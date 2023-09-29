@@ -26,10 +26,11 @@
 
 package com.jtattoo.plaf;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
-import java.util.logging.Logger;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -37,12 +38,10 @@ import javax.swing.ImageIcon;
 /**
  * <p>LazyMenuArrowImageIcon class.</p>
  *
- * Author Michael Hagen
- *
+ * Author Michael Hagen *
  */
+@Slf4j
 public class LazyMenuArrowImageIcon implements Icon {
-	
-	private static final Logger logger = Logger.getLogger(LazyMenuArrowImageIcon.class.getName());
 
 	private String leftToRightName = null;
 	private String rightToLefttName = null;
@@ -95,7 +94,7 @@ public class LazyMenuArrowImageIcon implements Icon {
 			try {
 				leftToRightIcon = new ImageIcon(LazyMenuArrowImageIcon.class.getResource(leftToRightName));
 			} catch (final Throwable t) {
-				logger.severe("ERROR: loading image " + leftToRightName + " failed!");
+				log.error("ERROR: loading image failed {} ", leftToRightIcon, t);
 			}
 		}
 		return leftToRightIcon;
@@ -106,7 +105,7 @@ public class LazyMenuArrowImageIcon implements Icon {
 			try {
 				rightToLeftIcon = new ImageIcon(LazyMenuArrowImageIcon.class.getResource(rightToLefttName));
 			} catch (final Throwable t) {
-				logger.severe("ERROR: loading image " + rightToLefttName + " failed!");
+				log.error("ERROR: loading image failed {} ", rightToLeftIcon, t);
 			}
 		}
 		return rightToLeftIcon;

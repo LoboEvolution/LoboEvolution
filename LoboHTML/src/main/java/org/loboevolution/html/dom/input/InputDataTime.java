@@ -26,6 +26,7 @@
 
 package org.loboevolution.html.dom.input;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.html.control.InputControl;
 import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
 
@@ -34,15 +35,12 @@ import javax.swing.text.MaskFormatter;
 import java.awt.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * <p>InputDataTime class.</p>
  */
+@Slf4j
 public class InputDataTime extends BasicInput {
-
-	private static final  Logger logger = Logger.getLogger(InputDataTime.class.getName());
 
 	/**
 	 * <p>Constructor for InputDataTime.</p>
@@ -90,7 +88,7 @@ public class InputDataTime extends BasicInput {
 			tf.addMouseListener(this);
 
 		} catch (final ParseException err) {
-			logger.log(Level.SEVERE, err.getMessage(), err);
+			log.error(err.getMessage(), err);
 		}
 	}
 }

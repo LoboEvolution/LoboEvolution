@@ -26,6 +26,8 @@
 
 package org.loboevolution.pdfview;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.awt.Rectangle;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Point2D;
@@ -33,19 +35,14 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
-import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 
 /**
  * <p>PDFDebugger class.</p>
- *
-  *
-  *
  */
+@Slf4j
 public class PDFDebugger {
-	
-	private static final Logger logger = Logger.getLogger(PDFDebugger.class.getName());
     /** Constant <code>DEBUG_DCTDECODE_DATA="debugdctdecode"</code> */
     public static final  String DEBUG_DCTDECODE_DATA = "debugdctdecode";
     /** Constant <code>DEBUG_TEXT=false</code> */
@@ -121,7 +118,7 @@ public class PDFDebugger {
      */
     public static void debug(final String msg, final int level) {
         if (level > debuglevel) {
-            logger.info(escape(msg));
+            log.info(escape(msg));
         }
     }
 
@@ -182,15 +179,15 @@ public class PDFDebugger {
     public static void logPath(final GeneralPath path, final String operation) {
         if (PDFDebugger.DEBUG_PATH) {
             if (operation != null) {
-                logger.info("Operation: " + operation + "; ");
+                log.info("Operation: {} ;", operation);
             }
-            logger.info("Current path: ");
+            log.info("Current path: ");
             final Rectangle b = path.getBounds();
             if (b != null)
-                logger.info("        Bounds [x=" + b.x + ",y=" + b.y + ",width=" + b.width + ",height=" + b.height + "]");
+                log.info("        Bounds [x=" + b.x + ",y=" + b.y + ",width=" + b.width + ",height=" + b.height + "]");
             final Point2D p = path.getCurrentPoint();
             if (p != null)
-                logger.info("        Point  [x=" + p.getX() + ",y=" + p.getY() + "]");
+                log.info("        Point  [x=" + p.getX() + ",y=" + p.getY() + "]");
         }
     }
 

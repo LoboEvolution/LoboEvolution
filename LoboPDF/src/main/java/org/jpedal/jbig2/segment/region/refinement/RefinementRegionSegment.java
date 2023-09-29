@@ -26,8 +26,8 @@
 package org.jpedal.jbig2.segment.region.refinement;
 
 import java.io.IOException;
-import java.util.logging.Logger;
 
+import lombok.extern.slf4j.Slf4j;
 import org.jpedal.jbig2.JBIG2Exception;
 import org.jpedal.jbig2.decoders.JBIG2StreamDecoder;
 import org.jpedal.jbig2.image.JBIG2Bitmap;
@@ -38,13 +38,9 @@ import org.jpedal.jbig2.segment.region.RegionSegment;
 
 /**
  * <p>RefinementRegionSegment class.</p>
- *
-  *
-  *
  */
+@Slf4j
 public class RefinementRegionSegment extends RegionSegment {
-	
-	private static final Logger logger = Logger.getLogger(RefinementRegionSegment.class.getName());
 	private final RefinementRegionFlags refinementRegionFlags = new RefinementRegionFlags();
 
 	private final boolean inlineImage;
@@ -77,7 +73,7 @@ public class RefinementRegionSegment extends RegionSegment {
 	 */
 	public void readSegment() throws IOException, JBIG2Exception {
 		if (JBIG2StreamDecoder.debug)
-			logger.info("==== Reading Generic Refinement Region ====");
+			log.info("==== Reading Generic Refinement Region ====");
 
 		super.readSegment();
 
@@ -106,7 +102,7 @@ public class RefinementRegionSegment extends RegionSegment {
 
 		if (noOfReferedToSegments > 1) {
 			if (JBIG2StreamDecoder.debug)
-				logger.info("Bad reference in JBIG2 generic refinement Segment");
+				log.info("Bad reference in JBIG2 generic refinement Segment");
 			
 			return;
 		}
@@ -150,7 +146,7 @@ public class RefinementRegionSegment extends RegionSegment {
 		refinementRegionFlags.setFlags(refinementRegionFlagsField);
 
 		if (JBIG2StreamDecoder.debug)
-			logger.info("generic region Segment flags = " + refinementRegionFlagsField);
+			log.info("generic region Segment flags = " + refinementRegionFlagsField);
 	}
 
 	/**

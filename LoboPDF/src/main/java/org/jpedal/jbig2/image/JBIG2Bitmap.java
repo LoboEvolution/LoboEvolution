@@ -31,8 +31,8 @@ import java.awt.image.DataBufferByte;
 import java.awt.image.Raster;
 import java.awt.image.WritableRaster;
 import java.io.IOException;
-import java.util.logging.Logger;
 
+import lombok.extern.slf4j.Slf4j;
 import org.jpedal.jbig2.JBIG2Exception;
 import org.jpedal.jbig2.decoders.ArithmeticDecoder;
 import org.jpedal.jbig2.decoders.DecodeIntResult;
@@ -43,13 +43,9 @@ import org.jpedal.jbig2.util.BinaryOperation;
 
 /**
  * <p>JBIG2Bitmap class.</p>
- *
-  *
-  *
  */
+@Slf4j
 public final class JBIG2Bitmap {
-	
-	private static final Logger logger = Logger.getLogger(JBIG2Bitmap.class.getName());
 	private final int width;
     private int height;
     private final int line;
@@ -242,7 +238,7 @@ public final class JBIG2Bitmap {
 						break;
 					default:
 						if (JBIG2StreamDecoder.debug)
-							logger.info("Illegal code in JBIG2 MMR bitmap data");
+							log.info("Illegal code in JBIG2 MMR bitmap data");
 
 						break;
 					}
@@ -262,7 +258,7 @@ public final class JBIG2Bitmap {
 			} else {
 				if (mmrDecoder.get24Bits() != 0x001001) {
 					if (JBIG2StreamDecoder.debug)
-						logger.info("Missing EOFB in JBIG2 MMR bitmap data");
+						log.info("Missing EOFB in JBIG2 MMR bitmap data");
 				}
 			}
 
@@ -774,7 +770,7 @@ public final class JBIG2Bitmap {
 
 				if (symbolID >= noOfSymbols) {
 					if (JBIG2StreamDecoder.debug)
-						logger.info("Invalid symbol number in JBIG2 text region");
+						log.info("Invalid symbol number in JBIG2 text region");
 				} else {
 					symbolBitmap = null;
 
@@ -1148,55 +1144,9 @@ public final class JBIG2Bitmap {
 	 * @return a {@link org.jpedal.jbig2.image.JBIG2Bitmap} object.
 	 */
 	public JBIG2Bitmap getSlice(final int x, final int y, final int width, final int height) {
-//		JBIG2Bitmap slice = new JBIG2Bitmap(width, height);
-//
-//		int sliceRow = 0, sliceCol = 0;
-//		int maxCol = x + width;
-//		
-//		//ShowGUIMessage.showGUIMessage("x", this.getBufferedImage(), "xx");
-//		
-//		logger.info(">>> getSlice x = "+x+" y = "+y+ " width = "+width+ " height = "+height);
-//		logger.info(">>> baseImage width = "+this.width+ " height = "+this.height);
-//		
-//		logger.info("counter = "+counter);
-//		if (counter == 17) {
-//			logger.info();
-//			//ShowGUIMessage.showGUIMessage("x", this.getBufferedImage(), "xx");
-//		}
-//		
-//		ShowGUIMessage.showGUIMessage("x", this.getBufferedImage(), "xx");
-//		
-//		for (int row = y; row < height; row++) {
-//			for (int col = x; col < maxCol; col += 8, sliceCol += 8) {
-//				slice.setPixelByte(sliceCol, sliceRow, getPixelByte(col, row));
-//				//if (counter > 10)
-//					//ShowGUIMessage.showGUIMessage("new", slice.getBufferedImage(), "new");
-//			}
-//			sliceCol = 0;
-//			sliceRow++;
-//		}
-//		counter++;
-//
-//		ShowGUIMessage.showGUIMessage("new", slice.getBufferedImage(), "new");
-//		
-//		return slice;
-		
+
 		final JBIG2Bitmap slice = new JBIG2Bitmap(width, height, arithmeticDecoder, huffmanDecoder, mmrDecoder);
 
-/*		int sliceRow = 0, sliceCol = 0;
-		for (int row = y; row < height; row++) {
-			for (int col = x; col < x + width; col++) {
-				//logger.info("row = "+row +" column = "+col);
-				//slice.setPixel(sliceCol, sliceRow, getPixel(col, row));
-				slice.data.set(sliceRow*slice.width + sliceCol, data.get(row*this.width + col));
-				sliceCol++;
-			}
-			sliceCol = 0;
-			sliceRow++;
-		}
-
-		return slice;*/
-		//int sliceRow = 0, sliceCol = 0;
 		int sliceIndx = 0;
 		for (int row = y; row < height; row++) {
 			int indx = row * this.width + x;
@@ -1302,17 +1252,6 @@ public final class JBIG2Bitmap {
 	 * @param defaultPixel a int.
 	 */
 	public void expand(final int newHeight, final int defaultPixel) {
-//		logger.info("expand FastBitSet");
-//		FastBitSet newData = new FastBitSet(width, newHeight);
-//
-//		for (int row = 0; row < height; row++) {
-//			for (int col = 0; col < width; col += 8) {
-//				setPixelByte(col, row, newData, getPixelByte(col, row));
-//			}
-//		}
-//
-//		this.height = newHeight;
-//		this.data = newData;
 		final FastBitSet newData = new FastBitSet(newHeight * width);
 		for (int row = 0; row < height; row++) {
 			for (int col = 0; col < width; col++) {

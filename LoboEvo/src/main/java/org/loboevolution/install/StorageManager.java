@@ -26,6 +26,7 @@
 
 package org.loboevolution.install;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.Files;
 import org.loboevolution.common.Strings;
 import org.loboevolution.config.DesktopConfig;
@@ -43,16 +44,12 @@ import java.sql.DriverManager;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * <p>StorageManager class.</p>
  */
+@Slf4j
 public class StorageManager extends SwingWorker<Void, Void> {
-	
-	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(StorageManager.class.getName());
 
 	private final JFrame frame;
 
@@ -97,7 +94,7 @@ public class StorageManager extends SwingWorker<Void, Void> {
 			Thread.sleep(1000);
 
 		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 
 		return null;
@@ -112,7 +109,7 @@ public class StorageManager extends SwingWorker<Void, Void> {
 			this.frame.setVisible(false);
 			GuiInit.createAndShowGui();
 		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 	}
 
@@ -179,7 +176,7 @@ public class StorageManager extends SwingWorker<Void, Void> {
 				}
 			}
 		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 	}
 }

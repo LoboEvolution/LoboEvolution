@@ -25,6 +25,7 @@
  */
 package org.loboevolution.menu.tools.screen;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.component.BrowserFrame;
 import javax.swing.*;
 import java.awt.*;
@@ -32,13 +33,12 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Area;
 import java.awt.image.BufferedImage;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
+/**
+ * <p>CapturePane class.</p>
+ */
+@Slf4j
 public class CapturePane extends JPanel {
-
-    /** The Constant logger. */
-    private static final Logger logger = Logger.getLogger(CapturePane.class.getName());
 
     private Rectangle captureBounds;
     private Point clickPoint;
@@ -90,7 +90,7 @@ public class CapturePane extends JPanel {
             final BufferedImage img = r.createScreenCapture(captureBounds);
             displayPreview(img, frame);
         } catch (final Exception e) {
-            logger.log(Level.SEVERE, e.getMessage(), e);
+            log.error(e.getMessage(), e);
         }
     }
 

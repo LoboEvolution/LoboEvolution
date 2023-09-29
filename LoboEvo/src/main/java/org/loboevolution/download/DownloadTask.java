@@ -26,22 +26,20 @@
 
 package org.loboevolution.download;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.net.URLConnection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.*;
 
 /**
  * Execute file download in a background thread and update the progress.
  */
+@Slf4j
 public class DownloadTask extends SwingWorker<Void, Void> {
-
-    /** The Constant logger. */
-    protected static final Logger logger = Logger.getLogger(DownloadTask.class.getName());
 
     private final DownloadWindow action;
 
@@ -112,7 +110,7 @@ public class DownloadTask extends SwingWorker<Void, Void> {
         } catch (final Exception ex) {
             JOptionPane.showMessageDialog(action, "Error downloading file: " + ex.getMessage(),
                     "Error", JOptionPane.ERROR_MESSAGE);
-            logger.log(Level.SEVERE, ex.toString());
+            log.error(ex.getMessage(), ex);
             setProgress(0);
             cancel(true);
         }

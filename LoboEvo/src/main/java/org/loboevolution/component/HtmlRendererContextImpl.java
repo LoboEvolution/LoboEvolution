@@ -28,6 +28,7 @@
  */
 package org.loboevolution.component;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.RecordedInputStream;
 import org.loboevolution.common.Strings;
 import org.loboevolution.common.Urls;
@@ -68,8 +69,6 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Optional;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * The HtmlRendererContextImpl class implements the
@@ -81,9 +80,8 @@ import java.util.logging.Logger;
  * A simple way to load a URL into the {@link HtmlPanel} of the renderer context
  * is to invoke {@link #navigate(String)}.
  */
+@Slf4j
 public class HtmlRendererContextImpl implements HtmlRendererContext {
-
-	private static final Logger logger = Logger.getLogger(HtmlRendererContextImpl.class.getName());
 
 	private UserAgentContext bcontext;
 
@@ -193,16 +191,16 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 	/** {@inheritDoc} */
 	@Override
 	public void error(final String message) {
-		if (logger.isLoggable(Level.SEVERE)) {
-			logger.log(Level.SEVERE, message);
+		if (log.isErrorEnabled()) {
+			log.error(message);
 		}
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void error(final String message, final Throwable throwable) {
-		if (logger.isLoggable(Level.SEVERE)) {
-			logger.log(Level.SEVERE, message, throwable);
+		if (log.isErrorEnabled()) {
+			log.error(message, throwable);
 		}
 	}
 
@@ -360,16 +358,16 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 	/** {@inheritDoc} */
 	@Override
 	public void moveInHistory(final int offset) {
-		if (logger.isLoggable(Level.WARNING)) {
-			logger.log(Level.WARNING, "moveInHistory() does nothing, unless overridden.");
+		if (log.isWarnEnabled()) {
+			log.warn("moveInHistory() does nothing, unless overridden.");
 		}
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public String getPreviousURL() {
-		if (logger.isLoggable(Level.WARNING)) {
-			logger.log(Level.WARNING, "getPreviousURL() does nothing, unless overridden.");
+		if (log.isWarnEnabled()) {
+			log.warn("getPreviousURL() does nothing, unless overridden.");
 		}
 		return null;
 	}
@@ -377,8 +375,8 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 	/** {@inheritDoc} */
 	@Override
 	public String getNextURL() {
-		if (logger.isLoggable(Level.WARNING)) {
-			logger.log(Level.WARNING, "getNextURL() does nothing, unless overridden.");
+		if (log.isWarnEnabled()) {
+			log.warn("getNextURL() does nothing, unless overridden.");
 		}
 		return null;
 	}
@@ -476,7 +474,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 			LinkStore.insertLinkVisited(fullURL);
 			bpanel.getScroll().getViewport().add((Component)tabbedPane);
 		} catch (final IOException e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 	}
 
@@ -497,7 +495,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 			tabbedPane.insertTab(title, null, viewer.getComponent(), title, index);
 			bpanel.getScroll().getViewport().add((Component)tabbedPane);
 		} catch (final IOException e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 	}
 
@@ -697,16 +695,16 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 	/** {@inheritDoc} */
 	@Override
 	public void warn(final String message) {
-		if (logger.isLoggable(Level.WARNING)) {
-			logger.log(Level.WARNING, message);
+		if (log.isWarnEnabled()) {
+			log.warn(message);
 		}
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void warn(final String message, final Throwable throwable) {
-		if (logger.isLoggable(Level.WARNING)) {
-			logger.log(Level.WARNING, message, throwable);
+		if (log.isWarnEnabled()) {
+			log.warn(message, throwable);
 		}
 	}
 
@@ -768,7 +766,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 					newUrlBuffer.append("=");
 					newUrlBuffer.append(encValue);
 				} else {
-					logger.warning("postData(): Ignoring non-textual parameter " + name + " for GET.");
+					log.warn("postData(): Ignoring non-textual parameter for GET {} ", name);
 				}
 			}
 			resolvedURL = new java.net.URL(newUrlBuffer.toString());
@@ -790,9 +788,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 		} else {
 			urlForLoading = resolvedURL;
 		}
-		if (logger.isLoggable(Level.INFO)) {
-			logger.info("process(): Loading URI=[" + urlForLoading + "].");
-		}
+
 		System.currentTimeMillis();
 		// Using potentially different URL for loading.
 		final Proxy proxy = getProxy();
@@ -828,7 +824,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 							bufOut.write((byte) '=');
 							bufOut.write(encValue.getBytes(StandardCharsets.UTF_8));
 						} else {
-							logger.warning("postData(): Ignoring non-textual parameter " + name + " for POST.");
+							log.warn("postData(): Ignoring non-textual parameter for POST {} ", name);
 						}
 					}
 				}
@@ -848,15 +844,14 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 			if (connection instanceof HttpURLConnection) {
 				final HttpURLConnection hc = (HttpURLConnection) connection;
 				final int responseCode = hc.getResponseCode();
-				if (logger.isLoggable(Level.INFO)) {
-					logger.info("process(): HTTP response code: " + responseCode);
-				}
+				log.info("process(): HTTP response code {} ", responseCode);
+
 				if (responseCode == HttpURLConnection.HTTP_MOVED_PERM
 						|| responseCode == HttpURLConnection.HTTP_MOVED_TEMP
 						|| responseCode == HttpURLConnection.HTTP_SEE_OTHER) {
 					final String location = hc.getHeaderField("Location");
 					if (location == null) {
-						logger.warning("No Location header in redirect from " + action + ".");
+						log.warn("No Location header in redirect from {} ", action);
 					} else {
 						final URL href;
 						href = Urls.createURL(action, location);
@@ -882,7 +877,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 					panel.scrollToElement(ref);
 				}
 			} catch (final SocketTimeoutException e) {
-				logger.log(Level.SEVERE, "More than " + connection.getConnectTimeout() + " elapsed.");
+				log.error("More time elapsed {}", connection.getConnectTimeout());
 			}
 		} finally {
 			this.currentConnection = null;

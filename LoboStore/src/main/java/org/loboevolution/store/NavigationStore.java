@@ -33,18 +33,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.info.BookmarkInfo;
 
 /**
  * <p>NavigationStore class.</p>
  */
+@Slf4j
 public class NavigationStore {
-	
-	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(NavigationStore.class.getName());
 
 	/** The Constant DB_PATH. */
 	private static final String DB_PATH = DatabseSQLite.getDatabaseDirectory();
@@ -74,7 +71,7 @@ public class NavigationStore {
 			pstmt.setInt(3, index);
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 	}
 
@@ -86,7 +83,7 @@ public class NavigationStore {
              final PreparedStatement pstmt = conn.prepareStatement(DELETE_HOST)) {
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 	}
 	
@@ -101,7 +98,7 @@ public class NavigationStore {
 			pstmt.setString(1, host);
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 	}
 	
@@ -126,7 +123,7 @@ public class NavigationStore {
 				}
 			}
 		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 		return recentHostEntries;
 	}

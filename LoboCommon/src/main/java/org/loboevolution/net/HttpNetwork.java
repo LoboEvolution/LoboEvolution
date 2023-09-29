@@ -26,6 +26,7 @@
 
 package org.loboevolution.net;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.Strings;
 import org.loboevolution.common.Urls;
 import org.loboevolution.html.dom.HTMLElement;
@@ -44,8 +45,6 @@ import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Base64;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.zip.GZIPInputStream;
@@ -53,10 +52,8 @@ import java.util.zip.GZIPInputStream;
 /**
  * <p>HttpNetwork class.</p>
  */
+@Slf4j
 public class HttpNetwork {
-	
-	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(HttpNetwork.class.getName());
 
 	/** Constant GZIP_ENCODING="gzip" */
 	public static final String GZIP_ENCODING = "gzip";
@@ -187,7 +184,7 @@ public class HttpNetwork {
 						try {
 							return ImageIO.read(in);
 						} catch (final IOException e) {
-							logger.log(Level.SEVERE, e.getMessage(), e);
+							log.error(e.getMessage(), e);
 						}
 					} else {
 						return ImageIO.read(in);
@@ -196,14 +193,13 @@ public class HttpNetwork {
 					if (connection instanceof HttpURLConnection) {
 						info.setHttpResponse(((HttpURLConnection)connection).getResponseCode());
 					}
-
-					logger.log(Level.SEVERE, "More than " + TIMEOUT_VALUE + " elapsed.");
+					log.error("More time elapsed {}", TIMEOUT_VALUE);
 				} catch (final FileNotFoundException e) {
-					logger.log(Level.INFO, e.getMessage());
+					log.info(e.getMessage(), e);
 				}
 			}
 		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		} finally {
 			final Instant finish = Instant.now();
 			final long timeElapsed = Duration.between(start, finish).toMillis();
@@ -228,7 +224,7 @@ public class HttpNetwork {
 		try (final InputStream in = openConnectionCheckRedirects(connection)) {
 			return toString(in);
 		} catch (final SocketTimeoutException e) {
-			logger.log(Level.SEVERE, "More than " + TIMEOUT_VALUE + " elapsed.");
+			log.error("More time elapsed {}", TIMEOUT_VALUE);
 	    }
 		return "";
 	}
@@ -259,7 +255,7 @@ public class HttpNetwork {
 
 			return getSource(url.toString());
 		} catch (final Exception err) {
-			logger.log(Level.SEVERE, err.getMessage(), err);
+			log.error(err.getMessage(), err);
 			return "";
 		}
 	}

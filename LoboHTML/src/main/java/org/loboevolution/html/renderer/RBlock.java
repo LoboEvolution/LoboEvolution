@@ -45,7 +45,6 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-import java.util.logging.Logger;
 
 /**
  * Represents a HTML block in a rendered document, typically a DIV. The root
@@ -55,9 +54,6 @@ import java.util.logging.Logger;
  * {@link org.loboevolution.html.renderer.RBlockViewport}.
  */
 public class RBlock extends BaseElementRenderable {
-
-	/** Constant logger */
-	protected static final Logger logger = Logger.getLogger(RBlock.class.getName());
 	private BoundableRenderable armedRenderable;
 	protected final RBlockViewport bodyLayout;
 	private final RBlockScroll scroll;

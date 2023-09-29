@@ -25,19 +25,14 @@
  */
 package org.jpedal.jbig2.segment;
 
-import java.util.logging.Logger;
-
+import lombok.extern.slf4j.Slf4j;
 import org.jpedal.jbig2.decoders.JBIG2StreamDecoder;
 
 /**
  * <p>SegmentHeader class.</p>
- *
-  *
-  *
  */
+@Slf4j
 public class SegmentHeader {
-
-	private static final Logger logger = Logger.getLogger(SegmentHeader.class.getName());
 	private int segmentNumber;
 
 	private int segmentType;
@@ -71,9 +66,9 @@ public class SegmentHeader {
 		deferredNonRetainSet = (SegmentHeaderFlags & 80) == 80; // 64 = 10000000
 
 		if (JBIG2StreamDecoder.debug) {
-			logger.info("SegmentType = " + segmentType);
-			logger.info("pageAssociationSizeSet = " + pageAssociationSizeSet);
-			logger.info("deferredNonRetainSet = " + deferredNonRetainSet);
+			log.info("SegmentType {} ",  segmentType);
+			log.info("pageAssociationSizeSet {} ",  pageAssociationSizeSet);
+			log.info("deferredNonRetainSet {} ",  deferredNonRetainSet);
 		}
 	}
 

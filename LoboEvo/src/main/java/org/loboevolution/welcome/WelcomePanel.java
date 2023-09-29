@@ -27,6 +27,7 @@
 package org.loboevolution.welcome;
 
 import com.jtattoo.plaf.lobo.LoboLookAndFeel;
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.component.IBrowserPanel;
 import org.loboevolution.component.IWelcomePanel;
 import org.loboevolution.config.DesktopConfig;
@@ -42,19 +43,14 @@ import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
-import java.util.logging.Logger;
 
 /**
  * <p>WelcomePanel class.</p>
  */
+@Slf4j
 public class WelcomePanel extends JPanel implements IWelcomePanel, LoboLookAndFeel {
 
     private static final long serialVersionUID = 1L;
-
-    /**
-     * The Constant logger.
-     */
-    private static final Logger logger = Logger.getLogger(WelcomePanel.class.getName());
 
     private final LoginButton button;
 
@@ -90,7 +86,7 @@ public class WelcomePanel extends JPanel implements IWelcomePanel, LoboLookAndFe
                 img = resize(null, is, (int) getSize().getWidth(), (int) getSize().getHeight());
                 g.drawImage(img, 0, 0, null);
             } catch (final IOException e) {
-                logger.severe(e.getMessage());
+                log.error(e.getMessage(), e);
             }
             super.paintComponent(g);
         } else {
@@ -141,7 +137,7 @@ public class WelcomePanel extends JPanel implements IWelcomePanel, LoboLookAndFe
             return newResizedImage;
 
         } catch (final IOException e) {
-            logger.severe(e.getMessage());
+            log.error(e.getMessage(), e);
         }
         return null;
     }

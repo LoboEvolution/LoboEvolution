@@ -26,6 +26,7 @@
 
 package org.loboevolution.html.dom.input;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.control.InputControl;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
@@ -40,16 +41,12 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
 import java.awt.image.PixelGrabber;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * <p>InputImage class.</p>
  */
+@Slf4j
 public class InputImage {
-	
-	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(InputImage.class.getName());
 
 	private final HTMLInputElementImpl modelNode;
 
@@ -115,7 +112,7 @@ public class InputImage {
 		try {
 			pg.grabPixels();
 		} catch (final InterruptedException e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 
 		final ColorModel cm = pg.getColorModel();

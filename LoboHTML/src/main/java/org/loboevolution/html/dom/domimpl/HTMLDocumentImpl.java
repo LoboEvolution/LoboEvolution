@@ -28,6 +28,7 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.Strings;
 import org.loboevolution.common.Urls;
 import org.loboevolution.config.HtmlRendererConfig;
@@ -66,15 +67,11 @@ import java.net.URL;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  * Implementation of the W3C HTMLDocument interface.
  */
+@Slf4j
 public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, DocumentView {
-
-	private static final Logger logger = Logger.getLogger(HTMLDocumentImpl.class.getName());
 
 	private volatile String baseURI;
 
@@ -149,7 +146,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 				this.setDocumentURI(documentURI);
 			}
 		} catch (final MalformedURLException mfu) {
-			logger.warning("HTMLDocumentImpl(): Document URI [" + documentURI + "] is malformed.");
+			log.warn("HTMLDocumentImpl(): Document URI {} is malformed.",  documentURI);
 		}
 		this.document = this;
 		// Get WindowImpl object
@@ -281,8 +278,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 			try {
 				return new URL(uri);
 			} catch (final Exception mfu2) {
-				logger.log(Level.WARNING,
-						"Unable to create URL for URI=[" + uri + "], with base=[" + getBaseURI() + "].", mfu);
+				log.error("Unable to create URL for URI= {} with base= ", uri, getBaseURI(), mfu);
 				return null;
 			}
 		}
@@ -304,8 +300,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 			try {
 				return new URL(uri);
 			} catch (final Exception mfu2) {
-				logger.log(Level.WARNING,
-						"Unable to create URL for URI=[" + uri + "], with base=[" + getBaseURI() + "].", mfu);
+				log.error("Unable to create URL for URI= {} with base= ", uri, getBaseURI(), mfu);
 				return null;
 			}
 		}
@@ -392,7 +387,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
                     ssa.addStyleSheets(this.styleSheets);
 
 				} catch (final Exception mfu) {
-					logger.log(Level.WARNING, "getStyleSheetAggregator()", mfu);
+					log.error(mfu.getMessage(), mfu);
 				}
 				this.styleSheetAggregator = ssa;
 			}
@@ -480,7 +475,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 					try {
 						reader.close();
 					} catch (final Exception err) {
-						logger.log(Level.WARNING, "load(): Unable to close stream", err);
+						log.error(err.getMessage(), err);
 					}
 					synchronized (this) {
 						this.reader = null;

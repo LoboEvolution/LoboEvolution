@@ -35,9 +35,8 @@ import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.StringTokenizer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.Strings;
 import org.loboevolution.common.Urls;
 import org.loboevolution.net.HttpNetwork;
@@ -45,10 +44,8 @@ import org.loboevolution.net.HttpNetwork;
 /**
  * <p>ExternalResourcesStore class.</p>
  */
+@Slf4j
 public class ExternalResourcesStore {
-
-	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(ExternalResourcesStore.class.getName());
 
 	/** The Constant DB_PATH. */
 	private static final String DB_PATH = DatabseSQLite.getDatabaseDirectory();
@@ -82,7 +79,7 @@ public class ExternalResourcesStore {
 			}
 
 		} catch (final Exception err) {
-			logger.log(Level.SEVERE, err.getMessage(), err);
+			log.error(err.getMessage(), err);
 		}
 		return source;
 	}
@@ -125,7 +122,7 @@ public class ExternalResourcesStore {
 				}
 			}
 		} catch (final Exception err) {
-			logger.log(Level.SEVERE, err.getMessage(), err);
+			log.error(err.getMessage(), err);
 		}
 		return check;
 	}
@@ -143,7 +140,7 @@ public class ExternalResourcesStore {
 			pstmt.setString(6, type);
 			pstmt.executeUpdate();
 		} catch (final Exception err) {
-			logger.log(Level.SEVERE, err.getMessage(), err);
+			log.error(err.getMessage(), err);
 		}
 	}
 
@@ -152,7 +149,7 @@ public class ExternalResourcesStore {
              final PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.DELETE_ALL_CACHE)) {
 			pstmt.executeUpdate();
 		} catch (final Exception err) {
-			logger.log(Level.SEVERE, err.getMessage(), err);
+			log.error(err.getMessage(), err);
 		}
 	}
 
@@ -163,7 +160,7 @@ public class ExternalResourcesStore {
 			pstmt.setString(2, type);
 			pstmt.executeUpdate();
 		} catch (final Exception err) {
-			logger.log(Level.SEVERE, err.getMessage(), err);
+			log.error(err.getMessage(), err);
 		}
 	}
 }

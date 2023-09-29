@@ -25,20 +25,18 @@
  */
 package org.loboevolution.common;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * <p>Files class.</p>
  */
+@Slf4j
 public class Files {
-	
-	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(Files.class.getName());
 
 	public static final int DEFAULT_BUFFER_SIZE = 819;
 
@@ -67,7 +65,7 @@ public class Files {
 			}
 			return tempFile;
 		} catch (final IOException e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 			return null;
 		}
 	}

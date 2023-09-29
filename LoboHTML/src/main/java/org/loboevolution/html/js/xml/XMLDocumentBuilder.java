@@ -26,6 +26,7 @@
 
 package org.loboevolution.html.js.xml;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.html.node.Document;
 import org.xml.sax.*;
 
@@ -34,15 +35,12 @@ import org.loboevolution.javax.xml.parsers.ParserConfigurationException;
 import org.loboevolution.javax.xml.parsers.SAXParser;
 import org.loboevolution.javax.xml.parsers.SAXParserFactory;
 import java.io.IOException;
-import java.util.logging.Logger;
 
 /**
  * <p>XMLDocumentBuilder class.</p>
  */
+@Slf4j
 public class XMLDocumentBuilder {
-
-    /** The Constant logger. */
-    protected static final Logger logger = Logger.getLogger(XMLDocumentBuilder.class.getName());
 
     private final SAXParserFactory parserFactory;
 
@@ -61,7 +59,7 @@ public class XMLDocumentBuilder {
             parserFactory.setXIncludeAware(false);
             parserFactory.setNamespaceAware(true);
         } catch (final SAXNotRecognizedException | SAXNotSupportedException | ParserConfigurationException e) {
-            logger.severe(e.getMessage());
+            log.error(e.getMessage(), e);
         }
     }
 
@@ -87,7 +85,7 @@ public class XMLDocumentBuilder {
             document.setDocumentURI(is.getSystemId());
             return document;
         } catch (final Throwable e) {
-            logger.severe(e.getMessage());
+            log.error(e.getMessage(), e);
         }
         return null;
     }

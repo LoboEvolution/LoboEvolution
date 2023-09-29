@@ -6,7 +6,7 @@
 
 package org.mozilla.classfile;
 
-import java.util.logging.Logger;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Helper class for internal representations of type information. In most cases, type information
@@ -14,10 +14,8 @@ import java.util.logging.Logger;
  * coming after the type tag in the output, we store it in bits 8-23 for uniformity; the tag is
  * always in bits 0-7.
  */
+@Slf4j
 final class TypeInfo {
-
-    /** The Constant logger. */
-    private static final Logger logger = Logger.getLogger(TypeInfo.class.getName());
 
     private TypeInfo() {}
 
@@ -232,9 +230,9 @@ final class TypeInfo {
     }
 
     static void print(int[] locals, int localsTop, int[] stack, int stackTop, ConstantPool pool) {
-        logger.info("locals: ");
-        logger.info(toString(locals, localsTop, pool));
-        logger.info("stack: ");
-        logger.info(toString(stack, stackTop, pool));
+        log.info("locals: ");
+        log.info(toString(locals, localsTop, pool));
+        log.info("stack: ");
+        log.info(toString(stack, stackTop, pool));
     }
 }

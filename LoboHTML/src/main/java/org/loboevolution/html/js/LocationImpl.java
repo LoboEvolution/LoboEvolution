@@ -26,6 +26,7 @@
 
 package org.loboevolution.html.js;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.node.DOMStringList;
@@ -33,20 +34,14 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.js.Location;
 import org.loboevolution.js.AbstractScriptableDelegate;
 
+import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
- * <p>
  * Location class.
- * </p>
- *
- *
- *
  */
+@Slf4j
 public class LocationImpl extends AbstractScriptableDelegate implements Location {
-	private static final Logger logger = Logger.getLogger(LocationImpl.class.getName());
 	private String target;
 
 	private final WindowImpl window;
@@ -238,8 +233,8 @@ public class LocationImpl extends AbstractScriptableDelegate implements Location
 					url = new URL(uri);
 				}
 				rcontext.navigate(url, this.target);
-			} catch (final java.net.MalformedURLException mfu) {
-				logger.log(Level.WARNING, "setHref(): Malformed location: [" + uri + "].", mfu);
+			} catch (final MalformedURLException mfu) {
+				log.error("setHref(): Malformed location: {}", uri, mfu);
 			}
 		}
 	}

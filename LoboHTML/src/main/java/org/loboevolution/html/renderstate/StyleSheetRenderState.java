@@ -28,6 +28,7 @@
  */
 package org.loboevolution.html.renderstate;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.Strings;
 import org.loboevolution.config.HtmlRendererConfig;
 import org.loboevolution.gui.LocalHtmlRendererConfig;
@@ -54,19 +55,14 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.net.URL;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * <p>StyleSheetRenderState class.</p>
  *
  * Author J. H. S.
- *
  */
+@Slf4j
 public class StyleSheetRenderState implements RenderState {
-	
-	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(StyleSheetRenderState.class.getName());
 	
 	private static final FontFactory FONT_FACTORY = FontFactory.getInstance();
 
@@ -1477,7 +1473,7 @@ public class StyleSheetRenderState implements RenderState {
 					binfo.setBackgroundImage(f.toURI().toURL());
 				}
 			} catch (final Exception e) {
-				logger.log(Level.SEVERE, e.getMessage(), e);
+				log.error(e.getMessage(), e);
 			}
 		}
 	}

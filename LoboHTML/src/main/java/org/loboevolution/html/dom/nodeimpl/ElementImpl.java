@@ -28,6 +28,7 @@
  */
 package org.loboevolution.html.dom.nodeimpl;
 
+import lombok.extern.slf4j.Slf4j;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.htmlunit.cssparser.parser.selector.Selector;
 import org.htmlunit.cssparser.parser.selector.SelectorList;
@@ -72,6 +73,7 @@ import java.util.stream.Stream;
 /**
  * <p>ElementImpl class.</p>
  */
+@Slf4j
 public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
 	private final NamedNodeMapImpl map;
@@ -157,7 +159,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		try {
 			map.removeNamedItem(name);
 		} catch (final DOMException ex) {
-			logger.severe(ex.getMessage());
+			log.error(ex.getMessage());
 		}
 	}
 

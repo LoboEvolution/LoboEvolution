@@ -38,9 +38,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.Domains;
 import org.loboevolution.common.Strings;
 import org.loboevolution.info.CookieInfo;
@@ -53,10 +52,8 @@ import org.loboevolution.util.DateUtil;
 /**
  * <p>CookieManager class.</p>
  */
+@Slf4j
 public class CookieManager {
-	
-	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(CookieManager.class.getName());
 
 	/** The Constant DB_PATH. */
 	private static final String DB_PATH = DatabseSQLite.getDatabaseDirectory();
@@ -76,7 +73,7 @@ public class CookieManager {
              final PreparedStatement pstmt = conn.prepareStatement(DELETE_COOKIES)) {
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 	}
 
@@ -94,7 +91,7 @@ public class CookieManager {
 			final String domain = url.getHost().replaceFirst("^www.*?\\.", "");
 			cookies = getCookies(domain, "/");
 		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 		return cookies;
 	}
@@ -121,7 +118,7 @@ public class CookieManager {
 					}
 				}
 			} catch (final Exception e) {
-				logger.log(Level.SEVERE, e.getMessage(), e);
+				log.error(e.getMessage(), e);
 				return null;
 			}
 		}
@@ -149,7 +146,7 @@ public class CookieManager {
 				}
 			}
 		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 	}
 
@@ -220,7 +217,7 @@ public class CookieManager {
 			try {
 				expiresDate = new Date(System.currentTimeMillis() + Long.parseLong(maxAge) * 1000);
 			} catch (final NumberFormatException e) {
-				logger.log(Level.SEVERE, e.getMessage(), e);
+				log.error(e.getMessage(), e);
 			}
 		} else if (expires != null) {
 			final DateUtil du = new DateUtil();
@@ -260,7 +257,7 @@ public class CookieManager {
 			pstmt.setInt(8, httponly ? 1 : 0);
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 	}
 

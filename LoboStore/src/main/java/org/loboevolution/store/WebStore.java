@@ -26,22 +26,20 @@
 
 package org.loboevolution.store;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * <p>WebStore class.</p>
  */
+@Slf4j
 public class WebStore {
-	
-	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(WebStore.class.getName());
 
 	/** The Constant DB_PATH. */
 	private static final String DB_PATH = DatabseSQLite.getDatabaseDirectory();
@@ -67,7 +65,7 @@ public class WebStore {
 				}
 			}
 		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 		return name;
 	}
@@ -91,7 +89,7 @@ public class WebStore {
 				}
 			}
 		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 		return map;
 	}
@@ -113,7 +111,7 @@ public class WebStore {
 			pstmt.setInt(4, tabIndex);
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 	}
 	
@@ -132,7 +130,7 @@ public class WebStore {
 			pstmt.setInt(3, index);
 			pstmt.executeUpdate();
 		} catch (final Exception err) {
-			logger.log(Level.SEVERE, err.getMessage(), err);
+			log.error(err.getMessage(), err);
 		}
 	}
 	
@@ -149,7 +147,7 @@ public class WebStore {
 			pstmt.setInt(2, index);
 			pstmt.executeUpdate();
 		} catch (final Exception err) {
-			logger.log(Level.SEVERE, err.getMessage(), err);
+			log.error(err.getMessage(), err);
 		}
 	}
 	
@@ -162,7 +160,7 @@ public class WebStore {
 			pstmt.setInt(1, 1);
 			pstmt.executeUpdate();
 		} catch (final Exception err) {
-			logger.log(Level.SEVERE, err.getMessage(), err);
+			log.error(err.getMessage(), err);
 		}
 	}
 	
@@ -183,7 +181,7 @@ public class WebStore {
 				}
 			}
 		} catch (final Exception err) {
-			logger.log(Level.SEVERE, err.getMessage(), err);
+			log.error(err.getMessage(), err);
 		}
 		return check;
 	}

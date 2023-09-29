@@ -25,20 +25,15 @@
  */
 package org.jpedal.jbig2.segment.pattern;
 
-import java.util.logging.Logger;
-
+import lombok.extern.slf4j.Slf4j;
 import org.jpedal.jbig2.decoders.JBIG2StreamDecoder;
 import org.jpedal.jbig2.segment.Flags;
 
 /**
  * <p>PatternDictionaryFlags class.</p>
- *
-  *
-  *
  */
+@Slf4j
 public class PatternDictionaryFlags extends Flags {
-	
-	private static final Logger logger = Logger.getLogger(PatternDictionaryFlags.class.getName());
 	/** Constant <code>HD_MMR="HD_MMR"</code> */
 	public static final String HD_MMR = "HD_MMR";
 	/** Constant <code>HD_TEMPLATE="HD_TEMPLATE"</code> */
@@ -55,6 +50,6 @@ public class PatternDictionaryFlags extends Flags {
 		flags.put(HD_TEMPLATE, (flagsAsInt >> 1) & 3);
 
 		if (JBIG2StreamDecoder.debug)
-			logger.info("flags: " + flags);
+			log.info("flags: {}", flags);
 	}
 }

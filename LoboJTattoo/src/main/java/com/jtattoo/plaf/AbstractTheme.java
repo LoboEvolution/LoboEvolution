@@ -26,13 +26,14 @@
 
 package com.jtattoo.plaf;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.RenderingHints;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
-import java.util.logging.Logger;
 
 import javax.swing.Icon;
 import javax.swing.plaf.ColorUIResource;
@@ -42,9 +43,8 @@ import javax.swing.plaf.metal.MetalTheme;
 /**
  * <p>Abstract AbstractTheme class.</p>
  */
+@Slf4j
 public abstract class AbstractTheme extends MetalTheme {
-
-	private static final Logger logger = Logger.getLogger(AbstractTheme.class.getName());
 	
 	/** Constant TEXT_ANTIALIAS_DEFAULT=0 */
 	public static final int TEXT_ANTIALIAS_DEFAULT = 0;
@@ -387,7 +387,7 @@ public abstract class AbstractTheme extends MetalTheme {
 				}
 				return new ColorUIResource(r, g, b);
 			} catch (final NumberFormatException ex) {
-				logger.severe("Exception while parsing color property: " + colorProp);
+				log.error("Exception while parsing color property: {} ", colorProp);
 			}
 		}
 		return color;
@@ -418,7 +418,7 @@ public abstract class AbstractTheme extends MetalTheme {
 		try {
 			val = Integer.parseInt(intProp);
 		} catch (final NumberFormatException ex) {
-			logger.severe("Exception while parsing int property: " + intProp);
+			log.error("Exception while parsing color property: {} ", intProp);
 		}
 		return val;
 	}

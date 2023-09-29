@@ -29,6 +29,7 @@ import com.jtattoo.plaf.lobo.LoboButton;
 import com.jtattoo.plaf.lobo.LoboLabel;
 import com.jtattoo.plaf.lobo.LoboLookAndFeel;
 import com.jtattoo.plaf.lobo.LoboPanel;
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.component.BrowserFrame;
 import org.loboevolution.component.ToolBar;
 
@@ -38,13 +39,12 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
+/**
+ * <p>PreviewFrame class.</p>
+ */
+@Slf4j
 public class PreviewFrame extends JFrame implements LoboLookAndFeel {
-
-    /** The Constant logger. */
-    private static final Logger logger = Logger.getLogger(PreviewFrame.class.getName());
 
     private static final String TITLE = "ScreenShot";
 
@@ -132,7 +132,7 @@ public class PreviewFrame extends JFrame implements LoboLookAndFeel {
             ImageIO.write(buffered, "png", new File(sFile.getAbsolutePath()));
 
         } catch (final Exception e) {
-            logger.log(Level.SEVERE, e.getMessage(), e);
+            log.error(e.getMessage(), e);
         } finally {
             setVisible(false);
         }

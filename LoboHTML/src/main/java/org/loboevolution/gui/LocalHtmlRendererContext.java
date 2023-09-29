@@ -27,6 +27,7 @@ package org.loboevolution.gui;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.Urls;
 import org.loboevolution.component.IBrowserFrame;
 import org.loboevolution.component.IBrowserPanel;
@@ -46,15 +47,11 @@ import java.net.Proxy;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Optional;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 @Data
 @AllArgsConstructor
+@Slf4j
 public class LocalHtmlRendererContext implements HtmlRendererContext{
-
-    private static final Logger logger = Logger.getLogger(LocalHtmlRendererContext.class.getName());
-
     private UserAgentContext bcontext;
 
     protected URLConnection currentConnection;
@@ -117,16 +114,16 @@ public class LocalHtmlRendererContext implements HtmlRendererContext{
     /** {@inheritDoc} */
     @Override
     public void error(final String message) {
-        if (logger.isLoggable(Level.SEVERE)) {
-            logger.log(Level.SEVERE, message);
+        if (log.isErrorEnabled()) {
+            log.error(message);
         }
     }
 
     /** {@inheritDoc} */
     @Override
     public void error(final String message, final Throwable throwable) {
-        if (logger.isLoggable(Level.SEVERE)) {
-            logger.log(Level.SEVERE, message, throwable);
+        if (log.isErrorEnabled()) {
+            log.error(message, throwable);
         }
     }
 
@@ -225,16 +222,16 @@ public class LocalHtmlRendererContext implements HtmlRendererContext{
     /** {@inheritDoc} */
     @Override
     public void moveInHistory(final int offset) {
-        if (logger.isLoggable(Level.WARNING)) {
-            logger.log(Level.WARNING, "moveInHistory() does nothing, unless overridden.");
+        if (log.isWarnEnabled()) {
+            log.warn("moveInHistory() does nothing, unless overridden.");
         }
     }
 
     /** {@inheritDoc} */
     @Override
     public String getPreviousURL() {
-        if (logger.isLoggable(Level.WARNING)) {
-            logger.log(Level.WARNING, "getPreviousURL() does nothing, unless overridden.");
+        if (log.isWarnEnabled()) {
+            log.warn("getPreviousURL() does nothing, unless overridden.");
         }
         return null;
     }
@@ -242,8 +239,8 @@ public class LocalHtmlRendererContext implements HtmlRendererContext{
     /** {@inheritDoc} */
     @Override
     public String getNextURL() {
-        if (logger.isLoggable(Level.WARNING)) {
-            logger.log(Level.WARNING, "getNextURL() does nothing, unless overridden.");
+        if (log.isWarnEnabled()) {
+            log.warn("getNextURL() does nothing, unless overridden.");
         }
         return null;
     }
@@ -447,16 +444,16 @@ public class LocalHtmlRendererContext implements HtmlRendererContext{
     /** {@inheritDoc} */
     @Override
     public void warn(final String message) {
-        if (logger.isLoggable(Level.WARNING)) {
-            logger.log(Level.WARNING, message);
+        if (log.isWarnEnabled()) {
+            log.warn(message);
         }
     }
 
     /** {@inheritDoc} */
     @Override
     public void warn(final String message, final Throwable throwable) {
-        if (logger.isLoggable(Level.WARNING)) {
-            logger.log(Level.WARNING, message, throwable);
+        if (log.isWarnEnabled()) {
+            log.warn(message, throwable);
         }
     }
 

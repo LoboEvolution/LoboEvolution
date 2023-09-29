@@ -26,6 +26,7 @@
 
 package org.loboevolution.html.js.xml;
 
+import lombok.extern.slf4j.Slf4j;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.html.dom.*;
 import org.loboevolution.html.dom.nodeimpl.traversal.TreeWalkerImpl;
@@ -50,15 +51,12 @@ import java.io.File;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.util.logging.Logger;
 
 /**
  * XMLDocument class.
  */
+@Slf4j
 public class XMLDocument implements Document {
-
-	/** The Constant logger. */
-	protected static final Logger logger = Logger.getLogger(XMLDocument.class.getName());
 
 	private static Document doc;
 
@@ -101,11 +99,11 @@ public class XMLDocument implements Document {
 				doc = builder.parse(new InputSourceImpl(in, "", StandardCharsets.UTF_8));
 			}
 		} catch (final SAXException e) {
-			logger.warning("A DOCTYPE was passed into the XML document");
+			log.warn("A DOCTYPE was passed into the XML document");
 		} catch (final IOException e) {
-			logger.severe("IOException occurred, XXE may still possible: " + e.getMessage());
+			log.error("IOException occurred, XXE may still possible: ", e);
 		} catch (final Exception e) {
-			logger.severe(e.getMessage());
+			log.error(e.getMessage(), e);
 		}
 	}
 

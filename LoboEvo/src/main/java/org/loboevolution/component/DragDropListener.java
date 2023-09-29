@@ -26,6 +26,7 @@
 
 package org.loboevolution.component;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.gui.HtmlPanel;
@@ -36,16 +37,12 @@ import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.dnd.*;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * <p>DragDropListener class.</p>
  */
+@Slf4j
 public class DragDropListener implements DropTargetListener {
-	
-	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(DragDropListener.class.getName());
 	
 	private final IBrowserPanel bpanel;
 
@@ -77,7 +74,7 @@ public class DragDropListener implements DropTargetListener {
 			}
 			dtde.rejectDrop();
 		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 			dtde.rejectDrop();
 		}
 	}

@@ -25,6 +25,7 @@
  */
 package org.loboevolution.gui;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.Strings;
 import org.loboevolution.common.Urls;
 import org.loboevolution.component.IBrowserPanel;
@@ -42,17 +43,12 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Base64;
-import java.util.logging.Logger;
 
 /**
  * The Class HtmlContextMenu.
- *
- *
- *
  */
+@Slf4j
 public class HtmlContextMenu {
-
-	private static final Logger logger = Logger.getLogger(HtmlContextMenu.class.getName());
 
 	/** The element. */
 	private final HTMLElement element;
@@ -111,13 +107,13 @@ public class HtmlContextMenu {
 				try (final InputStream stream = new ByteArrayInputStream(decodedBytes)) {
 					context.openImageViewer(href, stream);
 				} catch (final Exception e1) {
-					e1.printStackTrace();
+					log.error(e1.getMessage(), e1);
 				}
 			} else {
 				try {
 					context.openImageViewer(img.getFullURL(href));
 				} catch (final Exception e1) {
-					e1.printStackTrace();
+					log.error(e1.getMessage(), e1);
 				}
 			}
 		});
@@ -132,7 +128,7 @@ public class HtmlContextMenu {
 				try {
 					clip = img.getFullURL(href).toExternalForm();
 				} catch (final Exception e1) {
-					e1.printStackTrace();
+					log.error(e1.getMessage(), e1);
 				}
 			} else {
 				clip = href;
@@ -155,7 +151,7 @@ public class HtmlContextMenu {
 					d.downloadFile(new ByteArrayInputStream(decodedBytes));
 				}
 			} catch (final Exception e1) {
-				e1.printStackTrace();
+				log.error(e1.getMessage(), e1);
 			}
 		});
 		popupMenu.add(saveImage);
@@ -178,7 +174,7 @@ public class HtmlContextMenu {
 				final URL url = new URL(link.getAbsoluteHref());
 				context.linkClicked(url, true);
 			} catch (final Exception e0) {
-				logger.severe(e0.getMessage());
+				log.error(e0.getMessage(), e0);
 			}
 		});
 		popupMenu.add(menuItem);
@@ -196,7 +192,7 @@ public class HtmlContextMenu {
 				final IDownload d = bpanel.getBrowserFrame().getDownload();
 				d.downloadFile(new URL(link.getAbsoluteHref()));
 			} catch (final Exception e1) {
-				e1.printStackTrace();
+				log.error(e1.getMessage(), e1);
 			}
 		});
 		popupMenu.add(saveImage);

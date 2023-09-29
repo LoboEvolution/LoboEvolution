@@ -26,6 +26,7 @@
 
 package org.loboevolution.menu.tools.developer.tool;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.Strings;
 import org.loboevolution.component.BrowserFrame;
 import org.loboevolution.component.ToolBar;
@@ -43,19 +44,15 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * <p>ImagePageUI class.</p>
  */
+@Slf4j
 public class ImagePageUI extends AbstractToolsUI {
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;
-
-    /** The Constant logger. */
-    private static final Logger logger = Logger.getLogger(ImagePageUI.class.getName());
 
     /**
      * <p>Constructor for ImagePageUI.</p>
@@ -113,7 +110,7 @@ public class ImagePageUI extends AbstractToolsUI {
             tablePanel.add(jPanelImg);
             return new JScrollPane(tablePanel);
         } catch (final Exception e) {
-            logger.log(Level.SEVERE, e.getMessage(), e);
+            log.error(e.getMessage(), e);
         }
         return null;
     }

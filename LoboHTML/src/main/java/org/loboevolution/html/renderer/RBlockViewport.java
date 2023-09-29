@@ -25,6 +25,7 @@
  */
 package org.loboevolution.html.renderer;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.ArrayUtilities;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.HTMLTag;
@@ -57,8 +58,6 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * A substantial portion of the HTML rendering logic of the package can be found
@@ -67,9 +66,8 @@ import java.util.logging.Logger;
  * consisting of RLine's or RBlock's. RLine's in turn contain RWord's and so on.
  * This class also happens to be used as an RBlock scrollable viewport.
  */
+@Slf4j
 public class RBlockViewport extends BaseRCollection {
-	
-	private static final Logger logger = Logger.getLogger(RBlockViewport.class.getName());
 	
 	private static final MarkupLayout miscLayout = new MiscLayout();
 	
@@ -792,8 +790,8 @@ public class RBlockViewport extends BaseRCollection {
 	 * @return a {@link java.util.Iterator} object.
 	 */
 	public Iterator<Renderable> getRenderables(final int pointx, final int pointy) {
-		if (!SwingUtilities.isEventDispatchThread() && logger.isLoggable(Level.INFO)) {
-			logger.warning("getRenderable(): Invoked outside GUI dispatch thread.");
+		if (!SwingUtilities.isEventDispatchThread()) {
+			log.warn("getRenderable(): Invoked outside GUI dispatch thread.");
 		}
 		List<Renderable> result = null;
 		final SortedSet<PositionedRenderable> others = this.positionedRenderables;
@@ -1008,8 +1006,8 @@ public class RBlockViewport extends BaseRCollection {
 					   final FloatingBounds floatBounds, final boolean sizeOnly) {
 		// Expected in GUI thread. It's possible it may be invoked during pack()
 		// outside of the GUI thread.
-		if (!SwingUtilities.isEventDispatchThread() && logger.isLoggable(Level.INFO)) {
-			logger.warning("layout(): Invoked outside GUI dispatch thread.");
+		if (!SwingUtilities.isEventDispatchThread()) {
+			log.warn("layout(): Invoked outside GUI dispatch thread.");
 		}
 		final RenderableContainer container = this.container;
 		this.paddingInsets = paddingInsets;
@@ -1432,8 +1430,7 @@ public class RBlockViewport extends BaseRCollection {
 				addWordToLine(rword);
 			}
 		}} else{
-			logger.severe("RenderState is null for node " + textNode + " with parent " + textNode.getParentNode());
-
+			log.error("RenderState is null for node {} with parent {} ", textNode, textNode.getParentNode());
 		}
 	}
 

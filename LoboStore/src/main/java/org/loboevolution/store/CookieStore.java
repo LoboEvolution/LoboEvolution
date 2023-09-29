@@ -35,9 +35,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.Domains;
 import org.loboevolution.common.Strings;
 import org.loboevolution.info.GeneralInfo;
@@ -47,10 +46,8 @@ import org.loboevolution.util.DateUtil;
 /**
  * <p>CookieStore class.</p>
  */
+@Slf4j
 public class CookieStore {
-	
-	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(CookieStore.class.getName());
 
 	/** The Constant DB_PATH. */
 	private static final String DB_PATH = DatabseSQLite.getDatabaseDirectory();
@@ -127,7 +124,7 @@ public class CookieStore {
 				try {
 					expiresDate = new Date(System.currentTimeMillis() + Integer.parseInt(maxAge) * 1000);
 				} catch (final NumberFormatException e) {
-					logger.log(Level.SEVERE, e.getMessage(), e);
+					log.error(e.getMessage(), e);
 				}
 			} else if (expires != null) {
 				final DateUtil du = new DateUtil();
@@ -171,7 +168,7 @@ public class CookieStore {
 			pstmt.setInt(8, httponly ? 1 : 0);
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 	}
 
@@ -204,7 +201,7 @@ public class CookieStore {
 					}
 				}
 			} catch (final Exception e) {
-				logger.log(Level.SEVERE, e.getMessage(), e);
+				log.error(e.getMessage(), e);
 				return null;
 			}
 		}

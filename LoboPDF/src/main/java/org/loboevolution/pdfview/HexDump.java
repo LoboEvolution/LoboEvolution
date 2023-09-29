@@ -25,14 +25,13 @@
  */
 package org.loboevolution.pdfview;
 
-import java.util.logging.Logger;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * <p>HexDump class.</p>
  */
+@Slf4j
 public class HexDump {
-	
-	private static final Logger logger = Logger.getLogger(HexDump.class.getName());
     /**
      * <p>printData.</p>
      *
@@ -55,23 +54,23 @@ public class HexDump {
                 final int end = Integer.toHexString(i).length();
 
                 for (int j = start; j > end; j--) {
-                	logger.info("0");
+                	log.info("0");
                 }
-                logger.info(Integer.toHexString(i) + ": ");
+                log.info("{}", Integer.toHexString(i));
             }
             if (d < 16) {
-            	logger.info("0" + Integer.toHexString(d));
+                log.info("0 {} ", Integer.toHexString(d));
             } else {
-            	logger.info(Integer.toHexString(d));
+                log.info("{} ", Integer.toHexString(d));
             }
             if ((i & 15) == 15 || i == data.length - 1) {
-                logger.info("      " + new String(parts));
+                log.info("      {} ", String.valueOf(parts));
                 partsloc = 0;
             } else if ((i & 7) == 7) {
-            	logger.info("  ");
+            	log.info("  ");
                 parts[partsloc++] = ' ';
             } else if ((i & 1) == 1) {
-            	logger.info(" ");
+            	log.info(" ");
             }
         }
     }

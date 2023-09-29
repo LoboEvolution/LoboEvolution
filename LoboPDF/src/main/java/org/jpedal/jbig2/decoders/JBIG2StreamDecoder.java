@@ -29,8 +29,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Logger;
 
+import lombok.extern.slf4j.Slf4j;
 import org.jpedal.jbig2.JBIG2Exception;
 import org.jpedal.jbig2.image.JBIG2Bitmap;
 import org.jpedal.jbig2.io.StreamReader;
@@ -49,13 +49,9 @@ import org.jpedal.jbig2.util.BinaryOperation;
 
 /**
  * <p>JBIG2StreamDecoder class.</p>
- *
-  *
-  *
  */
+@Slf4j
 public class JBIG2StreamDecoder {
-	
-	private static final Logger logger = Logger.getLogger(JBIG2StreamDecoder.class.getName());
 
 	private StreamReader reader;
 
@@ -110,7 +106,7 @@ public class JBIG2StreamDecoder {
 
 		final boolean validFile = checkHeader();
 		if (JBIG2StreamDecoder.debug)
-			logger.info("validFile = " + validFile);
+			log.info("validFile {} ",  validFile);
 
 		if (!validFile) {
 			/**
@@ -151,20 +147,20 @@ public class JBIG2StreamDecoder {
 			 */
 
 			if (JBIG2StreamDecoder.debug)
-				logger.info("==== File Header ====");
+				log.info("==== File Header ====");
 
 			setFileHeaderFlags();
 
 			if (JBIG2StreamDecoder.debug) {
-				logger.info("randomAccessOrganisation = " + randomAccessOrganisation);
-				logger.info("noOfPagesKnown = " + noOfPagesKnown);
+				log.info("randomAccessOrganisation {} ",  randomAccessOrganisation);
+				log.info("noOfPagesKnown {} ",  noOfPagesKnown);
 			}
 
 			if (noOfPagesKnown) {
 				noOfPages = getNoOfPages();
 
 				if (JBIG2StreamDecoder.debug)
-					logger.info("noOfPages = " + noOfPages);
+					log.info("noOfPages {} ",  noOfPages);
 			}
 		}
 
@@ -216,7 +212,7 @@ public class JBIG2StreamDecoder {
 	private void readSegments() throws IOException, JBIG2Exception {
 
 		if (JBIG2StreamDecoder.debug)
-			logger.info("==== Segments ====");
+			log.info("==== Segments ====");
 
 		boolean finished = false;
 		while (!reader.isFinished() && !finished) {
@@ -224,7 +220,7 @@ public class JBIG2StreamDecoder {
 			final SegmentHeader segmentHeader = new SegmentHeader();
 
 			if (JBIG2StreamDecoder.debug)
-				logger.info("==== Segment Header ====");
+				log.info("==== Segment Header ====");
 
 			readSegmentHeader(segmentHeader);
 
@@ -238,7 +234,7 @@ public class JBIG2StreamDecoder {
 			switch (segmentType) {
 			case Segment.SYMBOL_DICTIONARY:
 				if (JBIG2StreamDecoder.debug)
-					logger.info("==== Segment Symbol Dictionary ====");
+					log.info("==== Segment Symbol Dictionary ====");
 
 				segment = new SymbolDictionarySegment(this);
 
@@ -248,7 +244,7 @@ public class JBIG2StreamDecoder {
 
 			case Segment.INTERMEDIATE_TEXT_REGION:
 				if (JBIG2StreamDecoder.debug)
-					logger.info("==== Intermediate Text Region ====");
+					log.info("==== Intermediate Text Region ====");
 
 				segment = new TextRegionSegment(this, false);
 
@@ -258,7 +254,7 @@ public class JBIG2StreamDecoder {
 
 			case Segment.IMMEDIATE_TEXT_REGION:
 				if (JBIG2StreamDecoder.debug)
-					logger.info("==== Immediate Text Region ====");
+					log.info("==== Immediate Text Region ====");
 
 				segment = new TextRegionSegment(this, true);
 
@@ -268,7 +264,7 @@ public class JBIG2StreamDecoder {
 
 			case Segment.IMMEDIATE_LOSSLESS_TEXT_REGION:
 				if (JBIG2StreamDecoder.debug)
-					logger.info("==== Immediate Lossless Text Region ====");
+					log.info("==== Immediate Lossless Text Region ====");
 
 				segment = new TextRegionSegment(this, true);
 
@@ -278,7 +274,7 @@ public class JBIG2StreamDecoder {
 
 			case Segment.PATTERN_DICTIONARY:
 				if (JBIG2StreamDecoder.debug)
-					logger.info("==== Pattern Dictionary ====");
+					log.info("==== Pattern Dictionary ====");
 
 				segment = new PatternDictionarySegment(this);
 
@@ -288,7 +284,7 @@ public class JBIG2StreamDecoder {
 
 			case Segment.INTERMEDIATE_HALFTONE_REGION:
 				if (JBIG2StreamDecoder.debug)
-					logger.info("==== Intermediate Halftone Region ====");
+					log.info("==== Intermediate Halftone Region ====");
 
 				segment = new HalftoneRegionSegment(this, false);
 
@@ -298,7 +294,7 @@ public class JBIG2StreamDecoder {
 
 			case Segment.IMMEDIATE_HALFTONE_REGION:
 				if (JBIG2StreamDecoder.debug)
-					logger.info("==== Immediate Halftone Region ====");
+					log.info("==== Immediate Halftone Region ====");
 
 				segment = new HalftoneRegionSegment(this, true);
 
@@ -308,7 +304,7 @@ public class JBIG2StreamDecoder {
 
 			case Segment.IMMEDIATE_LOSSLESS_HALFTONE_REGION:
 				if (JBIG2StreamDecoder.debug)
-					logger.info("==== Immediate Lossless Halftone Region ====");
+					log.info("==== Immediate Lossless Halftone Region ====");
 
 				segment = new HalftoneRegionSegment(this, true);
 
@@ -318,7 +314,7 @@ public class JBIG2StreamDecoder {
 
 			case Segment.INTERMEDIATE_GENERIC_REGION:
 				if (JBIG2StreamDecoder.debug)
-					logger.info("==== Intermediate Generic Region ====");
+					log.info("==== Intermediate Generic Region ====");
 
 				segment = new GenericRegionSegment(this, false);
 
@@ -328,7 +324,7 @@ public class JBIG2StreamDecoder {
 
 			case Segment.IMMEDIATE_GENERIC_REGION:
 				if (JBIG2StreamDecoder.debug)
-					logger.info("==== Immediate Generic Region ====");
+					log.info("==== Immediate Generic Region ====");
 
 				segment = new GenericRegionSegment(this, true);
 
@@ -338,7 +334,7 @@ public class JBIG2StreamDecoder {
 
 			case Segment.IMMEDIATE_LOSSLESS_GENERIC_REGION:
 				if (JBIG2StreamDecoder.debug)
-					logger.info("==== Immediate Lossless Generic Region ====");
+					log.info("==== Immediate Lossless Generic Region ====");
 
 				segment = new GenericRegionSegment(this, true);
 
@@ -348,7 +344,7 @@ public class JBIG2StreamDecoder {
 
 			case Segment.INTERMEDIATE_GENERIC_REFINEMENT_REGION:
 				if (JBIG2StreamDecoder.debug)
-					logger.info("==== Intermediate Generic Refinement Region ====");
+					log.info("==== Intermediate Generic Refinement Region ====");
 
 				segment = new RefinementRegionSegment(this, false, referredToSegments, noOfReferredToSegments);
 
@@ -358,7 +354,7 @@ public class JBIG2StreamDecoder {
 
 			case Segment.IMMEDIATE_GENERIC_REFINEMENT_REGION:
 				if (JBIG2StreamDecoder.debug)
-					logger.info("==== Immediate Generic Refinement Region ====");
+					log.info("==== Immediate Generic Refinement Region ====");
 
 				segment = new RefinementRegionSegment(this, true, referredToSegments, noOfReferredToSegments);
 
@@ -368,7 +364,7 @@ public class JBIG2StreamDecoder {
 
 			case Segment.IMMEDIATE_LOSSLESS_GENERIC_REFINEMENT_REGION:
 				if (JBIG2StreamDecoder.debug)
-					logger.info("==== Immediate lossless Generic Refinement Region ====");
+					log.info("==== Immediate lossless Generic Refinement Region ====");
 
 				segment = new RefinementRegionSegment(this, true, referredToSegments, noOfReferredToSegments);
 
@@ -378,7 +374,7 @@ public class JBIG2StreamDecoder {
 
 			case Segment.PAGE_INFORMATION:
 				if (JBIG2StreamDecoder.debug)
-					logger.info("==== Page Information Dictionary ====");
+					log.info("==== Page Information Dictionary ====");
 
 				segment = new PageInformationSegment(this);
 
@@ -391,7 +387,7 @@ public class JBIG2StreamDecoder {
 
 			case Segment.END_OF_STRIPE:
 				if (JBIG2StreamDecoder.debug)
-					logger.info("==== End of Stripes ====");
+					log.info("==== End of Stripes ====");
 
 				segment = new EndOfStripeSegment(this);
 
@@ -400,7 +396,7 @@ public class JBIG2StreamDecoder {
 
 			case Segment.END_OF_FILE:
 				if (JBIG2StreamDecoder.debug)
-					logger.info("==== End of File ====");
+					log.info("==== End of File ====");
 
 				finished = true;
 
@@ -408,17 +404,17 @@ public class JBIG2StreamDecoder {
 
 			case Segment.PROFILES:
 				if (JBIG2StreamDecoder.debug)
-					logger.info("PROFILES UNIMPLEMENTED");
+					log.info("PROFILES UNIMPLEMENTED");
 				break;
 
 			case Segment.TABLES:
 				if (JBIG2StreamDecoder.debug)
-					logger.info("TABLES UNIMPLEMENTED");
+					log.info("TABLES UNIMPLEMENTED");
 				break;
 
 			case Segment.EXTENSION:
 				if (JBIG2StreamDecoder.debug)
-					logger.info("==== Extensions ====");
+					log.info("==== Extensions ====");
 
 				segment = new ExtensionSegment(this);
 
@@ -427,7 +423,7 @@ public class JBIG2StreamDecoder {
 				break;
 
 			default:
-				logger.info("Unknown Segment type in JBIG2 stream");
+				log.info("Unknown Segment type in JBIG2 stream");
 
 				break;
 			}
@@ -509,7 +505,7 @@ public class JBIG2StreamDecoder {
 		segmentHeader.setPageAssociation(pageAssociation);
 
 		if (JBIG2StreamDecoder.debug)
-			logger.info("pageAssociation = " + pageAssociation);
+			log.info("pageAssociation {} ",  pageAssociation);
 	}
 
 	private void handleSegmentNumber(final SegmentHeader segmentHeader) throws IOException {
@@ -519,13 +515,13 @@ public class JBIG2StreamDecoder {
 		final int segmentNumber = BinaryOperation.getInt32(segmentBytes);
 
 		if (JBIG2StreamDecoder.debug)
-			logger.info("SegmentNumber = " + segmentNumber);
+			log.info("SegmentNumber {} ",  segmentNumber);
 		segmentHeader.setSegmentNumber(segmentNumber);
 	}
 
 	private void handleSegmentHeaderFlags(final SegmentHeader segmentHeader) throws IOException {
 		final short segmentHeaderFlags = reader.readByte();
-		// logger.info("SegmentHeaderFlags = " + SegmentHeaderFlags);
+		// log.info("SegmentHeaderFlags {} ",  SegmentHeaderFlags);
 		segmentHeader.setSegmentHeaderFlags(segmentHeaderFlags);
 	}
 
@@ -561,29 +557,29 @@ public class JBIG2StreamDecoder {
 
 			/** calculate the number of bytes in this field */
 			final int noOfBytesInField = (int) Math.ceil(4 + ((referredToSegmentCount + 1) / 8d));
-			// logger.info("noOfBytesInField = " + noOfBytesInField);
+			// log.info("noOfBytesInField {} ",  noOfBytesInField);
 
 			final int noOfRententionFlagBytes = noOfBytesInField - 4;
 			retentionFlags = new short[noOfRententionFlagBytes];
 			reader.readByte(retentionFlags);
 
 		} else { // error
-			throw new JBIG2Exception("Error, 3 bit Segment count field = " + referredToSegmentCount);
+			throw new JBIG2Exception("Error, 3 bit Segment count field " + referredToSegmentCount);
 		}
 
 		segmentHeader.setReferredToSegmentCount(referredToSegmentCount);
 
 		if (JBIG2StreamDecoder.debug)
-			logger.info("referredToSegmentCount = " + referredToSegmentCount);
+			log.info("referredToSegmentCount {} ",  referredToSegmentCount);
 
 		segmentHeader.setRententionFlags(retentionFlags);
 
 		if (JBIG2StreamDecoder.debug)
-			logger.info("retentionFlags = ");
+			log.info("retentionFlags = ");
 
 		if (JBIG2StreamDecoder.debug) {
 			for (final short s : retentionFlags) {
-				logger.info(s + " ");
+				log.info(s + " ");
 			}
 		}
 	}
@@ -614,10 +610,10 @@ public class JBIG2StreamDecoder {
 		segmentHeader.setReferredToSegments(referredToSegments);
 
 		if (JBIG2StreamDecoder.debug) {
-			logger.info("referredToSegments = ");
+			log.info("referredToSegments = ");
 			for (final int i : referredToSegments)
-				logger.info(i + " ");
-			logger.info("");
+				log.info(i + " ");
+			log.info("");
 		}
 	}
 
@@ -636,14 +632,14 @@ public class JBIG2StreamDecoder {
 		segmentHeader.setDataLength(dateLength);
 
 		if (JBIG2StreamDecoder.debug)
-			logger.info("dateLength = " + dateLength);
+			log.info("dateLength {} ",  dateLength);
 	}
 
 	private void setFileHeaderFlags() throws IOException {
 		final short headerFlags = reader.readByte();
 
 		if ((headerFlags & 0xfc) != 0) {
-			logger.info("Warning, reserved bits (2-7) of file header flags are not zero " + headerFlags);
+			log.info("Warning, reserved bits (2-7) of file header flags are not zero " + headerFlags);
 		}
 
 		final int fileOrganisation = headerFlags & 1;

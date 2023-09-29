@@ -28,6 +28,7 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
+import lombok.extern.slf4j.Slf4j;
 import org.htmlunit.cssparser.dom.CSSStyleSheetImpl;
 import org.htmlunit.cssparser.dom.CSSValueImpl;
 import org.htmlunit.cssparser.dom.Property;
@@ -60,6 +61,7 @@ import java.util.logging.Level;
 /**
  * <p>HTMLElementImpl class.</p>
  */
+@Slf4j
 public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSPropertiesContext {
 
 	private ComputedCSSStyleDeclaration computedStyles;
@@ -419,13 +421,13 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	/** {@inheritDoc} */
 	@Override
 	public void warn(final String message) {
-		logger.log(Level.WARNING, message);
+		log.warn(message);
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void warn(final String message, final Throwable err) {
-		logger.log(Level.WARNING, message, err);
+		log.warn(message, err);
 	}
 
 	/** {@inheritDoc} */

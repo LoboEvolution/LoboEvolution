@@ -25,6 +25,7 @@
  */
 package org.loboevolution.js;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.info.PropertyInfo;
 import org.mozilla.javascript.EvaluatorException;
 import org.mozilla.javascript.Function;
@@ -32,19 +33,15 @@ import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 
 import java.lang.reflect.Method;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * <p>JavaObjectWrapper class.</p>
  */
+@Slf4j
 public class JavaObjectWrapper extends ScriptableObject {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
-
-	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(JavaObjectWrapper.class.getName());
 
 	/** The delegate. */
 	private final Object delegate;
@@ -106,7 +103,7 @@ public class JavaObjectWrapper extends ScriptableObject {
 					return JavaScript.getInstance().getJavascriptObject(raw, this.getParentScope());
 				}
 			} catch (final Exception err) {
-				logger.log(Level.SEVERE, err.getMessage(), err);
+				log.error(err.getMessage(), err);
 			}
 		}
 		return Scriptable.NOT_FOUND;
@@ -130,7 +127,7 @@ public class JavaObjectWrapper extends ScriptableObject {
 				final Object val = getter.invoke(javaObject, (Object[]) null);
 				return JavaScript.getInstance().getJavascriptObject(val, start.getParentScope());
 			} catch (final Exception err) {
-				logger.log(Level.SEVERE, err.getMessage(), err);
+				log.error(err.getMessage(), err);
 				return new Object();
 			}
 		} else {
@@ -163,7 +160,7 @@ public class JavaObjectWrapper extends ScriptableObject {
 								return JavaScript.getInstance().getJavascriptObject(val, start.getParentScope());
 							}
 						} catch (final Exception err) {
-							logger.log(Level.SEVERE, err.getMessage(), err);
+							log.error(err.getMessage(), err);
 						}
 					}
 				}
@@ -188,7 +185,7 @@ public class JavaObjectWrapper extends ScriptableObject {
 				actualValue = JavaScript.getInstance().getJavaObject(value, pinfo.getPropertyType());
 				setter.invoke(this.getJavaObject(), index, actualValue);
 			} catch (final Exception err) {
-				logger.log(Level.SEVERE, err.getMessage(), err);
+				log.error(err.getMessage(), err);
 			}
 		}
 	}
@@ -208,7 +205,7 @@ public class JavaObjectWrapper extends ScriptableObject {
 						actualValue = JavaScript.getInstance().getJavaObject(value, pinfo.getPropertyType());
 						setter.invoke(this.getJavaObject(), actualValue);
 					} catch (final Exception err) {
-						logger.log(Level.SEVERE, err.getMessage(), err);
+						log.error(err.getMessage(), err);
 					}
 				}
 			} else {
@@ -221,7 +218,7 @@ public class JavaObjectWrapper extends ScriptableObject {
 							actualValue = JavaScript.getInstance().getJavaObject(value, ni.getPropertyType());
 							setter.invoke(this.getJavaObject(), name, actualValue);
 						} catch (final Exception err) {
-							logger.log(Level.SEVERE, err.getMessage(), err);
+							log.error(err.getMessage(), err);
 						}
 					} else {
 						super.put(name, start, value);

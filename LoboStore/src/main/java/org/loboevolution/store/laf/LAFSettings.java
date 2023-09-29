@@ -30,6 +30,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.store.DatabseSQLite;
 
 import java.awt.*;
@@ -40,8 +41,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * The Class LAFSettings.
@@ -50,17 +49,13 @@ import java.util.logging.Logger;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Slf4j
 public class LAFSettings implements Serializable {
 
     /**
      * The Constant serialVersionUID.
      */
     private static final long serialVersionUID = 1L;
-
-    /**
-     * The Constant logger.
-     */
-    private static final Logger logger = Logger.getLogger(LAFSettings.class.getName());
 
     /**
      * The Constant DB_PATH.
@@ -240,7 +235,7 @@ public class LAFSettings implements Serializable {
                 fonts.add(rs.getString(1));
             }
         } catch (final Exception e) {
-            logger.log(Level.SEVERE, e.getMessage(), e);
+            log.error(e.getMessage(), e);
         }
         return fonts.toArray(new String[0]);
     }

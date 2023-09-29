@@ -26,6 +26,7 @@
 
 package org.loboevolution.store;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.Strings;
 import org.loboevolution.info.BookmarkInfo;
 
@@ -33,18 +34,14 @@ import java.io.Serializable;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * The Class BookmarksStore.
  */
+@Slf4j
 public class BookmarksStore implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
-	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(BookmarksStore.class.getName());
 
 	/** The Constant DB_PATH. */
 	private static final String DB_PATH = DatabseSQLite.getDatabaseDirectory();
@@ -63,7 +60,7 @@ public class BookmarksStore implements Serializable {
              final PreparedStatement pstmt = conn.prepareStatement(this.DELETE_BOOKMARKS)) {
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 	}
 	
@@ -78,7 +75,7 @@ public class BookmarksStore implements Serializable {
 			pstmt.setString(1, url.trim());
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 	}
 
@@ -109,7 +106,7 @@ public class BookmarksStore implements Serializable {
 						values.add(info);
 					}
 				} catch (final Exception e) {
-					logger.log(Level.SEVERE, e.getMessage(), e);
+					log.error(e.getMessage(), e);
 				}
 			}
 			return values;
@@ -130,7 +127,7 @@ public class BookmarksStore implements Serializable {
 			pstmt.setString(4, info.getTagsText());
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 	}
 

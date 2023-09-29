@@ -28,6 +28,7 @@
  */
 package org.loboevolution.gui;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.EventDispatch2;
 import org.loboevolution.common.WrapperLayout;
 import org.loboevolution.component.IBrowserPanel;
@@ -62,8 +63,6 @@ import java.util.ArrayList;
 import java.util.EventListener;
 import java.util.EventObject;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * The HtmlPanel class is a Swing component that can render a HTML
@@ -74,10 +73,8 @@ import java.util.logging.Logger;
  * Invoke method {@link #setDocument(Document, HtmlRendererContext)} in order to
  * schedule a document for rendering.
  */
+@Slf4j
 public class HtmlPanel extends JComponent implements FrameContext {
-	
-	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(HtmlPanel.class.getName());
 
 	private final class LocalDocumentNotificationListener implements DocumentNotificationListener {
 		@Override
@@ -521,7 +518,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 			final Document document = builder.parse(is);
 			panel.setDocument(document, rendererContext);
 		} catch (final SocketTimeoutException e) {
-			logger.log(Level.SEVERE, "More than " + connection.getConnectTimeout() + " elapsed.");
+			log.error("More time elapsed {}", connection.getConnectTimeout());
 		}
 		return panel;
 	}

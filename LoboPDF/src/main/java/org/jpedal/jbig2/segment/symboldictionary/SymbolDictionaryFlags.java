@@ -25,20 +25,15 @@
  */
 package org.jpedal.jbig2.segment.symboldictionary;
 
-import java.util.logging.Logger;
-
+import lombok.extern.slf4j.Slf4j;
 import org.jpedal.jbig2.decoders.JBIG2StreamDecoder;
 import org.jpedal.jbig2.segment.Flags;
 
 /**
  * <p>SymbolDictionaryFlags class.</p>
- *
-  *
-  *
  */
+@Slf4j
 public class SymbolDictionaryFlags extends Flags {
-
-	private static final Logger logger = Logger.getLogger(SymbolDictionaryFlags.class.getName());
 	/** Constant <code>SD_HUFF="SD_HUFF"</code> */
 	public static final String SD_HUFF = "SD_HUFF";
 	/** Constant <code>SD_REF_AGG="SD_REF_AGG"</code> */
@@ -95,6 +90,6 @@ public class SymbolDictionaryFlags extends Flags {
 		flags.put(SD_R_TEMPLATE, (flagsAsInt >> 12) & 1);
 
 		if (JBIG2StreamDecoder.debug)
-			logger.info("flags: " + flags);
+			log.info("flags: {} ", flags);
 	}
 }

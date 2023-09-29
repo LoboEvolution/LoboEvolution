@@ -28,6 +28,7 @@
  */
 package org.loboevolution.component;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.config.HtmlRendererConfig;
 import org.loboevolution.config.HtmlRendererConfigImpl;
 import org.loboevolution.gui.HtmlPanel;
@@ -47,13 +48,12 @@ import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.net.*;
 import java.nio.charset.StandardCharsets;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
+/**
+ * <p>NavigatorFrame class.</p>
+ */
+@Slf4j
 public class NavigatorFrame {
-
-    /** The Constant logger. */
-    private static final Logger logger = Logger.getLogger(NavigatorFrame.class.getName());
 
     /**
      * <p>createHtmlPanel.</p>
@@ -67,7 +67,7 @@ public class NavigatorFrame {
         try {
             return createPanel(browserPanel, connection, uri);
         } catch (final Exception e) {
-            logger.log(Level.SEVERE, e.getMessage(), e);
+            log.error(e.getMessage(), e);
             return getErrorComponent(browserPanel, connection, uri, e);
         }
     }
@@ -89,7 +89,7 @@ public class NavigatorFrame {
             connection.connect();
             return createPanel(browserPanel, connection, uri);
         } catch (final Exception e) {
-            logger.log(Level.SEVERE, e.getMessage(), e);
+            log.error(e.getMessage(), e);
             return getErrorComponent(browserPanel, connection, uri, e);
         }
     }
@@ -109,7 +109,7 @@ public class NavigatorFrame {
             final Document document = builder.parse(is);
             panel.setDocument(document, rendererContext);
         } catch (final SocketTimeoutException e) {
-            logger.log(Level.SEVERE, "More than " + connection.getConnectTimeout() + " elapsed.");
+            log.error("More time elapsed {}", connection.getConnectTimeout());
         }
         return panel;
     }

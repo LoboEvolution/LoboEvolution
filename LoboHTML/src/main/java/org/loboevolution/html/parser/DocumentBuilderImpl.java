@@ -28,6 +28,7 @@
  */
 package org.loboevolution.html.parser;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.Urls;
 import org.loboevolution.config.HtmlRendererConfig;
 import org.loboevolution.gui.HtmlRendererContext;
@@ -44,14 +45,13 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.logging.Logger;
 
 /**
  * The DocumentBuilderImpl class is an HTML DOM parser that
  * implements the standard W3C DocumentBuilder interface.
  */
+@Slf4j
 public class DocumentBuilderImpl {
-	private static final Logger logger = Logger.getLogger(DocumentBuilderImpl.class.getName());
 	private final UserAgentContext bcontext;
 	private final HtmlRendererContext rcontext;
 	private final HtmlRendererConfig config;
@@ -90,7 +90,7 @@ public class DocumentBuilderImpl {
 		}
 		final String uri = is.getSystemId();
 		if (uri == null) {
-			logger.warning("parse(): InputSource has no SystemId (URI); document item URLs will not be resolvable.");
+			log.warn("parse(): InputSource has no SystemId (URI); document item URLs will not be resolvable.");
 		}
 		final WritableLineReader wis;
 		final Reader reader = is.getCharacterStream();

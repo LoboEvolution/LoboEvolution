@@ -28,6 +28,7 @@
  */
 package org.loboevolution.http;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.EventDispatch;
 import org.loboevolution.common.IORoutines;
 import org.loboevolution.common.Strings;
@@ -50,15 +51,12 @@ import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * <p>HttpRequest class.</p>
  */
+@Slf4j
 public class HttpRequest {
-
-	private static final Logger logger = Logger.getLogger(HttpRequest.class.getName());
 
 	private URLConnection connection;
 	private URL requestURL;
@@ -102,7 +100,7 @@ public class HttpRequest {
 			try {
 				c.getInputStream().close();
 			} catch (final IOException e) {
-				logger.log(Level.SEVERE, e.getMessage(), e);
+				log.error(e.getMessage(), e);
 			}
 		}
 
@@ -182,8 +180,7 @@ public class HttpRequest {
 		try {
 			return bytes == null ? null : new String(bytes, encoding);
 		} catch (final UnsupportedEncodingException uee) {
-			logger.log(Level.WARNING,
-					"getResponseText(): Charset '" + encoding + "' did not work. Retrying with ISO-8859-1.", uee);
+			log.warn("getResponseText(): Charset {} did not work. Retrying with ISO-8859-1.", encoding, uee);
 			return new String(bytes, StandardCharsets.ISO_8859_1);
 		}
 	}
@@ -203,7 +200,7 @@ public class HttpRequest {
 			final XMLDocumentBuilder builder = new XMLDocumentBuilder();
 			return builder.parse(new InputSourceImpl(in, "", StandardCharsets.UTF_8));
 		} catch (final Exception err) {
-			logger.log(Level.WARNING, "Unable to parse response as XML.", err);
+			log.error("Unable to parse response as XML.", err);
 			return null;
 		}
 	}
@@ -333,7 +330,7 @@ public class HttpRequest {
 					try {
 						sendSync(content, timeout);
 					} catch (final Throwable thrown) {
-						logger.log(Level.WARNING, "send(): Error in asynchronous request on " + url, thrown);
+						log.error("send(): Error in asynchronous request on {} ", url, thrown);
 					}
 				}
 			}.start();

@@ -46,15 +46,11 @@ import org.loboevolution.net.HttpNetwork;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.logging.Logger;
 
 /**
  * <p>ImgControl class.</p>
  */
 public class ImgControl extends BaseControl {
-
-	/** Constant logger */
-	protected static final Logger logger = Logger.getLogger(ImgControl.class.getName());
 
 	private static final long serialVersionUID = 1L;
 

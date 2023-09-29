@@ -25,20 +25,16 @@
  */
 package org.jpedal.jbig2.segment.region.generic;
 
-import java.util.logging.Logger;
-
+import lombok.extern.slf4j.Slf4j;
 import org.jpedal.jbig2.decoders.JBIG2StreamDecoder;
 import org.jpedal.jbig2.segment.Flags;
 
 /**
  * <p>GenericRegionFlags class.</p>
- *
-  *
-  *
  */
+@Slf4j
 public class GenericRegionFlags extends Flags {
 
-	private static final Logger logger = Logger.getLogger(GenericRegionFlags.class.getName());
 	/** Constant <code>MMR="MMR"</code> */
 	public static final String MMR = "MMR";
 	/** Constant <code>GB_TEMPLATE="GB_TEMPLATE"</code> */
@@ -61,6 +57,6 @@ public class GenericRegionFlags extends Flags {
 		
 		
 		if (JBIG2StreamDecoder.debug)
-			logger.info("flags: " + flags);
+			log.info("flags: {} ", flags);
 	}
 }

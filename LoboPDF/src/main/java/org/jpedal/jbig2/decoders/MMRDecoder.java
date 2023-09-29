@@ -25,17 +25,15 @@
  */
 package org.jpedal.jbig2.decoders;
 
-import java.util.logging.Logger;
-
+import lombok.extern.slf4j.Slf4j;
 import org.jpedal.jbig2.io.StreamReader;
 import org.jpedal.jbig2.util.BinaryOperation;
 
 /**
  * <p>MMRDecoder class.</p>
  */
+@Slf4j
 public class MMRDecoder {
-	
-	private static final Logger logger = Logger.getLogger(MMRDecoder.class.getName());
 
 	private final StreamReader reader;
 
@@ -128,9 +126,10 @@ public class MMRDecoder {
 		}
 		if (tuple[0] < 0) {
 			if (JBIG2StreamDecoder.debug)
-				logger.info("Bad two dim code in JBIG2 MMR stream");
+				log.info("Bad two dim code in JBIG2 MMR stream");
 			
 			return 0;
+
 		}
 		bufferLength -= tuple[0];
 		
@@ -185,7 +184,7 @@ public class MMRDecoder {
 			noOfBytesRead++;
 		}
 		if (JBIG2StreamDecoder.debug)
-			logger.info("Bad white code in JBIG2 MMR stream");
+			log.info("Bad white code in JBIG2 MMR stream");
 
 		bufferLength--;
 		
@@ -252,7 +251,7 @@ public class MMRDecoder {
 		}
 		
 		if (JBIG2StreamDecoder.debug)
-			logger.info("Bad black code in JBIG2 MMR stream");
+			log.info("Bad black code in JBIG2 MMR stream");
 
 		bufferLength--;
 		return 1;

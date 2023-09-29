@@ -33,21 +33,18 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.logging.Logger;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.pdfview.PDFDebugger;
 import org.loboevolution.pdfview.PDFFile;
 import org.loboevolution.pdfview.PDFObject;
 
 /**
  * A representation, with parser, of an Adobe Type 1 font.
- *
  * Author Mike Wessler
-  *
  */
+@Slf4j
 public class Type1Font extends OutlineFont {
-
-	private static final Logger logger = Logger.getLogger(Type1Font.class.getName());
     String[] chr2name;
     int password;
     byte[][] subrs;
@@ -603,7 +600,6 @@ public class Type1Font extends OutlineFont {
                         				flexArray[12], flexArray[13]);
                         		flexMode = false;
                         		this.sloc = 0;
-                        		//logger.info("End Flex " + flexPt);
                         		break;
                         	}
                         }

@@ -113,7 +113,7 @@ public abstract class Segment {
 			mmrDecoder = decoder.getMMRDecoder();
 			
 //		} catch (JBIG2Exception e) {
-//			logger.log(Level.SEVERE, e.getMessage(), e);
+//			log.error(e.getMessage(), e);
 //		}
 	}
 

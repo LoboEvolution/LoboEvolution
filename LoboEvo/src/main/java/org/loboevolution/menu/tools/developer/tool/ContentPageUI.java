@@ -26,6 +26,7 @@
 
 package org.loboevolution.menu.tools.developer.tool;
 
+import lombok.extern.slf4j.Slf4j;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.loboevolution.common.Strings;
@@ -43,19 +44,15 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * <p>CssPageUI class.</p>
  */
+@Slf4j
 public class ContentPageUI extends AbstractToolsUI {
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;
-
-    /** The Constant logger. */
-    private static final Logger logger = Logger.getLogger(ContentPageUI.class.getName());
 
     /**
      * <p>Constructor for CssPageUI.</p>
@@ -129,7 +126,7 @@ public class ContentPageUI extends AbstractToolsUI {
             tablePanel.add(textArea);
             return new JScrollPane(tablePanel);
         } catch (final Exception e) {
-            logger.log(Level.SEVERE, e.getMessage(), e);
+            log.error(e.getMessage(), e);
         }
         return null;
     }

@@ -85,49 +85,8 @@ import java.beans.VetoableChangeSupport;
  * exception can be used to veto changing the property. For example, perhaps the
  * property is changing from "fred" to "red", but a listener deems that "red" is
  * unexceptable. In this case, the listener can fire a veto exception and the
- * property must remain "fred". For example:
- *
- * <pre>
- *
- *  public class ABean extends JavaBean {
- *    private String foo;
- *
- *    public void setFoo(final String newFoo) throws PropertyVetoException {
- *      String old = getFoo();
- *      this.foo = newFoo;
- *      fireVetoableChange("foo", old, getFoo());
- *   }
- *
- *    public String getFoo() {
- *      return foo;
- *   }
- * }
- *
- *  public class Tester {
- *    public static void main(String... args) {
- *      try {
- *        ABean a = new ABean();
- *        a.setFoo("fred");
- *        a.addVetoableChangeListener(new VetoableChangeListener() {
- *          public void vetoableChange(PropertyChangeEvent evt) throws PropertyVetoException {
- *            if ("red".equals(evt.getNewValue()) {
- *              throw new PropertyVetoException("Cannot be red!", evt);
- *           }
- *         }
- *       }
- *        a.setFoo("red");
- *     } catch (Exception e) {
- *        logger.error(e); // this will be executed
- *     }
- *   }
- * }
- *
- * </pre>
- *
- * status REVIEWED
- *
+ * property must remain "fred". *
  * Author rbair
- *
  */
 public abstract class AbstractBean {
 	/**

@@ -33,9 +33,8 @@ import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.component.HtmlRendererContextImpl;
 import org.loboevolution.component.IBrowserPanel;
 import org.loboevolution.component.NavigatorFrame;
@@ -56,10 +55,8 @@ import org.xml.sax.InputSource;
 /**
  * <p>NavigationManager class.</p>
  */
+@Slf4j
 public class NavigationManager {
-	
-	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(NavigationManager.class.getName());
 
 	/**
 	 * <p>getDocument.</p>
@@ -84,10 +81,10 @@ public class NavigationManager {
 				final DocumentBuilderImpl builder = new DocumentBuilderImpl(rendererContext.getUserAgentContext(), rendererContext, config);
 				return builder.parse(is);
 			} catch (final SocketTimeoutException e) {
-				logger.log(Level.SEVERE, "More than " + connection.getConnectTimeout() + " elapsed.");
+				log.error("More time elapsed {}", connection.getConnectTimeout());
 		    }
 		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 		return null;
 	}

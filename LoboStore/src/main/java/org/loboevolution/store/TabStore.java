@@ -26,6 +26,7 @@
 
 package org.loboevolution.store;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.info.TabInfo;
 
 import java.sql.Connection;
@@ -34,16 +35,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * <p>TabStore class.</p>
  */
+@Slf4j
 public class TabStore {
-	
-	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(TabStore.class.getName());
 
 	/** The Constant DB_PATH. */
 	private static final String DB_PATH = DatabseSQLite.getDatabaseDirectory();
@@ -85,7 +82,7 @@ public class TabStore {
 			pstmt.setString(3, title);
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 	}
 
@@ -100,7 +97,7 @@ public class TabStore {
 			pstmt.setInt(1, index);
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 	}
 	
@@ -112,7 +109,7 @@ public class TabStore {
              final PreparedStatement pstmt = conn.prepareStatement(DELETE_TAB_ALL)) {
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 	}
 
@@ -134,7 +131,7 @@ public class TabStore {
 					}
 				}
 			} catch (final Exception e) {
-				logger.log(Level.SEVERE, e.getMessage(), e);
+				log.error(e.getMessage(), e);
 			}
 		}
 		return url;
@@ -158,7 +155,7 @@ public class TabStore {
 						.build());
 			}
 		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 		return urls;
 	}
@@ -177,7 +174,7 @@ public class TabStore {
 				urls.add(rs.getString(1));
 			}
 		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 		return urls;
 	}

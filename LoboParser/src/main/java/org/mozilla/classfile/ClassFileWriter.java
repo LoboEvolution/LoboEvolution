@@ -10,8 +10,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Arrays;
-import java.util.logging.Logger;
 
+import lombok.extern.slf4j.Slf4j;
 import org.mozilla.javascript.Kit;
 import org.mozilla.javascript.ObjArray;
 import org.mozilla.javascript.UintMap;
@@ -24,10 +24,8 @@ import org.mozilla.javascript.UintMap;
  *
  * @author Roger Lawrence
  */
+@Slf4j
 public class ClassFileWriter {
-
-    /** The Constant logger. */
-    private static final Logger logger = Logger.getLogger(ClassFileWriter.class.getName());
 
     /**
      * Thrown for cases where the error in generating the class file is due to a program size
@@ -424,12 +422,12 @@ public class ClassFileWriter {
         if (opcodeCount(theOpCode) != 0) throw new IllegalArgumentException("Unexpected operands");
         int newStack = itsStackTop + stackChange(theOpCode);
         if (newStack < 0 || Short.MAX_VALUE < newStack) badStack(newStack);
-        if (DEBUGCODE) logger.info("Add " + bytecodeStr(theOpCode));
+        if (DEBUGCODE) log.info("Add {} ",  bytecodeStr(theOpCode));
         addToCodeBuffer(theOpCode);
         itsStackTop = (short) newStack;
         if (newStack > itsMaxStack) itsMaxStack = (short) newStack;
         if (DEBUGSTACK) {
-            logger.info("After " + bytecodeStr(theOpCode) + " stack = " + itsStackTop);
+            log.info("After {} stack = {} ", bytecodeStr(theOpCode), itsStackTop);
         }
         if (theOpCode == ByteCode.ATHROW) {
             addSuperBlockStart(itsCodeBufferTop);
@@ -444,8 +442,7 @@ public class ClassFileWriter {
      */
     public void add(int theOpCode, int theOperand) {
         if (DEBUGCODE) {
-            logger.info(
-                    "Add " + bytecodeStr(theOpCode) + ", " + Integer.toHexString(theOperand));
+            log.info("Add  {},  {}", bytecodeStr(theOpCode), Integer.toHexString(theOperand));
         }
         int newStack = itsStackTop + stackChange(theOpCode);
         if (newStack < 0 || Short.MAX_VALUE < newStack) badStack(newStack);
@@ -491,13 +488,7 @@ public class ClassFileWriter {
                         int targetPC = getLabelPC(theOperand);
                         if (DEBUGLABELS) {
                             int theLabel = theOperand & 0x7FFFFFFF;
-                            logger.info(
-                                    "Fixing branch to "
-                                            + theLabel
-                                            + " at "
-                                            + targetPC
-                                            + " from "
-                                            + branchPC);
+                            log.info("Fixing branch to  {} at {} from {}", theLabel, targetPC, branchPC);
                         }
                         if (targetPC != -1) {
                             int offset = targetPC - branchPC;
@@ -591,7 +582,7 @@ public class ClassFileWriter {
         itsStackTop = (short) newStack;
         if (newStack > itsMaxStack) itsMaxStack = (short) newStack;
         if (DEBUGSTACK) {
-            logger.info("After " + bytecodeStr(theOpCode) + " stack = " + itsStackTop);
+            log.info("After {} stack = {} ", bytecodeStr(theOpCode), itsStackTop);
         }
     }
 
@@ -671,13 +662,7 @@ public class ClassFileWriter {
      */
     public void add(int theOpCode, int theOperand1, int theOperand2) {
         if (DEBUGCODE) {
-            logger.info(
-                    "Add "
-                            + bytecodeStr(theOpCode)
-                            + ", "
-                            + Integer.toHexString(theOperand1)
-                            + ", "
-                            + Integer.toHexString(theOperand2));
+            log.info("Add {}, {}, {}", bytecodeStr(theOpCode), Integer.toHexString(theOperand1), Integer.toHexString(theOperand2));
         }
         int newStack = itsStackTop + stackChange(theOpCode);
         if (newStack < 0 || Short.MAX_VALUE < newStack) badStack(newStack);
@@ -713,13 +698,13 @@ public class ClassFileWriter {
         itsStackTop = (short) newStack;
         if (newStack > itsMaxStack) itsMaxStack = (short) newStack;
         if (DEBUGSTACK) {
-            logger.info("After " + bytecodeStr(theOpCode) + " stack = " + itsStackTop);
+            log.info("After {} stack = {} ", bytecodeStr(theOpCode), itsStackTop);
         }
     }
 
     public void add(int theOpCode, String className) {
         if (DEBUGCODE) {
-            logger.info("Add " + bytecodeStr(theOpCode) + ", " + className);
+            log.info("Add {} {} ", bytecodeStr(theOpCode), className);
         }
         int newStack = itsStackTop + stackChange(theOpCode);
         if (newStack < 0 || Short.MAX_VALUE < newStack) badStack(newStack);
@@ -741,21 +726,13 @@ public class ClassFileWriter {
         itsStackTop = (short) newStack;
         if (newStack > itsMaxStack) itsMaxStack = (short) newStack;
         if (DEBUGSTACK) {
-            logger.info("After " + bytecodeStr(theOpCode) + " stack = " + itsStackTop);
+            log.info("After {} stack = {} ", bytecodeStr(theOpCode), itsStackTop);
         }
     }
 
     public void add(int theOpCode, String className, String fieldName, String fieldType) {
         if (DEBUGCODE) {
-            logger.info(
-                    "Add "
-                            + bytecodeStr(theOpCode)
-                            + ", "
-                            + className
-                            + ", "
-                            + fieldName
-                            + ", "
-                            + fieldType);
+            log.info("Add {}, {}, {} ", bytecodeStr(theOpCode), className, fieldName, fieldType);
         }
         int newStack = itsStackTop + stackChange(theOpCode);
         char fieldTypeChar = fieldType.charAt(0);
@@ -780,21 +757,13 @@ public class ClassFileWriter {
         itsStackTop = (short) newStack;
         if (newStack > itsMaxStack) itsMaxStack = (short) newStack;
         if (DEBUGSTACK) {
-            logger.info("After " + bytecodeStr(theOpCode) + " stack = " + itsStackTop);
+            log.info("After {} stack = {} ", bytecodeStr(theOpCode), itsStackTop);
         }
     }
 
     public void addInvoke(int theOpCode, String className, String methodName, String methodType) {
         if (DEBUGCODE) {
-            logger.info(
-                    "Add "
-                            + bytecodeStr(theOpCode)
-                            + ", "
-                            + className
-                            + ", "
-                            + methodName
-                            + ", "
-                            + methodType);
+            log.info("Add  {},  {}, {}, {}", bytecodeStr(theOpCode), className, methodName, methodType);
         }
         int parameterInfo = sizeOfParameters(methodType);
         int parameterCount = parameterInfo >>> 16;
@@ -832,14 +801,14 @@ public class ClassFileWriter {
         itsStackTop = (short) newStack;
         if (newStack > itsMaxStack) itsMaxStack = (short) newStack;
         if (DEBUGSTACK) {
-            logger.info("After " + bytecodeStr(theOpCode) + " stack = " + itsStackTop);
+            log.info("After {} stack = {} ", bytecodeStr(theOpCode), itsStackTop);
         }
     }
 
     public void addInvokeDynamic(
             String methodName, String methodType, MHandle bsm, Object... bsmArgs) {
         if (DEBUGCODE) {
-            logger.info("Add invokedynamic, " + methodName + ", " + methodType);
+            log.info("Add invokedynamic, {}, {} ",  methodName, methodType);
         }
         // JDK 1.7 major class file version is required for invokedynamic
         if (MajorVersion < 51) {
@@ -876,7 +845,7 @@ public class ClassFileWriter {
         itsStackTop = (short) newStack;
         if (newStack > itsMaxStack) itsMaxStack = (short) newStack;
         if (DEBUGSTACK) {
-            logger.info("After invokedynamic stack = " + itsStackTop);
+            log.info("After invokedynamic stack = {} ",  itsStackTop);
         }
     }
 
@@ -1112,9 +1081,9 @@ public class ClassFileWriter {
 
     public int addTableSwitch(int low, int high) {
         if (DEBUGCODE) {
-            logger.info("Add " + bytecodeStr(ByteCode.TABLESWITCH) + " " + low + " " + high);
+            log.info("Add {} {} {} ", bytecodeStr(ByteCode.TABLESWITCH), low, high);
         }
-        if (low > high) throw new ClassFileFormatException("Bad bounds: " + low + ' ' + high);
+        if (low > high) throw new ClassFileFormatException("Bad bounds:" +  low + ' ' + high);
 
         int newStack = itsStackTop + stackChange(ByteCode.TABLESWITCH);
         if (newStack < 0 || Short.MAX_VALUE < newStack) badStack(newStack);
@@ -1136,8 +1105,7 @@ public class ClassFileWriter {
         itsStackTop = (short) newStack;
         if (newStack > itsMaxStack) itsMaxStack = (short) newStack;
         if (DEBUGSTACK) {
-            logger.info(
-                    "After " + bytecodeStr(ByteCode.TABLESWITCH) + " stack = " + itsStackTop);
+            log.info("After {} stack = {} ",  bytecodeStr(ByteCode.TABLESWITCH), itsStackTop);
         }
 
         return switchStart;
@@ -1157,7 +1125,7 @@ public class ClassFileWriter {
 
     public final void markTableSwitchCase(int switchStart, int caseIndex, int stackTop) {
         if (!(0 <= stackTop && stackTop <= itsMaxStack))
-            throw new IllegalArgumentException("Bad stack index: " + stackTop);
+            throw new IllegalArgumentException("Bad stack index: " +  stackTop);
         itsStackTop = (short) stackTop;
         addSuperBlockStart(itsCodeBufferTop);
         itsJumpFroms.put(itsCodeBufferTop, switchStart);
@@ -1170,8 +1138,8 @@ public class ClassFileWriter {
      */
     public void setTableSwitchJump(int switchStart, int caseIndex, int jumpTarget) {
         if (jumpTarget < 0 || itsCodeBufferTop < jumpTarget)
-            throw new IllegalArgumentException("Bad jump target: " + jumpTarget);
-        if (caseIndex < -1) throw new IllegalArgumentException("Bad case index: " + caseIndex);
+            throw new IllegalArgumentException("Bad jump target:  " + jumpTarget);
+        if (caseIndex < -1) throw new IllegalArgumentException("Bad case index:  " +caseIndex);
 
         int padSize = 3 & ~switchStart; // == 3 - switchStart % 4
         int caseOffset;
@@ -1194,7 +1162,7 @@ public class ClassFileWriter {
         if (caseOffset < 0 || itsCodeBufferTop < caseOffset + 4) {
             // caseIndex >= -1 does not guarantee that caseOffset >= 0 due
             // to a possible overflow.
-            throw new ClassFileFormatException("Too big case index: " + caseIndex);
+            throw new ClassFileFormatException("Too big case index: " +  caseIndex);
         }
         // ALERT: perhaps check against case bounds?
         putInt32(jumpTarget - switchStart, itsCodeBuffer, caseOffset);
@@ -1311,8 +1279,7 @@ public class ClassFileWriter {
         itsStackTop = (short) newStack;
         if (newStack > itsMaxStack) itsMaxStack = (short) newStack;
         if (DEBUGSTACK) {
-            logger.info(
-                    "After " + "adjustStackTop(" + delta + ")" + " stack = " + itsStackTop);
+            log.info("After adjustStackTop({}),  stack = {} ", delta, itsStackTop);
         }
     }
 
@@ -1423,26 +1390,19 @@ public class ClassFileWriter {
             }
 
             if (DEBUGSTACKMAP) {
-                logger.info("super blocks: ");
+                log.info("super blocks: ");
                 for (int i = 0; i < superBlocks.length && superBlocks[i] != null; i++) {
-                    logger.info(
-                            "sb "
-                                    + i
-                                    + ": ["
-                                    + superBlocks[i].getStart()
-                                    + ", "
-                                    + superBlocks[i].getEnd()
-                                    + ")");
+                    log.info("sb {} {} {} ", i, superBlocks[i].getStart(), superBlocks[i].getEnd());
                 }
             }
 
             verify();
 
             if (DEBUGSTACKMAP) {
-                logger.info("type information:");
+                log.info("type information:");
                 for (int i = 0; i < superBlocks.length; i++) {
                     SuperBlock sb = superBlocks[i];
-                    logger.info("sb " + i + ":");
+                    log.info("sb {} ",  i);
                     TypeInfo.print(sb.getLocals(), sb.getStack(), itsConstantPool);
                 }
             }
@@ -1464,7 +1424,7 @@ public class ClassFileWriter {
                 if (offset < sb.getStart() || offset >= sb.getEnd()) Kit.codeBug();
                 return sb;
             }
-            throw new IllegalArgumentException("bad offset: " + offset);
+            throw new IllegalArgumentException("bad offset: " +  offset);
         }
 
         /**
@@ -1668,8 +1628,8 @@ public class ClassFileWriter {
             int next = 0;
 
             if (DEBUGSTACKMAP) {
-                logger.info("working on sb " + work.getIndex());
-                logger.info("initial type state:");
+                log.info("working on sb {} ",  work.getIndex());
+                log.info("initial type state:");
                 TypeInfo.print(locals, localsTop, stack, stackTop, itsConstantPool);
             }
 
@@ -1694,17 +1654,13 @@ public class ClassFileWriter {
                 }
                 if (DEBUGSTACK) {
                     if (etStart == 0 && etEnd == itsExceptionTableTop) {
-                        logger.info(
-                                "lookup size " + itsExceptionTableTop + ": could not be reduced");
+                        log.info(
+                                "lookup size {} : could not be reduced ",  itsExceptionTableTop);
                     } else if (etStart < 0) {
-                        logger.info(
-                                "lookup size " + itsExceptionTableTop + ": reduced completely");
+                        log.info(
+                                "lookup size {} : reduced completely ",  itsExceptionTableTop);
                     } else {
-                        logger.info(
-                                "lookup size "
-                                        + itsExceptionTableTop
-                                        + ": reduced to "
-                                        + (etEnd - etStart));
+                        log.info("lookup size {}: reduced to  ", itsExceptionTableTop, (etEnd - etStart));
                     }
                 }
             }
@@ -1721,22 +1677,13 @@ public class ClassFileWriter {
                 if (isBranch(bc)) {
                     SuperBlock targetSB = getBranchTarget(bci);
                     if (DEBUGSTACKMAP) {
-                        logger.info(
-                                "sb "
-                                        + work.getIndex()
-                                        + " points to sb "
-                                        + targetSB.getIndex()
-                                        + " (offset "
-                                        + bci
-                                        + " -> "
-                                        + targetSB.getStart()
-                                        + ")");
-                        logger.info("type state at " + bci + ":");
+                        log.info( "sb {} points to sb {} (offset {} -> {})", work.getIndex(), targetSB.getIndex(), bci, targetSB.getStart());
+                        log.info("type state at {} ",  bci);
                         TypeInfo.print(locals, localsTop, stack, stackTop, itsConstantPool);
                     }
                     flowInto(targetSB);
                     if (DEBUGSTACKMAP) {
-                        logger.info("type state of " + targetSB + " after merge:");
+                        log.info("type state of {} after merge: ",  targetSB);
                         TypeInfo.print(targetSB.getLocals(), targetSB.getStack(), itsConstantPool);
                     }
                 } else if (bc == ByteCode.TABLESWITCH) {
@@ -1744,11 +1691,7 @@ public class ClassFileWriter {
                     int defaultOffset = getOperand(switchStart, 4);
                     SuperBlock targetSB = getSuperBlockFromOffset(bci + defaultOffset);
                     if (DEBUGSTACK) {
-                        logger.info(
-                                "merging sb "
-                                        + work.getIndex()
-                                        + " with sb "
-                                        + targetSB.getIndex());
+                        log.info("merging sb {} with sg {} ",work.getIndex(), targetSB.getIndex());
                     }
                     flowInto(targetSB);
                     int low = getOperand(switchStart + 4, 4);
@@ -1759,11 +1702,7 @@ public class ClassFileWriter {
                         int label = bci + getOperand(caseBase + 4 * i, 4);
                         targetSB = getSuperBlockFromOffset(label);
                         if (DEBUGSTACKMAP) {
-                            logger.info(
-                                    "merging sb "
-                                            + work.getIndex()
-                                            + " with sb "
-                                            + targetSB.getIndex());
+                            log.info("merging sb {} with sb {} ", work.getIndex(), targetSB.getIndex());
                         }
                         flowInto(targetSB);
                     }
@@ -1792,7 +1731,7 @@ public class ClassFileWriter {
             }
 
             if (DEBUGSTACKMAP) {
-                logger.info("end of sb " + work.getIndex() + ":");
+                log.info("end of sb {} ", work.getIndex());
                 TypeInfo.print(locals, localsTop, stack, stackTop, itsConstantPool);
             }
 
@@ -1803,8 +1742,7 @@ public class ClassFileWriter {
                 int nextIndex = work.getIndex() + 1;
                 if (nextIndex < superBlocks.length) {
                     if (DEBUGSTACKMAP) {
-                        logger.info(
-                                "continuing from sb " + work.getIndex() + " into sb " + nextIndex);
+                        log.info("continuing from sb {} {} ", work.getIndex(), nextIndex);
                     }
                     flowInto(superBlocks[nextIndex]);
                 }
@@ -2132,14 +2070,14 @@ public class ClassFileWriter {
                 case ByteCode.NEWARRAY:
                     pop();
                     char componentType = arrayTypeToName(itsCodeBuffer[bci + 1]);
-                    index = itsConstantPool.addClass("[" + componentType);
+                    index = itsConstantPool.addClass("[ " + componentType);
                     push(TypeInfo.OBJECT((short) index));
                     break;
                 case ByteCode.ANEWARRAY:
                     index = getOperand(bci + 1, 2);
                     className = (String) itsConstantPool.getConstantData(index);
                     pop();
-                    push(TypeInfo.OBJECT("[L" + className + ';', itsConstantPool));
+                    push(TypeInfo.OBJECT("[ " +  className + ';', itsConstantPool));
                     break;
                 case ByteCode.INVOKEVIRTUAL:
                 case ByteCode.INVOKESPECIAL:
@@ -2291,8 +2229,7 @@ public class ClassFileWriter {
                     || tag == TypeInfo.NULL) {
                 push(type);
             } else {
-                throw new IllegalStateException(
-                        "bad local variable type: " + type + " at index: " + localIndex);
+                throw new IllegalStateException("bad local variable type: " + type + " at index: " + localIndex);
             }
         }
 
@@ -2628,7 +2565,7 @@ public class ClassFileWriter {
             case 'L':
                 return classDescriptorToInternalName(descriptor);
             default:
-                throw new IllegalArgumentException("bad descriptor:" + descriptor);
+                throw new IllegalArgumentException("bad descriptor: " + descriptor);
         }
     }
 
@@ -2941,7 +2878,7 @@ public class ClassFileWriter {
                 }
             }
         }
-        throw new IllegalArgumentException("Bad parameter signature: " + pString);
+        throw new IllegalArgumentException("Bad parameter signature " + pString);
     }
 
     static int putInt16(int value, byte[] array, int offset) {
@@ -3186,7 +3123,7 @@ public class ClassFileWriter {
                     return -1;
                 */
         }
-        throw new IllegalArgumentException("Bad opcode: " + opcode);
+        throw new IllegalArgumentException("Bad opcode " + opcode);
     }
 
     /** Number of operands accompanying the opcode. */

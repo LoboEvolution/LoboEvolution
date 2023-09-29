@@ -26,6 +26,7 @@
 
 package org.loboevolution.html.renderer;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.GUITasks;
 import org.loboevolution.common.Strings;
 import org.loboevolution.gui.HtmlRendererContext;
@@ -57,6 +58,7 @@ import java.util.logging.Level;
 /**
  * <p>Abstract BaseElementRenderable class.</p>
  */
+@Slf4j
 public abstract class BaseElementRenderable extends BaseRCollection implements RElement, RenderableContainer, ImageObserver {
 
 	/** Constant INVALID_SIZE */
@@ -307,8 +309,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 			try {
 				this.zIndex =  HtmlValues.getPixelSize(zIndex, null, doc.getDefaultView(), 0);
 			} catch (final NumberFormatException err) {
-				logger.log(Level.WARNING,
-						"Unable to parse z-index [" + zIndex + "] in element " + this.modelNode + ".", err);
+				log.warn("Unable to parse z-index {} in element {} ", zIndex, this.modelNode, err);
 				this.zIndex = 0;
 			}
 		} else {

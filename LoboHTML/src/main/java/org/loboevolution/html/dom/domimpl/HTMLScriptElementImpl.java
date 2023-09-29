@@ -28,6 +28,7 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.Strings;
 import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.dom.HTMLScriptElement;
@@ -57,15 +58,12 @@ import java.net.URLConnection;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.MissingResourceException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * <p>HTMLScriptElementImpl class.</p>
  */
+@Slf4j
 public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScriptElement {
-	private static final Logger logger = Logger.getLogger(HTMLScriptElementImpl.class.getName());
-
 	private boolean defer;
 
 	private String text;
@@ -203,13 +201,9 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 							info.setHttpResponse(400);
 						}
 
-						logger.log(Level.SEVERE, "More than " + connection.getConnectTimeout() + " elapsed.");
+						log.error("More time elapsed {}", connection.getConnectTimeout());
 				    } catch (final Exception e) {
-						if (e instanceof MissingResourceException) {
-							logger.log(Level.INFO, e.getMessage());
-						} else{
-							logger.log(Level.SEVERE, e.getMessage(), e);
-						}
+						log.error(e.getMessage(), e);
 					} finally {
 						final Instant finish = Instant.now();
 						final long timeElapsed = Duration.between(start, finish).toMillis();
@@ -235,11 +229,9 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 				}
 			} catch (final RhinoException ecmaError) {
 				final String error = ecmaError.sourceName() + ":" + ecmaError.lineNumber() + ": " + ecmaError.getMessage();
-				logger.log(Level.WARNING, "Javascript error at " + error, ecmaError.getMessage());
-			} catch (final MissingResourceException mre) {
-				logger.log(Level.WARNING, mre.getMessage());
+				log.error("Javascript error at {}", ecmaError.getMessage(), ecmaError);
 			} catch (final Throwable err) {
-				logger.log(Level.WARNING, "Unable to evaluate Javascript code", err);
+				log.error("Unable to evaluate Javascript code", err);
 			} finally {
 				Context.exit();
 			}

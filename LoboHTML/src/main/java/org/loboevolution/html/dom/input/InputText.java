@@ -26,6 +26,7 @@
 
 package org.loboevolution.html.dom.input;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.ArrayUtilities;
 import org.loboevolution.common.Strings;
 import org.loboevolution.component.input.Autocomplete;
@@ -44,14 +45,12 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 /**
  * <p>InputText class.</p>
  */
+@Slf4j
 public class InputText extends BasicInput {
-	
-	private static final Logger logger = Logger.getLogger(InputText.class.getName());
 
 	protected final JTextField iText = new JTextField();
 	
@@ -194,7 +193,7 @@ public class InputText extends BasicInput {
 			iText.getDocument().insertString(start, text, null);
 			setSelectionRange(start, end);
 		} catch (final BadLocationException e) {
-			logger.severe(e.getMessage());
+			log.error(e.getMessage(), e);
 		}
 	}
 	

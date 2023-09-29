@@ -24,21 +24,16 @@
  * Contact info: ivan.difrancesco@yahoo.it
  */
 package org.jpedal.jbig2.segment.region.halftone;
-
-import java.util.logging.Logger;
-
+import lombok.extern.slf4j.Slf4j;
 import org.jpedal.jbig2.decoders.JBIG2StreamDecoder;
 import org.jpedal.jbig2.segment.Flags;
 
 /**
  * <p>HalftoneRegionFlags class.</p>
- *
-  *
-  *
  */
+@Slf4j
 public class HalftoneRegionFlags extends Flags {
 
-	private static final Logger logger = Logger.getLogger(HalftoneRegionFlags.class.getName());
     /** Constant <code>H_MMR="H_MMR"</code> */
     public static final String H_MMR = "H_MMR";
     /** Constant <code>H_TEMPLATE="H_TEMPLATE"</code> */
@@ -71,6 +66,6 @@ public class HalftoneRegionFlags extends Flags {
 
 		
 		if (JBIG2StreamDecoder.debug)
-			logger.info("flags: " + flags);
+			log.info("flags: {} ", flags);
     }
 }

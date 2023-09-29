@@ -26,6 +26,7 @@
 
 package org.loboevolution.html.js.xml;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.Urls;
 import org.loboevolution.html.js.Executor;
 import org.loboevolution.html.node.Document;
@@ -40,15 +41,12 @@ import org.mozilla.javascript.Scriptable;
 import java.net.URL;
 import java.util.List;
 import java.util.MissingResourceException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * <p>XMLHttpRequest class.</p>
  */
+@Slf4j
 public class XMLHttpRequest extends AbstractScriptableDelegate {
-
-	private static final Logger logger = Logger.getLogger(XMLHttpRequest.class.getName());
 	private boolean listenerAdded;
 	private final URL codeSource;
 	private Function onreadystatechange;
@@ -86,14 +84,12 @@ public class XMLHttpRequest extends AbstractScriptableDelegate {
 				try {
 					final Scriptable newScope = (Scriptable) JavaScript.getInstance().getJavascriptObject(XMLHttpRequest.this, this.scope);
 					f.call(ctx, newScope, newScope, new Object[0]);
-				} catch (final MissingResourceException mre) {
-					logger.log(Level.WARNING, mre.getMessage());
 				} finally {
 					Context.exit();
 				}
 			}
 		} catch (final Exception err) {
-			logger.log(Level.WARNING, "Error processing ready state change.", err);
+			log.error("Error processing ready state change.", err);
 		}
 	}
 

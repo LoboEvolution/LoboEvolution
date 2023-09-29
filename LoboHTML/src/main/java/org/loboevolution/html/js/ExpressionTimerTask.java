@@ -26,16 +26,17 @@
 
 package org.loboevolution.html.js;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.mozilla.javascript.Context;
 
 import java.awt.event.ActionEvent;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
+/**
+ * The class ExpressionTimerTask.
+ */
+@Slf4j
 class ExpressionTimerTask extends WeakWindowTask {
-	
-	private static final Logger logger = Logger.getLogger(ExpressionTimerTask.class.getName());
 	
 	private final String expression;
 	
@@ -65,9 +66,7 @@ class ExpressionTimerTask extends WeakWindowTask {
 		try {
 			final WindowImpl window = this.getWindow();
 			if (window == null) {
-				if (logger.isLoggable(Level.INFO)) {
-					logger.info("actionPerformed(): WindowImpl is no longer available.");
-				}
+				log.info("actionPerformed(): WindowImpl is no longer available.");
 				return;
 			}
 			if (this.removeTask) {
@@ -79,7 +78,7 @@ class ExpressionTimerTask extends WeakWindowTask {
 			}
 			evalInScope(window, this.expression);
 		} catch (final Throwable err) {
-			logger.log(Level.WARNING, "actionPerformed()", err);
+			log.error("actionPerformed()", err);
 		}
 	}
 	

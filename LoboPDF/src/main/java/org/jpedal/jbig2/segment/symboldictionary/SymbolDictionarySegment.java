@@ -26,9 +26,8 @@
 package org.jpedal.jbig2.segment.symboldictionary;
 
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
+import lombok.extern.slf4j.Slf4j;
 import org.jpedal.jbig2.JBIG2Exception;
 import org.jpedal.jbig2.decoders.ArithmeticDecoderStats;
 import org.jpedal.jbig2.decoders.DecodeIntResult;
@@ -40,13 +39,9 @@ import org.jpedal.jbig2.util.BinaryOperation;
 
 /**
  * <p>SymbolDictionarySegment class.</p>
- *
-  *
-  *
  */
+@Slf4j
 public class SymbolDictionarySegment extends Segment {
-
-	private static final Logger logger = Logger.getLogger(SymbolDictionarySegment.class.getName());
 	private int noOfExportedSymbols;
 	private int noOfNewSymbols;
 
@@ -80,7 +75,7 @@ public class SymbolDictionarySegment extends Segment {
 	public void readSegment() throws IOException, JBIG2Exception {
 
 		if (JBIG2StreamDecoder.debug)
-			logger.info("==== Read Segment Symbol Dictionary ====");
+			log.info("==== Read Segment Symbol Dictionary ====");
 
 		/** read symbol dictionary flags */
 		readSymbolDictionaryFlags();
@@ -205,7 +200,7 @@ public class SymbolDictionarySegment extends Segment {
 
 			if (instanceDeltaHeight < 0 && -instanceDeltaHeight >= deltaHeight) {
 				if (JBIG2StreamDecoder.debug)
-					logger.info("Bad delta-height value in JBIG2 symbol dictionary");
+					log.info("Bad delta-height value in JBIG2 symbol dictionary");
 			}
 
 			deltaHeight += instanceDeltaHeight;
@@ -231,7 +226,7 @@ public class SymbolDictionarySegment extends Segment {
 
 				if (deltaWidth < 0 && -deltaWidth >= symbolWidth) {
 					if (JBIG2StreamDecoder.debug)
-						logger.info("Bad delta-width value in JBIG2 symbol dictionary");
+						log.info("Bad delta-width value in JBIG2 symbol dictionary");
 				}
 				
 				symbolWidth += deltaWidth;
@@ -407,7 +402,7 @@ public class SymbolDictionarySegment extends Segment {
 		symbolDictionaryFlags.setFlags(flags);
 
 		if (JBIG2StreamDecoder.debug)
-			logger.log(Level.INFO, () -> "symbolDictionaryFlags: " + flags);
+			log.info("symbolDictionaryFlags: {} ", flags);
 
 		// symbol dictionary AT flags
 		final int sdHuff = symbolDictionaryFlags.getFlagValue(SymbolDictionaryFlags.SD_HUFF);
@@ -446,7 +441,7 @@ public class SymbolDictionarySegment extends Segment {
         this.noOfExportedSymbols = noOfExportedSymbols;
 
 		if (JBIG2StreamDecoder.debug)
-			logger.info("noOfExportedSymbols = " + noOfExportedSymbols);
+			log.info("noOfExportedSymbols = {} ", noOfExportedSymbols);
 
 		/** extract no of new symbols */
 		final short[] noOfNewSymbolsField = new short[4];
@@ -456,7 +451,7 @@ public class SymbolDictionarySegment extends Segment {
         this.noOfNewSymbols = noOfNewSymbols;
 
 		if (JBIG2StreamDecoder.debug)
-			logger.info("noOfNewSymbols = " + noOfNewSymbols);
+			log.info("noOfNewSymbols = {}", noOfNewSymbols);
 	}
 
 	/**

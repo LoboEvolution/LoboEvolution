@@ -25,6 +25,7 @@
  */
 package org.loboevolution.pdf;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.BytesUtilities;
 import org.loboevolution.net.HttpNetwork;
 import org.loboevolution.net.UserAgent;
@@ -49,20 +50,15 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * The Class PDFViewer.
  */
+@Slf4j
 public class PDFViewer extends JFrame implements KeyListener, PageChangeListener, TreeSelectionListener {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
-	
-	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(PDFViewer.class.getName());
-	
 	private final float ZOOM_FACTOR = 1.2f;
 
 	/** The Constant TITLE. */
@@ -228,7 +224,7 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 			try {
 				SwingUtilities.invokeAndWait(() -> setVisible(true));
 			} catch (final InvocationTargetException e) {
-				logger.log(Level.SEVERE, e.getMessage(), e);
+				log.error(e.getMessage(), e);
 			} catch (final InterruptedException ie) {
 				Thread.currentThread().interrupt();
 			}
@@ -324,7 +320,7 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
             final ByteBuffer byteBuffer = BytesUtilities.readStream(inputStream);
             openPDFByteBuffer(byteBuffer, url.toString(), url.getFile());
         } catch (final Exception e) {
-            logger.log(Level.SEVERE, e.getMessage(), e);
+            log.error(e.getMessage(), e);
         }
     }
 
@@ -672,7 +668,7 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 					}
 				}
 			} catch (final IOException eio) {
-				logger.log(Level.SEVERE, eio.getMessage(), eio);
+				log.error(eio.getMessage(), eio);
 			}
 		}
 	}
@@ -691,7 +687,7 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 			url = getClass().getResource(name);
 			icon = new ImageIcon(url);
 		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 		return icon;
 	}

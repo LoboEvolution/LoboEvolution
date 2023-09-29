@@ -26,6 +26,7 @@
 
 package org.loboevolution.menu.tools.developer.tool;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.Strings;
 import org.loboevolution.component.BrowserFrame;
 import org.loboevolution.component.ToolBar;
@@ -40,19 +41,15 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * <p>InfoPageUI class.</p>
  */
+@Slf4j
 public class HeadersPageUI extends AbstractToolsUI {
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;
-
-    /** The Constant logger. */
-    private static final Logger logger = Logger.getLogger(HeadersPageUI.class.getName());
 
     /**
      * <p>Constructor for InfoPageUI.</p>
@@ -68,7 +65,7 @@ public class HeadersPageUI extends AbstractToolsUI {
             httpcon.getHeaderField("Set-Cookie");
             add(infoContent(httpcon));
         } catch (final Exception e) {
-            logger.log(Level.SEVERE, e.getMessage(), e);
+            log.error(e.getMessage(), e);
         }
     }
 
@@ -90,7 +87,7 @@ public class HeadersPageUI extends AbstractToolsUI {
             jtable.setShowGrid(false);
             return new JScrollPane(jtable);
         } catch (final Exception e) {
-            logger.log(Level.SEVERE, e.getMessage(), e);
+            log.error(e.getMessage(), e);
         }
         return null;
     }

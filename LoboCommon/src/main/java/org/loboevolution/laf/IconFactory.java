@@ -29,19 +29,17 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.IORoutines;
 
 /**
  * A factory for creating Icon objects.
  */
+@Slf4j
 public class IconFactory {
-
-    private static final  Logger logger = Logger.getLogger(IconFactory.class.getName());
 
 	/** The Constant instance. */
 	private static final IconFactory instance = new IconFactory();
@@ -78,7 +76,7 @@ public class IconFactory {
 				if (icon == null) {
 					final InputStream in = this.getClass().getResourceAsStream(resourcePath);
 					if (in == null) {
-						logger.info("getIcon(): Resource path " + resourcePath + " not found.");
+						log.info("getIcon(): Resource path  not found {}", resourcePath);
 						return null;
 					}
 					try {
@@ -92,7 +90,7 @@ public class IconFactory {
 				return icon;
 			}
 		} catch (final IOException e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 			return null;
 		}
 	}

@@ -26,6 +26,7 @@
 
 package org.loboevolution.menu.tools.pref.data;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.http.CookieManager;
 import org.loboevolution.info.BookmarkInfo;
 import org.loboevolution.info.CookieInfo;
@@ -39,17 +40,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.List;;
 
 /**
  * <p>MozilaFirefoxData class.</p>
  */
+@Slf4j
 public class MozilaFirefoxData extends BrowserData {
-	
-	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(MozilaFirefoxData.class.getName());
 
 	/** The Constant DB_PATH. */
 	private static final String DB_PATH = DatabseSQLite.getDatabaseDirectory();
@@ -73,7 +70,7 @@ public class MozilaFirefoxData extends BrowserData {
 				bookmarks.add(bookmark);
 			}
 		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 		return bookmarks;
 	}
@@ -95,7 +92,7 @@ public class MozilaFirefoxData extends BrowserData {
 						.build());
 			}
 		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 		return cookies;
 	}
@@ -113,7 +110,7 @@ public class MozilaFirefoxData extends BrowserData {
 			}
 
 		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 		return hostEntries;
 	}
@@ -167,7 +164,7 @@ public class MozilaFirefoxData extends BrowserData {
 				}
 			}
 		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 	}
 }

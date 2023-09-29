@@ -26,17 +26,18 @@
 
 package org.loboevolution.html.js;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.mozilla.javascript.Function;
 
 import java.awt.event.ActionEvent;
 import java.lang.ref.WeakReference;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
+/**
+ * The class FunctionTimerTask.
+ */
+@Slf4j
 class FunctionTimerTask extends WeakWindowTask {
-	
-	private static final Logger logger = Logger.getLogger(FunctionTimerTask.class.getName());
 	
 	private final WeakReference<Function> functionRef;
 
@@ -67,9 +68,7 @@ class FunctionTimerTask extends WeakWindowTask {
 		try {
 			final WindowImpl window = this.getWindow();
 			if (window == null) {
-				if (logger.isLoggable(Level.INFO)) {
-					logger.info("actionPerformed(): WindowImpl is no longer available.");
-				}
+				log.info("actionPerformed(): WindowImpl is no longer available.");
 				return;
 			}
 			if (this.removeTask) {
@@ -85,7 +84,7 @@ class FunctionTimerTask extends WeakWindowTask {
 			}
 
 		} catch (final Throwable err) {
-			logger.log(Level.WARNING, "actionPerformed()", err);
+			log.error("actionPerformed()", err);
 		}
 	}
 }

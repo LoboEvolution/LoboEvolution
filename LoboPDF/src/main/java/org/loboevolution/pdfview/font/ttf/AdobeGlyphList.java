@@ -26,6 +26,8 @@
 
 package org.loboevolution.pdfview.font.ttf;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -35,13 +37,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
+@Slf4j
 public final class AdobeGlyphList {
-	
-	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(AdobeGlyphList.class.getName());
 
     /** provide a translation from a glyph name to the possible unicode values. */
     static private Map<String, int[]> glyphToUnicodes;
@@ -108,7 +106,7 @@ public final class AdobeGlyphList {
 						}
 					}
 				} catch (final IOException e) {
-					logger.log(Level.SEVERE, e.getMessage(), e);
+					log.error(e.getMessage(), e);
 				}
 			}
 		}, "Adobe Glyph Loader Thread");

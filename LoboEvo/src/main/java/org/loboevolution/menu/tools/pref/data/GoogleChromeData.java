@@ -26,6 +26,7 @@
 
 package org.loboevolution.menu.tools.pref.data;
 
+import lombok.extern.slf4j.Slf4j;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.loboevolution.http.CookieManager;
@@ -44,19 +45,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * <p>GoogleChromeData class.</p>
- *
- *
- *
  */
+@Slf4j
 public class GoogleChromeData extends BrowserData {
-	
-	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(GoogleChromeData.class.getName());
 
 	private static final String CHROME_COOKIES = "SELECT * from cookies";
 
@@ -86,7 +80,7 @@ public class GoogleChromeData extends BrowserData {
 				}
 			}
 		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 		return listInfo;
 	}
@@ -108,7 +102,7 @@ public class GoogleChromeData extends BrowserData {
 						.build());
 			}
 		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 		return cookies;
 	}
@@ -126,7 +120,7 @@ public class GoogleChromeData extends BrowserData {
 			}
 
 		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 		return hostEntries;
 	}
@@ -179,7 +173,7 @@ public class GoogleChromeData extends BrowserData {
 				}
 			}
 		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 	}
 }

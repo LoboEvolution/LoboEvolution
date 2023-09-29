@@ -26,8 +26,8 @@
 package org.jpedal.jbig2.segment.region.generic;
 
 import java.io.IOException;
-import java.util.logging.Logger;
 
+import lombok.extern.slf4j.Slf4j;
 import org.jpedal.jbig2.JBIG2Exception;
 import org.jpedal.jbig2.decoders.JBIG2StreamDecoder;
 import org.jpedal.jbig2.image.JBIG2Bitmap;
@@ -38,13 +38,9 @@ import org.jpedal.jbig2.segment.region.RegionSegment;
 
 /**
  * <p>GenericRegionSegment class.</p>
- *
-  *
-  *
  */
+@Slf4j
 public class GenericRegionSegment extends RegionSegment {
-	
-	private static final Logger logger = Logger.getLogger(GenericRegionSegment.class.getName());
     private final GenericRegionFlags genericRegionFlags = new GenericRegionFlags();
 
     private final boolean inlineImage;
@@ -72,7 +68,7 @@ public class GenericRegionSegment extends RegionSegment {
     public void readSegment() throws IOException, JBIG2Exception {
     	
     	if (JBIG2StreamDecoder.debug)
-    		logger.info("==== Reading Immediate Generic Region ====");
+    		log.info("==== Reading Immediate Generic Region ====");
     	
     	super.readSegment();
         
@@ -186,7 +182,7 @@ public class GenericRegionSegment extends RegionSegment {
         genericRegionFlags.setFlags(genericRegionFlagsField);
         
         if (JBIG2StreamDecoder.debug)
-        	logger.info("generic region Segment flags = " + genericRegionFlagsField);
+        	log.info("generic region Segment flags = {} ", genericRegionFlagsField);
     }
 
     /**

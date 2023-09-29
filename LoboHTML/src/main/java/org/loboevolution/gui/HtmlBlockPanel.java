@@ -28,6 +28,7 @@
  */
 package org.loboevolution.gui;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.Nodes;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
@@ -50,8 +51,6 @@ import java.awt.datatransfer.Transferable;
 import java.awt.event.*;
 import java.util.List;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * A Swing component that renders a HTML block, given by a DOM root or an
@@ -63,8 +62,8 @@ import java.util.logging.Logger;
  * Author J. H. S.
  *
  */
+@Slf4j
 public class HtmlBlockPanel extends JComponent implements NodeRenderer, RenderableContainer, ClipboardOwner {
-	private static final Logger logger = Logger.getLogger(HtmlBlockPanel.class.getName());
 
 	private static final long serialVersionUID = 1L;
 	private Set<Component> components;
@@ -226,7 +225,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 				}
 			}
 		} catch (final Throwable thrown) {
-			logger.log(Level.SEVERE, "Unexpected error in layout engine. Document is " + getRootNode(), thrown);
+			log.error("Unexpected error in layout engine. Document is {} ", getRootNode(), thrown);
 		}
 	}
 
@@ -382,7 +381,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 								.sizeOnly(true)
 								.build()));
 					} catch (final Exception err) {
-						logger.log(Level.SEVERE, "Unable to do preferred size layout.", err);
+						log.error("Unable to do preferred size layout.", err);
 					}
 				}
 				// Adjust for permanent vertical scrollbar.

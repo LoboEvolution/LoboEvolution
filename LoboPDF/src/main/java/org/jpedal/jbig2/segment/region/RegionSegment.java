@@ -26,8 +26,8 @@
 package org.jpedal.jbig2.segment.region;
 
 import java.io.IOException;
-import java.util.logging.Logger;
 
+import lombok.extern.slf4j.Slf4j;
 import org.jpedal.jbig2.JBIG2Exception;
 import org.jpedal.jbig2.decoders.JBIG2StreamDecoder;
 import org.jpedal.jbig2.segment.Segment;
@@ -35,13 +35,9 @@ import org.jpedal.jbig2.util.BinaryOperation;
 
 /**
  * <p>Abstract RegionSegment class.</p>
- *
-  *
-  *
  */
+@Slf4j
 public abstract class RegionSegment extends Segment {
-	
-	private static final Logger logger = Logger.getLogger(RegionSegment.class.getName());
 	protected int regionBitmapWidth, regionBitmapHeight;
 	protected int regionBitmapXLocation, regionBitmapYLocation;
 
@@ -72,7 +68,7 @@ public abstract class RegionSegment extends Segment {
 		regionBitmapHeight = BinaryOperation.getInt32(buff);
 
 		if (JBIG2StreamDecoder.debug)
-			logger.info("Bitmap size = " + regionBitmapWidth + 'x' + regionBitmapHeight);
+			log.info("Bitmap size = {} x {} ",regionBitmapWidth, regionBitmapHeight);
 
 		buff = new short[4];
 		decoder.readByte(buff);
@@ -83,7 +79,7 @@ public abstract class RegionSegment extends Segment {
 		regionBitmapYLocation = BinaryOperation.getInt32(buff);
 
 		if (JBIG2StreamDecoder.debug)
-			logger.info("Bitmap location = " + regionBitmapXLocation + ',' + regionBitmapYLocation);
+			log.info("Bitmap location = {},{} ",regionBitmapXLocation, regionBitmapYLocation);
 
 		/** extract region Segment flags */
 		final short regionFlagsField = decoder.readByte();
@@ -91,6 +87,6 @@ public abstract class RegionSegment extends Segment {
 		regionFlags.setFlags(regionFlagsField);
 
 		if (JBIG2StreamDecoder.debug)
-			logger.info("region Segment flags = " + regionFlagsField);
+			log.info("region Segment flags = " + regionFlagsField);
 	}
 }

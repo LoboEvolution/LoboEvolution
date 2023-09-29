@@ -80,14 +80,11 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
-import java.util.logging.Logger;
 
 /**
  * <p>WindowImpl class.</p>
  */
 public class WindowImpl extends WindowEventHandlersImpl implements Window {
-
-	private static final Logger logger = Logger.getLogger(WindowImpl.class.getName());
 
 	private static final Map<HtmlRendererContext, WeakReference<WindowImpl>> CONTEXT_WINDOWS = new WeakHashMap<>();
 
@@ -708,9 +705,7 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 	}
 
 	private static int generateTimerID() {
-		synchronized (logger) {
-			return timerIdCounter++;
-		}
+		return timerIdCounter++;
 	}
 
 	/**

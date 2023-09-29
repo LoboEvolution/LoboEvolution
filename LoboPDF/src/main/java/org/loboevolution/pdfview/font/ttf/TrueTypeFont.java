@@ -31,8 +31,8 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
-import java.util.logging.Logger;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.pdfview.PDFDebugger;
 
 /**
@@ -41,9 +41,8 @@ import org.loboevolution.pdfview.PDFDebugger;
  * Author  jkaplan
   *
  */
+@Slf4j
 public class TrueTypeFont {
-
-	private static final Logger logger = Logger.getLogger(TrueTypeFont.class.getName());
     private final int type;
     // could be a ByteBuffer or a TrueTypeTable
 
@@ -426,11 +425,11 @@ public class TrueTypeFont {
 	public String toString () {
         final StringBuilder buf = new StringBuilder ();
 
-        logger.info ("Type         : " + getType ());
-        logger.info ("NumTables    : " + getNumTables ());
-        logger.info ("SearchRange  : " + getSearchRange ());
-        logger.info ("EntrySelector: " + getEntrySelector ());
-        logger.info ("RangeShift   : " + getRangeShift ());
+        log.info ("Type         : {} ", getType ());
+        log.info ("NumTables    : {} ", getNumTables ());
+        log.info ("SearchRange  : {} ", getSearchRange ());
+        log.info ("EntrySelector: {} ", getEntrySelector ());
+        log.info ("RangeShift   : {} ", getRangeShift ());
 
         for (final Map.Entry<String, Object> e : this.tables.entrySet()) {
             TrueTypeTable table = null;
@@ -440,7 +439,7 @@ public class TrueTypeFont {
                 table = (TrueTypeTable) e.getValue();
             }
 
-            logger.info("table: " + table);
+            log.info("table: {} ",table);
         }
 
         return buf.toString ();

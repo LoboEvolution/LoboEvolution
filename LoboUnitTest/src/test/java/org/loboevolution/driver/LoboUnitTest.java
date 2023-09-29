@@ -28,6 +28,7 @@ package org.loboevolution.driver;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
@@ -39,7 +40,6 @@ import org.loboevolution.html.node.js.Window;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.logging.Logger;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -47,11 +47,10 @@ import static org.junit.Assert.assertNotNull;
 /**
  * <p>LoboUnitTest class.</p>
  */
+@Getter
+@AllArgsConstructor
+@Slf4j
 public class LoboUnitTest extends LoboWebDriver {
-
-
-    /** The Constant logger. */
-     private final Logger logger = Logger.getLogger(LoboWebDriver.class.getName());
 
     /**
      * <p>checkSelectorsTest.</p>
@@ -112,8 +111,7 @@ public class LoboUnitTest extends LoboWebDriver {
         } catch (final AssertionError e) {
             throw new AssertionError("Result expected: " +  alerts + " Result: " + window.getMsg());
         } catch (final Exception ex) {
-            ex.printStackTrace();
-            logger.severe(ex.getMessage());
+            log.error(ex.getMessage(), ex);
         }
     }
 

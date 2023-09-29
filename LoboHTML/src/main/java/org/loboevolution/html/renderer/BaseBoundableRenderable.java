@@ -28,6 +28,7 @@
  */
 package org.loboevolution.html.renderer;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.dom.nodeimpl.ModelNode;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
@@ -37,16 +38,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.Optional;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Author J. H. S.
  */
+@Slf4j
 abstract class BaseBoundableRenderable extends RRectangle implements BoundableRenderable {
-
-	/** Constant logger */
-	protected static final Logger logger = Logger.getLogger(BaseBoundableRenderable.class.getName());
 
 	/** Constant SELECTION_COLOR */
 	protected static final Color SELECTION_COLOR = Color.BLUE;
@@ -496,9 +493,7 @@ abstract class BaseBoundableRenderable extends RRectangle implements BoundableRe
 			// Has to be top RBlock.
 			this.container.relayout();
 		} else {
-			if (logger.isLoggable(Level.INFO)) {
-				logger.warning("relayout(): Don't know how to relayout " + this + ", parent being " + parent);
-			}
+			log.warn("relayout(): Don't know how to relayout {} parent being {}", this, parent);
 		}
 	}
 
@@ -524,9 +519,7 @@ abstract class BaseBoundableRenderable extends RRectangle implements BoundableRe
 			// Has to be top RBlock.
 			this.container.repaint(x, y, width, height);
 		} else {
-			if (logger.isLoggable(Level.INFO)) {
-				logger.warning("repaint(): Don't know how to repaint " + this + ", parent being " + parent);
-			}
+			log.warn("relayout(): Don't know how to relayout {} parent being {}", this, parent);
 		}
 	}
 

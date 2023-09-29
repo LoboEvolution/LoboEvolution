@@ -25,20 +25,16 @@
  */
 package org.jpedal.jbig2.segment.region.text;
 
-import java.util.logging.Logger;
-
+import lombok.extern.slf4j.Slf4j;
 import org.jpedal.jbig2.decoders.JBIG2StreamDecoder;
 import org.jpedal.jbig2.segment.Flags;
 
 /**
  * <p>TextRegionFlags class.</p>
- *
-  *
-  *
  */
+@Slf4j
 public class TextRegionFlags extends Flags {
 
-	private static final Logger logger = Logger.getLogger(TextRegionFlags.class.getName());
 	/** Constant <code>SB_HUFF="SB_HUFF"</code> */
 	public static final String SB_HUFF = "SB_HUFF";
 	/** Constant <code>SB_REFINE="SB_REFINE"</code> */
@@ -93,6 +89,6 @@ public class TextRegionFlags extends Flags {
 		flags.put(SB_R_TEMPLATE, (flagsAsInt >> 15) & 1);
 
 		if (JBIG2StreamDecoder.debug)
-			logger.info("flags: " + flags);
+			log.info("flags: {} ", flags);
 	}
 }

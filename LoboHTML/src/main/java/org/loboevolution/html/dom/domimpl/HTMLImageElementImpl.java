@@ -28,6 +28,7 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.Urls;
 import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.control.ImgSvgControl;
@@ -48,6 +49,7 @@ import java.util.logging.Level;
 /**
  * <p>HTMLImageElementImpl class.</p>
  */
+@Slf4j
 public class HTMLImageElementImpl extends HTMLElementImpl implements HTMLImageElement {
 
 	/**
@@ -406,7 +408,7 @@ public class HTMLImageElementImpl extends HTMLElementImpl implements HTMLImageEl
 					uri = scriptURL == null ? src : scriptURL.toExternalForm();
 
 				} catch (final Exception e) {
-					logger.log(Level.SEVERE, e.getMessage(), e);
+					log.error(e.getMessage(), e);
 				}
 			} else {
 				uri = getSrc();
@@ -428,7 +430,7 @@ public class HTMLImageElementImpl extends HTMLElementImpl implements HTMLImageEl
 			panel.setPreferredSize(new Dimension((int) width, (int) height));
 			imgSvgControl.add(panel);
 		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 	}
 

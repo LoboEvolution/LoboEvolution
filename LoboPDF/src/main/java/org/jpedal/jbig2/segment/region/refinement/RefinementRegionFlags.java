@@ -25,17 +25,16 @@
  */
 package org.jpedal.jbig2.segment.region.refinement;
 
-import java.util.logging.Logger;
-
+import lombok.extern.slf4j.Slf4j;
 import org.jpedal.jbig2.decoders.JBIG2StreamDecoder;
 import org.jpedal.jbig2.segment.Flags;
 
 /**
  * <p>RefinementRegionFlags class.</p>
  */
+@Slf4j
 public class RefinementRegionFlags extends Flags {
-	
-	private static final Logger logger = Logger.getLogger(RefinementRegionFlags.class.getName());
+
 	/** Constant <code>GR_TEMPLATE="GR_TEMPLATE"</code> */
 	public static final String GR_TEMPLATE = "GR_TEMPLATE";
 	/** Constant <code>TPGDON="TPGDON"</code> */
@@ -52,6 +51,6 @@ public class RefinementRegionFlags extends Flags {
 		flags.put(TPGDON, (flagsAsInt >> 1) & 1);
 
 		if (JBIG2StreamDecoder.debug)
-			logger.info("flags: " + flags);
+			log.info("flags: {} ", flags);
 	}
 }

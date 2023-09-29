@@ -25,6 +25,7 @@
  */
 package org.loboevolution.html.js;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.events.Event;
@@ -36,17 +37,12 @@ import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 
 import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * <p>Executor class.</p>
- *
- *
- *
  */
+@Slf4j
 public class Executor {
-	private static final Logger logger = Logger.getLogger(Executor.class.getName());
 
 	/**
 	 * A document UserData key used to map Javascript scope in the HTML
@@ -114,11 +110,8 @@ public class Executor {
 					return true;
 				}
 				return (Boolean) result;
-			} catch (final java.util.MissingResourceException mre) {
-				logger.log(Level.WARNING, mre.getMessage());
-				return true;
 			} catch (final Throwable thrown) {
-				logger.log(Level.WARNING, "executeFunction(): There was an error in Javascript code.", thrown);
+				log.error("executeFunction(): There was an error in Javascript code.", thrown);
 				return true;
 			}
 		} finally {
@@ -146,8 +139,7 @@ public class Executor {
 				}
 				return (Boolean) result;
 			} catch (final Throwable err) {
-				logger.log(Level.WARNING,
-						"executeFunction(): Unable to execute Javascript function " + f.getClassName() + ".", err);
+				log.error("executeFunction(): Unable to execute Javascript function {} ", f.getClassName(), err);
 				return true;
 			}
 		} finally {

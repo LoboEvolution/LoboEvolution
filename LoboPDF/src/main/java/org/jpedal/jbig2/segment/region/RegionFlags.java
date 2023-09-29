@@ -25,20 +25,16 @@
  */
 package org.jpedal.jbig2.segment.region;
 
-import java.util.logging.Logger;
-
+import lombok.extern.slf4j.Slf4j;
 import org.jpedal.jbig2.decoders.JBIG2StreamDecoder;
 import org.jpedal.jbig2.segment.Flags;
 
 /**
  * <p>RegionFlags class.</p>
- *
-  *
-  *
  */
+@Slf4j
 public class RegionFlags extends Flags {
 
-	private static final Logger logger = Logger.getLogger(RegionFlags.class.getName());
 	/** Constant <code>EXTERNAL_COMBINATION_OPERATOR="EXTERNAL_COMBINATION_OPERATOR"</code> */
 	public static final String EXTERNAL_COMBINATION_OPERATOR = "EXTERNAL_COMBINATION_OPERATOR";
 
@@ -50,6 +46,6 @@ public class RegionFlags extends Flags {
 		flags.put(EXTERNAL_COMBINATION_OPERATOR, flagsAsInt & 7);
 
 		if (JBIG2StreamDecoder.debug)
-			logger.info("flags: " + flags);
+			log.info("flags: {} ", flags);
 	}
 }

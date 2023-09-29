@@ -26,6 +26,8 @@
 
 package org.loboevolution.menu.tools.pref.data;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.File;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
@@ -33,16 +35,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * <p>BrowserData class.</p>
  */
+@Slf4j
 public class BrowserData {
-
-	/** The Constant logger. */
-	protected static final Logger logger = Logger.getLogger(BrowserData.class.getName());
 
 	/**
 	 * Gets the chrome directory.
@@ -104,7 +102,7 @@ public class BrowserData {
 				}
 			}
 		} catch (final Exception ex) {
-			logger.log(Level.SEVERE, ex.toString());
+			log.error(ex.getMessage(), ex);
 		}
 		return cookieFilePaths;
 	}

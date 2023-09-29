@@ -26,6 +26,8 @@
 
 package org.loboevolution.common;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
@@ -35,19 +37,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.StringTokenizer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * <p>Urls class.</p>
- *
- *
- *
  */
+@Slf4j
 public class Urls {
-	
-	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(Urls.class.getName());
 	
 	/** The Constant PATTERN_RFC1123. */
 	public static final DateFormat PATTERN_RFC1123 = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz", Locale.US);
@@ -151,7 +146,7 @@ public class Urls {
 			final URI uri = new URI(url);
 			result = uri.isAbsolute();
 		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 		return result;
 	}
@@ -189,7 +184,7 @@ public class Urls {
 						try {
 							return baseTime + Integer.parseInt(value);
 						} catch (final NumberFormatException e) {
-							logger.log(Level.SEVERE, e.getMessage(), e);
+							log.error(e.getMessage(), e);
 						}
 					}
 				}
@@ -206,7 +201,7 @@ public class Urls {
 				try {
 					return baseTime + Integer.parseInt(expires);
 				} catch (final NumberFormatException e) {
-					logger.log(Level.SEVERE, e.getMessage(), e);
+					log.error(e.getMessage(), e);
 				}
 			}
 		}

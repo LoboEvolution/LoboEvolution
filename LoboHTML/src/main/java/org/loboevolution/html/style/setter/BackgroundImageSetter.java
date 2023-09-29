@@ -26,6 +26,7 @@
 
 package org.loboevolution.html.style.setter;
 
+import lombok.extern.slf4j.Slf4j;
 import org.htmlunit.cssparser.dom.AbstractCSSRuleImpl;
 import org.htmlunit.cssparser.dom.CSSStyleSheetImpl;
 import org.loboevolution.common.Urls;
@@ -34,17 +35,14 @@ import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.style.HtmlValues;
 
 import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
  * <p>BackgroundImageSetter class.</p>
  */
+@Slf4j
 public class BackgroundImageSetter implements SubPropertySetter {
-	
-	private static final Logger logger = Logger.getLogger(BackgroundImageSetter.class.getName());
 
 	private static final Pattern URL_PATTERN = Pattern.compile("url\\(\\s*[\"']?(.*?)[\"']?\\s*\\)");
 
@@ -86,9 +84,7 @@ public class BackgroundImageSetter implements SubPropertySetter {
 					}
 
 				} catch (final Exception mfu) {
-					logger.log(Level.WARNING,
-							"Unable to create URL for URI=[" + tentativeUri + "], with base=[" + baseHref + "].",
-							mfu);
+					log.error("Unable to create URL for URI= {} with base= ", tentativeUri, baseHref, mfu);
 					finalValue = newValue;
 				}
 			} else {

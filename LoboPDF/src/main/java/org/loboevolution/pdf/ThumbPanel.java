@@ -34,31 +34,25 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.JPanel;
 import javax.swing.JViewport;
 import javax.swing.Scrollable;
 import javax.swing.SwingUtilities;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.pdfview.PDFFile;
 import org.loboevolution.pdfview.PDFPage;
 
 /**
  * A panel of thumbnails, one for each page of a PDFFile. You can add a
  * PageChangeListener to be informed of when the user clicks one of the pages.
- *
-  *
-  *
  */
+@Slf4j
 public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObserver {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -6761217072379594185L;
-	
-	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(ThumbPanel.class.getName());
 
 	/** The PDFFile being displayed. */
 	private transient PDFFile file;
@@ -188,7 +182,7 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 				}
 				repaint();
 			} catch (final Exception e) {
-				logger.log(Level.SEVERE, e.getMessage(), e);
+				log.error(e.getMessage(), e);
 
 				final int size = lineheight - border;
 				images[workingon] = new BufferedImage(size, size, BufferedImage.TYPE_BYTE_BINARY);

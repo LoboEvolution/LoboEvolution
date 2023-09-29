@@ -26,6 +26,8 @@
 
 package org.loboevolution.store;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -33,16 +35,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * <p>DownloadStore class.</p>
  */
+@Slf4j
 public class DownloadStore {
-	
-	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(DownloadStore.class.getName());
 
 	/** The Constant DB_PATH. */
 	private static final String DB_PATH = DatabseSQLite.getDatabaseDirectory();
@@ -64,7 +62,7 @@ public class DownloadStore {
 			pstmt.setString(1, new URL(uri).toExternalForm());
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 	}
 
@@ -76,7 +74,7 @@ public class DownloadStore {
              final PreparedStatement pstmt = conn.prepareStatement(DELETE_DOWNLOAD)) {
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 	}
 
@@ -95,7 +93,7 @@ public class DownloadStore {
 				}
 			}
 		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 		return recent;
 	}

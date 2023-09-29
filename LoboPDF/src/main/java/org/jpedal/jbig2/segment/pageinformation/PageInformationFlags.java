@@ -25,20 +25,16 @@
  */
 package org.jpedal.jbig2.segment.pageinformation;
 
-import java.util.logging.Logger;
-
+import lombok.extern.slf4j.Slf4j;
 import org.jpedal.jbig2.decoders.JBIG2StreamDecoder;
 import org.jpedal.jbig2.segment.Flags;
 
 /**
- * <p>PageInformationFlags class.</p>
- *
-  *
-  *
+ * <p>PageInformationFlags class.</p>  *
  */
+@Slf4j
 public class PageInformationFlags extends Flags {
 
-	private static final Logger logger = Logger.getLogger(PageInformationFlags.class.getName());
 	/** Constant <code>DEFAULT_PIXEL_VALUE="DEFAULT_PIXEL_VALUE"</code> */
 	public static final String DEFAULT_PIXEL_VALUE = "DEFAULT_PIXEL_VALUE";
 	/** Constant <code>DEFAULT_COMBINATION_OPERATOR="DEFAULT_COMBINATION_OPERATOR"</code> */
@@ -55,6 +51,6 @@ public class PageInformationFlags extends Flags {
 		flags.put(DEFAULT_COMBINATION_OPERATOR, (flagsAsInt >> 3) & 3);
 
 		if (JBIG2StreamDecoder.debug)
-			logger.info("flags: " + flags);
+			log.info("flags: {} ", flags);
 	}
 }

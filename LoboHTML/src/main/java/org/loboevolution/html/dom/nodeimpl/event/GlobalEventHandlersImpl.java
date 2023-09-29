@@ -26,6 +26,7 @@
 
 package org.loboevolution.html.dom.nodeimpl.event;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.nodeimpl.ElementImpl;
 import org.loboevolution.html.js.Executor;
@@ -46,6 +47,7 @@ import java.util.logging.Level;
 /**
  * Implements common functionality of most elements.
  */
+@Slf4j
 public class GlobalEventHandlersImpl extends EventTargetImpl implements GlobalEventHandlers {
 
 	private Map<String, Function> functionByAttribute = null;
@@ -1340,9 +1342,9 @@ public class GlobalEventHandlersImpl extends EventTargetImpl implements GlobalEv
 							ctx.setLanguageVersion(Context.VERSION_1_8);
 							f = ctx.compileFunction(thisScope, functionCode, elem.getTagName() + "[" + elem.getId() + "]." + normalAttributeName, 1, null);
 						} catch (final RhinoException ecmaError) {
-							logger.log(Level.WARNING, "Javascript error at " + ecmaError.sourceName() + ":" + ecmaError.lineNumber() + ": " + ecmaError.getMessage(), ecmaError.getMessage());
+							log.error("Javascript error at {} : {} : {}  ", ecmaError.sourceName(), ecmaError.lineNumber(), ecmaError.getMessage(), ecmaError.getMessage());
 						} catch (final Throwable err) {
-							logger.log(Level.WARNING, "Unable to evaluate Javascript code", err);
+							log.error("Unable to evaluate Javascript code", err);
 						}
 					}
 				} else {

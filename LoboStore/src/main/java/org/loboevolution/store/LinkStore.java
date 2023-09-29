@@ -26,20 +26,18 @@
 
 package org.loboevolution.store;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * <p>LinkStore class.</p>
  */
+@Slf4j
 public class LinkStore {
-	
-	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(LinkStore.class.getName());
 
 	/** The Constant DB_PATH. */
 	private static final String DB_PATH = DatabseSQLite.getDatabaseDirectory();
@@ -61,7 +59,7 @@ public class LinkStore {
 				}
 			}
         } catch (final Exception e) {
-        	logger.log(Level.SEVERE, e.getMessage(), e);
+        	log.error(e.getMessage(), e);
         }
         return vis;
     }	
@@ -77,7 +75,7 @@ public class LinkStore {
 			pstmt.setString(1, link);
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 	}
 	
@@ -89,7 +87,7 @@ public class LinkStore {
              final PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.DELETE_LINK)) {
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 	}
 }

@@ -26,11 +26,12 @@
 
 package com.jtattoo.plaf;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.util.logging.Logger;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -38,12 +39,10 @@ import javax.swing.ImageIcon;
 /**
  * <p>LazyImageIcon class.</p>
  *
- * Author Michael Hagen
- *
+ * Author Michael Hagen*
  */
+@Slf4j
 public class LazyImageIcon implements Icon {
-	
-	private static final Logger logger = Logger.getLogger(LazyImageIcon.class.getName());
 	
 	private String name = null;
 	private ImageIcon icon = null;
@@ -62,7 +61,7 @@ public class LazyImageIcon implements Icon {
 			try {
 				icon = new ImageIcon(LazyImageIcon.class.getResource(name));
 			} catch (final Throwable t) {
-				logger.severe("ERROR: loading image " + name + " failed!");
+				log.error("ERROR: loading image failed {} ", name, t);
 			}
 		}
 		return icon;

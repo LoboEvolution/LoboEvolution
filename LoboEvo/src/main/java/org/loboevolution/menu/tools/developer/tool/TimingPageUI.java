@@ -26,6 +26,7 @@
 
 package org.loboevolution.menu.tools.developer.tool;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.component.BrowserFrame;
 import org.loboevolution.info.TimingInfo;
 import org.loboevolution.menu.tools.AbstractToolsUI;
@@ -35,20 +36,17 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
+/**
+ * <p>TimingPageUI class.</p>
+ */
+@Slf4j
 public class TimingPageUI extends AbstractToolsUI {
 
     /**
      * The Constant serialVersionUID.
      */
     private static final long serialVersionUID = 1L;
-
-    /**
-     * The Constant logger.
-     */
-    private static final Logger logger = Logger.getLogger(TimingPageUI.class.getName());
 
     /**
      * <p>Constructor for TimingPageUI.</p>
@@ -77,7 +75,7 @@ public class TimingPageUI extends AbstractToolsUI {
             jtable.setShowGrid(false);
             return new JScrollPane(jtable);
         } catch (final Exception e) {
-            logger.log(Level.SEVERE, e.getMessage(), e);
+            log.error(e.getMessage(), e);
         }
         return null;
     }

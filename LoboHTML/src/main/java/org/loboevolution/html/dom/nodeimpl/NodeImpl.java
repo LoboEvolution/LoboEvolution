@@ -28,6 +28,7 @@
  */
 package org.loboevolution.html.dom.nodeimpl;
 
+import lombok.extern.slf4j.Slf4j;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.common.Nodes;
 import org.loboevolution.common.Strings;
@@ -56,39 +57,23 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * <p>Abstract NodeImpl class.</p>
  */
+@Slf4j
 public abstract class NodeImpl extends AbstractScriptableDelegate implements Node, ModelNode, Cloneable {
-
 	private static final RenderState INVALID_RENDER_STATE = new StyleSheetRenderState(null);
-
-	/** Constant logger */
-	protected static final Logger logger = Logger.getLogger(NodeImpl.class.getName());
-
 	private HTMLCollection childrenCollection;
-
 	protected volatile Document document;
-
 	protected final NodeListImpl nodeList = new NodeListImpl();
-
 	protected volatile boolean notificationsSuspended = false;
-
 	protected volatile Node parentNode;
-
 	private volatile String prefix;
-
 	private String namespaceURI;
-
 	private RenderState renderState = INVALID_RENDER_STATE;
-
 	protected UINode uiNode;
-
 	private Map<String, Object> userData;
-
 	private Map<String, UserDataHandler> userDataHandlers;
 
 	/**
@@ -1539,13 +1524,13 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	 * @param message a {@link java.lang.String} object.
 	 */
 	public void warn(final String message) {
-		logger.log(Level.WARNING, message);
+		log.warn(message);
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void warn(final String message, final Throwable err) {
-		logger.log(Level.WARNING, message, err);
+		log.warn(message, err);
 	}
 
 	/** {@inheritDoc} */

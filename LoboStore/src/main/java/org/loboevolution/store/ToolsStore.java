@@ -26,6 +26,8 @@
 
 package org.loboevolution.store;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -34,18 +36,14 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * The Class ToolsStore.
  */
+@Slf4j
 public class ToolsStore implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
-	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(ToolsStore.class.getName());
 
 	/** The Constant DB_PATH. */
 	private static final String DB_PATH = DatabseSQLite.getDatabaseDirectory();
@@ -68,7 +66,7 @@ public class ToolsStore implements Serializable {
              final PreparedStatement pstmt = conn.prepareStatement(this.DELETE_SEARCH)) {
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 	}
 
@@ -93,7 +91,7 @@ public class ToolsStore implements Serializable {
 				searchEngineStores.add(se);
 			}
 		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 		return searchEngineStores;
 	}
@@ -133,7 +131,7 @@ public class ToolsStore implements Serializable {
 			pstmt.setInt(6, selected ? 1 : 0);
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 	}
 
@@ -156,7 +154,7 @@ public class ToolsStore implements Serializable {
 			pstmt.setString(1, name);
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 	}
 
@@ -168,7 +166,7 @@ public class ToolsStore implements Serializable {
              final PreparedStatement pstmt = conn.prepareStatement(this.UPDATE_SEARCH)) {
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 	}
 }

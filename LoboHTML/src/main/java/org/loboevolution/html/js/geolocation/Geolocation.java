@@ -26,6 +26,7 @@
 
 package org.loboevolution.html.js.geolocation;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.js.Executor;
 import org.loboevolution.html.js.WindowImpl;
@@ -34,8 +35,6 @@ import org.mozilla.javascript.Function;
 
 import java.net.UnknownHostException;
 import java.util.concurrent.TimeoutException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * <p>
@@ -50,14 +49,9 @@ import java.util.logging.Logger;
  * Specifications are being strictly followed by the system or application that
  * uses this geolocation package.</b>
  * </p>
- *
- *
- *
  */
+@Slf4j
 public class Geolocation extends AbstractScriptableDelegate {
-	
-	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(Geolocation.class.getName());
 
 	private final WindowImpl window;
 
@@ -111,7 +105,7 @@ public class Geolocation extends AbstractScriptableDelegate {
 					getCurrentPosition(success);
 					Thread.sleep(500);
 				} catch (final Exception e) {
-					logger.log(Level.SEVERE, e.getMessage(), e);
+					log.error(e.getMessage(), e);
 				}
 			}
 		});

@@ -26,6 +26,8 @@
 
 package org.loboevolution.store;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -33,18 +35,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  * <p>StyleStore class.</p>
  */
+@Slf4j
 public class StyleStore implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
-    /** The Constant logger. */
-    private static final Logger logger = Logger.getLogger(StyleStore.class.getName());
 
     /** The Constant DB_PATH. */
     private static final String DB_PATH = DatabseSQLite.getDatabaseDirectory();
@@ -82,7 +79,7 @@ public class StyleStore implements Serializable {
                 }
             }
         } catch (final Exception e) {
-            logger.log(Level.SEVERE, e.getMessage(), e);
+            log.error(e.getMessage(), e);
         }
         return values;
     }
@@ -102,10 +99,10 @@ public class StyleStore implements Serializable {
                 pstmt2.executeUpdate();
 
             } catch (final Exception e) {
-                logger.log(Level.SEVERE, e.getMessage(), e);
+                log.error(e.getMessage(), e);
             }
         } catch (final Exception e) {
-            logger.log(Level.SEVERE, e.getMessage(), e);
+            log.error(e.getMessage(), e);
         }
     }
 
@@ -126,7 +123,7 @@ public class StyleStore implements Serializable {
                 }
             }
         } catch (final Exception e) {
-            logger.log(Level.SEVERE, e.getMessage(), e);
+            log.error(e.getMessage(), e);
         }
         return values;
     }
@@ -155,11 +152,11 @@ public class StyleStore implements Serializable {
                 pstmt2.executeUpdate();
 
             } catch (final Exception e) {
-                logger.log(Level.SEVERE, e.getMessage(), e);
+                log.error(e.getMessage(), e);
             }
 
         } catch (final Exception e) {
-            logger.log(Level.SEVERE, e.getMessage(), e);
+            log.error(e.getMessage(), e);
         }
     }
 
@@ -171,7 +168,7 @@ public class StyleStore implements Serializable {
              final PreparedStatement pstmt = conn.prepareStatement(DELETE_STYLE)) {
             pstmt.executeUpdate();
         } catch (final Exception e) {
-            logger.log(Level.SEVERE, e.getMessage(), e);
+            log.error(e.getMessage(), e);
         }
     }
 }

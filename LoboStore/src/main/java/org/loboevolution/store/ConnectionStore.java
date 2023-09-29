@@ -34,19 +34,16 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.net.NetRoutines;
 
 
 /**
  * <p>ConnectionStore class.</p>
  */
+@Slf4j
 public class ConnectionStore implements Serializable {
-	
-	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(ConnectionStore.class.getName());
 
 	/** The Constant DB_PATH. */
 	private static final String DB_PATH = DatabseSQLite.getDatabaseDirectory();
@@ -107,7 +104,7 @@ public class ConnectionStore implements Serializable {
 				}
 			}
 		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 		return setting;
 	}
@@ -120,7 +117,7 @@ public class ConnectionStore implements Serializable {
              final PreparedStatement pstmt = conn.prepareStatement(DELETE_CONNECTIONS)) {
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 	}
 
@@ -213,7 +210,7 @@ public class ConnectionStore implements Serializable {
 			pstmt.setInt(7, isDisableProxyForLocalAddresses() ? 1 : 0);
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 	}
 

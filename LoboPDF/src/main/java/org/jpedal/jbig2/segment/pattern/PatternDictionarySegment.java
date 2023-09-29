@@ -26,8 +26,8 @@
 package org.jpedal.jbig2.segment.pattern;
 
 import java.io.IOException;
-import java.util.logging.Logger;
 
+import lombok.extern.slf4j.Slf4j;
 import org.jpedal.jbig2.JBIG2Exception;
 import org.jpedal.jbig2.decoders.JBIG2StreamDecoder;
 import org.jpedal.jbig2.image.JBIG2Bitmap;
@@ -36,13 +36,9 @@ import org.jpedal.jbig2.util.BinaryOperation;
 
 /**
  * <p>PatternDictionarySegment class.</p>
- *
-  *
-  *
  */
+@Slf4j
 public class PatternDictionarySegment extends Segment {
-	
-	private static final Logger logger = Logger.getLogger(PatternDictionarySegment.class.getName());
 	final PatternDictionaryFlags patternDictionaryFlags = new PatternDictionaryFlags();
 	private int width;
 	private int height;
@@ -73,14 +69,14 @@ public class PatternDictionarySegment extends Segment {
 		height = decoder.readByte();
 
 		if (JBIG2StreamDecoder.debug)
-			logger.info("pattern dictionary size = " + width + " , " + height);
+			log.info("pattern dictionary size = {} {} ", width, height);
 
 		final short[] buf = new short[4];
 		decoder.readByte(buf);
 		grayMax = BinaryOperation.getInt32(buf);
 
 		if (JBIG2StreamDecoder.debug)
-			logger.info("grey max = " + grayMax);
+			log.info("grey max = {} ", grayMax);
 
 		final boolean useMMR = patternDictionaryFlags.getFlagValue(PatternDictionaryFlags.HD_MMR) == 1;
 		final int template = patternDictionaryFlags.getFlagValue(PatternDictionaryFlags.HD_TEMPLATE);
@@ -135,7 +131,7 @@ public class PatternDictionarySegment extends Segment {
 		patternDictionaryFlags.setFlags(patternDictionaryFlagsField);
 
 		if (JBIG2StreamDecoder.debug)
-			logger.info("pattern Dictionary flags = " + patternDictionaryFlagsField);
+			log.info("pattern Dictionary flags = {} ", patternDictionaryFlagsField);
 	}
 
 	/**

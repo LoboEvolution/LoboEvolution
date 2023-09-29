@@ -40,15 +40,12 @@ import java.awt.*;
 import java.awt.event.InputEvent;
 import java.awt.event.MouseEvent;
 import java.util.Optional;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * <p>HtmlController class.</p>
  */
 public class HtmlController {
 	private static final HtmlController instance = new HtmlController();
-	private static final Logger logger = Logger.getLogger(HtmlController.class.getName());
 
 	/**
 	 * <p>Getter for the field instance.</p>
@@ -90,10 +87,6 @@ public class HtmlController {
 	 * @return a boolean.
 	 */
 	public boolean onContextMenu(final ModelNode node, final MouseEvent event, final int x, final int y) {
-		if (logger.isLoggable(Level.INFO)) {
-			logger.info("onContextMenu(): node=" + node + ",class=" + node.getClass().getName());
-		}
-		
 		if (node instanceof HTMLElementImpl) {
 			final HTMLElementImpl uiElement = (HTMLElementImpl) node;
 			final Function f = uiElement.getOncontextmenu();
@@ -129,9 +122,6 @@ public class HtmlController {
 	 * @param y a int.
 	 */
 	public boolean onDoubleClick(final ModelNode node, final MouseEvent event, final int x, final int y) {
-		if (logger.isLoggable(Level.INFO)) {
-			logger.info("onDoubleClick(): node=" + node + ",class=" + node.getClass().getName());
-		}
 		if (node instanceof HTMLElementImpl) {
 			final HTMLElementImpl uiElement = (HTMLElementImpl) node;
 			final Function f = uiElement.getOndblclick();
@@ -173,10 +163,6 @@ public class HtmlController {
 	 * @param y a int.
 	 */
 	public boolean onMouseClick(final ModelNode node, final MouseEvent event, final int x, final int y) {
-		if (logger.isLoggable(Level.INFO)) {
-			logger.info("onMouseClick(): node=" + node + ",class=" + node.getClass().getName());
-		}
-		
 		if (node instanceof HTMLElementImpl) {
 			final HTMLElementImpl uiElement = (HTMLElementImpl) node;
 			final Function f = uiElement.getOnclick();

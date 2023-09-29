@@ -26,6 +26,7 @@
 
 package org.loboevolution.html.js.xml;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.Nodes;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.node.*;
@@ -33,17 +34,12 @@ import org.loboevolution.html.node.js.xml.XMLSerializer;
 import org.loboevolution.js.AbstractScriptableDelegate;
 
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.logging.Logger;
 
 /**
  * <p>XMLSerializer class.</p>
  */
+@Slf4j
 public class XMLSerializerImpl extends AbstractScriptableDelegate implements XMLSerializer {
-
-    /**
-     * The Constant logger.
-     */
-    private static final Logger logger = Logger.getLogger(XMLSerializerImpl.class.getName());
 
     /**
      * {@inheritDoc}
@@ -60,7 +56,7 @@ public class XMLSerializerImpl extends AbstractScriptableDelegate implements XML
 			}
             return buff.toString();
         } catch (final Exception e) {
-            logger.severe(e.getMessage());
+            log.error(e.getMessage(), e);
         }
         return "";
     }
@@ -139,7 +135,7 @@ public class XMLSerializerImpl extends AbstractScriptableDelegate implements XML
             }
 
         } catch (final Exception e) {
-            logger.severe(e.getMessage());
+            log.error(e.getMessage(), e);
         }
     }
 

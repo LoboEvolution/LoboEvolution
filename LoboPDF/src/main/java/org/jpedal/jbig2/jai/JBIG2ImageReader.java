@@ -36,8 +36,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.imageio.ImageReadParam;
 import javax.imageio.ImageReader;
@@ -46,20 +44,16 @@ import javax.imageio.metadata.IIOMetadata;
 import javax.imageio.spi.ImageReaderSpi;
 import javax.imageio.stream.ImageInputStream;
 
+import lombok.extern.slf4j.Slf4j;
 import org.jpedal.jbig2.JBIG2Decoder;
 import org.jpedal.jbig2.JBIG2Exception;
 import org.jpedal.jbig2.image.JBIG2Bitmap;
 
 /**
  * <p>JBIG2ImageReader class.</p>
- *
-  *
-  *
  */
+@Slf4j
 public class JBIG2ImageReader extends ImageReader {
-	
-	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(JBIG2ImageReader.class.getName());
 	
 	private JBIG2Decoder decoder;
 	private ImageInputStream stream;
@@ -196,7 +190,7 @@ public class JBIG2ImageReader extends ImageReader {
 			wrDst.setRect(destinationOffset.x, destinationOffset.y, raster);
 
 		} catch (final RuntimeException e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 
 		return dst;
@@ -449,24 +443,15 @@ public class JBIG2ImageReader extends ImageReader {
 
 					// <start-full><start-demo>
 					System.err.println("xx=" + xx + " yy=" + yy + " jj=" + jj + " ptr=" + ((yy + (y * sampling)) * origLineLength) + (((x * sampling) + (xx * comp) + jj)) + '/' + data.length);
-
-					// System.err.println("index="+index);
 					System.err.println(((yy + (y * sampling)) * origLineLength) + " " + (((x * sampling) + (xx * comp) + jj)));
 					System.err.println("w=" + w + " h=" + h + " sampling=" + sampling + " x=" + x + " y=" + y);
-					// logger.info("xx="+xx+" yy="+yy);
-					logger.log(Level.SEVERE, e.getMessage(), e);
-					// <end-demo><end-full>
+					log.error(e.getMessage(), e);
 				}
 			}
 		}
 
 		if (sampling > 1) {
 			final int[] bands = { 0 };
-
-			// logger.info("w=" + w + " h=" + h + " size=" +
-			// data.length);
-			// WritableRaster raster =Raster.createPackedRaster(new
-			// DataBufferByte(newData, newData.length), newW, newH, 1, null);
 			final Raster raster = Raster.createInterleavedRaster(new DataBufferByte(data, data.length), w, h, w, 1, bands, null);
 
 			final BufferedImage image = new BufferedImage(w, h, BufferedImage.TYPE_BYTE_GRAY);
@@ -512,7 +497,7 @@ public class JBIG2ImageReader extends ImageReader {
 			decoder.decodeJBIG2(data);
 
 		} catch (final IOException | JBIG2Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 
         readFile = true;

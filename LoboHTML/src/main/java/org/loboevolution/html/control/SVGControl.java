@@ -29,21 +29,14 @@ package org.loboevolution.html.control;
 import org.loboevolution.html.dom.svgimpl.SVGSVGElementImpl;
 
 import java.awt.*;
-import java.util.logging.Logger;
 
 /**
  * <p>SVGControl class.</p>
- *
- *
- *
  */
 public class SVGControl extends BaseControl {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
-
-	/** Constant logger */
-	protected static final Logger logger = Logger.getLogger(SVGControl.class.getName());
 
 	private final SVGSVGElementImpl modelNode;
 

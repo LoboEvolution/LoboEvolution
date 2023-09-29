@@ -26,8 +26,8 @@
 package org.jpedal.jbig2.segment.pageinformation;
 
 import java.io.IOException;
-import java.util.logging.Logger;
 
+import lombok.extern.slf4j.Slf4j;
 import org.jpedal.jbig2.JBIG2Exception;
 import org.jpedal.jbig2.decoders.JBIG2StreamDecoder;
 import org.jpedal.jbig2.image.JBIG2Bitmap;
@@ -36,13 +36,10 @@ import org.jpedal.jbig2.util.BinaryOperation;
 
 /**
  * <p>PageInformationSegment class.</p>
- *
-  *
-  *
  */
+@Slf4j
 public class PageInformationSegment extends Segment {
 
-	private static final Logger logger = Logger.getLogger(PageInformationSegment.class.getName());
 	private int pageBitmapHeight, pageBitmapWidth;
 	private int yResolution, xResolution;
 
@@ -87,7 +84,7 @@ public class PageInformationSegment extends Segment {
 	public void readSegment() throws IOException, JBIG2Exception {
 
 		if (JBIG2StreamDecoder.debug)
-			logger.info("==== Reading Page Information Dictionary ====");
+			log.info("==== Reading Page Information Dictionary ====");
 
 		short[] buff = new short[4];
 		decoder.readByte(buff);
@@ -98,7 +95,7 @@ public class PageInformationSegment extends Segment {
 		pageBitmapHeight = BinaryOperation.getInt32(buff);
 
 		if (JBIG2StreamDecoder.debug)
-			logger.info("Bitmap size = " + pageBitmapWidth + 'x' + pageBitmapHeight);
+			log.info("Bitmap size =  {} x {} ", pageBitmapWidth, pageBitmapHeight);
 
 		buff = new short[4];
 		decoder.readByte(buff);
@@ -109,7 +106,7 @@ public class PageInformationSegment extends Segment {
 		yResolution = BinaryOperation.getInt32(buff);
 
 		if (JBIG2StreamDecoder.debug)
-			logger.info("Resolution = " + xResolution + 'x' + yResolution);
+			log.info("Resolution =  {} x {}", xResolution, yResolution);
 
 		/** extract page information flags */
 		final short pageInformationFlagsField = decoder.readByte();
@@ -117,14 +114,14 @@ public class PageInformationSegment extends Segment {
 		pageInformationFlags.setFlags(pageInformationFlagsField);
 
 		if (JBIG2StreamDecoder.debug)
-			logger.info("symbolDictionaryFlags = " + pageInformationFlagsField);
+			log.info("symbolDictionaryFlags = {} ", pageInformationFlagsField);
 
 		buff = new short[2];
 		decoder.readByte(buff);
 		pageStriping = BinaryOperation.getInt16(buff);
 
 		if (JBIG2StreamDecoder.debug)
-			logger.info("Page Striping = " + pageStriping);
+			log.info("Page Striping = {} ", pageStriping);
 
 		final int defPix = pageInformationFlags.getFlagValue(PageInformationFlags.DEFAULT_PIXEL_VALUE);
 

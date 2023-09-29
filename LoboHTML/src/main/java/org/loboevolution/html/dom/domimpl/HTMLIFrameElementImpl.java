@@ -26,6 +26,7 @@
 
 package org.loboevolution.html.dom.domimpl;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.Strings;
 import org.loboevolution.common.Urls;
 import org.loboevolution.html.control.FrameControl;
@@ -47,6 +48,7 @@ import java.util.logging.Level;
 /**
  * <p>HTMLIFrameElementImpl class.</p>
  */
+@Slf4j
 public class HTMLIFrameElementImpl extends HTMLElementImpl implements HTMLIFrameElement {
 
 	/**
@@ -307,7 +309,7 @@ public class HTMLIFrameElementImpl extends HTMLElementImpl implements HTMLIFrame
 				frameControl.add(newpanel);
 			}
 		} catch (final Exception e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 	}
 

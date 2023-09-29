@@ -26,6 +26,7 @@
 
 package org.loboevolution.html.parser;
 
+import lombok.extern.slf4j.Slf4j;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.Entities;
@@ -46,8 +47,6 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 /**
@@ -56,8 +55,8 @@ import java.util.stream.Collectors;
  * {@link org.loboevolution.html.parser.DocumentBuilderImpl}. This parser class
  * may be used directly when a different DOM implementation is preferred.
  */
+@Slf4j
 public class XHtmlParser {
-	private static final Logger logger = Logger.getLogger(XHtmlParser.class.getName());
 
 	/** Constant MODIFYING_KEY="cobra.suspend" */
 	public static final String MODIFYING_KEY = "cobra.suspend";
@@ -276,7 +275,7 @@ public class XHtmlParser {
 					}
 				} catch (final DOMException de) {
 					if ((parent.getNodeType() != Node.DOCUMENT_NODE) || (de.getCode() != DOMException.HIERARCHY_REQUEST_ERR)) {
-						logger.log(Level.WARNING, "parseToken(): Unable to append child to " + parent + ".", de);
+						log.error("parseToken(): Unable to append child to  {} ", parent, de);
 					}
 				}
 			}
@@ -851,7 +850,7 @@ public class XHtmlParser {
 					} catch (final DOMException de) {
 						if ((parent.getNodeType() != Node.DOCUMENT_NODE)
 								|| (de.getCode() != DOMException.HIERARCHY_REQUEST_ERR)) {
-							logger.log(Level.WARNING, "parseToken(): Unable to append child to " + parent + ".", de);
+							log.error("parseToken(): Unable to append child to  {} ", parent, de);
 						}
 					}
 					if (chInt == -1) {
@@ -878,7 +877,7 @@ public class XHtmlParser {
 					} catch (final DOMException de) {
 						if ((parent.getNodeType() != Node.DOCUMENT_NODE)
 								|| (de.getCode() != DOMException.HIERARCHY_REQUEST_ERR)) {
-							logger.log(Level.WARNING, "parseToken(): Unable to append child to " + parent + ".", de);
+							log.error("parseToken(): Unable to append child to  {} ", parent, de);
 						}
 					}
 					if (chInt == -1) {
@@ -1323,7 +1322,7 @@ public class XHtmlParser {
 						decimal = Integer.parseInt(number);
 					}
 				} catch (final NumberFormatException nfe) {
-					logger.log(Level.WARNING, "entityDecode()", nfe);
+					log.warn("entityDecode() ", nfe);
 					decimal = 0;
 				}
 				sb.append((char) decimal);
