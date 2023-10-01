@@ -42,8 +42,6 @@ public class Function2Args extends FunctionOneArg {
   /** {@inheritDoc} */
   @Override
   public void setArg(final Expression arg, final int argNum) throws WrongNumberArgsException {
-
-    // System.out.println("argNum: "+argNum);
     if (argNum == 0) super.setArg(arg, argNum);
     else if (1 == argNum) {
       m_arg1 = arg;

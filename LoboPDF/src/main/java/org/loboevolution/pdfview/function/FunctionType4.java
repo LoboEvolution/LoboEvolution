@@ -27,8 +27,9 @@ package org.loboevolution.pdfview.function;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.util.ArrayDeque;
 import java.util.List;
-import java.util.Stack;
+import java.util.Deque;
 
 import org.loboevolution.pdfview.PDFObject;
 import org.loboevolution.pdfview.function.postscript.PostScriptParser;
@@ -52,7 +53,7 @@ public class FunctionType4 extends PDFFunction {
     private List<String> tokens;
     
     /** the stack of operations. The stack contents should all be Comparable. */
-    private Stack<Object> stack;
+    private Deque<Object> stack;
 
     /**
      * Creates a new instance of FunctionType4
@@ -113,7 +114,7 @@ public class FunctionType4 extends PDFFunction {
 	 ************************************************************************/
 	
 	private void prepareInitialStack(final float[] inputs, final int inputOffset) {
-		this.stack = new Stack<>();
+		this.stack = new ArrayDeque<>();
     	for (int i = inputOffset; i < inputs.length; i++) {
     		this.stack.push((double) inputs[i]);
 		}

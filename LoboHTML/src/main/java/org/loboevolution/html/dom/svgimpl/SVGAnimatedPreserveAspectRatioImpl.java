@@ -59,8 +59,8 @@ public class SVGAnimatedPreserveAspectRatioImpl extends SVGAnimatedValue impleme
             final int numAnimations = animations.size();
             SVGPreserveAspectRatio result = null;
             for (int i = 0; i < numAnimations; i++) {
-                final SVGAnimationElementImpl animation = ( SVGAnimationElementImpl) animations.elementAt(i);
-                final SVGPreserveAspectRatio animVal = ( SVGPreserveAspectRatio) animation.getCurrentValue(ANIMTYPE_PRESERVEASPECTRATIO);
+                final SVGAnimationElementImpl animation = (SVGAnimationElementImpl) animations.get(i);
+                final SVGPreserveAspectRatio animVal = (SVGPreserveAspectRatio) animation.getCurrentValue(ANIMTYPE_PRESERVEASPECTRATIO);
                 if (animVal != null) {
                     result = animVal;
                     break;

@@ -26,13 +26,13 @@
 
 package org.loboevolution.pdfview.function.postscript.operation;
 
-import java.util.Stack;
+import java.util.Deque;
 
 
 final class Pop implements PostScriptOperation {
 	/** {@inheritDoc} */
 	@Override
-	public void eval(final Stack<Object> environment) {   // discard top element
+	public void eval(final Deque<Object> environment) {   // discard top element
 	    environment.pop();
 	}
 }

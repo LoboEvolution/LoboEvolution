@@ -26,22 +26,19 @@
 
 package org.loboevolution.pdfview.function.postscript.operation;
 
-import java.util.Stack;
+import java.util.Deque;
 
 /**
  * <p>PostScriptOperation interface.</p>
- *
-  *
-  *
  */
 public interface PostScriptOperation {
 
     /**
      * evaluate the function, popping the stack as needed and pushing results.
      *
-     * @param environment a {@link java.util.Stack} object.
+     * @param environment a {@link java.util.Deque} object.
      */
-    void eval(Stack<Object> environment);
+    void eval(Deque<Object> environment);
 
 }
 

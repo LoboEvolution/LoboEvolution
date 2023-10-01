@@ -26,7 +26,8 @@
 
 package org.loboevolution.html.dom.svgimpl;
 
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>SVGAnimatedValue class.</p>
@@ -48,7 +49,7 @@ public abstract class SVGAnimatedValue {
     public static final short ANIMTYPE_TRANSFORMLIST = 12;
 
     protected SVGElementImpl owner;
-    protected Vector animations;
+    protected List<SVGAnimationElementImpl> animations;
 
     public SVGElementImpl getOwner() {
         return owner;
@@ -56,12 +57,12 @@ public abstract class SVGAnimatedValue {
 
     public void addAnimation(final SVGAnimationElementImpl animation) {
         if (animations == null) {
-            animations = new Vector();
+            animations = new ArrayList();
         }
-        animations.addElement(animation);
+        animations.add(animation);
     }
 
-    public Vector getAnimations() {
+    public List<SVGAnimationElementImpl> getAnimations() {
         return animations;
     }
 

@@ -26,23 +26,25 @@
 
 package org.loboevolution.html.dom.svgimpl;
 
+import lombok.extern.slf4j.Slf4j;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.svg.SVGAnimationElement;
 import org.loboevolution.html.dom.svg.SVGElement;
 
+import java.util.ArrayList;
 import java.util.StringTokenizer;
-import java.util.Vector;
-
+import java.util.List;
 
 /**
  * <p>SVGAnimationElementImpl class.</p>
  */
+@Slf4j
 public abstract class SVGAnimationElementImpl extends SVGAnimationImpl implements SVGAnimationElement {
 
-	public Vector times = null;
-	public Vector vals = null;
-	public Vector splines = null;
+	public List<Float> times = null;
+	public List<String> vals = null;
+	public List<SVGPathSegCurvetoCubicAbsImpl> splines = null;
 
 	private boolean active = false;
 	protected boolean finished = false;
@@ -225,7 +227,7 @@ public abstract class SVGAnimationElementImpl extends SVGAnimationImpl implement
 
 				} else {
 					// something wrong
-					System.out.println("Invalid clock value: " + clockVal + ", will use the default value 0");
+					log.info("Invalid clock value: {}, will use the default value 0", clockVal);
 					return 0; // shouldn't get here
 				}
 
@@ -252,14 +254,14 @@ public abstract class SVGAnimationElementImpl extends SVGAnimationImpl implement
 				}
 			}
 		} catch (final NumberFormatException e) {
-			System.out.println("cannot decode time: " + clockVal);
+			log.info("cannot decode time: {} ", clockVal);
 			return 0;
 		}
 	}
 
 	protected void setupTimeValueVectors(final String calcMode, final String values) {
-		times = new Vector();
-		vals = new Vector();
+		times = new ArrayList<>();
+		vals = new ArrayList();
 		final String keyTimes = getAttribute("keyTimes");
 
 		if (Strings.isCssBlank(keyTimes)) {
@@ -271,9 +273,9 @@ public abstract class SVGAnimationElementImpl extends SVGAnimationImpl implement
 				int currentTokenCount = 0;
 				while (stVals.hasMoreTokens()) {
 					if (currentTokenCount == 0 || currentTokenCount == numVals - 1) {
-						times.addElement(currTime);
+						times.add(currTime);
 						currTime = 1;
-						vals.addElement(stVals.nextToken());
+						vals.add(stVals.nextToken());
 					} else {
 						stVals.nextToken();
 					}
@@ -285,9 +287,9 @@ public abstract class SVGAnimationElementImpl extends SVGAnimationImpl implement
 				final float timeInc = (float) (1.0 / (numVals - 1));
 				float currTime = 0;
 				while (stVals.hasMoreTokens()) {
-					times.addElement(currTime);
+					times.add(currTime);
 					currTime += timeInc;
-					vals.addElement(stVals.nextToken());
+					vals.add(stVals.nextToken());
 				}
 			}
 
@@ -295,13 +297,13 @@ public abstract class SVGAnimationElementImpl extends SVGAnimationImpl implement
 			final StringTokenizer stTimes = new StringTokenizer(keyTimes, ";");
 			final StringTokenizer stVals = new StringTokenizer(values, ";");
 			while (stTimes.hasMoreTokens() && stVals.hasMoreTokens()) {
-				times.addElement(Float.parseFloat(stTimes.nextToken()));
-				vals.addElement(stVals.nextToken());
+				times.add(Float.parseFloat(stTimes.nextToken()));
+				vals.add(stVals.nextToken());
 			}
 		}
 
 		if (calcMode.equals("spline") && getAttribute("keySplines").length() > 0) {
-			splines = new Vector();
+			splines = new ArrayList<>();
 			final String keySplines = getAttribute("keySplines");
 			final StringTokenizer st = new StringTokenizer(keySplines, ";");
 			while (st.hasMoreTokens()) {
@@ -313,14 +315,14 @@ public abstract class SVGAnimationElementImpl extends SVGAnimationImpl implement
 					final float x2 = Float.parseFloat(st2.nextToken());
 					final float y2 = Float.parseFloat(st2.nextToken());
 					final SVGPathSegCurvetoCubicAbsImpl bezierSeg = new SVGPathSegCurvetoCubicAbsImpl(1, 1, x1, y1, x2, y2);
-					splines.addElement(bezierSeg);
+					splines.add(bezierSeg);
 				}
 			}
 		}
 	}
 
 	protected float getSplineValueAt(final int splineIndex, final float percent) {
-		final SVGPathSegCurvetoCubicAbsImpl bezierSeg = (SVGPathSegCurvetoCubicAbsImpl) splines.elementAt(splineIndex);
+		final SVGPathSegCurvetoCubicAbsImpl bezierSeg = (SVGPathSegCurvetoCubicAbsImpl) splines.get(splineIndex);
 		return bezierSeg.getYAt(percent, new SVGPointImpl(0, 0));
 	}
 }

@@ -26,7 +26,7 @@
 
 package org.loboevolution.pdfview.function.postscript.operation;
 
-import java.util.Stack;
+import java.util.Deque;
 
 final class Exp implements PostScriptOperation {
 	@Override
@@ -42,7 +42,7 @@ final class Exp implements PostScriptOperation {
 	 *
 	 * errors: stackunderflow, typecheck, undefinedresult
 	 */
-	public void eval(final Stack<Object> environment) {
+	public void eval(final Deque<Object> environment) {
 	    final double exponent = (Double)environment.pop();
 	    final double base = (Double)environment.pop();
 	    environment.push(Math.pow(exponent, base));

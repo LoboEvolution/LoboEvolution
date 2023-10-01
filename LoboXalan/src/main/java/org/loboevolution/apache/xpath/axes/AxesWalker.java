@@ -25,7 +25,6 @@
  */
 package org.loboevolution.apache.xpath.axes;
 
-import java.util.Vector;
 import org.loboevolution.apache.xpath.Expression;
 import org.loboevolution.apache.xpath.XPathContext;
 import org.loboevolution.apache.xpath.XPathVisitor;
@@ -35,6 +34,8 @@ import org.loboevolution.apache.xpath.res.XPATHMessages;
 import org.loboevolution.apache.xml.dtm.DTM;
 import org.loboevolution.apache.xml.dtm.DTMAxisTraverser;
 import org.loboevolution.apache.xml.dtm.DTMIterator;
+
+import java.util.List;
 
 /** Serves as common interface for axes Walkers, and stores common state variables. */
 public class AxesWalker extends PredicatedNodeTest implements Cloneable, PathComponent {
@@ -85,15 +86,15 @@ public class AxesWalker extends PredicatedNodeTest implements Cloneable, PathCom
    *     even vectors.
    * @return non-null clone, which may be a new clone, or may be a clone contained on the cloneList.
    */
-  AxesWalker cloneDeep(final WalkingIterator cloneOwner, final Vector<AxesWalker> cloneList)
+  AxesWalker cloneDeep(final WalkingIterator cloneOwner, final List<AxesWalker> cloneList)
       throws CloneNotSupportedException {
     AxesWalker clone = findClone(this, cloneList);
     if (null != clone) return clone;
     clone = (AxesWalker) this.clone();
     clone.setLocPathIterator(cloneOwner);
     if (null != cloneList) {
-      cloneList.addElement(this);
-      cloneList.addElement(clone);
+      cloneList.add(this);
+      cloneList.add(clone);
     }
 
     if (wi().m_lastUsedWalker == this) cloneOwner.m_lastUsedWalker = clone;
@@ -118,12 +119,12 @@ public class AxesWalker extends PredicatedNodeTest implements Cloneable, PathCom
    *     vectors, may be null.
    * @return A clone that corresponds to the key, or null if key not found.
    */
-  static AxesWalker findClone(final AxesWalker key, final Vector<AxesWalker> cloneList) {
+  static AxesWalker findClone(final AxesWalker key, final List<AxesWalker> cloneList) {
     if (null != cloneList) {
       // First, look for clone on list.
       final int n = cloneList.size();
       for (int i = 0; i < n; i += 2) {
-        if (key == cloneList.elementAt(i)) return cloneList.elementAt(i + 1);
+        if (key == cloneList.get(i)) return cloneList.get(i + 1);
       }
     }
     return null;
@@ -318,7 +319,6 @@ public class AxesWalker extends PredicatedNodeTest implements Cloneable, PathCom
       lpi.setLastUsedWalker(savedWalker);
     }
 
-    // System.out.println("pos: "+pos);
     return pos;
   }
 

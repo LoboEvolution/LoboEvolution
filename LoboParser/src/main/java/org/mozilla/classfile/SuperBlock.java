@@ -6,12 +6,15 @@
 
 package org.mozilla.classfile;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * A super block is defined as a contiguous chunk of code with a single entry point and multiple
  * exit points (therefore ending in an unconditional jump or the end of the method). This is used to
  * emulate OpenJDK's compiler, which outputs stack map frames at the start of every super block
  * except the method start.
  */
+@Slf4j
 final class SuperBlock {
     SuperBlock(int index, int start, int end, int[] initialLocals) {
         this.index = index;
@@ -87,10 +90,10 @@ final class SuperBlock {
             return localsChanged || stackChanged;
         } else {
             if (ClassFileWriter.StackMapTable.DEBUGSTACKMAP) {
-                System.out.println("bad merge");
-                System.out.println("current type state:");
+                log.info("bad merge");
+                log.info("current type state:");
                 TypeInfo.print(this.locals, this.stack, pool);
-                System.out.println("incoming type state:");
+                log.info("incoming type state:");
                 TypeInfo.print(locals, localsTop, stack, stackTop, pool);
             }
             throw new IllegalArgumentException("bad merge attempt");

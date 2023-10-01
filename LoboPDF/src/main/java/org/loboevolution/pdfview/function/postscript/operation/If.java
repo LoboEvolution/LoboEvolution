@@ -26,7 +26,7 @@
 
 package org.loboevolution.pdfview.function.postscript.operation;
 
-import java.util.Stack;
+import java.util.Deque;
 
 
 final class If implements PostScriptOperation {
@@ -46,7 +46,7 @@ final class If implements PostScriptOperation {
 	 *
 	 * errors: stackunderflow, typecheck
 	 */
-	public void eval(final Stack<Object> environment) {
+	public void eval(final Deque<Object> environment) {
 	    if ((Boolean)environment.pop()) {
 	        environment.push(environment.pop());
 	    } else {

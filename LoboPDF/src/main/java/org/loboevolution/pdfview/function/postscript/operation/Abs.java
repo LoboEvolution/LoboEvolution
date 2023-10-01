@@ -26,7 +26,7 @@
 
 package org.loboevolution.pdfview.function.postscript.operation;
 
-import java.util.Stack;
+import java.util.Deque;
 
 final class Abs implements PostScriptOperation {
 	@Override
@@ -41,7 +41,7 @@ final class Abs implements PostScriptOperation {
 	 *
 	 * errors: stackunderflow, typecheck
 	 */
-	public void eval(final Stack<Object> environment) {
+	public void eval(final Deque<Object> environment) {
 		environment.push(Math.abs((Double) environment.pop()));
 	}
 }

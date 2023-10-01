@@ -25,22 +25,22 @@
  */
 package org.loboevolution.apache.xpath.compiler;
 
-import java.util.Hashtable;
+import java.util.HashMap;
 
 /** Table of strings to operation code lookups. */
 public class Keywords {
 
   /** Table of keywords to opcode associations. */
-  private static final Hashtable<String, Integer> m_keywords = new Hashtable<>();
+  private static final HashMap<String, Integer> m_keywords = new HashMap<>();
 
   /** Table of axes names to opcode associations. */
-  private static final Hashtable<String, Integer> m_axisnames = new Hashtable<>();
+  private static final HashMap<String, Integer> m_axisnames = new HashMap<>();
 
   /** Table of function name to function ID associations. */
-  private static final Hashtable<String, Integer> m_nodetests = new Hashtable<>();
+  private static final HashMap<String, Integer> m_nodetests = new HashMap<>();
 
   /** Table of node type strings to opcode associations. */
-  private static final Hashtable<String, Integer> m_nodetypes = new Hashtable<>();
+  private static final HashMap<String, Integer> m_nodetypes = new HashMap<>();
 
   /** ancestor axes string. */
   private static final String FROM_ANCESTORS_STRING = "ancestor";

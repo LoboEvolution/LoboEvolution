@@ -258,8 +258,6 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
             parentID = m_parent.elementAt(parentID);
             if (parentID < axisRoot) return NULL;
           } while (parentID > axisRoot);
-
-          // System.out.println("Found node via index: "+first);
           nextPotential = nextID + 1;
           continue;
         }
@@ -366,8 +364,6 @@ public abstract class DTMDefaultBaseTraversers extends DTMDefaultBase {
 
         if (NOTPROCESSED != next) {
           if (isAfterAxis(axisRoot, next)) return NULL;
-
-          // System.out.println("Found node via index: "+first);
           return next;
         } else if (axisHasBeenProcessed(axisRoot)) break;
 

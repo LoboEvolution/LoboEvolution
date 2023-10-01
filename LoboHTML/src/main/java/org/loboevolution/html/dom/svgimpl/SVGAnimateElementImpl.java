@@ -26,6 +26,7 @@
 
 package org.loboevolution.html.dom.svgimpl;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.svg.*;
 
@@ -34,6 +35,7 @@ import java.util.StringTokenizer;
 /**
  * <p>SVGAnimateElementImpl class.</p>
  */
+@Slf4j
 public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SVGAnimateElement {
 
 	/**
@@ -118,16 +120,16 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 			SVGLengthImpl afterLength = null;
 			int splineIndex = 0;
 			for (int i = 0; i < times.size() - 1; i++) {
-				beforeTime = (Float) times.elementAt(i);
-				afterTime = (Float) times.elementAt(i + 1);
+				beforeTime = times.get(i);
+				afterTime = times.get(i + 1);
 				if (percentageComplete >= beforeTime && percentageComplete <= afterTime) {
-					beforeLength = new SVGLengthImpl((String) vals.elementAt(i));
-					afterLength = new SVGLengthImpl((String) vals.elementAt(i + 1));
+					beforeLength = new SVGLengthImpl(vals.get(i));
+					afterLength = new SVGLengthImpl(vals.get(i + 1));
 					break;
 				}
 				if (i == times.size() - 2 && calcMode.equals("discrete") && percentageComplete > afterTime) {
-					beforeLength = new SVGLengthImpl((String) vals.elementAt(i + 1));
-					afterLength = new SVGLengthImpl((String) vals.elementAt(i + 1));
+					beforeLength = new SVGLengthImpl(vals.get(i + 1));
+					afterLength = new SVGLengthImpl(vals.get(i + 1));
 					break;
 				}
 				splineIndex++;
@@ -226,16 +228,16 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 			SVGLengthList afterLengthList = null;
 			int splineIndex = 0;
 			for (int i = 0; i < times.size() - 1; i++) {
-				beforeTime = (Float) times.elementAt(i);
-				afterTime = (Float) times.elementAt(i + 1);
+				beforeTime = times.get(i);
+				afterTime = times.get(i + 1);
 				if (percentageComplete >= beforeTime && percentageComplete <= afterTime) {
-					beforeLengthList = makeLengthList((String) vals.elementAt(i));
-					afterLengthList = makeLengthList((String) vals.elementAt(i + 1));
+					beforeLengthList = makeLengthList(vals.get(i));
+					afterLengthList = makeLengthList(vals.get(i + 1));
 					break;
 				}
 				if (i == times.size() - 2 && calcMode.equals("discrete") && percentageComplete > afterTime) {
-					beforeLengthList = makeLengthList((String) vals.elementAt(i + 1));
-					afterLengthList = makeLengthList((String) vals.elementAt(i + 1));
+					beforeLengthList = makeLengthList(vals.get(i + 1));
+					afterLengthList = makeLengthList(vals.get(i + 1));
 					break;
 				}
 				splineIndex++;
@@ -258,8 +260,7 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 						}
 						return currentList;
 					} else {
-						System.out.println(
-								"cannot animate length list, all lists need to contain the same number of items");
+						log.info("cannot animate length list, all lists need to contain the same number of items");
 						return null;
 					}
 
@@ -296,7 +297,7 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 					}
 					return currentList;
 				} else {
-					System.out.println("cannot animate length list, from and to lists have different number of items");
+					log.info("cannot animate length list, from and to lists have different number of items");
 					return null;
 				}
 
@@ -314,7 +315,7 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 					}
 					return currentList;
 				} else {
-					System.out.println("cannot animate length list, from and by lists have different number of items");
+					log.info("cannot animate length list, from and by lists have different number of items");
 					return null;
 				}
 			}
@@ -369,11 +370,11 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 			Boolean beforeBool = null;
 			Boolean afterBool = null;
 			for (int i = 0; i < times.size() - 1; i++) {
-				beforeTime = (Float) times.elementAt(i);
-				afterTime = (Float) times.elementAt(i + 1);
+				beforeTime = times.get(i);
+				afterTime = times.get(i + 1);
 				if (percentageComplete >= beforeTime && percentageComplete <= afterTime) {
-					beforeBool = Boolean.valueOf((String) vals.elementAt(i));
-					afterBool = Boolean.valueOf((String) vals.elementAt(i + 1));
+					beforeBool = Boolean.valueOf(vals.get(i));
+					afterBool = Boolean.valueOf(vals.get(i + 1));
 					break;
 				}
 			}
@@ -439,16 +440,16 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 			String beforeString = null;
 			String afterString = null;
 			for (int i = 0; i < times.size() - 1; i++) {
-				beforeTime = (Float) times.elementAt(i);
-				afterTime = (Float) times.elementAt(i + 1);
+				beforeTime = times.get(i);
+				afterTime = times.get(i + 1);
 				if (percentageComplete >= beforeTime && percentageComplete <= afterTime) {
-					beforeString = (String) vals.elementAt(i);
-					afterString = (String) vals.elementAt(i + 1);
+					beforeString = vals.get(i);
+					afterString = vals.get(i + 1);
 					break;
 				}
 				if (i == times.size() - 2 && calcMode.equals("discrete") && percentageComplete > afterTime) {
-					beforeString = (String) vals.elementAt(i + 1);
-					afterString = (String) vals.elementAt(i + 1);
+					beforeString = vals.get(i + 1);
+					afterString = vals.get(i + 1);
 					break;
 				}
 			}
@@ -503,23 +504,16 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 			Float afterNumber = null;
 			int splineIndex = 0;
 			for (int i = 0; i < times.size() - 1; i++) {
-				beforeTime = (Float) times.elementAt(i);
-				afterTime = (Float) times.elementAt(i + 1);
-				// System.out.println("checking for between: " + beforeTime + "
-				// and " + afterTime + " percent complete = " +
-				// percentageComplete);
+				beforeTime = times.get(i);
+				afterTime = times.get(i + 1);
 				if (percentageComplete >= beforeTime && percentageComplete <= afterTime) {
-					beforeNumber = new Float((String) vals.elementAt(i));
-					afterNumber = new Float((String) vals.elementAt(i + 1));
-					// System.out.println("time between " + i + " and " +
-					// (i+1));
+					beforeNumber = new Float(vals.get(i));
+					afterNumber = new Float(vals.get(i + 1));
 					break;
 				}
 				if (i == times.size() - 2 && calcMode.equals("discrete") && percentageComplete > afterTime) {
-					beforeNumber = new Float((String) vals.elementAt(i + 1));
-					afterNumber = new Float((String) vals.elementAt(i + 1));
-					// System.out.println("time between " + i + " and " +
-					// (i+1));
+					beforeNumber = new Float(vals.get(i + 1));
+					afterNumber = new Float(vals.get(i + 1));
 					break;
 				}
 				splineIndex++;
@@ -616,16 +610,16 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 			SVGNumberList afterNumberList = null;
 			int splineIndex = 0;
 			for (int i = 0; i < times.size() - 1; i++) {
-				beforeTime = ((Float) times.elementAt(i));
-				afterTime = ((Float) times.elementAt(i + 1));
+				beforeTime = (times.get(i));
+				afterTime = (times.get(i + 1));
 				if (percentageComplete >= beforeTime && percentageComplete <= afterTime) {
-					beforeNumberList = new SVGNumberListImpl((String) vals.elementAt(i));
-					afterNumberList = new SVGNumberListImpl((String) vals.elementAt(i + 1));
+					beforeNumberList = new SVGNumberListImpl(vals.get(i));
+					afterNumberList = new SVGNumberListImpl(vals.get(i + 1));
 					break;
 				}
 				if (i == times.size() - 2 && calcMode.equals("discrete") && percentageComplete > afterTime) {
-					beforeNumberList = new SVGNumberListImpl((String) vals.elementAt(i + 1));
-					afterNumberList = new SVGNumberListImpl((String) vals.elementAt(i + 1));
+					beforeNumberList = new SVGNumberListImpl(vals.get(i + 1));
+					afterNumberList = new SVGNumberListImpl(vals.get(i + 1));
 					break;
 				}
 				splineIndex++;
@@ -649,8 +643,7 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 						}
 						return currentList;
 					} else {
-						System.out.println(
-								"cannot animate number list, all lists need to contain the same number of items");
+						log.info("cannot animate number list, all lists need to contain the same number of items");
 						return null;
 					}
 
@@ -687,7 +680,7 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 					}
 					return currentList;
 				} else {
-					System.out.println("cannot animate length list, from and to lists have different number of items");
+					log.info("cannot animate length list, from and to lists have different number of items");
 					return null;
 				}
 
@@ -706,7 +699,7 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 					}
 					return currentList;
 				} else {
-					System.out.println("cannot animate length list, from and by lists have different number of items");
+					log.info("cannot animate length list, from and by lists have different number of items");
 					return null;
 				}
 			}
@@ -752,16 +745,16 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 			SVGAngleImpl afterAngle = null;
 			int splineIndex = 0;
 			for (int i = 0; i < times.size() - 1; i++) {
-				beforeTime = (Float) times.elementAt(i);
-				afterTime = (Float) times.elementAt(i + 1);
+				beforeTime = times.get(i);
+				afterTime = times.get(i + 1);
 				if (percentageComplete >= beforeTime && percentageComplete <= afterTime) {
-					beforeAngle = new SVGAngleImpl((String) vals.elementAt(i));
-					afterAngle = new SVGAngleImpl((String) vals.elementAt(i + 1));
+					beforeAngle = new SVGAngleImpl(vals.get(i));
+					afterAngle = new SVGAngleImpl(vals.get(i + 1));
 					break;
 				}
 				if (i == times.size() - 2 && calcMode.equals("discrete") && percentageComplete > afterTime) {
-					beforeAngle = new SVGAngleImpl((String) vals.elementAt(i + 1));
-					afterAngle = new SVGAngleImpl((String) vals.elementAt(i + 1));
+					beforeAngle = new SVGAngleImpl(vals.get(i + 1));
+					afterAngle = new SVGAngleImpl(vals.get(i + 1));
 					break;
 				}
 				splineIndex++;

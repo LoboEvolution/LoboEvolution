@@ -26,7 +26,7 @@
 
 package org.loboevolution.pdfview.function.postscript.operation;
 
-import java.util.Stack;
+import java.util.Deque;
 
 final class Roll implements PostScriptOperation {
 	
@@ -36,7 +36,7 @@ final class Roll implements PostScriptOperation {
 	 * @param st a {@link java.util.Stack} object.
 	 * @return a int.
 	 */
-	public static int popAsInteger(final Stack<Object> st) {
+	public static int popAsInteger(final Deque<Object> st) {
 		final Object e = st.pop();
 		if (e instanceof Double) {
 			final double doubleVal = (Double) e;
@@ -49,7 +49,7 @@ final class Roll implements PostScriptOperation {
 
 	/** {@inheritDoc} */
 	@Override
-	public void eval(final Stack<Object> environment) {
+	public void eval(final Deque<Object> environment) {
 	    // <i>anyn-1 ... any0 n j</i> <b>roll</b> <i>any(j-1)mod n ... anyn-1 ... any</i>
 	    // Roll n elements up j times
 		int j = popAsInteger(environment);

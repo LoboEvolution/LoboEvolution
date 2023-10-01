@@ -479,21 +479,7 @@ class Lexer {
       try {
         if (prefix.length() > 0) uName = m_namespaceContext.getNamespaceForPrefix(prefix);
         else {
-
-          // Assume last was wildcard. This is not legal according
-          // to the draft. Set the below to true to make namespace
-          // wildcards work.
-          if (false) {
-            addToTokenQueue(":");
-
-            final String s = pat.substring(posOfNSSep + 1, posOfScan);
-
-            if (s.length() > 0) addToTokenQueue(s);
-
-            return -1;
-          } else {
-            uName = m_namespaceContext.getNamespaceForPrefix(prefix);
-          }
+          uName = m_namespaceContext.getNamespaceForPrefix(prefix);
         }
       } catch (final ClassCastException cce) {
         uName = m_namespaceContext.getNamespaceForPrefix(prefix);

@@ -25,6 +25,7 @@
  */
 package org.loboevolution.apache.xpath.axes;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.apache.xml.utils.WrappedRuntimeException;
 import org.loboevolution.apache.xpath.Expression;
 import org.loboevolution.apache.xpath.XPathContext;
@@ -35,6 +36,7 @@ import org.loboevolution.apache.xpath.patterns.NodeTest;
 import org.loboevolution.apache.xml.dtm.DTM;
 import org.loboevolution.apache.xml.dtm.DTMIterator;
 
+@Slf4j
 public abstract class PredicatedNodeTest extends NodeTest implements SubContextList {
 
   /**
@@ -222,7 +224,6 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
       throws org.loboevolution.javax.xml.transform.TransformerException {
 
     final int nPredicates = getPredicateCount();
-    // System.out.println("nPredicates: "+nPredicates);
     if (nPredicates == 0) return true;
 
     try {
@@ -233,33 +234,26 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
 
       for (int i = 0; i < nPredicates; i++) {
         final XObject pred = m_predicates[i].execute(xctxt);
-        // System.out.println("\nBack from executing predicate expression - waiting
-        // count:
-        // "+m_lpi.getWaitingCount());
-        // System.out.println("pred.getType(): "+pred.getType());
         if (XObject.CLASS_NUMBER == pred.getType()) {
           if (DEBUG_PREDICATECOUNTING) {
-            System.out.flush();
-            System.out.println("\n===== start predicate count ========");
-            System.out.println("m_predicateIndex: " + m_predicateIndex);
-            // System.out.println("getProximityPosition(m_predicateIndex): "
-            // + getProximityPosition(m_predicateIndex));
-            System.out.println("pred.num(): " + pred.num());
+            log.info("\n===== start predicate count ========");
+            log.info("m_predicateIndex: {} ", m_predicateIndex);
+            log.info("pred.num(): {} ", pred.num());
           }
 
           final int proxPos = this.getProximityPosition(m_predicateIndex);
           final int predIndex = (int) pred.num();
           if (proxPos != predIndex) {
             if (DEBUG_PREDICATECOUNTING) {
-              System.out.println("\nnode context: " + nodeToString(context));
-              System.out.println("index predicate is false: " + proxPos);
-              System.out.println("\n===== end predicate count ========");
+              log.info("\nnode context: {} ", nodeToString(context));
+              log.info("index predicate is false: {} ", proxPos);
+              log.info("\n===== end predicate count ========");
             }
             return false;
           } else if (DEBUG_PREDICATECOUNTING) {
-            System.out.println("\nnode context: " + nodeToString(context));
-            System.out.println("index predicate is true: " + proxPos);
-            System.out.println("\n===== end predicate count ========");
+            log.info("\nnode context: {} ", nodeToString(context));
+            log.info("index predicate is true: {} ",  proxPos);
+            log.info("\n===== end predicate count ========");
           }
 
           // If there is a proximity index that will not change during the
@@ -320,10 +314,7 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
 
     try {
       xctxt.pushCurrentNode(n);
-
       final XObject score = execute(xctxt, n);
-
-      // System.out.println("\n::acceptNode - score: "+score.num()+"::");
       if (score != NodeTest.SCORE_NONE) {
         if (getPredicateCount() > 0) {
           countProximityPosition(0);

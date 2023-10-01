@@ -26,7 +26,7 @@
 
 package org.loboevolution.pdfview.function.postscript.operation;
 
-import java.util.Stack;
+import java.util.Deque;
 
 final class Bitshift implements PostScriptOperation {
 	@Override
@@ -45,7 +45,7 @@ final class Bitshift implements PostScriptOperation {
 	 *
 	 * errors: stackunderflow, typecheck
 	 */
-	public void eval(final Stack<Object> environment) {
+	public void eval(final Deque<Object> environment) {
 	    final long shift = (Long)environment.pop();
 	    final long int1 = (Long)environment.pop();
 	    environment.push(int1 << shift);

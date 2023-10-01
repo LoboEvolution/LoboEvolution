@@ -46,10 +46,7 @@ import java.awt.image.IndexColorModel;
 import java.awt.image.Kernel;
 import java.awt.image.WritableRaster;
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * This class turns a set of PDF Commands from a PDF page into an image.  It
@@ -77,7 +74,7 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
     /** the current graphics state */
     private GraphicsState state;
     /** the stack of push()ed graphics states */
-    private Stack<GraphicsState> stack;
+    private Deque<GraphicsState> stack;
     /** the total region of this image that has been written to */
     private Rectangle2D globalDirtyRegion;
     /** the image observers that will be updated when this image changes */
@@ -187,7 +184,7 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
         this.state.xform = g.getTransform();
 
         // initialize the stack
-        this.stack = new Stack<>();
+        this.stack = new ArrayDeque<>();
 
         // initialize the current command
         this.currentCommand = 0;

@@ -26,7 +26,7 @@
 
 package org.loboevolution.pdfview.function.postscript.operation;
 
-import java.util.Stack;
+import java.util.Deque;
 
 final class Floor implements PostScriptOperation {
 	@Override
@@ -41,7 +41,7 @@ final class Floor implements PostScriptOperation {
 	 *
 	 * errors: stackunderflow, typecheck
 	 */
-	public void eval(final Stack<Object> environment) {
+	public void eval(final Deque<Object> environment) {
 	    environment.push(Math.floor((Double)environment.pop()));
 	}
 }

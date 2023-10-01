@@ -6,6 +6,8 @@
 
 package org.mozilla.javascript;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.lang.reflect.Array;
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -20,6 +22,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * @see NativeJavaPackage
  * @see NativeJavaClass
  */
+@Slf4j
 public class NativeJavaMethod extends BaseFunction {
 
     private static final long serialVersionUID = -3440381785576412928L;
@@ -515,7 +518,7 @@ public class NativeJavaMethod extends BaseFunction {
             sb.append(" for arguments (");
             sb.append(scriptSignature(args));
             sb.append(')');
-            System.out.println(sb);
+            log.info(sb.toString());
         }
     }
 

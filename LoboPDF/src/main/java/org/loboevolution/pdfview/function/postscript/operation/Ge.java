@@ -26,7 +26,7 @@
 
 package org.loboevolution.pdfview.function.postscript.operation;
 
-import java.util.Stack;
+import java.util.Deque;
 
 
 final class Ge implements PostScriptOperation {
@@ -49,7 +49,7 @@ final class Ge implements PostScriptOperation {
 	 *
 	 * errors: invalidaccess, stackunderflow, typecheck
 	 */
-	public void eval(final Stack<Object> environment) {
+	public void eval(final Deque<Object> environment) {
 	    final double num2 = (Double)environment.pop();
 	    final double num1 = (Double)environment.pop();
 	    environment.push(num1 >= num2);

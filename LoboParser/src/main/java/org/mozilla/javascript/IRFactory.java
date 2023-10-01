@@ -8,6 +8,8 @@ package org.mozilla.javascript;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import lombok.extern.slf4j.Slf4j;
 import org.mozilla.javascript.ast.ArrayComprehension;
 import org.mozilla.javascript.ast.ArrayComprehensionLoop;
 import org.mozilla.javascript.ast.ArrayLiteral;
@@ -83,6 +85,7 @@ import org.mozilla.javascript.ast.Yield;
  * @author Mike McCabe
  * @author Norris Boyd
  */
+@Slf4j
 public final class IRFactory extends Parser {
     private static final int LOOP_DO_WHILE = 0;
     private static final int LOOP_WHILE = 1;
@@ -115,8 +118,8 @@ public final class IRFactory extends Parser {
         int sourceStartOffset = decompiler.getCurrentOffset();
 
         if (Token.printTrees) {
-            System.out.println("IRFactory.transformTree");
-            System.out.println(root.debugPrint());
+            log.info("IRFactory.transformTree");
+            log.info(root.debugPrint());
         }
         ScriptNode script = (ScriptNode) transform(root);
 
@@ -1943,7 +1946,6 @@ public final class IRFactory extends Parser {
             if (ifFalse != null) {
                 return ifFalse;
             }
-            // Replace if (false) xxx by empty block
             return new Node(Token.BLOCK, lineno);
         }
 

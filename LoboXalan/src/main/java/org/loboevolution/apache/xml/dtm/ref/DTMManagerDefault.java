@@ -25,6 +25,7 @@
  */
 package org.loboevolution.apache.xml.dtm.ref;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.html.node.Attr;
 import org.loboevolution.javax.xml.transform.Source;
 import org.loboevolution.javax.xml.transform.dom.DOMSource;
@@ -54,6 +55,7 @@ import org.loboevolution.html.node.Node;
  * activity (eg, when getDTM() is invoked). The downside of that solution would be a greater delay
  * before the DTM's storage is actually released for reuse.
  */
+@Slf4j
 public class DTMManagerDefault extends DTMManager {
   // static final boolean JKESS_XNI_EXPERIMENT=true;
 
@@ -155,8 +157,7 @@ public class DTMManagerDefault extends DTMManager {
           final Source source, final boolean unique, final boolean incremental, final boolean doIndexing) {
 
     if (DEBUG && null != source)
-      System.out.println(
-          "Starting " + (unique ? "UNIQUE" : "shared") + " source: " + source.getSystemId());
+      log.info("Starting {} source: {}", (unique ? "UNIQUE" : "shared"), source.getSystemId());
 
     final int dtmPos = getFirstFreeDTMID();
     final int documentID = dtmPos << IDENT_DTM_NODE_BITS;

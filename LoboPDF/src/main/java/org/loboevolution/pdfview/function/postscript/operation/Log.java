@@ -26,7 +26,7 @@
 
 package org.loboevolution.pdfview.function.postscript.operation;
 
-import java.util.Stack;
+import java.util.Deque;
 
 
 final class Log implements PostScriptOperation {
@@ -41,7 +41,7 @@ final class Log implements PostScriptOperation {
 	 *
 	 * errors:  rangecheck, stackunderflow, typecheck
 	 */
-	public void eval(final Stack<Object> environment) {
+	public void eval(final Deque<Object> environment) {
 	    environment.push(Math.log10((Double)environment.pop()));
 	}
 }

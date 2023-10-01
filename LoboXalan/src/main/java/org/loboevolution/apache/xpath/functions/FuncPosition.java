@@ -50,16 +50,11 @@ public class FuncPosition extends Function {
    *     active context node list.
    */
   public int getPositionInContextNodeList(final XPathContext xctxt) {
-
-    // System.out.println("FuncPosition- entry");
-    // If we're in a predicate, then this will return non-null.
     final SubContextList iter = m_isTopLevel ? null : xctxt.getSubContextList();
 
     if (null != iter) {
       return iter.getProximityPosition(xctxt);
     }
-
-    // System.out.println("FuncPosition - out of guesses: -1");
     return -1;
   }
 

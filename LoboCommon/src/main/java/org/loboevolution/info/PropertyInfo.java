@@ -33,6 +33,7 @@ import java.lang.reflect.Method;
  * <p>PropertyInfo class.</p>
  */
 @Data
+
 public class PropertyInfo {
 
 	/** The getter. */
@@ -54,7 +55,6 @@ public class PropertyInfo {
 	 * @param propType a {@link java.lang.Class} object.
 	 */
 	public PropertyInfo(final String name, final Class propType) {
-		super();
 		this.name = name;
 		this.propertyType = propType;
 	}

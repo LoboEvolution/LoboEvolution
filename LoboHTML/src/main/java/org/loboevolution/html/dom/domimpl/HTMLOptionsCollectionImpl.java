@@ -26,6 +26,7 @@
 
 package org.loboevolution.html.dom.domimpl;
 
+import lombok.extern.slf4j.Slf4j;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.HTMLOptionElement;
@@ -40,6 +41,7 @@ import java.util.List;
 /**
  * <p>HTMLOptionsCollectionImpl class.</p>
  */
+@Slf4j
 public class HTMLOptionsCollectionImpl extends HTMLCollectionImpl implements HTMLOptionsCollection {
 
 	private final NodeImpl rootNode;
@@ -115,7 +117,7 @@ public class HTMLOptionsCollectionImpl extends HTMLCollectionImpl implements HTM
 				} else if (d < getLength() && !selctElement.isMultiple()) {
 					addElementIndex((HTMLOptionElementImpl) element, getLength());
 				} else {
-					System.out.println("not found");
+					log.info("not found");
 				}
 			}
 

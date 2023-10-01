@@ -105,7 +105,6 @@ public class HTMLFormElementImpl extends HTMLElementImpl implements HTMLFormElem
 					final NamedNodeMap attributes = node.getAttributes();
 					for (final Node attribute : Nodes.iterable(attributes)) {
 						if (getName().equals(attribute.getNodeValue())) {
-							System.out.println(getName());
 							list.add(node);
 						}
 					}
@@ -129,7 +128,6 @@ public class HTMLFormElementImpl extends HTMLElementImpl implements HTMLFormElem
 				final NamedNodeMap attributes = nde.getAttributes();
 				for (final Node attribute : Nodes.iterable(attributes)) {
 					if (getName().equals(attribute.getNodeValue())) {
-						System.out.println(getName());
 						list.add(node);
 					}
 				}

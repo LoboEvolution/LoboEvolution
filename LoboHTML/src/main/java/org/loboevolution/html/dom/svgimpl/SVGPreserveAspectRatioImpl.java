@@ -26,11 +26,13 @@
 
 package org.loboevolution.html.dom.svgimpl;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.html.dom.svg.SVGPreserveAspectRatio;
 
 /**
  * <p>SVGPreserveAspectRatioImpl class.</p>
  */
+@Slf4j
 public class SVGPreserveAspectRatioImpl implements SVGPreserveAspectRatio {
 
     protected short align;
@@ -158,8 +160,7 @@ public class SVGPreserveAspectRatioImpl implements SVGPreserveAspectRatio {
         if (meetOrSliceString.equalsIgnoreCase("slice")) {
             return SVG_MEETORSLICE_SLICE;
         }
-        System.out.println("Cannot decode preserveAspectRatio meetOrSlice value: " + meetOrSliceString
-                + ", returning default value MEET");
+        log.info("Cannot decode preserveAspectRatio meetOrSlice value: {} , returning default value MEET",  meetOrSliceString);
         return SVG_MEETORSLICE_MEET;
     }
 

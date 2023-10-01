@@ -47,7 +47,7 @@ public class XMLSerializerImpl extends AbstractScriptableDelegate implements XML
     @Override
     public String serializeToString(final Node node) {
         try {
-            final StringBuffer buff = new StringBuffer();
+            final StringBuilder buff = new StringBuilder();
 			if (node instanceof Document) {
 				final NodeListImpl children = (NodeListImpl)node.getChildNodes();
 				children.forEach(elem -> getXString((Element) elem, true, buff, true));
@@ -61,7 +61,7 @@ public class XMLSerializerImpl extends AbstractScriptableDelegate implements XML
         return "";
     }
 
-    public static void getXString(final Element node, final boolean withoutNamespaces, final StringBuffer buff, boolean endTag) {
+    public static void getXString(final Element node, final boolean withoutNamespaces, final StringBuilder buff, boolean endTag) {
         try {
 
             buff.append("<")

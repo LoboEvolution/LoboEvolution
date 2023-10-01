@@ -25,6 +25,7 @@
  */
 package org.loboevolution.apache.xpath.axes;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.apache.xpath.Expression;
 import org.loboevolution.apache.xpath.compiler.Compiler;
 import org.loboevolution.apache.xpath.compiler.FunctionTable;
@@ -47,6 +48,7 @@ import org.loboevolution.javax.xml.transform.TransformerException;
  * map output, and an analysis engine for the location path expressions in order to provide
  * optimization hints.
  */
+@Slf4j
 public class WalkerFactory {
 
   /**
@@ -97,14 +99,7 @@ public class WalkerFactory {
   }
 
   public static void diagnoseIterator(final String name, final int analysis, final Compiler compiler) {
-    System.out.println(
-        compiler.toString()
-            + ", "
-            + name
-            + ", "
-            + Integer.toBinaryString(analysis)
-            + ", "
-            + getAnalysisString(analysis));
+    log.info("{}, {}, {}, {}", compiler.toString(), name, Integer.toBinaryString(analysis), getAnalysisString(analysis));
   }
 
   /**
@@ -160,16 +155,11 @@ public class WalkerFactory {
     } else if (isOneStep && !walksFilteredList(analysis)) {
       if (!walksNamespaces(analysis)
           && (walksInDocOrder(analysis) || isSet(analysis, BIT_PARENT))) {
-        if (false || DEBUG_ITERATOR_CREATION)
-          diagnoseIterator("OneStepIteratorForward", analysis, compiler);
 
         // Then use a simple iteration of the attributes, with node test
         // and predicate testing.
         iter = new OneStepIteratorForward(compiler, opPos, analysis);
       } else {
-        if (false || DEBUG_ITERATOR_CREATION)
-          diagnoseIterator("OneStepIterator", analysis, compiler);
-
         // Then use a simple iteration of the attributes, with node test
         // and predicate testing.
         iter = new OneStepIterator(compiler, opPos, analysis);
@@ -198,10 +188,6 @@ public class WalkerFactory {
       iter = new DescendantIterator(compiler, opPos, analysis);
     } else {
       if (isNaturalDocOrder(compiler, firstStepPos, analysis)) {
-        if (false || DEBUG_ITERATOR_CREATION) {
-          diagnoseIterator("WalkingIterator", analysis, compiler);
-        }
-
         iter = new WalkingIterator(compiler, opPos, analysis, true);
       } else {
         // if (DEBUG_ITERATOR_CREATION)
@@ -328,9 +314,6 @@ public class WalkerFactory {
     final int endFunc = opPos + compiler.getOp(opPos + 1) - 1;
     opPos = OpMap.getFirstChildPos(opPos);
     final int funcID = compiler.getOp(opPos);
-    // System.out.println("funcID: "+funcID);
-    // System.out.println("opPos: "+opPos);
-    // System.out.println("endFunc: "+endFunc);
     switch (funcID) {
       case FunctionTable.FUNC_LAST:
       case FunctionTable.FUNC_POSITION:
@@ -678,8 +661,8 @@ public class WalkerFactory {
   static StepPattern loadSteps(final Compiler compiler, final int stOpCodePos)
       throws TransformerException {
     if (DEBUG_PATTERN_CREATION) {
-      System.out.println("================");
-      System.out.println("loadSteps for: " + compiler.getPatternString());
+      log.info("================");
+      log.info("loadSteps for: {} ", compiler.getPatternString());
     }
     StepPattern step = null;
     StepPattern firstStep = null, prevStep = null;
@@ -785,9 +768,7 @@ public class WalkerFactory {
     }
 
     if (DEBUG_PATTERN_CREATION) {
-      System.out.println("Done loading steps: " + step.toString());
-
-      System.out.println();
+      log.info("Done loading steps: {} ", step.toString());
     }
     return step; // start from last pattern?? //firstStep;
   }
@@ -937,15 +918,6 @@ public class WalkerFactory {
 
     final AxesWalker ai;
     final int stepType = compiler.getOp(opPos);
-
-    /*
-     * System.out.println("0: "+compiler.getOp(opPos));
-     * System.out.println("1: "+compiler.getOp(opPos+1));
-     * System.out.println("2: "+compiler.getOp(opPos+2));
-     * System.out.println("3: "+compiler.getOp(opPos+3));
-     * System.out.println("4: "+compiler.getOp(opPos+4));
-     * System.out.println("5: "+compiler.getOp(opPos+5));
-     */
     boolean simpleInit = false;
 
     switch (stepType) {
@@ -954,7 +926,7 @@ public class WalkerFactory {
       case OpCodes.OP_FUNCTION:
       case OpCodes.OP_GROUP:
         if (DEBUG_WALKER_CREATION)
-          System.out.println("new walker:  FilterExprWalker: " + analysis + ", " + compiler);
+          log.info("new walker:  FilterExprWalker:  {}, {} ", analysis, compiler);
 
         ai = new FilterExprWalker(lpi);
         simpleInit = true;

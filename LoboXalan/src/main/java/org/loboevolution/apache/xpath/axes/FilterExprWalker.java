@@ -125,8 +125,6 @@ public class FilterExprWalker extends AxesWalker {
       // and then restore the variable context.
 
       if (isTopLevel) {
-        // System.out.println("calling m_expr.execute(getXPathContext())");
-
         result = (XNodeSet) expr.execute(xctxt);
         result.setShouldCacheNodes(true);
       } else result = (XNodeSet) expr.execute(xctxt);

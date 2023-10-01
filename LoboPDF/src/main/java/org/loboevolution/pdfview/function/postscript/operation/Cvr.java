@@ -26,7 +26,7 @@
 
 package org.loboevolution.pdfview.function.postscript.operation;
 
-import java.util.Stack;
+import java.util.Deque;
 
 final class Cvr implements PostScriptOperation {
 	@Override
@@ -48,7 +48,7 @@ final class Cvr implements PostScriptOperation {
 	 * errors: invalidaccess, limitcheck, stackunderflow,
 	 *         syntaxerror, typecheck, undefinedresult
 	 */
-	public void eval(final Stack<Object> environment) {
+	public void eval(final Deque<Object> environment) {
 	    // YOUR CODE IN THIS SPACE
 	}
 }

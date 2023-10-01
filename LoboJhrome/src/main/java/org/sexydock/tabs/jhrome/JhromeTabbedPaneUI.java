@@ -112,7 +112,7 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
     private ITabbedPaneDndPolicy dndPolicy = null;
     private final List<ITabbedPaneListener> tabListeners = new ArrayList<>();
     private Handler handler = new Handler();
-    private Hashtable<Integer, Integer> mnemonicToIndexMap;
+    private HashMap<Integer, Integer> mnemonicToIndexMap;
     /**
      * InputMap used for mnemonics. Only non-null if the JTabbedPane has mnemonics associated with it. Lazily created in initMnemonics.
      */
@@ -1152,7 +1152,7 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
      * Installs the state needed for mnemonics.
      */
     private void initMnemonics() {
-        mnemonicToIndexMap = new Hashtable<>();
+        mnemonicToIndexMap = new HashMap<>();
         mnemonicInputMap = new ComponentInputMapUIResource(tabbedPane);
         mnemonicInputMap.setParent(SwingUtilities.getUIInputMap(tabbedPane, JComponent.WHEN_IN_FOCUSED_WINDOW));
         SwingUtilities.replaceUIInputMap(tabbedPane, JComponent.WHEN_IN_FOCUSED_WINDOW, mnemonicInputMap);

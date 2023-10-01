@@ -31,9 +31,6 @@ import org.htmlunit.cssparser.dom.DOMException;
 
 /**
  * <p>SVGPreserveAspectRatio interface.</p>
- *
- *
- *
  */
 public interface SVGPreserveAspectRatio {
 	// Alignment Types

@@ -26,7 +26,7 @@
 
 package org.loboevolution.pdfview.function.postscript.operation;
 
-import java.util.Stack;
+import java.util.Deque;
 	final class Copy implements PostScriptOperation {
 		@Override
 		/**
@@ -74,7 +74,7 @@ import java.util.Stack;
 		 * errors: invalidaccess, rangecheck, stackoverflow,
 		 * stackunderflow, typecheck
 		 */
-		public void eval(final Stack<Object> environment) {
+		public void eval(final Deque<Object> environment) {
 		    final Number count = (Number) environment.pop();
 // ????
 		    final Object[] buffer = new Object[count.intValue()];

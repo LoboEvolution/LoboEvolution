@@ -25,12 +25,14 @@
  */
 package org.loboevolution.apache.xpath.functions;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.apache.xpath.Expression;
 import org.loboevolution.apache.xpath.XPathContext;
 import org.loboevolution.apache.xpath.XPathVisitor;
 import org.loboevolution.apache.xpath.compiler.Compiler;
 import org.loboevolution.apache.xpath.objects.XObject;
 import org.loboevolution.apache.xpath.res.XPATHMessages;
+import org.loboevolution.javax.xml.transform.TransformerException;
 
 /**
  * This is a superclass of all XPath functions. This allows two ways for the class to be called. One
@@ -38,6 +40,7 @@ import org.loboevolution.apache.xpath.res.XPATHMessages;
  * class, the other method is that the derived class may process it's own arguments, which is faster
  * since the arguments don't have to be added to an array, but causes a larger code footprint.
  */
+@Slf4j
 public abstract class Function extends Expression {
 
   /**
@@ -77,11 +80,8 @@ public abstract class Function extends Expression {
 
   /** {@inheritDoc} */
   @Override
-  public XObject execute(final XPathContext xctxt) throws org.loboevolution.javax.xml.transform.TransformerException {
-
-    // Programmer's assert. (And, no, I don't want the method to be abstract).
-    System.out.println("Error! Function.execute should not be called!");
-
+  public XObject execute(final XPathContext xctxt) throws TransformerException {
+    log.info("Error! Function.execute should not be called!");
     return null;
   }
 

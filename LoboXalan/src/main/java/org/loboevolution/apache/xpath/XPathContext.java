@@ -25,7 +25,9 @@
  */
 package org.loboevolution.apache.xpath;
 
-import java.util.Stack;
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.Deque;
 import org.loboevolution.javax.xml.transform.ErrorListener;
 import org.loboevolution.javax.xml.transform.URIResolver;
 
@@ -124,13 +126,13 @@ public class XPathContext extends DTMManager {
   public void reset() {
     m_dtmManager = DTMManager.newInstance();
 
-    m_axesIteratorStack.removeAllElements();
-    m_currentExpressionNodes.removeAllElements();
-    m_currentNodes.removeAllElements();
+    m_axesIteratorStack.clear();
+    m_currentExpressionNodes.clear();
+    m_currentNodes.clear();
     m_iteratorRoots.RemoveAllNoClear();
-    m_predicatePos.removeAllElements();
+    m_predicatePos.clear();
     m_predicateRoots.RemoveAllNoClear();
-    m_prefixResolvers.removeAllElements();
+    m_prefixResolvers.clear();
 
     m_prefixResolvers.push(null);
     m_currentNodes.push(DTM.NULL);
@@ -212,7 +214,7 @@ public class XPathContext extends DTMManager {
    * to be confused with the current node list. %REVIEW% Note that there are no bounds check and
    * resize for this stack, so if it is blown, it's all over.
    */
-  private final Stack<Integer> m_currentNodes = new Stack<>();
+  private final Deque<Integer> m_currentNodes = new ArrayDeque<>();
 
   /**
    * Get the current context node.
@@ -265,9 +267,9 @@ public class XPathContext extends DTMManager {
   private final NodeVector m_predicateRoots = new NodeVector();
 
   /** A stack of the current sub-expression nodes. */
-  private final Stack<Integer> m_currentExpressionNodes = new Stack<>();
+  private final Deque<Integer> m_currentExpressionNodes = new ArrayDeque<>();
 
-  private final Stack<Integer> m_predicatePos = new Stack<>();
+  private final Deque<Integer> m_predicatePos = new ArrayDeque<>();
 
   public final int getPredicatePos() {
     return m_predicatePos.peek();
@@ -281,7 +283,7 @@ public class XPathContext extends DTMManager {
     m_predicatePos.pop();
   }
 
-  private final Stack<PrefixResolver> m_prefixResolvers = new Stack<>();
+  private final Deque<PrefixResolver> m_prefixResolvers = new ArrayDeque<>();
 
   /**
    * Get the current namespace context for the xpath.
@@ -321,7 +323,7 @@ public class XPathContext extends DTMManager {
   // ==========================================================
 
   /** Stack of AxesIterators. */
-  private final Stack<SubContextList> m_axesIteratorStack = new Stack<>();
+  private final Deque<SubContextList> m_axesIteratorStack = new ArrayDeque<>();
 
   /**
    * Push a TreeWalker on the stack.

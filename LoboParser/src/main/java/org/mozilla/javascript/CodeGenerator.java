@@ -8,6 +8,8 @@ package org.mozilla.javascript;
 
 import java.math.BigInteger;
 import java.util.List;
+
+import lombok.extern.slf4j.Slf4j;
 import org.mozilla.javascript.ast.AstNode;
 import org.mozilla.javascript.ast.AstRoot;
 import org.mozilla.javascript.ast.Block;
@@ -19,6 +21,7 @@ import org.mozilla.javascript.ast.TemplateCharacters;
 import org.mozilla.javascript.ast.VariableInitializer;
 
 /** Generates bytecode for the Interpreter. */
+@Slf4j
 class CodeGenerator extends Icode {
 
     private static final int MIN_LABEL_TABLE_SIZE = 32;
@@ -61,15 +64,15 @@ class CodeGenerator extends Icode {
         this.compilerEnv = compilerEnv;
 
         if (Token.printTrees) {
-            System.out.println("before transform:");
-            System.out.println(tree.toStringTree(tree));
+            log.info("before transform:");
+            log.info(tree.toStringTree(tree));
         }
 
         new NodeTransformer().transform(tree, compilerEnv);
 
         if (Token.printTrees) {
-            System.out.println("after transform:");
-            System.out.println(tree.toStringTree(tree));
+            log.info("after transform:");
+            log.info(tree.toStringTree(tree));
         }
 
         if (returnFunction) {

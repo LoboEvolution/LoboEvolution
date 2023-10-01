@@ -33,15 +33,16 @@ import org.loboevolution.html.node.DOMImplementationSource;
 import java.lang.reflect.InvocationTargetException;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
+import java.util.ArrayList;
 import java.util.StringTokenizer;
-import java.util.Vector;
+import java.util.List;
 
 public final class DOMImplementationRegistry {
 
     /**
      * The list of DOMImplementationSources.
      */
-    private final Vector sources;
+    private final List<DOMImplementationSource> sources;
 
     /**
      * Default class name.
@@ -56,7 +57,7 @@ public final class DOMImplementationRegistry {
      *
      * @param srcs Vector List of DOMImplementationSources
      */
-    private DOMImplementationRegistry(final Vector srcs) {
+    private DOMImplementationRegistry(final List<DOMImplementationSource> srcs) {
         sources = srcs;
     }
 
@@ -88,7 +89,7 @@ public final class DOMImplementationRegistry {
             InstantiationException,
             IllegalAccessException,
             ClassCastException {
-        final Vector sources = new Vector();
+        final List<DOMImplementationSource> sources = new ArrayList<>();
 
         final ClassLoader classLoader = getClassLoader();
         final StringTokenizer st = new StringTokenizer(FALLBACK_CLASS);
@@ -110,7 +111,7 @@ public final class DOMImplementationRegistry {
             try {
                 final DOMImplementationSourceImpl source =
                         (DOMImplementationSourceImpl) sourceClass.getConstructor().newInstance();
-                sources.addElement(source);
+                sources.add(source);
             } catch (final NoSuchMethodException | InvocationTargetException e) {
                 throw new InstantiationException(e.getMessage());
             }
@@ -133,8 +134,7 @@ public final class DOMImplementationRegistry {
         final int size = sources.size();
         final String name = null;
         for (int i = 0; i < size; i++) {
-            final DOMImplementationSourceImpl source =
-                    (DOMImplementationSourceImpl) sources.elementAt(i);
+            final DOMImplementationSource source = sources.get(i);
             final DOMImplementation impl = source.getDOMImplementation(features);
             if (impl != null) {
                 return impl;
@@ -154,23 +154,21 @@ public final class DOMImplementationRegistry {
      * @return A list of DOMImplementations that support the desired features.
      */
     public DOMImplementationList getDOMImplementationList(final String features) {
-        final Vector implementations = new Vector();
+        final List<DOMImplementation> implementations = new ArrayList<>();
         final int size = sources.size();
         for (int i = 0; i < size; i++) {
-            final DOMImplementationSource source = (DOMImplementationSource) sources.elementAt(i);
-            final DOMImplementationList impls =
-                    source.getDOMImplementationList(features);
+            final DOMImplementationSource source = sources.get(i);
+            final DOMImplementationList impls = source.getDOMImplementationList(features);
             for (int j = 0; j < impls.getLength(); j++) {
                 final DOMImplementation impl = impls.item(j);
-                implementations.addElement(impl);
+                implementations.add(impl);
             }
         }
         return new DOMImplementationList() {
             public DOMImplementation item(final int index) {
                 if (index >= 0 && index < implementations.size()) {
                     try {
-                        return (DOMImplementation)
-                                implementations.elementAt(index);
+                        return implementations.get(index);
                     } catch (final ArrayIndexOutOfBoundsException e) {
                         return null;
                     }
@@ -194,7 +192,7 @@ public final class DOMImplementationRegistry {
             throw new NullPointerException();
         }
         if (!sources.contains(s)) {
-            sources.addElement(s);
+            sources.add(s);
         }
     }
 

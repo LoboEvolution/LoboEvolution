@@ -9,12 +9,15 @@ import java.io.StringWriter;
 import java.util.BitSet;
 import java.util.HashMap;
 import java.util.Map;
+
+import lombok.extern.slf4j.Slf4j;
 import org.mozilla.javascript.Node;
 import org.mozilla.javascript.ObjArray;
 import org.mozilla.javascript.ObjToIntMap;
 import org.mozilla.javascript.Token;
 import org.mozilla.javascript.ast.Jump;
 
+@Slf4j
 class Block {
 
     private static class FatBlock {
@@ -80,14 +83,9 @@ class Block {
 
         if (DEBUG) {
             ++debug_blockCount;
-            System.out.println(
-                    "-------------------"
-                            + fn.fnode.getFunctionName()
-                            + "  "
-                            + debug_blockCount
-                            + "--------");
-            System.out.println(fn.fnode.toStringTree(fn.fnode));
-            System.out.println(toString(theBlocks, statementNodes));
+            log.info("------------------- {} {} ------", fn.fnode.getFunctionName(), debug_blockCount);
+            log.info(fn.fnode.toStringTree(fn.fnode));
+            log.info(toString(theBlocks, statementNodes));
         }
 
         reachingDefDataFlow(fn, statementNodes, theBlocks, varTypes);
@@ -95,12 +93,12 @@ class Block {
 
         if (DEBUG) {
             for (Block theBlock : theBlocks) {
-                System.out.println("For block " + theBlock.itsBlockID);
+                log.info("For block {} ", theBlock.itsBlockID);
                 theBlock.printLiveOnEntrySet(fn);
             }
-            System.out.println("Variable Table, size = " + varCount);
+            log.info("Variable Table, size = {} " + varCount);
             for (int i = 0; i != varCount; i++) {
-                System.out.println("[" + i + "] type: " + varTypes[i]);
+                log.info("[" + i + "] type: {} ", varTypes[i]);
             }
         }
 
@@ -619,10 +617,10 @@ class Block {
         if (DEBUG) {
             for (int i = 0; i < fn.getVarCount(); i++) {
                 String name = fn.fnode.getParamOrVarName(i);
-                if (itsUseBeforeDefSet.get(i)) System.out.println(name + " is used before def'd");
-                if (itsNotDefSet.get(i)) System.out.println(name + " is not def'd");
-                if (itsLiveOnEntrySet.get(i)) System.out.println(name + " is live on entry");
-                if (itsLiveOnExitSet.get(i)) System.out.println(name + " is live on exit");
+                if (itsUseBeforeDefSet.get(i)) log.info(name + " is used before def'd");
+                if (itsNotDefSet.get(i)) log.info(name + " is not def'd");
+                if (itsLiveOnEntrySet.get(i)) log.info(name + " is live on entry");
+                if (itsLiveOnExitSet.get(i)) log.info(name + " is live on exit");
             }
         }
     }

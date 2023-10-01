@@ -100,7 +100,6 @@ public class DOMNodeTest extends LoboUnitTest {
 		elm.appendChild(document.createTextNode("   "));
 		assertEquals(6, elm.getChildNodes().getLength());
 		elm.normalize();
-		System.out.println(elm.getChildNodes().item(0).getNodeValue());
 		assertEquals(1, elm.getChildNodes().getLength());
 
 		html.appendChild(document.createTextNode("\n     "));

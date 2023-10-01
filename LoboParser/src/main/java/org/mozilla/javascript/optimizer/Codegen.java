@@ -17,6 +17,8 @@ import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import lombok.extern.slf4j.Slf4j;
 import org.mozilla.classfile.ByteCode;
 import org.mozilla.classfile.ClassFileWriter;
 import org.mozilla.javascript.CompilerEnvirons;
@@ -44,6 +46,7 @@ import org.mozilla.javascript.ast.TemplateCharacters;
  * @author Norris Boyd
  * @author Roger Lawrence
  */
+@Slf4j
 public class Codegen implements Evaluator {
     @Override
     public void captureStackInfo(RhinoException ex) {
@@ -160,7 +163,7 @@ public class Codegen implements Evaluator {
         transform(scriptOrFn);
 
         if (Token.printTrees) {
-            System.out.println(scriptOrFn.toStringTree(scriptOrFn));
+            log.info(scriptOrFn.toStringTree(scriptOrFn));
         }
 
         if (returnFunction) {

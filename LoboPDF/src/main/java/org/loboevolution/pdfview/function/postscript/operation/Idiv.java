@@ -26,7 +26,7 @@
 
 package org.loboevolution.pdfview.function.postscript.operation;
 
-import java.util.Stack;
+import java.util.Deque;
 
 final class Idiv implements PostScriptOperation {
 	@Override
@@ -42,7 +42,7 @@ final class Idiv implements PostScriptOperation {
 	 *
 	 * stackunderflow, typecheck, undefinedresult
 	 */
-	public void eval(final Stack<Object> environment) {
+	public void eval(final Deque<Object> environment) {
 	    final long int2 = (Long)environment.pop();
 	    final long int1 = (Long)environment.pop();
 	    environment.push(int1 / int2);

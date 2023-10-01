@@ -26,7 +26,7 @@
 
 package org.loboevolution.pdfview.function.postscript.operation;
 
-import java.util.Stack;
+import java.util.Deque;
 
 final class Dup implements PostScriptOperation {
 	@Override
@@ -42,7 +42,7 @@ final class Dup implements PostScriptOperation {
 	 *
 	 * errors: stackoverflow, stackunderflow
 	 */
-	public void eval(final Stack<Object> environment) {
+	public void eval(final Deque<Object> environment) {
 	    final Object obj = environment.pop();
 	    environment.push(obj);
 	    environment.push(obj);

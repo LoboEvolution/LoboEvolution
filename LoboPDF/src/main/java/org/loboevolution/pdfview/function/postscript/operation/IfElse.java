@@ -26,7 +26,7 @@
 
 package org.loboevolution.pdfview.function.postscript.operation;
 
-import java.util.Stack;
+import java.util.Deque;
 
 final class IfElse implements PostScriptOperation {
 	@Override
@@ -47,7 +47,7 @@ final class IfElse implements PostScriptOperation {
 	 *
 	 * errors: stackunderflow, typecheck
 	 */
-	public void eval(final Stack<Object> environment) {
+	public void eval(final Deque<Object> environment) {
 	    // execute expr1 if bool is true, expr2 if false
 	    if ((Boolean)environment.pop()) {
 //                        expression.push(popExpression());

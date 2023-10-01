@@ -50,12 +50,7 @@ public class FuncLast extends Function {
    */
   public int getCountOfContextNodeList(final XPathContext xctxt)
       throws org.loboevolution.javax.xml.transform.TransformerException {
-
-    // assert(null != m_contextNodeList, "m_contextNodeList must be non-null");
-    // If we're in a predicate, then this will return non-null.
     final SubContextList iter = m_isTopLevel ? null : xctxt.getSubContextList();
-
-    // System.out.println("iter: "+iter);
     if (null != iter) {
       return iter.getLastPos(xctxt);
     }

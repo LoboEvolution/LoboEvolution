@@ -35,6 +35,8 @@ import org.loboevolution.apache.xml.dtm.DTM;
 import org.loboevolution.apache.xml.dtm.DTMFilter;
 import org.loboevolution.html.node.traversal.NodeFilter;
 
+import java.util.Objects;
+
 /** This is the basic node test class for both match patterns and location path steps. */
 public class NodeTest extends Expression {
 
@@ -340,7 +342,7 @@ public class NodeTest extends Expression {
    * @return true if the strings match according to the rules of this method.
    */
   private static boolean subPartMatch(final String p, final String t) {
-    return (p == t) || ((null != p) && ((t == WILD) || p.equals(t)));
+    return Objects.equals(p, t) || (p != null && (Objects.equals(t, WILD)));
   }
 
   /**
@@ -352,8 +354,8 @@ public class NodeTest extends Expression {
    */
   private static boolean subPartMatchNS(final String p, final String t) {
 
-    return (p == t)
-        || ((null != p) && ((p.length() > 0) ? ((t == WILD) || p.equals(t)) : null == t));
+    return Objects.equals(p, t)
+            || (p != null && ((p.length() > 0) ? (Objects.equals(t, WILD) || Objects.equals(p, t)) : Objects.equals(null, t)));
   }
 
   /** {@inheritDoc} */

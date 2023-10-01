@@ -360,11 +360,6 @@ public class CCITT1D implements CCITTDecoder {
         BlackIs1 = blackIsOne;
 
         this.isByteAligned = isByteAligned;
-
-        //if(debug)
-        //    System.out.println("BlackIs1="+ BlackIs1 +"\ncolumnsSet="+columnsSet+"\nisByteAligned="+isByteAligned+"\nrowsSet="+rowsSet);
-
-        //and other values which might use defaults set from PdfObject
         this.width = columns;
         this.height = height;
 

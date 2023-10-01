@@ -273,8 +273,6 @@ public class OpMap {
   public String getStepNS(final int opPosOfStep) {
 
     final int argLenOfStep = getArgLengthOfStep(opPosOfStep);
-
-    // System.out.println("getStepNS.argLenOfStep: "+argLenOfStep);
     if (argLenOfStep == 3) {
       final int index = m_opMap.elementAt(opPosOfStep + 4);
 
@@ -291,10 +289,7 @@ public class OpMap {
    * @return OpCodes.EMPTY, OpCodes.ELEMWILDCARD, or the local name.
    */
   public String getStepLocalName(final int opPosOfStep) {
-
     final int argLenOfStep = getArgLengthOfStep(opPosOfStep);
-
-    // System.out.println("getStepLocalName.argLenOfStep: "+argLenOfStep);
     final int index;
 
     switch (argLenOfStep) {

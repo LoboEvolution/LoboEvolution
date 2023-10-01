@@ -29,6 +29,7 @@ package org.loboevolution.pdfview.decode;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
+import lombok.extern.slf4j.Slf4j;
 import org.jpedal.io.filter.ccitt.CCITT1D;
 import org.jpedal.io.filter.ccitt.CCITT2D;
 import org.jpedal.io.filter.ccitt.CCITTDecoder;
@@ -38,6 +39,7 @@ import org.loboevolution.pdfview.PDFObject;
 /**
  * <p>CCITTFaxDecode class.</p>
  */
+@Slf4j
 public class CCITTFaxDecode {
 
 	/**
@@ -107,7 +109,7 @@ public class CCITTFaxDecode {
 		try {
 			result = decoder.decode();
 		} catch (final RuntimeException e) {
-			System.out.println("Error decoding CCITTFax image k: "+ k);
+			log.info("Error decoding CCITTFax image k: {} ", k);
 			if (k >= 0) {
 				result = new CCITT2D(source, columns, rows, blackIsOne, align).decode();
 			} else {

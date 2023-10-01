@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import lombok.extern.slf4j.Slf4j;
 import org.mozilla.javascript.ast.FunctionNode;
 import org.mozilla.javascript.ast.Jump;
 import org.mozilla.javascript.ast.Scope;
@@ -22,6 +23,7 @@ import org.mozilla.javascript.ast.Symbol;
  * @see Node
  * @author Norris Boyd
  */
+@Slf4j
 public class NodeTransformer {
 
     public NodeTransformer() {}
@@ -58,7 +60,7 @@ public class NodeTransformer {
         tree.flattenSymbolTable(!createScopeObjects);
 
         // uncomment to print tree before transformation
-        if (Token.printTrees) System.out.println(tree.toStringTree(tree));
+        if (Token.printTrees) log.info(tree.toStringTree(tree));
         transformCompilationUnit_r(tree, tree, tree, createScopeObjects, inStrictMode);
     }
 

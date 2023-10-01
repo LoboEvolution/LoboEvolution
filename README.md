@@ -35,7 +35,7 @@ See CobraEvolution in action
 * Html Parser => [CobraParser](https://github.com/LoboEvolution/CobraEvolution/blob/main/LoboUnitTest/src/test/java/org/loboevolution/driver/CobraParser.java)
 * Html Render and Parser => [CobraHtmlPanel](https://github.com/LoboEvolution/CobraEvolution/blob/main/LoboUnitTest/src/test/java/org/loboevolution/driver/CobraHtmlPanel.java)
 
-After download to run
+After <a href="https://github.com/LoboEvolution/LoboEvolution/releases/download/4.0/loboevolution-4.0.jar">download<a/> to run
 ```
 java -jar loboevolution-4.0.jar
 ```

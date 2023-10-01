@@ -25,6 +25,7 @@
  */
 package org.loboevolution.apache.xpath.compiler;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.javax.xml.transform.ErrorListener;
 import org.loboevolution.javax.xml.transform.TransformerException;
 import org.loboevolution.apache.xpath.Expression;
@@ -66,6 +67,7 @@ import org.loboevolution.apache.xml.utils.PrefixResolver;
  * class compiles the string into a sequence of operation codes (op map) and then builds from that
  * into an Expression tree.
  */
+@Slf4j
 public class Compiler extends OpMap {
 
   /**
@@ -92,7 +94,6 @@ public class Compiler extends OpMap {
     final int op = getOp(opPos);
 
     Expression expr = null;
-    // System.out.println(getPatternString()+"op: "+op);
     switch (op) {
       case OpCodes.OP_XPATH:
         expr = compile(opPos + 2);
@@ -586,7 +587,6 @@ public class Compiler extends OpMap {
     final int axesType = getOp(opPos);
     final int testType = getOp(opPos + 3);
 
-    // System.out.println("testType: "+testType);
     switch (testType) {
       case OpCodes.NODETYPE_COMMENT:
         return DTMFilter.SHOW_COMMENT;
@@ -673,12 +673,12 @@ public class Compiler extends OpMap {
 
     switch (stepType) {
       case OpCodes.OP_FUNCTION:
-        if (DEBUG) System.out.println("MATCH_FUNCTION: " + m_currentPattern);
+        if (DEBUG) log.info("MATCH_FUNCTION: {} ", m_currentPattern);
         argLen = getOp(opPos + OpMap.MAPINDEX_LENGTH);
         pattern = new FunctionPattern(compileFunction(opPos), Axis.PARENT);
         break;
       case OpCodes.FROM_ROOT:
-        if (DEBUG) System.out.println("FROM_ROOT, " + m_currentPattern);
+        if (DEBUG) log.info("FROM_ROOT {} ", m_currentPattern);
         argLen = getArgLengthOfStep(opPos);
         opPos = getFirstChildPosOfStep(opPos);
         pattern =
@@ -687,8 +687,7 @@ public class Compiler extends OpMap {
         break;
       case OpCodes.MATCH_ATTRIBUTE:
         if (DEBUG)
-          System.out.println(
-              "MATCH_ATTRIBUTE: " + getStepLocalName(startOpPos) + ", " + m_currentPattern);
+          log.info("MATCH_ATTRIBUTE: {}, {} ", getStepLocalName(startOpPos) , m_currentPattern);
         argLen = getArgLengthOfStep(opPos);
         opPos = getFirstChildPosOfStep(opPos);
         pattern =
@@ -700,8 +699,7 @@ public class Compiler extends OpMap {
         break;
       case OpCodes.MATCH_ANY_ANCESTOR:
         if (DEBUG)
-          System.out.println(
-              "MATCH_ANY_ANCESTOR: " + getStepLocalName(startOpPos) + ", " + m_currentPattern);
+          log.info("MATCH_ANY_ANCESTOR: {}, {} ", getStepLocalName(startOpPos) , m_currentPattern);
         argLen = getArgLengthOfStep(opPos);
         opPos = getFirstChildPosOfStep(opPos);
         // bit-o-hackery, but this code is due for the morgue anyway...
@@ -714,11 +712,7 @@ public class Compiler extends OpMap {
         break;
       case OpCodes.MATCH_IMMEDIATE_ANCESTOR:
         if (DEBUG)
-          System.out.println(
-              "MATCH_IMMEDIATE_ANCESTOR: "
-                  + getStepLocalName(startOpPos)
-                  + ", "
-                  + m_currentPattern);
+          log.info("MATCH_IMMEDIATE_ANCESTOR: {}, {} ", getStepLocalName(startOpPos) , m_currentPattern);
         argLen = getArgLengthOfStep(opPos);
         opPos = getFirstChildPosOfStep(opPos);
         pattern =
@@ -753,7 +747,6 @@ public class Compiler extends OpMap {
        * pattern.setStaticScore(score); selfPattern.setStaticScore(score); }
        */
     } else {
-      // System.out.println("Setting "+ancestorPattern+" as relative to "+pattern);
       pattern.setRelativePathPattern(ancestorPattern);
     }
 
@@ -853,9 +846,6 @@ public class Compiler extends OpMap {
         int i = 0;
 
         for (int p = opPos; p < endFunc; p = getNextOpPos(p), i++) {
-
-          // System.out.println("argPos: "+ p);
-          // System.out.println("argCode: "+ m_opMap[p]);
           func.setArg(compile(p), i);
         }
 

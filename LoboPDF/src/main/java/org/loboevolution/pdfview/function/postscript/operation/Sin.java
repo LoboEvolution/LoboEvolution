@@ -26,7 +26,7 @@
 
 package org.loboevolution.pdfview.function.postscript.operation;
 
-import java.util.Stack;
+import java.util.Deque;
 
 
 final class Sin implements PostScriptOperation {
@@ -41,7 +41,7 @@ final class Sin implements PostScriptOperation {
 	 *
 	 * errors: stackunderflow, typecheck
 	 */
-	public void eval(final Stack<Object> environment) {
+	public void eval(final Deque<Object> environment) {
 	    final double radians = Math.toRadians((Double)environment.pop());
 	    environment.push(Math.toDegrees(Math.sin(radians)));
 	}

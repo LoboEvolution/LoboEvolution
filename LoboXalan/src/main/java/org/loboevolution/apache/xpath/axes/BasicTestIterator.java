@@ -97,25 +97,21 @@ public abstract class BasicTestIterator extends LocPathIterator {
     }
 
     int next;
-
-    try {
-      do {
-        next = getNextNode();
-
-        if (DTM.NULL != next) {
-          if (DTMIterator.FILTER_ACCEPT == acceptNode(next)) break;
-          else continue;
-        } else break;
-      } while (next != DTM.NULL);
+    do {
+      next = getNextNode();
 
       if (DTM.NULL != next) {
-        m_pos++;
-        return next;
-      }
-      m_foundLast = true;
-      return DTM.NULL;
-    } finally {
+        if (DTMIterator.FILTER_ACCEPT == acceptNode(next)) break;
+        else continue;
+      } else break;
+    } while (next != DTM.NULL);
+
+    if (DTM.NULL != next) {
+      m_pos++;
+      return next;
     }
+    m_foundLast = true;
+    return DTM.NULL;
   }
 
   /** {@inheritDoc} */

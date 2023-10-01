@@ -31,7 +31,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.nio.file.Files;
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.loboevolution.html.node.Node;
 import org.loboevolution.javax.xml.transform.Source;
@@ -76,7 +77,7 @@ public abstract class DTMDefaultBase implements DTM {
   protected final SuballocatedIntVector m_parent;
 
   /** Vector of SuballocatedIntVectors of NS decl sets */
-  protected Vector<SuballocatedIntVector> m_namespaceDeclSets = null;
+  protected List<SuballocatedIntVector> m_namespaceDeclSets = null;
 
   /** SuballocatedIntVector of elements at which corresponding namespaceDeclSets were defined */
   protected SuballocatedIntVector m_namespaceDeclSetElements = null;
@@ -911,16 +912,16 @@ public abstract class DTMDefaultBase implements DTM {
       // First
       m_namespaceDeclSetElements = new SuballocatedIntVector(32);
       m_namespaceDeclSetElements.addElement(elementNodeIndex);
-      m_namespaceDeclSets = new Vector<>();
+      m_namespaceDeclSets = new ArrayList<>();
       nsList = new SuballocatedIntVector(32);
-      m_namespaceDeclSets.addElement(nsList);
+      m_namespaceDeclSets.add(nsList);
     } else {
       // Most recent. May be -1 (none) if DTM was pruned.
       // %OPT% Is there a lastElement() method? Should there be?
       final int last = m_namespaceDeclSetElements.size() - 1;
 
       if (last >= 0 && elementNodeIndex == m_namespaceDeclSetElements.elementAt(last)) {
-        nsList = m_namespaceDeclSets.elementAt(last);
+        nsList = m_namespaceDeclSets.get(last);
       }
     }
     if (nsList == null) {
@@ -945,7 +946,7 @@ public abstract class DTMDefaultBase implements DTM {
         nsList = new SuballocatedIntVector(32);
       }
 
-      m_namespaceDeclSets.addElement(nsList);
+      m_namespaceDeclSets.add(nsList);
     }
 
     // Handle overwriting inherited.
@@ -978,7 +979,7 @@ public abstract class DTMDefaultBase implements DTM {
           findInSortedSuballocatedIntVector(m_namespaceDeclSetElements, elementNodeIndex);
       if (wouldBeAt >= 0) {
         // Found it
-        return m_namespaceDeclSets.elementAt(wouldBeAt);
+        return m_namespaceDeclSets.get(wouldBeAt);
       }
       if (wouldBeAt == -1) {
         // -1-wouldbeat == 0
@@ -1009,14 +1010,14 @@ public abstract class DTMDefaultBase implements DTM {
         }
 
         if (candidate == uppermostNSCandidateID) {
-          return m_namespaceDeclSets.elementAt(wouldBeAt);
+          return m_namespaceDeclSets.get(wouldBeAt);
         }
       }
 
       while (wouldBeAt >= 0 && ancestor > 0) {
         if (candidate == ancestor) {
           // Found ancestor in list
-          return m_namespaceDeclSets.elementAt(wouldBeAt);
+          return m_namespaceDeclSets.get(wouldBeAt);
         } else if (candidate < ancestor) {
           // Too deep in tree
           do {

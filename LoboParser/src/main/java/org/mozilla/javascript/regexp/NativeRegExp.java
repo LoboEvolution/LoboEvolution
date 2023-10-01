@@ -7,6 +7,8 @@
 package org.mozilla.javascript.regexp;
 
 import java.io.Serializable;
+
+import lombok.extern.slf4j.Slf4j;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.IdFunctionObject;
 import org.mozilla.javascript.IdScriptableObject;
@@ -29,6 +31,7 @@ import org.mozilla.javascript.Undefined;
  * @author Brendan Eich
  * @author Norris Boyd
  */
+@Slf4j
 public class NativeRegExp extends IdScriptableObject {
     private static final long serialVersionUID = 4965263491464903264L;
 
@@ -294,7 +297,7 @@ public class NativeRegExp extends IdScriptableObject {
         CompilerState state = new CompilerState(cx, regexp.source, length, flags);
         if (flat && length > 0) {
             if (debug) {
-                System.out.println("flat = \"" + str + "\"");
+                log.info("flat = {} ", str);
             }
             state.result = new RENode(REOP_FLAT);
             state.result.chr = state.cpbegin[0];
@@ -322,12 +325,11 @@ public class NativeRegExp extends IdScriptableObject {
         regexp.program[endPC++] = REOP_END;
 
         if (debug) {
-            System.out.println("Prog. length = " + endPC);
+            log.info("Prog. length = {} ", endPC);
             for (int i = 0; i < endPC; i++) {
-                System.out.print(regexp.program[i]);
+                log.info("{}", regexp.program[i]);
                 if (i < (endPC - 1)) System.out.print(", ");
             }
-            System.out.println();
         }
         regexp.parenCount = state.parenCount;
 
@@ -359,7 +361,7 @@ public class NativeRegExp extends IdScriptableObject {
 
         if (debug) {
             if (regexp.anchorCh >= 0) {
-                System.out.println("Anchor ch = '" + (char) regexp.anchorCh + "'");
+                log.info("Anchor ch = '{}' ", (char) regexp.anchorCh);
             }
         }
         return regexp;

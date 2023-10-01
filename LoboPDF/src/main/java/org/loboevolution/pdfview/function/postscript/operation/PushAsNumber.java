@@ -26,7 +26,7 @@
 
 package org.loboevolution.pdfview.function.postscript.operation;
 
-import java.util.Stack;
+import java.util.Deque;
 
 
 
@@ -55,7 +55,7 @@ final class PushAsNumber implements PostScriptOperation {
 	 ***********************************************************************
 	 */
 	@Override
-	public void eval(final Stack<Object> environment) {
+	public void eval(final Deque<Object> environment) {
 		try {
 			final double number = Double.parseDouble(this.token);
 			environment.push(number);

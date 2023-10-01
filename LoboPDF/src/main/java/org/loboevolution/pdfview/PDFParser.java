@@ -34,11 +34,7 @@ import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.nio.ByteBuffer;
 import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Stack;
+import java.util.*;
 
 import org.loboevolution.pdfview.PDFDebugger.DebugStopException;
 import org.loboevolution.pdfview.colorspace.PDFColorSpace;
@@ -59,8 +55,8 @@ import org.loboevolution.pdfview.pattern.PDFShader;
 public class PDFParser extends BaseWatchable {
     private int mDebugCommandIndex;
     // ---- parsing variables
-    private Stack<Object> stack; // stack of Object
-    private Stack<ParserState> parserStates; // stack of RenderState
+    private Deque<Object> stack; // stack of Object
+    private Deque<ParserState> parserStates; // stack of RenderState
     // the current render state
     private ParserState state;
     private GeneralPath path;
@@ -428,8 +424,8 @@ public class PDFParser extends BaseWatchable {
      */
     @Override
     public void setup() {
-        this.stack = new Stack<>();
-        this.parserStates = new Stack<>();
+        this.stack = new ArrayDeque<>();
+        this.parserStates = new ArrayDeque<>();
         this.state = new ParserState();
         this.path = new GeneralPath();
         this.loc = 0;
@@ -954,7 +950,7 @@ public class PDFParser extends BaseWatchable {
             }
             if (this.stack.size() != 0) {
                 PDFDebugger.debug("**** WARNING! Stack not zero! (cmd=" + cmd + ", size=" + this.stack.size() + ") *************************", 10);
-                this.stack.setSize(0);
+                this.stack.clear();
             }
         } else {
             this.stack.push(obj);

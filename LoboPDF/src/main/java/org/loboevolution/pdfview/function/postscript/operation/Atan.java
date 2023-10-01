@@ -26,7 +26,7 @@
 
 package org.loboevolution.pdfview.function.postscript.operation;
 
-import java.util.Stack;
+import java.util.Deque;
 
 
 final class Atan implements PostScriptOperation {
@@ -46,7 +46,7 @@ final class Atan implements PostScriptOperation {
 	 *
 	 * errors: stackunderflow, typecheck, undefinedresult
 	 */
-	public void eval(final Stack<Object> environment) {
+	public void eval(final Deque<Object> environment) {
 	    final double den = (Double)environment.pop();
 	    final double num = (Double)environment.pop();
 	    if (den == 0.0) {

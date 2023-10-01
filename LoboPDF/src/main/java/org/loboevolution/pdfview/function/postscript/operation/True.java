@@ -26,7 +26,7 @@
 
 package org.loboevolution.pdfview.function.postscript.operation;
 
-import java.util.Stack;
+import java.util.Deque;
 
 
 final class True implements PostScriptOperation {
@@ -42,7 +42,7 @@ final class True implements PostScriptOperation {
 	 *
 	 * errors: stackoverflow
 	 */
-	public void eval(final Stack<Object> environment) {
+	public void eval(final Deque<Object> environment) {
 	    environment.push(true);
 	}
 }

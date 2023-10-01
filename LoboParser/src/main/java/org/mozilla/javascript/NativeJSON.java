@@ -8,13 +8,8 @@ package org.mozilla.javascript;
 
 import java.lang.reflect.Array;
 import java.math.BigInteger;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.LinkedHashSet;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Stack;
+import java.util.*;
+
 import org.mozilla.javascript.json.JsonParser;
 import org.mozilla.javascript.xml.XMLObject;
 
@@ -210,7 +205,7 @@ public final class NativeJSON extends IdScriptableObject {
             this.propertyList = propertyList;
         }
 
-        Stack<Object> stack = new Stack<>();
+        Deque<Object> stack = new ArrayDeque<>();
         String indent;
         String gap;
         Callable replacer;
@@ -409,7 +404,7 @@ public final class NativeJSON extends IdScriptableObject {
             trackValue = unwrapped = ((Wrapper) value).unwrap();
         }
 
-        if (state.stack.search(trackValue) != -1) {
+        if (state.stack.contains(trackValue)) {
             throw ScriptRuntime.typeErrorById("msg.cyclic.value", trackValue.getClass().getName());
         }
         state.stack.push(trackValue);
@@ -490,7 +485,7 @@ public final class NativeJSON extends IdScriptableObject {
         if (value instanceof Wrapper) {
             trackValue = unwrapped = ((Wrapper) value).unwrap();
         }
-        if (state.stack.search(trackValue) != -1) {
+        if (state.stack.contains(trackValue)) {
             throw ScriptRuntime.typeErrorById("msg.cyclic.value", trackValue.getClass().getName());
         }
         state.stack.push(trackValue);
