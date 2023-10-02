@@ -33,73 +33,74 @@ import java.io.Serializable;
  */
 class PageBuilder implements Serializable, Runnable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
+    private final PDFViewer PDFViewer;
+    /**
+     * The value.
+     */
+    private int value = 0;
+    /**
+     * The timeout.
+     */
+    private long timeout;
+    /**
+     * The anim.
+     */
+    private transient Thread anim;
 
-	/** The value. */
-	private int value = 0;
+    /**
+     * <p>Constructor for PageBuilder.</p>
+     *
+     * @param PDFViewer a {@link org.loboevolution.pdf.PDFViewer} object.
+     */
+    public PageBuilder(final PDFViewer PDFViewer) {
+        this.PDFViewer = PDFViewer;
+    }
 
-	/** The timeout. */
-	private long timeout;
+    /**
+     * add the digit to the page number and start the timeout thread.
+     *
+     * @param keyval the keyval
+     */
+    public synchronized void keyTyped(final int keyval) {
+        value = value * 10 + keyval;
+        timeout = System.currentTimeMillis() + 500;
+        if (anim == null) {
+            anim = new Thread(this);
+            anim.setName(getClass().getName());
+            anim.start();
+        }
+    }
 
-	/** The anim. */
-	private transient Thread anim;
-	
-	private final PDFViewer PDFViewer;
-	
-	/**
-	 * <p>Constructor for PageBuilder.</p>
-	 *
-	 * @param PDFViewer a {@link org.loboevolution.pdf.PDFViewer} object.
-	 */
-	public PageBuilder(final PDFViewer PDFViewer) {
-		this.PDFViewer = PDFViewer;
-	}
-
-	/**
-	 * add the digit to the page number and start the timeout thread.
-	 *
-	 * @param keyval
-	 *            the keyval
-	 */
-	public synchronized void keyTyped(final int keyval) {
-		value = value * 10 + keyval;
-		timeout = System.currentTimeMillis() + 500;
-		if (anim == null) {
-			anim = new Thread(this);
-			anim.setName(getClass().getName());
-			anim.start();
-		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * waits for the timeout, and if time expires, go to the specified page
-	 * number.
-	 */
-	@Override
-	public void run() {
-		long now;
-		long then;
-		synchronized (this) {
-			now = System.currentTimeMillis();
-			then = timeout;
-		}
-		while (now < then) {
-			try {
-				Thread.sleep(timeout - now);
-			} catch (final InterruptedException ie) {
-				Thread.currentThread().interrupt();
-			}
-			synchronized (this) {
-				now = System.currentTimeMillis();
-				then = timeout;
-			}
-		}
-		synchronized (this) {
-			PDFViewer.gotoPage(value - 1);
-			anim = null;
-			value = 0;
-		}
-	}
+    /**
+     * {@inheritDoc}
+     * <p>
+     * waits for the timeout, and if time expires, go to the specified page
+     * number.
+     */
+    @Override
+    public void run() {
+        long now;
+        long then;
+        synchronized (this) {
+            now = System.currentTimeMillis();
+            then = timeout;
+        }
+        while (now < then) {
+            try {
+                Thread.sleep(timeout - now);
+            } catch (final InterruptedException ie) {
+                Thread.currentThread().interrupt();
+            }
+            synchronized (this) {
+                now = System.currentTimeMillis();
+                then = timeout;
+            }
+        }
+        synchronized (this) {
+            PDFViewer.gotoPage(value - 1);
+            anim = null;
+            value = 0;
+        }
+    }
 }

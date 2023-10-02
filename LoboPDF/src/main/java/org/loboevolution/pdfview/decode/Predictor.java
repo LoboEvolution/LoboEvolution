@@ -26,37 +26,46 @@
 
 package org.loboevolution.pdfview.decode;
 
-import java.io.IOException;
-import java.nio.ByteBuffer;
-
 import org.loboevolution.pdfview.PDFObject;
 import org.loboevolution.pdfview.PDFParseException;
+
+import java.io.IOException;
+import java.nio.ByteBuffer;
 
 /**
  * The abstract superclass of various predictor objects that undo well-known
  * prediction algorithms.
- *
-  *
-  *
  */
 public abstract class Predictor {
-    /** well known algorithms */
+    /**
+     * well known algorithms
+     */
     public static final int TIFF = 0;
-    /** Constant <code>PNG=1</code> */
+    /**
+     * Constant <code>PNG=1</code>
+     */
     public static final int PNG = 1;
-    
-    /** the algorithm to use */
+
+    /**
+     * the algorithm to use
+     */
     private final int algorithm;
-    
-    /** the number of colors per sample */
+
+    /**
+     * the number of colors per sample
+     */
     private int colors = 1;
-    
-    /** the number of bits per color component */
+
+    /**
+     * the number of bits per color component
+     */
     private int bpc = 8;
-    
-    /** the number of columns per row */
+
+    /**
+     * the number of columns per row
+     */
     private int columns = 1;
-    
+
     /**
      * Create an instance of a predictor.  Use <code>getPredictor()</code>
      * instead of this.
@@ -66,18 +75,7 @@ public abstract class Predictor {
     protected Predictor(final int algorithm) {
         this.algorithm = algorithm;
     }
-    
-    /**
-     * Actually perform this algorithm on decoded image data.
-     * Subclasses must implement this method
-     *
-     * @param imageData a {@link java.nio.ByteBuffer} object.
-     * @return a {@link java.nio.ByteBuffer} object.
-     * @throws java.io.IOException if any.
-     */
-    public abstract ByteBuffer unpredict(ByteBuffer imageData)
-        throws IOException;
-    
+
     /**
      * Get an instance of a predictor
      *
@@ -86,8 +84,7 @@ public abstract class Predictor {
      * @throws java.io.IOException if any.
      */
     public static Predictor getPredictor(final PDFObject params)
-        throws IOException
-    {
+            throws IOException {
         // get the algorithm (required)
         final PDFObject algorithmObj = params.getDictRef("Predictor");
         if (algorithmObj == null) {
@@ -95,7 +92,7 @@ public abstract class Predictor {
             return null;
         }
         final int algorithm = algorithmObj.getIntValue();
-    
+
         // create the predictor object
         Predictor predictor = null;
         switch (algorithm) {
@@ -103,8 +100,8 @@ public abstract class Predictor {
                 // no predictor
                 return null;
             case 2:
-            	predictor = new TIFFPredictor();
-            break;
+                predictor = new TIFFPredictor();
+                break;
             case 10:
             case 11:
             case 12:
@@ -116,29 +113,40 @@ public abstract class Predictor {
             default:
                 throw new PDFParseException("Unknown predictor: " + algorithm);
         }
-        
+
         // read the colors (optional)
         final PDFObject colorsObj = params.getDictRef("Colors");
         if (colorsObj != null) {
             predictor.setColors(colorsObj.getIntValue());
         }
-        
+
         // read the bits per component (optional)
         final PDFObject bpcObj = params.getDictRef("BitsPerComponent");
         if (bpcObj != null) {
             predictor.setBitsPerComponent(bpcObj.getIntValue());
         }
-        
+
         // read the columns (optional)
         final PDFObject columnsObj = params.getDictRef("Columns");
         if (columnsObj != null) {
             predictor.setColumns(columnsObj.getIntValue());
         }
-        
+
         // all set
         return predictor;
     }
-    
+
+    /**
+     * Actually perform this algorithm on decoded image data.
+     * Subclasses must implement this method
+     *
+     * @param imageData a {@link java.nio.ByteBuffer} object.
+     * @return a {@link java.nio.ByteBuffer} object.
+     * @throws java.io.IOException if any.
+     */
+    public abstract ByteBuffer unpredict(ByteBuffer imageData)
+            throws IOException;
+
     /**
      * Get the algorithm in use
      *
@@ -147,7 +155,7 @@ public abstract class Predictor {
     public int getAlgorithm() {
         return this.algorithm;
     }
-    
+
     /**
      * Get the number of colors per sample
      *
@@ -156,7 +164,7 @@ public abstract class Predictor {
     public int getColors() {
         return this.colors;
     }
-    
+
     /**
      * Set the number of colors per sample
      *
@@ -165,7 +173,7 @@ public abstract class Predictor {
     protected void setColors(final int colors) {
         this.colors = colors;
     }
-    
+
     /**
      * Get the number of bits per color component
      *
@@ -174,7 +182,7 @@ public abstract class Predictor {
     public int getBitsPerComponent() {
         return this.bpc;
     }
-    
+
     /**
      * Set the number of bits per color component
      *
@@ -183,7 +191,7 @@ public abstract class Predictor {
     public void setBitsPerComponent(final int bpc) {
         this.bpc = bpc;
     }
-    
+
     /**
      * Get the number of columns
      *
@@ -192,7 +200,7 @@ public abstract class Predictor {
     public int getColumns() {
         return this.columns;
     }
-    
+
     /**
      * Set the number of columns
      *

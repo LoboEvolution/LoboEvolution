@@ -30,20 +30,20 @@ import java.util.Deque;
 
 
 final class Not implements PostScriptOperation {
-	@Override
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <i>bool1|int1</i> <b>not</b> <i>bool2|int2</i> <p>
-	 *
-	 * returns the logical negation of the operand if it is
-	 * boolean. If the operand is an integer, not returns the
-	 * bitwise complement (ones complement) of its binary
-	 * representation. <p>
-	 *
-	 * errors: stackunderflow, typecheck
-	 */
-	public void eval(final Deque<Object> environment) {
-	    environment.push(~(Long)environment.pop());
-	}
+    @Override
+    /**
+     * {@inheritDoc}
+     *
+     * <i>bool1|int1</i> <b>not</b> <i>bool2|int2</i> <p>
+     *
+     * returns the logical negation of the operand if it is
+     * boolean. If the operand is an integer, not returns the
+     * bitwise complement (ones complement) of its binary
+     * representation. <p>
+     *
+     * errors: stackunderflow, typecheck
+     */
+    public void eval(final Deque<Object> environment) {
+        environment.push(~(Long) environment.pop());
+    }
 }

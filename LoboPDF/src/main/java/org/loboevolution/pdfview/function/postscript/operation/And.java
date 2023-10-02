@@ -29,20 +29,20 @@ package org.loboevolution.pdfview.function.postscript.operation;
 import java.util.Deque;
 
 final class And implements PostScriptOperation {
-	@Override
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <i>bool1|int1 bool2|int2</i> <b>and</b> <i>bool3|int3</i> <p>
-	 *
-	 * returns the logical conjunction of the operands
-	 * if they are boolean. If the operands are integers,
-	 * and returns the bitwise "and" of their binary
-	 * representations. <p>
-	 *
-	 * errors: stackunderflow, typecheck
-	 */
-	public void eval(final Deque<Object> environment) {
-	    environment.push((Long)environment.pop() & (Long)environment.pop());
-	}
+    @Override
+    /**
+     * {@inheritDoc}
+     *
+     * <i>bool1|int1 bool2|int2</i> <b>and</b> <i>bool3|int3</i> <p>
+     *
+     * returns the logical conjunction of the operands
+     * if they are boolean. If the operands are integers,
+     * and returns the bitwise "and" of their binary
+     * representations. <p>
+     *
+     * errors: stackunderflow, typecheck
+     */
+    public void eval(final Deque<Object> environment) {
+        environment.push((Long) environment.pop() & (Long) environment.pop());
+    }
 }

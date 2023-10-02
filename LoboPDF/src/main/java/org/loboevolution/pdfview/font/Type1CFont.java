@@ -25,13 +25,13 @@
  */
 package org.loboevolution.pdfview.font;
 
+import org.loboevolution.pdfview.PDFDebugger;
+import org.loboevolution.pdfview.PDFObject;
+
 import java.awt.geom.AffineTransform;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.NoninvertibleTransformException;
 import java.io.IOException;
-
-import org.loboevolution.pdfview.PDFDebugger;
-import org.loboevolution.pdfview.PDFObject;
 
 /**
  * A representation, with parser, of an Adobe Type 1C font.
@@ -44,54 +44,68 @@ import org.loboevolution.pdfview.PDFObject;
  */
 public class Type1CFont extends OutlineFont {
 
-    byte[] data;
-
-    int pos;
-
-    final float[] stack = new float[100];
-
-    int stackptr = 0;
-
-    int stemhints = 0;
-
-    String[] names;
-
-    int[] glyphnames;
-
-	final int[] encoding = new int[256];
-	
-    String fontname;
-
-    AffineTransform at = new AffineTransform (0.001f, 0, 0, 0.001f, 0, 0);
-
-    int number;
-
-    float fnum;
-
-    int type;
-
     static final int CMD = 0;
-
     static final int NUM = 1;
-
     static final int FLT = 2;
+    final float[] stack = new float[100];
+    final int[] encoding = new int[256];
+    final float[] temps = new float[32];
+    byte[] data;
+    int pos;
+    int stackptr = 0;
+    int stemhints = 0;
+    String[] names;
+    int[] glyphnames;
+    String fontname;
+    AffineTransform at = new AffineTransform(0.001f, 0, 0, 0.001f, 0, 0);
+    int number;
+    float fnum;
+    int type;
+    // Top DICT: NAME    CODE   DEFAULT
+    // charstringtype    12 6    2
+    // fontmatrix        12 7    0.001 0 0 0.001
+    // charset           15      - (offset)  names of glyphs (ref to name idx)
+    // encoding          16      - (offset)  array of codes
+    // CharStrings       17      - (offset)
+    // Private           18      - (size, offset)
+    // glyph at position i in CharStrings has name charset[i]
+    // and code encoding[i]
+    int charstringtype = 2;
+    int charsetbase = 0;
+    int encodingbase = 0;
+    int charstringbase = 0;
+    int privatebase = 0;
+
+    // DICT structure:
+    // operand operator operand operator ...
+    // INDEX structure:
+    // count(2) offsize [offset offset ... offset] data
+    // offset array has count+1 entries
+    // data starts at 3+(count+1)*offsize
+    // offset for data is offset+2+(count+1)*offsize
+    int privatesize = 0;
+    int gsubrbase = 0;
+    int lsubrbase = 0;
+    int gsubrsoffset = 0;
+    int lsubrsoffset = 0;
+    int nglyphs = 1;
 
     /**
      * create a new Type1CFont based on a font data stream and a descriptor
      *
-     * @param baseFont the postscript name of this font
-     * @param src a stream containing the font
+     * @param baseFont   the postscript name of this font
+     * @param src        a stream containing the font
      * @param descriptor the descriptor for this font
      * @throws java.io.IOException if any.
      */
-    public Type1CFont (final String baseFont, final PDFObject src,
-                       final PDFFontDescriptor descriptor) throws IOException {
-        super (baseFont, src, descriptor);
+    public Type1CFont(final String baseFont, final PDFObject src,
+                      final PDFFontDescriptor descriptor) throws IOException {
+        super(baseFont, src, descriptor);
 
-        final PDFObject dataObj = descriptor.getFontFile3 ();
-        this.data = dataObj.getStream ();
+        final PDFObject dataObj = descriptor.getFontFile3();
+        this.data = dataObj.getStream();
         this.pos = 0;
-        parse ();
+        parse();
 
         // TODO: free up (set to null) unused structures (data, subrs, stack)
     }
@@ -99,7 +113,7 @@ public class Type1CFont extends OutlineFont {
     /**
      * a debug method for printing the data
      */
-    private void printData () {
+    private void printData() {
         final char[] parts = new char[17];
         int partsloc = 0;
         for (int i = 0; i < this.data.length; i++) {
@@ -112,12 +126,12 @@ public class Type1CFont extends OutlineFont {
                 parts[partsloc++] = (char) d;
             }
             if (d < 16) {
-                PDFDebugger.debug("0" + Integer.toHexString (d), 200);
+                PDFDebugger.debug("0" + Integer.toHexString(d), 200);
             } else {
-                PDFDebugger.debug(Integer.toHexString (d), 200);
+                PDFDebugger.debug(Integer.toHexString(d), 200);
             }
             if ((i & 15) == 15) {
-                PDFDebugger.debug("      " + new String (parts), 200);
+                PDFDebugger.debug("      " + new String(parts), 200);
                 partsloc = 0;
             } else if ((i & 7) == 7) {
                 PDFDebugger.debug("  ", 200);
@@ -130,12 +144,13 @@ public class Type1CFont extends OutlineFont {
 
     /**
      * read the next decoded value from the stream
+     *
      * @param charstring ????
      */
-    private int readNext (final boolean charstring) {
+    private int readNext(final boolean charstring) {
         this.number = (this.data[this.pos++]) & 0xff;
         if (this.number == 30 && !charstring) { // goofy floatingpoint rep
-            readFNum ();
+            readFNum();
             return this.type = FLT;
         } else if (this.number == 28) {
             this.number = ((this.data[this.pos]) << 8) + ((this.data[this.pos + 1]) & 0xff);
@@ -163,10 +178,10 @@ public class Type1CFont extends OutlineFont {
             this.number = -(this.number - 251) * 256 - ((this.data[this.pos++]) & 0xff) - 108;
             return this.type = NUM;
         } else if (!charstring) { // dict shouldn't have a 255 code
-            printData ();
-            throw new RuntimeException ("Got a 255 code while reading dict");
+            printData();
+            throw new RuntimeException("Got a 255 code while reading dict");
         } else { // num was 255
-        	this.fnum = (((this.data[this.pos] & 0xff) << 24) |
+            this.fnum = (((this.data[this.pos] & 0xff) << 24) |
                     ((this.data[this.pos + 1] & 0xff) << 16) |
                     ((this.data[this.pos + 2] & 0xff) << 8) |
                     ((this.data[this.pos + 3] & 0xff))) / 65536f;
@@ -179,7 +194,7 @@ public class Type1CFont extends OutlineFont {
      * read the next funky floating point number from the input stream.
      * value gets put into the fnum field.
      */
-    public void readFNum () {
+    public void readFNum() {
         // work in nybbles: 0-9=0-9, a=. b=E, c=E-, d=rsvd e=neg f=end
         float f = 0;
         boolean neg = false;
@@ -214,15 +229,16 @@ public class Type1CFont extends OutlineFont {
                 break;
             }
         }
-        this.fnum = (neg ? -1 : 1) * f * (float) Math.pow (10, eval * exp);
+        this.fnum = (neg ? -1 : 1) * f * (float) Math.pow(10, eval * exp);
     }
 
     /**
      * read an integer from the input stream
+     *
      * @param len the number of bytes in the integer
      * @return the integer
      */
-    private int readInt (final int len) {
+    private int readInt(final int len) {
         int n = 0;
         for (int i = 0; i < len; i++) {
             n = (n << 8) | ((this.data[this.pos++]) & 0xff);
@@ -232,19 +248,13 @@ public class Type1CFont extends OutlineFont {
 
     /**
      * read the next byte from the stream
+     *
      * @return the byte
      */
-    private int readByte () {
+    private int readByte() {
         return (this.data[this.pos++]) & 0xff;
     }
 
-    // DICT structure:
-    // operand operator operand operator ...
-    // INDEX structure:
-    // count(2) offsize [offset offset ... offset] data
-    // offset array has count+1 entries
-    // data starts at 3+(count+1)*offsize
-    // offset for data is offset+2+(count+1)*offsize
     /**
      * get the size of the dictionary located within the stream at
      * some offset.
@@ -252,21 +262,21 @@ public class Type1CFont extends OutlineFont {
      * @param loc the index of the start of the dictionary
      * @return the size of the dictionary, in bytes.
      */
-    public int getIndexSize (final int loc) {
+    public int getIndexSize(final int loc) {
         final int hold = this.pos;
         this.pos = loc;
-        final int count = readInt (2);
+        final int count = readInt(2);
         if (count <= 0) {
             return 2;
         }
-        final int encsz = readByte ();
+        final int encsz = readByte();
         if (encsz < 1 || encsz > 4) {
-            throw new RuntimeException ("Offsize: " + encsz +
+            throw new RuntimeException("Offsize: " + encsz +
                     ", must be in range 1-4.");
         }
         // pos is now at the first offset.  last offset is at count*encsz
         this.pos += count * encsz;
-        final int end = readInt (encsz);
+        final int end = readInt(encsz);
         this.pos = hold;
         return 2 + (count + 1) * encsz + end;
     }
@@ -277,10 +287,10 @@ public class Type1CFont extends OutlineFont {
      * @param loc a int.
      * @return a int.
      */
-    public int getTableLength (final int loc) {
+    public int getTableLength(final int loc) {
         final int hold = this.pos;
         this.pos = loc;
-        final int count = readInt (2);
+        final int count = readInt(2);
         if (count <= 0) {
             return 2;
         }
@@ -289,111 +299,47 @@ public class Type1CFont extends OutlineFont {
     }
 
     /**
-     * A range.  There's probably a version of this class floating around
-     * somewhere already in Java.
-     */
-    static class Range {
-
-        private final int start;
-
-        private final int len;
-
-        public Range (final int start, final int len) {
-            this.start = start;
-            this.len = len;
-        }
-
-        public final int getStart () {
-            return this.start;
-        }
-
-        public final int getLen () {
-            return this.len;
-        }
-
-        public final int getEnd () {
-            return this.start + this.len;
-        }
-
-        @Override
-		public String toString () {
-            return "Range: start: " + this.start + ", len: " + this.len;
-        }
-    }
-
-    /**
      * Get the range of a particular index in a dictionary.
+     *
      * @param index the start of the dictionary.
-     * @param id the index of the entry in the dictionary
+     * @param id    the index of the entry in the dictionary
      * @return a range describing the offsets of the start and end of
      * the entry from the start of the file, not the dictionary
      */
-    Range getIndexEntry (final int index, final int id) {
+    Range getIndexEntry(final int index, final int id) {
         final int hold = this.pos;
         this.pos = index;
-        final int count = readInt (2);
-        final int encsz = readByte ();
+        final int count = readInt(2);
+        final int encsz = readByte();
         if (encsz < 1 || encsz > 4) {
-            throw new RuntimeException ("Offsize: " + encsz +
+            throw new RuntimeException("Offsize: " + encsz +
                     ", must be in range 1-4.");
         }
         this.pos += encsz * id;
-        final int from = readInt (encsz);
-        final Range r = new Range (from + 2 + index + encsz * (count + 1), readInt (
+        final int from = readInt(encsz);
+        final Range r = new Range(from + 2 + index + encsz * (count + 1), readInt(
                 encsz) - from);
         this.pos = hold;
         return r;
     }
-    // Top DICT: NAME    CODE   DEFAULT
-    // charstringtype    12 6    2
-    // fontmatrix        12 7    0.001 0 0 0.001
-    // charset           15      - (offset)  names of glyphs (ref to name idx)
-    // encoding          16      - (offset)  array of codes
-    // CharStrings       17      - (offset)
-    // Private           18      - (size, offset)
-    // glyph at position i in CharStrings has name charset[i]
-    // and code encoding[i]
-    int charstringtype = 2;
-
-    final float[] temps = new float[32];
-
-    int charsetbase = 0;
-
-    int encodingbase = 0;
-
-    int charstringbase = 0;
-
-    int privatebase = 0;
-
-    int privatesize = 0;
-
-    int gsubrbase = 0;
-
-    int lsubrbase = 0;
-
-    int gsubrsoffset = 0;
-
-    int lsubrsoffset = 0;
-
-    int nglyphs = 1;
 
     /**
      * read a dictionary that exists within some range, parsing the entries
      * within the dictionary.
      */
-    private void readDict (final Range r) {
-        this.pos = r.getStart ();
-        while (this.pos < r.getEnd ()) {
-            final int cmd = readCommand (false);
+    private void readDict(final Range r) {
+        this.pos = r.getStart();
+        while (this.pos < r.getEnd()) {
+            final int cmd = readCommand(false);
             if (cmd == 1006) { // charstringtype, default=2
                 this.charstringtype = (int) this.stack[0];
             } else if (cmd == 1007) { // fontmatrix
                 if (this.stackptr == 4) {
-                    this.at = new AffineTransform (this.stack[0], this.stack[1],
+                    this.at = new AffineTransform(this.stack[0], this.stack[1],
                             this.stack[2], this.stack[3],
                             0, 0);
                 } else {
-                    this.at = new AffineTransform (this.stack[0], this.stack[1],
+                    this.at = new AffineTransform(this.stack[0], this.stack[1],
                             this.stack[2], this.stack[3],
                             this.stack[4], this.stack[5]);
                 }
@@ -408,7 +354,7 @@ public class Type1CFont extends OutlineFont {
                 this.privatebase = (int) this.stack[1];
             } else if (cmd == 19) { // subrs (in Private dict)
                 this.lsubrbase = this.privatebase + (int) this.stack[0];
-                this.lsubrsoffset = calcoffset (this.lsubrbase);
+                this.lsubrsoffset = calcoffset(this.lsubrbase);
             }
             this.stackptr = 0;
         }
@@ -417,12 +363,13 @@ public class Type1CFont extends OutlineFont {
     /**
      * read a complete command.  this may involve several numbers
      * which go onto a stack before an actual command is read.
+     *
      * @param charstring ????
      * @return the command.  Some numbers may also be on the stack.
      */
-    private int readCommand (final boolean charstring) {
+    private int readCommand(final boolean charstring) {
         while (true) {
-            final int t = readNext (charstring);
+            final int t = readNext(charstring);
             if (t == CMD) {
                 return this.number;
             } else {
@@ -433,30 +380,31 @@ public class Type1CFont extends OutlineFont {
 
     /**
      * parse information about the encoding of this file.
+     *
      * @param base the start of the encoding data
      */
-    private void readEncodingData (final int base) {
+    private void readEncodingData(final int base) {
         if (base == 0) {  // this is the StandardEncoding
-            System.arraycopy (FontSupport.standardEncoding, 0, this.encoding, 0,
+            System.arraycopy(FontSupport.standardEncoding, 0, this.encoding, 0,
                     FontSupport.standardEncoding.length);
         } else if (base == 1) {  // this is the expert encoding
             PDFDebugger.debug("**** EXPERT ENCODING not yet implemented!");
             // TODO: copy ExpertEncoding
         } else {
             this.pos = base;
-            final int encodingtype = readByte ();
+            final int encodingtype = readByte();
             if ((encodingtype & 127) == 0) {
-                final int ncodes = readByte ();
+                final int ncodes = readByte();
                 for (int i = 1; i < ncodes + 1; i++) {
-                    final int idx = readByte () & 0xff;
+                    final int idx = readByte() & 0xff;
                     this.encoding[idx] = i;
                 }
             } else if ((encodingtype & 127) == 1) {
-                final int nranges = readByte ();
+                final int nranges = readByte();
                 int p = 1;
                 for (int i = 0; i < nranges; i++) {
-                    final int start = readByte ();
-                    final int more = readByte ();
+                    final int start = readByte();
+                    final int more = readByte();
                     for (int j = start; j < start + more + 1; j++) {
                         this.encoding[j] = p++;
                     }
@@ -470,9 +418,10 @@ public class Type1CFont extends OutlineFont {
 
     /**
      * read the names of the glyphs.
+     *
      * @param base the start of the glyph name table
      */
-    private void readGlyphNames (final int base) {
+    private void readGlyphNames(final int base) {
         if (base == 0) {
             this.glyphnames = new int[229];
             for (int i = 0; i < this.glyphnames.length; i++) {
@@ -490,16 +439,16 @@ public class Type1CFont extends OutlineFont {
         this.glyphnames = new int[this.nglyphs];
         this.glyphnames[0] = 0;
         this.pos = base;
-        final int t = readByte ();
+        final int t = readByte();
         if (t == 0) {
             for (int i = 1; i < this.nglyphs; i++) {
-                this.glyphnames[i] = readInt (2);
+                this.glyphnames[i] = readInt(2);
             }
         } else if (t == 1) {
             int n = 1;
             while (n < this.nglyphs) {
-                int sid = readInt (2);
-                final int range = readByte () + 1;
+                int sid = readInt(2);
+                final int range = readByte() + 1;
                 for (int i = 0; i < range; i++) {
                     this.glyphnames[n++] = sid++;
                 }
@@ -507,8 +456,8 @@ public class Type1CFont extends OutlineFont {
         } else if (t == 2) {
             int n = 1;
             while (n < this.nglyphs) {
-                int sid = readInt (2);
-                final int range = readInt (2) + 1;
+                int sid = readInt(2);
+                final int range = readInt(2) + 1;
                 for (int i = 0; i < range; i++) {
                     this.glyphnames[n++] = sid++;
                 }
@@ -518,54 +467,55 @@ public class Type1CFont extends OutlineFont {
 
     /**
      * read a list of names
+     *
      * @param base the start of the name table
      */
-    private void readNames (final int base) {
+    private void readNames(final int base) {
         this.pos = base;
-        final int nextra = readInt (2);
+        final int nextra = readInt(2);
         this.names = new String[nextra];
         //	safenames= new String[nextra];
         for (int i = 0; i < nextra; i++) {
-            final Range r = getIndexEntry (base, i);
-            this.names[i] = new String (this.data, r.getStart (), r.getLen ());
-            PDFDebugger.debug("Read name: "+i+" from "+r.getStart()+" to "+r.getEnd()+": "+safe(names[i]), 1000);
+            final Range r = getIndexEntry(base, i);
+            this.names[i] = new String(this.data, r.getStart(), r.getLen());
+            PDFDebugger.debug("Read name: " + i + " from " + r.getStart() + " to " + r.getEnd() + ": " + safe(names[i]), 1000);
         }
     }
 
     /**
      * parse the font data.
      */
-    private void parse () {
+    private void parse() {
         // jump over rest of header: base of font names index
-        final int fnames = readByte ();
+        final int fnames = readByte();
         // offset in the file of the array of font dicts
-        final int topdicts = fnames + getIndexSize (fnames);
+        final int topdicts = fnames + getIndexSize(fnames);
         // offset in the file of local names
-        final int theNames = topdicts + getIndexSize (topdicts);
+        final int theNames = topdicts + getIndexSize(topdicts);
         // offset in the file of the array of global subroutines
-        this.gsubrbase = theNames + getIndexSize (theNames);
-        this.gsubrsoffset = calcoffset (this.gsubrbase);
+        this.gsubrbase = theNames + getIndexSize(theNames);
+        this.gsubrsoffset = calcoffset(this.gsubrbase);
         // read extra names
-        readNames (theNames);
+        readNames(theNames);
         // does this file have more than one font?
         this.pos = topdicts;
-        if (readInt (2) != 1) {
-            printData ();
-            throw new RuntimeException ("More than one font in this file!");
+        if (readInt(2) != 1) {
+            printData();
+            throw new RuntimeException("More than one font in this file!");
         }
-        final Range r = getIndexEntry (fnames, 0);
-        this.fontname = new String (this.data, r.getStart (), r.getLen ());
+        final Range r = getIndexEntry(fnames, 0);
+        this.fontname = new String(this.data, r.getStart(), r.getLen());
         // read first dict
-        readDict (getIndexEntry (topdicts, 0));
+        readDict(getIndexEntry(topdicts, 0));
         // read the private dictionary
-        readDict (new Range (this.privatebase, this.privatesize));
+        readDict(new Range(this.privatebase, this.privatesize));
         // calculate the number of glyphs
         this.pos = this.charstringbase;
-        this.nglyphs = readInt (2);
+        this.nglyphs = readInt(2);
         // now get the glyph names
-        readGlyphNames (this.charsetbase);
+        readGlyphNames(this.charsetbase);
         // now figure out the encoding
-        readEncodingData (this.encodingbase);
+        readEncodingData(this.encodingbase);
     }
 
     /**
@@ -573,10 +523,10 @@ public class Type1CFont extends OutlineFont {
      * the standard names in FontSupport.stdNames, and is appended by
      * any names in the name table from this font's dictionary.
      */
-    private int getNameIndex (final String name) {
-        int val = FontSupport.findName (name, FontSupport.stdNames);
+    private int getNameIndex(final String name) {
+        int val = FontSupport.findName(name, FontSupport.stdNames);
         if (val == -1) {
-            val = FontSupport.findName (name, this.names) + FontSupport.stdNames.length;
+            val = FontSupport.findName(name, this.names) + FontSupport.stdNames.length;
         }
         if (val == -1) {
             val = 0;
@@ -588,34 +538,34 @@ public class Type1CFont extends OutlineFont {
      * convert a string to one in which any non-printable bytes are
      * replaced by "<###>" where ## is the value of the byte.
      */
-    private String safe (final String src) {
-        final StringBuilder sb = new StringBuilder ();
-        for (int i = 0; i < src.length (); i++) {
-            final char c = src.charAt (i);
+    private String safe(final String src) {
+        final StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < src.length(); i++) {
+            final char c = src.charAt(i);
             if (c >= 32 && c < 128) {
-                sb.append (c);
+                sb.append(c);
             } else {
                 sb.append("<").append((int) c).append(">");
             }
         }
-        return sb.toString ();
+        return sb.toString();
     }
 
     /**
      * Read the data for a glyph from the glyph table, and transform
      * it based on the current transform.
      *
-     * @param base the start of the glyph table
+     * @param base   the start of the glyph table
      * @param offset the index of this glyph in the glyph table
      */
-    private synchronized GeneralPath readGlyph (final int base, final int offset) {
-        final FlPoint pt = new FlPoint ();
+    private synchronized GeneralPath readGlyph(final int base, final int offset) {
+        final FlPoint pt = new FlPoint();
 
         // find this entry
-        final Range r = getIndexEntry (base, offset);
+        final Range r = getIndexEntry(base, offset);
 
         // create a path
-        final GeneralPath gp = new GeneralPath ();
+        final GeneralPath gp = new GeneralPath();
 
 
         // rember the start position (for recursive calls due to seac)
@@ -624,12 +574,12 @@ public class Type1CFont extends OutlineFont {
         // read the glyph itself
         this.stackptr = 0;
         this.stemhints = 0;
-        parseGlyph (r, gp, pt);
+        parseGlyph(r, gp, pt);
 
         // restore the start position
         this.pos = hold;
 
-        gp.transform (this.at);
+        gp.transform(this.at);
 
         return gp;
     }
@@ -641,8 +591,8 @@ public class Type1CFont extends OutlineFont {
      * @param base the index of the start of the dictionary
      * @return a int.
      */
-    public int calcoffset (final int base) {
-        final int len = getTableLength (base);
+    public int calcoffset(final int base) {
+        final int len = getTableLength(base);
         if (len < 1240) {
             return 107;
         } else if (len < 33900) {
@@ -654,53 +604,55 @@ public class Type1CFont extends OutlineFont {
 
     /**
      * build an accented character out of two pre-defined glyphs.
-     * @param x the x offset of the accent
-     * @param y the y offset of the accent
-     * @param b the index of the base glyph
-     * @param a the index of the accent glyph
+     *
+     * @param x  the x offset of the accent
+     * @param y  the y offset of the accent
+     * @param b  the index of the base glyph
+     * @param a  the index of the accent glyph
      * @param gp the GeneralPath into which the combined glyph will be
-     * written.
+     *           written.
      */
-    private void buildAccentChar (final float x, final float y, final char b, final char a,
-                                  final GeneralPath gp) {
+    private void buildAccentChar(final float x, final float y, final char b, final char a,
+                                 final GeneralPath gp) {
         // get the outline of the accent
-        final GeneralPath pathA = getOutline (a, getWidth (a, null));
+        final GeneralPath pathA = getOutline(a, getWidth(a, null));
 
-        // undo the effect of the transform applied in read 
-        final AffineTransform xformA = AffineTransform.getTranslateInstance (x, y);
+        // undo the effect of the transform applied in read
+        final AffineTransform xformA = AffineTransform.getTranslateInstance(x, y);
         try {
-            xformA.concatenate (this.at.createInverse ());
+            xformA.concatenate(this.at.createInverse());
         } catch (final NoninvertibleTransformException nte) {
             // oh well ...
         }
-        pathA.transform (xformA);
+        pathA.transform(xformA);
 
-        final GeneralPath pathB = getOutline (b, getWidth (b, null));
+        final GeneralPath pathB = getOutline(b, getWidth(b, null));
 
         try {
-            final AffineTransform xformB = this.at.createInverse ();
-            pathB.transform (xformB);
+            final AffineTransform xformB = this.at.createInverse();
+            pathB.transform(xformB);
         } catch (final NoninvertibleTransformException nte) {
             // ignore
         }
 
-        gp.append (pathB, false);
-        gp.append (pathA, false);
+        gp.append(pathB, false);
+        gp.append(pathA, false);
     }
 
     /**
      * parse a glyph defined in a particular range
-     * @param r the range of the glyph definition
+     *
+     * @param r  the range of the glyph definition
      * @param gp a GeneralPath in which to store the glyph outline
      * @param pt a FlPoint representing the end of the current path
      */
-    void parseGlyph (final Range r, final GeneralPath gp, final FlPoint pt) {
-        this.pos = r.getStart ();
+    void parseGlyph(final Range r, final GeneralPath gp, final FlPoint pt) {
+        this.pos = r.getStart();
         int i;
         float x1, y1, x2, y2, ybase;
         int hold;
-        while (this.pos < r.getEnd ()) {
-            final int cmd = readCommand (true);
+        while (this.pos < r.getEnd()) {
+            final int cmd = readCommand(true);
             hold = 0;
             switch (cmd) {
                 case 1: // hstem
@@ -714,54 +666,54 @@ public class Type1CFont extends OutlineFont {
                     }
                     pt.y += this.stack[0];
                     if (pt.open) {
-                        gp.closePath ();
+                        gp.closePath();
                     }
                     pt.open = false;
-                    gp.moveTo (pt.x, pt.y);
+                    gp.moveTo(pt.x, pt.y);
                     this.stackptr = 0;
                     break;
                 case 5: // rlineto
-                    for (i = 0; i < this.stackptr;) {
+                    for (i = 0; i < this.stackptr; ) {
                         pt.x += this.stack[i++];
                         pt.y += this.stack[i++];
-                        gp.lineTo (pt.x, pt.y);
+                        gp.lineTo(pt.x, pt.y);
                     }
                     pt.open = true;
                     this.stackptr = 0;
                     break;
                 case 6: // hlineto
-                    for (i = 0; i < this.stackptr;) {
+                    for (i = 0; i < this.stackptr; ) {
                         if ((i & 1) == 0) {
                             pt.x += this.stack[i++];
                         } else {
                             pt.y += this.stack[i++];
                         }
-                        gp.lineTo (pt.x, pt.y);
+                        gp.lineTo(pt.x, pt.y);
                     }
                     pt.open = true;
                     this.stackptr = 0;
                     break;
                 case 7: // vlineto
-                    for (i = 0; i < this.stackptr;) {
+                    for (i = 0; i < this.stackptr; ) {
                         if ((i & 1) == 0) {
                             pt.y += this.stack[i++];
                         } else {
                             pt.x += this.stack[i++];
                         }
-                        gp.lineTo (pt.x, pt.y);
+                        gp.lineTo(pt.x, pt.y);
                     }
                     pt.open = true;
                     this.stackptr = 0;
                     break;
                 case 8: // rrcurveto
-                    for (i = 0; i < this.stackptr;) {
+                    for (i = 0; i < this.stackptr; ) {
                         x1 = pt.x + this.stack[i++];
                         y1 = pt.y + this.stack[i++];
                         x2 = x1 + this.stack[i++];
                         y2 = y1 + this.stack[i++];
                         pt.x = x2 + this.stack[i++];
                         pt.y = y2 + this.stack[i++];
-                        gp.curveTo (x1, y1, x2, y2, pt.x, pt.y);
+                        gp.curveTo(x1, y1, x2, y2, pt.x, pt.y);
                     }
                     pt.open = true;
                     this.stackptr = 0;
@@ -769,8 +721,8 @@ public class Type1CFont extends OutlineFont {
                 case 10: // callsubr
                     hold = this.pos;
                     i = (int) this.stack[--this.stackptr] + this.lsubrsoffset;
-                    final Range lsubr = getIndexEntry (this.lsubrbase, i);
-                    parseGlyph (lsubr, gp, pt);
+                    final Range lsubr = getIndexEntry(this.lsubrbase, i);
+                    parseGlyph(lsubr, gp, pt);
                     this.pos = hold;
                     break;
                 case 11: // return
@@ -778,15 +730,15 @@ public class Type1CFont extends OutlineFont {
                 case 14: // endchar
                     // width x y achar bchar endchar == x y achar bchar seac
                     if (this.stackptr == 5) {
-                        buildAccentChar (this.stack[1], this.stack[2], (char) this.stack[3],
+                        buildAccentChar(this.stack[1], this.stack[2], (char) this.stack[3],
                                 (char) this.stack[4], gp);
-                } else if (this.stackptr == 4) {
-                    // see page 58 on specification 5177.Type2.pdf which indicates that
-                    // these parameters are valid for Type1C as the width is optional
-                    buildAccentChar(this.stack[0], this.stack[1], (char) this.stack[2], (char) this.stack[3], gp);
-                }
+                    } else if (this.stackptr == 4) {
+                        // see page 58 on specification 5177.Type2.pdf which indicates that
+                        // these parameters are valid for Type1C as the width is optional
+                        buildAccentChar(this.stack[0], this.stack[1], (char) this.stack[2], (char) this.stack[3], gp);
+                    }
                     if (pt.open) {
-                        gp.closePath ();
+                        gp.closePath();
                     }
                     pt.open = false;
                     this.stackptr = 0;
@@ -799,7 +751,7 @@ public class Type1CFont extends OutlineFont {
                     break;
                 case 19: // hintmask
                 case 20: // cntrmask
-                	stemhints += (this.stackptr) / 2;
+                    stemhints += (this.stackptr) / 2;
                     this.pos += (stemhints - 1) / 8 + 1;
                     this.stackptr = 0;
                     break;
@@ -811,9 +763,9 @@ public class Type1CFont extends OutlineFont {
                     pt.x += this.stack[0];
                     pt.y += this.stack[1];
                     if (pt.open) {
-                        gp.closePath ();
+                        gp.closePath();
                     }
-                    gp.moveTo (pt.x, pt.y);
+                    gp.moveTo(pt.x, pt.y);
                     pt.open = false;
                     this.stackptr = 0;
                     break;
@@ -823,33 +775,33 @@ public class Type1CFont extends OutlineFont {
                     }
                     pt.x += this.stack[0];
                     if (pt.open) {
-                        gp.closePath ();
+                        gp.closePath();
                     }
-                    gp.moveTo (pt.x, pt.y);
+                    gp.moveTo(pt.x, pt.y);
                     pt.open = false;
                     this.stackptr = 0;
                     break;
                 case 24: // rcurveline
-                    for (i = 0; i < this.stackptr - 2;) {
+                    for (i = 0; i < this.stackptr - 2; ) {
                         x1 = pt.x + this.stack[i++];
                         y1 = pt.y + this.stack[i++];
                         x2 = x1 + this.stack[i++];
                         y2 = y1 + this.stack[i++];
                         pt.x = x2 + this.stack[i++];
                         pt.y = y2 + this.stack[i++];
-                        gp.curveTo (x1, y1, x2, y2, pt.x, pt.y);
+                        gp.curveTo(x1, y1, x2, y2, pt.x, pt.y);
                     }
                     pt.x += this.stack[i++];
                     pt.y += this.stack[i++];
-                    gp.lineTo (pt.x, pt.y);
+                    gp.lineTo(pt.x, pt.y);
                     pt.open = true;
                     this.stackptr = 0;
                     break;
                 case 25: // rlinecurve
-                    for (i = 0; i < this.stackptr - 6;) {
+                    for (i = 0; i < this.stackptr - 6; ) {
                         pt.x += this.stack[i++];
                         pt.y += this.stack[i++];
-                        gp.lineTo (pt.x, pt.y);
+                        gp.lineTo(pt.x, pt.y);
                     }
                     x1 = pt.x + this.stack[i++];
                     y1 = pt.y + this.stack[i++];
@@ -857,7 +809,7 @@ public class Type1CFont extends OutlineFont {
                     y2 = y1 + this.stack[i++];
                     pt.x = x2 + this.stack[i++];
                     pt.y = y2 + this.stack[i++];
-                    gp.curveTo (x1, y1, x2, y2, pt.x, pt.y);
+                    gp.curveTo(x1, y1, x2, y2, pt.x, pt.y);
                     pt.open = true;
                     this.stackptr = 0;
                     break;
@@ -873,7 +825,7 @@ public class Type1CFont extends OutlineFont {
                         y2 = y1 + this.stack[i++];
                         pt.x = x2;
                         pt.y = y2 + this.stack[i++];
-                        gp.curveTo (x1, y1, x2, y2, pt.x, pt.y);
+                        gp.curveTo(x1, y1, x2, y2, pt.x, pt.y);
                     }
                     pt.open = true;
                     this.stackptr = 0;
@@ -890,7 +842,7 @@ public class Type1CFont extends OutlineFont {
                         y2 = y1 + this.stack[i++];
                         pt.x = x2 + this.stack[i++];
                         pt.y = y2;
-                        gp.curveTo (x1, y1, x2, y2, pt.x, pt.y);
+                        gp.curveTo(x1, y1, x2, y2, pt.x, pt.y);
                     }
                     pt.open = true;
                     this.stackptr = 0;
@@ -898,15 +850,15 @@ public class Type1CFont extends OutlineFont {
                 case 29: // callgsubr
                     hold = this.pos;
                     i = (int) this.stack[--this.stackptr] + this.gsubrsoffset;
-                    final Range gsubr = getIndexEntry (this.gsubrbase, i);
-                    parseGlyph (gsubr, gp, pt);
+                    final Range gsubr = getIndexEntry(this.gsubrbase, i);
+                    parseGlyph(gsubr, gp, pt);
                     this.pos = hold;
                     break;
                 case 30: // vhcurveto
                     hold = 4;
                     break;
                 case 31: // hvcurveto
-                    for (i = 0; i < this.stackptr;) {
+                    for (i = 0; i < this.stackptr; ) {
                         final boolean hv = (((i + hold) & 4) == 0);
                         x1 = pt.x + (hv ? this.stack[i++] : 0);
                         y1 = pt.y + (hv ? 0 : this.stack[i++]);
@@ -921,7 +873,7 @@ public class Type1CFont extends OutlineFont {
                                 pt.y += this.stack[i++];
                             }
                         }
-                        gp.curveTo (x1, y1, x2, y2, pt.x, pt.y);
+                        gp.curveTo(x1, y1, x2, y2, pt.x, pt.y);
                     }
                     pt.open = true;
                     this.stackptr = 0;
@@ -941,7 +893,7 @@ public class Type1CFont extends OutlineFont {
                     this.stack[this.stackptr++] = (x1 == 0) ? 1 : 0;
                     break;
                 case 1009: // abs
-                    this.stack[this.stackptr - 1] = Math.abs (this.stack[this.stackptr - 1]);
+                    this.stack[this.stackptr - 1] = Math.abs(this.stack[this.stackptr - 1]);
                     break;
                 case 1010: // add
                     x1 = this.stack[--this.stackptr];
@@ -985,7 +937,7 @@ public class Type1CFont extends OutlineFont {
                     this.stackptr -= 3;
                     break;
                 case 1023: // random
-                    this.stack[this.stackptr++] = (float) Math.random ();
+                    this.stack[this.stackptr++] = (float) Math.random();
                     break;
                 case 1024: // mul
                     x1 = this.stack[--this.stackptr];
@@ -993,7 +945,7 @@ public class Type1CFont extends OutlineFont {
                     this.stack[this.stackptr++] = y1 * x1;
                     break;
                 case 1026: // sqrt
-                    this.stack[this.stackptr - 1] = (float) Math.sqrt (this.stack[this.stackptr - 1]);
+                    this.stack[this.stackptr - 1] = (float) Math.sqrt(this.stack[this.stackptr - 1]);
                     break;
                 case 1027: // dup
                     x1 = this.stack[this.stackptr - 1];
@@ -1023,10 +975,10 @@ public class Type1CFont extends OutlineFont {
                     // x x x x i y y y -> y y y x x x x i (where i=3)
                     if (i > 0) {
                         final float[] roll = new float[n];
-                        System.arraycopy (this.stack, this.stackptr - 1 - i, roll, 0, i);
-                        System.arraycopy (this.stack, this.stackptr - 1 - n, roll, i,
+                        System.arraycopy(this.stack, this.stackptr - 1 - i, roll, 0, i);
+                        System.arraycopy(this.stack, this.stackptr - 1 - n, roll, i,
                                 n - i);
-                        System.arraycopy (roll, 0, this.stack, this.stackptr - 1 - n, n);
+                        System.arraycopy(roll, 0, this.stack, this.stackptr - 1 - n, n);
                     }
                     break;
                 case 1034: // hflex
@@ -1036,14 +988,14 @@ public class Type1CFont extends OutlineFont {
                     y2 = y1 + this.stack[2];
                     pt.x = x2 + this.stack[3];
                     pt.y = y2;
-                    gp.curveTo (x1, y1, x2, y2, pt.x, pt.y);
+                    gp.curveTo(x1, y1, x2, y2, pt.x, pt.y);
                     x1 = pt.x + this.stack[4];
                     y1 = pt.y;
                     x2 = x1 + this.stack[5];
                     y2 = ybase;
                     pt.x = x2 + this.stack[6];
                     pt.y = y2;
-                    gp.curveTo (x1, y1, x2, y2, pt.x, pt.y);
+                    gp.curveTo(x1, y1, x2, y2, pt.x, pt.y);
                     pt.open = true;
                     this.stackptr = 0;
                     break;
@@ -1054,14 +1006,14 @@ public class Type1CFont extends OutlineFont {
                     y2 = y1 + this.stack[3];
                     pt.x = x2 + this.stack[4];
                     pt.y = y2 + this.stack[5];
-                    gp.curveTo (x1, y1, x2, y2, pt.x, pt.y);
+                    gp.curveTo(x1, y1, x2, y2, pt.x, pt.y);
                     x1 = pt.x + this.stack[6];
                     y1 = pt.y + this.stack[7];
                     x2 = x1 + this.stack[8];
                     y2 = y1 + this.stack[9];
                     pt.x = x2 + this.stack[10];
                     pt.y = y2 + this.stack[11];
-                    gp.curveTo (x1, y1, x2, y2, pt.x, pt.y);
+                    gp.curveTo(x1, y1, x2, y2, pt.x, pt.y);
                     pt.open = true;
                     this.stackptr = 0;
                     break;
@@ -1073,14 +1025,14 @@ public class Type1CFont extends OutlineFont {
                     y2 = y1 + this.stack[3];
                     pt.x = x2 + this.stack[4];
                     pt.y = y2;
-                    gp.curveTo (x1, y1, x2, y2, pt.x, pt.y);
+                    gp.curveTo(x1, y1, x2, y2, pt.x, pt.y);
                     x1 = pt.x + this.stack[5];
                     y1 = pt.y;
                     x2 = x1 + this.stack[6];
                     y2 = y1 + this.stack[7];
                     pt.x = x2 + this.stack[8];
                     pt.y = ybase;
-                    gp.curveTo (x1, y1, x2, y2, pt.x, pt.y);
+                    gp.curveTo(x1, y1, x2, y2, pt.x, pt.y);
                     pt.open = true;
                     this.stackptr = 0;
                     break;
@@ -1093,19 +1045,19 @@ public class Type1CFont extends OutlineFont {
                     y2 = y1 + this.stack[3];
                     pt.x = x2 + this.stack[4];
                     pt.y = y2 + this.stack[5];
-                    gp.curveTo (x1, y1, x2, y2, pt.x, pt.y);
+                    gp.curveTo(x1, y1, x2, y2, pt.x, pt.y);
                     x1 = pt.x + this.stack[6];
                     y1 = pt.y + this.stack[7];
                     x2 = x1 + this.stack[8];
                     y2 = y1 + this.stack[9];
-                    if (Math.abs (x2 - xbase) > Math.abs (y2 - ybase)) {
+                    if (Math.abs(x2 - xbase) > Math.abs(y2 - ybase)) {
                         pt.x = x2 + this.stack[10];
                         pt.y = ybase;
                     } else {
                         pt.x = xbase;
                         pt.y = y2 + this.stack[10];
                     }
-                    gp.curveTo (x1, y1, x2, y2, pt.x, pt.y);
+                    gp.curveTo(x1, y1, x2, y2, pt.x, pt.y);
                     pt.open = true;
                     this.stackptr = 0;
                     break;
@@ -1116,34 +1068,34 @@ public class Type1CFont extends OutlineFont {
         }
     }
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * Get a glyph outline by name
-	 */
+    /**
+     * {@inheritDoc}
+     * <p>
+     * Get a glyph outline by name
+     */
     @Override
-	protected GeneralPath getOutline (final String name, final float width) {
+    protected GeneralPath getOutline(final String name, final float width) {
         // first find the index of this name
-        final int index = getNameIndex (name);
+        final int index = getNameIndex(name);
 
         // now find the glyph with that name
         for (int i = 0; i < this.glyphnames.length; i++) {
             if (this.glyphnames[i] == index) {
-                return readGlyph (this.charstringbase, i);
+                return readGlyph(this.charstringbase, i);
             }
         }
 
         // not found -- return the unknown glyph
-        return readGlyph (this.charstringbase, 0);
+        return readGlyph(this.charstringbase, 0);
     }
 
-	/**
-	 * {@inheritDoc}
-	 * Get a glyph outline by character code
-	 * Note this method must always return an outline
-	 */
+    /**
+     * {@inheritDoc}
+     * Get a glyph outline by character code
+     * Note this method must always return an outline
+     */
     @Override
-	protected GeneralPath getOutline (final char src, final float width) {
+    protected GeneralPath getOutline(final char src, final float width) {
         // ignore high bits
         final int index = (src & 0xff);
 
@@ -1152,18 +1104,51 @@ public class Type1CFont extends OutlineFont {
         if (this.encodingbase == 0 || this.encodingbase == 1) {
             for (int i = 0; i < this.glyphnames.length; i++) {
                 if (this.glyphnames[i] == this.encoding[index]) {
-                    return readGlyph (this.charstringbase, i);
+                    return readGlyph(this.charstringbase, i);
                 }
             }
         } else {
             // for a custom encoding, the mapping is from glyph to GID, so
             // we can just map the glyph directly
             if (index > 0 && index < this.encoding.length) {
-                return readGlyph (this.charstringbase, this.encoding[index]);
+                return readGlyph(this.charstringbase, this.encoding[index]);
             }
         }
 
         // for some reason the glyph was not found, return the empty glyph
-        return readGlyph (this.charstringbase, 0);
+        return readGlyph(this.charstringbase, 0);
+    }
+
+    /**
+     * A range.  There's probably a version of this class floating around
+     * somewhere already in Java.
+     */
+    static class Range {
+
+        private final int start;
+
+        private final int len;
+
+        public Range(final int start, final int len) {
+            this.start = start;
+            this.len = len;
+        }
+
+        public final int getStart() {
+            return this.start;
+        }
+
+        public final int getLen() {
+            return this.len;
+        }
+
+        public final int getEnd() {
+            return this.start + this.len;
+        }
+
+        @Override
+        public String toString() {
+            return "Range: start: " + this.start + ", len: " + this.len;
+        }
     }
 }

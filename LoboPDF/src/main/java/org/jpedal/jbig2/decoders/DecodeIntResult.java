@@ -27,41 +27,38 @@ package org.jpedal.jbig2.decoders;
 
 /**
  * <p>DecodeIntResult class.</p>
- *
-  *
-  *
  */
 public class DecodeIntResult {
 
-	private final int intResult;
-	private final boolean booleanResult;
+    private final int intResult;
+    private final boolean booleanResult;
 
-	/**
-	 * <p>Constructor for DecodeIntResult.</p>
-	 *
-	 * @param intResult a int.
-	 * @param booleanResult a boolean.
-	 */
-	public DecodeIntResult(final int intResult, final boolean booleanResult) {
-		this.intResult = intResult;
-		this.booleanResult = booleanResult;
-	}
+    /**
+     * <p>Constructor for DecodeIntResult.</p>
+     *
+     * @param intResult     a int.
+     * @param booleanResult a boolean.
+     */
+    public DecodeIntResult(final int intResult, final boolean booleanResult) {
+        this.intResult = intResult;
+        this.booleanResult = booleanResult;
+    }
 
-	/**
-	 * <p>intResult.</p>
-	 *
-	 * @return a int.
-	 */
-	public int intResult() {
-		return intResult;
-	}
+    /**
+     * <p>intResult.</p>
+     *
+     * @return a int.
+     */
+    public int intResult() {
+        return intResult;
+    }
 
-	/**
-	 * <p>booleanResult.</p>
-	 *
-	 * @return a boolean.
-	 */
-	public boolean booleanResult() {
-		return booleanResult;
-	}
+    /**
+     * <p>booleanResult.</p>
+     *
+     * @return a boolean.
+     */
+    public boolean booleanResult() {
+        return booleanResult;
+    }
 }

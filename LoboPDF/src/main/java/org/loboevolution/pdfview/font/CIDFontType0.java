@@ -26,14 +26,14 @@
 
 package org.loboevolution.pdfview.font;
 
-import java.io.IOException;
-
 import org.loboevolution.pdfview.PDFObject;
 import org.loboevolution.pdfview.font.cid.PDFCMap;
 import org.loboevolution.pdfview.font.ttf.AdobeGlyphList;
 
+import java.io.IOException;
+
 /**
- ***************************************************************************
+ * **************************************************************************
  * At the moment this is not fully supported to parse CID based fonts
  * As a hack we try to use a built in font as substitution and use a
  * toUnicode map to translate the characters if available.
@@ -41,56 +41,56 @@ import org.loboevolution.pdfview.font.ttf.AdobeGlyphList;
  * @version $Id: CIDFontType0.java,v 1.1 2011-08-03 15:48:56 bros Exp $
  * Author  Bernd Rosstauscher
  * @since 03.08.2011
- ***************************************************************************
+ * **************************************************************************
  */
 public class CIDFontType0 extends BuiltinFont {
 
-	private PDFCMap glyphLookupMap;
+    private PDFCMap glyphLookupMap;
 
-	/**
-	 ***********************************************************************
-	 * Constructor
-	 *
-	 * @param baseFont a {@link java.lang.String} object.
-	 * @param fontObj a {@link org.loboevolution.pdfview.PDFObject} object.
-	 * @param descriptor a {@link org.loboevolution.pdfview.font.PDFFontDescriptor} object.
-	 * @throws java.io.IOException if any.
-	 */
-	public CIDFontType0(final String baseFont, final PDFObject fontObj,
+    /**
+     * **********************************************************************
+     * Constructor
+     *
+     * @param baseFont   a {@link java.lang.String} object.
+     * @param fontObj    a {@link org.loboevolution.pdfview.PDFObject} object.
+     * @param descriptor a {@link org.loboevolution.pdfview.font.PDFFontDescriptor} object.
+     * @throws java.io.IOException if any.
+     */
+    public CIDFontType0(final String baseFont, final PDFObject fontObj,
                         final PDFFontDescriptor descriptor) throws IOException {
-		super(baseFont, fontObj, descriptor);
-	}
-	
-	/**
-	 * <p>parseToUnicodeMap.</p>
-	 *
-	 * @param fontObj a {@link org.loboevolution.pdfview.PDFObject} object.
-	 * @throws java.io.IOException if any.
-	 */
-	public void parseToUnicodeMap(final PDFObject fontObj) throws IOException {
-		final PDFObject toUnicode = fontObj.getDictRef("ToUnicode");
-		if (toUnicode != null) {
-			final PDFCMap cmap = PDFCMap.getCMap(toUnicode);
-			this.glyphLookupMap = cmap;
-		}
-	}
-	
-	/**
-	 * {@inheritDoc}
-	 *
-	 * Get a character from the first font in the descendant fonts array
-	 */
+        super(baseFont, fontObj, descriptor);
+    }
+
+    /**
+     * <p>parseToUnicodeMap.</p>
+     *
+     * @param fontObj a {@link org.loboevolution.pdfview.PDFObject} object.
+     * @throws java.io.IOException if any.
+     */
+    public void parseToUnicodeMap(final PDFObject fontObj) throws IOException {
+        final PDFObject toUnicode = fontObj.getDictRef("ToUnicode");
+        if (toUnicode != null) {
+            final PDFCMap cmap = PDFCMap.getCMap(toUnicode);
+            this.glyphLookupMap = cmap;
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * Get a character from the first font in the descendant fonts array
+     */
     @Override
-	protected PDFGlyph getGlyph(char src, final String glyph) {
-		String name = glyph;
+    protected PDFGlyph getGlyph(char src, final String glyph) {
+        String name = glyph;
         if (this.glyphLookupMap != null) {
-        	src = this.glyphLookupMap.map(src);
+            src = this.glyphLookupMap.map(src);
             //The preferred method of getting the glyph should be by name. 
             if (name == null && src != 160) {//unless it NBSP
-            	//so, try to find the name by the char
-            	name = AdobeGlyphList.getGlyphName(src);
+                //so, try to find the name by the char
+                name = AdobeGlyphList.getGlyphName(src);
             }
         }
-		return super.getGlyph(src, name);
+        return super.getGlyph(src, name);
     }
 }

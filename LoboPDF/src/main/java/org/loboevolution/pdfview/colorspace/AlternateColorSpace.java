@@ -26,48 +26,50 @@
 
 package org.loboevolution.pdfview.colorspace;
 
-import java.awt.color.ColorSpace;
-
 import org.loboevolution.pdfview.PDFPaint;
 import org.loboevolution.pdfview.function.PDFFunction;
+
+import java.awt.color.ColorSpace;
 
 /**
  * A color space that uses another color space to return values, and a
  * function to map between values in the input and input values to the
  * alternate color space
- *
-  *
-  *
  */
 public class AlternateColorSpace extends PDFColorSpace {
-    /** The alternate color space */
+    /**
+     * The alternate color space
+     */
     private final PDFColorSpace alternate;
-    
-    /** The function */
+
+    /**
+     * The function
+     */
     private final PDFFunction function;
-    
+
     private AltColorSpace altcolorspace;
-    
+
     /**
      * Creates a new instance of AlternateColorSpace
      *
      * @param alternate a {@link org.loboevolution.pdfview.colorspace.PDFColorSpace} object.
-     * @param function a {@link org.loboevolution.pdfview.function.PDFFunction} object.
+     * @param function  a {@link org.loboevolution.pdfview.function.PDFFunction} object.
      */
     public AlternateColorSpace(final PDFColorSpace alternate, final PDFFunction function) {
         super(null);
-        
+
         this.alternate = alternate;
         this.function = function;
     }
-    
+
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * get the number of components expected in the getPaint command
      */
-    @Override public int getNumComponents() {
-	if (this.function != null) {
+    @Override
+    public int getNumComponents() {
+        if (this.function != null) {
             return this.function.getNumInputs();
         } else {
             return this.alternate.getNumComponents();
@@ -76,7 +78,7 @@ public class AlternateColorSpace extends PDFColorSpace {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * get the PDFPaint representing the color described by the
      * given color components
      */
@@ -89,28 +91,29 @@ public class AlternateColorSpace extends PDFColorSpace {
 
         return this.alternate.getPaint(components);
     }
-    
+
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * get the original Java ColorSpace.
      */
-    @Override public ColorSpace getColorSpace() {
-    	if (altcolorspace == null) altcolorspace = new AltColorSpace(function, alternate.getColorSpace());
-    	return altcolorspace;
-    	//return this.alternate.getColorSpace();
+    @Override
+    public ColorSpace getColorSpace() {
+        if (altcolorspace == null) altcolorspace = new AltColorSpace(function, alternate.getColorSpace());
+        return altcolorspace;
+        //return this.alternate.getColorSpace();
     }
-    
-	/**
-	 ***********************************************************************
-	 * Get the PDF function
-	 *
-	 * @return PDFFunction
-	 ***********************************************************************
-	 */
-	public PDFFunction getFunktion() {
-		return this.function;		
-	}
-	
-	
+
+    /**
+     * **********************************************************************
+     * Get the PDF function
+     *
+     * @return PDFFunction
+     * **********************************************************************
+     */
+    public PDFFunction getFunktion() {
+        return this.function;
+    }
+
+
 }

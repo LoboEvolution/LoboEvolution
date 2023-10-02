@@ -35,22 +35,28 @@ import org.jpedal.jbig2.segment.Flags;
 @Slf4j
 public class RefinementRegionFlags extends Flags {
 
-	/** Constant <code>GR_TEMPLATE="GR_TEMPLATE"</code> */
-	public static final String GR_TEMPLATE = "GR_TEMPLATE";
-	/** Constant <code>TPGDON="TPGDON"</code> */
-	public static final String TPGDON = "TPGDON";
+    /**
+     * Constant <code>GR_TEMPLATE="GR_TEMPLATE"</code>
+     */
+    public static final String GR_TEMPLATE = "GR_TEMPLATE";
+    /**
+     * Constant <code>TPGDON="TPGDON"</code>
+     */
+    public static final String TPGDON = "TPGDON";
 
-	/** {@inheritDoc} */
-	public void setFlags(final int flagsAsInt) {
-		this.flagsAsInt = flagsAsInt;
+    /**
+     * {@inheritDoc}
+     */
+    public void setFlags(final int flagsAsInt) {
+        this.flagsAsInt = flagsAsInt;
 
-		/** extract GR_TEMPLATE */
-		flags.put(GR_TEMPLATE, flagsAsInt & 1);
+        /** extract GR_TEMPLATE */
+        flags.put(GR_TEMPLATE, flagsAsInt & 1);
 
-		/** extract TPGDON */
-		flags.put(TPGDON, (flagsAsInt >> 1) & 1);
+        /** extract TPGDON */
+        flags.put(TPGDON, (flagsAsInt >> 1) & 1);
 
-		if (JBIG2StreamDecoder.debug)
-			log.info("flags: {} ", flags);
-	}
+        if (JBIG2StreamDecoder.debug)
+            log.info("flags: {} ", flags);
+    }
 }

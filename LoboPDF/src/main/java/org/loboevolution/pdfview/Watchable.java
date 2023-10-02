@@ -27,27 +27,40 @@ package org.loboevolution.pdfview;
 
 /**
  * An interface for rendering or parsing, which can be stopped and started.
- *
-  *
-  *
  */
 public interface Watchable {
 
-    /** the possible statuses */
+    /**
+     * the possible statuses
+     */
     int UNKNOWN = 0;
-    /** Constant <code>NOT_STARTED=1</code> */
+    /**
+     * Constant <code>NOT_STARTED=1</code>
+     */
     int NOT_STARTED = 1;
-    /** Constant <code>PAUSED=2</code> */
+    /**
+     * Constant <code>PAUSED=2</code>
+     */
     int PAUSED = 2;
-    /** Constant <code>NEEDS_DATA=3</code> */
+    /**
+     * Constant <code>NEEDS_DATA=3</code>
+     */
     int NEEDS_DATA = 3;
-    /** Constant <code>RUNNING=4</code> */
+    /**
+     * Constant <code>RUNNING=4</code>
+     */
     int RUNNING = 4;
-    /** Constant <code>STOPPED=5</code> */
+    /**
+     * Constant <code>STOPPED=5</code>
+     */
     int STOPPED = 5;
-    /** Constant <code>COMPLETED=6</code> */
+    /**
+     * Constant <code>COMPLETED=6</code>
+     */
     int COMPLETED = 6;
-    /** Constant <code>ERROR=7</code> */
+    /**
+     * Constant <code>ERROR=7</code>
+     */
     int ERROR = 7;
 
     /**

@@ -27,37 +27,33 @@ package org.jpedal.jbig2;
 
 /**
  * <p>JBIG2Exception class.</p>
- *
-  *
-  *
  */
 public class JBIG2Exception extends Exception {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * <p>Constructor for JBIG2Exception.</p>
-	 *
-	 * @param ex a {@link java.lang.Exception} object.
-	 */
-	public JBIG2Exception(final Exception ex) {
-		super(ex);
-	}
+    /**
+     * <p>Constructor for JBIG2Exception.</p>
+     *
+     * @param ex a {@link java.lang.Exception} object.
+     */
+    public JBIG2Exception(final Exception ex) {
+        super(ex);
+    }
 
-	/**
-	 * Constructs a <CODE>JBIGException</CODE> whithout a message.
-	 */
-	public JBIG2Exception() {
-		super();
-	}
+    /**
+     * Constructs a <CODE>JBIGException</CODE> whithout a message.
+     */
+    public JBIG2Exception() {
+        super();
+    }
 
-	/**
-	 * Constructs a <code>JBIGException</code> with a message.
-	 *
-	 * @param message
-	 *            a message describing the exception
-	 */
-	public JBIG2Exception(final String message) {
-		super(message);
-	}
+    /**
+     * Constructs a <code>JBIGException</code> with a message.
+     *
+     * @param message a message describing the exception
+     */
+    public JBIG2Exception(final String message) {
+        super(message);
+    }
 }

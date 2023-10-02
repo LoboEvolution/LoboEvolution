@@ -29,9 +29,8 @@ import java.awt.geom.Rectangle2D;
 
 /**
  * The abstract superclass of all drawing commands for a PDFPage.
- *
+ * <p>
  * Author Mike Wessler
-  *
  */
 public abstract class PDFCmd {
 
@@ -39,16 +38,16 @@ public abstract class PDFCmd {
      * mark the page or change the graphics state
      *
      * @param state the current graphics state;  may be modified during
-     * execution.
+     *              execution.
      * @return the region of the page made dirty by executing this command
-     *         or null if no region was touched.  Note this value should be
-     *         in the coordinates of the image touched, not the page.
+     * or null if no region was touched.  Note this value should be
+     * in the coordinates of the image touched, not the page.
      */
     public abstract Rectangle2D execute(PDFRenderer state);
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * a human readable representation of this command
      */
     @Override

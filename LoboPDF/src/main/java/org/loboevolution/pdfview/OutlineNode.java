@@ -25,19 +25,16 @@
  */
 package org.loboevolution.pdfview;
 
-import javax.swing.tree.DefaultMutableTreeNode;
-
 import org.loboevolution.pdfview.action.PDFAction;
+
+import javax.swing.tree.DefaultMutableTreeNode;
 
 /**
  * <p>OutlineNode class.</p>
- *
-  *
-  *
  */
 public class OutlineNode extends DefaultMutableTreeNode {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     private final String title;
 
@@ -70,7 +67,7 @@ public class OutlineNode extends DefaultMutableTreeNode {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Return the node's visible name in the tree
      */
     @Override

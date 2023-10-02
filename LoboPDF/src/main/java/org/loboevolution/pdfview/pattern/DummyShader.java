@@ -26,39 +26,40 @@
 
 package org.loboevolution.pdfview.pattern;
 
-import java.awt.Color;
-import java.io.IOException;
-
 import org.loboevolution.pdfview.PDFObject;
 import org.loboevolution.pdfview.PDFPaint;
 
+import java.awt.*;
+import java.io.IOException;
+
 /**
  * <p>DummyShader class.</p>
- *
-  *
-  *
  */
 public class DummyShader extends PDFShader {
 
-	/**
-	 * <p>Constructor for DummyShader.</p>
-	 *
-	 * @param type a int.
-	 */
-	protected DummyShader(final int type) {
-		super(type);
-	}
+    /**
+     * <p>Constructor for DummyShader.</p>
+     *
+     * @param type a int.
+     */
+    protected DummyShader(final int type) {
+        super(type);
+    }
 
-	/** {@inheritDoc} */
-	@Override
-	public void parse(final PDFObject shareObj) throws IOException {
-		
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void parse(final PDFObject shareObj) throws IOException {
 
-	/** {@inheritDoc} */
-	@Override
-	public PDFPaint getPaint() {
-		return PDFPaint.getPaint(Color.PINK);
-	}
-		
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public PDFPaint getPaint() {
+        return PDFPaint.getPaint(Color.PINK);
+    }
+
 }

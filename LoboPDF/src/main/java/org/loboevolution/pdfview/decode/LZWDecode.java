@@ -25,18 +25,18 @@
  */
 package org.loboevolution.pdfview.decode;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.nio.ByteBuffer;
-
 import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.pdfview.PDFObject;
 import org.loboevolution.pdfview.PDFParseException;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.nio.ByteBuffer;
+
 /**
  * decode an LZW-encoded array of bytes.  LZW is a patented algorithm.
  *
- *   <p>Feb 21, 2009 Legal statement on Intellectual Property from Unisys</p><pre>
+ * <p>Feb 21, 2009 Legal statement on Intellectual Property from Unisys</p><pre>
  *   <b><u>LZW Patent Information</u></b> (http://www.unisys.com/about__unisys/lzw)
  *   <u>License Information on GIF and Other LZW-based Technologies
  *   </u>
@@ -70,22 +70,23 @@ import org.loboevolution.pdfview.PDFParseException;
  *   You should consult with your own legal counsel regarding your
  *   particular situation.
  *   </pre>
- *
- *   Mike Wessler
+ * <p>
+ * Mike Wessler
  */
 @Slf4j
 public class LZWDecode {
-    final ByteBuffer buf;
-    int bytepos;
-    int bitpos;
-    final byte[][] dict = new byte[4096][];
-    int dictlen = 0;
-    int bitspercode = 9;
     static final int STOP = 257;
     static final int CLEARDICT = 256;
+    final ByteBuffer buf;
+    final byte[][] dict = new byte[4096][];
+    int bytepos;
+    int bitpos;
+    int dictlen = 0;
+    int bitspercode = 9;
 
     /**
      * initialize this decoder with an array of encoded bytes
+     *
      * @param buf the buffer of bytes
      */
     private LZWDecode(final ByteBuffer buf) throws PDFParseException {
@@ -98,6 +99,31 @@ public class LZWDecode {
         this.buf = buf;
         this.bytepos = 0;
         this.bitpos = 0;
+    }
+
+    /**
+     * decode an array of LZW-encoded bytes to a byte array.
+     *
+     * @param buf    the buffer of encoded bytes
+     * @param params parameters for the decoder (unused)
+     * @return the decoded uncompressed bytes
+     * @throws java.io.IOException if any.
+     */
+    public static ByteBuffer decode(final ByteBuffer buf, final PDFObject params)
+            throws IOException {
+        // decode the array
+        final LZWDecode me = new LZWDecode(buf);
+        ByteBuffer outBytes = me.decode();
+
+        // undo a predictor algorithm, if any was used
+        if (params != null && params.getDictionary().containsKey("Predictor")) {
+            final Predictor predictor = Predictor.getPredictor(params);
+            if (predictor != null) {
+                outBytes = predictor.unpredict(outBytes);
+            }
+        }
+
+        return outBytes;
     }
 
     /**
@@ -137,6 +163,7 @@ public class LZWDecode {
 
     /**
      * decode the array.
+     *
      * @return the uncompressed byte array
      */
     private ByteBuffer decode() throws PDFParseException {
@@ -155,7 +182,7 @@ public class LZWDecode {
                 break;
             } else if (cW == CLEARDICT) {
                 resetDict();
-            //		pW= -1;
+                //		pW= -1;
             } else if (pW == CLEARDICT) {
                 baos.write(this.dict[cW], 0, this.dict[cW].length);
             } else {
@@ -178,30 +205,5 @@ public class LZWDecode {
             }
         }
         return ByteBuffer.wrap(baos.toByteArray());
-    }
-
-    /**
-     * decode an array of LZW-encoded bytes to a byte array.
-     *
-     * @param buf the buffer of encoded bytes
-     * @param params parameters for the decoder (unused)
-     * @return the decoded uncompressed bytes
-     * @throws java.io.IOException if any.
-     */
-    public static ByteBuffer decode(final ByteBuffer buf, final PDFObject params)
-            throws IOException {
-        // decode the array
-        final LZWDecode me = new LZWDecode(buf);
-        ByteBuffer outBytes = me.decode();
-
-        // undo a predictor algorithm, if any was used
-        if (params != null && params.getDictionary().containsKey("Predictor")) {
-            final Predictor predictor = Predictor.getPredictor(params);
-            if (predictor != null) {
-                outBytes = predictor.unpredict(outBytes);
-            }
-        }
-
-        return outBytes;
     }
 }

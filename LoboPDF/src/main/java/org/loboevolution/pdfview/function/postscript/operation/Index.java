@@ -31,11 +31,13 @@ import java.util.LinkedList;
 import java.util.List;
 
 final class Index implements PostScriptOperation {
-	/** {@inheritDoc} */
-	@Override
-	public void eval(final Deque<Object> environment) {   // <i>anyn ... any0 n</i> <b>index</b> <i>anyn ... any0 anyn</i>
-		final long n = Math.round((Double)environment.pop());
-		final List<Object> list = (LinkedList) environment;
-		environment.push(list.get((int)(environment.size() - n - 1)));
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void eval(final Deque<Object> environment) {   // <i>anyn ... any0 n</i> <b>index</b> <i>anyn ... any0 anyn</i>
+        final long n = Math.round((Double) environment.pop());
+        final List<Object> list = (LinkedList) environment;
+        environment.push(list.get((int) (environment.size() - n - 1)));
+    }
 }

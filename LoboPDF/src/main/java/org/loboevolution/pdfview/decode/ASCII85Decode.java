@@ -25,18 +25,17 @@
  */
 package org.loboevolution.pdfview.decode;
 
-import java.io.ByteArrayOutputStream;
-import java.nio.ByteBuffer;
-
 import org.loboevolution.pdfview.PDFFile;
 import org.loboevolution.pdfview.PDFObject;
 import org.loboevolution.pdfview.PDFParseException;
 
+import java.io.ByteArrayOutputStream;
+import java.nio.ByteBuffer;
+
 /**
  * decode ASCII85 text into a byte array.
- *
+ * <p>
  * Author Mike Wessler
-  *
  */
 public final class ASCII85Decode {
 
@@ -50,7 +49,26 @@ public final class ASCII85Decode {
     }
 
     /**
+     * decode an array of bytes in ASCII85 format.
+     * <p>
+     * In ASCII85 format, every 5 characters represents 4 decoded
+     * bytes in base 85.  The entire stream can contain whitespace,
+     * and ends in the characters '~&gt;'.
+     *
+     * @param buf    the encoded ASCII85 characters in a byte buffer
+     * @param params parameters to the decoder (ignored)
+     * @return the decoded bytes
+     * @throws org.loboevolution.pdfview.PDFParseException if any.
+     */
+    public static ByteBuffer decode(final ByteBuffer buf, final PDFObject params)
+            throws PDFParseException {
+        final ASCII85Decode me = new ASCII85Decode(buf);
+        return me.decode();
+    }
+
+    /**
      * get the next character from the input.
+     *
      * @return the next character, or -1 if at end of stream
      */
     private int nextChar() {
@@ -73,7 +91,7 @@ public final class ASCII85Decode {
      * bytes.  Return false when finished, or true otherwise.
      *
      * @param baos the ByteArrayOutputStream to write output to, set to the
-     *        correct position
+     *             correct position
      * @return false when finished, or true otherwise.
      */
     private boolean decode5(final ByteArrayOutputStream baos)
@@ -109,10 +127,10 @@ public final class ASCII85Decode {
 
         final int value =
                 five[0] * 85 * 85 * 85 * 85 +
-                five[1] * 85 * 85 * 85 +
-                five[2] * 85 * 85 +
-                five[3] * 85 +
-                five[4];
+                        five[1] * 85 * 85 * 85 +
+                        five[2] * 85 * 85 +
+                        five[3] * 85 +
+                        five[4];
 
         for (int j = 0; j < i; j++) {
             final int shift = 8 * (3 - j);
@@ -124,6 +142,7 @@ public final class ASCII85Decode {
 
     /**
      * decode the bytes
+     *
      * @return the decoded bytes
      */
     private ByteBuffer decode() throws PDFParseException {
@@ -133,28 +152,10 @@ public final class ASCII85Decode {
         // allocate the output buffer
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
-        // decode the bytes 
+        // decode the bytes
         while (decode5(baos)) {
         }
 
         return ByteBuffer.wrap(baos.toByteArray());
-    }
-
-    /**
-     * decode an array of bytes in ASCII85 format.
-     * <p>
-     * In ASCII85 format, every 5 characters represents 4 decoded
-     * bytes in base 85.  The entire stream can contain whitespace,
-     * and ends in the characters '~&gt;'.
-     *
-     * @param buf the encoded ASCII85 characters in a byte buffer
-     * @param params parameters to the decoder (ignored)
-     * @return the decoded bytes
-     * @throws org.loboevolution.pdfview.PDFParseException if any.
-     */
-    public static ByteBuffer decode(final ByteBuffer buf, final PDFObject params)
-            throws PDFParseException {
-        final ASCII85Decode me = new ASCII85Decode(buf);
-        return me.decode();
     }
 }

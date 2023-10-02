@@ -31,16 +31,19 @@ import java.util.Arrays;
 
 /**
  * Model the TrueType Post table
- *
+ * <p>
  * Author  jkaplan
-  *
  */
 public class HmtxTable extends TrueTypeTable {
-    
-	/** advance widths for any glyphs that have one */
+
+    /**
+     * advance widths for any glyphs that have one
+     */
     final short[] advanceWidths;
-    
-    /** left side bearings for each glyph */
+
+    /**
+     * left side bearings for each glyph
+     */
     final short[] leftSideBearings;
 
     /**
@@ -49,20 +52,20 @@ public class HmtxTable extends TrueTypeTable {
      * @param ttf a {@link org.loboevolution.pdfview.font.ttf.TrueTypeFont} object.
      */
     protected HmtxTable(final TrueTypeFont ttf) {
-        super (TrueTypeTable.HMTX_TABLE);
+        super(TrueTypeTable.HMTX_TABLE);
 
         // the number of glyphs stored in the maxp table may be incorrect
         // in the case of subsetted fonts produced by some pdf generators
         final MaxpTable maxp = (MaxpTable) ttf.getTable("maxp");
         final int numGlyphs = maxp.getNumGlyphs();
-        
+
         final HheaTable hhea = (HheaTable) ttf.getTable("hhea");
         final int numOfLongHorMetrics = hhea.getNumOfLongHorMetrics();
-        
+
         this.advanceWidths = new short[numOfLongHorMetrics];
-        this.leftSideBearings = new short[numGlyphs]; 
+        this.leftSideBearings = new short[numGlyphs];
     }
-    
+
     /**
      * get the advance of a given glyph
      *
@@ -76,7 +79,7 @@ public class HmtxTable extends TrueTypeTable {
             return this.advanceWidths[this.advanceWidths.length - 1];
         }
     }
-      
+
     /**
      * get the left side bearing of a given glyph
      *
@@ -86,40 +89,40 @@ public class HmtxTable extends TrueTypeTable {
     public short getLeftSideBearing(final int glyphID) {
         return this.leftSideBearings[glyphID];
     }
-    
-	/**
-	 * {@inheritDoc}
-	 *
-	 * get the data in this map as a ByteBuffer
-	 */
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * get the data in this map as a ByteBuffer
+     */
     @Override
-	public ByteBuffer getData() {
+    public ByteBuffer getData() {
         final int size = getLength();
-        
+
         final ByteBuffer buf = ByteBuffer.allocate(size);
-        
+
         // write the metrics
         for (int i = 0; i < this.leftSideBearings.length; i++) {
             if (i < this.advanceWidths.length) {
                 buf.putShort(this.advanceWidths[i]);
             }
-            
+
             buf.putShort(this.leftSideBearings[i]);
         }
-        
+
         // reset the start pointer
         buf.flip();
-        
+
         return buf;
     }
-    
-	/**
-	 * {@inheritDoc}
-	 *
-	 * Initialize this structure from a ByteBuffer
-	 */
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * Initialize this structure from a ByteBuffer
+     */
     @Override
-	public void setData(final ByteBuffer data) {
+    public void setData(final ByteBuffer data) {
         // some PDF writers subset the font but don't update the number of glyphs in the maxp table,
         // this would appear to break the TTF spec.
         // A better solution might be to try and override the numGlyphs in the maxp table based
@@ -132,25 +135,25 @@ public class HmtxTable extends TrueTypeTable {
             if (i < this.advanceWidths.length) {
                 this.advanceWidths[i] = data.getShort();
             }
-            
+
             this.leftSideBearings[i] = data.getShort();
         }
         // initialise the remaining advanceWidths and leftSideBearings to 0
         if (i < this.advanceWidths.length) {
-            Arrays.fill(this.advanceWidths, i, this.advanceWidths.length-1, (short) 0);
+            Arrays.fill(this.advanceWidths, i, this.advanceWidths.length - 1, (short) 0);
         }
         if (i < this.leftSideBearings.length) {
-            Arrays.fill(this.leftSideBearings, i, this.leftSideBearings.length-1, (short) 0);
+            Arrays.fill(this.leftSideBearings, i, this.leftSideBearings.length - 1, (short) 0);
         }
     }
-    
-	/**
-	 * {@inheritDoc}
-	 *
-	 * Get the length of this table
-	 */
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * Get the length of this table
+     */
     @Override
-	public int getLength() {
+    public int getLength() {
         return (this.advanceWidths.length * 2) + (this.leftSideBearings.length * 2);
     }
 }

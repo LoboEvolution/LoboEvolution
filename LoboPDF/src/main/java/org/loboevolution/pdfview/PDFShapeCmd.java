@@ -24,7 +24,8 @@
  * Contact info: ivan.difrancesco@yahoo.it
  */
 package org.loboevolution.pdfview;
-import java.awt.BasicStroke;
+
+import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.PathIterator;
@@ -35,38 +36,49 @@ import java.awt.geom.Rectangle2D;
  * for consecutive abutting anti-aliased regions. We stroke the shared
  * line between these regions again with a 1-pixel wide line so that
  * the background doesn't show through between them.
- *
+ * <p>
  * Author Mike Wessler
-  *
  */
 public class PDFShapeCmd extends PDFCmd {
-    /** stroke the outline of the path with the stroke paint */
+    /**
+     * stroke the outline of the path with the stroke paint
+     */
     public static final int STROKE = 1;
-    /** fill the path with the fill paint */
+    /**
+     * fill the path with the fill paint
+     */
     public static final int FILL = 2;
-    /** perform both stroke and fill */
+    /**
+     * perform both stroke and fill
+     */
     public static final int BOTH = 3;
-    /** set the clip region to the path */
+    /**
+     * set the clip region to the path
+     */
     public static final int CLIP = 4;
-    /** base path */
+    /**
+     * the stroke style for the anti-antialias stroke
+     */
+    final BasicStroke againstroke = new BasicStroke(2, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL);
+    /**
+     * base path
+     */
     private final GeneralPath gp;
-    /** the style */
-    private final int style;
     /** the bounding box of the path */
     // private Rectangle2D bounds;
-    /** the stroke style for the anti-antialias stroke */
-    final BasicStroke againstroke = new BasicStroke(2, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL);
+    /**
+     * the style
+     */
+    private final int style;
     private boolean autoAdjustStroke = false;
 
     /**
      * create a new PDFShapeCmd and check it against the previous one
      * to find any shared edges.
      *
-     * @param gp
-     * the path
-     * @param style
-     * the style: an OR of STROKE, FILL, or CLIP. As a
-     * convenience, BOTH = STROKE | FILL.
+     * @param gp               the path
+     * @param style            the style: an OR of STROKE, FILL, or CLIP. As a
+     *                         convenience, BOTH = STROKE | FILL.
      * @param autoAdjustStroke a boolean.
      */
     public PDFShapeCmd(final GeneralPath gp, final int style, final boolean autoAdjustStroke) {
@@ -77,7 +89,7 @@ public class PDFShapeCmd extends PDFCmd {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * perform the stroke and record the dirty region
      */
     @Override
@@ -109,9 +121,9 @@ public class PDFShapeCmd extends PDFCmd {
     }
 
     /**
-    * Check for overlap with the previous shape to make anti-aliased shapes
-    * that are near each other look good
-    */
+     * Check for overlap with the previous shape to make anti-aliased shapes
+     * that are near each other look good
+     */
     private GeneralPath checkOverlap(final PDFRenderer state) {
         if (this.style == FILL && this.gp != null && state.getLastShape() != null) {
             float[] mypoints = new float[16];
@@ -142,10 +154,10 @@ public class PDFShapeCmd extends PDFCmd {
     }
 
     /**
-    * Get an array of 16 points from a path
-    *
-    * @return the number of points we actually got
-    */
+     * Get an array of 16 points from a path
+     *
+     * @return the number of points we actually got
+     */
     private int getPoints(final GeneralPath path, float[] mypoints, final AffineTransform at) {
         int count = 0;
         float x = 0;
@@ -161,32 +173,32 @@ public class PDFShapeCmd extends PDFCmd {
             }
             final int pathtype = pi.currentSegment(coords);
             switch (pathtype) {
-            case PathIterator.SEG_MOVETO:
-                startx = x = coords[0];
-                starty = y = coords[1];
-                break;
-            case PathIterator.SEG_LINETO:
-                mypoints[count++] = x;
-                mypoints[count++] = y;
-                x = mypoints[count++] = coords[0];
-                y = mypoints[count++] = coords[1];
-                break;
-            case PathIterator.SEG_QUADTO:
-                x = coords[2];
-                y = coords[3];
-                break;
-            case PathIterator.SEG_CUBICTO:
-                x = mypoints[4];
-                y = mypoints[5];
-                break;
-            case PathIterator.SEG_CLOSE:
-                mypoints[count++] = x;
-                mypoints[count++] = y;
-                x = mypoints[count++] = startx;
-                y = mypoints[count++] = starty;
-                break;
-            default:
-    			break;
+                case PathIterator.SEG_MOVETO:
+                    startx = x = coords[0];
+                    starty = y = coords[1];
+                    break;
+                case PathIterator.SEG_LINETO:
+                    mypoints[count++] = x;
+                    mypoints[count++] = y;
+                    x = mypoints[count++] = coords[0];
+                    y = mypoints[count++] = coords[1];
+                    break;
+                case PathIterator.SEG_QUADTO:
+                    x = coords[2];
+                    y = coords[3];
+                    break;
+                case PathIterator.SEG_CUBICTO:
+                    x = mypoints[4];
+                    y = mypoints[5];
+                    break;
+                case PathIterator.SEG_CLOSE:
+                    mypoints[count++] = x;
+                    mypoints[count++] = y;
+                    x = mypoints[count++] = startx;
+                    y = mypoints[count++] = starty;
+                    break;
+                default:
+                    break;
             }
             pi.next();
         }
@@ -195,7 +207,7 @@ public class PDFShapeCmd extends PDFCmd {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Get detailed information about this shape
      */
     @Override

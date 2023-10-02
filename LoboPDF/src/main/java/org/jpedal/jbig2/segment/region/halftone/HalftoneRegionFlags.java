@@ -24,6 +24,7 @@
  * Contact info: ivan.difrancesco@yahoo.it
  */
 package org.jpedal.jbig2.segment.region.halftone;
+
 import lombok.extern.slf4j.Slf4j;
 import org.jpedal.jbig2.decoders.JBIG2StreamDecoder;
 import org.jpedal.jbig2.segment.Flags;
@@ -34,38 +35,50 @@ import org.jpedal.jbig2.segment.Flags;
 @Slf4j
 public class HalftoneRegionFlags extends Flags {
 
-    /** Constant <code>H_MMR="H_MMR"</code> */
+    /**
+     * Constant <code>H_MMR="H_MMR"</code>
+     */
     public static final String H_MMR = "H_MMR";
-    /** Constant <code>H_TEMPLATE="H_TEMPLATE"</code> */
+    /**
+     * Constant <code>H_TEMPLATE="H_TEMPLATE"</code>
+     */
     public static final String H_TEMPLATE = "H_TEMPLATE";
-    /** Constant <code>H_ENABLE_SKIP="H_ENABLE_SKIP"</code> */
+    /**
+     * Constant <code>H_ENABLE_SKIP="H_ENABLE_SKIP"</code>
+     */
     public static final String H_ENABLE_SKIP = "H_ENABLE_SKIP";
-    /** Constant <code>H_COMB_OP="H_COMB_OP"</code> */
+    /**
+     * Constant <code>H_COMB_OP="H_COMB_OP"</code>
+     */
     public static final String H_COMB_OP = "H_COMB_OP";
-    /** Constant <code>H_DEF_PIXEL="H_DEF_PIXEL"</code> */
+    /**
+     * Constant <code>H_DEF_PIXEL="H_DEF_PIXEL"</code>
+     */
     public static final String H_DEF_PIXEL = "H_DEF_PIXEL";
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     public void setFlags(final int flagsAsInt) {
         this.flagsAsInt = flagsAsInt;
 
         /** extract H_MMR */
-		flags.put(H_MMR, flagsAsInt & 1);
-		
-		/** extract H_TEMPLATE */
-		flags.put(H_TEMPLATE, (flagsAsInt >> 1) & 3);
-		
-		/** extract H_ENABLE_SKIP */
-		flags.put(H_ENABLE_SKIP, (flagsAsInt >> 3) & 1);
-		
-		/** extract H_COMB_OP */
-		flags.put(H_COMB_OP, (flagsAsInt >> 4) & 7);
-		
-		/** extract H_DEF_PIXEL */
-		flags.put(H_DEF_PIXEL, (flagsAsInt >> 7) & 1);
+        flags.put(H_MMR, flagsAsInt & 1);
 
-		
-		if (JBIG2StreamDecoder.debug)
-			log.info("flags: {} ", flags);
+        /** extract H_TEMPLATE */
+        flags.put(H_TEMPLATE, (flagsAsInt >> 1) & 3);
+
+        /** extract H_ENABLE_SKIP */
+        flags.put(H_ENABLE_SKIP, (flagsAsInt >> 3) & 1);
+
+        /** extract H_COMB_OP */
+        flags.put(H_COMB_OP, (flagsAsInt >> 4) & 7);
+
+        /** extract H_DEF_PIXEL */
+        flags.put(H_DEF_PIXEL, (flagsAsInt >> 7) & 1);
+
+
+        if (JBIG2StreamDecoder.debug)
+            log.info("flags: {} ", flags);
     }
 }

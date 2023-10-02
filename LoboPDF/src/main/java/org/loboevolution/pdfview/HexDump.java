@@ -54,7 +54,7 @@ public class HexDump {
                 final int end = Integer.toHexString(i).length();
 
                 for (int j = start; j > end; j--) {
-                	log.info("0");
+                    log.info("0");
                 }
                 log.info("{}", Integer.toHexString(i));
             }
@@ -67,10 +67,10 @@ public class HexDump {
                 log.info("      {} ", String.valueOf(parts));
                 partsloc = 0;
             } else if ((i & 7) == 7) {
-            	log.info("  ");
+                log.info("  ");
                 parts[partsloc++] = ' ';
             } else if ((i & 1) == 1) {
-            	log.info(" ");
+                log.info(" ");
             }
         }
     }

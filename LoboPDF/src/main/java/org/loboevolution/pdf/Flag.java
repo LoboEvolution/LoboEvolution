@@ -23,57 +23,56 @@
  *
  * Contact info: ivan.difrancesco@yahoo.it
  */
- package org.loboevolution.pdf;
+package org.loboevolution.pdf;
 
 /**
  * A generic synchronized flag, because Java doesn't have one.
- *
-  *
-  *
  */
 public class Flag {
 
-	/** The is set. */
-	private boolean isSet;
+    /**
+     * The is set.
+     */
+    private boolean isSet;
 
-	/**
-	 * Sets the flag. Any pending waitForFlag calls will now return.
-	 */
-	public synchronized void set() {
-		isSet = true;
-		notifyAll();
-	}
+    /**
+     * Sets the flag. Any pending waitForFlag calls will now return.
+     */
+    public synchronized void set() {
+        isSet = true;
+        notifyAll();
+    }
 
-	/**
-	 * Clears the flag. Do this before calling waitForFlag.
-	 */
-	public synchronized void clear() {
-		isSet = false;
-	}
+    /**
+     * Clears the flag. Do this before calling waitForFlag.
+     */
+    public synchronized void clear() {
+        isSet = false;
+    }
 
-	/**
-	 * Waits for the flag to be set, if it is not set already. This method
-	 * catches InterruptedExceptions, so if you want notification of
-	 * interruptions, use interruptibleWaitForFlag instead.
-	 */
-	public synchronized void waitForFlag() {
-		if (!isSet) {
-			try {
-				wait();
-			} catch (final InterruptedException ie) {
-				Thread.currentThread().interrupt();
-			}
-		}
-	}
+    /**
+     * Waits for the flag to be set, if it is not set already. This method
+     * catches InterruptedExceptions, so if you want notification of
+     * interruptions, use interruptibleWaitForFlag instead.
+     */
+    public synchronized void waitForFlag() {
+        if (!isSet) {
+            try {
+                wait();
+            } catch (final InterruptedException ie) {
+                Thread.currentThread().interrupt();
+            }
+        }
+    }
 
-	/**
-	 * Waits for the flag to be set, if it is not set already.
-	 *
-	 * @throws java.lang.InterruptedException if any.
-	 */
-	public synchronized void interruptibleWaitForFlag() throws InterruptedException {
-		if (!isSet) {
-			wait();
-		}
-	}
+    /**
+     * Waits for the flag to be set, if it is not set already.
+     *
+     * @throws java.lang.InterruptedException if any.
+     */
+    public synchronized void interruptibleWaitForFlag() throws InterruptedException {
+        if (!isSet) {
+            wait();
+        }
+    }
 }

@@ -25,6 +25,8 @@
  */
 package org.loboevolution.pdfview.font;
 
+import org.loboevolution.pdfview.*;
+
 import java.awt.geom.AffineTransform;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Point2D;
@@ -33,49 +35,55 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.loboevolution.pdfview.BaseWatchable;
-import org.loboevolution.pdfview.PDFDebugger;
-import org.loboevolution.pdfview.PDFFile;
-import org.loboevolution.pdfview.PDFObject;
-import org.loboevolution.pdfview.PDFPage;
-import org.loboevolution.pdfview.PDFParser;
-
 /**
  * A Type 3 Font, in which each glyph consists of a sequence of PDF
  * commands.
- *
+ * <p>
  * Author Mike Wessler
-  *
  */
 public class Type3Font extends PDFFont {
 
-    /** resources for the character definitions */
-    final HashMap<String,PDFObject> rsrc;
-    /** the character processes, mapped by name */
+    /**
+     * resources for the character definitions
+     */
+    final HashMap<String, PDFObject> rsrc;
+    /**
+     * the character processes, mapped by name
+     */
     Map charProcs;
-    /** bounding box for the font characters */
+    /**
+     * bounding box for the font characters
+     */
     Rectangle2D bbox;
-    /** affine transform for the font characters */
+    /**
+     * affine transform for the font characters
+     */
     AffineTransform at;
-    /** the widths */
+    /**
+     * the widths
+     */
     float[] widths;
-    /** the start code */
+    /**
+     * the start code
+     */
     int firstChar;
-    /** the end code */
+    /**
+     * the end code
+     */
     int lastChar;
 
     /**
      * Generate a Type 3 font.
      *
-     * @param baseFont the postscript name of this font
-     * @param fontObj a dictionary containing references to the character
-     * definitions and font information
-     * @param resources a set of resources used by the character definitions
+     * @param baseFont   the postscript name of this font
+     * @param fontObj    a dictionary containing references to the character
+     *                   definitions and font information
+     * @param resources  a set of resources used by the character definitions
      * @param descriptor the descriptor for this font
      * @throws java.io.IOException if any.
      */
     public Type3Font(final String baseFont, final PDFObject fontObj,
-                     final HashMap<String,PDFObject> resources, final PDFFontDescriptor descriptor) throws IOException {
+                     final HashMap<String, PDFObject> resources, final PDFFontDescriptor descriptor) throws IOException {
         super(baseFont, descriptor);
 
         this.rsrc = new HashMap<>();
@@ -140,20 +148,20 @@ public class Type3Font extends PDFFont {
         return this.lastChar;
     }
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * Get the glyph for a given character code and name
-	 *
-	 * The preferred method of getting the glyph should be by name.  If the
-	 * name is null or not valid, then the character code should be used.
-	 * If the both the code and the name are invalid, the undefined glyph
-	 * should be returned.
-	 *
-	 * Note this method must *always* return a glyph.
-	 */
+    /**
+     * {@inheritDoc}
+     * <p>
+     * Get the glyph for a given character code and name
+     * <p>
+     * The preferred method of getting the glyph should be by name.  If the
+     * name is null or not valid, then the character code should be used.
+     * If the both the code and the name are invalid, the undefined glyph
+     * should be returned.
+     * <p>
+     * Note this method must *always* return a glyph.
+     */
     @Override
-	protected PDFGlyph getGlyph(final char src, final String name) {
+    protected PDFGlyph getGlyph(final char src, final String name) {
         if (name == null) {
             throw new IllegalArgumentException("Glyph name required for Type3 font!" +
                     "Source character: " + (int) src);

@@ -26,24 +26,25 @@
 
 package org.loboevolution.pdfview.action;
 
-import java.io.IOException;
-
 import org.loboevolution.pdfview.PDFObject;
 import org.loboevolution.pdfview.PDFParseException;
 
+import java.io.IOException;
+
 /**
  * The common super-class of all PDF actions.
- *
-  *
-  *
  */
 public class PDFAction {
-    /** the type of this action */
+    /**
+     * the type of this action
+     */
     private final String type;
-    
-    /** the next action or array of actions */
+
+    /**
+     * the next action or array of actions
+     */
     private PDFObject next;
-    
+
     /**
      * Creates a new instance of PDFAction
      *
@@ -52,24 +53,23 @@ public class PDFAction {
     public PDFAction(final String type) {
         this.type = type;
     }
-    
+
     /**
      * Get an action of the appropriate type from a PDFObject
      *
-     * @param obj the PDF object containing the action to parse
+     * @param obj  the PDF object containing the action to parse
      * @param root the root of the PDF object tree
      * @return a {@link org.loboevolution.pdfview.action.PDFAction} object.
      * @throws java.io.IOException if any.
      */
     public static PDFAction getAction(final PDFObject obj, final PDFObject root)
-        throws IOException
-    {
+            throws IOException {
         // figure out the action type
         final PDFObject typeObj = obj.getDictRef("S");
         if (typeObj == null) {
             throw new PDFParseException("No action type in object: " + obj);
         }
-        
+
         // create the action based on the type
         PDFAction action = null;
         final String type = typeObj.getStringValue();
@@ -93,17 +93,17 @@ public class PDFAction {
                 /** [JK FIXME: Implement other action types! ] */
                 throw new PDFParseException("Unknown Action type: " + type);
         }
-        
+
         // figure out if there is a next action
         final PDFObject nextObj = obj.getDictRef("Next");
         if (nextObj != null) {
             action.setNext(nextObj);
         }
-        
+
         // return the action
         return action;
     }
-    
+
     /**
      * Get the type of this action
      *
@@ -112,7 +112,7 @@ public class PDFAction {
     public String getType() {
         return this.type;
     }
-    
+
     /**
      * Get the next action or array of actions
      *
@@ -121,7 +121,7 @@ public class PDFAction {
     public PDFObject getNext() {
         return this.next;
     }
-    
+
     /**
      * Set the next action or array of actions
      *
@@ -130,5 +130,5 @@ public class PDFAction {
     public void setNext(final PDFObject next) {
         this.next = next;
     }
-    
+
 }

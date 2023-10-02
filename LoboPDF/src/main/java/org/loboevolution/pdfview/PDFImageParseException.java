@@ -30,9 +30,8 @@ import java.io.IOException;
 
 /**
  * an exception class for recording errors when parsing an PDFImage
- *
+ * <p>
  * Author Katja Sondermann
-  *
  */
 public class PDFImageParseException extends IOException {
     /**
@@ -47,7 +46,7 @@ public class PDFImageParseException extends IOException {
     /**
      * <p>Constructor for PDFImageParseException.</p>
      *
-     * @param msg a {@link java.lang.String} object.
+     * @param msg   a {@link java.lang.String} object.
      * @param cause a {@link java.lang.Throwable} object.
      */
     public PDFImageParseException(final String msg, final Throwable cause) {

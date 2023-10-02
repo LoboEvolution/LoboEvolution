@@ -31,7 +31,7 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * Simple class to handle exceptions - as default we just print the stack trace
  * but it's possible to inject another behaviour
- *
+ * <p>
  * Author xond
  */
 @Slf4j
@@ -43,6 +43,6 @@ public class PDFErrorHandler {
      * @param e a {@link java.lang.Throwable} object.
      */
     public void publishException(final Throwable e) {
-       log.error(e.getMessage(), e); 
+        log.error(e.getMessage(), e);
     }
 }

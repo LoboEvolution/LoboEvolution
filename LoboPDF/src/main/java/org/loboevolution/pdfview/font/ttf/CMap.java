@@ -25,15 +25,14 @@
  */
 package org.loboevolution.pdfview.font.ttf;
 
-import java.nio.ByteBuffer;
-
 import org.loboevolution.pdfview.PDFDebugger;
+
+import java.nio.ByteBuffer;
 
 /**
  * <p>Abstract CMap class.</p>
- *
+ * <p>
  * Author  jkaplan
-  *
  */
 public abstract class CMap {
 
@@ -51,10 +50,10 @@ public abstract class CMap {
      * Creates a new instance of CMap
      * Don't use this directly, use <code>CMap.createMap()</code>
      *
-     * @param format a short.
+     * @param format   a short.
      * @param language a short.
      */
-    protected CMap (final short format, final short language) {
+    protected CMap(final short format, final short language) {
         this.format = format;
         this.language = language;
     }
@@ -79,22 +78,22 @@ public abstract class CMap {
      * <p>Reference:<br>
      * http://developer.apple.com/textfonts/TTRefMan/RM06/Chap6cmap.html </p>
      *
-     * @param format a short.
+     * @param format   a short.
      * @param language a short.
      * @return a {@link org.loboevolution.pdfview.font.ttf.CMap} object.
      */
-    public static CMap createMap (final short format, final short language) {
+    public static CMap createMap(final short format, final short language) {
         CMap outMap = null;
 
         switch (format) {
             case 0: // CMap format 0 - single byte codes
-                outMap = new CMapFormat0 (language);
+                outMap = new CMapFormat0(language);
                 break;
             case 4: // CMap format 4 - two byte encoding
-                outMap = new CMapFormat4 (language);
+                outMap = new CMapFormat4(language);
                 break;
             case 6: // CMap format 6 - 16-bit, two byte encoding
-                outMap = new CMapFormat6 (language);
+                outMap = new CMapFormat6(language);
                 break;
 //            case 8: // CMap format 8 - Mixed 16-bit and 32-bit coverage
 //                outMap = new CMapFormat_8(language);
@@ -119,31 +118,31 @@ public abstract class CMap {
 
     /**
      * Get a map from the given data
-     *
+     * <p>
      * This method reads the format, data and length variables of
      * the map.
      *
      * @param data a {@link java.nio.ByteBuffer} object.
      * @return a {@link org.loboevolution.pdfview.font.ttf.CMap} object.
      */
-    public static CMap getMap (final ByteBuffer data) {
-        final short format = data.getShort ();
-        final short lengthShort = data.getShort ();
+    public static CMap getMap(final ByteBuffer data) {
+        final short format = data.getShort();
+        final short lengthShort = data.getShort();
         final int length = 0xFFFF & lengthShort;
         PDFDebugger.debug("CMAP, length: " + length + ", short: " + lengthShort, 100);
 
         // make sure our slice of the data only contains up to the length
         // of this table
-        data.limit (Math.min (length, data.limit ()));
+        data.limit(Math.min(length, data.limit()));
 
-        final short language = data.getShort ();
+        final short language = data.getShort();
 
-        final CMap outMap = createMap (format, language);
+        final CMap outMap = createMap(format, language);
         if (outMap == null) {
             return null;
         }
 
-        outMap.setData (data.limit (), data);
+        outMap.setData(data.limit(), data);
 
         return outMap;
     }
@@ -153,7 +152,7 @@ public abstract class CMap {
      *
      * @return a short.
      */
-    public short getFormat () {
+    public short getFormat() {
         return this.format;
     }
 
@@ -162,7 +161,7 @@ public abstract class CMap {
      *
      * @return a short.
      */
-    public short getLanguage () {
+    public short getLanguage() {
         return this.language;
     }
 
@@ -170,23 +169,23 @@ public abstract class CMap {
      * Set the data for this map
      *
      * @param length a int.
-     * @param data a {@link java.nio.ByteBuffer} object.
+     * @param data   a {@link java.nio.ByteBuffer} object.
      */
-    public abstract void setData (int length, ByteBuffer data);
+    public abstract void setData(int length, ByteBuffer data);
 
     /**
      * Get the data in this map as a byte buffer
      *
      * @return a {@link java.nio.ByteBuffer} object.
      */
-    public abstract ByteBuffer getData ();
+    public abstract ByteBuffer getData();
 
     /**
      * Get the length of this map
      *
      * @return a short.
      */
-    public abstract short getLength ();
+    public abstract short getLength();
 
     /**
      * Map an 8 bit value to another 8 bit value
@@ -194,7 +193,7 @@ public abstract class CMap {
      * @param src a byte.
      * @return a byte.
      */
-    public abstract byte map (byte src);
+    public abstract byte map(byte src);
 
     /**
      * Map a 16 bit value to another 16 but value
@@ -202,7 +201,7 @@ public abstract class CMap {
      * @param src a char.
      * @return a char.
      */
-    public abstract char map (char src);
+    public abstract char map(char src);
 
     /**
      * Get the src code which maps to the given glyphID
@@ -210,18 +209,18 @@ public abstract class CMap {
      * @param glyphID a short.
      * @return a char.
      */
-    public abstract char reverseMap (final short glyphID);
+    public abstract char reverseMap(final short glyphID);
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Print a pretty string
      */
     @Override
-    public String toString () {
+    public String toString() {
         final String indent = "        ";
 
-        return indent + " format: " + getFormat () + " length: " +
-                getLength () + " language: " + getLanguage () + "\n";
+        return indent + " format: " + getFormat() + " length: " +
+                getLength() + " language: " + getLanguage() + "\n";
     }
 }

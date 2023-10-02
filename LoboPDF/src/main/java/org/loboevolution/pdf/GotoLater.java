@@ -27,33 +27,34 @@ package org.loboevolution.pdf;
 
 /**
  * Simple runnable to tell listeners that the page has changed.
- *
-  *
-  *
  */
 public class GotoLater implements Runnable {
 
-	/** The page. */
-	private final int page;
-	
-	private final ThumbPanel thumb;
+    /**
+     * The page.
+     */
+    private final int page;
 
-	/**
-	 * <p>Constructor for GotoLater.</p>
-	 *
-	 * @param pagenum a int.
-	 * @param thumb a {@link org.loboevolution.pdf.ThumbPanel} object.
-	 */
-	public GotoLater(final int pagenum, final ThumbPanel thumb) {
-		page = pagenum;
-		this.thumb = thumb;
-	}
+    private final ThumbPanel thumb;
 
-	/** {@inheritDoc} */
-	@Override
-	public void run() {
-		if (thumb.getListener() != null) {
-			thumb.getListener().gotoPage(page);
-		}
-	}
+    /**
+     * <p>Constructor for GotoLater.</p>
+     *
+     * @param pagenum a int.
+     * @param thumb   a {@link org.loboevolution.pdf.ThumbPanel} object.
+     */
+    public GotoLater(final int pagenum, final ThumbPanel thumb) {
+        page = pagenum;
+        this.thumb = thumb;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void run() {
+        if (thumb.getListener() != null) {
+            thumb.getListener().gotoPage(page);
+        }
+    }
 }

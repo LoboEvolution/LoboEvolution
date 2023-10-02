@@ -26,55 +26,55 @@
 
 package org.loboevolution.pdfview.font.ttf;
 
+import org.loboevolution.pdfview.PDFDebugger;
+
 import java.nio.ByteBuffer;
 import java.util.*;
 
-import org.loboevolution.pdfview.PDFDebugger;
-
 /**
  * Represents the TTF "cmap" table
- *
+ * <p>
  * Author  jkaplan
-  *
  */
 public class CmapTable extends TrueTypeTable {
-    
-    /** Holds value of property version. */
-    private short version;
-    
+
     /**
      * Holds the CMap subtables, sorted properly
      */
-    private final SortedMap<CmapSubtable,CMap> subtables;
-    
+    private final SortedMap<CmapSubtable, CMap> subtables;
+    /**
+     * Holds value of property version.
+     */
+    private short version;
+
     /**
      * Creates a new instance of CmapTable
      */
     protected CmapTable() {
         super(TrueTypeTable.CMAP_TABLE);
-        
+
         setVersion((short) 0x0);
-    
+
         this.subtables = Collections.synchronizedSortedMap(new TreeMap<>());
     }
-    
+
     /**
      * Add a CMap
      *
-     * @param platformID a short.
+     * @param platformID         a short.
      * @param platformSpecificID a short.
-     * @param cMap a {@link org.loboevolution.pdfview.font.ttf.CMap} object.
+     * @param cMap               a {@link org.loboevolution.pdfview.font.ttf.CMap} object.
      */
     public void addCMap(final short platformID, final short platformSpecificID,
                         final CMap cMap) {
         final CmapSubtable key = new CmapSubtable(platformID, platformSpecificID);
         this.subtables.put(key, cMap);
     }
-    
+
     /**
      * Get a CMap by platform and specific ID
      *
-     * @param platformID a short.
+     * @param platformID         a short.
      * @param platformSpecificID a short.
      * @return a {@link org.loboevolution.pdfview.font.ttf.CMap} object.
      */
@@ -82,7 +82,7 @@ public class CmapTable extends TrueTypeTable {
         final CmapSubtable key = new CmapSubtable(platformID, platformSpecificID);
         return this.subtables.get(key);
     }
-    
+
     /**
      * Get all CMaps
      *
@@ -90,85 +90,54 @@ public class CmapTable extends TrueTypeTable {
      */
     public CMap[] getCMaps() {
         final Collection<CMap> c = new ArrayList<>();
-        
-        final CMap cmap_3_1 = this.getCMap((short)3, (short)1);
+
+        final CMap cmap_3_1 = this.getCMap((short) 3, (short) 1);
         if (cmap_3_1 != null) {
-        	c.add(cmap_3_1);
+            c.add(cmap_3_1);
         }
-        final CMap cmap_1_0 = this.getCMap((short)1, (short)0);
+        final CMap cmap_1_0 = this.getCMap((short) 1, (short) 0);
         if (cmap_1_0 != null) {
-        	c.add(cmap_1_0);
+            c.add(cmap_1_0);
         }
 
         for (final CMap cmap : this.subtables.values()) {
-        	if (!c.contains(cmap)) {
-        		c.add(cmap);
-        	}
+            if (!c.contains(cmap)) {
+                c.add(cmap);
+            }
         }
         final CMap[] maps = new CMap[c.size()];
-        
+
         c.toArray(maps);
-        
+
         return maps;
     }
-    
+
     /**
      * Remove a CMap
      *
-     * @param platformID a short.
+     * @param platformID         a short.
      * @param platformSpecificID a short.
      */
     public void removeCMap(final short platformID, final short platformSpecificID) {
         final CmapSubtable key = new CmapSubtable(platformID, platformSpecificID);
         this.subtables.remove(key);
     }
-    
-    /** {@inheritDoc} */
-    @Override public void setData(final ByteBuffer data) {
-        setVersion(data.getShort());
-        
-        final short numberSubtables = data.getShort();
-        
-        for (int i = 0; i < numberSubtables; i++) {
-            final short platformID = data.getShort();
-            final short platformSpecificID = data.getShort();
-            final int offset = data.getInt();
-            
-            data.mark();
-            
-            // get the position from the start of this buffer 
-            data.position(offset);
-            
-            final ByteBuffer mapData = data.slice();
-            
-            data.reset();
-            
-            try {
-                final CMap cMap = CMap.getMap(mapData);
-                if (cMap != null) {
-                    addCMap(platformID, platformSpecificID, cMap);
-                }
-            } catch (final Exception ex) {
-                PDFDebugger.debug("Error reading map.  PlatformID=" +
-                                    platformID + ", PlatformSpecificID=" + 
-                                    platformSpecificID);
-                PDFDebugger.debug("Reason: " + ex);
-            }
-        }
-    }
-    
-    /** {@inheritDoc} */
-    @Override public ByteBuffer getData() {
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ByteBuffer getData() {
         final ByteBuffer buf = ByteBuffer.allocate(getLength());
-    
+
         // write the table header
         buf.putShort(getVersion());
         buf.putShort((short) this.subtables.size());
-        
+
         // the current offset to write to, starts at the end of the
         // subtables
         int curOffset = 4 + (this.subtables.size() * 8);
-        
+
         // write the subtables
         for (final Map.Entry<CmapSubtable, CMap> entry : this.subtables.entrySet()) {
             final CmapSubtable cms = entry.getKey();
@@ -180,40 +149,78 @@ public class CmapTable extends TrueTypeTable {
 
             curOffset += map.getLength();
         }
-        
+
         // write the tables
         for (final CMap map : this.subtables.values()) {
             buf.put(map.getData());
         }
-        
+
         // reset the position to the start of the buffer
         buf.flip();
-        
+
         return buf;
     }
-    
+
     /**
      * {@inheritDoc}
-     *
+     */
+    @Override
+    public void setData(final ByteBuffer data) {
+        setVersion(data.getShort());
+
+        final short numberSubtables = data.getShort();
+
+        for (int i = 0; i < numberSubtables; i++) {
+            final short platformID = data.getShort();
+            final short platformSpecificID = data.getShort();
+            final int offset = data.getInt();
+
+            data.mark();
+
+            // get the position from the start of this buffer
+            data.position(offset);
+
+            final ByteBuffer mapData = data.slice();
+
+            data.reset();
+
+            try {
+                final CMap cMap = CMap.getMap(mapData);
+                if (cMap != null) {
+                    addCMap(platformID, platformSpecificID, cMap);
+                }
+            } catch (final Exception ex) {
+                PDFDebugger.debug("Error reading map.  PlatformID=" +
+                        platformID + ", PlatformSpecificID=" +
+                        platformSpecificID);
+                PDFDebugger.debug("Reason: " + ex);
+            }
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     * <p>
      * Get the size of the table, in bytes
      */
-    @Override public int getLength() {
+    @Override
+    public int getLength() {
         // start with the size of the fixed data
         int length = 4;
-       
+
         // add the size of the subtables 
         length += this.subtables.size() * 8;
-        
+
         // add the size of the dynamic data
         for (final CMap map : this.subtables.values()) {
             // add the size of the subtable data
             length += map.getLength();
         }
-    
+
         return length;
     }
-    
-    
+
+
     /**
      * Getter for property version.
      *
@@ -222,7 +229,7 @@ public class CmapTable extends TrueTypeTable {
     public short getVersion() {
         return this.version;
     }
-    
+
     /**
      * Setter for property version.
      *
@@ -240,16 +247,17 @@ public class CmapTable extends TrueTypeTable {
     public short getNumberSubtables() {
         return (short) this.subtables.size();
     }
-    
+
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Print a pretty string
      */
-    @Override public String toString() {
+    @Override
+    public String toString() {
         final StringBuilder buf = new StringBuilder();
         final String indent = "    ";
-    
+
         buf.append(indent).append("Version: ").append(this.getVersion()).append("\n");
         buf.append(indent).append("NumMaps: ").append(this.getNumberSubtables()).append("\n");
 
@@ -261,45 +269,46 @@ public class CmapTable extends TrueTypeTable {
 
             buf.append(map.toString());
         }
-        
+
         return buf.toString();
     }
-    
+
     static class CmapSubtable implements Comparable {
         /**
          * The platformID for this subtable
          */
         final short platformID;
-        
+
         /**
          * The platform-specific id
          */
         final short platformSpecificID;
-        
-        /** 
+
+        /**
          * Create a Cmap subtable
          */
         protected CmapSubtable(final short platformID, final short platformSpecificID) {
             this.platformID = platformID;
             this.platformSpecificID = platformSpecificID;
         }
-            
+
         /**
          * Compare two subtables
          */
-        @Override public boolean equals(final Object obj) {
+        @Override
+        public boolean equals(final Object obj) {
             return (compareTo(obj) == 0);
         }
-        
+
         /**
          * Sort ascending by platform ID and then specific ID
          */
         @Override
-		public int compareTo(final Object obj) {
+        public int compareTo(final Object obj) {
             if (!(obj instanceof CmapSubtable)) {
                 return -1;
             }
-            
+
             final CmapSubtable cms = (CmapSubtable) obj;
             if (this.platformID < cms.platformID) {
                 return -1;
@@ -310,5 +319,5 @@ public class CmapTable extends TrueTypeTable {
             }
         }
     }
-    
+
 }

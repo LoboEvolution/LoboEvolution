@@ -35,30 +35,49 @@ import java.nio.ByteBuffer;
 
 /**
  * decode an array of hex nybbles into a byte array
- *
+ * <p>
  * Author Mike Wessler
-  *
  */
 public final class ASCIIHexDecode {
     private final ByteBuffer buf;
-    
+
     /**
      * initialize the decoder with an array of bytes in ASCIIHex format
      */
     private ASCIIHexDecode(final ByteBuffer buf) {
-	this.buf = buf;
+        this.buf = buf;
+    }
+
+    /**
+     * decode an array of bytes in ASCIIHex format.
+     * <p>
+     * ASCIIHex format consists of a sequence of Hexidecimal
+     * digits, with possible whitespace, ending with the
+     * '&gt;' character.
+     *
+     * @param buf    the encoded ASCII85 characters in a byte
+     *               buffer
+     * @param params parameters to the decoder (ignored)
+     * @return the decoded bytes
+     * @throws org.loboevolution.pdfview.PDFParseException if any.
+     */
+    public static ByteBuffer decode(final ByteBuffer buf, final PDFObject params)
+            throws PDFParseException {
+        final ASCIIHexDecode me = new ASCIIHexDecode(buf);
+        return me.decode();
     }
 
     /**
      * get the next character from the input
+     *
      * @return a number from 0-15, or -1 for the end character
      */
-    private int readHexDigit() throws PDFParseException {    
+    private int readHexDigit() throws PDFParseException {
         // read until we hit a non-whitespace character or the
         // end of the stream
         while (this.buf.remaining() > 0) {
             int c = this.buf.get();
-        
+
             // see if we found a useful character
             if (!PDFFile.isWhiteSpace((char) c)) {
                 if (c >= '0' && c <= '9') {
@@ -71,21 +90,22 @@ public final class ASCIIHexDecode {
                     c = -1;
                 } else {
                     // unknown character
-                    throw new PDFParseException("Bad character " + c + 
-                                                "in ASCIIHex decode");
+                    throw new PDFParseException("Bad character " + c +
+                            "in ASCIIHex decode");
                 }
-                
+
                 // return the useful character
                 return c;
             }
         }
-        
+
         // end of stream reached
-	throw new PDFParseException("Short stream in ASCIIHex decode");
+        throw new PDFParseException("Short stream in ASCIIHex decode");
     }
 
     /**
      * decode the array
+     *
      * @return the decoded bytes
      */
     private ByteBuffer decode() throws PDFParseException {
@@ -111,24 +131,5 @@ public final class ASCIIHexDecode {
         }
 
         return ByteBuffer.wrap(baos.toByteArray());
-    }
-
-    /**
-     * decode an array of bytes in ASCIIHex format.
-     * <p>
-     * ASCIIHex format consists of a sequence of Hexidecimal
-     * digits, with possible whitespace, ending with the
-     * '&gt;' character.
-     *
-     * @param buf the encoded ASCII85 characters in a byte
-     *        buffer
-     * @param params parameters to the decoder (ignored)
-     * @return the decoded bytes
-     * @throws org.loboevolution.pdfview.PDFParseException if any.
-     */
-    public static ByteBuffer decode(final ByteBuffer buf, final PDFObject params)
-            throws PDFParseException {
-        final ASCIIHexDecode me = new ASCIIHexDecode(buf);
-        return me.decode();
     }
 }

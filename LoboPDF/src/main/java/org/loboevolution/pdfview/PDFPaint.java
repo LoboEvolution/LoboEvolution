@@ -25,9 +25,7 @@
  */
 package org.loboevolution.pdfview;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.Paint;
+import java.awt.*;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Rectangle2D;
 
@@ -35,9 +33,8 @@ import java.awt.geom.Rectangle2D;
  * PDFPaint is some kind of shader that knows how to fill a path.
  * At the moment, only a solid color is implemented, but gradients
  * and textures should be possible, too.
- *
+ * <p>
  * Author Mike Wessler
-  *
  */
 public class PDFPaint {
 
@@ -76,8 +73,8 @@ public class PDFPaint {
      * fill a path with the paint, and record the dirty area.
      *
      * @param state the current graphics state
-     * @param g the graphics into which to draw
-     * @param s the path to fill
+     * @param g     the graphics into which to draw
+     * @param s     the path to fill
      * @return a {@link java.awt.geom.Rectangle2D} object.
      */
     public Rectangle2D fill(final PDFRenderer state, final Graphics2D g,

@@ -33,7 +33,6 @@ package org.loboevolution.pdfview.decrypt;
  * @see EncryptionUnsupportedByPlatformException
  * @see EncryptionUnsupportedByProductException
  * Author Luke Kirby
-  *
  */
 public abstract class UnsupportedEncryptionException extends Exception {
 
@@ -50,7 +49,7 @@ public abstract class UnsupportedEncryptionException extends Exception {
      * <p>Constructor for UnsupportedEncryptionException.</p>
      *
      * @param message a {@link java.lang.String} object.
-     * @param cause a {@link java.lang.Throwable} object.
+     * @param cause   a {@link java.lang.Throwable} object.
      */
     protected UnsupportedEncryptionException(final String message, final Throwable cause) {
         super(message, cause);

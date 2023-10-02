@@ -33,44 +33,40 @@ import java.util.List;
 
 /**
  * Undo prediction based on the PNG algorithm.
- *
-  *
-  *
  */
 public class PNGPredictor extends Predictor {
     /**
      * Creates a new instance of PNGPredictor
      */
     public PNGPredictor() {
-        super (PNG);
+        super(PNG);
     }
-    
-	/**
-	 * {@inheritDoc}
-	 *
-	 * Undo data based on the png algorithm
-	 */
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * Undo data based on the png algorithm
+     */
     @Override
-	public ByteBuffer unpredict(final ByteBuffer imageData)
-        throws IOException
-    {
+    public ByteBuffer unpredict(final ByteBuffer imageData)
+            throws IOException {
         final List<byte[]> rows = new ArrayList<>();
-        
+
         byte[] curLine = null;
         byte[] prevLine = null;
-        
+
         // get the number of bytes per row
         int rowSize = getColumns() * getColors() * getBitsPerComponent();
         rowSize = (int) Math.ceil(rowSize / 8.0);
-        
-        while(imageData.remaining() >= rowSize + 1) {
+
+        while (imageData.remaining() >= rowSize + 1) {
             // the first byte determines the algorithm
             final int algorithm = (imageData.get() & 0xff);
-            
+
             // read the rest of the line
             curLine = new byte[rowSize];
             imageData.get(curLine);
-            
+
             // use the algorithm, Luke
             switch (algorithm) {
                 case 0:
@@ -89,27 +85,27 @@ public class PNGPredictor extends Predictor {
                     doPaethLine(curLine, prevLine);
                     break;
                 default:
-        			break;
+                    break;
             }
-            
+
             rows.add(curLine);
             prevLine = curLine;
         }
-        
+
         // turn into byte array
         final ByteBuffer outBuf = ByteBuffer.allocate(rows.size() * rowSize);
         for (final byte[] b : rows) {
             outBuf.put(b);
         }
-        
+
         // reset start pointer
         outBuf.flip();
-        
+
         // return
         return outBuf;
-        
+
     }
-    
+
     /**
      * Return the value of the Sub algorithm on the line (compare bytes to
      * the previous byte of the same color on this line).
@@ -119,7 +115,7 @@ public class PNGPredictor extends Predictor {
     protected void doSubLine(final byte[] curLine) {
         // get the number of bytes per sample
         final int sub = (int) Math.ceil((getBitsPerComponent() * getColors()) / 8.0);
-        
+
         for (int i = 0; i < curLine.length; i++) {
             final int prevIdx = i - sub;
             if (prevIdx >= 0) {
@@ -127,12 +123,12 @@ public class PNGPredictor extends Predictor {
             }
         }
     }
-    
+
     /**
      * Return the value of the up algorithm on the line (compare bytes to
      * the same byte in the previous line)
      *
-     * @param curLine an array of {@link byte} objects.
+     * @param curLine  an array of {@link byte} objects.
      * @param prevLine an array of {@link byte} objects.
      */
     protected void doUpLine(final byte[] curLine, final byte[] prevLine) {
@@ -140,86 +136,86 @@ public class PNGPredictor extends Predictor {
             // do nothing if this is the first line
             return;
         }
-        
+
         for (int i = 0; i < curLine.length; i++) {
             curLine[i] += prevLine[i];
         }
     }
-    
+
     /**
      * Return the value of the average algorithm on the line (compare
      * bytes to the average of the previous byte of the same color and
      * the same byte on the previous line)
      *
-     * @param curLine an array of {@link byte} objects.
+     * @param curLine  an array of {@link byte} objects.
      * @param prevLine an array of {@link byte} objects.
      */
     protected void doAverageLine(final byte[] curLine, final byte[] prevLine) {
-         // get the number of bytes per sample
+        // get the number of bytes per sample
         final int sub = (int) Math.ceil((getBitsPerComponent() * getColors()) / 8.0);
-        
+
         for (int i = 0; i < curLine.length; i++) {
             int raw = 0;
             int prior = 0;
-            
+
             // get the last value of this color
             final int prevIdx = i - sub;
             if (prevIdx >= 0) {
                 raw = curLine[prevIdx] & 0xff;
             }
-            
+
             // get the value on the previous line
             if (prevLine != null) {
                 prior = prevLine[i] & 0xff;
             }
-            
+
             // add the average
             curLine[i] += (byte) (double) ((raw + prior) / 2);
-        }      
+        }
     }
-    
+
     /**
      * Return the value of the average algorithm on the line (compare
      * bytes to the average of the previous byte of the same color and
      * the same byte on the previous line)
      *
-     * @param curLine an array of {@link byte} objects.
+     * @param curLine  an array of {@link byte} objects.
      * @param prevLine an array of {@link byte} objects.
      */
     protected void doPaethLine(final byte[] curLine, final byte[] prevLine) {
-         // get the number of bytes per sample
+        // get the number of bytes per sample
         final int sub = (int) Math.ceil((getBitsPerComponent() * getColors()) / 8.0);
-        
+
         for (int i = 0; i < curLine.length; i++) {
             int left = 0;
             int up = 0;
             int upLeft = 0;
-            
+
             // get the last value of this color
             final int prevIdx = i - sub;
             if (prevIdx >= 0) {
                 left = curLine[prevIdx] & 0xff;
             }
-            
+
             // get the value on the previous line
             if (prevLine != null) {
                 up = prevLine[i] & 0xff;
             }
-            
+
             if (prevIdx >= 0 && prevLine != null) {
                 upLeft = prevLine[prevIdx] & 0xff;
             }
-            
+
             // add the average
             curLine[i] += (byte) paeth(left, up, upLeft);
-        }      
+        }
     }
-    
+
     /**
      * The paeth algorithm
      *
-     * @param left a int.
-     * @param up a int.
+     * @param left   a int.
+     * @param up     a int.
      * @param upLeft a int.
      * @return a int.
      */
@@ -228,7 +224,7 @@ public class PNGPredictor extends Predictor {
         final int pa = Math.abs(p - left);
         final int pb = Math.abs(p - up);
         final int pc = Math.abs(p - upLeft);
-        
+
         if ((pa <= pb) && (pa <= pc)) {
             return left;
         } else if (pb <= pc) {
@@ -237,5 +233,5 @@ public class PNGPredictor extends Predictor {
             return upLeft;
         }
     }
-    
+
 }

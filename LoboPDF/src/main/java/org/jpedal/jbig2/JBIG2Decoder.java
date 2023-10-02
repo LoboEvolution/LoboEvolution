@@ -25,11 +25,12 @@
  */
 package org.jpedal.jbig2;
 
-import java.awt.image.BufferedImage;
-import java.awt.image.DataBuffer;
-import java.awt.image.DataBufferByte;
-import java.awt.image.Raster;
-import java.awt.image.WritableRaster;
+import org.jpedal.jbig2.decoders.JBIG2StreamDecoder;
+import org.jpedal.jbig2.image.JBIG2Bitmap;
+import org.jpedal.jbig2.segment.Segment;
+import org.jpedal.jbig2.segment.pageinformation.PageInformationSegment;
+
+import java.awt.image.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -37,200 +38,192 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
-import org.jpedal.jbig2.decoders.JBIG2StreamDecoder;
-import org.jpedal.jbig2.image.JBIG2Bitmap;
-import org.jpedal.jbig2.segment.Segment;
-import org.jpedal.jbig2.segment.pageinformation.PageInformationSegment;
-
 /**
  * <p>JBIG2Decoder class.</p>
- *
-  *
-  *
  */
 public class JBIG2Decoder {
-	
-	private final JBIG2StreamDecoder streamDecoder;
 
-	/**
-	 * Constructor
-	 */
-	public JBIG2Decoder() {
-		streamDecoder = new JBIG2StreamDecoder();
-	}
+    private final JBIG2StreamDecoder streamDecoder;
 
-	/**
-	 * If the data stream is taken from a PDF, there may be some global data. Pass any global data
-	 * in here.  Call this method before decodeJBIG2(...)
-	 *
-	 * @param data global data
-	 * @throws org.jpedal.jbig2.JBIG2Exception if any.
-	 */
-	public void setGlobalData(final byte[] data) throws JBIG2Exception {
-		streamDecoder.setGlobalData(data);
-	}
+    /**
+     * Constructor
+     */
+    public JBIG2Decoder() {
+        streamDecoder = new JBIG2StreamDecoder();
+    }
 
-	/**
-	 * Decodes a JBIG2 image from a File object
-	 *
-	 * @param file File to decode
-	 * @throws java.io.IOException if any.
-	 * @throws org.jpedal.jbig2.JBIG2Exception if any.
-	 */
-	public void decodeJBIG2(final File file) throws IOException, JBIG2Exception {
-		decodeJBIG2(file.getAbsolutePath());
-	}
+    /**
+     * If the data stream is taken from a PDF, there may be some global data. Pass any global data
+     * in here.  Call this method before decodeJBIG2(...)
+     *
+     * @param data global data
+     * @throws org.jpedal.jbig2.JBIG2Exception if any.
+     */
+    public void setGlobalData(final byte[] data) throws JBIG2Exception {
+        streamDecoder.setGlobalData(data);
+    }
 
-	/**
-	 * Decodes a JBIG2 image from a String path
-	 *
-	 * @param file Must be the full path to the image
-	 * @throws java.io.IOException if any.
-	 * @throws org.jpedal.jbig2.JBIG2Exception if any.
-	 */
-	public void decodeJBIG2(final String file) throws IOException, JBIG2Exception {
-		decodeJBIG2(Files.newInputStream(Paths.get(file)));
-	}
+    /**
+     * Decodes a JBIG2 image from a File object
+     *
+     * @param file File to decode
+     * @throws java.io.IOException             if any.
+     * @throws org.jpedal.jbig2.JBIG2Exception if any.
+     */
+    public void decodeJBIG2(final File file) throws IOException, JBIG2Exception {
+        decodeJBIG2(file.getAbsolutePath());
+    }
 
-	/**
-	 * Decodes a JBIG2 image from an InputStream
-	 *
-	 * @param inputStream InputStream
-	 * @throws java.io.IOException if any.
-	 * @throws org.jpedal.jbig2.JBIG2Exception if any.
-	 */
-	public void decodeJBIG2(final InputStream inputStream) throws IOException, JBIG2Exception {
-		final int availiable = inputStream.available();
+    /**
+     * Decodes a JBIG2 image from a String path
+     *
+     * @param file Must be the full path to the image
+     * @throws java.io.IOException             if any.
+     * @throws org.jpedal.jbig2.JBIG2Exception if any.
+     */
+    public void decodeJBIG2(final String file) throws IOException, JBIG2Exception {
+        decodeJBIG2(Files.newInputStream(Paths.get(file)));
+    }
 
-		final byte[] bytes = new byte[availiable];
-		inputStream.read(bytes);
+    /**
+     * Decodes a JBIG2 image from an InputStream
+     *
+     * @param inputStream InputStream
+     * @throws java.io.IOException             if any.
+     * @throws org.jpedal.jbig2.JBIG2Exception if any.
+     */
+    public void decodeJBIG2(final InputStream inputStream) throws IOException, JBIG2Exception {
+        final int availiable = inputStream.available();
 
-		decodeJBIG2(bytes);
-	}
-	
-	/**
-	 * Decodes a JBIG2 image from a byte array
-	 *
-	 * @param data the raw data stream
-	 * @throws java.io.IOException if any.
-	 * @throws org.jpedal.jbig2.JBIG2Exception if any.
-	 */
-	public void decodeJBIG2(final byte[] data) throws IOException, JBIG2Exception {
-		streamDecoder.decodeJBIG2(data);
-	}
+        final byte[] bytes = new byte[availiable];
+        inputStream.read(bytes);
 
-	/**
-	 * <p>getPageAsBufferedImage.</p>
-	 *
-	 * @param page a int.
-	 * @return a {@link java.awt.image.BufferedImage} object.
-	 */
-	public BufferedImage getPageAsBufferedImage(int page) {
-		page++;
-		final JBIG2Bitmap pageBitmap = streamDecoder.findPageSegement(page).getPageBitmap();
+        decodeJBIG2(bytes);
+    }
 
-		final byte[] bytes = pageBitmap.getData(true);
+    /**
+     * Decodes a JBIG2 image from a byte array
+     *
+     * @param data the raw data stream
+     * @throws java.io.IOException             if any.
+     * @throws org.jpedal.jbig2.JBIG2Exception if any.
+     */
+    public void decodeJBIG2(final byte[] data) throws IOException, JBIG2Exception {
+        streamDecoder.decodeJBIG2(data);
+    }
 
-		if (bytes == null)
-			return null;
+    /**
+     * <p>getPageAsBufferedImage.</p>
+     *
+     * @param page a int.
+     * @return a {@link java.awt.image.BufferedImage} object.
+     */
+    public BufferedImage getPageAsBufferedImage(int page) {
+        page++;
+        final JBIG2Bitmap pageBitmap = streamDecoder.findPageSegement(page).getPageBitmap();
 
-		// make a a DEEP copy so we cant alter
-		final int len = bytes.length;
-		final byte[] copy = new byte[len];
-		System.arraycopy(bytes, 0, copy, 0, len);
+        final byte[] bytes = pageBitmap.getData(true);
 
-		// byte[] data = pageBitmap.getData(true).clone();
-		final int width = pageBitmap.getWidth();
-		final int height = pageBitmap.getHeight();
+        if (bytes == null)
+            return null;
 
-		/** create an image from the raw data */
-		final DataBuffer db = new DataBufferByte(copy, copy.length);
+        // make a a DEEP copy so we cant alter
+        final int len = bytes.length;
+        final byte[] copy = new byte[len];
+        System.arraycopy(bytes, 0, copy, 0, len);
 
-		final WritableRaster raster = Raster.createPackedRaster(db, width, height, 1, null);
-		final BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_BINARY);
-		image.setData(raster);
+        // byte[] data = pageBitmap.getData(true).clone();
+        final int width = pageBitmap.getWidth();
+        final int height = pageBitmap.getHeight();
+
+        /** create an image from the raw data */
+        final DataBuffer db = new DataBufferByte(copy, copy.length);
+
+        final WritableRaster raster = Raster.createPackedRaster(db, width, height, 1, null);
+        final BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_BINARY);
+        image.setData(raster);
 
 
-		return image;
-	}
+        return image;
+    }
 
-	/**
-	 * <p>isNumberOfPagesKnown.</p>
-	 *
-	 * @return a boolean.
-	 */
-	public boolean isNumberOfPagesKnown() {
-		return streamDecoder.isNumberOfPagesKnown();
-	}
+    /**
+     * <p>isNumberOfPagesKnown.</p>
+     *
+     * @return a boolean.
+     */
+    public boolean isNumberOfPagesKnown() {
+        return streamDecoder.isNumberOfPagesKnown();
+    }
 
-	/**
-	 * <p>getNumberOfPages.</p>
-	 *
-	 * @return a int.
-	 */
-	public int getNumberOfPages() {
-		final int pages = streamDecoder.getNumberOfPages();
-		if (streamDecoder.isNumberOfPagesKnown() && pages != 0)
-			return pages;
+    /**
+     * <p>getNumberOfPages.</p>
+     *
+     * @return a int.
+     */
+    public int getNumberOfPages() {
+        final int pages = streamDecoder.getNumberOfPages();
+        if (streamDecoder.isNumberOfPagesKnown() && pages != 0)
+            return pages;
 
-		int noOfPages = 0;
+        int noOfPages = 0;
 
-		final List<Segment> segments = getAllSegments();
-		for (final Segment segment : segments) {
-			if (segment.getSegmentHeader().getSegmentType() == Segment.PAGE_INFORMATION)
-				noOfPages++;
-		}
+        final List<Segment> segments = getAllSegments();
+        for (final Segment segment : segments) {
+            if (segment.getSegmentHeader().getSegmentType() == Segment.PAGE_INFORMATION)
+                noOfPages++;
+        }
 
-		return noOfPages;
-	}
+        return noOfPages;
+    }
 
-	/**
-	 * <p>getAllSegments.</p>
-	 *
-	 * @return a {@link java.util.List} object.
-	 */
-	public List<Segment> getAllSegments() {
-		return streamDecoder.getAllSegments();
-	}
+    /**
+     * <p>getAllSegments.</p>
+     *
+     * @return a {@link java.util.List} object.
+     */
+    public List<Segment> getAllSegments() {
+        return streamDecoder.getAllSegments();
+    }
 
-	/**
-	 * <p>findPageSegement.</p>
-	 *
-	 * @param page a int.
-	 * @return a {@link org.jpedal.jbig2.segment.pageinformation.PageInformationSegment} object.
-	 */
-	public PageInformationSegment findPageSegement(int page) {
-		page++;
-		return streamDecoder.findPageSegement(page);
-	}
+    /**
+     * <p>findPageSegement.</p>
+     *
+     * @param page a int.
+     * @return a {@link org.jpedal.jbig2.segment.pageinformation.PageInformationSegment} object.
+     */
+    public PageInformationSegment findPageSegement(int page) {
+        page++;
+        return streamDecoder.findPageSegement(page);
+    }
 
-	/**
-	 * <p>findSegment.</p>
-	 *
-	 * @param segmentNumber a int.
-	 * @return a {@link org.jpedal.jbig2.segment.Segment} object.
-	 */
-	public Segment findSegment(final int segmentNumber) {
-		return streamDecoder.findSegment(segmentNumber);
-	}
+    /**
+     * <p>findSegment.</p>
+     *
+     * @param segmentNumber a int.
+     * @return a {@link org.jpedal.jbig2.segment.Segment} object.
+     */
+    public Segment findSegment(final int segmentNumber) {
+        return streamDecoder.findSegment(segmentNumber);
+    }
 
-	/**
-	 * <p>getPageAsJBIG2Bitmap.</p>
-	 *
-	 * @param page a int.
-	 * @return a {@link org.jpedal.jbig2.image.JBIG2Bitmap} object.
-	 */
-	public JBIG2Bitmap getPageAsJBIG2Bitmap(int page) {
-		page++;
-		return streamDecoder.findPageSegement(page).getPageBitmap();
-	}
+    /**
+     * <p>getPageAsJBIG2Bitmap.</p>
+     *
+     * @param page a int.
+     * @return a {@link org.jpedal.jbig2.image.JBIG2Bitmap} object.
+     */
+    public JBIG2Bitmap getPageAsJBIG2Bitmap(int page) {
+        page++;
+        return streamDecoder.findPageSegement(page).getPageBitmap();
+    }
 
-	/**
-	 * <p>isRandomAccessOrganisationUsed.</p>
-	 *
-	 * @return a boolean.
-	 */
-	public boolean isRandomAccessOrganisationUsed() {
-		return streamDecoder.isRandomAccessOrganisationUsed();
-	}
+    /**
+     * <p>isRandomAccessOrganisationUsed.</p>
+     *
+     * @return a boolean.
+     */
+    public boolean isRandomAccessOrganisationUsed() {
+        return streamDecoder.isRandomAccessOrganisationUsed();
+    }
 }

@@ -30,39 +30,48 @@ import java.nio.ByteBuffer;
 
 /**
  * A single glyph in a pdf font.  May be simple or compound via subclasses
- *
-  *
-  *
  */
 public class Glyf {
-    /** If true, the glyf is compound */
+    /**
+     * If true, the glyf is compound
+     */
     private boolean isCompound;
-    
-    /** the number of contours */
+
+    /**
+     * the number of contours
+     */
     private short numContours;
-    
-    /** the minimum x value */
+
+    /**
+     * the minimum x value
+     */
     private short minX;
-    
-    /** the minimum y value */
+
+    /**
+     * the minimum y value
+     */
     private short minY;
-    
-    /** the maximum x value */
+
+    /**
+     * the maximum x value
+     */
     private short maxX;
-    
-    /** the maximum y value */
+
+    /**
+     * the maximum y value
+     */
     private short maxY;
-    
+
     /**
      * Creates a new instance of glyf
      * Don't use this directly, use <code>Glyf.getGlyf()</code>
      */
     protected Glyf() {
     }
-    
+
     /**
      * Get a map from the given data
-     *
+     * <p>
      * This method reads the format, data and length variables of
      * the map.
      *
@@ -71,7 +80,7 @@ public class Glyf {
      */
     public static Glyf getGlyf(final ByteBuffer data) {
         final short numContours = data.getShort();
-        
+
         Glyf g = null;
         if (numContours == 0) {
             // no glyph data
@@ -83,32 +92,22 @@ public class Glyf {
             // simple glyf
             g = new GlyfSimple();
         } else {
-            throw new IllegalArgumentException("Unknown glyf type: " + 
-                                               numContours);
+            throw new IllegalArgumentException("Unknown glyf type: " +
+                    numContours);
         }
-        
+
         g.setNumContours(numContours);
         g.setMinX(data.getShort());
         g.setMinY(data.getShort());
         g.setMaxX(data.getShort());
         g.setMaxY(data.getShort());
-        
+
         // do glyphtype-specific parsing
         g.setData(data);
-    
+
         return g;
     }
-   
-    /**
-     * Set the data for this glyf.  Do nothing, since a glyf with
-     * no contours has no glyf data.
-     *
-     * @param data a {@link java.nio.ByteBuffer} object.
-     */
-    public void setData(final ByteBuffer data) {
-        return;
-    }
-    
+
     /**
      * Get the data in this glyf as a byte buffer.  Return the basic
      * glyf data only, since there is no specific data.  This method returns
@@ -119,17 +118,27 @@ public class Glyf {
      */
     public ByteBuffer getData() {
         final ByteBuffer buf = ByteBuffer.allocate(getLength());
-        
+
         buf.putShort(getNumContours());
         buf.putShort(getMinX());
         buf.putShort(getMinY());
         buf.putShort(getMaxX());
         buf.putShort(getMaxY());
-        
+
         // don't flip the buffer, since it may be used by subclasses
         return buf;
     }
-    
+
+    /**
+     * Set the data for this glyf.  Do nothing, since a glyf with
+     * no contours has no glyf data.
+     *
+     * @param data a {@link java.nio.ByteBuffer} object.
+     */
+    public void setData(final ByteBuffer data) {
+        return;
+    }
+
     /**
      * Get the length of this glyf.  A glyf with no data has a length
      * of 10 (2 bytes each for 5 short values)
@@ -139,7 +148,7 @@ public class Glyf {
     public short getLength() {
         return 10;
     }
-    
+
     /**
      * Get whether this is a simple or compound glyf
      *
@@ -148,7 +157,7 @@ public class Glyf {
     public boolean isCompound() {
         return this.isCompound;
     }
-    
+
     /**
      * Set whether this is a simple or compound glyf
      *
@@ -157,7 +166,7 @@ public class Glyf {
     protected void setCompound(final boolean isCompound) {
         this.isCompound = isCompound;
     }
-    
+
     /**
      * Get the number of contours in this glyf
      *
@@ -166,7 +175,7 @@ public class Glyf {
     public short getNumContours() {
         return this.numContours;
     }
-    
+
     /**
      * Set the number of contours in this glyf
      *
@@ -175,7 +184,7 @@ public class Glyf {
     protected void setNumContours(final short numContours) {
         this.numContours = numContours;
     }
-    
+
     /**
      * Get the minimum x in this glyf
      *
@@ -184,7 +193,7 @@ public class Glyf {
     public short getMinX() {
         return this.minX;
     }
-    
+
     /**
      * Set the minimum X in this glyf
      *
@@ -193,7 +202,7 @@ public class Glyf {
     protected void setMinX(final short minX) {
         this.minX = minX;
     }
-    
+
     /**
      * Get the minimum y in this glyf
      *
@@ -202,7 +211,7 @@ public class Glyf {
     public short getMinY() {
         return this.minY;
     }
-    
+
     /**
      * Set the minimum Y in this glyf
      *
@@ -211,6 +220,7 @@ public class Glyf {
     protected void setMinY(final short minY) {
         this.minY = minY;
     }
+
     /**
      * Get the maximum x in this glyf
      *
@@ -219,7 +229,7 @@ public class Glyf {
     public short getMaxX() {
         return this.maxX;
     }
-    
+
     /**
      * Set the maximum X in this glyf
      *
@@ -228,7 +238,7 @@ public class Glyf {
     protected void setMaxX(final short maxX) {
         this.maxX = maxX;
     }
-    
+
     /**
      * Get the maximum y in this glyf
      *
@@ -237,7 +247,7 @@ public class Glyf {
     public short getMaxY() {
         return this.maxY;
     }
-    
+
     /**
      * Set the maximum Y in this glyf
      *

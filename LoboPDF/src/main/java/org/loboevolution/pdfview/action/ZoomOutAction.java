@@ -26,40 +26,38 @@
 
 package org.loboevolution.pdfview.action;
 
-import java.awt.event.ActionEvent;
-
-import javax.swing.AbstractAction;
-
 import org.loboevolution.pdf.PDFViewer;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
 
 /**
  * <p>ZoomOutAction class.</p>
- *
-  *
-  *
  */
 public class ZoomOutAction extends AbstractAction {
 
-	private static final long serialVersionUID = 1L;
-	
-	private final PDFViewer dialog;
-	
-	private final float zoomfactor;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * <p>Constructor for ZoomOutAction.</p>
-	 *
-	 * @param dialog a {@link org.loboevolution.pdf.PDFViewer} object.
-	 * @param factor a float.
-	 */
-	public ZoomOutAction(final PDFViewer dialog, final float factor) {
-		super("Zoom out", dialog.getIcon("/org/loboevolution/images/zoomout.png"));
-		zoomfactor = factor;
-		this.dialog = dialog;
-	}
+    private final PDFViewer dialog;
 
-	/** {@inheritDoc} */
-	public void actionPerformed(final ActionEvent evt) {
-		dialog.doZoom(zoomfactor);
-	}
+    private final float zoomfactor;
+
+    /**
+     * <p>Constructor for ZoomOutAction.</p>
+     *
+     * @param dialog a {@link org.loboevolution.pdf.PDFViewer} object.
+     * @param factor a float.
+     */
+    public ZoomOutAction(final PDFViewer dialog, final float factor) {
+        super("Zoom out", dialog.getIcon("/org/loboevolution/images/zoomout.png"));
+        zoomfactor = factor;
+        this.dialog = dialog;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void actionPerformed(final ActionEvent evt) {
+        dialog.doZoom(zoomfactor);
+    }
 }

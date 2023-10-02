@@ -26,53 +26,51 @@
 
 package org.loboevolution.pdfview.pattern;
 
-import java.io.IOException;
-import java.util.Map;
-
 import org.loboevolution.pdfview.PDFObject;
 import org.loboevolution.pdfview.PDFPaint;
 
+import java.io.IOException;
+import java.util.Map;
+
 /**
  * A type 1 (tiling) pattern
- *
-  *
-  *
  */
 public class PatternType2 extends PDFPattern {
-        
-    /** the shader */
+
+    /**
+     * the shader
+     */
     private PDFShader shader;
-        
+
     /**
      * Creates a new instance of PatternType1
      */
     public PatternType2() {
         super(2);
     }
-    
-	/**
-	 * {@inheritDoc}
-	 *
-	 * Parse the pattern from the PDFObject
-	 *
-	 * Note the resources passed in are ignored...
-	 */
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * Parse the pattern from the PDFObject
+     * <p>
+     * Note the resources passed in are ignored...
+     */
     @Override
-	protected void parse(final PDFObject patternObj, final Map rsrc) throws IOException
-    {
-        this.shader = PDFShader.getShader(patternObj.getDictRef("Shading"), rsrc);        
+    protected void parse(final PDFObject patternObj, final Map rsrc) throws IOException {
+        this.shader = PDFShader.getShader(patternObj.getDictRef("Shading"), rsrc);
     }
-    
-	/**
-	 * {@inheritDoc}
-	 *
-	 * Create a PDFPaint from this pattern and set of components.
-	 * This creates a buffered image of this pattern using
-	 * the given paint, then uses that image to create the correct
-	 * TexturePaint to use in the PDFPaint.
-	 */
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * Create a PDFPaint from this pattern and set of components.
+     * This creates a buffered image of this pattern using
+     * the given paint, then uses that image to create the correct
+     * TexturePaint to use in the PDFPaint.
+     */
     @Override
-	public PDFPaint getPaint(final PDFPaint basePaint) {
-    	return shader.getPaint();
-    }    
+    public PDFPaint getPaint(final PDFPaint basePaint) {
+        return shader.getPaint();
+    }
 }

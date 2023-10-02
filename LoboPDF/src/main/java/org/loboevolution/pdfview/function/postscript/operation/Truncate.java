@@ -30,20 +30,20 @@ import java.util.Deque;
 
 
 final class Truncate implements PostScriptOperation {
-	@Override
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <i>num1</i> <b>truncate</b> <i>num2</i> <p>
-	 *
-	 * truncates num1 toward 0 by removing its fractional part.
-	 * The type of the result is the same as the type of the
-	 * operand. <p>
-	 *
-	 * errors: stackunderflow, typecheck
-	 */
-	public void eval(final Deque<Object> environment) {
-	    final double num1 = (Double)environment.pop();
-	    environment.push((((long) num1) - num1));
-	}
+    @Override
+    /**
+     * {@inheritDoc}
+     *
+     * <i>num1</i> <b>truncate</b> <i>num2</i> <p>
+     *
+     * truncates num1 toward 0 by removing its fractional part.
+     * The type of the result is the same as the type of the
+     * operand. <p>
+     *
+     * errors: stackunderflow, typecheck
+     */
+    public void eval(final Deque<Object> environment) {
+        final double num1 = (Double) environment.pop();
+        environment.push((((long) num1) - num1));
+    }
 }

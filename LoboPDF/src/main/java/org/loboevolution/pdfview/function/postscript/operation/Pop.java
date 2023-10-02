@@ -30,10 +30,12 @@ import java.util.Deque;
 
 
 final class Pop implements PostScriptOperation {
-	/** {@inheritDoc} */
-	@Override
-	public void eval(final Deque<Object> environment) {   // discard top element
-	    environment.pop();
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void eval(final Deque<Object> environment) {   // discard top element
+        environment.pop();
+    }
 }
 

@@ -31,36 +31,39 @@ import java.nio.ByteBuffer;
 
 /**
  * Exposes a {@link java.nio.ByteBuffer} as an {@link java.io.InputStream}.
- *
+ * <p>
  * Author Luke Kirby
-  *
  */
 public class ByteBufferInputStream extends InputStream {
 
-    /** The underlying byte buffer */
+    /**
+     * The underlying byte buffer
+     */
     private final ByteBuffer buffer;
 
     /**
      * Class constructor
      *
      * @param buffer the buffer to present as an input stream, positioned
-     *  at the current read position of the byte buffer
+     *               at the current read position of the byte buffer
      */
     public ByteBufferInputStream(final ByteBuffer buffer) {
         this.buffer = buffer;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int read(final byte[] b, final int off, final int len) throws IOException {
 
         if (b == null) {
-	    throw new NullPointerException();
-	} else if (off < 0 || len < 0 || len > b.length - off) {
-	    throw new IndexOutOfBoundsException();
-	} else if (len == 0) {
-	    return 0;
-	}
+            throw new NullPointerException();
+        } else if (off < 0 || len < 0 || len > b.length - off) {
+            throw new IndexOutOfBoundsException();
+        } else if (len == 0) {
+            return 0;
+        }
 
         final int remaining = buffer.remaining();
         if (remaining == 0) {
@@ -74,7 +77,9 @@ public class ByteBufferInputStream extends InputStream {
         }
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public long skip(final long n) throws IOException {
         if (n <= 0) {
@@ -91,31 +96,41 @@ public class ByteBufferInputStream extends InputStream {
         }
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int read() throws IOException {
         return buffer.get();
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int available() throws IOException {
         return buffer.remaining();
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void mark(final int readlimit) {
         buffer.mark();
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean markSupported() {
         return true;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void reset() throws IOException {
         buffer.reset();

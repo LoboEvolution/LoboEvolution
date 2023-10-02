@@ -25,32 +25,35 @@
  */
 package org.loboevolution.pdfview.font;
 
+import org.loboevolution.pdfview.PDFObject;
+
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Point2D;
 import java.io.IOException;
 
-import org.loboevolution.pdfview.PDFObject;
-
 /**
  * Supports width operations for Type1, Type1C, TrueType and Type3 fonts
- *
-  *
-  *
  */
 public abstract class OutlineFont extends PDFFont {
 
-    /** the first character code */
+    /**
+     * the first character code
+     */
     private int firstChar = -1;
-    /** the last character code */
+    /**
+     * the last character code
+     */
     private int lastChar = -1;
-    /** the widths for each character code */
+    /**
+     * the widths for each character code
+     */
     private float[] widths;
 
     /**
      * Creates a new instance of OutlineFont
      *
-     * @param baseFont a {@link java.lang.String} object.
-     * @param fontObj a {@link org.loboevolution.pdfview.PDFObject} object.
+     * @param baseFont   a {@link java.lang.String} object.
+     * @param fontObj    a {@link org.loboevolution.pdfview.PDFObject} object.
      * @param descriptor a {@link org.loboevolution.pdfview.font.PDFFontDescriptor} object.
      * @throws java.io.IOException if any.
      */
@@ -130,7 +133,7 @@ public abstract class OutlineFont extends PDFFont {
         if (idx < 0 || this.widths == null || idx >= this.widths.length) {
             // try to get the missing width from the font descriptor
             if (getDescriptor() != null) {
-                return getDescriptor().getMissingWidth() / (float)getDefaultWidth();
+                return getDescriptor().getMissingWidth() / (float) getDefaultWidth();
             } else {
                 return 0;
             }
@@ -139,20 +142,20 @@ public abstract class OutlineFont extends PDFFont {
         return this.widths[idx];
     }
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * Get the glyph for a given character code and name
-	 *
-	 * The preferred method of getting the glyph should be by name.  If the
-	 * name is null or not valid, then the character code should be used.
-	 * If the both the code and the name are invalid, the undefined glyph
-	 * should be returned.
-	 *
-	 * Note this method must *always* return a glyph.
-	 */
+    /**
+     * {@inheritDoc}
+     * <p>
+     * Get the glyph for a given character code and name
+     * <p>
+     * The preferred method of getting the glyph should be by name.  If the
+     * name is null or not valid, then the character code should be used.
+     * If the both the code and the name are invalid, the undefined glyph
+     * should be returned.
+     * <p>
+     * Note this method must *always* return a glyph.
+     */
     @Override
-	protected PDFGlyph getGlyph(final char src, final String name) {
+    protected PDFGlyph getGlyph(final char src, final String name) {
         GeneralPath outline = null;
         final float width = getWidth(src, name);
 
@@ -174,20 +177,20 @@ public abstract class OutlineFont extends PDFFont {
     /**
      * Get a glyph outline by name
      *
-     * @param name the name of the desired glyph
-     * @return the glyph outline, or null if unavailable
+     * @param name  the name of the desired glyph
      * @param width a float.
+     * @return the glyph outline, or null if unavailable
      */
     protected abstract GeneralPath getOutline(final String name, final float width);
 
     /**
      * Get a glyph outline by character code
-     *
+     * <p>
      * Note this method must always return an outline
      *
-     * @param src the character code of the desired glyph
-     * @return the glyph outline
+     * @param src   the character code of the desired glyph
      * @param width a float.
+     * @return the glyph outline
      */
     protected abstract GeneralPath getOutline(char src, final float width);
 }

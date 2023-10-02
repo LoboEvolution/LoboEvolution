@@ -26,19 +26,18 @@
 
 package org.loboevolution.pdfview.pattern;
 
-import java.awt.geom.Rectangle2D;
-import java.io.IOException;
-import java.util.Map;
-
 import org.loboevolution.pdfview.PDFObject;
 import org.loboevolution.pdfview.PDFPaint;
 import org.loboevolution.pdfview.PDFParseException;
 import org.loboevolution.pdfview.colorspace.PDFColorSpace;
 
+import java.awt.geom.Rectangle2D;
+import java.io.IOException;
+import java.util.Map;
+
 /**
- *
  * <p>A PDFShader fills a given region with a shading, such as a gradient.</p>
- *
+ * <p>
  * Shading Dictionaries (section 4.6)<br>
  * A shading dictionary specifies details of a particular gradient fill,
  * including the type of shading to be used, the geometry of the area to
@@ -72,43 +71,67 @@ import org.loboevolution.pdfview.colorspace.PDFColorSpace;
  * <p>Tensor-product patch meshes (type 7) are similar to type 6 but
  * with additional control points in each patch, affording greater
  * control over color mapping.</p>
- *
+ * <p>
  * Table 4.28 shows the entries that all shading dictionaries share
  * in common; entries specific to particular shading types are
  * described in the relevant sections below.
  */
 public abstract class PDFShader {
-    
-    /** Constant <code>FUNCTION_SHADING=1</code> */
-    public static final  int             FUNCTION_SHADING = 1;
-    /** Constant <code>AXIAL_SHADING=2</code> */
-    public static final  int             AXIAL_SHADING = 2;
-    /** Constant <code>RADIAL_SHADING=3</code> */
-    public static final  int             RADIAL_SHADING = 3;
-    /** Constant <code>FREE_FORM_SHADING=4</code> */
-    public static final  int             FREE_FORM_SHADING = 4;
-    /** Constant <code>LATTICE_SHADING=5</code> */
-    public static final  int             LATTICE_SHADING = 5;
-    /** Constant <code>COONS_PATCH_MESH_SHADING=6</code> */
-    public static final  int             COONS_PATCH_MESH_SHADING = 6;
-    /** Constant <code>TENSOR_PRODUCTS_MESH_SHADING=7</code> */
-    public static final  int             TENSOR_PRODUCTS_MESH_SHADING = 7;
 
-    /** The tolerance for reevaluating the shading function again */
+    /**
+     * Constant <code>FUNCTION_SHADING=1</code>
+     */
+    public static final int FUNCTION_SHADING = 1;
+    /**
+     * Constant <code>AXIAL_SHADING=2</code>
+     */
+    public static final int AXIAL_SHADING = 2;
+    /**
+     * Constant <code>RADIAL_SHADING=3</code>
+     */
+    public static final int RADIAL_SHADING = 3;
+    /**
+     * Constant <code>FREE_FORM_SHADING=4</code>
+     */
+    public static final int FREE_FORM_SHADING = 4;
+    /**
+     * Constant <code>LATTICE_SHADING=5</code>
+     */
+    public static final int LATTICE_SHADING = 5;
+    /**
+     * Constant <code>COONS_PATCH_MESH_SHADING=6</code>
+     */
+    public static final int COONS_PATCH_MESH_SHADING = 6;
+    /**
+     * Constant <code>TENSOR_PRODUCTS_MESH_SHADING=7</code>
+     */
+    public static final int TENSOR_PRODUCTS_MESH_SHADING = 7;
+
+    /**
+     * The tolerance for reevaluating the shading function again
+     */
     public static final float TOLERANCE = 1e-4f;
 
-    /** the type of the shading (1 through 7)*/
+    /**
+     * the type of the shading (1 through 7)
+     */
     private final int type;
-    
-    /** the colorspace */
+
+    /**
+     * the colorspace
+     */
     private PDFColorSpace colorSpace;
-    
-    /** the background color */
+
+    /**
+     * the background color
+     */
     private PDFPaint background;
-    
-    /** the bounding box of the pattern */
+
+    /**
+     * the bounding box of the pattern
+     */
     private Rectangle2D bbox;
-    
+
     /**
      * Creates a new instance of PDFShader
      *
@@ -117,8 +140,8 @@ public abstract class PDFShader {
     protected PDFShader(final int type) {
         this.type = type;
     }
-    
-    
+
+
     /**
      * Parse a pdf shader into a shader object
      *
@@ -128,40 +151,39 @@ public abstract class PDFShader {
      * @throws java.io.IOException if any.
      */
     public static PDFShader getShader(final PDFObject shaderObj, final Map resources)
-        throws IOException
-    {
+            throws IOException {
         // first see if the shader is already cached
         PDFShader shader = (PDFShader) shaderObj.getCache();
         if (shader != null) {
             return shader;
         }
-        
+
         // read the type (required)
         final PDFObject typeObj = shaderObj.getDictRef("ShadingType");
         if (typeObj == null) {
             throw new PDFParseException("No shader type defined!");
         }
         final int type = typeObj.getIntValue();
-        
+
         // create the shader
         switch (type) {
             case AXIAL_SHADING:
                 shader = new ShaderType2();
                 break;
-    
+
             case RADIAL_SHADING:
-            	shader = new ShaderType3();
-            	break;
+                shader = new ShaderType3();
+                break;
 
             case FUNCTION_SHADING:
             case FREE_FORM_SHADING:
             case LATTICE_SHADING:
             case COONS_PATCH_MESH_SHADING:
             case TENSOR_PRODUCTS_MESH_SHADING:
-            default:    
-            		shader = new DummyShader(type);
+            default:
+                shader = new DummyShader(type);
         }
-        
+
         // read the color space (required)
         final PDFObject csObj = shaderObj.getDictRef("ColorSpace");
         if (csObj == null) {
@@ -169,7 +191,7 @@ public abstract class PDFShader {
         }
         final PDFColorSpace cs = PDFColorSpace.getColorSpace(csObj, resources);
         shader.setColorSpace(cs);
-        
+
         // read the background color (optional)
         final PDFObject bgObj = shaderObj.getDictRef("Background");
         if (bgObj != null) {
@@ -179,9 +201,9 @@ public abstract class PDFShader {
                 bgArray[i] = bgObjs[i].getFloatValue();
             }
             final PDFPaint paint = cs.getPaint(bgArray);
-            shader.setBackground(paint);          
+            shader.setBackground(paint);
         }
-        
+
         // read the bounding box (optional)
         final PDFObject bboxObj = shaderObj.getDictRef("BBox");
         if (bboxObj != null) {
@@ -190,21 +212,21 @@ public abstract class PDFShader {
             final float minY = rectObj[1].getFloatValue();
             final float maxX = rectObj[2].getFloatValue();
             final float maxY = rectObj[3].getFloatValue();
-            
+
             final Rectangle2D bbox =
-                new Rectangle2D.Float(minX, minY,  maxX - minX, maxY - minY);
+                    new Rectangle2D.Float(minX, minY, maxX - minX, maxY - minY);
             shader.setBBox(bbox);
         }
-        
+
         // parse the shader-specific attributes
         shader.parse(shaderObj);
-        
+
         // set the cache
         shaderObj.setCache(shader);
-        
+
         return shader;
     }
-    
+
     /**
      * Get the type
      *
@@ -213,7 +235,7 @@ public abstract class PDFShader {
     public int getType() {
         return this.type;
     }
-    
+
     /**
      * Get the color space
      *
@@ -231,7 +253,7 @@ public abstract class PDFShader {
     protected void setColorSpace(final PDFColorSpace colorSpace) {
         this.colorSpace = colorSpace;
     }
-    
+
     /**
      * Get the background color
      *
@@ -240,7 +262,7 @@ public abstract class PDFShader {
     public PDFPaint getBackground() {
         return this.background;
     }
-    
+
     /**
      * Set the background color
      *
@@ -249,7 +271,7 @@ public abstract class PDFShader {
     protected void setBackground(final PDFPaint background) {
         this.background = background;
     }
-    
+
     /**
      * Get the bounding box
      *
@@ -258,7 +280,7 @@ public abstract class PDFShader {
     public Rectangle2D getBBox() {
         return this.bbox;
     }
-    
+
     /**
      * Set the bounding box
      *
@@ -267,7 +289,7 @@ public abstract class PDFShader {
     protected void setBBox(final Rectangle2D bbox) {
         this.bbox = bbox;
     }
-    
+
     /**
      * Parse the shader-specific data
      *
@@ -275,7 +297,7 @@ public abstract class PDFShader {
      * @throws java.io.IOException if any.
      */
     public abstract void parse(PDFObject shareObj) throws IOException;
-    
+
     /**
      * Returns paint that represents the selected shader
      *

@@ -37,41 +37,27 @@ import java.util.Map;
  * Encodes into a PDFDocEncoding representation. Note that only 256 characters
  * (if that) are represented in the PDFDocEncoding, so users should be
  * prepared to deal with unmappable character exceptions.
- *
+ * <p>
  * see "PDF Reference version 1.7, Appendix D"
  * Author Luke Kirby
-  *
  */
 public class PDFDocCharsetEncoder extends CharsetEncoder {
-
-    /**
-     * Identify whether a particular character preserves the same byte value
-     * upon encoding in PDFDocEncoding
-     *
-     * @param ch the character
-     * @return whether the character is identity encoded
-     */
-    public static boolean isIdentityEncoding(final char ch) {
-        return ch >= 0 && ch <= 255 && IDENT_PDF_DOC_ENCODING_MAP[ch];
-
-    }
 
     /**
      * For each character that exists in PDFDocEncoding, identifies whether
      * the byte value in UTF-16BE is the same as it is in PDFDocEncoding
      */
-    static final  boolean[] IDENT_PDF_DOC_ENCODING_MAP = new boolean[256];
-
+    static final boolean[] IDENT_PDF_DOC_ENCODING_MAP = new boolean[256];
     /**
      * For non-identity encoded characters, maps from the character to
      * the byte value in PDFDocEncoding. If an entry for a non-identity
      * coded character is absent from this map, that character is unmappable
      * in the PDFDocEncoding.
      */
-    static final  Map<Character,Byte> EXTENDED_TO_PDF_DOC_ENCODING_MAP =
+    static final Map<Character, Byte> EXTENDED_TO_PDF_DOC_ENCODING_MAP =
             new HashMap<>();
-    static
-    {
+
+    static {
         for (byte i = 0; i < PDFStringUtil.PDF_DOC_ENCODING_MAP.length; ++i) {
             final char c = PDFStringUtil.PDF_DOC_ENCODING_MAP[i];
             final boolean identical = (c == i);
@@ -89,9 +75,23 @@ public class PDFDocCharsetEncoder extends CharsetEncoder {
         super(null, 1, 1);
     }
 
-	/** {@inheritDoc} */
+    /**
+     * Identify whether a particular character preserves the same byte value
+     * upon encoding in PDFDocEncoding
+     *
+     * @param ch the character
+     * @return whether the character is identity encoded
+     */
+    public static boolean isIdentityEncoding(final char ch) {
+        return ch >= 0 && ch <= 255 && IDENT_PDF_DOC_ENCODING_MAP[ch];
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
-	protected CoderResult encodeLoop(final CharBuffer in, final ByteBuffer out) {
+    protected CoderResult encodeLoop(final CharBuffer in, final ByteBuffer out) {
         while (in.remaining() > 0) {
             if (out.remaining() < 1) {
                 return CoderResult.OVERFLOW;
@@ -111,10 +111,12 @@ public class PDFDocCharsetEncoder extends CharsetEncoder {
         return CoderResult.UNDERFLOW;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isLegalReplacement(final byte[] repl) {
         // avoid referencing the non-existent character set
         return true;
-    }    
+    }
 }

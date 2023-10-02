@@ -30,19 +30,19 @@ import java.util.Deque;
 
 
 final class True implements PostScriptOperation {
-	@Override
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <b>true</b> <i>true</i> <p>
-	 *
-	 * pushes a boolean object whose value is true on the operand
-	 * stack. true is not an operator; it is a name in systemdict
-	 * associated with the boolean value true. <p>
-	 *
-	 * errors: stackoverflow
-	 */
-	public void eval(final Deque<Object> environment) {
-	    environment.push(true);
-	}
+    @Override
+    /**
+     * {@inheritDoc}
+     *
+     * <b>true</b> <i>true</i> <p>
+     *
+     * pushes a boolean object whose value is true on the operand
+     * stack. true is not an operator; it is a name in systemdict
+     * associated with the boolean value true. <p>
+     *
+     * errors: stackoverflow
+     */
+    public void eval(final Deque<Object> environment) {
+        environment.push(true);
+    }
 }

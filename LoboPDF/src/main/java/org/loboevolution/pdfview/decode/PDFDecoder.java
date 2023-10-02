@@ -25,15 +25,15 @@
  */
 package org.loboevolution.pdfview.decode;
 
+import org.loboevolution.pdfview.PDFObject;
+import org.loboevolution.pdfview.PDFParseException;
+import org.loboevolution.pdfview.decrypt.PDFDecrypterFactory;
+
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
-
-import org.loboevolution.pdfview.PDFObject;
-import org.loboevolution.pdfview.PDFParseException;
-import org.loboevolution.pdfview.decrypt.PDFDecrypterFactory;
 
 /**
  * A PDF Decoder encapsulates all the methods of decoding a stream of bytes
@@ -41,23 +41,24 @@ import org.loboevolution.pdfview.decrypt.PDFDecrypterFactory;
  * <p>
  * You should use the decodeStream() method of this object rather than using
  * any of the decoders directly.
- *
-  *
-  *
  */
 public class PDFDecoder {
 
-    /** Constant <code>DCT_FILTERS</code> */
-    public static final  Set<String> DCT_FILTERS = new HashSet<>(Arrays.asList("DCT", "DCTDecode"));
+    /**
+     * Constant <code>DCT_FILTERS</code>
+     */
+    public static final Set<String> DCT_FILTERS = new HashSet<>(Arrays.asList("DCT", "DCTDecode"));
 
-    /** Creates a new instance of PDFDecoder */
+    /**
+     * Creates a new instance of PDFDecoder
+     */
     private PDFDecoder() {
     }
 
     /**
      * <p>isLastFilter.</p>
      *
-     * @param dict a {@link org.loboevolution.pdfview.PDFObject} object.
+     * @param dict    a {@link org.loboevolution.pdfview.PDFObject} object.
      * @param filters a {@link java.util.Set} object.
      * @return a boolean.
      * @throws java.io.IOException if any.
@@ -75,39 +76,11 @@ public class PDFDecoder {
     }
 
     /**
-     * Utility class for reading and storing the specification of
-     * Filters on a stream
-     */
-    private static class FilterSpec
-    {
-        PDFObject[] ary;
-        PDFObject[] params;
-
-        private FilterSpec(final PDFObject dict, final PDFObject filter) throws IOException {
-            if (filter.getType() == PDFObject.NAME) {
-                ary = new PDFObject[1];
-                ary[0] = filter;
-                params = new PDFObject[1];
-                params[0] = dict.getDictRef("DecodeParms");
-            } else {
-                ary = filter.getArray();
-                final PDFObject parmsobj = dict.getDictRef("DecodeParms");
-                if (parmsobj != null) {
-                    params = parmsobj.getArray();
-                } else {
-                    params = new PDFObject[ary.length];
-                }
-            }
-        }
-
-    }
-
-    /**
      * decode a byte[] stream using the filters specified in the object's
      * dictionary (passed as argument 1).
      *
-     * @param dict the dictionary associated with the stream
-     * @param streamBuf the data in the stream, as a byte buffer
+     * @param dict         the dictionary associated with the stream
+     * @param streamBuf    the data in the stream, as a byte buffer
      * @param filterLimits a {@link java.util.Set} object.
      * @return a {@link java.nio.ByteBuffer} object.
      * @throws java.io.IOException if any.
@@ -172,8 +145,8 @@ public class PDFDecoder {
                     } else {
                         throw new PDFParseException("Unknown coding method:" + spec.ary[i].getStringValue());
                     }
-                }catch(final Exception e) {
-                    throw new PDFParseException("Problem decoding "+enctype+" encoded stream!", e);
+                } catch (final Exception e) {
+                    throw new PDFParseException("Problem decoding " + enctype + " encoded stream!", e);
                 }
 
             }
@@ -184,6 +157,7 @@ public class PDFDecoder {
 
     /**
      * The name of the Crypt filter to apply
+     *
      * @param param the parameters to the Crypt filter
      * @return the name of the crypt filter to apply
      * @throws IOException if there's a problem reading the objects
@@ -232,6 +206,33 @@ public class PDFDecoder {
                 final String cfName = getCryptFilterName(spec.params[0]);
                 // see whether the specified crypt filter really decrypts
                 return dict.getDecrypter().isEncryptionPresent(cfName);
+            }
+        }
+
+    }
+
+    /**
+     * Utility class for reading and storing the specification of
+     * Filters on a stream
+     */
+    private static class FilterSpec {
+        PDFObject[] ary;
+        PDFObject[] params;
+
+        private FilterSpec(final PDFObject dict, final PDFObject filter) throws IOException {
+            if (filter.getType() == PDFObject.NAME) {
+                ary = new PDFObject[1];
+                ary[0] = filter;
+                params = new PDFObject[1];
+                params[0] = dict.getDictRef("DecodeParms");
+            } else {
+                ary = filter.getArray();
+                final PDFObject parmsobj = dict.getDictRef("DecodeParms");
+                if (parmsobj != null) {
+                    params = parmsobj.getArray();
+                } else {
+                    params = new PDFObject[ary.length];
+                }
             }
         }
 

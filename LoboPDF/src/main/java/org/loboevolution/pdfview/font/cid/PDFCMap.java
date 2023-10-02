@@ -25,34 +25,34 @@
  */
 package org.loboevolution.pdfview.font.cid;
 
-import java.io.IOException;
-import java.util.HashMap;
-
 import org.loboevolution.pdfview.PDFDebugger;
 import org.loboevolution.pdfview.PDFObject;
+
+import java.io.IOException;
+import java.util.HashMap;
 
 /**
  * A CMap maps from a character in a composite font to a font/glyph number
  * pair in a CID font.
- *
+ * <p>
  * Author  jkaplan
-  *
  */
 public abstract class PDFCMap {
     /**
      * A cache of known CMaps by name
      */
     private static HashMap<String, PDFCMap> cache;
-    
+
     /**
      * Creates a new instance of CMap
      */
-    protected PDFCMap() {}
-    
+    protected PDFCMap() {
+    }
+
     /**
      * Get a CMap, given a PDF object containing one of the following:
-     *  a string name of a known CMap
-     *  a stream containing a CMap definition
+     * a string name of a known CMap
+     * a stream containing a CMap definition
      *
      * @param map a {@link org.loboevolution.pdfview.PDFObject} object.
      * @return a {@link org.loboevolution.pdfview.font.cid.PDFCMap} object.
@@ -67,7 +67,7 @@ public abstract class PDFCMap {
             throw new IOException("CMap type not Name or Stream!");
         }
     }
-       
+
     /**
      * Get a CMap, given a string name
      *
@@ -79,31 +79,31 @@ public abstract class PDFCMap {
         if (cache == null) {
             populateCache();
         }
-        
+
         if (!cache.containsKey(mapName)) {
             //throw new IOException("Unknown CMap: " + mapName);
-        	PDFDebugger.debug("Unknown CMap: '" + mapName + "' procced with 'Identity-H'");
-	       	return cache.get("Identity-H");
+            PDFDebugger.debug("Unknown CMap: '" + mapName + "' procced with 'Identity-H'");
+            return cache.get("Identity-H");
         }
-            
+
         return cache.get(mapName);
     }
-    
+
     /**
      * Populate the cache with well-known types
      */
     protected static void populateCache() {
         cache = new HashMap<>();
-    
+
         // add the Identity-H map
         cache.put("Identity-H", new PDFCMap() {
             @Override
-			public char map(final char src) {
+            public char map(final char src) {
                 return src;
             }
         });
     }
-    
+
     /**
      * Parse a CMap from a CMap stream
      *
@@ -112,9 +112,9 @@ public abstract class PDFCMap {
      * @throws java.io.IOException if any.
      */
     protected static PDFCMap parseCMap(final PDFObject map) throws IOException {
-       	return new ToUnicodeMap(map);
+        return new ToUnicodeMap(map);
     }
-    
+
     /**
      * Map a given source character to a destination character
      *
@@ -122,7 +122,7 @@ public abstract class PDFCMap {
      * @return a char.
      */
     public abstract char map(char src);
-    
+
     /**
      * Get the font number assoicated with a given source character
      *
@@ -132,5 +132,5 @@ public abstract class PDFCMap {
     public int getFontID(final char src) {
         return 0;
     }
-    
+
 }

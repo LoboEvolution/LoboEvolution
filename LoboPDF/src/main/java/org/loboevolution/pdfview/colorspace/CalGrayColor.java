@@ -26,53 +26,52 @@
 
 package org.loboevolution.pdfview.colorspace;
 
+import org.loboevolution.pdfview.PDFObject;
+
 import java.awt.color.ColorSpace;
 import java.io.IOException;
 
-import org.loboevolution.pdfview.PDFObject;
-
 /**
  * A ColorSpace for calibrated gray
- *
+ * <p>
  * Author Mike Wessler
-  *
  */
 public class CalGrayColor extends ColorSpace {
-	final float[] white = {1f, 1f, 1f};
+    static final ColorSpace cie = ColorSpace.getInstance(ColorSpace.CS_sRGB);
+    final float[] white = {1f, 1f, 1f};
     final float[] black = {0, 0, 0};
-    float gamma= 1;
-    static final ColorSpace cie= ColorSpace.getInstance(ColorSpace.CS_sRGB);
+    float gamma = 1;
 
     /**
      * Create a new Calibrated Gray color space object, given
      * the description in a PDF dictionary.
      *
      * @param obj a dictionary that contains an Array of 3 Numbers
-     * for "WhitePoint" and "BlackPoint", and a Number for "Gamma"
+     *            for "WhitePoint" and "BlackPoint", and a Number for "Gamma"
      * @throws java.io.IOException if any.
      */
     public CalGrayColor(final PDFObject obj) throws IOException {
-	// obj is a dictionary that has the following parts:
-	// WhitePoint [a b c]
-	// BlackPoint [a b c]
-	// Gamma a
-	super(TYPE_GRAY, 1);
-	PDFObject ary= obj.getDictRef("WhitePoint");
-	if (ary!=null) {
-	    for(int i=0; i<3; i++) {
-		this.white[i]= ary.getAt(i).getFloatValue();
-	    }
-	}
-	ary= obj.getDictRef("BlackPoint");
-	if (ary!=null) {
-	    for(int i=0; i<3; i++) {
-		this.black[i]= ary.getAt(i).getFloatValue();
-	    }
-	}
-	final PDFObject g= obj.getDictRef("Gamma");
-	if (g!=null) {
-	    this.gamma= g.getFloatValue();
-	}
+        // obj is a dictionary that has the following parts:
+        // WhitePoint [a b c]
+        // BlackPoint [a b c]
+        // Gamma a
+        super(TYPE_GRAY, 1);
+        PDFObject ary = obj.getDictRef("WhitePoint");
+        if (ary != null) {
+            for (int i = 0; i < 3; i++) {
+                this.white[i] = ary.getAt(i).getFloatValue();
+            }
+        }
+        ary = obj.getDictRef("BlackPoint");
+        if (ary != null) {
+            for (int i = 0; i < 3; i++) {
+                this.black[i] = ary.getAt(i).getFloatValue();
+            }
+        }
+        final PDFObject g = obj.getDictRef("Gamma");
+        if (g != null) {
+            this.gamma = g.getFloatValue();
+        }
     }
 
     /**
@@ -82,73 +81,75 @@ public class CalGrayColor extends ColorSpace {
     public CalGrayColor() {
         super(TYPE_GRAY, 1);
     }
-    
+
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * get the number of components (1).
      */
-    @Override public int getNumComponents() {
-	return 1;
-    }
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * convert from Calibrated Gray to RGB.
-	 */
     @Override
-	public float[] toRGB(final float[] comp) {
-	if (comp.length==1) {
-	    final float mul= (float)Math.pow(comp[0], this.gamma);
-	    final float[] xyz = {
-		this.white[0]*mul,
-		0,
-		0};
-	    final float[] rgb = cie.fromCIEXYZ(xyz);
-	    return rgb;
-	} else {
-	    return this.black;
-	}
-    }
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * convert from RGB to Calibrated Gray.  NOT IMPLEMENTED
-	 */
-    @Override
-	public float[] fromRGB(final float[] rgbvalue) {
-	return new float[1];
-    }
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * convert from CIEXYZ to Calibrated Gray.  NOT IMPLEMENTED
-	 */
-    @Override
-	public float[] fromCIEXYZ(final float[] colorvalue) {
-	return new float[1];
+    public int getNumComponents() {
+        return 1;
     }
 
     /**
      * {@inheritDoc}
-     *
-     * get the type of this ColorSpace (TYPE_GRAY)
+     * <p>
+     * convert from Calibrated Gray to RGB.
      */
-    @Override public int getType() {
-	return TYPE_GRAY;
+    @Override
+    public float[] toRGB(final float[] comp) {
+        if (comp.length == 1) {
+            final float mul = (float) Math.pow(comp[0], this.gamma);
+            final float[] xyz = {
+                    this.white[0] * mul,
+                    0,
+                    0};
+            final float[] rgb = cie.fromCIEXYZ(xyz);
+            return rgb;
+        } else {
+            return this.black;
+        }
     }
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * convert from Calibrated Gray to CIEXYZ.  NOT IMPLEMENTED
-	 */
+    /**
+     * {@inheritDoc}
+     * <p>
+     * convert from RGB to Calibrated Gray.  NOT IMPLEMENTED
+     */
     @Override
-	public float[] toCIEXYZ(final float[] colorvalue) {
-	return new float[3];
+    public float[] fromRGB(final float[] rgbvalue) {
+        return new float[1];
     }
-    
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * convert from CIEXYZ to Calibrated Gray.  NOT IMPLEMENTED
+     */
+    @Override
+    public float[] fromCIEXYZ(final float[] colorvalue) {
+        return new float[1];
+    }
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * get the type of this ColorSpace (TYPE_GRAY)
+     */
+    @Override
+    public int getType() {
+        return TYPE_GRAY;
+    }
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * convert from Calibrated Gray to CIEXYZ.  NOT IMPLEMENTED
+     */
+    @Override
+    public float[] toCIEXYZ(final float[] colorvalue) {
+        return new float[3];
+    }
+
 }

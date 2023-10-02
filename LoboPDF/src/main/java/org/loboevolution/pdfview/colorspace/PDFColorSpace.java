@@ -25,7 +25,12 @@
  */
 package org.loboevolution.pdfview.colorspace;
 
-import java.awt.Color;
+import org.loboevolution.pdfview.PDFObject;
+import org.loboevolution.pdfview.PDFPaint;
+import org.loboevolution.pdfview.PDFParseException;
+import org.loboevolution.pdfview.function.PDFFunction;
+
+import java.awt.*;
 import java.awt.color.ColorSpace;
 import java.awt.color.ICC_ColorSpace;
 import java.awt.color.ICC_Profile;
@@ -35,11 +40,6 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.Map;
 
-import org.loboevolution.pdfview.PDFObject;
-import org.loboevolution.pdfview.PDFPaint;
-import org.loboevolution.pdfview.PDFParseException;
-import org.loboevolution.pdfview.function.PDFFunction;
-
 /**
  * A color space that can convert a set of color components into
  * PDFPaint.
@@ -47,42 +47,56 @@ import org.loboevolution.pdfview.function.PDFFunction;
  */
 public class PDFColorSpace {
 
-    /** the name of the device-dependent gray color space */
+    /**
+     * the name of the device-dependent gray color space
+     */
     public static final int COLORSPACE_GRAY = 0;
 
-    /** the name of the device-dependent RGB color space */
+    /**
+     * the name of the device-dependent RGB color space
+     */
     public static final int COLORSPACE_RGB = 1;
 
-    /** the name of the device-dependent CMYK color space */
+    /**
+     * the name of the device-dependent CMYK color space
+     */
     public static final int COLORSPACE_CMYK = 2;
 
-    /** the name of the pattern color space */
+    /**
+     * the name of the pattern color space
+     */
     public static final int COLORSPACE_PATTERN = 3;
 
     private static final PDFColorSpace rgbSpace = new PDFColorSpace(ColorSpace.getInstance(ColorSpace.CS_sRGB));
     private static final PDFColorSpace cmykSpace = new PDFColorSpace(new CMYKColorSpace());
 
-    /** the pattern space */
+    /**
+     * the pattern space
+     */
     private static final PDFColorSpace patternSpace = new PatternSpace();
 
-    /** graySpace and the gamma correction for it. */
+    /**
+     * graySpace and the gamma correction for it.
+     */
     private static final PDFColorSpace graySpace;
 
-	static {
-		final boolean useSGray = true;
+    static {
+        final boolean useSGray = true;
 
-		try {
-			final URL resource = PDFColorSpace.class.getResource("/org/loboevolution/pdfview/colorspace/sGray.icc");
-			try (final InputStream stream = resource.openStream()) {
-				graySpace = new PDFColorSpace((!useSGray) ? ColorSpace.getInstance(ColorSpace.CS_GRAY)
-						: new ICC_ColorSpace(ICC_Profile.getInstance(stream)));
-			}
-		} catch (final Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
+        try {
+            final URL resource = PDFColorSpace.class.getResource("/org/loboevolution/pdfview/colorspace/sGray.icc");
+            try (final InputStream stream = resource.openStream()) {
+                graySpace = new PDFColorSpace((!useSGray) ? ColorSpace.getInstance(ColorSpace.CS_GRAY)
+                        : new ICC_ColorSpace(ICC_Profile.getInstance(stream)));
+            }
+        } catch (final Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 
-    /** the color space */
+    /**
+     * the color space
+     */
     ColorSpace cs;
 
     /**
@@ -102,36 +116,36 @@ public class PDFColorSpace {
      */
     public static PDFColorSpace getColorSpace(final int name) {
         switch (name) {
-        case COLORSPACE_GRAY:
-        case ColorSpace.CS_GRAY:
-        case ColorSpace.TYPE_GRAY:
-            return graySpace;
+            case COLORSPACE_GRAY:
+            case ColorSpace.CS_GRAY:
+            case ColorSpace.TYPE_GRAY:
+                return graySpace;
 
-        case COLORSPACE_RGB:
-            return rgbSpace;
+            case COLORSPACE_RGB:
+                return rgbSpace;
 
-        case COLORSPACE_CMYK:
-            return cmykSpace;
+            case COLORSPACE_CMYK:
+                return cmykSpace;
 
-        case COLORSPACE_PATTERN:
-            return patternSpace;
+            case COLORSPACE_PATTERN:
+                return patternSpace;
 
-        default:
-            throw new IllegalArgumentException("Unknown Color Space name: " +
-                name);
+            default:
+                throw new IllegalArgumentException("Unknown Color Space name: " +
+                        name);
         }
     }
 
     /**
      * Get a color space specified in a PDFObject
      *
-     * @param csobj the PDFObject with the colorspace information
+     * @param csobj     the PDFObject with the colorspace information
      * @param resources a {@link java.util.Map} object.
      * @return a {@link org.loboevolution.pdfview.colorspace.PDFColorSpace} object.
      * @throws java.io.IOException if any.
      */
     public static PDFColorSpace getColorSpace(PDFObject csobj, final Map resources)
-        throws IOException {
+            throws IOException {
         String name;
 
         PDFObject colorSpaces = null;
@@ -255,7 +269,7 @@ public class PDFColorSpace {
      * given color components
      *
      * @param components the color components corresponding to the given
-     * colorspace
+     *                   colorspace
      * @return a PDFPaint object representing the closest Color to the
      * given components.
      */

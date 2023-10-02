@@ -35,22 +35,28 @@ import org.jpedal.jbig2.segment.Flags;
 @Slf4j
 public class PageInformationFlags extends Flags {
 
-	/** Constant <code>DEFAULT_PIXEL_VALUE="DEFAULT_PIXEL_VALUE"</code> */
-	public static final String DEFAULT_PIXEL_VALUE = "DEFAULT_PIXEL_VALUE";
-	/** Constant <code>DEFAULT_COMBINATION_OPERATOR="DEFAULT_COMBINATION_OPERATOR"</code> */
-	public static final String DEFAULT_COMBINATION_OPERATOR = "DEFAULT_COMBINATION_OPERATOR";
+    /**
+     * Constant <code>DEFAULT_PIXEL_VALUE="DEFAULT_PIXEL_VALUE"</code>
+     */
+    public static final String DEFAULT_PIXEL_VALUE = "DEFAULT_PIXEL_VALUE";
+    /**
+     * Constant <code>DEFAULT_COMBINATION_OPERATOR="DEFAULT_COMBINATION_OPERATOR"</code>
+     */
+    public static final String DEFAULT_COMBINATION_OPERATOR = "DEFAULT_COMBINATION_OPERATOR";
 
-	/** {@inheritDoc} */
-	public void setFlags(final int flagsAsInt) {
-		this.flagsAsInt = flagsAsInt;
+    /**
+     * {@inheritDoc}
+     */
+    public void setFlags(final int flagsAsInt) {
+        this.flagsAsInt = flagsAsInt;
 
-		/** extract DEFAULT_PIXEL_VALUE */
-		flags.put(DEFAULT_PIXEL_VALUE, (flagsAsInt >> 2) & 1);
+        /** extract DEFAULT_PIXEL_VALUE */
+        flags.put(DEFAULT_PIXEL_VALUE, (flagsAsInt >> 2) & 1);
 
-		/** extract DEFAULT_COMBINATION_OPERATOR */
-		flags.put(DEFAULT_COMBINATION_OPERATOR, (flagsAsInt >> 3) & 3);
+        /** extract DEFAULT_COMBINATION_OPERATOR */
+        flags.put(DEFAULT_COMBINATION_OPERATOR, (flagsAsInt >> 3) & 3);
 
-		if (JBIG2StreamDecoder.debug)
-			log.info("flags: {} ", flags);
-	}
+        if (JBIG2StreamDecoder.debug)
+            log.info("flags: {} ", flags);
+    }
 }

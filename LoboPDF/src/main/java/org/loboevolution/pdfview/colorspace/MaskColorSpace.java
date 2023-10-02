@@ -26,95 +26,104 @@
 
 package org.loboevolution.pdfview.colorspace;
 
-import java.awt.Color;
-import java.awt.color.ColorSpace;
-
 import org.loboevolution.pdfview.PDFPaint;
+
+import java.awt.*;
+import java.awt.color.ColorSpace;
 
 /**
  * A color space used to implement masks.  For now, the only type of mask
  * supported is one where the image pixels specify where to paint, and the
  * painting itself is done in a pre-specified PDF Paint.
- *
-  *
-  *
  */
 public class MaskColorSpace extends ColorSpace {
-    /** The paint to paint in.  Note this cannot be a pattern or gradient. */
+    final ColorSpace cie = ColorSpace.getInstance(ColorSpace.CS_CIEXYZ);
+    /**
+     * The paint to paint in.  Note this cannot be a pattern or gradient.
+     */
     private final PDFPaint paint;
-    
+    final float[] prev1 = this.cie.fromRGB(toRGB(new float[]{1.0f}));
+    final float[] prev0 = this.cie.fromRGB(toRGB(new float[]{0.0f}));
+
     /**
      * Creates a new instance of PaintColorSpace
      *
      * @param paint a {@link org.loboevolution.pdfview.PDFPaint} object.
      */
     public MaskColorSpace(final PDFPaint paint) {
-        super (TYPE_RGB, 1);
-        
+        super(TYPE_RGB, 1);
+
         this.paint = paint;
     }
-    
-	/** {@inheritDoc} */
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
-	public float[] fromCIEXYZ(final float[] colorvalue) {
+    public float[] fromCIEXYZ(final float[] colorvalue) {
         final float x = colorvalue[0];
         final float y = colorvalue[1];
         final float z = colorvalue[2];
-        
+
         final float[] mask = new float[1];
-        
+
         if (Math.round(x) > 0 || Math.round(y) > 0 || Math.round(z) > 0) {
             mask[0] = 1;
         } else {
-            mask[0] = 0; 
+            mask[0] = 0;
         }
-        
+
         return mask;
     }
-    
-	/** {@inheritDoc} */
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
-	public float[] fromRGB(final float[] rgbvalue) {
+    public float[] fromRGB(final float[] rgbvalue) {
         final float r = rgbvalue[0];
         final float g = rgbvalue[1];
         final float b = rgbvalue[2];
-        
+
         final float[] mask = new float[1];
-        
+
         if (Math.round(r) > 0 || Math.round(g) > 0 || Math.round(b) > 0) {
             mask[0] = 1;
         } else {
-            mask[0] = 0; 
+            mask[0] = 0;
         }
-        
+
         return mask;
     }
-    
-    final ColorSpace cie = ColorSpace.getInstance(ColorSpace.CS_CIEXYZ);
-    final float[] prev1= this.cie.fromRGB(toRGB(new float[] {1.0f}));
-    final float[] prev0= this.cie.fromRGB(toRGB(new float[] {0.0f}));
 
-	/** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-	public float[] toCIEXYZ(final float[] colorvalue) {
-	if (colorvalue[0]==1) {
-	    return this.prev1;
-	} else if (colorvalue[0]==0) {
-	    return this.prev0;
-	} else {
-	    return this.cie.fromRGB(toRGB(colorvalue));
-	}
+    public float[] toCIEXYZ(final float[] colorvalue) {
+        if (colorvalue[0] == 1) {
+            return this.prev1;
+        } else if (colorvalue[0] == 0) {
+            return this.prev0;
+        } else {
+            return this.cie.fromRGB(toRGB(colorvalue));
+        }
     }
-    
-	/** {@inheritDoc} */
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
-	public float[] toRGB(final float[] colorvalue) {
+    public float[] toRGB(final float[] colorvalue) {
         return ((Color) this.paint.getPaint()).getRGBColorComponents(null);
     }
 
-    /** {@inheritDoc} */
-    @Override public int getNumComponents() {
-	return 1;
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getNumComponents() {
+        return 1;
     }
-    
+
 }

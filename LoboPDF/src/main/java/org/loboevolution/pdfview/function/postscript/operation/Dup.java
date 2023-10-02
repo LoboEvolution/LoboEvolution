@@ -29,22 +29,22 @@ package org.loboevolution.pdfview.function.postscript.operation;
 import java.util.Deque;
 
 final class Dup implements PostScriptOperation {
-	@Override
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <i>any</i> <b>dup</b> <i>any any</i> <p>
-	 *
-	 * duplicates the top element on the operand stack.
-	 * dup copies only the object; the value of a composite
-	 * object is not copied but is shared.
-	 * See Section 3.3, "Data Types and Objects." <p>
-	 *
-	 * errors: stackoverflow, stackunderflow
-	 */
-	public void eval(final Deque<Object> environment) {
-	    final Object obj = environment.pop();
-	    environment.push(obj);
-	    environment.push(obj);
-	}
+    @Override
+    /**
+     * {@inheritDoc}
+     *
+     * <i>any</i> <b>dup</b> <i>any any</i> <p>
+     *
+     * duplicates the top element on the operand stack.
+     * dup copies only the object; the value of a composite
+     * object is not copied but is shared.
+     * See Section 3.3, "Data Types and Objects." <p>
+     *
+     * errors: stackoverflow, stackunderflow
+     */
+    public void eval(final Deque<Object> environment) {
+        final Object obj = environment.pop();
+        environment.push(obj);
+        environment.push(obj);
+    }
 }

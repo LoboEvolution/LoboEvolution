@@ -35,9 +35,8 @@ import java.nio.charset.CoderResult;
  * A {@link java.nio.charset.CharsetEncoder} that attempts to write out the lower 8 bits
  * of any character. Characters &gt;= 256 in value are regarded
  * as unmappable.
- *
+ * <p>
  * Author Luke Kirby
-  *
  */
 public class Identity8BitCharsetEncoder extends CharsetEncoder {
 
@@ -48,9 +47,11 @@ public class Identity8BitCharsetEncoder extends CharsetEncoder {
         super(null, 1, 1);
     }
 
-	/** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-	protected CoderResult encodeLoop(final CharBuffer in, final ByteBuffer out) {
+    protected CoderResult encodeLoop(final CharBuffer in, final ByteBuffer out) {
         while (in.remaining() > 0) {
             if (out.remaining() < 1) {
                 return CoderResult.OVERFLOW;
@@ -65,7 +66,9 @@ public class Identity8BitCharsetEncoder extends CharsetEncoder {
         return CoderResult.UNDERFLOW;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isLegalReplacement(final byte[] repl) {
         // avoid referencing the non-existent character set

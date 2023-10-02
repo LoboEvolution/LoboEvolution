@@ -36,12 +36,10 @@ import java.awt.image.SampleModel;
  * {@link java.awt.image.MultiPixelPackedSampleModel}, which allows for sub-byte
  * components, does not allow for such byte spanning, while the PDF
  * specification does permit it -- hence the existence of this class.
- *
+ * <p>
  * Author Luke Kirby, Pirion Systems
-  *
  */
-public class PdfSubByteSampleModel extends SampleModel
-{
+public class PdfSubByteSampleModel extends SampleModel {
     private final int transferBytesPerPixel;
     private final int storageBitsPerPixel;
     private final int bitsPerLine;
@@ -53,13 +51,12 @@ public class PdfSubByteSampleModel extends SampleModel
     /**
      * <p>Constructor for PdfSubByteSampleModel.</p>
      *
-     * @param w a int.
-     * @param h a int.
-     * @param numComponents a int.
+     * @param w                a int.
+     * @param h                a int.
+     * @param numComponents    a int.
      * @param bitsPerComponent a int.
      */
-    public PdfSubByteSampleModel(final int w, final int h, final int numComponents, final int bitsPerComponent)
-    {
+    public PdfSubByteSampleModel(final int w, final int h, final int numComponents, final int bitsPerComponent) {
         super(DataBuffer.TYPE_BYTE, w, h, numComponents);
         assert bitsPerComponent < 8 : "This is designed just for use with per-component sizes of less than 8 bits; " +
                 "you should probably use PixelInterleavedSampleModel";
@@ -79,18 +76,20 @@ public class PdfSubByteSampleModel extends SampleModel
         ignoredBitsPerComponentPerByte = 8 - bitsPerBand;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public int getNumDataElements()
-    {
+    public int getNumDataElements() {
         return transferBytesPerPixel;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public Object getDataElements(final int x, final int y, final Object obj, final DataBuffer data)
-    {
-        final byte[] elements = obj != null ? (byte[])obj : new byte[numBands];
+    public Object getDataElements(final int x, final int y, final Object obj, final DataBuffer data) {
+        final byte[] elements = obj != null ? (byte[]) obj : new byte[numBands];
         int bitIndex = y * bitsPerLine + storageBitsPerPixel * x;
         for (int i = 0; i < elements.length; ++i) {
             elements[i] = (byte) getComponent(data, bitIndex);
@@ -99,69 +98,76 @@ public class PdfSubByteSampleModel extends SampleModel
         return elements;
     }
 
-    private int getComponent(final DataBuffer data, final int aBitIndex)
-    {
+    private int getComponent(final DataBuffer data, final int aBitIndex) {
         final int boffset = aBitIndex >> 3; // == aBitIndex / 8
         final int b = data.getElem(boffset);
         final int bitIndexInB = aBitIndex & 7;
-        final int shift =  ignoredBitsPerComponentPerByte - bitIndexInB;
+        final int shift = ignoredBitsPerComponentPerByte - bitIndexInB;
         return (b >>> shift) & componentMask;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void setDataElements(final int x, final int y, final Object obj, final DataBuffer data)
-    {
+    public void setDataElements(final int x, final int y, final Object obj, final DataBuffer data) {
         throw new UnsupportedOperationException("read only");
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public int getSample(final int x, final int y, final int b, final DataBuffer data)
-    {
+    public int getSample(final int x, final int y, final int b, final DataBuffer data) {
         return getComponent(data, y * bitsPerLine + storageBitsPerPixel * x + bitsPerBand * b);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void setSample(final int x, final int y, final int b, final int s, final DataBuffer data)
-    {
+    public void setSample(final int x, final int y, final int b, final int s, final DataBuffer data) {
         throw new UnsupportedOperationException("read only");
 
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public SampleModel createCompatibleSampleModel(final int w, final int h)
-    {
+    public SampleModel createCompatibleSampleModel(final int w, final int h) {
         throw new UnsupportedOperationException("Not required");
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public SampleModel createSubsetSampleModel(final int[] bands)
-    {
+    public SampleModel createSubsetSampleModel(final int[] bands) {
         throw new UnsupportedOperationException("Not required");
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public DataBuffer createDataBuffer()
-    {
+    public DataBuffer createDataBuffer() {
         throw new UnsupportedOperationException("Not required");
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public int[] getSampleSize()
-    {
+    public int[] getSampleSize() {
         return sampleSize;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public int getSampleSize(final int band)
-    {
+    public int getSampleSize(final int band) {
         return bitsPerBand;
     }
 }

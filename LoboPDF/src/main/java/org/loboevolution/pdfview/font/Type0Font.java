@@ -26,49 +26,48 @@
 
 package org.loboevolution.pdfview.font;
 
-import java.io.IOException;
-
 import org.loboevolution.pdfview.PDFObject;
+
+import java.io.IOException;
 
 /**
  * Type 0 fonts are composite fonts with a CMAP to map between
  * source character codes and destination fonts/codes
- *
+ * <p>
  * Author  Jonathan Kaplan
-  *
  */
 public class Type0Font extends PDFFont {
-   
+
     /**
      * The decendant fonts, indexed by font number from the CMAP
      */
     PDFFont[] fonts;
-        
+
     /**
      * Creates a new instance of Type0Font
      *
-     * @param baseFont a {@link java.lang.String} object.
-     * @param fontObj a {@link org.loboevolution.pdfview.PDFObject} object.
+     * @param baseFont   a {@link java.lang.String} object.
+     * @param fontObj    a {@link org.loboevolution.pdfview.PDFObject} object.
      * @param descriptor a {@link org.loboevolution.pdfview.font.PDFFontDescriptor} object.
      * @throws java.io.IOException if any.
      */
     public Type0Font(final String baseFont, final PDFObject fontObj,
                      final PDFFontDescriptor descriptor) throws IOException {
-        super (baseFont, descriptor);
-                         
+        super(baseFont, descriptor);
+
         final PDFObject[] descendantFonts = fontObj.getDictRef("DescendantFonts").getArray();
-        
+
         this.fonts = new PDFFont[descendantFonts.length];
-        
+
         for (int i = 0; i < descendantFonts.length; i++) {
             final PDFFont descFont = PDFFont.getFont(descendantFonts[i], null);
             if (descFont instanceof CIDFontType0) {
-            	((CIDFontType0)descFont).parseToUnicodeMap(fontObj);
+                ((CIDFontType0) descFont).parseToUnicodeMap(fontObj);
             }
-			this.fonts[i] = descFont;
+            this.fonts[i] = descFont;
         }
     }
-    
+
     /**
      * Get a descendant font of this font by fontId
      *
@@ -78,14 +77,14 @@ public class Type0Font extends PDFFont {
     public PDFFont getDescendantFont(final int fontID) {
         return this.fonts[fontID];
     }
-    
-	/**
-	 * {@inheritDoc}
-	 *
-	 * Get a character from the first font in the descendant fonts array
-	 */
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * Get a character from the first font in the descendant fonts array
+     */
     @Override
-	protected PDFGlyph getGlyph(final char src, final String name) {
+    protected PDFGlyph getGlyph(final char src, final String name) {
         return (getDescendantFont(0).getGlyph(src, name));
     }
 }

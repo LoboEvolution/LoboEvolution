@@ -29,19 +29,19 @@ package org.loboevolution.pdfview.function.postscript.operation;
 import java.util.Deque;
 
 final class Xor implements PostScriptOperation {
-	@Override
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <i>bool1|int1 bool2|int2</i> <b>xor</b> <i>bool3|int3</i> <p>
-	 *
-	 * returns the logical "exclusive or" of the operands if they
-	 * are boolean. If the operands are integers, xor returns the
-	 * bitwise "exclusive or" of their binary representations. <p>
-	 *
-	 * errors: stackunderflow, typecheck
-	 */
-	public void eval(final Deque<Object> environment) {
-	    environment.push((Long)environment.pop() ^ (Long)environment.pop());
-	}
+    @Override
+    /**
+     * {@inheritDoc}
+     *
+     * <i>bool1|int1 bool2|int2</i> <b>xor</b> <i>bool3|int3</i> <p>
+     *
+     * returns the logical "exclusive or" of the operands if they
+     * are boolean. If the operands are integers, xor returns the
+     * bitwise "exclusive or" of their binary representations. <p>
+     *
+     * errors: stackunderflow, typecheck
+     */
+    public void eval(final Deque<Object> environment) {
+        environment.push((Long) environment.pop() ^ (Long) environment.pop());
+    }
 }

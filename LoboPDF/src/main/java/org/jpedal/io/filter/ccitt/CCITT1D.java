@@ -32,42 +32,8 @@ import java.util.BitSet;
  */
 public class CCITT1D implements CCITTDecoder {
 
-    /**
-     * values set in PdfObject
-     */
-    boolean BlackIs1 = false, isByteAligned = false;
-    int columns = 1728;
-
-    byte[] data;
-
-    int bitReached;
-
     private final static int EOL = -1;
-
     private static final boolean debug = false;
-
-    boolean isWhite = true;
-    private boolean isTerminating = false;
-
-    private boolean isEndOfLine = false;
-    private boolean EOS = false;
-
-    private int cRTC = 0;
-    int width = 0;
-    int height = 0;
-    private int line = 0;
-    private int rowC = 0;
-
-    BitSet out;
-    private BitSet inputBits;
-    int outPtr = 0;
-
-    private int bytesNeeded = 0;
-    int scanlineStride;
-    private int inputBitCount = 0;
-
-    // ---------- BLACK --------------
-
     final static private int[][][] b = new int[][][]{
             {{3, 2, 0}, {2, 3, 0}},
             {{2, 1, 0}, {3, 4, 0}},
@@ -209,9 +175,6 @@ public class CCITT1D implements CCITTDecoder {
                     {100, 1664, 1},
                     {101, 1728, 1}
             }};
-
-    // ---------- WHITE --------------
-
     final static private int[][][] w = new int[][][]{{
             {7, 2, 0},
             {8, 3, 0},
@@ -347,6 +310,32 @@ public class CCITT1D implements CCITTDecoder {
                     {30, 2496, 1},
                     {31, 2560, 1}
             }};
+    /**
+     * values set in PdfObject
+     */
+    boolean BlackIs1 = false, isByteAligned = false;
+    int columns = 1728;
+    byte[] data;
+    int bitReached;
+    boolean isWhite = true;
+    int width = 0;
+    int height = 0;
+    BitSet out;
+    int outPtr = 0;
+    int scanlineStride;
+    private boolean isTerminating = false;
+    private boolean isEndOfLine = false;
+    private boolean EOS = false;
+    private int cRTC = 0;
+    private int line = 0;
+    private int rowC = 0;
+    private BitSet inputBits;
+
+    // ---------- BLACK --------------
+    private int bytesNeeded = 0;
+
+    // ---------- WHITE --------------
+    private int inputBitCount = 0;
 
 
     public CCITT1D(final byte[] rawData, final int width, final int height,
@@ -378,6 +367,52 @@ public class CCITT1D implements CCITTDecoder {
     }
 
     CCITT1D() {
+    }
+
+    private static int checkTables(final int possCode, final int bitLength, final boolean isWhite) {
+
+        int itemFound = -1;
+        final int[][] table;
+
+        if (isWhite) {
+            table = w[bitLength - 4];
+        } else {
+            table = b[bitLength - 2];
+        }
+
+        final int size = table.length;
+
+        for (int z = 0; z < size; z++) {
+            if (possCode == table[z][0]) {
+                itemFound = z;
+                z = size;
+
+            }
+        }
+        return itemFound;
+    }
+
+    private static BitSet fromByteArray(final byte[] bytes, final int bitsNeeded) {
+
+        int bitSetPtr = 0, value;
+        byte tmp;
+
+        final BitSet bits = new BitSet(bitsNeeded);
+        for (final byte aByte : bytes) {
+            tmp = aByte;
+            for (int z = 7; z >= 0; z--) {
+
+                value = (tmp & (1 << z));
+
+                if (value >= 1)
+                    bits.set(bitSetPtr, true);
+
+                bitSetPtr++;
+            }
+        }
+
+        return bits;
+
     }
 
     public byte[] decode() {
@@ -590,52 +625,6 @@ public class CCITT1D implements CCITTDecoder {
         }
 
         return tmp;
-    }
-
-    private static int checkTables(final int possCode, final int bitLength, final boolean isWhite) {
-
-        int itemFound = -1;
-        final int[][] table;
-
-        if (isWhite) {
-            table = w[bitLength - 4];
-        } else {
-            table = b[bitLength - 2];
-        }
-
-        final int size = table.length;
-
-        for (int z = 0; z < size; z++) {
-            if (possCode == table[z][0]) {
-                itemFound = z;
-                z = size;
-
-            }
-        }
-        return itemFound;
-    }
-
-    private static BitSet fromByteArray(final byte[] bytes, final int bitsNeeded) {
-
-        int bitSetPtr = 0, value;
-        byte tmp;
-
-        final BitSet bits = new BitSet(bitsNeeded);
-        for (final byte aByte : bytes) {
-            tmp = aByte;
-            for (int z = 7; z >= 0; z--) {
-
-                value = (tmp & (1 << z));
-
-                if (value >= 1)
-                    bits.set(bitSetPtr, true);
-
-                bitSetPtr++;
-            }
-        }
-
-        return bits;
-
     }
 
     private void moveToEOLMarker() {

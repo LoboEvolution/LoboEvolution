@@ -27,22 +27,21 @@
 package org.loboevolution.pdfview.function.postscript.operation;
 
 import java.util.Deque;
-import java.util.Deque;
 
 
 final class Ln implements PostScriptOperation {
-	@Override
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <i>num</i> <b>ln</b> <i>real</i> <p>
-	 *
-	 * returns the natural logarithm (base e) of num.
-	 * The result is a real number. <p>
-	 *
-	 * errors: rangecheck, stackunderflow, typecheck
-	 */
-	public void eval(final Deque<Object> environment) {
-	    environment.push(Math.log((Double)environment.pop()));
-	}
+    @Override
+    /**
+     * {@inheritDoc}
+     *
+     * <i>num</i> <b>ln</b> <i>real</i> <p>
+     *
+     * returns the natural logarithm (base e) of num.
+     * The result is a real number. <p>
+     *
+     * errors: rangecheck, stackunderflow, typecheck
+     */
+    public void eval(final Deque<Object> environment) {
+        environment.push(Math.log((Double) environment.pop()));
+    }
 }

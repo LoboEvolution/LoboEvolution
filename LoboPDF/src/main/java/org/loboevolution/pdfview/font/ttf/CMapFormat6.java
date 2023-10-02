@@ -32,19 +32,26 @@ import java.util.Map;
 
 /**
  * <p>CMapFormat6 class.</p>
- *
+ * <p>
  * Author  jkaplan
-  *
  */
 public class CMapFormat6 extends CMap {
-    /** First character code of subrange. */
+    /**
+     * a reverse lookup from glyph id to index.
+     */
+    private final Map<Short, Short> glyphLookup = new HashMap<>();
+    /**
+     * First character code of subrange.
+     */
     private short firstCode;
-    /** Number of character codes in subrange. */
+    /**
+     * Number of character codes in subrange.
+     */
     private short entryCount;
-    /** Array of glyph index values for character codes in the range. */
-    private short [] glyphIndexArray;
-    /** a reverse lookup from glyph id to index. */
-    private final Map<Short,Short> glyphLookup = new HashMap<>();
+    /**
+     * Array of glyph index values for character codes in the range.
+     */
+    private short[] glyphIndexArray;
 
     /**
      * Creates a new instance of CMapFormat0
@@ -55,13 +62,13 @@ public class CMapFormat6 extends CMap {
         super((short) 6, language);
     }
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * Get the length of this table
-	 */
+    /**
+     * {@inheritDoc}
+     * <p>
+     * Get the length of this table
+     */
     @Override
-	public short getLength() {
+    public short getLength() {
         // start with the size of the fixed header
         short size = 5 * 2;
 
@@ -70,13 +77,13 @@ public class CMapFormat6 extends CMap {
         return size;
     }
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * Cannot map from a byte
-	 */
+    /**
+     * {@inheritDoc}
+     * <p>
+     * Cannot map from a byte
+     */
     @Override
-	public byte map(final byte src) {
+    public byte map(final byte src) {
         final char c = map((char) src);
         if (c < Byte.MIN_VALUE || c > Byte.MAX_VALUE) {
             // out of range
@@ -85,13 +92,13 @@ public class CMapFormat6 extends CMap {
         return (byte) c;
     }
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * Map from char
-	 */
+    /**
+     * {@inheritDoc}
+     * <p>
+     * Map from char
+     */
     @Override
-	public char map(final char src) {
+    public char map(final char src) {
 
         // find first segment with endcode > src
         if (src < this.firstCode || src > (this.firstCode + this.entryCount)) {
@@ -102,13 +109,13 @@ public class CMapFormat6 extends CMap {
         return (char) this.glyphIndexArray[src - this.firstCode];
     }
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * Get the src code which maps to the given glyphID
-	 */
+    /**
+     * {@inheritDoc}
+     * <p>
+     * Get the src code which maps to the given glyphID
+     */
     @Override
-	public char reverseMap(final short glyphID) {
+    public char reverseMap(final short glyphID) {
         final Short result = this.glyphLookup.get(glyphID);
         if (result == null) {
             return '\000';
@@ -117,18 +124,18 @@ public class CMapFormat6 extends CMap {
     }
 
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * Get the data in this map as a ByteBuffer
-	 */
+    /**
+     * {@inheritDoc}
+     * <p>
+     * Get the data in this map as a ByteBuffer
+     */
     @Override
-	public void setData(final int length, final ByteBuffer data) {
+    public void setData(final int length, final ByteBuffer data) {
         // read the table size values
         this.firstCode = data.getShort();
         this.entryCount = data.getShort();
 
-        this.glyphIndexArray = new short [this.entryCount];
+        this.glyphIndexArray = new short[this.entryCount];
         for (int i = 0; i < this.glyphIndexArray.length; i++) {
             this.glyphIndexArray[i] = data.getShort();
             this.glyphLookup.put(this.glyphIndexArray[i],
@@ -136,13 +143,13 @@ public class CMapFormat6 extends CMap {
         }
     }
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * Get the data in the map as a byte buffer
-	 */
+    /**
+     * {@inheritDoc}
+     * <p>
+     * Get the data in the map as a byte buffer
+     */
     @Override
-	public ByteBuffer getData() {
+    public ByteBuffer getData() {
         final ByteBuffer buf = ByteBuffer.allocate(getLength());
 
         // write the header

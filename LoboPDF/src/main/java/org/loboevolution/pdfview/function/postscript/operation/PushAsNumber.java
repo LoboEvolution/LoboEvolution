@@ -29,39 +29,39 @@ package org.loboevolution.pdfview.function.postscript.operation;
 import java.util.Deque;
 
 
-
 final class PushAsNumber implements PostScriptOperation {
 
-	private final String token;
-	
-	/**
-	 ***********************************************************************
-	 * Constructor
-	 *
-	 * @param numberToken
-	 ***********************************************************************
-	 */
-	public PushAsNumber(final String numberToken) {
-		super();
-		this.token = numberToken;
-	}
-	
-	/**
-	 * {@inheritDoc}
-	 *
-	 ***********************************************************************
-	 * eval
-	 * @see org.loboevolution.pdfview.function.postscript.operation.PostScriptOperation#eval(java.util.Stack)
-	 ***********************************************************************
-	 */
-	@Override
-	public void eval(final Deque<Object> environment) {
-		try {
-			final double number = Double.parseDouble(this.token);
-			environment.push(number);
-		} catch (final NumberFormatException e) {
-			throw new IllegalArgumentException("PS token is not supported "+this.token); 
-		}	}
+    private final String token;
+
+    /**
+     * **********************************************************************
+     * Constructor
+     *
+     * @param numberToken **********************************************************************
+     */
+    public PushAsNumber(final String numberToken) {
+        super();
+        this.token = numberToken;
+    }
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * **********************************************************************
+     * eval
+     *
+     * @see org.loboevolution.pdfview.function.postscript.operation.PostScriptOperation#eval(java.util.Stack)
+     * **********************************************************************
+     */
+    @Override
+    public void eval(final Deque<Object> environment) {
+        try {
+            final double number = Double.parseDouble(this.token);
+            environment.push(number);
+        } catch (final NumberFormatException e) {
+            throw new IllegalArgumentException("PS token is not supported " + this.token);
+        }
+    }
 
 }
 

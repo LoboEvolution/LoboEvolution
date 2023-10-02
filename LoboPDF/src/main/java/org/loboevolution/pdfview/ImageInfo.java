@@ -25,14 +25,11 @@
  */
 package org.loboevolution.pdfview;
 
-import java.awt.Color;
+import java.awt.*;
 import java.awt.geom.Rectangle2D;
 
 /**
  * <p>ImageInfo class.</p>
- *
-  *
-  *
  */
 public class ImageInfo {
 
@@ -44,9 +41,9 @@ public class ImageInfo {
     /**
      * <p>Constructor for ImageInfo.</p>
      *
-     * @param width a int.
+     * @param width  a int.
      * @param height a int.
-     * @param clip a {@link java.awt.geom.Rectangle2D} object.
+     * @param clip   a {@link java.awt.geom.Rectangle2D} object.
      */
     public ImageInfo(final int width, final int height, final Rectangle2D clip) {
         this(width, height, clip, Color.WHITE);
@@ -55,9 +52,9 @@ public class ImageInfo {
     /**
      * <p>Constructor for ImageInfo.</p>
      *
-     * @param width a int.
-     * @param height a int.
-     * @param clip a {@link java.awt.geom.Rectangle2D} object.
+     * @param width   a int.
+     * @param height  a int.
+     * @param clip    a {@link java.awt.geom.Rectangle2D} object.
      * @param bgColor a {@link java.awt.Color} object.
      */
     public ImageInfo(final int width, final int height, final Rectangle2D clip, final Color bgColor) {
@@ -68,7 +65,10 @@ public class ImageInfo {
     }
 
     // a hashcode that uses width, height and clip to generate its number
-    /** {@inheritDoc} */
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         int code = (this.width ^ this.height << 16);
@@ -82,7 +82,10 @@ public class ImageInfo {
     }
 
     // an equals method that compares values
-    /** {@inheritDoc} */
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(final Object o) {
         if (!(o instanceof ImageInfo)) {

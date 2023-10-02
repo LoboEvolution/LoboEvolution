@@ -30,146 +30,62 @@ import java.nio.ByteBuffer;
 
 /**
  * A single simple glyph in a pdf font.
- *
-  *
-  *
  */
 public class GlyfSimple extends Glyf {
-    /** the end points of the various contours */
+    /**
+     * the end points of the various contours
+     */
     private short[] contourEndPts;
-    
-    /** the instructions */
+
+    /**
+     * the instructions
+     */
     private byte[] instructions;
-    
-    /** the flags */
+
+    /**
+     * the flags
+     */
     private byte[] flags;
-    
-    /** the x coordinates */
+
+    /**
+     * the x coordinates
+     */
     private short[] xCoords;
-    
-    /** the y coordinates */
+
+    /**
+     * the y coordinates
+     */
     private short[] yCoords;
-    
+
     /**
      * Creates a new instance of a simple glyf
      */
     protected GlyfSimple() {
     }
-    
-	/**
-	 * {@inheritDoc}
-	 *
-	 * Set the data for this glyf.
-	 */
-    @Override
-	public void setData(final ByteBuffer data) {
-        // int pos = data.position();
-        // byte[] prdata = new byte[data.remaining()];
-        // data.get(prdata);
-        // HexDump.printData(prdata);
-        // data.position(pos);
-        
-        
-        // read the contour end points
-        final short[] contourEndPts = new short[getNumContours()];
-        for (int i = 0; i < contourEndPts.length; i++) {
-            contourEndPts[i] = data.getShort();
-        }
-        setContourEndPoints(contourEndPts);
-        
-        // the number of points in the glyf is the number of the end
-        // point in the last contour
-        final int numPoints = getContourEndPoint(getNumContours() - 1) + 1;
-        
-        // read the instructions
-        final short numInstructions = data.getShort();
-        final byte[] instructions = new byte[numInstructions];
-        for (int i = 0; i < instructions.length; i++) {
-            instructions[i] = data.get();
-        }
-        setInstructions(instructions);
-        
-        // read the flags
-        final byte[] flags = new byte[numPoints];
-        for (int i = 0; i < flags.length; i++) {
-            flags[i] = data.get();
-            
-            // check for repeats
-            if ((flags[i] & 0x8) != 0) {
-                final byte f = flags[i];
-                final int n = (data.get() & 0xff);
-                for (int c = 0; c < n; c++) {
-                    flags[++i] =  f;
-                }
-            }
-        }
-        setFlags(flags);
-        
-        // read the x coordinates
-        final short[] xCoords = new short[numPoints];
-        for (int i = 0; i < xCoords.length; i++) {
-             if (i > 0) {
-                 xCoords[i] = xCoords[i - 1];
-             }
 
-             // read this value
-            if (xIsByte(i)) {
-                int val = (data.get() & 0xff);
-                if (!xIsSame(i)) {
-                    // the xIsSame bit controls the sign
-                    val = -val;
-                }
-                xCoords[i] += (short)val;
-            } else if (!xIsSame(i)) {
-                xCoords[i] += data.getShort();
-            }
-        }
-        setXCoords(xCoords);
-        
-        // read the y coordinates
-        final short[] yCoords = new short[numPoints];
-        for (int i = 0; i < yCoords.length; i++) {
-            if (i > 0) {
-                yCoords[i] = yCoords[i - 1];
-            } 
-            // read this value
-            if (yIsByte(i)) {   
-                int val = (data.get() & 0xff);
-                if (!yIsSame(i)) {
-                    // the xIsSame bit controls the sign
-                    val = -val;
-                }
-                yCoords[i] += (short)val;
-            } else if (!yIsSame(i)) {
-                yCoords[i] += data.getShort();
-            }
-        }
-        setYCoords(yCoords);
-    }
-    
-	/**
-	 * {@inheritDoc}
-	 *
-	 * Get the data in this glyf as a byte buffer.  Return the basic
-	 * glyf data only, since there is no specific data.  This method returns
-	 * the data un-flipped, so subclasses can simply append to the allocated
-	 * buffer.
-	 */
+    /**
+     * {@inheritDoc}
+     * <p>
+     * Get the data in this glyf as a byte buffer.  Return the basic
+     * glyf data only, since there is no specific data.  This method returns
+     * the data un-flipped, so subclasses can simply append to the allocated
+     * buffer.
+     */
     @Override
-	public ByteBuffer getData() {
+    public ByteBuffer getData() {
         final ByteBuffer buf = super.getData();
-        
+
         // write the contour end points
         for (int i = 0; i < getNumContours(); i++) {
             buf.putShort(getContourEndPoint(i));
         }
-        
+
         // write the instructions
         buf.putShort(getNumInstructions());
         for (int i = 0; i < getNumInstructions(); i++) {
             buf.put(getInstruction(i));
         }
-        
+
         // write the flags
         for (int i = 0; i < getNumPoints(); i++) {
             // check for repeats
@@ -184,7 +100,7 @@ public class GlyfSimple extends Glyf {
                 buf.put(getFlag(i));
             }
         }
-        
+
         // write the x coordinates
         for (int i = 0; i < getNumPoints(); i++) {
             if (xIsByte(i)) {
@@ -193,7 +109,7 @@ public class GlyfSimple extends Glyf {
                 buf.putShort(getXCoord(i));
             }
         }
-        
+
         // write the y coordinates
         for (int i = 0; i < getNumPoints(); i++) {
             if (yIsByte(i)) {
@@ -202,52 +118,143 @@ public class GlyfSimple extends Glyf {
                 buf.putShort(getYCoord(i));
             }
         }
-        
+
         // don't flip the buffer, since it may be used by subclasses
         return buf;
     }
-    
-	/**
-	 * {@inheritDoc}
-	 *
-	 * Get the length of this glyf.
-	 */
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * Set the data for this glyf.
+     */
     @Override
-	public short getLength() {
+    public void setData(final ByteBuffer data) {
+        // int pos = data.position();
+        // byte[] prdata = new byte[data.remaining()];
+        // data.get(prdata);
+        // HexDump.printData(prdata);
+        // data.position(pos);
+
+
+        // read the contour end points
+        final short[] contourEndPts = new short[getNumContours()];
+        for (int i = 0; i < contourEndPts.length; i++) {
+            contourEndPts[i] = data.getShort();
+        }
+        setContourEndPoints(contourEndPts);
+
+        // the number of points in the glyf is the number of the end
+        // point in the last contour
+        final int numPoints = getContourEndPoint(getNumContours() - 1) + 1;
+
+        // read the instructions
+        final short numInstructions = data.getShort();
+        final byte[] instructions = new byte[numInstructions];
+        for (int i = 0; i < instructions.length; i++) {
+            instructions[i] = data.get();
+        }
+        setInstructions(instructions);
+
+        // read the flags
+        final byte[] flags = new byte[numPoints];
+        for (int i = 0; i < flags.length; i++) {
+            flags[i] = data.get();
+
+            // check for repeats
+            if ((flags[i] & 0x8) != 0) {
+                final byte f = flags[i];
+                final int n = (data.get() & 0xff);
+                for (int c = 0; c < n; c++) {
+                    flags[++i] = f;
+                }
+            }
+        }
+        setFlags(flags);
+
+        // read the x coordinates
+        final short[] xCoords = new short[numPoints];
+        for (int i = 0; i < xCoords.length; i++) {
+            if (i > 0) {
+                xCoords[i] = xCoords[i - 1];
+            }
+
+            // read this value
+            if (xIsByte(i)) {
+                int val = (data.get() & 0xff);
+                if (!xIsSame(i)) {
+                    // the xIsSame bit controls the sign
+                    val = -val;
+                }
+                xCoords[i] += (short) val;
+            } else if (!xIsSame(i)) {
+                xCoords[i] += data.getShort();
+            }
+        }
+        setXCoords(xCoords);
+
+        // read the y coordinates
+        final short[] yCoords = new short[numPoints];
+        for (int i = 0; i < yCoords.length; i++) {
+            if (i > 0) {
+                yCoords[i] = yCoords[i - 1];
+            }
+            // read this value
+            if (yIsByte(i)) {
+                int val = (data.get() & 0xff);
+                if (!yIsSame(i)) {
+                    // the xIsSame bit controls the sign
+                    val = -val;
+                }
+                yCoords[i] += (short) val;
+            } else if (!yIsSame(i)) {
+                yCoords[i] += data.getShort();
+            }
+        }
+        setYCoords(yCoords);
+    }
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * Get the length of this glyf.
+     */
+    @Override
+    public short getLength() {
         // start with the length of the superclass
         short length = super.getLength();
-        
+
         // add the length of the end points
-        length =  (short)(length + (getNumContours() * 2));
-        
+        length = (short) (length + (getNumContours() * 2));
+
         // add the length of the instructions
-        length =  (short)(length + (2 + getNumInstructions()));
-        
+        length = (short) (length + (2 + getNumInstructions()));
+
         // add the length of the flags, avoiding repeats
         for (int i = 0; i < getNumPoints(); i++) {
             // check for repeats
-            while (i > 0 && (getFlag(i) == getFlag(i - 1)));
+            while (i > 0 && (getFlag(i) == getFlag(i - 1))) ;
             length++;
         }
-        
+
         // add the length of the xCoordinates
         for (int i = 0; i < getNumPoints(); i++) {
             if (xIsByte(i)) {
                 length++;
             } else if (!xIsSame(i)) {
-                length  = (short)(length +2);
+                length = (short) (length + 2);
             }
-            
+
             if (yIsByte(i)) {
                 length++;
             } else if (!yIsSame(i)) {
-                length  = (short)(length +2);
+                length = (short) (length + 2);
             }
         }
-         
+
         return length;
     }
-    
+
     /**
      * Get the end point of a given contour
      *
@@ -257,7 +264,7 @@ public class GlyfSimple extends Glyf {
     public short getContourEndPoint(final int index) {
         return this.contourEndPts[index];
     }
-    
+
     /**
      * Set the number of contours in this glyf
      *
@@ -266,7 +273,7 @@ public class GlyfSimple extends Glyf {
     protected void setContourEndPoints(final short[] contourEndPts) {
         this.contourEndPts = contourEndPts;
     }
-    
+
     /**
      * Get the number of instructions
      *
@@ -275,7 +282,7 @@ public class GlyfSimple extends Glyf {
     public short getNumInstructions() {
         return (short) this.instructions.length;
     }
-    
+
     /**
      * Get a given instruction
      *
@@ -285,7 +292,7 @@ public class GlyfSimple extends Glyf {
     public byte getInstruction(final int index) {
         return this.instructions[index];
     }
-    
+
     /**
      * Set the instructions
      *
@@ -294,7 +301,7 @@ public class GlyfSimple extends Glyf {
     protected void setInstructions(final byte[] instructions) {
         this.instructions = instructions;
     }
-    
+
     /**
      * Get the number of points in the glyf
      *
@@ -303,7 +310,7 @@ public class GlyfSimple extends Glyf {
     public short getNumPoints() {
         return (short) this.flags.length;
     }
-    
+
     /**
      * Get a given flag
      *
@@ -313,7 +320,7 @@ public class GlyfSimple extends Glyf {
     public byte getFlag(final int pointIndex) {
         return this.flags[pointIndex];
     }
-    
+
     /**
      * Determine whether the given point is on the curve
      *
@@ -323,7 +330,7 @@ public class GlyfSimple extends Glyf {
     public boolean onCurve(final int pointIndex) {
         return ((getFlag(pointIndex) & 0x1) != 0);
     }
-    
+
     /**
      * Determine whether the x value for the given point is byte or short.
      * If true, it is a byte, if false it is a short
@@ -334,7 +341,7 @@ public class GlyfSimple extends Glyf {
     protected boolean xIsByte(final int pointIndex) {
         return ((getFlag(pointIndex) & 0x2) != 0);
     }
-    
+
     /**
      * Determine whether the x value for the given point is byte or short.
      * If true, it is a byte, if false it is a short
@@ -345,7 +352,7 @@ public class GlyfSimple extends Glyf {
     protected boolean yIsByte(final int pointIndex) {
         return ((getFlag(pointIndex) & 0x4) != 0);
     }
-    
+
     /**
      * Determine whether this flag repeats
      *
@@ -355,7 +362,7 @@ public class GlyfSimple extends Glyf {
     protected boolean repeat(final int pointIndex) {
         return ((getFlag(pointIndex) & 0x8) != 0);
     }
-    
+
     /**
      * Determine whether the x value for the given point is the same as
      * the previous value.
@@ -366,7 +373,7 @@ public class GlyfSimple extends Glyf {
     protected boolean xIsSame(final int pointIndex) {
         return ((getFlag(pointIndex) & 0x10) != 0);
     }
-    
+
     /**
      * Determine whether the y value for the given point is the same as
      * the previous value.
@@ -377,7 +384,7 @@ public class GlyfSimple extends Glyf {
     protected boolean yIsSame(final int pointIndex) {
         return ((getFlag(pointIndex) & 0x20) != 0);
     }
-    
+
     /**
      * Set the flags
      *
@@ -386,7 +393,7 @@ public class GlyfSimple extends Glyf {
     protected void setFlags(final byte[] flags) {
         this.flags = flags;
     }
-    
+
     /**
      * Get a given x coordinate
      *
@@ -396,7 +403,7 @@ public class GlyfSimple extends Glyf {
     public short getXCoord(final int pointIndex) {
         return this.xCoords[pointIndex];
     }
-    
+
     /**
      * Set the x coordinates
      *
@@ -405,7 +412,7 @@ public class GlyfSimple extends Glyf {
     protected void setXCoords(final short[] xCoords) {
         this.xCoords = xCoords;
     }
-    
+
     /**
      * Get a given y coordinate
      *
@@ -415,7 +422,7 @@ public class GlyfSimple extends Glyf {
     public short getYCoord(final int pointIndex) {
         return this.yCoords[pointIndex];
     }
-    
+
     /**
      * Set the x coordinates
      *

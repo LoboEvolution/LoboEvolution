@@ -24,12 +24,10 @@
  * Contact info: ivan.difrancesco@yahoo.it
  */
 package org.loboevolution.pdf;
+
 /**
  * A listener to indicate that some control has asked for a particular page to
  * be displayed.
- *
-  *
-  *
  */
 public interface PageChangeListener {
     /**

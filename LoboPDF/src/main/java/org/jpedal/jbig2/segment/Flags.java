@@ -30,31 +30,27 @@ import java.util.Map;
 
 /**
  * <p>Abstract Flags class.</p>
- *
-  *
-  *
  */
 public abstract class Flags {
 
-	protected int flagsAsInt;
+    protected final Map<String, Integer> flags = new LinkedHashMap<>();
+    protected int flagsAsInt;
 
-	protected final Map<String, Integer> flags = new LinkedHashMap<>();
+    /**
+     * <p>getFlagValue.</p>
+     *
+     * @param key a {@link java.lang.String} object.
+     * @return a int.
+     */
+    public int getFlagValue(final String key) {
+        final Integer value = flags.get(key);
+        return value;
+    }
 
-	/**
-	 * <p>getFlagValue.</p>
-	 *
-	 * @param key a {@link java.lang.String} object.
-	 * @return a int.
-	 */
-	public int getFlagValue(final String key) {
-		final Integer value = flags.get(key);
-		return value;
-	}
-
-	/**
-	 * <p>Setter for the field <code>flags</code>.</p>
-	 *
-	 * @param flagsAsInt a int.
-	 */
-	public abstract void setFlags(int flagsAsInt);
+    /**
+     * <p>Setter for the field <code>flags</code>.</p>
+     *
+     * @param flagsAsInt a int.
+     */
+    public abstract void setFlags(int flagsAsInt);
 }

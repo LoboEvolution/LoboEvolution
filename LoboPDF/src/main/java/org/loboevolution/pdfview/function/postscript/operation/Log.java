@@ -30,18 +30,18 @@ import java.util.Deque;
 
 
 final class Log implements PostScriptOperation {
-	@Override
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <i>num</i> <b>log</b> <i>real</i> <p>
-	 *
-	 * returns the common logarithm (base 10) of num.
-	 * The result is a real number. <p>
-	 *
-	 * errors:  rangecheck, stackunderflow, typecheck
-	 */
-	public void eval(final Deque<Object> environment) {
-	    environment.push(Math.log10((Double)environment.pop()));
-	}
+    @Override
+    /**
+     * {@inheritDoc}
+     *
+     * <i>num</i> <b>log</b> <i>real</i> <p>
+     *
+     * returns the common logarithm (base 10) of num.
+     * The result is a real number. <p>
+     *
+     * errors:  rangecheck, stackunderflow, typecheck
+     */
+    public void eval(final Deque<Object> environment) {
+        environment.push(Math.log10((Double) environment.pop()));
+    }
 }

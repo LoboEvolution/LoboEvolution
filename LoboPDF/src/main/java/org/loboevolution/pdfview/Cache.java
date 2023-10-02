@@ -33,13 +33,12 @@ import java.util.Map;
 
 /**
  * A cache of PDF pages and images.
- *
-  *
-  *
  */
 public class Cache {
 
-    /** the pages in the cache, mapped by page number */
+    /**
+     * the pages in the cache, mapped by page number
+     */
     private final Map<Integer, SoftReference<PageRecord>> pages;
 
     /**
@@ -54,7 +53,7 @@ public class Cache {
      * pages which have already been completely rendered.
      *
      * @param pageNumber the page number of this page
-     * @param page the page to add
+     * @param page       the page to add
      */
     public void addPage(final Integer pageNumber, final PDFPage page) {
         addPageRecord(pageNumber, page, null);
@@ -65,10 +64,10 @@ public class Cache {
      * pages which are still in the process of being rendered.
      *
      * @param pageNumber the page number of this page
-     * @param page the page to add
-     * @param parser the parser which is parsing this page
+     * @param page       the page to add
+     * @param parser     the parser which is parsing this page
      */
-    public void addPage(final Integer pageNumber,final  PDFPage page, final PDFParser parser) {
+    public void addPage(final Integer pageNumber, final PDFPage page, final PDFParser parser) {
         addPageRecord(pageNumber, page, parser);
     }
 
@@ -76,8 +75,8 @@ public class Cache {
      * Add an image to the cache.  This method should be used for images
      * which have already been completely rendered
      *
-     * @param page page this image is associated with
-     * @param info the image info associated with this image
+     * @param page  page this image is associated with
+     * @param info  the image info associated with this image
      * @param image the image to add
      */
     public void addImage(final PDFPage page, final ImageInfo info, final BufferedImage image) {
@@ -88,9 +87,9 @@ public class Cache {
      * Add an image to the cache.  This method should be used for images
      * which are still in the process of being rendered.
      *
-     * @param page the page this image is associated with
-     * @param info the image info associated with this image
-     * @param image the image to add
+     * @param page     the page this image is associated with
+     * @param info     the image info associated with this image
+     * @param image    the image to add
      * @param renderer the renderer which is rendering this page
      */
     public void addImage(final PDFPage page, final ImageInfo info, final BufferedImage image,
@@ -299,22 +298,34 @@ public class Cache {
         return null;
     }
 
-    /** the basic information about a page or image */
+    /**
+     * the basic information about a page or image
+     */
     static class Record {
 
-        /** the page or image itself */
+        /**
+         * the page or image itself
+         */
         Object value;
-        /** the thing generating the page, or null if done/not provided */
+        /**
+         * the thing generating the page, or null if done/not provided
+         */
         BaseWatchable generator;
     }
 
-    /** the record stored for each page in the cache */
+    /**
+     * the record stored for each page in the cache
+     */
     static class PageRecord extends Record {
 
-        /** any images associated with the page */
+        /**
+         * any images associated with the page
+         */
         final Map<ImageInfo, SoftReference<Record>> images;
 
-        /** create a new page record */
+        /**
+         * create a new page record
+         */
         public PageRecord() {
             this.images = Collections.synchronizedMap(new HashMap<>());
         }

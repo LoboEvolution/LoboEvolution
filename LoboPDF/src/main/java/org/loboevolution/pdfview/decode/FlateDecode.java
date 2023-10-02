@@ -25,20 +25,19 @@
  */
 package org.loboevolution.pdfview.decode;
 
+import org.loboevolution.pdfview.PDFObject;
+import org.loboevolution.pdfview.PDFParseException;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.zip.DataFormatException;
 import java.util.zip.Inflater;
 
-import org.loboevolution.pdfview.PDFObject;
-import org.loboevolution.pdfview.PDFParseException;
-
 /**
  * decode a deFlated byte array
- *
+ * <p>
  * Author Mike Wessler
-  *
  */
 public class FlateDecode {
 
@@ -48,10 +47,10 @@ public class FlateDecode {
      * Flate is a built-in Java algorithm.  It's part of the java.util.zip
      * package.
      *
-     * @param buf the deflated input buffer
+     * @param buf    the deflated input buffer
      * @param params parameters to the decoder (unused)
+     * @param dict   a {@link org.loboevolution.pdfview.PDFObject} object.
      * @return the decoded (inflated) bytes
-     * @param dict a {@link org.loboevolution.pdfview.PDFObject} object.
      * @throws java.io.IOException if any.
      */
     public static ByteBuffer decode(final PDFObject dict, final ByteBuffer buf,
@@ -74,15 +73,15 @@ public class FlateDecode {
         final byte[] decomp = new byte[bufSize];
         int read = 0;
 
-        try {        	
+        try {
             while (!inf.finished()) {
                 read = inf.inflate(decomp);
                 if (read <= 0) {
-                    if (inf.needsDictionary()) {                    	
+                    if (inf.needsDictionary()) {
                         throw new PDFParseException("Don't know how to ask for a dictionary in FlateDecode");
                     } else {
-                       	// just return the data which is already read
-                       	break;
+                        // just return the data which is already read
+                        break;
                     }
                 }
                 baos.write(decomp, 0, read);

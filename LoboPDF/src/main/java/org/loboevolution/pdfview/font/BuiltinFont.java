@@ -25,79 +25,79 @@
  */
 package org.loboevolution.pdfview.font;
 
-import java.awt.Font;
+import org.loboevolution.pdfview.PDFObject;
+
+import java.awt.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Properties;
 
-import org.loboevolution.pdfview.PDFObject;
-
 /**
  * This class represents the 14 built-in fonts.  It reads these fonts
  * from files in the "res" directory, as specified in
  * BaseNames.properties.
- *
-  *
-  *
  */
 public class BuiltinFont extends Type1Font {
 
-    /** the properties file */
-    private static Properties props;
-    
-    /** the names of the 14 base fonts */
+    /**
+     * the names of the 14 base fonts
+     */
     private static final String[] baseFonts = {
-        "Courier", "Courier-Bold", "Courier-BoldOblique", "Courier-Oblique",
-        "Helvetica", "Helvetica-Bold", "Helvetica-BoldOblique",
-        "Helvetica-Oblique", "Times-Roman", "Times-Bold", "Times-BoldItalic",
-        "Times-Italic", "Symbol", "ZapfDingbats"
+            "Courier", "Courier-Bold", "Courier-BoldOblique", "Courier-Oblique",
+            "Helvetica", "Helvetica-Bold", "Helvetica-BoldOblique",
+            "Helvetica-Oblique", "Times-Roman", "Times-Bold", "Times-BoldItalic",
+            "Times-Italic", "Symbol", "ZapfDingbats"
     };
-   
-    /** fonts others (e.g. Acrobad PDFWriter 3.02 for Windows) assume
-     *  are there, even though they're not in the spec.  Grrr...
-     *
+    /**
+     * fonts others (e.g. Acrobad PDFWriter 3.02 for Windows) assume
+     * are there, even though they're not in the spec.  Grrr...
+     * <p>
      * the format is <Name_in_PDF> <Builtin_To_Use>
      */
     private static final String[] mappedFonts = {
-        // map arial to helvetica
-        "Arial", "Helvetica",
-        "Arial,Bold", "Helvetica-Bold",
-        "Arial,BoldItalic", "Helvetica-BoldOblique",
-        "Arial,Italic", "Helvetica-Oblique",
-        // map ArialMT to Helvetica
-        "ArialMT", "Helvetica",
-        "Arial-BoldMT", "Helvetica-Bold",
-        "Arial-BoldItalicMT", "Helvetica-BoldOblique",
-        "Arial-ItalicMT", "Helvetica-Oblique",
-        // map TimesNewRoman to Times
-        "TimesNewRoman", "Times-Roman",
-        "TimesNewRoman,Bold", "Times-Bold",
-        "TimesNewRoman,BoldItalic", "Times-BoldItalic",
-        "TimesNewRoman,Italic", "Times-Italic",
-        // map TimesNewRomanPSMT to Times
-        "TimesNewRomanPSMT", "Times-Roman",
-        "TimesNewRomanPS-BoldMT", "Times-Bold",
-        "TimesNewRomanPS-BoldItalicMT", "Times-BoldItalic",
-        "TimesNewRomanPS-ItalicMT", "Times-Italic",
-        //Map some variants of Courier
-        "Courier,Bold", "Courier-Bold",
-        "Courier,BoldItalic", "Courier-BoldOblique",
-        "Courier,Italic", "Courier-Oblique",
-        // map CourierNew to Courier
-        "CourierNew", "Courier",
-        "CourierNew,Bold", "Courier-Bold",
-        "CourierNew,BoldItalic", "Courier-BoldOblique",
-        "CourierNew,Italic", "Courier-Oblique",
+            // map arial to helvetica
+            "Arial", "Helvetica",
+            "Arial,Bold", "Helvetica-Bold",
+            "Arial,BoldItalic", "Helvetica-BoldOblique",
+            "Arial,Italic", "Helvetica-Oblique",
+            // map ArialMT to Helvetica
+            "ArialMT", "Helvetica",
+            "Arial-BoldMT", "Helvetica-Bold",
+            "Arial-BoldItalicMT", "Helvetica-BoldOblique",
+            "Arial-ItalicMT", "Helvetica-Oblique",
+            // map TimesNewRoman to Times
+            "TimesNewRoman", "Times-Roman",
+            "TimesNewRoman,Bold", "Times-Bold",
+            "TimesNewRoman,BoldItalic", "Times-BoldItalic",
+            "TimesNewRoman,Italic", "Times-Italic",
+            // map TimesNewRomanPSMT to Times
+            "TimesNewRomanPSMT", "Times-Roman",
+            "TimesNewRomanPS-BoldMT", "Times-Bold",
+            "TimesNewRomanPS-BoldItalicMT", "Times-BoldItalic",
+            "TimesNewRomanPS-ItalicMT", "Times-Italic",
+            //Map some variants of Courier
+            "Courier,Bold", "Courier-Bold",
+            "Courier,BoldItalic", "Courier-BoldOblique",
+            "Courier,Italic", "Courier-Oblique",
+            // map CourierNew to Courier
+            "CourierNew", "Courier",
+            "CourierNew,Bold", "Courier-Bold",
+            "CourierNew,BoldItalic", "Courier-BoldOblique",
+            "CourierNew,Italic", "Courier-Oblique",
     };
+    /**
+     * the properties file
+     */
+    private static Properties props;
 
     /**
      * Create a new Builtin object based on the name of a built-in font
-     *
+     * <p>
      * This must be the name of one of the 14 built-in fonts!
      *
      * @param baseFont the name of the font, from the PDF file
-     * @param fontObj the object containing font information
+     * @param fontObj  the object containing font information
      * @throws java.io.IOException if any.
      */
     public BuiltinFont(final String baseFont, final PDFObject fontObj) throws IOException {
@@ -111,8 +111,8 @@ public class BuiltinFont extends Type1Font {
      * font from the PDF file. Parse the description for key information
      * and use that to generate an appropriate font.
      *
-     * @param baseFont a {@link java.lang.String} object.
-     * @param fontObj a {@link org.loboevolution.pdfview.PDFObject} object.
+     * @param baseFont   a {@link java.lang.String} object.
+     * @param fontObj    a {@link org.loboevolution.pdfview.PDFObject} object.
      * @param descriptor a {@link org.loboevolution.pdfview.font.PDFFontDescriptor} object.
      * @throws java.io.IOException if any.
      */
@@ -146,8 +146,8 @@ public class BuiltinFont extends Type1Font {
             style |= Font.BOLD;
         }
         if ((descriptor.getItalicAngle() != 0) ||
-        		((flags & (PDFFontDescriptor.SCRIPT | PDFFontDescriptor.ITALIC)) != 0)) {
-        	style |= Font.ITALIC;
+                ((flags & (PDFFontDescriptor.SCRIPT | PDFFontDescriptor.ITALIC)) != 0)) {
+            style |= Font.ITALIC;
         }
         String name = null;
 
@@ -191,13 +191,13 @@ public class BuiltinFont extends Type1Font {
      */
     private void parseFont(final String baseFont) throws IOException {
         // load the base fonts properties files, if it isn't already loaded
-		if (props == null) {
-			props = new Properties();
-			final URL resource = BuiltinFont.class.getResource("/org/loboevolution/pdfview/font/res/BaseFonts.properties");
-			try (final InputStream stream = resource.openStream()) {
-				props.load(stream);
-			}
-		}
+        if (props == null) {
+            props = new Properties();
+            final URL resource = BuiltinFont.class.getResource("/org/loboevolution/pdfview/font/res/BaseFonts.properties");
+            try (final InputStream stream = resource.openStream()) {
+                props.load(stream);
+            }
+        }
 
         // make sure we're a known font
         if (!props.containsKey(baseFont + ".file")) {

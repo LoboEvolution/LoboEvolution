@@ -28,7 +28,8 @@ package org.loboevolution.pdfview;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.awt.Rectangle;
+import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
@@ -36,63 +37,94 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
-import javax.imageio.ImageIO;
-
 /**
  * <p>PDFDebugger class.</p>
  */
 @Slf4j
 public class PDFDebugger {
-    /** Constant <code>DEBUG_DCTDECODE_DATA="debugdctdecode"</code> */
-    public static final  String DEBUG_DCTDECODE_DATA = "debugdctdecode";
-    /** Constant <code>DEBUG_TEXT=false</code> */
+    /**
+     * Constant <code>DEBUG_DCTDECODE_DATA="debugdctdecode"</code>
+     */
+    public static final String DEBUG_DCTDECODE_DATA = "debugdctdecode";
+    /**
+     * Constant <code>DEBUG_TEXT=false</code>
+     */
     public static final boolean DEBUG_TEXT = false;
-    /** Constant <code>DEBUG_IMAGES=false</code> */
+    /**
+     * Constant <code>DEBUG_IMAGES=false</code>
+     */
     public static final boolean DEBUG_IMAGES = false;
-    /** Constant <code>DEBUG_OPERATORS=false</code> */
+    /**
+     * Constant <code>DEBUG_OPERATORS=false</code>
+     */
     public static final boolean DEBUG_OPERATORS = false;
-    /** Constant <code>DEBUG_PATH=false</code> */
+    /**
+     * Constant <code>DEBUG_PATH=false</code>
+     */
     public static final boolean DEBUG_PATH = false;
-    /** Constant <code>DEBUG_STOP_AT_INDEX=0</code> */
+    /**
+     * Constant <code>DEBUG_STOP_AT_INDEX=0</code>
+     */
     public static final int DEBUG_STOP_AT_INDEX = 0;
-    /** Constant <code>DISABLE_TEXT=false</code> */
+    /**
+     * Constant <code>DISABLE_TEXT=false</code>
+     */
     public static final boolean DISABLE_TEXT = false;
-    /** Constant <code>DISABLE_IMAGES=false</code> */
+    /**
+     * Constant <code>DISABLE_IMAGES=false</code>
+     */
     public static final boolean DISABLE_IMAGES = false;
-    /** Constant <code>DISABLE_PATH_STROKE=false</code> */
+    /**
+     * Constant <code>DISABLE_PATH_STROKE=false</code>
+     */
     public static final boolean DISABLE_PATH_STROKE = false;
-    /** Constant <code>DISABLE_PATH_FILL=false</code> */
+    /**
+     * Constant <code>DISABLE_PATH_FILL=false</code>
+     */
     public static final boolean DISABLE_PATH_FILL = false;
-    /** Constant <code>DISABLE_PATH_STROKE_FILL=false</code> */
+    /**
+     * Constant <code>DISABLE_PATH_STROKE_FILL=false</code>
+     */
     public static final boolean DISABLE_PATH_STROKE_FILL = false;
-    /** Constant <code>DISABLE_CLIP=false</code> */
+    /**
+     * Constant <code>DISABLE_CLIP=false</code>
+     */
     public static final boolean DISABLE_CLIP = false;
-    /** Constant <code>DISABLE_FORMS=false</code> */
+    /**
+     * Constant <code>DISABLE_FORMS=false</code>
+     */
     public static final boolean DISABLE_FORMS = false;
-    /** Constant <code>DISABLE_SHADER=false</code> */
+    /**
+     * Constant <code>DISABLE_SHADER=false</code>
+     */
     public static final boolean DISABLE_SHADER = false;
-    /** Constant <code>SHOW_TEXT_REGIONS=false</code> */
+    /**
+     * Constant <code>SHOW_TEXT_REGIONS=false</code>
+     */
     public static final boolean SHOW_TEXT_REGIONS = false;
-    /** Constant <code>SHOW_TEXT_ANCHOR=false</code> */
+    /**
+     * Constant <code>SHOW_TEXT_ANCHOR=false</code>
+     */
     public static final boolean SHOW_TEXT_ANCHOR = false;
-    /** Constant <code>DISABLE_THUMBNAILS=false</code> */
+    /**
+     * Constant <code>DISABLE_THUMBNAILS=false</code>
+     */
     public static final boolean DISABLE_THUMBNAILS = false;
-    /** Constant <code>DRAW_DELAY=0</code> */
+    /**
+     * Constant <code>DRAW_DELAY=0</code>
+     */
     public static final long DRAW_DELAY = 0;
 
-    /** Constant <code>debuglevel=4000</code> */
+    /**
+     * Constant <code>debuglevel=4000</code>
+     */
     public static int debuglevel = 4000;
-
-    @SuppressWarnings("serial")
-    public static class DebugStopException extends Exception {
-        // nothing to do
-    }
 
     /**
      * <p>debugImage.</p>
      *
      * @param image a {@link java.awt.image.BufferedImage} object.
-     * @param name a {@link java.lang.String} object.
+     * @param name  a {@link java.lang.String} object.
      */
     public static void debugImage(final BufferedImage image, final String name) {
         if (PDFDebugger.DEBUG_IMAGES) {
@@ -109,11 +141,10 @@ public class PDFDebugger {
         }
     }
 
-    // TODO: add debug level and print it? 
     /**
      * <p>debug.</p>
      *
-     * @param msg a {@link java.lang.String} object.
+     * @param msg   a {@link java.lang.String} object.
      * @param level a int.
      */
     public static void debug(final String msg, final int level) {
@@ -123,6 +154,7 @@ public class PDFDebugger {
     }
 
     // TODO: add debug level and print it? 
+
     /**
      * <p>debug.</p>
      *
@@ -131,6 +163,8 @@ public class PDFDebugger {
     public static void debug(final String msg) {
         debug(msg, debuglevel);
     }
+
+    // TODO: add debug level and print it? 
 
     /**
      * <p>escape.</p>
@@ -159,7 +193,6 @@ public class PDFDebugger {
         debuglevel = level;
     }
 
-
     /**
      * <p>dumpStream.</p>
      *
@@ -173,7 +206,7 @@ public class PDFDebugger {
     /**
      * <p>logPath.</p>
      *
-     * @param path a {@link java.awt.geom.GeneralPath} object.
+     * @param path      a {@link java.awt.geom.GeneralPath} object.
      * @param operation a {@link java.lang.String} object.
      */
     public static void logPath(final GeneralPath path, final String operation) {
@@ -208,6 +241,11 @@ public class PDFDebugger {
             final String key = entry.getKey();
             PDFDebugger.debug("key = " + key + " value = " + dict.get(key));
         }
+    }
+
+    @SuppressWarnings("serial")
+    public static class DebugStopException extends Exception {
+        // nothing to do
     }
 
 }

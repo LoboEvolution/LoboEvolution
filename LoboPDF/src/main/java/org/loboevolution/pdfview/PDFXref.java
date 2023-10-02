@@ -45,23 +45,22 @@ import java.lang.ref.SoftReference;
  * <p>
  * This is an unhappy state of affairs, and should be fixed.  Fortunatly,
  * the two uses have already been factored out as two different methods.
- *
+ * <p>
  * Author Mike Wessler
-  *
  */
 public class PDFXref {
 
     private final int id;
     private final int generation;
     private final boolean compressed;
-    
+
     // this field is only used in PDFFile.objIdx
     private SoftReference<PDFObject> reference = null;
 
     /**
      * create a new PDFXref, given a parsed id and generation.
      *
-     * @param id a int.
+     * @param id  a int.
      * @param gen a int.
      */
     public PDFXref(final int id, final int gen) {
@@ -73,8 +72,8 @@ public class PDFXref {
     /**
      * create a new PDFXref, given a parsed id, compressedObjId and index
      *
-     * @param id a int.
-     * @param gen a int.
+     * @param id         a int.
+     * @param gen        a int.
      * @param compressed a boolean.
      */
     public PDFXref(final int id, final int gen, final boolean compressed) {
@@ -168,16 +167,20 @@ public class PDFXref {
     public void setObject(final PDFObject obj) {
         this.reference = new SoftReference<>(obj);
     }
-    
-	/** {@inheritDoc} */
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
-	public boolean equals(final Object obj) {
+    public boolean equals(final Object obj) {
         return (obj instanceof PDFXref) &&
-                ((PDFXref)obj).id == id &&
-                ((PDFXref)obj).generation == generation;
+                ((PDFXref) obj).id == id &&
+                ((PDFXref) obj).generation == generation;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         return id ^ (generation << 8);

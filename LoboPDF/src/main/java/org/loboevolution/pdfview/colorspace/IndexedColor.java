@@ -25,29 +25,35 @@
  */
 package org.loboevolution.pdfview.colorspace;
 
-import java.awt.Color;
-import java.io.IOException;
-
 import org.loboevolution.pdfview.PDFObject;
 import org.loboevolution.pdfview.PDFPaint;
 
+import java.awt.*;
+import java.io.IOException;
+
 /**
  * A PDFColorSpace for an IndexedColor model
- *
+ * <p>
  * Author Mike Wessler
-  *
  */
 public class IndexedColor extends PDFColorSpace {
 
     /**
-     * r,g,and b components of the color table as a single array, for
-     * Java's IndexColorModel */
-    protected byte[] finalcolors;
-    /** the color table */
-    Color[] table;
-    /** size of the color table */
+     * size of the color table
+     */
     final int count;
-    /** number of channels in the base Color Space (unused) */
+    /**
+     * r,g,and b components of the color table as a single array, for
+     * Java's IndexColorModel
+     */
+    protected byte[] finalcolors;
+    /**
+     * the color table
+     */
+    Color[] table;
+    /**
+     * number of channels in the base Color Space (unused)
+     */
     int nchannels = 1;
 
     /**
@@ -56,10 +62,10 @@ public class IndexedColor extends PDFColorSpace {
      * of the stream is interpreted as a color in the base ColorSpace, where
      * n is the number of components in that color space.
      *
-     * @param base the color space in which the data is interpreted
-     * @param cnt the number of colors in the table
+     * @param base   the color space in which the data is interpreted
+     * @param cnt    the number of colors in the table
      * @param stream a stream of bytes.  The number of bytes must be count*n,
-     * where n is the number of components in the base colorspace.
+     *               where n is the number of components in the base colorspace.
      * @throws java.io.IOException if any.
      */
     public IndexedColor(final PDFColorSpace base, final int cnt, final PDFObject stream) throws IOException {
@@ -134,7 +140,7 @@ public class IndexedColor extends PDFColorSpace {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * get the number of components of this colorspace (1)
      */
     @Override
@@ -144,7 +150,7 @@ public class IndexedColor extends PDFColorSpace {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * get the color represented by the index.
      */
     @Override

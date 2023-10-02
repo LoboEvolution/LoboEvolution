@@ -33,34 +33,35 @@ import java.util.Map;
  * <p>OperationSet class.</p>
  */
 public final class OperationSet {
-	
-    /** the set of all Operations we support. These operations are defined
-     * in Appendix B - Operators.*/
-    private Map<String, PostScriptOperation> operationSet = null;
-    
+
     private static OperationSet instance;
-    
+    /**
+     * the set of all Operations we support. These operations are defined
+     * in Appendix B - Operators.
+     */
+    private Map<String, PostScriptOperation> operationSet = null;
+
     /*************************************************************************
      * Constructor
      ************************************************************************/
-    
+
     private OperationSet() {
-    	super();
-    	initOperations();
+        super();
+        initOperations();
     }
-    
+
     /**
      * <p>Getter for the field <code>instance</code>.</p>
      *
      * @return a {@link org.loboevolution.pdfview.function.postscript.operation.OperationSet} object.
      */
     public static synchronized OperationSet getInstance() {
-    	if (instance == null) {
-    		instance = new OperationSet();
-    	}
-    	return instance;
+        if (instance == null) {
+            instance = new OperationSet();
+        }
+        return instance;
     }
-    
+
     /**
      * <p>getOperation.</p>
      *
@@ -68,15 +69,15 @@ public final class OperationSet {
      * @return a {@link org.loboevolution.pdfview.function.postscript.operation.PostScriptOperation} object.
      */
     public PostScriptOperation getOperation(final String token) {
-    	PostScriptOperation result = this.operationSet.get(token.trim().toLowerCase());
-    	if (result == null) {
-    		result = new PushAsNumber(token);
-    	}
-    	return result;
-    	
+        PostScriptOperation result = this.operationSet.get(token.trim().toLowerCase());
+        if (result == null) {
+            result = new PushAsNumber(token);
+        }
+        return result;
+
     }
-    
-    
+
+
     /**
      * Initialize the operations that we can perform.
      */
@@ -91,7 +92,7 @@ public final class OperationSet {
          */
         if (this.operationSet == null) {
             this.operationSet = new HashMap<>();
-           
+
             // Arithmetic Operators
             this.operationSet.put("abs", new Abs());
             this.operationSet.put("add", new Add());
@@ -120,7 +121,7 @@ public final class OperationSet {
             this.operationSet.put("eq", new Eq());
             this.operationSet.put("false", new False());
             this.operationSet.put("ge", new Ge());
-            this.operationSet.put("gt",new Gt());
+            this.operationSet.put("gt", new Gt());
             this.operationSet.put("le", new Le());
             this.operationSet.put("lt", new Lt());
             this.operationSet.put("ne", new Ne());
@@ -142,5 +143,5 @@ public final class OperationSet {
             this.operationSet.put("roll", new Roll());
         }
     }
-    
+
 }

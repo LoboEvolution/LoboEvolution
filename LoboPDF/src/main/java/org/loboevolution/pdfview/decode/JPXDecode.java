@@ -26,33 +26,31 @@
 
 package org.loboevolution.pdfview.decode;
 
+import org.loboevolution.pdfview.PDFObject;
+import org.loboevolution.pdfview.PDFParseException;
+
+import javax.imageio.ImageIO;
+import javax.imageio.ImageReader;
+import javax.imageio.stream.MemoryCacheImageInputStream;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.Iterator;
 
-import javax.imageio.ImageIO;
-import javax.imageio.ImageReader;
-import javax.imageio.stream.MemoryCacheImageInputStream;
-
-import org.loboevolution.pdfview.PDFObject;
-import org.loboevolution.pdfview.PDFParseException;
-
 /**
  * decode a JPX encoded imagestream into a byte array.  This class uses Java's
  * image_io JPEG2000 reader to do the decoding.
- *
+ * <p>
  * Author Bernd Rosstauscher
-  *
  */
 public class JPXDecode {
-	
+
     /**
      * <p>decode.</p>
      *
-     * @param dict a {@link org.loboevolution.pdfview.PDFObject} object.
-     * @param buf a {@link java.nio.ByteBuffer} object.
+     * @param dict   a {@link org.loboevolution.pdfview.PDFObject} object.
+     * @param buf    a {@link java.nio.ByteBuffer} object.
      * @param params a {@link org.loboevolution.pdfview.PDFObject} object.
      * @return a {@link java.nio.ByteBuffer} object.
      * @throws org.loboevolution.pdfview.PDFParseException if any.
@@ -60,36 +58,36 @@ public class JPXDecode {
     protected static ByteBuffer decode(final PDFObject dict, final ByteBuffer buf, final PDFObject params) throws PDFParseException {
         final BufferedImage bimg = loadImageData(buf);
         final byte[] output = ImageDataDecoder.decodeImageData(bimg);
-		return ByteBuffer.wrap(output);
+        return ByteBuffer.wrap(output);
     }
 
-	/*************************************************************************
-	 * @param buf
-	 * @return
-	 * @throws PDFParseException
-	 * @throws IOException
-	 ************************************************************************/
-    
-	private static BufferedImage loadImageData(final ByteBuffer buf) throws PDFParseException {
+    /*************************************************************************
+     * @param buf
+     * @return
+     * @throws PDFParseException
+     * @throws IOException
+     ************************************************************************/
+
+    private static BufferedImage loadImageData(final ByteBuffer buf) throws PDFParseException {
         ImageReader reader = null;
-		try {
-			final byte[] input = new byte[buf.remaining()];
-			buf.get(input);
-			final Iterator<ImageReader> readers = ImageIO.getImageReadersByMIMEType("image/jpeg2000");
-			if (!readers.hasNext()) {
-				throw new PDFParseException("JPXDecode failed. No reader available");
-			}
-			reader = readers.next();
-			reader.setInput(new MemoryCacheImageInputStream(new ByteArrayInputStream(input)));
-			final BufferedImage bimg = reader.read(0);
-			return bimg;
-		} catch (final IOException e) {
+        try {
+            final byte[] input = new byte[buf.remaining()];
+            buf.get(input);
+            final Iterator<ImageReader> readers = ImageIO.getImageReadersByMIMEType("image/jpeg2000");
+            if (!readers.hasNext()) {
+                throw new PDFParseException("JPXDecode failed. No reader available");
+            }
+            reader = readers.next();
+            reader.setInput(new MemoryCacheImageInputStream(new ByteArrayInputStream(input)));
+            final BufferedImage bimg = reader.read(0);
+            return bimg;
+        } catch (final IOException e) {
             throw new PDFParseException("JPXDecode failed", e);
         } finally {
             if (reader != null) {
                 reader.dispose();
             }
-		}
+        }
 
-	}
+    }
 }

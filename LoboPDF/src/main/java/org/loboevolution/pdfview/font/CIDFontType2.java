@@ -25,22 +25,25 @@
  */
 package org.loboevolution.pdfview.font;
 
+import org.loboevolution.pdfview.PDFObject;
+
 import java.awt.geom.GeneralPath;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.loboevolution.pdfview.PDFObject;
-
 /**
  * a font object derived from a CID font.
- *
+ * <p>
  * Author Jonathan Kaplan
-  *
  */
 public class CIDFontType2 extends TTFFont {
 
+    /*
+     * the default width
+     */
+    private final int defaultWidth = 1000;
     /**
      * The width of each glyph from the DW and W arrays
      */
@@ -49,25 +52,22 @@ public class CIDFontType2 extends TTFFont {
      * The vertical width of each glyph from the DW2 and W2 arrays
      */
     private Map<Character, Float> widthsVertical = null;
-
-    /*
-     * the default width
-     */
-    private final int defaultWidth = 1000;
     /*
      * the default vertical width
      */
     private int defaultWidthVertical = 1000;
-    /** the CIDtoGID map, if any */
+    /**
+     * the CIDtoGID map, if any
+     */
     private ByteBuffer cidToGidMap;
 
     /**
      * create a new CIDFontType2 object based on the name of a built-in font
      * and the font descriptor
      *
-     * @param baseName the name of the font, from the PDF file
-     * @param fontObj a dictionary that contains the DW (defaultWidth) and
-     * W (width) parameters
+     * @param baseName   the name of the font, from the PDF file
+     * @param fontObj    a dictionary that contains the DW (defaultWidth) and
+     *                   W (width) parameters
      * @param descriptor a descriptor for the font
      * @throws java.io.IOException if any.
      */
@@ -90,17 +90,19 @@ public class CIDFontType2 extends TTFFont {
         }
     }
 
-    /** Parse the Widths array and DW object */
+    /**
+     * Parse the Widths array and DW object
+     */
     private void parseWidths(final PDFObject fontObj)
             throws IOException {
         // read the default width (otpional)
         PDFObject defaultWidthObj = fontObj.getDictRef("DW");
         if (defaultWidthObj != null && defaultWidthObj.getIntValue() != 0) {
-        	// XOND: commented out the setting of new default width, as several 
-        	//		PDFs are displayed in a wrong format due to this:
+            // XOND: commented out the setting of new default width, as several
+            //		PDFs are displayed in a wrong format due to this:
 //            this.defaultWidth = defaultWidthObj.getIntValue();
         }
-        
+
         int entryIdx = 0;
         int first = 0;
         int last = 0;
@@ -225,7 +227,7 @@ public class CIDFontType2 extends TTFFont {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Get the default width in text space
      */
     @Override
@@ -235,7 +237,7 @@ public class CIDFontType2 extends TTFFont {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Get the width of a given character
      */
     @Override
@@ -281,7 +283,7 @@ public class CIDFontType2 extends TTFFont {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Get the outline of a character given the character code.  We
      * interpose here in order to avoid using the CMap of the font in
      * a CID mapped font.

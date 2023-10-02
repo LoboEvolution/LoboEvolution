@@ -27,94 +27,91 @@ package org.jpedal.jbig2.decoders;
 
 /**
  * <p>ArithmeticDecoderStats class.</p>
- *
-  *
-  *
  */
 public class ArithmeticDecoderStats {
-	private final int contextSize;
-	private final int[] codingContextTable;
+    private final int contextSize;
+    private final int[] codingContextTable;
 
-	/**
-	 * <p>Constructor for ArithmeticDecoderStats.</p>
-	 *
-	 * @param contextSize a int.
-	 */
-	public ArithmeticDecoderStats(final int contextSize) {
-		this.contextSize = contextSize;
-		this.codingContextTable = new int[contextSize];
-		
-		//reset();
-	}
+    /**
+     * <p>Constructor for ArithmeticDecoderStats.</p>
+     *
+     * @param contextSize a int.
+     */
+    public ArithmeticDecoderStats(final int contextSize) {
+        this.contextSize = contextSize;
+        this.codingContextTable = new int[contextSize];
 
-	/**
-	 * <p>reset.</p>
-	 */
-	public void reset() {
-		for (int i = 0; i < contextSize; i++) {
-			codingContextTable[i] = 0;
-		}
-	}
+        //reset();
+    }
 
-	/**
-	 * <p>setEntry.</p>
-	 *
-	 * @param codingContext a int.
-	 * @param i a int.
-	 * @param moreProbableSymbol a int.
-	 */
-	public void setEntry(final int codingContext, final int i, final int moreProbableSymbol) {
-		codingContextTable[codingContext] = (i << i) + moreProbableSymbol;
-	}
+    /**
+     * <p>reset.</p>
+     */
+    public void reset() {
+        for (int i = 0; i < contextSize; i++) {
+            codingContextTable[i] = 0;
+        }
+    }
 
-	/**
-	 * <p>getContextCodingTableValue.</p>
-	 *
-	 * @param index a int.
-	 * @return a int.
-	 */
-	public int getContextCodingTableValue(final int index) {
-		return codingContextTable[index];
-	}
-	
-	/**
-	 * <p>setContextCodingTableValue.</p>
-	 *
-	 * @param index a int.
-	 * @param value a int.
-	 */
-	public void setContextCodingTableValue(final int index, final int value) {
-		codingContextTable[index] = value;
-	}
-	
-	/**
-	 * <p>Getter for the field <code>contextSize</code>.</p>
-	 *
-	 * @return a int.
-	 */
-	public int getContextSize() {
-		return contextSize;
-	}
+    /**
+     * <p>setEntry.</p>
+     *
+     * @param codingContext      a int.
+     * @param i                  a int.
+     * @param moreProbableSymbol a int.
+     */
+    public void setEntry(final int codingContext, final int i, final int moreProbableSymbol) {
+        codingContextTable[codingContext] = (i << i) + moreProbableSymbol;
+    }
 
-	/**
-	 * <p>overwrite.</p>
-	 *
-	 * @param stats a {@link org.jpedal.jbig2.decoders.ArithmeticDecoderStats} object.
-	 */
-	public void overwrite(final ArithmeticDecoderStats stats) {
+    /**
+     * <p>getContextCodingTableValue.</p>
+     *
+     * @param index a int.
+     * @return a int.
+     */
+    public int getContextCodingTableValue(final int index) {
+        return codingContextTable[index];
+    }
+
+    /**
+     * <p>setContextCodingTableValue.</p>
+     *
+     * @param index a int.
+     * @param value a int.
+     */
+    public void setContextCodingTableValue(final int index, final int value) {
+        codingContextTable[index] = value;
+    }
+
+    /**
+     * <p>Getter for the field <code>contextSize</code>.</p>
+     *
+     * @return a int.
+     */
+    public int getContextSize() {
+        return contextSize;
+    }
+
+    /**
+     * <p>overwrite.</p>
+     *
+     * @param stats a {@link org.jpedal.jbig2.decoders.ArithmeticDecoderStats} object.
+     */
+    public void overwrite(final ArithmeticDecoderStats stats) {
         System.arraycopy(stats.codingContextTable, 0, codingContextTable, 0, contextSize);
-	}
+    }
 
-	/**
-	 * <p>copy.</p>
-	 *
-	 * @return a {@link org.jpedal.jbig2.decoders.ArithmeticDecoderStats} object.
-	 */
-	public ArithmeticDecoderStats copy() {
-		final ArithmeticDecoderStats stats = new ArithmeticDecoderStats(contextSize);
+    /**
+     * <p>copy.</p>
+     *
+     * @return a {@link org.jpedal.jbig2.decoders.ArithmeticDecoderStats} object.
+     */
+    public ArithmeticDecoderStats copy() {
+        final ArithmeticDecoderStats stats = new ArithmeticDecoderStats(contextSize);
 
         System.arraycopy(codingContextTable, 0, stats.codingContextTable, 0, contextSize);
 
-		return stats;
-	}
+        return stats;
+    }
 }

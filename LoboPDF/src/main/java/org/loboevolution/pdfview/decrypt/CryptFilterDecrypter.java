@@ -26,11 +26,11 @@
 
 package org.loboevolution.pdfview.decrypt;
 
-import java.nio.ByteBuffer;
-import java.util.Map;
-
 import org.loboevolution.pdfview.PDFObject;
 import org.loboevolution.pdfview.PDFParseException;
+
+import java.nio.ByteBuffer;
+import java.util.Map;
 
 /**
  * Implements Version 4 standard decryption, whereby the Encrypt dictionary
@@ -40,28 +40,33 @@ import org.loboevolution.pdfview.PDFParseException;
  * for strings is specified. Requests to decode a stream with a named
  * decrypter (typically Identity) instead of the default decrypter
  * are honoured.
- *
+ * <p>
  * Author Luke Kirby
-  *
  */
 public class CryptFilterDecrypter implements PDFDecrypter {
 
-    /** Maps from crypt filter names to their corresponding decrypters */
+    /**
+     * Maps from crypt filter names to their corresponding decrypters
+     */
     private final Map<String, PDFDecrypter> decrypters;
-    /** The default decrypter for stream content */
+    /**
+     * The default decrypter for stream content
+     */
     private final PDFDecrypter defaultStreamDecrypter;
-    /** The default decrypter for string content */
+    /**
+     * The default decrypter for string content
+     */
     private final PDFDecrypter defaultStringDecrypter;
 
     /**
      * Class constructor
      *
-     * @param decrypters a map of crypt filter names to their corresponding
-     *  decrypters. Must already contain the Identity filter.
+     * @param decrypters             a map of crypt filter names to their corresponding
+     *                               decrypters. Must already contain the Identity filter.
      * @param defaultStreamCryptName the crypt filter name of the default
-     *  stream decrypter
+     *                               stream decrypter
      * @param defaultStringCryptName the crypt filter name of the default
-     * string decrypter
+     *                               string decrypter
      * @throws org.loboevolution.pdfview.PDFParseException if any.
      */
     public CryptFilterDecrypter(
@@ -87,9 +92,11 @@ public class CryptFilterDecrypter implements PDFDecrypter {
         }
     }
 
-	/** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-	public ByteBuffer decryptBuffer(
+    public ByteBuffer decryptBuffer(
             final String cryptFilterName, final PDFObject streamObj, final ByteBuffer streamBuf)
             throws PDFParseException {
         final PDFDecrypter decrypter;
@@ -113,16 +120,20 @@ public class CryptFilterDecrypter implements PDFDecrypter {
                 streamBuf);
     }
 
-	/** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-	public String decryptString(final int objNum, final int objGen, final String inputBasicString)
+    public String decryptString(final int objNum, final int objGen, final String inputBasicString)
             throws PDFParseException {
         return defaultStringDecrypter.decryptString(objNum, objGen, inputBasicString);
     }
 
-	/** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-	public boolean isEncryptionPresent() {
+    public boolean isEncryptionPresent() {
         for (final PDFDecrypter decrypter : decrypters.values()) {
             if (decrypter.isEncryptionPresent()) {
                 return true;
@@ -131,16 +142,20 @@ public class CryptFilterDecrypter implements PDFDecrypter {
         return false;
     }
 
-	/** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-	public boolean isEncryptionPresent(final String cryptFilterName) {
+    public boolean isEncryptionPresent(final String cryptFilterName) {
         final PDFDecrypter decrypter = decrypters.get(cryptFilterName);
         return decrypter != null && decrypter.isEncryptionPresent(cryptFilterName);
     }
 
-	/** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-	public boolean isOwnerAuthorised() {
+    public boolean isOwnerAuthorised() {
         for (final PDFDecrypter decrypter : decrypters.values()) {
             if (decrypter.isOwnerAuthorised()) {
                 return true;

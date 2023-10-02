@@ -40,9 +40,8 @@ import java.nio.ByteBuffer;
 /**
  * decode a DCT encoded array into a byte array.  This class uses Java's
  * built-in JPEG image class to do the decoding.
- *
+ * <p>
  * Author Mike Wessler
-  *
  */
 public class DCTDecode {
 
@@ -124,12 +123,12 @@ public class DCTDecode {
 class MyTracker implements ImageObserver {
     boolean done = false;
 
-     /**
-      * create a new MyTracker that watches this image.
-      * The image will start loading immediately.
-      *
-      * @param img a {@link java.awt.Image} object.
-      */
+    /**
+     * create a new MyTracker that watches this image.
+     * The image will start loading immediately.
+     *
+     * @param img a {@link java.awt.Image} object.
+     */
     public MyTracker(final Image img) {
         img.getWidth(this);
     }
@@ -151,9 +150,9 @@ class MyTracker implements ImageObserver {
         return true;
     }
 
-     /**
-      * Wait until the image is done, then return.
-      */
+    /**
+     * Wait until the image is done, then return.
+     */
     public synchronized void waitForAll() {
         if (!this.done) {
             try {

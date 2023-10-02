@@ -30,35 +30,36 @@ import java.nio.ByteBuffer;
 
 /**
  * Model the TrueType Loca table
- *
-  *
-  *
  */
 public class LocaTable extends TrueTypeTable {
-    /** if true, the table stores glyphs in long format */
+    /**
+     * if true, the table stores glyphs in long format
+     */
     private final boolean isLong;
-    
-    /** the offsets themselves */
+
+    /**
+     * the offsets themselves
+     */
     private final int[] offsets;
-    
+
     /**
      * Creates a new instance of HmtxTable
      *
      * @param ttf a {@link org.loboevolution.pdfview.font.ttf.TrueTypeFont} object.
      */
     protected LocaTable(final TrueTypeFont ttf) {
-        super (TrueTypeTable.LOCA_TABLE);
-    
+        super(TrueTypeTable.LOCA_TABLE);
+
         final MaxpTable maxp = (MaxpTable) ttf.getTable("maxp");
         final int numGlyphs = maxp.getNumGlyphs();
-        
+
         final HeadTable head = (HeadTable) ttf.getTable("head");
         final short format = head.getIndexToLocFormat();
         this.isLong = (format == 1);
-        
-        this.offsets = new int[numGlyphs + 1]; 
+
+        this.offsets = new int[numGlyphs + 1];
     }
-    
+
     /**
      * get the offset, in bytes, of a given glyph from the start of
      * the glyph table
@@ -69,7 +70,7 @@ public class LocaTable extends TrueTypeTable {
     public int getOffset(final int glyphID) {
         return this.offsets[glyphID];
     }
-      
+
     /**
      * get the size, in bytes, of the given glyph
      *
@@ -79,7 +80,7 @@ public class LocaTable extends TrueTypeTable {
     public int getSize(final int glyphID) {
         return this.offsets[glyphID + 1] - this.offsets[glyphID];
     }
-    
+
     /**
      * Return true if the glyphs arte in long (int) format, or
      * false if they are in short (short) format
@@ -89,19 +90,19 @@ public class LocaTable extends TrueTypeTable {
     public boolean isLongFormat() {
         return this.isLong;
     }
-    
-   
-	/**
-	 * {@inheritDoc}
-	 *
-	 * get the data in this map as a ByteBuffer
-	 */
+
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * get the data in this map as a ByteBuffer
+     */
     @Override
-	public ByteBuffer getData() {
+    public ByteBuffer getData() {
         final int size = getLength();
-        
+
         final ByteBuffer buf = ByteBuffer.allocate(size);
-        
+
         // write the offsets
         for (final int offset : this.offsets) {
             if (isLongFormat()) {
@@ -110,36 +111,36 @@ public class LocaTable extends TrueTypeTable {
                 buf.putShort((short) (offset / 2));
             }
         }
-        
+
         // reset the start pointer
         buf.flip();
-        
+
         return buf;
     }
-    
-	/**
-	 * {@inheritDoc}
-	 *
-	 * Initialize this structure from a ByteBuffer
-	 */
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * Initialize this structure from a ByteBuffer
+     */
     @Override
-	public void setData(final ByteBuffer data) {
+    public void setData(final ByteBuffer data) {
         for (int i = 0; i < this.offsets.length; i++) {
             if (isLongFormat()) {
                 this.offsets[i] = data.getInt();
             } else {
-                this.offsets[i] = 2 * ( 0xFFFF & data.getShort());
+                this.offsets[i] = 2 * (0xFFFF & data.getShort());
             }
         }
     }
-    
-	/**
-	 * {@inheritDoc}
-	 *
-	 * Get the length of this table
-	 */
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * Get the length of this table
+     */
     @Override
-	public int getLength() {
+    public int getLength() {
         if (isLongFormat()) {
             return this.offsets.length * 4;
         } else {

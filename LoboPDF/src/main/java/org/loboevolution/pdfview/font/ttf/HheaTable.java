@@ -30,68 +30,129 @@ import java.nio.ByteBuffer;
 
 /**
  * <p>HheaTable class.</p>
- *
+ * <p>
  * Author  jkaplan
-  *
  */
 public class HheaTable extends TrueTypeTable {
-    
-    /** Holds value of property version. */
+
+    /**
+     * Holds value of property version.
+     */
     private int version;
-    
-    /** Holds value of property ascent. */
+
+    /**
+     * Holds value of property ascent.
+     */
     private short ascent;
-    
-    /** Holds value of property descent. */
+
+    /**
+     * Holds value of property descent.
+     */
     private short descent;
-    
-    /** Holds value of property lineGap. */
+
+    /**
+     * Holds value of property lineGap.
+     */
     private short lineGap;
-    
-    /** Holds value of property advanceWidthMax. */
+
+    /**
+     * Holds value of property advanceWidthMax.
+     */
     private short advanceWidthMax;
-    
-    /** Holds value of property minLeftSideBearing. */
+
+    /**
+     * Holds value of property minLeftSideBearing.
+     */
     private short minLeftSideBearing;
-    
-    /** Holds value of property minRightSideBearing. */
+
+    /**
+     * Holds value of property minRightSideBearing.
+     */
     private short minRightSideBearing;
-    
-    /** Holds value of property xMaxExtent. */
+
+    /**
+     * Holds value of property xMaxExtent.
+     */
     private short xMaxExtent;
-    
-    /** Holds value of property caretSlopeRise. */
+
+    /**
+     * Holds value of property caretSlopeRise.
+     */
     private short caretSlopeRise;
-    
-    /** Holds value of property caretSlopeRun. */
+
+    /**
+     * Holds value of property caretSlopeRun.
+     */
     private short caretSlopeRun;
-    
-    /** Holds value of property caretOffset. */
+
+    /**
+     * Holds value of property caretOffset.
+     */
     private short caretOffset;
-    
-    /** Holds value of property metricDataFormat. */
+
+    /**
+     * Holds value of property metricDataFormat.
+     */
     private short metricDataFormat;
-    
-    /** Holds value of property numOfLongHorMetrics. */
+
+    /**
+     * Holds value of property numOfLongHorMetrics.
+     */
     private short numOfLongHorMetrics;
-    
+
     /**
      * Creates a new instance of HeadTable
      * Makes up reasonable(?) defaults for all values
      */
     protected HheaTable() {
         super(TrueTypeTable.HEAD_TABLE);
-        
+
         setVersion(0x10000);
     }
-    
-	/**
-	 * {@inheritDoc}
-	 *
-	 * Parse the data before it is set
-	 */
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * Get the data we have stored
+     */
     @Override
-	public void setData(final ByteBuffer data) {
+    public ByteBuffer getData() {
+        final ByteBuffer buf = ByteBuffer.allocate(getLength());
+
+        buf.putInt(getVersion());
+        buf.putShort(getAscent());
+        buf.putShort(getDescent());
+        buf.putShort(getLineGap());
+        buf.putShort(getAdvanceWidthMax());
+        buf.putShort(getMinLeftSideBearing());
+        buf.putShort(getMinRightSideBearing());
+        buf.putShort(getXMaxExtent());
+        buf.putShort(getCaretSlopeRise());
+        buf.putShort(getCaretSlopeRun());
+        buf.putShort(getCaretOffset());
+
+        // padding
+        buf.putShort((short) 0);
+        buf.putShort((short) 0);
+        buf.putShort((short) 0);
+        buf.putShort((short) 0);
+
+        buf.putShort(getMetricDataFormat());
+        buf.putShort((short) getNumOfLongHorMetrics());
+
+        // reset the position to the start of the buffer
+        buf.flip();
+
+        return buf;
+    }
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * Parse the data before it is set
+     */
+    @Override
+    public void setData(final ByteBuffer data) {
         if (data.remaining() != 36) {
             throw new IllegalArgumentException("Bad Head table size");
         }
@@ -106,63 +167,27 @@ public class HheaTable extends TrueTypeTable {
         setCaretSlopeRise(data.getShort());
         setCaretSlopeRun(data.getShort());
         setCaretOffset(data.getShort());
-        
+
         // padding
         data.getShort();
         data.getShort();
         data.getShort();
         data.getShort();
-        
+
         setMetricDataFormat(data.getShort());
         setNumOfLongHorMetrics(data.getShort());
     }
-    
-	/**
-	 * {@inheritDoc}
-	 *
-	 * Get the data we have stored
-	 */
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * Get the length of this table
+     */
     @Override
-	public ByteBuffer getData() {
-        final ByteBuffer buf = ByteBuffer.allocate(getLength());
-        
-        buf.putInt(getVersion());
-        buf.putShort(getAscent());
-        buf.putShort(getDescent());
-        buf.putShort(getLineGap());
-        buf.putShort(getAdvanceWidthMax());
-        buf.putShort(getMinLeftSideBearing());
-        buf.putShort(getMinRightSideBearing());
-        buf.putShort(getXMaxExtent());
-        buf.putShort(getCaretSlopeRise());
-        buf.putShort(getCaretSlopeRun());
-        buf.putShort(getCaretOffset());
-        
-        // padding
-        buf.putShort((short) 0);
-        buf.putShort((short) 0);
-        buf.putShort((short) 0);
-        buf.putShort((short) 0);
-        
-        buf.putShort(getMetricDataFormat());
-        buf.putShort((short) getNumOfLongHorMetrics());
-    
-        // reset the position to the start of the buffer
-        buf.flip();
-        
-        return buf;
-    }
-    
-	/**
-	 * {@inheritDoc}
-	 *
-	 * Get the length of this table
-	 */
-    @Override
-	public int getLength() {
+    public int getLength() {
         return 36;
     }
-    
+
     /**
      * Getter for property version.
      *
@@ -171,7 +196,7 @@ public class HheaTable extends TrueTypeTable {
     public int getVersion() {
         return this.version;
     }
-   
+
     /**
      * Setter for property version.
      *
@@ -180,17 +205,17 @@ public class HheaTable extends TrueTypeTable {
     public void setVersion(final int version) {
         this.version = version;
     }
-    
-	/**
-	 * {@inheritDoc}
-	 *
-	 * Create a pretty string
-	 */
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * Create a pretty string
+     */
     @Override
-	public String toString() {
+    public String toString() {
         final StringBuilder buf = new StringBuilder();
         final String indent = "    ";
-        
+
         buf.append(indent).append("Version             : ").append(Integer.toHexString(getVersion())).append("\n");
         buf.append(indent).append("Ascent              : ").append(getAscent()).append("\n");
         buf.append(indent).append("Descent             : ").append(getDescent()).append("\n");
@@ -206,7 +231,7 @@ public class HheaTable extends TrueTypeTable {
         buf.append(indent).append("NumOfLongHorMetrics : ").append(getNumOfLongHorMetrics()).append("\n");
         return buf.toString();
     }
-    
+
     /**
      * Getter for property ascent.
      *
@@ -215,7 +240,7 @@ public class HheaTable extends TrueTypeTable {
     public short getAscent() {
         return this.ascent;
     }
-    
+
     /**
      * Setter for property ascent.
      *
@@ -224,7 +249,7 @@ public class HheaTable extends TrueTypeTable {
     public void setAscent(final short ascent) {
         this.ascent = ascent;
     }
-    
+
     /**
      * Getter for property descent.
      *
@@ -233,7 +258,7 @@ public class HheaTable extends TrueTypeTable {
     public short getDescent() {
         return this.descent;
     }
-    
+
     /**
      * Setter for property descent.
      *
@@ -242,7 +267,7 @@ public class HheaTable extends TrueTypeTable {
     public void setDescent(final short descent) {
         this.descent = descent;
     }
-    
+
     /**
      * Getter for property lineGap.
      *
@@ -251,7 +276,7 @@ public class HheaTable extends TrueTypeTable {
     public short getLineGap() {
         return this.lineGap;
     }
-    
+
     /**
      * Setter for property lineGap.
      *
@@ -260,7 +285,7 @@ public class HheaTable extends TrueTypeTable {
     public void setLineGap(final short lineGap) {
         this.lineGap = lineGap;
     }
-    
+
     /**
      * Getter for property advanceWidthMax.
      *
@@ -269,7 +294,7 @@ public class HheaTable extends TrueTypeTable {
     public short getAdvanceWidthMax() {
         return this.advanceWidthMax;
     }
-    
+
     /**
      * Setter for property advanceWidthMax.
      *
@@ -278,7 +303,7 @@ public class HheaTable extends TrueTypeTable {
     public void setAdvanceWidthMax(final short advanceWidthMax) {
         this.advanceWidthMax = advanceWidthMax;
     }
-    
+
     /**
      * Getter for property minLeftSideBearing.
      *
@@ -287,7 +312,7 @@ public class HheaTable extends TrueTypeTable {
     public short getMinLeftSideBearing() {
         return this.minLeftSideBearing;
     }
-    
+
     /**
      * Setter for property minLeftSideBearing.
      *
@@ -296,7 +321,7 @@ public class HheaTable extends TrueTypeTable {
     public void setMinLeftSideBearing(final short minLeftSideBearing) {
         this.minLeftSideBearing = minLeftSideBearing;
     }
-    
+
     /**
      * Getter for property minRIghtSideBearing.
      *
@@ -305,7 +330,7 @@ public class HheaTable extends TrueTypeTable {
     public short getMinRightSideBearing() {
         return this.minRightSideBearing;
     }
-    
+
     /**
      * Setter for property minRIghtSideBearing.
      *
@@ -314,7 +339,7 @@ public class HheaTable extends TrueTypeTable {
     public void setMinRightSideBearing(final short minRightSideBearing) {
         this.minRightSideBearing = minRightSideBearing;
     }
-    
+
     /**
      * Getter for property xMaxExtent.
      *
@@ -323,7 +348,7 @@ public class HheaTable extends TrueTypeTable {
     public short getXMaxExtent() {
         return this.xMaxExtent;
     }
-    
+
     /**
      * Setter for property xMaxExtent.
      *
@@ -332,7 +357,7 @@ public class HheaTable extends TrueTypeTable {
     public void setXMaxExtent(final short xMaxExtent) {
         this.xMaxExtent = xMaxExtent;
     }
-    
+
     /**
      * Getter for property caretSlopeRise.
      *
@@ -341,7 +366,7 @@ public class HheaTable extends TrueTypeTable {
     public short getCaretSlopeRise() {
         return this.caretSlopeRise;
     }
-    
+
     /**
      * Setter for property caretSlopeRise.
      *
@@ -350,7 +375,7 @@ public class HheaTable extends TrueTypeTable {
     public void setCaretSlopeRise(final short caretSlopeRise) {
         this.caretSlopeRise = caretSlopeRise;
     }
-    
+
     /**
      * Getter for property caretSlopeRun.
      *
@@ -359,7 +384,7 @@ public class HheaTable extends TrueTypeTable {
     public short getCaretSlopeRun() {
         return this.caretSlopeRun;
     }
-    
+
     /**
      * Setter for property caretSlopeRun.
      *
@@ -368,7 +393,7 @@ public class HheaTable extends TrueTypeTable {
     public void setCaretSlopeRun(final short caretSlopeRun) {
         this.caretSlopeRun = caretSlopeRun;
     }
-    
+
     /**
      * Getter for property caretOffset.
      *
@@ -377,7 +402,7 @@ public class HheaTable extends TrueTypeTable {
     public short getCaretOffset() {
         return this.caretOffset;
     }
-    
+
     /**
      * Setter for property caretOffset.
      *
@@ -386,7 +411,7 @@ public class HheaTable extends TrueTypeTable {
     public void setCaretOffset(final short caretOffset) {
         this.caretOffset = caretOffset;
     }
-    
+
     /**
      * Getter for property metricDataFormat.
      *
@@ -395,7 +420,7 @@ public class HheaTable extends TrueTypeTable {
     public short getMetricDataFormat() {
         return this.metricDataFormat;
     }
-    
+
     /**
      * Setter for property metricDataFormat.
      *
@@ -404,7 +429,7 @@ public class HheaTable extends TrueTypeTable {
     public void setMetricDataFormat(final short metricDataFormat) {
         this.metricDataFormat = metricDataFormat;
     }
-    
+
     /**
      * Getter for property numOfLongHorMetrics.
      *
@@ -413,7 +438,7 @@ public class HheaTable extends TrueTypeTable {
     public int getNumOfLongHorMetrics() {
         return this.numOfLongHorMetrics & 0xFFFF;
     }
-    
+
     /**
      * Setter for property numOfLongHorMetrics.
      *
@@ -422,5 +447,5 @@ public class HheaTable extends TrueTypeTable {
     public void setNumOfLongHorMetrics(final short numOfLongHorMetrics) {
         this.numOfLongHorMetrics = numOfLongHorMetrics;
     }
-    
+
 }

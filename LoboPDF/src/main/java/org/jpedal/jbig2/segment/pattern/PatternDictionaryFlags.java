@@ -34,22 +34,28 @@ import org.jpedal.jbig2.segment.Flags;
  */
 @Slf4j
 public class PatternDictionaryFlags extends Flags {
-	/** Constant <code>HD_MMR="HD_MMR"</code> */
-	public static final String HD_MMR = "HD_MMR";
-	/** Constant <code>HD_TEMPLATE="HD_TEMPLATE"</code> */
-	public static final String HD_TEMPLATE = "HD_TEMPLATE";
+    /**
+     * Constant <code>HD_MMR="HD_MMR"</code>
+     */
+    public static final String HD_MMR = "HD_MMR";
+    /**
+     * Constant <code>HD_TEMPLATE="HD_TEMPLATE"</code>
+     */
+    public static final String HD_TEMPLATE = "HD_TEMPLATE";
 
-	/** {@inheritDoc} */
-	public void setFlags(final int flagsAsInt) {
-		this.flagsAsInt = flagsAsInt;
+    /**
+     * {@inheritDoc}
+     */
+    public void setFlags(final int flagsAsInt) {
+        this.flagsAsInt = flagsAsInt;
 
-		/** extract HD_MMR */
-		flags.put(HD_MMR, flagsAsInt & 1);
+        /** extract HD_MMR */
+        flags.put(HD_MMR, flagsAsInt & 1);
 
-		/** extract HD_TEMPLATE */
-		flags.put(HD_TEMPLATE, (flagsAsInt >> 1) & 3);
+        /** extract HD_TEMPLATE */
+        flags.put(HD_TEMPLATE, (flagsAsInt >> 1) & 3);
 
-		if (JBIG2StreamDecoder.debug)
-			log.info("flags: {}", flags);
-	}
+        if (JBIG2StreamDecoder.debug)
+            log.info("flags: {}", flags);
+    }
 }

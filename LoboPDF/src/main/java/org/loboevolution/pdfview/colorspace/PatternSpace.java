@@ -26,12 +26,12 @@
 
 package org.loboevolution.pdfview.colorspace;
 
-import java.io.IOException;
-import java.util.Map;
-
 import org.loboevolution.pdfview.PDFObject;
 import org.loboevolution.pdfview.PDFPaint;
 import org.loboevolution.pdfview.pattern.PDFPattern;
+
+import java.io.IOException;
+import java.util.Map;
 
 /**
  * A PatternSpace fills with a pattern, the name of which is

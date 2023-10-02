@@ -25,68 +25,67 @@
  */
 package org.jpedal.jbig2.segment.region;
 
-import java.io.IOException;
-
 import lombok.extern.slf4j.Slf4j;
 import org.jpedal.jbig2.JBIG2Exception;
 import org.jpedal.jbig2.decoders.JBIG2StreamDecoder;
 import org.jpedal.jbig2.segment.Segment;
 import org.jpedal.jbig2.util.BinaryOperation;
 
+import java.io.IOException;
+
 /**
  * <p>Abstract RegionSegment class.</p>
  */
 @Slf4j
 public abstract class RegionSegment extends Segment {
-	protected int regionBitmapWidth, regionBitmapHeight;
-	protected int regionBitmapXLocation, regionBitmapYLocation;
+    protected final RegionFlags regionFlags = new RegionFlags();
+    protected int regionBitmapWidth, regionBitmapHeight;
+    protected int regionBitmapXLocation, regionBitmapYLocation;
 
-	protected final RegionFlags regionFlags = new RegionFlags();
+    /**
+     * <p>Constructor for RegionSegment.</p>
+     *
+     * @param streamDecoder a {@link org.jpedal.jbig2.decoders.JBIG2StreamDecoder} object.
+     */
+    public RegionSegment(final JBIG2StreamDecoder streamDecoder) {
+        super(streamDecoder);
+    }
 
-	/**
-	 * <p>Constructor for RegionSegment.</p>
-	 *
-	 * @param streamDecoder a {@link org.jpedal.jbig2.decoders.JBIG2StreamDecoder} object.
-	 */
-	public RegionSegment(final JBIG2StreamDecoder streamDecoder) {
-		super(streamDecoder);
-	}
+    /**
+     * <p>readSegment.</p>
+     *
+     * @throws java.io.IOException             if any.
+     * @throws org.jpedal.jbig2.JBIG2Exception if any.
+     */
+    public void readSegment() throws IOException, JBIG2Exception {
+        short[] buff = new short[4];
+        decoder.readByte(buff);
+        regionBitmapWidth = BinaryOperation.getInt32(buff);
 
-	/**
-	 * <p>readSegment.</p>
-	 *
-	 * @throws java.io.IOException if any.
-	 * @throws org.jpedal.jbig2.JBIG2Exception if any.
-	 */
-	public void readSegment() throws IOException, JBIG2Exception {
-		short[] buff = new short[4];
-		decoder.readByte(buff);
-		regionBitmapWidth = BinaryOperation.getInt32(buff);
+        buff = new short[4];
+        decoder.readByte(buff);
+        regionBitmapHeight = BinaryOperation.getInt32(buff);
 
-		buff = new short[4];
-		decoder.readByte(buff);
-		regionBitmapHeight = BinaryOperation.getInt32(buff);
+        if (JBIG2StreamDecoder.debug)
+            log.info("Bitmap size = {} x {} ", regionBitmapWidth, regionBitmapHeight);
 
-		if (JBIG2StreamDecoder.debug)
-			log.info("Bitmap size = {} x {} ",regionBitmapWidth, regionBitmapHeight);
+        buff = new short[4];
+        decoder.readByte(buff);
+        regionBitmapXLocation = BinaryOperation.getInt32(buff);
 
-		buff = new short[4];
-		decoder.readByte(buff);
-		regionBitmapXLocation = BinaryOperation.getInt32(buff);
+        buff = new short[4];
+        decoder.readByte(buff);
+        regionBitmapYLocation = BinaryOperation.getInt32(buff);
 
-		buff = new short[4];
-		decoder.readByte(buff);
-		regionBitmapYLocation = BinaryOperation.getInt32(buff);
+        if (JBIG2StreamDecoder.debug)
+            log.info("Bitmap location = {},{} ", regionBitmapXLocation, regionBitmapYLocation);
 
-		if (JBIG2StreamDecoder.debug)
-			log.info("Bitmap location = {},{} ",regionBitmapXLocation, regionBitmapYLocation);
+        /** extract region Segment flags */
+        final short regionFlagsField = decoder.readByte();
 
-		/** extract region Segment flags */
-		final short regionFlagsField = decoder.readByte();
+        regionFlags.setFlags(regionFlagsField);
 
-		regionFlags.setFlags(regionFlagsField);
-
-		if (JBIG2StreamDecoder.debug)
-			log.info("region Segment flags = " + regionFlagsField);
-	}
+        if (JBIG2StreamDecoder.debug)
+            log.info("region Segment flags = " + regionFlagsField);
+    }
 }

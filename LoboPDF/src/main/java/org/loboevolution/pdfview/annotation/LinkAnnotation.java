@@ -26,16 +26,16 @@
 
 package org.loboevolution.pdfview.annotation;
 
-import java.io.IOException;
-
 import org.loboevolution.pdfview.PDFDestination;
 import org.loboevolution.pdfview.PDFObject;
 import org.loboevolution.pdfview.PDFParseException;
 import org.loboevolution.pdfview.action.GoToAction;
 import org.loboevolution.pdfview.action.PDFAction;
 
+import java.io.IOException;
+
 /**
- ***************************************************************************
+ * **************************************************************************
  * PDF annotation describing a link to either a location within the current
  * document, a location in another PDF file, an application/file to be opened
  * or a web site.
@@ -48,52 +48,52 @@ import org.loboevolution.pdfview.action.PDFAction;
  * <p>GoToEAction - for a destination in an embedded PDF file</p>
  * <p>UriAction - for a web link</p>
  * <p>LaunchAction - for launching an application/opening a file</p>
- *
+ * <p>
  * Author Katja Sondermann
+ *
  * @since 06.07.2009
- ***************************************************************************
-  *
+ * **************************************************************************
  */
 public class LinkAnnotation extends PDFAnnotation {
 
-	private PDFAction action = null;
+    private PDFAction action = null;
 
-	/**
-	 ***********************************************************************
-	 * Constructor
-	 *
-	 * @param annotObject a {@link org.loboevolution.pdfview.PDFObject} object.
-	 * @throws java.io.IOException if any.
-	 */
-	public LinkAnnotation(final PDFObject annotObject) throws IOException {
-		super(annotObject, ANNOTATION_TYPE.LINK);
-		// a link annotation can either have an action (GoTo or URI) or a destination (DEST)
-		final PDFObject actionObj = annotObject.getDictRef("A");
-		if (actionObj != null) {
-			this.action = PDFAction.getAction(actionObj, annotObject.getRoot());
-		} else {
-			// if a destination is given, create a GoToAction from it
-			PDFObject dest = annotObject.getDictRef("Dest");
-			if (dest == null) {
-				dest = annotObject.getDictRef("DEST");
-			}
-			if (dest != null) {
-				this.action = new GoToAction(PDFDestination.getDestination(dest, annotObject.getRoot()));
-			} else {
-				throw new PDFParseException(
-					"Could not parse link annotation (no Action or Destination found): "
-						+ annotObject.toString());
-			}
-		}
-	}
-	
-	/**
-	 ***********************************************************************
-	 * Get the contained PDFAction
-	 *
-	 * @return a {@link org.loboevolution.pdfview.action.PDFAction} object.
-	 */
-	public PDFAction getAction() {
-		return this.action;
-	}
+    /**
+     * **********************************************************************
+     * Constructor
+     *
+     * @param annotObject a {@link org.loboevolution.pdfview.PDFObject} object.
+     * @throws java.io.IOException if any.
+     */
+    public LinkAnnotation(final PDFObject annotObject) throws IOException {
+        super(annotObject, ANNOTATION_TYPE.LINK);
+        // a link annotation can either have an action (GoTo or URI) or a destination (DEST)
+        final PDFObject actionObj = annotObject.getDictRef("A");
+        if (actionObj != null) {
+            this.action = PDFAction.getAction(actionObj, annotObject.getRoot());
+        } else {
+            // if a destination is given, create a GoToAction from it
+            PDFObject dest = annotObject.getDictRef("Dest");
+            if (dest == null) {
+                dest = annotObject.getDictRef("DEST");
+            }
+            if (dest != null) {
+                this.action = new GoToAction(PDFDestination.getDestination(dest, annotObject.getRoot()));
+            } else {
+                throw new PDFParseException(
+                        "Could not parse link annotation (no Action or Destination found): "
+                                + annotObject.toString());
+            }
+        }
+    }
+
+    /**
+     * **********************************************************************
+     * Get the contained PDFAction
+     *
+     * @return a {@link org.loboevolution.pdfview.action.PDFAction} object.
+     */
+    public PDFAction getAction() {
+        return this.action;
+    }
 }

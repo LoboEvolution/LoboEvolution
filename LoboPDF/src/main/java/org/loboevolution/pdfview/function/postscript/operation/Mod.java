@@ -30,23 +30,23 @@ import java.util.Deque;
 
 
 final class Mod implements PostScriptOperation {
-	@Override
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <i>int1 int2</i> <b>mod</b> <i>remainder</i> <p>
-	 *
-	 * returns the remainder that results from
-	 * dividing int1 by int2. The sign of the result
-	 * is the same as the sign of the dividend int1.
-	 * Both operands must be integers and the result
-	 * is an integer. <p>
-	 *
-	 * errors: stackunderflow, typecheck, undefinedresult
-	 */
-	public void eval(final Deque<Object> environment) {
-	    final long int2 = (Long)environment.pop();
-	    final long int1 = (Long)environment.pop();
-	    environment.push(int1 % int2);
-	}
+    @Override
+    /**
+     * {@inheritDoc}
+     *
+     * <i>int1 int2</i> <b>mod</b> <i>remainder</i> <p>
+     *
+     * returns the remainder that results from
+     * dividing int1 by int2. The sign of the result
+     * is the same as the sign of the dividend int1.
+     * Both operands must be integers and the result
+     * is an integer. <p>
+     *
+     * errors: stackunderflow, typecheck, undefinedresult
+     */
+    public void eval(final Deque<Object> environment) {
+        final long int2 = (Long) environment.pop();
+        final long int1 = (Long) environment.pop();
+        environment.push(int1 % int2);
+    }
 }

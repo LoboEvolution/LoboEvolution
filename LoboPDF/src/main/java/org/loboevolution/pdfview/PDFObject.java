@@ -25,19 +25,14 @@
  */
 package org.loboevolution.pdfview;
 
-import java.io.IOException;
-import java.lang.ref.SoftReference;
-import java.nio.ByteBuffer;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
-
 import org.loboevolution.pdfview.decode.PDFDecoder;
 import org.loboevolution.pdfview.decrypt.IdentityDecrypter;
 import org.loboevolution.pdfview.decrypt.PDFDecrypter;
+
+import java.io.IOException;
+import java.lang.ref.SoftReference;
+import java.nio.ByteBuffer;
+import java.util.*;
 
 /**
  * a class encapsulating all the possibilities of content for
@@ -54,31 +49,50 @@ import org.loboevolution.pdfview.decrypt.PDFDecrypter;
  * PDF object.  Indirect references will always be dereferenced
  * by the time any data is returned from one of the methods
  * in this class.
- *
+ * <p>
  * Author Mike Wessler
-  *
  */
 public class PDFObject {
 
-    /** an indirect reference*/
+    /**
+     * an indirect reference
+     */
     public static final int INDIRECT = 0;      // PDFXref
-    /** a Boolean */
+    /**
+     * a Boolean
+     */
     public static final int BOOLEAN = 1;      // Boolean
-    /** a Number, represented as a double */
+    /**
+     * a Number, represented as a double
+     */
     public static final int NUMBER = 2;       // Double
-    /** a String */
+    /**
+     * a String
+     */
     public static final int STRING = 3;       // String
-    /** a special string, seen in PDF files as /Name */
+    /**
+     * a special string, seen in PDF files as /Name
+     */
     public static final int NAME = 4;         // String
-    /** an array of PDFObjects */
+    /**
+     * an array of PDFObjects
+     */
     public static final int ARRAY = 5;        // Array of PDFObject
-    /** a Hashmap that maps String names to PDFObjects */
+    /**
+     * a Hashmap that maps String names to PDFObjects
+     */
     public static final int DICTIONARY = 6;   // HashMap(String->PDFObject)
-    /** a Stream: a Hashmap with a byte array */
+    /**
+     * a Stream: a Hashmap with a byte array
+     */
     public static final int STREAM = 7;        // HashMap + byte[]
-    /** the NULL object (there is only one) */
+    /**
+     * the NULL object (there is only one)
+     */
     public static final int NULL = 8;         // null
-    /** a special PDF bare word, like R, obj, true, false, etc */
+    /**
+     * a special PDF bare word, like R, obj, true, false, etc
+     */
     public static final int KEYWORD = 9;      // String
     /**
      * When a value of {@link #getObjGen objNum} or {@link #getObjGen objGen},
@@ -94,23 +108,35 @@ public class PDFObject {
      */
     public static final int OBJ_NUM_TRAILER = -1;
 
-    /** the NULL PDFObject */
+    /**
+     * the NULL PDFObject
+     */
     public static final PDFObject nullObj = new PDFObject(null, NULL, null);
-    /** the type of this object */
-    private int type;
-    /** the value of this object. It can be a wide number of things, defined by type */
-    private Object value;
-    /** the encoded stream, if this is a STREAM object */
-    private ByteBuffer stream;
-    /** a cached version of the decoded stream */
-    private SoftReference<ByteBuffer> decodedStream;
-    /** The filter limits used to generate the cached decoded stream */
-    private Set<String> decodedStreamFilterLimits = null;
     /**
      * the PDFFile from which this object came, used for
      * dereferences
      */
     private final PDFFile owner;
+    /**
+     * the type of this object
+     */
+    private int type;
+    /**
+     * the value of this object. It can be a wide number of things, defined by type
+     */
+    private Object value;
+    /**
+     * the encoded stream, if this is a STREAM object
+     */
+    private ByteBuffer stream;
+    /**
+     * a cached version of the decoded stream
+     */
+    private SoftReference<ByteBuffer> decodedStream;
+    /**
+     * The filter limits used to generate the cached decoded stream
+     */
+    private Set<String> decodedStreamFilterLimits = null;
     /**
      * a cache of translated data.  This data can be
      * garbage collected at any time, after which it will
@@ -118,22 +144,26 @@ public class PDFObject {
      */
     private SoftReference<?> cache;
 
-    /** @see #getObjNum() */
+    /**
+     * @see #getObjNum()
+     */
     private int objNum = OBJ_NUM_EMBEDDED;
 
-    /** @see #getObjGen() */
+    /**
+     * @see #getObjGen()
+     */
     private int objGen = OBJ_NUM_EMBEDDED;
 
     /**
      * create a new simple PDFObject with a type and a value
      *
      * @param owner the PDFFile in which this object resides, used
-     * for dereferencing.  This may be null.
-     * @param type the type of object
+     *              for dereferencing.  This may be null.
+     * @param type  the type of object
      * @param value the value.  For DICTIONARY, this is a HashMap.
-     * for ARRAY it's an ArrayList.  For NUMBER, it's a Double.
-     * for BOOLEAN, it's Boolean.TRUE or Boolean.FALSE.  For
-     * everything else, it's a String.
+     *              for ARRAY it's an ArrayList.  For NUMBER, it's a Double.
+     *              for BOOLEAN, it's Boolean.TRUE or Boolean.FALSE.  For
+     *              everything else, it's a String.
      */
     public PDFObject(final PDFFile owner, final int type, Object value) {
         this.type = type;
@@ -182,10 +212,10 @@ public class PDFObject {
             this.type = BOOLEAN;
         } else if (obj instanceof PDFParser.Tok) {
             final PDFParser.Tok tok = (PDFParser.Tok) obj;
-            if (tok!=null && tok.name!=null && tok.name.equals("true")) {
+            if (tok != null && tok.name != null && tok.name.equals("true")) {
                 this.value = Boolean.TRUE;
                 this.type = BOOLEAN;
-            } else if (tok!=null && tok.name!=null && tok.name.equals("false")) {
+            } else if (tok != null && tok.name != null && tok.name.equals("false")) {
                 this.value = Boolean.FALSE;
                 this.type = BOOLEAN;
             } else {
@@ -201,7 +231,7 @@ public class PDFObject {
      * create a new PDFObject based on a PDFXref
      *
      * @param owner the PDFFile from which the PDFXref was drawn
-     * @param xref the PDFXref to turn into a PDFObject
+     * @param xref  the PDFXref to turn into a PDFObject
      */
     public PDFObject(final PDFFile owner, final PDFXref xref) {
         this.type = INDIRECT;
@@ -222,17 +252,6 @@ public class PDFObject {
         }
 
         return type;
-    }
-
-    /**
-     * set the stream of this object.  It should have been
-     * a DICTIONARY before the call.
-     *
-     * @param data the data, as a ByteBuffer.
-     */
-    public void setStream(final ByteBuffer data) {
-        this.type = STREAM;
-        this.stream = data;
     }
 
     /**
@@ -275,8 +294,7 @@ public class PDFObject {
      * @return an array of {@link byte} objects.
      * @throws java.io.IOException if any.
      */
-    public byte[] getStream(final Set<String> filterLimits) throws IOException
-    {
+    public byte[] getStream(final Set<String> filterLimits) throws IOException {
         if (type == INDIRECT) {
             return dereference().getStream(filterLimits);
         } else if (type == STREAM && stream != null) {
@@ -323,7 +341,18 @@ public class PDFObject {
      * @throws java.io.IOException if any.
      */
     public byte[] getStream() throws IOException {
-       return getStream(Collections.emptySet());
+        return getStream(Collections.emptySet());
+    }
+
+    /**
+     * set the stream of this object.  It should have been
+     * a DICTIONARY before the call.
+     *
+     * @param data the data, as a ByteBuffer.
+     */
+    public void setStream(final ByteBuffer data) {
+        this.type = STREAM;
+        this.stream = data;
     }
 
     /**
@@ -341,8 +370,8 @@ public class PDFObject {
      * get the stream from this object as a byte buffer.  Will return null if
      * this object isn't a STREAM.
      *
-     * @return the buffer, or null, if this isn't a STREAM.
      * @param filterLimits a {@link java.util.Set} object.
+     * @return the buffer, or null, if this isn't a STREAM.
      * @throws java.io.IOException if any.
      */
     public ByteBuffer getStreamBuffer(final Set<String> filterLimits) throws IOException {
@@ -474,7 +503,7 @@ public class PDFObject {
      * @throws java.io.IOException if any.
      */
     public String getTextStringValue() throws IOException {
-	return PDFStringUtil.asTextString(getStringValue());
+        return PDFStringUtil.asTextString(getStringValue());
     }
 
     /**
@@ -563,11 +592,11 @@ public class PDFObject {
      * @return a {@link java.util.Map} object.
      * @throws java.io.IOException if any.
      */
-    public Map<String,PDFObject> getDictionary() throws IOException {
+    public Map<String, PDFObject> getDictionary() throws IOException {
         if (type == INDIRECT) {
             return dereference().getDictionary();
         } else if (type == DICTIONARY || type == STREAM) {
-            return (Map<String,PDFObject>) value;
+            return (Map<String, PDFObject>) value;
         }
 
         // wrong type
@@ -604,7 +633,7 @@ public class PDFObject {
      * given value.
      *
      * @param match the expected value for the "Type" key in the
-     * dictionary
+     *              dictionary
      * @return whether the dictionary is of the expected type
      * @throws java.io.IOException if any.
      */
@@ -668,7 +697,7 @@ public class PDFObject {
      * indicates that the object is not numbered, as it's not a top-level
      * object: if the value is {@link #OBJ_NUM_EMBEDDED}, it is because it's
      * embedded within another object. If the value is {@link
-     *#OBJ_NUM_TRAILER}, it's because it's an object from the trailer.
+     * #OBJ_NUM_TRAILER}, it's because it's an object from the trailer.
      *
      * @return the object generation number, if positive
      */
@@ -678,7 +707,7 @@ public class PDFObject {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * return a representation of this PDFObject as a String.
      * Does NOT dereference anything:  this is the only method
      * that allows you to distinguish an INDIRECT PDFObject.
@@ -687,7 +716,7 @@ public class PDFObject {
     public String toString() {
         try {
             if (type == INDIRECT) {
-                final StringBuilder str = new StringBuilder ();
+                final StringBuilder str = new StringBuilder();
                 str.append("Indirect to #").append(((PDFXref) value).getID());
                 try {
                     str.append("\n").append(dereference().toString());
@@ -777,7 +806,7 @@ public class PDFObject {
                     PDFDebugger.debug("Bad seed (owner==null)!  Object=" + this);
                 }
 
-                obj = owner.dereference((PDFXref)value, getDecrypter());
+                obj = owner.dereference((PDFXref) value, getDecrypter());
 
                 cache = new SoftReference<>(obj);
             }
@@ -800,7 +829,7 @@ public class PDFObject {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Test whether two PDFObject are equal.  Objects are equal IFF they
      * are the same reference OR they are both indirect objects with the
      * same id and generation number in their xref
@@ -825,13 +854,13 @@ public class PDFObject {
 
         return false;
     }
-	
+
     /**
      * Returns the root of this object.
      *
      * @return a {@link org.loboevolution.pdfview.PDFObject} object.
      */
     public PDFObject getRoot() {
-    	return owner.getRoot();
+        return owner.getRoot();
     }
 }

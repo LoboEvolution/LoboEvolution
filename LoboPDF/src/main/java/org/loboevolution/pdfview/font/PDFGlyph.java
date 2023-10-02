@@ -25,38 +25,45 @@
  */
 package org.loboevolution.pdfview.font;
 
+import org.loboevolution.pdfview.PDFPage;
+import org.loboevolution.pdfview.PDFShapeCmd;
+
 import java.awt.geom.AffineTransform;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Point2D;
 
-import org.loboevolution.pdfview.PDFPage;
-import org.loboevolution.pdfview.PDFShapeCmd;
-
 /**
  * A single glyph in a stream of PDF text, which knows how to write itself
  * onto a PDF command stream
- *
-  *
-  *
  */
 public class PDFGlyph {
-    /** the character code of this glyph */
+    /**
+     * the character code of this glyph
+     */
     private final char src;
-    /** the name of this glyph */
+    /**
+     * the name of this glyph
+     */
     private final String name;
-    /** the advance from this glyph */
+    /**
+     * the advance from this glyph
+     */
     private final Point2D advance;
-    /** the shape represented by this glyph (for all fonts but type 3) */
+    /**
+     * the shape represented by this glyph (for all fonts but type 3)
+     */
     private GeneralPath shape;
-    /** the PDFPage storing this glyph's commands (for type 3 fonts) */
+    /**
+     * the PDFPage storing this glyph's commands (for type 3 fonts)
+     */
     private PDFPage page;
 
     /**
      * Creates a new instance of PDFGlyph based on a shape
      *
-     * @param src a char.
-     * @param name a {@link java.lang.String} object.
-     * @param shape a {@link java.awt.geom.GeneralPath} object.
+     * @param src     a char.
+     * @param name    a {@link java.lang.String} object.
+     * @param shape   a {@link java.awt.geom.GeneralPath} object.
      * @param advance a {@link java.awt.geom.Point2D.Float} object.
      */
     public PDFGlyph(final char src, final String name, final GeneralPath shape, final Point2D.Float advance) {
@@ -69,9 +76,9 @@ public class PDFGlyph {
     /**
      * Creates a new instance of PDFGlyph based on a page
      *
-     * @param src a char.
-     * @param name a {@link java.lang.String} object.
-     * @param page a {@link org.loboevolution.pdfview.PDFPage} object.
+     * @param src     a char.
+     * @param name    a {@link java.lang.String} object.
+     * @param page    a {@link org.loboevolution.pdfview.PDFPage} object.
      * @param advance a {@link java.awt.geom.Point2D} object.
      */
     public PDFGlyph(final char src, final String name, final PDFPage page, final Point2D advance) {
@@ -120,9 +127,9 @@ public class PDFGlyph {
     /**
      * Add commands for this glyph to a page
      *
-     * @param cmds a {@link org.loboevolution.pdfview.PDFPage} object.
+     * @param cmds      a {@link org.loboevolution.pdfview.PDFPage} object.
      * @param transform a {@link java.awt.geom.AffineTransform} object.
-     * @param mode a int.
+     * @param mode      a int.
      * @return a {@link java.awt.geom.Point2D} object.
      */
     public Point2D addCommands(final PDFPage cmds, final AffineTransform transform, final int mode) {
@@ -144,7 +151,9 @@ public class PDFGlyph {
         return advance;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         final StringBuilder str = new StringBuilder();

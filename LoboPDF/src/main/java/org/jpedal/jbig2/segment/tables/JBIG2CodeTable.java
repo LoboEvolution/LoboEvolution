@@ -27,18 +27,15 @@ package org.jpedal.jbig2.segment.tables;
 
 /**
  * <p>JBIG2CodeTable class.</p>
- *
-  *
-  *
  */
 public class JBIG2CodeTable {
 
-	/**
-	 * <p>getHuffTable.</p>
-	 *
-	 * @return an array of {@link int} objects.
-	 */
-	public static int[][] getHuffTable() {
-		return null;
-	}
+    /**
+     * <p>getHuffTable.</p>
+     *
+     * @return an array of {@link int} objects.
+     */
+    public static int[][] getHuffTable() {
+        return null;
+    }
 }

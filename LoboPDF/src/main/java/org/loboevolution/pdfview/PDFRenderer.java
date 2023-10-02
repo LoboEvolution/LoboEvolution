@@ -25,27 +25,13 @@
  */
 package org.loboevolution.pdfview;
 
-import java.awt.AlphaComposite;
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Paint;
-import java.awt.Rectangle;
-import java.awt.RenderingHints;
-import java.awt.Shape;
+import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Rectangle2D;
-import java.awt.image.BufferedImage;
-import java.awt.image.BufferedImageOp;
-import java.awt.image.ColorModel;
-import java.awt.image.ConvolveOp;
-import java.awt.image.ImageObserver;
-import java.awt.image.IndexColorModel;
-import java.awt.image.Kernel;
-import java.awt.image.WritableRaster;
+import java.awt.image.*;
 import java.lang.ref.WeakReference;
+import java.util.List;
 import java.util.*;
 
 /**
@@ -58,59 +44,94 @@ import java.util.*;
  */
 public class PDFRenderer extends BaseWatchable implements Runnable {
 
-    /** the page we were generate from */
+    /**
+     * how long (in milliseconds) to wait between image updates
+     */
+    public static final long UPDATE_DURATION = 200;
+    /**
+     * Constant <code>NOPHASE=-1000</code>
+     */
+    public static final float NOPHASE = -1000;
+    /**
+     * Constant <code>NOWIDTH=-1000</code>
+     */
+    public static final float NOWIDTH = -1000;
+    /**
+     * Constant <code>NOLIMIT=-1000</code>
+     */
+    public static final float NOLIMIT = -1000;
+    /**
+     * Constant <code>NOCAP=-1000</code>
+     */
+    public static final int NOCAP = -1000;
+    /**
+     * Constant <code>NODASH</code>
+     */
+    public static final float[] NODASH = null;
+    /**
+     * Constant <code>NOJOIN=-1000</code>
+     */
+    public static final int NOJOIN = -1000;
+    /**
+     * the image observers that will be updated when this image changes
+     */
+    private final List<ImageObserver> observers;
+    /**
+     * the info about the image, if we need to recreate it
+     */
+    private final ImageInfo imageinfo;
+    /**
+     * the page we were generate from
+     */
     private PDFPage page;
-    /** where we are in the page's command list */
+    /**
+     * where we are in the page's command list
+     */
     private int currentCommand;
-    /** a weak reference to the image we render into.  For the image
+    /**
+     * a weak reference to the image we render into.  For the image
      * to remain available, some other code must retain a strong reference to it.
      */
     private WeakReference<BufferedImage> imageRef;
-    /** the graphics object for use within an iteration.  Note this must be
+    /**
+     * the graphics object for use within an iteration.  Note this must be
      * set to null at the end of each iteration, or the image will not be
      * collected
      */
     private Graphics2D g;
-    /** the current graphics state */
+    /**
+     * the current graphics state
+     */
     private GraphicsState state;
-    /** the stack of push()ed graphics states */
+    /**
+     * the stack of push()ed graphics states
+     */
     private Deque<GraphicsState> stack;
-    /** the total region of this image that has been written to */
+    /**
+     * the total region of this image that has been written to
+     */
     private Rectangle2D globalDirtyRegion;
-    /** the image observers that will be updated when this image changes */
-    private final List<ImageObserver> observers;
-    /** the last shape we drew (to check for overlaps) */
+    /**
+     * the last shape we drew (to check for overlaps)
+     */
     private GeneralPath lastShape;
     private AffineTransform lastTransform;
-    /** the info about the image, if we need to recreate it */
-    private final ImageInfo imageinfo;
-    /** the next time the image should be notified about updates */
+    /**
+     * the next time the image should be notified about updates
+     */
     private long then = 0;
-    /** the sum of all the individual dirty regions since the last update */
+    /**
+     * the sum of all the individual dirty regions since the last update
+     */
     private Rectangle2D unupdatedRegion;
 
-    /** how long (in milliseconds) to wait between image updates */
-    public static final long UPDATE_DURATION = 200;
-    /** Constant <code>NOPHASE=-1000</code> */
-    public static final float NOPHASE = -1000;
-    /** Constant <code>NOWIDTH=-1000</code> */
-    public static final float NOWIDTH = -1000;
-    /** Constant <code>NOLIMIT=-1000</code> */
-    public static final float NOLIMIT = -1000;
-    /** Constant <code>NOCAP=-1000</code> */
-    public static final int NOCAP = -1000;
-    /** Constant <code>NODASH</code> */
-    public static final float[] NODASH = null;
-    /** Constant <code>NOJOIN=-1000</code> */
-    public static final int NOJOIN = -1000;
-    
 
     /**
      * create a new PDFGraphics state
      *
-     * @param page the current page
+     * @param page      the current page
      * @param imageinfo the paramters of the image to render
-     * @param bi a {@link java.awt.image.BufferedImage} object.
+     * @param bi        a {@link java.awt.image.BufferedImage} object.
      */
     public PDFRenderer(final PDFPage page, final ImageInfo imageinfo, final BufferedImage bi) {
         super();
@@ -128,13 +149,13 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
      * will <b>not</b> create an image, and you will get a NullPointerException
      * if you attempt to call getImage().
      *
-     * @param page the current page
-     * @param g the Graphics2D object to use for drawing
+     * @param page      the current page
+     * @param g         the Graphics2D object to use for drawing
      * @param imgbounds the bounds of the image into which to fit the page
-     * @param clip the portion of the page to draw, in page space, or null
-     * if the whole page should be drawn
-     * @param bgColor the color to draw the background of the image, or
-     * null for no color (0 alpha value)
+     * @param clip      the portion of the page to draw, in page space, or null
+     *                  if the whole page should be drawn
+     * @param bgColor   the color to draw the background of the image, or
+     *                  null for no color (0 alpha value)
      */
     public PDFRenderer(final PDFPage page, final Graphics2D g, final Rectangle imgbounds,
                        final Rectangle2D clip, final Color bgColor) {
@@ -207,9 +228,9 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
      * push() was called.
      */
     public void pop() {
-    	if (!this.stack.isEmpty()) {
+        if (!this.stack.isEmpty()) {
             this.state = this.stack.pop();
-    	}
+        }
 
         setTransform(this.state.xform);
         setClip(this.state.cliprgn);
@@ -218,11 +239,11 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
     /**
      * draw an outline using the current stroke and draw paint
      *
-     * @param s the path to stroke
+     * @param s                the path to stroke
+     * @param autoAdjustStroke a boolean.
      * @return a Rectangle2D to which the current region being
      * drawn will be added.  May also be null, in which case no dirty
      * region will be recorded.
-     * @param autoAdjustStroke a boolean.
      */
     public Rectangle2D stroke(GeneralPath s, final boolean autoAdjustStroke) {
         // TODO: consider autoAdjustStroke here instead of during parsing
@@ -239,7 +260,7 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
      * see if we would produce a line that was too small, and if so, scale
      * it up to produce a graphics line of 1 pixel, or so. This matches our
      * output with Adobe Reader.
-     * 
+     *
      * @param g
      * @param bs
      * @return
@@ -253,7 +274,7 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
                 width = 1.0f / (float) bt.getScaleX();
             } else {
                 // prevent division by a really small number
-                width = stroke.getLineWidth()<1f?1.0f:stroke.getLineWidth();
+                width = stroke.getLineWidth() < 1f ? 1.0f : stroke.getLineWidth();
             }
             stroke = new BasicStroke(width, bs.getEndCap(), bs.getLineJoin(), bs.getMiterLimit(), bs.getDashArray(), bs.getDashPhase());
         }
@@ -263,7 +284,7 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
     /**
      * draw an outline.
      *
-     * @param p the path to draw
+     * @param p  the path to draw
      * @param bs the stroke with which to draw the path
      */
     public void draw(final GeneralPath p, final BasicStroke bs) {
@@ -282,10 +303,10 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
     public Rectangle2D fill(GeneralPath s) {
         this.g.setComposite(this.state.fillAlpha);
         if (s == null) {
-        	final GraphicsState gs =  stack.peek();
-          if (gs.cliprgn != null) {
-          	s = new GeneralPath(gs.cliprgn);
-          }
+            final GraphicsState gs = stack.peek();
+            if (gs.cliprgn != null) {
+                s = new GeneralPath(gs.cliprgn);
+            }
         }
         return this.state.fillPaint.fill(this, this.g, s);
     }
@@ -301,60 +322,60 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
         BufferedImage bi;
         try {
             bi = image.getImage();
-        }catch (final PDFImageParseException e) {
+        } catch (final PDFImageParseException e) {
             // maybe it was an unsupported format, or something.
             // Nothing to draw, anyway!
             return new Rectangle2D.Double();
         }
-    	
-    	// transform must use bitmap size
+
+        // transform must use bitmap size
         final AffineTransform at = new AffineTransform(1f / bi.getWidth(), 0,
                 0, -1f / bi.getHeight(),
                 0, 1);
 
         if (image.isImageMask()) {
-        	bi = getMaskedImage(bi);
+            bi = getMaskedImage(bi);
         }
 
-        final Rectangle r = g.getTransform().createTransformedShape(new Rectangle(0,0,1,1)).getBounds();
+        final Rectangle r = g.getTransform().createTransformedShape(new Rectangle(0, 0, 1, 1)).getBounds();
         final boolean isBlured = false;
-        
-        if (Configuration.getInstance().isUseBlurResizingForImages() && 
-        		bi.getType() != BufferedImage.TYPE_CUSTOM && 
-        		bi.getWidth() >= 1.75*r.getWidth() && bi.getHeight() >= 1.75*r.getHeight()) {
-        	try {
-            	return smartDrawImage(image, bi, r, at);
-        	}catch (final Exception e) {
-				// do nothing, just go on with the "default" processing 
-			}
+
+        if (Configuration.getInstance().isUseBlurResizingForImages() &&
+                bi.getType() != BufferedImage.TYPE_CUSTOM &&
+                bi.getWidth() >= 1.75 * r.getWidth() && bi.getHeight() >= 1.75 * r.getHeight()) {
+            try {
+                return smartDrawImage(image, bi, r, at);
+            } catch (final Exception e) {
+                // do nothing, just go on with the "default" processing
+            }
         }
-        
+
         this.g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER));
-                
+
         //Image quality is better when using texturepaint instead of drawimage
         //but it is also slower :(
-		this.g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, 
-				RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        this.g.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
+                RenderingHints.VALUE_INTERPOLATION_BILINEAR);
         // banded rendering may lead to lower memory consumption for e.g. scanned PDFs with large images
         final int bandSize = Configuration.getInstance().getThresholdForBandedImageRendering();
         if (bandSize > 0 && bi.getHeight() > bandSize) {
-           // draw in bands
-           final int tempMax = bi.getHeight();
-           for (int offset=0; offset<tempMax; offset += bandSize) {
-               final int h = Math.min(tempMax - offset, bandSize);
-               final AffineTransform translated = AffineTransform.getTranslateInstance(0, -(double)offset/tempMax);
-               translated.concatenate(at);
+            // draw in bands
+            final int tempMax = bi.getHeight();
+            for (int offset = 0; offset < tempMax; offset += bandSize) {
+                final int h = Math.min(tempMax - offset, bandSize);
+                final AffineTransform translated = AffineTransform.getTranslateInstance(0, -(double) offset / tempMax);
+                translated.concatenate(at);
 
-               if (!g.drawImage(bi.getSubimage(0,offset,bi.getWidth(),h), translated, null)) {
-                   PDFDebugger.debug("Image part not completed!", 10);
-               }
-           }
+                if (!g.drawImage(bi.getSubimage(0, offset, bi.getWidth(), h), translated, null)) {
+                    PDFDebugger.debug("Image part not completed!", 10);
+                }
+            }
         } else {
-               if (!g.drawImage(bi, at, null)) {
-                   PDFDebugger.debug("Image not completed!", 10);
-               }
+            if (!g.drawImage(bi, at, null)) {
+                PDFDebugger.debug("Image not completed!", 10);
+            }
         }
-		
+
         if (isBlured) bi.flush();
 
         // get the total transform that was executed
@@ -365,7 +386,7 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
         final double miny = bi.getMinY();
 
         final double[] points = new double[]{
-            minx, miny, minx + bi.getWidth(), miny + bi.getHeight()
+                minx, miny, minx + bi.getWidth(), miny + bi.getHeight()
         };
         bt.transform(points, 0, points, 0, 2);
 
@@ -377,90 +398,89 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
 
     private Rectangle2D smartDrawImage(final PDFImage image, BufferedImage bi, final Rectangle r, AffineTransform at) {
         boolean isBlured = false;
-        
-        if (Configuration.getInstance().isUseBlurResizingForImages() && 
-        		bi.getType() != BufferedImage.TYPE_CUSTOM && 
-        		bi.getWidth() >= 1.75*r.getWidth() && bi.getHeight() >= 1.75*r.getHeight()) {
 
-        	final BufferedImageOp op;
-        	// indexed colored images need to be converted for the convolveOp
-        	final boolean colorConversion = (bi.getColorModel() instanceof IndexColorModel);
-        	final float maxFactor = 3.5f;
-        	if (bi.getWidth() > maxFactor*r.getWidth() && bi.getHeight() > maxFactor*r.getHeight()) {
-        		//First resize, otherwise we risk that we get out of heapspace
-        		final int newHeight = (int)Math.round(maxFactor*r.getHeight());
-        		final int newWidth = (int)Math.round(maxFactor*r.getWidth());
-        		final BufferedImage resized = new BufferedImage(newWidth,
-        				newHeight, colorConversion?BufferedImage.TYPE_INT_ARGB:bi.getType());
-        		final Graphics2D bg = (Graphics2D) resized.getGraphics();
-        		bg.setRenderingHint(RenderingHints.KEY_INTERPOLATION, 
-        				RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-        		bg.drawImage(bi, 0, 0, newWidth, newHeight, null);
-        		bi = resized;
+        if (Configuration.getInstance().isUseBlurResizingForImages() &&
+                bi.getType() != BufferedImage.TYPE_CUSTOM &&
+                bi.getWidth() >= 1.75 * r.getWidth() && bi.getHeight() >= 1.75 * r.getHeight()) {
+
+            final BufferedImageOp op;
+            // indexed colored images need to be converted for the convolveOp
+            final boolean colorConversion = (bi.getColorModel() instanceof IndexColorModel);
+            final float maxFactor = 3.5f;
+            if (bi.getWidth() > maxFactor * r.getWidth() && bi.getHeight() > maxFactor * r.getHeight()) {
+                //First resize, otherwise we risk that we get out of heapspace
+                final int newHeight = (int) Math.round(maxFactor * r.getHeight());
+                final int newWidth = (int) Math.round(maxFactor * r.getWidth());
+                final BufferedImage resized = new BufferedImage(newWidth,
+                        newHeight, colorConversion ? BufferedImage.TYPE_INT_ARGB : bi.getType());
+                final Graphics2D bg = (Graphics2D) resized.getGraphics();
+                bg.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
+                        RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+                bg.drawImage(bi, 0, 0, newWidth, newHeight, null);
+                bi = resized;
                 at = new AffineTransform(1f / bi.getWidth(), 0,
                         0, -1f / bi.getHeight(),
                         0, 1);
-                
-                final float weight = 1.0f/16.0f;
-            	final float[] blurKernel = {
-            			weight, weight, weight, weight,
-            			weight, weight, weight, weight,
-            			weight, weight, weight, weight,
-            			weight, weight, weight, weight,
-            	};
-            	op = new ConvolveOp(new Kernel(4, 4, blurKernel), ConvolveOp.EDGE_NO_OP, null);            	
-        	}
-        	else {
-        		final float weight = 1.0f/18.0f;
-        		final float[] blurKernel = {
-        				1*weight, 2*weight, 1*weight,
-        				2*weight, 6*weight, 2*weight,
-        				1*weight, 2*weight, 1*weight
-        		};
-        		if (colorConversion) {
-            		final BufferedImage colored = new BufferedImage(bi.getWidth(),
-            				bi.getHeight(), colorConversion?BufferedImage.TYPE_INT_ARGB:bi.getType());
-            		final Graphics2D bg = (Graphics2D) colored.getGraphics();
-            		bg.setRenderingHint(RenderingHints.KEY_INTERPOLATION, 
-            				RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-            		bg.drawImage(bi, 0, 0, bi.getWidth(), bi.getHeight(), null);
-            		bi = colored;
-        		}
-        		op = new ConvolveOp(new Kernel(3, 3, blurKernel), ConvolveOp.EDGE_NO_OP, null);
-        	}
-        	
-        	final BufferedImage blured = op.createCompatibleDestImage(bi,
-        			colorConversion?ColorModel.getRGBdefault():bi.getColorModel());
-        	
-           	op.filter(bi, blured);
-        	bi = blured;
-        	isBlured = true;
+
+                final float weight = 1.0f / 16.0f;
+                final float[] blurKernel = {
+                        weight, weight, weight, weight,
+                        weight, weight, weight, weight,
+                        weight, weight, weight, weight,
+                        weight, weight, weight, weight,
+                };
+                op = new ConvolveOp(new Kernel(4, 4, blurKernel), ConvolveOp.EDGE_NO_OP, null);
+            } else {
+                final float weight = 1.0f / 18.0f;
+                final float[] blurKernel = {
+                        1 * weight, 2 * weight, 1 * weight,
+                        2 * weight, 6 * weight, 2 * weight,
+                        1 * weight, 2 * weight, 1 * weight
+                };
+                if (colorConversion) {
+                    final BufferedImage colored = new BufferedImage(bi.getWidth(),
+                            bi.getHeight(), colorConversion ? BufferedImage.TYPE_INT_ARGB : bi.getType());
+                    final Graphics2D bg = (Graphics2D) colored.getGraphics();
+                    bg.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
+                            RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+                    bg.drawImage(bi, 0, 0, bi.getWidth(), bi.getHeight(), null);
+                    bi = colored;
+                }
+                op = new ConvolveOp(new Kernel(3, 3, blurKernel), ConvolveOp.EDGE_NO_OP, null);
+            }
+
+            final BufferedImage blured = op.createCompatibleDestImage(bi,
+                    colorConversion ? ColorModel.getRGBdefault() : bi.getColorModel());
+
+            op.filter(bi, blured);
+            bi = blured;
+            isBlured = true;
         }
-        
+
         this.g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER));
-                
+
         //Image quality is better when using texturepaint instead of drawimage
         //but it is also slower :(
-		this.g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, 
-				RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        this.g.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
+                RenderingHints.VALUE_INTERPOLATION_BILINEAR);
         // banded rendering may lead to lower memory consumption for e.g. scanned PDFs with large images
         final int bandSize = Configuration.getInstance().getThresholdForBandedImageRendering();
         if (bandSize > 0 && bi.getHeight() > bandSize) {
-           // draw in bands
-           final int tempMax = bi.getHeight();
-           for (int offset=0; offset<tempMax; offset += bandSize) {
-               final int h = Math.min(tempMax - offset, bandSize);
-               final AffineTransform translated = AffineTransform.getTranslateInstance(0, -(double)offset/tempMax);
-               translated.concatenate(at);
+            // draw in bands
+            final int tempMax = bi.getHeight();
+            for (int offset = 0; offset < tempMax; offset += bandSize) {
+                final int h = Math.min(tempMax - offset, bandSize);
+                final AffineTransform translated = AffineTransform.getTranslateInstance(0, -(double) offset / tempMax);
+                translated.concatenate(at);
 
-               if (!g.drawImage(bi.getSubimage(0,offset,bi.getWidth(),h), translated, null)) {
-                   PDFDebugger.debug("Image part not completed!", 10);
-               }
-           }
+                if (!g.drawImage(bi.getSubimage(0, offset, bi.getWidth(), h), translated, null)) {
+                    PDFDebugger.debug("Image part not completed!", 10);
+                }
+            }
         } else {
-               if (!g.drawImage(bi, at, null)) {
-                   PDFDebugger.debug("Image not completed!", 10);
-               }
+            if (!g.drawImage(bi, at, null)) {
+                PDFDebugger.debug("Image not completed!", 10);
+            }
         }
 
         if (isBlured) bi.flush();
@@ -473,7 +493,7 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
         final double miny = bi.getMinY();
 
         final double[] points = new double[]{
-            minx, miny, minx + bi.getWidth(), miny + bi.getHeight()
+                minx, miny, minx + bi.getWidth(), miny + bi.getHeight()
         };
         bt.transform(points, 0, points, 0, 2);
 
@@ -481,7 +501,7 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
                 points[2] - points[0],
                 points[3] - points[1]);
     }
-    
+
     /**
      * add the path to the current clip.  The new clip will be the intersection
      * of the old clip and given path.
@@ -512,22 +532,22 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
     }
 
     /**
-     * concatenate the given transform with the current transform
-     *
-     * @param at a {@link java.awt.geom.AffineTransform} object.
-     */
-    public void transform(final AffineTransform at) {
-        this.state.xform.concatenate(at);
-        this.g.setTransform(this.state.xform);
-    }
-
-    /**
      * replace the current transform with the given one.
      *
      * @param at a {@link java.awt.geom.AffineTransform} object.
      */
     public void setTransform(final AffineTransform at) {
         this.state.xform = at;
+        this.g.setTransform(this.state.xform);
+    }
+
+    /**
+     * concatenate the given transform with the current transform
+     *
+     * @param at a {@link java.awt.geom.AffineTransform} object.
+     */
+    public void transform(final AffineTransform at) {
+        this.state.xform.concatenate(at);
         this.g.setTransform(this.state.xform);
     }
 
@@ -545,14 +565,14 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
     /**
      * Set some or all aspects of the current stroke.
      *
-     * @param w the width of the stroke, or NOWIDTH to leave it unchanged
-     * @param cap the end cap style, or NOCAP to leave it unchanged
-     * @param join the join style, or NOJOIN to leave it unchanged
+     * @param w     the width of the stroke, or NOWIDTH to leave it unchanged
+     * @param cap   the end cap style, or NOCAP to leave it unchanged
+     * @param join  the join style, or NOJOIN to leave it unchanged
      * @param limit the miter limit, or NOLIMIT to leave it unchanged
      * @param phase the phase of the dash array, or NOPHASE to leave it
-     * unchanged
-     * @param ary the dash array, or null to leave it unchanged.  phase
-     * and ary must both be valid, or phase must be NOPHASE while ary is null.
+     *              unchanged
+     * @param ary   the dash array, or null to leave it unchanged.  phase
+     *              and ary must both be valid, or phase must be NOPHASE while ary is null.
      */
     public void setStrokeParts(final float wStroke, final int capStroke, final int joinStroke, final float limitStroke, final float[] aryStroke, final float phaseStroke) {
         float w = wStroke;
@@ -689,15 +709,6 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
     }
 
     /**
-     * Set the last shape drawn
-     *
-     * @param shape a {@link java.awt.geom.GeneralPath} object.
-     */
-    public void setLastShape(final GeneralPath shape) {
-        this.lastShape = shape;
-    }
-
-    /**
      * Get the last shape drawn
      *
      * @return a {@link java.awt.geom.GeneralPath} object.
@@ -707,18 +718,27 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
     }
 
     /**
+     * Set the last shape drawn
+     *
+     * @param shape a {@link java.awt.geom.GeneralPath} object.
+     */
+    public void setLastShape(final GeneralPath shape) {
+        this.lastShape = shape;
+    }
+
+    /**
      * If exists, returns the image which is used by the renderer.
      *
      * @return a BufferedImage or null
      */
     public BufferedImage getImage() {
-    	if (this.imageRef == null) return null;
-    	return this.imageRef.get();
+        if (this.imageRef == null) return null;
+        return this.imageRef.get();
     }
-    
+
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Setup rendering.  Called before iteration begins
      */
     @Override
@@ -740,15 +760,15 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
         }
     }
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * Draws the next command in the PDFPage to the buffered image.
-	 * The image will be notified about changes no less than every
-	 * UPDATE_DURATION milliseconds.
-	 */
+    /**
+     * {@inheritDoc}
+     * <p>
+     * Draws the next command in the PDFPage to the buffered image.
+     * The image will be notified about changes no less than every
+     * UPDATE_DURATION milliseconds.
+     */
     @Override
-	public int iterate() throws Exception {
+    public int iterate() throws Exception {
         // make sure we have a page to render
         if (this.page == null) {
             return Watchable.COMPLETED;
@@ -812,7 +832,7 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Called when iteration has stopped
      */
     @Override
@@ -825,8 +845,8 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
 
         this.observers.clear();
 
-    // keep around the image ref and image info for use in
-    // late addObserver() call
+        // keep around the image ref and image info for use in
+        // late addObserver() call
     }
 
     /**
@@ -905,7 +925,7 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
         }
 
         synchronized (this.observers) {
-            for (final Iterator<ImageObserver> i = this.observers.iterator(); i.hasNext();) {
+            for (final Iterator<ImageObserver> i = this.observers.iterator(); i.hasNext(); ) {
                 final ImageObserver observer = i.next();
 
                 final boolean result = observer.imageUpdate(bi, flags,
@@ -926,60 +946,58 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
      * that have a value in the image with the current paint
      */
     private BufferedImage getMaskedImage(final BufferedImage bi) {
-        
-    	// get the color of the current paint
-    	final Paint paint = state.fillPaint.getPaint();
-    	if (!(paint instanceof Color)) {
-    		// TODO - support other types of Paint
-    		return bi;
-    	}
 
-    	final Color col = (Color) paint;
-    	final ColorModel colorModel = bi.getColorModel();
-    	if (colorModel instanceof IndexColorModel) {
-    		final int mapSize = ((IndexColorModel) colorModel).getMapSize();
-    		final int pixelSize = colorModel.getPixelSize();
-    		if (mapSize == 2 && pixelSize == 1) {
-    			// we have a monochrome image mask with 1 bit per pixel
-    			// swap out the standard color with the current paint color
-    			final int[] rgbValues = new int[2];
-    			((IndexColorModel) colorModel).getRGBs(rgbValues);
-    			byte[] colorComponents = null;
-    			if (rgbValues[0] == 0xff000000) {
-    				// normal case color at 0
-        			colorComponents = new byte[]{
-        					(byte) col.getRed(), 
-        					(byte) col.getGreen(), 
-        					(byte) col.getBlue(), 
-        					(byte) col.getAlpha(),
-        					0, 0, 0, 0 // the background is transparent
-        					};    				
-    			}
-    			else if (rgbValues[1] == 0xff000000) {
-    				// alternate case color at 1
-        			colorComponents = new byte[]{        					
-        					0, 0, 0, 0, // the background is transparent
-        					(byte) col.getRed(), 
-        					(byte) col.getGreen(), 
-        					(byte) col.getBlue(), 
-        					(byte) col.getAlpha()
-        					};    				    				
-    			}
-    			
-    			if (colorComponents != null) {
-    				// replace mapped colors
-        			final int startIndex = 0;
-        			final boolean hasAlpha = true;
-    				final ColorModel replacementColorModel = new IndexColorModel(pixelSize, mapSize, colorComponents, startIndex, hasAlpha);
-    				final WritableRaster raster = bi.getRaster();
+        // get the color of the current paint
+        final Paint paint = state.fillPaint.getPaint();
+        if (!(paint instanceof Color)) {
+            // TODO - support other types of Paint
+            return bi;
+        }
+
+        final Color col = (Color) paint;
+        final ColorModel colorModel = bi.getColorModel();
+        if (colorModel instanceof IndexColorModel) {
+            final int mapSize = ((IndexColorModel) colorModel).getMapSize();
+            final int pixelSize = colorModel.getPixelSize();
+            if (mapSize == 2 && pixelSize == 1) {
+                // we have a monochrome image mask with 1 bit per pixel
+                // swap out the standard color with the current paint color
+                final int[] rgbValues = new int[2];
+                ((IndexColorModel) colorModel).getRGBs(rgbValues);
+                byte[] colorComponents = null;
+                if (rgbValues[0] == 0xff000000) {
+                    // normal case color at 0
+                    colorComponents = new byte[]{
+                            (byte) col.getRed(),
+                            (byte) col.getGreen(),
+                            (byte) col.getBlue(),
+                            (byte) col.getAlpha(),
+                            0, 0, 0, 0 // the background is transparent
+                    };
+                } else if (rgbValues[1] == 0xff000000) {
+                    // alternate case color at 1
+                    colorComponents = new byte[]{
+                            0, 0, 0, 0, // the background is transparent
+                            (byte) col.getRed(),
+                            (byte) col.getGreen(),
+                            (byte) col.getBlue(),
+                            (byte) col.getAlpha()
+                    };
+                }
+
+                if (colorComponents != null) {
+                    // replace mapped colors
+                    final int startIndex = 0;
+                    final boolean hasAlpha = true;
+                    final ColorModel replacementColorModel = new IndexColorModel(pixelSize, mapSize, colorComponents, startIndex, hasAlpha);
+                    final WritableRaster raster = bi.getRaster();
                     return new BufferedImage(replacementColorModel, raster, false, null);
-    			}
-    			else {
-    				return bi; // no color replacement 
-    			}
-    		}
-    	}
-    	
+                } else {
+                    return bi; // no color replacement
+                }
+            }
+        }
+
         // format as 8 bits each of ARGB
         int paintColor = col.getAlpha() << 24;
         paintColor |= col.getRed() << 16;
@@ -1023,24 +1041,58 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
         return dstImage;
     }
 
+    /**
+     * <p>Getter for the field <code>lastTransform</code>.</p>
+     *
+     * @return Returns the lastTransform.
+     * **********************************************************************
+     */
+    public AffineTransform getLastTransform() {
+        return this.lastTransform;
+    }
+
+    /**
+     * **********************************************************************
+     * Remember the current transformation
+     * **********************************************************************
+     */
+    public void rememberTransformation() {
+        this.lastTransform = this.state.xform;
+    }
+
     static class GraphicsState implements Cloneable {
 
-        /** the clip region */
+        /**
+         * the clip region
+         */
         Shape cliprgn;
-        /** the current stroke */
+        /**
+         * the current stroke
+         */
         BasicStroke stroke;
-        /** the current paint for drawing strokes */
+        /**
+         * the current paint for drawing strokes
+         */
         PDFPaint strokePaint;
-        /** the current paint for filling shapes */
+        /**
+         * the current paint for filling shapes
+         */
         PDFPaint fillPaint;
-        /** the current compositing alpha for stroking */
+        /**
+         * the current compositing alpha for stroking
+         */
         AlphaComposite strokeAlpha;
-        /** the current compositing alpha for filling */
+        /**
+         * the current compositing alpha for filling
+         */
         AlphaComposite fillAlpha;
-        /** the current transform */
+        /**
+         * the current transform
+         */
         AffineTransform xform;
 
-        /** Clone this Graphics state.
+        /**
+         * Clone this Graphics state.
          * Note that cliprgn is not cloned.  It must be set manually from
          * the current graphics object's clip
          */
@@ -1067,23 +1119,4 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
             return cState;
         }
     }
-
-	/**
-	 * <p>Getter for the field <code>lastTransform</code>.</p>
-	 *
-	 * @return Returns the lastTransform.
-	 ***********************************************************************
-	 */
-	public AffineTransform getLastTransform() {
-		return this.lastTransform;
-	}
-
-	/**
-	 ***********************************************************************
-	 * Remember the current transformation
-	 ***********************************************************************
-	 */
-	public void rememberTransformation() {
-		this.lastTransform = this.state.xform;
-	}
 }

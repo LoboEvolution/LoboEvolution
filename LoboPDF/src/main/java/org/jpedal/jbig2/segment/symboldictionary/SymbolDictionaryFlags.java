@@ -34,62 +34,84 @@ import org.jpedal.jbig2.segment.Flags;
  */
 @Slf4j
 public class SymbolDictionaryFlags extends Flags {
-	/** Constant <code>SD_HUFF="SD_HUFF"</code> */
-	public static final String SD_HUFF = "SD_HUFF";
-	/** Constant <code>SD_REF_AGG="SD_REF_AGG"</code> */
-	public static final String SD_REF_AGG = "SD_REF_AGG";
-	/** Constant <code>SD_HUFF_DH="SD_HUFF_DH"</code> */
-	public static final String SD_HUFF_DH = "SD_HUFF_DH";
-	/** Constant <code>SD_HUFF_DW="SD_HUFF_DW"</code> */
-	public static final String SD_HUFF_DW = "SD_HUFF_DW";
-	/** Constant <code>SD_HUFF_BM_SIZE="SD_HUFF_BM_SIZE"</code> */
-	public static final String SD_HUFF_BM_SIZE = "SD_HUFF_BM_SIZE";
-	/** Constant <code>SD_HUFF_AGG_INST="SD_HUFF_AGG_INST"</code> */
-	public static final String SD_HUFF_AGG_INST = "SD_HUFF_AGG_INST";
-	/** Constant <code>BITMAP_CC_USED="BITMAP_CC_USED"</code> */
-	public static final String BITMAP_CC_USED = "BITMAP_CC_USED";
-	/** Constant <code>BITMAP_CC_RETAINED="BITMAP_CC_RETAINED"</code> */
-	public static final String BITMAP_CC_RETAINED = "BITMAP_CC_RETAINED";
-	/** Constant <code>SD_TEMPLATE="SD_TEMPLATE"</code> */
-	public static final String SD_TEMPLATE = "SD_TEMPLATE";
-	/** Constant <code>SD_R_TEMPLATE="SD_R_TEMPLATE"</code> */
-	public static final String SD_R_TEMPLATE = "SD_R_TEMPLATE";
+    /**
+     * Constant <code>SD_HUFF="SD_HUFF"</code>
+     */
+    public static final String SD_HUFF = "SD_HUFF";
+    /**
+     * Constant <code>SD_REF_AGG="SD_REF_AGG"</code>
+     */
+    public static final String SD_REF_AGG = "SD_REF_AGG";
+    /**
+     * Constant <code>SD_HUFF_DH="SD_HUFF_DH"</code>
+     */
+    public static final String SD_HUFF_DH = "SD_HUFF_DH";
+    /**
+     * Constant <code>SD_HUFF_DW="SD_HUFF_DW"</code>
+     */
+    public static final String SD_HUFF_DW = "SD_HUFF_DW";
+    /**
+     * Constant <code>SD_HUFF_BM_SIZE="SD_HUFF_BM_SIZE"</code>
+     */
+    public static final String SD_HUFF_BM_SIZE = "SD_HUFF_BM_SIZE";
+    /**
+     * Constant <code>SD_HUFF_AGG_INST="SD_HUFF_AGG_INST"</code>
+     */
+    public static final String SD_HUFF_AGG_INST = "SD_HUFF_AGG_INST";
+    /**
+     * Constant <code>BITMAP_CC_USED="BITMAP_CC_USED"</code>
+     */
+    public static final String BITMAP_CC_USED = "BITMAP_CC_USED";
+    /**
+     * Constant <code>BITMAP_CC_RETAINED="BITMAP_CC_RETAINED"</code>
+     */
+    public static final String BITMAP_CC_RETAINED = "BITMAP_CC_RETAINED";
+    /**
+     * Constant <code>SD_TEMPLATE="SD_TEMPLATE"</code>
+     */
+    public static final String SD_TEMPLATE = "SD_TEMPLATE";
+    /**
+     * Constant <code>SD_R_TEMPLATE="SD_R_TEMPLATE"</code>
+     */
+    public static final String SD_R_TEMPLATE = "SD_R_TEMPLATE";
 
-	/** {@inheritDoc} */
-	public void setFlags(final int flagsAsInt) {
-		this.flagsAsInt = flagsAsInt;
+    /**
+     * {@inheritDoc}
+     */
+    public void setFlags(final int flagsAsInt) {
+        this.flagsAsInt = flagsAsInt;
 
-		/** extract SD_HUFF */
-		flags.put(SD_HUFF, flagsAsInt & 1);
+        /** extract SD_HUFF */
+        flags.put(SD_HUFF, flagsAsInt & 1);
 
-		/** extract SD_REF_AGG */
-		flags.put(SD_REF_AGG, (flagsAsInt >> 1) & 1);
+        /** extract SD_REF_AGG */
+        flags.put(SD_REF_AGG, (flagsAsInt >> 1) & 1);
 
-		/** extract SD_HUFF_DH */
-		flags.put(SD_HUFF_DH, (flagsAsInt >> 2) & 3);
+        /** extract SD_HUFF_DH */
+        flags.put(SD_HUFF_DH, (flagsAsInt >> 2) & 3);
 
-		/** extract SD_HUFF_DW */
-		flags.put(SD_HUFF_DW, (flagsAsInt >> 4) & 3);
+        /** extract SD_HUFF_DW */
+        flags.put(SD_HUFF_DW, (flagsAsInt >> 4) & 3);
 
-		/** extract SD_HUFF_BM_SIZE */
-		flags.put(SD_HUFF_BM_SIZE, (flagsAsInt >> 6) & 1);
+        /** extract SD_HUFF_BM_SIZE */
+        flags.put(SD_HUFF_BM_SIZE, (flagsAsInt >> 6) & 1);
 
-		/** extract SD_HUFF_AGG_INST */
-		flags.put(SD_HUFF_AGG_INST, (flagsAsInt >> 7) & 1);
+        /** extract SD_HUFF_AGG_INST */
+        flags.put(SD_HUFF_AGG_INST, (flagsAsInt >> 7) & 1);
 
-		/** extract BITMAP_CC_USED */
-		flags.put(BITMAP_CC_USED, (flagsAsInt >> 8) & 1);
+        /** extract BITMAP_CC_USED */
+        flags.put(BITMAP_CC_USED, (flagsAsInt >> 8) & 1);
 
-		/** extract BITMAP_CC_RETAINED */
-		flags.put(BITMAP_CC_RETAINED, (flagsAsInt >> 9) & 1);
+        /** extract BITMAP_CC_RETAINED */
+        flags.put(BITMAP_CC_RETAINED, (flagsAsInt >> 9) & 1);
 
-		/** extract SD_TEMPLATE */
-		flags.put(SD_TEMPLATE, (flagsAsInt >> 10) & 3);
+        /** extract SD_TEMPLATE */
+        flags.put(SD_TEMPLATE, (flagsAsInt >> 10) & 3);
 
-		/** extract SD_R_TEMPLATE */
-		flags.put(SD_R_TEMPLATE, (flagsAsInt >> 12) & 1);
+        /** extract SD_R_TEMPLATE */
+        flags.put(SD_R_TEMPLATE, (flagsAsInt >> 12) & 1);
 
-		if (JBIG2StreamDecoder.debug)
-			log.info("flags: {} ", flags);
-	}
+        if (JBIG2StreamDecoder.debug)
+            log.info("flags: {} ", flags);
+    }
 }

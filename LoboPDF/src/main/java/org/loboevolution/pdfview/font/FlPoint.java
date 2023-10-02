@@ -30,29 +30,32 @@ package org.loboevolution.pdfview.font;
  * A floating-point Point, with public fields.  Also contains a flag
  * for "open" to indicate that the path this point is a member of has
  * or hasn't been closed.
- *
+ * <p>
  * Author Mike Wessler
-  *
  */
 public class FlPoint {
-    /** x coordinate of the point */
-    public float x= 0;
+    /**
+     * x coordinate of the point
+     */
+    public float x = 0;
 
-    /** y coordinate of the point */
-    public float y= 0;
+    /**
+     * y coordinate of the point
+     */
+    public float y = 0;
 
     /**
      * whether the path this point is a part of is open or closed.
      * used in Type1CFont.java.
      */
-    public boolean open= false;
-    
+    public boolean open = false;
+
     /**
      * reset the values to (0,0) and closed
      */
     public final void reset() {
-	this.x= 0;
-	this.y= 0;
-	this.open= false;
+        this.x = 0;
+        this.y = 0;
+        this.open = false;
     }
 }

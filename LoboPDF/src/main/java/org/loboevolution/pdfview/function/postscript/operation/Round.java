@@ -29,21 +29,21 @@ package org.loboevolution.pdfview.function.postscript.operation;
 import java.util.Deque;
 
 final class Round implements PostScriptOperation {
-	@Override
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <i>num1</i> <b>round</b> <i>num2</i> <p>
-	 *
-	 * returns the integer value nearest to num1.
-	 * If num1 is equally close to its two nearest
-	 * integers, round returns the greater of the two.
-	 * The type of the result is the same as
-	 * the type of the operand. <p>
-	 *
-	 * errors: stackunderflow, typecheck
-	 */
-	public void eval(final Deque<Object> environment) {
-	    environment.push(Math.round((Double)environment.pop()));
-	}
+    @Override
+    /**
+     * {@inheritDoc}
+     *
+     * <i>num1</i> <b>round</b> <i>num2</i> <p>
+     *
+     * returns the integer value nearest to num1.
+     * If num1 is equally close to its two nearest
+     * integers, round returns the greater of the two.
+     * The type of the result is the same as
+     * the type of the operand. <p>
+     *
+     * errors: stackunderflow, typecheck
+     */
+    public void eval(final Deque<Object> environment) {
+        environment.push(Math.round((Double) environment.pop()));
+    }
 }

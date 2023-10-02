@@ -25,53 +25,53 @@
  */
 package org.loboevolution.pdf;
 
+import javax.swing.*;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 
-import javax.swing.JOptionPane;
-
 /**
  * A thread for printing in.
- *
-  *
-  *
  */
 public class PrintThread extends Thread {
 
-	/** The pt pages. */
-	private final PDFPrintPage ptPages;
+    /**
+     * The pt pages.
+     */
+    private final PDFPrintPage ptPages;
 
-	/** The pt pjob. */
-	private final PrinterJob ptPjob;
-	
-	private final PDFViewer dialog;
+    /**
+     * The pt pjob.
+     */
+    private final PrinterJob ptPjob;
 
-	/**
-	 * Instantiates a new prints the thread.
-	 *
-	 * @param pages
-	 *            the pages
-	 * @param pjob
-	 *            the pjob
-	 * @param dialog a {@link org.loboevolution.pdf.PDFViewer} object.
-	 */
-	public PrintThread(final PDFPrintPage pages, final PrinterJob pjob, final PDFViewer dialog) {
-		ptPages = pages;
-		ptPjob = pjob;
-		setName(getClass().getName());
-		this.dialog = dialog;
-	}
+    private final PDFViewer dialog;
 
-	/** {@inheritDoc} */
-	@Override
-	public void run() {
-		try {
-			ptPages.show(ptPjob);
-			ptPjob.print();
-		} catch (final PrinterException pe) {
-			JOptionPane.showMessageDialog(dialog, "Printing Error: " + pe.getMessage(), "Print Aborted",
-					JOptionPane.ERROR_MESSAGE);
-		}
-		ptPages.hide();
-	}
+    /**
+     * Instantiates a new prints the thread.
+     *
+     * @param pages  the pages
+     * @param pjob   the pjob
+     * @param dialog a {@link org.loboevolution.pdf.PDFViewer} object.
+     */
+    public PrintThread(final PDFPrintPage pages, final PrinterJob pjob, final PDFViewer dialog) {
+        ptPages = pages;
+        ptPjob = pjob;
+        setName(getClass().getName());
+        this.dialog = dialog;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void run() {
+        try {
+            ptPages.show(ptPjob);
+            ptPjob.print();
+        } catch (final PrinterException pe) {
+            JOptionPane.showMessageDialog(dialog, "Printing Error: " + pe.getMessage(), "Print Aborted",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+        ptPages.hide();
+    }
 }

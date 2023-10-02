@@ -33,12 +33,10 @@ import java.awt.color.ColorSpace;
  * uses an existing CMYK color space to convert from CMYK to RGB.  This allows embedded
  * CMYK color profiles to be used with YCCK images.  If no CMYK color space is
  * provided then by default it uses a CMYKColorSpace. Only toRGB is supported.
- *
+ * <p>
  * Author Ben Day
-  *
  */
-public class YCCKColorSpace extends ColorSpace
-{
+public class YCCKColorSpace extends ColorSpace {
 
     private final ColorSpace cmykColorSpace;
 
@@ -55,92 +53,84 @@ public class YCCKColorSpace extends ColorSpace
     /**
      * <p>Constructor for YCCKColorSpace.</p>
      */
-    public YCCKColorSpace()
-    {
+    public YCCKColorSpace() {
         this(new CMYKColorSpace());
     }
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Convert from CIEXYZ to RGB.  NOT IMPLEMENTED
      */
     @Override
-    public float[] fromCIEXYZ(final float[] colorvalue)
-    {
+    public float[] fromCIEXYZ(final float[] colorvalue) {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Convert from RGB to YCCK.  NOT IMPLEMENTED
      */
     @Override
-    public float[] fromRGB(final float[] rgbvalue)
-    {
+    public float[] fromRGB(final float[] rgbvalue) {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * the number of components
      */
     @Override
-    public int getNumComponents()
-    {
+    public int getNumComponents() {
         return 4;
     }
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * the name of this color space
      */
     @Override
-    public String getName(final int idx)
-    {
+    public String getName(final int idx) {
         return "YCCK";
     }
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * the type of this color space (TYPE_4CLR)
      */
     @Override
-    public int getType()
-    {
+    public int getType() {
         return TYPE_4CLR;
     }
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Convert from YCCK to CIEXYZ.  NOT IMPLEMENTED
      */
     @Override
-    public float[] toCIEXYZ(final float[] colorvalue)
-    {
+    public float[] toCIEXYZ(final float[] colorvalue) {
         return cmykColorSpace.toCIEXYZ(toCmyk(colorvalue));
     }
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Convert from YCCK to RGB.
      */
     @Override
-    public float[] toRGB(final float[] colorvalue)
-    {
+    public float[] toRGB(final float[] colorvalue) {
         return cmykColorSpace.toRGB(toCmyk(colorvalue));
     }
 
     private float[] toCmyk(final float[] colorvalue) {
         final float y = colorvalue[0];
-        float cb = colorvalue[1];
-        float cr = colorvalue[2];
+        final float cb = colorvalue[1];
+        final float cr = colorvalue[2];
         final float k = colorvalue[3];
         final float[] cmyk = new float[4];
         float v;

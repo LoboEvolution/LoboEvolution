@@ -29,23 +29,23 @@ package org.loboevolution.pdfview.function.postscript.operation;
 import java.util.Deque;
 
 final class Exp implements PostScriptOperation {
-	@Override
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <i>base exponent</i> <b>exp</b> <i>real</i> <p>
-	 *
-	 * raises base to the exponent power. The operands may be
-	 * either integers or real numbers. If the exponent has a
-	 * fractional part, the result is meaningful only if the
-	 * base is nonnegative. The result is always a real number. <p>
-	 *
-	 * errors: stackunderflow, typecheck, undefinedresult
-	 */
-	public void eval(final Deque<Object> environment) {
-	    final double exponent = (Double)environment.pop();
-	    final double base = (Double)environment.pop();
-	    environment.push(Math.pow(exponent, base));
-	}
-	
+    @Override
+    /**
+     * {@inheritDoc}
+     *
+     * <i>base exponent</i> <b>exp</b> <i>real</i> <p>
+     *
+     * raises base to the exponent power. The operands may be
+     * either integers or real numbers. If the exponent has a
+     * fractional part, the result is meaningful only if the
+     * base is nonnegative. The result is always a real number. <p>
+     *
+     * errors: stackunderflow, typecheck, undefinedresult
+     */
+    public void eval(final Deque<Object> environment) {
+        final double exponent = (Double) environment.pop();
+        final double base = (Double) environment.pop();
+        environment.push(Math.pow(exponent, base));
+    }
+
 }

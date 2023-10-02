@@ -31,9 +31,6 @@ import java.nio.ByteBuffer;
 
 /**
  * Undo prediction based on the TIFF Predictor 2 algorithm
- *
-  *
-  *
  */
 public class TIFFPredictor extends Predictor {
 
@@ -41,17 +38,30 @@ public class TIFFPredictor extends Predictor {
      * <p>Constructor for TIFFPredictor.</p>
      */
     public TIFFPredictor() {
-        super (TIFF);
+        super(TIFF);
+    }
+
+    private static byte getbits(final byte[] data, final int bitIndex, final int shiftWhenByteAligned, final int mask) {
+        final int b = data[(bitIndex >> 3)];
+        final int bitIndexInB = bitIndex & 7;
+        final int shift = shiftWhenByteAligned - bitIndexInB;
+        return (byte) ((b >>> shift) & mask);
+    }
+
+    private static void setbits(final byte[] data, final int bitIndex, final int shiftWhenByteAligned, final int mask, final byte bits) {
+        final int b = data[(bitIndex >> 3)];
+        final int bitIndexInB = bitIndex & 7;
+        final int shift = shiftWhenByteAligned - bitIndexInB;
+        data[bitIndex >> 3] = (byte) ((b & ~(mask << shift)) | (bits << shift));
     }
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Undo data based on the png algorithm
      */
     public ByteBuffer unpredict(final ByteBuffer imageData)
-        throws IOException
-    {
+            throws IOException {
         final ByteBuffer out = ByteBuffer.allocate(imageData.limit());
 
         final int numComponents = getColors();
@@ -61,7 +71,7 @@ public class TIFFPredictor extends Predictor {
 
         final byte[] row = new byte[bytePerRow];
 
-        while(imageData.remaining() > 0) {
+        while (imageData.remaining() > 0) {
             imageData.get(row);
             if (getBitsPerComponent() == 8) {
                 for (int i = numComponents; i < row.length; i += numComponents) {
@@ -114,22 +124,6 @@ public class TIFFPredictor extends Predictor {
         // return
         return out;
 
-    }
-
-    private static byte getbits(final byte[] data, final int bitIndex, final int shiftWhenByteAligned, final int mask)
-    {
-        final int b = data[(bitIndex >> 3)];
-        final int bitIndexInB = bitIndex & 7;
-        final int shift =  shiftWhenByteAligned - bitIndexInB;
-        return (byte) ((b >>> shift) & mask);
-    }
-
-    private static void setbits(final byte[] data, final int bitIndex, final int shiftWhenByteAligned, final int mask, final byte bits)
-    {
-        final int b = data[(bitIndex >> 3)];
-        final int bitIndexInB = bitIndex & 7;
-        final int shift =  shiftWhenByteAligned - bitIndexInB;
-        data[bitIndex >> 3] = (byte) ((b & ~(mask << shift)) | (bits << shift));
     }
 
 

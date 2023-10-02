@@ -26,79 +26,84 @@
 
 package org.loboevolution.pdfview.colorspace;
 
-import java.awt.color.ColorSpace;
-
 import org.loboevolution.pdfview.function.PDFFunction;
 
+import java.awt.color.ColorSpace;
+
 /**
- ***************************************************************************
+ * **************************************************************************
  * Color Space implementation for handling the PDF AlternateColorSpace.
  * A PDF function is applied to colorvalues before converting.
- *
+ * <p>
  * Author  Katja Sondermann
+ *
  * @since 06.01.2011
- ***************************************************************************
-  *
+ * **************************************************************************
  */
 public class AltColorSpace extends ColorSpace {
 
-	private final PDFFunction fkt;
-	private final ColorSpace origCs;
-	/**
-	 * Create a new CMYKColorSpace Instance.
-	 *
-	 * @param fkt a {@link org.loboevolution.pdfview.function.PDFFunction} object.
-	 * @param origCs a {@link java.awt.color.ColorSpace} object.
-	 */
-	public AltColorSpace(final PDFFunction fkt, final ColorSpace origCs) {
-		super(origCs.getType(), fkt.getNumInputs());
-		this.fkt = fkt;
-		this.origCs = origCs;
-	}
+    private final PDFFunction fkt;
+    private final ColorSpace origCs;
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * Converts from CIEXYZ.
-	 * @see java.awt.color.ColorSpace#fromCIEXYZ(float[])
-	 */
-	@Override
-	public float[] fromCIEXYZ(final float[] p_colorvalue) {
-		return this.origCs.fromCIEXYZ(this.fkt.calculate(p_colorvalue));
-	}
+    /**
+     * Create a new CMYKColorSpace Instance.
+     *
+     * @param fkt    a {@link org.loboevolution.pdfview.function.PDFFunction} object.
+     * @param origCs a {@link java.awt.color.ColorSpace} object.
+     */
+    public AltColorSpace(final PDFFunction fkt, final ColorSpace origCs) {
+        super(origCs.getType(), fkt.getNumInputs());
+        this.fkt = fkt;
+        this.origCs = origCs;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * Converts a given RGB.
-	 * @see java.awt.color.ColorSpace#fromRGB(float[])
-	 */
-	@Override
-	public float[] fromRGB(final float[] p_rgbvalue) {
-		return this.origCs.fromCIEXYZ(this.fkt.calculate(p_rgbvalue));
-	}
+    /**
+     * {@inheritDoc}
+     * <p>
+     * Converts from CIEXYZ.
+     *
+     * @see java.awt.color.ColorSpace#fromCIEXYZ(float[])
+     */
+    @Override
+    public float[] fromCIEXYZ(final float[] p_colorvalue) {
+        return this.origCs.fromCIEXYZ(this.fkt.calculate(p_colorvalue));
+    }
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * Converts to CIEXYZ.
-	 * @see java.awt.color.ColorSpace#toCIEXYZ(float[])
-	 */
-	@Override
-	public float[] toCIEXYZ(final float[] p_colorvalue) {
-		final float[] colorvalue = this.fkt.calculate(p_colorvalue);
-		return this.origCs.toCIEXYZ(colorvalue);
-	}
+    /**
+     * {@inheritDoc}
+     * <p>
+     * Converts a given RGB.
+     *
+     * @see java.awt.color.ColorSpace#fromRGB(float[])
+     */
+    @Override
+    public float[] fromRGB(final float[] p_rgbvalue) {
+        return this.origCs.fromCIEXYZ(this.fkt.calculate(p_rgbvalue));
+    }
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * Converts to RGB.
-	 * @see java.awt.color.ColorSpace#toRGB(float[])
-	 */
-	@Override
-	public float[] toRGB(final float[] p_colorvalue) {
-		final float[] colorvalue = this.fkt.calculate(p_colorvalue);
-		return this.origCs.toRGB(colorvalue);
-	}
+    /**
+     * {@inheritDoc}
+     * <p>
+     * Converts to CIEXYZ.
+     *
+     * @see java.awt.color.ColorSpace#toCIEXYZ(float[])
+     */
+    @Override
+    public float[] toCIEXYZ(final float[] p_colorvalue) {
+        final float[] colorvalue = this.fkt.calculate(p_colorvalue);
+        return this.origCs.toCIEXYZ(colorvalue);
+    }
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * Converts to RGB.
+     *
+     * @see java.awt.color.ColorSpace#toRGB(float[])
+     */
+    @Override
+    public float[] toRGB(final float[] p_colorvalue) {
+        final float[] colorvalue = this.fkt.calculate(p_colorvalue);
+        return this.origCs.toRGB(colorvalue);
+    }
 }

@@ -38,13 +38,12 @@ import java.io.IOException;
  *      as well as the limits of the data contained in that child.
  * </ul>
  * A PDF name tree is sorted in accordance with the String.compareTo() method.
- *
-  *
-  *
  */
 public class NameTree {
 
-    /** the root object */
+    /**
+     * the root object
+     */
     private final PDFObject root;
 
     /**
@@ -82,19 +81,19 @@ public class NameTree {
         final PDFObject kidsObj = root.getDictRef("Kids");
         if (kidsObj != null) {
             final PDFObject[] kids = kidsObj.getArray();
-			for (final PDFObject pdfObject : kids) {
-				// find the limits of this kid
-				final PDFObject limitsObj = pdfObject.getDictRef("Limits");
-				if (limitsObj != null) {
-					final String lowerLimit = limitsObj.getAt(0).getStringValue();
-					final String upperLimit = limitsObj.getAt(1).getStringValue();
-					// are we in range?
-					if ((key.compareTo(lowerLimit) >= 0) && (key.compareTo(upperLimit) <= 0)) {
-						// we are, so find in this child
-						return find(pdfObject, key);
-					}
-				}
-			}
+            for (final PDFObject pdfObject : kids) {
+                // find the limits of this kid
+                final PDFObject limitsObj = pdfObject.getDictRef("Limits");
+                if (limitsObj != null) {
+                    final String lowerLimit = limitsObj.getAt(0).getStringValue();
+                    final String upperLimit = limitsObj.getAt(1).getStringValue();
+                    // are we in range?
+                    if ((key.compareTo(lowerLimit) >= 0) && (key.compareTo(upperLimit) <= 0)) {
+                        // we are, so find in this child
+                        return find(pdfObject, key);
+                    }
+                }
+            }
         }
 
         // no luck
@@ -119,12 +118,12 @@ public class NameTree {
             final int comp = key.compareTo(posKey);
             if (comp == 0) {
                 // they match.  Return the value
-        		final int tmp = (pos * 2) + 1;
-        		if (array.length>tmp) {
+                final int tmp = (pos * 2) + 1;
+                if (array.length > tmp) {
                     return array[tmp];
-        		} else {
-        			return null;
-        		}
+                } else {
+                    return null;
+                }
             } else if (comp > 0) {
                 // too big, search the top half of the tree
                 start = pos + 1;

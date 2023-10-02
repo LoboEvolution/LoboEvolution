@@ -26,41 +26,20 @@
 
 package org.loboevolution.pdfview.decrypt;
 
-import java.nio.ByteBuffer;
-
 import org.loboevolution.pdfview.PDFObject;
 import org.loboevolution.pdfview.PDFParseException;
+
+import java.nio.ByteBuffer;
 
 /**
  * Performs identity decryption; that is, inputs aren't encrypted and
  * are returned right back.
- *
+ * <p>
  * Author Luke Kirby
-  *
-  *
  */
 public class IdentityDecrypter implements PDFDecrypter {
 
     private static final IdentityDecrypter INSTANCE = new IdentityDecrypter();
-
-	/** {@inheritDoc} */
-    @Override
-	public ByteBuffer decryptBuffer(final String cryptFilterName,
-                                    final PDFObject streamObj, final ByteBuffer streamBuf)
-            throws PDFParseException {
-
-        if (cryptFilterName != null) {
-            throw new PDFParseException("This Encryption version does not support Crypt filters");
-        }
-
-        return streamBuf;
-    }
-
-	/** {@inheritDoc} */
-    @Override
-	public String decryptString(final int objNum, final int objGen, final String inputBasicString) {
-        return inputBasicString;
-    }
 
     /**
      * <p>getInstance.</p>
@@ -71,21 +50,50 @@ public class IdentityDecrypter implements PDFDecrypter {
         return INSTANCE;
     }
 
-	/** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-	public boolean isEncryptionPresent() {
+    public ByteBuffer decryptBuffer(final String cryptFilterName,
+                                    final PDFObject streamObj, final ByteBuffer streamBuf)
+            throws PDFParseException {
+
+        if (cryptFilterName != null) {
+            throw new PDFParseException("This Encryption version does not support Crypt filters");
+        }
+
+        return streamBuf;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String decryptString(final int objNum, final int objGen, final String inputBasicString) {
+        return inputBasicString;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isEncryptionPresent() {
         return false;
     }
 
-	/** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-	public boolean isEncryptionPresent(final String cryptFilterName) {
+    public boolean isEncryptionPresent(final String cryptFilterName) {
         return false;
     }
 
-	/** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-	public boolean isOwnerAuthorised() {
+    public boolean isOwnerAuthorised() {
         return false;
     }
 }

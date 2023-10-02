@@ -30,9 +30,6 @@ import java.nio.ByteBuffer;
 /**
  * The base class for TrueType tables.  Specific tables can extend this
  * to add more functionality
- *
-  *
-  *
  */
 public class TrueTypeTable {
 
@@ -40,21 +37,37 @@ public class TrueTypeTable {
      * Well known tables
      */
     public static final int CMAP_TABLE = 0x636d6170;
-    /** Constant <code>GLYF_TABLE=0x676c7966</code> */
+    /**
+     * Constant <code>GLYF_TABLE=0x676c7966</code>
+     */
     public static final int GLYF_TABLE = 0x676c7966;
-    /** Constant <code>HEAD_TABLE=0x68656164</code> */
+    /**
+     * Constant <code>HEAD_TABLE=0x68656164</code>
+     */
     public static final int HEAD_TABLE = 0x68656164;
-    /** Constant <code>HHEA_TABLE=0x68686561</code> */
+    /**
+     * Constant <code>HHEA_TABLE=0x68686561</code>
+     */
     public static final int HHEA_TABLE = 0x68686561;
-    /** Constant <code>HMTX_TABLE=0x686d7478</code> */
+    /**
+     * Constant <code>HMTX_TABLE=0x686d7478</code>
+     */
     public static final int HMTX_TABLE = 0x686d7478;
-    /** Constant <code>MAXP_TABLE=0x6d617870</code> */
+    /**
+     * Constant <code>MAXP_TABLE=0x6d617870</code>
+     */
     public static final int MAXP_TABLE = 0x6d617870;
-    /** Constant <code>NAME_TABLE=0x6e616d65</code> */
+    /**
+     * Constant <code>NAME_TABLE=0x6e616d65</code>
+     */
     public static final int NAME_TABLE = 0x6e616d65;
-    /** Constant <code>POST_TABLE=0x706f7374</code> */
+    /**
+     * Constant <code>POST_TABLE=0x706f7374</code>
+     */
     public static final int POST_TABLE = 0x706f7374;
-    /** Constant <code>LOCA_TABLE=0x6c6f6361</code> */
+    /**
+     * Constant <code>LOCA_TABLE=0x6c6f6361</code>
+     */
     public static final int LOCA_TABLE = 0x6c6f6361;
     /**
      * This table's tag
@@ -67,7 +80,7 @@ public class TrueTypeTable {
 
     /**
      * Creates a new instance of TrueTypeTable.
-     *
+     * <p>
      * This method is protected.  Use the <code>getTable()</code> methods
      * to get new instances.
      *
@@ -80,9 +93,9 @@ public class TrueTypeTable {
     /**
      * Get a new instance of an empty table by tag string
      *
-     * @param ttf the font that contains this table
+     * @param ttf       the font that contains this table
      * @param tagString the tag for this table, as a 4 character string
-     *        (e.g. head or cmap)
+     *                  (e.g. head or cmap)
      * @return a {@link org.loboevolution.pdfview.font.ttf.TrueTypeTable} object.
      */
     public static TrueTypeTable createTable(final TrueTypeFont ttf,
@@ -93,10 +106,10 @@ public class TrueTypeTable {
     /**
      * Get a new instance of a table with provided data
      *
-     * @param ttf the font that contains this table
+     * @param ttf       the font that contains this table
      * @param tagString the tag for this table, as a 4 character string
-     *        (e.g. head or cmap)
-     * @param data the table data
+     *                  (e.g. head or cmap)
+     * @param data      the table data
      * @return a {@link org.loboevolution.pdfview.font.ttf.TrueTypeTable} object.
      */
     public static TrueTypeTable createTable(final TrueTypeFont ttf,
@@ -146,6 +159,38 @@ public class TrueTypeTable {
     }
 
     /**
+     * Get the tag as a string
+     *
+     * @param tag a int.
+     * @return a {@link java.lang.String} object.
+     */
+    public static String tagToString(final int tag) {
+        final char[] c = new char[4];
+        c[0] = (char) (0xff & (tag >> 24));
+        c[1] = (char) (0xff & (tag >> 16));
+        c[2] = (char) (0xff & (tag >> 8));
+        c[3] = (char) (0xff & (tag));
+
+        return new String(c);
+    }
+
+    /**
+     * Turn a string into a tag
+     *
+     * @param tag a {@link java.lang.String} object.
+     * @return a int.
+     */
+    public static int stringToTag(final String tag) {
+        final char[] c = tag.toCharArray();
+
+        if (c.length != 4) {
+            throw new IllegalArgumentException("Bad tag length: " + tag);
+        }
+
+        return c[0] << 24 | c[1] << 16 | c[2] << 8 | c[3];
+    }
+
+    /**
      * Get the table's tag
      *
      * @return a int.
@@ -182,44 +227,12 @@ public class TrueTypeTable {
     }
 
     /**
-     * Get the tag as a string
-     *
-     * @param tag a int.
-     * @return a {@link java.lang.String} object.
+     * {@inheritDoc}
+     * <p>
+     * Put into a nice string
      */
-    public static String tagToString(final int tag) {
-        final char[] c = new char[4];
-        c[0] = (char) (0xff & (tag >> 24));
-        c[1] = (char) (0xff & (tag >> 16));
-        c[2] = (char) (0xff & (tag >> 8));
-        c[3] = (char) (0xff & (tag));
-
-        return new String(c);
-    }
-
-    /**
-     * Turn a string into a tag
-     *
-     * @param tag a {@link java.lang.String} object.
-     * @return a int.
-     */
-    public static int stringToTag(final String tag) {
-        final char[] c = tag.toCharArray();
-
-        if (c.length != 4) {
-            throw new IllegalArgumentException("Bad tag length: " + tag);
-        }
-
-        return c[0] << 24 | c[1] << 16 | c[2] << 8 | c[3];
-    }
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * Put into a nice string
-	 */
     @Override
-	public String toString() {
+    public String toString() {
         String out = "    " + tagToString(getTag()) + " Table.  Data is: ";
         if (getData() == null) {
             out += "not set";

@@ -35,28 +35,36 @@ import org.jpedal.jbig2.segment.Flags;
 @Slf4j
 public class GenericRegionFlags extends Flags {
 
-	/** Constant <code>MMR="MMR"</code> */
-	public static final String MMR = "MMR";
-	/** Constant <code>GB_TEMPLATE="GB_TEMPLATE"</code> */
-	public static final String GB_TEMPLATE = "GB_TEMPLATE";
-	/** Constant <code>TPGDON="TPGDON"</code> */
-	public static final String TPGDON = "TPGDON";
+    /**
+     * Constant <code>MMR="MMR"</code>
+     */
+    public static final String MMR = "MMR";
+    /**
+     * Constant <code>GB_TEMPLATE="GB_TEMPLATE"</code>
+     */
+    public static final String GB_TEMPLATE = "GB_TEMPLATE";
+    /**
+     * Constant <code>TPGDON="TPGDON"</code>
+     */
+    public static final String TPGDON = "TPGDON";
 
-	/** {@inheritDoc} */
-	public void setFlags(final int flagsAsInt) {
-		this.flagsAsInt = flagsAsInt;
-		
-		/** extract MMR */
-		flags.put(MMR, flagsAsInt & 1);
-		
-		/** extract GB_TEMPLATE */
-		flags.put(GB_TEMPLATE, (flagsAsInt >> 1) & 3);
-		
-		/** extract TPGDON */
-		flags.put(TPGDON, (flagsAsInt >> 3) & 1);
-		
-		
-		if (JBIG2StreamDecoder.debug)
-			log.info("flags: {} ", flags);
-	}
+    /**
+     * {@inheritDoc}
+     */
+    public void setFlags(final int flagsAsInt) {
+        this.flagsAsInt = flagsAsInt;
+
+        /** extract MMR */
+        flags.put(MMR, flagsAsInt & 1);
+
+        /** extract GB_TEMPLATE */
+        flags.put(GB_TEMPLATE, (flagsAsInt >> 1) & 3);
+
+        /** extract TPGDON */
+        flags.put(TPGDON, (flagsAsInt >> 3) & 1);
+
+
+        if (JBIG2StreamDecoder.debug)
+            log.info("flags: {} ", flags);
+    }
 }

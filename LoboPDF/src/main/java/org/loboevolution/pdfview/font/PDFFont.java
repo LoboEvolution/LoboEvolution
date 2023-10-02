@@ -25,17 +25,6 @@
  */
 package org.loboevolution.pdfview.font;
 
-import java.io.File;
-import java.io.FilenameFilter;
-import java.io.IOException;
-import java.io.RandomAccessFile;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.regex.Pattern;
-
 import org.loboevolution.pdfview.BaseWatchable;
 import org.loboevolution.pdfview.PDFDebugger;
 import org.loboevolution.pdfview.PDFObject;
@@ -43,31 +32,59 @@ import org.loboevolution.pdfview.PDFParseException;
 import org.loboevolution.pdfview.font.cid.PDFCMap;
 import org.loboevolution.pdfview.font.ttf.TrueTypeFont;
 
+import java.io.File;
+import java.io.FilenameFilter;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.util.*;
+import java.util.regex.Pattern;
+
 /**
  * a Font definition for PDF files
  * Author Mike Wessler
-  *
  */
 public abstract class PDFFont {
 
     private static final FilenameFilter TTF_FILTER = (dir, name) -> name.toLowerCase().endsWith(".ttf");
 
-    private static Map<String,File> namedFontsToLocalTtfFiles = null;
+    private static Map<String, File> namedFontsToLocalTtfFiles = null;
 
-    /** the font SubType of this font */
+    /**
+     * the font SubType of this font
+     */
     private String subtype;
-    /** the postscript name of this font */
+    /**
+     * the postscript name of this font
+     */
     private String baseFont;
-    /** the font encoding (maps character ids to glyphs) */
+    /**
+     * the font encoding (maps character ids to glyphs)
+     */
     private PDFFontEncoding encoding;
-    /** the font descriptor */
+    /**
+     * the font descriptor
+     */
     private PDFFontDescriptor descriptor;
-    /** the CMap that maps this font to unicode values */
+    /**
+     * the CMap that maps this font to unicode values
+     */
     private PDFCMap unicodeMap;
-    /** a cache of glyphs indexed by character */
-    private Map<Character,PDFGlyph> charCache;
+    /**
+     * a cache of glyphs indexed by character
+     */
+    private Map<Character, PDFGlyph> charCache;
 
 
+    /**
+     * Create a PDFFont given the base font name and the font descriptor
+     *
+     * @param baseFont   the postscript name of this font
+     * @param descriptor the descriptor for the font
+     */
+    protected PDFFont(final String baseFont, final PDFFontDescriptor descriptor) {
+        setBaseFont(baseFont);
+        setDescriptor(descriptor);
+    }
 
     /**
      * get the PDFFont corresponding to the font described in a PDFObject.
@@ -90,13 +107,13 @@ public abstract class PDFFont {
      * CharProcs = (dictionary)
      * Resources = (dictionary)
      *
-     * @param obj a {@link org.loboevolution.pdfview.PDFObject} object.
+     * @param obj       a {@link org.loboevolution.pdfview.PDFObject} object.
      * @param resources a {@link java.util.HashMap} object.
      * @return a {@link org.loboevolution.pdfview.font.PDFFont} object.
      * @throws java.io.IOException if any.
      */
     public synchronized static PDFFont getFont(final PDFObject obj,
-                                               final HashMap<String,PDFObject> resources)
+                                               final HashMap<String, PDFObject> resources)
             throws IOException {
         PDFFont font = (PDFFont) obj.getCache();
         if (font != null) {
@@ -270,9 +287,7 @@ public abstract class PDFFont {
         }
     }
 
-
-    private static String[] getDefaultFontSearchPath()
-    {
+    private static String[] getDefaultFontSearchPath() {
         String osName = null;
         try {
             osName = System.getProperty("os.name");
@@ -297,7 +312,7 @@ public abstract class PDFFont {
             } catch (final SecurityException secEx) {
                 // drop through and accept default path
             }
-            return new String[] { path };
+            return new String[]{path};
         } else if (osName != null && osName.startsWith("mac")) {
             final List<String> paths = new ArrayList<>(Arrays.asList(
                     "/Library/Fonts",
@@ -439,7 +454,7 @@ public abstract class PDFFont {
      * Get a glyph for a given character code.  The glyph is returned
      * from the cache if available, or added to the cache if not
      *
-     * @param src the character code of this glyph
+     * @param src  the character code of this glyph
      * @param name the name of the glyph, or null if the name is unknown
      * @return a glyph for this character
      */
@@ -461,27 +476,16 @@ public abstract class PDFFont {
     }
 
     /**
-     * Create a PDFFont given the base font name and the font descriptor
-     *
-     * @param baseFont the postscript name of this font
-     * @param descriptor the descriptor for the font
-     */
-    protected PDFFont(final String baseFont, final PDFFontDescriptor descriptor) {
-        setBaseFont(baseFont);
-        setDescriptor(descriptor);
-    }
-
-    /**
      * Get the glyph for a given character code and name
-     *
+     * <p>
      * The preferred method of getting the glyph should be by name.  If the
      * name is null or not valid, then the character code should be used.
      * If the both the code and the name are invalid, the undefined glyph
      * should be returned.
-     *
+     * <p>
      * Note this method must *always* return a glyph.
      *
-     * @param src the character code of this glyph
+     * @param src  the character code of this glyph
      * @param name the name of this glyph or null if unknown
      * @return a glyph for this character
      */
@@ -489,7 +493,7 @@ public abstract class PDFFont {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Turn this font into a pretty String
      */
     @Override
@@ -499,7 +503,7 @@ public abstract class PDFFont {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Compare two fonts base on the baseFont
      */
     @Override
@@ -513,7 +517,7 @@ public abstract class PDFFont {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Hash a font based on its base font
      */
     @Override

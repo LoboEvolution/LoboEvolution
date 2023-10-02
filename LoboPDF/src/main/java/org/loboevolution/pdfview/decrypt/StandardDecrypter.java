@@ -26,37 +26,25 @@
 
 package org.loboevolution.pdfview.decrypt;
 
-import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.security.GeneralSecurityException;
-import java.security.InvalidAlgorithmParameterException;
-import java.security.InvalidKeyException;
-import java.security.Key;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
-import java.util.List;
-
-import javax.crypto.BadPaddingException;
-import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
-import javax.crypto.SecretKey;
-import javax.crypto.ShortBufferException;
-import javax.crypto.spec.IvParameterSpec;
-import javax.crypto.spec.SecretKeySpec;
-
 import org.loboevolution.pdfview.PDFObject;
 import org.loboevolution.pdfview.PDFParseException;
 import org.loboevolution.pdfview.PDFStringUtil;
+
+import javax.crypto.*;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
+import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.security.*;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Standard simple decrypter for versions 1, 2 and 4 of the Standard
  * password-based decryption mechanisms, as described in section 3.5 of
  * the PDF Reference version 1.7.
- *
+ * <p>
  * Author Luke Kirby
-  *
  */
 public class StandardDecrypter implements PDFDecrypter {
 
@@ -64,35 +52,16 @@ public class StandardDecrypter implements PDFDecrypter {
      * Extra salt to add to AES-based decryption keys, as per PDF Reference 1.7
      */
     private static final byte[] AESV2_SALT = {'s', 'A', 'l', 'T'};
-
-    /**
-     * Describes an encryption algorithm to be used, declaring not only the
-     * cipher type, but also key generation techniques
-     */
-    public enum EncryptionAlgorithm {
-        RC4, AESV2;
-
-        boolean isRC4() {
-            return this == RC4;
-        }
-
-        boolean isAES() {
-            return this == AESV2;
-        }
-
-    }
-
     /**
      * Padding used to bring passwords up to 32 bytes, as specified by the
      * first step of Algorithm 3.2 in the PDF Reference version 1.7.
      */
-    private static final  byte[] PW_PADDING = new byte[]{
+    private static final byte[] PW_PADDING = new byte[]{
             0x28, (byte) 0xBF, 0x4E, 0x5E, 0x4E, 0x75, (byte) 0x8A, 0x41,
             0x64, 0x00, 0x4E, 0x56, (byte) 0xFF, (byte) 0xFA, 0x01, 0x08,
             0x2E, 0x2E, 0x00, (byte) 0xB6, (byte) 0xD0, 0x68, 0x3E, (byte) 0x80,
             0x2F, 0x0C, (byte) 0xA9, (byte) 0xFE, 0x64, 0x53, 0x69, 0x7A
     };
-
     /**
      * The specification of the RC4 cipher for JCE interactions
      */
@@ -101,7 +70,6 @@ public class StandardDecrypter implements PDFDecrypter {
      * The key type for RC4 keys
      */
     private static final String KEY_RC4 = "RC4";
-
     /**
      * The specification of the AES cipher for JCE interactions. As per the
      * spec, cipher-block chanining (CBC) mode and PKCS5 padding are used
@@ -111,7 +79,10 @@ public class StandardDecrypter implements PDFDecrypter {
      * The key type for AES keys
      */
     private static final String KEY_AES = "AES";
-
+    /**
+     * The encryption algorithm being employed
+     */
+    private final EncryptionAlgorithm encryptionAlgorithm;
     /**
      * Whether the owner password was specified
      */
@@ -124,29 +95,24 @@ public class StandardDecrypter implements PDFDecrypter {
     private byte[] generalKeyBytes;
 
     /**
-     * The encryption algorithm being employed
-     */
-    private final EncryptionAlgorithm encryptionAlgorithm;
-
-    /**
      * Class constructor
      *
      * @param encryptionAlgorithm the algorithm used for encryption
-     * @param documentId the contents of the ID entry of the document's trailer
-     * dictionary; can be null, but according to the spec, shouldn't be. Is
-     * expected to be an array of two byte sequences.
-     * @param keyBitLength the length of the key in bits; should be a multiple
-     * of 8 between 40 and 128
-     * @param revision the revision of the Standard encryption security handler
-     * being employed. Should be 2, 3 or 4.
-     * @param oValue the value of the O entry from the Encrypt dictionary
-     * @param uValue the value of the U entry from the Encrypt dictionary
-     * @param pValue the value of the P entry from the Encrypt dictionary
-     * @param encryptMetadata whether metadata is being encrypted, as identified
-     * by the Encrypt dict (with default true if not explicitly identified)
-     * @param password the password; not null
-     * @throws java.io.IOException if any.
-     * @throws org.loboevolution.pdfview.decrypt.EncryptionUnsupportedByProductException if any.
+     * @param documentId          the contents of the ID entry of the document's trailer
+     *                            dictionary; can be null, but according to the spec, shouldn't be. Is
+     *                            expected to be an array of two byte sequences.
+     * @param keyBitLength        the length of the key in bits; should be a multiple
+     *                            of 8 between 40 and 128
+     * @param revision            the revision of the Standard encryption security handler
+     *                            being employed. Should be 2, 3 or 4.
+     * @param oValue              the value of the O entry from the Encrypt dictionary
+     * @param uValue              the value of the U entry from the Encrypt dictionary
+     * @param pValue              the value of the P entry from the Encrypt dictionary
+     * @param encryptMetadata     whether metadata is being encrypted, as identified
+     *                            by the Encrypt dict (with default true if not explicitly identified)
+     * @param password            the password; not null
+     * @throws java.io.IOException                                                        if any.
+     * @throws org.loboevolution.pdfview.decrypt.EncryptionUnsupportedByProductException  if any.
      * @throws org.loboevolution.pdfview.decrypt.EncryptionUnsupportedByPlatformException if any.
      */
     public StandardDecrypter(
@@ -176,8 +142,8 @@ public class StandardDecrypter implements PDFDecrypter {
             final List<byte[]> passwordBytePossibilities =
                     password.getPasswordBytes(false);
             for (int i = 0;
-                    this.generalKeyBytes == null && i < passwordBytePossibilities.size();
-                    ++i) {
+                 this.generalKeyBytes == null && i < passwordBytePossibilities.size();
+                 ++i) {
                 final byte[] passwordBytes = passwordBytePossibilities.get(i);
                 this.generalKeyBytes = checkOwnerPassword(
                         passwordBytes, firstDocIdValue, keyBitLength,
@@ -209,9 +175,11 @@ public class StandardDecrypter implements PDFDecrypter {
 
     }
 
-	/** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-	public ByteBuffer decryptBuffer(
+    public ByteBuffer decryptBuffer(
             final String cryptFilterName, final PDFObject streamObj, final ByteBuffer streamBuf)
             throws PDFParseException {
 
@@ -236,9 +204,11 @@ public class StandardDecrypter implements PDFDecrypter {
         return decryptBuffer(streamBuf, decryptionKeyBytes);
     }
 
-	/** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-	public String decryptString(final int objNum, final int objGen, final String inputBasicString)
+    public String decryptString(final int objNum, final int objGen, final String inputBasicString)
             throws PDFParseException {
         final byte[] crypted = PDFStringUtil.asBytes(inputBasicString);
         final byte[] decryptionKey = getObjectSaltedDecryptionKey(objNum, objGen);
@@ -246,21 +216,27 @@ public class StandardDecrypter implements PDFDecrypter {
         return PDFStringUtil.asBasicString(decrypted.array(), decrypted.arrayOffset(), decrypted.limit());
     }
 
-	/** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-	public boolean isOwnerAuthorised() {
+    public boolean isOwnerAuthorised() {
         return this.ownerAuthorised;
     }
 
-	/** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
-	public boolean isEncryptionPresent() {
+    public boolean isEncryptionPresent() {
         return true;
     }
-    
-	/** {@inheritDoc} */
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
-	public boolean isEncryptionPresent(final String cryptFilterName) {
+    public boolean isEncryptionPresent(final String cryptFilterName) {
         return true;
     }
 
@@ -274,9 +250,9 @@ public class StandardDecrypter implements PDFDecrypter {
      *
      * @param keyBitLength the length of the content key, in bits
      * @throws EncryptionUnsupportedByPlatformException if the platform does not
-     * support the required ciphers and key lengths
-     * @throws PDFParseException if there's an internal error while testing
-     * cipher availability
+     *                                                  support the required ciphers and key lengths
+     * @throws PDFParseException                        if there's an internal error while testing
+     *                                                  cipher availability
      */
     private void testJceAvailability(final int keyBitLength)
             throws
@@ -348,7 +324,7 @@ public class StandardDecrypter implements PDFDecrypter {
     /**
      * Decrypt a buffer
      *
-     * @param encrypted the encrypted content
+     * @param encrypted          the encrypted content
      * @param decryptionKeyBytes the key to use for decryption
      * @return a freshly allocated buffer containing the decrypted content
      * @throws PDFParseException if there's a problem decrypting the content
@@ -386,20 +362,20 @@ public class StandardDecrypter implements PDFDecrypter {
     /**
      * Setup the cipher for decryption
      *
-     * @param encrypted the encrypted content; required by AES encryption so
-     * that the initialisation vector can be established
+     * @param encrypted          the encrypted content; required by AES encryption so
+     *                           that the initialisation vector can be established
      * @param decryptionKeyBytes the bytes for the decryption key
      * @return a content decryption cypher, ready to accept input
-     * @throws PDFParseException if the encrypted buffer is malformed or on an
-     * internal error
-     * @throws NoSuchAlgorithmException if the cipher algorithm is not supported
-     * by the platform
-     * @throws NoSuchPaddingException if the cipher padding is not supported by
-     * the platform
-     * @throws InvalidKeyException if the key is invalid according to the
-     * cipher, or too long
+     * @throws PDFParseException                  if the encrypted buffer is malformed or on an
+     *                                            internal error
+     * @throws NoSuchAlgorithmException           if the cipher algorithm is not supported
+     *                                            by the platform
+     * @throws NoSuchPaddingException             if the cipher padding is not supported by
+     *                                            the platform
+     * @throws InvalidKeyException                if the key is invalid according to the
+     *                                            cipher, or too long
      * @throws InvalidAlgorithmParameterException if the cipher parameters are
-     * bad
+     *                                            bad
      */
     private Cipher createAndInitialiseContentCipher(
             final ByteBuffer encrypted,
@@ -456,7 +432,7 @@ public class StandardDecrypter implements PDFDecrypter {
      * @param objNum the object number
      * @param objGen the object generation
      * @return the key to be used for decrypting data associated with the object
-     *         numbered so
+     * numbered so
      * @throws PDFParseException if the MD5 digest is not available
      */
     private byte[] getObjectSaltedDecryptionKey(final int objNum, final int objGen)
@@ -514,7 +490,7 @@ public class StandardDecrypter implements PDFDecrypter {
      * @param objNum the object number
      * @param objGen the object generation
      * @throws PDFParseException if the object numbering indicates that they
-     * aren't true object numbers
+     *                           aren't true object numbers
      */
     private void checkNums(final int objNum, final int objGen)
             throws PDFParseException {
@@ -532,16 +508,16 @@ public class StandardDecrypter implements PDFDecrypter {
      * document configuration. Correponds to Algorithms 3.4 and 3.5 of the
      * PDF Reference version 1.7
      *
-     * @param generalKey the general encryption key
+     * @param generalKey      the general encryption key
      * @param firstDocIdValue the value of the first element in the document's
-     * ID entry in the trailer dictionary
-     * @param revision the revision of the security handler
+     *                        ID entry in the trailer dictionary
+     * @param revision        the revision of the security handler
      * @return the U value for the given configuration
-     * @throws GeneralSecurityException if there's an error getting required
-     * ciphers, etc. (unexpected, since a check for algorithm availability is
-     * performed on construction)
+     * @throws GeneralSecurityException                if there's an error getting required
+     *                                                 ciphers, etc. (unexpected, since a check for algorithm availability is
+     *                                                 performed on construction)
      * @throws EncryptionUnsupportedByProductException if the revision is not
-     * supported
+     *                                                 supported
      */
     private byte[] calculateUValue(
             final byte[] generalKey, final byte[] firstDocIdValue, final int revision)
@@ -630,14 +606,14 @@ public class StandardDecrypter implements PDFDecrypter {
      * owner password. Corresponds to Algorithm 3.3 of the PDF Reference
      * version 1.7.
      *
-     * @see #checkOwnerPassword
      * @param ownerPassword the owner password
-     * @param userPassword the user password
-     * @param keyBitLength the key length in bits (40-128)
-     * @param revision the security handler revision
+     * @param userPassword  the user password
+     * @param keyBitLength  the key length in bits (40-128)
+     * @param revision      the security handler revision
      * @return the O value entry
      * @throws GeneralSecurityException if ciphers are unavailable or
-     *  inappropriately used
+     *                                  inappropriately used
+     * @see #checkOwnerPassword
      */
     private byte[] calculuateOValue(
             final byte[] ownerPassword, final byte[] userPassword,
@@ -674,24 +650,24 @@ public class StandardDecrypter implements PDFDecrypter {
      * Check to see whether a given password is the owner password. Corresponds
      * to algorithm 3.6 of PDF Reference version 1.7.
      *
-     * @param ownerPassword the suggested owner password (may be null or
-     * empty)
+     * @param ownerPassword   the suggested owner password (may be null or
+     *                        empty)
      * @param firstDocIdValue the byte stream from the first element of the
-     *  value of the ID entry in the trailer dictionary
-     * @param keyBitLength the key length in bits
-     * @param revision the security handler revision
-     * @param oValue the O value from the Encrypt dictionary
-     * @param uValue the U value from the Encrypt dictionary
-     * @param pValue the P value from the Encrypt dictionary
+     *                        value of the ID entry in the trailer dictionary
+     * @param keyBitLength    the key length in bits
+     * @param revision        the security handler revision
+     * @param oValue          the O value from the Encrypt dictionary
+     * @param uValue          the U value from the Encrypt dictionary
+     * @param pValue          the P value from the Encrypt dictionary
      * @param encryptMetadata the EncryptMetadata entry from the Encrypt dictionary
-     *  (or false if not present or revision &lt;= 3)
+     *                        (or false if not present or revision &lt;= 3)
      * @return the general/user key bytes if the owner password is currect,
-     *  <code>null</code> otherwise
-     * @throws GeneralSecurityException if there's a problem with
-     * cipher or digest usage; unexpected
+     * <code>null</code> otherwise
+     * @throws GeneralSecurityException                if there's a problem with
+     *                                                 cipher or digest usage; unexpected
      * @throws EncryptionUnsupportedByProductException if PDFRenderer doesn't
-     * support the security handler revision
-     * @throws PDFParseException if the document is malformed
+     *                                                 support the security handler revision
+     * @throws PDFParseException                       if the document is malformed
      */
     private byte[] checkOwnerPassword(
             final byte[] ownerPassword, final byte[] firstDocIdValue, final int keyBitLength,
@@ -752,9 +728,10 @@ public class StandardDecrypter implements PDFDecrypter {
      * Establish the key to be used for the generation and validation
      * of the user password via the O entry. Corresponds to steps 1-4 in
      * Algorithm 3.3 of the PDF Reference version 1.7.
+     *
      * @param ownerPassword the owner password
-     * @param keyBitLength the length of the key in bits
-     * @param revision the security handler revision
+     * @param keyBitLength  the length of the key in bits
+     * @param revision      the security handler revision
      * @return the key bytes to use for generation/validation of the O entry
      * @throws GeneralSecurityException if there's a problem wranling ciphers
      */
@@ -795,23 +772,24 @@ public class StandardDecrypter implements PDFDecrypter {
      * Check to see whether a provided user password is correct with respect
      * to an Encrypt dict configuration. Corresponds to algorithm 3.6 of
      * the PDF Reference version 1.7
-     * @param userPassword the user password to test; may be null or empty
+     *
+     * @param userPassword    the user password to test; may be null or empty
      * @param firstDocIdValue the byte stream from the first element of the
-     *  value of the ID entry in the trailer dictionary
-     * @param keyBitLength the length of the key in bits
-     * @param revision the security handler revision
-     * @param oValue the O value from the Encrypt dictionary
-     * @param uValue the U value from the Encrypt dictionary
-     * @param pValue the P value from the Encrypt dictionary
+     *                        value of the ID entry in the trailer dictionary
+     * @param keyBitLength    the length of the key in bits
+     * @param revision        the security handler revision
+     * @param oValue          the O value from the Encrypt dictionary
+     * @param uValue          the U value from the Encrypt dictionary
+     * @param pValue          the P value from the Encrypt dictionary
      * @param encryptMetadata the EncryptMetadata entry from the Encrypt dictionary
-     *  (or false if not present or revision &lt;= 3)
+     *                        (or false if not present or revision &lt;= 3)
      * @return the general/user encryption key if the user password is correct,
-     *  or null if incorrect
-     * @throws GeneralSecurityException if there's a problem with
-     * cipher or digest usage; unexpected
+     * or null if incorrect
+     * @throws GeneralSecurityException                if there's a problem with
+     *                                                 cipher or digest usage; unexpected
      * @throws EncryptionUnsupportedByProductException if PDFRenderer doesn't
-     * support the security handler revision
-     * @throws PDFParseException if the document is improperly constructed
+     *                                                 support the security handler revision
+     * @throws PDFParseException                       if the document is improperly constructed
      */
     private byte[] checkUserPassword(
             final byte[] userPassword, final byte[] firstDocIdValue, final int keyBitLength,
@@ -860,23 +838,22 @@ public class StandardDecrypter implements PDFDecrypter {
         return generalKey;
     }
 
-
     /**
      * Determine what the general encryption key is, given a configuration. This
      * corresponds to Algorithm 3.2 of PDF Reference version 1.7.
      *
-     * @param userPassword the desired user password; may be null or empty
+     * @param userPassword    the desired user password; may be null or empty
      * @param firstDocIdValue the byte stream from the first element of the
-     * value of the ID entry in the trailer dictionary
-     * @param keyBitLength the length of the key in bits
-     * @param revision the security handler revision
-     * @param oValue the O value from the Encrypt dictionary
-     * @param pValue the P value from the Encrypt dictionary
+     *                        value of the ID entry in the trailer dictionary
+     * @param keyBitLength    the length of the key in bits
+     * @param revision        the security handler revision
+     * @param oValue          the O value from the Encrypt dictionary
+     * @param pValue          the P value from the Encrypt dictionary
      * @param encryptMetadata the EncryptMetadata entry from the Encrypt
-     * dictionary (or false if not present or revision &lt;= 3)
+     *                        dictionary (or false if not present or revision &lt;= 3)
      * @return the general encryption key
      * @throws GeneralSecurityException if an error occurs when obtaining
-     *  and operating ciphers/digests
+     *                                  and operating ciphers/digests
      */
     private byte[] calculateGeneralEncryptionKey(
             final byte[] userPassword, final byte[] firstDocIdValue, final int keyBitLength,
@@ -951,6 +928,7 @@ public class StandardDecrypter implements PDFDecrypter {
     /**
      * Pad a password as per step 1 of Algorithm 3.2 of the PDF Reference
      * version 1.7
+     *
      * @param password the password, may be null or empty
      * @return the padded password, always 32 bytes long
      */
@@ -976,7 +954,7 @@ public class StandardDecrypter implements PDFDecrypter {
         // limit password to 32 bytes
         final int numContributingPasswordBytes =
                 password.length > padded.length ?
-                padded.length : password.length;
+                        padded.length : password.length;
         System.arraycopy(password, 0, padded, 0, numContributingPasswordBytes);
         // Copy padding
         if (password.length < padded.length) {
@@ -990,9 +968,9 @@ public class StandardDecrypter implements PDFDecrypter {
      * Encrypt some bytes
      *
      * @param cipher the cipher
-     * @param input the plaintext
+     * @param input  the plaintext
      * @return the crypt text
-     * @throws BadPaddingException if there's bad padding
+     * @throws BadPaddingException       if there's bad padding
      * @throws IllegalBlockSizeException if the block size is bad
      */
     private byte[] crypt(final Cipher cipher, final byte[] input)
@@ -1004,7 +982,7 @@ public class StandardDecrypter implements PDFDecrypter {
      * Initialise a cipher for encryption
      *
      * @param cipher the cipher
-     * @param key the encryption key
+     * @param key    the encryption key
      * @throws InvalidKeyException if the key is invalid for the cipher
      */
     private void initEncryption(final Cipher cipher, final SecretKey key)
@@ -1018,10 +996,10 @@ public class StandardDecrypter implements PDFDecrypter {
      * Refer to the documentation of the algorithm steps where this is called.
      *
      * @param shuffle the bytes to be shuffled
-     * @param key the original key
-     * @param rc4 the cipher to use
+     * @param key     the original key
+     * @param rc4     the cipher to use
      * @throws GeneralSecurityException if there's a problem with cipher
-     *  operation
+     *                                  operation
      */
     private void rc4shuffle(final byte[] shuffle, final byte[] key, final Cipher rc4)
             throws GeneralSecurityException {
@@ -1039,12 +1017,13 @@ public class StandardDecrypter implements PDFDecrypter {
     /**
      * Reverse the {@link #rc4shuffle} operation, and the operation
      * that invariable preceeds it, thereby obtaining an original message
-     * @param rc4 the RC4 cipher to use
+     *
+     * @param rc4     the RC4 cipher to use
      * @param shuffle the bytes in which shuffling will take place; unshuffling
-     *  happens in place
-     * @param key the encryption key
+     *                happens in place
+     * @param key     the encryption key
      * @throws GeneralSecurityException if there's a problem with cipher
-     *  operation
+     *                                  operation
      */
     private void rc4unshuffle(final Cipher rc4, final byte[] shuffle, final byte[] key)
             throws GeneralSecurityException {
@@ -1063,12 +1042,13 @@ public class StandardDecrypter implements PDFDecrypter {
 
     /**
      * Encrypt/decrypt something in place
-     * @param rc4 the cipher to use; must be a stream cipher producing
-     *  identical output length to input (e.g., RC4)
+     *
+     * @param rc4    the cipher to use; must be a stream cipher producing
+     *               identical output length to input (e.g., RC4)
      * @param buffer the buffer to read input from and write output to
      * @throws IllegalBlockSizeException if an inappropriate cipher is used
-     * @throws ShortBufferException if an inappropriate cipher is used
-     * @throws BadPaddingException if an inappropriate cipher is used
+     * @throws ShortBufferException      if an inappropriate cipher is used
+     * @throws BadPaddingException       if an inappropriate cipher is used
      */
     private void cryptInPlace(final Cipher rc4, final byte[] buffer)
             throws IllegalBlockSizeException, ShortBufferException, BadPaddingException {
@@ -1077,10 +1057,11 @@ public class StandardDecrypter implements PDFDecrypter {
 
     /**
      * Setup a cipher for decryption
+     *
      * @param cipher the cipher
-     * @param aKey the cipher key
+     * @param aKey   the cipher key
      * @throws InvalidKeyException if the key is of an unacceptable size or
-     *  doesn't belong to the cipher
+     *                             doesn't belong to the cipher
      */
     private void initDecryption(final Cipher cipher, final Key aKey)
             throws InvalidKeyException {
@@ -1090,10 +1071,11 @@ public class StandardDecrypter implements PDFDecrypter {
     /**
      * Create a new RC4 cipher. Should always be available for supported
      * platforms.
+     *
      * @return the cipher
      * @throws NoSuchAlgorithmException if the RC4 cipher is unavailable
-     * @throws NoSuchPaddingException should not happen, as no padding
-     *  is specified
+     * @throws NoSuchPaddingException   should not happen, as no padding
+     *                                  is specified
      */
     private Cipher createRC4Cipher()
             throws NoSuchAlgorithmException, NoSuchPaddingException {
@@ -1103,9 +1085,10 @@ public class StandardDecrypter implements PDFDecrypter {
     /**
      * Create a new AES cipher. Should always be available for supported
      * platforms.
+     *
      * @return the new cipher
      * @throws NoSuchAlgorithmException if the AES cipher is unavailable
-     * @throws NoSuchPaddingException if the required padding is unavailable
+     * @throws NoSuchPaddingException   if the required padding is unavailable
      */
     private Cipher createAESCipher()
             throws NoSuchAlgorithmException, NoSuchPaddingException {
@@ -1115,6 +1098,7 @@ public class StandardDecrypter implements PDFDecrypter {
     /**
      * Create an MD5 digest. Should always be available for supported
      * platforms.
+     *
      * @return the MD5 digest
      * @throws NoSuchAlgorithmException if the digest is not available
      */
@@ -1135,14 +1119,32 @@ public class StandardDecrypter implements PDFDecrypter {
 
     /**
      * Hash into an existing byte array
-     * @param md5 the MD5 digest
+     *
+     * @param md5  the MD5 digest
      * @param hash the hash destination
      * @throws GeneralSecurityException if there's a problem hashing; e.g.,
-     *  if the buffer is too small
+     *                                  if the buffer is too small
      */
     private void digestTo(final MessageDigest md5, final byte[] hash)
-                throws GeneralSecurityException {
+            throws GeneralSecurityException {
         md5.digest(hash, 0, hash.length);
+    }
+
+    /**
+     * Describes an encryption algorithm to be used, declaring not only the
+     * cipher type, but also key generation techniques
+     */
+    public enum EncryptionAlgorithm {
+        RC4, AESV2;
+
+        boolean isRC4() {
+            return this == RC4;
+        }
+
+        boolean isAES() {
+            return this == AESV2;
+        }
+
     }
 
 

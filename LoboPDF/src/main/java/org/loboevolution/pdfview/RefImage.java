@@ -25,7 +25,7 @@
  */
 package org.loboevolution.pdfview;
 
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
@@ -37,28 +37,30 @@ import java.awt.image.BufferedImage;
  */
 public class RefImage extends BufferedImage {
 
-    /** a strong reference to the graphics object */
+    /**
+     * a strong reference to the graphics object
+     */
     private Graphics2D g;
 
     /**
      * Creates a new instance of RefImage
      *
-     * @param width a int.
+     * @param width  a int.
      * @param height a int.
-     * @param type a int.
+     * @param type   a int.
      */
     public RefImage(final int width, final int height, final int type) {
         super(width, height, type);
     }
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * Create a graphics object only if it is currently null, otherwise
-	 * return the existing graphics object.
-	 */
+    /**
+     * {@inheritDoc}
+     * <p>
+     * Create a graphics object only if it is currently null, otherwise
+     * return the existing graphics object.
+     */
     @Override
-	public Graphics2D createGraphics() {
+    public Graphics2D createGraphics() {
         if (this.g == null) {
             this.g = super.createGraphics();
         }

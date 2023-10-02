@@ -27,53 +27,50 @@ package org.jpedal.jbig2.image;
 
 /**
  * <p>BitmapPointer class.</p>
- *
-  *
-  *
  */
 public class BitmapPointer {
-	private int x; 
-	private int y;
-	private final int width;
-	private final int height;
-	private int count;
-	private boolean output;
-	private final JBIG2Bitmap bitmap;
+    private final int width;
+    private final int height;
+    private final JBIG2Bitmap bitmap;
+    private int x;
+    private int y;
+    private int count;
+    private boolean output;
 
-	/**
-	 * <p>Constructor for BitmapPointer.</p>
-	 *
-	 * @param bitmap a {@link org.jpedal.jbig2.image.JBIG2Bitmap} object.
-	 */
-	public BitmapPointer(final JBIG2Bitmap bitmap) {
-		this.bitmap = bitmap;
-		this.height = bitmap.getHeight();
-		this.width = bitmap.getWidth();
-	}
+    /**
+     * <p>Constructor for BitmapPointer.</p>
+     *
+     * @param bitmap a {@link org.jpedal.jbig2.image.JBIG2Bitmap} object.
+     */
+    public BitmapPointer(final JBIG2Bitmap bitmap) {
+        this.bitmap = bitmap;
+        this.height = bitmap.getHeight();
+        this.width = bitmap.getWidth();
+    }
 
-	/**
-	 * <p>setPointer.</p>
-	 *
-	 * @param x a int.
-	 * @param y a int.
-	 */
-	public void setPointer(final int x, final int y) {
-		this.x = x;
-		this.y = y;
-		output = this.y >= 0 && this.y < height && this.x < width;
-		count = this.y * width;
-	}
+    /**
+     * <p>setPointer.</p>
+     *
+     * @param x a int.
+     * @param y a int.
+     */
+    public void setPointer(final int x, final int y) {
+        this.x = x;
+        this.y = y;
+        output = this.y >= 0 && this.y < height && this.x < width;
+        count = this.y * width;
+    }
 
-	/**
-	 * <p>nextPixel.</p>
-	 *
-	 * @return a int.
-	 */
-	public int nextPixel() {
+    /**
+     * <p>nextPixel.</p>
+     *
+     * @return a int.
+     */
+    public int nextPixel() {
 
-		// fairly certain the byte can be cached here - seems to work fine. only
-		// problem would be if cached pixel was modified, and the modified
-		// version needed.
+        // fairly certain the byte can be cached here - seems to work fine. only
+        // problem would be if cached pixel was modified, and the modified
+        // version needed.
 //		if (y < 0 || y >= height || x >= width) {
 //			return 0;
 //		} else if (x < 0) {
@@ -100,22 +97,22 @@ public class BitmapPointer {
 //		x++;
 //
 //		return pixel;
-		
-		if (!output) {
-			return 0;
-		} else if (x < 0 || x >= width) {
-			x++;
-			return 0;
-		}
+
+        if (!output) {
+            return 0;
+        } else if (x < 0 || x >= width) {
+            x++;
+            return 0;
+        }
 		/*if ((output == false) || x < 0) {
 			x++;
 			return 0;
 		}*/
-		//int pixel = bitmap.getPixel(x, y);
-		//x++;
-		return bitmap.data.get(count + x++) ? 1 : 0;
-		
+        //int pixel = bitmap.getPixel(x, y);
+        //x++;
+        return bitmap.data.get(count + x++) ? 1 : 0;
 
-		//return pixel;
-	}
+
+        //return pixel;
+    }
 }

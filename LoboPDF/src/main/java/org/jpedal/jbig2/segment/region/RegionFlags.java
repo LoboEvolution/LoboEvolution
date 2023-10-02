@@ -35,17 +35,21 @@ import org.jpedal.jbig2.segment.Flags;
 @Slf4j
 public class RegionFlags extends Flags {
 
-	/** Constant <code>EXTERNAL_COMBINATION_OPERATOR="EXTERNAL_COMBINATION_OPERATOR"</code> */
-	public static final String EXTERNAL_COMBINATION_OPERATOR = "EXTERNAL_COMBINATION_OPERATOR";
+    /**
+     * Constant <code>EXTERNAL_COMBINATION_OPERATOR="EXTERNAL_COMBINATION_OPERATOR"</code>
+     */
+    public static final String EXTERNAL_COMBINATION_OPERATOR = "EXTERNAL_COMBINATION_OPERATOR";
 
-	/** {@inheritDoc} */
-	public void setFlags(final int flagsAsInt) {
-		this.flagsAsInt = flagsAsInt;
+    /**
+     * {@inheritDoc}
+     */
+    public void setFlags(final int flagsAsInt) {
+        this.flagsAsInt = flagsAsInt;
 
-		/** extract EXTERNAL_COMBINATION_OPERATOR */
-		flags.put(EXTERNAL_COMBINATION_OPERATOR, flagsAsInt & 7);
+        /** extract EXTERNAL_COMBINATION_OPERATOR */
+        flags.put(EXTERNAL_COMBINATION_OPERATOR, flagsAsInt & 7);
 
-		if (JBIG2StreamDecoder.debug)
-			log.info("flags: {} ", flags);
-	}
+        if (JBIG2StreamDecoder.debug)
+            log.info("flags: {} ", flags);
+    }
 }
