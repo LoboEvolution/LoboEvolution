@@ -46,6 +46,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.RandomAccessFile;
 import java.lang.reflect.InvocationTargetException;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.ByteBuffer;
@@ -325,6 +326,19 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
     }
 
 	/**
+	 * open a URL to a PDF file. The file is read in and processed with an
+	 * in-memory buffer.
+	 *
+	 * @param url
+	 *            the url
+	 * @throws java.io.IOException if any.
+	 */
+	public void openFile(final URL url, final URLConnection httpcon) throws IOException {
+		final ByteBuffer byteBuffer = BytesUtilities.readStream(httpcon.getInputStream());
+		openPDFByteBuffer(byteBuffer, url.toString(), url.getFile());
+	}
+
+	/**
 	 * <p>
 	 * Open a specific pdf file. Creates a DocumentInfo from the file, and opens
 	 * that.
@@ -360,13 +374,13 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 	 *            the name
 	 */
 	private void openPDFByteBuffer(final ByteBuffer buf, final String path, final String name) {
-		
 		// create a PDFFile from the data
 		final PDFFile newfile;
 		
 		try {
 			newfile = new PDFFile(buf);
 		} catch (final IOException e) {
+            e.printStackTrace();
 			openError(path + " doesn't appear to be a PDF file.");
 			return;
 		}
@@ -407,6 +421,25 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 	public void doOpen(final String name) {
 		try {
 			openFile(new URL(name));
+		} catch (final IOException ioe) {
+			try {
+				openFile(new File(name));
+			} catch (final IOException ex) {
+				ex.printStackTrace();
+			}
+		}
+	}
+
+	/**
+	 * Open a local file, given a string filename.
+	 *
+	 * @param name the name of the file to open
+	 * @param url
+	 * @param httpcon
+	 */
+	public void doOpen(final String name, final URL url, final URLConnection httpcon) {
+		try {
+			openFile(url, httpcon);
 		} catch (final IOException ioe) {
 			try {
 				openFile(new File(name));

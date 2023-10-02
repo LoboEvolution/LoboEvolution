@@ -50,6 +50,7 @@ import java.awt.image.BufferedImage;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLConnection;
 
 /**
  * <p>GoAction class.</p>
@@ -83,14 +84,15 @@ public class GoAction extends AbstractAction {
 
 			final URL url = new URL(addressBarText);
 			final String filename = url.getFile();
-			final HttpURLConnection httpcon = (HttpURLConnection) url.openConnection();
-			httpcon.addRequestProperty("User-Agent", UserAgent.getUserAgent());
-			httpcon.getHeaderField("Set-Cookie");
-			final String mimeType = httpcon.getContentType();
+
+			final URLConnection connection = url.openConnection();
+			connection.addRequestProperty("User-Agent", UserAgent.getUserAgent());
+			connection.getHeaderField("Set-Cookie");
+			final String mimeType = connection.getContentType();
 			switch (MimeType.get(mimeType)) {
 				case PDF:
 					final PDFViewer viewer = new PDFViewer(true);
-					viewer.doOpen(addressBarText);
+					viewer.doOpen(addressBarText, url, connection);
 					break;
 				case ICO:
 				case BMP:
@@ -105,29 +107,30 @@ public class GoAction extends AbstractAction {
 					}
 					break;
 				case TXT:
-					goUrlTxt(addressBarText, httpcon, getSyntaxConstants(url), filename);
+					goUrlTxt(addressBarText, connection, getSyntaxConstants(url), filename);
 					break;
 				case JS:
-					goUrlTxt(addressBarText, httpcon, SyntaxConstants.SYNTAX_STYLE_JAVASCRIPT, filename);
+					goUrlTxt(addressBarText, connection, SyntaxConstants.SYNTAX_STYLE_JAVASCRIPT, filename);
 					break;
 				case CSS:
-					goUrlTxt(addressBarText, httpcon, SyntaxConstants.SYNTAX_STYLE_CSS, filename);
+					goUrlTxt(addressBarText, connection, SyntaxConstants.SYNTAX_STYLE_CSS, filename);
 					break;
 				case XML:
-					goUrlTxt(addressBarText, httpcon, SyntaxConstants.SYNTAX_STYLE_XML, filename);
+					goUrlTxt(addressBarText, connection, SyntaxConstants.SYNTAX_STYLE_XML, filename);
 					break;
 				case JSON:
-					goUrlTxt(addressBarText, httpcon, SyntaxConstants.SYNTAX_STYLE_JSON, filename);
+					goUrlTxt(addressBarText, connection, SyntaxConstants.SYNTAX_STYLE_JSON, filename);
 					break;
 				case HTML:
 				case XHTML:
 				case SVG:
-					goURL(addressBarText, httpcon);
+					goURL(addressBarText, connection);
 					break;
 				default:
 					break;
 			}
 		} catch (final Exception e) {
+			e.printStackTrace();
 			if (!addressBarText.matches("^\\w+?://.*")) {
 				final SearchEngineStore searchEngine = new ToolsStore().getSelectedSearchEngine();
 				addressBarText = searchEngine.getBaseUrl() + addressBarText;
@@ -136,15 +139,15 @@ public class GoAction extends AbstractAction {
 		}
 	}
 
-	private void goURL(final String text, final HttpURLConnection httpcon) {
+	private void goURL(final String text, final URLConnection connection) {
 		final ITabbedPane tabbedPane = panel.getTabbedPane();
 		tabbedPane.setComponentPopupMenu(this.panel);
 		final int indexPanel = tabbedPane.getSelectedIndex();
 		final HtmlPanel htmlPanel;
-		if (httpcon == null) {
+		if (connection == null) {
 			htmlPanel = NavigatorFrame.createHtmlPanel(panel, text);
 		} else {
-			htmlPanel = NavigatorFrame.createHtmlPanel(panel, text, httpcon);
+			htmlPanel = NavigatorFrame.createHtmlPanel(panel, text, connection);
 		}
 
 		final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) htmlPanel.getRootNode();
@@ -180,10 +183,10 @@ public class GoAction extends AbstractAction {
 	}
 
 
-	private void goUrlTxt(final String fullURL, final HttpURLConnection httpcon, final String mimeType, final String title) throws Exception {
+	private void goUrlTxt(final String fullURL, final URLConnection connection, final String mimeType, final String title) throws Exception {
 		final ITabbedPane tabbedPane = panel.getTabbedPane();
 		final int indexPanel = tabbedPane.getSelectedIndex();
-		final InputStream in = httpcon.getInputStream();
+		final InputStream in = connection.getInputStream();
 		final String source = IORoutines.loadAsText(in, "UTF-8");
 		final RSyntaxTextArea textArea = new RSyntaxTextArea(source);
 		textArea.setSyntaxEditingStyle(mimeType);
