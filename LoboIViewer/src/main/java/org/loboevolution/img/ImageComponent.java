@@ -42,8 +42,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import javax.swing.CellRendererPane;
-import javax.swing.JComponent;
+import javax.swing.*;
 
 
 /**
@@ -179,6 +178,7 @@ class ImageComponent extends JComponent {
 	public void setImage(final BufferedImage newImage) {
 		final BufferedImage oldImage = image;
 		image = newImage;
+		resizePanel();
 		paintManager.notifyChanged();
 		if (!Objects.equals(oldImage, newImage) && 
 			(oldImage == null || newImage == null || 
@@ -351,17 +351,18 @@ class ImageComponent extends JComponent {
 		zoomFactor = newZoomFactor;
 		final boolean canRescroll = getViewer().getSynchronizer().zoomFactorChangedCanIRescroll(getViewer());
 		if (getResizeStrategy() == ResizeStrategy.CUSTOM_ZOOM) {
+			//resize the panel shrink if needed
+			resizePanel();
 			resizeNow();
-			// do not rescroll if we're following another viewer; the scrolling will be
-			// synchronized later
+			// do not rescroll if we're following another viewer; the scrolling will be synchronized later
 			if (canRescroll) {
 				rescroller.rescroll();
-				getViewer().getSynchronizer().doneRescrolling(getViewer());
+				viewer.getSynchronizer().doneRescrolling(viewer);
 			}
 		} else {
 			// no rescrolling is necessary, actually
 			if (canRescroll)
-				getViewer().getSynchronizer().doneRescrolling(getViewer());
+				viewer.getSynchronizer().doneRescrolling(viewer);
 		}
 		getPropertyChangeSupport().firePropertyChange("zoomFactor", oldZoomFactor, newZoomFactor);
 	}
@@ -472,6 +473,23 @@ class ImageComponent extends JComponent {
 
 	private double getSizeRatio() {
 		return Math.min(getWidth() / (double) image.getWidth(), getHeight() / (double) image.getHeight());
+	}
+
+	protected void resizePanel() {
+		if (zoomFactor <= 1.0) {
+			this.viewer.getComponent().setPreferredSize(getPreferredSize());
+			this.viewer.getScrollPane().setPreferredSize(getPreferredSize());
+			this.viewer.getScrollPane().setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+			this.viewer.getScrollPane().setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+		} else {
+			//back to image original size.
+			final Dimension original = new Dimension(image.getWidth(), image.getHeight());
+			this.viewer.getComponent().setPreferredSize(original);
+			this.viewer.getScrollPane().setPreferredSize(original);
+			this.viewer.getScrollPane().setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+			this.viewer.getScrollPane().setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+
+		}
 	}
 
 	/**

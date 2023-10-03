@@ -26,10 +26,7 @@
 
 package org.loboevolution.img;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.LayoutManager;
-import java.awt.Point;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -77,6 +74,7 @@ public final class ImageViewer {
 	private boolean statusBarVisible = false;
 	private final PropertyChangeSupport propertyChangeSupport;
 	private Synchronizer synchronizer;
+	private final JPopupMenu popup;
 
 	/**
 	 * Creates a new image viewer. Initially it will be empty, and it will have a
@@ -110,7 +108,7 @@ public final class ImageViewer {
 	 */
 	public ImageViewer(final BufferedImage image, final boolean defaultPopupMenu) {
 		propertyChangeSupport = new PropertyChangeSupport(this);
-		panel = new JPanel(new BorderLayout());
+		panel = new JPanel(new FlowLayout());
 		scroller = new JScrollPane() {
 			private static final long serialVersionUID = 1L;
 
@@ -145,40 +143,13 @@ public final class ImageViewer {
 		scroller.setViewportView(view.getComponent());
 		theImage.setImage(image);
 
-		panel.add(scroller, BorderLayout.CENTER);
+		panel.add(scroller);
 
 		setStatusBar(new DefaultStatusBar());
+		popup = new DefaultViewerPopup(ImageViewer.this);
 
 		if (defaultPopupMenu) {
-			theImage.addMouseListener(new MouseAdapter() {
-				JPopupMenu popup;
-
-				private void showPopup(final MouseEvent e) {
-					e.consume();
-					if (popup == null)
-						popup = new DefaultViewerPopup(ImageViewer.this);
-					Point p = panel.getPopupLocation(e);
-					if (p == null) {
-						p = e.getPoint();
-					}
-					popup.show(e.getComponent(), p.x, p.y);
-				}
-
-				@Override
-				public void mousePressed(final MouseEvent e) {
-					if (e.isPopupTrigger()) {
-						showPopup(e);
-					}
-				}
-
-				@Override
-				public void mouseReleased(final MouseEvent e) {
-					if (e.isPopupTrigger()) {
-						showPopup(e);
-					}
-				}
-			});
-
+			theImage.addMouseListener(new ImageMouseAdapter(popup, panel) );
 		}
 	}
 
@@ -663,5 +634,9 @@ public final class ImageViewer {
 	 */
 	public Point pointToPixel(final Point p, final boolean clipToImage) {
 		return theImage.pointToPixel(p, clipToImage);
+	}
+
+	public JPopupMenu getPopupMenu() {
+		return popup;
 	}
 }
