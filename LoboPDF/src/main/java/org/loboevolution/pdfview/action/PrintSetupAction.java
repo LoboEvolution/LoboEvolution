@@ -26,27 +26,28 @@
 
 package org.loboevolution.pdfview.action;
 
+import org.loboevolution.config.DesktopConfig;
 import org.loboevolution.pdf.PDFViewer;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 /**
- * <p>SetupAction class.</p>
+ * <p>PrintSetupAction class.</p>
  */
-public class SetupAction extends AbstractAction {
+public class PrintSetupAction extends AbstractAction {
 
     private static final long serialVersionUID = 1L;
 
     private final PDFViewer dialog;
 
     /**
-     * <p>Constructor for SetupAction.</p>
+     * <p>Constructor for PrintSetupAction.</p>
      *
      * @param dialog a {@link org.loboevolution.pdf.PDFViewer} object.
      */
-    public SetupAction(final PDFViewer dialog) {
-        super("Page setup...");
+    public PrintSetupAction(final PDFViewer dialog) {
+        super("Print setup...", new ImageIcon(DesktopConfig.getResourceFile("print-setup.png",DesktopConfig.PATH_PDF_IMAGE)));
         this.dialog = dialog;
     }
 

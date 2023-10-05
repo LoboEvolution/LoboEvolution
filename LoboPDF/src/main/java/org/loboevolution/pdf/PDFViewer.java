@@ -129,9 +129,9 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
     private PageBuilder pb;
 
     /**
-     * The setup action.
+     * The print setup action.
      */
-    private SetupAction pageSetupAction;
+    private PrintSetupAction printSetupAction;
 
     /**
      * The print action.
@@ -186,7 +186,7 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 
     private void createAndShowGUI(final boolean useThumbs) {
         doThumb = useThumbs;
-        pageSetupAction = new SetupAction(this);
+        printSetupAction = new PrintSetupAction(this);
         printAction = new PrintAction(this);
         fitHeightAction = new FitHeightAction(this);
         fitAction = new FitAction(this);
@@ -224,7 +224,7 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 
         final JMenuBar mb = new JMenuBar();
         final JMenu file = new JMenu("File");
-        file.add(pageSetupAction);
+        file.add(printSetupAction);
         file.addSeparator();
         file.add(printAction);
         mb.add(file);
@@ -730,23 +730,5 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
                 log.error(eio.getMessage(), eio);
             }
         }
-    }
-
-    /**
-     * utility method to get an icon from the resources of this class.
-     *
-     * @param name the name of the icon
-     * @return the icon, or null if the icon wasn't found.
-     */
-    public Icon getIcon(final String name) {
-        Icon icon = null;
-        final URL url;
-        try {
-            url = getClass().getResource(name);
-            icon = new ImageIcon(url);
-        } catch (final Exception e) {
-            log.error(e.getMessage(), e);
-        }
-        return icon;
     }
 }

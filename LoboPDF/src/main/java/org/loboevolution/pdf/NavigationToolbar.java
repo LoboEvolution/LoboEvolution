@@ -26,6 +26,7 @@
 
 package org.loboevolution.pdf;
 
+import org.loboevolution.config.DesktopConfig;
 import org.loboevolution.pdfview.PDFFile;
 
 import javax.swing.*;
@@ -71,9 +72,9 @@ public class NavigationToolbar extends JToolBar {
 
         add(Box.createHorizontalGlue());
 
-        addButton("Rewind To Start", "/org/loboevolution/images/start.gif", FIRSTPAGE);
-        addButton("Back 5 Pages", "/org/loboevolution/images/fback.gif", FBACKPAGE);
-        addButton("Back", "/org/loboevolution/images/back.gif", BACKPAGE);
+        addButton("Rewind To Start", "start.gif", FIRSTPAGE);
+        addButton("Back 5 Pages", "fback.gif", FBACKPAGE);
+        addButton("Back", "back.gif", BACKPAGE);
 
         add(new JLabel("Page"));
         currentPageBox.setText("1");
@@ -82,9 +83,9 @@ public class NavigationToolbar extends JToolBar {
         add(currentPageBox);
         add(totalNoOfPages);
 
-        addButton("Forward", "/org/loboevolution/images/forward.gif", FORWARDPAGE);
-        addButton("Forward 5 Pages", "/org/loboevolution/images/fforward.gif", FFORWARDPAGE);
-        addButton("Fast Forward To End", "/org/loboevolution/images/end.gif", LASTPAGE);
+        addButton("Forward", "forward.gif", FORWARDPAGE);
+        addButton("Forward 5 Pages", "fforward.gif", FFORWARDPAGE);
+        addButton("Fast Forward To End", "end.gif", LASTPAGE);
 
         add(Box.createHorizontalGlue());
 
@@ -110,10 +111,9 @@ public class NavigationToolbar extends JToolBar {
 
     private void addButton(final String tooltip, final String url, final int type) {
         final JButton button = new JButton();
-        button.setIcon(new ImageIcon(getClass().getResource(url)));
+        button.setIcon(new ImageIcon(DesktopConfig.getResourceFile(url,DesktopConfig.PATH_PDF_IMAGE)));
         button.setToolTipText(tooltip);
         button.addActionListener(actionEvent -> executeCommand(type));
-
         add(button);
     }
 

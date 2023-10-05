@@ -92,7 +92,7 @@ public class DownloadWindow extends JFrame implements IDownload, LoboLookAndFeel
         contentPane.setBackground(background());
         setResizable(true);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        final ImageIcon ico = new ImageIcon(DesktopConfig.getResourceFile("download.png"));
+        final ImageIcon ico = new ImageIcon(DesktopConfig.getResourceFile("download.png",DesktopConfig.PATH_IMAGE));
         setIconImage(ico.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
         setBounds(100, 100, 450, 300);
 

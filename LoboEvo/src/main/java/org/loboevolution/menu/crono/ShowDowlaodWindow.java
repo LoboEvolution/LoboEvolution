@@ -63,7 +63,7 @@ public class ShowDowlaodWindow extends JFrame implements LoboLookAndFeel {
         setResizable(true);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setBounds(100, 100, 600, 500);
-        final ImageIcon ico = new ImageIcon(DesktopConfig.getResourceFile("download.png"));
+        final ImageIcon ico = new ImageIcon(DesktopConfig.getResourceFile("download.png",DesktopConfig.PATH_IMAGE));
         setIconImage(ico.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
 
         final LoboLabel label_6 = new LoboLabel("");

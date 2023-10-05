@@ -26,6 +26,7 @@
 
 package org.loboevolution.pdfview.action;
 
+import org.loboevolution.config.DesktopConfig;
 import org.loboevolution.pdf.PDFViewer;
 
 import javax.swing.*;
@@ -46,7 +47,7 @@ public class FitHeightAction extends AbstractAction {
      * @param dialog a {@link org.loboevolution.pdf.PDFViewer} object.
      */
     public FitHeightAction(final PDFViewer dialog) {
-        super("Fit Height", dialog.getIcon("/org/loboevolution/images/fit-height.png"));
+        super("Fit Height", new ImageIcon(DesktopConfig.getResourceFile("fit-height.png",DesktopConfig.PATH_PDF_IMAGE)));
         this.dialog = dialog;
     }
 

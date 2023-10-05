@@ -42,24 +42,34 @@ public class DesktopConfig {
 
     public static String PATH_IMAGE = "image";
 
+    public static String PATH_PDF_IMAGE = "pdfview";
+
     public static String PATH_WELCOME = "welcome";
 
     /**
-     * <p>createWallpapersDirectorys.</p>
+     * <p>createDirectory.</p>
      * @param path a {@link java.lang.String} object.
      */
-    public static void createWallpapersDirectory(final String path) throws Exception {
+    public void createDirectory(final String path) throws Exception {
         final Path pathDir = Paths.get(System.getProperty("user.home"), "lobo", path);
         if(!Files.exists(pathDir)) Files.createDirectories(pathDir);
     }
 
     /**
-     * <p>createWallpapersFile.</p>
+     * <p>createDatabaseDirectory.</p>
+     */
+    public void createDatabaseDirectory() throws Exception {
+        final Path path = Paths.get(System.getProperty("user.home"), "lobo", "store");
+        if(!Files.exists(path)) Files.createDirectories(path);
+    }
+
+    /**
+     * <p>createFile.</p>
      * @param inputStream a {@link java.io.InputStream} object.
      * @param path a {@link java.lang.String} object.
      * @param name a {@link java.lang.String} object.
      */
-    public static void createWallpapersFile(final InputStream inputStream, final String path, final String name) throws Exception {
+    public void createFile(final InputStream inputStream, final String path, final String name) throws Exception {
         final String filename = name.substring(name.lastIndexOf("/") +1, name.length());
         final Path pathFile = Files.createFile(Paths.get(System.getProperty("user.home"), "lobo", path, filename));
         org.loboevolution.common.Files.copyInputStreamToFile(inputStream, pathFile.toFile());
@@ -82,10 +92,11 @@ public class DesktopConfig {
     /**
      * <p>getResourceFile.</p>
      * @param fileName a {@link java.lang.String} object.
+     * @param path a {@link java.lang.String} object.
      */
-    public static URL getResourceFile(final String fileName)  {
+    public static URL getResourceFile(final String fileName, final String path)  {
         try {
-            final Path dir = Paths.get(System.getProperty("user.home"), "lobo", PATH_IMAGE, fileName);
+            final Path dir = Paths.get(System.getProperty("user.home"), "lobo", path, fileName);
             return dir.toUri().toURL();
         } catch (final MalformedURLException e) {
             throw new RuntimeException(e);

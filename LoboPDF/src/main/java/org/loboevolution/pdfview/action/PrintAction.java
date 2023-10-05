@@ -26,6 +26,7 @@
 
 package org.loboevolution.pdfview.action;
 
+import org.loboevolution.config.DesktopConfig;
 import org.loboevolution.pdf.PDFViewer;
 
 import javax.swing.*;
@@ -46,7 +47,7 @@ public class PrintAction extends AbstractAction {
      * @param dialog a {@link org.loboevolution.pdf.PDFViewer} object.
      */
     public PrintAction(final PDFViewer dialog) {
-        super("Print...", dialog.getIcon("/org/loboevolution/images/print.png"));
+        super("Print...", new ImageIcon(DesktopConfig.getResourceFile("print.png",DesktopConfig.PATH_PDF_IMAGE)));
         this.dialog = dialog;
     }
 

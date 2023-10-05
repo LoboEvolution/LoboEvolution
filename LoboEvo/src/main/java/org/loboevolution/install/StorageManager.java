@@ -51,6 +51,14 @@ import java.util.List;
 @Slf4j
 public class StorageManager extends SwingWorker<Void, Void> {
 
+	private static final String PATH_IMAGE = "org/lobo/image/";
+
+	private static final String PATH_PDF_IMAGE = "org/lobo/pdfview/";
+
+	private static final String PATH_WELCOME = "org/lobo/welcome/";
+
+	private static final String PATH_STORE = "org/lobo/storage/";
+
 	private final JFrame frame;
 
 	/**
@@ -69,19 +77,22 @@ public class StorageManager extends SwingWorker<Void, Void> {
 		setProgress(0);
 
 		try {
-			DatabseSQLite.createDatabaseDirectory();
-			DesktopConfig.createWallpapersDirectory(DesktopConfig.PATH_IMAGE);
-			DesktopConfig.createWallpapersDirectory(DesktopConfig.PATH_WELCOME);
+			final DesktopConfig desktopConfig = new DesktopConfig();
+			desktopConfig.createDatabaseDirectory();
+			desktopConfig.createDirectory(DesktopConfig.PATH_IMAGE);
+			desktopConfig.createDirectory(DesktopConfig.PATH_PDF_IMAGE);
+			desktopConfig.createDirectory(DesktopConfig.PATH_WELCOME);
 			ClassLoader.getSystemClassLoader();
 			int count = 1;
 			for (final String name : getList()) {
 				try (final InputStream input = ClassLoader.getSystemResourceAsStream(name)) {
 					if (name.contains("storage")) {
 						populateDatabase(Files.getResourceAsFile(input));
-					} else if (name.contains(DesktopConfig.PATH_WELCOME)) {
-						DesktopConfig.createWallpapersFile(input, DesktopConfig.PATH_WELCOME, name);
 					} else {
-						DesktopConfig.createWallpapersFile(input, DesktopConfig.PATH_IMAGE, name);
+						final String path = name.contains(DesktopConfig.PATH_WELCOME) ? DesktopConfig.PATH_WELCOME
+								: name.contains(DesktopConfig.PATH_IMAGE) ? DesktopConfig.PATH_IMAGE
+								: DesktopConfig.PATH_PDF_IMAGE;
+						desktopConfig.createFile(input, path, name);
 					}
 				}
 
@@ -115,41 +126,56 @@ public class StorageManager extends SwingWorker<Void, Void> {
 
 	private List<String> getList() {
 		final List<String> files = new ArrayList<>();
+
 		files.add(0, "org/lobo/storage/table.sql");
-		files.add("org/lobo/storage/char.sql");
-		files.add("org/lobo/storage/font_size.sql");
-		files.add("org/lobo/storage/font.sql");
-		files.add("org/lobo/storage/network.sql");
-		files.add("org/lobo/storage/searchEngine.sql");
-		files.add("org/lobo/storage/size.sql");
-		files.add("org/lobo/storage/lookAndFeel.sql");
+		files.add(PATH_STORE + "char.sql");
+		files.add(PATH_STORE + "font_size.sql");
+		files.add(PATH_STORE + "font.sql");
+		files.add(PATH_STORE + "network.sql");
+		files.add(PATH_STORE + "searchEngine.sql");
+		files.add(PATH_STORE + "size.sql");
+		files.add(PATH_STORE + "lookAndFeel.sql");
 
-		files.add("org/lobo/image/welcome/galaxy-g8ac4ab980_640.jpg");
-		files.add("org/lobo/image/welcome/wolf-g9d8e30cbc_640.jpg");
-		files.add("org/lobo/image/welcome/wolf-g5692c130a_640.jpg");
-		files.add("org/lobo/image/welcome/wolf-g26964a871_640.jpg");
-		files.add("org/lobo/image/welcome/wolf-gcc0cb3fd8_640.jpg");
-		files.add("org/lobo/image/welcome/wolf-gd9365180a_640.jpg");
-		files.add("org/lobo/image/welcome/wolf-gecf98a8c9_640.jpg");
-		files.add("org/lobo/image/welcome/wolf-gf3835d81e_640.png");
-		files.add("org/lobo/image/welcome/wolves-gccc236798_640.jpg");
+		files.add(PATH_WELCOME + "galaxy-g8ac4ab980_640.jpg");
+		files.add(PATH_WELCOME + "wolf-g9d8e30cbc_640.jpg");
+		files.add(PATH_WELCOME + "wolf-g5692c130a_640.jpg");
+		files.add(PATH_WELCOME + "wolf-g26964a871_640.jpg");
+		files.add(PATH_WELCOME + "wolf-gcc0cb3fd8_640.jpg");
+		files.add(PATH_WELCOME + "wolf-gd9365180a_640.jpg");
+		files.add(PATH_WELCOME + "wolf-gecf98a8c9_640.jpg");
+		files.add(PATH_WELCOME + "wolf-gf3835d81e_640.png");
+		files.add(PATH_WELCOME + "wolves-gccc236798_640.jpg");
 
-		files.add("org/lobo/image/back.png");
-		files.add("org/lobo/image/bookmark.png");
-		files.add("org/lobo/image/copy.png");
-		files.add("org/lobo/image/download.png");
-		files.add("org/lobo/image/forward.png");
-		files.add("org/lobo/image/go.png");
-		files.add("org/lobo/image/home.png");
-		files.add("org/lobo/image/host.png");
-		files.add("org/lobo/image/icon.png");
-		files.add("org/lobo/image/lobo.png");
-		files.add("org/lobo/image/print.png");
-		files.add("org/lobo/image/reload.png");
-		files.add("org/lobo/image/save.png");
-		files.add("org/lobo/image/search.png");
-		files.add("org/lobo/image/zoomin.png");
-		files.add("org/lobo/image/zoomout.png");
+		files.add(PATH_IMAGE + "back.png");
+		files.add(PATH_IMAGE + "bookmark.png");
+		files.add(PATH_IMAGE + "copy.png");
+		files.add(PATH_IMAGE + "download.png");
+		files.add(PATH_IMAGE + "forward.png");
+		files.add(PATH_IMAGE + "go.png");
+		files.add(PATH_IMAGE + "home.png");
+		files.add(PATH_IMAGE + "host.png");
+		files.add(PATH_IMAGE + "icon.png");
+		files.add(PATH_IMAGE + "lobo.png");
+		files.add(PATH_IMAGE + "print.png");
+		files.add(PATH_IMAGE + "reload.png");
+		files.add(PATH_IMAGE + "save.png");
+		files.add(PATH_IMAGE + "search.png");
+		files.add(PATH_IMAGE + "zoomin.png");
+		files.add(PATH_IMAGE + "zoomout.png");
+
+		files.add(PATH_PDF_IMAGE + "zoomin.png");
+		files.add(PATH_PDF_IMAGE + "zoomout.png");
+		files.add(PATH_PDF_IMAGE + "fit.png");
+		files.add(PATH_PDF_IMAGE + "fit-height.png");
+		files.add(PATH_PDF_IMAGE + "print.png");
+		files.add(PATH_PDF_IMAGE + "print-setup.png");
+		files.add(PATH_PDF_IMAGE + "fback.gif");
+		files.add(PATH_PDF_IMAGE + "back.gif");
+		files.add(PATH_PDF_IMAGE + "forward.gif");
+		files.add(PATH_PDF_IMAGE + "fforward.gif");
+		files.add(PATH_PDF_IMAGE + "end.gif");
+		files.add(PATH_PDF_IMAGE + "start.gif");
+
 
 		return files;
 	}

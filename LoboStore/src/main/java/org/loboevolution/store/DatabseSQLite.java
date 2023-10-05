@@ -40,15 +40,6 @@ public class DatabseSQLite {
 
     /** The Constant LOBO_DB. */
     private static final String LOBO_DB = "LOBOEVOLUTION_STORAGE.sqlite";
-
-    /**
-     * <p>createDatabaseDirectory.</p>
-     */
-    public static void createDatabaseDirectory() throws Exception {
-        final Path path = Paths.get(System.getProperty("user.home"), "lobo", "store");
-        if(!Files.exists(path)) Files.createDirectories(path);
-    }
-
     /**
      * <p>getDatabaseDirectory.</p>
      *

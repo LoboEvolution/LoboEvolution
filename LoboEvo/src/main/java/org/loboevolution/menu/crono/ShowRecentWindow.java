@@ -92,7 +92,7 @@ public class ShowRecentWindow extends JFrame implements LoboLookAndFeel {
 		setResizable(true);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 920, 500);
-		final ImageIcon ico = new ImageIcon(DesktopConfig.getResourceFile("host.png"));
+		final ImageIcon ico = new ImageIcon(DesktopConfig.getResourceFile("host.png",DesktopConfig.PATH_IMAGE));
 		setIconImage(ico.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
 		
 		final LoboLabel label_6 = new LoboLabel("");

@@ -26,6 +26,7 @@
 
 package org.loboevolution.pdfview.action;
 
+import org.loboevolution.config.DesktopConfig;
 import org.loboevolution.pdf.PDFViewer;
 
 import javax.swing.*;
@@ -49,7 +50,7 @@ public class ZoomInAction extends AbstractAction {
      * @param factor a float.
      */
     public ZoomInAction(final PDFViewer dialog, final float factor) {
-        super("Zoom in", dialog.getIcon("/org/loboevolution/images/zoomin.png"));
+        super("Zoom in", new ImageIcon(DesktopConfig.getResourceFile("zoomin.png",DesktopConfig.PATH_PDF_IMAGE)));
         zoomfactor = factor;
         this.dialog = dialog;
     }

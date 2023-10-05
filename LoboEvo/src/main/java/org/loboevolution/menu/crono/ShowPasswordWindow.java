@@ -92,7 +92,7 @@ public class ShowPasswordWindow extends JFrame implements LoboLookAndFeel {
 		setResizable(false);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 900, 410);
-		final ImageIcon ico = new ImageIcon(DesktopConfig.getResourceFile("bookmark.png"));
+		final ImageIcon ico = new ImageIcon(DesktopConfig.getResourceFile("bookmark.png",DesktopConfig.PATH_IMAGE));
 		setIconImage(ico.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
 		
 		final LoboLabel label_6 = new LoboLabel("");

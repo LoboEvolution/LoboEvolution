@@ -189,7 +189,7 @@ public class HtmlRendererConfigImpl implements HtmlRendererConfig {
 
     @Override
     public URL getResourceFile(final String fileName) {
-        return DesktopConfig.getResourceFile(fileName);
+        return DesktopConfig.getResourceFile(fileName,DesktopConfig.PATH_IMAGE);
     }
 
     @Override
