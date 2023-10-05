@@ -105,7 +105,7 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
     /**
      * The page format for printing.
      */
-    private transient PageFormat pformat = PrinterJob.getPrinterJob().defaultPage();
+    private PageFormat pformat;
     /**
      * true if the thumb panel should exist at all.
      */
@@ -480,6 +480,9 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
      */
     public void doPageSetup() {
         final PrinterJob pjob = PrinterJob.getPrinterJob();
+        if (pformat == null) {
+            pformat = PrinterJob.getPrinterJob().defaultPage();
+        }
         pformat = pjob.pageDialog(pformat);
     }
 
@@ -492,6 +495,10 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
         pjob.setJobName(docName);
         final Book book = new Book();
         final PDFPrintPage pages = new PDFPrintPage(curFile);
+        if (pformat == null) {
+            pformat = PrinterJob.getPrinterJob().defaultPage();
+        }
+
         book.append(pages, pformat, curFile.getNumPages());
         pjob.setPageable(book);
         if (pjob.printDialog()) {
