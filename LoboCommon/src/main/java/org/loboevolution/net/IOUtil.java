@@ -46,23 +46,6 @@ public class IOUtil {
      */
     public static byte[] readFully(final InputStream inputStream) throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        write(inputStream, baos);
         return baos.toByteArray();
     }
-
-    /**
-     * Write all inputstream content to outputstream.
-     *
-     * @param inputStream  input stream
-     * @param outputStream output stream
-     * @throws IOException on error
-     */
-    private static void write(final InputStream inputStream, final OutputStream outputStream) throws IOException {
-        final byte[] bytes = new byte[8192];
-        int length;
-        while ((length = inputStream.read(bytes)) > 0) {
-            outputStream.write(bytes, 0, length);
-        }
-    }
-
 }
