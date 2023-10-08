@@ -111,7 +111,7 @@ public class ContentPageUI extends AbstractToolsUI {
                     for (final int selectedColumn : selectedColumns) {
                         try {
                             final String href = (String) jtable.getValueAt(element, selectedColumn);
-                            textArea.setText(HttpNetwork.getSource(href));
+                            textArea.setText(HttpNetwork.getSource(href, null));
                             textArea.repaint();
                         } catch (final Exception ex) {
                             ex.printStackTrace();

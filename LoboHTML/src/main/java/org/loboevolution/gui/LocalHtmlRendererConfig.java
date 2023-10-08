@@ -55,8 +55,8 @@ public class LocalHtmlRendererConfig implements HtmlRendererConfig {
     }
 
     @Override
-    public String getSourceCache(final String baseUrl, final String type, final boolean test) {
-        return HttpNetwork.sourceResponse(baseUrl, type);
+    public String getSourceCache(final String baseUrl, final String type, final String integrity, final boolean test) {
+        return HttpNetwork.sourceResponse(baseUrl, type, integrity);
     }
 
     @Override

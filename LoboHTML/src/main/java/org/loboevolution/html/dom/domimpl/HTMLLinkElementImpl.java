@@ -177,7 +177,7 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 							if (CSSUtilities.matchesMedia(media, doc.getDefaultView())) {
 								final Instant start = Instant.now();
 								final TimingInfo info = new TimingInfo();
-								final org.htmlunit.cssparser.dom.CSSStyleSheetImpl sheet = CSSUtilities.parseCssExternal(getHtmlRendererConfig(), href, scriptURL, baseURI, rcontext.isTestEnabled());
+								final org.htmlunit.cssparser.dom.CSSStyleSheetImpl sheet = CSSUtilities.parseCssExternal(getHtmlRendererConfig(), href, scriptURL, baseURI, getIntegrity(), rcontext.isTestEnabled());
 								sheet.setHref(scriptURL == null ? href : scriptURL.toExternalForm());
 								sheet.setDisabled(this.disabled);
 								final CSSStyleSheetImpl cssStyleSheet = new CSSStyleSheetImpl(sheet);
@@ -325,7 +325,7 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 
 	@Override
 	public String getIntegrity() {
-		return null;
+		return getAttribute("integrity");
 	}
 
 	@Override

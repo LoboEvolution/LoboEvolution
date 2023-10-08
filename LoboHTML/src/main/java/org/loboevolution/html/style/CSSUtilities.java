@@ -111,13 +111,15 @@ public final class CSSUtilities {
 	 * @param href                a {@link String} object.
 	 * @param scriptURL           a {@link URL} object.
 	 * @param baseURI             a {@link String} object.
+	 * @param integrity             a {@link String} object.
 	 * @return a {@link CSSStyleSheetImpl} object.
 	 * @throws java.lang.Exception if any.
 	 */
-	public static CSSStyleSheetImpl parseCssExternal(final HtmlRendererConfig config, final String href, final URL scriptURL, final String baseURI, final boolean test) throws Exception {
+	public static CSSStyleSheetImpl parseCssExternal(final HtmlRendererConfig config, final String href, final URL scriptURL,
+													 final String baseURI, final String integrity, final boolean test) throws Exception {
 		final CSSOMParser parser = new CSSOMParser();
 		final String scriptURI = scriptURL == null ? href : scriptURL.toExternalForm();
-		final String source = config.getSourceCache(scriptURI, "CSS", test);
+		final String source = config.getSourceCache(scriptURI, "CSS", integrity, test);
 		final InputSource is = getCssInputSourceForStyleSheet(source, baseURI);
 		return parser.parseStyleSheet(is, null);
 	}

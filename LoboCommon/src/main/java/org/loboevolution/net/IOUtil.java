@@ -24,28 +24,45 @@
  * Contact info: ivan.difrancesco@yahoo.it
  */
 
-package org.loboevolution.html.js.geolocation;
+package org.loboevolution.net;
 
-import org.json.JSONObject;
-import org.loboevolution.net.HttpNetwork;
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 
 /**
- * <p>IPAddressBasedGeoAcquirer class.</p>
+ * <p>IOUtil class.</p>
  */
-public class IPAddressBasedGeoAcquirer {
-	
-	/**
-	 * <p>acquireLocation.</p>
-	 *
-	 * @return a {@link org.loboevolution.html.js.geolocation.Position} object.
-	 * @throws java.lang.Exception if any.
-	 */
-	protected Position acquireLocation() throws Exception {
-		final String source = HttpNetwork.getSource("https://freegeoip.app/json/", null);
-		final JSONObject children = new JSONObject(source);
-		final double latitude = Double.parseDouble(children.optString("latitude"));
-		final double longitude = Double.parseDouble(children.optString("longitude"));
-		final Coordinates coords = new Coordinates(latitude, longitude, (double) 0, 0, (double) 0, null, (double) 0);
-		return new Position(coords, -1);
-	}
+public class IOUtil {
+
+    /**
+     * Read all inputStream content to a byte array.
+     *
+     * @param inputStream input stream
+     * @return content as byte array
+     * @throws IOException on error
+     */
+    public static byte[] readFully(final InputStream inputStream) throws IOException {
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        write(inputStream, baos);
+        return baos.toByteArray();
+    }
+
+    /**
+     * Write all inputstream content to outputstream.
+     *
+     * @param inputStream  input stream
+     * @param outputStream output stream
+     * @throws IOException on error
+     */
+    private static void write(final InputStream inputStream, final OutputStream outputStream) throws IOException {
+        final byte[] bytes = new byte[8192];
+        int length;
+        while ((length = inputStream.read(bytes)) > 0) {
+            outputStream.write(bytes, 0, length);
+        }
+    }
+
 }

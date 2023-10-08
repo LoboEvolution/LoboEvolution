@@ -27,9 +27,12 @@
 package org.loboevolution.config;
 
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
+import org.loboevolution.common.Strings;
 import org.loboevolution.info.GeneralInfo;
 import org.loboevolution.info.TabInfo;
 import org.loboevolution.net.Cookie;
+import org.loboevolution.net.HttpNetwork;
 import org.loboevolution.store.*;
 
 import java.awt.*;
@@ -45,6 +48,7 @@ import java.util.Map;
  * The class HtmlRendererConfigImpl.
  */
 @Data
+@Slf4j
 public class HtmlRendererConfigImpl implements HtmlRendererConfig {
 
     private static final String DB_PATH = DatabseSQLite.getDatabaseDirectory();
@@ -127,8 +131,22 @@ public class HtmlRendererConfigImpl implements HtmlRendererConfig {
     }
 
     @Override
-    public String getSourceCache(final String baseUrl, final String type, final boolean test) {
-        return ExternalResourcesStore.getSourceCache(baseUrl, type, test);
+    public String getSourceCache(final String baseUrl, final String type, final String integrity, final boolean test) {
+        try {
+            final ExternalResourcesStore resourcesStore = new ExternalResourcesStore();
+            String source = resourcesStore.getSourceCache(baseUrl, type, test);
+            if (Strings.isBlank(source)) {
+                source = HttpNetwork.sourceResponse(baseUrl, type, integrity);
+                if (!test) {
+                    resourcesStore.saveCache(baseUrl, source, type);
+                }
+                return source;
+            }
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+        }
+
+        return null;
     }
 
     @Override

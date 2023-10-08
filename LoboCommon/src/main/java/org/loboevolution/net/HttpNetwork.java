@@ -211,25 +211,28 @@ public class HttpNetwork {
 	/**
 	 * <p>getSource.</p>
 	 *
-	 * @param uri a {@link java.lang.String} object.
+	 * @param uri        a {@link String} object.
+	 * @param integrity  a {@link String} object.
 	 * @return a {@link java.lang.String} object.
 	 * @throws java.lang.Exception if any.
 	 */
-	public static String getSource(final String uri) throws Exception {
+	public static String getSource(final String uri, final String integrity) throws Exception {
 
 		final URL url = new URL(uri);
 		final URLConnection connection = url.openConnection();
 		connection.setRequestProperty("User-Agent", UserAgent.getUserAgent());
 		connection.getHeaderField("Set-Cookie");
 		try (final InputStream in = openConnectionCheckRedirects(connection)) {
-			return toString(in);
+			if(AlgorithmDigest.validate(IOUtil.readFully(in), integrity)){
+				return toString(in);
+			}
 		} catch (final SocketTimeoutException e) {
 			log.error("More time elapsed {}", TIMEOUT_VALUE);
 	    }
 		return "";
 	}
 
-	public static String sourceResponse(final String sUri, final String type) {
+	public static String sourceResponse(final String sUri, final String type, final String integrity) {
 		URL url;
 		String scriptURI = sUri;
 		try {
@@ -253,7 +256,7 @@ public class HttpNetwork {
 				url = uri.toURL();
 			}
 
-			return getSource(url.toString());
+			return getSource(url.toString(), integrity);
 		} catch (final Exception err) {
 			log.error(err.getMessage(), err);
 			return "";

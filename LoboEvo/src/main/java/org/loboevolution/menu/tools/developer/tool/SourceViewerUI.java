@@ -52,7 +52,7 @@ public class SourceViewerUI  extends AbstractToolsUI {
     public SourceViewerUI(final BrowserFrame frame) {
         try {
             final ToolBar toolbar = frame.getToolbar();
-            add(addTextArea(HttpNetwork.getSource(toolbar.getAddressBar().getText())));
+            add(addTextArea(HttpNetwork.getSource(toolbar.getAddressBar().getText(), null)));
         } catch (final Exception exp) {
             exp.printStackTrace();
         }

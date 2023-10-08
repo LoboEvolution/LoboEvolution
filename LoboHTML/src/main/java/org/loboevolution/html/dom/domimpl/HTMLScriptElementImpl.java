@@ -40,7 +40,9 @@ import org.loboevolution.html.renderstate.DisplayRenderState;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.info.TimingInfo;
+import org.loboevolution.net.AlgorithmDigest;
 import org.loboevolution.net.HttpNetwork;
+import org.loboevolution.net.IOUtil;
 import org.loboevolution.net.UserAgent;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.RhinoException;
@@ -189,10 +191,15 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 					final URLConnection connection = u.openConnection();
 					connection.setRequestProperty("User-Agent", UserAgent.getUserAgent());
 					connection.getHeaderField("Set-Cookie");
-					try (final InputStream in = HttpNetwork.openConnectionCheckRedirects(connection);
-                         final Reader reader = new InputStreamReader(in, "utf-8")) {
-						final BufferedReader br = new BufferedReader(reader);
-						ctx.evaluateReader(scope, br, scriptURI, 1, null);
+					try (final InputStream in = HttpNetwork.openConnectionCheckRedirects(connection)) {
+						if (AlgorithmDigest.validate(IOUtil.readFully(in), getIntegrity())) {
+							try (final Reader reader = new InputStreamReader(in, "utf-8")) {
+								final BufferedReader br = new BufferedReader(reader);
+								ctx.evaluateReader(scope, br, scriptURI, 1, null);
+							} catch (Exception e){
+								throw new Exception(e);
+							}
+						}
 					} catch (final SocketTimeoutException e) {
 						if (connection instanceof HttpURLConnection) {
 							final HttpURLConnection urlConnection = (HttpURLConnection) u.openConnection();
@@ -284,8 +291,7 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 	}
 	@Override
 	public String getIntegrity() {
-		// TODO Auto-generated method stub
-		return null;
+		return getAttribute("integrity");
 	}
 
 	@Override

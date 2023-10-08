@@ -1002,7 +1002,7 @@ public class StyleSheetAggregator {
 					final MediaListImpl mediaList = importRule.getMedia();
 					final HTMLDocumentImpl doc = getDoc();
 					final String uri = doc.getFullURL(importRule.getHref(), doc.getBaseURI()).toString();
-					final CSSStyleSheetImpl sheet = CSSUtilities.parseCssExternal(getDoc().getHtmlRendererConfig(), uri, null, doc.getBaseURI(), false);
+					final CSSStyleSheetImpl sheet = CSSUtilities.parseCssExternal(getDoc().getHtmlRendererConfig(), uri, null, doc.getBaseURI(), null, false);
 					if (mediaList.getLength() == 0 && index.getMediaList().getLength() == 0) {
 						index(index, sheet.getCssRules());
 					} else {
