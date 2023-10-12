@@ -58,6 +58,8 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * A substantial portion of the HTML rendering logic of the package can be found
@@ -123,9 +125,13 @@ public class RBlockViewport extends BaseRCollection {
 
 	private final RBlockInfo info;
 
+	private Integer cachedVisualWidth = null;
+
+	private Integer cachedVisualHeight = null;
+
 	/** Constant ZERO_INSETS */
 	public static final Insets ZERO_INSETS = new Insets(0, 0, 0, 0);
-	
+
 	/**
 	 * Constructs an HtmlBlockLayout.
 	 *
@@ -141,7 +147,7 @@ public class RBlockViewport extends BaseRCollection {
 		this.layoutUpTreeCanBeInvalidated = true;
 		this.info = info;
 	}
-	
+
 	private static int getPosition(final HTMLElementImpl element) {
 		if(element == null) return RenderState.POSITION_STATIC;
 		final RenderState rs = element.getRenderState();
@@ -754,8 +760,8 @@ public class RBlockViewport extends BaseRCollection {
 	/** {@inheritDoc} */
 	@Override
 	public BoundableRenderable getRenderable(final int x, final int y) {
-		final Iterator<Renderable> i = this.getRenderables(x, y);
-		return i == null ? null : i.hasNext() ? (BoundableRenderable) i.next() : null;
+		final List<Renderable> renderables = this.getRenderables(x, y);
+		return renderables == null ? null : renderables.stream().findFirst().isPresent() ? (BoundableRenderable) renderables.stream().findFirst().get() : null;
 	}
 
 	/**
@@ -770,15 +776,15 @@ public class RBlockViewport extends BaseRCollection {
 
 	/** {@inheritDoc} */
 	@Override
-	public Iterator<Renderable> getRenderables() {
+	public List<Renderable> getRenderables() {
 		final SortedSet<PositionedRenderable> others = this.positionedRenderables;
 		if (others == null || others.size() == 0) {
 			final List<Renderable> sr = this.seqRenderables;
-			return sr == null ? null : sr.iterator();
+			return sr == null ? null : sr;
 		} else {
 			final List<Renderable> allRenderables = new ArrayList<>();
 			this.populateZIndexGroupsIterator(others, this.seqRenderables, allRenderables);
-			return allRenderables.iterator();
+			return allRenderables;
 		}
 	}
 
@@ -787,9 +793,9 @@ public class RBlockViewport extends BaseRCollection {
 	 *
 	 * @param pointx a int.
 	 * @param pointy a int.
-	 * @return a {@link java.util.Iterator} object.
+	 * @return a {@link java.util.List} object.
 	 */
-	public Iterator<Renderable> getRenderables(final int pointx, final int pointy) {
+	public List<Renderable> getRenderables(final int pointx, final int pointy) {
 		if (!SwingUtilities.isEventDispatchThread()) {
 			log.warn("getRenderable(): Invoked outside GUI dispatch thread.");
 		}
@@ -842,46 +848,7 @@ public class RBlockViewport extends BaseRCollection {
 				}
 			}
 		}
-		return result == null ? null : result.iterator();
-	}
-
-	/**
-	 * <p>getRenderables.</p>
-	 *
-	 * @param point a {@link java.awt.Point} object.
-	 * @return a {@link java.util.Iterator} object.
-	 */
-	public Iterator<Renderable> getRenderables(final Point point) {
-		return this.getRenderables(point.x, point.y);
-	}
-
-	private Iterator<Renderable> getRenderables(final Rectangle clipBounds) {
-		final List<Renderable> sr = this.seqRenderables;
-		Iterator<Renderable> baseIterator = null;
-		if (sr != null) {
-			final Renderable[] array = sr.toArray(Renderable.EMPTY_ARRAY);
-			final Range range = MarkupUtilities.findRenderables(array, clipBounds, true);
-			baseIterator = ArrayUtilities.iterator(array, range.offset, range.length);
-		}
-		final SortedSet<PositionedRenderable> others = this.positionedRenderables;
-		if (others == null || others.size() == 0) {
-			return baseIterator;
-		} else {
-			final ArrayList<PositionedRenderable> matches = new ArrayList<>();
-			// ArrayList "matches" keeps the order from "others".
-			for (final PositionedRenderable pr : others) {
-				if (pr.isFixed() || clipBounds.intersects(pr.getRenderable().getVisualBounds())) {
-					matches.add(pr);
-				}
-			}
-			if (matches.size() == 0) {
-				return baseIterator;
-			} else {
-				final List<Renderable> destination = new ArrayList<>();
-				populateZIndexGroups(matches, baseIterator, destination);
-				return destination.iterator();
-			}
-		}
+		return result == null ? null : result;
 	}
 
 	void importDelayedPair(final DelayedPair pair) {
@@ -1448,37 +1415,39 @@ public class RBlockViewport extends BaseRCollection {
 	/** {@inheritDoc} */
 	@Override
 	public boolean onDoubleClick(final MouseEvent event, final int x, final int y) {
-		final Iterator<Renderable> i = this.getRenderables(new Point(x, y));
-		if (i != null) {
-			while (i.hasNext()) {
-				final BoundableRenderable br = (BoundableRenderable) i.next();
+		final List<Renderable> renderables = getRenderables();
+		final AtomicBoolean result = new AtomicBoolean(true);
+		if (renderables != null) {
+			renderables.forEach(rn -> {
+				final BoundableRenderable br = (BoundableRenderable) rn;
 				if (br != null) {
 					final Rectangle bounds = br.getVisualBounds();
 					if (!br.onDoubleClick(event, x - bounds.x, y - bounds.y)) {
-						return false;
+						result.set(false);
 					}
 				}
-			}
+			});
 		}
-		return true;
+		return result.get();
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public boolean onMouseClick(final MouseEvent event, final int x, final int y) {
-		final Iterator<Renderable> i = this.getRenderables(new Point(x, y));
-		if (i != null) {
-			while (i.hasNext()) {
-				final BoundableRenderable br = (BoundableRenderable) i.next();
+		final List<Renderable> renderables = getRenderables();
+		final AtomicBoolean result = new AtomicBoolean(true);
+		if (renderables != null) {
+			renderables.forEach(rn -> {
+				final BoundableRenderable br = (BoundableRenderable) rn;
 				if (br != null) {
 					final Rectangle bounds = br.getVisualBounds();
 					if (!br.onMouseClick(event, x - bounds.x, y - bounds.y)) {
-						return false;
+						result.set(false);
 					}
 				}
-			}
+			});
 		}
-		return true;
+		return result.get();
 	}
 
 	/** {@inheritDoc} */
@@ -1498,29 +1467,31 @@ public class RBlockViewport extends BaseRCollection {
 	/** {@inheritDoc} */
 	@Override
 	public boolean onMousePressed(final MouseEvent event, final int x, final int y) {
-		final Iterator<Renderable> i = this.getRenderables(new Point(x, y));
-		if (i != null) {
-			while (i.hasNext()) {
-				final BoundableRenderable br = (BoundableRenderable) i.next();
+		final List<Renderable> renderables = getRenderables();
+		final AtomicBoolean result = new AtomicBoolean(true);
+		if (renderables != null) {
+			renderables.forEach(rn -> {
+				final BoundableRenderable br = (BoundableRenderable) rn;
 				if (br != null) {
 					final Rectangle bounds = br.getVisualBounds();
 					if (!br.onMousePressed(event, x - bounds.x, y - bounds.y)) {
 						this.armedRenderable = br;
-						return false;
+						result.set(false);
 					}
 				}
-			}
+			});
 		}
-		return true;
+		return result.get();
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public boolean onMouseReleased(final MouseEvent event, final int x, final int y) {
-		final Iterator<Renderable> i = this.getRenderables(new Point(x, y));
-		if (i != null) {
-			while (i.hasNext()) {
-				final BoundableRenderable br = (BoundableRenderable) i.next();
+		final List<Renderable> renderables = getRenderables();
+		final AtomicBoolean result = new AtomicBoolean(true);
+		if (renderables != null) {
+			renderables.forEach(rn -> {
+				final BoundableRenderable br = (BoundableRenderable) rn;
 				if (br != null) {
 					final Rectangle bounds = br.getVisualBounds();
 					if (!br.onMouseReleased(event, x - bounds.x, y - bounds.y)) {
@@ -1529,17 +1500,17 @@ public class RBlockViewport extends BaseRCollection {
 							oldArmedRenderable.onMouseDisarmed(event);
 							this.armedRenderable = null;
 						}
-						return false;
+						result.set(false);
 					}
 				}
-			}
+			});
 		}
 		final BoundableRenderable oldArmedRenderable = this.armedRenderable;
 		if (oldArmedRenderable != null) {
 			oldArmedRenderable.onMouseDisarmed(event);
 			this.armedRenderable = null;
 		}
-		return true;
+		return result.get();
 	}
 
 	/** {@inheritDoc} */
@@ -1562,10 +1533,9 @@ public class RBlockViewport extends BaseRCollection {
 
 		try {
 			final Rectangle clipBounds = gInUnClipped.getClipBounds();
-			final Iterator<Renderable> i = this.getRenderables(clipBounds);
-			if (i != null) {
-				while (i.hasNext()) {
-					final Renderable robj = i.next();
+			final List<Renderable> renderables = getRenderables();
+			if (renderables != null) {
+				renderables.forEach(robj -> {
 					if (robj instanceof BoundableRenderable) {
 						final BoundableRenderable renderable = (BoundableRenderable) robj;
 						if (!renderable.isDelegated()) {
@@ -1598,7 +1568,7 @@ public class RBlockViewport extends BaseRCollection {
 						}
 						if(!paintRendable) robj.paint(selectedG);
 					}
-				}
+				});
 			}
 		} finally {
 			if (translationRequired) {
@@ -1940,69 +1910,73 @@ public class RBlockViewport extends BaseRCollection {
 	/** {@inheritDoc} */
 	@Override
 	public int getVisualHeight() {
-		double maxY = getHeight();
-		final Iterator<? extends Renderable> renderables = getRenderables();
+		if (cachedVisualHeight != null) {
+			return cachedVisualHeight;
+		}
+
+		final AtomicInteger maxY = new AtomicInteger(getHeight());
+		final List<Renderable> renderables = getRenderables();
 		if (renderables != null) {
-			while (renderables.hasNext()) {
-				final Renderable r = renderables.next();
+			renderables.forEach(r -> {
 				if (r instanceof BoundableRenderable) {
 					final BoundableRenderable br = (BoundableRenderable) r;
 					final double brMaxY = br.getVisualBounds().getMaxY();
-					if (brMaxY > maxY) {
-						maxY = brMaxY;
+					if (brMaxY > maxY.get()) {
+						maxY.set((int) brMaxY);
 					}
 				} else if (r instanceof RenderableContainer) {
 					final RenderableContainer rc = (RenderableContainer) r;
 					final double rcMaxY = rc.getVisualBounds().getMaxY();
-					if (rcMaxY > maxY) {
-						maxY = rcMaxY;
+					if (rcMaxY > maxY.get()) {
+						maxY.set((int) rcMaxY);
 					}
 				} else if (r instanceof PositionedRenderable) {
 					final PositionedRenderable rc = (PositionedRenderable) r;
 					final double rcMaxY = rc.getRenderable().getVisualBounds().getMaxY();
-					if (rcMaxY > maxY) {
-						maxY = rcMaxY;
+					if (rcMaxY > maxY.get()) {
+						maxY.set((int) rcMaxY);
 					}
-				} else {
-					Thread.dumpStack();
 				}
-			}
+			});
 		}
-		return (int) maxY;
+		cachedVisualHeight = maxY.get();
+		return cachedVisualHeight;
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public int getVisualWidth() {
-		double maxX = getWidth();
-		final Iterator<? extends Renderable> renderables = getRenderables();
+		if (cachedVisualWidth != null) {
+			return cachedVisualWidth;
+		}
+
+		final AtomicInteger maxX = new AtomicInteger(getWidth());
+		final List<Renderable> renderables = getRenderables();
 		if (renderables != null) {
-			while (renderables.hasNext()) {
-				final Renderable r = renderables.next();
+			renderables.forEach(r -> {
 				if (r instanceof BoundableRenderable) {
 					final BoundableRenderable br = (BoundableRenderable) r;
 					final double brMaxX = br.getVisualBounds().getMaxX();
-					if (brMaxX > maxX) {
-						maxX = brMaxX;
+					if (brMaxX > maxX.get()) {
+						maxX.set((int) brMaxX);
 					}
 				} else if (r instanceof RenderableContainer) {
 					final RenderableContainer rc = (RenderableContainer) r;
 					final double rcMaxX = rc.getVisualBounds().getMaxX();
-					if (rcMaxX > maxX) {
-						maxX = rcMaxX;
+					if (rcMaxX > maxX.get()) {
+						maxX.set((int) rcMaxX);
 					}
 				} else if (r instanceof PositionedRenderable) {
 					final PositionedRenderable rc = (PositionedRenderable) r;
 					final double rcMaxX = rc.getRenderable().getVisualBounds().getMaxX();
-					if (rcMaxX > maxX) {
-						maxX = rcMaxX;
+					if (rcMaxX >maxX.get()) {
+						maxX.set((int) rcMaxX);
 					}
-				} else {
-					Thread.dumpStack();
 				}
-			}
+			});
 		}
-		return (int) maxX;
+		cachedVisualWidth = maxX.get();
+		return cachedVisualWidth;
 	}
 
 	/**

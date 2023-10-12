@@ -87,7 +87,7 @@ public class GradientStyle {
 		builder.append(start).append("(");
 		final int startIdx = start.length();
 		final int closingIdx = backgroundImage.lastIndexOf(')');
-		final String quote = backgroundImage.substring(startIdx, closingIdx);
+		final String quote = backgroundImage.substring(startIdx+1, closingIdx);
 		final String values = gradientValues(quote);
 		final String direction = direction(quote);
 		final GradientInfo info = parseGradint(values);

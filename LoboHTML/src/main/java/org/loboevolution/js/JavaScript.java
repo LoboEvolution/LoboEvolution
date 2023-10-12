@@ -37,9 +37,6 @@ import java.util.WeakHashMap;
 
 /**
  * <p>JavaScript class.</p>
- *
- *
- *
  */
 public class JavaScript {
 	private static final JavaScript instance = new JavaScript();
@@ -134,9 +131,6 @@ public class JavaScript {
 		} else if (raw.getClass().isPrimitive()) {
 			return raw;
 		} else if (raw instanceof ScriptableDelegate) {
-			// Classes that implement ScriptableDelegate retain
-			// the JavaScript object. Reciprocal linking cannot
-			// be done with weak hash maps and without leaking.
 			synchronized (this) {
 				Scriptable javascriptObject = ((ScriptableDelegate) raw).getScriptable();
 				if (javascriptObject == null) {

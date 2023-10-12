@@ -51,6 +51,7 @@ import java.awt.datatransfer.Transferable;
 import java.awt.event.*;
 import java.util.List;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * A Swing component that renders a HTML block, given by a DOM root or an
@@ -763,21 +764,20 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	 * Gets an aggregate of the bounds of renderer leaf nodes.
 	 */
 	private Rectangle scanNodeBounds(final RCollection root, final Node node, final RCollection relativeTo) {
-		final Iterator<Renderable> i = root.getRenderables();
-		Rectangle resultBounds = null;
-		BoundableRenderable prevBoundable = null;
-		if (i != null) {
-			while (i.hasNext()) {
-				final Renderable rn = i.next();
-				final Renderable r = rn instanceof PositionedRenderable ? (((PositionedRenderable)rn).getRenderable()) : rn;
+		final List<Renderable> renderables = root.getRenderables();
+		final AtomicReference<Rectangle> resultBounds = new AtomicReference<>();
+		if (renderables != null) {
+			final AtomicReference<BoundableRenderable> prevBoundable = new AtomicReference<>();
+			renderables.forEach(rn -> {
+				final Renderable r = rn instanceof PositionedRenderable ? (((PositionedRenderable) rn).getRenderable()) : rn;
 				Rectangle subBounds = null;
 				if (r instanceof RCollection) {
 					final RCollection rc = (RCollection) r;
-					prevBoundable = rc;
+					prevBoundable.set(rc);
 					subBounds = scanNodeBounds(rc, node, relativeTo);
 				} else if (r instanceof BoundableRenderable) {
 					final BoundableRenderable br = (BoundableRenderable) r;
-					prevBoundable = br;
+					prevBoundable.set(br);
 					if (Nodes.isSameOrAncestorOf(node, (Node) r.getModelNode())) {
 						final Point origin = br.getOriginRelativeTo(relativeTo);
 						final Dimension size = br.getSize();
@@ -787,21 +787,22 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 					// This would have to be a RStyleChanger. We rely on these
 					// when the target node has blank content.
 					if (Nodes.isSameOrAncestorOf(node, (Node) r.getModelNode())) {
-						final int xInRoot = prevBoundable == null ? 0 : prevBoundable.getX() + prevBoundable.getWidth();
+						final BoundableRenderable boundable = prevBoundable.get();
+						final int xInRoot = boundable == null ? 0 : boundable.getX() + boundable.getWidth();
 						final Point rootOrigin = root.getOriginRelativeTo(relativeTo);
 						subBounds = new Rectangle(rootOrigin.x + xInRoot, rootOrigin.y, 0, root.getHeight());
 					}
 				}
 				if (subBounds != null) {
-					if (resultBounds == null) {
-						resultBounds = subBounds;
+					if (resultBounds.get() == null) {
+						resultBounds.set(subBounds);
 					} else {
-						resultBounds = subBounds.union(resultBounds);
+						resultBounds.set(subBounds.union(resultBounds.get()));
 					}
 				}
-			}
+			});
 		}
-		return resultBounds;
+		return resultBounds.get();
 	}
 
 	/**

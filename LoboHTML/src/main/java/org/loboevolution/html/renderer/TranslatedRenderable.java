@@ -31,7 +31,9 @@ import org.loboevolution.html.dom.nodeimpl.ModelNode;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * <p>TranslatedRenderable class.</p>
@@ -366,8 +368,10 @@ public class TranslatedRenderable extends BaseBoundableRenderable implements RCo
 
     /** {@inheritDoc} */
     @Override
-    public Iterator<Renderable> getRenderables() {
-        return ArrayUtilities.singletonIterator(translatedChild);
+    public List<Renderable> getRenderables() {
+        final List<Renderable> renderables = new ArrayList<>();
+        renderables.add(translatedChild);
+        return renderables;
     }
 
     /** {@inheritDoc} */

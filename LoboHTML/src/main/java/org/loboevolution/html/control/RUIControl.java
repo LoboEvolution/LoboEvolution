@@ -38,60 +38,16 @@ import java.awt.*;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.List;
 import java.util.Objects;
 
 /**
  * <p>RUIControl class.</p>
- *
- * Author J. H. S.
- *
  */
 public class RUIControl extends BaseElementRenderable {
-	private static class LayoutKey {
-		public final int availHeight;
-		public final int availWidth;
-		public final Font font;
-		public final int whitespace;
-
-		public LayoutKey(final int availWidth, final int availHeight, final int whitespace, final Font font) {
-			this.availWidth = availWidth;
-			this.availHeight = availHeight;
-			this.whitespace = whitespace;
-			this.font = font;
-		}
-
-		@Override
-		public boolean equals(final Object obj) {
-			if (obj == this) {
-				return true;
-			}
-			if (!(obj instanceof LayoutKey)) {
-				return false;
-			}
-			final LayoutKey other = (LayoutKey) obj;
-			return other.availWidth == this.availWidth && other.availHeight == this.availHeight
-					&& other.whitespace == this.whitespace && Objects.equals(other.font, this.font);
-		}
-
-		@Override
-		public int hashCode() {
-			final Font font = this.font;
-			return this.availWidth * 1000 + this.availHeight ^ (font == null ? 0 : font.hashCode());
-		}
-	}
-
-	private static class LayoutValue {
-		public final int height;
-		public final int width;
-
-		public LayoutValue(final int width, final int height) {
-			this.width = width;
-			this.height = height;
-		}
-	}
 
 	private static final int MAX_CACHE_SIZE = 10;
-	private final Map<LayoutKey, LayoutValue> cachedLayout = new HashMap<>();
+	private final Map<LayoutKey, LayoutValue> cachedLayout = new HashMap<>(5);
 
 	protected int declaredHeight = -1;
 
@@ -246,7 +202,7 @@ public class RUIControl extends BaseElementRenderable {
 
 	/** {@inheritDoc} */
 	@Override
-	public Iterator<Renderable> getRenderables() {
+	public List<Renderable> getRenderables() {
 		// No children for GUI controls
 		return null;
 	}

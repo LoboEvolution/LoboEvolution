@@ -744,15 +744,14 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 		if (this.layoutDeepCanBeInvalidated) {
 			this.layoutDeepCanBeInvalidated = false;
 			invalidateLayoutLocal();
-			final Iterator<Renderable> i = getRenderables();
-			if (i != null) {
-				while (i.hasNext()) {
-					final Renderable rn = i.next();
+			final List<Renderable> renderables = getRenderables();
+			if (renderables != null) {
+				renderables.forEach(rn -> {
 					final Renderable r = (rn instanceof PositionedRenderable) ? ((PositionedRenderable) rn).getRenderable() : rn;
 					if (r instanceof RCollection) {
 						((RCollection) r).invalidateLayoutDeep();
 					}
-				}
+				});
 			}
 		}
 	}

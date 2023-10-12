@@ -39,10 +39,7 @@ import org.loboevolution.http.UserAgentContext;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
+import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
 
@@ -82,16 +79,43 @@ public class DocumentBuilderImpl {
 	 * @throws org.xml.sax.SAXException if any.
 	 * @throws java.io.IOException if any.
 	 */
-	public Document createDocument(final InputSource is) throws SAXException, IOException {
+	public Document createDocument(final InputSource is) throws IOException {
+		final String uri = is.getSystemId();
+		if (uri == null) {
+			log.warn("parse(): InputSource has no SystemId (URI); document item URLs will not be resolvable.");
+		}
+
+		try (final WritableLineReader wis = writableLineReader(is, uri)) {
+			final HTMLDocumentImpl document = new HTMLDocumentImpl(this.bcontext, this.rcontext, this.config, wis, uri);
+			document.load();
+			return document;
+		} catch (SAXException e) {
+			throw new RuntimeException(e);
+		}
+    }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Parses an HTML document. Note that this method will read the entire input
+	 * source before returning a Document instance.
+	 *
+	 * @param is a {@link org.xml.sax.InputSource} object.
+	 * @return a {@link org.loboevolution.html.node.Document} object.
+	 * @throws org.xml.sax.SAXException if any.
+	 * @throws java.io.IOException if any.
+	 */
+	public Document parse(final InputSource is) throws SAXException, IOException {
+		return (HTMLDocumentImpl) createDocument(is);
+	}
+
+	private WritableLineReader writableLineReader(final InputSource is, final String uri) throws IOException {
 		final String encoding = is.getEncoding();
 		String charset = encoding;
 		if (charset == null) {
 			charset = "US-ASCII";
 		}
-		final String uri = is.getSystemId();
-		if (uri == null) {
-			log.warn("parse(): InputSource has no SystemId (URI); document item URLs will not be resolvable.");
-		}
+
 		final WritableLineReader wis;
 		final Reader reader = is.getCharacterStream();
 		if (reader != null) {
@@ -112,23 +136,7 @@ public class DocumentBuilderImpl {
 						"The InputSource must have either a reader, an input stream or a URI.");
 			}
 		}
-		return new HTMLDocumentImpl(this.bcontext, this.rcontext, this.config,  wis, uri);
-	}
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * Parses an HTML document. Note that this method will read the entire input
-	 * source before returning a Document instance.
-	 *
-	 * @param is a {@link org.xml.sax.InputSource} object.
-	 * @return a {@link org.loboevolution.html.node.Document} object.
-	 * @throws org.xml.sax.SAXException if any.
-	 * @throws java.io.IOException if any.
-	 */
-	public Document parse(final InputSource is) throws SAXException, IOException {
-		final HTMLDocumentImpl document = (HTMLDocumentImpl) createDocument(is);
-		document.load();
-		return document;
+		return wis;
 	}
 }

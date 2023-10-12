@@ -39,6 +39,9 @@ import org.loboevolution.html.style.HtmlValues;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.Iterator;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicReference;
 
 abstract class BaseRCollection extends BaseBoundableRenderable implements RCollection {
 
@@ -94,10 +97,9 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 				checkPoint1 = endPoint.getPoint();
 			}
 		}
-		final Iterator<Renderable> i = getRenderables();
-		if (i != null) {
-			while (i.hasNext()) {
-		        final Renderable rn = i.next();
+		final List<Renderable> renderables = getRenderables();
+		if (renderables != null) {
+			for (final Renderable rn : renderables) {
 		        final Renderable robj = (rn instanceof PositionedRenderable) ? ((PositionedRenderable) rn).getRenderable() : rn;
 				if (robj instanceof BoundableRenderable) {
 					final BoundableRenderable renderable = (BoundableRenderable) robj;
@@ -127,15 +129,12 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 					}
 					inSelection = newInSelection;
 				}
-			}
+			};
 		}
 		if (inSelection && checkPoint1 != null) {
 			return false;
 		} else if (!inSelection && (checkPoint1 != null || checkPoint2 != null)
 				&& !(checkPoint1 != null && checkPoint2 != null)) {
-			// Has to have started not being in selection,
-			// but we must start selecting without having
-			// selected anything in the block then.
 			return true;
 		}
 		return inSelection;
@@ -149,41 +148,37 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 
 	/** {@inheritDoc} */
 	public BoundableRenderable getRenderable(final int x, final int y) {
-		final Iterator<Renderable> i = getRenderables();
-		if (i != null) {
-			while (i.hasNext()) {
-				final Renderable rn = i.next();
+		final List<Renderable> renderables = getRenderables();
+		final AtomicReference<BoundableRenderable> renderable = new AtomicReference<>(null);
+		if (renderables != null) {
+			renderables.forEach(rn -> {
 				final Renderable r = (rn instanceof PositionedRenderable) ? ((PositionedRenderable) rn).getRenderable() : rn;
 				if (r instanceof BoundableRenderable) {
 					final BoundableRenderable br = (BoundableRenderable) r;
 					if (br instanceof RBlockViewport) {
-						return br;
+						renderable.set(br);
 					}
 					if ((!br.isDelegated()) && br.contains(x, y)) {
-						return br;
+						renderable.set(br);
 					}
 				}
-			}
+			});
 		}
-		return null;
+		return renderable.get();
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void invalidateLayoutDeep() {
-		// TODO: May be pretty inefficient in RLine's
-		// if it's true that non-layable components
-		// are not in RLine's anymore.
 		invalidateLayoutLocal();
-		final Iterator<Renderable> renderables = getRenderables();
+		final List<Renderable> renderables = getRenderables();
 		if (renderables != null) {
-			while (renderables.hasNext()) {
-		        final Renderable rn = renderables.next();
-		        final Renderable r = (rn instanceof PositionedRenderable) ? ((PositionedRenderable) rn).getRenderable() : rn;
+			renderables.forEach(rn -> {
+				final Renderable r = (rn instanceof PositionedRenderable) ? ((PositionedRenderable) rn).getRenderable() : rn;
 				if (r instanceof RCollection) {
 					((RCollection) r).invalidateLayoutDeep();
 				}
-			}
+			});
 		}
 	}
 
@@ -264,10 +259,9 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 				checkPoint1 = endPoint.getPoint();
 			}
 		}
-		final Iterator<Renderable> i = getRenderables();
-		if (i != null) {
-			while (i.hasNext()) {
-		        final Renderable rn = i.next();
+		final List<Renderable> renderables = getRenderables();
+		if (renderables != null) {
+			for (final Renderable rn : renderables) {
 		        final Renderable robj = (rn instanceof PositionedRenderable) ? ((PositionedRenderable) rn).getRenderable() : rn;
 				if (robj instanceof BoundableRenderable) {
 					final BoundableRenderable renderable = (BoundableRenderable) robj;
@@ -302,7 +296,7 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 						g.translate(-offsetX, -offsetY);
 					}
 				}
-			}
+			};
 		}
 		if (inSelection && checkPoint1 != null) {
 			return false;
@@ -323,20 +317,18 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 	 */
 	@Override
 	public void updateWidgetBounds(final int guiX, final int guiY) {
-		final Iterator<Renderable> i = getRenderables();
-		if (i != null) {
-			while (i.hasNext()) {
-		        final Renderable rn = i.next();
+		final List<Renderable> renderables = getRenderables();
+		if (renderables != null) {
+			renderables.forEach(rn -> {
 		        final Renderable r = (rn instanceof PositionedRenderable) ? ((PositionedRenderable) rn).getRenderable() : rn;
 				if (r instanceof RCollection) {
 					// RUIControl is a RCollection too.
 					final RCollection rc = (RCollection) r;
 					rc.updateWidgetBounds(guiX + rc.getX(), guiY + rc.getY());
 				}
-			}
+			});
 		}
 	}
-
 
 	/**
 	 * <p>getDeclaredWidthImpl.</p>

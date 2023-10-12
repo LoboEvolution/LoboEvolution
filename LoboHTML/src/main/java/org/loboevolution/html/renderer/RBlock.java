@@ -43,7 +43,8 @@ import org.loboevolution.info.FloatingInfo;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
-import java.util.Iterator;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 /**
@@ -529,33 +530,11 @@ public class RBlock extends BaseElementRenderable {
 
 	/** {@inheritDoc} */
 	@Override
-	public Iterator getRenderables() {
+	public List<Renderable> getRenderables() {
 		final RBlockViewport bodyLayout = this.bodyLayout;
-		return new Iterator() {
-			private RBlockViewport bl = bodyLayout;
-
-			@Override
-			public boolean hasNext() {
-				return this.bl != null;
-			}
-
-			@Override
-			public Object next() {
-				if (this.bl == null) {
-					throw new NoSuchElementException();
-				}
-				try {
-					return this.bl;
-				} finally {
-					this.bl = null;
-				}
-			}
-
-			@Override
-			public void remove() {
-				throw new UnsupportedOperationException();
-			}
-		};
+		final List<Renderable> renderables = new ArrayList<>();
+		renderables.add(bodyLayout);
+		return renderables;
 	}
 
 	/**

@@ -543,10 +543,10 @@ class TableMatrix {
 	/**
 	 * <p>getRenderables.</p>
 	 *
-	 * @return a {@link java.util.Iterator} object.
+	 * @return a {@link java.util.List} object.
 	 */
-	public Iterator<RTableCell> getRenderables() {
-		return this.allCells.iterator();
+	public List<RTableCell> getRenderables() {
+		return this.allCells;
 	}
 
 	/**

@@ -61,18 +61,6 @@ public class ArrayUtilities {
 	}
 
 	/**
-	 * <p>iterator.</p>
-	 *
-	 * @param array an array of {@link java.lang.Object} objects.
-	 * @param offset a int.
-	 * @param length a int.
-	 * @return a {@link java.util.Iterator} object.
-	 */
-	public static Iterator iterator(final Object[] array, final int offset, final int length) {
-		return new ArrayIterator(array, offset, length);
-	}
-
-	/**
 	 * <p>moveItem.</p>
 	 *
 	 * @param sourceIndex a int.
@@ -86,41 +74,6 @@ public class ArrayUtilities {
 	    } else {
 	        Collections.rotate(list.subList(targetIndex, sourceIndex + 1), 1);
 	    }
-	}
-	
-	/**
-	 * <p>singletonIterator.</p>
-	 *
-	 * @param item a {@link java.lang.Object} object.
-	 * @return a {@link java.util.Iterator} object.
-	 */
-	public static Iterator singletonIterator(final Object item) {
-		return new Iterator() {
-			private boolean gotItem = false;
-
-			@Override
-			public boolean hasNext() {
-				return !this.gotItem;
-			}
-
-			@Override
-			public Object next() {
-				if (this.gotItem) {
-					throw new NoSuchElementException();
-				}
-				this.gotItem = true;
-				return item;
-			}
-
-			@Override
-			public void remove() {
-				if (!this.gotItem) {
-					this.gotItem = true;
-				} else {
-					throw new NoSuchElementException();
-				}
-			}
-		};
 	}
 	
 
@@ -173,29 +126,5 @@ public class ArrayUtilities {
 			}
 		}
 		return false;
-	}
-	
-	private static class ArrayIterator<T> implements Iterator<T> {
-		private final T[] array;
-		private final int top;
-		private int offset;
-
-		public ArrayIterator(final T[] array, final int offset, final int length) {
-			this.array = array;
-			this.offset = offset;
-			this.top = offset + length;
-		}
-
-		public boolean hasNext() {
-			return this.offset < this.top;
-		}
-
-		public T next() {
-			return this.array[this.offset++];
-		}
-
-		public void remove() {
-			throw new UnsupportedOperationException();
-		}
 	}
 }

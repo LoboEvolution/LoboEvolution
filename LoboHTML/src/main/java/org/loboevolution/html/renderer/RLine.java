@@ -430,8 +430,8 @@ class RLine extends BaseRCollection {
 
 	/** {@inheritDoc} */
 	@Override
-	public Iterator<Renderable> getRenderables() {
-		return this.renderables.iterator();
+	public List<Renderable> getRenderables() {
+		return this.renderables;
 	}
 
 	/** {@inheritDoc} */
@@ -550,10 +550,9 @@ class RLine extends BaseRCollection {
 			g.setColor(textColor);
 			final Font font = rs.getFont();
 			g.setFont(font);
-			final Iterator<Renderable> i = this.renderables.iterator();
-			if (i != null) {
-				while (i.hasNext()) {
-					final Renderable r = i.next();
+			final List<Renderable> renderables = this.renderables;
+			if (renderables != null) {
+				renderables.forEach(r -> {
 					if (r instanceof RElement) {
 						final RElement relement = (RElement) r;
 						if (!relement.isDelegated()) {
@@ -572,7 +571,7 @@ class RLine extends BaseRCollection {
 					} else {
 						r.paint(g);
 					}
-				}
+				});
 			}
 		}
 	}

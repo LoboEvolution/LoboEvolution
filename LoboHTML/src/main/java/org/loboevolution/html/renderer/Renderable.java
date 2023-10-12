@@ -33,6 +33,8 @@ import org.loboevolution.html.dom.nodeimpl.ModelNode;
 
 import java.awt.*;
 import java.util.Iterator;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * Represents a renderer (view) node.
@@ -71,15 +73,15 @@ public interface Renderable {
 	 * @return a {@link org.loboevolution.html.renderer.Renderable} object.
 	 */
 	default Renderable findHtmlRenderable(final RCollection root) {
-		final Iterator<? extends Renderable> rs = root.getRenderables();
-		if (rs != null) {
-			while (rs.hasNext()) {
-				final Renderable r = rs.next();
-				if (r.getModelNode() instanceof HTMLHtmlElement) {
-					return r;
+		final List<Renderable> renderables = root.getRenderables();
+		final AtomicReference<Renderable> renderable = new AtomicReference<>(null);
+		if (renderables != null) {
+			renderables.forEach(rn -> {
+				if (rn.getModelNode() instanceof HTMLHtmlElement) {
+					renderable.set(rn);
 				}
-			}
+			});
 		}
-		return null;
+		return renderable.get();
 	}
 }

@@ -27,7 +27,7 @@
 package org.loboevolution.html.renderer;
 
 import java.awt.*;
-import java.util.Iterator;
+import java.util.List;
 
 /**
  * A {@link org.loboevolution.html.renderer.Renderable} with children.
@@ -59,9 +59,9 @@ public interface RCollection extends BoundableRenderable {
 	/**
 	 * <p>getRenderables.</p>
 	 *
-	 * @return a {@link java.util.Iterator} object.
+	 * @return a {@link java.util.List} object.
 	 */
-	Iterator<Renderable> getRenderables();
+	List<Renderable> getRenderables();
 	
 	/**
 	 * <p>getRenderable.</p>

@@ -55,8 +55,7 @@ public class LoboWebDriver {
 	protected HTMLDocumentImpl loadHtml(final String html) {
 		final String url = LoboWebDriver.class.getResource("/org/lobo/html/htmlsample.html").toString();
 		HTMLDocumentImpl doc = null;
-		try {
-			final WritableLineReader wis = new WritableLineReader(new StringReader(html));
+		try(final WritableLineReader wis = new WritableLineReader(new StringReader(html))){
 			final HtmlRendererConfig config = new LocalHtmlRendererConfig();
 			final UserAgentContext ucontext = new UserAgentContext(config, true);
 			final HtmlPanel panel = new HtmlPanel();
@@ -80,8 +79,7 @@ public class LoboWebDriver {
 	 */
 	protected static HTMLDocumentImpl loadHtml(final InputStream in, final String url) {
 		HTMLDocumentImpl doc = null;
-		try {
-			final WritableLineReader wis = new WritableLineReader(new InputStreamReader(in, StandardCharsets.UTF_8));
+		try (final WritableLineReader wis = new WritableLineReader(new InputStreamReader(in, StandardCharsets.UTF_8))) {
 			final HtmlRendererConfig config = new LocalHtmlRendererConfig();
 			final UserAgentContext ucontext = new UserAgentContext(config, true);
 			final HtmlPanel panel = new HtmlPanel();
@@ -95,5 +93,4 @@ public class LoboWebDriver {
 		}
 		return doc;
 	}
-
 }

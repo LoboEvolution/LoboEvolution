@@ -23,33 +23,19 @@
  *
  * Contact info: ivan.difrancesco@yahoo.it
  */
-/*
- * Created on Apr 16, 2005
- */
-package org.loboevolution.html.renderer;
+
+package org.loboevolution.html.control;
 
 /**
- * Author J. H. S.
+ * <p>LayoutValue class.</p>
  */
-class Range {
-	public final int length;
-	public final int offset;
+public class LayoutValue {
 
-	/**
-	 * <p>Constructor for Range.</p>
-	 *
-	 * @param offset a int.
-	 * @param length a int.
-	 */
-	public Range(final int offset, final int length) {
-		super();
-		this.offset = offset;
-		this.length = length;
-	}
+    public final int height;
+    public final int width;
 
-	/** {@inheritDoc} */
-	@Override
-	public String toString() {
-		return "Range[offset=" + this.offset + ",length=" + this.length + "]";
-	}
+    public LayoutValue(final int width, final int height) {
+        this.width = width;
+        this.height = height;
+    }
 }

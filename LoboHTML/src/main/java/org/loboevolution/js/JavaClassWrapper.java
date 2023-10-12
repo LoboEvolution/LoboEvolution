@@ -29,8 +29,7 @@ import org.loboevolution.info.PropertyInfo;
 import org.mozilla.javascript.Function;
 
 import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * <p>JavaClassWrapper class.</p>
@@ -188,8 +187,8 @@ public class JavaClassWrapper {
 	}
 
 	private void scanMethods() {
-		final Method[] methods = this.javaClass.getMethods();
-		for (final Method method : methods) {
+		final List<Method> methods = Arrays.asList(this.javaClass.getMethods());
+		methods.forEach(method -> {
 			final String name = method.getName();
 			if (isPropertyMethod(name, method)) {
 				ensurePropertyKnown(name, method);
@@ -206,7 +205,7 @@ public class JavaClassWrapper {
 				}
 				f.addMethod(method);
 			}
-		}
+		});
 	}
 
 	/** {@inheritDoc} */

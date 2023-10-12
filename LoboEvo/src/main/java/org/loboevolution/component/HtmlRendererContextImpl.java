@@ -865,13 +865,10 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 				final InputStream bin = new BufferedInputStream(rin, 8192);
 				final String actualURI = urlForLoading.toExternalForm();
 				// Only create document, don't parse.
-				final HTMLDocumentImpl document = createDocument(
-						new InputSourceImpl(bin, actualURI, getDocumentCharset(connection)));
+				final HTMLDocumentImpl document = createDocument(new InputSourceImpl(bin, actualURI, getDocumentCharset(connection)));
 				// Set document in HtmlPanel. Safe to call outside GUI thread.
 				final HtmlPanel panel = this.htmlPanel;
 				panel.setDocument(document, HtmlRendererContextImpl.this);
-				// Now start loading.
-				document.load();
 				final String ref = urlForLoading.getRef();
 				if (ref != null && ref.length() != 0) {
 					panel.scrollToElement(ref);

@@ -62,7 +62,6 @@ import org.xml.sax.SAXException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
-import java.net.SocketPermission;
 import java.net.URL;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
@@ -83,7 +82,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 
 	private URL documentURL;
 
-    private final Map<String, Element> elementsById = new HashMap<>();
+	private final Map<String, Element> elementsById = new HashMap<>();
 
 	private final Map<String, Element> elementsByName = new HashMap<>();
 
@@ -95,7 +94,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 
 	private StyleSheetAggregator styleSheetAggregator = null;
 
-    private final StyleSheetListImpl styleSheets = new StyleSheetListImpl();
+	private final StyleSheetListImpl styleSheets = new StyleSheetListImpl();
 
 	private final UserAgentContext ucontext;
 
@@ -137,10 +136,6 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 		try {
 			if (Strings.isNotBlank(documentURI)) {
 				final URL docURL = new URL(documentURI);
-				final SecurityManager sm = System.getSecurityManager();
-				if (sm != null) {
-					sm.checkPermission(new SocketPermission(docURL.getHost(), "connect"));
-				}
 				this.documentURL = docURL;
 				setDomain(docURL.getHost());
 				this.setDocumentURI(documentURI);
@@ -149,7 +144,6 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 			log.warn("HTMLDocumentImpl(): Document URI {} is malformed.",  documentURI);
 		}
 		this.document = this;
-		// Get WindowImpl object
 		setWindow(rcontext, ucontext, config);
 		final WindowImpl window = (WindowImpl)getDefaultView();
 		window.setDocument(this);
@@ -323,15 +317,15 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	public String getCharacterSet() {
 		return "UTF-8";
 	}
-	
+
 	/** {@inheritDoc} */
 	@Override
 	public String getCharset() {
 		return "UTF-8";
 	}
-    
+
 	/** {@inheritDoc} */
-    @Override
+	@Override
 	public HTMLHeadElementImpl getHead() {
 		synchronized (this) {
 			final HTMLCollection collection = new HTMLCollectionImpl(this, new HeadFilter());
@@ -342,9 +336,9 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 			}
 		}
 	}
-    
+
 	/** {@inheritDoc} */
-    @Override
+	@Override
 	public HTMLElement getBody() {
 		synchronized (this) {
 			if (this.body == null) {
@@ -355,7 +349,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 					return null;
 				}
 			}
-            return this.body;
+			return this.body;
 		}
 	}
 
@@ -384,7 +378,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 				ssa = new StyleSheetAggregator();
 				try {
 					ssa.setDoc(this);
-                    ssa.addStyleSheets(this.styleSheets);
+					ssa.addStyleSheets(this.styleSheets);
 
 				} catch (final Exception mfu) {
 					log.error(mfu.getMessage(), mfu);
@@ -395,12 +389,12 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 		}
 	}
 
-    /**
-     * <p>Getter for the field styleSheets.</p>
-     *
-     * @return a {@link org.loboevolution.html.node.css.StyleSheetList} object.
-     */
-    public StyleSheetList getStyleSheets() {
+	/**
+	 * <p>Getter for the field styleSheets.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.node.css.StyleSheetList} object.
+	 */
+	public StyleSheetList getStyleSheets() {
 		return this.styleSheets;
 	}
 
@@ -437,51 +431,22 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 
 	/**
 	 * Loads the document from the reader provided when the current instance of
-	 * HTMLDocumentImpl was constructed. It then closes the reader.
-	 *
+	 * HTMLDocumentImpl was constructed.
 	 * @throws java.io.IOException if any.
 	 * @throws org.xml.sax.SAXException if any.
 	 * @throws java.io.UnsupportedEncodingException if any.
 	 */
 	public void load() throws IOException, SAXException, UnsupportedEncodingException {
-		this.load(true);
-	}
+		removeAllChildrenImpl();
+		setTitle(null);
+		setBaseURI(null);
+		setDefaultTarget(null);
+		this.styleSheets.clear();
+		this.styleSheetAggregator = null;
 
-	/**
-	 * <p>load.</p>
-	 *
-	 * @param closeReader a boolean.
-	 * @throws java.io.IOException if any.
-	 * @throws org.xml.sax.SAXException if any.
-	 * @throws java.io.UnsupportedEncodingException if any.
-	 */
-	public void load(final boolean closeReader) throws IOException, SAXException, UnsupportedEncodingException {
-		final WritableLineReader reader;
-		synchronized (this) {
-			removeAllChildrenImpl();
-			setTitle(null);
-			setBaseURI(null);
-			setDefaultTarget(null);
-            this.styleSheets.clear();
-			this.styleSheetAggregator = null;
-			reader = this.reader;
-		}
-		if (reader != null) {
-			try {
-				final XHtmlParser parser = new XHtmlParser(getUcontext(), document, true);
-				parser.parse(reader);
-			} finally {
-				if (closeReader) {
-					try {
-						reader.close();
-					} catch (final Exception err) {
-						log.error(err.getMessage(), err);
-					}
-					synchronized (this) {
-						this.reader = null;
-					}
-				}
-			}
+		if (this.reader != null) {
+			final XHtmlParser parser = new XHtmlParser(getUcontext(), document, true);
+			parser.parse(reader);
 		}
 	}
 
@@ -532,7 +497,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 			visitImpl(Node::normalize);
 		}
 	}
-	
+
 	/**
 	 * Changed if the position of the node in a parent has changed.
 	 *

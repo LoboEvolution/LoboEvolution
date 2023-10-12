@@ -34,7 +34,7 @@ import org.loboevolution.html.renderstate.RenderState;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
-import java.util.Iterator;
+import java.util.List;
 
 /**
  * <p>RInlineBlock class.</p>
@@ -69,10 +69,10 @@ public class RInlineBlock extends BaseElementRenderable {
 	/**
 	 * <p>getRenderables.</p>
 	 *
-	 * @return a {@link java.util.Iterator} object.
+	 * @return a {@link java.util.List} object.
 	 */
-	public Iterator<Renderable> getRenderables() {
-		return ArrayUtilities.singletonIterator(this.child);
+	public List<Renderable> getRenderables() {
+		return this.child.getRenderables();
 	}
 
 	/** {@inheritDoc} */

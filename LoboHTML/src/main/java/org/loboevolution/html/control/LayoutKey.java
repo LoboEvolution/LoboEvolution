@@ -23,21 +23,45 @@
  *
  * Contact info: ivan.difrancesco@yahoo.it
  */
-/*
- * Created on Jan 29, 2006
- */
-package org.loboevolution.html.renderer;
 
-import org.loboevolution.html.dom.nodeimpl.NodeImpl;
+package org.loboevolution.html.control;
+
+import java.awt.*;
+import java.util.Objects;
 
 /**
- * <p>NodeRenderer interface.</p>
+ * <p>LayoutKey class.</p>
  */
-public interface NodeRenderer {
-	/**
-	 * <p>setRootNode.</p>
-	 *
-	 * @param node a {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} object.
-	 */
-	void setRootNode(NodeImpl node);
+public class LayoutKey {
+
+    public final int availHeight;
+    public final int availWidth;
+    public final Font font;
+    public final int whitespace;
+
+    public LayoutKey(final int availWidth, final int availHeight, final int whitespace, final Font font) {
+        this.availWidth = availWidth;
+        this.availHeight = availHeight;
+        this.whitespace = whitespace;
+        this.font = font;
+    }
+
+    @Override
+    public boolean equals(final Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof LayoutKey)) {
+            return false;
+        }
+        final LayoutKey other = (LayoutKey) obj;
+        return other.availWidth == this.availWidth && other.availHeight == this.availHeight
+                && other.whitespace == this.whitespace && Objects.equals(other.font, this.font);
+    }
+
+    @Override
+    public int hashCode() {
+        final Font font = this.font;
+        return this.availWidth * 1000 + this.availHeight ^ (font == null ? 0 : font.hashCode());
+    }
 }
