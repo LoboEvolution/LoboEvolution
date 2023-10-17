@@ -28,19 +28,40 @@ package org.loboevolution.html.dom.nodeimpl;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.html.dom.Notation;
 import org.loboevolution.html.dom.nodeimpl.event.EventTargetImpl;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class NotationImpl extends EventTargetImpl implements Notation {
+public class NotationImpl extends NodeImpl implements Notation {
 
     private String publicId;
     private String systemId;
     private String nodeName;
 
     @Override
+    public String getLocalName() {
+        return "";
+    }
+
+    @Override
     public int getNodeType() {
         return NOTATION_NODE;
+    }
+
+    @Override
+    public String getNodeValue() throws DOMException {
+        return null;
+    }
+
+    @Override
+    public void setNodeValue(String nodeValue) throws DOMException {
+        throw new DOMException(DOMException.INVALID_MODIFICATION_ERR, "readonly node");
+    }
+
+    @Override
+    public boolean hasAttributes() {
+        return false;
     }
 }

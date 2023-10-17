@@ -83,8 +83,7 @@ class ExpressionTimerTask extends WeakWindowTask {
 	}
 	
 	private Object evalInScope(final WindowImpl window, final String javascript) {
-		final HTMLDocumentImpl document = (HTMLDocumentImpl)window.getDocumentNode();
-		final Context ctx = Executor.createContext(document.getDocumentURL(), window.getUaContext());
+		final Context ctx = Executor.createContext();
 		try {
 			final String scriptURI = "window.eval";
 			return ctx.evaluateString(window.getWindowScope(), javascript, scriptURI, 1, null);

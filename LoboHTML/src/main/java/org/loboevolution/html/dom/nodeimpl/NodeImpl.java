@@ -41,6 +41,8 @@ import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.HTMLHtmlElement;
 import org.loboevolution.html.dom.UserDataHandler;
 import org.loboevolution.html.dom.filter.ElementFilter;
+import org.loboevolution.html.dom.nodeimpl.event.EventTargetImpl;
+import org.loboevolution.html.node.events.Event;
 import org.loboevolution.html.node.traversal.NodeFilter;
 import org.loboevolution.html.dom.domimpl.*;
 import org.loboevolution.html.dom.filter.TextFilter;
@@ -52,6 +54,8 @@ import org.loboevolution.html.renderstate.StyleSheetRenderState;
 import org.loboevolution.html.xpath.XPathNSResolver;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.js.AbstractScriptableDelegate;
+import org.mozilla.javascript.Function;
+import org.w3c.dom.events.EventException;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -67,6 +71,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	private HTMLCollection childrenCollection;
 	protected volatile Document document;
 	protected final NodeListImpl nodeList = new NodeListImpl();
+	private final EventTargetImpl eventTarget = new EventTargetImpl(this);
 	protected volatile boolean notificationsSuspended = false;
 	protected volatile Node parentNode;
 	private volatile String prefix;
@@ -318,18 +323,8 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		return prevRenderState;
 	}
 
-	/**
-	 * <p>equalAttributes.</p>
-	 *
-	 * @param arg a {@link org.loboevolution.html.node.Node} object.
-	 * @return a boolean.
-	 */
-	public abstract boolean equalAttributes(Node arg);
-
-
 	@Override
 	public NamedNodeMap getAttributes() {return null;}
-
 
 	/**
 	 * Extracts all descendents that match the filter, except those descendents of
@@ -1541,6 +1536,40 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		} catch (final CloneNotSupportedException e) {
 			throw new IllegalStateException(e);
 		}
+	}
+
+	@Override
+	public void addEventListener(final String type, final Function listener) {
+		addEventListener(type, listener, true);
+	}
+
+	@Override
+	public void addEventListener(final String type, final Function listener, final boolean useCapture) {
+		eventTarget.addEventListener(type, listener, useCapture);
+	}
+
+	@Override
+	public void removeEventListener(final String script, final Function function) {
+		removeEventListener(script, function, true);
+	}
+
+	@Override
+	public void removeEventListener(final String type, final Function listener, final boolean useCapture) {
+		eventTarget.removeEventListener(type, listener, useCapture);
+	}
+
+	@Override
+	public boolean dispatchEvent(final Node element, final Event evt) {
+		return eventTarget.dispatchEvent(element, evt);
+	}
+
+	@Override
+	public boolean dispatchEvent(final Event evt) throws EventException {
+		return eventTarget.dispatchEvent(evt);
+	}
+
+	public EventTargetImpl getEventTarget() {
+		return eventTarget;
 	}
 
 	public short getNONE() {

@@ -48,7 +48,7 @@ public class CommentImpl extends CharacterDataImpl implements Comment {
 	/** {@inheritDoc} */
 	@Override
 	public String getLocalName() {
-		return null;
+		return "";
 	}
 
 	/** {@inheritDoc} */
@@ -78,6 +78,11 @@ public class CommentImpl extends CharacterDataImpl implements Comment {
 	@Override
 	public Node appendChild(final Node newChild) {
 		throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "This node type does not support this method.");
+	}
+
+	@Override
+	public boolean hasAttributes() {
+		return false;
 	}
 
 	/** {@inheritDoc} */

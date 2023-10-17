@@ -154,6 +154,11 @@ public class TextImpl extends CharacterDataImpl implements Text {
 		return null;
 	}
 
+	@Override
+	public boolean hasAttributes() {
+		return false;
+	}
+
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

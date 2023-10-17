@@ -26,150 +26,186 @@
 
 package org.loboevolution.html.dom.nodeimpl.event;
 
-import org.htmlunit.cssparser.dom.DOMException;
+import lombok.extern.slf4j.Slf4j;
+import org.loboevolution.common.ArrayUtilities;
+import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.nodeimpl.ElementImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.js.Executor;
-import org.loboevolution.html.node.Element;
+import org.loboevolution.html.js.WindowImpl;
+import org.loboevolution.html.js.events.EventImpl;
+import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.events.Event;
 import org.loboevolution.html.node.events.EventTarget;
+import org.loboevolution.http.UserAgentContext;
+import org.loboevolution.js.JavaScript;
+import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
+import org.mozilla.javascript.RhinoException;
+import org.mozilla.javascript.Scriptable;
 import org.w3c.dom.events.EventException;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * <p>EventTargetImpl class.</p>
  */
-public class EventTargetImpl extends NodeImpl implements EventTarget {
+@Slf4j
+public class EventTargetImpl implements EventTarget {
 
-	private final Map<NodeImpl, Map<String, List<Function>>> onEventHandlers = new HashMap<>();
-	
-	private final List<Node> clicked = new ArrayList<>();
+    private final NodeImpl target;
+    private ArrayList<EventListenerEntry> mListenerEntries;
 
-	/** {@inheritDoc} */
-	@Override
-	public void addEventListener(final String type, final Function listener) {
-	    addEventListener(type, listener, false);
-	}
+    public EventTargetImpl(final NodeImpl target) {
+        this.target = target;
+    }
 
-	/** {@inheritDoc} */
-	@Override
-	public void addEventListener(final String type, final Function listener, final boolean useCapture) {
-		if ("load".equals(type) || "DOMContentLoaded".equals(type)) {
-			onloadEvent(listener);
-		} else {
-			final List<Function> handlerList = new ArrayList<>();
-			handlerList.add(listener);
-			final Map<String, List<Function>> onEventListeners = new HashMap<>();
-			onEventListeners.put(type, handlerList);
-			this.onEventHandlers.put(this, onEventListeners);
-		}
-	}
-	
-	private void onloadEvent(final Function onloadHandler) {
-		Executor.executeFunction(this, onloadHandler, null, new Object[0]);
-	}
+    @Override
+    public void addEventListener(final String type, final Function listener) {
+        addEventListener(type, listener, false);
+    }
 
-	/** {@inheritDoc} */
-	@Override
-	public void removeEventListener(final String type, final Function listener) {
-		removeEventListener(type, listener, true);
-	}
+    @Override
+    public void addEventListener(final String type, final Function listener, final boolean useCapture) {
+        if (Strings.isNotBlank(type) && listener != null) {
+            if ("load".equals(type) || "DOMContentLoaded".equals(type)) {
+                onloadEvent(listener);
+            } else {
+                removeEventListener(type, listener, useCapture);
+                if (mListenerEntries == null) {
+                    mListenerEntries = new ArrayList<EventListenerEntry>();
+                }
+                mListenerEntries.add(new EventListenerEntry(type, listener, useCapture));
+            }
+        }
+    }
 
-	/** {@inheritDoc} */
-	@Override
-	public void removeEventListener(final String type, final Function listener, final boolean useCapture) {
-		final Set<NodeImpl> keySet = onEventHandlers.keySet();
-		for (final NodeImpl htmlElementImpl : keySet) {
-			final Map<String, List<Function>> map = this.onEventHandlers.get(htmlElementImpl);
-			if (map != null) {
-				final List<Function> list = map.get(type);
-				if (list != null) {
-					list.remove(listener);
-				}
-				if (htmlElementImpl instanceof Element) {
-					((ElementImpl) htmlElementImpl).removeAttributeField(type);
-				}
-			}
-		}
-	}
+    @Override
+    public void removeEventListener(final String type, final Function listener) {
+        removeEventListener(type, listener, true);
+    }
 
-	/** {@inheritDoc} */
-	@Override
-	public boolean dispatchEvent(final Node htmlElementImpl, final Event evt) {
-		final Function f = getFunction(htmlElementImpl, evt);
-		if (f != null) {
-			if (!clicked.contains(htmlElementImpl)) {
-				Executor.executeFunction(this, f, evt, new Object[0]);
-				clicked.add(htmlElementImpl);
-			} else {
-				clicked.clear();
-			}
-		}
-		return false;
-	}
+    @Override
+    public void removeEventListener(final String type, final Function listener, final boolean useCapture) {
+        if (ArrayUtilities.isNotBlank(mListenerEntries)) {
+            mListenerEntries.forEach(listenerEntry -> {
+                if ((Objects.equals(listenerEntry.isUseCapture(), useCapture))
+                        && (Objects.equals(listenerEntry.getFunction(), listener))
+                        && Objects.equals(listenerEntry.getType(), type)) {
+                    mListenerEntries.remove(listenerEntry);
+                }
+            });
+        }
+    }
 
-	public Function getFunction(final Node htmlElementImpl, final Event evt) {
-		final Map<String, List<Function>> map = this.onEventHandlers.get(htmlElementImpl);
-		if (map != null) {
-			final String evType = evt.getType();
-			final List<Function> handlers = map.get(evType.startsWith("on") ? evType.substring(2) : evType);
-			if (handlers != null && handlers.size() > 0) {
-				final Optional<Function> optional = handlers.stream().findFirst();
-				return optional.get();
-			}
-		}
-		return null;
-	}
+    @Override
+    public boolean dispatchEvent(final Node element, final Event evt) {
+        final EventImpl eventImpl = (EventImpl) evt;
+        eventImpl.setTarget(this);
+        eventImpl.setEventPhase(Event.AT_TARGET);
+        eventImpl.setCurrentTarget(this);
+        if (!eventImpl.isPropogationStopped() && mListenerEntries != null) {
+            mListenerEntries.forEach(listenerEntry -> {
+                if (!listenerEntry.isUseCapture() && listenerEntry.getType().equals(eventImpl.getType())) {
+                    try {
+                        Executor.executeFunction((NodeImpl) element, listenerEntry.getFunction(), eventImpl, new Object[0]);
+                    } catch (Exception e) {
+                        log.error("Catched EventListener exception", e);
+                    }
+                }
+            });
+        }
+        return eventImpl.isPreventDefault();
+    }
 
-	@Override
-	public boolean dispatchEvent(final Event evt) throws EventException {
-		return false;
-	}
+    @Override
+    public boolean dispatchEvent(final Event evt) throws EventException {
+        final EventImpl eventImpl = (EventImpl) evt;
+        eventImpl.setTarget(this);
+        eventImpl.setEventPhase(Event.AT_TARGET);
+        eventImpl.setCurrentTarget(this);
+        if (!eventImpl.isPropogationStopped() && mListenerEntries != null) {
+            mListenerEntries.forEach(listenerEntry -> {
+                if (!listenerEntry.isUseCapture() && listenerEntry.getType().equals(eventImpl.getType())) {
+                    try {
+                        Executor.executeFunction(target, listenerEntry.getFunction(), eventImpl, new Object[0]);
+                    } catch (Exception e) {
+                        log.error("Catched EventListener exception", e);
+                    }
+                }
+            });
+        }
+        return eventImpl.isPreventDefault();
+    }
 
-	/** {@inheritDoc} */
-	@Override
-	public String getNodeName() {
-		return "[object HTMLDocument]";
-	}
+    public Function getFunction(final Object obj, final String type) {
+        final String subType = type.startsWith("on") ? type.substring(2) : type;
+        if (obj instanceof WindowImpl) {
+            final WindowImpl window = (WindowImpl) obj;
+            return window.getUserAgentContext().isScriptingEnabled() ? searchFunction(subType) : null;
+        }
 
-	/** {@inheritDoc} */
-	@Override
-	public int getNodeType() {
-		return Node.DOCUMENT_NODE;
-	}
+        if (obj instanceof ElementImpl) {
+            final ElementImpl elem = (ElementImpl) obj;
+            final UserAgentContext uac = elem.getUserAgentContext();
+            if (uac.isScriptingEnabled()) {
+                final Function func = searchFunction(subType);
+                if (func == null) {
+                    return searchStringFunction(elem, subType);
+                }
 
-	@Override
-	public boolean equalAttributes(final Node arg) {
-		return false;
-	}
+                return func;
+            }
+        }
 
-	/** {@inheritDoc} */
-	@Override
-	public String getLocalName() {
-		return getNodeName();
-	}
+        return null;
+    }
 
-	/** {@inheritDoc} */
-	@Override
-	public String getNodeValue() {
-		return null;
-	}
-	
-	/** {@inheritDoc} */
-	@Override
-	public void setNodeValue(final String nodeValue) throws DOMException {
-		throw new DOMException(DOMException.INVALID_MODIFICATION_ERR, "Cannot set node value of document");
-	}
+    private Function searchFunction(final String type) {
+        final AtomicReference<Function> function = new AtomicReference<>(null);
+        if (mListenerEntries != null) {
+            mListenerEntries.forEach(listenerEntry -> {
+                if (!listenerEntry.isUseCapture() && listenerEntry.getType().equals(type)) {
+                    function.set(listenerEntry.getFunction());
+                }
+            });
+        }
+        return function.get();
+    }
 
-	@Override
-	public boolean hasAttributes() {
-		return false;
-	}
+    private Function searchStringFunction(final ElementImpl elem, final String type) {
+        Function func = null;
+        final String normalAttributeName = "on" + type;
+        final String attributeValue = elem.getAttribute(normalAttributeName);
+        if (Strings.isCssNotBlank(attributeValue)) {
+            final String functionCode = "function " + normalAttributeName + "_" + System.identityHashCode(this) + "() { " + attributeValue + " }";
+            final Document doc = elem.getDocumentNode();
+            if (doc == null) {
+                throw new IllegalStateException("Element does not belong to a document.");
+            }
 
-	public Map<NodeImpl, Map<String, List<Function>>> getOnEventHandlers() {
-		return onEventHandlers;
-	}
+            try (final Context ctx = Executor.createContext()) {
+                final Scriptable scope = (Scriptable) doc.getUserData(Executor.SCOPE_KEY);
+                if (scope == null) {
+                    throw new IllegalStateException("Scriptable (scope) instance was expected to be keyed as UserData to document using " + Executor.SCOPE_KEY);
+                }
+                final Scriptable thisScope = (Scriptable) JavaScript.getInstance().getJavascriptObject(this, scope);
+                try {
+                    ctx.setLanguageVersion(Context.VERSION_1_8);
+                    func = ctx.compileFunction(thisScope, functionCode, elem.getTagName() + "[" + elem.getId() + "]." + normalAttributeName, 1, null);
+                } catch (final RhinoException ecmaError) {
+                    log.error("Javascript error at {} : {} : {}  ", ecmaError.sourceName(), ecmaError.lineNumber(), ecmaError.getMessage(), ecmaError.getMessage());
+                } catch (final Throwable err) {
+                    log.error("Unable to evaluate Javascript code", err);
+                }
+            }
+        }
+        return func;
+    }
+
+    private void onloadEvent(final Function onloadHandler) {
+        Executor.executeFunction(target, onloadHandler, null, new Object[0]);
+    }
 }

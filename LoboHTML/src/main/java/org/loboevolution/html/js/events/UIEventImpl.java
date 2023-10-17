@@ -30,9 +30,6 @@ import org.loboevolution.html.node.js.Window;
 
 /**
  * <p>UIEventImpl class.</p>
- *
- *
- *
  */
 public class UIEventImpl extends EventImpl implements UIEvent {
 	

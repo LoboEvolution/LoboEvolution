@@ -52,12 +52,9 @@ public class Executor {
 
 	/**
 	 * This method should be invoked instead of Context.enter.
-	 *
-	 * @param codeSource a {@link java.net.URL} object.
-	 * @param ucontext a {@link org.loboevolution.http.UserAgentContext} object.
 	 * @return a {@link org.mozilla.javascript.Context} object.
 	 */
-	public static Context createContext(final URL codeSource, final UserAgentContext ucontext) {
+	public static Context createContext() {
 		final Context ctx = Context.enter();
 		ctx.setLanguageVersion(Context.VERSION_1_8);
 		ctx.setOptimizationLevel(-1);
@@ -92,7 +89,7 @@ public class Executor {
 		if (doc == null) {
 			throw new IllegalStateException("Element does not belong to a document.");
 		}
-		final Context ctx = createContext(element.getDocumentURL(), element.getUserAgentContext());
+		final Context ctx = createContext();
 		try {
 			final Scriptable scope = (Scriptable) doc.getUserData(Executor.SCOPE_KEY);
 			if (scope == null) {
@@ -124,13 +121,10 @@ public class Executor {
 	 *
 	 * @param thisScope a {@link org.mozilla.javascript.Scriptable} object.
 	 * @param f a {@link org.mozilla.javascript.Function} object.
-	 * @param codeSource a {@link java.net.URL} object.
-	 * @param ucontext a {@link org.loboevolution.http.UserAgentContext} object.
 	 * @return a boolean.
 	 */
-	public static boolean executeFunction(final Scriptable thisScope, final Function f,final  URL codeSource,
-										  final UserAgentContext ucontext) {
-		final Context ctx = createContext(codeSource, ucontext);
+	public static boolean executeFunction(final Scriptable thisScope, final Function f) {
+		final Context ctx = createContext();
 		try {
 			try {
 				final Object result = f.call(ctx, thisScope, thisScope, new Object[0]);

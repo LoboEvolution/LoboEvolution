@@ -28,6 +28,7 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
+import lombok.Data;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.html.dom.HTMLBodyElement;
 import org.loboevolution.html.dom.HTMLDocument;
@@ -43,6 +44,7 @@ import org.mozilla.javascript.Function;
  * <p>HTMLBodyElementImpl class.</p>
  */
 public class HTMLBodyElementImpl extends HTMLElementImpl implements HTMLBodyElement {
+
 	/**
 	 * <p>Constructor for HTMLBodyElementImpl.</p>
 	 *
@@ -56,7 +58,7 @@ public class HTMLBodyElementImpl extends HTMLElementImpl implements HTMLBodyElem
 	@Override
 	public void assignAttributeField(final String normalName, final String value) {
 		if ("onload".equals(normalName)) {
-			final Function onload = getEventFunction(null, normalName);
+			final Function onload = getEventTarget().getFunction(this, normalName);
 			if (onload != null) {
 				setOnload(onload);
 			}
@@ -210,6 +212,7 @@ public class HTMLBodyElementImpl extends HTMLElementImpl implements HTMLBodyElem
 		setAttribute("vlink", vLink);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Node appendChild(final Node newChild) {
 
@@ -225,6 +228,72 @@ public class HTMLBodyElementImpl extends HTMLElementImpl implements HTMLBodyElem
 			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Cannot append doc");
 		}
 		return super.appendChild(newChild);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOnafterprint() {
+		return getEventTarget().getFunction(this, "afterprint");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnafterprint(final Function onafterprint) {
+		getEventTarget().addEventListener("afterprint", onafterprint, false);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOnbeforeprint() {
+		return getEventTarget().getFunction(this, "afterprint");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnbeforeprint(final Function onbeforeprint) {
+		getEventTarget().addEventListener("beforeprint", onbeforeprint, false);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOnlanguagechange() {
+		return getEventTarget().getFunction(this, "languagechange");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnlanguagechange(final Function onlanguagechange) {
+		getEventTarget().addEventListener("languagechange", onlanguagechange, false);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOnoffline() {
+		return getEventTarget().getFunction(this, "offline");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOnonline() {
+		return getEventTarget().getFunction(this, "online");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnonline(final Function ononline) {
+		getEventTarget().addEventListener("online", ononline, false);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOnunload() {
+		return getEventTarget().getFunction(this, "unload");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnunload(final Function onunload) {
+		getEventTarget().addEventListener("unload", onunload, false);
 	}
 
 	/** {@inheritDoc} */

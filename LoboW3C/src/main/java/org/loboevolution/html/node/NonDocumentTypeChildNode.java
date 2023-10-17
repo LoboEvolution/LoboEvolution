@@ -28,9 +28,6 @@ package org.loboevolution.html.node;
 
 /**
  * <p>NonDocumentTypeChildNode interface.</p>
- *
- *
- *
  */
 public interface NonDocumentTypeChildNode {
     /**

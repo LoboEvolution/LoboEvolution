@@ -40,7 +40,7 @@ import org.loboevolution.html.node.Node;
  * <p>DocumentTypeImpl class.</p>
  */
 @NoArgsConstructor
-public class DocumentTypeImpl extends EventTargetImpl implements DocumentType {
+public class DocumentTypeImpl extends NodeImpl implements DocumentType {
 	private String publicId;
 	private String qualifiedName;
 	private String systemId;
@@ -63,7 +63,7 @@ public class DocumentTypeImpl extends EventTargetImpl implements DocumentType {
 	/** {@inheritDoc} */
 	@Override
 	public String getLocalName() {
-		return null;
+		return "";
 	}
 
 	/** {@inheritDoc} */
@@ -84,6 +84,16 @@ public class DocumentTypeImpl extends EventTargetImpl implements DocumentType {
 		return Node.DOCUMENT_TYPE_NODE;
 	}
 
+	@Override
+	public String getNodeValue() throws DOMException {
+		return null;
+	}
+
+	@Override
+	public void setNodeValue(final String nodeValue) throws DOMException {
+		throw new DOMException(DOMException.INVALID_MODIFICATION_ERR, "readonly node");
+	}
+
 	/** {@inheritDoc} */
 	@Override
 	public String getPublicId() {
@@ -93,6 +103,11 @@ public class DocumentTypeImpl extends EventTargetImpl implements DocumentType {
 	@Override
 	public Node appendChild(final Node newChild) {
 		throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Cannot append node.");
+	}
+
+	@Override
+	public boolean hasAttributes() {
+		return false;
 	}
 
 	/** {@inheritDoc} */

@@ -43,7 +43,7 @@ import org.loboevolution.html.node.Node;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class EntityReferenceImpl extends EventTargetImpl implements EntityReference {
+public class EntityReferenceImpl extends NodeImpl implements EntityReference {
 
     private String publicId;
     private String systemId;
@@ -52,13 +52,13 @@ public class EntityReferenceImpl extends EventTargetImpl implements EntityRefere
     private String notationName;
 
     @Override
-    public void setNodeValue(final String nodeValue) throws DOMException {
-        super.setNodeValue(nodeValue);
+    public Node replaceChild(final Node newChild, final Node oldChild) {
+        throw new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR, "readonly node");
     }
 
     @Override
-    public Node replaceChild(final Node newChild, final Node oldChild) {
-        throw new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR, "readonly node");
+    public boolean hasAttributes() {
+        return false;
     }
 
     @Override
@@ -67,8 +67,18 @@ public class EntityReferenceImpl extends EventTargetImpl implements EntityRefere
     }
 
     @Override
+    public String getLocalName() {
+        return "";
+    }
+
+    @Override
     public Node insertBefore(final Node newChild, final Node refChild) {
         throw new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR, "readonly node");
+    }
+
+    @Override
+    public void setNodeValue(final String nodeValue) {
+        throw new DOMException(DOMException.INVALID_MODIFICATION_ERR, "readonly node");
     }
 
     @Override

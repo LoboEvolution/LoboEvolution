@@ -24,54 +24,20 @@
  * Contact info: ivan.difrancesco@yahoo.it
  */
 
-package org.loboevolution.html.node.events;
+package org.loboevolution.html.dom.nodeimpl.event;
 
-import org.loboevolution.html.node.js.Window;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import org.mozilla.javascript.Function;
 
 /**
- * Simple user interface events.
+ * <p>EventListenerEntry class.</p>
  */
-public interface UIEvent extends Event {
+@Data
+@AllArgsConstructor
+class EventListenerEntry {
 
-    /**
-     * <p>getDetail.</p>
-     *
-     * @return a double.
-     */
-    double getDetail();
-
-
-    /**
-     * <p>getView.</p>
-     *
-     * @return a {@link org.loboevolution.html.node.js.Window} object.
-     */
-    Window getView();
-
-    /**
-     * <p>initUIEvent.</p>
-     *
-     * @param typeArg       a {@link java.lang.String} object.
-     * @param canBubbleArg  a boolean.
-     * @param cancelableArg a boolean.
-     * @param viewArg       a {@link org.loboevolution.html.node.js.Window} object.
-     * @param detailArg     a double.
-     */
-    void initUIEvent(String typeArg, boolean canBubbleArg, boolean cancelableArg, Window viewArg, double detailArg);
-
-
-    interface UIEventInit extends EventInit {
-
-        int getDetail();
-
-
-        void setDetail(int detail);
-
-
-        Window getView();
-
-
-        void setView(Window view);
-
-    }
+    private String type;
+    private Function function;
+    private boolean useCapture;
 }

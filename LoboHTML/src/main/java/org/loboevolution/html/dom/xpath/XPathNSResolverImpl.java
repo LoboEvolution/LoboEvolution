@@ -77,7 +77,7 @@ public class XPathNSResolverImpl implements XPathNSResolver {
                         }
                         break;
                     case Node.ELEMENT_NODE:
-                        if (parent.getNodeName().indexOf(prefix.toUpperCase() + ":") == 0) {
+                        if (parent.getNodeName().indexOf(prefix + ":") == 0) {
                             return parent.getNamespaceURI();
                         }
                         final NamedNodeMap nnm = parent.getAttributes();

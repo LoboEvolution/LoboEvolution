@@ -58,6 +58,7 @@ import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.style.CSSUtilities;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.html.style.StyleSheetAggregator;
+
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.annotations.JSFunction;
 
@@ -74,7 +75,7 @@ import java.util.stream.Stream;
  * <p>ElementImpl class.</p>
  */
 @Slf4j
-public class ElementImpl extends WindowEventHandlersImpl implements Element {
+public abstract class ElementImpl extends NodeImpl implements Element {
 
 	private final NamedNodeMapImpl map;
 
@@ -91,16 +92,6 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		this.name = name;
 		this.map = new NamedNodeMapImpl(this, new NodeListImpl());
 
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public boolean equalAttributes(final Node arg) {
-		if (arg instanceof ElementImpl) {
-			return Objects.equals(map, arg.getAttributes());
-		} else {
-			return false;
-		}
 	}
 
 	/** {@inheritDoc} */
@@ -186,16 +177,6 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 			} catch (final DOMException ex1) {
 				throw new DOMException(DOMException.NOT_FOUND_ERR, "Attribute not found");
 			}
-		}
-	}
-
-	/**
-	 * @param normalName a {@link java.lang.String} object.
-	 */
-	public void removeAttributeField(final String normalName) {
-		final Map<String, Function> fba = this.getFunctionByAttribute();
-		if (fba != null) {
-			fba.remove("on"+normalName);
 		}
 	}
 
@@ -437,6 +418,11 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		return Node.ELEMENT_NODE;
 	}
 
+	@Override
+	public String getNodeValue() throws DOMException {
+		return null;
+	}
+
 	/**
 	 * Gets inner text of the element, possibly including text in comments. This can
 	 * be used to get Javascript code out of a SCRIPT element.
@@ -570,9 +556,7 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 
 	/** {@inheritDoc} */
 	@Override
-	public void setNodeValue(final String nodeValue) {
-		// nop
-	}
+	public void setNodeValue(final String nodeValue) {}
 
 	/**
 	 * <p>setTitle.</p>
@@ -1193,8 +1177,6 @@ public class ElementImpl extends WindowEventHandlersImpl implements Element {
 		}
 	}
 
-	/** {@inheritDoc} */
-	@Override
 	public void assignAttributeField(final String normalName, final String value) {
 		boolean isName = false;
 		if ("id".equalsIgnoreCase(normalName) || (isName = "name".equals(normalName))) {

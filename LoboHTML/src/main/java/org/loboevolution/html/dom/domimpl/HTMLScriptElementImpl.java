@@ -158,7 +158,7 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 	/**
 	 * <p>processScript.</p>
 	 */
-	protected final void processScript() {
+	private void processScript() {
 		final UserAgentContext bcontext = getUserAgentContext();
 		if (bcontext == null) {
 			throw new IllegalStateException("No user agent context.");
@@ -174,7 +174,7 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 		}
 
 		if (bcontext.isScriptingEnabled()) {
-			final Context ctx = Executor.createContext(getDocumentURL(), bcontext);
+			final Context ctx = Executor.createContext();
 			ctx.setLanguageVersion(Context.VERSION_1_8);
 			ctx.setOptimizationLevel(-1);
 			final String src = getSrc();

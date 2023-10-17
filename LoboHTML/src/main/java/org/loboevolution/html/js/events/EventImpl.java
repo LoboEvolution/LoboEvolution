@@ -25,6 +25,8 @@
  */
 package org.loboevolution.html.js.events;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.loboevolution.html.node.events.Event;
 import org.loboevolution.html.node.events.EventTarget;
 import org.loboevolution.js.AbstractScriptableDelegate;
@@ -35,189 +37,121 @@ import java.util.List;
 /**
  * <p>EventImpl class.</p>
  */
+@Data
+@NoArgsConstructor
 public class EventImpl extends AbstractScriptableDelegate implements Event {
-	
-	private String eventType;
-	
-	private boolean cancelable;
-	
-	private boolean canBubble;
-	
-	/**
-	 * <p>Constructor for EventImpl.</p>
-	 *
-	 * @param eventTypeArg a {@link java.lang.String} object.
-	 * @param canBubbleArg a boolean.
-	 * @param cancelableArg a boolean.
-	 */
-	public EventImpl(final String eventTypeArg, final boolean canBubbleArg, final boolean cancelableArg) {
-		eventType = eventTypeArg;
-		canBubble = canBubbleArg;
-		cancelable = cancelableArg;
-	}
-	
-	/**
-	 * <p>Constructor for EventImpl.</p>
-	 */
-	public EventImpl() {
-		eventType = null;
-		canBubble = false;
-		cancelable = false;
-	}
-	
-	/** {@inheritDoc} */
-	@Override
-	public void initEvent(final String eventTypeArg, final boolean canBubbleArg, final boolean cancelableArg) {
-		eventType = eventTypeArg;
-		canBubble = canBubbleArg;
-		cancelable = cancelableArg;
-	}
 
-	/** {@inheritDoc} */
-	@Override
-	public String getType() {
-		return this.eventType;
-	}
+    private final long mTimeStamp = System.currentTimeMillis();
+    private EventTarget target;
+    private EventTarget currentTarget;
+    private short eventPhase;
+    private int mSeekTo;
+    private String type;
 
-	/** {@inheritDoc} */
-	@Override
-	public EventTarget getTarget() {
+    private boolean bubbles;
+    private boolean cancelBubble;
+    private boolean cancelable;
+    private boolean composed;
+    private boolean defaultPrevented;
+    private boolean initialized;
+    private boolean stopPropagation;
+    private boolean preventDefault;
+
+
+    /**
+     * <p>Constructor for EventImpl.</p>
+     *
+     * @param type a {@link java.lang.String} object.
+     * @param bubbles a boolean.
+     * @param cancelable a boolean.
+     */
+    public EventImpl(final String type, final boolean bubbles, final boolean cancelable) {
+        this.type = type;
+        this.bubbles = bubbles;
+        this.cancelable = cancelable;
+        this.initialized = true;
+    }
+
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void initEvent(final String type, final boolean bubbles, final boolean cancelable) {
+        this.type = type;
+        this.bubbles = bubbles;
+        this.cancelable = cancelable;
+        this.initialized = true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void initEvent(final String type, final boolean bubbles) {
+        initEvent(type, bubbles, false);
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void initEvent(final String type) {
+        initEvent(type, false, false);
+    }
+
+    @Override
+    public boolean isIsTrusted() {
+        return false;
+    }
+
+    @Override
+    public boolean isReturnValue() {
+        return false;
+    }
+
+    @Override
+    public void setReturnValue(final boolean returnValue) {
 		// TODO Auto-generated method stub
-		return null;
+    }
+
+    @Override
+    public EventTarget getSrcElement() {
+        return null;
+    }
+
+    @Override
+    public double getTimeStamp() {
+        return mTimeStamp;
+    }
+
+    @Override
+    public List<EventTarget> composedPath() {
+        return null;
+    }
+
+    @Override
+    public void preventDefault() {
+        preventDefault = true;
+    }
+
+    @Override
+    public void stopImmediatePropagation() {
+        // TODO Auto-generated method stub
+    }
+
+    @Override
+    public void stopPropagation() {
+        stopPropagation = true;
+    }
+
+	public boolean isPropogationStopped() {
+		return stopPropagation;
 	}
 
-	/** {@inheritDoc} */
-	@Override
-	public EventTarget getCurrentTarget() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public boolean isBubbles() {
-		return this.canBubble;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public boolean isCancelable() {
-		return this.cancelable;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public double getTimeStamp() {
-		return System.currentTimeMillis();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void stopPropagation() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void preventDefault() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setCancelBubble(final boolean cancelBubble) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public boolean isComposed() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public boolean isDefaultPrevented() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public EventPhase getEventPhase() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public boolean isIsTrusted() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public boolean isReturnValue() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setReturnValue(final boolean returnValue) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public EventTarget getSrcElement() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public List<EventTarget> composedPath() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void initEvent(final String type, final boolean bubbles) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void initEvent(final String type) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void stopImmediatePropagation() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public boolean isCancelBubble() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public String toString() {
-		return "[object Event]";
-	}
+    @Override
+    public String toString() {
+        return "[object Event]";
+    }
 }

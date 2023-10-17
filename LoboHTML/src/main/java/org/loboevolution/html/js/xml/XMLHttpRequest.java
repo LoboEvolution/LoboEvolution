@@ -80,7 +80,7 @@ public class XMLHttpRequest extends AbstractScriptableDelegate {
 		try {
 			final Function f = getOnreadystatechange();
 			if (f != null) {
-				final Context ctx = Executor.createContext(this.codeSource, this.pcontext);
+				final Context ctx = Executor.createContext();
 				try {
 					final Scriptable newScope = (Scriptable) JavaScript.getInstance().getJavascriptObject(XMLHttpRequest.this, this.scope);
 					f.call(ctx, newScope, newScope, new Object[0]);

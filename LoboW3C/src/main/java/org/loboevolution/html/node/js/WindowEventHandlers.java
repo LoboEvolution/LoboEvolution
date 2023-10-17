@@ -31,9 +31,6 @@ import org.mozilla.javascript.Function;
 
 /**
  * <p>WindowEventHandlers interface.</p>
- *
- *
- *
  */
 public interface WindowEventHandlers extends EventTarget {
 

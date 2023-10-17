@@ -45,6 +45,7 @@ import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.node.css.ComputedCSSStyleDeclaration;
+import org.loboevolution.html.node.events.GlobalEventHandlers;
 import org.loboevolution.html.renderer.HtmlController;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.renderstate.StyleSheetRenderState;
@@ -53,16 +54,18 @@ import org.loboevolution.html.style.ComputedCSSStyleDeclarationImpl;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.html.style.StyleSheetAggregator;
 import org.loboevolution.info.PropertyCssInfo;
+import org.mozilla.javascript.Function;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 
 /**
  * <p>HTMLElementImpl class.</p>
  */
 @Slf4j
-public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSPropertiesContext {
+public class HTMLElementImpl extends ElementImpl implements HTMLElement, GlobalEventHandlers, CSSPropertiesContext {
 
 	private ComputedCSSStyleDeclaration computedStyles;
 
@@ -538,6 +541,1138 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	@Override
 	public void click() {
 		HtmlController.getInstance().onMouseClick(this, null, 0, 0);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>Getter for the field onblur.</p>
+	 */
+	@Override
+	public Function getOnblur() {
+		return getEventTarget().getFunction(this, "blur");
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>Getter for the field onclick.</p>
+	 */
+	@Override
+	public Function getOnclick() {
+		return getEventTarget().getFunction(this, "click");
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>Getter for the field oncontextmenu.</p>
+	 */
+	@Override
+	public Function getOncontextmenu() {
+		return getEventTarget().getFunction(this, "contextmenu");
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>Getter for the field ondblclick.</p>
+	 */
+	@Override
+	public Function getOndblclick() {
+		return getEventTarget().getFunction(this, "dblclick");
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>Getter for the field onfocus.</p>
+	 */
+	@Override
+	public Function getOnfocus() {
+		return getEventTarget().getFunction(this, "focus");
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>Getter for the field onfocus.</p>
+	 */
+	@Override
+	public Function getOnfullscreenchange() {
+		return getEventTarget().getFunction(this, "focus");
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>Getter for the field onkeydown.</p>
+	 */
+	@Override
+	public Function getOnkeydown() {
+		return getEventTarget().getFunction(this, "keydown");
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>Getter for the field onkeypress.</p>
+	 */
+	@Override
+	public Function getOnkeypress() {
+		return getEventTarget().getFunction(this, "keypress");
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>Getter for the field onkeyup.</p>
+	 */
+	@Override
+	public Function getOnkeyup() {
+		return getEventTarget().getFunction(this, "keyup");
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>Getter for the field onmousedown.</p>
+	 */
+	@Override
+	public Function getOnmousedown() {
+		return getEventTarget().getFunction(this, "mousedown");
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>Getter for the field onmousemove.</p>
+	 */
+	@Override
+	public Function getOnmousemove() {
+		return getEventTarget().getFunction(this, "mousemove");
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>Getter for the field onmouseout.</p>
+	 */
+	@Override
+	public Function getOnmouseout() {
+		return getEventTarget().getFunction(this, "mouseout");
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>Getter for the field onmouseover.</p>
+	 */
+	@Override
+	public Function getOnmouseover() {
+		return getEventTarget().getFunction(this, "mouseover");
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>Getter for the field onmouseup.</p>
+	 */
+	@Override
+	public Function getOnmouseup() {
+		return getEventTarget().getFunction(this, "mouseup");
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>Getter for the field onchange.</p>
+	 */
+	@Override
+	public Function getOnchange() {
+		return getEventTarget().getFunction(this, "change");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOnabort() {
+		return getEventTarget().getFunction(this, "abort");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOnanimationcancel() {
+		return getEventTarget().getFunction(this, "animationcancel");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOnanimationend() {
+		return getEventTarget().getFunction(this, "animationend");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOnanimationiteration() {
+		return getEventTarget().getFunction(this, "animationiteration");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOnanimationstart() {
+		return getEventTarget().getFunction(this, "animationstart");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOnauxclick() {
+		return getEventTarget().getFunction(this, "auxclick");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOncancel() {
+		return getEventTarget().getFunction(this, "cancel");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOncanplay() {
+
+		return getEventTarget().getFunction(this, "canplay");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOncanplaythrough() {
+		return getEventTarget().getFunction(this, "canplaythrough");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOnclose() {
+		return getEventTarget().getFunction(this, "close");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOncuechange() {
+		return getEventTarget().getFunction(this, "cuechange");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOndrag() {
+		return getEventTarget().getFunction(this, "drag");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOndragend() {
+		return getEventTarget().getFunction(this, "dragend");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOndragenter() {
+		return getEventTarget().getFunction(this, "dragenter");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOndragexit() {
+		return getEventTarget().getFunction(this, "dragexit");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOndragleave() {
+		return getEventTarget().getFunction(this, "dragleave");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOndragover() {
+		return getEventTarget().getFunction(this, "dragover");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOndragstart() {
+		return getEventTarget().getFunction(this, "dragstart");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOndrop() {
+		return getEventTarget().getFunction(this, "drop");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOndurationchange() {
+		return getEventTarget().getFunction(this, "durationchange");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOnemptied() {
+		return getEventTarget().getFunction(this, "emptied");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOnended() {
+		return getEventTarget().getFunction(this, "ended");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOnerror() {
+		return getEventTarget().getFunction(this, "error");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOnfocusin() {
+		return getEventTarget().getFunction(this, "focusin");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOnfocusout() {
+		return getEventTarget().getFunction(this, "focusout");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOngotpointercapture() {
+		return getEventTarget().getFunction(this, "gotpointercapture");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOninput() {
+		return getEventTarget().getFunction(this, "input");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOninvalid() {
+		return getEventTarget().getFunction(this, "invalid");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOnload() {
+		return getEventTarget().getFunction(this, "load");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOnloadeddata() {
+		return getEventTarget().getFunction(this, "loadeddata");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOnloadedmetadata() {
+		return getEventTarget().getFunction(this, "loadedmetadata");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOnloadend() {
+		return getEventTarget().getFunction(this, "loadend");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOnloadstart() {
+		return getEventTarget().getFunction(this, "loadstart");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOnlostpointercapture() {
+		return getEventTarget().getFunction(this, "lostpointercapture");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOnmouseenter() {
+		return getEventTarget().getFunction(this, "mouseenter");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOnmouseleave() {
+		return getEventTarget().getFunction(this, "mouseleave");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOnpause() {
+		return getEventTarget().getFunction(this, "pause");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOnplay() {
+		return getEventTarget().getFunction(this, "play");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOnplaying() {
+		return getEventTarget().getFunction(this, "playing");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOnpointercancel() {
+		return getEventTarget().getFunction(this, "pointercancel");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOnpointerdown() {
+		return getEventTarget().getFunction(this, "pointerdown");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOnpointerenter() {
+		return getEventTarget().getFunction(this, "pointerenter");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOnpointerleave() {
+		return getEventTarget().getFunction(this, "pointerleave");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOnpointermove() {
+		return getEventTarget().getFunction(this, "pointermove");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOnpointerout() {
+		return getEventTarget().getFunction(this, "pointerout");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOnpointerover() {
+		return getEventTarget().getFunction(this, "pointerover");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOnpointerup() {
+		return getEventTarget().getFunction(this, "pointerup");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOnprogress() {
+		return getEventTarget().getFunction(this, "progress");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOnratechange() {
+		return getEventTarget().getFunction(this, "ratechange");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOnreset() {
+		return getEventTarget().getFunction(this, "reset");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOnresize() {
+		return getEventTarget().getFunction(this, "resize");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOnscroll() {
+		return getEventTarget().getFunction(this, "scroll");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOnsecuritypolicyviolation() {
+		return getEventTarget().getFunction(this, "securitypolicyviolation");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOnseeked() {
+		return getEventTarget().getFunction(this, "seeked");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOnseeking() {
+		return getEventTarget().getFunction(this, "seeking");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOnselect() {
+		return getEventTarget().getFunction(this, "select");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOnselectionchange() {
+		return getEventTarget().getFunction(this, "selectionchange");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOnselectstart() {
+		return getEventTarget().getFunction(this, "selectstart");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOnstalled() {
+		return getEventTarget().getFunction(this, "stalled");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOnsubmit() {
+		return getEventTarget().getFunction(this, "submit");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOnsuspend() {
+		return getEventTarget().getFunction(this, "suspend");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOntimeupdate() {
+		return getEventTarget().getFunction(this, "timeupdate");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOntoggle() {
+		return getEventTarget().getFunction(this, "toggle");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOntouchcancel() {
+		return getEventTarget().getFunction(this, "touchcancel");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOntouchend() {
+		return getEventTarget().getFunction(this, "touchend");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOntouchmove() {
+		return getEventTarget().getFunction(this, "touchmove");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOntouchstart() {
+		return getEventTarget().getFunction(this, "touchstart");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOntransitioncancel() {
+		return getEventTarget().getFunction(this, "transitioncancel");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOntransitionend() {
+		return getEventTarget().getFunction(this, "transitionend");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOntransitionrun() {
+		return getEventTarget().getFunction(this, "transitionrun");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOntransitionstart() {
+		return getEventTarget().getFunction(this, "transitionstart");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOnvolumechange() {
+		return getEventTarget().getFunction(this, "volumechange");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOnwaiting() {
+		return getEventTarget().getFunction(this, "waiting");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Function getOnwheel() {
+		return getEventTarget().getFunction(this, "wheel");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnfocus(final Function onfocus) {
+		getEventTarget().addEventListener("focus", onfocus);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnblur(final Function onblur) {
+		getEventTarget().addEventListener("blur", onblur);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnclick(final Function onclick) {
+		getEventTarget().addEventListener("click", onclick);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOndblclick(final Function ondblclick) {
+		getEventTarget().addEventListener("dblclick", ondblclick);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnmousedown(final Function onmousedown) {
+		getEventTarget().addEventListener("mousedown", onmousedown);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnmouseup(final Function onmouseup) {
+		getEventTarget().addEventListener("mouseup", onmouseup);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnmouseover(final Function onmouseover) {
+		getEventTarget().addEventListener("mouseover", onmouseover);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnmousemove(final Function onmousemove) {
+		getEventTarget().addEventListener("mousemove", onmousemove);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnmouseout(final Function onmouseout) {
+		getEventTarget().addEventListener("mouseout", onmouseout);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnkeypress(final Function onkeypress) {
+		getEventTarget().addEventListener("keypress", onkeypress);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnkeydown(final Function onkeydown) {
+		getEventTarget().addEventListener("keydown", onkeydown);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnkeyup(final Function onkeyup) {
+		getEventTarget().addEventListener("keyup", onkeyup);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOncontextmenu(final Function oncontextmenu) {
+		getEventTarget().addEventListener("contextmenu", oncontextmenu);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnchange(final Function onchange) {
+		getEventTarget().addEventListener("change", onchange);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnabort(final Function onabort) {
+		getEventTarget().addEventListener("abort", onabort);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnwaiting(final Function onwaiting) {
+		getEventTarget().addEventListener("waiting", onwaiting);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnvolumechange(final Function onvolumechange) {
+		getEventTarget().addEventListener("volumechange", onvolumechange);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOntransitionstart(final Function ontransitionstart) {
+		getEventTarget().addEventListener("transitionstart", ontransitionstart);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOntransitionrun(final Function ontransitionrun) {
+		getEventTarget().addEventListener("transitionrun", ontransitionrun);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOntransitionend(final Function ontransitionend) {
+		getEventTarget().addEventListener("transitionend", ontransitionend);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOntransitioncancel(final Function ontransitioncancel) {
+		getEventTarget().addEventListener("transitioncancel", ontransitioncancel);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOntouchstart(final Function ontouchstart) {
+		getEventTarget().addEventListener("touchstart", ontouchstart);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOntoggle(final Function ontoggle) {
+		getEventTarget().addEventListener("toggle", ontoggle);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOntouchmove(final Function ontouchmove) {
+		getEventTarget().addEventListener("touchmove", ontouchmove);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOntouchend(final Function ontouchend) {
+		getEventTarget().addEventListener("touchend", ontouchend);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOntouchcancel(final Function ontouchcancel) {
+		getEventTarget().addEventListener("touchcancel", ontouchcancel);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOntimeupdate(final Function ontimeupdate) {
+		getEventTarget().addEventListener("timeupdate", ontimeupdate);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnsubmit(final Function onsubmit) {
+		getEventTarget().addEventListener("submit", onsubmit);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnstalled(final Function onstalled) {
+		getEventTarget().addEventListener("stalled", onstalled);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnselectstart(final Function onselectstart) {
+		getEventTarget().addEventListener("selectstart", onselectstart);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnselectionchange(final Function onselectionchange) {
+		getEventTarget().addEventListener("selectionchange", onselectionchange);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnselect(final Function onselect) {
+		getEventTarget().addEventListener("select", onselect);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnseeking(final Function onseeking) {
+		getEventTarget().addEventListener("seeking", onseeking);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnseeked(final Function onseeked) {
+		getEventTarget().addEventListener("seeked", onseeked);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnsecuritypolicyviolation(final Function onsecuritypolicyviolation) {
+		getEventTarget().addEventListener("securitypolicyviolation", onsecuritypolicyviolation);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnscroll(final Function onscroll) {
+		getEventTarget().addEventListener("scroll", onscroll);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnresize(final Function onresize) {
+		getEventTarget().addEventListener("resize", onresize);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnreset(final Function onreset) {
+		getEventTarget().addEventListener("reset", onreset);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnratechange(final Function onratechange) {
+		getEventTarget().addEventListener("ratechange", onratechange);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnprogress(final Function onprogress) {
+		getEventTarget().addEventListener("progress", onprogress);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnpointerup(final Function onpointerup) {
+		getEventTarget().addEventListener("pointerup", onpointerup);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnpointerover(final Function onpointerover) {
+		getEventTarget().addEventListener("pointerover", onpointerover);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnpointerout(final Function onpointerout) {
+		getEventTarget().addEventListener("pointerout", onpointerout);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnwheel(final Function onwheel) {
+		getEventTarget().addEventListener("wheel", onwheel);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnsuspend(final Function onsuspend) {
+		getEventTarget().addEventListener("suspend", onsuspend);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnpointermove(final Function onpointermove) {
+		getEventTarget().addEventListener("pointermove", onpointermove);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnpointerleave(final Function onpointerleave) {
+		getEventTarget().addEventListener("pointerleave", onpointerleave);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnpointerenter(final Function onpointerenter) {
+		getEventTarget().addEventListener("pointerenter", onpointerenter);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnpointerdown(final Function onpointerdown) {
+		getEventTarget().addEventListener("pointerdown", onpointerdown);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnpointercancel(final Function onpointercancel) {
+		getEventTarget().addEventListener("pointercancel", onpointercancel);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnplaying(final Function onplaying) {
+		getEventTarget().addEventListener("playing", onplaying);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnplay(final Function onplay) {
+		getEventTarget().addEventListener("play", onplay);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnpause(final Function onpause) {
+		getEventTarget().addEventListener("pause", onpause);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnmouseleave(final Function onmouseleave) {
+		getEventTarget().addEventListener("mouseleave", onmouseleave);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnmouseenter(final Function onmouseenter) {
+		getEventTarget().addEventListener("mouseenter", onmouseenter);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnauxclick(final Function onauxclick) {
+		getEventTarget().addEventListener("auxclick", onauxclick);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnlostpointercapture(final Function onlostpointercapture) {
+		getEventTarget().addEventListener("lostpointercapture", onlostpointercapture);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnloadstart(final Function onloadstart) {
+		getEventTarget().addEventListener("loadstart", onloadstart);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnloadend(final Function onloadend) {
+		getEventTarget().addEventListener("loadend", onloadend);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnloadedmetadata(final Function onloadedmetadata) {
+		getEventTarget().addEventListener("loadedmetadata", onloadedmetadata);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnloadeddata(final Function onloadeddata) {
+		getEventTarget().addEventListener("loadeddata", onloadeddata);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnload(final Function onload) {
+		getEventTarget().addEventListener("load", onload);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOninvalid(final Function oninvalid) {
+		getEventTarget().addEventListener("invalid", oninvalid);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOninput(final Function oninput) {
+		getEventTarget().addEventListener("input", oninput);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOngotpointercapture(final Function ongotpointercapture) {
+		getEventTarget().addEventListener("gotpointercapture", ongotpointercapture);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnfocusout(final Function onfocusout) {
+		getEventTarget().addEventListener("focusout", onfocusout);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnfocusin(final Function onfocusin) {
+		getEventTarget().addEventListener("focusin", onfocusin);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnerror(final Function onerror) {
+		getEventTarget().addEventListener("error", onerror);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnended(final Function onended) {
+		getEventTarget().addEventListener("ended", onended);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnemptied(final Function onemptied) {
+		getEventTarget().addEventListener("emptied", onemptied);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOndurationchange(final Function ondurationchange) {
+		getEventTarget().addEventListener("durationchange", ondurationchange);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOndrop(final Function ondrop) {
+		getEventTarget().addEventListener("drop", ondrop);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOndragstart(final Function ondragstart) {
+		getEventTarget().addEventListener("dragstart", ondragstart);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOndragover(final Function ondragover) {
+		getEventTarget().addEventListener("dragover", ondragover);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOndragleave(final Function ondragleave) {
+		getEventTarget().addEventListener("dragleave", ondragleave);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOndragexit(final Function ondragexit) {
+		getEventTarget().addEventListener("dragexit", ondragexit);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOndragenter(final Function ondragenter) {
+		getEventTarget().addEventListener("dragenter", ondragenter);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOndragend(final Function ondragend) {
+		getEventTarget().addEventListener("dragend", ondragend);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOndrag(final Function ondrag) {
+		getEventTarget().addEventListener("drag", ondrag);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOncuechange(final Function oncuechange) {
+		getEventTarget().addEventListener("cuechange", oncuechange);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnclose(final Function onclose) {
+		getEventTarget().addEventListener("close", onclose);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOncanplaythrough(final Function oncanplaythrough) {
+		getEventTarget().addEventListener("canplaythrough", oncanplaythrough);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOncanplay(final Function oncanplay) {
+		getEventTarget().addEventListener("canplay", oncanplay);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnanimationstart(final Function onanimationstart) {
+		getEventTarget().addEventListener("animationstart", onanimationstart);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnanimationiteration(final Function onanimationiteration) {
+		getEventTarget().addEventListener("animationiteration", onanimationiteration);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnanimationend(final Function onanimationend) {
+		getEventTarget().addEventListener("animationend", onanimationend);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOnanimationcancel(final Function onanimationcancel) {
+		getEventTarget().addEventListener("animationcancel", onanimationcancel);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setOncancel(final Function oncancel) {
+		getEventTarget().addEventListener("cancel", oncancel);
+	}
+
+	/**
+	 * <p>setOnoffline.</p>
+	 *
+	 * @param onoffline a {@link org.mozilla.javascript.Function} object.
+	 */
+	public void setOnoffline(final Function onoffline) {
+
 	}
 
 	/**

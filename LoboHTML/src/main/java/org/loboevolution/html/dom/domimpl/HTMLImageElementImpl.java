@@ -72,7 +72,7 @@ public class HTMLImageElementImpl extends HTMLElementImpl implements HTMLImageEl
 	@Override
 	public void assignAttributeField(final String normalName, final String value) {
 		if ("onload".equals(normalName)) {
-			final Function onload = getEventFunction(null, normalName);
+			final Function onload = getEventTarget().getFunction(this, normalName);
 			if (onload != null) {
 				setOnload(onload);
 			}

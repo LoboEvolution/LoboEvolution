@@ -80,7 +80,7 @@ class FunctionTimerTask extends WeakWindowTask {
 			}
 			final Function function = this.functionRef.get();
 			if (function != null) {
-				Executor.executeFunction(window.getWindowScope(), function, doc.getDocumentURL(), window.getUserAgentContext());
+				Executor.executeFunction(window.getWindowScope(), function);
 			}
 
 		} catch (final Throwable err) {

@@ -58,7 +58,7 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 			final String value = attr.getNodeValue();
 			final String prefix = attr.getPrefix();
 			final String namespace = attr.getNamespaceURI();
-			final AttrImpl attrImpl = new AttrImpl(name, value, "id".equalsIgnoreCase(name), this.owner,  true);
+			final AttrImpl attrImpl = new AttrImpl(name, value, "id".equalsIgnoreCase(name), this.owner, true);
 			attrImpl.setPrefix(prefix);
 			attrImpl.setNamespaceURI(namespace);
 			this.attributes.add(attrImpl);

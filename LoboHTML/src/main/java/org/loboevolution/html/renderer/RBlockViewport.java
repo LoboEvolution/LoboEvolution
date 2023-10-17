@@ -1419,8 +1419,8 @@ public class RBlockViewport extends BaseRCollection {
 		final AtomicBoolean result = new AtomicBoolean(true);
 		if (renderables != null) {
 			renderables.forEach(rn -> {
-				final BoundableRenderable br = (BoundableRenderable) rn;
-				if (br != null) {
+				if (rn instanceof BoundableRenderable) {
+					final BoundableRenderable br = (BoundableRenderable) rn;
 					final Rectangle bounds = br.getVisualBounds();
 					if (!br.onDoubleClick(event, x - bounds.x, y - bounds.y)) {
 						result.set(false);
@@ -1438,8 +1438,8 @@ public class RBlockViewport extends BaseRCollection {
 		final AtomicBoolean result = new AtomicBoolean(true);
 		if (renderables != null) {
 			renderables.forEach(rn -> {
-				final BoundableRenderable br = (BoundableRenderable) rn;
-				if (br != null) {
+				if (rn instanceof BoundableRenderable) {
+					final BoundableRenderable br = (BoundableRenderable) rn;
 					final Rectangle bounds = br.getVisualBounds();
 					if (!br.onMouseClick(event, x - bounds.x, y - bounds.y)) {
 						result.set(false);
@@ -1471,8 +1471,8 @@ public class RBlockViewport extends BaseRCollection {
 		final AtomicBoolean result = new AtomicBoolean(true);
 		if (renderables != null) {
 			renderables.forEach(rn -> {
-				final BoundableRenderable br = (BoundableRenderable) rn;
-				if (br != null) {
+				if (rn instanceof BoundableRenderable) {
+					final BoundableRenderable br = (BoundableRenderable) rn;
 					final Rectangle bounds = br.getVisualBounds();
 					if (!br.onMousePressed(event, x - bounds.x, y - bounds.y)) {
 						this.armedRenderable = br;
@@ -1491,8 +1491,8 @@ public class RBlockViewport extends BaseRCollection {
 		final AtomicBoolean result = new AtomicBoolean(true);
 		if (renderables != null) {
 			renderables.forEach(rn -> {
-				final BoundableRenderable br = (BoundableRenderable) rn;
-				if (br != null) {
+				if (rn instanceof BoundableRenderable) {
+					final BoundableRenderable br = (BoundableRenderable) rn;
 					final Rectangle bounds = br.getVisualBounds();
 					if (!br.onMouseReleased(event, x - bounds.x, y - bounds.y)) {
 						final BoundableRenderable oldArmedRenderable = this.armedRenderable;

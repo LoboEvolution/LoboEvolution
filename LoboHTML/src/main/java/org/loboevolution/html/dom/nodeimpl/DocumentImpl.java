@@ -37,7 +37,6 @@ import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.dom.*;
 import org.loboevolution.html.dom.domimpl.*;
 import org.loboevolution.html.dom.filter.*;
-import org.loboevolution.html.dom.nodeimpl.event.GlobalEventHandlersImpl;
 import org.loboevolution.html.dom.nodeimpl.traversal.NodeIteratorImpl;
 import org.loboevolution.html.dom.nodeimpl.traversal.TreeWalkerImpl;
 import org.loboevolution.html.dom.xpath.XPathEvaluatorImpl;
@@ -70,7 +69,7 @@ import java.util.stream.Stream;
 /**
  * <p>DocumentImpl class.</p>
  */
-public class DocumentImpl extends GlobalEventHandlersImpl implements Document, XPathEvaluator {
+public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
 
 	private boolean strictErrorChecking = true;
 
@@ -527,6 +526,12 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 	/** {@inheritDoc} */
 	@Override
 	public String getDocumentURI() {
+		return this.documentURI;
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public String getBaseURI() {
 		return this.documentURI;
 	}
 
@@ -1337,5 +1342,30 @@ public class DocumentImpl extends GlobalEventHandlersImpl implements Document, X
 
 	public void setTest(final boolean test) {
 		this.test = test;
+	}
+
+	@Override
+	public String getLocalName() {
+		return "";
+	}
+
+	@Override
+	public String getNodeName() {
+		return "[object HTMLDocument]";
+	}
+
+	@Override
+	public int getNodeType() {
+		return Node.DOCUMENT_NODE;
+	}
+
+	@Override
+	public String getNodeValue() throws DOMException {
+		return null;
+	}
+
+	@Override
+	public void setNodeValue(String nodeValue) throws DOMException {
+		throw new DOMException(DOMException.INVALID_MODIFICATION_ERR, "readonly node");
 	}
 }

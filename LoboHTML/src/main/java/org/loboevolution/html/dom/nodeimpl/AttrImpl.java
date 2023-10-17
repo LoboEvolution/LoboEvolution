@@ -25,18 +25,15 @@
  */
 package org.loboevolution.html.dom.nodeimpl;
 
+import lombok.*;
 import org.htmlunit.cssparser.dom.DOMException;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 import org.loboevolution.common.Nodes;
 import org.loboevolution.common.Strings;
-import org.loboevolution.html.dom.nodeimpl.event.EventTargetImpl;
 import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.NamedNodeMap;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.TypeInfo;
+
 import java.util.Objects;
 
 /**
@@ -46,9 +43,9 @@ import java.util.Objects;
 @Data
 @Builder
 @AllArgsConstructor
-public class AttrImpl extends EventTargetImpl implements Attr {
+public class AttrImpl extends NodeImpl implements Attr {
 
-    private final String name;
+    private String name;
 
     private String value;
 
@@ -56,8 +53,7 @@ public class AttrImpl extends EventTargetImpl implements Attr {
 
     private Node ownerElement;
 
-    @Builder.Default
-    private boolean specified = true;
+    private boolean specified;
 
     /**
      * {@inheritDoc}
@@ -205,6 +201,11 @@ public class AttrImpl extends EventTargetImpl implements Attr {
             }
         }
         return comparison;
+    }
+
+    @Override
+    public boolean hasAttributes() {
+        return false;
     }
 
     public void setOwnerElement(final Node ownerElement) {

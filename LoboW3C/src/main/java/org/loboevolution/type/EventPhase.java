@@ -33,9 +33,6 @@ import java.util.Map;
 
 /**
  * <p>EventPhase class.</p>
- *
- *
- *
  */
 public enum EventPhase {
 	
@@ -88,7 +85,7 @@ public enum EventPhase {
 	 * @return a {@link org.loboevolution.type} object.
 	 */
 	public static EventPhase get(String actionName) {
-		EventPhase value = ENUM_MAP.get(actionName);
+		final EventPhase value = ENUM_MAP.get(actionName);
 		return value == null ? EventPhase.NONE : value;
 	}
 

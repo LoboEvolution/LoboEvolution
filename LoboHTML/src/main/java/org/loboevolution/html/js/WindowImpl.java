@@ -174,7 +174,7 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 		if (prevDocument != document) {
 			final Function onunload = getOnunload();
 			if (onunload != null) {
-				Executor.executeFunction(this.getWindowScope(), onunload, prevDocument.getDocumentURL(), this.getUaContext());
+				Executor.executeFunction(this.getWindowScope(), onunload);
 				setOnunload(null);
 			}
 
@@ -413,8 +413,6 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 		return this.document;
 	}
 
-	/** {@inheritDoc} */
-	@Override
 	public Document getDocumentNode() {
 		return this.document;
 	}
@@ -440,9 +438,10 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 
 	/** {@inheritDoc} */
 	@Override
-    public Storage getSessionStorage() {
-    	 return new SessionStorage(this.getHtmlRendererConfig());
-    }
+	public Storage getSessionStorage() {
+		final HTMLDocumentImpl doc = this.document;
+		return new SessionStorage(doc.getHtmlRendererConfig());
+	}
 
 	/** {@inheritDoc} */
 	@Override
@@ -838,6 +837,15 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 		}
 	}
 
+	@Override
+	public boolean dispatchEvent(final Node element, final Event evt) {
+		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.getDocument();
+		if (doc != null) {
+			return doc.dispatchEvent(element, evt);
+		}
+		return false;
+	}
+
 	/** {@inheritDoc} */
 	@Override
 	public double getInnerHeight() {
@@ -967,7 +975,8 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 	/** {@inheritDoc} */
 	@Override
 	public Console getConsole() {
-		return new ConsoleImpl(this.getHtmlRendererConfig());
+		final HTMLDocumentImpl doc = this.document;
+		return new ConsoleImpl(doc.getHtmlRendererConfig());
 	}
 
 	/** {@inheritDoc} */
@@ -1327,11 +1336,6 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 	public NodeFilter getNodeFilter() {
 		return new NodeFilterImpl();
 	}
-
-	public Node getNode() {
-		return this;
-	}
-
 
 	@Override
 	public String toString() {

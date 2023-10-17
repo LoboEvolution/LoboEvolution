@@ -348,6 +348,7 @@ public class XHtmlParser {
 							} else {
 								reference = new EntityReferenceImpl();
 							}
+							reference.setOwnerDocument(document);
 
 							if (sp.length > 2) {
 								sp = doctypeStr2.split("[\"\\s+]");
@@ -387,6 +388,7 @@ public class XHtmlParser {
 						case "!NOTATION":
 							final String notationStr = this.parseEndOfTag(reader);
 							final NotationImpl not = new NotationImpl();
+							not.setOwnerDocument(document);
 
 							if (notationStr.contains("PUBLIC")) {
 								final String[] split = notationStr.split("PUBLIC");

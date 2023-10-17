@@ -35,7 +35,7 @@ import org.loboevolution.html.node.CharacterData;
 /**
  * <p>Abstract CharacterDataImpl class.</p>
  */
-public class CharacterDataImpl extends EventTargetImpl implements CharacterData {
+public abstract class CharacterDataImpl extends NodeImpl implements CharacterData {
 	
 	protected volatile String text;
 
