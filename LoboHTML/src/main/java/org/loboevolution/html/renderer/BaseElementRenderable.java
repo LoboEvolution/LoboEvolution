@@ -991,7 +991,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 			final int newStartY = startY + btop;
 			final Rectangle clientRegion = new Rectangle(newStartX, newStartY, newTotalWidth, newTotalHeight);
 			final Rectangle clipBounds = g.getClipBounds();
-			if (!clientRegion.contains(clipBounds)) {
+			if (clipBounds == null || !clientRegion.contains(clipBounds)) {
 				final BorderInfo borderInfo = this.borderInfo;
 				int x1;
 				int y1;
