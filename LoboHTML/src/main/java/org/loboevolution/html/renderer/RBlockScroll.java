@@ -63,23 +63,31 @@ public class RBlockScroll {
      * @param g a {@link java.awt.Graphics} object.
      */
     public void paintSroll(final Graphics g) {
-        final JScrollBar hsb = getHScrollBar();
-        final Insets insets = rBlock.getInsetsMarginBorder(rBlock.hasHScrollBar, rBlock.hasVScrollBar);
-        if (hsb != null) {
-            final Graphics sbg = g.create(insets.left, rBlock.getHeight() - insets.bottom, rBlock.getWidth() - insets.left - insets.right, 16);
-            try {
-                hsb.paint(sbg);
-            } finally {
-                sbg.dispose();
+        final boolean hscroll = rBlock.hasHScrollBar;
+        final boolean vscroll = rBlock.hasVScrollBar;
+
+        if (hscroll || vscroll) {
+
+            final JScrollBar hsb = hScrollBar;
+            final JScrollBar vsb = vScrollBar;
+
+            final Insets insets = rBlock.getInsetsMarginBorder(rBlock.hasHScrollBar, rBlock.hasVScrollBar);
+            if (hsb != null) {
+                final Graphics sbg = g.create(insets.left, rBlock.getHeight() - insets.bottom, rBlock.getWidth() - insets.left - insets.right, 16);
+                try {
+                    hsb.paint(sbg);
+                } finally {
+                    sbg.dispose();
+                }
             }
-        }
-        final JScrollBar vsb = getVScrollBar();
-        if (vsb != null) {
-            final Graphics sbg = g.create(rBlock.getWidth() - insets.right, insets.top, 16, rBlock.getHeight() - insets.top - insets.bottom);
-            try {
-                vsb.paint(sbg);
-            } finally {
-                sbg.dispose();
+
+            if (vsb != null) {
+                final Graphics sbg = g.create(rBlock.getWidth() - insets.right, insets.top, 16, rBlock.getHeight() - insets.top - insets.bottom);
+                try {
+                    vsb.paint(sbg);
+                } finally {
+                    sbg.dispose();
+                }
             }
         }
     }
@@ -309,11 +317,7 @@ public class RBlockScroll {
 
         @Override
         public void adjustmentValueChanged(final AdjustmentEvent evt) {
-            if (evt.getValueIsAdjusting()) {
-                return;
-            }
-
-            if (!resettingScrollBars) {
+            if (!evt.getValueIsAdjusting() && !resettingScrollBars) {
                 final int value = evt.getValue();
                 scrollToSBValue(this.orientation, value);
                 rBlock.onMouseScroll();

@@ -109,7 +109,7 @@ public interface SVGPathSegCurvetoCubicAbs extends SVGPathSeg {
 	 * @param x2 a float.
 	 * @throws DOMException if any.
 	 */
-	void setX2(float x2);;
+	void setX2(float x2);
 
 	/**
 	 * <p>getY2.</p>
@@ -124,5 +124,5 @@ public interface SVGPathSegCurvetoCubicAbs extends SVGPathSeg {
 	 * @param y2 a float.
 	 * @throws DOMException if any.
 	 */
-	void setY2(float y2);;
+	void setY2(float y2);
 }

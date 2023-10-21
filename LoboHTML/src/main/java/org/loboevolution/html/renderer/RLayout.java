@@ -42,10 +42,10 @@ import java.util.Map;
  * <p>RLayout class.</p>
  */
 public class RLayout {
-	
+
 	/** Constant elementLayout */
 	protected static final Map<HTMLTag, MarkupLayout> elementLayout = new HashMap<>();
-	
+
 	static {
 		final Map<HTMLTag, MarkupLayout> el = elementLayout;
 
@@ -87,9 +87,10 @@ public class RLayout {
 		el.put(HTMLTag.MAIN, block);
 		el.put(HTMLTag.PRE, block);
 		el.put(HTMLTag.DETAILS, block);
+		el.put(HTMLTag.P, block);
 
 		el.put(HTMLTag.BR,new BrLayout());
-		el.put(HTMLTag.P,new PLayout());
+
 		el.put(HTMLTag.NOSCRIPT,new NoScriptLayout());
 		final NopLayout nop = new NopLayout();
 		el.put(HTMLTag.SCRIPT,nop);
@@ -143,7 +144,7 @@ public class RLayout {
 	}
 
 	protected abstract static class CommonLayout implements MarkupLayout {
-	
+
 	    private final int display;
 
 		public CommonLayout(final int defaultDisplay) {
@@ -194,7 +195,7 @@ public class RLayout {
 					break;
 			}
 		}
-		
+
 		private int calculateLayout(final HTMLElementImpl markupElement) {
 			final RenderState rs = markupElement.getRenderState();
 			final boolean isHidden = markupElement.isHidden();
@@ -259,7 +260,7 @@ public class RLayout {
 	        }
 	    }
 	}
-	
+
 	protected static class CanvasLayout extends CommonWidgetLayout {
 		public CanvasLayout() {
 			super(ADD_AS_BLOCK);
@@ -280,12 +281,12 @@ public class RLayout {
 
 		@Override
 		protected RElement createRenderable(final RBlockViewport bodyLayout, final HTMLElementImpl markupElement) {
-			UIControl control = new SVGControl((SVGSVGElementImpl) markupElement);
+			final UIControl control = new SVGControl((SVGSVGElementImpl) markupElement);
 			return new RUIControl(markupElement,control, bodyLayout.container,
 					bodyLayout.frameContext, bodyLayout.userAgentContext);
 		}
 	}
-	
+
 	protected static class RSSLayout extends CommonWidgetLayout {
 		public RSSLayout() {
 			super(ADD_AS_BLOCK);
@@ -332,7 +333,7 @@ public class RLayout {
 					bodyLayout.frameContext, bodyLayout.userAgentContext);
 		}
 	}
-	
+
 	protected static class IFrameLayout extends CommonWidgetLayout {
 		public IFrameLayout() {
 			super(ADD_INLINE);
@@ -345,7 +346,7 @@ public class RLayout {
 					bodyLayout.userAgentContext);
 		}
 	}
-	
+
 	protected static class ListItemLayout extends CommonLayout {
 		public ListItemLayout() {
 			super(RenderState.DISPLAY_LIST_ITEM);
@@ -406,17 +407,6 @@ public class RLayout {
 		}
 	}
 
-	protected static class PLayout extends CommonLayout {
-		public PLayout() {
-			super(RenderState.DISPLAY_BLOCK);
-		}
-
-		@Override
-		public void layoutMarkup(final RBlockViewport bodyLayout, final HTMLElementImpl markupElement) {
-			super.layoutMarkup(bodyLayout, markupElement);
-		}
-	}
-
 	protected static class SelectLayout extends CommonWidgetLayout {
 		public SelectLayout() {
 			super(ADD_INLINE);
@@ -435,13 +425,13 @@ public class RLayout {
 			super(RenderState.DISPLAY_TABLE);
 		}
 	}
-	
+
 	protected static class TableRowLayout extends CommonLayout {
 		public TableRowLayout() {
 			super(RenderState.DISPLAY_TABLE_ROW);
 		}
 	}
-	
+
 	protected static class TableCellLayout extends CommonLayout {
 		public TableCellLayout() {
 			super(RenderState.DISPLAY_TABLE_CELL);
@@ -460,7 +450,7 @@ public class RLayout {
 					bodyLayout.userAgentContext);
 		}
 	}
-	
+
 	protected static class ButtonLayout extends CommonWidgetLayout {
 		public ButtonLayout() {
 			super(ADD_INLINE);

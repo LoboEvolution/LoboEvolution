@@ -69,7 +69,9 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, GlobalE
 
 	private ComputedCSSStyleDeclaration computedStyles;
 
-	private volatile CSSStyleDeclaration currentStyleDeclarationState;
+	private CSSStyleDeclaration currentStyleDeclarationState;
+
+	private CSSStyleDeclaration mouseOverStyleDeclarationState = null;
 
 	private CSSStyleDeclarationImpl localStyleDeclarationState = null;
 
@@ -125,6 +127,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, GlobalE
 			this.currentStyleDeclarationState = null;
 			this.computedStyles = null;
 			if (deep) {
+
 				nodeList.forEach(node -> {
 					if (node instanceof HTMLElementImpl) {
 						((HTMLElementImpl) node).forgetStyle(deep);
@@ -195,16 +198,19 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, GlobalE
 	 * @return a {@link org.loboevolution.html.node.css.ComputedCSSStyleDeclaration} object.
 	 */
 	public ComputedCSSStyleDeclaration getComputedStyle(final String pseudoElem) {
+
+		final ComputedCSSStyleDeclaration computedStyles = this.computedStyles;
+		if (computedStyles != null) {
+			return computedStyles;
+		}
+
 		String pseudoElement = pseudoElem;
 
 		if (pseudoElement == null) {
 			pseudoElement = "";
 		}
 
-		final ComputedCSSStyleDeclaration computedStyles = this.computedStyles;
-		if (computedStyles != null) {
-			return computedStyles;
-		}
+
 
 		final CSSStyleDeclarationImpl style = (CSSStyleDeclarationImpl) addStyleSheetDeclarations(false, pseudoElement);
 		final CSSStyleDeclarationImpl localStyle = (CSSStyleDeclarationImpl) getStyle();
@@ -220,14 +226,10 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, GlobalE
 	 * @return a {@link org.loboevolution.html.node.css.CSSStyleDeclaration} object.
 	 */
 	public CSSStyleDeclaration getCurrentStyle() {
-		CSSStyleDeclarationImpl style;
-		synchronized (this) {
-			style = (CSSStyleDeclarationImpl) this.currentStyleDeclarationState;
-			if (style != null) {
-				return style;
-			}
+		CSSStyleDeclarationImpl style = (CSSStyleDeclarationImpl) this.currentStyleDeclarationState;
+		if (style != null) {
+			return style;
 		}
-
 		style = (CSSStyleDeclarationImpl) addStyleSheetDeclarations(false, getTagName());
 		final CSSStyleDeclarationImpl localStyle = (CSSStyleDeclarationImpl) getStyle();
 		localStyle.merge(style);
@@ -310,7 +312,12 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, GlobalE
 	public CSSStyleDeclaration getParentStyle() {
 		final Object parent = this.parentNode;
 		if (parent instanceof HTMLElementImpl) {
-			return ((HTMLElementImpl) parent).getCurrentStyle();
+			final HTMLElementImpl elementParent = (HTMLElementImpl) parent;
+			if (elementParent.currentStyleDeclarationState != null) {
+				return elementParent.currentStyleDeclarationState;
+			}
+
+			return elementParent.getCurrentStyle();
 		}
 		return null;
 	}
@@ -387,7 +394,13 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, GlobalE
 	public void setMouseOver(final boolean mouseOver) {
 		if (hasMouseOver) {
 			if (mouseOver) {
-				currentStyleDeclarationState = addStyleSheetDeclarations(true, getTagName());
+				if (mouseOverStyleDeclarationState != null) {
+					currentStyleDeclarationState = mouseOverStyleDeclarationState;
+				} else {
+					currentStyleDeclarationState = addStyleSheetDeclarations(true, getTagName());
+					mouseOverStyleDeclarationState = currentStyleDeclarationState;
+				}
+
 				if (currentStyleDeclarationState != null) {
 					informInvalidRecursive();
 				}
@@ -460,7 +473,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, GlobalE
 		final Node node = getParentNode();
 		if (node instanceof HTMLElement) {
 			final HTMLElementImpl element = (HTMLElementImpl) node;
-			final ComputedCSSStyleDeclaration style = element.getComputedStyle();
+			final ComputedCSSStyleDeclaration style = this.computedStyles;
 			if (!CSSValues.STATIC.isEqual(style.getPosition())) {
 				return element;
 			}
@@ -1726,6 +1739,10 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, GlobalE
 		properties3.forEach(prop -> localStyleDeclarationState.setPropertyValueProcessed(prop.getName(), prop.getValue(), prop.isImportant()));
 
 		return localStyleDeclarationState;
+	}
+
+	public boolean isHasMouseOver() {
+		return hasMouseOver;
 	}
 
 	/** {@inheritDoc} */

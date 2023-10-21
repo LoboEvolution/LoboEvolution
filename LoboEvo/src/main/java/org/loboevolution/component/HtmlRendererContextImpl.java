@@ -44,6 +44,7 @@ import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLImageElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLLinkElementImpl;
 import org.loboevolution.html.dom.input.FormInput;
+import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.parser.DocumentBuilderImpl;
 import org.loboevolution.html.parser.InputSourceImpl;
 import org.loboevolution.http.UserAgentContext;
@@ -405,8 +406,9 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 	public boolean onContextMenu(HTMLElement element, final MouseEvent event) {
 		final HTMLElementImpl elem = (HTMLElementImpl) element;
 		final HTMLImageElementImpl elmImg = new HTMLImageElementImpl();
-		if (elem.getCurrentStyle() != null && Strings.isNotBlank(elem.getCurrentStyle().getBackgroundImage())) {
-			final String backgroundImageText = elem.getCurrentStyle().getBackgroundImage();
+		final CSSStyleDeclaration style = elem.getCurrentStyle();
+		if (style != null && Strings.isNotBlank(style.getBackgroundImage())) {
+			final String backgroundImageText = style.getBackgroundImage();
 			final String start = "url(";
 			final int startIdx = start.length() + 1;
 			final int closingIdx = backgroundImageText.lastIndexOf(')') - 1;
