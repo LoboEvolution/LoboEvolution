@@ -137,6 +137,21 @@ public interface Element extends Node, InnerHTML, NonDocumentTypeChildNode, Pare
     String getOuterHTML();
 
     /**
+     * <p>getInnerHTML.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
+    String getInnerHTML();
+
+
+    /**
+     * <p>getInnerText.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
+    String getInnerText();
+
+    /**
      * <p>getBoundingClientRect.</p>
      *
      * @return a {@link DOMRect} object.

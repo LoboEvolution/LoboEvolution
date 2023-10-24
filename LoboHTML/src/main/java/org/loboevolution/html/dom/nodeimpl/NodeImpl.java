@@ -185,11 +185,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		nodeList.forEach(child -> {
 			if (child instanceof HTMLElementImpl) {
 				final HTMLElementImpl elem = (HTMLElementImpl) child;
-				if (elem.getOuter() != null) {
-					buffer.append(elem.getOuter());
-				} else {
-					((HTMLElementImpl) child).appendOuterHTMLImpl(buffer);
-				}
+				((HTMLElementImpl) child).appendOuterHTMLImpl(buffer);
 			} else if (child instanceof Comment) {
 				buffer.append("<!--").append((child).getTextContent()).append("-->");
 			} else if (child instanceof Text) {
@@ -527,33 +523,6 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		} else {
 			return new LocalHtmlRendererConfig();
 		}
-	}
-
-	/**
-	 * <p>getInnerHTML.</p>
-	 *
-	 * @return a {@link java.lang.String} object.
-	 */
-	public String getInnerHTML() {
-		final StringBuilder buffer = new StringBuilder();
-		synchronized (this) {
-			appendInnerHTMLImpl(buffer);
-		}
-		return buffer.toString();
-	}
-
-	/**
-	 * Attempts to convert the subtree starting at this point to a close text
-	 * representation. BR elements are converted to line breaks, and so forth.
-	 *
-	 * @return a {@link java.lang.String} object.
-	 */
-	public String getInnerText() {
-		final StringBuilder buffer = new StringBuilder();
-		synchronized (this) {
-			appendInnerTextImpl(buffer);
-		}
-		return buffer.toString();
 	}
 
 	/** {@inheritDoc} */

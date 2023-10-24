@@ -515,7 +515,7 @@ public class HTMLElementTest extends LoboUnitTest {
     @Test
     public void getInnerHTML_EmptyAttributes() {
         final String html = "<body onload='alert(document.body.innerHTML)'><div id='i' foo='' name=''></div></body>";
-        final String[] messages = {"<div id='i' foo='' name=''>"};
+        final String[] messages = {"<DIV id='i' foo='' name=''/>"};
         checkHtmlAlert(html, messages);
     }
 
@@ -771,7 +771,7 @@ public class HTMLElementTest extends LoboUnitTest {
     @Test
     public void getOuterHTMLFromUnclosedParagraph() {
         final String html = createPageForGetOuterHTML("p", "New  cell value", true);
-        final String[] messages = {"Outer = <P id=\"myNode\">New  cell value\n\n</P>"};
+        final String[] messages = {"Outer = <P id=\"myNode\">New  cell value\n</P>"};
         checkHtmlAlert(html, messages);
     }
 
@@ -848,7 +848,7 @@ public class HTMLElementTest extends LoboUnitTest {
     @Test
     public void setOuterHTMLAddBlockToBlock() {
         final String html = createPageForSetOuterHTML("div", "<div>test</div>");
-        final String[] messages = {"Old = <SPAN id=\"innerNode\">Old outerHTML</SPAN>", "New = <div>test</div>", "Children: 1"};
+        final String[] messages = {"Old = <SPAN id=\"innerNode\">Old outerHTML</SPAN>", "New = <DIV>test</DIV>", "Children: 1"};
         checkHtmlAlert(html, messages);
     }
 
@@ -858,7 +858,7 @@ public class HTMLElementTest extends LoboUnitTest {
     @Test
     public void setOuterHTMLAddBlockToInline() {
         final String html = createPageForSetOuterHTML("span", "<div>test</div>");
-        final String[] messages = {"Old = <SPAN id=\"innerNode\">Old outerHTML</SPAN>", "New = <div>test</div>", "Children: 1"};
+        final String[] messages = {"Old = <SPAN id=\"innerNode\">Old outerHTML</SPAN>", "New = <DIV>test</DIV>", "Children: 1"};
         checkHtmlAlert(html, messages);
     }
 
@@ -869,7 +869,7 @@ public class HTMLElementTest extends LoboUnitTest {
     @Test
     public void setOuterHTMLAddInlineToInline() {
         final String html = createPageForSetOuterHTML("span", "<span>test</span>");
-        final String[] messages = {"Old = <SPAN id=\"innerNode\">Old outerHTML</SPAN>", "New = <span>test</span>", "Children: 1"};
+        final String[] messages = {"Old = <SPAN id=\"innerNode\">Old outerHTML</SPAN>", "New = <SPAN>test</SPAN>", "Children: 1"};
         checkHtmlAlert(html, messages);
     }
 
@@ -879,7 +879,7 @@ public class HTMLElementTest extends LoboUnitTest {
     @Test
     public void setOuterHTMLAddInlineToBlock() {
         final String html = createPageForSetOuterHTML("div", "<span>test</span>");
-        final String[] messages = {"Old = <SPAN id=\"innerNode\">Old outerHTML</SPAN>", "New = <span>test</span>", "Children: 1"};
+        final String[] messages = {"Old = <SPAN id=\"innerNode\">Old outerHTML</SPAN>", "New = <SPAN>test</SPAN>", "Children: 1"};
         checkHtmlAlert(html, messages);
     }
 
@@ -889,7 +889,7 @@ public class HTMLElementTest extends LoboUnitTest {
     @Test
     public void setOuterHTMLAddEmpty() {
         final String html = createPageForSetOuterHTML("div", "<br>");
-        final String[] messages = {"Old = <SPAN id=\"innerNode\">Old outerHTML</SPAN>", "New = <br>", "Children: 1"};
+        final String[] messages = {"Old = <SPAN id=\"innerNode\">Old outerHTML</SPAN>", "New = <BR/>", "Children: 1"};
         checkHtmlAlert(html, messages);
     }
 
@@ -938,7 +938,7 @@ public class HTMLElementTest extends LoboUnitTest {
     @Test
     public void setOuterHTMLAddBlockToParagraph() {
         final String html = createPageForSetOuterHTML("p", "<div>test</div>");
-        final String[] messages = {"Old = <SPAN id=\"innerNode\">Old outerHTML</SPAN>", "New = <div>test</div>", "Children: 1"};
+        final String[] messages = {"Old = <SPAN id=\"innerNode\">Old outerHTML</SPAN>", "New = <DIV>test</DIV>", "Children: 1"};
         checkHtmlAlert(html, messages);
     }
 
@@ -948,7 +948,7 @@ public class HTMLElementTest extends LoboUnitTest {
     @Test
     public void setOuterHTMLAddParagraphToParagraph() {
         final String html = createPageForSetOuterHTML("p", "<p>test</p>");
-        final String[] messages = {"Old = <SPAN id=\"innerNode\">Old outerHTML</SPAN>", "New = <p>test</p>", "Children: 1"};
+        final String[] messages = {"Old = <SPAN id=\"innerNode\">Old outerHTML</SPAN>", "New = <P>test</P>", "Children: 1"};
         checkHtmlAlert(html, messages);
     }
 
@@ -957,8 +957,8 @@ public class HTMLElementTest extends LoboUnitTest {
      */
     @Test
     public void setOuterHTMLAddAnchorToAnchor() {
-        final String html = createPageForSetOuterHTML("a", "<a>test</a>");
-        final String[] messages = {"Old = <SPAN id=\"innerNode\">Old outerHTML</SPAN>", "New = <a>test</a>", "Children: 1"};
+        final String html = createPageForSetOuterHTML("a", "<A>test</A>");
+        final String[] messages = {"Old = <SPAN id=\"innerNode\">Old outerHTML</SPAN>", "New = <A>test</A>", "Children: 1"};
         checkHtmlAlert(html, messages);
     }
 
@@ -968,7 +968,7 @@ public class HTMLElementTest extends LoboUnitTest {
     @Test
     public void setOuterHTMLAddSelfClosingBlock() {
         final String html = createPageForSetOuterHTML("div", "<div/>");
-        final String[] messages = {"Old = <SPAN id=\"innerNode\">Old outerHTML</SPAN>", "New = <div/>", "Children: 1"};
+        final String[] messages = {"Old = <SPAN id=\"innerNode\">Old outerHTML</SPAN>", "New = <DIV/>", "Children: 1"};
         checkHtmlAlert(html, messages);
     }
 
@@ -977,7 +977,7 @@ public class HTMLElementTest extends LoboUnitTest {
      */
     @Test
     public void setOuterHTMLAddMultipleSelfClosingBlock() {
-        final String html = createPageForSetOuterHTML("div", "<div/><div>");
+        final String html = createPageForSetOuterHTML("div", "<DIV/><DIV>");
         final String[] messages = {"Old = <SPAN id=\\\"innerNode\\\">Old outerHTML</span>\",\n" +
                 "                \"New = <div><div></div></div>\", \"Children: 1\""};
         checkHtmlAlert(html, messages);
@@ -989,7 +989,7 @@ public class HTMLElementTest extends LoboUnitTest {
     @Test
     public void setOuterHTMLAddSelfClosingInline() {
         final String html = createPageForSetOuterHTML("div", "<span/>");
-        final String[] messages = {"Old = <SPAN id=\"innerNode\">Old outerHTML</SPAN>", "New = <span/>", "Children: 1"};
+        final String[] messages = {"Old = <SPAN id=\"innerNode\">Old outerHTML</SPAN>", "New = <SPAN/>", "Children: 1"};
         checkHtmlAlert(html, messages);
     }
 
@@ -999,7 +999,7 @@ public class HTMLElementTest extends LoboUnitTest {
     @Test
     public void setOuterHTMLAddSelfClosingEmpty() {
         final String html = createPageForSetOuterHTML("div", "<br/>");
-        final String[] messages = {"Old = <SPAN id=\"innerNode\">Old outerHTML</SPAN>", "New = <br/>", "Children: 1"};
+        final String[] messages = {"Old = <SPAN id=\"innerNode\">Old outerHTML</SPAN>", "New = <BR/>", "Children: 1"};
         checkHtmlAlert(html, messages);
     }
 
@@ -1173,7 +1173,7 @@ public class HTMLElementTest extends LoboUnitTest {
                 + "  <div id='myNode'><span id='innerNode'>Old outerHTML</span></div>\n"
                 + "</body>\n"
                 + "</html>";
-        final String[] messages = {"Old = <SPAN id=\"innerNode\">Old outerHTML</SPAN>", "New = <span id=\"innerNode\">Old outerHTML</span>", "Children: 1"};
+        final String[] messages = {"Old = <SPAN id=\"innerNode\">Old outerHTML</SPAN>", "New = <SPAN id=\"innerNode\">Old outerHTML</SPAN>", "Children: 1"};
         checkHtmlAlert(html, messages);
     }
 

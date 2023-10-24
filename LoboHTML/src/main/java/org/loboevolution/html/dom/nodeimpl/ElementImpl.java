@@ -81,8 +81,6 @@ public abstract class ElementImpl extends NodeImpl implements Element {
 
 	private final String name;
 
-	private String outer;
-
 	/**
 	 * <p>Constructor for ElementImpl.</p>
 	 *
@@ -574,34 +572,14 @@ public abstract class ElementImpl extends NodeImpl implements Element {
 		if (document != null) {
 			final XHtmlParser parser = new XHtmlParser(document.getUserAgentContext(), document, false);
 			this.nodeList.clear();
-			try {
-				try (final Reader reader = new StringReader(newHtml)) {
-					parser.parse(reader, this);
-				}
+			try (final Reader reader = new StringReader(newHtml)) {
+				parser.parse(reader, this);
 			} catch (final Exception thrown) {
 				this.warn("setInnerHTML(): Error setting inner HTML.", thrown);
 			}
 		} else {
 			this.warn("setInnerHTML(): Element " + this + " does not belong to a document.");
 		}
-	}
-
-	/**
-	 * <p>Getter for the field <code>outer</code>.</p>
-	 *
-	 * @return the outer
-	 */
-	public String getOuter() {
-		return outer;
-	}
-
-	/**
-	 * <p>Setter for the field <code>outer</code>.</p>
-	 *
-	 * @param outer the outer to set
-	 */
-	public void setOuter(final String outer) {
-		this.outer = outer;
 	}
 
 	/** {@inheritDoc} */
@@ -660,6 +638,26 @@ public abstract class ElementImpl extends NodeImpl implements Element {
 
 	/** {@inheritDoc} */
 	@Override
+	public String getInnerHTML() {
+		final StringBuilder buffer = new StringBuilder();
+		synchronized (this) {
+			appendInnerHTMLImpl(buffer);
+		}
+		return buffer.toString();
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public String getInnerText() {
+		final StringBuilder buffer = new StringBuilder();
+		synchronized (this) {
+			appendInnerTextImpl(buffer);
+		}
+		return buffer.toString();
+	}
+
+	/** {@inheritDoc} */
+	@Override
 	public String getOuterHTML() {
 		final StringBuilder buffer = new StringBuilder();
 		synchronized (this) {
@@ -671,22 +669,23 @@ public abstract class ElementImpl extends NodeImpl implements Element {
 	/** {@inheritDoc} */
 	@Override
 	public void setOuterHTML(final String newHtml) {
-		this.outer = outerNewHtml(newHtml);
-		if (this.outer != null) {
-			final HTMLDocumentImpl document = (HTMLDocumentImpl) this.document;
-			if (document != null) {
-				final XHtmlParser parser = new XHtmlParser(document.getUserAgentContext(), document, false);
-				this.nodeList.clear();
-				try {
-					try (final Reader reader = new StringReader(newHtml)) {
-						parser.parse(reader, this);
-					}
+		final HTMLDocumentImpl document = (HTMLDocumentImpl) this.document;
+		if (document != null) {
+			if (this.parentNode != null) {
+				final NodeListImpl list = ((NodeListImpl) this.parentNode.getChildNodes());
+				final int idx = list.indexOf(this);
+				final Node d = list.get(idx);
+				list.remove(idx);
+
+				try (final Reader reader = new StringReader(newHtml != null ? newHtml : "")) {
+					final XHtmlParser parser = new XHtmlParser(document.getUserAgentContext(), document, false);
+					parser.parse(reader, this.parentNode);
 				} catch (final Exception thrown) {
 					this.warn("setOuterHTML(): Error setting inner HTML.", thrown);
 				}
-			} else {
-				this.warn("setOuterHTML(): Element " + this + " does not belong to a document.");
 			}
+		} else {
+			this.warn("setOuterHTML(): Element " + this + " does not belong to a document.");
 		}
 	}
 
@@ -1256,13 +1255,6 @@ public abstract class ElementImpl extends NodeImpl implements Element {
 			buffer.append(tagName);
 			buffer.append('>');
 		}
-	}
-
-	private String outerNewHtml(final String newHtml) {
-		if (newHtml != null) {
-			return newHtml.endsWith(">") || ! newHtml.startsWith("<") ? newHtml : newHtml + ">";
-		}
-		return "";
 	}
 
     private boolean isHScrollable() {

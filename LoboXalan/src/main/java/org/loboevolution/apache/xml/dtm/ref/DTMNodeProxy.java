@@ -1463,6 +1463,11 @@ public class DTMNodeProxy
     }
 
     @Override
+    public String getInnerText() {
+        return null;
+    }
+
+    @Override
     public void setInnerHTML(final String innerHTML) {
 
     }

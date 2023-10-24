@@ -227,48 +227,47 @@ public class XHtmlParser {
 				try {
 					text.chars()
 							.forEach(i -> {
-										final char ch = (char) i;
-										if (ch == '&') {
-											if (txt.length() > 0) {
-												final Node textNode = doc.createTextNode(txt.toString());
-												safeAppendChild(parent, textNode);
-												txt.setLength(0);
-											}
-
-											isEnt.set(true);
-										}
-
-										if (ch == '<') {
-											isCda.set(true);
-										}
-
-										if (ch == '>') {
-											isCda.set(false);
-											cdata.append(ch);
-											final Node textNode = doc.createCDATASection(cdata.toString());
-											safeAppendChild(parent, textNode);
-											cdata.setLength(0);
-										}
-
-										if (!isEnt.get() && !isCda.get()) {
-											txt.append(ch);
-										} else if (isCda.get()) {
-											cdata.append(ch);
-										} else {
-											ent.append(ch);
-										}
-
-										if (ch == ';') {
-											isEnt.set(false);
-											final Node textNode = doc.createEntityReference(ent.toString());
-											safeAppendChild(parent, textNode);
-											ent.setLength(0);
-
-										}
+								final char ch = (char) i;
+								if (ch == '&') {
+									if (txt.length() > 0) {
+										final Node textNode = doc.createTextNode(txt.toString());
+										safeAppendChild(parent, textNode);
+										txt.setLength(0);
 									}
-							);
 
-					if(txt.length() > 0) {
+									isEnt.set(true);
+								}
+
+								if (ch == '<') {
+									isCda.set(true);
+								}
+
+								if (ch == '>') {
+									isCda.set(false);
+									cdata.append(ch);
+									final Node textNode = doc.createCDATASection(cdata.toString());
+									safeAppendChild(parent, textNode);
+									cdata.setLength(0);
+								}
+
+								if (!isEnt.get() && !isCda.get()) {
+									txt.append(ch);
+								} else if (isCda.get()) {
+									cdata.append(ch);
+								} else {
+									ent.append(ch);
+								}
+
+								if (ch == ';') {
+									isEnt.set(false);
+									final Node textNode = doc.createEntityReference(ent.toString());
+									safeAppendChild(parent, textNode);
+									ent.setLength(0);
+
+								}
+							});
+
+					if (txt.length() > 0) {
 						final Node textNode = doc.createTextNode(txt.toString());
 						safeAppendChild(parent, textNode);
 						txt.setLength(0);
@@ -1267,7 +1266,7 @@ public class XHtmlParser {
 				lastHeadElement = child;
 			}
 		}
-		if(newParent != null) newParent.appendChild(child);
+		if(newParent != null) {newParent.appendChild(child);}
 	}
 
 	private void ensureBodyElement(final Node parent) {
