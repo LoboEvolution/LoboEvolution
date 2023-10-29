@@ -25,7 +25,7 @@
  */
 package org.loboevolution.css;
 
-import org.htmlunit.cssparser.dom.CSSStyleDeclarationImpl;
+import org.loboevolution.html.js.css.CSSStyleDeclarationImpl;
 import org.junit.Test;
 import org.loboevolution.driver.LoboUnitTest;
 

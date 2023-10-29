@@ -59,7 +59,6 @@ public class FourCornersSetter implements SubPropertySetter {
 		final CSSStyleDeclarationImpl properties = (CSSStyleDeclarationImpl) declaration;
 		
 		if (Strings.isNotBlank(newValue)) {
-			properties.setProperty(this.property, newValue);
 			
 			final String[] array = HtmlValues.splitCssValue(newValue);
 			switch (array.length) {
@@ -91,6 +90,8 @@ public class FourCornersSetter implements SubPropertySetter {
 			default:
 				break;
 			}
+
+			properties.removeProperty(property);
 		}
 	}
 }

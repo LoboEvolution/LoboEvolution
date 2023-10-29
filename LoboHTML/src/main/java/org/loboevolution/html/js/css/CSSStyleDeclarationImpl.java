@@ -26,6 +26,7 @@
 
 package org.loboevolution.html.js.css;
 
+import org.htmlunit.cssparser.dom.AbstractCSSRuleImpl;
 import org.htmlunit.cssparser.dom.Property;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.CSSValues;
@@ -177,7 +178,8 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
         final String propertyPriority1 = getPropertyPriority(propertyName);
         String value = vl;
 
-        if(Strings.isNotBlank(propertyPriority1)) return;
+        if(Strings.isNotBlank(propertyPriority1) ||
+                (Strings.isNotBlank(priority) && !"important".equalsIgnoreCase(priority))) return;
 
         if (Strings.isBlank(value) || "null".equals(value)) {
             if (Strings.isBlank(value)) value = "";
@@ -289,8 +291,8 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     }
 
     @Override
-    public CSSRule getParentRule() {
-        return (CSSRule) style.getParentRule();
+    public AbstractCSSRuleImpl getParentRule() {
+        return (AbstractCSSRuleImpl) style.getParentRule();
     }
 
     @Override

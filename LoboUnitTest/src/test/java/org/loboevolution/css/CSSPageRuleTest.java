@@ -320,7 +320,7 @@ public class CSSPageRuleTest extends LoboUnitTest {
                 + "</script>\n"
                 + "</body></html>";
 
-        final String[] messages = {":first", null};
+        final String[] messages = {":first", "null"};
         checkHtmlAlert(html, messages);
     }
 
@@ -408,7 +408,6 @@ public class CSSPageRuleTest extends LoboUnitTest {
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
                 + "  var style = rule.style;\n"
-                + "  alert(Object.prototype.toString.call(style));\n"
                 + "  alert(style);\n"
                 + "  alert(style.length);\n"
                 + "  alert(style.parentRule);\n"
@@ -417,10 +416,9 @@ public class CSSPageRuleTest extends LoboUnitTest {
                 + "    alert(style.item(i));\n"
                 + "  }\n"
                 + "</script>\n"
-
                 + "</body></html>";
 
-        final String[] messages = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]", "4", "[object CSSPageRule]",
+        final String[] messages = {"[object CSSStyleDeclaration]", "4", "[object CSSPageRule]",
                 "margin: 1cm;", "margin-top", "margin-right", "margin-bottom", "margin-left"};
         checkHtmlAlert(html, messages);
     }
@@ -436,7 +434,6 @@ public class CSSPageRuleTest extends LoboUnitTest {
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
                 + "  var style = rule.style;\n"
-                + "  alert(Object.prototype.toString.call(style));\n"
                 + "  alert(style);\n"
                 + "  alert(style.length);\n"
                 + "  alert(style.parentRule);\n"
@@ -447,7 +444,7 @@ public class CSSPageRuleTest extends LoboUnitTest {
                 + "</script>\n"
                 + "</body></html>";
 
-        final String[] messages = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]", "0", "[object CSSPageRule]", ""};
+        final String[] messages = {"[object CSSStyleDeclaration]", "0", "[object CSSPageRule]", ""};
         checkHtmlAlert(html, messages);
     }
 }

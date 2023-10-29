@@ -41,6 +41,7 @@ import org.loboevolution.html.dom.input.FormInput;
 import org.loboevolution.html.dom.nodeimpl.ElementImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.js.css.CSSStyleDeclarationImpl;
+import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.css.CSSStyleDeclaration;
@@ -210,8 +211,6 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, GlobalE
 			pseudoElement = "";
 		}
 
-
-
 		final CSSStyleDeclarationImpl style = (CSSStyleDeclarationImpl) addStyleSheetDeclarations(false, pseudoElement);
 		final CSSStyleDeclarationImpl localStyle = (CSSStyleDeclarationImpl) getStyle();
 		localStyle.merge(style);
@@ -325,11 +324,11 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, GlobalE
 	public CSSStyleDeclaration getStyle() {
 		CSSStyleDeclarationImpl styleDeclaration = new CSSStyleDeclarationImpl(this);
 		if (localStyleDeclarationState == null || localStyleDeclarationState.getLength() == 0) {
-			final String style = getAttribute("style");
-			if (Strings.isNotBlank(style)) {
+			final Attr style = getAttributeNode("style");
+			if (style != null && Strings.isNotBlank(style.getValue())) {
 				final CSSOMParser parser = new CSSOMParser(new CSS3Parser());
 				try {
-					styleDeclaration = new CSSStyleDeclarationImpl(this, parser.parseStyleDeclaration(style));
+					styleDeclaration = new CSSStyleDeclarationImpl(this, parser.parseStyleDeclaration(style.getValue()));
 				} catch (final Exception err) {
 					final String id = getId();
 					final String withId = Strings.isBlank(id) ? "" : " with ID '" + id + "'";

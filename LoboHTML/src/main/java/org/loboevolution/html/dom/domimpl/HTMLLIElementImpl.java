@@ -35,9 +35,6 @@ import org.loboevolution.html.style.HtmlValues;
 
 /**
  * <p>HTMLLIElementImpl class.</p>
- *
- *
- *
  */
 public class HTMLLIElementImpl extends HTMLElementImpl implements HTMLLIElement {
 	/**

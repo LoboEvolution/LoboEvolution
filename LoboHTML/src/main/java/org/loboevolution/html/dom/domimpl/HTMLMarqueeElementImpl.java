@@ -35,7 +35,7 @@ import org.loboevolution.html.renderstate.RenderState;
 public class HTMLMarqueeElementImpl extends HTMLElementImpl implements HTMLMarqueeElement {
 
     /**
-     * <p>Constructor for HTMLElementImpl.</p>
+     * <p>Constructor for HTMLMarqueeElementImpl.</p>
      *
      * @param name a {@link String} object.
      */

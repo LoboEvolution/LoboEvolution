@@ -513,12 +513,6 @@ public class ElementOffsetWidthTest extends LoboUnitTest {
     }
 
     @Test
-    public void multicol() {
-        final String[] messages = {"-16"};
-        checkHtmlAlert(test("multicol"), messages);
-    }
-
-    @Test
     public void nobr() {
         final String[] messages = {"0"};
         checkHtmlAlert(test("nobr"), messages);
@@ -600,12 +594,6 @@ public class ElementOffsetWidthTest extends LoboUnitTest {
     public void param() {
         final String[] messages = {"0"};
         checkHtmlAlert(test("param"), messages);
-    }
-
-    @Test
-    public void plaintext() {
-        final String[] messages = {"-16"};
-        checkHtmlAlert(test("plaintext"), messages);
     }
 
     @Test

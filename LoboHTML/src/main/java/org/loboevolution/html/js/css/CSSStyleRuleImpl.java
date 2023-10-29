@@ -27,6 +27,7 @@
 package org.loboevolution.html.js.css;
 
 import org.htmlunit.cssparser.dom.AbstractCSSRuleImpl;
+import org.htmlunit.cssparser.dom.CSSPageRuleImpl;
 import org.htmlunit.cssparser.util.CSSProperties;
 import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.node.css.CSSStyleRule;
@@ -54,7 +55,19 @@ public class CSSStyleRuleImpl extends CSSRuleImpl implements CSSStyleRule {
             final org.htmlunit.cssparser.dom.CSSStyleRuleImpl styleRule = (org.htmlunit.cssparser.dom.CSSStyleRuleImpl) abstractCSSRule;
             return styleRule.getSelectorText();
         }
+
+        if (abstractCSSRule instanceof CSSPageRuleImpl) {
+            final CSSPageRuleImpl styleRule = (CSSPageRuleImpl) abstractCSSRule;
+            return styleRule.getSelectorText();
+        }
         return null;
+    }
+
+    public void setSelectorText(final String selectorText) {
+        if (abstractCSSRule instanceof CSSPageRuleImpl) {
+            final CSSPageRuleImpl styleRule = (CSSPageRuleImpl) abstractCSSRule;
+            styleRule.setSelectorText(selectorText);
+        }
     }
 
     /** {@inheritDoc} */
@@ -63,6 +76,34 @@ public class CSSStyleRuleImpl extends CSSRuleImpl implements CSSStyleRule {
         final AtomicReference<CSSStyleDeclarationImpl> atomicReference = new AtomicReference<>();
         if (abstractCSSRule instanceof org.htmlunit.cssparser.dom.CSSStyleRuleImpl) {
             final org.htmlunit.cssparser.dom.CSSStyleRuleImpl styleRule = (org.htmlunit.cssparser.dom.CSSStyleRuleImpl) abstractCSSRule;
+            final List<NameValuePair> list = new ArrayList<>();
+
+            styleRule.getStyle().getProperties().forEach(p -> {
+                list.add(new NameValuePair(p.getName(), p.getValue().toString()));
+            });
+
+            atomicReference.set(new CSSStyleDeclarationImpl(styleRule.getStyle()));
+
+            list.forEach(p -> {
+                switch (p.getName()) {
+                    case CSSProperties.MARGIN:
+                    case CSSProperties.BORDER:
+                    case CSSProperties.BORDER_COLOR:
+                    case CSSProperties.BORDER_WIDTH:
+                    case CSSProperties.PADDING:
+                        new FourCornersSetter(p.getName(), p.getName() + "-", "").changeValue(atomicReference.get(), p.getValue());
+                        break;
+                    case CSSProperties.BORDER_STYLE:
+                        new BorderStyleSetter(p.getName(), p.getName() + "-", "-style").changeValue(atomicReference.get(), p.getValue());
+                        break;
+                    default:
+                        break;
+                }
+            });
+        }
+
+        if (abstractCSSRule instanceof CSSPageRuleImpl) {
+            final CSSPageRuleImpl styleRule = (CSSPageRuleImpl) abstractCSSRule;
             final List<NameValuePair> list = new ArrayList<>();
 
             styleRule.getStyle().getProperties().forEach(p -> {

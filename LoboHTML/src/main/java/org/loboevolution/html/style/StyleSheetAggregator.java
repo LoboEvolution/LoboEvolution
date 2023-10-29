@@ -412,6 +412,11 @@ public class StyleSheetAggregator {
 				}
 				break;
 
+			case "focus":
+				if (element instanceof HTMLInputElement) {
+					return ((HTMLInputElementImpl) element).isFocusable();
+				}
+
 			case "checked":
 				if (element instanceof HTMLInputElement) {
 					return ((HTMLInputElement) element).isChecked();

@@ -32,9 +32,6 @@ import org.loboevolution.html.dom.domimpl.UINode;
 /**
  * A renderer node for elements such as blocks, lists, tables, inputs, images,
  * etc.
- *
- *
- *
  */
 public interface RElement extends RCollection, UINode {
 

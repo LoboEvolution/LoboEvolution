@@ -1321,9 +1321,10 @@ public abstract class ElementImpl extends NodeImpl implements Element {
 								this instanceof HTMLTextAreaElement ||
 								this instanceof HTMLDDElementImpl ||
 								this instanceof HTMLCanvasElement ||
-								this instanceof HTMLImageElement ||
+								this instanceof HTMLHeadElement ||
 								this instanceof HTMLButtonElement ||
 								this instanceof HTMLFieldSetElement ||
+								this instanceof HTMLProgressElement ||
 								this instanceof HTMLSelectElement ||
 								this instanceof HTMLTableCellElement ||
 								this instanceof HTMLTableCaptionElement ||
@@ -1357,8 +1358,8 @@ public abstract class ElementImpl extends NodeImpl implements Element {
 		final Node nodeObj = getParentNode();
 		if (nodeObj instanceof HTMLElementImpl) {
 			final HTMLElementImpl elem = (HTMLElementImpl)nodeObj;
-			final int client = elem.getClientWidth();
-			if(client > 0) {
+			final Integer client = elem.getClientWidth();
+			if(client != null && client > 0) {
 				sizeWidth = client;
 			}
 		}
@@ -1422,8 +1423,8 @@ public abstract class ElementImpl extends NodeImpl implements Element {
 		final Node nodeObj = getParentNode();
 		if (nodeObj instanceof HTMLElementImpl) {
 			final HTMLElementImpl elem = (HTMLElementImpl)nodeObj;
-			final int client = elem.getClientHeight();
-			if(client!= -1) {
+			final Integer client = elem.getClientHeight();
+			if(client != null && client != -1) {
 				sizeHeight = client;
 			}
 		}

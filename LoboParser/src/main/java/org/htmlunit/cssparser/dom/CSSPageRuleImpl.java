@@ -180,6 +180,6 @@ public class CSSPageRuleImpl extends AbstractCSSRuleImpl {
     /** {@inheritDoc} */
     @Override
     public String toString() {
-        return getCssText();
+        return "[object CSSPageRule]";
     }
 }

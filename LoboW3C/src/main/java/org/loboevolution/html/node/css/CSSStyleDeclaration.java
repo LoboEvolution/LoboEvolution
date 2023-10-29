@@ -26,6 +26,8 @@
 
 package org.loboevolution.html.node.css;
 
+import org.htmlunit.cssparser.dom.AbstractCSSRuleImpl;
+
 /**
  * CSS style declaration interface
  */
@@ -80,9 +82,9 @@ public interface CSSStyleDeclaration extends CSS3Properties {
 
     /**
      * <p> getParentRule. </p>
-     * @return a {@link org.loboevolution.html.node.css.CSSRule} object.
+     * @return a {@link org.htmlunit.cssparser.dom.AbstractCSSRuleImpl} object.
      */
-    CSSRule getParentRule();
+    AbstractCSSRuleImpl getParentRule();
 
     /**
      * <p> setProperty. </p>
