@@ -22,7 +22,6 @@ import org.htmlunit.cssparser.util.ParserUtils;
  * For associating a CSS event with a document location.
  *
  * @author Ronald Brill
- *
  */
 public class Locator implements Serializable {
 
@@ -32,7 +31,6 @@ public class Locator implements Serializable {
 
     /**
      * Creates new LocatorImpl.
-     *
      * @param uri the uri
      * @param line the lineNumber
      * @param column the columnNumber
@@ -54,7 +52,6 @@ public class Locator implements Serializable {
 
     /**
      * Set the uri to a new value.
-     *
      * @param uri the new uri
      */
     public void setUri(final String uri) {
@@ -66,7 +63,6 @@ public class Locator implements Serializable {
      * Note that this is the column number of the first
      * character after the text associated with the document
      * event.  The first column in a line is position 1.
-     *
      * @return The column number, or -1 if none is available.
      * @see #getLineNumber
      */
@@ -76,7 +72,6 @@ public class Locator implements Serializable {
 
     /**
      * Set the columnNumber to a new value.
-     *
      * @param column the new columnNumber
      */
     public void setColumnNumber(final int column) {
@@ -87,7 +82,6 @@ public class Locator implements Serializable {
      * Return the line number where the current document event ends.
      * Note that this is the line position of the first character
      * after the text associated with the document event.
-     *
      * @return The line number, or -1 if none is available.
      * @see #getColumnNumber
      */
@@ -97,7 +91,6 @@ public class Locator implements Serializable {
 
     /**
      * Set the lineNumber to a new value.
-     *
      * @param line the new lineNumber
      */
     public void setLineNumber(final int line) {

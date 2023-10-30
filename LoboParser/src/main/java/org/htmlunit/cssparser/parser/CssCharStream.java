@@ -135,7 +135,7 @@ public final class CssCharStream implements CharStream
 
   /** Start. */
   @Override
-public final char BeginToken() throws java.io.IOException
+public final char beginToken() throws java.io.IOException
   {
     tokenBegin = -1;
     char c = readChar();
@@ -211,20 +211,6 @@ public final char readChar() throws java.io.IOException
     return c;
   }
 
-  @Override
-@Deprecated
-  /** {@inheritDoc} */
-  public final int getColumn() {
-    return bufcolumn[bufpos];
-  }
-
-  @Override
-@Deprecated
-  /** {@inheritDoc} */
-  public final int getLine() {
-    return bufline[bufpos];
-  }
-
 /**
  * {@inheritDoc}
  *
@@ -279,7 +265,6 @@ public final void backup(int amount) {
 
   /**
    * Constructor.
-   *
    * @param dstream the stream to read from
    * @param startline startline
    * @param startcolumn startcolumn
@@ -299,7 +284,6 @@ public final void backup(int amount) {
 
   /**
    * Constructor.
-   *
    * @param dstream the stream to read from
    * @param startline startline
    * @param startcolumn startcolumn
@@ -315,7 +299,7 @@ public final void backup(int amount) {
  * Get token literal value.
  */
   @Override
-public final String GetImage()
+public final String getImage()
   {
     if (bufpos >= tokenBegin)
       return new String(buffer, tokenBegin, bufpos - tokenBegin + 1);
@@ -328,7 +312,7 @@ public final String GetImage()
  * Get the suffix.
  */
   @Override
-public final char[] GetSuffix(int len)
+public final char[] getSuffix(int len)
   {
     char[] ret = new char[len];
 
@@ -349,7 +333,7 @@ public final char[] GetSuffix(int len)
  * Reset buffer when finished.
  */
   @Override
-public void Done()
+public void done()
   {
     buffer = null;
     bufline = null;
@@ -358,7 +342,6 @@ public void Done()
 
   /**
    * Method to adjust line and column numbers for the start of a token.
-   *
    * @param newLine the new line
    * @param newCol the new column
    */
@@ -420,7 +403,7 @@ public int getTabSize() {
 
   /** {@inheritDoc} */
   @Override
-public boolean getTrackLineColumn() {
+public boolean isTrackLineColumn() {
       return trackLineColumn;
   }
 
