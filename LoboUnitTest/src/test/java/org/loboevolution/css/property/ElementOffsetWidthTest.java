@@ -56,7 +56,7 @@ public class ElementOffsetWidthTest extends LoboUnitTest {
 
     @Test
     public void address() {
-        final String[] messages = {"-16"};
+        final String[] messages = {"-17"};
         checkHtmlAlert(test("address"), messages);
     }
 
@@ -74,13 +74,13 @@ public class ElementOffsetWidthTest extends LoboUnitTest {
 
     @Test
     public void article() {
-        final String[] messages = {"-16"};
+        final String[] messages = {"-17"};
         checkHtmlAlert(test("article"), messages);
     }
 
     @Test
     public void aside() {
-        final String[] messages = {"-16"};
+        final String[] messages = {"-17"};
         checkHtmlAlert(test("aside"), messages);
     }
 
@@ -134,13 +134,13 @@ public class ElementOffsetWidthTest extends LoboUnitTest {
 
     @Test
     public void blockquote() {
-        final String[] messages = {"-16"};
+        final String[] messages = {"-17"};
         checkHtmlAlert(test("blockquote"), messages);
     }
 
     @Test
     public void body() {
-        final String[] messages = {"-16"};
+        final String[] messages = {"-17"};
         checkHtmlAlert(test("body"), messages);
     }
 
@@ -176,7 +176,7 @@ public class ElementOffsetWidthTest extends LoboUnitTest {
 
     @Test
     public void center() {
-        final String[] messages = {"-16"};
+        final String[] messages = {"-17"};
         checkHtmlAlert(test("center"), messages);
     }
 
@@ -206,7 +206,7 @@ public class ElementOffsetWidthTest extends LoboUnitTest {
 
     @Test
     public void details() {
-        final String[] messages = {"-16"};
+        final String[] messages = {"-17"};
         checkHtmlAlert(test("details"), messages);
     }
 
@@ -236,25 +236,25 @@ public class ElementOffsetWidthTest extends LoboUnitTest {
 
     @Test
     public void dir() {
-        final String[] messages = {"-16"};
+        final String[] messages = {"-17"};
         checkHtmlAlert(test("dir"), messages);
     }
 
     @Test
     public void div() {
-        final String[] messages = {"-16"};
+        final String[] messages = {"-17"};
         checkHtmlAlert(test("div"), messages);
     }
 
     @Test
     public void dl() {
-        final String[] messages = {"-16"};
+        final String[] messages = {"-17"};
         checkHtmlAlert(test("dl"), messages);
     }
 
     @Test
     public void dt() {
-        final String[] messages = {"-16"};
+        final String[] messages = {"-17"};
         checkHtmlAlert(test("dt"), messages);
     }
 
@@ -278,14 +278,14 @@ public class ElementOffsetWidthTest extends LoboUnitTest {
 
     @Test
     public void figcaption() {
-        final String[] messages = {"-16"};
+        final String[] messages = {"-17"};
         checkHtmlAlert(test("figcaption"), messages);
     }
 
 
     @Test
     public void figure() {
-        final String[] messages = {"-96"};
+        final String[] messages = {"-97"};
         checkHtmlAlert(test("figure"), messages);
     }
 
@@ -297,13 +297,13 @@ public class ElementOffsetWidthTest extends LoboUnitTest {
 
     @Test
     public void footer() {
-        final String[] messages = {"-16"};
+        final String[] messages = {"-17"};
         checkHtmlAlert(test("footer"), messages);
     }
 
     @Test
     public void form() {
-        final String[] messages = {"-16"};
+        final String[] messages = {"-17"};
         checkHtmlAlert(test("form"), messages);
     }
 
@@ -321,37 +321,37 @@ public class ElementOffsetWidthTest extends LoboUnitTest {
 
     @Test
     public void h1() {
-        final String[] messages = {"-16"};
+        final String[] messages = {"-17"};
         checkHtmlAlert(test("h1"), messages);
     }
 
     @Test
     public void h2() {
-        final String[] messages = {"-16"};
+        final String[] messages = {"-17"};
         checkHtmlAlert(test("h2"), messages);
     }
 
     @Test
     public void h3() {
-        final String[] messages = {"-16"};
+        final String[] messages = {"-17"};
         checkHtmlAlert(test("h3"), messages);
     }
 
     @Test
     public void h4() {
-        final String[] messages = {"-16"};
+        final String[] messages = {"-17"};
         checkHtmlAlert(test("h4"), messages);
     }
 
     @Test
     public void h5() {
-        final String[] messages = {"-16"};
+        final String[] messages = {"-17"};
         checkHtmlAlert(test("h5"), messages);
     }
 
     @Test
     public void h6() {
-        final String[] messages = {"-16"};
+        final String[] messages = {"-17"};
         checkHtmlAlert(test("h6"), messages);
     }
 
@@ -363,13 +363,13 @@ public class ElementOffsetWidthTest extends LoboUnitTest {
 
     @Test
     public void header() {
-        final String[] messages = {"-16"};
+        final String[] messages = {"-17"};
         checkHtmlAlert(test("header"), messages);
     }
 
     @Test
     public void hr() {
-        final String[] messages = {"-16"};
+        final String[] messages = {"-17"};
         checkHtmlAlert(test("hr"), messages);
     }
 
@@ -442,19 +442,19 @@ public class ElementOffsetWidthTest extends LoboUnitTest {
 
     @Test
     public void legend() {
-        final String[] messages = {"-16"};
+        final String[] messages = {"-17"};
         checkHtmlAlert(test("legend"), messages);
     }
 
     @Test
     public void listing() {
-        final String[] messages = {"-16"};
+        final String[] messages = {"-17"};
         checkHtmlAlert(test("listing"), messages);
     }
 
     @Test
     public void li() {
-        final String[] messages = {"-16"};
+        final String[] messages = {"-17"};
         checkHtmlAlert(test("li"), messages);
     }
 
@@ -466,7 +466,7 @@ public class ElementOffsetWidthTest extends LoboUnitTest {
 
     @Test
     public void mainTag() {
-        final String[] messages = {"-16"};
+        final String[] messages = {"-17"};
         checkHtmlAlert(test("main"), messages);
     }
 
@@ -478,7 +478,7 @@ public class ElementOffsetWidthTest extends LoboUnitTest {
 
     @Test
     public void marquee() {
-        final String[] messages = {"-16"};
+        final String[] messages = {"-17"};
         checkHtmlAlert(test("marquee"), messages);
     }
 
@@ -490,7 +490,7 @@ public class ElementOffsetWidthTest extends LoboUnitTest {
 
     @Test
     public void menu() {
-        final String[] messages = {"-16"};
+        final String[] messages = {"-17"};
         checkHtmlAlert(test("menu"), messages);
     }
 
@@ -520,7 +520,7 @@ public class ElementOffsetWidthTest extends LoboUnitTest {
 
     @Test
     public void nav() {
-        final String[] messages = {"-16"};
+        final String[] messages = {"-17"};
         checkHtmlAlert(test("nav"), messages);
     }
 
@@ -562,19 +562,19 @@ public class ElementOffsetWidthTest extends LoboUnitTest {
 
     @Test
     public void ol() {
-        final String[] messages = {"-16"};
+        final String[] messages = {"-17"};
         checkHtmlAlert(test("ol"), messages);
     }
 
     @Test
     public void optgroup() {
-        final String[] messages = {"-16"};
+        final String[] messages = {"-17"};
         checkHtmlAlert(test("optgroup"), messages);
     }
 
     @Test
     public void option() {
-        final String[] messages = {"-16"};
+        final String[] messages = {"-17"};
         checkHtmlAlert(test("option"), messages);
     }
 
@@ -586,7 +586,7 @@ public class ElementOffsetWidthTest extends LoboUnitTest {
 
     @Test
     public void p() {
-        final String[] messages = {"-16"};
+        final String[] messages = {"-17"};
         checkHtmlAlert(test("p"), messages);
     }
 
@@ -598,7 +598,7 @@ public class ElementOffsetWidthTest extends LoboUnitTest {
 
     @Test
     public void pre() {
-        final String[] messages = {"-16"};
+        final String[] messages = {"-17"};
         checkHtmlAlert(test("pre"), messages);
     }
 
@@ -622,7 +622,7 @@ public class ElementOffsetWidthTest extends LoboUnitTest {
 
     @Test
     public void rt() {
-        final String[] messages = {"-16"};
+        final String[] messages = {"-17"};
         checkHtmlAlert(test("rt"), messages);
     }
 
@@ -646,7 +646,7 @@ public class ElementOffsetWidthTest extends LoboUnitTest {
 
     @Test
     public void section() {
-        final String[] messages = {"-16"};
+        final String[] messages = {"-17"};
         checkHtmlAlert(test("section"), messages);
     }
 
@@ -707,7 +707,7 @@ public class ElementOffsetWidthTest extends LoboUnitTest {
 
     @Test
     public void summary() {
-        final String[] messages = {"-16"};
+        final String[] messages = {"-17"};
         checkHtmlAlert(test("summary"), messages);
     }
 
@@ -810,7 +810,7 @@ public class ElementOffsetWidthTest extends LoboUnitTest {
 
     @Test
     public void ul() {
-        final String[] messages = {"-16"};
+        final String[] messages = {"-17"};
         checkHtmlAlert(test("ul"), messages);
     }
 

@@ -345,7 +345,7 @@ public class LocalHtmlRendererContext implements HtmlRendererContext{
         if (bpanel != null && bpanel.getWidth() > 0) {
             return bpanel.getWidth();
         }
-        return 900;
+        return 800;
     }
 
     /** {@inheritDoc} */

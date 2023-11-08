@@ -261,8 +261,8 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, GlobalE
 
 	/** {@inheritDoc} */
 	@Override
-	public double getOffsetHeight() {
-		return calculateHeight(true, true);
+	public Integer getOffsetHeight() {
+		return calculateHeight(true, true, false);
 	}
 
 	/** {@inheritDoc} */
@@ -282,7 +282,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, GlobalE
 	 */
 	@Override
 	public Integer getOffsetWidth() {
-		return calculateWidth(true, true);
+		return calculateWidth(true, true, false);
 	}
 
 	/**

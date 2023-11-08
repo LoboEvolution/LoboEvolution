@@ -32,7 +32,7 @@ import org.loboevolution.driver.LoboUnitTest;
  * Unit tests for {@code offsetHeight} of an element.
  */
 public class ElementClientHeightTest extends LoboUnitTest {
-    private static final String VALUE_ = "e == null ? e : (e.clientHeight < 1000 ? e.clientHeight :" + "e.clientHeight - document.documentElement.clientHeight)";
+    private static final String VALUE_ = "e == null ? e : (e.clientHeight < 400 ? e.clientHeight :" + "e.clientHeight - document.documentElement.clientHeight)";
 
     @Test
     public void abbr() {
@@ -102,7 +102,7 @@ public class ElementClientHeightTest extends LoboUnitTest {
 
     @Test
     public void blink() {
-        final String[] messages = {"18"};
+        final String[] messages = {"0"};
         checkHtmlAlert(test("blink", "text"), messages);
     }
 
@@ -156,7 +156,7 @@ public class ElementClientHeightTest extends LoboUnitTest {
 
     @Test
     public void cite() {
-        final String[] messages = {"18"};
+        final String[] messages = {"0"};
         checkHtmlAlert(test("cite", "text"), messages);
     }
 
@@ -186,7 +186,7 @@ public class ElementClientHeightTest extends LoboUnitTest {
 
     @Test
     public void dfn() {
-        final String[] messages = {"18"};
+        final String[] messages = {"0"};
         checkHtmlAlert(test("dfn", "text"), messages);
     }
 
@@ -199,7 +199,7 @@ public class ElementClientHeightTest extends LoboUnitTest {
     @Test
 
     public void del() {
-        final String[] messages = {"18"};
+        final String[] messages = {"0"};
         checkHtmlAlert(test("del", "text"), messages);
     }
 
@@ -243,7 +243,7 @@ public class ElementClientHeightTest extends LoboUnitTest {
 
     @Test
     public void em() {
-        final String[] messages = {"18"};
+        final String[] messages = {"0"};
         checkHtmlAlert(test("em", "text"), messages);
     }
 
@@ -268,7 +268,7 @@ public class ElementClientHeightTest extends LoboUnitTest {
     @Test
 
     public void font() {
-        final String[] messages = {"18"};
+        final String[] messages = {"0"};
         checkHtmlAlert(test("font", "text"), messages);
     }
 
@@ -364,13 +364,13 @@ public class ElementClientHeightTest extends LoboUnitTest {
 
     @Test
     public void i() {
-        final String[] messages = {"18"};
+        final String[] messages = {"0"};
         checkHtmlAlert(test("i", "text"), messages);
     }
 
     @Test
     public void label() {
-        final String[] messages = {"18"};
+        final String[] messages = {"0"};
         checkHtmlAlert(test("label", "text"), messages);
     }
 
@@ -388,7 +388,7 @@ public class ElementClientHeightTest extends LoboUnitTest {
 
     @Test
     public void listing() {
-        final String[] messages = {"18"};
+        final String[] messages = {"0"};
         checkHtmlAlert(test("listing", "text"), messages);
     }
 
@@ -413,7 +413,7 @@ public class ElementClientHeightTest extends LoboUnitTest {
 
     @Test
     public void map() {
-        final String[] messages = {"18"};
+        final String[] messages = {"0"};
         checkHtmlAlert(test("map", "text"), messages);
     }
 
@@ -474,7 +474,7 @@ public class ElementClientHeightTest extends LoboUnitTest {
 
     @Test
     public void nextid() {
-        final String[] messages = {"18"};
+        final String[] messages = {"0"};
         checkHtmlAlert(test("nextid", "text"), messages);
     }
 
@@ -504,7 +504,7 @@ public class ElementClientHeightTest extends LoboUnitTest {
 
     @Test
     public void object() {
-        final String[] messages = {"18"};
+        final String[] messages = {"0"};
         checkHtmlAlert(test("object", "text"), messages);
     }
 
@@ -566,7 +566,7 @@ public class ElementClientHeightTest extends LoboUnitTest {
 
     @Test
     public void s() {
-        final String[] messages = {"18"};
+        final String[] messages = {"0"};
         checkHtmlAlert(test("s", "text"), messages);
     }
 
@@ -623,7 +623,7 @@ public class ElementClientHeightTest extends LoboUnitTest {
 
     @Test
     public void strike() {
-        final String[] messages = {"18"};
+        final String[] messages = {"0"};
         checkHtmlAlert(test("strike", "text"), messages);
     }
 
@@ -745,7 +745,7 @@ public class ElementClientHeightTest extends LoboUnitTest {
 
     @Test
     public void u() {
-        final String[] messages = {"18"};
+        final String[] messages = {"0"};
         checkHtmlAlert(test("u", "text"), messages);
     }
 
@@ -757,7 +757,7 @@ public class ElementClientHeightTest extends LoboUnitTest {
 
     @Test
     public void var() {
-        final String[] messages = {"18"};
+        final String[] messages = {"0"};
         checkHtmlAlert(test("var", "text"), messages);
     }
 

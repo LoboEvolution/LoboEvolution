@@ -65,6 +65,7 @@ public class ElementFactory {
 		builders.put(HTMLTag.FOOTER, div);
 
 		builders.put(HTMLTag.MARQUEE, new HTMLElementBuilder.Marquee());
+		builders.put(HTMLTag.METER, new HTMLElementBuilder.Meter());
 		builders.put(HTMLTag.DIR, new HTMLElementBuilder.Dir());
 		builders.put(HTMLTag.DETAILS, new HTMLElementBuilder.Details());
 		builders.put(HTMLTag.DIALOG, new HTMLElementBuilder.Dialog());

@@ -49,6 +49,24 @@ public class HTMLProgressElementImpl extends HTMLElementImpl {
 	protected RenderState createRenderState(final RenderState prevRenderState) {
 		return new DisplayRenderState(prevRenderState, this, RenderState.DISPLAY_INLINE_BLOCK);
 	}
+
+	@Override
+	public Integer getClientWidth() {
+		final int clientWidth = super.getClientWidth();
+		return clientWidth == 0 ? 160 : clientWidth;
+	}
+	@Override
+	public int getClientHeight() {
+		final int clientHeight = super.getClientHeight();
+		return clientHeight == 0 ? 16 : clientHeight;
+	}
+
+	@Override
+	public Integer getOffsetWidth() {
+		final int offsetWidth = super.getOffsetWidth();
+		return offsetWidth == 0 ? 160 : offsetWidth;
+	}
+
 	
 	/** {@inheritDoc} */
 	@Override

@@ -194,6 +194,13 @@ public class HTMLOptionElementImpl extends HTMLElementImpl implements HTMLOption
 
 	/** {@inheritDoc} */
 	@Override
+	public int getClientHeight() {
+		final int clientHeight = super.getClientHeight();
+		return clientHeight == 0 ? 20 : clientHeight;
+	}
+
+	/** {@inheritDoc} */
+	@Override
 	public String toString() {
 		return "[object HTMLOptionElement]";
 	}

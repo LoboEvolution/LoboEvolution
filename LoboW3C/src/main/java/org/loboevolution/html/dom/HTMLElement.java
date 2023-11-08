@@ -95,7 +95,7 @@ public interface HTMLElement extends Element {
 	 *
 	 * @return a double.
 	 */
-	double getOffsetHeight();
+	Integer getOffsetHeight();
 
 	/**
 	 * <p>getOffsetLeft.</p>

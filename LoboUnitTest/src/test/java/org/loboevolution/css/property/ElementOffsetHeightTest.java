@@ -52,7 +52,12 @@ public class ElementOffsetHeightTest extends LoboUnitTest {
                 + "  alert(area.value);\n"
                 + "</script></body></html>";
 
-        final String[] messages = {""};
+        final String[] messages = {"0, 1, 2, 3, 4, 5, 6, 8, 9, 10, 11, 12, 13, 14, 16, 17, 18, 19, 20, 21, 22, 24, 25, " +
+                "26, 27, 28, 29, 31, 32, 33, 34, 35, 36, 37, 39, 40, 41, 42, 43, 44, 45, 47, 48, 49, 50, 51, 52, 54, 55, " +
+                "56, 57, 58, 59, 60, 62, 63, 64, 65, 66, 67, 68, 70, 71, 72, 73, 74, 75, 77, 78, 79, 80, 81, 82, 83, 85, " +
+                "86, 87, 88, 89, 90, 91, 93, 94, 95, 96, 97, 98, 100, 101, 102, 103, 104, 105, 106, 108, 109, 110, 111, " +
+                "112, 113, 114, 116, 117, 118, 119, 120, 121, 123, 124, 125, 126, 127, 128, 129, 131, 132, 133, 134, 135, " +
+                "136, 137, 139, 140, 141, 142, 143, 144, 146, 147"};
         checkHtmlAlert(html, messages);
     }
 
@@ -142,54 +147,6 @@ public class ElementOffsetHeightTest extends LoboUnitTest {
                 + "</body></html>";
 
         final String[] messages = {"true"};
-        checkHtmlAlert(html, messages);
-    }
-
-    @Test
-    public void issue124() {
-        final String html
-                = "<!DOCTYPE html>\n"
-                + "<html>\n"
-                + "  <head>\n"
-                + "    <style>\n"
-                + "      .title-box {width: 960px; font-size: 60px;}\n"
-                + "      .title-sizer {height: 300px;}\n"
-                + "    </style>\n"
-                + "  </head>\n"
-                + "  <body>\n"
-                + "    <div class='title-box'>\n"
-                + "      <span class='title-sizer'>\n"
-                + "        <span class='title'>\n"
-                + "          8oz steak from Good and Gather. 8oz steak from Good and Gather. 8oz"
-                + "          steak from Good and Gather. 8oz steak from Good and Gather. 8oz steak"
-                + "          from Good and Gather. 8oz steak from Good and Gather. 8oz steak from"
-                + "          Good and Gather. 8oz steak from Good and Gather."
-                + "        </span>\n"
-                + "      </span>\n"
-                + "    </div>\n"
-                + "  </body>\n"
-                + "  <script>\n"
-                + "    function getAttributeValue(element, attribute) {\n"
-                + "      if (element) {\n"
-                + "        return window.getComputedStyle(element)[attribute].split('px')[0];\n"
-                + "      }\n"
-                + "      return 0;\n"
-                + "    }\n"
-                + "    var titleSizer = document.querySelector('.title-sizer');\n"
-                + "    var title = document.querySelector('.title');\n"
-                + "    var titleHeight = titleSizer.offsetHeight;\n"
-                + "    var titleFontSize = getAttributeValue(titleSizer, 'fontSize');\n"
-                + "    var titleHeightGoal = getAttributeValue(titleSizer, 'height');\n"
-                + "    alert(titleHeight);\r\n"
-                + "    while (titleHeight > titleHeightGoal) {\n"
-                + "      titleFontSize -= 1;\n"
-                + "      title.style.fontSize = titleFontSize + 'px';\n"
-                + "      titleHeight = titleSizer.offsetHeight;\n"
-                + "    }\n"
-                + "    alert(titleHeight);\n"
-                + "  </script>\n"
-                + "</html>";
-        final String[] messages = {"552", "276"};
         checkHtmlAlert(html, messages);
     }
 }

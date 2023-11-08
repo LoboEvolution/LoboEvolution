@@ -194,19 +194,14 @@ public class HTMLDivElementTest extends LoboUnitTest {
                         + "    function test() {\n"
                         + "      var elt = document.getElementById('emptyDiv');\n"
                         + "      alert(elt.clientWidth > 500);\n"
-
                         + "      elt = document.getElementById('textDiv');\n"
                         + "      alert(elt.clientWidth > 500);\n"
-
                         + "      elt = document.getElementById('styleDiv0');\n"
                         + "      alert(elt.clientWidth == 0);\n"
-
                         + "      elt = document.getElementById('styleDiv10');\n"
                         + "      alert(elt.clientWidth > 8);\n"
-
                         + "      elt = document.getElementById('styleDivAuto');\n"
                         + "      alert(elt.clientWidth > 500);\n"
-
                         + "      elt = document.getElementById('styleDivAutoEmpty');\n"
                         + "      alert(elt.clientWidth > 500);\n"
                         + "    }\n"
@@ -236,19 +231,14 @@ public class HTMLDivElementTest extends LoboUnitTest {
                         + "    function test() {\n"
                         + "      var elt = document.getElementById('emptyDiv');\n"
                         + "      alert(elt.clientWidth > 500);\n"
-
                         + "      elt = document.getElementById('textDiv');\n"
                         + "      alert(elt.clientWidth > 500);\n"
-
                         + "      elt = document.getElementById('styleDiv0');\n"
                         + "      alert(elt.clientWidth == 0);\n"
-
                         + "      elt = document.getElementById('styleDiv10');\n"
                         + "      alert(elt.clientWidth > 8);\n"
-
                         + "      elt = document.getElementById('styleDivAuto');\n"
                         + "      alert(elt.clientWidth > 500);\n"
-
                         + "      elt = document.getElementById('styleDivAutoEmpty');\n"
                         + "      alert(elt.clientWidth > 500);\n"
                         + "    }\n"

@@ -154,7 +154,7 @@ public class HTMLIFrameElementImpl extends HTMLElementImpl implements HTMLIFrame
 	}
 
 	@Override
-	public double getOffsetHeight() {
+	public Integer getOffsetHeight() {
 		return getClientHeight();
 	}
 

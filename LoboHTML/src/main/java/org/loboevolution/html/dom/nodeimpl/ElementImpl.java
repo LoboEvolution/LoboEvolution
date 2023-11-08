@@ -43,12 +43,10 @@ import org.loboevolution.html.dom.filter.ElementFilter;
 import org.loboevolution.html.dom.filter.TagNameFilter;
 import org.loboevolution.html.dom.filter.TagNsNameFilter;
 import org.loboevolution.gui.HtmlPanel;
-import org.loboevolution.html.dom.svg.SVGSVGElement;
 import org.loboevolution.html.js.geom.DOMRectImpl;
 import org.loboevolution.html.js.geom.DOMRectListImpl;
 import org.loboevolution.html.node.*;
 import org.loboevolution.html.node.css.CSSStyleDeclaration;
-import org.loboevolution.html.node.css.ComputedCSSStyleDeclaration;
 import org.loboevolution.html.node.js.Window;
 import org.loboevolution.html.node.js.geom.DOMRect;
 import org.loboevolution.html.node.js.geom.DOMRectList;
@@ -56,10 +54,10 @@ import org.loboevolution.html.parser.XHtmlParser;
 import org.loboevolution.html.renderer.RBlock;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.style.CSSUtilities;
+import org.loboevolution.html.style.FontValues;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.html.style.StyleSheetAggregator;
 
-import org.mozilla.javascript.Function;
 import org.mozilla.javascript.annotations.JSFunction;
 
 import javax.swing.*;
@@ -77,9 +75,12 @@ import java.util.stream.Stream;
 @Slf4j
 public abstract class ElementImpl extends NodeImpl implements Element {
 
+	private static final int SCROLL_BAR_THICKNESS = 17;
+
 	private final NamedNodeMapImpl map;
 
 	private final String name;
+
 
 	/**
 	 * <p>Constructor for ElementImpl.</p>
@@ -611,7 +612,7 @@ public abstract class ElementImpl extends NodeImpl implements Element {
 	/** {@inheritDoc} */
 	@Override
 	public int getClientHeight() {
-		return calculateHeight(false, true);
+		return calculateHeight(false, true, true);
 	}
 
 	/** {@inheritDoc} */
@@ -633,7 +634,7 @@ public abstract class ElementImpl extends NodeImpl implements Element {
 	/** {@inheritDoc} */
 	@Override
 	public Integer getClientWidth() {
-		return calculateWidth(false, true);
+		return calculateWidth(false, true, true);
 	}
 
 	/** {@inheritDoc} */
@@ -796,7 +797,7 @@ public abstract class ElementImpl extends NodeImpl implements Element {
 	/** {@inheritDoc} */
 	@Override
 	public double getScrollHeight() {
-		return isVScrollable() ? getClientHeight() : 0;
+		return getClientHeight();
 	}
 
 	/** {@inheritDoc} */
@@ -856,7 +857,7 @@ public abstract class ElementImpl extends NodeImpl implements Element {
 	/** {@inheritDoc} */
 	@Override
 	public double getScrollWidth() {
-		return isHScrollable() ? getClientWidth() : 0;
+		return getClientWidth();
 	}
 
 	/** {@inheritDoc} */
@@ -966,8 +967,8 @@ public abstract class ElementImpl extends NodeImpl implements Element {
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
 		final Window win = doc.getDefaultView();
 		final RenderState rs  = doc.getRenderState();
-		int width = calculateWidth(true, true);
-		final int height = calculateHeight(true, true);
+		int width = calculateWidth(true, true, true);
+		final int height = calculateHeight(true, true, true);
 		final String position = currentStyle.getPosition();
 		int marginLeft =  HtmlValues.getPixelSize(currentStyle.getMarginLeft(), rs, win, 0);
 		int marginTop =  HtmlValues.getPixelSize(currentStyle.getMarginTop(), rs, win, 0);
@@ -1292,167 +1293,133 @@ public abstract class ElementImpl extends NodeImpl implements Element {
         return ("scroll".equals(overflow) || "auto".equals(overflow)) && (heightChild > this.getClientHeight());
     }
 
-	public int calculateWidth(final boolean isBorder, final boolean isPadding) {
-		boolean border = isBorder;
-		boolean padding = isPadding;
+	public int calculateWidth(final boolean isBorder, final boolean isPadding, final boolean isClient) {
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
-		final HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
-		final HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
-		final Dimension preferredSize = htmlPanel.getPreferredSize();
-		final CSSStyleDeclaration currentStyle = ((HTMLElementImpl)this).getCurrentStyle();
-		final ComputedCSSStyleDeclaration computedStyle = ((HTMLElementImpl)this).getComputedStyle();
-		String width = currentStyle.getWidth();
-		final String borderLeftWidth = currentStyle.getBorderLeftWidth();
-		final String borderRightWidth = currentStyle.getBorderRightWidth();
-		final String boxSizing = currentStyle.getBoxSizing();
-		final String display = computedStyle.getDisplay();
-		final int paddingRight = HtmlValues.getPixelSize(currentStyle.getPaddingRight(), null, doc.getDefaultView(), 0);
-		final int paddingLeft = HtmlValues.getPixelSize(currentStyle.getPaddingLeft(), null, doc.getDefaultView(), 0);
-		int sizeWidth = preferredSize.width;
+		final CSSStyleDeclaration currentStyle = ((HTMLElementImpl) this).getCurrentStyle();
+		final String width = currentStyle.getWidth();
+		final String overflow = currentStyle.getOverflow();
+		final RenderState rs = getRenderState();
+		final boolean padding = "border-box".equals(currentStyle.getBoxSizing()) ? false : isPadding;
+		final boolean border = "border-box".equals(currentStyle.getBoxSizing()) ? false : isBorder;
 
-		if (this instanceof HTMLHeadElement) {
-			return  -1;
-		}
+		int widthSize = 0;
 
 		if (getParentNode() == null ||
-				CSSValues.NONE.isEqual(display) ||
-				(Strings.isBlank(width) &&
-						(this instanceof HTMLInputElement ||
-								this instanceof HTMLTextAreaElement ||
-								this instanceof HTMLDDElementImpl ||
-								this instanceof HTMLCanvasElement ||
-								this instanceof HTMLHeadElement ||
-								this instanceof HTMLButtonElement ||
-								this instanceof HTMLFieldSetElement ||
-								this instanceof HTMLProgressElement ||
-								this instanceof HTMLSelectElement ||
-								this instanceof HTMLTableCellElement ||
-								this instanceof HTMLTableCaptionElement ||
-								this instanceof HTMLTableRowElement ||
-								this instanceof HTMLTableColElement ||
-								this instanceof HTMLTableColGroupElementImpl ||
-								this instanceof HTMLTableSectionElement ||
-								this instanceof SVGSVGElement))) {
-			return 0;
-		}
+				rs.getDisplay() == RenderState.DISPLAY_NONE ||
+				(isClient && rs.getDisplay() == RenderState.DISPLAY_INLINE)) {
+			widthSize = 0;
+		} else {
+			final int parentWidth = this instanceof HTMLHtmlElement ? -1 : isClient ? getParentElement().getClientWidth() : getParentElement().getOffsetWidth();
+			widthSize = HtmlValues.getPixelSize(CSSValues.AUTO.isEqual(width) ? "100%" : Strings.isBlank(width) ? childWidth(this, doc, parentWidth) + "px" : width, null, doc.getDefaultView(), 0, parentWidth);
+			if (Strings.isBlank(width) && rs.getDisplay() == RenderState.DISPLAY_BLOCK) {
+				widthSize = parentWidth;
+			} else {
 
-		if (CSSValues.INLINE.isEqual(display)) {
-			width = "0";
-			if (paddingRight <= 0 && paddingLeft <= 0) {
-				return 0;
+				if (widthSize == 0 && (this instanceof HTMLInputElement ||
+						this instanceof HTMLButtonElement ||
+						this instanceof HTMLHeadElement ||
+						this instanceof HTMLSelectElement ||
+						this instanceof HTMLTextAreaElement ||
+						this instanceof HTMLProgressElement ||
+						this instanceof HTMLMeterElement ||
+						this instanceof HTMLStrongElementImpl)) {
+					return widthSize;
+				}
+			}
+
+			if (!isClient && rs.getDisplay() == RenderState.DISPLAY_INLINE) {
+				widthSize = 0;
+			} else {
+				final HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
+				final HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
+				final Dimension preferredSize = htmlPanel.getPreferredSize();
+				widthSize = widthSize == -1 ? preferredSize.width : widthSize;
+
+				if (!(this instanceof HTMLHtmlElement) && widthSize == preferredSize.width) {
+					widthSize = widthSize - SCROLL_BAR_THICKNESS;
+				}
+			}
+
+			if (padding) {
+				widthSize += HtmlValues.getPixelSize(currentStyle.getPaddingRight(), null, doc.getDefaultView(), 0);
+				widthSize += HtmlValues.getPixelSize(currentStyle.getPaddingLeft(), null, doc.getDefaultView(), 0);
+			}
+
+			if (border) {
+				widthSize += HtmlValues.getPixelSize(currentStyle.getBorderLeftWidth(), null, doc.getDefaultView(), 0);
+				widthSize += HtmlValues.getPixelSize(currentStyle.getBorderRightWidth(), null, doc.getDefaultView(), 0);
+			}
+
+			if (isClient && widthSize > 0 && CSSValues.SCROLL.isEqual(overflow)) {
+				widthSize = widthSize - SCROLL_BAR_THICKNESS;
 			}
 		}
-
-		if (this instanceof HTMLHtmlElementImpl) {
-			width = String.valueOf(doc.getDefaultView().getInnerWidth());
-		}
-
-		if (this instanceof HTMLBodyElementImpl) {
-			width = String.valueOf(doc.getDefaultView().getInnerWidth() - 16);
-		}
-
-		if(Strings.isBlank(width)){
-			width = "-1px";
-		}
-
-		final Node nodeObj = getParentNode();
-		if (nodeObj instanceof HTMLElementImpl) {
-			final HTMLElementImpl elem = (HTMLElementImpl)nodeObj;
-			final Integer client = elem.getClientWidth();
-			if(client != null && client > 0) {
-				sizeWidth = client;
-			}
-		}
-
-		if (Strings.isNotBlank(display) && !CSSValues.INLINE.isEqual(display) && (Strings.isBlank(width) || "auto".equalsIgnoreCase(width) || "-1px".equals(width))) {
-			width = "100%";
-		}
-
-		int widthSize = "-1px".equals(width) ? sizeWidth : HtmlValues.getPixelSize(width, null, doc.getDefaultView(), -1, sizeWidth);
-
-		if ("border-box".equals(boxSizing)) {
-			padding = false;
-			border = false;
-		}
-
-		if (padding) {
-			widthSize += paddingRight;
-			widthSize += paddingLeft;
-		}
-
-		if (border) {
-			widthSize += HtmlValues.getPixelSize(borderRightWidth, null, doc.getDefaultView(), 0);
-			widthSize += HtmlValues.getPixelSize(borderLeftWidth, null, doc.getDefaultView(), 0);
-		}
-
 		return widthSize;
 	}
 
-	public int calculateHeight(final boolean isBorder, final boolean isPadding) {
-		boolean border = isBorder;
-		boolean padding = isPadding;
+	public int calculateHeight(final boolean isBorder, final boolean isPadding, final boolean isClient) {
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
+		final CSSStyleDeclaration currentStyle = ((HTMLElementImpl) this).getCurrentStyle();
+		final String height = currentStyle.getHeight();
+		final String overflow = currentStyle.getOverflow();
+		final String position = currentStyle.getPosition();
+		final RenderState rs = getRenderState();
+		final boolean padding = "border-box".equals(currentStyle.getBoxSizing()) ? false : isPadding;
+		final boolean border = "border-box".equals(currentStyle.getBoxSizing()) ? false : isBorder;
+
+		int heightSize = 0;
+
 		final HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
 		final HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
 		final Dimension preferredSize = htmlPanel.getPreferredSize();
-		final CSSStyleDeclaration currentStyle = ((HTMLElementImpl)this).getCurrentStyle();
-		String height = currentStyle.getHeight();
-		final String borderTopWidth = currentStyle.getBorderTopWidth();
-		final String borderBottomWidth = currentStyle.getBorderBottomWidth();
-		final String boxSizing = currentStyle.getBoxSizing();
-		final String dispaly = currentStyle.getDisplay();
-		final String position = currentStyle.getPosition();
-		int sizeHeight = preferredSize.height;
 
-		if (getParentNode() == null || CSSValues.NONE.isEqual(dispaly)) {
-			return 0;
-		}
+		if (getParentNode() == null ||
+				rs.getDisplay() == RenderState.DISPLAY_NONE ||
+				(isClient && rs.getDisplay() == RenderState.DISPLAY_INLINE)) {
+			heightSize = 0;
+		} else {
+			final int parentHeight = this instanceof HTMLHtmlElement ? preferredSize.height : isClient ? getParentElement().getClientHeight() : getParentElement().getOffsetHeight();
+			heightSize = HtmlValues.getPixelSize(CSSValues.AUTO.isEqual(height) ? "100%" : Strings.isBlank(height) ? childHeight(this, position, doc, parentHeight) + "px" : height, null, doc.getDefaultView(), 0, parentHeight);
+			if (heightSize == 0 && (this instanceof HTMLInputElement ||
+					this instanceof HTMLButtonElement ||
+					this instanceof HTMLHeadElement ||
+					this instanceof HTMLSelectElement ||
+					this instanceof HTMLTextAreaElement ||
+					this instanceof HTMLProgressElement ||
+					this instanceof HTMLMeterElement ||
+					this instanceof HTMLStrongElementImpl)) {
+				return heightSize;
+			}
 
-		if (this instanceof HTMLHeadElement) {
-			return  -1;
-		}
+			if (!isClient && rs.getDisplay() == RenderState.DISPLAY_INLINE) {
+				heightSize = 0;
+			} else {
 
-		if(Strings.isBlank(height)){
-			height = "-1px";
-		}
+				heightSize = heightSize == -1 ? preferredSize.height : heightSize;
 
-		if (this instanceof HTMLBodyElementImpl) {
-			height = String.valueOf(doc.getDefaultView().getInnerHeight());
-		}
+				if (!(this instanceof HTMLHtmlElement) && heightSize == preferredSize.height) {
+					heightSize = heightSize - SCROLL_BAR_THICKNESS;
+				}
+			}
 
-		final Node nodeObj = getParentNode();
-		if (nodeObj instanceof HTMLElementImpl) {
-			final HTMLElementImpl elem = (HTMLElementImpl)nodeObj;
-			final Integer client = elem.getClientHeight();
-			if(client != null && client != -1) {
-				sizeHeight = client;
+			if (padding) {
+				heightSize += HtmlValues.getPixelSize(currentStyle.getPaddingTop(), null, doc.getDefaultView(), 0);;
+				heightSize += HtmlValues.getPixelSize(currentStyle.getPaddingBottom(), null, doc.getDefaultView(), 0);;
+			}
+
+			if (border) {
+				heightSize += HtmlValues.getPixelSize(currentStyle.getBorderTopWidth(), null, doc.getDefaultView(), 0);
+				heightSize += HtmlValues.getPixelSize(currentStyle.getBorderBottomWidth(), null, doc.getDefaultView(), 0);
+			}
+
+			if (isClient && heightSize > 0 && CSSValues.SCROLL.isEqual(overflow)) {
+				heightSize = heightSize - SCROLL_BAR_THICKNESS;
 			}
 		}
-
-		height = "auto".equals(height) ? "100%" : "-1px".equals(height) ? textHeight(this, position) + "px" : height;
-		int heightSize = HtmlValues.getPixelSize(height, null, doc.getDefaultView(), -1, sizeHeight);
-
-		if ("border-box".equals(boxSizing)) {
-			padding = false;
-			border = false;
-		}
-
-		if (padding) {
-			final String paddingTop = currentStyle.getPaddingTop();
-			final String paddingBottom = currentStyle.getPaddingBottom();
-			heightSize += HtmlValues.getPixelSize(paddingTop, null, doc.getDefaultView(), 0);
-			heightSize += HtmlValues.getPixelSize(paddingBottom, null, doc.getDefaultView(), 0);
-		}
-
-		if (border) {
-			heightSize += HtmlValues.getPixelSize(borderTopWidth, null, doc.getDefaultView(), 0);
-			heightSize += HtmlValues.getPixelSize(borderBottomWidth, null, doc.getDefaultView(), 0);
-		}
-
 		return heightSize;
 	}
 
-	private int textHeight(final ElementImpl elm, final String position) {
+	private int childHeight(final ElementImpl elm, final String position, final HTMLDocumentImpl doc, final Integer parentHeight) {
 		final AtomicInteger h = new AtomicInteger(CSSValues.ABSOLUTE.isEqual(position) ? -1 : 0);
 		if (elm instanceof HTMLTextAreaElement ||
 				elm instanceof HTMLBaseFontElement ||
@@ -1469,12 +1436,38 @@ public abstract class ElementImpl extends NodeImpl implements Element {
 					} else if (elm instanceof HTMLDDElementImpl) {
 						h.addAndGet(17);
 					} else {
-						h.addAndGet(18);
+						h.addAndGet((int)Strings.texMeasure(((Text)child).getTextContent(), elm.getRenderState().getFont()).getHeight());
 					}
 					break;
 				case Node.ELEMENT_NODE:
 					final CSSStyleDeclaration currentStyle = ((HTMLElementImpl)child).getCurrentStyle();
-					h.addAndGet(textHeight((ElementImpl) child, currentStyle.getPosition()));
+					final String height = currentStyle.getHeight();
+					if(Strings.isNotBlank(height)){
+						h.addAndGet(HtmlValues.getPixelSize(CSSValues.AUTO.isEqual(height) ? "100%" : height, null, doc.getDefaultView(), 0, parentHeight));
+					} else {
+						h.addAndGet(childHeight((ElementImpl) child, currentStyle.getPosition(), doc, parentHeight));
+					}
+					break;
+				default:
+					break;
+			}
+		});
+		return h.get();
+	}
+
+	private int childWidth(final ElementImpl elm, final HTMLDocumentImpl doc, final Integer parentWidth) {
+		final AtomicInteger h = new AtomicInteger(0);
+		elm.getNodeList().forEach(child -> {
+			final int type = child.getNodeType();
+			switch (type) {
+				case Node.ELEMENT_NODE:
+					final CSSStyleDeclaration currentStyle = ((HTMLElementImpl)child).getCurrentStyle();
+					final String width = currentStyle.getWidth();
+					if(Strings.isNotBlank(width)){
+						h.addAndGet(HtmlValues.getPixelSize(width, null, doc.getDefaultView(), 0, parentWidth));
+					} else {
+						h.addAndGet(childWidth((ElementImpl) child, doc, parentWidth));
+					}
 					break;
 				default:
 					break;

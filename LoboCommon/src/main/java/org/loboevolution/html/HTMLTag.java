@@ -101,6 +101,8 @@ public enum HTMLTag {
     MAIN("MAIN"),
     MARQUEE("MARQUEE"),
     META("META"),
+
+    METER("METER"),
     MENU("MENU"),
     NAV("NAV"),
     NOSCRIPT("NOSCRIPT"),

@@ -1011,7 +1011,7 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
                 + "</head>\n"
                 + "<body onload='test()'>\n"
                 + "</body></html>";
-        final String[] messages = {null, null};
+        final String[] messages = {"", ""};
         checkHtmlAlert(html, messages);
     }
 
@@ -1600,13 +1600,8 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
                 + "    var divNormal = document.createElement('div');\n"
                 + "    divNormal.style = 'box-sizing: border-box; width: 100px; height: 100px; border: 10px solid white;"
                 + " padding: 2px; margin: 3px';\n"
-                + "    document.body.appendChild(divNormal);\n"
-                + "\n"
-                + "   if (window.navigator.userAgent.indexOf('Trident/') == -1) {\n"
-                + "     alert(divNormal.offsetWidth);\n"
-                + "   } else {\n"
-                + "     alert(divNormal.offsetWidth == window.innerWidth - 16);\n"
-                + "   }\n"
+                + " document.body.appendChild(divNormal);\n"
+                + " alert(divNormal.offsetWidth);\n"
                 + "  }\n"
                 + "</script></head>\n"
                 + "<body onload='test()'>\n"
@@ -1655,7 +1650,7 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
                 + "<body onload='test()'>\n"
                 + "</body>\n"
                 + "</html>\n";
-        final String[] messages = {"", "0", "16"};
+        final String[] messages = {"", "0", "17"};
         checkHtmlAlert(html, messages);
     }
 

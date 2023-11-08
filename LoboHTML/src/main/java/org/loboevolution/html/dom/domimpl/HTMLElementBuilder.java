@@ -650,6 +650,13 @@ public abstract class HTMLElementBuilder {
 		public HTMLElementImpl build(final String name) { return new HTMLMarqueeElementImpl(name); }
 	}
 
+	public static class Meter extends HTMLElementBuilder {
+		@Override
+		public HTMLElementImpl build(final String name) {
+			return new HTMLMeterElementImpl(name);
+		}
+	}
+
 	public static class Video extends HTMLElementBuilder {
 		@Override
 		public HTMLElementImpl build(final String name) {

@@ -32,9 +32,6 @@ import java.awt.*;
 
 /**
  * <p>TextAreaControl class.</p>
- *
- *
- *
  */
 public class TextAreaControl extends BaseControl {
 

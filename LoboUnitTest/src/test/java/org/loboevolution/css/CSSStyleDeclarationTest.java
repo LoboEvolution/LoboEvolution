@@ -682,7 +682,7 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
                 + "</head>\n"
                 + "<body onload='test()'>\n"
                 + "</body></html>";
-        final String[] messages = {null, null, "none", "rgb(0, 128, 0)"};
+        final String[] messages = {"", null, "none", "rgb(0, 128, 0)"};
         checkHtmlAlert(html, messages);
     }
 
