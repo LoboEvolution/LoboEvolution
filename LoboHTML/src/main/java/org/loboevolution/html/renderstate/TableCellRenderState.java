@@ -185,9 +185,12 @@ public class TableCellRenderState extends DisplayRenderState {
 		}
 		if (binfo == null || binfo.getBackgroundColor() == null) {
 			String bgColor = element.getBgColor();
-			if (Strings.isNotBlank(bgColor)) {
+			if (Strings.isBlank(bgColor)) {
 				if (rowElement != null) {
 					bgColor = rowElement.getBgColor();
+					if (Strings.isBlank(bgColor)) {
+						binfo = rowElement.getRenderState().getBackgroundInfo();
+					}
 				}
 			}
 			if (Strings.isNotBlank(bgColor)) {

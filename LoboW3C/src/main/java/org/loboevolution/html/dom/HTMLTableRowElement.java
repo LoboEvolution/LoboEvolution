@@ -30,10 +30,8 @@ package org.loboevolution.html.dom;
 
 
 /**
- * Provides special properties and methods (beyond the HTMLElement interface it also has available to it by inheritance) for manipulating the layout and presentation of rows in an HTML table.
- *
- *
- *
+ * Provides special properties and methods (beyond the HTMLElement interface it also has available to it by inheritance)
+ * for manipulating the layout and presentation of rows in an HTML table.
  */
 public interface HTMLTableRowElement extends HTMLElement {
 
