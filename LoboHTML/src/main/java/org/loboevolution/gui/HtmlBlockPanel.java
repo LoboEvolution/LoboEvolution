@@ -601,7 +601,8 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 
 	private void onMouseWheelMoved(final MouseWheelEvent mwe) {
 		if (mwe.getScrollType() == MouseWheelEvent.WHEEL_UNIT_SCROLL) {
-			final int units = mwe.getWheelRotation() * mwe.getScrollAmount();
+			final int factor = mwe.isShiftDown() ? 2 : 1;
+			final int units = mwe.getWheelRotation() * mwe.getScrollAmount() * factor;
 			final Renderable innerMostRenderable = getInnerMostRenderable(mwe.getX(), mwe.getY());
 			boolean consumed = false;
 			RBlock innerBlock = getContainingBlock(innerMostRenderable);
