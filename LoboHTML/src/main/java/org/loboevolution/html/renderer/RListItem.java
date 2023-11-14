@@ -113,7 +113,6 @@ class RListItem extends BaseRListElement {
 		final RBlockViewport layout = this.bodyLayout;
 		if (layout != null) {
 			final ListStyle listStyle = this.listStyle;
-			
 			ListValues bulletType = listStyle == null ? ListValues.TYPE_UNSET : ListValues.get(listStyle.getType());
 			if (bulletType != ListValues.TYPE_NONE) {
 				if (bulletType == ListValues.TYPE_UNSET) {
@@ -121,11 +120,12 @@ class RListItem extends BaseRListElement {
 					if (!(parent instanceof RList)) {
 						parent = parent.getOriginalOrCurrentParent();
 					}
+
 					if (parent instanceof RList) {
 						final ListStyle parentListStyle = ((RList) parent).listStyle;
-						bulletType = parentListStyle == null ? ListValues.TYPE_DECIMAL : ListValues.get(parentListStyle.getType());
+						bulletType = parentListStyle == null ? ListValues.TYPE_DISC : ListValues.get(parentListStyle.getType());
 					} else {
-						bulletType = ListValues.TYPE_DECIMAL;
+						bulletType = ListValues.TYPE_DISC;
 					}
 				}
 

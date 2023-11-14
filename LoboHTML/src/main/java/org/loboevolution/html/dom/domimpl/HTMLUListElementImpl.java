@@ -79,6 +79,6 @@ public class HTMLUListElementImpl extends HTMLElementImpl implements HTMLUListEl
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {
-		return "[object HTMLTableUListlement]";
+		return "[object HTMLUListElement]";
 	}
 }
