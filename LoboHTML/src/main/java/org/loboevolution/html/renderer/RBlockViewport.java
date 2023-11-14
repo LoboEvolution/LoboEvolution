@@ -1109,6 +1109,7 @@ public class RBlockViewport extends BaseRCollection {
 						.defaultOverflowY(block.defaultOverflowY)
 						.sizeOnly(sizeOnly)
 						.build());
+				this.lastSeqBlock = block;
 			} else if (renderable instanceof RElement) {
 				final RElement e = (RElement) renderable;
 				e.layout(availWidth, availHeight, this.sizeOnly);
