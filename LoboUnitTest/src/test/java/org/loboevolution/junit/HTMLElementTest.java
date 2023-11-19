@@ -281,7 +281,7 @@ public class HTMLElementTest extends LoboUnitTest {
 		// Replace class attribute, first with another namespace
 		attr = document.createAttributeNS("http://www.example.com/examplens", "e:class");
 		attr.setValue("barclass");
-		assertEquals("e:class", attr.getLocalName());
+		assertEquals("class", attr.getLocalName());
 		body.setAttributeNodeNS(attr);
 		assertEquals("fooclass", body.getAttribute("class"));
 		attr = document.createAttribute("class");
@@ -322,7 +322,7 @@ public class HTMLElementTest extends LoboUnitTest {
 		// Set CLASS attribute with another namespace
 		attr = document.createAttributeNS("http://www.example.com/examplens", "e:CLASS");
 		attr.setValue("barclass");
-		assertEquals("e:CLASS", attr.getLocalName());
+		assertEquals("CLASS", attr.getLocalName());
 		body.setAttributeNodeNS(attr);
 		assertEquals("fooclass", body.getAttribute("CLASS"));
 		attr = document.createAttribute("CLASS");
@@ -583,7 +583,7 @@ public class HTMLElementTest extends LoboUnitTest {
 		assertEquals("http://www.w3.org/2000/svg", svg.getNamespaceURI());
 		final Element p = document.createElementNS(null, "p");
 		body.appendChild(p);
-		assertEquals(HTMLDocument.HTML_NAMESPACE_URI, p.getNamespaceURI());
+		assertNull(p.getNamespaceURI());
 	}
 
 	@Test
