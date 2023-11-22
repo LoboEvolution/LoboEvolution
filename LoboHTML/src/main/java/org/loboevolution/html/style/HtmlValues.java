@@ -262,7 +262,7 @@ public class HtmlValues {
 	 * @param availSize a int.
 	 * @return a int.
 	 */
-	public static int getPixelSize(final String spec, final RenderState renderState, final Window window, final int errorValue, final int availSize) {
+	public static Integer getPixelSize(final String spec, final RenderState renderState, final Window window, final Integer errorValue, final int availSize) {
 		try {
 			if (spec.endsWith("%")) {
 				final String perText = spec.substring(0, spec.length() - 1);
@@ -519,7 +519,7 @@ public class HtmlValues {
 				token.endsWith("mm") ||
 				token.endsWith("ex") ||
 				token.endsWith("em") ||
-				(token.endsWith("in")  && !token.startsWith("zoom")) ||
+				(token.endsWith("in")  && !token.startsWith("zoom") && !token.equals("thin")) ||
 				token.endsWith("q") ||
 				token.endsWith("vh") ||
 				token.endsWith("vw") ||

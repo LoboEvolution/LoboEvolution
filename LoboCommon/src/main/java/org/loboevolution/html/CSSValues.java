@@ -272,6 +272,10 @@ public enum CSSValues {
 
 	TABLE_FOOTER_GROUP("table-footer-group"),
 
+	THIN("thin"),
+
+	THICK("thick"),
+
 	TEXT_CSS("text"),
 
 	TOP("top"),

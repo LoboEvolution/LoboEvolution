@@ -208,8 +208,9 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
                         CSSValues.INITIAL.getValue().equals(value) ||
                         value.endsWith("%")) {
                     style.setProperty(propertyName, value, priority);
+                } else if(CSSValues.THICK.isEqual(value) || CSSValues.THIN.isEqual(value) || CSSValues.MEDIUM.isEqual(value)) {
+                    style.setProperty(propertyName, value, priority);
                 }
-
             } else {
                 style.setProperty(propertyName, value, priority);
             }

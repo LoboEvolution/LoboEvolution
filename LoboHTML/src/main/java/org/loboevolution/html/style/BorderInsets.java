@@ -147,10 +147,10 @@ public class BorderInsets {
 		binfo.setInsets(HtmlInsets.getInsets(topText, leftText, bottomText, rightText, element, renderState));
 	}
 
-	private static String borderInsets(final String parentStyle, final int style, final String value) {
+	private static String borderInsets(final String parentStyle, final int style, String value) {
 		if (isNone(style)) return "0px";
-		if (isInherit(value)) return parentStyle;
-		return value;
+        if (isInherit(value)) return getBorderWidthValue(parentStyle);
+        return getBorderWidthValue(value);
 	}
 
 	private static boolean isNone(final int value) {
@@ -160,6 +160,22 @@ public class BorderInsets {
 	private static boolean isInherit(final String value) {
 		return CSSValues.INHERIT.equals(CSSValues.get(value));
 	}
+
+    private static String getBorderWidthValue(String value) {
+        if (CSSValues.THIN.isEqual(value)) {
+            value = "1px";
+        }
+
+        if (CSSValues.MEDIUM.isEqual(value)) {
+            value = "3px";
+        }
+
+        if (CSSValues.THICK.isEqual(value)) {
+            value = "5px";
+        }
+
+        return value;
+    }
 
 	private static Color getBorderColor(final HTMLElementImpl element, final String colorSpec, final RenderState renderState) {
 		final ColorFactory cf = ColorFactory.getInstance();
