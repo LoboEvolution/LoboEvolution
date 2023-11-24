@@ -26,6 +26,7 @@
 package org.loboevolution.html.dom.filter;
 
 import org.loboevolution.common.Nodes;
+import org.loboevolution.html.dom.HTMLAnchorElement;
 import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.NamedNodeMap;
 import org.loboevolution.html.node.traversal.NodeFilter;
@@ -40,7 +41,7 @@ public class AnchorFilter implements NodeFilter {
 	@Override
 	public short acceptNode(final Node node) {
 		final String nodeName = node.getNodeName();
-		if ("a".equalsIgnoreCase(nodeName)) {
+		if (node instanceof HTMLAnchorElement) {
 			final NamedNodeMap attributes = node.getAttributes();
 			for (final Node attribute : Nodes.iterable(attributes)) {
 				if ("name".equals(((Attr)attribute).getName())) {

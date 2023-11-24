@@ -455,11 +455,11 @@ public class StyleSheetAggregator {
 						|| element instanceof HTMLTextAreaElement) && !element.hasAttribute("required");
 
 			case "link":
-				return (element instanceof HTMLLinkElement);
+				return (element instanceof HTMLAnchorElementImpl);
 
 			case "visited":
-				if (element instanceof HTMLLinkElement) {
-					final HTMLLinkElementImpl elem = (HTMLLinkElementImpl)element;
+				if (element instanceof HTMLAnchorElementImpl) {
+					final HTMLAnchorElementImpl elem = (HTMLAnchorElementImpl)element;
 					final HtmlRendererConfig config = elem.getHtmlRendererConfig();
 					return config.isVisited(elem.getHref());
 				} else{

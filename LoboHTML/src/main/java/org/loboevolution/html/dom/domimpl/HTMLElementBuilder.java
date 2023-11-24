@@ -41,7 +41,7 @@ public abstract class HTMLElementBuilder {
 	public static class Anchor extends HTMLElementBuilder {
 		@Override
 		public HTMLElementImpl build(final String name) {
-			return new HTMLLinkElementImpl(name);
+			return new HTMLAnchorElementImpl(name);
 		}
 	}
 

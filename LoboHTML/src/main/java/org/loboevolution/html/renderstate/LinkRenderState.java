@@ -28,9 +28,10 @@ package org.loboevolution.html.renderstate;
 
 import org.loboevolution.common.Strings;
 import org.loboevolution.gui.HtmlRendererContext;
+import org.loboevolution.html.dom.HTMLAnchorElement;
 import org.loboevolution.html.dom.HTMLBodyElement;
 import org.loboevolution.html.dom.HTMLDocument;
-import org.loboevolution.html.dom.domimpl.HTMLLinkElementImpl;
+import org.loboevolution.html.dom.domimpl.HTMLAnchorElementImpl;
 import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.laf.ColorFactory;
 
@@ -44,14 +45,14 @@ public class LinkRenderState extends StyleSheetRenderState {
 
     private final HtmlRendererContext rcontext;
 
-    private final HTMLLinkElementImpl element;
+    private final HTMLAnchorElement element;
 
     /**
      * <p>Constructor for RenderStateDelegator.</p>
      *
      * @param delegate a {@link RenderState} object.
      */
-    public LinkRenderState(final RenderState delegate, final HtmlRendererContext rcontext, final HTMLLinkElementImpl element) {
+    public LinkRenderState(final RenderState delegate, final HtmlRendererContext rcontext, final HTMLAnchorElementImpl element) {
         super(delegate, element);
         this.element = element;
         this.rcontext = rcontext;
@@ -87,7 +88,7 @@ public class LinkRenderState extends StyleSheetRenderState {
             final boolean visited = rcontext.isVisitedLink(element);
             String vlink = null;
             String link = null;
-            final HTMLDocument doc = (HTMLDocument) element.getDocumentNode();
+            final HTMLDocument doc = (HTMLDocument) element.getOwnerDocument();
             if (doc != null) {
                 final HTMLBodyElement body = (HTMLBodyElement) doc.getBody();
                 if (body != null) {

@@ -31,6 +31,7 @@ import org.loboevolution.config.HtmlRendererConfig;
 import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.dom.HTMLLinkElement;
 import org.loboevolution.gui.HtmlPanel;
+import org.loboevolution.html.dom.nodeimpl.DOMTokenListImpl;
 import org.loboevolution.html.js.css.CSSStyleSheetImpl;
 import org.loboevolution.html.node.DOMTokenList;
 import org.loboevolution.html.node.css.StyleSheet;
@@ -52,6 +53,7 @@ import java.nio.file.Paths;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -75,61 +77,13 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 	/** {@inheritDoc} */
 	@Override
 	protected RenderState createRenderState(final RenderState prevRenderState) {
-		final RenderState tmpRenderState = prevRenderState;
-		if (hasAttribute("href")) {
-			return new LinkRenderState(prevRenderState, getHtmlRendererContext(), this);
-		}
-		return super.createRenderState(tmpRenderState);
-	}
-
-	/**
-	 * <p>getAbsoluteHref.</p>
-	 *
-	 * @return a {@link java.lang.String} object.
-	 */
-	public String getAbsoluteHref() {
-		final HtmlRendererContext rcontext = getHtmlRendererContext();
-		if (rcontext != null) {
-			final String href = getHref();
-			if (href != null && href.length() > 0) {
-				getTarget();
-				try {
-					final URL url = getFullURL(href);
-					return url == null ? null : url.toExternalForm();
-				} catch (final MalformedURLException mfu) {
-					this.warn("Malformed URI: [" + href + "].", mfu);
-				}
-			}
-		}
-		return null;
-	}
-
-	/**
-	 * <p>navigate.</p>
-	 */
-	public void navigate() {
-		final HtmlRendererContext rcontext = getHtmlRendererContext();
-		if (!this.disabled && rcontext != null) {
-			final String href = getHref();
-			if (Strings.isNotBlank(href)) {
-				try {
-					final URL url = getFullURL(href);
-					if (url == null) {
-						this.warn("Unable to resolve URI: [" + href + "].");
-					} else {
-						rcontext.linkClicked(url, false);
-					}
-				} catch (final MalformedURLException mfu) {
-					this.warn("Malformed URI: [" + href + "].", mfu);
-				}
-			}
-		}
+		return super.createRenderState(prevRenderState);
 	}
 
 	/**
 	 * If the LINK refers to a stylesheet document, this method loads and parses it.
 	 */
-	protected void processLink() {
+	private void processLink() {
 		this.styleSheet = null;
 		final String rel = getAttribute("rel");
 		if (rel != null) {
@@ -357,7 +311,14 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 
 	@Override
 	public DOMTokenList getRelList() {
-		return null;
+		final DOMTokenListImpl tokList = new DOMTokenListImpl(this);
+		final String rel = getRel();
+		if(Strings.isNotBlank(rel)){
+			final String[] listString = rel.split(" ");
+			final List<String> names = Arrays.asList(listString);
+			names.forEach(tokList::populate);
+		}
+		return tokList;
 	}
 
 	/** {@inheritDoc} */

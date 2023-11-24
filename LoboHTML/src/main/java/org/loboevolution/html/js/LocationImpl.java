@@ -46,7 +46,7 @@ public class LocationImpl extends AbstractScriptableDelegate implements Location
 
 	private final WindowImpl window;
 
-	LocationImpl(final WindowImpl window) {
+	public LocationImpl(final WindowImpl window) {
 		this.window = window;
 	}
 

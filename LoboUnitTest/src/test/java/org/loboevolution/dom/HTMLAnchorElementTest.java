@@ -264,7 +264,7 @@ public class HTMLAnchorElementTest extends LoboUnitTest {
                 + "</body>\n"
                 + "</html>";
 
-        final String[] messages = {"undefined", "undefined", "a", "A", "a8", "8Afoo", "8", "@"};
+        final String[] messages = {null, "A", "a", "A", "a8", "8Afoo", "8", "@"};
         checkHtmlAlert(html, messages);
     }
 

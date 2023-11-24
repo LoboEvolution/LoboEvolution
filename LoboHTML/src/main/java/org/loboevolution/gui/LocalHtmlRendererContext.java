@@ -32,8 +32,10 @@ import org.loboevolution.common.Urls;
 import org.loboevolution.component.IBrowserFrame;
 import org.loboevolution.component.IBrowserPanel;
 import org.loboevolution.component.IToolBar;
+import org.loboevolution.html.dom.HTMLAnchorElement;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.HTMLLinkElement;
+import org.loboevolution.html.dom.domimpl.HTMLAnchorElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.input.FormInput;
 import org.loboevolution.http.UserAgentContext;
@@ -209,7 +211,7 @@ public class LocalHtmlRendererContext implements HtmlRendererContext{
 
     /** {@inheritDoc} */
     @Override
-    public boolean isVisitedLink(final HTMLLinkElement link) {
+    public boolean isVisitedLink(final HTMLAnchorElement link) {
         return false;
     }
 

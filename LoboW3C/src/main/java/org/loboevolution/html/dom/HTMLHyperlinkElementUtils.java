@@ -28,9 +28,6 @@ package org.loboevolution.html.dom;
 
 /**
  * <p>HTMLHyperlinkElementUtils interface.</p>
- *
- *
- *
  */
 public interface HTMLHyperlinkElementUtils {
     

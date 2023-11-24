@@ -177,8 +177,8 @@ public class HtmlController {
 			}
 		}
 		
-		if (node instanceof HTMLLinkElementImpl) {
-			((HTMLLinkElementImpl) node).navigate();
+		if (node instanceof HTMLAnchorElementImpl) {
+			((HTMLAnchorElementImpl) node).navigate();
 			return false;
 		} else if (node instanceof HTMLButtonElementImpl) {
 			final HTMLButtonElementImpl btn = (HTMLButtonElementImpl) node;
@@ -211,8 +211,8 @@ public class HtmlController {
 	 * @param event a {@link java.awt.event.MouseEvent} object.
 	 */
 	public boolean onMouseDisarmed(final ModelNode node, final MouseEvent event) {
-		if (node instanceof HTMLLinkElementImpl) {
-			((HTMLLinkElementImpl) node).getCurrentStyle().setOverlayColor(null);
+		if (node instanceof HTMLAnchorElementImpl) {
+			((HTMLAnchorElementImpl) node).getCurrentStyle().setOverlayColor(null);
 			return false;
 		}
 		final ModelNode parent = node.getParentModelNode();
@@ -245,8 +245,8 @@ public class HtmlController {
 			}
 		}
 		
-		if (node instanceof HTMLLinkElementImpl) {
-			((HTMLLinkElementImpl) node).getCurrentStyle().setOverlayColor("#9090FF80");
+		if (node instanceof HTMLAnchorElementImpl) {
+			((HTMLAnchorElementImpl) node).getCurrentStyle().setOverlayColor("#9090FF80");
 			return false;
 		}
 		
@@ -449,8 +449,8 @@ public class HtmlController {
 			}
 		}
 		
-		if (node instanceof HTMLLinkElementImpl) {
-			((HTMLLinkElementImpl) node).getCurrentStyle().setOverlayColor(null);
+		if (node instanceof HTMLAnchorElementImpl) {
+			((HTMLAnchorElementImpl) node).getCurrentStyle().setOverlayColor(null);
 			return false;
 		}
 

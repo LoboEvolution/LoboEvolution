@@ -30,10 +30,9 @@ package org.loboevolution.html.dom;
 import org.loboevolution.html.node.DOMTokenList;
 
 /**
- * Hyperlink elements and provides special properties and methods (beyond those of the regular HTMLElement object interface that they inherit from) for manipulating the layout and presentation of such elements.
- *
- *
- *
+ * Hyperlink elements and provides special properties
+ * and methods (beyond those of the regular HTMLElement object interface that they inherit from)
+ * for manipulating the layout and presentation of such elements.
  */
 public interface HTMLAnchorElement extends HTMLElement, HTMLHyperlinkElementUtils {
 

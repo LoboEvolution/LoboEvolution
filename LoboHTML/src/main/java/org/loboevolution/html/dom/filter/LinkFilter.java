@@ -25,7 +25,7 @@
  */
 package org.loboevolution.html.dom.filter;
 
-import org.loboevolution.html.dom.HTMLLinkElement;
+import org.loboevolution.html.dom.HTMLAnchorElement;
 import org.loboevolution.html.node.traversal.NodeFilter;
 import org.loboevolution.html.node.Node;
 
@@ -37,7 +37,7 @@ public class LinkFilter implements NodeFilter {
 	/** {@inheritDoc} */
 	@Override
 	public short acceptNode(final Node node) {
-		return node instanceof HTMLLinkElement ?
+		return node instanceof HTMLAnchorElement ?
 				NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
 	}
 }

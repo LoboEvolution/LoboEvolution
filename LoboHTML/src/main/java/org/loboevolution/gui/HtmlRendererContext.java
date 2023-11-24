@@ -28,6 +28,7 @@
  */
 package org.loboevolution.gui;
 
+import org.loboevolution.html.dom.HTMLAnchorElement;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.HTMLLinkElement;
 import org.loboevolution.html.dom.input.FormInput;
@@ -220,10 +221,10 @@ public interface HtmlRendererContext {
     /**
      * <p>isVisitedLink.</p>
      *
-     * @param link a {@link org.loboevolution.html.dom.HTMLLinkElement} object.
+     * @param link a {@link org.loboevolution.html.dom.HTMLAnchorElement} object.
      * @return a boolean.
      */
-    boolean isVisitedLink(HTMLLinkElement link);
+    boolean isVisitedLink(HTMLAnchorElement link);
 
 
     /**

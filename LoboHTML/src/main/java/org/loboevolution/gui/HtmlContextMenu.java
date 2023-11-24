@@ -31,8 +31,8 @@ import org.loboevolution.common.Urls;
 import org.loboevolution.component.IBrowserPanel;
 import org.loboevolution.component.IDownload;
 import org.loboevolution.html.dom.HTMLElement;
+import org.loboevolution.html.dom.domimpl.HTMLAnchorElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLImageElementImpl;
-import org.loboevolution.html.dom.domimpl.HTMLLinkElementImpl;
 import org.loboevolution.laf.IconFactory;
 
 import javax.swing.*;
@@ -166,7 +166,7 @@ public class HtmlContextMenu {
 	 */
 	public JPopupMenu popupMenuLink(final IBrowserPanel bpanel) {
 		final JPopupMenu popupMenu = new JPopupMenu();
-		final HTMLLinkElementImpl link = (HTMLLinkElementImpl) element;
+		final HTMLAnchorElementImpl link = (HTMLAnchorElementImpl) element;
 		final JMenuItem menuItem = new JMenuItem("Open link in new tab");
 		menuItem.setIcon(IconFactory.getInstance().getIcon(SEARCH));
 		menuItem.addActionListener(e -> {

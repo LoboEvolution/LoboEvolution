@@ -448,8 +448,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, GlobalE
 	/** {@inheritDoc} */
 	@Override
 	public String getAccessKey() {
-		// TODO Auto-generated method stub
-		return null;
+		return getAttribute("accessKey");
 	}
 
 	/** {@inheritDoc} */

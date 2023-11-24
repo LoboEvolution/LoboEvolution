@@ -37,12 +37,10 @@ import org.loboevolution.config.HtmlRendererConfigImpl;
 import org.loboevolution.gui.HtmlContextMenu;
 import org.loboevolution.gui.HtmlPanel;
 import org.loboevolution.gui.HtmlRendererContext;
+import org.loboevolution.html.dom.HTMLAnchorElement;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.HTMLLinkElement;
-import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
-import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
-import org.loboevolution.html.dom.domimpl.HTMLImageElementImpl;
-import org.loboevolution.html.dom.domimpl.HTMLLinkElementImpl;
+import org.loboevolution.html.dom.domimpl.*;
 import org.loboevolution.html.dom.input.FormInput;
 import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.parser.DocumentBuilderImpl;
@@ -316,7 +314,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean isVisitedLink(final HTMLLinkElement link) {
+	public boolean isVisitedLink(final HTMLAnchorElement link) {
 		return LinkStore.isVisited(link.getHref());
 	}
 
@@ -422,7 +420,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 			final JPopupMenu popupMenuImage = menu.popupMenuImage(htmlPanel.getBrowserPanel());
 			popupMenuImage.show(event.getComponent(), event.getX(), event.getY());
 			return false;
-		} else if (element instanceof HTMLLinkElementImpl) {
+		} else if (element instanceof HTMLAnchorElementImpl) {
 			final JPopupMenu popupMenuLink = menu.popupMenuLink(htmlPanel.getBrowserPanel());
 			popupMenuLink.show(event.getComponent(), event.getX(), event.getY());
 			return false;

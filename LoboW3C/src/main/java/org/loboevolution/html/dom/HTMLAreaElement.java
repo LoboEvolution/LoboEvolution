@@ -30,10 +30,8 @@ package org.loboevolution.html.dom;
 import org.loboevolution.html.node.DOMTokenList;
 
 /**
- * Provides special properties and methods (beyond those of the regular object HTMLElement interface it also has available to it by inheritance) for manipulating the layout and presentation of &lt;area&gt; elements.
- *
- *
- *
+ * Provides special properties and methods (beyond those of the regular object HTMLElement interface
+ * it also has available to it by inheritance) for manipulating the layout and presentation of &lt;area&gt; elements.
  */
 public interface HTMLAreaElement extends HTMLElement, HTMLHyperlinkElementUtils {
 

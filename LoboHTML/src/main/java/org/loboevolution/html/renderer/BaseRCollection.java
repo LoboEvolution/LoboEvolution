@@ -27,9 +27,9 @@
 package org.loboevolution.html.renderer;
 
 import org.loboevolution.common.Strings;
+import org.loboevolution.html.dom.domimpl.HTMLAnchorElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
-import org.loboevolution.html.dom.domimpl.HTMLLinkElementImpl;
 import org.loboevolution.html.dom.nodeimpl.ModelNode;
 import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.renderstate.RenderState;
@@ -355,7 +355,7 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 
 		int width = -1;
 
-		if(element instanceof HTMLLinkElementImpl && Strings.isNotBlank(textContent)) {
+		if(element instanceof HTMLAnchorElementImpl && Strings.isNotBlank(textContent)) {
 			width = (int) (Strings.texMeasure(textContent,  renderState.getFont()).getWidth()) + 5;
 		}
 
