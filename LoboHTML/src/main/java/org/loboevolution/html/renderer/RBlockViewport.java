@@ -50,6 +50,7 @@ import org.loboevolution.html.renderer.table.RTable;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.style.HtmlInsets;
 import org.loboevolution.gui.HtmlRendererContext;
+import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.info.FloatingInfo;
 
@@ -1779,27 +1780,6 @@ public class RBlockViewport extends BaseRCollection {
 		final RenderableContainer containingBlock = absolute ? getPositionedAncestor(this.container) : getRootContainer(container);
 
 		final CSSStyleDeclaration style = element.getCurrentStyle();
-		int dhInt = getDeclaredHeightImpl(element, availContentHeight);
-		int dwInt = getDeclaredWidthImpl(element, availContentWidth);
-
-		final Node nodeObj = element.getFirstChild();
-		if (nodeObj instanceof HTMLElementImpl) {
-			final int position = getPosition((HTMLElementImpl) nodeObj);
-
-			if (position != RenderState.POSITION_ABSOLUTE && position != RenderState.POSITION_FIXED) {
-				final HTMLElementImpl elem = (HTMLElementImpl) nodeObj;
-				final int wclient = elem.getBoundingClientRect().getWidth();
-				final int hclient = elem.getBoundingClientRect().getHeight();
-				dwInt = wclient != -1 ? wclient : dwInt;
-				dhInt = hclient != -1 ? hclient : dhInt;
-				final RenderState rs = elem.getRenderState();
-				final HtmlInsets marginInsets = rs.getMarginInsets();
-				if (marginInsets != null) {
-					dwInt += marginInsets.getLeft() + marginInsets.getRight();
-					dhInt += marginInsets.getTop() + marginInsets.getBottom();
-				}
-			}
-		}
 
 		this.container.addDelayedPair(DelayedPair.builder().
 				modelNode(getModelNode()).
@@ -1812,8 +1792,8 @@ public class RBlockViewport extends BaseRCollection {
 				right(style.getRight()).
 				top(style.getTop()).
 				bottom(style.getBottom()).
-				width(dwInt).
-				height(dhInt).
+				width(HtmlValues.getPixelSize(style.getWidth(), element.getRenderState(), element.getDocumentNode().getDefaultView(), null, availContentWidth)).
+				height(HtmlValues.getPixelSize(style.getHeight(), element.getRenderState(), element.getDocumentNode().getDefaultView(), null, availContentHeight)).
 				rs(element.getRenderState()).
 				initY(currentLine.getY() + currentLine.getHeight()).
 				initX(currentLine.getX()).
