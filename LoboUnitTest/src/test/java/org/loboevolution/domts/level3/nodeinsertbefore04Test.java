@@ -28,13 +28,13 @@ package org.loboevolution.domts.level3;
 
 
 import org.htmlunit.cssparser.dom.DOMException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -61,7 +61,7 @@ public class nodeinsertbefore04Test extends LoboUnitTest {
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.HIERARCHY_REQUEST_ERR);
             }
-            assertTrue("throw_HIERARCHY_REQUEST_ERR", success);
+            assertTrue(success);
         }
     }
 }

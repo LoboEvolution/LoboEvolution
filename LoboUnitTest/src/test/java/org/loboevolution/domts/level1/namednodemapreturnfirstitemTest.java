@@ -27,7 +27,7 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
@@ -35,7 +35,7 @@ import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -73,9 +73,7 @@ public class namednodemapreturnfirstitemTest extends LoboUnitTest {
         attributes = testAddress.getAttributes();
         child = attributes.item(0);
         name = child.getNodeName();
-        assertTrue("namednodemapReturnFirstItemAssert",
-                ("domestic".equals(name) | "street".equals(name))
-        );
+        assertTrue(("domestic".equals(name) | "street".equals(name)));
     }
 }
 

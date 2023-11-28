@@ -27,11 +27,11 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * The "getAttributes()" method invoked on a Comment
@@ -69,13 +69,13 @@ public class hc_nodecommentnodeattributesTest extends LoboUnitTest {
 
                 if (nodeType == 8) {
                     attrList = commentNode.getAttributes();
-                    assertNull("existingCommentAttributesNull", attrList);
+                    assertNull(attrList);
                 }
             }
         }
         commentNode = doc.createComment("This is a comment");
         attrList = commentNode.getAttributes();
-        assertNull("createdCommentAttributesNull", attrList);
+        assertNull(attrList);
     }
 }
 

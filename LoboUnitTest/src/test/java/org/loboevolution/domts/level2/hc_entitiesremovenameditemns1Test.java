@@ -28,14 +28,14 @@
 package org.loboevolution.domts.level2;
 
 import org.htmlunit.cssparser.dom.DOMException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.html.node.NamedNodeMap;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.fail;
 
 
 /**
@@ -61,9 +61,9 @@ public class hc_entitiesremovenameditemns1Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
 
-        assertNotNull("docTypeNotNull", docType);
+        assertNotNull(docType);
         entities = docType.getEntities();
-        assertNotNull("entitiesNotNull", entities);
+        assertNotNull(entities);
 
         try {
             entities.removeNamedItemNS("http://www.w3.org/1999/xhtml", "alpha");

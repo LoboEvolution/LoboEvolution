@@ -27,13 +27,13 @@
 
 package org.loboevolution.domts.level2;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -66,12 +66,12 @@ public class getElementsByTagNameNS02Test extends LoboUnitTest {
         final String lname;
         doc = sampleXmlFile("staffNS.xml");
         newList = doc.getElementsByTagNameNS("*", "employee");
-        assertEquals( "employeeCount", 5, newList.getLength());
+        assertEquals( 5, newList.getLength());
         newElement = (Element) newList.item(3);
         prefix = newElement.getPrefix();
-        assertEquals("prefix", "EMP", prefix);
+        assertEquals("EMP", prefix);
         lname = newElement.getLocalName();
-        assertEquals("lname", "EMPLOYEE", lname);
+        assertEquals("EMPLOYEE", lname);
     }
 }
 

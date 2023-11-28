@@ -27,12 +27,12 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -61,11 +61,11 @@ public class domconfigurationcansetparameter01Test extends LoboUnitTest {
         appendedChild = docElem.appendChild(newCommentNode);
         domConfig = doc.getDomConfig();
         canSet = domConfig.canSetParameter("comments", Boolean.FALSE);
-        assertTrue("domconfigurationcansetparameter01", canSet);
+        assertTrue(canSet);
         doc.normalizeDocument();
         lastChild = docElem.getLastChild();
         commentValue = lastChild.getNodeValue();
-        assertEquals("domconfigurationsetparameter02_2", "This is a new Comment node", commentValue);
+        assertEquals("This is a new Comment node", commentValue);
     }
 }
 

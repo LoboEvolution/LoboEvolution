@@ -27,11 +27,11 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -74,8 +74,8 @@ public class documentadoptnode26Test extends LoboUnitTest {
         if ((adoptedNode != null)) {
             adoptedName = adoptedNode.getNodeName();
             adoptedNS = adoptedNode.getNamespaceURI();
-            assertEquals("documentadoptnode26_1", "head", adoptedName);
-            assertEquals("documentadoptnode26_2", "http://www.w3.org/1999/xhtml", adoptedNS);
+            assertEquals("head", adoptedName);
+            assertEquals("http://www.w3.org/1999/xhtml", adoptedNS);
         }
     }
 }

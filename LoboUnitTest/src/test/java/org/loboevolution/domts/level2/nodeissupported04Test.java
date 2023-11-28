@@ -27,13 +27,13 @@
 
 package org.loboevolution.domts.level2;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.EntityReference;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 /**
@@ -60,9 +60,9 @@ public class nodeissupported04Test extends LoboUnitTest {
         final boolean success;
         doc = sampleXmlFile("staffNS.xml");
         entRef = doc.createEntityReference("ent1");
-        assertNotNull("createdEntRefNotNull", entRef);
+        assertNotNull(entRef);
         success = entRef.isSupported("XML CORE", "");
-        assertFalse("nodeissupported04", success);
+        assertFalse(success);
     }
 }
 

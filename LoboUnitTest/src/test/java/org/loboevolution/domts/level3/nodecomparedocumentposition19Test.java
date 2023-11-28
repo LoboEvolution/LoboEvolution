@@ -27,7 +27,7 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.CDATASection;
@@ -35,7 +35,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -68,9 +68,9 @@ public class nodecomparedocumentposition19Test extends LoboUnitTest {
         aNode = cdata2.getPreviousSibling();
         cdata1 = (CDATASection) aNode.getPreviousSibling();
         cdata1Position = cdata1.compareDocumentPosition(cdata2);
-        assertEquals("nodecomparedocumentposition19_cdata2Follows", 4, cdata1Position);
+        assertEquals(4, cdata1Position);
         cdata2Position = cdata2.compareDocumentPosition(cdata1);
-        assertEquals("nodecomparedocumentposition_cdata1Precedes", 2, cdata2Position);
+        assertEquals(2, cdata2Position);
     }
 }
 

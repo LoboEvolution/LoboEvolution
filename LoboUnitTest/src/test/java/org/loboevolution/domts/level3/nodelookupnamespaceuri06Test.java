@@ -27,13 +27,13 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Invoke lookupNamespaceURI on an Element node with no prefix, which has a namespace
@@ -55,6 +55,6 @@ public class nodelookupnamespaceuri06Test extends LoboUnitTest {
         elemList = doc.getElementsByTagName("p");
         elem = (Element) elemList.item(2);
         namespaceURI = elem.lookupNamespaceURI("dmstc");
-        assertEquals("nodelookupnamespaceuri06", "http://www.netzero.com", namespaceURI);
+        assertEquals("http://www.netzero.com", namespaceURI);
     }
 }

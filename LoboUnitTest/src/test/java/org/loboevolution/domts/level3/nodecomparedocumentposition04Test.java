@@ -27,11 +27,11 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -50,7 +50,7 @@ public class nodecomparedocumentposition04Test extends LoboUnitTest {
         final int documentPosition;
         doc = sampleXmlFile("hc_staff.xml");
         documentPosition = doc.compareDocumentPosition(doc);
-        assertEquals("nodecomparedocumentpositionNoFlags04", 0, documentPosition);
+        assertEquals(0, documentPosition);
     }
 
 }

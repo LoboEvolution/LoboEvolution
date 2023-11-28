@@ -27,14 +27,14 @@
 
 package org.loboevolution.domts.level2;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentFragment;
 import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -74,11 +74,11 @@ public class importNode08Test extends LoboUnitTest {
         docFrag = aNewDoc.createDocumentFragment();
         aNode = doc.importNode(docFrag, false);
         hasChild = aNode.hasChildNodes();
-        assertFalse("hasChild", hasChild);
+        assertFalse(hasChild);
         ownerDocument = aNode.getOwnerDocument();
         docType = ownerDocument.getDoctype();
         system = docType.getSystemId();
-        assertEquals("system", "staffNS.dtd", system);
+        assertEquals("staffNS.dtd", system);
     }
 }
 

@@ -27,14 +27,14 @@
 
 package org.loboevolution.domts.level2;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -76,7 +76,7 @@ public class namednodemapremovenameditemns03Test extends LoboUnitTest {
         attribute = (Attr)attributes.removeNamedItemNS("http://www.w3.org/DOM/L1", "att");
         attribute = (Attr) attributes.getNamedItemNS("http://www.w3.org/DOM/L2", "att");
         nodeName = attribute.getNodeName();
-        assertEquals("namednodemapremovenameditemns02", "L2:att", nodeName);
+        assertEquals("L2:att", nodeName);
     }
 }
 

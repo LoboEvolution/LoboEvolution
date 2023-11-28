@@ -27,13 +27,13 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.DOMConfiguration;
 import org.loboevolution.html.node.Document;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 /**
@@ -55,15 +55,15 @@ public class domconfigurationgetparameter01Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         domConfig = doc.getDomConfig();
         param = domConfig.getParameter("comments");
-        assertNotNull("domconfigurationgetparameter01_1", param);
+        assertNotNull(param);
         param = domConfig.getParameter("cdata-sections");
-        assertNotNull("domconfigurationgetparameter01_2", param);
+        assertNotNull(param);
         param = domConfig.getParameter("entities");
-        assertNotNull("domconfigurationgetparameter01_3", param);
+        assertNotNull(param);
         param = domConfig.getParameter("namespace-declarations");
-        assertNotNull("domconfigurationgetparameter01_4", param);
+        assertNotNull(param);
         param = domConfig.getParameter("infoset");
-        assertNull("domconfigurationgetparameter01_5", param);
+        assertNull(param);
     }
 }
 

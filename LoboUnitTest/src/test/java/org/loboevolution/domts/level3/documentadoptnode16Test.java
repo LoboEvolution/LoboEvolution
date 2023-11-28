@@ -27,13 +27,13 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 /**
@@ -87,15 +87,15 @@ public class documentadoptnode16Test extends LoboUnitTest {
             attributes = childImp.getAttributes();
             childAttrImp = (Attr) attributes.getNamedItem("state");
             firstChild = childAttrImp.getFirstChild();
-            assertNotNull("firstChildNotNull", firstChild);
+            assertNotNull(firstChild);
             firstChildName = firstChild.getNodeName();
             firstChildValue = firstChild.getNodeValue();
             firstChildType = firstChild.getNodeType();
 
             if (firstChildType == 5) {
-                assertEquals("firstChildEnt3Ref", "gamma", firstChildName);
+                assertEquals("gamma", firstChildName);
             } else {
-                assertEquals("documentadoptnode16", "Texas", firstChildValue);
+                assertEquals("Texas", firstChildValue);
             }
 
         }

@@ -27,15 +27,15 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -66,10 +66,10 @@ public class documentsetxmlstandalone02Test extends LoboUnitTest {
         newDoc = domImpl.createDocument(rootNS, rootName, nullDocType);
         newDoc.setXmlStandalone(false);
         standalone = newDoc.getXmlStandalone();
-        assertFalse("documentsetxmlstandalone02_false", standalone);
+        assertFalse(standalone);
         newDoc.setXmlStandalone(true);
         standalone = newDoc.getXmlStandalone();
-        assertTrue("documentsetxmlstandalone02_true", standalone);
+        assertTrue(standalone);
     }
 }
 

@@ -27,13 +27,13 @@
 
 package org.loboevolution.domts.level2;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -51,7 +51,6 @@ public class nodegetlocalname03Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -73,10 +72,10 @@ public class nodegetlocalname03Test extends LoboUnitTest {
         localQElemName = qelement.getLocalName();
         localAttrName = attr.getLocalName();
         localQAttrName = qattr.getLocalName();
-        assertEquals("nodegetlocalname03_localElemName", "elem", localElemName);
-        assertEquals("nodegetlocalname03_localQElemName", "qelem", localQElemName);
-        assertEquals("nodegetlocalname03_localAttrName", "attr", localAttrName);
-        assertEquals("nodegetlocalname03_localQAttrName", "qattr", localQAttrName);
+        assertEquals("elem", localElemName);
+        assertEquals("qelem", localQElemName);
+        assertEquals("attr", localAttrName);
+        assertEquals("qattr", localQAttrName);
     }
 }
 

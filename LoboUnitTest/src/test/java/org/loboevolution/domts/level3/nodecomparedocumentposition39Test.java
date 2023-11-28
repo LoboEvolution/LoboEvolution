@@ -27,15 +27,15 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 
 /**
@@ -62,12 +62,12 @@ public class nodecomparedocumentposition39Test extends LoboUnitTest {
         attr1 = elem.getAttributeNode("class");
         attr2 = elem.getAttributeNode("xsi:noNamespaceSchemaLocation");
         attrPosition = attr1.compareDocumentPosition(attr2);
-        assertEquals("isImplementationSpecific", 32 & 32, attrPosition & 32);
-        assertEquals("otherBitsZero", 0 & 25, attrPosition & 25);
-        assertNotEquals("eitherFollowingOrPreceding", 0 & 6, attrPosition & 6);
+        assertEquals(32 & 32, attrPosition & 32);
+        assertEquals(0 & 25, attrPosition & 25);
+        assertNotEquals(0 & 6, attrPosition & 6);
         swappedPosition = attr2.compareDocumentPosition(attr1);
-        assertNotEquals("onlyOnePreceding", swappedPosition & 2, attrPosition & 2);
-        assertNotEquals("onlyOneFollowing", swappedPosition & 4, attrPosition & 4);
+        assertNotEquals(swappedPosition & 2, attrPosition & 2);
+        assertNotEquals(swappedPosition & 4, attrPosition & 4);
     }
 }
 

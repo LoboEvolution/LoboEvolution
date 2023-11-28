@@ -28,12 +28,12 @@ package org.loboevolution.domts.level3;
 
 
 import org.htmlunit.cssparser.dom.DOMException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Using removeChild on a default Attribute node attempt to remove its EntityReference child node and
@@ -70,7 +70,7 @@ public class noderemovechild31Test extends LoboUnitTest {
         child = (EntityReference) parent.getLastChild();
         removed = (EntityReference) parent.removeChild(child);
         removedName = removed.getNodeName();
-        assertEquals("noderemovechild31", "delta", removedName);
+        assertEquals("delta", removedName);
 
         try {
             removedNode = child.removeChild(parent);
@@ -97,7 +97,7 @@ public class noderemovechild31Test extends LoboUnitTest {
                 } catch (final DOMException ex) {
                     success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
                 }
-                assertTrue("throw_NO_MODIFICATION_ALLOWED_ERR", success);
+                assertTrue(success);
             }
         }
     }

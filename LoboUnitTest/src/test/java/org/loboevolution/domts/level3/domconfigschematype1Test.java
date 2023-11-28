@@ -28,7 +28,7 @@ package org.loboevolution.domts.level3;
 
 
 import org.htmlunit.cssparser.dom.DOMException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.nodeimpl.DOMImplementationImpl;
@@ -38,7 +38,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.http.UserAgentContext;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -66,7 +66,7 @@ public class domconfigschematype1Test extends LoboUnitTest {
         doc = domImpl.createDocument("http://www.w3.org/1999/xhtml", "html", nullDocType);
         domConfig = doc.getDomConfig();
         canSet = domConfig.canSetParameter(parameter, Boolean.TRUE);
-        assertFalse("canSetTrue", canSet);
+        assertFalse(canSet);
 
         try {
             state = (String) domConfig.getParameter(parameter);
@@ -84,7 +84,7 @@ public class domconfigschematype1Test extends LoboUnitTest {
             /*DOMString */
             domConfig.setParameter(parameter, dtdType);
             state = (String) domConfig.getParameter(parameter);
-            assertEquals("setDTDEffective", dtdType, state);
+            assertEquals( dtdType, state);
         } else {
 
             {
@@ -95,7 +95,7 @@ public class domconfigschematype1Test extends LoboUnitTest {
                 } catch (final DOMException ex) {
                     success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
                 }
-                assertTrue("throw_NOT_SUPPORTED_ERR_dtd", success);
+                assertTrue(success);
             }
         }
 
@@ -106,7 +106,7 @@ public class domconfigschematype1Test extends LoboUnitTest {
             /*DOMString */
             domConfig.setParameter(parameter, xmlSchemaType);
             state = (String) domConfig.getParameter(parameter);
-            assertEquals("setSchemaEffective", xmlSchemaType, state);
+            assertEquals(xmlSchemaType, state);
         } else {
 
             {
@@ -117,7 +117,7 @@ public class domconfigschematype1Test extends LoboUnitTest {
                 } catch (final DOMException ex) {
                     success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
                 }
-                assertTrue("throw_NOT_SUPPORTED_ERR_schema", success);
+                assertTrue(success);
             }
         }
 

@@ -27,12 +27,12 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -73,17 +73,17 @@ public class hc_attrreplacechild2Test extends LoboUnitTest {
         retval = docFrag.appendChild(terNode);
         retval = docFrag.appendChild(dayNode);
         firstChild = titleAttr.getFirstChild();
-        assertNotNull("attrChildNotNull", firstChild);
+        assertNotNull(firstChild);
         retval = titleAttr.replaceChild(docFrag, firstChild);
         value = titleAttr.getValue();
-        assertEquals("attrValue", "terday", value);
+        assertEquals("terday", value);
         value = titleAttr.getNodeValue();
         assertEquals("attrNodeValue", "terday", value);
         value = retval.getNodeValue();
         assertEquals("retvalValue", "Yes", value);
         firstChild = titleAttr.getFirstChild();
         value = firstChild.getNodeValue();
-        assertEquals("firstChildValue", "ter", value);
+        assertEquals( "ter", value);
     }
 }
 

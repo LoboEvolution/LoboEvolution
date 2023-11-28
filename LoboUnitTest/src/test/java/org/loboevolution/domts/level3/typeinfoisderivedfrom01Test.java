@@ -27,7 +27,7 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Attr;
@@ -35,8 +35,8 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.TypeInfo;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 /**
@@ -61,11 +61,11 @@ public class typeinfoisderivedfrom01Test extends LoboUnitTest {
         acronymElem = (Element) elemList.item(0);
         attr = acronymElem.getAttributeNode("title");
         typeInfo = attr.getSchemaTypeInfo();
-        assertNotNull("typeInfoNotNull", typeInfo);
+        assertNotNull(typeInfo);
         isDerived = typeInfo.isDerivedFrom("http://www.w3.org/TR/REC-xml", "CDATA", 0);
-        assertFalse("isDerived0", isDerived);
+        assertFalse(isDerived);
         isDerived = typeInfo.isDerivedFrom("http://www.w3.org/TR/REC-xml", "CDATA", 15);
-        assertFalse("isDerived15", isDerived);
+        assertFalse(isDerived);
     }
 }
 

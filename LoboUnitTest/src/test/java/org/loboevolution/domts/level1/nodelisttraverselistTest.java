@@ -27,7 +27,7 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
@@ -37,7 +37,7 @@ import org.loboevolution.html.node.NodeList;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -104,9 +104,9 @@ public class nodelisttraverselistTest extends LoboUnitTest {
         }
 
         if (length == 6) {
-            assertEquals("nowhitespace", expectedNoWhitespace, result);
+            assertEquals(expectedNoWhitespace, result);
         } else {
-            assertEquals("whitespace", expectedWhitespace, result);
+            assertEquals(expectedWhitespace, result);
         }
 
     }

@@ -27,13 +27,13 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -55,7 +55,7 @@ public class nodegettextcontent13Test extends LoboUnitTest {
         elemList = doc.getElementsByTagName("strong");
         elem = (Element) elemList.item(1);
         textContent = elem.getTextContent();
-        assertEquals("nodegettextcontent13", "Martha Raynolds\nThis is a CDATASection with EntityReference number 2 &ent2;\nThis is an adjacent CDATASection with a reference to a tab &tab;", textContent);
+        assertEquals("Martha Raynolds\nThis is a CDATASection with EntityReference number 2 &ent2;\nThis is an adjacent CDATASection with a reference to a tab &tab;", textContent);
     }
 }
 

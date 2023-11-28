@@ -28,7 +28,7 @@
 package org.loboevolution.domts.level2;
 
 import org.htmlunit.cssparser.dom.DOMException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.Notation;
 import org.loboevolution.html.node.Document;
@@ -36,8 +36,8 @@ import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.html.node.EntityReference;
 import org.loboevolution.html.node.NamedNodeMap;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -69,9 +69,9 @@ public class namednodemapsetnameditemns05Test extends LoboUnitTest {
         doc = sampleXmlFile("staffNS.xml");
         docType = doc.getDoctype();
         entities = docType.getEntities();
-        assertNotNull("entitiesNotNull", entities);
+        assertNotNull(entities);
         notations = docType.getNotations();
-        assertNotNull("notationsNotNull", notations);
+        assertNotNull(notations);
         entity = (EntityReference) entities.getNamedItem("ent1");
         notation = (Notation) notations.getNamedItem("notation1");
 
@@ -81,14 +81,14 @@ public class namednodemapsetnameditemns05Test extends LoboUnitTest {
         } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
         }
-        assertTrue("throw_NO_MODIFICATION_ALLOWED_ERR_entities", success);
+        assertTrue(success);
 
         try {
             notations.setNamedItemNS(notation);
         } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
         }
-        assertTrue("throw_NO_MODIFICATION_ALLOWED_ERR_notations", success);
+        assertTrue(success);
 
     }
 }

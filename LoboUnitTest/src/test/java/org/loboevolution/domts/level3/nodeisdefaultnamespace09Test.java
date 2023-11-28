@@ -27,13 +27,13 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * Using isDefaultNamespace on a new Child of a new Element node with a namespace URI
@@ -57,9 +57,9 @@ public class nodeisdefaultnamespace09Test extends LoboUnitTest {
         child = doc.createElement("xhtml:p");
         appendedChild = parent.appendChild(child);
         isDefault = parent.isDefaultNamespace("http://www.w3.org/1999/xhtml");
-        assertFalse("nodeisdefaultnamespace09_1", isDefault);
+        assertFalse(isDefault);
         isDefault = child.isDefaultNamespace("http://www.w3.org/1999/xhtml");
-        assertFalse("nodeisdefaultnamespace09_2", isDefault);
+        assertFalse(isDefault);
     }
 }
 

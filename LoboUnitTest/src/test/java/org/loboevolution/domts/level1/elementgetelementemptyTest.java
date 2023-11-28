@@ -27,14 +27,14 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -73,7 +73,7 @@ public class elementgetelementemptyTest extends LoboUnitTest {
         testEmployee = (Element) elementList.item(3);
         testEmployee.setAttributeNode(newAttribute);
         attrValue = testEmployee.getAttribute("district");
-        assertEquals("elementGetElementEmptyAssert", null, attrValue);
+        assertNull(attrValue);
     }
 }
 

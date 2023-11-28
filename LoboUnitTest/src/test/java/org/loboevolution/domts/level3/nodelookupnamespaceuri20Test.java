@@ -27,7 +27,7 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Attr;
@@ -35,7 +35,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Invoke lookupNamespaceURI on the an attribute node without a namespace prefix of
@@ -61,7 +61,7 @@ public class nodelookupnamespaceuri20Test extends LoboUnitTest {
         attributesMap = elem.getAttributes();
         attr = (Attr) attributesMap.getNamedItem("xmlns:nm");
         namespaceURI = attr.lookupNamespaceURI("nm");
-        assertEquals("nodelookupnamespaceuri20", "http://www.altavista.com", namespaceURI);
+        assertEquals("http://www.altavista.com", namespaceURI);
     }
 
 }

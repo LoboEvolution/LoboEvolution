@@ -27,13 +27,13 @@
 
 package org.loboevolution.domts.level2;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentFragment;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -68,8 +68,8 @@ public class nodesetprefix01Test extends LoboUnitTest {
         element.setPrefix("dmstc");
         elementTagName = element.getTagName();
         elementNodeName = element.getNodeName();
-        assertEquals("nodesetprefix01_tagname", "dmstc:address", elementTagName);
-        assertEquals("nodesetprefix01_nodeName", "dmstc:address", elementNodeName);
+        assertEquals( "dmstc:address", elementTagName);
+        assertEquals( "dmstc:address", elementNodeName);
     }
 }
 

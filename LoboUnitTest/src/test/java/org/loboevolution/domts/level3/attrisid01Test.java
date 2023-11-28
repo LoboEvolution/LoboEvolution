@@ -27,14 +27,14 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 
 /**
@@ -57,7 +57,7 @@ public class attrisid01Test extends LoboUnitTest {
         elemList = doc.getElementsByTagName("acronym");
         acronymElem = (Element) elemList.item(2);
         attr = acronymElem.getAttributeNode("class");
-        assertFalse("AttrIsIDFalse01", attr.isId());
+        assertFalse(attr.isId());
     }
 }
 

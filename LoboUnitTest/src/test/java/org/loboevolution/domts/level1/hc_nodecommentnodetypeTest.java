@@ -27,13 +27,13 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeList;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -70,12 +70,12 @@ public class hc_nodecommentnodetypeTest extends LoboUnitTest {
 
             if ("#comment".equals(commentNodeName)) {
                 nodeType = commentNode.getNodeType();
-                assertEquals("existingCommentNodeType", 8, nodeType);
+                assertEquals(8, nodeType);
             }
         }
         commentNode = doc.createComment("This is a comment");
         nodeType = commentNode.getNodeType();
-        assertEquals("createdCommentNodeType", 8, nodeType);
+        assertEquals(8, nodeType);
     }
 }
 

@@ -27,14 +27,14 @@
 
 package org.loboevolution.domts.level2;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.Text;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -73,12 +73,12 @@ public class importNode15Test extends LoboUnitTest {
         text = aNewDoc.createTextNode("this is text data");
         aNode = doc.importNode(text, false);
         ownerDocument = aNode.getOwnerDocument();
-        assertNotNull("ownerDocumentNotNull", ownerDocument);
+        assertNotNull(ownerDocument);
         docType = ownerDocument.getDoctype();
         system = docType.getSystemId();
-        assertEquals("systemId", "staffNS.dtd", system);
+        assertEquals("staffNS.dtd", system);
         value = aNode.getNodeValue();
-        assertEquals("nodeValue", "this is text data", value);
+        assertEquals("this is text data", value);
     }
 }
 

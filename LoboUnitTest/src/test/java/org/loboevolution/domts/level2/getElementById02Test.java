@@ -27,12 +27,12 @@
 
 package org.loboevolution.domts.level2;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 /**
@@ -59,7 +59,7 @@ public class getElementById02Test extends LoboUnitTest {
         final Element element;
         doc = sampleXmlFile("staffNS.xml");
         element = doc.getElementById("Cancun");
-        assertNull("throw_Null", element);
+        assertNull(element);
     }
 }
 

@@ -28,7 +28,7 @@ package org.loboevolution.domts.level3;
 
 
 import lombok.SneakyThrows;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.nodeimpl.DOMImplementationImpl;
@@ -37,7 +37,7 @@ import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.DOMImplementationList;
 import org.loboevolution.http.UserAgentContext;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -65,7 +65,7 @@ public class domimplementationregistry23Test extends LoboUnitTest {
         final DOMImplementationList domImplList;
         final int length;
          final DOMImplementationRegistry domImplRegistry = DOMImplementationRegistry.newInstance();
-        assertNotNull("domImplRegistryNotNull", domImplRegistry);
+        assertNotNull(domImplRegistry);
         domImplList = domImplRegistry.getDOMImplementationList("cOrE 3.0 xMl 3.0 eVeNts 2.0 lS");
         length = (int) domImplList.getLength();
 
@@ -75,20 +75,18 @@ public class domimplementationregistry23Test extends LoboUnitTest {
             hasXML = baseImpl.hasFeature("XML", "3.0");
             hasEvents = baseImpl.hasFeature("Events", "2.0");
             hasLS = baseImpl.hasFeature("LS", nullVersion);
-            assertFalse("baseImplFeatures",
-                    (hasCore & hasXML & hasEvents & hasLS)
-            );
+            assertFalse((hasCore & hasXML & hasEvents & hasLS));
         } else {
             for (int indexN10096 = 0; indexN10096 < domImplList.getLength(); indexN10096++) {
                 domImpl = (DOMImplementation) domImplList.item(indexN10096);
                 hasCore = domImpl.hasFeature("Core", "3.0");
-                assertTrue("hasCore", hasCore);
+                assertTrue(hasCore);
                 hasXML = domImpl.hasFeature("XML", "3.0");
-                assertTrue("hasXML", hasXML);
+                assertTrue(hasXML);
                 hasEvents = domImpl.hasFeature("Events", "2.0");
-                assertTrue("hasEvents", hasEvents);
+                assertTrue(hasEvents);
                 hasLS = domImpl.hasFeature("LS", nullVersion);
-                assertTrue("hasLS", hasLS);
+                assertTrue(hasLS);
             }
         }
 

@@ -28,7 +28,7 @@ package org.loboevolution.domts.level3;
 
 
 import org.htmlunit.cssparser.dom.DOMException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.DOMError;
@@ -40,7 +40,7 @@ import org.loboevolution.http.UserAgentContext;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -83,7 +83,7 @@ public class infoset07Test extends LoboUnitTest {
         } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
         }
-        assertTrue("xml10InvalidName", success);
+        assertTrue(success);
 
 
         try {
@@ -107,14 +107,14 @@ public class infoset07Test extends LoboUnitTest {
         for (final Object o : errors) {
             error = (DOMError) o;
             severity = error.getSeverity();
-            assertEquals("severity", 2, severity);
+            assertEquals(2, severity);
             type = error.getType();
-            assertEquals("type", "wf-invalid-character-in-node-name", type);
+            assertEquals("wf-invalid-character-in-node-name", type);
             locator = error.getLocation();
             relatedNode = locator.getRelatedNode();
-            assertSame("relatedNode", attr, relatedNode);
+            assertSame(attr, relatedNode);
         }
-        assertSame("oneError", 1, errors.size());
+        assertSame(1, errors.size());
     }
 }
 

@@ -28,12 +28,12 @@
 package org.loboevolution.domts.level1;
 
 import org.htmlunit.cssparser.dom.DOMException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.fail;
 
 
 /**
@@ -59,9 +59,9 @@ public class hc_entitiessetnameditem1Test extends LoboUnitTest {
         final Element elem;
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
-        assertNotNull("docTypeNotNull", docType);
+        assertNotNull(docType);
         entities = docType.getEntities();
-        assertNotNull("entitiesNotNull", entities);
+        assertNotNull(entities);
         elem = doc.createElement("br");
 
         try {

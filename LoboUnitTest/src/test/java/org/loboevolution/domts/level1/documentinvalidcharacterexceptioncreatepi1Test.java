@@ -28,11 +28,11 @@
 package org.loboevolution.domts.level1;
 
 import org.htmlunit.cssparser.dom.DOMException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -61,7 +61,7 @@ public class documentinvalidcharacterexceptioncreatepi1Test extends LoboUnitTest
         } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
         }
-        assertTrue("throw_NOT_SUPPORTED_ERR", success);
+        assertTrue(success);
 
     }
 }

@@ -27,7 +27,7 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Attr;
@@ -35,7 +35,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Invoke lookupPrefix on the title attribute node of the acronym node with
@@ -62,7 +62,7 @@ public class nodelookupprefix17Test extends LoboUnitTest {
         attributesMap = elem.getAttributes();
         attr = (Attr) attributesMap.getNamedItem("xsi:noNamespaceSchemaLocation");
         prefix = attr.lookupPrefix("http://www.netzero.com");
-        assertEquals("nodelookupprefix17", "dmstc", prefix);
+        assertEquals( "dmstc", prefix);
     }
 }
 

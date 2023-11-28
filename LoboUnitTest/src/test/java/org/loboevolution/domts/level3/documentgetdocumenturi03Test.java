@@ -27,11 +27,11 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 /**
@@ -65,7 +65,7 @@ public class documentgetdocumenturi03Test extends LoboUnitTest {
         docElemImported = newDoc.importNode(docElem, false);
         importedOwner = docElemImported.getOwnerDocument();
         docURI = importedOwner.getDocumentURI();
-        assertNull("documentgetdocumenturi03", docURI);
+        assertNull(docURI);
     }
 }
 

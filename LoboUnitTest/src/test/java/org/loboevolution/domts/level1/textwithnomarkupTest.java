@@ -27,13 +27,13 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -71,7 +71,7 @@ public class textwithnomarkupTest extends LoboUnitTest {
         nameNode = elementList.item(2);
         nodeV = nameNode.getFirstChild();
         value = nodeV.getNodeValue();
-        assertEquals("textNodeValue", "Roger\n Jones", value);
+        assertEquals("Roger\n Jones", value);
     }
 
 }

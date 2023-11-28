@@ -27,13 +27,13 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentFragment;
 import org.loboevolution.html.node.NodeList;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -65,13 +65,13 @@ public class hc_documentcreatedocumentfragmentTest extends LoboUnitTest {
         newDocFragment = doc.createDocumentFragment();
         children = newDocFragment.getChildNodes();
         length = children.getLength();
-        assertEquals("length", 0, length);
+        assertEquals( 0, length);
         newDocFragmentName = newDocFragment.getNodeName();
-        assertEquals("STRONG", "[object DocumentFragment]", newDocFragmentName);
+        assertEquals("[object DocumentFragment]", newDocFragmentName);
         newDocFragmentType = newDocFragment.getNodeType();
-        assertEquals("type", 11, newDocFragmentType);
+        assertEquals(11, newDocFragmentType);
         newDocFragmentValue = newDocFragment.getNodeValue();
-        assertNull("value", newDocFragmentValue);
+        assertNull(newDocFragmentValue);
     }
 }
 

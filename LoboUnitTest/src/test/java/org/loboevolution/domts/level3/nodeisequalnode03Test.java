@@ -27,12 +27,12 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -56,11 +56,11 @@ public class nodeisequalnode03Test extends LoboUnitTest {
         doc1 = sampleXmlFile("barfoo_utf8.xml");
         doc2 = sampleXmlFile("barfoo_utf16.xml");
         isEqual = doc1.isEqualNode(doc2);
-        assertTrue("docAreNotEquals", isEqual);
+        assertTrue(isEqual);
         docElem1 = doc1.getDocumentElement();
         docElem2 = doc2.getDocumentElement();
         isEqual = docElem1.isEqualNode(docElem2);
-        assertTrue("docElemsAreEquals", isEqual);
+        assertTrue(isEqual);
     }
 }
 

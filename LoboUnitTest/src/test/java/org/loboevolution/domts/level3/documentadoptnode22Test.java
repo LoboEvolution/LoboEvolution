@@ -26,14 +26,14 @@
 
 package org.loboevolution.domts.level3;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -61,10 +61,10 @@ public class documentadoptnode22Test extends LoboUnitTest {
 
         if ((adoptedNode != null)) {
             success = adoptedNode.hasChildNodes();
-            assertTrue("documentadoptnode22_1", success);
+            assertTrue(success);
             nodeName = adoptedNode.getNodeName();
             nodeNameOrig = docElement.getNodeName();
-            assertEquals("documentadoptnode22_2", nodeName, nodeNameOrig);
+            assertEquals(nodeName, nodeNameOrig);
         }
     }
 }

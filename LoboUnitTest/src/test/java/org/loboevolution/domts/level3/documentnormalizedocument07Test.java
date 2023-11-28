@@ -27,7 +27,7 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.DOMError;
 import org.loboevolution.html.dom.DOMLocator;
@@ -37,7 +37,7 @@ import org.loboevolution.html.node.*;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -109,7 +109,7 @@ public class documentnormalizedocument07Test extends LoboUnitTest {
             if (severity == 2) {
                 location = error.getLocation();
                 problemNode = location.getRelatedNode();
-                assertSame("relatedNode", newChild, problemNode);
+                assertSame(newChild, problemNode);
                 lineNumber = location.getLineNumber();
                 columnNumber = location.getColumnNumber();
                 byteOffset = location.getByteOffset();
@@ -117,17 +117,17 @@ public class documentnormalizedocument07Test extends LoboUnitTest {
                 uri = location.getUri();
                 message = error.getMessage();
                 length = message.length();
-                assertTrue("messageNotEmpty", (length > 0));
+                assertTrue(length > 0);
                 type = error.getType();
                 relatedData = error.getRelatedData();
                 relatedException = error.getRelatedException();
                 errorCount += 1;
             } else {
-                assertEquals("anyOthersShouldBeWarnings", 1, severity);
+                assertEquals(1, severity);
             }
 
         }
-        assertEquals("oneError", 1, errorCount);
+        assertEquals(1, errorCount);
     }
 }
 

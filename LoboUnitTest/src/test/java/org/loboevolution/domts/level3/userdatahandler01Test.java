@@ -27,7 +27,7 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.UserDataHandler;
@@ -38,8 +38,8 @@ import org.loboevolution.html.node.Node;
 
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 
 /**
@@ -79,10 +79,10 @@ public class userdatahandler01Test extends LoboUnitTest {
         elementNS = node.getNamespaceURI();
         newNode = doc.renameNode(node, elementNS, "div");
         notifications = userDataHandlerImpl.getAllNotifications();
-        assertEquals("twoNotifications", 2, notifications.size());
+        assertEquals(2, notifications.size());
         for (final UserDataNotification userDataNotification : notifications) {
             operation = userDataNotification.getOperation();
-            assertEquals("operationIsRename", 4, operation);
+            assertEquals(4, operation);
             key = userDataNotification.getKey();
             data = (String) userDataNotification.getData();
 
@@ -96,18 +96,18 @@ public class userdatahandler01Test extends LoboUnitTest {
             }
 
             src = userDataNotification.getSrc();
-            assertSame("srcIsNode", node, src);
+            assertSame(node, src);
             dst = userDataNotification.getDst();
 
             if ((dst == null)) {
-                assertSame("ifDstNullRenameMustReuseNode", node, newNode);
+                assertSame(node, newNode);
             } else {
-                assertSame("dstIsNewNode", newNode, dst);
+                assertSame(newNode, dst);
             }
 
         }
-        assertEquals("greetingCountIs1", 1, greetingCount);
-        assertEquals("salutationCountIs1", 1, salutationCount);
+        assertEquals(1, greetingCount);
+        assertEquals(1, salutationCount);
     }
 }
 

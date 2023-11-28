@@ -26,13 +26,13 @@
 
 package org.loboevolution.domts.level3;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Using compareDocumentPosition check if the Element node is contained and follows the appended Document node, and
@@ -59,8 +59,8 @@ public class nodecomparedocumentposition09Test extends LoboUnitTest {
         newElem = doc.createElementNS("http://www.w3.org/1999/xhtml", "br");
         elem.appendChild(newElem);
         documentPosition = doc.compareDocumentPosition(newElem);
-        assertEquals("nodecomparedocumentpositionIsContainedFollowing09", 20, documentPosition);
+        assertEquals(20, documentPosition);
         documentElementPosition = newElem.compareDocumentPosition(doc);
-        assertEquals("nodecomparedocumentpositionContainsPRECEDING09", 10, documentElementPosition);
+        assertEquals(10, documentElementPosition);
     }
 }

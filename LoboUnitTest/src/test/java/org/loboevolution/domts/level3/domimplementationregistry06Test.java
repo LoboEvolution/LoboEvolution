@@ -27,13 +27,13 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.nodeimpl.bootstrap.DOMImplementationRegistry;
 import org.loboevolution.html.node.DOMImplementation;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -53,13 +53,13 @@ public class domimplementationregistry06Test extends LoboUnitTest {
         final String nullVersion = null;
 
         final DOMImplementationRegistry domImplRegistry = DOMImplementationRegistry.newInstance();
-        assertNotNull("domImplRegistryNotNull", domImplRegistry);
+        assertNotNull(domImplRegistry);
         domImpl = domImplRegistry.getDOMImplementation("xMl 3.0 cOrE");
-        assertNotNull("domImplNotNull", domImpl);
+        assertNotNull(domImpl);
         hasFeature = domImpl.hasFeature("XML", "3.0");
-        assertTrue("hasXML3", hasFeature);
+        assertTrue(hasFeature);
         hasFeature = domImpl.hasFeature("Core", nullVersion);
-        assertTrue("hasCore", hasFeature);
+        assertTrue(hasFeature);
     }
 }
 

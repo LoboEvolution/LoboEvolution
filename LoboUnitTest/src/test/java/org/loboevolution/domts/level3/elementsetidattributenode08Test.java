@@ -26,7 +26,7 @@
 
 package org.loboevolution.domts.level3;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Attr;
@@ -34,8 +34,8 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * This method declares the attribute specified by node to be of type ID. If the value of the specified attribute
@@ -71,18 +71,18 @@ public class elementsetidattributenode08Test extends LoboUnitTest {
         attr = (Attr) attributesMap.getNamedItem("title");
         acronymElem.setIdAttributeNode(attr, true);
         id = attr.isId();
-        assertTrue("elementsetidattributenodeIsId1True08", id);
+        assertTrue(id);
         attributesMap = pElem.getAttributes();
         attr = (Attr) attributesMap.getNamedItem("xmlns:dmstc");
         pElem.setIdAttributeNode(attr, true);
         id = attr.isId();
-        assertTrue("elementsetidattributenodeIsId2True08", id);
+        assertTrue(id);
         elem = doc.getElementById("Yes");
         elemName = elem.getTagName();
-        assertEquals("elementsetidattributenode1GetElementById08", "ACRONYM", elemName);
+        assertEquals("ACRONYM", elemName);
         elem = doc.getElementById("http://www.netzero.com");
         elemName = elem.getTagName();
-        assertEquals("elementsetidattributenode2GetElementById08", "P", elemName);
+        assertEquals("P", elemName);
     }
 }
 

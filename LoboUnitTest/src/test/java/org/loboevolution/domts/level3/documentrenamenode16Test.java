@@ -27,15 +27,15 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 /**
@@ -68,9 +68,10 @@ public class documentrenamenode16Test extends LoboUnitTest {
         nodeName = renamedclass.getNodeName();
         namespaceURI = renamedclass.getNamespaceURI();
         nodeType = renamedclass.getNodeType();
-        assertEquals("documentrenamenode16_nodeName", "renamedNode", nodeName);
-        assertEquals("documentrenamenode16_nodeType", 1, nodeType);
-        assertNull("documentrenamenode16_nodeValue", namespaceURI);
+        assertEquals( "renamedNode", nodeName);
+        assertEquals( 1, nodeType);
+        assertNull( namespaceURI);
+        assertNull( namespaceURI);
     }
 }
 

@@ -27,7 +27,7 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.DOMConfiguration;
@@ -35,7 +35,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Text;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -63,19 +63,19 @@ public class domconfigurationcansetparameter06Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         domConfig = doc.getDomConfig();
         canSet = domConfig.canSetParameter("element-content-whitespace", Boolean.TRUE);
-        assertTrue("domconfigurationcansetparameter06_1", canSet);
+        assertTrue(canSet);
         itemList = doc.getElementsByTagNameNS("*", "strong");
         elementStrong = (Element) itemList.item(0);
         textNode = (Text) elementStrong.getFirstChild();
         textNode.setTextContent("                                                ");
         hasWhitespace = textNode.isElementContentWhitespace();
-        assertTrue("domconfigurationsetparameter06_2", hasWhitespace);
+        assertTrue(hasWhitespace);
         doc.normalizeDocument();
         itemList = doc.getElementsByTagNameNS("*", "strong");
         elementStrong = (Element) itemList.item(0);
         textNode = (Text) elementStrong.getFirstChild();
         hasWhitespace = textNode.isElementContentWhitespace();
-        assertTrue("domconfigurationsetparameter06_3", hasWhitespace);
+        assertTrue(hasWhitespace);
     }
 }
 

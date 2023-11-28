@@ -28,14 +28,14 @@
 package org.loboevolution.domts.level1;
 
 import org.htmlunit.cssparser.dom.DOMException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.html.node.NamedNodeMap;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -61,13 +61,13 @@ public class nodevalue08Test extends LoboUnitTest {
         final NamedNodeMap nodeMap;
         doc = sampleXmlFile("staff.xml");
         docType = doc.getDoctype();
-        assertNotNull("docTypeNotNull", docType);
+        assertNotNull(docType);
         nodeMap = docType.getNotations();
-        assertNotNull("notationsNotNull", nodeMap);
+        assertNotNull(nodeMap);
         newNode = nodeMap.getNamedItem("notation1");
-        assertNotNull("notationNotNull", newNode);
+        assertNotNull(newNode);
         newValue = newNode.getNodeValue();
-        assertNull("initiallyNull", newValue);
+        assertNull(newValue);
 
         boolean success = false;
         try {
@@ -77,8 +77,8 @@ public class nodevalue08Test extends LoboUnitTest {
         }
 
         newValue = newNode.getNodeValue();
-        assertTrue("throw_INVALID_MODIFICATION_ERR", success);
-        assertNull("nullAfterAttemptedChange", newValue);
+        assertTrue(success);
+        assertNull(newValue);
     }
 }
 

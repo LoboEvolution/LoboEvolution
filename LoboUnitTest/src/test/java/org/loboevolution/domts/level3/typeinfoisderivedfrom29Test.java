@@ -27,15 +27,15 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.TypeInfo;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -56,9 +56,9 @@ public class typeinfoisderivedfrom29Test extends LoboUnitTest {
         elemList = doc.getElementsByTagName("p");
         elem = (Element) elemList.item(0);
         typeInfo = elem.getSchemaTypeInfo();
-        assertNotNull("typeInfoNotNull", typeInfo);
+        assertNotNull(typeInfo);
         isDerived = typeInfo.isDerivedFrom("http://www.w3.org/1999/xhtml", "pType", 15);
-        assertTrue("derivedFromPTypeAnyMethod", isDerived);
+        assertTrue(isDerived);
     }
 }
 

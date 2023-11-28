@@ -26,12 +26,12 @@
 
 package org.loboevolution.domts.level3;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Text;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Invoke the adoptNode method on this document using a new Text node as the source.  Verify
@@ -56,7 +56,7 @@ public class documentadoptnode30Test extends LoboUnitTest {
 
         if ((adoptedText != null)) {
             nodeValue = adoptedText.getNodeValue();
-            assertEquals("documentadoptnode30", "Document.adoptNode test for a TEXT_NODE", nodeValue);
+            assertEquals( "Document.adoptNode test for a TEXT_NODE", nodeValue);
         }
     }
 }

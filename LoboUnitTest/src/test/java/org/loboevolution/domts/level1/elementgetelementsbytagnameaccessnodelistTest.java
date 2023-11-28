@@ -27,14 +27,14 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -70,7 +70,7 @@ public class elementgetelementsbytagnameaccessnodelistTest extends LoboUnitTest 
             child = child.getNextSibling();
         }
         childName = child.getNodeName();
-        assertEquals("nodename", "EMPLOYEEID",childName);
+         assertEquals( "EMPLOYEEID",childName);
         child = child.getFirstChild();
         childValue = child.getNodeValue();
         assertEquals("emp0004", "EMP0004", childValue);

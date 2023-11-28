@@ -27,13 +27,13 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -69,7 +69,7 @@ public class nodeisequalnode22Test extends LoboUnitTest {
         docType1 = domImpl1.createDocumentType(rootName, nullPubId, nullSysId);
         docType2 = domImpl2.createDocumentType(rootName, nullPubId, nullSysId);
         isEqual = docType1.isEqualNode(docType2);
-        assertTrue("nodeisequalnode22", isEqual);
+        assertTrue(isEqual);
     }
 }
 

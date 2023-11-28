@@ -27,7 +27,7 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.nodeimpl.DOMErrorMonitor;
@@ -36,7 +36,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Normalize document with element-content-whitespace set to false and validation set to true, check that
@@ -72,15 +72,15 @@ public class elementcontentwhitespace02Test extends LoboUnitTest {
             /*DOMErrorMonitor */
             domConfig.setParameter("error-handler", errorMonitor);
             doc.normalizeDocument();
-            assertTrue("normalizeError", errorMonitor.assertLowerSeverity(2));
+            assertTrue(errorMonitor.assertLowerSeverity(2));
             bodyList = doc.getElementsByTagName("body");
             body = (Element) bodyList.item(0);
             child = body.getFirstChild();
-            assertNotNull("firstChildNotNull", child);
+            assertNotNull(child);
             childName = child.getNodeName();
-            assertEquals("firstChild", "P", childName);
+            assertEquals( "P", childName);
             child = child.getNextSibling();
-            assertNull("secondChild", child);
+            assertNull(child);
         }
     }
 }

@@ -27,14 +27,14 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -59,70 +59,70 @@ public class nodegetfeature10Test extends LoboUnitTest {
         elem = (Element) nodeList.item(0);
         node = elem.getFirstChild();
         featureImpl = node.getFeature("Core", nullVersion);
-        assertSame("coreUnspecifiedVersion", node, featureImpl);
+        assertSame(node, featureImpl);
         featureImpl = node.getFeature("cOrE", nullVersion);
-        assertSame("cOrEUnspecifiedVersion", node, featureImpl);
+         assertSame(node, featureImpl);
         featureImpl = node.getFeature("+cOrE", nullVersion);
-        assertSame("PlusCoreUnspecifiedVersion", node, featureImpl);
+        assertSame(node, featureImpl);
         featureImpl = node.getFeature("bogus.feature", nullVersion);
-        assertNull("unrecognizedFeature", featureImpl);
+        assertNull(featureImpl);
         featureImpl = node.getFeature("cOrE", "2.0");
-        assertSame("Core20", node, featureImpl);
+        assertSame(node, featureImpl);
         featureImpl = node.getFeature("cOrE", "3.0");
-        assertSame("Core30", node, featureImpl);
+        assertSame(node, featureImpl);
         isSupported = node.isSupported("XML", nullVersion);
         featureImpl = node.getFeature("XML", nullVersion);
 
         if (isSupported) {
-            assertSame("XMLUnspecified", node, featureImpl);
+            assertSame(node, featureImpl);
         }
         isSupported = node.isSupported("SVG", nullVersion);
         featureImpl = node.getFeature("SVG", nullVersion);
 
         if (isSupported) {
-            assertSame("SVGUnspecified", node, featureImpl);
+            assertSame(node, featureImpl);
         }
         isSupported = node.isSupported("HTML", nullVersion);
         featureImpl = node.getFeature("HTML", nullVersion);
 
         if (isSupported) {
-            assertSame("HTMLUnspecified", node, featureImpl);
+            assertSame(node, featureImpl);
         }
         isSupported = node.isSupported("Events", nullVersion);
         featureImpl = node.getFeature("Events", nullVersion);
 
         if (isSupported) {
-            assertSame("EventsUnspecified", node, featureImpl);
+            assertSame(node, featureImpl);
         }
         isSupported = node.isSupported("LS", nullVersion);
         featureImpl = node.getFeature("LS", nullVersion);
 
         if (isSupported) {
-            assertSame("LSUnspecified", node, featureImpl);
+            assertSame(node, featureImpl);
         }
         isSupported = node.isSupported("LS-Async", nullVersion);
         featureImpl = node.getFeature("LS-Async", nullVersion);
 
         if (isSupported) {
-            assertSame("LSAsyncUnspecified", node, featureImpl);
+            assertSame(node, featureImpl);
         }
         isSupported = node.isSupported("XPath", nullVersion);
         featureImpl = node.getFeature("XPath", nullVersion);
 
         if (isSupported) {
-            assertSame("XPathUnspecified", node, featureImpl);
+            assertSame(node, featureImpl);
         }
         isSupported = node.isSupported("+HTML", nullVersion);
         featureImpl = node.getFeature("HTML", nullVersion);
 
         if (isSupported) {
-            assertNotNull("PlusHTMLUnspecified", featureImpl);
+            assertNotNull(featureImpl);
         }
         isSupported = node.isSupported("+SVG", nullVersion);
         featureImpl = node.getFeature("SVG", nullVersion);
 
         if (isSupported) {
-            assertNotNull("PlusSVGUnspecified", featureImpl);
+            assertNotNull(featureImpl);
         }
     }
 }

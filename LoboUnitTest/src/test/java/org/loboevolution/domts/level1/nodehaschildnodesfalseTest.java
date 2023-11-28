@@ -27,14 +27,14 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeList;
 
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 
 /**
@@ -72,7 +72,7 @@ public class nodehaschildnodesfalseTest extends LoboUnitTest {
         employeeNode = employeeIdList.item(1);
         textNode = employeeNode.getFirstChild();
         state = textNode.hasChildNodes();
-        assertFalse("nodeHasChildFalseAssert1", state);
+        assertFalse(state);
     }
 }
 

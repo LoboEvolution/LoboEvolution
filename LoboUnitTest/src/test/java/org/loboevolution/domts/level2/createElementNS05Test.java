@@ -27,12 +27,12 @@
 
 package org.loboevolution.domts.level2;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -64,7 +64,7 @@ public class createElementNS05Test extends LoboUnitTest {
         doc = sampleXmlFile("staffNS.xml");
         newElement = doc.createElementNS(namespaceURI, qualifiedName);
         elementName = newElement.getTagName();
-        assertEquals("throw_Equals", qualifiedName, elementName);
+        assertEquals(qualifiedName, elementName);
     }
 }
 

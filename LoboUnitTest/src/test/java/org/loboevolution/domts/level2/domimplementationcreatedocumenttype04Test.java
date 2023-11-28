@@ -28,7 +28,7 @@
 package org.loboevolution.domts.level2;
 
 import org.htmlunit.cssparser.dom.DOMException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DOMImplementation;
@@ -36,7 +36,7 @@ import org.loboevolution.html.node.DOMImplementation;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -92,7 +92,7 @@ public class domimplementationcreatedocumenttype04Test extends LoboUnitTest {
                 } catch (final DOMException ex) {
                     success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
                 }
-                assertTrue("domimplementationcreatedocumenttype04", success);
+                assertTrue(success);
             }
         }
     }

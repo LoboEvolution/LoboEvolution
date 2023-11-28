@@ -27,14 +27,14 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 /**
@@ -59,7 +59,7 @@ public class nodegetbaseuri15Test extends LoboUnitTest {
         bodyElem = (Element) bodyList.item(0);
         attrNode = bodyElem.getAttributeNode("id");
         baseURI = attrNode.getBaseURI();
-        assertNull("baseURI", baseURI);
+        assertNull(baseURI);
     }
 }
 

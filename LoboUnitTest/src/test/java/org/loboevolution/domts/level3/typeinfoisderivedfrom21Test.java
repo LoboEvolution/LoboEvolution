@@ -27,14 +27,14 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.TypeInfo;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -56,17 +56,17 @@ public class typeinfoisderivedfrom21Test extends LoboUnitTest {
         elemList = doc.getElementsByTagName("em");
         elem = (Element) elemList.item(0);
         typeInfo = elem.getSchemaTypeInfo();
-        assertNotNull("typeInfoNotNull", typeInfo);
+        assertNotNull(typeInfo);
         typeName = typeInfo.getTypeName();
-        assertEquals("typeName", "emType", typeName);
+        assertEquals("emType", typeName);
         isDerived = typeInfo.isDerivedFrom("http://www.w3.org/1999/xhtml", "emType", 1);
-        assertTrue("derivedFromSelfByRestriction", isDerived);
+        assertTrue(isDerived);
         isDerived = typeInfo.isDerivedFrom("http://www.w3.org/1999/xhtml", "emType", 14);
-        assertFalse("notDerivedFromSelfOtherMethod", isDerived);
+        assertFalse(isDerived);
         isDerived = typeInfo.isDerivedFrom("http://www.w3.org/1999/xhtml", "emType", 0);
-        assertTrue("derivedFromSelfByAny", isDerived);
+        assertTrue(isDerived);
         isDerived = typeInfo.isDerivedFrom("http://www.w3.org/1999/xhtml", "emType", 15);
-        assertTrue("derivedFromSelfByAll", isDerived);
+        assertTrue(isDerived);
     }
 }
 

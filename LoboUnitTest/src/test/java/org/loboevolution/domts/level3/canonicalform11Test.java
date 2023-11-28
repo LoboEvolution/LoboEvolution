@@ -27,7 +27,7 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.nodeimpl.DOMErrorMonitor;
@@ -36,7 +36,7 @@ import org.loboevolution.html.node.DOMConfiguration;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -69,15 +69,15 @@ public class canonicalform11Test extends LoboUnitTest {
             domConfig.setParameter("error-handler", errorMonitor);
             domConfig.setParameter("canonical-form", Boolean.TRUE);
             doc.normalizeDocument();
-            assertTrue("normalizeError", errorMonitor.assertLowerSeverity(2));
+            assertTrue(errorMonitor.assertLowerSeverity(2));
             elemList = doc.getElementsByTagName("acronym");
             elem = (Element) elemList.item(0);
             attr = elem.getAttributeNode("title");
-            assertNotNull("titlePresent", attr);
+            assertNotNull(attr);
             attrSpecified = attr.isSpecified();
-            assertTrue("titleSpecified", attrSpecified);
+            assertTrue(attrSpecified);
             attrValue = attr.getNodeValue();
-            assertEquals("titleValue", "default", attrValue);
+            assertEquals( "default", attrValue);
         }
     }
 }

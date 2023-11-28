@@ -26,14 +26,14 @@
 
 package org.loboevolution.domts.level3;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.Text;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Invoke lookupNamespaceURI on a Element's new Text node, which has a namespace attribute declaration
@@ -60,7 +60,7 @@ public class nodelookupnamespaceuri13Test extends LoboUnitTest {
         appendedChild = elem.appendChild(txt);
         appendedChild = docElem.appendChild(elem);
         namespaceURI = txt.lookupNamespaceURI("dom3");
-        assertEquals("nodelookupnamespaceuri13", "http://www.w3.org/1999/xhtml", namespaceURI);
+        assertEquals( "http://www.w3.org/1999/xhtml", namespaceURI);
     }
 }
 

@@ -27,14 +27,14 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.NamedNodeMap;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeList;
 
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 /**
@@ -72,12 +72,12 @@ public class nodecommentnodeattributesTest extends LoboUnitTest {
 
             if (nodeType == 8) {
                 attrList = childNode.getAttributes();
-                assertNull("attributesNull", attrList);
+                assertNull(attrList);
             }
         }
         childNode = doc.createComment("This is a comment");
         attrList = childNode.getAttributes();
-        assertNull("createdAttributesNull", attrList);
+        assertNull(attrList);
     }
 }
 

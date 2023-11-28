@@ -27,15 +27,15 @@
 
 package org.loboevolution.domts.level2;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.Notation;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.html.node.NamedNodeMap;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 /**
@@ -64,9 +64,9 @@ public class getNamedItemNS04Test extends LoboUnitTest {
         doc = sampleXmlFile("staffNS.xml");
         docType = doc.getDoctype();
         notations = docType.getNotations();
-        assertNotNull("notationsNotNull", notations);
+        assertNotNull(notations);
         notation = (Notation) notations.getNamedItemNS(nullNS, "notation1");
-        assertNull("notationNull", notation);
+        assertNull(notation);
     }
 }
 

@@ -27,12 +27,12 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -54,8 +54,8 @@ public class nodegetbaseuri04Test extends LoboUnitTest {
         doc = sampleXmlFile("barfoo.xml");
         docElem = doc.getDocumentElement();
         baseURI = docElem.getBaseURI();
-        assertURIEquals(new URIEquals("baseURI", null, null, null, null, "barfoo", null, null, Boolean.TRUE, baseURI));
+        assertURIEquals(new URIEquals( null, null, null, null, "barfoo", null, null, Boolean.TRUE, baseURI));
         documentURI = doc.getDocumentURI();
-        assertEquals("baseURIEqualsDocURI", documentURI, baseURI);
+        assertEquals(documentURI, baseURI);
     }
 }

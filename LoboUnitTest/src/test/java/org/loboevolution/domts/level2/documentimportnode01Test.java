@@ -27,7 +27,7 @@
 
 package org.loboevolution.domts.level2;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Attr;
@@ -35,7 +35,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -83,9 +83,9 @@ public class documentimportnode01Test extends LoboUnitTest {
         nodeName = importedAttr.getNodeName();
         nodeValue = importedAttr.getNodeValue();
         nodeType = importedAttr.getNodeType();
-        assertEquals("documentimportnode01_nodeName", "street", nodeName);
-        assertEquals("documentimportnode01_nodeType", 2, nodeType);
-        assertEquals("documentimportnode01_nodeValue", "Yes", nodeValue);
+        assertEquals("street", nodeName);
+        assertEquals(2, nodeType);
+        assertEquals("Yes", nodeValue);
     }
 }
 

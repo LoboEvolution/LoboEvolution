@@ -27,12 +27,12 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -61,13 +61,13 @@ public class domconfigurationcansetparameter03Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         domConfig = doc.getDomConfig();
         canSet = domConfig.canSetParameter("entities", Boolean.FALSE);
-        assertTrue("domconfigurationcansetparameter03_1", canSet);
+        assertTrue(canSet);
         doc.normalizeDocument();
         docType = doc.getDoctype();
         entitiesMap = docType.getEntities();
         entity = entitiesMap.getNamedItemNS(nullNS, "epsilon");
         entityName = entity.getNodeName();
-        assertEquals("domconfigurationcansetparameter03_2", "epsilon", entityName);
+        assertEquals("epsilon", entityName);
     }
 }
 

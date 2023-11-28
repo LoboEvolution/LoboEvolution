@@ -27,12 +27,12 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -66,7 +66,7 @@ public class documentadoptnode32Test extends LoboUnitTest {
 
         if ((adoptedCDATA != null)) {
             nodeValue = adoptedCDATA.getNodeValue();
-            assertEquals("documentadoptnode32", "Document.adoptNode test for a CDATASECTION_NODE", nodeValue);
+            assertEquals( "Document.adoptNode test for a CDATASECTION_NODE", nodeValue);
         }
     }
 }

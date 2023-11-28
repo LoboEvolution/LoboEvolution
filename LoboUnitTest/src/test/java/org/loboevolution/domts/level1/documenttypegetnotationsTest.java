@@ -27,7 +27,7 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
@@ -37,7 +37,7 @@ import org.loboevolution.html.node.Node;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -74,15 +74,15 @@ public class documenttypegetnotationsTest extends LoboUnitTest {
 
         doc = sampleXmlFile("staff.xml");
         docType = doc.getDoctype();
-        assertNotNull("docTypeNotNull", docType);
+        assertNotNull(docType);
         notationList = docType.getNotations();
-        assertNotNull("notationsNotNull", notationList);
+        assertNotNull(notationList);
         for (int indexN1005B = 0; indexN1005B < notationList.getLength(); indexN1005B++) {
             notation = notationList.item(indexN1005B);
             notationName = notation.getNodeName();
             actual.add(notationName);
         }
-        assertEquals("names", expected, actual);
+        assertEquals( expected, actual);
     }
 }
 

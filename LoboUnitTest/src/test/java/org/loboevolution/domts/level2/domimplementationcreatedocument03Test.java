@@ -27,7 +27,7 @@
 
 package org.loboevolution.domts.level2;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
@@ -36,7 +36,7 @@ import org.loboevolution.html.node.DocumentType;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 /**
@@ -83,7 +83,7 @@ public class domimplementationcreatedocument03Test extends LoboUnitTest {
         for (final Object name : qualifiedNames) {
             qualifiedName = (String) name;
             newDoc = domImpl.createDocument(namespaceURI, qualifiedName, docType);
-            assertNotNull("domimplementationcreatedocument03", newDoc);
+            assertNotNull(newDoc);
         }
     }
 }

@@ -27,13 +27,13 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.nodeimpl.DOMErrorMonitor;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Insert whitespace before the "p" element in barfoo and normalize with validation.
@@ -73,12 +73,12 @@ public class textiselementcontentwhitespace06Test extends LoboUnitTest {
             blankNode = doc.createTextNode("     ");
             replacedNode = bodyElem.insertBefore(blankNode, refChild);
             doc.normalizeDocument();
-            assertTrue("noErrors", errorMonitor.assertLowerSeverity(2));
+            assertTrue(errorMonitor.assertLowerSeverity(2));
             bodyList = doc.getElementsByTagName("body");
             bodyElem = (Element) bodyList.item(0);
             textNode = (Text) bodyElem.getFirstChild();
             isElemContentWhitespace = textNode.isElementContentWhitespace();
-            assertTrue("isElemContentWhitespace", isElemContentWhitespace);
+            assertTrue(isElemContentWhitespace);
         }
     }
 }

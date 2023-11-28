@@ -27,7 +27,7 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Attr;
@@ -35,7 +35,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Invoke setIdAttributeNS on an existing namespace attribute with a namespace URI and a qualified name.  Verify by calling
@@ -64,13 +64,13 @@ public class elementsetidattributens01Test extends LoboUnitTest {
         attributesMap = employeeElem.getAttributes();
         attr = (Attr) attributesMap.getNamedItem("xmlns:dmstc");
         id = attr.isId();
-        assertTrue("elementsetidattributensIsIdTrue01", id);
+        assertTrue(id);
         elem = doc.getElementById("http://www.netzero.com");
         elemName = elem.getTagName();
-        assertEquals("elementsetidattributensGetElementById01", "P", elemName);
+        assertEquals("P", elemName);
         employeeElem.setIdAttributeNS("http://www.usa.com", "dmstc", false);
         id = attr.isId();
-        assertFalse("elementsetidattributensIsIdFalse01", id);
+        assertFalse(id);
     }
 
 }

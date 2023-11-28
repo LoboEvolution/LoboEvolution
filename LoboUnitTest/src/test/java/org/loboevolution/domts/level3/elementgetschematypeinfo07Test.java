@@ -27,14 +27,14 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.TypeInfo;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * The getSchemaTypeInfo method retrieves the type information associated with this element.
@@ -63,8 +63,8 @@ public class elementgetschematypeinfo07Test extends LoboUnitTest {
         elemTypeInfo = supElem.getSchemaTypeInfo();
         typeName = elemTypeInfo.getTypeName();
         typeNamespace = elemTypeInfo.getTypeNamespace();
-        assertEquals("elementgetschematypeinfo07_typeName", "sup", typeName);
-        assertEquals("elementgetschematypeinfo07_typeNamespace", "http://www.w3.org/1999/xhtml", typeNamespace);
+        assertEquals("sup", typeName);
+        assertEquals( "http://www.w3.org/1999/xhtml", typeNamespace);
     }
 }
 

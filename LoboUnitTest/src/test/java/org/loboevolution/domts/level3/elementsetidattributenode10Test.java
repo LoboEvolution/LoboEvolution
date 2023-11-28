@@ -26,7 +26,7 @@
 
 package org.loboevolution.domts.level3;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Attr;
@@ -34,7 +34,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * This method declares the attribute specified by node to be of type ID. If the value of the specified attribute
@@ -67,13 +67,13 @@ public class elementsetidattributenode10Test extends LoboUnitTest {
         attr = (Attr) attributesMap.getNamedItem("class");
         acronymElem.setIdAttributeNode(attr, true);
         id = attr.isId();
-        assertTrue("elementsetidattributenodeIsIdTrue10", id);
+        assertTrue(id);
         elem = doc.getElementById("Yα");
         elemName = elem.getTagName();
-        assertEquals("elementsetidattributenodeGetElementById10", "ACRONYM", elemName);
+        assertEquals("ACRONYM", elemName);
         acronymElem.setIdAttributeNode(attr, false);
         id = attr.isId();
-        assertFalse("elementsetidattributenodeIsIdFalse10", id);
+        assertFalse(id);
     }
 }
 

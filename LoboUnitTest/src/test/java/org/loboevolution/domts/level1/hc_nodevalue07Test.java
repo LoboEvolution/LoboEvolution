@@ -27,15 +27,14 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.html.node.NamedNodeMap;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -61,16 +60,16 @@ public class hc_nodevalue07Test extends LoboUnitTest {
         final DocumentType docType;
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
-        assertNotNull("docTypeNotNull", docType);
+        assertNotNull(docType);
         nodeMap = docType.getEntities();
-        assertNotNull("entitiesNotNull", nodeMap);
+        assertNotNull(nodeMap);
         newNode = nodeMap.getNamedItem("alpha");
-        assertNotNull("entityNotNull", newNode);
+        assertNotNull(newNode);
         newValue = newNode.getNodeValue();
-        assertNull("initiallyNull", newValue);
+        assertNull(newValue);
         newNode.setNodeValue("This should have no effect");
         newValue = newNode.getNodeValue();
-        assertNull("nullAfterAttemptedChange", newValue);
+        assertNull(newValue);
 
     }
 

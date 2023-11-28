@@ -27,15 +27,15 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.DOMConfiguration;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 /**
@@ -67,7 +67,7 @@ public class documentnormalizedocument11Test extends LoboUnitTest {
         doc.normalizeDocument();
         elemList = doc.getElementsByTagNameNS("*", "acronym");
         elemName = (Element) elemList.item(1);
-        assertNotNull("documentnormalizedocument11_NotNullElem", elemName);
+        assertNotNull(elemName);
         canSet = domConfig.canSetParameter("namespace-declarations", Boolean.FALSE);
 
         if (canSet) {
@@ -76,7 +76,7 @@ public class documentnormalizedocument11Test extends LoboUnitTest {
             elemList = doc.getElementsByTagNameNS("*", "acronym");
             elemName = (Element) elemList.item(1);
             nodeName = elemName.getNodeName();
-            assertEquals("documentnormalizedocument11_namespaceDeclarations", "address", nodeName);
+            assertEquals("address", nodeName);
         }
     }
 }

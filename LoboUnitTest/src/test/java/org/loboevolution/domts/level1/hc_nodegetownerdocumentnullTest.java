@@ -27,11 +27,11 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 /**
@@ -56,7 +56,7 @@ public class hc_nodegetownerdocumentnullTest extends LoboUnitTest {
         final Document ownerDocument;
         doc = sampleXmlFile("hc_staff.xml");
         ownerDocument = doc.getOwnerDocument();
-        assertNull("nodeGetOwnerDocumentNullAssert1", ownerDocument);
+        assertNull( ownerDocument);
     }
 }
 

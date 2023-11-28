@@ -27,12 +27,12 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Text;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -62,11 +62,11 @@ public class hc_documentcreatetextnodeTest extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         newTextNode = doc.createTextNode("This is a new Text node");
         newTextValue = newTextNode.getNodeValue();
-        assertEquals("value", "This is a new Text node", newTextValue);
+        assertEquals( "This is a new Text node", newTextValue);
         newTextName = newTextNode.getNodeName();
-        assertEquals("STRONG", "#text", newTextName);
+        assertEquals("#text", newTextName);
         newTextType = newTextNode.getNodeType();
-        assertEquals("type", 3, newTextType);
+        assertEquals(3, newTextType);
     }
 }
 

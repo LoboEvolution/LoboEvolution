@@ -28,7 +28,7 @@ package org.loboevolution.domts.level3;
 
 
 import org.htmlunit.cssparser.dom.DOMException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.nodeimpl.DOMImplementationImpl;
@@ -38,7 +38,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.http.UserAgentContext;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -67,11 +67,11 @@ public class domconfigschemalocation1Test extends LoboUnitTest {
         doc = domImpl.createDocument("http://www.w3.org/1999/xhtml", "html", nullDocType);
         domConfig = doc.getDomConfig();
         canSet = domConfig.canSetParameter(parameter, Boolean.TRUE);
-        assertFalse("canSetTrue", canSet);
+        assertFalse(canSet);
 
         try {
             state = (String) domConfig.getParameter(parameter);
-            assertNull("defaultSchemaLocation", state);
+            assertNull(state);
 
         } catch (final DOMException ex) {
             if (ex.getCode() == 8) {
@@ -81,18 +81,18 @@ public class domconfigschemalocation1Test extends LoboUnitTest {
         }
         /*DOMString */
         canSet = domConfig.canSetParameter(parameter, sampleSchemaLocation);
-        assertTrue("canSetURI", canSet);
+        assertTrue(canSet);
         /*DOMString */
         canSet = domConfig.canSetParameter(parameter, nullSchemaLocation);
-        assertTrue("canSetNull", canSet);
+        assertTrue(canSet);
         /*DOMString */
         domConfig.setParameter(parameter, sampleSchemaLocation);
         state = (String) domConfig.getParameter(parameter);
-        assertEquals("setURIEffective", sampleSchemaLocation, state);
+        assertEquals(sampleSchemaLocation, state);
         /*DOMString */
         domConfig.setParameter(parameter, nullSchemaLocation);
         state = (String) domConfig.getParameter(parameter);
-        assertNull("setNullEffective", state);
+        assertNull(state);
     }
 }
 

@@ -27,14 +27,14 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.CharacterData;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -68,9 +68,9 @@ public class CDataSectionGetDataTest extends LoboUnitTest {
         child = nameList.item(1);
         lastChild = child.getLastChild();
         nodeType = lastChild.getNodeType();
-        assertEquals("isCDATA", 4, nodeType);
+        assertEquals(4, nodeType, "isCDATA");
         data = ((CharacterData) lastChild).getData();
-        assertEquals("data", "This is an adjacent CDATASection with a reference to a tab &tab;", data);
+        assertEquals( "This is an adjacent CDATASection with a reference to a tab &tab;", data);
     }
 }
 

@@ -27,14 +27,14 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.EntityReference;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -58,7 +58,7 @@ public class nodegettextcontent17Test extends LoboUnitTest {
         entRef = doc.createEntityReference("beta");
         appendedChild = elem.appendChild(entRef);
         textContent = entRef.getTextContent();
-        assertEquals("nodegettextcontent17", "β", textContent);
+        assertEquals( "β", textContent);
     }
 }
 

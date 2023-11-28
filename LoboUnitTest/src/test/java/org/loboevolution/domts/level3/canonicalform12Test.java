@@ -27,15 +27,15 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.nodeimpl.DOMErrorMonitor;
 import org.loboevolution.html.node.DOMConfiguration;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -65,9 +65,9 @@ public class canonicalform12Test extends LoboUnitTest {
             /*DOMErrorMonitor */
             domConfig.setParameter("error-handler", errorMonitor);
             doc.normalizeDocument();
-            assertTrue("normalizeError", errorMonitor.assertLowerSeverity(2));
+            assertTrue(errorMonitor.assertLowerSeverity(2));
             doctype = doc.getDoctype();
-            assertNull("docTypeNull", doctype);
+            assertNull(doctype);
         }
     }
 }

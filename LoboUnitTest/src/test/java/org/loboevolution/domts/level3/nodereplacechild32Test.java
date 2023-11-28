@@ -26,12 +26,12 @@
 
 package org.loboevolution.domts.level3;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * The method replaceChild replaces the child node oldChild with newChild in the list of
@@ -67,7 +67,7 @@ public class nodereplacechild32Test extends LoboUnitTest {
         enRefChild = (EntityReference) parent.appendChild(enRef);
         replaced = parent.replaceChild(newChild, enRefChild);
         nodeName = replaced.getNodeName();
-        assertEquals("nodereplacechild32", "entity1", nodeName);
+        assertEquals("entity1", nodeName);
     }
 }
 

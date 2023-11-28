@@ -27,13 +27,13 @@
 
 package org.loboevolution.domts.level2;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.CharacterData;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -75,7 +75,7 @@ public class normalize01Test extends LoboUnitTest {
         textList = firstChild.getChildNodes();
         textNode = (CharacterData) textList.item(0);
         data = textNode.getData();
-        assertEquals("data", "Roger\n Jones", data);
+        assertEquals( "Roger\n Jones", data);
     }
 }
 

@@ -28,7 +28,7 @@ package org.loboevolution.domts.level3;
 
 
 import org.htmlunit.cssparser.dom.DOMException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.nodeimpl.DOMImplementationImpl;
@@ -38,8 +38,8 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.http.UserAgentContext;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -65,15 +65,15 @@ public class domconfigelementcontentwhitespace1Test extends LoboUnitTest {
         doc = domImpl.createDocument("http://www.w3.org/1999/xhtml", "html", nullDocType);
         domConfig = doc.getDomConfig();
         state = ((Boolean) domConfig.getParameter(parameter));
-        assertTrue("defaultFalse", state);
+        assertTrue(state);
         canSet = domConfig.canSetParameter(parameter, Boolean.TRUE);
-        assertTrue("canSetTrue", canSet);
+        assertTrue(canSet);
         canSet = domConfig.canSetParameter(parameter, Boolean.FALSE);
 
         if (canSet) {
             domConfig.setParameter(parameter, Boolean.FALSE);
             state = ((Boolean) domConfig.getParameter(parameter));
-            assertFalse("setFalseEffective", state);
+            assertFalse(state);
         } else {
 
             {
@@ -83,10 +83,10 @@ public class domconfigelementcontentwhitespace1Test extends LoboUnitTest {
                 } catch (final DOMException ex) {
                     success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
                 }
-                assertTrue("throw_NOT_SUPPORTED_ERR", success);
+                assertTrue(success);
             }
             state = ((Boolean) domConfig.getParameter(parameter));
-            assertTrue("setFalseNotEffective", state);
+            assertTrue(state);
         }
 
         domConfig.setParameter(parameter, Boolean.TRUE);

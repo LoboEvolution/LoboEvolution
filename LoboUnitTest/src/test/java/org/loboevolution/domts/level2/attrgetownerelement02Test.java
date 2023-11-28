@@ -27,14 +27,14 @@
 
 package org.loboevolution.domts.level2;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -66,7 +66,7 @@ public class attrgetownerelement02Test extends LoboUnitTest {
         element.setAttributeNodeNS(attr);
         ownerElement = attr.getOwnerElement();
         ownerElementName = ownerElement.getNodeName();
-        assertEquals("attrgetownerelement02", "root", ownerElementName);
+        assertEquals("root", ownerElementName);
     }
 }
 

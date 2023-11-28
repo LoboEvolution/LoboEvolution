@@ -27,13 +27,13 @@
 
 package org.loboevolution.domts.level2;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -61,7 +61,7 @@ public class elementgetattributenodens02Test extends LoboUnitTest {
         attribute = doc.createAttributeNS("http://www.w3.org/DOM/Level2", "l2:att");
         element.setAttributeNodeNS(attribute);
         attribute = element.getAttributeNodeNS("http://www.w3.org/DOM/Level2", "att");
-        assertEquals("elementgetattributenodens02", null, attribute);
+        assertNull(attribute);
     }
 }
 

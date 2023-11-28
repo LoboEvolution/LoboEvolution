@@ -27,7 +27,7 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Attr;
@@ -35,7 +35,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -68,9 +68,9 @@ public class documentrenamenode01Test extends LoboUnitTest {
         nodeName = renamedclass.getNodeName();
         namespaceURI = renamedclass.getNamespaceURI();
         nodeType = renamedclass.getNodeType();
-        assertEquals("documentrenameode01_nodeName", "renamedNode", nodeName);
-        assertEquals("documentrenameNode01_nodeType", 2, nodeType);
-        assertEquals("documentrenamenode01_nodeValue", "http://www.w3.org/DOM/Test", namespaceURI);
+        assertEquals( "renamedNode", nodeName);
+        assertEquals(2, nodeType);
+        assertEquals( "http://www.w3.org/DOM/Test", namespaceURI);
     }
 }
 

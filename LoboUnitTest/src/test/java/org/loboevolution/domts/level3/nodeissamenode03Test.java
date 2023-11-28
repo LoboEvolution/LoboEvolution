@@ -27,13 +27,13 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -57,7 +57,7 @@ public class nodeissamenode03Test extends LoboUnitTest {
         element1 = (Element) childList.item(0);
         element2 = (Element) childList.item(0);
         isSame = element2.isSameNode(element1);
-        assertTrue("nodeissamenode03", isSame);
+        assertTrue(isSame);
     }
 }
 

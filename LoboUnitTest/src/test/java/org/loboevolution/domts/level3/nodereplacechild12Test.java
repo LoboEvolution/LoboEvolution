@@ -27,15 +27,15 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Comment;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.ProcessingInstruction;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 /**
@@ -64,13 +64,13 @@ public class nodereplacechild12Test extends LoboUnitTest {
         appendedChild = doc.appendChild(comment);
         appendedChild = doc.appendChild(pi);
         replacedNode = doc.replaceChild(comment, pi);
-        assertNotNull("returnValueNotNull", replacedNode);
+        assertNotNull(replacedNode);
         nodeName = replacedNode.getNodeName();
-        assertEquals("returnValueIsPI", "PITarget", nodeName);
+        assertEquals("PITarget", nodeName);
         lastChild = doc.getLastChild();
-        assertNotNull("lastChildNotNull", lastChild);
+        assertNotNull(lastChild);
         nodeName = lastChild.getNodeName();
-        assertEquals("lastChildIsComment", "#comment", nodeName);
+        assertEquals("#comment", nodeName);
     }
 }
 

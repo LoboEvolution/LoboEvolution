@@ -27,14 +27,14 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeList;
 
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 /**
@@ -71,7 +71,7 @@ public class nodegetlastchildnullTest extends LoboUnitTest {
         secondChildNode = employeeList.item(1);
         textNode = secondChildNode.getFirstChild();
         noChildNode = textNode.getLastChild();
-        assertNull("nodeGetLastChildNullAssert1", noChildNode);
+        assertNull(noChildNode);
     }
 }
 

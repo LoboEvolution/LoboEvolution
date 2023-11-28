@@ -27,14 +27,14 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.TypeInfo;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -61,7 +61,7 @@ public class typeinfogettypenamespace04Test extends LoboUnitTest {
         emElem = (Element) elemList.item(0);
         elemTypeInfo = emElem.getSchemaTypeInfo();
         typeNamespace = elemTypeInfo.getTypeNamespace();
-        assertEquals("typeinfogettypenamespace04_1", "http://www.w3.org/1999/xhtml", typeNamespace);
+        assertEquals("http://www.w3.org/1999/xhtml", typeNamespace);
     }
 }
 

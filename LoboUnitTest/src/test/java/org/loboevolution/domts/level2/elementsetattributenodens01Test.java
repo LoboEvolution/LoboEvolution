@@ -27,14 +27,14 @@
 
 package org.loboevolution.domts.level2;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -78,11 +78,11 @@ public class elementsetattributenodens01Test extends LoboUnitTest {
         attrNode = element.getAttributeNodeNS("http://www.w3.org/DOM/Test/att1", "att");
         attrName = attrNode.getNodeName();
         attrNS = attrNode.getNamespaceURI();
-        assertEquals("elementsetattributenodens01_attrName", "p2:att", attrName);
-        assertEquals("elementsetattributenodens01_attrNS", "http://www.w3.org/DOM/Test/att1", attrNS);
+        assertEquals("p2:att", attrName);
+        assertEquals("http://www.w3.org/DOM/Test/att1", attrNS);
         attributes = element.getAttributes();
         length = attributes.getLength();
-        assertEquals("length", 1, length);
+        assertEquals( 1, length);
     }
 }
 

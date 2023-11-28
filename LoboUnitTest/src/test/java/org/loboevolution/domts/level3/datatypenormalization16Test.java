@@ -27,7 +27,7 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.nodeimpl.DOMErrorMonitor;
@@ -36,8 +36,8 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -81,24 +81,24 @@ public class datatypenormalization16Test extends LoboUnitTest {
             /*DOMErrorMonitor */
             domConfig.setParameter("error-handler", errorMonitor);
             doc.normalizeDocument();
-            assertTrue("normalizeError", errorMonitor.assertLowerSeverity(2));
+            assertTrue(errorMonitor.assertLowerSeverity(2));
             elemList = doc.getElementsByTagNameNS("http://www.w3.org/1999/xhtml", "sup");
             element = (Element) elemList.item(0);
             childNode = element.getFirstChild();
             childValue = childNode.getNodeValue();
-            assertEquals("content1", "EMP  0001", childValue);
+            assertEquals( "EMP  0001", childValue);
             element = (Element) elemList.item(1);
             childNode = element.getFirstChild();
             childValue = childNode.getNodeValue();
-            assertEquals("content2", "EMP  0001", childValue);
+            assertEquals("EMP  0001", childValue);
             element = (Element) elemList.item(2);
             childNode = element.getFirstChild();
             childValue = childNode.getNodeValue();
-            assertEquals("content3", "EMP 0001", childValue);
+            assertEquals( "EMP 0001", childValue);
             element = (Element) elemList.item(3);
             childNode = element.getFirstChild();
             childValue = childNode.getNodeValue();
-            assertEquals("content4", "EMP 0001", childValue);
+            assertEquals( "EMP 0001", childValue);
         }
     }
 }

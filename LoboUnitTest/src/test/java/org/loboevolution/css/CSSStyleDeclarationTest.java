@@ -26,7 +26,7 @@
 package org.loboevolution.css;
 
 import org.loboevolution.html.js.css.CSSStyleDeclarationImpl;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 
 /**

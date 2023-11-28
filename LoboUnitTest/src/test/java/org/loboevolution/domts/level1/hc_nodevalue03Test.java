@@ -28,12 +28,12 @@
 package org.loboevolution.domts.level1;
 
 import org.htmlunit.cssparser.dom.DOMException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -58,9 +58,9 @@ public class hc_nodevalue03Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
 
         newNode = doc.createEntityReference("ent1");
-        assertNotNull("createdEntRefNotNull", newNode);
+        assertNotNull(newNode);
         newValue = newNode.getNodeValue();
-        assertNull("initiallyNull", newValue);
+        assertNull(newValue);
 
         boolean success = false;
         try {
@@ -68,10 +68,10 @@ public class hc_nodevalue03Test extends LoboUnitTest {
         } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.INVALID_MODIFICATION_ERR);
         }
-        assertTrue("throw_INVALID_MODIFICATION_ERR", success);
+        assertTrue(success);
 
         newValue = newNode.getNodeValue();
-        assertNull("nullAfterAttemptedChange", newValue);
+        assertNull(newValue);
 
     }
 }

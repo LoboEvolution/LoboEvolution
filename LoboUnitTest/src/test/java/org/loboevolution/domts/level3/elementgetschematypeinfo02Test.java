@@ -26,15 +26,15 @@
 
 package org.loboevolution.domts.level3;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.TypeInfo;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * Call getSchemaTypeInfo on title attribute for the first "em" element from schema-validated document.
@@ -57,11 +57,11 @@ public class elementgetschematypeinfo02Test extends LoboUnitTest {
         elemList = doc.getElementsByTagName("em");
         elem = (Element) elemList.item(0);
         typeInfo = elem.getSchemaTypeInfo();
-        assertNotNull("typeInfoNotNull", typeInfo);
+        assertNotNull(typeInfo);
         typeName = typeInfo.getTypeName();
         assertEquals("nameIsEmType", "emType", typeName);
         typeNS = typeInfo.getTypeNamespace();
-        assertEquals("nsIsXML", "http://www.w3.org/1999/xhtml", typeNS);
+        assertEquals( "http://www.w3.org/1999/xhtml", typeNS);
     }
 }
 

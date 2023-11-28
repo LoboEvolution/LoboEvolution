@@ -27,12 +27,12 @@
 
 package org.loboevolution.domts.level2;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 
 /**
@@ -66,7 +66,7 @@ public class isSupported02Test extends LoboUnitTest {
         doc = sampleXmlFile("staff.xml");
         rootNode = doc.getDocumentElement();
         state = rootNode.isSupported("XML", "9.0");
-        assertFalse("throw_False", state);
+        assertFalse(state);
     }
 }
 

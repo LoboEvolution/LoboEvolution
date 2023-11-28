@@ -28,13 +28,13 @@ package org.loboevolution.domts.level3;
 
 
 import org.htmlunit.cssparser.dom.DOMException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentFragment;
 import org.loboevolution.html.node.EntityReference;
 
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * The method removeChild removes the child node indicated by oldChild from the list
@@ -60,7 +60,7 @@ public class noderemovechild12Test extends LoboUnitTest {
         docFrag.appendChild(eRef);
         docFrag.removeChild(eRef);
         removedERef = (EntityReference) docFrag.getFirstChild();
-        assertNull("noderemovechild12", removedERef);
+        assertNull(removedERef);
 
         try {
             eRef.removeChild(docFrag);

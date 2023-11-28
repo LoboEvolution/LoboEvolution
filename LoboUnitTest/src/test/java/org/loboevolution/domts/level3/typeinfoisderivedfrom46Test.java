@@ -27,7 +27,7 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Attr;
@@ -35,8 +35,8 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.TypeInfo;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 /**
@@ -60,9 +60,9 @@ public class typeinfoisderivedfrom46Test extends LoboUnitTest {
         elemList = doc.getElementsByTagName("acronym");
         acronymElem = (Element) elemList.item(2);
         typeInfo = acronymElem.getSchemaTypeInfo();
-        assertNotNull("typeInfoNotNull", typeInfo);
+        assertNotNull(typeInfo);
         isDerived = typeInfo.isDerivedFrom("http://www.w3.org/2001/XMLSchema", "anySimpleType", 13);
-        assertFalse("derivedFromAnySimpleType", isDerived);
+        assertFalse(isDerived);
     }
 }
 

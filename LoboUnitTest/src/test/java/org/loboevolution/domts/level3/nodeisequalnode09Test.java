@@ -27,12 +27,12 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Get the first "em" node, construct an equivalent in a new document and see if isEqualNode
@@ -71,7 +71,7 @@ public class nodeisequalnode09Test extends LoboUnitTest {
         text = newDoc.createTextNode("EMP0001");
         appendedChild = elem2.appendChild(text);
         isEqual = elem1.isEqualNode(elem2);
-        assertTrue("nodesAreEqual", isEqual);
+        assertTrue(isEqual);
     }
 }
 

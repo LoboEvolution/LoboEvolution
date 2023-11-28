@@ -27,12 +27,12 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 /**
@@ -57,7 +57,7 @@ public class documentgetdoctypenodtdTest extends LoboUnitTest {
         final DocumentType docType;
         doc = sampleXmlFile("hc_nodtdstaff.xml");
         docType = doc.getDoctype();
-        assertNull("documentGetDocTypeNoDTDAssert", docType);
+        assertNull(docType);
     }
 }
 

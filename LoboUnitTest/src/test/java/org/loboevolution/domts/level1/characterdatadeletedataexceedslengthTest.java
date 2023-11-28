@@ -27,14 +27,14 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.CharacterData;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -75,7 +75,7 @@ public class characterdatadeletedataexceedslengthTest extends LoboUnitTest {
         child = (CharacterData) nameNode.getFirstChild();
         child.deleteData(4, 50);
         childData = child.getData();
-        assertEquals("characterdataDeleteDataExceedsLengthAssert", "1230", childData);
+        assertEquals("1230", childData);
     }
 }
 

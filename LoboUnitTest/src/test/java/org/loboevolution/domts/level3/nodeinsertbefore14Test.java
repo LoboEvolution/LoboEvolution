@@ -28,14 +28,14 @@ package org.loboevolution.domts.level3;
 
 
 import org.htmlunit.cssparser.dom.DOMException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -68,7 +68,7 @@ public class nodeinsertbefore14Test extends LoboUnitTest {
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }
-            assertTrue("NO_MODIFICATION_ALLOWED_ERR_nodeinsertbefore14", success);
+            assertTrue(success);
         }
     }
 }

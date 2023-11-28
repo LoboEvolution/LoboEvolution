@@ -28,7 +28,7 @@ package org.loboevolution.domts.level3;
 
 
 import lombok.SneakyThrows;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.html.dom.nodeimpl.DOMImplementationImpl;
@@ -37,7 +37,7 @@ import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.DOMImplementationList;
 import org.loboevolution.http.UserAgentContext;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -63,19 +63,19 @@ public class domimplementationregistry19Test extends LoboUnitTest {
         final DOMImplementationList domImplList;
         final int length;
          final DOMImplementationRegistry domImplRegistry = DOMImplementationRegistry.newInstance();
-        assertNotNull("domImplRegistryNotNull", domImplRegistry);
+        assertNotNull(domImplRegistry);
         domImplList = domImplRegistry.getDOMImplementationList("SVG");
         length = (int) domImplList.getLength();
 
         if (length == 0) {
             baseImpl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(), true));
             hasFeature = baseImpl.hasFeature("SVG", null);
-            assertFalse("baseImplSupportsSVG", hasFeature);
+            assertFalse(hasFeature);
         } else {
             for (int indexN10067 = 0; indexN10067 < domImplList.getLength(); indexN10067++) {
                 domImpl = (DOMImplementation) domImplList.item(indexN10067);
                 hasFeature = domImpl.hasFeature("SVG", nullVersion);
-                assertTrue("hasCore", hasFeature);
+                assertTrue(hasFeature);
             }
         }
 

@@ -27,7 +27,7 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Attr;
@@ -38,7 +38,7 @@ import org.loboevolution.html.node.NamedNodeMap;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -81,7 +81,7 @@ public class hc_elementretrieveallattributesTest extends LoboUnitTest {
             actual.add(attributeName);
         }
 
-        assertEquals("attributeNames", expected, actual);
+        assertEquals(expected, actual);
     }
 
 }

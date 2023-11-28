@@ -27,14 +27,14 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * Invoke lookupNamespaceURI on an Element node with no prefix, which has 2 namespace
@@ -58,8 +58,8 @@ public class nodelookupnamespaceuri08Test extends LoboUnitTest {
         elemList = doc.getElementsByTagName("p");
         elem = (Element) elemList.item(0);
         namespaceURI = elem.lookupNamespaceURI("dmstc");
-        assertEquals("nodelookupnamespaceuri08", "http://www.usa.com", namespaceURI);
+        assertEquals("http://www.usa.com", namespaceURI);
         namespaceURIEmpty = elem.lookupNamespaceURI("");
-        assertNull("nodelookupnamespaceprefixEmpty08", namespaceURIEmpty);
+        assertNull(namespaceURIEmpty);
     }
 }

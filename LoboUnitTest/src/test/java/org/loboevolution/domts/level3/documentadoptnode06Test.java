@@ -27,11 +27,11 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -92,18 +92,18 @@ public class documentadoptnode06Test extends LoboUnitTest {
             nodePrefix = adoptedAttr.getPrefix();
             attrOwnerElem = adoptedAttr.getOwnerElement();
             isSpecified = adoptedAttr.isSpecified();
-            assertEquals("documentadoptnode06_nodeName", "xml:lang", nodeName);
-            assertEquals("documentadoptnode06_namespaceURI", xmlNS, nodeNamespaceURI);
-            assertEquals("documentadoptnode06_prefix", "xml", nodePrefix);
-            assertNull("documentadoptnode06_ownerDoc", attrOwnerElem);
-            assertTrue("documentadoptnode06_specified", isSpecified);
+            assertEquals("xml:lang", nodeName);
+            assertEquals( xmlNS, nodeNamespaceURI);
+            assertEquals("xml", nodePrefix);
+            assertNull(attrOwnerElem);
+            assertTrue(isSpecified);
             nodeList = adoptedAttr.getChildNodes();
             adoptText = (Text) nodeList.item(0);
             adoptEntRef = (EntityReference) nodeList.item(1);
             adoptedTextNodeValue = adoptText.getNodeValue();
             adoptedEntRefNodeValue = adoptEntRef.getNodeName();
-            assertEquals("documentadoptnode06_TextNodeValue", "Text Node", adoptedTextNodeValue);
-            assertEquals("documentadoptnode06_EntRefNodeValue", "alpha", adoptedEntRefNodeValue);
+            assertEquals("Text Node", adoptedTextNodeValue);
+            assertEquals( "alpha", adoptedEntRefNodeValue);
         }
     }
 }

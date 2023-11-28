@@ -27,12 +27,12 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -65,7 +65,7 @@ public class textreplacewholetext05Test extends LoboUnitTest {
         textNode = (Text) elementName.getFirstChild();
         replacedText = textNode.replaceWholeText("New Text and Cdata");
         wholeText = replacedText.getWholeText();
-        assertEquals("textreplacewholetext05", "New Text and Cdata", wholeText);
+        assertEquals("New Text and Cdata", wholeText);
     }
 }
 

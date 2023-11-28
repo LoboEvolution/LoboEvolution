@@ -27,7 +27,7 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.nodeimpl.DOMImplementationImpl;
@@ -37,7 +37,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.http.UserAgentContext;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -67,7 +67,7 @@ public class domconfigdatatypenormalization2Test extends LoboUnitTest {
         if (canSet) {
             domConfig.setParameter(parameter, Boolean.TRUE);
             state = ((Boolean) domConfig.getParameter("validate"));
-            assertTrue("validateSet", state);
+            assertTrue(state);
         }
     }
 }

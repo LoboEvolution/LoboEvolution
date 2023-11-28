@@ -27,7 +27,7 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Attr;
@@ -35,7 +35,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
 
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 /**
@@ -72,7 +72,7 @@ public class hc_namednodemapremovenameditemTest extends LoboUnitTest {
         attributes = testAddress.getAttributes();
         attributes.removeNamedItem("class");
         streetAttr = (Attr) attributes.getNamedItem("class");
-        assertNull("isnull", streetAttr);
+        assertNull(streetAttr);
     }
 
 }

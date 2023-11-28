@@ -27,14 +27,14 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -63,7 +63,7 @@ public class attrisid05Test extends LoboUnitTest {
         clonedacronymElem = (Element) acronymElem.cloneNode(true);
         acronymParentElem.appendChild(clonedacronymElem);
         attr = acronymElem.getAttributeNode("id");
-        assertTrue("AttrIsIDTrue05", attr.isId());
+        assertTrue(attr.isId());
     }
 }
 

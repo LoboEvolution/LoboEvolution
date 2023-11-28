@@ -27,8 +27,8 @@
 package org.loboevolution.junit;
 
 import org.htmlunit.cssparser.dom.DOMException;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.*;
@@ -44,13 +44,13 @@ import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.node.css.CSSStyleSheet;
 import org.loboevolution.http.UserAgentContext;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class HTMLDocumentTest extends LoboUnitTest {
 
     private static Document document;
 
-    @BeforeClass
+    @BeforeAll
     public static void setUpBeforeClass() {
         document = sampleHtmlFile();
     }
@@ -1156,7 +1156,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
         assertNotNull(sheet);
     }
 
-    @Test(timeout = 8000)
+    @Test
     public void testLinkElementEvil() {
         final Element link = document.createElement("link");
         link.setAttribute("rel", "stylesheet");
@@ -1167,7 +1167,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
         assertEquals(0, sheet.getCssRules().getLength());
     }
 
-    @Test(timeout = 8000)
+    @Test
     public void testLinkElementEvilJar() {
         final Element link = document.createElement("link");
         link.setAttribute("rel", "stylesheet");

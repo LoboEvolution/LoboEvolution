@@ -27,7 +27,7 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.nodeimpl.DOMErrorMonitor;
@@ -36,8 +36,8 @@ import org.loboevolution.html.node.DOMConfiguration;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -71,12 +71,12 @@ public class cdatasections01Test extends LoboUnitTest {
         /*DOMErrorMonitor */
         domConfig.setParameter("error-handler", errorMonitor);
         doc.normalize();
-        assertTrue("normalizationError", errorMonitor.assertLowerSeverity(2));
+        assertTrue(errorMonitor.assertLowerSeverity(2));
         pList = doc.getElementsByTagName("p");
         elem = (Element) pList.item(0);
         cdata = (CDATASection) elem.getLastChild();
         nodeName = cdata.getNodeName();
-        assertEquals("documentnormalizedocument03_true", "#cdata-section", nodeName);
+        assertEquals("#cdata-section", nodeName);
     }
 }
 

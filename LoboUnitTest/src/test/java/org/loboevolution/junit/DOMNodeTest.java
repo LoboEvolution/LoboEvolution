@@ -27,8 +27,8 @@
 package org.loboevolution.junit;
 
 import org.htmlunit.cssparser.dom.DOMException;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
@@ -36,14 +36,14 @@ import org.loboevolution.html.dom.nodeimpl.DOMImplementationImpl;
 import org.loboevolution.html.node.*;
 import org.loboevolution.http.UserAgentContext;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class DOMNodeTest extends LoboUnitTest {
 
 	private static Document document;
 	private static DOMImplementationImpl impl;
 
-	@BeforeClass
+	@BeforeAll
 	public static void setUpBeforeClass() {
 		final UserAgentContext context = new UserAgentContext(new LocalHtmlRendererConfig(), true);
 		context.setUserAgentEnabled(false);

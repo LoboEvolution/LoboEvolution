@@ -27,14 +27,14 @@
 
 package org.loboevolution.domts.level2;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -84,15 +84,15 @@ public class importNode01Test extends LoboUnitTest {
         ownerDocument = aNode.getOwnerDocument();
         docType = ownerDocument.getDoctype();
         system = docType.getSystemId();
-        assertNotNull("aNode", aNode);
-        assertEquals("systemId", "staffNS.dtd", system);
+        assertNotNull(aNode);
+        assertEquals("staffNS.dtd", system);
         attrOwnerElement = ((Attr) aNode).getOwnerElement();
-        assertNull("ownerElement", attrOwnerElement);
+        assertNull(attrOwnerElement);
         specified = ((Attr) aNode).isSpecified();
-        assertTrue("specified", specified);
+        assertTrue(specified);
         nodeName = aNode.getNodeName();
-        assertEquals("nodeName", "attr1", nodeName);
+        assertEquals("attr1", nodeName);
         childValue = aNode.getNodeValue();
-        assertEquals("childValue", "importedText", childValue);
+        assertEquals("importedText", childValue);
     }
 }

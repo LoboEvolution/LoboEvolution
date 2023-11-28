@@ -27,7 +27,7 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.DOMError;
 import org.loboevolution.html.dom.HTMLCollection;
@@ -36,8 +36,8 @@ import org.loboevolution.html.node.*;
 
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -90,16 +90,16 @@ public class documentnormalizedocument08Test extends LoboUnitTest {
             if ("cdata-sections-splitted".equals(type)) {
                 splittedCount += 1;
             } else {
-                assertEquals("anyOthersShouldBeWarnings", 1, severity);
+                assertEquals(1, severity);
             }
 
         }
-        assertEquals("twoSplittedWarning", 2, splittedCount);
+        assertEquals(2, splittedCount);
         elemList = doc.getElementsByTagName("p");
         elem = (Element) elemList.item(0);
         childNodes = elem.getChildNodes();
         length = childNodes.getLength();
-        assertTrue("atLeast4ChildNodes", (length > 3));
+        assertTrue(length > 3);
     }
 }
 

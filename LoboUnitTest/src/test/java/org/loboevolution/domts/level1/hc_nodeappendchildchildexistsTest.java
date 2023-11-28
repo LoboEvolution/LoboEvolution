@@ -27,7 +27,7 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
@@ -38,7 +38,7 @@ import org.loboevolution.html.node.NodeList;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -94,7 +94,7 @@ public class hc_nodeappendchildchildexistsTest extends LoboUnitTest {
             memberName = memberNode.getNodeName();
             actual.add(memberName);
         }
-        assertEquals("liveByTagName", expected, actual);
+        assertEquals(expected, actual);
         final NodeList childList2 = childNode.getChildNodes();
         for (int indexN1009C = 0; indexN1009C < childList2.getLength(); indexN1009C++) {
             memberNode = childList2.item(indexN1009C);
@@ -105,7 +105,7 @@ public class hc_nodeappendchildchildexistsTest extends LoboUnitTest {
                 refreshedActual.add(memberName);
             }
         }
-        assertEquals("refreshedChildNodes", expected, refreshedActual);
+        assertEquals(expected, refreshedActual);
     }
 }
 

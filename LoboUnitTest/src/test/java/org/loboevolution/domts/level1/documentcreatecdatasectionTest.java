@@ -27,12 +27,12 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.CDATASection;
 import org.loboevolution.html.node.Document;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -64,11 +64,11 @@ public class documentcreatecdatasectionTest extends LoboUnitTest {
         doc = sampleXmlFile("staff.xml");
         newCDATASectionNode = doc.createCDATASection("This is a new CDATASection node");
         newCDATASectionValue = newCDATASectionNode.getNodeValue();
-        assertEquals("nodeValue", "This is a new CDATASection node", newCDATASectionValue);
+         assertEquals( "This is a new CDATASection node", newCDATASectionValue);
         newCDATASectionName = newCDATASectionNode.getNodeName();
-        assertEquals("nodeName", "#cdata-section", newCDATASectionName);
+         assertEquals( "#cdata-section", newCDATASectionName);
         newCDATASectionType = newCDATASectionNode.getNodeType();
-        assertEquals("nodeType", 4, newCDATASectionType);
+        assertEquals(4, newCDATASectionType);
     }
 }
 

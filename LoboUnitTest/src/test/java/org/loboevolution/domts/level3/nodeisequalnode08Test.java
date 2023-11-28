@@ -27,7 +27,7 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
@@ -35,7 +35,7 @@ import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.Text;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Retreive an element node of this Document having nodeName as employeeId and
@@ -63,7 +63,7 @@ public class nodeisequalnode08Test extends LoboUnitTest {
         text = doc.createTextNode("EMP0001");
         appendedChild = elem2.appendChild(text);
         isEqual = elem1.isEqualNode(elem2);
-        assertTrue("nodeisequalnode08", isEqual);
+        assertTrue(isEqual);
     }
 }
 

@@ -27,14 +27,14 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -61,7 +61,7 @@ public class nodegettextcontent08Test extends LoboUnitTest {
         replacedAttr = elem.setAttributeNodeNS(att);
         attr = elem.getAttributeNodeNS("http://www.w3.org/XML/1998/namespace", "lang");
         textContent = attr.getTextContent();
-        assertEquals("nodegettextcontent08", "", textContent);
+        assertEquals( "", textContent);
     }
 }
 

@@ -26,12 +26,12 @@
 
 package org.loboevolution.domts.level3;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Text;
 
-import static junit.framework.TestCase.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 /**
@@ -53,7 +53,7 @@ public class textreplacewholetext04Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         textNode = doc.createTextNode("New Text");
         replacedText = textNode.replaceWholeText("");
-        assertNull("retvalIsNull", replacedText);
+        assertNull(replacedText);
     }
 }
 

@@ -27,13 +27,13 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -58,7 +58,7 @@ public class nodelookupprefix10Test extends LoboUnitTest {
         child = doc.createElement("br");
         appendedChild = parent.appendChild(child);
         prefix = child.lookupPrefix("http://www.w3.org/1999/xhtml");
-        assertEquals("nodelookupprefix10", "dom3", prefix);
+        assertEquals("dom3", prefix);
     }
 }
 

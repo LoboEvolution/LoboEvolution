@@ -27,12 +27,12 @@
 
 package org.loboevolution.domts.level2;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -75,7 +75,7 @@ public class setNamedItemNS05Test extends LoboUnitTest {
         attributes = testAddress.getAttributes();
         retnode = attributes.setNamedItemNS(arg);
         value = retnode.getNodeValue();
-        assertEquals("throw_Equals", "Yes", value);
+        assertEquals("Yes", value);
     }
 }
 

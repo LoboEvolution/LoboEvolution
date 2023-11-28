@@ -27,11 +27,11 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -49,7 +49,7 @@ public class documentgetxmlversion03Test extends LoboUnitTest {
         final String versionValue;
         doc = sampleXmlFile("barfoo.xml");
         versionValue = doc.getXmlVersion();
-        assertEquals("documentgetxmlversion03", "1.0", versionValue);
+        assertEquals("1.0", versionValue);
     }
 }
 

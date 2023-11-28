@@ -27,14 +27,14 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.CharacterData;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -70,7 +70,7 @@ public class hc_characterdatainsertdatabeginningTest extends LoboUnitTest {
         child = (CharacterData) nameNode.getFirstChild();
         child.insertData(0, "Mss. ");
         childData = child.getData();
-        assertEquals("characterdataInsertDataBeginningAssert", "Mss. Margaret Martin", childData);
+        assertEquals("Mss. Margaret Martin", childData);
     }
 }
 

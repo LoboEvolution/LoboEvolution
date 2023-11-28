@@ -27,7 +27,7 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.DOMError;
 import org.loboevolution.html.dom.DOMLocator;
@@ -37,7 +37,7 @@ import org.loboevolution.html.node.*;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -108,9 +108,7 @@ public class documentnormalizedocument06Test extends LoboUnitTest {
         newChild = (CDATASection) elem.getFirstChild();
         nodeValue = newChild.getNodeValue();
         nodeType = newChild.getNodeType();
-        assertFalse("wasSplit",
-                (nodeType == 4 & (nodeValue.indexOf("]]>") >= 0))
-        );
+        assertFalse((nodeType == 4 & (nodeValue.indexOf("]]>") >= 0)));
         errors = errorMonitor.getErrors();
         for (final Object o : errors) {
             error = (DOMError) o;
@@ -119,15 +117,15 @@ public class documentnormalizedocument06Test extends LoboUnitTest {
 
             if ("cdata-sections-splitted".equals(type)) {
                 relatedData = error.getRelatedData();
-                assertSame("relatedData", newChild, relatedData);
-                assertEquals("severity", 1, severity);
+                assertSame(newChild, relatedData);
+                assertEquals(1, severity);
                 message = error.getMessage();
                 length = message.length();
-                assertTrue("messageNotEmpty", (length > 0));
+                assertTrue((length > 0));
                 relatedException = error.getRelatedException();
                 location = error.getLocation();
                 problemNode = location.getRelatedNode();
-                assertSame("relatedNode", newChild, problemNode);
+                assertSame(newChild, problemNode);
                 lineNumber = location.getLineNumber();
                 columnNumber = location.getColumnNumber();
                 byteOffset = location.getByteOffset();
@@ -135,11 +133,11 @@ public class documentnormalizedocument06Test extends LoboUnitTest {
                 uri = location.getUri();
                 splittedCount += 1;
             } else {
-                assertEquals("anyOthersShouldBeWarnings", 1, severity);
+                assertEquals(1, severity);
             }
 
         }
-        assertEquals("oneSplittedWarning", 1, splittedCount);
+        assertEquals(1, splittedCount);
     }
 }
 

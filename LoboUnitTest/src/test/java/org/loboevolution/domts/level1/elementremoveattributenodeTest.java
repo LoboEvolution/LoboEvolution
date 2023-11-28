@@ -27,14 +27,14 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -69,7 +69,7 @@ public class elementremoveattributenodeTest extends LoboUnitTest {
         streetAttr = testEmployee.getAttributeNode("street");
         removedAttr = testEmployee.removeAttributeNode(streetAttr);
         removedValue = removedAttr.getValue();
-        assertEquals("elementRemoveAttributeNodeAssert", "No", removedValue);
+        assertEquals("No", removedValue);
     }
 }
 

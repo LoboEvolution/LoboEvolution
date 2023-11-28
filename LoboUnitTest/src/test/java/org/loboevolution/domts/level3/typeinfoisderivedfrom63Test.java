@@ -27,14 +27,14 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.TypeInfo;
 
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 
 /**
@@ -64,7 +64,7 @@ public class typeinfoisderivedfrom63Test extends LoboUnitTest {
         acronymElem = (Element) elemList.item(0);
         elemTypeInfo = acronymElem.getSchemaTypeInfo();
         retValue = elemTypeInfo.isDerivedFrom("http://www.w3.org/TR/REC-xml", nullName, 0);
-        assertFalse("typeinfoisderivedfrom63", retValue);
+        assertFalse(retValue);
     }
 }
 

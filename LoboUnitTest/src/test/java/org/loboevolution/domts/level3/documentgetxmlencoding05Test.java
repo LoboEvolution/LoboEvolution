@@ -27,11 +27,11 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -51,7 +51,7 @@ public class documentgetxmlencoding05Test extends LoboUnitTest {
         doc = sampleXmlFile("barfoo_utf8.xml");
         cloned = (Document) doc.cloneNode(true);
         encodingName = cloned.getXmlEncoding();
-        assertTrue("documentgetxmlencoding05", ("uTf-8".equals(encodingName) || (encodingName == null))
-        );
+        assertTrue(("uTf-8".equals(encodingName) || (encodingName == null)), "documentgetxmlencoding05"
+                );
     }
 }

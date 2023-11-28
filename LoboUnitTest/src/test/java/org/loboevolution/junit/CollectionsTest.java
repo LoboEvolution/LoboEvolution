@@ -27,7 +27,7 @@
 package org.loboevolution.junit;
 
 import org.htmlunit.cssparser.dom.DOMException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.filter.ElementNameFilter;
 import org.loboevolution.html.dom.nodeimpl.traversal.NodeIteratorImpl;
@@ -39,7 +39,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import java.util.Iterator;
 import java.util.ListIterator;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Compare <code>NodeList</code> and <code>NodeIterator</code> implementations

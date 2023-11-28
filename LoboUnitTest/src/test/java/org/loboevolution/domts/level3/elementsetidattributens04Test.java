@@ -27,7 +27,7 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Attr;
@@ -35,7 +35,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * The method setIdAttributeNS declares the attribute specified by local name and namespace URI to be of type ID.
@@ -69,13 +69,13 @@ public class elementsetidattributens04Test extends LoboUnitTest {
         attributesMap = strongElem.getAttributes();
         attr = (Attr) attributesMap.getNamedItem("dmstc:newAttr");
         id = attr.isId();
-        assertTrue("elementsetidattributensIsIdTrue04", id);
+        assertTrue(id);
         elem = doc.getElementById("newValue");
         elemName = elem.getTagName();
-        assertEquals("elementsetidattributensGetElementById04", "STRONG", elemName);
+        assertEquals("STRONG", elemName);
         strongElem.setIdAttributeNS("http://www.netzero.com", "newAttr", false);
         id = attr.isId();
-        assertFalse("elementsetidattributensIsIdFalse04", id);
+        assertFalse(id);
     }
 }
 

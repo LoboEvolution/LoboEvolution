@@ -27,11 +27,11 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -69,7 +69,7 @@ public class nodeisequalnode18Test extends LoboUnitTest {
 
         if ((attr2 != null)) {
             isEqual = attr1.isEqualNode(attr2);
-            assertTrue("nodeisequalnode18", isEqual);
+            assertTrue(isEqual);
         }
     }
 }

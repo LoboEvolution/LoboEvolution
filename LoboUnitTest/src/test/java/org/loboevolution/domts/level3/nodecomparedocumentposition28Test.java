@@ -27,7 +27,7 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
@@ -35,8 +35,8 @@ import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.EntityReference;
 import org.loboevolution.html.node.ProcessingInstruction;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 /**
@@ -63,18 +63,18 @@ public class nodecomparedocumentposition28Test extends LoboUnitTest {
 
         varList = doc.getElementsByTagName("var");
         varElem = (Element) varList.item(2);
-        assertNotNull("varElemNotNull", varElem);
+        assertNotNull(varElem);
         entRef = (EntityReference) varElem.getFirstChild();
-        assertNotNull("entRefNotNull", entRef);
+        assertNotNull(entRef);
 
         entRefChild1 = (Element) entRef.getFirstChild();
-        assertNotNull("entRefChild1NotNull", entRefChild1);
+        assertNotNull(entRefChild1);
         entRefChild2 = (ProcessingInstruction) entRef.getLastChild();
-        assertNotNull("entRefChild2NotNull", entRefChild2);
+        assertNotNull(entRefChild2);
         entRefChild1Position = entRefChild1.compareDocumentPosition(entRefChild2);
-        assertEquals("nodecomparedocumentpositionFollowing28", 4, entRefChild1Position);
+        assertEquals(4, entRefChild1Position);
         entRefChild2Position = entRefChild2.compareDocumentPosition(entRefChild1);
-        assertEquals("nodecomparedocumentpositionPRECEDING28", 2, entRefChild2Position);
+        assertEquals(2, entRefChild2Position);
     }
 }
 

@@ -27,13 +27,13 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -66,7 +66,7 @@ public class NodeCloneTrueCopyTextTest extends LoboUnitTest {
         clonedNode = childNode.cloneNode(true);
         lastChildNode = clonedNode.getLastChild();
         childValue = lastChildNode.getNodeValue();
-        assertEquals("nodeCloneTrueCopyTextAssert1", "35,000", childValue);
+        assertEquals("35,000", childValue);
     }
 }
 

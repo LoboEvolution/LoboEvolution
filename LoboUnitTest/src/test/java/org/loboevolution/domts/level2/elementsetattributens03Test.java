@@ -27,14 +27,14 @@
 
 package org.loboevolution.domts.level2;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -66,13 +66,13 @@ public class elementsetattributens03Test extends LoboUnitTest {
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagName("employee");
         element = (Element) elementList.item(0);
-        assertNotNull("empEmployeeNotNull", element);
+        assertNotNull(element);
         element.setAttributeNS("http://www.w3.org/DOM/Test/1", "defaultAttr", "default1");
         element.setAttributeNS("http://www.w3.org/DOM/Test/2", "defaultAttr", "default2");
         attribute = element.getAttributeNodeNS("http://www.w3.org/DOM/Test/1", "defaultAttr");
         attrName = attribute.getNodeName();
         attrValue = attribute.getNodeValue();
-        assertEquals("elementsetattributens03_attrName", "defaultAttr", attrName);
-        assertEquals("elementsetattributens03_attrValue", "default1", attrValue);
+        assertEquals("defaultAttr", attrName);
+        assertEquals( "default1", attrValue);
     }
 }

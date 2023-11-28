@@ -27,14 +27,14 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.DOMConfiguration;
 import org.loboevolution.html.node.DOMStringList;
 import org.loboevolution.html.node.Document;
 
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 /**
@@ -58,9 +58,9 @@ public class domstringlistgetlength01Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         domConfig = doc.getDomConfig();
         paramList = domConfig.getParameterNames();
-        assertNotNull("domstringlistgetlength01_notNull", paramList);
+        assertNotNull(paramList);
         listSize = paramList.getLength();
-        assertNotEquals("domstringlistgetlength01_notZero", 0, listSize);
+        assertNotEquals(0, listSize);
     }
 }
 

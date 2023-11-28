@@ -27,12 +27,12 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Text;
 
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 /**
@@ -52,7 +52,7 @@ public class nodegetuserdata06Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         txt = doc.createTextNode("TEXT");
         retUserData = txt.getUserData("");
-        assertNull("nodegetuserdata06", retUserData);
+        assertNull(retUserData);
     }
 }
 

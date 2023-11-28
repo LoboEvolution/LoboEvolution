@@ -27,14 +27,14 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.nodeimpl.DOMErrorMonitor;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Normalize a document with the 'canonical-form' parameter set to true and
@@ -64,7 +64,7 @@ public class canonicalform03Test extends LoboUnitTest {
         elemName = (Element) elemList.item(1);
         cdata = (CDATASection) elemName.getLastChild();
         nodeName = cdata.getNodeName();
-        assertEquals("documentnormalizedocument02", "#cdata-section", nodeName);
+        assertEquals( "#cdata-section", nodeName);
         domConfig = doc.getDomConfig();
         domConfig.setParameter("error-handler", errorMonitor);
         canSet = domConfig.canSetParameter("canonical-form", Boolean.TRUE);
@@ -72,12 +72,12 @@ public class canonicalform03Test extends LoboUnitTest {
         if (canSet) {
             domConfig.setParameter("canonical-form", Boolean.TRUE);
             doc.normalizeDocument();
-            assertTrue("normalization2Error", errorMonitor.assertLowerSeverity(2));
+            assertTrue(errorMonitor.assertLowerSeverity(2));
             elemList = doc.getElementsByTagName("strong");
             elemName = (Element) elemList.item(1);
             text = (Text) elemName.getLastChild();
             nodeName = text.getNodeName();
-            assertEquals("documentnormalizedocument02_false", "#text", nodeName);
+            assertEquals( "#text", nodeName);
         }
     }
 }

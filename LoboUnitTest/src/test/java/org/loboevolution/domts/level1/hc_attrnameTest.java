@@ -27,7 +27,7 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Attr;
@@ -35,7 +35,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -71,8 +71,8 @@ public class hc_attrnameTest extends LoboUnitTest {
         streetAttr = (Attr) attributes.getNamedItem("class");
         strong1 = streetAttr.getNodeName();
         strong2 = streetAttr.getName();
-        assertEquals("nodeName", "class", strong1);
-        assertEquals("name", "class", strong2);
+         assertEquals( "class", strong1);
+         assertEquals( "class", strong2);
     }
 }
 

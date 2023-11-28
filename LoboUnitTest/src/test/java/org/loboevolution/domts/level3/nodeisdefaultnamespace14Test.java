@@ -27,7 +27,7 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.CDATASection;
@@ -35,7 +35,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -65,7 +65,7 @@ public class nodeisdefaultnamespace14Test extends LoboUnitTest {
         appendedChild = elem.appendChild(cdata);
         appendedChild = bodyElem.appendChild(elem);
         isDefault = cdata.isDefaultNamespace("http://www.w3.org/1999/xhtml");
-        assertTrue("nodeisdefaultnamespace14", isDefault);
+        assertTrue(isDefault);
     }
 }
 

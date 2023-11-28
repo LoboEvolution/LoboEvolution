@@ -27,12 +27,12 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Using isDefaultNamespace on this Document node with the
@@ -53,7 +53,7 @@ public class nodeisdefaultnamespace01Test extends LoboUnitTest {
         docElem = doc.getDocumentElement();
         docElemNS = docElem.getNamespaceURI();
         isDefault = doc.isDefaultNamespace(docElemNS);
-        assertTrue("nodeisdefaultnamespace01", isDefault);
+        assertTrue(isDefault);
     }
 }
 

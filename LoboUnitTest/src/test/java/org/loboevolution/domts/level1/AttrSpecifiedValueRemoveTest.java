@@ -27,7 +27,7 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Attr;
@@ -35,8 +35,8 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 /**
@@ -79,9 +79,9 @@ public class AttrSpecifiedValueRemoveTest extends LoboUnitTest {
         testNode.removeAttribute("street");
         attributes = testNode.getAttributes();
         streetAttr = (Attr) attributes.getNamedItem("street");
-        assertNotNull("streetAttrNotNull", streetAttr);
+        assertNotNull(streetAttr);
         state = streetAttr.isSpecified();
-        assertFalse("attrSpecifiedValueRemoveAssert", state);
+        assertFalse(state);
     }
 }
 

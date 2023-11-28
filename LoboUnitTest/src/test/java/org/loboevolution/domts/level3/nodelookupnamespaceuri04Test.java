@@ -27,7 +27,7 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.Notation;
 import org.loboevolution.html.node.Document;
@@ -35,7 +35,7 @@ import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.html.node.NamedNodeMap;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * Using lookupNamespaceURI on an Entity and Notation node and check if the value returned is Null .
@@ -61,7 +61,7 @@ public class nodelookupnamespaceuri04Test extends LoboUnitTest {
         entity = entitiesMap.getNamedItem("alpha");
         notation = (Notation) notationsMap.getNamedItem("notation1");
         namespaceURI = entity.lookupNamespaceURI("");
-        assertNull("nodelookupnamespaceuri04", namespaceURI);
+        assertNull(namespaceURI);
     }
 }
 

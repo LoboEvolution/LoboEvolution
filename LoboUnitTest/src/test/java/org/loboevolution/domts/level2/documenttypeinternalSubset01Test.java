@@ -27,13 +27,13 @@
 
 package org.loboevolution.domts.level2;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.DocumentType;
 
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 /**
@@ -65,7 +65,7 @@ public class documenttypeinternalSubset01Test extends LoboUnitTest {
         domImpl = doc.getImplementation();
         docType = domImpl.createDocumentType("l2:root", nullNS, nullNS);
         internal = docType.getInternalSubset();
-        assertNull("internalSubsetNull", internal);
+        assertNull(internal);
     }
 }
 

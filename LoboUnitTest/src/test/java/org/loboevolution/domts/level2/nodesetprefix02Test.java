@@ -27,14 +27,14 @@
 
 package org.loboevolution.domts.level2;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -74,8 +74,8 @@ public class nodesetprefix02Test extends LoboUnitTest {
         attribute = element.getAttributeNodeNS("http://www.usa.com", "domestic");
         attrName = attribute.getNodeName();
         newAttrName = newAttribute.getNodeName();
-        assertEquals("nodesetprefix02_attrName", "dmstc:domestic", attrName);
-        assertEquals("nodesetprefix02_newAttrName", "dom:address", newAttrName);
+        assertEquals( "dmstc:domestic", attrName);
+        assertEquals( "dom:address", newAttrName);
     }
 }
 

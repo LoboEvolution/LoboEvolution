@@ -28,14 +28,14 @@ package org.loboevolution.domts.level3;
 
 
 import lombok.SneakyThrows;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.nodeimpl.bootstrap.DOMImplementationRegistry;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.DOMImplementationList;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -58,14 +58,14 @@ public class domimplementationregistry14Test extends LoboUnitTest {
         final DOMImplementationList domImplList;
         final int length;
          final DOMImplementationRegistry domImplRegistry = DOMImplementationRegistry.newInstance();
-        assertNotNull("domImplRegistryNotNull", domImplRegistry);
+        assertNotNull(domImplRegistry);
         domImplList = domImplRegistry.getDOMImplementationList("cOrE 3.0");
         length = (int) domImplList.getLength();
-        assertTrue("atLeastOne", (length > 0));
+        assertTrue((length > 0));
         for (int indexN10052 = 0; indexN10052 < domImplList.getLength(); indexN10052++) {
             domImpl = (DOMImplementation) domImplList.item(indexN10052);
             hasFeature = domImpl.hasFeature("Core", "3.0");
-            assertTrue("hasCore", hasFeature);
+            assertTrue(hasFeature);
         }
     }
 }

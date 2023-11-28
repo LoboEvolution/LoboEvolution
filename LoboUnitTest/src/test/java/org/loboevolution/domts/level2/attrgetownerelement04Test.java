@@ -27,7 +27,7 @@
 
 package org.loboevolution.domts.level2;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Attr;
@@ -35,8 +35,8 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 /**
@@ -69,11 +69,11 @@ public class attrgetownerelement04Test extends LoboUnitTest {
         docImp = sampleXmlFile("staff.xml");
         addresses = doc.getElementsByTagName( "address");
         element = (Element) addresses.item(1);
-        assertNotNull("empAddressNotNull", element);
+        assertNotNull(element);
         attr = element.getAttributeNode( "zone");
         attrImp = (Attr) docImp.importNode(attr, true);
         ownerElement = attrImp.getOwnerElement();
-        assertNull("attrgetownerelement04", ownerElement);
+        assertNull(ownerElement);
     }
 }
 

@@ -27,12 +27,12 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -79,7 +79,7 @@ public class documentadoptnode14Test extends LoboUnitTest {
 
         if ((adoptedDocFrag != null)) {
             success = adoptedDocFrag.hasChildNodes();
-            assertTrue("documentadoptnode14", success);
+            assertTrue(success);
         }
     }
 }

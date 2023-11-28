@@ -27,12 +27,12 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -73,12 +73,12 @@ public class hc_documentcreateelementcasesensitiveTest extends LoboUnitTest {
         newElement2.setAttribute("title", "Dallas");
         attribute1 = newElement1.getAttribute("lang");
         attribute2 = newElement2.getAttribute("title");
-        assertEquals("attrib1", "EN", attribute1);
-        assertEquals("attrib2", "Dallas", attribute2);
+        assertEquals( "EN", attribute1);
+        assertEquals( "Dallas", attribute2);
         nodeName1 = newElement1.getNodeName();
         nodeName2 = newElement2.getNodeName();
-        assertEquals("nodeName1", "ACRONYM", nodeName1);
-        assertEquals("nodeName2", "ACRONYM", nodeName2);
+        assertEquals("ACRONYM", nodeName1);
+        assertEquals( "ACRONYM", nodeName2);
     }
 }
 

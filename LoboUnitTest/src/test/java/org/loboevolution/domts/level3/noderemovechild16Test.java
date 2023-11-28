@@ -28,14 +28,14 @@ package org.loboevolution.domts.level3;
 
 
 import org.htmlunit.cssparser.dom.DOMException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Using removeChild on the first 'p' Element node attempt to remove its 'em'
@@ -61,7 +61,7 @@ public class noderemovechild16Test extends LoboUnitTest {
         parent = (Element) child.getParentNode();
         removed = (Element) parent.removeChild(child);
         removedName = removed.getNodeName();
-        assertEquals("noderemovechild16", "EM", removedName);
+        assertEquals("EM", removedName);
 
         boolean success = false;
         try {
@@ -69,7 +69,7 @@ public class noderemovechild16Test extends LoboUnitTest {
         } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
         }
-        assertTrue("NOT_FOUND_ERR_noderemovechild16", success);
+        assertTrue(success);
 
     }
 }

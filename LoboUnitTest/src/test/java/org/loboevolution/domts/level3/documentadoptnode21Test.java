@@ -26,7 +26,7 @@
 
 package org.loboevolution.domts.level3;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Attr;
@@ -34,8 +34,8 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * The adoptNode method changes the ownerDocument of a node, its children, as well as the
@@ -73,10 +73,10 @@ public class documentadoptnode21Test extends LoboUnitTest {
         nodeValue = adoptedTitle.getNodeValue();
         nodeType = adoptedTitle.getNodeType();
         attrOwnerElem = (Element) ((Attr) adoptedTitle).getOwnerElement();
-        assertEquals("documentadoptnode21_nodeName", "title", nodeName);
-        assertEquals("documentadoptnode21_nodeType", 2, nodeType);
-        assertEquals("documentadoptnode21_nodeValue", "Yes", nodeValue);
-        assertNull("documentadoptnode21_ownerDoc", attrOwnerElem);
+        assertEquals("title", nodeName);
+        assertEquals(2, nodeType);
+        assertEquals( "Yes", nodeValue);
+        assertNull(attrOwnerElem);
     }
 }
 

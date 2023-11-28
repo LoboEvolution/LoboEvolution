@@ -27,14 +27,14 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.Text;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -72,7 +72,7 @@ public class textsplittextfourTest extends LoboUnitTest {
         textNode = (Text) addressNode.getFirstChild();
         splitNode = textNode.splitText(30);
         value = splitNode.getNodeValue();
-        assertEquals("textSplitTextFourAssert", "98551", value);
+        assertEquals("98551", value);
     }
 
 }

@@ -27,7 +27,7 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.nodeimpl.DOMErrorMonitor;
@@ -36,7 +36,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -82,13 +82,13 @@ public class datatypenormalization13Test extends LoboUnitTest {
             /*DOMErrorMonitor */
             domConfig.setParameter("error-handler", errorMonitor);
             doc.normalizeDocument();
-            assertTrue("normalizeError", errorMonitor.assertLowerSeverity(2));
+            assertTrue(errorMonitor.assertLowerSeverity(2));
             elemList = doc.getElementsByTagNameNS("http://www.w3.org/1999/xhtml", "em");
             element = (Element) elemList.item(0);
             childNode = element.getFirstChild();
-            assertNotNull("childNodeNotNull", childNode);
+            assertNotNull(childNode);
             childValue = childNode.getNodeValue();
-            assertEquals("content", "    EMP  0001   ", childValue);
+            assertEquals("    EMP  0001   ", childValue);
         }
     }
 }

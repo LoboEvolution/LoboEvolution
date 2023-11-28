@@ -27,14 +27,14 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.DOMConfiguration;
 import org.loboevolution.html.node.DOMStringList;
 import org.loboevolution.html.node.Document;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -60,21 +60,21 @@ public class domstringlistcontains02Test extends LoboUnitTest {
         domConfig = doc.getDomConfig();
         paramList = domConfig.getParameterNames();
         contain = paramList.contains("comments");
-        assertTrue("domstringlistcontains02_1", contain);
+        assertTrue(contain);
         contain = paramList.contains("cdata-sections");
-        assertTrue("domstringlistcontains02_2", contain);
+        assertTrue(contain);
         contain = paramList.contains("entities");
-        assertTrue("domstringlistcontains02_3", contain);
+        assertTrue(contain);
         contain = paramList.contains("error-handler");
-        assertTrue("domstringlistcontains02_4", contain);
+        assertTrue(contain);
         contain = paramList.contains("infoset");
-        assertTrue("domstringlistcontains02_5", contain);
+        assertTrue(contain);
         contain = paramList.contains("namespace-declarations");
-        assertTrue("domstringlistcontains02_6", contain);
+        assertTrue(contain);
         contain = paramList.contains("element-content-whitespace");
-        assertTrue("domstringlistcontains02_7", contain);
+        assertTrue(contain);
         contain = paramList.contains("test");
-        assertFalse("domstringlistcontains02_8", contain);
+        assertFalse(contain);
     }
 }
 

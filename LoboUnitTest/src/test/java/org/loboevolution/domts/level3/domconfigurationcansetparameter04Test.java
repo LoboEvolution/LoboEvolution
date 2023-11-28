@@ -27,15 +27,15 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.DOMConfiguration;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -62,13 +62,13 @@ public class domconfigurationcansetparameter04Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         domConfig = doc.getDomConfig();
         canSet = domConfig.canSetParameter("entities", Boolean.FALSE);
-        assertTrue("domconfigurationcansetparameter04_1", canSet);
+        assertTrue(canSet);
         doc.normalizeDocument();
         acronymList = doc.getElementsByTagNameNS("*", "acronym");
         acronymElem = acronymList.item(1);
         first = acronymElem.getFirstChild();
         nodeType = first.getNodeType();
-        assertEquals("domconfigurationcansetparameter04_2", 5, nodeType);
+        assertEquals(5, nodeType);
     }
 }
 

@@ -27,15 +27,15 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.TypeInfo;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 /**
@@ -60,10 +60,10 @@ public class elementgetschematypeinfo03Test extends LoboUnitTest {
         elemList = doc.getElementsByTagName("em");
         elem = (Element) elemList.item(0);
         typeInfo = elem.getSchemaTypeInfo();
-        assertNotNull("typeInfoNotNull", typeInfo);
+        assertNotNull(typeInfo);
         typeName = typeInfo.getTypeName();
-        assertNull("typeName", typeName);
+        assertNull(typeName);
         typeNS = typeInfo.getTypeNamespace();
-        assertNull("typeNS", typeNS);
+        assertNull(typeNS);
     }
 }

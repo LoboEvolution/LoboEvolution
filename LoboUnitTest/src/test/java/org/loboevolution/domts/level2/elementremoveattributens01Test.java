@@ -27,13 +27,13 @@
 
 package org.loboevolution.domts.level2;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 
 /**
@@ -65,7 +65,7 @@ public class elementremoveattributens01Test extends LoboUnitTest {
         element.setAttributeNodeNS(attribute);
         element.removeAttributeNS("http://www.w3.org/DOM/Test/createAttributeNS", "attr");
         state = element.hasAttributeNS("http://www.w3.org/DOM/Test/createAttributeNS", "attr");
-        assertFalse("elementremoveattributens01", state);
+        assertFalse(state);
     }
 }
 

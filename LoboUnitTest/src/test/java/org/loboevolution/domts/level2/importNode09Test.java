@@ -27,14 +27,14 @@
 
 package org.loboevolution.domts.level2;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.html.node.EntityReference;
 import org.loboevolution.html.node.NamedNodeMap;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -76,21 +76,21 @@ public class importNode09Test extends LoboUnitTest {
         aNewDoc = sampleXmlFile("staffNS.xml");
         docType = aNewDoc.getDoctype();
         entityList = docType.getEntities();
-        assertNotNull("entitiesNotNull", entityList);
+        assertNotNull(entityList);
         entity2 = (EntityReference) entityList.getNamedItem("ent6");
         entity1 = (EntityReference) doc.importNode(entity2, false);
         ownerDocument = entity1.getOwnerDocument();
         docType = ownerDocument.getDoctype();
         system = docType.getSystemId();
-        assertEquals("dtdSystemId", "staffNS.dtd", system);
+        assertEquals("staffNS.dtd", system);
         entityName = entity1.getNodeName();
-        assertEquals("entityName", "ent6", entityName);
+        assertEquals("ent6", entityName);
         publicVal = entity1.getPublicId();
-        assertEquals("entityPublicId", "uri", publicVal);
+        assertEquals("uri", publicVal);
         system = entity1.getSystemId();
-        assertEquals("entitySystemId", "file", system);
+        assertEquals( "file", system);
         notationName = entity1.getNotationName();
-        assertEquals("notationName", "notation2", notationName);
+        assertEquals("notation2", notationName);
     }
 }
 

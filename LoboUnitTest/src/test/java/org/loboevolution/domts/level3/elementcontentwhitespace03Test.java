@@ -27,13 +27,13 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.nodeimpl.DOMErrorMonitor;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Normalize document using Node.normalize with element-content-whitespace set to false and validation set to true, check that
@@ -67,15 +67,15 @@ public class elementcontentwhitespace03Test extends LoboUnitTest {
             /*DOMErrorMonitor */
             domConfig.setParameter("error-handler", errorMonitor);
             doc.normalize();
-            assertTrue("normalizeError", errorMonitor.assertLowerSeverity(2));
+            assertTrue(errorMonitor.assertLowerSeverity(2));
             bodyList = doc.getElementsByTagName("body");
             body = (Element) bodyList.item(0);
             child = body.getFirstChild();
-            assertNotNull("firstChildNotNull", child);
+            assertNotNull(child);
             childName = child.getNodeName();
-            assertEquals("firstChild", "#text", childName);
+            assertEquals( "#text", childName);
             child = child.getNextSibling();
-            assertNotNull("secondChildNotNull", child);
+            assertNotNull(child);
             childName = child.getNodeName();
             assertEquals("secondChild", "p", childName);
         }

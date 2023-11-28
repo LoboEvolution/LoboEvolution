@@ -27,12 +27,12 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * The method setTextContent has no effect when the node is defined to be null.
@@ -69,7 +69,7 @@ public class nodesettextcontent02Test extends LoboUnitTest {
         elemList = newDoc.getElementsByTagNameNS("*", "childElem");
         elemChild = (Element) elemList.item(0);
         nodeName = elemChild.getNodeName();
-        assertEquals("nodesettextcontent02", "dom3:childElem", nodeName);
+        assertEquals("dom3:childElem", nodeName);
     }
 }
 

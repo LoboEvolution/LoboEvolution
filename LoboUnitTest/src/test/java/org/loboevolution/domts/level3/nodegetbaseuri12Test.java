@@ -27,7 +27,7 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
@@ -58,7 +58,7 @@ public class nodegetbaseuri12Test extends LoboUnitTest {
         entitiesMap = docType.getEntities();
         entity = entitiesMap.getNamedItem("epsilon");
         baseURI = entity.getBaseURI();
-        assertURIEquals(new URIEquals("entityBase", null, null, null, null, "hc_staff", null, null, true, baseURI));
+        assertURIEquals(new URIEquals(null, null, null, null, "hc_staff", null, null, true, baseURI));
     }
 }
 

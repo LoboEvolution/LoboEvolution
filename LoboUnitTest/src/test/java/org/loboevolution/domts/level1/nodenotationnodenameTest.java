@@ -27,14 +27,14 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.html.node.NamedNodeMap;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -64,13 +64,13 @@ public class nodenotationnodenameTest extends LoboUnitTest {
         final String notationName;
         doc = sampleXmlFile("staff.xml");
         docType = doc.getDoctype();
-        assertNotNull("docTypeNotNull", docType);
+        assertNotNull(docType);
         notations = docType.getNotations();
-        assertNotNull("notationsNotNull", notations);
+        assertNotNull(notations);
         notationNode = notations.getNamedItem("notation1");
-        assertNotNull("notationNotNull", notationNode);
+        assertNotNull(notationNode);
         notationName = notationNode.getNodeName();
-        assertEquals("nodeName", "notation1", notationName);
+        assertEquals("notation1", notationName);
     }
 
 }

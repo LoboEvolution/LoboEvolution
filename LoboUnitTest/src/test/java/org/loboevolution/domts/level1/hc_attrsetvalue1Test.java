@@ -27,12 +27,12 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -63,18 +63,18 @@ public class hc_attrsetvalue1Test extends LoboUnitTest {
         attributes = testNode.getAttributes();
         titleAttr = (Attr) attributes.getNamedItem("title");
         firstChild = titleAttr.getFirstChild();
-        assertNotNull("attrChildNotNull", firstChild);
+        assertNotNull(firstChild);
         titleAttr.setValue("Tomorrow");
         firstChild.setNodeValue("impl reused node");
         value = titleAttr.getValue();
-        assertEquals("attrValue", "Tomorrow", value);
+        assertEquals("Tomorrow", value);
         value = titleAttr.getNodeValue();
-        assertEquals("attrNodeValue", "Tomorrow", value);
+        assertEquals( "Tomorrow", value);
         firstChild = titleAttr.getLastChild();
         value = firstChild.getNodeValue();
-        assertEquals("firstChildValue", "Tomorrow", value);
+        assertEquals( "Tomorrow", value);
         otherChild = firstChild.getNextSibling();
-        assertNull("nextSiblingIsNull", otherChild);
+        assertNull(otherChild);
     }
 }
 

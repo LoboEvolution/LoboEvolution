@@ -27,14 +27,14 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.Notation;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.html.node.NamedNodeMap;
 
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 /**
@@ -59,7 +59,7 @@ public class nodesettextcontent04Test extends LoboUnitTest {
         notation1 = (Notation) notationsMap.getNamedItem("notation1");
         notation1.setTextContent("textContent");
         textContent = notation1.getTextContent();
-        assertNull("nodesettextcontent04", textContent);
+        assertNull(textContent);
     }
 }
 

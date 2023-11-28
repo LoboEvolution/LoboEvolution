@@ -28,13 +28,13 @@ package org.loboevolution.domts.level3;
 
 
 import lombok.SneakyThrows;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.nodeimpl.bootstrap.DOMImplementationRegistry;
 import org.loboevolution.html.node.DOMImplementationList;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 /**
@@ -54,10 +54,10 @@ public class domimplementationregistry18Test extends LoboUnitTest {
         final DOMImplementationList domImplList;
         final int length;
          final DOMImplementationRegistry domImplRegistry = DOMImplementationRegistry.newInstance();
-        assertNotNull("domImplRegistryNotNull", domImplRegistry);
+        assertNotNull(domImplRegistry);
         domImplList = domImplRegistry.getDOMImplementationList("http://www.example.com/bogus-feature 99.0");
         length = domImplList.getLength();
-        assertEquals("emptyList", 0, length);
+        assertEquals(0, length);
     }
 }
 

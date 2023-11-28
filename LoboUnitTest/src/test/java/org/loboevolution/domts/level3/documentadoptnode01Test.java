@@ -27,12 +27,12 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -73,22 +73,22 @@ public class documentadoptnode01Test extends LoboUnitTest {
             nodeValue = adoptedclass.getNodeValue();
             nodeType = adoptedclass.getNodeType();
             attrOwnerElem = (Element) ((Attr) adoptedclass).getOwnerElement();
-            assertEquals("documentadoptode01_nodeName", "class", nodeName);
-            assertEquals("documentadoptNode01_nodeType", 2, nodeType);
-            assertNotNull("documentadoptnode01_ownerDoc", attrOwnerElem);
+            assertEquals("class", nodeName);
+            assertEquals(2, nodeType);
+            assertNotNull(attrOwnerElem);
             firstChild = (Text) adoptedclass.getFirstChild();
-            assertNotNull("firstChildNotNull", firstChild);
+            assertNotNull(firstChild);
             firstChildValue = firstChild.getNodeValue();
 
             if ("Y".equals(firstChildValue)) {
                 secondChild = (EntityReference) firstChild.getNextSibling();
-                assertNotNull("secondChildNotNull", secondChild);
+                assertNotNull(secondChild);
                 secondChildType = secondChild.getNodeType();
-                assertEquals("secondChildIsEntityReference", 5, secondChildType);
+                assertEquals(5, secondChildType);
                 secondChildName = secondChild.getNodeName();
-                assertEquals("secondChildIsEnt1Reference", "alpha", secondChildName);
+                assertEquals("alpha", secondChildName);
             } else {
-                assertEquals("documentadoptnode01_nodeValue", "Yα", nodeValue);
+                assertEquals("Yα", nodeValue);
             }
 
         }

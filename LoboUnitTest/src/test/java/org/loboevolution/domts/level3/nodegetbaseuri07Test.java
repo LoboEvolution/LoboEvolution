@@ -27,13 +27,13 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -62,7 +62,7 @@ public class nodegetbaseuri07Test extends LoboUnitTest {
         newElement.setAttribute("content", "text/xml");
         bodyElem.appendChild(newElement);
         baseURI = newElement.getBaseURI();
-        assertEquals("nodegetbaseuri07", "http://www.w3.org/DOM/EmployeeID", baseURI);
+        assertEquals("http://www.w3.org/DOM/EmployeeID", baseURI);
     }
 }
 

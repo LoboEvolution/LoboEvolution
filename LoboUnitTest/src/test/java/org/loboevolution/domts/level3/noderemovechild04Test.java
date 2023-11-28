@@ -28,14 +28,14 @@ package org.loboevolution.domts.level3;
 
 
 import org.htmlunit.cssparser.dom.DOMException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -58,7 +58,7 @@ public class noderemovechild04Test extends LoboUnitTest {
         docType = doc.getDoctype();
         removed = doc.removeChild(docType);
         removedDocType = doc.getDoctype();
-        assertNull("noderemovechild04", removedDocType);
+        assertNull(removedDocType);
 
         {
             boolean success = false;
@@ -67,7 +67,7 @@ public class noderemovechild04Test extends LoboUnitTest {
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
             }
-            assertTrue("NOT_FOUND_ERR_noderemovechild04", success);
+            assertTrue(success);
         }
     }
 }

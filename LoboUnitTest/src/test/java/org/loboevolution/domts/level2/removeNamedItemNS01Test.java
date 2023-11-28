@@ -27,13 +27,13 @@
 
 package org.loboevolution.domts.level2;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 /**
@@ -70,9 +70,9 @@ public class removeNamedItemNS01Test extends LoboUnitTest {
         testAddress = (Element) elementList.item(1);
         attributes = testAddress.getAttributes();
         removedNode = attributes.removeNamedItemNS("http://www.usa.com", "domestic");
-        assertNotNull("retval", removedNode);
+        assertNotNull(removedNode);
         newAttr = (Attr) attributes.getNamedItem("dmstc:domestic");
-        assertNull("nodeRemoved", newAttr);
+        assertNull(newAttr);
     }
 }
 

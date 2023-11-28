@@ -27,12 +27,12 @@
 
 package org.loboevolution.domts.level2;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -61,7 +61,7 @@ public class systemId01Test extends LoboUnitTest {
         doc = sampleXmlFile("staffNS.xml");
         docType = doc.getDoctype();
         systemId = docType.getSystemId();
-        assertEquals("systemId", "staffNS.dtd", systemId);
+        assertEquals("staffNS.dtd", systemId);
     }
 }
 

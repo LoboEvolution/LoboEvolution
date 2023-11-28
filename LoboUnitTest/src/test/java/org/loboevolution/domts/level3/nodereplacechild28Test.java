@@ -28,13 +28,13 @@ package org.loboevolution.domts.level3;
 
 
 import org.htmlunit.cssparser.dom.DOMException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Attempt to replace a text node with a text node from an
@@ -61,11 +61,11 @@ public class nodereplacechild28Test extends LoboUnitTest {
         childList = doc.getElementsByTagName("acronym");
         acronym = (Element) childList.item(1);
         betaRef = (EntityReference) acronym.getFirstChild();
-        assertNotNull("betaRefNotNull", betaRef);
+        assertNotNull(betaRef);
         betaText = betaRef.getFirstChild();
-        assertNotNull("betaTextNotNull", betaText);
+        assertNotNull(betaText);
         dallas = (Text) betaRef.getNextSibling();
-        assertNotNull("dallasNotNull", dallas);
+        assertNotNull(dallas);
 
         {
             boolean success = false;
@@ -74,7 +74,7 @@ public class nodereplacechild28Test extends LoboUnitTest {
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }
-            assertTrue("throw_NO_MODIFICATION_ALLOWED_ERR", success);
+            assertTrue(success);
         }
     }
 }

@@ -27,11 +27,11 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -62,10 +62,10 @@ public class nodereplacechild17Test extends LoboUnitTest {
         appendedChild = docFrag.appendChild(cmt);
         replacedCmt = (Comment) docFrag.replaceChild(pi, cmt);
         data = replacedCmt.getData();
-        assertEquals("nodereplacechild17_1", "Comment", data);
+        assertEquals( "Comment", data);
         replacedPi = (ProcessingInstruction) docFrag.replaceChild(cmt, pi);
         target = replacedPi.getTarget();
-        assertEquals("nodereplacechild17_2", "target", target);
+        assertEquals( "target", target);
     }
 }
 

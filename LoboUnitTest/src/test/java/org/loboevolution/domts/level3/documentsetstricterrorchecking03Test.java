@@ -27,11 +27,11 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 
 /**
@@ -50,7 +50,7 @@ public class documentsetstricterrorchecking03Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         doc.setStrictErrorChecking(false);
         strictErrorCheckingValue = doc.getStrictErrorChecking();
-        assertFalse("documentsetstricterrorchecking03", strictErrorCheckingValue);
+        assertFalse(strictErrorCheckingValue);
     }
 }
 

@@ -27,7 +27,7 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.Notation;
 import org.loboevolution.html.node.Document;
@@ -35,7 +35,7 @@ import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.html.node.NamedNodeMap;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Using compareDocumentPosition check if the Entity node precedes the Notation node and the Notation
@@ -63,9 +63,9 @@ public class nodecomparedocumentposition22Test extends LoboUnitTest {
         entity = entitiesMap.getNamedItem("alpha");
         notation = (Notation) notationsMap.getNamedItem("notation1");
         entityPosition = entity.compareDocumentPosition(notation);
-        assertEquals("nodecomparedocumentpositionFollowing22", 4, entityPosition);
+        assertEquals(4, entityPosition);
         notationPosition = (int) notation.compareDocumentPosition(entity);
-        assertEquals("nodecomparedocumentpositionPRECEDING22", 2, notationPosition);
+        assertEquals(2, notationPosition);
     }
 }
 

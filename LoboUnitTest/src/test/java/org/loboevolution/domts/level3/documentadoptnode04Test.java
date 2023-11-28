@@ -27,11 +27,11 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -78,11 +78,11 @@ public class documentadoptnode04Test extends LoboUnitTest {
             nodePrefix = adoptedAttr.getPrefix();
             attrOwnerElem = adoptedAttr.getOwnerElement();
             isSpecified = adoptedAttr.isSpecified();
-            assertEquals("documentadoptnode04_nodeName", "xml:lang", nodeName);
-            assertEquals("documentadoptnode04_namespaceURI", xmlNS, nodeNamespaceURI);
-            assertEquals("documentadoptnode04_prefix", "xml", nodePrefix);
-            assertNull("documentadoptnode04_ownerDoc", attrOwnerElem);
-            assertTrue("documentadoptnode04_specified", isSpecified);
+            assertEquals( "xml:lang", nodeName);
+            assertEquals(xmlNS, nodeNamespaceURI);
+            assertEquals("xml", nodePrefix);
+            assertNull(attrOwnerElem);
+            assertTrue(isSpecified);
         }
     }
 }

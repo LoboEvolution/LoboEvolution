@@ -27,13 +27,13 @@
 
 package org.loboevolution.domts.level2;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 /**
@@ -61,7 +61,7 @@ public class attrgetownerelement03Test extends LoboUnitTest {
         doc = sampleXmlFile("staffNS.xml");
         attr = doc.createAttributeNS("http://www.w3.org/DOM", "dom:attr");
         ownerElement = attr.getOwnerElement();
-        assertNull("attrgetownerelement03", ownerElement);
+        assertNull(ownerElement);
     }
 }
 

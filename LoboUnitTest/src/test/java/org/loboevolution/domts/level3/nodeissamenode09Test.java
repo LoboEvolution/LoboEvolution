@@ -27,14 +27,14 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.html.node.NamedNodeMap;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 
 /**
@@ -57,7 +57,7 @@ public class nodeissamenode09Test extends LoboUnitTest {
         entitiesMap = docType.getEntities();
         entity = entitiesMap.getNamedItem("alpha");
         isSame = docType.isSameNode(entity);
-        assertFalse("nodeissamenode09", isSame);
+        assertFalse(isSame);
     }
 }
 

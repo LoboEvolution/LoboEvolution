@@ -27,14 +27,14 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -66,7 +66,7 @@ public class nodeisequalnode02Test extends LoboUnitTest {
         doc1 = domImpl.createDocument(rootNS, rootName, nullDocType);
         doc2 = domImpl.createDocument(rootNS, rootName, nullDocType);
         isEqual = doc1.isEqualNode(doc2);
-        assertTrue("nodeisequalnode02", isEqual);
+        assertTrue(isEqual);
     }
 }
 

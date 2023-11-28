@@ -27,14 +27,14 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.DOMConfiguration;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.DOMStringList;
 import org.loboevolution.html.node.Document;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -74,14 +74,14 @@ public class domconfigparameternames01Test extends LoboUnitTest {
         boolean canSet;
         doc = sampleXmlFile("barfoo.xml");
         config = doc.getDomConfig();
-        assertNotNull("configNotNull", config);
+        assertNotNull(config);
         parameterNames = config.getParameterNames();
-        assertNotNull("parameterNamesNotNull", parameterNames);
+        assertNotNull(parameterNames);
         for (int indexN1008C = 0; indexN1008C < parameterNames.getLength(); indexN1008C++) {
             parameterName = parameterNames.item(indexN1008C);
             paramValue = config.getParameter(parameterName);
             canSet = config.canSetParameter(parameterName, paramValue);
-            assertTrue("canSetToDefaultValue", canSet);
+            assertTrue(canSet);
             config.setParameter(parameterName, paramValue);
 
             if (
@@ -96,7 +96,7 @@ public class domconfigparameternames01Test extends LoboUnitTest {
                 matchCount += 1;
             }
         }
-        assertEquals("definedParameterCount", 16, matchCount);
+        assertEquals(16, matchCount);
     }
 }
 

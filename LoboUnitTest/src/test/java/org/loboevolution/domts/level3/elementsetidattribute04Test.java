@@ -27,7 +27,7 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Attr;
@@ -35,7 +35,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -66,13 +66,13 @@ public class elementsetidattribute04Test extends LoboUnitTest {
         attributesMap = nameElem.getAttributes();
         attr = (Attr) attributesMap.getNamedItem("hasMiddleName");
         id = attr.isId();
-        assertTrue("elementsetidattributeIsIdTrue03", id);
+        assertTrue(id);
         elem = doc.getElementById("Antoine");
         elemName = elem.getTagName();
-        assertEquals("elementsetidattributeGetElementById03", "STRONG", elemName);
+        assertEquals("STRONG", elemName);
         nameElem.setIdAttribute("hasMiddleName", false);
         id = attr.isId();
-        assertFalse("elementsetidattributeIsIdFalse03", id);
+        assertFalse(id);
     }
 }
 

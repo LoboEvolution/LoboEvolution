@@ -27,13 +27,13 @@
 
 package org.loboevolution.domts.level2;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 /**
@@ -66,7 +66,7 @@ public class nodegetownerdocument01Test extends LoboUnitTest {
         domImpl = doc.getImplementation();
         docType = domImpl.createDocumentType("mydoc", nullID, nullID);
         ownerDoc = docType.getOwnerDocument();
-        assertNull("nodegetownerdocument01", ownerDoc);
+        assertNull(ownerDoc);
     }
 }
 

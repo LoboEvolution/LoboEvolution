@@ -27,12 +27,12 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.ProcessingInstruction;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -69,13 +69,13 @@ public class documentcreateprocessinginstructionTest extends LoboUnitTest {
         final int piType;
         doc = sampleXmlFile("staff.xml");
         newPINode = doc.createProcessingInstruction("TESTPI", "This is a new PI node");
-        assertNotNull("createdPINotNull", newPINode);
+        assertNotNull(newPINode);
         piName = newPINode.getNodeName();
-        assertEquals("name", "TESTPI", piName);
+        assertEquals("TESTPI", piName);
         piValue = newPINode.getNodeValue();
-        assertEquals("value", "This is a new PI node", piValue);
+        assertEquals("This is a new PI node", piValue);
         piType = newPINode.getNodeType();
-        assertEquals("type", 7, piType);
+        assertEquals(7, piType);
     }
 }
 

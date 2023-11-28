@@ -27,12 +27,12 @@
 
 package org.loboevolution.domts.level2;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -62,7 +62,7 @@ public class documentcreateattributeNS01Test extends LoboUnitTest {
         doc = sampleXmlFile("staffNS.xml");
         attribute = doc.createAttributeNS(namespaceURI, qualifiedName);
         final String nodeName = attribute.getNodeName();
-        assertEquals("documentcreateattributeNS01", "test", nodeName);
+        assertEquals("test", nodeName);
     }
 }
 

@@ -27,13 +27,13 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Checks that element content whitespace is not added to textContent.  Determination
@@ -54,7 +54,7 @@ public class nodegettextcontent19Test extends LoboUnitTest {
         elemList = doc.getElementsByTagName("body");
         elem = (Element) elemList.item(0);
         textContent = elem.getTextContent();
-        assertEquals("textContent", "bar", textContent);
+        assertEquals("bar", textContent);
     }
 }
 

@@ -27,11 +27,11 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -75,7 +75,7 @@ public class documentadoptnode31Test extends LoboUnitTest {
 
         if ((adoptedText != null)) {
             nodeValue = adoptedText.getNodeValue();
-            assertEquals("documentadoptnode31", "new Document.adoptNode test for a TEXT_NODE", nodeValue);
+            assertEquals( "new Document.adoptNode test for a TEXT_NODE", nodeValue);
         }
     }
 }

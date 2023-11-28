@@ -27,14 +27,14 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.nodeimpl.DOMErrorMonitor;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -70,20 +70,20 @@ public class documentnormalizedocument04Test extends LoboUnitTest {
         /*DOMErrorMonitor */
         domConfig.setParameter("error-handler", errorMonitor);
         doc.normalizeDocument();
-        assertTrue("normalizationError", errorMonitor.assertLowerSeverity(2));
+        assertTrue(errorMonitor.assertLowerSeverity(2));
         pList = doc.getElementsByTagName("p");
         elem = (Element) pList.item(0);
         lastChild = elem.getLastChild();
         nodeName = lastChild.getNodeName();
-        assertEquals("documentnormalizedocument04_true", "#comment", nodeName);
+        assertEquals( "#comment", nodeName);
         domConfig.setParameter("comments", Boolean.FALSE);
         doc.normalizeDocument();
-        assertTrue("normalization2Error", errorMonitor.assertLowerSeverity(2));
+        assertTrue( errorMonitor.assertLowerSeverity(2));
         pList = doc.getElementsByTagName("p");
         elem = (Element) pList.item(0);
         lastChild = elem.getLastChild();
         nodeName = lastChild.getNodeName();
-        assertEquals("hasChildText", "#text", nodeName);
+        assertEquals("#text", nodeName);
     }
 }
 

@@ -27,7 +27,7 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.DOMErrorHandler;
@@ -38,8 +38,8 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.http.UserAgentContext;
 
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -69,11 +69,11 @@ public class domconfigerrorhandler2Test extends LoboUnitTest {
         domConfig = doc.getDomConfig();
         /*DOMErrorHandler */
         canSet = domConfig.canSetParameter(parameter, errorHandler);
-        assertTrue("canSetNull", canSet);
+        assertTrue(canSet);
         /*DOMErrorHandler */
         domConfig.setParameter(parameter, errorHandler);
         state = (DOMErrorHandler) domConfig.getParameter(parameter);
-        assertNull("errorHandlerIsNull", state);
+        assertNull(state);
     }
 }
 

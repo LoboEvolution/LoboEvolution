@@ -27,7 +27,7 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Attr;
@@ -35,7 +35,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Invoke lookupNamespaceURI on the title attribute node of the acronym node with
@@ -61,7 +61,7 @@ public void runTest(){
         attributesMap=elem.getAttributes();
         attr=(Attr)attributesMap.getNamedItem("xsi:noNamespaceSchemaLocation");
         namespaceURI=attr.lookupNamespaceURI("dmstc");
-        assertEquals("nodelookupnamespaceuri17","http://www.netzero.com",namespaceURI);
+        assertEquals("http://www.netzero.com",namespaceURI);
         }
         }
 

@@ -27,12 +27,12 @@
 
 package org.loboevolution.domts.level2;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -64,7 +64,7 @@ public class getElementsByTagNameNS05Test extends LoboUnitTest {
         final HTMLCollection elementList;
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagNameNS(namespaceURI, localName);
-        assertEquals( "throw_Size", 0, elementList.getLength());
+        assertEquals( 0, elementList.getLength());
     }
 }
 

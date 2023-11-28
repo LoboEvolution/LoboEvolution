@@ -27,12 +27,12 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Comment;
 import org.loboevolution.html.node.Document;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -62,11 +62,11 @@ public class hc_documentcreatecommentTest extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         newCommentNode = doc.createComment("This is a new Comment node");
         newCommentValue = newCommentNode.getNodeValue();
-        assertEquals("value", "This is a new Comment node", newCommentValue);
+        assertEquals( "This is a new Comment node", newCommentValue);
         newCommentName = newCommentNode.getNodeName();
-        assertEquals("STRONG", "#comment", newCommentName);
+        assertEquals("#comment", newCommentName);
         newCommentType = newCommentNode.getNodeType();
-        assertEquals("type", 8, newCommentType);
+        assertEquals(8, newCommentType);
     }
 }
 

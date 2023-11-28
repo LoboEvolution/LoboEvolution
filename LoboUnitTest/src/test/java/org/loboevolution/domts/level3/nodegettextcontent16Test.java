@@ -27,11 +27,11 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * The method getTextContent returns the text content of this node and its descendants.
@@ -75,7 +75,7 @@ public class nodegettextcontent16Test extends LoboUnitTest {
         appendedChild = docFrag.appendChild(elem);
         doc.normalizeDocument();
         textContent = docFrag.getTextContent();
-        assertEquals("nodegettextcontent16", "Text βCData", textContent);
+        assertEquals( "Text βCData", textContent);
     }
 }
 

@@ -26,7 +26,7 @@
 
 package org.loboevolution.domts.level3;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.Notation;
 import org.loboevolution.html.node.Document;
@@ -34,7 +34,7 @@ import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.html.node.NamedNodeMap;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * Using isDefaultNamespace on a Notation and Entity node with the value of the namespaceURI parameter
@@ -63,8 +63,8 @@ public class nodeisdefaultnamespace04Test extends LoboUnitTest {
         entity = entitiesMap.getNamedItem("alpha");
         notation = (Notation) notationsMap.getNamedItem("notation1");
         isDefault = entity.isDefaultNamespace(nullNSURI);
-        assertFalse("nodeisdefaultnamespace04_1", isDefault);
+        assertFalse(isDefault);
         isDefault = notation.isDefaultNamespace(nullNSURI);
-        assertFalse("nodeisdefaultnamespace04_2", isDefault);
+        assertFalse(isDefault);
     }
 }

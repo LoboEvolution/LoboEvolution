@@ -27,13 +27,13 @@
 
 package org.loboevolution.domts.level2;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -63,7 +63,7 @@ public class elementhasattribute04Test extends LoboUnitTest {
         attribute = doc.createAttribute("domestic");
         element.setAttributeNode(attribute);
         state = element.hasAttribute("domestic");
-        assertTrue("elementhasattribute04", state);
+        assertTrue(state);
     }
 }
 

@@ -28,14 +28,14 @@
 package org.loboevolution.domts.level2;
 
 import org.htmlunit.cssparser.dom.DOMException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -78,7 +78,7 @@ public class elementsetattributenodens03Test extends LoboUnitTest {
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.INUSE_ATTRIBUTE_ERR);
             }
-            assertTrue("elementsetattributenodens03", success);
+            assertTrue(success);
         }
     }
 }

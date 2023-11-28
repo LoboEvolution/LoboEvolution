@@ -27,7 +27,7 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Attr;
@@ -35,8 +35,8 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Declares the attribute specified by local name and namespace URI to be of type ID. If the value of the
@@ -71,17 +71,17 @@ public class elementsetidattributens11Test extends LoboUnitTest {
         attributesMap = pElem1.getAttributes();
         attr = (Attr) attributesMap.getNamedItem("xmlns:dmstc");
         id = attr.isId();
-        assertTrue("elementsetidattributensIsId1True11", id);
+        assertTrue(id);
         attributesMap = pElem2.getAttributes();
         attr = (Attr) attributesMap.getNamedItem("xmlns:dmstc");
         id = attr.isId();
-        assertTrue("elementsetidattributensIsId2True11", id);
+        assertTrue(id);
         elem = doc.getElementById("http://www.netzero.com");
         elemName = elem.getTagName();
-        assertEquals("elementsetidattributens1GetElementById11", "P", elemName);
+        assertEquals("P", elemName);
         elem = doc.getElementById("http://www.usa.com");
         elemName = elem.getTagName();
-        assertEquals("elementsetidattributens2GetElementById11", "P", elemName);
+        assertEquals("P", elemName);
     }
 }
 

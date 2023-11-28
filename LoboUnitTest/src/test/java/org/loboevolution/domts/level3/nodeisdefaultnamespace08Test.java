@@ -27,13 +27,13 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * Using isDefaultNamespace on an Element node with a prefix, which has a namespace
@@ -55,7 +55,7 @@ public class nodeisdefaultnamespace08Test extends LoboUnitTest {
         elemList = doc.getElementsByTagName("strong");
         elem = (Element) elemList.item(3);
         isDefault = elem.isDefaultNamespace("http://www.altavista.com");
-        assertFalse("nodeisdefaultnamespace08", isDefault);
+        assertFalse(isDefault);
     }
 }
 

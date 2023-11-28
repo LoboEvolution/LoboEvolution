@@ -27,14 +27,14 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -71,11 +71,11 @@ public class hc_elementcreatenewattributeTest extends LoboUnitTest {
         testAddress = (Element) elementList.item(0);
         newAttribute = doc.createAttribute("lang");
         oldAttr = testAddress.setAttributeNode(newAttribute);
-        assertNull("old_attr_doesnt_exist", oldAttr);
+        assertNull(oldAttr);
         districtAttr = testAddress.getAttributeNode("lang");
-        assertNotNull("new_district_accessible", districtAttr);
+        assertNotNull(districtAttr);
         attrVal = testAddress.getAttribute("lang");
-        assertEquals("attr_value", "", attrVal);
+        assertEquals("", attrVal);
     }
 }
 

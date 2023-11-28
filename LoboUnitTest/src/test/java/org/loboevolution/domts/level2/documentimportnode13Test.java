@@ -27,14 +27,14 @@
 
 package org.loboevolution.domts.level2;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeList;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -72,7 +72,7 @@ public class documentimportnode13Test extends LoboUnitTest {
         imported = doc.importNode(employeeElem, false);
         importedList = imported.getChildNodes();
         importedLen = importedList.getLength();
-        assertEquals("documentimportnode13", 0, importedLen);
+        assertEquals(0, importedLen);
     }
 }
 

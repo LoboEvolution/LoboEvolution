@@ -27,13 +27,13 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.ProcessingInstruction;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -56,9 +56,9 @@ public class nodecomparedocumentposition12Test extends LoboUnitTest {
         pi = doc.createProcessingInstruction("PITarget", "PIDATA");
         appendedChild = doc.appendChild(pi);
         documentPosition = doc.compareDocumentPosition(pi);
-        assertEquals("nodecomparedocumentpositionIsContainedFollowing12", 20, documentPosition);
+        assertEquals(20, documentPosition);
         piPosition = pi.compareDocumentPosition(doc);
-        assertEquals("nodecomparedocumentpositionContainsPRECEDING12", 10, piPosition);
+        assertEquals(10, piPosition);
     }
 }
 

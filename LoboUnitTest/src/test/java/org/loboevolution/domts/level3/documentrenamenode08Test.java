@@ -28,12 +28,12 @@ package org.loboevolution.domts.level3;
 
 
 import org.htmlunit.cssparser.dom.DOMException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -75,7 +75,7 @@ public class documentrenamenode08Test extends LoboUnitTest {
         } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.WRONG_DOCUMENT_ERR);
         }
-        assertTrue("documentrenamenode08_WRONG_DOCUMENT_ERR", success);
+        assertTrue(success);
 
     }
 }

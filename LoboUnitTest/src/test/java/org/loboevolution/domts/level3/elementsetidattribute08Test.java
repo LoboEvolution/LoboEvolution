@@ -27,7 +27,7 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Attr;
@@ -35,8 +35,8 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -71,18 +71,18 @@ public class elementsetidattribute08Test extends LoboUnitTest {
         attributesMap = acronymElem1.getAttributes();
         attr = (Attr) attributesMap.getNamedItem("class");
         id = attr.isId();
-        assertTrue("elementsetidattributeIsId1True08", id);
+        assertTrue(id);
         attributesMap = acronymElem2.getAttributes();
         attr = (Attr) attributesMap.getNamedItem("class");
         id = attr.isId();
-        assertTrue("elementsetidattributeIsId2True08", id);
+        assertTrue(id);
         attributesMap = acronymElem3.getAttributes();
         attr = (Attr) attributesMap.getNamedItem("class");
         id = attr.isId();
-        assertTrue("elementsetidattributeIsId3True08", id);
+        assertTrue(id);
         elem = doc.getElementById("No");
         elemName = elem.getTagName();
-        assertEquals("elementsetidattributeGetElementById08", "ACRONYM", elemName);
+        assertEquals("ACRONYM", elemName);
     }
 }
 

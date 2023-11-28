@@ -27,7 +27,7 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Attr;
@@ -35,7 +35,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
 
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 
 /**
@@ -67,7 +67,7 @@ public class AttrNotSpecifiedValueTest extends LoboUnitTest {
         final Element testNode = (Element) addressList.item(1);
         final NamedNodeMap attributes = testNode.getAttributes();
         final Attr streetAttr = (Attr) attributes.getNamedItem("street");
-        assertFalse("streetNotSpecified", streetAttr.isSpecified());
+        assertFalse(streetAttr.isSpecified(), "streetNotSpecified");
     }
 }
 

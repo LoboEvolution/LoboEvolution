@@ -27,12 +27,12 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 
 /**
@@ -70,7 +70,7 @@ public class textiselementcontentwhitespace04Test extends LoboUnitTest {
             doc.normalizeDocument();
             textNode = (Text) pElem.getFirstChild();
             isElemContentWhitespace = textNode.isElementContentWhitespace();
-            assertFalse("notElemContent", isElemContentWhitespace);
+            assertFalse(isElemContentWhitespace);
         }
     }
 }

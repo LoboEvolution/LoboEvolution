@@ -27,7 +27,7 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.nodeimpl.DOMImplementationImpl;
@@ -35,7 +35,7 @@ import org.loboevolution.html.dom.nodeimpl.bootstrap.DOMImplementationRegistry;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.http.UserAgentContext;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -57,16 +57,16 @@ public class domimplementationregistry10Test extends LoboUnitTest {
         final String nullVersion = null;
 
         final DOMImplementationRegistry domImplRegistry = DOMImplementationRegistry.newInstance();
-        assertNotNull("domImplRegistryNotNull", domImplRegistry);
+        assertNotNull(domImplRegistry);
         domImpl = domImplRegistry.getDOMImplementation("LS");
 
         if ((domImpl == null)) {
             baseImpl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(), true));
             hasFeature = baseImpl.hasFeature("LS", nullVersion);
-            assertFalse("baseImplSupportsLS", hasFeature);
+            assertFalse(hasFeature);
         } else {
             hasFeature = domImpl.hasFeature("LS", nullVersion);
-            assertTrue("hasCore", hasFeature);
+            assertTrue(hasFeature);
         }
     }
 }

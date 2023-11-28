@@ -27,14 +27,14 @@
 
 package org.loboevolution.domts.level2;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -52,7 +52,6 @@ public class elementsetattributenodens02Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -68,7 +67,7 @@ public class elementsetattributenodens02Test extends LoboUnitTest {
         final String nullNS = null;
 
         doc = sampleXmlFile("staffNS.xml");
-        elementList = doc.getElementsByTagName( "address");
+        elementList = doc.getElementsByTagName("address");
         element = (Element) elementList.item(1);
         attribute = element.getAttributeNodeNS(nullNS, "street");
         attributeCloned = (Attr) attribute.cloneNode(true);
@@ -76,8 +75,8 @@ public class elementsetattributenodens02Test extends LoboUnitTest {
         newAttr = element2.setAttributeNodeNS(attributeCloned);
         attrName = newAttr.getNodeName();
         attrValue = newAttr.getNodeValue();
-        assertEquals("elementsetattributenodens02_attrName", "street", attrName);
-        assertEquals("elementsetattributenodens02_attrValue", "Yes", attrValue);
+        assertEquals("street", attrName);
+        assertEquals("Yes", attrValue);
     }
 }
 

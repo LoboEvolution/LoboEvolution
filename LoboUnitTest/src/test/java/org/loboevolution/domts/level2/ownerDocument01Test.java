@@ -27,11 +27,11 @@
 
 package org.loboevolution.domts.level2;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * The "getOwnerDocument()" method returns null if the target
@@ -56,7 +56,7 @@ public class ownerDocument01Test extends LoboUnitTest {
         final Document ownerDocument;
         doc = sampleXmlFile("staff.xml");
         ownerDocument =  doc.getOwnerDocument();
-        assertNull("throw_Null", ownerDocument);
+        assertNull(ownerDocument);
     }
 }
 

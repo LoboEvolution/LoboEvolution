@@ -27,12 +27,12 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 
 /**
@@ -55,13 +55,13 @@ public class nodecomparedocumentposition03Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         docComp = sampleXmlFile("hc_staff.xml");
         documentPosition1 = doc.compareDocumentPosition(docComp);
-        assertEquals("isImplSpecificDisconnected1", 33 & 57, documentPosition1 & 57);
+        assertEquals(33 & 57, documentPosition1 & 57);
         documentPosition2 = docComp.compareDocumentPosition(doc);
-        assertNotEquals("notBothPreceding", documentPosition1 & 2, documentPosition2 & 2);
-        assertNotEquals("notBothFollowing", documentPosition1 & 4, documentPosition2 & 4);
-        assertEquals("isImplSpecificDisconnected2", 33 & 57, documentPosition2 & 57);
+        assertNotEquals(documentPosition1 & 2, documentPosition2 & 2);
+        assertNotEquals(documentPosition1 & 4, documentPosition2 & 4);
+        assertEquals(33 & 57, documentPosition2 & 57);
         documentPosition3 = doc.compareDocumentPosition(docComp);
-        assertEquals("isConsistent", documentPosition1, documentPosition3);
+        assertEquals(documentPosition1, documentPosition3);
     }
 }
 

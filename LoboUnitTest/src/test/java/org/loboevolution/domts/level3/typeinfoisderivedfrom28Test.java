@@ -27,14 +27,14 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.TypeInfo;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -56,17 +56,17 @@ public class typeinfoisderivedfrom28Test extends LoboUnitTest {
         elemList = doc.getElementsByTagName("strong");
         elem = (Element) elemList.item(0);
         typeInfo = elem.getSchemaTypeInfo();
-        assertNotNull("typeInfoNotNull", typeInfo);
+        assertNotNull(typeInfo);
         typeName = typeInfo.getTypeName();
-        assertEquals("typeName", "strongType", typeName);
+        assertEquals("strongType", typeName);
         isDerived = typeInfo.isDerivedFrom("http://www.w3.org/1999/xhtml", "strongType", 1);
-        assertTrue("notDerivedFromSelfRestriction", isDerived);
+        assertTrue(isDerived);
         isDerived = typeInfo.isDerivedFrom("http://www.w3.org/1999/xhtml", "strongType", 14);
-        assertFalse("notDerivedFromSelfOther", isDerived);
+        assertFalse(isDerived);
         isDerived = typeInfo.isDerivedFrom("http://www.w3.org/1999/xhtml", "strongType", 15);
-        assertTrue("notDerivedFromSelfAll", isDerived);
+        assertTrue(isDerived);
         isDerived = typeInfo.isDerivedFrom("http://www.w3.org/1999/xhtml", "strongType", 0);
-        assertTrue("notDerivedFromSelfAny", isDerived);
+        assertTrue(isDerived);
     }
 }
 

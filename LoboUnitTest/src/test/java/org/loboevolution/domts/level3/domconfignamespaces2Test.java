@@ -27,12 +27,12 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.DOMConfiguration;
 import org.loboevolution.html.node.Document;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -52,7 +52,7 @@ public class domconfignamespaces2Test extends LoboUnitTest {
         doc = sampleXmlFile("barfoo.xml");
         domConfig = doc.getDomConfig();
         state = ((Boolean) domConfig.getParameter("namespaces"));
-        assertTrue("namespacesTrue", state);
+        assertTrue(state);
     }
 }
 

@@ -27,11 +27,11 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -70,8 +70,8 @@ public class documentadoptnode35Test extends LoboUnitTest {
         if ((adoptedPI != null)) {
             piTarget = adoptedPI.getTarget();
             piData = adoptedPI.getData();
-            assertEquals("documentadoptnode35_Target", "PITarget", piTarget);
-            assertEquals("documentadoptnode35_Data", "PIData", piData);
+            assertEquals( "PITarget", piTarget);
+            assertEquals( "PIData", piData);
         }
     }
 }

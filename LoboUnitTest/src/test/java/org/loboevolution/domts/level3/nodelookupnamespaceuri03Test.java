@@ -27,12 +27,12 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * Using lookupNamespaceURI on this DocumentType node check if the value returned is Null .
@@ -52,7 +52,7 @@ public class nodelookupnamespaceuri03Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
         namespaceURI = docType.lookupNamespaceURI(nullPrefix);
-        assertNull("nodelookupnamespaceuri03", namespaceURI);
+        assertNull(namespaceURI);
     }
 }
 

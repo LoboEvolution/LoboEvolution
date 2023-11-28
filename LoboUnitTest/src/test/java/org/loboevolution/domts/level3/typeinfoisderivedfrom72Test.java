@@ -27,14 +27,14 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.TypeInfo;
 
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 
 /**
@@ -65,6 +65,6 @@ public class typeinfoisderivedfrom72Test extends LoboUnitTest {
         elem = (Element) elemList.item(0);
         elemTypeInfo = elem.getSchemaTypeInfo();
         retValue = elemTypeInfo.isDerivedFrom("http://www.w3.org/1999/xhtml", "field", 12);
-        assertFalse("isDerived", retValue);
+        assertFalse(retValue);
     }
 }

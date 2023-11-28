@@ -27,12 +27,12 @@
 
 package org.loboevolution.domts.level2;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DOMImplementation;
 
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 
 /**
@@ -61,7 +61,7 @@ public class domimplementationhasfeature02Test extends LoboUnitTest {
         
         domImpl = doc.getImplementation();
         success = domImpl.hasFeature("Blah Blah", "");
-        assertFalse("domimplementationhasfeature02", success);
+        assertFalse(success);
     }
 }
 

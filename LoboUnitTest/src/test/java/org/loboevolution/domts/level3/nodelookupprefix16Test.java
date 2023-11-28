@@ -27,13 +27,13 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 /**
@@ -57,7 +57,7 @@ public class nodelookupprefix16Test extends LoboUnitTest {
         attr = doc.createAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:lang");
         attNode = elem.setAttributeNodeNS(attr);
         prefix = attr.lookupPrefix("http://www.w3.org/XML/1998/namespace");
-        assertNull("nodelookupprefix16", prefix);
+        assertNull(prefix);
     }
 }
 

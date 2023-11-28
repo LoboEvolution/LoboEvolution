@@ -27,15 +27,15 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -66,8 +66,8 @@ public class attrisid07Test extends LoboUnitTest {
         acronymElem.setAttributeNS("http://www.w3.org/DOM", "dom3:newAttr", "null");
         acronymElem.setIdAttributeNS("http://www.w3.org/DOM", "newAttr", true);
         attr = acronymElem.getAttributeNodeNS("http://www.w3.org/DOM", "newAttr");
-        assertTrue("AttrIsIDTrue07_1", attr.isId());
+        assertTrue(attr.isId());
         attrImported = (Attr) doc.importNode(attr, false);
-        assertFalse("AttrIsID07_isFalseforImportedNode", attrImported.isId());
+        assertFalse(attrImported.isId());
     }
 }

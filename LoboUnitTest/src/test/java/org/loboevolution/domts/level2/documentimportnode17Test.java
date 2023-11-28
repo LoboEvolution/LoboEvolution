@@ -27,12 +27,12 @@
 
 package org.loboevolution.domts.level2;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -69,7 +69,7 @@ public class documentimportnode17Test extends LoboUnitTest {
         commentToImport = doc.createComment("Document.importNode test for a COMMENT_NODE");
         commentImport = doc.importNode(commentToImport, true);
         nodeValue = commentImport.getNodeValue();
-        assertEquals("documentimportnode17", "Document.importNode test for a COMMENT_NODE", nodeValue);
+        assertEquals("Document.importNode test for a COMMENT_NODE", nodeValue);
     }
 }
 

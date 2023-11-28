@@ -27,13 +27,13 @@
 
 package org.loboevolution.domts.level2;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -64,7 +64,7 @@ public class elementgetattributens02Test extends LoboUnitTest {
         childList = doc.getElementsByTagName( "employee");
         element = (Element) childList.item(1);
         attrValue = element.getAttributeNS(nullNS, "defaultAttr");
-        assertEquals("elementgetattributens02", "defaultVal", attrValue);
+        assertEquals("defaultVal", attrValue);
     }
 }
 

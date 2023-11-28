@@ -27,14 +27,14 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.Notation;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.html.node.NamedNodeMap;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -60,7 +60,7 @@ public class nodeissamenode08Test extends LoboUnitTest {
         notation1 = (Notation) entitiesMap.getNamedItem("notation1");
         notation2 = (Notation) entitiesMap.getNamedItem("notation1");
         isSame = notation1.isSameNode(notation2);
-        assertTrue("nodeissamenode08", isSame);
+        assertTrue(isSame);
     }
 }
 

@@ -28,7 +28,7 @@ package org.loboevolution.domts.level3;
 
 
 import org.htmlunit.cssparser.dom.DOMException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
@@ -36,8 +36,8 @@ import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.Text;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -65,7 +65,7 @@ public class noderemovechild17Test extends LoboUnitTest {
         child = (Text) parent.getFirstChild();
         removed = (Text) parent.removeChild(child);
         removedValue = removed.getNodeValue();
-        assertEquals("noderemovechild17", "EMP0001", removedValue);
+        assertEquals("EMP0001", removedValue);
 
         {
             boolean success = false;
@@ -74,7 +74,7 @@ public class noderemovechild17Test extends LoboUnitTest {
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
             }
-            assertTrue("throw_NOT_FOUND_ERR", success);
+            assertTrue(success);
         }
     }
 }

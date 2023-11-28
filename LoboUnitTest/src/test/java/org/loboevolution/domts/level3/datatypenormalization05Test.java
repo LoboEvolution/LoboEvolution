@@ -27,7 +27,7 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.nodeimpl.DOMErrorMonitor;
@@ -35,8 +35,8 @@ import org.loboevolution.html.node.DOMConfiguration;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -78,29 +78,29 @@ public class datatypenormalization05Test extends LoboUnitTest {
             /*DOMErrorMonitor */
             domConfig.setParameter("error-handler", errorMonitor);
             doc.normalizeDocument();
-            assertTrue("normalizeError", errorMonitor.assertLowerSeverity(2));
+            assertTrue(errorMonitor.assertLowerSeverity(2));
             elemList = doc.getElementsByTagNameNS("http://www.w3.org/2001/DOM-Test-Suite/Level-3/datatype_normalization", "data:dateTime");
             element = (Element) elemList.item(0);
             str = element.getAttribute("data:value");
-            assertEquals("firstValue", "2004-01-21T15:30:00-05:00", str);
+             assertEquals( "2004-01-21T15:30:00-05:00", str);
             str = element.getAttribute("data:union");
-            assertEquals("firstUnion", "2004-01-21T20:30:00-05:00", str);
+             assertEquals( "2004-01-21T20:30:00-05:00", str);
             str = element.getTextContent();
-            assertEquals("firstList", "2004-01-21T15:30:00 2004-01-21T15:30:00Z", str);
+             assertEquals( "2004-01-21T15:30:00 2004-01-21T15:30:00Z", str);
             element = (Element) elemList.item(1);
             str = element.getAttribute("data:value");
-            assertEquals("secondValue", "2004-01-21T15:30:00.0000-05:00", str);
+             assertEquals( "2004-01-21T15:30:00.0000-05:00", str);
             str = element.getAttribute("data:union");
-            assertEquals("secondUnion", "2004-01-21T15:30:00.0000-05:00", str);
+             assertEquals( "2004-01-21T15:30:00.0000-05:00", str);
             str = element.getTextContent();
-            assertEquals("secondList", "2004-01-21T15:30:00.0000", str);
+             assertEquals( "2004-01-21T15:30:00.0000", str);
             element = (Element) elemList.item(2);
             str = element.getAttribute("data:value");
-            assertEquals("thirdValue", "2004-01-21T15:30:00.0001-05:00", str);
+             assertEquals( "2004-01-21T15:30:00.0001-05:00", str);
             str = element.getAttribute("data:union");
-            assertEquals("thirdUnion", "2004-01-21T15:30:00.0001-05:00", str);
+            assertEquals( "2004-01-21T15:30:00.0001-05:00", str);
             str = element.getTextContent();
-            assertEquals("thirdList", "2004-01-21T15:30:00.0001", str);
+            assertEquals( "2004-01-21T15:30:00.0001", str);
         }
     }
 }

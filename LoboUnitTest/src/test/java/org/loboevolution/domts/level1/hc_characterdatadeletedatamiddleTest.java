@@ -27,14 +27,14 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.CharacterData;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -72,7 +72,7 @@ public class hc_characterdatadeletedatamiddleTest extends LoboUnitTest {
         child = (CharacterData) nameNode.getFirstChild();
         child.deleteData(16, 8);
         childData = child.getData();
-        assertEquals("characterdataDeleteDataMiddleAssert", "1230 North Ave. Texas 98551", childData);
+        assertEquals("1230 North Ave. Texas 98551", childData);
     }
 }
 

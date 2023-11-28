@@ -28,15 +28,15 @@
 package org.loboevolution.domts.level2;
 
 import org.htmlunit.cssparser.dom.DOMException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -64,7 +64,7 @@ public class nodesetprefix04Test extends LoboUnitTest {
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagName("employee");
         element = (Element) elementList.item(1);
-        assertNotNull("empEmployeeNotNull", element);
+        assertNotNull(element);
         attribute = element.getAttributeNodeNS(null, "defaultAttr");
         boolean success = false;
         try {
@@ -72,7 +72,7 @@ public class nodesetprefix04Test extends LoboUnitTest {
         } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NAMESPACE_ERR);
         }
-        assertTrue("nodesetprefix04", success);
+        assertTrue(success);
     }
 }
 

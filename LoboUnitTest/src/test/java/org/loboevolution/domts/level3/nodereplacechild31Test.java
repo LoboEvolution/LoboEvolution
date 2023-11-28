@@ -28,13 +28,13 @@ package org.loboevolution.domts.level3;
 
 
 import org.htmlunit.cssparser.dom.DOMException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Using replaceChild on an Element node that is the replacement Text of an EntityReference
@@ -61,9 +61,9 @@ public class nodereplacechild31Test extends LoboUnitTest {
         elem = (Element) childList.item(2);
         ent4Ref = (EntityReference) elem.getFirstChild();
         span = (Element) ent4Ref.getFirstChild();
-        assertNotNull("spanNotNull", span);
+        assertNotNull(span);
         spanText = (Text) span.getFirstChild();
-        assertNotNull("spanTextNotNull", spanText);
+        assertNotNull(spanText);
         newChild = doc.createElementNS("http://www.w3.org/1999/xhtml", "xhtml:p");
 
         {
@@ -73,7 +73,7 @@ public class nodereplacechild31Test extends LoboUnitTest {
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }
-            assertTrue("throw_NO_MODIFICATION_ALLOWED_ERR", success);
+            assertTrue(success);
         }
     }
 }

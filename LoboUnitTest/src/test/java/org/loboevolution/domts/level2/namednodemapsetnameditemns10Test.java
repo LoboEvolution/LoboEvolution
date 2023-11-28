@@ -28,13 +28,13 @@
 package org.loboevolution.domts.level2;
 
 import org.htmlunit.cssparser.dom.DOMException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -68,7 +68,7 @@ public class namednodemapsetnameditemns10Test extends LoboUnitTest {
         doc = sampleXmlFile("staffNS.xml");
         docType = doc.getDoctype();
         entities = docType.getEntities();
-        assertNotNull("entitiesNotNull", entities);
+        assertNotNull(entities);
         entity = (EntityReference) entities.getNamedItem("ent1");
         elementList = doc.getElementsByTagName( "address");
         element = (Element) elementList.item(0);
@@ -81,7 +81,7 @@ public class namednodemapsetnameditemns10Test extends LoboUnitTest {
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.HIERARCHY_REQUEST_ERR);
             }
-            assertTrue("throw_HIERARCHY_REQUEST_ERR", success);
+            assertTrue(success);
         }
     }
 }

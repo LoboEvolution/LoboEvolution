@@ -27,8 +27,8 @@
 package org.loboevolution.junit;
 
 import org.htmlunit.cssparser.dom.DOMException;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.html.dom.HTMLCollection;
@@ -41,7 +41,7 @@ import org.loboevolution.html.node.*;
 import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.http.UserAgentContext;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class DOMElementTest extends LoboUnitTest {
 
@@ -49,7 +49,7 @@ public class DOMElementTest extends LoboUnitTest {
 
     private static DOMImplementationImpl domImpl;
 
-    @BeforeClass
+    @BeforeAll
     public static void setUpBeforeClass() {
         final UserAgentContext context = new UserAgentContext(new LocalHtmlRendererConfig(), true);
         context.setUserAgentEnabled(false);
@@ -142,7 +142,7 @@ public class DOMElementTest extends LoboUnitTest {
             success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
         }
 
-        assertTrue("throw_NOT_FOUND_ERR", success);
+        assertTrue(success, "throw_NOT_FOUND_ERR");
         assertTrue(body.hasAttribute("id"));
         idattr = body.removeAttributeNode(idattr);
         assertNull(idattr.getOwnerElement());
@@ -174,7 +174,7 @@ public class DOMElementTest extends LoboUnitTest {
         } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
         }
-        assertTrue("throw_NOT_FOUND_ERR", success);
+        assertTrue(success, "throw_NOT_FOUND_ERR");
         assertTrue(svg.hasAttributeNS(Document.NAMESPACE_SVG, "version"));
         svg.removeAttributeNS(Document.NAMESPACE_SVG, "version");
         assertFalse(svg.hasAttributeNS(Document.NAMESPACE_SVG, "version"));

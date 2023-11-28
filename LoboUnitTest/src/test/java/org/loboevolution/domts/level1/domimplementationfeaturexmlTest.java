@@ -27,12 +27,12 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DOMImplementation;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -56,7 +56,7 @@ public class domimplementationfeaturexmlTest extends LoboUnitTest {
         doc = sampleXmlFile("staff.xml");
         domImpl = doc.getImplementation();
         state = domImpl.hasFeature("xml", "1.0");
-        assertTrue("hasXML1", state);
+        assertTrue(state);
     }
 }
 

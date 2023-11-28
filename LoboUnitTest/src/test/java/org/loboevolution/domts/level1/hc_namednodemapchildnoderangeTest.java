@@ -27,7 +27,7 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
@@ -35,7 +35,7 @@ import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -69,14 +69,14 @@ public class hc_namednodemapchildnoderangeTest extends LoboUnitTest {
         testEmployee = (Element) elementList.item(2);
         attributes = testEmployee.getAttributes();
         length = attributes.getLength();
-        assertEquals("htmlLength", 2, length);
+        assertEquals(2, length);
 
         child = attributes.item(0);
-        assertNotNull("attr0", child);
+        assertNotNull(child);
         child = attributes.item(1);
-        assertNotNull("attr1", child);
+        assertNotNull(child);
         child = attributes.item(3);
-        assertNull("attr3", child);
+        assertNull(child);
     }
 
 }

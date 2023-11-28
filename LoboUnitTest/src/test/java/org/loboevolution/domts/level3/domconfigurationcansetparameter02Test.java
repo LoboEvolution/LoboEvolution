@@ -27,7 +27,7 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.DOMConfiguration;
@@ -35,8 +35,8 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeList;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -65,17 +65,17 @@ public class domconfigurationcansetparameter02Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         domConfig = doc.getDomConfig();
         canSet = domConfig.canSetParameter("cdata-sections", Boolean.FALSE);
-        assertTrue("domconfigurationcansetparameter02_1", canSet);
+        assertTrue(canSet);
         doc.normalizeDocument();
         strongList = doc.getElementsByTagNameNS("*", "strong");
         strongElem = strongList.item(1);
         childList = strongElem.getChildNodes();
         cdata1 = childList.item(1);
         nodeType = cdata1.getNodeType();
-        assertEquals("domconfigurationcansetparameter02_2", 4, nodeType);
+        assertEquals(4, nodeType);
         cdata2 = childList.item(3);
         nodeType = cdata2.getNodeType();
-        assertEquals("domconfigurationcansetparameter02_3", 4, nodeType);
+        assertEquals(4, nodeType);
     }
 }
 

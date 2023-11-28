@@ -27,11 +27,11 @@
 
 package org.loboevolution.domts.level2;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -95,7 +95,7 @@ public class nodenormalize01Test extends LoboUnitTest {
         comment = newDoc.createComment("comment");
         pi = newDoc.createProcessingInstruction("PITarget", "PIData");
         entRef = newDoc.createEntityReference("EntRef");
-        assertNotNull("createdEntRefNotNull", entRef);
+        assertNotNull(entRef);
         documentElement = newDoc.getDocumentElement();
         documentElement.appendChild(element1);
         element2.appendChild(text1);
@@ -136,34 +136,34 @@ public class nodenormalize01Test extends LoboUnitTest {
         element7.appendChild(text3);
         element1.appendChild(element7);
         elementList = element1.getChildNodes();
-        assertEquals( "nodeNormalize01_1Bef", 6, elementList.getLength());
+        assertEquals(6, elementList.getLength());
         elementList = element2.getChildNodes();
-        assertEquals( "nodeNormalize01_2Bef", 3, elementList.getLength());
+        assertEquals(3, elementList.getLength());
         elementList = element3.getChildNodes();
-        assertEquals( "nodeNormalize01_3Bef", 3, elementList.getLength());
+        assertEquals(3, elementList.getLength());
         elementList = element4.getChildNodes();
-        assertEquals( "nodeNormalize01_4Bef", 3, elementList.getLength());
+        assertEquals(3, elementList.getLength());
         elementList = element5.getChildNodes();
-        assertEquals( "nodeNormalize01_5Bef", 3, elementList.getLength());
+        assertEquals(3, elementList.getLength());
         elementList = element6.getChildNodes();
-        assertEquals( "nodeNormalize01_6Bef", 3, elementList.getLength());
+        assertEquals(3, elementList.getLength());
         elementList = element7.getChildNodes();
-        assertEquals( "nodeNormalize01_7Bef", 4, elementList.getLength());
+        assertEquals( 4, elementList.getLength());
         newDoc.normalize();
         elementList = element1.getChildNodes();
-        assertEquals( "nodeNormalize01_1Aft", 6, elementList.getLength());
+        assertEquals(6, elementList.getLength());
         elementList = element2.getChildNodes();
-        assertEquals( "nodeNormalize01_2Aft", 1, elementList.getLength());
+        assertEquals(  1, elementList.getLength());
         elementList = element3.getChildNodes();
-        assertEquals( "nodeNormalize01_3Aft", 2, elementList.getLength());
+        assertEquals(2, elementList.getLength());
         elementList = element4.getChildNodes();
-        assertEquals( "nodeNormalize01_4Aft", 2, elementList.getLength());
+        assertEquals(2, elementList.getLength());
         elementList = element5.getChildNodes();
-        assertEquals( "nodeNormalize01_5Aft", 2, elementList.getLength());
+        assertEquals(2, elementList.getLength());
         elementList = element6.getChildNodes();
-        assertEquals( "nodeNormalize01_6Aft", 2, elementList.getLength());
+        assertEquals(2, elementList.getLength());
         elementList = element7.getChildNodes();
-        assertEquals( "nodeNormalize01_7Aft", 2, elementList.getLength());
+        assertEquals(2, elementList.getLength());
     }
 }
 

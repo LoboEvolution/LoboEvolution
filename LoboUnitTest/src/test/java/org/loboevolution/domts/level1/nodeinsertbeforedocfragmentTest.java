@@ -27,7 +27,7 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
@@ -35,7 +35,7 @@ import org.loboevolution.html.node.DocumentFragment;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeList;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -87,10 +87,10 @@ public class nodeinsertbeforedocfragmentTest extends LoboUnitTest {
         insertedNode = employeeNode.insertBefore(newdocFragment, refChild);
         child = childList.item(3);
         childName = child.getNodeName();
-        assertEquals("childName3", "newChild1", childName);
+        assertEquals("newChild1", childName);
         child = childList.item(4);
         childName = child.getNodeName();
-        assertEquals("childName4", "newChild2", childName);
+        assertEquals( "newChild2", childName);
     }
 }
 

@@ -27,14 +27,14 @@
 
 package org.loboevolution.domts.level2;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -60,9 +60,9 @@ public class nodehasattributes03Test extends LoboUnitTest {
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagName("employee");
         element = (Element) elementList.item(0);
-        assertNotNull("empEmployeeNotNull", element);
+        assertNotNull(element);
         hasAttributes = element.hasAttributes();
-        assertTrue("hasAttributes", hasAttributes);
+        assertTrue(hasAttributes);
     }
 }
 

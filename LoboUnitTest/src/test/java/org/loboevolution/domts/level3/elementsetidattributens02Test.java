@@ -26,7 +26,7 @@
 
 package org.loboevolution.domts.level3;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Attr;
@@ -34,7 +34,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Invoke setIdAttributeNS on an existing attribute with a namespace URI and a qualified name.  Verify by calling
@@ -64,14 +64,14 @@ public class elementsetidattributens02Test extends LoboUnitTest {
         attributesMap = addressElem.getAttributes();
         attr = (Attr) attributesMap.getNamedItem("xsi:noNamespaceSchemaLocation");
         id = attr.isId();
-        assertTrue("elementsetidattributensIsIdTrue02", id);
+        assertTrue(id);
         elem = doc.getElementById("Yes");
-        assertNotNull("getElementByIDNotNull", elem);
+        assertNotNull(elem);
         elemName = elem.getTagName();
-        assertEquals("elementsetidattributensGetElementById01", "ACRONYM", elemName);
+        assertEquals("ACRONYM", elemName);
         addressElem.setIdAttributeNS(xsiNS, "noNamespaceSchemaLocation", false);
         id = attr.isId();
-        assertFalse("elementsetidattributensIsIdFalse02", id);
+        assertFalse(id);
     }
 }
 

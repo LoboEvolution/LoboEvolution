@@ -27,14 +27,14 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -69,7 +69,7 @@ public class nodeinsertbefore16Test extends LoboUnitTest {
         firstChild = element.getFirstChild();
         insertedElem = (Element) firstChild.getNextSibling();
         nodeName = insertedElem.getNodeName();
-        assertEquals("nodeinsertbefore16", "xhtml:br", nodeName);
+        assertEquals("xhtml:br", nodeName);
     }
 }
 

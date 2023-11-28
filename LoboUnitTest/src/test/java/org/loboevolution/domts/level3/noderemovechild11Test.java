@@ -27,14 +27,14 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentFragment;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.Text;
 
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 /**
@@ -60,7 +60,7 @@ public class noderemovechild11Test extends LoboUnitTest {
         appendedChild = docFrag.appendChild(txt);
         removedChild = docFrag.removeChild(txt);
         removedTxt = (Text) docFrag.getFirstChild();
-        assertNull("noderemovechild11", removedTxt);
+        assertNull(removedTxt);
     }
 }
 

@@ -27,7 +27,7 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Attr;
@@ -35,7 +35,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 /**
@@ -67,7 +67,7 @@ public class hc_nodeattributenodeattributeTest extends LoboUnitTest {
         testAddr = (Element) elementList.item(0);
         addrAttr = testAddr.getAttributes();
         attrNode = (Attr) addrAttr.item(0);
-        assertNotNull("nodeAttributeNodeAttributeAssert1", attrNode);
+        assertNotNull(attrNode);
     }
 }
 

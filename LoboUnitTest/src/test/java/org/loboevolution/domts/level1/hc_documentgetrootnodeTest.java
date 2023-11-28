@@ -27,12 +27,12 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -56,7 +56,7 @@ public class hc_documentgetrootnodeTest extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         root = doc.getDocumentElement();
         rootName = root.getNodeName();
-        assertEquals("docElemName", "HTML", rootName);
+        assertEquals("HTML", rootName);
 
     }
 }

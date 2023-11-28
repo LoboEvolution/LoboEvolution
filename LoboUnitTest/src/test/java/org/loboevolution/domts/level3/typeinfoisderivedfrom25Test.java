@@ -27,14 +27,14 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.TypeInfo;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -56,11 +56,11 @@ public class typeinfoisderivedfrom25Test extends LoboUnitTest {
         elemList = doc.getElementsByTagName("strong");
         elem = (Element) elemList.item(0);
         typeInfo = elem.getSchemaTypeInfo();
-        assertNotNull("typeInfoNotNull", typeInfo);
+        assertNotNull(typeInfo);
         typeName = typeInfo.getTypeName();
-        assertEquals("typeName", "strongType", typeName);
+        assertEquals("strongType", typeName);
         isDerived = typeInfo.isDerivedFrom("http://www.w3.org/2001/XMLSchema", "anySimpleType", 1);
-        assertTrue("derivedFromAnySimpleType", isDerived);
+        assertTrue(isDerived);
     }
 }
 

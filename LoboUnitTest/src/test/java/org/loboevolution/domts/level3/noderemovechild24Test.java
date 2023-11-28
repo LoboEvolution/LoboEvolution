@@ -28,12 +28,12 @@ package org.loboevolution.domts.level3;
 
 
 import org.htmlunit.cssparser.dom.DOMException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -57,9 +57,9 @@ public class noderemovechild24Test extends LoboUnitTest {
         docType = doc.getDoctype();
         entitiesMap = docType.getEntities();
         alphaEntity = entitiesMap.getNamedItem("alpha");
-        assertNotNull("alphaEntityNotNull", alphaEntity);
+        assertNotNull(alphaEntity);
         alphaText = (Text) alphaEntity.getFirstChild();
-        assertNotNull("alphaTextNotNull", alphaText);
+        assertNotNull(alphaText);
 
         {
             boolean success = false;
@@ -68,7 +68,7 @@ public class noderemovechild24Test extends LoboUnitTest {
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }
-            assertTrue("throw_NO_MODIFICATION_ALLOWED_ERR", success);
+            assertTrue(success);
         }
     }
 }

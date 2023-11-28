@@ -27,14 +27,14 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -66,6 +66,6 @@ public class nodelookupprefix02Test extends LoboUnitTest {
         qname = "dom3:" + rootName;
         newDoc = domImpl.createDocument(rootNS, qname, nullDocType);
         prefix = newDoc.lookupPrefix(rootNS);
-        assertEquals("nodelookupprefix02", "dom3", prefix);
+        assertEquals("dom3", prefix);
     }
 }

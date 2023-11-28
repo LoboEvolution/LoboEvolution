@@ -26,11 +26,11 @@
 
 package org.loboevolution.domts.level3;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Invoke the adoptNode method on this document using a new PI node created in a new doc
@@ -76,12 +76,12 @@ public class documentadoptnode36Test extends LoboUnitTest {
             if ((adoptedPI2 != null)) {
                 piTarget = adoptedPI1.getTarget();
                 piData = adoptedPI1.getData();
-                assertEquals("documentadoptnode36_Target1", "PITarget", piTarget);
-                assertEquals("documentadoptnode36_Data1", "PIData", piData);
+                assertEquals("PITarget", piTarget);
+                assertEquals("PIData", piData);
                 piTarget = adoptedPI2.getTarget();
                 piData = adoptedPI2.getData();
-                assertEquals("documentadoptnode36_Target2", "PITarget", piTarget);
-                assertEquals("documentadoptnode36_Data2", "PIData", piData);
+                assertEquals("PITarget", piTarget);
+                assertEquals("PIData", piData);
             }
         }
     }

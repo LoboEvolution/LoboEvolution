@@ -27,7 +27,7 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.DOMImplementation;
@@ -35,8 +35,8 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -82,15 +82,15 @@ public class nodeisequalnode11Test extends LoboUnitTest {
         elem1 = (Element) employeeList.item(0);
         elem2 = (Element) newDoc.importNode(elem1, false);
         isEqual = elem1.isEqualNode(elem2);
-        assertFalse("nodeisequalnodeFalse11", isEqual);
+        assertFalse(isEqual);
         elem3 = (Element) newDoc.importNode(elem1, true);
         isEqual = elem1.isEqualNode(elem3);
 
-        assertFalse("deepImportNoDTD", isEqual);
+        assertFalse(isEqual);
         dupDoc = sampleXmlFile("hc_staff.xml");
         elem4 = (Element) dupDoc.importNode(elem1, true);
         isEqual = elem1.isEqualNode(elem4);
-        assertTrue("deepImportSameDTD", isEqual);
+        assertTrue(isEqual);
     }
 }
 

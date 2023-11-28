@@ -27,12 +27,12 @@
 
 package org.loboevolution.domts.level2;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -77,17 +77,17 @@ public class nodeissupported01Test extends LoboUnitTest {
         for (int indexN10063 = 0; indexN10063 < featuresXML.size(); indexN10063++) {
             featureXML = (String) featuresXML.get(indexN10063);
             success = element.isSupported(featureXML, version);
-            assertTrue("nodeissupported01_XML1", success);
+            assertTrue(success);
             success = element.isSupported(featureXML, version1);
-            assertTrue("nodeissupported01_XML2", success);
+            assertTrue(success);
         }
         for (int indexN1007C = 0; indexN1007C < featuresCore.size(); indexN1007C++) {
             featureCore = (String) featuresCore.get(indexN1007C);
             success = element.isSupported(featureCore, version);
-            assertTrue("nodeissupported01_Core1", success);
+            assertTrue(success);
             success = element.isSupported(featureCore, version1);
             success = element.isSupported(featureCore, version2);
-            assertTrue("nodeissupported01_Core3", success);
+            assertTrue(success);
         }
     }
 }

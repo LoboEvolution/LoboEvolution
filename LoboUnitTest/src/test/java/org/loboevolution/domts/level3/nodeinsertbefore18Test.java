@@ -27,11 +27,11 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * The method insertBefore inserts the node newChild before the existing child node refChild.
@@ -71,7 +71,7 @@ public class nodeinsertbefore18Test extends LoboUnitTest {
         inserted = element.insertBefore(newComment, newElem);
         insertedNode = (Comment) element.getFirstChild();
         data = insertedNode.getData();
-        assertEquals("nodeinsertbefore18", "Comment", data);
+        assertEquals( "Comment", data);
     }
 }
 

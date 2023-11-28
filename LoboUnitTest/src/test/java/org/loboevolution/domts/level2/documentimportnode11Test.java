@@ -27,13 +27,13 @@
 
 package org.loboevolution.domts.level2;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -69,10 +69,10 @@ public class documentimportnode11Test extends LoboUnitTest {
         docElement = doc.getDocumentElement();
         imported = doc.importNode(docElement, false);
         success = imported.hasChildNodes();
-        assertFalse("documentimportnode11", success);
+        assertFalse(success);
         nodeNameImported = imported.getNodeName();
         nodeNameOrig = docElement.getNodeName();
-        assertEquals("documentimportnode11_NodeName", nodeNameImported, nodeNameOrig);
+        assertEquals( nodeNameImported, nodeNameOrig);
     }
 }
 

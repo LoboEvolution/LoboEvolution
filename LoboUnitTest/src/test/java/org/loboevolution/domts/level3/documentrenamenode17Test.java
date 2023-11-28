@@ -27,11 +27,11 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -71,9 +71,9 @@ public class documentrenamenode17Test extends LoboUnitTest {
         nodeName = renamedNode.getNodeName();
         namespaceURI = renamedNode.getNamespaceURI();
         nodeType = renamedNode.getNodeType();
-        assertEquals("documentrenamenode16_nodeName", "xhtml:head", nodeName);
-        assertEquals("documentrenamenode16_nodeType", 1, nodeType);
-        assertEquals("documentrenamenode16_nodeValue", "http://www.w3.org/1999/xhtml", namespaceURI);
+        assertEquals( "xhtml:head", nodeName);
+        assertEquals( 1, nodeType);
+        assertEquals( "http://www.w3.org/1999/xhtml", namespaceURI);
     }
 }
 

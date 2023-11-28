@@ -28,14 +28,14 @@
 package org.loboevolution.domts.level2;
 
 import org.htmlunit.cssparser.dom.DOMException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.html.node.EntityReference;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -74,7 +74,7 @@ public class importNode10Test extends LoboUnitTest {
         doc = sampleXmlFile("staffNS.xml");
         aNewDoc = sampleXmlFile("staffNS.xml");
         entRef = aNewDoc.createEntityReference("entRef1");
-        assertNotNull("createdEntRefNotNull", entRef);
+        assertNotNull(entRef);
 
         boolean success = false;
         try {
@@ -82,15 +82,15 @@ public class importNode10Test extends LoboUnitTest {
         } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.INVALID_MODIFICATION_ERR);
         }
-        assertTrue("throw_INVALID_MODIFICATION_ERR", success);
+        assertTrue(success);
 
         aNode = doc.importNode(entRef, false);
         ownerDocument = aNode.getOwnerDocument();
         docType = ownerDocument.getDoctype();
         system = docType.getSystemId();
-        assertEquals("systemId", "staffNS.dtd", system);
+        assertEquals("staffNS.dtd", system);
         name = aNode.getNodeName();
-        assertEquals("nodeName", "entRef1", name);
+        assertEquals("entRef1", name);
     }
 }
 

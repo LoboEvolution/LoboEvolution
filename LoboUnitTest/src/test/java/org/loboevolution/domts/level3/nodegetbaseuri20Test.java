@@ -27,13 +27,13 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 /**
@@ -56,9 +56,9 @@ public class nodegetbaseuri20Test extends LoboUnitTest {
         doc = sampleXmlFile("external_barfoo.xml");
         pList = doc.getElementsByTagName("p");
         pElem = (Element) pList.item(2);
-        assertNotNull("pElemNotNull", pElem);
+        assertNotNull(pElem);
         baseURI = pElem.getBaseURI();
-        assertURIEquals(new URIEquals("equalsExternalBarFoo", null, null, null, null, "external_widget", null, null, true, baseURI));
+        assertURIEquals(new URIEquals(null, null, null, null, "external_widget", null, null, true, baseURI));
     }
 }
 

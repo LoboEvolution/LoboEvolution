@@ -27,15 +27,15 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Using isDefaultNamespace on a DocumentElement of a new Document node with the value of the
@@ -69,9 +69,9 @@ public class nodeisdefaultnamespace05Test extends LoboUnitTest {
         newDoc = domImpl.createDocument(rootNS, rootName, nullDocType);
         elem = newDoc.getDocumentElement();
         isDefault = elem.isDefaultNamespace(rootNS);
-        assertTrue("nodeisdefaultnamespace05_1", isDefault);
+        assertTrue(isDefault);
         isDefault = elem.isDefaultNamespace(nullNSURI);
-        assertFalse("nodeisdefaultnamespace05_2", isDefault);
+        assertFalse(isDefault);
     }
 }
 

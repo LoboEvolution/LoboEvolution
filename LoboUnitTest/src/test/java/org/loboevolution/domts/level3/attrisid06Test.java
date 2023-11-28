@@ -27,12 +27,12 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 
 /**
@@ -52,7 +52,7 @@ public class attrisid06Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         attr = doc.createAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:lang");
         id = attr.isId();
-        assertFalse("AttrIsIDFalse06", id);
+        assertFalse(id);
     }
 }
 

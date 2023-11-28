@@ -28,12 +28,12 @@ package org.loboevolution.domts.level3;
 
 
 import org.htmlunit.cssparser.dom.DOMException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -64,9 +64,9 @@ public class nodereplacechild38Test extends LoboUnitTest {
         docType = doc.getDoctype();
         entitiesMap = docType.getEntities();
         ent = entitiesMap.getNamedItem("alpha");
-        assertNotNull("alphaEntity", ent);
+        assertNotNull(ent);
         oldChild = (Text) ent.getFirstChild();
-        assertNotNull("alphaText", oldChild);
+        assertNotNull(oldChild);
         cdata = doc.createCDATASection("CDATASection");
 
         {
@@ -76,7 +76,7 @@ public class nodereplacechild38Test extends LoboUnitTest {
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }
-            assertTrue("throw_NO_MODIFICATION_ALLOWED_ERR1", success);
+            assertTrue(success);
         }
         pi = doc.createProcessingInstruction("target", "data");
 
@@ -87,7 +87,7 @@ public class nodereplacechild38Test extends LoboUnitTest {
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }
-            assertTrue("throw_NO_MODIFICATION_ALLOWED_ERR2", success);
+            assertTrue(success);
         }
         comment = doc.createComment("Comment");
 
@@ -98,7 +98,7 @@ public class nodereplacechild38Test extends LoboUnitTest {
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }
-            assertTrue("throw_NO_MODIFICATION_ALLOWED_ERR3", success);
+            assertTrue(success);
         }
         txt = doc.createTextNode("Text");
 
@@ -109,7 +109,7 @@ public class nodereplacechild38Test extends LoboUnitTest {
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }
-            assertTrue("throw_NO_MODIFICATION_ALLOWED_ERR4", success);
+            assertTrue(success);
         }
         elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "xhtml:p");
 
@@ -120,7 +120,7 @@ public class nodereplacechild38Test extends LoboUnitTest {
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }
-            assertTrue("throw_NO_MODIFICATION_ALLOWED_ERR5", success);
+            assertTrue(success);
         }
         entRef = doc.createEntityReference("delta");
 
@@ -131,7 +131,7 @@ public class nodereplacechild38Test extends LoboUnitTest {
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }
-            assertTrue("throw_NO_MODIFICATION_ALLOWED_ERR6", success);
+            assertTrue(success);
         }
     }
 }

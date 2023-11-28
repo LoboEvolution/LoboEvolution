@@ -27,7 +27,7 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.nodeimpl.DOMErrorMonitor;
@@ -35,8 +35,8 @@ import org.loboevolution.html.node.DOMConfiguration;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -78,22 +78,22 @@ public class datatypenormalization02Test extends LoboUnitTest {
             /*DOMErrorMonitor */
             domConfig.setParameter("error-handler", errorMonitor);
             doc.normalizeDocument();
-            assertTrue("normalizeError", errorMonitor.assertLowerSeverity(2));
+            assertTrue(errorMonitor.assertLowerSeverity(2));
             elemList = doc.getElementsByTagNameNS("http://www.w3.org/2001/DOM-Test-Suite/Level-3/datatype_normalization", "data:decimal");
             element = (Element) elemList.item(0);
             str = element.getAttribute("data:value");
-            assertEquals("firstValue", "+0003.141592600", str);
+             assertEquals( "+0003.141592600", str);
             str = element.getAttribute("data:union");
-            assertEquals("firstUnion", "+0003.141592600", str);
+             assertEquals( "+0003.141592600", str);
             str = element.getTextContent();
-            assertEquals("firstList", "+10 .1", str);
+             assertEquals( "+10 .1", str);
             element = (Element) elemList.item(1);
             str = element.getAttribute("data:value");
-            assertEquals("secondValue", "01", str);
+             assertEquals( "01", str);
             str = element.getAttribute("data:union");
-            assertEquals("secondUnion", "01", str);
+             assertEquals( "01", str);
             str = element.getTextContent();
-            assertEquals("secondList", "-.001", str);
+             assertEquals( "-.001", str);
         }
     }
 }

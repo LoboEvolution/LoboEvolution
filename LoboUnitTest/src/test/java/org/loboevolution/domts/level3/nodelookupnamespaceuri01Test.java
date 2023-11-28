@@ -27,11 +27,11 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * Return value from lookupNamespaceURI(null) on a Document node with no default namespace should be null.
@@ -49,7 +49,7 @@ public class nodelookupnamespaceuri01Test extends LoboUnitTest {
 
         doc = sampleXmlFile("barfoo_nodefaultns.xml");
         namespaceURI = doc.lookupNamespaceURI(nullPrefix);
-        assertNull("nodelookupnamespaceuri01", namespaceURI);
+        assertNull(namespaceURI);
     }
 }
 

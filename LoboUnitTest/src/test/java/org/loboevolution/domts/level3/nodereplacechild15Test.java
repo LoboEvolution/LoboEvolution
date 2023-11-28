@@ -27,11 +27,11 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -68,7 +68,7 @@ public class nodereplacechild15Test extends LoboUnitTest {
         appendedChild = docFrag.appendChild(elem2);
         replaced = (Element) docFrag.replaceChild(elem, elem2);
         title = replaced.getAttribute("title");
-        assertEquals("nodereplacechild15", "new element", title);
+        assertEquals( "new element", title);
     }
 }
 

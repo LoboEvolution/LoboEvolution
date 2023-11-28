@@ -28,7 +28,7 @@ package org.loboevolution.domts.level3;
 
 
 import org.htmlunit.cssparser.dom.DOMException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.DOMError;
@@ -39,8 +39,8 @@ import org.loboevolution.http.UserAgentContext;
 
 import java.util.List;
 
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -76,7 +76,7 @@ public class wellformed04Test extends LoboUnitTest {
         } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
         }
-        assertTrue("xml10InvalidName", success);
+        assertTrue(success);
 
 
         try {
@@ -100,7 +100,7 @@ public class wellformed04Test extends LoboUnitTest {
             doc.normalizeDocument();
             errors = errorMonitor.getErrors();
             for (final DOMError domError : errors) {
-                assertNull("noErrorsExpected", domError);
+                assertNull(domError);
             }
         }
     }

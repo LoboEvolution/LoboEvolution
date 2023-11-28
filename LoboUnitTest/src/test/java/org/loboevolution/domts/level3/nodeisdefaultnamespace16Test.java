@@ -27,12 +27,12 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 
 /**
@@ -53,7 +53,7 @@ public class nodeisdefaultnamespace16Test extends LoboUnitTest {
         doc = sampleXmlFile("barfoo.xml");
         attr = doc.createAttributeNS("http://www.w3.org/XML/1998/namespace", "lang");
         isDefault = attr.isDefaultNamespace("http://www.w3.org/XML/1998/namespace");
-        assertFalse("nodeisdefaultnamespace16", isDefault);
+        assertFalse(isDefault);
     }
 }
 

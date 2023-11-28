@@ -27,7 +27,7 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.nodeimpl.DOMErrorMonitor;
@@ -35,8 +35,8 @@ import org.loboevolution.html.node.DOMConfiguration;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -78,22 +78,22 @@ public class datatypenormalization03Test extends LoboUnitTest {
             /*DOMErrorMonitor */
             domConfig.setParameter("error-handler", errorMonitor);
             doc.normalizeDocument();
-            assertTrue("normalizeError", errorMonitor.assertLowerSeverity(2));
+            assertTrue(errorMonitor.assertLowerSeverity(2));
             elemList = doc.getElementsByTagNameNS("http://www.w3.org/2001/DOM-Test-Suite/Level-3/datatype_normalization", "data:boolean");
             element = (Element) elemList.item(0);
             str = element.getAttribute("data:value");
-            assertEquals("firstValue", "true", str);
+             assertEquals( "true", str);
             str = element.getAttribute("data:union");
-            assertEquals("firstUnion", "false", str);
+             assertEquals( "false", str);
             str = element.getTextContent();
-            assertEquals("firstList", "false true false", str);
+             assertEquals( "false true false", str);
             element = (Element) elemList.item(1);
             str = element.getAttribute("data:value");
-            assertEquals("secondValue", "1", str);
+             assertEquals( "1", str);
             str = element.getAttribute("data:union");
-            assertEquals("secondUnion", "0", str);
+             assertEquals( "0", str);
             str = element.getTextContent();
-            assertEquals("secondList", "0 1 0", str);
+             assertEquals( "0 1 0", str);
         }
     }
 }

@@ -27,11 +27,11 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 /**
@@ -50,7 +50,7 @@ public class nodesetuserdata02Test extends LoboUnitTest {
 
         doc = sampleXmlFile("hc_staff.xml");
         prevUserData = doc.setUserData("something", null, null);
-        assertNull("nodesetuserdata02", prevUserData);
+        assertNull(prevUserData);
     }
 }
 

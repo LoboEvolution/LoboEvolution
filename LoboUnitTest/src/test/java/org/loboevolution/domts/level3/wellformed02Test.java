@@ -27,7 +27,7 @@
 package org.loboevolution.domts.level3;
 
 import org.htmlunit.cssparser.dom.DOMException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.DOMError;
@@ -38,8 +38,8 @@ import org.loboevolution.http.UserAgentContext;
 
 import java.util.List;
 
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Create a document with an XML 1.1 valid but XML 1.0 invalid element and
@@ -76,7 +76,7 @@ public class wellformed02Test extends LoboUnitTest {
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
             }
-            assertTrue("xml10InvalidName", success);
+            assertTrue(success);
         }
 
         try {
@@ -100,7 +100,7 @@ public class wellformed02Test extends LoboUnitTest {
             domConfig.setParameter("error-handler", errorMonitor);
             doc.normalizeDocument();
             errors = errorMonitor.getErrors();
-            assertSame("noError", 0, errors.size());
+            assertSame(0, errors.size());
         }
     }
 }

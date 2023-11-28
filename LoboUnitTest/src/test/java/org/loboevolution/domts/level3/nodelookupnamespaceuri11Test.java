@@ -27,14 +27,14 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Invoke lookupNamespaceURI on an imported new Element node with a namespace URI and prefix
@@ -68,7 +68,7 @@ public void runTest(){
         elem=doc.createElementNS("http://www.w3.org/1999/xhtml","dom3:p");
         importedNode=(Element)newDoc.importNode(elem,true);
         namespaceURI=importedNode.lookupNamespaceURI("dom3");
-        assertEquals("nodelookupnamespaceuri11","http://www.w3.org/1999/xhtml",namespaceURI);
+        assertEquals("http://www.w3.org/1999/xhtml",namespaceURI);
         }
         }
 

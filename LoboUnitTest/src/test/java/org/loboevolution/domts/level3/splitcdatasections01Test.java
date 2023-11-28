@@ -27,7 +27,7 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.DOMError;
 import org.loboevolution.html.dom.HTMLCollection;
@@ -36,7 +36,7 @@ import org.loboevolution.html.node.*;
 
 import java.util.List;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -72,7 +72,7 @@ public class splitcdatasections01Test extends LoboUnitTest {
         /*DOMErrorMonitor */
         domConfig.setParameter("error-handler", errorMonitor);
         doc.normalize();
-        assertTrue("noErrors", errorMonitor.assertLowerSeverity(2));
+        assertTrue(errorMonitor.assertLowerSeverity(2));
     }
 }
 

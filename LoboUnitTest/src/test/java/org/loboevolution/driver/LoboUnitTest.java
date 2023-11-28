@@ -41,8 +41,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * <p>LoboUnitTest class.</p>
@@ -121,12 +120,11 @@ public class LoboUnitTest extends LoboWebDriver {
      */
     public void assertURIEquals(final URIEquals uriEquals) {
 
-        assertNotNull(uriEquals.getAssertID(), uriEquals.getActual());
+        assertNotNull(uriEquals.getActual());
 
         String uri = uriEquals.getActual();
         final String actual = uriEquals.getActual();
         final String fragment = uriEquals.getFragment();
-        final String assertID = uriEquals.getAssertID();
         final String query = uriEquals.getQuery();
         final String scheme = uriEquals.getScheme();
         final String path = uriEquals.getPath();
@@ -142,7 +140,7 @@ public class LoboUnitTest extends LoboWebDriver {
             actualFragment = actual.substring(lastPound + 1);
         }
         if (Strings.isNotBlank(fragment)) {
-            assertEquals(assertID, fragment, actualFragment);
+            assertEquals(fragment, actualFragment);
 
         }
         final int lastQuestion = uri.lastIndexOf('?');
@@ -152,7 +150,7 @@ public class LoboUnitTest extends LoboWebDriver {
             actualQuery = actual.substring(lastQuestion + 1);
         }
         if (query != null) {
-            assertEquals(assertID, query, actualQuery);
+            assertEquals(query, actualQuery);
 
         }
         final int firstColon = uri.indexOf(':');
@@ -165,11 +163,11 @@ public class LoboUnitTest extends LoboWebDriver {
         }
 
         if (Strings.isNotBlank(scheme)) {
-            assertEquals(assertID, scheme, actualScheme);
+            assertEquals(scheme, actualScheme);
         }
 
         if (Strings.isNotBlank(path)) {
-            assertEquals(assertID, path, actualPath);
+            assertEquals(path, actualPath);
         }
 
         if (Strings.isNotBlank(host)) {
@@ -178,7 +176,7 @@ public class LoboUnitTest extends LoboWebDriver {
                 final int termSlash = actualPath.indexOf("/", 2);
                 actualHost = actualPath.substring(0, termSlash);
             }
-            assertEquals(assertID, host, actualHost);
+            assertEquals(host, actualHost);
         }
 
         String actualFile = actualPath;
@@ -188,7 +186,7 @@ public class LoboUnitTest extends LoboWebDriver {
                 actualFile = actualPath.substring(finalSlash + 1);
             }
             if (file != null) {
-                assertEquals(assertID, file, actualFile);
+                assertEquals(file, actualFile);
             }
         }
 
@@ -198,12 +196,11 @@ public class LoboUnitTest extends LoboWebDriver {
             if (finalPeriod != -1) {
                 actualName = actualFile.substring(0, finalPeriod);
             }
-            assertEquals(assertID, name, actualName);
+            assertEquals(name, actualName);
         }
 
         if (isAbsolute != null) {
             assertEquals(
-                    assertID,
                     isAbsolute,
                     actualPath.startsWith("/") || actualPath.startsWith("file:/"));
         }
@@ -212,10 +209,6 @@ public class LoboUnitTest extends LoboWebDriver {
     @Getter
     @AllArgsConstructor
     public class URIEquals {
-        /**
-         * <p>assertID.</p>
-         */
-        private String assertID;
         /**
          * <p>scheme.</p>
          */

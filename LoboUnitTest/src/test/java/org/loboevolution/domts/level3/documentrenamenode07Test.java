@@ -27,11 +27,11 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -69,8 +69,8 @@ public class documentrenamenode07Test extends LoboUnitTest {
         renamedNode = newDoc.renameNode(attr, "http://www.w3.org/XML/1998/namespace", "xml:dom");
         nodeName = renamedNode.getNodeName();
         namespaceURI = renamedNode.getNamespaceURI();
-        assertEquals("documentrenamenode07_nodeName", "xml:dom", nodeName);
-        assertEquals("documentrenamenode07_namespaceURI", "http://www.w3.org/XML/1998/namespace", namespaceURI);
+        assertEquals("xml:dom", nodeName);
+        assertEquals("http://www.w3.org/XML/1998/namespace", namespaceURI);
     }
 }
 

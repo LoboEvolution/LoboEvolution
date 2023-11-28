@@ -27,14 +27,14 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.DOMConfiguration;
 import org.loboevolution.html.node.DOMStringList;
 import org.loboevolution.html.node.Document;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -56,9 +56,9 @@ public class domstringlistcontains01Test extends LoboUnitTest {
         domConfig = doc.getDomConfig();
         paramList = domConfig.getParameterNames();
         contains = paramList.contains("comments");
-        assertTrue("paramsContainComments", contains);
+        assertTrue(contains);
         contains = paramList.contains("");
-        assertFalse("paramsDoesntContainEmpty", contains);
+        assertFalse(contains);
     }
 }
 

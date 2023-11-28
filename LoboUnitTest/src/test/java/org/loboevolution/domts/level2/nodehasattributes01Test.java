@@ -27,14 +27,14 @@
 
 package org.loboevolution.domts.level2;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -62,11 +62,11 @@ public class nodehasattributes01Test extends LoboUnitTest {
         elementList = doc.getElementsByTagName("employee");
         element = (Element) elementList.item(0);
         hasAttributes = element.hasAttributes();
-        assertFalse("nodehasattributes01_1", hasAttributes);
+        assertFalse(hasAttributes);
         elementList = doc.getElementsByTagName("address");
         element = (Element) elementList.item(0);
         hasAttributes = element.hasAttributes();
-        assertTrue("nodehasattributes01_2", hasAttributes);
+        assertTrue(hasAttributes);
     }
 }
 

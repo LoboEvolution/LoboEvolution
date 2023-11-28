@@ -27,12 +27,12 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -81,7 +81,7 @@ public class namednodemapsetnameditemTest extends LoboUnitTest {
         setNode = attributes.setNamedItem(newAttribute);
         districtNode = (Attr) attributes.getNamedItem("district");
         attrName = districtNode.getNodeName();
-        assertEquals("namednodemapSetNamedItemAssert", "district", attrName);
+        assertEquals("district", attrName);
     }
 }
 

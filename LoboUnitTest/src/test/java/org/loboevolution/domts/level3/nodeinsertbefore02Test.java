@@ -27,11 +27,11 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -75,10 +75,10 @@ public class nodeinsertbefore02Test extends LoboUnitTest {
         newPI = newDoc.createProcessingInstruction("PITarget", "PIData");
         insertedComment = (Comment) newDoc.insertBefore(newComment, newDocType);
         data = insertedComment.getData();
-        assertEquals("nodeinsertbefore02_1", "Comment", data);
+        assertEquals("Comment", data);
         insertedPI = (ProcessingInstruction) newDoc.insertBefore(newPI, newComment);
         target = insertedPI.getTarget();
-        assertEquals("nodeinsertbefore02_2", "PITarget", target);
+        assertEquals("PITarget", target);
     }
 }
 

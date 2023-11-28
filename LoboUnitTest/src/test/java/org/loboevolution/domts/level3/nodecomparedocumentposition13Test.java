@@ -26,14 +26,14 @@
 
 package org.loboevolution.domts.level3;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Comment;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Using compareDocumentPosition check if the Document node contains and precedes the new Comment node,
@@ -59,8 +59,8 @@ public class nodecomparedocumentposition13Test extends LoboUnitTest {
         elem = (Element) elemList.item(3);
         elem.appendChild(comment);
         documentPosition = doc.compareDocumentPosition(comment);
-        assertEquals("nodecomparedocumentpositionIsContainedFollowing13", 20, documentPosition);
+        assertEquals(20, documentPosition);
         commentPosition = comment.compareDocumentPosition(doc);
-        assertEquals("nodecomparedocumentpositionContainsPRECEDING13", 10, commentPosition);
+        assertEquals(10, commentPosition);
     }
 }

@@ -27,14 +27,14 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.nodeimpl.DOMImplementationImpl;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.http.UserAgentContext;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -50,7 +50,7 @@ public class hasFeature03Test extends LoboUnitTest {
         final boolean state;
         impl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(), true));
         state = impl.hasFeature("+cOrE", "3.0");
-        assertTrue("hasPlusCore30", state);
+        assertTrue(state);
     }
 }
 

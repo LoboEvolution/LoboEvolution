@@ -26,14 +26,14 @@
 
 package org.loboevolution.domts.level3;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Text;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Get the newline between the "body" and "p" element.  Since node is both in element content
@@ -56,6 +56,6 @@ public class textiselementcontentwhitespace03Test extends LoboUnitTest {
         pElem = (Element) pList.item(0);
         textNode = (Text) pElem.getPreviousSibling();
         isElemContentWhitespace = textNode.isElementContentWhitespace();
-        assertTrue("isElementContentWhitespace", isElemContentWhitespace);
+        assertTrue(isElemContentWhitespace);
     }
 }

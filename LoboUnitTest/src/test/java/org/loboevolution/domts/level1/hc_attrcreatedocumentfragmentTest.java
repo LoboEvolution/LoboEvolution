@@ -27,11 +27,11 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -79,7 +79,7 @@ public class hc_attrcreatedocumentfragmentTest extends LoboUnitTest {
                 langAttrCount += 1;
             }
         }
-        assertEquals("hasLangAttr", 1, langAttrCount);
+        assertEquals(1, langAttrCount);
     }
 }
 

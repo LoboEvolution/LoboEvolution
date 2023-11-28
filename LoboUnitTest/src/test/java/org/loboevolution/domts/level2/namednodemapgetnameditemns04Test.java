@@ -27,7 +27,7 @@
 
 package org.loboevolution.domts.level2;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Attr;
@@ -35,7 +35,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -75,7 +75,7 @@ public class namednodemapgetnameditemns04Test extends LoboUnitTest {
         attributes = element.getAttributes();
         attribute = (Attr) attributes.getNamedItemNS("http://www.w3.org/DOM/L1", "street");
         attrName = attribute.getNodeName();
-        assertEquals("namednodemapgetnameditemns04", "street", attrName);
+        assertEquals("street", attrName);
     }
 }
 

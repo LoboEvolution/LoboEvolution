@@ -26,7 +26,7 @@
 
 package org.loboevolution.domts.level3;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Attr;
@@ -34,8 +34,8 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.TypeInfo;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Check if a type derived by extension from a union returns true
@@ -60,9 +60,9 @@ public class typeinfoisderivedfrom59Test extends LoboUnitTest {
         elemList = doc.getElementsByTagName("code");
         codeElem = (Element) elemList.item(0);
         typeInfo = codeElem.getSchemaTypeInfo();
-        assertNotNull("typeInfoNotNull", typeInfo);
+        assertNotNull(typeInfo);
         isDerived = typeInfo.isDerivedFrom("http://www.w3.org/2001/XMLSchema", "integer", 4);
-        assertTrue("isDerived", isDerived);
+        assertTrue(isDerived);
     }
 }
 

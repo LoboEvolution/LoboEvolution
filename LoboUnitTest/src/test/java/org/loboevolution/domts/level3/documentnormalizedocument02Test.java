@@ -27,14 +27,14 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.nodeimpl.DOMErrorMonitor;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -63,26 +63,26 @@ public class documentnormalizedocument02Test extends LoboUnitTest {
         elemName = (Element) elemList.item(1);
         cdata = (CDATASection) elemName.getLastChild();
         nodeName = cdata.getNodeName();
-        assertEquals("documentnormalizedocument02", "#cdata-section", nodeName);
+        assertEquals( "#cdata-section", nodeName);
         domConfig = doc.getDomConfig();
         domConfig.setParameter("cdata-sections", Boolean.TRUE);
         /*DOMErrorMonitor */
         domConfig.setParameter("error-handler", errorMonitor);
         doc.normalizeDocument();
-        assertTrue("normalizationError", errorMonitor.assertLowerSeverity(2));
+        assertTrue(errorMonitor.assertLowerSeverity(2));
         elemList = doc.getElementsByTagName("strong");
         elemName = (Element) elemList.item(1);
         cdata = (CDATASection) elemName.getLastChild();
         nodeName = cdata.getNodeName();
-        assertEquals("documentnormalizedocument02_true", "#cdata-section", nodeName);
+        assertEquals("#cdata-section", nodeName);
         domConfig.setParameter("cdata-sections", Boolean.FALSE);
         doc.normalizeDocument();
-        assertTrue("normalization2Error", errorMonitor.assertLowerSeverity(2));
+        assertTrue( errorMonitor.assertLowerSeverity(2));
         elemList = doc.getElementsByTagName("strong");
         elemName = (Element) elemList.item(1);
         text = (Text) elemName.getLastChild();
         nodeName = text.getNodeName();
-        assertEquals("documentnormalizedocument02_false", "#text", nodeName);
+        assertEquals("#text", nodeName);
     }
 }
 

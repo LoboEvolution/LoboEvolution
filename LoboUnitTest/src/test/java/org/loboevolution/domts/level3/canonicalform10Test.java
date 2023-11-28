@@ -27,7 +27,7 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.nodeimpl.DOMErrorMonitor;
@@ -36,7 +36,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -68,13 +68,13 @@ public class canonicalform10Test extends LoboUnitTest {
             domConfig.setParameter("error-handler", errorMonitor);
             domConfig.setParameter("canonical-form", Boolean.TRUE);
             doc.normalizeDocument();
-            assertTrue("normalizeError", errorMonitor.assertLowerSeverity(2));
+            assertTrue(errorMonitor.assertLowerSeverity(2));
             divList = doc.getElementsByTagName("div");
             div = (Element) divList.item(5);
             node = div.getAttributeNode("xmlns");
-            assertNotNull("xmlnsPresent", node);
+            assertNotNull(node);
             node = div.getAttributeNode("xmlns:a");
-            assertNull("xmlnsANotPresent", node);
+            assertNull(node);
         }
     }
 }

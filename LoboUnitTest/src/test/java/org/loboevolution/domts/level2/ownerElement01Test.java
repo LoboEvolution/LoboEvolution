@@ -27,12 +27,12 @@
 
 package org.loboevolution.domts.level2;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -68,7 +68,7 @@ public class ownerElement01Test extends LoboUnitTest {
         domesticAttr = (Attr) attributes.getNamedItem("domestic");
         elementNode = domesticAttr.getOwnerElement();
         name = elementNode.getNodeName();
-        assertEquals("throw_Equals", "ADDRESS", name);
+        assertEquals("ADDRESS", name);
     }
 }
 

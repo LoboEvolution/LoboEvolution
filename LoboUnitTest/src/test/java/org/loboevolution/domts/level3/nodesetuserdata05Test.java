@@ -27,13 +27,13 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -67,7 +67,7 @@ public class nodesetuserdata05Test extends LoboUnitTest {
         returned1 = attr.getUserData("Key1");
         returned2 = attr.getUserData("Key2");
         success = ((Node) /*DOMUserData */returned1).isEqualNode(((Node) /*DOMUserData */returned2));
-        assertTrue("nodesetuserdata05", success);
+        assertTrue(success);
     }
 }
 

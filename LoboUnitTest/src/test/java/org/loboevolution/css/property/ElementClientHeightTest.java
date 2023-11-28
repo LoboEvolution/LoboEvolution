@@ -25,7 +25,7 @@
  */
 package org.loboevolution.css.property;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 
 /**

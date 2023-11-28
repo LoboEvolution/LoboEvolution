@@ -28,7 +28,7 @@
 package org.loboevolution.domts.level2;
 
 import org.htmlunit.cssparser.dom.DOMException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Attr;
@@ -36,8 +36,8 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -81,7 +81,7 @@ public class setAttributeNodeNS01Test extends LoboUnitTest {
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagName("address");
         testAddr = elementList.item(0);
-        assertNotNull("empAddrNotNull", testAddr);
+        assertNotNull(testAddr);
         newElement = doc.createElement("newElement");
         appendedChild = testAddr.appendChild(newElement);
         newAttr = doc.createAttributeNS(namespaceURI, qualifiedName);
@@ -94,7 +94,7 @@ public class setAttributeNodeNS01Test extends LoboUnitTest {
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.INUSE_ATTRIBUTE_ERR);
             }
-            assertTrue("throw_INUSE_ATTRIBUTE_ERR", success);
+            assertTrue(success);
         }
     }
 }

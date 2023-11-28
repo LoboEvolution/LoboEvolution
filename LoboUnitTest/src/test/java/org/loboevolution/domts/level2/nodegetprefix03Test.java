@@ -27,13 +27,13 @@
 
 package org.loboevolution.domts.level2;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -73,10 +73,10 @@ public class nodegetprefix03Test extends LoboUnitTest {
         elemPrefix = qelement.getPrefix();
         attrNoPrefix = attr.getPrefix();
         attrPrefix = qattr.getPrefix();
-        assertNull("nodegetprefix03_1", elemNoPrefix);
-        assertEquals("nodegetprefix03_2", "qual", elemPrefix);
-        assertNull("nodegetprefix03_3", attrNoPrefix);
-        assertEquals("nodegetprefix03_4", "qual", attrPrefix);
+        assertNull( elemNoPrefix);
+        assertEquals( "qual", elemPrefix);
+        assertNull( attrNoPrefix);
+        assertEquals( "qual", attrPrefix);
     }
 }
 

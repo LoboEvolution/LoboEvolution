@@ -27,12 +27,12 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -88,23 +88,23 @@ public class documentadoptnode02Test extends LoboUnitTest {
             nodeType = adoptedclass.getNodeType();
             attrOwnerElem = (Element) ((Attr) /*Node */adoptedclass).getOwnerElement();
             isSpecified = ((Attr) /*Node */adoptedclass).isSpecified();
-            assertEquals("documentadoptnode02_nodeName", "class", nodeName);
-            assertEquals("documentadoptnode02_nodeType", 2, nodeType);
-            assertNull("documentadoptnode02_ownerDoc", attrOwnerElem);
-            assertTrue("documentadoptnode02_specified", isSpecified);
+            assertEquals("class", nodeName);
+            assertEquals(2, nodeType);
+            assertNull(attrOwnerElem);
+            assertTrue(isSpecified);
             firstChild = (Text) adoptedclass.getFirstChild();
-            assertNotNull("firstChildNotNull", firstChild);
+            assertNotNull(firstChild);
             firstChildValue = firstChild.getNodeValue();
 
             if ("Y".equals(firstChildValue)) {
                 secondChild = (EntityReference) firstChild.getNextSibling();
-                assertNotNull("secondChildNotNull", secondChild);
+                assertNotNull(secondChild);
                 secondChildType = secondChild.getNodeType();
-                assertEquals("secondChildIsEntityReference", 5, secondChildType);
+                assertEquals(5, secondChildType);
                 secondChildName = secondChild.getNodeName();
-                assertEquals("secondChildIsEnt1Reference", "alpha", secondChildName);
+                assertEquals("alpha", secondChildName);
             } else {
-                assertEquals("documentadoptnode02_nodeValue", "Yα", nodeValue);
+                assertEquals("Yα", nodeValue);
             }
 
         }

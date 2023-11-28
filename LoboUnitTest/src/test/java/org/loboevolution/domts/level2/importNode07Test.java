@@ -27,14 +27,14 @@
 
 package org.loboevolution.domts.level2;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -77,12 +77,12 @@ public class importNode07Test extends LoboUnitTest {
         element = aNewDoc.createElementNS(namespaceURI, qualifiedName);
         aNode = (Element) doc.importNode(element, false);
         attributes = aNode.getAttributes();
-        assertEquals("throw_Size", 1, attributes.getLength());
+        assertEquals(1, attributes.getLength());
         name = aNode.getNodeName();
-        assertEquals("nodeName", "employee", name);
+         assertEquals( "employee", name);
         attr = (Attr) attributes.item(0);
         lname = attr.getLocalName();
-        assertEquals("lname", "defaultAttr", lname);
+        assertEquals( "defaultAttr", lname);
     }
 }
 

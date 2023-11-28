@@ -27,7 +27,7 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Attr;
@@ -35,7 +35,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.TypeInfo;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -68,8 +68,8 @@ public class attrgetschematypeinfo08Test extends LoboUnitTest {
         attrTypeInfo = attr.getSchemaTypeInfo();
         typeName = attrTypeInfo.getTypeName();
         typeNamespace = attrTypeInfo.getTypeNamespace();
-        assertEquals("attrgetschematypeinfo08_typeName", "string", typeName);
-        assertEquals("attrgetschematypeinfo08_typeNamespace", "http://www.w3.org/2001/XMLSchema", typeNamespace);
+        assertEquals("string", typeName);
+        assertEquals( "http://www.w3.org/2001/XMLSchema", typeNamespace);
     }
 }
 

@@ -27,14 +27,14 @@
 
 package org.loboevolution.domts.level2;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentFragment;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.Text;
 
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 /**
@@ -64,7 +64,7 @@ public class hc_nodedocumentfragmentnormalize2Test extends LoboUnitTest {
         retval = docFragment.appendChild(txtNode);
         docFragment.normalize();
         txtNode = (Text) docFragment.getFirstChild();
-        assertNull("noChild", txtNode);
+        assertNull(txtNode);
     }
 }
 

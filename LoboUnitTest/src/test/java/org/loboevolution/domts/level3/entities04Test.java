@@ -27,13 +27,13 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.nodeimpl.DOMErrorMonitor;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -70,17 +70,17 @@ public class entities04Test extends LoboUnitTest {
         entRef = doc.createEntityReference("ent1");
         child = pElem.appendChild(entRef);
         doc.normalize();
-        assertTrue("normalizeError", errorMonitor.assertLowerSeverity(2));
+        assertTrue(errorMonitor.assertLowerSeverity(2));
         pList = doc.getElementsByTagName("p");
         pElem = (Element) pList.item(0);
         child = pElem.getLastChild();
-        assertNotNull("lastChildNotNull", child);
+        assertNotNull(child);
         childName = child.getNodeName();
-        assertEquals("firstChild", "ent1", childName);
+        assertEquals( "ent1", childName);
         doctype = doc.getDoctype();
         entities = doctype.getEntities();
         ent2 = entities.getNamedItem("ent2");
-        assertNotNull("ent2NotNull", ent2);
+        assertNotNull(ent2);
     }
 }
 

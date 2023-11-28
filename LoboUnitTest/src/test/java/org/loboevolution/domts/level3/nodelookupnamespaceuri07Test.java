@@ -27,13 +27,13 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Invoke lookupNamespaceURI on an Element node with no prefix, which has a namespace
@@ -45,17 +45,17 @@ import static org.junit.Assert.assertEquals;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-lookupNamespaceURI">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-lookupNamespaceURI</a>
  */
 public class nodelookupnamespaceuri07Test extends LoboUnitTest {
-@Test
-public void runTest(){
+    @Test
+    public void runTest() {
         final Document doc;
         final Element elem;
         final HTMLCollection elemList;
         final String namespaceURI;
-        doc=sampleXmlFile("hc_staff.xml");
-        elemList=doc.getElementsByTagName("em");
-        elem=(Element)elemList.item(2);
-        namespaceURI=elem.lookupNamespaceURI("dmstc");
-        assertEquals("nodelookupnamespaceuri07","http://www.netzero.com",namespaceURI);
-        }
-        }
+        doc = sampleXmlFile("hc_staff.xml");
+        elemList = doc.getElementsByTagName("em");
+        elem = (Element) elemList.item(2);
+        namespaceURI = elem.lookupNamespaceURI("dmstc");
+        assertEquals("http://www.netzero.com",namespaceURI);
+    }
+}
 

@@ -27,12 +27,12 @@
 
 package org.loboevolution.domts.level2;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -69,20 +69,20 @@ public class documentcreateattributeNS02Test extends LoboUnitTest {
         nodeValue = attribute1.getNodeValue();
         prefix = attribute1.getPrefix();
         namespaceURI = attribute1.getNamespaceURI();
-        assertEquals("documentcreateattributeNS02_att1_name", "xml:xml", name);
-        assertEquals("documentcreateattributeNS02_att1_nodeName", "xml:xml", nodeName);
-        assertEquals("documentcreateattributeNS02_att1_nodeValue", null, nodeValue);
-        assertEquals("documentcreateattributeNS02_att1_prefix", "xml", prefix);
-        assertEquals("documentcreateattributeNS02_att1_namespaceURI", "http://www.w3.org/XML/1998/namespace", namespaceURI);
+        assertEquals( "xml:xml", name);
+        assertEquals("xml:xml", nodeName);
+        assertNull(nodeValue);
+        assertEquals( "xml", prefix);
+        assertEquals( "http://www.w3.org/XML/1998/namespace", namespaceURI);
         attribute2 = doc.createAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns");
         name = attribute2.getName();
         nodeName = attribute2.getNodeName();
         nodeValue = attribute2.getNodeValue();
         namespaceURI = attribute2.getNamespaceURI();
-        assertEquals("documentcreateattributeNS02_att2_name", "xmlns", name);
-        assertEquals("documentcreateattributeNS02_att2_nodeName", "xmlns", nodeName);
-        assertEquals("documentcreateattributeNS02_att2_nodeValue", null, nodeValue);
-        assertEquals("documentcreateattributeNS02_att2_namespaceURI", "http://www.w3.org/2000/xmlns/", namespaceURI);
+        assertEquals( "xmlns", name);
+        assertEquals( "xmlns", nodeName);
+        assertNull(nodeValue);
+        assertEquals("http://www.w3.org/2000/xmlns/", namespaceURI);
     }
 
 }

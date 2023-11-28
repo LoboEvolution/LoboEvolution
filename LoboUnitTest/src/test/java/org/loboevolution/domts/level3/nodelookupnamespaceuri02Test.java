@@ -27,14 +27,14 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Using lookupNamespaceURI on a new Document node with a namespaceURI and prefix
@@ -65,6 +65,6 @@ public class nodelookupnamespaceuri02Test extends LoboUnitTest {
         qname = "dom3:" + rootName;
         newDoc = domImpl.createDocument(rootNS, qname, nullDocType);
         namespaceURI = newDoc.lookupNamespaceURI("dom3");
-        assertEquals("nodelookupnamespaceuri02", rootNS, namespaceURI);
+        assertEquals(rootNS, namespaceURI);
     }
 }

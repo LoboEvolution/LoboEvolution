@@ -27,7 +27,7 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Attr;
@@ -35,7 +35,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.TypeInfo;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -61,11 +61,11 @@ public class typeinfoisderivedfrom08Test extends LoboUnitTest {
         acronymElem = (Element) elemList.item(2);
         attr = acronymElem.getAttributeNode("class");
         typeInfo = attr.getSchemaTypeInfo();
-        assertNotNull("typeInfoNotNull", typeInfo);
+        assertNotNull(typeInfo);
         typeName = typeInfo.getTypeName();
-        assertEquals("nameIsString", "classType", typeName);
+        assertEquals( "classType", typeName);
         isDerived = typeInfo.isDerivedFrom("http://www.w3.org/2001/XMLSchema", "string", 15);
-        assertTrue("derivedFromString", isDerived);
+        assertTrue(isDerived);
     }
 }
 

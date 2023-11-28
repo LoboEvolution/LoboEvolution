@@ -27,14 +27,14 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.Notation;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.html.node.NamedNodeMap;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -60,6 +60,6 @@ public class nodecomparedocumentposition24Test extends LoboUnitTest {
         notation = (Notation) notaionsMap.getNamedItem("notation1");
         notation2 = (Notation) notaionsMap.getNamedItem("notation1");
         notationPosition = notation.compareDocumentPosition(notation2);
-        assertEquals("nodecomparedocumentposition24", 0, notationPosition);
+        assertEquals(0, notationPosition);
     }
 }

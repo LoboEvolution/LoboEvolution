@@ -27,13 +27,13 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -68,9 +68,9 @@ public class hc_nodegetfirstchildTest extends LoboUnitTest {
         childName = fchildNode.getNodeName();
 
         if ("#text".equals(childName)) {
-            assertEquals("firstChild_w_whitespace", "#text", childName);
+            assertEquals("#text", childName);
         } else {
-            assertEquals("firstChild_wo_whitespace", "EM", childName);
+            assertEquals( "EM", childName);
         }
 
     }

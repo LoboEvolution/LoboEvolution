@@ -27,13 +27,13 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -56,7 +56,7 @@ public class nodegettextcontent14Test extends LoboUnitTest {
         elemList = doc.getElementsByTagName("p");
         elem = (Element) elemList.item(2);
         textContent = elem.getTextContent();
-        assertEquals("nodegettextcontent13", "\n  EMP0003\n  Roger\n Jones\n  Department Manager\n  100,000\n  Element data\n  PO Box 27 Irving, texas 98553\n ", textContent);
+        assertEquals("\n  EMP0003\n  Roger\n Jones\n  Department Manager\n  100,000\n  Element data\n  PO Box 27 Irving, texas 98553\n ", textContent);
     }
 }
 

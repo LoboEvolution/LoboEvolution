@@ -27,12 +27,12 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -65,13 +65,13 @@ public class hc_attrfirstchildTest extends LoboUnitTest {
         attributes = testNode.getAttributes();
         titleAttr = (Attr) attributes.getNamedItem("title");
         textNode = (Text) titleAttr.getFirstChild();
-        assertNotNull("textNodeNotNull", textNode);
+        assertNotNull(textNode);
         value = textNode.getNodeValue();
-        assertEquals("child1IsYes", "Yes", value);
+        assertEquals("Yes", value);
         otherChild = textNode.getNextSibling();
-        assertNull("nextSiblingIsNull", otherChild);
+        assertNull(otherChild);
         otherChild = textNode.getPreviousSibling();
-        assertNull("previousSiblingIsNull", otherChild);
+        assertNull(otherChild);
     }
 }
 

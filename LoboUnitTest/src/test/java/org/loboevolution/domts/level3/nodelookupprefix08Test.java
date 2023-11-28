@@ -27,14 +27,14 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * Invoke lookupPrefix on an Element node with no prefix, which has 2 namespace
@@ -57,9 +57,9 @@ public class nodelookupprefix08Test extends LoboUnitTest {
         elemList = doc.getElementsByTagName("p");
         elem = (Element) elemList.item(0);
         prefix = elem.lookupPrefix("http://www.usa.com");
-        assertEquals("nodelookupprefix08", "dmstc", prefix);
+        assertEquals("dmstc", prefix);
         prefixEmpty = elem.lookupPrefix("http://www.w3.org/1999/xhtml");
-        assertNull("nodelookupnamespaceprefixEmpty08", prefixEmpty);
+        assertNull(prefixEmpty);
     }
 }
 

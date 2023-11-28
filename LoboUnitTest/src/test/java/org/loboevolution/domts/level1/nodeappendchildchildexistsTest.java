@@ -27,13 +27,13 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -80,11 +80,11 @@ public class nodeappendchildchildexistsTest extends LoboUnitTest {
         lchildName = lchild.getNodeName();
 
         if ("employeeId".equals(initialName)) {
-            assertEquals("assert1_nowhitespace", "name", fchildName);
-            assertEquals("assert2_nowhitespace", "EMPLOYEEID",lchildName);
+            assertEquals("name", fchildName);
+            assertEquals( "EMPLOYEEID",lchildName);
         } else {
-            assertEquals("assert1", "EMPLOYEEID", fchildName);
-            assertEquals("assert2", "#text", lchildName);
+            assertEquals( "EMPLOYEEID", fchildName);
+            assertEquals( "#text", lchildName);
         }
 
     }

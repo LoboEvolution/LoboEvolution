@@ -27,7 +27,7 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
@@ -35,8 +35,8 @@ import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.EntityReference;
 import org.loboevolution.html.node.Text;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 /**
@@ -63,14 +63,14 @@ public class nodegetbaseuri19Test extends LoboUnitTest {
         doc = sampleXmlFile("external_barfoo.xml");
         pList = doc.getElementsByTagName("p");
         pElem = (Element) pList.item(0);
-        assertNotNull("pElemNotNull", pElem);
+        assertNotNull(pElem);
         entRef = (EntityReference) pElem.getLastChild();
-        assertNotNull("entRefNotNull", entRef);
+        assertNotNull(entRef);
         textNode = (Text) entRef.getFirstChild();
-        assertNotNull("entRefTextNotNull", textNode);
+        assertNotNull(textNode);
 
         baseURI = textNode.getBaseURI();
-        assertNull("baseURI", baseURI);
+        assertNull(baseURI);
     }
 }
 

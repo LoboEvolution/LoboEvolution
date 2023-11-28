@@ -27,12 +27,12 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -65,15 +65,15 @@ public class documentnormalizedocument10Test extends LoboUnitTest {
         doc.appendChild(elem);
         text = (Text) elem.getFirstChild();
         nodeValue = text.getNodeValue();
-        assertEquals("documentnormalizedocument10", "Text          Node", nodeValue);
+        assertEquals("Text          Node", nodeValue);
         domConfig = doc.getDomConfig();
         canSet = domConfig.canSetParameter("element-content-whitespace", Boolean.TRUE);
-        assertTrue("canSetElementContentWhitespaceTrue", canSet);
+        assertTrue(canSet);
         domConfig.setParameter("element-content-whitespace", Boolean.TRUE);
         doc.normalizeDocument();
         text = (Text) elem.getFirstChild();
         nodeValue = text.getNodeValue();
-        assertEquals("documentnormalizedocument10_true1", "Text          Node", nodeValue);
+        assertEquals( "Text          Node", nodeValue);
         canSet = domConfig.canSetParameter("element-content-whitespace", Boolean.FALSE);
 
         if (canSet) {
@@ -81,7 +81,7 @@ public class documentnormalizedocument10Test extends LoboUnitTest {
             doc.normalizeDocument();
             text = (Text) elem.getFirstChild();
             nodeValue = text.getNodeValue();
-            assertEquals("documentnormalizedocument10_true2", "Text Node", nodeValue);
+            assertEquals("Text Node", nodeValue);
         }
     }
 }

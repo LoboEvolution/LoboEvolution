@@ -27,13 +27,13 @@
 
 package org.loboevolution.domts.level2;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.DocumentType;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -65,8 +65,8 @@ public class documenttypesystemid01Test extends LoboUnitTest {
         docType = domImpl.createDocumentType("l2:root", "PUB", "SYS");
         publicId = docType.getPublicId();
         systemId = docType.getSystemId();
-        assertEquals("documenttypepublicid01", "PUB", publicId);
-        assertEquals("documenttypesystemid01", "SYS", systemId);
+        assertEquals("PUB", publicId);
+        assertEquals( "SYS", systemId);
     }
 }
 

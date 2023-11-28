@@ -27,13 +27,13 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -68,7 +68,7 @@ public class hc_documentgetelementsbytagnamevalueTest extends LoboUnitTest {
         nameNode = nameList.item(3);
         firstChild = nameNode.getFirstChild();
         childValue = firstChild.getNodeValue();
-        assertEquals("documentGetElementsByTagNameValueAssert", "Jeny Oconnor", childValue);
+        assertEquals("Jeny Oconnor", childValue);
     }
 }
 

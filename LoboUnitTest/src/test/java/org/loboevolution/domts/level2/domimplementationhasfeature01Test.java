@@ -27,7 +27,7 @@
 
 package org.loboevolution.domts.level2;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DOMImplementation;
@@ -35,7 +35,7 @@ import org.loboevolution.html.node.DOMImplementation;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -81,16 +81,16 @@ public class domimplementationhasfeature01Test extends LoboUnitTest {
         for (final Object o : featuresXML) {
             featureXML = (String) o;
             success = domImpl.hasFeature(featureXML, version);
-            assertTrue("domimplementationhasfeature01_XML_1", success);
+            assertTrue(success);
             success = domImpl.hasFeature(featureXML, version1);
-            assertTrue("domimplementationhasfeature01_XML_2", success);
+            assertTrue(success);
         }
         for (final Object o : featuresCore) {
             featureCore = (String) o;
             success = domImpl.hasFeature(featureCore, version);
-            assertTrue("domimplementationhasfeature01_Core_1", success);
+            assertTrue(success);
             success = domImpl.hasFeature(featureCore, version2);
-            assertTrue("domimplementationhasfeature01_Core_3", success);
+            assertTrue(success);
         }
     }
 }

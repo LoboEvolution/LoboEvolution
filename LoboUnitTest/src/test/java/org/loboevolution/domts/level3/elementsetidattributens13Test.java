@@ -28,7 +28,7 @@ package org.loboevolution.domts.level3;
 
 
 import org.htmlunit.cssparser.dom.DOMException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Attr;
@@ -36,8 +36,8 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -69,10 +69,10 @@ public class elementsetidattributens13Test extends LoboUnitTest {
         attributesMap = nameElem.getAttributes();
         attr = (Attr) attributesMap.getNamedItem("xmlns:newAttr");
         id = attr.isId();
-        assertTrue("elementsetidattributensIsIdTrue13", id);
+        assertTrue(id);
         elem = doc.getElementById("newValue");
         elemName = elem.getTagName();
-        assertEquals("elementsetidattributensGetElementById13", "STRONG", elemName);
+        assertEquals("STRONG", elemName);
 
         {
             boolean success = false;
@@ -81,7 +81,7 @@ public class elementsetidattributens13Test extends LoboUnitTest {
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
             }
-            assertTrue("throw_NOT_FOUND_ERR", success);
+            assertTrue(success);
         }
     }
 }

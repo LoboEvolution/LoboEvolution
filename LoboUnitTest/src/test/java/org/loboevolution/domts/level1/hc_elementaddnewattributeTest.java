@@ -27,13 +27,13 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -67,7 +67,7 @@ public class hc_elementaddnewattributeTest extends LoboUnitTest {
         testEmployee = (Element) elementList.item(4);
         testEmployee.setAttribute("lang", "EN-us");
         attrValue = testEmployee.getAttribute("lang");
-        assertEquals("attrValue", "EN-us", attrValue);
+        assertEquals("EN-us", attrValue);
     }
 }
 

@@ -27,12 +27,12 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -59,7 +59,7 @@ public class hc_documentgetelementsbytagnamelengthTest extends LoboUnitTest {
         final HTMLCollection nameList;
         doc = sampleXmlFile("hc_staff.xml");
         nameList = doc.getElementsByTagName("strong");
-        assertEquals("documentGetElementsByTagNameLengthAssert", 5, nameList.getLength());
+        assertEquals(5, nameList.getLength());
     }
 }
 

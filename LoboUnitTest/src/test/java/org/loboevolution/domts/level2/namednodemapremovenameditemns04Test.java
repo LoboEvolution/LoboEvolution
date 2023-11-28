@@ -27,12 +27,12 @@
 
 package org.loboevolution.domts.level2;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 /**
@@ -63,9 +63,9 @@ public class namednodemapremovenameditemns04Test extends LoboUnitTest {
         element = (Element) elementList.item(0);
         attributes = element.getAttributes();
         attribute = (Attr) attributes.getNamedItemNS("http://www.w3.org/2000/xmlns/", "xmlns");
-        assertNull("namednodemapremovenameditemns04_1", attribute);
+        assertNull(attribute);
         attribute = (Attr) attributes.getNamedItemNS("http://www.w3.org/2000/xmlns/", "dmstc");
-        assertNull("namednodemapremovenameditemns04_2", attribute);
+        assertNull(attribute);
     }
 }
 

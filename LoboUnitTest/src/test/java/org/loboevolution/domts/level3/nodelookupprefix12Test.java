@@ -27,13 +27,13 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Invoke lookupPrefix on an renamed new Element node with a namespace URI
@@ -57,7 +57,7 @@ public class nodelookupprefix12Test extends LoboUnitTest {
         elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "dom3:p");
         renamedNode = (Element) doc.renameNode(elem, "http://www.w3.org/1999/xhtml", "ren:br");
         prefix = renamedNode.lookupPrefix("http://www.w3.org/1999/xhtml");
-        assertEquals("nodelookupprefix12", "ren", prefix);
+        assertEquals("ren", prefix);
     }
 }
 

@@ -27,7 +27,7 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.nodeimpl.UserDataHandlerImpl;
@@ -36,7 +36,7 @@ import org.loboevolution.html.node.*;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -88,11 +88,11 @@ public class userdatahandler04Test extends LoboUnitTest {
         elementNS = node.getNamespaceURI();
         newNode = doc.adoptNode(node);
         notifications = userDataHandlerImpl.getAllNotifications();
-        assertEquals("twoNotifications", 2, notifications.size());
+        assertEquals(2, notifications.size());
         for (int indexN100CD = 0; indexN100CD < notifications.size(); indexN100CD++) {
             notification = (UserDataNotification) notifications.get(indexN100CD);
             operation = notification.getOperation();
-            assertEquals("operationIsImport", 5, operation);
+            assertEquals(5, operation);
             key = notification.getKey();
             data = (String) notification.getData();
 
@@ -106,12 +106,12 @@ public class userdatahandler04Test extends LoboUnitTest {
             }
 
             src = notification.getSrc();
-            assertSame("srcIsNode", node, src);
+            assertSame(node, src);
             dst = notification.getDst();
-            assertNull("dstIsNull", dst);
+            assertNull(dst);
         }
-        assertEquals("greetingCountIs1", 1, greetingCount);
-        assertEquals("salutationCountIs1", 1, salutationCount);
+        assertEquals(1, greetingCount);
+        assertEquals(1, salutationCount);
     }
 }
 

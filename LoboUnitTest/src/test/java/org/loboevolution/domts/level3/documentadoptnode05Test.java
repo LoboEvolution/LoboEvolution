@@ -27,12 +27,12 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -83,11 +83,11 @@ public class documentadoptnode05Test extends LoboUnitTest {
             nodePrefix = adoptedAttr.getPrefix();
             attrOwnerElem = (Element) ((Attr) /*Node */adoptedAttr).getOwnerElement();
             isSpecified = ((Attr) /*Node */adoptedAttr).isSpecified();
-            assertEquals("documentadoptnode05_nodeName", "dir", nodeName);
-            assertNull("documentadoptnode05_namespaceURI", nodeNamespaceURI);
-            assertNull("documentadoptnode05_prefix", nodePrefix);
-            assertNull("documentadoptnode05_ownerDoc", attrOwnerElem);
-            assertTrue("documentadoptnode05_specified", isSpecified);
+            assertEquals( "dir", nodeName);
+            assertNull( nodeNamespaceURI);
+            assertNull(nodePrefix);
+            assertNull(attrOwnerElem);
+            assertTrue(isSpecified);
         }
     }
 }

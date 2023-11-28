@@ -27,7 +27,7 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
@@ -38,7 +38,7 @@ import org.loboevolution.html.node.Node;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -83,7 +83,7 @@ public class nodeelementnodeattributesTest extends LoboUnitTest {
             attrName = attrNode.getNodeName();
             attrList.add(attrName);
         }
-        assertEquals("nodeElementNodeValueAssert1", expected, attrList);
+        assertEquals(expected, attrList);
     }
 }
 

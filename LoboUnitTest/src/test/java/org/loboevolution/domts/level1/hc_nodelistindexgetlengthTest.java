@@ -27,14 +27,14 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeList;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -69,9 +69,9 @@ public class hc_nodelistindexgetlengthTest extends LoboUnitTest {
         length = employeeList.getLength();
 
         if (length == 6) {
-            assertEquals("length_wo_space", 6, length);
+            assertEquals(6, length);
         } else {
-            assertEquals("length_w_space", 13, length);
+            assertEquals(13, length);
         }
 
     }

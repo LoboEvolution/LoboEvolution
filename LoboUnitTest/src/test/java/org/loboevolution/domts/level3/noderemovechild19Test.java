@@ -28,7 +28,7 @@ package org.loboevolution.domts.level3;
 
 
 import org.htmlunit.cssparser.dom.DOMException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
@@ -36,7 +36,7 @@ import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.EntityReference;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Using removeChild on the first 'p' Element node attempt to remove a EntityReference
@@ -66,7 +66,7 @@ public class noderemovechild19Test extends LoboUnitTest {
         child = (EntityReference) parent.getFirstChild();
         removed = (EntityReference) parent.removeChild(child);
         removedName = removed.getNodeName();
-        assertEquals("noderemovechild19", "beta", removedName);
+        assertEquals( "beta", removedName);
 
         try {
             removedNode = child.removeChild(parent);
@@ -92,7 +92,7 @@ public class noderemovechild19Test extends LoboUnitTest {
                 } catch (final DOMException ex) {
                     success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
                 }
-                assertTrue("throw_NO_MODIFICATION_ALLOWED_ERR", success);
+                assertTrue(success);
             }
         }
     }

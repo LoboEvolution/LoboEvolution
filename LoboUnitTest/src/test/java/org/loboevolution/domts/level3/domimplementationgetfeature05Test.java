@@ -27,12 +27,12 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
 
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 /**
@@ -54,7 +54,7 @@ public class domimplementationgetfeature05Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         domImpl = doc.getImplementation();
         domImplReturned = (DOMImplementation) domImpl.getFeature("", nullVersion);
-        assertNull("domimplementationgetFeature05", domImplReturned);
+        assertNull(domImplReturned);
     }
 }
 

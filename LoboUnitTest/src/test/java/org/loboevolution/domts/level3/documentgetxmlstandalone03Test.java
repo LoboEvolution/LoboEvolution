@@ -27,11 +27,11 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 
 /**
@@ -49,7 +49,7 @@ public class documentgetxmlstandalone03Test extends LoboUnitTest {
         final boolean standalone;
         doc = sampleXmlFile("barfoo_standalone_no.xml");
         standalone = doc.getXmlStandalone();
-        assertFalse("documentgetxmlstandalone03", standalone);
+        assertFalse(standalone);
     }
 }
 

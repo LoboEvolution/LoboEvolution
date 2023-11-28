@@ -27,12 +27,12 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.CharacterData;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -73,16 +73,16 @@ public class nodeinsertbefore11Test extends LoboUnitTest {
         appendedChild = docFrag.appendChild(eRef);
         inserted = docFrag.insertBefore(comment, pi);
         insertedVal = ((CharacterData) /*Node */inserted).getData();
-        assertEquals("nodeinsertbefore11_Comment", "Comment", insertedVal);
+        assertEquals( "Comment", insertedVal);
         inserted = docFrag.insertBefore(txt, comment);
         insertedVal = ((CharacterData) /*Node */inserted).getData();
-        assertEquals("nodeinsertbefore11_Text", "Text", insertedVal);
+        assertEquals("Text", insertedVal);
         inserted = docFrag.insertBefore(cdata, txt);
         insertedVal = ((CharacterData) /*Node */inserted).getData();
-        assertEquals("nodeinsertbefore11_CDATA", "CDATA", insertedVal);
+        assertEquals( "CDATA", insertedVal);
         inserted = docFrag.insertBefore(eRef, cdata);
         insertedVal = inserted.getNodeName();
-        assertEquals("nodeinsertbefore11_Ent1", "alpha", insertedVal);
+        assertEquals("alpha", insertedVal);
     }
 }
 

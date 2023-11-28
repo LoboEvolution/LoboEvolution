@@ -27,13 +27,13 @@
 
 package org.loboevolution.domts.level2;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -63,7 +63,7 @@ public class hasAttribute04Test extends LoboUnitTest {
         elementList = doc.getElementsByTagName("address");
         testNode = (Element) elementList.item(0);
         state = testNode.hasAttribute("dmstc:domestic");
-        assertTrue("hasDomesticAttr", state);
+        assertTrue(state);
     }
 }
 

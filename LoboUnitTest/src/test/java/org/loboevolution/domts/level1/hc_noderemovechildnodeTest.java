@@ -27,7 +27,7 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
@@ -38,7 +38,7 @@ import org.loboevolution.html.node.NodeList;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -90,7 +90,7 @@ public class hc_noderemovechildnodeTest extends LoboUnitTest {
         oldChild = emList.item(0);
         removedChild = employeeNode.removeChild(oldChild);
         removedName = removedChild.getNodeName();
-        assertEquals("removedName", "EM", removedName);
+        assertEquals("EM", removedName);
         for (int indexN10098 = 0; indexN10098 < childList.getLength(); indexN10098++) {
             child = childList.item(indexN10098);
             nodeType = child.getNodeType();
@@ -99,12 +99,12 @@ public class hc_noderemovechildnodeTest extends LoboUnitTest {
             if (nodeType == 1) {
                 actual.add(childName);
             } else {
-                assertEquals("textNodeType", 3, nodeType);
-                assertEquals("textNodeName", "#text", childName);
+                assertEquals(3, nodeType);
+                assertEquals( "#text", childName);
             }
 
         }
-        assertEquals("childNames", expected, actual);
+        assertEquals(expected, actual);
     }
 }
 

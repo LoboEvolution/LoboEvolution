@@ -27,14 +27,14 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 /**
@@ -66,6 +66,6 @@ public class hc_elementgetattributenodenullTest extends LoboUnitTest {
         elementList = doc.getElementsByTagName("acronym");
         testEmployee = (Element) elementList.item(0);
         domesticAttr = testEmployee.getAttributeNode("invalidAttribute");
-        assertNull("elementGetAttributeNodeNullAssert", domesticAttr);
+        assertNull(domesticAttr);
     }
 }

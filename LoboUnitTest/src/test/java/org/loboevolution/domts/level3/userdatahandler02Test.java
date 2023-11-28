@@ -27,7 +27,7 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.nodeimpl.UserDataHandlerImpl;
@@ -37,8 +37,8 @@ import org.loboevolution.html.node.Node;
 
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 
 /**
@@ -78,29 +78,29 @@ public class userdatahandler02Test extends LoboUnitTest {
         elementNS = node.getNamespaceURI();
         newNode = node.cloneNode(true);
         notifications = userDataHandlerImpl.getAllNotifications();
-        assertEquals("twoNotifications", 2, notifications.size());
+        assertEquals(2, notifications.size());
         for (final UserDataNotification userDataNotification : notifications) {
             operation = userDataNotification.getOperation();
-            assertEquals("operationIsClone", 1, operation);
+            assertEquals(1, operation);
             key = userDataNotification.getKey();
             data = (String) userDataNotification.getData();
 
             if ("greeting".equals(key)) {
-                assertEquals("greetingDataHello", hello, data);
+                assertEquals(hello, data);
                 greetingCount += 1;
             } else {
-                assertEquals("saluationKey", "salutation", key);
-                assertEquals("salutationDataMr", mister, data);
+                assertEquals("salutation", key);
+                assertEquals(mister, data);
                 salutationCount += 1;
             }
 
             src = userDataNotification.getSrc();
-            assertSame("srcIsNode", node, src);
+            assertSame(node, src);
             dst = userDataNotification.getDst();
-            assertSame("dstIsNewNode", newNode, dst);
+            assertSame(newNode, dst);
         }
-        assertEquals("greetingCountIs1", 1, greetingCount);
-        assertEquals("salutationCountIs1", 1, salutationCount);
+        assertEquals(1, greetingCount);
+        assertEquals(1, salutationCount);
     }
 }
 

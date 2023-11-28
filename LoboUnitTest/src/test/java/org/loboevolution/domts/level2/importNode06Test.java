@@ -27,14 +27,14 @@
 
 package org.loboevolution.domts.level2;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -73,15 +73,15 @@ public class importNode06Test extends LoboUnitTest {
         aNewDoc = sampleXmlFile("staffNS.xml");
         addresses = aNewDoc.getElementsByTagName("address");
         element = (Element) addresses.item(0);
-        assertNotNull("empAddressNotNull", element);
+        assertNotNull(element);
         aNode = doc.importNode(element, true);
         hasChild = aNode.hasChildNodes();
-        assertTrue("throw_True", hasChild);
+        assertTrue(hasChild);
         name = aNode.getNodeName();
-        assertEquals("nodeName", "ADDRESS", name);
+        assertEquals("ADDRESS", name);
         child = aNode.getFirstChild();
         value = child.getNodeValue();
-        assertEquals("nodeValue", "27 South Road. Dallas, texas 98556", value);
+        assertEquals("27 South Road. Dallas, texas 98556", value);
     }
 }
 

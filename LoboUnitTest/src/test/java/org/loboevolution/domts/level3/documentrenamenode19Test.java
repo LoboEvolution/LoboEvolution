@@ -28,14 +28,14 @@ package org.loboevolution.domts.level3;
 
 
 import org.htmlunit.cssparser.dom.DOMException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -76,7 +76,7 @@ public class documentrenamenode19Test extends LoboUnitTest {
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NAMESPACE_ERR);
             }
-            assertTrue("documentrenamenode19_NAMESPACE_ERR", success);
+            assertTrue(success);
 
         }
     }

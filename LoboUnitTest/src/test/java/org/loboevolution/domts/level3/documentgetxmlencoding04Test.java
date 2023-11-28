@@ -27,11 +27,11 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 /**
@@ -49,7 +49,7 @@ public class documentgetxmlencoding04Test extends LoboUnitTest {
         final String encodingName;
         doc = sampleXmlFile("hc_staff.xml");
         encodingName = doc.getXmlEncoding();
-        assertNull("documentgetxmlencoding04", encodingName);
+        assertNull(encodingName);
     }
 }
 

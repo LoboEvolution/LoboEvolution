@@ -39,9 +39,28 @@
             <version>1.0</version>
         </dependency>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.13.2</version>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.10.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.10.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
+            <version>5.10.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-suite</artifactId>
+            <version>1.10.1</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -57,19 +76,18 @@
     </dependencies>
 
     <build>
-        <sourceDirectory>src</sourceDirectory>
         <testSourceDirectory>src/test/java</testSourceDirectory>
         <directory>${buildDirectory}</directory>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-report-plugin</artifactId>
-                <version>3.0.0-M7</version>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.2</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-deploy-plugin</artifactId>
-                <version>3.0.0-M2</version>
+                <version>3.1.1</version>
                 <configuration>
                     <skip>true</skip>
                 </configuration>
@@ -77,12 +95,12 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
-                <version>3.12.1</version>
+               <version>4.0.0-M12</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-project-info-reports-plugin</artifactId>
-                <version>3.4.1</version>
+                <version>3.5.0</version>
             </plugin>
         </plugins>
     </build>
@@ -92,7 +110,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-project-info-reports-plugin</artifactId>
-                <version>3.4.1</version>
+                <version>3.5.0</version>
                 <reportSets>
                     <reportSet>
                         <reports>

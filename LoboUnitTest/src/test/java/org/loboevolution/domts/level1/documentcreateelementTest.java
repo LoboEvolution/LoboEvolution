@@ -27,12 +27,12 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -52,7 +52,6 @@ public class documentcreateelementTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -64,11 +63,11 @@ public class documentcreateelementTest extends LoboUnitTest {
         doc = sampleXmlFile("staff.xml");
         newElement = doc.createElement("address");
         newElementName = newElement.getNodeName();
-        assertEquals("name", "address", newElementName);
+        assertEquals("address", newElementName);
         newElementType = newElement.getNodeType();
-        assertEquals("type", 1, newElementType);
+        assertEquals(1, newElementType);
         newElementValue = newElement.getNodeValue();
-        assertNull("valueInitiallyNull", newElementValue);
+        assertNull(newElementValue);
     }
 }
 

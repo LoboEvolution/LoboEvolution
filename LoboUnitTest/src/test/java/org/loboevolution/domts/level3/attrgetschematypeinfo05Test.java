@@ -27,7 +27,7 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Attr;
@@ -35,8 +35,8 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.TypeInfo;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 /**
@@ -64,11 +64,11 @@ public class attrgetschematypeinfo05Test extends LoboUnitTest {
         acronymElem = (Element) elemList.item(2);
         attr = acronymElem.getAttributeNode("class");
         typeInfo = attr.getSchemaTypeInfo();
-        assertNotNull("typeInfoNotNull", typeInfo);
+        assertNotNull(typeInfo);
         typeName = typeInfo.getTypeName();
-        assertEquals("nameIsClassType", "classType", typeName);
+        assertEquals( "classType", typeName);
         typeNS = typeInfo.getTypeNamespace();
-        assertEquals("nsIsXHTML", "http://www.w3.org/1999/xhtml", typeNS);
+        assertEquals("http://www.w3.org/1999/xhtml", typeNS);
     }
 }
 

@@ -27,13 +27,13 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.NodeList;
 import org.loboevolution.html.node.ProcessingInstruction;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -68,7 +68,7 @@ public class processinginstructiongetdataTest extends LoboUnitTest {
         childNodes = doc.getChildNodes();
         piNode = (ProcessingInstruction) childNodes.item(0);
         data = piNode.getData();
-        assertEquals("processinginstructionGetTargetAssert", "PIDATA", data);
+        assertEquals("PIDATA", data);
     }
 
 }

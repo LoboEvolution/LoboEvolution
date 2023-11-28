@@ -27,13 +27,13 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.nodeimpl.DOMErrorMonitor;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -72,15 +72,15 @@ public class canonicalform01Test extends LoboUnitTest {
             entRef = doc.createEntityReference("ent1");
             pElem.appendChild(entRef);
             doc.normalizeDocument();
-            assertTrue("normalizeError", errorMonitor.assertLowerSeverity(2));
+            assertTrue(errorMonitor.assertLowerSeverity(2));
             pList = doc.getElementsByTagName("p");
             pElem = (Element) pList.item(0);
             child = pElem.getLastChild();
-            assertNotNull("lastChildNotNull", child);
+            assertNotNull(child);
             childName = child.getNodeName();
-            assertEquals("firstChildName", "#text", childName);
+            assertEquals( "#text", childName);
             childValue = child.getNodeValue();
-            assertEquals("firstChildValue", "barfoo", childValue);
+            assertEquals( "barfoo", childValue);
         }
     }
 }

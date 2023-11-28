@@ -27,11 +27,11 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.*;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Attr nodes may be associated with Element nodes contained within a DocumentFragment.
@@ -69,7 +69,7 @@ public class AttrCreateDocumentFragmentTest extends LoboUnitTest {
         domesticAttr = domesticNode.getAttributes();
         attrs = (Attr) domesticAttr.item(0);
         attrName = attrs.getName();
-        assertEquals("attrCreateDocumentFragmentAssert", "newdomestic", attrName);
+        assertEquals("newdomestic", attrName);
     }
 }
 

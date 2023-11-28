@@ -27,14 +27,14 @@
 
 package org.loboevolution.domts.level2;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.Notation;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.html.node.NamedNodeMap;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -74,17 +74,17 @@ public class importNode13Test extends LoboUnitTest {
         aNewDoc = sampleXmlFile("staffNS.xml");
         doc1Type = aNewDoc.getDoctype();
         notationList = doc1Type.getNotations();
-        assertNotNull("notationsNotNull", notationList);
+        assertNotNull(notationList);
         notation = (Notation) notationList.getNamedItem("notation1");
         aNode = (Notation) doc.importNode(notation, false);
         ownerDocument = aNode.getOwnerDocument();
         docType = ownerDocument.getDoctype();
         system = docType.getSystemId();
-        assertEquals("systemId", "staffNS.dtd", system);
+        assertEquals("staffNS.dtd", system);
         publicVal = aNode.getPublicId();
-        assertEquals("publicId", "notation1File", publicVal);
+        assertEquals( "notation1File", publicVal);
         system = aNode.getSystemId();
-        assertNull("notationSystemId", system);
+        assertNull(system);
     }
 }
 

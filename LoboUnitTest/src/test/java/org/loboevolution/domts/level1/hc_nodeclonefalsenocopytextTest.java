@@ -27,14 +27,14 @@
 
 package org.loboevolution.domts.level1;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeList;
 
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 /**
@@ -71,7 +71,7 @@ public class hc_nodeclonefalsenocopytextTest extends LoboUnitTest {
         childNode = childList.item(3);
         clonedNode = childNode.cloneNode(false);
         lastChildNode = clonedNode.getLastChild();
-        assertNull("nodeCloneFalseNoCopyTextAssert1", lastChildNode);
+        assertNull(lastChildNode);
     }
 }
 

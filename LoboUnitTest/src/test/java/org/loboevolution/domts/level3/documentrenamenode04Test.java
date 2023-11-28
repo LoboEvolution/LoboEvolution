@@ -27,14 +27,14 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 /**
@@ -60,8 +60,8 @@ public class documentrenamenode04Test extends LoboUnitTest {
         renamedNode = doc.renameNode(attr, "", "title");
         nodeName = renamedNode.getNodeName();
         namespaceURI = renamedNode.getNamespaceURI();
-        assertEquals("documentrenamenode04_nodeName", "title", nodeName);
-        assertNull("documentrenamenode04_namespaceURI", namespaceURI);
+        assertEquals("title", nodeName);
+        assertNull(namespaceURI);
     }
 }
 

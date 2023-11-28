@@ -27,7 +27,7 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.DOMError;
 import org.loboevolution.html.dom.DOMLocator;
@@ -40,7 +40,7 @@ import org.loboevolution.html.node.Node;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -98,27 +98,27 @@ public class canonicalform05Test extends LoboUnitTest {
                 if (severity == 2) {
                     location = error.getLocation();
                     problemNode = location.getRelatedNode();
-                    assertSame("relatedNodeIsL1Node", newChild, problemNode);
+                    assertSame(newChild, problemNode);
                     lineNumber = location.getLineNumber();
-                    assertEquals("lineNumber", -1, lineNumber);
+                    assertEquals(-1, lineNumber);
                     columnNumber = location.getColumnNumber();
-                    assertEquals("columnNumber", -1, columnNumber);
+                    assertEquals(-1, columnNumber);
                     byteOffset = location.getByteOffset();
-                    assertEquals("byteOffset", -1, byteOffset);
+                    assertEquals(-1, byteOffset);
                     utf16Offset = location.getUtf16Offset();
-                    assertEquals("utf16Offset", -1, utf16Offset);
+                    assertEquals(-1, utf16Offset);
                     uri = location.getUri();
-                    assertNull("uri", uri);
+                    assertNull(uri);
                     message = error.getMessage();
                     length = message.length();
-                    assertTrue("messageNotEmpty", (length > 0));
+                    assertTrue(length > 0);
                     errorCount += 1;
                 } else {
-                    assertEquals("anyOthersShouldBeWarnings", 1, severity);
+                    assertEquals(1, severity);
                 }
 
             }
-            assertEquals("oneError", 1, errorCount);
+            assertEquals(1, errorCount);
         }
     }
 }

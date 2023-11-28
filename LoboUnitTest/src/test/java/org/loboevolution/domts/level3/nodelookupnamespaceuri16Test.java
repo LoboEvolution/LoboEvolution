@@ -26,13 +26,13 @@
 
 package org.loboevolution.domts.level3;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 /**
  * Invoke lookupNamespaceURI on a new Attribute node with with a namespace URI
  * and prefix and verify if the namespaceURI returned is null.
@@ -54,7 +54,7 @@ public void runTest(){
         attr=doc.createAttributeNS("http://www.w3.org/XML/1998/namespace","xml:lang");
         attNode=elem.setAttributeNodeNS(attr);
         namespaceURI=attr.lookupNamespaceURI("xml");
-        assertNull("nodelookupnamespaceuri16",namespaceURI);
+        assertNull(namespaceURI);
         }
         }
 

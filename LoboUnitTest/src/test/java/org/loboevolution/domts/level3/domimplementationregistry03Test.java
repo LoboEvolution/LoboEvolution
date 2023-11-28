@@ -28,13 +28,13 @@ package org.loboevolution.domts.level3;
 
 
 import lombok.SneakyThrows;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.nodeimpl.bootstrap.DOMImplementationRegistry;
 import org.loboevolution.html.node.DOMImplementation;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -53,11 +53,11 @@ public class domimplementationregistry03Test extends LoboUnitTest {
         final DOMImplementation domImpl;
         final boolean hasFeature;
         final DOMImplementationRegistry domImplRegistry = DOMImplementationRegistry.newInstance();
-        assertNotNull("domImplRegistryNotNull", domImplRegistry);
+        assertNotNull(domImplRegistry);
         domImpl = domImplRegistry.getDOMImplementation("cOrE 3.0");
-        assertNotNull("domImplNotNull", domImpl);
+        assertNotNull(domImpl);
         hasFeature = domImpl.hasFeature("Core", "3.0");
-        assertTrue("hasCore", hasFeature);
+        assertTrue(hasFeature);
     }
 }
 

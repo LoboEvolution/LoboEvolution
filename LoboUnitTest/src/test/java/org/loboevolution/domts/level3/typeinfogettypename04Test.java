@@ -27,14 +27,14 @@
 package org.loboevolution.domts.level3;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.TypeInfo;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -62,7 +62,7 @@ public class typeinfogettypename04Test extends LoboUnitTest {
         emElem = (Element) elemList.item(0);
         elemTypeInfo = emElem.getSchemaTypeInfo();
         typeName = elemTypeInfo.getTypeName();
-        assertEquals("typeinfogettypename04_1", "emType", typeName);
+        assertEquals("emType", typeName);
     }
 }
 

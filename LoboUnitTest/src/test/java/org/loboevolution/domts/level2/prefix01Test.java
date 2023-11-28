@@ -27,12 +27,12 @@
 
 package org.loboevolution.domts.level2;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 /**
@@ -63,7 +63,7 @@ public class prefix01Test extends LoboUnitTest {
         doc = sampleXmlFile("staffNS.xml");
         createdNode = doc.createElement("test:employee");
         prefix = createdNode.getPrefix();
-        assertNull("throw_Null", prefix);
+        assertNull(prefix);
     }
 }
 
