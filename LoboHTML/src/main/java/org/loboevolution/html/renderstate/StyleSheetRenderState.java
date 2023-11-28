@@ -608,6 +608,11 @@ public class StyleSheetRenderState implements RenderState {
 		if (mi != INVALID_INSETS) {
 			return mi;
 		}
+
+		if("border-box".equals(getBoxSizing())){
+			return INVALID_INSETS;
+		}
+
 		final CSSStyleDeclaration props = getCssProperties();
 		if (props == null) {
 			mi = null;
