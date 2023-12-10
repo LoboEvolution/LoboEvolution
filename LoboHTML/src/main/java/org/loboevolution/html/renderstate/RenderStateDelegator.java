@@ -35,9 +35,6 @@ import java.util.Optional;
 
 /**
  * <p>Abstract RenderStateDelegator class.</p>
- *
- *
- *
  */
 public abstract class RenderStateDelegator implements RenderState {
 	protected final RenderState delegate;
@@ -86,6 +83,12 @@ public abstract class RenderStateDelegator implements RenderState {
 	@Override
 	public BackgroundInfo getBackgroundInfo() {
 		return this.delegate.getBackgroundInfo();
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public BackgroundInfo getBackgroundImageInfo(final int width, final int height) {
+		return this.delegate.getBackgroundImageInfo(width, height);
 	}
 
 	/** {@inheritDoc} */

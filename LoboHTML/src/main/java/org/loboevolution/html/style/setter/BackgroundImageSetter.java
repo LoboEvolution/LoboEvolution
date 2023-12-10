@@ -34,6 +34,7 @@ import org.loboevolution.html.js.css.CSSStyleDeclarationImpl;
 import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.style.HtmlValues;
 
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -70,17 +71,10 @@ public class BackgroundImageSetter implements SubPropertySetter {
 					if (tentativeUri.contains("data:image")) {
 						finalValue = tentativeUri;
 					} else {
-						final URL resourcesUrl = Urls.createURL(new URL(baseHref), "../resources");
-						if (resourcesUrl != null) {
-							finalValue = "url("
-									+ HtmlValues.quoteAndEscape(resourcesUrl.toExternalForm() + "/" + tentativeUri)
-									+ ")";
-						} else {
-							final URL styleUrl = Urls.createURL(null, baseHref);
-							finalValue = "url("
-									+ HtmlValues.quoteAndEscape(Urls.createURL(styleUrl, tentativeUri).toExternalForm())
-									+ ")";
-						}
+						final URL resourcesUrl = Urls.createURL(null, baseHref);
+						finalValue = "url("
+								+ HtmlValues.quoteAndEscape(Urls.createURL(resourcesUrl, tentativeUri).toExternalForm())
+								+ ")";
 					}
 
 				} catch (final Exception mfu) {

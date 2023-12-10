@@ -219,6 +219,15 @@ public interface RenderState {
 	BackgroundInfo getBackgroundInfo();
 
 	/**
+	 * <p>getBackgroundImageInfo.</p>
+	 *
+	 * @param width a {@link java.lang.Integer} object.
+	 * @param height a {@link java.lang.Integer} object.
+	 * @return a {@link org.loboevolution.info.BackgroundInfo} object.
+	 */
+	BackgroundInfo getBackgroundImageInfo(int width, int height);
+
+	/**
 	 * <p>getBlankWidth.</p>
 	 *
 	 * @return a int.

@@ -906,10 +906,6 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 				clientG.fillRect(bkgBounds.x, bkgBounds.y, bkgBounds.width, bkgBounds.height);
 			}
 
-			if (binfo == null) {
-				binfo = rs == null ? null : rs.getBackgroundInfo();
-			}
-
 			final Image image = this.backgroundImage;
 			if (image != null) {
 				if (bkgBounds == null) {
@@ -919,8 +915,20 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 				final int h = image.getHeight(this);
 				if (w != -1 && h != -1) {
 
-					final int imageY = getImageY(totalHeight, binfo, h);
-					final int imageX = getImageX(totalWidth, binfo, w);
+					if (rs != null) {
+						binfo = rs == null ? null : rs.getBackgroundImageInfo(w, h);
+					}
+
+					if(binfo != null && binfo.getBackgroundXPosition() == 0) {
+						binfo.setBackgroundXPosition(startX);
+					}
+
+					if(binfo != null && binfo.getBackgroundYPosition() == 0) {
+						binfo.setBackgroundYPosition(startY);
+					}
+
+					final int imageY = binfo == null ? 0 : binfo.getBackgroundYPosition();
+					final int imageX = binfo == null ? 0 : binfo.getBackgroundXPosition();
 
 					final int baseX = (bkgBounds.x / w) * w - (w - imageX);
 					final int baseY = (bkgBounds.y / h) * h - (h - imageY);
@@ -930,19 +938,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 
 					switch (binfo == null ? BackgroundInfo.BR_REPEAT : binfo.getBackgroundRepeat()) {
 						case BackgroundInfo.BR_NO_REPEAT:
-							final int _imageX;
-							if (binfo.isBackgroundXPositionAbsolute()) {
-								_imageX = binfo.getBackgroundXPosition();
-							} else {
-								_imageX = binfo.getBackgroundXPosition() * (totalWidth - w) / 100;
-							}
-							final int _imageY;
-							if (binfo.isBackgroundYPositionAbsolute()) {
-								_imageY = binfo.getBackgroundYPosition();
-							} else {
-								_imageY = binfo.getBackgroundYPosition() * (totalHeight - h) / 100;
-							}
-							g.drawImage(image, _imageX, _imageY, w, h, this);
+								g.drawImage(image, imageX, 	imageY, w, h, this);
 							break;
 
 						case BackgroundInfo.BR_REPEAT_X:
@@ -1079,30 +1075,6 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 			default:
 				g.drawLine(x1, y1, x2, y2);
 				break;
-		}
-	}
-
-	private static int getImageY(final int totalHeight, final BackgroundInfo binfo, final int h) {
-		if (binfo == null) {
-			return 0;
-		} else {
-			if (binfo.isBackgroundYPositionAbsolute()) {
-				return binfo.getBackgroundYPosition();
-			} else {
-				return (binfo.getBackgroundYPosition() * (totalHeight - h)) / 100;
-			}
-		}
-	}
-
-	private static int getImageX(final int totalWidth, final BackgroundInfo binfo, final int w) {
-		if (binfo == null) {
-			return 0;
-		} else {
-			if (binfo.isBackgroundXPositionAbsolute()) {
-				return binfo.getBackgroundXPosition();
-			} else {
-				return (binfo.getBackgroundXPosition() * (totalWidth - w)) / 100;
-			}
 		}
 	}
 }

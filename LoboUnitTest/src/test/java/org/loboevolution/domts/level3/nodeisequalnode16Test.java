@@ -59,7 +59,7 @@ public class nodeisequalnode16Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("p");
         addrElement = (Element) elementList.item(3);
-        attr1 = addrElement.getAttributeNodeNS(nullNSURI, "dir");
+        attr1 = addrElement.getAttributeNodeNS(nullNSURI, "nm:dir");
         attr2 = (Attr) attr1.cloneNode(true);
         isEqual = attr1.isEqualNode(attr2);
         assertTrue(isEqual);

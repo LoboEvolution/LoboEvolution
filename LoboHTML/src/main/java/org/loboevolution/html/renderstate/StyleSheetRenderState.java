@@ -36,8 +36,8 @@ import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
-import org.loboevolution.html.dom.domimpl.HTMLLinkElementImpl;
 import org.loboevolution.html.node.css.CSSStyleDeclaration;
+import org.loboevolution.html.renderer.BackgroundRender;
 import org.loboevolution.html.renderer.LineBreak;
 import org.loboevolution.html.renderer.RFlex;
 import org.loboevolution.html.style.*;
@@ -48,12 +48,8 @@ import org.loboevolution.laf.ColorFactory;
 import org.loboevolution.laf.FontFactory;
 import org.loboevolution.laf.FontKey;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.net.URL;
 import java.util.*;
 
 /**
@@ -289,19 +285,33 @@ public class StyleSheetRenderState implements RenderState {
 			}
 			
 			if (Strings.isNotBlank(backgroundRepeatText)) {
-				applyBackgroundRepeat(binfo, backgroundRepeatText);
-			}
-			
-			if (Strings.isNotBlank(backgroundPositionText)) {
-				applyBackgroundPosition(binfo, backgroundPositionText);
+				final BackgroundRender backgroundImageRender = new BackgroundRender(element, prevRenderState, document);
+				backgroundImageRender.applyBackgroundRepeat(binfo, backgroundRepeatText);
 			}
 
 			if (Strings.isNotBlank(backgroundImageText)) {
-				applyBackgroundImage(binfo, backgroundImageText, this.document, props);
+				final BackgroundRender backgroundImageRender = new BackgroundRender(element, prevRenderState, document);
+				backgroundImageRender.applyBackgroundImage(binfo, backgroundImageText, this, props);
 			}
 		}
 		this.iBackgroundInfo = binfo;		
 		return binfo;
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public BackgroundInfo getBackgroundImageInfo(final int width, final int height){
+		final BackgroundInfo binfo = iBackgroundInfo;
+		final CSSStyleDeclaration props = getCssProperties();
+		final String backgroundPositionText = props.getBackgroundPosition();
+
+		if (Strings.isNotBlank(backgroundPositionText)) {
+			final BackgroundRender backgroundImageRender = new BackgroundRender(element, prevRenderState, document);
+			backgroundImageRender.applyBackgroundPosition(binfo, backgroundPositionText, width, height);
+		}
+		this.iBackgroundInfo = binfo;
+		return binfo;
+
 	}
 
 	/** {@inheritDoc} */
@@ -1316,188 +1326,4 @@ public class StyleSheetRenderState implements RenderState {
 	   final CSSStyleDeclaration props = this.getCssProperties();
        return props == null ? null : props.getVerticalAlign();
    }
-   
-   
-   private void applyBackgroundPosition(final BackgroundInfo binfo, final String position) {
-		binfo.setBackgroundXPositionAbsolute(false);
-		binfo.setBackgroundYPositionAbsolute(false);
-		binfo.setBackgroundXPosition(50);
-		binfo.setBackgroundYPosition(50);
-		final StringTokenizer tok = new StringTokenizer(position, " \t\r\n");
-		if (tok.hasMoreTokens()) {
-			final String xposition = tok.nextToken();
-			applyBackgroundHorizontalPositon(binfo, xposition);
-			if (tok.hasMoreTokens()) {
-				final String yposition = tok.nextToken();
-				applyBackgroundVerticalPosition(binfo, yposition);
-			}
-		}
-	}
-	
-	private void applyBackgroundRepeat(final BackgroundInfo binfo, final String backgroundRepeatText) {
-		if (binfo.getBackgroundRepeat() == BackgroundInfo.BR_REPEAT) {
-			final CSSValues rep = CSSValues.get(backgroundRepeatText);
-			switch (rep) {
-			case REPEAT_X:
-				binfo.setBackgroundRepeat(BackgroundInfo.BR_REPEAT_X);
-				break;
-			case REPEAT_Y:
-				binfo.setBackgroundRepeat(BackgroundInfo.BR_REPEAT_Y);
-				break;
-			case REPEAT_NO:
-				binfo.setBackgroundRepeat(BackgroundInfo.BR_NO_REPEAT);
-				break;
-			case INHERIT:
-				final BackgroundInfo bi = prevRenderState.getPreviousRenderState().getBackgroundInfo();
-				if (bi != null) {
-					binfo.setBackgroundRepeat(bi.getBackgroundRepeat());
-				}
-				break;
-			case INITIAL:
-			case REPEAT:
-			default:
-				binfo.setBackgroundRepeat(BackgroundInfo.BR_REPEAT);
-				break;
-			}
-		}
-	}
-
-	private void applyBackgroundVerticalPosition(final BackgroundInfo binfo, final String yposition) {
-		if (yposition.endsWith("%")) {
-			binfo.setBackgroundYPositionAbsolute(false);
-			try {
-				binfo.setBackgroundYPosition(
-						(int) Double.parseDouble(yposition.substring(0, yposition.length() - 1).trim()));
-			} catch (final NumberFormatException nfe) {
-				binfo.setBackgroundYPosition(0);
-			}
-		} else {
-
-			final CSSValues ypos = CSSValues.get(yposition);
-			switch (ypos) {
-			case CENTER:
-				binfo.setBackgroundYPositionAbsolute(false);
-				binfo.setBackgroundYPosition(50);
-				break;
-			case RIGHT:
-				case BOTTOM:
-					binfo.setBackgroundYPositionAbsolute(false);
-				binfo.setBackgroundYPosition(100);
-				break;
-			case LEFT:
-				case TOP:
-					binfo.setBackgroundYPositionAbsolute(false);
-				binfo.setBackgroundYPosition(0);
-				break;
-				case INHERIT:
-				final BackgroundInfo bi = prevRenderState.getPreviousRenderState().getBackgroundInfo();
-				if (bi != null) {
-					binfo.setBackgroundYPositionAbsolute(bi.isBackgroundYPositionAbsolute());
-					binfo.setBackgroundYPosition(bi.getBackgroundYPosition());
-				}
-				break;
-			case INITIAL:
-			default:
-				binfo.setBackgroundYPositionAbsolute(true);
-				binfo.setBackgroundYPosition(HtmlValues.getPixelSize(yposition, prevRenderState, document.getDefaultView(), 0));
-				break;
-			}
-		}
-	}
-	
-	private void applyBackgroundHorizontalPositon(final BackgroundInfo binfo, final String xposition) {
-		if (xposition.endsWith("%")) {
-			binfo.setBackgroundXPositionAbsolute(false);
-			try {
-				binfo.setBackgroundXPosition((int) Double.parseDouble(xposition.substring(0, xposition.length() - 1).trim()));
-			} catch (final NumberFormatException nfe) {
-				binfo.setBackgroundXPosition(0);
-			}
-		} else {
-
-			final CSSValues xpos = CSSValues.get(xposition);
-			switch (xpos) {
-			case CENTER:
-				binfo.setBackgroundXPositionAbsolute(false);
-				binfo.setBackgroundXPosition(50);
-				break;
-			case RIGHT:
-				case BOTTOM:
-					binfo.setBackgroundXPositionAbsolute(false);
-				binfo.setBackgroundXPosition(100);
-				break;
-			case LEFT:
-				case TOP:
-					binfo.setBackgroundXPositionAbsolute(false);
-				binfo.setBackgroundXPosition(0);
-				break;
-				case INHERIT:
-				final BackgroundInfo bi = prevRenderState.getPreviousRenderState().getBackgroundInfo();
-				if (bi != null) {
-					binfo.setBackgroundXPositionAbsolute(bi.isBackgroundXPositionAbsolute());
-					binfo.setBackgroundXPosition(bi.getBackgroundXPosition());
-				}
-				break;
-			case INITIAL:
-			default:
-				binfo.setBackgroundXPositionAbsolute(true);
-				binfo.setBackgroundXPosition(HtmlValues.getPixelSize(xposition, prevRenderState, document.getDefaultView(), 0));
-				break;
-			}
-		}
-	}
-
-	private void applyBackgroundImage(final BackgroundInfo binfo, final String backgroundImageText, final HTMLDocumentImpl document,final  CSSStyleDeclaration props) {
-		if (HtmlValues.isUrl(backgroundImageText)) {
-			final String start = "url(";
-			final int startIdx = start.length() + 1;
-			final int closingIdx = backgroundImageText.lastIndexOf(')') - 1;
-			String quotedUri = backgroundImageText.substring(startIdx, closingIdx);
-			final String[] items = {"http", "https", "file"};
-			if (Strings.containsWords(quotedUri, items)) {
-				try {
-					binfo.setBackgroundImage(linkUri(document, quotedUri, backgroundImageText));
-				} catch (final Exception e) {
-					binfo.setBackgroundImage(null);
-				}
-			} else {
-				if (quotedUri.contains(";base64,")) {
-					final String base64 = backgroundImageText.split(";base64,")[1];
-					final byte[] decodedBytes = Base64.getDecoder().decode(Strings.linearize(base64));
-					quotedUri = Arrays.toString(decodedBytes);
-				}
-				binfo.setBackgroundImage(linkUri(document, quotedUri, backgroundImageText));
-			}
-		} else if (HtmlValues.isGradient(backgroundImageText)) {
-			try {
-				final GradientStyle style = new GradientStyle();
-				final BufferedImage img = style.gradientToImg(document, props, this, backgroundImageText);
-				if (img != null) {
-					final File f = File.createTempFile("temp", null);
-					ImageIO.write(img, "png", f);
-					binfo.setBackgroundImage(f.toURI().toURL());
-				}
-			} catch (final Exception e) {
-				log.error(e.getMessage(), e);
-			}
-		}
-	}
-
-	private URL linkUri(final HTMLDocumentImpl document, final String quotedUri, final String backgroundImageText) {
-		if (element instanceof HTMLLinkElementImpl) {
-			final HTMLLinkElementImpl elm = (HTMLLinkElementImpl) element;
-			final String rel = elm.getAttribute("rel");
-			if (rel != null) {
-				final String cleanRel = rel.trim().toLowerCase();
-				final boolean isStyleSheet = cleanRel.equals("stylesheet");
-				final boolean isAltStyleSheet = cleanRel.equals("alternate stylesheet");
-
-				if ((isStyleSheet || isAltStyleSheet)) {
-					return document.getFullURL(quotedUri, elm.getHref());
-
-				}
-			}
-		}
-		return document.getFullURL(quotedUri, backgroundImageText);
-	}
 }
