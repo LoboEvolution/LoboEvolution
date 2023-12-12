@@ -38,6 +38,8 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
+
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.component.BrowserFrame;
 import org.loboevolution.config.DesktopConfig;
 import org.loboevolution.info.BookmarkInfo;
@@ -51,10 +53,8 @@ import com.jtattoo.plaf.lobo.LoboTextField;
 
 /**
  * <p>ShowPasswordWindow class.</p>
- *
- *
- *
  */
+@Slf4j
 public class ShowPasswordWindow extends JFrame implements LoboLookAndFeel {
 
 	/** The Constant serialVersionUID. */
@@ -312,7 +312,7 @@ public class ShowPasswordWindow extends JFrame implements LoboLookAndFeel {
 			}
 
 		} catch (final Exception e) {
-			e.printStackTrace();
+			log.error(e.getMessage(), e);
 		}
 
 		panel_3.setPreferredSize(new Dimension(0, 1000));

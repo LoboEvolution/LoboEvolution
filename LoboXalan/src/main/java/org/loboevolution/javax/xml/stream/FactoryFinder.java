@@ -26,6 +26,8 @@
 
 package org.loboevolution.javax.xml.stream;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.File;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
@@ -42,6 +44,7 @@ import java.util.ServiceLoader;
  *
  * @author Santiago.PericasGeertsen@sun.com
  */
+@Slf4j
 class FactoryFinder {
     // Check we have access to package.
     private static final String DEFAULT_PACKAGE = "com.sun.xml.internal.";
@@ -84,7 +87,7 @@ class FactoryFinder {
 
     private static void dPrint(final String msg) {
         if (debug) {
-            System.err.println("JAXP: " + msg);
+            log.debug("JAXP: " + msg);
         }
     }
 
@@ -306,7 +309,7 @@ class FactoryFinder {
             }
         }
         catch (final Exception ex) {
-            if (debug) ex.printStackTrace();
+            if (debug) log.error(ex.getMessage(), ex);
         }
 
         if (type.getName().equals(factoryId)) {

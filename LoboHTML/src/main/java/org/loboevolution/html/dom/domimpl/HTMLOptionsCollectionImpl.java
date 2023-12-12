@@ -159,8 +159,8 @@ public class HTMLOptionsCollectionImpl extends HTMLCollectionImpl implements HTM
 					opt.setSelected(i == 0);
 				}
 			}
-		} catch (final Exception e) {
-			e.printStackTrace();
+		} catch (final Exception ex) {
+			log.error(ex.getMessage(), ex);
 		}
 
 		return false;

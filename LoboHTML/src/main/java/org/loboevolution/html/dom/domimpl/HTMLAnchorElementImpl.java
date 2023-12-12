@@ -316,7 +316,6 @@ public class HTMLAnchorElementImpl extends HTMLElementImpl implements HTMLAnchor
             final Document document = getOwnerDocument();
             url = document == null ? null : new URL(document.getDocumentURI());
         } catch (final Exception mfu) {
-            System.out.println("getURL ---> ");
             url = null;
         }
         return url;

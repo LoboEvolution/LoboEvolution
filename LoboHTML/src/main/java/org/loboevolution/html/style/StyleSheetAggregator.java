@@ -26,6 +26,7 @@
 
 package org.loboevolution.html.style;
 
+import lombok.extern.slf4j.Slf4j;
 import org.htmlunit.cssparser.parser.CSSErrorHandler;
 import org.htmlunit.cssparser.parser.CSSException;
 import org.htmlunit.cssparser.parser.CSSOMParser;
@@ -61,6 +62,7 @@ import java.util.regex.Pattern;
  * found, it is added to the style sheet aggreagator by means of the
  * {@link #addStyleSheet(CSSStyleSheetImpl)} method.
  */
+@Slf4j
 public class StyleSheetAggregator {
 
 	private static final Pattern UNESCAPE_SELECTOR = Pattern.compile("\\\\([\\[\\]\\.:])");
@@ -1013,8 +1015,8 @@ public class StyleSheetAggregator {
 					} else {
 						index(index.addMedia(mediaList), sheet.getCssRules());
 					}
-				} catch (final Exception e) {
-					e.printStackTrace();
+				} catch (final Exception ex) {
+					log.error(ex.getMessage(), ex);
 				}
 			}
 		}

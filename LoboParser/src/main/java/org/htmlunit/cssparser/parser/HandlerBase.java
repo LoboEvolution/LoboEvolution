@@ -14,6 +14,7 @@
  */
 package org.htmlunit.cssparser.parser;
 
+import lombok.extern.slf4j.Slf4j;
 import org.htmlunit.cssparser.parser.media.MediaQueryList;
 import org.htmlunit.cssparser.parser.selector.SelectorList;
 
@@ -22,6 +23,7 @@ import org.htmlunit.cssparser.parser.selector.SelectorList;
  *
  * @author Ronald Brill
  */
+@Slf4j
 public class HandlerBase implements DocumentHandler, CSSErrorHandler {
 
     /** {@inheritDoc} */
@@ -120,7 +122,7 @@ public class HandlerBase implements DocumentHandler, CSSErrorHandler {
             .append(exception.getColumnNumber())
             .append("] ")
             .append(exception.getMessage());
-        System.err.println(sb);
+        log.error(sb.toString());
     }
 
     /** {@inheritDoc} */
@@ -134,7 +136,7 @@ public class HandlerBase implements DocumentHandler, CSSErrorHandler {
             .append(exception.getColumnNumber())
             .append("] ")
             .append(exception.getMessage());
-        System.err.println(sb);
+        log.error(sb.toString());
     }
 
     /** {@inheritDoc} */
@@ -148,6 +150,6 @@ public class HandlerBase implements DocumentHandler, CSSErrorHandler {
             .append(exception.getColumnNumber())
             .append("] ")
             .append(exception.getMessage());
-        System.err.println(sb);
+        log.error(sb.toString());
     }
 }

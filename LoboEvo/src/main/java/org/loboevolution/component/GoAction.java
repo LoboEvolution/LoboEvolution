@@ -26,6 +26,7 @@
 
 package org.loboevolution.component;
 
+import lombok.extern.slf4j.Slf4j;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.loboevolution.common.IORoutines;
@@ -55,6 +56,7 @@ import java.net.URLConnection;
 /**
  * <p>GoAction class.</p>
  */
+@Slf4j
 public class GoAction extends AbstractAction {
 
 	private static final long serialVersionUID = 1L;
@@ -130,7 +132,7 @@ public class GoAction extends AbstractAction {
 					break;
 			}
 		} catch (final Exception e) {
-			e.printStackTrace();
+			log.error(e.getMessage(), e);
 			if (!addressBarText.matches("^\\w+?://.*")) {
 				final SearchEngineStore searchEngine = new ToolsStore().getSelectedSearchEngine();
 				addressBarText = searchEngine.getBaseUrl() + addressBarText;

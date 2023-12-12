@@ -7,6 +7,8 @@
 package org.mozilla.javascript;
 
 import java.math.BigInteger;
+
+import lombok.extern.slf4j.Slf4j;
 import org.mozilla.javascript.ast.FunctionNode;
 
 /**
@@ -34,6 +36,7 @@ import org.mozilla.javascript.ast.FunctionNode;
  * space... but would require some method of deriving the final constant pool entry from information
  * available at parse time.
  */
+@Slf4j
 public class Decompiler {
     /**
      * Flag to indicate that the decompilation should omit the function header and trailing brace.
@@ -245,7 +248,7 @@ public class Decompiler {
         // Spew tokens in source, for debugging.
         // as TYPE number char
         if (printSource) {
-            System.err.println("length:" + length);
+            log.error("length:" + length);
             for (int i = 0; i < length; ++i) {
                 // Note that tokenToName will fail unless Context.printTrees
                 // is true.
@@ -257,7 +260,7 @@ public class Decompiler {
                     tokenname = "---";
                 }
                 String pad = tokenname.length() > 7 ? "\t" : "\t\t";
-                System.err.println(
+                log.error(
                         tokenname
                                 + pad
                                 + (int) source.charAt(i)
@@ -265,7 +268,6 @@ public class Decompiler {
                                 + ScriptRuntime.escapeString(source.substring(i, i + 1))
                                 + "'");
             }
-            System.err.println();
         }
 
         int braceNesting = 0;

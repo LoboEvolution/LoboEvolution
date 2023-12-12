@@ -62,7 +62,6 @@ public class noderemovechild05Test extends LoboUnitTest {
 
         } catch (final DOMException ex) {
             if (ex.getCode() == 9) {
-                ex.printStackTrace();
                 return;
             }
             throw ex;

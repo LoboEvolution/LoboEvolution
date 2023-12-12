@@ -114,7 +114,7 @@ public class ContentPageUI extends AbstractToolsUI {
                             textArea.setText(HttpNetwork.getSource(href, null));
                             textArea.repaint();
                         } catch (final Exception ex) {
-                            ex.printStackTrace();
+                            log.error(ex.getMessage(), ex);
                         }
                     }
                 }

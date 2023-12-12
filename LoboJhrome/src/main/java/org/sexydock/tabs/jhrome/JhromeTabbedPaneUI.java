@@ -26,6 +26,7 @@
 
 package org.sexydock.tabs.jhrome;
 
+import lombok.extern.slf4j.Slf4j;
 import org.omg.CORBA.BooleanHolder;
 import org.sexydock.InternalTransferableStore;
 import org.sexydock.SwingUtils;
@@ -51,6 +52,10 @@ import java.io.IOException;
 import java.util.List;
 import java.util.*;
 
+/**
+ * The Class JhromeTabbedPaneUI.
+ */
+@Slf4j
 public class JhromeTabbedPaneUI extends TabbedPaneUI {
     public static final String TAB_CLOSE_BUTTONS_VISIBLE = "sexydock.tabbedPane.tabCloseButtonsVisible";
 
@@ -153,7 +158,7 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
 
     private static void log(final Exception e) {
         if (LOG_EXCEPTIONS) {
-            e.printStackTrace();
+            log.error(e.getMessage(), e);
         }
     }
 
@@ -793,8 +798,8 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
 
         try {
             removeAllTabsInternal();
-        } catch (final Exception e) {
-            e.printStackTrace();
+        } catch (final Exception ex) {
+            log.error(ex.getMessage(), ex);
         }
 
         dragHandler.dispose();
@@ -1650,7 +1655,7 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
                 try {
                     tabLayeredPane.setComponentZOrder(selectedTab.tab, layer++);
                 } catch (final Exception ex) {
-                    ex.printStackTrace();
+                    log.error(ex.getMessage(), ex);
                 }
             }
 

@@ -27,6 +27,7 @@
 package org.loboevolution.menu.crono;
 
 import com.jtattoo.plaf.lobo.*;
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.component.BrowserFrame;
 import org.loboevolution.download.DownloadWindow;
 import org.loboevolution.config.DesktopConfig;
@@ -38,10 +39,8 @@ import java.util.List;
 
 /**
  * <p>ShowDowlaodWindow class.</p>
- *
- *
- *
  */
+@Slf4j
 public class ShowDowlaodWindow extends JFrame implements LoboLookAndFeel {
 
     /** The Constant serialVersionUID. */
@@ -146,7 +145,7 @@ public class ShowDowlaodWindow extends JFrame implements LoboLookAndFeel {
             }
 
         } catch (final Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage(), e);
         }
 
         panel_3.setPreferredSize(new Dimension(0, 700));

@@ -216,7 +216,7 @@ public class NativeJavaMethod extends BaseFunction {
 
         if (debug) {
             Class<?> actualType = (retval == null) ? null : retval.getClass();
-            System.err.println(
+            log.error(
                     " ----- Returned "
                             + retval
                             + " actual = "
@@ -232,7 +232,7 @@ public class NativeJavaMethod extends BaseFunction {
                                 retval, staticType);
         if (debug) {
             Class<?> actualType = (wrapped == null) ? null : wrapped.getClass();
-            System.err.println(" ----- Wrapped as " + wrapped + " class = " + actualType);
+            log.error(" ----- Wrapped as " + wrapped + " class = " + actualType);
         }
 
         if (wrapped == null && staticType == Void.TYPE) {

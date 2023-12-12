@@ -26,6 +26,7 @@
 
 package org.loboevolution.html.style;
 
+import lombok.extern.slf4j.Slf4j;
 import org.htmlunit.cssparser.dom.CSSStyleSheetImpl;
 import org.htmlunit.cssparser.dom.MediaListImpl;
 import org.htmlunit.cssparser.parser.CSSOMParser;
@@ -48,6 +49,7 @@ import java.util.StringTokenizer;
 /**
  * <p>CSSUtilities class.</p>
  */
+@Slf4j
 public final class CSSUtilities {
 
 	/**
@@ -96,8 +98,8 @@ public final class CSSUtilities {
 				try {
 					final MediaQueryList media = window.matchMedia(mediaValues);
 					return media.isMatches();
-				} catch (final Exception e) {
-					e.printStackTrace();
+				} catch (final Exception ex) {
+					log.error(ex.getMessage(), ex);
 				}
 			}
 		}

@@ -37,16 +37,15 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.component.BrowserFrame;
 import org.loboevolution.component.ToolBar;
 import org.loboevolution.net.HttpNetwork;
 
 /**
  * <p>SaveFileAction class.</p>
- *
- *
- *
  */
+@Slf4j
 public class SaveFileAction extends AbstractAction {
 
 	private static final long serialVersionUID = 1L;
@@ -95,7 +94,7 @@ public class SaveFileAction extends AbstractAction {
 				baos.writeTo(ops);
 				baos.flush();
 			} catch (final Exception e1) {
-				e1.printStackTrace();
+				log.error(e1.getMessage(), e1);
 			}
 		}
 	}

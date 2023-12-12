@@ -163,7 +163,6 @@ public class FontValues extends HtmlValues {
 				try {
 					return (int) Math.round(defaultSize * Double.parseDouble(text));
 				} catch (final NumberFormatException nfe) {
-					nfe.printStackTrace();
 					return defaultSize;
 				}
 			case "em":

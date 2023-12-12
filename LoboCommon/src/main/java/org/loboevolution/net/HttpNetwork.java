@@ -195,7 +195,7 @@ public class HttpNetwork {
 					}
 					log.error("More time elapsed {}", TIMEOUT_VALUE);
 				} catch (final FileNotFoundException e) {
-					log.info(e.getMessage(), e);
+					log.error(e.getMessage(), e);
 				}
 			}
 		} catch (final Exception e) {

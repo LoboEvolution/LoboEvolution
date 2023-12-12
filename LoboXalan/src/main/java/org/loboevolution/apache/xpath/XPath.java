@@ -241,7 +241,6 @@ public class XPath {
             while (e instanceof WrappedRuntimeException) {
                 e = ((WrappedRuntimeException) e).getException();
             }
-            // e.printStackTrace();
 
             String msg = e.getMessage();
 
@@ -250,7 +249,6 @@ public class XPath {
             }
             final TransformerException te = new TransformerException(msg, getLocator(), e);
             final ErrorListener el = xctxt.getErrorListener();
-            // te.printStackTrace();
             if (null != el) // defensive, should never happen.
             {
                 el.fatalError(te);
@@ -296,7 +294,6 @@ public class XPath {
             while (e instanceof WrappedRuntimeException) {
                 e = ((WrappedRuntimeException) e).getException();
             }
-            // e.printStackTrace();
 
             String msg = e.getMessage();
 
@@ -306,7 +303,6 @@ public class XPath {
 
             final TransformerException te = new TransformerException(msg, getLocator(), e);
             final ErrorListener el = xctxt.getErrorListener();
-            // te.printStackTrace();
             if (null != el) // defensive, should never happen.
             {
                 el.fatalError(te);

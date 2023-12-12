@@ -34,6 +34,7 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.javax.xml.transform.Source;
 import org.loboevolution.apache.xpath.objects.XString;
@@ -49,6 +50,7 @@ import org.loboevolution.apache.xml.utils.SuballocatedIntVector;
  * The <code>DTMDefaultBase</code> class serves as a helper base for DTMs. It sets up structures for
  * navigation and type, while leaving data management and construction to the derived classes.
  */
+@Slf4j
 public abstract class DTMDefaultBase implements DTM {
   static final boolean JJK_DEBUG = false;
 
@@ -504,7 +506,7 @@ public abstract class DTMDefaultBase implements DTM {
     try {
       if (os == null) {
         final File f = new File("DTMDump" + this.hashCode() + ".txt");
-        System.err.println("Dumping... " + f.getAbsolutePath());
+        log.error("Dumping... " + f.getAbsolutePath());
         os = Files.newOutputStream(f.toPath());
       }
       final PrintStream ps = new PrintStream(os);

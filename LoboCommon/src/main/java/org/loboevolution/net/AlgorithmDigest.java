@@ -26,6 +26,8 @@
 
 package org.loboevolution.net;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.security.MessageDigest;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -33,8 +35,8 @@ import java.util.stream.Collectors;
 /**
  * <p>AlgorithmDigest class.</p>
  */
-public class AlgorithmDigest
-        implements Comparable<AlgorithmDigest> {
+@Slf4j
+public class AlgorithmDigest implements Comparable<AlgorithmDigest> {
 
     private final static Map<String, Integer> str = createMap();
     private final String algorithm;
@@ -118,7 +120,7 @@ public class AlgorithmDigest
             final byte[] digestedBytes = md.digest();
             return Base64.getEncoder().encodeToString(digestedBytes);
         } catch (final Exception e) {
-            System.out.println("Exception: " + e.getMessage());
+            log.error(e.getMessage(), e);
         }
         return null;
     }

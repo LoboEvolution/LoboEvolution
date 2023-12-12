@@ -25,11 +25,14 @@
  */
 package org.jpedal.io.filter.ccitt;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.BitSet;
 
 /**
  * implement 1D CCITT decoding
  */
+@Slf4j
 public class CCITT1D implements CCITTDecoder {
 
     private final static int EOL = -1;
@@ -558,7 +561,7 @@ public class CCITT1D implements CCITTDecoder {
 
         if (pixelCount == -1) {
             if (line != 0) {
-                System.err.println("EOF marker encountered but not EOL yet!");
+                log.error("EOF marker encountered but not EOL yet!");
             }
 
             line = 0;

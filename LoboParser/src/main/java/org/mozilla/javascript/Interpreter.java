@@ -15,11 +15,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+
+import lombok.extern.slf4j.Slf4j;
 import org.mozilla.javascript.ScriptRuntime.NoSuchMethodShim;
 import org.mozilla.javascript.ast.FunctionNode;
 import org.mozilla.javascript.ast.ScriptNode;
 import org.mozilla.javascript.debug.DebugFrame;
 
+@Slf4j
 public final class Interpreter extends Icode implements Evaluator {
     // data for parsing
     InterpreterData itsData;
@@ -376,12 +379,12 @@ public final class Interpreter extends Icode implements Evaluator {
 
         if (Token.LAST_BYTECODE_TOKEN > 127) {
             String str = "Violation of Token.LAST_BYTECODE_TOKEN <= 127";
-            System.err.println(str);
+            log.error(str);
             throw new IllegalStateException(str);
         }
         if (MIN_ICODE < -128) {
             String str = "Violation of Interpreter.MIN_ICODE >= -128";
-            System.err.println(str);
+            log.error(str);
             throw new IllegalStateException(str);
         }
     }
@@ -3388,7 +3391,7 @@ public final class Interpreter extends Icode implements Evaluator {
                     frame.debuggerFrame.onExit(cx, false, result);
                 }
             } catch (Throwable ex) {
-                System.err.println("RHINO USAGE WARNING: onExit terminated with exception");
+                log.error("RHINO USAGE WARNING: onExit terminated with exception");
                 ex.printStackTrace(System.err);
             }
         }

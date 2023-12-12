@@ -26,6 +26,8 @@
 
 package org.loboevolution.common;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.beans.BeanInfo;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
@@ -33,6 +35,7 @@ import java.beans.PropertyDescriptor;
 /**
  * <p>Objects class.</p>
  */
+@Slf4j
 public class Objects {
 
 	public static <M> void merge(final M target, final M destination) {
@@ -57,7 +60,7 @@ public class Objects {
 				}
 			}
 		} catch (final Exception e) {
-			e.printStackTrace();
+			log.error(e.getMessage(), e);
 		}
 	}
 

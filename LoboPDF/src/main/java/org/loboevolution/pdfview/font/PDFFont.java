@@ -25,6 +25,7 @@
  */
 package org.loboevolution.pdfview.font;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.pdfview.BaseWatchable;
 import org.loboevolution.pdfview.PDFDebugger;
 import org.loboevolution.pdfview.PDFObject;
@@ -43,6 +44,7 @@ import java.util.regex.Pattern;
  * a Font definition for PDF files
  * Author Mike Wessler
  */
+@Slf4j
 public abstract class PDFFont {
 
     private static final FilenameFilter TTF_FILTER = (dir, name) -> name.toLowerCase().endsWith(".ttf");
@@ -267,7 +269,7 @@ public abstract class PDFFont {
                                 // I'm not sure how much confidence we should have
                                 // in the font parsing, so we'll avoid relying on
                                 // this not to fail
-                                System.err.println("Problem parsing " + ttfFile);
+                                log.error("Problem parsing " + ttfFile);
                                 BaseWatchable.getErrorHandler().publishException(t);
                             }
                         }

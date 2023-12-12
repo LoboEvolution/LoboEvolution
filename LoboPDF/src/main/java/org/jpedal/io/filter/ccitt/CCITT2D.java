@@ -25,6 +25,9 @@
  */
 package org.jpedal.io.filter.ccitt;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class CCITT2D extends CCITT1D implements CCITTDecoder {
 
     // Initial black run look up table, uses the first 4 bits of a code

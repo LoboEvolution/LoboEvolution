@@ -636,7 +636,6 @@ public class Compiler extends OpMap {
             return DTMFilter.SHOW_ELEMENT;
         }
       default:
-        // System.err.println("We should never reach here.");
         return DTMFilter.SHOW_ALL;
     }
   }

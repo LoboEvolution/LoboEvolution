@@ -26,6 +26,7 @@
 
 package org.loboevolution.menu.tools.developer.tool.inspector;
 
+import lombok.extern.slf4j.Slf4j;
 import org.htmlunit.cssparser.dom.CSSStyleDeclarationImpl;
 import org.htmlunit.cssparser.dom.CSSStyleSheetImpl;
 import org.loboevolution.common.Strings;
@@ -44,6 +45,7 @@ import java.util.Map;
 /**
  * <p>ElementPropertiesPanel class.</p>
  */
+@Slf4j
 public class ElementPropertiesPanel extends JPanel {
 
     private final JTable _properties;
@@ -74,7 +76,7 @@ public class ElementPropertiesPanel extends JPanel {
                 model.getColumn(0).sizeWidthToFit();
             }
         } catch (final Exception ex) {
-            ex.printStackTrace();
+            log.error(ex.getMessage(), ex);
         }
     }
 

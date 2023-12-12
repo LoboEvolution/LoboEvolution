@@ -28,6 +28,7 @@ package org.loboevolution.download;
 
 import com.jtattoo.plaf.lobo.LoboButton;
 import com.jtattoo.plaf.lobo.LoboLookAndFeel;
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.component.IDownload;
 import org.loboevolution.config.DesktopConfig;
 import org.loboevolution.gui.FieldType;
@@ -45,10 +46,8 @@ import java.net.URLConnection;
 
 /**
  * <p>DownloadWindow class.</p>
- *
- *
- *
  */
+@Slf4j
 public class DownloadWindow extends JFrame implements IDownload, LoboLookAndFeel {
 
     private static final long serialVersionUID = 1L;
@@ -178,7 +177,7 @@ public class DownloadWindow extends JFrame implements IDownload, LoboLookAndFeel
             final DownloadWindow d = new DownloadWindow(url);
             d.setVisible(true);
         } catch (final Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage(), e);
         }
     }
     
@@ -192,7 +191,7 @@ public class DownloadWindow extends JFrame implements IDownload, LoboLookAndFeel
             final DownloadWindow d = new DownloadWindow(new URL(url));
             d.setVisible(true);
         } catch (final Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage(), e);
         }
     }
 
@@ -207,7 +206,7 @@ public class DownloadWindow extends JFrame implements IDownload, LoboLookAndFeel
             final DownloadWindow d = new DownloadWindow(tempFile.toURI().toURL());
             d.setVisible(true);
         } catch (final IOException e) {
-            e.printStackTrace();
+            log.error(e.getMessage(), e);
         }
     }
 

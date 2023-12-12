@@ -1263,7 +1263,6 @@ public class WalkerFactory {
           // int nodeTestType = compiler.getStepTestType(stepOpCodePos);
 
           final String localName = compiler.getStepLocalName(stepOpCodePos);
-          // System.err.println("localName: "+localName);
           if (localName.equals("*")) {
             foundWildAttribute = true;
           }

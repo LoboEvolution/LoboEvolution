@@ -26,6 +26,7 @@
 
 package org.loboevolution.download;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.store.DownloadStore;
 
 import javax.swing.*;
@@ -36,10 +37,8 @@ import java.io.File;
 
 /**
  * <p>DownloadFileAction class.</p>
- *
- *
- *
  */
+@Slf4j
 public class DownloadFileAction extends AbstractAction implements PropertyChangeListener {
 
     private static final long serialVersionUID = 1L;
@@ -55,7 +54,7 @@ public class DownloadFileAction extends AbstractAction implements PropertyChange
         try {
             startDownload(action.getDestinationFile());
         } catch (final Exception ex) {
-            ex.printStackTrace();
+            log.error(ex.getMessage(), ex);
         }
     }
 

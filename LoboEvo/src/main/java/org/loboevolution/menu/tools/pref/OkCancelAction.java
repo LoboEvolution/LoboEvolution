@@ -30,11 +30,13 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.init.GuiInit;
 
 /**
  * The Class OkAction.
  */
+@Slf4j
 public class OkCancelAction extends AbstractAction {
 
 	/** The Constant serialVersionUID. */
@@ -59,8 +61,8 @@ public class OkCancelAction extends AbstractAction {
 			this.prefer.getFrame().dispose();
 			GuiInit.initLookAndFeel();
 			GuiInit.createAndShowGui();
-		} catch (final Exception e1) {
-			e1.printStackTrace();
+		} catch (final Exception ex) {
+			log.error(ex.getMessage(), ex);
 		}
 
 	}

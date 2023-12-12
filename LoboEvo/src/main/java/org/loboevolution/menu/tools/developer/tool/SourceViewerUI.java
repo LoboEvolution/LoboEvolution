@@ -26,6 +26,7 @@
 
 package org.loboevolution.menu.tools.developer.tool;
 
+import lombok.extern.slf4j.Slf4j;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rtextarea.RTextScrollPane;
@@ -39,6 +40,7 @@ import java.awt.*;
 /**
  * <p>SourceViewerUI class.</p>
  */
+@Slf4j
 public class SourceViewerUI  extends AbstractToolsUI {
 
     /** The Constant serialVersionUID. */
@@ -53,8 +55,8 @@ public class SourceViewerUI  extends AbstractToolsUI {
         try {
             final ToolBar toolbar = frame.getToolbar();
             add(addTextArea(HttpNetwork.getSource(toolbar.getAddressBar().getText(), null)));
-        } catch (final Exception exp) {
-            exp.printStackTrace();
+        } catch (final Exception ex) {
+            log.error(ex.getMessage(), ex);
         }
     }
 

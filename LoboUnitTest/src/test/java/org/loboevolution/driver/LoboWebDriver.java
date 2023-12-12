@@ -26,6 +26,7 @@
 
 package org.loboevolution.driver;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.config.HtmlRendererConfig;
 import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.gui.LocalHtmlRendererConfig;
@@ -44,6 +45,7 @@ import java.nio.charset.StandardCharsets;
 /**
  * <p>LoboWebDriver class.</p>
  */
+@Slf4j
 public class LoboWebDriver {
 
 	/**
@@ -64,8 +66,8 @@ public class LoboWebDriver {
 			ucontext.setUserAgentEnabled(true);
 			doc = new HTMLDocumentImpl(ucontext, rendererContext, config, wis, url);
 			doc.load();
-		} catch (final Exception e) {
-			e.printStackTrace();
+		} catch (final Exception ex) {
+			log.error(ex.getMessage(), ex);
 		}
 		return doc;
 	}
@@ -88,8 +90,8 @@ public class LoboWebDriver {
 			ucontext.setUserAgentEnabled(true);
 			doc = new HTMLDocumentImpl(ucontext, rendererContext, config, wis, url);
 			doc.load();
-		} catch (final Exception e) {
-			e.printStackTrace();
+		} catch (final Exception ex) {
+			log.error(ex.getMessage(), ex);
 		}
 		return doc;
 	}

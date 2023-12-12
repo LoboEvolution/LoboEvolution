@@ -408,7 +408,6 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
         try {
             newfile = new PDFFile(buf);
         } catch (final IOException e) {
-            e.printStackTrace();
             openError(path + " doesn't appear to be a PDF file.");
             return;
         }
@@ -451,7 +450,7 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
             try {
                 openFile(new File(name));
             } catch (final IOException ex) {
-                ex.printStackTrace();
+                log.error(ex.getMessage(), ex);
             }
         }
     }
@@ -470,7 +469,7 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
             try {
                 openFile(new File(name));
             } catch (final IOException ex) {
-                ex.printStackTrace();
+                log.error(ex.getMessage(), ex);
             }
         }
     }

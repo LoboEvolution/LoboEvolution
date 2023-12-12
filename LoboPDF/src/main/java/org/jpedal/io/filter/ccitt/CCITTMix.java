@@ -25,11 +25,14 @@
  */
 package org.jpedal.io.filter.ccitt;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.IOException;
 
 /**
  * handle case with mix of CCITT1D and 2D
  */
+@Slf4j
 public class CCITTMix extends CCITT2D implements CCITTDecoder {
 
     private int fillBits = 0;
@@ -81,8 +84,8 @@ public class CCITTMix extends CCITT2D implements CCITTDecoder {
                     decode1DRun(curr);
                 }
             }
-        } catch (final Exception e) {
-            e.printStackTrace();
+        } catch (final Exception ex) {
+            log.error(ex.getMessage(), ex);
         }
 
         //put it all together

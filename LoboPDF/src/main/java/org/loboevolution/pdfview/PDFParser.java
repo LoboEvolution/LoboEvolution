@@ -25,6 +25,7 @@
  */
 package org.loboevolution.pdfview;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.pdfview.PDFDebugger.DebugStopException;
 import org.loboevolution.pdfview.colorspace.PDFColorSpace;
 import org.loboevolution.pdfview.colorspace.PatternSpace;
@@ -52,6 +53,7 @@ import static java.awt.geom.Path2D.WIND_EVEN_ODD;
  * <p>
  * Author Mike Wessler
  */
+@Slf4j
 public class PDFParser extends BaseWatchable {
     // ---- result variables
     final byte[] stream;
@@ -927,7 +929,7 @@ public class PDFParser extends BaseWatchable {
         }
         mDebugCommandIndex++;
         if (PDFDebugger.DEBUG_STOP_AT_INDEX > 0 && mDebugCommandIndex > PDFDebugger.DEBUG_STOP_AT_INDEX) {
-            System.err.println("Debugging: stopped at instruction #" + mDebugCommandIndex);
+            log.error("Debugging: stopped at instruction #" + mDebugCommandIndex);
             throw new DebugStopException();
         }
         if (PDFDebugger.DRAW_DELAY > 0) {

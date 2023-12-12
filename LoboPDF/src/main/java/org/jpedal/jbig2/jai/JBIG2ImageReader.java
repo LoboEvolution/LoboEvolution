@@ -183,16 +183,8 @@ public class JBIG2ImageReader extends ImageReader {
 
                     final byte[] newData = new byte[newW * newH * comp];
 
-                    // System.err.println(w+" "+h+" "+data.length+"
-                    // comp="+comp+" scaling="+sampling+" "+decodeColorData);
-
                     origLineLength = w * comp;
 
-                    // System.err.println("size="+w*h*comp+" filter"+filter+"
-                    // scaling="+sampling+" comp="+comp);
-                    // System.err.println("w="+w+" h="+h+" data="+data.length+"
-                    // origLineLength="+origLineLength+" sampling="+sampling);
-                    // scan all pixels and down-sample
                     for (y = 0; y < newH; y++) {
                         for (x = 0; x < newW; x++) {
 
@@ -240,11 +232,6 @@ public class JBIG2ImageReader extends ImageReader {
                     w = newW;
 
                 } catch (final Exception e) {
-
-                    // <start-full><start-demo>
-                    System.err.println("xx=" + xx + " yy=" + yy + " jj=" + jj + " ptr=" + ((yy + (y * sampling)) * origLineLength) + (((x * sampling) + (xx * comp) + jj)) + '/' + data.length);
-                    System.err.println(((yy + (y * sampling)) * origLineLength) + " " + (((x * sampling) + (xx * comp) + jj)));
-                    System.err.println("w=" + w + " h=" + h + " sampling=" + sampling + " x=" + x + " y=" + y);
                     log.error(e.getMessage(), e);
                 }
             }

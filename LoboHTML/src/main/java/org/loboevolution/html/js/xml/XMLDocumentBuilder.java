@@ -67,8 +67,8 @@ public class XMLDocumentBuilder {
         try {
             final SAXParser saxParser = parserFactory.newSAXParser();
             return parse(is, saxParser.getXMLReader());
-        } catch (final Exception e) {
-            e.printStackTrace();
+        } catch (final Exception ex) {
+            log.error(ex.getMessage(), ex);
         }
 
         return null;

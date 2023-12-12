@@ -28,6 +28,7 @@
  */
 package org.loboevolution.html.dom.nodeimpl;
 
+import lombok.extern.slf4j.Slf4j;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.html.dom.nodeimpl.event.EventTargetImpl;
 import org.loboevolution.html.node.CharacterData;
@@ -35,6 +36,7 @@ import org.loboevolution.html.node.CharacterData;
 /**
  * <p>Abstract CharacterDataImpl class.</p>
  */
+@Slf4j
 public abstract class CharacterDataImpl extends NodeImpl implements CharacterData {
 	
 	protected volatile String text;
@@ -138,8 +140,8 @@ public abstract class CharacterDataImpl extends NodeImpl implements CharacterDat
 			}
 		} catch (final StringIndexOutOfBoundsException e) {
 			throw new DOMException(DOMException.INDEX_SIZE_ERR, "Wrong arguments");
-		} catch (final Exception e) {
-			e.printStackTrace();
+		} catch (final Exception ex) {
+			log.error(ex.getMessage(), ex);
 		}
 	}
 

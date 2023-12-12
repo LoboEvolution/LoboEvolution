@@ -26,6 +26,8 @@
 
 package org.loboevolution.common;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -35,6 +37,7 @@ import java.nio.ByteBuffer;
 /**
  * <p>BytesUtilities class.</p>
  */
+@Slf4j
 public class BytesUtilities {
 
     private static final int DEFAULT_BLOCK_SIZE = 8192;
@@ -54,7 +57,7 @@ public class BytesUtilities {
             final byte[] bytes = inputStreamToByteArray(inputStream);
             buffer = ByteBuffer.wrap(bytes);
         } catch (final IOException ex) {
-            ex.printStackTrace();
+            log.error(ex.getMessage(), ex);
         }
 
         return buffer;
