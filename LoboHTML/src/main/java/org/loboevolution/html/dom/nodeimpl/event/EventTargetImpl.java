@@ -196,7 +196,8 @@ public class EventTargetImpl implements EventTarget {
                     ctx.setLanguageVersion(Context.VERSION_1_8);
                     func = ctx.compileFunction(thisScope, functionCode, elem.getTagName() + "[" + elem.getId() + "]." + normalAttributeName, 1, null);
                 } catch (final RhinoException ecmaError) {
-                    log.error("Javascript error at {} : {} : {}  ", ecmaError.sourceName(), ecmaError.lineNumber(), ecmaError.getMessage(), ecmaError.getMessage());
+                    final String error = ecmaError.sourceName() + ":" + ecmaError.lineNumber() + ": " + ecmaError.getMessage();
+                    log.error("Javascript error at {}", error);
                 } catch (final Throwable err) {
                     log.error("Unable to evaluate Javascript code", err);
                 }

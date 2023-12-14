@@ -65,14 +65,14 @@ public class BrowserPanel extends JPanel implements IBrowserPanel {
 		this.tabbedPane.setComponentPopupMenu(new TabbedPanePopupMenu(this));
 		final List<String> startupURLs = GeneralStore.getStartupURLs();
 
-		if (startupURLs.size() == 0) {
+		if (startupURLs.isEmpty()) {
 			this.welcome = new WelcomePanel(this);
 			this.tabbedPane.addTab("Welcome", this.welcome.getWelocome());
 		} else if (startupURLs.size() == 1) {
 			final TabbedHtml html = new TabbedHtml();
 			final String url = startupURLs.get(0);
 			html.tab(this, url, 1);
-		} else if (startupURLs.size() > 0) {
+		} else {
 			final TabbedHtml html = new TabbedHtml();
 			for (int i = 0; i < startupURLs.size(); i++) {
 				final String url = startupURLs.get(i);

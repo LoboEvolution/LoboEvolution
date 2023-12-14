@@ -126,13 +126,11 @@ abstract class BaseBoundableRenderable extends RRectangle implements BoundableRe
 	/** {@inheritDoc} */
 	@Override
 	public Point getGUIPoint(final int clientX, final int clientY) {
-		final Renderable parent = getParent();
-		if (parent instanceof BoundableRenderable) {
-			return ((BoundableRenderable) parent).getGUIPoint(clientX + this.getX(), clientY + this.getY());
-		} else if (parent == null) {
+		final BoundableRenderable parent = getParent();
+		if (parent == null) {
 			return this.container.getGUIPoint(clientX + this.getX(), clientY + this.getY());
 		} else {
-			throw new IllegalStateException("parent=" + parent);
+			return parent.getGUIPoint(clientX + this.getX(), clientY + this.getY());
 		}
 	}
 
@@ -253,13 +251,11 @@ abstract class BaseBoundableRenderable extends RRectangle implements BoundableRe
 	/** {@inheritDoc} */
 	@Override
 	public Point getRenderablePoint(final int guiX, final int guiY) {
-		final Renderable parent = getParent();
-		if (parent instanceof BoundableRenderable) {
-			return ((BoundableRenderable) parent).getRenderablePoint(guiX - this.getX(), guiY - this.getY());
-		} else if (parent == null) {
+		final BoundableRenderable parent = getParent();
+		if (parent == null) {
 			return new Point(guiX - this.getX(), guiY - this.getY());
 		} else {
-			throw new IllegalStateException("parent=" + parent);
+			return parent.getRenderablePoint(guiX - this.getX(), guiY - this.getY());
 		}
 	}
 
@@ -512,14 +508,11 @@ abstract class BaseBoundableRenderable extends RRectangle implements BoundableRe
 			return;
 		}
 
-		final Renderable parent = this.parent;
-		if (parent instanceof BoundableRenderable) {
-			 ((BoundableRenderable) parent).repaint(x + this.getX(), y + this.getY(), width, height);
-		} else if (parent == null) {
-			// Has to be top RBlock.
+		final BoundableRenderable parent = this.parent;
+		if (parent == null) {
 			this.container.repaint(x, y, width, height);
 		} else {
-			log.warn("relayout(): Don't know how to relayout {} parent being {}", this, parent);
+			parent.repaint(x + this.getX(), y + this.getY(), width, height);
 		}
 	}
 

@@ -44,7 +44,7 @@ import java.util.List;
  */
 class RLine extends BaseRCollection {
 
-	private boolean allowOverflow = false;
+	private boolean allowOverflow;
 	private int baseLineOffset;
 	private int desiredMaxWidth;
 
@@ -551,28 +551,27 @@ class RLine extends BaseRCollection {
 			final Font font = rs.getFont();
 			g.setFont(font);
 			final List<Renderable> renderables = this.renderables;
-			if (renderables != null) {
-				renderables.forEach(r -> {
-					if (r instanceof RElement) {
-						final RElement relement = (RElement) r;
-						if (!relement.isDelegated()) {
-							final Graphics newG = g.create();
-							newG.translate(relement.getX(), relement.getY());
-							try {
-								relement.paint(newG);
-							} finally {
-								newG.dispose();
-							}
+			renderables.forEach(r -> {
+				if (r instanceof RElement) {
+					final RElement relement = (RElement) r;
+					if (!relement.isDelegated()) {
+						final Graphics newG = g.create();
+						newG.translate(relement.getX(), relement.getY());
+						try {
+							relement.paint(newG);
+						} finally {
+							newG.dispose();
 						}
-
-					} else if (r instanceof BoundableRenderable) {
-						final BoundableRenderable br = (BoundableRenderable) r;
-						if (!br.isDelegated()) br.paintTranslated(g);
-					} else {
-						r.paint(g);
 					}
-				});
-			}
+
+				} else if (r instanceof BoundableRenderable) {
+					final BoundableRenderable br = (BoundableRenderable) r;
+					if (!br.isDelegated()) br.paintTranslated(g);
+				} else {
+					r.paint(g);
+				}
+			});
+
 		}
 	}
 

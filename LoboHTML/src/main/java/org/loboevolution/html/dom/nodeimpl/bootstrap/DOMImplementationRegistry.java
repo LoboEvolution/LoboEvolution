@@ -102,7 +102,7 @@ public final class DOMImplementationRegistry {
                     internal = true;
                 }
             }
-            Class sourceClass = null;
+            Class sourceClass;
             if (classLoader != null && !internal) {
                 sourceClass = classLoader.loadClass(sourceName);
             } else {
@@ -132,7 +132,6 @@ public final class DOMImplementationRegistry {
      */
     public DOMImplementation getDOMImplementation(final String features) {
         final int size = sources.size();
-        final String name = null;
         for (int i = 0; i < size; i++) {
             final DOMImplementationSource source = sources.get(i);
             final DOMImplementation impl = source.getDOMImplementation(features);

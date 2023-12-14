@@ -39,7 +39,7 @@ import java.util.ArrayList;
  */
 public class DOMImplementationListImpl implements DOMImplementationList {
 
-    private List<DOMImplementation> domImplementations = new ArrayList<>();
+    private final List<DOMImplementation> domImplementations;
 
     public DOMImplementationListImpl(final List<DOMImplementation> implementations) {
         this.domImplementations = implementations;

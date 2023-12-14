@@ -38,6 +38,7 @@ import org.loboevolution.gui.HtmlContextMenu;
 import org.loboevolution.gui.HtmlPanel;
 import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.dom.HTMLAnchorElement;
+import org.loboevolution.html.dom.HTMLDocument;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.HTMLLinkElement;
 import org.loboevolution.html.dom.domimpl.*;
@@ -424,7 +425,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 			final JPopupMenu popupMenuLink = menu.popupMenuLink(htmlPanel.getBrowserPanel());
 			popupMenuLink.show(event.getComponent(), event.getX(), event.getY());
 			return false;
-		} else if (element instanceof HTMLElementImpl) {
+		} else if (!(element instanceof HTMLDocument)) {
 			final JPopupMenu popupMenuAbstract = menu.popupMenuAbstractUI();
 			popupMenuAbstract.show(event.getComponent(), event.getX(), event.getY());
 			return false;

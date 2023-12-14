@@ -184,7 +184,6 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	protected void appendInnerHTMLImpl(final StringBuilder buffer) {
 		nodeList.forEach(child -> {
 			if (child instanceof HTMLElementImpl) {
-				final HTMLElementImpl elem = (HTMLElementImpl) child;
 				((HTMLElementImpl) child).appendOuterHTMLImpl(buffer);
 			} else if (child instanceof Comment) {
 				buffer.append("<!--").append((child).getTextContent()).append("-->");

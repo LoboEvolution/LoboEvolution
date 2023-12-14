@@ -124,7 +124,7 @@ public class XPathExpressionImpl implements XPathExpression {
 		}
 
 		final XPathContext xpathSupport = new XPathContext(false);
-		XObject xobj = null;
+		XObject xobj;
 
 		if (null != m_doc) {
 			xpathSupport.getDTMHandleFromNode(m_doc);

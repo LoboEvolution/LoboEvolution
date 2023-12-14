@@ -427,8 +427,8 @@ public class StyleSheetRenderState implements RenderState {
 		if (d != null) {
 			return d;
 		}
-		CSSValues display = null;
-		int displayInt = -1;
+		CSSValues display;
+		int displayInt;
 		final RenderState previous = this.getPreviousRenderState();
 
 		if (previous != null && previous.getDisplay() == DISPLAY_FLEX_BOX) {
@@ -503,25 +503,25 @@ public class StyleSheetRenderState implements RenderState {
 			return p;
 		}
 		final CSSStyleDeclaration props = this.getCssProperties();
-		int floatValue = 0;
 		final String floatText = props == null ? null : props.getFloat();
 		final String floatTextTL = Strings.isBlank(floatText) ? "" : floatText;
 		final CSSValues flt = CSSValues.get(floatTextTL);
+		int floatValue;
 		switch (flt) {
-		case LEFT:
-			floatValue = FLOAT_LEFT;
-			break;
-		case RIGHT:
-			floatValue = FLOAT_RIGHT;
-			break;
-		case INHERIT:
-			floatValue = this.getPreviousRenderState().getFloat();
-			break;
-		case INITIAL:
-		case NONE:
-		default:
-			floatValue = FLOAT_NONE;
-			break;
+			case LEFT:
+				floatValue = FLOAT_LEFT;
+				break;
+			case RIGHT:
+				floatValue = FLOAT_RIGHT;
+				break;
+			case INHERIT:
+				floatValue = this.getPreviousRenderState().getFloat();
+				break;
+			case INITIAL:
+			case NONE:
+			default:
+				floatValue = FLOAT_NONE;
+				break;
 		}
 		this.cachedFloat = floatValue;
 		return floatValue;
@@ -774,7 +774,7 @@ public class StyleSheetRenderState implements RenderState {
 			return p;
 		}
 		final CSSStyleDeclaration props = this.getCssProperties();
-		int position = 0;
+		int position;
 		final String positionText = props == null ? null : props.getPosition();
 		final String positionTextTL = Strings.isBlank(positionText) ? "" : positionText;
 		final CSSValues pos = CSSValues.get(positionTextTL);

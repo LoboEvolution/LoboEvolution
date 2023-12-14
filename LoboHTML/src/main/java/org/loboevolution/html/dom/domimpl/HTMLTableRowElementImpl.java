@@ -187,7 +187,7 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTabl
 		}
 		final HTMLTableCellElementImpl cellElement = (HTMLTableCellElementImpl) doc.createElement(tagName);
 		
-		int index = -1;		
+		int index;
 		if (objIndex instanceof Double) {
 			index = ((Double) objIndex).intValue();
 		} else {

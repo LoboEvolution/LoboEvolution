@@ -25,7 +25,7 @@
  */
 package org.loboevolution.html.renderer;
 
-interface FloatingBounds {
+public interface FloatingBounds {
 	/**
 	 * The Y at which the float clears starting at the given Y.
 	 *

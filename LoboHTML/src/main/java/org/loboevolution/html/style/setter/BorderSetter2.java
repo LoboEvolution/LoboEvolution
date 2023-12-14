@@ -81,12 +81,8 @@ public class BorderSetter2 implements SubPropertySetter {
 				width = "2px";
 			}
 
-			if (color != null) {
-				properties.setProperty(name + "-color", color);
-			}
-			if (width != null) {
-				properties.setProperty(name + "-width", width);
-			}
+			properties.setProperty(name + "-color", color);
+			properties.setProperty(name + "-width", width);
 		}
 	}
 }

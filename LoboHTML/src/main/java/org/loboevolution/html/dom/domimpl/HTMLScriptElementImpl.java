@@ -174,12 +174,11 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 		}
 
 		if (bcontext.isScriptingEnabled()) {
-			final Context ctx = Executor.createContext();
-			ctx.setLanguageVersion(Context.VERSION_1_8);
-			ctx.setOptimizationLevel(-1);
-			final String src = getSrc();
-			final Instant start = Instant.now();
-			try {
+			try (Context ctx = Executor.createContext()) {
+				ctx.setLanguageVersion(Context.VERSION_1_8);
+				ctx.setOptimizationLevel(-1);
+				final String src = getSrc();
+				final Instant start = Instant.now();
 
 				if (Strings.isNotBlank(src)) {
 					final TimingInfo info = new TimingInfo();
@@ -196,7 +195,7 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 							try (final Reader reader = new InputStreamReader(in, "utf-8")) {
 								final BufferedReader br = new BufferedReader(reader);
 								ctx.evaluateReader(scope, br, scriptURI, 1, null);
-							} catch (Exception e){
+							} catch (Exception e) {
 								throw new Exception(e);
 							}
 						}
@@ -209,7 +208,7 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 						}
 
 						log.error("More time elapsed {}", connection.getConnectTimeout());
-				    } catch (final Exception e) {
+					} catch (final Exception e) {
 						log.error(e.getMessage(), e);
 					} finally {
 						final Instant finish = Instant.now();
@@ -236,11 +235,9 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 				}
 			} catch (final RhinoException ecmaError) {
 				final String error = ecmaError.sourceName() + ":" + ecmaError.lineNumber() + ": " + ecmaError.getMessage();
-				log.error("Javascript error at {}", ecmaError.getMessage(), ecmaError);
+				log.error("Javascript error at {}", error);
 			} catch (final Throwable err) {
 				log.error("Unable to evaluate Javascript code", err);
-			} finally {
-				Context.exit();
 			}
 		}
 	}

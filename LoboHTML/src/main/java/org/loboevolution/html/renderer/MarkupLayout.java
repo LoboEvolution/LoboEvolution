@@ -30,7 +30,7 @@ package org.loboevolution.html.renderer;
 
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 
-interface MarkupLayout {
+public interface MarkupLayout {
 	/**
 	 * <p>layoutMarkup.</p>
 	 *

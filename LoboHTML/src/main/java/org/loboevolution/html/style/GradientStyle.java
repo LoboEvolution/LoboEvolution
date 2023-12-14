@@ -94,7 +94,7 @@ public class GradientStyle {
 		final Color[] colors = info.getColors();
 		final int width = getWidth(document, props, renderState);
 		final int height = getHeight(document, props, renderState);
-		LinearGradientPaint linearGradientPaint = null;
+		LinearGradientPaint linearGradientPaint;
 		final BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 		final Graphics2D g2 = image.createGraphics();
 		switch (direction) {

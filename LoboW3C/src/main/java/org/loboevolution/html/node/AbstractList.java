@@ -113,7 +113,7 @@ public class AbstractList<E> extends AbstractScriptableDelegate implements List<
 	/** {@inheritDoc} */
 	@Override
 	public boolean containsAll(Collection<?> c) {
-		return list.containsAll(c);
+		return new HashSet<>(list).containsAll(c);
 	}
 
 	/** {@inheritDoc} */

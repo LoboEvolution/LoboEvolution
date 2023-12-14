@@ -34,6 +34,8 @@ import org.loboevolution.http.UserAgentContext;
 import org.xml.sax.*;
 import org.xml.sax.ext.LexicalHandler;
 
+import java.util.Objects;
+
 /**
  * <p>XMLContentHandler class.</p>
  */
@@ -175,7 +177,7 @@ public class XMLContentHandler implements ContentHandler, LexicalHandler, ErrorH
             attr.setValue(value);
             element.getAttributes().setNamedItem(attr);
             if ("ID".equals(atts.getType(i))
-                    || ("id".equals(attrQName) && element.getNamespaceURI() != document.getNamespaceURI())) {
+                    || ("id".equals(attrQName) && !Objects.equals(element.getNamespaceURI(), document.getNamespaceURI()))) {
                 element.setIdAttributeNode(attr, true);
             }
         }

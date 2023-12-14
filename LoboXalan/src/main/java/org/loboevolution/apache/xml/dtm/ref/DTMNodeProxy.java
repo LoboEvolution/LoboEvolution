@@ -27,6 +27,7 @@ package org.loboevolution.apache.xml.dtm.ref;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.loboevolution.apache.xpath.NodeSet;
 import org.loboevolution.apache.xml.dtm.DTM;
@@ -1711,7 +1712,7 @@ public class DTMNodeProxy
                 final String prefix = this.getPrefix();
                 if (namespace != null) {
                     // REVISIT: is it possible that prefix is empty string?
-                    if (specifiedPrefix == null && prefix == specifiedPrefix) {
+                    if (specifiedPrefix == null && Objects.equals(prefix, specifiedPrefix)) {
                         // looking for default namespace
                         return namespace;
                     } else if (prefix != null && prefix.equals(specifiedPrefix)) {

@@ -298,12 +298,14 @@ class TableMatrix {
 	private HTMLElementImpl getParentRow(final HTMLElementImpl cellNode) {
 		Node parentNode = cellNode.getParentNode();
 		for (;;) {
-			if (parentNode instanceof HTMLElementImpl) {				
-				return (HTMLElementImpl) parentNode;
-			}
 			if (parentNode instanceof HTMLTableElementImpl) {
 				return null;
 			}
+
+			if (parentNode instanceof HTMLElementImpl) {
+				return (HTMLElementImpl) parentNode;
+			}
+
 			parentNode = parentNode.getParentNode();
 		}
 	}
@@ -455,7 +457,7 @@ class TableMatrix {
 		for (int row = 0; row < numRows;) {
 			// SizeInfo rowSize = rowSizes[row];
 			final List<VirtualCell> columns = rows.get(row);
-			VirtualCell vc = null;
+			VirtualCell vc;
 			final int sizeCol = columns.size();
 			if (sizeCol > col) {
 				vc = columns.get(col);

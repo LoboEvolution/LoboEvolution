@@ -122,9 +122,9 @@ public class BackgroundRender {
                             applyBackgroundHorizontalPositon(binfo, tk, width, height);
                             break;
                         default:
-                            int size = -1;
-                            int margin = -1;
-                            int border = -1;
+                            int size;
+                            int margin;
+                            int border;
                             switch (ps.get()) {
                                 case TOP:
                                 case BOTTOM:

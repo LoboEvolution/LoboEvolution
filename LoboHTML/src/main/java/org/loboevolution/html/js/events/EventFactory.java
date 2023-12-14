@@ -45,19 +45,19 @@ public class EventFactory {
 	 * @throws DOMException if any.
 	 */
 	public static Event createEvent(final String eventType) {
-		Event theEvent = null;
+		Event theEvent;
 		final String event = Strings.isNotBlank(eventType) ? eventType.toLowerCase() : "";
 		switch (event) {
-		case "mouseevent":
-			theEvent = new MouseEventImpl();
-			break;
-		case "uievent":
-			theEvent = new UIEventImpl();
-			break;
-		case "event":
-		default:
-			theEvent = new EventImpl();
-			break;
+			case "mouseevent":
+				theEvent = new MouseEventImpl();
+				break;
+			case "uievent":
+				theEvent = new UIEventImpl();
+				break;
+			case "event":
+			default:
+				theEvent = new EventImpl();
+				break;
 		}
 		return theEvent;
 	}

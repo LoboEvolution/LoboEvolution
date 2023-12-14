@@ -63,7 +63,7 @@ public class CSSRuleListImpl extends AbstractList<CSSStyleRule>  implements CSSR
      * @param newList a {@link org.htmlunit.cssparser.dom.CSSRuleListImpl} object.
      */
     public void addStyleRule(final org.htmlunit.cssparser.dom.CSSRuleListImpl newList){
-        List<AbstractCSSRuleImpl> ruls =  null;
+        List<AbstractCSSRuleImpl> ruls;
         if (newList != null) {
             clear();
             ruls = newList.getRules();

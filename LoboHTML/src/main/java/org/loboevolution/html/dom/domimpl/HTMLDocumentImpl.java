@@ -272,7 +272,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 			try {
 				return new URL(uri);
 			} catch (final Exception mfu2) {
-				log.error("Unable to create URL for URI= {} with base= ", uri, getBaseURI(), mfu);
+				log.error("Unable to create URL for URI= {} with base {} ", uri, baseURI);
 				return null;
 			}
 		}
@@ -294,7 +294,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 			try {
 				return new URL(uri);
 			} catch (final Exception mfu2) {
-				log.error("Unable to create URL for URI= {} with base= ", uri, getBaseURI(), mfu);
+				log.error("Unable to create URL for URI= {} with base {}", uri, baseURI);
 				return null;
 			}
 		}

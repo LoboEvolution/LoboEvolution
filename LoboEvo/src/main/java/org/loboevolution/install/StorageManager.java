@@ -101,7 +101,7 @@ public class StorageManager extends SwingWorker<Void, Void> {
 				count++;
 			}
 
-			setProgress(Math.min(100, 100));
+			setProgress(100);
 			Thread.sleep(1000);
 
 		} catch (final Exception e) {

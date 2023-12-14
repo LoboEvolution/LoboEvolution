@@ -52,12 +52,12 @@ public class InputDataTime extends BasicInput {
 
 		try {
 			final String type = modelNode.getType();
-			JFormattedTextField tf = null;
-			MaskFormatter dateMask = null;
+			JFormattedTextField tf;
+			MaskFormatter dateMask;
 
 			switch (type.toLowerCase()) {
 			case "datetime-local":
-				tf = new JFormattedTextField(new SimpleDateFormat("dd/mm/yyyy hh:mm"));
+				tf = new JFormattedTextField(new SimpleDateFormat("dd/MM/yyyy hh:mm"));
 				dateMask = new MaskFormatter("##/##/#### ##:##");
 				break;
 			case "time":
@@ -65,12 +65,12 @@ public class InputDataTime extends BasicInput {
 				dateMask = new MaskFormatter("##:##:##");
 				break;
 			case "month":
-				tf = new JFormattedTextField(new SimpleDateFormat("mm/yyyy"));
+				tf = new JFormattedTextField(new SimpleDateFormat("MM/yyyy"));
 				dateMask = new MaskFormatter("##/####");
 				break;
 			case "date":
 			default:
-				tf = new JFormattedTextField(new SimpleDateFormat("dd/mm/yyyy"));
+				tf = new JFormattedTextField(new SimpleDateFormat("dd/MM/yyyy"));
 				dateMask = new MaskFormatter("##/##/####");
 				break;
 			}

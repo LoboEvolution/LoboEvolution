@@ -40,7 +40,6 @@ public class AnchorFilter implements NodeFilter {
 	/** {@inheritDoc} */
 	@Override
 	public short acceptNode(final Node node) {
-		final String nodeName = node.getNodeName();
 		if (node instanceof HTMLAnchorElement) {
 			final NamedNodeMap attributes = node.getAttributes();
 			for (final Node attribute : Nodes.iterable(attributes)) {

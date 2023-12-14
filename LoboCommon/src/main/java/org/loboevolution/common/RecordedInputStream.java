@@ -108,12 +108,12 @@ public class RecordedInputStream extends InputStream {
 	/** {@inheritDoc} */
 	@Override
 	public int read() throws IOException {
-		if (this.readPosition != -1 && this.readPosition < this.resetBuffer.length) {
-			final int b = this.resetBuffer[this.readPosition];
+        final int b;
+        if (this.readPosition != -1 && this.readPosition < this.resetBuffer.length) {
+            b = this.resetBuffer[this.readPosition];
 			this.readPosition++;
-			return b;
-		} else {
-			final int b = this.delegate.read();
+        } else {
+            b = this.delegate.read();
 			if (b != -1) {
 				if (!this.hasReachedMaxBufferSize) {
 					this.store.write(b);
@@ -122,9 +122,9 @@ public class RecordedInputStream extends InputStream {
 					}
 				}
 			}
-			return b;
-		}
-	}
+        }
+        return b;
+    }
 
 	/** {@inheritDoc} */
 	@Override

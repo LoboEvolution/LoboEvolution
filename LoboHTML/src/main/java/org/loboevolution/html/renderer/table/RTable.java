@@ -185,21 +185,19 @@ public class RTable extends BaseElementRenderable {
 	@Override
 	public List<Renderable> getRenderables() {
 		final SortedSet<PositionedRenderable> prs = this.positionedRenderables;
+		final List<Renderable> c = new LinkedList<>();
 		if (prs != null) {
-			final List c = new LinkedList();
 			for (final PositionedRenderable pr : prs) {
 				final BoundableRenderable r = pr.getRenderable();
 				c.add(r);
 			}
 			final List<RTableCell> renderables = this.tableMatrix.getRenderables();
-			renderables.forEach(renderable -> c.add(renderable));
-			return c;
+			c.addAll(renderables);
 		} else {
-			final List c = new LinkedList();
 			final List<RTableCell> renderables = this.tableMatrix.getRenderables();
-			renderables.forEach(renderable -> c.add(renderable));
-			return c;
+			c.addAll(renderables);
 		}
+		return c;
 	}
 
 	private void importDelayedPair(final DelayedPair pair) {

@@ -30,6 +30,7 @@ import org.mozilla.javascript.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -115,11 +116,12 @@ public class JavaFunctionObject extends ScriptableObject implements Function {
 		Method matchingMethod = null;
 		for (final Method m : methods) {
 			final Class[] parameterTypes = m.getParameterTypes();
+			boolean isParameterTypes = Arrays.stream(parameterTypes).findAny().isPresent();
 			if (args == null) {
-				if (parameterTypes == null || parameterTypes.length == 0) {
+				if (!isParameterTypes) {
 					return m;
 				}
-			} else if (parameterTypes != null && args.length >= parameterTypes.length) {
+			} else if (isParameterTypes && args.length >= parameterTypes.length) {
 				if (areAssignableTo(args, parameterTypes)) {
 					return m;
 				}

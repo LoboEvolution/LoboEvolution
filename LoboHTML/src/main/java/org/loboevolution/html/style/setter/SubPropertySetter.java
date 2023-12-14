@@ -40,7 +40,5 @@ public interface SubPropertySetter extends CSSProperties {
 	 * @param declaration a {@link org.loboevolution.html.node.css.CSSStyleDeclaration} object.
 	 * @param newValue a {@link java.lang.String} object.
 	 */
-	default void changeValue(final CSSStyleDeclaration declaration, final String newValue) {
-		this.changeValue(declaration, newValue);
-	}
+	void changeValue(final CSSStyleDeclaration declaration, final String newValue);
 }

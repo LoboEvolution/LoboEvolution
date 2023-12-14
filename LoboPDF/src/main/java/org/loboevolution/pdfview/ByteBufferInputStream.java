@@ -101,7 +101,7 @@ public class ByteBufferInputStream extends InputStream {
      */
     @Override
     public int read() throws IOException {
-        return buffer.get();
+        return buffer.get() & 0xFF;
     }
 
     /**

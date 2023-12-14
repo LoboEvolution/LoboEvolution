@@ -977,7 +977,6 @@ public class RBlockViewport extends BaseRCollection {
 		if (!SwingUtilities.isEventDispatchThread()) {
 			log.warn("layout(): Invoked outside GUI dispatch thread.");
 		}
-		final RenderableContainer container = this.container;
 		this.paddingInsets = paddingInsets;
 		this.yLimit = yLimit;
 		this.desiredWidth = desiredWidth;
@@ -1534,7 +1533,6 @@ public class RBlockViewport extends BaseRCollection {
 		}
 
 		try {
-			final Rectangle clipBounds = gInUnClipped.getClipBounds();
 			final List<Renderable> renderables = getRenderables();
 			if (renderables != null) {
 				renderables.forEach(robj -> {

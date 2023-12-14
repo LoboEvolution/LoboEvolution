@@ -122,7 +122,7 @@ public class CookieStore {
 			Date expiresDate = null;
 			if (maxAge != null) {
 				try {
-					expiresDate = new Date(System.currentTimeMillis() + Integer.parseInt(maxAge) * 1000);
+					expiresDate = new Date(System.currentTimeMillis() + Integer.parseInt(maxAge) * 1000L);
 				} catch (final NumberFormatException e) {
 					log.error(e.getMessage(), e);
 				}

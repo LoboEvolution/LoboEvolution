@@ -88,7 +88,7 @@ public class DOMImplementationSourceImpl implements DOMImplementationSource {
 
         final StringTokenizer st = new StringTokenizer(features);
         String feature = null;
-        String version = null;
+        String version;
 
         if (st.hasMoreTokens()) {
             feature = st.nextToken();

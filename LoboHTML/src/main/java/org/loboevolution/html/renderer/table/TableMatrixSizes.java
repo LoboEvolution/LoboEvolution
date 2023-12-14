@@ -160,7 +160,7 @@ class TableMatrixSizes {
 					}
 				}
 
-				return new HtmlLength(HtmlValues.getPixelSize(heightText, element.getRenderState(), doc.getDefaultView(), 0, availHeight));
+				return new HtmlLength(height);
 			}
 		} catch (final Exception err) {
 			return null;

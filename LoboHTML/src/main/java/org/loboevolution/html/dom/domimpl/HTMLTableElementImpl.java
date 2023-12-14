@@ -288,7 +288,7 @@ public class HTMLTableElementImpl extends HTMLElementImpl implements HTMLTableEl
 		}
 		final HTMLTableRowElementImpl rowElement = (HTMLTableRowElementImpl) doc.createElement("TR");
 		
-		int index = -1;		
+		int index;
 		if (objIndex instanceof Double) {
 			index = ((Double) objIndex).intValue();
 		} else {

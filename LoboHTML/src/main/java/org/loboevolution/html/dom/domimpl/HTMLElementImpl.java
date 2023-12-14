@@ -400,9 +400,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, GlobalE
 					mouseOverStyleDeclarationState = currentStyleDeclarationState;
 				}
 
-				if (currentStyleDeclarationState != null) {
-					informInvalidRecursive();
-				}
+				informInvalidRecursive();
 			} else {
 				forgetStyle(true);
 				informInvalidRecursive();

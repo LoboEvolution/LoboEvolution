@@ -54,7 +54,6 @@ import org.loboevolution.html.parser.XHtmlParser;
 import org.loboevolution.html.renderer.RBlock;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.style.CSSUtilities;
-import org.loboevolution.html.style.FontValues;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.html.style.StyleSheetAggregator;
 
@@ -675,7 +674,6 @@ public abstract class ElementImpl extends NodeImpl implements Element {
 			if (this.parentNode != null) {
 				final NodeListImpl list = ((NodeListImpl) this.parentNode.getChildNodes());
 				final int idx = list.indexOf(this);
-				final Node d = list.get(idx);
 				list.remove(idx);
 
 				try (final Reader reader = new StringReader(newHtml != null ? newHtml : "")) {
@@ -1302,7 +1300,7 @@ public abstract class ElementImpl extends NodeImpl implements Element {
 		final boolean padding = "border-box".equals(currentStyle.getBoxSizing()) ? false : isPadding;
 		final boolean border = "border-box".equals(currentStyle.getBoxSizing()) ? false : isBorder;
 
-		int widthSize = 0;
+		int widthSize;
 
 		if (getParentNode() == null ||
 				rs.getDisplay() == RenderState.DISPLAY_NONE ||
@@ -1364,10 +1362,10 @@ public abstract class ElementImpl extends NodeImpl implements Element {
 		final String overflow = currentStyle.getOverflow();
 		final String position = currentStyle.getPosition();
 		final RenderState rs = getRenderState();
-		final boolean padding = "border-box".equals(currentStyle.getBoxSizing()) ? false : isPadding;
-		final boolean border = "border-box".equals(currentStyle.getBoxSizing()) ? false : isBorder;
+		final boolean padding = !"border-box".equals(currentStyle.getBoxSizing()) && isPadding;
+		final boolean border = !"border-box".equals(currentStyle.getBoxSizing()) && isBorder;
 
-		int heightSize = 0;
+		int heightSize;
 
 		final HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
 		final HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
@@ -1403,8 +1401,8 @@ public abstract class ElementImpl extends NodeImpl implements Element {
 			}
 
 			if (padding) {
-				heightSize += HtmlValues.getPixelSize(currentStyle.getPaddingTop(), null, doc.getDefaultView(), 0);;
-				heightSize += HtmlValues.getPixelSize(currentStyle.getPaddingBottom(), null, doc.getDefaultView(), 0);;
+				heightSize += HtmlValues.getPixelSize(currentStyle.getPaddingTop(), null, doc.getDefaultView(), 0);
+				heightSize += HtmlValues.getPixelSize(currentStyle.getPaddingBottom(), null, doc.getDefaultView(), 0);
 			}
 
 			if (border) {

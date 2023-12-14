@@ -263,7 +263,7 @@ public class HtmlController {
 	/**
 	 * <p>onMouseOut.</p>
 	 *
-	 * @param node a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
+	 * @param modelNode a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 * @param event a {@link java.awt.event.MouseEvent} object.
 	 * @param x a int.
 	 * @param y a int.
@@ -293,7 +293,7 @@ public class HtmlController {
 	/**
 	 * <p>onMouseMoved.</p>
 	 *
-	 * @param node a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
+	 * @param modelNode a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 * @param event a {@link java.awt.event.MouseEvent} object.
 	 * @param x a int.
 	 * @param y a int.
@@ -320,7 +320,7 @@ public class HtmlController {
 	/**
 	 * <p>onMouseOver.</p>
 	 *
-	 * @param node a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
+	 * @param modelNode a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 * @param event a {@link java.awt.event.MouseEvent} object.
 	 * @param x a int.
 	 * @param y a int.
@@ -345,40 +345,6 @@ public class HtmlController {
 			}
 			node = node.getParentModelNode();
 		}
-	}
-	
-	
-	/**
-	 * <p>onMouseOver.</p>
-	 *
-	 * @param renderable a {@link org.loboevolution.html.renderer.BaseBoundableRenderable} object.
-	 * @param nodeStart a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
-	 * @param event a {@link java.awt.event.MouseEvent} object.
-	 * @param x a int.
-	 * @param y a int.
-	 * @param limit a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
-	 */
-	public void onMouseOver(final BaseBoundableRenderable renderable, final ModelNode nodeStart, final MouseEvent event, final int x, final int y, final ModelNode limit) {
-		ModelNode node = nodeStart;
-		while (node != null) {
-			if (node == limit) {
-				break;
-			}
-			if (node instanceof HTMLElementImpl) {
-				final HTMLElementImpl uiElement = (HTMLElementImpl) node;
-				uiElement.setMouseOver(true);
-				final Function f = uiElement.getOnmouseover();
-				if (f != null) {
-					final MouseEventImpl evt = new MouseEventImpl();
-					evt.initMouseEvent("mouseover", false, false, null, 0, 0, 0, x, y, true, true, true, true, (short) 0, null);
-					evt.setIe(event);
-					Executor.executeFunction(uiElement, f, evt, new Object[0]);
-				}
-			}
-			node = node.getParentModelNode();
-		}
-
-		setMouseOnMouseOver(renderable, nodeStart, limit);
 	}
 
 	/**

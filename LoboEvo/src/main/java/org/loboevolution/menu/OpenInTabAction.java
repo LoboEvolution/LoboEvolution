@@ -71,8 +71,8 @@ public class OpenInTabAction extends AbstractAction {
 		final int indexPanel = panel.getTabbedPane().getIndex() +1;
 		final ITabbedPane tabbedPane = panel.getTabbedPane();
 		tabbedPane.setComponentPopupMenu(panel);
-		JComponent comp = null;
-		String title = "";
+		JComponent comp;
+		String title;
 		
 		if (this.address != null) {
 			comp = NavigatorFrame.createHtmlPanel(panel, this.address);

@@ -571,7 +571,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	private Renderable getInnerMostRenderable(final int x, final int y) {
 		final RBlock block = this.rblock;
 		Renderable r = block.getRenderable(x - block.getX(), y - block.getY());
-		Renderable inner = null;
+		Renderable inner;
 		do {
 			if (r instanceof RCollection) {
 				final RCollection rc = (RCollection) r;

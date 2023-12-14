@@ -42,8 +42,8 @@ import java.awt.event.KeyListener;
 public class InputNumber extends InputText {
 
 	private final JTextField numeric;
-	private String min = "";
-	private String max = "";
+	private String min;
+	private String max;
 
 	/**
 	 * <p>Constructor for InputNumber.</p>

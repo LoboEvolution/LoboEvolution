@@ -916,7 +916,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 				if (w != -1 && h != -1) {
 
 					if (rs != null) {
-						binfo = rs == null ? null : rs.getBackgroundImageInfo(w, h);
+						binfo = rs.getBackgroundImageInfo(w, h);
 					}
 
 					if(binfo != null && binfo.getBackgroundXPosition() == 0) {

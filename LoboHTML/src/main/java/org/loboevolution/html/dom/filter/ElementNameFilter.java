@@ -54,7 +54,7 @@ public class ElementNameFilter implements NodeFilter {
 	public short acceptNode(final Node node) {
 		if (node instanceof Element) {
 			final Element elm = (Element)node;
-			if (elm != null && this.name != null) {
+			if (this.name != null) {
 				return this.name.equals(elm.getAttribute("name")) ?
 						NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
 			}

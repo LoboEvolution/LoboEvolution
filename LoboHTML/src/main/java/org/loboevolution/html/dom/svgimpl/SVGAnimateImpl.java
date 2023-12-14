@@ -434,13 +434,13 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 
 	private int timeDelayTransform(final SVGAnimationImpl animate) {
 		final float dur = animate.getDur();
-		float range = 0;
-		float sxFrom = 0;
-		float sxTo = 0;
+		float range;
+		float sxFrom;
+		float sxTo;
 		final String from_trans = animate.getFrom();
 		final String to_trans = animate.getTo();
 		final StringTokenizer stFrom = new StringTokenizer(from_trans, " ,");
-		StringTokenizer stTo = null;
+		StringTokenizer stTo;
 		switch (animate.getAttributeType()) {
 		case SVGTransform.SVG_TRANSFORM_TRANSLATE:
 			float txFrom = 0;

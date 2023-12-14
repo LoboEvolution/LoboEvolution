@@ -26,25 +26,21 @@
 package org.loboevolution.apache.xml.dtm.ref;
 
 // for dumpDTM
-import java.io.File;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.PrintStream;
-import java.nio.file.Files;
-import java.util.ArrayList;
-import java.util.List;
 
 import lombok.extern.slf4j.Slf4j;
-import org.loboevolution.html.node.Node;
-import org.loboevolution.javax.xml.transform.Source;
-import org.loboevolution.apache.xpath.objects.XString;
-import org.loboevolution.apache.xpath.res.XPATHErrorResources;
-import org.loboevolution.apache.xpath.res.XPATHMessages;
 import org.loboevolution.apache.xml.dtm.DTM;
 import org.loboevolution.apache.xml.dtm.DTMAxisTraverser;
 import org.loboevolution.apache.xml.dtm.DTMException;
 import org.loboevolution.apache.xml.dtm.DTMManager;
 import org.loboevolution.apache.xml.utils.SuballocatedIntVector;
+import org.loboevolution.apache.xpath.objects.XString;
+import org.loboevolution.apache.xpath.res.XPATHErrorResources;
+import org.loboevolution.apache.xpath.res.XPATHMessages;
+import org.loboevolution.html.node.Node;
+import org.loboevolution.javax.xml.transform.Source;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The <code>DTMDefaultBase</code> class serves as a helper base for DTMs. It sets up structures for
@@ -498,126 +494,6 @@ public abstract class DTMDefaultBase implements DTM {
 
       if (identity >= m_size && !isMore) return NULL;
       else if (identity < m_size) return m_parent.elementAt(identity);
-    }
-  }
-
-  /** Diagnostics function to dump the DTM. */
-  public void dumpDTM(OutputStream os) {
-    try {
-      if (os == null) {
-        final File f = new File("DTMDump" + this.hashCode() + ".txt");
-        log.error("Dumping... " + f.getAbsolutePath());
-        os = Files.newOutputStream(f.toPath());
-      }
-      final PrintStream ps = new PrintStream(os);
-
-      while (nextNode()) {}
-
-      final int nRecords = m_size;
-
-      ps.println("Total nodes: " + nRecords);
-
-      for (int index = 0; index < nRecords; ++index) {
-        final int i = makeNodeHandle(index);
-        ps.println("=========== index=" + index + " handle=" + i + " ===========");
-        ps.println("NodeName: " + getNodeName(i));
-        ps.println("NodeNameX: " + getNodeNameX(i));
-        ps.println("LocalName: " + getLocalName(i));
-        ps.println("NamespaceURI: " + getNamespaceURI(i));
-        ps.println("Prefix: " + getPrefix(i));
-
-        final int exTypeID = _exptype(index);
-
-        ps.println("Expanded Type ID: " + Integer.toHexString(exTypeID));
-
-        final int type = _type(index);
-        final String typestring;
-
-        switch (type) {
-          case DTM.ATTRIBUTE_NODE:
-            typestring = "ATTRIBUTE_NODE";
-            break;
-          case DTM.CDATA_SECTION_NODE:
-            typestring = "CDATA_SECTION_NODE";
-            break;
-          case DTM.COMMENT_NODE:
-            typestring = "COMMENT_NODE";
-            break;
-          case DTM.DOCUMENT_FRAGMENT_NODE:
-            typestring = "DOCUMENT_FRAGMENT_NODE";
-            break;
-          case DTM.DOCUMENT_NODE:
-            typestring = "DOCUMENT_NODE";
-            break;
-          case DTM.DOCUMENT_TYPE_NODE:
-            typestring = "DOCUMENT_NODE";
-            break;
-          case DTM.ELEMENT_NODE:
-            typestring = "ELEMENT_NODE";
-            break;
-          case DTM.ENTITY_NODE:
-            typestring = "ENTITY_NODE";
-            break;
-          case DTM.ENTITY_REFERENCE_NODE:
-            typestring = "ENTITY_REFERENCE_NODE";
-            break;
-          case DTM.NAMESPACE_NODE:
-            typestring = "NAMESPACE_NODE";
-            break;
-          case DTM.NOTATION_NODE:
-            typestring = "NOTATION_NODE";
-            break;
-          case DTM.NULL:
-            typestring = "NULL";
-            break;
-          case DTM.PROCESSING_INSTRUCTION_NODE:
-            typestring = "PROCESSING_INSTRUCTION_NODE";
-            break;
-          case DTM.TEXT_NODE:
-            typestring = "TEXT_NODE";
-            break;
-          default:
-            typestring = "Unknown!";
-            break;
-        }
-
-        ps.println("Type: " + typestring);
-
-        final int firstChild = _firstch(index);
-
-        if (DTM.NULL == firstChild) ps.println("First child: DTM.NULL");
-        else if (NOTPROCESSED == firstChild) ps.println("First child: NOTPROCESSED");
-        else ps.println("First child: " + firstChild);
-
-        if (m_prevsib != null) {
-          final int prevSibling = _prevsib(index);
-
-          if (DTM.NULL == prevSibling) ps.println("Prev sibling: DTM.NULL");
-          else if (NOTPROCESSED == prevSibling) ps.println("Prev sibling: NOTPROCESSED");
-          else ps.println("Prev sibling: " + prevSibling);
-        }
-
-        final int nextSibling = _nextsib(index);
-
-        if (DTM.NULL == nextSibling) ps.println("Next sibling: DTM.NULL");
-        else if (NOTPROCESSED == nextSibling) ps.println("Next sibling: NOTPROCESSED");
-        else ps.println("Next sibling: " + nextSibling);
-
-        final int parent = _parent(index);
-
-        if (DTM.NULL == parent) ps.println("Parent: DTM.NULL");
-        else if (NOTPROCESSED == parent) ps.println("Parent: NOTPROCESSED");
-        else ps.println("Parent: " + parent);
-
-        final int level = _level(index);
-
-        ps.println("Level: " + level);
-        ps.println("Node Value: " + getNodeValue(i));
-        ps.println("String Value: " + getStringValue(i));
-      }
-    } catch (final IOException ioe) {
-      ioe.printStackTrace(System.err);
-      throw new RuntimeException(ioe.getMessage());
     }
   }
 

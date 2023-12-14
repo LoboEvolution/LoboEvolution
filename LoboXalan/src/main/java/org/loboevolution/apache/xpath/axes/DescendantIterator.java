@@ -37,6 +37,8 @@ import org.loboevolution.apache.xml.dtm.DTMAxisTraverser;
 import org.loboevolution.apache.xml.dtm.DTMFilter;
 import org.loboevolution.apache.xml.dtm.DTMIterator;
 
+import java.util.Objects;
+
 /**
  * This class implements an optimized iterator for descendant, descendant-or-self, or "//foo"
  * patterns.
@@ -198,7 +200,8 @@ public class DescendantIterator extends LocPathIterator {
     final String localName = getLocalName();
     final String namespace = getNamespace();
     final int what = m_whatToShow;
-    if (DTMFilter.SHOW_ALL == what || localName == NodeTest.WILD || namespace == NodeTest.WILD) {
+    if (Objects.equals(what, DTMFilter.SHOW_ALL) ||
+            Objects.equals(localName, NodeTest.WILD) || Objects.equals(namespace, NodeTest.WILD)) {
       return traverser.first(current);
     } else {
       final int type = getNodeTypeTest(what);

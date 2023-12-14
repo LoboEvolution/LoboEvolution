@@ -78,7 +78,7 @@ public class BackgroundImageSetter implements SubPropertySetter {
 					}
 
 				} catch (final Exception mfu) {
-					log.error("Unable to create URL for URI= {} with base= ", tentativeUri, baseHref, mfu);
+					log.error("Unable to create URL for URI= {} with base {}", tentativeUri, baseHref);
 					finalValue = newValue;
 				}
 			} else {

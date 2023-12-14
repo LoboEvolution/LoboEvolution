@@ -270,7 +270,7 @@ public class SVGLengthImpl implements SVGLength {
 	}
 
 	private String getUnitTypeAsString(final short unitType) {
-		String suffix = "";
+		String suffix;
 		switch (unitType) {
 		case SVGLength.SVG_LENGTHTYPE_CM:
 			suffix = "cm";

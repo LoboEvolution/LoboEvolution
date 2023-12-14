@@ -30,7 +30,6 @@ package org.loboevolution.html.dom.nodeimpl;
 
 import lombok.extern.slf4j.Slf4j;
 import org.htmlunit.cssparser.dom.DOMException;
-import org.loboevolution.html.dom.nodeimpl.event.EventTargetImpl;
 import org.loboevolution.html.node.CharacterData;
 
 /**
@@ -39,7 +38,7 @@ import org.loboevolution.html.node.CharacterData;
 @Slf4j
 public abstract class CharacterDataImpl extends NodeImpl implements CharacterData {
 	
-	protected volatile String text;
+	protected String text;
 
 	/**
 	 * <p>Constructor for CharacterDataImpl.</p>
@@ -181,11 +180,10 @@ public abstract class CharacterDataImpl extends NodeImpl implements CharacterDat
 	@Override
 	public String toString() {
 		String someText = this.text;
-		final int length = someText.length();
 		if (someText != null && someText.length() > 32) {
 			someText = someText.substring(0, 29) + "...";
 		}
-		return getNodeName() + "[length=" + length + ",text=" + someText + "]";
+		return getNodeName() + "[length=" + someText.length() + ",text=" + someText + "]";
 	}
 
 }

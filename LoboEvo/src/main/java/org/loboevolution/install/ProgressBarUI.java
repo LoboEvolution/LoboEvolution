@@ -83,7 +83,7 @@ public class ProgressBarUI extends JPanel implements PropertyChangeListener {
 	/** {@inheritDoc} */
 	@Override
 	public void propertyChange(final PropertyChangeEvent evt) {
-		if ("progress" == evt.getPropertyName()) {
+		if ("progress".equals(evt.getPropertyName())) {
 			final int progress = (Integer) evt.getNewValue();
 			this.progressBar.setValue(progress);
 			this.taskOutput.append(String.format("Completed %d%% of task.\n", this.storage.getProgress()));
