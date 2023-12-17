@@ -146,7 +146,7 @@ public abstract class Segment {
 
         huffmanDecoder = decoder.getHuffmanDecoder();
         arithmeticDecoder = decoder.getArithmeticDecoder();
-        mmrDecoder = decoder.getMMRDecoder();
+        mmrDecoder = decoder.getMmrDecoder();
 
 //		} catch (JBIG2Exception e) {
 //			log.error(e.getMessage(), e);
