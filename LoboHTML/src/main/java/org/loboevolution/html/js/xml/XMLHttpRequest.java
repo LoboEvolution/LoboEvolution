@@ -40,7 +40,6 @@ import org.mozilla.javascript.Scriptable;
 
 import java.net.URL;
 import java.util.List;
-import java.util.MissingResourceException;
 
 /**
  * <p>XMLHttpRequest class.</p>

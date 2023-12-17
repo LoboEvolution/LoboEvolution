@@ -53,7 +53,6 @@ import java.awt.image.ImageObserver;
 import java.net.URL;
 import java.util.List;
 import java.util.*;
-import java.util.logging.Level;
 
 /**
  * <p>Abstract BaseElementRenderable class.</p>

@@ -40,8 +40,10 @@ import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.dom.HTMLAnchorElement;
 import org.loboevolution.html.dom.HTMLDocument;
 import org.loboevolution.html.dom.HTMLElement;
-import org.loboevolution.html.dom.HTMLLinkElement;
-import org.loboevolution.html.dom.domimpl.*;
+import org.loboevolution.html.dom.domimpl.HTMLAnchorElementImpl;
+import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
+import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
+import org.loboevolution.html.dom.domimpl.HTMLImageElementImpl;
 import org.loboevolution.html.dom.input.FormInput;
 import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.parser.DocumentBuilderImpl;
@@ -871,7 +873,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 				final HtmlPanel panel = this.htmlPanel;
 				panel.setDocument(document, HtmlRendererContextImpl.this);
 				final String ref = urlForLoading.getRef();
-				if (ref != null && ref.length() != 0) {
+				if (Strings.isNotBlank(ref)) {
 					panel.scrollToElement(ref);
 				}
 			} catch (final SocketTimeoutException e) {

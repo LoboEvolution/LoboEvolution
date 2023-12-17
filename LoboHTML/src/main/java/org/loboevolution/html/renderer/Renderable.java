@@ -32,7 +32,6 @@ import org.loboevolution.html.dom.HTMLHtmlElement;
 import org.loboevolution.html.dom.nodeimpl.ModelNode;
 
 import java.awt.*;
-import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -40,6 +39,7 @@ import java.util.concurrent.atomic.AtomicReference;
  * Represents a renderer (view) node.
  */
 public interface Renderable {
+
 	/** Constant EMPTY_ARRAY */
 	Renderable[] EMPTY_ARRAY = new Renderable[0];
 

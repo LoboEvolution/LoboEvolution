@@ -26,6 +26,7 @@
 
 package org.loboevolution.menu.tools.developer.tool.inspector;
 
+import org.loboevolution.common.Strings;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeList;
@@ -207,7 +208,7 @@ public class DOMTreeModel implements TreeModel {
                 final Node child = nl.item(i);
                 if (child.getNodeType() == Node.ELEMENT_NODE ||
                         child.getNodeType() == Node.COMMENT_NODE ||
-                        (child.getNodeType() == Node.TEXT_NODE && (child.getNodeValue().trim().length() > 0))) {
+                        (child.getNodeType() == Node.TEXT_NODE && Strings.isNotBlank(child.getNodeValue().trim()))) {
                     children.add(child);
                 }
             }

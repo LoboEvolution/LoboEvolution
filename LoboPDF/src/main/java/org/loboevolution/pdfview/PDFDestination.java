@@ -118,7 +118,7 @@ public class PDFDestination {
      * Get a destination from either an array (explicit destination), a name
      * (named destination) or a string (name tree destination).
      *
-     * @param obj  the PDFObject representing this destination
+     * @param pdfObj  the PDFObject representing this destination
      * @param root the root of the PDF object tree
      * @return a {@link org.loboevolution.pdfview.PDFDestination} object.
      * @throws java.io.IOException if any.

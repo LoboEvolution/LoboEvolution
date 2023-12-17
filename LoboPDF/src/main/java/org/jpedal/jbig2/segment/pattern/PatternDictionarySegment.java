@@ -62,7 +62,6 @@ public class PatternDictionarySegment extends Segment {
      * @throws org.jpedal.jbig2.JBIG2Exception if any.
      */
     public void readSegment() throws IOException, JBIG2Exception {
-        /** read text region Segment flags */
         readPatternDictionaryFlags();
 
         width = decoder.readByte();

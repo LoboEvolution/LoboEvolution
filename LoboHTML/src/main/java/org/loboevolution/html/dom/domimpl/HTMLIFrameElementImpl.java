@@ -43,7 +43,6 @@ import org.loboevolution.net.UserAgent;
 import java.awt.*;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.logging.Level;
 
 /**
  * <p>HTMLIFrameElementImpl class.</p>

@@ -47,13 +47,14 @@ public class SVGViewBoxImpl {
 	 * <p>Constructor for SVGViewBoxImpl.</p>
 	 *
 	 * @param svgElem a {@link org.loboevolution.html.dom.svg.SVGSVGElement} object.
-	 * @param x a float.
-	 * @param y a float.
-	 * @param width a float.
-	 * @param height a float.
-	 * @param r a float.
+	 * @param svgX a {@link java.lang.Float} object.
+	 * @param svgY a {@link java.lang.Float} object
+	 * @param svgWidth a {@link java.lang.Float} object
+	 * @param svgHeight a {@link java.lang.Float} object
+	 * @param svgR a {@link java.lang.Float} object
 	 */
-	public SVGViewBoxImpl(final SVGSVGElement svgElem, final float svgX, final float svgY, final float svgWidth, final float svgHeight, final float svgR) {
+	public SVGViewBoxImpl(final SVGSVGElement svgElem, final float svgX, final float svgY,
+						  final float svgWidth, final float svgHeight, final float svgR) {
 		float x = svgX;
 		float y = svgY;
 		float r = svgR;

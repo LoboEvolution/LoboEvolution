@@ -26,10 +26,7 @@
 
 package org.loboevolution.html.js.geom;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.loboevolution.html.node.js.geom.DOMRect;
 import org.loboevolution.html.node.js.geom.DOMRectInit;
 import org.loboevolution.html.node.js.geom.DOMRectReadOnly;

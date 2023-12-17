@@ -160,10 +160,6 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
     private MouseInputListener mouseInputListener;
 
     /**
-     * Cursor used to track the cursor set by the user. This is
-     * initially Cursor.DEFAULT_CURSOR.
-     */
-    /**
      * WindowListener that is added to the parent Window
      * the JRootPane is contained in.
      */

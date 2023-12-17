@@ -76,7 +76,6 @@ public class DocumentBuilderImpl {
 	 *           source must provide either an input stream or a reader.
 	 * @see HTMLDocumentImpl#load()
 	 * @return a {@link org.loboevolution.html.node.Document} object.
-	 * @throws org.xml.sax.SAXException if any.
 	 * @throws java.io.IOException if any.
 	 */
 	public Document createDocument(final InputSource is) throws IOException {

@@ -29,9 +29,7 @@ package org.loboevolution.javax.xml.transform.dom;
 import org.loboevolution.javax.xml.transform.SourceLocator;
 import org.loboevolution.html.node.Node;
 
-public interface DOMLocator
-    extends SourceLocator
-{
+public interface DOMLocator extends SourceLocator {
 
-    public abstract Node getOriginatingNode();
+    Node getOriginatingNode();
 }

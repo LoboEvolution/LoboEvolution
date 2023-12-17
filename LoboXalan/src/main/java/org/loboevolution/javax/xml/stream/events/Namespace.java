@@ -56,15 +56,15 @@ public interface Namespace extends Attribute {
    * Gets the prefix, returns "" if this is a default
    * namespace declaration.
    */
-  public String getPrefix();
+  String getPrefix();
 
   /**
    * Gets the uri bound to the prefix of this namespace
    */
-  public String getNamespaceURI();
+  String getNamespaceURI();
 
   /**
    * returns true if this attribute declares the default namespace
    */
-  public boolean isDefaultNamespaceDeclaration();
+  boolean isDefaultNamespaceDeclaration();
 }

@@ -171,8 +171,7 @@ public class SVGTransformListImpl implements SVGTransformList {
 
 	/**
 	 * <p>createTransformList.</p>
-	 *
-	 * @param transformString a {@link java.lang.String} object.
+	 * @param transformStr a {@link java.lang.String} object.
 	 * @return a {@link org.loboevolution.html.dom.svg.SVGTransformList} object.
 	 */
 	public static SVGTransformList createTransformList(final String transformStr) {

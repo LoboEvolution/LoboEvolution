@@ -30,7 +30,6 @@ package org.loboevolution.gui;
 
 import org.loboevolution.html.dom.HTMLAnchorElement;
 import org.loboevolution.html.dom.HTMLElement;
-import org.loboevolution.html.dom.HTMLLinkElement;
 import org.loboevolution.html.dom.input.FormInput;
 import org.loboevolution.http.UserAgentContext;
 

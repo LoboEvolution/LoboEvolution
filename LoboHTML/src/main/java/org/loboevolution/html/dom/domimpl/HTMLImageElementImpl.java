@@ -44,7 +44,6 @@ import org.mozilla.javascript.Function;
 import java.awt.*;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.logging.Level;
 
 /**
  * <p>HTMLImageElementImpl class.</p>

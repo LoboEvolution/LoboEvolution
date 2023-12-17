@@ -32,6 +32,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.htmlunit.cssparser.parser.selector.Selector;
 import org.htmlunit.cssparser.parser.selector.SelectorList;
+import org.loboevolution.common.ArrayUtilities;
 import org.loboevolution.common.Nodes;
 import org.loboevolution.common.Strings;
 import org.loboevolution.gui.HtmlRendererContext;
@@ -1133,7 +1134,7 @@ public abstract class ElementImpl extends NodeImpl implements Element {
 					}
 				});
 			}
-			return elem.size() > 0 ? elem.get(0) : null;
+			return ArrayUtilities.isNotBlank(elem) ? elem.get(0) : null;
 		} catch (final Exception e) {
 			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "Is not a valid selector.");
 		}

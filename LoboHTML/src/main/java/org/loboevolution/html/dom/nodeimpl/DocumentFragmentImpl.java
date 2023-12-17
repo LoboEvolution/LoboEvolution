@@ -29,7 +29,6 @@
 package org.loboevolution.html.dom.nodeimpl;
 
 import org.htmlunit.cssparser.dom.DOMException;
-import org.loboevolution.html.dom.nodeimpl.event.EventTargetImpl;
 import org.loboevolution.html.node.DocumentFragment;
 import org.loboevolution.html.node.Node;
 

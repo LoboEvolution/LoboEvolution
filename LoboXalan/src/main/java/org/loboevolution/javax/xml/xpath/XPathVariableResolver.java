@@ -30,5 +30,5 @@ import org.loboevolution.javax.xml.namespace.QName;
 
 public interface XPathVariableResolver {
 
-    public abstract Object resolveVariable(QName qname);
+    Object resolveVariable(QName qname);
 }

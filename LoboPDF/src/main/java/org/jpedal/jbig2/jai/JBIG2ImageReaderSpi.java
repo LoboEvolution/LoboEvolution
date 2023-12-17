@@ -76,7 +76,7 @@ public class JBIG2ImageReaderSpi extends ImageReaderSpi {
 
         final ImageInputStream stream = (ImageInputStream) input;
 
-        /** Read and validate the input source's header. */
+        // Read and validate the input source's header.
         final byte[] header = new byte[8];
         try {
             // The input source's current position must be preserved so that

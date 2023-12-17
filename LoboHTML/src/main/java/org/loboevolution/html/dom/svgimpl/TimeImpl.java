@@ -48,8 +48,7 @@ public class TimeImpl implements Time {
 
 	/**
 	 * <p>Constructor for TimeImpl.</p>
-	 *
-	 * @param timeValue a {@link java.lang.String} object.
+	 * @param time a {@link java.lang.String} object.
 	 */
 	public TimeImpl(final String time) {
 		String timeValue = time;

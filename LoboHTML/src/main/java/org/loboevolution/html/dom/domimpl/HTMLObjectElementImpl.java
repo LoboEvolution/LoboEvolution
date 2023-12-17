@@ -241,8 +241,6 @@ public class HTMLObjectElementImpl extends HTMLElementImpl implements HTMLObject
 	public void setHeight(final String height) {
 		setAttribute("height", height);
 	}
-
-	/** {@inheritDoc} */
 	
 
 	/** {@inheritDoc} */

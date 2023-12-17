@@ -39,7 +39,6 @@ import java.util.StringTokenizer;
 import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.Strings;
 import org.loboevolution.common.Urls;
-import org.loboevolution.net.HttpNetwork;
 
 /**
  * <p>ExternalResourcesStore class.</p>

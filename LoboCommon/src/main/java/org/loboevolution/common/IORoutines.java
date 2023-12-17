@@ -95,7 +95,7 @@ public class IORoutines {
 	 * <p>load.</p>
 	 *
 	 * @param in a {@link java.io.InputStream} object.
-	 * @param initialBufferSize a {@link java.lang.Integer} object.
+	 * @param initBufferSize a {@link java.lang.Integer} object.
 	 * @return an array of {@link byte} objects.
 	 * @throws java.io.IOException if any.
 	 */

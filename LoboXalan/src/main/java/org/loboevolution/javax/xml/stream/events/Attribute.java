@@ -62,20 +62,20 @@ public interface Attribute extends XMLEvent {
   /**
    * Gets the normalized value of this attribute
    */
-  public String getValue();
+  String getValue();
 
   /**
    * Gets the type of this attribute, default is
    * the String "CDATA"
    * @return the type as a String, default is "CDATA"
    */
-  public String getDTDType();
+  String getDTDType();
 
   /**
    * A flag indicating whether this attribute was actually
    * specified in the start-tag of its element, or was defaulted from the schema.
    * @return returns true if this was specified in the start element
    */
-  public boolean isSpecified();
+  boolean isSpecified();
 
 }

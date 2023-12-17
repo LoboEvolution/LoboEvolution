@@ -333,7 +333,7 @@ public final class Strings {
 	 * @throws java.lang.Exception if any.
 	 */
 	public static String hash(final String password, final byte[] salt) throws Exception {
-        if (password == null || password.length() == 0)
+        if (Strings.isBlank(password))
             throw new IllegalArgumentException("Empty passwords are not supported.");
 
 		final KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 4096, 256 * 8);

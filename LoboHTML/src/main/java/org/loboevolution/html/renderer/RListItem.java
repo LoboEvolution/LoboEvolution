@@ -33,6 +33,7 @@ import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.style.ListStyle;
 
 import java.awt.*;
+import java.util.Objects;
 
 class RListItem extends BaseRListElement {
 
@@ -63,7 +64,7 @@ class RListItem extends BaseRListElement {
 		super.doLayout(info);
 		final RenderState renderState = this.modelNode.getRenderState();
 		final Integer value = getValue();
-		if (value == UNSET) {
+		if (Objects.equals(value, UNSET)) {
 			this.count = renderState.incrementCount(DEFAULT_COUNTER_NAME, this.listNesting);
 		} else {
 			final int newCount = value;

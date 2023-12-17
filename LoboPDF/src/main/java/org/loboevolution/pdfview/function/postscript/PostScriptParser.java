@@ -85,8 +85,8 @@ public class PostScriptParser {
     }
 
     /*************************************************************************
-     * @param t
-     * @return
+     * @param token a {@link java.lang.String} object.
+     * @return a {@link java.lang.String} object.
      ************************************************************************/
     private String filterBlockStart(final String token) {
         String t = token;

@@ -62,5 +62,5 @@ public interface StreamFilter {
    * @param reader the event to test
    * @return true if this filter accepts this event, false otherwise
    */
-  public boolean accept(XMLStreamReader reader);
+  boolean accept(XMLStreamReader reader);
 }

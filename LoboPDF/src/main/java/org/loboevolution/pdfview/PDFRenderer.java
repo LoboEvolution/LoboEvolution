@@ -565,16 +565,16 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
     /**
      * Set some or all aspects of the current stroke.
      *
-     * @param w     the width of the stroke, or NOWIDTH to leave it unchanged
-     * @param cap   the end cap style, or NOCAP to leave it unchanged
-     * @param join  the join style, or NOJOIN to leave it unchanged
-     * @param limit the miter limit, or NOLIMIT to leave it unchanged
-     * @param phase the phase of the dash array, or NOPHASE to leave it
-     *              unchanged
-     * @param ary   the dash array, or null to leave it unchanged.  phase
-     *              and ary must both be valid, or phase must be NOPHASE while ary is null.
+     * @param wStroke     the width of the stroke, or NOWIDTH to leave it unchanged
+     * @param capStroke   the end cap style, or NOCAP to leave it unchanged
+     * @param joinStroke  the join style, or NOJOIN to leave it unchanged
+     * @param limitStroke the miter limit, or NOLIMIT to leave it unchanged
+     * @param aryStroke   the dash array, or null to leave it unchanged.  phase
+     *                    and ary must both be valid, or phase must be NOPHASE while ary is null.
+     * @param phaseStroke the phase of the dash array, or NOPHASE to leave it unchanged
      */
-    public void setStrokeParts(final float wStroke, final int capStroke, final int joinStroke, final float limitStroke, final float[] aryStroke, final float phaseStroke) {
+    public void setStrokeParts(final float wStroke, final int capStroke, final int joinStroke,
+                               final float limitStroke, final float[] aryStroke, final float phaseStroke) {
         float w = wStroke;
         int cap = capStroke;
         int join = joinStroke;

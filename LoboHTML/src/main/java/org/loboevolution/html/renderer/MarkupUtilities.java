@@ -28,7 +28,6 @@
  */
 package org.loboevolution.html.renderer;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -38,9 +38,7 @@ import org.loboevolution.html.style.HtmlValues;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
-import java.util.Iterator;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
 abstract class BaseRCollection extends BaseBoundableRenderable implements RCollection {
@@ -129,7 +127,7 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 					}
 					inSelection = newInSelection;
 				}
-			};
+			}
 		}
 		if (inSelection && checkPoint1 != null) {
 			return false;
@@ -296,7 +294,7 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 						g.translate(-offsetX, -offsetY);
 					}
 				}
-			};
+			}
 		}
 		if (inSelection && checkPoint1 != null) {
 			return false;

@@ -29,5 +29,5 @@ package org.loboevolution.javax.xml.xpath;
 import org.loboevolution.javax.xml.namespace.QName;
 public interface XPathFunctionResolver {
 
-    public abstract XPathFunction resolveFunction(QName qname, final int i);
+    XPathFunction resolveFunction(QName qname, final int i);
 }

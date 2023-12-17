@@ -61,7 +61,7 @@ public interface StartElement extends XMLEvent {
    * Get the name of this event
    * @return the qualified name of this event
    */
-  public QName getName();
+  QName getName();
 
   /**
    * Returns an Iterator of non-namespace declared attributes declared on
@@ -74,7 +74,7 @@ public interface StartElement extends XMLEvent {
    * @return a readonly Iterator over Attribute interfaces, or an
    * empty iterator
    */
-  public Iterator getAttributes();
+  Iterator getAttributes();
 
   /**
    * Returns an Iterator of namespaces declared on this element.
@@ -99,14 +99,14 @@ public interface StartElement extends XMLEvent {
    * empty iterator
    *
    */
-  public Iterator getNamespaces();
+  Iterator getNamespaces();
 
   /**
    * Returns the attribute referred to by this name
    * @param name the qname of the desired name
    * @return the attribute corresponding to the name value or null
    */
-  public Attribute getAttributeByName(QName name);
+  Attribute getAttributeByName(QName name);
 
   /**
    * Gets a read-only namespace context. If no context is
@@ -116,7 +116,7 @@ public interface StartElement extends XMLEvent {
    *
    * @return the current namespace context
    */
-  public NamespaceContext getNamespaceContext();
+  NamespaceContext getNamespaceContext();
 
   /**
    * Gets the value that the prefix is bound to in the
@@ -125,5 +125,5 @@ public interface StartElement extends XMLEvent {
    * @param prefix the prefix to lookup
    * @return the uri bound to the prefix or null
    */
-  public String getNamespaceURI(final String prefix);
+  String getNamespaceURI(final String prefix);
 }

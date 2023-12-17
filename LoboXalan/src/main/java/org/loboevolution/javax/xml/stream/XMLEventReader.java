@@ -61,14 +61,14 @@ public interface XMLEventReader extends Iterator {
    * @throws XMLStreamException if there is an error with the underlying XML.
    * @return XMLEvent
    */
-  public XMLEvent nextEvent() throws XMLStreamException;
+  XMLEvent nextEvent() throws XMLStreamException;
 
   /**
    * Check if there are more events.
    * Returns true if there are more events and false otherwise.
    * @return true if the event reader has more events, false otherwise
    */
-  public boolean hasNext();
+  boolean hasNext();
 
   /**
    * Check the next XMLEvent without reading it from the stream.
@@ -78,7 +78,7 @@ public interface XMLEventReader extends Iterator {
    * @throws XMLStreamException
    * @return XMLEvent
    */
-  public XMLEvent peek() throws XMLStreamException;
+  XMLEvent peek() throws XMLStreamException;
 
   /**
    * Reads the content of a text-only element. Precondition:
@@ -87,7 +87,7 @@ public interface XMLEventReader extends Iterator {
    * @throws XMLStreamException if the current event is not a START_ELEMENT
    * or if a non text element is encountered
    */
-  public String getElementText() throws XMLStreamException;
+  String getElementText() throws XMLStreamException;
 
   /**
    * Skips any insignificant space events until a START_ELEMENT or
@@ -98,7 +98,7 @@ public interface XMLEventReader extends Iterator {
    * the DTD is missing or not interpreted.
    * @throws XMLStreamException if anything other than space characters are encountered
    */
-  public XMLEvent nextTag() throws XMLStreamException;
+  XMLEvent nextTag() throws XMLStreamException;
 
   /**
    * Get the value of a feature/property from the underlying implementation
@@ -106,12 +106,12 @@ public interface XMLEventReader extends Iterator {
    * @return The value of the property
    * @throws IllegalArgumentException if the property is not supported
    */
-  public Object getProperty(java.lang.String name) throws java.lang.IllegalArgumentException;
+  Object getProperty(java.lang.String name) throws java.lang.IllegalArgumentException;
 
   /**
    * Frees any resources associated with this Reader.  This method does not close the
    * underlying input source.
    * @throws XMLStreamException if there are errors freeing associated resources
    */
-  public void close() throws XMLStreamException;
+  void close() throws XMLStreamException;
 }

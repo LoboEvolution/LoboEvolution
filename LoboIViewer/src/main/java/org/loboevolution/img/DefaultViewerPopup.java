@@ -79,15 +79,11 @@ public class DefaultViewerPopup extends JPopupMenu {
 	}
 
 	private void createAndShowGUI() {
-		
-		/** Status bar toggle **/
 
 		final JCheckBoxMenuItem toggleStatusBarItem = new JCheckBoxMenuItem("Status bar");
 		toggleStatusBarItem.setState(viewer.isStatusBarVisible());
 		viewer.addPropertyChangeListener("statusBarVisible", evt -> toggleStatusBarItem.setState(viewer.isStatusBarVisible()));
 		toggleStatusBarItem.addActionListener(e -> viewer.setStatusBarVisible(!viewer.isStatusBarVisible()));
-
-		/** Zoom menu **/
 
 		final JMenu zoomMenu = new JMenu("Zoom");
 		final JRadioButtonMenuItem zoomOriginalSize = new JRadioButtonMenuItem("Original size",
@@ -169,12 +165,9 @@ public class DefaultViewerPopup extends JPopupMenu {
 			}
 		});
 
-		/** Save command **/
-
 		final JMenuItem saveImageMenuItem = new JMenuItem("Save image...");
 		saveImageMenuItem.addActionListener(e -> saveImageAction());
 
-		/** Pixelated zoom toggle **/
 		final JCheckBoxMenuItem togglePixelatedZoomItem = new JCheckBoxMenuItem("Pixelated zoom");
 		togglePixelatedZoomItem.setState(viewer.isPixelatedZoom());
 		viewer.addPropertyChangeListener("pixelatedZoom", evt -> togglePixelatedZoomItem.setState(viewer.isPixelatedZoom()));

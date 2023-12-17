@@ -30,9 +30,9 @@ import java.util.Iterator;
 
 public interface NamespaceContext {
 
-    public abstract String getNamespaceURI(final String s);
+    String getNamespaceURI(final String s);
 
-    public abstract String getPrefix(final String s);
+    String getPrefix(final String s);
 
-    public abstract Iterator getPrefixes(final String s);
+    Iterator getPrefixes(final String s);
 }

@@ -39,11 +39,11 @@ public abstract class XPathFactory {
         throw new RuntimeException("Stub!");
     }
 
-    public static final XPathFactory newInstance() {
+    public static XPathFactory newInstance() {
         throw new RuntimeException("Stub!");
     }
 
-    public static final XPathFactory newInstance(final String uri)
+    public static XPathFactory newInstance(final String uri)
             throws XPathFactoryConfigurationException {
         throw new RuntimeException("Stub!");
     }

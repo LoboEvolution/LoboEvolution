@@ -79,11 +79,11 @@ public interface Location {
    * Returns the public ID of the XML
    * @return the public ID, or null if not available
    */
-  public String getPublicId();
+  String getPublicId();
 
   /**
    * Returns the system ID of the XML
    * @return the system ID, or null if not available
    */
-  public String getSystemId();
+  String getSystemId();
 }

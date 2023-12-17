@@ -25,7 +25,6 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
-import lombok.Data;
 import org.loboevolution.html.dom.nodeimpl.event.EventTargetImpl;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.events.Event;

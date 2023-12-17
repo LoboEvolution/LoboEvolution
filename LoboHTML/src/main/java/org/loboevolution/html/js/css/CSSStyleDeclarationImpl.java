@@ -31,7 +31,6 @@ import org.htmlunit.cssparser.dom.Property;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
-import org.loboevolution.html.node.css.CSSRule;
 import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.html.style.setter.*;

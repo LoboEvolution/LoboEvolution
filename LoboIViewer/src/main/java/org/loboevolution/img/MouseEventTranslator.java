@@ -172,7 +172,7 @@ public class MouseEventTranslator implements MouseInputListener, PropertyChangeL
 	 * image.
 	 */
 	protected void correctionalFire() {
-		/**
+		/*
 		 * We use our parent, LayeredImageView, to locate the mouse. If the viewer has
 		 * an overlay, then ImageComponent.getMousePosition will return null because the
 		 * mouse is over the overlay and not the image component.

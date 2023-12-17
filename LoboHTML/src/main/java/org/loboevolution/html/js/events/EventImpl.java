@@ -31,7 +31,6 @@ import lombok.NoArgsConstructor;
 import org.loboevolution.html.node.events.Event;
 import org.loboevolution.html.node.events.EventTarget;
 import org.loboevolution.js.AbstractScriptableDelegate;
-import org.loboevolution.type.EventPhase;
 
 import java.util.List;
 

@@ -58,7 +58,7 @@ public interface EndElement extends XMLEvent {
    * Get the name of this event
    * @return the qualified name of this event
    */
-  public QName getName();
+  QName getName();
 
   /**
    * Returns an Iterator of namespaces that have gone out
@@ -67,6 +67,6 @@ public interface EndElement extends XMLEvent {
    * @return an Iterator over Namespace interfaces, or an
    * empty iterator
    */
-  public Iterator getNamespaces();
+  Iterator getNamespaces();
 
 }

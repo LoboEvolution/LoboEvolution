@@ -28,13 +28,10 @@ package org.loboevolution.javax.xml.transform;
 
 import java.util.Properties;
 
-// Referenced classes of package org.loboevolution.javax.xml.transform:
-//            TransformerConfigurationException, Transformer
-
 public interface Templates {
 
-    public abstract Transformer newTransformer()
+    Transformer newTransformer()
             throws TransformerConfigurationException;
 
-    public abstract Properties getOutputProperties();
+    Properties getOutputProperties();
 }

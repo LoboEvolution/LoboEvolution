@@ -30,9 +30,6 @@ package org.loboevolution.net;
 
 /**
  * The Class NameValuePair.
- *
- * Author J. H. S.
- *
  */
 public class NameValuePair extends AbstractBean implements Cloneable {
 	

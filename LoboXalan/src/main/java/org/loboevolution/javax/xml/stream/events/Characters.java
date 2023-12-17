@@ -54,7 +54,7 @@ public interface Characters extends XMLEvent {
   /**
    * Get the character data of this event
    */
-  public String getData();
+  String getData();
 
   /**
    * Returns true if this set of Characters
@@ -63,7 +63,7 @@ public interface Characters extends XMLEvent {
    * checking of CHARACTERS events to see if they
    * are composed of only whitespace characters
    */
-  public boolean isWhiteSpace();
+  boolean isWhiteSpace();
 
   /**
    * Returns true if this is a CData section.  If this
@@ -74,13 +74,13 @@ public interface Characters extends XMLEvent {
    * as a single Characters event. This method will return false
    * in this case.
    */
-  public boolean isCData();
+  boolean isCData();
 
   /**
    * Return true if this is ignorableWhiteSpace.  If
    * this event is ignorableWhiteSpace its event type will
    * be SPACE.
    */
-  public boolean isIgnorableWhiteSpace();
+  boolean isIgnorableWhiteSpace();
 
 }

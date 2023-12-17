@@ -503,7 +503,7 @@ public class CCITT1D implements CCITTDecoder {
 
         int pixelCount = 0, itemFound = -1, maskAdj = 0;
 
-        /**
+        /*
          * look for valid value starting at 2 bits
          *
          * starting with 2 bits (4 for white)

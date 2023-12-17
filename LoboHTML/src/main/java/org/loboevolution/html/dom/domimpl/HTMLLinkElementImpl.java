@@ -36,7 +36,6 @@ import org.loboevolution.html.js.css.CSSStyleSheetImpl;
 import org.loboevolution.html.node.DOMTokenList;
 import org.loboevolution.html.node.css.StyleSheet;
 import org.loboevolution.html.parser.XHtmlParser;
-import org.loboevolution.html.renderstate.LinkRenderState;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.style.CSSUtilities;
 import org.loboevolution.http.UserAgentContext;
@@ -117,14 +116,14 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 					List<String> styles = new ArrayList<>();
 					if (!rcontext.isTestEnabled()) {
 						styles = config.getStyles(href, currentUrl);
-						if (styles.size() == 0) {
+						if (styles.isEmpty()) {
 							config.insertStyle(title, href, currentUrl, isStyleSheet ? 1 : 0);
 						} else {
 							styleEnabled = styles.get(0);
 						}
 					}
 
-					if (styleEnabled.equals(title) || styles.size() == 0) {
+					if (styleEnabled.equals(title) || styles.isEmpty()) {
 						final UserAgentContext uacontext = getUserAgentContext();
 						if (uacontext.isExternalCSSEnabled()) {
 							final String media = getMedia();

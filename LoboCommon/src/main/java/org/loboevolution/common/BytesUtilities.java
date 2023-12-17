@@ -48,11 +48,11 @@ public class BytesUtilities {
      * @param inputStream a {@link java.io.InputStream} object.
      */
     public static ByteBuffer readStream(final InputStream inputStream) {
-        ByteBuffer buffer = null;
         if (inputStream == null) {
-            return buffer;
+            return null;
         }
 
+        ByteBuffer buffer = null;
         try {
             final byte[] bytes = inputStreamToByteArray(inputStream);
             buffer = ByteBuffer.wrap(bytes);

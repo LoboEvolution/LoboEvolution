@@ -28,8 +28,6 @@ package org.loboevolution.html.node.events;
 
 import java.util.List;
 
-import org.loboevolution.type.EventPhase;
-
 /**
  * An event which takes place in the DOM.
  */
@@ -38,18 +36,18 @@ public interface Event {
     /**
      * The current event phase is the capturing phase.
      */
-    public static final short CAPTURING_PHASE = 1;
+    short CAPTURING_PHASE = 1;
 
     /**
      * The event is currently being evaluated at the target
      * <code>EventTarget</code>.
      */
-    public static final short AT_TARGET = 2;
+    short AT_TARGET = 2;
 
     /**
      * The current event phase is the bubbling phase.
      */
-    public static final short BUBBLING_PHASE = 3;
+    short BUBBLING_PHASE = 3;
 
     /**
      * Returns true or false depending on how event was initialized. True if event

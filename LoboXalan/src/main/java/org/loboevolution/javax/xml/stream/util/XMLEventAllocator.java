@@ -60,7 +60,7 @@ public interface XMLEventAllocator {
    * This method creates an instance of the XMLEventAllocator. This
    * allows the XMLInputFactory to allocate a new instance per reader.
    */
-  public XMLEventAllocator newInstance();
+  XMLEventAllocator newInstance();
 
   /**
    * This method allocates an event given the current
@@ -71,7 +71,7 @@ public interface XMLEventAllocator {
    * @param reader The XMLStreamReader to allocate from
    * @return the event corresponding to the current reader state
    */
-  public XMLEvent allocate(XMLStreamReader reader)
+  XMLEvent allocate(XMLStreamReader reader)
     throws XMLStreamException;
 
   /**
@@ -85,7 +85,7 @@ public interface XMLEventAllocator {
    * @param reader The XMLStreamReader to allocate from
    * @param consumer The XMLEventConsumer to add to.
    */
-  public void allocate(XMLStreamReader reader, XMLEventConsumer consumer)
+  void allocate(XMLStreamReader reader, XMLEventConsumer consumer)
     throws XMLStreamException;
 
 }

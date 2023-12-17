@@ -191,5 +191,5 @@ public interface RenderableContainer {
 	 * @param bodyLayout a {@link org.loboevolution.html.renderer.RCollection} object.
 	 * @return a {@link java.awt.Point} object.
 	 */
-	public Point getOriginRelativeToAbs(RCollection bodyLayout);
+	Point getOriginRelativeToAbs(RCollection bodyLayout);
 }

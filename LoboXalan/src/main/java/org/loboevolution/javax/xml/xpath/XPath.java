@@ -30,37 +30,34 @@ import org.loboevolution.javax.xml.namespace.NamespaceContext;
 import org.loboevolution.javax.xml.namespace.QName;
 import org.xml.sax.InputSource;
 
-// Referenced classes of package org.loboevolution.javax.xml.xpath:
-//            XPathExpressionException, XPathVariableResolver, XPathFunctionResolver, XPathExpression
-
 public interface XPath {
 
-    public abstract void reset();
+    void reset();
 
-    public abstract XPathVariableResolver getXPathVariableResolver();
+    XPathVariableResolver getXPathVariableResolver();
 
-    public abstract void setXPathVariableResolver(XPathVariableResolver xpathvariableresolver);
+    void setXPathVariableResolver(XPathVariableResolver xpathvariableresolver);
 
-    public abstract XPathFunctionResolver getXPathFunctionResolver();
+    XPathFunctionResolver getXPathFunctionResolver();
 
-    public abstract void setXPathFunctionResolver(XPathFunctionResolver xpathfunctionresolver);
+    void setXPathFunctionResolver(XPathFunctionResolver xpathfunctionresolver);
 
-    public abstract NamespaceContext getNamespaceContext();
+    NamespaceContext getNamespaceContext();
 
-    public abstract void setNamespaceContext(NamespaceContext namespacecontext);
+    void setNamespaceContext(NamespaceContext namespacecontext);
 
-    public abstract XPathExpression compile(final String s)
+    XPathExpression compile(final String s)
             throws XPathExpressionException;
 
-    public abstract Object evaluate(final String s, Object obj, QName qname)
+    Object evaluate(final String s, Object obj, QName qname)
             throws XPathExpressionException;
 
-    public abstract String evaluate(final String s, Object obj)
+    String evaluate(final String s, Object obj)
             throws XPathExpressionException;
 
-    public abstract Object evaluate(final String s, InputSource inputsource, QName qname)
+    Object evaluate(final String s, InputSource inputsource, QName qname)
             throws XPathExpressionException;
 
-    public abstract String evaluate(final String s, InputSource inputsource)
+    String evaluate(final String s, InputSource inputsource)
             throws XPathExpressionException;
 }

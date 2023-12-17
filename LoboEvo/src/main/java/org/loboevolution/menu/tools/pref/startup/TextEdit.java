@@ -146,7 +146,6 @@ public class TextEdit extends JFrame implements LoboLookAndFeel {
 	 * <p>Setter for the field resultingText.</p>
 	 *
 	 * @param resultingText a {@link java.lang.String} object.
-	 * @return a {@link java.lang.String} object.
 	 */
 	public void setResultingText(final String resultingText) {
 		this.resultingText = resultingText;

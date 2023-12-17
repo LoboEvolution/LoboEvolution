@@ -42,8 +42,8 @@ import java.awt.event.KeyListener;
 public class InputNumber extends InputText {
 
 	private final JTextField numeric;
-	private String min;
-	private String max;
+	private final String min;
+	private final String max;
 
 	/**
 	 * <p>Constructor for InputNumber.</p>
@@ -57,7 +57,7 @@ public class InputNumber extends InputText {
         final String value = modelNode.getValue();
         min = modelNode.getAttribute("min");
         max = modelNode.getAttribute("max");
-        if (!isNumeric(value)) {
+        if (!Strings.isNumeric(value)) {
             numeric.setBorder(BorderFactory.createLineBorder(Color.RED));
         } else {
             numeric.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -67,10 +67,10 @@ public class InputNumber extends InputText {
 	}
 
 	private KeyListener addKeyListener() {
-		final KeyListener keyListener = new KeyAdapter() {
+        return new KeyAdapter() {
 			public void keyPressed(final KeyEvent keyEvent) {
 				final JTextField num = (JTextField) keyEvent.getSource();
-				if (!isNumeric(num.getText())) {
+				if (!Strings.isNumeric(num.getText())) {
 					numeric.setBorder(BorderFactory.createLineBorder(Color.RED));
 				} else {
 					numeric.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -93,18 +93,5 @@ public class InputNumber extends InputText {
 				}
 			}
 		};
-		return keyListener;
 	}
-
-	private boolean isNumeric(final String keyCode) {
-		try {
-			if (keyCode == null || (keyCode != null && keyCode.length() == 0))
-				return true;
-			Integer.parseInt(keyCode);
-			return true;
-		} catch (final Exception ex) {
-			return false;
-		}
-	}
-
 }

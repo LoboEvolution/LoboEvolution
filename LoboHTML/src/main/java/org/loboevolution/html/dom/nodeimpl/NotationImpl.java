@@ -30,7 +30,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.html.dom.Notation;
-import org.loboevolution.html.dom.nodeimpl.event.EventTargetImpl;
 
 @EqualsAndHashCode(callSuper = true)
 @Data

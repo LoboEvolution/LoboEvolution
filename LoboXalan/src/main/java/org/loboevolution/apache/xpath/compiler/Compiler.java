@@ -528,7 +528,7 @@ public class Compiler extends OpMap {
   /**
    * Compile an entire match pattern expression.
    *
-   * @param opPos The current position in the m_opMap array.
+   * @param oPos The current position in the m_opMap array.
    * @return reference to {@link UnionPattern} instance.
    * @throws TransformerException if a error occurs creating the Expression.
    */
@@ -645,7 +645,7 @@ public class Compiler extends OpMap {
   /**
    * Compile a step pattern unit expression, used for both location paths and match patterns.
    *
-   * @param opPos The current position in the m_opMap array.
+   * @param oPos The current position in the m_opMap array.
    * @param stepCount The number of steps to expect.
    * @param ancestorPattern The owning StepPattern, which may be null.
    * @return reference to {@link StepPattern} instance.
@@ -779,7 +779,7 @@ public class Compiler extends OpMap {
   /**
    * Count the number of predicates in the step.
    *
-   * @param opPos The position of the first predicate the m_opMap array.
+   * @param oPos The position of the first predicate the m_opMap array.
    * @return The number of predicates for this step.
    * @throws TransformerException if a error occurs creating the Expression.
    */
@@ -798,7 +798,7 @@ public class Compiler extends OpMap {
   /**
    * Compiles predicates in the step.
    *
-   * @param opPos The position of the first predicate the m_opMap array.
+   * @param oPos The position of the first predicate the m_opMap array.
    * @param predicates An empty pre-determined array of {@link
    *     Expression}s, that will be filled in.
    * @throws TransformerException if any
@@ -814,7 +814,7 @@ public class Compiler extends OpMap {
   /**
    * Compile a built-in XPath function.
    *
-   * @param opPos The current position in the m_opMap array.
+   * @param oPos The current position in the m_opMap array.
    * @return reference to {@link Function} instance.
    * @throws TransformerException if a error occurs creating the Expression.
    */

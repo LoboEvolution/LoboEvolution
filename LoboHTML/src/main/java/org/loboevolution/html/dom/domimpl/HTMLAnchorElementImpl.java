@@ -352,7 +352,7 @@ public class HTMLAnchorElementImpl extends HTMLElementImpl implements HTMLAnchor
         final HtmlRendererContext rcontext = getHtmlRendererContext();
         if (rcontext != null) {
             final String href = getHref();
-            if (href != null && href.length() > 0) {
+            if (Strings.isNotBlank(href)) {
                 getTarget();
                 try {
                     final URL url = getFullURL(href);

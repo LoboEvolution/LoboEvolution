@@ -1005,36 +1005,7 @@ public final class JBIG2Bitmap {
             }
         }
     }
-
-    /**
-     * set a full byte of pixels
-     */
-//	private void setPixelByte(int col, final int row, byte bits) {
-    //data.setByte(row, col, bits);
-//	}
-
-    /**
-     * get a byte of pixels
-     */
-//	public byte getPixelByte(int col, final int row) {
-    //return data.getByte(row, col);
-//	}
-
-//	public byte getPixelByte(int col, final int row) {
-    //return data.getByte(row, col);
-//	}
-//	public byte getPixelByte(int col, final int row) {
-    //return data.getByte(row, col);
-//	}
-
-//	public byte getPixelByte(int col, final int row) {
-    //return data.getByte(row, col);
-//	}
     private void duplicateRow(final int yDest, final int ySrc) {
-//		for (int i = 0; i < width;) {
-//			setPixelByte(i, yDest, getPixelByte(i, ySrc));
-//			i += 8;
-//		}
         for (int i = 0; i < width; i++) {
             setPixel(i, yDest, getPixel(i, ySrc));
         }
@@ -1280,7 +1251,7 @@ public final class JBIG2Bitmap {
         final byte[] copy = new byte[len];
         System.arraycopy(bytes, 0, copy, 0, len);
 
-        /** create an image from the raw data */
+        // create an image from the raw data
         final DataBuffer db = new DataBufferByte(copy, copy.length);
 
         final WritableRaster raster = Raster.createPackedRaster(db, width, height, 1, null);

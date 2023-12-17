@@ -283,12 +283,12 @@ public class NodeTest extends Expression {
   protected void calcScore() {
 
     if ((m_namespace == null) && (m_name == null)) m_score = SCORE_NODETEST;
-    else if (((m_namespace == WILD) || (m_namespace == null)) && (m_name == WILD))
+    else if (((Objects.equals(m_namespace, WILD)) || (m_namespace == null)) && (Objects.equals(m_name, WILD)))
       m_score = SCORE_NODETEST;
-    else if ((m_namespace != WILD) && (m_name == WILD)) m_score = SCORE_NSWILD;
+    else if ((!Objects.equals(m_namespace, WILD)) && (Objects.equals(m_name, WILD))) m_score = SCORE_NSWILD;
     else m_score = SCORE_QNAME;
 
-    m_isTotallyWild = m_namespace == null && m_name == WILD;
+    m_isTotallyWild = m_namespace == null && Objects.equals(m_name, WILD);
   }
 
   /**

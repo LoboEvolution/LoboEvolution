@@ -72,7 +72,7 @@ public class GenericRegionSegment extends RegionSegment {
 
         super.readSegment();
 
-        /** read text region Segment flags */
+        // read text region Segment flags
         readGenericRegionFlags();
 
         final boolean useMMR = genericRegionFlags.getFlagValue(GenericRegionFlags.MMR) != 0;
@@ -176,7 +176,7 @@ public class GenericRegionSegment extends RegionSegment {
     }
 
     private void readGenericRegionFlags() throws IOException {
-        /** extract text region Segment flags */
+        // extract text region Segment flags
         final short genericRegionFlagsField = decoder.readByte();
 
         genericRegionFlags.setFlags(genericRegionFlagsField);

@@ -55,35 +55,35 @@ public interface StartDocument extends XMLEvent {
    * Returns the system ID of the XML data
    * @return the system ID, defaults to ""
    */
-  public String getSystemId();
+  String getSystemId();
 
   /**
    * Returns the encoding style of the XML data
    * @return the character encoding, defaults to "UTF-8"
    */
-  public String getCharacterEncodingScheme();
+  String getCharacterEncodingScheme();
 
   /**
    * Returns true if CharacterEncodingScheme was set in
    * the encoding declaration of the document
    */
-  public boolean encodingSet();
+  boolean encodingSet();
 
   /**
    * Returns if this XML is standalone
    * @return the standalone state of XML, defaults to "no"
    */
-  public boolean isStandalone();
+  boolean isStandalone();
 
   /**
    * Returns true if the standalone attribute was set in
    * the encoding declaration of the document.
    */
-  public boolean standaloneSet();
+  boolean standaloneSet();
 
   /**
    * Returns the version of XML of this XML stream
    * @return the version of XML, defaults to "1.0"
    */
-  public String getVersion();
+  String getVersion();
 }

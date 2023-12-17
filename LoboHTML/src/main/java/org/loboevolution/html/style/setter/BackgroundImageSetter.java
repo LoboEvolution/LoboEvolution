@@ -34,7 +34,6 @@ import org.loboevolution.html.js.css.CSSStyleDeclarationImpl;
 import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.style.HtmlValues;
 
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

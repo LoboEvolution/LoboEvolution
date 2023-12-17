@@ -74,7 +74,6 @@ public class RefinementRegionSegment extends RegionSegment {
 
         super.readSegment();
 
-        /** read text region segment flags */
         readGenericRegionFlags();
 
         final short[] genericRegionAdaptiveTemplateX = new short[2];
@@ -137,7 +136,6 @@ public class RefinementRegionSegment extends RegionSegment {
     }
 
     private void readGenericRegionFlags() throws IOException {
-        /** extract text region Segment flags */
         final short refinementRegionFlagsField = decoder.readByte();
 
         refinementRegionFlags.setFlags(refinementRegionFlagsField);

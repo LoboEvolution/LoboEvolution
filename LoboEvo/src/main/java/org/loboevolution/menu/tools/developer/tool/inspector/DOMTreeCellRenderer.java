@@ -26,6 +26,7 @@
 
 package org.loboevolution.menu.tools.developer.tool.inspector;
 
+import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.nodeimpl.ElementImpl;
 import org.loboevolution.html.node.Node;
 
@@ -74,7 +75,7 @@ public class DOMTreeCellRenderer extends DefaultTreeCellRenderer {
 
         if (node.getNodeType() == Node.TEXT_NODE) {
 
-            if (node.getNodeValue().trim().length() > 0) {
+            if (Strings.isNotBlank(node.getNodeValue().trim())) {
                 value = "\"" + node.getNodeValue() + "\"";
             }
         }

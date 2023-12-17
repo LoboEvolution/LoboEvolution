@@ -59,7 +59,6 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.MissingResourceException;
 
 /**
  * <p>HTMLScriptElementImpl class.</p>

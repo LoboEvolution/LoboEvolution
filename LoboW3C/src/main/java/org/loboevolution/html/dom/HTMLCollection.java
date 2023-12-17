@@ -59,12 +59,9 @@ public interface HTMLCollection {
      */
     Node item(Object index);
 
-
     /**
      * <p>item.</p>
-     *
      * @param index a int.
-     * @return a {@link org.loboevolution.html.node.Node} object.
      */
     void setItem(Integer index, Node node);
 

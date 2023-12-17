@@ -103,7 +103,7 @@ public class DOMImplementationImpl implements DOMImplementation {
 			}
 			doc.appendChild(elem);
 		} else {
-			if (qualifiedName != null && qualifiedName.length() == 0)
+			if (Strings.isNotBlank(qualifiedName))
 				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
 		}
 

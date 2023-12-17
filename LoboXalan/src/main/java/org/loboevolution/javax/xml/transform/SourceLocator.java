@@ -29,11 +29,11 @@ package org.loboevolution.javax.xml.transform;
 
 public interface SourceLocator {
 
-    public abstract String getPublicId();
+    String getPublicId();
 
-    public abstract String getSystemId();
+    String getSystemId();
 
-    public abstract int getLineNumber();
+    int getLineNumber();
 
-    public abstract int getColumnNumber();
+    int getColumnNumber();
 }

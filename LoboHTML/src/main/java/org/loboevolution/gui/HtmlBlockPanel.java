@@ -232,7 +232,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 
 	/** {@inheritDoc} */
 	@Override
-	public void finalize() throws Throwable {
+	protected void finalize() throws Throwable {
 		super.finalize();
 	}
 

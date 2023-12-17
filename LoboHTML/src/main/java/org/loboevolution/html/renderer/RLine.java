@@ -36,7 +36,6 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -287,10 +286,10 @@ class RLine extends BaseRCollection {
 	/**
 	 * Rearrange line elements based on a new line height and alignment provided.
 	 * All line elements are expected to have bounds preset.
-	 * 
-	 * @param newHeight
-	 * @param elementHeight
-	 * @param valign
+	 *
+	 * @param newHeight a {@link java.lang.Integer} object.
+	 * @param elementHeight a {@link java.lang.Integer} object.
+	 * @param valign a {@link java.lang.Integer} object.
 	 */
 	private void adjustHeight(final int newHeight, final int elementHeight, final int valign) {
 		// Set new line height

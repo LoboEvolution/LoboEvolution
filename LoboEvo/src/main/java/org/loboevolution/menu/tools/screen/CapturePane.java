@@ -97,14 +97,15 @@ public class CapturePane extends JPanel {
     /**
      * hides this frame and brings up the preview frame to display picture
      *
-     * @param img
+     * @param imgage a {@link java.awt.image.BufferedImage} object.
+     * @param frame a {@link org.loboevolution.component.BrowserFrame} object.
      */
-    private void displayPreview(final BufferedImage img, final BrowserFrame frame) {
+    private void displayPreview(final BufferedImage imgage, final BrowserFrame frame) {
         if (preview == null) {
             preview = new PreviewFrame(this, frame);
         }
         setVisible(false);
-        preview.setImage(new ImageIcon(img));
+        preview.setImage(new ImageIcon(imgage));
         preview.setVisible(true);
     }
 

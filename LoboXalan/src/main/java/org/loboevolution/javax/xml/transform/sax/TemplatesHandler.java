@@ -29,13 +29,11 @@ package org.loboevolution.javax.xml.transform.sax;
 import org.loboevolution.javax.xml.transform.Templates;
 import org.xml.sax.ContentHandler;
 
-public interface TemplatesHandler
-    extends ContentHandler
-{
+public interface TemplatesHandler extends ContentHandler {
 
-    public abstract Templates getTemplates();
+    Templates getTemplates();
 
-    public abstract void setSystemId(final String s);
+    String getSystemId();
 
-    public abstract String getSystemId();
+    void setSystemId(final String s);
 }

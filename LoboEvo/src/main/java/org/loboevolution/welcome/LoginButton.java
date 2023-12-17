@@ -51,11 +51,7 @@ public class LoginButton extends JLabel implements LoboLookAndFeel {
 
 	private static final long serialVersionUID = 1L;
 
-	private final String BUTTON_TEXT_LOGIN = "Surf!";
-
-	private final Color COLOR_BACKGROUND = background();
-
-	private final Color COLOR_INTERACTIVE = background();
+    private final Color COLOR_INTERACTIVE = background();
 
 	private final Color COLOR_INTERACTIVE_DARKER = interactive();
 
@@ -75,7 +71,8 @@ public class LoginButton extends JLabel implements LoboLookAndFeel {
 	 */
 	public LoginButton(final IBrowserPanel panel, final TextFieldUsername text) {
 
-		setBackground(this.COLOR_BACKGROUND);
+        Color COLOR_BACKGROUND = background();
+        setBackground(COLOR_BACKGROUND);
 		setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
 		addMouseListener(new MouseAdapter() {
@@ -149,10 +146,11 @@ public class LoginButton extends JLabel implements LoboLookAndFeel {
 		g2.fillRoundRect(insets.left, insets.top, w, h, this.ROUNDNESS, this.ROUNDNESS);
 
 		final FontMetrics metrics = g2.getFontMetrics(this.FONT_GENERAL_UI);
-		final int x2 = (getWidth() - metrics.stringWidth(this.BUTTON_TEXT_LOGIN)) / 2;
+        String BUTTON_TEXT_LOGIN = "Surf!";
+        final int x2 = (getWidth() - metrics.stringWidth(BUTTON_TEXT_LOGIN)) / 2;
 		final int y2 = (getHeight() - metrics.getHeight()) / 2 + metrics.getAscent();
 		g2.setFont(this.FONT_GENERAL_UI);
 		g2.setColor(this.loginButtonColors[1]);
-		g2.drawString(this.BUTTON_TEXT_LOGIN, x2, y2);
+		g2.drawString(BUTTON_TEXT_LOGIN, x2, y2);
 	}
 }

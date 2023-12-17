@@ -45,7 +45,6 @@ import org.loboevolution.javax.xml.transform.Result;
  * @see <a href="http://jcp.org/en/jsr/detail?id=173">
  *  JSR 173: Streaming API for XML</a>
  * @see XMLStreamWriter
- * @see XMLEventWriter
  *
  * @since 1.6
  */

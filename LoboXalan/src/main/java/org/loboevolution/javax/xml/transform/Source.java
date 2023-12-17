@@ -26,10 +26,9 @@
 
 package org.loboevolution.javax.xml.transform;
 
-
 public interface Source {
 
-    public abstract String getSystemId();
+    String getSystemId();
 
-    public abstract void setSystemId(final String s);
+    void setSystemId(final String s);
 }

@@ -42,9 +42,6 @@ public class DeveloperToolPanel extends LoboPanel {
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
-	/** The ui. */
-	private transient AbstractToolsUI setting;
-
 	/**
 	 * Instantiates a new preferences panel.
 	 */
@@ -63,7 +60,6 @@ public class DeveloperToolPanel extends LoboPanel {
 	 * @param ui the new settings ui
 	 */
 	public void setSettingsUI(final AbstractToolsUI ui) {
-		this.setting = ui;
 		removeAll();
 		if (ui != null) {
 			this.add(ui);

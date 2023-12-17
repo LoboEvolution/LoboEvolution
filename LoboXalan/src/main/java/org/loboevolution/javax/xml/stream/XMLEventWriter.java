@@ -60,13 +60,13 @@ public interface XMLEventWriter extends XMLEventConsumer {
    * Writes any cached events to the underlying output mechanism
    * @throws XMLStreamException
    */
-  public void flush() throws XMLStreamException;
+  void flush() throws XMLStreamException;
 
   /**
    * Frees any resources associated with this stream
    * @throws XMLStreamException
    */
-  public void close() throws XMLStreamException;
+  void close() throws XMLStreamException;
 
   /**
    * Add an event to the output stream
@@ -195,7 +195,7 @@ public interface XMLEventWriter extends XMLEventConsumer {
    * @param event the event to be added
    * @throws XMLStreamException
    */
-  public void add(XMLEvent event) throws XMLStreamException;
+  void add(XMLEvent event) throws XMLStreamException;
 
   /**
    * Adds an entire stream to an output stream,
@@ -208,14 +208,14 @@ public interface XMLEventWriter extends XMLEventConsumer {
    * @throws XMLStreamException
    */
 
-  public void add(XMLEventReader reader) throws XMLStreamException;
+  void add(XMLEventReader reader) throws XMLStreamException;
 
   /**
    * Gets the prefix the uri is bound to
    * @param uri the uri to look up
    * @throws XMLStreamException
    */
-  public String getPrefix(final String uri) throws XMLStreamException;
+  String getPrefix(final String uri) throws XMLStreamException;
 
   /**
    * Sets the prefix the uri is bound to.  This prefix is bound
@@ -226,7 +226,7 @@ public interface XMLEventWriter extends XMLEventConsumer {
    * @param uri the uri to bind to the prefix
    * @throws XMLStreamException
    */
-  public void setPrefix(final String prefix, final String uri) throws XMLStreamException;
+  void setPrefix(final String prefix, final String uri) throws XMLStreamException;
 
   /**
    * Binds a URI to the default namespace
@@ -237,7 +237,7 @@ public interface XMLEventWriter extends XMLEventConsumer {
    * @param uri the uri to bind to the default namespace
    * @throws XMLStreamException
    */
-  public void setDefaultNamespace(final String uri) throws XMLStreamException;
+  void setDefaultNamespace(final String uri) throws XMLStreamException;
 
   /**
    * Sets the current namespace context for prefix and uri bindings.
@@ -249,14 +249,14 @@ public interface XMLEventWriter extends XMLEventConsumer {
    * @param context the namespace context to use for this writer
    * @throws XMLStreamException
    */
-  public void setNamespaceContext(NamespaceContext context)
+  void setNamespaceContext(NamespaceContext context)
     throws XMLStreamException;
 
   /**
    * Returns the current namespace context.
    * @return the current namespace context
    */
-  public NamespaceContext getNamespaceContext();
+  NamespaceContext getNamespaceContext();
 
 
 }

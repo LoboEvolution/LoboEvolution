@@ -241,7 +241,7 @@ public class Type1Font extends OutlineFont {
      * @param start where in the array to start decoding
      * @param end   where in the array to stop decoding
      * @param key   the decryption key
-     * @param skip  how many bytes to skip initially
+     * @param skipdecrypt  how many bytes to skip initially
      * @return the decrypted bytes.  The length of this array will be
      * (start-end-skip) bytes long
      */

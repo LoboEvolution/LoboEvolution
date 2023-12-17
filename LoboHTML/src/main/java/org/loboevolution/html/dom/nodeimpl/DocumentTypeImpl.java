@@ -31,7 +31,6 @@ package org.loboevolution.html.dom.nodeimpl;
 import org.htmlunit.cssparser.dom.DOMException;
 import lombok.NoArgsConstructor;
 import org.loboevolution.common.Strings;
-import org.loboevolution.html.dom.nodeimpl.event.EventTargetImpl;
 import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.html.node.NamedNodeMap;
 import org.loboevolution.html.node.Node;

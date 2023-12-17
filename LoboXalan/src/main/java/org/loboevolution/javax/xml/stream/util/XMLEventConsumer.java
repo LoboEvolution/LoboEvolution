@@ -55,15 +55,14 @@ import org.loboevolution.javax.xml.stream.XMLStreamException;
 
 public interface XMLEventConsumer {
 
-  /**
-   * This method adds an event to the consumer. Calling this method
-   * invalidates the event parameter. The client application should
-   * discard all references to this event upon calling add.
-   * The behavior of an application that continues to use such references
-   * is undefined.
-   *
-   * @param event the event to add, may not be null
-   */
-  public void add(XMLEvent event)
-    throws XMLStreamException;
+    /**
+     * This method adds an event to the consumer. Calling this method
+     * invalidates the event parameter. The client application should
+     * discard all references to this event upon calling add.
+     * The behavior of an application that continues to use such references
+     * is undefined.
+     *
+     * @param event the event to add, may not be null
+     */
+    void add(XMLEvent event) throws XMLStreamException;
 }

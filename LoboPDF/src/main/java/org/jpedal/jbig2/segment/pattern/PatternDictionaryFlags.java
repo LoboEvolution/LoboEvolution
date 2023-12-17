@@ -48,13 +48,8 @@ public class PatternDictionaryFlags extends Flags {
      */
     public void setFlags(final int flagsAsInt) {
         this.flagsAsInt = flagsAsInt;
-
-        /** extract HD_MMR */
         flags.put(HD_MMR, flagsAsInt & 1);
-
-        /** extract HD_TEMPLATE */
         flags.put(HD_TEMPLATE, (flagsAsInt >> 1) & 3);
-
         if (JBIG2StreamDecoder.debug)
             log.info("flags: {}", flags);
     }

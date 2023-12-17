@@ -31,7 +31,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.loboevolution.html.dom.nodeimpl.event.EventTargetImpl;
 import org.loboevolution.html.node.EntityReference;
 import org.loboevolution.html.node.Node;
 

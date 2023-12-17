@@ -36,7 +36,6 @@ import org.loboevolution.http.UserAgentContext;
 
 import java.awt.*;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.List;
 import java.util.Objects;

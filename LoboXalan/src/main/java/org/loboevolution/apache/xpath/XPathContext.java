@@ -27,7 +27,6 @@ package org.loboevolution.apache.xpath;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.Deque;
 import org.loboevolution.javax.xml.transform.ErrorListener;
 import org.loboevolution.javax.xml.transform.URIResolver;
 

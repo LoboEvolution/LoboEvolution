@@ -45,7 +45,6 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 /**
  * Represents a HTML block in a rendered document, typically a DIV. The root
@@ -454,7 +453,7 @@ public class RBlock extends BaseElementRenderable {
 
 	/** {@inheritDoc} */
 	@Override
-	public void finalize() throws Throwable {
+	protected void finalize() throws Throwable {
 		super.finalize();
 	}
 

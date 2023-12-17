@@ -63,25 +63,7 @@ public class SettingsUI extends AbstractToolsUI {
 
 	private static final long serialVersionUID = 1L;
 
-	/** The chrome bookmark panel. */
-	private LoboCheckBox chromeBookmarkPanel;
-
-	/** The chrome history panel. */
-	private LoboCheckBox chromeHistoryPanel;
-
-	/** The chrome panel. */
-	private LoboCheckBox chromePanel;
-
-	/** The mozilla bookmark panel. */
-	private LoboCheckBox mozillaBookmarkPanel;
-
-	/** The mozilla history panel. */
-	private LoboCheckBox mozillaHistoryPanel;
-
-	/** The mozilla panel. */
-	private LoboCheckBox mozillaPanel;
-
-	/** The search engine list control. */
+    /** The search engine list control. */
 	private ItemListControl<SearchEngineStore> searchEngineListControl;
 
 	static final GeneralInfo genSettings = GeneralStore.getGeneralInfo();
@@ -98,26 +80,26 @@ public class SettingsUI extends AbstractToolsUI {
 		final ItemEditorFactory<SearchEngineStore> factory = SearchEngineEditor::new;
 		this.searchEngineListControl = new ItemListControl<>(factory);
 		this.searchEngineListControl.setEditorCaption("Please enter search engine information below.");
-		
-		this.mozillaHistoryPanel = new LoboCheckBox("Mozilla Firefox");
-		this.chromeHistoryPanel = new LoboCheckBox("Google Chrome");
+
+        LoboCheckBox mozillaHistoryPanel = new LoboCheckBox("Mozilla Firefox");
+        LoboCheckBox chromeHistoryPanel = new LoboCheckBox("Google Chrome");
 
 		final LoboButton historyButton = new LoboButton();
-		historyButton.setAction(new ImportDataAction(this.mozillaHistoryPanel, this.chromeHistoryPanel, HISTORY));
+		historyButton.setAction(new ImportDataAction(mozillaHistoryPanel, chromeHistoryPanel, HISTORY));
 		historyButton.setText("Import History");
 
-		this.mozillaBookmarkPanel = new LoboCheckBox("Mozilla Firefox");
-		this.chromeBookmarkPanel = new LoboCheckBox("Google Chrome");
+        LoboCheckBox mozillaBookmarkPanel = new LoboCheckBox("Mozilla Firefox");
+        LoboCheckBox chromeBookmarkPanel = new LoboCheckBox("Google Chrome");
 
 		final LoboButton bookmarkButton = new LoboButton();
-		bookmarkButton.setAction(new ImportDataAction(this.mozillaBookmarkPanel, this.chromeBookmarkPanel, BOOKMARKS));
+		bookmarkButton.setAction(new ImportDataAction(mozillaBookmarkPanel, chromeBookmarkPanel, BOOKMARKS));
 		bookmarkButton.setText("Import Bookmarks");
 
-		this.mozillaPanel = new LoboCheckBox("Mozilla Firefox");
-		this.chromePanel = new LoboCheckBox("Google Chrome");
+        LoboCheckBox mozillaPanel = new LoboCheckBox("Mozilla Firefox");
+        LoboCheckBox chromePanel = new LoboCheckBox("Google Chrome");
 
 		final LoboButton importButton = new LoboButton();
-		importButton.setAction(new ImportDataAction(this.mozillaPanel, this.chromePanel, COOKIES));
+		importButton.setAction(new ImportDataAction(mozillaPanel, chromePanel, COOKIES));
 		importButton.setText("Import Cookies");
 
 		this.add(getSearchEnginePane());

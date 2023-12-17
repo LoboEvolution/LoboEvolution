@@ -67,8 +67,6 @@ public class HalftoneRegionSegment extends RegionSegment {
      */
     public void readSegment() throws IOException, JBIG2Exception {
         super.readSegment();
-
-        /** read text region Segment flags */
         readHalftoneRegionFlags();
 
         short[] buf = new short[4];
@@ -221,7 +219,6 @@ public class HalftoneRegionSegment extends RegionSegment {
     }
 
     private void readHalftoneRegionFlags() throws IOException {
-        /** extract text region Segment flags */
         final short halftoneRegionFlagsField = decoder.readByte();
 
         halftoneRegionFlags.setFlags(halftoneRegionFlagsField);

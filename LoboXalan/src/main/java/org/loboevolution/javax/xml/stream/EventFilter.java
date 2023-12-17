@@ -61,5 +61,5 @@ public interface EventFilter {
    * @param event the event to test
    * @return true if this filter accepts this event, false otherwise
    */
-  public boolean accept(XMLEvent event);
+  boolean accept(XMLEvent event);
 }

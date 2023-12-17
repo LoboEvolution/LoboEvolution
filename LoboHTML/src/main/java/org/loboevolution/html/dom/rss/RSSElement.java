@@ -57,7 +57,7 @@ public class RSSElement extends HTMLElementImpl {
 			childNodes.forEach(child -> {
 				if (child.getNodeType() == Node.TEXT_NODE) {
 					String nodeValue = child.getNodeValue();
-					String childText = "";
+					String childText;
 					nodeValue = nodeValue.replace('\n', ' ');
 					nodeValue = nodeValue.replace('\r', ' ');
 					nodeValue = nodeValue.replace('\t', ' ');

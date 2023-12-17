@@ -107,7 +107,6 @@ public class PageInformationSegment extends Segment {
         if (JBIG2StreamDecoder.debug)
             log.info("Resolution =  {} x {}", xResolution, yResolution);
 
-        /** extract page information flags */
         final short pageInformationFlagsField = decoder.readByte();
 
         pageInformationFlags.setFlags(pageInformationFlagsField);

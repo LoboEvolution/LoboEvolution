@@ -32,7 +32,6 @@ import org.loboevolution.html.node.DOMImplementationList;
 import org.loboevolution.html.node.DOMImplementation;
 
 import java.util.List;
-import java.util.ArrayList;
 
 /**
  * <p>DOMImplementationImpl class.</p>

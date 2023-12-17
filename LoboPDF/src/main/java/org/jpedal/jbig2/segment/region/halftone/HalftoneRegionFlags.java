@@ -61,23 +61,11 @@ public class HalftoneRegionFlags extends Flags {
      */
     public void setFlags(final int flagsAsInt) {
         this.flagsAsInt = flagsAsInt;
-
-        /** extract H_MMR */
         flags.put(H_MMR, flagsAsInt & 1);
-
-        /** extract H_TEMPLATE */
         flags.put(H_TEMPLATE, (flagsAsInt >> 1) & 3);
-
-        /** extract H_ENABLE_SKIP */
         flags.put(H_ENABLE_SKIP, (flagsAsInt >> 3) & 1);
-
-        /** extract H_COMB_OP */
         flags.put(H_COMB_OP, (flagsAsInt >> 4) & 7);
-
-        /** extract H_DEF_PIXEL */
         flags.put(H_DEF_PIXEL, (flagsAsInt >> 7) & 1);
-
-
         if (JBIG2StreamDecoder.debug)
             log.info("flags: {} ", flags);
     }

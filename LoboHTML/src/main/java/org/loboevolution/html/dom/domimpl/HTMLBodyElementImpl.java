@@ -28,7 +28,6 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
-import lombok.Data;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.html.dom.HTMLBodyElement;
 import org.loboevolution.html.dom.HTMLDocument;

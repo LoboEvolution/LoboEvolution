@@ -65,16 +65,16 @@ public final class Domains {
 	 * @param hostName a {@link java.lang.String} object.
 	 * @return a boolean.
 	 */
-	public static boolean isValidCookieDomain(final String dmain, final String hostName) {
+	public static boolean isValidCookieDomain(final String domain, final String hostName) {
 		final String plainDomain;
-		String domain = dmain;
-		if (!domain.startsWith(".")) {
+		String dmain = domain;
+		if (!dmain.startsWith(".")) {
 			// Valid domains must start with a dot
 			// according to RFC 2109, but
 			// RFC 2965 specifies a dot is prepended
 			// in the Set-Cookie2 header.
-			plainDomain = domain;
-			domain = "." + domain;
+			plainDomain = dmain;
+			dmain = "." + dmain;
 		} else {
 			plainDomain = domain.substring(1);
 		}
@@ -83,15 +83,15 @@ public final class Domains {
 		if (!hostNameTL.endsWith(plainDomainTL)) {
 			return false;
 		}
-		final int lastDotIdx = domain.lastIndexOf('.');
+		final int lastDotIdx = dmain.lastIndexOf('.');
 		if (lastDotIdx == -1) {
 			return false;
 		}
-		final String suffix = domain.substring(lastDotIdx).toLowerCase();
+		final String suffix = dmain.substring(lastDotIdx).toLowerCase();
 		if (gTLDs.contains(suffix)) {
-			return Strings.countChars(domain, '.') >= 2;
+			return Strings.countChars(dmain, '.') >= 2;
 		} else {
-			return Strings.countChars(domain, '.') >= 3;
+			return Strings.countChars(dmain, '.') >= 3;
 		}
 	}
 }

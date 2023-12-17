@@ -131,12 +131,10 @@ public class JBIG2Decoder {
         final int len = bytes.length;
         final byte[] copy = new byte[len];
         System.arraycopy(bytes, 0, copy, 0, len);
-
-        // byte[] data = pageBitmap.getData(true).clone();
         final int width = pageBitmap.getWidth();
         final int height = pageBitmap.getHeight();
 
-        /** create an image from the raw data */
+        // create an image from the raw data
         final DataBuffer db = new DataBufferByte(copy, copy.length);
 
         final WritableRaster raster = Raster.createPackedRaster(db, width, height, 1, null);

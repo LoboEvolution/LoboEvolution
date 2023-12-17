@@ -1555,7 +1555,7 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
                 newTabHeight = animate(currentTabHeight, targetTabHeight, animFactor, animNeeded);
             }
             final int extraDropZoneSpace = 25;
-            /**
+            /*
              * How many pixels the content panel overlaps the tabs. This is necessary with the Google Chrome appearance to make the selected tab and the content panel
              * look like a contiguous object
              */

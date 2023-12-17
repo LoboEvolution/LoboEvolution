@@ -28,6 +28,7 @@ package org.loboevolution.html.dom.domimpl;
 
 import lombok.extern.slf4j.Slf4j;
 import org.htmlunit.cssparser.dom.DOMException;
+import org.loboevolution.common.ArrayUtilities;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.HTMLOptionElement;
 import org.loboevolution.html.dom.HTMLOptionsCollection;
@@ -132,7 +133,7 @@ public class HTMLOptionsCollectionImpl extends HTMLCollectionImpl implements HTM
 	public void add(final HTMLOptionElement element) {
 		final HTMLSelectElementImpl selctElement = (HTMLSelectElementImpl) rootNode;
 		final List<Node> nodeList = getList();
-		if (nodeList.size() == 0 && !selctElement.isMultiple()) element.setSelected(true);
+		if (ArrayUtilities.isBlank(nodeList) && !selctElement.isMultiple()) element.setSelected(true);
 		nodeList.add(element);
 	}
 
@@ -183,7 +184,7 @@ public class HTMLOptionsCollectionImpl extends HTMLCollectionImpl implements HTM
 				setList(list);
 			} else {
 				final List<Node> list;
-				if (index == 0 && nodeList.size() == 0) {
+				if (index == 0 && ArrayUtilities.isBlank(nodeList)) {
 					list = new ArrayList<>();
 					((NodeImpl) node).setParentImpl(selctElement);
 					list.add(node);
@@ -224,7 +225,7 @@ public class HTMLOptionsCollectionImpl extends HTMLCollectionImpl implements HTM
 			add(element);
 		} else {
 			final HTMLSelectElementImpl selctElement = (HTMLSelectElementImpl) rootNode;
-			if (nodeList.size() == 0 && !selctElement.isMultiple()) {
+			if (ArrayUtilities.isBlank(nodeList) && !selctElement.isMultiple()) {
 				element.setSelected(true);
 				((NodeImpl) element).setParentImpl(selctElement);
 				nodeList.add(element);

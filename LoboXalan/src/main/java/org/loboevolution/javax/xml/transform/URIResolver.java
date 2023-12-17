@@ -26,13 +26,8 @@
 
 package org.loboevolution.javax.xml.transform;
 
+public interface URIResolver {
 
-// Referenced classes of package org.loboevolution.javax.xml.transform:
-//            TransformerException, Source
-
-public interface URIResolver
-{
-
-    public abstract Source resolve(final String s, final String s1)
-        throws TransformerException;
+    Source resolve(final String s, final String s1)
+            throws TransformerException;
 }

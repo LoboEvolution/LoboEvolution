@@ -39,7 +39,6 @@ import org.loboevolution.html.style.GradientStyle;
 import org.loboevolution.html.style.HtmlInsets;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.info.BackgroundInfo;
-import org.loboevolution.info.BorderInfo;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -104,8 +103,8 @@ public class BackgroundRender {
                 break;
             case 3:
             case 4:
-                final AtomicReference<CSSValues> ps = new AtomicReference(null);
-                final AtomicReference<String> lastPos = new AtomicReference(null);
+                final AtomicReference<CSSValues> ps = new AtomicReference<>(null);
+                final AtomicReference<String> lastPos = new AtomicReference<>(null);
                 Arrays.stream(tok).forEach(tk -> {
                     lastPos.set(tk);
                     final CSSValues pos = CSSValues.get(tk);

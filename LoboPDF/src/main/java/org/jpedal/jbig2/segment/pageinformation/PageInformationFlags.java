@@ -49,13 +49,8 @@ public class PageInformationFlags extends Flags {
      */
     public void setFlags(final int flagsAsInt) {
         this.flagsAsInt = flagsAsInt;
-
-        /** extract DEFAULT_PIXEL_VALUE */
         flags.put(DEFAULT_PIXEL_VALUE, (flagsAsInt >> 2) & 1);
-
-        /** extract DEFAULT_COMBINATION_OPERATOR */
         flags.put(DEFAULT_COMBINATION_OPERATOR, (flagsAsInt >> 3) & 3);
-
         if (JBIG2StreamDecoder.debug)
             log.info("flags: {} ", flags);
     }

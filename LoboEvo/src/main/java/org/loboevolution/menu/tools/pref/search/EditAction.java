@@ -33,9 +33,6 @@ import javax.swing.AbstractAction;
 
 /**
  * <p>EditAction class.</p>
- *
- *
- *
  */
 public class EditAction<T> extends AbstractAction {
 
@@ -107,7 +104,7 @@ public class EditAction<T> extends AbstractAction {
 	/**
 	 * Replace selected item.
 	 *
-	 * @param item
+	 * @param item a T object
 	 */
 	private void replaceSelectedItem(final T item) {
 		final int index = this.item.getComboBox().getSelectedIndex();

@@ -27,6 +27,7 @@
 package org.loboevolution.net;
 
 import lombok.extern.slf4j.Slf4j;
+import org.loboevolution.common.Strings;
 
 import java.security.MessageDigest;
 import java.util.*;
@@ -62,7 +63,7 @@ public class AlgorithmDigest implements Comparable<AlgorithmDigest> {
     }
 
     public static List<AlgorithmDigest> parseMetadata(final String integrity) {
-        if (integrity == null || integrity.length() == 0) {
+        if (Strings.isBlank(integrity)) {
             return null;
         }
         final String[] tokens = integrity.split("\\s+");
@@ -97,11 +98,10 @@ public class AlgorithmDigest implements Comparable<AlgorithmDigest> {
     }
 
     public static List<AlgorithmDigest> strongestAlgDigests(final List<AlgorithmDigest> hashes) {
-        Collections.sort(hashes, (a, b) -> a.compareTo(b));
+        hashes.sort(AlgorithmDigest::compareTo);
         final Integer strongest = hashes.get(0).strength;
-        final List<AlgorithmDigest> result = hashes.stream().filter((h) -> h.strength == strongest)
+        return hashes.stream().filter((h) -> Objects.equals(h.strength, strongest))
                 .collect(Collectors.toList());
-        return result;
     }
 
     private static Map<String, Integer> createMap() {

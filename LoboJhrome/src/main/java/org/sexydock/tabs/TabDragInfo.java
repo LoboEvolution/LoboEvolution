@@ -34,7 +34,7 @@ public class TabDragInfo {
     public final double grabX;
     public final Tab tab;
     public final Dimension sourceWindowSize;
-    private Point grabPoint = null;
+    private Point grabPoint;
     public TabDragInfo(final Tab tab, final Point grabPoint, final double grabX, final IFloatingTabHandler floatingTabHandler, final Dimension sourceWindowSize) {
         super();
         this.floatingTabHandler = floatingTabHandler;

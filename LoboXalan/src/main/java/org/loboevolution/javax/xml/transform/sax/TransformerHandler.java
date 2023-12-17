@@ -32,15 +32,14 @@ import org.xml.sax.ContentHandler;
 import org.xml.sax.DTDHandler;
 import org.xml.sax.ext.LexicalHandler;
 
-public interface TransformerHandler
-        extends ContentHandler, LexicalHandler, DTDHandler {
+public interface TransformerHandler extends ContentHandler, LexicalHandler, DTDHandler {
 
-    public abstract void setResult(Result result)
+    void setResult(Result result)
             throws IllegalArgumentException;
 
-    public abstract void setSystemId(final String s);
+    String getSystemId();
 
-    public abstract String getSystemId();
+    void setSystemId(final String s);
 
-    public abstract Transformer getTransformer();
+    Transformer getTransformer();
 }

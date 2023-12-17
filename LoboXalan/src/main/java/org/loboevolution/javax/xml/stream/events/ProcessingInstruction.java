@@ -56,12 +56,12 @@ public interface ProcessingInstruction extends XMLEvent {
    *
    * @return the String value of the PI or null
    */
-  public String getTarget();
+  String getTarget();
 
   /**
    * The data section of the processing instruction
    *
    * @return the String value of the PI's data or null
    */
-  public String getData();
+  String getData();
 }

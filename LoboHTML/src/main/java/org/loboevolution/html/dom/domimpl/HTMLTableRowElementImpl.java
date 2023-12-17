@@ -29,6 +29,7 @@
 package org.loboevolution.html.dom.domimpl;
 
 import org.htmlunit.cssparser.dom.DOMException;
+import org.loboevolution.common.ArrayUtilities;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.HTMLTableCellElement;
@@ -112,7 +113,7 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTabl
 	/** {@inheritDoc} */
 	@Override
 	public HTMLCollection getCells() {
-		if (getParentNode() != null && this.nodeList.size() == 0) {
+		if (getParentNode() != null && ArrayUtilities.isBlank(this.nodeList)) {
 			return new HTMLCollectionImpl((NodeImpl) getParentNode(), new ElementFilter("TD"));
 		}
 		return new HTMLCollectionImpl(this, new ElementFilter("TD"));

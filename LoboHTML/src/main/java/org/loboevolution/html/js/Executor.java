@@ -29,14 +29,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.events.Event;
-import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.js.JavaScript;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
-
-import java.net.URL;
 
 /**
  * <p>Executor class.</p>
