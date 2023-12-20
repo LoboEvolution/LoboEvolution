@@ -85,14 +85,14 @@ public interface HTMLTableColElement extends HTMLElement {
 	/**
 	 * Sets or retrieves the number of columns in the group.
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	int getSpan();
 
 	/**
 	 * <p>setSpan.</p>
 	 *
-	 * @param span a int.
+	 * @param span a {@link java.lang.Integer} object.
 	 */
 	void setSpan(int span);
 

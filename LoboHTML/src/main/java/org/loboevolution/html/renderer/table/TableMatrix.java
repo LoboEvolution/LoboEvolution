@@ -93,8 +93,8 @@ class TableMatrix {
 	 * Called on every relayout. Element children might have changed.
 	 *
 	 * @param insets a {@link java.awt.Insets} object.
-	 * @param availWidth a int.
-	 * @param availHeight a int.
+	 * @param availWidth a {@link java.lang.Integer} object.
+	 * @param availHeight a {@link java.lang.Integer} object.
 	 */
 	public void reset(final Insets insets, final int availWidth, final int availHeight) {
 		final TableMatrixSizes size = new TableMatrixSizes(this);
@@ -162,8 +162,8 @@ class TableMatrix {
 	/**
 	 * <p>build.</p>
 	 *
-	 * @param availWidth a int.
-	 * @param availHeight a int.
+	 * @param availWidth a {@link java.lang.Integer} object.
+	 * @param availHeight a {@link java.lang.Integer} object.
 	 * @param sizeOnly a boolean.
 	 */
 	public void build(final int availWidth, final int availHeight, final boolean sizeOnly) {
@@ -277,8 +277,8 @@ class TableMatrix {
 	/**
 	 * <p>getLowestRenderableSpot.</p>
 	 *
-	 * @param x a int.
-	 * @param y a int.
+	 * @param x a {@link java.lang.Integer} object.
+	 * @param y a {@link java.lang.Integer} object.
 	 * @return a {@link org.loboevolution.html.renderer.RenderableSpot} object.
 	 */
 	public RenderableSpot getLowestRenderableSpot(final int x, final int y) {
@@ -527,7 +527,7 @@ class TableMatrix {
 	/**
 	 * <p>getNumColumns.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	public int getNumColumns() {
 		return this.columnSizes.length;
@@ -536,7 +536,7 @@ class TableMatrix {
 	/**
 	 * <p>getNumRows.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	public int getNumRows() {
 		return this.rows.size();

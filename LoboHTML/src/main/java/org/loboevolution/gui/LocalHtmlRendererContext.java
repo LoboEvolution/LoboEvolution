@@ -46,7 +46,6 @@ import java.net.MalformedURLException;
 import java.net.Proxy;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.Optional;
 
 @Data
 @AllArgsConstructor
@@ -431,8 +430,8 @@ public class LocalHtmlRendererContext implements HtmlRendererContext{
 
     /** {@inheritDoc} */
     @Override
-    public void setCursor(final Optional<Cursor> cursorOpt) {
-        final Cursor cursor = cursorOpt.orElse(Cursor.getDefaultCursor());
+    public void setCursor(final Cursor cursorOpt) {
+        final Cursor cursor = cursorOpt != null ? cursorOpt : Cursor.getDefaultCursor();
         htmlPanel.setCursor(cursor);
     }
 

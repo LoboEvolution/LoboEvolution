@@ -44,7 +44,7 @@ class DocumentNotification {
 	/**
 	 * <p>Constructor for DocumentNotification.</p>
 	 *
-	 * @param type a int.
+	 * @param type a {@link java.lang.Integer} object.
 	 * @param node a {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} object.
 	 */
 	public DocumentNotification(final int type, final NodeImpl node) {

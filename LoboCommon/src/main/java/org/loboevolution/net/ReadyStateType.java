@@ -26,6 +26,12 @@
 
 package org.loboevolution.net;
 
+import lombok.Getter;
+
+/**
+ * The Class ReadyStateType.
+ */
+@Getter
 public enum ReadyStateType {
 
     UNSENT(0),
@@ -42,13 +48,5 @@ public enum ReadyStateType {
 
     ReadyStateType(final Integer value) {
         this.value = value;
-    }
-
-    /**
-     * <p> Getter for the field value </p>
-     * @return a {@link java.lang.Integer} object.
-     */
-    public Integer getValue() {
-        return value;
     }
 }

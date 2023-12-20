@@ -35,14 +35,14 @@ public interface SVGElementInstanceList {
 	/**
 	 * <p>getLength.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	int getLength();
 
 	/**
 	 * <p>item.</p>
 	 *
-	 * @param index a int.
+	 * @param index a {@link java.lang.Integer} object.
 	 * @return a {@link org.loboevolution.html.dom.svg.SVGElementInstance} object.
 	 */
 	SVGElementInstance item(int index);

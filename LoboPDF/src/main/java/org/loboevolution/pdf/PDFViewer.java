@@ -607,7 +607,8 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
         // if the PDF has an outline, display it.
         try {
             outline = curFile.getOutline();
-        } catch (final IOException ioe) {
+        } catch (final IOException e) {
+            log.info(e.getMessage());
         }
         if (outline != null && olf == null) {
             if (outline.getChildCount() > 0) {

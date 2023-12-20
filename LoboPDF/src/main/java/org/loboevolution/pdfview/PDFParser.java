@@ -936,6 +936,7 @@ public class PDFParser extends BaseWatchable {
             try {
                 Thread.sleep(PDFDebugger.DRAW_DELAY);
             } catch (final InterruptedException e) {
+                log.info(e.getMessage());
             }
         }
     }

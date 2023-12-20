@@ -52,7 +52,7 @@ public class BackgroundImageSetter implements SubPropertySetter {
 		String baseHref = null;
 		String finalValue;
 		final CSSStyleDeclarationImpl props = (CSSStyleDeclarationImpl) declaration;
-		final AbstractCSSRuleImpl rule = (AbstractCSSRuleImpl) props.getParentRule();
+		final AbstractCSSRuleImpl rule = props.getParentRule();
 		if (rule != null) {
 			final CSSStyleSheetImpl ssheet = rule.getParentStyleSheet();
 			baseHref = ssheet.getHref();

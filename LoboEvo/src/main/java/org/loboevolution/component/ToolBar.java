@@ -43,6 +43,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 
+import lombok.Getter;
 import org.loboevolution.component.input.Autocomplete;
 import org.loboevolution.config.DesktopConfig;
 import org.loboevolution.info.BookmarkInfo;
@@ -51,6 +52,7 @@ import org.loboevolution.store.BookmarksStore;
 /**
  * <p>ToolBar class.</p>
  */
+@Getter
 public class ToolBar extends JToolBar implements IToolBar {
 
 	private static final long serialVersionUID = 1L;
@@ -64,15 +66,6 @@ public class ToolBar extends JToolBar implements IToolBar {
 	 */
 	public ToolBar(final BrowserPanel panel) {
 		init(panel);
-	}
-
-	/**
-	 * <p>Getter for the field addressBar.</p>
-	 *
-	 * @return the addressBar
-	 */
-	public JTextField getAddressBar() {
-		return this.addressBar;
 	}
 
 	private void init(final BrowserPanel panel) {

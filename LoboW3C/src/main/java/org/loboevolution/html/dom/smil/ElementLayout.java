@@ -74,14 +74,14 @@ public interface ElementLayout {
      * @exception DOMException
      *                NO_MODIFICATION_ALLOWED_ERR: Raised if this attribute is
      *                readonly.
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     int getHeight();
 
     /**
      * <p>setHeight.</p>
      *
-     * @param height a int.
+     * @param height a {@link java.lang.Integer} object.
      * @throws DOMException if any.
      */
     void setHeight(int height) throws DOMException;
@@ -92,14 +92,14 @@ public interface ElementLayout {
      * @exception DOMException
      *                NO_MODIFICATION_ALLOWED_ERR: Raised if this attribute is
      *                readonly.
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     int getWidth();
 
     /**
      * <p>setWidth.</p>
      *
-     * @param width a int.
+     * @param width a {@link java.lang.Integer} object.
      * @throws DOMException if any.
      */
     void setWidth(final int width) throws DOMException;

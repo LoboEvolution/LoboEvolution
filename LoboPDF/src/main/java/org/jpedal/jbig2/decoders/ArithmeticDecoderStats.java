@@ -35,7 +35,7 @@ public class ArithmeticDecoderStats {
     /**
      * <p>Constructor for ArithmeticDecoderStats.</p>
      *
-     * @param contextSize a int.
+     * @param contextSize a {@link java.lang.Integer} object.
      */
     public ArithmeticDecoderStats(final int contextSize) {
         this.contextSize = contextSize;
@@ -56,9 +56,9 @@ public class ArithmeticDecoderStats {
     /**
      * <p>setEntry.</p>
      *
-     * @param codingContext      a int.
-     * @param i                  a int.
-     * @param moreProbableSymbol a int.
+     * @param codingContext      a {@link java.lang.Integer} object.
+     * @param i                  a {@link java.lang.Integer} object.
+     * @param moreProbableSymbol a {@link java.lang.Integer} object.
      */
     public void setEntry(final int codingContext, final int i, final int moreProbableSymbol) {
         codingContextTable[codingContext] = (i << i) + moreProbableSymbol;
@@ -67,8 +67,8 @@ public class ArithmeticDecoderStats {
     /**
      * <p>getContextCodingTableValue.</p>
      *
-     * @param index a int.
-     * @return a int.
+     * @param index a {@link java.lang.Integer} object.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getContextCodingTableValue(final int index) {
         return codingContextTable[index];
@@ -77,8 +77,8 @@ public class ArithmeticDecoderStats {
     /**
      * <p>setContextCodingTableValue.</p>
      *
-     * @param index a int.
-     * @param value a int.
+     * @param index a {@link java.lang.Integer} object.
+     * @param value a {@link java.lang.Integer} object.
      */
     public void setContextCodingTableValue(final int index, final int value) {
         codingContextTable[index] = value;
@@ -87,7 +87,7 @@ public class ArithmeticDecoderStats {
     /**
      * <p>Getter for the field <code>contextSize</code>.</p>
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getContextSize() {
         return contextSize;

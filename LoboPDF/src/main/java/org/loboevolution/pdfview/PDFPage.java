@@ -91,7 +91,7 @@ public class PDFPage {
      * create a PDFPage with dimensions in bbox and rotation.
      *
      * @param bbox     a {@link java.awt.geom.Rectangle2D} object.
-     * @param rotation a int.
+     * @param rotation a {@link java.lang.Integer} object.
      */
     public PDFPage(final Rectangle2D bbox, final int rotation) {
         this(-1, bbox, rotation, null);
@@ -331,7 +331,7 @@ public class PDFPage {
     /**
      * get the rotation of this image
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getRotation() {
         return this.rotation;
@@ -399,7 +399,7 @@ public class PDFPage {
     /**
      * get the current number of commands for this page
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getCommandCount() {
         return this.commands.size();
@@ -408,7 +408,7 @@ public class PDFPage {
     /**
      * get the command at a given index
      *
-     * @param index a int.
+     * @param index a {@link java.lang.Integer} object.
      * @return a {@link org.loboevolution.pdfview.PDFCmd} object.
      */
     public PDFCmd getCommand(final int index) {
@@ -427,7 +427,7 @@ public class PDFPage {
     /**
      * get all the commands in the current page starting at the given index
      *
-     * @param startIndex a int.
+     * @param startIndex a {@link java.lang.Integer} object.
      * @return a {@link java.util.List} object.
      */
     public List<PDFCmd> getCommands(final int startIndex) {
@@ -437,8 +437,8 @@ public class PDFPage {
     /**
      * <p>Getter for the field <code>commands</code>.</p>
      *
-     * @param startIndex a int.
-     * @param endIndex   a int.
+     * @param startIndex a {@link java.lang.Integer} object.
+     * @param endIndex   a {@link java.lang.Integer} object.
      * @return a {@link java.util.List} object.
      */
     public List<PDFCmd> getCommands(final int startIndex, final int endIndex) {
@@ -544,8 +544,8 @@ public class PDFPage {
     /**
      * Stop the rendering of a particular image on this page
      *
-     * @param width  a int.
-     * @param height a int.
+     * @param width  a {@link java.lang.Integer} object.
+     * @param height a {@link java.lang.Integer} object.
      * @param clip   a {@link java.awt.geom.Rectangle2D} object.
      */
     public void stop(final int width, final int height, final Rectangle2D clip) {

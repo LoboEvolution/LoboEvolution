@@ -54,8 +54,8 @@ public final class JBIG2Bitmap {
     /**
      * <p>Constructor for JBIG2Bitmap.</p>
      *
-     * @param width             a int.
-     * @param height            a int.
+     * @param width             a {@link java.lang.Integer} object.
+     * @param height            a {@link java.lang.Integer} object.
      * @param arithmeticDecoder a {@link org.jpedal.jbig2.decoders.ArithmeticDecoder} object.
      * @param huffmanDecoder    a {@link org.jpedal.jbig2.decoders.HuffmanDecoder} object.
      * @param mmrDecoder        a {@link org.jpedal.jbig2.decoders.MMRDecoder} object.
@@ -76,13 +76,13 @@ public final class JBIG2Bitmap {
      * <p>readBitmap.</p>
      *
      * @param useMMR                             a boolean.
-     * @param template                           a int.
+     * @param template                           a {@link java.lang.Integer} object.
      * @param typicalPredictionGenericDecodingOn a boolean.
      * @param useSkip                            a boolean.
      * @param skipBitmap                         a {@link org.jpedal.jbig2.image.JBIG2Bitmap} object.
      * @param adaptiveTemplateX                  an array of {@link short} objects.
      * @param adaptiveTemplateY                  an array of {@link short} objects.
-     * @param mmrDataLength                      a int.
+     * @param mmrDataLength                      a {@link java.lang.Integer} object.
      * @throws java.io.IOException             if any.
      * @throws org.jpedal.jbig2.JBIG2Exception if any.
      */
@@ -463,11 +463,11 @@ public final class JBIG2Bitmap {
     /**
      * <p>readGenericRefinementRegion.</p>
      *
-     * @param template                             a int.
+     * @param template                             a {@link java.lang.Integer} object.
      * @param typicalPredictionGenericRefinementOn a boolean.
      * @param referredToBitmap                     a {@link org.jpedal.jbig2.image.JBIG2Bitmap} object.
-     * @param referenceDX                          a int.
-     * @param referenceDY                          a int.
+     * @param referenceDX                          a {@link java.lang.Integer} object.
+     * @param referenceDY                          a {@link java.lang.Integer} object.
      * @param adaptiveTemplateX                    an array of {@link short} objects.
      * @param adaptiveTemplateY                    an array of {@link short} objects.
      * @throws java.io.IOException             if any.
@@ -671,17 +671,17 @@ public final class JBIG2Bitmap {
      *
      * @param huffman                       a boolean.
      * @param symbolRefine                  a boolean.
-     * @param noOfSymbolInstances           a int.
-     * @param logStrips                     a int.
-     * @param noOfSymbols                   a int.
+     * @param noOfSymbolInstances           a {@link java.lang.Integer} object.
+     * @param logStrips                     a {@link java.lang.Integer} object.
+     * @param noOfSymbols                   a {@link java.lang.Integer} object.
      * @param symbolCodeTable               an array of {@link int} objects.
-     * @param symbolCodeLength              a int.
+     * @param symbolCodeLength              a {@link java.lang.Integer} object.
      * @param symbols                       an array of {@link org.jpedal.jbig2.image.JBIG2Bitmap} objects.
-     * @param defaultPixel                  a int.
-     * @param combinationOperator           a int.
+     * @param defaultPixel                  a {@link java.lang.Integer} object.
+     * @param combinationOperator           a {@link java.lang.Integer} object.
      * @param transposed                    a boolean.
-     * @param referenceCorner               a int.
-     * @param sOffset                       a int.
+     * @param referenceCorner               a {@link java.lang.Integer} object.
+     * @param sOffset                       a {@link java.lang.Integer} object.
      * @param huffmanFSTable                an array of {@link int} objects.
      * @param huffmanDSTable                an array of {@link int} objects.
      * @param huffmanDTTable                an array of {@link int} objects.
@@ -690,7 +690,7 @@ public final class JBIG2Bitmap {
      * @param huffmanRDXTable               an array of {@link int} objects.
      * @param huffmanRDYTable               an array of {@link int} objects.
      * @param huffmanRSizeTable             an array of {@link int} objects.
-     * @param template                      a int.
+     * @param template                      a {@link java.lang.Integer} object.
      * @param symbolRegionAdaptiveTemplateX an array of {@link short} objects.
      * @param symbolRegionAdaptiveTemplateY an array of {@link short} objects.
      * @param decoder                       a {@link org.jpedal.jbig2.decoders.JBIG2StreamDecoder} object.
@@ -864,7 +864,7 @@ public final class JBIG2Bitmap {
     /**
      * <p>clear.</p>
      *
-     * @param defPixel a int.
+     * @param defPixel a {@link java.lang.Integer} object.
      */
     public void clear(final int defPixel) {
         data.setAll(defPixel == 1);
@@ -875,8 +875,8 @@ public final class JBIG2Bitmap {
      * <p>combine.</p>
      *
      * @param bitmap a {@link org.jpedal.jbig2.image.JBIG2Bitmap} object.
-     * @param x      a int.
-     * @param y      a int.
+     * @param x      a {@link java.lang.Integer} object.
+     * @param y      a {@link java.lang.Integer} object.
      * @param combOp a long.
      */
     public void combine(final JBIG2Bitmap bitmap, final int x, final int y, final long combOp) {
@@ -1014,7 +1014,7 @@ public final class JBIG2Bitmap {
     /**
      * <p>Getter for the field <code>width</code>.</p>
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getWidth() {
         return width;
@@ -1023,7 +1023,7 @@ public final class JBIG2Bitmap {
     /**
      * <p>Getter for the field <code>height</code>.</p>
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getHeight() {
         return height;
@@ -1090,10 +1090,10 @@ public final class JBIG2Bitmap {
     /**
      * <p>getSlice.</p>
      *
-     * @param x      a int.
-     * @param y      a int.
-     * @param width  a int.
-     * @param height a int.
+     * @param x      a {@link java.lang.Integer} object.
+     * @param y      a {@link java.lang.Integer} object.
+     * @param width  a {@link java.lang.Integer} object.
+     * @param height a {@link java.lang.Integer} object.
      * @return a {@link org.jpedal.jbig2.image.JBIG2Bitmap} object.
      */
     public JBIG2Bitmap getSlice(final int x, final int y, final int width, final int height) {
@@ -1180,9 +1180,9 @@ public final class JBIG2Bitmap {
     /**
      * <p>setPixel.</p>
      *
-     * @param col   a int.
-     * @param row   a int.
-     * @param value a int.
+     * @param col   a {@link java.lang.Integer} object.
+     * @param row   a {@link java.lang.Integer} object.
+     * @param value a {@link java.lang.Integer} object.
      */
     public void setPixel(final int col, final int row, final int value) {
         setPixel(col, row, data, value);
@@ -1191,9 +1191,9 @@ public final class JBIG2Bitmap {
     /**
      * <p>getPixel.</p>
      *
-     * @param col a int.
-     * @param row a int.
-     * @return a int.
+     * @param col a {@link java.lang.Integer} object.
+     * @param row a {@link java.lang.Integer} object.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getPixel(final int col, final int row) {
         return data.get((row * width) + col) ? 1 : 0;
@@ -1202,8 +1202,8 @@ public final class JBIG2Bitmap {
     /**
      * <p>expand.</p>
      *
-     * @param newHeight    a int.
-     * @param defaultPixel a int.
+     * @param newHeight    a {@link java.lang.Integer} object.
+     * @param defaultPixel a {@link java.lang.Integer} object.
      */
     public void expand(final int newHeight, final int defaultPixel) {
         final FastBitSet newData = new FastBitSet(newHeight * width);
@@ -1220,7 +1220,7 @@ public final class JBIG2Bitmap {
     /**
      * <p>Getter for the field <code>bitmapNumber</code>.</p>
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getBitmapNumber() {
         return bitmapNumber;
@@ -1229,7 +1229,7 @@ public final class JBIG2Bitmap {
     /**
      * <p>Setter for the field <code>bitmapNumber</code>.</p>
      *
-     * @param segmentNumber a int.
+     * @param segmentNumber a {@link java.lang.Integer} object.
      */
     public void setBitmapNumber(final int segmentNumber) {
         this.bitmapNumber = segmentNumber;

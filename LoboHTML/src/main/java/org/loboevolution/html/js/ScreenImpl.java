@@ -54,7 +54,7 @@ public class ScreenImpl extends AbstractScriptableDelegate implements Screen {
 	/**
 	 * <p>getAvailHeight.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	public int getAvailHeight() {
 		final GraphicsEnvironment ge = this.graphicsEnvironment;
@@ -67,7 +67,7 @@ public class ScreenImpl extends AbstractScriptableDelegate implements Screen {
 	/**
 	 * <p>getAvailWidth.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	public int getAvailWidth() {
 		final GraphicsEnvironment ge = this.graphicsEnvironment;
@@ -80,7 +80,7 @@ public class ScreenImpl extends AbstractScriptableDelegate implements Screen {
 	/**
 	 * <p>getColorDepth.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	public int getColorDepth() {
 		return 24;
@@ -89,7 +89,7 @@ public class ScreenImpl extends AbstractScriptableDelegate implements Screen {
 	/**
 	 * <p>getHeight.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	public int getHeight() {
 		final GraphicsDevice gd = this.graphicsDevice;
@@ -99,7 +99,7 @@ public class ScreenImpl extends AbstractScriptableDelegate implements Screen {
 	/**
 	 * <p>getPixelDepth.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	public int getPixelDepth() {
 		return 96;
@@ -108,7 +108,7 @@ public class ScreenImpl extends AbstractScriptableDelegate implements Screen {
 	/**
 	 * <p>getWidth.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	public int getWidth() {
 		final GraphicsEnvironment ge = this.graphicsEnvironment;

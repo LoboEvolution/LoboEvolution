@@ -35,11 +35,6 @@ import org.loboevolution.html.xpath.XPathNSResolver;
  */
 public class XPathNSResolverImpl implements XPathNSResolver {
 
-    private final String
-            S_XMLNAMESPACEURI = "http://www.w3.org/XML/1998/namespace";
-    private final String S_XSLNAMESPACEURL = "http://www.w3.org/1999/XSL/Transform";
-    private final String S_OLDXSLNAMESPACEURL = "http://www.w3.org/XSL/Transform/1.0";
-
     private Node parent;
 
     /**
@@ -59,7 +54,7 @@ public class XPathNSResolverImpl implements XPathNSResolver {
         String namespace = null;
 
         if ("xml".equals(prefix)) {
-            namespace = S_XMLNAMESPACEURI;
+            namespace = "http://www.w3.org/XML/1998/namespace";
         } else {
             int type;
             while (parent != null

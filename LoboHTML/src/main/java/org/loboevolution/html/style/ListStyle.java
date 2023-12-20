@@ -25,16 +25,16 @@
  */
 package org.loboevolution.html.style;
 
+import lombok.Data;
+
 import java.awt.*;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
  * <p>ListStyle class.</p>
- *
- *
- *
  */
+@Data
 public class ListStyle {
 	
 	private Image image;
@@ -52,9 +52,9 @@ public class ListStyle {
 	/**
 	 * <p>Constructor for ListStyle.</p>
 	 *
-	 * @param type a int.
+	 * @param type a {@link java.lang.Integer} object.
 	 * @param image a {@link java.awt.Image} object.
-	 * @param position a int.
+	 * @param position a {@link java.lang.Integer} object.
 	 */
 	public ListStyle(final int type, final Image image, final int position) {
 		this.type = type;
@@ -65,7 +65,7 @@ public class ListStyle {
 	/**
 	 * <p>getRomanNumerals.</p>
 	 *
-	 * @param num a int.
+	 * @param num a {@link java.lang.Integer} object.
 	 * @return a {@link java.lang.String} object.
 	 */
 	public static String getRomanNumerals(int num) {
@@ -102,59 +102,4 @@ public class ListStyle {
 		}
 		return sb.toString();
 	}
-
-	/**
-	 * <p>Getter for the field image.</p>
-	 *
-	 * @return the image
-	 */
-	public Image getImage() {
-		return image;
-	}
-
-	/**
-	 * <p>Getter for the field position.</p>
-	 *
-	 * @return the position
-	 */
-	public int getPosition() {
-		return position;
-	}
-
-	/**
-	 * <p>Getter for the field type.</p>
-	 *
-	 * @return the type
-	 */
-	public int getType() {
-		return type;
-	}
-
-	/**
-	 * <p>Setter for the field image.</p>
-	 *
-	 * @param image the image to set
-	 */
-	public void setImage(final Image image) {
-		this.image = image;
-	}
-
-	/**
-	 * <p>Setter for the field position.</p>
-	 *
-	 * @param position the position to set
-	 */
-	public void setPosition(final int position) {
-		this.position = position;
-	}
-
-	/**
-	 * <p>Setter for the field type.</p>
-	 *
-	 * @param type the type to set
-	 */
-	public void setType(final int type) {
-		this.type = type;
-	}
-
 }

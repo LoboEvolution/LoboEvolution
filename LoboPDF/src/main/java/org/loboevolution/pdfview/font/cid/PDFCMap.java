@@ -127,7 +127,7 @@ public abstract class PDFCMap {
      * Get the font number assoicated with a given source character
      *
      * @param src a char.
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getFontID(final char src) {
         return 0;

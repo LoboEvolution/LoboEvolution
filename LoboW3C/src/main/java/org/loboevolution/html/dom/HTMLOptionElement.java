@@ -72,7 +72,7 @@ public interface HTMLOptionElement extends HTMLElement {
     /**
      * Sets or retrieves the ordinal position of an option in a list box.
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     int getIndex();
 

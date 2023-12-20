@@ -26,6 +26,8 @@
 
 package org.loboevolution.html.js.css;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.htmlunit.cssparser.dom.MediaListImpl;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.js.WindowImpl;
@@ -36,31 +38,13 @@ import org.loboevolution.html.style.StyleSheetAggregator;
 /**
  * <p>MediaQueryListImpl class.</p>
  */
+@AllArgsConstructor
+@Getter
 public class MediaQueryListImpl implements MediaQueryList {
-
-    private final String media;
 
     private final WindowImpl window;
 
-    /**
-     * <p>Constructor for MediaQueryListImpl.</p>
-     *
-     * @param window a {@link org.loboevolution.html.js.WindowImpl} object.
-     * @param mediaQueryString a {@link java.lang.String} object.
-     */
-    public MediaQueryListImpl(final WindowImpl window, final String mediaQueryString) {
-        this.window = window;
-        this.media = mediaQueryString;
-    }
-
-    /**
-     * <p>Getter for the field <code>media</code>.</p>
-     *
-     * @return a {@link java.lang.String} object.
-     */
-    public String getMedia() {
-        return media;
-    }
+    private final String media;
 
     /**
      * <p>isMatches.</p>

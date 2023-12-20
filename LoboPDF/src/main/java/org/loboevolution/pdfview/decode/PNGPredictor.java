@@ -214,10 +214,10 @@ public class PNGPredictor extends Predictor {
     /**
      * The paeth algorithm
      *
-     * @param left   a int.
-     * @param up     a int.
-     * @param upLeft a int.
-     * @return a int.
+     * @param left   a {@link java.lang.Integer} object.
+     * @param up     a {@link java.lang.Integer} object.
+     * @param upLeft a {@link java.lang.Integer} object.
+     * @return a {@link java.lang.Integer} object.
      */
     protected int paeth(final int left, final int up, final int upLeft) {
         final int p = left + up - upLeft;

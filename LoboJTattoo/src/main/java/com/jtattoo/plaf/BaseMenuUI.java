@@ -115,10 +115,10 @@ public class BaseMenuUI extends BasicMenuUI {
 	 *
 	 * @param g a {@link java.awt.Graphics} object.
 	 * @param c a {@link javax.swing.JComponent} object.
-	 * @param x a int.
-	 * @param y a int.
-	 * @param w a int.
-	 * @param h a int.
+	 * @param x a {@link java.lang.Integer} object.
+	 * @param y a {@link java.lang.Integer} object.
+	 * @param w a {@link java.lang.Integer} object.
+	 * @param h a {@link java.lang.Integer} object.
 	 */
 	protected void paintBackground(final Graphics g, final JComponent c, final int x, final int y, final int w, final int h) {
 		final JMenuItem mi = (JMenuItem) c;

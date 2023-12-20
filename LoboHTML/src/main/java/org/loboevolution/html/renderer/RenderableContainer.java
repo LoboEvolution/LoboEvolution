@@ -94,10 +94,10 @@ public interface RenderableContainer {
 	/**
 	 * <p>repaint.</p>
 	 *
-	 * @param x a int.
-	 * @param y a int.
-	 * @param width a int.
-	 * @param height a int.
+	 * @param x a {@link java.lang.Integer} object.
+	 * @param y a {@link java.lang.Integer} object.
+	 * @param width a {@link java.lang.Integer} object.
+	 * @param height a {@link java.lang.Integer} object.
 	 */
 	void repaint(int x, final int y, final int width, final int height);
 
@@ -127,21 +127,21 @@ public interface RenderableContainer {
     /**
      * <p>getY.</p>
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     int getY();
     
     /**
      * <p>getInnerWidth.</p>
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     default int getInnerWidth() {return 0;}
 
     /**
      * <p>getInnerHeight.</p>
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     default int getInnerHeight() {return 0;}
 
@@ -155,22 +155,22 @@ public interface RenderableContainer {
     /**
      * <p>getVisualWidth.</p>
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     int getVisualWidth();
     
     /**
      * <p>getVisualHeight.</p>
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     int getVisualHeight();
     
     /**
      * <p>getGUIPoint.</p>
      *
-     * @param x a int.
-     * @param y a int.
+     * @param x a {@link java.lang.Integer} object.
+     * @param y a {@link java.lang.Integer} object.
      * @return a {@link java.awt.Point} object.
      */
     Point getGUIPoint(int x, final int y);
@@ -179,8 +179,8 @@ public interface RenderableContainer {
      * <p>translateDescendentPoint.</p>
      *
      * @param descendent a {@link org.loboevolution.html.renderer.BoundableRenderable} object.
-     * @param x a int.
-     * @param y a int.
+     * @param x a {@link java.lang.Integer} object.
+     * @param y a {@link java.lang.Integer} object.
      * @return a {@link java.awt.Point} object.
      */
     Point translateDescendentPoint(BoundableRenderable descendent, final int x, final int y);

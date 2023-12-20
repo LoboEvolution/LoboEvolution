@@ -59,7 +59,7 @@ public interface SVGPathElement extends SVGElement, SVGTests, SVGLangSpace, SVGE
 	 * <p>getPathSegAtLength.</p>
 	 *
 	 * @param distance a float.
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	int getPathSegAtLength(float distance);
 

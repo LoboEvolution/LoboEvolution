@@ -26,6 +26,7 @@
 
 package org.loboevolution.html.dom.svgimpl;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.dom.svg.*;
 import org.loboevolution.html.node.Node;
@@ -42,6 +43,7 @@ import java.util.List;
 /**
  * <p>SVGGElementImpl class.</p>
  */
+@Slf4j
 public class SVGGElementImpl extends SVGGraphic implements SVGGElement {
 
 	/**
@@ -111,6 +113,7 @@ public class SVGGElementImpl extends SVGGraphic implements SVGGElement {
 					try {
 						imageTransform.preConcatenate(screenCTM.createInverse());
 					} catch (NoninvertibleTransformException e) {
+						log.info(e.getMessage());
 					}
 					graphics.drawImage(image, imageTransform, null);
 					graphics.setComposite(oldComposite);

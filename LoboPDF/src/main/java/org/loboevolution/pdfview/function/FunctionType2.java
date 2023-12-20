@@ -146,7 +146,7 @@ public class FunctionType2 extends PDFFunction {
     /**
      * Get the values at zero
      *
-     * @param index a int.
+     * @param index a {@link java.lang.Integer} object.
      * @return a float.
      */
     public float getC0(final int index) {
@@ -165,7 +165,7 @@ public class FunctionType2 extends PDFFunction {
     /**
      * Get the values at one
      *
-     * @param index a int.
+     * @param index a {@link java.lang.Integer} object.
      * @return a float.
      */
     public float getC1(final int index) {

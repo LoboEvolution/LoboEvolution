@@ -177,7 +177,7 @@ public class HTMLFormElementImpl extends HTMLElementImpl implements HTMLFormElem
 	/**
 	 * <p>item.</p>
 	 *
-	 * @param index a int.
+	 * @param index a {@link java.lang.Integer} object.
 	 * @return a {@link java.lang.Object} object.
 	 */
 	public Object item(final int index) {

@@ -354,7 +354,7 @@ public class FontSupport {
      * get the name of a glyph from its encoding value (NOT the character
      * value), using the standard encoding.
      *
-     * @param i a int.
+     * @param i a {@link java.lang.Integer} object.
      * @return a {@link java.lang.String} object.
      */
     public static String getName(int i) {

@@ -41,8 +41,8 @@ public class ImageInfo {
     /**
      * <p>Constructor for ImageInfo.</p>
      *
-     * @param width  a int.
-     * @param height a int.
+     * @param width  a {@link java.lang.Integer} object.
+     * @param height a {@link java.lang.Integer} object.
      * @param clip   a {@link java.awt.geom.Rectangle2D} object.
      */
     public ImageInfo(final int width, final int height, final Rectangle2D clip) {
@@ -52,8 +52,8 @@ public class ImageInfo {
     /**
      * <p>Constructor for ImageInfo.</p>
      *
-     * @param width   a int.
-     * @param height  a int.
+     * @param width   a {@link java.lang.Integer} object.
+     * @param height  a {@link java.lang.Integer} object.
      * @param clip    a {@link java.awt.geom.Rectangle2D} object.
      * @param bgColor a {@link java.awt.Color} object.
      */

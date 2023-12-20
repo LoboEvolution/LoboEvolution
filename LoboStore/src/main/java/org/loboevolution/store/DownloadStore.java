@@ -40,16 +40,10 @@ import java.util.List;
  * <p>DownloadStore class.</p>
  */
 @Slf4j
-public class DownloadStore {
+public class DownloadStore implements QueryStore{
 
 	/** The Constant DB_PATH. */
 	private static final String DB_PATH = DatabseSQLite.getDatabaseDirectory();
-
-	private final String DELETE_DOWNLOAD = "DELETE FROM DOWNLOAD";
-
-	private final String DOWNLOAD_ORDERED = "SELECT baseUrl FROM DOWNLOAD ORDER BY dt ASC";
-
-	private final String INSERT_DOWNLOAD = "INSERT INTO DOWNLOAD (baseUrl, dt) VALUES(?, strftime('%Y-%m-%d %H:%M:%S', 'now'))";
 
 	/**
 	 * <p>addAsRecent.</p>

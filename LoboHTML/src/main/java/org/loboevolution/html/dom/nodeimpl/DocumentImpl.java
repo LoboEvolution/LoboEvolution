@@ -26,6 +26,9 @@
 
 package org.loboevolution.html.dom.nodeimpl;
 
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.htmlunit.cssparser.parser.selector.Selector;
 import org.htmlunit.cssparser.parser.selector.SelectorList;
@@ -80,6 +83,9 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
 
 	private boolean isrss = false;
 
+	@Getter
+	@Setter
+	@Builder.Default
 	private boolean test = false;
 
 	private String xmlVersion = null;
@@ -90,11 +96,11 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
 
 	private String domain;
 
+	@Getter
+	@Setter
 	private String referrer;
 
-	private DocumentType doctype;
-
-	private HTMLElement body;
+    private HTMLElement body;
 
 	private Window window;
 
@@ -352,13 +358,12 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
 	 */
 	@Override
 	public DocumentType getDoctype() {
-		doctype = (DocumentType) nodeList.
-				stream().
-				filter(node -> node.getNodeType() == Node.DOCUMENT_TYPE_NODE).
-				findFirst().
-				orElse(new DocumentTypeImpl());
 
-		return this.doctype;
+        return (DocumentType) nodeList.
+                stream().
+                filter(node -> node.getNodeType() == Node.DOCUMENT_TYPE_NODE).
+                findFirst().
+                orElse(new DocumentTypeImpl());
 	}
 
 	/**
@@ -959,21 +964,6 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
 
 	/** {@inheritDoc} */
 	@Override
-	public String getReferrer() {
-		return this.referrer;
-	}
-
-	/**
-	 * <p>Setter for the field referrer.</p>
-	 *
-	 * @param value a {@link java.lang.String} object.
-	 */
-	public void setReferrer(final String value) {
-		this.referrer = value;
-	}
-
-	/** {@inheritDoc} */
-	@Override
 	public Element getScrollingElement() {
 		// TODO Auto-generated method stub
 		return null;
@@ -1335,14 +1325,6 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
 	@Override
 	public void setXml(final boolean xml) {
 		this.xml = xml;
-	}
-
-	public boolean isTest() {
-		return test;
-	}
-
-	public void setTest(final boolean test) {
-		this.test = test;
 	}
 
 	@Override

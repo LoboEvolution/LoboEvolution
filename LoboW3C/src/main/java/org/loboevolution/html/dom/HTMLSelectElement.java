@@ -309,7 +309,7 @@ public interface HTMLSelectElement extends HTMLElement {
 	/**
 	 * <p>getLength.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	int getLength();
 

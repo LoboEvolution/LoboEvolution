@@ -134,37 +134,34 @@ public class DescendantIterator extends LocPathIterator {
 
     int next;
 
-    try {
-      do {
-        if (0 == m_extendedTypeID) {
-          next =
-              m_lastFetched =
-                  (DTM.NULL == m_lastFetched)
-                      ? m_traverser.first(m_context)
-                      : m_traverser.next(m_context, m_lastFetched);
-        } else {
-          next =
-              m_lastFetched =
-                  (DTM.NULL == m_lastFetched)
-                      ? m_traverser.first(m_context, m_extendedTypeID)
-                      : m_traverser.next(m_context, m_lastFetched, m_extendedTypeID);
-        }
-
-        if (DTM.NULL != next) {
-          if (DTMIterator.FILTER_ACCEPT == acceptNode(next)) break;
-          else continue;
-        } else break;
-      } while (next != DTM.NULL);
+    do {
+      if (0 == m_extendedTypeID) {
+        next =
+                m_lastFetched =
+                        (DTM.NULL == m_lastFetched)
+                                ? m_traverser.first(m_context)
+                                : m_traverser.next(m_context, m_lastFetched);
+      } else {
+        next =
+                m_lastFetched =
+                        (DTM.NULL == m_lastFetched)
+                                ? m_traverser.first(m_context, m_extendedTypeID)
+                                : m_traverser.next(m_context, m_lastFetched, m_extendedTypeID);
+      }
 
       if (DTM.NULL != next) {
-        m_pos++;
-        return next;
-      } else {
-        m_foundLast = true;
+        if (DTMIterator.FILTER_ACCEPT == acceptNode(next)) break;
+        else continue;
+      } else break;
+    } while (next != DTM.NULL);
 
-        return DTM.NULL;
-      }
-    } finally {
+    if (DTM.NULL != next) {
+      m_pos++;
+      return next;
+    } else {
+      m_foundLast = true;
+
+      return DTM.NULL;
     }
   }
 
@@ -241,9 +238,6 @@ public class DescendantIterator extends LocPathIterator {
   @Override
   public boolean deepEquals(final Expression expr) {
     if (!super.deepEquals(expr)) return false;
-
-    if (m_axis != ((DescendantIterator) expr).m_axis) return false;
-
-    return true;
+    return m_axis == ((DescendantIterator) expr).m_axis;
   }
 }

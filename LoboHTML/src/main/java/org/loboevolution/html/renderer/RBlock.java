@@ -25,6 +25,8 @@
  */
 package org.loboevolution.html.renderer;
 
+import lombok.Builder;
+import lombok.Setter;
 import org.loboevolution.html.dom.HTMLHtmlElement;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
@@ -57,7 +59,13 @@ public class RBlock extends BaseElementRenderable {
 	private BoundableRenderable armedRenderable;
 	protected final RBlockViewport bodyLayout;
 	private final RBlockScroll scroll;
+
+	@Setter
+	@Builder.Default
 	protected int defaultOverflowX = RenderState.OVERFLOW_NONE;
+
+	@Setter
+	@Builder.Default
 	protected int defaultOverflowY = RenderState.OVERFLOW_NONE;
 	protected RenderableSpot endSelection;
 	protected final FrameContext frameContext;
@@ -478,7 +486,7 @@ public class RBlock extends BaseElementRenderable {
 	/**
 	 * <p>getFirstBaselineOffset.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	public int getFirstBaselineOffset() {
 		return this.bodyLayout.getFirstBaselineOffset();
@@ -487,7 +495,7 @@ public class RBlock extends BaseElementRenderable {
 	/**
 	 * <p>getFirstLineHeight.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	public int getFirstLineHeight() {
 		return this.bodyLayout.getFirstLineHeight();
@@ -539,8 +547,8 @@ public class RBlock extends BaseElementRenderable {
 	/**
 	 * <p>getViewportListNesting.</p>
 	 *
-	 * @param blockNesting a int.
-	 * @return a int.
+	 * @param blockNesting a {@link java.lang.Integer} object.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	public int getViewportListNesting(final int blockNesting) {
 		return blockNesting;
@@ -550,7 +558,7 @@ public class RBlock extends BaseElementRenderable {
 	/**
 	 * Gets the width the vertical scrollbar has when shown.
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	public int getVScrollBarWidth() {
 		return SCROLL_BAR_THICKNESS;
@@ -788,8 +796,8 @@ public class RBlock extends BaseElementRenderable {
 	/**
 	 * <p>scrollByUnits.</p>
 	 *
-	 * @param orientation a int.
-	 * @param units a int.
+	 * @param orientation a {@link java.lang.Integer} object.
+	 * @param units a {@link java.lang.Integer} object.
 	 * @return a boolean.
 	 */
 	public boolean scrollByUnits(final int orientation, final int units) {
@@ -849,24 +857,6 @@ public class RBlock extends BaseElementRenderable {
 		} else {
 			return new Rectangle(-relativeOffsetX, -relativeOffsetY, this.getWidth() - hInset, this.getHeight() - vInset);
 		}
-	}
-
-	/**
-	 * <p>Setter for the field defaultOverflowX.</p>
-	 *
-	 * @param defaultOverflowX a int.
-	 */
-	public void setDefaultOverflowX(final int defaultOverflowX) {
-		this.defaultOverflowX = defaultOverflowX;
-	}
-
-	/**
-	 * <p>Setter for the field defaultOverflowY.</p>
-	 *
-	 * @param defaultOverflowY a int.
-	 */
-	public void setDefaultOverflowY(final int defaultOverflowY) {
-		this.defaultOverflowY = defaultOverflowY;
 	}
 
 	/**

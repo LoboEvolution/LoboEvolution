@@ -37,9 +37,9 @@ class FloatingViewportBounds implements FloatingBounds {
 	 *
 	 * @param prevBounds a {@link org.loboevolution.html.renderer.FloatingBounds} object.
 	 * @param leftFloat a boolean.
-	 * @param y a int.
+	 * @param y a {@link java.lang.Integer} object.
 	 * @param offsetFromBorder Width of floating box, including padding insets.
-	 * @param height a int.
+	 * @param height a {@link java.lang.Integer} object.
 	 */
 	public FloatingViewportBounds(final FloatingBounds prevBounds, final boolean leftFloat, final int y, final int offsetFromBorder,
                                   final int height) {

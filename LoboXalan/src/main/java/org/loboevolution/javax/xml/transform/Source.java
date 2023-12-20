@@ -28,7 +28,25 @@ package org.loboevolution.javax.xml.transform;
 
 public interface Source {
 
+    /**
+     * Get the system identifier that was set with setSystemId.
+     *
+     * @return The system identifier that was set with setSystemId, or null
+     * if setSystemId was not called.
+     */
     String getSystemId();
 
-    void setSystemId(final String s);
+    /**
+     * Set the system identifier for this Source.
+     *
+     * <p>The system identifier is optional if there is a byte stream
+     * or a character stream, but it is still useful to provide one,
+     * since the application can use it to resolve relative URIs
+     * and can include it in error messages and warnings (the parser
+     * will attempt to open a connection to the URI only if
+     * there is no byte stream or character stream specified).</p>
+     *
+     * @param systemId The system identifier as a URL string.
+     */
+    void setSystemId(final String systemId);
 }

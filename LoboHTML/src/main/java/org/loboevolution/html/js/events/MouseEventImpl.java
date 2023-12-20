@@ -25,6 +25,7 @@
  */
 package org.loboevolution.html.js.events;
 
+import lombok.Data;
 import org.loboevolution.html.node.events.EventTarget;
 import org.loboevolution.html.node.events.MouseEvent;
 import org.loboevolution.html.node.js.Window;
@@ -32,13 +33,9 @@ import org.loboevolution.html.node.js.Window;
 import java.awt.event.InputEvent;
 
 /**
- * <p>
  * MouseEventImpl class.
- * </p>
- *
- *
- *
  */
+@Data
 public class MouseEventImpl extends UIEventImpl implements MouseEvent {
 
 	private double screenX;
@@ -64,15 +61,13 @@ public class MouseEventImpl extends UIEventImpl implements MouseEvent {
 	private InputEvent ie;
 
 	/**
-	 * <p>
 	 * Constructor for MouseEventImpl.
-	 * </p>
 	 *
 	 * @param type     a {@link java.lang.String} object.
 	 * @param shiftKey a boolean.
 	 * @param ctrlKey  a boolean.
 	 * @param altKey   a boolean.
-	 * @param button   a int.
+	 * @param button   a {@link java.lang.Integer} object.
 	 */
 	public MouseEventImpl(final String type, final boolean shiftKey, final boolean ctrlKey, final boolean altKey,
 			final int button) {
@@ -84,9 +79,7 @@ public class MouseEventImpl extends UIEventImpl implements MouseEvent {
 	}
 
 	/**
-	 * <p>
 	 * Constructor for MouseEventImpl.
-	 * </p>
 	 */
 	public MouseEventImpl() {
 		this.shiftKey = false;
@@ -117,30 +110,6 @@ public class MouseEventImpl extends UIEventImpl implements MouseEvent {
 
 	/** {@inheritDoc} */
 	@Override
-	public double getScreenX() {
-		return screenX;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public double getScreenY() {
-		return screenY;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public double getClientX() {
-		return clientX;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public double getClientY() {
-		return clientY;
-	}
-
-	/** {@inheritDoc} */
-	@Override
 	public boolean isCtrlKey() {
 		return ctrlKey && ie.isControlDown();
 	}
@@ -159,46 +128,12 @@ public class MouseEventImpl extends UIEventImpl implements MouseEvent {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean isMetaKey() {
-		return metaKey;
-	}
-
-	/** {@inheritDoc} */
-	@Override
 	public int getButton() {
 		if (ie instanceof MouseEvent) {
 			return (short) (((MouseEvent) ie).getButton() - 1);
 		} else {
 			return button;
 		}
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public EventTarget getRelatedTarget() {
-		return this.relatedTarget;
-	}
-
-	/**
-	 * <p>
-	 * Getter for the field ie.
-	 * </p>
-	 *
-	 * @return a {@link java.awt.event.InputEvent} object.
-	 */
-	public InputEvent getIe() {
-		return ie;
-	}
-
-	/**
-	 * <p>
-	 * Setter for the field ie.
-	 * </p>
-	 *
-	 * @param ie a {@link java.awt.event.InputEvent} object.
-	 */
-	public void setIe(final InputEvent ie) {
-		this.ie = ie;
 	}
 
 	/** {@inheritDoc} */

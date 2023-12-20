@@ -110,14 +110,14 @@ public interface HTMLTableRowElement extends HTMLElement {
     /**
      * Retrieves the position of the object in the rows collection for the table.
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     int getRowIndex();
 
     /**
      * Retrieves the position of the object in the collection.
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     int getSectionRowIndex();
 

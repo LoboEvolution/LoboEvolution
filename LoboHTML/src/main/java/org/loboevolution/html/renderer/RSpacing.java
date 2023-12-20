@@ -41,8 +41,8 @@ final class RSpacing extends BaseBoundableRenderable {
 	 *
 	 * @param me a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 * @param container a {@link org.loboevolution.html.renderer.RenderableContainer} object.
-	 * @param width a int.
-	 * @param height a int.
+	 * @param width a {@link java.lang.Integer} object.
+	 * @param height a {@link java.lang.Integer} object.
 	 */
 	public RSpacing(final ModelNode me, final RenderableContainer container, final int width, final int height) {
 		super(container, me);

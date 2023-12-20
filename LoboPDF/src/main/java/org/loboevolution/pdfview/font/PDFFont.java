@@ -25,6 +25,8 @@
  */
 package org.loboevolution.pdfview.font;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.pdfview.BaseWatchable;
 import org.loboevolution.pdfview.PDFDebugger;
@@ -45,6 +47,8 @@ import java.util.regex.Pattern;
  * Author Mike Wessler
  */
 @Slf4j
+@Data
+@NoArgsConstructor
 public abstract class PDFFont {
 
     private static final FilenameFilter TTF_FILTER = (dir, name) -> name.toLowerCase().endsWith(".ttf");
@@ -333,96 +337,6 @@ public abstract class PDFFont {
             // (UNIX, most likely) platforms here
             return new String[0];
         }
-    }
-
-    /**
-     * Get the subtype of this font.
-     *
-     * @return the subtype, one of: Type0, Type1, TrueType or Type3
-     */
-    public String getSubtype() {
-        return this.subtype;
-    }
-
-    /**
-     * Set the font subtype
-     *
-     * @param subtype a {@link java.lang.String} object.
-     */
-    public void setSubtype(final String subtype) {
-        this.subtype = subtype;
-    }
-
-    /**
-     * Get the postscript name of this font
-     *
-     * @return the postscript name of this font
-     */
-    public String getBaseFont() {
-        return this.baseFont;
-    }
-
-    /**
-     * Set the postscript name of this font
-     *
-     * @param baseFont the postscript name of the font
-     */
-    public void setBaseFont(final String baseFont) {
-        this.baseFont = baseFont;
-    }
-
-    /**
-     * Get the encoding for this font
-     *
-     * @return the encoding which maps from this font to actual characters
-     */
-    public PDFFontEncoding getEncoding() {
-        return this.encoding;
-    }
-
-    /**
-     * Set the encoding for this font
-     *
-     * @param encoding a {@link org.loboevolution.pdfview.font.PDFFontEncoding} object.
-     */
-    public void setEncoding(final PDFFontEncoding encoding) {
-        this.encoding = encoding;
-    }
-
-    /**
-     * Get the descriptor for this font
-     *
-     * @return the font descriptor
-     */
-    public PDFFontDescriptor getDescriptor() {
-        return this.descriptor;
-    }
-
-    /**
-     * Set the descriptor font descriptor
-     *
-     * @param descriptor a {@link org.loboevolution.pdfview.font.PDFFontDescriptor} object.
-     */
-    public void setDescriptor(final PDFFontDescriptor descriptor) {
-        this.descriptor = descriptor;
-    }
-
-    /**
-     * Get the CMap which maps the characters in this font to unicode names
-     *
-     * @return a {@link org.loboevolution.pdfview.font.cid.PDFCMap} object.
-     */
-    public PDFCMap getUnicodeMap() {
-        return this.unicodeMap;
-    }
-
-    /**
-     * Set the CMap which maps the characters in this font to unicode names
-     *
-     * @param unicodeMap a {@link org.loboevolution.pdfview.font.cid.PDFCMap} object.
-     */
-    public void setUnicodeMap(final PDFCMap unicodeMap) {
-        this.unicodeMap = unicodeMap;
     }
 
     /**

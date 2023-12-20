@@ -27,9 +27,6 @@ package org.loboevolution.html.dom;
 
 /**
  * The public interface CanvasPattern.
- *
- *
- *
  */
 public interface CanvasPattern {
 

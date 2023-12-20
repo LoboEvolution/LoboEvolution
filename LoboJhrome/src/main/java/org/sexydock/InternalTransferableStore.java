@@ -26,6 +26,8 @@
 
 package org.sexydock;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.Transferable;
@@ -33,6 +35,7 @@ import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 import java.util.UUID;
 
+@Slf4j
 public final class InternalTransferableStore {
     public static final DataFlavor INTERNAL_TRANSFERABLE_FLAVOR = new DataFlavor("application/x-sexydock-tab", "SexyDock Tab");
     private String storedUUID = null;
@@ -65,8 +68,8 @@ public final class InternalTransferableStore {
                     storedUUID = null;
                     storedObject = null;
                 }
-            } catch (final Exception ex) {
-
+            } catch (final Exception e) {
+                log.info(e.getMessage());
             }
         }
     }

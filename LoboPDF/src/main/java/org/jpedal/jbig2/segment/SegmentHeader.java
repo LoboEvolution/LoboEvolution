@@ -84,7 +84,7 @@ public class SegmentHeader {
     /**
      * <p>Getter for the field <code>segmentType</code>.</p>
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getSegmentType() {
         return segmentType;
@@ -93,7 +93,7 @@ public class SegmentHeader {
     /**
      * <p>Setter for the field <code>segmentType</code>.</p>
      *
-     * @param type a int.
+     * @param type a {@link java.lang.Integer} object.
      */
     public void setSegmentType(final int type) {
         this.segmentType = type;
@@ -102,7 +102,7 @@ public class SegmentHeader {
     /**
      * <p>Getter for the field <code>segmentNumber</code>.</p>
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getSegmentNumber() {
         return segmentNumber;
@@ -111,7 +111,7 @@ public class SegmentHeader {
     /**
      * <p>Setter for the field <code>segmentNumber</code>.</p>
      *
-     * @param SegmentNumber a int.
+     * @param SegmentNumber a {@link java.lang.Integer} object.
      */
     public void setSegmentNumber(final int SegmentNumber) {
         this.segmentNumber = SegmentNumber;
@@ -138,7 +138,7 @@ public class SegmentHeader {
     /**
      * <p>Getter for the field <code>referredToSegmentCount</code>.</p>
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getReferredToSegmentCount() {
         return referredToSegmentCount;
@@ -147,7 +147,7 @@ public class SegmentHeader {
     /**
      * <p>Setter for the field <code>referredToSegmentCount</code>.</p>
      *
-     * @param referredToSegmentCount a int.
+     * @param referredToSegmentCount a {@link java.lang.Integer} object.
      */
     public void setReferredToSegmentCount(final int referredToSegmentCount) {
         this.referredToSegmentCount = referredToSegmentCount;
@@ -174,7 +174,7 @@ public class SegmentHeader {
     /**
      * <p>Getter for the field <code>pageAssociation</code>.</p>
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getPageAssociation() {
         return pageAssociation;
@@ -183,7 +183,7 @@ public class SegmentHeader {
     /**
      * <p>Setter for the field <code>pageAssociation</code>.</p>
      *
-     * @param pageAssociation a int.
+     * @param pageAssociation a {@link java.lang.Integer} object.
      */
     public void setPageAssociation(final int pageAssociation) {
         this.pageAssociation = pageAssociation;
@@ -192,7 +192,7 @@ public class SegmentHeader {
     /**
      * <p>Setter for the field <code>dataLength</code>.</p>
      *
-     * @param dataLength a int.
+     * @param dataLength a {@link java.lang.Integer} object.
      */
     public void setDataLength(final int dataLength) {
         this.dataLength = dataLength;
@@ -201,7 +201,7 @@ public class SegmentHeader {
     /**
      * <p>getSegmentDataLength.</p>
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getSegmentDataLength() {
         return dataLength;

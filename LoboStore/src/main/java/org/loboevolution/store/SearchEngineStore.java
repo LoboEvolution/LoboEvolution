@@ -26,6 +26,8 @@
 
 package org.loboevolution.store;
 
+import lombok.Data;
+
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
@@ -35,6 +37,7 @@ import java.net.URLEncoder;
 /**
  * The Class SearchEngineStore.
  */
+@Data
 public class SearchEngineStore implements Serializable {
 
 	/** The Constant serialVersionUID. */
@@ -59,51 +62,6 @@ public class SearchEngineStore implements Serializable {
 	private String type;
 
 	/**
-	 * Gets the base url.
-	 *
-	 * @return the base url
-	 */
-	public String getBaseUrl() {
-		return this.baseUrl;
-	}
-
-	/**
-	 * Gets the description.
-	 *
-	 * @return the description
-	 */
-	public String getDescription() {
-		return this.description;
-	}
-
-	/**
-	 * Gets the name.
-	 *
-	 * @return the name
-	 */
-	public String getName() {
-		return this.name;
-	}
-
-	/**
-	 * Gets the query parameter.
-	 *
-	 * @return the query parameter
-	 */
-	public String getQueryParameter() {
-		return this.queryParameter;
-	}
-
-	/**
-	 * <p>Getter for the field type.</p>
-	 *
-	 * @return the type
-	 */
-	public String getType() {
-		return this.type;
-	}
-
-	/**
 	 * Gets the url.
 	 *
 	 * @param query the query
@@ -119,69 +77,6 @@ public class SearchEngineStore implements Serializable {
 		} catch (final UnsupportedEncodingException uee) {
 			throw new IllegalStateException("not expected", uee);
 		}
-	}
-
-	/**
-	 * <p>isSelected.</p>
-	 *
-	 * @return a boolean.
-	 */
-	public boolean isSelected() {
-		return this.isSelected;
-	}
-
-	/**
-	 * <p>Setter for the field baseUrl.</p>
-	 *
-	 * @param baseUrl the baseUrl to set
-	 */
-	public void setBaseUrl(final String baseUrl) {
-		this.baseUrl = baseUrl;
-	}
-
-	/**
-	 * <p>Setter for the field description.</p>
-	 *
-	 * @param description the description to set
-	 */
-	public void setDescription(final String description) {
-		this.description = description;
-	}
-
-	/**
-	 * Gets the name.
-	 *
-	 * @param name a {@link java.lang.String} object.
-	 */
-	public void setName(final String name) {
-		this.name = name;
-	}
-
-	/**
-	 * <p>Setter for the field queryParameter.</p>
-	 *
-	 * @param queryParameter the queryParameter to set
-	 */
-	public void setQueryParameter(final String queryParameter) {
-		this.queryParameter = queryParameter;
-	}
-
-	/**
-	 * <p>setSelected.</p>
-	 *
-	 * @param isSelected the isSelected to set
-	 */
-	public void setSelected(final boolean isSelected) {
-		this.isSelected = isSelected;
-	}
-
-	/**
-	 * <p>Setter for the field type.</p>
-	 *
-	 * @param type the type to set
-	 */
-	public void setType(final String type) {
-		this.type = type;
 	}
 
 

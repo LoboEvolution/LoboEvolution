@@ -117,7 +117,9 @@ public class HtmlRendererConfigImpl implements HtmlRendererConfig {
                 setBlackWhite(rs.getInt(24) == 1);
                 setWhiteBlack(rs.getInt(25) == 1);
             }
-        } catch (final Exception e) {}
+        } catch (final Exception e) {
+            log.info(e.getMessage());
+        }
     }
 
     @Override

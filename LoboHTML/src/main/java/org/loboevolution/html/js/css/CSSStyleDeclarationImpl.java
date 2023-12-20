@@ -292,7 +292,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
 
     @Override
     public AbstractCSSRuleImpl getParentRule() {
-        return (AbstractCSSRuleImpl) style.getParentRule();
+        return style.getParentRule();
     }
 
     @Override

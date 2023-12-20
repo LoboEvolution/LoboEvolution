@@ -173,7 +173,7 @@ public class GlyfCompound extends Glyf {
     /**
      * Get the number of components in this compound
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getNumComponents() {
         return this.components.length;
@@ -182,7 +182,7 @@ public class GlyfCompound extends Glyf {
     /**
      * Get a given flag
      *
-     * @param index a int.
+     * @param index a {@link java.lang.Integer} object.
      * @return a short.
      */
     public short getFlag(final int index) {
@@ -192,8 +192,8 @@ public class GlyfCompound extends Glyf {
     /**
      * Get the glyf index for a given glyf
      *
-     * @param index a int.
-     * @return a int.
+     * @param index a {@link java.lang.Integer} object.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getGlyphIndex(final int index) {
         return this.components[index].glyphIndex;
@@ -203,7 +203,7 @@ public class GlyfCompound extends Glyf {
      * Get the base affine transform.  This is based on a whacy formula
      * defined in the true type font spec.
      *
-     * @param index a int.
+     * @param index a {@link java.lang.Integer} object.
      * @return an array of {@link double} objects.
      */
     public double[] getTransform(final int index) {
@@ -228,8 +228,8 @@ public class GlyfCompound extends Glyf {
     /**
      * Get the point in the compound glyph to match
      *
-     * @param index a int.
-     * @return a int.
+     * @param index a {@link java.lang.Integer} object.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getCompoundPoint(final int index) {
         return this.components[index].compoundPoint;
@@ -238,8 +238,8 @@ public class GlyfCompound extends Glyf {
     /**
      * Get the point in the component glyph to match
      *
-     * @param index a int.
-     * @return a int.
+     * @param index a {@link java.lang.Integer} object.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getComponentPoint(final int index) {
         return this.components[index].componentPoint;
@@ -248,7 +248,7 @@ public class GlyfCompound extends Glyf {
     /**
      * Determine whether args 1 and 2 are words or bytes
      *
-     * @param index a int.
+     * @param index a {@link java.lang.Integer} object.
      * @return a boolean.
      */
     public boolean argsAreWords(final int index) {
@@ -258,7 +258,7 @@ public class GlyfCompound extends Glyf {
     /**
      * Determine whether args 1 and 2 are xy values or point indices
      *
-     * @param index a int.
+     * @param index a {@link java.lang.Integer} object.
      * @return a boolean.
      */
     public boolean argsAreXYValues(final int index) {
@@ -268,7 +268,7 @@ public class GlyfCompound extends Glyf {
     /**
      * Determine whether to round XY values to the grid
      *
-     * @param index a int.
+     * @param index a {@link java.lang.Integer} object.
      * @return a boolean.
      */
     public boolean roundXYToGrid(final int index) {
@@ -278,7 +278,7 @@ public class GlyfCompound extends Glyf {
     /**
      * Determine whether there is a simple scale
      *
-     * @param index a int.
+     * @param index a {@link java.lang.Integer} object.
      * @return a boolean.
      */
     public boolean hasAScale(final int index) {
@@ -288,7 +288,7 @@ public class GlyfCompound extends Glyf {
     /**
      * Determine whether there are more components left to read
      *
-     * @param index a int.
+     * @param index a {@link java.lang.Integer} object.
      * @return a boolean.
      */
     protected boolean moreComponents(final int index) {
@@ -298,7 +298,7 @@ public class GlyfCompound extends Glyf {
     /**
      * Determine whether there are separate scales on X and Y
      *
-     * @param index a int.
+     * @param index a {@link java.lang.Integer} object.
      * @return a boolean.
      */
     protected boolean hasXYScale(final int index) {
@@ -308,7 +308,7 @@ public class GlyfCompound extends Glyf {
     /**
      * Determine whether there is a 2x2 transform
      *
-     * @param index a int.
+     * @param index a {@link java.lang.Integer} object.
      * @return a boolean.
      */
     protected boolean hasTwoByTwo(final int index) {
@@ -318,7 +318,7 @@ public class GlyfCompound extends Glyf {
     /**
      * Determine whether there are instructions
      *
-     * @param index a int.
+     * @param index a {@link java.lang.Integer} object.
      * @return a boolean.
      */
     protected boolean hasInstructions(final int index) {
@@ -328,7 +328,7 @@ public class GlyfCompound extends Glyf {
     /**
      * Use the metrics of this component for the compound
      *
-     * @param index a int.
+     * @param index a {@link java.lang.Integer} object.
      * @return a boolean.
      */
     public boolean useMetrics(final int index) {
@@ -338,7 +338,7 @@ public class GlyfCompound extends Glyf {
     /**
      * This component overlaps the existing compound
      *
-     * @param index a int.
+     * @param index a {@link java.lang.Integer} object.
      * @return a boolean.
      */
     public boolean overlapCompound(final int index) {
@@ -364,7 +364,7 @@ public class GlyfCompound extends Glyf {
     /**
      * Get a given instruction
      *
-     * @param index a int.
+     * @param index a {@link java.lang.Integer} object.
      * @return a byte.
      */
     public byte getInstruction(final int index) {

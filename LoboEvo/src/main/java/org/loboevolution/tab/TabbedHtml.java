@@ -48,7 +48,7 @@ public class TabbedHtml {
 	 *
 	 * @param panel a {@link org.loboevolution.component.BrowserPanel} object.
 	 * @param url a {@link java.lang.String} object.
-	 * @param index a int.
+	 * @param index a {@link java.lang.Integer} object.
 	 */
 	public void tab(final BrowserPanel panel, final String url, final int index) {
 		final ITabbedPane tabbedPane = panel.getTabbedPane();

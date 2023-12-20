@@ -25,6 +25,7 @@
  */
 package org.loboevolution.apache.xpath;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.javax.xml.transform.SourceLocator;
 import org.loboevolution.javax.xml.transform.TransformerException;
 
@@ -36,6 +37,7 @@ import java.io.PrintWriter;
  * exceptions, printStackTrace will dump all the traces of the nested exceptions, not just the trace
  * of this object.
  */
+@Slf4j
 public class XPathException extends TransformerException {
 
   /**
@@ -66,6 +68,7 @@ public class XPathException extends TransformerException {
     try {
       super.printStackTrace(s);
     } catch (final Exception e) {
+      log.info(e.getMessage());
     }
   }
 
@@ -85,6 +88,7 @@ public class XPathException extends TransformerException {
     try {
       super.printStackTrace(s);
     } catch (final Exception e) {
+      log.info(e.getMessage());
     }
   }
 

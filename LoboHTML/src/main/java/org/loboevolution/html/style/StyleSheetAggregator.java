@@ -26,6 +26,9 @@
 
 package org.loboevolution.html.style;
 
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.htmlunit.cssparser.parser.CSSErrorHandler;
 import org.htmlunit.cssparser.parser.CSSException;
@@ -81,8 +84,13 @@ public class StyleSheetAggregator {
 
 	private final List<CSSStyleSheetImpl> styleSheets;
 
+	@Getter
+	@Setter
+	@Builder.Default
 	private boolean mouseOver = false;
 
+	@Getter
+	@Setter
 	private HTMLDocumentImpl doc;
 
 
@@ -1020,21 +1028,5 @@ public class StyleSheetAggregator {
 				}
 			}
 		}
-	}
-
-	public boolean isMouseOver() {
-		return mouseOver;
-	}
-
-	public void setMouseOver(final boolean mouseOver) {
-		this.mouseOver = mouseOver;
-	}
-
-	public HTMLDocumentImpl getDoc() {
-		return doc;
-	}
-
-	public void setDoc(final HTMLDocumentImpl doc) {
-		this.doc = doc;
 	}
 }

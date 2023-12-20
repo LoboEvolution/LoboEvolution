@@ -51,10 +51,10 @@ public class PdfSubByteSampleModel extends SampleModel {
     /**
      * <p>Constructor for PdfSubByteSampleModel.</p>
      *
-     * @param w                a int.
-     * @param h                a int.
-     * @param numComponents    a int.
-     * @param bitsPerComponent a int.
+     * @param w                a {@link java.lang.Integer} object.
+     * @param h                a {@link java.lang.Integer} object.
+     * @param numComponents    a {@link java.lang.Integer} object.
+     * @param bitsPerComponent a {@link java.lang.Integer} object.
      */
     public PdfSubByteSampleModel(final int w, final int h, final int numComponents, final int bitsPerComponent) {
         super(DataBuffer.TYPE_BYTE, w, h, numComponents);

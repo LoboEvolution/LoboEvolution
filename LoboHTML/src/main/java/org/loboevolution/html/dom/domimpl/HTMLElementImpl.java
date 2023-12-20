@@ -28,6 +28,7 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.htmlunit.cssparser.dom.CSSStyleSheetImpl;
 import org.htmlunit.cssparser.dom.CSSValueImpl;
@@ -74,6 +75,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, GlobalE
 
 	private CSSStyleDeclarationImpl localStyleDeclarationState = null;
 
+	@Getter
 	private boolean hasMouseOver;
 	
 	/**
@@ -167,8 +169,8 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, GlobalE
 	 * <p>getAttributeAsInt.</p>
 	 *
 	 * @param name a {@link java.lang.String} object.
-	 * @param defaultValue a int.
-	 * @return a int.
+	 * @param defaultValue a {@link java.lang.Integer} object.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	protected int getAttributeAsInt(final String name, final int defaultValue) {
 		final String value = getAttribute(name);
@@ -1733,10 +1735,6 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, GlobalE
 		properties3.forEach(prop -> localStyleDeclarationState.setPropertyValueProcessed(prop.getName(), prop.getValue(), prop.isImportant()));
 
 		return localStyleDeclarationState;
-	}
-
-	public boolean isHasMouseOver() {
-		return hasMouseOver;
 	}
 
 	/** {@inheritDoc} */

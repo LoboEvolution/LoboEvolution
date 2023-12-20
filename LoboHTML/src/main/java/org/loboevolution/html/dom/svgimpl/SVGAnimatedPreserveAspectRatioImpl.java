@@ -30,6 +30,8 @@ import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.html.dom.svg.SVGAnimatedPreserveAspectRatio;
 import org.loboevolution.html.dom.svg.SVGPreserveAspectRatio;
 
+import java.util.List;
+
 /**
  * <p>SVGAnimatedPreserveAspectRatioImpl class.</p>
  */
@@ -38,7 +40,7 @@ public class SVGAnimatedPreserveAspectRatioImpl extends SVGAnimatedValue impleme
     private SVGPreserveAspectRatio baseVal;
 
     public SVGAnimatedPreserveAspectRatioImpl(final SVGPreserveAspectRatio baseVal, final SVGElementImpl owner) {
-        this.owner = owner;
+        this.setOwner(owner);
         this.baseVal = baseVal;
     }
 
@@ -53,14 +55,13 @@ public class SVGAnimatedPreserveAspectRatioImpl extends SVGAnimatedValue impleme
 
     @Override
     public SVGPreserveAspectRatio getAnimVal() {
+        List<SVGAnimationElementImpl> animations = getAnimations();
         if (animations == null) {
             return baseVal;
         } else {
-            final int numAnimations = animations.size();
             SVGPreserveAspectRatio result = null;
-            for (int i = 0; i < numAnimations; i++) {
-                final SVGAnimationElementImpl animation = (SVGAnimationElementImpl) animations.get(i);
-                final SVGPreserveAspectRatio animVal = (SVGPreserveAspectRatio) animation.getCurrentValue(ANIMTYPE_PRESERVEASPECTRATIO);
+            for (SVGAnimationElementImpl svgAnimationElement : animations) {
+                final SVGPreserveAspectRatio animVal = (SVGPreserveAspectRatio) svgAnimationElement.getCurrentValue(ANIMTYPE_PRESERVEASPECTRATIO);
                 if (animVal != null) {
                     result = animVal;
                     break;

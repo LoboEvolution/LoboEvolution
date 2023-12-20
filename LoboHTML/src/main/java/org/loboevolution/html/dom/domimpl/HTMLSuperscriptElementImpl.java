@@ -40,7 +40,7 @@ public class HTMLSuperscriptElementImpl extends HTMLElementImpl {
 	 * <p>Constructor for HTMLSuperscriptElementImpl.</p>
 	 *
 	 * @param name a {@link java.lang.String} object.
-	 * @param superscript a int.
+	 * @param superscript a {@link java.lang.Integer} object.
 	 */
 	public HTMLSuperscriptElementImpl(final String name, final int superscript) {
 		super(name);

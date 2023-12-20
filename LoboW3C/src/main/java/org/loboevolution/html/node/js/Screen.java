@@ -35,42 +35,42 @@ public interface Screen {
 	/**
 	 * <p>getAvailHeight.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	int getAvailHeight();
 
 	/**
 	 * <p>getAvailWidth.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	int getAvailWidth();
 
 	/**
 	 * <p>getColorDepth.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	int getColorDepth();
 
 	/**
 	 * <p>getHeight.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	int getHeight();
 
 	/**
 	 * <p>getPixelDepth.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	int getPixelDepth();
 
 	/**
 	 * <p>getWidth.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	int getWidth();
 

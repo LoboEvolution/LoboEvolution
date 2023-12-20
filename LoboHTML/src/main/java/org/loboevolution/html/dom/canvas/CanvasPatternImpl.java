@@ -32,9 +32,6 @@ import org.loboevolution.html.dom.HTMLImageElement;
 
 /**
  * <p>CanvasPatternImpl class.</p>
- *
- *
- *
  */
 public class CanvasPatternImpl implements CanvasPattern {
 	

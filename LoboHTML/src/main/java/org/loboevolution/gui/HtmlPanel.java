@@ -28,6 +28,8 @@
  */
 package org.loboevolution.gui;
 
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.EventDispatch2;
 import org.loboevolution.common.WrapperLayout;
@@ -155,10 +157,13 @@ public class HtmlPanel extends JComponent implements FrameContext {
 
 	private volatile int preferredWidth = -1;
 
+	@Getter
 	private volatile NodeImpl rootNode;
 
 	private final EventDispatch2 selectionDispatch = new SelectionDispatch();
 
+	@Getter
+	@Setter
 	private IBrowserPanel browserPanel;
 
 	/**
@@ -264,16 +269,6 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	public BoundableRenderable getBlockRenderable() {
 		final HtmlBlockPanel htmlBlock = this.htmlBlockPanel;
 		return htmlBlock == null ? null : htmlBlock.getRootRenderable();
-	}
-
-
-	/**
-	 * Gets the HTML DOM node currently rendered if any.
-	 *
-	 * @return a {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} object.
-	 */
-	public NodeImpl getRootNode() {
-		return this.rootNode;
 	}
 
 	/**
@@ -604,23 +599,5 @@ public class HtmlPanel extends JComponent implements FrameContext {
 		removeAll();
 		this.add(shp);
 		this.nodeRenderer = shp;
-	}
-	
-	/**
-	 * <p>Getter for the field browserPanel.</p>
-	 *
-	 * @return a {@link org.loboevolution.component.IBrowserPanel} object.
-	 */
-	public IBrowserPanel getBrowserPanel() {
-		return browserPanel;
-	}
-
-	/**
-	 * <p>Setter for the field browserPanel.</p>
-	 *
-	 * @param browserPanel a {@link org.loboevolution.component.IBrowserPanel} object.
-	 */
-	public void setBrowserPanel(final IBrowserPanel browserPanel) {
-		this.browserPanel = browserPanel;
 	}
 }

@@ -125,7 +125,7 @@ public class HuffmanDecoder {
      * <p>buildTable.</p>
      *
      * @param table  an array of {@link int} objects.
-     * @param length a int.
+     * @param length a {@link java.lang.Integer} object.
      * @return an array of {@link int} objects.
      */
     public static int[][] buildTable(final int[][] table, final int length) {

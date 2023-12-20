@@ -26,6 +26,8 @@
 
 package org.loboevolution.html.dom.svgimpl;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.loboevolution.html.dom.svg.SVGPathSegCurvetoCubicAbs;
 import org.loboevolution.html.dom.svg.SVGPoint;
 import org.loboevolution.html.dom.svg.SVGPointList;
@@ -33,6 +35,8 @@ import org.loboevolution.html.dom.svg.SVGPointList;
 /**
  * <p>SVGPathSegCurvetoCubicAbsImpl class.</p>
  */
+@Getter
+@Setter
 public class SVGPathSegCurvetoCubicAbsImpl implements SVGPathSegCurvetoCubicAbs {
 
 	private float x;
@@ -80,86 +84,6 @@ public class SVGPathSegCurvetoCubicAbsImpl implements SVGPathSegCurvetoCubicAbs 
 		return "C";
 	}
 
-	/** {@inheritDoc} */
-	@Override
-	public float getX() {
-		return x;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setX(final float x) {
-		this.x = x;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public float getY() {
-		return y;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setY(final float y) {
-		this.y = y;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public float getX1() {
-		return x1;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setX1(final float x1) {
-		this.x1 = x1;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public float getY1() {
-		return y1;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setY1(final float y1) {
-		this.y1 = y1;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public float getX2() {
-		return x2;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setX2(final float x2) {
-		this.x2 = x2;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public float getY2() {
-		return y2;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setY2(final float y2) {
-		this.y2 = y2;
-	}
-
-	public SVGPointList getPoints() {
-		return points;
-	}
-
-	public void setPoints(final SVGPointList Points) {
-		this.points = Points;
-	}
-
 	private void calculatePoints(final SVGPoint startPoint) {
 		final SVGPointList points = new SVGPointListImpl();
 		final float startPointX = startPoint.getX();
@@ -178,8 +102,7 @@ public class SVGPathSegCurvetoCubicAbsImpl implements SVGPathSegCurvetoCubicAbs 
 
 		final float pre1 = 3 * stepPow1;
 		final float pre2 = 3 * stepPow2;
-		final float pre3 = stepPow3;
-		final float pre4 = 6 * stepPow2;
+        final float pre4 = 6 * stepPow2;
 		final float pre5 = 6 * stepPow3;
 
 		final float tmp1X = startPointX - controlPoint1X * 2 + controlPoint2X;
@@ -189,8 +112,8 @@ public class SVGPathSegCurvetoCubicAbsImpl implements SVGPathSegCurvetoCubicAbs 
 
 		float fx = startPointX;
 		float fy = startPointY;
-		float dfx = (controlPoint1X - startPointX) * pre1 + tmp1X * pre2 + tmp2X * pre3;
-		float dfy = (controlPoint1Y - startPointY) * pre1 + tmp1Y * pre2 + tmp2Y * pre3;
+		float dfx = (controlPoint1X - startPointX) * pre1 + tmp1X * pre2 + tmp2X * stepPow3;
+		float dfy = (controlPoint1Y - startPointY) * pre1 + tmp1Y * pre2 + tmp2Y * stepPow3;
 		float ddfx = tmp1X * pre4 + tmp2X * pre5;
 		float ddfy = tmp1Y * pre4 + tmp2Y * pre5;
 		final float dddfx = tmp2X * pre5;

@@ -26,6 +26,7 @@
 
 package org.loboevolution.pdfview.decrypt;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.pdfview.PDFObject;
 import org.loboevolution.pdfview.PDFParseException;
 
@@ -45,6 +46,7 @@ import java.util.Map;
  * See "PDF Reference version 1.7, section 3.5: Encryption"
  * Author Luke Kirby
  */
+@Slf4j
 public class PDFDecrypterFactory {
 
     /**
@@ -336,6 +338,7 @@ public class PDFDecrypterFactory {
                 final PDFObject filter = encryptDict.getDictRef("Filter");
                 return filter != null;
             } catch (final IOException e) {
+                log.info(e.getMessage());
             }
         }
         return false;

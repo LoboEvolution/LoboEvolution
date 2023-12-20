@@ -26,6 +26,7 @@
 
 package org.loboevolution.html.dom.domimpl;
 
+import lombok.Getter;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.CanvasRenderingContext2D;
 import org.loboevolution.html.dom.FileCallback;
@@ -39,6 +40,7 @@ import java.awt.image.BufferedImage;
 /**
  * The Class HTMLCanvasElementImpl.
  */
+@Getter
 public class HTMLCanvasElementImpl extends HTMLElementImpl implements HTMLCanvasElement {
 	
 	private BufferedImage image;
@@ -138,14 +140,6 @@ public class HTMLCanvasElementImpl extends HTMLElementImpl implements HTMLCanvas
 		return getClientWidth();
 	}
 
-	/**
-	 * <p>Getter for the field image.</p>
-	 *
-	 * @return the image
-	 */
-	public BufferedImage getImage() {
-		return image;
-	}
 	
 	/** {@inheritDoc} */
 	@Override

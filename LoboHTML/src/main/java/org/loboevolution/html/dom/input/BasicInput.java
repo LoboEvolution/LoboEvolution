@@ -26,6 +26,7 @@
 
 package org.loboevolution.html.dom.input;
 
+import lombok.Data;
 import org.loboevolution.common.Strings;
 import org.loboevolution.config.HtmlRendererConfig;
 import org.loboevolution.html.dom.HTMLInputElement;
@@ -44,6 +45,7 @@ import java.util.regex.Pattern;
 /**
  * <p>BasicInput class.</p>
  */
+@Data
 public class BasicInput implements FocusListener, KeyListener, CaretListener, MouseListener {
 
     private HTMLBasicInputElement element;
@@ -166,21 +168,5 @@ public class BasicInput implements FocusListener, KeyListener, CaretListener, Mo
     @Override
     public void mouseClicked(final MouseEvent e) {
         // TODO Auto-generated method stub
-    }
-
-    public HTMLBasicInputElement getElement() {
-        return element;
-    }
-
-    public void setElement(final HTMLBasicInputElement element) {
-        this.element = element;
-    }
-
-    public JTextComponent getjComponent() {
-        return jComponent;
-    }
-
-    public void setjComponent(final JTextComponent jComponent) {
-        this.jComponent = jComponent;
     }
 }

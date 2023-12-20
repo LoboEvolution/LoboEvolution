@@ -39,8 +39,8 @@ class ShiftedFloatingBounds implements FloatingBounds {
 	 *
 	 * @param prevBounds The baseline floating bounds.
 	 * @param shiftY     How much the original bounds have shifted in the Y axis.
-	 * @param shiftLeft a int.
-	 * @param shiftRight a int.
+	 * @param shiftLeft a {@link java.lang.Integer} object.
+	 * @param shiftRight a {@link java.lang.Integer} object.
 	 */
 	public ShiftedFloatingBounds(final FloatingBounds prevBounds, final int shiftLeft, final int shiftRight,
 			final int shiftY) {

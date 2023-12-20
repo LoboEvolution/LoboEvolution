@@ -473,7 +473,7 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
 	 *
 	 * @param g a {@link java.awt.Graphics} object.
 	 * @param cellRect a {@link java.awt.Rectangle} object.
-	 * @param col a int.
+	 * @param col a {@link java.lang.Integer} object.
 	 */
 	protected void paintBackground(final Graphics g, final Rectangle cellRect, final int col) {
 		final Component component = getHeaderRenderer(col);
@@ -536,8 +536,8 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
 	/**
 	 * <p>updateRolloverColumn.</p>
 	 *
-	 * @param oldColumn a int.
-	 * @param newColumn a int.
+	 * @param oldColumn a {@link java.lang.Integer} object.
+	 * @param newColumn a {@link java.lang.Integer} object.
 	 */
 	protected void updateRolloverColumn(final int oldColumn, final int newColumn) {
 		if (header == null) {

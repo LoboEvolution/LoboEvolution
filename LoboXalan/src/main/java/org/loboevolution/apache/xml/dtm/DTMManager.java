@@ -25,6 +25,7 @@
  */
 package org.loboevolution.apache.xml.dtm;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.apache.xml.dtm.ref.DTMManagerDefault;
 import org.loboevolution.apache.xml.utils.PrefixResolver;
 import org.loboevolution.html.node.Node;
@@ -46,6 +47,7 @@ import org.loboevolution.html.node.Node;
  *
  * <p>State: In progress!!
  */
+@Slf4j
 public abstract class DTMManager {
   /** Default constructor is protected on purpose. */
   protected DTMManager() {}
@@ -164,7 +166,8 @@ public abstract class DTMManager {
     try {
       /* Temp debug code - this will be removed after we test everything */
       final boolean debug = System.getProperty("dtm.debug") != null;
-    } catch (final SecurityException ex) {
+    } catch (final SecurityException e) {
+      log.info(e.getMessage());
     }
   }
 

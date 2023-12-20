@@ -345,8 +345,8 @@ public class HTMLInputElementImpl extends HTMLBasicInputElement implements HTMLI
     /**
      * <p>submitImage.</p>
      *
-     * @param x a int.
-     * @param y a int.
+     * @param x a {@link java.lang.Integer} object.
+     * @param y a {@link java.lang.Integer} object.
      */
     public void submitImage(final int x, final int y) {
         final String name = getName();

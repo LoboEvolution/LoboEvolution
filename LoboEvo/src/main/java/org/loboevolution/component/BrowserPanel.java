@@ -32,6 +32,7 @@ import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import lombok.Getter;
 import org.loboevolution.store.GeneralStore;
 import org.loboevolution.tab.DnDTabbedPane;
 import org.loboevolution.tab.TabbedHtml;
@@ -41,6 +42,7 @@ import org.loboevolution.welcome.WelcomePanel;
 /**
  * <p>BrowserPanel class.</p>
  */
+@Getter
 public class BrowserPanel extends JPanel implements IBrowserPanel {
 	private static final long serialVersionUID = 1L;
 
@@ -81,41 +83,5 @@ public class BrowserPanel extends JPanel implements IBrowserPanel {
 		}
 		this.scroll.getViewport().add(this.tabbedPane);
 		add(this.scroll);
-	}
-
-	/**
-	 * <p>Getter for the field scroll.</p>
-	 *
-	 * @return the scroll
-	 */
-	public JScrollPane getScroll() {
-		return this.scroll;
-	}
-
-	/**
-	 * <p>Getter for the field tabbedPane.</p>
-	 *
-	 * @return the tabbedPane
-	 */
-	public DnDTabbedPane getTabbedPane() {
-		return this.tabbedPane;
-	}
-
-	/**
-	 * <p>Getter for the field welcome.</p>
-	 *
-	 * @return the welcome
-	 */
-	public IWelcomePanel getWelcome() {
-		return this.welcome;
-	}
-	
-	/**
-	 * <p>Getter for the field browserFrame.</p>
-	 *
-	 * @return the browserFrame
-	 */
-	public BrowserFrame getBrowserFrame() {
-		return browserFrame;
 	}
 }

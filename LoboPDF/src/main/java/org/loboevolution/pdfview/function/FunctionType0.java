@@ -215,7 +215,7 @@ public class FunctionType0 extends PDFFunction {
     /**
      * Get the number of bits per sample
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     protected int getBitsPerSample() {
         return this.bitsPerSample;
@@ -224,7 +224,7 @@ public class FunctionType0 extends PDFFunction {
     /**
      * Set the number of bits per sample
      *
-     * @param bits a int.
+     * @param bits a {@link java.lang.Integer} object.
      */
     protected void setBitsPerSample(final int bits) {
         this.bitsPerSample = bits;
@@ -233,7 +233,7 @@ public class FunctionType0 extends PDFFunction {
     /**
      * Get the interpolation type
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     protected int getOrder() {
         return this.order;
@@ -242,7 +242,7 @@ public class FunctionType0 extends PDFFunction {
     /**
      * Set the interpolation type
      *
-     * @param order a int.
+     * @param order a {@link java.lang.Integer} object.
      */
     protected void setOrder(final int order) {
         this.order = order;

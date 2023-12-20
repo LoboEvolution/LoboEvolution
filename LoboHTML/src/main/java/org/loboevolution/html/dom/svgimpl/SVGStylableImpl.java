@@ -134,7 +134,7 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	/**
 	 * <p>getStrokeLineCap.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	public int getStrokeLineCap() {
 		final CSSStyleDeclaration style = getStyle();
@@ -160,7 +160,7 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	/**
 	 * <p>getStrokeLinejoin.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	public int getStrokeLinejoin() {
 		final CSSStyleDeclaration style = getStyle();
@@ -183,7 +183,7 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	/**
 	 * <p>getStrokeWidth.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	public int getStrokeWidth() {
 		final CSSStyleDeclaration style = getStyle();
@@ -200,7 +200,7 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	/**
 	 * <p>getStrokeMiterlimit.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	public int getStrokeMiterlimit() {
 		final CSSStyleDeclaration style = getStyle();

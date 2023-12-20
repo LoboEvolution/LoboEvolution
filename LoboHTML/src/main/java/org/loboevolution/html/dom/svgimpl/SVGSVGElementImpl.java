@@ -26,6 +26,9 @@
 
 package org.loboevolution.html.dom.svgimpl;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.html.dom.filter.IdFilter;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
@@ -48,22 +51,27 @@ import java.util.List;
 /**
  * <p>SVGSVGElementImpl class.</p>
  */
+@Slf4j
 public class SVGSVGElementImpl extends SVGLocatableImpl implements SVGSVGElement, Drawable {
 	
 	private final SVGRect viewport;
 
+	@Getter
 	private SVGViewSpec currentView;
 	
 	private SVGAnimatedRect viewBox;
 	
 	private SVGPoint currentTranslate;
 	
+	@Getter
 	private AffineTransform viewboxToViewportTransform;
 
 	private float currentScale;
 
 	private boolean useCurrentView = false;
-	
+
+	@Getter
+	@Setter
 	private boolean painted;
 
 	/**
@@ -193,12 +201,6 @@ public class SVGSVGElementImpl extends SVGLocatableImpl implements SVGSVGElement
 	@Override
 	public void setUseCurrentView(final boolean useCurrentView) {
 		this.useCurrentView = useCurrentView;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public SVGViewSpec getCurrentView() {
-		return currentView;
 	}
 
 	/** {@inheritDoc} */
@@ -388,29 +390,6 @@ public class SVGSVGElementImpl extends SVGLocatableImpl implements SVGSVGElement
 		return nodeList != null && nodeList.getLength() > 0 ? (Element)nodeList.item(0) : null;
 	}
 
-	/**
-	 * <p>isPainted.</p>
-	 *
-	 * @return the painted
-	 */
-	public boolean isPainted() {
-		return painted;
-	}
-
-	/**
-	 * <p>Setter for the field painted.</p>
-	 *
-	 * @param painted the painted to set
-	 */
-	public void setPainted(final boolean painted) {
-		this.painted = painted;
-	}
-
-
-	public AffineTransform getViewboxToViewportTransform() {
-		return viewboxToViewportTransform;
-	}
-
 	/** {@inheritDoc} */
 	@Override
 	public void draw(final Graphics2D graphics) {
@@ -456,6 +435,7 @@ public class SVGSVGElementImpl extends SVGLocatableImpl implements SVGSVGElement
 					try {
 						imageTransform.preConcatenate(screenCTM.createInverse());
 					} catch (final NoninvertibleTransformException e) {
+						log.info(e.getMessage());
 					}
 					graphics.drawImage(image, imageTransform, null);
 					graphics.setComposite(oldComposite);

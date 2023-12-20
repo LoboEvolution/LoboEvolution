@@ -148,7 +148,7 @@ public class PDFFile {
      * Is the argument a white space character according to the PDF spec?.
      * ISO Spec 32000-1:2008 - Table 1
      *
-     * @param c a int.
+     * @param c a {@link java.lang.Integer} object.
      * @return a boolean.
      */
     public static boolean isWhiteSpace(final int c) {
@@ -289,7 +289,7 @@ public class PDFFile {
      * return the number of pages in this PDFFile.  The pages will be
      * numbered from 1 to getNumPages(), inclusive.
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getNumPages() {
         try {
@@ -1650,7 +1650,7 @@ public class PDFFile {
     /**
      * Stop the rendering of a particular image on this page
      *
-     * @param pageNum a int.
+     * @param pageNum a {@link java.lang.Integer} object.
      */
     public void stop(final int pageNum) {
         final PDFParser parser = this.cache.getPageParser(pageNum);

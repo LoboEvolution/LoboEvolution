@@ -26,18 +26,19 @@
 
 package org.loboevolution.html.js.geolocation;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.loboevolution.js.AbstractScriptableDelegate;
 
 /**
  * The CoordinatesImpl class provides Java implementation of the
- * "CoordinatesImpl Interface" as detailed out in the W3C Specifications (http://www.w3.org/TR/geolocation-API/#coordinates_interface)
- *
+ * "CoordinatesImpl Interface" as detailed out in the W3C Specifications
+ * (<a href="http://www.w3.org/TR/geolocation-API/#coordinates_interface">...</a>)
  * Note: This class must not have any sub-classes to ensure W3C Specifications are being
  * strictly followed by the system or application that uses this geolocation package.
- *
- *
- *
  */
+@EqualsAndHashCode(callSuper = true)
+@Data
 public class Coordinates extends AbstractScriptableDelegate {
 	
 	/*
@@ -156,67 +157,4 @@ public class Coordinates extends AbstractScriptableDelegate {
     	this.heading = heading;
     	this.speed = speed;
     }
-
-	/**
-	 * Returns the latitude that was passed to the constructor.
-	 *
-	 * @return	the latitude.
-	 */
-	public double getLatitude() {
-		return latitude;
-	}
-
-	/**
-	 * Returns the longitude that was passed to the constructor.
-	 *
-	 * @return	the longitude.
-	 */
-	public double getLongitude() {
-		return longitude;
-	}
-
-	/**
-	 * Returns the altitude that was passed to the constructor.
-	 *
-	 * @return	the altitude.
-	 */
-	public Double getAltitude() {
-		return altitude;
-	}
-
-	/**
-	 * Returns the accuracy that was passed to the constructor.
-	 *
-	 * @return	the accuracy.
-	 */
-	public double getAccuracy() {
-		return accuracy;
-	}
-
-	/**
-	 * Returns the altitude accuracy that was passed to the constructor.
-	 *
-	 * @return	the altitude accuracy.
-	 */
-	public Double getAltitudeAccuracy() {
-		return altitudeAccuracy;
-	}
-
-	/**
-	 * Returns the heading that was passed to the constructor.
-	 *
-	 * @return the heading.
-	 */
-	public Double getHeading() {
-		return heading;
-	}
-
-	/**
-	 * Returns the speed that was passed to the constructor.
-	 *
-	 * @return the speed.
-	 */
-	public Double getSpeed() {
-		return speed;
-	}
 }

@@ -39,25 +39,19 @@ import java.util.List;
  * The Class BookmarksStore.
  */
 @Slf4j
-public class BookmarksStore implements Serializable {
+public class BookmarksStore implements QueryStore, Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	/** The Constant DB_PATH. */
 	private static final String DB_PATH = DatabseSQLite.getDatabaseDirectory();
 
-	private final String DELETE_BOOKMARKS = "DELETE FROM BOOKMARKS";
-	
-	private final String DELETE_BOOKMARKS_BY_URL = "DELETE FROM BOOKMARKS WHERE baseUrl = ?";
-
-	private final String INSERT_BOOKMARKS = "INSERT INTO BOOKMARKS (name, description, baseUrl, tags) VALUES(?,?,?,?)";
-
 	/**
 	 * <p>deleteBookmarks.</p>
 	 */
 	public void deleteBookmarks() {
 		try (final Connection conn = DriverManager.getConnection(DB_PATH);
-             final PreparedStatement pstmt = conn.prepareStatement(this.DELETE_BOOKMARKS)) {
+             final PreparedStatement pstmt = conn.prepareStatement(DELETE_BOOKMARKS)) {
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
 			log.error(e.getMessage(), e);
@@ -71,7 +65,7 @@ public class BookmarksStore implements Serializable {
 	 */
 	public void deleteBookmark(final String url) {
 		try (final Connection conn = DriverManager.getConnection(DB_PATH);
-             final PreparedStatement pstmt = conn.prepareStatement(this.DELETE_BOOKMARKS_BY_URL)) {
+             final PreparedStatement pstmt = conn.prepareStatement(DELETE_BOOKMARKS_BY_URL)) {
 			pstmt.setString(1, url.trim());
 			pstmt.executeUpdate();
 		} catch (final Exception e) {

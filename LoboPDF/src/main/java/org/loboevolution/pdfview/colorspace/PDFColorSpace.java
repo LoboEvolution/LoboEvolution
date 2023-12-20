@@ -258,7 +258,7 @@ public class PDFColorSpace {
     /**
      * get the number of components expected in the getPaint command
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getNumComponents() {
         return this.cs.getNumComponents();

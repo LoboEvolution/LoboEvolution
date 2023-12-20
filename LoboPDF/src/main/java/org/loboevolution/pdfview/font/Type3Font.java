@@ -133,7 +133,7 @@ public class Type3Font extends PDFFont {
     /**
      * Get the first character code
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getFirstChar() {
         return this.firstChar;
@@ -142,7 +142,7 @@ public class Type3Font extends PDFFont {
     /**
      * Get the last character code
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getLastChar() {
         return this.lastChar;

@@ -70,7 +70,6 @@ import java.net.*;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * The HtmlRendererContextImpl class implements the
@@ -647,8 +646,8 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 
 	/** {@inheritDoc} */
 	@Override
-    public void setCursor(final Optional<Cursor> cursorOpt) {
-        final Cursor cursor = cursorOpt.orElse(Cursor.getDefaultCursor());
+    public void setCursor(final Cursor cursorOpt) {
+        final Cursor cursor = cursorOpt != null ? cursorOpt : Cursor.getDefaultCursor();
         htmlPanel.setCursor(cursor);
     }
 
@@ -838,8 +837,6 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 					((HttpURLConnection) connection).setFixedLengthStreamingMode(postContent.length);
 				}
 				connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-				// connection.setRequestProperty("Content-Length",
-				// String.valueOf(postContent.length));
 				final OutputStream postOut = connection.getOutputStream();
 				postOut.write(postContent);
 				postOut.flush();

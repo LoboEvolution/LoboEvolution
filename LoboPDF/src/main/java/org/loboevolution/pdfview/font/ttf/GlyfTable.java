@@ -62,7 +62,7 @@ public class GlyfTable extends TrueTypeTable {
     /**
      * Get the glyph at a given index, parsing it as needed
      *
-     * @param index a int.
+     * @param index a {@link java.lang.Integer} object.
      * @return a {@link org.loboevolution.pdfview.font.ttf.Glyf} object.
      */
     public Glyf getGlyph(final int index) {

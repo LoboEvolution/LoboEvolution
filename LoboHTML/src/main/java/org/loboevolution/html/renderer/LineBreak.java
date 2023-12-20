@@ -48,7 +48,7 @@ public class LineBreak {
 	 * <p>Getter for the field breakType.</p>
 	 *
 	 * @param clearAttr a {@link java.lang.String} object.
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	public static int getBreakType(final String clearAttr) {
 		if (clearAttr == null) {
@@ -74,7 +74,7 @@ public class LineBreak {
 	/**
 	 * <p>Constructor for LineBreak.</p>
 	 *
-	 * @param breakType a int.
+	 * @param breakType a {@link java.lang.Integer} object.
 	 * @param newLineNode a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 */
 	public LineBreak(final int breakType, final ModelNode newLineNode) {
@@ -86,7 +86,7 @@ public class LineBreak {
 	/**
 	 * <p>Getter for the field breakType.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	public int getBreakType() {
 		return this.breakType;

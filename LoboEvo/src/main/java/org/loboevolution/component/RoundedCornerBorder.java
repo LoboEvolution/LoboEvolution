@@ -65,10 +65,10 @@ public class RoundedCornerBorder extends AbstractBorder {
 	/**
 	 * <p>getBorderShape.</p>
 	 *
-	 * @param x a int.
-	 * @param y a int.
-	 * @param w a int.
-	 * @param h a int.
+	 * @param x a {@link java.lang.Integer} object.
+	 * @param y a {@link java.lang.Integer} object.
+	 * @param w a {@link java.lang.Integer} object.
+	 * @param h a {@link java.lang.Integer} object.
 	 * @return a {@link java.awt.Shape} object.
 	 */
 	public Shape getBorderShape(final int x, final int y, final int w, final int h) {

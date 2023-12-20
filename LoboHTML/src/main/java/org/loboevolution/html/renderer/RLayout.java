@@ -269,8 +269,7 @@ public class RLayout {
 		@Override
 		protected RElement createRenderable(final RBlockViewport bodyLayout, final HTMLElementImpl markupElement) {
 			final UIControl control = new CanvasControl((HTMLCanvasElementImpl) markupElement);
-			return new RUIControl(markupElement,control, bodyLayout.container,
-					bodyLayout.frameContext, bodyLayout.userAgentContext);
+			return new RUIControl(markupElement,control, bodyLayout.container, bodyLayout.userAgentContext);
 		}
 	}
 
@@ -282,8 +281,7 @@ public class RLayout {
 		@Override
 		protected RElement createRenderable(final RBlockViewport bodyLayout, final HTMLElementImpl markupElement) {
 			final UIControl control = new SVGControl((SVGSVGElementImpl) markupElement);
-			return new RUIControl(markupElement,control, bodyLayout.container,
-					bodyLayout.frameContext, bodyLayout.userAgentContext);
+			return new RUIControl(markupElement,control, bodyLayout.container, bodyLayout.userAgentContext);
 		}
 	}
 
@@ -295,8 +293,7 @@ public class RLayout {
 		@Override
 		protected RElement createRenderable(final RBlockViewport bodyLayout, final HTMLElementImpl markupElement) {
 			final UIControl control = new RSSControl((RSSElementImpl) markupElement);
-			return new RUIControl(markupElement,control, bodyLayout.container,
-					bodyLayout.frameContext, bodyLayout.userAgentContext);
+			return new RUIControl(markupElement,control, bodyLayout.container, bodyLayout.userAgentContext);
 		}
 	}
 
@@ -316,7 +313,7 @@ public class RLayout {
 				control = new ImgControl(image);
 			}
 
-			return new RImgControl(markupElement, control, bodyLayout.container, bodyLayout.frameContext, bodyLayout.userAgentContext);
+			return new RImgControl(markupElement, control, bodyLayout.container, bodyLayout.userAgentContext);
 		}
 	}
 
@@ -329,8 +326,7 @@ public class RLayout {
 		@Override
 		protected RElement createRenderable(final RBlockViewport bodyLayout, final HTMLElementImpl markupElement) {
 			final UIControl control = new InputControl((HTMLInputElementImpl) markupElement);
-			return new RUIControl(markupElement,control, bodyLayout.container,
-					bodyLayout.frameContext, bodyLayout.userAgentContext);
+			return new RUIControl(markupElement,control, bodyLayout.container, bodyLayout.userAgentContext);
 		}
 	}
 
@@ -342,8 +338,7 @@ public class RLayout {
 		@Override
 		protected RElement createRenderable(final RBlockViewport bodyLayout, final HTMLElementImpl markupElement) {
 			final UIControl control = new FrameControl((HTMLIFrameElementImpl)markupElement);
-			return new RUIControl(markupElement, control, bodyLayout.container, bodyLayout.frameContext,
-					bodyLayout.userAgentContext);
+			return new RUIControl(markupElement, control, bodyLayout.container, bodyLayout.userAgentContext);
 		}
 	}
 
@@ -396,7 +391,7 @@ public class RLayout {
 		protected RElement createRenderable(final RBlockViewport bodyLayout, final HTMLElementImpl markupElement) {
 			final HtmlObject ho = this.htmlObject.get();
 			final UIControl uiControl = new UIControlWrapper(ho);
-			return new RUIControl(markupElement, uiControl, bodyLayout.container, bodyLayout.frameContext, bodyLayout.userAgentContext);
+			return new RUIControl(markupElement, uiControl, bodyLayout.container, bodyLayout.userAgentContext);
 		}
 
 		@Override
@@ -415,8 +410,7 @@ public class RLayout {
 		@Override
 		protected RElement createRenderable(final RBlockViewport bodyLayout, final HTMLElementImpl markupElement) {
 			final UIControl control = new SelectControl((HTMLSelectElementImpl) markupElement);
-			return new RUIControl(markupElement, control, bodyLayout.container, bodyLayout.frameContext,
-					bodyLayout.userAgentContext);
+			return new RUIControl(markupElement, control, bodyLayout.container, bodyLayout.userAgentContext);
 		}
 	}
 
@@ -446,8 +440,7 @@ public class RLayout {
 		@Override
 		protected RElement createRenderable(final RBlockViewport bodyLayout, final HTMLElementImpl markupElement) {
 			final UIControl control = new TextAreaControl((HTMLTextAreaElementImpl) markupElement);
-			return new RUIControl(markupElement, control, bodyLayout.container, bodyLayout.frameContext,
-					bodyLayout.userAgentContext);
+			return new RUIControl(markupElement, control, bodyLayout.container, bodyLayout.userAgentContext);
 		}
 	}
 
@@ -459,8 +452,7 @@ public class RLayout {
 		@Override
 		protected RElement createRenderable(final RBlockViewport bodyLayout, final HTMLElementImpl markupElement) {
 			final UIControl control = new ButtonControl((HTMLButtonElementImpl) markupElement);
-			return new RUIControl(markupElement, control, bodyLayout.container, bodyLayout.frameContext,
-					bodyLayout.userAgentContext);
+			return new RUIControl(markupElement, control, bodyLayout.container, bodyLayout.userAgentContext);
 		}
 	}
 }

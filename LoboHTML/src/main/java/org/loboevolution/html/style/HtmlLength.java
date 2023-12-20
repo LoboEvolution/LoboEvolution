@@ -54,7 +54,7 @@ public final class HtmlLength {
 	/**
 	 * <p>Constructor for HtmlLength.</p>
 	 *
-	 * @param pixels a int.
+	 * @param pixels a {@link java.lang.Integer} object.
 	 */
 	public HtmlLength(final int pixels) {
 		this.lengthType = PIXELS;
@@ -95,7 +95,7 @@ public final class HtmlLength {
 	/**
 	 * <p>divideBy.</p>
 	 *
-	 * @param denominator a int.
+	 * @param denominator a {@link java.lang.Integer} object.
 	 */
 	public void divideBy(final int denominator) {
 		int val = this.value;
@@ -106,8 +106,8 @@ public final class HtmlLength {
 	/**
 	 * <p>getLength.</p>
 	 *
-	 * @param availLength a int.
-	 * @return a int.
+	 * @param availLength a {@link java.lang.Integer} object.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	public int getLength(final int availLength) {
 		final int lt = this.lengthType;

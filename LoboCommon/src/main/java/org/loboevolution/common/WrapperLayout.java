@@ -28,6 +28,8 @@
  */
 package org.loboevolution.common;
 
+import lombok.Getter;
+
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -35,21 +37,11 @@ import java.awt.LayoutManager;
 
 /**
  * <p>WrapperLayout class.</p>
- *
- * Author J. H. S.
- *
  */
 public class WrapperLayout implements LayoutManager {
-	private static final WrapperLayout instance = new WrapperLayout();
 
-	/**
-	 * <p>Getter for the field instance.</p>
-	 *
-	 * @return a {@link org.loboevolution.common.WrapperLayout} object.
-	 */
-	public static WrapperLayout getInstance() {
-		return instance;
-	}
+	@Getter
+	private static final WrapperLayout instance = new WrapperLayout();
 
 
 	/** {@inheritDoc} */

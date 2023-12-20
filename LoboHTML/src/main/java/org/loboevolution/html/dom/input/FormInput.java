@@ -26,11 +26,14 @@
 
 package org.loboevolution.html.dom.input;
 
+import lombok.Data;
+
 import java.io.File;
 
 /**
  * The FormInput class contains the state of an HTML form input item.
  */
+@Data
 public class FormInput {
 
 	/** The Constant EMPTY_ARRAY. */
@@ -54,7 +57,6 @@ public class FormInput {
 	 *            The value of the input.
 	 */
 	public FormInput(final String name, final String value) {
-		super();
 		this.name = name;
 		this.textValue = value;
 		this.fileValue = null;
@@ -75,15 +77,6 @@ public class FormInput {
 	}
 
 	/**
-	 * Gets the name.
-	 *
-	 * @return the name
-	 */
-	public String getName() {
-		return this.name;
-	}
-
-	/**
 	 * Checks if is text.
 	 *
 	 * @return true, if is text
@@ -99,24 +92,6 @@ public class FormInput {
 	 */
 	public boolean isFile() {
 		return this.fileValue != null;
-	}
-
-	/**
-	 * Gets the text value.
-	 *
-	 * @return the text value
-	 */
-	public String getTextValue() {
-		return this.textValue;
-	}
-
-	/**
-	 * Gets the file value.
-	 *
-	 * @return the file value
-	 */
-	public File[] getFileValue() {
-		return this.fileValue;
 	}
 
 	/**

@@ -63,7 +63,7 @@ public interface UIControl {
 	/**
 	 * <p>getVAlign.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	default int getVAlign() {
 		return AlignValues.BASELINE.getValue();
@@ -84,18 +84,18 @@ public interface UIControl {
 	/**
 	 * <p>reset.</p>
 	 *
-	 * @param availWidth a int.
-	 * @param availHeight a int.
+	 * @param availWidth a {@link java.lang.Integer} object.
+	 * @param availHeight a {@link java.lang.Integer} object.
 	 */
 	void reset(int availWidth, final int availHeight);
 
 	/**
 	 * <p>setBounds.</p>
 	 *
-	 * @param x a int.
-	 * @param y a int.
-	 * @param width a int.
-	 * @param height a int.
+	 * @param x a {@link java.lang.Integer} object.
+	 * @param y a {@link java.lang.Integer} object.
+	 * @param width a {@link java.lang.Integer} object.
+	 * @param height a {@link java.lang.Integer} object.
 	 */
 	void setBounds(int x, final int y, final int width, final int height);
 

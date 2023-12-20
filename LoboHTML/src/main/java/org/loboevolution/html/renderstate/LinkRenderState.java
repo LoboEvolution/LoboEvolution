@@ -36,7 +36,6 @@ import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.laf.ColorFactory;
 
 import java.awt.*;
-import java.util.Optional;
 
 /**
  * <p>LinkRenderState class.</p>
@@ -79,8 +78,8 @@ public class LinkRenderState extends StyleSheetRenderState {
     }
 
     @Override
-    public Optional<Cursor> getCursor() {
-        return Optional.of(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+    public Cursor getCursor() {
+        return Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);
     }
 
     private Color linkColor() {

@@ -45,12 +45,10 @@ public class RImgControl extends RUIControl {
 	 * @param me a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 * @param widget a {@link org.loboevolution.html.control.UIControl} object.
 	 * @param container a {@link org.loboevolution.html.renderer.RenderableContainer} object.
-	 * @param frameContext a {@link org.loboevolution.html.renderer.FrameContext} object.
 	 * @param ucontext a {@link org.loboevolution.http.UserAgentContext} object.
 	 */
-	public RImgControl(final ModelNode me, final UIControl widget, final RenderableContainer container, final FrameContext frameContext,
-					   final UserAgentContext ucontext) {
-		super(me, widget, container, frameContext, ucontext);
+	public RImgControl(final ModelNode me, final UIControl widget, final RenderableContainer container, final UserAgentContext ucontext) {
+		super(me, widget, container, ucontext);
 	}
 
 	/** {@inheritDoc} */

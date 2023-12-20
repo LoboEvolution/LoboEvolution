@@ -25,6 +25,8 @@
  */
 package org.loboevolution.laf;
 
+import lombok.Getter;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -32,6 +34,7 @@ import java.util.Map;
 /**
  * <p>LAFType class.</p>
  */
+@Getter
 public enum LAFType {
 
 	ACRYL("Acryl"),
@@ -84,15 +87,6 @@ public enum LAFType {
 
 	LAFType(final String value) {
 		this.value = value;
-	}
-
-	/**
-	 * <p>Getter for the field value.</p>
-	 *
-	 * @return a {@link java.lang.String} object.
-	 */
-	public String getValue() {
-		return value;
 	}
 
 	/**

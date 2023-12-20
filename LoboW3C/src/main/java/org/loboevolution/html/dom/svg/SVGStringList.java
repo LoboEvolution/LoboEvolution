@@ -38,7 +38,7 @@ public interface SVGStringList {
 	/**
 	 * <p>getNumberOfItems.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	int getNumberOfItems();
 
@@ -61,7 +61,7 @@ public interface SVGStringList {
 	/**
 	 * <p>getItem.</p>
 	 *
-	 * @param index a int.
+	 * @param index a {@link java.lang.Integer} object.
 	 * @return a {@link java.lang.String} object.*/
 	String getItem(int index);
 
@@ -69,7 +69,7 @@ public interface SVGStringList {
 	 * <p>insertItemBefore.</p>
 	 *
 	 * @param newItem a {@link java.lang.String} object.
-	 * @param index a int.
+	 * @param index a {@link java.lang.Integer} object.
 	 * @return a {@link java.lang.String} object.
 	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
 	 */
@@ -79,7 +79,7 @@ public interface SVGStringList {
 	 * <p>replaceItem.</p>
 	 *
 	 * @param newItem a {@link java.lang.String} object.
-	 * @param index a int.
+	 * @param index a {@link java.lang.Integer} object.
 	 * @return a {@link java.lang.String} object.
 	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
 	 */
@@ -88,7 +88,7 @@ public interface SVGStringList {
 	/**
 	 * <p>removeItem.</p>
 	 *
-	 * @param index a int.
+	 * @param index a {@link java.lang.Integer} object.
 	 * @return a {@link java.lang.String} object.
 	 */
 	String removeItem(int index);

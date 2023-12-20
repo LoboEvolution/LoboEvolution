@@ -394,7 +394,7 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 	 * <p>timerDelay.</p>
 	 *
 	 * @param animate a {@link org.loboevolution.html.dom.svgimpl.SVGAnimationImpl} object.
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	public int timerDelay(final SVGAnimationImpl animate) {
 		if (animate.getDur() == 0)

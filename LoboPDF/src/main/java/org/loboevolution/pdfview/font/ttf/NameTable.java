@@ -126,8 +126,8 @@ public class NameTable extends TrueTypeTable {
     /**
      * Get the charset name for a given platform, encoding and language
      *
-     * @param platformID a int.
-     * @param encodingID a int.
+     * @param platformID a {@link java.lang.Integer} object.
+     * @param encodingID a {@link java.lang.Integer} object.
      * @return a {@link java.lang.String} object.
      */
     public static String getCharsetName(final int platformID, final int encodingID) {

@@ -258,7 +258,7 @@ public class GlyfSimple extends Glyf {
     /**
      * Get the end point of a given contour
      *
-     * @param index a int.
+     * @param index a {@link java.lang.Integer} object.
      * @return a short.
      */
     public short getContourEndPoint(final int index) {
@@ -286,7 +286,7 @@ public class GlyfSimple extends Glyf {
     /**
      * Get a given instruction
      *
-     * @param index a int.
+     * @param index a {@link java.lang.Integer} object.
      * @return a byte.
      */
     public byte getInstruction(final int index) {
@@ -314,7 +314,7 @@ public class GlyfSimple extends Glyf {
     /**
      * Get a given flag
      *
-     * @param pointIndex a int.
+     * @param pointIndex a {@link java.lang.Integer} object.
      * @return a byte.
      */
     public byte getFlag(final int pointIndex) {
@@ -324,7 +324,7 @@ public class GlyfSimple extends Glyf {
     /**
      * Determine whether the given point is on the curve
      *
-     * @param pointIndex a int.
+     * @param pointIndex a {@link java.lang.Integer} object.
      * @return a boolean.
      */
     public boolean onCurve(final int pointIndex) {
@@ -335,7 +335,7 @@ public class GlyfSimple extends Glyf {
      * Determine whether the x value for the given point is byte or short.
      * If true, it is a byte, if false it is a short
      *
-     * @param pointIndex a int.
+     * @param pointIndex a {@link java.lang.Integer} object.
      * @return a boolean.
      */
     protected boolean xIsByte(final int pointIndex) {
@@ -346,7 +346,7 @@ public class GlyfSimple extends Glyf {
      * Determine whether the x value for the given point is byte or short.
      * If true, it is a byte, if false it is a short
      *
-     * @param pointIndex a int.
+     * @param pointIndex a {@link java.lang.Integer} object.
      * @return a boolean.
      */
     protected boolean yIsByte(final int pointIndex) {
@@ -356,7 +356,7 @@ public class GlyfSimple extends Glyf {
     /**
      * Determine whether this flag repeats
      *
-     * @param pointIndex a int.
+     * @param pointIndex a {@link java.lang.Integer} object.
      * @return a boolean.
      */
     protected boolean repeat(final int pointIndex) {
@@ -367,7 +367,7 @@ public class GlyfSimple extends Glyf {
      * Determine whether the x value for the given point is the same as
      * the previous value.
      *
-     * @param pointIndex a int.
+     * @param pointIndex a {@link java.lang.Integer} object.
      * @return a boolean.
      */
     protected boolean xIsSame(final int pointIndex) {
@@ -378,7 +378,7 @@ public class GlyfSimple extends Glyf {
      * Determine whether the y value for the given point is the same as
      * the previous value.
      *
-     * @param pointIndex a int.
+     * @param pointIndex a {@link java.lang.Integer} object.
      * @return a boolean.
      */
     protected boolean yIsSame(final int pointIndex) {
@@ -397,7 +397,7 @@ public class GlyfSimple extends Glyf {
     /**
      * Get a given x coordinate
      *
-     * @param pointIndex a int.
+     * @param pointIndex a {@link java.lang.Integer} object.
      * @return a short.
      */
     public short getXCoord(final int pointIndex) {
@@ -416,7 +416,7 @@ public class GlyfSimple extends Glyf {
     /**
      * Get a given y coordinate
      *
-     * @param pointIndex a int.
+     * @param pointIndex a {@link java.lang.Integer} object.
      * @return a short.
      */
     public short getYCoord(final int pointIndex) {

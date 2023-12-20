@@ -41,8 +41,8 @@ final class MarkupUtilities {
    * <p>findRenderable.</p>
    *
    * @param renderables an array of {@link org.loboevolution.html.renderer.Renderable} objects.
-   * @param x a int.
-   * @param y a int.
+   * @param x a {@link java.lang.Integer} object.
+   * @param y a {@link java.lang.Integer} object.
    * @param vertical a boolean.
    * @return a {@link org.loboevolution.html.renderer.BoundableRenderable} object.
    */
@@ -68,8 +68,8 @@ final class MarkupUtilities {
    * <p>findRenderables.</p>
    *
    * @param renderables an array of {@link org.loboevolution.html.renderer.Renderable} objects.
-   * @param x a int.
-   * @param y a int.
+   * @param x a {@link java.lang.Integer} object.
+   * @param y a {@link java.lang.Integer} object.
    * @param vertical a boolean.
    * @return a {@link java.util.List} object.
    */

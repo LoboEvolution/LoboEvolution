@@ -39,7 +39,7 @@ public interface SVGPointList {
 	/**
 	 * <p>getNumberOfItems.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	int getNumberOfItems();
 
@@ -67,7 +67,7 @@ public interface SVGPointList {
 	/**
 	 * <p>getItem.</p>
 	 *
-	 * @param index a int.
+	 * @param index a {@link java.lang.Integer} object.
 	 * @return a {@link org.loboevolution.html.dom.svg.SVGPoint} object.
 	 * @throws DOMException if any.
 	 */
@@ -77,7 +77,7 @@ public interface SVGPointList {
 	 * <p>insertItemBefore.</p>
 	 *
 	 * @param newItem a {@link org.loboevolution.html.dom.svg.SVGPoint} object.
-	 * @param index a int.
+	 * @param index a {@link java.lang.Integer} object.
 	 * @return a {@link org.loboevolution.html.dom.svg.SVGPoint} object.
 	 * @throws DOMException if any.
 	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
@@ -92,7 +92,7 @@ public interface SVGPointList {
 	 * <p>replaceItem.</p>
 	 *
 	 * @param newItem a {@link org.loboevolution.html.dom.svg.SVGPoint} object.
-	 * @param index a int.
+	 * @param index a {@link java.lang.Integer} object.
 	 * @return a {@link org.loboevolution.html.dom.svg.SVGPoint} object.
 	 * @throws DOMException if any.
 	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
@@ -106,7 +106,7 @@ public interface SVGPointList {
 	/**
 	 * <p>removeItem.</p>
 	 *
-	 * @param index a int.
+	 * @param index a {@link java.lang.Integer} object.
 	 * @return a {@link org.loboevolution.html.dom.svg.SVGPoint} object.
 	 * @throws DOMException if any.
 	 */

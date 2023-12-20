@@ -36,7 +36,7 @@ public interface HTMLAllCollection  {
     /**
      * Returns the number of elements in the collection.
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     int getLength();
 

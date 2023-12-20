@@ -49,7 +49,7 @@ public class DOMImplementationListImpl implements DOMImplementationList {
     public DOMImplementation item(final int index) {
         final int length = getLength();
         if (index >= 0 && index < length) {
-            return (DOMImplementation) domImplementations.get(index);
+            return domImplementations.get(index);
         }
         return null;
     }

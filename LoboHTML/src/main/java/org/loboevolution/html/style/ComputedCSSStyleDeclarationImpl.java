@@ -486,7 +486,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
     @Override
     public String getCursor() {
         final RenderState rs = element.getRenderState();
-        return this.element.getParentNode() == null ? null : rs.getCursor().get().getType() == Cursor.DEFAULT_CURSOR ? "auto" : style.getCursor();
+        return this.element.getParentNode() == null ? null : rs.getCursor().getType() == Cursor.DEFAULT_CURSOR ? "auto" : style.getCursor();
     }
 
     /**

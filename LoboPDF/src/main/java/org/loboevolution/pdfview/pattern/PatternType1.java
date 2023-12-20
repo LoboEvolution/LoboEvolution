@@ -198,7 +198,7 @@ public class PatternType1 extends PDFPattern {
     /**
      * get the paint type
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getPaintType() {
         return this.paintType;
@@ -207,7 +207,7 @@ public class PatternType1 extends PDFPattern {
     /**
      * get the tiling type
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getTilingType() {
         return this.tilingType;
@@ -225,7 +225,7 @@ public class PatternType1 extends PDFPattern {
     /**
      * get the x step
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getXStep() {
         return this.xStep;
@@ -234,7 +234,7 @@ public class PatternType1 extends PDFPattern {
     /**
      * get the y step
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getYStep() {
         return this.yStep;

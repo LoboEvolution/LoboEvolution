@@ -37,7 +37,7 @@ public interface History {
 	/**
 	 * <p>getLength.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	int getLength();
 
@@ -68,7 +68,7 @@ public interface History {
 	/**
 	 * <p>go.</p>
 	 *
-	 * @param delta a int.
+	 * @param delta a {@link java.lang.Integer} object.
 	 */
 	void go(int delta);
 

@@ -51,7 +51,7 @@ public class WritableLineReader extends LineNumberReader {
 	 * <p>Constructor for WritableLineReader.</p>
 	 *
 	 * @param reader a {@link java.io.Reader} object.
-	 * @param bufferSize a int.
+	 * @param bufferSize a {@link java.lang.Integer} object.
 	 */
 	public WritableLineReader(final Reader reader, final int bufferSize) {
 		super(reader, bufferSize);

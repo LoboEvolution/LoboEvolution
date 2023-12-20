@@ -38,6 +38,8 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.*;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.loboevolution.common.Strings;
 import org.loboevolution.download.DownloadWindow;
 import org.loboevolution.menu.MenuBar;
@@ -49,6 +51,8 @@ import org.loboevolution.store.WebStore;
 /**
  * <p>BrowserFrame class.</p>
  */
+@EqualsAndHashCode(callSuper = true)
+@Data
 public class BrowserFrame extends JFrame implements IBrowserFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -118,42 +122,6 @@ public class BrowserFrame extends JFrame implements IBrowserFrame {
 				style.deleteStyle();
 			}
 		});
-	}
-
-	/**
-	 * <p>Getter for the field panel.</p>
-	 *
-	 * @return the panel
-	 */
-	public BrowserPanel getPanel() {
-		return this.panel;
-	}
-
-	/**
-	 * <p>Getter for the field toolbar.</p>
-	 *
-	 * @return the toolbar
-	 */
-	public ToolBar getToolbar() {
-		return this.toolbar;
-	}
-
-	/**
-	 * <p>Setter for the field panel.</p>
-	 *
-	 * @param panel the panel to set
-	 */
-	public void setPanel(final BrowserPanel panel) {
-		this.panel = panel;
-	}
-
-	/**
-	 * <p>Setter for the field toolbar.</p>
-	 *
-	 * @param toolbar the toolbar to set
-	 */
-	public void setToolbar(final ToolBar toolbar) {
-		this.toolbar = toolbar;
 	}
 
 	/** {@inheritDoc} */

@@ -26,6 +26,9 @@
 
 package org.loboevolution.html.js.xml;
 
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.Urls;
 import org.loboevolution.html.js.Executor;
@@ -49,9 +52,12 @@ public class XMLHttpRequest extends AbstractScriptableDelegate {
 	private boolean listenerAdded;
 	private final URL codeSource;
 	private Function onreadystatechange;
-	private final UserAgentContext pcontext;
 	private final HttpRequest request;
 	private final Scriptable scope;
+
+	@Getter
+	@Setter
+	@Builder.Default
 	private int timeout = 0;
 
 	/**
@@ -63,7 +69,6 @@ public class XMLHttpRequest extends AbstractScriptableDelegate {
 	 */
 	public XMLHttpRequest(final UserAgentContext pcontext, final java.net.URL codeSource, final Scriptable scope) {
 		this.request = pcontext.createHttpRequest();
-		this.pcontext = pcontext;
 		this.scope = scope;
 		this.codeSource = codeSource;
 	}
@@ -119,7 +124,7 @@ public class XMLHttpRequest extends AbstractScriptableDelegate {
 	/**
 	 * <p>getReadyState.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	public int getReadyState() {
 		return this.request.getReadyState();
@@ -165,7 +170,7 @@ public class XMLHttpRequest extends AbstractScriptableDelegate {
 	/**
 	 * <p>getStatus.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	public int getStatus() {
 		return this.request.getStatus();
@@ -262,13 +267,5 @@ public class XMLHttpRequest extends AbstractScriptableDelegate {
 				this.listenerAdded = true;
 			}
 		}
-	}
-
-	public int getTimeout() {
-		return timeout;
-	}
-
-	public void setTimeout(final int timeout) {
-		this.timeout = timeout;
 	}
 }

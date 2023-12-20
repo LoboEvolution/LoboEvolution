@@ -26,6 +26,8 @@
 
 package org.loboevolution.http;
 
+import lombok.Builder;
+import lombok.Setter;
 import org.loboevolution.config.HtmlRendererConfig;
 import org.loboevolution.info.GeneralInfo;
 import org.loboevolution.net.Cookie;
@@ -43,6 +45,8 @@ public class UserAgentContext {
 
 	private final HtmlRendererConfig config;
 
+	@Setter
+	@Builder.Default
 	private boolean userAgentEnabled = false;
 
 	public UserAgentContext(final HtmlRendererConfig config){
@@ -90,11 +94,6 @@ public class UserAgentContext {
 	 */
 	public boolean isNavigationEnabled() {
 		return userAgentEnabled ||settings.isNavigation();
-	}
-
-
-	public void setUserAgentEnabled(final boolean userAgentEnabled) {
-		this.userAgentEnabled = userAgentEnabled;
 	}
 
 	/**

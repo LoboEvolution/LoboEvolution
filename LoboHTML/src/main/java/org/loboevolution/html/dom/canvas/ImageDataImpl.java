@@ -47,8 +47,8 @@ public class ImageDataImpl implements ImageData {
 	 * <p>Constructor for ImageDataImpl.</p>
 	 *
 	 * @param image a {@link java.awt.image.BufferedImage} object.
-	 * @param sw a int.
-	 * @param sh a int.
+	 * @param sw a {@link java.lang.Integer} object.
+	 * @param sh a {@link java.lang.Integer} object.
 	 */
 	public ImageDataImpl(final BufferedImage image, final int sw, final int sh) {
 		this.image = image;

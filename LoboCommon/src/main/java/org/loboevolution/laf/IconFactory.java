@@ -32,6 +32,7 @@ import java.util.Map;
 
 import javax.swing.ImageIcon;
 
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.IORoutines;
 
@@ -42,6 +43,7 @@ import org.loboevolution.common.IORoutines;
 public class IconFactory {
 
 	/** The Constant instance. */
+	@Getter
 	private static final IconFactory instance = new IconFactory();
 	
 	/** The icon map. */
@@ -51,15 +53,6 @@ public class IconFactory {
 	 * Instantiates a new icon factory.
 	 */
 	private IconFactory() {
-	}
-
-	/**
-	 * Gets the Constant instance.
-	 *
-	 * @return the Constant instance
-	 */
-	public static IconFactory getInstance() {
-		return instance;
 	}
 
 	/**

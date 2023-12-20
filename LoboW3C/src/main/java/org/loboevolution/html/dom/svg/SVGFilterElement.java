@@ -92,8 +92,8 @@ public interface SVGFilterElement
 	/**
 	 * <p>setFilterRes.</p>
 	 *
-	 * @param filterResX a int.
-	 * @param filterResY a int.
+	 * @param filterResX a {@link java.lang.Integer} object.
+	 * @param filterResY a {@link java.lang.Integer} object.
 	 */
 	void setFilterRes(int filterResX, int filterResY);
 }

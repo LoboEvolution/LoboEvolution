@@ -143,7 +143,7 @@ public abstract class AbstractToolBarUI extends BasicToolBarUI {
 	 */
 	protected void changeButtonBorder(final AbstractButton b) {
 		final Object cp = b.getClientProperty("paintToolBarBorder");
-		if (cp != null && cp instanceof Boolean) {
+		if (cp instanceof Boolean) {
 			final Boolean changeBorder = (Boolean) cp;
 			if (!changeBorder) {
 				return;
@@ -282,7 +282,7 @@ public abstract class AbstractToolBarUI extends BasicToolBarUI {
 	 */
 	protected void restoreButtonBorder(final AbstractButton b) {
 		final Object cp = b.getClientProperty("paintToolBarBorder");
-		if (cp != null && cp instanceof Boolean) {
+		if (cp instanceof Boolean) {
 			final Boolean changeBorder = (Boolean) cp;
 			if (!changeBorder) {
 				return;

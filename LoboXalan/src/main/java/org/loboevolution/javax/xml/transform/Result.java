@@ -32,7 +32,20 @@ public interface Result {
     String PI_DISABLE_OUTPUT_ESCAPING = "org.loboevolution.javax.xml.transform.disable-output-escaping";
     String PI_ENABLE_OUTPUT_ESCAPING = "org.loboevolution.javax.xml.transform.enable-output-escaping";
 
+    /**
+     * Get the system identifier that was set with setSystemId.
+     *
+     * @return The system identifier that was set with setSystemId, or null
+     * if setSystemId was not called.
+     */
     String getSystemId();
 
-    void setSystemId(final String s);
+    /**
+     * Set the systemID that may be used in association
+     * with the byte or character stream, or, if neither is set, use
+     * this value as a writeable URI (probably a file name).
+     *
+     * @param systemId The system identifier as a URI string.
+     */
+    void setSystemId(final String systemId);
 }

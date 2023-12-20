@@ -40,7 +40,7 @@ public class DummyShader extends PDFShader {
     /**
      * <p>Constructor for DummyShader.</p>
      *
-     * @param type a int.
+     * @param type a {@link java.lang.Integer} object.
      */
     protected DummyShader(final int type) {
         super(type);

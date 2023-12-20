@@ -84,7 +84,7 @@ public class TextureTabbedPaneUI extends BaseTabbedPaneUI {
 	/**
 	 * <p>getSelectedTexture.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	protected int getSelectedTexture() {
 		return TextureUtils.SELECTED_TEXTURE_TYPE;
@@ -103,7 +103,7 @@ public class TextureTabbedPaneUI extends BaseTabbedPaneUI {
 	/**
 	 * <p>getTexture.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	protected int getTexture() {
 		return TextureUtils.BACKGROUND_TEXTURE_TYPE;
@@ -112,8 +112,8 @@ public class TextureTabbedPaneUI extends BaseTabbedPaneUI {
 	/**
 	 * <p>getUnSelectedTexture.</p>
 	 *
-	 * @param tabIndex a int.
-	 * @return a int.
+	 * @param tabIndex a {@link java.lang.Integer} object.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	protected int getUnSelectedTexture(final int tabIndex) {
 		if (tabIndex == rolloverIndex && tabPane.isEnabledAt(tabIndex)) {

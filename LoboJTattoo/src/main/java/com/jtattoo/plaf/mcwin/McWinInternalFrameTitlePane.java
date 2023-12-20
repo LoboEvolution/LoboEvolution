@@ -179,7 +179,7 @@ public class McWinInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
 			if (title_length > 2) {
 				final int subtitle_w = fm.stringWidth(frame.getTitle().substring(0, 2) + "...");
-				width += title_w < subtitle_w ? title_w : subtitle_w;
+				width += Math.min(title_w, subtitle_w);
 			} else {
 				width += title_w;
 			}

@@ -25,12 +25,17 @@
  */
 package org.loboevolution.pdfview.font.ttf;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.nio.ByteBuffer;
 
 /**
  * The base class for TrueType tables.  Specific tables can extend this
  * to add more functionality
  */
+@NoArgsConstructor(force = true)
+@Data
 public class TrueTypeTable {
 
     /**
@@ -114,7 +119,7 @@ public class TrueTypeTable {
      */
     public static TrueTypeTable createTable(final TrueTypeFont ttf,
                                             final String tagString, final ByteBuffer data) {
-        TrueTypeTable outTable = null;
+        TrueTypeTable outTable;
 
         final int tag = stringToTag(tagString);
 
@@ -161,7 +166,7 @@ public class TrueTypeTable {
     /**
      * Get the tag as a string
      *
-     * @param tag a int.
+     * @param tag a {@link java.lang.Integer} object.
      * @return a {@link java.lang.String} object.
      */
     public static String tagToString(final int tag) {
@@ -178,7 +183,7 @@ public class TrueTypeTable {
      * Turn a string into a tag
      *
      * @param tag a {@link java.lang.String} object.
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public static int stringToTag(final String tag) {
         final char[] c = tag.toCharArray();
@@ -191,36 +196,9 @@ public class TrueTypeTable {
     }
 
     /**
-     * Get the table's tag
-     *
-     * @return a int.
-     */
-    public int getTag() {
-        return this.tag;
-    }
-
-    /**
-     * Get the data in the table
-     *
-     * @return a {@link java.nio.ByteBuffer} object.
-     */
-    public ByteBuffer getData() {
-        return this.data;
-    }
-
-    /**
-     * Set the data in the table
-     *
-     * @param data a {@link java.nio.ByteBuffer} object.
-     */
-    public void setData(final ByteBuffer data) {
-        this.data = data;
-    }
-
-    /**
      * Get the size of the table, in bytes
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getLength() {
         return getData().remaining();

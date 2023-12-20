@@ -38,7 +38,7 @@ public interface SVGTransformList {
 	/**
 	 * <p>getNumberOfItems.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	int getNumberOfItems();
 
@@ -66,7 +66,7 @@ public interface SVGTransformList {
 	/**
 	 * <p>getItem.</p>
 	 *
-	 * @param index a int.
+	 * @param index a {@link java.lang.Integer} object.
 	 * @return a {@link org.loboevolution.html.dom.svg.SVGTransform} object.
 	 * @throws DOMException if any.
 	 */
@@ -76,7 +76,7 @@ public interface SVGTransformList {
 	 * <p>insertItemBefore.</p>
 	 *
 	 * @param newItem a {@link org.loboevolution.html.dom.svg.SVGTransform} object.
-	 * @param index a int.
+	 * @param index a {@link java.lang.Integer} object.
 	 * @return a {@link org.loboevolution.html.dom.svg.SVGTransform} object.
 	 * @throws DOMException if any.
 	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
@@ -91,7 +91,7 @@ public interface SVGTransformList {
 	 * <p>replaceItem.</p>
 	 *
 	 * @param newItem a {@link org.loboevolution.html.dom.svg.SVGTransform} object.
-	 * @param index a int.
+	 * @param index a {@link java.lang.Integer} object.
 	 * @return a {@link org.loboevolution.html.dom.svg.SVGTransform} object.
 	 * @throws DOMException if any.
 	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
@@ -105,7 +105,7 @@ public interface SVGTransformList {
 	/**
 	 * <p>removeItem.</p>
 	 *
-	 * @param index a int.
+	 * @param index a {@link java.lang.Integer} object.
 	 * @return a {@link org.loboevolution.html.dom.svg.SVGTransform} object.
 	 * @throws DOMException if any.
 	 */

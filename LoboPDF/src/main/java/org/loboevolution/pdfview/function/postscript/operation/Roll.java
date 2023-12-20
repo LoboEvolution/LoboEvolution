@@ -34,7 +34,7 @@ final class Roll implements PostScriptOperation {
      * <p>popAsInteger.</p>
      *
      * @param st a {@link java.util.Stack} object.
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public static int popAsInteger(final Deque<Object> st) {
         final Object e = st.pop();

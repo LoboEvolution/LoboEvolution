@@ -34,8 +34,8 @@ class LineMargin {
 	 * <p>Constructor for LineMargin.</p>
 	 *
 	 * @param next a {@link org.loboevolution.html.renderer.LineMargin} object.
-	 * @param cleary a int.
-	 * @param totalXOffset a int.
+	 * @param cleary a {@link java.lang.Integer} object.
+	 * @param totalXOffset a {@link java.lang.Integer} object.
 	 */
 	public LineMargin(final LineMargin next, final int cleary, final int totalXOffset) {
 		super();
@@ -58,7 +58,7 @@ class LineMargin {
 	/**
 	 * <p>Getter for the field clearY.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	public int getClearY() {
 		return this.clearY;
@@ -76,7 +76,7 @@ class LineMargin {
 	/**
 	 * <p>getOffset.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	public int getOffset() {
 		return this.clearX;
@@ -85,8 +85,8 @@ class LineMargin {
 	/**
 	 * <p>translated.</p>
 	 *
-	 * @param yoffset a int.
-	 * @param xoffset a int.
+	 * @param yoffset a {@link java.lang.Integer} object.
+	 * @param xoffset a {@link java.lang.Integer} object.
 	 * @return a {@link org.loboevolution.html.renderer.LineMargin} object.
 	 */
 	public LineMargin translated(final int yoffset, final int xoffset) {

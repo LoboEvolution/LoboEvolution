@@ -131,7 +131,7 @@ public class MMRDecoder {
     /**
      * <p>skipTo.</p>
      *
-     * @param length a int.
+     * @param length a {@link java.lang.Integer} object.
      */
     public void skipTo(final int length) {
         while (noOfBytesRead < length) {
@@ -159,7 +159,7 @@ public class MMRDecoder {
     /**
      * <p>get2DCode.</p>
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int get2DCode() {
         int[] tuple;
@@ -210,7 +210,7 @@ public class MMRDecoder {
     /**
      * <p>getWhiteCode.</p>
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getWhiteCode() {
         int[] tuple;
@@ -265,7 +265,7 @@ public class MMRDecoder {
     /**
      * <p>getBlackCode.</p>
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getBlackCode() {
         int[] tuple;

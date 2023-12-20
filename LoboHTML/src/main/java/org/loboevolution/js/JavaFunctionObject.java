@@ -117,7 +117,8 @@ public class JavaFunctionObject extends ScriptableObject implements Function {
 		for (final Method m : methods) {
 			final Class[] parameterTypes = m.getParameterTypes();
 			boolean isParameterTypes = Arrays.stream(parameterTypes).findAny().isPresent();
-			if (args == null) {
+			if (args == null || args.length == 0) {
+
 				if (!isParameterTypes) {
 					return m;
 				}

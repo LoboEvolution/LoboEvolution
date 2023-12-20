@@ -26,6 +26,8 @@
 
 package org.loboevolution.pdfview.font.ttf;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.loboevolution.pdfview.PDFDebugger;
 
 import java.nio.ByteBuffer;
@@ -36,6 +38,8 @@ import java.util.Arrays;
  * <p>
  * Author  jkaplan
  */
+@EqualsAndHashCode(callSuper = true)
+@Data
 public class PostTable extends TrueTypeTable {
 
     /**
@@ -206,168 +210,6 @@ public class PostTable extends TrueTypeTable {
     }
 
     /**
-     * Getter for property format.
-     *
-     * @return Value of property format.
-     */
-    public int getFormat() {
-        return this.format;
-    }
-
-    /**
-     * Setter for property format.
-     *
-     * @param format New value of property format.
-     */
-    public void setFormat(final int format) {
-        this.format = format;
-    }
-
-    /**
-     * Getter for property italicAngle.
-     *
-     * @return Value of property italicAngle.
-     */
-    public int getItalicAngle() {
-        return this.italicAngle;
-    }
-
-    /**
-     * Setter for property italicAngle.
-     *
-     * @param italicAngle New value of property italicAngle.
-     */
-    public void setItalicAngle(final int italicAngle) {
-        this.italicAngle = italicAngle;
-    }
-
-    /**
-     * Getter for property underlinePosition.
-     *
-     * @return Value of property underlinePosition.
-     */
-    public short getUnderlinePosition() {
-        return this.underlinePosition;
-    }
-
-    /**
-     * Setter for property underlinePosition.
-     *
-     * @param underlinePosition New value of property underlinePosition.
-     */
-    public void setUnderlinePosition(final short underlinePosition) {
-        this.underlinePosition = underlinePosition;
-    }
-
-    /**
-     * Getter for property underlineThickness.
-     *
-     * @return Value of property underlineThickness.
-     */
-    public short getUnderlineThickness() {
-        return this.underlineThickness;
-    }
-
-    /**
-     * Setter for property underlineThickness.
-     *
-     * @param underlineThickness New value of property underlineThickness.
-     */
-    public void setUnderlineThickness(final short underlineThickness) {
-        this.underlineThickness = underlineThickness;
-    }
-
-    /**
-     * Getter for property isFixedPitch.
-     *
-     * @return Value of property isFixedPitch.
-     */
-    public short getIsFixedPitch() {
-        return this.isFixedPitch;
-    }
-
-    /**
-     * Setter for property isFixedPitch.
-     *
-     * @param isFixedPitch New value of property isFixedPitch.
-     */
-    public void setIsFixedPitch(final short isFixedPitch) {
-        this.isFixedPitch = isFixedPitch;
-    }
-
-    /**
-     * Getter for property minMemType42.
-     *
-     * @return Value of property minMemType42.
-     */
-    public int getMinMemType42() {
-        return this.minMemType42;
-    }
-
-    /**
-     * Setter for property minMemType42.
-     *
-     * @param minMemType42 New value of property minMemType42.
-     */
-    public void setMinMemType42(final int minMemType42) {
-        this.minMemType42 = minMemType42;
-    }
-
-    /**
-     * Getter for property maxMemType42.
-     *
-     * @return Value of property maxMemType42.
-     */
-    public int getMaxMemType42() {
-        return this.maxMemType42;
-    }
-
-    /**
-     * Setter for property maxMemType42.
-     *
-     * @param maxMemType42 New value of property maxMemType42.
-     */
-    public void setMaxMemType42(final int maxMemType42) {
-        this.maxMemType42 = maxMemType42;
-    }
-
-    /**
-     * Getter for property minMemType1.
-     *
-     * @return Value of property minMemType1.
-     */
-    public int getMinMemType1() {
-        return this.minMemType1;
-    }
-
-    /**
-     * Setter for property minMemType1.
-     *
-     * @param minMemType1 New value of property minMemType1.
-     */
-    public void setMinMemType1(final int minMemType1) {
-        this.minMemType1 = minMemType1;
-    }
-
-    /**
-     * Getter for property maxMemType1.
-     *
-     * @return Value of property maxMemType1.
-     */
-    public int getMaxMemType1() {
-        return this.maxMemType1;
-    }
-
-    /**
-     * Setter for property maxMemType1.
-     *
-     * @param maxMemType1 New value of property maxMemType1.
-     */
-    public void setMaxMemType1(final int maxMemType1) {
-        this.maxMemType1 = maxMemType1;
-    }
-
-    /**
      * An empty post map
      */
     static class PostMap {
@@ -404,7 +246,6 @@ public class PostTable extends TrueTypeTable {
          */
         void setData(final ByteBuffer data) {
             // do nothing
-            return;
         }
     }
 
@@ -452,7 +293,6 @@ public class PostTable extends TrueTypeTable {
         };
 
         @Override
-        /** map a name to a character index */
         short getCharIndex(final String charName) {
             for (int i = 0; i < this.stdNames.length; i++) {
                 if (charName.equals(this.stdNames[i])) {
@@ -464,29 +304,10 @@ public class PostTable extends TrueTypeTable {
         }
 
         @Override
-        /** name a character index to a name */
         String getCharName(final char charIndex) {
             return this.stdNames[charIndex];
         }
 
-        @Override
-        /** get the length of the data in this map */
-        int getLength() {
-            return 0;
-        }
-
-        @Override
-        /** get the data in this map as a ByteBuffer */
-        ByteBuffer getData() {
-            return ByteBuffer.allocate(0);
-        }
-
-        @Override
-        /** set the data in this map from a ByteBuffer */
-        void setData(final ByteBuffer data) {
-            // do nothing
-            return;
-        }
     }
 
     /**
@@ -504,7 +325,6 @@ public class PostTable extends TrueTypeTable {
         String[] glyphNames;
 
         @Override
-        /** Map a character name to an index */
         short getCharIndex(final String charName) {
             // find the index of this character name
             short idx = -1;
@@ -535,7 +355,6 @@ public class PostTable extends TrueTypeTable {
         }
 
         @Override
-        /** Map an index to a character name */
         String getCharName(final char charIndex) {
             if (charIndex >= this.stdNames.length) {
                 return this.glyphNames[charIndex - this.stdNames.length];
@@ -545,7 +364,6 @@ public class PostTable extends TrueTypeTable {
         }
 
         @Override
-        /** get the length of this class's data */
         int getLength() {
             // the size of the header plus the table of mappings
             int size = 2 + (2 * this.glyphNameIndex.length);
@@ -560,7 +378,6 @@ public class PostTable extends TrueTypeTable {
         }
 
         @Override
-        /** get the data in this map as a byte array */
         ByteBuffer getData() {
             final ByteBuffer buf = ByteBuffer.allocate(getLength());
 
@@ -585,7 +402,6 @@ public class PostTable extends TrueTypeTable {
         }
 
         @Override
-        /** set the contents of this map from a ByteBuffer */
         void setData(final ByteBuffer data) {
             final short numGlyphs = data.getShort();
             this.glyphNameIndex = new short[numGlyphs];

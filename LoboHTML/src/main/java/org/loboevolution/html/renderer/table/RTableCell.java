@@ -98,7 +98,7 @@ public class RTableCell extends RBlock {
 	/**
 	 * <p>Getter for the field colSpan.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	public int getColSpan() {
 		int cs = this.colSpan;
@@ -135,7 +135,7 @@ public class RTableCell extends RBlock {
 	/**
 	 * <p>Getter for the field rowSpan.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	public int getRowSpan() {
 		int rs = this.rowSpan;
@@ -218,9 +218,9 @@ public class RTableCell extends RBlock {
 	 *
 	 * @param colSizes an array of {@link org.loboevolution.info.SizeInfo} objects.
 	 * @param rowSizes an array of {@link org.loboevolution.info.SizeInfo} objects.
-	 * @param hasBorder a int.
-	 * @param cellSpacingX a int.
-	 * @param cellSpacingY a int.
+	 * @param hasBorder a {@link java.lang.Integer} object.
+	 * @param cellSpacingX a {@link java.lang.Integer} object.
+	 * @param cellSpacingY a {@link java.lang.Integer} object.
 	 */
 	public void setCellBounds(final SizeInfo[] colSizes, final SizeInfo[] rowSizes, final int hasBorder,
 							  final int cellSpacingX, final int cellSpacingY) {
@@ -277,7 +277,7 @@ public class RTableCell extends RBlock {
 	/**
 	 * <p>Setter for the field rowSpan.</p>
 	 *
-	 * @param rowSpan a int.
+	 * @param rowSpan a {@link java.lang.Integer} object.
 	 */
 	public void setRowSpan(final int rowSpan) {
 		this.rowSpan = rowSpan;

@@ -26,6 +26,8 @@
 
 package org.loboevolution.html.js;
 
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
@@ -42,6 +44,9 @@ import java.net.URL;
  */
 @Slf4j
 public class LocationImpl extends AbstractScriptableDelegate implements Location {
+
+	@Getter
+	@Setter
 	private String target;
 
 	private final WindowImpl window;
@@ -161,17 +166,6 @@ public class LocationImpl extends AbstractScriptableDelegate implements Location
 		return query == null ? "" : "?" + query;
 	}
 
-	/**
-	 * <p>
-	 * Getter for the field target.
-	 * </p>
-	 *
-	 * @return a {@link java.lang.String} object.
-	 */
-	public String getTarget() {
-		return this.target;
-	}
-
 	private URL getURL() {
 		URL url;
 		try {
@@ -239,22 +233,9 @@ public class LocationImpl extends AbstractScriptableDelegate implements Location
 		}
 	}
 
-	/**
-	 * <p>
-	 * Setter for the field target.
-	 * </p>
-	 *
-	 * @param value a {@link java.lang.String} object.
-	 */
-	public void setTarget(final String value) {
-		this.target = value;
-	}
-
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {
-		// This needs to be href. Callers
-		// rely on that.
 		return getHref();
 	}
 

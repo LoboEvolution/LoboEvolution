@@ -224,7 +224,7 @@ public class PDFTextFormat implements Cloneable {
     /**
      * Get the mode of the text
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getMode() {
         return this.tm;
@@ -245,7 +245,7 @@ public class PDFTextFormat implements Cloneable {
      * corresponds to the hight bit being 1; and Stroke corresponds
      * to the middle xor low bit being 1.
      *
-     * @param m a int.
+     * @param m a {@link java.lang.Integer} object.
      */
     public void setMode(final int m) {
         int mode = 0;

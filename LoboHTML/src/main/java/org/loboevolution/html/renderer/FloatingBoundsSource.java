@@ -29,7 +29,7 @@ public interface FloatingBoundsSource {
 	/**
 	 * <p>getChildBlockFloatingBounds.</p>
 	 *
-	 * @param apparentBlockWidth a int.
+	 * @param apparentBlockWidth a {@link java.lang.Integer} object.
 	 * @return a {@link org.loboevolution.html.renderer.FloatingBounds} object.
 	 */
 	FloatingBounds getChildBlockFloatingBounds(int apparentBlockWidth);

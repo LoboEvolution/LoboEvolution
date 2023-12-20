@@ -26,6 +26,8 @@
 
 package org.loboevolution.html.parser;
 
+import lombok.Builder;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.common.Strings;
@@ -93,6 +95,8 @@ public class XHtmlParser {
 
 	private boolean needRoot = false;
 
+	@Getter
+	@Builder.Default
 	private final Map<String, String> namespaces = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
 
 	/**
@@ -1375,9 +1379,5 @@ public class XHtmlParser {
 		} else {
 			element.setAttribute(attributeName, attributeValue);
 		}
-	}
-
-	public Map<String, String> getNamespaces() {
-		return namespaces;
 	}
 }

@@ -44,16 +44,16 @@ import org.loboevolution.type.VisibilityState;
  */
 public interface Document extends Node, NonElementParentNode, ParentNode, DocumentTraversal {
 
-	/** Constant <code>XMLNS_NAMESPACE_URI="http://www.w3.org/2000/xmlns/"</code> */
+	/** Constant <code>XMLNS_NAMESPACE_URI="<a href="http://www.w3.org/2000/xmlns/">...</a>"</code> */
 	String XMLNS_NAMESPACE_URI = "http://www.w3.org/2000/xmlns/";
 
-	/** Constant <code>XML_NAMESPACE_URI="http://www.w3.org/XML/1998/namespace"</code> */
+	/** Constant <code>XML_NAMESPACE_URI="<a href="http://www.w3.org/XML/1998/namespace">...</a>"</code> */
 	String XML_NAMESPACE_URI = "http://www.w3.org/XML/1998/namespace";
 
-	/** Constant <code>HTML_NAMESPACE_URI="http://www.w3.org/1999/xhtml"</code> */
+	/** Constant <code>HTML_NAMESPACE_URI="<a href="http://www.w3.org/1999/xhtml">...</a>"</code> */
 	String HTML_NAMESPACE_URI = "http://www.w3.org/1999/xhtml";
 
-	/** Constant <code>NAMESPACE_SVG="http://www.w3.org/2000/svg"</code> */
+	/** Constant <code>NAMESPACE_SVG="<a href="http://www.w3.org/2000/svg">...</a>"</code> */
 	String NAMESPACE_SVG = "http://www.w3.org/2000/svg";
 
 	/**

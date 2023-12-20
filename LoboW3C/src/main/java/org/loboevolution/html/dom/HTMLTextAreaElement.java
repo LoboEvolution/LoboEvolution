@@ -68,7 +68,7 @@ public interface HTMLTextAreaElement extends HTMLElement {
     /**
      * Sets or retrieves the width of the object.
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     int getCols();
 
@@ -145,7 +145,7 @@ public interface HTMLTextAreaElement extends HTMLElement {
     /**
      * Sets or retrieves the maximum number of characters that the user can enter in a text control.
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     int getMaxLength();
 
@@ -153,7 +153,7 @@ public interface HTMLTextAreaElement extends HTMLElement {
     /**
      * <p>setMaxLength.</p>
      *
-     * @param maxLength a int.
+     * @param maxLength a {@link java.lang.Integer} object.
      */
     void setMaxLength(int maxLength);
 
@@ -161,7 +161,7 @@ public interface HTMLTextAreaElement extends HTMLElement {
     /**
      * <p>getMinLength.</p>
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     int getMinLength();
 
@@ -169,7 +169,7 @@ public interface HTMLTextAreaElement extends HTMLElement {
     /**
      * <p>setMinLength.</p>
      *
-     * @param minLength a int.
+     * @param minLength a {@link java.lang.Integer} object.
      */
     void setMinLength(int minLength);
 
@@ -236,7 +236,7 @@ public interface HTMLTextAreaElement extends HTMLElement {
     /**
      * Sets or retrieves the number of horizontal rows contained in the object.
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     int getRows();
 
@@ -267,7 +267,7 @@ public interface HTMLTextAreaElement extends HTMLElement {
     /**
      * Gets or sets the end position or offset of a text selection.
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     int getSelectionEnd();
 
@@ -275,28 +275,28 @@ public interface HTMLTextAreaElement extends HTMLElement {
     /**
      * <p>setSelectionEnd.</p>
      *
-     * @param selectionEnd a int.
+     * @param selectionEnd a {@link java.lang.Integer} object.
      */
     void setSelectionEnd(int selectionEnd);
 
     /**
      * Gets or sets the starting position or offset of a text selection.
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     int getSelectionStart();
 
     /**
      * <p>setSelectionStart.</p>
      *
-     * @param selectionStart a int.
+     * @param selectionStart a {@link java.lang.Integer} object.
      */
     void setSelectionStart(int selectionStart);
 
     /**
      * <p>getTextLength.</p>
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     int getTextLength();
 
@@ -389,8 +389,8 @@ public interface HTMLTextAreaElement extends HTMLElement {
      * <p>setRangeText.</p>
      *
      * @param replacement a {@link java.lang.String} object.
-     * @param start       a int.
-     * @param end         a int.
+     * @param start       a {@link java.lang.Integer} object.
+     * @param end         a {@link java.lang.Integer} object.
      */
     void setRangeText(String replacement, int start, int end);
 
@@ -406,8 +406,8 @@ public interface HTMLTextAreaElement extends HTMLElement {
     /**
      * <p>setSelectionRange.</p>
      *
-     * @param start a int.
-     * @param end   a int.
+     * @param start a {@link java.lang.Integer} object.
+     * @param end   a {@link java.lang.Integer} object.
      */
     void setSelectionRange(int start, int end);
 

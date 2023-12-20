@@ -1435,7 +1435,7 @@ public abstract class ElementImpl extends NodeImpl implements Element {
 					} else if (elm instanceof HTMLDDElementImpl) {
 						h.addAndGet(17);
 					} else {
-						h.addAndGet((int)Strings.texMeasure(((Text)child).getTextContent(), elm.getRenderState().getFont()).getHeight());
+						h.addAndGet((int)Strings.texMeasure(child.getTextContent(), elm.getRenderState().getFont()).getHeight());
 					}
 					break;
 				case Node.ELEMENT_NODE:

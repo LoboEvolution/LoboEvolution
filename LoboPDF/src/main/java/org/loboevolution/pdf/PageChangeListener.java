@@ -33,7 +33,7 @@ public interface PageChangeListener {
     /**
      * Notifies the listener that it should go to a particular page number.
      *
-     * @param page a int.
+     * @param page a {@link java.lang.Integer} object.
      */
     void gotoPage(int page);
 }

@@ -54,8 +54,8 @@ public interface HtmlObject {
 	 * based on element children or attributes and possibly change its preferred
 	 * size if appropriate.
 	 *
-	 * @param availableWidth a int.
-	 * @param availableHeight a int.
+	 * @param availableWidth a {@link java.lang.Integer} object.
+	 * @param availableHeight a {@link java.lang.Integer} object.
 	 */
 	void reset(int availableWidth, final int availableHeight);
 

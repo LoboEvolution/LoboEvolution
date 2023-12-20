@@ -61,7 +61,7 @@ public interface SVGTextContentElement
 	/**
 	 * <p>getNumberOfChars.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	int getNumberOfChars();
 
@@ -75,8 +75,8 @@ public interface SVGTextContentElement
 	/**
 	 * <p>getSubStringLength.</p>
 	 *
-	 * @param charnum a int.
-	 * @param nchars a int.
+	 * @param charnum a {@link java.lang.Integer} object.
+	 * @param nchars a {@link java.lang.Integer} object.
 	 * @return a float.
 	 * @throws DOMException if any.
 	 */
@@ -85,7 +85,7 @@ public interface SVGTextContentElement
 	/**
 	 * <p>getStartPositionOfChar.</p>
 	 *
-	 * @param charnum a int.
+	 * @param charnum a {@link java.lang.Integer} object.
 	 * @return a {@link org.loboevolution.html.dom.svg.SVGPoint} object.
 	 * @throws DOMException if any.
 	 */
@@ -94,7 +94,7 @@ public interface SVGTextContentElement
 	/**
 	 * <p>getEndPositionOfChar.</p>
 	 *
-	 * @param charnum a int.
+	 * @param charnum a {@link java.lang.Integer} object.
 	 * @return a {@link org.loboevolution.html.dom.svg.SVGPoint} object.
 	 * @throws DOMException if any.
 	 */
@@ -103,7 +103,7 @@ public interface SVGTextContentElement
 	/**
 	 * <p>getExtentOfChar.</p>
 	 *
-	 * @param charnum a int.
+	 * @param charnum a {@link java.lang.Integer} object.
 	 * @return a {@link org.loboevolution.html.dom.svg.SVGRect} object.
 	 * @throws DOMException if any.
 	 */
@@ -112,7 +112,7 @@ public interface SVGTextContentElement
 	/**
 	 * <p>getRotationOfChar.</p>
 	 *
-	 * @param charnum a int.
+	 * @param charnum a {@link java.lang.Integer} object.
 	 * @return a float.
 	 * @throws DOMException if any.
 	 */
@@ -122,15 +122,15 @@ public interface SVGTextContentElement
 	 * <p>getCharNumAtPosition.</p>
 	 *
 	 * @param point a {@link org.loboevolution.html.dom.svg.SVGPoint} object.
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	int getCharNumAtPosition(SVGPoint point);
 
 	/**
 	 * <p>selectSubString.</p>
 	 *
-	 * @param charnum a int.
-	 * @param nchars a int.
+	 * @param charnum a {@link java.lang.Integer} object.
+	 * @param nchars a {@link java.lang.Integer} object.
 	 * @throws DOMException if any.
 	 */
 	void selectSubString(int charnum, int nchars);

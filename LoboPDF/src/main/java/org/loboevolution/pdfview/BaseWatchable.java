@@ -217,7 +217,7 @@ public abstract class BaseWatchable implements Watchable, Runnable {
     /**
      * Set the status of this watchable
      *
-     * @param status a int.
+     * @param status a {@link java.lang.Integer} object.
      */
     protected void setStatus(final int status) {
         synchronized (this.statusLock) {

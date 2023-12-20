@@ -51,7 +51,7 @@ public interface CharacterData extends Node, NonDocumentTypeChildNode {
 	/**
 	 * <p>getLength.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	int getLength();
 
@@ -65,15 +65,15 @@ public interface CharacterData extends Node, NonDocumentTypeChildNode {
 	/**
 	 * <p>deleteData.</p>
 	 *
-	 * @param offset a int.
-	 * @param count a int.
+	 * @param offset a {@link java.lang.Integer} object.
+	 * @param count a {@link java.lang.Integer} object.
 	 */
 	void deleteData(int offset, int count);
 
 	/**
 	 * <p>insertData.</p>
 	 *
-	 * @param offset a int.
+	 * @param offset a {@link java.lang.Integer} object.
 	 * @param data a {@link java.lang.String} object.
 	 */
 	void insertData(int offset, String data);
@@ -81,8 +81,8 @@ public interface CharacterData extends Node, NonDocumentTypeChildNode {
 	/**
 	 * <p>replaceData.</p>
 	 *
-	 * @param offset a int.
-	 * @param count a int.
+	 * @param offset a {@link java.lang.Integer} object.
+	 * @param count a {@link java.lang.Integer} object.
 	 * @param data a {@link java.lang.String} object.
 	 */
 	void replaceData(int offset, int count, String data);
@@ -90,8 +90,8 @@ public interface CharacterData extends Node, NonDocumentTypeChildNode {
 	/**
 	 * <p>substringData.</p>
 	 *
-	 * @param offset a int.
-	 * @param count a int.
+	 * @param offset a {@link java.lang.Integer} object.
+	 * @param count a {@link java.lang.Integer} object.
 	 * @return a {@link java.lang.String} object.
 	 */
 	String substringData(int offset, int count);

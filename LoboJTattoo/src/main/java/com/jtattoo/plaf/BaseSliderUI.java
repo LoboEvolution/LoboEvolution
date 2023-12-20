@@ -178,7 +178,7 @@ public class BaseSliderUI extends BasicSliderUI {
 	/**
 	 * <p>getTrackWidth.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	protected int getTrackWidth() {
 		if (slider.getOrientation() == SwingConstants.HORIZONTAL) {

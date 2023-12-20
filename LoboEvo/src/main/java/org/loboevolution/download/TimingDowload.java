@@ -74,7 +74,7 @@ public class TimingDowload {
     /**
      * <p>getElapsedText.</p>
      *
-     * @param cl a int.
+     * @param cl a {@link java.lang.Integer} object.
      * @return a {@link java.lang.String} object.
      */
     public static String getElapsedText(final int cl) {

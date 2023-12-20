@@ -256,7 +256,7 @@ public class CIDFontType2 extends TTFFont {
     /**
      * Get the default vertical width in text space
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getDefaultWidthVertical() {
         return this.defaultWidthVertical;

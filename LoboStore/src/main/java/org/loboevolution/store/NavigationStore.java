@@ -41,26 +41,16 @@ import org.loboevolution.info.BookmarkInfo;
  * <p>NavigationStore class.</p>
  */
 @Slf4j
-public class NavigationStore {
+public class NavigationStore implements QueryStore {
 
 	/** The Constant DB_PATH. */
 	private static final String DB_PATH = DatabseSQLite.getDatabaseDirectory();
-
-	private final String DELETE_HOST = "DELETE FROM HOST";
-	
-	private final String DELETE_HOST_BY_URL = "DELETE FROM HOST where baseUrl = ?";
-
-	private final String HOST = "SELECT DISTINCT baseUrl, name FROM HOST ORDER BY dt DESC LIMIT ?";
-	
-	private final String HOST_TAB = "SELECT baseUrl, name FROM HOST where tab = ? ORDER BY dt DESC";
-
-	private final String INSERT_HOST = "INSERT INTO HOST (baseUrl, name, tab, dt) VALUES(?,?,?, strftime('%Y-%m-%d %H:%M:%S', 'now'))";
 
 	/**
 	 * <p>addAsRecent.</p>
 	 *
 	 * @param uri a {@link java.lang.String} object.
-	 * @param index a int.
+	 * @param index a {@link java.lang.Integer} object.
 	 * @param title a {@link java.lang.String} object.
 	 */
 	public void addAsRecent(final String uri, final String title, final int index) {
@@ -105,7 +95,7 @@ public class NavigationStore {
 	/**
 	 * <p>getRecentHost.</p>
 	 *
-	 * @param index a int.
+	 * @param index a {@link java.lang.Integer} object.
 	 * @param isTab a boolean.
 	 * @return a {@link java.util.List} object.
 	 */

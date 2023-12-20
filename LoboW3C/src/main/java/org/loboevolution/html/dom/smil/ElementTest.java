@@ -38,14 +38,14 @@ public interface ElementTest {
      * @exception DOMException
      *                NO_MODIFICATION_ALLOWED_ERR: Raised if this attribute is
      *                readonly.
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     int getSystemBitrate();
 
     /**
      * <p>setSystemBitrate.</p>
      *
-     * @param systemBitrate a int.
+     * @param systemBitrate a {@link java.lang.Integer} object.
      * @throws DOMException if any.
      */
     void setSystemBitrate(int systemBitrate) throws DOMException;

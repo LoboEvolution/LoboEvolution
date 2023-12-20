@@ -26,6 +26,7 @@
 
 package org.loboevolution.pdfview.decode;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.pdfview.PDFObject;
 import org.loboevolution.pdfview.PDFParseException;
 
@@ -43,6 +44,7 @@ import java.nio.ByteBuffer;
  * <p>
  * Author Mike Wessler
  */
+@Slf4j
 public class DCTDecode {
 
     /**
@@ -106,9 +108,7 @@ public class DCTDecode {
                 bimg.getGraphics().drawImage(img, 0, 0, null);
             }
         } catch (final Exception ex) {
-            final PDFParseException ex2 = new PDFParseException("DCTDecode failed");
-            ex2.initCause(ex);
-            throw ex2;
+            throw new PDFParseException("DCTDecode failed", ex);
         }
 
         return bimg;
@@ -120,6 +120,7 @@ public class DCTDecode {
  * Image tracker.  I'm not sure why I'm not using the default Java
  * image tracker for this one.
  */
+@Slf4j
 class MyTracker implements ImageObserver {
     boolean done = false;
 
@@ -157,7 +158,8 @@ class MyTracker implements ImageObserver {
         if (!this.done) {
             try {
                 wait();
-            } catch (final InterruptedException ie) {
+            } catch (final InterruptedException e) {
+                log.info(e.getMessage());
             }
         }
     }

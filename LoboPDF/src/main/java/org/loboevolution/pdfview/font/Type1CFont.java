@@ -284,8 +284,8 @@ public class Type1CFont extends OutlineFont {
     /**
      * return the number of entries in an Index table.
      *
-     * @param loc a int.
-     * @return a int.
+     * @param loc a {@link java.lang.Integer} object.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getTableLength(final int loc) {
         final int hold = this.pos;
@@ -589,7 +589,7 @@ public class Type1CFont extends OutlineFont {
      * to determine what the offset should be.
      *
      * @param base the index of the start of the dictionary
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int calcoffset(final int base) {
         final int len = getTableLength(base);

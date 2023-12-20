@@ -28,6 +28,7 @@
  */
 package org.loboevolution.html.renderer;
 
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.dom.nodeimpl.ModelNode;
@@ -53,6 +54,7 @@ abstract class BaseBoundableRenderable extends RRectangle implements BoundableRe
 
 	protected final RenderableContainer container;
 
+	@Setter
 	private BoundableRenderable delegator;
 
 	protected boolean layoutUpTreeCanBeInvalidated = true;
@@ -99,7 +101,7 @@ abstract class BaseBoundableRenderable extends RRectangle implements BoundableRe
 	/**
 	 * <p>getVisualHeight.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	public int getVisualHeight() {
 		return getHeight();
@@ -108,7 +110,7 @@ abstract class BaseBoundableRenderable extends RRectangle implements BoundableRe
 	/**
 	 * <p>getVisualWidth.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	public int getVisualWidth() {
 		return getWidth();
@@ -412,16 +414,16 @@ abstract class BaseBoundableRenderable extends RRectangle implements BoundableRe
 	}
 
 	private static void resetCursorOnMouseOut(final ModelNode nodeStart, final ModelNode limit) {
-		Optional<Cursor> foundCursorOpt = Optional.empty();
+		Cursor foundCursorOpt = null;
 		ModelNode node = limit;
 		while (node != null) {
 
 			if (node instanceof NodeImpl) {
 				final NodeImpl uiElement = (NodeImpl) node;
 				final RenderState rs = uiElement.getRenderState();
-				final Optional<Cursor> cursorOpt = rs.getCursor();
+				final Cursor cursorOpt = rs.getCursor();
 				foundCursorOpt = cursorOpt;
-				if (cursorOpt.isPresent()) {
+				if (cursorOpt == null) {
 					break;
 				}
 			}
@@ -527,10 +529,6 @@ abstract class BaseBoundableRenderable extends RRectangle implements BoundableRe
 	@Override
 	public void setParent(final RCollection parent) {
 		this.parent = parent;
-	}
-
-	public void setDelegator(final BoundableRenderable pDelegator) {
-		this.delegator = pDelegator;
 	}
 
 	public boolean isDelegated() {

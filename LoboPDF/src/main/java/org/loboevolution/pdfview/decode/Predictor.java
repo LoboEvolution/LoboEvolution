@@ -70,7 +70,7 @@ public abstract class Predictor {
      * Create an instance of a predictor.  Use <code>getPredictor()</code>
      * instead of this.
      *
-     * @param algorithm a int.
+     * @param algorithm a {@link java.lang.Integer} object.
      */
     protected Predictor(final int algorithm) {
         this.algorithm = algorithm;
@@ -159,7 +159,7 @@ public abstract class Predictor {
     /**
      * Get the number of colors per sample
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getColors() {
         return this.colors;
@@ -168,7 +168,7 @@ public abstract class Predictor {
     /**
      * Set the number of colors per sample
      *
-     * @param colors a int.
+     * @param colors a {@link java.lang.Integer} object.
      */
     protected void setColors(final int colors) {
         this.colors = colors;
@@ -177,7 +177,7 @@ public abstract class Predictor {
     /**
      * Get the number of bits per color component
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getBitsPerComponent() {
         return this.bpc;
@@ -186,7 +186,7 @@ public abstract class Predictor {
     /**
      * Set the number of bits per color component
      *
-     * @param bpc a int.
+     * @param bpc a {@link java.lang.Integer} object.
      */
     public void setBitsPerComponent(final int bpc) {
         this.bpc = bpc;
@@ -195,7 +195,7 @@ public abstract class Predictor {
     /**
      * Get the number of columns
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getColumns() {
         return this.columns;
@@ -204,7 +204,7 @@ public abstract class Predictor {
     /**
      * Set the number of columns
      *
-     * @param columns a int.
+     * @param columns a {@link java.lang.Integer} object.
      */
     public void setColumns(final int columns) {
         this.columns = columns;

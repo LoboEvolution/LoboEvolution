@@ -43,10 +43,10 @@ public class ParentFloatingBoundsSource implements FloatingBoundsSource {
 	/**
 	 * <p>Constructor for ParentFloatingBoundsSource.</p>
 	 *
-	 * @param blockShiftRight a int.
-	 * @param expectedWidth a int.
-	 * @param newX a int.
-	 * @param newY a int.
+	 * @param blockShiftRight a {@link java.lang.Integer} object.
+	 * @param expectedWidth a {@link java.lang.Integer} object.
+	 * @param newX a {@link java.lang.Integer} object.
+	 * @param newY a {@link java.lang.Integer} object.
 	 * @param floatBounds a {@link org.loboevolution.html.renderer.FloatingBounds} object.
 	 */
 	public ParentFloatingBoundsSource(final int blockShiftRight, final int expectedWidth, final int newX, final int newY,

@@ -46,7 +46,7 @@ public class TrueTypeFont {
     /**
      * Creates a new instance of TrueTypeParser
      *
-     * @param type a int.
+     * @param type a {@link java.lang.Integer} object.
      */
     public TrueTypeFont(final int type) {
         this.type = type;
@@ -168,7 +168,7 @@ public class TrueTypeFont {
     /**
      * Get the type of this font
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getType() {
         return this.type;

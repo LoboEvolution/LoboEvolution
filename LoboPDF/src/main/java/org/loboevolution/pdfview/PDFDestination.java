@@ -252,7 +252,7 @@ public class PDFDestination {
     /**
      * Get the type of this destination
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getType() {
         return this.type;

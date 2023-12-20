@@ -37,7 +37,7 @@ public interface ParentNode extends Node {
     /**
      * <p>getChildElementCount.</p>
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     int getChildElementCount();
 

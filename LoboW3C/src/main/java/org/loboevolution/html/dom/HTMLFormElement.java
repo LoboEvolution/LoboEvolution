@@ -118,7 +118,7 @@ public interface HTMLFormElement extends HTMLElement {
     /**
      * Sets or retrieves the number of objects in a collection.
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     int getLength();
 

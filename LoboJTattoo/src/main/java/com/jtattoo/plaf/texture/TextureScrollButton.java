@@ -43,8 +43,8 @@ public class TextureScrollButton extends XPScrollButton {
 	/**
 	 * <p>Constructor for TextureScrollButton.</p>
 	 *
-	 * @param direction a int.
-	 * @param width a int.
+	 * @param direction a {@link java.lang.Integer} object.
+	 * @param width a {@link java.lang.Integer} object.
 	 */
 	public TextureScrollButton(final int direction, final int width) {
 		super(direction, width);

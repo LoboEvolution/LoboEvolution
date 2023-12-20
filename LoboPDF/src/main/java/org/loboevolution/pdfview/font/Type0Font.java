@@ -71,7 +71,7 @@ public class Type0Font extends PDFFont {
     /**
      * Get a descendant font of this font by fontId
      *
-     * @param fontID a int.
+     * @param fontID a {@link java.lang.Integer} object.
      * @return a {@link org.loboevolution.pdfview.font.PDFFont} object.
      */
     public PDFFont getDescendantFont(final int fontID) {

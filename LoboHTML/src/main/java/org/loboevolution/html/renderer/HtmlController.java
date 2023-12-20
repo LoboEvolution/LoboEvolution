@@ -82,8 +82,8 @@ public class HtmlController {
 	 *
 	 * @param node a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 * @param event a {@link java.awt.event.MouseEvent} object.
-	 * @param x a int.
-	 * @param y a int.
+	 * @param x a {@link java.lang.Integer} object.
+	 * @param y a {@link java.lang.Integer} object.
 	 * @return a boolean.
 	 */
 	public boolean onContextMenu(final ModelNode node, final MouseEvent event, final int x, final int y) {
@@ -118,8 +118,8 @@ public class HtmlController {
 	 * @return True to propagate further, false if consumed.
 	 * @param node a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 * @param event a {@link java.awt.event.MouseEvent} object.
-	 * @param x a int.
-	 * @param y a int.
+	 * @param x a {@link java.lang.Integer} object.
+	 * @param y a {@link java.lang.Integer} object.
 	 */
 	public boolean onDoubleClick(final ModelNode node, final MouseEvent event, final int x, final int y) {
 		if (node instanceof HTMLElementImpl) {
@@ -159,8 +159,8 @@ public class HtmlController {
 	 * @return True to propagate further and false if the event was consumed.
 	 * @param node a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 * @param event a {@link java.awt.event.MouseEvent} object.
-	 * @param x a int.
-	 * @param y a int.
+	 * @param x a {@link java.lang.Integer} object.
+	 * @param y a {@link java.lang.Integer} object.
 	 */
 	public boolean onMouseClick(final ModelNode node, final MouseEvent event, final int x, final int y) {
 		if (node instanceof HTMLElementImpl) {
@@ -228,8 +228,8 @@ public class HtmlController {
 	 * @return True to propagate further, false if consumed.
 	 * @param node a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 * @param event a {@link java.awt.event.MouseEvent} object.
-	 * @param x a int.
-	 * @param y a int.
+	 * @param x a {@link java.lang.Integer} object.
+	 * @param y a {@link java.lang.Integer} object.
 	 */
 	public boolean onMouseDown(final ModelNode node, final MouseEvent event, final int x, final int y) {
 		boolean pass = true;
@@ -265,8 +265,8 @@ public class HtmlController {
 	 *
 	 * @param modelNode a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 * @param event a {@link java.awt.event.MouseEvent} object.
-	 * @param x a int.
-	 * @param y a int.
+	 * @param x a {@link java.lang.Integer} object.
+	 * @param y a {@link java.lang.Integer} object.
 	 * @param limit a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 */
 	public void onMouseOut(final ModelNode modelNode, final MouseEvent event, final int x, final int y, final ModelNode limit) {
@@ -295,8 +295,8 @@ public class HtmlController {
 	 *
 	 * @param modelNode a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 * @param event a {@link java.awt.event.MouseEvent} object.
-	 * @param x a int.
-	 * @param y a int.
+	 * @param x a {@link java.lang.Integer} object.
+	 * @param y a {@link java.lang.Integer} object.
 	 * @param limit a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 */
 	public void onMouseMoved(final ModelNode modelNode, final MouseEvent event, final int x, final int y, final ModelNode limit) {
@@ -322,8 +322,8 @@ public class HtmlController {
 	 *
 	 * @param modelNode a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 * @param event a {@link java.awt.event.MouseEvent} object.
-	 * @param x a int.
-	 * @param y a int.
+	 * @param x a {@link java.lang.Integer} object.
+	 * @param y a {@link java.lang.Integer} object.
 	 * @param limit a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 */
 	public void onMouseOver(final ModelNode modelNode, final MouseEvent event, final int x, final int y, final ModelNode limit) {
@@ -376,14 +376,14 @@ public class HtmlController {
 				final NodeImpl uiElement = (NodeImpl) node;
 				final HtmlRendererContext rcontext = uiElement.getHtmlRendererContext();
 				final RenderState rs = uiElement.getRenderState();
-				final Optional<Cursor> cursorOpt = rs.getCursor();
-				if (cursorOpt.isPresent()) {
+				final Cursor cursorOpt = rs.getCursor();
+				if (cursorOpt != null) {
 					rcontext.setCursor(cursorOpt);
 					break;
 				} else {
 					if (node.getParentModelNode() == limit) {
 						if (renderable instanceof RWord || renderable instanceof RBlank) {
-							rcontext.setCursor(Optional.of(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR)));
+							rcontext.setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
 						}
 					}
 				}
@@ -398,8 +398,8 @@ public class HtmlController {
 	 * @return True to propagate further, false if consumed.
 	 * @param node a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 * @param event a {@link java.awt.event.MouseEvent} object.
-	 * @param x a int.
-	 * @param y a int.
+	 * @param x a {@link java.lang.Integer} object.
+	 * @param y a {@link java.lang.Integer} object.
 	 */
 	public boolean onMouseUp(final ModelNode node, final MouseEvent event, final int x, final int y) {
 		boolean pass = true;

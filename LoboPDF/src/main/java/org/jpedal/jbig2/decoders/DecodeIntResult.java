@@ -36,7 +36,7 @@ public class DecodeIntResult {
     /**
      * <p>Constructor for DecodeIntResult.</p>
      *
-     * @param intResult     a int.
+     * @param intResult     a {@link java.lang.Integer} object.
      * @param booleanResult a boolean.
      */
     public DecodeIntResult(final int intResult, final boolean booleanResult) {
@@ -47,7 +47,7 @@ public class DecodeIntResult {
     /**
      * <p>intResult.</p>
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int intResult() {
         return intResult;

@@ -25,6 +25,9 @@
  */
 package org.loboevolution.pdfview.font;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import org.loboevolution.pdfview.PDFObject;
 
 import java.awt.geom.GeneralPath;
@@ -34,6 +37,8 @@ import java.io.IOException;
 /**
  * Supports width operations for Type1, Type1C, TrueType and Type3 fonts
  */
+@EqualsAndHashCode(callSuper = true)
+@Data
 public abstract class OutlineFont extends PDFFont {
 
     /**
@@ -84,27 +89,9 @@ public abstract class OutlineFont extends PDFFont {
     }
 
     /**
-     * Get the first character code
-     *
-     * @return a int.
-     */
-    public int getFirstChar() {
-        return this.firstChar;
-    }
-
-    /**
-     * Get the last character code
-     *
-     * @return a int.
-     */
-    public int getLastChar() {
-        return this.lastChar;
-    }
-
-    /**
      * Get the default width in text space
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getDefaultWidth() {
         return 1000;
@@ -113,7 +100,7 @@ public abstract class OutlineFont extends PDFFont {
     /**
      * Get the number of characters
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getCharCount() {
         return (getLastChar() - getFirstChar()) + 1;

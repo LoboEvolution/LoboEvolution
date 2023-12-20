@@ -69,7 +69,7 @@ public class HmtxTable extends TrueTypeTable {
     /**
      * get the advance of a given glyph
      *
-     * @param glyphID a int.
+     * @param glyphID a {@link java.lang.Integer} object.
      * @return a short.
      */
     public short getAdvance(final int glyphID) {
@@ -83,7 +83,7 @@ public class HmtxTable extends TrueTypeTable {
     /**
      * get the left side bearing of a given glyph
      *
-     * @param glyphID a int.
+     * @param glyphID a {@link java.lang.Integer} object.
      * @return a short.
      */
     public short getLeftSideBearing(final int glyphID) {

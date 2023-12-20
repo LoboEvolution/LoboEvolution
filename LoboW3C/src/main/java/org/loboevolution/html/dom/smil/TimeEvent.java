@@ -46,7 +46,7 @@ public interface TimeEvent extends Event {
      * Specifies some detail information about the Event ,
      * depending on the type of event.
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     int getDetail();
 

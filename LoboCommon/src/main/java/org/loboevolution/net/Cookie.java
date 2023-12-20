@@ -28,15 +28,16 @@
  */
 package org.loboevolution.net;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 /**
  * The Class Cookie.
- *
- * Author J. H. S.
- *
  */
+@Getter
 public class Cookie extends NameValuePair {
 	
 	/** The comment. */
@@ -46,6 +47,7 @@ public class Cookie extends NameValuePair {
 	private String domain;
 	
 	/** The expires. */
+	@Setter
 	private String expires;
 	
 	/** The max age. */
@@ -105,34 +107,6 @@ public class Cookie extends NameValuePair {
 		firePropertyChange("comment", old, getComment());
 	}
 
-	/**
-	 * Gets the comment.
-	 *
-	 * @return the comment
-	 */
-	public String getComment() {
-		return comment;
-	}
-
-	/**
-	 * Gets the expires.
-	 *
-	 * @return the expires
-	 */
-	public String getExpires() {
-		return expires;
-	}
-
-	/**
-	 * <p>Setter for the field expires.</p>
-	 *
-	 * @param expires the expires to set
-	 */
-	public void setExpires(final String expires) {
-		this.expires = expires;
-	}
-
-
 
 	/**
 	 * Sets the domain.
@@ -146,14 +120,6 @@ public class Cookie extends NameValuePair {
 		firePropertyChange("domain", old, getDomain());
 	}
 
-	/**
-	 * Gets the domain.
-	 *
-	 * @return the domain
-	 */
-	public String getDomain() {
-		return domain;
-	}
 
 	/**
 	 * Sets the max age.
@@ -165,15 +131,6 @@ public class Cookie extends NameValuePair {
 		final long old = getMaxAge();
 		this.maxAge = age;
 		firePropertyChange("maxAge", old, getMaxAge());
-	}
-
-	/**
-	 * Gets the max age.
-	 *
-	 * @return the max age
-	 */
-	public int getMaxAge() {
-		return maxAge;
 	}
 
 	/**
@@ -189,15 +146,6 @@ public class Cookie extends NameValuePair {
 	}
 
 	/**
-	 * Gets the path.
-	 *
-	 * @return the path
-	 */
-	public String getPath() {
-		return path;
-	}
-
-	/**
 	 * Sets the secure.
 	 *
 	 * @param secure
@@ -207,15 +155,6 @@ public class Cookie extends NameValuePair {
 		final boolean old = isSecure();
 		this.secure = secure;
 		firePropertyChange("secure", old, isSecure());
-	}
-
-	/**
-	 * Checks if is secure.
-	 *
-	 * @return the secure
-	 */
-	public boolean isSecure() {
-		return secure;
 	}
 
 	/**
@@ -231,24 +170,6 @@ public class Cookie extends NameValuePair {
 	}
 
 	/**
-	 * Gets the version.
-	 *
-	 * @return the version
-	 */
-	public int getVersion() {
-		return version;
-	}
-
-	/**
-	 * <p>isHttpOnly.</p>
-	 *
-	 * @return a boolean.
-	 */
-	public boolean isHttpOnly() {
-		return httpOnly;
-	}
-
-	/**
 	 * <p>Setter for the field httpOnly.</p>
 	 *
 	 * @param httpOnly a boolean.
@@ -257,13 +178,5 @@ public class Cookie extends NameValuePair {
 		final boolean old = isHttpOnly();
 		this.httpOnly = httpOnly;
 		firePropertyChange("httpOnly", old, isHttpOnly());
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public String toString() {
-		return "Cookie [" + getName() + "=" + getValue() + ", " + "Comment=" + getComment() + ", " + "Domain="
-				+ getDomain() + ", " + "Max-Age=" + getMaxAge() + ", " + "Path=" + getPath() + ", " + "Secure="
-				+ isSecure() + ", " + "Version=" + getVersion() + "]";
 	}
 }

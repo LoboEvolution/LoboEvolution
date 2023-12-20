@@ -93,7 +93,7 @@ public class ArithmeticDecoder {
     /**
      * <p>resetIntStats.</p>
      *
-     * @param symbolCodeLength a int.
+     * @param symbolCodeLength a {@link java.lang.Integer} object.
      */
     public void resetIntStats(final int symbolCodeLength) {
         iadhStats.reset();
@@ -120,7 +120,7 @@ public class ArithmeticDecoder {
     /**
      * <p>resetGenericStats.</p>
      *
-     * @param template      a int.
+     * @param template      a {@link java.lang.Integer} object.
      * @param previousStats a {@link org.jpedal.jbig2.decoders.ArithmeticDecoderStats} object.
      */
     public void resetGenericStats(final int template, final ArithmeticDecoderStats previousStats) {
@@ -144,7 +144,7 @@ public class ArithmeticDecoder {
     /**
      * <p>resetRefinementStats.</p>
      *
-     * @param template      a int.
+     * @param template      a {@link java.lang.Integer} object.
      * @param previousStats a {@link org.jpedal.jbig2.decoders.ArithmeticDecoderStats} object.
      */
     public void resetRefinementStats(final int template, final ArithmeticDecoderStats previousStats) {
@@ -271,7 +271,7 @@ public class ArithmeticDecoder {
      *
      * @param context a long.
      * @param stats   a {@link org.jpedal.jbig2.decoders.ArithmeticDecoderStats} object.
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      * @throws java.io.IOException if any.
      */
     public int decodeBit(final long context, final ArithmeticDecoderStats stats) throws IOException {

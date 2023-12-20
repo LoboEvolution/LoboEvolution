@@ -41,8 +41,8 @@ class LocatorImpl implements Locator {
 	 *
 	 * @param pid a {@link java.lang.String} object.
 	 * @param sid a {@link java.lang.String} object.
-	 * @param lnumber a int.
-	 * @param cnumber a int.
+	 * @param lnumber a {@link java.lang.Integer} object.
+	 * @param cnumber a {@link java.lang.Integer} object.
 	 */
 	public LocatorImpl(final String pid, final String sid, final int lnumber, final int cnumber) {
 		super();

@@ -52,7 +52,7 @@ public class RefinementRegionSegment extends RegionSegment {
      * @param streamDecoder         a {@link org.jpedal.jbig2.decoders.JBIG2StreamDecoder} object.
      * @param inlineImage           a boolean.
      * @param referedToSegments     an array of {@link int} objects.
-     * @param noOfReferedToSegments a int.
+     * @param noOfReferedToSegments a {@link java.lang.Integer} object.
      */
     public RefinementRegionSegment(final JBIG2StreamDecoder streamDecoder, final boolean inlineImage, final int[] referedToSegments, final int noOfReferedToSegments) {
         super(streamDecoder);

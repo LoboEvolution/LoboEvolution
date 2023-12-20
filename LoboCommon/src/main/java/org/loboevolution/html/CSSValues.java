@@ -25,6 +25,8 @@
  */
 package org.loboevolution.html;
 
+import lombok.Getter;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -32,6 +34,7 @@ import java.util.Map;
 /**
  * <p>CSSValues class.</p>
  */
+@Getter
 public enum CSSValues {
 
 	ABSOLUTE("absolute"),
@@ -311,7 +314,7 @@ public enum CSSValues {
 	ZOOM_IN("zoom-in"),
 
 	ZOOM_OUT("zoom-out");
-	
+
 	private final String value;
 	private static final Map<String, CSSValues> ENUM_MAP;
 	
@@ -325,15 +328,6 @@ public enum CSSValues {
 
 	CSSValues(final String value) {
 		this.value = value;
-	}
-
-	/**
-	 * <p>Getter for the field value.</p>
-	 *
-	 * @return a {@link java.lang.String} object.
-	 */
-	public String getValue() {
-		return value;
 	}
 
 	/**

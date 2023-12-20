@@ -52,7 +52,7 @@ public interface Text extends CharacterData {
     /**
      * Splits data at the given offset and returns the remainder as Text node.
      *
-     * @param offset a int.
+     * @param offset a {@link java.lang.Integer} object.
      * @return a {@link org.loboevolution.html.node.Text} object.
      */
     Text splitText(int offset);

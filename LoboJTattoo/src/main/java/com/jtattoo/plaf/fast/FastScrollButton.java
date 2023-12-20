@@ -52,8 +52,8 @@ public class FastScrollButton extends BaseScrollButton {
 	/**
 	 * <p>Constructor for FastScrollButton.</p>
 	 *
-	 * @param direction a int.
-	 * @param width a int.
+	 * @param direction a {@link java.lang.Integer} object.
+	 * @param width a {@link java.lang.Integer} object.
 	 */
 	public FastScrollButton(final int direction, final int width) {
 		super(direction, width);

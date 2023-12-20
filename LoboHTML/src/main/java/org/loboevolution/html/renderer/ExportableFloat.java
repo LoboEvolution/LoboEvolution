@@ -44,8 +44,8 @@ public class ExportableFloat {
 	 *
 	 * @param element a {@link org.loboevolution.html.renderer.BoundableRenderable} object.
 	 * @param leftFloat a boolean.
-	 * @param origX a int.
-	 * @param origY a int.
+	 * @param origX a {@link java.lang.Integer} object.
+	 * @param origY a {@link java.lang.Integer} object.
 	 */
 	public ExportableFloat(final BoundableRenderable element, final boolean leftFloat, final int origX, final int origY) {
 		super();

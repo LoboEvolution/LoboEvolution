@@ -25,6 +25,7 @@
  */
 package org.loboevolution.html.dom.canvas;
 
+import lombok.Data;
 import org.loboevolution.html.dom.CanvasGradient;
 import org.loboevolution.laf.ColorFactory;
 
@@ -36,10 +37,8 @@ import java.util.List;
 
 /**
  * The Class CanvasGradientImpl.
- *
- *
- *
  */
+@Data
 public class CanvasGradientImpl implements CanvasGradient {
 
 	/** The fractions. */
@@ -144,157 +143,5 @@ public class CanvasGradientImpl implements CanvasGradient {
 			return new LinearGradientPaint(linearX.floatValue(), linearX1.floatValue(), linearY.floatValue(),
 					linearY1.floatValue(), floatArray, colorArray);
 		}
-	}
-
-	/**
-	 * Gets the fractions.
-	 *
-	 * @return the fractions
-	 */
-	public List<Float> getFractions() {
-		return fractions;
-	}
-
-	/**
-	 * Sets the fractions.
-	 *
-	 * @param fractions
-	 *            the new fractions
-	 */
-	public void setFractions(final List<Float> fractions) {
-		this.fractions = fractions;
-	}
-
-	/**
-	 * Gets the colors.
-	 *
-	 * @return the colors
-	 */
-	public List<Color> getColors() {
-		return colors;
-	}
-
-	/**
-	 * Sets the colors.
-	 *
-	 * @param colors
-	 *            the new colors
-	 */
-	public void setColors(final List<Color> colors) {
-		this.colors = colors;
-	}
-
-	/**
-	 * Gets the linear x.
-	 *
-	 * @return the linear x
-	 */
-	public Double getLinearX() {
-		return linearX;
-	}
-
-	/**
-	 * Sets the linear x.
-	 *
-	 * @param linearX
-	 *            the new linear x
-	 */
-	public void setLinearX(final Double linearX) {
-		this.linearX = linearX;
-	}
-
-	/**
-	 * Gets the linear x1.
-	 *
-	 * @return the linear x1
-	 */
-	public Double getLinearX1() {
-		return linearX1;
-	}
-
-	/**
-	 * Sets the linear x1.
-	 *
-	 * @param linearX1
-	 *            the new linear x1
-	 */
-	public void setLinearX1(final Double linearX1) {
-		this.linearX1 = linearX1;
-	}
-
-	/**
-	 * Gets the linear y.
-	 *
-	 * @return the linear y
-	 */
-	public Double getLinearY() {
-		return linearY;
-	}
-
-	/**
-	 * Sets the linear y.
-	 *
-	 * @param linearY
-	 *            the new linear y
-	 */
-	public void setLinearY(final Double linearY) {
-		this.linearY = linearY;
-	}
-
-	/**
-	 * Gets the linear y1.
-	 *
-	 * @return the linear y1
-	 */
-	public Double getLinearY1() {
-		return linearY1;
-	}
-
-	/**
-	 * Sets the linear y1.
-	 *
-	 * @param linearY1
-	 *            the new linear y1
-	 */
-	public void setLinearY1(final Double linearY1) {
-		this.linearY1 = linearY1;
-	}
-
-	/**
-	 * <p>Getter for the field r1.</p>
-	 *
-	 * @return the r1
-	 */
-	public Double getR1() {
-		return r1;
-	}
-
-	/**
-	 * <p>Setter for the field r1.</p>
-	 *
-	 * @param r1
-	 *            the r1 to set
-	 */
-	public void setR1(final Double r1) {
-		this.r1 = r1;
-	}
-
-	/**
-	 * <p>Getter for the field r2.</p>
-	 *
-	 * @return the r2
-	 */
-	public Double getR2() {
-		return r2;
-	}
-
-	/**
-	 * <p>Setter for the field r2.</p>
-	 *
-	 * @param r2
-	 *            the r2 to set
-	 */
-	public void setR2(final Double r2) {
-		this.r2 = r2;
 	}
 }

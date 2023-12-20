@@ -76,7 +76,7 @@ public class InputDataTime extends BasicInput {
 			}
 
 			setElement(modelNode);
-			setjComponent(tf);
+			setJComponent(tf);
 			final Dimension ps = tf.getPreferredSize();
 			tf.setPreferredSize(new Dimension(128, ps.height));
 			ic.add(tf);

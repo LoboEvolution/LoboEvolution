@@ -46,10 +46,10 @@ final class RWord extends BaseBoundableRenderable {
 	 * @param word a {@link java.lang.String} object.
 	 * @param container a {@link org.loboevolution.html.renderer.RenderableContainer} object.
 	 * @param fontMetrics a {@link java.awt.FontMetrics} object.
-	 * @param descent a int.
-	 * @param ascentPlusLeading a int.
-	 * @param height a int.
-	 * @param textTransform a int.
+	 * @param descent a {@link java.lang.Integer} object.
+	 * @param ascentPlusLeading a {@link java.lang.Integer} object.
+	 * @param height a {@link java.lang.Integer} object.
+	 * @param textTransform a {@link java.lang.Integer} object.
 	 */
 	public RWord(final ModelNode me, final String word, final RenderableContainer container, final FontMetrics fontMetrics, final int descent,
 				 final int ascentPlusLeading, final int height, final int textTransform) {

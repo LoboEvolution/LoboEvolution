@@ -186,7 +186,7 @@ public class HTMLBodyElementImpl extends HTMLElementImpl implements HTMLBodyElem
 	public void setOwnerDocument(final Document value) {
 		super.setOwnerDocument(value);
 		if (value instanceof HTMLDocument) {
-			((HTMLDocument) value).setBody(this);
+			value.setBody(this);
 		}
 	}
 
@@ -195,7 +195,7 @@ public class HTMLBodyElementImpl extends HTMLElementImpl implements HTMLBodyElem
 	public void setOwnerDocument(final Document value, final boolean deep) {
 		super.setOwnerDocument(value, deep);
 		if (value instanceof HTMLDocument) {
-			((HTMLDocument) value).setBody(this);
+			value.setBody(this);
 		}
 	}
 

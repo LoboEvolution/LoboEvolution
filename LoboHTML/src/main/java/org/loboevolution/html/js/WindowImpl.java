@@ -28,6 +28,7 @@
  */
 package org.loboevolution.html.js;
 
+import lombok.Getter;
 import org.htmlunit.cssparser.dom.CSSRuleListImpl;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.common.Nodes;
@@ -90,6 +91,7 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 
 	private Map<Integer, TaskWrapper> taskMap;
 
+	@Getter
 	private List<String> msg;
 
 	private static int timerIdCounter = 0;
@@ -122,8 +124,10 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 
 	private Scriptable windowScope;
 
+	@Getter
 	private final UserAgentContext uaContext;
 
+	@Getter
 	private final HtmlRendererConfig config;
 
     
@@ -281,27 +285,6 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 				return windowScope;
 			}
 		}
-	}
-
-	/**
-	 * <p>Getter for the field <code>uaContext</code>.</p>
-	 *
-	 * @return the uaContext
-	 */
-	public UserAgentContext getUaContext() {
-		return uaContext;
-	}
-
-	@Override
-	public HtmlRendererConfig getConfig() { return this.config; }
-
-	/**
-	 * <p>Getter for the field <code>msg</code>.</p>
-	 *
-	 * @return a {@link java.util.List} object.
-	 */
-	public List<String> getMsg() {
-		return msg;
 	}
 
 	/**
@@ -710,7 +693,7 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 	/**
 	 * <p>Setter for the field length.</p>
 	 *
-	 * @param length a int.
+	 * @param length a {@link java.lang.Integer} object.
 	 */
 	public void setLength(final int length) {
 		this.lengthSet = true;

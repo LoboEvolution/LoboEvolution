@@ -26,6 +26,8 @@
 
 package com.jtattoo.plaf;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.awt.AWTException;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -50,6 +52,7 @@ import javax.swing.plaf.basic.BasicPopupMenuUI;
  * Author Michael Hagen
  *
  */
+@Slf4j
 public class BasePopupMenuUI extends BasicPopupMenuUI {
 
 	// ----------------------------------------------------------------------------------------
@@ -128,8 +131,9 @@ public class BasePopupMenuUI extends BasicPopupMenuUI {
 		if (robot == null) {
 			try {
 				robot = new Robot();
-			} catch (final AWTException ex) {
-			}
+			} catch (final AWTException e) {
+				log.info(e.getMessage());
+            }
 		}
 		return robot;
 	}

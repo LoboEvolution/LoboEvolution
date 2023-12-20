@@ -1175,7 +1175,7 @@ public class DTMNodeProxy
     public final Attr getAttributeNode(final String name) {
 
         final DTMNamedNodeMap map = new DTMNamedNodeMap(dtm, node);
-        return (Attr) map.getNamedItem(name);
+        return map.getNamedItem(name);
     }
 
     /**

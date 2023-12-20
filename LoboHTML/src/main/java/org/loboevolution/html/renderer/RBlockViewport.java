@@ -388,7 +388,7 @@ public class RBlockViewport extends BaseRCollection {
 	 * <p>addLineBreak.</p>
 	 *
 	 * @param startNode a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
-	 * @param breakType a int.
+	 * @param breakType a {@link java.lang.Integer} object.
 	 */
 	protected void addLineBreak(final ModelNode startNode, final int breakType) {
 		RLine line = this.currentLine;
@@ -533,7 +533,7 @@ public class RBlockViewport extends BaseRCollection {
 	 * @param canvasWidth   The new width of the viewport. It could be different to
 	 *                      the previously calculated width.
 	 * @param paddingInsets a {@link java.awt.Insets} object.
-	 * @param alignXPercent a int.
+	 * @param alignXPercent a {@link java.lang.Integer} object.
 	 */
 	public void alignX(final int alignXPercent, final int canvasWidth, final Insets paddingInsets) {
 		final int prevMaxY = this.maxY;
@@ -569,9 +569,9 @@ public class RBlockViewport extends BaseRCollection {
 	/**
 	 * Applies vertical alignment.
 	 *
-	 * @param canvasHeight a int.
+	 * @param canvasHeight a {@link java.lang.Integer} object.
 	 * @param paddingInsets a {@link java.awt.Insets} object.
-	 * @param alignYPercent a int.
+	 * @param alignYPercent a {@link java.lang.Integer} object.
 	 */
 	public void alignY(final int alignYPercent, final int canvasHeight, final Insets paddingInsets) {
 		final int prevMaxY = this.maxY;
@@ -685,7 +685,7 @@ public class RBlockViewport extends BaseRCollection {
 	/**
 	 * <p>getFirstBaselineOffset.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	public int getFirstBaselineOffset() {
 		final List<Renderable> renderables = this.seqRenderables;
@@ -712,7 +712,7 @@ public class RBlockViewport extends BaseRCollection {
 	/**
 	 * <p>getFirstLineHeight.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	public int getFirstLineHeight() {
 		final List<Renderable> renderables = this.seqRenderables;
@@ -792,8 +792,8 @@ public class RBlockViewport extends BaseRCollection {
 	/**
 	 * <p>getRenderables.</p>
 	 *
-	 * @param pointx a int.
-	 * @param pointy a int.
+	 * @param pointx a {@link java.lang.Integer} object.
+	 * @param pointy a {@link java.lang.Integer} object.
 	 * @return a {@link java.util.List} object.
 	 */
 	public List<Renderable> getRenderables(final int pointx, final int pointy) {
@@ -964,8 +964,8 @@ public class RBlockViewport extends BaseRCollection {
 	 * @param yLimit If other than -1, layout will throw
 	 *               SizeExceededException in the event that the layout
 	 *               goes beyond this y-coordinate point.
-	 * @param desiredWidth a int.
-	 * @param desiredHeight a int.
+	 * @param desiredWidth a {@link java.lang.Integer} object.
+	 * @param desiredHeight a {@link java.lang.Integer} object.
 	 * @param paddingInsets a {@link java.awt.Insets} object.
 	 * @param floatBounds a {@link org.loboevolution.html.renderer.FloatingBounds} object.
 	 * @param sizeOnly a boolean.
@@ -1869,7 +1869,7 @@ public class RBlockViewport extends BaseRCollection {
 	}
 
 	private RElement setupNewUIControl(final RenderableContainer container, final HTMLElementImpl element, final UIControl control) {
-		final RElement renderable = new RUIControl(element, control, container, this.frameContext, this.userAgentContext);
+		final RElement renderable = new RUIControl(element, control, container, this.userAgentContext);
 		element.setUINode(renderable);
 		return renderable;
 	}

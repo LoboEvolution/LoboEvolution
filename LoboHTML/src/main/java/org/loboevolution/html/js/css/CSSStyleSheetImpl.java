@@ -26,6 +26,7 @@
 
 package org.loboevolution.html.js.css;
 
+import lombok.Getter;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.html.node.css.CSSRule;
 import org.loboevolution.html.node.css.CSSRuleList;
@@ -33,6 +34,7 @@ import org.loboevolution.html.node.css.CSSStyleSheet;
 
 public class CSSStyleSheetImpl extends StyleSheetImpl implements CSSStyleSheet {
 
+    @Getter
     private final org.htmlunit.cssparser.dom.CSSStyleSheetImpl cssStyleSheet;
 
     private final CSSRuleListImpl cssRuleList;
@@ -85,10 +87,6 @@ public class CSSStyleSheetImpl extends StyleSheetImpl implements CSSStyleSheet {
 
     public void setDisabled(final boolean disabled) {
         cssStyleSheet.setDisabled(disabled);
-    }
-
-    public org.htmlunit.cssparser.dom.CSSStyleSheetImpl getCssStyleSheet() {
-        return this.cssStyleSheet;
     }
 
     @Override

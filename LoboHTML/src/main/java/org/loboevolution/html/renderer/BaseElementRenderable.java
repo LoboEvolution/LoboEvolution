@@ -163,8 +163,8 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 	/**
 	 * <p>applyStyle.</p>
 	 *
-	 * @param availWidth a int.
-	 * @param availHeight a int.
+	 * @param availWidth a {@link java.lang.Integer} object.
+	 * @param availHeight a {@link java.lang.Integer} object.
 	 */
 	protected void applyStyle(final int availWidth, final int availHeight) {
 		final Object rootNode = this.modelNode;
@@ -398,8 +398,8 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 	/**
 	 * <p>doLayout.</p>
 	 *
-	 * @param availWidth a int.
-	 * @param availHeight a int.
+	 * @param availWidth a {@link java.lang.Integer} object.
+	 * @param availHeight a {@link java.lang.Integer} object.
 	 * @param sizeOnly a boolean.
 	 */
 	protected abstract void doLayout(int availWidth, final int availHeight, boolean sizeOnly);

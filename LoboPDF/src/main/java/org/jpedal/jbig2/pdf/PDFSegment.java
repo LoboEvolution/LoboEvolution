@@ -88,7 +88,7 @@ public class PDFSegment {
     /**
      * <p>setDataLength.</p>
      *
-     * @param segmentDataLength a int.
+     * @param segmentDataLength a {@link java.lang.Integer} object.
      */
     public void setDataLength(final int segmentDataLength) {
         this.segmentDataLength = segmentDataLength;
@@ -98,7 +98,7 @@ public class PDFSegment {
     /**
      * <p>Getter for the field <code>segmentDataLength</code>.</p>
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getSegmentDataLength() {
         return segmentDataLength;

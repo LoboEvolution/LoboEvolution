@@ -41,7 +41,7 @@ public class UIEventImpl extends EventImpl implements UIEvent {
 	 * <p>Constructor for UIEventImpl.</p>
 	 *
 	 * @param eventTypeArg a {@link java.lang.String} object.
-	 * @param detailArg a int.
+	 * @param detailArg a {@link java.lang.Integer} object.
 	 * @param viewArg a {@link org.loboevolution.html.node.views.AbstractView} object.
 	 */
 	public UIEventImpl(final String eventTypeArg, final double detailArg, final Window viewArg) {

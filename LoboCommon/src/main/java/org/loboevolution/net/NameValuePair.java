@@ -28,27 +28,27 @@
  */
 package org.loboevolution.net;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.ToString;
+
 /**
  * The Class NameValuePair.
  */
-public class NameValuePair extends AbstractBean implements Cloneable {
-	
-	/** The name. */
-	public String name;
-	
-	/** The value. */
-	public String value;
+@AllArgsConstructor
+@Getter
+@ToString
+public class NameValuePair extends AbstractBean {
 
 	/**
-	 * Instantiates a new name value pair.
-	 *
-	 * @param name  the name
-	 * @param value the value
+	 * The name.
 	 */
-	public NameValuePair(final String name, final String value) {
-		this.name = name;
-		this.value = value;
-	}
+	public String name;
+
+	/**
+	 * The value.
+	 */
+	public String value;
 
 	/**
 	 * Sets the name.
@@ -62,15 +62,6 @@ public class NameValuePair extends AbstractBean implements Cloneable {
 	}
 
 	/**
-	 * Gets the name.
-	 *
-	 * @return the name
-	 */
-	public final String getName() {
-		return name;
-	}
-
-	/**
 	 * Sets the value.
 	 *
 	 * @param value the new value
@@ -79,20 +70,5 @@ public class NameValuePair extends AbstractBean implements Cloneable {
 		final String old = getValue();
 		this.value = value;
 		firePropertyChange("value", old, value);
-	}
-
-	/**
-	 * Gets the value.
-	 *
-	 * @return the value
-	 */
-	public final String getValue() {
-		return value;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public String toString() {
-		return name + "=" + value;
 	}
 }

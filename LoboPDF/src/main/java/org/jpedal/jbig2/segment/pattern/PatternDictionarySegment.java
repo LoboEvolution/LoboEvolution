@@ -145,7 +145,7 @@ public class PatternDictionarySegment extends Segment {
     /**
      * <p>Getter for the field <code>size</code>.</p>
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getSize() {
         return size;

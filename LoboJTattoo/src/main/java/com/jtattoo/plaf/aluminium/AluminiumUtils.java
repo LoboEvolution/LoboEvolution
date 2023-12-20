@@ -113,10 +113,10 @@ public final class AluminiumUtils {
 	 *
 	 * @param g a {@link java.awt.Graphics} object.
 	 * @param c a {@link java.awt.Component} object.
-	 * @param x a int.
-	 * @param y a int.
-	 * @param w a int.
-	 * @param h a int.
+	 * @param x a {@link java.lang.Integer} object.
+	 * @param y a {@link java.lang.Integer} object.
+	 * @param w a {@link java.lang.Integer} object.
+	 * @param h a {@link java.lang.Integer} object.
 	 */
 	public static void fillComponent(final Graphics g, final Component c, final int x, final int y, final int w, final int h) {
 		final Graphics2D g2D = (Graphics2D) g;

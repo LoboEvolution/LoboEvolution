@@ -52,7 +52,7 @@ public interface NodeIterator {
 	/**
 	 * <p>getWhatToShow.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	int getWhatToShow();
 

@@ -256,7 +256,7 @@ public class SelectOption {
 	/**
 	 * <p>getVisibleSize.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	public int getVisibleSize() {
 		return this.comboBox.getMaximumRowCount();
@@ -265,7 +265,7 @@ public class SelectOption {
 	/**
 	 * <p>setVisibleSize.</p>
 	 *
-	 * @param value a int.
+	 * @param value a {@link java.lang.Integer} object.
 	 */
 	public void setVisibleSize(final int value) {
 		this.comboBox.setMaximumRowCount(value);

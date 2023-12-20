@@ -98,7 +98,7 @@ public final class TextureUtils {
 	 *
 	 * @param g a {@link java.awt.Graphics} object.
 	 * @param c a {@link java.awt.Component} object.
-	 * @param textureType a int.
+	 * @param textureType a {@link java.lang.Integer} object.
 	 */
 	public static void fillComponent(final Graphics g, final Component c, final int textureType) {
 		JTattooUtilities.fillComponent(g, c, getTexture(textureType));
@@ -109,11 +109,11 @@ public final class TextureUtils {
 	 *
 	 * @param g a {@link java.awt.Graphics} object.
 	 * @param c a {@link java.awt.Component} object.
-	 * @param x a int.
-	 * @param y a int.
-	 * @param w a int.
-	 * @param h a int.
-	 * @param textureType a int.
+	 * @param x a {@link java.lang.Integer} object.
+	 * @param y a {@link java.lang.Integer} object.
+	 * @param w a {@link java.lang.Integer} object.
+	 * @param h a {@link java.lang.Integer} object.
+	 * @param textureType a {@link java.lang.Integer} object.
 	 */
 	public static void fillComponent(final Graphics g, final Component c, final int x, final int y, final int w, final int h, final int textureType) {
 		final Graphics2D g2D = (Graphics2D) g;
@@ -149,11 +149,11 @@ public final class TextureUtils {
 	 *
 	 * @param g a {@link java.awt.Graphics} object.
 	 * @param c a {@link java.awt.Component} object.
-	 * @param x a int.
-	 * @param y a int.
-	 * @param w a int.
-	 * @param h a int.
-	 * @param textureType a int.
+	 * @param x a {@link java.lang.Integer} object.
+	 * @param y a {@link java.lang.Integer} object.
+	 * @param w a {@link java.lang.Integer} object.
+	 * @param h a {@link java.lang.Integer} object.
+	 * @param textureType a {@link java.lang.Integer} object.
 	 */
 	public static void fillRect(final Graphics g, final Component c, final int x, final int y, final int w, final int h, final int textureType) {
 		final Graphics2D g2D = (Graphics2D) g;
@@ -186,7 +186,7 @@ public final class TextureUtils {
 	/**
 	 * <p>getTexture.</p>
 	 *
-	 * @param textureType a int.
+	 * @param textureType a {@link java.lang.Integer} object.
 	 * @return a {@link javax.swing.Icon} object.
 	 */
 	public static Icon getTexture(final int textureType) {
@@ -226,7 +226,7 @@ public final class TextureUtils {
 	 * <p>getTextureType.</p>
 	 *
 	 * @param c a {@link javax.swing.JComponent} object.
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	public static int getTextureType(final JComponent c) {
 		int textureType = TextureUtils.BACKGROUND_TEXTURE_TYPE;

@@ -26,6 +26,10 @@
 
 package com.jtattoo.plaf;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.extern.slf4j.Slf4j;
+
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Component;
@@ -85,7 +89,6 @@ import javax.swing.text.View;
 
 /**
  * This class is a modified copy of the javax.swing.plaf.basic.BasicTabbedPaneUI
- *
  * A Basic L&amp;F implementation of TabbedPaneUI.
  *
  * @version 1.87 06/08/99
@@ -96,8 +99,11 @@ import javax.swing.text.View;
  * Author Dave Moore
  * Author Michael Hagen
  */
+@Slf4j
 public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 
+	@EqualsAndHashCode(callSuper = true)
+	@Data
 	public class ArrowButton extends JButton implements SwingConstants {
 
 		/**
@@ -115,10 +121,6 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 				final Color cHi = AbstractLookAndFeel.getTheme().getControlHighlight();
 				setBorder(BorderFactory.createEtchedBorder(cHi, cLo));
 			}
-		}
-
-		public int getDirection() {
-			return direction;
 		}
 
 		@Override
@@ -595,6 +597,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 						}
 					}
 				} catch (final Exception ex) {
+					log.info(ex.getMessage());
 				}
 				tabPane.revalidate();
 				tabPane.repaint();
@@ -971,10 +974,10 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 		 *
 		 */
 		private static final long serialVersionUID = 1L;
-		private JTabbedPane tabbedPane = null;
 
 		@Override
 		public void actionPerformed(final ActionEvent e) {
+			JTabbedPane tabbedPane = null;
 			final Object src = e.getSource();
 			if (src instanceof JTabbedPane) {
 				tabbedPane = (JTabbedPane) src;
@@ -1336,7 +1339,8 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 			} else {
 				try {
 					selectedComponent = tabPane.getComponentAt(selectedIndex);
-				} catch (final Exception ex) {
+				} catch (final Exception e) {
+					log.info(e.getMessage());
 				}
 			}
 			final int cx;
@@ -1417,7 +1421,8 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 						} else {
 							child.setBounds(cx, cy, cw, ch);
 						}
-					} catch (final Exception ex) {
+					} catch (final Exception e) {
+						log.info(e.getMessage());
 					}
 				}
 			}
@@ -1750,8 +1755,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 				try {
 					selectedComponent = tabPane.getComponentAt(selectedIndex);
 				} catch (final Exception ex) {
-//                    outStream.print("----------------------------------------------------\n");
-//                    ex.printStackTrace(outStream);
+					log.info(ex.getMessage());
 				}
 			}
 			boolean shouldChangeFocus = false;
@@ -2117,7 +2121,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	 *
 	 * @param topInsets a {@link java.awt.Insets} object.
 	 * @param targetInsets a {@link java.awt.Insets} object.
-	 * @param targetPlacement a int.
+	 * @param targetPlacement a {@link java.lang.Integer} object.
 	 */
 	protected static void rotateInsets(final Insets topInsets, final Insets targetInsets, final int targetPlacement) {
 		switch (targetPlacement) {
@@ -2284,7 +2288,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	/**
 	 * <p>assureRectsCreated.</p>
 	 *
-	 * @param tabCount a int.
+	 * @param tabCount a {@link java.lang.Integer} object.
 	 */
 	protected void assureRectsCreated(final int tabCount) {
 		final int rectArrayLen = rects.length;
@@ -2301,8 +2305,8 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	/**
 	 * <p>calculateMaxTabHeight.</p>
 	 *
-	 * @param tabPlacement a int.
-	 * @return a int.
+	 * @param tabPlacement a {@link java.lang.Integer} object.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	protected int calculateMaxTabHeight(final int tabPlacement) {
 		final int tc = tabPane.getTabCount();
@@ -2317,8 +2321,8 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	/**
 	 * <p>calculateMaxTabWidth.</p>
 	 *
-	 * @param tabPlacement a int.
-	 * @return a int.
+	 * @param tabPlacement a {@link java.lang.Integer} object.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	protected int calculateMaxTabWidth(final int tabPlacement) {
 		final int tc = tabPane.getTabCount();
@@ -2332,10 +2336,10 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	/**
 	 * <p>calculateTabAreaHeight.</p>
 	 *
-	 * @param tabPlacement a int.
-	 * @param horizRunCount a int.
-	 * @param maxTabHeight a int.
-	 * @return a int.
+	 * @param tabPlacement a {@link java.lang.Integer} object.
+	 * @param horizRunCount a {@link java.lang.Integer} object.
+	 * @param maxTabHeight a {@link java.lang.Integer} object.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	protected int calculateTabAreaHeight(final int tabPlacement, final int horizRunCount, final int maxTabHeight) {
 		if (tabPlacement == SwingConstants.TOP || tabPlacement == SwingConstants.BOTTOM) {
@@ -2351,10 +2355,10 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	/**
 	 * <p>calculateTabAreaWidth.</p>
 	 *
-	 * @param tabPlacement a int.
-	 * @param vertRunCount a int.
-	 * @param maxTabWidth a int.
-	 * @return a int.
+	 * @param tabPlacement a {@link java.lang.Integer} object.
+	 * @param vertRunCount a {@link java.lang.Integer} object.
+	 * @param maxTabWidth a {@link java.lang.Integer} object.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	protected int calculateTabAreaWidth(final int tabPlacement, final int vertRunCount, final int maxTabWidth) {
 		if (tabPlacement == SwingConstants.LEFT || tabPlacement == SwingConstants.RIGHT) {
@@ -2369,10 +2373,10 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	/**
 	 * <p>calculateTabHeight.</p>
 	 *
-	 * @param tabPlacement a int.
-	 * @param tabIndex a int.
-	 * @param fontHeight a int.
-	 * @return a int.
+	 * @param tabPlacement a {@link java.lang.Integer} object.
+	 * @param tabIndex a {@link java.lang.Integer} object.
+	 * @param fontHeight a {@link java.lang.Integer} object.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	protected int calculateTabHeight(final int tabPlacement, final int tabIndex, final int fontHeight) {
 		int height = 0;
@@ -2401,10 +2405,10 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	/**
 	 * <p>calculateTabWidth.</p>
 	 *
-	 * @param tabPlacement a int.
-	 * @param tabIndex a int.
+	 * @param tabPlacement a {@link java.lang.Integer} object.
+	 * @param tabIndex a {@link java.lang.Integer} object.
 	 * @param metrics a {@link java.awt.FontMetrics} object.
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	protected int calculateTabWidth(final int tabPlacement, final int tabIndex, final FontMetrics metrics) {
 		final Insets insets = getTabInsets(tabPlacement, tabIndex);
@@ -2624,9 +2628,9 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	/**
 	 * <p>getClosestTab.</p>
 	 *
-	 * @param x a int.
-	 * @param y a int.
-	 * @return a int.
+	 * @param x a {@link java.lang.Integer} object.
+	 * @param y a {@link java.lang.Integer} object.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	protected int getClosestTab(final int x, final int y) {
 		int min = 0;
@@ -2677,7 +2681,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	/**
 	 * <p>getContentBorderColors.</p>
 	 *
-	 * @param tabPlacement a int.
+	 * @param tabPlacement a {@link java.lang.Integer} object.
 	 * @return an array of {@link java.awt.Color} objects.
 	 */
 	protected Color[] getContentBorderColors(final int tabPlacement) {
@@ -2691,7 +2695,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	/**
 	 * <p>Getter for the field contentBorderInsets.</p>
 	 *
-	 * @param tabPlacement a int.
+	 * @param tabPlacement a {@link java.lang.Integer} object.
 	 * @return a {@link java.awt.Insets} object.
 	 */
 	protected Insets getContentBorderInsets(final int tabPlacement) {
@@ -2714,7 +2718,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	/**
 	 * <p>getGapColor.</p>
 	 *
-	 * @param tabIndex a int.
+	 * @param tabIndex a {@link java.lang.Integer} object.
 	 * @return a {@link java.awt.Color} object.
 	 */
 	protected Color getGapColor(final int tabIndex) {
@@ -2743,7 +2747,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	/**
 	 * <p>getHiBorderColor.</p>
 	 *
-	 * @param tabIndex a int.
+	 * @param tabIndex a {@link java.lang.Integer} object.
 	 * @return a {@link java.awt.Color} object.
 	 */
 	protected Color getHiBorderColor(final int tabIndex) {
@@ -2768,7 +2772,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	/**
 	 * <p>getIconForTab.</p>
 	 *
-	 * @param tabIndex a int.
+	 * @param tabIndex a {@link java.lang.Integer} object.
 	 * @return a {@link javax.swing.Icon} object.
 	 */
 	protected Icon getIconForTab(final int tabIndex) {
@@ -2791,7 +2795,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	/**
 	 * <p>getLoBorderColor.</p>
 	 *
-	 * @param tabIndex a int.
+	 * @param tabIndex a {@link java.lang.Integer} object.
 	 * @return a {@link java.awt.Color} object.
 	 */
 	protected Color getLoBorderColor(final int tabIndex) {
@@ -2815,8 +2819,8 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	/**
 	 * <p>getNextTabIndex.</p>
 	 *
-	 * @param base a int.
-	 * @return a int.
+	 * @param base a {@link java.lang.Integer} object.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	protected int getNextTabIndex(final int base) {
 		return (base + 1) % tabPane.getTabCount();
@@ -2825,9 +2829,9 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	/**
 	 * <p>getNextTabIndexInRun.</p>
 	 *
-	 * @param tabCount a int.
-	 * @param base a int.
-	 * @return a int.
+	 * @param tabCount a {@link java.lang.Integer} object.
+	 * @param base a {@link java.lang.Integer} object.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	protected int getNextTabIndexInRun(final int tabCount, final int base) {
 		if (runCount < 2) {
@@ -2844,8 +2848,8 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	/**
 	 * <p>getNextTabRun.</p>
 	 *
-	 * @param baseRun a int.
-	 * @return a int.
+	 * @param baseRun a {@link java.lang.Integer} object.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	protected int getNextTabRun(final int baseRun) {
 		return (baseRun + 1) % runCount;
@@ -2862,20 +2866,20 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	/**
 	 * <p>getPreviousTabIndex.</p>
 	 *
-	 * @param base a int.
-	 * @return a int.
+	 * @param base a {@link java.lang.Integer} object.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	protected int getPreviousTabIndex(final int base) {
 		final int tabIndex = base - 1 >= 0 ? base - 1 : tabPane.getTabCount() - 1;
-		return tabIndex >= 0 ? tabIndex : 0;
+		return Math.max(tabIndex, 0);
 	}
 
 	/**
 	 * <p>getPreviousTabIndexInRun.</p>
 	 *
-	 * @param tabCount a int.
-	 * @param base a int.
-	 * @return a int.
+	 * @param tabCount a {@link java.lang.Integer} object.
+	 * @param base a {@link java.lang.Integer} object.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	protected int getPreviousTabIndexInRun(final int tabCount, final int base) {
 		if (runCount < 2) {
@@ -2892,20 +2896,20 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	/**
 	 * <p>getPreviousTabRun.</p>
 	 *
-	 * @param baseRun a int.
-	 * @return a int.
+	 * @param baseRun a {@link java.lang.Integer} object.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	protected int getPreviousTabRun(final int baseRun) {
 		final int runIndex = baseRun - 1 >= 0 ? baseRun - 1 : runCount - 1;
-		return runIndex >= 0 ? runIndex : 0;
+		return Math.max(runIndex, 0);
 	}
 
 	/**
 	 * <p>getRunForTab.</p>
 	 *
-	 * @param tabCount a int.
-	 * @param tabIndex a int.
-	 * @return a int.
+	 * @param tabCount a {@link java.lang.Integer} object.
+	 * @param tabIndex a {@link java.lang.Integer} object.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	protected int getRunForTab(final int tabCount, final int tabIndex) {
 		for ( int i = 0; i < runCount; i++) {
@@ -2921,7 +2925,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	/**
 	 * <p>Getter for the field selectedTabPadInsets.</p>
 	 *
-	 * @param tabPlacement a int.
+	 * @param tabPlacement a {@link java.lang.Integer} object.
 	 * @return a {@link java.awt.Insets} object.
 	 */
 	protected Insets getSelectedTabPadInsets(final int tabPlacement) {
@@ -2932,7 +2936,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	/**
 	 * <p>Getter for the field tabAreaInsets.</p>
 	 *
-	 * @param tabPlacement a int.
+	 * @param tabPlacement a {@link java.lang.Integer} object.
 	 * @return a {@link java.awt.Insets} object.
 	 */
 	protected Insets getTabAreaInsets(final int tabPlacement) {
@@ -2949,9 +2953,9 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	/**
 	 * <p>getTabAtLocation.</p>
 	 *
-	 * @param x a int.
-	 * @param y a int.
-	 * @return a int.
+	 * @param x a {@link java.lang.Integer} object.
+	 * @param y a {@link java.lang.Integer} object.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	protected int getTabAtLocation(final int x, final int y) {
 		ensureCurrentLayout();
@@ -3017,7 +3021,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	/**
 	 * <p>getTabColors.</p>
 	 *
-	 * @param tabIndex a int.
+	 * @param tabIndex a {@link java.lang.Integer} object.
 	 * @param isSelected a boolean.
 	 * @param isRollover a boolean.
 	 * @return an array of {@link java.awt.Color} objects.
@@ -3071,8 +3075,8 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	/**
 	 * <p>Getter for the field tabInsets.</p>
 	 *
-	 * @param tabPlacement a int.
-	 * @param tabIndex a int.
+	 * @param tabPlacement a {@link java.lang.Integer} object.
+	 * @param tabIndex a {@link java.lang.Integer} object.
 	 * @return a {@link java.awt.Insets} object.
 	 */
 	protected Insets getTabInsets(final int tabPlacement, final int tabIndex) {
@@ -3082,10 +3086,10 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	/**
 	 * <p>getTabLabelShiftX.</p>
 	 *
-	 * @param tabPlacement a int.
-	 * @param tabIndex a int.
+	 * @param tabPlacement a {@link java.lang.Integer} object.
+	 * @param tabIndex a {@link java.lang.Integer} object.
 	 * @param isSelected a boolean.
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	protected int getTabLabelShiftX(final int tabPlacement, final int tabIndex, final boolean isSelected) {
 		return 0;
@@ -3094,10 +3098,10 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	/**
 	 * <p>getTabLabelShiftY.</p>
 	 *
-	 * @param tabPlacement a int.
-	 * @param tabIndex a int.
+	 * @param tabPlacement a {@link java.lang.Integer} object.
+	 * @param tabIndex a {@link java.lang.Integer} object.
 	 * @param isSelected a boolean.
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	protected int getTabLabelShiftY(final int tabPlacement, final int tabIndex, final boolean isSelected) {
 		if (!isSelected) {
@@ -3120,9 +3124,9 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	/**
 	 * <p>getTabRunIndent.</p>
 	 *
-	 * @param tabPlacement a int.
-	 * @param run a int.
-	 * @return a int.
+	 * @param tabPlacement a {@link java.lang.Integer} object.
+	 * @param run a {@link java.lang.Integer} object.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	protected int getTabRunIndent(final int tabPlacement, final int run) {
 		return 0;
@@ -3131,11 +3135,11 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	/**
 	 * <p>getTabRunOffset.</p>
 	 *
-	 * @param tabPlacement a int.
-	 * @param tabCount a int.
-	 * @param tabIndex a int.
+	 * @param tabPlacement a {@link java.lang.Integer} object.
+	 * @param tabCount a {@link java.lang.Integer} object.
+	 * @param tabIndex a {@link java.lang.Integer} object.
 	 * @param forward a boolean.
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	protected int getTabRunOffset(final int tabPlacement, final int tabCount, final int tabIndex, final boolean forward) {
 		final int run = getRunForTab(tabCount, tabIndex);
@@ -3197,8 +3201,8 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	/**
 	 * <p>Getter for the field tabRunOverlay.</p>
 	 *
-	 * @param tabPlacement a int.
-	 * @return a int.
+	 * @param tabPlacement a {@link java.lang.Integer} object.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	protected int getTabRunOverlay(final int tabPlacement) {
 		return tabRunOverlay;
@@ -3245,9 +3249,6 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	 */
 	private void initMnemonics() {
 		mnemonicToIndexMap = new HashMap<>();
-//        mnemonicInputMap = new InputMapUIResource();
-//        mnemonicInputMap.setParent(SwingUtilities.getUIInputMap(tabPane, JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT));
-//        SwingUtilities.replaceUIInputMap(tabPane, JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT, mnemonicInputMap);
 		mnemonicInputMap = new ComponentInputMapUIResource(tabPane);
 		mnemonicInputMap.setParent(SwingUtilities.getUIInputMap(tabPane, JComponent.WHEN_IN_FOCUSED_WINDOW));
 		SwingUtilities.replaceUIInputMap(tabPane, JComponent.WHEN_IN_FOCUSED_WINDOW, mnemonicInputMap);
@@ -3410,9 +3411,9 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	/**
 	 * <p>lastTabInRun.</p>
 	 *
-	 * @param tabCount a int.
-	 * @param run a int.
-	 * @return a int.
+	 * @param tabCount a {@link java.lang.Integer} object.
+	 * @param run a {@link java.lang.Integer} object.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	protected int lastTabInRun(final int tabCount, final int run) {
 		if (runCount == 1) {
@@ -3428,9 +3429,9 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	/**
 	 * <p>layoutLabel.</p>
 	 *
-	 * @param tabPlacement a int.
+	 * @param tabPlacement a {@link java.lang.Integer} object.
 	 * @param metrics a {@link java.awt.FontMetrics} object.
-	 * @param tabIndex a int.
+	 * @param tabIndex a {@link java.lang.Integer} object.
 	 * @param title a {@link java.lang.String} object.
 	 * @param icon a {@link javax.swing.Icon} object.
 	 * @param tabRect a {@link java.awt.Rectangle} object.
@@ -3463,7 +3464,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	/**
 	 * <p>navigateSelectedTab.</p>
 	 *
-	 * @param direction a int.
+	 * @param direction a {@link java.lang.Integer} object.
 	 */
 	protected void navigateSelectedTab(final int direction) {
 		final int tabPlacement = tabPane.getTabPlacement();
@@ -3566,12 +3567,12 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	/**
 	 * <p>paintBottomTabBorder.</p>
 	 *
-	 * @param tabIndex a int.
+	 * @param tabIndex a {@link java.lang.Integer} object.
 	 * @param g a {@link java.awt.Graphics} object.
-	 * @param x1 a int.
-	 * @param y1 a int.
-	 * @param x2 a int.
-	 * @param y2 a int.
+	 * @param x1 a {@link java.lang.Integer} object.
+	 * @param y1 a {@link java.lang.Integer} object.
+	 * @param x2 a {@link java.lang.Integer} object.
+	 * @param y2 a {@link java.lang.Integer} object.
 	 * @param isSelected a boolean.
 	 */
 	protected void paintBottomTabBorder(final int tabIndex, final Graphics g, final int x1, final int y1, final int x2, final int y2, final boolean isSelected) {
@@ -3618,12 +3619,12 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	 * <p>paintContentBorder.</p>
 	 *
 	 * @param g a {@link java.awt.Graphics} object.
-	 * @param tabPlacement a int.
-	 * @param selectedIndex a int.
-	 * @param x a int.
-	 * @param y a int.
-	 * @param w a int.
-	 * @param h a int.
+	 * @param tabPlacement a {@link java.lang.Integer} object.
+	 * @param selectedIndex a {@link java.lang.Integer} object.
+	 * @param x a {@link java.lang.Integer} object.
+	 * @param y a {@link java.lang.Integer} object.
+	 * @param w a {@link java.lang.Integer} object.
+	 * @param h a {@link java.lang.Integer} object.
 	 */
 	protected void paintContentBorder(final Graphics g, final int tabPlacement, final int selectedIndex, final int x, final int y, final int w, final int h) {
 		final int tabAreaHeight = calculateTabAreaHeight(tabPlacement, runCount, maxTabHeight);
@@ -3803,9 +3804,9 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	 * <p>paintFocusIndicator.</p>
 	 *
 	 * @param g a {@link java.awt.Graphics} object.
-	 * @param tabPlacement a int.
+	 * @param tabPlacement a {@link java.lang.Integer} object.
 	 * @param rects an array of {@link java.awt.Rectangle} objects.
-	 * @param tabIndex a int.
+	 * @param tabIndex a {@link java.lang.Integer} object.
 	 * @param iconRect a {@link java.awt.Rectangle} object.
 	 * @param textRect a {@link java.awt.Rectangle} object.
 	 * @param isSelected a boolean.
@@ -3823,8 +3824,8 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	 * <p>paintIcon.</p>
 	 *
 	 * @param g a {@link java.awt.Graphics} object.
-	 * @param tabPlacement a int.
-	 * @param tabIndex a int.
+	 * @param tabPlacement a {@link java.lang.Integer} object.
+	 * @param tabIndex a {@link java.lang.Integer} object.
 	 * @param icon a {@link javax.swing.Icon} object.
 	 * @param iconRect a {@link java.awt.Rectangle} object.
 	 * @param isSelected a boolean.
@@ -3839,12 +3840,12 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	/**
 	 * <p>paintLeftTabBorder.</p>
 	 *
-	 * @param tabIndex a int.
+	 * @param tabIndex a {@link java.lang.Integer} object.
 	 * @param g a {@link java.awt.Graphics} object.
-	 * @param x1 a int.
-	 * @param y1 a int.
-	 * @param x2 a int.
-	 * @param y2 a int.
+	 * @param x1 a {@link java.lang.Integer} object.
+	 * @param y1 a {@link java.lang.Integer} object.
+	 * @param x2 a {@link java.lang.Integer} object.
+	 * @param y2 a {@link java.lang.Integer} object.
 	 * @param isSelected a boolean.
 	 */
 	protected void paintLeftTabBorder(final int tabIndex, final Graphics g, final int x1, final int y1, final int x2, final int y2, final boolean isSelected) {
@@ -3900,12 +3901,12 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	/**
 	 * <p>paintRightTabBorder.</p>
 	 *
-	 * @param tabIndex a int.
+	 * @param tabIndex a {@link java.lang.Integer} object.
 	 * @param g a {@link java.awt.Graphics} object.
-	 * @param x1 a int.
-	 * @param y1 a int.
-	 * @param x2 a int.
-	 * @param y2 a int.
+	 * @param x1 a {@link java.lang.Integer} object.
+	 * @param y1 a {@link java.lang.Integer} object.
+	 * @param x2 a {@link java.lang.Integer} object.
+	 * @param y2 a {@link java.lang.Integer} object.
 	 * @param isSelected a boolean.
 	 */
 	protected void paintRightTabBorder(final int tabIndex, final Graphics g, final int x1, final int y1, final int x2, final int y2, final boolean isSelected) {
@@ -3953,12 +3954,12 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	/**
 	 * <p>paintRoundedBottomTabBorder.</p>
 	 *
-	 * @param tabIndex a int.
+	 * @param tabIndex a {@link java.lang.Integer} object.
 	 * @param g a {@link java.awt.Graphics} object.
-	 * @param x1 a int.
-	 * @param y1 a int.
-	 * @param x2 a int.
-	 * @param y2 a int.
+	 * @param x1 a {@link java.lang.Integer} object.
+	 * @param y1 a {@link java.lang.Integer} object.
+	 * @param x2 a {@link java.lang.Integer} object.
+	 * @param y2 a {@link java.lang.Integer} object.
 	 * @param isSelected a boolean.
 	 */
 	protected void paintRoundedBottomTabBorder(final int tabIndex, final Graphics g, final int x1, final int y1, final int x2, final int y2,
@@ -3981,12 +3982,12 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	/**
 	 * <p>paintRoundedTopTabBorder.</p>
 	 *
-	 * @param tabIndex a int.
+	 * @param tabIndex a {@link java.lang.Integer} object.
 	 * @param g a {@link java.awt.Graphics} object.
-	 * @param x1 a int.
-	 * @param y1 a int.
-	 * @param x2 a int.
-	 * @param y2 a int.
+	 * @param x1 a {@link java.lang.Integer} object.
+	 * @param y1 a {@link java.lang.Integer} object.
+	 * @param x2 a {@link java.lang.Integer} object.
+	 * @param y2 a {@link java.lang.Integer} object.
 	 * @param isSelected a boolean.
 	 */
 	protected void paintRoundedTopTabBorder(final int tabIndex, final Graphics g, final int x1, final int y1, final int x2, final int y2,
@@ -4017,12 +4018,12 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	 * <p>paintScrollContentBorder.</p>
 	 *
 	 * @param g a {@link java.awt.Graphics} object.
-	 * @param tabPlacement a int.
-	 * @param selectedIndex a int.
-	 * @param x a int.
-	 * @param y a int.
-	 * @param w a int.
-	 * @param h a int.
+	 * @param tabPlacement a {@link java.lang.Integer} object.
+	 * @param selectedIndex a {@link java.lang.Integer} object.
+	 * @param x a {@link java.lang.Integer} object.
+	 * @param y a {@link java.lang.Integer} object.
+	 * @param w a {@link java.lang.Integer} object.
+	 * @param h a {@link java.lang.Integer} object.
 	 */
 	protected void paintScrollContentBorder(final Graphics g, final int tabPlacement, final int selectedIndex, final int x, final int y, final int w,
                                             final int h) {
@@ -4052,9 +4053,9 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	 * <p>paintTab.</p>
 	 *
 	 * @param g a {@link java.awt.Graphics} object.
-	 * @param tabPlacement a int.
+	 * @param tabPlacement a {@link java.lang.Integer} object.
 	 * @param rects an array of {@link java.awt.Rectangle} objects.
-	 * @param tabIndex a int.
+	 * @param tabIndex a {@link java.lang.Integer} object.
 	 * @param iconRect a {@link java.awt.Rectangle} object.
 	 * @param textRect a {@link java.awt.Rectangle} object.
 	 */
@@ -4119,7 +4120,8 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 				paintIcon(g, tabPlacement, tabIndex, icon, iconRect, isSelected);
 			}
 			paintFocusIndicator(g, tabPlacement, rects, tabIndex, iconRect, textRect, isSelected);
-		} catch (final Exception ex) {
+		} catch (final Exception e) {
+			log.info(e.getMessage());
 		}
 
 		if (cropShape != null) {
@@ -4184,12 +4186,12 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	 * <p>paintTabBackground.</p>
 	 *
 	 * @param g a {@link java.awt.Graphics} object.
-	 * @param tabPlacement a int.
-	 * @param tabIndex a int.
-	 * @param x a int.
-	 * @param y a int.
-	 * @param w a int.
-	 * @param h a int.
+	 * @param tabPlacement a {@link java.lang.Integer} object.
+	 * @param tabIndex a {@link java.lang.Integer} object.
+	 * @param x a {@link java.lang.Integer} object.
+	 * @param y a {@link java.lang.Integer} object.
+	 * @param w a {@link java.lang.Integer} object.
+	 * @param h a {@link java.lang.Integer} object.
 	 * @param isSelected a boolean.
 	 */
 	protected void paintTabBackground(final Graphics g, final int tabPlacement, final int tabIndex, final int x, final int y, final int w, final int h,
@@ -4206,24 +4208,19 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 			switch (tabPlacement) {
 			case TOP:
 			default:
-				if (isSelected) {
-					final Area clipArea = new Area(new RoundRectangle2D.Double(x, y, w, h + 4, d, d));
-					final Area rectArea = new Area(new Rectangle2D.Double(x, y, w, h + 2));
-					clipArea.intersect(rectArea);
-					clipArea.intersect(orgClipArea);
-					g2D.setClip(clipArea);
-					JTattooUtilities.fillHorGradient(g, colorArr, x, y, w, h + 4);
-					g2D.setClip(savedClip);
-				} else {
-					final Area clipArea = new Area(new RoundRectangle2D.Double(x, y, w, h + 4, d, d));
-					final Area rectArea = new Area(new Rectangle2D.Double(x, y, w, h));
-					clipArea.intersect(rectArea);
-					clipArea.intersect(orgClipArea);
-					g2D.setClip(clipArea);
-					JTattooUtilities.fillHorGradient(g, colorArr, x, y, w, h + 4);
-					g2D.setClip(savedClip);
-				}
-				break;
+                final Area clipArea = new Area(new RoundRectangle2D.Double(x, y, w, h + 4, d, d));
+                final Area rectArea;
+                if (isSelected) {
+                    rectArea = new Area(new Rectangle2D.Double(x, y, w, h + 2));
+                } else {
+                    rectArea = new Area(new Rectangle2D.Double(x, y, w, h));
+                }
+                clipArea.intersect(rectArea);
+                clipArea.intersect(orgClipArea);
+                g2D.setClip(clipArea);
+                JTattooUtilities.fillHorGradient(g, colorArr, x, y, w, h + 4);
+                g2D.setClip(savedClip);
+                break;
 			case LEFT:
 				if (isSelected) {
 					JTattooUtilities.fillHorGradient(g, colorArr, x + 1, y + 1, w + 1, h - 1);
@@ -4232,24 +4229,19 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 				}
 				break;
 			case BOTTOM:
-				if (isSelected) {
-					final Area clipArea = new Area(new RoundRectangle2D.Double(x, y - 4, w, h + 4, d, d));
-					final Area rectArea = new Area(new Rectangle2D.Double(x, y - 2, w, h + 1));
-					clipArea.intersect(rectArea);
-					clipArea.intersect(orgClipArea);
-					g2D.setClip(clipArea);
-					JTattooUtilities.fillHorGradient(g, colorArr, x, y - 4, w, h + 4);
-					g2D.setClip(savedClip);
-				} else {
-					final Area clipArea = new Area(new RoundRectangle2D.Double(x, y - 4, w, h + 4, d, d));
-					final Area rectArea = new Area(new Rectangle2D.Double(x, y, w, h));
-					clipArea.intersect(rectArea);
-					clipArea.intersect(orgClipArea);
-					g2D.setClip(clipArea);
-					JTattooUtilities.fillHorGradient(g, colorArr, x, y - 4, w, h + 4);
-					g2D.setClip(savedClip);
-				}
-				break;
+                final Area clipA = new Area(new RoundRectangle2D.Double(x, y - 4, w, h + 4, d, d));
+                final Area rectA;
+                if (isSelected) {
+					rectA = new Area(new Rectangle2D.Double(x, y - 2, w, h + 1));
+                } else {
+					rectA = new Area(new Rectangle2D.Double(x, y, w, h));
+                }
+				clipA.intersect(rectA);
+				clipA.intersect(orgClipArea);
+                g2D.setClip(clipA);
+                JTattooUtilities.fillHorGradient(g, colorArr, x, y - 4, w, h + 4);
+                g2D.setClip(savedClip);
+                break;
 			case RIGHT:
 				if (isSelected) {
 					JTattooUtilities.fillHorGradient(g, colorArr, x - 2, y + 1, w + 2, h - 1);
@@ -4269,12 +4261,12 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	 * <p>paintTabBorder.</p>
 	 *
 	 * @param g a {@link java.awt.Graphics} object.
-	 * @param tabPlacement a int.
-	 * @param tabIndex a int.
-	 * @param x a int.
-	 * @param y a int.
-	 * @param w a int.
-	 * @param h a int.
+	 * @param tabPlacement a {@link java.lang.Integer} object.
+	 * @param tabIndex a {@link java.lang.Integer} object.
+	 * @param x a {@link java.lang.Integer} object.
+	 * @param y a {@link java.lang.Integer} object.
+	 * @param w a {@link java.lang.Integer} object.
+	 * @param h a {@link java.lang.Integer} object.
 	 * @param isSelected a boolean.
 	 */
 	protected void paintTabBorder(final Graphics g, final int tabPlacement, final int tabIndex, final int x, final int y, final int w, final int h,
@@ -4309,10 +4301,10 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	 * <p>paintText.</p>
 	 *
 	 * @param g a {@link java.awt.Graphics} object.
-	 * @param tabPlacement a int.
+	 * @param tabPlacement a {@link java.lang.Integer} object.
 	 * @param font a {@link java.awt.Font} object.
 	 * @param metrics a {@link java.awt.FontMetrics} object.
-	 * @param tabIndex a int.
+	 * @param tabIndex a {@link java.lang.Integer} object.
 	 * @param title a {@link java.lang.String} object.
 	 * @param textRect a {@link java.awt.Rectangle} object.
 	 * @param isSelected a boolean.
@@ -4370,12 +4362,12 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	/**
 	 * <p>paintTopTabBorder.</p>
 	 *
-	 * @param tabIndex a int.
+	 * @param tabIndex a {@link java.lang.Integer} object.
 	 * @param g a {@link java.awt.Graphics} object.
-	 * @param x1 a int.
-	 * @param y1 a int.
-	 * @param x2 a int.
-	 * @param y2 a int.
+	 * @param x1 a {@link java.lang.Integer} object.
+	 * @param y1 a {@link java.lang.Integer} object.
+	 * @param x2 a {@link java.lang.Integer} object.
+	 * @param y2 a {@link java.lang.Integer} object.
 	 * @param isSelected a boolean.
 	 */
 	protected void paintTopTabBorder(final int tabIndex, final Graphics g, final int x1, final int y1, final int x2, final int y2, final boolean isSelected) {
@@ -4483,9 +4475,9 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	/**
 	 * <p>selectAdjacentRunTab.</p>
 	 *
-	 * @param tabPlacement a int.
-	 * @param tabIndex a int.
-	 * @param offset a int.
+	 * @param tabPlacement a {@link java.lang.Integer} object.
+	 * @param tabIndex a {@link java.lang.Integer} object.
+	 * @param offset a {@link java.lang.Integer} object.
 	 */
 	protected void selectAdjacentRunTab(final int tabPlacement, final int tabIndex, final int offset) {
 		if (runCount < 2) {
@@ -4514,7 +4506,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	/**
 	 * <p>selectNextTab.</p>
 	 *
-	 * @param current a int.
+	 * @param current a {@link java.lang.Integer} object.
 	 */
 	protected void selectNextTab(final int current) {
 		int tabIndex = getNextTabIndex(current);
@@ -4527,7 +4519,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	/**
 	 * <p>selectNextTabInRun.</p>
 	 *
-	 * @param current a int.
+	 * @param current a {@link java.lang.Integer} object.
 	 */
 	protected void selectNextTabInRun(final int current) {
 		final int tc = tabPane.getTabCount();
@@ -4541,7 +4533,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	/**
 	 * <p>selectPreviousTab.</p>
 	 *
-	 * @param current a int.
+	 * @param current a {@link java.lang.Integer} object.
 	 */
 	protected void selectPreviousTab(final int current) {
 		int tabIndex = getPreviousTabIndex(current);
@@ -4554,7 +4546,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	/**
 	 * <p>selectPreviousTabInRun.</p>
 	 *
-	 * @param current a int.
+	 * @param current a {@link java.lang.Integer} object.
 	 */
 	protected void selectPreviousTabInRun(final int current) {
 		final int tc = tabPane.getTabCount();
@@ -4583,8 +4575,8 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	/**
 	 * <p>shouldPadTabRun.</p>
 	 *
-	 * @param tabPlacement a int.
-	 * @param run a int.
+	 * @param tabPlacement a {@link java.lang.Integer} object.
+	 * @param run a {@link java.lang.Integer} object.
 	 * @return a boolean.
 	 */
 	protected boolean shouldPadTabRun(final int tabPlacement, final int run) {
@@ -4594,7 +4586,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	/**
 	 * <p>shouldRotateTabRuns.</p>
 	 *
-	 * @param tabPlacement a int.
+	 * @param tabPlacement a {@link java.lang.Integer} object.
 	 * @return a boolean.
 	 */
 	protected boolean shouldRotateTabRuns(final int tabPlacement) {

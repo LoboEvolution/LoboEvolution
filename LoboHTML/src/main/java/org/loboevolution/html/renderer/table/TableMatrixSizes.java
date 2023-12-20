@@ -60,7 +60,7 @@ class TableMatrixSizes {
 	 * <p> getWidthLength. </p>
 	 *
 	 * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
-	 * @param availWidth a int.
+	 * @param availWidth a {@link java.lang.Integer} object.
 	 * @return a {@link org.loboevolution.html.style.HtmlLength} object.
 	 */
 	static HtmlLength getWidthLength(final HTMLElementImpl element, final int availWidth) {
@@ -851,16 +851,16 @@ class TableMatrixSizes {
 	 * @param rowLenght      an array of {@link org.loboevolution.info.SizeInfo}
 	 *                       objects.
 	 * @param rows           a {@link java.util.ArrayList} object.
-	 * @param cellSpacingY   a int.
-	 * @param numCols        a int.
-	 * @param widthTotal     a int.
-	 * @param difference     a int.
-	 * @param cellSpacingX   a int.
-	 * @param hasBorder      a int.
-	 * @param numNoWidth     a int.
-	 * @param cellAvailWidth a int.
-	 * @param currTotal      a int.
-	 * @return a int.
+	 * @param cellSpacingY   a {@link java.lang.Integer} object.
+	 * @param numCols        a {@link java.lang.Integer} object.
+	 * @param widthTotal     a {@link java.lang.Integer} object.
+	 * @param difference     a {@link java.lang.Integer} object.
+	 * @param cellSpacingX   a {@link java.lang.Integer} object.
+	 * @param hasBorder      a {@link java.lang.Integer} object.
+	 * @param numNoWidth     a {@link java.lang.Integer} object.
+	 * @param cellAvailWidth a {@link java.lang.Integer} object.
+	 * @param currTotal      a {@link java.lang.Integer} object.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	private static int adjustCurrentTotal2(final SizeInfo[] columnSizes, final SizeInfo[] rowLenght,
                                            final List<ArrayList<VirtualCell>> rows, final int cellSpacingY, final int numCols, final int widthTotal, final int difference,
@@ -966,14 +966,14 @@ class TableMatrixSizes {
 	 * @param rowLenght    an array of {@link org.loboevolution.info.SizeInfo}
 	 *                     objects.
 	 * @param rows         a {@link java.util.ArrayList} object.
-	 * @param cellSpacingY a int.
-	 * @param numCols      a int.
-	 * @param widthTotal   a int.
-	 * @param difference   a int.
-	 * @param cellSpacingX a int.
-	 * @param hasBorder    a int.
-	 * @param currTotal    a int.
-	 * @return a int.
+	 * @param cellSpacingY a {@link java.lang.Integer} object.
+	 * @param numCols      a {@link java.lang.Integer} object.
+	 * @param widthTotal   a {@link java.lang.Integer} object.
+	 * @param difference   a {@link java.lang.Integer} object.
+	 * @param cellSpacingX a {@link java.lang.Integer} object.
+	 * @param hasBorder    a {@link java.lang.Integer} object.
+	 * @param currTotal    a {@link java.lang.Integer} object.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	int adjustCurrentTotal(final SizeInfo[] columnSizes, final SizeInfo[] rowLenght, final List<ArrayList<VirtualCell>> rows,
                            final int cellSpacingY, final int numCols, final int widthTotal, final int difference, final int cellSpacingX, final int hasBorder,

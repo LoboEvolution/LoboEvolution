@@ -52,8 +52,6 @@ public class RUIControl extends BaseElementRenderable {
 
 	protected int declaredWidth = -1;
 
-	private final FrameContext frameContext;
-
 	private LayoutKey lastLayoutKey = null;
 
 	private LayoutValue lastLayoutValue = null;
@@ -68,15 +66,13 @@ public class RUIControl extends BaseElementRenderable {
      * @param me a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
      * @param widget a {@link org.loboevolution.html.control.UIControl} object.
      * @param container a {@link org.loboevolution.html.renderer.RenderableContainer} object.
-     * @param frameContext a {@link org.loboevolution.html.renderer.FrameContext} object.
      * @param ucontext a {@link org.loboevolution.http.UserAgentContext} object.
      */
     public RUIControl(final ModelNode me, final UIControl widget, final RenderableContainer container,
-            final FrameContext frameContext, final UserAgentContext ucontext) {
+					  final UserAgentContext ucontext) {
 		super(container, me, ucontext);
 		this.modelNode = me;
 		this.widget = widget;
-		this.frameContext = frameContext;
 		widget.setRUIControl(this);
 	}
 

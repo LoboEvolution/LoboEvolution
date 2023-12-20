@@ -62,7 +62,7 @@ public class InputPassword extends BasicInput {
 	public InputPassword(final HTMLInputElementImpl modelNode, final InputControl ic) {
 		this.modelNode = modelNode;
 		setElement(this.modelNode);
-		setjComponent(pwd);
+		setJComponent(pwd);
 		final String type = modelNode.getType();
 		
 		if (modelNode.getTitle() != null)
@@ -107,7 +107,7 @@ public class InputPassword extends BasicInput {
 
 		@Override
 		public void insertString(final int offs, final String str, final AttributeSet a) throws BadLocationException {
-			final int max = (int)modelNode.getMaxLength();
+			final int max = modelNode.getMaxLength();
 
 			final int docLength = getLength();
 			if (docLength >= max) {

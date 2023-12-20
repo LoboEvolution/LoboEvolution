@@ -52,7 +52,7 @@ public class BinaryOperation {
      * <p>getInt32.</p>
      *
      * @param number an array of {@link short} objects.
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public static int getInt32(final short[] number) {
         return (number[0] << 24) | (number[1] << 16) | (number[2] << 8) | number[3];
@@ -62,7 +62,7 @@ public class BinaryOperation {
      * <p>getInt16.</p>
      *
      * @param number an array of {@link short} objects.
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public static int getInt16(final short[] number) {
         return (number[0] << 8) | number[1];
@@ -72,7 +72,7 @@ public class BinaryOperation {
      * <p>bit32ShiftL.</p>
      *
      * @param number a long.
-     * @param shift  a int.
+     * @param shift  a {@link java.lang.Integer} object.
      * @return a long.
      */
     public static long bit32ShiftL(final long number, final int shift) {
@@ -84,7 +84,7 @@ public class BinaryOperation {
      * <p>bit32ShiftR.</p>
      *
      * @param number a long.
-     * @param shift  a int.
+     * @param shift  a {@link java.lang.Integer} object.
      * @return a long.
      */
     public static long bit32ShiftR(final long number, final int shift) {
@@ -104,10 +104,10 @@ public class BinaryOperation {
     /**
      * <p>bit8Shift.</p>
      *
-     * @param number    a int.
-     * @param shift     a int.
-     * @param direction a int.
-     * @return a int.
+     * @param number    a {@link java.lang.Integer} object.
+     * @param shift     a {@link java.lang.Integer} object.
+     * @param direction a {@link java.lang.Integer} object.
+     * @return a {@link java.lang.Integer} object.
      */
     public static int bit8Shift(int number, final int shift, final int direction) {
         if (direction == LEFT_SHIFT)
@@ -122,7 +122,7 @@ public class BinaryOperation {
      * <p>getInt32.</p>
      *
      * @param number an array of {@link byte} objects.
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public static int getInt32(final byte[] number) {
         return (number[0] << 24) | (number[1] << 16) | (number[2] << 8) | number[3];

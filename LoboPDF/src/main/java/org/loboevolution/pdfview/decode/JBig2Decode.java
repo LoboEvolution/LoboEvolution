@@ -85,8 +85,7 @@ public class JBig2Decode {
         } catch (final JBIG2Exception ex) {
             final IOException ioException;
 
-            ioException = new IOException();
-            ioException.initCause(ex);
+            ioException = new IOException(ex);
             throw ioException;
         }
         return decoder.getPageAsJBIG2Bitmap(0).getData(true);

@@ -98,7 +98,7 @@ public interface HTMLTableCellElement extends HTMLElement {
     /**
      * Retrieves the position of the object in the cells collection of a row.
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     int getCellIndex();
 
@@ -137,7 +137,7 @@ public interface HTMLTableCellElement extends HTMLElement {
     /**
      * Sets or retrieves the number columns in the table that the object should span.
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     int getColSpan();
 
@@ -199,7 +199,7 @@ public interface HTMLTableCellElement extends HTMLElement {
     /**
      * Sets or retrieves how many rows in a table the cell should span.
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     int getRowSpan();
 

@@ -26,6 +26,7 @@
 package org.loboevolution.html.style;
 
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
@@ -37,6 +38,7 @@ import java.awt.*;
  * <p>HtmlInsets class.</p>
  */
 @Data
+@Slf4j
 public class HtmlInsets {
 	
 	/** Constant TYPE_UNDEFINED=0 */
@@ -84,10 +86,10 @@ public class HtmlInsets {
 	/**
 	 * <p>getAWTInsets.</p>
 	 *
-	 * @param availWidth a int.
-	 * @param availHeight a int.
-	 * @param autoX a int.
-	 * @param autoY a int.
+	 * @param availWidth a {@link java.lang.Integer} object.
+	 * @param availHeight a {@link java.lang.Integer} object.
+	 * @param autoX a {@link java.lang.Integer} object.
+	 * @param autoY a {@link java.lang.Integer} object.
 	 * @return a {@link java.awt.Insets} object.
 	 */
 	public Insets getAWTInsets(final int availWidth, final int availHeight, final int autoX, final int autoY) {
@@ -139,7 +141,9 @@ public class HtmlInsets {
 				type = HtmlInsets.TYPE_PERCENT;
 				try {
 					value = Integer.parseInt(sizeText.substring(0, sizeText.length() - 1));
-				} catch (final Exception nfe) {}
+				} catch (final Exception e) {
+					log.info(e.getMessage());
+				}
 			} else {
 				final HTMLDocumentImpl doc = (HTMLDocumentImpl)element.getDocumentNode();
 				type = HtmlInsets.TYPE_PIXELS;

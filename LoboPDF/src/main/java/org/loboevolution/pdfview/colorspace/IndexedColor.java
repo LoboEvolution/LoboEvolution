@@ -123,7 +123,7 @@ public class IndexedColor extends PDFColorSpace {
     /**
      * Get the number of indices
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getCount() {
         return this.count;

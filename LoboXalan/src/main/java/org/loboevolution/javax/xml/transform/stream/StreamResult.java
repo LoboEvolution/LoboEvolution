@@ -26,6 +26,7 @@
 
 package org.loboevolution.javax.xml.transform.stream;
 
+import lombok.Data;
 import org.loboevolution.javax.xml.transform.Result;
 
 import java.io.File;
@@ -38,14 +39,33 @@ import java.io.Writer;
  *
  * @author <a href="Jeff.Suttor@Sun.com">Jeff Suttor</a>
  */
+@Data
 public class StreamResult implements Result {
 
-    /** If {@link org.loboevolution.javax.xml.transform.TransformerFactory#getFeature}
+    /**
+     * If {@link org.loboevolution.javax.xml.transform.TransformerFactory#getFeature}
      * returns true when passed this value as an argument,
      * the Transformer supports Result output of this type.
      */
     public static final String FEATURE =
-        "http://org.loboevolution.javax.xml.transform.stream.StreamResult/feature";
+            "http://org.loboevolution.javax.xml.transform.stream.StreamResult/feature";
+
+    /**
+     * The systemID that may be used in association
+     * with the byte or character stream, or, if neither is set, use
+     * this value as a writeable URI (probably a file name).
+     */
+    private String systemId;
+
+    /**
+     * The byte stream that is to be written to.
+     */
+    private OutputStream outputStream;
+
+    /**
+     * The character stream that is to be written to.
+     */
+    private Writer writer;
 
     /**
      * Zero-argument default constructor.
@@ -73,7 +93,7 @@ public class StreamResult implements Result {
      * there are times when it is useful to write to a character
      * stream, such as when using a StringWriter.
      *
-     * @param writer  A valid Writer reference.
+     * @param writer A valid Writer reference.
      */
     public StreamResult(final Writer writer) {
         setWriter(writer);
@@ -94,110 +114,6 @@ public class StreamResult implements Result {
      * @param f Must a non-null File reference.
      */
     public StreamResult(final File f) {
-        //convert file to appropriate URI, f.toURI().toASCIIString()
-        //converts the URI to string as per rule specified in
-        //RFC 2396,
         setSystemId(f.toURI().toASCIIString());
     }
-
-    /**
-     * Set the ByteStream that is to be written to.  Normally,
-     * a stream should be used rather than a reader, so that
-     * the transformer may use instructions contained in the
-     * transformation instructions to control the encoding.
-     *
-     * @param outputStream A valid OutputStream reference.
-     */
-    public void setOutputStream(final OutputStream outputStream) {
-        this.outputStream = outputStream;
-    }
-
-    /**
-     * Get the byte stream that was set with setOutputStream.
-     *
-     * @return The byte stream that was set with setOutputStream, or null
-     * if setOutputStream or the ByteStream constructor was not called.
-     */
-    public OutputStream getOutputStream() {
-        return outputStream;
-    }
-
-    /**
-     * Set the writer that is to receive the result.  Normally,
-     * a stream should be used rather than a writer, so that
-     * the transformer may use instructions contained in the
-     * transformation instructions to control the encoding.  However,
-     * there are times when it is useful to write to a writer,
-     * such as when using a StringWriter.
-     *
-     * @param writer  A valid Writer reference.
-     */
-    public void setWriter(final Writer writer) {
-        this.writer = writer;
-    }
-
-    /**
-     * Get the character stream that was set with setWriter.
-     *
-     * @return The character stream that was set with setWriter, or null
-     * if setWriter or the Writer constructor was not called.
-     */
-    public Writer getWriter() {
-        return writer;
-    }
-
-    /**
-     * Set the systemID that may be used in association
-     * with the byte or character stream, or, if neither is set, use
-     * this value as a writeable URI (probably a file name).
-     *
-     * @param systemId The system identifier as a URI string.
-     */
-    public void setSystemId(final String systemId) {
-        this.systemId = systemId;
-    }
-
-    /**
-     * <p>Set the system ID from a <code>File</code> reference.</p>
-     *
-     *
-     * @param f Must a non-null File reference.
-     */
-    public void setSystemId(final File f) {
-        //convert file to appropriate URI, f.toURI().toASCIIString()
-        //converts the URI to string as per rule specified in
-        //RFC 2396,
-        this.systemId = f.toURI().toASCIIString();
-    }
-
-    /**
-     * Get the system identifier that was set with setSystemId.
-     *
-     * @return The system identifier that was set with setSystemId, or null
-     * if setSystemId was not called.
-     */
-    public String getSystemId() {
-        return systemId;
-    }
-
-    //////////////////////////////////////////////////////////////////////
-    // Internal state.
-    //////////////////////////////////////////////////////////////////////
-
-    /**
-     * The systemID that may be used in association
-     * with the byte or character stream, or, if neither is set, use
-     * this value as a writeable URI (probably a file name).
-     */
-    private String systemId;
-
-    /**
-     * The byte stream that is to be written to.
-     */
-    private OutputStream outputStream;
-
-    /**
-     * The character stream that is to be written to.
-     */
-    private Writer writer;
 }

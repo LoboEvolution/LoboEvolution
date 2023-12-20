@@ -138,7 +138,7 @@ public class PageInformationSegment extends Segment {
     /**
      * <p>Getter for the field <code>pageBitmapHeight</code>.</p>
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getPageBitmapHeight() {
         return pageBitmapHeight;

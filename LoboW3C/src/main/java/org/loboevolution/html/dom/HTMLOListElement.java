@@ -68,14 +68,14 @@ public interface HTMLOListElement extends HTMLElement {
 	/**
 	 * The starting number.
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	int getStart();
 
 	/**
 	 * <p>setStart.</p>
 	 *
-	 * @param start a int.
+	 * @param start a {@link java.lang.Integer} object.
 	 */
 	void setStart(int start);
 

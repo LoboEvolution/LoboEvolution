@@ -60,8 +60,8 @@ public class PDFXref {
     /**
      * create a new PDFXref, given a parsed id and generation.
      *
-     * @param id  a int.
-     * @param gen a int.
+     * @param id  a {@link java.lang.Integer} object.
+     * @param gen a {@link java.lang.Integer} object.
      */
     public PDFXref(final int id, final int gen) {
         this.id = id;
@@ -72,8 +72,8 @@ public class PDFXref {
     /**
      * create a new PDFXref, given a parsed id, compressedObjId and index
      *
-     * @param id         a int.
-     * @param gen        a int.
+     * @param id         a {@link java.lang.Integer} object.
+     * @param gen        a {@link java.lang.Integer} object.
      * @param compressed a boolean.
      */
     public PDFXref(final int id, final int gen, final boolean compressed) {
@@ -102,7 +102,7 @@ public class PDFXref {
     /**
      * get the character index into the file of the start of this object
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getFilePos() {
         return this.id;
@@ -111,7 +111,7 @@ public class PDFXref {
     /**
      * get the generation of this object
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getGeneration() {
         return this.generation;
@@ -120,7 +120,7 @@ public class PDFXref {
     /**
      * get the generation of this object
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getIndex() {
         return this.generation;
@@ -129,7 +129,7 @@ public class PDFXref {
     /**
      * get the object number of this object
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getID() {
         return this.id;

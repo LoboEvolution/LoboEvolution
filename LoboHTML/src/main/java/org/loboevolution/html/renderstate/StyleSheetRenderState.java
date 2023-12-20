@@ -130,7 +130,7 @@ public class StyleSheetRenderState implements RenderState {
 
 	protected final RenderState prevRenderState;
 	    
-    private Optional<Cursor> cursor;
+    private Cursor cursor;
 
 	Map<String, WordInfo> iWordInfoMap = null;
 
@@ -1233,17 +1233,17 @@ public class StyleSheetRenderState implements RenderState {
     
     /** {@inheritDoc} */
     @Override
-    public void setCursor(final Optional<Cursor> cursor) {
+    public void setCursor(final Cursor cursor) {
        this.cursor = cursor;
         
     }
 
 	/** {@inheritDoc} */
 	@Override
-	public Optional<Cursor> getCursor() {
+	public Cursor getCursor() {
 		final Toolkit toolkit = Toolkit.getDefaultToolkit();
-		Optional<Cursor> prevCursorOpt = Optional.empty();
-		if(element == null) return prevCursorOpt;
+		Cursor prevCursorOpt = null;
+		if(element == null) return null;
 		final CSSStyleDeclaration props = element.getStyle();
 		final HtmlRendererConfig config = element.getHtmlRendererConfig();
 
@@ -1258,54 +1258,54 @@ public class StyleSheetRenderState implements RenderState {
 			switch (key) {
 				case AUTO:
 				case TEXT_CSS:
-					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
+					prevCursorOpt = Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR);
 					break;
 				case CROSSHAIR:
-					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
+					prevCursorOpt = Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR);
 					break;
 				case E_RESIZE:
 				case EW_RESIZE:
-					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.E_RESIZE_CURSOR));
+					prevCursorOpt = Cursor.getPredefinedCursor(Cursor.E_RESIZE_CURSOR);
 					break;
 				case MOVE:
-					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
+					prevCursorOpt = Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR);
 					break;
 				case N_RESIZE:
-					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.N_RESIZE_CURSOR));
+					prevCursorOpt = Cursor.getPredefinedCursor(Cursor.N_RESIZE_CURSOR);
 					break;
 				case NE_RESIZE:
 				case NESW_RESIZE:
-					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.NE_RESIZE_CURSOR));
+					prevCursorOpt = Cursor.getPredefinedCursor(Cursor.NE_RESIZE_CURSOR);
 					break;
 				case NW_RESIZE:
 				case NWSE_RESIZE:
-					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.NW_RESIZE_CURSOR));
+					prevCursorOpt = Cursor.getPredefinedCursor(Cursor.NW_RESIZE_CURSOR);
 					break;
 				case GRAB:
 				case POINTER:
-					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+					prevCursorOpt = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);
 					break;
 				case S_RESIZE:
-					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.S_RESIZE_CURSOR));
+					prevCursorOpt = Cursor.getPredefinedCursor(Cursor.S_RESIZE_CURSOR);
 					break;
 				case SE_RESIZE:
-					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.SE_RESIZE_CURSOR));
+					prevCursorOpt = Cursor.getPredefinedCursor(Cursor.SE_RESIZE_CURSOR);
 					break;
 				case SW_RESIZE:
-					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.SW_RESIZE_CURSOR));
+					prevCursorOpt = Cursor.getPredefinedCursor(Cursor.SW_RESIZE_CURSOR);
 					break;
 				case W_RESIZE:
-					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.W_RESIZE_CURSOR));
+					prevCursorOpt = Cursor.getPredefinedCursor(Cursor.W_RESIZE_CURSOR);
 					break;
 				case WAIT:
 				case PROGRESS:
-					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+					prevCursorOpt = Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
 					break;
 				case ZOOM_IN:
-					prevCursorOpt =  Optional.of(toolkit.createCustomCursor(new ImageIcon(config.getResourceFile("zoomin.png")).getImage(), new Point(5,5), "zoomin"));
+					prevCursorOpt =  toolkit.createCustomCursor(new ImageIcon(config.getResourceFile("zoomin.png")).getImage(), new Point(5,5), "zoomin");
 					break;
 				case ZOOM_OUT:
-					prevCursorOpt =  Optional.of(toolkit.createCustomCursor(new ImageIcon(config.getResourceFile("zoomout.png")).getImage(), new Point(5,5), "zoomout"));
+					prevCursorOpt =  toolkit.createCustomCursor(new ImageIcon(config.getResourceFile("zoomout.png")).getImage(), new Point(5,5), "zoomout");
 					break;
 				case INHERIT:
 					prevCursorOpt = this.getPreviousRenderState().getCursor();
@@ -1313,7 +1313,7 @@ public class StyleSheetRenderState implements RenderState {
 				case DEFAULT:
 				case INITIAL:
 				default:
-					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+					prevCursorOpt = Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR);
 					break;
 			}
 		}

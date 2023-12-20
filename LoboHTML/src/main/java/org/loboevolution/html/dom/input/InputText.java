@@ -26,6 +26,9 @@
 
 package org.loboevolution.html.dom.input;
 
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.ArrayUtilities;
 import org.loboevolution.common.Strings;
@@ -54,6 +57,8 @@ public class InputText extends BasicInput {
 
 	protected final JTextField iText = new JTextField();
 	
+	@Getter
+	@Setter
 	private boolean textWrittenIn;
 	
 	private final HTMLInputElementImpl modelNode;
@@ -67,7 +72,7 @@ public class InputText extends BasicInput {
 	public InputText(final HTMLInputElementImpl modelNode, final InputControl ic) {
 		this.modelNode = modelNode;
 		setElement(this.modelNode);
-		setjComponent(iText);
+		setJComponent(iText);
 		final String type = modelNode.getType();
 		final Font font = iText.getFont();
 		iText.setFont(font.deriveFont(modelNode.getHtmlRendererConfig().getFontSize()));
@@ -157,8 +162,8 @@ public class InputText extends BasicInput {
 	/**
 	 * <p>setSelectionRange.</p>
 	 *
-	 * @param start a int.
-	 * @param end a int.
+	 * @param start a {@link java.lang.Integer} object.
+	 * @param end a {@link java.lang.Integer} object.
 	 */
 	public void setSelectionRange(final int start, final int end) {
 		iText.setSelectionStart(start);
@@ -184,8 +189,8 @@ public class InputText extends BasicInput {
 	/**
 	 * <p>setRangeText.</p>
 	 *
-	 * @param start a int.
-	 * @param end a int.
+	 * @param start a {@link java.lang.Integer} object.
+	 * @param end a {@link java.lang.Integer} object.
 	 * @param text a {@link java.lang.String} object.
 	 */
 	public void setRangeText(final int start, final int end, final String text) {
@@ -251,23 +256,5 @@ public class InputText extends BasicInput {
 				super.insertString(offs, str, a);
 			}
 		}
-	}
-	
-	/**
-	 * <p>isTextWrittenIn.</p>
-	 *
-	 * @return a boolean.
-	 */
-	public boolean isTextWrittenIn() {
-		return textWrittenIn;
-	}
-
-	/**
-	 * <p>Setter for the field textWrittenIn.</p>
-	 *
-	 * @param textWrittenIn a boolean.
-	 */
-	public void setTextWrittenIn(final boolean textWrittenIn) {
-		this.textWrittenIn = textWrittenIn;
 	}
 }

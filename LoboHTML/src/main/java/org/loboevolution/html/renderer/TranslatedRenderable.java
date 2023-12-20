@@ -170,7 +170,7 @@ public class TranslatedRenderable extends BaseBoundableRenderable implements RCo
     /**
      * <p>getX.</p>
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getX() {
         return translatedChild.getX();
@@ -179,7 +179,7 @@ public class TranslatedRenderable extends BaseBoundableRenderable implements RCo
     /**
      * <p>getY.</p>
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getY() {
         return translatedChild.getY();
@@ -188,7 +188,7 @@ public class TranslatedRenderable extends BaseBoundableRenderable implements RCo
     /**
      * <p>getHeight.</p>
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getHeight() {
         return translatedChild.getHeight();
@@ -197,7 +197,7 @@ public class TranslatedRenderable extends BaseBoundableRenderable implements RCo
     /**
      * <p>getWidth.</p>
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getWidth() {
         return translatedChild.getWidth();
@@ -206,7 +206,7 @@ public class TranslatedRenderable extends BaseBoundableRenderable implements RCo
     /**
      * <p>getVisualHeight.</p>
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getVisualHeight() {
         return translatedChild.getVisualHeight();
@@ -215,7 +215,7 @@ public class TranslatedRenderable extends BaseBoundableRenderable implements RCo
     /**
      * <p>getVisualWidth.</p>
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getVisualWidth() {
         return translatedChild.getVisualWidth();
@@ -267,8 +267,8 @@ public class TranslatedRenderable extends BaseBoundableRenderable implements RCo
      * <p>onMiddleClick.</p>
      *
      * @param event a {@link java.awt.event.MouseEvent} object.
-     * @param x a int.
-     * @param y a int.
+     * @param x a {@link java.lang.Integer} object.
+     * @param y a {@link java.lang.Integer} object.
      * @return a boolean.
      */
     public boolean onMiddleClick(final MouseEvent event, final int x, final int y) {
@@ -333,7 +333,7 @@ public class TranslatedRenderable extends BaseBoundableRenderable implements RCo
     /**
      * <p>getZIndex.</p>
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getZIndex() {
         return translatedChild.getZIndex();

@@ -26,12 +26,15 @@
 
 package org.loboevolution.html.dom.svgimpl;
 
+import lombok.Data;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * <p>SVGAnimatedValue class.</p>
  */
+@Data
 public abstract class SVGAnimatedValue {
 
     public static final short ANIMTYPE_ANGLE = 0;
@@ -48,22 +51,14 @@ public abstract class SVGAnimatedValue {
     public static final short ANIMTYPE_TEXTROTATE = 11;
     public static final short ANIMTYPE_TRANSFORMLIST = 12;
 
-    protected SVGElementImpl owner;
-    protected List<SVGAnimationElementImpl> animations;
-
-    public SVGElementImpl getOwner() {
-        return owner;
-    }
+    private SVGElementImpl owner;
+    private List<SVGAnimationElementImpl> animations;
 
     public void addAnimation(final SVGAnimationElementImpl animation) {
         if (animations == null) {
-            animations = new ArrayList();
+            animations = new ArrayList<>();
         }
         animations.add(animation);
-    }
-
-    public List<SVGAnimationElementImpl> getAnimations() {
-        return animations;
     }
 
 }

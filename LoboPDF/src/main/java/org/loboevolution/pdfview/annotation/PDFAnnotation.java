@@ -153,7 +153,7 @@ public class PDFAnnotation {
             case LINK:
                 return Configuration.getInstance().isPrintLinkAnnotations();
             case SIGNATURE:
-                return Configuration.getInstance().isPrintSignatureFields();
+                return Configuration.getInstance().isPrintSigantureFields();
             case UNKNOWN:
             default:
                 return false;

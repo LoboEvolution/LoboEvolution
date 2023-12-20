@@ -206,7 +206,7 @@ public interface Element extends Node, InnerHTML, NonDocumentTypeChildNode, Pare
     /**
      * <p>setScrollLeft.</p>
      *
-     * @param scrollLeft a int.
+     * @param scrollLeft a {@link java.lang.Integer} object.
      */
     void setScrollLeft(double scrollLeft);
 
@@ -222,7 +222,7 @@ public interface Element extends Node, InnerHTML, NonDocumentTypeChildNode, Pare
     /**
      * <p>setScrollTop.</p>
      *
-     * @param scrollTop a int.
+     * @param scrollTop a {@link java.lang.Integer} object.
      */
     void setScrollTop(double scrollTop);
 
@@ -355,7 +355,7 @@ public interface Element extends Node, InnerHTML, NonDocumentTypeChildNode, Pare
     /**
      * <p>hasPointerCapture.</p>
      *
-     * @param pointerId a int.
+     * @param pointerId a {@link java.lang.Integer} object.
      * @return a boolean.
      */
     boolean hasPointerCapture(int pointerId);
@@ -371,7 +371,7 @@ public interface Element extends Node, InnerHTML, NonDocumentTypeChildNode, Pare
     /**
      * <p>releasePointerCapture.</p>
      *
-     * @param pointerId a int.
+     * @param pointerId a {@link java.lang.Integer} object.
      */
     void releasePointerCapture(int pointerId);
 
@@ -501,7 +501,7 @@ public interface Element extends Node, InnerHTML, NonDocumentTypeChildNode, Pare
     /**
      * <p>setPointerCapture.</p>
      *
-     * @param pointerId a int.
+     * @param pointerId a {@link java.lang.Integer} object.
      */
     void setPointerCapture(int pointerId);
 

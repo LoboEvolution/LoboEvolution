@@ -455,7 +455,7 @@ public class SymbolDictionarySegment extends Segment {
     /**
      * <p>Getter for the field <code>noOfExportedSymbols</code>.</p>
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getNoOfExportedSymbols() {
         return noOfExportedSymbols;
@@ -464,7 +464,7 @@ public class SymbolDictionarySegment extends Segment {
     /**
      * <p>Setter for the field <code>noOfExportedSymbols</code>.</p>
      *
-     * @param noOfExportedSymbols a int.
+     * @param noOfExportedSymbols a {@link java.lang.Integer} object.
      */
     public void setNoOfExportedSymbols(final int noOfExportedSymbols) {
         this.noOfExportedSymbols = noOfExportedSymbols;
@@ -473,7 +473,7 @@ public class SymbolDictionarySegment extends Segment {
     /**
      * <p>Getter for the field <code>noOfNewSymbols</code>.</p>
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getNoOfNewSymbols() {
         return noOfNewSymbols;
@@ -482,7 +482,7 @@ public class SymbolDictionarySegment extends Segment {
     /**
      * <p>Setter for the field <code>noOfNewSymbols</code>.</p>
      *
-     * @param noOfNewSymbols a int.
+     * @param noOfNewSymbols a {@link java.lang.Integer} object.
      */
     public void setNoOfNewSymbols(final int noOfNewSymbols) {
         this.noOfNewSymbols = noOfNewSymbols;

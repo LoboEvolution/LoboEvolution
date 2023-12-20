@@ -55,7 +55,7 @@ public class RecordedInputStream extends InputStream {
 	 * <p>Constructor for RecordedInputStream.</p>
 	 *
 	 * @param delegate a {@link java.io.InputStream} object.
-	 * @param maxBufferSize a int.
+	 * @param maxBufferSize a {@link java.lang.Integer} object.
 	 */
 	public RecordedInputStream(final InputStream delegate, final int maxBufferSize) {
 		this.delegate = delegate;

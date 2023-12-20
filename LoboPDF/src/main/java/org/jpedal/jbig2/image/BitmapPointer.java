@@ -51,8 +51,8 @@ public class BitmapPointer {
     /**
      * <p>setPointer.</p>
      *
-     * @param x a int.
-     * @param y a int.
+     * @param x a {@link java.lang.Integer} object.
+     * @param y a {@link java.lang.Integer} object.
      */
     public void setPointer(final int x, final int y) {
         this.x = x;
@@ -64,7 +64,7 @@ public class BitmapPointer {
     /**
      * <p>nextPixel.</p>
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int nextPixel() {
 

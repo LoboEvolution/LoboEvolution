@@ -86,7 +86,7 @@ public interface NamedNodeMap {
 	/**
 	 * <p>item.</p>
 	 *
-	 * @param index a int.
+	 * @param index a {@link java.lang.Integer} object.
 	 * @return a {@link org.loboevolution.html.node.Attr} object.
 	 */
 	Node item(int index);
@@ -94,7 +94,7 @@ public interface NamedNodeMap {
 	/**
 	 * <p>getLength.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	int getLength();
 }

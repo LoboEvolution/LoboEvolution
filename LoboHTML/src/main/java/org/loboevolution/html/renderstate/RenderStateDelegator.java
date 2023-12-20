@@ -31,7 +31,6 @@ import org.loboevolution.info.BorderInfo;
 import org.loboevolution.info.WordInfo;
 
 import java.awt.*;
-import java.util.Optional;
 
 /**
  * <p>Abstract RenderStateDelegator class.</p>
@@ -327,13 +326,13 @@ public abstract class RenderStateDelegator implements RenderState {
 
 	/** {@inheritDoc} */
 	@Override
-	public Optional<Cursor> getCursor() {
+	public Cursor getCursor() {
 		return this.delegate.getCursor();
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setCursor(final Optional<Cursor> cursor) {
+	public void setCursor(final Cursor cursor) {
 		this.delegate.setCursor(cursor);
 	}
 

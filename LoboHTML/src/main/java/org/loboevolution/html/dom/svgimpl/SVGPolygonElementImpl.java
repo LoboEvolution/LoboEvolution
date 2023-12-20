@@ -26,6 +26,7 @@
 
 package org.loboevolution.html.dom.svgimpl;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.html.dom.svg.*;
 
 import java.awt.*;
@@ -37,6 +38,7 @@ import java.util.StringTokenizer;
 /**
  * <p>SVGPolygonElementImpl class.</p>
  */
+@Slf4j
 public class SVGPolygonElementImpl extends SVGGraphic implements SVGPolygonElement {
 
 	/**
@@ -105,6 +107,7 @@ public class SVGPolygonElementImpl extends SVGGraphic implements SVGPolygonEleme
 				final SVGPoint point = new SVGPointImpl(x, y);
 				points.appendItem(point);
 			} catch (final NoSuchElementException e) {
+				log.info(e.getMessage());
 			}
 		}
 		return points;

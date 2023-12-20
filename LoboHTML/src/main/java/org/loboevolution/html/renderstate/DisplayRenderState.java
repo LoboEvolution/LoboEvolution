@@ -38,7 +38,7 @@ public class DisplayRenderState extends StyleSheetRenderState {
 	 *
 	 * @param prevRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
 	 * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
-	 * @param defaultDisplay a int.
+	 * @param defaultDisplay a {@link java.lang.Integer} object.
 	 */
 	public DisplayRenderState(final RenderState prevRenderState, final HTMLElementImpl element, final int defaultDisplay) {
 		super(prevRenderState, element);

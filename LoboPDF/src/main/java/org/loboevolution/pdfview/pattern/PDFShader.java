@@ -135,7 +135,7 @@ public abstract class PDFShader {
     /**
      * Creates a new instance of PDFShader
      *
-     * @param type a int.
+     * @param type a {@link java.lang.Integer} object.
      */
     protected PDFShader(final int type) {
         this.type = type;
@@ -230,7 +230,7 @@ public abstract class PDFShader {
     /**
      * Get the type
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getType() {
         return this.type;

@@ -94,7 +94,7 @@ public class NavigationManager {
 	 *
 	 * @param uri a {@link java.lang.String} object.
 	 * @param title a {@link java.lang.String} object.
-	 * @param index a int.
+	 * @param index a {@link java.lang.Integer} object.
 	 */
 	public static void insertHistory(final String uri, final String title, final int index) {
 		final NavigationStore history = new NavigationStore();

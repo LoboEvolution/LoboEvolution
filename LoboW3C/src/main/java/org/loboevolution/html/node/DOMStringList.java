@@ -38,7 +38,7 @@ public interface DOMStringList {
     /**
      * Returns the number of strings in strings.
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     int getLength();
 
@@ -53,7 +53,7 @@ public interface DOMStringList {
     /**
      * Returns the string with index index from strings.
      *
-     * @param index a int.
+     * @param index a {@link java.lang.Integer} object.
      * @return a {@link java.lang.String} object.
      */
     String item(int index);

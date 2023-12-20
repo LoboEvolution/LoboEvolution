@@ -724,7 +724,7 @@ public class PDFImage {
     /**
      * Get the image's width
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getWidth() {
         return this.width;
@@ -733,7 +733,7 @@ public class PDFImage {
     /**
      * Set the image's width
      *
-     * @param width a int.
+     * @param width a {@link java.lang.Integer} object.
      */
     protected void setWidth(final int width) {
         this.width = width;
@@ -742,7 +742,7 @@ public class PDFImage {
     /**
      * Get the image's height
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getHeight() {
         return this.height;
@@ -751,7 +751,7 @@ public class PDFImage {
     /**
      * Set the image's height
      *
-     * @param height a int.
+     * @param height a {@link java.lang.Integer} object.
      */
     protected void setHeight(final int height) {
         this.height = height;
@@ -794,7 +794,7 @@ public class PDFImage {
     /**
      * Get the number of bits per component sample
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     protected int getBitsPerComponent() {
         return this.bpc;
@@ -803,7 +803,7 @@ public class PDFImage {
     /**
      * Set the number of bits per component sample
      *
-     * @param bpc a int.
+     * @param bpc a {@link java.lang.Integer} object.
      */
     protected void setBitsPerComponent(final int bpc) {
         this.bpc = bpc;

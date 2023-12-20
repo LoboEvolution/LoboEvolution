@@ -105,7 +105,7 @@ public class DocumentBuilderImpl {
 	 * @throws java.io.IOException if any.
 	 */
 	public Document parse(final InputSource is) throws SAXException, IOException {
-		return (HTMLDocumentImpl) createDocument(is);
+		return createDocument(is);
 	}
 
 	private WritableLineReader writableLineReader(final InputSource is, final String uri) throws IOException {

@@ -255,7 +255,7 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
      * Sets the currently viewed page, indicates it with a highlight border, and
      * makes sure the thumbnail is visible.
      *
-     * @param pagenum a int.
+     * @param pagenum a {@link java.lang.Integer} object.
      */
     public void pageShown(final int pagenum) {
         if (showing != pagenum) {
@@ -282,7 +282,7 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
      * notification in the AWT thread. Also highlights the selected page. Does
      * this first so that feedback is immediate.
      *
-     * @param pagenum a int.
+     * @param pagenum a {@link java.lang.Integer} object.
      */
     public void showPage(final int pagenum) {
         pageShown(pagenum);

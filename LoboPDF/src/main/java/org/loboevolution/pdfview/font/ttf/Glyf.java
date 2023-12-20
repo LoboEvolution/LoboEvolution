@@ -26,16 +26,19 @@
 
 package org.loboevolution.pdfview.font.ttf;
 
+import lombok.Data;
+
 import java.nio.ByteBuffer;
 
 /**
  * A single glyph in a pdf font.  May be simple or compound via subclasses
  */
+@Data
 public class Glyf {
     /**
      * If true, the glyf is compound
      */
-    private boolean isCompound;
+    private boolean compound;
 
     /**
      * the number of contours
@@ -81,7 +84,7 @@ public class Glyf {
     public static Glyf getGlyf(final ByteBuffer data) {
         final short numContours = data.getShort();
 
-        Glyf g = null;
+        Glyf g;
         if (numContours == 0) {
             // no glyph data
             g = new Glyf();
@@ -136,7 +139,7 @@ public class Glyf {
      * @param data a {@link java.nio.ByteBuffer} object.
      */
     public void setData(final ByteBuffer data) {
-        return;
+        //No data
     }
 
     /**
@@ -147,113 +150,5 @@ public class Glyf {
      */
     public short getLength() {
         return 10;
-    }
-
-    /**
-     * Get whether this is a simple or compound glyf
-     *
-     * @return a boolean.
-     */
-    public boolean isCompound() {
-        return this.isCompound;
-    }
-
-    /**
-     * Set whether this is a simple or compound glyf
-     *
-     * @param isCompound a boolean.
-     */
-    protected void setCompound(final boolean isCompound) {
-        this.isCompound = isCompound;
-    }
-
-    /**
-     * Get the number of contours in this glyf
-     *
-     * @return a short.
-     */
-    public short getNumContours() {
-        return this.numContours;
-    }
-
-    /**
-     * Set the number of contours in this glyf
-     *
-     * @param numContours a short.
-     */
-    protected void setNumContours(final short numContours) {
-        this.numContours = numContours;
-    }
-
-    /**
-     * Get the minimum x in this glyf
-     *
-     * @return a short.
-     */
-    public short getMinX() {
-        return this.minX;
-    }
-
-    /**
-     * Set the minimum X in this glyf
-     *
-     * @param minX a short.
-     */
-    protected void setMinX(final short minX) {
-        this.minX = minX;
-    }
-
-    /**
-     * Get the minimum y in this glyf
-     *
-     * @return a short.
-     */
-    public short getMinY() {
-        return this.minY;
-    }
-
-    /**
-     * Set the minimum Y in this glyf
-     *
-     * @param minY a short.
-     */
-    protected void setMinY(final short minY) {
-        this.minY = minY;
-    }
-
-    /**
-     * Get the maximum x in this glyf
-     *
-     * @return a short.
-     */
-    public short getMaxX() {
-        return this.maxX;
-    }
-
-    /**
-     * Set the maximum X in this glyf
-     *
-     * @param maxX a short.
-     */
-    protected void setMaxX(final short maxX) {
-        this.maxX = maxX;
-    }
-
-    /**
-     * Get the maximum y in this glyf
-     *
-     * @return a short.
-     */
-    public short getMaxY() {
-        return this.maxY;
-    }
-
-    /**
-     * Set the maximum Y in this glyf
-     *
-     * @param maxY a short.
-     */
-    protected void setMaxY(final short maxY) {
-        this.maxY = maxY;
     }
 }

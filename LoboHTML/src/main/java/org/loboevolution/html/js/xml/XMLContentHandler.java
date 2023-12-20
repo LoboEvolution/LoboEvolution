@@ -26,6 +26,7 @@
 
 package org.loboevolution.html.js.xml;
 
+import lombok.Getter;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.html.dom.nodeimpl.DOMImplementationImpl;
@@ -41,6 +42,7 @@ import java.util.Objects;
  */
 public class XMLContentHandler implements ContentHandler, LexicalHandler, ErrorHandler {
 
+    @Getter
     private Document document = null;
 
     private Node currentNode = null;
@@ -143,10 +145,8 @@ public class XMLContentHandler implements ContentHandler, LexicalHandler, ErrorH
 
     /** {@inheritDoc} */
     @Override
-    public void comment(final char[] ch, final int start, final int length) {}
+    public void comment(final char[] ch, final int start, final int length) {
 
-    public Document getDocument() {
-        return this.document;
     }
 
     private void documentElement(final String uri, final String localName, final String qName, final Attributes atts) throws SAXException {

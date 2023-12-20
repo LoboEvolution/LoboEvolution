@@ -38,17 +38,10 @@ import java.sql.PreparedStatement;
  * <p>LookAndFeelsStore class.</p>
  */
 @Slf4j
-public class LookAndFeelsStore {
+public class LookAndFeelsStore implements QueryStore{
 
 	/** The Constant DB_PATH. */
 	private static final String DB_PATH = DatabseSQLite.getDatabaseDirectory();
-
-	private final String DELETE_LAF = "DELETE FROM LOOK_AND_FEEL";
-
-	private final String INSERT_LAF = " INSERT INTO LOOK_AND_FEEL (acryl, aero, aluminium, bernstein, fast, graphite,"
-			+ "hiFi,luna, mcWin, mint, noire, smart, texture, subscript, superscript, underline, italic, "
-			+ "strikethrough, fontSize, font, color, bold, modern, black, white) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-
 	/**
 	 * Connect to the test.db database
 	 *

@@ -953,8 +953,7 @@ public class StandardDecrypter implements PDFDecrypter {
         final byte[] padded = new byte[32];
         // limit password to 32 bytes
         final int numContributingPasswordBytes =
-                password.length > padded.length ?
-                        padded.length : password.length;
+                Math.min(password.length, padded.length);
         System.arraycopy(password, 0, padded, 0, numContributingPasswordBytes);
         // Copy padding
         if (password.length < padded.length) {

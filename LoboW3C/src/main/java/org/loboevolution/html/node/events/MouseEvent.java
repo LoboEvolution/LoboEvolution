@@ -45,14 +45,14 @@ public interface MouseEvent extends UIEvent {
 	/**
 	 * <p>getButton.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	int getButton();
 
 	/**
 	 * <p>getButtons.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	int getButtons();
 
@@ -192,7 +192,7 @@ public interface MouseEvent extends UIEvent {
 	 * @param altKeyArg a boolean.
 	 * @param shiftKeyArg a boolean.
 	 * @param metaKeyArg a boolean.
-	 * @param buttonArg a int.
+	 * @param buttonArg a {@link java.lang.Integer} object.
 	 * @param relatedTargetArg a {@link org.loboevolution.html.node.events.EventTarget} object.
 	 */
 	void initMouseEvent(String typeArg, boolean canBubbleArg, boolean cancelableArg, Window viewArg, double detailArg,

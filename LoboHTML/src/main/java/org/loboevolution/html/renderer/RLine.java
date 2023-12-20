@@ -28,6 +28,8 @@
  */
 package org.loboevolution.html.renderer;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.loboevolution.html.AlignValues;
 import org.loboevolution.html.dom.nodeimpl.ModelNode;
 import org.loboevolution.html.renderstate.RenderState;
@@ -43,12 +45,15 @@ import java.util.List;
  */
 class RLine extends BaseRCollection {
 
+	@Getter
 	private boolean allowOverflow;
 	private int baseLineOffset;
 	private int desiredMaxWidth;
 
 	private boolean firstAllowOverflowWord = false;
 
+	@Getter
+	@Setter
 	private LineBreak lineBreak;
 	private BoundableRenderable mousePressTarget;
 
@@ -65,10 +70,10 @@ class RLine extends BaseRCollection {
 	 *
 	 * @param modelNode a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 * @param container a {@link org.loboevolution.html.renderer.RenderableContainer} object.
-	 * @param x a int.
-	 * @param y a int.
-	 * @param desiredMaxWidth a int.
-	 * @param height a int.
+	 * @param x a {@link java.lang.Integer} object.
+	 * @param y a {@link java.lang.Integer} object.
+	 * @param desiredMaxWidth a {@link java.lang.Integer} object.
+	 * @param height a {@link java.lang.Integer} object.
 	 * @param initialAllowOverflow a boolean.
 	 */
 	public RLine(final ModelNode modelNode, final RenderableContainer container, final int x, final int y, final int desiredMaxWidth, final int height,
@@ -362,8 +367,8 @@ class RLine extends BaseRCollection {
 	/**
 	 * This method should only be invoked when the line has no items yet.
 	 *
-	 * @param x a int.
-	 * @param desiredMaxWidth a int.
+	 * @param x a {@link java.lang.Integer} object.
+	 * @param desiredMaxWidth a {@link java.lang.Integer} object.
 	 */
 	public void changeLimits(final int x, final int desiredMaxWidth) {
 		this.setX(x);
@@ -393,7 +398,7 @@ class RLine extends BaseRCollection {
 	/**
 	 * <p>getBaselineOffset.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	public int getBaselineOffset() {
 		return this.baseLineOffset;
@@ -403,15 +408,6 @@ class RLine extends BaseRCollection {
 	@Override
 	public Color getBlockBackgroundColor() {
 		return this.container.getPaintedBackgroundColor();
-	}
-
-	/**
-	 * <p>Getter for the field lineBreak.</p>
-	 *
-	 * @return a {@link org.loboevolution.html.renderer.LineBreak} object.
-	 */
-	public LineBreak getLineBreak() {
-		return this.lineBreak;
 	}
 
 	/** {@inheritDoc} */
@@ -439,15 +435,6 @@ class RLine extends BaseRCollection {
 		// Workaround for fact that RBlockViewport does not
 		// get validated or invalidated.
 		this.layoutUpTreeCanBeInvalidated = true;
-	}
-
-	/**
-	 * <p>isAllowOverflow.</p>
-	 *
-	 * @return a boolean.
-	 */
-	public boolean isAllowOverflow() {
-		return this.allowOverflow;
 	}
 
 	/** {@inheritDoc} */
@@ -614,15 +601,6 @@ class RLine extends BaseRCollection {
 				yoffset = this.baseLineOffset - elementHeight;
 		}
 		relement.setY(yoffset);
-	}
-
-	/**
-	 * <p>Setter for the field lineBreak.</p>
-	 *
-	 * @param lineBreak a {@link org.loboevolution.html.renderer.LineBreak} object.
-	 */
-	public void setLineBreak(final LineBreak lineBreak) {
-		this.lineBreak = lineBreak;
 	}
 
 	/**

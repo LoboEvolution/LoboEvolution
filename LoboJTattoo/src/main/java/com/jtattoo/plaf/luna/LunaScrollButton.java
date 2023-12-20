@@ -43,8 +43,8 @@ public class LunaScrollButton extends XPScrollButton {
 	/**
 	 * <p>Constructor for LunaScrollButton.</p>
 	 *
-	 * @param direction a int.
-	 * @param width a int.
+	 * @param direction a {@link java.lang.Integer} object.
+	 * @param width a {@link java.lang.Integer} object.
 	 */
 	public LunaScrollButton(final int direction, final int width) {
 		super(direction, width);

@@ -115,7 +115,7 @@ public class JBIG2Decoder {
     /**
      * <p>getPageAsBufferedImage.</p>
      *
-     * @param page a int.
+     * @param page a {@link java.lang.Integer} object.
      * @return a {@link java.awt.image.BufferedImage} object.
      */
     public BufferedImage getPageAsBufferedImage(int page) {
@@ -157,7 +157,7 @@ public class JBIG2Decoder {
     /**
      * <p>getNumberOfPages.</p>
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getNumberOfPages() {
         final int pages = streamDecoder.getNumberOfPages();
@@ -187,7 +187,7 @@ public class JBIG2Decoder {
     /**
      * <p>findPageSegement.</p>
      *
-     * @param page a int.
+     * @param page a {@link java.lang.Integer} object.
      * @return a {@link org.jpedal.jbig2.segment.pageinformation.PageInformationSegment} object.
      */
     public PageInformationSegment findPageSegement(int page) {
@@ -198,7 +198,7 @@ public class JBIG2Decoder {
     /**
      * <p>findSegment.</p>
      *
-     * @param segmentNumber a int.
+     * @param segmentNumber a {@link java.lang.Integer} object.
      * @return a {@link org.jpedal.jbig2.segment.Segment} object.
      */
     public Segment findSegment(final int segmentNumber) {
@@ -208,7 +208,7 @@ public class JBIG2Decoder {
     /**
      * <p>getPageAsJBIG2Bitmap.</p>
      *
-     * @param page a int.
+     * @param page a {@link java.lang.Integer} object.
      * @return a {@link org.jpedal.jbig2.image.JBIG2Bitmap} object.
      */
     public JBIG2Bitmap getPageAsJBIG2Bitmap(int page) {

@@ -57,7 +57,7 @@ public interface HTMLLIElement extends HTMLElement {
     /**
      * Sets or retrieves the value of a list item.
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     int getValue();
 
@@ -65,7 +65,7 @@ public interface HTMLLIElement extends HTMLElement {
     /**
      * <p>setValue.</p>
      *
-     * @param value a int.
+     * @param value a {@link java.lang.Integer} object.
      */
     void setValue(int value);
 

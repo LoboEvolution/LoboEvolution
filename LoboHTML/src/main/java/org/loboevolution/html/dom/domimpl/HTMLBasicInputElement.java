@@ -26,6 +26,8 @@
 
 package org.loboevolution.html.dom.domimpl;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.loboevolution.html.node.NodeList;
 import org.loboevolution.html.node.ValidityState;
 import org.loboevolution.type.Direction;
@@ -35,10 +37,14 @@ import org.loboevolution.type.Direction;
  */
 public abstract class HTMLBasicInputElement extends HTMLElementImpl {
 
+    @Getter
+    @Setter
     private boolean focusable = false;
 
+    @Setter
     private int selectionStart = 0;
 
+    @Setter
     private int selectionEnd = 0;
 
     private boolean isMaxSet = false;
@@ -80,10 +86,6 @@ public abstract class HTMLBasicInputElement extends HTMLElementImpl {
     public boolean isReadOnly() {
         final String disabled = getAttribute("readonly");
         return disabled != null;
-    }
-
-    public boolean isFocusable() {
-        return focusable;
     }
 
     public String getDefaultValue() {
@@ -233,18 +235,6 @@ public abstract class HTMLBasicInputElement extends HTMLElementImpl {
     public void setReadOnly(final boolean readOnly) {
         setAttribute("readonly", String.valueOf(readOnly));
 
-    }
-
-    public void setFocusable(final boolean focusable) {
-        this.focusable = focusable;
-    }
-
-    public void setSelectionStart(final int start) {
-        this.selectionStart = start;
-    }
-
-    public void setSelectionEnd(final int end) {
-        this.selectionEnd = end;
     }
 
     public void setSelectionRange(final int start, final int end) {

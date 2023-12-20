@@ -54,8 +54,8 @@ public abstract class XPScrollButton extends BaseScrollButton {
 	/**
 	 * <p>Constructor for XPScrollButton.</p>
 	 *
-	 * @param direction a int.
-	 * @param width a int.
+	 * @param direction a {@link java.lang.Integer} object.
+	 * @param width a {@link java.lang.Integer} object.
 	 */
 	public XPScrollButton(final int direction, final int width) {
 		super(direction, width);

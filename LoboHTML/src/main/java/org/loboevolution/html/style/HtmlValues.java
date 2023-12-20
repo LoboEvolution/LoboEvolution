@@ -177,8 +177,8 @@ public class HtmlValues {
 	 *
 	 * @param spec a {@link java.lang.String} object.
 	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
-	 * @param errorValue a int.
-	 * @return a int.
+	 * @param errorValue a {@link java.lang.Integer} object.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	public static int getPixelSize(final String spec, final RenderState renderState, final Window window, final int errorValue) {
 		try {
@@ -258,9 +258,9 @@ public class HtmlValues {
 	 *
 	 * @param spec a {@link java.lang.String} object.
 	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
-	 * @param errorValue a int.
-	 * @param availSize a int.
-	 * @return a int.
+	 * @param errorValue a {@link java.lang.Integer} object.
+	 * @param availSize a {@link java.lang.Integer} object.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	public static Integer getPixelSize(final String spec, final RenderState renderState, final Window window, final Integer errorValue, final int availSize) {
 		try {
@@ -280,7 +280,7 @@ public class HtmlValues {
 	 * <p>resolutionValue.</p>
 	 *
 	 * @param cssValue a {@link CSSValueImpl} object.
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	public static int resolutionValue(final CSSValueImpl cssValue) {
         if (cssValue == null) {

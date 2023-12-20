@@ -125,8 +125,8 @@ public class CCITTFaxDecode {
      *
      * @param dict         a {@link org.loboevolution.pdfview.PDFObject} object.
      * @param name         a {@link java.lang.String} object.
-     * @param defaultValue a int.
-     * @return a int.
+     * @param defaultValue a {@link java.lang.Integer} object.
+     * @return a {@link java.lang.Integer} object.
      * @throws java.io.IOException if any.
      */
     public static int getOptionFieldInt(final PDFObject dict, final String name, final int defaultValue) throws IOException {

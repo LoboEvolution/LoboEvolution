@@ -28,6 +28,7 @@
  */
 package org.loboevolution.laf;
 
+import lombok.Getter;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.CSSValues;
 
@@ -48,16 +49,8 @@ public final class FontFactory {
 	private final Map<FontKey, Font> fontMap = new HashMap<>();
 
 	/** The Constant instance. */
+	@Getter
 	private static final FontFactory instance = new FontFactory();
-
-	/**
-	 * Gets the Constant instance.
-	 *
-	 * @return the Constant instance
-	 */
-	public static FontFactory getInstance() {
-		return instance;
-	}
 
 	/**
 	 * Instantiates a new font factory.

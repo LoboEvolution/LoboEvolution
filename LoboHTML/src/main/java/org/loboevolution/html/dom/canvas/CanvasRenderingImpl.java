@@ -26,6 +26,7 @@
 
 package org.loboevolution.html.dom.canvas;
 
+import lombok.Getter;
 import org.loboevolution.common.Strings;
 import org.loboevolution.config.HtmlRendererConfig;
 import org.loboevolution.gui.HtmlRendererContext;
@@ -59,6 +60,7 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
 	private final HTMLCanvasElementImpl canvas;
 	
 	/** The image. */
+	@Getter
 	private final BufferedImage image;
 	
     /** The fill style. */
@@ -186,8 +188,7 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
 		if (this.font == null) {
 			final HtmlRendererConfig config = canvas.getHtmlRendererConfig();
 			final FontFactory fontFactory = FontFactory.getInstance();
-			final Font font = fontFactory.getFont(FontValues.getDefaultFontKey(config));
-			this.font = font;
+            this.font = fontFactory.getFont(FontValues.getDefaultFontKey(config));
 		}
 		return this.font;
 	}
@@ -826,15 +827,6 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
 	public void translate(final int tx, final int ty) {
 		translateX = tx;
 		translateY = ty;
-	}
-	
-	/**
-	 * <p>Getter for the field image.</p>
-	 *
-	 * @return the image
-	 */
-	public BufferedImage getImage() {
-		return image;
 	}
 	
 	private Graphics2D createGraphics() {

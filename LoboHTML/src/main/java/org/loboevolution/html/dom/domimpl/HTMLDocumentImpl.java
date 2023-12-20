@@ -28,6 +28,8 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.Strings;
 import org.loboevolution.common.Urls;
@@ -76,6 +78,8 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 
 	private HTMLElement body;
 
+	@Getter
+	@Setter
 	private String defaultTarget;
 
 	private final List<DocumentNotificationListener> documentNotificationListeners = new ArrayList<>();
@@ -86,18 +90,23 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 
 	private final Map<String, Element> elementsByName = new HashMap<>();
 
+	@Getter
 	private Set<Locale> locales;
 
+	@Getter
 	private Function onloadHandler;
 
+	@Getter
 	private final HtmlRendererContext rcontext;
 
 	private StyleSheetAggregator styleSheetAggregator = null;
 
 	private final StyleSheetListImpl styleSheets = new StyleSheetListImpl();
 
+	@Getter
 	private final UserAgentContext ucontext;
 
+	@Getter
 	private final HtmlRendererConfig config;
 
 	/**
@@ -245,15 +254,6 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 		}
 	}
 
-	/**
-	 * <p>Getter for the field defaultTarget.</p>
-	 *
-	 * @return a {@link java.lang.String} object.
-	 */
-	public String getDefaultTarget() {
-		return this.defaultTarget;
-	}
-
 	/** {@inheritDoc} */
 	@Override
 	public URL getDocumentURL() {
@@ -351,24 +351,6 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 			}
 			return this.body;
 		}
-	}
-
-	/**
-	 * Gets an <i>immutable</i> set of locales previously set for this document.
-	 *
-	 * @return a {@link java.util.Set} object.
-	 */
-	public Set<Locale> getLocales() {
-		return this.locales;
-	}
-
-	/**
-	 * <p>Getter for the field onloadHandler.</p>
-	 *
-	 * @return a {@link org.mozilla.javascript.Function} object.
-	 */
-	public Function getOnloadHandler() {
-		return this.onloadHandler;
 	}
 
 	final StyleSheetAggregator getStyleSheetAggregator() {
@@ -560,15 +542,6 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	}
 
 	/**
-	 * <p>Setter for the field defaultTarget.</p>
-	 *
-	 * @param value a {@link java.lang.String} object.
-	 */
-	public void setDefaultTarget(final String value) {
-		this.defaultTarget = value;
-	}
-
-	/**
 	 * Caller should synchronize on document.
 	 */
 	public void setElementById(final String id, final Element element) {
@@ -644,23 +617,5 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 		for (final DocumentNotificationListener dnl : listenersList) {
 			dnl.structureInvalidated(node);
 		}
-	}
-
-	/**
-	 * <p>Getter for the field <code>ucontext</code>.</p>
-	 *
-	 * @return the ucontext
-	 */
-	public UserAgentContext getUcontext() {
-		return ucontext;
-	}
-
-	/**
-	 * <p>Getter for the field <code>HtmlRendererConfig</code>.</p>
-	 *
-	 * @return a {@link HtmlRendererConfig} object.
-	 */
-	public HtmlRendererConfig getConfig() {
-		return config;
 	}
 }

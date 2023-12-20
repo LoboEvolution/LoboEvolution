@@ -145,7 +145,7 @@ public class PDFDebugger {
      * <p>debug.</p>
      *
      * @param msg   a {@link java.lang.String} object.
-     * @param level a int.
+     * @param level a {@link java.lang.Integer} object.
      */
     public static void debug(final String msg, final int level) {
         if (level > debuglevel) {
@@ -187,7 +187,7 @@ public class PDFDebugger {
     /**
      * <p>setDebugLevel.</p>
      *
-     * @param level a int.
+     * @param level a {@link java.lang.Integer} object.
      */
     public static void setDebugLevel(final int level) {
         debuglevel = level;

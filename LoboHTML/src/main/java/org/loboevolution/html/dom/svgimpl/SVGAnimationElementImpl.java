@@ -322,7 +322,7 @@ public abstract class SVGAnimationElementImpl extends SVGAnimationImpl implement
 	}
 
 	protected float getSplineValueAt(final int splineIndex, final float percent) {
-		final SVGPathSegCurvetoCubicAbsImpl bezierSeg = (SVGPathSegCurvetoCubicAbsImpl) splines.get(splineIndex);
+		final SVGPathSegCurvetoCubicAbsImpl bezierSeg = splines.get(splineIndex);
 		return bezierSeg.getYAt(percent, new SVGPointImpl(0, 0));
 	}
 }

@@ -28,31 +28,13 @@
  */
 package org.loboevolution.html.parser;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.loboevolution.html.node.Element;
 
+@AllArgsConstructor
+@Getter
 class StopException extends Exception {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+
 	private final Element element;
-
-	/**
-	 * <p>Constructor for StopException.</p>
-	 *
-	 * @param element a {@link org.loboevolution.html.node.Element} object.
-	 */
-	public StopException(final Element element) {
-		super();
-		this.element = element;
-	}
-
-	/**
-	 * <p>Getter for the field element.</p>
-	 *
-	 * @return a {@link org.loboevolution.html.node.Element} object.
-	 */
-	public Element getElement() {
-		return this.element;
-	}
 }

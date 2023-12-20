@@ -45,9 +45,9 @@ public class RefImage extends BufferedImage {
     /**
      * Creates a new instance of RefImage
      *
-     * @param width  a int.
-     * @param height a int.
-     * @param type   a int.
+     * @param width  a {@link java.lang.Integer} object.
+     * @param height a {@link java.lang.Integer} object.
+     * @param type   a {@link java.lang.Integer} object.
      */
     public RefImage(final int width, final int height, final int type) {
         super(width, height, type);

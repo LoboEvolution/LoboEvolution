@@ -103,10 +103,10 @@ public class GUITasks {
 	 * <p>drawDotted.</p>
 	 *
 	 * @param g a {@link java.awt.Graphics} object.
-	 * @param x1 a int.
-	 * @param y1 a int.
-	 * @param x2 a int.
-	 * @param y2 a int.
+	 * @param x1 a {@link java.lang.Integer} object.
+	 * @param y1 a {@link java.lang.Integer} object.
+	 * @param x2 a {@link java.lang.Integer} object.
+	 * @param y2 a {@link java.lang.Integer} object.
 	 * @param width a float.
 	 */
 	public static void drawDotted(final Graphics g, final int x1, final int y1, final int x2, final int y2, final float width) {

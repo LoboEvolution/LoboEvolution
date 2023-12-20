@@ -344,7 +344,7 @@ public final class Strings {
 	/**
 	 * <p>randomAlphaNumeric.</p>
 	 *
-	 * @param count a int.
+	 * @param count a {@link java.lang.Integer} object.
 	 * @return a {@link java.lang.String} object.
 	 */
 	public static String randomAlphaNumeric(int count) {

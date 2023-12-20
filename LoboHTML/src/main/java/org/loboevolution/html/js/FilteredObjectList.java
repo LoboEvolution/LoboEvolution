@@ -57,7 +57,7 @@ public class FilteredObjectList extends AbstractScriptableDelegate {
 	/**
 	 * <p>getLength.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	public int getLength() {
 		synchronized (this.lock) {
@@ -74,7 +74,7 @@ public class FilteredObjectList extends AbstractScriptableDelegate {
 	/**
 	 * <p>item.</p>
 	 *
-	 * @param index a int.
+	 * @param index a {@link java.lang.Integer} object.
 	 * @return a {@link java.lang.Object} object.
 	 */
 	public Object item(final int index) {

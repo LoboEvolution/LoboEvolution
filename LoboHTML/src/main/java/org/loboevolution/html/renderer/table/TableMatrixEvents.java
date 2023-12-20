@@ -51,8 +51,8 @@ class TableMatrixEvents {
 	 * <p>onDoubleClick.</p>
 	 *
 	 * @param event a {@link java.awt.event.MouseEvent} object.
-	 * @param x a int.
-	 * @param y a int.
+	 * @param x a {@link java.lang.Integer} object.
+	 * @param y a {@link java.lang.Integer} object.
 	 * @return a boolean.
 	 */
 	public boolean onDoubleClick(final MouseEvent event, final int x, final int y) {
@@ -72,8 +72,8 @@ class TableMatrixEvents {
 	 * <p>onMouseClick.</p>
 	 *
 	 * @param event a {@link java.awt.event.MouseEvent} object.
-	 * @param x a int.
-	 * @param y a int.
+	 * @param x a {@link java.lang.Integer} object.
+	 * @param y a {@link java.lang.Integer} object.
 	 * @return a boolean.
 	 */
 	public boolean onMouseClick(final MouseEvent event, final int x, final int y) {
@@ -109,8 +109,8 @@ class TableMatrixEvents {
 	 * <p>onMousePressed.</p>
 	 *
 	 * @param event a {@link java.awt.event.MouseEvent} object.
-	 * @param x a int.
-	 * @param y a int.
+	 * @param x a {@link java.lang.Integer} object.
+	 * @param y a {@link java.lang.Integer} object.
 	 * @return a boolean.
 	 */
 	public boolean onMousePressed(final MouseEvent event, final int x, final int y) {
@@ -131,8 +131,8 @@ class TableMatrixEvents {
 	 * <p>onMouseReleased.</p>
 	 *
 	 * @param event a {@link java.awt.event.MouseEvent} object.
-	 * @param x a int.
-	 * @param y a int.
+	 * @param x a {@link java.lang.Integer} object.
+	 * @param y a {@link java.lang.Integer} object.
 	 * @return a boolean.
 	 */
 	public boolean onMouseReleased(final MouseEvent event, final int x, final int y) {

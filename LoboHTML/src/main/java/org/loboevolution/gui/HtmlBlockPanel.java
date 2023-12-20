@@ -251,7 +251,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	/**
 	 * <p>getFirstLineHeight.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	public int getFirstLineHeight() {
 		final RBlock block = this.rblock;
@@ -866,7 +866,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	/**
 	 * <p>Setter for the field defaultOverflowX.</p>
 	 *
-	 * @param defaultOverflowX a int.
+	 * @param defaultOverflowX a {@link java.lang.Integer} object.
 	 */
 	public void setDefaultOverflowX(final int defaultOverflowX) {
 		if (defaultOverflowX != this.defaultOverflowX) {
@@ -882,7 +882,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	/**
 	 * <p>Setter for the field defaultOverflowY.</p>
 	 *
-	 * @param defaultOverflowY a int.
+	 * @param defaultOverflowY a {@link java.lang.Integer} object.
 	 */
 	public void setDefaultOverflowY(final int defaultOverflowY) {
 		if (this.defaultOverflowY != defaultOverflowY) {

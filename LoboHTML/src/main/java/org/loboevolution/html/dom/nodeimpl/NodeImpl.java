@@ -28,6 +28,7 @@
  */
 package org.loboevolution.html.dom.nodeimpl;
 
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.common.Nodes;
@@ -68,9 +69,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Slf4j
 public abstract class NodeImpl extends AbstractScriptableDelegate implements Node, ModelNode, Cloneable {
 	private static final RenderState INVALID_RENDER_STATE = new StyleSheetRenderState(null);
-	private HTMLCollection childrenCollection;
+
 	protected volatile Document document;
+	@Getter
 	protected final NodeListImpl nodeList = new NodeListImpl();
+	@Getter
 	private final EventTargetImpl eventTarget = new EventTargetImpl(this);
 	protected volatile boolean notificationsSuspended = false;
 	protected volatile Node parentNode;
@@ -382,7 +385,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	 * <p>getChildIndex.</p>
 	 *
 	 * @param child a {@link org.loboevolution.html.node.Node} object.
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	public int getChildIndex(final Node child) {
 		return this.nodeList.indexOf(child);
@@ -400,22 +403,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	 * @return a {@link org.loboevolution.html.dom.HTMLCollection} object.
 	 */
 	public HTMLCollection getChildren() {
-		synchronized (this) {
-			HTMLCollection collection = this.childrenCollection;
-			if (collection == null) {
-				collection = new HTMLCollectionImpl(this, new ElementFilter(null));
-			}
-			return collection;
-		}
-	}
-
-	/**
-	 * <p>getChildrenArray.</p>
-	 *
-	 * @return an array of {@link org.loboevolution.html.dom.nodeimpl.NodeListImpl} objects.
-	 */
-	public NodeListImpl getNodeList() {
-		return nodeList;
+		return new HTMLCollectionImpl(this, new ElementFilter(null));
 	}
 
 	/**
@@ -932,7 +920,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	 * <p>insertAt.</p>
 	 *
 	 * @param newChild a {@link org.loboevolution.html.node.Node} object.
-	 * @param idx a int.
+	 * @param idx a {@link java.lang.Integer} object.
 	 * @return a {@link org.loboevolution.html.node.Node} object.
 	 * @throws DOMException if any.
 	 */
@@ -1158,7 +1146,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	/**
 	 * <p>removeChildAt.</p>
 	 *
-	 * @param index a int.
+	 * @param index a {@link java.lang.Integer} object.
 	 * @return a {@link org.loboevolution.html.node.Node} object.
 	 * @throws DOMException if any.
 	 */
@@ -1466,19 +1454,11 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	 * @param visitor a {@link org.loboevolution.html.dom.nodeimpl.NodeVisitor} object.
 	 */
 	protected void visitImpl(final NodeVisitor visitor) {
-		try {
-			visitor.visit(this);
-		} catch (final Exception sve) {
-			throw sve;
-		}
+		visitor.visit(this);
 		nodeList.forEach(node -> {
 			final NodeImpl child = (NodeImpl) node;
-			try {
-				child.visit(visitor);
-			} catch (final Exception sve) {
-				throw sve;
-			}
-		});
+            child.visit(visitor);
+        });
 	}
 
 	/**
@@ -1534,10 +1514,6 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	@Override
 	public boolean dispatchEvent(final Event evt) throws EventException {
 		return eventTarget.dispatchEvent(evt);
-	}
-
-	public EventTargetImpl getEventTarget() {
-		return eventTarget;
 	}
 
 	public short getNONE() {

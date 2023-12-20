@@ -33,7 +33,7 @@ public interface DOMTokenList {
 
     /**
      * Returns the number of tokens.
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     int getLength();
 
@@ -67,7 +67,7 @@ public interface DOMTokenList {
 
     /**
      * Returns the token with index index.
-     * @param index a int.
+     * @param index a {@link java.lang.Integer} object.
      * @return a {@link java.lang.String} object.
      */
     String item(int index);

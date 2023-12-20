@@ -42,9 +42,6 @@ import org.loboevolution.common.Strings;
 
 /**
  * <p>Autocomplete class.</p>
- *
- *
- *
  */
 public class Autocomplete {
 

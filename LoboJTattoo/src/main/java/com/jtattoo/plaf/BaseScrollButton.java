@@ -26,6 +26,9 @@
 
 package com.jtattoo.plaf;
 
+import lombok.Builder;
+import lombok.Getter;
+
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Composite;
@@ -42,32 +45,21 @@ import javax.swing.plaf.basic.BasicArrowButton;
  * Author Michael Hagen
  *
  */
+@Getter
 public class BaseScrollButton extends BasicArrowButton {
 
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = 1L;
+	@Builder.Default
 	protected int buttonWidth = 24;
 
 	/**
 	 * <p>Constructor for BaseScrollButton.</p>
 	 *
-	 * @param direction a int.
-	 * @param width a int.
+	 * @param direction a {@link java.lang.Integer} object.
+	 * @param width a {@link java.lang.Integer} object.
 	 */
 	public BaseScrollButton(final int direction, final int width) {
 		super(direction);
 		buttonWidth = width;
-	}
-
-	/**
-	 * <p>Getter for the field buttonWidth.</p>
-	 *
-	 * @return a int.
-	 */
-	public int getButtonWidth() {
-		return buttonWidth;
 	}
 
 	/** {@inheritDoc} */

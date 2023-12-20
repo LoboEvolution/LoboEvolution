@@ -62,7 +62,7 @@ public class TextArea extends BasicInput {
 	public TextArea(final HTMLTextAreaElementImpl modelNode, final TextAreaControl ic) {
 		this.modelNode = modelNode;
 		setElement(modelNode);
-		setjComponent(jtArea);
+		setJComponent(jtArea);
 		
 		final Font font = jtArea.getFont();
 		jtArea.setFont(font.deriveFont(modelNode.getHtmlRendererConfig().getFontSize()));

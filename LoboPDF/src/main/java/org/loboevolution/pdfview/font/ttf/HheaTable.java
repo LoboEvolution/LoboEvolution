@@ -26,6 +26,9 @@
 
 package org.loboevolution.pdfview.font.ttf;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import java.nio.ByteBuffer;
 
 /**
@@ -33,6 +36,8 @@ import java.nio.ByteBuffer;
  * <p>
  * Author  jkaplan
  */
+@EqualsAndHashCode(callSuper = true)
+@Data
 public class HheaTable extends TrueTypeTable {
 
     /**
@@ -189,24 +194,6 @@ public class HheaTable extends TrueTypeTable {
     }
 
     /**
-     * Getter for property version.
-     *
-     * @return Value of property version.
-     */
-    public int getVersion() {
-        return this.version;
-    }
-
-    /**
-     * Setter for property version.
-     *
-     * @param version New value of property version.
-     */
-    public void setVersion(final int version) {
-        this.version = version;
-    }
-
-    /**
      * {@inheritDoc}
      * <p>
      * Create a pretty string
@@ -231,221 +218,4 @@ public class HheaTable extends TrueTypeTable {
         buf.append(indent).append("NumOfLongHorMetrics : ").append(getNumOfLongHorMetrics()).append("\n");
         return buf.toString();
     }
-
-    /**
-     * Getter for property ascent.
-     *
-     * @return Value of property ascent.
-     */
-    public short getAscent() {
-        return this.ascent;
-    }
-
-    /**
-     * Setter for property ascent.
-     *
-     * @param ascent New value of property ascent.
-     */
-    public void setAscent(final short ascent) {
-        this.ascent = ascent;
-    }
-
-    /**
-     * Getter for property descent.
-     *
-     * @return Value of property descent.
-     */
-    public short getDescent() {
-        return this.descent;
-    }
-
-    /**
-     * Setter for property descent.
-     *
-     * @param descent New value of property descent.
-     */
-    public void setDescent(final short descent) {
-        this.descent = descent;
-    }
-
-    /**
-     * Getter for property lineGap.
-     *
-     * @return Value of property lineGap.
-     */
-    public short getLineGap() {
-        return this.lineGap;
-    }
-
-    /**
-     * Setter for property lineGap.
-     *
-     * @param lineGap New value of property lineGap.
-     */
-    public void setLineGap(final short lineGap) {
-        this.lineGap = lineGap;
-    }
-
-    /**
-     * Getter for property advanceWidthMax.
-     *
-     * @return Value of property advanceWidthMax.
-     */
-    public short getAdvanceWidthMax() {
-        return this.advanceWidthMax;
-    }
-
-    /**
-     * Setter for property advanceWidthMax.
-     *
-     * @param advanceWidthMax New value of property advanceWidthMax.
-     */
-    public void setAdvanceWidthMax(final short advanceWidthMax) {
-        this.advanceWidthMax = advanceWidthMax;
-    }
-
-    /**
-     * Getter for property minLeftSideBearing.
-     *
-     * @return Value of property minLeftSideBearing.
-     */
-    public short getMinLeftSideBearing() {
-        return this.minLeftSideBearing;
-    }
-
-    /**
-     * Setter for property minLeftSideBearing.
-     *
-     * @param minLeftSideBearing New value of property minLeftSideBearing.
-     */
-    public void setMinLeftSideBearing(final short minLeftSideBearing) {
-        this.minLeftSideBearing = minLeftSideBearing;
-    }
-
-    /**
-     * Getter for property minRIghtSideBearing.
-     *
-     * @return Value of property minRIghtSideBearing.
-     */
-    public short getMinRightSideBearing() {
-        return this.minRightSideBearing;
-    }
-
-    /**
-     * Setter for property minRIghtSideBearing.
-     *
-     * @param minRightSideBearing New value of property minRIghtSideBearing.
-     */
-    public void setMinRightSideBearing(final short minRightSideBearing) {
-        this.minRightSideBearing = minRightSideBearing;
-    }
-
-    /**
-     * Getter for property xMaxExtent.
-     *
-     * @return Value of property xMaxExtent.
-     */
-    public short getXMaxExtent() {
-        return this.xMaxExtent;
-    }
-
-    /**
-     * Setter for property xMaxExtent.
-     *
-     * @param xMaxExtent New value of property xMaxExtent.
-     */
-    public void setXMaxExtent(final short xMaxExtent) {
-        this.xMaxExtent = xMaxExtent;
-    }
-
-    /**
-     * Getter for property caretSlopeRise.
-     *
-     * @return Value of property caretSlopeRise.
-     */
-    public short getCaretSlopeRise() {
-        return this.caretSlopeRise;
-    }
-
-    /**
-     * Setter for property caretSlopeRise.
-     *
-     * @param caretSlopeRise New value of property caretSlopeRise.
-     */
-    public void setCaretSlopeRise(final short caretSlopeRise) {
-        this.caretSlopeRise = caretSlopeRise;
-    }
-
-    /**
-     * Getter for property caretSlopeRun.
-     *
-     * @return Value of property caretSlopeRun.
-     */
-    public short getCaretSlopeRun() {
-        return this.caretSlopeRun;
-    }
-
-    /**
-     * Setter for property caretSlopeRun.
-     *
-     * @param caretSlopeRun New value of property caretSlopeRun.
-     */
-    public void setCaretSlopeRun(final short caretSlopeRun) {
-        this.caretSlopeRun = caretSlopeRun;
-    }
-
-    /**
-     * Getter for property caretOffset.
-     *
-     * @return Value of property caretOffset.
-     */
-    public short getCaretOffset() {
-        return this.caretOffset;
-    }
-
-    /**
-     * Setter for property caretOffset.
-     *
-     * @param caretOffset New value of property caretOffset.
-     */
-    public void setCaretOffset(final short caretOffset) {
-        this.caretOffset = caretOffset;
-    }
-
-    /**
-     * Getter for property metricDataFormat.
-     *
-     * @return Value of property metricDataFormat.
-     */
-    public short getMetricDataFormat() {
-        return this.metricDataFormat;
-    }
-
-    /**
-     * Setter for property metricDataFormat.
-     *
-     * @param metricDataFormat New value of property metricDataFormat.
-     */
-    public void setMetricDataFormat(final short metricDataFormat) {
-        this.metricDataFormat = metricDataFormat;
-    }
-
-    /**
-     * Getter for property numOfLongHorMetrics.
-     *
-     * @return Value of property numOfLongHorMetrics.
-     */
-    public int getNumOfLongHorMetrics() {
-        return this.numOfLongHorMetrics & 0xFFFF;
-    }
-
-    /**
-     * Setter for property numOfLongHorMetrics.
-     *
-     * @param numOfLongHorMetrics New value of property numOfLongHorMetrics.
-     */
-    public void setNumOfLongHorMetrics(final short numOfLongHorMetrics) {
-        this.numOfLongHorMetrics = numOfLongHorMetrics;
-    }
-
 }

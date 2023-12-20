@@ -64,8 +64,8 @@ public class LocaTable extends TrueTypeTable {
      * get the offset, in bytes, of a given glyph from the start of
      * the glyph table
      *
-     * @param glyphID a int.
-     * @return a int.
+     * @param glyphID a {@link java.lang.Integer} object.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getOffset(final int glyphID) {
         return this.offsets[glyphID];
@@ -74,8 +74,8 @@ public class LocaTable extends TrueTypeTable {
     /**
      * get the size, in bytes, of the given glyph
      *
-     * @param glyphID a int.
-     * @return a int.
+     * @param glyphID a {@link java.lang.Integer} object.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getSize(final int glyphID) {
         return this.offsets[glyphID + 1] - this.offsets[glyphID];

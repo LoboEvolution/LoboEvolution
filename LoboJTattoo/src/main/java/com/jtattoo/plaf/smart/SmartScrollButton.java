@@ -46,8 +46,8 @@ public class SmartScrollButton extends BaseScrollButton {
 	/**
 	 * <p>Constructor for SmartScrollButton.</p>
 	 *
-	 * @param direction a int.
-	 * @param width a int.
+	 * @param direction a {@link java.lang.Integer} object.
+	 * @param width a {@link java.lang.Integer} object.
 	 */
 	public SmartScrollButton(final int direction, final int width) {
 		super(direction, width);

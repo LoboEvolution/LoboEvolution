@@ -42,7 +42,7 @@ public interface Navigator {
 	/**
 	 * <p>getMaxTouchPoints.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	int getMaxTouchPoints();
 
@@ -56,7 +56,7 @@ public interface Navigator {
 	/**
 	 * <p>getMsMaxTouchPoints.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	int getMsMaxTouchPoints();
 
@@ -77,7 +77,7 @@ public interface Navigator {
 	/**
 	 * <p>vibrate.</p>
 	 *
-	 * @param pattern a int.
+	 * @param pattern a {@link java.lang.Integer} object.
 	 * @return a boolean.
 	 */
 	boolean vibrate(int pattern);
@@ -85,7 +85,7 @@ public interface Navigator {
 	/**
 	 * <p>vibrate.</p>
 	 *
-	 * @param pattern a int.
+	 * @param pattern a {@link java.lang.Integer} object.
 	 * @return a boolean.
 	 */
 	boolean vibrate(int... pattern);

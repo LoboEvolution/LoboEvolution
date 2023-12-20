@@ -25,6 +25,7 @@
  */
 package org.loboevolution.pdfview.font;
 
+import lombok.Data;
 import org.loboevolution.pdfview.PDFPage;
 import org.loboevolution.pdfview.PDFShapeCmd;
 
@@ -36,6 +37,7 @@ import java.awt.geom.Point2D;
  * A single glyph in a stream of PDF text, which knows how to write itself
  * onto a PDF command stream
  */
+@Data
 public class PDFGlyph {
     /**
      * the character code of this glyph
@@ -98,38 +100,11 @@ public class PDFGlyph {
     }
 
     /**
-     * Get the name of this glyph
-     *
-     * @return a {@link java.lang.String} object.
-     */
-    public String getName() {
-        return this.name;
-    }
-
-    /**
-     * Get the shape of this glyph
-     *
-     * @return a {@link java.awt.geom.GeneralPath} object.
-     */
-    public GeneralPath getShape() {
-        return this.shape;
-    }
-
-    /**
-     * Get the PDFPage for a type3 font glyph
-     *
-     * @return a {@link org.loboevolution.pdfview.PDFPage} object.
-     */
-    public PDFPage getPage() {
-        return this.page;
-    }
-
-    /**
      * Add commands for this glyph to a page
      *
      * @param cmds      a {@link org.loboevolution.pdfview.PDFPage} object.
      * @param transform a {@link java.awt.geom.AffineTransform} object.
-     * @param mode      a int.
+     * @param mode      a {@link java.lang.Integer} object.
      * @return a {@link java.awt.geom.Point2D} object.
      */
     public Point2D addCommands(final PDFPage cmds, final AffineTransform transform, final int mode) {
@@ -140,15 +115,6 @@ public class PDFGlyph {
             cmds.addCommands(this.page, transform);
         }
         return this.advance;
-    }
-
-    /**
-     * <p>Getter for the field <code>advance</code>.</p>
-     *
-     * @return a {@link java.awt.geom.Point2D} object.
-     */
-    public Point2D getAdvance() {
-        return advance;
     }
 
     /**

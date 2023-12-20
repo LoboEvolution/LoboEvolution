@@ -168,7 +168,7 @@ public abstract class CMap {
     /**
      * Set the data for this map
      *
-     * @param length a int.
+     * @param length a {@link java.lang.Integer} object.
      * @param data   a {@link java.nio.ByteBuffer} object.
      */
     public abstract void setData(int length, ByteBuffer data);

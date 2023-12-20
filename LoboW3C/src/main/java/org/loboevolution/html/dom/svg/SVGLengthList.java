@@ -39,7 +39,7 @@ public interface SVGLengthList {
 	/**
 	 * <p>getNumberOfItems.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	int getNumberOfItems();
 
@@ -67,7 +67,7 @@ public interface SVGLengthList {
 	/**
 	 * <p>getItem.</p>
 	 *
-	 * @param index a int.
+	 * @param index a {@link java.lang.Integer} object.
 	 * @return a {@link org.loboevolution.html.dom.svg.SVGLength} object.
 	 * @throws DOMException if any.
 	 */
@@ -77,7 +77,7 @@ public interface SVGLengthList {
 	 * <p>insertItemBefore.</p>
 	 *
 	 * @param newItem a {@link org.loboevolution.html.dom.svg.SVGLength} object.
-	 * @param index a int.
+	 * @param index a {@link java.lang.Integer} object.
 	 * @return a {@link org.loboevolution.html.dom.svg.SVGLength} object.
 	 * @throws DOMException if any.
 	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
@@ -92,7 +92,7 @@ public interface SVGLengthList {
 	 * <p>replaceItem.</p>
 	 *
 	 * @param newItem a {@link org.loboevolution.html.dom.svg.SVGLength} object.
-	 * @param index a int.
+	 * @param index a {@link java.lang.Integer} object.
 	 * @return a {@link org.loboevolution.html.dom.svg.SVGLength} object.
 	 * @throws DOMException if any.
 	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
@@ -106,7 +106,7 @@ public interface SVGLengthList {
 	/**
 	 * <p>removeItem.</p>
 	 *
-	 * @param index a int.
+	 * @param index a {@link java.lang.Integer} object.
 	 * @return a {@link org.loboevolution.html.dom.svg.SVGLength} object.
 	 * @throws DOMException if any.
 	 */

@@ -27,14 +27,13 @@
 package org.loboevolution.html.dom.svgimpl;
 
 
+import lombok.Data;
 import org.loboevolution.html.dom.svg.SVGSVGElement;
 
 /**
  * <p>SVGViewBoxImpl class.</p>
- *
- *
- *
  */
+@Data
 public class SVGViewBoxImpl {
 
 	private float x;
@@ -94,95 +93,5 @@ public class SVGViewBoxImpl {
 		this.r = r;
 		this.width = width;
 		this.height = height;
-	}
-
-	/**
-	 * <p>Getter for the field x.</p>
-	 *
-	 * @return a float.
-	 */
-	public float getX() {
-		return x;
-	}
-
-	/**
-	 * <p>Setter for the field x.</p>
-	 *
-	 * @param x a float.
-	 */
-	public void setX(final float x) {
-		this.x = x;
-	}
-
-	/**
-	 * <p>Getter for the field y.</p>
-	 *
-	 * @return a float.
-	 */
-	public float getY() {
-		return y;
-	}
-
-	/**
-	 * <p>Setter for the field y.</p>
-	 *
-	 * @param y a float.
-	 */
-	public void setY(final float y) {
-		this.y = y;
-	}
-
-	/**
-	 * <p>Getter for the field width.</p>
-	 *
-	 * @return a float.
-	 */
-	public float getWidth() {
-		return width;
-	}
-
-	/**
-	 * <p>Setter for the field width.</p>
-	 *
-	 * @param width a float.
-	 */
-	public void setWidth(final float width) {
-		this.width = width;
-	}
-
-	/**
-	 * <p>Getter for the field height.</p>
-	 *
-	 * @return a float.
-	 */
-	public float getHeight() {
-		return height;
-	}
-
-	/**
-	 * <p>Setter for the field height.</p>
-	 *
-	 * @param height a float.
-	 */
-	public void setHeight(final float height) {
-		this.height = height;
-	}
-
-	/**
-	 * <p>Getter for the field r.</p>
-	 *
-	 * @return a float.
-	 */
-	public float getR() {
-		return r;
-	}
-
-	/**
-	 * <p>Setter for the field r.</p>
-	 *
-	 * @param r a float.
-	 */
-	public void setR(final float r) {
-		this.r = r;
 	}
 }

@@ -75,14 +75,14 @@ public interface SMILRegionElement extends SMILElement, ElementLayout {
      * @exception DOMException
      *                NO_MODIFICATION_ALLOWED_ERR: Raised if this attribute is
      *                readonly.
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     int getZIndex();
 
     /**
      * <p>setZIndex.</p>
      *
-     * @param zIndex a int.
+     * @param zIndex a {@link java.lang.Integer} object.
      * @throws DOMException if any.
      */
     void setZIndex(int zIndex) throws DOMException;

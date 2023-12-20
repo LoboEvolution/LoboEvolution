@@ -25,6 +25,8 @@
  */
 package org.loboevolution.pdfview.font;
 
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.pdfview.PDFDebugger;
 import org.loboevolution.pdfview.PDFFile;
@@ -96,8 +98,8 @@ public class Type1Font extends OutlineFont {
      * Read a font from it's data, start position and length
      *
      * @param font  an array of {@link byte} objects.
-     * @param start a int.
-     * @param len   a int.
+     * @param start a {@link java.lang.Integer} object.
+     * @param len   a {@link java.lang.Integer} object.
      */
     protected void parseFont(final byte[] font, final int start, final int len) {
         this.name2width = new HashMap<>();
@@ -237,11 +239,11 @@ public class Type1Font extends OutlineFont {
     /**
      * decrypt an array using the Adobe Type 1 Font decryption algorithm.
      *
-     * @param d     the input array of bytes
-     * @param start where in the array to start decoding
-     * @param end   where in the array to stop decoding
-     * @param key   the decryption key
-     * @param skipdecrypt  how many bytes to skip initially
+     * @param d           the input array of bytes
+     * @param start       where in the array to start decoding
+     * @param end         where in the array to stop decoding
+     * @param key         the decryption key
+     * @param skipdecrypt how many bytes to skip initially
      * @return the decrypted bytes.  The length of this array will be
      * (start-end-skip) bytes long
      */
@@ -845,6 +847,9 @@ public class Type1Font extends OutlineFont {
     class PSParser {
 
         final byte[] data;
+
+        @Getter
+        @Setter
         int loc;
 
         /**
@@ -906,20 +911,6 @@ public class Type1Font extends OutlineFont {
                 }
             }
             return ary;
-        }
-
-        /**
-         * get the current location within the input stream
-         */
-        public int getLoc() {
-            return this.loc;
-        }
-
-        /**
-         * set the current location within the input stream
-         */
-        public void setLoc(final int loc) {
-            this.loc = loc;
         }
 
         /**

@@ -53,7 +53,7 @@ public abstract class PDFPattern {
     /**
      * Creates a new instance of PDFPattern
      *
-     * @param type a int.
+     * @param type a {@link java.lang.Integer} object.
      */
     protected PDFPattern(final int type) {
         this.type = type;
@@ -118,7 +118,7 @@ public abstract class PDFPattern {
     /**
      * Get the type of this pattern
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getPatternType() {
         return this.type;

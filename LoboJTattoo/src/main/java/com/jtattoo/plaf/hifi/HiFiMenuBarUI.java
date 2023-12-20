@@ -51,7 +51,7 @@ public class HiFiMenuBarUI extends BasicMenuBarUI {
 	@Override
 	public void installUI(final JComponent c) {
 		super.installUI(c);
-		if (c != null && c instanceof JMenuBar) {
+		if (c instanceof JMenuBar) {
 			c.setBorder(BaseBorders.getMenuBarBorder());
 		}
 	}

@@ -44,9 +44,9 @@ final class RBlank extends BaseBoundableRenderable {
 	 * @param me a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 * @param fm a {@link java.awt.FontMetrics} object.
 	 * @param container a {@link org.loboevolution.html.renderer.RenderableContainer} object.
-	 * @param ascentPlusLeading a int.
-	 * @param width a int.
-	 * @param height a int.
+	 * @param ascentPlusLeading a {@link java.lang.Integer} object.
+	 * @param width a {@link java.lang.Integer} object.
+	 * @param height a {@link java.lang.Integer} object.
 	 */
 	public RBlank(final ModelNode me, final FontMetrics fm, final RenderableContainer container, final int ascentPlusLeading, final int width,
 				  final int height) {

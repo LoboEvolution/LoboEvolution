@@ -26,6 +26,8 @@
 
 package org.loboevolution.util;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -35,10 +37,8 @@ import java.util.Locale;
 
 /**
  * <p>DateUtil class.</p>
- *
- *
- *
  */
+@Slf4j
 public final class DateUtil {
 
 	/**
@@ -59,9 +59,10 @@ public final class DateUtil {
 			try {
 				return parse(dateString, regexp, loc);
 			} catch (final ParseException e) {
+				log.info(e.getMessage());
 			}
 		}
-		return null; // Unknown format.
+		return null;
 	}
 
 	private List<String> formatList() {

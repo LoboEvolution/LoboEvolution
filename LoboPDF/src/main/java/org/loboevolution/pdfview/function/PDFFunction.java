@@ -103,7 +103,7 @@ public abstract class PDFFunction {
     /**
      * Creates a new instance of PDFFunction
      *
-     * @param type a int.
+     * @param type a {@link java.lang.Integer} object.
      */
     protected PDFFunction(final int type) {
         this.type = type;

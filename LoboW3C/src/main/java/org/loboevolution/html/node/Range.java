@@ -74,7 +74,7 @@ public interface Range {
      *
      * @param how a {@link org.loboevolution.type.Mode} object.
      * @param sourceRange a {@link org.loboevolution.html.node.Range} object.
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     int compareBoundaryPoints(Mode how, Range sourceRange);
 
@@ -82,8 +82,8 @@ public interface Range {
      * Returns −1 if the point is before the range, 0 if the point is in the range, and 1 if the point is after the range.
      *
      * @param node a {@link org.loboevolution.html.node.Node} object.
-     * @param offset a int.
-     * @return a int.
+     * @param offset a {@link java.lang.Integer} object.
+     * @return a {@link java.lang.Integer} object.
      */
     int comparePoint(Node node, int offset);
 
@@ -131,7 +131,7 @@ public interface Range {
      * <p>isPointInRange.</p>
      *
      * @param node a {@link org.loboevolution.html.node.Node} object.
-     * @param offset a int.
+     * @param offset a {@link java.lang.Integer} object.
      * @return a boolean.
      */
     boolean isPointInRange(Node node, int offset);
@@ -154,7 +154,7 @@ public interface Range {
      * <p>setEnd.</p>
      *
      * @param node a {@link org.loboevolution.html.node.Node} object.
-     * @param offset a int.
+     * @param offset a {@link java.lang.Integer} object.
      */
     void setEnd(Node node, int offset);
 
@@ -176,7 +176,7 @@ public interface Range {
      * <p>setStart.</p>
      *
      * @param node a {@link org.loboevolution.html.node.Node} object.
-     * @param offset a int.
+     * @param offset a {@link java.lang.Integer} object.
      */
     void setStart(Node node, int offset);
 

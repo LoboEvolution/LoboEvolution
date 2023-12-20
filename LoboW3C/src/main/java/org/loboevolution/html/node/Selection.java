@@ -46,7 +46,7 @@ public interface Selection {
 	/**
 	 * <p>getAnchorOffset.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	int getAnchorOffset();
 
@@ -60,7 +60,7 @@ public interface Selection {
 	/**
 	 * <p>getFocusOffset.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	int getFocusOffset();
 
@@ -74,7 +74,7 @@ public interface Selection {
 	/**
 	 * <p>getRangeCount.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	int getRangeCount();
 
@@ -96,7 +96,7 @@ public interface Selection {
 	 * <p>collapse.</p>
 	 *
 	 * @param node a {@link org.loboevolution.html.node.Node} object.
-	 * @param offset a int.
+	 * @param offset a {@link java.lang.Integer} object.
 	 */
 	void collapse(Node node, int offset);
 
@@ -148,7 +148,7 @@ public interface Selection {
 	 * <p>extend.</p>
 	 *
 	 * @param node a {@link org.loboevolution.html.node.Node} object.
-	 * @param offset a int.
+	 * @param offset a {@link java.lang.Integer} object.
 	 */
 	void extend(Node node, int offset);
 
@@ -162,7 +162,7 @@ public interface Selection {
 	/**
 	 * <p>getRangeAt.</p>
 	 *
-	 * @param index a int.
+	 * @param index a {@link java.lang.Integer} object.
 	 * @return a {@link org.loboevolution.html.node.Range} object.
 	 */
 	Range getRangeAt(int index);
@@ -190,9 +190,9 @@ public interface Selection {
 	 * <p>setBaseAndExtent.</p>
 	 *
 	 * @param anchorNode a {@link org.loboevolution.html.node.Node} object.
-	 * @param anchorOffset a int.
+	 * @param anchorOffset a {@link java.lang.Integer} object.
 	 * @param focusNode a {@link org.loboevolution.html.node.Node} object.
-	 * @param focusOffset a int.
+	 * @param focusOffset a {@link java.lang.Integer} object.
 	 */
 	void setBaseAndExtent(Node anchorNode, int anchorOffset, Node focusNode, int focusOffset);
 
@@ -200,7 +200,7 @@ public interface Selection {
 	 * <p>setPosition.</p>
 	 *
 	 * @param node a {@link org.loboevolution.html.node.Node} object.
-	 * @param offset a int.
+	 * @param offset a {@link java.lang.Integer} object.
 	 */
 	void setPosition(Node node, int offset);
 

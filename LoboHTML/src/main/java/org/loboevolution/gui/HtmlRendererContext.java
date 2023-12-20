@@ -37,7 +37,6 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.io.InputStream;
 import java.net.URL;
-import java.util.Optional;
 
 public interface HtmlRendererContext {
 
@@ -247,7 +246,7 @@ public interface HtmlRendererContext {
     /**
      * <p>moveInHistory.</p>
      *
-     * @param offset a int.
+     * @param offset a {@link java.lang.Integer} object.
      */
     void moveInHistory(int offset);
 
@@ -363,9 +362,9 @@ public interface HtmlRendererContext {
     /**
      * <p>setCursor.</p>
      *
-     * @param cursorOpt a {@link java.util.Optional} object.
+     * @param cursor a {@link java.awt.Cursor} object.
      */
-    void setCursor(Optional<Cursor> cursorOpt);
+    void setCursor(Cursor cursor);
 
     /**
      * Implements simple navigation and form submission with incremental rendering
@@ -423,7 +422,7 @@ public interface HtmlRendererContext {
     /**
      * <p>getHistoryLength.</p>
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     int getHistoryLength();
 

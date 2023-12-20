@@ -51,8 +51,8 @@ public interface RCollection extends BoundableRenderable {
 	/**
 	 * <p>updateWidgetBounds.</p>
 	 *
-	 * @param guiX a int.
-	 * @param guiY a int.
+	 * @param guiX a {@link java.lang.Integer} object.
+	 * @param guiY a {@link java.lang.Integer} object.
 	 */
 	void updateWidgetBounds(int guiX, final int guiY);
 	
@@ -66,8 +66,8 @@ public interface RCollection extends BoundableRenderable {
 	/**
 	 * <p>getRenderable.</p>
 	 *
-	 * @param x a int.
-	 * @param y a int.
+	 * @param x a {@link java.lang.Integer} object.
+	 * @param y a {@link java.lang.Integer} object.
 	 * @return a {@link org.loboevolution.html.renderer.BoundableRenderable} object.
 	 */
 	BoundableRenderable getRenderable(final int x, final int y);

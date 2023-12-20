@@ -25,6 +25,7 @@
  */
 package org.loboevolution.html.dom.nodeimpl.bootstrap;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.html.dom.nodeimpl.DOMImplementationSourceImpl;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.DOMImplementationList;
@@ -37,6 +38,7 @@ import java.util.ArrayList;
 import java.util.StringTokenizer;
 import java.util.List;
 
+@Slf4j
 public final class DOMImplementationRegistry {
 
     /**
@@ -249,6 +251,7 @@ public final class DOMImplementationRegistry {
                         classLoader =
                                 Thread.currentThread().getContextClassLoader();
                     } catch (final SecurityException ex) {
+                        log.info(ex.getMessage());
                     }
                     return classLoader;
                 });

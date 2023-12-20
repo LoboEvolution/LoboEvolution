@@ -51,7 +51,7 @@ public class InputFile extends BasicInput {
 	public InputFile(final HTMLInputElementImpl modelNode, final InputControl ic) {
 		control = ic;
 		setElement(modelNode);
-		setjComponent(textField);
+		setJComponent(textField);
 		final JButton browseButton = new JButton();
 		browseButton.setContentAreaFilled(false);
 		browseButton.setAction(new BrowseAction());

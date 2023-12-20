@@ -165,7 +165,7 @@ public class ImageSequenceViewer {
 	/**
 	 * Returns the current position of this image sequence shower.
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	public int getPosition() {
 		return position;

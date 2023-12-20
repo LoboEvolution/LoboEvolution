@@ -39,26 +39,12 @@ import java.util.List;
  * <p>StyleStore class.</p>
  */
 @Slf4j
-public class StyleStore implements Serializable {
+public class StyleStore implements QueryStore, Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /** The Constant DB_PATH. */
     private static final String DB_PATH = DatabseSQLite.getDatabaseDirectory();
-
-    private final String DELETE_STYLE = "DELETE FROM STYLE";
-
-    private final String DELETE_STYLE_HREF = "DELETE FROM STYLE WHERE href = ? AND baseUrl = ?";
-
-    private final String INSERT_STYLE = "INSERT OR REPLACE INTO STYLE(title, href, baseUrl, enable) values (?, ?, ?, ?)";
-
-    private final String STYLE = "SELECT title FROM STYLE WHERE href = ? AND baseUrl = ? AND enable = 1";
-
-    private final String STYLE_ALL = "SELECT title FROM STYLE WHERE baseUrl = ?";
-
-    private final String UPDATE_STYLE_ALL = "UPDATE STYLE SET enable = 0";
-
-    private final String UPDATE_STYLE = "UPDATE STYLE SET enable = 1 WHERE title = ?";
 
     /**
      * Gets the styles
@@ -134,7 +120,7 @@ public class StyleStore implements Serializable {
      * @param title a {@link java.lang.String} object.
      * @param href a {@link java.lang.String} object.
      * @param baseUrl a {@link java.lang.String} object.
-     * @param enable a int.
+     * @param enable a {@link java.lang.Integer} object.
      */
     public void insertStyle(final String title, final String href, final String baseUrl, final int enable) {
 

@@ -139,7 +139,7 @@ public class HttpRequest {
 	/**
 	 * <p>Getter for the field readyState.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	public synchronized int getReadyState() {
 		return this.readyState.getValue();
@@ -208,7 +208,7 @@ public class HttpRequest {
 	/**
 	 * <p>Getter for the field status.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	public synchronized int getStatus() {
 		return this.status;

@@ -38,42 +38,42 @@ public interface RElement extends RCollection, UINode {
 	/**
 	 * <p>getCollapsibleMarginBottom.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	int getCollapsibleMarginBottom();
 
 	/**
 	 * <p>getCollapsibleMarginTop.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	int getCollapsibleMarginTop();
 
 	/**
 	 * <p>getMarginBottom.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	int getMarginBottom();
 
 	/**
 	 * <p>getMarginLeft.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	int getMarginLeft();
 
 	/**
 	 * <p>getMarginRight.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	int getMarginRight();
 
 	/**
 	 * <p>getMarginTop.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	int getMarginTop();
 
@@ -81,7 +81,7 @@ public interface RElement extends RCollection, UINode {
 	 * Vertical alignment for elements rendered in a line. Returns one of the
 	 * constants defined in this class.
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	default int getVAlign() {
 		return AlignValues.BASELINE.getValue();

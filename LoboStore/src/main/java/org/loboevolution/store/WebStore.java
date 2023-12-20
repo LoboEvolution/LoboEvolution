@@ -99,8 +99,8 @@ public class WebStore {
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 * @param value a {@link java.lang.String} object.
-	 * @param session a int.
-	 * @param tabIndex a int.
+	 * @param session a {@link java.lang.Integer} object.
+	 * @param tabIndex a {@link java.lang.Integer} object.
 	 */
 	public static void insertStorage(final String name, final String value, final int session, final int tabIndex) {
 		try (final Connection conn = DriverManager.getConnection(DB_PATH);

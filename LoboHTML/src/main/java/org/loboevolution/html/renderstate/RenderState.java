@@ -34,7 +34,6 @@ import org.loboevolution.info.BorderInfo;
 import org.loboevolution.info.WordInfo;
 
 import java.awt.*;
-import java.util.Optional;
 
 /**
  * <p>RenderState interface.</p>
@@ -179,14 +178,14 @@ public interface RenderState {
 	/**
 	 * <p>getAlignXPercent.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	int getAlignXPercent();
 
 	/**
 	 * <p>getAlignYPercent.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	int getAlignYPercent();
 	
@@ -230,7 +229,7 @@ public interface RenderState {
 	/**
 	 * <p>getBlankWidth.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	int getBlankWidth();
 
@@ -252,22 +251,22 @@ public interface RenderState {
 	 * <p>getCount.</p>
 	 *
 	 * @param counter a {@link java.lang.String} object.
-	 * @param nesting a int.
-	 * @return a int.
+	 * @param nesting a {@link java.lang.Integer} object.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	int getCount(final String counter, final int nesting);
 
 	/**
 	 * <p>getDisplay.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	int getDisplay();
 
 	/**
 	 * <p>getFloat.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	int getFloat();
 	
@@ -309,7 +308,7 @@ public interface RenderState {
 	/**
 	 * <p>getFontBase.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	int getFontBase();
 
@@ -330,14 +329,14 @@ public interface RenderState {
 	/**
 	 * <p>getOverflowX.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	int getOverflowX();
 
 	/**
 	 * <p>getOverflowY.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	int getOverflowY();
 
@@ -358,7 +357,7 @@ public interface RenderState {
 	/**
 	 * <p>getPosition.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	int getPosition();
 
@@ -379,15 +378,15 @@ public interface RenderState {
 	/**
 	 * <p>getTextDecorationMask.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	int getTextDecorationMask();
 
 	/**
 	 * <p>getTextIndent.</p>
 	 *
-	 * @param availWidth a int.
-	 * @return a int.
+	 * @param availWidth a {@link java.lang.Integer} object.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	int getTextIndent(int availWidth);
 
@@ -401,21 +400,21 @@ public interface RenderState {
 	/**
 	 * <p>getTextTransform.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	int getTextTransform();
 
 	/**
 	 * <p>getVisibility.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	int getVisibility();
 
 	/**
 	 * <p>getWhiteSpace.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	int getWhiteSpace();
 
@@ -431,8 +430,8 @@ public interface RenderState {
 	 * <p>incrementCount.</p>
 	 *
 	 * @param counter a {@link java.lang.String} object.
-	 * @param nesting a int.
-	 * @return a int.
+	 * @param nesting a {@link java.lang.Integer} object.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	int incrementCount(final String counter, final int nesting);
 
@@ -452,8 +451,8 @@ public interface RenderState {
 	 * <p>resetCount.</p>
 	 *
 	 * @param counter a {@link java.lang.String} object.
-	 * @param nesting a int.
-	 * @param value a int.
+	 * @param nesting a {@link java.lang.Integer} object.
+	 * @param value a {@link java.lang.Integer} object.
 	 */
 	void resetCount(final String counter, final int nesting, final int value);
 
@@ -467,7 +466,7 @@ public interface RenderState {
     /**
      * <p>getClear.</p>
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     int getClear();
     
@@ -516,16 +515,16 @@ public interface RenderState {
     /**
      * <p>getCursor.</p>
      *
-     * @return a {@link java.util.Optional} object.
+     * @return a {@link java.awt.Cursor} object.
      */
-    Optional<Cursor> getCursor();
+	Cursor getCursor();
     
     /**
      * <p>setCursor.</p>
      *
-     * @param cursor a {@link java.util.Optional} object.
+     * @param cursor a {@link java.awt.Cursor} object.
      */
-    void setCursor(Optional<Cursor> cursor);
+    void setCursor(Cursor cursor);
 
 	/**
 	 * <p>getDefaultDisplay.</p>

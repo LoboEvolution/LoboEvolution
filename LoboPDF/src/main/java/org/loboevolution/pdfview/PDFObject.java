@@ -418,7 +418,7 @@ public class PDFObject {
      * get the value as an int.  Will return 0 if this object
      * isn't a NUMBER.
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      * @throws java.io.IOException if any.
      */
     public int getIntValue() throws IOException {
@@ -550,7 +550,7 @@ public class PDFObject {
      * position in the array.  If this is not an ARRAY, returns
      * null.
      *
-     * @param idx a int.
+     * @param idx a {@link java.lang.Integer} object.
      * @return a {@link org.loboevolution.pdfview.PDFObject} object.
      * @throws java.io.IOException if any.
      */
@@ -763,7 +763,7 @@ public class PDFObject {
                 if (st == null) {
                     return "Broken stream";
                 }
-                return "Stream: [[" + new String(st, 0, st.length > 30 ? 30 : st.length) + "]]";
+                return "Stream: [[" + new String(st, 0, Math.min(st.length, 30)) + "]]";
             } else if (type == NULL) {
                 return "Null";
             } else if (type == KEYWORD) {

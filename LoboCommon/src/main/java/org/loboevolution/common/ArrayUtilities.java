@@ -61,8 +61,8 @@ public class ArrayUtilities {
 	/**
 	 * <p>moveItem.</p>
 	 *
-	 * @param sourceIndex a int.
-	 * @param targetIndex a int.
+	 * @param sourceIndex a {@link java.lang.Integer} object.
+	 * @param targetIndex a {@link java.lang.Integer} object.
 	 * @param list a {@link java.util.List} object.
 	 * @param <T> a T object.
 	 */

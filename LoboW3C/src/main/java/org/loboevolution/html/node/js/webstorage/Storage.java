@@ -36,7 +36,7 @@ public interface Storage {
 	/**
 	 * <p>getLength.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	int getLength();
 
@@ -59,7 +59,7 @@ public interface Storage {
 	 * Returns the name of the nth key in the list, or null if n is greater than or
 	 * equal to the number of key/value pairs in the object.
 	 *
-	 * @param index a int.
+	 * @param index a {@link java.lang.Integer} object.
 	 * @return a {@link java.lang.Object} object.
 	 */
 	Object key(int index);

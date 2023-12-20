@@ -40,7 +40,7 @@ public abstract class Flags {
      * <p>getFlagValue.</p>
      *
      * @param key a {@link java.lang.String} object.
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int getFlagValue(final String key) {
         final Integer value = flags.get(key);
@@ -50,7 +50,7 @@ public abstract class Flags {
     /**
      * <p>Setter for the field <code>flags</code>.</p>
      *
-     * @param flagsAsInt a int.
+     * @param flagsAsInt a {@link java.lang.Integer} object.
      */
     public abstract void setFlags(int flagsAsInt);
 }

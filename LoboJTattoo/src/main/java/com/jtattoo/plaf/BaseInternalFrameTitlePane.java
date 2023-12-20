@@ -217,7 +217,7 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
 
 			if (title_length > 2) {
 				final int subtitle_w = fm.stringWidth(frame.getTitle().substring(0, 2) + "...");
-				width += title_w < subtitle_w ? title_w : subtitle_w;
+				width += Math.min(title_w, subtitle_w);
 			} else {
 				width += title_w;
 			}
@@ -350,7 +350,7 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
 	/**
 	 * <p>getHorSpacing.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	protected int getHorSpacing() {
 		return 3;
@@ -359,7 +359,7 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
 	/**
 	 * <p>getIconWidth.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	protected int getIconWidth() {
 		final Image image = iconToImage(frame.getFrameIcon());
@@ -380,7 +380,7 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
 	/**
 	 * <p>getVerSpacing.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	protected int getVerSpacing() {
 		return 3;
@@ -539,8 +539,8 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
 	 * <p>paintIcon.</p>
 	 *
 	 * @param g a {@link java.awt.Graphics} object.
-	 * @param x a int.
-	 * @return a int.
+	 * @param x a {@link java.lang.Integer} object.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	protected int paintIcon(final Graphics g, final int x) {
 		final Image image = iconToImage(frame.getFrameIcon());
@@ -588,8 +588,8 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
 	 * <p>paintText.</p>
 	 *
 	 * @param g a {@link java.awt.Graphics} object.
-	 * @param x a int.
-	 * @param y a int.
+	 * @param x a {@link java.lang.Integer} object.
+	 * @param y a {@link java.lang.Integer} object.
 	 * @param title a {@link java.lang.String} object.
 	 */
 	public void paintText(final Graphics g, final int x, final int y, final String title) {

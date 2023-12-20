@@ -26,6 +26,7 @@
 
 package org.loboevolution.pdf;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.config.DesktopConfig;
 import org.loboevolution.pdfview.PDFFile;
 
@@ -35,6 +36,7 @@ import java.awt.*;
 /**
  * <p>NavigationToolbar class.</p>
  */
+@Slf4j
 public class NavigationToolbar extends JToolBar {
 
     private static final long serialVersionUID = 1L;
@@ -94,7 +96,7 @@ public class NavigationToolbar extends JToolBar {
     /**
      * <p>Setter for the field <code>totalNoOfPages</code>.</p>
      *
-     * @param noOfPages a int.
+     * @param noOfPages a {@link java.lang.Integer} object.
      */
     public void setTotalNoOfPages(final int noOfPages) {
         totalNoOfPages.setText("of " + noOfPages);
@@ -103,7 +105,7 @@ public class NavigationToolbar extends JToolBar {
     /**
      * <p>setCurrentPage.</p>
      *
-     * @param currentPage a int.
+     * @param currentPage a {@link java.lang.Integer} object.
      */
     public void setCurrentPage(final int currentPage) {
         currentPageBox.setText(String.valueOf(currentPage));
@@ -120,7 +122,7 @@ public class NavigationToolbar extends JToolBar {
     /**
      * <p>executeCommand.</p>
      *
-     * @param type a int.
+     * @param type a {@link java.lang.Integer} object.
      */
     public void executeCommand(final int type) {
         switch (type) {
@@ -148,7 +150,8 @@ public class NavigationToolbar extends JToolBar {
                 final int curpage = PDFViewer.curpage;
                 try {
                     pagenum = Integer.parseInt(currentPageBox.getText()) - 1;
-                } catch (final NumberFormatException nfe) {
+                } catch (final NumberFormatException e) {
+                    log.info(e.getMessage());
                 }
                 if (pagenum >= curFile.getNumPages()) {
                     pagenum = curFile.getNumPages() - 1;

@@ -173,7 +173,7 @@ public class HTMLTableCellElementImpl extends HTMLElementImpl implements HTMLTab
 	/**
 	 * <p>Setter for the field <code>index</code>.</p>
 	 *
-	 * @param index a int.
+	 * @param index a {@link java.lang.Integer} object.
 	 */
 	protected void setIndex(final int index) {
 		this.index = index;

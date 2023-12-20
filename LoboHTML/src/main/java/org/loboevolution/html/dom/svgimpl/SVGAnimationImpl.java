@@ -26,6 +26,7 @@
 
 package org.loboevolution.html.dom.svgimpl;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.ArrayUtilities;
 import org.loboevolution.html.dom.smil.ElementTargetAttributes;
 import org.loboevolution.html.dom.smil.SMILAnimation;
@@ -38,10 +39,8 @@ import java.util.ArrayList;
 
 /**
  * <p>SVGAnimationImpl class.</p>
- *
- *
- *
  */
+@Slf4j
 public class SVGAnimationImpl extends SVGElementImpl implements SMILAnimation {
 	
 	private SVGAnimateImpl animate;
@@ -129,6 +128,7 @@ public class SVGAnimationImpl extends SVGElementImpl implements SMILAnimation {
 				try {
 					beginTimeList.add(new TimeImpl(beginTimeString));
 				} catch (final IllegalArgumentException e) {
+					log.info(e.getMessage());
 				}
 			}
 		}
@@ -152,6 +152,7 @@ public class SVGAnimationImpl extends SVGElementImpl implements SMILAnimation {
 				try {
 					beginTimeList.add(new TimeImpl(beginTimeString));
 				} catch (final IllegalArgumentException e) {
+					log.info(e.getMessage());
 				}
 			}
 		}

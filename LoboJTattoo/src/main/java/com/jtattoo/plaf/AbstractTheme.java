@@ -26,7 +26,10 @@
 
 package com.jtattoo.plaf;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
+import org.loboevolution.common.Strings;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -43,7 +46,9 @@ import javax.swing.plaf.metal.MetalTheme;
 /**
  * <p>Abstract AbstractTheme class.</p>
  */
+@EqualsAndHashCode(callSuper = true)
 @Slf4j
+@Data
 public abstract class AbstractTheme extends MetalTheme {
 	
 	/** Constant TEXT_ANTIALIAS_DEFAULT=0 */
@@ -410,8 +415,8 @@ public abstract class AbstractTheme extends MetalTheme {
 	 * <p>createInt.</p>
 	 *
 	 * @param intProp a {@link java.lang.String} object.
-	 * @param defaultValue a int.
-	 * @return a int.
+	 * @param defaultValue a {@link java.lang.Integer} object.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	protected static int createInt(final String intProp, final int defaultValue) {
 		int val = defaultValue;
@@ -421,24 +426,6 @@ public abstract class AbstractTheme extends MetalTheme {
 			log.error("Exception while parsing color property: {} ", intProp);
 		}
 		return val;
-	}
-
-	/**
-	 * <p>Getter for the field internalName.</p>
-	 *
-	 * @return a {@link java.lang.String} object.
-	 */
-	public static String getInternalName() {
-		return internalName;
-	}
-
-	/**
-	 * <p>Setter for the field internalName.</p>
-	 *
-	 * @param name a {@link java.lang.String} object.
-	 */
-	public static void setInternalName(final String name) {
-		internalName = name;
 	}
 
 	/**
@@ -485,15 +472,6 @@ public abstract class AbstractTheme extends MetalTheme {
 	}
 
 	/**
-	 * <p>Getter for the field alterBackgroundTexture.</p>
-	 *
-	 * @return a {@link javax.swing.Icon} object.
-	 */
-	public Icon getAlterBackgroundTexture() {
-		return alterBackgroundTexture;
-	}
-
-	/**
 	 * <p>Getter for the field backgroundColor.</p>
 	 *
 	 * @return a {@link javax.swing.plaf.ColorUIResource} object.
@@ -518,15 +496,6 @@ public abstract class AbstractTheme extends MetalTheme {
 	 */
 	public ColorUIResource getBackgroundColorLight() {
 		return backgroundColorLight;
-	}
-
-	/**
-	 * <p>Getter for the field backgroundTexture.</p>
-	 *
-	 * @return a {@link javax.swing.Icon} object.
-	 */
-	public Icon getBackgroundTexture() {
-		return backgroundTexture;
 	}
 
 	/**
@@ -753,15 +722,6 @@ public abstract class AbstractTheme extends MetalTheme {
 	}
 
 	/**
-	 * <p>Getter for the field disabledTexture.</p>
-	 *
-	 * @return a {@link javax.swing.Icon} object.
-	 */
-	public Icon getDisabledTexture() {
-		return disabledTexture;
-	}
-
-	/**
 	 * <p>Getter for the field focusBackgroundColor.</p>
 	 *
 	 * @return a {@link javax.swing.plaf.ColorUIResource} object.
@@ -881,12 +841,7 @@ public abstract class AbstractTheme extends MetalTheme {
 	 * @return a {@link java.lang.String} object.
 	 */
 	public String getLogoString() {
-		if (logoString != null) {
-			if (logoString.trim().length() == 0) {
-				return null;
-			}
-		}
-		return logoString;
+		return Strings.isNotBlank(logoString) ? logoString : null;
 	}
 
 	/**
@@ -914,15 +869,6 @@ public abstract class AbstractTheme extends MetalTheme {
 	 */
 	public Color[] getMenuBarColors() {
 		return MENUBAR_COLORS;
-	}
-
-	/**
-	 * <p>Getter for the field menubarTexture.</p>
-	 *
-	 * @return a {@link javax.swing.Icon} object.
-	 */
-	public Icon getMenubarTexture() {
-		return menubarTexture;
 	}
 
 	/**
@@ -1013,7 +959,7 @@ public abstract class AbstractTheme extends MetalTheme {
 	/** {@inheritDoc} */
 	@Override
 	public String getName() {
-		return getInternalName();
+		return internalName;
 	}
 
 	/**
@@ -1041,15 +987,6 @@ public abstract class AbstractTheme extends MetalTheme {
 	 */
 	public ColorUIResource getPressedForegroundColor() {
 		return pressedForegroundColor;
-	}
-
-	/**
-	 * <p>Getter for the field pressedTexture.</p>
-	 *
-	 * @return a {@link javax.swing.Icon} object.
-	 */
-	public Icon getPressedTexture() {
-		return pressedTexture;
 	}
 
 	// -----------------------------------------------------------------------------------
@@ -1164,15 +1101,6 @@ public abstract class AbstractTheme extends MetalTheme {
 		return rolloverForegroundColor;
 	}
 
-	/**
-	 * <p>Getter for the field rolloverTexture.</p>
-	 *
-	 * @return a {@link javax.swing.Icon} object.
-	 */
-	public Icon getRolloverTexture() {
-		return rolloverTexture;
-	}
-
 	/** {@inheritDoc} */
 	@Override
 	protected ColorUIResource getSecondary1() {
@@ -1198,15 +1126,6 @@ public abstract class AbstractTheme extends MetalTheme {
 	 */
 	public Color[] getSelectedColors() {
 		return SELECTED_COLORS;
-	}
-
-	/**
-	 * <p>Getter for the field selectedTexture.</p>
-	 *
-	 * @return a {@link javax.swing.Icon} object.
-	 */
-	public Icon getSelectedTexture() {
-		return selectedTexture;
 	}
 
 	/**
@@ -1359,19 +1278,10 @@ public abstract class AbstractTheme extends MetalTheme {
 	/**
 	 * <p>Getter for the field textAntiAliasingMode.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	public int getTextAntiAliasingMode() {
 		return textAntiAliasingMode;
-	}
-
-	/**
-	 * <p>Getter for the field textureSet.</p>
-	 *
-	 * @return a {@link java.lang.String} object.
-	 */
-	public String getTextureSet() {
-		return textureSet;
 	}
 
 	/**
@@ -1440,7 +1350,7 @@ public abstract class AbstractTheme extends MetalTheme {
 	/**
 	 * <p>Getter for the field tooltipBorderSize.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	public int getTooltipBorderSize() {
 		return Math.max(0, Math.min(8, tooltipBorderSize));
@@ -1458,7 +1368,7 @@ public abstract class AbstractTheme extends MetalTheme {
 	/**
 	 * <p>Getter for the field tooltipShadowSize.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	public int getTooltipShadowSize() {
 		return Math.max(0, Math.min(8, tooltipShadowSize));
@@ -1577,15 +1487,6 @@ public abstract class AbstractTheme extends MetalTheme {
 	}
 
 	/**
-	 * <p>Getter for the field windowTexture.</p>
-	 *
-	 * @return a {@link javax.swing.Icon} object.
-	 */
-	public Icon getWindowTexture() {
-		return windowTexture;
-	}
-
-	/**
 	 * <p>Getter for the field windowTitleBackgroundColor.</p>
 	 *
 	 * @return a {@link javax.swing.plaf.ColorUIResource} object.
@@ -1653,39 +1554,12 @@ public abstract class AbstractTheme extends MetalTheme {
 	}
 
 	/**
-	 * <p>isBrightMode.</p>
-	 *
-	 * @return a boolean.
-	 */
-	public boolean isBrightMode() {
-		return brightMode;
-	}
-
-	/**
 	 * <p>isCenterWindowTitleOn.</p>
 	 *
 	 * @return a boolean.
 	 */
 	public boolean isCenterWindowTitleOn() {
 		return centerWindowTitle;
-	}
-
-	/**
-	 * <p>isDarkTexture.</p>
-	 *
-	 * @return a boolean.
-	 */
-	public boolean isDarkTexture() {
-		return darkTexture;
-	}
-
-	/**
-	 * <p>isDynamicLayout.</p>
-	 *
-	 * @return a boolean.
-	 */
-	public boolean isDynamicLayout() {
-		return dynamicLayout;
 	}
 
 	/**
@@ -1734,15 +1608,6 @@ public abstract class AbstractTheme extends MetalTheme {
 	}
 
 	/**
-	 * <p>isMenuOpaque.</p>
-	 *
-	 * @return a boolean.
-	 */
-	public boolean isMenuOpaque() {
-		return menuOpaque;
-	}
-
-	/**
 	 * <p>isSmallFontSize.</p>
 	 *
 	 * @return a boolean.
@@ -1779,24 +1644,6 @@ public abstract class AbstractTheme extends MetalTheme {
 	}
 
 	/**
-	 * <p>isToolbarDecorated.</p>
-	 *
-	 * @return a boolean.
-	 */
-	public boolean isToolbarDecorated() {
-		return toolbarDecorated;
-	}
-
-	/**
-	 * <p>isTooltipCastShadow.</p>
-	 *
-	 * @return a boolean.
-	 */
-	public boolean isTooltipCastShadow() {
-		return tooltipCastShadow;
-	}
-
-	/**
 	 * <p>isWindowDecorationOn.</p>
 	 *
 	 * @return a boolean.
@@ -1816,13 +1663,15 @@ public abstract class AbstractTheme extends MetalTheme {
 			in = new FileInputStream(fileName);
 			props.load(in);
 			setProperties(props);
-		} catch (final IOException ex) {
+		} catch (final IOException e) {
+			log.info(e.getMessage());
 		} finally {
 			try {
 				if (in != null) {
 					in.close();
 				}
-			} catch (final IOException ex) {
+			} catch (final IOException e) {
+				log.info(e.getMessage());
 			}
 		}
 	}
@@ -2389,5 +2238,24 @@ public abstract class AbstractTheme extends MetalTheme {
 		SLIDER_COLORS = DEFAULT_COLORS;
 		PROGRESSBAR_COLORS = DEFAULT_COLORS;
 	}
+
+	/**
+	 * <p>Getter for the field internalName.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
+	public static String getInternalName() {
+		return internalName;
+	}
+
+	/**
+	 * <p>Setter for the field internalName.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
+	public static void setInternalName(final String name) {
+		internalName = name;
+	}
+
 
 } // end of class AbstractTheme

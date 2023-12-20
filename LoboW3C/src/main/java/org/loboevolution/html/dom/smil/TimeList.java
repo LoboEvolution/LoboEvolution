@@ -51,7 +51,7 @@ public interface TimeList {
      * The number of times in the list. The range of valid child time indices is
      * 0 to length-1 inclusive.
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     int getLength();
 

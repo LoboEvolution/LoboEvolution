@@ -53,7 +53,7 @@ public class HTMLTitleElementImpl extends HTMLElementImpl {
 			if (document instanceof HTMLDocumentImpl) {
 				final String textContent = getTextContent();
 				final String title = textContent == null ? null : textContent.trim();
-				((HTMLDocumentImpl) document).setTitle(title);
+				document.setTitle(title);
 			}
 		}
 		return super.setUserData(key, data, handler);

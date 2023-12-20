@@ -104,7 +104,7 @@ public class StreamReader {
     /**
      * <p>readBit.</p>
      *
-     * @return a int.
+     * @return a {@link java.lang.Integer} object.
      */
     public int readBit() {
         final short buf = readByte();
@@ -125,8 +125,8 @@ public class StreamReader {
     /**
      * <p>readBits.</p>
      *
-     * @param num a int.
-     * @return a int.
+     * @param num a {@link java.lang.Integer} object.
+     * @return a {@link java.lang.Integer} object.
      */
     public int readBits(final int num) {
         int result = 0;
@@ -141,7 +141,7 @@ public class StreamReader {
     /**
      * <p>movePointer.</p>
      *
-     * @param ammount a int.
+     * @param ammount a {@link java.lang.Integer} object.
      */
     public void movePointer(final int ammount) {
         bytePointer += ammount;

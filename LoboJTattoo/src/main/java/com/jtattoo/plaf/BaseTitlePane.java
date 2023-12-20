@@ -26,6 +26,8 @@
 
 package com.jtattoo.plaf;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.awt.AlphaComposite;
 import java.awt.Component;
 import java.awt.Composite;
@@ -81,6 +83,7 @@ import javax.swing.plaf.UIResource;
  * Author Michael Hagen
  * @since 1.4
  */
+@Slf4j
 public class BaseTitlePane extends JComponent implements TitlePane {
 
 	protected class CloseAction extends AbstractAction {
@@ -471,7 +474,8 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 		if (value instanceof String) {
 			try {
 				return Integer.parseInt((String) value);
-			} catch (final NumberFormatException nfe) {
+			} catch (final NumberFormatException e) {
+				log.info(e.getMessage());
 			}
 		}
 		return defaultValue;
@@ -744,7 +748,7 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 	/**
 	 * <p>getHorSpacing.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	protected int getHorSpacing() {
 		return 3;
@@ -753,7 +757,7 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 	/**
 	 * <p>getIconWidth.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	protected int getIconWidth() {
 		final Image image = getFrameIconImage();
@@ -794,7 +798,7 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 	/**
 	 * <p>getVerSpacing.</p>
 	 *
-	 * @return a int.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	protected int getVerSpacing() {
 		return 3;
@@ -1016,8 +1020,8 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 	 * <p>paintIcon.</p>
 	 *
 	 * @param g a {@link java.awt.Graphics} object.
-	 * @param x a int.
-	 * @return a int.
+	 * @param x a {@link java.lang.Integer} object.
+	 * @return a {@link java.lang.Integer} object.
 	 */
 	protected int paintIcon(final Graphics g, final int x) {
 		final Image image = getFrameIconImage();
@@ -1048,8 +1052,8 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 	 * <p>paintText.</p>
 	 *
 	 * @param g a {@link java.awt.Graphics} object.
-	 * @param x a int.
-	 * @param y a int.
+	 * @param x a {@link java.lang.Integer} object.
+	 * @param y a {@link java.lang.Integer} object.
 	 * @param title a {@link java.lang.String} object.
 	 */
 	public void paintText(final Graphics g, final int x, final int y, final String title) {
@@ -1145,7 +1149,7 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 	/**
 	 * <p>Setter for the field state.</p>
 	 *
-	 * @param state a int.
+	 * @param state a {@link java.lang.Integer} object.
 	 */
 	protected void setState(final int state) {
 		setState(state, false);
@@ -1154,7 +1158,7 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 	/**
 	 * <p>Setter for the field state.</p>
 	 *
-	 * @param state a int.
+	 * @param state a {@link java.lang.Integer} object.
 	 * @param updateRegardless a boolean.
 	 */
 	protected void setState(final int state, final boolean updateRegardless) {

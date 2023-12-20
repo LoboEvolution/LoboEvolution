@@ -158,7 +158,7 @@ public final class AdobeGlyphList {
      * translate a unicode value into a glyph name. It is possible for
      * different unicode values to translate into the same glyph name.
      *
-     * @param unicode a int.
+     * @param unicode a {@link java.lang.Integer} object.
      * @return String
      */
     public static String getGlyphName(final int unicode) {

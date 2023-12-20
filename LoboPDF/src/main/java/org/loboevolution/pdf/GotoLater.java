@@ -40,7 +40,7 @@ public class GotoLater implements Runnable {
     /**
      * <p>Constructor for GotoLater.</p>
      *
-     * @param pagenum a int.
+     * @param pagenum a {@link java.lang.Integer} object.
      * @param thumb   a {@link org.loboevolution.pdf.ThumbPanel} object.
      */
     public GotoLater(final int pagenum, final ThumbPanel thumb) {

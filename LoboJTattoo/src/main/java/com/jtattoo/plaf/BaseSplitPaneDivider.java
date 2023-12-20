@@ -26,6 +26,9 @@
 
 package com.jtattoo.plaf;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Component;
@@ -161,6 +164,8 @@ public class BaseSplitPaneDivider extends BasicSplitPaneDivider {
 	private static final long serialVersionUID = 1L;
 	protected boolean centerOneTouchButtons = true;
 
+	@Getter
+	@Setter
 	protected boolean flatMode = false;
 
 	/**
@@ -301,15 +306,6 @@ public class BaseSplitPaneDivider extends BasicSplitPaneDivider {
 		return ColorHelper.darker(AbstractLookAndFeel.getTheme().getRolloverColor(), 16);
 	}
 
-	/**
-	 * <p>isFlatMode.</p>
-	 *
-	 * @return a boolean.
-	 */
-	public boolean isFlatMode() {
-		return flatMode;
-	}
-
 	/** {@inheritDoc} */
 	@Override
 	public void paint(final Graphics g) {
@@ -377,15 +373,6 @@ public class BaseSplitPaneDivider extends BasicSplitPaneDivider {
 			g2D.setComposite(savedComposite);
 		}
 		paintComponents(g);
-	}
-
-	/**
-	 * <p>Setter for the field flatMode.</p>
-	 *
-	 * @param flatMode a boolean.
-	 */
-	public void setFlatMode(final boolean flatMode) {
-		this.flatMode = flatMode;
 	}
 
 } // end of class BaseSplitPaneDivieder

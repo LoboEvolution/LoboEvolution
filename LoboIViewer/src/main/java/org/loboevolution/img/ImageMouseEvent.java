@@ -47,8 +47,8 @@ public class ImageMouseEvent extends EventObject {
 	 *
 	 * @param source a {@link java.lang.Object} object.
 	 * @param image a {@link java.awt.image.BufferedImage} object.
-	 * @param x a int.
-	 * @param y a int.
+	 * @param x a {@link java.lang.Integer} object.
+	 * @param y a {@link java.lang.Integer} object.
 	 * @param orig a {@link java.awt.event.MouseEvent} object.
 	 */
 	public ImageMouseEvent(final Object source, final BufferedImage image, final int x, final int y, final MouseEvent orig) {

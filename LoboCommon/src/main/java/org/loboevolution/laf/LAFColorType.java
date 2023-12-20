@@ -26,6 +26,8 @@
 
 package org.loboevolution.laf;
 
+import lombok.Getter;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -33,6 +35,7 @@ import java.util.Map;
 /**
  * <p>LAFColorType class.</p>
  */
+@Getter
 public enum LAFColorType {
 
 	BACKGROUND_MODERN("rgb(37, 51, 61)"),
@@ -60,17 +63,6 @@ public enum LAFColorType {
 
 	LAFColorType(final String value) {
 		this.value = value;
-	}
-
-	/**
-	 * <p>
-	 * Getter for the field value.
-	 * </p>
-	 *
-	 * @return a {@link java.lang.String} object.
-	 */
-	public String getValue() {
-		return value;
 	}
 
 	/**

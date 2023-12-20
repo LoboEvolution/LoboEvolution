@@ -43,8 +43,8 @@ public class RenderableSpot {
 	 * <p>Constructor for RenderableSpot.</p>
 	 *
 	 * @param renderable a {@link org.loboevolution.html.renderer.BoundableRenderable} object.
-	 * @param x a int.
-	 * @param y a int.
+	 * @param x a {@link java.lang.Integer} object.
+	 * @param y a {@link java.lang.Integer} object.
 	 */
 	public RenderableSpot(final BoundableRenderable renderable, final int x, final int y) {
 		super();

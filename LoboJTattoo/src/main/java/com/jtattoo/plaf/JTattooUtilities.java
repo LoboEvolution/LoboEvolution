@@ -75,10 +75,10 @@ public class JTattooUtilities {
 	 * @param g a {@link java.awt.Graphics} object.
 	 * @param c1 a {@link java.awt.Color} object.
 	 * @param c2 a {@link java.awt.Color} object.
-	 * @param x a int.
-	 * @param y a int.
-	 * @param w a int.
-	 * @param h a int.
+	 * @param x a {@link java.lang.Integer} object.
+	 * @param y a {@link java.lang.Integer} object.
+	 * @param w a {@link java.lang.Integer} object.
+	 * @param h a {@link java.lang.Integer} object.
 	 */
 	public static void draw3DBorder(final Graphics g, final Color c1, final Color c2, final int x, final int y, final int w, final int h) {
 		final int x2 = x + w - 1;
@@ -96,10 +96,10 @@ public class JTattooUtilities {
 	 *
 	 * @param g a {@link java.awt.Graphics} object.
 	 * @param c a {@link java.awt.Color} object.
-	 * @param x a int.
-	 * @param y a int.
-	 * @param w a int.
-	 * @param h a int.
+	 * @param x a {@link java.lang.Integer} object.
+	 * @param y a {@link java.lang.Integer} object.
+	 * @param w a {@link java.lang.Integer} object.
+	 * @param h a {@link java.lang.Integer} object.
 	 */
 	public static void drawBorder(final Graphics g, final Color c, final int x, final int y, final int w, final int h) {
 		g.setColor(c);
@@ -112,10 +112,10 @@ public class JTattooUtilities {
 	 * @param g a {@link java.awt.Graphics} object.
 	 * @param c1 a {@link java.awt.Color} object.
 	 * @param c2 a {@link java.awt.Color} object.
-	 * @param x a int.
-	 * @param y a int.
-	 * @param w a int.
-	 * @param h a int.
+	 * @param x a {@link java.lang.Integer} object.
+	 * @param y a {@link java.lang.Integer} object.
+	 * @param w a {@link java.lang.Integer} object.
+	 * @param h a {@link java.lang.Integer} object.
 	 */
 	public static void drawRound3DBorder(final Graphics g, final Color c1, final Color c2, final int x, final int y, final int w, final int h) {
 		final Graphics2D g2D = (Graphics2D) g;
@@ -166,11 +166,11 @@ public class JTattooUtilities {
 	 *
 	 * @param g a {@link java.awt.Graphics} object.
 	 * @param c a {@link java.awt.Color} object.
-	 * @param x a int.
-	 * @param y a int.
-	 * @param w a int.
-	 * @param h a int.
-	 * @param r a int.
+	 * @param x a {@link java.lang.Integer} object.
+	 * @param y a {@link java.lang.Integer} object.
+	 * @param w a {@link java.lang.Integer} object.
+	 * @param h a {@link java.lang.Integer} object.
+	 * @param r a {@link java.lang.Integer} object.
 	 */
 	public static void drawRoundBorder(final Graphics g, final Color c, final int x, final int y, final int w, final int h, final int r) {
 		final Graphics2D g2D = (Graphics2D) g;
@@ -187,8 +187,8 @@ public class JTattooUtilities {
 	 * @param c a {@link javax.swing.JComponent} object.
 	 * @param g a {@link java.awt.Graphics} object.
 	 * @param text a {@link java.lang.String} object.
-	 * @param x a int.
-	 * @param y a int.
+	 * @param x a {@link java.lang.Integer} object.
+	 * @param y a {@link java.lang.Integer} object.
 	 */
 	public static void drawString(final JComponent c, final Graphics g, final String text, final int x, final int y) {
 		final Graphics2D g2D = (Graphics2D) g;
@@ -210,9 +210,9 @@ public class JTattooUtilities {
 	 * @param c a {@link javax.swing.JComponent} object.
 	 * @param g a {@link java.awt.Graphics} object.
 	 * @param text a {@link java.lang.String} object.
-	 * @param underlinedIndex a int.
-	 * @param x a int.
-	 * @param y a int.
+	 * @param underlinedIndex a {@link java.lang.Integer} object.
+	 * @param x a {@link java.lang.Integer} object.
+	 * @param y a {@link java.lang.Integer} object.
 	 */
 	public static void drawStringUnderlineCharAt(final JComponent c, final Graphics g, final String text, final int underlinedIndex, final int x,
                                                  final int y) {
@@ -265,10 +265,10 @@ public class JTattooUtilities {
 	 *
 	 * @param g a {@link java.awt.Graphics} object.
 	 * @param colors an array of {@link java.awt.Color} objects.
-	 * @param x a int.
-	 * @param y a int.
-	 * @param w a int.
-	 * @param h a int.
+	 * @param x a {@link java.lang.Integer} object.
+	 * @param y a {@link java.lang.Integer} object.
+	 * @param w a {@link java.lang.Integer} object.
+	 * @param h a {@link java.lang.Integer} object.
 	 */
 	public static void fillHorGradient(final Graphics g, final Color[] colors, final int x, final int y, final int w, final int h) {
 		if (colors != null) {
@@ -297,10 +297,10 @@ public class JTattooUtilities {
 	 *
 	 * @param g a {@link java.awt.Graphics} object.
 	 * @param colors an array of {@link java.awt.Color} objects.
-	 * @param x a int.
-	 * @param y a int.
-	 * @param w a int.
-	 * @param h a int.
+	 * @param x a {@link java.lang.Integer} object.
+	 * @param y a {@link java.lang.Integer} object.
+	 * @param w a {@link java.lang.Integer} object.
+	 * @param h a {@link java.lang.Integer} object.
 	 */
 	public static void fillInverseHorGradient(final Graphics g, final Color[] colors, final int x, final int y, final int w, final int h) {
 		if (colors != null) {
@@ -329,10 +329,10 @@ public class JTattooUtilities {
 	 *
 	 * @param g a {@link java.awt.Graphics} object.
 	 * @param colors an array of {@link java.awt.Color} objects.
-	 * @param x a int.
-	 * @param y a int.
-	 * @param w a int.
-	 * @param h a int.
+	 * @param x a {@link java.lang.Integer} object.
+	 * @param y a {@link java.lang.Integer} object.
+	 * @param w a {@link java.lang.Integer} object.
+	 * @param h a {@link java.lang.Integer} object.
 	 */
 	public static void fillInverseVerGradient(final Graphics g, final Color[] colors, final int x, final int y, final int w, final int h) {
 		if (colors != null) {
@@ -357,10 +357,10 @@ public class JTattooUtilities {
 	 *
 	 * @param g a {@link java.awt.Graphics} object.
 	 * @param colors an array of {@link java.awt.Color} objects.
-	 * @param x a int.
-	 * @param y a int.
-	 * @param w a int.
-	 * @param h a int.
+	 * @param x a {@link java.lang.Integer} object.
+	 * @param y a {@link java.lang.Integer} object.
+	 * @param w a {@link java.lang.Integer} object.
+	 * @param h a {@link java.lang.Integer} object.
 	 */
 	public static void fillVerGradient(final Graphics g, final Color[] colors, final int x, final int y, final int w, final int h) {
 		if (colors != null) {
@@ -385,7 +385,7 @@ public class JTattooUtilities {
 	 *
 	 * @param text a {@link java.lang.String} object.
 	 * @param fm a {@link java.awt.FontMetrics} object.
-	 * @param maxWidth a int.
+	 * @param maxWidth a {@link java.lang.Integer} object.
 	 * @return a {@link java.lang.String} object.
 	 */
 	public static String getClippedText(final String text, final FontMetrics fm, final int maxWidth) {
@@ -702,10 +702,10 @@ public class JTattooUtilities {
 	 *
 	 * @param g a {@link java.awt.Graphics} object.
 	 * @param colors an array of {@link java.awt.Color} objects.
-	 * @param x a int.
-	 * @param y a int.
-	 * @param w a int.
-	 * @param h a int.
+	 * @param x a {@link java.lang.Integer} object.
+	 * @param y a {@link java.lang.Integer} object.
+	 * @param w a {@link java.lang.Integer} object.
+	 * @param h a {@link java.lang.Integer} object.
 	 */
 	public static void smoothFillHorGradient(final Graphics g, final Color[] colors, final int x, final int y, final int w, final int h) {
 		if (colors != null) {
@@ -735,10 +735,10 @@ public class JTattooUtilities {
 	 *
 	 * @param g a {@link java.awt.Graphics} object.
 	 * @param colors an array of {@link java.awt.Color} objects.
-	 * @param x a int.
-	 * @param y a int.
-	 * @param w a int.
-	 * @param h a int.
+	 * @param x a {@link java.lang.Integer} object.
+	 * @param y a {@link java.lang.Integer} object.
+	 * @param w a {@link java.lang.Integer} object.
+	 * @param h a {@link java.lang.Integer} object.
 	 */
 	public static void smoothFillInverseHorGradient(final Graphics g, final Color[] colors, final int x, final int y, final int w, final int h) {
 		if (colors != null) {
