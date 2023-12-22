@@ -38,6 +38,8 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.MatteBorder;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.loboevolution.common.Strings;
 import org.loboevolution.config.DesktopConfig;
 import org.loboevolution.info.BookmarkInfo;
@@ -51,10 +53,9 @@ import com.jtattoo.plaf.lobo.LoboTextField;
 
 /**
  * <p>AddBookmarkWindow class.</p>
- *
- *
- *
  */
+@EqualsAndHashCode(callSuper = true)
+@Data
 public class AddBookmarkWindow extends JFrame implements LoboLookAndFeel, ActionListener{
 
 	/** The Constant serialVersionUID. */
@@ -195,77 +196,5 @@ public class AddBookmarkWindow extends JFrame implements LoboLookAndFeel, Action
 		binfo.setDescription(getDescriptionField().getText());
 		binfo.setTags(Strings.split(getTagsField().getText()));
 		return binfo;
-	}
-
-	/**
-	 * <p>Getter for the field <code>descriptionField</code>.</p>
-	 *
-	 * @return the descriptionField
-	 */
-	public LoboTextField getDescriptionField() {
-		return descriptionField;
-	}
-
-	/**
-	 * <p>Setter for the field <code>descriptionField</code>.</p>
-	 *
-	 * @param descriptionField the descriptionField to set
-	 */
-	public void setDescriptionField(final LoboTextField descriptionField) {
-		this.descriptionField = descriptionField;
-	}
-
-	/**
-	 * <p>Getter for the field <code>titleField</code>.</p>
-	 *
-	 * @return the titleField
-	 */
-	public LoboTextField getTitleField() {
-		return titleField;
-	}
-
-	/**
-	 * <p>Setter for the field <code>titleField</code>.</p>
-	 *
-	 * @param titleField the titleField to set
-	 */
-	public void setTitleField(final LoboTextField titleField) {
-		this.titleField = titleField;
-	}
-
-	/**
-	 * <p>Getter for the field <code>tagsField</code>.</p>
-	 *
-	 * @return the tagsField
-	 */
-	public LoboTextField getTagsField() {
-		return tagsField;
-	}
-
-	/**
-	 * <p>Setter for the field <code>tagsField</code>.</p>
-	 *
-	 * @param tagsField the tagsField to set
-	 */
-	public void setTagsField(final LoboTextField tagsField) {
-		this.tagsField = tagsField;
-	}
-
-	/**
-	 * <p>Getter for the field <code>urlField</code>.</p>
-	 *
-	 * @return the urlField
-	 */
-	public LoboTextField getUrlField() {
-		return urlField;
-	}
-
-	/**
-	 * <p>Setter for the field <code>urlField</code>.</p>
-	 *
-	 * @param urlField the urlField to set
-	 */
-	public void setUrlField(final LoboTextField urlField) {
-		this.urlField = urlField;
 	}
 }

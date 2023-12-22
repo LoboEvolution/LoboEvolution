@@ -26,6 +26,9 @@
 
 package org.loboevolution.pdfview.action;
 
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.loboevolution.pdfview.PDFDestination;
 import org.loboevolution.pdfview.PDFObject;
 
@@ -40,6 +43,7 @@ import java.io.IOException;
  * @since 07.07.2009
  * **************************************************************************
  */
+@Getter
 public class GoToRAction extends PDFAction {
 
     /**
@@ -54,25 +58,6 @@ public class GoToRAction extends PDFAction {
      * Should the remote file be opened in a new window? (optional)
      */
     private boolean newWindow = false;
-
-    /**
-     * Creates a new instance of GoToRAction from an object
-     *
-     * @param obj  the PDFObject with the action information
-     * @param root a {@link org.loboevolution.pdfview.PDFObject} object.
-     * @throws java.io.IOException if any.
-     */
-    public GoToRAction(final PDFObject obj, final PDFObject root) throws IOException {
-        super("GoToR");
-        // find the destination and parse it
-        this.destination = PdfObjectParseUtil.parseDestination("D", obj, root, true);
-
-        // find the remote file and parse it
-        this.file = PdfObjectParseUtil.parseStringFromDict("F", obj, true);
-
-        // find the new window attribute and parse it if available
-        this.newWindow = PdfObjectParseUtil.parseBooleanFromDict("NewWindow", obj, false);
-    }
 
     /**
      * **********************************************************************
@@ -91,35 +76,21 @@ public class GoToRAction extends PDFAction {
     }
 
     /**
-     * **********************************************************************
-     * Get the destination this action refers to
+     * Creates a new instance of GoToRAction from an object
      *
-     * @return PDFDestination
-     * **********************************************************************
+     * @param obj  the PDFObject with the action information
+     * @param root a {@link org.loboevolution.pdfview.PDFObject} object.
+     * @throws java.io.IOException if any.
      */
-    public PDFDestination getDestination() {
-        return this.destination;
-    }
+    public GoToRAction(final PDFObject obj, final PDFObject root) throws IOException {
+        super("GoToR");
+        // find the destination and parse it
+        this.destination = PdfObjectParseUtil.parseDestination("D", obj, root, true);
 
-    /**
-     * **********************************************************************
-     * Get the file this action refers to
-     *
-     * @return PDFDestination
-     * **********************************************************************
-     */
-    public String getFile() {
-        return this.file;
-    }
+        // find the remote file and parse it
+        this.file = PdfObjectParseUtil.parseStringFromDict("F", obj, true);
 
-    /**
-     * **********************************************************************
-     * Should the remote file be opened in a new window?
-     *
-     * @return boolean
-     * **********************************************************************
-     */
-    public boolean isNewWindow() {
-        return this.newWindow;
+        // find the new window attribute and parse it if available
+        this.newWindow = PdfObjectParseUtil.parseBooleanFromDict("NewWindow", obj, false);
     }
 }

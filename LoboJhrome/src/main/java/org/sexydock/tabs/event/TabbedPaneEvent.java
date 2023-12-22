@@ -26,21 +26,17 @@
 
 package org.sexydock.tabs.event;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.swing.*;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class TabbedPaneEvent {
-    public final JTabbedPane tabbedPane;
-    public final long timestamp;
-    public TabbedPaneEvent(final JTabbedPane tabbedPane, final long timestamp) {
-        this.timestamp = timestamp;
-        this.tabbedPane = tabbedPane;
-    }
 
-    public JTabbedPane getTabbedPane() {
-        return tabbedPane;
-    }
-
-    public long getTimestamp() {
-        return timestamp;
-    }
+    public long timestamp;
+    public JTabbedPane tabbedPane;
 }

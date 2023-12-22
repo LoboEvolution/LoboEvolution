@@ -26,6 +26,7 @@
 
 package org.loboevolution.html.renderer;
 
+import lombok.Getter;
 import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.dom.domimpl.*;
 import org.loboevolution.html.dom.nodeimpl.ModelNode;
@@ -39,22 +40,14 @@ import org.mozilla.javascript.Function;
 import java.awt.*;
 import java.awt.event.InputEvent;
 import java.awt.event.MouseEvent;
-import java.util.Optional;
 
 /**
  * <p>HtmlController class.</p>
  */
 public class HtmlController {
-	private static final HtmlController instance = new HtmlController();
 
-	/**
-	 * <p>Getter for the field instance.</p>
-	 *
-	 * @return a {@link org.loboevolution.html.renderer.HtmlController} object.
-	 */
-	public static HtmlController getInstance() {
-		return instance;
-	}
+	@Getter
+	private static final HtmlController instance = new HtmlController();
 
 	/**
 	 * <p>onChange.</p>

@@ -26,6 +26,7 @@
 
 package org.loboevolution.pdfview.annotation;
 
+import lombok.Getter;
 import org.loboevolution.pdfview.PDFDestination;
 import org.loboevolution.pdfview.PDFObject;
 import org.loboevolution.pdfview.PDFParseException;
@@ -54,9 +55,10 @@ import java.io.IOException;
  * @since 06.07.2009
  * **************************************************************************
  */
+@Getter
 public class LinkAnnotation extends PDFAnnotation {
 
-    private PDFAction action = null;
+    private PDFAction action;
 
     /**
      * **********************************************************************
@@ -85,15 +87,5 @@ public class LinkAnnotation extends PDFAnnotation {
                                 + annotObject.toString());
             }
         }
-    }
-
-    /**
-     * **********************************************************************
-     * Get the contained PDFAction
-     *
-     * @return a {@link org.loboevolution.pdfview.action.PDFAction} object.
-     */
-    public PDFAction getAction() {
-        return this.action;
     }
 }

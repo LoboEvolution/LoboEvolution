@@ -28,6 +28,10 @@
  */
 package org.loboevolution.html.renderer.table;
 
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.loboevolution.html.dom.HTMLTableCellElement;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
@@ -43,14 +47,13 @@ import java.awt.*;
 /**
  * <p>RTableCell class.</p>
  */
+@Getter
+@Setter
 public class RTableCell extends RBlock {
 
 	private final HTMLElementImpl cellElement;
-	
 	private int colSpan = -1;
-
 	private int rowSpan = -1;
-
 	private VirtualCell topLeftVirtualCell;
 
 	/**
@@ -147,15 +150,6 @@ public class RTableCell extends RBlock {
 	}
 
 	/**
-	 * <p>Getter for the field topLeftVirtualCell.</p>
-	 *
-	 * @return a {@link org.loboevolution.html.renderer.table.VirtualCell} object.
-	 */
-	public VirtualCell getTopLeftVirtualCell() {
-		return this.topLeftVirtualCell;
-	}
-
-	/**
 	 * <p>getVirtualColumn.</p>
 	 *
 	 * @return Returns the virtualColumn.
@@ -196,15 +190,6 @@ public class RTableCell extends RBlock {
 		} else {
 			return widthText;
 		}
-	}
-
-	/**
-	 * <p>getCellElement.</p>
-	 *
-	 * @return a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
-	 */
-	public HTMLElementImpl getCellElement() {
-		return cellElement;
 	}
 
 	/** {@inheritDoc} */
@@ -272,23 +257,4 @@ public class RTableCell extends RBlock {
 		final HTMLDocumentImpl doc =  (HTMLDocumentImpl)elem.getDocumentNode();
         return HtmlValues.getPixelSize(rowSpanText, null, doc.getDefaultView(), 1);
     }
-
-
-	/**
-	 * <p>Setter for the field rowSpan.</p>
-	 *
-	 * @param rowSpan a {@link java.lang.Integer} object.
-	 */
-	public void setRowSpan(final int rowSpan) {
-		this.rowSpan = rowSpan;
-	}
-
-	/**
-	 * <p>Setter for the field topLeftVirtualCell.</p>
-	 *
-	 * @param vc a {@link org.loboevolution.html.renderer.table.VirtualCell} object.
-	 */
-	public void setTopLeftVirtualCell(final VirtualCell vc) {
-		this.topLeftVirtualCell = vc;
-	}
 }

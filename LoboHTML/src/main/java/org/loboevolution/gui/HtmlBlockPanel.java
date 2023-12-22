@@ -28,6 +28,7 @@
  */
 package org.loboevolution.gui;
 
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.Nodes;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
@@ -73,6 +74,15 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	protected RenderableSpot endSelection;
 	protected final FrameContext frameContext;
 	private BoundableRenderable mousePressTarget;
+
+	/**
+	 * Allows {@link #getPreferredSize()} to render the HTML block in order to
+	 * determine the preferred size of this component. Note that
+	 * getPreferredSize() is a potentially time-consuming
+	 * operation if the preferred width is set.
+	 * width The preferred blocked width. Use -1 to unset.
+	 */
+	@Setter
 	protected int preferredWidth = -1;
 	private boolean processingDocumentNotification = false;
 	protected RBlock rblock;
@@ -893,18 +903,6 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 				block.relayoutIfValid();
 			}
 		}
-	}
-
-	/**
-	 * Allows {@link #getPreferredSize()} to render the HTML block in order to
-	 * determine the preferred size of this component. Note that
-	 * getPreferredSize() is a potentially time-consuming
-	 * operation if the preferred width is set.
-	 *
-	 * @param width The preferred blocked width. Use -1 to unset.
-	 */
-	public void setPreferredWidth(final int width) {
-		this.preferredWidth = width;
 	}
 
 	/**

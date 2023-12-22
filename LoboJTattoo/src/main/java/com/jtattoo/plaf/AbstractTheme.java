@@ -28,6 +28,8 @@ package com.jtattoo.plaf;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.Strings;
 
@@ -100,6 +102,8 @@ public abstract class AbstractTheme extends MetalTheme {
 	public static final ColorUIResource DARK_BLUE = new ColorUIResource(0, 64, 128);
 
 	/** Constant internalName="Default" */
+	@Getter
+	@Setter
 	private static String internalName = "Default";
 	/** Constant windowDecoration=false */
 	private boolean windowDecoration = false;
@@ -2237,24 +2241,6 @@ public abstract class AbstractTheme extends MetalTheme {
 		THUMB_COLORS = DEFAULT_COLORS;
 		SLIDER_COLORS = DEFAULT_COLORS;
 		PROGRESSBAR_COLORS = DEFAULT_COLORS;
-	}
-
-	/**
-	 * <p>Getter for the field internalName.</p>
-	 *
-	 * @return a {@link java.lang.String} object.
-	 */
-	public static String getInternalName() {
-		return internalName;
-	}
-
-	/**
-	 * <p>Setter for the field internalName.</p>
-	 *
-	 * @param name a {@link java.lang.String} object.
-	 */
-	public static void setInternalName(final String name) {
-		internalName = name;
 	}
 
 

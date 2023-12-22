@@ -96,7 +96,6 @@ public class XHtmlParser {
 	private boolean needRoot = false;
 
 	@Getter
-	@Builder.Default
 	private final Map<String, String> namespaces = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
 
 	/**

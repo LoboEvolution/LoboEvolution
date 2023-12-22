@@ -25,20 +25,19 @@
  */
 package org.loboevolution.html.renderer.table;
 
+import lombok.Data;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.style.HtmlLength;
 
 /**
  * <p>VirtualCell class.</p>
- *
- *
- *
  */
+@Data
 public class VirtualCell {
 	private final RTableCell actualCell;
 	private int column;
-	private final boolean isTopLeft;
+	private boolean topLeft;
 	private int row;
 
 	/**
@@ -49,25 +48,7 @@ public class VirtualCell {
 	 */
 	public VirtualCell(final RTableCell cell, final boolean isTopLeft) {
 		this.actualCell = cell;
-		this.isTopLeft = isTopLeft;
-	}
-
-	/**
-	 * <p>Getter for the field actualCell.</p>
-	 *
-	 * @return Returns the actualCell.
-	 */
-	public RTableCell getActualCell() {
-		return this.actualCell;
-	}
-
-	/**
-	 * <p>Getter for the field column.</p>
-	 *
-	 * @return Returns the column.
-	 */
-	public int getColumn() {
-		return this.column;
+		this.topLeft = isTopLeft;
 	}
 
 	/**
@@ -88,15 +69,6 @@ public class VirtualCell {
 	}
 
 	/**
-	 * <p>Getter for the field row.</p>
-	 *
-	 * @return Returns the row.
-	 */
-	public int getRow() {
-		return this.row;
-	}
-
-	/**
 	 * <p>getWidthLength.</p>
 	 *
 	 * @return a {@link org.loboevolution.html.style.HtmlLength} object.
@@ -111,32 +83,5 @@ public class VirtualCell {
 			length.divideBy(cell.getColSpan());
 		}
 		return length;
-	}
-
-	/**
-	 * <p>isTopLeft.</p>
-	 *
-	 * @return a boolean.
-	 */
-	public boolean isTopLeft() {
-		return this.isTopLeft;
-	}
-
-	/**
-	 * <p>Setter for the field column.</p>
-	 *
-	 * @param column The column to set.
-	 */
-	public void setColumn(final int column) {
-		this.column = column;
-	}
-
-	/**
-	 * <p>Setter for the field row.</p>
-	 *
-	 * @param row The row to set.
-	 */
-	public void setRow(final int row) {
-		this.row = row;
 	}
 }

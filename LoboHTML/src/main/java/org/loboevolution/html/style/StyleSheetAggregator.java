@@ -86,7 +86,6 @@ public class StyleSheetAggregator {
 
 	@Getter
 	@Setter
-	@Builder.Default
 	private boolean mouseOver = false;
 
 	@Getter

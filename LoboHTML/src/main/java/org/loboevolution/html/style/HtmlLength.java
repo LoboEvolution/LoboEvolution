@@ -28,14 +28,13 @@
  */
 package org.loboevolution.html.style;
 
+import lombok.Data;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 
 /**
  * <p>HtmlLength class.</p>
- *
- *
- *
  */
+@Data
 public final class HtmlLength {
 	/** Constant EMPTY_ARRAY */
 	public static final HtmlLength[] EMPTY_ARRAY = new HtmlLength[0];
@@ -44,12 +43,11 @@ public final class HtmlLength {
 	/** Constant MULTI_LENGTH=0 */
 	public static final int MULTI_LENGTH = 0;
 
-	// Note: Preferred type has higher value
 	/** Constant PIXELS=1 */
 	public static final int PIXELS = 1;
 
 	private final int lengthType;
-	private volatile int value;
+	private volatile int rawValue;
 
 	/**
 	 * <p>Constructor for HtmlLength.</p>
@@ -58,7 +56,7 @@ public final class HtmlLength {
 	 */
 	public HtmlLength(final int pixels) {
 		this.lengthType = PIXELS;
-		this.value = pixels;
+		this.rawValue = pixels;
 	}
 
 	/**
@@ -89,7 +87,7 @@ public final class HtmlLength {
 			this.lengthType = PIXELS;
 			parseable = specTrim;
 		}
-		this.value = HtmlValues.getPixelSize(parseable, null, doc.getDefaultView(), -1);
+		this.rawValue = HtmlValues.getPixelSize(parseable, null, doc.getDefaultView(), -1);
 	}
 
 	/**
@@ -98,9 +96,9 @@ public final class HtmlLength {
 	 * @param denominator a {@link java.lang.Integer} object.
 	 */
 	public void divideBy(final int denominator) {
-		int val = this.value;
+		int val = this.rawValue;
 		val = val / denominator;
-		this.value = val;
+		this.rawValue = val;
 	}
 
 	/**
@@ -110,30 +108,11 @@ public final class HtmlLength {
 	 * @return a {@link java.lang.Integer} object.
 	 */
 	public int getLength(final int availLength) {
-		final int lt = this.lengthType;
-		if (lt == LENGTH) {
-			return availLength * this.value / 100;
+        if (this.lengthType == LENGTH) {
+			return availLength * this.rawValue / 100;
 		} else {
-			return this.value;
+			return this.rawValue;
 		}
-	}
-
-	/**
-	 * <p>Getter for the field lengthType.</p>
-	 *
-	 * @return Returns the lengthType.
-	 */
-	public int getLengthType() {
-		return this.lengthType;
-	}
-
-	/**
-	 * <p>getRawValue.</p>
-	 *
-	 * @return Returns the spec.
-	 */
-	public int getRawValue() {
-		return this.value;
 	}
 
 	/**
@@ -149,6 +128,6 @@ public final class HtmlLength {
 		if (this.lengthType > otherLength.lengthType) {
 			return true;
 		}
-		return this.value > otherLength.value;
+		return this.rawValue > otherLength.rawValue;
 	}
 }

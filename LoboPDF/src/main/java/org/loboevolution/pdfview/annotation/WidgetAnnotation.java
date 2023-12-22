@@ -27,6 +27,7 @@
 package org.loboevolution.pdfview.annotation;
 
 import lombok.Getter;
+import lombok.Setter;
 import org.loboevolution.pdfview.*;
 
 import java.awt.geom.AffineTransform;
@@ -45,14 +46,15 @@ import java.util.List;
 public class WidgetAnnotation extends PDFAnnotation {
 
     private final PDFObject fieldValueRef;
+
+    @Getter
+    @Setter
     private String fieldValue;
+
+    @Getter
+    @Setter
     private FieldType fieldType;
-    /**
-     * -- GETTER --
-     * Name for this widget.
-     *
-     * @return Widget name
-     */
+
     @Getter
     private String fieldName;
     private List<PDFCmd> cmd;
@@ -244,34 +246,6 @@ public class WidgetAnnotation extends PDFAnnotation {
                 rect2.getMinX(),
                 rect2.getMinY()};
         return new AffineTransform(f);
-    }
-
-    /**
-     * Returns the type of the field
-     *
-     * @return Field type
-     */
-    public FieldType getFieldType() {
-        return this.fieldType;
-    }
-
-    /**
-     * The field's value as a string. Might be {@code null}.
-     *
-     * @return The field value or {@code null}.
-     */
-    public String getFieldValue() {
-        return this.fieldValue;
-    }
-
-    /**
-     * Sets the field value for a text field. Note: this doesn't actually change
-     * the PDF file yet.
-     *
-     * @param fieldValue The new value for the text field
-     */
-    public void setFieldValue(final String fieldValue) {
-        this.fieldValue = fieldValue;
     }
 
     /**

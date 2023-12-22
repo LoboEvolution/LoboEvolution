@@ -25,7 +25,7 @@
  */
 package org.loboevolution.html.renderer;
 
-import lombok.Builder;
+import lombok.Getter;
 import lombok.Setter;
 import org.loboevolution.html.dom.HTMLHtmlElement;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
@@ -58,14 +58,13 @@ import java.util.List;
 public class RBlock extends BaseElementRenderable {
 	private BoundableRenderable armedRenderable;
 	protected final RBlockViewport bodyLayout;
+	@Getter
 	private final RBlockScroll scroll;
 
 	@Setter
-	@Builder.Default
 	protected int defaultOverflowX = RenderState.OVERFLOW_NONE;
 
 	@Setter
-	@Builder.Default
 	protected int defaultOverflowY = RenderState.OVERFLOW_NONE;
 	protected RenderableSpot endSelection;
 	protected final FrameContext frameContext;
@@ -888,10 +887,6 @@ public class RBlock extends BaseElementRenderable {
 	public void updateWidgetBounds(final int guiX, final int guiY) {
 		super.updateWidgetBounds(guiX, guiY);
 		scroll.updateWidgetBounds(guiX, guiY);
-	}
-
-	public RBlockScroll getScroll() {
-		return scroll;
 	}
 
 	private void correctViewportOrigin(final Insets insets, final int blockWidth, final int blockHeight) {

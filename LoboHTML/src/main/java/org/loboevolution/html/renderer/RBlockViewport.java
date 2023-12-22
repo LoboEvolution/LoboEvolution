@@ -781,7 +781,7 @@ public class RBlockViewport extends BaseRCollection {
 		final SortedSet<PositionedRenderable> others = this.positionedRenderables;
 		if (others == null || others.size() == 0) {
 			final List<Renderable> sr = this.seqRenderables;
-			return sr == null ? null : sr;
+			return sr;
 		} else {
 			final List<Renderable> allRenderables = new ArrayList<>();
 			this.populateZIndexGroupsIterator(others, this.seqRenderables, allRenderables);
@@ -849,7 +849,7 @@ public class RBlockViewport extends BaseRCollection {
 				}
 			}
 		}
-		return result == null ? null : result;
+		return result;
 	}
 
 	void importDelayedPair(final DelayedPair pair) {

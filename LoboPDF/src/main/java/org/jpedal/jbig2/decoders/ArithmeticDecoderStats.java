@@ -25,10 +25,13 @@
  */
 package org.jpedal.jbig2.decoders;
 
+import lombok.Getter;
+
 /**
  * <p>ArithmeticDecoderStats class.</p>
  */
 public class ArithmeticDecoderStats {
+    @Getter
     private final int contextSize;
     private final int[] codingContextTable;
 
@@ -85,15 +88,6 @@ public class ArithmeticDecoderStats {
     }
 
     /**
-     * <p>Getter for the field <code>contextSize</code>.</p>
-     *
-     * @return a {@link java.lang.Integer} object.
-     */
-    public int getContextSize() {
-        return contextSize;
-    }
-
-    /**
      * <p>overwrite.</p>
      *
      * @param stats a {@link org.jpedal.jbig2.decoders.ArithmeticDecoderStats} object.
@@ -109,9 +103,7 @@ public class ArithmeticDecoderStats {
      */
     public ArithmeticDecoderStats copy() {
         final ArithmeticDecoderStats stats = new ArithmeticDecoderStats(contextSize);
-
         System.arraycopy(codingContextTable, 0, stats.codingContextTable, 0, contextSize);
-
         return stats;
     }
 }

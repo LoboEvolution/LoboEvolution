@@ -26,6 +26,8 @@
 
 package org.loboevolution.pdfview.font.ttf;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.loboevolution.pdfview.PDFDebugger;
 
 import java.nio.ByteBuffer;
@@ -45,6 +47,8 @@ public class CmapTable extends TrueTypeTable {
     /**
      * Holds value of property version.
      */
+    @Getter
+    @Setter
     private short version;
 
     /**
@@ -218,25 +222,6 @@ public class CmapTable extends TrueTypeTable {
         }
 
         return length;
-    }
-
-
-    /**
-     * Getter for property version.
-     *
-     * @return Value of property version.
-     */
-    public short getVersion() {
-        return this.version;
-    }
-
-    /**
-     * Setter for property version.
-     *
-     * @param version New value of property version.
-     */
-    public void setVersion(final short version) {
-        this.version = version;
     }
 
     /**

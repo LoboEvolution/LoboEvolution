@@ -26,6 +26,8 @@
 
 package org.loboevolution.tab;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.loboevolution.common.Strings;
 import org.loboevolution.component.IBrowserFrame;
 import org.loboevolution.component.IBrowserPanel;
@@ -40,6 +42,8 @@ import java.awt.*;
 /**
  * <p>DnDTabbedPane class.</p>
  */
+@EqualsAndHashCode(callSuper = true)
+@Data
 public class DnDTabbedPane extends JTabbedPane implements ITabbedPane {
 
 	private static final long serialVersionUID = 1L;
@@ -74,33 +78,6 @@ public class DnDTabbedPane extends JTabbedPane implements ITabbedPane {
 			setIndex(sourceTabbedPane.getSelectedIndex());
 		};
 		addChangeListener(changeListener);
-	}
-
-	/**
-	 * <p>Getter for the field index.</p>
-	 *
-	 * @return the index
-	 */
-	public int getIndex() {
-		return this.index;
-	}
-
-	/**
-	 * <p>Setter for the field index.</p>
-	 *
-	 * @param index the index to set
-	 */
-	public void setIndex(final int index) {
-		this.index = index;
-	}
-
-	/**
-	 * <p>Getter for the field browserPanel.</p>
-	 *
-	 * @return the browserPanel
-	 */
-	public IBrowserPanel getBrowserPanel() {
-		return browserPanel;
 	}
 
 	@Override

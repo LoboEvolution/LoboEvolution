@@ -25,6 +25,7 @@
  */
 package org.loboevolution.pdfview.font.ttf;
 
+import lombok.Getter;
 import org.loboevolution.pdfview.PDFDebugger;
 
 import java.nio.ByteBuffer;
@@ -34,6 +35,7 @@ import java.nio.ByteBuffer;
  * <p>
  * Author  jkaplan
  */
+@Getter
 public abstract class CMap {
 
     /**
@@ -76,14 +78,14 @@ public abstract class CMap {
      * This supports text encoded with surrogates in Unicode 2.0 and later.</p>
      *
      * <p>Reference:<br>
-     * http://developer.apple.com/textfonts/TTRefMan/RM06/Chap6cmap.html </p>
+     * <a href="http://developer.apple.com/textfonts/TTRefMan/RM06/Chap6cmap.html">...</a> </p>
      *
      * @param format   a short.
      * @param language a short.
-     * @return a {@link org.loboevolution.pdfview.font.ttf.CMap} object.
+     * @return a {@link CMap} object.
      */
     public static CMap createMap(final short format, final short language) {
-        CMap outMap = null;
+        CMap outMap;
 
         switch (format) {
             case 0: // CMap format 0 - single byte codes
@@ -95,19 +97,6 @@ public abstract class CMap {
             case 6: // CMap format 6 - 16-bit, two byte encoding
                 outMap = new CMapFormat6(language);
                 break;
-//            case 8: // CMap format 8 - Mixed 16-bit and 32-bit coverage
-//                outMap = new CMapFormat_8(language);
-//                break;
-//            // CMap format 10 - Format 10.0 is a bit like format 6, in that it
-//            // defines a trimmed array for a tight range of 32-bit character codes:
-//            case 10:
-//                outMap = new CMapFormat_10(language);
-//                break;
-//            // Format 12.0 is a bit like format 4, in that it defines
-//            // segments for sparse representation in 4-byte character space.
-//            case 12: // CMap format 12 -
-//                outMap = new CMapFormat_12(language);
-//                break;
             default:
                 PDFDebugger.debug("Unsupport CMap format: " + format);
                 return null;
@@ -145,24 +134,6 @@ public abstract class CMap {
         outMap.setData(data.limit(), data);
 
         return outMap;
-    }
-
-    /**
-     * Get the format of this map
-     *
-     * @return a short.
-     */
-    public short getFormat() {
-        return this.format;
-    }
-
-    /**
-     * Get the language of this map
-     *
-     * @return a short.
-     */
-    public short getLanguage() {
-        return this.language;
     }
 
     /**

@@ -26,6 +26,8 @@
 
 package org.loboevolution.pdfview.pattern;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.loboevolution.pdfview.PDFObject;
 import org.loboevolution.pdfview.PDFPaint;
 import org.loboevolution.pdfview.PDFParseException;
@@ -76,6 +78,8 @@ import java.util.Map;
  * in common; entries specific to particular shading types are
  * described in the relevant sections below.
  */
+@Getter
+@Setter
 public abstract class PDFShader {
 
     /**
@@ -215,7 +219,7 @@ public abstract class PDFShader {
 
             final Rectangle2D bbox =
                     new Rectangle2D.Float(minX, minY, maxX - minX, maxY - minY);
-            shader.setBBox(bbox);
+            shader.setBbox(bbox);
         }
 
         // parse the shader-specific attributes
@@ -225,69 +229,6 @@ public abstract class PDFShader {
         shaderObj.setCache(shader);
 
         return shader;
-    }
-
-    /**
-     * Get the type
-     *
-     * @return a {@link java.lang.Integer} object.
-     */
-    public int getType() {
-        return this.type;
-    }
-
-    /**
-     * Get the color space
-     *
-     * @return a {@link org.loboevolution.pdfview.colorspace.PDFColorSpace} object.
-     */
-    public PDFColorSpace getColorSpace() {
-        return this.colorSpace;
-    }
-
-    /**
-     * Set the color space
-     *
-     * @param colorSpace a {@link org.loboevolution.pdfview.colorspace.PDFColorSpace} object.
-     */
-    protected void setColorSpace(final PDFColorSpace colorSpace) {
-        this.colorSpace = colorSpace;
-    }
-
-    /**
-     * Get the background color
-     *
-     * @return a {@link org.loboevolution.pdfview.PDFPaint} object.
-     */
-    public PDFPaint getBackground() {
-        return this.background;
-    }
-
-    /**
-     * Set the background color
-     *
-     * @param background a {@link org.loboevolution.pdfview.PDFPaint} object.
-     */
-    protected void setBackground(final PDFPaint background) {
-        this.background = background;
-    }
-
-    /**
-     * Get the bounding box
-     *
-     * @return a {@link java.awt.geom.Rectangle2D} object.
-     */
-    public Rectangle2D getBBox() {
-        return this.bbox;
-    }
-
-    /**
-     * Set the bounding box
-     *
-     * @param bbox a {@link java.awt.geom.Rectangle2D} object.
-     */
-    protected void setBBox(final Rectangle2D bbox) {
-        this.bbox = bbox;
     }
 
     /**

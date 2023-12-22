@@ -25,6 +25,7 @@
  */
 package org.loboevolution.pdfview.font;
 
+import lombok.Getter;
 import org.loboevolution.pdfview.PDFObject;
 
 import java.awt.geom.GeneralPath;
@@ -55,6 +56,7 @@ public class CIDFontType2 extends TTFFont {
     /*
      * the default vertical width
      */
+    @Getter
     private int defaultWidthVertical = 1000;
     /**
      * the CIDtoGID map, if any
@@ -251,15 +253,6 @@ public class CIDFontType2 extends TTFFont {
         }
 
         return w / getDefaultWidth();
-    }
-
-    /**
-     * Get the default vertical width in text space
-     *
-     * @return a {@link java.lang.Integer} object.
-     */
-    public int getDefaultWidthVertical() {
-        return this.defaultWidthVertical;
     }
 
     /**

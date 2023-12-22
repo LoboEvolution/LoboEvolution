@@ -25,6 +25,7 @@
  */
 package org.loboevolution.pdfview;
 
+import lombok.Data;
 import org.loboevolution.pdfview.action.GoToAction;
 import org.loboevolution.pdfview.action.PDFAction;
 import org.loboevolution.pdfview.annotation.PDFAnnotation;
@@ -44,6 +45,7 @@ import java.util.*;
  * request one or more PDFPages.
  * Author Mike Wessler
  */
+@Data
 public class PDFFile {
 
     /**
@@ -67,8 +69,7 @@ public class PDFFile {
      * in the PDF file
      */
     PDFXref[] objIdx;
-    /** the end of line character */
-    /**
+        /**
      * the root PDFObject, as specified in the PDF file
      */
     PDFObject root = null;
@@ -256,36 +257,6 @@ public class PDFFile {
     }
 
     /**
-     * Gets whether the owner of the file has given permission to print
-     * the file.
-     *
-     * @return true if it is okay to print the file
-     */
-    public boolean isPrintable() {
-        return this.printable;
-    }
-
-    /**
-     * Gets whether the owner of the file has given permission to save
-     * a copy of the file.
-     *
-     * @return true if it is okay to save the file
-     */
-    public boolean isSaveable() {
-        return this.saveable;
-    }
-
-    /**
-     * get the root PDFObject of this PDFFile.  You generally shouldn't need
-     * this, but we've left it open in case you want to go spelunking.
-     *
-     * @return a {@link org.loboevolution.pdfview.PDFObject} object.
-     */
-    public PDFObject getRoot() {
-        return this.root;
-    }
-
-    /**
      * return the number of pages in this PDFFile.  The pages will be
      * numbered from 1 to getNumPages(), inclusive.
      *
@@ -335,7 +306,7 @@ public class PDFFile {
         // store the current position in the buffer
         final int startPos = this.buf.position();
 
-        final boolean compressed = this.objIdx[id].getCompressed();
+        final boolean compressed = this.objIdx[id].isCompressed();
         if (!compressed) {
             final int loc = this.objIdx[id].getFilePos();
             if (loc < 0) {
@@ -1308,7 +1279,7 @@ public class PDFFile {
                     } else if (type == 1) { // active uncompressed
                         this.objIdx[refID] = new PDFXref(id, gen);
                     } else { // active compressed
-                        this.objIdx[refID] = new PDFXref(id, gen, true);
+                        this.objIdx[refID] = new PDFXref(id, gen, true, null);
                     }
 
                 }
@@ -1834,15 +1805,5 @@ public class PDFFile {
 
         // no luck
         return null;
-    }
-
-    /**
-     * Get the default decrypter for the document
-     *
-     * @return the default decrypter; never null, even for documents that
-     * aren't encrypted
-     */
-    public PDFDecrypter getDefaultDecrypter() {
-        return this.defaultDecrypter;
     }
 }

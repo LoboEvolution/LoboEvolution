@@ -26,6 +26,8 @@
 
 package org.loboevolution.pdfview.action;
 
+import lombok.Data;
+import lombok.Getter;
 import org.loboevolution.pdfview.PDFDestination;
 import org.loboevolution.pdfview.PDFObject;
 import org.loboevolution.pdfview.PDFParseException;
@@ -42,6 +44,7 @@ import java.util.ArrayList;
  * @since 07.07.2009
  * **************************************************************************
  */
+@Getter
 public class GoToEAction extends PDFAction {
 
     /**
@@ -51,11 +54,11 @@ public class GoToEAction extends PDFAction {
     /**
      * the remote file this action refers to (optional)
      */
-    private String file = null;
+    private final String file;
     /**
      * Should the remote file be opened in a new window? (optional)
      */
-    private boolean newWindow = false;
+    private final boolean newWindow;
     /**
      * The target dictionary
      */
@@ -147,54 +150,10 @@ public class GoToEAction extends PDFAction {
             }
         } else {
             if (this.file == null) {
-                throw new PDFParseException("No target dictionary in GoToE action " + targetObj);
+                throw new PDFParseException("No target dictionary in GoToE action ");
             }
         }
         return target;
-    }
-
-    /**
-     * **********************************************************************
-     * Get the destination this action refers to
-     *
-     * @return PDFDestination
-     * **********************************************************************
-     */
-    public PDFDestination getDestination() {
-        return this.destination;
-    }
-
-    /**
-     * **********************************************************************
-     * Get the file this action refers to
-     *
-     * @return PDFDestination
-     * **********************************************************************
-     */
-    public String getFile() {
-        return this.file;
-    }
-
-    /**
-     * **********************************************************************
-     * Should the remote file be opened in a new window?
-     *
-     * @return boolean
-     * **********************************************************************
-     */
-    public boolean isNewWindow() {
-        return this.newWindow;
-    }
-
-    /**
-     * **********************************************************************
-     * Get the target dictionary
-     *
-     * @return GoToETarget
-     * **********************************************************************
-     */
-    public GoToETarget getTarget() {
-        return this.target;
     }
 
 
@@ -205,6 +164,7 @@ public class GoToEAction extends PDFAction {
      * Author  xond
      * @since 07.07.2009
      ****************************************************************************/
+    @Data
     public static class GoToETarget {
         private String relation;
         private String nameInTree;
@@ -212,97 +172,6 @@ public class GoToEAction extends PDFAction {
         private String annotNo;
         private GoToETarget targetDictionary;
 
-        /*************************************************************************
-         * Relation between current document and the target. Can either be "P" or "C"
-         * @return a {@link java.lang.String} object.
-         ************************************************************************/
-        public String getRelation() {
-            return this.relation;
-        }
-
-        /*************************************************************************
-         * Relation between current document and the target. Can either be "P" or "C"
-         * @param relation a {@link java.lang.String} object.
-         ************************************************************************/
-        public void setRelation(final String relation) {
-            this.relation = relation;
-        }
-
-        /*************************************************************************
-         * The file name in the embedded files tree
-         * @return a {@link java.lang.String} object.
-         ************************************************************************/
-        public String getNameInTree() {
-            return this.nameInTree;
-        }
-
-        /*************************************************************************
-         * The file name in the embedded files tree
-         * @param nameInTree a {@link java.lang.String} object.
-         ************************************************************************/
-        public void setNameInTree(final String nameInTree) {
-            this.nameInTree = nameInTree;
-        }
-
-        /*************************************************************************
-         * Page Number:
-         * If the value can be parsed as Integer, it specifies the page number in
-         * the current document containing the file attachment annotation. If the
-         * value is a string, it defines a named destination in the current document
-         * that provides the page number of the file attachment annotation.
-         *
-         * @return String
-         ************************************************************************/
-        public String getPageNo() {
-            return this.pageNo;
-        }
-
-        /*************************************************************************
-         * Page Number:
-         * If the value can be parsed as Integer, it specifies the page number in
-         * the current document containing the file attachment annotation. If the
-         * value is a string, it defines a named destination in the current document
-         * that provides the page number of the file attachment annotation.
-         *
-         * @param pageNo a {@link java.lang.String} object.
-         ************************************************************************/
-        public void setPageNo(final String pageNo) {
-            this.pageNo = pageNo;
-        }
-
-        /*************************************************************************
-         * The index of the according annotation in the annotations array
-         * @return a {@link java.lang.String} object.
-         ************************************************************************/
-        public String getAnnotNo() {
-            return this.annotNo;
-        }
-
-        /*************************************************************************
-         * The index of the according annotation in the annotations array
-         * @param annotNo a {@link java.lang.String} object.
-         ************************************************************************/
-        public void setAnnotNo(final String annotNo) {
-            this.annotNo = annotNo;
-        }
-
-        /*************************************************************************
-         * A target dictionary specifying additional target information. If missing,
-         * the current document is the target file containing the destination.
-         * @return GoToETarget
-         ************************************************************************/
-        public GoToETarget getTargetDictionary() {
-            return this.targetDictionary;
-        }
-
-        /*************************************************************************
-         * A target dictionary specifying additional target information. If missing,
-         * the current document is the target file containing the destination.
-         * @param targetDictionary a {@link GoToETarget} object.
-         ************************************************************************/
-        public void setTargetDictionary(final GoToETarget targetDictionary) {
-            this.targetDictionary = targetDictionary;
-        }
 
         @Override
         public boolean equals(final Object obj) {

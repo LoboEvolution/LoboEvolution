@@ -26,35 +26,24 @@
 
 package org.sexydock.tabs.event;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.sexydock.tabs.Tab;
 
 import javax.swing.*;
 
+@EqualsAndHashCode(callSuper = true)
+@Data
+@ToString
 public class TabMovedEvent extends TabbedPaneEvent {
     public final Tab movedTab;
     public final int prevIndex;
     public final int newIndex;
     public TabMovedEvent(final JTabbedPane tabbedPane, final long timestamp, final Tab movedTab, final int prevIndex, final int newIndex) {
-        super(tabbedPane, timestamp);
+        super(timestamp, tabbedPane);
         this.movedTab = movedTab;
         this.prevIndex = prevIndex;
         this.newIndex = newIndex;
-    }
-
-    public Tab getMovedTab() {
-        return movedTab;
-    }
-
-    public int getPrevIndex() {
-        return prevIndex;
-    }
-
-    public int getNewIndex() {
-        return newIndex;
-    }
-
-    @Override
-    public String toString() {
-        return String.format("%s[tabbedPane: %s, timestamp: %d, movedTab: %s, prevIndex: %d, newIndex: %d]", getClass().getName(), tabbedPane, timestamp, movedTab, prevIndex, newIndex);
     }
 }

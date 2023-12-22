@@ -26,7 +26,6 @@
 
 package org.loboevolution.http;
 
-import lombok.Builder;
 import lombok.Setter;
 import org.loboevolution.config.HtmlRendererConfig;
 import org.loboevolution.info.GeneralInfo;
@@ -46,7 +45,6 @@ public class UserAgentContext {
 	private final HtmlRendererConfig config;
 
 	@Setter
-	@Builder.Default
 	private boolean userAgentEnabled = false;
 
 	public UserAgentContext(final HtmlRendererConfig config){

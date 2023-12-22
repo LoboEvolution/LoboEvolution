@@ -28,6 +28,8 @@ package org.loboevolution.menu.tools.developer;
 
 import com.jtattoo.plaf.lobo.LoboButton;
 import com.jtattoo.plaf.lobo.LoboPanel;
+import lombok.Getter;
+import lombok.Setter;
 import org.loboevolution.component.BrowserFrame;
 
 import javax.swing.*;
@@ -43,9 +45,12 @@ public class DeveloperToolsWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	/** The Constant frame. */
+	@Getter
+	@Setter
 	private BrowserFrame frame;
 
 	/** The developer panel. */
+	@Getter
 	private final transient DeveloperToolPanel developerPanel;
 
 	/** The developer tree. */
@@ -118,32 +123,5 @@ public class DeveloperToolsWindow extends JFrame {
 		rightPanel.add(prefsPanel);
 		rightPanel.add(createButtonsPanel());
 		return rightPanel;
-	}
-
-	/**
-	 * <p>Getter for the field frame.</p>
-	 *
-	 * @return the frame
-	 */
-	public BrowserFrame getFrame() {
-		return this.frame;
-	}
-
-	/**
-	 * <p>Getter for the field developerPanel.</p>
-	 *
-	 * @return the developerPanel
-	 */
-	public DeveloperToolPanel getDeveloperPanel() {
-		return this.developerPanel;
-	}
-
-	/**
-	 * <p>Setter for the field frame.</p>
-	 *
-	 * @param frame the frame to set
-	 */
-	public void setFrame(final BrowserFrame frame) {
-		this.frame = frame;
 	}
 }

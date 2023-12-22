@@ -26,25 +26,22 @@
 
 package org.sexydock.tabs.event;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.sexydock.tabs.Tab;
 
 import javax.swing.*;
 import java.util.List;
 
+@EqualsAndHashCode(callSuper = true)
+@Data
+@ToString
 public class TabsClearedEvent extends TabbedPaneEvent {
     public final List<Tab> removedTabs;
 
     public TabsClearedEvent(final JTabbedPane tabbedPane, final long timestamp, final List<Tab> removedTabs) {
-        super(tabbedPane, timestamp);
+        super(timestamp, tabbedPane);
         this.removedTabs = removedTabs;
-    }
-
-    public List<Tab> getRemovedTabs() {
-        return removedTabs;
-    }
-
-    @Override
-    public String toString() {
-        return String.format("%s[tabbedPane: %s, timestamp: %d]", getClass().getName(), tabbedPane, timestamp);
     }
 }

@@ -25,6 +25,7 @@
  */
 package org.loboevolution.pdfview;
 
+import lombok.Getter;
 import org.loboevolution.pdfview.font.PDFFont;
 import org.loboevolution.pdfview.font.PDFGlyph;
 
@@ -42,7 +43,7 @@ public class PDFTextFormat implements Cloneable {
     /**
      * current matrix transform
      */
-    private final AffineTransform cur;
+    private final AffineTransform transform;
     /**
      * build text rep of word
      */
@@ -82,12 +83,13 @@ public class PDFTextFormat implements Cloneable {
     /**
      * font
      */
+    @Getter
     private PDFFont font;
-    // private Object array[]= new Object[1];
     /**
      * font size
      */
-    private float fsize = 1;
+    @Getter
+    private float fontSize = 1;
     /**
      * are we between BT and ET?
      */
@@ -97,7 +99,7 @@ public class PDFTextFormat implements Cloneable {
      * create a new PDFTextFormat, with initial values
      */
     public PDFTextFormat() {
-        this.cur = new AffineTransform();
+        this.transform = new AffineTransform();
         this.line = new AffineTransform();
         this.prevEnd = new Point2D.Float(-100, -100);
         this.tc = this.tw = this.tr = 0;
@@ -107,7 +109,7 @@ public class PDFTextFormat implements Cloneable {
      * reset the PDFTextFormat for a new run
      */
     public void reset() {
-        this.cur.setToIdentity();
+        this.transform.setToIdentity();
         this.line.setToIdentity();
         this.inuse = true;
         this.word.setLength(0);
@@ -193,24 +195,6 @@ public class PDFTextFormat implements Cloneable {
     }
 
     /**
-     * get the font
-     *
-     * @return a {@link org.loboevolution.pdfview.font.PDFFont} object.
-     */
-    public PDFFont getFont() {
-        return this.font;
-    }
-
-    /**
-     * get the font size
-     *
-     * @return a float.
-     */
-    public float getFontSize() {
-        return this.fsize;
-    }
-
-    /**
      * set the font and size
      *
      * @param f    a {@link org.loboevolution.pdfview.font.PDFFont} object.
@@ -218,7 +202,7 @@ public class PDFTextFormat implements Cloneable {
      */
     public void setFont(final PDFFont f, final float size) {
         this.font = f;
-        this.fsize = size;
+        this.fontSize = size;
     }
 
     /**
@@ -305,16 +289,7 @@ public class PDFTextFormat implements Cloneable {
      */
     public void carriageReturn(final float x, final float y) {
         this.line.concatenate(AffineTransform.getTranslateInstance(x, y));
-        this.cur.setTransform(this.line);
-    }
-
-    /**
-     * Get the current transform
-     *
-     * @return a {@link java.awt.geom.AffineTransform} object.
-     */
-    public AffineTransform getTransform() {
-        return this.cur;
+        this.transform.setTransform(this.line);
     }
 
     /**
@@ -324,7 +299,7 @@ public class PDFTextFormat implements Cloneable {
      */
     public void setMatrix(final float[] matrix) {
         this.line = new AffineTransform(matrix);
-        this.cur.setTransform(this.line);
+        this.transform.setTransform(this.line);
     }
 
     /**
@@ -336,8 +311,8 @@ public class PDFTextFormat implements Cloneable {
      */
     public void doText(final PDFPage cmds, final String text, final boolean autoAdjustStroke) {
         final Point2D.Float zero = new Point2D.Float();
-        final AffineTransform scale = new AffineTransform(this.fsize * this.th, 0, /* 0 */
-                0, this.fsize, /* 0 */
+        final AffineTransform scale = new AffineTransform(this.fontSize * this.th, 0, /* 0 */
+                0, this.fontSize, /* 0 */
                 0, this.tr /* 1 */);
         final AffineTransform at = new AffineTransform();
         final List<PDFGlyph> l = this.font.getGlyphs(text);
@@ -347,7 +322,7 @@ public class PDFTextFormat implements Cloneable {
             }
         }
         for (final PDFGlyph glyph : l) {
-            at.setTransform(this.cur);
+            at.setTransform(this.transform);
             at.concatenate(scale);
             if (PDFDebugger.SHOW_TEXT_REGIONS) {
                 GeneralPath path = new GeneralPath();
@@ -375,14 +350,14 @@ public class PDFTextFormat implements Cloneable {
             if (!PDFDebugger.DISABLE_TEXT) {
                 advance = glyph.addCommands(cmds, at, this.tm);
             }
-            double advanceX = (advance.getX() * this.fsize) + this.tc;
+            double advanceX = (advance.getX() * this.fontSize) + this.tc;
             if (glyph.getChar() == ' ') {
                 advanceX += this.tw;
             }
             advanceX *= this.th;
             if (PDFDebugger.SHOW_TEXT_ANCHOR) {
                 final AffineTransform at2 = new AffineTransform();
-                at2.setTransform(this.cur);
+                at2.setTransform(this.transform);
                 GeneralPath path = new GeneralPath();
                 path.moveTo(0, 0);
                 path.lineTo(6, 0);
@@ -401,9 +376,9 @@ public class PDFTextFormat implements Cloneable {
                     cmds.addCommand(lastColor);
                 }
             }
-            this.cur.translate(advanceX, advance.getY());
+            this.transform.translate(advanceX, advance.getY());
         }
-        this.cur.transform(zero, this.prevEnd);
+        this.transform.transform(zero, this.prevEnd);
     }
 
     /**
@@ -422,7 +397,7 @@ public class PDFTextFormat implements Cloneable {
                 doText(cmds, (String) o, autoAdjustStroke);
             } else if (o instanceof Double) {
                 final float val = ((Double) o).floatValue() / 1000f;
-                this.cur.translate(-val * this.fsize * this.th, 0);
+                this.transform.translate(-val * this.fontSize * this.th, 0);
             } else {
                 throw new PDFParseException("Bad element in TJ array");
             }

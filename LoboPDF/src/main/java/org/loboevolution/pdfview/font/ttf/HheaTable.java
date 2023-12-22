@@ -143,7 +143,7 @@ public class HheaTable extends TrueTypeTable {
         buf.putShort((short) 0);
 
         buf.putShort(getMetricDataFormat());
-        buf.putShort((short) getNumOfLongHorMetrics());
+        buf.putShort(getNumOfLongHorMetrics());
 
         // reset the position to the start of the buffer
         buf.flip();
@@ -200,22 +200,20 @@ public class HheaTable extends TrueTypeTable {
      */
     @Override
     public String toString() {
-        final StringBuilder buf = new StringBuilder();
         final String indent = "    ";
 
-        buf.append(indent).append("Version             : ").append(Integer.toHexString(getVersion())).append("\n");
-        buf.append(indent).append("Ascent              : ").append(getAscent()).append("\n");
-        buf.append(indent).append("Descent             : ").append(getDescent()).append("\n");
-        buf.append(indent).append("LineGap             : ").append(getLineGap()).append("\n");
-        buf.append(indent).append("AdvanceWidthMax     : ").append(getAdvanceWidthMax()).append("\n");
-        buf.append(indent).append("MinLSB              : ").append(getMinLeftSideBearing()).append("\n");
-        buf.append(indent).append("MinRSB              : ").append(getMinRightSideBearing()).append("\n");
-        buf.append(indent).append("MaxExtent           : ").append(getXMaxExtent()).append("\n");
-        buf.append(indent).append("CaretSlopeRise      : ").append(getCaretSlopeRise()).append("\n");
-        buf.append(indent).append("CaretSlopeRun       : ").append(getCaretSlopeRun()).append("\n");
-        buf.append(indent).append("CaretOffset         : ").append(getCaretOffset()).append("\n");
-        buf.append(indent).append("MetricDataFormat    : ").append(getMetricDataFormat()).append("\n");
-        buf.append(indent).append("NumOfLongHorMetrics : ").append(getNumOfLongHorMetrics()).append("\n");
-        return buf.toString();
+        return indent + "Version             : " + Integer.toHexString(getVersion()) + "\n" +
+                indent + "Ascent              : " + getAscent() + "\n" +
+                indent + "Descent             : " + getDescent() + "\n" +
+                indent + "LineGap             : " + getLineGap() + "\n" +
+                indent + "AdvanceWidthMax     : " + getAdvanceWidthMax() + "\n" +
+                indent + "MinLSB              : " + getMinLeftSideBearing() + "\n" +
+                indent + "MinRSB              : " + getMinRightSideBearing() + "\n" +
+                indent + "MaxExtent           : " + getXMaxExtent() + "\n" +
+                indent + "CaretSlopeRise      : " + getCaretSlopeRise() + "\n" +
+                indent + "CaretSlopeRun       : " + getCaretSlopeRun() + "\n" +
+                indent + "CaretOffset         : " + getCaretOffset() + "\n" +
+                indent + "MetricDataFormat    : " + getMetricDataFormat() + "\n" +
+                indent + "NumOfLongHorMetrics : " + getNumOfLongHorMetrics() + "\n";
     }
 }

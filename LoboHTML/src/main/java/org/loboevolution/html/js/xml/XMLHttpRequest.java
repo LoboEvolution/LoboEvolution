@@ -26,7 +26,6 @@
 
 package org.loboevolution.html.js.xml;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -57,7 +56,6 @@ public class XMLHttpRequest extends AbstractScriptableDelegate {
 
 	@Getter
 	@Setter
-	@Builder.Default
 	private int timeout = 0;
 
 	/**

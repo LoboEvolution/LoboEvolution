@@ -26,6 +26,8 @@
 
 package org.loboevolution.pdfview.pattern;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.loboevolution.pdfview.BaseWatchable;
 import org.loboevolution.pdfview.PDFObject;
 import org.loboevolution.pdfview.PDFPaint;
@@ -45,6 +47,8 @@ import java.io.IOException;
 /**
  * A shader that performs radial shader based on a function.
  */
+@Getter
+@Setter
 public class ShaderType3 extends PDFShader {
     /**
      * the center of the first circle
@@ -155,97 +159,6 @@ public class ShaderType3 extends PDFShader {
     @Override
     public PDFPaint getPaint() {
         return PDFPaint.getPaint(new Type3Paint());
-    }
-
-
-    /**
-     * Get the domain minimum
-     *
-     * @return a float.
-     */
-    public float getMinT() {
-        return this.minT;
-    }
-
-    /**
-     * Set the domain minimum
-     *
-     * @param minT a float.
-     */
-    protected void setMinT(final float minT) {
-        this.minT = minT;
-    }
-
-    /**
-     * Get the domain maximum
-     *
-     * @return a float.
-     */
-    public float getMaxT() {
-        return this.maxT;
-    }
-
-    /**
-     * Set the domain maximum
-     *
-     * @param maxT a float.
-     */
-    protected void setMaxT(final float maxT) {
-        this.maxT = maxT;
-    }
-
-    /**
-     * Get whether to extend the start of the axis
-     *
-     * @return a boolean.
-     */
-    public boolean getExtendStart() {
-        return this.extendStart;
-    }
-
-    /**
-     * Set whether to extend the start of the axis
-     *
-     * @param extendStart a boolean.
-     */
-    protected void setExtendStart(final boolean extendStart) {
-        this.extendStart = extendStart;
-    }
-
-    /**
-     * Get whether to extend the end of the axis
-     *
-     * @return a boolean.
-     */
-    public boolean getExtendEnd() {
-        return this.extendEnd;
-    }
-
-    /**
-     * Set whether to extend the end of the axis
-     *
-     * @param extendEnd a boolean.
-     */
-    protected void setExtendEnd(final boolean extendEnd) {
-        this.extendEnd = extendEnd;
-    }
-
-    /**
-     * Get the functions associated with this shader
-     *
-     * @return an array of {@link org.loboevolution.pdfview.function.PDFFunction} objects.
-     */
-    public PDFFunction[] getFunctions() {
-        return this.functions;
-    }
-
-    /**
-     * Set the functions associated with this shader
-     *
-     * @param functions an array of {@link org.loboevolution.pdfview.function.PDFFunction} objects.
-     */
-    protected void setFunctions(final PDFFunction[] functions) {
-        this.functions = functions;
     }
 
     /**

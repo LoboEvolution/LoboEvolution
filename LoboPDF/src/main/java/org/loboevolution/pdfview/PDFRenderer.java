@@ -25,6 +25,9 @@
  */
 package org.loboevolution.pdfview;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.GeneralPath;
@@ -114,7 +117,10 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
     /**
      * the last shape we drew (to check for overlaps)
      */
+    @Getter
+    @Setter
     private GeneralPath lastShape;
+    @Getter
     private AffineTransform lastTransform;
     /**
      * the next time the image should be notified about updates
@@ -709,24 +715,6 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
     }
 
     /**
-     * Get the last shape drawn
-     *
-     * @return a {@link java.awt.geom.GeneralPath} object.
-     */
-    public GeneralPath getLastShape() {
-        return this.lastShape;
-    }
-
-    /**
-     * Set the last shape drawn
-     *
-     * @param shape a {@link java.awt.geom.GeneralPath} object.
-     */
-    public void setLastShape(final GeneralPath shape) {
-        this.lastShape = shape;
-    }
-
-    /**
      * If exists, returns the image which is used by the renderer.
      *
      * @return a BufferedImage or null
@@ -1039,16 +1027,6 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
         }
 
         return dstImage;
-    }
-
-    /**
-     * <p>Getter for the field <code>lastTransform</code>.</p>
-     *
-     * @return Returns the lastTransform.
-     * **********************************************************************
-     */
-    public AffineTransform getLastTransform() {
-        return this.lastTransform;
     }
 
     /**

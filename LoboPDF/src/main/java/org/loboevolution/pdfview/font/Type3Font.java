@@ -25,6 +25,7 @@
  */
 package org.loboevolution.pdfview.font;
 
+import lombok.Getter;
 import org.loboevolution.pdfview.*;
 
 import java.awt.geom.AffineTransform;
@@ -66,11 +67,13 @@ public class Type3Font extends PDFFont {
     /**
      * the start code
      */
-    int firstChar;
+    @Getter
+    private int firstChar;
     /**
      * the end code
      */
-    int lastChar;
+    @Getter
+    private int lastChar;
 
     /**
      * Generate a Type 3 font.
@@ -128,24 +131,6 @@ public class Type3Font extends PDFFont {
         // get first and last chars
         this.firstChar = fontObj.getDictRef("FirstChar").getIntValue();
         this.lastChar = fontObj.getDictRef("LastChar").getIntValue();
-    }
-
-    /**
-     * Get the first character code
-     *
-     * @return a {@link java.lang.Integer} object.
-     */
-    public int getFirstChar() {
-        return this.firstChar;
-    }
-
-    /**
-     * Get the last character code
-     *
-     * @return a {@link java.lang.Integer} object.
-     */
-    public int getLastChar() {
-        return this.lastChar;
     }
 
     /**

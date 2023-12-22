@@ -326,7 +326,7 @@ public class DOM2DTM extends DTMDefaultBaseIterators {
             // %TBD% Should never arise, but I want to be sure of that...
             if (JJK_DEBUG) {
               log.info("***** DOM2DTM Pop Control Flow problem");
-              for (; ; ) ; // Freeze right here!
+              //for (; ; ) ; // Freeze right here!
             }
           }
 

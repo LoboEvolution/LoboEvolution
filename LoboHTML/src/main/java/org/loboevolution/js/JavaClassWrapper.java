@@ -25,6 +25,8 @@
  */
 package org.loboevolution.js;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.loboevolution.info.PropertyInfo;
 import org.mozilla.javascript.Function;
 
@@ -36,8 +38,12 @@ import java.util.*;
  */
 public class JavaClassWrapper {
 	private final Map<String, JavaFunctionObject> functions = new HashMap<>();
+	@Getter
+	@Setter
 	private PropertyInfo integerIndexer;
 	private final Class javaClass;
+	@Getter
+	@Setter
 	private PropertyInfo nameIndexer;
 	private final Map<String, PropertyInfo> properties = new HashMap<>();
 
@@ -105,24 +111,6 @@ public class JavaClassWrapper {
 	 */
 	public Function getFunction(final String name) {
 		return this.functions.get(name);
-	}
-
-	/**
-	 * <p>Getter for the field integerIndexer.</p>
-	 *
-	 * @return a {@link org.loboevolution.info.PropertyInfo} object.
-	 */
-	public PropertyInfo getIntegerIndexer() {
-		return this.integerIndexer;
-	}
-
-	/**
-	 * <p>Getter for the field nameIndexer.</p>
-	 *
-	 * @return a {@link org.loboevolution.info.PropertyInfo} object.
-	 */
-	public PropertyInfo getNameIndexer() {
-		return this.nameIndexer;
 	}
 
 	/**
@@ -215,11 +203,8 @@ public class JavaClassWrapper {
 	}
 
 	private void updateIntegerIndexer(final String methodName, final Method method) {
-		boolean getter = true;
-		if (methodName.startsWith("set")) {
-			getter = false;
-		}
-		PropertyInfo indexer = this.integerIndexer;
+		boolean getter = !methodName.startsWith("set");
+        PropertyInfo indexer = this.integerIndexer;
 		if (indexer == null) {
 			final Class pt = getter ? method.getReturnType() : method.getParameterTypes()[1];
 			indexer = new PropertyInfo("$item", pt);
@@ -233,11 +218,8 @@ public class JavaClassWrapper {
 	}
 
 	private void updateNameIndexer(final String methodName, final Method method) {
-		boolean getter = true;
-		if (methodName.startsWith("set")) {
-			getter = false;
-		}
-		PropertyInfo indexer = this.nameIndexer;
+		boolean getter = !methodName.startsWith("set");
+        PropertyInfo indexer = this.nameIndexer;
 		if (indexer == null) {
 			indexer = new PropertyInfo("$item", Object.class);
 			this.nameIndexer = indexer;

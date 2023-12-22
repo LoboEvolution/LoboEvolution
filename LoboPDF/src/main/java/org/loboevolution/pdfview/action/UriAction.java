@@ -26,6 +26,7 @@
 
 package org.loboevolution.pdfview.action;
 
+import lombok.Getter;
 import org.loboevolution.pdfview.PDFObject;
 
 import java.io.IOException;
@@ -39,6 +40,7 @@ import java.io.IOException;
  * @since 07.07.2009
  * **************************************************************************
  */
+@Getter
 public class UriAction extends PDFAction {
 
     /**
@@ -69,16 +71,5 @@ public class UriAction extends PDFAction {
     public UriAction(final String uri) throws IOException {
         super("URI");
         this.uri = uri;
-    }
-
-    /**
-     * **********************************************************************
-     * Get the URI this action directs to
-     *
-     * @return String
-     * **********************************************************************
-     */
-    public String getUri() {
-        return this.uri;
     }
 }

@@ -26,6 +26,7 @@
 
 package org.loboevolution.pdfview.action;
 
+import lombok.Data;
 import org.loboevolution.pdfview.PDFObject;
 import org.loboevolution.pdfview.PDFParseException;
 
@@ -34,6 +35,7 @@ import java.io.IOException;
 /**
  * The common super-class of all PDF actions.
  */
+@Data
 public class PDFAction {
     /**
      * the type of this action
@@ -102,33 +104,6 @@ public class PDFAction {
 
         // return the action
         return action;
-    }
-
-    /**
-     * Get the type of this action
-     *
-     * @return a {@link java.lang.String} object.
-     */
-    public String getType() {
-        return this.type;
-    }
-
-    /**
-     * Get the next action or array of actions
-     *
-     * @return a {@link org.loboevolution.pdfview.PDFObject} object.
-     */
-    public PDFObject getNext() {
-        return this.next;
-    }
-
-    /**
-     * Set the next action or array of actions
-     *
-     * @param next a {@link org.loboevolution.pdfview.PDFObject} object.
-     */
-    public void setNext(final PDFObject next) {
-        this.next = next;
     }
 
 }

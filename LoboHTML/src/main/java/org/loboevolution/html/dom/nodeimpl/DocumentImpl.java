@@ -85,7 +85,6 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
 
 	@Getter
 	@Setter
-	@Builder.Default
 	private boolean test = false;
 
 	private String xmlVersion = null;

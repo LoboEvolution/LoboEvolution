@@ -25,6 +25,8 @@
  */
 package org.loboevolution.pdf;
 
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.pdfview.PDFFile;
 import org.loboevolution.pdfview.PDFPage;
@@ -59,6 +61,8 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
     /**
      * Guesstimate of the width of a thumbnail that hasn't been processed yet.
      */
+    @Getter
+    @Setter
     private int defaultWidth = (lineheight - border) * 4 / 3;
     /**
      * The PDFFile being displayed.
@@ -98,6 +102,8 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
     /**
      * The PageChangeListener that is listening for page changes.
      */
+    @Getter
+    @Setter
     private transient PageChangeListener listener;
 
     /**
@@ -214,18 +220,6 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
      */
     public void stop() {
         anim = null;
-    }
-
-    /**
-     * Sets the guesstimate of the width of a thumbnail that hasn't been
-     * processed yet.
-     *
-     * @param width the new guesstimate of the width of a thumbnail that hasn't
-     *              been processed yet
-     */
-    public void setDefaultWidth(final int width) {
-        defaultWidth = width;
-        // setPreferredSize(new Dimension(width, lineheight));
     }
 
     /**
@@ -364,9 +358,6 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
      */
     @Override
     public boolean imageUpdate(final Image img, final int infoflags, final int x, final int y, final int width, final int height) {
-        // if ((infoflags & ALLBITS)!=0) {
-        // flag.set();
-        // }
         return (infoflags & (ALLBITS | ERROR | ABORT)) == 0;
     }
 
@@ -408,23 +399,5 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
     @Override
     public int getScrollableUnitIncrement(final Rectangle visrect, final int orientation, final int direction) {
         return lineheight;
-    }
-
-    /**
-     * <p>Getter for the field <code>listener</code>.</p>
-     *
-     * @return the listener
-     */
-    public PageChangeListener getListener() {
-        return listener;
-    }
-
-    /**
-     * <p>Setter for the field <code>listener</code>.</p>
-     *
-     * @param listener the listener to set
-     */
-    public void setListener(final PageChangeListener listener) {
-        this.listener = listener;
     }
 }

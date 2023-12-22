@@ -724,7 +724,7 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
                     if (dest == null) {
                         return;
                     }
-                    final PDFObject page = dest.getPage();
+                    final PDFObject page = dest.getPageObj();
                     if (page == null) {
                         return;
                     }

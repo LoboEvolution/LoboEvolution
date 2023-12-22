@@ -26,6 +26,7 @@
 
 package org.loboevolution.pdfview.annotation;
 
+import lombok.Getter;
 import org.loboevolution.pdfview.Configuration;
 import org.loboevolution.pdfview.PDFCmd;
 import org.loboevolution.pdfview.PDFObject;
@@ -51,6 +52,7 @@ import java.util.List;
  * @since 03.07.2009
  * **************************************************************************
  */
+@Getter
 public class PDFAnnotation {
     /**
      * Definition of some annotation sub-types
@@ -186,39 +188,6 @@ public class PDFAnnotation {
     }
 
     /**
-     * **********************************************************************
-     * Get the PDF Object which contains the annotation values
-     *
-     * @return PDFObject
-     * **********************************************************************
-     */
-    public PDFObject getPdfObj() {
-        return this.pdfObj;
-    }
-
-    /**
-     * **********************************************************************
-     * Get the annotation type
-     *
-     * @return int
-     * **********************************************************************
-     */
-    public ANNOTATION_TYPE getType() {
-        return this.type;
-    }
-
-    /**
-     * **********************************************************************
-     * Get the rectangle on which the annotation should be applied to
-     *
-     * @return Rectangle2D.Float
-     * **********************************************************************
-     */
-    public Float getRect() {
-        return this.rect;
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
@@ -250,15 +219,14 @@ public class PDFAnnotation {
     }
 
 
+    @Getter
     public enum ANNOTATION_TYPE {
         UNKNOWN("-", 0, PDFAnnotation.class),
         LINK("Link", 1, LinkAnnotation.class),
         WIDGET("Widget", 2, WidgetAnnotation.class),
         STAMP("Stamp", 3, StampAnnotation.class),
         FREETEXT("FreeText", 5, FreetextAnnotation.class),
-        SIGNATURE("Sig", 6, WidgetAnnotation.class),
-        // TODO 28.03.2012: add more annotation types
-        ;
+        SIGNATURE("Sig", 6, WidgetAnnotation.class);
 
         private final String definition;
         private final int internalId;
@@ -285,26 +253,6 @@ public class PDFAnnotation {
             return UNKNOWN;
         }
 
-        /**
-         * @return the definition
-         */
-        public String getDefinition() {
-            return definition;
-        }
-
-        /**
-         * @return the internalId
-         */
-        public int getInternalId() {
-            return internalId;
-        }
-
-        /**
-         * @return the className
-         */
-        public Class<?> getClassName() {
-            return className;
-        }
     }
 
 }

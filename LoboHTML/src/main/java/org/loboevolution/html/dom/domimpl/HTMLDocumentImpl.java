@@ -74,6 +74,7 @@ import java.util.*;
 @Slf4j
 public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, DocumentView {
 
+	@Setter
 	private volatile String baseURI;
 
 	private HTMLElement body;
@@ -91,9 +92,11 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	private final Map<String, Element> elementsByName = new HashMap<>();
 
 	@Getter
+	@Setter
 	private Set<Locale> locales;
 
 	@Getter
+	@Setter
 	private Function onloadHandler;
 
 	@Getter
@@ -510,15 +513,6 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 		}
 	}
 
-	/**
-	 * <p>Setter for the field baseURI.</p>
-	 *
-	 * @param value a {@link java.lang.String} object.
-	 */
-	public void setBaseURI(final String value) {
-		this.baseURI = value;
-	}
-
 	/** {@inheritDoc} */
 	@Override
 	public void setBody(final HTMLElement body) {
@@ -550,31 +544,11 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 		}
 	}
 
-	/**
-	 * Sets the locales of the document. This helps determine whether specific fonts
-	 * can display text in the languages of all the locales.
-	 *
-	 * @param locales An <i>immutable</i> set of java.util.Locale
-	 *                instances.
-	 */
-	public void setLocales(final Set<Locale> locales) {
-		this.locales = locales;
-	}
-
 
 	public void setNamedItem(final String name, final Element element) {
 		synchronized (this) {
 			this.elementsByName.put(name, element);
 		}
-	}
-
-	/**
-	 * <p>Setter for the field onloadHandler.</p>
-	 *
-	 * @param onloadHandler a {@link org.mozilla.javascript.Function} object.
-	 */
-	public void setOnloadHandler(final Function onloadHandler) {
-		this.onloadHandler = onloadHandler;
 	}
 
 	/** {@inheritDoc} */

@@ -1298,8 +1298,8 @@ public abstract class ElementImpl extends NodeImpl implements Element {
 		final String width = currentStyle.getWidth();
 		final String overflow = currentStyle.getOverflow();
 		final RenderState rs = getRenderState();
-		final boolean padding = "border-box".equals(currentStyle.getBoxSizing()) ? false : isPadding;
-		final boolean border = "border-box".equals(currentStyle.getBoxSizing()) ? false : isBorder;
+		final boolean padding = !"border-box".equals(currentStyle.getBoxSizing()) && isPadding;
+		final boolean border = !"border-box".equals(currentStyle.getBoxSizing()) && isBorder;
 
 		int widthSize;
 
@@ -1458,19 +1458,15 @@ public abstract class ElementImpl extends NodeImpl implements Element {
 		final AtomicInteger h = new AtomicInteger(0);
 		elm.getNodeList().forEach(child -> {
 			final int type = child.getNodeType();
-			switch (type) {
-				case Node.ELEMENT_NODE:
-					final CSSStyleDeclaration currentStyle = ((HTMLElementImpl)child).getCurrentStyle();
-					final String width = currentStyle.getWidth();
-					if(Strings.isNotBlank(width)){
-						h.addAndGet(HtmlValues.getPixelSize(width, null, doc.getDefaultView(), 0, parentWidth));
-					} else {
-						h.addAndGet(childWidth((ElementImpl) child, doc, parentWidth));
-					}
-					break;
-				default:
-					break;
-			}
+            if (type == Node.ELEMENT_NODE) {
+                final CSSStyleDeclaration currentStyle = ((HTMLElementImpl) child).getCurrentStyle();
+                final String width = currentStyle.getWidth();
+                if (Strings.isNotBlank(width)) {
+                    h.addAndGet(HtmlValues.getPixelSize(width, null, doc.getDefaultView(), 0, parentWidth));
+                } else {
+                    h.addAndGet(childWidth((ElementImpl) child, doc, parentWidth));
+                }
+            }
 		});
 		return h.get();
 	}

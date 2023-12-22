@@ -25,6 +25,7 @@
  */
 package org.jpedal.jbig2.image;
 
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.jpedal.jbig2.JBIG2Exception;
 import org.jpedal.jbig2.decoders.*;
@@ -37,6 +38,7 @@ import java.io.IOException;
  * <p>JBIG2Bitmap class.</p>
  */
 @Slf4j
+@Data
 public final class JBIG2Bitmap {
     private final int width;
     private final int line;
@@ -1012,52 +1014,12 @@ public final class JBIG2Bitmap {
     }
 
     /**
-     * <p>Getter for the field <code>width</code>.</p>
-     *
-     * @return a {@link java.lang.Integer} object.
-     */
-    public int getWidth() {
-        return width;
-    }
-
-    /**
-     * <p>Getter for the field <code>height</code>.</p>
-     *
-     * @return a {@link java.lang.Integer} object.
-     */
-    public int getHeight() {
-        return height;
-    }
-
-    /**
      * <p>Getter for the field <code>data</code>.</p>
      *
      * @param switchPixelColor a boolean.
      * @return an array of {@link byte} objects.
      */
     public byte[] getData(final boolean switchPixelColor) {
-//		byte[] bytes = new byte[height * line];
-//
-//		for (int i = 0; i < height; i++) {
-//			System.arraycopy(data.bytes[i], 0, bytes, line * i, line);
-//		}
-//
-//		for (int i = 0; i < bytes.length; i++) {
-//			// reverse bits
-//
-//			int value = bytes[i];
-//			value = (value & 0x0f) << 4 | (value & 0xf0) >> 4;
-//			value = (value & 0x33) << 2 | (value & 0xcc) >> 2;
-//			value = (value & 0x55) << 1 | (value & 0xaa) >> 1;
-//
-//			if (switchPixelColor) {
-//				value ^= 0xff;
-//			}
-//
-//			bytes[i] = (byte) (value & 0xFF);
-//		}
-//
-//		return bytes;
         final byte[] bytes = new byte[height * line];
 
         int count = 0, offset = 0;
@@ -1113,64 +1075,6 @@ public final class JBIG2Bitmap {
         return slice;
     }
 
-    /**
-     * private static void setPixel(int col, final int row, FastBitSet data, final int value) {
-     * if (value == 1)
-     * data.set(row, col);
-     * else
-     * data.clear(row, col);
-     * }/
-     **/
-
-//	private void setPixelByte(int col, final int row, FastBitSet data, byte bits) {
-//		data.setByte(row, col, bits);
-//	}
-
-//	public void setPixel(int col, final int row, final int value) {
-//		setPixel(col, row, data, value);
-//	}
-
-//	public int getPixel(int col, final int row) {
-//		return data.get(row, col) ? 1 : 0;
-//	}
-
-
-//	private void setPixelByte(int col, final int row, FastBitSet data, byte bits) {
-//		data.setByte(row, col, bits);
-//	}
-
-//	public void setPixel(int col, final int row, final int value) {
-//		setPixel(col, row, data, value);
-//	}
-
-//	public int getPixel(int col, final int row) {
-//		return data.get(row, col) ? 1 : 0;
-//	}
-
-//	private void setPixelByte(int col, final int row, FastBitSet data, byte bits) {
-//		data.setByte(row, col, bits);
-//	}
-
-//	public void setPixel(int col, final int row, final int value) {
-//		setPixel(col, row, data, value);
-//	}
-
-//	public int getPixel(int col, final int row) {
-//		return data.get(row, col) ? 1 : 0;
-//	}
-
-
-//	private void setPixelByte(int col, final int row, FastBitSet data, byte bits) {
-//		data.setByte(row, col, bits);
-//	}
-
-//	public void setPixel(int col, final int row, final int value) {
-//		setPixel(col, row, data, value);
-//	}
-
-//	public int getPixel(int col, final int row) {
-//		return data.get(row, col) ? 1 : 0;
-//	}
     private void setPixel(final int col, final int row, final FastBitSet data, final int value) {
         final int index = (row * width) + col;
 
@@ -1215,24 +1119,6 @@ public final class JBIG2Bitmap {
 
         this.height = newHeight;
         this.data = newData;
-    }
-
-    /**
-     * <p>Getter for the field <code>bitmapNumber</code>.</p>
-     *
-     * @return a {@link java.lang.Integer} object.
-     */
-    public int getBitmapNumber() {
-        return bitmapNumber;
-    }
-
-    /**
-     * <p>Setter for the field <code>bitmapNumber</code>.</p>
-     *
-     * @param segmentNumber a {@link java.lang.Integer} object.
-     */
-    public void setBitmapNumber(final int segmentNumber) {
-        this.bitmapNumber = segmentNumber;
     }
 
     /**

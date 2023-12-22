@@ -27,7 +27,6 @@ package org.loboevolution.pdfview.font;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 import org.loboevolution.pdfview.PDFObject;
 
 import java.awt.geom.GeneralPath;

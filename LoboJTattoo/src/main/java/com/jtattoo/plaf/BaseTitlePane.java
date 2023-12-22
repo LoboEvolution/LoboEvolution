@@ -26,6 +26,7 @@
 
 package com.jtattoo.plaf;
 
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.awt.AlphaComposite;
@@ -527,6 +528,7 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 	// state)
 	protected boolean wasMaximizeError = false;
 
+	@Setter
 	protected BufferedImage backgroundImage = null;
 
 	protected float alphaValue = 0.85f;
@@ -1116,15 +1118,6 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 	 */
 	public void setAlphaTransparency(final float alpha) {
 		alphaValue = alpha;
-	}
-
-	/**
-	 * <p>Setter for the field backgroundImage.</p>
-	 *
-	 * @param bgImage a {@link java.awt.image.BufferedImage} object.
-	 */
-	public void setBackgroundImage(final BufferedImage bgImage) {
-		backgroundImage = bgImage;
 	}
 
 	/**

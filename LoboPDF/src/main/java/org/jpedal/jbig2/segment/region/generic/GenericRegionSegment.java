@@ -25,6 +25,7 @@
  */
 package org.jpedal.jbig2.segment.region.generic;
 
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.jpedal.jbig2.JBIG2Exception;
 import org.jpedal.jbig2.decoders.JBIG2StreamDecoder;
@@ -41,6 +42,7 @@ import java.io.IOException;
  */
 @Slf4j
 public class GenericRegionSegment extends RegionSegment {
+    @Getter
     private final GenericRegionFlags genericRegionFlags = new GenericRegionFlags();
 
     private final boolean inlineImage;
@@ -183,14 +185,5 @@ public class GenericRegionSegment extends RegionSegment {
 
         if (JBIG2StreamDecoder.debug)
             log.info("generic region Segment flags = {} ", genericRegionFlagsField);
-    }
-
-    /**
-     * <p>Getter for the field <code>genericRegionFlags</code>.</p>
-     *
-     * @return a {@link org.jpedal.jbig2.segment.region.generic.GenericRegionFlags} object.
-     */
-    public GenericRegionFlags getGenericRegionFlags() {
-        return genericRegionFlags;
     }
 }

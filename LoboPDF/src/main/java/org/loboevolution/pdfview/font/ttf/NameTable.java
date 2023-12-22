@@ -26,6 +26,9 @@
 
 package org.loboevolution.pdfview.font.ttf;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.util.*;
@@ -111,6 +114,8 @@ public class NameTable extends TrueTypeTable {
     /**
      * The format of this table
      */
+    @Getter
+    @Setter
     private short format;
 
 
@@ -370,24 +375,6 @@ public class NameTable extends TrueTypeTable {
         }
 
         return length;
-    }
-
-    /**
-     * Get the format of this table
-     *
-     * @return a short.
-     */
-    public short getFormat() {
-        return this.format;
-    }
-
-    /**
-     * Set the format of this table
-     *
-     * @param format a short.
-     */
-    public void setFormat(final short format) {
-        this.format = format;
     }
 
     /**

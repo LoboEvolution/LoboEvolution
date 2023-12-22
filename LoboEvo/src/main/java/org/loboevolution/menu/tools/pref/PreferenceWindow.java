@@ -36,6 +36,8 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.loboevolution.component.BrowserFrame;
 
 import com.jtattoo.plaf.lobo.LoboButton;
@@ -43,18 +45,18 @@ import com.jtattoo.plaf.lobo.LoboPanel;
 
 /**
  * <p>PreferenceWindow class.</p>
- *
- *
- *
  */
 public class PreferenceWindow extends JFrame {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
+	@Getter
+	@Setter
 	private BrowserFrame frame;
 
 	/** The preferences panel. */
+	@Getter
 	private final transient PreferencesPanel preferencesPanel;
 
 	/** The preferences tree. */
@@ -142,32 +144,5 @@ public class PreferenceWindow extends JFrame {
 		rightPanel.add(prefsPanel);
 		rightPanel.add(createButtonsPanel());
 		return rightPanel;
-	}
-
-	/**
-	 * <p>Getter for the field frame.</p>
-	 *
-	 * @return the frame
-	 */
-	public BrowserFrame getFrame() {
-		return this.frame;
-	}
-
-	/**
-	 * <p>Getter for the field preferencesPanel.</p>
-	 *
-	 * @return the preferencesPanel
-	 */
-	public PreferencesPanel getPreferencesPanel() {
-		return this.preferencesPanel;
-	}
-
-	/**
-	 * <p>Setter for the field frame.</p>
-	 *
-	 * @param frame the frame to set
-	 */
-	public void setFrame(final BrowserFrame frame) {
-		this.frame = frame;
 	}
 }

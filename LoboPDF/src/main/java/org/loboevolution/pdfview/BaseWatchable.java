@@ -25,6 +25,9 @@
  */
 package org.loboevolution.pdfview;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * An abstract implementation of the watchable interface, that is extended
  * by the parser and renderer to do their thing.
@@ -34,8 +37,11 @@ public abstract class BaseWatchable implements Watchable, Runnable {
     /**
      * suppress local stack trace on setError.
      */
+    @Getter
+    @Setter
     private static boolean SuppressSetErrorStackTrace = false;
-    // handle exceptions via this class
+
+    @Setter
     private static PDFErrorHandler errorHandler = new PDFErrorHandler();
     /**
      * a lock for status-related operations
@@ -57,6 +63,7 @@ public abstract class BaseWatchable implements Watchable, Runnable {
      * the thread we are running in
      */
     private Thread thread;
+    @Getter
     private Exception exception;
 
     /**
@@ -64,24 +71,6 @@ public abstract class BaseWatchable implements Watchable, Runnable {
      */
     protected BaseWatchable() {
         setStatus(Watchable.NOT_STARTED);
-    }
-
-    /**
-     * return true if we would be suppressing setError stack traces.
-     *
-     * @return boolean
-     */
-    public static boolean isSuppressSetErrorStackTrace() {
-        return SuppressSetErrorStackTrace;
-    }
-
-    /**
-     * set suppression of stack traces from setError.
-     *
-     * @param suppressTrace a boolean.
-     */
-    public static void setSuppressSetErrorStackTrace(final boolean suppressTrace) {
-        SuppressSetErrorStackTrace = suppressTrace;
     }
 
     /**
@@ -94,15 +83,6 @@ public abstract class BaseWatchable implements Watchable, Runnable {
             errorHandler = new PDFErrorHandler();
         }
         return errorHandler;
-    }
-
-    /**
-     * <p>Setter for the field <code>errorHandler</code>.</p>
-     *
-     * @param e a {@link org.loboevolution.pdfview.PDFErrorHandler} object.
-     */
-    public static void setErrorHandler(final PDFErrorHandler e) {
-        errorHandler = e;
     }
 
     /**
@@ -384,15 +364,6 @@ public abstract class BaseWatchable implements Watchable, Runnable {
         }
 
         setStatus(Watchable.ERROR);
-    }
-
-    /**
-     * <p>Getter for the field <code>exception</code>.</p>
-     *
-     * @return a {@link java.lang.Exception} object.
-     */
-    public Exception getException() {
-        return exception;
     }
 
     /**

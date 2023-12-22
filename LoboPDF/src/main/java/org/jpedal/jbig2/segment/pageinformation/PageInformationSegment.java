@@ -25,6 +25,8 @@
  */
 package org.jpedal.jbig2.segment.pageinformation;
 
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.jpedal.jbig2.JBIG2Exception;
 import org.jpedal.jbig2.decoders.JBIG2StreamDecoder;
@@ -38,12 +40,12 @@ import java.io.IOException;
  * <p>PageInformationSegment class.</p>
  */
 @Slf4j
+@Getter
+@Setter
 public class PageInformationSegment extends Segment {
 
     final PageInformationFlags pageInformationFlags = new PageInformationFlags();
-    private int pageBitmapHeight, pageBitmapWidth;
-    private int yResolution, xResolution;
-    private int pageStriping;
+    private int pageBitmapHeight;
 
     private JBIG2Bitmap pageBitmap;
 
@@ -54,24 +56,6 @@ public class PageInformationSegment extends Segment {
      */
     public PageInformationSegment(final JBIG2StreamDecoder streamDecoder) {
         super(streamDecoder);
-    }
-
-    /**
-     * <p>Getter for the field <code>pageInformationFlags</code>.</p>
-     *
-     * @return a {@link org.jpedal.jbig2.segment.pageinformation.PageInformationFlags} object.
-     */
-    public PageInformationFlags getPageInformationFlags() {
-        return pageInformationFlags;
-    }
-
-    /**
-     * <p>Getter for the field <code>pageBitmap</code>.</p>
-     *
-     * @return a {@link org.jpedal.jbig2.image.JBIG2Bitmap} object.
-     */
-    public JBIG2Bitmap getPageBitmap() {
-        return pageBitmap;
     }
 
     /**
@@ -87,7 +71,7 @@ public class PageInformationSegment extends Segment {
 
         short[] buff = new short[4];
         decoder.readByte(buff);
-        pageBitmapWidth = BinaryOperation.getInt32(buff);
+        int pageBitmapWidth = BinaryOperation.getInt32(buff);
 
         buff = new short[4];
         decoder.readByte(buff);
@@ -98,11 +82,11 @@ public class PageInformationSegment extends Segment {
 
         buff = new short[4];
         decoder.readByte(buff);
-        xResolution = BinaryOperation.getInt32(buff);
+        int xResolution = BinaryOperation.getInt32(buff);
 
         buff = new short[4];
         decoder.readByte(buff);
-        yResolution = BinaryOperation.getInt32(buff);
+        int yResolution = BinaryOperation.getInt32(buff);
 
         if (JBIG2StreamDecoder.debug)
             log.info("Resolution =  {} x {}", xResolution, yResolution);
@@ -116,7 +100,7 @@ public class PageInformationSegment extends Segment {
 
         buff = new short[2];
         decoder.readByte(buff);
-        pageStriping = BinaryOperation.getInt16(buff);
+        int pageStriping = BinaryOperation.getInt16(buff);
 
         if (JBIG2StreamDecoder.debug)
             log.info("Page Striping = {} ", pageStriping);
@@ -133,14 +117,5 @@ public class PageInformationSegment extends Segment {
 
         pageBitmap = new JBIG2Bitmap(pageBitmapWidth, height, arithmeticDecoder, huffmanDecoder, mmrDecoder);
         pageBitmap.clear(defPix);
-    }
-
-    /**
-     * <p>Getter for the field <code>pageBitmapHeight</code>.</p>
-     *
-     * @return a {@link java.lang.Integer} object.
-     */
-    public int getPageBitmapHeight() {
-        return pageBitmapHeight;
     }
 }

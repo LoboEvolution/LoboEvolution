@@ -52,92 +52,72 @@ package org.loboevolution.javax.xml.stream;
 
 public class XMLStreamException extends Exception {
 
-  protected Throwable nested;
-  protected Location location;
+    protected Throwable nestedException;
+    protected Location location;
 
-  /**
-   * Default constructor
-   */
-  public XMLStreamException(){
-    super();
-  }
+    /**
+     * Default constructor
+     */
+    public XMLStreamException() {
+        super();
+    }
 
-  /**
-   * Construct an exception with the assocated message.
-   *
-   * @param msg the message to report
-   */
-  public XMLStreamException(final String msg) {
-    super(msg);
-  }
+    /**
+     * Construct an exception with the assocated message.
+     *
+     * @param msg the message to report
+     */
+    public XMLStreamException(final String msg) {
+        super(msg);
+    }
 
-  /**
-   * Construct an exception with the assocated exception
-   *
-   * @param th a nested exception
-   */
-  public XMLStreamException(final Throwable th) {
-      super(th);
-    nested = th;
-  }
+    /**
+     * Construct an exception with the assocated exception
+     *
+     * @param th a nested exception
+     */
+    public XMLStreamException(final Throwable th) {
+        super(th);
+        nestedException = th;
+    }
 
-  /**
-   * Construct an exception with the assocated message and exception
-   *
-   * @param th a nested exception
-   * @param msg the message to report
-   */
-  public XMLStreamException(final String msg, final Throwable th) {
-    super(msg, th);
-    nested = th;
-  }
+    /**
+     * Construct an exception with the assocated message and exception
+     *
+     * @param th  a nested exception
+     * @param msg the message to report
+     */
+    public XMLStreamException(final String msg, final Throwable th) {
+        super(msg, th);
+        nestedException = th;
+    }
 
-  /**
-   * Construct an exception with the assocated message, exception and location.
-   *
-   * @param th a nested exception
-   * @param msg the message to report
-   * @param location the location of the error
-   */
-  public XMLStreamException(final String msg, final Location location, final Throwable th) {
-    super("ParseError at [row,col]:["+location.getLineNumber()+","+
-          location.getColumnNumber()+"]\n"+
-          "Message: "+msg);
-    nested = th;
-    this.location = location;
-  }
+    /**
+     * Construct an exception with the assocated message, exception and location.
+     *
+     * @param th       a nested exception
+     * @param msg      the message to report
+     * @param location the location of the error
+     */
+    public XMLStreamException(final String msg, final Location location, final Throwable th) {
+        super("ParseError at [row,col]:[" + location.getLineNumber() + "," +
+                location.getColumnNumber() + "]\n" +
+                "Message: " + msg);
+        nestedException = th;
+        this.location = location;
+    }
 
-  /**
-   * Construct an exception with the assocated message, exception and location.
-   *
-   * @param msg the message to report
-   * @param location the location of the error
-   */
-  public XMLStreamException(final String msg,
-                            final Location location) {
-    super("ParseError at [row,col]:["+location.getLineNumber()+","+
-          location.getColumnNumber()+"]\n"+
-          "Message: "+msg);
-    this.location = location;
-  }
-
-
-  /**
-   * Gets the nested exception.
-   *
-   * @return Nested exception
-   */
-  public Throwable getNestedException() {
-    return nested;
-  }
-
-  /**
-   * Gets the location of the exception
-   *
-   * @return the location of the exception, may be null if none is available
-   */
-  public Location getLocation() {
-    return location;
-  }
-
+    /**
+     * Construct an exception with the assocated message, exception and location.
+     *
+     * @param msg      the message to report
+     * @param location the location of the error
+     */
+    public XMLStreamException(final String msg,
+                              final Location location) {
+        super("ParseError at [row,col]:[" + location.getLineNumber() + "," +
+                location.getColumnNumber() + "]\n" +
+                "Message: " + msg);
+        this.location = location;
+    }
 }

@@ -122,8 +122,6 @@ public class PDFGlyph {
      */
     @Override
     public String toString() {
-        final StringBuilder str = new StringBuilder();
-        str.append(this.name);
-        return str.toString();
+        return this.name;
     }
 }

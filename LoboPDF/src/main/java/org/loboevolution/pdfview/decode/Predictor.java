@@ -26,6 +26,7 @@
 
 package org.loboevolution.pdfview.decode;
 
+import lombok.Data;
 import org.loboevolution.pdfview.PDFObject;
 import org.loboevolution.pdfview.PDFParseException;
 
@@ -36,6 +37,7 @@ import java.nio.ByteBuffer;
  * The abstract superclass of various predictor objects that undo well-known
  * prediction algorithms.
  */
+@Data
 public abstract class Predictor {
     /**
      * well known algorithms
@@ -59,7 +61,7 @@ public abstract class Predictor {
     /**
      * the number of bits per color component
      */
-    private int bpc = 8;
+    private int bitsPerComponent = 8;
 
     /**
      * the number of columns per row
@@ -94,7 +96,7 @@ public abstract class Predictor {
         final int algorithm = algorithmObj.getIntValue();
 
         // create the predictor object
-        Predictor predictor = null;
+        Predictor predictor;
         switch (algorithm) {
             case 1:
                 // no predictor
@@ -146,67 +148,4 @@ public abstract class Predictor {
      */
     public abstract ByteBuffer unpredict(ByteBuffer imageData)
             throws IOException;
-
-    /**
-     * Get the algorithm in use
-     *
-     * @return one of the known algorithm types
-     */
-    public int getAlgorithm() {
-        return this.algorithm;
-    }
-
-    /**
-     * Get the number of colors per sample
-     *
-     * @return a {@link java.lang.Integer} object.
-     */
-    public int getColors() {
-        return this.colors;
-    }
-
-    /**
-     * Set the number of colors per sample
-     *
-     * @param colors a {@link java.lang.Integer} object.
-     */
-    protected void setColors(final int colors) {
-        this.colors = colors;
-    }
-
-    /**
-     * Get the number of bits per color component
-     *
-     * @return a {@link java.lang.Integer} object.
-     */
-    public int getBitsPerComponent() {
-        return this.bpc;
-    }
-
-    /**
-     * Set the number of bits per color component
-     *
-     * @param bpc a {@link java.lang.Integer} object.
-     */
-    public void setBitsPerComponent(final int bpc) {
-        this.bpc = bpc;
-    }
-
-    /**
-     * Get the number of columns
-     *
-     * @return a {@link java.lang.Integer} object.
-     */
-    public int getColumns() {
-        return this.columns;
-    }
-
-    /**
-     * Set the number of columns
-     *
-     * @param columns a {@link java.lang.Integer} object.
-     */
-    public void setColumns(final int columns) {
-        this.columns = columns;
-    }
 }

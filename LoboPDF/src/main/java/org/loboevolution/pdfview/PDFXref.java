@@ -25,6 +25,9 @@
  */
 package org.loboevolution.pdfview;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
 import java.lang.ref.SoftReference;
 
 /**
@@ -48,6 +51,8 @@ import java.lang.ref.SoftReference;
  * <p>
  * Author Mike Wessler
  */
+@Data
+@AllArgsConstructor
 public class PDFXref {
 
     private final int id;
@@ -67,19 +72,6 @@ public class PDFXref {
         this.id = id;
         this.generation = gen;
         this.compressed = false;
-    }
-
-    /**
-     * create a new PDFXref, given a parsed id, compressedObjId and index
-     *
-     * @param id         a {@link java.lang.Integer} object.
-     * @param gen        a {@link java.lang.Integer} object.
-     * @param compressed a boolean.
-     */
-    public PDFXref(final int id, final int gen, final boolean compressed) {
-        this.id = id;
-        this.generation = gen;
-        this.compressed = compressed;
     }
 
     /**
@@ -113,15 +105,6 @@ public class PDFXref {
      *
      * @return a {@link java.lang.Integer} object.
      */
-    public int getGeneration() {
-        return this.generation;
-    }
-
-    /**
-     * get the generation of this object
-     *
-     * @return a {@link java.lang.Integer} object.
-     */
     public int getIndex() {
         return this.generation;
     }
@@ -133,15 +116,6 @@ public class PDFXref {
      */
     public int getID() {
         return this.id;
-    }
-
-    /**
-     * get compressed flag of this object
-     *
-     * @return a boolean.
-     */
-    public boolean getCompressed() {
-        return this.compressed;
     }
 
 

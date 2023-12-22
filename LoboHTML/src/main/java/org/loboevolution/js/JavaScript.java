@@ -25,6 +25,7 @@
  */
 package org.loboevolution.js;
 
+import lombok.Getter;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.node.Document;
 import org.mozilla.javascript.Function;
@@ -39,16 +40,9 @@ import java.util.WeakHashMap;
  * <p>JavaScript class.</p>
  */
 public class JavaScript {
-	private static final JavaScript instance = new JavaScript();
 
-	/**
-	 * <p>Getter for the field instance.</p>
-	 *
-	 * @return a {@link org.loboevolution.js.JavaScript} object.
-	 */
-	public static JavaScript getInstance() {
-		return instance;
-	}
+	@Getter
+	private static final JavaScript instance = new JavaScript();
 
 	private static String getStringValue(final Object object) {
 		if (object instanceof Undefined) {

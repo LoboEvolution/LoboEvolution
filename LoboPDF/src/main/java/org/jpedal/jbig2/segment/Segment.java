@@ -25,6 +25,8 @@
  */
 package org.jpedal.jbig2.segment;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.jpedal.jbig2.JBIG2Exception;
 import org.jpedal.jbig2.decoders.ArithmeticDecoder;
 import org.jpedal.jbig2.decoders.HuffmanDecoder;
@@ -130,6 +132,8 @@ public abstract class Segment {
     protected final ArithmeticDecoder arithmeticDecoder;
     protected final MMRDecoder mmrDecoder;
     protected final JBIG2StreamDecoder decoder;
+    @Getter
+    @Setter
     protected SegmentHeader segmentHeader;
 
     /**
@@ -168,24 +172,6 @@ public abstract class Segment {
         }
 
         return atValue;
-    }
-
-    /**
-     * <p>Getter for the field <code>segmentHeader</code>.</p>
-     *
-     * @return a {@link org.jpedal.jbig2.segment.SegmentHeader} object.
-     */
-    public SegmentHeader getSegmentHeader() {
-        return segmentHeader;
-    }
-
-    /**
-     * <p>Setter for the field <code>segmentHeader</code>.</p>
-     *
-     * @param segmentHeader a {@link org.jpedal.jbig2.segment.SegmentHeader} object.
-     */
-    public void setSegmentHeader(final SegmentHeader segmentHeader) {
-        this.segmentHeader = segmentHeader;
     }
 
     /**

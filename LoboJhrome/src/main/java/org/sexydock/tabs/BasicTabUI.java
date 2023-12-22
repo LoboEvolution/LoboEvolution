@@ -26,6 +26,8 @@
 
 package org.sexydock.tabs;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.sexydock.SwingUtils;
 import org.sexydock.tabs.jhrome.JhromeTabbedPaneUI;
 
@@ -40,6 +42,8 @@ import java.beans.PropertyChangeListener;
  *
  * @author andy.edwards
  */
+@EqualsAndHashCode(callSuper = true)
+@Data
 public class BasicTabUI extends TabUI {
     public static final String CLOSE_BUTTON_LISTENER = "sexydock.closeButtonListener";
 
@@ -52,10 +56,6 @@ public class BasicTabUI extends TabUI {
     final Color rolloverForeground = new Color(80, 80, 80);
     Color unselectedForeground = new Color(80, 80, 80);
     final Color selectedForeground = Color.BLACK;
-    final Color disabledBackground = new Color(191, 191, 202);
-    final Color rolloverBackground = Color.RED;                    // new Color( 231 , 231 , 239 );
-    final Color unselectedBackground = new Color(211, 211, 222);
-    final Color selectedBackground = new Color(248, 248, 248);
     final PropertyChangeHandler propertyChangeHandler = new PropertyChangeHandler();
 
     public BasicTabUI() {
@@ -191,54 +191,6 @@ public class BasicTabUI extends TabUI {
         bounds.y = insets.top;
         bounds.height -= insets.top + insets.bottom;
         return bounds.contains(p);
-    }
-
-    public Color getUnselectedLabelColor() {
-        return unselectedForeground;
-    }
-
-    public void setUnselectedLabelColor(final Color unselectedLabelColor) {
-        this.unselectedForeground = unselectedLabelColor;
-    }
-
-    public JButton getCloseButton() {
-        return closeButton;
-    }
-
-    public JLabel getLabel() {
-        return label;
-    }
-
-    public Color getDisabledForeground() {
-        return disabledForeground != null ? disabledForeground : getUnselectedForeground();
-    }
-
-    public Color getRolloverForeground() {
-        return rolloverForeground != null ? rolloverForeground : getSelectedForeground();
-    }
-
-    public Color getUnselectedForeground() {
-        return unselectedForeground != null ? unselectedForeground : getSelectedForeground();
-    }
-
-    public Color getSelectedForeground() {
-        return selectedForeground;
-    }
-
-    public Color getDisabledBackground() {
-        return disabledBackground != null ? disabledBackground : getUnselectedBackground();
-    }
-
-    public Color getRolloverBackground() {
-        return rolloverBackground != null ? rolloverBackground : getSelectedBackground();
-    }
-
-    public Color getUnselectedBackground() {
-        return unselectedBackground != null ? unselectedBackground : getSelectedBackground();
-    }
-
-    public Color getSelectedBackground() {
-        return selectedBackground;
     }
 
     private static class TabLayout extends BorderLayout {

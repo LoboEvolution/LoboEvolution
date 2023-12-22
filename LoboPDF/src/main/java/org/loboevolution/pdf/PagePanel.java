@@ -26,6 +26,7 @@
 
 package org.loboevolution.pdf;
 
+import lombok.Getter;
 import org.loboevolution.pdfview.PDFPage;
 
 import javax.swing.*;
@@ -58,6 +59,7 @@ public class PagePanel extends JPanel implements ImageObserver, MouseListener {
     /**
      * The current PDFPage that was rendered into image
      */
+    @Getter
     private PDFPage page;
     /**
      * The horizontal offset of the image from the left edge of the panel
@@ -166,15 +168,6 @@ public class PagePanel extends JPanel implements ImageObserver, MouseListener {
                 }
             }
         }
-    }
-
-    /**
-     * Gets the page currently being displayed
-     *
-     * @return a {@link org.loboevolution.pdfview.PDFPage} object.
-     */
-    public PDFPage getPage() {
-        return page;
     }
 
     /**

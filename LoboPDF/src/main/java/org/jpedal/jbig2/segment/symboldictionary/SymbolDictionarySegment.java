@@ -25,6 +25,8 @@
  */
 package org.jpedal.jbig2.segment.symboldictionary;
 
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.jpedal.jbig2.JBIG2Exception;
 import org.jpedal.jbig2.decoders.ArithmeticDecoderStats;
@@ -41,6 +43,8 @@ import java.io.IOException;
  * <p>SymbolDictionarySegment class.</p>
  */
 @Slf4j
+@Getter
+@Setter
 public class SymbolDictionarySegment extends Segment {
     final short[] symbolDictionaryAdaptiveTemplateX = new short[4];
     final short[] symbolDictionaryAdaptiveTemplateY = new short[4];
@@ -450,104 +454,5 @@ public class SymbolDictionarySegment extends Segment {
 
         if (JBIG2StreamDecoder.debug)
             log.info("noOfNewSymbols = {}", noOfNewSymbols);
-    }
-
-    /**
-     * <p>Getter for the field <code>noOfExportedSymbols</code>.</p>
-     *
-     * @return a {@link java.lang.Integer} object.
-     */
-    public int getNoOfExportedSymbols() {
-        return noOfExportedSymbols;
-    }
-
-    /**
-     * <p>Setter for the field <code>noOfExportedSymbols</code>.</p>
-     *
-     * @param noOfExportedSymbols a {@link java.lang.Integer} object.
-     */
-    public void setNoOfExportedSymbols(final int noOfExportedSymbols) {
-        this.noOfExportedSymbols = noOfExportedSymbols;
-    }
-
-    /**
-     * <p>Getter for the field <code>noOfNewSymbols</code>.</p>
-     *
-     * @return a {@link java.lang.Integer} object.
-     */
-    public int getNoOfNewSymbols() {
-        return noOfNewSymbols;
-    }
-
-    /**
-     * <p>Setter for the field <code>noOfNewSymbols</code>.</p>
-     *
-     * @param noOfNewSymbols a {@link java.lang.Integer} object.
-     */
-    public void setNoOfNewSymbols(final int noOfNewSymbols) {
-        this.noOfNewSymbols = noOfNewSymbols;
-    }
-
-    /**
-     * <p>Getter for the field <code>bitmaps</code>.</p>
-     *
-     * @return an array of {@link org.jpedal.jbig2.image.JBIG2Bitmap} objects.
-     */
-    public JBIG2Bitmap[] getBitmaps() {
-        return bitmaps;
-    }
-
-    /**
-     * <p>Getter for the field <code>symbolDictionaryFlags</code>.</p>
-     *
-     * @return a {@link org.jpedal.jbig2.segment.symboldictionary.SymbolDictionaryFlags} object.
-     */
-    public SymbolDictionaryFlags getSymbolDictionaryFlags() {
-        return symbolDictionaryFlags;
-    }
-
-    /**
-     * <p>Setter for the field <code>symbolDictionaryFlags</code>.</p>
-     *
-     * @param symbolDictionaryFlags a {@link org.jpedal.jbig2.segment.symboldictionary.SymbolDictionaryFlags} object.
-     */
-    public void setSymbolDictionaryFlags(final SymbolDictionaryFlags symbolDictionaryFlags) {
-        this.symbolDictionaryFlags = symbolDictionaryFlags;
-    }
-
-    /**
-     * <p>Getter for the field <code>genericRegionStats</code>.</p>
-     *
-     * @return a {@link org.jpedal.jbig2.decoders.ArithmeticDecoderStats} object.
-     */
-    public ArithmeticDecoderStats getGenericRegionStats() {
-        return genericRegionStats;
-    }
-
-    /**
-     * <p>Setter for the field <code>genericRegionStats</code>.</p>
-     *
-     * @param genericRegionStats a {@link org.jpedal.jbig2.decoders.ArithmeticDecoderStats} object.
-     */
-    public void setGenericRegionStats(final ArithmeticDecoderStats genericRegionStats) {
-        this.genericRegionStats = genericRegionStats;
-    }
-
-    /**
-     * <p>Getter for the field <code>refinementRegionStats</code>.</p>
-     *
-     * @return a {@link org.jpedal.jbig2.decoders.ArithmeticDecoderStats} object.
-     */
-    public ArithmeticDecoderStats getRefinementRegionStats() {
-        return refinementRegionStats;
-    }
-
-    /**
-     * <p>Setter for the field <code>refinementRegionStats</code>.</p>
-     *
-     * @param refinementRegionStats a {@link org.jpedal.jbig2.decoders.ArithmeticDecoderStats} object.
-     */
-    public void setRefinementRegionStats(final ArithmeticDecoderStats refinementRegionStats) {
-        this.refinementRegionStats = refinementRegionStats;
     }
 }

@@ -25,6 +25,7 @@
  */
 package org.jpedal.jbig2.segment.pattern;
 
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.jpedal.jbig2.JBIG2Exception;
 import org.jpedal.jbig2.decoders.JBIG2StreamDecoder;
@@ -38,11 +39,9 @@ import java.io.IOException;
  * <p>PatternDictionarySegment class.</p>
  */
 @Slf4j
+@Getter
 public class PatternDictionarySegment extends Segment {
     final PatternDictionaryFlags patternDictionaryFlags = new PatternDictionaryFlags();
-    private int width;
-    private int height;
-    private int grayMax;
     private JBIG2Bitmap[] bitmaps;
     private int size;
 
@@ -64,15 +63,15 @@ public class PatternDictionarySegment extends Segment {
     public void readSegment() throws IOException, JBIG2Exception {
         readPatternDictionaryFlags();
 
-        width = decoder.readByte();
-        height = decoder.readByte();
+        int width = decoder.readByte();
+        int height = decoder.readByte();
 
         if (JBIG2StreamDecoder.debug)
             log.info("pattern dictionary size = {} {} ", width, height);
 
         final short[] buf = new short[4];
         decoder.readByte(buf);
-        grayMax = BinaryOperation.getInt32(buf);
+        int grayMax = BinaryOperation.getInt32(buf);
 
         if (JBIG2StreamDecoder.debug)
             log.info("grey max = {} ", grayMax);
@@ -114,16 +113,6 @@ public class PatternDictionarySegment extends Segment {
         this.bitmaps = bitmaps;
     }
 
-
-    /**
-     * <p>Getter for the field <code>bitmaps</code>.</p>
-     *
-     * @return an array of {@link org.jpedal.jbig2.image.JBIG2Bitmap} objects.
-     */
-    public JBIG2Bitmap[] getBitmaps() {
-        return bitmaps;
-    }
-
     private void readPatternDictionaryFlags() throws IOException {
         final short patternDictionaryFlagsField = decoder.readByte();
 
@@ -131,23 +120,5 @@ public class PatternDictionarySegment extends Segment {
 
         if (JBIG2StreamDecoder.debug)
             log.info("pattern Dictionary flags = {} ", patternDictionaryFlagsField);
-    }
-
-    /**
-     * <p>Getter for the field <code>patternDictionaryFlags</code>.</p>
-     *
-     * @return a {@link org.jpedal.jbig2.segment.pattern.PatternDictionaryFlags} object.
-     */
-    public PatternDictionaryFlags getPatternDictionaryFlags() {
-        return patternDictionaryFlags;
-    }
-
-    /**
-     * <p>Getter for the field <code>size</code>.</p>
-     *
-     * @return a {@link java.lang.Integer} object.
-     */
-    public int getSize() {
-        return size;
     }
 }

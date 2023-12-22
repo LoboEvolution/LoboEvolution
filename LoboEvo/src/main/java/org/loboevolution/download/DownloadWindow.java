@@ -28,6 +28,8 @@ package org.loboevolution.download;
 
 import com.jtattoo.plaf.lobo.LoboButton;
 import com.jtattoo.plaf.lobo.LoboLookAndFeel;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.component.IDownload;
 import org.loboevolution.config.DesktopConfig;
@@ -47,7 +49,9 @@ import java.net.URLConnection;
 /**
  * <p>DownloadWindow class.</p>
  */
+@EqualsAndHashCode(callSuper = true)
 @Slf4j
+@Data
 public class DownloadWindow extends JFrame implements IDownload, LoboLookAndFeel {
 
     private static final long serialVersionUID = 1L;
@@ -219,68 +223,4 @@ public class DownloadWindow extends JFrame implements IDownload, LoboLookAndFeel
             }
         }
     }
-
-    /**
-     * <p>Getter for the field <code>destinationFile</code>.</p>
-     *
-     * @return a {@link java.io.File} object.
-     */
-    public File getDestinationFile() {
-        return destinationFile;
-    }
-
-    /**
-     * <p>Setter for the field <code>destinationFile</code>.</p>
-     *
-     * @param destinationFile a {@link java.io.File} object.
-     */
-    public void setDestinationFile(final File destinationFile) {
-        this.destinationFile = destinationFile;
-    }
-
-    /**
-     * <p>Getter for the field <code>httpConn</code>.</p>
-     *
-     * @return a {@link java.net.URLConnection} object.
-     */
-    public URLConnection getHttpConn() {
-        return httpConn;
-    }
-
-    /**
-     * <p>Getter for the field <code>url</code>.</p>
-     *
-     * @return a {@link java.net.URL} object.
-     */
-    public URL getUrl() {
-        return url;
-    }
-
-    /**
-     * <p>Getter for the field <code>progressBar</code>.</p>
-     *
-     * @return a {@link javax.swing.JProgressBar} object.
-     */
-    public JProgressBar getProgressBar() {
-        return progressBar;
-    }
-
-    /**
-     * <p>Getter for the field <code>transferRateField</code>.</p>
-     *
-     * @return a {@link org.loboevolution.gui.FormField} object.
-     */
-    public FormField getTransferRateField() {
-        return transferRateField;
-    }
-
-    /**
-     * <p>Getter for the field <code>transferSizeField</code>.</p>
-     *
-     * @return a {@link org.loboevolution.gui.FormField} object.
-     */
-    public FormField getTransferSizeField() {
-        return transferSizeField;
-    }
 }
-

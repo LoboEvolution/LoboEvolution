@@ -25,6 +25,8 @@
  */
 package org.loboevolution.pdfview;
 
+import lombok.Data;
+
 import java.io.IOException;
 
 /**
@@ -40,6 +42,7 @@ import java.io.IOException;
  * <p>
  * All three of these cases are handled by the getDestination() method.
  */
+@Data
 public class PDFDestination {
 
     /**
@@ -141,7 +144,7 @@ public class PDFDestination {
         final PDFObject[] destArray = obj.getArray();
 
         // create the destination based on the type
-        PDFDestination dest = null;
+        PDFDestination dest;
         final String type = destArray[1].getStringValue();
         switch (type) {
             case "XYZ":
@@ -247,113 +250,5 @@ public class PDFDestination {
 
         // not found
         return null;
-    }
-
-    /**
-     * Get the type of this destination
-     *
-     * @return a {@link java.lang.Integer} object.
-     */
-    public int getType() {
-        return this.type;
-    }
-
-    /**
-     * Get the PDF Page object associated with this destination
-     *
-     * @return a {@link org.loboevolution.pdfview.PDFObject} object.
-     */
-    public PDFObject getPage() {
-        return this.pageObj;
-    }
-
-    /**
-     * Get the left coordinate value
-     *
-     * @return a float.
-     */
-    public float getLeft() {
-        return this.left;
-    }
-
-    /**
-     * Set the left coordinate value
-     *
-     * @param left a float.
-     */
-    public void setLeft(final float left) {
-        this.left = left;
-    }
-
-    /**
-     * Get the right coordinate value
-     *
-     * @return a float.
-     */
-    public float getRight() {
-        return this.right;
-    }
-
-    /**
-     * Set the right coordinate value
-     *
-     * @param right a float.
-     */
-    public void setRight(final float right) {
-        this.right = right;
-    }
-
-    /**
-     * Get the top coordinate value
-     *
-     * @return a float.
-     */
-    public float getTop() {
-        return this.top;
-    }
-
-    /**
-     * Set the top coordinate value
-     *
-     * @param top a float.
-     */
-    public void setTop(final float top) {
-        this.top = top;
-    }
-
-    /**
-     * Get the bottom coordinate value
-     *
-     * @return a float.
-     */
-    public float getBottom() {
-        return this.bottom;
-    }
-
-    /**
-     * Set the bottom coordinate value
-     *
-     * @param bottom a float.
-     */
-    public void setBottom(final float bottom) {
-        this.bottom = bottom;
-    }
-
-    /**
-     * Get the zoom value
-     *
-     * @return a float.
-     */
-    public float getZoom() {
-        return this.zoom;
-    }
-
-    /**
-     * Set the zoom value
-     *
-     * @param zoom a float.
-     */
-    public void setZoom(final float zoom) {
-        this.zoom = zoom;
     }
 }

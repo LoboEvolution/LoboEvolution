@@ -25,12 +25,16 @@
  */
 package org.jpedal.jbig2.pdf;
 
+import lombok.Data;
+import lombok.Getter;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 /**
  * <p>PDFSegment class.</p>
  */
+@Data
 public class PDFSegment {
 
     private final ByteArrayOutputStream header = new ByteArrayOutputStream();
@@ -65,42 +69,5 @@ public class PDFSegment {
      */
     public void writeToData(final short bite) {
         data.write(bite);
-    }
-
-    /**
-     * <p>Getter for the field <code>header</code>.</p>
-     *
-     * @return a {@link java.io.ByteArrayOutputStream} object.
-     */
-    public ByteArrayOutputStream getHeader() {
-        return header;
-    }
-
-    /**
-     * <p>Getter for the field <code>data</code>.</p>
-     *
-     * @return a {@link java.io.ByteArrayOutputStream} object.
-     */
-    public ByteArrayOutputStream getData() {
-        return data;
-    }
-
-    /**
-     * <p>setDataLength.</p>
-     *
-     * @param segmentDataLength a {@link java.lang.Integer} object.
-     */
-    public void setDataLength(final int segmentDataLength) {
-        this.segmentDataLength = segmentDataLength;
-
-    }
-
-    /**
-     * <p>Getter for the field <code>segmentDataLength</code>.</p>
-     *
-     * @return a {@link java.lang.Integer} object.
-     */
-    public int getSegmentDataLength() {
-        return segmentDataLength;
     }
 }

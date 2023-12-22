@@ -26,6 +26,7 @@
 
 package org.loboevolution.javax.xml.transform.stax;
 
+import lombok.Getter;
 import org.loboevolution.javax.xml.stream.XMLEventReader;
 import org.loboevolution.javax.xml.stream.XMLStreamConstants;
 import org.loboevolution.javax.xml.stream.XMLStreamException;
@@ -57,7 +58,7 @@ import org.loboevolution.javax.xml.transform.Source;
  */
 public class StAXSource implements Source {
 
-    /** If {@link org.loboevolution.javax.xml.transform.TransformerFactory#getFeature(final String name)}
+    /**
      * returns true when passed this value as an argument,
      * the Transformer supports Source input of this type.
      */
@@ -70,7 +71,20 @@ public class StAXSource implements Source {
     /** <p><code>XMLStreamReader</code> to be used for source input.</p> */
     private XMLStreamReader xmlStreamReader = null;
 
-    /** <p>System identifier of source input.</p> */
+    /**
+     * <p>Get the system identifier used by this
+     * <code>StAXSource</code>.</p>
+     *
+     * <p>The <code>XMLStreamReader</code> or <code>XMLEventReader</code>
+     * used to construct this <code>StAXSource</code> is queried to determine
+     * the system identifier of the XML source.</p>
+     *
+     * <p>The system identifier may be <code>null</code> or
+     * an empty <code>""</code> <code>String</code>.</p>
+     *
+     * System identifier used by this <code>StAXSource</code>.
+     */
+    @Getter
     private String systemId = null;
 
     /**
@@ -215,23 +229,5 @@ public class StAXSource implements Source {
         throw new UnsupportedOperationException(
                 "StAXSource#setSystemId(systemId) cannot set the "
                 + "system identifier for a StAXSource");
-    }
-
-    /**
-     * <p>Get the system identifier used by this
-     * <code>StAXSource</code>.</p>
-     *
-     * <p>The <code>XMLStreamReader</code> or <code>XMLEventReader</code>
-     * used to construct this <code>StAXSource</code> is queried to determine
-     * the system identifier of the XML source.</p>
-     *
-     * <p>The system identifier may be <code>null</code> or
-     * an empty <code>""</code> <code>String</code>.</p>
-     *
-     * @return System identifier used by this <code>StAXSource</code>.
-     */
-    public String getSystemId() {
-
-        return systemId;
     }
 }

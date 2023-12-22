@@ -25,6 +25,7 @@
  */
 package org.loboevolution.pdfview.colorspace;
 
+import lombok.Getter;
 import org.loboevolution.pdfview.PDFObject;
 import org.loboevolution.pdfview.PDFPaint;
 
@@ -36,6 +37,7 @@ import java.io.IOException;
  * <p>
  * Author Mike Wessler
  */
+@Getter
 public class IndexedColor extends PDFColorSpace {
 
     /**
@@ -46,7 +48,7 @@ public class IndexedColor extends PDFColorSpace {
      * r,g,and b components of the color table as a single array, for
      * Java's IndexColorModel
      */
-    protected byte[] finalcolors;
+    protected byte[] colorComponents;
     /**
      * the color table
      */
@@ -76,7 +78,7 @@ public class IndexedColor extends PDFColorSpace {
         final byte[] data = stream.getStream();
         this.nchannels = base.getNumComponents();
         final boolean offSized = (data.length / this.nchannels) < count;
-        this.finalcolors = new byte[3 * count];
+        this.colorComponents = new byte[3 * count];
         this.table = new Color[count];
         final float[] comps = new float[this.nchannels];
         int loc = 0;
@@ -90,9 +92,9 @@ public class IndexedColor extends PDFColorSpace {
                 }
             }
             this.table[i] = (Color) base.getPaint(comps).getPaint();
-            this.finalcolors[finalloc++] = (byte) this.table[i].getRed();
-            this.finalcolors[finalloc++] = (byte) this.table[i].getGreen();
-            this.finalcolors[finalloc++] = (byte) this.table[i].getBlue();
+            this.colorComponents[finalloc++] = (byte) this.table[i].getRed();
+            this.colorComponents[finalloc++] = (byte) this.table[i].getGreen();
+            this.colorComponents[finalloc++] = (byte) this.table[i].getBlue();
         }
     }
 
@@ -108,34 +110,16 @@ public class IndexedColor extends PDFColorSpace {
         this.count = table.length;
         this.table = table;
 
-        this.finalcolors = new byte[3 * this.count];
+        this.colorComponents = new byte[3 * this.count];
         this.nchannels = 3;
 
         int loc = 0;
 
         for (int i = 0; i < this.count; i++) {
-            this.finalcolors[loc++] = (byte) table[i].getRed();
-            this.finalcolors[loc++] = (byte) table[i].getGreen();
-            this.finalcolors[loc++] = (byte) table[i].getBlue();
+            this.colorComponents[loc++] = (byte) table[i].getRed();
+            this.colorComponents[loc++] = (byte) table[i].getGreen();
+            this.colorComponents[loc++] = (byte) table[i].getBlue();
         }
-    }
-
-    /**
-     * Get the number of indices
-     *
-     * @return a {@link java.lang.Integer} object.
-     */
-    public int getCount() {
-        return this.count;
-    }
-
-    /**
-     * Get the table of color components
-     *
-     * @return an array of {@link byte} objects.
-     */
-    public byte[] getColorComponents() {
-        return this.finalcolors;
     }
 
     /**

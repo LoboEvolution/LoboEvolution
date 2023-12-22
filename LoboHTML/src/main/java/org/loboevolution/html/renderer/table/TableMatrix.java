@@ -25,6 +25,8 @@
  */
 package org.loboevolution.html.renderer.table;
 
+import lombok.Data;
+import lombok.Getter;
 import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.dom.HTMLTableElement;
 import org.loboevolution.html.dom.domimpl.*;
@@ -50,6 +52,7 @@ class TableMatrix {
 
 	final List<HTMLElementImpl> rowElements = new ArrayList<>();
 	final List<ArrayList<VirtualCell>> rows = new ArrayList<>();
+	@Getter
 	private final List<RTableCell> allCells = new ArrayList<>();
 
 	private final RenderableContainer container;
@@ -58,6 +61,7 @@ class TableMatrix {
 	private final HtmlRendererContext rendererContext;
 	private HTMLElementImpl captionElement;
 	private final RElement relement;
+	@Getter
 	private int tableWidth;
 	
 	protected SizeInfo[] columnSizes;
@@ -71,6 +75,7 @@ class TableMatrix {
 	protected int cellSpacingY;
 	protected int hasOldStyleBorder;
 	protected int heightsOfExtras;
+	@Getter
 	protected int tableHeight;
 	protected int widthsOfExtras;	
 
@@ -514,16 +519,6 @@ class TableMatrix {
 		}
 	}
 	
-	
-	/**
-	 * <p>getAllCells.</p>
-	 *
-	 * @return the allCells
-	 */
-	public List<RTableCell> getAllCells() {
-		return this.allCells;
-	}
-	
 	/**
 	 * <p>getNumColumns.</p>
 	 *
@@ -549,23 +544,5 @@ class TableMatrix {
 	 */
 	public List<RTableCell> getRenderables() {
 		return this.allCells;
-	}
-
-	/**
-	 * <p>Getter for the field tableHeight.</p>
-	 *
-	 * @return Returns the tableHeight.
-	 */
-	public int getTableHeight() {
-		return this.tableHeight;
-	}
-
-	/**
-	 * <p>Getter for the field tableWidth.</p>
-	 *
-	 * @return Returns the tableWidth.
-	 */
-	public int getTableWidth() {
-		return this.tableWidth;
 	}
 }

@@ -26,6 +26,8 @@
 
 package org.loboevolution.pdfview.function;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.loboevolution.pdfview.PDFObject;
 import org.loboevolution.pdfview.PDFParseException;
 
@@ -40,16 +42,20 @@ public class FunctionType2 extends PDFFunction {
     /**
      * the function's value at zero for the n outputs
      */
+    @Setter
     private float[] c0 = new float[]{0f};
 
     /**
      * the function's value at one for the n outputs
      */
+    @Setter
     private float[] c1 = new float[]{1f};
 
     /**
      * the exponent
      */
+    @Getter
+    @Setter
     private float n;
 
     /**
@@ -126,24 +132,6 @@ public class FunctionType2 extends PDFFunction {
     }
 
     /**
-     * Get the exponent
-     *
-     * @return a float.
-     */
-    public float getN() {
-        return this.n;
-    }
-
-    /**
-     * Set the exponent
-     *
-     * @param n a float.
-     */
-    protected void setN(final float n) {
-        this.n = n;
-    }
-
-    /**
      * Get the values at zero
      *
      * @param index a {@link java.lang.Integer} object.
@@ -154,15 +142,6 @@ public class FunctionType2 extends PDFFunction {
     }
 
     /**
-     * Set the values at zero
-     *
-     * @param c0 an array of {@link float} objects.
-     */
-    protected void setC0(final float[] c0) {
-        this.c0 = c0;
-    }
-
-    /**
      * Get the values at one
      *
      * @param index a {@link java.lang.Integer} object.
@@ -170,14 +149,5 @@ public class FunctionType2 extends PDFFunction {
      */
     public float getC1(final int index) {
         return this.c1[index];
-    }
-
-    /**
-     * Set the values at one
-     *
-     * @param c1 an array of {@link float} objects.
-     */
-    protected void setC1(final float[] c1) {
-        this.c1 = c1;
     }
 }

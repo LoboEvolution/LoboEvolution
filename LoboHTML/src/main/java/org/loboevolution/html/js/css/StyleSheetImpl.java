@@ -26,6 +26,8 @@
 
 package org.loboevolution.html.js.css;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.htmlunit.cssparser.dom.CSSStyleSheetImpl;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
@@ -37,7 +39,9 @@ public class StyleSheetImpl implements StyleSheet {
 
     private final CSSStyleSheetImpl cssStyleSheet;
 
-    private Node ownerNode;
+    @Getter
+    @Setter
+    private Element ownerNode;
 
     public StyleSheetImpl(final CSSStyleSheetImpl cssStyleSheet) {
         this.cssStyleSheet = cssStyleSheet;
@@ -57,12 +61,6 @@ public class StyleSheetImpl implements StyleSheet {
 
     /** {@inheritDoc} */
     @Override
-    public Element getOwnerNode() {
-        return (Element) ownerNode;
-    }
-
-    /** {@inheritDoc} */
-    @Override
     public CSSStyleSheet parentStyleSheet() {
         return null;
     }
@@ -77,10 +75,6 @@ public class StyleSheetImpl implements StyleSheet {
     @Override
     public boolean getDisabled() {
         return cssStyleSheet.getDisabled();
-    }
-
-    public void setOwnerNode(final Node ownerNode) {
-        this.ownerNode = ownerNode;
     }
 
     @Override

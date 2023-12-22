@@ -352,10 +352,10 @@ public class WalkerFactory {
       case OpCodes.OP_EQUALS:
         final int leftPos = OpMap.getFirstChildPos(op);
         final int rightPos = compiler.getNextOpPos(leftPos);
-        isProx = isProximateInnerExpr(compiler, leftPos);
-        if (isProx) return true;
-        isProx = isProximateInnerExpr(compiler, rightPos);
-        if (isProx) return true;
+        boolean isProx2 = isProximateInnerExpr(compiler, leftPos);
+        if (isProx2) return true;
+        isProx2 = isProximateInnerExpr(compiler, rightPos);
+        if (isProx2) return true;
         break;
       default:
         return true; // be conservative...
@@ -404,10 +404,10 @@ public class WalkerFactory {
         case OpCodes.OP_EQUALS:
           final int leftPos = OpMap.getFirstChildPos(innerExprOpPos);
           final int rightPos = compiler.getNextOpPos(leftPos);
-          isProx = isProximateInnerExpr(compiler, leftPos);
-          if (isProx) return true;
-          isProx = isProximateInnerExpr(compiler, rightPos);
-          if (isProx) return true;
+          boolean isProx2 = isProximateInnerExpr(compiler, leftPos);
+          if (isProx2) return true;
+          isProx2 = isProximateInnerExpr(compiler, rightPos);
+          if (isProx2) return true;
           break;
         default:
           return true; // be conservative...

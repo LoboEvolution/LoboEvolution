@@ -25,14 +25,13 @@
  */
 package org.loboevolution.html.renderer;
 
+import lombok.Data;
 import org.loboevolution.html.dom.nodeimpl.ModelNode;
 
 /**
  * <p>LineBreak class.</p>
- *
- *
- *
  */
+@Data
 public class LineBreak {
 	
 	/** Constant LEFT=1 */
@@ -43,6 +42,21 @@ public class LineBreak {
 	public static final int RIGHT = 2;
 	/** Constant BOTH=3 */
 	public static final int BOTH = 3;
+
+	private final int breakType;
+
+	private final ModelNode modelNode;
+
+	/**
+	 * <p>Constructor for LineBreak.</p>
+	 *
+	 * @param breakType a {@link java.lang.Integer} object.
+	 * @param newLineNode a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
+	 */
+	public LineBreak(final int breakType, final ModelNode newLineNode) {
+		this.breakType = breakType;
+		this.modelNode = newLineNode;
+	}
 
 	/**
 	 * <p>Getter for the field breakType.</p>
@@ -65,39 +79,5 @@ public class LineBreak {
 				return NONE;
 			}
 		}
-	}
-
-	private final int breakType;
-
-	private final ModelNode newLineNode;
-
-	/**
-	 * <p>Constructor for LineBreak.</p>
-	 *
-	 * @param breakType a {@link java.lang.Integer} object.
-	 * @param newLineNode a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
-	 */
-	public LineBreak(final int breakType, final ModelNode newLineNode) {
-		super();
-		this.breakType = breakType;
-		this.newLineNode = newLineNode;
-	}
-
-	/**
-	 * <p>Getter for the field breakType.</p>
-	 *
-	 * @return a {@link java.lang.Integer} object.
-	 */
-	public int getBreakType() {
-		return this.breakType;
-	}
-
-	/**
-	 * <p>getModelNode.</p>
-	 *
-	 * @return a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
-	 */
-	public ModelNode getModelNode() {
-		return this.newLineNode;
 	}
 }

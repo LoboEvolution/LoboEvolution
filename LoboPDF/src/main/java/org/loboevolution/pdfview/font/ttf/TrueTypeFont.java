@@ -25,6 +25,8 @@
  */
 package org.loboevolution.pdfview.font.ttf;
 
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.pdfview.PDFDebugger;
 
@@ -38,6 +40,8 @@ import java.util.*;
  */
 @Slf4j
 public class TrueTypeFont {
+
+    @Getter
     private final int type;
     // could be a ByteBuffer or a TrueTypeTable
 
@@ -163,15 +167,6 @@ public class TrueTypeFont {
             }
             data.reset();
         }
-    }
-
-    /**
-     * Get the type of this font
-     *
-     * @return a {@link java.lang.Integer} object.
-     */
-    public int getType() {
-        return this.type;
     }
 
     /**
@@ -418,8 +413,6 @@ public class TrueTypeFont {
      */
     @Override
     public String toString() {
-        final StringBuilder buf = new StringBuilder();
-
         log.info("Type         : {} ", getType());
         log.info("NumTables    : {} ", getNumTables());
         log.info("SearchRange  : {} ", getSearchRange());
@@ -437,7 +430,7 @@ public class TrueTypeFont {
             log.info("table: {} ", table);
         }
 
-        return buf.toString();
+        return "";
     }
 
     /**

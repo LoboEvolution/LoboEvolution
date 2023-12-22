@@ -25,6 +25,7 @@
  */
 package org.jpedal.jbig2.segment.region.halftone;
 
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.jpedal.jbig2.JBIG2Exception;
 import org.jpedal.jbig2.decoders.JBIG2StreamDecoder;
@@ -43,6 +44,7 @@ import java.io.IOException;
  */
 @Slf4j
 public class HalftoneRegionSegment extends RegionSegment {
+    @Getter
     private final HalftoneRegionFlags halftoneRegionFlags = new HalftoneRegionFlags();
 
     private final boolean inlineImage;
@@ -225,14 +227,5 @@ public class HalftoneRegionSegment extends RegionSegment {
 
         if (JBIG2StreamDecoder.debug)
             log.info("generic region Segment flags = {} ", halftoneRegionFlagsField);
-    }
-
-    /**
-     * <p>Getter for the field <code>halftoneRegionFlags</code>.</p>
-     *
-     * @return a {@link org.jpedal.jbig2.segment.region.halftone.HalftoneRegionFlags} object.
-     */
-    public HalftoneRegionFlags getHalftoneRegionFlags() {
-        return halftoneRegionFlags;
     }
 }

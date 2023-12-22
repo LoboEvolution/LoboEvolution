@@ -32,6 +32,7 @@ import javax.swing.text.JTextComponent;
 import com.jtattoo.plaf.lobo.LoboLabel;
 import com.jtattoo.plaf.lobo.LoboPasswordField;
 import com.jtattoo.plaf.lobo.LoboTextField;
+import lombok.Getter;
 
 /**
  * The Class FormField.
@@ -48,6 +49,7 @@ public class FormField {
 	private LoboLabel loboLabel;
 
 	/** The type. */
+	@Getter
 	public final FieldType type;
 
 	/**
@@ -152,15 +154,6 @@ public class FormField {
 	 */
 	public String getToolTip() {
 		return getFieldEditor().getToolTipText();
-	}
-
-	/**
-	 * Gets the type.
-	 *
-	 * @return the type
-	 */
-	public FieldType getType() {
-		return this.type;
 	}
 
 	/**

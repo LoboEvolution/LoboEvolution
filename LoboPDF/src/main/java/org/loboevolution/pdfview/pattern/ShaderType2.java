@@ -26,6 +26,8 @@
 
 package org.loboevolution.pdfview.pattern;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.loboevolution.pdfview.PDFObject;
 import org.loboevolution.pdfview.PDFPaint;
 import org.loboevolution.pdfview.PDFParseException;
@@ -43,6 +45,8 @@ import java.io.IOException;
 /**
  * A shader that performs axial shader based on a function.
  */
+@Getter
+@Setter
 public class ShaderType2 extends PDFShader {
     /**
      * the start of the axis
@@ -144,123 +148,6 @@ public class ShaderType2 extends PDFShader {
     @Override
     public PDFPaint getPaint() {
         return PDFPaint.getPaint(new Type2Paint());
-    }
-
-    /**
-     * Get the start of the axis
-     *
-     * @return a {@link java.awt.geom.Point2D} object.
-     */
-    public Point2D getAxisStart() {
-        return this.axisStart;
-    }
-
-    /**
-     * Set the start of the axis
-     *
-     * @param axisStart a {@link java.awt.geom.Point2D} object.
-     */
-    protected void setAxisStart(final Point2D axisStart) {
-        this.axisStart = axisStart;
-    }
-
-    /**
-     * Get the end of the axis
-     *
-     * @return a {@link java.awt.geom.Point2D} object.
-     */
-    public Point2D getAxisEnd() {
-        return this.axisEnd;
-    }
-
-    /**
-     * Set the start of the axis
-     *
-     * @param axisEnd a {@link java.awt.geom.Point2D} object.
-     */
-    protected void setAxisEnd(final Point2D axisEnd) {
-        this.axisEnd = axisEnd;
-    }
-
-    /**
-     * Get the domain minimum
-     *
-     * @return a float.
-     */
-    public float getMinT() {
-        return this.minT;
-    }
-
-    /**
-     * Set the domain minimum
-     *
-     * @param minT a float.
-     */
-    protected void setMinT(final float minT) {
-        this.minT = minT;
-    }
-
-    /**
-     * Get the domain maximum
-     *
-     * @return a float.
-     */
-    public float getMaxT() {
-        return this.maxT;
-    }
-
-    /**
-     * Set the domain maximum
-     *
-     * @param maxT a float.
-     */
-    protected void setMaxT(final float maxT) {
-        this.maxT = maxT;
-    }
-
-    /**
-     * Get whether to extend the start of the axis
-     *
-     * @return a boolean.
-     */
-    public boolean getExtendStart() {
-        return this.extendStart;
-    }
-
-    /**
-     * Set whether to extend the start of the axis
-     *
-     * @param extendStart a boolean.
-     */
-    protected void setExtendStart(final boolean extendStart) {
-        this.extendStart = extendStart;
-    }
-
-    /**
-     * Get whether to extend the end of the axis
-     *
-     * @return a boolean.
-     */
-    public boolean getExtendEnd() {
-        return this.extendEnd;
-    }
-
-    /**
-     * Set whether to extend the end of the axis
-     *
-     * @param extendEnd a boolean.
-     */
-    protected void setExtendEnd(final boolean extendEnd) {
-        this.extendEnd = extendEnd;
-    }
-
-    /**
-     * Get the functions associated with this shader
-     *
-     * @return an array of {@link org.loboevolution.pdfview.function.PDFFunction} objects.
-     */
-    public PDFFunction[] getFunctions() {
-        return this.functions;
     }
 
     /**

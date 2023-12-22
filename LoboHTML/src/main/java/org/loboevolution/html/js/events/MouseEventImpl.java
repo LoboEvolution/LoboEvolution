@@ -26,6 +26,7 @@
 package org.loboevolution.html.js.events;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.loboevolution.html.node.events.EventTarget;
 import org.loboevolution.html.node.events.MouseEvent;
 import org.loboevolution.html.node.js.Window;
@@ -35,6 +36,7 @@ import java.awt.event.InputEvent;
 /**
  * MouseEventImpl class.
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 public class MouseEventImpl extends UIEventImpl implements MouseEvent {
 

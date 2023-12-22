@@ -26,6 +26,7 @@
 
 package org.loboevolution.pdfview.annotation;
 
+import lombok.Getter;
 import org.loboevolution.pdfview.*;
 
 import java.awt.geom.AffineTransform;
@@ -45,6 +46,7 @@ import java.util.List;
  * @since 26.03.2012
  * **************************************************************************
  */
+@Getter
 public class StampAnnotation extends PDFAnnotation {
     private String iconName;
     private PDFAnnotation popupAnnotation;
@@ -198,51 +200,6 @@ public class StampAnnotation extends PDFAnnotation {
 
     private void parsePopupAnnotation(final PDFObject popupObj) throws IOException {
         this.popupAnnotation = (popupObj != null) ? createAnnotation(popupObj) : null;
-    }
-
-    /**
-     * <p>Getter for the field <code>iconName</code>.</p>
-     *
-     * @return the iconName
-     */
-    public String getIconName() {
-        return iconName;
-    }
-
-    /**
-     * <p>Getter for the field <code>popupAnnotation</code>.</p>
-     *
-     * @return the popupAnnotation
-     */
-    public PDFAnnotation getPopupAnnotation() {
-        return popupAnnotation;
-    }
-
-    /**
-     * <p>Getter for the field <code>onAppearance</code>.</p>
-     *
-     * @return the onAppearance
-     */
-    public PDFObject getOnAppearance() {
-        return onAppearance;
-    }
-
-    /**
-     * <p>Getter for the field <code>offAppearance</code>.</p>
-     *
-     * @return the offAppearance
-     */
-    public PDFObject getOffAppearance() {
-        return offAppearance;
-    }
-
-    /**
-     * <p>isAppearanceStateOn.</p>
-     *
-     * @return the appearanceStateOn
-     */
-    public boolean isAppearanceStateOn() {
-        return appearanceStateOn;
     }
 
     /**

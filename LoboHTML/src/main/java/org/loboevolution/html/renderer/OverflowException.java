@@ -28,11 +28,16 @@
  */
 package org.loboevolution.html.renderer;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import java.util.Collection;
 
 /**
- * Author J. H. S.
+ * <p>OverflowException class.</p>
  */
+@EqualsAndHashCode(callSuper = true)
+@Data
 class OverflowException extends Exception {
 
 	private static final long serialVersionUID = 1L;
@@ -46,14 +51,5 @@ class OverflowException extends Exception {
 	 */
 	public OverflowException(final Collection<Renderable> renderables) {
 		this.renderables = renderables;
-	}
-
-	/**
-	 * <p>Getter for the field renderables.</p>
-	 *
-	 * @return a {@link java.util.Collection} object.
-	 */
-	public Collection<Renderable> getRenderables() {
-		return this.renderables;
 	}
 }

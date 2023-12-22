@@ -25,6 +25,9 @@
  */
 package org.loboevolution.pdfview;
 
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.loboevolution.pdfview.annotation.PDFAnnotation;
 import org.loboevolution.pdfview.annotation.PDFAnnotation.ANNOTATION_TYPE;
 
@@ -50,6 +53,7 @@ import java.util.*;
  * <p>
  * Author Mike Wessler
  */
+@Data
 public class PDFPage {
     /**
      * a map from image info to weak references to parsers that are active
@@ -85,6 +89,8 @@ public class PDFPage {
     /**
      * List of annotations for this page
      */
+    @Getter
+    @Setter
     private List<PDFAnnotation> annots;
 
     /**
@@ -284,30 +290,12 @@ public class PDFPage {
     }
 
     /**
-     * get the page number used to lookup this page
-     *
-     * @return the page number
-     */
-    public int getPageNumber() {
-        return this.pageNumber;
-    }
-
-    /**
      * get the aspect ratio of the correctly oriented page.
      *
      * @return the width/height aspect ratio of the page
      */
     public float getAspectRatio() {
         return getWidth() / getHeight();
-    }
-
-    /**
-     * get the bounding box of the page, before any rotation.
-     *
-     * @return a {@link java.awt.geom.Rectangle2D} object.
-     */
-    public Rectangle2D getBBox() {
-        return this.bbox;
     }
 
     /**
@@ -326,15 +314,6 @@ public class PDFPage {
      */
     public float getHeight() {
         return (float) this.bbox.getHeight();
-    }
-
-    /**
-     * get the rotation of this image
-     *
-     * @return a {@link java.lang.Integer} object.
-     */
-    public int getRotation() {
-        return this.rotation;
     }
 
     /**
@@ -369,7 +348,7 @@ public class PDFPage {
         final double clipW;
         final double clipH;
         if (clip == null) {
-            clip = getBBox();
+            clip = getBbox();
             clipW = clip.getWidth();
             clipH = clip.getHeight();
         } else if (getRotation() == 90 || getRotation() == 270) {
@@ -413,15 +392,6 @@ public class PDFPage {
      */
     public PDFCmd getCommand(final int index) {
         return this.commands.get(index);
-    }
-
-    /**
-     * get all the commands in the current page
-     *
-     * @return a {@link java.util.List} object.
-     */
-    public List<PDFCmd> getCommands() {
-        return this.commands;
     }
 
     /**
@@ -521,16 +491,6 @@ public class PDFPage {
     }
 
     /**
-     * get whether parsing for this PDFPage has been completed and all
-     * commands are in place.
-     *
-     * @return a boolean.
-     */
-    public boolean isFinished() {
-        return this.finished;
-    }
-
-    /**
      * wait for finish
      *
      * @throws java.lang.InterruptedException if any.
@@ -595,8 +555,6 @@ public class PDFPage {
      * @param at a {@link java.awt.geom.AffineTransform} object.
      */
     public void addXform(final AffineTransform at) {
-        // PDFXformCmd xc= lastXformCmd();
-        // xc.at.concatenate(at);
         addCommand(new PDFXformCmd(new AffineTransform(at)));
     }
 
@@ -608,9 +566,6 @@ public class PDFPage {
      */
     public PDFChangeStrokeCmd addStrokeWidth(final float w) {
         final PDFChangeStrokeCmd sc = new PDFChangeStrokeCmd();
-        // if (w == 0) {
-        // w = 0.1f;
-        // }
         sc.setWidth(w);
         addCommand(sc);
         return sc;
@@ -763,24 +718,6 @@ public class PDFPage {
                 }
             }
         }
-    }
-
-    /**
-     * Get a list of all annotations for this PDF pag
-     *
-     * @return List of {@link org.loboevolution.pdfview.annotation.PDFAnnotation} object.
-     */
-    public List<PDFAnnotation> getAnnots() {
-        return this.annots;
-    }
-
-    /**
-     * Set annotations for this PDF page
-     *
-     * @param annots a {@link org.loboevolution.pdfview.annotation.PDFAnnotation} object.
-     */
-    public void setAnnots(final List<PDFAnnotation> annots) {
-        this.annots = annots;
     }
 
     /**
@@ -999,10 +936,8 @@ class PDFXformCmd extends PDFCmd {
 
     @Override
     public String getDetails() {
-        final StringBuilder buf = new StringBuilder();
-        buf.append("PDFXformCommand: \n");
-        buf.append(this.at.toString());
-        return buf.toString();
+        return "PDFXformCommand: \n" +
+                this.at.toString();
     }
 }
 

@@ -36,6 +36,8 @@ import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.border.EmptyBorder;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.loboevolution.gui.AbstractItemEditor;
 import org.loboevolution.gui.ItemEditorFactory;
 
@@ -62,12 +64,15 @@ public class ItemEditor<T> extends JFrame implements LoboLookAndFeel {
 	private final LoboLabel captionLabel = new LoboLabel("");
 
 	/** The editor. */
+	@Getter
 	private final transient AbstractItemEditor<T> editor;
 
 	/** The ok button. */
 	private final LoboButton okButton = new LoboButton();
 
 	/** The resulting item. */
+	@Getter
+	@Setter
 	private transient T resultingItem;
 
 	/**
@@ -122,24 +127,6 @@ public class ItemEditor<T> extends JFrame implements LoboLookAndFeel {
 		panel.add(Box.createGlue());
 		return panel;
 	}
-	
-	/**
-	 * <p>Getter for the field editor.</p>
-	 *
-	 * @return the editor
-	 */
-	public AbstractItemEditor<T> getEditor() {
-		return this.editor;
-	}
-
-	/**
-	 * Gets the resulting item.
-	 *
-	 * @return the resulting item
-	 */
-	public T getResultingItem() {
-		return this.resultingItem;
-	}
 
 	/**
 	 * Sets the caption.
@@ -157,14 +144,5 @@ public class ItemEditor<T> extends JFrame implements LoboLookAndFeel {
 	 */
 	public void setItem(final T item) {
 		this.getEditor().setItem(item);
-	}
-
-	/**
-	 * <p>Setter for the field resultingItem.</p>
-	 *
-	 * @param resultingItem the resultingItem to set
-	 */
-	public void setResultingItem(final T resultingItem) {
-		this.resultingItem = resultingItem;
 	}
 }

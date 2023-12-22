@@ -26,6 +26,9 @@
 
 package org.loboevolution.pdfview.font.ttf;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import java.nio.ByteBuffer;
 
 /**
@@ -33,6 +36,8 @@ import java.nio.ByteBuffer;
  * <p>
  * Author  jkaplan
  */
+@EqualsAndHashCode(callSuper = true)
+@Data
 public class MaxpTable extends TrueTypeTable {
 
     /**
@@ -205,39 +210,12 @@ public class MaxpTable extends TrueTypeTable {
     }
 
     /**
-     * Getter for property version.
-     *
-     * @return Value of property version.
-     */
-    public int getVersion() {
-        return this.version;
-    }
-
-    /**
-     * Setter for property version.
-     *
-     * @param version New value of property version.
-     */
-    public void setVersion(final int version) {
-        this.version = version;
-    }
-
-    /**
      * Getter for property numGlyphs.
      *
      * @return Value of property numGlyphs.
      */
     public int getNumGlyphs() {
         return this.numGlyphs & 0xFFFF;
-    }
-
-    /**
-     * Setter for property numGlyphs.
-     *
-     * @param numGlyphs New value of property numGlyphs.
-     */
-    public void setNumGlyphs(final int numGlyphs) {
-        this.numGlyphs = numGlyphs;
     }
 
     /**
@@ -250,30 +228,12 @@ public class MaxpTable extends TrueTypeTable {
     }
 
     /**
-     * Setter for property maxPoints.
-     *
-     * @param maxPoints New value of property maxPoints.
-     */
-    public void setMaxPoints(final int maxPoints) {
-        this.maxPoints = maxPoints;
-    }
-
-    /**
      * Getter for property maxContours.
      *
      * @return Value of property maxContours.
      */
     public int getMaxContours() {
         return this.maxContours & 0xFFFF;
-    }
-
-    /**
-     * Setter for property maxContours.
-     *
-     * @param maxContours New value of property maxContours.
-     */
-    public void setMaxContours(final int maxContours) {
-        this.maxContours = maxContours;
     }
 
     /**
@@ -286,30 +246,12 @@ public class MaxpTable extends TrueTypeTable {
     }
 
     /**
-     * Setter for property maxComponentPoints.
-     *
-     * @param maxComponentPoints New value of property maxComponentPoints.
-     */
-    public void setMaxComponentPoints(final int maxComponentPoints) {
-        this.maxComponentPoints = maxComponentPoints;
-    }
-
-    /**
      * Getter for property maxComponentContours.
      *
      * @return Value of property maxComponentContours.
      */
     public int getMaxComponentContours() {
         return this.maxComponentContours & 0xFFFF;
-    }
-
-    /**
-     * Setter for property maxComponentContours.
-     *
-     * @param maxComponentContours New value of property maxComponentContours.
-     */
-    public void setMaxComponentContours(final int maxComponentContours) {
-        this.maxComponentContours = maxComponentContours;
     }
 
     /**
@@ -322,30 +264,12 @@ public class MaxpTable extends TrueTypeTable {
     }
 
     /**
-     * Setter for property maxZones.
-     *
-     * @param maxZones New value of property maxZones.
-     */
-    public void setMaxZones(final int maxZones) {
-        this.maxZones = maxZones;
-    }
-
-    /**
      * Getter for property maxTwilightPoints.
      *
      * @return Value of property maxTwilightPoints.
      */
     public int getMaxTwilightPoints() {
         return this.maxTwilightPoints & 0xFFFF;
-    }
-
-    /**
-     * Setter for property maxTwilightPoints.
-     *
-     * @param maxTwilightPoints New value of property maxTwilightPoints.
-     */
-    public void setMaxTwilightPoints(final int maxTwilightPoints) {
-        this.maxTwilightPoints = maxTwilightPoints;
     }
 
     /**
@@ -358,30 +282,12 @@ public class MaxpTable extends TrueTypeTable {
     }
 
     /**
-     * Setter for property maxStorage.
-     *
-     * @param maxStorage New value of property maxStorage.
-     */
-    public void setMaxStorage(final int maxStorage) {
-        this.maxStorage = maxStorage;
-    }
-
-    /**
      * Getter for property maxFunctionDefs.
      *
      * @return Value of property maxFunctionDefs.
      */
     public int getMaxFunctionDefs() {
         return this.maxFunctionDefs & 0xFFFF;
-    }
-
-    /**
-     * Setter for property maxFunctionDefs.
-     *
-     * @param maxFunctionDefs New value of property maxFunctionDefs.
-     */
-    public void setMaxFunctionDefs(final int maxFunctionDefs) {
-        this.maxFunctionDefs = maxFunctionDefs;
     }
 
     /**
@@ -394,30 +300,12 @@ public class MaxpTable extends TrueTypeTable {
     }
 
     /**
-     * Setter for property maxInstructionDefs.
-     *
-     * @param maxInstructionDefs New value of property maxInstructionDefs.
-     */
-    public void setMaxInstructionDefs(final int maxInstructionDefs) {
-        this.maxInstructionDefs = maxInstructionDefs;
-    }
-
-    /**
      * Getter for property maxStackElements.
      *
      * @return Value of property maxStackElements.
      */
     public int getMaxStackElements() {
         return this.maxStackElements & 0xFFFF;
-    }
-
-    /**
-     * Setter for property maxStackElements.
-     *
-     * @param maxStackElements New value of property maxStackElements.
-     */
-    public void setMaxStackElements(final int maxStackElements) {
-        this.maxStackElements = maxStackElements;
     }
 
     /**
@@ -430,30 +318,12 @@ public class MaxpTable extends TrueTypeTable {
     }
 
     /**
-     * Setter for property maxSizeOfInstructions.
-     *
-     * @param maxSizeOfInstructions New value of property maxSizeOfInstructions.
-     */
-    public void setMaxSizeOfInstructions(final int maxSizeOfInstructions) {
-        this.maxSizeOfInstructions = maxSizeOfInstructions;
-    }
-
-    /**
      * Getter for property maxComponentElements.
      *
      * @return Value of property maxComponentElements.
      */
     public int getMaxComponentElements() {
         return this.maxComponentElements & 0xFFFF;
-    }
-
-    /**
-     * Setter for property maxComponentElements.
-     *
-     * @param maxComponentElements New value of property maxComponentElements.
-     */
-    public void setMaxComponentElements(final int maxComponentElements) {
-        this.maxComponentElements = maxComponentElements;
     }
 
     /**
@@ -466,40 +336,28 @@ public class MaxpTable extends TrueTypeTable {
     }
 
     /**
-     * Setter for property maxComponentDepth.
-     *
-     * @param maxComponentDepth New value of property maxComponentDepth.
-     */
-    public void setMaxComponentDepth(final int maxComponentDepth) {
-        this.maxComponentDepth = maxComponentDepth;
-    }
-
-    /**
      * {@inheritDoc}
      * <p>
      * Create a pretty String
      */
     @Override
     public String toString() {
-        final StringBuilder buf = new StringBuilder();
         final String indent = "    ";
 
-        buf.append(indent).append("Version          : ").append(Integer.toHexString(getVersion())).append("\n");
-        buf.append(indent).append("NumGlyphs        : ").append(getNumGlyphs()).append("\n");
-        buf.append(indent).append("MaxPoints        : ").append(getMaxPoints()).append("\n");
-        buf.append(indent).append("MaxContours      : ").append(getMaxContours()).append("\n");
-        buf.append(indent).append("MaxCompPoints    : ").append(getMaxComponentPoints()).append("\n");
-        buf.append(indent).append("MaxCompContours  : ").append(getMaxComponentContours()).append("\n");
-        buf.append(indent).append("MaxZones         : ").append(getMaxZones()).append("\n");
-        buf.append(indent).append("MaxTwilightPoints: ").append(getMaxTwilightPoints()).append("\n");
-        buf.append(indent).append("MaxStorage       : ").append(getMaxStorage()).append("\n");
-        buf.append(indent).append("MaxFuncDefs      : ").append(getMaxFunctionDefs()).append("\n");
-        buf.append(indent).append("MaxInstDefs      : ").append(getMaxInstructionDefs()).append("\n");
-        buf.append(indent).append("MaxStackElements : ").append(getMaxStackElements()).append("\n");
-        buf.append(indent).append("MaxSizeInst      : ").append(getMaxSizeOfInstructions()).append("\n");
-        buf.append(indent).append("MaxCompElements  : ").append(getMaxComponentElements()).append("\n");
-        buf.append(indent).append("MaxCompDepth     : ").append(getMaxComponentDepth()).append("\n");
-
-        return buf.toString();
+        return indent + "Version          : " + Integer.toHexString(getVersion()) + "\n" +
+                indent + "NumGlyphs        : " + getNumGlyphs() + "\n" +
+                indent + "MaxPoints        : " + getMaxPoints() + "\n" +
+                indent + "MaxContours      : " + getMaxContours() + "\n" +
+                indent + "MaxCompPoints    : " + getMaxComponentPoints() + "\n" +
+                indent + "MaxCompContours  : " + getMaxComponentContours() + "\n" +
+                indent + "MaxZones         : " + getMaxZones() + "\n" +
+                indent + "MaxTwilightPoints: " + getMaxTwilightPoints() + "\n" +
+                indent + "MaxStorage       : " + getMaxStorage() + "\n" +
+                indent + "MaxFuncDefs      : " + getMaxFunctionDefs() + "\n" +
+                indent + "MaxInstDefs      : " + getMaxInstructionDefs() + "\n" +
+                indent + "MaxStackElements : " + getMaxStackElements() + "\n" +
+                indent + "MaxSizeInst      : " + getMaxSizeOfInstructions() + "\n" +
+                indent + "MaxCompElements  : " + getMaxComponentElements() + "\n" +
+                indent + "MaxCompDepth     : " + getMaxComponentDepth() + "\n";
     }
 }

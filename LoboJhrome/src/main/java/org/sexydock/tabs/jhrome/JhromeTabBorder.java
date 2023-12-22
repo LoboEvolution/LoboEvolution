@@ -26,6 +26,9 @@
 
 package org.sexydock.tabs.jhrome;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
@@ -42,15 +45,9 @@ public class JhromeTabBorder implements Border {
     private Path2D openPath;
     private Path2D closedPath;
 
+    @Getter
+    @Setter
     private boolean flip;
-
-    public boolean isFlip() {
-        return flip;
-    }
-
-    public void setFlip(final boolean flip) {
-        this.flip = flip;
-    }
 
     private void updatePaths(final int x, final int y, final int width, final int height) {
         if (width < attrs.insets.left + attrs.insets.right) {

@@ -26,6 +26,9 @@
 
 package org.loboevolution.gui;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.awt.Component;
 import java.awt.Dimension;
 import java.util.ArrayList;
@@ -53,6 +56,8 @@ public class FormPanel extends JComponent {
 	private boolean fieldsInvalid = false;
 
 	/** The min label width. */
+	@Getter
+	@Setter
 	private int minLabelWidth = 0;
 
 	/**
@@ -102,15 +107,6 @@ public class FormPanel extends JComponent {
 			populateComponents();
 		}
 		return super.getMinimumSize();
-	}
-
-	/**
-	 * Gets the min label width.
-	 *
-	 * @return the min label width
-	 */
-	public int getMinLabelWidth() {
-		return this.minLabelWidth;
 	}
 
 	/** {@inheritDoc} */
@@ -179,14 +175,5 @@ public class FormPanel extends JComponent {
 	public void revalidate() {
 		this.fieldsInvalid = true;
 		super.revalidate();
-	}
-
-	/**
-	 * Sets the min label width.
-	 *
-	 * @param minLabelWidth the new min label width
-	 */
-	public void setMinLabelWidth(final int minLabelWidth) {
-		this.minLabelWidth = minLabelWidth;
 	}
 }

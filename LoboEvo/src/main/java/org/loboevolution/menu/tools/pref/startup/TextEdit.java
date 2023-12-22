@@ -39,6 +39,9 @@ import javax.swing.border.EmptyBorder;
 import com.jtattoo.plaf.lobo.LoboButton;
 import com.jtattoo.plaf.lobo.LoboLabel;
 import com.jtattoo.plaf.lobo.LoboLookAndFeel;
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * The Class TextEdit.
  *
@@ -60,6 +63,8 @@ public class TextEdit extends JFrame implements LoboLookAndFeel {
 	private final LoboButton okButton = new LoboButton();
 
 	/** The resulting text. */
+	@Getter
+	@Setter
 	private String resultingText;
 
 	/** The text area. */
@@ -113,16 +118,6 @@ public class TextEdit extends JFrame implements LoboLookAndFeel {
 		panel.add(Box.createGlue());
 		return panel;
 	}
-	
-	
-	/**
-	 * Gets the resulting text.
-	 *
-	 * @return the resulting text
-	 */
-	public String getResultingText() {
-		return this.resultingText;
-	}
 
 	/**
 	 * Gets the text.
@@ -140,15 +135,6 @@ public class TextEdit extends JFrame implements LoboLookAndFeel {
 	 */
 	public void setCaption(final String text) {
 		this.captionLabel.setText(text);
-	}
-
-	/**
-	 * <p>Setter for the field resultingText.</p>
-	 *
-	 * @param resultingText a {@link java.lang.String} object.
-	 */
-	public void setResultingText(final String resultingText) {
-		this.resultingText = resultingText;
 	}
 
 	/**

@@ -25,12 +25,14 @@
  */
 package org.loboevolution.html.renderer;
 
+import lombok.Data;
 import org.loboevolution.html.dom.nodeimpl.ModelNode;
 
 import java.awt.*;
 
+@Data
 final class RFloatInfo implements Renderable {
-	private final BoundableRenderable element;
+	private final BoundableRenderable renderable;
 	private final boolean leftFloat;
 	private final ModelNode modelNode;
 
@@ -38,37 +40,13 @@ final class RFloatInfo implements Renderable {
 	 * <p>Constructor for RFloatInfo.</p>
 	 *
 	 * @param node a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
-	 * @param element a {@link org.loboevolution.html.renderer.BoundableRenderable} object.
+	 * @param renderable a {@link org.loboevolution.html.renderer.BoundableRenderable} object.
 	 * @param leftFloat a boolean.
 	 */
-	public RFloatInfo(final ModelNode node, final BoundableRenderable element, final boolean leftFloat) {
+	public RFloatInfo(final ModelNode node, final BoundableRenderable renderable, final boolean leftFloat) {
 		this.modelNode = node;
-		this.element = element;
+		this.renderable = renderable;
 		this.leftFloat = leftFloat;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public ModelNode getModelNode() {
-		return this.modelNode;
-	}
-
-	/**
-	 * <p>getRenderable.</p>
-	 *
-	 * @return a {@link org.loboevolution.html.renderer.BoundableRenderable} object.
-	 */
-	public BoundableRenderable getRenderable() {
-		return this.element;
-	}
-
-	/**
-	 * <p>isLeftFloat.</p>
-	 *
-	 * @return a boolean.
-	 */
-	public boolean isLeftFloat() {
-		return this.leftFloat;
 	}
 
 	/** {@inheritDoc} */

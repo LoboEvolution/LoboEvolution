@@ -25,6 +25,7 @@
  */
 package org.jpedal.jbig2.segment;
 
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.jpedal.jbig2.decoders.JBIG2StreamDecoder;
 
@@ -32,6 +33,7 @@ import org.jpedal.jbig2.decoders.JBIG2StreamDecoder;
  * <p>SegmentHeader class.</p>
  */
 @Slf4j
+@Data
 public class SegmentHeader {
     private int segmentNumber;
 
@@ -61,141 +63,6 @@ public class SegmentHeader {
             log.info("pageAssociationSizeSet {} ", pageAssociationSizeSet);
             log.info("deferredNonRetainSet {} ", deferredNonRetainSet);
         }
-    }
-
-    /**
-     * <p>Getter for the field <code>referredToSegments</code>.</p>
-     *
-     * @return an array of {@link int} objects.
-     */
-    public int[] getReferredToSegments() {
-        return referredToSegments;
-    }
-
-    /**
-     * <p>Setter for the field <code>referredToSegments</code>.</p>
-     *
-     * @param referredToSegments an array of {@link int} objects.
-     */
-    public void setReferredToSegments(final int[] referredToSegments) {
-        this.referredToSegments = referredToSegments;
-    }
-
-    /**
-     * <p>Getter for the field <code>segmentType</code>.</p>
-     *
-     * @return a {@link java.lang.Integer} object.
-     */
-    public int getSegmentType() {
-        return segmentType;
-    }
-
-    /**
-     * <p>Setter for the field <code>segmentType</code>.</p>
-     *
-     * @param type a {@link java.lang.Integer} object.
-     */
-    public void setSegmentType(final int type) {
-        this.segmentType = type;
-    }
-
-    /**
-     * <p>Getter for the field <code>segmentNumber</code>.</p>
-     *
-     * @return a {@link java.lang.Integer} object.
-     */
-    public int getSegmentNumber() {
-        return segmentNumber;
-    }
-
-    /**
-     * <p>Setter for the field <code>segmentNumber</code>.</p>
-     *
-     * @param SegmentNumber a {@link java.lang.Integer} object.
-     */
-    public void setSegmentNumber(final int SegmentNumber) {
-        this.segmentNumber = SegmentNumber;
-    }
-
-    /**
-     * <p>isPageAssociationSizeSet.</p>
-     *
-     * @return a boolean.
-     */
-    public boolean isPageAssociationSizeSet() {
-        return pageAssociationSizeSet;
-    }
-
-    /**
-     * <p>isDeferredNonRetainSet.</p>
-     *
-     * @return a boolean.
-     */
-    public boolean isDeferredNonRetainSet() {
-        return deferredNonRetainSet;
-    }
-
-    /**
-     * <p>Getter for the field <code>referredToSegmentCount</code>.</p>
-     *
-     * @return a {@link java.lang.Integer} object.
-     */
-    public int getReferredToSegmentCount() {
-        return referredToSegmentCount;
-    }
-
-    /**
-     * <p>Setter for the field <code>referredToSegmentCount</code>.</p>
-     *
-     * @param referredToSegmentCount a {@link java.lang.Integer} object.
-     */
-    public void setReferredToSegmentCount(final int referredToSegmentCount) {
-        this.referredToSegmentCount = referredToSegmentCount;
-    }
-
-    /**
-     * <p>Getter for the field <code>rententionFlags</code>.</p>
-     *
-     * @return an array of {@link short} objects.
-     */
-    public short[] getRententionFlags() {
-        return rententionFlags;
-    }
-
-    /**
-     * <p>Setter for the field <code>rententionFlags</code>.</p>
-     *
-     * @param rententionFlags an array of {@link short} objects.
-     */
-    public void setRententionFlags(final short[] rententionFlags) {
-        this.rententionFlags = rententionFlags;
-    }
-
-    /**
-     * <p>Getter for the field <code>pageAssociation</code>.</p>
-     *
-     * @return a {@link java.lang.Integer} object.
-     */
-    public int getPageAssociation() {
-        return pageAssociation;
-    }
-
-    /**
-     * <p>Setter for the field <code>pageAssociation</code>.</p>
-     *
-     * @param pageAssociation a {@link java.lang.Integer} object.
-     */
-    public void setPageAssociation(final int pageAssociation) {
-        this.pageAssociation = pageAssociation;
-    }
-
-    /**
-     * <p>Setter for the field <code>dataLength</code>.</p>
-     *
-     * @param dataLength a {@link java.lang.Integer} object.
-     */
-    public void setDataLength(final int dataLength) {
-        this.dataLength = dataLength;
     }
 
     /**

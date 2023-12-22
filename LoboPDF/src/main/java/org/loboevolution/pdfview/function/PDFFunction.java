@@ -25,6 +25,8 @@
  */
 package org.loboevolution.pdfview.function;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.loboevolution.pdfview.PDFObject;
 import org.loboevolution.pdfview.PDFParseException;
 
@@ -87,17 +89,20 @@ public abstract class PDFFunction {
     /**
      * the type of this function from the list of known types
      */
+    @Getter
     private final int type;
 
     /**
      * the input domain of this function, an array of 2 * <i>m</i> floats
      */
+    @Setter
     private float[] domain;
 
     /**
      * the output range of this functions, and array of 2 * <i>n</i> floats.
      * required for type 0 and 4 functions
      */
+    @Setter
     private float[] range;
 
     /**
@@ -214,15 +219,6 @@ public abstract class PDFFunction {
     }
 
     /**
-     * Get the type of this function
-     *
-     * @return one of the types of function (0-4)
-     */
-    public int getType() {
-        return this.type;
-    }
-
-    /**
      * Get the number of inputs, <i>m</i>, required by this function
      *
      * @return the number of input values expected by this function
@@ -256,15 +252,6 @@ public abstract class PDFFunction {
     }
 
     /**
-     * Set the domain of this function
-     *
-     * @param domain an array of {@link float} objects.
-     */
-    protected void setDomain(final float[] domain) {
-        this.domain = domain;
-    }
-
-    /**
      * Get a component of the range of this function
      *
      * @param i the index into the range array, which has size 2 * <i>n</i>.
@@ -281,15 +268,6 @@ public abstract class PDFFunction {
             }
         }
         return this.range[i];
-    }
-
-    /**
-     * Set the range of this function
-     *
-     * @param range an array of {@link float} objects.
-     */
-    protected void setRange(final float[] range) {
-        this.range = range;
     }
 
     /**

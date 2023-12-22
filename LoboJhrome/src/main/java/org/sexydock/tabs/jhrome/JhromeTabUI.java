@@ -26,6 +26,8 @@
 
 package org.sexydock.tabs.jhrome;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.sexydock.SwingUtils;
 import org.sexydock.tabs.BasicTabUI;
 import org.sexydock.tabs.Tab;
@@ -44,6 +46,8 @@ import java.beans.PropertyChangeListener;
  *
  * @author andy.edwards
  */
+@EqualsAndHashCode(callSuper = true)
+@Data
 public class JhromeTabUI extends BasicTabUI {
     CompoundBorder compoundBorder;
     JhromeTabBorder outerBorder;
@@ -56,7 +60,7 @@ public class JhromeTabUI extends BasicTabUI {
     javax.swing.Timer highlightTimer;
     Color selectedLabelColor = Color.BLACK;
     Color unselectedLabelColor = new Color(80, 80, 80);
-    PropertyChangeHandler propertyChangeHandler;
+    PropertyChangeHandler changeHandler;
 
     public JhromeTabUI() {
         super();
@@ -106,8 +110,8 @@ public class JhromeTabUI extends BasicTabUI {
         tab.setBorder(compoundBorder);
         tab.setOpaque(false);
 
-        propertyChangeHandler = new PropertyChangeHandler();
-        getTab().addPropertyChangeListener(propertyChangeHandler);
+        changeHandler = new PropertyChangeHandler();
+        getTab().addPropertyChangeListener(changeHandler);
     }
 
     public void update(final Graphics g, final JComponent c) {
@@ -125,8 +129,8 @@ public class JhromeTabUI extends BasicTabUI {
 
         tab.setBorder(null);
 
-        tab.removePropertyChangeListener(propertyChangeHandler);
-        propertyChangeHandler = null;
+        tab.removePropertyChangeListener(changeHandler);
+        changeHandler = null;
     }
 
     protected void update() {
@@ -170,53 +174,6 @@ public class JhromeTabUI extends BasicTabUI {
         return outerBorder.contains(p);
     }
 
-    public JhromeTabBorderAttributes getSelectedAttributes() {
-        return selectedAttributes;
-    }
-
-    public void setSelectedAttributes(final JhromeTabBorderAttributes selectedAttributes) {
-        this.selectedAttributes = selectedAttributes;
-    }
-
-    public JhromeTabBorderAttributes getRolloverAttributes() {
-        return rolloverAttributes;
-    }
-
-    public void setRolloverAttributes(final JhromeTabBorderAttributes rolloverAttributes) {
-        this.rolloverAttributes = rolloverAttributes;
-    }
-
-    public JhromeTabBorderAttributes getNormalAttributes() {
-        return normalAttributes;
-    }
-
-    public void setNormalAttributes(final JhromeTabBorderAttributes normalAttributes) {
-        this.normalAttributes = normalAttributes;
-    }
-
-    public float getHighlightSpeed() {
-        return highlightSpeed;
-    }
-
-    public void setHighlightSpeed(final float highlightSpeed) {
-        this.highlightSpeed = highlightSpeed;
-    }
-
-    public Color getSelectedLabelColor() {
-        return selectedLabelColor;
-    }
-
-    public void setSelectedLabelColor(final Color selectedLabelColor) {
-        this.selectedLabelColor = selectedLabelColor;
-    }
-
-    public Color getUnselectedLabelColor() {
-        return unselectedLabelColor;
-    }
-
-    public void setUnselectedLabelColor(final Color unselectedLabelColor) {
-        this.unselectedLabelColor = unselectedLabelColor;
-    }
 
     private final class PropertyChangeHandler implements PropertyChangeListener {
         @Override

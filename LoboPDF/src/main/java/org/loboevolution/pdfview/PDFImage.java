@@ -25,6 +25,9 @@
  */
 package org.loboevolution.pdfview;
 
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.loboevolution.pdfview.colorspace.AlternateColorSpace;
 import org.loboevolution.pdfview.colorspace.IndexedColor;
 import org.loboevolution.pdfview.colorspace.PDFColorSpace;
@@ -54,6 +57,7 @@ import java.util.Map;
 /**
  * Encapsulates a PDF Image
  */
+@Data
 public class PDFImage {
 
     private static final int[][] GREY_TO_ARGB = new int[8][];
@@ -85,10 +89,12 @@ public class PDFImage {
     /**
      * the number of bits per sample component
      */
-    private int bpc;
+    private int bitsPerComponent;
     /**
      * whether this image is a mask or not
      */
+    @Getter
+    @Setter
     private boolean imageMask = false;
     /**
      * the SMask image, if any
@@ -484,7 +490,7 @@ public class PDFImage {
         // hack to avoid *very* slow conversion
         final ColorSpace cs = cm.getColorSpace();
         final ColorSpace rgbCS = ColorSpace.getInstance(ColorSpace.CS_sRGB);
-        if (isGreyscale(cs) && bpc <= 8 && getDecode() == null && jpegData == null
+        if (isGreyscale(cs) && bitsPerComponent <= 8 && getDecode() == null && jpegData == null
                 && Configuration.getInstance().isConvertGreyscaleImagesToArgb()) {
             bi = convertGreyscaleToArgb(data, bi);
         } else if (!isImageMask() && cs instanceof ICC_ColorSpace && !cs.equals(rgbCS)
@@ -617,8 +623,8 @@ public class PDFImage {
         final int[] convertedPixels = new int[getWidth() * getHeight()];
         final WritableRaster r = bi.getRaster();
         int i = 0;
-        final int[] greyToArgbMap = getGreyToArgbMap(bpc);
-        if (bpc == 1) {
+        final int[] greyToArgbMap = getGreyToArgbMap(bitsPerComponent);
+        if (bitsPerComponent == 1) {
             final int calculatedLineBytes = (getWidth() + 7) / 8;
             int rowStartByteIndex;
             // avoid hitting the WritableRaster for the common 1 bpc case
@@ -722,42 +728,6 @@ public class PDFImage {
     }
 
     /**
-     * Get the image's width
-     *
-     * @return a {@link java.lang.Integer} object.
-     */
-    public int getWidth() {
-        return this.width;
-    }
-
-    /**
-     * Set the image's width
-     *
-     * @param width a {@link java.lang.Integer} object.
-     */
-    protected void setWidth(final int width) {
-        this.width = width;
-    }
-
-    /**
-     * Get the image's height
-     *
-     * @return a {@link java.lang.Integer} object.
-     */
-    public int getHeight() {
-        return this.height;
-    }
-
-    /**
-     * Set the image's height
-     *
-     * @param height a {@link java.lang.Integer} object.
-     */
-    protected void setHeight(final int height) {
-        this.height = height;
-    }
-
-    /**
      * set the color key mask. It is an array of start/end entries to indicate
      * ranges of color indicies that should be masked out.
      *
@@ -771,96 +741,6 @@ public class PDFImage {
             masks[i] = maskObjects[i].getIntValue();
         }
         this.colorKeyMask = masks;
-    }
-
-    /**
-     * Get the colorspace associated with this image, or null if there isn't one
-     *
-     * @return a {@link org.loboevolution.pdfview.colorspace.PDFColorSpace} object.
-     */
-    protected PDFColorSpace getColorSpace() {
-        return this.colorSpace;
-    }
-
-    /**
-     * Set the colorspace associated with this image
-     *
-     * @param colorSpace a {@link org.loboevolution.pdfview.colorspace.PDFColorSpace} object.
-     */
-    protected void setColorSpace(final PDFColorSpace colorSpace) {
-        this.colorSpace = colorSpace;
-    }
-
-    /**
-     * Get the number of bits per component sample
-     *
-     * @return a {@link java.lang.Integer} object.
-     */
-    protected int getBitsPerComponent() {
-        return this.bpc;
-    }
-
-    /**
-     * Set the number of bits per component sample
-     *
-     * @param bpc a {@link java.lang.Integer} object.
-     */
-    protected void setBitsPerComponent(final int bpc) {
-        this.bpc = bpc;
-    }
-
-    /**
-     * Return whether or not this is an image mask
-     *
-     * @return a boolean.
-     */
-    public boolean isImageMask() {
-        return this.imageMask;
-    }
-
-    /**
-     * Set whether or not this is an image mask
-     *
-     * @param imageMask a boolean.
-     */
-    public void setImageMask(final boolean imageMask) {
-        this.imageMask = imageMask;
-    }
-
-    /**
-     * Return the soft mask associated with this image
-     *
-     * @return a {@link org.loboevolution.pdfview.PDFImage} object.
-     */
-    public PDFImage getSMask() {
-        return this.sMask;
-    }
-
-    /**
-     * Set the soft mask image
-     *
-     * @param sMask a {@link org.loboevolution.pdfview.PDFImage} object.
-     */
-    protected void setSMask(final PDFImage sMask) {
-        this.sMask = sMask;
-    }
-
-    /**
-     * Get the decode array
-     *
-     * @return an array of {@link float} objects.
-     */
-    protected float[] getDecode() {
-        return this.decode;
-    }
-
-    /**
-     * Set the decode array
-     *
-     * @param decode an array of {@link float} objects.
-     */
-    protected void setDecode(final float[] decode) {
-        this.decode = decode;
     }
 
     /**

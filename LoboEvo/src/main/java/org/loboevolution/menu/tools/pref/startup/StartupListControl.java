@@ -37,12 +37,11 @@ import javax.swing.JComboBox;
 import javax.swing.JComponent;
 
 import com.jtattoo.plaf.lobo.LoboButton;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * <p>StartupListControl class.</p>
- *
- *
- *
  */
 public class StartupListControl extends JComponent {
 
@@ -53,9 +52,12 @@ public class StartupListControl extends JComponent {
 	private final JComboBox<String> comboBox;
 
 	/** The edit list caption. */
+	@Getter
+	@Setter
 	private String editListCaption;
 
 	/** The strings. */
+	@Getter
 	private List<String> strings;
 
 	/**
@@ -77,24 +79,6 @@ public class StartupListControl extends JComponent {
 	}
 
 	/**
-	 * Gets the edit list caption.
-	 *
-	 * @return the edit list caption
-	 */
-	public String getEditListCaption() {
-		return this.editListCaption;
-	}
-
-	/**
-	 * Gets the strings.
-	 *
-	 * @return the strings
-	 */
-	public List<String> getStrings() {
-		return this.strings;
-	}
-
-	/**
 	 * Gets the strings as text.
 	 *
 	 * @return the strings as text
@@ -111,15 +95,6 @@ public class StartupListControl extends JComponent {
 			buffer.append(lineSeparator);
 		}
 		return buffer.toString();
-	}
-
-	/**
-	 * Sets the edit list caption.
-	 *
-	 * @param caption the new edit list caption
-	 */
-	public void setEditListCaption(final String caption) {
-		this.editListCaption = caption;
 	}
 
 	/**

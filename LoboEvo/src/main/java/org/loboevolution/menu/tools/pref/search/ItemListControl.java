@@ -33,6 +33,8 @@ import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.loboevolution.gui.ItemEditorFactory;
 
 import com.jtattoo.plaf.lobo.LoboButton;
@@ -41,9 +43,9 @@ import com.jtattoo.plaf.lobo.LoboButton;
  * The Class ItemListControl.
  *
  * @param <T> the generic type
- *
- *
  */
+@EqualsAndHashCode(callSuper = true)
+@Data
 public class ItemListControl<T> extends JComponent {
 
 	/** The Constant serialVersionUID. */
@@ -92,33 +94,6 @@ public class ItemListControl<T> extends JComponent {
 	}
 
 	/**
-	 * <p>Getter for the field comboBox.</p>
-	 *
-	 * @return the comboBox
-	 */
-	public JComboBox<T> getComboBox() {
-		return this.comboBox;
-	}
-
-	/**
-	 * <p>Getter for the field editListCaption.</p>
-	 *
-	 * @return the editListCaption
-	 */
-	public String getEditListCaption() {
-		return this.editListCaption;
-	}
-
-	/**
-	 * <p>Getter for the field itemEditorFactory.</p>
-	 *
-	 * @return the itemEditorFactory
-	 */
-	public ItemEditorFactory<T> getItemEditorFactory() {
-		return this.itemEditorFactory;
-	}
-
-	/**
 	 * Gets the items.
 	 *
 	 * @return the items
@@ -130,15 +105,6 @@ public class ItemListControl<T> extends JComponent {
 			items.add(this.getComboBox().getItemAt(i));
 		}
 		return items;
-	}
-
-	/**
-	 * <p>Setter for the field editListCaption.</p>
-	 *
-	 * @param editListCaption the editListCaption to set
-	 */
-	public void setEditListCaption(final String editListCaption) {
-		this.editListCaption = editListCaption;
 	}
 
 	/**

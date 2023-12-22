@@ -163,14 +163,11 @@ public class GradientStyle {
 		g2.fillRect(0, 0, width, height);
 		g2.setPaint(p);
 
-		switch (info.getShape()) {
-			case "circle":
-				g2.fillOval(0, 0, width - 1, height - 1);
-				break;
-			default:
-				g2.draw(new Ellipse2D.Double(0, 0, width - 1, height - 1));
-				break;
-		}
+        if (info.getShape().equals("circle")) {
+            g2.fillOval(0, 0, width - 1, height - 1);
+        } else {
+            g2.draw(new Ellipse2D.Double(0, 0, width - 1, height - 1));
+        }
 
 		return image;
 	}

@@ -26,18 +26,11 @@
 
 package com.jtattoo.plaf;
 
-import lombok.Builder;
 import lombok.Getter;
 
-import java.awt.AlphaComposite;
-import java.awt.Color;
-import java.awt.Composite;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-
-import javax.swing.Icon;
+import javax.swing.*;
 import javax.swing.plaf.basic.BasicArrowButton;
+import java.awt.*;
 
 /**
  * <p>BaseScrollButton class.</p>
@@ -48,7 +41,6 @@ import javax.swing.plaf.basic.BasicArrowButton;
 @Getter
 public class BaseScrollButton extends BasicArrowButton {
 
-	@Builder.Default
 	protected int buttonWidth = 24;
 
 	/**

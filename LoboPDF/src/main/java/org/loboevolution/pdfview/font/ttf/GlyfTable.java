@@ -171,12 +171,9 @@ public class GlyfTable extends TrueTypeTable {
      */
     @Override
     public String toString() {
-        final StringBuilder buf = new StringBuilder();
         final String indent = "    ";
 
-        buf.append(indent).append("Glyf Table: (").append(this.glyphs.length).append(" glyphs)\n");
-        buf.append(indent).append("  Glyf 0: ").append(getGlyph(0));
-
-        return buf.toString();
+        return indent + "Glyf Table: (" + this.glyphs.length + " glyphs)\n" +
+                indent + "  Glyf 0: " + getGlyph(0);
     }
 }

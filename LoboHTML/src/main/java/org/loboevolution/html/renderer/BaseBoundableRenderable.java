@@ -38,7 +38,6 @@ import org.loboevolution.html.renderstate.RenderState;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
-import java.util.Optional;
 
 /**
  * Author J. H. S.

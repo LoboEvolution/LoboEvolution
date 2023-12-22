@@ -35,6 +35,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.net.NetRoutines;
 
@@ -43,16 +44,11 @@ import org.loboevolution.net.NetRoutines;
  * <p>ConnectionStore class.</p>
  */
 @Slf4j
-public class ConnectionStore implements Serializable {
+@Data
+public class ConnectionStore implements QueryStore, Serializable {
 
 	/** The Constant DB_PATH. */
 	private static final String DB_PATH = DatabseSQLite.getDatabaseDirectory();
-
-	private static final String CONNECTIONS = "SELECT DISTINCT proxyType, userName, password, authenticated, host, port, disableProxyForLocalAddresses FROM CONNECTION";
-
-	private static final String DELETE_CONNECTIONS = "DELETE FROM CONNECTION";
-
-	private static final String INSERT_CONNECTIONS = "INSERT INTO CONNECTION (proxyType, userName, password, authenticated, host, port, disableProxyForLocalAddresses) VALUES(?,?,?,?,?,?,?)";
 
 	private static final long serialVersionUID = 1L;
 
@@ -72,7 +68,7 @@ public class ConnectionStore implements Serializable {
 	private Proxy.Type proxyType = Proxy.Type.DIRECT;
 
 	/** The socket address. */
-	private InetSocketAddress socketAddress = null;
+	private InetSocketAddress inetSocketAddress = null;
 
 	/** The user name. */
 	private String userName;
@@ -122,24 +118,6 @@ public class ConnectionStore implements Serializable {
 	}
 
 	/**
-	 * Gets the inet socket address.
-	 *
-	 * @return the inet socket address
-	 */
-	public InetSocketAddress getInetSocketAddress() {
-		return this.socketAddress;
-	}
-
-	/**
-	 * Gets the password.
-	 *
-	 * @return the password
-	 */
-	public String getPassword() {
-		return this.password;
-	}
-
-	/**
 	 * Gets the password authentication.
 	 *
 	 * @return the password authentication
@@ -162,7 +140,7 @@ public class ConnectionStore implements Serializable {
 	public Proxy getProxy(final String host) {
 		synchronized (this) {
 			if (this.proxy == null) {
-				final InetSocketAddress sa = this.socketAddress;
+				final InetSocketAddress sa = this.inetSocketAddress;
 				if (this.proxyType == Proxy.Type.DIRECT || sa == null) {
 					this.proxy = Proxy.NO_PROXY;
 				} else {
@@ -175,24 +153,6 @@ public class ConnectionStore implements Serializable {
 			}
 			return proxy;
 		}
-	}
-
-	/**
-	 * Gets the proxy type.
-	 *
-	 * @return the proxy type
-	 */
-	public Proxy.Type getProxyType() {
-		return this.proxyType;
-	}
-
-	/**
-	 * Gets the user name.
-	 *
-	 * @return the user name
-	 */
-	public String getUserName() {
-		return this.userName;
 	}
 
 	/**
@@ -215,24 +175,6 @@ public class ConnectionStore implements Serializable {
 	}
 
 	/**
-	 * Checks if is authenticated.
-	 *
-	 * @return the authenticated
-	 */
-	public boolean isAuthenticated() {
-		return this.authenticated;
-	}
-
-	/**
-	 * Checks if is disable proxy for local addresses.
-	 *
-	 * @return the disable proxy for local addresses
-	 */
-	public boolean isDisableProxyForLocalAddresses() {
-		return this.disableProxyForLocalAddresses;
-	}
-
-	/**
 	 * Restore defaults.
 	 */
 	public void restoreDefaults() {
@@ -240,7 +182,7 @@ public class ConnectionStore implements Serializable {
 		this.userName = "";
 		this.password = "";
 		this.authenticated = false;
-		this.socketAddress = null;
+		this.inetSocketAddress = null;
 		this.disableProxyForLocalAddresses = true;
 		synchronized (this) {
 			this.proxy = null;
@@ -280,7 +222,7 @@ public class ConnectionStore implements Serializable {
 	 * @param socketAddress the new inet socket address
 	 */
 	public void setInetSocketAddress(final InetSocketAddress socketAddress) {
-		this.socketAddress = socketAddress;
+		this.inetSocketAddress = socketAddress;
 		synchronized (this) {
 			this.proxy = null;
 		}

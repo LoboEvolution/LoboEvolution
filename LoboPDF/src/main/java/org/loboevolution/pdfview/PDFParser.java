@@ -1254,7 +1254,7 @@ public class PDFParser extends BaseWatchable {
             return;
         }
         this.cmds.addPush();
-        final Rectangle2D bbox = shader.getBBox();
+        final Rectangle2D bbox = shader.getBbox();
         if (bbox != null) {
             this.cmds.addFillPaint(shader.getPaint());
             this.cmds.addPath(new GeneralPath(bbox), PDFShapeCmd.FILL, this.autoAdjustStroke);

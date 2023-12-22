@@ -26,6 +26,8 @@
 
 package org.loboevolution.pdfview.pattern;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.loboevolution.pdfview.*;
 
 import java.awt.*;
@@ -41,6 +43,8 @@ import java.util.Map;
 /**
  * A type 1 (tiling) pattern
  */
+@Getter
+@Setter
 public class PatternType1 extends PDFPattern {
     /**
      * paint types
@@ -144,7 +148,7 @@ public class PatternType1 extends PDFPattern {
 
 
         // now create a page bounded by the pattern's user space size
-        final PDFPage page = new PDFPage(getBBox(), 0);
+        final PDFPage page = new PDFPage(getBbox(), 0);
 
         // set the base paint if there is one
         if (basePaint != null) {
@@ -184,60 +188,6 @@ public class PatternType1 extends PDFPattern {
 
 
         return new TilingPatternPaint(paint, this);
-    }
-
-    /**
-     * get the associated resources
-     *
-     * @return a {@link java.util.Map} object.
-     */
-    public Map<String, PDFObject> getResources() {
-        return this.resources;
-    }
-
-    /**
-     * get the paint type
-     *
-     * @return a {@link java.lang.Integer} object.
-     */
-    public int getPaintType() {
-        return this.paintType;
-    }
-
-    /**
-     * get the tiling type
-     *
-     * @return a {@link java.lang.Integer} object.
-     */
-    public int getTilingType() {
-        return this.tilingType;
-    }
-
-    /**
-     * get the bounding box
-     *
-     * @return a {@link java.awt.geom.Rectangle2D} object.
-     */
-    public Rectangle2D getBBox() {
-        return this.bbox;
-    }
-
-    /**
-     * get the x step
-     *
-     * @return a {@link java.lang.Integer} object.
-     */
-    public int getXStep() {
-        return this.xStep;
-    }
-
-    /**
-     * get the y step
-     *
-     * @return a {@link java.lang.Integer} object.
-     */
-    public int getYStep() {
-        return this.yStep;
     }
 
     /**

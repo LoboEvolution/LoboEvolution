@@ -25,6 +25,7 @@
  */
 package org.jpedal.jbig2.segment.region.text;
 
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.jpedal.jbig2.JBIG2Exception;
 import org.jpedal.jbig2.decoders.HuffmanDecoder;
@@ -45,6 +46,7 @@ import java.util.List;
  * <p>TextRegionSegment class.</p>
  */
 @Slf4j
+@Getter
 public class TextRegionSegment extends RegionSegment {
     private final TextRegionFlags textRegionFlags = new TextRegionFlags();
 
@@ -339,23 +341,5 @@ public class TextRegionSegment extends RegionSegment {
             symbolRegionAdaptiveTemplateX[1] = readATValue();
             symbolRegionAdaptiveTemplateY[1] = readATValue();
         }
-    }
-
-    /**
-     * <p>Getter for the field <code>textRegionFlags</code>.</p>
-     *
-     * @return a {@link org.jpedal.jbig2.segment.region.text.TextRegionFlags} object.
-     */
-    public TextRegionFlags getTextRegionFlags() {
-        return textRegionFlags;
-    }
-
-    /**
-     * <p>Getter for the field <code>textRegionHuffmanFlags</code>.</p>
-     *
-     * @return a {@link org.jpedal.jbig2.segment.region.text.TextRegionHuffmanFlags} object.
-     */
-    public TextRegionHuffmanFlags getTextRegionHuffmanFlags() {
-        return textRegionHuffmanFlags;
     }
 }

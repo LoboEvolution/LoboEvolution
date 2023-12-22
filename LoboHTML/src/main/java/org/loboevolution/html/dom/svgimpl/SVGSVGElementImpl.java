@@ -60,7 +60,9 @@ public class SVGSVGElementImpl extends SVGLocatableImpl implements SVGSVGElement
 	private SVGViewSpec currentView;
 	
 	private SVGAnimatedRect viewBox;
-	
+
+	@Getter
+	@Setter
 	private SVGPoint currentTranslate;
 	
 	@Getter
@@ -213,22 +215,6 @@ public class SVGSVGElementImpl extends SVGLocatableImpl implements SVGSVGElement
 	@Override
 	public void setCurrentScale(final float currentScale) {
 		this.currentScale = currentScale;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public SVGPoint getCurrentTranslate() {
-		return currentTranslate;
-	}
-
-	/**
-	 * <p>Setter for the field currentTranslate.</p>
-	 *
-	 * @param currentTranslate a {@link org.loboevolution.html.dom.svg.SVGPoint} object.
-	 * @throws DOMException if any.
-	 */
-	public void setCurrentTranslate(final SVGPoint currentTranslate) {
-		this.currentTranslate = currentTranslate;
 	}
 
 	/** {@inheritDoc} */

@@ -26,11 +26,16 @@
 
 package org.sexydock.tabs;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import org.sexydock.tabs.jhrome.JhromeTabUI;
 
 import javax.swing.*;
 import java.awt.*;
 
+@EqualsAndHashCode(callSuper = true)
+@Data
 public class Tab extends JComponent {
     private static final String uiClassId = "TabUI";
 
@@ -68,19 +73,11 @@ public class Tab extends JComponent {
         return (o1 == o2) || (o1 != null && o1.equals(o2)) || (o2 != null && o2.equals(o1));
     }
 
-    public boolean isRollover() {
-        return rollover;
-    }
-
     public void setRollover(final boolean rollover) {
         if (this.rollover != rollover) {
             this.rollover = rollover;
             firePropertyChange("rollover", !rollover, rollover);
         }
-    }
-
-    public boolean isSelected() {
-        return selected;
     }
 
     public void setSelected(final boolean selected) {
@@ -98,20 +95,12 @@ public class Tab extends JComponent {
         super.setUI(ui);
     }
 
-    public String getTitle() {
-        return title;
-    }
-
     public void setTitle(final String title) {
         if (!equals(title, this.title)) {
             final String oldValue = this.title;
             this.title = title;
             firePropertyChange("title", oldValue, title);
         }
-    }
-
-    public Component getTabComponent() {
-        return tabComponent;
     }
 
     public void setTabComponent(final Component overrideTitle) {
@@ -122,10 +111,6 @@ public class Tab extends JComponent {
         }
     }
 
-    public Icon getIcon() {
-        return icon;
-    }
-
     public void setIcon(final Icon icon) {
         if (this.icon != icon) {
             final Icon oldValue = this.icon;
@@ -134,20 +119,12 @@ public class Tab extends JComponent {
         }
     }
 
-    public int getMnemonic() {
-        return mnemonic;
-    }
-
     public void setMnemonic(final int mnemonic) {
         if (this.mnemonic != mnemonic) {
             final int oldValue = this.mnemonic;
             this.mnemonic = mnemonic;
             firePropertyChange("mnemonic", oldValue, mnemonic);
         }
-    }
-
-    public int getDisplayedMnemonicIndex() {
-        return displayedMnemonicIndex;
     }
 
     public void setDisplayedMnemonicIndex(final int displayedMnemonic) {
@@ -160,14 +137,6 @@ public class Tab extends JComponent {
 
     public Component getRenderer() {
         return this;
-    }
-
-    public Component getContent() {
-        return content;
-    }
-
-    public void setContent(final Component tabContent) {
-        this.content = tabContent;
     }
 
     /**

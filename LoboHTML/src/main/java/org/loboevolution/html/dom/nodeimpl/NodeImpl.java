@@ -29,6 +29,7 @@
 package org.loboevolution.html.dom.nodeimpl;
 
 import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.common.Nodes;
@@ -78,6 +79,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	protected volatile boolean notificationsSuspended = false;
 	protected volatile Node parentNode;
 	private volatile String prefix;
+	@Setter
 	private String namespaceURI;
 	private RenderState renderState = INVALID_RENDER_STATE;
 	protected UINode uiNode;
@@ -1346,10 +1348,6 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 			throw new DOMException(DOMException.NAMESPACE_ERR, "Invalid prefix");
 		}
 		this.prefix = prefix;
-	}
-
-	public void setNamespaceURI(final String namespaceURI) {
-		this.namespaceURI = namespaceURI;
 	}
 
 	/** {@inheritDoc} */

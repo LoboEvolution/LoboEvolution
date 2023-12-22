@@ -25,6 +25,7 @@
  */
 package org.loboevolution.pdfview;
 
+import lombok.Getter;
 import org.loboevolution.pdfview.decode.PDFDecoder;
 import org.loboevolution.pdfview.decrypt.IdentityDecrypter;
 import org.loboevolution.pdfview.decrypt.PDFDecrypter;
@@ -145,13 +146,25 @@ public class PDFObject {
     private SoftReference<?> cache;
 
     /**
-     * @see #getObjNum()
+     * Get the object number of this object; a negative value indicates that
+     * the object is not numbered, as it's not a top-level object: if the value
+     * is {@link #OBJ_NUM_EMBEDDED}, it is because it's embedded within
+     * another object. If the value is {@link #OBJ_NUM_TRAILER}, it's because
+     * it's an object from the trailer.
+     * the object number, if positive
      */
+    @Getter
     private int objNum = OBJ_NUM_EMBEDDED;
 
     /**
-     * @see #getObjGen()
+     * Get the object generation number of this object; a negative value
+     * indicates that the object is not numbered, as it's not a top-level
+     * object: if the value is {@link #OBJ_NUM_EMBEDDED}, it is because it's
+     * embedded within another object. If the value is {@link
+     * #OBJ_NUM_TRAILER}, it's because it's an object from the trailer.
+     * the object generation number, if positive
      */
+    @Getter
     private int objGen = OBJ_NUM_EMBEDDED;
 
     /**
@@ -677,32 +690,6 @@ public class PDFObject {
         assert objGen >= OBJ_NUM_TRAILER;
         this.objNum = objNum;
         this.objGen = objGen;
-    }
-
-    /**
-     * Get the object number of this object; a negative value indicates that
-     * the object is not numbered, as it's not a top-level object: if the value
-     * is {@link #OBJ_NUM_EMBEDDED}, it is because it's embedded within
-     * another object. If the value is {@link #OBJ_NUM_TRAILER}, it's because
-     * it's an object from the trailer.
-     *
-     * @return the object number, if positive
-     */
-    public int getObjNum() {
-        return objNum;
-    }
-
-    /**
-     * Get the object generation number of this object; a negative value
-     * indicates that the object is not numbered, as it's not a top-level
-     * object: if the value is {@link #OBJ_NUM_EMBEDDED}, it is because it's
-     * embedded within another object. If the value is {@link
-     * #OBJ_NUM_TRAILER}, it's because it's an object from the trailer.
-     *
-     * @return the object generation number, if positive
-     */
-    public int getObjGen() {
-        return objGen;
     }
 
     /**
