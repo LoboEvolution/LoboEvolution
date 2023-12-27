@@ -961,16 +961,15 @@ public abstract class ElementImpl extends NodeImpl implements Element {
 	/** {@inheritDoc} */
 	@Override
 	public DOMRect getBoundingClientRect() {
-
-		final CSSStyleDeclaration currentStyle = ((HTMLElementImpl)this).getCurrentStyle();
+		final CSSStyleDeclaration currentStyle = ((HTMLElementImpl) this).getCurrentStyle();
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
 		final Window win = doc.getDefaultView();
-		final RenderState rs  = doc.getRenderState();
+		final RenderState rs = doc.getRenderState();
 		int width = calculateWidth(true, true, true);
 		final int height = calculateHeight(true, true, true);
 		final String position = currentStyle.getPosition();
-		int marginLeft =  HtmlValues.getPixelSize(currentStyle.getMarginLeft(), rs, win, 0);
-		int marginTop =  HtmlValues.getPixelSize(currentStyle.getMarginTop(), rs, win, 0);
+		int marginLeft = HtmlValues.getPixelSize(currentStyle.getMarginLeft(), rs, win, 0);
+		int marginTop = HtmlValues.getPixelSize(currentStyle.getMarginTop(), rs, win, 0);
 
 		int top = 8;
 		int left = 8;
@@ -980,7 +979,7 @@ public abstract class ElementImpl extends NodeImpl implements Element {
 			left = 0;
 		}
 
-		if(CSSValues.ABSOLUTE.isEqual(position)){
+		if (CSSValues.ABSOLUTE.isEqual(position)) {
 			final int topLeft = HtmlValues.getPixelSize(currentStyle.getWidth(), rs, win, 0);
 			top = HtmlValues.getPixelSize(currentStyle.getTop(), rs, win, 0);
 			final String leftTxt = currentStyle.getLeft();
@@ -1301,17 +1300,24 @@ public abstract class ElementImpl extends NodeImpl implements Element {
 		final boolean padding = !"border-box".equals(currentStyle.getBoxSizing()) && isPadding;
 		final boolean border = !"border-box".equals(currentStyle.getBoxSizing()) && isBorder;
 
-		int widthSize;
+		Integer widthSize;
 
 		if (getParentNode() == null ||
 				rs.getDisplay() == RenderState.DISPLAY_NONE ||
 				(isClient && rs.getDisplay() == RenderState.DISPLAY_INLINE)) {
 			widthSize = 0;
 		} else {
-			final int parentWidth = this instanceof HTMLHtmlElement ? -1 : isClient ? getParentElement().getClientWidth() : getParentElement().getOffsetWidth();
+			Integer parentWidth;
+			if (this instanceof HTMLHtmlElement) {
+				parentWidth = -1;
+			} else if (isClient) {
+				parentWidth = getParentElement().getClientWidth();
+			} else {
+				parentWidth = getParentElement().getOffsetWidth();
+			}
 			widthSize = HtmlValues.getPixelSize(CSSValues.AUTO.isEqual(width) ? "100%" : Strings.isBlank(width) ? childWidth(this, doc, parentWidth) + "px" : width, null, doc.getDefaultView(), 0, parentWidth);
 			if (Strings.isBlank(width) && rs.getDisplay() == RenderState.DISPLAY_BLOCK) {
-				widthSize = parentWidth;
+				widthSize = parentWidth == null ? 0 : parentWidth;
 			} else {
 
 				if (widthSize == 0 && (this instanceof HTMLInputElement ||
@@ -1377,7 +1383,15 @@ public abstract class ElementImpl extends NodeImpl implements Element {
 				(isClient && rs.getDisplay() == RenderState.DISPLAY_INLINE)) {
 			heightSize = 0;
 		} else {
-			final int parentHeight = this instanceof HTMLHtmlElement ? preferredSize.height : isClient ? getParentElement().getClientHeight() : getParentElement().getOffsetHeight();
+			Integer parentHeight;
+			if (this instanceof HTMLHtmlElement) {
+				parentHeight = preferredSize.height;
+			} else if (isClient) {
+				parentHeight = getParentElement().getClientHeight();
+			} else {
+				parentHeight = getParentElement().getOffsetHeight();
+			}
+
 			heightSize = HtmlValues.getPixelSize(CSSValues.AUTO.isEqual(height) ? "100%" : Strings.isBlank(height) ? childHeight(this, position, doc, parentHeight) + "px" : height, null, doc.getDefaultView(), 0, parentHeight);
 			if (heightSize == 0 && (this instanceof HTMLInputElement ||
 					this instanceof HTMLButtonElement ||

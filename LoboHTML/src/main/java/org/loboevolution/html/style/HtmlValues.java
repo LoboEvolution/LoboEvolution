@@ -262,7 +262,7 @@ public class HtmlValues {
 	 * @param availSize a {@link java.lang.Integer} object.
 	 * @return a {@link java.lang.Integer} object.
 	 */
-	public static Integer getPixelSize(final String spec, final RenderState renderState, final Window window, final Integer errorValue, final int availSize) {
+	public static Integer getPixelSize(final String spec, final RenderState renderState, final Window window, final Integer errorValue, final Integer availSize) {
 		try {
 			if (spec.endsWith("%")) {
 				final String perText = spec.substring(0, spec.length() - 1);
