@@ -63,16 +63,13 @@ public class hc_attrappendchild2Test extends LoboUnitTest {
         attributes = testNode.getAttributes();
         titleAttr = (Attr) attributes.getNamedItem("title");
         newChild = doc.createElement("terday");
-
-        {
-            boolean success = false;
-            try {
-                titleAttr.appendChild(newChild);
-            } catch (final DOMException ex) {
-                success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
-            }
-            assertTrue(success);
+        boolean success = false;
+        try {
+            titleAttr.appendChild(newChild);
+        } catch (final DOMException ex) {
+            success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
         }
+        assertTrue(success);
     }
 }
 

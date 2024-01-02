@@ -75,27 +75,22 @@ public class setAttributeNodeNS01Test extends LoboUnitTest {
         final Attr newAttr;
         final HTMLCollection elementList;
         final Node testAddr;
-        final Node appendedChild;
-        final Attr setAttr1;
-        final Attr setAttr2;
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagName("address");
         testAddr = elementList.item(0);
         assertNotNull(testAddr);
         newElement = doc.createElement("newElement");
-        appendedChild = testAddr.appendChild(newElement);
+        testAddr.appendChild(newElement);
         newAttr = doc.createAttributeNS(namespaceURI, qualifiedName);
-        setAttr1 = newElement.setAttributeNodeNS(newAttr);
+        newElement.setAttributeNodeNS(newAttr);
 
-        {
-            boolean success = false;
-            try {
-                setAttr2 = ((Element) testAddr).setAttributeNodeNS(newAttr);
-            } catch (final DOMException ex) {
-                success = (ex.getCode() == DOMException.INUSE_ATTRIBUTE_ERR);
-            }
-            assertTrue(success);
+        boolean success = false;
+        try {
+            ((Element) testAddr).setAttributeNodeNS(newAttr);
+        } catch (final DOMException ex) {
+            success = (ex.getCode() == DOMException.INUSE_ATTRIBUTE_ERR);
         }
+        assertTrue(success);
     }
 }
 

@@ -495,10 +495,10 @@ public class XHtmlParser {
 						element.setUserData(MODIFYING_KEY, Boolean.TRUE, null);
 
 						safeAppendChild(parent, element);
-						final AtomicReference<ElementImpl> atomicReference = new AtomicReference<>(element);
+						final AtomicReference<ElementImpl> elementAtomicReference = new AtomicReference<>(element);
 
 						attributeInfo.forEach(info -> {
-							setAttributeNode(atomicReference.get(), info.getAttributeName(), info.getAttributeValue());
+							setAttributeNode(elementAtomicReference.get(), info.getAttributeName(), info.getAttributeValue());
 						});
 
 						if (stopTags != null && stopTags.contains(HTMLTag.get(normalTag))) {
@@ -1358,16 +1358,14 @@ public class XHtmlParser {
 
 		if (this.document.isXml()) {
 			String namespaceURI = null;
-
-			final String key = attributeName.contains(":") ?
-					attributeName.split(":")[attributeName.contains("xmlns") ? 1 : 0] :
-					attributeName;
-
-			if (getNamespaces().get(key) == null) {
-				getNamespaces().put(key, attributeValue);
-				namespaceURI = attributeValue;
-			} else {
-				namespaceURI = getNamespaces().get(key);
+			if (attributeName.contains(":")) {
+				String key = attributeName.split(":")[attributeName.contains("xmlns") ? 1 : 0];
+				if (getNamespaces().get(key) == null) {
+					getNamespaces().put(key, attributeValue);
+					namespaceURI = attributeValue;
+				} else {
+					namespaceURI = getNamespaces().get(key);
+				}
 			}
 
 			if (Strings.isNotBlank(namespaceURI)) {

@@ -159,7 +159,7 @@ public class AttrUnitTest extends LoboUnitTest {
                 + "  }\n"
                 + "</script></head><body onload='test()'>\n"
                 + "</body></html>";
-        final String[] messages = {"[object Attr]", "", "[object Attr]", ""};
+        final String[] messages = {"[object Attr]", null, "[object Attr]", null};
         checkHtmlAlert(html, messages);
     }
 

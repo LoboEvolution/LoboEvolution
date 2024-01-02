@@ -67,7 +67,7 @@ public class EntityReferenceImpl extends NodeImpl implements EntityReference {
 
     @Override
     public String getLocalName() {
-        return "";
+        return this.nodeName;
     }
 
     @Override

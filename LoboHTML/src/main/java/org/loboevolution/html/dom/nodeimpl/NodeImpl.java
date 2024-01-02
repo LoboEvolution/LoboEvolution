@@ -110,6 +110,12 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Use setAttributeNode to add attribute nodes.");
 		}
 
+		if (getNodeType() == Node.ATTRIBUTE_NODE) {
+			if (newChild.getNodeType() == Node.ELEMENT_NODE) {
+				throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Cannot insert Node.");
+			}
+		}
+
 		if (newChild.getNodeType() == Node.DOCUMENT_TYPE_NODE) {
 			final NodeListImpl list = getNodeList();
 			list.forEach(n -> {

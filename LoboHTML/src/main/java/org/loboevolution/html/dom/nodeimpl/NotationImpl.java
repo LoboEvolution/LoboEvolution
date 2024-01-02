@@ -41,7 +41,7 @@ public class NotationImpl extends NodeImpl implements Notation {
 
     @Override
     public String getLocalName() {
-        return "";
+        return this.nodeName;
     }
 
     @Override

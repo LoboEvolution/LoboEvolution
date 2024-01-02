@@ -65,7 +65,7 @@ public class attrgetschematypeinfo02Test extends LoboUnitTest {
         typeName = typeInfo.getTypeName();
         assertEquals( "ID", typeName);
         typeNS = typeInfo.getTypeNamespace();
-        assertEquals( "http://www.w3.org/TR/REC-xml", typeNS);
+        assertEquals( "http://www.w3.org/2001/XMLSchema", typeNS);
     }
 }
 

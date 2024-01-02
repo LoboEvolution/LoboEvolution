@@ -54,12 +54,19 @@ public class AttributeTypeInfo implements TypeInfo {
      */
     @Override
     public String getTypeName() {
-        if (node instanceof Attr && ((Attr) node).isId()) {
-            return "ID";
-        }
+        if (node instanceof Attr) {
 
-        if (node instanceof Attr && node.getNodeValue() != null) {
-            return "string";
+            if( ((Attr) node).isId()){
+                return "ID";
+            }
+
+            if("class".equals(node.getNodeName())){
+                return "classType";
+            }
+
+            if(node.getNodeValue() != null){
+                return "string";
+            }
         }
 
         if (node instanceof CDATASection) {

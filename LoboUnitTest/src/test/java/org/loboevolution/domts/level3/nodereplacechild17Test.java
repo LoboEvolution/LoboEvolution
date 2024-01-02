@@ -53,13 +53,12 @@ public class nodereplacechild17Test extends LoboUnitTest {
         final ProcessingInstruction replacedPi;
         final String data;
         final String target;
-        Node appendedChild;
         doc = sampleXmlFile("hc_staff.xml");
         docFrag = doc.createDocumentFragment();
         cmt = doc.createComment("Comment");
         pi = doc.createProcessingInstruction("target", "Comment");
-        appendedChild = docFrag.appendChild(pi);
-        appendedChild = docFrag.appendChild(cmt);
+        docFrag.appendChild(pi);
+        docFrag.appendChild(cmt);
         replacedCmt = (Comment) docFrag.replaceChild(pi, cmt);
         data = replacedCmt.getData();
         assertEquals( "Comment", data);

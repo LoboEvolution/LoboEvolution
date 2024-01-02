@@ -81,7 +81,7 @@ public class DOMElementTest extends LoboUnitTest {
         assertSame(idattr, attrs.item(0));
         final Attr attr = document.createAttribute("lang");
         attr.setValue("en");
-        attrs.setNamedItem(attr);
+        body.setAttributeNode(attr);
         assertEquals(2, attrs.getLength());
         assertTrue(body.hasAttribute("lang"));
         assertEquals("en", body.getAttribute("lang"));

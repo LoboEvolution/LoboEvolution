@@ -66,6 +66,7 @@ import java.io.Reader;
 import java.io.StringReader;
 import java.util.List;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
@@ -214,6 +215,7 @@ public abstract class ElementImpl extends NodeImpl implements Element {
 			removeAttributeNode((AttrImpl) node);
 		}
 
+
 		final AttrImpl attr = new AttrImpl(name, value, "id".equalsIgnoreCase(name), this, true);
 		final Document doc = getOwnerDocument();
 		attr.setOwnerDocument(doc);
@@ -256,8 +258,13 @@ public abstract class ElementImpl extends NodeImpl implements Element {
 			qualifiedName = split[1];
 
 		} else {
+
 			if (!Strings.isXMLIdentifier(qualifiedName)) {
 				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
+			}
+
+			if (qualifiedName.equals("xmlns") && !"http://www.w3.org/2000/xmlns".equals(namespaceURI)) {
+				throw new DOMException(DOMException.NAMESPACE_ERR, "The namespaceURI is not http://www.w3.org/XML/1998/namespace.");
 			}
 		}
 
@@ -337,18 +344,22 @@ public abstract class ElementImpl extends NodeImpl implements Element {
 	/** {@inheritDoc} */
 	@Override
 	public Attr setAttributeNodeNS(final Attr newAttr) throws DOMException {
-		final Attr checkAttr = getAttributeNodeNS(newAttr.getNamespaceURI(), newAttr.getLocalName());
-		if (checkAttr == null && Objects.equals(newAttr.getOwnerElement(), this)) {
+        final NodeListImpl childNodes = (NodeListImpl) getDescendents(new ElementFilter(null), true);
+        AtomicBoolean check = new AtomicBoolean(false);
+        childNodes.forEach(child -> {
+                if (child instanceof Element && !check.get()) {
+                    ElementImpl el = (ElementImpl) child;
+                    Attr checkAttr = el.getAttributeNodeNS(newAttr.getNamespaceURI(), newAttr.getLocalName());
+                    check.set(checkAttr != null);
+                }
+        });
+		if (((newAttr.getOwnerElement() != null && check.get()) || Objects.equals(newAttr.getOwnerElement(), this))) {
 			throw new DOMException(DOMException.INUSE_ATTRIBUTE_ERR,
 					"Attr is already an attribute of another Element object. The DOM user must explicitly clone Attr nodes to re-use them in other elements.");
 		}
 
 		if(!Objects.equals(newAttr.getOwnerDocument(), getOwnerDocument())) {
 			throw new DOMException(DOMException.WRONG_DOCUMENT_ERR, "Different Document");
-		}
-
-		if (checkAttr != null && Objects.equals(checkAttr.getNamespaceURI(), newAttr.getNamespaceURI())) {
-			removeAttributeNS(newAttr.getNamespaceURI(), newAttr.getLocalName());
 		}
 
 		newAttr.setOwnerElement(this);

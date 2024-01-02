@@ -76,9 +76,15 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 	public Node getNamedItem(final String name) {
 		final AtomicReference<Node> atomicReference = new AtomicReference<>();
 		if (Strings.isNotBlank(name)) {
+			String nm = name.contains(":") ? name.split(":")[1] : name;
 			attributes.forEach(attr -> {
-				final String key = attr.getNodeName();
-				if (name.equalsIgnoreCase(key)) {
+				final String key = attr.getLocalName();
+
+				if(!name.contains(":") && attr.getPrefix() == null && nm.equalsIgnoreCase(key) && atomicReference.get() == null) {
+					atomicReference.set(attr);
+				}
+
+				if(name.contains(":") && attr.getPrefix() != null && nm.equalsIgnoreCase(key) && atomicReference.get() == null) {
 					atomicReference.set(attr);
 				}
 			});
@@ -89,13 +95,16 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 	/** {@inheritDoc} */
 	@Override
 	public Node getNamedItemNS(final String namespaceURI, final String localName) {
+		if (namespaceURI == null) {
+			return getNamedItem(localName);
+		}
+
 		final AtomicReference<Node> atomicReference = new AtomicReference<>();
 		if (Strings.isNotBlank(localName)) {
 			attributes.forEach(attr -> {
 				final String namespace = attr.getNamespaceURI();
 				final String parentNamespace = owner.getParentNode() != null ? owner.getParentNode().getNamespaceURI() : null;
-
-					if (Strings.isBlank(namespaceURI) || "*".equals(namespaceURI) || namespaceURI.equals(namespace) || namespaceURI.equals(parentNamespace)) {
+				if (Strings.isBlank(namespaceURI) || "*".equals(namespaceURI) || namespaceURI.equals(namespace) || namespaceURI.equals(parentNamespace)) {
 					if (attr.getLocalName().equalsIgnoreCase(localName)) {
 						atomicReference.set(attr);
 					}
@@ -182,18 +191,15 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 			throw new DOMException(DOMException.WRONG_DOCUMENT_ERR, "Different Document");
 		}
 
+		final Node check = getNamedItem(node.getNodeName());
+		this.attributes.remove(check);
+
 		if (node instanceof Attr) {
 			final Attr attr = (Attr) node;
 			final TextImpl t = new TextImpl(attr.getValue());
 			t.setOwnerDocument(attr.getOwnerDocument());
 			t.setParentImpl(attr.getParentNode());
 			attr.appendChild(t);
-			final Node check = getNamedItem(attr.getNodeName());
-			if (check != null) {
-				this.attributes.remove(check);
-				this.attributes.add(node);
-				return node;
-			}
 		}
 
 		this.attributes.add(node);

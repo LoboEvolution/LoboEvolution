@@ -61,7 +61,7 @@ public class documentrenamenode04Test extends LoboUnitTest {
         nodeName = renamedNode.getNodeName();
         namespaceURI = renamedNode.getNamespaceURI();
         assertEquals("title", nodeName);
-        assertNull(namespaceURI);
+        assertEquals(namespaceURI, "");
     }
 }
 

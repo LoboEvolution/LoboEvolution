@@ -54,7 +54,6 @@ public class attrgetschematypeinfo06Test extends LoboUnitTest {
         final Document doc;
         final HTMLCollection elemList;
         final Element acronymElem;
-        Element elem;
         final Attr attr;
         final TypeInfo typeInfo;
         final String typeName;

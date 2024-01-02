@@ -42,12 +42,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * The "setAttributeNS(namespaceURI,localName,value)" method raises a
  * NAMESPACE_ERR DOMException if the "qualifiedName" has a
  * value of "xmlns" and the namespaceURI is different from
- * http://www.w3.org/2000/xmlns.
+ * <a href="http://www.w3.org/2000/xmlns">...</a>.
  * <p>
  * Attempt to add an attribute with a "qualifiedName" of "xmlns" as the
  * on the first employee node.
  * An exception should be raised since the namespaceURI of this node is not
- * http://www.w3.org/2000/xmlns.
+ * <a href="http://www.w3.org/2000/xmlns">...</a>.
  *
  * @author NIST
  * @author Mary Brady
@@ -72,15 +72,14 @@ public class setAttributeNS07Test extends LoboUnitTest {
         elementList = doc.getElementsByTagName("employee");
         testAddr = elementList.item(0);
 
-        {
-            boolean success = false;
-            try {
-                ((Element) testAddr).setAttributeNS(namespaceURI, qualifiedName, "newValue");
-            } catch (final DOMException ex) {
-                success = (ex.getCode() == DOMException.NAMESPACE_ERR);
-            }
-            assertTrue(success);
+        boolean success = false;
+        try {
+            ((Element) testAddr).setAttributeNS(namespaceURI, qualifiedName, "newValue");
+        } catch (final DOMException ex) {
+            success = (ex.getCode() == DOMException.NAMESPACE_ERR);
         }
+        assertTrue(success);
+
     }
 }
 

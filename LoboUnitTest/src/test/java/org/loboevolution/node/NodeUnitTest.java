@@ -719,7 +719,7 @@ public class NodeUnitTest extends LoboUnitTest {
                         + "  </body>\n"
                         + "</html>";
 
-        final String[] messages = {"null"};
+        final String[] messages = {null};
         checkHtmlAlert(html, messages);
     }
 

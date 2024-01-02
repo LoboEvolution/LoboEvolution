@@ -27,7 +27,6 @@
 package org.loboevolution.domts.level3;
 
 
-import org.htmlunit.cssparser.dom.DOMException;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.DOMImplementation;
@@ -52,37 +51,22 @@ public class nodereplacechild13Test extends LoboUnitTest {
         final Document doc;
         final DocumentType docType;
         final DocumentType newDocType;
-        final DocumentType replaced;
+        DocumentType replaced;
         final DOMImplementation domImpl;
         final String nodeName;
-        final String nullPubId = null;
-
-        final String nullSysId = null;
-
         final Element docElem;
         final String docElemName;
-        final String docElemNS;
         doc = sampleXmlFile("hc_staff.xml");
         docElem = doc.getDocumentElement();
         docElemName = docElem.getTagName();
-        docElemNS = docElem.getNamespaceURI();
         docType = doc.getDoctype();
         domImpl = doc.getImplementation();
-        newDocType = domImpl.createDocumentType(docElemName, nullPubId, nullSysId);
-
-        try {
-            replaced = (DocumentType) doc.replaceChild(newDocType, docType);
-
-        } catch (final DOMException ex) {
-            switch (ex.getCode()) {
-                case 9:
-                    return;
-                default:
-                    throw ex;
-            }
-        }
+        newDocType = domImpl.createDocumentType(docElemName, null, null);
+        replaced = (DocumentType) doc.replaceChild(newDocType, docType);
         nodeName = replaced.getNodeName();
+        System.out.println(nodeName);
         assertEquals(docElemName, nodeName);
+
     }
 }
 
