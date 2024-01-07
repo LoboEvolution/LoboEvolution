@@ -105,6 +105,11 @@ public class DocumentTypeImpl extends NodeImpl implements DocumentType {
 	}
 
 	@Override
+	public Node getParentNode() {
+		return getOwnerDocument();
+	}
+
+	@Override
 	public boolean hasAttributes() {
 		return false;
 	}

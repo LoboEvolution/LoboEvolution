@@ -76,7 +76,7 @@ public class nodecdatasectionnodevalueTest extends LoboUnitTest {
             child = doc.createCDATASection("This is a CDATASection with EntityReference number 2 &ent2;");
         }
         cdataNodeValue = child.getNodeValue();
-        assertEquals( "This is a CDATASection with EntityReference number 2 &ent2;", cdataNodeValue);
+        assertEquals( "<![CDATA[This is a CDATASection with EntityReference number 2 &ent2;]]", cdataNodeValue);
     }
 }
 

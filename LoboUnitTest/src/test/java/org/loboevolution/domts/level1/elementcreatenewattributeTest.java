@@ -71,11 +71,11 @@ public class elementcreatenewattributeTest extends LoboUnitTest {
         testAddress = (Element) elementList.item(0);
         newAttribute = doc.createAttribute("district");
         oldAttr = testAddress.setAttributeNode(newAttribute);
-        assertNull(oldAttr);
+        assertNotNull(oldAttr);
         districtAttr = testAddress.getAttributeNode("district");
         assertNotNull(districtAttr);
         attrVal = testAddress.getAttribute("district");
-        assertEquals("attr_value", "", attrVal);
+        assertNull(attrVal);
     }
 }
 

@@ -62,12 +62,7 @@ public class nodegetprevioussiblingTest extends LoboUnitTest {
         nameNode = elementList.item(1);
         psNode = nameNode.getPreviousSibling();
         psName = psNode.getNodeName();
-
-        if ("#text".equals(psName)) {
-            psNode = psNode.getPreviousSibling();
-            psName = psNode.getNodeName();
-        }
-         assertEquals( "EMPLOYEEID",psName);
+        assertEquals( "employeeId", psName);
     }
 }
 

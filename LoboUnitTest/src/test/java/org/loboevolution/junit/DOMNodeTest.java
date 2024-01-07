@@ -873,14 +873,14 @@ public class DOMNodeTest extends LoboUnitTest {
 		elm.setAttributeNode(attr);
 		assertTrue(elm.hasAttributes());
 		assertFalse(elm.hasChildNodes());
-		assertNull(attr.getParentNode());
+		assertNotNull(attr.getParentNode());
 		Text text = document.createTextNode("foo");
 		elm.appendChild(text);
 		assertTrue(elm.hasChildNodes());
 		assertSame(elm, text.getParentNode());
 		text = (Text) elm.removeChild(text);
 		assertFalse(elm.hasChildNodes());
-		assertNotNull(text.getParentNode());
+		assertNull(text.getParentNode());
 		assertNull(text.getNextSibling());
 		assertNull(text.getPreviousSibling());
 		assertNull(text.getNextElementSibling());
@@ -892,7 +892,7 @@ public class DOMNodeTest extends LoboUnitTest {
 		assertTrue(html.hasChildNodes());
 		assertNotNull(html.getFirstChild());
 		assertNotNull(html.getLastChild());
-		assertNotNull(elm.getParentNode());
+		assertNull(elm.getParentNode());
 		assertNull(elm.getNextSibling());
 		assertNull(elm.getPreviousSibling());
 		assertNull(elm.getNextElementSibling());
@@ -959,7 +959,7 @@ public class DOMNodeTest extends LoboUnitTest {
 		//
 		body.removeChild(div);
 		assertTrue(body.hasChildNodes());
-		assertNotNull(div.getParentNode());
+		assertNull(div.getParentNode());
 		assertNull(div.getNextSibling());
 		assertNull(div.getPreviousSibling());
 		assertNull(div.getNextElementSibling());
@@ -987,7 +987,7 @@ public class DOMNodeTest extends LoboUnitTest {
 		//
 		elm = (Element) body.removeChild(elm);
 		assertTrue(body.hasChildNodes());
-		assertNotNull(elm.getParentNode());
+		assertNull(elm.getParentNode());
 		assertNull(elm.getNextSibling());
 		assertNull(elm.getPreviousSibling());
 		assertNull(elm.getNextElementSibling());
@@ -1016,7 +1016,7 @@ public class DOMNodeTest extends LoboUnitTest {
 		assertSame(p, body.getChildNodes().item(1));
 		//
 		body.removeChild(text2);
-		assertNotNull(text2.getParentNode());
+		assertNull(text2.getParentNode());
 		assertNull(text2.getNextSibling());
 		assertNull(text2.getPreviousSibling());
 		assertNull(text2.getNextElementSibling());
@@ -1048,7 +1048,7 @@ public class DOMNodeTest extends LoboUnitTest {
 		assertNull(body.getLastChild());
 		assertNull(body.getFirstElementChild());
 		assertNull(body.getLastElementChild());
-		assertNotNull(p.getParentNode());
+		assertNull(p.getParentNode());
 		assertNull(p.getNextSibling());
 		assertNull(p.getPreviousSibling());
 		assertNull(p.getNextElementSibling());
@@ -1068,8 +1068,8 @@ public class DOMNodeTest extends LoboUnitTest {
 		final Element elm = (Element) html.replaceChild(body2, body);
 		assertEquals(body, elm);
 		assertSame(html, body2.getParentNode());
-		assertNull(elm.getParentNode());
-		assertNull(body.getParentNode());
+		assertNotNull(elm.getParentNode());
+		assertNotNull(body.getParentNode());
 		assertNull(body.getNextSibling());
 		assertNull(body.getPreviousSibling());
 		assertNull(body.getNextElementSibling());
@@ -1082,7 +1082,7 @@ public class DOMNodeTest extends LoboUnitTest {
 		assertSame(foo1, text);
 		assertEquals("foo1", text.getTextContent());
 		assertEquals(body2, foo2.getParentNode());
-		assertNull(text.getParentNode());
+		assertNotNull(text.getParentNode());
 	}
 
 	@Test
@@ -1121,7 +1121,7 @@ public class DOMNodeTest extends LoboUnitTest {
 		final Element elm = (Element) body.replaceChild(div2, div);
 		assertSame(div, elm);
 		assertSame(body, div2.getParentNode());
-		assertNull(elm.getParentNode());
+		assertNotNull(elm.getParentNode());
 		assertNull(elm.getNextSibling());
 		assertNull(elm.getPreviousSibling());
 		assertNull(elm.getNextElementSibling());
@@ -1197,7 +1197,7 @@ public class DOMNodeTest extends LoboUnitTest {
 		assertEquals("p", body.getChildNodes().item(2).getNodeName());
 		assertNotNull(fragment.getFirstChild());
 		assertNotNull(fragment.getLastChild());
-		assertNull(fragment.getParentNode());
+		assertNotNull(fragment.getParentNode());
 	}
 
 	@Test

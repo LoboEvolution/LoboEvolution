@@ -70,17 +70,19 @@ public class XMLSerializerImpl extends AbstractScriptableDelegate implements XML
             if (node.hasAttributes()) {
                 buff.append(" ");
 
-				final NamedNodeMap attributes = node.getAttributes();
-                for (final Node nodeAttr : Nodes.iterable(attributes)) {
-                    final Attr attrItem = (Attr) nodeAttr;
-                    final String name = namespace(attrItem.getNodeName(), withoutNamespaces);
-                    final String value = attrItem.getNodeValue();
+                final NamedNodeMap attributes = node.getAttributes();
+                if (attributes != null) {
+                    for (final Node nodeAttr : Nodes.iterable(attributes)) {
+                        final Attr attrItem = (Attr) nodeAttr;
+                        final String name = namespace(attrItem.getNodeName(), withoutNamespaces);
+                        final String value = attrItem.getNodeValue();
 
-                    buff.append(name)
-                            .append("=")
-                            .append("\"")
-                            .append(value)
-                            .append("\"");
+                        buff.append(name)
+                                .append("=")
+                                .append("\"")
+                                .append(value)
+                                .append("\"");
+                    }
                 }
             }
 

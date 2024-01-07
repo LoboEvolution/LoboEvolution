@@ -74,11 +74,11 @@ public class nodereplacechildnewchildexistsTest extends LoboUnitTest {
         final List<String> expected;
 
         final List<String> expectedWithoutWhitespace = new ArrayList<>();
-        expectedWithoutWhitespace.add("name");
-        expectedWithoutWhitespace.add("position");
-        expectedWithoutWhitespace.add("salary");
-        expectedWithoutWhitespace.add("gender");
-        expectedWithoutWhitespace.add("employeeId");
+        expectedWithoutWhitespace.add("NAME");
+        expectedWithoutWhitespace.add("POSITION");
+        expectedWithoutWhitespace.add("SALARY");
+        expectedWithoutWhitespace.add("GENDER");
+        expectedWithoutWhitespace.add("EMPLOYEEID");
 
         final List<String> expectedWithWhitespace = new ArrayList<>();
         expectedWithWhitespace.add("#text");
@@ -120,6 +120,4 @@ public class nodereplacechildnewchildexistsTest extends LoboUnitTest {
         }
         assertEquals(expected, actual);
     }
-
 }
-

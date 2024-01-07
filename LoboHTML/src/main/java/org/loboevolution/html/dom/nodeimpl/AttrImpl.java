@@ -193,14 +193,15 @@ public class AttrImpl extends NodeImpl implements Attr {
 
     @Override
     public short compareDocumentPosition(final Node other) {
-        short comparison = super.compareDocumentPosition(other);
+        short comparison = 0;
         if (other instanceof Attr) {
             final AttrImpl otherImpl = (AttrImpl) other;
             if (otherImpl.getOwnerElement().isSameNode(this.ownerElement)) {
-                comparison += Node.DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC;
+                comparison = Node.DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC;
             }
+            return comparison;
         }
-        return comparison;
+        return super.compareDocumentPosition(other);
     }
 
     @Override

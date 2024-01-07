@@ -73,7 +73,7 @@ public class elementgetelementsbytagnameaccessnodelistTest extends LoboUnitTest 
          assertEquals( "EMPLOYEEID",childName);
         child = child.getFirstChild();
         childValue = child.getNodeValue();
-        assertEquals("emp0004", "EMP0004", childValue);
+        assertEquals("EMP0004", childValue);
     }
 }
 

@@ -42,9 +42,11 @@ public class AnchorFilter implements NodeFilter {
 	public short acceptNode(final Node node) {
 		if (node instanceof HTMLAnchorElement) {
 			final NamedNodeMap attributes = node.getAttributes();
-			for (final Node attribute : Nodes.iterable(attributes)) {
-				if ("name".equals(((Attr)attribute).getName())) {
-					return NodeFilter.FILTER_ACCEPT;
+			if (attributes != null) {
+				for (final Node attribute : Nodes.iterable(attributes)) {
+					if ("name".equals(((Attr) attribute).getName())) {
+						return NodeFilter.FILTER_ACCEPT;
+					}
 				}
 			}
 		}

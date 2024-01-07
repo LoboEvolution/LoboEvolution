@@ -26,7 +26,6 @@
 
 package org.loboevolution.html.parser;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.htmlunit.cssparser.dom.DOMException;
@@ -34,8 +33,11 @@ import org.loboevolution.common.Strings;
 import org.loboevolution.html.Entities;
 import org.loboevolution.html.HTMLEntities;
 import org.loboevolution.html.HTMLTag;
-import org.loboevolution.html.dom.nodeimpl.*;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
+import org.loboevolution.html.dom.nodeimpl.DocumentTypeImpl;
+import org.loboevolution.html.dom.nodeimpl.ElementImpl;
+import org.loboevolution.html.dom.nodeimpl.EntityReferenceImpl;
+import org.loboevolution.html.dom.nodeimpl.NotationImpl;
 import org.loboevolution.html.node.*;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.info.AttributeInfo;
@@ -351,6 +353,7 @@ public class XHtmlParser {
 								reference = new EntityReferenceImpl();
 							}
 							reference.setOwnerDocument(document);
+							reference.setParentImpl(document);
 
 							if (sp.length > 2) {
 								sp = doctypeStr2.split("[\"\\s+]");
@@ -391,6 +394,7 @@ public class XHtmlParser {
 							final String notationStr = this.parseEndOfTag(reader);
 							final NotationImpl not = new NotationImpl();
 							not.setOwnerDocument(document);
+							not.setParentImpl(document);
 
 							if (notationStr.contains("PUBLIC")) {
 								final String[] split = notationStr.split("PUBLIC");

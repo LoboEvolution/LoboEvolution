@@ -95,7 +95,7 @@ public class HTMLElementTest extends LoboUnitTest {
 		assertEquals(0, attr.getChildNodes().getLength());
 		assertNull(attr.getFirstChild());
 		assertNull(attr.getLastChild());
-		assertNull(attr.getParentNode());
+		assertNotNull(attr.getParentNode());
 		assertEquals("style", attr.getName());
 		assertEquals("style", attr.getNodeName());
 		assertEquals("display:block", attr.getValue());
@@ -119,7 +119,7 @@ public class HTMLElementTest extends LoboUnitTest {
 		assertEquals(0, attr.getChildNodes().getLength());
 		assertNull(attr.getFirstChild());
 		assertNull(attr.getLastChild());
-		assertNull(attr.getParentNode());
+		assertNotNull(attr.getParentNode());
 		assertEquals("xmlns", attr.getName());
 		assertEquals("http://www.w3.org/2000/xmlns/", attr.getNamespaceURI());
 		assertEquals(HTMLDocument.HTML_NAMESPACE_URI, attr.getValue());
@@ -136,7 +136,7 @@ public class HTMLElementTest extends LoboUnitTest {
 		assertEquals(0, attr.getChildNodes().getLength());
 		assertNull(attr.getFirstChild());
 		assertNull(attr.getLastChild());
-		assertNull(attr.getParentNode());
+		assertNotNull(attr.getParentNode());
 		assertEquals("http://www.w3.org/2000/svg", attr.getNamespaceURI());
 		assertEquals("version", attr.getName());
 		assertEquals("version", attr.getNodeName());
@@ -261,7 +261,7 @@ public class HTMLElementTest extends LoboUnitTest {
 		body.setAttributeNode(attr);
 		assertTrue(body.hasAttributes());
 		assertTrue(attr.isId());
-		assertNull(attr.getParentNode());
+		assertNotNull(attr.getParentNode());
 		assertEquals("bodyId", body.getAttribute("id"));
 		assertEquals(1, body.getAttributes().getLength());
 		// Set the attribute to itself
@@ -301,7 +301,7 @@ public class HTMLElementTest extends LoboUnitTest {
 		body.setAttributeNode(attr);
 		assertTrue(body.hasAttributes());
 		assertTrue(attr.isId());
-		assertNull(attr.getParentNode());
+		assertNotNull(attr.getParentNode());
 		assertEquals("ID", attr.getLocalName());
 		assertEquals("bodyId", body.getAttribute("ID"));
 		assertEquals(1, body.getAttributes().getLength());
@@ -344,7 +344,7 @@ public class HTMLElementTest extends LoboUnitTest {
 		assertEquals(1, nnm.getLength());
 		Attr attr = (Attr) nnm.item(0);
 		assertTrue(attr.isId());
-		assertNull(attr.getParentNode());
+		assertNotNull(attr.getParentNode());
 		assertEquals("ID", attr.getLocalName());
 		assertSame(attr, nnm.getNamedItem("ID"));
 		assertSame(attr, nnm.getNamedItemNS(null, "id"));
@@ -401,7 +401,7 @@ public class HTMLElementTest extends LoboUnitTest {
 		assertEquals("foo bar", attr.getValue());
 		body.setAttributeNode(attr);
 		assertTrue(body.hasAttribute("class"));
-		assertNull(attr.getParentNode());
+		assertNotNull(attr.getParentNode());
 		assertEquals("foo bar", attr.getValue());
 
 		fooelms = (HTMLCollectionImpl) document.getElementsByClassName("foo");
@@ -438,7 +438,7 @@ public class HTMLElementTest extends LoboUnitTest {
 		assertEquals("foo bar", attr.getValue());
 		body.setAttributeNode(attr);
 		assertTrue(body.hasAttribute("CLASS"));
-		assertNull(attr.getParentNode());
+		assertNotNull(attr.getParentNode());
 		assertEquals("foo bar", attr.getValue());
 		fooelms = (HTMLCollectionImpl) document.getElementsByClassName("foo");
 

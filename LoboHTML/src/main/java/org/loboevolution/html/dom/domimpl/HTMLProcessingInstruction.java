@@ -31,7 +31,11 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.htmlunit.cssparser.dom.DOMException;
+import org.loboevolution.html.node.NamedNodeMap;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.ProcessingInstruction;
 
@@ -39,9 +43,12 @@ import org.loboevolution.html.node.ProcessingInstruction;
  * HTML DOM object representing processing instruction as per HTML 4.0
  * specification.
  */
+@Getter
+@Setter
 public class HTMLProcessingInstruction extends HTMLElementImpl implements ProcessingInstruction {
 
 	private String data;
+
 	private String target;
 
 	/**
@@ -51,12 +58,6 @@ public class HTMLProcessingInstruction extends HTMLElementImpl implements Proces
 	 */
 	public HTMLProcessingInstruction(final String name) {
 		super(name);
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public String getData() {
-		return this.data;
 	}
 
 	/** {@inheritDoc} */
@@ -83,31 +84,11 @@ public class HTMLProcessingInstruction extends HTMLElementImpl implements Proces
 		return this.data;
 	}
 
-	/** {@inheritDoc} */
-	@Override
-	public String getTarget() {
-		return this.target;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setData(final String data) {
-		this.data = data;
-	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void setNodeValue(final String nodeValue) {
 		this.data = nodeValue;
-	}
-
-	/**
-	 * <p>Setter for the field <code>target</code>.</p>
-	 *
-	 * @param target a {@link java.lang.String} object.
-	 */
-	public void setTarget(final String target) {
-		this.target = target;
 	}
 
 	/** {@inheritDoc} */
@@ -156,6 +137,11 @@ public class HTMLProcessingInstruction extends HTMLElementImpl implements Proces
 	public int getClientHeight() {
 		final int clientHeight = super.getClientHeight();
 		return clientHeight == 0 ? 16 : clientHeight;
+	}
+
+	@Override
+	public NamedNodeMap getAttributes() {
+		return null;
 	}
 
 	@Override

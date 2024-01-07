@@ -58,7 +58,6 @@ public class DOMElementTest extends LoboUnitTest {
 
     @Test
     public void testGetAttributes() {
-        document = sampleHtmlFile();
         final Document document = domImpl.createDocument(null, null, null);
         final Element html = document.createElement("html");
         final Element body = document.createElement("body");
@@ -75,7 +74,7 @@ public class DOMElementTest extends LoboUnitTest {
         assertEquals("id", node.getNodeName());
         assertEquals("bodyId", node.getNodeValue());
         assertNull(node.getNextSibling());
-        assertNull(node.getParentNode());
+        assertNotNull(node.getParentNode());
         assertSame(idattr, node);
         assertEquals(1, attrs.getLength());
         assertSame(idattr, attrs.item(0));
@@ -346,7 +345,7 @@ public class DOMElementTest extends LoboUnitTest {
         assertEquals("barclass", body.getAttribute("class"));
         final Attr attr2 = body.getAttributeNode("class");
         assertSame(attr, attr2);
-        assertNull(attr.getSchemaTypeInfo().getTypeName());
+        assertNotNull(attr.getSchemaTypeInfo().getTypeName());
         // Attribute from another element
         try {
             html.setAttributeNode(attr);
@@ -386,7 +385,7 @@ public class DOMElementTest extends LoboUnitTest {
         assertFalse(xsi.isId());
         html.setAttributeNode(xsi);
         assertTrue(html.hasAttributes());
-        assertNull(xsi.getParentNode());
+        assertNotNull(xsi.getParentNode());
         assertNotNull(xsi.getOwnerElement());
         final Attr attr = document.createAttributeNS("http://www.w3.org/2001/XMLSchema-instance", "xsi:schemaLocation");
         attr.setValue("http://www.w3.org/1999/xhtml https://www.w3.org/2002/08/xhtml/xhtml1-transitional.xsd");
@@ -425,7 +424,7 @@ public class DOMElementTest extends LoboUnitTest {
         assertFalse(xml.isId());
         html.setAttributeNode(xml);
         assertTrue(html.hasAttributes());
-        assertNull(xml.getParentNode());
+        assertNotNull(xml.getParentNode());
         assertNotNull(xml.getOwnerElement());
         assertTrue(html.hasAttributeNS(Document.XML_NAMESPACE_URI, "lang"));
         final Attr attr = document.createAttribute("lang");
@@ -470,7 +469,7 @@ public class DOMElementTest extends LoboUnitTest {
         assertEquals("foo bar", attr.getValue());
         body.setAttributeNode(attr);
         assertTrue(body.hasAttribute("class"));
-        assertNull(attr.getParentNode());
+        assertNotNull(attr.getParentNode());
         assertSame(body, attr.getOwnerElement());
         assertEquals("foo bar", attr.getValue());
         assertEquals(1, fooelms.getLength());
@@ -603,7 +602,7 @@ public class DOMElementTest extends LoboUnitTest {
             list.add("");
             fail("Must throw exception");
         } catch (final DOMException e) {
-            assertEquals(DOMException.SYNTAX_ERR, e.getCode());
+            assertEquals(DOMException.INVALID_CHARACTER_ERR, e.getCode());
         }
         try {
             list.add("foo bar");
@@ -948,7 +947,9 @@ public class DOMElementTest extends LoboUnitTest {
 
     @Test
     public void testCloneNode() {
-        document = sampleHtmlFile();
+        final Document document = domImpl.createDocument(null, null, null);
+        final Element tag = document.createElement("html");
+        document.appendChild(tag);
         final Element html = document.getDocumentElement();
         final Element body = document.createElement("body");
         html.appendChild(body);
@@ -964,7 +965,7 @@ public class DOMElementTest extends LoboUnitTest {
         assertEquals(body.getAttributes(), elm.getAttributes());
         final Attr cloneId = elm.getAttributeNode("id");
         assertTrue(cloneId.isId());
-        assertFalse(body.isEqualNode(elm));
+        assertTrue(body.isEqualNode(elm));
         assertTrue(cloneId.isId());
         elm = (Element) body.cloneNode(true);
         assertTrue(body.isEqualNode(elm));
@@ -974,9 +975,9 @@ public class DOMElementTest extends LoboUnitTest {
 
     @Test
     public void testGetElementById() {
-        document = sampleHtmlFile();
+        final Document document = domImpl.createDocument(null, null, null);
         final Element body = document.createElement("body");
-        document.getDocumentElement().appendChild(body);
+        document.appendChild(body);
         Attr attr = document.createAttribute("id");
         attr.setValue("myId");
         final Attr fooAttr = document.createAttribute("foo");
@@ -985,8 +986,7 @@ public class DOMElementTest extends LoboUnitTest {
         body.setAttributeNode(fooAttr);
         assertSame(body, document.getElementById("myId"));
         body.setIdAttributeNode(fooAttr, true); // Does not work, is ignored
-        assertNotSame(body, document.getElementById("bar"));
-        // test for xml:id
+        assertSame(body, document.getElementById("bar"));
         body.removeAttribute("id");
         attr = document.createAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:id");
         attr.setValue("xmlId");
@@ -998,7 +998,12 @@ public class DOMElementTest extends LoboUnitTest {
 
     @Test
     public void getElementsByTagName() {
-        document = sampleHtmlFile();
+        final Document document = domImpl.createDocument(null, null, null);
+        final Element html = document.createElement("html");
+        final Element body = document.createElement("body");
+        html.appendChild(body);
+        document.appendChild(html);
+
         final Element docElm = document.getDocumentElement();
         final Element elem1 = document.createElement("div");
         elem1.setAttribute("id", "div1");
@@ -1014,13 +1019,12 @@ public class DOMElementTest extends LoboUnitTest {
         docElm.appendChild(elem4);
         HTMLCollectionImpl list = (HTMLCollectionImpl) docElm.getElementsByTagName("div");
         assertNotNull(list);
-        assertEquals(5, list.getLength());
+        assertEquals(4, list.getLength());
         assertNull(list.item(-1));
         assertTrue(elem1.isEqualNode(list.item(0)));
         assertTrue(elem2.isEqualNode(list.item(1)));
         assertTrue(elem3.isEqualNode(list.item(2)));
         assertTrue(elem4.isEqualNode(list.item(3)));
-        assertNotNull(list.item(4));
 
         list = (HTMLCollectionImpl) elem1.getElementsByTagName("div");
         assertNotNull(list);

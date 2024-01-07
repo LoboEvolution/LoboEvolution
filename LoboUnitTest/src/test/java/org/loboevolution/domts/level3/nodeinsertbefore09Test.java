@@ -58,19 +58,18 @@ public class nodeinsertbefore09Test extends LoboUnitTest {
         final Comment newComment;
         final Comment insertComment;
         final Comment comment;
-        final DocumentFragment inserted;
         final String data;
-        Node appendedChild;
         doc = sampleXmlFile("hc_staff.xml");
         newComment = doc.createComment("Comment");
-        appendedChild = doc.appendChild(newComment);
+        doc.appendChild(newComment);
         docFrag = doc.createDocumentFragment();
         insertComment = doc.createComment("insertComment");
-        appendedChild = docFrag.appendChild(insertComment);
-        inserted = (DocumentFragment) doc.insertBefore(docFrag, newComment);
+        docFrag.appendChild(insertComment);
+        doc.insertBefore(docFrag, newComment);
         comment = (Comment) newComment.getPreviousSibling();
         data = comment.getData();
-        assertEquals("nodeinsertbefore09", "insertComment", data);
+        assertEquals( "insertComment", data);
     }
+
 }
 

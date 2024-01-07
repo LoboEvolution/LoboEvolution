@@ -26,7 +26,6 @@
 
 package org.loboevolution.html.dom.nodeimpl;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.htmlunit.cssparser.dom.DOMException;
@@ -1332,11 +1331,6 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
 	}
 
 	@Override
-	public String getNodeName() {
-		return "[object HTMLDocument]";
-	}
-
-	@Override
 	public int getNodeType() {
 		return Node.DOCUMENT_NODE;
 	}
@@ -1349,5 +1343,10 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
 	@Override
 	public void setNodeValue(String nodeValue) throws DOMException {
 		throw new DOMException(DOMException.INVALID_MODIFICATION_ERR, "readonly node");
+	}
+
+	@Override
+	public String getNodeName() {
+		return "[object HTMLDocument]";
 	}
 }

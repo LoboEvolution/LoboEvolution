@@ -40,7 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 /**
- * Using compareDocumentPosition to check if the EntityReference node contains and precedes it's last
+ * Using compareDocumentPosition to check if the EntityReference node contains and precedes its last
  * childElement, and that this childElement is contained and follows the EntityReference node.
  *
  * @author IBM

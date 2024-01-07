@@ -103,9 +103,11 @@ public class HTMLFormElementImpl extends HTMLElementImpl implements HTMLFormElem
 			elements.forEach(node -> {
 				if (node.hasAttributes()) {
 					final NamedNodeMap attributes = node.getAttributes();
-					for (final Node attribute : Nodes.iterable(attributes)) {
-						if (getName().equals(attribute.getNodeValue())) {
-							list.add(node);
+					if (attributes != null) {
+						for (final Node attribute : Nodes.iterable(attributes)) {
+							if (getName().equals(attribute.getNodeValue())) {
+								list.add(node);
+							}
 						}
 					}
 				}

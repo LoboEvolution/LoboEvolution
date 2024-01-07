@@ -125,7 +125,8 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 			});
 		}
 
-		if (newChild.getOwnerDocument() != null && !Objects.equals(newChild.getOwnerDocument(), getOwnerDocument())) {
+		if (newChild.getOwnerDocument() != null && getOwnerDocument() != null &&
+				!Objects.equals(newChild.getOwnerDocument(), getOwnerDocument())) {
 			throw new DOMException(DOMException.WRONG_DOCUMENT_ERR, "Different Document");
 		}
 
@@ -277,46 +278,74 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 				|| "1.0".equals(version) || "2.0".equals(version) || "3.0".equals(version));
 	}
 
-	/** {@inheritDoc} */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public short compareDocumentPosition(final Node other) {
-		if (this.isSameNode(other)) {
+		final NodeImpl their = (NodeImpl) other;
+		if (their == this) {
 			return 0;
 		}
-		if (!(other instanceof NodeImpl)) {
-			return Node.DOCUMENT_POSITION_DISCONNECTED;
-		}
-		final NodeImpl otherImpl = (NodeImpl) other;
-		if (!(otherImpl.getDocumentNode() == this.getDocumentNode())) {
-			return Node.DOCUMENT_POSITION_DISCONNECTED;
-		}
-		short comparison = 0;
-		final int thisIndex = getNodeIndex();
-		final int otherIndex = ((NodeImpl) other).getNodeIndex();
 
-		if (thisIndex < otherIndex) {
-			comparison += Node.DOCUMENT_POSITION_FOLLOWING;
-			if (otherImpl.containedBy(this)) {
-				comparison += Node.DOCUMENT_POSITION_CONTAINED_BY;
-			}
-		} else {
-			comparison += Node.DOCUMENT_POSITION_PRECEDING;
-			if (this.containedBy(otherImpl)) {
-				comparison += Node.DOCUMENT_POSITION_CONTAINS;
-			}
+		if (getNodeType() == DOCUMENT_NODE && other.getParentNode() == null) {
+			return DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC | DOCUMENT_POSITION_DISCONNECTED;
 		}
-		return comparison;
-	}
 
-	private boolean containedBy(final NodeImpl other) {
-		Node parent = getParentNode();
-		while (parent != null) {
-			if (other.isSameNode(parent)) {
-				return true;
-			}
-			parent = parent.getParentNode();
+		if (other.getNodeType() == DOCUMENT_NODE && getParentNode() == null) {
+			return DOCUMENT_POSITION_PRECEDING | DOCUMENT_POSITION_FOLLOWING;
 		}
-		return false;
+
+		if (Objects.equals(their.getDocumentNode(), getDocumentNode())) {
+			final List<Node> ancestry = new ArrayList<>();
+			ancestry.add(their);
+			Node p = their.getParentNode();
+			while (p != null) {
+				if (p == this) {
+					return DOCUMENT_POSITION_CONTAINED_BY | DOCUMENT_POSITION_FOLLOWING;
+				}
+				ancestry.add(p);
+				p = p.getParentNode();
+			}
+			p = this.getParentNode();
+			Node k = this;
+			final int alen = ancestry.size();
+			while (p != null) {
+				for (int apos = 0; apos < alen; apos++) {
+					if (p == ancestry.get(apos)) {
+						final int sibpos = apos - 1;
+						if (sibpos < 0) {
+							return DOCUMENT_POSITION_CONTAINS | DOCUMENT_POSITION_PRECEDING;
+						}
+						final Node sibling = ancestry.get(sibpos);
+                        if (sibling instanceof Attr) {
+							final NamedNodeMap nnm = p.getAttributes();
+							for (int i = nnm.getLength() - 1; i >= 0; i--) {
+								final Node n = nnm.item(i);
+								if (n == sibling) {
+									return DOCUMENT_POSITION_FOLLOWING;
+								} else if (n == k) {
+									return DOCUMENT_POSITION_PRECEDING;
+								}
+							}
+						} else {
+							for (int i = p.getChildNodes().getLength() - 1; i >= 0; i--) {
+								final Node n = p.getChildNodes().item(i);
+								if (n == sibling) {
+									return DOCUMENT_POSITION_FOLLOWING;
+								} else if (n == k) {
+									return DOCUMENT_POSITION_PRECEDING;
+								}
+							}
+						}
+						throw new IllegalStateException("Sibling nodes appear not to be siblings?");
+					}
+				}
+				k = p;
+				p = p.getParentNode();
+			}
+		}
+		return Node.DOCUMENT_POSITION_DISCONNECTED;
 	}
 
 	/**
@@ -583,11 +612,6 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		}
 	}
 
-	private int getNodeIndex() {
-		final NodeImpl parent = (NodeImpl) getParentNode();
-		return parent == null ? -1 : parent.getChildIndex(this);
-	}
-
 	/**
 	 * <p>Getter for the field nodeList.</p>
 	 *
@@ -617,7 +641,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	/** {@inheritDoc} */
 	@Override
 	public Document getOwnerDocument() {
-		return this.document != null ? this.document : this instanceof Document ? (Document) this : null;
+		return this.document;
 	}
 
 	/** {@inheritDoc} */
@@ -629,11 +653,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	/** {@inheritDoc} */
 	@Override
 	public Node getParentNode() {
-		if (this instanceof Attr) {
-			return null;
-		} else {
-			return this.parentNode;
-		}
+		return this.parentNode;
 	}
 
 	/** {@inheritDoc} */
@@ -999,10 +1019,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 			if (newChild instanceof NodeImpl) {
 				((NodeImpl) newChild).setParentImpl(this);
 			}
-			if (this.nodeList.contains(newChild)) {
-				this.nodeList.remove(newChild);
-				this.nodeList.add(idx > 0 ? idx-1 : idx, newChild);
-			} else {
+			if (!this.nodeList.contains(newChild)) {
 				this.nodeList.add(idx, newChild);
 			}
 		}
@@ -1148,6 +1165,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		if (!this.notificationsSuspended) {
 			informStructureInvalid();
 		}
+		((NodeImpl) oldChild).setParentImpl(null);
 		return oldChild;
 	}
 
@@ -1261,6 +1279,10 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 			throw new DOMException(DOMException.NOT_FOUND_ERR, "oldChild not found");
 		}
 
+		if (getNodeType() == Node.DOCUMENT_TYPE_NODE && newChild.getNodeType() == Node.ATTRIBUTE_NODE) {
+			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Document cannot append Attr");
+		}
+
 		if (getNodeType() == Node.ENTITY_REFERENCE_NODE) {
 			throw new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR, "readonly node");
 		}
@@ -1282,6 +1304,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 
 
 		final int idx2 = this.nodeList.indexOf(newChild);
+		((NodeImpl)newChild).setParentImpl(this);
 		this.nodeList.set(idx, newChild);
 		if (idx2 != -1) {
 			this.nodeList.remove(idx2);

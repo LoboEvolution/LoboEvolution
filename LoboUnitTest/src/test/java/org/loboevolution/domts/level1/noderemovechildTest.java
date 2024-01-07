@@ -43,9 +43,9 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * returns it.
  * <p>
  * Remove the first employee by invoking the
- * "removeChild(oldChild)" method an checking the
- * node returned by the "getParentNode()" method.   It
- * should be set to null.
+ * "removeChild(oldChild)" method and checking the
+ * node returned by the "getParentNode()" method.
+ * It should be set to null.
  *
  * @author NIST
  * @author Mary Brady

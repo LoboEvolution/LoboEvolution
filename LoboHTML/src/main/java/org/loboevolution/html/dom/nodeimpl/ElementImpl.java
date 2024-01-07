@@ -80,6 +80,8 @@ public abstract class ElementImpl extends NodeImpl implements Element {
 
 	private final NamedNodeMapImpl map;
 
+	private final DOMTokenListImpl tokList;
+
 	private final String name;
 
 
@@ -91,6 +93,7 @@ public abstract class ElementImpl extends NodeImpl implements Element {
 	public ElementImpl(final String name) {
 		this.name = name;
 		this.map = new NamedNodeMapImpl(this, new NodeListImpl());
+		this.tokList = new DOMTokenListImpl(this);
 
 	}
 
@@ -219,6 +222,7 @@ public abstract class ElementImpl extends NodeImpl implements Element {
 		final AttrImpl attr = new AttrImpl(name, value, "id".equalsIgnoreCase(name), this, true);
 		final Document doc = getOwnerDocument();
 		attr.setOwnerDocument(doc);
+		attr.setParentImpl(this);
 		attr.setNamespaceURI(getNamespaceURI() != null ? getNamespaceURI() : doc != null ? doc.getNamespaceURI() : getParentNode() != null ? getParentNode().getNamespaceURI() : null);
 		if (Strings.isNotBlank(prefix) && Strings.isNotBlank(attr.getNamespaceURI())) {
 			attr.setPrefix(prefix);
@@ -277,6 +281,7 @@ public abstract class ElementImpl extends NodeImpl implements Element {
 		final AttrImpl attr = new AttrImpl(qualifiedName, value, "id".equalsIgnoreCase(name), this, true);
 		attr.setNamespaceURI(namespaceURI);
 		attr.setOwnerDocument(getOwnerDocument());
+		attr.setParentImpl(this);
 		if (Strings.isNotBlank(prefix)) attr.setPrefix(prefix);
 		map.setNamedItemNS(attr);
 		assignAttributeField(qualifiedName, value);
@@ -321,19 +326,22 @@ public abstract class ElementImpl extends NodeImpl implements Element {
 	/** {@inheritDoc} */
 	@Override
 	public Attr setAttributeNode(final Attr newAttr) {
-		final Attr checkAttr = getAttributeNode(newAttr.getName());
-
-		if (checkAttr == null && Objects.equals(newAttr.getOwnerElement(), this)) {
+		final NodeListImpl childNodes = (NodeListImpl) getDescendents(new ElementFilter(null), true);
+		AtomicBoolean check = new AtomicBoolean(false);
+		childNodes.forEach(child -> {
+			if (child instanceof Element && !Objects.equals(newAttr.getOwnerElement(), child) && !check.get()) {
+				ElementImpl el = (ElementImpl) child;
+				Attr checkAttr = el.getAttributeNodeNS(newAttr.getNamespaceURI(), newAttr.getLocalName());
+				check.set(checkAttr != null);
+			}
+		});
+		if (newAttr.getOwnerElement() != null && check.get()) {
 			throw new DOMException(DOMException.INUSE_ATTRIBUTE_ERR,
 					"Attr is already an attribute of another Element object. The DOM user must explicitly clone Attr nodes to re-use them in other elements.");
 		}
 
 		if(!Objects.equals(newAttr.getOwnerDocument(), getOwnerDocument())) {
 			throw new DOMException(DOMException.WRONG_DOCUMENT_ERR, "Different Document");
-		}
-
-		if (checkAttr != null && Strings.isBlank(checkAttr.getNamespaceURI())) {
-			removeAttributeNode(checkAttr);
 		}
 
 		newAttr.setOwnerElement(this);
@@ -347,13 +355,13 @@ public abstract class ElementImpl extends NodeImpl implements Element {
         final NodeListImpl childNodes = (NodeListImpl) getDescendents(new ElementFilter(null), true);
         AtomicBoolean check = new AtomicBoolean(false);
         childNodes.forEach(child -> {
-                if (child instanceof Element && !check.get()) {
+			if (child instanceof Element && !Objects.equals(newAttr.getOwnerElement(), child) && !check.get()) {
                     ElementImpl el = (ElementImpl) child;
                     Attr checkAttr = el.getAttributeNodeNS(newAttr.getNamespaceURI(), newAttr.getLocalName());
                     check.set(checkAttr != null);
                 }
         });
-		if (((newAttr.getOwnerElement() != null && check.get()) || Objects.equals(newAttr.getOwnerElement(), this))) {
+		if (newAttr.getOwnerElement() != null && check.get()) {
 			throw new DOMException(DOMException.INUSE_ATTRIBUTE_ERR,
 					"Attr is already an attribute of another Element object. The DOM user must explicitly clone Attr nodes to re-use them in other elements.");
 		}
@@ -597,7 +605,6 @@ public abstract class ElementImpl extends NodeImpl implements Element {
 	/** {@inheritDoc} */
 	@Override
 	public DOMTokenList getClassList() {
-		final DOMTokenListImpl tokList = new DOMTokenListImpl(this);
 		final String className = getClassName();
 		if(Strings.isNotBlank(className)){
 			final String[] listString = className.split(" ");
@@ -617,7 +624,8 @@ public abstract class ElementImpl extends NodeImpl implements Element {
 	/** {@inheritDoc} */
 	@Override
 	public void setClassName(final String className) {
-		setAttribute("class", className);
+		tokList.remove();
+		tokList.add(className);
 	}
 
 	/** {@inheritDoc} */

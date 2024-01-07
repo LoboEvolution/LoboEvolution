@@ -78,7 +78,12 @@ public class DOMTokenListImpl implements DOMTokenList {
 	 */
 	@Override
 	public void add(final String token) throws DOMException {
-		if (token != null && !tokenset.contains(token)) {
+
+		if(token == null) {
+			throw new DOMException(DOMException.SYNTAX_ERR, "Token cannot contain spaces");
+		}
+
+		if (!tokenset.contains(token)) {
 			final String tok = token.trim();
 			if (Strings.isBlank(tok)) {
 				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "Token cannot contain spaces");
@@ -87,17 +92,8 @@ public class DOMTokenListImpl implements DOMTokenList {
 			if (tok.contains(" ") || tok.contains("\t")) {
 				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "Token cannot contain spaces");
 			}
-
 			tokenset.add(tok);
-			final String className = element.getClassName();
-			if (!className.contains(tok)) {
-
-				if (Strings.isNotBlank(className) && (!className.contains("\t") || !className.contains("\n"))) {
-					element.setClassName(className.trim() + " " + tok);
-				} else {
-					element.setClassName(tok);
-				}
-			}
+			element.setAttribute("class", getValue());
 		}
 	}
 
@@ -118,8 +114,12 @@ public class DOMTokenListImpl implements DOMTokenList {
 			tokenset.remove(tokTrim);
 			final StringBuilder sb = new StringBuilder();
 			tokenset.forEach(tok -> sb.append(tok).append(' '));
-			element.setClassName(sb.toString().trim());
+			element.setAttribute("class",sb.toString().trim());
 		}
+	}
+
+	public void remove() {
+		tokenset.clear();
 	}
 
 	/** {@inheritDoc} */
@@ -141,13 +141,13 @@ public class DOMTokenListImpl implements DOMTokenList {
 				if (result) {
 					final StringBuilder sb = new StringBuilder();
 					tokenset.forEach(tk -> sb.append(tk).append(' '));
-					element.setClassName(sb.toString().trim());
+					element.setAttribute("class",sb.toString().trim());
 				}
 				return result;
 			} else {
 				final StringBuilder sb = new StringBuilder();
 				tokenset.forEach(tk -> sb.append(tk).append(' '));
-				element.setClassName(sb.toString().trim());
+				element.setAttribute("class",sb.toString().trim());
 			}
 		}
 		return false;
@@ -201,13 +201,20 @@ public class DOMTokenListImpl implements DOMTokenList {
 	 */
 	@Override
 	public boolean replace(final String oldToken, final String newToken) {
-		if (Strings.isNotBlank(oldToken) && Strings.isBlank(newToken)) {
+		if (Strings.isNotBlank(oldToken) && Strings.isNotBlank(newToken)) {
 			final int idx = tokenset.indexOf(oldToken);
 			if (idx != -1) {
-				tokenset.set(idx, newToken);
+				final int idx2 = tokenset.indexOf(newToken);
+				if (idx2 != -1) {
+					tokenset.remove(idx);
+				} else{
+					tokenset.set(idx, newToken);
+				}
+				element.setAttribute("class",getValue());
 				return true;
 			}
 		}
+
 		return false;
 	}
 
@@ -225,7 +232,7 @@ public class DOMTokenListImpl implements DOMTokenList {
 				if(Strings.countChars(tok, '\t') == 0) tokenset.add(tok);
 				final String className = element.getClassName();
 				if (!className.contains(tok))
-					element.setClassName(Strings.isNotBlank(className) ? className.trim() + " " + tok : tok);
+					element.setAttribute("class",Strings.isNotBlank(className) ? className.trim() + " " + tok : tok);
 			}
 		}
 	}

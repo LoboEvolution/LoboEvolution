@@ -64,7 +64,7 @@ public class nodecomparedocumentposition22Test extends LoboUnitTest {
         notation = (Notation) notationsMap.getNamedItem("notation1");
         entityPosition = entity.compareDocumentPosition(notation);
         assertEquals(4, entityPosition);
-        notationPosition = (int) notation.compareDocumentPosition(entity);
+        notationPosition = notation.compareDocumentPosition(entity);
         assertEquals(2, notationPosition);
     }
 }

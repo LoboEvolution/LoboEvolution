@@ -53,11 +53,13 @@ public class IdFilter implements NodeFilter {
 	public short acceptNode(final Node node) {
 		if ((node instanceof Element) && this._id != null) {
 			final NamedNodeMap attributes = node.getAttributes();
-			for (final Node attribute : Nodes.iterable(attributes)) {
-				final Attr attr = (Attr) attribute;
-				if (Strings.isNotBlank(attr.getNodeValue())) {
-					if (this._id.equals(attr.getNodeValue()) && attr.isId()) {
-						return NodeFilter.FILTER_ACCEPT;
+			if (attributes != null) {
+				for (final Node attribute : Nodes.iterable(attributes)) {
+					final Attr attr = (Attr) attribute;
+					if (Strings.isNotBlank(attr.getNodeValue())) {
+						if (this._id.equals(attr.getNodeValue()) && attr.isId()) {
+							return NodeFilter.FILTER_ACCEPT;
+						}
 					}
 				}
 			}

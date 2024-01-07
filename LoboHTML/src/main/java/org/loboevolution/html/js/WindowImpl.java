@@ -234,9 +234,11 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 		all.forEach(node -> {
 			if (node.hasAttributes()) {
 				final NamedNodeMap attributes = node.getAttributes();
-				for (final Node attribute : Nodes.iterable(attributes)) {
-					if (name.equals(attribute.getNodeValue())) {
-						find.set(node);
+				if (attributes != null) {
+					for (final Node attribute : Nodes.iterable(attributes)) {
+						if (name.equals(attribute.getNodeValue())) {
+							find.set(node);
+						}
 					}
 				}
 			}

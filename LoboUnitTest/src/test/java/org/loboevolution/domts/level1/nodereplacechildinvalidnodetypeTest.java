@@ -61,7 +61,6 @@ public class nodereplacechildinvalidnodetypeTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -70,23 +69,19 @@ public class nodereplacechildinvalidnodetypeTest extends LoboUnitTest {
         final Node newChild;
         final HTMLCollection elementList;
         final Node oldChild;
-        final Node replacedChild;
         doc = sampleXmlFile("staff.xml");
         rootNode = doc.getDocumentElement();
         newChild = doc.createAttribute("newAttribute");
         elementList = doc.getElementsByTagName("employee");
         oldChild = elementList.item(1);
 
-        {
-            boolean success = false;
-            try {
-                replacedChild = rootNode.replaceChild(newChild, oldChild);
-            } catch (final DOMException ex) {
-                success = (ex.getCode() == DOMException.HIERARCHY_REQUEST_ERR);
-            }
-            assertTrue(success);
+        boolean success = false;
+        try {
+            rootNode.replaceChild(newChild, oldChild);
+        } catch (final DOMException ex) {
+            success = (ex.getCode() == DOMException.HIERARCHY_REQUEST_ERR);
         }
+        assertTrue(success);
+
     }
-
 }
-
