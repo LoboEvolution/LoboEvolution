@@ -49,7 +49,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/namespaces-algorithms#normalizeDocumentAlgo">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/namespaces-algorithms#normalizeDocumentAlgo</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-namespaces">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-namespaces</a>
  */
-public class documentnormalizedocument13Test extends LoboUnitTest {
+public class DocumentnormalizeDocument13Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -95,30 +95,30 @@ public class documentnormalizedocument13Test extends LoboUnitTest {
             if (severity == 2) {
                 location = error.getLocation();
                 problemNode = location.getRelatedNode();
-                assertSame(newAttr, problemNode);
+                assertSame(newAttr, problemNode, "DocumentnormalizeDocument13Assert1");
                 lineNumber = location.getLineNumber();
-                assertEquals(-1, lineNumber);
+                assertEquals(-1, lineNumber, "DocumentnormalizeDocument13Assert2");
                 columnNumber = location.getColumnNumber();
-                assertEquals(-1, columnNumber);
+                assertEquals(-1, columnNumber, "DocumentnormalizeDocument13Assert3");
                 byteOffset = location.getByteOffset();
-                assertEquals(-1, byteOffset);
+                assertEquals(-1, byteOffset, "DocumentnormalizeDocument13Assert4");
                 utf16Offset = location.getUtf16Offset();
-                assertEquals(-1, utf16Offset);
+                assertEquals(-1, utf16Offset, "DocumentnormalizeDocument13Assert5");
                 uri = location.getUri();
-                assertNull(uri);
+                assertNull(uri, "DocumentnormalizeDocument13Assert6");
                 message = error.getMessage();
                 length = message.length();
-                assertTrue((length > 0));
+                assertTrue((length > 0), "DocumentnormalizeDocument13Assert7");
                 type = error.getType();
                 relatedData = error.getRelatedData();
                 relatedException = error.getRelatedException();
                 errorCount += 1;
             } else {
-                assertEquals(1, severity);
+                assertEquals(1, severity, "DocumentnormalizeDocument13Assert8");
             }
 
         }
-        assertEquals(1, errorCount);
+        assertEquals(1, errorCount, "DocumentnormalizeDocument13Assert9");
     }
 }
 

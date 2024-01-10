@@ -50,7 +50,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-111237558">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-111237558</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-667469212">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-667469212</a>
  */
-public class nodecdatasectionnodetypeTest extends LoboUnitTest {
+public class NodecdatasectionnodetypeTest extends LoboUnitTest {
 
 
     /**
@@ -74,7 +74,7 @@ public class nodecdatasectionnodetypeTest extends LoboUnitTest {
             cdataNode = doc.createCDATASection("");
             nodeType = cdataNode.getNodeType();
         }
-        assertEquals(4, nodeType);
+        assertEquals(4, nodeType, "NodecdatasectionnodetypeAssert1");
     }
 }
 

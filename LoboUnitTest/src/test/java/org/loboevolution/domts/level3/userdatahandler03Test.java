@@ -46,7 +46,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
  * @author Curt Arnold
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-handleUserDataEvent">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-handleUserDataEvent</a>
  */
-public class userdatahandler03Test extends LoboUnitTest {
+public class Userdatahandler03Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -89,28 +89,28 @@ public class userdatahandler03Test extends LoboUnitTest {
         elementNS = node.getNamespaceURI();
         newNode = doc.importNode(node, true);
         notifications = userDataHandlerImpl.getAllNotifications();
-        assertEquals(2, notifications.size());
+        assertEquals(2, notifications.size(), "Userdatahandler03Assert3");
         for (final UserDataNotification notification1 : notifications) {
             operation = notification1.getOperation();
-            assertEquals(2, operation);
+            assertEquals(2, operation, "Userdatahandler03Assert4");
             key = notification1.getKey();
             data = (String) notification1.getData();
 
             if ("greeting".equals(key)) {
-                assertEquals("greetingDataHello", hello, data);
+                assertEquals(hello, data, "Userdatahandler03Assert5");
                 greetingCount += 1;
             } else {
-                assertEquals("saluationKey", "salutation", key);
-                assertEquals("salutationDataMr", mister, data);
+                assertEquals("salutation", key, "Userdatahandler03Assert6");
+                assertEquals(mister, data, "Userdatahandler03Assert7");
                 salutationCount += 1;
             }
 
             src = notification1.getSrc();
-            assertSame(node, src);
+            assertSame(node, src, "Userdatahandler03Assert8");
             dst = notification1.getDst();
-            assertSame(newNode, dst);
+            assertSame(newNode, dst, "Userdatahandler03Assert9");
         }
-        assertEquals(1, greetingCount);
-        assertEquals( 1, salutationCount);
+        assertEquals(1, greetingCount, "Userdatahandler03Assert10");
+        assertEquals( 1, salutationCount, "Userdatahandler03Assert11");
     }
 }

@@ -47,7 +47,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-renameNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-renameNode</a>
  */
-public class documentrenamenode06Test extends LoboUnitTest {
+public class Documentrenamenode06Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -66,9 +66,9 @@ public class documentrenamenode06Test extends LoboUnitTest {
         nodeName = renamedclass.getNodeName();
         namespaceURI = renamedclass.getNamespaceURI();
         nodeType = renamedclass.getNodeType();
-        assertEquals("xsi:schemaLocation", nodeName);
-        assertEquals(2, nodeType);
-        assertEquals("http://www.w3.org/2001/XMLSchema-instance", namespaceURI);
+        assertEquals("xsi:schemaLocation", nodeName, "Documentrenamenode06Assert2");
+        assertEquals(2, nodeType, "Documentrenamenode06Assert3");
+        assertEquals("http://www.w3.org/2001/XMLSchema-instance", namespaceURI, "Documentrenamenode06Assert4");
     }
 }
 

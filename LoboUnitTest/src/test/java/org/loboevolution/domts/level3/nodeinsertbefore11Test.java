@@ -43,7 +43,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-952280727">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-952280727</a>
  */
-public class nodeinsertbefore11Test extends LoboUnitTest {
+public class Nodeinsertbefore11Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -73,16 +73,16 @@ public class nodeinsertbefore11Test extends LoboUnitTest {
         appendedChild = docFrag.appendChild(eRef);
         inserted = docFrag.insertBefore(comment, pi);
         insertedVal = ((CharacterData) /*Node */inserted).getData();
-        assertEquals( "Comment", insertedVal);
+        assertEquals( "Comment", insertedVal, "Nodeinsertbefore11Assert2");
         inserted = docFrag.insertBefore(txt, comment);
         insertedVal = ((CharacterData) /*Node */inserted).getData();
-        assertEquals("Text", insertedVal);
+        assertEquals("Text", insertedVal, "Nodeinsertbefore11Assert3");
         inserted = docFrag.insertBefore(cdata, txt);
         insertedVal = ((CharacterData) /*Node */inserted).getData();
-        assertEquals( "CDATA", insertedVal);
+        assertEquals( "CDATA", insertedVal, "Nodeinsertbefore11Assert4");
         inserted = docFrag.insertBefore(eRef, cdata);
         insertedVal = inserted.getNodeName();
-        assertEquals("alpha", insertedVal);
+        assertEquals("alpha", insertedVal, "Nodeinsertbefore11Assert5");
     }
 }
 

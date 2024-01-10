@@ -48,7 +48,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/ecma-script-binding">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/ecma-script-binding</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-getDOMImpl">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-getDOMImpl</a>
  */
-public class domimplementationregistry09Test extends LoboUnitTest {
+public class Domimplementationregistry09Test extends LoboUnitTest {
     @SneakyThrows
     @Test
     public void runTest() {
@@ -59,16 +59,16 @@ public class domimplementationregistry09Test extends LoboUnitTest {
         final String nullVersion = null;
 
          final DOMImplementationRegistry domImplRegistry = DOMImplementationRegistry.newInstance();
-        assertNotNull(domImplRegistry);
+        assertNotNull(domImplRegistry, "Domimplementationregistry09Assert1");
         domImpl = domImplRegistry.getDOMImplementation("HTML");
 
         if ((domImpl == null)) {
             baseImpl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(), true));
             hasFeature = baseImpl.hasFeature("HTML", nullVersion);
-            assertFalse(hasFeature);
+            assertFalse(hasFeature, "Domimplementationregistry09Assert2");
         } else {
             hasFeature = domImpl.hasFeature("HTML", nullVersion);
-            assertTrue(hasFeature);
+            assertTrue(hasFeature, "Domimplementationregistry09Assert3");
         }
 
     }

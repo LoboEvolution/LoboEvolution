@@ -45,7 +45,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Jenny Hsu
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-ElSetIdAttr">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-ElSetIdAttr</a>
  */
-public class elementsetidattribute06Test extends LoboUnitTest {
+public class Elementsetidattribute06Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -60,7 +60,7 @@ public class elementsetidattribute06Test extends LoboUnitTest {
         } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
         }
-        assertTrue(success);
+        assertTrue(success, "Elementsetidattribute06Assert2");
 
     }
 }

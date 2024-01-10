@@ -46,7 +46,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-element-content-whitespace">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-element-content-whitespace</a>
  */
-public class elementcontentwhitespace02Test extends LoboUnitTest {
+public class Elementcontentwhitespace02Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -72,15 +72,15 @@ public class elementcontentwhitespace02Test extends LoboUnitTest {
             /*DOMErrorMonitor */
             domConfig.setParameter("error-handler", errorMonitor);
             doc.normalizeDocument();
-            assertTrue(errorMonitor.assertLowerSeverity(2));
+            assertTrue(errorMonitor.assertLowerSeverity(2), "Elementcontentwhitespace02Assert1");
             bodyList = doc.getElementsByTagName("body");
             body = (Element) bodyList.item(0);
             child = body.getFirstChild();
-            assertNotNull(child);
+            assertNotNull(child, "Elementcontentwhitespace02Assert2");
             childName = child.getNodeName();
-            assertEquals( "P", childName);
+            assertEquals( "P", childName, "Elementcontentwhitespace02Assert3");
             child = child.getNextSibling();
-            assertNull(child);
+            assertNull(child, "Elementcontentwhitespace02Assert4");
         }
     }
 }

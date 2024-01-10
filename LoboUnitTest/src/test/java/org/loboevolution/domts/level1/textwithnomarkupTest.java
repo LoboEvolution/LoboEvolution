@@ -53,7 +53,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1312295772">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1312295772</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080</a>
  */
-public class textwithnomarkupTest extends LoboUnitTest {
+public class TextwithnomarkupTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -71,7 +71,7 @@ public class textwithnomarkupTest extends LoboUnitTest {
         nameNode = elementList.item(2);
         nodeV = nameNode.getFirstChild();
         value = nodeV.getNodeValue();
-        assertEquals("Roger\n Jones", value);
+        assertEquals("Roger\n Jones", value, "TextwithnomarkupAssert1");
     }
 
 }

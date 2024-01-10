@@ -46,7 +46,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-datatype-normalization">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-datatype-normalization</a>
  */
-public class datatypenormalization07Test extends LoboUnitTest {
+public class Datatypenormalization07Test extends LoboUnitTest {
 
 
     @Test
@@ -77,11 +77,11 @@ public class datatypenormalization07Test extends LoboUnitTest {
             /*DOMErrorMonitor */
             domConfig.setParameter("error-handler", errorMonitor);
             doc.normalizeDocument();
-            assertTrue(errorMonitor.assertLowerSeverity(2));
+            assertTrue(errorMonitor.assertLowerSeverity(2), "Datatypenormalization07Assert3");
             elemList = doc.getElementsByTagNameNS("http://www.w3.org/2001/DOM-Test-Suite/Level-3/datatype_normalization", "data:double");
             element = (Element) elemList.item(0);
             str = element.getAttribute("data:default");
-             assertEquals( "3.1415926", str);
+             assertEquals( "3.1415926", str, "Datatypenormalization07Assert4");
         }
     }
 }

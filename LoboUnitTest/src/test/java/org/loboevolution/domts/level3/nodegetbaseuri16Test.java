@@ -44,7 +44,7 @@ import org.loboevolution.html.node.EntityReference;
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=419">http://www.w3.org/Bugs/Public/show_bug.cgi?id=419</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/infoset-mapping#Infoset2EntityReference">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/infoset-mapping#Infoset2EntityReference</a>
  */
-public class nodegetbaseuri16Test extends LoboUnitTest {
+public class Nodegetbaseuri16Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;

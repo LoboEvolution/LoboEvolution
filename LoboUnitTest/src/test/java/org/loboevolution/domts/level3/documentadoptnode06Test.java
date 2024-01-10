@@ -44,7 +44,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode</a>
  */
-public class documentadoptnode06Test extends LoboUnitTest {
+public class Documentadoptnode06Test extends LoboUnitTest {
 
 
     @Test
@@ -92,18 +92,18 @@ public class documentadoptnode06Test extends LoboUnitTest {
             nodePrefix = adoptedAttr.getPrefix();
             attrOwnerElem = adoptedAttr.getOwnerElement();
             isSpecified = adoptedAttr.isSpecified();
-            assertEquals("xml:lang", nodeName);
-            assertEquals( xmlNS, nodeNamespaceURI);
-            assertEquals("xml", nodePrefix);
-            assertNull(attrOwnerElem);
-            assertTrue(isSpecified);
+            assertEquals("xml:lang", nodeName, "Documentadoptnode06Assert1");
+            assertEquals( xmlNS, nodeNamespaceURI, "Documentadoptnode06Assert2");
+            assertEquals("xml", nodePrefix, "Documentadoptnode06Assert3");
+            assertNull(attrOwnerElem, "Documentadoptnode06Assert4");
+            assertTrue(isSpecified, "Documentadoptnode06Assert5");
             nodeList = adoptedAttr.getChildNodes();
             adoptText = (Text) nodeList.item(0);
             adoptEntRef = (EntityReference) nodeList.item(1);
             adoptedTextNodeValue = adoptText.getNodeValue();
             adoptedEntRefNodeValue = adoptEntRef.getNodeName();
-            assertEquals("Text Node", adoptedTextNodeValue);
-            assertEquals( "alpha", adoptedEntRefNodeValue);
+            assertEquals("Text Node", adoptedTextNodeValue, "Documentadoptnode06Assert6");
+            assertEquals( "alpha", adoptedEntRefNodeValue, "Documentadoptnode06Assert7");
         }
     }
 }

@@ -52,7 +52,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-667469212">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-667469212</a>
  */
-public class nodecdatasectionnodevalueTest extends LoboUnitTest {
+public class NodecdatasectionnodevalueTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -76,7 +76,7 @@ public class nodecdatasectionnodevalueTest extends LoboUnitTest {
             child = doc.createCDATASection("This is a CDATASection with EntityReference number 2 &ent2;");
         }
         cdataNodeValue = child.getNodeValue();
-        assertEquals( "<![CDATA[This is a CDATASection with EntityReference number 2 &ent2;]]", cdataNodeValue);
+        assertEquals( "<![CDATA[This is a CDATASection with EntityReference number 2 &ent2;]]", cdataNodeValue, "NodecdatasectionnodevalueAssert1");
     }
 }
 

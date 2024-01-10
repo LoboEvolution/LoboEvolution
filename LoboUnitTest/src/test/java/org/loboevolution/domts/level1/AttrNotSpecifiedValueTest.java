@@ -67,7 +67,7 @@ public class AttrNotSpecifiedValueTest extends LoboUnitTest {
         final Element testNode = (Element) addressList.item(1);
         final NamedNodeMap attributes = testNode.getAttributes();
         final Attr streetAttr = (Attr) attributes.getNamedItem("street");
-        assertFalse(streetAttr.isSpecified());
+        assertFalse(streetAttr.isSpecified(), "AttrNotSpecifiedValueAssert2");
     }
 }
 

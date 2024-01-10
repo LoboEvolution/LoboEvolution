@@ -53,7 +53,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core">http://www.w3.org/TR/DOM-Level-2-Core/core</a>
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-getElBTNNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-getElBTNNS</a>
  */
-public class documentgetelementsbytagnameNS02Test extends LoboUnitTest {
+public class DocumentgetelementsbytagnameNS02Test extends LoboUnitTest {
 
 
     /**

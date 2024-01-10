@@ -45,7 +45,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-textContent">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-textContent</a>
  */
-public class nodesettextcontent04Test extends LoboUnitTest {
+public class Nodesettextcontent04Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -59,7 +59,7 @@ public class nodesettextcontent04Test extends LoboUnitTest {
         notation1 = (Notation) notationsMap.getNamedItem("notation1");
         notation1.setTextContent("textContent");
         textContent = notation1.getTextContent();
-        assertNull(textContent);
+        assertNull(textContent, "Nodesettextcontent04Assert2");
     }
 }
 

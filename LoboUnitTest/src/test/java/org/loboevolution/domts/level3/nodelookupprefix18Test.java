@@ -47,7 +47,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * @author Jenny Hsu
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-lookupNamespacePrefix">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-lookupNamespacePrefix</a>
  */
-public class nodelookupprefix18Test extends LoboUnitTest {
+public class Nodelookupprefix18Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -62,8 +62,8 @@ public class nodelookupprefix18Test extends LoboUnitTest {
         attributesMap = elem.getAttributes();
         attr = (Attr) attributesMap.getNamedItemNS("*", "dir");
         prefix = attr.lookupPrefix("http://www.w3.org/1999/xhtml");
-        assertNull(prefix);
+        assertNull(prefix, "Nodelookupprefix18Assert3");
         prefix = attr.lookupPrefix("http://www.altavista.com");
-        assertEquals("nm", prefix);
+        assertEquals("nm", prefix, "Nodelookupprefix18Assert4");
     }
 }

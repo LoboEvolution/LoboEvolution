@@ -32,6 +32,7 @@ import org.loboevolution.pdfview.PDFParseException;
 import javax.imageio.ImageIO;
 import javax.imageio.ImageReader;
 import javax.imageio.stream.MemoryCacheImageInputStream;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -62,10 +63,9 @@ public class JPXDecode {
     }
 
     /*************************************************************************
-     * @param buf
-     * @return
-     * @throws PDFParseException
-     * @throws IOException
+     * @param buf a {@link ByteBuffer} object.
+     * @return a {@link BufferedImage} object.
+     * @throws  {@link PDFParseException} object
      ************************************************************************/
 
     private static BufferedImage loadImageData(final ByteBuffer buf) throws PDFParseException {

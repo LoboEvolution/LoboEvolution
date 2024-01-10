@@ -47,7 +47,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-1734834066">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-1734834066</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=417">http://www.w3.org/Bugs/Public/show_bug.cgi?id=417</a>
  */
-public class noderemovechild05Test extends LoboUnitTest {
+public class Noderemovechild05Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -66,9 +66,9 @@ public class noderemovechild05Test extends LoboUnitTest {
             }
             throw ex;
         }
-        assertNotNull(removedChild);
+        assertNotNull(removedChild, "Noderemovechild05Assert1");
         removedDocType = doc.getDoctype();
-        assertNull(removedDocType);
+        assertNull(removedDocType, "Noderemovechild05Assert2");
 
         {
             boolean success = false;
@@ -77,7 +77,7 @@ public class noderemovechild05Test extends LoboUnitTest {
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
             }
-            assertTrue(success);
+            assertTrue(success, "Noderemovechild05Assert3");
         }
     }
 }

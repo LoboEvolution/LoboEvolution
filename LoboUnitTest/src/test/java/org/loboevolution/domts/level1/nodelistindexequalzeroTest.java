@@ -46,7 +46,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Mary Brady
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-844377136">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-844377136</a>
  */
-public class nodelistindexequalzeroTest extends LoboUnitTest {
+public class NodelistindexequalzeroTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -68,7 +68,7 @@ public class nodelistindexequalzeroTest extends LoboUnitTest {
         childName = child.getNodeName();
 
         if (!"#text".equals(childName)) {
-            assertEquals( "EMPLOYEEID", childName);
+            assertEquals( "EMPLOYEEID", childName, "NodelistindexequalzeroAssert1");
         }
     }
 

@@ -51,7 +51,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Mary Brady
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1478689192">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1478689192</a>
  */
-public class processinginstructiongettargetTest extends LoboUnitTest {
+public class ProcessinginstructiongettargetTest extends LoboUnitTest {
     /**
      * Runs the test case.
      *
@@ -66,7 +66,7 @@ public class processinginstructiongettargetTest extends LoboUnitTest {
         childNodes = doc.getChildNodes();
         piNode = (ProcessingInstruction) childNodes.item(0);
         target = piNode.getTarget();
-        assertEquals("TEST-STYLE", target);
+        assertEquals("TEST-STYLE", target, "ProcessinginstructiongettargetAssert1");
     }
 }
 

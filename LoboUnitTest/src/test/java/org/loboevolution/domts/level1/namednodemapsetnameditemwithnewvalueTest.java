@@ -54,7 +54,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1025163788">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1025163788</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-349467F9">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-349467F9</a>
  */
-public class namednodemapsetnameditemwithnewvalueTest extends LoboUnitTest {
+public class NamednodemapsetnameditemwithnewvalueTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -74,7 +74,7 @@ public class namednodemapsetnameditemwithnewvalueTest extends LoboUnitTest {
         newAttribute = doc.createAttribute("district");
         attributes = testAddress.getAttributes();
         newNode = attributes.setNamedItem(newAttribute);
-        assertNull(newNode);
+        assertNull(newNode, "NamednodemapsetnameditemwithnewvalueAssert2");
     }
 }
 

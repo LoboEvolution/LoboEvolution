@@ -50,7 +50,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Mary Brady
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-785887307">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-785887307</a>
  */
-public class nodereplacechildTest extends LoboUnitTest {
+public class NodereplacechildTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -76,7 +76,7 @@ public class nodereplacechildTest extends LoboUnitTest {
         replacedNode = employeeNode.replaceChild(newChild, oldChild);
         child = childList.item(0);
         childName = child.getNodeName();
-        assertEquals("newChild", childName);
+        assertEquals("newChild", childName, "NodereplacechildAssert1");
     }
 
 }

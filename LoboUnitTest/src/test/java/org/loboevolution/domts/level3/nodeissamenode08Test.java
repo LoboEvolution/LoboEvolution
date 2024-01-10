@@ -45,7 +45,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isSameNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isSameNode</a>
  */
-public class nodeissamenode08Test extends LoboUnitTest {
+public class Nodeissamenode08Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -60,7 +60,7 @@ public class nodeissamenode08Test extends LoboUnitTest {
         notation1 = (Notation) entitiesMap.getNamedItem("notation1");
         notation2 = (Notation) entitiesMap.getNamedItem("notation1");
         isSame = notation1.isSameNode(notation2);
-        assertTrue(isSame);
+        assertTrue(isSame, "Nodeissamenode08Assert2");
     }
 }
 

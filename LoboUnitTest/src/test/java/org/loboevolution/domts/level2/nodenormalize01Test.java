@@ -48,7 +48,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-normalize">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-normalize</a>
  */
-public class nodenormalize01Test extends LoboUnitTest {
+public class Nodenormalize01Test extends LoboUnitTest {
 
     /**
      * Runs the test case.

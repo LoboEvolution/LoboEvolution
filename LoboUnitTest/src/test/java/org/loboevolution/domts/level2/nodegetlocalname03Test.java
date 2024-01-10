@@ -47,7 +47,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSLocalN">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSLocalN</a>
  */
-public class nodegetlocalname03Test extends LoboUnitTest {
+public class Nodegetlocalname03Test extends LoboUnitTest {
 
     /**
      * Runs the test case.

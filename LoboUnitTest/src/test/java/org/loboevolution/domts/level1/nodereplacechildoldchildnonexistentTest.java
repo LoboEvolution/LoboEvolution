@@ -54,7 +54,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-785887307">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-785887307</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=249">http://www.w3.org/Bugs/Public/show_bug.cgi?id=249</a>
  */
-public class nodereplacechildoldchildnonexistentTest extends LoboUnitTest {
+public class NodereplacechildoldchildnonexistentTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -81,7 +81,7 @@ public class nodereplacechildoldchildnonexistentTest extends LoboUnitTest {
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
             }
-            assertTrue(success);
+            assertTrue(success, "NodereplacechildoldchildnonexistentAssert2");
         }
     }
 

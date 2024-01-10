@@ -48,7 +48,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-D58B193">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-D58B193</a>
  */
-public class namednodemapremovenameditemns03Test extends LoboUnitTest {
+public class Namednodemapremovenameditemns03Test extends LoboUnitTest {
 
     /**
      * Runs the test case.

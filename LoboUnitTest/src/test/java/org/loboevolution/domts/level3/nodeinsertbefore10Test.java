@@ -48,7 +48,7 @@ import static org.junit.jupiter.api.Assertions.fail;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-952280727">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-952280727</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=415">http://www.w3.org/Bugs/Public/show_bug.cgi?id=415</a>
  */
-public class nodeinsertbefore10Test extends LoboUnitTest {
+public class Nodeinsertbefore10Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;

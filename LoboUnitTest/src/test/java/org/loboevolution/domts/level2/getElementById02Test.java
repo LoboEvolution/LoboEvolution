@@ -47,7 +47,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * @author Mary Brady
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-getElBId">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-getElBId</a>
  */
-public class getElementById02Test extends LoboUnitTest {
+public class GetElementById02Test extends LoboUnitTest {
 
     /**
      * Runs the test case.

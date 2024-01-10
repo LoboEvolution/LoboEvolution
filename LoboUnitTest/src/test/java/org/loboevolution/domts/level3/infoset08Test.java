@@ -42,7 +42,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-infoset">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-infoset</a>
  */
-public class infoset08Test extends LoboUnitTest {
+public class Infoset08Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
@@ -62,17 +62,17 @@ public class infoset08Test extends LoboUnitTest {
         domConfig.setParameter("error-handler", errorMonitor);
 
         doc.normalizeDocument();
-        assertTrue(errorMonitor.assertLowerSeverity(2));
+        assertTrue(errorMonitor.assertLowerSeverity(2), "Infoset08Assert1");
         bodyList = doc.getElementsByTagName("body");
         body = (Element) bodyList.item(0);
         child = body.getFirstChild();
-        assertNotNull(child);
+        assertNotNull(child, "Infoset08Assert2");
         childName = child.getNodeName();
-        assertEquals("#text", childName);
+        assertEquals("#text", childName, "Infoset08Assert3");
         child = child.getNextSibling();
-        assertNotNull(child);
+        assertNotNull(child, "Infoset08Assert4");
         childName = child.getNodeName();
-        assertEquals("p", childName);
+        assertEquals("p", childName, "Infoset08Assert5");
     }
 }
 

@@ -46,7 +46,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
  * @author Jenny Hsu
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-compareDocumentPosition">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-compareDocumentPosition</a>
  */
-public class nodecomparedocumentposition23Test extends LoboUnitTest {
+public class Nodecomparedocumentposition23Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -63,13 +63,13 @@ public class nodecomparedocumentposition23Test extends LoboUnitTest {
         entity = entitiesMap.getNamedItem("alpha");
         entity2 = entitiesMap.getNamedItem("delta");
         position1 = entity.compareDocumentPosition(entity2);
-        assertEquals(32 & 57, position1 & 57);
+        assertEquals(32 & 57, position1 & 57, "Nodecomparedocumentposition23Assert3");
         position2 = entity2.compareDocumentPosition(entity);
-        assertNotEquals(position1 & 2, position2 & 2);
-        assertNotEquals(position1 & 4, position2 & 4);
-        assertEquals(32 & 57, position2 & 57);
+        assertNotEquals(position1 & 2, position2 & 2, "Nodecomparedocumentposition23Assert4");
+        assertNotEquals(position1 & 4, position2 & 4, "Nodecomparedocumentposition23Assert5");
+        assertEquals(32 & 57, position2 & 57, "Nodecomparedocumentposition23Assert6");
         position3 = entity.compareDocumentPosition(entity2);
-        assertEquals(position1, position3);
+        assertEquals(position1, position3, "Nodecomparedocumentposition23Assert7");
     }
 }
 

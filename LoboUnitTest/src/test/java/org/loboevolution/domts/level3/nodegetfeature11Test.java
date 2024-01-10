@@ -42,7 +42,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Curt Arnold
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-getFeature">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-getFeature</a>
  */
-public class nodegetfeature11Test extends LoboUnitTest {
+public class Nodegetfeature11Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -56,70 +56,70 @@ public class nodegetfeature11Test extends LoboUnitTest {
         domImpl = doc.getImplementation();
         node = doc.createCDATASection("some text");
         featureImpl = node.getFeature("Core", nullVersion);
-        assertSame(node, featureImpl);
+        assertSame(node, featureImpl, "Nodegetfeature11Assert1");
         featureImpl = node.getFeature("cOrE", nullVersion);
-         assertSame(node, featureImpl);
+         assertSame(node, featureImpl, "Nodegetfeature11Assert2");
         featureImpl = node.getFeature("+cOrE", nullVersion);
-        assertSame(node, featureImpl);
+        assertSame(node, featureImpl, "Nodegetfeature11Assert3");
         featureImpl = node.getFeature("bogus.feature", nullVersion);
-        assertNull(featureImpl);
+        assertNull(featureImpl, "Nodegetfeature11Assert4");
         featureImpl = node.getFeature("cOrE", "2.0");
-        assertSame(node, featureImpl);
+        assertSame(node, featureImpl, "Nodegetfeature11Assert5");
         featureImpl = node.getFeature("cOrE", "3.0");
-        assertSame(node, featureImpl);
+        assertSame(node, featureImpl, "Nodegetfeature11Assert6");
         isSupported = node.isSupported("XML", nullVersion);
         featureImpl = node.getFeature("XML", nullVersion);
 
         if (isSupported) {
-            assertSame(node, featureImpl);
+            assertSame(node, featureImpl, "Nodegetfeature11Assert7");
         }
         isSupported = node.isSupported("SVG", nullVersion);
         featureImpl = node.getFeature("SVG", nullVersion);
 
         if (isSupported) {
-            assertSame(node, featureImpl);
+            assertSame(node, featureImpl, "Nodegetfeature11Assert8");
         }
         isSupported = node.isSupported("HTML", nullVersion);
         featureImpl = node.getFeature("HTML", nullVersion);
 
         if (isSupported) {
-            assertSame(node, featureImpl);
+            assertSame(node, featureImpl, "Nodegetfeature11Assert9");
         }
         isSupported = node.isSupported("Events", nullVersion);
         featureImpl = node.getFeature("Events", nullVersion);
 
         if (isSupported) {
-            assertSame(node, featureImpl);
+            assertSame(node, featureImpl, "Nodegetfeature11Assert10");
         }
         isSupported = node.isSupported("LS", nullVersion);
         featureImpl = node.getFeature("LS", nullVersion);
 
         if (isSupported) {
-            assertSame(node, featureImpl);
+            assertSame(node, featureImpl, "Nodegetfeature11Assert11");
         }
         isSupported = node.isSupported("LS-Async", nullVersion);
         featureImpl = node.getFeature("LS-Async", nullVersion);
 
         if (isSupported) {
-            assertSame(node, featureImpl);
+            assertSame(node, featureImpl, "Nodegetfeature11Assert12");
         }
         isSupported = node.isSupported("XPath", nullVersion);
         featureImpl = node.getFeature("XPath", nullVersion);
 
         if (isSupported) {
-            assertSame(node, featureImpl);
+            assertSame(node, featureImpl, "Nodegetfeature11Assert13");
         }
         isSupported = node.isSupported("+HTML", nullVersion);
         featureImpl = node.getFeature("HTML", nullVersion);
 
         if (isSupported) {
-            assertNotNull(featureImpl);
+            assertNotNull(featureImpl, "Nodegetfeature11Assert14");
         }
         isSupported = node.isSupported("+SVG", nullVersion);
         featureImpl = node.getFeature("SVG", nullVersion);
 
         if (isSupported) {
-            assertNotNull(featureImpl);
+            assertNotNull(featureImpl, "Nodegetfeature11Assert15");
         }
     }
 }

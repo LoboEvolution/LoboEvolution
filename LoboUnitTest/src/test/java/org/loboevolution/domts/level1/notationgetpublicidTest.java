@@ -46,7 +46,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Mary Brady
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-54F2B4D0">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-54F2B4D0</a>
  */
-public class notationgetpublicidTest extends LoboUnitTest {
+public class NotationgetpublicidTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -61,12 +61,12 @@ public class notationgetpublicidTest extends LoboUnitTest {
         final String publicId;
         doc = sampleXmlFile("staff.xml");
         docType = doc.getDoctype();
-        assertNotNull(docType);
+        assertNotNull(docType, "NotationgetpublicidAssert1");
         notations = docType.getNotations();
-        assertNotNull(notations);
+        assertNotNull(notations, "NotationgetpublicidAssert2");
         notationNode = (Notation) notations.getNamedItem("notation1");
         publicId = notationNode.getPublicId();
-        assertEquals( "notation1File", publicId);
+        assertEquals( "notation1File", publicId, "NotationgetpublicidAssert3");
     }
 
 }

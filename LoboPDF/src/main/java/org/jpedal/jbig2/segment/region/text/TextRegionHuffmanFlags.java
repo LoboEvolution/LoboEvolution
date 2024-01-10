@@ -74,28 +74,28 @@ public class TextRegionHuffmanFlags extends Flags {
     public void setFlags(final int flagsAsInt) {
         this.flagsAsInt = flagsAsInt;
 
-        /** extract SB_HUFF_FS */
+        /* extract SB_HUFF_FS */
         flags.put(SB_HUFF_FS, flagsAsInt & 3);
 
-        /** extract SB_HUFF_DS */
+        /* extract SB_HUFF_DS */
         flags.put(SB_HUFF_DS, (flagsAsInt >> 2) & 3);
 
-        /** extract SB_HUFF_DT */
+        /* extract SB_HUFF_DT */
         flags.put(SB_HUFF_DT, (flagsAsInt >> 4) & 3);
 
-        /** extract SB_HUFF_RDW */
+        /* extract SB_HUFF_RDW */
         flags.put(SB_HUFF_RDW, (flagsAsInt >> 6) & 3);
 
-        /** extract SB_HUFF_RDH */
+        /* extract SB_HUFF_RDH */
         flags.put(SB_HUFF_RDH, (flagsAsInt >> 8) & 3);
 
-        /** extract SB_HUFF_RDX */
+        /* extract SB_HUFF_RDX */
         flags.put(SB_HUFF_RDX, (flagsAsInt >> 10) & 3);
 
-        /** extract SB_HUFF_RDY */
+        /* extract SB_HUFF_RDY */
         flags.put(SB_HUFF_RDY, (flagsAsInt >> 12) & 3);
 
-        /** extract SB_HUFF_RSIZE */
+        /* extract SB_HUFF_RSIZE */
         flags.put(SB_HUFF_RSIZE, (flagsAsInt >> 14) & 1);
 
         if (JBIG2StreamDecoder.debug)

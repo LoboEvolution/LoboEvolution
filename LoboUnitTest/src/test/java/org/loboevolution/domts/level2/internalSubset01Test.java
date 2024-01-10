@@ -48,7 +48,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * @author Mary Brady
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-Core-DocType-internalSubset">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-Core-DocType-internalSubset</a>
  */
-public class internalSubset01Test extends LoboUnitTest {
+public class InternalSubset01Test extends LoboUnitTest {
 
     /**
      * Runs the test case.

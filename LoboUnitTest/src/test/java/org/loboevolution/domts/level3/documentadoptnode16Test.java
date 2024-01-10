@@ -44,7 +44,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode</a>
  */
-public class documentadoptnode16Test extends LoboUnitTest {
+public class Documentadoptnode16Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -87,15 +87,15 @@ public class documentadoptnode16Test extends LoboUnitTest {
             attributes = childImp.getAttributes();
             childAttrImp = (Attr) attributes.getNamedItem("state");
             firstChild = childAttrImp.getFirstChild();
-            assertNotNull(firstChild);
+            assertNotNull(firstChild, "Documentadoptnode16Assert3");
             firstChildName = firstChild.getNodeName();
             firstChildValue = firstChild.getNodeValue();
             firstChildType = firstChild.getNodeType();
 
             if (firstChildType == 5) {
-                assertEquals("gamma", firstChildName);
+                assertEquals("gamma", firstChildName, "Documentadoptnode16Assert4");
             } else {
-                assertEquals("Texas", firstChildValue);
+                assertEquals("Texas", firstChildValue, "Documentadoptnode16Assert5");
             }
 
         }

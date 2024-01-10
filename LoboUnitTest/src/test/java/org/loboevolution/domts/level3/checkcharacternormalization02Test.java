@@ -50,7 +50,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-check-character-normalization">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-check-character-normalization</a>
  * @see <a href="http://www.w3.org/TR/2003/WD-charmod-20030822/">http://www.w3.org/TR/2003/WD-charmod-20030822/</a>
  */
-public class checkcharacternormalization02Test extends LoboUnitTest {
+public class Checkcharacternormalization02Test extends LoboUnitTest {
 
 
     @Test
@@ -95,13 +95,13 @@ public class checkcharacternormalization02Test extends LoboUnitTest {
                 if (severity == 2) {
                     errorCount += 1;
                     errorType = error.getType();
-                    assertEquals("errorType", "check-character-normalization-failure", errorType);
+                    assertEquals("check-character-normalization-failure", errorType, "Checkcharacternormalization02Assert3");
                     locator = error.getLocation();
                     relatedNode = locator.getRelatedNode();
-                    assertSame(text, relatedNode);
+                    assertSame(text, relatedNode, "Checkcharacternormalization02Assert4");
                 }
             }
-            assertEquals(1, errorCount);
+            assertEquals(1, errorCount, "Checkcharacternormalization02Assert5");
         }
     }
 }

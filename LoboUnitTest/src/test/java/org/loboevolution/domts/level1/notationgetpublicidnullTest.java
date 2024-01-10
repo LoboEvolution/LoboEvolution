@@ -52,7 +52,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * @author Mary Brady
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-54F2B4D0">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-54F2B4D0</a>
  */
-public class notationgetpublicidnullTest extends LoboUnitTest {
+public class NotationgetpublicidnullTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -67,12 +67,12 @@ public class notationgetpublicidnullTest extends LoboUnitTest {
         final String publicId;
         doc = sampleXmlFile("staff.xml");
         docType = doc.getDoctype();
-        assertNotNull(docType);
+        assertNotNull(docType, "NotationgetpublicidnullAssert3");
         notations = docType.getNotations();
-        assertNotNull(notations);
+        assertNotNull(notations, "NotationgetpublicidnullAssert4");
         notationNode = (Notation) notations.getNamedItem("notation2");
         publicId = notationNode.getPublicId();
-        assertNull(publicId);
+        assertNull(publicId, "NotationgetpublicidnullAssert5");
     }
 
 }

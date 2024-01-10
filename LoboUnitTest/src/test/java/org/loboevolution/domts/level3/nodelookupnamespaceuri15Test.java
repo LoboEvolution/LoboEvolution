@@ -45,7 +45,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-lookupNamespaceURI">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-lookupNamespaceURI</a>
  */
-public class nodelookupnamespaceuri15Test extends LoboUnitTest {
+public class Nodelookupnamespaceuri15Test extends LoboUnitTest {
 @Test
 public void runTest(){
         final Document doc;
@@ -63,7 +63,7 @@ public void runTest(){
         appendedChild=elem.appendChild(clonedComment);
         appendedChild=docElem.appendChild(elem);
         namespaceURI=clonedComment.lookupNamespaceURI("dom3");
-        assertEquals("http://www.w3.org/1999/xhtml",namespaceURI);
+        assertEquals("http://www.w3.org/1999/xhtml",namespaceURI, "Nodelookupnamespaceuri15Assert2");
         }
         }
 

@@ -51,7 +51,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Mary Brady
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-getElBTNNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-getElBTNNS</a>
  */
-public class getElementsByTagNameNS02Test extends LoboUnitTest {
+public class GetElementsByTagNameNS02Test extends LoboUnitTest {
 
     /**
      * Runs the test case.

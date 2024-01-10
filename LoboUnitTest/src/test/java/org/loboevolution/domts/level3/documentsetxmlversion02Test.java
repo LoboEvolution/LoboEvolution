@@ -45,7 +45,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-version">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-version</a>
  */
-public class documentsetxmlversion02Test extends LoboUnitTest {
+public class Documentsetxmlversion02Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -65,7 +65,7 @@ public class documentsetxmlversion02Test extends LoboUnitTest {
         newDoc = domImpl.createDocument(rootNS, rootName, nullDocType);
         newDoc.setXmlVersion("1.0");
         versionValue = newDoc.getXmlVersion();
-        assertEquals("1.0", versionValue);
+        assertEquals("1.0", versionValue, "Documentsetxmlversion02Assert2");
     }
 }
 

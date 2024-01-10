@@ -40,7 +40,6 @@ final class PushAsNumber implements PostScriptOperation {
      * @param numberToken **********************************************************************
      */
     public PushAsNumber(final String numberToken) {
-        super();
         this.token = numberToken;
     }
 
@@ -50,7 +49,7 @@ final class PushAsNumber implements PostScriptOperation {
      * **********************************************************************
      * eval
      *
-     * @see org.loboevolution.pdfview.function.postscript.operation.PostScriptOperation#eval(java.util.Stack)
+     * @see org.loboevolution.pdfview.function.postscript.operation.PostScriptOperation#eval(java.util.Deque)
      * **********************************************************************
      */
     @Override

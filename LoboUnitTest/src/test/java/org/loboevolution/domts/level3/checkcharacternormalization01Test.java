@@ -49,7 +49,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-check-character-normalization">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-check-character-normalization</a>
  * @see <a href="http://www.w3.org/TR/2003/WD-charmod-20030822/">http://www.w3.org/TR/2003/WD-charmod-20030822/</a>
  */
-public class checkcharacternormalization01Test extends LoboUnitTest {
+public class Checkcharacternormalization01Test extends LoboUnitTest {
 
 
     @Test
@@ -72,12 +72,12 @@ public class checkcharacternormalization01Test extends LoboUnitTest {
         text = doc.createTextNode("suçon");
         pElem.appendChild(text);
         doc.normalizeDocument();
-        assertTrue(errorMonitor.assertLowerSeverity(2));
+        assertTrue(errorMonitor.assertLowerSeverity(2), "Checkcharacternormalization01Assert3");
         pList = doc.getElementsByTagName("p");
         pElem = (Element) pList.item(0);
         text = (Text) pElem.getFirstChild();
         textValue = text.getNodeValue();
-        assertEquals("barsuçon", textValue);
+        assertEquals("barsuçon", textValue, "Checkcharacternormalization01Assert4");
     }
 }
 

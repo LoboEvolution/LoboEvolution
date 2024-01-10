@@ -42,7 +42,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Attr-isId">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Attr-isId</a>
  */
-public class attrisid06Test extends LoboUnitTest {
+public class Attrisid06Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
@@ -52,7 +52,7 @@ public class attrisid06Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         attr = doc.createAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:lang");
         id = attr.isId();
-        assertFalse(id);
+        assertFalse(id, "Attrisid06Assert2");
     }
 }
 

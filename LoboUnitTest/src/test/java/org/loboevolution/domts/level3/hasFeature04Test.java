@@ -43,14 +43,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Curt Arnold
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-5CED94D7">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-5CED94D7</a>
  */
-public class hasFeature04Test extends LoboUnitTest {
+public class HasFeature04Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final DOMImplementation impl;
         final boolean state;
         impl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(), true));
         state = impl.hasFeature("+xMl", "3.0");
-        assertTrue(state);
+        assertTrue(state, "HasFeature04Assert2");
     }
 }
 

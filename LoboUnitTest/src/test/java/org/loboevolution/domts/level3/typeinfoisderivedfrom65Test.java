@@ -48,7 +48,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Jenny Hsu
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom</a>
  */
-public class typeinfoisderivedfrom65Test extends LoboUnitTest {
+public class Typeinfoisderivedfrom65Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -61,7 +61,7 @@ public class typeinfoisderivedfrom65Test extends LoboUnitTest {
         strongElem = (Element) elemList.item(0);
         elemTypeInfo = (AttributeTypeInfo) strongElem.getSchemaTypeInfo();
         retValue = ((TypeInfo) elemTypeInfo).isDerivedFrom("http://www.w3.org/2001/XMLSchema", "string", 8);
-        assertTrue(retValue);
+        assertTrue(retValue, "Typeinfoisderivedfrom65Assert2");
     }
 }
 

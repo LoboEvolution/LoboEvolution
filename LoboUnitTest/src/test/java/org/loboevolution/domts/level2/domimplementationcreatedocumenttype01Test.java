@@ -49,7 +49,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#Level-2-Core-DOM-createDocument">http://www.w3.org/TR/DOM-Level-2-Core/core#Level-2-Core-DOM-createDocument</a>
  */
-public class domimplementationcreatedocumenttype01Test extends LoboUnitTest {
+public class Domimplementationcreatedocumenttype01Test extends LoboUnitTest {
 
     /**
      * Runs the test case.

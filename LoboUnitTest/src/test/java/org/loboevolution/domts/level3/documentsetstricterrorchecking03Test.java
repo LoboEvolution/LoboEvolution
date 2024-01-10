@@ -42,7 +42,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-strictErrorChecking">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-strictErrorChecking</a>
  */
-public class documentsetstricterrorchecking03Test extends LoboUnitTest {
+public class Documentsetstricterrorchecking03Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -50,7 +50,7 @@ public class documentsetstricterrorchecking03Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         doc.setStrictErrorChecking(false);
         strictErrorCheckingValue = doc.getStrictErrorChecking();
-        assertFalse(strictErrorCheckingValue);
+        assertFalse(strictErrorCheckingValue, "Documentsetstricterrorchecking03Assert2");
     }
 }
 

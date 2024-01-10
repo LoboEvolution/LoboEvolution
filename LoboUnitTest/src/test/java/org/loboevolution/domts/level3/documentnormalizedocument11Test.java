@@ -52,7 +52,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-namespace-declarations">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-namespace-declarations</a>
  */
-public class documentnormalizedocument11Test extends LoboUnitTest {
+public class DocumentnormalizeDocument11Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -67,7 +67,7 @@ public class documentnormalizedocument11Test extends LoboUnitTest {
         doc.normalizeDocument();
         elemList = doc.getElementsByTagNameNS("*", "acronym");
         elemName = (Element) elemList.item(1);
-        assertNotNull(elemName);
+        assertNotNull(elemName, "DocumentnormalizeDocument11Assert3");
         canSet = domConfig.canSetParameter("namespace-declarations", Boolean.FALSE);
 
         if (canSet) {
@@ -76,7 +76,7 @@ public class documentnormalizedocument11Test extends LoboUnitTest {
             elemList = doc.getElementsByTagNameNS("*", "acronym");
             elemName = (Element) elemList.item(1);
             nodeName = elemName.getNodeName();
-            assertEquals("address", nodeName);
+            assertEquals("address", nodeName, "DocumentnormalizeDocument11Assert4");
         }
     }
 }

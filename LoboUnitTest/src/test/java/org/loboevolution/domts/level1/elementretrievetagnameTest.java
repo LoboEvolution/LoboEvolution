@@ -49,7 +49,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D095">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D095</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-104682815">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-104682815</a>
  */
-public class elementretrievetagnameTest extends LoboUnitTest {
+public class ElementretrievetagnameTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -65,9 +65,9 @@ public class elementretrievetagnameTest extends LoboUnitTest {
         elementList = doc.getElementsByTagName("position");
         testEmployee = (Element)elementList.item(1);
         name = testEmployee.getNodeName();
-         assertEquals( "POSITION", name);
+         assertEquals( "POSITION", name, "ElementretrievetagnameAssert1");
         name = testEmployee.getTagName();
-        assertEquals("POSITION", name);
+        assertEquals("POSITION", name, "ElementretrievetagnameAssert2");
     }
 }
 

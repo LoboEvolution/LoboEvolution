@@ -45,16 +45,16 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-getDOMImpls">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-getDOMImpls</a>
  * @see <a href="http://lists.w3.org/Archives/Public/www-dom/2004JanMar/0111.html">http://lists.w3.org/Archives/Public/www-dom/2004JanMar/0111.html</a>
  */
-public class domimplementationregistry24Test extends LoboUnitTest {
+public class Domimplementationregistry24Test extends LoboUnitTest {
     @Test
     @SneakyThrows
     public void runTest() {
        
         final DOMImplementation domImpl;
          final DOMImplementationRegistry domImplRegistry = DOMImplementationRegistry.newInstance();
-        assertNotNull(domImplRegistry);
+        assertNotNull(domImplRegistry, "Domimplementationregistry24Assert2");
         domImpl = domImplRegistry.getDOMImplementation("");
-        assertNotNull(domImpl);
+        assertNotNull(domImpl, "Domimplementationregistry24Assert3");
     }
 }
 

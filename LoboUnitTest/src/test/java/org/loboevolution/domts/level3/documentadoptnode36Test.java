@@ -41,7 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode</a>
  */
-public class documentadoptnode36Test extends LoboUnitTest {
+public class Documentadoptnode36Test extends LoboUnitTest {
 
 
     @Test
@@ -76,12 +76,12 @@ public class documentadoptnode36Test extends LoboUnitTest {
             if ((adoptedPI2 != null)) {
                 piTarget = adoptedPI1.getTarget();
                 piData = adoptedPI1.getData();
-                assertEquals("PITarget", piTarget);
-                assertEquals("PIData", piData);
+                assertEquals("PITarget", piTarget, "Documentadoptnode36Assert2");
+                assertEquals("PIData", piData, "Documentadoptnode36Assert3");
                 piTarget = adoptedPI2.getTarget();
                 piData = adoptedPI2.getData();
-                assertEquals("PITarget", piTarget);
-                assertEquals("PIData", piData);
+                assertEquals("PITarget", piTarget, "Documentadoptnode36Assert4");
+                assertEquals("PIData", piData, "Documentadoptnode36Assert5");
             }
         }
     }

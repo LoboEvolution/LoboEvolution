@@ -49,7 +49,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Jenny Hsu
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMStringList-contains">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMStringList-contains</a>
  */
-public class domstringlistcontains02Test extends LoboUnitTest {
+public class Domstringlistcontains02Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -60,21 +60,21 @@ public class domstringlistcontains02Test extends LoboUnitTest {
         domConfig = doc.getDomConfig();
         paramList = domConfig.getParameterNames();
         contain = paramList.contains("comments");
-        assertTrue(contain);
+        assertTrue(contain, "Domstringlistcontains02Assert3");
         contain = paramList.contains("cdata-sections");
-        assertTrue(contain);
+        assertTrue(contain, "Domstringlistcontains02Assert4");
         contain = paramList.contains("entities");
-        assertTrue(contain);
+        assertTrue(contain, "Domstringlistcontains02Assert5");
         contain = paramList.contains("error-handler");
-        assertTrue(contain);
+        assertTrue(contain, "Domstringlistcontains02Assert6");
         contain = paramList.contains("infoset");
-        assertTrue(contain);
+        assertTrue(contain, "Domstringlistcontains02Assert7");
         contain = paramList.contains("namespace-declarations");
-        assertTrue(contain);
+        assertTrue(contain, "Domstringlistcontains02Assert8");
         contain = paramList.contains("element-content-whitespace");
-        assertTrue(contain);
+        assertTrue(contain, "Domstringlistcontains02Assert9");
         contain = paramList.contains("test");
-        assertFalse(contain);
+        assertFalse(contain, "Domstringlistcontains02Assert10");
     }
 }
 

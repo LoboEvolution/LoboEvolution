@@ -30,7 +30,6 @@ import lombok.Getter;
 import lombok.Setter;
 import org.htmlunit.cssparser.dom.CSSStyleSheetImpl;
 import org.loboevolution.html.node.Element;
-import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.css.CSSStyleSheet;
 import org.loboevolution.html.node.css.MediaList;
 import org.loboevolution.html.node.css.StyleSheet;

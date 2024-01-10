@@ -44,7 +44,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isDefaultNamespace">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isDefaultNamespace</a>
  */
-public class nodeisdefaultnamespace16Test extends LoboUnitTest {
+public class Nodeisdefaultnamespace16Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -53,7 +53,7 @@ public class nodeisdefaultnamespace16Test extends LoboUnitTest {
         doc = sampleXmlFile("barfoo.xml");
         attr = doc.createAttributeNS("http://www.w3.org/XML/1998/namespace", "lang");
         isDefault = attr.isDefaultNamespace("http://www.w3.org/XML/1998/namespace");
-        assertFalse(isDefault);
+        assertFalse(isDefault, "Nodeisdefaultnamespace16Assert2");
     }
 }
 

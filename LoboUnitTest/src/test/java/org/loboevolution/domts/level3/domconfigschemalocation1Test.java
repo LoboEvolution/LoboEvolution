@@ -49,7 +49,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration-getParameter">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration-getParameter</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration-setParameter">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration-setParameter</a>
  */
-public class domconfigschemalocation1Test extends LoboUnitTest {
+public class Domconfigschemalocation1Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final DOMImplementation domImpl;
@@ -67,11 +67,11 @@ public class domconfigschemalocation1Test extends LoboUnitTest {
         doc = domImpl.createDocument("http://www.w3.org/1999/xhtml", "html", nullDocType);
         domConfig = doc.getDomConfig();
         canSet = domConfig.canSetParameter(parameter, Boolean.TRUE);
-        assertFalse(canSet);
+        assertFalse(canSet, "Domconfigschemalocation1Assert1");
 
         try {
             state = (String) domConfig.getParameter(parameter);
-            assertNull(state);
+            assertNull(state, "Domconfigschemalocation1Assert2");
 
         } catch (final DOMException ex) {
             if (ex.getCode() == 8) {
@@ -81,18 +81,18 @@ public class domconfigschemalocation1Test extends LoboUnitTest {
         }
         /*DOMString */
         canSet = domConfig.canSetParameter(parameter, sampleSchemaLocation);
-        assertTrue(canSet);
+        assertTrue(canSet, "Domconfigschemalocation1Assert3");
         /*DOMString */
         canSet = domConfig.canSetParameter(parameter, nullSchemaLocation);
-        assertTrue(canSet);
+        assertTrue(canSet, "Domconfigschemalocation1Assert4");
         /*DOMString */
         domConfig.setParameter(parameter, sampleSchemaLocation);
         state = (String) domConfig.getParameter(parameter);
-        assertEquals(sampleSchemaLocation, state);
+        assertEquals(sampleSchemaLocation, state, "Domconfigschemalocation1Assert5");
         /*DOMString */
         domConfig.setParameter(parameter, nullSchemaLocation);
         state = (String) domConfig.getParameter(parameter);
-        assertNull(state);
+        assertNull(state, "Domconfigschemalocation1Assert6");
     }
 }
 

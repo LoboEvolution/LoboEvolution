@@ -57,7 +57,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1025163788">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1025163788</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-349467F9">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-349467F9</a>
  */
-public class namednodemapsetnameditemreturnvalueTest extends LoboUnitTest {
+public class NamednodemapsetnameditemreturnvalueTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -79,7 +79,7 @@ public class namednodemapsetnameditemreturnvalueTest extends LoboUnitTest {
         attributes = testAddress.getAttributes();
         newNode = attributes.setNamedItem(newAttribute);
         attrValue = newNode.getNodeValue();
-        assertEquals("No", attrValue);
+        assertEquals("No", attrValue, "NamednodemapsetnameditemreturnvalueAssert1");
     }
 }
 

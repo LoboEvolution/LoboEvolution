@@ -29,7 +29,6 @@ package org.loboevolution.html.dom.svgimpl;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.html.dom.filter.IdFilter;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.dom.svg.*;

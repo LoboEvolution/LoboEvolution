@@ -55,7 +55,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-785887307')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='NOT_FOUND_ERR'])">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-785887307')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='NOT_FOUND_ERR'])</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-785887307">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-785887307</a>
  */
-public class nodereplacechildnewchilddiffdocumentTest extends LoboUnitTest {
+public class NodereplacechildnewchilddiffdocumentTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -81,7 +81,7 @@ public class nodereplacechildnewchilddiffdocumentTest extends LoboUnitTest {
         } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.WRONG_DOCUMENT_ERR);
         }
-        assertTrue(success);
+        assertTrue(success, "NodereplacechildnewchilddiffdocumentAssert2");
     }
 }
 

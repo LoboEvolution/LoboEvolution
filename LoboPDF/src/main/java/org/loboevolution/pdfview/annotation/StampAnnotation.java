@@ -185,7 +185,7 @@ public class StampAnnotation extends PDFAnnotation {
     /**
      * Transform to the position of the stamp annotation
      *
-     * @return
+     * @return a {@link AffineTransform} object.
      */
     private AffineTransform getPositionTransformation() {
         final Float rect2 = getRect();

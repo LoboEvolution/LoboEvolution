@@ -48,7 +48,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=416">http://www.w3.org/Bugs/Public/show_bug.cgi?id=416</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-cdata-sections">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-cdata-sections</a>
  */
-public class documentnormalizedocument03Test extends LoboUnitTest {
+public class DocumentnormalizeDocument03Test extends LoboUnitTest {
 
 
     @Test
@@ -74,21 +74,21 @@ public class documentnormalizedocument03Test extends LoboUnitTest {
         /*DOMErrorMonitor */
         domConfig.setParameter("error-handler", errorMonitor);
         doc.normalizeDocument();
-        assertTrue(errorMonitor.assertLowerSeverity(2));
+        assertTrue(errorMonitor.assertLowerSeverity(2), "DocumentnormalizeDocument03Assert3");
         pList = doc.getElementsByTagName("p");
         elem = (Element) pList.item(0);
         cdata = (CDATASection) elem.getLastChild();
         nodeName = cdata.getNodeName();
-        assertEquals("#cdata-section", nodeName);
+        assertEquals("#cdata-section", nodeName, "DocumentnormalizeDocument03Assert4");
         domConfig.setParameter("cdata-sections", Boolean.FALSE);
         doc.normalizeDocument();
-        assertTrue( errorMonitor.assertLowerSeverity(2));
+        assertTrue( errorMonitor.assertLowerSeverity(2), "DocumentnormalizeDocument03Assert5");
         pList = doc.getElementsByTagName("p");
         elem = (Element) pList.item(0);
         text = elem.getLastChild();
         nodeName = text.getNodeName();
-        assertEquals( "#text", nodeName);
+        assertEquals( "#text", nodeName, "DocumentnormalizeDocument03Assert6");
         nodeValue = text.getNodeValue();
-        assertEquals("barCDATA", nodeValue);
+        assertEquals("barCDATA", nodeValue, "DocumentnormalizeDocument03Assert7");
     }
 }

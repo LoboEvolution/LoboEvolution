@@ -47,7 +47,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Mary Brady
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-E8AAB1D0">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-E8AAB1D0</a>
  */
-public class notationgetsystemidnullTest extends LoboUnitTest {
+public class NotationgetsystemidnullTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -62,12 +62,12 @@ public class notationgetsystemidnullTest extends LoboUnitTest {
         final String systemId;
         doc = sampleXmlFile("staff.xml");
         docType = doc.getDoctype();
-        assertNotNull(docType);
+        assertNotNull(docType, "NotationgetsystemidnullAssert1");
         notations = docType.getNotations();
-        assertNotNull(notations);
+        assertNotNull(notations, "NotationgetsystemidnullAssert2");
         notationNode = (Notation) notations.getNamedItem("notation1");
         systemId = notationNode.getSystemId();
-        assertNull(systemId);
+        assertNull(systemId, "NotationgetsystemidnullAssert3");
     }
 
 }

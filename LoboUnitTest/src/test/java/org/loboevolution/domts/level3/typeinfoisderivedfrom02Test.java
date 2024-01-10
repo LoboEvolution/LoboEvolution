@@ -44,7 +44,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Curt Arnold
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom</a>
  */
-public class typeinfoisderivedfrom02Test extends LoboUnitTest {
+public class Typeinfoisderivedfrom02Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -60,15 +60,15 @@ public class typeinfoisderivedfrom02Test extends LoboUnitTest {
         acronymElem = (Element) elemList.item(0);
         attr = acronymElem.getAttributeNode("title");
         typeInfo = attr.getSchemaTypeInfo();
-        assertNotNull(typeInfo);
+        assertNotNull(typeInfo, "Typeinfoisderivedfrom02Assert1");
         isDerived = typeInfo.isDerivedFrom("http://www.w3.org/2001/XMLSchema", "string", 1);
-        assertTrue(isDerived);
+        assertTrue(isDerived, "Typeinfoisderivedfrom02Assert2");
         isDerived = typeInfo.isDerivedFrom("http://www.w3.org/2001/XMLSchema", "string", 14);
-        assertFalse(isDerived);
+        assertFalse(isDerived, "Typeinfoisderivedfrom02Assert3");
         isDerived = typeInfo.isDerivedFrom("http://www.w3.org/2001/XMLSchema", "string", 0);
-        assertTrue(isDerived);
+        assertTrue(isDerived, "Typeinfoisderivedfrom02Assert4");
         isDerived = typeInfo.isDerivedFrom("http://www.w3.org/2001/XMLSchema", "string", 15);
-        assertTrue(isDerived);
+        assertTrue(isDerived, "Typeinfoisderivedfrom02Assert5");
     }
 }
 

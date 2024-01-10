@@ -47,7 +47,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-1734834066">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-1734834066</a>
  */
-public class noderemovechild12Test extends LoboUnitTest {
+public class Noderemovechild12Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -60,7 +60,7 @@ public class noderemovechild12Test extends LoboUnitTest {
         docFrag.appendChild(eRef);
         docFrag.removeChild(eRef);
         removedERef = (EntityReference) docFrag.getFirstChild();
-        assertNull(removedERef);
+        assertNull(removedERef, "Noderemovechild12Assert2");
 
         try {
             eRef.removeChild(docFrag);

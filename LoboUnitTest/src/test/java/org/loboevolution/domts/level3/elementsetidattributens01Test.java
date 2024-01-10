@@ -46,7 +46,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Jenny Hsu
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-ElSetIdAttrNS">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-ElSetIdAttrNS</a>
  */
-public class elementsetidattributens01Test extends LoboUnitTest {
+public class Elementsetidattributens01Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -64,13 +64,13 @@ public class elementsetidattributens01Test extends LoboUnitTest {
         attributesMap = employeeElem.getAttributes();
         attr = (Attr) attributesMap.getNamedItem("xmlns:dmstc");
         id = attr.isId();
-        assertTrue(id);
+        assertTrue(id, "Elementsetidattributens01Assert1");
         elem = doc.getElementById("http://www.netzero.com");
         elemName = elem.getTagName();
-        assertEquals("P", elemName);
+        assertEquals("P", elemName, "Elementsetidattributens01Assert2");
         employeeElem.setIdAttributeNS("http://www.usa.com", "dmstc", false);
         id = attr.isId();
-        assertFalse(id);
+        assertFalse(id, "Elementsetidattributens01Assert3");
     }
 
 }

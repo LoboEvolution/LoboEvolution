@@ -47,7 +47,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=419">http://www.w3.org/Bugs/Public/show_bug.cgi?id=419</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/infoset-mapping#Infoset2Notation">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/infoset-mapping#Infoset2Notation</a>
  */
-public class nodegetbaseuri13Test extends LoboUnitTest {
+public class Nodegetbaseuri13Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -62,7 +62,7 @@ public class nodegetbaseuri13Test extends LoboUnitTest {
         notation = (Notation) notationsMap.getNamedItem("notation1");
         baseURI = notation.getBaseURI();
         docURI = doc.getDocumentURI();
-        assertEquals(docURI, baseURI);
+        assertEquals(docURI, baseURI, "Nodegetbaseuri13Assert2");
         assertURIEquals(new URIEquals(null, null, null, null, "hc_staff", null, null, true, baseURI));
     }
 }

@@ -42,7 +42,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-inputEncoding">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-inputEncoding</a>
  */
-public class documentgetinputencoding04Test extends LoboUnitTest {
+public class Documentgetinputencoding04Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;

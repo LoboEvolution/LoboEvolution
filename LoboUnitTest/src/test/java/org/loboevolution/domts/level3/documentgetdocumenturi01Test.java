@@ -41,14 +41,14 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-documentURI">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-documentURI</a>
  */
-public class documentgetdocumenturi01Test extends LoboUnitTest {
+public class Documentgetdocumenturi01Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
         final String docURI;
         doc = sampleXmlFile("hc_staff.xml");
         docURI = doc.getDocumentURI();
-        assertNotNull("documentgetdocumenturi01", docURI);
+        assertNotNull(docURI, "Documentgetdocumenturi01Assert2");
     }
 }
 

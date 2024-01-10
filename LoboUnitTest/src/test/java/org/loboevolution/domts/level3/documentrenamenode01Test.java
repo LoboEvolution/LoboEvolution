@@ -49,7 +49,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-renameNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-renameNode</a>
  */
-public class documentrenamenode01Test extends LoboUnitTest {
+public class Documentrenamenode01Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -68,9 +68,9 @@ public class documentrenamenode01Test extends LoboUnitTest {
         nodeName = renamedclass.getNodeName();
         namespaceURI = renamedclass.getNamespaceURI();
         nodeType = renamedclass.getNodeType();
-        assertEquals( "renamedNode", nodeName);
-        assertEquals(2, nodeType);
-        assertEquals( "http://www.w3.org/DOM/Test", namespaceURI);
+        assertEquals( "renamedNode", nodeName, "Documentrenamenode01Assert2");
+        assertEquals(2, nodeType, "Documentrenamenode01Assert3");
+        assertEquals( "http://www.w3.org/DOM/Test", namespaceURI, "Documentrenamenode01Assert4");
     }
 }
 

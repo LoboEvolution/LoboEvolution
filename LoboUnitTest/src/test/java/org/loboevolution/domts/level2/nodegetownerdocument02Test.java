@@ -50,7 +50,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#node-ownerDoc">http://www.w3.org/TR/DOM-Level-2-Core/core#node-ownerDoc</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=259">http://www.w3.org/Bugs/Public/show_bug.cgi?id=259</a>
  */
-public class nodegetownerdocument02Test extends LoboUnitTest {
+public class Nodegetownerdocument02Test extends LoboUnitTest {
 
     /**
      * Runs the test case.

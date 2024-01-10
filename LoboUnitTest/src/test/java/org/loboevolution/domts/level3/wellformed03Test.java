@@ -50,7 +50,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-well-formed">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-well-formed</a>
  */
-public class wellformed03Test extends LoboUnitTest {
+public class Wellformed03Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final DOMImplementation domImpl;
@@ -81,7 +81,7 @@ public class wellformed03Test extends LoboUnitTest {
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
             }
-            assertTrue(success);
+            assertTrue(success, "Wellformed03Assert1");
         }
 
         try {
@@ -105,14 +105,14 @@ public class wellformed03Test extends LoboUnitTest {
         for (final DOMError domError : errors) {
             error = domError;
             severity = error.getSeverity();
-            assertEquals(2, severity);
+            assertEquals(2, severity, "Wellformed03Assert2");
             type = error.getType();
-            assertEquals("wf-invalid-character-in-node-name", type);
+            assertEquals("wf-invalid-character-in-node-name", type, "Wellformed03Assert3");
             locator = error.getLocation();
             relatedNode = locator.getRelatedNode();
-            assertSame(attr, relatedNode);
+            assertSame(attr, relatedNode, "Wellformed03Assert4");
         }
-        assertSame(1, errors.size());
+        assertSame(1, errors.size(), "Wellformed03Assert5");
     }
 }
 

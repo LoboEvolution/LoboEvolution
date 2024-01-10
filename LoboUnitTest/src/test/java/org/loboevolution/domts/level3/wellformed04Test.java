@@ -51,7 +51,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-well-formed">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-well-formed</a>
  */
-public class wellformed04Test extends LoboUnitTest {
+public class Wellformed04Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final DOMImplementation domImpl;
@@ -76,7 +76,7 @@ public class wellformed04Test extends LoboUnitTest {
         } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
         }
-        assertTrue(success);
+        assertTrue(success, "Wellformed04Assert3");
 
 
         try {
@@ -100,7 +100,7 @@ public class wellformed04Test extends LoboUnitTest {
             doc.normalizeDocument();
             errors = errorMonitor.getErrors();
             for (final DOMError domError : errors) {
-                assertNull(domError);
+                assertNull(domError, "Wellformed04Assert4");
             }
         }
     }

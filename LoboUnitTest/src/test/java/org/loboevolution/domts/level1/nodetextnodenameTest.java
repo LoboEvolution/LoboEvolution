@@ -50,7 +50,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Mary Brady
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D095">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D095</a>
  */
-public class nodetextnodenameTest extends LoboUnitTest {
+public class NodetextnodenameTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -68,7 +68,7 @@ public class nodetextnodenameTest extends LoboUnitTest {
         testAddr = (Element) elementList.item(0);
         textNode = testAddr.getFirstChild();
         textName = textNode.getNodeName();
-        assertEquals("#text", textName);
+        assertEquals("#text", textName, "NodetextnodenameAssert1");
     }
 
 }

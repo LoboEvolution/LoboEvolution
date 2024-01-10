@@ -44,7 +44,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-B63ED1A3">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-B63ED1A3</a>
  */
-public class nodevalue05Test extends LoboUnitTest {
+public class Nodevalue05Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -58,16 +58,16 @@ public class nodevalue05Test extends LoboUnitTest {
         doc = sampleXmlFile("staff.xml");
         newNode = doc.createDocumentFragment();
         newValue = newNode.getNodeValue();
-        assertNull(newValue);
+        assertNull(newValue, "Nodevalue05Assert1");
         boolean success = false;
         try {
             newNode.setNodeValue("This should have no effect");
         } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.INVALID_MODIFICATION_ERR);
         }
-        assertTrue(success);
+        assertTrue(success, "Nodevalue05Assert2");
         newValue = newNode.getNodeValue();
-        assertNull(newValue);
+        assertNull(newValue, "Nodevalue05Assert3");
     }
 
 }

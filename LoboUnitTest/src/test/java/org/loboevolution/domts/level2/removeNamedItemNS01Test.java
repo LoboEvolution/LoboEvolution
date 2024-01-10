@@ -51,7 +51,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * @author Mary Brady
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-1074577549">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-1074577549</a>
  */
-public class removeNamedItemNS01Test extends LoboUnitTest {
+public class RemoveNamedItemNS01Test extends LoboUnitTest {
 
     /**
      * Runs the test case.

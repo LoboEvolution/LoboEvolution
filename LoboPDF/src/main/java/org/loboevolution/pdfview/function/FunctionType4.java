@@ -26,6 +26,7 @@
 package org.loboevolution.pdfview.function;
 
 import org.loboevolution.pdfview.PDFObject;
+import org.loboevolution.pdfview.decrypt.PDFPassword;
 import org.loboevolution.pdfview.function.postscript.PostScriptParser;
 import org.loboevolution.pdfview.function.postscript.operation.OperationSet;
 import org.loboevolution.pdfview.function.postscript.operation.PostScriptOperation;
@@ -98,8 +99,8 @@ public class FunctionType4 extends PDFFunction {
     }
 
     /*************************************************************************
-     * @param outputs
-     * @param outputOffset
+     * @param outputs a {@link Float} object.
+     * @param outputOffset a {@link Float} object.
      ************************************************************************/
     private void prepareResult(final float[] outputs, final int outputOffset) {
         for (int i = outputOffset; i < outputs.length; i++) {
@@ -110,8 +111,8 @@ public class FunctionType4 extends PDFFunction {
     /*************************************************************************
      * Put all input values on the initial stack.
      * All values are pushed as Double because we calculate internally with double.
-     * @param inputs
-     * @param inputOffset
+     * @param inputs a {@link Float} object.
+     * @param inputOffset a {@link Integer} object.
      ************************************************************************/
 
     private void prepareInitialStack(final float[] inputs, final int inputOffset) {
@@ -122,8 +123,8 @@ public class FunctionType4 extends PDFFunction {
     }
 
     /*************************************************************************
-     * @param outputs
-     * @param outputOffset
+     * @param outputs a {@link Float} object.
+     * @param outputOffset a {@link Integer} object.
      ************************************************************************/
 
     private void assertResultIsCorrect(final float[] outputs, final int outputOffset) {

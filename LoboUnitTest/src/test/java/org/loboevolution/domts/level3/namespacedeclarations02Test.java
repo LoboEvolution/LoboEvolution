@@ -45,7 +45,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-namespace-declarations">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-namespace-declarations</a>
  */
-public class namespacedeclarations02Test extends LoboUnitTest {
+public class Namespacedeclarations02Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -60,10 +60,10 @@ public class namespacedeclarations02Test extends LoboUnitTest {
         /*DOMErrorMonitor */
         domConfig.setParameter("error-handler", errorMonitor);
         doc.normalizeDocument();
-        assertTrue(errorMonitor.assertLowerSeverity(2));
+        assertTrue(errorMonitor.assertLowerSeverity(2), "Namespacedeclarations02Assert1");
         docElem = doc.getDocumentElement();
         xmlnsAttr = docElem.getAttributeNode("xmlns");
-        assertNull(xmlnsAttr);
+        assertNull(xmlnsAttr, "Namespacedeclarations02Assert2");
     }
 }
 

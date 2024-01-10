@@ -44,7 +44,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-standalone">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-standalone</a>
  */
-public class documentgetxmlstandalone02Test extends LoboUnitTest {
+public class Documentgetxmlstandalone02Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -63,7 +63,7 @@ public class documentgetxmlstandalone02Test extends LoboUnitTest {
         domImpl = doc.getImplementation();
         newDoc = domImpl.createDocument(rootNS, rootName, nullDocType);
         standalone = newDoc.getXmlStandalone();
-        assertFalse(standalone);
+        assertFalse(standalone, "Documentgetxmlstandalone02Assert2");
     }
 }
 

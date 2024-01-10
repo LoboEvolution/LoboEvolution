@@ -44,7 +44,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-renameNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-renameNode</a>
  */
-public class documentrenamenode27Test extends LoboUnitTest {
+public class Documentrenamenode27Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -84,7 +84,7 @@ public class documentrenamenode27Test extends LoboUnitTest {
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
             }
-            assertTrue(success);
+            assertTrue(success, "Documentrenamenode27Assert2");
         }
 
         {
@@ -94,7 +94,7 @@ public class documentrenamenode27Test extends LoboUnitTest {
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
             }
-            assertTrue(success);
+            assertTrue(success, "Documentrenamenode27Assert3");
         }
 
         {
@@ -104,7 +104,7 @@ public class documentrenamenode27Test extends LoboUnitTest {
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
             }
-            assertTrue(success);
+            assertTrue(success, "Documentrenamenode27Assert4");
         }
 
 
@@ -114,7 +114,7 @@ public class documentrenamenode27Test extends LoboUnitTest {
         } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
         }
-        assertTrue(success);
+        assertTrue(success, "Documentrenamenode27Assert5");
 
 
         success = false;
@@ -123,7 +123,7 @@ public class documentrenamenode27Test extends LoboUnitTest {
         } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
         }
-        assertTrue(success);
+        assertTrue(success, "Documentrenamenode27Assert6");
 
     }
 

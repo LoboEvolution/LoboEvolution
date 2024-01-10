@@ -26,9 +26,7 @@
 
 package org.loboevolution.pdfview.action;
 
-import lombok.Data;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import org.loboevolution.pdfview.PDFDestination;
 import org.loboevolution.pdfview.PDFObject;
 

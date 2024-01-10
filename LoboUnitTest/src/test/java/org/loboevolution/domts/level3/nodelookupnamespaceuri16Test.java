@@ -41,7 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-lookupNamespaceURI">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-lookupNamespaceURI</a>
  */
-public class nodelookupnamespaceuri16Test extends LoboUnitTest {
+public class Nodelookupnamespaceuri16Test extends LoboUnitTest {
 @Test
 public void runTest(){
         final Document doc;
@@ -54,7 +54,7 @@ public void runTest(){
         attr=doc.createAttributeNS("http://www.w3.org/XML/1998/namespace","xml:lang");
         attNode=elem.setAttributeNodeNS(attr);
         namespaceURI=attr.lookupNamespaceURI("xml");
-        assertNull(namespaceURI);
+        assertNull(namespaceURI, "Nodelookupnamespaceuri16Assert2");
         }
         }
 

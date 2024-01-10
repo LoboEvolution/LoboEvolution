@@ -53,7 +53,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * @author Mary Brady
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1074577549">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1074577549</a>
  */
-public class namednodemapreturnnullTest extends LoboUnitTest {
+public class NamednodemapreturnnullTest extends LoboUnitTest {
 
 
     /**
@@ -72,7 +72,7 @@ public class namednodemapreturnnullTest extends LoboUnitTest {
         testEmployee = (Element) elementList.item(1);
         attributes = testEmployee.getAttributes();
         districtNode = (Attr) attributes.getNamedItem("district");
-        assertNull(districtNode);
+        assertNull(districtNode, "NamednodemapreturnnullAssert2");
     }
 }
 

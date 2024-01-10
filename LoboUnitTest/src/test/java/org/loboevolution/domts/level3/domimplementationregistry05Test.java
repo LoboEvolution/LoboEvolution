@@ -46,18 +46,18 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/ecma-script-binding">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/ecma-script-binding</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-getDOMImpl">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-getDOMImpl</a>
  */
-public class domimplementationregistry05Test extends LoboUnitTest {
+public class Domimplementationregistry05Test extends LoboUnitTest {
     @SneakyThrows
     @Test
     public void runTest()  {
         final DOMImplementation domImpl;
         final boolean hasFeature;
         final DOMImplementationRegistry domImplRegistry = DOMImplementationRegistry.newInstance();
-        assertNotNull(domImplRegistry);
+        assertNotNull(domImplRegistry, "Domimplementationregistry05Assert3");
         domImpl = domImplRegistry.getDOMImplementation("+cOrE 3.0");
-        assertNotNull(domImpl);
+        assertNotNull(domImpl, "Domimplementationregistry05Assert4");
         hasFeature = domImpl.hasFeature("+Core", "3.0");
-        assertTrue(hasFeature);
+        assertTrue(hasFeature, "Domimplementationregistry05Assert5");
     }
 }
 

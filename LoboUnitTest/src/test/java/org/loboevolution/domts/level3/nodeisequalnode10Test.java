@@ -44,7 +44,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isEqualNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isEqualNode</a>
  */
-public class nodeisequalnode10Test extends LoboUnitTest {
+public class Nodeisequalnode10Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -57,7 +57,7 @@ public class nodeisequalnode10Test extends LoboUnitTest {
         elem1 = (Element) employeeList.item(0);
         elem2 = (Element) employeeList.item(1);
         isEqual = elem1.isEqualNode(elem2);
-        assertFalse(isEqual);
+        assertFalse(isEqual, "Nodeisequalnode10Assert2");
     }
 }
 

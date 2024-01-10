@@ -48,7 +48,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author Jenny Hsu
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-typeName">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-typeName</a>
  */
-public class typeinfogettypenamespace03Test extends LoboUnitTest {
+public class Typeinfogettypenamespace03Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -63,7 +63,7 @@ public class typeinfogettypenamespace03Test extends LoboUnitTest {
         classAttr = acElem.getAttributeNode("class");
         attrTypeInfo = classAttr.getSchemaTypeInfo();
         typeNamespace = attrTypeInfo.getTypeNamespace();
-        assertEquals("http://www.w3.org/1999/xhtml", typeNamespace);
+        assertEquals("http://www.w3.org/1999/xhtml", typeNamespace, "Typeinfogettypenamespace03Assert2");
     }
 }
 

@@ -49,7 +49,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1060184317">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1060184317</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=251">http://www.w3.org/Bugs/Public/show_bug.cgi?id=251</a>
  */
-public class nodeparentnodeTest extends LoboUnitTest {
+public class NodeparentnodeTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -67,7 +67,7 @@ public class nodeparentnodeTest extends LoboUnitTest {
         employeeNode = elementList.item(1);
         parentNode = employeeNode.getParentNode();
         parentName = parentNode.getNodeName();
-        assertEquals("STAFF", parentName);
+        assertEquals("STAFF", parentName, "NodeparentnodeAssert1");
 
     }
 

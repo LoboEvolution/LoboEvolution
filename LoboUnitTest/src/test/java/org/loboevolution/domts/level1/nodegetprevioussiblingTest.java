@@ -44,7 +44,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Mary Brady
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-640FB3C8">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-640FB3C8</a>
  */
-public class nodegetprevioussiblingTest extends LoboUnitTest {
+public class NodegetprevioussiblingTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -62,7 +62,7 @@ public class nodegetprevioussiblingTest extends LoboUnitTest {
         nameNode = elementList.item(1);
         psNode = nameNode.getPreviousSibling();
         psName = psNode.getNodeName();
-        assertEquals( "employeeId", psName);
+        assertEquals( "employeeId", psName, "NodegetprevioussiblingAssert1");
     }
 }
 

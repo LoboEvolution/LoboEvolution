@@ -43,7 +43,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMImplementation3-getFeature">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMImplementation3-getFeature</a>
  */
-public class domimplementationgetfeature03Test extends LoboUnitTest {
+public class Domimplementationgetfeature03Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -54,7 +54,7 @@ public class domimplementationgetfeature03Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         domImpl = doc.getImplementation();
         domImplReturned = (DOMImplementation) domImpl.getFeature("Core", nullVersion);
-        assertNotNull(domImplReturned);
+        assertNotNull(domImplReturned, "Domimplementationgetfeature03Assert2");
     }
 }
 

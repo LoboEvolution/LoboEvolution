@@ -49,7 +49,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D095">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D095</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-785887307">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-785887307</a>
  */
-public class nodereplacechildnodenameTest extends LoboUnitTest {
+public class NodereplacechildnodenameTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -77,9 +77,9 @@ public class nodereplacechildnodenameTest extends LoboUnitTest {
         childName = replacedNode.getNodeName();
 
         if (length == 6) {
-            assertEquals("NAME", childName);
+            assertEquals("NAME", childName, "NodereplacechildnodenameAssert1");
         } else {
-            assertEquals( "EMPLOYEEID",childName);
+            assertEquals( "EMPLOYEEID",childName, "NodereplacechildnodenameAssert2");
         }
 
     }

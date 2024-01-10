@@ -38,7 +38,7 @@ public class DTMDOMException extends DOMException {
   /**
    * Constructor DTMDOMException
    *
-   * @param code
+   * @param code a {@link Short} object.
    */
   public DTMDOMException(final short code) {
     super(code, "");

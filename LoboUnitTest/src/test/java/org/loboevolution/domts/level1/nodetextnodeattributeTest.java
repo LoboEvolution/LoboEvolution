@@ -50,7 +50,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-84CF096">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-84CF096</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1312295772">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1312295772</a>
  */
-public class nodetextnodeattributeTest extends LoboUnitTest {
+public class NodetextnodeattributeTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -68,7 +68,7 @@ public class nodetextnodeattributeTest extends LoboUnitTest {
         testAddr = elementList.item(0);
         textNode = (Text) testAddr.getFirstChild();
         attrList = textNode.getAttributes();
-        assertNull(attrList);
+        assertNull(attrList, "NodetextnodeattributeAssert2");
     }
 
 }

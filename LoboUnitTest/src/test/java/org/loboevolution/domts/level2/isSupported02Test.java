@@ -52,7 +52,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
  * @author Mary Brady
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#Level-2-Core-Node-supports">http://www.w3.org/TR/DOM-Level-2-Core/core#Level-2-Core-Node-supports</a>
  */
-public class isSupported02Test extends LoboUnitTest {
+public class IsSupported02Test extends LoboUnitTest {
 
     /**
      * Runs the test case.

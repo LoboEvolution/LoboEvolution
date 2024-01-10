@@ -45,7 +45,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-textContent">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-textContent</a>
  */
-public class nodegettextcontent14Test extends LoboUnitTest {
+public class Nodegettextcontent14Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -56,7 +56,7 @@ public class nodegettextcontent14Test extends LoboUnitTest {
         elemList = doc.getElementsByTagName("p");
         elem = (Element) elemList.item(2);
         textContent = elem.getTextContent();
-        assertEquals("\n  EMP0003\n  Roger\n Jones\n  Department Manager\n  100,000\n  Element data\n  PO Box 27 Irving, texas 98553\n ", textContent);
+        assertEquals("\n  EMP0003\n  Roger\n Jones\n  Department Manager\n  100,000\n  Element data\n  PO Box 27 Irving, texas 98553\n ", textContent, "Nodegettextcontent14Assert2");
     }
 }
 

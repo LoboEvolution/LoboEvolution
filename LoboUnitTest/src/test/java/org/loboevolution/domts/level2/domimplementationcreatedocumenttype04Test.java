@@ -50,7 +50,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#Level-2-Core-DOM-createDocType">http://www.w3.org/TR/DOM-Level-2-Core/core#Level-2-Core-DOM-createDocType</a>
  */
-public class domimplementationcreatedocumenttype04Test extends LoboUnitTest {
+public class Domimplementationcreatedocumenttype04Test extends LoboUnitTest {
 
     /**
      * Runs the test case.

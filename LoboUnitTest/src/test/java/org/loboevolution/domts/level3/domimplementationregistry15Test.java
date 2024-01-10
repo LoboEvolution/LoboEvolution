@@ -48,7 +48,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/ecma-script-binding">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/ecma-script-binding</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-getDOMImpls">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-getDOMImpls</a>
  */
-public class domimplementationregistry15Test extends LoboUnitTest {
+public class Domimplementationregistry15Test extends LoboUnitTest {
     @Test
     @SneakyThrows
     public void runTest() {
@@ -60,14 +60,14 @@ public class domimplementationregistry15Test extends LoboUnitTest {
         final DOMImplementationList domImplList;
         final int length;
          final DOMImplementationRegistry domImplRegistry = DOMImplementationRegistry.newInstance();
-        assertNotNull(domImplRegistry);
+        assertNotNull(domImplRegistry, "Domimplementationregistry15Assert3");
         domImplList = domImplRegistry.getDOMImplementationList("+cOrE");
         length = (int) domImplList.getLength();
-        assertTrue((length > 0));
+        assertTrue((length > 0), "Domimplementationregistry15Assert4");
         for (int indexN10057 = 0; indexN10057 < domImplList.getLength(); indexN10057++) {
             domImpl = (DOMImplementation) domImplList.item(indexN10057);
             hasFeature = domImpl.hasFeature("+Core", nullVersion);
-            assertTrue(hasFeature);
+            assertTrue(hasFeature, "Domimplementationregistry15Assert5");
         }
     }
 }

@@ -44,7 +44,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-11C98490">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-11C98490</a>
  */
-public class nodevalue03Test extends LoboUnitTest {
+public class Nodevalue03Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -57,19 +57,19 @@ public class nodevalue03Test extends LoboUnitTest {
         String newValue;
         doc = sampleXmlFile("staff.xml");
         newNode = doc.createEntityReference("ent1");
-        assertNotNull(newNode);
+        assertNotNull(newNode, "Nodevalue03Assert1");
         newValue = newNode.getNodeValue();
-        assertNull(newValue);
+        assertNull(newValue, "Nodevalue03Assert2");
         boolean success = false;
         try {
             newNode.setNodeValue("This should have no effect");
         } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.INVALID_MODIFICATION_ERR);
         }
-        assertTrue(success);
+        assertTrue(success, "Nodevalue03Assert3");
 
         newValue = newNode.getNodeValue();
-        assertNull(newValue);
+        assertNull(newValue, "Nodevalue03Assert4");
     }
 
 }

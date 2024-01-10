@@ -45,7 +45,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-textContent">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-textContent</a>
  */
-public class nodegettextcontent11Test extends LoboUnitTest {
+public class Nodegettextcontent11Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -58,7 +58,7 @@ public class nodegettextcontent11Test extends LoboUnitTest {
         elem = (Element) elemList.item(1);
         cdata = (CDATASection) elem.getLastChild();
         textContent = cdata.getTextContent();
-        assertEquals("This is an adjacent CDATASection with a reference to a tab &tab;", textContent);
+        assertEquals("This is an adjacent CDATASection with a reference to a tab &tab;", textContent, "Nodegettextcontent11Assert2");
     }
 }
 

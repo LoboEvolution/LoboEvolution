@@ -43,7 +43,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode</a>
  */
-public class documentadoptnode27Test extends LoboUnitTest {
+public class Documentadoptnode27Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -76,8 +76,8 @@ public class documentadoptnode27Test extends LoboUnitTest {
         if ((adoptedNode != null)) {
             adoptedName = adoptedNode.getNodeName();
             adoptedNS = adoptedNode.getNamespaceURI();
-            assertEquals("xhtml:head", adoptedName);
-            assertEquals("http://www.w3.org/1999/xhtml", adoptedNS);
+            assertEquals("xhtml:head", adoptedName, "Documentadoptnode27Assert2");
+            assertEquals("http://www.w3.org/1999/xhtml", adoptedNS, "Documentadoptnode27Assert3");
         }
     }
 }

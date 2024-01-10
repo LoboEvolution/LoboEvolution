@@ -221,8 +221,8 @@ public class PDFColorSpace {
                 break;
             case "Indexed":
             case "I":
-                /**
-                 * 4.5.5 [/Indexed baseColor hival lookup]
+                /*
+                  4.5.5 [/Indexed baseColor hival lookup]
                  */
                 final PDFColorSpace refspace = getColorSpace(ary[1], resources);
 

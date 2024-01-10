@@ -54,7 +54,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isEqualNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isEqualNode</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=529">http://www.w3.org/Bugs/Public/show_bug.cgi?id=529</a>
  */
-public class nodeisequalnode11Test extends LoboUnitTest {
+public class Nodeisequalnode11Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -82,15 +82,15 @@ public class nodeisequalnode11Test extends LoboUnitTest {
         elem1 = (Element) employeeList.item(0);
         elem2 = (Element) newDoc.importNode(elem1, false);
         isEqual = elem1.isEqualNode(elem2);
-        assertFalse(isEqual);
+        assertFalse(isEqual, "Nodeisequalnode11Assert3");
         elem3 = (Element) newDoc.importNode(elem1, true);
         isEqual = elem1.isEqualNode(elem3);
 
-        assertFalse(isEqual);
+        assertFalse(isEqual, "Nodeisequalnode11Assert4");
         dupDoc = sampleXmlFile("hc_staff.xml");
         elem4 = (Element) dupDoc.importNode(elem1, true);
         isEqual = elem1.isEqualNode(elem4);
-        assertTrue(isEqual);
+        assertTrue(isEqual, "Nodeisequalnode11Assert5");
     }
 }
 

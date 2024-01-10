@@ -49,7 +49,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Mary Brady
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080</a>
  */
-public class nodeprocessinginstructionnodevalueTest extends LoboUnitTest {
+public class NodeprocessinginstructionnodevalueTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -65,7 +65,7 @@ public class nodeprocessinginstructionnodevalueTest extends LoboUnitTest {
         testList = doc.getChildNodes();
         piNode = testList.item(0);
         piValue = piNode.getNodeValue();
-        assertEquals( "PIDATA", piValue);
+        assertEquals( "PIDATA", piValue, "NodeprocessinginstructionnodevalueAssert1");
     }
 
 }

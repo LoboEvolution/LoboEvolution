@@ -51,7 +51,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#node-ownerDoc">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#node-ownerDoc</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=251">http://www.w3.org/Bugs/Public/show_bug.cgi?id=251</a>
  */
-public class nodegetownerdocumentTest extends LoboUnitTest {
+public class NodegetownerdocumentTest extends LoboUnitTest {
     /**
      * Runs the test case.
      *
@@ -70,7 +70,7 @@ public class nodegetownerdocumentTest extends LoboUnitTest {
         ownerDocument = docNode.getOwnerDocument();
         docElement = ownerDocument.getDocumentElement();
         elementName = docElement.getNodeName();
-        assertEquals( "STAFF", elementName);
+        assertEquals( "STAFF", elementName, "NodegetownerdocumentAssert1");
 
     }
 }

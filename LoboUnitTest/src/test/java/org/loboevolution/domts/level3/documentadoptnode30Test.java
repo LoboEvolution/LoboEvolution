@@ -41,7 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode</a>
  */
-public class documentadoptnode30Test extends LoboUnitTest {
+public class Documentadoptnode30Test extends LoboUnitTest {
 
 
     @Test
@@ -56,7 +56,7 @@ public class documentadoptnode30Test extends LoboUnitTest {
 
         if ((adoptedText != null)) {
             nodeValue = adoptedText.getNodeValue();
-            assertEquals( "Document.adoptNode test for a TEXT_NODE", nodeValue);
+            assertEquals( "Document.adoptNode test for a TEXT_NODE", nodeValue, "Documentadoptnode30Assert2");
         }
     }
 }

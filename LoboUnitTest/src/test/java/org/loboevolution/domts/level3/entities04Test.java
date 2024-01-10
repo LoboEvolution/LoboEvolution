@@ -43,7 +43,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-normalize">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-normalize</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-entities">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-entities</a>
  */
-public class entities04Test extends LoboUnitTest {
+public class Entities04Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -70,17 +70,17 @@ public class entities04Test extends LoboUnitTest {
         entRef = doc.createEntityReference("ent1");
         child = pElem.appendChild(entRef);
         doc.normalize();
-        assertTrue(errorMonitor.assertLowerSeverity(2));
+        assertTrue(errorMonitor.assertLowerSeverity(2), "Entities04Assert1");
         pList = doc.getElementsByTagName("p");
         pElem = (Element) pList.item(0);
         child = pElem.getLastChild();
-        assertNotNull(child);
+        assertNotNull(child, "Entities04Assert2");
         childName = child.getNodeName();
-        assertEquals( "ent1", childName);
+        assertEquals( "ent1", childName, "Entities04Assert3");
         doctype = doc.getDoctype();
         entities = doctype.getEntities();
         ent2 = entities.getNamedItem("ent2");
-        assertNotNull(ent2);
+        assertNotNull(ent2, "Entities04Assert4");
     }
 }
 

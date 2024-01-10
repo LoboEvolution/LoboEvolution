@@ -48,7 +48,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-952280727">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-952280727</a>
  */
-public class nodeinsertbefore12Test extends LoboUnitTest {
+public class Nodeinsertbefore12Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -67,7 +67,7 @@ public class nodeinsertbefore12Test extends LoboUnitTest {
         inserted = docFrag.insertBefore(docFragNew, elem);
         last = docFrag.getLastChild();
         name = last.getNodeName();
-        assertEquals("dom3:elem", name);
+        assertEquals("dom3:elem", name, "Nodeinsertbefore12Assert2");
     }
 }
 

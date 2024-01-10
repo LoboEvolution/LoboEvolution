@@ -47,7 +47,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-104682815">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-104682815</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=251">http://www.w3.org/Bugs/Public/show_bug.cgi?id=251</a>
  */
-public class elementgettagnameTest extends LoboUnitTest {
+public class ElementgettagnameTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -60,7 +60,7 @@ public class elementgettagnameTest extends LoboUnitTest {
         doc = sampleXmlFile("staff.xml");
         root = doc.getDocumentElement();
         tagname = root.getTagName();
-        assertEquals("STAFF", tagname);
+        assertEquals("STAFF", tagname, "ElementgettagnameAssert1");
     }
 }
 

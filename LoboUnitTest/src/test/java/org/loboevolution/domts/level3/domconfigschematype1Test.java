@@ -49,7 +49,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration-getParameter">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration-getParameter</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration-setParameter">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration-setParameter</a>
  */
-public class domconfigschematype1Test extends LoboUnitTest {
+public class Domconfigschematype1Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final DOMImplementation domImpl;
@@ -66,7 +66,7 @@ public class domconfigschematype1Test extends LoboUnitTest {
         doc = domImpl.createDocument("http://www.w3.org/1999/xhtml", "html", nullDocType);
         domConfig = doc.getDomConfig();
         canSet = domConfig.canSetParameter(parameter, Boolean.TRUE);
-        assertFalse(canSet);
+        assertFalse(canSet, "Domconfigschematype1Assert1");
 
         try {
             state = (String) domConfig.getParameter(parameter);
@@ -84,7 +84,7 @@ public class domconfigschematype1Test extends LoboUnitTest {
             /*DOMString */
             domConfig.setParameter(parameter, dtdType);
             state = (String) domConfig.getParameter(parameter);
-            assertEquals( dtdType, state);
+            assertEquals( dtdType, state, "Domconfigschematype1Assert2");
         } else {
 
             {
@@ -95,7 +95,7 @@ public class domconfigschematype1Test extends LoboUnitTest {
                 } catch (final DOMException ex) {
                     success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
                 }
-                assertTrue(success);
+                assertTrue(success, "Domconfigschematype1Assert3");
             }
         }
 
@@ -106,7 +106,7 @@ public class domconfigschematype1Test extends LoboUnitTest {
             /*DOMString */
             domConfig.setParameter(parameter, xmlSchemaType);
             state = (String) domConfig.getParameter(parameter);
-            assertEquals(xmlSchemaType, state);
+            assertEquals(xmlSchemaType, state, "Domconfigschematype1Assert4");
         } else {
 
             {
@@ -117,7 +117,7 @@ public class domconfigschematype1Test extends LoboUnitTest {
                 } catch (final DOMException ex) {
                     success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
                 }
-                assertTrue(success);
+                assertTrue(success, "Domconfigschematype1Assert5");
             }
         }
 

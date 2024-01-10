@@ -44,7 +44,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-normalize">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-normalize</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-comments">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-comments</a>
  */
-public class comments01Test extends LoboUnitTest {
+public class Comments01Test extends LoboUnitTest {
 
 
     @Test
@@ -68,12 +68,12 @@ public class comments01Test extends LoboUnitTest {
         /*DOMErrorMonitor */
         domConfig.setParameter("error-handler", errorMonitor);
         doc.normalize();
-        assertTrue(errorMonitor.assertLowerSeverity(2));
+        assertTrue(errorMonitor.assertLowerSeverity(2), "Comments01Assert3");
         pList = doc.getElementsByTagName("p");
         elem = (Element) pList.item(0);
         lastChild = elem.getLastChild();
         nodeName = lastChild.getNodeName();
-        assertEquals("#comment", nodeName);
+        assertEquals("#comment", nodeName, "Comments01Assert4");
     }
 }
 

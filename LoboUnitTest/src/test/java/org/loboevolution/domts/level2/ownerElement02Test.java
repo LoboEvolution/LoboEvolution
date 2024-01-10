@@ -48,7 +48,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * @author Mary Brady
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#Attr-ownerElement">http://www.w3.org/TR/DOM-Level-2-Core/core#Attr-ownerElement</a>
  */
-public class ownerElement02Test extends LoboUnitTest {
+public class OwnerElement02Test extends LoboUnitTest {
 
     /**
      * Runs the test case.

@@ -43,7 +43,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-normalize">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-normalize</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-element-content-whitespace">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-element-content-whitespace</a>
  */
-public class elementcontentwhitespace03Test extends LoboUnitTest {
+public class Elementcontentwhitespace03Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -67,17 +67,17 @@ public class elementcontentwhitespace03Test extends LoboUnitTest {
             /*DOMErrorMonitor */
             domConfig.setParameter("error-handler", errorMonitor);
             doc.normalize();
-            assertTrue(errorMonitor.assertLowerSeverity(2));
+            assertTrue(errorMonitor.assertLowerSeverity(2), "Elementcontentwhitespace03Assert1");
             bodyList = doc.getElementsByTagName("body");
             body = (Element) bodyList.item(0);
             child = body.getFirstChild();
-            assertNotNull(child);
+            assertNotNull(child, "Elementcontentwhitespace03Assert2");
             childName = child.getNodeName();
-            assertEquals( "#text", childName);
+            assertEquals( "#text", childName, "Elementcontentwhitespace03Assert3");
             child = child.getNextSibling();
-            assertNotNull(child);
+            assertNotNull(child, "Elementcontentwhitespace03Assert4");
             childName = child.getNodeName();
-            assertEquals("secondChild", "p", childName);
+            assertEquals("p", childName, "Elementcontentwhitespace03Assert5");
         }
     }
 }

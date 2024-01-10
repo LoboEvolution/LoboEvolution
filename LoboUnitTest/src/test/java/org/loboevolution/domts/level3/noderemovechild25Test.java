@@ -44,7 +44,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-1734834066">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-1734834066</a>
  */
-public class noderemovechild25Test extends LoboUnitTest {
+public class Noderemovechild25Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -57,9 +57,9 @@ public class noderemovechild25Test extends LoboUnitTest {
         docType = doc.getDoctype();
         entitiesMap = docType.getEntities();
         ent4 = entitiesMap.getNamedItem("ent4");
-        assertNotNull(ent4);
+        assertNotNull(ent4, "Noderemovechild25Assert3");
         span = (Element) ent4.getFirstChild();
-        assertNotNull(span);
+        assertNotNull(span, "Noderemovechild25Assert4");
 
         boolean success = false;
         try {
@@ -67,7 +67,7 @@ public class noderemovechild25Test extends LoboUnitTest {
         } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
         }
-        assertTrue(success);
+        assertTrue(success, "Noderemovechild25Assert5");
 
     }
 }

@@ -44,7 +44,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
  * @author Jenny Hsu
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-compareDocumentPosition">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-compareDocumentPosition</a>
  */
-public class nodecomparedocumentposition03Test extends LoboUnitTest {
+public class Nodecomparedocumentposition03Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -55,13 +55,13 @@ public class nodecomparedocumentposition03Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         docComp = sampleXmlFile("hc_staff.xml");
         documentPosition1 = doc.compareDocumentPosition(docComp);
-        assertEquals(33 & 57, documentPosition1 & 57);
+        assertEquals(33 & 57, documentPosition1 & 57, "Nodecomparedocumentposition03Assert3");
         documentPosition2 = docComp.compareDocumentPosition(doc);
-        assertNotEquals(documentPosition1 & 2, documentPosition2 & 2);
-        assertNotEquals(documentPosition1 & 4, documentPosition2 & 4);
-        assertEquals(33 & 57, documentPosition2 & 57);
+        assertNotEquals(documentPosition1 & 2, documentPosition2 & 2, "Nodecomparedocumentposition03Assert4");
+        assertNotEquals(documentPosition1 & 4, documentPosition2 & 4, "Nodecomparedocumentposition03Assert5");
+        assertEquals(33 & 57, documentPosition2 & 57, "Nodecomparedocumentposition03Assert6");
         documentPosition3 = doc.compareDocumentPosition(docComp);
-        assertEquals(documentPosition1, documentPosition3);
+        assertEquals(documentPosition1, documentPosition3, "Nodecomparedocumentposition03Assert7");
     }
 }
 

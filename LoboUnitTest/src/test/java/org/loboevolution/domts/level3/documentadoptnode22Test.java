@@ -44,7 +44,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode</a>
  */
-public class documentadoptnode22Test extends LoboUnitTest {
+public class Documentadoptnode22Test extends LoboUnitTest {
 
 
     @Test
@@ -61,10 +61,10 @@ public class documentadoptnode22Test extends LoboUnitTest {
 
         if ((adoptedNode != null)) {
             success = adoptedNode.hasChildNodes();
-            assertTrue(success);
+            assertTrue(success, "Documentadoptnode22Assert3");
             nodeName = adoptedNode.getNodeName();
             nodeNameOrig = docElement.getNodeName();
-            assertEquals(nodeName, nodeNameOrig);
+            assertEquals(nodeName, nodeNameOrig, "Documentadoptnode22Assert4");
         }
     }
 }

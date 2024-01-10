@@ -48,7 +48,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=419">http://www.w3.org/Bugs/Public/show_bug.cgi?id=419</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/infoset-mapping#Infoset2Document">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/infoset-mapping#Infoset2Document</a>
  */
-public class nodegetbaseuri02Test extends LoboUnitTest {
+public class Nodegetbaseuri02Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -67,10 +67,10 @@ public class nodegetbaseuri02Test extends LoboUnitTest {
         domImpl = doc.getImplementation();
         newDoc = domImpl.createDocument(rootNS, rootName, nullDocType);
         baseURI = newDoc.getBaseURI();
-        assertNull(baseURI);
+        assertNull(baseURI, "Nodegetbaseuri02Assert3");
         newDoc.setDocumentURI("http://www.example.com/sample.xml");
         baseURI = newDoc.getBaseURI();
-        assertTrue("http://www.example.com/sample.xml".equalsIgnoreCase(baseURI));
+        assertTrue("http://www.example.com/sample.xml".equalsIgnoreCase(baseURI), "Nodegetbaseuri02Assert4");
     }
 }
 

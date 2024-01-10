@@ -79,9 +79,9 @@ public class AttrSpecifiedValueRemoveTest extends LoboUnitTest {
         testNode.removeAttribute("street");
         attributes = testNode.getAttributes();
         streetAttr = (Attr) attributes.getNamedItem("street");
-        assertNotNull(streetAttr);
+        assertNotNull(streetAttr, "AttrSpecifiedValueRemoveAssert3");
         state = streetAttr.isSpecified();
-        assertFalse(state);
+        assertFalse(state, "AttrSpecifiedValueRemoveAssert4");
     }
 }
 

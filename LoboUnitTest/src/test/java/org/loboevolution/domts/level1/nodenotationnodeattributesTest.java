@@ -49,7 +49,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * @author Mary Brady
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-84CF096">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-84CF096</a>
  */
-public class nodenotationnodeattributesTest extends LoboUnitTest {
+public class NodenotationnodeattributesTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -64,13 +64,13 @@ public class nodenotationnodeattributesTest extends LoboUnitTest {
         final NamedNodeMap attrList;
         doc = sampleXmlFile("staff.xml");
         docType = doc.getDoctype();
-        assertNotNull(docType);
+        assertNotNull(docType, "NodenotationnodeattributesAssert3");
         notations = docType.getNotations();
-        assertNotNull(notations);
+        assertNotNull(notations, "NodenotationnodeattributesAssert4");
         notationNode = (Notation) notations.getNamedItem("notation1");
-        assertNotNull(notationNode);
+        assertNotNull(notationNode, "NodenotationnodeattributesAssert5");
         attrList = notationNode.getAttributes();
-        assertNull(attrList);
+        assertNull(attrList, "NodenotationnodeattributesAssert6");
     }
 }
 

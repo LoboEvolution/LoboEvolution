@@ -28,7 +28,6 @@ package org.sexydock.tabs;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import org.sexydock.tabs.jhrome.JhromeTabUI;
 
 import javax.swing.*;

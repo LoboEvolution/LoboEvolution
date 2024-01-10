@@ -46,7 +46,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-952280727">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-952280727</a>
  */
-public class nodeinsertbefore15Test extends LoboUnitTest {
+public class Nodeinsertbefore15Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -70,7 +70,7 @@ public class nodeinsertbefore15Test extends LoboUnitTest {
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }
-            assertTrue(success);
+            assertTrue(success, "Nodeinsertbefore15Assert2");
         }
         pi = doc.createProcessingInstruction("target", "data");
 
@@ -81,7 +81,7 @@ public class nodeinsertbefore15Test extends LoboUnitTest {
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }
-            assertTrue(success);
+            assertTrue(success, "Nodeinsertbefore15Assert3");
         }
         comment = doc.createComment("Comment");
 
@@ -92,7 +92,7 @@ public class nodeinsertbefore15Test extends LoboUnitTest {
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }
-            assertTrue(success);
+            assertTrue(success, "Nodeinsertbefore15Assert4");
         }
         txt = doc.createTextNode("Text");
 
@@ -103,7 +103,7 @@ public class nodeinsertbefore15Test extends LoboUnitTest {
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }
-            assertTrue(success);
+            assertTrue(success, "Nodeinsertbefore15Assert5");
         }
         elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "body");
 
@@ -114,7 +114,7 @@ public class nodeinsertbefore15Test extends LoboUnitTest {
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }
-            assertTrue(success);
+            assertTrue(success, "Nodeinsertbefore15Assert6");
         }
     }
 }

@@ -42,14 +42,14 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-getUserData">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-getUserData</a>
  */
-public class nodegetuserdata02Test extends LoboUnitTest {
+public class Nodegetuserdata02Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
         final Object userData;
         doc = sampleXmlFile("hc_staff.xml");
         userData = doc.getUserData("key1");
-        assertNull( userData);
+        assertNull( userData, "Nodegetuserdata02Assert2");
     }
 }
 

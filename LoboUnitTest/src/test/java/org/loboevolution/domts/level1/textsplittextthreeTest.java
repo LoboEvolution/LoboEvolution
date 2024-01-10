@@ -54,7 +54,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Mary Brady
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-38853C1D">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-38853C1D</a>
  */
-public class textsplittextthreeTest extends LoboUnitTest {
+public class TextsplittextthreeTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -74,7 +74,7 @@ public class textsplittextthreeTest extends LoboUnitTest {
         textNode = (Text) nameNode.getFirstChild();
         splitNode = textNode.splitText(6);
         value = splitNode.getNodeValue();
-        assertEquals(" Jones", value);
+        assertEquals(" Jones", value, "TextsplittextthreeAssert1");
     }
 
 }

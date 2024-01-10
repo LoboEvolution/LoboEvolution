@@ -56,7 +56,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Mary Brady
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#Core-Document-importNode">http://www.w3.org/TR/DOM-Level-2-Core/core#Core-Document-importNode</a>
  */
-public class importNode01Test extends LoboUnitTest {
+public class ImportNode01Test extends LoboUnitTest {
 
     /**
      * Runs the test case.

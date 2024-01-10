@@ -69,7 +69,7 @@ public class AttrCreateDocumentFragmentTest extends LoboUnitTest {
         domesticAttr = domesticNode.getAttributes();
         attrs = (Attr) domesticAttr.item(0);
         attrName = attrs.getName();
-        assertEquals("newdomestic", attrName);
+        assertEquals("newdomestic", attrName, "AttrCreateDocumentFragmentAssert1");
     }
 }
 

@@ -42,7 +42,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-encoding">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-encoding</a>
  */
-public class documentgetxmlencoding05Test extends LoboUnitTest {
+public class Documentgetxmlencoding05Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;

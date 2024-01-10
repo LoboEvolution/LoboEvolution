@@ -51,7 +51,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Mary Brady
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSLocalN">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSLocalN</a>
  */
-public class localName01Test extends LoboUnitTest {
+public class LocalName01Test extends LoboUnitTest {
 
     /**
      * Runs the test case.

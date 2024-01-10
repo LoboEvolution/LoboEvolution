@@ -42,7 +42,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-standalone">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-standalone</a>
  */
-public class documentsetxmlstandalone01Test extends LoboUnitTest {
+public class Documentsetxmlstandalone01Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -50,7 +50,7 @@ public class documentsetxmlstandalone01Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         doc.setXmlStandalone(true);
         standalone = doc.getXmlStandalone();
-        assertTrue(standalone);
+        assertTrue(standalone, "Documentsetxmlstandalone01Assert2");
     }
 }
 

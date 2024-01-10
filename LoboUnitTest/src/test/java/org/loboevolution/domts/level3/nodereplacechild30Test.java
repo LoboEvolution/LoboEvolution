@@ -42,7 +42,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307</a>
  */
-public class nodereplacechild30Test extends LoboUnitTest {
+public class Nodereplacechild30Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -75,31 +75,31 @@ public class nodereplacechild30Test extends LoboUnitTest {
         appendedChild = parent.appendChild(newERef);
         replaced = parent.replaceChild(newElement, oldChild);
         nodeName = replaced.getNodeName();
-        assertEquals( "xhtml:head", nodeName);
+        assertEquals( "xhtml:head", nodeName, "Nodereplacechild30Assert2");
         replaced = parent.replaceChild(oldChild, newElement);
         nodeName = replaced.getNodeName();
-        assertEquals( "xhtml:body", nodeName);
+        assertEquals( "xhtml:body", nodeName, "Nodereplacechild30Assert3");
         replaced = parent.replaceChild(newText, oldChild);
         nodeName = replaced.getNodeName();
-        assertEquals( "xhtml:head", nodeName);
+        assertEquals( "xhtml:head", nodeName, "Nodereplacechild30Assert4");
         replaced = parent.replaceChild(oldChild, newText);
         nodeName = replaced.getNodeName();
-        assertEquals( "#text", nodeName);
+        assertEquals( "#text", nodeName, "Nodereplacechild30Assert5");
         replaced = parent.replaceChild(newComment, oldChild);
         nodeName = replaced.getNodeName();
-        assertEquals( "xhtml:head", nodeName);
+        assertEquals( "xhtml:head", nodeName, "Nodereplacechild30Assert6");
         replaced = parent.replaceChild(oldChild, newComment);
         nodeName = replaced.getNodeName();
-        assertEquals("#comment", nodeName);
+        assertEquals("#comment", nodeName, "Nodereplacechild30Assert7");
         replaced = parent.replaceChild(oldChild, newPI);
         nodeName = replaced.getNodeName();
-        assertEquals( "target", nodeName);
+        assertEquals( "target", nodeName, "Nodereplacechild30Assert8");
         replaced = parent.replaceChild(oldChild, newCdata);
         nodeName = replaced.getNodeName();
-        assertEquals( "#cdata-section", nodeName);
+        assertEquals( "#cdata-section", nodeName, "Nodereplacechild30Assert9");
         replaced = parent.replaceChild(oldChild, newERef);
         nodeName = replaced.getNodeName();
-        assertEquals( "delta", nodeName);
+        assertEquals( "delta", nodeName, "Nodereplacechild30Assert10");
     }
 }
 

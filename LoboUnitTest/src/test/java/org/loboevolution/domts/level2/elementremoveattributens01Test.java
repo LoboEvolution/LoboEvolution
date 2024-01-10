@@ -47,7 +47,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElRemAtNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElRemAtNS</a>
  */
-public class elementremoveattributens01Test extends LoboUnitTest {
+public class Elementremoveattributens01Test extends LoboUnitTest {
 
     /**
      * Runs the test case.

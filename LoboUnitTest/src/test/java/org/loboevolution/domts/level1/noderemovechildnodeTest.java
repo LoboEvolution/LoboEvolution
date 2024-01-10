@@ -47,7 +47,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Mary Brady
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1734834066">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1734834066</a>
  */
-public class noderemovechildnodeTest extends LoboUnitTest {
+public class NoderemovechildnodeTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -77,12 +77,12 @@ public class noderemovechildnodeTest extends LoboUnitTest {
         length = childList.getLength();
 
         if (length == 5) {
-            assertEquals("EMPLOYEEID",removedName);
-            assertEquals("NAME", childName);
+            assertEquals("EMPLOYEEID",removedName, "NoderemovechildnodeAssert1");
+            assertEquals("NAME", childName, "NoderemovechildnodeAssert2");
         } else {
-            assertEquals("#text", removedName);
-            assertEquals("EMPLOYEEID",childName);
-            assertEquals(12, length);
+            assertEquals("#text", removedName, "NoderemovechildnodeAssert3");
+            assertEquals("EMPLOYEEID",childName, "NoderemovechildnodeAssert4");
+            assertEquals(12, length, "NoderemovechildnodeAssert5");
         }
 
     }

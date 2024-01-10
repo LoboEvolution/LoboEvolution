@@ -47,7 +47,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Jenny Hsu
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-ElSetIdAttrNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-ElSetIdAttrNode</a>
  */
-public class elementsetidattributenode07Test extends LoboUnitTest {
+public class Elementsetidattributenode07Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -69,18 +69,18 @@ public class elementsetidattributenode07Test extends LoboUnitTest {
         attr = (Attr) attributesMap.getNamedItem("class");
         acronymElem1.setIdAttributeNode(attr, true);
         id = attr.isId();
-        assertTrue(id);
+        assertTrue(id, "Elementsetidattributenode07Assert3");
         attributesMap = acronymElem2.getAttributes();
         attr = (Attr) attributesMap.getNamedItem("class");
         acronymElem2.setIdAttributeNode(attr, true);
         id = attr.isId();
-        assertTrue(id);
+        assertTrue(id, "Elementsetidattributenode07Assert4");
         elem = doc.getElementById("No");
         elemName = elem.getTagName();
-        assertEquals("ACRONYM", elemName);
+        assertEquals("ACRONYM", elemName, "Elementsetidattributenode07Assert5");
         elem = doc.getElementById("Yes");
         elemName = elem.getTagName();
-        assertEquals("ACRONYM", elemName);
+        assertEquals("ACRONYM", elemName, "Elementsetidattributenode07Assert6");
     }
 }
 

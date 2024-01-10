@@ -50,7 +50,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/ecma-script-binding">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/ecma-script-binding</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-getDOMImpls">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-getDOMImpls</a>
  */
-public class domimplementationregistry20Test extends LoboUnitTest {
+public class Domimplementationregistry20Test extends LoboUnitTest {
     @Test
     @SneakyThrows
     public void runTest() {
@@ -63,19 +63,19 @@ public class domimplementationregistry20Test extends LoboUnitTest {
         final DOMImplementationList domImplList;
         final int length;
          final DOMImplementationRegistry domImplRegistry = DOMImplementationRegistry.newInstance();
-        assertNotNull(domImplRegistry);
+        assertNotNull(domImplRegistry, "Domimplementationregistry20Assert1");
         domImplList = domImplRegistry.getDOMImplementationList("HTML");
         length = (int) domImplList.getLength();
 
         if (length == 0) {
             baseImpl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(), true));
             hasFeature = baseImpl.hasFeature("HTML", nullVersion);
-            assertFalse(hasFeature);
+            assertFalse(hasFeature, "Domimplementationregistry20Assert2");
         } else {
             for (int indexN10068 = 0; indexN10068 < domImplList.getLength(); indexN10068++) {
                 domImpl = (DOMImplementation) domImplList.item(indexN10068);
                 hasFeature = domImpl.hasFeature("HTML", nullVersion);
-                assertTrue(hasFeature);
+                assertTrue(hasFeature, "Domimplementationregistry20Assert3");
             }
         }
 

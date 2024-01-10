@@ -731,7 +731,7 @@ public class PDFImage {
      * set the color key mask. It is an array of start/end entries to indicate
      * ranges of color indicies that should be masked out.
      *
-     * @param maskArrayObject
+     * @param maskArrayObject a {@link PDFObject} object.
      */
     private void setColorKeyMask(final PDFObject maskArrayObject) throws IOException {
         final PDFObject[] maskObjects = maskArrayObject.getArray();
@@ -1070,7 +1070,7 @@ public class PDFImage {
          * around a lack of YCCK/CMYK report in the standard Java jpeg readers.
          * Non-YCCK images will not be decoded while in this mode.
          *
-         * @param ycckcmykDecodeMode
+         * @param ycckcmykDecodeMode a {@link Boolean} object.
          */
         public void ycckcmykDecodeMode(final boolean ycckcmykDecodeMode) {
             this.ycckcmykDecodeMode = ycckcmykDecodeMode;
@@ -1079,7 +1079,7 @@ public class PDFImage {
         /**
          * Get the color model that should be used now
          *
-         * @return
+         * @return a {@link ColorModel} object.
          */
         public ColorModel getColorModel() {
             return cm;

@@ -51,7 +51,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration-getParameter">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration-getParameter</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration-setParameter">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration-setParameter</a>
  */
-public class domconfigerrorhandler2Test extends LoboUnitTest {
+public class Domconfigerrorhandler2Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final DOMImplementation domImpl;
@@ -69,11 +69,11 @@ public class domconfigerrorhandler2Test extends LoboUnitTest {
         domConfig = doc.getDomConfig();
         /*DOMErrorHandler */
         canSet = domConfig.canSetParameter(parameter, errorHandler);
-        assertTrue(canSet);
+        assertTrue(canSet, "Domconfigerrorhandler2Assert3");
         /*DOMErrorHandler */
         domConfig.setParameter(parameter, errorHandler);
         state = (DOMErrorHandler) domConfig.getParameter(parameter);
-        assertNull(state);
+        assertNull(state, "Domconfigerrorhandler2Assert4");
     }
 }
 

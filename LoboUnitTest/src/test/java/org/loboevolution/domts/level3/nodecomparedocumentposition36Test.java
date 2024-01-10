@@ -46,7 +46,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author Jenny Hsu
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-compareDocumentPosition">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-compareDocumentPosition</a>
  */
-public class nodecomparedocumentposition36Test extends LoboUnitTest {
+public class Nodecomparedocumentposition36Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -64,9 +64,9 @@ public class nodecomparedocumentposition36Test extends LoboUnitTest {
         elemListFollows = doc.getElementsByTagName("strong");
         elemFollows = (Element) elemListFollows.item(3);
         attrPosition = attr.compareDocumentPosition(elemFollows);
-        assertEquals(4, attrPosition);
+        assertEquals(4, attrPosition, "Nodecomparedocumentposition36Assert2");
         elemFollowsPosition = elemFollows.compareDocumentPosition(attr);
-        assertEquals(2, elemFollowsPosition);
+        assertEquals(2, elemFollowsPosition, "Nodecomparedocumentposition36Assert3");
     }
 }
 

@@ -53,7 +53,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-6D6AC0F9">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-6D6AC0F9</a>
  * @see <a href="http://lists.w3.org/Archives/Public/www-dom-ts/2002Mar/0002.html">http://lists.w3.org/Archives/Public/www-dom-ts/2002Mar/0002.html</a>
  */
-public class elementremoveattributeTest extends LoboUnitTest {
+public class ElementremoveattributeTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -69,7 +69,7 @@ public class elementremoveattributeTest extends LoboUnitTest {
         elementList = doc.getElementsByTagName("address");
         testEmployee = (Element) elementList.item(3);
         attrValue = testEmployee.getAttribute("street");
-        assertEquals("Yes", attrValue);
+        assertEquals("Yes", attrValue, "ElementremoveattributeAssert1");
     }
 }
 

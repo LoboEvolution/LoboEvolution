@@ -49,7 +49,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Mary Brady
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-844377136">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-844377136</a>
  */
-public class nodelistindexnotzeroTest extends LoboUnitTest {
+public class NodelistindexnotzeroTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -77,7 +77,7 @@ public class nodelistindexnotzeroTest extends LoboUnitTest {
         }
 
         childName = child.getNodeName();
-         assertEquals( "NAME", childName);
+         assertEquals( "NAME", childName, "NodelistindexnotzeroAssert1");
     }
 }
 

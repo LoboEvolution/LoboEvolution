@@ -51,7 +51,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Mary Brady
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-785887307">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-785887307</a>
  */
-public class nodereplacechildnewchildexistsTest extends LoboUnitTest {
+public class NodereplacechildnewchildexistsTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -112,12 +112,12 @@ public class nodereplacechildnewchildexistsTest extends LoboUnitTest {
         }
 
         replacedChild = employeeNode.replaceChild(newChild, oldChild);
-        assertSame(oldChild, replacedChild);
+        assertSame(oldChild, replacedChild, "NodereplacechildnewchildexistsAssert1");
         for (int indexN100DE = 0; indexN100DE < childList.getLength(); indexN100DE++) {
             childNode = childList.item(indexN100DE);
             childName = childNode.getNodeName();
             actual.add(childName);
         }
-        assertEquals(expected, actual);
+        assertEquals(expected, actual, "NodereplacechildnewchildexistsAssert2");
     }
 }

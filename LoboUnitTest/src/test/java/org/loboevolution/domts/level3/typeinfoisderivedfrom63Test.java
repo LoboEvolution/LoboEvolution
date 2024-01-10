@@ -48,7 +48,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
  * @author Jenny Hsu
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom</a>
  */
-public class typeinfoisderivedfrom63Test extends LoboUnitTest {
+public class Typeinfoisderivedfrom63Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -64,7 +64,7 @@ public class typeinfoisderivedfrom63Test extends LoboUnitTest {
         acronymElem = (Element) elemList.item(0);
         elemTypeInfo = acronymElem.getSchemaTypeInfo();
         retValue = elemTypeInfo.isDerivedFrom("http://www.w3.org/TR/REC-xml", nullName, 0);
-        assertFalse(retValue);
+        assertFalse(retValue, "Typeinfoisderivedfrom63Assert2");
     }
 }
 

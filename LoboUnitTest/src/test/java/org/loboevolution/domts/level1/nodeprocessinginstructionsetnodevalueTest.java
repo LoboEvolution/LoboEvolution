@@ -47,7 +47,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-837822393">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-837822393</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=181">http://www.w3.org/Bugs/Public/show_bug.cgi?id=181</a>
  */
-public class nodeprocessinginstructionsetnodevalueTest extends LoboUnitTest {
+public class NodeprocessinginstructionsetnodevalueTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -64,9 +64,9 @@ public class nodeprocessinginstructionsetnodevalueTest extends LoboUnitTest {
         piNode = testList.item(0);
         piNode.setNodeValue("Something different");
         piValue = piNode.getNodeValue();
-         assertEquals( "Something different", piValue);
+         assertEquals( "Something different", piValue, "NodeprocessinginstructionsetnodevalueAssert1");
         piValue = ((ProcessingInstruction) piNode).getData();
-        assertEquals( "Something different", piValue);
+        assertEquals( "Something different", piValue, "NodeprocessinginstructionsetnodevalueAssert2");
     }
 
 }

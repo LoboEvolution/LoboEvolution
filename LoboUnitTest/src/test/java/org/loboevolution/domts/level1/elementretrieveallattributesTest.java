@@ -53,7 +53,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-84CF096">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-84CF096</a>
  * @see <a href="http://lists.w3.org/Archives/Public/www-dom-ts/2002Mar/0002.html">http://lists.w3.org/Archives/Public/www-dom-ts/2002Mar/0002.html</a>
  */
-public class elementretrieveallattributesTest extends LoboUnitTest {
+public class ElementretrieveallattributesTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -69,7 +69,7 @@ public class elementretrieveallattributesTest extends LoboUnitTest {
         addressList = doc.getElementsByTagName("address");
         testAddress = (Element) addressList.item(1);
         attributes = testAddress.getAttributes();
-        assertEquals(2, attributes.getLength());
+        assertEquals(2, attributes.getLength(), "ElementretrieveallattributesAssert1");
     }
 }
 

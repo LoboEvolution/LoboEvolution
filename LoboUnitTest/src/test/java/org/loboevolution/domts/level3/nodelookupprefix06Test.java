@@ -44,7 +44,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author Jenny Hsu
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-lookupNamespacePrefix">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-lookupNamespacePrefix</a>
  */
-public class nodelookupprefix06Test extends LoboUnitTest {
+public class Nodelookupprefix06Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -55,7 +55,7 @@ public class nodelookupprefix06Test extends LoboUnitTest {
         elemList = doc.getElementsByTagName("p");
         elem = (Element) elemList.item(2);
         prefix = elem.lookupPrefix("http://www.netzero.com");
-        assertEquals("dmstc", prefix);
+        assertEquals("dmstc", prefix, "Nodelookupprefix06Assert2");
     }
 }
 

@@ -56,7 +56,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-184E7107">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-184E7107</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=249">http://www.w3.org/Bugs/Public/show_bug.cgi?id=249</a>
  */
-public class nodeappendchildnewchilddiffdocumentTest extends LoboUnitTest {
+public class NodeappendchildnewchilddiffdocumentTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -79,7 +79,7 @@ public class nodeappendchildnewchilddiffdocumentTest extends LoboUnitTest {
         } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.WRONG_DOCUMENT_ERR);
         }
-        assertTrue(success);
+        assertTrue(success, "NodeappendchildnewchilddiffdocumentAssert2");
     }
 
 }

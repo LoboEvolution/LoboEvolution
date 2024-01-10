@@ -46,7 +46,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeHasAttrs">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeHasAttrs</a>
  */
-public class elementhasattribute04Test extends LoboUnitTest {
+public class Elementhasattribute04Test extends LoboUnitTest {
 
     /**
      * Runs the test case.

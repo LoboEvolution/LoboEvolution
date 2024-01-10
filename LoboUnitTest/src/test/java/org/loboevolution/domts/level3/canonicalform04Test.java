@@ -47,7 +47,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-canonical-form">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-canonical-form</a>
  */
-public class canonicalform04Test extends LoboUnitTest {
+public class Canonicalform04Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
@@ -67,10 +67,10 @@ public class canonicalform04Test extends LoboUnitTest {
             domConfig.setParameter("error-handler", errorMonitor);
             domConfig.setParameter("canonical-form", Boolean.TRUE);
             doc.normalizeDocument();
-            assertTrue(errorMonitor.assertLowerSeverity(2));
+            assertTrue(errorMonitor.assertLowerSeverity(2), "Canonicalform04Assert3");
             docElem = doc.getDocumentElement();
             xmlnsAttr = docElem.getAttributeNode("xmlns");
-            assertNotNull(xmlnsAttr);
+            assertNotNull(xmlnsAttr, "Canonicalform04Assert4");
         }
     }
 }

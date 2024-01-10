@@ -44,7 +44,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-lookupNamespaceURI">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-lookupNamespaceURI</a>
  */
-public class nodelookupnamespaceuri06Test extends LoboUnitTest {
+public class Nodelookupnamespaceuri06Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -55,6 +55,6 @@ public class nodelookupnamespaceuri06Test extends LoboUnitTest {
         elemList = doc.getElementsByTagName("p");
         elem = (Element) elemList.item(2);
         namespaceURI = elem.lookupNamespaceURI("dmstc");
-        assertEquals("http://www.netzero.com", namespaceURI);
+        assertEquals("http://www.netzero.com", namespaceURI, "Nodelookupnamespaceuri06Assert2");
     }
 }

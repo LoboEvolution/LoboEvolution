@@ -45,7 +45,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Jenny Hsu
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-ElSetIdAttrNS">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-ElSetIdAttrNS</a>
  */
-public class elementsetidattributens02Test extends LoboUnitTest {
+public class Elementsetidattributens02Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -64,14 +64,14 @@ public class elementsetidattributens02Test extends LoboUnitTest {
         attributesMap = addressElem.getAttributes();
         attr = (Attr) attributesMap.getNamedItem("xsi:noNamespaceSchemaLocation");
         id = attr.isId();
-        assertTrue(id);
+        assertTrue(id, "Elementsetidattributens02Assert1");
         elem = doc.getElementById("Yes");
-        assertNotNull(elem);
+        assertNotNull(elem, "Elementsetidattributens02Assert2");
         elemName = elem.getTagName();
-        assertEquals("ACRONYM", elemName);
+        assertEquals("ACRONYM", elemName, "Elementsetidattributens02Assert3");
         addressElem.setIdAttributeNS(xsiNS, "noNamespaceSchemaLocation", false);
         id = attr.isId();
-        assertFalse(id);
+        assertFalse(id, "Elementsetidattributens02Assert4");
     }
 }
 

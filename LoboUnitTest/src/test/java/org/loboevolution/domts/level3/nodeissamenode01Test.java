@@ -42,7 +42,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isSameNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isSameNode</a>
  */
-public class nodeissamenode01Test extends LoboUnitTest {
+public class Nodeissamenode01Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc1;
@@ -51,7 +51,7 @@ public class nodeissamenode01Test extends LoboUnitTest {
         doc1 = sampleXmlFile("hc_staff.xml");
         doc2 = sampleXmlFile("hc_staff.xml");
         isSame = doc1.isSameNode(doc2);
-        assertFalse(isSame);
+        assertFalse(isSame, "Nodeissamenode01Assert2");
     }
 }
 

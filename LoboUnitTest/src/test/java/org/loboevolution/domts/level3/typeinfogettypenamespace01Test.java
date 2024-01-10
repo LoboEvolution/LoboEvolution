@@ -49,7 +49,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author Jenny Hsu
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-typeNamespace">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-typeNamespace</a>
  */
-public class typeinfogettypenamespace01Test extends LoboUnitTest {
+public class Typeinfogettypenamespace01Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -64,7 +64,7 @@ public class typeinfogettypenamespace01Test extends LoboUnitTest {
         titleAttr = acElem.getAttributeNode("title");
         attrTypeInfo = titleAttr.getSchemaTypeInfo();
         typeNamespace = attrTypeInfo.getTypeNamespace();
-        assertEquals("http://www.w3.org/2001/XMLSchema", typeNamespace);
+        assertEquals("http://www.w3.org/2001/XMLSchema", typeNamespace, "Typeinfogettypenamespace01Assert2");
     }
 }
 

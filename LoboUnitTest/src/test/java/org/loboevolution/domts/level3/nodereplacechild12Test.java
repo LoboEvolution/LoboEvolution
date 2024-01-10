@@ -47,7 +47,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=416">http://www.w3.org/Bugs/Public/show_bug.cgi?id=416</a>
  */
-public class nodereplacechild12Test extends LoboUnitTest {
+public class Nodereplacechild12Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -64,13 +64,13 @@ public class nodereplacechild12Test extends LoboUnitTest {
         appendedChild = doc.appendChild(comment);
         appendedChild = doc.appendChild(pi);
         replacedNode = doc.replaceChild(comment, pi);
-        assertNotNull(replacedNode);
+        assertNotNull(replacedNode, "Nodereplacechild12Assert3");
         nodeName = replacedNode.getNodeName();
-        assertEquals("PITarget", nodeName);
+        assertEquals("PITarget", nodeName, "Nodereplacechild12Assert4");
         lastChild = doc.getLastChild();
-        assertNotNull(lastChild);
+        assertNotNull(lastChild, "Nodereplacechild12Assert5");
         nodeName = lastChild.getNodeName();
-        assertEquals("#comment", nodeName);
+        assertEquals("#comment", nodeName, "Nodereplacechild12Assert6");
     }
 }
 

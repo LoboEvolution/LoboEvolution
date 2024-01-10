@@ -46,7 +46,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#i-Document">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#i-Document</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080</a>
  */
-public class nodedocumentnodevalueTest extends LoboUnitTest {
+public class NodedocumentnodevalueTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -58,7 +58,7 @@ public class nodedocumentnodevalueTest extends LoboUnitTest {
         final String documentValue;
         doc = sampleXmlFile("staff.xml");
         documentValue = doc.getNodeValue();
-        assertNull(documentValue);
+        assertNull(documentValue, "NodedocumentnodevalueAssert2");
     }
 }
 

@@ -48,7 +48,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * @author Mary Brady
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-640FB3C8">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-640FB3C8</a>
  */
-public class nodegetprevioussiblingnullTest extends LoboUnitTest {
+public class NodegetprevioussiblingnullTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -66,7 +66,7 @@ public class nodegetprevioussiblingnullTest extends LoboUnitTest {
         employeeNode = elementList.item(2);
         fcNode = employeeNode.getFirstChild();
         psNode = fcNode.getPreviousSibling();
-        assertNull(psNode);
+        assertNull(psNode, "NodegetprevioussiblingnullAssert2");
     }
 }
 

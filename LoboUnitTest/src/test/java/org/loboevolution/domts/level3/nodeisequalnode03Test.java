@@ -45,7 +45,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isEqualNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isEqualNode</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=528">http://www.w3.org/Bugs/Public/show_bug.cgi?id=528</a>
  */
-public class nodeisequalnode03Test extends LoboUnitTest {
+public class Nodeisequalnode03Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc1;
@@ -56,11 +56,11 @@ public class nodeisequalnode03Test extends LoboUnitTest {
         doc1 = sampleXmlFile("barfoo_utf8.xml");
         doc2 = sampleXmlFile("barfoo_utf16.xml");
         isEqual = doc1.isEqualNode(doc2);
-        assertTrue(isEqual);
+        assertTrue(isEqual, "Nodeisequalnode03Assert2");
         docElem1 = doc1.getDocumentElement();
         docElem2 = doc2.getDocumentElement();
         isEqual = docElem1.isEqualNode(docElem2);
-        assertTrue(isEqual);
+        assertTrue(isEqual, "Nodeisequalnode03Assert3");
     }
 }
 

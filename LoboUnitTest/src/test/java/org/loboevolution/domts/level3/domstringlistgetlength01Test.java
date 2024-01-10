@@ -48,7 +48,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMStringList-length">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMStringList-length</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration-parameterNames">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration-parameterNames</a>
  */
-public class domstringlistgetlength01Test extends LoboUnitTest {
+public class Domstringlistgetlength01Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -58,9 +58,9 @@ public class domstringlistgetlength01Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         domConfig = doc.getDomConfig();
         paramList = domConfig.getParameterNames();
-        assertNotNull(paramList);
+        assertNotNull(paramList, "Domstringlistgetlength01Assert3");
         listSize = paramList.getLength();
-        assertNotEquals(0, listSize);
+        assertNotEquals(0, listSize, "Domstringlistgetlength01Assert4");
     }
 }
 

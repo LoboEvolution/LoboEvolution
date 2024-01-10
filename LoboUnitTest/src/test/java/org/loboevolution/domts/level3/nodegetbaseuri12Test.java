@@ -45,7 +45,7 @@ import org.loboevolution.html.node.Node;
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=419">http://www.w3.org/Bugs/Public/show_bug.cgi?id=419</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/infoset-mapping#Infoset2Entity">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/infoset-mapping#Infoset2Entity</a>
  */
-public class nodegetbaseuri12Test extends LoboUnitTest {
+public class Nodegetbaseuri12Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;

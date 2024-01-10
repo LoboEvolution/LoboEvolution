@@ -53,7 +53,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * @author Mary Brady
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-887236154">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-887236154</a>
  */
-public class elementsetattributenodenullTest extends LoboUnitTest {
+public class ElementsetattributenodenullTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -71,7 +71,7 @@ public class elementsetattributenodenullTest extends LoboUnitTest {
         testEmployee = (Element) elementList.item(2);
         newAttribute = doc.createAttribute("district");
         districtAttr = testEmployee.setAttributeNode(newAttribute);
-        assertNull(districtAttr);
+        assertNull(districtAttr, "ElementsetattributenodenullAssert2");
     }
 }
 

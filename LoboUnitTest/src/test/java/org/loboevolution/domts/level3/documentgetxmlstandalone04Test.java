@@ -42,14 +42,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-standalone">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-standalone</a>
  */
-public class documentgetxmlstandalone04Test extends LoboUnitTest {
+public class Documentgetxmlstandalone04Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
         final boolean standalone;
         doc = sampleXmlFile("barfoo_standalone_yes.xml");
         standalone = doc.getXmlStandalone();
-        assertTrue(standalone);
+        assertTrue(standalone, "Documentgetxmlstandalone04Assert2");
     }
 }
 

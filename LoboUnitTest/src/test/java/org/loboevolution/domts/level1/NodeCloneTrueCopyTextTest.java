@@ -66,7 +66,7 @@ public class NodeCloneTrueCopyTextTest extends LoboUnitTest {
         clonedNode = childNode.cloneNode(true);
         lastChildNode = clonedNode.getLastChild();
         childValue = lastChildNode.getNodeValue();
-        assertEquals("35,000", childValue);
+        assertEquals("35,000", childValue, "NodeCloneTrueCopyTextAssert1");
     }
 }
 

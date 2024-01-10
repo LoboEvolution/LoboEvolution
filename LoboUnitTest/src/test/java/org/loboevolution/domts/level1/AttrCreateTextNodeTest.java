@@ -73,9 +73,9 @@ public class AttrCreateTextNodeTest extends LoboUnitTest {
         streetAttr = (Attr) attributes.getNamedItem("street");
         streetAttr.setValue("Y&ent1;");
         value = streetAttr.getValue();
-        assertEquals( "Y&ent1;", value);
+        assertEquals( "Y&ent1;", value, "AttrCreateTextNodeAssert1");
         value = streetAttr.getNodeValue();
-         assertEquals( "Y&ent1;", value);
+         assertEquals( "Y&ent1;", value, "AttrCreateTextNodeAssert2");
     }
 }
 

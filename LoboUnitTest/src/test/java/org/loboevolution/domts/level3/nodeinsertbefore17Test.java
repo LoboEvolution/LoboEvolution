@@ -49,7 +49,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-952280727">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-952280727</a>
  */
-public class nodeinsertbefore17Test extends LoboUnitTest {
+public class Nodeinsertbefore17Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -69,7 +69,7 @@ public class nodeinsertbefore17Test extends LoboUnitTest {
         inserted = element.insertBefore(newText, refNode);
         insertedText = (Text) element.getFirstChild();
         nodeName = insertedText.getNodeName();
-        assertEquals("#text", nodeName);
+        assertEquals("#text", nodeName, "Nodeinsertbefore17Assert2");
     }
 }
 

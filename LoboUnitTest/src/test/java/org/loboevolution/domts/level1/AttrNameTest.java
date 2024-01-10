@@ -70,9 +70,9 @@ public class AttrNameTest extends LoboUnitTest {
         attributes = testNode.getAttributes();
         streetAttr = (Attr) attributes.getNamedItem("street");
         name = streetAttr.getNodeName();
-         assertEquals( "street", name);
+         assertEquals( "street", name, "AttrNameAssert1");
         name = streetAttr.getName();
-         assertEquals( "street", name);
+         assertEquals( "street", name, "AttrNameAssert2");
     }
 }
 

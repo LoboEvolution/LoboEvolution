@@ -50,7 +50,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Jenny Hsu
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration</a>
  */
-public class domconfigurationcansetparameter06Test extends LoboUnitTest {
+public class Domconfigurationcansetparameter06Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -63,19 +63,19 @@ public class domconfigurationcansetparameter06Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         domConfig = doc.getDomConfig();
         canSet = domConfig.canSetParameter("element-content-whitespace", Boolean.TRUE);
-        assertTrue(canSet);
+        assertTrue(canSet, "Domconfigurationcansetparameter06Assert2");
         itemList = doc.getElementsByTagNameNS("*", "strong");
         elementStrong = (Element) itemList.item(0);
         textNode = (Text) elementStrong.getFirstChild();
         textNode.setTextContent("                                                ");
         hasWhitespace = textNode.isElementContentWhitespace();
-        assertTrue(hasWhitespace);
+        assertTrue(hasWhitespace, "Domconfigurationcansetparameter06Assert3");
         doc.normalizeDocument();
         itemList = doc.getElementsByTagNameNS("*", "strong");
         elementStrong = (Element) itemList.item(0);
         textNode = (Text) elementStrong.getFirstChild();
         hasWhitespace = textNode.isElementContentWhitespace();
-        assertTrue(hasWhitespace);
+        assertTrue(hasWhitespace, "Domconfigurationcansetparameter06Assert4");
     }
 }
 

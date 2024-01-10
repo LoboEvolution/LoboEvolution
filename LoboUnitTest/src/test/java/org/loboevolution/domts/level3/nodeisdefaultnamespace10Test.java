@@ -45,7 +45,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isDefaultNamespace">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isDefaultNamespace</a>
  */
-public class nodeisdefaultnamespace10Test extends LoboUnitTest {
+public class Nodeisdefaultnamespace10Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -58,9 +58,9 @@ public class nodeisdefaultnamespace10Test extends LoboUnitTest {
         child = doc.createElementNS("http://www.w3.org/1999/xhtml", "p");
         appendedChild = parent.appendChild(child);
         isDefault = child.isDefaultNamespace("http://www.w3.org/1999/xhtml");
-        assertFalse(isDefault);
+        assertFalse(isDefault, "Nodeisdefaultnamespace10Assert3");
         isDefault = parent.isDefaultNamespace("http://www.w3.org/1999/xhtml");
-        assertFalse(isDefault);
+        assertFalse(isDefault, "Nodeisdefaultnamespace10Assert4");
     }
 }
 

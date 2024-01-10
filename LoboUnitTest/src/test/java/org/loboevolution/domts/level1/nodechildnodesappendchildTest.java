@@ -46,7 +46,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1451460987">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1451460987</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-184E7107">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-184E7107</a>
  */
-public class nodechildnodesappendchildTest extends LoboUnitTest {
+public class NodechildnodesappendchildTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -70,7 +70,7 @@ public class nodechildnodesappendchildTest extends LoboUnitTest {
         createdNode = doc.createElement("text3");
         employeeNode = employeeNode.appendChild(createdNode);
         length = childList.getLength();
-        assertEquals(expectedLength, length);
+        assertEquals(expectedLength, length, "NodechildnodesappendchildAssert1");
     }
 }
 

@@ -28,7 +28,6 @@ package org.sexydock.tabs.event;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.sexydock.tabs.Tab;
 

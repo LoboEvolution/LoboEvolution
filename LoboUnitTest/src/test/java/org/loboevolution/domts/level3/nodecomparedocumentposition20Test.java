@@ -47,7 +47,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author Jenny Hsu
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-compareDocumentPosition">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-compareDocumentPosition</a>
  */
-public class nodecomparedocumentposition20Test extends LoboUnitTest {
+public class Nodecomparedocumentposition20Test extends LoboUnitTest {
 
 
     @Test
@@ -65,9 +65,9 @@ public class nodecomparedocumentposition20Test extends LoboUnitTest {
         txt = (Text) elemName.getFirstChild();
         cdata = (CDATASection) elemName.getLastChild();
         txtPosition = txt.compareDocumentPosition(cdata);
-        assertEquals(4, txtPosition);
+        assertEquals(4, txtPosition, "Nodecomparedocumentposition20Assert2");
         cdataPosition = cdata.compareDocumentPosition(txt);
-        assertEquals(2, cdataPosition);
+        assertEquals(2, cdataPosition, "Nodecomparedocumentposition20Assert3");
     }
 }
 

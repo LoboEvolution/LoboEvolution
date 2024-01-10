@@ -64,7 +64,7 @@ public class PDFShapeCmd extends PDFCmd {
      * base path
      */
     private final GeneralPath gp;
-    /** the bounding box of the path */
+    /* the bounding box of the path */
     // private Rectangle2D bounds;
     /**
      * the style

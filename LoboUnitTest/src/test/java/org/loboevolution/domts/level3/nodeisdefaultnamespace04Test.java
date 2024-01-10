@@ -44,7 +44,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isDefaultNamespace">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isDefaultNamespace</a>
  */
-public class nodeisdefaultnamespace04Test extends LoboUnitTest {
+public class Nodeisdefaultnamespace04Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -63,8 +63,8 @@ public class nodeisdefaultnamespace04Test extends LoboUnitTest {
         entity = entitiesMap.getNamedItem("alpha");
         notation = (Notation) notationsMap.getNamedItem("notation1");
         isDefault = entity.isDefaultNamespace(nullNSURI);
-        assertFalse(isDefault);
+        assertFalse(isDefault, "Nodeisdefaultnamespace04Assert2");
         isDefault = notation.isDefaultNamespace(nullNSURI);
-        assertFalse(isDefault);
+        assertFalse(isDefault, "Nodeisdefaultnamespace04Assert3");
     }
 }

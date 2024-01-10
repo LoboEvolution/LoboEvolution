@@ -49,7 +49,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/infoset-mapping#Infoset2DocumentType">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/infoset-mapping#Infoset2DocumentType</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/infoset-mapping#Infoset2EntityReference">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/infoset-mapping#Infoset2EntityReference</a>
  */
-public class nodegetbaseuri19Test extends LoboUnitTest {
+public class Nodegetbaseuri19Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
@@ -63,14 +63,14 @@ public class nodegetbaseuri19Test extends LoboUnitTest {
         doc = sampleXmlFile("external_barfoo.xml");
         pList = doc.getElementsByTagName("p");
         pElem = (Element) pList.item(0);
-        assertNotNull(pElem);
+        assertNotNull(pElem, "Nodegetbaseuri19Assert3");
         entRef = (EntityReference) pElem.getLastChild();
-        assertNotNull(entRef);
+        assertNotNull(entRef, "Nodegetbaseuri19Assert4");
         textNode = (Text) entRef.getFirstChild();
-        assertNotNull(textNode);
+        assertNotNull(textNode, "Nodegetbaseuri19Assert5");
 
         baseURI = textNode.getBaseURI();
-        assertNull(baseURI);
+        assertNull(baseURI, "Nodegetbaseuri19Assert6");
     }
 }
 

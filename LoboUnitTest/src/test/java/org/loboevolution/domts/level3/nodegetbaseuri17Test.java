@@ -46,7 +46,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=419">http://www.w3.org/Bugs/Public/show_bug.cgi?id=419</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/infoset-mapping#Infoset2Text">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/infoset-mapping#Infoset2Text</a>
  */
-public class nodegetbaseuri17Test extends LoboUnitTest {
+public class Nodegetbaseuri17Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -59,7 +59,7 @@ public class nodegetbaseuri17Test extends LoboUnitTest {
         pElem = (Element) pList.item(0);
         textNode = (Text) pElem.getFirstChild();
         baseURI = textNode.getBaseURI();
-        assertNull(baseURI);
+        assertNull(baseURI, "Nodegetbaseuri17Assert2");
     }
 }
 

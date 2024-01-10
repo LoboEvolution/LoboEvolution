@@ -51,7 +51,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * @author Mary Brady
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1734834066">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1734834066</a>
  */
-public class noderemovechildTest extends LoboUnitTest {
+public class NoderemovechildTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -71,7 +71,7 @@ public class noderemovechildTest extends LoboUnitTest {
         childToRemove = childList.item(1);
         removedChild = rootNode.removeChild(childToRemove);
         parentNode = removedChild.getParentNode();
-        assertNull(parentNode);
+        assertNull(parentNode, "NoderemovechildAssert2");
     }
 
 }

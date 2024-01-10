@@ -47,7 +47,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#Level-2-Core-Node-supports">http://www.w3.org/TR/DOM-Level-2-Core/core#Level-2-Core-Node-supports</a>
  */
-public class nodeissupported04Test extends LoboUnitTest {
+public class Nodeissupported04Test extends LoboUnitTest {
 
     /**
      * Runs the test case.

@@ -56,7 +56,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-785887307">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-785887307</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=249">http://www.w3.org/Bugs/Public/show_bug.cgi?id=249</a>
  */
-public class nodereplacechildnodeancestorTest extends LoboUnitTest {
+public class NodereplacechildnodeancestorTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -85,7 +85,7 @@ public class nodereplacechildnodeancestorTest extends LoboUnitTest {
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.HIERARCHY_REQUEST_ERR);
             }
-            assertTrue(success);
+            assertTrue(success, "NodereplacechildnodeancestorAssert2");
         }
     }
 

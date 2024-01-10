@@ -48,7 +48,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/ecma-script-binding">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/ecma-script-binding</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-getDOMImpl">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-getDOMImpl</a>
  */
-public class domimplementationregistry12Test extends LoboUnitTest {
+public class Domimplementationregistry12Test extends LoboUnitTest {
     @Test
     @SneakyThrows
     public void runTest() {
@@ -62,7 +62,7 @@ public class domimplementationregistry12Test extends LoboUnitTest {
         final String nullVersion = null;
 
          final DOMImplementationRegistry domImplRegistry = DOMImplementationRegistry.newInstance();
-        assertNotNull(domImplRegistry);
+        assertNotNull(domImplRegistry, "Domimplementationregistry12Assert1");
         domImpl = domImplRegistry.getDOMImplementation("cOrE 3.0 xMl 3.0 eVeNts 2.0 lS");
 
         if ((domImpl == null)) {
@@ -71,16 +71,16 @@ public class domimplementationregistry12Test extends LoboUnitTest {
             hasXML = baseImpl.hasFeature("XML", "3.0");
             hasEvents = baseImpl.hasFeature("Events", "2.0");
             hasLS = baseImpl.hasFeature("LS", nullVersion);
-            assertFalse((hasCore & hasXML & hasEvents & hasLS));
+            assertFalse((hasCore & hasXML & hasEvents & hasLS), "Domimplementationregistry12Assert2");
         } else {
             hasCore = domImpl.hasFeature("Core", "3.0");
-            assertTrue(hasCore);
+            assertTrue(hasCore, "Domimplementationregistry12Assert3");
             hasXML = domImpl.hasFeature("XML", "3.0");
-            assertTrue(hasXML);
+            assertTrue(hasXML, "Domimplementationregistry12Assert4");
             hasEvents = domImpl.hasFeature("Events", "2.0");
-            assertTrue(hasEvents);
+            assertTrue(hasEvents, "Domimplementationregistry12Assert5");
             hasLS = domImpl.hasFeature("LS", nullVersion);
-            assertTrue(hasLS);
+            assertTrue(hasLS, "Domimplementationregistry12Assert6");
         }
 
     }

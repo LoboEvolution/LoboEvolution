@@ -60,7 +60,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-well-formed">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-well-formed</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-element-content-whitespace">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-element-content-whitespace</a>
  */
-public class domconfigparameternames01Test extends LoboUnitTest {
+public class Domconfigparameternames01Test extends LoboUnitTest {
     @Test
     public void runTest() {
         DOMImplementation domImpl;
@@ -74,14 +74,14 @@ public class domconfigparameternames01Test extends LoboUnitTest {
         boolean canSet;
         doc = sampleXmlFile("barfoo.xml");
         config = doc.getDomConfig();
-        assertNotNull(config);
+        assertNotNull(config, "Domconfigparameternames01Assert1");
         parameterNames = config.getParameterNames();
-        assertNotNull(parameterNames);
+        assertNotNull(parameterNames, "Domconfigparameternames01Assert2");
         for (int indexN1008C = 0; indexN1008C < parameterNames.getLength(); indexN1008C++) {
             parameterName = parameterNames.item(indexN1008C);
             paramValue = config.getParameter(parameterName);
             canSet = config.canSetParameter(parameterName, paramValue);
-            assertTrue(canSet);
+            assertTrue(canSet, "Domconfigparameternames01Assert3");
             config.setParameter(parameterName, paramValue);
 
             if (
@@ -96,7 +96,7 @@ public class domconfigparameternames01Test extends LoboUnitTest {
                 matchCount += 1;
             }
         }
-        assertEquals(16, matchCount);
+        assertEquals(16, matchCount, "Domconfigparameternames01Assert4");
     }
 }
 

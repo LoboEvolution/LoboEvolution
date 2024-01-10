@@ -47,7 +47,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Mary Brady
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSPrefix">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSPrefix</a>
  */
-public class prefix03Test extends LoboUnitTest {
+public class Prefix03Test extends LoboUnitTest {
 
 
     /**

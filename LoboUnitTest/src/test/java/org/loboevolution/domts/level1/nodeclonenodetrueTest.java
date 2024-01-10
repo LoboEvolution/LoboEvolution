@@ -55,7 +55,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Mary Brady
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-3A0ED0A4">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-3A0ED0A4</a>
  */
-public class nodeclonenodetrueTest extends LoboUnitTest {
+public class NodeclonenodetrueTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -111,9 +111,9 @@ public class nodeclonenodetrueTest extends LoboUnitTest {
         }
 
         if (length == 6) {
-            assertEquals(expectedNoWhitespace, result);
+            assertEquals(expectedNoWhitespace, result, "NodeclonenodetrueAssert1");
         } else {
-            assertEquals(expectedWhitespace, result);
+            assertEquals(expectedWhitespace, result, "NodeclonenodetrueAssert2");
         }
 
     }

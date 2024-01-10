@@ -44,7 +44,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Mary Brady
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-6AC54C2F">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-6AC54C2F</a>
  */
-public class nodegetnextsiblingTest extends LoboUnitTest {
+public class NodegetnextsiblingTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -67,7 +67,7 @@ public class nodegetnextsiblingTest extends LoboUnitTest {
             nsNode = nsNode.getNextSibling();
             nsName = nsNode.getNodeName();
         }
-         assertEquals( "NAME", nsName);
+         assertEquals( "NAME", nsName, "NodegetnextsiblingAssert1");
     }
 }
 

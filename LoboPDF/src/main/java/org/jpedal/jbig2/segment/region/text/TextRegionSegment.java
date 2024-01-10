@@ -81,7 +81,7 @@ public class TextRegionSegment extends RegionSegment {
 
         super.readSegment();
 
-        /** read text region Segment flags */
+        /* read text region Segment flags */
         readTextRegionFlags();
 
         final short[] buff = new short[4];
@@ -310,7 +310,7 @@ public class TextRegionSegment extends RegionSegment {
     }
 
     private void readTextRegionFlags() throws IOException {
-        /** extract text region Segment flags */
+        /* extract text region Segment flags */
         final short[] textRegionFlagsField = new short[2];
         decoder.readByte(textRegionFlagsField);
 
@@ -322,7 +322,7 @@ public class TextRegionSegment extends RegionSegment {
 
         final boolean sbHuff = textRegionFlags.getFlagValue(TextRegionFlags.SB_HUFF) != 0;
         if (sbHuff) {
-            /** extract text region Segment Huffman flags */
+            /* extract text region Segment Huffman flags */
             final short[] textRegionHuffmanFlagsField = new short[2];
             decoder.readByte(textRegionHuffmanFlagsField);
 

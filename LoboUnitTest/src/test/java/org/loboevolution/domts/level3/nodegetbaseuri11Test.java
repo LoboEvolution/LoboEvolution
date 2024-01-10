@@ -47,7 +47,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=419">http://www.w3.org/Bugs/Public/show_bug.cgi?id=419</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/infoset-mapping#Infoset2ProcessingInstruction">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/infoset-mapping#Infoset2ProcessingInstruction</a>
  */
-public class nodegetbaseuri11Test extends LoboUnitTest {
+public class Nodegetbaseuri11Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -68,6 +68,6 @@ public class nodegetbaseuri11Test extends LoboUnitTest {
         baseURI = imported.getBaseURI();
         assertURIEquals(new URIEquals(null, null, null, null, "barfoo_base", null, null, true, baseURI));
         docURI = doc.getDocumentURI();
-        assertEquals(docURI, baseURI);
+        assertEquals(docURI, baseURI, "Nodegetbaseuri11Assert2");
     }
 }

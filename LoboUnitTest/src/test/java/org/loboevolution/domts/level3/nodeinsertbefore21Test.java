@@ -46,7 +46,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-952280727">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-952280727</a>
  */
-public class nodeinsertbefore21Test extends LoboUnitTest {
+public class Nodeinsertbefore21Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -68,7 +68,7 @@ public class nodeinsertbefore21Test extends LoboUnitTest {
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.HIERARCHY_REQUEST_ERR);
             }
-            assertTrue(success);
+            assertTrue(success, "Nodeinsertbefore21Assert2");
         }
     }
 }

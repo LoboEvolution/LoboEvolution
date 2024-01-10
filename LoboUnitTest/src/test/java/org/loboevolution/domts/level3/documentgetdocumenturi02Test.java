@@ -44,7 +44,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-documentURI">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-documentURI</a>
  */
-public class documentgetdocumenturi02Test extends LoboUnitTest {
+public class Documentgetdocumenturi02Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -63,7 +63,7 @@ public class documentgetdocumenturi02Test extends LoboUnitTest {
         domImpl = doc.getImplementation();
         newDoc = domImpl.createDocument(rootNS, rootName, nullDocType);
         docURI = newDoc.getDocumentURI();
-        assertNull(docURI);
+        assertNull(docURI, "Documentgetdocumenturi02Assert2");
     }
 }
 

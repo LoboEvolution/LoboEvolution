@@ -42,7 +42,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  * @author NIST
  * @author Mary Brady
  */
-public class nodedocumenttypenodevalueTest extends LoboUnitTest {
+public class NodedocumenttypenodevalueTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -54,7 +54,7 @@ public class nodedocumenttypenodevalueTest extends LoboUnitTest {
         final DocumentType docType;
         doc = sampleXmlFile("staff.xml");
         docType = doc.getDoctype();
-        assertNotNull(docType);
+        assertNotNull(docType, "NodedocumenttypenodevalueAssert2");
     }
 }
 

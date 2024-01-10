@@ -42,14 +42,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-version">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-version</a>
  */
-public class documentgetxmlversion01Test extends LoboUnitTest {
+public class Documentgetxmlversion01Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
         final String versionValue;
         doc = sampleXmlFile("hc_staff.xml");
         versionValue = doc.getXmlVersion();
-        assertEquals("1.0", versionValue);
+        assertEquals("1.0", versionValue, "Documentgetxmlversion01Assert2");
     }
 }
 

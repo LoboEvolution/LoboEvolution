@@ -70,8 +70,8 @@ public class ToUnicodeMap extends PDFCMap {
     }
 
     /*************************************************************************
-     * @param map
-     * @throws IOException
+     * @param map a {@link PDFObject} object.
+     * @throws {@link IOException} object.
      ************************************************************************/
 
     private void parseMappings(final PDFObject map) throws IOException {
@@ -97,8 +97,8 @@ public class ToUnicodeMap extends PDFCMap {
     }
 
     /*************************************************************************
-     * @param bf
-     * @throws IOException
+     * @param bf a {@link BufferedReader} object.
+     * @throws {@link IOException} object.
      ************************************************************************/
 
     private void parseCharRangeMappingSection(final BufferedReader bf, final boolean isCid) throws IOException {
@@ -135,8 +135,8 @@ public class ToUnicodeMap extends PDFCMap {
     }
 
     /*************************************************************************
-     * @param line
-     * @return
+     * @param line a {@link String} object.
+     * @param isCID a {@link Boolean} object.
      ************************************************************************/
 
     private void parseRangeLine(final String line, final boolean isCid) {
@@ -193,8 +193,9 @@ public class ToUnicodeMap extends PDFCMap {
     }
 
     /*************************************************************************
-     * @param bf
-     * @throws IOException
+     * @param bf a {@link BufferedReader} object.
+     * @param isCID a {@link Boolean} object.
+     * @throws {@link IOException} object.
      ************************************************************************/
 
     private void parseSingleCharMappingSection(final BufferedReader bf, final boolean isCID) throws IOException {
@@ -209,8 +210,8 @@ public class ToUnicodeMap extends PDFCMap {
     }
 
     /*************************************************************************
-     * @param line
-     * @return
+     * @param line a {@link String} object.
+     * @param isCID a {@link Boolean} object.
      ************************************************************************/
 
     private void parseSingleCharMappingLine(final String line, final boolean isCID) {
@@ -226,8 +227,8 @@ public class ToUnicodeMap extends PDFCMap {
 
     /*************************************************************************
      * Parse a string of the format <0F3A> to a char.
-     * @param chardef
-     * @return
+     * @param chardef a {@link String} object.
+     * @return a {@link Character} object.
      ************************************************************************/
 
     private Character parseChar(final String chardef) {
@@ -275,8 +276,8 @@ public class ToUnicodeMap extends PDFCMap {
     }
 
     /*************************************************************************
-     * @param src
-     * @return
+     * @param src a {@link Character} object.
+     * @return a {@link Character} object.
      ************************************************************************/
 
     private Character lookupInRanges(final char src) {

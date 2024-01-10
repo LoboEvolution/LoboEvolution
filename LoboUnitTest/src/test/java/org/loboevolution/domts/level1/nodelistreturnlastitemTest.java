@@ -45,7 +45,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Mary Brady
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-844377136">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-844377136</a>
  */
-public class nodelistreturnlastitemTest extends LoboUnitTest {
+public class NodelistreturnlastitemTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -69,11 +69,11 @@ public class nodelistreturnlastitemTest extends LoboUnitTest {
         if (length == 6) {
             child = employeeList.item(5);
             childName = child.getNodeName();
-            assertEquals("ADDRESS", childName);
+            assertEquals("ADDRESS", childName, "NodelistreturnlastitemAssert1");
         } else {
             child = employeeList.item(12);
             childName = child.getNodeName();
-            assertEquals("#text", childName);
+            assertEquals("#text", childName, "NodelistreturnlastitemAssert2");
         }
 
     }

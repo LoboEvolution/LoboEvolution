@@ -49,7 +49,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMImplementationList-item">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMImplementationList-item</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMImplementationList-length">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMImplementationList-length</a>
  */
-public class domimplementationregistry13Test extends LoboUnitTest {
+public class Domimplementationregistry13Test extends LoboUnitTest {
     @Test
     @SneakyThrows
     public void runTest() {
@@ -61,17 +61,17 @@ public class domimplementationregistry13Test extends LoboUnitTest {
         final String nullVersion = null;
 
          final DOMImplementationRegistry domImplRegistry = DOMImplementationRegistry.newInstance();
-        assertNotNull(domImplRegistry);
+        assertNotNull(domImplRegistry, "Domimplementationregistry13Assert1");
         domImplList = domImplRegistry.getDOMImplementationList("cOrE");
         length = (int) domImplList.getLength();
         domImpl = domImplList.item(((int) /*int */length));
-        assertNull(domImpl);
-        assertNull(domImpl);
-        assertTrue((length > 0));
+        assertNull(domImpl, "Domimplementationregistry13Assert2");
+        assertNull(domImpl, "Domimplementationregistry13Assert3");
+        assertTrue((length > 0), "Domimplementationregistry13Assert4");
         for (int indexN10067 = 0; indexN10067 < domImplList.getLength(); indexN10067++) {
             domImpl = (DOMImplementation) domImplList.item(indexN10067);
             hasFeature = domImpl.hasFeature("Core", nullVersion);
-            assertTrue(hasFeature);
+            assertTrue(hasFeature, "Domimplementationregistry13Assert5");
         }
     }
 }

@@ -107,9 +107,9 @@ public class GenericRegionSegment extends RegionSegment {
         int bytesRead = 0;
 
         if (length == -1) {
-            /**
-             * length of data is unknown, so it needs to be determined through examination of the data.
-             * See 7.2.7 - Segment data length of the JBIG2 specification.
+            /*
+              length of data is unknown, so it needs to be determined through examination of the data.
+              See 7.2.7 - Segment data length of the JBIG2 specification.
              */
 
             unknownLength = true;

@@ -45,7 +45,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Text3-wholeText">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Text3-wholeText</a>
  */
-public class textwholetext03Test extends LoboUnitTest {
+public class Textwholetext03Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -61,7 +61,7 @@ public class textwholetext03Test extends LoboUnitTest {
         appendedChild = elem.appendChild(text1);
         appendedChild = elem.appendChild(text2);
         combinedText = text1.getWholeText();
-        assertEquals("Text I Text II", combinedText);
+        assertEquals("Text I Text II", combinedText, "Textwholetext03Assert2");
     }
 }
 

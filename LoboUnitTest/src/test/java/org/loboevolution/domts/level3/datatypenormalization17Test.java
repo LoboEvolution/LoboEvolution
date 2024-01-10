@@ -47,7 +47,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-datatype-normalization">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-datatype-normalization</a>
  */
-public class datatypenormalization17Test extends LoboUnitTest {
+public class Datatypenormalization17Test extends LoboUnitTest {
 
 
     @Test
@@ -79,20 +79,20 @@ public class datatypenormalization17Test extends LoboUnitTest {
             /*DOMErrorMonitor */
             domConfig.setParameter("error-handler", errorMonitor);
             doc.normalizeDocument();
-            assertTrue(errorMonitor.assertLowerSeverity(2));
+            assertTrue(errorMonitor.assertLowerSeverity(2), "Datatypenormalization17Assert1");
             elemList = doc.getElementsByTagNameNS("http://www.w3.org/1999/xhtml", "code");
             element = (Element) elemList.item(1);
             childNode = element.getFirstChild();
             childValue = childNode.getNodeValue();
-            assertEquals( "EMP  0001", childValue);
+            assertEquals( "EMP  0001", childValue, "Datatypenormalization17Assert2");
             element = (Element) elemList.item(2);
             childNode = element.getFirstChild();
             childValue = childNode.getNodeValue();
-            assertEquals( "EMP 0001", childValue);
+            assertEquals( "EMP 0001", childValue, "Datatypenormalization17Assert3");
             element = (Element) elemList.item(0);
             childNode = element.getFirstChild();
             childValue = childNode.getNodeValue();
-            assertNotEquals( "EMP 0001", childValue);
+            assertNotEquals( "EMP 0001", childValue, "Datatypenormalization17Assert4");
         }
     }
 }

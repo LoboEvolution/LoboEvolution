@@ -44,7 +44,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Jenny Hsu
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration-canSetParameter">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration-canSetParameter</a>
  */
-public class domconfigurationcansetparameter01Test extends LoboUnitTest {
+public class Domconfigurationcansetparameter01Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -61,11 +61,11 @@ public class domconfigurationcansetparameter01Test extends LoboUnitTest {
         appendedChild = docElem.appendChild(newCommentNode);
         domConfig = doc.getDomConfig();
         canSet = domConfig.canSetParameter("comments", Boolean.FALSE);
-        assertTrue(canSet);
+        assertTrue(canSet, "Domconfigurationcansetparameter01Assert3");
         doc.normalizeDocument();
         lastChild = docElem.getLastChild();
         commentValue = lastChild.getNodeValue();
-        assertEquals("This is a new Comment node", commentValue);
+        assertEquals("This is a new Comment node", commentValue, "Domconfigurationcansetparameter01Assert4");
     }
 }
 

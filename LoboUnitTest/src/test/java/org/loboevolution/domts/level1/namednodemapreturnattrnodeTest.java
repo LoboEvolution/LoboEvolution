@@ -55,7 +55,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-637646024">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-637646024</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1112119403">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1112119403</a>
  */
-public class namednodemapreturnattrnodeTest extends LoboUnitTest {
+public class NamednodemapreturnattrnodeTest extends LoboUnitTest {
 
 
     /**
@@ -75,12 +75,12 @@ public class namednodemapreturnattrnodeTest extends LoboUnitTest {
         testEmployee = (Element) elementList.item(1);
         attributes = testEmployee.getAttributes();
         streetAttr = (Attr) attributes.getNamedItem("street");
-        assertNotNull(streetAttr);
+        assertNotNull(streetAttr, "NamednodemapreturnattrnodeAssert1");
         attrName = streetAttr.getNodeName();
-         assertEquals( "street", attrName);
+         assertEquals( "street", attrName, "NamednodemapreturnattrnodeAssert2");
         
         attrName = streetAttr.getName();
-        assertEquals("street", attrName);
+        assertEquals("street", attrName, "NamednodemapreturnattrnodeAssert3");
     }
 }
 

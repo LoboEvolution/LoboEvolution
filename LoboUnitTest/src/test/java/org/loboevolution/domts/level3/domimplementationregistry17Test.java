@@ -47,7 +47,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/ecma-script-binding">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/ecma-script-binding</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-getDOMImpls">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-getDOMImpls</a>
  */
-public class domimplementationregistry17Test extends LoboUnitTest {
+public class Domimplementationregistry17Test extends LoboUnitTest {
     @Test
     @SneakyThrows
     public void runTest() throws Exception {
@@ -59,16 +59,16 @@ public class domimplementationregistry17Test extends LoboUnitTest {
         final DOMImplementationList domImplList;
         final int length;
          final DOMImplementationRegistry domImplRegistry = DOMImplementationRegistry.newInstance();
-        assertNotNull(domImplRegistry);
+        assertNotNull(domImplRegistry, "Domimplementationregistry17Assert3");
         domImplList = domImplRegistry.getDOMImplementationList("xMl 3.0 cOrE");
         length = domImplList.getLength();
-        assertTrue((length > 0));
+        assertTrue((length > 0), "Domimplementationregistry17Assert4");
         for (int indexN1005A = 0; indexN1005A < domImplList.getLength(); indexN1005A++) {
             domImpl = (DOMImplementation) domImplList.item(indexN1005A);
             hasFeature = domImpl.hasFeature("XML", "3.0");
-            assertTrue(hasFeature);
+            assertTrue(hasFeature, "Domimplementationregistry17Assert5");
             hasFeature = domImpl.hasFeature("Core", nullVersion);
-            assertTrue(hasFeature);
+            assertTrue(hasFeature, "Domimplementationregistry17Assert6");
         }
     }
 }

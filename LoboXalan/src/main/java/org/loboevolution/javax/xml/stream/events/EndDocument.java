@@ -51,7 +51,4 @@
 package org.loboevolution.javax.xml.stream.events;
 
 public interface EndDocument extends XMLEvent {
-  /**
-   * No methods are defined in this interface.
-   */
 }

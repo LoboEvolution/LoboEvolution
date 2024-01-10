@@ -267,9 +267,9 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
      * it up to produce a graphics line of 1 pixel, or so. This matches our
      * output with Adobe Reader.
      *
-     * @param g
-     * @param bs
-     * @return
+     * @param g a {@link Graphics2D} object.
+     * @param bs a {@link BasicStroke} object.
+     * @return a {@link BasicStroke} object.
      */
     private BasicStroke autoAdjustStrokeWidth(final Graphics2D g, final BasicStroke bs) {
         final AffineTransform bt = new AffineTransform(g.getTransform());

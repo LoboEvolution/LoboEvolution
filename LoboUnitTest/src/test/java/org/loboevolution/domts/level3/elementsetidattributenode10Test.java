@@ -49,7 +49,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Jenny Hsu
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-ElSetIdAttrNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-ElSetIdAttrNode</a>
  */
-public class elementsetidattributenode10Test extends LoboUnitTest {
+public class Elementsetidattributenode10Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -67,13 +67,13 @@ public class elementsetidattributenode10Test extends LoboUnitTest {
         attr = (Attr) attributesMap.getNamedItem("class");
         acronymElem.setIdAttributeNode(attr, true);
         id = attr.isId();
-        assertTrue(id);
+        assertTrue(id, "Elementsetidattributenode10Assert1");
         elem = doc.getElementById("Yα");
         elemName = elem.getTagName();
-        assertEquals("ACRONYM", elemName);
+        assertEquals("ACRONYM", elemName, "Elementsetidattributenode10Assert2");
         acronymElem.setIdAttributeNode(attr, false);
         id = attr.isId();
-        assertFalse(id);
+        assertFalse(id, "Elementsetidattributenode10Assert3");
     }
 }
 

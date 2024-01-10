@@ -45,7 +45,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isEqualNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isEqualNode</a>
  */
-public class nodeisequalnode16Test extends LoboUnitTest {
+public class Nodeisequalnode16Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -62,7 +62,7 @@ public class nodeisequalnode16Test extends LoboUnitTest {
         attr1 = addrElement.getAttributeNodeNS(nullNSURI, "nm:dir");
         attr2 = (Attr) attr1.cloneNode(true);
         isEqual = attr1.isEqualNode(attr2);
-        assertTrue(isEqual);
+        assertTrue(isEqual, "Nodeisequalnode16Assert2");
     }
 }
 

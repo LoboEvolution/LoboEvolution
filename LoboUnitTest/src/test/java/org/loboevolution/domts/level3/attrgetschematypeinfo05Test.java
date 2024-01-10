@@ -47,7 +47,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-typeName">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-typeName</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-typeNamespace">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-typeNamespace</a>
  */
-public class attrgetschematypeinfo05Test extends LoboUnitTest {
+public class Attrgetschematypeinfo05Test extends LoboUnitTest {
 
 
     @Test
@@ -64,11 +64,11 @@ public class attrgetschematypeinfo05Test extends LoboUnitTest {
         acronymElem = (Element) elemList.item(2);
         attr = acronymElem.getAttributeNode("class");
         typeInfo = attr.getSchemaTypeInfo();
-        assertNotNull(typeInfo);
+        assertNotNull(typeInfo, "Attrgetschematypeinfo05Assert3");
         typeName = typeInfo.getTypeName();
-        assertEquals( "classType", typeName);
+        assertEquals( "classType", typeName, "Attrgetschematypeinfo05Assert4");
         typeNS = typeInfo.getTypeNamespace();
-        assertEquals("http://www.w3.org/2001/XMLSchema", typeNS);
+        assertEquals("http://www.w3.org/2001/XMLSchema", typeNS, "Attrgetschematypeinfo05Assert5");
     }
 }
 

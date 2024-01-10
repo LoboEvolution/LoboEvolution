@@ -49,7 +49,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElSetAtNodeNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElSetAtNodeNS</a>
  */
-public class elementsetattributenodens04Test extends LoboUnitTest {
+public class Elementsetattributenodens04Test extends LoboUnitTest {
 
     /**
      * Runs the test case.

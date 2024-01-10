@@ -46,7 +46,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
  * @author Jenny Hsu
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-compareDocumentPosition">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-compareDocumentPosition</a>
  */
-public class nodecomparedocumentposition16Test extends LoboUnitTest {
+public class Nodecomparedocumentposition16Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -62,13 +62,13 @@ public class nodecomparedocumentposition16Test extends LoboUnitTest {
         attr = doc.createAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:lang");
         attrCloned = (Attr) attr.cloneNode(true);
         position1 = docFrag.compareDocumentPosition(attrCloned);
-        assertEquals(33 & 57, position1 & 57);
+        assertEquals(33 & 57, position1 & 57, "Nodecomparedocumentposition16Assert3");
         position2 = attrCloned.compareDocumentPosition(docFrag);
-        assertNotEquals(position1 & 2, position2 & 2);
-        assertNotEquals(position1 & 4, position2 & 4);
-        assertEquals(33 & 57, position2 & 57);
+        assertNotEquals(position1 & 2, position2 & 2, "Nodecomparedocumentposition16Assert4");
+        assertNotEquals(position1 & 4, position2 & 4, "Nodecomparedocumentposition16Assert5");
+        assertEquals(33 & 57, position2 & 57, "Nodecomparedocumentposition16Assert6");
         position3 = docFrag.compareDocumentPosition(attrCloned);
-        assertEquals(position1, position3);
+        assertEquals(position1, position3, "Nodecomparedocumentposition16Assert7");
     }
 }
 

@@ -46,7 +46,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=416">http://www.w3.org/Bugs/Public/show_bug.cgi?id=416</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-comments">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-comments</a>
  */
-public class documentnormalizedocument04Test extends LoboUnitTest {
+public class DocumentnormalizeDocument04Test extends LoboUnitTest {
 
 
     @Test
@@ -70,20 +70,20 @@ public class documentnormalizedocument04Test extends LoboUnitTest {
         /*DOMErrorMonitor */
         domConfig.setParameter("error-handler", errorMonitor);
         doc.normalizeDocument();
-        assertTrue(errorMonitor.assertLowerSeverity(2));
+        assertTrue(errorMonitor.assertLowerSeverity(2), "DocumentnormalizeDocument04Assert3");
         pList = doc.getElementsByTagName("p");
         elem = (Element) pList.item(0);
         lastChild = elem.getLastChild();
         nodeName = lastChild.getNodeName();
-        assertEquals( "#comment", nodeName);
+        assertEquals( "#comment", nodeName, "DocumentnormalizeDocument04Assert4");
         domConfig.setParameter("comments", Boolean.FALSE);
         doc.normalizeDocument();
-        assertTrue( errorMonitor.assertLowerSeverity(2));
+        assertTrue( errorMonitor.assertLowerSeverity(2), "DocumentnormalizeDocument04Assert5");
         pList = doc.getElementsByTagName("p");
         elem = (Element) pList.item(0);
         lastChild = elem.getLastChild();
         nodeName = lastChild.getNodeName();
-        assertEquals("#text", nodeName);
+        assertEquals("#text", nodeName, "DocumentnormalizeDocument04Assert6");
     }
 }
 

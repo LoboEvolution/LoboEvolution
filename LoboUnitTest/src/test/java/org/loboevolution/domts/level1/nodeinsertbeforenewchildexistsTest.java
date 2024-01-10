@@ -55,7 +55,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Mary Brady
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-952280727">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-952280727</a>
  */
-public class nodeinsertbeforenewchildexistsTest extends LoboUnitTest {
+public class NodeinsertbeforenewchildexistsTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -120,7 +120,7 @@ public class nodeinsertbeforenewchildexistsTest extends LoboUnitTest {
             childName = child.getNodeName();
             result.add(childName);
         }
-        assertEquals(expected, result);
+        assertEquals(expected, result, "NodeinsertbeforenewchildexistsAssert1");
     }
 
 }

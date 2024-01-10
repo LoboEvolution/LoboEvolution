@@ -46,7 +46,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
  * @author Jenny Hsu
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-compareDocumentPosition">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-compareDocumentPosition</a>
  */
-public class nodecomparedocumentposition39Test extends LoboUnitTest {
+public class Nodecomparedocumentposition39Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -62,12 +62,12 @@ public class nodecomparedocumentposition39Test extends LoboUnitTest {
         attr1 = elem.getAttributeNode("class");
         attr2 = elem.getAttributeNode("xsi:noNamespaceSchemaLocation");
         attrPosition = attr1.compareDocumentPosition(attr2);
-        assertEquals(32 & 32, attrPosition & 32);
-        assertEquals(0 & 25, attrPosition & 25);
-        assertNotEquals(0 & 6, attrPosition & 6);
+        assertEquals(32 & 32, attrPosition & 32, "Nodecomparedocumentposition39Assert3");
+        assertEquals(0 & 25, attrPosition & 25, "Nodecomparedocumentposition39Assert4");
+        assertNotEquals(0 & 6, attrPosition & 6, "Nodecomparedocumentposition39Assert5");
         swappedPosition = attr2.compareDocumentPosition(attr1);
-        assertNotEquals(swappedPosition & 2, attrPosition & 2);
-        assertNotEquals(swappedPosition & 4, attrPosition & 4);
+        assertNotEquals(swappedPosition & 2, attrPosition & 2, "Nodecomparedocumentposition39Assert6");
+        assertNotEquals(swappedPosition & 4, attrPosition & 4, "Nodecomparedocumentposition39Assert7");
     }
 }
 

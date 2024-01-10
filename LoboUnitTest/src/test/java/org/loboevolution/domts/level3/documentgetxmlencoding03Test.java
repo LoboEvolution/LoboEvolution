@@ -42,14 +42,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-encoding">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-encoding</a>
  */
-public class documentgetxmlencoding03Test extends LoboUnitTest {
+public class Documentgetxmlencoding03Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
         final String encodingName;
         doc = sampleXmlFile("barfoo_utf16.xml");
         encodingName = doc.getXmlEncoding();
-        assertEquals("uTf-16", encodingName);
+        assertEquals("uTf-16", encodingName, "Documentgetxmlencoding03Assert2");
     }
 }
 

@@ -52,7 +52,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-184E7107">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-184E7107</a>
  * @see <a href="http://www.w3.org/2001/DOM-Test-Suite/level1/core/nodeappendchildnomodificationallowederr.xml">http://www.w3.org/2001/DOM-Test-Suite/level1/core/nodeappendchildnomodificationallowederr.xml</a>
  */
-public class nodeappendchildnomodificationallowederrEETest extends LoboUnitTest {
+public class NodeappendchildnomodificationallowederrEETest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -66,7 +66,7 @@ public class nodeappendchildnomodificationallowederrEETest extends LoboUnitTest 
         final Node appendedNode;
         doc = sampleXmlFile("staff.xml");
         entRef = doc.createEntityReference("ent4");
-        assertNotNull(entRef);
+        assertNotNull(entRef, "NodeappendchildnomodificationallowederrEEAssert3");
         createdNode = doc.createElement("text3");
 
         {
@@ -76,7 +76,7 @@ public class nodeappendchildnomodificationallowederrEETest extends LoboUnitTest 
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }
-            assertTrue(success);
+            assertTrue(success, "NodeappendchildnomodificationallowederrEEAssert4");
         }
     }
 }

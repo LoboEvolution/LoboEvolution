@@ -48,7 +48,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * @author Mary Brady
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-84CF096">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-84CF096</a>
  */
-public class nodeprocessinginstructionnodeattributesTest extends LoboUnitTest {
+public class NodeprocessinginstructionnodeattributesTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -64,7 +64,7 @@ public class nodeprocessinginstructionnodeattributesTest extends LoboUnitTest {
         testList = doc.getChildNodes();
         piNode = (HTMLProcessingInstruction) testList.item(0);
         attrList = piNode.getAttributes();
-        assertNull(attrList);
+        assertNull(attrList, "NodeprocessinginstructionnodeattributesAssert2");
     }
 
 }

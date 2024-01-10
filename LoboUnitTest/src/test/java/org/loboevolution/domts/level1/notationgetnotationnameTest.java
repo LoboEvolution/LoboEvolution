@@ -47,7 +47,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D095">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D095</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-5431D1B9">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-5431D1B9</a>
  */
-public class notationgetnotationnameTest extends LoboUnitTest {
+public class NotationgetnotationnameTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -62,12 +62,12 @@ public class notationgetnotationnameTest extends LoboUnitTest {
         final String notationName;
         doc = sampleXmlFile("staff.xml");
         docType = doc.getDoctype();
-        assertNotNull(docType);
+        assertNotNull(docType, "NotationgetnotationnameAssert1");
         notations = docType.getNotations();
-        assertNotNull(notations);
+        assertNotNull(notations, "NotationgetnotationnameAssert2");
         notationNode = (Notation) notations.getNamedItem("notation1");
         notationName = notationNode.getNodeName();
-        assertEquals("notation1", notationName);
+        assertEquals("notation1", notationName, "NotationgetnotationnameAssert3");
     }
 }
 

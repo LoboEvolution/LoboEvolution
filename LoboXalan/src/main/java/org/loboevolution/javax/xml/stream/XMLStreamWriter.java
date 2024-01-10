@@ -115,19 +115,6 @@ public interface XMLStreamWriter {
     throws XMLStreamException;
 
   /**
-   * Writes string data to the output without checking for well formedness.
-   * The data is opaque to the XMLStreamWriter, i.e. the characters are written
-   * blindly to the underlying output.  If the method cannot be supported
-   * in the currrent writing context the implementation may throw a
-   * UnsupportedOperationException.  For example note that any
-   * namespace declarations, end tags, etc. will be ignored and could
-   * interfere with proper maintanence of the writers internal state.
-   *
-   * @param data the data to write
-   */
-  //  void writeRaw(final String data) throws XMLStreamException;
-
-  /**
    * Writes an end tag to the output relying on the internal
    * state of the writer to determine the prefix and local name
    * of the event.

@@ -58,7 +58,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1025163788">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1025163788</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-349467F9">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-349467F9</a>
  */
-public class namednodemapsetnameditemthatexistsTest extends LoboUnitTest {
+public class NamednodemapsetnameditemthatexistsTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -82,7 +82,7 @@ public class namednodemapsetnameditemthatexistsTest extends LoboUnitTest {
         setNode = attributes.setNamedItem(newAttribute);
         districtNode = (Attr) attributes.getNamedItem("street");
         attrValue = districtNode.getNodeValue();
-        assertNull(attrValue);
+        assertNull(attrValue, "NamednodemapsetnameditemthatexistsAssert1");
     }
 }
 

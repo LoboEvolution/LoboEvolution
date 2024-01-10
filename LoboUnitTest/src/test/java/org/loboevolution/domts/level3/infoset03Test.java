@@ -47,7 +47,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-infoset">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-infoset</a>
  */
-public class infoset03Test extends LoboUnitTest {
+public class Infoset03Test extends LoboUnitTest {
 
 
     @Test
@@ -78,21 +78,21 @@ public class infoset03Test extends LoboUnitTest {
             /*DOMErrorMonitor */
             domConfig.setParameter("error-handler", errorMonitor);
             doc.normalizeDocument();
-            assertTrue(errorMonitor.assertLowerSeverity(2));
+            assertTrue(errorMonitor.assertLowerSeverity(2), "Infoset03Assert3");
             elemList = doc.getElementsByTagNameNS("http://www.w3.org/1999/xhtml", "code");
             element = (Element) elemList.item(0);
             childNode = element.getFirstChild();
             childValue = childNode.getNodeValue();
             childLength = childValue.length();
-            assertEquals(18, childLength);
+            assertEquals(18, childLength, "Infoset03Assert4");
             element = (Element) elemList.item(1);
             childNode = element.getFirstChild();
             childValue = childNode.getNodeValue();
-            assertEquals("EMP  0001", childValue);
+            assertEquals("EMP  0001", childValue, "Infoset03Assert5");
             element = (Element) elemList.item(2);
             childNode = element.getFirstChild();
             childValue = childNode.getNodeValue();
-            assertEquals("EMP 0001", childValue);
+            assertEquals("EMP 0001", childValue, "Infoset03Assert6");
         }
     }
 }

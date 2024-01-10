@@ -52,7 +52,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/namespaces-algorithms#normalizeDocumentAlgo">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/namespaces-algorithms#normalizeDocumentAlgo</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-canonical-form">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-canonical-form</a>
  */
-public class canonicalform05Test extends LoboUnitTest {
+public class Canonicalform05Test extends LoboUnitTest {
 
 
     @Test
@@ -98,27 +98,27 @@ public class canonicalform05Test extends LoboUnitTest {
                 if (severity == 2) {
                     location = error.getLocation();
                     problemNode = location.getRelatedNode();
-                    assertSame(newChild, problemNode);
+                    assertSame(newChild, problemNode, "Canonicalform05Assert1");
                     lineNumber = location.getLineNumber();
-                    assertEquals(-1, lineNumber);
+                    assertEquals(-1, lineNumber, "Canonicalform05Assert2");
                     columnNumber = location.getColumnNumber();
-                    assertEquals(-1, columnNumber);
+                    assertEquals(-1, columnNumber, "Canonicalform05Assert3");
                     byteOffset = location.getByteOffset();
-                    assertEquals(-1, byteOffset);
+                    assertEquals(-1, byteOffset, "Canonicalform05Assert4");
                     utf16Offset = location.getUtf16Offset();
-                    assertEquals(-1, utf16Offset);
+                    assertEquals(-1, utf16Offset, "Canonicalform05Assert5");
                     uri = location.getUri();
-                    assertNull(uri);
+                    assertNull(uri, "Canonicalform05Assert6");
                     message = error.getMessage();
                     length = message.length();
-                    assertTrue(length > 0);
+                    assertTrue(length > 0, "Canonicalform05Assert7");
                     errorCount += 1;
                 } else {
-                    assertEquals(1, severity);
+                    assertEquals(1, severity, "Canonicalform05Assert8");
                 }
 
             }
-            assertEquals(1, errorCount);
+            assertEquals(1, errorCount, "Canonicalform05Assert9");
         }
     }
 }

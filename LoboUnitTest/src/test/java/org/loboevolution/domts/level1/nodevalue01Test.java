@@ -44,7 +44,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#i-Document">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#i-Document</a>
  */
-public class nodevalue01Test extends LoboUnitTest {
+public class Nodevalue01Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -58,10 +58,10 @@ public class nodevalue01Test extends LoboUnitTest {
         doc = sampleXmlFile("staff.xml");
         newNode = doc.createElement("address");
         newValue = newNode.getNodeValue();
-        assertNull(newValue);
+        assertNull(newValue, "Nodevalue01Assert3");
         newNode.setNodeValue("This should have no effect");
         newValue = newNode.getNodeValue();
-        assertNull(newValue);
+        assertNull(newValue, "Nodevalue01Assert4");
     }
 
 }

@@ -78,25 +78,25 @@ public class TextRegionFlags extends Flags {
     public void setFlags(final int flagsAsInt) {
         this.flagsAsInt = flagsAsInt;
 
-        /** extract SB_HUFF */
+        /*extract SB_HUFF */
         flags.put(SB_HUFF, flagsAsInt & 1);
 
-        /** extract SB_REFINE */
+        /*extract SB_REFINE */
         flags.put(SB_REFINE, (flagsAsInt >> 1) & 1);
 
-        /** extract LOG_SB_STRIPES */
+        /*extract LOG_SB_STRIPES */
         flags.put(LOG_SB_STRIPES, (flagsAsInt >> 2) & 3);
 
-        /** extract REF_CORNER */
+        /*extract REF_CORNER */
         flags.put(REF_CORNER, (flagsAsInt >> 4) & 3);
 
-        /** extract TRANSPOSED */
+        /*extract TRANSPOSED */
         flags.put(TRANSPOSED, (flagsAsInt >> 6) & 1);
 
-        /** extract SB_COMB_OP */
+        /*extract SB_COMB_OP */
         flags.put(SB_COMB_OP, (flagsAsInt >> 7) & 3);
 
-        /** extract SB_DEF_PIXEL */
+        /*extract SB_DEF_PIXEL */
         flags.put(SB_DEF_PIXEL, (flagsAsInt >> 9) & 1);
 
         int sOffset = (flagsAsInt >> 10) & 0x1f;
@@ -105,7 +105,7 @@ public class TextRegionFlags extends Flags {
         }
         flags.put(SB_DS_OFFSET, sOffset);
 
-        /** extract SB_R_TEMPLATE */
+        /*extract SB_R_TEMPLATE */
         flags.put(SB_R_TEMPLATE, (flagsAsInt >> 15) & 1);
 
         if (JBIG2StreamDecoder.debug)

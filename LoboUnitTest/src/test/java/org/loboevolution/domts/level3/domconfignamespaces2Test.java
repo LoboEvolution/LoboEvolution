@@ -43,7 +43,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-namespaces">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-namespaces</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration</a>
  */
-public class domconfignamespaces2Test extends LoboUnitTest {
+public class Domconfignamespaces2Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -52,7 +52,7 @@ public class domconfignamespaces2Test extends LoboUnitTest {
         doc = sampleXmlFile("barfoo.xml");
         domConfig = doc.getDomConfig();
         state = ((Boolean) domConfig.getParameter("namespaces"));
-        assertTrue(state);
+        assertTrue(state, "Domconfignamespaces2Assert2");
     }
 }
 

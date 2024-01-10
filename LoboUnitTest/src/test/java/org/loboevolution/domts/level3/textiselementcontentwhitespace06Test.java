@@ -43,7 +43,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Curt Arnold
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Text3-isElementContentWhitespace">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Text3-isElementContentWhitespace</a>
  */
-public class textiselementcontentwhitespace06Test extends LoboUnitTest {
+public class Textiselementcontentwhitespace06Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -73,12 +73,12 @@ public class textiselementcontentwhitespace06Test extends LoboUnitTest {
             blankNode = doc.createTextNode("     ");
             replacedNode = bodyElem.insertBefore(blankNode, refChild);
             doc.normalizeDocument();
-            assertTrue(errorMonitor.assertLowerSeverity(2));
+            assertTrue(errorMonitor.assertLowerSeverity(2), "Textiselementcontentwhitespace06Assert2");
             bodyList = doc.getElementsByTagName("body");
             bodyElem = (Element) bodyList.item(0);
             textNode = (Text) bodyElem.getFirstChild();
             isElemContentWhitespace = textNode.isElementContentWhitespace();
-            assertTrue(isElemContentWhitespace);
+            assertTrue(isElemContentWhitespace, "Textiselementcontentwhitespace06Assert3");
         }
     }
 }

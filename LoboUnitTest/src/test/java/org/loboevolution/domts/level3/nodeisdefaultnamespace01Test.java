@@ -42,7 +42,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isDefaultNamespace">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isDefaultNamespace</a>
  */
-public class nodeisdefaultnamespace01Test extends LoboUnitTest {
+public class Nodeisdefaultnamespace01Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -53,7 +53,7 @@ public class nodeisdefaultnamespace01Test extends LoboUnitTest {
         docElem = doc.getDocumentElement();
         docElemNS = docElem.getNamespaceURI();
         isDefault = doc.isDefaultNamespace(docElemNS);
-        assertTrue(isDefault);
+        assertTrue(isDefault, "Nodeisdefaultnamespace01Assert2");
     }
 }
 

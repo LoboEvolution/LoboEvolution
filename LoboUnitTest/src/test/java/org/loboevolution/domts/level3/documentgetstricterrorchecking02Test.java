@@ -44,7 +44,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-strictErrorChecking">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-strictErrorChecking</a>
  */
-public class documentgetstricterrorchecking02Test extends LoboUnitTest {
+public class Documentgetstricterrorchecking02Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -63,7 +63,7 @@ public class documentgetstricterrorchecking02Test extends LoboUnitTest {
         domImpl = doc.getImplementation();
         newDoc = domImpl.createDocument(rootNS, rootName, nullDocType);
         strictErrorCheckingValue = newDoc.getStrictErrorChecking();
-        assertTrue(strictErrorCheckingValue);
+        assertTrue(strictErrorCheckingValue, "Documentgetstricterrorchecking02Assert2");
     }
 }
 

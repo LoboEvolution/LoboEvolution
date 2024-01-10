@@ -45,7 +45,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-textContent">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-textContent</a>
  */
-public class nodesettextcontent01Test extends LoboUnitTest {
+public class Nodesettextcontent01Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -56,9 +56,9 @@ public class nodesettextcontent01Test extends LoboUnitTest {
         doc.setTextContent("textContent");
         elemList = doc.getElementsByTagName("acronym");
         elem = (Element) elemList.item(3);
-        assertNotNull(elem);
+        assertNotNull(elem, "Nodesettextcontent01Assert3");
         nodeName = elem.getNodeName();
-        assertEquals( "ACRONYM", nodeName);
+        assertEquals( "ACRONYM", nodeName, "Nodesettextcontent01Assert4");
     }
 }
 

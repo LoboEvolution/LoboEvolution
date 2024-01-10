@@ -42,7 +42,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * @author Mary Brady
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#node-ownerDoc">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#node-ownerDoc</a>
  */
-public class nodegetownerdocumentnullTest extends LoboUnitTest {
+public class NodegetownerdocumentnullTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -54,7 +54,7 @@ public class nodegetownerdocumentnullTest extends LoboUnitTest {
         final Document ownerDocument;
         doc = sampleXmlFile("staff.xml");
         ownerDocument = doc.getOwnerDocument();
-        assertNull(ownerDocument);
+        assertNull(ownerDocument, "NodegetownerdocumentnullAssert2");
     }
 }
 

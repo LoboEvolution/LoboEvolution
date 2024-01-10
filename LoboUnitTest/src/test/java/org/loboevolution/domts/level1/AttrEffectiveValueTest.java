@@ -69,7 +69,7 @@ public class AttrEffectiveValueTest extends LoboUnitTest {
         attributes = testNode.getAttributes();
         domesticAttr = (Attr) attributes.getNamedItem("domestic");
         value = domesticAttr.getNodeValue();
-        assertEquals("Yes", value);
+        assertEquals("Yes", value, "AttrEffectiveValueAssert1");
     }
 
 }

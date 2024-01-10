@@ -44,7 +44,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode</a>
  */
-public class documentadoptnode02Test extends LoboUnitTest {
+public class Documentadoptnode02Test extends LoboUnitTest {
 
 
     @Test
@@ -88,23 +88,23 @@ public class documentadoptnode02Test extends LoboUnitTest {
             nodeType = adoptedclass.getNodeType();
             attrOwnerElem = (Element) ((Attr) /*Node */adoptedclass).getOwnerElement();
             isSpecified = ((Attr) /*Node */adoptedclass).isSpecified();
-            assertEquals("class", nodeName);
-            assertEquals(2, nodeType);
-            assertNull(attrOwnerElem);
-            assertTrue(isSpecified);
+            assertEquals("class", nodeName, "Documentadoptnode02Assert1");
+            assertEquals(2, nodeType, "Documentadoptnode02Assert2");
+            assertNull(attrOwnerElem, "Documentadoptnode02Assert3");
+            assertTrue(isSpecified, "Documentadoptnode02Assert4");
             firstChild = (Text) adoptedclass.getFirstChild();
-            assertNotNull(firstChild);
+            assertNotNull(firstChild, "Documentadoptnode02Assert5");
             firstChildValue = firstChild.getNodeValue();
 
             if ("Y".equals(firstChildValue)) {
                 secondChild = (EntityReference) firstChild.getNextSibling();
-                assertNotNull(secondChild);
+                assertNotNull(secondChild, "Documentadoptnode02Assert6");
                 secondChildType = secondChild.getNodeType();
-                assertEquals(5, secondChildType);
+                assertEquals(5, secondChildType, "Documentadoptnode02Assert7");
                 secondChildName = secondChild.getNodeName();
-                assertEquals("alpha", secondChildName);
+                assertEquals("alpha", secondChildName, "Documentadoptnode02Assert8");
             } else {
-                assertEquals("Yα", nodeValue);
+                assertEquals("Yα", nodeValue, "Documentadoptnode02Assert9");
             }
 
         }

@@ -48,7 +48,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-renameNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-renameNode</a>
  */
-public class documentrenamenode24Test extends LoboUnitTest {
+public class Documentrenamenode24Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -65,7 +65,7 @@ public class documentrenamenode24Test extends LoboUnitTest {
         } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
         }
-        assertTrue(success);
+        assertTrue(success, "Documentrenamenode24Assert2");
 
     }
 }

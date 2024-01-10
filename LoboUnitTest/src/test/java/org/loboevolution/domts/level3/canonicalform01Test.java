@@ -44,7 +44,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-canonical-form">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-canonical-form</a>
  */
-public class canonicalform01Test extends LoboUnitTest {
+public class Canonicalform01Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
@@ -72,15 +72,15 @@ public class canonicalform01Test extends LoboUnitTest {
             entRef = doc.createEntityReference("ent1");
             pElem.appendChild(entRef);
             doc.normalizeDocument();
-            assertTrue(errorMonitor.assertLowerSeverity(2));
+            assertTrue(errorMonitor.assertLowerSeverity(2), "Canonicalform01Assert1");
             pList = doc.getElementsByTagName("p");
             pElem = (Element) pList.item(0);
             child = pElem.getLastChild();
-            assertNotNull(child);
+            assertNotNull(child, "Canonicalform01Assert2");
             childName = child.getNodeName();
-            assertEquals( "#text", childName);
+            assertEquals( "#text", childName, "Canonicalform01Assert3");
             childValue = child.getNodeValue();
-            assertEquals( "barfoo", childValue);
+            assertEquals( "barfoo", childValue, "Canonicalform01Assert4");
         }
     }
 }

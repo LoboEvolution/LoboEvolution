@@ -46,7 +46,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument</a>
  */
-public class documentnormalizedocument01Test extends LoboUnitTest {
+public class DocumentnormalizeDocument01Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -63,10 +63,10 @@ public class documentnormalizedocument01Test extends LoboUnitTest {
         /*DOMErrorMonitor */
         domConfig.setParameter("error-handler", errorMonitor);
         doc.normalizeDocument();
-        assertTrue(errorMonitor.assertLowerSeverity(2));
+        assertTrue(errorMonitor.assertLowerSeverity(2), "DocumentnormalizeDocument01Assert3");
         docElem = doc.getDocumentElement();
         docElemNodeName = docElem.getNodeName();
-        assertEquals(origDocElemNodeName, docElemNodeName);
+        assertEquals(origDocElemNodeName, docElemNodeName, "DocumentnormalizeDocument01Assert4");
     }
 }
 

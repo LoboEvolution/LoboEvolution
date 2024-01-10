@@ -844,72 +844,72 @@ public class XPATHErrorResources extends ListResourceBundle {
 
                 //BEGIN:  Definitions of error keys used  in exception messages of  JAXP 1.3 XPath API implementation
 
-                /** Field ER_EXTENSION_FUNCTION_CANNOT_BE_INVOKED                       */
+                /* Field ER_EXTENSION_FUNCTION_CANNOT_BE_INVOKED                       */
 
                 {ER_EXTENSION_FUNCTION_CANNOT_BE_INVOKED,
                         "Extension function: ''{0}'' can not be invoked when the XMLConstants.FEATURE_SECURE_PROCESSING feature is set to true."},
 
-                /** Field ER_RESOLVE_VARIABLE_RETURNS_NULL                       */
+                /*Field ER_RESOLVE_VARIABLE_RETURNS_NULL                       */
 
                 {ER_RESOLVE_VARIABLE_RETURNS_NULL,
                         "resolveVariable for variable {0} returning null"},
 
-                /** Field ER_UNSUPPORTED_RETURN_TYPE                       */
+                /*Field ER_UNSUPPORTED_RETURN_TYPE                       */
 
                 {ER_UNSUPPORTED_RETURN_TYPE,
                         "UnSupported Return Type : {0}"},
 
-                /** Field ER_SOURCE_RETURN_TYPE_CANNOT_BE_NULL                       */
+                /*Field ER_SOURCE_RETURN_TYPE_CANNOT_BE_NULL                       */
 
                 {ER_SOURCE_RETURN_TYPE_CANNOT_BE_NULL,
                         "Source and/or Return Type can not be null"},
 
-                /** Field ER_SOURCE_RETURN_TYPE_CANNOT_BE_NULL                       */
+                /*Field ER_SOURCE_RETURN_TYPE_CANNOT_BE_NULL                       */
 
                 {ER_SOURCE_RETURN_TYPE_CANNOT_BE_NULL,
                         "Source and/or Return Type can not be null"},
 
-                /** Field ER_ARG_CANNOT_BE_NULL                       */
+                /*Field ER_ARG_CANNOT_BE_NULL                       */
 
                 {ER_ARG_CANNOT_BE_NULL,
                         "{0} argument can not be null"},
 
-                /** Field ER_OBJECT_MODEL_NULL                       */
+                /*Field ER_OBJECT_MODEL_NULL                       */
 
                 {ER_OBJECT_MODEL_NULL,
                         "{0}#isObjectModelSupported( String objectModel ) cannot be called with objectModel == null"},
 
-                /** Field ER_OBJECT_MODEL_EMPTY                       */
+                /*Field ER_OBJECT_MODEL_EMPTY                       */
 
                 {ER_OBJECT_MODEL_EMPTY,
                         "{0}#isObjectModelSupported( String objectModel ) cannot be called with objectModel == \"\""},
 
-                /** Field ER_OBJECT_MODEL_EMPTY                       */
+                /*Field ER_OBJECT_MODEL_EMPTY                       */
 
                 {ER_FEATURE_NAME_NULL,
                         "Trying to set a feature with a null name: {0}#setFeature( null, {1})"},
 
-                /** Field ER_FEATURE_UNKNOWN                       */
+                /*Field ER_FEATURE_UNKNOWN                       */
 
                 {ER_FEATURE_UNKNOWN,
                         "Trying to set the unknown feature \"{0}\":{1}#setFeature({0},{2})"},
 
-                /** Field ER_GETTING_NULL_FEATURE                       */
+                /*Field ER_GETTING_NULL_FEATURE                       */
 
                 {ER_GETTING_NULL_FEATURE,
                         "Trying to get a feature with a null name: {0}#getFeature(null)"},
 
-                /** Field ER_GETTING_NULL_FEATURE                       */
+                /*Field ER_GETTING_NULL_FEATURE                       */
 
                 {ER_GETTING_UNKNOWN_FEATURE,
                         "Trying to get the unknown feature \"{0}\":{1}#getFeature({0})"},
 
-                /** Field ER_NULL_XPATH_FUNCTION_RESOLVER                       */
+                /*Field ER_NULL_XPATH_FUNCTION_RESOLVER                       */
 
                 {ER_NULL_XPATH_FUNCTION_RESOLVER,
                         "Attempting to set a null XPathFunctionResolver:{0}#setXPathFunctionResolver(null)"},
 
-                /** Field ER_NULL_XPATH_VARIABLE_RESOLVER                       */
+                /*Field ER_NULL_XPATH_VARIABLE_RESOLVER                       */
 
                 {ER_NULL_XPATH_VARIABLE_RESOLVER,
                         "Attempting to set a null XPathVariableResolver:{0}#setXPathVariableResolver(null)"},

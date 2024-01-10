@@ -458,9 +458,9 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
     /**
      * Open a local file, given a string filename.
      *
-     * @param name    the name of the file to open
-     * @param url
-     * @param httpcon
+     * @param name a {@link java.lang.String} object.
+     * @param url a {@link URL} object.
+     * @param httpcon a {@link URLConnection} object.
      */
     public void doOpen(final String name, final URL url, final URLConnection httpcon) {
         try {

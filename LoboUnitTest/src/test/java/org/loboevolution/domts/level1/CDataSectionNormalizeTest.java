@@ -71,13 +71,13 @@ public class CDataSectionNormalizeTest extends LoboUnitTest {
         lChild.normalize();
         childNodes = lChild.getChildNodes();
         cdataN = (CDATASection) childNodes.item(1);
-        assertNotNull(cdataN);
+        assertNotNull(cdataN, "CDataSectionNormalizeAssert1");
         data = cdataN.getData();
-        assertEquals("This is a CDATASection with EntityReference number 2 &ent2;", data);
+        assertEquals("This is a CDATASection with EntityReference number 2 &ent2;", data, "CDataSectionNormalizeAssert2");
         cdataN = (CDATASection) childNodes.item(3);
-        assertNotNull(cdataN);
+        assertNotNull(cdataN, "CDataSectionNormalizeAssert3");
         data = cdataN.getData();
-        assertEquals("This is an adjacent CDATASection with a reference to a tab &tab;", data);
+        assertEquals("This is an adjacent CDATASection with a reference to a tab &tab;", data, "CDataSectionNormalizeAssert4");
     }
 }
 

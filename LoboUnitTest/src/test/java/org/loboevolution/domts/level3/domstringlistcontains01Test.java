@@ -45,7 +45,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMStringList-contains">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMStringList-contains</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration-parameterNames">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration-parameterNames</a>
  */
-public class domstringlistcontains01Test extends LoboUnitTest {
+public class Domstringlistcontains01Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -56,9 +56,9 @@ public class domstringlistcontains01Test extends LoboUnitTest {
         domConfig = doc.getDomConfig();
         paramList = domConfig.getParameterNames();
         contains = paramList.contains("comments");
-        assertTrue(contains);
+        assertTrue(contains, "Domstringlistcontains01Assert3");
         contains = paramList.contains("");
-        assertFalse(contains);
+        assertFalse(contains, "Domstringlistcontains01Assert4");
     }
 }
 

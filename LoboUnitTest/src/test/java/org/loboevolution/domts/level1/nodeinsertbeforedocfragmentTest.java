@@ -54,7 +54,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Mary Brady
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-952280727">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-952280727</a>
  */
-public class nodeinsertbeforedocfragmentTest extends LoboUnitTest {
+public class NodeinsertbeforedocfragmentTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -87,10 +87,10 @@ public class nodeinsertbeforedocfragmentTest extends LoboUnitTest {
         insertedNode = employeeNode.insertBefore(newdocFragment, refChild);
         child = childList.item(3);
         childName = child.getNodeName();
-        assertEquals("newChild1", childName);
+        assertEquals("newChild1", childName, "NodeinsertbeforedocfragmentAssert1");
         child = childList.item(4);
         childName = child.getNodeName();
-        assertEquals( "newChild2", childName);
+        assertEquals( "newChild2", childName, "NodeinsertbeforedocfragmentAssert2");
     }
 }
 

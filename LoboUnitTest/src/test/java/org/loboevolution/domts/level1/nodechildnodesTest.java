@@ -47,7 +47,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Mary Brady
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1451460987">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1451460987</a>
  */
-public class nodechildnodesTest extends LoboUnitTest {
+public class NodechildnodesTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -84,7 +84,7 @@ public class nodechildnodesTest extends LoboUnitTest {
                 elementNames.add(childName);
             }
         }
-        assertEquals(expectedElementNames, elementNames);
+        assertEquals(expectedElementNames, elementNames, "NodechildnodesAssert1");
     }
 }
 

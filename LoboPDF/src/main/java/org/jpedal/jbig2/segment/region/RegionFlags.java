@@ -46,7 +46,7 @@ public class RegionFlags extends Flags {
     public void setFlags(final int flagsAsInt) {
         this.flagsAsInt = flagsAsInt;
 
-        /** extract EXTERNAL_COMBINATION_OPERATOR */
+        /* extract EXTERNAL_COMBINATION_OPERATOR */
         flags.put(EXTERNAL_COMBINATION_OPERATOR, flagsAsInt & 7);
 
         if (JBIG2StreamDecoder.debug)

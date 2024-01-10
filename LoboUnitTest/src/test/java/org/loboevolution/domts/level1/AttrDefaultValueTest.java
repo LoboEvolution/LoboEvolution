@@ -73,7 +73,7 @@ public class AttrDefaultValueTest extends LoboUnitTest {
         attributes = testNode.getAttributes();
         streetAttr = (Attr) attributes.getNamedItem("street");
         value = streetAttr.getNodeValue();
-        assertEquals("Yes", value);
+        assertEquals("Yes", value, "AttrDefaultValueAssert1");
     }
 }
 

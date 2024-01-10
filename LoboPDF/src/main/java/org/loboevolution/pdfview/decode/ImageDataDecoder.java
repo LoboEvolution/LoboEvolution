@@ -27,6 +27,7 @@
 package org.loboevolution.pdfview.decode;
 
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.awt.image.DataBufferInt;
@@ -41,12 +42,12 @@ import java.awt.image.DataBufferInt;
 public class ImageDataDecoder {
 
     /*************************************************************************
-     * @param bimg
-     * @return
+     * @param bimg a {@link BufferedImage} object.
+     * @return a {@link Byte} object.
      ************************************************************************/
 
     static byte[] decodeImageData(final BufferedImage bimg) {
-        byte[] output = null;
+        byte[] output;
 
         final int type = bimg.getType();
 

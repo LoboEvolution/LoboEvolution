@@ -47,7 +47,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-datatype-normalization">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-datatype-normalization</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration</a>
  */
-public class domconfigdatatypenormalization2Test extends LoboUnitTest {
+public class Domconfigdatatypenormalization2Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final DOMImplementation domImpl;
@@ -67,7 +67,7 @@ public class domconfigdatatypenormalization2Test extends LoboUnitTest {
         if (canSet) {
             domConfig.setParameter(parameter, Boolean.TRUE);
             state = ((Boolean) domConfig.getParameter("validate"));
-            assertTrue(state);
+            assertTrue(state, "Domconfigdatatypenormalization2Assert2");
         }
     }
 }

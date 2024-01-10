@@ -43,7 +43,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode</a>
  */
-public class documentadoptnode01Test extends LoboUnitTest {
+public class Documentadoptnode01Test extends LoboUnitTest {
 
 
     @Test
@@ -73,22 +73,22 @@ public class documentadoptnode01Test extends LoboUnitTest {
             nodeValue = adoptedclass.getNodeValue();
             nodeType = adoptedclass.getNodeType();
             attrOwnerElem = (Element) ((Attr) adoptedclass).getOwnerElement();
-            assertEquals("class", nodeName);
-            assertEquals(2, nodeType);
-            assertNotNull(attrOwnerElem);
+            assertEquals("class", nodeName, "Documentadoptnode01Assert1");
+            assertEquals(2, nodeType, "Documentadoptnode01Assert2");
+            assertNotNull(attrOwnerElem, "Documentadoptnode01Assert3");
             firstChild = (Text) adoptedclass.getFirstChild();
-            assertNotNull(firstChild);
+            assertNotNull(firstChild, "Documentadoptnode01Assert4");
             firstChildValue = firstChild.getNodeValue();
 
             if ("Y".equals(firstChildValue)) {
                 secondChild = (EntityReference) firstChild.getNextSibling();
-                assertNotNull(secondChild);
+                assertNotNull(secondChild, "Documentadoptnode01Assert5");
                 secondChildType = secondChild.getNodeType();
-                assertEquals(5, secondChildType);
+                assertEquals(5, secondChildType, "Documentadoptnode01Assert6");
                 secondChildName = secondChild.getNodeName();
-                assertEquals("alpha", secondChildName);
+                assertEquals("alpha", secondChildName, "Documentadoptnode01Assert7");
             } else {
-                assertEquals("Yα", nodeValue);
+                assertEquals("Yα", nodeValue, "Documentadoptnode01Assert8");
             }
 
         }

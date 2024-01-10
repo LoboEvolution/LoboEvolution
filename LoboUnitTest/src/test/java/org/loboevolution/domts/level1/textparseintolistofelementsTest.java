@@ -51,7 +51,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-11C98490">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-11C98490</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-745549614">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-745549614</a>
  */
-public class textparseintolistofelementsTest extends LoboUnitTest {
+public class TextparseintolistofelementsTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -89,7 +89,7 @@ public class textparseintolistofelementsTest extends LoboUnitTest {
 
             if ((value == null)) {
                 grandChild = child.getFirstChild();
-                assertNotNull(grandChild);
+                assertNotNull(grandChild, "TextparseintolistofelementsAssert1");
                 value = grandChild.getNodeValue();
                 result.add(value);
             } else {
@@ -99,9 +99,9 @@ public class textparseintolistofelementsTest extends LoboUnitTest {
         }
 
         if (length == 4) {
-            assertEquals(expectedNormal, result);
+            assertEquals(expectedNormal, result, "TextparseintolistofelementsAssert2");
         } else {
-            assertEquals(expectedExpanded, result);
+            assertEquals(expectedExpanded, result, "TextparseintolistofelementsAssert3");
         }
 
     }

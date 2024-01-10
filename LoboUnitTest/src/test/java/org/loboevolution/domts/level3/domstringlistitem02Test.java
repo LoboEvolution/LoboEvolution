@@ -48,7 +48,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * @author Jenny Hsu
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMStringList-item">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMStringList-item</a>
  */
-public class domstringlistitem02Test extends LoboUnitTest {
+public class Domstringlistitem02Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -60,9 +60,9 @@ public class domstringlistitem02Test extends LoboUnitTest {
         domConfig = doc.getDomConfig();
         paramList = domConfig.getParameterNames();
         retStr = paramList.item(0);
-        assertNotNull(retStr);
+        assertNotNull(retStr, "Domstringlistitem02Assert3");
         retStr = paramList.item(100);
-        assertNull(retStr);
+        assertNull(retStr, "Domstringlistitem02Assert4");
     }
 }
 

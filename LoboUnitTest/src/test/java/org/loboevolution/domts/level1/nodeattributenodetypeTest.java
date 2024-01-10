@@ -49,7 +49,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Mary Brady
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-111237558">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-111237558</a>
  */
-public class nodeattributenodetypeTest extends LoboUnitTest {
+public class NodeattributenodetypeTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -67,7 +67,7 @@ public class nodeattributenodetypeTest extends LoboUnitTest {
         testAddr = (Element) elementList.item(0);
         addrAttr = testAddr.getAttributeNode("domestic");
         nodeType = addrAttr.getNodeType();
-        assertEquals(2, nodeType);
+        assertEquals(2, nodeType, "NodeattributenodetypeAssert1");
     }
 }
 

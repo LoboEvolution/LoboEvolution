@@ -42,7 +42,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-setUserData">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-setUserData</a>
  */
-public class nodesetuserdata02Test extends LoboUnitTest {
+public class Nodesetuserdata02Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -50,7 +50,7 @@ public class nodesetuserdata02Test extends LoboUnitTest {
 
         doc = sampleXmlFile("hc_staff.xml");
         prevUserData = doc.setUserData("something", null, null);
-        assertNull(prevUserData);
+        assertNull(prevUserData, "Nodesetuserdata02Assert2");
     }
 }
 

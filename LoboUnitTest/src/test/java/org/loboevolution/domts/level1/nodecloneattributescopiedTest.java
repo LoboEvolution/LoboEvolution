@@ -55,7 +55,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Mary Brady
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-84CF096">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-84CF096</a>
  */
-public class nodecloneattributescopiedTest extends LoboUnitTest {
+public class NodecloneattributescopiedTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -86,7 +86,7 @@ public class nodecloneattributescopiedTest extends LoboUnitTest {
             attributeName = attributeNode.getNodeName();
             result.add(attributeName);
         }
-        assertEquals(expectedResult, result);
+        assertEquals(expectedResult, result, "NodecloneattributescopiedAssert1");
     }
 }
 

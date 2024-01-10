@@ -47,7 +47,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElGetAtNodeNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElGetAtNodeNS</a>
  */
-public class elementgetattributenodens01Test extends LoboUnitTest {
+public class Elementgetattributenodens01Test extends LoboUnitTest {
 
     /**
      * Runs the test case.

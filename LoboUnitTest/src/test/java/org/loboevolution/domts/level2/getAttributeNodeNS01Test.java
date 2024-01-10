@@ -52,7 +52,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * @author Mary Brady
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElGetAtNodeNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElGetAtNodeNS</a>
  */
-public class getAttributeNodeNS01Test extends LoboUnitTest {
+public class GetAttributeNodeNS01Test extends LoboUnitTest {
 
     /**
      * Runs the test case.

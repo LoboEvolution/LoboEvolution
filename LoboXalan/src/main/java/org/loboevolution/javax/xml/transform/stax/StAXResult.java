@@ -49,7 +49,7 @@ import org.loboevolution.javax.xml.transform.Result;
  * @since 1.6
  */
 public class StAXResult implements Result {
-    /** If {@link org.loboevolution.javax.xml.transform.TransformerFactory#getFeature(final String name)}
+    /** If {@link org.loboevolution.javax.xml.transform.TransformerFactory#getFeature(String)}
      * returns true when passed this value as an argument,
      * the Transformer supports Result output of this type.
      */

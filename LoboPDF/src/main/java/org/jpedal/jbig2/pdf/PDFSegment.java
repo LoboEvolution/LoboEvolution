@@ -26,7 +26,6 @@
 package org.jpedal.jbig2.pdf;
 
 import lombok.Data;
-import lombok.Getter;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

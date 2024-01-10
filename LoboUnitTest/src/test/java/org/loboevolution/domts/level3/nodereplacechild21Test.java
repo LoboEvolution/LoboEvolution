@@ -50,7 +50,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307</a>
  */
-public class nodereplacechild21Test extends LoboUnitTest {
+public class Nodereplacechild21Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -78,7 +78,7 @@ public class nodereplacechild21Test extends LoboUnitTest {
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }
-            assertTrue(success);
+            assertTrue(success, "Nodereplacechild21Assert2");
         }
 
         {
@@ -88,7 +88,7 @@ public class nodereplacechild21Test extends LoboUnitTest {
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }
-            assertTrue(success);
+            assertTrue(success, "Nodereplacechild21Assert3");
         }
     }
 }

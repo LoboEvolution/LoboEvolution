@@ -48,7 +48,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-split-cdata-sections">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-split-cdata-sections</a>
  */
-public class documentnormalizedocument08Test extends LoboUnitTest {
+public class DocumentnormalizeDocument08Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -90,16 +90,16 @@ public class documentnormalizedocument08Test extends LoboUnitTest {
             if ("cdata-sections-splitted".equals(type)) {
                 splittedCount += 1;
             } else {
-                assertEquals(1, severity);
+                assertEquals(1, severity, "DocumentnormalizeDocument08Assert3");
             }
 
         }
-        assertEquals(2, splittedCount);
+        assertEquals(2, splittedCount, "DocumentnormalizeDocument08Assert4");
         elemList = doc.getElementsByTagName("p");
         elem = (Element) elemList.item(0);
         childNodes = elem.getChildNodes();
         length = childNodes.getLength();
-        assertTrue(length > 3);
+        assertTrue(length > 3, "DocumentnormalizeDocument08Assert5");
     }
 }
 

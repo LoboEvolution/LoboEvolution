@@ -44,7 +44,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-canonical-form">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-canonical-form</a>
  */
-public class canonicalform03Test extends LoboUnitTest {
+public class Canonicalform03Test extends LoboUnitTest {
 
 
     @Test
@@ -64,7 +64,7 @@ public class canonicalform03Test extends LoboUnitTest {
         elemName = (Element) elemList.item(1);
         cdata = (CDATASection) elemName.getLastChild();
         nodeName = cdata.getNodeName();
-        assertEquals( "#cdata-section", nodeName);
+        assertEquals( "#cdata-section", nodeName, "Canonicalform03Assert3");
         domConfig = doc.getDomConfig();
         domConfig.setParameter("error-handler", errorMonitor);
         canSet = domConfig.canSetParameter("canonical-form", Boolean.TRUE);
@@ -72,12 +72,12 @@ public class canonicalform03Test extends LoboUnitTest {
         if (canSet) {
             domConfig.setParameter("canonical-form", Boolean.TRUE);
             doc.normalizeDocument();
-            assertTrue(errorMonitor.assertLowerSeverity(2));
+            assertTrue(errorMonitor.assertLowerSeverity(2), "Canonicalform03Assert4");
             elemList = doc.getElementsByTagName("strong");
             elemName = (Element) elemList.item(1);
             text = (Text) elemName.getLastChild();
             nodeName = text.getNodeName();
-            assertEquals( "#text", nodeName);
+            assertEquals( "#text", nodeName, "Canonicalform03Assert5");
         }
     }
 }

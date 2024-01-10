@@ -45,7 +45,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Mary Brady
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-111237558">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-111237558</a>
  */
-public class nodeentitynodetypeTest extends LoboUnitTest {
+public class NodeentitynodetypeTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -60,13 +60,13 @@ public class nodeentitynodetypeTest extends LoboUnitTest {
         final int nodeType;
         doc = sampleXmlFile("staff.xml");
         docType = doc.getDoctype();
-        assertNotNull(docType);
+        assertNotNull(docType, "NodeentitynodetypeAssert1");
         entities = docType.getEntities();
-        assertNotNull(entities);
+        assertNotNull(entities, "NodeentitynodetypeAssert2");
         entityNode = entities.getNamedItem("ent1");
-        assertNotNull(entityNode);
+        assertNotNull(entityNode, "NodeentitynodetypeAssert3");
         nodeType = entityNode.getNodeType();
-        assertEquals(6, nodeType);
+        assertEquals(6, nodeType, "NodeentitynodetypeAssert4");
     }
 }
 

@@ -52,7 +52,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core">http://www.w3.org/TR/DOM-Level-2-Core/core</a>
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#Core-Document-importNode">http://www.w3.org/TR/DOM-Level-2-Core/core#Core-Document-importNode</a>
  */
-public class documentimportnode09Test extends LoboUnitTest {
+public class Documentimportnode09Test extends LoboUnitTest {
 
     /**
      * Runs the test case.

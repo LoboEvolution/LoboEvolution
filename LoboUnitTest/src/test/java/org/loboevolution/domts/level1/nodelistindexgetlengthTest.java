@@ -45,7 +45,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Mary Brady
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-203510337">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-203510337</a>
  */
-public class nodelistindexgetlengthTest extends LoboUnitTest {
+public class NodelistindexgetlengthTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -63,7 +63,7 @@ public class nodelistindexgetlengthTest extends LoboUnitTest {
         employeeNode = elementList.item(2);
         employeeList = employeeNode.getChildNodes();
         length = employeeList.getLength();
-        assertTrue(length == 6 || length == 13);
+        assertTrue(length == 6 || length == 13, "NodelistindexgetlengthAssert2");
     }
 
 }

@@ -45,7 +45,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-canonical-form">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-canonical-form</a>
  */
-public class canonicalform08Test extends LoboUnitTest {
+public class Canonicalform08Test extends LoboUnitTest {
 
 
     @Test
@@ -68,53 +68,53 @@ public class canonicalform08Test extends LoboUnitTest {
             /*DOMErrorMonitor */
             domConfig.setParameter("error-handler", errorMonitor);
             doc.normalizeDocument();
-            assertTrue(errorMonitor.assertLowerSeverity(2));
+            assertTrue(errorMonitor.assertLowerSeverity(2), "Canonicalform08Assert1");
             node = doc.getFirstChild();
             nodeType = node.getNodeType();
-            assertEquals(7, nodeType);
+            assertEquals(7, nodeType, "Canonicalform08Assert2");
             nodeValue = ((ProcessingInstruction) /*Node */node).getData();
             length = nodeValue.length();
-            assertEquals(36, length);
+            assertEquals(36, length, "Canonicalform08Assert3");
             node = node.getNextSibling();
             nodeType = node.getNodeType();
-            assertEquals(3, nodeType);
+            assertEquals(3, nodeType, "Canonicalform08Assert4");
             nodeValue = node.getNodeValue();
             length = nodeValue.length();
-            assertEquals(1, length);
+            assertEquals(1, length, "Canonicalform08Assert5");
             node = node.getNextSibling();
             nodeType = node.getNodeType();
-            assertEquals(1, nodeType);
+            assertEquals(1, nodeType, "Canonicalform08Assert6");
             node = node.getNextSibling();
             nodeType = node.getNodeType();
-            assertEquals(3, nodeType);
+            assertEquals(3, nodeType, "Canonicalform08Assert7");
             nodeValue = node.getNodeValue();
             length = nodeValue.length();
-            assertEquals(1, length);
+            assertEquals(1, length, "Canonicalform08Assert8");
             node = node.getNextSibling();
             nodeType = node.getNodeType();
-            assertEquals(7, nodeType);
+            assertEquals(7, nodeType, "Canonicalform08Assert9");
             nodeValue = ((ProcessingInstruction) /*Node */node).getData();
-            assertEquals("trailingPIData", "", nodeValue);
+            assertEquals("", nodeValue, "Canonicalform08Assert10");
             node = node.getNextSibling();
             nodeType = node.getNodeType();
-            assertEquals(3, nodeType);
+            assertEquals(3, nodeType, "Canonicalform08Assert11");
             nodeValue = node.getNodeValue();
             length = nodeValue.length();
-            assertEquals(1, length);
+            assertEquals(1, length, "Canonicalform08Assert12");
             node = node.getNextSibling();
             nodeType = node.getNodeType();
-            assertEquals(8, nodeType);
+            assertEquals(8, nodeType, "Canonicalform08Assert13");
             node = node.getNextSibling();
             nodeType = node.getNodeType();
-            assertEquals(3, nodeType);
+            assertEquals(3, nodeType, "Canonicalform08Assert14");
             nodeValue = node.getNodeValue();
             length = nodeValue.length();
-            assertEquals(1, length);
+            assertEquals(1, length, "Canonicalform08Assert15");
             node = node.getNextSibling();
             nodeType = node.getNodeType();
-            assertEquals(8, nodeType);
+            assertEquals(8, nodeType, "Canonicalform08Assert16");
             node = node.getNextSibling();
-            assertNull(node);
+            assertNull(node, "Canonicalform08Assert17");
         }
     }
 }

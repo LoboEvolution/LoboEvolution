@@ -61,7 +61,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMLocator-uri">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMLocator-uri</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=542">http://www.w3.org/Bugs/Public/show_bug.cgi?id=542</a>
  */
-public class documentnormalizedocument06Test extends LoboUnitTest {
+public class DocumentnormalizeDocument06Test extends LoboUnitTest {
 
 
     @Test
@@ -108,7 +108,7 @@ public class documentnormalizedocument06Test extends LoboUnitTest {
         newChild = (CDATASection) elem.getFirstChild();
         nodeValue = newChild.getNodeValue();
         nodeType = newChild.getNodeType();
-        assertFalse((nodeType == 4 & (nodeValue.indexOf("]]>") >= 0)));
+        assertFalse((nodeType == 4 & (nodeValue.indexOf("]]>") >= 0)), "DocumentnormalizeDocument06Assert1");
         errors = errorMonitor.getErrors();
         for (final Object o : errors) {
             error = (DOMError) o;
@@ -117,15 +117,15 @@ public class documentnormalizedocument06Test extends LoboUnitTest {
 
             if ("cdata-sections-splitted".equals(type)) {
                 relatedData = error.getRelatedData();
-                assertSame(newChild, relatedData);
-                assertEquals(1, severity);
+                assertSame(newChild, relatedData, "DocumentnormalizeDocument06Assert2");
+                assertEquals(1, severity, "DocumentnormalizeDocument06Assert3");
                 message = error.getMessage();
                 length = message.length();
-                assertTrue((length > 0));
+                assertTrue((length > 0), "DocumentnormalizeDocument06Assert4");
                 relatedException = error.getRelatedException();
                 location = error.getLocation();
                 problemNode = location.getRelatedNode();
-                assertSame(newChild, problemNode);
+                assertSame(newChild, problemNode, "DocumentnormalizeDocument06Assert5");
                 lineNumber = location.getLineNumber();
                 columnNumber = location.getColumnNumber();
                 byteOffset = location.getByteOffset();
@@ -133,11 +133,11 @@ public class documentnormalizedocument06Test extends LoboUnitTest {
                 uri = location.getUri();
                 splittedCount += 1;
             } else {
-                assertEquals(1, severity);
+                assertEquals(1, severity, "DocumentnormalizeDocument06Assert6");
             }
 
         }
-        assertEquals(1, splittedCount);
+        assertEquals(1, splittedCount, "DocumentnormalizeDocument06Assert7");
     }
 }
 

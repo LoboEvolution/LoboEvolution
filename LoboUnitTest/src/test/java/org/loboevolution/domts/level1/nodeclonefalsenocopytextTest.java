@@ -50,7 +50,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * @author Mary Brady
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-3A0ED0A4">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-3A0ED0A4</a>
  */
-public class nodeclonefalsenocopytextTest extends LoboUnitTest {
+public class NodeclonefalsenocopytextTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -72,7 +72,7 @@ public class nodeclonefalsenocopytextTest extends LoboUnitTest {
         childNode = childList.item(3);
         clonedNode = childNode.cloneNode(false);
         lastChildNode = clonedNode.getLastChild();
-        assertNull(lastChildNode);
+        assertNull(lastChildNode, "NodeclonefalsenocopytextAssert2");
     }
 }
 

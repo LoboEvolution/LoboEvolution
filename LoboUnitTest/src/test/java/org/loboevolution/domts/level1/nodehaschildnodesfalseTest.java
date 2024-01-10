@@ -50,7 +50,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1451460987">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1451460987</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-810594187">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-810594187</a>
  */
-public class nodehaschildnodesfalseTest extends LoboUnitTest {
+public class NodehaschildnodesfalseTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -72,7 +72,7 @@ public class nodehaschildnodesfalseTest extends LoboUnitTest {
         employeeNode = employeeIdList.item(1);
         textNode = employeeNode.getFirstChild();
         state = textNode.hasChildNodes();
-        assertFalse(state);
+        assertFalse(state, "NodehaschildnodesfalseAssert2");
     }
 }
 

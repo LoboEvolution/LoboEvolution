@@ -50,7 +50,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  * @author Jenny Hsu
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Attr-schemaTypeInfo">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Attr-schemaTypeInfo</a>
  */
-public class attrgetschematypeinfo07Test extends LoboUnitTest {
+public class Attrgetschematypeinfo07Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
@@ -66,11 +66,11 @@ public class attrgetschematypeinfo07Test extends LoboUnitTest {
         acElem = (Element) elemList.item(3);
         attr = acElem.getAttributeNode("id");
         attrTypeInfo = attr.getSchemaTypeInfo();
-        assertNotNull(attrTypeInfo);
+        assertNotNull(attrTypeInfo, "Attrgetschematypeinfo07Assert3");
         typeName = attrTypeInfo.getTypeName();
         typeNamespace = attrTypeInfo.getTypeNamespace();
-        assertEquals("ID", typeName);
-        assertEquals( "http://www.w3.org/2001/XMLSchema", typeNamespace);
+        assertEquals("ID", typeName, "Attrgetschematypeinfo07Assert4");
+        assertEquals( "http://www.w3.org/2001/XMLSchema", typeNamespace, "Attrgetschematypeinfo07Assert5");
     }
 }
 

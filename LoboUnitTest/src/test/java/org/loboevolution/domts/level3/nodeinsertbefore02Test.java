@@ -44,7 +44,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-952280727">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-952280727</a>
  */
-public class nodeinsertbefore02Test extends LoboUnitTest {
+public class Nodeinsertbefore02Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -75,10 +75,10 @@ public class nodeinsertbefore02Test extends LoboUnitTest {
         newPI = newDoc.createProcessingInstruction("PITarget", "PIData");
         insertedComment = (Comment) newDoc.insertBefore(newComment, newDocType);
         data = insertedComment.getData();
-        assertEquals("Comment", data);
+        assertEquals("Comment", data, "Nodeinsertbefore02Assert2");
         insertedPI = (ProcessingInstruction) newDoc.insertBefore(newPI, newComment);
         target = insertedPI.getTarget();
-        assertEquals("PITarget", target);
+        assertEquals("PITarget", target, "Nodeinsertbefore02Assert3");
     }
 }
 

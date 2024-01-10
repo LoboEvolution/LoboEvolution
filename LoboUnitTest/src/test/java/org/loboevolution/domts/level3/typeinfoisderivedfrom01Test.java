@@ -45,7 +45,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  * @author Curt Arnold
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom</a>
  */
-public class typeinfoisderivedfrom01Test extends LoboUnitTest {
+public class Typeinfoisderivedfrom01Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -61,11 +61,11 @@ public class typeinfoisderivedfrom01Test extends LoboUnitTest {
         acronymElem = (Element) elemList.item(0);
         attr = acronymElem.getAttributeNode("title");
         typeInfo = attr.getSchemaTypeInfo();
-        assertNotNull(typeInfo);
+        assertNotNull(typeInfo, "Typeinfoisderivedfrom01Assert3");
         isDerived = typeInfo.isDerivedFrom("http://www.w3.org/TR/REC-xml", "CDATA", 0);
-        assertFalse(isDerived);
+        assertFalse(isDerived, "Typeinfoisderivedfrom01Assert4");
         isDerived = typeInfo.isDerivedFrom("http://www.w3.org/TR/REC-xml", "CDATA", 15);
-        assertFalse(isDerived);
+        assertFalse(isDerived, "Typeinfoisderivedfrom01Assert5");
     }
 }
 

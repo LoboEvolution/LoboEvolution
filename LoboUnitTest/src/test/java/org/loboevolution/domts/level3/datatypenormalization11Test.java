@@ -46,7 +46,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-datatype-normalization">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-datatype-normalization</a>
  */
-public class datatypenormalization11Test extends LoboUnitTest {
+public class Datatypenormalization11Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
@@ -76,11 +76,11 @@ public class datatypenormalization11Test extends LoboUnitTest {
             /*DOMErrorMonitor */
             domConfig.setParameter("error-handler", errorMonitor);
             doc.normalizeDocument();
-            assertTrue(errorMonitor.assertLowerSeverity(2));
+            assertTrue(errorMonitor.assertLowerSeverity(2), "Datatypenormalization11Assert3");
             elemList = doc.getElementsByTagNameNS("http://www.w3.org/2001/DOM-Test-Suite/Level-3/datatype_normalization", "data:dateTime");
             element = (Element) elemList.item(0);
             str = element.getAttribute("data:default");
-             assertEquals( "2004-01-21T20:30:00Z", str);
+             assertEquals( "2004-01-21T20:30:00Z", str, "Datatypenormalization11Assert4");
         }
     }
 }

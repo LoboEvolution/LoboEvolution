@@ -46,7 +46,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-setUserData">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-setUserData</a>
  */
-public class nodesetuserdata04Test extends LoboUnitTest {
+public class Nodesetuserdata04Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -68,7 +68,7 @@ public class nodesetuserdata04Test extends LoboUnitTest {
         returned1 = elem.getUserData("Key1");
         returned2 = elem.getUserData("Key2");
         success = ((Node) /*DOMUserData */returned1).isEqualNode(((Node) /*DOMUserData */returned2));
-        assertTrue(success);
+        assertTrue(success, "Nodesetuserdata04Assert2");
     }
 }
 

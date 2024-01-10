@@ -42,7 +42,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-getFeature">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-getFeature</a>
  */
-public class nodegetfeature08Test extends LoboUnitTest {
+public class Nodegetfeature08Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
@@ -55,70 +55,70 @@ public class nodegetfeature08Test extends LoboUnitTest {
         doc = sampleXmlFile("barfoo.xml");
         node = doc.createProcessingInstruction("test-pi", "foo");
         featureImpl = node.getFeature("Core", nullVersion);
-        assertSame(node, featureImpl);
+        assertSame(node, featureImpl, "Nodegetfeature08Assert1");
         featureImpl = node.getFeature("cOrE", nullVersion);
-         assertSame(node, featureImpl);
+         assertSame(node, featureImpl, "Nodegetfeature08Assert2");
         featureImpl = node.getFeature("+cOrE", nullVersion);
-        assertSame(node, featureImpl);
+        assertSame(node, featureImpl, "Nodegetfeature08Assert3");
         featureImpl = node.getFeature("bogus.feature", nullVersion);
-        assertNull(featureImpl);
+        assertNull(featureImpl, "Nodegetfeature08Assert4");
         featureImpl = node.getFeature("cOrE", "2.0");
-        assertSame(node, featureImpl);
+        assertSame(node, featureImpl, "Nodegetfeature08Assert5");
         featureImpl = node.getFeature("cOrE", "3.0");
-        assertSame(node, featureImpl);
+        assertSame(node, featureImpl, "Nodegetfeature08Assert6");
         isSupported = node.isSupported("XML", nullVersion);
         featureImpl = node.getFeature("XML", nullVersion);
 
         if (isSupported) {
-            assertSame(node, featureImpl);
+            assertSame(node, featureImpl, "Nodegetfeature08Assert7");
         }
         isSupported = node.isSupported("SVG", nullVersion);
         featureImpl = node.getFeature("SVG", nullVersion);
 
         if (isSupported) {
-            assertSame(node, featureImpl);
+            assertSame(node, featureImpl, "Nodegetfeature08Assert8");
         }
         isSupported = node.isSupported("HTML", nullVersion);
         featureImpl = node.getFeature("HTML", nullVersion);
 
         if (isSupported) {
-            assertSame(node, featureImpl);
+            assertSame(node, featureImpl, "Nodegetfeature08Assert9");
         }
         isSupported = node.isSupported("Events", nullVersion);
         featureImpl = node.getFeature("Events", nullVersion);
 
         if (isSupported) {
-            assertSame(node, featureImpl);
+            assertSame(node, featureImpl, "Nodegetfeature08Assert10");
         }
         isSupported = node.isSupported("LS", nullVersion);
         featureImpl = node.getFeature("LS", nullVersion);
 
         if (isSupported) {
-            assertSame(node, featureImpl);
+            assertSame(node, featureImpl, "Nodegetfeature08Assert11");
         }
         isSupported = node.isSupported("LS-Async", nullVersion);
         featureImpl = node.getFeature("LS-Async", nullVersion);
 
         if (isSupported) {
-            assertSame(node, featureImpl);
+            assertSame(node, featureImpl, "Nodegetfeature08Assert12");
         }
         isSupported = node.isSupported("XPath", nullVersion);
         featureImpl = node.getFeature("XPath", nullVersion);
 
         if (isSupported) {
-            assertSame(node, featureImpl);
+            assertSame(node, featureImpl, "Nodegetfeature08Assert13");
         }
         isSupported = node.isSupported("+HTML", nullVersion);
         featureImpl = node.getFeature("HTML", nullVersion);
 
         if (isSupported) {
-            assertNotNull(featureImpl);
+            assertNotNull(featureImpl, "Nodegetfeature08Assert14");
         }
         isSupported = node.isSupported("+SVG", nullVersion);
         featureImpl = node.getFeature("SVG", nullVersion);
 
         if (isSupported) {
-            assertNotNull(featureImpl);
+            assertNotNull(featureImpl, "Nodegetfeature08Assert15");
         }
     }
 }

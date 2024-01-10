@@ -46,7 +46,7 @@ import static org.junit.jupiter.api.Assertions.fail;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-952280727">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-952280727</a>
  */
-public class nodeinsertbefore05Test extends LoboUnitTest {
+public class Nodeinsertbefore05Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;

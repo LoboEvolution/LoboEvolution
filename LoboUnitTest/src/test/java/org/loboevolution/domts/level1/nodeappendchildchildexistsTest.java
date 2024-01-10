@@ -50,7 +50,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Mary Brady
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-184E7107">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-184E7107</a>
  */
-public class nodeappendchildchildexistsTest extends LoboUnitTest {
+public class NodeappendchildchildexistsTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -80,11 +80,11 @@ public class nodeappendchildchildexistsTest extends LoboUnitTest {
         lchildName = lchild.getNodeName();
 
         if ("employeeId".equals(initialName)) {
-            assertEquals("name", fchildName);
-            assertEquals( "EMPLOYEEID",lchildName);
+            assertEquals("name", fchildName, "NodeappendchildchildexistsAssert1");
+            assertEquals( "EMPLOYEEID",lchildName, "NodeappendchildchildexistsAssert2");
         } else {
-            assertEquals( "EMPLOYEEID", fchildName);
-            assertEquals( "#text", lchildName);
+            assertEquals( "EMPLOYEEID", fchildName, "NodeappendchildchildexistsAssert3");
+            assertEquals( "#text", lchildName, "NodeappendchildchildexistsAssert4");
         }
 
     }

@@ -46,7 +46,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * @author Jenny Hsu
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration-getParameter">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration-getParameter</a>
  */
-public class domconfigurationgetparameter01Test extends LoboUnitTest {
+public class Domconfigurationgetparameter01Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -55,15 +55,15 @@ public class domconfigurationgetparameter01Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         domConfig = doc.getDomConfig();
         param = domConfig.getParameter("comments");
-        assertNotNull(param);
+        assertNotNull(param, "Domconfigurationgetparameter01Assert3");
         param = domConfig.getParameter("cdata-sections");
-        assertNotNull(param);
+        assertNotNull(param, "Domconfigurationgetparameter01Assert4");
         param = domConfig.getParameter("entities");
-        assertNotNull(param);
+        assertNotNull(param, "Domconfigurationgetparameter01Assert5");
         param = domConfig.getParameter("namespace-declarations");
-        assertNotNull(param);
+        assertNotNull(param, "Domconfigurationgetparameter01Assert6");
         param = domConfig.getParameter("infoset");
-        assertNull(param);
+        assertNull(param, "Domconfigurationgetparameter01Assert7");
     }
 }
 

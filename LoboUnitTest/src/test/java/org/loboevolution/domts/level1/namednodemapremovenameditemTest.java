@@ -53,7 +53,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-349467F9">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-349467F9</a>
  * @see <a href="http://lists.w3.org/Archives/Public/www-dom-ts/2002Mar/0002.html">http://lists.w3.org/Archives/Public/www-dom-ts/2002Mar/0002.html</a>
  */
-public class namednodemapremovenameditemTest extends LoboUnitTest {
+public class NamednodemapremovenameditemTest extends LoboUnitTest {
 
 
     /**
@@ -73,12 +73,12 @@ public class namednodemapremovenameditemTest extends LoboUnitTest {
         elementList = doc.getElementsByTagName("address");
         testAddress = (Element) elementList.item(2);
         attributes = testAddress.getAttributes();
-        assertNotNull(attributes);
+        assertNotNull(attributes, "NamednodemapremovenameditemAssert3");
         removedNode = attributes.removeNamedItem("street");
         streetAttr = (Attr) attributes.getNamedItem("street");
-        assertNotNull(streetAttr);
+        assertNotNull(streetAttr, "NamednodemapremovenameditemAssert4");
         specified = streetAttr.isSpecified();
-        assertFalse(specified);
+        assertFalse(specified, "NamednodemapremovenameditemAssert5");
     }
 }
 

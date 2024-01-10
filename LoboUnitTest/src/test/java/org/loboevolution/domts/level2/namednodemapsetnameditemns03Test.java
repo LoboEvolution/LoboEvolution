@@ -55,7 +55,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=259">http://www.w3.org/Bugs/Public/show_bug.cgi?id=259</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=408">http://www.w3.org/Bugs/Public/show_bug.cgi?id=408</a>
  */
-public class namednodemapsetnameditemns03Test extends LoboUnitTest {
+public class Namednodemapsetnameditemns03Test extends LoboUnitTest {
 
     /**
      * Runs the test case.

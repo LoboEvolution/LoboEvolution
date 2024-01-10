@@ -80,7 +80,7 @@ public abstract class RegionSegment extends Segment {
         if (JBIG2StreamDecoder.debug)
             log.info("Bitmap location = {},{} ", regionBitmapXLocation, regionBitmapYLocation);
 
-        /** extract region Segment flags */
+        /* extract region Segment flags */
         final short regionFlagsField = decoder.readByte();
 
         regionFlags.setFlags(regionFlagsField);

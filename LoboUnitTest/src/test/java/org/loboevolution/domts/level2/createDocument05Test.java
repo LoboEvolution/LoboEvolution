@@ -55,7 +55,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Mary Brady
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#">http://www.w3.org/TR/DOM-Level-2-Core/core#</a>
  */
-public class createDocument05Test extends LoboUnitTest {
+public class CreateDocument05Test extends LoboUnitTest {
 
     /**
      * Runs the test case.

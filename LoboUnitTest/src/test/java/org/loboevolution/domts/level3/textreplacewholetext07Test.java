@@ -48,7 +48,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Text3-replaceWholeText">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Text3-replaceWholeText</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=425">http://www.w3.org/Bugs/Public/show_bug.cgi?id=425</a>
  */
-public class textreplacewholetext07Test extends LoboUnitTest {
+public class Textreplacewholetext07Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -71,13 +71,13 @@ public class textreplacewholetext07Test extends LoboUnitTest {
         textNode = (Text) elementName.getFirstChild();
         replacedText = textNode.replaceWholeText("New Text and Cdata");
         textNode = (Text) elementName.getFirstChild();
-        assertSame(textNode, replacedText);
+        assertSame(textNode, replacedText, "Textreplacewholetext07Assert1");
         nodeValue = textNode.getNodeValue();
-        assertEquals("New Text and Cdata", nodeValue);
+        assertEquals("New Text and Cdata", nodeValue, "Textreplacewholetext07Assert2");
         node = textNode.getNextSibling();
-        assertNotNull(node);
+        assertNotNull(node, "Textreplacewholetext07Assert3");
         nodeType = node.getNodeType();
-        assertEquals(5, nodeType);
+        assertEquals(5, nodeType, "Textreplacewholetext07Assert4");
     }
 }
 

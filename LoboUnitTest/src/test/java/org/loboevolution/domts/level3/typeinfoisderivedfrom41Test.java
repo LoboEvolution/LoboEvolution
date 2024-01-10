@@ -43,7 +43,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Curt Arnold
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom</a>
  */
-public class typeinfoisderivedfrom41Test extends LoboUnitTest {
+public class Typeinfoisderivedfrom41Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -56,11 +56,11 @@ public class typeinfoisderivedfrom41Test extends LoboUnitTest {
         elemList = doc.getElementsByTagName("em");
         elem = (Element) elemList.item(0);
         typeInfo = elem.getSchemaTypeInfo();
-        assertNotNull(typeInfo);
+        assertNotNull(typeInfo, "Typeinfoisderivedfrom41Assert1");
         typeName = typeInfo.getTypeName();
-        assertEquals("emType", typeName);
+        assertEquals("emType", typeName, "Typeinfoisderivedfrom41Assert2");
         isDerived = typeInfo.isDerivedFrom("http://www.w3.org/2001/XMLSchema", "ID", 10);
-        assertFalse(isDerived);
+        assertFalse(isDerived, "Typeinfoisderivedfrom41Assert3");
     }
 }
 

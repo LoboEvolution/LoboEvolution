@@ -51,7 +51,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D095">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D095</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-667469212">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-667469212</a>
  */
-public class nodecdatasectionnodenameTest extends LoboUnitTest {
+public class NodecdatasectionnodenameTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -75,7 +75,7 @@ public class nodecdatasectionnodenameTest extends LoboUnitTest {
             cdataNode = doc.createCDATASection("");
         }
         cdataNodeName = cdataNode.getNodeName();
-        assertEquals("#cdata-section", cdataNodeName);
+        assertEquals("#cdata-section", cdataNodeName, "NodecdatasectionnodenameAssert1");
     }
 }
 

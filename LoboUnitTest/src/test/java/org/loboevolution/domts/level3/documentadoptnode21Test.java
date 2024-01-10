@@ -50,7 +50,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode</a>
  */
-public class documentadoptnode21Test extends LoboUnitTest {
+public class Documentadoptnode21Test extends LoboUnitTest {
 
 
     @Test
@@ -73,10 +73,10 @@ public class documentadoptnode21Test extends LoboUnitTest {
         nodeValue = adoptedTitle.getNodeValue();
         nodeType = adoptedTitle.getNodeType();
         attrOwnerElem = (Element) ((Attr) adoptedTitle).getOwnerElement();
-        assertEquals("title", nodeName);
-        assertEquals(2, nodeType);
-        assertEquals( "Yes", nodeValue);
-        assertNull(attrOwnerElem);
+        assertEquals("title", nodeName, "Documentadoptnode21Assert3");
+        assertEquals(2, nodeType, "Documentadoptnode21Assert4");
+        assertEquals( "Yes", nodeValue, "Documentadoptnode21Assert5");
+        assertNull(attrOwnerElem, "Documentadoptnode21Assert6");
     }
 }
 

@@ -50,7 +50,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Jenny Hsu
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-ElSetIdAttrNS">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-ElSetIdAttrNS</a>
  */
-public class elementsetidattributens14Test extends LoboUnitTest {
+public class Elementsetidattributens14Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
@@ -73,17 +73,17 @@ public class elementsetidattributens14Test extends LoboUnitTest {
         attributesMap = pElem.getAttributes();
         attr = (Attr) attributesMap.getNamedItem("xmlns:dmstc");
         id = attr.isId();
-        assertTrue(id);
+        assertTrue(id, "Elementsetidattributens14Assert3");
         attributesMap = acronymElem.getAttributes();
         attr = (Attr) attributesMap.getNamedItem("xsi:noNamespaceSchemaLocation");
         id = attr.isId();
-        assertTrue(id);
+        assertTrue(id, "Elementsetidattributens14Assert4");
         elem = doc.getElementById("Yes");
         elemName = elem.getTagName();
-        assertEquals("ACRONYM", elemName);
+        assertEquals("ACRONYM", elemName, "Elementsetidattributens14Assert5");
         elem = doc.getElementById("http://www.usa.com");
         elemName = elem.getTagName();
-        assertEquals("P", elemName);
+        assertEquals("P", elemName, "Elementsetidattributens14Assert6");
     }
 
 }

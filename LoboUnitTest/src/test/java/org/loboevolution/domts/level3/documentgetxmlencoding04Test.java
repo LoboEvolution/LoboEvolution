@@ -42,14 +42,14 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-encoding">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-encoding</a>
  */
-public class documentgetxmlencoding04Test extends LoboUnitTest {
+public class Documentgetxmlencoding04Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
         final String encodingName;
         doc = sampleXmlFile("hc_staff.xml");
         encodingName = doc.getXmlEncoding();
-        assertNull(encodingName);
+        assertNull(encodingName, "Documentgetxmlencoding04Assert2");
     }
 }
 

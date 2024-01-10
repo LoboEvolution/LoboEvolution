@@ -47,7 +47,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  * @author Jenny Hsu
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-compareDocumentPosition">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-compareDocumentPosition</a>
  */
-public class nodecomparedocumentposition27Test extends LoboUnitTest {
+public class Nodecomparedocumentposition27Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -61,16 +61,16 @@ public class nodecomparedocumentposition27Test extends LoboUnitTest {
 
         varList = doc.getElementsByTagName("var");
         varElem = (Element) varList.item(2);
-        assertNotNull(varElem);
+        assertNotNull(varElem, "Nodecomparedocumentposition27Assert3");
         entRef = (EntityReference) varElem.getFirstChild();
-        assertNotNull(entRef);
+        assertNotNull(entRef, "Nodecomparedocumentposition27Assert4");
 
         entRefChild1 = (ProcessingInstruction) entRef.getLastChild();
-        assertNotNull(entRefChild1);
+        assertNotNull(entRefChild1, "Nodecomparedocumentposition27Assert5");
         entRefPosition = entRef.compareDocumentPosition(entRefChild1);
-        assertEquals(20, entRefPosition);
+        assertEquals(20, entRefPosition, "Nodecomparedocumentposition27Assert6");
         entRefChild1Position = entRefChild1.compareDocumentPosition(entRef);
-        assertEquals(10, entRefChild1Position);
+        assertEquals(10, entRefChild1Position, "Nodecomparedocumentposition27Assert7");
     }
 }
 

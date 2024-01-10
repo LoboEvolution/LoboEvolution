@@ -46,7 +46,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-canonical-form">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-canonical-form</a>
  */
-public class canonicalform11Test extends LoboUnitTest {
+public class Canonicalform11Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
@@ -69,15 +69,15 @@ public class canonicalform11Test extends LoboUnitTest {
             domConfig.setParameter("error-handler", errorMonitor);
             domConfig.setParameter("canonical-form", Boolean.TRUE);
             doc.normalizeDocument();
-            assertTrue(errorMonitor.assertLowerSeverity(2));
+            assertTrue(errorMonitor.assertLowerSeverity(2), "Canonicalform11Assert1");
             elemList = doc.getElementsByTagName("acronym");
             elem = (Element) elemList.item(0);
             attr = elem.getAttributeNode("title");
-            assertNotNull(attr);
+            assertNotNull(attr, "Canonicalform11Assert2");
             attrSpecified = attr.isSpecified();
-            assertTrue(attrSpecified);
+            assertTrue(attrSpecified, "Canonicalform11Assert3");
             attrValue = attr.getNodeValue();
-            assertEquals( "default", attrValue);
+            assertEquals( "default", attrValue, "Canonicalform11Assert4");
         }
     }
 }

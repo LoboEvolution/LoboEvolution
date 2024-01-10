@@ -46,7 +46,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-textContent">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-textContent</a>
  */
-public class nodegettextcontent12Test extends LoboUnitTest {
+public class Nodegettextcontent12Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -60,7 +60,7 @@ public class nodegettextcontent12Test extends LoboUnitTest {
         comment = doc.createComment("Comment");
         appendedChild = elem.appendChild(comment);
         textContent = comment.getTextContent();
-        assertEquals("Comment", textContent);
+        assertEquals("Comment", textContent, "Nodegettextcontent12Assert2");
     }
 }
 

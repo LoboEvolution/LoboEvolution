@@ -47,7 +47,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-getDOMImpls">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-getDOMImpls</a>
  * @see <a href="http://lists.w3.org/Archives/Public/www-dom/2004JanMar/0111.html">http://lists.w3.org/Archives/Public/www-dom/2004JanMar/0111.html</a>
  */
-public class domimplementationregistry25Test extends LoboUnitTest {
+public class Domimplementationregistry25Test extends LoboUnitTest {
     @Test
     @SneakyThrows
     public void runTest() {
@@ -55,10 +55,10 @@ public class domimplementationregistry25Test extends LoboUnitTest {
         final DOMImplementationList domImplList;
         final int length;
          final DOMImplementationRegistry domImplRegistry = DOMImplementationRegistry.newInstance();
-        assertNotNull(domImplRegistry);
+        assertNotNull(domImplRegistry, "Domimplementationregistry25Assert3");
         domImplList = domImplRegistry.getDOMImplementationList("");
         length = (int) domImplList.getLength();
-        assertTrue((length > 0));
+        assertTrue((length > 0), "Domimplementationregistry25Assert4");
     }
 }
 

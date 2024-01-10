@@ -46,7 +46,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-5431D1B9">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-5431D1B9</a>
  */
-public class nodevalue08Test extends LoboUnitTest {
+public class Nodevalue08Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -61,13 +61,13 @@ public class nodevalue08Test extends LoboUnitTest {
         final NamedNodeMap nodeMap;
         doc = sampleXmlFile("staff.xml");
         docType = doc.getDoctype();
-        assertNotNull(docType);
+        assertNotNull(docType, "Nodevalue08Assert1");
         nodeMap = docType.getNotations();
-        assertNotNull(nodeMap);
+        assertNotNull(nodeMap, "Nodevalue08Assert2");
         newNode = nodeMap.getNamedItem("notation1");
-        assertNotNull(newNode);
+        assertNotNull(newNode, "Nodevalue08Assert3");
         newValue = newNode.getNodeValue();
-        assertNull(newValue);
+        assertNull(newValue, "Nodevalue08Assert4");
 
         boolean success = false;
         try {
@@ -77,8 +77,8 @@ public class nodevalue08Test extends LoboUnitTest {
         }
 
         newValue = newNode.getNodeValue();
-        assertTrue(success);
-        assertNull(newValue);
+        assertTrue(success, "Nodevalue08Assert5");
+        assertNull(newValue, "Nodevalue08Assert6");
     }
 }
 

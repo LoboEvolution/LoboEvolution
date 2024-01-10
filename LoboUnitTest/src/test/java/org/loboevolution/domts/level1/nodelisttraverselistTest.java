@@ -52,7 +52,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-203510337">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-203510337</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-844377136">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-844377136</a>
  */
-public class nodelisttraverselistTest extends LoboUnitTest {
+public class NodelisttraverselistTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -104,9 +104,9 @@ public class nodelisttraverselistTest extends LoboUnitTest {
         }
 
         if (length == 6) {
-            assertEquals(expectedNoWhitespace, result);
+            assertEquals(expectedNoWhitespace, result, "NodelisttraverselistAssert1");
         } else {
-            assertEquals(expectedWhitespace, result);
+            assertEquals(expectedWhitespace, result, "NodelisttraverselistAssert2");
         }
 
     }

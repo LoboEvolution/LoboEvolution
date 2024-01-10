@@ -46,7 +46,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#i-Document">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#i-Document</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D095">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D095</a>
  */
-public class nodedocumentnodenameTest extends LoboUnitTest {
+public class NodedocumentnodenameTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -57,7 +57,7 @@ public class nodedocumentnodenameTest extends LoboUnitTest {
         final String documentName;
         doc = sampleXmlFile("staff.xml");
         documentName = doc.getNodeName();
-        assertEquals("[object HTMLDocument]", documentName);
+        assertEquals("[object HTMLDocument]", documentName, "NodedocumentnodenameAssert1");
     }
 }
 

@@ -43,7 +43,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-getUserData">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-getUserData</a>
  */
-public class nodegetuserdata05Test extends LoboUnitTest {
+public class Nodegetuserdata05Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -63,7 +63,7 @@ public class nodegetuserdata05Test extends LoboUnitTest {
         /*Node */
         prevUserData = entity.setUserData("key", attr, null);
         retUserData = entity.getUserData("Key");
-        assertNull(retUserData);
+        assertNull(retUserData, "Nodegetuserdata05Assert2");
     }
 }
 

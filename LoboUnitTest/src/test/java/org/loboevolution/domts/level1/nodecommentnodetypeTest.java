@@ -49,7 +49,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-111237558">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-111237558</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1728279322">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1728279322</a>
  */
-public class nodecommentnodetypeTest extends LoboUnitTest {
+public class NodecommentnodetypeTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -70,7 +70,7 @@ public class nodecommentnodetypeTest extends LoboUnitTest {
 
             if ("#comment".equals(commentNodeName)) {
                 nodeType = commentNode.getNodeType();
-                assertEquals(8, nodeType);
+                assertEquals(8, nodeType, "NodecommentnodetypeAssert1");
             }
         }
     }

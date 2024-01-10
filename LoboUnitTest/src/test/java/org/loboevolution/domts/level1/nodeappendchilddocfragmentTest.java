@@ -52,7 +52,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Mary Brady
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-184E7107">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-184E7107</a>
  */
-public class nodeappendchilddocfragmentTest extends LoboUnitTest {
+public class NodeappendchilddocfragmentTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -101,7 +101,7 @@ public class nodeappendchilddocfragmentTest extends LoboUnitTest {
                 result.add(childName);
             }
         }
-        assertEquals(expected, result);
+        assertEquals(expected, result, "NodeappendchilddocfragmentAssert1");
     }
 }
 

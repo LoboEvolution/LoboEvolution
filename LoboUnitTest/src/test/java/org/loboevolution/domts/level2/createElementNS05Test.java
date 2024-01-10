@@ -48,7 +48,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Mary Brady
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-104682815">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-104682815</a>
  */
-public class createElementNS05Test extends LoboUnitTest {
+public class CreateElementNS05Test extends LoboUnitTest {
 
     /**
      * Runs the test case.

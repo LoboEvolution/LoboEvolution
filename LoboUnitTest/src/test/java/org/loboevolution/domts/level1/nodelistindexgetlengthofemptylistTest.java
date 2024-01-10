@@ -50,7 +50,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Mary Brady
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-203510337">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-203510337</a>
  */
-public class nodelistindexgetlengthofemptylistTest extends LoboUnitTest {
+public class NodelistindexgetlengthofemptylistTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -72,7 +72,7 @@ public class nodelistindexgetlengthofemptylistTest extends LoboUnitTest {
         childNode = employeeList.item(1);
         textNode = childNode.getFirstChild();
         textList = textNode.getChildNodes();
-        assertEquals(0, textList.getLength());
+        assertEquals(0, textList.getLength(), "NodelistindexgetlengthofemptylistAssert1");
     }
 
 }

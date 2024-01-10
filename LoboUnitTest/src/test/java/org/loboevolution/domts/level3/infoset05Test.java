@@ -47,7 +47,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-infoset">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-infoset</a>
  */
-public class infoset05Test extends LoboUnitTest {
+public class Infoset05Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
@@ -63,10 +63,10 @@ public class infoset05Test extends LoboUnitTest {
         /*DOMErrorMonitor */
         domConfig.setParameter("error-handler", errorMonitor);
         doc.normalizeDocument();
-        assertTrue(errorMonitor.assertLowerSeverity(2));
+        assertTrue(errorMonitor.assertLowerSeverity(2), "Infoset05Assert3");
         docElem = doc.getDocumentElement();
         xmlnsAttr = docElem.getAttributeNode("xmlns");
-        assertNotNull(xmlnsAttr);
+        assertNotNull(xmlnsAttr, "Infoset05Assert4");
     }
 }
 

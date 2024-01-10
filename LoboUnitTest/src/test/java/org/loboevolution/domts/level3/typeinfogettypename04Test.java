@@ -48,7 +48,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author Jenny Hsu
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-typeName">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-typeName</a>
  */
-public class typeinfogettypename04Test extends LoboUnitTest {
+public class Typeinfogettypename04Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -62,7 +62,7 @@ public class typeinfogettypename04Test extends LoboUnitTest {
         emElem = (Element) elemList.item(0);
         elemTypeInfo = emElem.getSchemaTypeInfo();
         typeName = elemTypeInfo.getTypeName();
-        assertEquals("emType", typeName);
+        assertEquals("emType", typeName, "Typeinfogettypename04Assert2");
     }
 }
 

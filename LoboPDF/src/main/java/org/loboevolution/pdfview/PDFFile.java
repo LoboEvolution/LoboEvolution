@@ -32,6 +32,7 @@ import org.loboevolution.pdfview.annotation.PDFAnnotation;
 import org.loboevolution.pdfview.decrypt.*;
 
 import java.awt.geom.Rectangle2D;
+import java.awt.image.ColorModel;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.*;
@@ -518,7 +519,7 @@ public class PDFFile {
      * process a version string, to determine the major and minor versions
      * of the file.
      *
-     * @param versionString
+     * @param versionString a {@link String} object.
      */
     private void processVersion(final String versionString) {
         try {
@@ -1014,7 +1015,7 @@ public class PDFFile {
      * If dictionary has a /Prev entry, move file pointer
      * and read new trailer
      *
-     * @param password
+     * @param password a {@link PDFPassword} object.
      */
     private void readTrailer(final PDFPassword password)
             throws
@@ -1203,7 +1204,7 @@ public class PDFFile {
      * If dictionary has a /Prev entry, move file pointer
      * and read new trailer
      *
-     * @param password
+     * @param password a {@link PDFPassword} object.
      */
     private void readTrailer15(final PDFPassword password) throws IOException,
             EncryptionUnsupportedByProductException, EncryptionUnsupportedByPlatformException {

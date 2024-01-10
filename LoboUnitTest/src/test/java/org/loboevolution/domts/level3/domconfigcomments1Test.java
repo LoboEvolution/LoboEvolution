@@ -48,7 +48,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-comments">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-comments</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration</a>
  */
-public class domconfigcomments1Test extends LoboUnitTest {
+public class Domconfigcomments1Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final DOMImplementation domImpl;
@@ -63,17 +63,17 @@ public class domconfigcomments1Test extends LoboUnitTest {
         doc = domImpl.createDocument("http://www.w3.org/1999/xhtml", "html", nullDocType);
         domConfig = doc.getDomConfig();
         state = ((Boolean) domConfig.getParameter(parameter));
-        assertTrue(state);
+        assertTrue(state, "Domconfigcomments1Assert3");
         canSet = domConfig.canSetParameter(parameter, Boolean.FALSE);
-        assertTrue(canSet);
+        assertTrue(canSet, "Domconfigcomments1Assert4");
         canSet = domConfig.canSetParameter(parameter, Boolean.TRUE);
-        assertTrue(canSet);
+        assertTrue(canSet, "Domconfigcomments1Assert5");
         domConfig.setParameter(parameter, Boolean.FALSE);
         state = ((Boolean) domConfig.getParameter(parameter));
-        assertFalse(state);
+        assertFalse(state, "Domconfigcomments1Assert6");
         domConfig.setParameter(parameter, Boolean.TRUE);
         state = ((Boolean) domConfig.getParameter(parameter));
-        assertTrue(state);
+        assertTrue(state, "Domconfigcomments1Assert7");
     }
 }
 

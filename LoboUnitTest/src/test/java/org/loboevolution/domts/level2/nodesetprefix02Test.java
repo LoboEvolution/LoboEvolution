@@ -50,7 +50,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSPrefix">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSPrefix</a>
  */
-public class nodesetprefix02Test extends LoboUnitTest {
+public class Nodesetprefix02Test extends LoboUnitTest {
 
     /**
      * Runs the test case.

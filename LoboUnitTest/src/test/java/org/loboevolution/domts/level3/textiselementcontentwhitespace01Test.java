@@ -43,7 +43,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Text3-isElementContentWhitespace">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Text3-isElementContentWhitespace</a>
  */
-public class textiselementcontentwhitespace01Test extends LoboUnitTest {
+public class Textiselementcontentwhitespace01Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -52,7 +52,7 @@ public class textiselementcontentwhitespace01Test extends LoboUnitTest {
         doc = sampleXmlFile("barfoo.xml");
         newText = doc.createTextNode("   ");
         hasWhitespace = newText.isElementContentWhitespace();
-        assertFalse(hasWhitespace);
+        assertFalse(hasWhitespace, "Textiselementcontentwhitespace01Assert2");
     }
 }
 

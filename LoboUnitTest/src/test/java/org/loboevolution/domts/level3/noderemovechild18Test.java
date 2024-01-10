@@ -49,7 +49,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-1734834066">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-1734834066</a>
  */
-public class noderemovechild18Test extends LoboUnitTest {
+public class Noderemovechild18Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -65,7 +65,7 @@ public class noderemovechild18Test extends LoboUnitTest {
         child = (CDATASection) parent.getLastChild();
         removed = (CDATASection) parent.removeChild(child);
         removedValue = removed.getNodeValue();
-        assertEquals("This is an adjacent CDATASection with a reference to a tab &tab;", removedValue);
+        assertEquals("This is an adjacent CDATASection with a reference to a tab &tab;", removedValue, "Noderemovechild18Assert3");
 
         {
             boolean success = false;
@@ -74,7 +74,7 @@ public class noderemovechild18Test extends LoboUnitTest {
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
             }
-            assertTrue(success);
+            assertTrue(success, "Noderemovechild18Assert4");
         }
     }
 }

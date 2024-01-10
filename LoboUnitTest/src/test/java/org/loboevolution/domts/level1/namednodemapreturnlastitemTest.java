@@ -53,7 +53,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Mary Brady
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-349467F9">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-349467F9</a>
  */
-public class namednodemapreturnlastitemTest extends LoboUnitTest {
+public class NamednodemapreturnlastitemTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -73,7 +73,7 @@ public class namednodemapreturnlastitemTest extends LoboUnitTest {
         attributes = testEmployee.getAttributes();
         child = attributes.item(1);
         name = child.getNodeName();
-        assertTrue(("domestic".equals(name) | "street".equals(name)) );
+        assertTrue(("domestic".equals(name) | "street".equals(name)) , "NamednodemapreturnlastitemAssert2");
     }
 }
 

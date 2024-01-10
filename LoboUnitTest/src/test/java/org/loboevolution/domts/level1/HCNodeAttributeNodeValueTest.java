@@ -68,7 +68,7 @@ public class HCNodeAttributeNodeValueTest extends LoboUnitTest {
         testAddr = (Element) elementList.item(0);
         addrAttr = testAddr.getAttributeNode("title");
         attrValue = addrAttr.getNodeValue();
-         assertEquals( "Yes", attrValue);
+         assertEquals( "Yes", attrValue, "HCNodeAttributeNodeValueAssert1");
     }
 }
 

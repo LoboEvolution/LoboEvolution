@@ -43,7 +43,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-textContent">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-textContent</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=538">http://www.w3.org/Bugs/Public/show_bug.cgi?id=538</a>
  */
-public class nodegettextcontent19Test extends LoboUnitTest {
+public class Nodegettextcontent19Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -54,7 +54,7 @@ public class nodegettextcontent19Test extends LoboUnitTest {
         elemList = doc.getElementsByTagName("body");
         elem = (Element) elemList.item(0);
         textContent = elem.getTextContent();
-        assertEquals("bar", textContent);
+        assertEquals("bar", textContent, "Nodegettextcontent19Assert2");
     }
 }
 

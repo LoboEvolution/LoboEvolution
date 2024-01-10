@@ -49,7 +49,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * @author Mary Brady
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-3A0ED0A4">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-3A0ED0A4</a>
  */
-public class nodeclonegetparentnullTest extends LoboUnitTest {
+public class NodeclonegetparentnullTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -67,7 +67,7 @@ public class nodeclonegetparentnullTest extends LoboUnitTest {
         employeeNode = elementList.item(1);
         clonedNode = employeeNode.cloneNode(false);
         parentNode = clonedNode.getParentNode();
-        assertNull(parentNode);
+        assertNull(parentNode, "NodeclonegetparentnullAssert2");
     }
 }
 

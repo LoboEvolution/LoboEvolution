@@ -50,7 +50,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-setNamedItemNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-setNamedItemNS</a>
  */
-public class namednodemapsetnameditemns02Test extends LoboUnitTest {
+public class Namednodemapsetnameditemns02Test extends LoboUnitTest {
 
     /**
      * Runs the test case.

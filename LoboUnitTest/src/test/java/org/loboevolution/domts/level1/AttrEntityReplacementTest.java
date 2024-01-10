@@ -74,7 +74,7 @@ public class AttrEntityReplacementTest extends LoboUnitTest {
         attributes = testNode.getAttributes();
         streetAttr = (Attr) attributes.getNamedItem("street");
         value = streetAttr.getValue();
-        assertEquals( "Yes", value);
+        assertEquals( "Yes", value, "AttrEntityReplacementAssert1");
     }
 
 }

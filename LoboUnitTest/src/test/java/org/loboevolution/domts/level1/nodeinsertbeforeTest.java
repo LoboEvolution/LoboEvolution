@@ -52,7 +52,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Mary Brady
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-952280727">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-952280727</a>
  */
-public class nodeinsertbeforeTest extends LoboUnitTest {
+public class NodeinsertbeforeTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -119,7 +119,7 @@ public class nodeinsertbeforeTest extends LoboUnitTest {
             childName = child.getNodeName();
             actual.add(childName);
         }
-        assertEquals(expected, actual);
+        assertEquals(expected, actual, "NodeinsertbeforeAssert1");
     }
 
 }

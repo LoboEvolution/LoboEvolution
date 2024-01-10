@@ -48,7 +48,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Jenny Hsu
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-ElSetIdAttr">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-ElSetIdAttr</a>
  */
-public class elementsetidattribute07Test extends LoboUnitTest {
+public class Elementsetidattribute07Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -71,17 +71,17 @@ public class elementsetidattribute07Test extends LoboUnitTest {
         attributesMap = nameElem1.getAttributes();
         attr = (Attr) attributesMap.getNamedItem("hasMiddleName");
         id = attr.isId();
-        assertTrue(id);
+        assertTrue(id, "Elementsetidattribute07Assert3");
         attributesMap = nameElem2.getAttributes();
         attr = (Attr) attributesMap.getNamedItem("hasMiddleName");
         id = attr.isId();
-        assertTrue(id);
+        assertTrue(id, "Elementsetidattribute07Assert4");
         elem = doc.getElementById("Antoine");
         elemName = elem.getTagName();
-        assertEquals("STRONG", elemName);
+        assertEquals("STRONG", elemName, "Elementsetidattribute07Assert5");
         elem = doc.getElementById("Neeya");
         elemName = elem.getTagName();
-        assertEquals("STRONG", elemName);
+        assertEquals("STRONG", elemName, "Elementsetidattribute07Assert6");
     }
 }
 

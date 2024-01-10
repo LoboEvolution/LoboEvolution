@@ -44,7 +44,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Text3-replaceWholeText">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Text3-replaceWholeText</a>
  */
-public class textreplacewholetext03Test extends LoboUnitTest {
+public class Textreplacewholetext03Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -55,7 +55,7 @@ public class textreplacewholetext03Test extends LoboUnitTest {
         textNode = doc.createTextNode("New Text");
         replacedText = textNode.replaceWholeText(" a b c b ");
         wholeText = replacedText.getWholeText();
-        assertEquals(" a b c b ", wholeText);
+        assertEquals(" a b c b ", wholeText, "Textreplacewholetext03Assert2");
     }
 }
 

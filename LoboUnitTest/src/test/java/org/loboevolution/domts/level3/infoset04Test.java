@@ -47,7 +47,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=416">http://www.w3.org/Bugs/Public/show_bug.cgi?id=416</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-infoset">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-infoset</a>
  */
-public class infoset04Test extends LoboUnitTest {
+public class Infoset04Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
@@ -73,14 +73,14 @@ public class infoset04Test extends LoboUnitTest {
         /*DOMErrorMonitor */
         domConfig.setParameter("error-handler", errorMonitor);
         doc.normalizeDocument();
-        assertTrue( errorMonitor.assertLowerSeverity(2));
+        assertTrue( errorMonitor.assertLowerSeverity(2), "Infoset04Assert3");
         pList = doc.getElementsByTagName("p");
         elem = (Element) pList.item(0);
         text = elem.getLastChild();
         nodeName = text.getNodeName();
-        assertEquals("#text", nodeName);
+        assertEquals("#text", nodeName, "Infoset04Assert4");
         nodeValue = text.getNodeValue();
-        assertEquals("barCDATA", nodeValue);
+        assertEquals("barCDATA", nodeValue, "Infoset04Assert5");
     }
 }
 

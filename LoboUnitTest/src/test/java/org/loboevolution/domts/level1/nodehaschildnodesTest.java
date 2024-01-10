@@ -48,7 +48,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Mary Brady
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-810594187">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-810594187</a>
  */
-public class nodehaschildnodesTest extends LoboUnitTest {
+public class NodehaschildnodesTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -63,7 +63,7 @@ public class nodehaschildnodesTest extends LoboUnitTest {
         elementList = doc.getElementsByTagName("employee");
         employeeNode = elementList.item(1);
         state = employeeNode.hasChildNodes();
-        assertTrue(state);
+        assertTrue(state, "NodehaschildnodesAssert2");
     }
 }
 

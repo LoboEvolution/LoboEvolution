@@ -34,6 +34,8 @@ import org.loboevolution.apache.xml.dtm.DTMIterator;
 import org.loboevolution.apache.xml.dtm.DTMManager;
 import org.loboevolution.apache.xml.utils.NodeVector;
 
+import java.io.BufferedReader;
+
 /**
  * This class is the dynamic wrapper for a Xalan DTMIterator instance, and provides random access
  * capabilities.
@@ -132,7 +134,7 @@ public class NodeSequence extends XObject implements DTMIterator, Cloneable, Pat
   /**
    * Create a new NodeSequence from a (already cloned) iterator.
    *
-   * @param nodeVector
+   * @param nodeVector a {@link Object} object.
    */
   public NodeSequence(final Object nodeVector) {
     super(nodeVector);

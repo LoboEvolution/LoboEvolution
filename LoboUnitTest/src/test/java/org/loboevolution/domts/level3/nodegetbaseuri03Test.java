@@ -44,7 +44,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=419">http://www.w3.org/Bugs/Public/show_bug.cgi?id=419</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/infoset-mapping#Infoset2DocumentType">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/infoset-mapping#Infoset2DocumentType</a>
  */
-public class nodegetbaseuri03Test extends LoboUnitTest {
+public class Nodegetbaseuri03Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -53,7 +53,7 @@ public class nodegetbaseuri03Test extends LoboUnitTest {
         doc = sampleXmlFile("barfoo.xml");
         docType = doc.getDoctype();
         baseURI = docType.getBaseURI();
-        assertNull(baseURI);
+        assertNull(baseURI, "Nodegetbaseuri03Assert2");
     }
 }
 

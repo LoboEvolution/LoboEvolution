@@ -44,7 +44,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode</a>
  */
-public class documentadoptnode05Test extends LoboUnitTest {
+public class Documentadoptnode05Test extends LoboUnitTest {
 
 
     @Test
@@ -83,11 +83,11 @@ public class documentadoptnode05Test extends LoboUnitTest {
             nodePrefix = adoptedAttr.getPrefix();
             attrOwnerElem = (Element) ((Attr) /*Node */adoptedAttr).getOwnerElement();
             isSpecified = ((Attr) /*Node */adoptedAttr).isSpecified();
-            assertEquals( "dir", nodeName);
-            assertNull( nodeNamespaceURI);
-            assertNull(nodePrefix);
-            assertNull(attrOwnerElem);
-            assertTrue(isSpecified);
+            assertEquals( "dir", nodeName, "Documentadoptnode05Assert1");
+            assertNull( nodeNamespaceURI, "Documentadoptnode05Assert2");
+            assertNull(nodePrefix, "Documentadoptnode05Assert3");
+            assertNull(attrOwnerElem, "Documentadoptnode05Assert4");
+            assertTrue(isSpecified, "Documentadoptnode05Assert5");
         }
     }
 }

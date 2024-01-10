@@ -51,7 +51,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-canonical-form">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-canonical-form</a>
  */
-public class canonicalform06Test extends LoboUnitTest {
+public class Canonicalform06Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
@@ -83,7 +83,7 @@ public class canonicalform06Test extends LoboUnitTest {
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
             }
-            assertTrue(success);
+            assertTrue(success, "Canonicalform06Assert1");
         }
 
         try {
@@ -110,14 +110,14 @@ public class canonicalform06Test extends LoboUnitTest {
             for (final Object o : errors) {
                 error = (DOMError) o;
                 severity = error.getSeverity();
-                assertEquals(2, severity);
+                assertEquals(2, severity, "Canonicalform06Assert2");
                 type = error.getType();
-                assertEquals("wf-invalid-character-in-node-name", type);
+                assertEquals("wf-invalid-character-in-node-name", type, "Canonicalform06Assert3");
                 locator = error.getLocation();
                 relatedNode = locator.getRelatedNode();
-                assertSame(elem, relatedNode);
+                assertSame(elem, relatedNode, "Canonicalform06Assert4");
             }
-            assertSame(1, errors.size());
+            assertSame(1, errors.size(), "Canonicalform06Assert5");
         }
     }
 }

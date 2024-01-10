@@ -43,7 +43,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1728279322">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1728279322</a>
  */
-public class nodevalue02Test extends LoboUnitTest {
+public class Nodevalue02Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -57,10 +57,10 @@ public class nodevalue02Test extends LoboUnitTest {
         doc = sampleXmlFile("staff.xml");
         newNode = doc.createComment("This is a new Comment node");
         newValue = newNode.getNodeValue();
-        assertEquals( "This is a new Comment node", newValue);
+        assertEquals( "This is a new Comment node", newValue, "Nodevalue02Assert1");
         newNode.setNodeValue("This should have an effect");
         newValue = newNode.getNodeValue();
-        assertEquals("This should have an effect", newValue);
+        assertEquals("This should have an effect", newValue, "Nodevalue02Assert2");
     }
 
 }

@@ -43,7 +43,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307</a>
  */
-public class nodereplacechild32Test extends LoboUnitTest {
+public class Nodereplacechild32Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -67,7 +67,7 @@ public class nodereplacechild32Test extends LoboUnitTest {
         enRefChild = (EntityReference) parent.appendChild(enRef);
         replaced = parent.replaceChild(newChild, enRefChild);
         nodeName = replaced.getNodeName();
-        assertEquals("entity1", nodeName);
+        assertEquals("entity1", nodeName, "Nodereplacechild32Assert2");
     }
 }
 

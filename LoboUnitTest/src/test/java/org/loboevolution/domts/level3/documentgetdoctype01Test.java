@@ -48,7 +48,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-B63ED1A31">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-B63ED1A31</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307</a>
  */
-public class documentgetdoctype01Test extends LoboUnitTest {
+public class Documentgetdoctype01Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -75,7 +75,7 @@ public class documentgetdoctype01Test extends LoboUnitTest {
         }
         replacedDocType = doc.getDoctype();
         newSysID = replacedDocType.getSystemId();
-        assertNull(newSysID);
+        assertNull(newSysID, "Documentgetdoctype01Assert3");
     }
 }
 

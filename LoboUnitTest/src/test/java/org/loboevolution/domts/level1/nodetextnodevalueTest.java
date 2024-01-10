@@ -50,7 +50,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Mary Brady
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080</a>
  */
-public class nodetextnodevalueTest extends LoboUnitTest {
+public class NodetextnodevalueTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -68,7 +68,7 @@ public class nodetextnodevalueTest extends LoboUnitTest {
         testAddr = (Element) elementList.item(0);
         textNode = testAddr.getFirstChild();
         textValue = textNode.getNodeValue();
-        assertEquals( "1230 North Ave. Dallas, Texas 98551", textValue);
+        assertEquals( "1230 North Ave. Dallas, Texas 98551", textValue, "NodetextnodevalueAssert1");
     }
 
 }

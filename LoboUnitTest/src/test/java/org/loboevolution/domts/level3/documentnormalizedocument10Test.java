@@ -48,7 +48,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-element-content-whitespace">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-element-content-whitespace</a>
  */
-public class documentnormalizedocument10Test extends LoboUnitTest {
+public class DocumentnormalizeDocument10Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -65,15 +65,15 @@ public class documentnormalizedocument10Test extends LoboUnitTest {
         doc.appendChild(elem);
         text = (Text) elem.getFirstChild();
         nodeValue = text.getNodeValue();
-        assertEquals("Text          Node", nodeValue);
+        assertEquals("Text          Node", nodeValue, "DocumentnormalizeDocument10Assert3");
         domConfig = doc.getDomConfig();
         canSet = domConfig.canSetParameter("element-content-whitespace", Boolean.TRUE);
-        assertTrue(canSet);
+        assertTrue(canSet, "DocumentnormalizeDocument10Assert4");
         domConfig.setParameter("element-content-whitespace", Boolean.TRUE);
         doc.normalizeDocument();
         text = (Text) elem.getFirstChild();
         nodeValue = text.getNodeValue();
-        assertEquals( "Text          Node", nodeValue);
+        assertEquals( "Text          Node", nodeValue, "DocumentnormalizeDocument10Assert5");
         canSet = domConfig.canSetParameter("element-content-whitespace", Boolean.FALSE);
 
         if (canSet) {
@@ -81,7 +81,7 @@ public class documentnormalizedocument10Test extends LoboUnitTest {
             doc.normalizeDocument();
             text = (Text) elem.getFirstChild();
             nodeValue = text.getNodeValue();
-            assertEquals("Text Node", nodeValue);
+            assertEquals("Text Node", nodeValue, "DocumentnormalizeDocument10Assert6");
         }
     }
 }

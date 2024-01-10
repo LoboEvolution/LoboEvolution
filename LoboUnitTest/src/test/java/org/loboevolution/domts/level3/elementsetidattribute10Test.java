@@ -46,7 +46,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Jenny Hsu
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-ElSetIdAttr">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-ElSetIdAttr</a>
  */
-public class elementsetidattribute10Test extends LoboUnitTest {
+public class Elementsetidattribute10Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -64,15 +64,15 @@ public class elementsetidattribute10Test extends LoboUnitTest {
         attributesMap = acronymElem.getAttributes();
         attr = (Attr) attributesMap.getNamedItem("class");
         id = attr.isId();
-        assertTrue(id);
+        assertTrue(id, "Elementsetidattribute10Assert1");
         acronymElem.setIdAttribute("class", true);
         id = attr.isId();
-        assertTrue(id);
+        assertTrue(id, "Elementsetidattribute10Assert2");
         acronymElem.setIdAttribute("class", false);
         id = attr.isId();
-        assertFalse(id);
+        assertFalse(id, "Elementsetidattribute10Assert3");
         elem = doc.getElementById("No");
-        assertNull(elem);
+        assertNull(elem, "Elementsetidattribute10Assert4");
     }
 }
 

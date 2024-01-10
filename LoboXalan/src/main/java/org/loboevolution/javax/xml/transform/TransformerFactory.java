@@ -61,7 +61,7 @@ public abstract class TransformerFactory {
     public abstract void setFeature(final String s, boolean flag)
             throws TransformerConfigurationException;
 
-    public abstract boolean getFeature(final String s);
+    public abstract boolean getFeature(final String name);
 
     public abstract void setAttribute(final String s, Object obj);
 

@@ -50,7 +50,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration-getParameter">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration-getParameter</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration-setParameter">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration-setParameter</a>
  */
-public class domconfigelementcontentwhitespace1Test extends LoboUnitTest {
+public class Domconfigelementcontentwhitespace1Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final DOMImplementation domImpl;
@@ -65,15 +65,15 @@ public class domconfigelementcontentwhitespace1Test extends LoboUnitTest {
         doc = domImpl.createDocument("http://www.w3.org/1999/xhtml", "html", nullDocType);
         domConfig = doc.getDomConfig();
         state = ((Boolean) domConfig.getParameter(parameter));
-        assertTrue(state);
+        assertTrue(state, "Domconfigelementcontentwhitespace1Assert3");
         canSet = domConfig.canSetParameter(parameter, Boolean.TRUE);
-        assertTrue(canSet);
+        assertTrue(canSet, "Domconfigelementcontentwhitespace1Assert4");
         canSet = domConfig.canSetParameter(parameter, Boolean.FALSE);
 
         if (canSet) {
             domConfig.setParameter(parameter, Boolean.FALSE);
             state = ((Boolean) domConfig.getParameter(parameter));
-            assertFalse(state);
+            assertFalse(state, "Domconfigelementcontentwhitespace1Assert5");
         } else {
 
             {
@@ -83,10 +83,10 @@ public class domconfigelementcontentwhitespace1Test extends LoboUnitTest {
                 } catch (final DOMException ex) {
                     success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
                 }
-                assertTrue(success);
+                assertTrue(success, "Domconfigelementcontentwhitespace1Assert6");
             }
             state = ((Boolean) domConfig.getParameter(parameter));
-            assertTrue(state);
+            assertTrue(state, "Domconfigelementcontentwhitespace1Assert7");
         }
 
         domConfig.setParameter(parameter, Boolean.TRUE);

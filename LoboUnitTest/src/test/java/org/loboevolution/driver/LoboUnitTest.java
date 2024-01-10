@@ -120,7 +120,7 @@ public class LoboUnitTest extends LoboWebDriver {
      */
     public void assertURIEquals(final URIEquals uriEquals) {
 
-        assertNotNull(uriEquals.getActual());
+        assertNotNull(uriEquals.getActual(), "assertURIEquals");
 
         String uri = uriEquals.getActual();
         final String actual = uriEquals.getActual();

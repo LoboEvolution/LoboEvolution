@@ -44,7 +44,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Curt Arnold
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom</a>
  */
-public class typeinfoisderivedfrom14Test extends LoboUnitTest {
+public class Typeinfoisderivedfrom14Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -61,17 +61,17 @@ public class typeinfoisderivedfrom14Test extends LoboUnitTest {
         acronymElem = (Element) elemList.item(2);
         attr = acronymElem.getAttributeNode("class");
         typeInfo = attr.getSchemaTypeInfo();
-        assertNotNull(typeInfo);
+        assertNotNull(typeInfo, "Typeinfoisderivedfrom14Assert1");
         typeName = typeInfo.getTypeName();
-         assertEquals( "classType", typeName);
+         assertEquals( "classType", typeName, "Typeinfoisderivedfrom14Assert2");
         isDerived = typeInfo.isDerivedFrom("http://www.w3.org/1999/xhtml", "classType", 1);
-        assertTrue(isDerived);
+        assertTrue(isDerived, "Typeinfoisderivedfrom14Assert3");
         isDerived = typeInfo.isDerivedFrom("http://www.w3.org/1999/xhtml", "classType", 14);
-        assertFalse(isDerived);
+        assertFalse(isDerived, "Typeinfoisderivedfrom14Assert4");
         isDerived = typeInfo.isDerivedFrom("http://www.w3.org/1999/xhtml", "classType", 15);
-        assertTrue(isDerived);
+        assertTrue(isDerived, "Typeinfoisderivedfrom14Assert5");
         isDerived = typeInfo.isDerivedFrom("http://www.w3.org/1999/xhtml", "classType", 0);
-        assertTrue(isDerived);
+        assertTrue(isDerived, "Typeinfoisderivedfrom14Assert6");
     }
 }
 

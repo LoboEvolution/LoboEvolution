@@ -61,7 +61,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMLocator-uri">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMLocator-uri</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=542">http://www.w3.org/Bugs/Public/show_bug.cgi?id=542</a>
  */
-public class documentnormalizedocument07Test extends LoboUnitTest {
+public class DocumentnormalizeDocument07Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -109,7 +109,7 @@ public class documentnormalizedocument07Test extends LoboUnitTest {
             if (severity == 2) {
                 location = error.getLocation();
                 problemNode = location.getRelatedNode();
-                assertSame(newChild, problemNode);
+                assertSame(newChild, problemNode, "DocumentnormalizeDocument07Assert1");
                 lineNumber = location.getLineNumber();
                 columnNumber = location.getColumnNumber();
                 byteOffset = location.getByteOffset();
@@ -117,17 +117,17 @@ public class documentnormalizedocument07Test extends LoboUnitTest {
                 uri = location.getUri();
                 message = error.getMessage();
                 length = message.length();
-                assertTrue(length > 0);
+                assertTrue(length > 0, "DocumentnormalizeDocument07Assert2");
                 type = error.getType();
                 relatedData = error.getRelatedData();
                 relatedException = error.getRelatedException();
                 errorCount += 1;
             } else {
-                assertEquals(1, severity);
+                assertEquals(1, severity, "DocumentnormalizeDocument07Assert3");
             }
 
         }
-        assertEquals(1, errorCount);
+        assertEquals(1, errorCount, "DocumentnormalizeDocument07Assert4");
     }
 }
 

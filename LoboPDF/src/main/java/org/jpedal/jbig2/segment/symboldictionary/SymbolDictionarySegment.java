@@ -79,7 +79,7 @@ public class SymbolDictionarySegment extends Segment {
         if (JBIG2StreamDecoder.debug)
             log.info("==== Read Segment Symbol Dictionary ====");
 
-        /** read symbol dictionary flags */
+        /* read symbol dictionary flags */
         readSymbolDictionaryFlags();
 
         //List codeTables = new ArrayList();
@@ -391,12 +391,12 @@ public class SymbolDictionarySegment extends Segment {
             }
         }
 
-        /** consume any remaining bits */
+        /* consume any remaining bits */
         decoder.consumeRemainingBits();
     }
 
     private void readSymbolDictionaryFlags() throws IOException {
-        /** extract symbol dictionary flags */
+        /* extract symbol dictionary flags */
         final short[] symbolDictionaryFlagsField = new short[2];
         decoder.readByte(symbolDictionaryFlagsField);
 
@@ -435,7 +435,7 @@ public class SymbolDictionarySegment extends Segment {
             symbolDictionaryRAdaptiveTemplateY[1] = readATValue();
         }
 
-        /** extract no of exported symbols */
+        /* extract no of exported symbols */
         final short[] noOfExportedSymbolsField = new short[4];
         decoder.readByte(noOfExportedSymbolsField);
 
@@ -445,7 +445,7 @@ public class SymbolDictionarySegment extends Segment {
         if (JBIG2StreamDecoder.debug)
             log.info("noOfExportedSymbols = {} ", noOfExportedSymbols);
 
-        /** extract no of new symbols */
+        /* extract no of new symbols */
         final short[] noOfNewSymbolsField = new short[4];
         decoder.readByte(noOfNewSymbolsField);
 

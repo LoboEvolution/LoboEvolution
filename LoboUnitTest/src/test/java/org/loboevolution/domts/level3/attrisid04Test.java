@@ -45,7 +45,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Attr-isId">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Attr-isId</a>
  */
-public class attrisid04Test extends LoboUnitTest {
+public class Attrisid04Test extends LoboUnitTest {
 
     @Test
     public void runTest() {
@@ -57,6 +57,6 @@ public class attrisid04Test extends LoboUnitTest {
         elemList = doc.getElementsByTagName("acronym");
         acronymElem = (Element) elemList.item(3);
         attr = acronymElem.getAttributeNode("id");
-        assertTrue(attr.isId());
+        assertTrue(attr.isId(), "Attrisid04Assert2");
     }
 }

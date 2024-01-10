@@ -46,7 +46,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=425">http://www.w3.org/Bugs/Public/show_bug.cgi?id=425</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=540">http://www.w3.org/Bugs/Public/show_bug.cgi?id=540</a>
  */
-public class textreplacewholetext08Test extends LoboUnitTest {
+public class Textreplacewholetext08Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -68,7 +68,7 @@ public class textreplacewholetext08Test extends LoboUnitTest {
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }
-            assertTrue(success);
+            assertTrue(success, "Textreplacewholetext08Assert2");
         }
     }
 }

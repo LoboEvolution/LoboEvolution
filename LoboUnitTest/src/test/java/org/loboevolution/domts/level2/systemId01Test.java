@@ -47,7 +47,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Mary Brady
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-Core-DocType-systemId">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-Core-DocType-systemId</a>
  */
-public class systemId01Test extends LoboUnitTest {
+public class SystemId01Test extends LoboUnitTest {
 
     /**
      * Runs the test case.

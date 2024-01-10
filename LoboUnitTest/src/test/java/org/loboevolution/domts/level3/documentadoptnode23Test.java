@@ -46,7 +46,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode</a>
  */
-public class documentadoptnode23Test extends LoboUnitTest {
+public class Documentadoptnode23Test extends LoboUnitTest {
     /**
      * Runs the test case.
      *
@@ -72,7 +72,7 @@ public class documentadoptnode23Test extends LoboUnitTest {
             acronymElemLen = acronymElemChild.getLength();
             adoptedNodeChild = adoptedNode.getChildNodes();
             adoptedLen = adoptedNodeChild.getLength();
-            assertEquals(adoptedLen, acronymElemLen);
+            assertEquals(adoptedLen, acronymElemLen, "Documentadoptnode23Assert2");
         }
     }
 }

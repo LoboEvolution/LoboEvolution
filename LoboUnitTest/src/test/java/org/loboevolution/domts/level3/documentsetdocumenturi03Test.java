@@ -47,7 +47,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author Neil Delima
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-documentURI">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-documentURI</a>
  */
-public class documentsetdocumenturi03Test extends LoboUnitTest {
+public class DocumentsetDocumenturi03Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -67,7 +67,7 @@ public class documentsetdocumenturi03Test extends LoboUnitTest {
         newDoc = domImpl.createDocument(rootNS, rootName, nullDocType);
         newDoc.setDocumentURI("somestring");
         docURI = newDoc.getDocumentURI();
-        assertEquals("somestring", docURI);
+        assertEquals("somestring", docURI, "DocumentsetDocumenturi03Assert2");
     }
 }
 

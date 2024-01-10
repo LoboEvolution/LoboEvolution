@@ -25,7 +25,6 @@
  */
 package org.loboevolution.html.renderer.table;
 
-import lombok.Data;
 import lombok.Getter;
 import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.dom.HTMLTableElement;

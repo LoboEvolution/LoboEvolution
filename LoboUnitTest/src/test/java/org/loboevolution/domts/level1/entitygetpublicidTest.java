@@ -52,7 +52,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-6ABAEB38">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-6ABAEB38</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-D7C29F3E">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-D7C29F3E</a>
  */
-public class entitygetpublicidTest extends LoboUnitTest {
+public class EntitygetpublicidTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
@@ -68,15 +68,15 @@ public class entitygetpublicidTest extends LoboUnitTest {
         final String notation;
         doc = sampleXmlFile("staff.xml");
         docType = doc.getDoctype();
-        assertNotNull(docType);
+        assertNotNull(docType, "EntitygetpublicidAssert1");
         entityList = docType.getEntities();
-        assertNotNull(entityList);
+        assertNotNull(entityList, "EntitygetpublicidAssert2");
         entityNode = (EntityReference) entityList.getNamedItem("ent5");
         publicId = entityNode.getPublicId();
-        assertEquals("entityURI", publicId);
+        assertEquals("entityURI", publicId, "EntitygetpublicidAssert3");
         entityNode.getSystemId();
         notation = entityNode.getNotationName();
-        assertEquals("notation1", notation);
+        assertEquals("notation1", notation, "EntitygetpublicidAssert4");
     }
 }
 

@@ -47,7 +47,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-datatype-normalization">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-datatype-normalization</a>
  */
-public class datatypenormalization02Test extends LoboUnitTest {
+public class Datatypenormalization02Test extends LoboUnitTest {
 
 
     @Test
@@ -78,22 +78,22 @@ public class datatypenormalization02Test extends LoboUnitTest {
             /*DOMErrorMonitor */
             domConfig.setParameter("error-handler", errorMonitor);
             doc.normalizeDocument();
-            assertTrue(errorMonitor.assertLowerSeverity(2));
+            assertTrue(errorMonitor.assertLowerSeverity(2), "Datatypenormalization02Assert3");
             elemList = doc.getElementsByTagNameNS("http://www.w3.org/2001/DOM-Test-Suite/Level-3/datatype_normalization", "data:decimal");
             element = (Element) elemList.item(0);
             str = element.getAttribute("data:value");
-             assertEquals( "+0003.141592600", str);
+             assertEquals( "+0003.141592600", str, "Datatypenormalization02Assert4");
             str = element.getAttribute("data:union");
-             assertEquals( "+0003.141592600", str);
+             assertEquals( "+0003.141592600", str, "Datatypenormalization02Assert5");
             str = element.getTextContent();
-             assertEquals( "+10 .1", str);
+             assertEquals( "+10 .1", str, "Datatypenormalization02Assert6");
             element = (Element) elemList.item(1);
             str = element.getAttribute("data:value");
-             assertEquals( "01", str);
+             assertEquals( "01", str, "Datatypenormalization02Assert7");
             str = element.getAttribute("data:union");
-             assertEquals( "01", str);
+             assertEquals( "01", str, "Datatypenormalization02Assert8");
             str = element.getTextContent();
-             assertEquals( "-.001", str);
+             assertEquals( "-.001", str, "Datatypenormalization02Assert9");
         }
     }
 }

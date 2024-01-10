@@ -47,7 +47,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author Jenny Hsu
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Element-schemaTypeInfo">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Element-schemaTypeInfo</a>
  */
-public class elementgetschematypeinfo06Test extends LoboUnitTest {
+public class Elementgetschematypeinfo06Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -63,8 +63,8 @@ public class elementgetschematypeinfo06Test extends LoboUnitTest {
         elemTypeInfo = strongElem.getSchemaTypeInfo();
         typeName = elemTypeInfo.getTypeName();
         typeNamespace = elemTypeInfo.getTypeNamespace();
-        assertEquals( "strongType", typeName);
-        assertEquals("http://www.w3.org/1999/xhtml", typeNamespace);
+        assertEquals( "strongType", typeName, "Elementgetschematypeinfo06Assert2");
+        assertEquals("http://www.w3.org/1999/xhtml", typeNamespace, "Elementgetschematypeinfo06Assert3");
     }
 }
 

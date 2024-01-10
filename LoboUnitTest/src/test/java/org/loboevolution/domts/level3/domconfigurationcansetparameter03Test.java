@@ -46,7 +46,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Jenny Hsu
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration</a>
  */
-public class domconfigurationcansetparameter03Test extends LoboUnitTest {
+public class Domconfigurationcansetparameter03Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -61,13 +61,13 @@ public class domconfigurationcansetparameter03Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         domConfig = doc.getDomConfig();
         canSet = domConfig.canSetParameter("entities", Boolean.FALSE);
-        assertTrue(canSet);
+        assertTrue(canSet, "Domconfigurationcansetparameter03Assert3");
         doc.normalizeDocument();
         docType = doc.getDoctype();
         entitiesMap = docType.getEntities();
         entity = entitiesMap.getNamedItemNS(nullNS, "epsilon");
         entityName = entity.getNodeName();
-        assertEquals("epsilon", entityName);
+        assertEquals("epsilon", entityName, "Domconfigurationcansetparameter03Assert4");
     }
 }
 

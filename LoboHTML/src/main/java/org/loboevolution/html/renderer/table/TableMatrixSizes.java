@@ -282,10 +282,10 @@ class TableMatrixSizes {
 	 * are layed out again if necessary to determine if they can really be shrunk.
 	 * </ol>
 	 * 
-	 * @param hasBorder
-	 * @param cellSpacingX
-	 * @param cellSpacingY
-	 * @param availWidth
+	 * @param hasBorder a {@link java.lang.Integer} object.
+	 * @param cellSpacingX a {@link java.lang.Integer} object.
+	 * @param cellSpacingY a {@link java.lang.Integer} object.
+	 * @param availWidth a {@link java.lang.Integer} object.
 	 */
 	void determineColumnSizes(final int hasBorder, final int cellSpacingX, final int cellSpacingY, final int availWidth) {
 		final HtmlLength tableWidthLength = matrix.tableWidthLength;
@@ -527,9 +527,10 @@ class TableMatrixSizes {
 	 * This method sets the tentative actual sizes of columns (rows) based on
 	 * specified witdhs (heights) if available.
 	 * 
-	 * @param columnSizes
-	 * @param widthsOfExtras
-	 * @param cellAvailWidth
+	 * @param columnSizes a {@link SizeInfo} object.
+	 * @param widthsOfExtras a {@link java.lang.Integer} object.
+	 * @param cellAvailWidth a {@link java.lang.Integer} object.
+	 * @param setNoWidthColumns a {@link java.lang.Boolean} object.
 	 */
 	private void determineTentativeSizes(final SizeInfo[] columnSizes, final int widthsOfExtras, final int cellAvailWidth,
                                          final boolean setNoWidthColumns) {

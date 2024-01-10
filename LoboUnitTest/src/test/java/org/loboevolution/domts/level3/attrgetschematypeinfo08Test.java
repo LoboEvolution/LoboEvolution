@@ -49,7 +49,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author Jenny Hsu
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Attr-schemaTypeInfo">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Attr-schemaTypeInfo</a>
  */
-public class attrgetschematypeinfo08Test extends LoboUnitTest {
+public class Attrgetschematypeinfo08Test extends LoboUnitTest {
 
 
     @Test
@@ -68,8 +68,8 @@ public class attrgetschematypeinfo08Test extends LoboUnitTest {
         attrTypeInfo = attr.getSchemaTypeInfo();
         typeName = attrTypeInfo.getTypeName();
         typeNamespace = attrTypeInfo.getTypeNamespace();
-        assertEquals("string", typeName);
-        assertEquals( "http://www.w3.org/2001/XMLSchema", typeNamespace);
+        assertEquals("string", typeName, "Attrgetschematypeinfo08Assert2");
+        assertEquals( "http://www.w3.org/2001/XMLSchema", typeNamespace, "Attrgetschematypeinfo08Assert3");
     }
 }
 

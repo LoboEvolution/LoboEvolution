@@ -49,7 +49,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Jenny Hsu
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration</a>
  */
-public class domconfigurationcansetparameter04Test extends LoboUnitTest {
+public class Domconfigurationcansetparameter04Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
@@ -62,13 +62,13 @@ public class domconfigurationcansetparameter04Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         domConfig = doc.getDomConfig();
         canSet = domConfig.canSetParameter("entities", Boolean.FALSE);
-        assertTrue(canSet);
+        assertTrue(canSet, "Domconfigurationcansetparameter04Assert3");
         doc.normalizeDocument();
         acronymList = doc.getElementsByTagNameNS("*", "acronym");
         acronymElem = acronymList.item(1);
         first = acronymElem.getFirstChild();
         nodeType = first.getNodeType();
-        assertEquals(5, nodeType);
+        assertEquals(5, nodeType, "Domconfigurationcansetparameter04Assert4");
     }
 }
 
