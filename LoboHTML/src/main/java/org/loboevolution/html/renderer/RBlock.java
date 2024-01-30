@@ -171,64 +171,87 @@ public class RBlock extends BaseElementRenderable {
 			rs = new BlockRenderState(null);
 		}
 
-		applyStyle(availWidth, availHeight);
+		this.applyStyle(availWidth, availHeight);
 
 		final RBlockViewport bodyLayout = this.bodyLayout;
 		final NodeImpl node = (NodeImpl) this.modelNode;
-        if (node == null || bodyLayout == null) {
-            final Insets insets = getInsetsMarginBorder(false, false);
-            return RBlockLayoutInfo.builder().
-                    width(insets.left + insets.right).
-                    height(insets.bottom + insets.top).
-                    hasHScrollBar(false).
-                    hasVScrollBar(false).
-                    build();
-        }
+		if (node == null) {
+			final Insets insets = this.getInsetsMarginBorder(false, false);
+			return RBlockLayoutInfo.builder().
+					width(insets.left + insets.right).
+					height(insets.bottom + insets.top).
+					hasHScrollBar(false).
+					hasVScrollBar(false).
+					build();
+		}
 
-		final Insets paddingInsets = (this.paddingInsets == null) ? RBlockViewport.ZERO_INSETS : this.paddingInsets;
+        final Insets paddingInsets = (this.paddingInsets == null) ? RBlockViewport.ZERO_INSETS : this.paddingInsets;
+        final Insets borderInsets = (this.borderInsets == null) ? RBlockViewport.ZERO_INSETS : this.borderInsets;
+        final Insets marginInsets = (this.marginInsets == null) ? RBlockViewport.ZERO_INSETS : this.marginInsets;
 
 		final int paddingTotalWidth = paddingInsets.left + paddingInsets.right;
 		final int paddingTotalHeight = paddingInsets.top + paddingInsets.bottom;
 
-		final int overflowX = (this.overflowX == RenderState.OVERFLOW_NONE) ? defaultOverflowX : this.overflowX;
-		final int overflowY = (this.overflowY == RenderState.OVERFLOW_NONE) ? defaultOverflowY : this.overflowY;
+        final int overflowX = (this.overflowX == RenderState.OVERFLOW_NONE) ? defaultOverflowX : this.overflowX;
+        final int overflowY = (this.overflowY == RenderState.OVERFLOW_NONE) ? defaultOverflowY : this.overflowY;
 
 		final boolean vauto = overflowY == RenderState.OVERFLOW_AUTO;
 		boolean hscroll = overflowX == RenderState.OVERFLOW_SCROLL;
 		final boolean hauto = overflowX == RenderState.OVERFLOW_AUTO;
 		boolean vscroll = overflowY == RenderState.OVERFLOW_SCROLL;
 
-		Insets insets = getInsetsMarginBorder(hscroll, vscroll);
+		Insets insets = this.getInsetsMarginBorder(hscroll, vscroll);
 		int insetsTotalWidth = insets.left + insets.right;
 		int insetsTotalHeight = insets.top + insets.bottom;
-		int actualAvailWidth = availWidth - paddingTotalWidth - insetsTotalWidth;
-		final int actualAvailHeight = availHeight - paddingTotalHeight - insetsTotalHeight;
-		final Integer dw = getDeclaredWidth(actualAvailWidth);
-		final Integer dh = getDeclaredHeight(actualAvailHeight);
-		int declaredWidth = dw != null ? dw : -1;
-		final int declaredHeight = dh != null ? dh : -1;
+		int tentativeAvailWidth = availWidth - paddingTotalWidth - insetsTotalWidth;
+		int tentativeAvailHeight = availHeight - paddingTotalHeight - insetsTotalHeight;
 
-		clearGUIComponents();
+		final Integer declaredMaxWidth = getDeclaredMaxWidth(renderState, tentativeAvailWidth);
+		final Integer declaredMaxHeight = getDeclaredMaxHeight(renderState, tentativeAvailHeight);
+		if (declaredMaxWidth != null) {
+			tentativeAvailWidth = Math.min(tentativeAvailWidth, declaredMaxWidth);
+		}
+
+		final boolean isHtmlElem = getModelNode() instanceof HTMLHtmlElement;
+		int actualAvailWidth = tentativeAvailWidth;
+
+        final Integer dw = this.getDeclaredWidth(actualAvailWidth);
+		final Integer dh = this.getDeclaredHeight(tentativeAvailHeight);
+		int declaredWidth = dw == null ? -1 : dw;
+		int declaredHeight = dh == null ? -1 : dh;
+
+		final Integer declaredMinWidth = getDeclaredMinWidth(renderState, tentativeAvailWidth);
+		if ((declaredMinWidth != null) && declaredMinWidth > 0) {
+			declaredWidth = dw == null ? declaredMinWidth : Math.max(declaredWidth, declaredMinWidth);
+		}
+
+		final Integer declaredMinHeight = getDeclaredMinHeight(renderState, tentativeAvailHeight);
+		if ((declaredMinHeight != null) && declaredMinHeight > 0) {
+			declaredHeight = dh == null ? declaredMinHeight : Math.max(declaredHeight, declaredMinHeight);
+		}
+
+		this.clearGUIComponents();
 
 		int tentativeWidth;
 		int tentativeHeight;
 
-		if ("border-box".equals(rs.getBoxSizing())) {
-			tentativeWidth = declaredWidth == -1 ? availWidth : declaredWidth;
-			tentativeHeight = declaredHeight == -1 ? availHeight : declaredHeight;
-		} else {
-			tentativeWidth = declaredWidth == -1 ? availWidth : declaredWidth + insetsTotalWidth + paddingTotalWidth;
-			tentativeHeight = declaredHeight == -1 ? availHeight : declaredHeight + insetsTotalHeight + paddingTotalHeight;
-		}
 
-		if (declaredWidth == -1 && !expandWidth && availWidth > insetsTotalWidth + paddingTotalWidth) {
+        if ("border-box".equals(rs.getBoxSizing())) {
+            tentativeWidth = declaredWidth == -1 ? availWidth : declaredWidth;
+            tentativeHeight = declaredHeight == -1 ? availHeight : declaredHeight;
+        } else {
+            tentativeWidth = declaredWidth == -1 ? availWidth : declaredWidth + insetsTotalWidth + paddingTotalWidth;
+            tentativeHeight = declaredHeight == -1 ? availHeight : declaredHeight + insetsTotalHeight + paddingTotalHeight;
+        }
+
+		if ((declaredWidth == -1) && !expandWidth && (availWidth > (insetsTotalWidth + paddingTotalWidth))) {
 			final RenderThreadState state = RenderThreadState.getState();
 			final boolean prevOverrideNoWrap = state.overrideNoWrap;
 			if (!prevOverrideNoWrap) {
 				state.overrideNoWrap = true;
 				try {
-					bodyLayout.layout(paddingTotalWidth, paddingTotalHeight, paddingInsets, -1, null, true);
-					if (bodyLayout.getWidth() + insetsTotalWidth < tentativeWidth) {
+                    bodyLayout.layout(paddingTotalWidth, paddingTotalHeight, paddingInsets, -1, null, true);
+					if ((bodyLayout.getWidth() + insetsTotalWidth) < tentativeWidth) {
 						tentativeWidth = bodyLayout.getWidth() + insetsTotalWidth;
 						tentativeHeight = bodyLayout.getHeight() + insetsTotalHeight;
 					}
@@ -238,24 +261,35 @@ public class RBlock extends BaseElementRenderable {
 			}
 		}
 
+		if (declaredMinWidth != null) {
+			tentativeWidth = Math.max(tentativeWidth, declaredMinWidth);
+		}
+
+		if (declaredMinHeight != null) {
+			tentativeHeight = Math.max(tentativeHeight, declaredMinHeight);
+		}
+
 		FloatingBounds viewportFloatBounds = null;
 		FloatingBounds blockFloatBounds = null;
 		if (blockFloatBoundsSource != null) {
 			blockFloatBounds = blockFloatBoundsSource.getChildBlockFloatingBounds(tentativeWidth);
 			viewportFloatBounds = new ShiftedFloatingBounds(blockFloatBounds, -insets.left, -insets.right, -insets.top);
 		}
-		int desiredViewportWidth = "border-box".equals(rs.getBoxSizing()) ? tentativeWidth : tentativeWidth - insetsTotalWidth;
-		final int desiredViewportHeight = "border-box".equals(rs.getBoxSizing()) ? tentativeHeight : tentativeHeight - insets.top - insets.bottom;
+		if (declaredMaxWidth != null) {
+			tentativeWidth = Math.min(tentativeWidth, declaredMaxWidth + insetsTotalWidth + paddingTotalWidth);
+		}
+		int desiredViewportWidth = tentativeWidth - insetsTotalWidth;
+		final int desiredViewportHeight = tentativeHeight - insets.top - insets.bottom;
 		final int maxY = vauto ? (declaredHeight == -1 ? availHeight : declaredHeight + paddingInsets.top) : -1;
 		try {
 			bodyLayout.layout(desiredViewportWidth, desiredViewportHeight, paddingInsets, maxY, viewportFloatBounds, sizeOnly);
 		} catch (final SizeExceededException see) {
 			vscroll = true;
-			insets = getInsetsMarginBorder(hscroll, vscroll);
+			insets = this.getInsetsMarginBorder(hscroll, vscroll);
 			insetsTotalWidth = insets.left + insets.right;
 			actualAvailWidth = availWidth - paddingTotalWidth - insetsTotalWidth;
-			final Integer newdw = getDeclaredWidth(actualAvailWidth);
-			declaredWidth = newdw == null ? -1 : newdw;
+			final Integer dwNew = this.getDeclaredWidth(actualAvailWidth);
+			declaredWidth = dwNew == null ? -1 : dwNew;
 			desiredViewportWidth = tentativeWidth - insetsTotalWidth;
 			if (blockFloatBounds != null) {
 				viewportFloatBounds = new ShiftedFloatingBounds(blockFloatBounds, -insets.left, -insets.right, -insets.top);
@@ -263,15 +297,52 @@ public class RBlock extends BaseElementRenderable {
 			bodyLayout.layout(desiredViewportWidth, desiredViewportHeight, paddingInsets, -1, viewportFloatBounds, sizeOnly);
 		}
 
+		if (marginInsets != this.marginInsets) {
+			// Can happen because of margin top being absorbed from child
+			insets = this.getInsetsMarginBorder(hscroll, vscroll);
+			insetsTotalHeight = insets.top + insets.bottom;
+		}
+
 		final int bodyWidth = bodyLayout.getWidth();
 		final int bodyHeight = bodyLayout.getHeight();
-		final int prelimBlockWidth = bodyWidth + insetsTotalWidth;
+
+		if ((declaredHeight == -1) && (bodyHeight == 0)) {
+			if ((paddingInsets.top == 0) && (paddingInsets.bottom == 0) && (borderInsets.top == 0) && (borderInsets.bottom == 0)) {
+				final Insets mi = this.marginInsets;
+				if (mi != null) {
+					mi.top = Math.max(mi.top, mi.bottom);
+					mi.bottom = 0;
+					insets = this.getInsetsMarginBorder(hscroll, vscroll);
+					insetsTotalHeight = insets.top + insets.bottom;
+				}
+			}
+		}
+
+		int prelimBlockWidth = bodyWidth + insetsTotalWidth;
 		int prelimBlockHeight = bodyHeight + insetsTotalHeight;
 
-		if ((vauto || vscroll) && ((prelimBlockHeight - insetsTotalHeight) < bodyLayout.getHeight())) {
-			final boolean isHtmlElem = getModelNode() instanceof HTMLHtmlElement;
+        final int adjDeclaredWidth;
+        final int adjDeclaredHeight;
+
+        if ("border-box".equals(rs.getBoxSizing())) {
+            adjDeclaredWidth = declaredWidth;
+            adjDeclaredHeight = declaredHeight;
+        } else {
+            adjDeclaredWidth = declaredWidth == -1 ? -1 : declaredWidth + insets.left + insets.right + paddingInsets.left + paddingInsets.right;
+            adjDeclaredHeight = declaredHeight == -1 ? -1 : declaredHeight + insets.top + insets.bottom + paddingInsets.top + paddingInsets.bottom;
+        }
+
+		// Adjust insets and other dimensions base on overflow-y=auto.
+		if (hauto && (((adjDeclaredWidth != -1) && (prelimBlockWidth > adjDeclaredWidth)) || (prelimBlockWidth > tentativeWidth))) {
+			hscroll = true;
+			insets = this.getInsetsMarginBorder(hscroll, vscroll);
+			insetsTotalHeight = insets.top + insets.bottom;
+			prelimBlockHeight = bodyHeight + insetsTotalHeight;
+		}
+
+		if ((vauto || vscroll) && ((prelimBlockHeight - insetsTotalHeight) < bodyLayout.getVisualHeight())) {
 			if (isHtmlElem) {
-				prelimBlockHeight = bodyLayout.getHeight() + insetsTotalHeight;
+				prelimBlockHeight = bodyLayout.getVisualHeight() + insetsTotalHeight;
 			} else {
 				vscroll = true;
 				insets = this.getInsetsMarginBorder(hscroll, vscroll);
@@ -279,59 +350,56 @@ public class RBlock extends BaseElementRenderable {
 			}
 		}
 
-		final int adjDeclaredWidth;
-		final int adjDeclaredHeight;
-
-		if ("border-box".equals(rs.getBoxSizing())) {
-			adjDeclaredWidth = declaredWidth;
-			adjDeclaredHeight = declaredHeight;
-		} else {
-			adjDeclaredWidth = declaredWidth == -1 ? -1 : declaredWidth + insets.left + insets.right + paddingInsets.left + paddingInsets.right;
-			adjDeclaredHeight = declaredHeight == -1 ? -1 : declaredHeight + insets.top + insets.bottom + paddingInsets.top + paddingInsets.bottom;
-		}
-
-		// Adjust insets and other dimensions base on overflow-y=auto.
-		if (hauto && (adjDeclaredWidth != -1 && prelimBlockWidth > adjDeclaredWidth || prelimBlockWidth > tentativeWidth)) {
-			hscroll = true;
-			insets = getInsetsMarginBorder(hscroll, vscroll);
-			insetsTotalHeight = insets.top + insets.bottom;
-			prelimBlockHeight = bodyHeight + insetsTotalHeight;
-		}
-
 		int resultingWidth;
 		int resultingHeight;
-
 		if (adjDeclaredWidth == -1) {
 			resultingWidth = expandWidth ? Math.max(prelimBlockWidth, tentativeWidth) : prelimBlockWidth;
-			if (hscroll && resultingWidth > tentativeWidth) {
+			if ((tentativeWidth > 0) && hscroll && (resultingWidth > tentativeWidth)) {
 				resultingWidth = Math.max(tentativeWidth, SCROLL_BAR_THICKNESS);
 			}
 		} else {
 			resultingWidth = adjDeclaredWidth;
 		}
+		if (!sizeOnly) {
+			final int alignmentXPercent = rs.getAlignXPercent();
+			if (alignmentXPercent > 0) {
+				final int canvasWidth = Math.max(bodyLayout.getWidth(), resultingWidth - insets.left - insets.right);
+				bodyLayout.alignX(alignmentXPercent, canvasWidth, paddingInsets);
+			}
+		}
 
 		if (adjDeclaredHeight == -1) {
 			resultingHeight = expandHeight ? Math.max(prelimBlockHeight, tentativeHeight) : prelimBlockHeight;
-			if (vscroll && resultingHeight > tentativeHeight) {
+			if (vscroll && (resultingHeight > tentativeHeight)) {
 				resultingHeight = Math.max(tentativeHeight, SCROLL_BAR_THICKNESS);
 			}
 		} else {
 			resultingHeight = adjDeclaredHeight;
 		}
-
 		if (!sizeOnly) {
 			final int alignmentYPercent = rs.getAlignYPercent();
-			final int alignmentXPercent = rs.getAlignXPercent();
-
-			if (alignmentXPercent > 0) {
-				final int canvasWidth = Math.max(bodyLayout.getWidth(), resultingWidth - insets.left - insets.right);
-				bodyLayout.alignX(alignmentXPercent, canvasWidth, paddingInsets);
-			}
-
 			if (alignmentYPercent > 0) {
 				final int canvasHeight = Math.max(bodyLayout.getHeight(), resultingHeight - insets.top - insets.bottom);
 				bodyLayout.alignY(alignmentYPercent, canvasHeight, paddingInsets);
 			}
+		}
+
+		final int scrollWidth = vscroll ? SCROLL_BAR_THICKNESS : 0;
+		if (declaredWidth >= 0) {
+			resultingWidth = Math.min(resultingWidth, declaredWidth + paddingTotalWidth + insetsTotalWidth - scrollWidth);
+		}
+
+		if (declaredMaxWidth != null) {
+			resultingWidth = Math.min(resultingWidth, declaredMaxWidth + paddingTotalWidth + insetsTotalWidth - scrollWidth);
+		}
+
+		final int scrollHeight = hscroll ? SCROLL_BAR_THICKNESS : 0;
+		if (declaredHeight >= 0) {
+			resultingHeight = Math.min(resultingHeight, declaredHeight + paddingTotalHeight + insetsTotalHeight - scrollHeight);
+		}
+
+		if (declaredMaxHeight != null) {
+			resultingHeight = Math.min(resultingHeight, declaredMaxHeight + paddingTotalHeight + insetsTotalHeight - scrollHeight);
 		}
 
 		if (renderState.getPosition() == RenderState.POSITION_STATIC || renderState.getPosition() == RenderState.POSITION_RELATIVE) {
@@ -345,16 +413,7 @@ public class RBlock extends BaseElementRenderable {
 		insets = getInsetsMarginBorder(hscroll, vscroll);
 
 		if (hscroll || vscroll) {
-
-			if (vscroll) {
-				addComponent(scroll.getVScrollBar());
-			}
-			if (hscroll) {
-				addComponent(scroll.getHScrollBar());
-			}
-
-
-			correctViewportOrigin(insets, resultingWidth, resultingHeight);
+			this.correctViewportOrigin(insets, resultingWidth, resultingHeight);
 			this.setWidth(resultingWidth);
 			this.setHeight(resultingHeight);
 			scroll.resetScrollBars(rs);
@@ -362,12 +421,13 @@ public class RBlock extends BaseElementRenderable {
 			bodyLayout.setX(insets.left);
 			bodyLayout.setY(insets.top);
 		}
+
 		return RBlockLayoutInfo.builder().
-                width(resultingWidth).
-                height(resultingHeight).
-                hasHScrollBar(hscroll).
-                hasVScrollBar(vscroll).
-                build();
+				width(resultingWidth).
+				height(resultingHeight).
+				hasHScrollBar(hscroll).
+				hasVScrollBar(vscroll).
+				build();
 	}
 
 	private Dimension applyAutoStyles(final int availWidth) {
@@ -391,14 +451,13 @@ public class RBlock extends BaseElementRenderable {
 		final HtmlInsets minsets = rs.getMarginInsets();
 		if (minsets != null) {
 			if (availWidth > 1) {
-				final int autoMarginX = availWidth;
-				if (minsets.getLeftType() == HtmlInsets.TYPE_AUTO) {
-					this.marginInsets.left = autoMarginX;
-					changes.width += autoMarginX;
+                if (minsets.getLeftType() == HtmlInsets.TYPE_AUTO) {
+					this.marginInsets.left = availWidth;
+					changes.width += availWidth;
 				}
 				if (minsets.getRightType() == HtmlInsets.TYPE_AUTO) {
-					this.marginInsets.right = autoMarginX;
-					changes.width += autoMarginX;
+					this.marginInsets.right = availWidth;
+					changes.width += availWidth;
 				}
 			}
 		}

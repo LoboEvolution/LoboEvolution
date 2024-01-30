@@ -196,11 +196,6 @@ abstract class BaseBoundableRenderable extends RRectangle implements BoundableRe
 		int x = this.getX();
 		int y = this.getY();
 
-		if (this instanceof RBlockViewport) {
-			x -= 0;
-			y -= 0;
-		}
-
 		RCollection parent = this.parent;
 		for (;;) {
 			if (parent == null) {
@@ -406,8 +401,7 @@ abstract class BaseBoundableRenderable extends RRectangle implements BoundableRe
 	/** {@inheritDoc} */
 	@Override
 	public void onMouseScroll() {
-		final ModelNode me = this.modelNode;
-		if (me != null) {
+        if (this.modelNode != null) {
 			HtmlController.getInstance().onMouseScroll(this.modelNode);
 		}
 	}
