@@ -27,8 +27,8 @@
 package org.loboevolution.html.js.storage;
 
 import org.loboevolution.config.HtmlRendererConfig;
-import org.loboevolution.html.node.js.Window;
-import org.loboevolution.html.node.js.webstorage.Storage;
+import org.loboevolution.js.Window;
+import org.loboevolution.js.webstorage.Storage;
 
 import java.util.Map;
 

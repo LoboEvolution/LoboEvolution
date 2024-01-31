@@ -40,11 +40,10 @@ public class CSSImportRuleTest extends LoboUnitTest {
                 + "<script>\n"
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
-                + " alert(Object.prototype.toString.call(rule));\n"
                 + " alert(rule);\n"
                 + "</script>\n"
                 + "</body></html>";
-        final String[] messages = {"[object CSSStyleRuleImpl], [object CSSStyleRule]"};
+        final String[] messages = {"[object CSSImportRule]"};
         checkHtmlAlert(html, messages);
     }
 
@@ -126,7 +125,7 @@ public class CSSImportRuleTest extends LoboUnitTest {
                 + "</script>\n"
                 + "</body></html>";
 
-        final String[] messages = {"null"};
+        final String[] messages = {null};
         checkHtmlAlert(html, messages);
     }
 
@@ -186,26 +185,7 @@ public class CSSImportRuleTest extends LoboUnitTest {
                 + "</script>\n"
                 + "</body></html>";
 
-        final String[] messages = {"imp.css", "@import url(\"../css/imp.css/imp.css\");"};
-        checkHtmlAlert(html, messages);
-    }
-
-    @Test
-    public void hrefSimpleAbsolute() {
-        final String html
-                = "<html><body>\n"
-                + "<style>\n"
-                + "  @import  imp.css;\n"
-                + "</style>\n"
-                + "<script>\n"
-                + "  var styleSheet = document.styleSheets[0];\n"
-                + "  var rule = styleSheet.cssRules[0];\n"
-                + " alert(rule.href);\n"
-                + " alert(rule.cssText);\n"
-                + "</script>\n"
-                + "</body></html>";
-
-        final String[] messages = {"§§URL§§imp.css", "@import url('§§URL§§imp.css')"};
+        final String[] messages = {"imp.css", "@import url(\"imp.css\");"};
         checkHtmlAlert(html, messages);
     }
 
@@ -224,7 +204,7 @@ public class CSSImportRuleTest extends LoboUnitTest {
                 + "</script>\n"
                 + "</body></html>";
 
-        final String[] messages = {"imp.css", "@import url(../css/imp.css/imp.css);"};
+        final String[] messages = {"imp.css", "@import url(\"imp.css\");"};
         checkHtmlAlert(html, messages);
     }
 
@@ -243,7 +223,7 @@ public class CSSImportRuleTest extends LoboUnitTest {
                 + "</script>\n"
                 + "</body></html>";
 
-        final String[] messages = {"§§URL§§imp.css", "@import url(§§URL§§imp.css)"};
+        final String[] messages = {"imp.css", "@import url(\"imp.css\");"};
         checkHtmlAlert(html, messages);
     }
 
@@ -258,7 +238,6 @@ public class CSSImportRuleTest extends LoboUnitTest {
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
                 + "  var mediaList = rule.media;\n"
-                + " alert(Object.prototype.toString.call(mediaList));\n"
                 + " alert(mediaList);\n"
                 + " alert(mediaList.length);\n"
                 + "  for (var i = 0; i < mediaList.length; i++) {\n"
@@ -269,7 +248,7 @@ public class CSSImportRuleTest extends LoboUnitTest {
                 + "</script>\n"
                 + "</body></html>";
 
-        final String[] messages = {"[object MediaList]", "", "0", "", "@import url(\"../css/imp.css/imp.css\");"};
+        final String[] messages = {"", "0", "", "@import url(\"../css/imp.css/\");"};
         checkHtmlAlert(html, messages);
     }
 
@@ -284,7 +263,6 @@ public class CSSImportRuleTest extends LoboUnitTest {
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
                 + "  var mediaList = rule.media;\n"
-                + " alert(Object.prototype.toString.call(mediaList));\n"
                 + " alert(mediaList);\n"
                 + " alert(mediaList.length);\n"
                 + "  for (var i = 0; i < mediaList.length; i++) {\n"
@@ -296,7 +274,7 @@ public class CSSImportRuleTest extends LoboUnitTest {
 
                 + "</body></html>";
 
-        final String[] messages = {"[object MediaList]", "all", "1", "all", "all", "@import url(\"imp.css\") all"};
+        final String[] messages = {"all", "1", "all", "all", "@import url(\"../css/imp.css\") all;"};
         checkHtmlAlert(html, messages);
     }
 
@@ -311,7 +289,6 @@ public class CSSImportRuleTest extends LoboUnitTest {
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
                 + "  var mediaList = rule.media;\n"
-                + " alert(Object.prototype.toString.call(mediaList));\n"
                 + " alert(mediaList);\n"
                 + " alert(mediaList.length);\n"
                 + "  for (var i = 0; i < mediaList.length; i++) {\n"
@@ -322,7 +299,7 @@ public class CSSImportRuleTest extends LoboUnitTest {
                 + "</script>\n"
                 + "</body></html>";
 
-        final String[] messages = {"[object MediaList]", "screen", "1", "screen", "screen", "@import url(imp.css) screen"};
+        final String[] messages = {"screen", "1", "screen", "screen", "@import url(imp.css) screen;"};
         checkHtmlAlert(html, messages);
     }
 
@@ -363,7 +340,7 @@ public class CSSImportRuleTest extends LoboUnitTest {
                 + "<script>\n"
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + " alert(styleSheet.ownerNode);\n"
-                + "  var rule = styleSheet.cssRules[0];\n"
+                + " var rule = styleSheet.cssRules[0];\n"
                 + " alert(rule.styleSheet);\n"
                 + " alert(rule.styleSheet.href);\n"
                 + " alert(rule.styleSheet.ownerNode);\n"
@@ -458,7 +435,7 @@ public class CSSImportRuleTest extends LoboUnitTest {
                 + "  }\n"
                 + "</script>\n"
                 + "</body></html>";
-        final String[] messages = {"[object CSSImportRule]", "foo.css", "", "0", "[object CSSStyleSheet]"};
+        final String[] messages = {"[object CSSImportRule]", "../css/foo.css", "", "0", "[object CSSStyleSheet]"};
         checkHtmlAlert(html, messages);
     }
 

@@ -26,7 +26,6 @@
 package org.loboevolution.pdfview.function;
 
 import org.loboevolution.pdfview.PDFObject;
-import org.loboevolution.pdfview.decrypt.PDFPassword;
 import org.loboevolution.pdfview.function.postscript.PostScriptParser;
 import org.loboevolution.pdfview.function.postscript.operation.OperationSet;
 import org.loboevolution.pdfview.function.postscript.operation.PostScriptOperation;

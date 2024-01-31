@@ -39,9 +39,9 @@ import org.loboevolution.html.dom.nodeimpl.DOMImplementationImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.js.css.CSSStyleSheetImpl;
 import org.loboevolution.html.node.*;
-import org.loboevolution.html.node.css.CSSRuleList;
-import org.loboevolution.html.node.css.CSSStyleDeclaration;
-import org.loboevolution.html.node.css.CSSStyleSheet;
+import org.loboevolution.css.CSSRuleList;
+import org.loboevolution.css.CSSStyleDeclaration;
+import org.loboevolution.css.CSSStyleSheet;
 import org.loboevolution.http.UserAgentContext;
 
 import static org.junit.jupiter.api.Assertions.*;

@@ -27,9 +27,12 @@
 package org.loboevolution.html.js.css;
 
 import org.loboevolution.html.node.AbstractList;
-import org.loboevolution.html.node.css.CSSStyleSheet;
-import org.loboevolution.html.node.css.StyleSheetList;
+import org.loboevolution.css.CSSStyleSheet;
+import org.loboevolution.css.StyleSheetList;
 
+/**
+ * <p>StyleSheetListImpl class.</p>
+ */
 public class StyleSheetListImpl extends AbstractList<CSSStyleSheet> implements StyleSheetList {
 
     /** {@inheritDoc} */

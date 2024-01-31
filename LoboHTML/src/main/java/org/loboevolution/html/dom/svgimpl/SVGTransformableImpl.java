@@ -30,7 +30,7 @@ import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.svg.SVGAnimatedTransformList;
 import org.loboevolution.html.dom.svg.SVGTransformList;
 import org.loboevolution.html.dom.svg.SVGTransformable;
-import org.loboevolution.html.node.css.CSSStyleDeclaration;
+import org.loboevolution.css.CSSStyleDeclaration;
 
 /**
  * <p>SVGTransformableImpl class.</p>

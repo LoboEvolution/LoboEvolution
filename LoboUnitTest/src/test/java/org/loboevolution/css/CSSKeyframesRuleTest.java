@@ -52,7 +52,7 @@ public class CSSKeyframesRuleTest extends LoboUnitTest {
                 + "</script>\n"
                 + "</body></html>";
 
-        final String[] messages = {"[object CSSKeyframesRule]", "7"};
+        final String[] messages = {"[object CSSKeyFramesRule]", "7"};
         checkHtmlAlert(html, messages);
     }
 
@@ -75,7 +75,7 @@ public class CSSKeyframesRuleTest extends LoboUnitTest {
                 + "</script>\n"
                 + "</body></html>";
 
-        final String[] messages = {"[object CSSKeyframesRule]", "identifier"};
+        final String[] messages = {"[object CSSKeyFramesRule]", "identifier"};
         checkHtmlAlert(html, messages);
     }
 

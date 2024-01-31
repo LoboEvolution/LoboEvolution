@@ -28,8 +28,8 @@ package org.loboevolution.html.js.events;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.loboevolution.html.node.events.Event;
-import org.loboevolution.html.node.events.EventTarget;
+import org.loboevolution.events.Event;
+import org.loboevolution.events.EventTarget;
 import org.loboevolution.js.AbstractScriptableDelegate;
 
 import java.util.List;

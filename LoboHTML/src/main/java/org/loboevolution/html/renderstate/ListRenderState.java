@@ -27,8 +27,7 @@ package org.loboevolution.html.renderstate;
 
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.style.HtmlInsets;
-
-import java.awt.*;
+import org.loboevolution.html.style.HtmlValues;
 
 /**
  * <p>ListRenderState class.</p>s
@@ -48,15 +47,11 @@ public class ListRenderState extends AbstractMarginRenderState {
 	@Override
 	protected HtmlInsets getDefaultMarginInsets() {
 		final HtmlInsets insets = new HtmlInsets();
-		final RenderState prevRS = getPreviousRenderState();
-		final FontMetrics fm = prevRS == null ? getFontMetrics() : prevRS.getFontMetrics();
-		insets.setTop(fm.getHeight());
-		insets.setBottom(fm.getHeight());
+		final int topBottom = HtmlValues.getPixelSize("1.12em", null, element.getDocumentNode().getDefaultView(), -1);
+		insets.setTop(topBottom);
+		insets.setBottom(topBottom);
 		insets.setTopType(HtmlInsets.TYPE_PIXELS);
 		insets.setBottomType(HtmlInsets.TYPE_PIXELS);
-		final int dpi = GraphicsEnvironment.isHeadless() ? 72 : Toolkit.getDefaultToolkit().getScreenResolution();
-		insets.setLeft((int) Math.round(dpi * 30.0 / 72.0));
-		insets.setLeftType(HtmlInsets.TYPE_PIXELS);
 		return insets;
 	}
 }

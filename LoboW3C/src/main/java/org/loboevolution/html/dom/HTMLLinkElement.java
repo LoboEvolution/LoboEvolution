@@ -27,7 +27,7 @@
 package org.loboevolution.html.dom;
 
 import org.loboevolution.html.node.DOMTokenList;
-import org.loboevolution.html.node.css.StyleSheet;
+import org.loboevolution.css.StyleSheet;
 
 /**
  * Reference information for external resources and the relationship of those
@@ -267,7 +267,7 @@ public interface HTMLLinkElement extends HTMLElement {
 
 	/**
 	 * getSheet().
-	 * @return a {@link org.loboevolution.html.node.css.StyleSheet} object.
+	 * @return a {@link StyleSheet} object.
 	 */
 	StyleSheet getSheet();
 

@@ -31,7 +31,6 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.htmlunit.cssparser.dom.DOMException;

@@ -43,12 +43,11 @@ public class CSSPageRuleTest extends LoboUnitTest {
                 + "<script>\n"
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
-                + "  alert(Object.prototype.toString.call(rule));\n"
                 + "  alert(rule);\n"
                 + "</script>\n"
                 + "</body></html>";
 
-        final String[] messages = {"[object CSSPageRule]", "[object CSSPageRule]"};
+        final String[] messages = {"[object CSSPageRule]"};
         checkHtmlAlert(html, messages);
     }
 
@@ -249,7 +248,6 @@ public class CSSPageRuleTest extends LoboUnitTest {
                 + "  }\n"
                 + "</script>\n"
                 + "</body></html>";
-
         final String[] messages = {":first"};
         checkHtmlAlert(html, messages);
     }

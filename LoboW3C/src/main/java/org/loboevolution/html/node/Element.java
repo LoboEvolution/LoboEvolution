@@ -27,9 +27,9 @@
 package org.loboevolution.html.node;
 
 import org.loboevolution.html.dom.HTMLCollection;
-import org.loboevolution.html.node.js.geom.DOMRectList;
+import org.loboevolution.js.geom.DOMRectList;
 import org.mozilla.javascript.Function;
-import org.loboevolution.html.node.js.geom.DOMRect;
+import org.loboevolution.js.geom.DOMRect;
 
 /**
  * Element is the most general base class from which all objects in a Document inherit.

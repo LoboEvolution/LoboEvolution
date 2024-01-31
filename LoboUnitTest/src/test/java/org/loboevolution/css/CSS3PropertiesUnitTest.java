@@ -29,7 +29,7 @@ import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 
 /**
- * Tests for {@link org.loboevolution.html.node.css.CSS3Properties}.
+ * Tests for {@link CSS3Properties}.
  */
 public class CSS3PropertiesUnitTest extends LoboUnitTest {
 
@@ -98,7 +98,7 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
                 + "  <div id='style_test_1'/>\n"
                 + "  <div id='myDiv2'/>\n"
                 + "</body></html>";
-        final String[] messages = {"", "", "pointer", "pointer"};
+        final String[] messages = {null, null, "pointer", "pointer"};
         checkHtmlAlert(html, messages);
     }
 
@@ -1342,7 +1342,7 @@ public class CSS3PropertiesUnitTest extends LoboUnitTest {
                 + "<body onload='test()'>\n"
                 + "  <div id='mydiv' class='abc'></div>\n"
                 + "</body></html>";
-        final String[] messages = {"", "", "left", "left", "right", "right"};
+        final String[] messages = {null, null, "left", "left", "right", "right"};
         checkHtmlAlert(html, messages);
     }
 

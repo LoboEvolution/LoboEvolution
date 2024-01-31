@@ -35,7 +35,7 @@ import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.HTMLStyleElement;
 import org.loboevolution.html.dom.svg.SVGSVGElement;
 import org.loboevolution.html.js.css.CSSStyleSheetImpl;
-import org.loboevolution.html.node.css.CSSStyleSheet;
+import org.loboevolution.css.CSSStyleSheet;
 import org.loboevolution.html.parser.XHtmlParser;
 import org.loboevolution.html.style.CSSUtilities;
 import org.loboevolution.html.dom.UserDataHandler;

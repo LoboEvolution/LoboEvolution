@@ -33,7 +33,6 @@ import lombok.Setter;
 import org.loboevolution.html.AlignValues;
 import org.loboevolution.html.dom.nodeimpl.ModelNode;
 import org.loboevolution.html.renderstate.RenderState;
-import org.loboevolution.info.SizeInfo;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;

@@ -34,7 +34,7 @@ import org.loboevolution.html.dom.HTMLOptionElement;
 import org.loboevolution.html.dom.HTMLOptionsCollection;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.node.Node;
-import org.loboevolution.html.node.traversal.NodeFilter;
+import org.loboevolution.traversal.NodeFilter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +53,7 @@ public class HTMLOptionsCollectionImpl extends HTMLCollectionImpl implements HTM
 	 * <p>Constructor for HTMLOptionsCollectionImpl.</p>
 	 *
 	 * @param rootNode a {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} object.
-	 * @param filter a {@link org.loboevolution.html.node.traversal.NodeFilter} object.
+	 * @param filter a {@link NodeFilter} object.
 	 */
 	public HTMLOptionsCollectionImpl(final NodeImpl rootNode, final NodeFilter filter) {
 		super(rootNode, filter);

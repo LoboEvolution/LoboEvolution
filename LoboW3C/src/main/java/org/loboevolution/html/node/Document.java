@@ -28,10 +28,10 @@ package org.loboevolution.html.node;
 
 import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.html.dom.*;
-import org.loboevolution.html.node.events.Event;
-import org.loboevolution.html.node.js.Location;
-import org.loboevolution.html.node.js.Window;
-import org.loboevolution.html.node.traversal.DocumentTraversal;
+import org.loboevolution.events.Event;
+import org.loboevolution.js.Location;
+import org.loboevolution.js.Window;
+import org.loboevolution.traversal.DocumentTraversal;
 import org.loboevolution.html.xpath.XPathExpression;
 import org.loboevolution.html.xpath.XPathNSResolver;
 import org.loboevolution.html.xpath.XPathResult;
@@ -218,7 +218,7 @@ public interface Document extends Node, NonElementParentNode, ParentNode, Docume
 	/**
 	 * <p>getDefaultView.</p>
 	 *
-	 * @return a {@link org.loboevolution.html.node.js.Window} object.
+	 * @return a {@link Window} object.
 	 */
 	Window getDefaultView();
 
@@ -386,14 +386,14 @@ public interface Document extends Node, NonElementParentNode, ParentNode, Docume
 	/**
 	 * Contains information about the current URL.
 	 *
-	 * @return a {@link org.loboevolution.html.node.js.Location} object.
+	 * @return a {@link Location} object.
 	 */
 	Location getLocation();
 
 	/**
 	 * <p>setLocation.</p>
 	 *
-	 * @param location a {@link org.loboevolution.html.node.js.Location} object.
+	 * @param location a {@link Location} object.
 	 */
 	void setLocation(Location location);
 
@@ -587,7 +587,7 @@ public interface Document extends Node, NonElementParentNode, ParentNode, Docume
 	 * <p>createEvent.</p>
 	 *
 	 * @param eventInterface a {@link java.lang.String} object.
-	 * @return a {@link org.loboevolution.html.node.events.Event} object.
+	 * @return a {@link Event} object.
 	 */
 	Event createEvent(String eventInterface);
 

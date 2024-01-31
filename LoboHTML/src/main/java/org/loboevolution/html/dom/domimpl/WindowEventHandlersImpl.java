@@ -27,9 +27,9 @@ package org.loboevolution.html.dom.domimpl;
 
 import org.loboevolution.html.dom.nodeimpl.event.EventTargetImpl;
 import org.loboevolution.html.node.Node;
-import org.loboevolution.html.node.events.Event;
-import org.loboevolution.html.node.events.GlobalEventHandlers;
-import org.loboevolution.html.node.js.WindowEventHandlers;
+import org.loboevolution.events.Event;
+import org.loboevolution.events.GlobalEventHandlers;
+import org.loboevolution.js.WindowEventHandlers;
 import org.mozilla.javascript.Function;
 import org.w3c.dom.events.EventException;
 

@@ -30,7 +30,7 @@ import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.js.xml.XMLDocument;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
-import org.loboevolution.html.node.js.DOMParser;
+import org.loboevolution.js.DOMParser;
 import org.loboevolution.js.AbstractScriptableDelegate;
 import org.mozilla.javascript.Context;
 

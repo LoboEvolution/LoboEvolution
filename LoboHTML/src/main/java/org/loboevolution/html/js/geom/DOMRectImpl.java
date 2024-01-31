@@ -27,9 +27,9 @@
 package org.loboevolution.html.js.geom;
 
 import lombok.Data;
-import org.loboevolution.html.node.js.geom.DOMRect;
-import org.loboevolution.html.node.js.geom.DOMRectInit;
-import org.loboevolution.html.node.js.geom.DOMRectReadOnly;
+import org.loboevolution.js.geom.DOMRect;
+import org.loboevolution.js.geom.DOMRectInit;
+import org.loboevolution.js.geom.DOMRectReadOnly;
 
 /**
  * <p>DOMRectImpl class.</p>

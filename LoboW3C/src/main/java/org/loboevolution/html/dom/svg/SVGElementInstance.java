@@ -25,7 +25,7 @@
  */
 package org.loboevolution.html.dom.svg;
 
-import org.loboevolution.html.node.events.EventTarget;
+import org.loboevolution.events.EventTarget;
 
 /**
  * <p>SVGElementInstance interface.</p>

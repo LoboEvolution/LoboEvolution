@@ -25,8 +25,9 @@
  */
 package org.loboevolution.html.js.events;
 
-import org.loboevolution.html.node.events.UIEvent;
-import org.loboevolution.html.node.js.Window;
+import org.loboevolution.events.UIEvent;
+import org.loboevolution.js.Window;
+import org.loboevolution.views.AbstractView;
 
 /**
  * <p>UIEventImpl class.</p>
@@ -42,7 +43,7 @@ public class UIEventImpl extends EventImpl implements UIEvent {
 	 *
 	 * @param eventTypeArg a {@link java.lang.String} object.
 	 * @param detailArg a {@link java.lang.Integer} object.
-	 * @param viewArg a {@link org.loboevolution.html.node.views.AbstractView} object.
+	 * @param viewArg a {@link AbstractView} object.
 	 */
 	public UIEventImpl(final String eventTypeArg, final double detailArg, final Window viewArg) {
 		super(eventTypeArg, false, false);

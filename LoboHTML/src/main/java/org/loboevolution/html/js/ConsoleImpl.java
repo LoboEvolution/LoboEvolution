@@ -28,7 +28,7 @@ package org.loboevolution.html.js;
 
 import org.loboevolution.config.HtmlRendererConfig;
 import org.loboevolution.html.js.storage.SessionStorage;
-import org.loboevolution.html.node.js.console.Console;
+import org.loboevolution.js.console.Console;
 
 import java.util.Date;
 

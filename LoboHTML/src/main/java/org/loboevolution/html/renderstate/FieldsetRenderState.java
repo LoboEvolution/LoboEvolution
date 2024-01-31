@@ -49,11 +49,11 @@ public class FieldsetRenderState extends AbstractMarginRenderState {
     @Override
     protected HtmlInsets getDefaultMarginInsets() {
         final HtmlInsets insets = new HtmlInsets();
-        final int leftRight = HtmlValues.getPixelSize("2px", null, element.getDocumentNode().getDefaultView(), -1);
-        insets.setLeft(leftRight);
-        insets.setRight(leftRight);
-        insets.setLeftType(HtmlInsets.TYPE_PIXELS);
-        insets.setRightType(HtmlInsets.TYPE_PIXELS);
+        final int topBottom = HtmlValues.getPixelSize("1.12em", null, element.getDocumentNode().getDefaultView(), -1);
+        insets.setTop(topBottom);
+        insets.setBottom(topBottom);
+        insets.setTopType(HtmlInsets.TYPE_PIXELS);
+        insets.setBottomType(HtmlInsets.TYPE_PIXELS);
         return insets;
     }
 

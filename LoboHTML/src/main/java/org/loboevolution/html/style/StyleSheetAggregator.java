@@ -50,8 +50,8 @@ import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.js.css.StyleSheetListImpl;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.Text;
-import org.loboevolution.html.node.css.CSSStyleSheet;
-import org.loboevolution.html.node.js.Window;
+import org.loboevolution.css.CSSStyleSheet;
+import org.loboevolution.js.Window;
 
 import java.io.IOException;
 import java.util.*;
@@ -273,7 +273,7 @@ public class StyleSheetAggregator {
 					value = UNESCAPE_SELECTOR.matcher(value).replaceAll("$1");
 				}
 				final String attrValue = element.getAttribute(condition.getLocalName());
-				return Strings.isNotBlank(attrValue) && attrValue.equals(value);
+				return attrValue != null && attrValue.equals(value);
 			}
 			return element.hasAttribute(condition.getLocalName());
 
@@ -321,14 +321,14 @@ public class StyleSheetAggregator {
 			final String v = beginHyphenAttributeCondition.getValue();
 			final String a = element.getAttribute(beginHyphenAttributeCondition.getLocalName());
 			if (beginHyphenAttributeCondition.isCaseInSensitive()) {
-				return  Strings.isNotBlank(v)
-						&& Strings.isNotBlank(a)
+				return  v != null
+						&& a != null
 						&& selectsHyphenSeparated(
 						v.toLowerCase(Locale.ROOT),
 						a.toLowerCase(Locale.ROOT));
 			}
-			return Strings.isNotBlank(v)
-					&& Strings.isNotBlank(a)
+			return v != null
+					&& a != null
 					&& selectsHyphenSeparated(v, a);
 
 		case ONE_OF_ATTRIBUTE_CONDITION:
@@ -336,14 +336,14 @@ public class StyleSheetAggregator {
 			final String v2 = oneOfAttributeCondition.getValue();
 			final String a2 = element.getAttribute(oneOfAttributeCondition.getLocalName());
 			if (oneOfAttributeCondition.isCaseInSensitive()) {
-				return Strings.isNotBlank(v2)
-						&& Strings.isNotBlank(a2)
+				return  v2 != null
+						&& a2 != null
 						&& selectsOneOf(
 						v2.toLowerCase(Locale.ROOT),
 						a2.toLowerCase(Locale.ROOT));
 			}
-			return Strings.isNotBlank(v2)
-					&& Strings.isNotBlank(a2)
+			return  v2 != null
+					&& a2 != null
 					&& selectsOneOf(v2, a2);
 
 		case LANG_CONDITION:
@@ -538,6 +538,12 @@ public class StyleSheetAggregator {
 			case "empty":
 				return isEmpty(element);
 
+			case "valid":
+				return isValid(element);
+
+			case "invalid":
+				return inValid(element);
+
 			case "target":
 				final HTMLElementImpl impl = (HTMLElementImpl) element;
 				final HTMLDocumentImpl document = (HTMLDocumentImpl) impl.getDocumentNode();
@@ -656,7 +662,7 @@ public class StyleSheetAggregator {
 	private static boolean selectsHyphenSeparated(final String condition, final String attribute) {
 		final int conditionLength = condition.length();
 		if (conditionLength < 1) {
-			if (Strings.isNotBlank(attribute)) {
+			if (attribute != null) {
 				final int attribLength = attribute.length();
 				return attribLength == 0 || '-' == attribute.charAt(0);
 			}
@@ -769,7 +775,7 @@ public class StyleSheetAggregator {
 	/**
 	 * <p>isActive.</p>
 	 *
-	 * @param window a {@link org.loboevolution.html.node.js.Window} object.
+	 * @param window a {@link Window} object.
 	 * @param mediaList a {@link MediaListImpl} object.
 	 * @return a boolean.
 	 */
@@ -912,7 +918,7 @@ public class StyleSheetAggregator {
 			}
 		}
 
-		return mediaQuery.getProperties().size() != 0 || !"print".equalsIgnoreCase(mediaType);
+		return !mediaQuery.getProperties().isEmpty() || !"print".equalsIgnoreCase(mediaType);
 	}
 	
 	private boolean isEmpty(final HTMLElement element) {
@@ -923,6 +929,23 @@ public class StyleSheetAggregator {
 		}
 		return true;
 	}
+
+	private boolean isValid(final HTMLElement element) {
+		if (element instanceof HTMLInputElement) {
+			return !element.hasAttribute("required") ||
+					(Strings.isNotBlank(element.getAttribute("value")) && element.hasAttribute("required"));
+		}
+		return false;
+	}
+
+	private boolean inValid(final HTMLElement element) {
+		if (element instanceof HTMLInputElement || element instanceof HTMLFormElement) {
+			return (!element.hasAttribute("required") && element.getAttribute("value") == null) ||
+					(Strings.isBlank(element.getAttribute("value")) && element.hasAttribute("required"));
+		}
+		return false;
+	}
+
 
 	private boolean getNth(final HTMLElement element, final String nth, final int index) {
 		final HTMLDocumentImpl doc =  (HTMLDocumentImpl)element.getOwnerDocument();
@@ -1006,9 +1029,6 @@ public class StyleSheetAggregator {
 				} else {
 					index(index.addMedia(mediaList), mediaRule.getCssRules());
 				}
-			} else if (rule instanceof CSSPageRuleImpl) {
-				final CSSPageRuleImpl pageRule = (CSSPageRuleImpl) rule;
-				index(index, pageRule.getParentStyleSheet().getCssRules());
 			} else if (rule instanceof CSSImportRuleImpl) {
 				try {
 					final CSSImportRuleImpl importRule = (CSSImportRuleImpl) rule;

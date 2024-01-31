@@ -61,6 +61,7 @@ import org.loboevolution.apache.xml.dtm.Axis;
 import org.loboevolution.apache.xml.dtm.DTMFilter;
 import org.loboevolution.apache.xml.dtm.DTMIterator;
 import org.loboevolution.apache.xml.utils.PrefixResolver;
+import org.loboevolution.traversal.NodeFilter;
 
 /**
  * An instance of this class compiles an XPath string expression into a Expression object. This
@@ -575,11 +576,11 @@ public class Compiler extends OpMap {
   }
 
   /**
-   * Get a {@link org.loboevolution.html.node.traversal.NodeFilter} bit set that tells what to show for a given node
+   * Get a {@link NodeFilter} bit set that tells what to show for a given node
    * test.
    *
    * @param opPos the op map position for the location step.
-   * @return {@link org.loboevolution.html.node.traversal.NodeFilter} bit set that tells what to show for a given
+   * @return {@link NodeFilter} bit set that tells what to show for a given
    *     node test.
    */
   public int getWhatToShow(final int opPos) {

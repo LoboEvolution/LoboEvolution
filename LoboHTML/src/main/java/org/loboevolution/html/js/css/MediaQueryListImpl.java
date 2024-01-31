@@ -31,7 +31,7 @@ import lombok.Getter;
 import org.htmlunit.cssparser.dom.MediaListImpl;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.js.WindowImpl;
-import org.loboevolution.html.node.css.MediaQueryList;
+import org.loboevolution.css.MediaQueryList;
 import org.loboevolution.html.style.CSSUtilities;
 import org.loboevolution.html.style.StyleSheetAggregator;
 

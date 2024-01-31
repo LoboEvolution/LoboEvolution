@@ -27,8 +27,8 @@
 package org.loboevolution.html.js.geom;
 
 import org.loboevolution.html.node.AbstractList;
-import org.loboevolution.html.node.js.geom.DOMRect;
-import org.loboevolution.html.node.js.geom.DOMRectList;
+import org.loboevolution.js.geom.DOMRect;
+import org.loboevolution.js.geom.DOMRectList;
 
 public class DOMRectListImpl extends AbstractList<DOMRect>  implements DOMRectList {
     /**

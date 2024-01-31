@@ -26,7 +26,7 @@
 
 package org.loboevolution.html.js;
 
-import org.loboevolution.html.node.js.Screen;
+import org.loboevolution.js.Screen;
 import org.loboevolution.js.AbstractScriptableDelegate;
 
 import java.awt.*;

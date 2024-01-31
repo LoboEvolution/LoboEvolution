@@ -32,8 +32,8 @@ import lombok.Setter;
 import org.loboevolution.html.node.AbstractList;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
-import org.loboevolution.html.node.traversal.NodeFilter;
-import org.loboevolution.html.node.traversal.NodeIterator;
+import org.loboevolution.traversal.NodeFilter;
+import org.loboevolution.traversal.NodeIterator;
 
 /**
  * <p>TreeWalkerImpl class.</p>

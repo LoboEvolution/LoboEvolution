@@ -54,7 +54,7 @@ public class Nodegetbaseuri04Test extends LoboUnitTest {
         doc = sampleXmlFile("barfoo.xml");
         docElem = doc.getDocumentElement();
         baseURI = docElem.getBaseURI();
-        assertURIEquals(new URIEquals( null, null, null, null, "barfoo", null, null, Boolean.TRUE, baseURI));
+        assertURIEquals(new URIEquals(null, null, null, null, "barfoo", null, null, Boolean.TRUE, baseURI));
         documentURI = doc.getDocumentURI();
         assertEquals(documentURI, baseURI, "Nodegetbaseuri04Assert2");
     }

@@ -25,7 +25,7 @@
  */
 package org.loboevolution.html.dom.filter;
 
-import org.loboevolution.html.node.traversal.NodeFilter;
+import org.loboevolution.traversal.NodeFilter;
 import org.loboevolution.html.dom.domimpl.HTMLFormElementImpl;
 import org.loboevolution.html.node.Node;
 

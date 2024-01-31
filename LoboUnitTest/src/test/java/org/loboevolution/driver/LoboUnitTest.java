@@ -34,14 +34,18 @@ import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.nodeimpl.DocumentImpl;
 import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.css.ComputedCSSStyleDeclaration;
-import org.loboevolution.html.node.js.Window;
+import org.loboevolution.css.ComputedCSSStyleDeclaration;
+import org.loboevolution.js.Window;
+import org.loboevolution.net.HttpNetwork;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * <p>LoboUnitTest class.</p>
@@ -73,10 +77,18 @@ public class LoboUnitTest extends LoboWebDriver {
      * @return a {@link org.loboevolution.html.node.Document} object.
      */
     public static Document sampleHtmlFile() {
-        final String url = LoboWebDriver.class.getResource("/org/lobo/html/htmlsample.html").toString();
-        final DocumentImpl doc = loadHtml(LoboUnitTest.class.getResourceAsStream("/org/lobo/html/htmlsample.html"), url);
-        doc.setTest(true);
-        return doc;
+        URL url = LoboWebDriver.class.getResource("/org/lobo/html/htmlsample.html");
+        if (url != null) {
+            final DocumentImpl doc;
+            try (InputStream stream = HttpNetwork.getInputStream(url.openConnection())) {
+                doc = loadHtml(stream, url.toString());
+                doc.setTest(true);
+                return doc;
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return null;
     }
 
     /**
@@ -85,11 +97,19 @@ public class LoboUnitTest extends LoboWebDriver {
      * @return a {@link org.loboevolution.html.node.Document} object.
      */
     public static Document sampleXmlFile(final String fileName) {
-        final String url = Objects.requireNonNull(LoboWebDriver.class.getResource("/org/lobo/xml/" + fileName)).toString();
-        final DocumentImpl doc = LoboWebDriver.loadHtml(LoboUnitTest.class.getResourceAsStream("/org/lobo/xml/" + fileName), url);
-        doc.setTest(true);
-        doc.setXml(true);
-        return doc;
+        URL url = LoboWebDriver.class.getResource("/org/lobo/xml/" + fileName);
+        if (url != null) {
+            final DocumentImpl doc;
+            try (InputStream stream = HttpNetwork.getInputStream(url.openConnection())) {
+                doc = loadHtml(stream, url.toString());
+                doc.setTest(true);
+                doc.setXml(true);
+                return doc;
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return null;
     }
 
     /**
@@ -208,7 +228,7 @@ public class LoboUnitTest extends LoboWebDriver {
 
     @Getter
     @AllArgsConstructor
-    public class URIEquals {
+    public static class URIEquals {
         /**
          * <p>scheme.</p>
          */

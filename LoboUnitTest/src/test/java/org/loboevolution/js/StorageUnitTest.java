@@ -28,9 +28,10 @@ package org.loboevolution.js;
 
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
+import org.loboevolution.js.webstorage.Storage;
 
 /**
- * Tests for {@link org.loboevolution.html.node.js.webstorage.Storage}.
+ * Tests for {@link Storage}.
  */
 
 public class StorageUnitTest extends LoboUnitTest {

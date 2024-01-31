@@ -27,7 +27,7 @@
 package org.loboevolution.html.dom;
 
 
-import org.loboevolution.html.node.css.CSSStyleSheet;
+import org.loboevolution.css.CSSStyleSheet;
 
 /**
  * A &lt;style&gt; element. It inherits properties and methods from its parent, HTMLElement, and from LinkStyle.
@@ -85,7 +85,7 @@ public interface HTMLStyleElement extends HTMLElement {
 	/**
 	 * <p>isDisabled.</p>
 	 *
-	 * @return a {@link org.loboevolution.html.node.css.CSSStyleSheet} object.
+	 * @return a {@link CSSStyleSheet} object.
 	 */
 	CSSStyleSheet getStyleSheet();
 

@@ -30,7 +30,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.Nodes;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.node.*;
-import org.loboevolution.html.node.js.xml.XMLSerializer;
+import org.loboevolution.js.xml.XMLSerializer;
 import org.loboevolution.js.AbstractScriptableDelegate;
 
 import java.util.concurrent.atomic.AtomicBoolean;

@@ -31,8 +31,8 @@ import org.loboevolution.apache.xml.dtm.DTMDOMException;
 import org.loboevolution.apache.xml.dtm.DTMIterator;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.html.node.Node;
-import org.loboevolution.html.node.traversal.NodeFilter;
-import org.loboevolution.html.node.traversal.NodeIterator;
+import org.loboevolution.traversal.NodeFilter;
+import org.loboevolution.traversal.NodeIterator;
 
 /**
  * <code>DTMNodeIterator</code> gives us an implementation of the DTMNodeIterator which returns DOM

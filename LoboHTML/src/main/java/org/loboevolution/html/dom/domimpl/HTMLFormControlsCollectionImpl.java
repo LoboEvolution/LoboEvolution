@@ -28,7 +28,7 @@ package org.loboevolution.html.dom.domimpl;
 
 import org.loboevolution.html.dom.HTMLFormControlsCollection;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
-import org.loboevolution.html.node.traversal.NodeFilter;
+import org.loboevolution.traversal.NodeFilter;
 
 /**
  * <p>HTMLFormControlsCollectionImpl class.</p>

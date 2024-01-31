@@ -32,8 +32,8 @@ import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.filter.ElementNameFilter;
 import org.loboevolution.html.dom.nodeimpl.traversal.NodeIteratorImpl;
 import org.loboevolution.html.node.*;
-import org.loboevolution.html.node.traversal.NodeFilter;
-import org.loboevolution.html.node.traversal.TreeWalker;
+import org.loboevolution.traversal.NodeFilter;
+import org.loboevolution.traversal.TreeWalker;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.util.Iterator;

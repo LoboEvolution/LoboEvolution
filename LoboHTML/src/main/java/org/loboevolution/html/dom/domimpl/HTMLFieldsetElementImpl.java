@@ -134,14 +134,11 @@ public class HTMLFieldsetElementImpl extends HTMLElementImpl implements HTMLFiel
     /** {@inheritDoc} */
     @Override
     public Integer getClientWidth() {
-        int clientWidth = super.getClientWidth();
-        clientWidth = clientWidth == 0 ? getDocumentNode().getDocumentElement().getClientWidth() : clientWidth;
-
+        int clientWidth = getDocumentNode().getDocumentElement().getClientWidth();
         if (getRenderState() != null && getRenderState().getPaddingInsets() != null) {
             clientWidth -= getRenderState().getPaddingInsets().getRight();
             clientWidth -= getRenderState().getPaddingInsets().getLeft();
         }
-
         return clientWidth;
     }
 

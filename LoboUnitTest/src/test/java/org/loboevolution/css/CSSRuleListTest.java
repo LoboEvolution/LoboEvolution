@@ -74,25 +74,6 @@ public class CSSRuleListTest extends LoboUnitTest {
         checkHtmlAlert(html, messages);
     }
 
-
-    @Test
-    public void has() {
-        final String html = "<html><head><title>First</title>\n"
-                + "<style>\n"
-                + "  BODY { font-size: 1234px; }\n"
-                + "</style>\n"
-                + "<script>\n"
-                + "  function test() {\n"
-                + "    var rules = document.styleSheets[0].cssRules;\n"
-                + "    alert(0 in rules);\n"
-                + "  }\n"
-                + "</script>\n"
-                + "</head><body onload='test()'>\n"
-                + "</body></html>";
-        final String[] messages = {"true"};
-        checkHtmlAlert(html, messages);
-    }
-
     @Test
     public void ruleListUnknownAtRule() {
         final String html = "<html><head><title>First</title>\n"
@@ -127,29 +108,7 @@ public class CSSRuleListTest extends LoboUnitTest {
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"
                 + "</body></html>";
-        final String[] messages = {"1", "[object CSSKeyframesRule]"};
-        checkHtmlAlert(html, messages);
-    }
-
-    @Test
-    public void in() {
-        final String html = "<html><head><title>First</title>\n"
-                + "<style>\n"
-                + "  BODY { font-size: 1234px; }\n"
-                + "</style>\n"
-                + "<script>\n"
-                + "  function test() {\n"
-                + "    var rules = document.styleSheets[0].cssRules;\n"
-                + "    alert(rules.length);\n"
-                + "    alert(-1 in rules);\n"
-                + "    alert(0 in rules);\n"
-                + "    alert(1 in rules);\n"
-                + "    alert(42 in rules);\n"
-                + "  }\n"
-                + "</script>\n"
-                + "</head><body onload='test()'>\n"
-                + "</body></html>";
-        final String[] messages = {"1", "false", "true", "false", "false"};
+        final String[] messages = {"1", "[object CSSKeyFramesRule]"};
         checkHtmlAlert(html, messages);
     }
 

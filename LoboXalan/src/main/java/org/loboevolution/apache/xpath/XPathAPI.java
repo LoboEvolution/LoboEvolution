@@ -27,7 +27,7 @@ package org.loboevolution.apache.xpath;
 
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.NodeList;
-import org.loboevolution.html.node.traversal.NodeIterator;
+import org.loboevolution.traversal.NodeIterator;
 import org.loboevolution.javax.xml.transform.TransformerException;
 import org.loboevolution.apache.xpath.objects.XObject;
 import org.loboevolution.apache.xml.utils.PrefixResolver;

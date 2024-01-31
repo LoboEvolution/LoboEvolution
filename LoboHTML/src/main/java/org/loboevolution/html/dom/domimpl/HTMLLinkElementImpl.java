@@ -34,7 +34,7 @@ import org.loboevolution.gui.HtmlPanel;
 import org.loboevolution.html.dom.nodeimpl.DOMTokenListImpl;
 import org.loboevolution.html.js.css.CSSStyleSheetImpl;
 import org.loboevolution.html.node.DOMTokenList;
-import org.loboevolution.html.node.css.StyleSheet;
+import org.loboevolution.css.StyleSheet;
 import org.loboevolution.html.parser.XHtmlParser;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.style.CSSUtilities;

@@ -30,7 +30,7 @@ import org.loboevolution.common.Strings;
 import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.dom.HTMLHtmlElement;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
-import org.loboevolution.html.node.css.CSSStyleDeclaration;
+import org.loboevolution.css.CSSStyleDeclaration;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.info.BorderInfo;
 import org.loboevolution.laf.ColorFactory;
@@ -78,7 +78,7 @@ public class BorderInsets {
 	/**
 	 * <p>getBorderInfo.</p>
 	 *
-	 * @param properties a {@link org.loboevolution.html.node.css.CSSStyleDeclaration} object.
+	 * @param properties a {@link CSSStyleDeclaration} object.
 	 * @param element a {@link  org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
 	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
 	 * @return a {@link org.loboevolution.info.BorderInfo} object.
@@ -115,7 +115,7 @@ public class BorderInsets {
 	 * <p>populateBorderInsets.</p>
 	 *
 	 * @param binfo a {@link org.loboevolution.info.BorderInfo} object.
-	 * @param cssProperties a {@link org.loboevolution.html.node.css.CSSStyleDeclaration} object.
+	 * @param cssProperties a {@link CSSStyleDeclaration} object.
 	 * @param element a {@link  org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
 	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
 	 */

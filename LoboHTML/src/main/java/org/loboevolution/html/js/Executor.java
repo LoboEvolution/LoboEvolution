@@ -28,7 +28,7 @@ package org.loboevolution.html.js;
 import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.events.Event;
+import org.loboevolution.events.Event;
 import org.loboevolution.js.JavaScript;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
@@ -63,7 +63,7 @@ public class Executor {
 	 *
 	 * @param element a {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} object.
 	 * @param f a {@link org.mozilla.javascript.Function} object.
-	 * @param event a {@link org.loboevolution.html.node.events.Event} object.
+	 * @param event a {@link Event} object.
 	 * @param obj an array of {@link java.lang.Object} objects.
 	 * @return a boolean.
 	 */
@@ -77,7 +77,7 @@ public class Executor {
 	 * @param element a {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} object.
 	 * @param thisObject a {@link java.lang.Object} object.
 	 * @param f a {@link org.mozilla.javascript.Function} object.
-	 * @param event a {@link org.loboevolution.html.node.events.Event} object.
+	 * @param event a {@link Event} object.
 	 * @param obj an array of {@link java.lang.Object} objects.
 	 * @return a boolean.
 	 */

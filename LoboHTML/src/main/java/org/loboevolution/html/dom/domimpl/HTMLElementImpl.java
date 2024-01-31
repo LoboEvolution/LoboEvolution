@@ -36,6 +36,7 @@ import org.htmlunit.cssparser.dom.Property;
 import org.htmlunit.cssparser.parser.CSSOMParser;
 import org.htmlunit.cssparser.parser.javacc.CSS3Parser;
 import org.loboevolution.common.Strings;
+import org.loboevolution.css.ComputedCSSStyleDeclaration;
 import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.input.FormInput;
@@ -45,9 +46,8 @@ import org.loboevolution.html.js.css.CSSStyleDeclarationImpl;
 import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
-import org.loboevolution.html.node.css.CSSStyleDeclaration;
-import org.loboevolution.html.node.css.ComputedCSSStyleDeclaration;
-import org.loboevolution.html.node.events.GlobalEventHandlers;
+import org.loboevolution.css.CSSStyleDeclaration;
+import org.loboevolution.events.GlobalEventHandlers;
 import org.loboevolution.html.renderer.HtmlController;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.renderstate.StyleSheetRenderState;
@@ -196,14 +196,9 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, GlobalE
 	 * <p>getComputedStyle.</p>
 	 *
 	 * @param pseudoElem a {@link java.lang.String} object.
-	 * @return a {@link org.loboevolution.html.node.css.ComputedCSSStyleDeclaration} object.
+	 * @return a {@link ComputedCSSStyleDeclaration} object.
 	 */
 	public ComputedCSSStyleDeclaration getComputedStyle(final String pseudoElem) {
-
-		final ComputedCSSStyleDeclaration computedStyles = this.computedStyles;
-		if (computedStyles != null) {
-			return computedStyles;
-		}
 
 		String pseudoElement = pseudoElem;
 
@@ -222,7 +217,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, GlobalE
 	 * Gets the style object associated with the element.
 	 * It may return null only if the type of element does not handle stylesheets.
 	 *
-	 * @return a {@link org.loboevolution.html.node.css.CSSStyleDeclaration} object.
+	 * @return a {@link CSSStyleDeclaration} object.
 	 */
 	public CSSStyleDeclaration getCurrentStyle() {
 		CSSStyleDeclarationImpl style = (CSSStyleDeclarationImpl) this.currentStyleDeclarationState;
@@ -322,7 +317,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, GlobalE
 	}
 
 	public CSSStyleDeclaration getStyle() {
-		CSSStyleDeclarationImpl styleDeclaration = new CSSStyleDeclarationImpl(this);
+		CSSStyleDeclarationImpl styleDeclaration = new CSSStyleDeclarationImpl(this, false);
 		if (localStyleDeclarationState == null || localStyleDeclarationState.getLength() == 0) {
 			final Attr style = getAttributeNode("style");
 			if (style != null && Strings.isNotBlank(style.getValue())) {
@@ -1709,11 +1704,11 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, GlobalE
 	 * Adds style sheet declarations applicable to this element. A properties object
 	 * is created if necessary when the one passed is null.
 	 * @param mouseOver a {@link java.lang.Boolean } object.
-	 * @return a {@link org.loboevolution.html.node.css.CSSStyleDeclaration} object.
+	 * @return a {@link CSSStyleDeclaration} object.
 	 */
 	private CSSStyleDeclaration addStyleSheetDeclarations(final boolean mouseOver, final String elementName) {
 
-		final CSSStyleDeclarationImpl localStyleDeclarationState = new CSSStyleDeclarationImpl(this);
+		final CSSStyleDeclarationImpl localStyleDeclarationState = new CSSStyleDeclarationImpl(this, true);
 		final String classNames = getClassName();
 		final String[] classNameArray = Strings.isNotBlank(classNames) ? Strings.split(classNames) : null;
 
@@ -1725,16 +1720,21 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, GlobalE
 	}
 
 	private CSSStyleDeclarationImpl propertyValueProcessed(final CSSStyleDeclarationImpl localStyleDeclarationState) {
-		final List<PropertyCssInfo> properties3 = new ArrayList<>();
-		final List<Property> properties = localStyleDeclarationState.getProperties();
-		properties.forEach(prop -> {
-			final CSSValueImpl propertyValue = prop.getValue();
-			properties3.add(new PropertyCssInfo(prop.getName(), propertyValue != null ? propertyValue.getCssText() : null, prop.isImportant()));
-		});
+		try {
+			final List<PropertyCssInfo> properties3 = new ArrayList<>();
+			final List<Property> properties = localStyleDeclarationState.getProperties();
+			properties.forEach(prop -> {
+				final CSSValueImpl propertyValue = prop.getValue();
+				properties3.add(new PropertyCssInfo(prop.getName(), propertyValue != null ? propertyValue.getCssText() : null, prop.isImportant()));
+			});
 
-		properties3.forEach(prop -> localStyleDeclarationState.setPropertyValueProcessed(prop.getName(), prop.getValue(), prop.isImportant()));
+			properties3.forEach(prop -> localStyleDeclarationState.setPropertyValueProcessed(prop.getName(), prop.getValue(), prop.isImportant()));
 
-		return localStyleDeclarationState;
+			return localStyleDeclarationState;
+		} catch (Exception ex) {
+			log.error(ex.getMessage(), ex);
+		}
+		return null;
 	}
 
 	/** {@inheritDoc} */

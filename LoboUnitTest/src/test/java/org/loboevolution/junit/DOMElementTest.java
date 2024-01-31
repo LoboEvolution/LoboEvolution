@@ -38,7 +38,7 @@ import org.loboevolution.html.dom.nodeimpl.DOMImplementationImpl;
 import org.loboevolution.html.dom.nodeimpl.ElementImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.node.*;
-import org.loboevolution.html.node.css.CSSStyleDeclaration;
+import org.loboevolution.css.CSSStyleDeclaration;
 import org.loboevolution.http.UserAgentContext;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -119,7 +119,7 @@ public class DOMElementTest extends LoboUnitTest {
         Attr idattr = document.createAttributeNS(Document.HTML_NAMESPACE_URI, "id");
         idattr.setValue("bodyId");
         body.setAttributeNode(idattr);
-        assertNull(idattr.getParentNode());
+        assertNotNull(idattr.getParentNode());
         assertEquals("bodyId", body.getAttribute("id"));
         assertEquals("bodyId", body.getAttributeNode("id").getValue());
         assertEquals("bodyId", body.getAttributeNodeNS(Document.HTML_NAMESPACE_URI, "id").getValue());

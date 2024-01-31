@@ -118,7 +118,7 @@ public class HeadingRenderState extends AbstractMarginRenderState {
 	public Font getFont() {
 		final HtmlRendererConfig config = element.getHtmlRendererConfig();
 		final FontKey key = FontValues.getDefaultFontKey(config);
-		key.setFontWeight(CSSValues.BOLD.getValue());
+		key.setFontWeight(CSSValues.BOLDER.getValue());
 		key.setFontSize(FontValues.getFontSize(getHeadingFontSize(), element.getDocumentNode().getDefaultView(), prevRenderState));
 		return FontFactory.getInstance().getFont(FontValues.getFontKey(key, element, this.getCssProperties(), prevRenderState));
 	}
@@ -129,17 +129,17 @@ public class HeadingRenderState extends AbstractMarginRenderState {
 			final int lastCharValue = tagName.charAt(1) - '0';
 			switch (lastCharValue) {
 				case 1:
-					return "2rem";
+					return "2em";
 				case 2:
-					return "1.5rem";
+					return "1.5em";
 				case 3:
-					return "1.2rem";
+					return "1.17em";
 				case 4:
-					return "1rem";
+					return "1.12em";
 				case 5:
-					return "0.83rem";
+					return "0.83em";
 				case 6:
-					return "0.67rem";
+					return "0.75em";
 				default:
 					return "";
 			}

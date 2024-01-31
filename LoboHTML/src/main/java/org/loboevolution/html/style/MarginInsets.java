@@ -26,9 +26,9 @@
 
 package org.loboevolution.html.style;
 
+import org.loboevolution.css.CSSStyleDeclaration;
 import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
-import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.renderstate.RenderState;
 
 /**
@@ -39,7 +39,7 @@ public class MarginInsets {
 	/**
 	 * <p>getMarginInsets.</p>
 	 *
-	 * @param cssProperties a {@link org.loboevolution.html.node.css.CSSStyleDeclaration} object.
+	 * @param cssProperties a {@link CSSStyleDeclaration} object.
 	 * @param element a {@link  org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
 	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
 	 * @return a {@link org.loboevolution.html.style.HtmlInsets} object.
@@ -59,7 +59,7 @@ public class MarginInsets {
 	/**
 	 * <p>getPaddingInsets.</p>
 	 *
-	 * @param cssProperties a {@link org.loboevolution.html.node.css.CSSStyleDeclaration} object.
+	 * @param cssProperties a {@link CSSStyleDeclaration} object.
 	 * @param element a {@link  org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
 	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
 	 * @return a {@link org.loboevolution.html.style.HtmlInsets} object.

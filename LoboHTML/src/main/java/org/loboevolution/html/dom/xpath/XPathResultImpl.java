@@ -35,11 +35,12 @@ import org.loboevolution.apache.xpath.XPath;
 import org.loboevolution.apache.xpath.objects.XObject;
 import org.loboevolution.apache.xpath.res.XPATHErrorResources;
 import org.loboevolution.apache.xpath.res.XPATHMessages;
+import org.loboevolution.events.EventListener;
 import org.loboevolution.html.node.Node;
-import org.loboevolution.html.node.traversal.NodeIterator;
+import org.loboevolution.traversal.NodeIterator;
 import org.loboevolution.html.node.NodeList;
-import org.loboevolution.html.node.events.Event;
-import org.loboevolution.html.node.events.EventTarget;
+import org.loboevolution.events.Event;
+import org.loboevolution.events.EventTarget;
 import org.loboevolution.html.xpath.XPathException;
 import org.loboevolution.html.xpath.XPathResult;
 
@@ -465,8 +466,8 @@ public class XPathResultImpl implements XPathResult {
      * <p>
      * Handle event.
      *
-     * @param event a {@link org.loboevolution.html.node.events.Event} object.
-     * @see org.loboevolution.html.node.events.EventListener#handleEvent(Event)
+     * @param event a {@link Event} object.
+     * @see EventListener#handleEvent(Event)
      */
     public void handleEvent(final Event event) {
         if (event.getType().equals("DOMSubtreeModified")) {

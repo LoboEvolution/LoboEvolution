@@ -32,6 +32,7 @@ import lombok.Getter;
 import org.htmlunit.cssparser.dom.CSSRuleListImpl;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.common.Nodes;
+import org.loboevolution.common.Strings;
 import org.loboevolution.config.HtmlRendererConfig;
 import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.dom.HTMLCollection;
@@ -52,17 +53,17 @@ import org.loboevolution.html.js.storage.SessionStorage;
 import org.loboevolution.html.js.xml.XMLHttpRequest;
 import org.loboevolution.html.js.xml.XMLSerializerImpl;
 import org.loboevolution.html.node.*;
-import org.loboevolution.html.node.css.ComputedCSSStyleDeclaration;
-import org.loboevolution.html.node.events.Event;
-import org.loboevolution.html.node.history.History;
-import org.loboevolution.html.node.js.Location;
-import org.loboevolution.html.node.js.Navigator;
-import org.loboevolution.html.node.js.Screen;
-import org.loboevolution.html.node.js.Window;
-import org.loboevolution.html.node.js.console.Console;
-import org.loboevolution.html.node.js.webstorage.Storage;
-import org.loboevolution.html.node.traversal.NodeFilter;
-import org.loboevolution.html.node.views.DocumentView;
+import org.loboevolution.css.ComputedCSSStyleDeclaration;
+import org.loboevolution.events.Event;
+import org.loboevolution.html.dom.History;
+import org.loboevolution.js.Location;
+import org.loboevolution.js.Navigator;
+import org.loboevolution.js.Screen;
+import org.loboevolution.js.Window;
+import org.loboevolution.js.console.Console;
+import org.loboevolution.js.webstorage.Storage;
+import org.loboevolution.traversal.NodeFilter;
+import org.loboevolution.views.DocumentView;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.js.JavaInstantiator;
 import org.loboevolution.js.JavaScript;
@@ -369,7 +370,7 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 	@Override
 	public ComputedCSSStyleDeclaration getComputedStyle(final Element element, final String pseudoElement) {
 		if (element instanceof HTMLElementImpl) {
-			return ((HTMLElementImpl) element).getComputedStyle(pseudoElement);
+			return ((HTMLElementImpl) element).getComputedStyle(Strings.isNotBlank(pseudoElement) ? pseudoElement : element.getNodeName());
 		} else {
 			throw new IllegalArgumentException("Element implementation unknown: " + element);
 		}

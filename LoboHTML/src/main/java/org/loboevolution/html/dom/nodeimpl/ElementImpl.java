@@ -47,10 +47,10 @@ import org.loboevolution.gui.HtmlPanel;
 import org.loboevolution.html.js.geom.DOMRectImpl;
 import org.loboevolution.html.js.geom.DOMRectListImpl;
 import org.loboevolution.html.node.*;
-import org.loboevolution.html.node.css.CSSStyleDeclaration;
-import org.loboevolution.html.node.js.Window;
-import org.loboevolution.html.node.js.geom.DOMRect;
-import org.loboevolution.html.node.js.geom.DOMRectList;
+import org.loboevolution.css.CSSStyleDeclaration;
+import org.loboevolution.js.Window;
+import org.loboevolution.js.geom.DOMRect;
+import org.loboevolution.js.geom.DOMRectList;
 import org.loboevolution.html.parser.XHtmlParser;
 import org.loboevolution.html.renderer.RBlock;
 import org.loboevolution.html.renderstate.RenderState;
@@ -1346,6 +1346,7 @@ public abstract class ElementImpl extends NodeImpl implements Element {
 						this instanceof HTMLTextAreaElement ||
 						this instanceof HTMLProgressElement ||
 						this instanceof HTMLMeterElement ||
+						this instanceof HTMLSmallElementImpl ||
 						this instanceof HTMLStrongElementImpl)) {
 					return widthSize;
 				}

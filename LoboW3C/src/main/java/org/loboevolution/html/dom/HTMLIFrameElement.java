@@ -28,7 +28,7 @@ package org.loboevolution.html.dom;
 
 import org.loboevolution.html.node.DOMTokenList;
 import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.js.WindowProxy;
+import org.loboevolution.js.WindowProxy;
 
 /**
  * Provides special properties and methods (beyond those of the HTMLElement
@@ -104,7 +104,7 @@ public interface HTMLIFrameElement extends HTMLElement {
 	/**
 	 * Retrieves the object of the specified.
 	 *
-	 * @return a {@link org.loboevolution.html.node.js.WindowProxy} object.
+	 * @return a {@link WindowProxy} object.
 	 */
 	WindowProxy getContentWindow();
 

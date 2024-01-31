@@ -30,10 +30,13 @@ import lombok.Getter;
 import lombok.Setter;
 import org.htmlunit.cssparser.dom.CSSStyleSheetImpl;
 import org.loboevolution.html.node.Element;
-import org.loboevolution.html.node.css.CSSStyleSheet;
-import org.loboevolution.html.node.css.MediaList;
-import org.loboevolution.html.node.css.StyleSheet;
+import org.loboevolution.css.CSSStyleSheet;
+import org.loboevolution.css.MediaList;
+import org.loboevolution.css.StyleSheet;
 
+/**
+ * <p>StyleSheetImpl class.</p>
+ */
 public class StyleSheetImpl implements StyleSheet {
 
     private final CSSStyleSheetImpl cssStyleSheet;

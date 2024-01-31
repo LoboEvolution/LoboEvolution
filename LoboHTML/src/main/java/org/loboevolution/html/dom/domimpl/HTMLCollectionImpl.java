@@ -33,7 +33,7 @@ import org.loboevolution.html.node.AbstractList;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
-import org.loboevolution.html.node.traversal.NodeFilter;
+import org.loboevolution.traversal.NodeFilter;
 
 import java.util.Arrays;
 import java.util.Optional;
@@ -52,7 +52,7 @@ public class HTMLCollectionImpl extends AbstractList<Node> implements HTMLCollec
 	 * Constructor for HTMLCollectionImpl.
 	 * </p>
 	 * @param rootNode a {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} object.
-	 * @param filter a {@link org.loboevolution.html.node.traversal.NodeFilter} object.
+	 * @param filter a {@link NodeFilter} object.
 	 */
 	public HTMLCollectionImpl(final NodeImpl rootNode, final NodeFilter filter) {
 		setList((NodeListImpl) rootNode.getNodeList(filter));

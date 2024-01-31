@@ -38,7 +38,7 @@ import org.loboevolution.html.js.Executor;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
 import org.loboevolution.html.node.Node;
-import org.loboevolution.html.renderstate.BlockRenderState;
+import org.loboevolution.html.renderstate.FormRenderState;
 import org.loboevolution.html.renderstate.RenderState;
 import org.mozilla.javascript.Function;
 
@@ -56,17 +56,6 @@ public class HTMLFormElementImpl extends HTMLElementImpl implements HTMLFormElem
 	private HTMLFormControlsCollection elements;
 
 	/**
-	 * <p>isInput.</p>
-	 *
-	 * @param node a {@link org.loboevolution.html.node.Node} object.
-	 * @return a boolean.
-	 */
-	public static boolean isInput(final Node node) {
-		final String name = node.getNodeName().toLowerCase();
-		return name.equals("input") || name.equals("textarea") || name.equals("select");
-	}
-
-	/**
 	 * <p>Constructor for HTMLFormElementImpl.</p>
 	 */
 	public HTMLFormElementImpl() {
@@ -80,6 +69,12 @@ public class HTMLFormElementImpl extends HTMLElementImpl implements HTMLFormElem
 	 */
 	public HTMLFormElementImpl(final String name) {
 		super(name);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	protected RenderState createRenderState(final RenderState prevRenderState) {
+		return new FormRenderState(prevRenderState, this);
 	}
 
 	/** {@inheritDoc} */
@@ -390,10 +385,15 @@ public class HTMLFormElementImpl extends HTMLElementImpl implements HTMLFormElem
 		return false;
 	}
 
-	/** {@inheritDoc} */
-	@Override
-	protected RenderState createRenderState(final RenderState prevRenderState) {
-		return new BlockRenderState(prevRenderState, this);
+	/**
+	 * <p>isInput.</p>
+	 *
+	 * @param node a {@link org.loboevolution.html.node.Node} object.
+	 * @return a boolean.
+	 */
+	public static boolean isInput(final Node node) {
+		final String name = node.getNodeName().toLowerCase();
+		return name.equals("input") || name.equals("textarea") || name.equals("select");
 	}
 	
 	/** {@inheritDoc} */

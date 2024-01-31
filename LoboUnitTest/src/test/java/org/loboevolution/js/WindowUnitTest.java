@@ -30,7 +30,7 @@ import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 
 /**
- * Tests for {@link org.loboevolution.html.node.js.Window}.
+ * Tests for {@link Window}.
  */
 public class WindowUnitTest extends LoboUnitTest {
 

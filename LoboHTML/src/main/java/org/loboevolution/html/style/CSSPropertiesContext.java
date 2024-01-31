@@ -25,7 +25,7 @@
  */
 package org.loboevolution.html.style;
 
-import org.loboevolution.html.node.css.CSSStyleDeclaration;
+import org.loboevolution.css.CSSStyleDeclaration;
 
 /**
  * <p>CSSPropertiesContext interface.</p>
@@ -41,7 +41,7 @@ public interface CSSPropertiesContext {
 	/**
 	 * <p>getParentStyle.</p>
 	 *
-	 * @return a {@link org.loboevolution.html.node.css.CSSStyleDeclaration} object.
+	 * @return a {@link CSSStyleDeclaration} object.
 	 */
 	CSSStyleDeclaration getParentStyle();
 

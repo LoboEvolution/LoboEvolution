@@ -57,18 +57,12 @@ public class HTMLDDElementImpl extends HTMLElementImpl {
     /** {@inheritDoc} */
     @Override
     public Integer getClientWidth() {
-        int clientWidth = super.getClientWidth();
-        if (clientWidth == 0) {
-            int clientWidthDoc = getParentElement().getClientWidth();
-
-            if (getRenderState() != null && getRenderState().getPaddingInsets() != null) {
-                clientWidthDoc -= getRenderState().getPaddingInsets().getRight();
-                clientWidthDoc -= getRenderState().getPaddingInsets().getLeft();
-                clientWidth = clientWidthDoc;
-            }
+        int clientWidth = getParentElement().getClientWidth();
+        if (getRenderState() != null && getRenderState().getPaddingInsets() != null) {
+            clientWidth -= getRenderState().getPaddingInsets().getRight();
+            clientWidth -= getRenderState().getPaddingInsets().getLeft();
         }
-
-        return clientWidth;
+        return clientWidth +1;
     }
 
     /** {@inheritDoc} */

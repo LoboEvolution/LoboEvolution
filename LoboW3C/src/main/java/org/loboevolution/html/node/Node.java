@@ -29,7 +29,7 @@ package org.loboevolution.html.node;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.UserDataHandler;
-import org.loboevolution.html.node.events.EventTarget;
+import org.loboevolution.events.EventTarget;
 
 /**
  * Node is an interface from which a number of DOM API object types inherit. It

@@ -36,8 +36,8 @@ import org.htmlunit.cssparser.parser.selector.SelectorList;
 import org.htmlunit.cssparser.util.ThrowCssExceptionErrorHandler;
 import org.loboevolution.common.Strings;
 import org.loboevolution.config.HtmlRendererConfig;
-import org.loboevolution.html.node.css.MediaQueryList;
-import org.loboevolution.html.node.js.Window;
+import org.loboevolution.css.MediaQueryList;
+import org.loboevolution.js.Window;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -82,7 +82,7 @@ public final class CSSUtilities {
 	 * <p>matchesMedia.</p>
 	 *
 	 * @param mediaValues a {@link java.lang.String} object.
-	 * @param window a {@link org.loboevolution.html.node.js.Window} object.
+	 * @param window a {@link Window} object.
 	 * @return a boolean.
 	 */
 	public static boolean matchesMedia(final String mediaValues, final Window window) {

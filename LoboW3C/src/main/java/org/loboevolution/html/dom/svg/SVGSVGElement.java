@@ -29,7 +29,7 @@ package org.loboevolution.html.dom.svg;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NodeList;
-import org.loboevolution.html.node.events.Event;
+import org.loboevolution.events.Event;
 
 /**
  * <p>SVGSVGElement interface.</p>
@@ -313,7 +313,7 @@ public interface SVGSVGElement extends SVGElement, SVGTests, SVGLangSpace, SVGEx
      * <p>createEvent.</p>
      *
      * @param eventType a {@link java.lang.String} object.
-     * @return a {@link org.loboevolution.html.node.events.Event} object.
+     * @return a {@link Event} object.
      */
     Event createEvent(String eventType);
 }

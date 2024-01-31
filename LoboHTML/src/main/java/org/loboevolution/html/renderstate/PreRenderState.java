@@ -27,7 +27,7 @@ package org.loboevolution.html.renderstate;
 
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
-import org.loboevolution.html.node.css.CSSStyleDeclaration;
+import org.loboevolution.css.CSSStyleDeclaration;
 
 /**
  * <p>PreRenderState class.</p>

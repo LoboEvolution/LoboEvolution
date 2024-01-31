@@ -32,7 +32,6 @@ import org.loboevolution.pdfview.annotation.PDFAnnotation;
 import org.loboevolution.pdfview.decrypt.*;
 
 import java.awt.geom.Rectangle2D;
-import java.awt.image.ColorModel;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.*;

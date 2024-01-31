@@ -140,7 +140,6 @@ public class CSSStyleSheetImpl implements Serializable {
      * @param rule  the rule to insert
      * @param index the insert pos
      * @throws DOMException in case of error
-     * @throws DOMException in case of error
      */
     public void insertRule(final String rule, final int index) throws DOMException {
         try {
@@ -210,13 +209,7 @@ public class CSSStyleSheetImpl implements Serializable {
                     DOMException.INDEX_OUT_OF_BOUNDS,
                     e.getMessage());
         }
-        catch (final CSSException e) {
-            throw new DOMException(
-                    DOMException.SYNTAX_ERR,
-                    DOMException.SYNTAX_ERROR,
-                    e.getMessage());
-        }
-        catch (final IOException e) {
+        catch (final CSSException | IOException e) {
             throw new DOMException(
                     DOMException.SYNTAX_ERR,
                     DOMException.SYNTAX_ERROR,

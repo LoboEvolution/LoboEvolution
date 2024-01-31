@@ -29,7 +29,7 @@ import org.loboevolution.common.Nodes;
 import org.loboevolution.html.dom.HTMLAnchorElement;
 import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.NamedNodeMap;
-import org.loboevolution.html.node.traversal.NodeFilter;
+import org.loboevolution.traversal.NodeFilter;
 import org.loboevolution.html.node.Node;
 
 /**

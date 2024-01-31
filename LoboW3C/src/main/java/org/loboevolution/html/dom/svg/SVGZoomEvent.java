@@ -25,7 +25,7 @@
  */
 package org.loboevolution.html.dom.svg;
 
-import org.loboevolution.html.node.events.UIEvent;
+import org.loboevolution.events.UIEvent;
 
 /**
  * <p>SVGZoomEvent interface.</p>

@@ -36,7 +36,7 @@ import org.loboevolution.html.js.events.EventFactory;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeList;
-import org.loboevolution.html.node.events.Event;
+import org.loboevolution.events.Event;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;

@@ -28,10 +28,13 @@ package org.loboevolution.html.js.css;
 
 import lombok.Getter;
 import org.htmlunit.cssparser.dom.DOMException;
-import org.loboevolution.html.node.css.CSSRule;
-import org.loboevolution.html.node.css.CSSRuleList;
-import org.loboevolution.html.node.css.CSSStyleSheet;
+import org.loboevolution.css.CSSRule;
+import org.loboevolution.css.CSSRuleList;
+import org.loboevolution.css.CSSStyleSheet;
 
+/**
+ * <p>CSSStyleSheetImpl class.</p>
+ */
 public class CSSStyleSheetImpl extends StyleSheetImpl implements CSSStyleSheet {
 
     @Getter
@@ -64,10 +67,22 @@ public class CSSStyleSheetImpl extends StyleSheetImpl implements CSSStyleSheet {
         try {
             this.cssStyleSheet.insertRule(rule, index);
             this.cssRuleList.addStyleRule(cssStyleSheet.getCssRules());
-        } catch (final IndexOutOfBoundsException e){
+        } catch (final IndexOutOfBoundsException e) {
             throw new DOMException(
                     DOMException.INDEX_SIZE_ERR, e.getMessage());
+        } catch (DOMException cssException) {
+            throw cssException;
         } catch (final Exception e) {
+            final int pos = rule.indexOf('{');
+            if (pos > -1) {
+                final String newRule = rule.substring(0, pos) + "{}";
+                try {
+                    insertRule(newRule, index);
+                    return index;
+                } catch (final Exception ex) {
+                    return 0;
+                }
+            }
             return 0;
         }
         return index;

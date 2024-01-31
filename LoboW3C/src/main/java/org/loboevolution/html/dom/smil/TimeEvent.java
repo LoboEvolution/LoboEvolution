@@ -26,8 +26,8 @@
 
 package org.loboevolution.html.dom.smil;
 
-import org.loboevolution.html.node.events.Event;
-import org.loboevolution.html.node.views.AbstractView;
+import org.loboevolution.events.Event;
+import org.loboevolution.views.AbstractView;
 
 /**
  * The TimeEvent interface provides specific contextual information
@@ -38,7 +38,7 @@ public interface TimeEvent extends Event {
      * The view attribute identifies the AbstractView
      * from which the event was generated.
      *
-     * @return a {@link org.loboevolution.html.node.views.AbstractView} object.
+     * @return a {@link AbstractView} object.
      */
     AbstractView getView();
 

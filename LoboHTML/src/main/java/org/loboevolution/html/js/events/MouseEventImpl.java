@@ -27,9 +27,9 @@ package org.loboevolution.html.js.events;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.loboevolution.html.node.events.EventTarget;
-import org.loboevolution.html.node.events.MouseEvent;
-import org.loboevolution.html.node.js.Window;
+import org.loboevolution.events.EventTarget;
+import org.loboevolution.events.MouseEvent;
+import org.loboevolution.js.Window;
 
 import java.awt.event.InputEvent;
 

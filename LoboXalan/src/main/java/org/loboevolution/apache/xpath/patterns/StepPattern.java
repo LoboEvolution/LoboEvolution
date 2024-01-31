@@ -35,7 +35,7 @@ import org.loboevolution.apache.xml.dtm.Axis;
 import org.loboevolution.apache.xml.dtm.DTM;
 import org.loboevolution.apache.xml.dtm.DTMAxisTraverser;
 import org.loboevolution.apache.xml.dtm.DTMFilter;
-import org.loboevolution.html.node.traversal.NodeFilter;
+import org.loboevolution.traversal.NodeFilter;
 
 /** This class represents a single pattern match step. */
 public class StepPattern extends NodeTest implements SubContextList {
@@ -46,7 +46,7 @@ public class StepPattern extends NodeTest implements SubContextList {
   /**
    * Construct a StepPattern that tests for namespaces and node names.
    *
-   * @param whatToShow Bit set defined mainly by {@link org.loboevolution.html.node.traversal.NodeFilter}.
+   * @param whatToShow Bit set defined mainly by {@link NodeFilter}.
    * @param namespace The namespace to be tested.
    * @param name The local name to be tested.
    * @param axis The Axis for this test, one of of Axes.ANCESTORORSELF, etc.

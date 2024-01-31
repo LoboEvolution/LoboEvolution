@@ -34,8 +34,6 @@ import org.loboevolution.apache.xml.dtm.DTMIterator;
 import org.loboevolution.apache.xml.dtm.DTMManager;
 import org.loboevolution.apache.xml.utils.NodeVector;
 
-import java.io.BufferedReader;
-
 /**
  * This class is the dynamic wrapper for a Xalan DTMIterator instance, and provides random access
  * capabilities.

@@ -35,7 +35,7 @@ import org.loboevolution.html.dom.domimpl.HTMLCollectionImpl;
 import org.loboevolution.html.dom.domimpl.HTMLStyleElementImpl;
 import org.loboevolution.html.dom.nodeimpl.DOMImplementationImpl;
 import org.loboevolution.html.node.*;
-import org.loboevolution.html.node.css.CSSStyleSheet;
+import org.loboevolution.css.CSSStyleSheet;
 import org.loboevolution.http.UserAgentContext;
 
 import java.util.Iterator;

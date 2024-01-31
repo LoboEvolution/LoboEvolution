@@ -28,7 +28,7 @@ package org.loboevolution.html.dom.nodeimpl.traversal;
 
 import lombok.AllArgsConstructor;
 import org.loboevolution.html.node.Node;
-import org.loboevolution.html.node.traversal.NodeFilter;
+import org.loboevolution.traversal.NodeFilter;
 
 /**
  * <p>NodeFilterImpl class.</p>

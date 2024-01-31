@@ -31,12 +31,12 @@ package org.loboevolution.html.renderstate;
 import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.Strings;
 import org.loboevolution.config.HtmlRendererConfig;
+import org.loboevolution.css.CSSStyleDeclaration;
 import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
-import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.renderer.BackgroundRender;
 import org.loboevolution.html.renderer.LineBreak;
 import org.loboevolution.html.renderer.RFlex;
@@ -303,7 +303,7 @@ public class StyleSheetRenderState implements RenderState {
 	public BackgroundInfo getBackgroundImageInfo(final int width, final int height){
 		final BackgroundInfo binfo = iBackgroundInfo;
 		final CSSStyleDeclaration props = getCssProperties();
-		final String backgroundPositionText = props.getBackgroundPosition();
+		final String backgroundPositionText = props != null ? props.getBackgroundPosition() : "";
 
 		if (Strings.isNotBlank(backgroundPositionText)) {
 			final BackgroundRender backgroundImageRender = new BackgroundRender(element, prevRenderState, document);
@@ -407,7 +407,7 @@ public class StyleSheetRenderState implements RenderState {
 	/**
 	 * <p>getCssProperties.</p>
 	 *
-	 * @return a {@link org.loboevolution.html.node.css.CSSStyleDeclaration} object.
+	 * @return a {@link CSSStyleDeclaration} object.
 	 */
 	protected final CSSStyleDeclaration getCssProperties() {
 		final HTMLElementImpl element = this.element;
@@ -487,7 +487,7 @@ public class StyleSheetRenderState implements RenderState {
 			displayInt = this.getPreviousRenderState().getDisplay();
 			break;
 		case INITIAL:
-			default:
+		default:
 			displayInt = this.getDefaultDisplay();
 			break;
 		}

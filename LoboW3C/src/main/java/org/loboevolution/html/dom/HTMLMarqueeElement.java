@@ -27,8 +27,8 @@
 package org.loboevolution.html.dom;
 
 
-import org.loboevolution.html.node.events.Event;
-import org.loboevolution.html.node.events.EventListener;
+import org.loboevolution.events.Event;
+import org.loboevolution.events.EventListener;
 
 /**
  * Provides methods to manipulate &lt;marquee&gt; elements.
@@ -135,7 +135,7 @@ public interface HTMLMarqueeElement extends HTMLElement {
     /**
      * <p>getOnbounce.</p>
      *
-     * @return a {@link org.loboevolution.html.node.events.EventListener} object.
+     * @return a {@link EventListener} object.
      */
     @Deprecated
     EventListener<Event> getOnbounce();
@@ -143,7 +143,7 @@ public interface HTMLMarqueeElement extends HTMLElement {
     /**
      * <p>setOnbounce.</p>
      *
-     * @param onbounce a {@link org.loboevolution.html.node.events.EventListener} object.
+     * @param onbounce a {@link EventListener} object.
      */
     @Deprecated
     void setOnbounce(EventListener<Event> onbounce);
@@ -152,7 +152,7 @@ public interface HTMLMarqueeElement extends HTMLElement {
     /**
      * <p>getOnfinish.</p>
      *
-     * @return a {@link org.loboevolution.html.node.events.EventListener} object.
+     * @return a {@link EventListener} object.
      */
     @Deprecated
     EventListener<Event> getOnfinish();
@@ -160,7 +160,7 @@ public interface HTMLMarqueeElement extends HTMLElement {
     /**
      * <p>setOnfinish.</p>
      *
-     * @param onfinish a {@link org.loboevolution.html.node.events.EventListener} object.
+     * @param onfinish a {@link EventListener} object.
      */
     @Deprecated
     void setOnfinish(EventListener<Event> onfinish);
@@ -168,7 +168,7 @@ public interface HTMLMarqueeElement extends HTMLElement {
     /**
      * <p>getOnstart.</p>
      *
-     * @return a {@link org.loboevolution.html.node.events.EventListener} object.
+     * @return a {@link EventListener} object.
      */
     @Deprecated
     EventListener<Event> getOnstart();
@@ -176,7 +176,7 @@ public interface HTMLMarqueeElement extends HTMLElement {
     /**
      * <p>setOnstart.</p>
      *
-     * @param onstart a {@link org.loboevolution.html.node.events.EventListener} object.
+     * @param onstart a {@link EventListener} object.
      */
     @Deprecated
     void setOnstart(EventListener<Event> onstart);

@@ -27,8 +27,8 @@
 package org.loboevolution.html.dom.domimpl;
 
 import org.loboevolution.html.dom.HTMLMarqueeElement;
-import org.loboevolution.html.node.events.Event;
-import org.loboevolution.html.node.events.EventListener;
+import org.loboevolution.events.Event;
+import org.loboevolution.events.EventListener;
 import org.loboevolution.html.renderstate.BlockRenderState;
 import org.loboevolution.html.renderstate.RenderState;
 

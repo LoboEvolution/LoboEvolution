@@ -26,7 +26,7 @@
  */
 package org.loboevolution.html.dom.svg;
 
-import org.loboevolution.html.node.events.Event;
+import org.loboevolution.events.Event;
 
 /**
  * <p>SVGEvent interface.</p>

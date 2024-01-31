@@ -34,7 +34,7 @@ import org.loboevolution.apache.xpath.res.XPATHErrorResources;
 import org.loboevolution.apache.xpath.res.XPATHMessages;
 import org.loboevolution.apache.xml.dtm.DTMIterator;
 import org.loboevolution.html.node.NodeList;
-import org.loboevolution.html.node.traversal.NodeIterator;
+import org.loboevolution.traversal.NodeIterator;
 import org.loboevolution.javax.xml.transform.TransformerException;
 
 /**

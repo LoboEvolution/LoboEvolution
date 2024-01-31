@@ -50,8 +50,8 @@ import org.loboevolution.html.js.css.CSSStyleSheetImpl;
 import org.loboevolution.html.js.css.StyleSheetListImpl;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
-import org.loboevolution.html.node.css.StyleSheetList;
-import org.loboevolution.html.node.views.DocumentView;
+import org.loboevolution.css.StyleSheetList;
+import org.loboevolution.views.DocumentView;
 import org.loboevolution.html.parser.XHtmlParser;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.renderstate.StyleSheetRenderState;
@@ -377,7 +377,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	/**
 	 * <p>Getter for the field styleSheets.</p>
 	 *
-	 * @return a {@link org.loboevolution.html.node.css.StyleSheetList} object.
+	 * @return a {@link StyleSheetList} object.
 	 */
 	public StyleSheetList getStyleSheets() {
 		return this.styleSheets;

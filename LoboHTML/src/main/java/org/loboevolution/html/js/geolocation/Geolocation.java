@@ -31,6 +31,7 @@ import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.js.Executor;
 import org.loboevolution.html.js.WindowImpl;
 import org.loboevolution.js.AbstractScriptableDelegate;
+import org.loboevolution.js.Window;
 import org.mozilla.javascript.Function;
 
 import java.net.UnknownHostException;
@@ -58,7 +59,7 @@ public class Geolocation extends AbstractScriptableDelegate {
 	/**
 	 * <p>Constructor for Geolocation.</p>
 	 *
-	 * @param window a {@link org.loboevolution.html.node.js.Window} object.
+	 * @param window a {@link Window} object.
 	 */
 	public Geolocation(final WindowImpl window) {
 		this.window = window;

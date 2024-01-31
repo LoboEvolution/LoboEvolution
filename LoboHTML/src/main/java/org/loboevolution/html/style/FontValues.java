@@ -32,8 +32,8 @@ import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.js.WindowImpl;
-import org.loboevolution.html.node.css.CSSStyleDeclaration;
-import org.loboevolution.html.node.js.Window;
+import org.loboevolution.css.CSSStyleDeclaration;
+import org.loboevolution.js.Window;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.laf.FontKey;
 
@@ -179,7 +179,7 @@ public class FontValues extends HtmlValues {
 			case "ex":
 				final int pixelSize = getPixelSize(spec, parentRenderState, window, (int) defaultSize);
 				final int dpi = GraphicsEnvironment.isHeadless() ? 72 : Toolkit.getDefaultToolkit().getScreenResolution();
-				return pixelSize * 96 / dpi;
+				return (float) (pixelSize * 96) / dpi;
 			case "%":
 				final String value = specTL.substring(0, specTL.length() - 1);
 				try {

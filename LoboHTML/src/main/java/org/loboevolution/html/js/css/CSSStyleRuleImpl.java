@@ -29,8 +29,9 @@ package org.loboevolution.html.js.css;
 import org.htmlunit.cssparser.dom.AbstractCSSRuleImpl;
 import org.htmlunit.cssparser.dom.CSSPageRuleImpl;
 import org.htmlunit.cssparser.util.CSSProperties;
-import org.loboevolution.html.node.css.CSSStyleDeclaration;
-import org.loboevolution.html.node.css.CSSStyleRule;
+import org.loboevolution.css.CSSStyleDeclaration;
+import org.loboevolution.css.CSSStyleRule;
+import org.loboevolution.css.CSSStyleSheet;
 import org.loboevolution.html.style.setter.BorderStyleSetter;
 import org.loboevolution.html.style.setter.FourCornersSetter;
 import org.loboevolution.net.NameValuePair;
@@ -39,7 +40,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
-public class CSSStyleRuleImpl extends CSSRuleImpl implements CSSStyleRule {
+/**
+ * <p>CSSStyleRuleImpl class.</p>
+ */
+public class CSSStyleRuleImpl extends AbstractCSSStyleRule implements CSSStyleRule {
 
     private final AbstractCSSRuleImpl abstractCSSRule;
 
@@ -68,6 +72,11 @@ public class CSSStyleRuleImpl extends CSSRuleImpl implements CSSStyleRule {
             final CSSPageRuleImpl styleRule = (CSSPageRuleImpl) abstractCSSRule;
             styleRule.setSelectorText(selectorText);
         }
+    }
+
+    @Override
+    public CSSStyleSheet getParentStyleSheet() {
+        return abstractCSSRule != null ? new CSSStyleSheetImpl(abstractCSSRule.getParentStyleSheet()) : null;
     }
 
     /** {@inheritDoc} */

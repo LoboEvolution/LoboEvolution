@@ -28,7 +28,7 @@ package org.loboevolution.html.style.setter;
 
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.js.css.CSSStyleDeclarationImpl;
-import org.loboevolution.html.node.css.CSSStyleDeclaration;
+import org.loboevolution.css.CSSStyleDeclaration;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.laf.ColorFactory;
 

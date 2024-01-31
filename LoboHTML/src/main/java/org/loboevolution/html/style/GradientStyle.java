@@ -29,8 +29,8 @@ package org.loboevolution.html.style;
 import org.loboevolution.common.ArrayUtilities;
 import org.loboevolution.common.Strings;
 import org.loboevolution.config.HtmlRendererConfig;
+import org.loboevolution.css.CSSStyleDeclaration;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
-import org.loboevolution.html.node.css.CSSStyleDeclaration;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.info.GradientInfo;
 import org.loboevolution.laf.ColorFactory;
@@ -53,7 +53,7 @@ public class GradientStyle {
 	/**
 	 * <p>gradientToImg.</p>
 	 * @param document a {@link org.loboevolution.html.dom.domimpl.HTMLDocumentImpl} object.
-	 * @param props a {@link org.loboevolution.html.node.css.CSSStyleDeclaration} object.
+	 * @param props a {@link CSSStyleDeclaration} object.
 	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
 	 * @param backgroundImage a {@link java.lang.String} object.
 	 * @return a {@link java.awt.image.BufferedImage} object.

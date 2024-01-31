@@ -70,6 +70,11 @@ public class HTMLQuoteElementImpl extends HTMLElementImpl implements HTMLQuoteEl
 		return clientHeight == 0 ? 17 : clientHeight;
 	}
 
+	@Override
+	public Integer getOffsetWidth() {
+		return "Q".equals(getNodeName()) ? 25 : super.getOffsetWidth();
+	}
+
 
 	/** {@inheritDoc} */
 	@Override

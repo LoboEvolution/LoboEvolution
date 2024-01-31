@@ -27,8 +27,11 @@
 package org.loboevolution.html.js.css;
 
 import org.htmlunit.cssparser.parser.media.MediaQuery;
-import org.loboevolution.html.node.css.MediaList;
+import org.loboevolution.css.MediaList;
 
+/**
+ * <p>MediaListImpl class.</p>
+ */
 public class MediaListImpl implements MediaList {
 
     private final org.htmlunit.cssparser.dom.MediaListImpl media;
@@ -73,6 +76,6 @@ public class MediaListImpl implements MediaList {
 
     @Override
     public String toString() {
-        return "[object MediaList]";
+        return getLength() > 0 ? "all" : "";
     }
 }

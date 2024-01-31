@@ -34,7 +34,7 @@ import org.loboevolution.html.dom.HTMLIFrameElement;
 import org.loboevolution.gui.HtmlPanel;
 import org.loboevolution.html.node.DOMTokenList;
 import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.js.WindowProxy;
+import org.loboevolution.js.WindowProxy;
 import org.loboevolution.html.renderstate.IFrameRenderState;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.style.HtmlValues;

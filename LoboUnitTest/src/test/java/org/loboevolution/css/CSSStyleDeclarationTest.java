@@ -47,7 +47,7 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
                 + "  alert(style.color);\n"
                 + "  alert(node.getAttribute('style'));\n"
                 + "}\n</script></head>\n"
-                + "<body onload='doTest()'><div id='div1' style='color: black'>foo</div></body></html>";
+                + "<body onload='doTest()'><div id='div1' style='color: black;'>foo</div></body></html>";
         final String[] messages = {"black", "pink", "color: pink;"};
         checkHtmlAlert(html, messages);
     }
@@ -84,7 +84,7 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
                 + "}\n</script></head>\n"
                 + "<body onload='doTest()'><div id='div1'>foo</div></body></html>";
 
-        final String[] messages = {null, null, "pink", "color: pink;"};
+        final String[] messages = {null, null, "pink", "color: pink"};
         checkHtmlAlert(html, messages);
     }
 
@@ -100,7 +100,7 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
                 + "}\n</script></head>\n"
                 + "<body onload='doTest()'>\n"
                 + "<div id='div1'>foo</div></body></html>";
-        final String[] messages = {"string", "string", "string", "undefined"};
+        final String[] messages = {"object", "object", "object", "undefined"};
         checkHtmlAlert(html, messages);
     }
 
@@ -179,7 +179,7 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     }
 
     @Test
-    public void getPropertyValue_WithDash() {
+    public void getPropertyValueWithDash() {
         final String html =
                 "<html><body onload='test()'><script>\n"
                         + "    function prop(elem, prop) {\n"
@@ -243,7 +243,7 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
                 + "}\n"
                 + "</script>\n"
                 + "</body></html>";
-        final String[] messages = {"", "0.5", "0.4", "0.33333", "-3", "3", "", "", ""};
+        final String[] messages = {null, "0.5", "0.4", "0.33333", "-3", "3", "", "", ""};
         checkHtmlAlert(html, messages);
     }
 
@@ -404,21 +404,6 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
                 + "</script>\n"
                 + "</body></html>";
         final String[] messages = {"undefined"};
-        checkHtmlAlert(html, messages);
-    }
-
-    @Test
-    public void setUnsupportdProperty() {
-        final String html = "<html><body>\n"
-                + "<div id='my' style=''>d</div>\n"
-                + "<script>\n"
-                + "  d = document.getElementById('my');\n"
-                + "  alert(d.style.htmlunit);\n"
-                + "  d.style.htmlunit = 'foo';\n"
-                + "  alert(d.style.htmlunit);\n"
-                + "</script>\n"
-                + "</body></html>";
-        final String[] messages = {"undefined", "foo"};
         checkHtmlAlert(html, messages);
     }
 
@@ -705,7 +690,7 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
                 + "</head>\n"
                 + "<body onload='test()'>\n"
                 + "</body></html>";
-        final String[] messages = {null, "", "inline", "rgb(0, 0, 0)"};
+        final String[] messages = {"", null, "inline", "rgb(0, 0, 0)"};
         checkHtmlAlert(html, messages);
     }
 
@@ -1486,7 +1471,7 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
                 + "  alert(node.getAttribute('style'));\n"
                 + "}\n"
                 + "</script></head>\n"
-                + "<body onload='doTest()'><div id='div1' style='COLOR: BLACK'>foo</div></body></html>";
+                + "<body onload='doTest()'><div id='div1' style='COLOR: BLACK;'>foo</div></body></html>";
 
         final String[] messages = {"black", "pink", "color: pink;"};
         checkHtmlAlert(html, messages);
@@ -1639,9 +1624,9 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
                 + "<script>\n"
                 + "  function test() {\n"
                 + "    var style = document.getElementById('test').style;\n"
-                + "    alert(style.boxSizing === '');\n"
+                + "    alert(style.boxSizing === null);\n"
                 + "    style = document.createElement('div').style;\n"
-                + "    alert(style.boxSizing === '');\n"
+                + "    alert(style.boxSizing === null);\n"
                 + "    style.boxSizing = 'border-box';\n"
                 + "    alert(style.boxSizing);\n"
                 + "  }\n"

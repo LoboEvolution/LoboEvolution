@@ -176,10 +176,4 @@ public class CSSPageRuleImpl extends AbstractCSSRuleImpl {
         hash = ParserUtils.hashCode(hash, style_);
         return hash;
     }
-
-    /** {@inheritDoc} */
-    @Override
-    public String toString() {
-        return "[object CSSPageRule]";
-    }
 }

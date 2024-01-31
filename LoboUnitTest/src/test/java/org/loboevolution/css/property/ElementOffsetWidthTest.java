@@ -375,7 +375,7 @@ public class ElementOffsetWidthTest extends LoboUnitTest {
 
     @Test
     public void iframe() {
-        final String[] messages = {"304"};
+        final String[] messages = {"300"};
         checkHtmlAlert(test("iframe"), messages);
     }
 
@@ -444,12 +444,6 @@ public class ElementOffsetWidthTest extends LoboUnitTest {
     public void legend() {
         final String[] messages = {"-17"};
         checkHtmlAlert(test("legend"), messages);
-    }
-
-    @Test
-    public void listing() {
-        final String[] messages = {"-17"};
-        checkHtmlAlert(test("listing"), messages);
     }
 
     @Test

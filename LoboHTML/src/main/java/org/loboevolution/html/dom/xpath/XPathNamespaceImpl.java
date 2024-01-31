@@ -32,7 +32,7 @@ package org.loboevolution.html.dom.xpath;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.node.*;
-import org.loboevolution.html.node.events.Event;
+import org.loboevolution.events.Event;
 import org.loboevolution.html.xpath.XPathNamespace;
 import org.mozilla.javascript.Function;
 import org.loboevolution.html.dom.UserDataHandler;

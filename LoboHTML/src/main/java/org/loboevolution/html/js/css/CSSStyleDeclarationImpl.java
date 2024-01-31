@@ -26,12 +26,17 @@
 
 package org.loboevolution.html.js.css;
 
-import org.htmlunit.cssparser.dom.AbstractCSSRuleImpl;
+import org.htmlunit.cssparser.dom.CSSCharsetRuleImpl;
+import org.htmlunit.cssparser.dom.CSSFontFaceRuleImpl;
+import org.htmlunit.cssparser.dom.CSSImportRuleImpl;
+import org.htmlunit.cssparser.dom.CSSMediaRuleImpl;
+import org.htmlunit.cssparser.dom.CSSPageRuleImpl;
 import org.htmlunit.cssparser.dom.Property;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
-import org.loboevolution.html.node.css.CSSStyleDeclaration;
+import org.loboevolution.html.node.Attr;
+import org.loboevolution.css.CSSStyleDeclaration;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.html.style.setter.*;
 import org.mozilla.javascript.annotations.JSFunction;
@@ -39,6 +44,9 @@ import org.mozilla.javascript.annotations.JSFunction;
 import java.util.*;
 import java.util.regex.Pattern;
 
+/**
+ * <p>CSSStyleDeclarationImpl class.</p>
+ */
 public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
 
     private static final Pattern DOUBLE_PATTERN = Pattern.compile(
@@ -51,6 +59,8 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
 
     private String overlayColor;
     private final HTMLElementImpl element;
+    private boolean add;
+
     private final org.htmlunit.cssparser.dom.CSSStyleDeclarationImpl style;
 
     private static final Map<String, Boolean> propertyLenght = new HashMap<>();
@@ -111,7 +121,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     /**
      * <p>Constructor for CSSStyleDeclarationImpl.</p>
      *
-     * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
+     * @param element a {@link HTMLElementImpl} object.
      * @param style a {@link org.htmlunit.cssparser.dom.CSSStyleDeclarationImpl} object.
      */
     public CSSStyleDeclarationImpl(final HTMLElementImpl element, final org.htmlunit.cssparser.dom.CSSStyleDeclarationImpl style) {
@@ -122,11 +132,12 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     /**
      * <p>Constructor for CSSStyleDeclarationImpl.</p>
 
-     * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
+     * @param element a {@link HTMLElementImpl} object.
      */
-    public CSSStyleDeclarationImpl(final HTMLElementImpl element) {
+    public CSSStyleDeclarationImpl(final HTMLElementImpl element, boolean add) {
         this.element = element;
         this.style = new org.htmlunit.cssparser.dom.CSSStyleDeclarationImpl();
+        this.add = add;
     }
 
     /**
@@ -174,7 +185,8 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
 
     @Override
     public void setProperty(final String propertyName, final String vl, final String priority) {
-        final String propertyPriority1 = getPropertyPriority(propertyName);
+        String lwPropertyName = propertyName.toLowerCase();
+        final String propertyPriority1 = getPropertyPriority(lwPropertyName);
         String value = vl;
 
         if(Strings.isNotBlank(propertyPriority1) ||
@@ -182,46 +194,47 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
 
         if (Strings.isBlank(value) || "null".equals(value)) {
             if (Strings.isBlank(value)) value = "";
-            style.setProperty(propertyName, value, priority);
+            style.setProperty(lwPropertyName, value, priority);
         } else {
             value = value.toLowerCase().trim();
 
             if (HtmlValues.isUnits(value)) {
                 final int val = HtmlValues.getPixelSize(value, null, element.getOwnerDocument() != null ? element.getOwnerDocument().getDefaultView() : null, -1);
                 if (val > -1) {
-                    style.setProperty(propertyName, value, priority);
+                    style.setProperty(lwPropertyName, value, priority);
                 }
-            } else if (propertyLenght.get(propertyName) != null && propertyLenght.get(propertyName)) {
+            } else if (propertyLenght.get(lwPropertyName) != null && propertyLenght.get(lwPropertyName)) {
 
                 if (DOUBLE_PATTERN.matcher(value).matches()) {
                     final double d = Double.parseDouble(value);
                     if (!Double.isNaN(d) && !Double.isInfinite(d)) {
                         value += "px";
-                        style.setProperty(propertyName, value, priority);
+                        style.setProperty(lwPropertyName, value, priority);
                     }
                 } else if (NUMERIC_PATTERN.matcher(value).matches()) {
                     value += "px";
-                    style.setProperty(propertyName, value, priority);
+                    style.setProperty(lwPropertyName, value, priority);
                 } else if (CSSValues.AUTO.getValue().equals(value) ||
                         CSSValues.INHERIT.getValue().equals(value) ||
                         CSSValues.INITIAL.getValue().equals(value) ||
                         value.endsWith("%")) {
-                    style.setProperty(propertyName, value, priority);
+                    style.setProperty(lwPropertyName, value, priority);
                 } else if(CSSValues.THICK.isEqual(value) || CSSValues.THIN.isEqual(value) || CSSValues.MEDIUM.isEqual(value)) {
-                    style.setProperty(propertyName, value, priority);
+                    style.setProperty(lwPropertyName, value, priority);
                 }
             } else {
-                style.setProperty(propertyName, value, priority);
+                style.setProperty(lwPropertyName, value, priority);
             }
         }
+        refreshStyle(lwPropertyName, value);
     }
 
     /**
      * <p>setPropertyValueProcessed.</p>
      *
-     * @param lowerCaseName a {@link java.lang.String} object.
-     * @param value a {@link java.lang.String} object.
-     * @param important a {@link java.lang.Boolean} object.
+     * @param lowerCaseName a {@link String} object.
+     * @param value a {@link String} object.
+     * @param important a {@link Boolean} object.
      */
     public final void setPropertyValueProcessed(final String lowerCaseName, final String value, final boolean important) {
         final SubPropertySetter setter = SUB_SETTERS.get(lowerCaseName);
@@ -237,9 +250,9 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
         final List<Property> locals = getProperties();
         final List<Property> styles = style.getProperties();
 
-        if (locals.size() == 0 && styles.size() > 0) {
+        if (locals.isEmpty() && !styles.isEmpty()) {
             locals.addAll(styles);
-        } else if (locals.size() > 0 && styles.size() > 0) {
+        } else if (!locals.isEmpty() && !styles.isEmpty()) {
             locals.forEach(prop -> {
                 final String propertyValue2 = style.getPropertyValue(prop.getName());
                 if (Strings.isBlank(propertyValue2)) {
@@ -276,9 +289,57 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     }
 
     @Override
-    public String removeProperty(final String property) {
-        final String prop = style.removeProperty(property);
-        return prop;
+    public String removeProperty(String property) {
+        String remove = style.removeProperty(property);
+        Attr attr = this.element.getAttributeNode("style");
+        if (attr != null) {
+            String style = attr.getNodeValue();
+            if (style != null && style.contains(";")) {
+                String[] splitStyle = style.split(";");
+                StringBuilder builder = new StringBuilder();
+                for (String css : splitStyle) {
+                    String[] cssArray = css.split(":");
+                    if (!property.equalsIgnoreCase(cssArray[0].trim())) {
+                        builder.append(cssArray[0]).append(": ").append(cssArray[1].trim());
+                    }
+                }
+                attr.setValue(builder.toString());
+            } else {
+                attr.setValue(null);
+            }
+        }
+        return remove;
+    }
+
+    private void refreshStyle(final String lwPropertyName, final String value) {
+        Attr attr = this.element.getAttributeNode("style");
+        if (!add && attr != null &&  attr.getNodeValue() != null) {
+            String style = attr.getNodeValue();
+            if (style.contains(";")) {
+                String[] splitStyle = style.split(";");
+                for (String s : splitStyle) {
+                    String[] cssArray = s.split(":");
+                    if (lwPropertyName.equalsIgnoreCase(cssArray[0].trim())) {
+                        style = style.
+                                replace(cssArray[0], lwPropertyName).
+                                replace(cssArray[1], value).
+                                replace(":", ": ");
+                    }
+                }
+                attr.setValue(style);
+            } else {
+                String[] splitStyle = style.split(":");
+                if (lwPropertyName.equalsIgnoreCase(splitStyle[0].trim())) {
+                    attr.setValue(lwPropertyName + ": " + value);
+                }
+            }
+        }
+
+        if (!add && attr == null && element.getDocumentNode() != null) {
+            attr = element.getDocumentNode().createAttribute("style");
+            attr.setValue(lwPropertyName + ": " + value);
+            element.setAttributeNode(attr);
+        }
     }
 
     @Override
@@ -290,9 +351,24 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
         return style.getProperties();
     }
 
-    @Override
-    public AbstractCSSRuleImpl getParentRule() {
-        return style.getParentRule();
+    public AbstractCSSStyleRule getParentRule() {
+        if (style.getParentRule() instanceof CSSPageRuleImpl) {
+            return new org.loboevolution.html.js.css.CSSPageRuleImpl((CSSPageRuleImpl) style.getParentRule());
+        }
+        if (style.getParentRule() instanceof CSSCharsetRuleImpl) {
+            return new org.loboevolution.html.js.css.CSSCharsetRuleImpl(style.getParentRule());
+        }
+        if (style.getParentRule() instanceof CSSFontFaceRuleImpl) {
+            return new org.loboevolution.html.js.css.CSSFontFaceRuleImpl((CSSFontFaceRuleImpl) style.getParentRule());
+        }
+        if (style.getParentRule() instanceof CSSImportRuleImpl) {
+            return new org.loboevolution.html.js.css.CSSImportRuleImpl((CSSImportRuleImpl) style.getParentRule());
+        }
+        if (style.getParentRule() instanceof CSSMediaRuleImpl) {
+            return new org.loboevolution.html.js.css.CSSMediaRuleImpl(style.getParentRule());
+        }
+
+        return new org.loboevolution.html.js.css.CSSStyleRuleImpl(style.getParentRule());
     }
 
     @Override
@@ -1124,6 +1200,9 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     @Override
     public String getzIndex() {
         final String zIndex = this.getPropertyValue(Z_INDEX);
+        if (zIndex != null && zIndex.contains(".")) {
+            return "";
+        }
         final int val = HtmlValues.getPixelSize(zIndex, null, null, -1);
         return val == -1 ? "" : String.valueOf(val);
     }
@@ -1173,6 +1252,13 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     @Override
     public void setBackgroundRepeat(final String backgroundRepeat) {
        this.setProperty(BACKGROUND_REPEAT, backgroundRepeat);
+        this.element.informLookInvalid();
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public void setBoxSizing(final String boxSizing) {
+        this.setProperty(BOX_SIZING, boxSizing);
         this.element.informLookInvalid();
     }
 
@@ -1953,7 +2039,9 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     /** {@inheritDoc} */
     @Override
     public void setWidows(final String widows) {
-       this.setProperty(WIDOWS, widows);
+       if(!"0".equals(widows)) {
+           this.setProperty(WIDOWS, widows);
+       }
     }
 
     /** {@inheritDoc} */

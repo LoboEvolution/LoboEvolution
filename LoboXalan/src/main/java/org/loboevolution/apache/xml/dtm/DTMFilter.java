@@ -25,7 +25,7 @@
  */
 package org.loboevolution.apache.xml.dtm;
 
-import org.loboevolution.html.node.traversal.NodeFilter;
+import org.loboevolution.traversal.NodeFilter;
 
 /**
  * Simple filter for doing node tests. Note the semantics of this are somewhat different that the

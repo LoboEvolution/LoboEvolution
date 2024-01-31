@@ -27,11 +27,11 @@
 package org.loboevolution.html.style.setter;
 
 import lombok.extern.slf4j.Slf4j;
-import org.htmlunit.cssparser.dom.AbstractCSSRuleImpl;
-import org.htmlunit.cssparser.dom.CSSStyleSheetImpl;
 import org.loboevolution.common.Urls;
+import org.loboevolution.html.js.css.AbstractCSSStyleRule;
 import org.loboevolution.html.js.css.CSSStyleDeclarationImpl;
-import org.loboevolution.html.node.css.CSSStyleDeclaration;
+import org.loboevolution.css.CSSStyleDeclaration;
+import org.loboevolution.css.CSSStyleSheet;
 import org.loboevolution.html.style.HtmlValues;
 
 import java.net.URL;
@@ -52,9 +52,9 @@ public class BackgroundImageSetter implements SubPropertySetter {
 		String baseHref = null;
 		String finalValue;
 		final CSSStyleDeclarationImpl props = (CSSStyleDeclarationImpl) declaration;
-		final AbstractCSSRuleImpl rule = props.getParentRule();
-		if (rule != null) {
-			final CSSStyleSheetImpl ssheet = rule.getParentStyleSheet();
+		final AbstractCSSStyleRule rule = props.getParentRule();
+		if (rule != null && rule.getParentStyleSheet() != null) {
+			final CSSStyleSheet ssheet = rule.getParentStyleSheet();
 			baseHref = ssheet.getHref();
 		}
 

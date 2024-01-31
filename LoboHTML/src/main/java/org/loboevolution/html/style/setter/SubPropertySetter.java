@@ -27,7 +27,7 @@
 package org.loboevolution.html.style.setter;
 
 import org.htmlunit.cssparser.util.CSSProperties;
-import org.loboevolution.html.node.css.CSSStyleDeclaration;
+import org.loboevolution.css.CSSStyleDeclaration;
 
 /**
  * <p>SubPropertySetter interface.</p>
@@ -37,7 +37,7 @@ public interface SubPropertySetter extends CSSProperties {
 	/**
 	 * <p>changeValue.</p>
 	 *
-	 * @param declaration a {@link org.loboevolution.html.node.css.CSSStyleDeclaration} object.
+	 * @param declaration a {@link CSSStyleDeclaration} object.
 	 * @param newValue a {@link java.lang.String} object.
 	 */
 	void changeValue(final CSSStyleDeclaration declaration, final String newValue);
