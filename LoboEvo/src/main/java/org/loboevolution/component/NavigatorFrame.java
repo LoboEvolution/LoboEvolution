@@ -104,7 +104,7 @@ public class NavigatorFrame {
             final UserAgentContext ucontext = new UserAgentContext(new HtmlRendererConfigImpl());
             final HtmlRendererConfig config = new HtmlRendererConfigImpl();
             final HtmlRendererContext rendererContext = new HtmlRendererContextImpl(panel, ucontext, config);
-            panel.setPreferredSize(new Dimension(800, 400));
+            panel.setPreferredSize(new Dimension((int) config.getInitialWindowBounds().getWidth(), (int) config.getInitialWindowBounds().getHeight()));
             final DocumentBuilderImpl builder = new DocumentBuilderImpl(rendererContext.getUserAgentContext(),rendererContext, config);
             final Document document = builder.parse(is);
             panel.setDocument(document, rendererContext);
@@ -134,7 +134,7 @@ public class NavigatorFrame {
             final UserAgentContext ucontext = new UserAgentContext(new HtmlRendererConfigImpl());
             final HtmlRendererConfig config = new HtmlRendererConfigImpl();
             final HtmlRendererContext rendererContext = new HtmlRendererContextImpl(panel, ucontext, config);
-            panel.setPreferredSize(new Dimension(800, 400));
+            panel.setPreferredSize(new Dimension((int) config.getInitialWindowBounds().getWidth(), (int) config.getInitialWindowBounds().getHeight()));
             final DocumentBuilderImpl builder = new DocumentBuilderImpl(rendererContext.getUserAgentContext(), rendererContext, config);
             final Document document = builder.parse(is);
             panel.setDocument(document, rendererContext);

@@ -1,1 +1,1 @@
-INSERT INTO SIZE (width, height) VALUES(900,500);
+INSERT INTO SIZE (width, height) VALUES(1600,900);
