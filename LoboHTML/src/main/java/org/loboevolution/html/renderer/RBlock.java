@@ -27,6 +27,7 @@ package org.loboevolution.html.renderer;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.loboevolution.html.dom.HTMLBodyElement;
 import org.loboevolution.html.dom.HTMLHtmlElement;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
@@ -162,7 +163,7 @@ public class RBlock extends BaseElementRenderable {
 		final int availWidth = info.getAvailWidth();
 		final int availHeight = info.getAvailHeight();
 		final boolean expandWidth = info.isExpandWidth();
-		final boolean expandHeight = info.isExpandHeight();
+		final boolean expandHeight = modelNode instanceof HTMLHtmlElement || modelNode instanceof HTMLBodyElement || info.isExpandHeight();
 		final boolean sizeOnly = info.isSizeOnly();
 		final FloatingBoundsSource blockFloatBoundsSource = info.getBlockFloatBoundsSource();
 

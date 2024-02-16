@@ -295,7 +295,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
         if (attr != null) {
             String style = attr.getNodeValue();
             if (style != null && style.contains(";")) {
-                String[] splitStyle = style.split(";");
+                String[] splitStyle = style.trim().split(";");
                 StringBuilder builder = new StringBuilder();
                 for (String css : splitStyle) {
                     String[] cssArray = css.split(":");

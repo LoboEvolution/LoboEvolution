@@ -103,7 +103,7 @@ public class HTMLBodyElementImpl extends HTMLElementImpl implements HTMLBodyElem
 	 */
 	public Function getOnload() {
 		final Object document = this.document;
-		if (document instanceof HTMLDocumentImpl) {
+		if (document instanceof HTMLDocument) {
 			return ((HTMLDocumentImpl) document).getOnloadHandler();
 		} else {
 			return null;
@@ -174,9 +174,7 @@ public class HTMLBodyElementImpl extends HTMLElementImpl implements HTMLBodyElem
 	 */
 	public void setOnload(final Function onload) {
 		final Object document = this.document;
-		if (document instanceof HTMLDocumentImpl) {
-			// Note that body.onload overrides
-			// WindowImpl.onload.
+		if (document instanceof HTMLDocument) {
 			((HTMLDocumentImpl) document).setOnloadHandler(onload);
 		}
 	}

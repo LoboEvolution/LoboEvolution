@@ -25,6 +25,7 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
+import org.loboevolution.html.dom.HTMLDocument;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.parser.XHtmlParser;
 import org.loboevolution.html.dom.UserDataHandler;
@@ -50,7 +51,7 @@ public class HTMLTitleElementImpl extends HTMLElementImpl {
 	public Object setUserData(final String key, final Object data, final UserDataHandler handler) {
 		if (XHtmlParser.MODIFYING_KEY.equals(key) && data == Boolean.FALSE) {
 			final Document document = this.document;
-			if (document instanceof HTMLDocumentImpl) {
+			if (document instanceof HTMLDocument) {
 				final String textContent = getTextContent();
 				final String title = textContent == null ? null : textContent.trim();
 				document.setTitle(title);

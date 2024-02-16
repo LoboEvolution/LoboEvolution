@@ -210,8 +210,7 @@ public class HtmlValues {
 				final Font DEFAULT_FONT = FONT_FACTORY.getFont(FontValues.getDefaultFontKey(win.getConfig()));
 				final Font f = (renderState == null) ? DEFAULT_FONT : renderState.getFont();
 				final int fontSize = f.getSize();
-				final double pixelSize = (double) (fontSize * dpi) / 96;
-				return (int) Math.round(pixelSize * Double.parseDouble(text));
+				return (int) Math.round(fontSize * Double.parseDouble(text));
 			case "rem":
 				final WindowImpl win2 = (WindowImpl) window;
 				final float fs = win2.getConfig() != null ? win2.getConfig().getFontSize() : 16.0f;

@@ -32,6 +32,7 @@ import org.loboevolution.common.Strings;
 import org.loboevolution.css.CSS2Properties;
 import org.loboevolution.css.CSS3Properties;
 import org.loboevolution.gui.HtmlRendererContext;
+import org.loboevolution.html.HTMLTag;
 import org.loboevolution.html.dom.HTMLDocument;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
@@ -174,14 +175,16 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 		final HTMLElementImpl rootElement;
 		final boolean isRootBlock;
 
-		if (rootNode instanceof HTMLDocumentImpl) {
+		if (rootNode instanceof HTMLDocument) {
 			isRootBlock = true;
 			final HTMLDocumentImpl doc = (HTMLDocumentImpl) rootNode;
-			rootElement = (HTMLElementImpl) doc.getBody();
+			rootElement = (HTMLElementImpl) doc.getElementsByName(HTMLTag.HTML.getValue()).item(0);
 		} else {
 			isRootBlock = false;
 			rootElement = (HTMLElementImpl) rootNode;
 		}
+
+
 		if (rootElement == null) {
 			clearStyle(isRootBlock);
 			return;
@@ -606,7 +609,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 	@Override
 	public int getInnerWidth() {
 		final Object rootNode = this.modelNode;
-		if (rootNode instanceof HTMLDocumentImpl) {
+		if (rootNode instanceof HTMLDocument) {
 			final HTMLDocumentImpl doc = (HTMLDocumentImpl) rootNode;
 			return doc.getHtmlRendererContext().getInnerWidth();
 		}
@@ -623,7 +626,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 	@Override
 	public int getInnerHeight() {
 		final Object rootNode = this.modelNode;
-		if (rootNode instanceof HTMLDocumentImpl) {
+		if (rootNode instanceof HTMLDocument) {
 			final HTMLDocumentImpl doc = (HTMLDocumentImpl) rootNode;
 			return doc.getHtmlRendererContext().getInnerHeight();
 		}
@@ -849,7 +852,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 	 */
 	protected boolean isMarginBoundary() {
 		return this.overflowY != RenderState.OVERFLOW_VISIBLE && this.overflowX != RenderState.OVERFLOW_NONE
-				|| this.modelNode instanceof HTMLDocumentImpl;
+				|| this.modelNode instanceof HTMLDocument;
 	}
 
 	/** {@inheritDoc} */

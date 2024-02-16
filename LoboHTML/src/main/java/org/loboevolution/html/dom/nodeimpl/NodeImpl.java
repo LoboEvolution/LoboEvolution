@@ -38,10 +38,7 @@ import org.loboevolution.common.Urls;
 import org.loboevolution.config.HtmlRendererConfig;
 import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.gui.LocalHtmlRendererConfig;
-import org.loboevolution.html.dom.HTMLCollection;
-import org.loboevolution.html.dom.HTMLElement;
-import org.loboevolution.html.dom.HTMLHtmlElement;
-import org.loboevolution.html.dom.UserDataHandler;
+import org.loboevolution.html.dom.*;
 import org.loboevolution.html.dom.filter.ElementFilter;
 import org.loboevolution.html.dom.nodeimpl.event.EventTargetImpl;
 import org.loboevolution.events.Event;
@@ -473,7 +470,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	 */
 	public URL getDocumentURL() {
 		final Object doc = this.document;
-		if (doc instanceof HTMLDocumentImpl) {
+		if (doc instanceof HTMLDocument) {
 			return ((HTMLDocumentImpl) doc).getDocumentURL();
 		} else {
 			return null;
@@ -514,7 +511,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	public URL getFullURL(final String spec) throws MalformedURLException {
 		final Object doc = this.document;
 		final String cleanSpec  = Urls.encodeIllegalCharacters(spec);
-		if (doc instanceof HTMLDocumentImpl) {
+		if (doc instanceof HTMLDocument) {
 			return ((HTMLDocumentImpl) doc).getFullURL(cleanSpec );
 		} else {
 			return new URL(cleanSpec );
@@ -528,7 +525,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	 */
 	public HtmlRendererContext getHtmlRendererContext() {
 		final Object doc = this.document;
-		if (doc instanceof HTMLDocumentImpl) {
+		if (doc instanceof HTMLDocument) {
 			return ((HTMLDocumentImpl) doc).getHtmlRendererContext();
 		} else {
 			return null;
@@ -542,7 +539,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	 */
 	public HtmlRendererConfig getHtmlRendererConfig() {
 		final Object doc = this.document;
-		if (doc instanceof HTMLDocumentImpl) {
+		if (doc instanceof HTMLDocument) {
 			return ((HTMLDocumentImpl) doc).getConfig();
 		} else {
 			return new LocalHtmlRendererConfig();
@@ -801,7 +798,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	 */
 	public UserAgentContext getUserAgentContext() {
 		final Object doc = this.document;
-		if (doc instanceof HTMLDocumentImpl) {
+		if (doc instanceof HTMLDocument) {
 			return ((HTMLDocumentImpl) doc).getUserAgentContext();
 		} else {
 			return null;

@@ -32,6 +32,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.Urls;
 import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.control.ImgSvgControl;
+import org.loboevolution.html.dom.HTMLDocument;
 import org.loboevolution.html.dom.HTMLImageElement;
 import org.loboevolution.gui.HtmlPanel;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
@@ -142,7 +143,7 @@ public class HTMLImageElementImpl extends HTMLElementImpl implements HTMLImageEl
 	 */
 	public Function getOnload() {
 		final Object document = this.document;
-		if (document instanceof HTMLDocumentImpl) {
+		if (document instanceof HTMLDocument) {
 			return ((HTMLDocumentImpl) document).getOnloadHandler();
 		} else {
 			return null;
@@ -228,7 +229,7 @@ public class HTMLImageElementImpl extends HTMLElementImpl implements HTMLImageEl
 	 */
 	public void setOnload(final Function onload) {
 		final Object document = this.document;
-		if (document instanceof HTMLDocumentImpl) {
+		if (document instanceof HTMLDocument) {
 			((HTMLDocumentImpl) document).setOnloadHandler(onload);
 		}
 	}
@@ -398,9 +399,9 @@ public class HTMLImageElementImpl extends HTMLElementImpl implements HTMLImageEl
 		try {
 			final Object document = this.document;
 			String uri = null;
-			if (document instanceof HTMLDocumentImpl) {
+			if (document instanceof HTMLDocument) {
 				try {
-					final HTMLDocumentImpl doc = (HTMLDocumentImpl) document;
+					final HTMLDocument doc = (HTMLDocument) document;
 					final URL baseURL = new URL(doc.getBaseURI());
 					final String src = getSrc();
 					final URL scriptURL = Urls.createURL(baseURL, src);

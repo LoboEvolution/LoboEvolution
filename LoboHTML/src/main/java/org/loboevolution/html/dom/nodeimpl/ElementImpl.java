@@ -1013,7 +1013,7 @@ public abstract class ElementImpl extends NodeImpl implements Element {
 
 		for (Node n = getParentNode(); n != null; n = n.getParentNode()) {
 
-			if (!(n instanceof TextImpl) && !(n instanceof HTMLDocumentImpl)) {
+			if (!(n instanceof TextImpl) && !(n instanceof HTMLDocument)) {
 
 				final HTMLElementImpl p = (HTMLElementImpl) n;
 				final CSSStyleDeclaration pCurrentStyle = p.getCurrentStyle();
@@ -1067,7 +1067,7 @@ public abstract class ElementImpl extends NodeImpl implements Element {
 		String display = Strings.isNotBlank(style.getDisplay()) ? style.getDisplay() : getAttribute("display");
 		if (!"none".equals(display)) {
 			for (Node n = getParentNode(); n != null; n = n.getPreviousSibling()) {
-				if (!(n instanceof HTMLBodyElement) && !(n instanceof TextImpl) && !(n instanceof HTMLDocumentImpl)) {
+				if (!(n instanceof HTMLBodyElement) && !(n instanceof TextImpl) && !(n instanceof HTMLDocument)) {
 					final HTMLElementImpl p = (HTMLElementImpl) n;
 					final CSSStyleDeclaration st = p.getCurrentStyle();
 					display = st.getDisplay();

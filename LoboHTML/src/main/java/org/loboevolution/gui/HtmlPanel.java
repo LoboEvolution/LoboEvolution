@@ -35,6 +35,7 @@ import org.loboevolution.common.EventDispatch2;
 import org.loboevolution.common.WrapperLayout;
 import org.loboevolution.component.IBrowserPanel;
 import org.loboevolution.config.HtmlRendererConfig;
+import org.loboevolution.html.dom.HTMLDocument;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.dom.nodeimpl.event.DocumentNotificationListener;
@@ -465,8 +466,8 @@ public class HtmlPanel extends JComponent implements FrameContext {
 
 	private void scrollToElementImpl(final String nameOrId) {
 		final NodeImpl node = this.rootNode;
-		if (node instanceof HTMLDocumentImpl) {
-			final HTMLDocumentImpl doc = (HTMLDocumentImpl) node;
+		if (node instanceof HTMLDocument) {
+			final HTMLDocument doc = (HTMLDocument) node;
 			final Element element = doc.getElementById(nameOrId);
 			if (element != null) {
 				this.scrollTo(element);
@@ -543,7 +544,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 
 	private void setDocumentImpl(final Document node, final HtmlRendererContext rcontext) {
 		// Expected to be called in the GUI thread.
-		if (!(node instanceof HTMLDocumentImpl)) {
+		if (!(node instanceof HTMLDocument)) {
 			throw new IllegalArgumentException(
 					"Only nodes of type HTMLDocumentImpl are currently supported. Use DocumentBuilderImpl.");
 		}

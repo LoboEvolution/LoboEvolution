@@ -30,6 +30,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.gui.HtmlRendererContext;
+import org.loboevolution.html.dom.HTMLDocument;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.node.DOMStringList;
 import org.loboevolution.html.node.Document;
@@ -185,7 +186,7 @@ public class LocationImpl extends AbstractScriptableDelegate implements Location
 	public void reload() {
 		// TODO: This is not really reload.
 		final Document document = this.window.getDocumentNode();
-		if (document instanceof HTMLDocumentImpl) {
+		if (document instanceof HTMLDocument) {
 			final HTMLDocumentImpl docImpl = (HTMLDocumentImpl) document;
 			final HtmlRendererContext rcontext = docImpl.getHtmlRendererContext();
 			if (rcontext != null) {
@@ -220,7 +221,7 @@ public class LocationImpl extends AbstractScriptableDelegate implements Location
 			try {
 				final URL url;
 				final Document document = this.window.getDocumentNode();
-				if (document instanceof HTMLDocumentImpl) {
+				if (document instanceof HTMLDocument) {
 					final HTMLDocumentImpl docImpl = (HTMLDocumentImpl) document;
 					url = docImpl.getFullURL(uri);
 				} else {

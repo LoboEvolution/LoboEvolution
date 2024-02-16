@@ -57,6 +57,7 @@ import java.net.HttpURLConnection;
 import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.time.Instant;
 
@@ -92,13 +93,13 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 	}
 
 	@Override
-	public boolean isAsync() {
+	public Boolean isAsync() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public void setAsync(final boolean async) {
+	public void setAsync(Object async) {
 		// TODO Auto-generated method stub
 	}
 
@@ -191,7 +192,7 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 					connection.getHeaderField("Set-Cookie");
 					try (final InputStream in = HttpNetwork.openConnectionCheckRedirects(connection)) {
 						if (AlgorithmDigest.validate(IOUtil.readFully(in), getIntegrity())) {
-							try (final Reader reader = new InputStreamReader(in, "utf-8")) {
+							try (final Reader reader = new InputStreamReader(in, StandardCharsets.UTF_8)) {
 								final BufferedReader br = new BufferedReader(reader);
 								ctx.evaluateReader(scope, br, scriptURI, 1, null);
 							} catch (Exception e) {

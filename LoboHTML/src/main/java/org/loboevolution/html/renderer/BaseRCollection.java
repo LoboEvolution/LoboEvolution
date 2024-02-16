@@ -320,9 +320,9 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 			renderables.forEach(rn -> {
 		        final Renderable r = (rn instanceof PositionedRenderable) ? ((PositionedRenderable) rn).getRenderable() : rn;
 				if (r instanceof RCollection) {
-					// RUIControl is a RCollection too.
 					final RCollection rc = (RCollection) r;
-					rc.updateWidgetBounds(guiX + rc.getX(), guiY + rc.getY());
+					final Point or = rc.getOriginRelativeTo(this);
+					rc.updateWidgetBounds(guiX + or.x, guiY + or.y);
 				}
 			});
 		}

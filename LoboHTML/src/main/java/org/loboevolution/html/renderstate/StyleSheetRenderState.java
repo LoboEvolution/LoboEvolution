@@ -167,11 +167,10 @@ public class StyleSheetRenderState implements RenderState {
 		final CSSStyleDeclaration props = getCssProperties();
 		String textAlign = props == null ? null : props.getTextAlign();
 		if (Strings.isBlank(textAlign)) {
-			// Fall back to align attribute.
 			final HTMLElement element = this.element;
 			if (element != null) {
 				textAlign = element.getAttribute("align");
-				if (Strings.isNotBlank(textAlign)) {
+				if (Strings.isBlank(textAlign)) {
 					final RenderState prs = this.prevRenderState;
 					if (prs != null) {
 						return prs.getAlignXPercent();
