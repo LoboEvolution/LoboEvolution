@@ -6,7 +6,6 @@
 	<a href="https://codebeat.co/projects/github-com-loboevolution-loboevolution-master"><img alt="codebeat badge" src="https://codebeat.co/badges/74e4393e-77b9-44a9-ad98-0b33fb839754" /></a>
 	<a href="https://codeclimate.com/github/LoboEvolution/LoboEvolution/maintainability"><img src="https://api.codeclimate.com/v1/badges/eaeed65cfc69b72b4701/maintainability" /></a>
 	<a href="https://github.com/LoboEvolution/LoboEvolution/actions/workflows/codeql.yml"><img src="https://github.com/LoboEvolution/LoboEvolution/actions/workflows/codeql.yml/badge.svg?branch=master" alt="Docs"></a>
-    <a href="https://github.com/LoboEvolution/LoboEvolution/actions/workflows/code_quality.yml"><img src="https://github.com/LoboEvolution/LoboEvolution/actions/workflows/code_quality.yml/badge.svg" alt="Qodana"></a>
 </p>
 <p align="center">
 	<a href="http://sourceforge.net/projects/loboevolution/"><img src="https://img.shields.io/website-up-down-green-red/http/shields.io.svg" alt="Website"/></a>
