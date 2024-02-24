@@ -577,7 +577,7 @@ public class StyleSheetRenderState implements RenderState {
 			return this.iFont;
 		}
 
-		if (style == null) {
+		if (style == null || Strings.isBlank(style.getFont())) {
 			if (prs != null) {
 				this.iFont = prs.getFont();
 				return this.iFont;
