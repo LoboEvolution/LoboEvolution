@@ -601,7 +601,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 
 	/** {@inheritDoc} */
 	@Override
-	public final Collection<DelayedPair> getDelayedPairs() {
+	public final List<DelayedPair> getDelayedPairs() {
 		return this.delayedPairs;
 	}
 

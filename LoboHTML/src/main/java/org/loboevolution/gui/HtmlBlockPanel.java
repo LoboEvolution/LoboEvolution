@@ -254,7 +254,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 
 	/** {@inheritDoc} */
 	@Override
-	public Collection<DelayedPair> getDelayedPairs() {
+	public List<DelayedPair> getDelayedPairs() {
 		return null;
 	}
 

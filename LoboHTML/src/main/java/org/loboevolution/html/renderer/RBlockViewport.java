@@ -1780,7 +1780,7 @@ public class RBlockViewport extends BaseRCollection {
 		final CSSStyleDeclaration style = element.getCurrentStyle();
 
 		this.container.addDelayedPair(DelayedPair.builder().
-				modelNode(getModelNode()).
+				modelNode(element).
 				immediateContainingBlock(container).
 				containingBlock(containingBlock).
 				child(renderable).
@@ -1866,12 +1866,6 @@ public class RBlockViewport extends BaseRCollection {
 			}
 			c.add(floatInfo);
 		}
-	}
-
-	private RElement setupNewUIControl(final RenderableContainer container, final HTMLElementImpl element, final UIControl control) {
-		final RElement renderable = new RUIControl(element, control, container, this.userAgentContext);
-		element.setUINode(renderable);
-		return renderable;
 	}
 
 	/** {@inheritDoc} */
@@ -1962,7 +1956,7 @@ public class RBlockViewport extends BaseRCollection {
 	 * <p>positionDelayed.</p>
 	 */
 	public void positionDelayed() {
-		final Collection<DelayedPair> delayedPairs = container.getDelayedPairs();
+		final List<DelayedPair> delayedPairs = container.getDelayedPairs();
 		if (ArrayUtilities.isNotBlank(delayedPairs)) {
 			delayedPairs.stream().filter(pair -> pair.getContainingBlock() == container).forEach(this::importDelayedPair);
 		}

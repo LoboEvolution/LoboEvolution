@@ -27,11 +27,11 @@
 package org.loboevolution.html.renderer;
 
 import java.awt.*;
-import java.util.Collection;
+import java.util.List;
 
 /**
  * A RenderableContainer is either usually a parent block or the root GUI
- * component. It's is a Renderable or GUI component whose layout may be
+ * component. It is a Renderable or GUI component whose layout may be
  * invalidated.
  */
 public interface RenderableContainer {
@@ -63,9 +63,9 @@ public interface RenderableContainer {
 	/**
 	 * <p>getDelayedPairs.</p>
 	 *
-	 * @return a {@link java.util.Collection} object.
+	 * @return a {@link java.util.List} object.
 	 */
-	Collection<DelayedPair> getDelayedPairs();
+	List<DelayedPair> getDelayedPairs();
 
 	/**
 	 * <p>getPaintedBackgroundColor.</p>
