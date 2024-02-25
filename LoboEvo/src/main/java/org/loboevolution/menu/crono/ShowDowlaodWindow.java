@@ -41,7 +41,7 @@ import java.util.List;
  * <p>ShowDowlaodWindow class.</p>
  */
 @Slf4j
-public class ShowDowlaodWindow extends JFrame implements LoboLookAndFeel {
+public class ShowDowlaodWindow extends JFrame {
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;
@@ -56,9 +56,10 @@ public class ShowDowlaodWindow extends JFrame implements LoboLookAndFeel {
     }
 
     private void createAndShowGUI() {
+        final LoboBackground lb = new LoboBackground();
         final Container contentPane = getContentPane();
         contentPane.setLayout(null);
-        contentPane.setBackground(background());
+        contentPane.setBackground(lb.getBackground());
         setResizable(true);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setBounds(100, 100, 600, 500);

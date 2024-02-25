@@ -29,7 +29,6 @@ package com.jtattoo.plaf.acryl;
 import javax.swing.border.Border;
 
 import com.jtattoo.plaf.AbstractBorderFactory;
-import com.jtattoo.plaf.BaseBorders;
 
 /**
  * <p>AcrylBorderFactory class.</p>
@@ -37,7 +36,7 @@ import com.jtattoo.plaf.BaseBorders;
  * Author Michael Hagen
  *
  */
-public final class AcrylBorderFactory implements AbstractBorderFactory {
+public final class AcrylBorderFactory extends AbstractBorderFactory {
 
 	private static AcrylBorderFactory instance = null;
 
@@ -70,50 +69,8 @@ public final class AcrylBorderFactory implements AbstractBorderFactory {
 
 	/** {@inheritDoc} */
 	@Override
-	public Border getDesktopIconBorder() {
-		return BaseBorders.getDesktopIconBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Border getFocusFrameBorder() {
-		return BaseBorders.getFocusFrameBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
 	public Border getInternalFrameBorder() {
 		return AcrylBorders.getInternalFrameBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Border getMenuBarBorder() {
-		return BaseBorders.getMenuBarBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Border getMenuItemBorder() {
-		return BaseBorders.getMenuItemBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Border getPaletteBorder() {
-		return BaseBorders.getPaletteBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Border getPopupMenuBorder() {
-		return BaseBorders.getPopupMenuBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Border getProgressBarBorder() {
-		return BaseBorders.getProgressBarBorder();
 	}
 
 	/** {@inheritDoc} */
@@ -126,18 +83,6 @@ public final class AcrylBorderFactory implements AbstractBorderFactory {
 	@Override
 	public Border getSpinnerBorder() {
 		return AcrylBorders.getSpinnerBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Border getTabbedPaneBorder() {
-		return BaseBorders.getTabbedPaneBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Border getTableHeaderBorder() {
-		return BaseBorders.getTableHeaderBorder();
 	}
 
 	/** {@inheritDoc} */
@@ -162,12 +107,6 @@ public final class AcrylBorderFactory implements AbstractBorderFactory {
 	@Override
 	public Border getToggleButtonBorder() {
 		return AcrylBorders.getToggleButtonBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Border getToolBarBorder() {
-		return BaseBorders.getToolBarBorder();
 	}
 
 } // end of class AcrylBorderFactory

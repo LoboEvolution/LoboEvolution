@@ -30,11 +30,8 @@ import javax.swing.JCheckBox;
 
 /**
  * <p>LoboCheckBox class.</p>
- *
- *
- *
  */
-public class LoboCheckBox extends JCheckBox implements LoboLookAndFeel {
+public class LoboCheckBox extends JCheckBox {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -45,7 +42,8 @@ public class LoboCheckBox extends JCheckBox implements LoboLookAndFeel {
 	 */
 	public LoboCheckBox(final String name) {
 		super(name);
-		setBackground(background());
-		setForeground(foreground());
+		final LoboBackground lb = new LoboBackground();
+		setBackground(lb.getBackground());
+		setForeground(lb.getForeground());
 	}
 }

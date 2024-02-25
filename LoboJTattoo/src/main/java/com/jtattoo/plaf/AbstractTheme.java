@@ -1660,24 +1660,8 @@ public abstract class AbstractTheme extends MetalTheme {
 	 * <p>loadProperties.</p>
 	 */
 	public void loadProperties() {
-		FileInputStream in = null;
-		try {
-			final String fileName = System.getProperty("user.home") + "/.jtattoo/" + getPropertyFileName();
-			final Properties props = new Properties();
-			in = new FileInputStream(fileName);
-			props.load(in);
-			setProperties(props);
-		} catch (final IOException e) {
-			log.info(e.getMessage());
-		} finally {
-			try {
-				if (in != null) {
-					in.close();
-				}
-			} catch (final IOException e) {
-				log.info(e.getMessage());
-			}
-		}
+		final Properties props = new Properties();
+		setProperties(props);
 	}
 
 	/**

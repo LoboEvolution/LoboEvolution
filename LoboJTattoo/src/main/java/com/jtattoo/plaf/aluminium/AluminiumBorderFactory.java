@@ -29,6 +29,7 @@ package com.jtattoo.plaf.aluminium;
 import javax.swing.border.Border;
 
 import com.jtattoo.plaf.AbstractBorderFactory;
+import com.jtattoo.plaf.BorderFactory;
 import com.jtattoo.plaf.BaseBorders;
 
 /**
@@ -37,7 +38,7 @@ import com.jtattoo.plaf.BaseBorders;
  * Author Michael Hagen
  *
  */
-public final class AluminiumBorderFactory implements AbstractBorderFactory {
+public final class AluminiumBorderFactory extends AbstractBorderFactory {
 
 	private static AluminiumBorderFactory instance = null;
 
@@ -64,110 +65,14 @@ public final class AluminiumBorderFactory implements AbstractBorderFactory {
 
 	/** {@inheritDoc} */
 	@Override
-	public Border getComboBoxBorder() {
-		return BaseBorders.getComboBoxBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Border getDesktopIconBorder() {
-		return BaseBorders.getDesktopIconBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Border getFocusFrameBorder() {
-		return BaseBorders.getFocusFrameBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
 	public Border getInternalFrameBorder() {
 		return AluminiumBorders.getInternalFrameBorder();
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Border getMenuBarBorder() {
-		return BaseBorders.getMenuBarBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Border getMenuItemBorder() {
-		return BaseBorders.getMenuItemBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Border getPaletteBorder() {
-		return BaseBorders.getPaletteBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Border getPopupMenuBorder() {
-		return BaseBorders.getPopupMenuBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Border getProgressBarBorder() {
-		return BaseBorders.getProgressBarBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Border getScrollPaneBorder() {
-		return BaseBorders.getScrollPaneBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Border getSpinnerBorder() {
-		return BaseBorders.getSpinnerBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Border getTabbedPaneBorder() {
-		return BaseBorders.getTabbedPaneBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Border getTableHeaderBorder() {
-		return BaseBorders.getTableHeaderBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Border getTableScrollPaneBorder() {
-		return BaseBorders.getTableScrollPaneBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Border getTextBorder() {
-		return BaseBorders.getTextBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Border getTextFieldBorder() {
-		return BaseBorders.getTextFieldBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
 	public Border getToggleButtonBorder() {
 		return AluminiumBorders.getToggleButtonBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Border getToolBarBorder() {
-		return BaseBorders.getToolBarBorder();
 	}
 
 } // end of class AluminiumBorderFactory

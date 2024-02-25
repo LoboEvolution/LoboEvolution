@@ -26,8 +26,8 @@
 
 package org.loboevolution.download;
 
+import com.jtattoo.plaf.lobo.LoboBackground;
 import com.jtattoo.plaf.lobo.LoboButton;
-import com.jtattoo.plaf.lobo.LoboLookAndFeel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
@@ -52,7 +52,7 @@ import java.net.URLConnection;
 @EqualsAndHashCode(callSuper = true)
 @Slf4j
 @Data
-public class DownloadWindow extends JFrame implements IDownload, LoboLookAndFeel {
+public class DownloadWindow extends JFrame implements IDownload {
 
     private static final long serialVersionUID = 1L;
 
@@ -90,9 +90,10 @@ public class DownloadWindow extends JFrame implements IDownload, LoboLookAndFeel
      * @throws java.io.IOException if any.
      */
     public DownloadWindow(final URL url) throws IOException {
+        final LoboBackground lb = new LoboBackground();
         final Container contentPane = getContentPane();
         contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.X_AXIS));
-        contentPane.setBackground(background());
+        contentPane.setBackground(lb.getBackground());
         setResizable(true);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         final ImageIcon ico = new ImageIcon(DesktopConfig.getResourceFile("download.png",DesktopConfig.PATH_IMAGE));

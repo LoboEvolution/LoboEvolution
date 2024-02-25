@@ -32,6 +32,7 @@ import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import javax.swing.JLabel;
 
+import com.jtattoo.plaf.lobo.LoboBackground;
 import org.loboevolution.common.Strings;
 import org.loboevolution.component.IBrowserPanel;
 import org.loboevolution.component.ITabbedPane;
@@ -41,25 +42,26 @@ import org.loboevolution.http.NavigationManager;
 import org.loboevolution.store.SearchEngineStore;
 import org.loboevolution.store.TabStore;
 
-import com.jtattoo.plaf.lobo.LoboLookAndFeel;
 import org.loboevolution.store.ToolsStore;
 
 /**
  * <p>LoginButton class.</p>
  */
-public class LoginButton extends JLabel implements LoboLookAndFeel {
+public class LoginButton extends JLabel {
 
 	private static final long serialVersionUID = 1L;
 
-    private final Color COLOR_INTERACTIVE = background();
-
-	private final Color COLOR_INTERACTIVE_DARKER = interactive();
+	private final LoboBackground lb = new LoboBackground();
 
 	private final Font FONT_GENERAL_UI = new Font("Segoe UI", Font.PLAIN, 20);
 
-	private final Color[] loginButtonColors = { this.COLOR_INTERACTIVE, foreground() };
-
 	private final Color OFFWHITE = new Color(229, 229, 229);
+
+	private final Color COLOR_INTERACTIVE = lb.getBackground();
+
+	private final Color COLOR_INTERACTIVE_DARKER = lb.getInteractive();
+
+	private final Color[] loginButtonColors = { this.COLOR_INTERACTIVE, lb.getForeground() };
 
 	private final int ROUNDNESS = 8;
 
@@ -70,9 +72,7 @@ public class LoginButton extends JLabel implements LoboLookAndFeel {
 	 * @param text a {@link org.loboevolution.welcome.TextFieldUsername} object.
 	 */
 	public LoginButton(final IBrowserPanel panel, final TextFieldUsername text) {
-
-        Color COLOR_BACKGROUND = background();
-        setBackground(COLOR_BACKGROUND);
+        setBackground(lb.getBackground());
 		setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
 		addMouseListener(new MouseAdapter() {
@@ -87,7 +87,7 @@ public class LoginButton extends JLabel implements LoboLookAndFeel {
 			@Override
 			public void mouseExited(final MouseEvent e) {
 				LoginButton.this.loginButtonColors[0] = LoginButton.this.COLOR_INTERACTIVE;
-				LoginButton.this.loginButtonColors[1] = LoginButton.this.foreground();
+				LoginButton.this.loginButtonColors[1] = LoginButton.this.getForeground();
 				repaint();
 			}
 
@@ -129,7 +129,7 @@ public class LoginButton extends JLabel implements LoboLookAndFeel {
 	@Override
 	protected void paintBorder(final Graphics g) {
 		final Graphics2D g2 = get2dGraphics(g);
-		g2.setColor(foreground());
+		g2.setColor(lb.getForeground());
 		g2.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, ROUNDNESS, ROUNDNESS);
 	}
 

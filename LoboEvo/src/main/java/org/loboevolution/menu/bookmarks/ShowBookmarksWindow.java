@@ -39,6 +39,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
+import com.jtattoo.plaf.lobo.*;
 import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.Strings;
 import org.loboevolution.component.BrowserFrame;
@@ -53,18 +54,11 @@ import org.loboevolution.store.BookmarksStore;
 import org.loboevolution.config.DesktopConfig;
 import org.loboevolution.store.TabStore;
 
-import com.jtattoo.plaf.lobo.LoboButton;
-import com.jtattoo.plaf.lobo.LoboLabel;
-import com.jtattoo.plaf.lobo.LoboLookAndFeel;
-import com.jtattoo.plaf.lobo.LoboPanel;
-import com.jtattoo.plaf.lobo.LoboSeparator;
-import com.jtattoo.plaf.lobo.LoboTextField;
-
 /**
  * <p>ShowBookmarksWindow class.</p>
  */
 @Slf4j
-public class ShowBookmarksWindow extends JFrame implements LoboLookAndFeel {
+public class ShowBookmarksWindow extends JFrame {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
@@ -93,8 +87,9 @@ public class ShowBookmarksWindow extends JFrame implements LoboLookAndFeel {
 	
 	private void createAndShowGUI(final BrowserFrame frame, final Integer num) {
 		final Container contentPane = getContentPane();
+		final LoboBackground lb = new LoboBackground();
 		contentPane.setLayout(null);
-		contentPane.setBackground(background());
+		contentPane.setBackground(lb.getBackground());
 		setResizable(false);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 950, 410);

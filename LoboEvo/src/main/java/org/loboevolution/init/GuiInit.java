@@ -67,61 +67,41 @@ public class GuiInit {
 		if (settings.isAcryl()) {
 			AcrylLookAndFeel.setCurrentTheme(props);
 			UIManager.setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel");
-		}
-
-		if (settings.isAero()) {
+		} else if (settings.isAero()) {
 			AeroLookAndFeel.setCurrentTheme(props);
 			UIManager.setLookAndFeel("com.jtattoo.plaf.aero.AeroLookAndFeel");
-		}
-
-		if (settings.isAluminium()) {
+		} else if (settings.isAluminium()) {
 			AluminiumLookAndFeel.setCurrentTheme(props);
 			UIManager.setLookAndFeel("com.jtattoo.plaf.aluminium.AluminiumLookAndFeel");
-		}
-
-		if (settings.isBernstein()) {
+		} else if (settings.isBernstein()) {
 			BernsteinLookAndFeel.setCurrentTheme(props);
 			UIManager.setLookAndFeel("com.jtattoo.plaf.bernstein.BernsteinLookAndFeel");
-		}
-
-		if (settings.isFast()) {
+		} else if (settings.isFast()) {
 			FastLookAndFeel.setCurrentTheme(props);
 			UIManager.setLookAndFeel("com.jtattoo.plaf.fast.FastLookAndFeel");
-		}
-
-		if (settings.isGraphite()) {
+		} else if (settings.isGraphite()) {
 			GraphiteLookAndFeel.setCurrentTheme(props);
 			UIManager.setLookAndFeel("com.jtattoo.plaf.graphite.GraphiteLookAndFeel");
-		}
-
-		if (settings.isHiFi()) {
+		} else if (settings.isHiFi()) {
 			HiFiLookAndFeel.setCurrentTheme(props);
 			UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
-		}
-
-		if (settings.isLuna()) {
+		} else if (settings.isLuna()) {
 			LunaLookAndFeel.setCurrentTheme(props);
 			UIManager.setLookAndFeel("com.jtattoo.plaf.luna.LunaLookAndFeel");
-		}
-
-		if (settings.isMcWin()) {
+		} else if (settings.isMcWin()) {
 			McWinLookAndFeel.setCurrentTheme(props);
 			UIManager.setLookAndFeel("com.jtattoo.plaf.mcwin.McWinLookAndFeel");
-		}
-
-		if (settings.isNoire()) {
+		} else if (settings.isNoire()) {
 			NoireLookAndFeel.setCurrentTheme(props);
 			UIManager.setLookAndFeel("com.jtattoo.plaf.noire.NoireLookAndFeel");
-		}
-
-		if (settings.isSmart()) {
+		} else if (settings.isSmart()) {
 			SmartLookAndFeel.setCurrentTheme(props);
 			UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
-		}
-
-		if (settings.isTexture()) {
+		} else if (settings.isTexture()) {
 			TextureLookAndFeel.setCurrentTheme(props);
 			UIManager.setLookAndFeel("com.jtattoo.plaf.texture.TextureLookAndFeel");
+		} else {
+			UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
 		}
 	}
 

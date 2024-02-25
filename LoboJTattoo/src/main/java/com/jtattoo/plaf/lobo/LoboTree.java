@@ -36,11 +36,8 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 
 /**
  * <p>LoboTree class.</p>
- *
- *
- *
  */
-public class LoboTree extends JTree implements LoboLookAndFeel {
+public class LoboTree extends JTree {
 
 	private static final long serialVersionUID = 1L;
 
@@ -48,18 +45,20 @@ public class LoboTree extends JTree implements LoboLookAndFeel {
 	 * <p>Constructor for LoboTree.</p>
 	 */
 	public LoboTree() {
-		setBackground(background());
-		setForeground(foreground());
+		final LoboBackground lb = new LoboBackground();
+		setBackground(lb.getBackground());
+		setForeground(lb.getForeground());
 		setCellRenderer(new TreeCellRenderer());
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	protected void paintComponent(final Graphics g) {
+		final LoboBackground lb = new LoboBackground();
 		g.setColor(getBackground());
 		g.fillRect(0, 0, getWidth(), getHeight());
 		if (getSelectionCount() > 0) {
-			g.setColor(foreground());
+			g.setColor(lb.getForeground());
 			for (final int i : getSelectionRows()) {
 				final Rectangle r = getRowBounds(i);
 				g.fillRect(r.x, r.y, getWidth() - r.x, r.height);
@@ -68,20 +67,21 @@ public class LoboTree extends JTree implements LoboLookAndFeel {
 		super.paintComponent(g);
 		if (getLeadSelectionPath() != null) {
 			final Rectangle r = getRowBounds(getRowForPath(getLeadSelectionPath()));
-			g.setColor(hasFocus() ? foreground() : null);
+			g.setColor(hasFocus() ? lb.getForeground() : null);
 			g.drawRect(r.x, r.y, getWidth() - r.x - 1, r.height - 1);
 		}
 	}
 
-	class TreeCellRenderer extends DefaultTreeCellRenderer {
+	static class TreeCellRenderer extends DefaultTreeCellRenderer {
 		private static final long serialVersionUID = 1L;
 
 		@Override
 		public Component getTreeCellRendererComponent(final JTree tree, final Object value, final boolean selected, final boolean expanded,
                                                       final boolean leaf, final int row, final boolean hasFocus) {
 			final JLabel l = (JLabel) super.getTreeCellRendererComponent(tree, value, selected, expanded, leaf, row, false);
-			l.setBackground(background());
-			l.setForeground(foreground());
+			final LoboBackground lb = new LoboBackground();
+			l.setBackground(lb.getBackground());
+			l.setForeground(lb.getForeground());
 			l.setOpaque(true);
 			return l;
 		}

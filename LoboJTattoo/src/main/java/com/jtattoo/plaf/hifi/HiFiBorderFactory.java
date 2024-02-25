@@ -28,7 +28,6 @@ package com.jtattoo.plaf.hifi;
 import javax.swing.border.Border;
 
 import com.jtattoo.plaf.AbstractBorderFactory;
-import com.jtattoo.plaf.BaseBorders;
 
 /**
  * <p>HiFiBorderFactory class.</p>
@@ -36,7 +35,7 @@ import com.jtattoo.plaf.BaseBorders;
  * Author Michael Hagen
  *
  */
-public final class HiFiBorderFactory implements AbstractBorderFactory {
+public final class HiFiBorderFactory extends AbstractBorderFactory {
 
 	private static HiFiBorderFactory instance = null;
 
@@ -63,56 +62,8 @@ public final class HiFiBorderFactory implements AbstractBorderFactory {
 
 	/** {@inheritDoc} */
 	@Override
-	public Border getComboBoxBorder() {
-		return BaseBorders.getComboBoxBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Border getDesktopIconBorder() {
-		return BaseBorders.getDesktopIconBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Border getFocusFrameBorder() {
-		return BaseBorders.getFocusFrameBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
 	public Border getInternalFrameBorder() {
 		return HiFiBorders.getInternalFrameBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Border getMenuBarBorder() {
-		return BaseBorders.getMenuBarBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Border getMenuItemBorder() {
-		return BaseBorders.getMenuItemBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Border getPaletteBorder() {
-		return BaseBorders.getPaletteBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Border getPopupMenuBorder() {
-		return BaseBorders.getPopupMenuBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Border getProgressBarBorder() {
-		return BaseBorders.getProgressBarBorder();
 	}
 
 	/** {@inheritDoc} */
@@ -123,38 +74,8 @@ public final class HiFiBorderFactory implements AbstractBorderFactory {
 
 	/** {@inheritDoc} */
 	@Override
-	public Border getSpinnerBorder() {
-		return BaseBorders.getSpinnerBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Border getTabbedPaneBorder() {
-		return BaseBorders.getTabbedPaneBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Border getTableHeaderBorder() {
-		return BaseBorders.getTableHeaderBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
 	public Border getTableScrollPaneBorder() {
 		return HiFiBorders.getTableScrollPaneBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Border getTextBorder() {
-		return BaseBorders.getTextBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Border getTextFieldBorder() {
-		return BaseBorders.getTextFieldBorder();
 	}
 
 	/** {@inheritDoc} */

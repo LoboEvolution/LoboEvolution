@@ -30,11 +30,8 @@ import javax.swing.JLabel;
 
 /**
  * <p>LoboLabel class.</p>
- *
- *
- *
  */
-public class LoboLabel extends JLabel implements LoboLookAndFeel {
+public class LoboLabel extends JLabel {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -45,6 +42,7 @@ public class LoboLabel extends JLabel implements LoboLookAndFeel {
 	 */
 	public LoboLabel(final String name) {
 		super(name);
-		setForeground(foreground());
+		final LoboBackground lb = new LoboBackground();
+		setForeground(lb.getForeground());
 	}
 }

@@ -124,7 +124,7 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
 				if (ArrayUtilities.isNotBlank(keyList)) {
 					final RowSorter.SortKey sortKey = (RowSorter.SortKey) keyList.get(0);
 					if (sortKey.getColumn() == table.convertColumnIndexToModel(col)) {
-						final AbstractIconFactory iconFactory = ((AbstractLookAndFeel) UIManager.getLookAndFeel())
+						final IconFactory iconFactory = ((AbstractLookAndFeel) UIManager.getLookAndFeel())
 								.getIconFactory();
 						if (sortKey.getSortOrder().equals(SortOrder.ASCENDING)) {
 							setIcon(iconFactory.getUpArrowIcon());

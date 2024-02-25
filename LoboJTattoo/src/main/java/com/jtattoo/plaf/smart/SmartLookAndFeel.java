@@ -34,36 +34,8 @@ import java.util.Properties;
 
 import javax.swing.UIDefaults;
 
-import com.jtattoo.plaf.AbstractBorderFactory;
-import com.jtattoo.plaf.AbstractIconFactory;
-import com.jtattoo.plaf.AbstractLookAndFeel;
-import com.jtattoo.plaf.AbstractTheme;
-import com.jtattoo.plaf.BaseCheckBoxMenuItemUI;
-import com.jtattoo.plaf.BaseCheckBoxUI;
-import com.jtattoo.plaf.BaseDesktopPaneUI;
-import com.jtattoo.plaf.BaseEditorPaneUI;
-import com.jtattoo.plaf.BaseFileChooserUI;
-import com.jtattoo.plaf.BaseFormattedTextFieldUI;
-import com.jtattoo.plaf.BaseLabelUI;
-import com.jtattoo.plaf.BaseMenuBarUI;
-import com.jtattoo.plaf.BaseMenuItemUI;
-import com.jtattoo.plaf.BaseMenuUI;
-import com.jtattoo.plaf.BasePanelUI;
-import com.jtattoo.plaf.BasePasswordFieldUI;
-import com.jtattoo.plaf.BasePopupMenuUI;
-import com.jtattoo.plaf.BaseProgressBarUI;
-import com.jtattoo.plaf.BaseRadioButtonMenuItemUI;
-import com.jtattoo.plaf.BaseRadioButtonUI;
-import com.jtattoo.plaf.BaseScrollPaneUI;
-import com.jtattoo.plaf.BaseSeparatorUI;
-import com.jtattoo.plaf.BaseSliderUI;
-import com.jtattoo.plaf.BaseSpinnerUI;
-import com.jtattoo.plaf.BaseSplitPaneUI;
-import com.jtattoo.plaf.BaseTableUI;
-import com.jtattoo.plaf.BaseTextAreaUI;
-import com.jtattoo.plaf.BaseTextFieldUI;
-import com.jtattoo.plaf.BaseToolTipUI;
-import com.jtattoo.plaf.BaseTreeUI;
+import com.jtattoo.plaf.*;
+import com.jtattoo.plaf.IconFactory;
 
 /**
  * <p>SmartLookAndFeel class.</p>
@@ -513,7 +485,7 @@ public class SmartLookAndFeel extends AbstractLookAndFeel {
 
 	/** {@inheritDoc} */
 	@Override
-	public AbstractBorderFactory getBorderFactory() {
+	public BorderFactory getBorderFactory() {
 		return SmartBorderFactory.getInstance();
 	}
 
@@ -525,7 +497,7 @@ public class SmartLookAndFeel extends AbstractLookAndFeel {
 
 	/** {@inheritDoc} */
 	@Override
-	public AbstractIconFactory getIconFactory() {
+	public IconFactory getIconFactory() {
 		return SmartIconFactory.getInstance();
 	}
 

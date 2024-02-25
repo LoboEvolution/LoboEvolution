@@ -41,10 +41,7 @@ import com.jtattoo.plaf.ColorHelper;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**
- * <p>AcrylToolBarUI class.</p>
- *
- *
- *
+ * <p>AcrylToolBarUI class.</p>s
  */
 public class AcrylToolBarUI extends AbstractToolBarUI {
 

@@ -34,11 +34,8 @@ import javax.swing.border.LineBorder;
 
 /**
  * <p>LoboButton class.</p>
- *
- *
- *
  */
-public class LoboButton extends JButton implements LoboLookAndFeel {
+public class LoboButton extends JButton {
 
 	private static final long serialVersionUID = 1L;
 
@@ -46,11 +43,12 @@ public class LoboButton extends JButton implements LoboLookAndFeel {
 	 * <p>Constructor for LoboButton.</p>
 	 */
 	public LoboButton() {
-		setForeground(foreground());
+		final LoboBackground lb = new LoboBackground();
+		setForeground(lb.getForeground());
 		setFont(new Font("Tahoma", Font.BOLD, 14));
 		setFocusPainted(false);
 		setContentAreaFilled(false);
-		setBorder(new LineBorder(foreground()));
+		setBorder(new LineBorder(lb.getForeground()));
 		setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 	}
 }

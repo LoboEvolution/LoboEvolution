@@ -36,19 +36,16 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
+import com.jtattoo.plaf.lobo.LoboBackground;
 import com.jtattoo.plaf.lobo.LoboButton;
 import com.jtattoo.plaf.lobo.LoboLabel;
-import com.jtattoo.plaf.lobo.LoboLookAndFeel;
 import lombok.Getter;
 import lombok.Setter;
 
 /**
  * The Class TextEdit.
- *
- *
- *
  */
-public class TextEdit extends JFrame implements LoboLookAndFeel {
+public class TextEdit extends JFrame {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
@@ -82,6 +79,7 @@ public class TextEdit extends JFrame implements LoboLookAndFeel {
 	 */
 	private void createAndShowGUI() {
 		setResizable(false);
+		final LoboBackground lb = new LoboBackground();
 		this.captionLabel.setPreferredSize(new Dimension(Short.MAX_VALUE, 32));
 		this.captionLabel.setAlignmentX(0.0f);
 		this.captionLabel.setBorder(new EmptyBorder(8, 0, 8, 0));
@@ -97,7 +95,7 @@ public class TextEdit extends JFrame implements LoboLookAndFeel {
 		rootBox.add(this.createButtonPanel());
 		
 		final Container contentPane = getContentPane();
-		contentPane.setBackground(background());
+		contentPane.setBackground(lb.getBackground());
 		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
 		contentPane.add(rootBox);
 	}

@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2014 - 2024 LoboEvolution
+ * Copyright (c) 2014 - 2023 LoboEvolution
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,145 +28,101 @@ package com.jtattoo.plaf;
 
 import javax.swing.border.Border;
 
-/**
- * <p>AbstractBorderFactory interface.</p>
- *
- * Author Michael Hagen
- *
- */
-public interface AbstractBorderFactory {
+public abstract class AbstractBorderFactory implements BorderFactory {
 
-    /**
-     * <p>getButtonBorder.</p>
-     *
-     * @return a {@link javax.swing.border.Border} object.
-     */
-    Border getButtonBorder();
+    /** {@inheritDoc} */
+    @Override
+    public Border getComboBoxBorder() {
+        return BaseBorders.getComboBoxBorder();
+    }
 
-    /**
-     * <p>getComboBoxBorder.</p>
-     *
-     * @return a {@link javax.swing.border.Border} object.
-     */
-    Border getComboBoxBorder();
+    /** {@inheritDoc} */
+    @Override
+    public Border getDesktopIconBorder() {
+        return BaseBorders.getDesktopIconBorder();
+    }
 
-    /**
-     * <p>getDesktopIconBorder.</p>
-     *
-     * @return a {@link javax.swing.border.Border} object.
-     */
-    Border getDesktopIconBorder();
+    /** {@inheritDoc} */
+    @Override
+    public Border getFocusFrameBorder() {
+        return BaseBorders.getFocusFrameBorder();
+    }
 
-    /**
-     * <p>getFocusFrameBorder.</p>
-     *
-     * @return a {@link javax.swing.border.Border} object.
-     */
-    Border getFocusFrameBorder();
+    /** {@inheritDoc} */
+    @Override
+    public Border getMenuBarBorder() {
+        return BaseBorders.getMenuBarBorder();
+    }
 
-    /**
-     * <p>getInternalFrameBorder.</p>
-     *
-     * @return a {@link javax.swing.border.Border} object.
-     */
-    Border getInternalFrameBorder();
+    /** {@inheritDoc} */
+    @Override
+    public Border getMenuItemBorder() {
+        return BaseBorders.getMenuItemBorder();
+    }
 
-    /**
-     * <p>getMenuBarBorder.</p>
-     *
-     * @return a {@link javax.swing.border.Border} object.
-     */
-    Border getMenuBarBorder();
+    /** {@inheritDoc} */
+    @Override
+    public Border getPaletteBorder() {
+        return BaseBorders.getPaletteBorder();
+    }
 
-    /**
-     * <p>getMenuItemBorder.</p>
-     *
-     * @return a {@link javax.swing.border.Border} object.
-     */
-    Border getMenuItemBorder();
+    /** {@inheritDoc} */
+    @Override
+    public Border getPopupMenuBorder() {
+        return BaseBorders.getPopupMenuBorder();
+    }
 
-    /**
-     * <p>getPaletteBorder.</p>
-     *
-     * @return a {@link javax.swing.border.Border} object.
-     */
-    Border getPaletteBorder();
+    /** {@inheritDoc} */
+    @Override
+    public Border getProgressBarBorder() {
+        return BaseBorders.getProgressBarBorder();
+    }
 
-    /**
-     * <p>getPopupMenuBorder.</p>
-     *
-     * @return a {@link javax.swing.border.Border} object.
-     */
-    Border getPopupMenuBorder();
+    /** {@inheritDoc} */
+    @Override
+    public Border getScrollPaneBorder() {
+        return BaseBorders.getScrollPaneBorder();
+    }
 
-    /**
-     * <p>getProgressBarBorder.</p>
-     *
-     * @return a {@link javax.swing.border.Border} object.
-     */
-    Border getProgressBarBorder();
+    /** {@inheritDoc} */
+    @Override
+    public Border getSpinnerBorder() {
+        return BaseBorders.getSpinnerBorder();
+    }
 
-    /**
-     * <p>getScrollPaneBorder.</p>
-     *
-     * @return a {@link javax.swing.border.Border} object.
-     */
-    Border getScrollPaneBorder();
+    /** {@inheritDoc} */
+    @Override
+    public Border getTabbedPaneBorder() {
+        return BaseBorders.getTabbedPaneBorder();
+    }
 
-    /**
-     * <p>getSpinnerBorder.</p>
-     *
-     * @return a {@link javax.swing.border.Border} object.
-     */
-    Border getSpinnerBorder();
+    /** {@inheritDoc} */
+    @Override
+    public Border getTableHeaderBorder() {
+        return BaseBorders.getTableHeaderBorder();
+    }
 
-    /**
-     * <p>getTabbedPaneBorder.</p>
-     *
-     * @return a {@link javax.swing.border.Border} object.
-     */
-    Border getTabbedPaneBorder();
+    /** {@inheritDoc} */
+    @Override
+    public Border getTableScrollPaneBorder() {
+        return BaseBorders.getTableScrollPaneBorder();
+    }
 
-    /**
-     * <p>getTableHeaderBorder.</p>
-     *
-     * @return a {@link javax.swing.border.Border} object.
-     */
-    Border getTableHeaderBorder();
+    /** {@inheritDoc} */
+    @Override
+    public Border getTextBorder() {
+        return BaseBorders.getTextBorder();
+    }
 
-    /**
-     * <p>getTableScrollPaneBorder.</p>
-     *
-     * @return a {@link javax.swing.border.Border} object.
-     */
-    Border getTableScrollPaneBorder();
+    /** {@inheritDoc} */
+    @Override
+    public Border getTextFieldBorder() {
+        return BaseBorders.getTextFieldBorder();
+    }
 
-    /**
-     * <p>getTextBorder.</p>
-     *
-     * @return a {@link javax.swing.border.Border} object.
-     */
-    Border getTextBorder();
-
-    /**
-     * <p>getTextFieldBorder.</p>
-     *
-     * @return a {@link javax.swing.border.Border} object.
-     */
-    Border getTextFieldBorder();
-
-    /**
-     * <p>getToggleButtonBorder.</p>
-     *
-     * @return a {@link javax.swing.border.Border} object.
-     */
-    Border getToggleButtonBorder();
-
-    /**
-     * <p>getToolBarBorder.</p>
-     *
-     * @return a {@link javax.swing.border.Border} object.
-     */
-    Border getToolBarBorder();
-
-} // end of interface AbstractBorderFactory
+    /** {@inheritDoc} */
+    @Override
+    public Border getToolBarBorder() {
+        return BaseBorders.getToolBarBorder();
+    }
+}

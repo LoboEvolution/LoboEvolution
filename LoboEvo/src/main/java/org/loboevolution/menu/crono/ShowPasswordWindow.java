@@ -39,23 +39,18 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
+import com.jtattoo.plaf.lobo.*;
 import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.component.BrowserFrame;
 import org.loboevolution.config.DesktopConfig;
 import org.loboevolution.info.BookmarkInfo;
 import org.loboevolution.store.InputStore;
-import com.jtattoo.plaf.lobo.LoboButton;
-import com.jtattoo.plaf.lobo.LoboLabel;
-import com.jtattoo.plaf.lobo.LoboLookAndFeel;
-import com.jtattoo.plaf.lobo.LoboPanel;
-import com.jtattoo.plaf.lobo.LoboSeparator;
-import com.jtattoo.plaf.lobo.LoboTextField;
 
 /**
  * <p>ShowPasswordWindow class.</p>
  */
 @Slf4j
-public class ShowPasswordWindow extends JFrame implements LoboLookAndFeel {
+public class ShowPasswordWindow extends JFrame {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
@@ -87,8 +82,9 @@ public class ShowPasswordWindow extends JFrame implements LoboLookAndFeel {
 	
 	private void createAndShowGUI(final BrowserFrame frame, final Integer num) {
 		final Container contentPane = getContentPane();
+		final LoboBackground lb = new LoboBackground();
 		contentPane.setLayout(null);
-		contentPane.setBackground(background());
+		contentPane.setBackground(lb.getBackground());
 		setResizable(false);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 900, 410);

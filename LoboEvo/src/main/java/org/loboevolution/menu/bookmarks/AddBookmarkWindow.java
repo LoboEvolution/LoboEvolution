@@ -38,6 +38,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.MatteBorder;
 
+import com.jtattoo.plaf.lobo.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.loboevolution.common.Strings;
@@ -45,18 +46,12 @@ import org.loboevolution.config.DesktopConfig;
 import org.loboevolution.info.BookmarkInfo;
 import org.loboevolution.store.BookmarksStore;
 
-import com.jtattoo.plaf.lobo.LoboButton;
-import com.jtattoo.plaf.lobo.LoboLabel;
-import com.jtattoo.plaf.lobo.LoboLookAndFeel;
-import com.jtattoo.plaf.lobo.LoboPanel;
-import com.jtattoo.plaf.lobo.LoboTextField;
-
 /**
  * <p>AddBookmarkWindow class.</p>
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class AddBookmarkWindow extends JFrame implements LoboLookAndFeel, ActionListener{
+public class AddBookmarkWindow extends JFrame implements ActionListener {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
@@ -83,7 +78,8 @@ public class AddBookmarkWindow extends JFrame implements LoboLookAndFeel, Action
 	}
 
 	private void createAndShowGUI(final String uri) {
-		final MatteBorder border = new MatteBorder(0, 0, 1, 0, foreground());
+		final LoboBackground lb = new LoboBackground();
+		final MatteBorder border = new MatteBorder(0, 0, 1, 0, lb.getForeground());
 		
 		final Container contentPane = getContentPane();
 		contentPane.setLayout(null);

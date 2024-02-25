@@ -35,31 +35,8 @@ import java.util.Properties;
 import javax.swing.UIDefaults;
 import javax.swing.plaf.InsetsUIResource;
 
-import com.jtattoo.plaf.AbstractBorderFactory;
-import com.jtattoo.plaf.AbstractIconFactory;
-import com.jtattoo.plaf.AbstractLookAndFeel;
-import com.jtattoo.plaf.AbstractTheme;
-import com.jtattoo.plaf.BaseCheckBoxMenuItemUI;
-import com.jtattoo.plaf.BaseDesktopPaneUI;
-import com.jtattoo.plaf.BaseEditorPaneUI;
-import com.jtattoo.plaf.BaseFileChooserUI;
-import com.jtattoo.plaf.BaseFormattedTextFieldUI;
-import com.jtattoo.plaf.BaseLabelUI;
-import com.jtattoo.plaf.BaseMenuItemUI;
-import com.jtattoo.plaf.BaseMenuUI;
-import com.jtattoo.plaf.BasePasswordFieldUI;
-import com.jtattoo.plaf.BasePopupMenuUI;
-import com.jtattoo.plaf.BaseProgressBarUI;
-import com.jtattoo.plaf.BaseRadioButtonMenuItemUI;
-import com.jtattoo.plaf.BaseScrollBarUI;
-import com.jtattoo.plaf.BaseSeparatorUI;
-import com.jtattoo.plaf.BaseSpinnerUI;
-import com.jtattoo.plaf.BaseTableHeaderUI;
-import com.jtattoo.plaf.BaseTableUI;
-import com.jtattoo.plaf.BaseTextAreaUI;
-import com.jtattoo.plaf.BaseTextFieldUI;
-import com.jtattoo.plaf.BaseToolTipUI;
-import com.jtattoo.plaf.BaseTreeUI;
+import com.jtattoo.plaf.*;
+import com.jtattoo.plaf.BorderFactory;
 
 /**
  * <p>McWinLookAndFeel class.</p>
@@ -319,7 +296,7 @@ public class McWinLookAndFeel extends AbstractLookAndFeel {
 
 	/** {@inheritDoc} */
 	@Override
-	public AbstractBorderFactory getBorderFactory() {
+	public BorderFactory getBorderFactory() {
 		return McWinBorderFactory.getInstance();
 	}
 
@@ -331,7 +308,7 @@ public class McWinLookAndFeel extends AbstractLookAndFeel {
 
 	/** {@inheritDoc} */
 	@Override
-	public AbstractIconFactory getIconFactory() {
+	public IconFactory getIconFactory() {
 		return McWinIconFactory.getInstance();
 	}
 

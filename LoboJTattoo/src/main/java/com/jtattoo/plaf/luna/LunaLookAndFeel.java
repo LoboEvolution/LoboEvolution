@@ -33,8 +33,8 @@ import java.util.Properties;
 
 import javax.swing.UIDefaults;
 
-import com.jtattoo.plaf.AbstractBorderFactory;
-import com.jtattoo.plaf.AbstractIconFactory;
+import com.jtattoo.plaf.BorderFactory;
+import com.jtattoo.plaf.IconFactory;
 import com.jtattoo.plaf.AbstractLookAndFeel;
 import com.jtattoo.plaf.AbstractTheme;
 import com.jtattoo.plaf.BaseCheckBoxMenuItemUI;
@@ -208,7 +208,7 @@ public class LunaLookAndFeel extends AbstractLookAndFeel {
 
 	/** {@inheritDoc} */
 	@Override
-	public AbstractBorderFactory getBorderFactory() {
+	public BorderFactory getBorderFactory() {
 		return LunaBorderFactory.getInstance();
 	}
 
@@ -220,7 +220,7 @@ public class LunaLookAndFeel extends AbstractLookAndFeel {
 
 	/** {@inheritDoc} */
 	@Override
-	public AbstractIconFactory getIconFactory() {
+	public IconFactory getIconFactory() {
 		return LunaIconFactory.getInstance();
 	}
 

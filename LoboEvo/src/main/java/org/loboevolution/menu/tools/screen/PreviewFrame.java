@@ -25,9 +25,9 @@
  */
 package org.loboevolution.menu.tools.screen;
 
+import com.jtattoo.plaf.lobo.LoboBackground;
 import com.jtattoo.plaf.lobo.LoboButton;
 import com.jtattoo.plaf.lobo.LoboLabel;
-import com.jtattoo.plaf.lobo.LoboLookAndFeel;
 import com.jtattoo.plaf.lobo.LoboPanel;
 import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.component.BrowserFrame;
@@ -44,7 +44,7 @@ import java.io.*;
  * <p>PreviewFrame class.</p>
  */
 @Slf4j
-public class PreviewFrame extends JFrame implements LoboLookAndFeel {
+public class PreviewFrame extends JFrame {
 
     private static final String TITLE = "ScreenShot";
 
@@ -89,8 +89,9 @@ public class PreviewFrame extends JFrame implements LoboLookAndFeel {
     }
 
     private void initLayout() {
+        final LoboBackground lb = new LoboBackground();
         setTitle(TITLE);
-        setBackground(background());
+        setBackground(lb.getBackground());
         setMinimumSize(new Dimension(500, 500));
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setLocationRelativeTo(pane);

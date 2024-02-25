@@ -30,11 +30,8 @@ import javax.swing.JSeparator;
 
 /**
  * <p>LoboSeparator class.</p>
- *
- *
- *
  */
-public class LoboSeparator extends JSeparator implements LoboLookAndFeel {
+public class LoboSeparator extends JSeparator {
 
 	private static final long serialVersionUID = 1L;
 
@@ -42,7 +39,8 @@ public class LoboSeparator extends JSeparator implements LoboLookAndFeel {
 	 * <p>Constructor for LoboSeparator.</p>
 	 */
 	public LoboSeparator() {
-		setBackground(background());
-		setForeground(foreground());
+		final LoboBackground lb = new LoboBackground();
+		setBackground(lb.getBackground());
+		setForeground(lb.getForeground());
 	}
 }

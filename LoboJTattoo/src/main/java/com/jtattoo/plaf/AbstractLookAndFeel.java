@@ -29,7 +29,6 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.BorderFactory;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.UIDefaults;
@@ -548,9 +547,9 @@ public abstract class AbstractLookAndFeel extends MetalLookAndFeel {
 	/**
 	 * <p>getBorderFactory.</p>
 	 *
-	 * @return a {@link com.jtattoo.plaf.AbstractBorderFactory} object.
+	 * @return a {@link BorderFactory} object.
 	 */
-	public abstract AbstractBorderFactory getBorderFactory();
+	public abstract BorderFactory getBorderFactory();
 
 	/**
 	 * <p>getControlDarkShadowColor.</p>
@@ -582,9 +581,9 @@ public abstract class AbstractLookAndFeel extends MetalLookAndFeel {
 	/**
 	 * <p>getIconFactory.</p>
 	 *
-	 * @return a {@link com.jtattoo.plaf.AbstractIconFactory} object.
+	 * @return a {@link IconFactory} object.
 	 */
-	public abstract AbstractIconFactory getIconFactory();
+	public abstract IconFactory getIconFactory();
 
 	/** {@inheritDoc} */
 	@Override
@@ -612,9 +611,9 @@ public abstract class AbstractLookAndFeel extends MetalLookAndFeel {
 				new Object[]{getFrameColor()});
 		final Object focusCellHighlightBorder = new UIDefaults.ProxyLazyValue(
 				"javax.swing.plaf.BorderUIResource$LineBorderUIResource", new Object[]{getFocusCellColor()});
-		final Object optionPaneBorder = BorderFactory.createEmptyBorder(0, 0, 0, 0);
-		final Object optionPaneMessageAreaBorder = BorderFactory.createEmptyBorder(8, 8, 8, 8);
-		final Object optionPaneButtonAreaBorder = BorderFactory.createEmptyBorder(0, 8, 8, 8);
+		final Object optionPaneBorder = javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0);
+		final Object optionPaneMessageAreaBorder = javax.swing.BorderFactory.createEmptyBorder(8, 8, 8, 8);
+		final Object optionPaneButtonAreaBorder = javax.swing.BorderFactory.createEmptyBorder(0, 8, 8, 8);
 		final Object windowBorder = getBorderFactory().getInternalFrameBorder();
 
 		final Color c = getBackgroundColor();
@@ -805,7 +804,7 @@ public abstract class AbstractLookAndFeel extends MetalLookAndFeel {
 				"Separator.background", getBackgroundColor(), "Separator.foreground", getControlForegroundColor(),
 				// SplitPane
 				"SplitPane.centerOneTouchButtons", Boolean.TRUE, "SplitPane.dividerSize", 7, "SplitPane.border",
-				BorderFactory.createEmptyBorder(),
+				javax.swing.BorderFactory.createEmptyBorder(),
 				// Tree
 				"Tree.background", getInputBackgroundColor(), "Tree.foreground", getInputForegroundColor(),
 				"Tree.textForeground", getInputForegroundColor(), "Tree.textBackground", getInputBackgroundColor(),
@@ -831,7 +830,7 @@ public abstract class AbstractLookAndFeel extends MetalLookAndFeel {
 		table.put("Spinner.foreground", getButtonForegroundColor());
 		table.put("Spinner.border", getBorderFactory().getSpinnerBorder());
 		table.put("Spinner.arrowButtonInsets", null);
-		table.put("Spinner.arrowButtonBorder", BorderFactory.createEmptyBorder());
+		table.put("Spinner.arrowButtonBorder", javax.swing.BorderFactory.createEmptyBorder());
 		table.put("Spinner.editorBorderPainted", Boolean.FALSE);
 		if (getTheme().isMacStyleScrollBarOn()) {
 			if (getTheme().isSmallFontSize()) {

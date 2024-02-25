@@ -32,11 +32,8 @@ import javax.swing.JTextField;
 
 /**
  * <p>LoboTextField class.</p>
- *
- *
- *
  */
-public class LoboTextField extends JTextField implements LoboLookAndFeel {
+public class LoboTextField extends JTextField {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -44,8 +41,9 @@ public class LoboTextField extends JTextField implements LoboLookAndFeel {
 	 * <p>Constructor for LoboTextField.</p>
 	 */
 	public LoboTextField() {
-		final Color fground = foreground();
-		final Color bkg = background();
+		final LoboBackground lb = new LoboBackground();
+		final Color fground = lb.getForeground();
+		final Color bkg = lb.getBackground();
 		setBackground(bkg);
 		setCaretColor(fground);
 		setForeground(fground);

@@ -26,6 +26,8 @@
 
 package org.loboevolution.welcome;
 
+import com.jtattoo.plaf.lobo.LoboBackground;
+
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
@@ -39,18 +41,18 @@ import java.util.HashMap;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import com.jtattoo.plaf.lobo.LoboLookAndFeel;
-
 /**
  * <p>TextFieldUsername class.</p>
  */
-public class TextFieldUsername extends JTextField implements LoboLookAndFeel {
+public class TextFieldUsername extends JTextField  {
 
 	private static final long serialVersionUID = 1L;
 
-	private final Color COLOR_INTERACTIVE = foreground();
+	private final LoboBackground lb = new LoboBackground();
 
-	private final Color COLOR_OUTLINE = foreground();
+	private final Color COLOR_INTERACTIVE = lb.getForeground();
+
+	private final Color COLOR_OUTLINE = lb.getForeground();
 
 	private Color borderColor = COLOR_INTERACTIVE;
 
@@ -63,7 +65,7 @@ public class TextFieldUsername extends JTextField implements LoboLookAndFeel {
 	 */
 	public TextFieldUsername() {
 		setOpaque(false);
-		setBackground(background());
+		setBackground(lb.getBackground());
 		setForeground(COLOR_OUTLINE);
 		setBorderColor(COLOR_OUTLINE);
 		setCaretColor(Color.white);

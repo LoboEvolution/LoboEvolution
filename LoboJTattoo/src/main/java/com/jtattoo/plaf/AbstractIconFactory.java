@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2014 - 2024 LoboEvolution
+ * Copyright (c) 2014 - 2023 LoboEvolution
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -26,315 +26,265 @@
 
 package com.jtattoo.plaf;
 
-import javax.swing.Icon;
+import javax.swing.*;
 
-/**
- * <p>AbstractIconFactory interface.</p>
- *
- * Author Michael Hagen
- *
- */
-public interface AbstractIconFactory {
+public class AbstractIconFactory implements IconFactory {
 
-    /**
-     * <p>getCheckBoxIcon.</p>
-     *
-     * @return a {@link javax.swing.Icon} object.
-     */
-    Icon getCheckBoxIcon();
+    /** {@inheritDoc} */
+    @Override
+    public Icon getCheckBoxIcon() {
+        return BaseIcons.getCheckBoxIcon();
+    }
 
-    /**
-     * <p>getCloseIcon.</p>
-     *
-     * @return a {@link javax.swing.Icon} object.
-     */
-    Icon getCloseIcon();
+    /** {@inheritDoc} */
+    @Override
+    public Icon getCloseIcon() {
+        return BaseIcons.getCloseIcon();
+    }
 
-    /**
-     * <p>getComboBoxIcon.</p>
-     *
-     * @return a {@link javax.swing.Icon} object.
-     */
-    Icon getComboBoxIcon();
+    /** {@inheritDoc} */
+    @Override
+    public Icon getComboBoxIcon() {
+        return BaseIcons.getComboBoxIcon();
+    }
 
-    /**
-     * <p>getDownArrowIcon.</p>
-     *
-     * @return a {@link javax.swing.Icon} object.
-     */
-    Icon getDownArrowIcon();
+    /** {@inheritDoc} */
+    @Override
+    public Icon getDownArrowIcon() {
+        return BaseIcons.getDownArrowIcon();
+    }
 
-    /**
-     * <p>getFileChooserDetailViewIcon.</p>
-     *
-     * @return a {@link javax.swing.Icon} object.
-     */
-    Icon getFileChooserDetailViewIcon();
+    /** {@inheritDoc} */
+    @Override
+    public Icon getFileChooserDetailViewIcon() {
+        return BaseIcons.getFileChooserDetailViewIcon();
+    }
 
-    /**
-     * <p>getFileChooserHomeFolderIcon.</p>
-     *
-     * @return a {@link javax.swing.Icon} object.
-     */
-    Icon getFileChooserHomeFolderIcon();
+    /** {@inheritDoc} */
+    @Override
+    public Icon getFileChooserHomeFolderIcon() {
+        return BaseIcons.getFileChooserHomeFolderIcon();
+    }
 
-    /**
-     * <p>getFileChooserListViewIcon.</p>
-     *
-     * @return a {@link javax.swing.Icon} object.
-     */
-    Icon getFileChooserListViewIcon();
+    /** {@inheritDoc} */
+    @Override
+    public Icon getFileChooserListViewIcon() {
+        return BaseIcons.getFileChooserListViewIcon();
+    }
 
-    /**
-     * <p>getFileChooserNewFolderIcon.</p>
-     *
-     * @return a {@link javax.swing.Icon} object.
-     */
-    Icon getFileChooserNewFolderIcon();
+    /** {@inheritDoc} */
+    @Override
+    public Icon getFileChooserNewFolderIcon() {
+        return BaseIcons.getFileChooserNewFolderIcon();
+    }
 
-    /**
-     * <p>getFileChooserUpFolderIcon.</p>
-     *
-     * @return a {@link javax.swing.Icon} object.
-     */
-    Icon getFileChooserUpFolderIcon();
+    /** {@inheritDoc} */
+    @Override
+    public Icon getFileChooserUpFolderIcon() {
+        return BaseIcons.getFileChooserUpFolderIcon();
+    }
 
-    /**
-     * <p>getFileViewComputerIcon.</p>
-     *
-     * @return a {@link javax.swing.Icon} object.
-     */
-    Icon getFileViewComputerIcon();
+    /** {@inheritDoc} */
+    @Override
+    public Icon getFileViewComputerIcon() {
+        return BaseIcons.getFileViewComputerIcon();
+    }
 
-    /**
-     * <p>getFileViewFloppyDriveIcon.</p>
-     *
-     * @return a {@link javax.swing.Icon} object.
-     */
-    Icon getFileViewFloppyDriveIcon();
+    /** {@inheritDoc} */
+    @Override
+    public Icon getFileViewFloppyDriveIcon() {
+        return BaseIcons.getFileViewFloppyDriveIcon();
+    }
 
-    /**
-     * <p>getFileViewHardDriveIcon.</p>
-     *
-     * @return a {@link javax.swing.Icon} object.
-     */
-    Icon getFileViewHardDriveIcon();
+    /** {@inheritDoc} */
+    @Override
+    public Icon getFileViewHardDriveIcon() {
+        return BaseIcons.getFileViewHardDriveIcon();
+    }
 
-    /**
-     * <p>getIconIcon.</p>
-     *
-     * @return a {@link javax.swing.Icon} object.
-     */
-    Icon getIconIcon();
+    /** {@inheritDoc} */
+    @Override
+    public Icon getIconIcon() {
+        return BaseIcons.getIconIcon();
+    }
 
-    /**
-     * <p>getLeftArrowIcon.</p>
-     *
-     * @return a {@link javax.swing.Icon} object.
-     */
-    Icon getLeftArrowIcon();
+    /** {@inheritDoc} */
+    @Override
+    public Icon getLeftArrowIcon() {
+        return BaseIcons.getLeftArrowIcon();
+    }
 
-    /**
-     * <p>getMaxIcon.</p>
-     *
-     * @return a {@link javax.swing.Icon} object.
-     */
-    Icon getMaxIcon();
+    /** {@inheritDoc} */
+    @Override
+    public Icon getMaxIcon() {
+        return BaseIcons.getMaxIcon();
+    }
 
-    /**
-     * <p>getMenuArrowIcon.</p>
-     *
-     * @return a {@link javax.swing.Icon} object.
-     */
-    Icon getMenuArrowIcon();
+    /** {@inheritDoc} */
+    @Override
+    public Icon getMenuArrowIcon() {
+        return BaseIcons.getMenuArrowIcon();
+    }
 
-    /**
-     * <p>getMenuCheckBoxIcon.</p>
-     *
-     * @return a {@link javax.swing.Icon} object.
-     */
-    Icon getMenuCheckBoxIcon();
+    /** {@inheritDoc} */
+    @Override
+    public Icon getMenuCheckBoxIcon() {
+        return BaseIcons.getMenuCheckBoxIcon();
+    }
 
-    /**
-     * <p>getMenuIcon.</p>
-     *
-     * @return a {@link javax.swing.Icon} object.
-     */
-    Icon getMenuIcon();
+    /** {@inheritDoc} */
+    @Override
+    public Icon getMenuIcon() {
+        return BaseIcons.getMenuIcon();
+    }
 
-    /**
-     * <p>getMenuRadioButtonIcon.</p>
-     *
-     * @return a {@link javax.swing.Icon} object.
-     */
-    Icon getMenuRadioButtonIcon();
+    /** {@inheritDoc} */
+    @Override
+    public Icon getMenuRadioButtonIcon() {
+        return BaseIcons.getMenuRadioButtonIcon();
+    }
 
-    /**
-     * <p>getMinIcon.</p>
-     *
-     * @return a {@link javax.swing.Icon} object.
-     */
-    Icon getMinIcon();
+    /** {@inheritDoc} */
+    @Override
+    public Icon getMinIcon() {
+        return BaseIcons.getMinIcon();
+    }
 
-    /**
-     * <p>getOptionPaneErrorIcon.</p>
-     *
-     * @return a {@link javax.swing.Icon} object.
-     */
-    Icon getOptionPaneErrorIcon();
+    /** {@inheritDoc} */
+    @Override
+    public Icon getOptionPaneErrorIcon() {
+        return BaseIcons.getOptionPaneErrorIcon();
+    }
 
-    /**
-     * <p>getOptionPaneInformationIcon.</p>
-     *
-     * @return a {@link javax.swing.Icon} object.
-     */
-    Icon getOptionPaneInformationIcon();
+    /** {@inheritDoc} */
+    @Override
+    public Icon getOptionPaneInformationIcon() {
+        return BaseIcons.getOptionPaneInformationIcon();
+    }
 
-    /**
-     * <p>getOptionPaneQuestionIcon.</p>
-     *
-     * @return a {@link javax.swing.Icon} object.
-     */
-    Icon getOptionPaneQuestionIcon();
+    /** {@inheritDoc} */
+    @Override
+    public Icon getOptionPaneQuestionIcon() {
+        return BaseIcons.getOptionPaneQuestionIcon();
+    }
 
-    /**
-     * <p>getOptionPaneWarningIcon.</p>
-     *
-     * @return a {@link javax.swing.Icon} object.
-     */
-    Icon getOptionPaneWarningIcon();
+    /** {@inheritDoc} */
+    @Override
+    public Icon getOptionPaneWarningIcon() {
+        return BaseIcons.getOptionPaneWarningIcon();
+    }
 
-    /**
-     * <p>getPaletteCloseIcon.</p>
-     *
-     * @return a {@link javax.swing.Icon} object.
-     */
-    Icon getPaletteCloseIcon();
+    /** {@inheritDoc} */
+    @Override
+    public Icon getPaletteCloseIcon() {
+        return BaseIcons.getPaletteCloseIcon();
+    }
 
-    /**
-     * <p>getRadioButtonIcon.</p>
-     *
-     * @return a {@link javax.swing.Icon} object.
-     */
-    Icon getRadioButtonIcon();
+    /** {@inheritDoc} */
+    @Override
+    public Icon getRadioButtonIcon() {
+        return BaseIcons.getRadioButtonIcon();
+    }
 
-    /**
-     * <p>getRightArrowIcon.</p>
-     *
-     * @return a {@link javax.swing.Icon} object.
-     */
-    Icon getRightArrowIcon();
+    /** {@inheritDoc} */
+    @Override
+    public Icon getRightArrowIcon() {
+        return BaseIcons.getRightArrowIcon();
+    }
 
-    /**
-     * <p>getSplitterDownArrowIcon.</p>
-     *
-     * @return a {@link javax.swing.Icon} object.
-     */
-    Icon getSplitterDownArrowIcon();
+    /** {@inheritDoc} */
+    @Override
+    public Icon getSplitterDownArrowIcon() {
+        return BaseIcons.getSplitterDownArrowIcon();
+    }
 
-    /**
-     * <p>getSplitterHorBumpIcon.</p>
-     *
-     * @return a {@link javax.swing.Icon} object.
-     */
-    Icon getSplitterHorBumpIcon();
+    /** {@inheritDoc} */
+    @Override
+    public Icon getSplitterHorBumpIcon() {
+        return BaseIcons.getSplitterHorBumpIcon();
+    }
 
-    /**
-     * <p>getSplitterLeftArrowIcon.</p>
-     *
-     * @return a {@link javax.swing.Icon} object.
-     */
-    Icon getSplitterLeftArrowIcon();
+    /** {@inheritDoc} */
+    @Override
+    public Icon getSplitterLeftArrowIcon() {
+        return BaseIcons.getSplitterLeftArrowIcon();
+    }
 
-    /**
-     * <p>getSplitterRightArrowIcon.</p>
-     *
-     * @return a {@link javax.swing.Icon} object.
-     */
-    Icon getSplitterRightArrowIcon();
+    /** {@inheritDoc} */
+    @Override
+    public Icon getSplitterRightArrowIcon() {
+        return BaseIcons.getSplitterRightArrowIcon();
+    }
 
-    /**
-     * <p>getSplitterUpArrowIcon.</p>
-     *
-     * @return a {@link javax.swing.Icon} object.
-     */
-    Icon getSplitterUpArrowIcon();
+    /** {@inheritDoc} */
+    @Override
+    public Icon getSplitterUpArrowIcon() {
+        return BaseIcons.getSplitterUpArrowIcon();
+    }
 
-    /**
-     * <p>getSplitterVerBumpIcon.</p>
-     *
-     * @return a {@link javax.swing.Icon} object.
-     */
-    Icon getSplitterVerBumpIcon();
+    /** {@inheritDoc} */
+    @Override
+    public Icon getSplitterVerBumpIcon() {
+        return BaseIcons.getSplitterVerBumpIcon();
+    }
 
-    /**
-     * <p>getThumbHorIcon.</p>
-     *
-     * @return a {@link javax.swing.Icon} object.
-     */
-    Icon getThumbHorIcon();
+    /** {@inheritDoc} */
+    @Override
+    public Icon getThumbHorIcon() {
+        return BaseIcons.getThumbHorIcon();
+    }
 
-    /**
-     * <p>getThumbHorIconRollover.</p>
-     *
-     * @return a {@link javax.swing.Icon} object.
-     */
-    Icon getThumbHorIconRollover();
+    /** {@inheritDoc} */
+    @Override
+    public Icon getThumbHorIconRollover() {
+        return BaseIcons.getThumbHorIconRollover();
+    }
 
-    /**
-     * <p>getThumbVerIcon.</p>
-     *
-     * @return a {@link javax.swing.Icon} object.
-     */
-    Icon getThumbVerIcon();
+    /** {@inheritDoc} */
+    @Override
+    public Icon getThumbVerIcon() {
+        return BaseIcons.getThumbVerIcon();
+    }
 
-    /**
-     * <p>getThumbVerIconRollover.</p>
-     *
-     * @return a {@link javax.swing.Icon} object.
-     */
-    Icon getThumbVerIconRollover();
+    /** {@inheritDoc} */
+    @Override
+    public Icon getThumbVerIconRollover() {
+        return BaseIcons.getThumbVerIconRollover();
+    }
 
-    /**
-     * <p>getTreeCloseIcon.</p>
-     *
-     * @return a {@link javax.swing.Icon} object.
-     */
-    Icon getTreeCloseIcon();
+    /** {@inheritDoc} */
+    @Override
+    public Icon getTreeCloseIcon() {
+        return BaseIcons.getTreeClosedIcon();
+    }
 
-    /**
-     * <p>getTreeCollapsedIcon.</p>
-     *
-     * @return a {@link javax.swing.Icon} object.
-     */
-    Icon getTreeCollapsedIcon();
+    /** {@inheritDoc} */
+    @Override
+    public Icon getTreeCollapsedIcon() {
+        return BaseIcons.getTreeCollapsedIcon();
+    }
 
-    /**
-     * <p>getTreeExpandedIcon.</p>
-     *
-     * @return a {@link javax.swing.Icon} object.
-     */
-    Icon getTreeExpandedIcon();
+    /** {@inheritDoc} */
+    @Override
+    public Icon getTreeExpandedIcon() {
+        return BaseIcons.getTreeExpandedIcon();
+    }
 
-    /**
-     * <p>getTreeLeafIcon.</p>
-     *
-     * @return a {@link javax.swing.Icon} object.
-     */
-    Icon getTreeLeafIcon();
+    /** {@inheritDoc} */
+    @Override
+    public Icon getTreeLeafIcon() {
+        return BaseIcons.getTreeLeafIcon();
+    }
 
-    /**
-     * <p>getTreeOpenIcon.</p>
-     *
-     * @return a {@link javax.swing.Icon} object.
-     */
-    Icon getTreeOpenIcon();
+    /** {@inheritDoc} */
+    @Override
+    public Icon getTreeOpenIcon() {
+        return BaseIcons.getTreeOpenedIcon();
+    }
 
-    /**
-     * <p>getUpArrowIcon.</p>
-     *
-     * @return a {@link javax.swing.Icon} object.
-     */
-    Icon getUpArrowIcon();
-
-} // end of interface AbstractIconFactory
+    /** {@inheritDoc} */
+    @Override
+    public Icon getUpArrowIcon() {
+        return BaseIcons.getUpArrowIcon();
+    }
+}

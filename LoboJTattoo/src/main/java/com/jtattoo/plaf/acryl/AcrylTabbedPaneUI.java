@@ -46,10 +46,7 @@ import com.jtattoo.plaf.ColorHelper;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**
- * author Michael Hagen
- *
- *
- *
+ * author Michael Hagen *
  */
 public class AcrylTabbedPaneUI extends BaseTabbedPaneUI {
 

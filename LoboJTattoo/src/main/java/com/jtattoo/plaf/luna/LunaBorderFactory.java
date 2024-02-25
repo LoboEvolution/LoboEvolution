@@ -28,7 +28,6 @@ package com.jtattoo.plaf.luna;
 import javax.swing.border.Border;
 
 import com.jtattoo.plaf.AbstractBorderFactory;
-import com.jtattoo.plaf.BaseBorders;
 
 /**
  * <p>LunaBorderFactory class.</p>
@@ -36,7 +35,7 @@ import com.jtattoo.plaf.BaseBorders;
  * Author Michael Hagen
  *
  */
-public final class LunaBorderFactory implements AbstractBorderFactory {
+public final class LunaBorderFactory extends AbstractBorderFactory {
 
 	private static LunaBorderFactory instance = null;
 
@@ -69,50 +68,8 @@ public final class LunaBorderFactory implements AbstractBorderFactory {
 
 	/** {@inheritDoc} */
 	@Override
-	public Border getDesktopIconBorder() {
-		return BaseBorders.getDesktopIconBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Border getFocusFrameBorder() {
-		return BaseBorders.getFocusFrameBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
 	public Border getInternalFrameBorder() {
 		return LunaBorders.getInternalFrameBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Border getMenuBarBorder() {
-		return BaseBorders.getMenuBarBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Border getMenuItemBorder() {
-		return BaseBorders.getMenuItemBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Border getPaletteBorder() {
-		return BaseBorders.getPaletteBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Border getPopupMenuBorder() {
-		return BaseBorders.getPopupMenuBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Border getProgressBarBorder() {
-		return BaseBorders.getProgressBarBorder();
 	}
 
 	/** {@inheritDoc} */
@@ -121,17 +78,6 @@ public final class LunaBorderFactory implements AbstractBorderFactory {
 		return LunaBorders.getScrollPaneBorder();
 	}
 
-	/** {@inheritDoc} */
-	@Override
-	public Border getSpinnerBorder() {
-		return BaseBorders.getSpinnerBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Border getTabbedPaneBorder() {
-		return BaseBorders.getTabbedPaneBorder();
-	}
 
 	/** {@inheritDoc} */
 	@Override
@@ -161,12 +107,6 @@ public final class LunaBorderFactory implements AbstractBorderFactory {
 	@Override
 	public Border getToggleButtonBorder() {
 		return LunaBorders.getToggleButtonBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Border getToolBarBorder() {
-		return BaseBorders.getToolBarBorder();
 	}
 
 } // end of class LunaBorderFactory

@@ -34,11 +34,8 @@ import javax.swing.border.TitledBorder;
 
 /**
  * <p>LoboPanel class.</p>
- *
- *
- *
  */
-public class LoboPanel extends JPanel implements LoboLookAndFeel {
+public class LoboPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
@@ -46,7 +43,8 @@ public class LoboPanel extends JPanel implements LoboLookAndFeel {
 	 * <p>Constructor for LoboPanel.</p>
 	 */
 	public LoboPanel() {
-		setBackground(background());
+		final LoboBackground lb = new LoboBackground();
+		setBackground(lb.getBackground());
 	}
 	
 	/**
@@ -55,9 +53,10 @@ public class LoboPanel extends JPanel implements LoboLookAndFeel {
 	 * @param title a {@link java.lang.String} object.
 	 */
 	public LoboPanel(final String title) {
-		setBackground(background());
-		final TitledBorder border = new TitledBorder(new LineBorder(foreground()), title);
-		border.setTitleColor(foreground());
+		final LoboBackground lb = new LoboBackground();
+		setBackground(lb.getBackground());
+		final TitledBorder border = new TitledBorder(new LineBorder(lb.getForeground()), title);
+		border.setTitleColor(lb.getForeground());
 		setBorder(border);
 	}
 
@@ -69,9 +68,10 @@ public class LoboPanel extends JPanel implements LoboLookAndFeel {
 	 */
 	public LoboPanel(final LayoutManager layout, final String title) {
 		super(layout);
-		setBackground(background());
-		final TitledBorder border = new TitledBorder(new LineBorder(foreground()), title);
-		border.setTitleColor(foreground());
+		final LoboBackground lb = new LoboBackground();
+		setBackground(lb.getBackground());
+		final TitledBorder border = new TitledBorder(new LineBorder(lb.getForeground()), title);
+		border.setTitleColor(lb.getForeground());
 		setBorder(border);
 	}
 }

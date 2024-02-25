@@ -34,10 +34,8 @@ import com.jtattoo.plaf.lobo.LoboPanel;
 public abstract class AbstractToolsUI extends LoboPanel implements ToolsUIInfo {
 
     @Override
-    public void restoreDefaults() {
-    }
+    public void restoreDefaults() {}
 
     @Override
-    public void save() {
-    }
+    public void save() {}
 }

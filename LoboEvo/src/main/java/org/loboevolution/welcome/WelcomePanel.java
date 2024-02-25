@@ -26,7 +26,7 @@
 
 package org.loboevolution.welcome;
 
-import com.jtattoo.plaf.lobo.LoboLookAndFeel;
+import com.jtattoo.plaf.lobo.LoboBackground;
 import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.component.IBrowserPanel;
 import org.loboevolution.component.IWelcomePanel;
@@ -48,7 +48,7 @@ import java.util.Random;
  * <p>WelcomePanel class.</p>
  */
 @Slf4j
-public class WelcomePanel extends JPanel implements IWelcomePanel, LoboLookAndFeel {
+public class WelcomePanel extends JPanel implements IWelcomePanel {
 
     private static final long serialVersionUID = 1L;
 
@@ -64,9 +64,10 @@ public class WelcomePanel extends JPanel implements IWelcomePanel, LoboLookAndFe
      * @param panel a {@link org.loboevolution.component.IBrowserPanel} object.
      */
     public WelcomePanel(final IBrowserPanel panel) {
+        final LoboBackground lb = new LoboBackground();
         this.text = new TextFieldUsername();
         this.button = new LoginButton(panel, this.text);
-        setBackground(background());
+        setBackground(lb.getBackground());
         setLayout(null);
         add(this.text);
         add(this.button);

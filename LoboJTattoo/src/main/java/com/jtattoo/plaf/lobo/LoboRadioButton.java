@@ -30,11 +30,8 @@ import javax.swing.JRadioButton;
 
 /**
  * <p>LoboRadioButton class.</p>
- *
- *
- *
  */
-public class LoboRadioButton extends JRadioButton implements LoboLookAndFeel {
+public class LoboRadioButton extends JRadioButton {
 	
 private static final long serialVersionUID = 1L;
 		
@@ -45,7 +42,8 @@ private static final long serialVersionUID = 1L;
 	 */
 	public LoboRadioButton(final String name) {
 		super(name);
-		setBackground(background());
-		setForeground(foreground());
+		final LoboBackground lb = new LoboBackground();
+		setBackground(lb.getBackground());
+		setForeground(lb.getForeground());
 	}
 }

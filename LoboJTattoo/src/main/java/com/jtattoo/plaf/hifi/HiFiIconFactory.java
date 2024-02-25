@@ -28,7 +28,6 @@ package com.jtattoo.plaf.hifi;
 import javax.swing.Icon;
 
 import com.jtattoo.plaf.AbstractIconFactory;
-import com.jtattoo.plaf.BaseIcons;
 
 /**
  * <p>HiFiIconFactory class.</p>
@@ -36,7 +35,7 @@ import com.jtattoo.plaf.BaseIcons;
  * Author Michael Hagen
  *
  */
-public final class HiFiIconFactory implements AbstractIconFactory {
+public final class HiFiIconFactory extends AbstractIconFactory {
 
 	private static HiFiIconFactory instance = null;
 
@@ -81,54 +80,6 @@ public final class HiFiIconFactory implements AbstractIconFactory {
 
 	/** {@inheritDoc} */
 	@Override
-	public Icon getFileChooserDetailViewIcon() {
-		return BaseIcons.getFileChooserDetailViewIcon();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Icon getFileChooserHomeFolderIcon() {
-		return BaseIcons.getFileChooserHomeFolderIcon();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Icon getFileChooserListViewIcon() {
-		return BaseIcons.getFileChooserListViewIcon();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Icon getFileChooserNewFolderIcon() {
-		return BaseIcons.getFileChooserNewFolderIcon();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Icon getFileChooserUpFolderIcon() {
-		return BaseIcons.getFileChooserUpFolderIcon();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Icon getFileViewComputerIcon() {
-		return BaseIcons.getFileViewComputerIcon();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Icon getFileViewFloppyDriveIcon() {
-		return BaseIcons.getFileViewFloppyDriveIcon();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Icon getFileViewHardDriveIcon() {
-		return BaseIcons.getFileViewHardDriveIcon();
-	}
-
-	/** {@inheritDoc} */
-	@Override
 	public Icon getIconIcon() {
 		return HiFiIcons.getIconIcon();
 	}
@@ -153,56 +104,8 @@ public final class HiFiIconFactory implements AbstractIconFactory {
 
 	/** {@inheritDoc} */
 	@Override
-	public Icon getMenuCheckBoxIcon() {
-		return BaseIcons.getMenuCheckBoxIcon();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Icon getMenuIcon() {
-		return BaseIcons.getMenuIcon();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Icon getMenuRadioButtonIcon() {
-		return BaseIcons.getMenuRadioButtonIcon();
-	}
-
-	/** {@inheritDoc} */
-	@Override
 	public Icon getMinIcon() {
 		return HiFiIcons.getMinIcon();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Icon getOptionPaneErrorIcon() {
-		return BaseIcons.getOptionPaneErrorIcon();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Icon getOptionPaneInformationIcon() {
-		return BaseIcons.getOptionPaneInformationIcon();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Icon getOptionPaneQuestionIcon() {
-		return BaseIcons.getOptionPaneQuestionIcon();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Icon getOptionPaneWarningIcon() {
-		return BaseIcons.getOptionPaneWarningIcon();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Icon getPaletteCloseIcon() {
-		return BaseIcons.getPaletteCloseIcon();
 	}
 
 	/** {@inheritDoc} */
@@ -279,12 +182,6 @@ public final class HiFiIconFactory implements AbstractIconFactory {
 
 	/** {@inheritDoc} */
 	@Override
-	public Icon getTreeCloseIcon() {
-		return BaseIcons.getTreeClosedIcon();
-	}
-
-	/** {@inheritDoc} */
-	@Override
 	public Icon getTreeCollapsedIcon() {
 		return HiFiIcons.getTreeCollapsedIcon();
 	}
@@ -293,18 +190,6 @@ public final class HiFiIconFactory implements AbstractIconFactory {
 	@Override
 	public Icon getTreeExpandedIcon() {
 		return HiFiIcons.getTreeExpandedIcon();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Icon getTreeLeafIcon() {
-		return BaseIcons.getTreeLeafIcon();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Icon getTreeOpenIcon() {
-		return BaseIcons.getTreeOpenedIcon();
 	}
 
 	/** {@inheritDoc} */

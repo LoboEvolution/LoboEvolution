@@ -28,7 +28,6 @@ package com.jtattoo.plaf.mint;
 import javax.swing.border.Border;
 
 import com.jtattoo.plaf.AbstractBorderFactory;
-import com.jtattoo.plaf.BaseBorders;
 
 /**
  * <p>MintBorderFactory class.</p>
@@ -36,7 +35,7 @@ import com.jtattoo.plaf.BaseBorders;
  * Author Michael Hagen
  *
  */
-public final class MintBorderFactory implements AbstractBorderFactory {
+public final class MintBorderFactory extends AbstractBorderFactory {
 
 	private static MintBorderFactory instance = null;
 
@@ -61,23 +60,6 @@ public final class MintBorderFactory implements AbstractBorderFactory {
 		return MintBorders.getButtonBorder();
 	}
 
-	/** {@inheritDoc} */
-	@Override
-	public Border getComboBoxBorder() {
-		return BaseBorders.getComboBoxBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Border getDesktopIconBorder() {
-		return BaseBorders.getDesktopIconBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Border getFocusFrameBorder() {
-		return BaseBorders.getFocusFrameBorder();
-	}
 
 	/** {@inheritDoc} */
 	@Override
@@ -87,86 +69,8 @@ public final class MintBorderFactory implements AbstractBorderFactory {
 
 	/** {@inheritDoc} */
 	@Override
-	public Border getMenuBarBorder() {
-		return BaseBorders.getMenuBarBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Border getMenuItemBorder() {
-		return BaseBorders.getMenuItemBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Border getPaletteBorder() {
-		return BaseBorders.getPaletteBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Border getPopupMenuBorder() {
-		return BaseBorders.getPopupMenuBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Border getProgressBarBorder() {
-		return BaseBorders.getProgressBarBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Border getScrollPaneBorder() {
-		return BaseBorders.getScrollPaneBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Border getSpinnerBorder() {
-		return BaseBorders.getSpinnerBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Border getTabbedPaneBorder() {
-		return BaseBorders.getTabbedPaneBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Border getTableHeaderBorder() {
-		return BaseBorders.getTableHeaderBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Border getTableScrollPaneBorder() {
-		return BaseBorders.getTableScrollPaneBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Border getTextBorder() {
-		return BaseBorders.getTextBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Border getTextFieldBorder() {
-		return BaseBorders.getTextFieldBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
 	public Border getToggleButtonBorder() {
 		return MintBorders.getToggleButtonBorder();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Border getToolBarBorder() {
-		return BaseBorders.getToolBarBorder();
 	}
 
 } // end of class MintBorderFactory
