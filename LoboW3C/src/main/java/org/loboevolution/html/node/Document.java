@@ -548,7 +548,7 @@ public interface Document extends Node, NonElementParentNode, ParentNode, Docume
 	Element createElement(String tagName);
 
 	/**
-	 * Returns an element with namespace namespace. Its namespace prefix will be
+	 * Returns an element with namespace. Its namespace prefix will be
 	 * everything before ":" (U+003E) in qualifiedName or null. Its local name will
 	 * be everything after ":" (U+003E) in qualifiedName or qualifiedName.
 	 * <p>

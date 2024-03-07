@@ -32,6 +32,7 @@ import org.htmlunit.cssparser.parser.CSSOMParser;
 import org.htmlunit.cssparser.parser.InputSource;
 import org.htmlunit.cssparser.parser.javacc.CSS3Parser;
 import org.loboevolution.common.Strings;
+import org.loboevolution.html.dom.HTMLDocument;
 import org.loboevolution.html.dom.HTMLStyleElement;
 import org.loboevolution.html.dom.svg.SVGSVGElement;
 import org.loboevolution.html.js.css.CSSStyleSheetImpl;
@@ -102,6 +103,9 @@ public class HTMLStyleElementImpl extends HTMLElementImpl implements HTMLStyleEl
 		final CSSStyleSheetImpl sheet = this.styleSheet;
 		if (sheet != null) {
 			sheet.setDisabled(disabled);
+			if(disabled) {
+				((HTMLDocumentImpl)this.document).allInvalidated(true);
+			}
 		}
 	}
 
@@ -134,7 +138,7 @@ public class HTMLStyleElementImpl extends HTMLElementImpl implements HTMLStyleEl
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) getOwnerDocument();
 		if (CSSUtilities.matchesMedia(getMedia(), doc.getDefaultView())) {
 			final String text = getRawInnerText(true);
-			if (Strings.isNotBlank(text)) {
+			if (Strings.isNotBlank(text) && !isDisabled()) {
 				final String processedText = CSSUtilities.preProcessCss(text);
 				final CSSOMParser parser = new CSSOMParser(new CSS3Parser());
 				final String baseURI = doc.getBaseURI();

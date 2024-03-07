@@ -31,9 +31,6 @@ import java.awt.*;
 /**
  * This interface should be implemented to provide OBJECT, EMBED or APPLET
  * functionality.
- *
- *
- *
  */
 public interface HtmlObject {
 	/**

@@ -123,22 +123,4 @@ public class GUITasks {
 			ng.dispose();
 		}
 	}
-
-	/**
-	 * <p>getTopFrame.</p>
-	 *
-	 * @return a {@link java.awt.Frame} object.
-	 */
-	public static Frame getTopFrame() {
-		final Frame[] frames = Frame.getFrames();
-		for (final Frame frame : frames) {
-			if (frame.getFocusOwner() != null) {
-				return frame;
-			}
-		}
-		if (frames.length > 0) {
-			return frames[0];
-		}
-		return null;
-	}
 }
