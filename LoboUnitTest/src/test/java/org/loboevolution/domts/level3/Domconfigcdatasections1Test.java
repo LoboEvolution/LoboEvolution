@@ -28,8 +28,8 @@ package org.loboevolution.domts.level3;
 
 
 import org.junit.jupiter.api.Test;
-import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.driver.LoboUnitTest;
+import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.html.dom.nodeimpl.DOMImplementationImpl;
 import org.loboevolution.html.node.DOMConfiguration;
 import org.loboevolution.html.node.DOMImplementation;
@@ -43,8 +43,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Checks behavior of "cdata-sections" configuration parameter.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-cdata-sections">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-cdata-sections</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration-getParameter">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration-getParameter</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration-setParameter">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration-setParameter</a>

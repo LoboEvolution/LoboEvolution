@@ -43,9 +43,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * <p>
  * Get schemaTypeInfo on a simple type attribute that belongs to a document with an XML schema.
  * Invoke method isDerivedFrom with derivation method list and verify that the value returned is true.
- *
- * @author IBM
- * @author Jenny Hsu
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom</a>
  */
 public class Typeinfoisderivedfrom65Test extends LoboUnitTest {

@@ -34,7 +34,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -42,8 +42,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * node to the list of children.   The last node in the list
  * is then retrieved and its NodeName examined.   The
  * "getNodeName()" method should return "br".
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-184E7107">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-184E7107</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=247">http://www.w3.org/Bugs/Public/show_bug.cgi?id=247</a>
  */
@@ -51,7 +50,6 @@ public class HcnodeappendchildTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -71,7 +69,7 @@ public class HcnodeappendchildTest extends LoboUnitTest {
         appendedChild = employeeNode.appendChild(createdNode);
         lchild = employeeNode.getLastChild();
         childName = lchild.getNodeName();
-         assertEquals( "br", childName, "HcnodeappendchildAssert1");
+        assertEquals("br", childName, "HcnodeappendchildAssert1");
     }
 }
 

@@ -40,9 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Invoke setUserData on a new PI node to set this its UserData to itself
  * and using getUserData with an valid Key and isEqualsNode check if the
  * returned UserData object is the same as that was set.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-getUserData">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-getUserData</a>
  */
 public class Nodegetuserdata07Test extends LoboUnitTest {

@@ -41,8 +41,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Call setUserData on a node providing a UserDataHandler and adopt the node.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-handleUserDataEvent">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-handleUserDataEvent</a>
  */
 public class Userdatahandler04Test extends LoboUnitTest {
@@ -83,14 +82,16 @@ public class Userdatahandler04Test extends LoboUnitTest {
         newDoc = domImpl.createDocument(rootNS, rootName, docType);
         pList = doc.getElementsByTagName("p");
         node = pList.item(0);
-        oldUserData = node.setUserData("greeting", ((Object) /*DOMString */hello), userDataHandlerImpl);
-        oldUserData = node.setUserData("salutation", ((Object) /*DOMString */mister), userDataHandlerImpl);
+        /*DOMString */
+        oldUserData = node.setUserData("greeting", hello, userDataHandlerImpl);
+        /*DOMString */
+        oldUserData = node.setUserData("salutation", mister, userDataHandlerImpl);
         elementNS = node.getNamespaceURI();
         newNode = doc.adoptNode(node);
         notifications = userDataHandlerImpl.getAllNotifications();
         assertEquals(2, notifications.size(), "Userdatahandler04Assert1");
         for (int indexN100CD = 0; indexN100CD < notifications.size(); indexN100CD++) {
-            notification = (UserDataNotification) notifications.get(indexN100CD);
+            notification = notifications.get(indexN100CD);
             operation = notification.getOperation();
             assertEquals(5, operation, "Userdatahandler04Assert2");
             key = notification.getKey();

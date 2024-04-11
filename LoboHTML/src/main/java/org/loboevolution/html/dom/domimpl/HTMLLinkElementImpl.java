@@ -48,6 +48,7 @@ import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.Duration;
 import java.time.Instant;
@@ -67,7 +68,7 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 	/**
 	 * <p>Constructor for HTMLLinkElementImpl.</p>
 	 *
-	 * @param name a {@link java.lang.String} object.
+	 * @param name a {@link String} object.
 	 */
 	public HTMLLinkElementImpl(final String name) {
 		super(name);
@@ -131,8 +132,19 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 								final Instant start = Instant.now();
 								final TimingInfo info = new TimingInfo();
 								final org.htmlunit.cssparser.dom.CSSStyleSheetImpl sheet = CSSUtilities.parseCssExternal(getHtmlRendererConfig(), href, scriptURL, baseURI, getIntegrity(), rcontext.isTestEnabled());
-								sheet.setHref(scriptURL == null ? href : scriptURL.toExternalForm());
+								String fileName;
+								boolean exist;
+								if (scriptURL != null) {
+									fileName = scriptURL.getFile().substring(scriptURL.getFile().lastIndexOf('/') + 1);
+									exist = Urls.exists(scriptURL);
+								} else {
+									fileName = href.substring(href.lastIndexOf('/') + 1);
+									exist = Urls.exists(new URL(href));
+								}
+
+								sheet.setHref(exist ? fileName : null);
 								sheet.setDisabled(this.disabled);
+
 								final CSSStyleSheetImpl cssStyleSheet = new CSSStyleSheetImpl(sheet);
 								cssStyleSheet.setOwnerNode(this);
 								doc.addStyleSheet(cssStyleSheet);

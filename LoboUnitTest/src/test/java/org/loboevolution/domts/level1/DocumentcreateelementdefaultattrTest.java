@@ -34,7 +34,8 @@ import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 /**
@@ -48,9 +49,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * whose tagName is "address".  The tagName "address" has an
  * attribute with default values, therefore the newly created element
  * will have them.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-2141741547">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-2141741547</a>
  * @see <a href="http://lists.w3.org/Archives/Public/www-dom-ts/2002Mar/0002.html">http://lists.w3.org/Archives/Public/www-dom-ts/2002Mar/0002.html</a>
  */
@@ -58,7 +57,6 @@ public class DocumentcreateelementdefaultattrTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -74,7 +72,7 @@ public class DocumentcreateelementdefaultattrTest extends LoboUnitTest {
         child = defaultAttr.item(0);
         assertNotNull(child, "DocumentcreateelementdefaultattrAssert1");
         name = child.getNodeName();
-        assertEquals( "street", name, "DocumentcreateelementdefaultattrAssert2");
+        assertEquals("street", name, "DocumentcreateelementdefaultattrAssert2");
         value = child.getNodeValue();
         assertEquals("Yes", value, "DocumentcreateelementdefaultattrAssert3");
     }

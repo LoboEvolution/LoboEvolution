@@ -18,8 +18,6 @@ import org.htmlunit.cssparser.parser.Locator;
 
 /**
  * <p>PseudoElementSelector class.</p>
- *
- * @author Ronald Brill
  */
 public class PseudoElementSelector extends AbstractSelector implements SimpleSelector {
 

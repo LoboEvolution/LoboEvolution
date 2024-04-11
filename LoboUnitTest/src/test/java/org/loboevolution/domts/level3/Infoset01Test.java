@@ -39,8 +39,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Normalize document with infoset set to true, check that
  * entity references are expanded and unused entity declaration are maintained.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-infoset">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-infoset</a>
  */
@@ -78,9 +77,9 @@ public class Infoset01Test extends LoboUnitTest {
         child = pElem.getLastChild();
         assertNotNull(child, "Infoset01Assert2");
         childName = child.getNodeName();
-        assertEquals( "#text", childName, "Infoset01Assert3");
+        assertEquals("#text", childName, "Infoset01Assert3");
         childValue = child.getNodeValue();
-        assertEquals( "barfoo", childValue, "Infoset01Assert4");
+        assertEquals("barfoo", childValue, "Infoset01Assert4");
         doctype = doc.getDoctype();
         entities = doctype.getEntities();
         ent2 = entities.getNamedItem("ent2");

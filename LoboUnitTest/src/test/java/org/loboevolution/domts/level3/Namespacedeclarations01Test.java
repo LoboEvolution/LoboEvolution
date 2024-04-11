@@ -41,8 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Normalize document with namespace-declarations set to true, check that
  * namespace declaration attributes are maintained.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-namespace-declarations">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-namespace-declarations</a>
  */

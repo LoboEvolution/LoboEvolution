@@ -34,7 +34,8 @@ import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.Text;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 /**
@@ -47,16 +48,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * this document.  Method should return a text node whose value matches
  * the above string. The returned node should belong to this document
  * whose systemId is "staff.dtd"
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#Core-Document-importNode">http://www.w3.org/TR/DOM-Level-2-Core/core#Core-Document-importNode</a>
  */
 public class ImportNode15Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

@@ -32,7 +32,7 @@ import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -44,9 +44,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * Invoke the getElementsByTagNameNS method on a this Document object with the
  * values of namespaceURI=null and localName="elementId".  This
  * should return a nodeList of 0 item.  Check the length of the nodeList returned.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core">http://www.w3.org/TR/DOM-Level-2-Core/core</a>
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-getElBTNNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-getElBTNNS</a>
  */
@@ -54,7 +52,6 @@ public class DocumentgetelementsbytagnameNS05Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

@@ -46,16 +46,13 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  * Call the createDocument on this DOMImplementation with
  * createDocument ("http://www.w3.org/DOMTest/L2",see the array below for valid QNames,null).
  * Check if the returned Document object is empty with no Document Element.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#Level-2-Core-DOM-createDocument">http://www.w3.org/TR/DOM-Level-2-Core/core#Level-2-Core-DOM-createDocument</a>
  */
 public class Domimplementationcreatedocument03Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

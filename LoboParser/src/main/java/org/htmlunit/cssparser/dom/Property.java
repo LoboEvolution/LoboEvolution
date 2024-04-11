@@ -22,8 +22,6 @@ import org.htmlunit.cssparser.util.ParserUtils;
 /**
  * <p>Property class.</p>
  *
- * @author Ronald Brill
- *
  */
 public class Property extends AbstractLocatable implements Serializable {
 

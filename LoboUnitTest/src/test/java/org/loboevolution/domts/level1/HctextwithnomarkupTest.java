@@ -33,7 +33,7 @@ import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -47,8 +47,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * multiple text lines without markup, so they should be
  * treated as a single Text node.   The "getNodeValue()"
  * method should contain the combination of the two lines.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1312295772">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1312295772</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080</a>
  */
@@ -56,7 +55,6 @@ public class HctextwithnomarkupTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

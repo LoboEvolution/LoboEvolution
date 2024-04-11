@@ -33,22 +33,19 @@ import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
  * The "getNextSibling()" method returns the node immediately
  * following this node.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-6AC54C2F">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-6AC54C2F</a>
  */
 public class NodegetnextsiblingTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -67,7 +64,7 @@ public class NodegetnextsiblingTest extends LoboUnitTest {
             nsNode = nsNode.getNextSibling();
             nsName = nsNode.getNodeName();
         }
-         assertEquals( "NAME", nsName, "NodegetnextsiblingAssert1");
+        assertEquals("NAME", nsName, "NodegetnextsiblingAssert1");
     }
 }
 

@@ -39,33 +39,31 @@ import org.loboevolution.html.node.Node;
  * children, and returns the oldChild node.
  * Using replaceChild on this Document node attempt to replace this DocumentElement node with
  * this Document Node and verify if a HIERARCHY_REQUEST_ERR or a NOT_FOUND_ERR error is thrown.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307</a>
  */
 public class Nodereplacechild04Test extends LoboUnitTest {
-@Test
-public void runTest(){
+    @Test
+    public void runTest() {
         final Document doc;
         final Element docElem;
         final Node replaced;
-        doc=sampleXmlFile("hc_staff.xml");
-        docElem=doc.getDocumentElement();
+        doc = sampleXmlFile("hc_staff.xml");
+        docElem = doc.getDocumentElement();
 
-        try{
-        replaced=doc.replaceChild(doc,docElem);
+        try {
+            replaced = doc.replaceChild(doc, docElem);
 
-        }catch(final DOMException ex){
-        switch(ex.getCode()){
-        case 8:
-        break;
-        case 3:
-        break;
-default:
-        throw ex;
+        } catch (final DOMException ex) {
+            switch (ex.getCode()) {
+                case 8:
+                    break;
+                case 3:
+                    break;
+                default:
+                    throw ex;
+            }
         }
-        }
-        }
-        }
+    }
+}
 

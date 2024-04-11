@@ -48,8 +48,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * method should add the new node and return null.
  * This test uses the "createAttribute(name)" method from
  * the document interface.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1025163788">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1025163788</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-349467F9">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-349467F9</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=243">http://www.w3.org/Bugs/Public/show_bug.cgi?id=243</a>
@@ -58,7 +57,6 @@ public class HcnamednodemapsetnameditemwithnewvalueTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -70,7 +68,7 @@ public class HcnamednodemapsetnameditemwithnewvalueTest extends LoboUnitTest {
         final Node newNode;
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("acronym");
-        testAddress = (Element)elementList.item(2);
+        testAddress = (Element) elementList.item(2);
         newAttribute = doc.createAttribute("lang");
         attributes = testAddress.getAttributes();
         newNode = attributes.setNamedItem(newAttribute);

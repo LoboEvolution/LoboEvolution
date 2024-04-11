@@ -22,8 +22,6 @@ import org.htmlunit.cssparser.parser.selector.SelectorList;
  * application needs to be informed of basic parsing events, it implements this
  * interface and registers an instance with the CSS parser using the
  * setCSSHandler method.
- *
- * @author Ronald Brill
  */
 public interface DocumentHandler {
 

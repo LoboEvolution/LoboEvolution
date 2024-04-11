@@ -38,9 +38,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Create a new Element node in this Document.  return its ownerDocument and check if the
  * the ownerDocument is equal to this Document using isEqualNode.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isEqualNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isEqualNode</a>
  */
 public class Nodeisequalnode04Test extends LoboUnitTest {

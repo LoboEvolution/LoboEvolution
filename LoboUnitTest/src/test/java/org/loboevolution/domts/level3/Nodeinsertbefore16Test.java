@@ -40,9 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * Using insertBefore on an Element node attempt to insert a new Element, node before its
  * first element child and verify the name of the new first child node.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-952280727">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-952280727</a>
  */
 public class Nodeinsertbefore16Test extends LoboUnitTest {

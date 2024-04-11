@@ -29,8 +29,8 @@ package org.loboevolution.domts.level1;
 
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DOMImplementation;
+import org.loboevolution.html.node.Document;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -41,8 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * DOMImplementation.hasFeature("HTML","1.0") should be true.
  * Otherwise, DOMImplementation.hasFeature("XML", "1.0")
  * should be true.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1B793EBA">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1B793EBA</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=245">http://www.w3.org/Bugs/Public/show_bug.cgi?id=245</a>
  */
@@ -50,7 +49,6 @@ public class HcdocumentgetimplementationTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -58,7 +56,7 @@ public class HcdocumentgetimplementationTest extends LoboUnitTest {
         final DOMImplementation docImpl;
         final boolean xmlstate;
         doc = sampleXmlFile("hc_staff.xml");
-        
+
         docImpl = doc.getImplementation();
         xmlstate = docImpl.hasFeature("XML", "1.0");
         assertTrue(xmlstate, "HcdocumentgetimplementationAssert2");

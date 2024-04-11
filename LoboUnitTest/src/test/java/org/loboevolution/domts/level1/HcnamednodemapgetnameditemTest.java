@@ -35,7 +35,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -44,8 +44,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * list is created an invocation of the "getNamedItem(name)"
  * method is done with name="title".  This should result
  * in the title Attr node being returned.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1074577549">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1074577549</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-349467F9">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-349467F9</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=236">http://www.w3.org/Bugs/Public/show_bug.cgi?id=236</a>
@@ -55,7 +54,6 @@ public class HcnamednodemapgetnameditemTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -67,11 +65,11 @@ public class HcnamednodemapgetnameditemTest extends LoboUnitTest {
         final String attrName;
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("acronym");
-        testEmployee = (Element)elementList.item(1);
+        testEmployee = (Element) elementList.item(1);
         attributes = testEmployee.getAttributes();
         domesticAttr = (Attr) attributes.getNamedItem("title");
         attrName = domesticAttr.getNodeName();
-        assertEquals( "title", attrName, "HcnamednodemapgetnameditemAssert1");
+        assertEquals("title", attrName, "HcnamednodemapgetnameditemAssert1");
     }
 }
 

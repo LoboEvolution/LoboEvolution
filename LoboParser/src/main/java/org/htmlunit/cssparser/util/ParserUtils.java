@@ -16,8 +16,6 @@ package org.htmlunit.cssparser.util;
 
 /**
  * Util methods.
- *
- * @author Ronald Brill
  */
 public final class ParserUtils {
 

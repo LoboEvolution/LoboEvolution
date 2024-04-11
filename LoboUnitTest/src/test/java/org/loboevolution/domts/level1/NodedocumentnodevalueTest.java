@@ -40,9 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * Retrieve the DOM Document and check the string returned
  * by the "getNodeValue()" method.   It should be equal to
  * null.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#i-Document">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#i-Document</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080</a>
  */
@@ -50,7 +48,6 @@ public class NodedocumentnodevalueTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

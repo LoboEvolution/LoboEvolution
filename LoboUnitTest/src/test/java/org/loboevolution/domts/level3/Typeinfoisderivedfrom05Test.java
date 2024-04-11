@@ -40,8 +40,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Check if xsd:string is derived from xsd:anyType by restriction.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom</a>
  */
 public class Typeinfoisderivedfrom05Test extends LoboUnitTest {
@@ -63,7 +62,7 @@ public class Typeinfoisderivedfrom05Test extends LoboUnitTest {
         typeInfo = attr.getSchemaTypeInfo();
         assertNotNull(typeInfo, "Typeinfoisderivedfrom05Assert1");
         typeName = typeInfo.getTypeName();
-        assertEquals( "string", typeName, "Typeinfoisderivedfrom05Assert2");
+        assertEquals("string", typeName, "Typeinfoisderivedfrom05Assert2");
         isDerived = typeInfo.isDerivedFrom("http://www.w3.org/2001/XMLSchema", "anyType", 1);
         assertTrue(isDerived, "Typeinfoisderivedfrom05Assert3");
     }

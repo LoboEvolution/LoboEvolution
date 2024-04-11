@@ -45,9 +45,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * that is a part of this Document.   Verify that the returned adopted node's nodeName, nodeValue
  * and nodeType are as expected and that the ownerElement attribute of the returned attribute node
  * was set to null.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode</a>
  */
 public class Documentadoptnode21Test extends LoboUnitTest {
@@ -75,7 +73,7 @@ public class Documentadoptnode21Test extends LoboUnitTest {
         attrOwnerElem = (Element) ((Attr) adoptedTitle).getOwnerElement();
         assertEquals("title", nodeName, "Documentadoptnode21Assert3");
         assertEquals(2, nodeType, "Documentadoptnode21Assert4");
-        assertEquals( "Yes", nodeValue, "Documentadoptnode21Assert5");
+        assertEquals("Yes", nodeValue, "Documentadoptnode21Assert5");
         assertNull(attrOwnerElem, "Documentadoptnode21Assert6");
     }
 }

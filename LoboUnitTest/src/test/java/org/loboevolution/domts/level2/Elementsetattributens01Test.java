@@ -33,7 +33,7 @@ import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -41,9 +41,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * Create a new element and add a new attribute node to it using the setAttributeNS method.
  * Check if the attribute was correctly set by invoking the getAttributeNodeNS method
  * and checking the nodeName and nodeValue of the returned nodes.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElSetAttrNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElSetAttrNS</a>
  */
 public class Elementsetattributens01Test extends LoboUnitTest {

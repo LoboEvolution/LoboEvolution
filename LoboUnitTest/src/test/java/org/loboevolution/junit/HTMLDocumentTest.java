@@ -29,8 +29,11 @@ package org.loboevolution.junit;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.loboevolution.gui.LocalHtmlRendererConfig;
+import org.loboevolution.css.CSSRuleList;
+import org.loboevolution.css.CSSStyleDeclaration;
+import org.loboevolution.css.CSSStyleSheet;
 import org.loboevolution.driver.LoboUnitTest;
+import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.html.dom.*;
 import org.loboevolution.html.dom.domimpl.HTMLCollectionImpl;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
@@ -39,9 +42,6 @@ import org.loboevolution.html.dom.nodeimpl.DOMImplementationImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.js.css.CSSStyleSheetImpl;
 import org.loboevolution.html.node.*;
-import org.loboevolution.css.CSSRuleList;
-import org.loboevolution.css.CSSStyleDeclaration;
-import org.loboevolution.css.CSSStyleSheet;
 import org.loboevolution.http.UserAgentContext;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -188,15 +188,15 @@ public class HTMLDocumentTest extends LoboUnitTest {
     @Test
     public void testCreateElement() {
         Element elm = document.createElement("link");
-        assertTrue(elm instanceof HTMLLinkElement);
+        assertInstanceOf(HTMLLinkElement.class, elm);
         elm = document.createElement("LINK");
-        assertTrue(elm instanceof HTMLLinkElement);
+        assertInstanceOf(HTMLLinkElement.class, elm);
         assertEquals("LINK", elm.getLocalName());
         assertEquals("LINK", elm.getTagName());
         elm = document.createElement("style");
-        assertTrue(elm instanceof HTMLStyleElement);
+        assertInstanceOf(HTMLStyleElement.class, elm);
         elm = document.createElement("STYLE");
-        assertTrue(elm instanceof HTMLStyleElement);
+        assertInstanceOf(HTMLStyleElement.class, elm);
         assertEquals("STYLE", elm.getLocalName());
 
         final HTMLElement html = (HTMLElement) document.createElement("html");
@@ -236,19 +236,19 @@ public class HTMLDocumentTest extends LoboUnitTest {
     @Test
     public void testCreateElementNS() {
         Element elm = document.createElementNS(HTMLDocument.HTML_NAMESPACE_URI, "link");
-        assertTrue(elm instanceof HTMLLinkElement);
+        assertInstanceOf(HTMLLinkElement.class, elm);
 
         elm = document.createElementNS(HTMLDocument.HTML_NAMESPACE_URI, "LINK");
-        assertTrue(elm instanceof HTMLLinkElement);
+        assertInstanceOf(HTMLLinkElement.class, elm);
         assertEquals("LINK", elm.getLocalName());
         assertEquals("LINK", elm.getTagName());
         assertEquals(HTMLDocument.HTML_NAMESPACE_URI, elm.getNamespaceURI());
 
         elm = document.createElementNS(HTMLDocument.HTML_NAMESPACE_URI, "style");
-        assertTrue(elm instanceof HTMLStyleElement);
+        assertInstanceOf(HTMLStyleElement.class, elm);
 
         elm = document.createElementNS(HTMLDocument.HTML_NAMESPACE_URI, "STYLE");
-        assertTrue(elm instanceof HTMLStyleElement);
+        assertInstanceOf(HTMLStyleElement.class, elm);
         assertEquals("STYLE", elm.getLocalName());
 
         elm = document.createElementNS("http://www.w3.org/2000/svg", "g:rect");
@@ -576,7 +576,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
 
     @Test
     public void getChildNodes() {
-        final NodeListImpl list = (NodeListImpl)document.getChildNodes();
+        final NodeListImpl list = (NodeListImpl) document.getChildNodes();
         assertNotNull(list);
         assertEquals(2, list.getLength());
     }
@@ -805,7 +805,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
         final Text text = document.createTextNode(" p3");
         p.appendChild(text);
         p.appendChild(document.createTextNode(" p4"));
-        final NodeListImpl list = (NodeListImpl)p.getChildNodes();
+        final NodeListImpl list = (NodeListImpl) p.getChildNodes();
         assertNotNull(list);
         assertEquals(3, p.getChildNodes().getLength());
         assertEquals("p1  p3 p4", text.getWholeText());

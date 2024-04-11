@@ -40,9 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * Invoke lookupNamespaceURI on an Element node with no prefix, whose parent has no prefix and
  * 2 namespace attribute declarations with and without namespace prefixes and check if the value of
  * the namespaceURI returned by using each prefix as a parameter is valid.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-lookupNamespaceURI">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-lookupNamespaceURI</a>
  */
 public class Nodelookupnamespaceuri09Test extends LoboUnitTest {

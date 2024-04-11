@@ -33,7 +33,8 @@ import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 /**
@@ -46,16 +47,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * this domimplementation. namespaceURI is "http://www.ecommerce.org/schema"
  * qualifiedName is "y:x" and doctype is null.
  * Method should return a new xml Document as specified by the listed parameters.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#Level-2-Core-DOM-createDocument">http://www.w3.org/TR/DOM-Level-2-Core/core#Level-2-Core-DOM-createDocument</a>
  */
 public class CreateDocument07Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -69,13 +67,13 @@ public class CreateDocument07Test extends LoboUnitTest {
         final String nodeName;
         final String nodeValue;
         doc = sampleXmlFile("staffNS.xml");
-        
+
         domImpl = doc.getImplementation();
         aNewDoc = domImpl.createDocument(namespaceURI, qualifiedName, docType);
         nodeName = aNewDoc.getNodeName();
         nodeValue = aNewDoc.getNodeValue();
-         assertEquals( "[object HTMLDocument]", nodeName);
-        assertNull( nodeValue);
+        assertEquals("[object HTMLDocument]", nodeName);
+        assertNull(nodeValue);
     }
 }
 

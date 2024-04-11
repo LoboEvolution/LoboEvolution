@@ -44,16 +44,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * The value returned by the "getAttributeNS()" method for the domestic attribute
  * should be the empty string since the attribute does not have a specified value
  * because it was removed by the "removeAttributeNS()" method.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElGetAttrNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElGetAttrNS</a>
  */
 public class GetAttributeNS03Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -69,7 +66,7 @@ public class GetAttributeNS03Test extends LoboUnitTest {
         assertNotNull(testAddr);
         testAddr.removeAttributeNS(namespaceURI, localName);
         attrValue = testAddr.getAttributeNS(namespaceURI, localName);
-        assertEquals(null, attrValue);
+        assertNull(attrValue);
     }
 }
 

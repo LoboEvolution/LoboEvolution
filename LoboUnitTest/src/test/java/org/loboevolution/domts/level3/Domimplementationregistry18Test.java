@@ -40,8 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 /**
  * DOMImplementationRegistry.getDOMImplementationList("http://www.example.com/bogus-feature 99.0")
  * should return a zero-length list.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/java-binding">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/java-binding</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/ecma-script-binding">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/ecma-script-binding</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-getDOMImpls">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-getDOMImpls</a>
@@ -53,7 +52,7 @@ public class Domimplementationregistry18Test extends LoboUnitTest {
 
         final DOMImplementationList domImplList;
         final int length;
-         final DOMImplementationRegistry domImplRegistry = DOMImplementationRegistry.newInstance();
+        final DOMImplementationRegistry domImplRegistry = DOMImplementationRegistry.newInstance();
         assertNotNull(domImplRegistry, "Domimplementationregistry18Assert3");
         domImplList = domImplRegistry.getDOMImplementationList("http://www.example.com/bogus-feature 99.0");
         length = domImplList.getLength();

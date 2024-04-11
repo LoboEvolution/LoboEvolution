@@ -44,9 +44,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
  * Retrieve the Text node inside the first child of the
  * second employee and invoke the "hasChildNodes()" method.
  * It should return the boolean value "false".
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1451460987">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1451460987</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-810594187">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-810594187</a>
  */
@@ -54,7 +52,6 @@ public class NodehaschildnodesfalseTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

@@ -39,9 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * <p>
  * Using setTextContent on a new Element node, attempt to set its content to ELEMENT.
  * Retreive the textContent and verify if it is was set to ELEMENT.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-textContent">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-textContent</a>
  */
 public class Nodesettextcontent10Test extends LoboUnitTest {
@@ -70,7 +68,7 @@ public class Nodesettextcontent10Test extends LoboUnitTest {
         appendedChild = elem.appendChild(cdata);
         elem.setTextContent("ELEMENT");
         textContent = elem.getTextContent();
-        assertEquals( "ELEMENT", textContent, "Nodesettextcontent10Assert2");
+        assertEquals("ELEMENT", textContent, "Nodesettextcontent10Assert2");
     }
 }
 

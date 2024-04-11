@@ -43,16 +43,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * Invoke method createAttributeNS(namespaceURI,qualifiedName) on this document with
  * parameters equal "http://www.ecommerce.org/" and "ecom:local"
  * respectively. Method should return a new Attr object whose name is "ecom:local".
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-1112119403">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-1112119403</a>
  */
 public class CreateAttributeNS05Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

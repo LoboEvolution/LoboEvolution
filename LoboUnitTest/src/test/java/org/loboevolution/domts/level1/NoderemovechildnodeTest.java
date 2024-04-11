@@ -34,7 +34,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -42,16 +42,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * After the removal, the second employee should have five or twelve
  * children and the first child should now be the child
  * that used to be at the second position in the list.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1734834066">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1734834066</a>
  */
 public class NoderemovechildnodeTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -77,11 +74,11 @@ public class NoderemovechildnodeTest extends LoboUnitTest {
         length = childList.getLength();
 
         if (length == 5) {
-            assertEquals("EMPLOYEEID",removedName, "NoderemovechildnodeAssert1");
+            assertEquals("EMPLOYEEID", removedName, "NoderemovechildnodeAssert1");
             assertEquals("NAME", childName, "NoderemovechildnodeAssert2");
         } else {
             assertEquals("#text", removedName, "NoderemovechildnodeAssert3");
-            assertEquals("EMPLOYEEID",childName, "NoderemovechildnodeAssert4");
+            assertEquals("EMPLOYEEID", childName, "NoderemovechildnodeAssert4");
             assertEquals(12, length, "NoderemovechildnodeAssert5");
         }
 

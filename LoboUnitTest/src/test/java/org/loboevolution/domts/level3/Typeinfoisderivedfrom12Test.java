@@ -40,8 +40,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Check classType is derived from anyType specifying derivationMethod as 0.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom</a>
  */
 public class Typeinfoisderivedfrom12Test extends LoboUnitTest {
@@ -63,7 +62,7 @@ public class Typeinfoisderivedfrom12Test extends LoboUnitTest {
         typeInfo = attr.getSchemaTypeInfo();
         assertNotNull(typeInfo, "Typeinfoisderivedfrom12Assert1");
         typeName = typeInfo.getTypeName();
-        assertEquals( "classType", typeName, "Typeinfoisderivedfrom12Assert2");
+        assertEquals("classType", typeName, "Typeinfoisderivedfrom12Assert2");
         isDerived = typeInfo.isDerivedFrom("http://www.w3.org/2001/XMLSchema", "anyType", 0);
         assertTrue(isDerived, "Typeinfoisderivedfrom12Assert3");
     }

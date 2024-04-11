@@ -34,22 +34,19 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
  * Element.getElementsByTagName("employee") should return a NodeList whose length is
  * "5" in the order the children were encountered.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1938918D">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1938918D</a>
  */
 public class ElementgetelementsbytagnameaccessnodelistTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -70,7 +67,7 @@ public class ElementgetelementsbytagnameaccessnodelistTest extends LoboUnitTest 
             child = child.getNextSibling();
         }
         childName = child.getNodeName();
-         assertEquals( "EMPLOYEEID",childName, "ElementgetelementsbytagnameaccessnodelistAssert1");
+        assertEquals("EMPLOYEEID", childName, "ElementgetelementsbytagnameaccessnodelistAssert1");
         child = child.getFirstChild();
         childValue = child.getNodeValue();
         assertEquals("EMP0004", childValue, "ElementgetelementsbytagnameaccessnodelistAssert2");

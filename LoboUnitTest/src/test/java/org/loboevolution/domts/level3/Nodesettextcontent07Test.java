@@ -40,9 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * Using setTextContent on an existing Text node, attempt to set its value to Text.
  * Retreive the textContent and verify if it is was set to Text.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-textContent">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-textContent</a>
  */
 public class Nodesettextcontent07Test extends LoboUnitTest {

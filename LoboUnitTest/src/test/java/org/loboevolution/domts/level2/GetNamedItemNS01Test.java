@@ -35,7 +35,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -47,16 +47,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * Try to retrieve the attribute node with local name "domestic"
  * and namespace uri "http://www.usa.com" with
  * method getNamedItemNS(namespaceURI,localName).
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-F68D095">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-F68D095</a>
  */
 public class GetNamedItemNS01Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -68,11 +65,11 @@ public class GetNamedItemNS01Test extends LoboUnitTest {
         final String attrName;
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagName("address");
-        testEmployee = (Element)elementList.item(1);
+        testEmployee = (Element) elementList.item(1);
         attributes = testEmployee.getAttributes();
         domesticAttr = (Attr) attributes.getNamedItemNS("http://www.usa.com", "domestic");
         attrName = domesticAttr.getNodeName();
-        assertEquals( "dmstc:domestic", attrName);
+        assertEquals("dmstc:domestic", attrName);
     }
 }
 

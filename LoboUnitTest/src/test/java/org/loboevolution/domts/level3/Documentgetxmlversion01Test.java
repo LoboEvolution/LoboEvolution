@@ -37,9 +37,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * Check if the value of the version attribute in the XML declaration of this document
  * obtained by parsing staffNS.xml is "1.0".
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-version">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-version</a>
  */
 public class Documentgetxmlversion01Test extends LoboUnitTest {

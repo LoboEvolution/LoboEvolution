@@ -43,9 +43,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Using removeChild on the first 'p' Element node attempt to remove a new
  * Element child and verify the name of the returned node that was removed.  Now attempt
  * to do the same on a cloned child and verify if a NOT_FOUND_ERR is thrown.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-1734834066">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-1734834066</a>
  */
 public class Noderemovechild20Test extends LoboUnitTest {
@@ -68,7 +66,7 @@ public class Noderemovechild20Test extends LoboUnitTest {
         appendedChild = parent.appendChild(child);
         removed = (Element) parent.removeChild(child);
         removedName = removed.getNodeName();
-        assertEquals( "dom3:br", removedName, "Noderemovechild20Assert3");
+        assertEquals("dom3:br", removedName, "Noderemovechild20Assert3");
         clonedChild = (Element) child.cloneNode(true);
 
         {

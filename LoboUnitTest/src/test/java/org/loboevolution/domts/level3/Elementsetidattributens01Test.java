@@ -41,9 +41,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * Invoke setIdAttributeNS on an existing namespace attribute with a namespace URI and a qualified name.  Verify by calling
  * isId on the attribute node and getElementById on document node.  Call setIdAttributeNS with isId=false to reset.
  * isId should now return false.
- *
- * @author IBM
- * @author Jenny Hsu
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-ElSetIdAttrNS">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-ElSetIdAttrNS</a>
  */
 public class Elementsetidattributens01Test extends LoboUnitTest {

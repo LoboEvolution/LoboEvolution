@@ -45,9 +45,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Using insertBefore on this Document node attempt to insert a new Attr node before
  * this DocumentType node and verfiy if a NO_MODIFICATION_ALLOWED_ERR is raised.
  * (This can also raise a HIERARCHY_REQUEST_ERR and NOT_FOUND_ERR)
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-952280727">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-952280727</a>
  */
 public class Nodeinsertbefore14Test extends LoboUnitTest {

@@ -42,8 +42,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Normalize document with canonical-form set to true and validation set to true, check that
  * whitespace in element content is preserved.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-canonical-form">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-canonical-form</a>
  */
@@ -76,7 +75,7 @@ public class Canonicalform07Test extends LoboUnitTest {
             child = body.getFirstChild();
             assertNotNull(child, "Canonicalform07Assert2");
             childName = child.getNodeName();
-            assertEquals( "#text", childName, "Canonicalform07Assert3");
+            assertEquals("#text", childName, "Canonicalform07Assert3");
             child = child.getNextSibling();
             assertNotNull(child, "Canonicalform07Assert4");
             childName = child.getNodeName();

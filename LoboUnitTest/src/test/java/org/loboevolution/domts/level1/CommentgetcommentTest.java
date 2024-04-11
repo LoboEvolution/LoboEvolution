@@ -33,7 +33,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -41,9 +41,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * '<!--' and ending '-->'
  * Retrieve the nodes of the DOM document.  Search for a
  * comment node and the content is its value.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1334481328">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1334481328</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D095">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D095</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080</a>
@@ -53,7 +51,6 @@ public class CommentgetcommentTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -72,9 +69,9 @@ public class CommentgetcommentTest extends LoboUnitTest {
 
             if (childType == 8) {
                 childName = child.getNodeName();
-                 assertEquals( "#comment", childName, "CommentgetcommentAssert1");
+                assertEquals("#comment", childName, "CommentgetcommentAssert1");
                 childValue = child.getNodeValue();
-                 assertEquals( " This is comment number 1.", childValue, "CommentgetcommentAssert2");
+                assertEquals(" This is comment number 1.", childValue, "CommentgetcommentAssert2");
                 commentCount = commentCount + 1;
             }
         }

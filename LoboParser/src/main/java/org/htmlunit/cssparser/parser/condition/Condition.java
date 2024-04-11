@@ -19,8 +19,6 @@ import org.htmlunit.cssparser.parser.Locatable;
 /**
  * <p>Condition interface.</p>
  *
- * @author Ronald Brill
- *
  */
 public interface Condition extends Locatable {
 

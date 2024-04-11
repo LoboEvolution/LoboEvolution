@@ -33,7 +33,8 @@ import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 /**
@@ -43,9 +44,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * <p>
  * Ceate two new element nodes and atribute nodes, with and without namespace prefixes.
  * Retreive their namespaceURI's using getNamespaceURI and verrify if it is correct.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSname">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSname</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=259">http://www.w3.org/Bugs/Public/show_bug.cgi?id=259</a>
  */
@@ -53,7 +52,6 @@ public class Nodegetnamespaceuri03Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -77,8 +75,8 @@ public class Nodegetnamespaceuri03Test extends LoboUnitTest {
         elemNSURINull = element.getNamespaceURI();
         attrNSURI = attrNS.getNamespaceURI();
         attrNSURINull = attr.getNamespaceURI();
-        assertEquals( "http://www.w3.org/DOM/Test/elem", elemNSURI);
-        assertNull( elemNSURINull);
+        assertEquals("http://www.w3.org/DOM/Test/elem", elemNSURI);
+        assertNull(elemNSURINull);
         assertEquals("http://www.w3.org/DOM/Test/attr", attrNSURI);
         assertNull(attrNSURINull);
     }

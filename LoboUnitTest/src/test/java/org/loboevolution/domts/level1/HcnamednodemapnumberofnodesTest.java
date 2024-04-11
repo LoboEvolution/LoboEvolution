@@ -34,13 +34,12 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
  * Retrieve the second "p" element and evaluate Node.attributes.length.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-84CF096">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-84CF096</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-6D0FB19E">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-6D0FB19E</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=250">http://www.w3.org/Bugs/Public/show_bug.cgi?id=250</a>
@@ -49,7 +48,6 @@ public class HcnamednodemapnumberofnodesTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -63,7 +61,7 @@ public class HcnamednodemapnumberofnodesTest extends LoboUnitTest {
         testEmployee = (Element) elementList.item(2);
         attributes = testEmployee.getAttributes();
         length = attributes.getLength();
-        assertEquals( 3, length, "HcnamednodemapnumberofnodesAssert1");
+        assertEquals(3, length, "HcnamednodemapnumberofnodesAssert1");
     }
 }
 

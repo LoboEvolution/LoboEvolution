@@ -37,7 +37,8 @@ import org.loboevolution.html.node.Node;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 /**
@@ -47,17 +48,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * Retrieve the Document Type for this document and create
  * a NamedNodeMap object of all the notations.  There
  * should be two items in the list (notation1 and notation2).
- *
- * @author NIST
- * @author Mary Brady
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-D46829EF">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-D46829EF</a>
  */
 public class DocumenttypegetnotationsTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -82,7 +79,7 @@ public class DocumenttypegetnotationsTest extends LoboUnitTest {
             notationName = notation.getNodeName();
             actual.add(notationName);
         }
-        assertEquals( expected, actual, "DocumenttypegetnotationsAssert3");
+        assertEquals(expected, actual, "DocumenttypegetnotationsAssert3");
     }
 }
 

@@ -39,8 +39,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Check strongType is derived from xsd:string by any method.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom</a>
  */
 public class Typeinfoisderivedfrom22Test extends LoboUnitTest {

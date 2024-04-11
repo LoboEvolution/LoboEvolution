@@ -34,7 +34,7 @@ import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -42,8 +42,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * child of the first p element and check the string returned
  * by the "getNodeName()" method.   It should be equal to
  * "title".
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D095">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D095</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=236">http://www.w3.org/Bugs/Public/show_bug.cgi?id=236</a>
  */
@@ -51,7 +50,6 @@ public class HcnodeattributenodenameTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -65,7 +63,7 @@ public class HcnodeattributenodenameTest extends LoboUnitTest {
         testAddr = (Element) elementList.item(0);
         addrAttr = testAddr.getAttributeNode("title");
         attrName = addrAttr.getNodeName();
-         assertEquals( "title", attrName, "HcnodeattributenodenameAssert1");
+        assertEquals("title", attrName, "HcnodeattributenodenameAssert1");
     }
 }
 

@@ -22,8 +22,6 @@ import org.htmlunit.cssparser.parser.LexicalUnit.LexicalUnitType;
 
 /**
  * Implementation of RGBColor.
- *
- * @author Ronald Brill
  */
 public class RGBColorImpl implements Serializable {
     private final String function_;

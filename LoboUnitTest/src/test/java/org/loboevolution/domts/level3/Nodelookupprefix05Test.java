@@ -39,9 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * Using lookupPrefix on the DocumentElement node of a new document with a
  * namespaceURI and prefix and check if the prefix value returned is valid.
- *
- * @author IBM
- * @author Jenny Hsu
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-lookupNamespacePrefix">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-lookupNamespacePrefix</a>
  */
 public class Nodelookupprefix05Test extends LoboUnitTest {

@@ -40,9 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * Using compareDocumentPosition to check if the Element contains and precedes its default attribute
  * and that the attribute follows and iscontained by the Element
- *
- * @author IBM
- * @author Jenny Hsu
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-compareDocumentPosition">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-compareDocumentPosition</a>
  */
 public class Nodecomparedocumentposition35Test extends LoboUnitTest {

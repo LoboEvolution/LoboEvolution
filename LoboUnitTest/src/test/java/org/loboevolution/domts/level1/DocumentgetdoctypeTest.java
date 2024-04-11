@@ -42,9 +42,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * "getDoctype()" method.  The name of the document
  * type should be returned.  The "getName()" method
  * should be equal to "staff" or "svg".
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-B63ED1A31">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-B63ED1A31</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=249">http://www.w3.org/Bugs/Public/show_bug.cgi?id=249</a>
@@ -53,7 +51,6 @@ public class DocumentgetdoctypeTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -67,7 +64,7 @@ public class DocumentgetdoctypeTest extends LoboUnitTest {
         docTypeName = docType.getName();
         assertEquals("staff", docTypeName, "DocumentgetdoctypeAssert2");
         nodeValue = docType.getNodeValue();
-        assertNull( nodeValue, "DocumentgetdoctypeAssert3");
+        assertNull(nodeValue, "DocumentgetdoctypeAssert3");
     }
 }
 

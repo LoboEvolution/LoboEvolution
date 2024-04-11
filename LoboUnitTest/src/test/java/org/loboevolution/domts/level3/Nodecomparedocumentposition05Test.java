@@ -41,9 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 /**
  * Using compareDocumentPosition check if the document position of a Document and a new Document node
  * are disconnected, implementation-specific and preceding/following.
- *
- * @author IBM
- * @author Jenny Hsu
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-compareDocumentPosition">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-compareDocumentPosition</a>
  */
 public class Nodecomparedocumentposition05Test extends LoboUnitTest {

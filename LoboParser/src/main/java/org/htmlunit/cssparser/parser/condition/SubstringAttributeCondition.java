@@ -17,8 +17,6 @@ package org.htmlunit.cssparser.parser.condition;
 /**
  * <p>SubstringAttributeCondition class.</p>
  *
- * @author Ronald Brill
- *
  */
 public class SubstringAttributeCondition extends AttributeCondition {
 

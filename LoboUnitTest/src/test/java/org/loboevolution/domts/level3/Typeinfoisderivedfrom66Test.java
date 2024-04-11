@@ -43,9 +43,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Get schemaTypeInfo on an element of type Union that belongs to a document with an XML schema.
  * Invoke method isDerivedFrom with derivation method union and verify that the value returned is true.
  * Verify that emType is derived from emp0004_5Type by union.
- *
- * @author IBM
- * @author Jenny Hsu
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom</a>
  */
 public class Typeinfoisderivedfrom66Test extends LoboUnitTest {

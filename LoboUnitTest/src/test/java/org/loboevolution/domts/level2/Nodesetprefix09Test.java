@@ -40,16 +40,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * The method setPrefix raises a INVALID_CHARACTER_ERR if the specified prefix contains an illegal character.
  * Create a new namespace aware element node and call the setPrefix method on it with a prefix having
  * an invalid character.  Check if a NAMESPACE_ERR is thrown.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSPrefix">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSPrefix</a>
  */
 public class Nodesetprefix09Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

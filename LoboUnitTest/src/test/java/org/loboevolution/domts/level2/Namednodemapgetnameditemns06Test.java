@@ -32,7 +32,7 @@ import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.*;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -41,16 +41,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * Since NamedNodeMaps are live each one should get updated, using the getNamedItemNS retreive
  * the newly created attribute from each node map.
  * Verify if the attr node has been retreived successfully by checking its nodeName atttribute.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-getNamedItemNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-getNamedItemNS</a>
  */
 public class Namednodemapgetnameditemns06Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -71,10 +68,10 @@ public class Namednodemapgetnameditemns06Test extends LoboUnitTest {
         element.setAttributeNodeNS(newAttr1);
         attribute = attributesMap1.getNamedItemNS("http://www.w3.org/DOM/L1", "street");
         attrName = attribute.getNodeName();
-        assertEquals( "street", attrName);
+        assertEquals("street", attrName);
         attribute = attributesMap2.getNamedItemNS("http://www.w3.org/DOM/L1", "street");
         attrName = attribute.getNodeName();
-        assertEquals( "street", attrName);
+        assertEquals("street", attrName);
     }
 }
 

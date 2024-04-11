@@ -40,9 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * Using replaceChild on the documentElement of a newly created Document node, attempt to replace an
  * element child of this documentElement node with a child that was imported from another document.
  * Verify the nodeName of the replaced element node.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307</a>
  */
 public class Nodereplacechild14Test extends LoboUnitTest {
@@ -71,7 +69,7 @@ public class Nodereplacechild14Test extends LoboUnitTest {
         appendedChild = docElem.appendChild(elem2);
         replaced = (Element) docElem.replaceChild(imported, elem2);
         nodeName = replaced.getNodeName();
-        assertEquals( "dom3:doc2elem", nodeName, "Nodereplacechild14Assert2");
+        assertEquals("dom3:doc2elem", nodeName, "Nodereplacechild14Assert2");
     }
 }
 

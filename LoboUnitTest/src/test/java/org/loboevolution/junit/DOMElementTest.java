@@ -29,6 +29,7 @@ package org.loboevolution.junit;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.loboevolution.css.CSSStyleDeclaration;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.html.dom.HTMLCollection;
@@ -38,7 +39,6 @@ import org.loboevolution.html.dom.nodeimpl.DOMImplementationImpl;
 import org.loboevolution.html.dom.nodeimpl.ElementImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.node.*;
-import org.loboevolution.css.CSSStyleDeclaration;
 import org.loboevolution.http.UserAgentContext;
 
 import static org.junit.jupiter.api.Assertions.*;

@@ -40,8 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Attempt to add a second document element by a replacing a trailing comment.  The attempt should result
  * in a HIERARCHY_REQUEST_ERR or NOT_SUPPORTED_ERR.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307</a>
  */
 public class Nodereplacechild39Test extends LoboUnitTest {

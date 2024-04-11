@@ -17,8 +17,6 @@ package org.htmlunit.cssparser.parser;
 /**
  * Locatable interface.
  *
- * @author Ronald Brill
- *
  */
 public interface Locatable {
 

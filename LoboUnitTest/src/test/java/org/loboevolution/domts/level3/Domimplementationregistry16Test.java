@@ -42,8 +42,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * DOMImplementationRegistry.getDOMImplementationList("+cOrE 3.0") should return
  * a list of DOMImplementation
  * where hasFeature("+Core", "3.0") returns true.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/java-binding">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/java-binding</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/ecma-script-binding">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/ecma-script-binding</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-getDOMImpls">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-getDOMImpls</a>
@@ -52,18 +51,18 @@ public class Domimplementationregistry16Test extends LoboUnitTest {
     @Test
     @SneakyThrows
     public void runTest() {
-       
+
         DOMImplementation domImpl;
         boolean hasFeature;
         final DOMImplementationList domImplList;
         final int length;
-         final DOMImplementationRegistry domImplRegistry = DOMImplementationRegistry.newInstance();
+        final DOMImplementationRegistry domImplRegistry = DOMImplementationRegistry.newInstance();
         assertNotNull(domImplRegistry, "Domimplementationregistry16Assert3");
         domImplList = domImplRegistry.getDOMImplementationList("+cOrE 3.0");
-        length = (int) domImplList.getLength();
+        length = domImplList.getLength();
         assertTrue((length > 0), "Domimplementationregistry16Assert4");
         for (int indexN10052 = 0; indexN10052 < domImplList.getLength(); indexN10052++) {
-            domImpl = (DOMImplementation) domImplList.item(indexN10052);
+            domImpl = domImplList.item(indexN10052);
             hasFeature = domImpl.hasFeature("+Core", "3.0");
             assertTrue(hasFeature, "Domimplementationregistry16Assert5");
         }

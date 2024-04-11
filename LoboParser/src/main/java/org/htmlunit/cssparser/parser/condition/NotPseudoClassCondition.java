@@ -22,8 +22,6 @@ import org.htmlunit.cssparser.parser.selector.SelectorList;
 
 /**
  * Not condition.
- *
- * @author Ronald Brill
  */
 public class NotPseudoClassCondition extends AbstractLocatable implements Condition, Serializable {
 

@@ -41,9 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * Using compareDocumentPosition check the document position of the text node of the fist and second elements
  * whose localName is name.  The first text node should return FOLLOWING and the second text node should
  * return PRECEDING when compareDocumentPosition is invoked with the other node as a parameter.
- *
- * @author IBM
- * @author Jenny Hsu
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-compareDocumentPosition">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-compareDocumentPosition</a>
  */
 public class Nodecomparedocumentposition21Test extends LoboUnitTest {

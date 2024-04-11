@@ -30,8 +30,8 @@ package org.loboevolution.domts.level2;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DOMImplementation;
+import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -45,16 +45,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Call the createDocument on this DOMImplementation with namespaceURI that is
  * http://www.w3.org/xml/1998/namespace and a qualifiedName that has the prefix xml
  * Check if the NAMESPACE_ERR is thrown.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#Level-2-Core-DOM-createDocument">http://www.w3.org/TR/DOM-Level-2-Core/core#Level-2-Core-DOM-createDocument</a>
  */
 public class Domimplementationcreatedocument05Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

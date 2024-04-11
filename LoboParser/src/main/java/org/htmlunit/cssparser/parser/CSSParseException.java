@@ -16,8 +16,6 @@ package org.htmlunit.cssparser.parser;
 
 /**
  * Encapsulate a CSS parse error or warning.
- *
- * @author Ronald Brill
  */
 public class CSSParseException extends CSSException {
 

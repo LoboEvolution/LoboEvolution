@@ -32,7 +32,7 @@ import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -44,9 +44,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * Each call should create a distinct Element node.  The
  * newly created Elements are then assigned attributes
  * that are retrieved.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-2141741547">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-2141741547</a>
  */
 public class DocumentcreateelementcasesensitiveTest extends LoboUnitTest {
@@ -54,7 +52,6 @@ public class DocumentcreateelementcasesensitiveTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -70,8 +67,8 @@ public class DocumentcreateelementcasesensitiveTest extends LoboUnitTest {
         newElement2.setAttribute("county", "Dallas");
         attribute1 = newElement1.getAttribute("district");
         attribute2 = newElement2.getAttribute("county");
-        assertEquals( "Fort Worth", attribute1, "DocumentcreateelementcasesensitiveAssert1");
-        assertEquals( "Dallas", attribute2, "DocumentcreateelementcasesensitiveAssert2");
+        assertEquals("Fort Worth", attribute1, "DocumentcreateelementcasesensitiveAssert1");
+        assertEquals("Dallas", attribute2, "DocumentcreateelementcasesensitiveAssert2");
     }
 
 }

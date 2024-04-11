@@ -40,9 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 /**
  * Cretae a new DocumentType node whose systemId is StaffNS.DTD.  Create a new Document
  * node.  Check if the value of the standalone attribute on the new Document is false.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-standalone">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-standalone</a>
  */
 public class Documentgetxmlstandalone05Test extends LoboUnitTest {

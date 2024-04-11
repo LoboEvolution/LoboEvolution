@@ -42,9 +42,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Invoke the renameNode method to attempt to rename a Entity and Notation nodes of this Document.
  * Check if a NOT_SUPPORTED_ERR gets thrown.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-renameNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-renameNode</a>
  */
 public class Documentrenamenode28Test extends LoboUnitTest {

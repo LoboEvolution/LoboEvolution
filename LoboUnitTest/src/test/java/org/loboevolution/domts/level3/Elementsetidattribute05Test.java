@@ -40,9 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Invoke setIdAttribute on the third strong element with a non-existing attribute name.  Verify that
  * NOT_FOUND_ERR is raised.
- *
- * @author IBM
- * @author Jenny Hsu
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-ElSetIdAttr">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-ElSetIdAttr</a>
  */
 public class Elementsetidattribute05Test extends LoboUnitTest {

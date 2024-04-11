@@ -29,8 +29,8 @@ package org.loboevolution.domts.level3;
 
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
-import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.driver.LoboUnitTest;
+import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.html.dom.nodeimpl.DOMImplementationImpl;
 import org.loboevolution.html.dom.nodeimpl.bootstrap.DOMImplementationRegistry;
 import org.loboevolution.html.node.DOMImplementation;
@@ -42,8 +42,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * DOMImplementationRegistry.getDOMImplementation("cOrE 3.0 xMl 3.0 eVeNts 2.0 lS") should return null
  * or a DOMImplementation that implements the specified features.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/java-binding">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/java-binding</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/ecma-script-binding">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/ecma-script-binding</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-getDOMImpl">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-getDOMImpl</a>
@@ -52,7 +51,7 @@ public class Domimplementationregistry12Test extends LoboUnitTest {
     @Test
     @SneakyThrows
     public void runTest() {
-       
+
         final DOMImplementation domImpl;
         final boolean hasCore;
         final boolean hasXML;
@@ -61,7 +60,7 @@ public class Domimplementationregistry12Test extends LoboUnitTest {
         final DOMImplementation baseImpl;
         final String nullVersion = null;
 
-         final DOMImplementationRegistry domImplRegistry = DOMImplementationRegistry.newInstance();
+        final DOMImplementationRegistry domImplRegistry = DOMImplementationRegistry.newInstance();
         assertNotNull(domImplRegistry, "Domimplementationregistry12Assert1");
         domImpl = domImplRegistry.getDOMImplementation("cOrE 3.0 xMl 3.0 eVeNts 2.0 lS");
 

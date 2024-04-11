@@ -41,9 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * The parameter entities is turned on by default.  Check to see if this feature can be set
  * to false by invoking canSetParameter method.  Also check that this method does not change the
  * value of parameter by checking if entities still exist in the document.
- *
- * @author IBM
- * @author Jenny Hsu
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration</a>
  */
 public class Domconfigurationcansetparameter03Test extends LoboUnitTest {

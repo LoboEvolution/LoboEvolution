@@ -45,9 +45,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Create a new document and a new attribute node in it.  Call the setNamedItemNS using the first
  * namedNodeMap and the new attribute node attribute of the new document.  This should
  * raise a WRONG_DOCUMENT_ERR.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-setNamedItemNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-setNamedItemNS</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=259">http://www.w3.org/Bugs/Public/show_bug.cgi?id=259</a>
  */
@@ -55,7 +53,6 @@ public class Namednodemapsetnameditemns04Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -71,7 +68,7 @@ public class Namednodemapsetnameditemns04Test extends LoboUnitTest {
         final String nullNS = null;
 
         doc = sampleXmlFile("staffNS.xml");
-        
+
         elementList = doc.getElementsByTagNameNS("*", "address");
         element = (Element) elementList.item(1);
         attributes = element.getAttributes();

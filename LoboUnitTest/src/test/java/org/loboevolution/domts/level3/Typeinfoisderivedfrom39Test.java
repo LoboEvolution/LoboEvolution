@@ -40,8 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * Check if anonymous type of p element derives from itself.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom</a>
  */
 public class Typeinfoisderivedfrom39Test extends LoboUnitTest {

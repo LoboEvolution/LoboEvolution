@@ -39,8 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Normalize a document with the 'canonical-form' parameter set to true and
  * check that a CDATASection has been eliminated.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-canonical-form">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-canonical-form</a>
  */
@@ -64,7 +63,7 @@ public class Canonicalform03Test extends LoboUnitTest {
         elemName = (Element) elemList.item(1);
         cdata = (CDATASection) elemName.getLastChild();
         nodeName = cdata.getNodeName();
-        assertEquals( "#cdata-section", nodeName, "Canonicalform03Assert3");
+        assertEquals("#cdata-section", nodeName, "Canonicalform03Assert3");
         domConfig = doc.getDomConfig();
         domConfig.setParameter("error-handler", errorMonitor);
         canSet = domConfig.canSetParameter("canonical-form", Boolean.TRUE);
@@ -77,7 +76,7 @@ public class Canonicalform03Test extends LoboUnitTest {
             elemName = (Element) elemList.item(1);
             text = (Text) elemName.getLastChild();
             nodeName = text.getNodeName();
-            assertEquals( "#text", nodeName, "Canonicalform03Assert5");
+            assertEquals("#text", nodeName, "Canonicalform03Assert5");
         }
     }
 }

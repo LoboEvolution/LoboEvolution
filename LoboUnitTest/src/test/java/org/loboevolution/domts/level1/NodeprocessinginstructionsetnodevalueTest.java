@@ -34,14 +34,13 @@ import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeList;
 import org.loboevolution.html.node.ProcessingInstruction;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
  * Setting the nodeValue should change the value returned by
  * nodeValue and ProcessingInstruction.getData.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1004215813">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1004215813</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-837822393">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-837822393</a>
@@ -51,7 +50,6 @@ public class NodeprocessinginstructionsetnodevalueTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -64,9 +62,9 @@ public class NodeprocessinginstructionsetnodevalueTest extends LoboUnitTest {
         piNode = testList.item(0);
         piNode.setNodeValue("Something different");
         piValue = piNode.getNodeValue();
-         assertEquals( "Something different", piValue, "NodeprocessinginstructionsetnodevalueAssert1");
+        assertEquals("Something different", piValue, "NodeprocessinginstructionsetnodevalueAssert1");
         piValue = ((ProcessingInstruction) piNode).getData();
-        assertEquals( "Something different", piValue, "NodeprocessinginstructionsetnodevalueAssert2");
+        assertEquals("Something different", piValue, "NodeprocessinginstructionsetnodevalueAssert2");
     }
 
 }

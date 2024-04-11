@@ -43,16 +43,13 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * Apply the "getOwnerElement()" method to get the Element associated
  * with the attribute.  The value returned should be "null" since this
  * attribute is not in use.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#Attr-ownerElement">http://www.w3.org/TR/DOM-Level-2-Core/core#Attr-ownerElement</a>
  */
 public class OwnerElement02Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

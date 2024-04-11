@@ -39,9 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * <p>
  * Using insertBefore on an Element node attempt to insert new Comment/PI and CDATA nodes
  * before each other and verify the names of the newly inserted nodes.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-952280727">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-952280727</a>
  */
 public class Nodeinsertbefore18Test extends LoboUnitTest {
@@ -71,7 +69,7 @@ public class Nodeinsertbefore18Test extends LoboUnitTest {
         inserted = element.insertBefore(newComment, newElem);
         insertedNode = (Comment) element.getFirstChild();
         data = insertedNode.getData();
-        assertEquals( "Comment", data, "Nodeinsertbefore18Assert2");
+        assertEquals("Comment", data, "Nodeinsertbefore18Assert2");
     }
 }
 

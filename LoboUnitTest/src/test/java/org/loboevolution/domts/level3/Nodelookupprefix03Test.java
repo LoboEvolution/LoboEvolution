@@ -37,9 +37,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * Using lookupPrefix on this DocumentType node check if the value returned is Null .
- *
- * @author IBM
- * @author Jenny Hsu
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-lookupNamespacePrefix">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-lookupNamespacePrefix</a>
  */
 public class Nodelookupprefix03Test extends LoboUnitTest {

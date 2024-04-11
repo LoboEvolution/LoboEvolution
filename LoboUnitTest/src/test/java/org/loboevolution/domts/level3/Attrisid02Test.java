@@ -41,9 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Invoke setIdAttribute on the third acronym element's new attribute and set
  * isID=true.  Verify by calling isID on the new attribute and check if the
  * value returned is true.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Attr-isId">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Attr-isId</a>
  */
 public class Attrisid02Test extends LoboUnitTest {

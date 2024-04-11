@@ -41,9 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * <p>
  * Create a new DocumentType node.  Since this node is not used with any Document yet
  * verify if the ownerDocument is null.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#node-ownerDoc">http://www.w3.org/TR/DOM-Level-2-Core/core#node-ownerDoc</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=259">http://www.w3.org/Bugs/Public/show_bug.cgi?id=259</a>
  */
@@ -51,7 +49,6 @@ public class Nodegetownerdocument01Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -62,7 +59,7 @@ public class Nodegetownerdocument01Test extends LoboUnitTest {
         final String nullID = null;
 
         doc = sampleXmlFile("staff.xml");
-        
+
         domImpl = doc.getImplementation();
         docType = domImpl.createDocumentType("mydoc", nullID, nullID);
         ownerDoc = docType.getOwnerDocument();

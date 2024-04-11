@@ -43,16 +43,13 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * <p>
  * Retrieve the Processing Instruction node and invoke
  * the "getAttributes()" method.   It should return null.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-84CF096">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-84CF096</a>
  */
 public class NodeprocessinginstructionnodeattributesTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

@@ -38,9 +38,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * children, and returns the oldChild node.
  * Using replaceChild on an Attr node to replace its EntityReference Child with a
  * new Text Node and verify the name of the replaced child.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307</a>
  */
 public class Nodereplacechild32Test extends LoboUnitTest {

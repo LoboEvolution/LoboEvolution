@@ -42,9 +42,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Using removeChild on a new EntityReference node attempt to remove the first child
  * of this node and verify if a NO_MODIFICATION_ALLOWED_ERR is thrown.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-1734834066">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-1734834066</a>
  */
 public class Noderemovechild13Test extends LoboUnitTest {

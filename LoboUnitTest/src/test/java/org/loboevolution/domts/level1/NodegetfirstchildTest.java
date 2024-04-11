@@ -33,22 +33,19 @@ import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
  * The "getFirstChild()" method returns the first child
  * of this node.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-169727388">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-169727388</a>
  */
 public class NodegetfirstchildTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -67,7 +64,7 @@ public class NodegetfirstchildTest extends LoboUnitTest {
             fchildNode = fchildNode.getNextSibling();
             childName = fchildNode.getNodeName();
         }
-         assertEquals( "EMPLOYEEID", childName, "NodegetfirstchildAssert1");
+        assertEquals("EMPLOYEEID", childName, "NodegetfirstchildAssert1");
     }
 }
 

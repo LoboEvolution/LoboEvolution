@@ -46,9 +46,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Using the method importNode with deep=false, import a newly created DocumentFragment node
  * with the first address element from this Document appended to it into this document.
  * Since deep=true, a DocumentFragment with its child should be returned
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core">http://www.w3.org/TR/DOM-Level-2-Core/core</a>
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#Core-Document-importNode">http://www.w3.org/TR/DOM-Level-2-Core/core#Core-Document-importNode</a>
  */
@@ -56,7 +54,6 @@ public class Documentimportnode10Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

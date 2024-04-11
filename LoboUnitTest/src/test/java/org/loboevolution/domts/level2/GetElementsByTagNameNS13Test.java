@@ -33,7 +33,7 @@ import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -46,15 +46,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * localName.
  * The method should return a NodeList whose length is
  * "0".
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-1938918D">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-1938918D</a>
  */
 public class GetElementsByTagNameNS13Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

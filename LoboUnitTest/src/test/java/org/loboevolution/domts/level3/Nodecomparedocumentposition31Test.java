@@ -40,9 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * Using compareDocumentPosition to check if invoking the method on the first name node with
  * a new node appended to the second position node as a parameter is FOLLOWING, and is PRECEDING vice versa
- *
- * @author IBM
- * @author Jenny Hsu
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-compareDocumentPosition">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-compareDocumentPosition</a>
  */
 public class Nodecomparedocumentposition31Test extends LoboUnitTest {

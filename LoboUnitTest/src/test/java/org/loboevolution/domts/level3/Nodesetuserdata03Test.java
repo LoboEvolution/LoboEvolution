@@ -41,9 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Invoke setUserData on this Document to set this Documents UserData to a new
  * Element node.  Do the same with a new Text node and using isNodeEqual verify
  * the returned Element UserData object.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-setUserData">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-setUserData</a>
  */
 public class Nodesetuserdata03Test extends LoboUnitTest {

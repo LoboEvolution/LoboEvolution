@@ -40,15 +40,13 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * <p>
  * Invoke the "getOwnerDocument()" method on the master
  * document.   The Document returned should be null.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#node-ownerDoc">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#node-ownerDoc</a>
  */
 public class HcnodegetownerdocumentnullTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -56,7 +54,7 @@ public class HcnodegetownerdocumentnullTest extends LoboUnitTest {
         final Document ownerDocument;
         doc = sampleXmlFile("hc_staff.xml");
         ownerDocument = doc.getOwnerDocument();
-        assertNull( ownerDocument, "HcnodegetownerdocumentnullAssert2");
+        assertNull(ownerDocument, "HcnodegetownerdocumentnullAssert2");
     }
 }
 

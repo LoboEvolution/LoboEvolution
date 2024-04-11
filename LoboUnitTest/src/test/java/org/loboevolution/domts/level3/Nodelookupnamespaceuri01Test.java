@@ -35,9 +35,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * Return value from lookupNamespaceURI(null) on a Document node with no default namespace should be null.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-lookupNamespaceURI">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-lookupNamespaceURI</a>
  */
 public class Nodelookupnamespaceuri01Test extends LoboUnitTest {

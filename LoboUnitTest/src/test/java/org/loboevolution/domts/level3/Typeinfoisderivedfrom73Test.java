@@ -40,8 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Checks that isDerivedFrom(...,0) returns true where the target type is a union
  * where the ancestor type is a member of the union and is a union itself.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom</a>
  */
 public class Typeinfoisderivedfrom73Test extends LoboUnitTest {
@@ -58,7 +57,7 @@ public class Typeinfoisderivedfrom73Test extends LoboUnitTest {
         elem = (Element) elemList.item(0);
         elemTypeInfo = elem.getSchemaTypeInfo();
         retValue = elemTypeInfo.isDerivedFrom("http://www.w3.org/1999/xhtml", "emType", 0);
-         assertTrue(retValue, "Typeinfoisderivedfrom73Assert2");
+        assertTrue(retValue, "Typeinfoisderivedfrom73Assert2");
     }
 }
 

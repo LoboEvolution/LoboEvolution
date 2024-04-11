@@ -34,7 +34,7 @@ import org.loboevolution.html.node.CharacterData;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -48,15 +48,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * with offset=9 and count=10.  The method should return
  * the substring "Martin" since offset+count &#62; length
  * (19 &#62;15).
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-6531BCCF">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-6531BCCF</a>
  */
 public class HccharacterdatasubstringexceedsvalueTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

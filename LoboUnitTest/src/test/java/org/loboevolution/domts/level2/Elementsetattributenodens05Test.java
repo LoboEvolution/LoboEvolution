@@ -44,9 +44,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Create new element and attribute nodes in different documents.
  * Attempt to add the attribute node to the element node.
  * Check if an WRONG_DOCUMENT_ERR is thrown.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElSetAtNodeNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElSetAtNodeNS</a>
  */
 public class Elementsetattributenodens05Test extends LoboUnitTest {

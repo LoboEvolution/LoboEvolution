@@ -35,7 +35,8 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 /**
@@ -47,9 +48,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * list is created an invocation of the "getNamedItem(name)"
  * method is done with name="street".  This should result
  * in the method returning an Attr node.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1074577549">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1074577549</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-84CF096">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-84CF096</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-637646024">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-637646024</a>
@@ -60,7 +59,6 @@ public class NamednodemapreturnattrnodeTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -77,8 +75,8 @@ public class NamednodemapreturnattrnodeTest extends LoboUnitTest {
         streetAttr = (Attr) attributes.getNamedItem("street");
         assertNotNull(streetAttr, "NamednodemapreturnattrnodeAssert1");
         attrName = streetAttr.getNodeName();
-         assertEquals( "street", attrName, "NamednodemapreturnattrnodeAssert2");
-        
+        assertEquals("street", attrName, "NamednodemapreturnattrnodeAssert2");
+
         attrName = streetAttr.getName();
         assertEquals("street", attrName, "NamednodemapreturnattrnodeAssert3");
     }

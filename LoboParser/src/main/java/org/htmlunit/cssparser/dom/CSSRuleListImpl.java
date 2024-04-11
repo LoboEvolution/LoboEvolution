@@ -23,8 +23,6 @@ import org.htmlunit.cssparser.util.ParserUtils;
 /**
  * Implementation of CSSRuleList.
  *
- * @author Ronald Brill
- *
  */
 public class CSSRuleListImpl implements Serializable {
 

@@ -44,16 +44,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Create two new element nodes and a new attribute node.  Attempt to add the same attribute
  * node to the same two element nodes.
  * Check if an INUSE_ATTRIBUTE_ERR is thrown.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElSetAtNodeNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElSetAtNodeNS</a>
  */
 public class Elementsetattributenodens04Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

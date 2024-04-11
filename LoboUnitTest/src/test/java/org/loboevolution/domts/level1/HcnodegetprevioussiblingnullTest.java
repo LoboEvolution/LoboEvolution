@@ -43,15 +43,13 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * Retrieve the first child of the second employee and
  * invoke the "getPreviousSibling()" method.   It should
  * be set to null.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-640FB3C8">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-640FB3C8</a>
  */
 public class HcnodegetprevioussiblingnullTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

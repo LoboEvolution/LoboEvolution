@@ -48,8 +48,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * method is done with name="lang".  This name does not
  * match any names in the list therefore the method should
  * return null.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1074577549">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1074577549</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=243">http://www.w3.org/Bugs/Public/show_bug.cgi?id=243</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=249">http://www.w3.org/Bugs/Public/show_bug.cgi?id=249</a>
@@ -58,7 +57,6 @@ public class HcnamednodemapreturnnullTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -72,7 +70,7 @@ public class HcnamednodemapreturnnullTest extends LoboUnitTest {
         testEmployee = (Element) elementList.item(1);
         attributes = testEmployee.getAttributes();
         districtNode = (Attr) attributes.getNamedItem("lang");
-        assertNull( districtNode, "HcnamednodemapreturnnullAssert2");
+        assertNull(districtNode, "HcnamednodemapreturnnullAssert2");
     }
 }
 

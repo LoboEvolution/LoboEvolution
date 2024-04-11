@@ -41,8 +41,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * The string returned by the "getNodeValue()" method for an
  * Entity Node is always null and "setNodeValue" should have no effect.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-527DCFF2">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-527DCFF2</a>
  */
@@ -50,7 +49,6 @@ public class NodeentitysetnodevalueTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

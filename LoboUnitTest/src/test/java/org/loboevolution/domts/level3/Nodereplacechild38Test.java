@@ -40,9 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Using replaceChild on an Entity node attempt to replace its Text child with new Text,
  * Comment, ProcessingInstruction and CDATASection nodes and in each case verify if
  * a NO_MODIFICATION_ALLOWED_ERR is raised.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307</a>
  */
 public class Nodereplacechild38Test extends LoboUnitTest {

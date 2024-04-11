@@ -46,16 +46,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * and add it to this element.  Using the getNamedItemNS retreive the newly created attribute
  * node from a nodemap of attributes of the retreive element node.
  * Verify if the attr node has been retreived successfully by checking its nodeName atttribute.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-getNamedItemNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-getNamedItemNS</a>
  */
 public class Namednodemapgetnameditemns04Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

@@ -34,7 +34,7 @@ import org.loboevolution.html.node.CharacterData;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -43,15 +43,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * Retrieve the character data from the second child
  * of the first employee and invoke the "setNodeValue()"
  * method, call "getData()" and compare.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-72AB8359">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-72AB8359</a>
  */
 public class CharacterdatasetnodevalueTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -67,9 +65,9 @@ public class CharacterdatasetnodevalueTest extends LoboUnitTest {
         child = (CharacterData) nameNode.getFirstChild();
         child.setNodeValue("Marilyn Martin");
         childData = child.getData();
-        assertEquals( "Marilyn Martin", childData, "CharacterdatasetnodevalueAssert1");
+        assertEquals("Marilyn Martin", childData, "CharacterdatasetnodevalueAssert1");
         childValue = child.getNodeValue();
-        assertEquals( "Marilyn Martin", childValue, "CharacterdatasetnodevalueAssert2");
+        assertEquals("Marilyn Martin", childValue, "CharacterdatasetnodevalueAssert2");
     }
 }
 

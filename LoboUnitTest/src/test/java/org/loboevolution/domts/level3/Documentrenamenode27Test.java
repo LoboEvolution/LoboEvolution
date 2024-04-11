@@ -39,9 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Invoke the renameNode method to attempt to rename new Text, Comment, CDataSection,
  * ProcessingInstruction and EntityReference nodes of a new Document.
  * Check if a NOT_SUPPORTED_ERR is thrown.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-renameNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-renameNode</a>
  */
 public class Documentrenamenode27Test extends LoboUnitTest {

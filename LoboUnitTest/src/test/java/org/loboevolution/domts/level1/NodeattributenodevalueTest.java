@@ -45,16 +45,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * child of the first employee and check the string returned
  * by the "getNodeValue()" method.   It should be equal to
  * "Yes".
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080</a>
  */
 public class NodeattributenodevalueTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

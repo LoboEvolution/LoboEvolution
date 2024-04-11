@@ -48,9 +48,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Do the same for another document and retreive its street attribute.  Call the setNamedItemNS
  * using the first namedNodeMap and the retreive street attribute of the second.  This should
  * raise a WRONG_DOCUMENT_ERR.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-setNamedItemNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-setNamedItemNS</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=259">http://www.w3.org/Bugs/Public/show_bug.cgi?id=259</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=408">http://www.w3.org/Bugs/Public/show_bug.cgi?id=408</a>

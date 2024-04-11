@@ -39,9 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 /**
  * Using isDefaultNamespace on a Notation and Entity node with the value of the namespaceURI parameter
  * as null check if the value returned is false.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isDefaultNamespace">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isDefaultNamespace</a>
  */
 public class Nodeisdefaultnamespace04Test extends LoboUnitTest {

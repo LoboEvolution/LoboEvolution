@@ -40,8 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Appends an entity reference containing text and an element to an existing
  * text node, then calls Text.replaceWholeText on the existing text node.
  * A NO_MODIFICATION_ALLOWED_ERR should be thrown.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Text3-replaceWholeText">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Text3-replaceWholeText</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=425">http://www.w3.org/Bugs/Public/show_bug.cgi?id=425</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=540">http://www.w3.org/Bugs/Public/show_bug.cgi?id=540</a>

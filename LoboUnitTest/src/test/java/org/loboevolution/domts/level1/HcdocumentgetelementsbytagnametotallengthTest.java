@@ -36,7 +36,7 @@ import org.loboevolution.html.node.Element;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -44,8 +44,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * "getElementsByTagName(tagName)" method with tagName
  * equal to "*".  The method should return a NodeList
  * that contains all the elements of the document.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-A6C9094">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-A6C9094</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=251">http://www.w3.org/Bugs/Public/show_bug.cgi?id=251</a>
  */
@@ -53,7 +52,6 @@ public class HcdocumentgetelementsbytagnametotallengthTest extends LoboUnitTest 
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

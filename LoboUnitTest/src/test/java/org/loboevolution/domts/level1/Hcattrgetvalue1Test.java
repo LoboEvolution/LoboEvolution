@@ -35,20 +35,18 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
  * Checks the value of an attribute that contains entity references.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-221662474">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-221662474</a>
  */
 public class Hcattrgetvalue1Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -64,7 +62,7 @@ public class Hcattrgetvalue1Test extends LoboUnitTest {
         attributes = testNode.getAttributes();
         titleAttr = (Attr) attributes.getNamedItem("class");
         value = titleAttr.getValue();
-        assertEquals( "Y\u03b1", value, "Hcattrgetvalue1Assert1"); // Android-changed: GREEK LOWER CASE ALPHA
+        assertEquals("Y\u03b1", value, "Hcattrgetvalue1Assert1"); // Android-changed: GREEK LOWER CASE ALPHA
     }
 }
 

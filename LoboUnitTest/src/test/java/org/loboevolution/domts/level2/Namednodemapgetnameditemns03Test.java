@@ -43,16 +43,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * Create a new Element node and add 2 new attribute nodes having the same local name but different
  * namespace names and namespace prefixes to it.  Using the getNamedItemNS retreive the second attribute node.
  * Verify if the attr node has been retreived successfully by checking its nodeName atttribute.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-getNamedItemNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-getNamedItemNS</a>
  */
 public class Namednodemapgetnameditemns03Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -67,10 +64,10 @@ public class Namednodemapgetnameditemns03Test extends LoboUnitTest {
         doc = sampleXmlFile("staffNS.xml");
         element = doc.createElementNS("http://www.w3.org/DOM/Test", "root");
         newAttr1 = doc.createAttributeNS("http://www.w3.org/DOM/L1", "L1:att");
-        
+
         newAttribute = element.setAttributeNodeNS(newAttr1);
         newAttr2 = doc.createAttributeNS("http://www.w3.org/DOM/L2", "L2:att");
-        
+
         newAttribute = element.setAttributeNodeNS(newAttr2);
         attributes = element.getAttributes();
         attribute = (Attr) attributes.getNamedItemNS("http://www.w3.org/DOM/L2", "att");

@@ -39,8 +39,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Check if emType is derived from emp0001_3Type by any method other than union.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom</a>
  */
 public class Typeinfoisderivedfrom17Test extends LoboUnitTest {
@@ -58,7 +57,7 @@ public class Typeinfoisderivedfrom17Test extends LoboUnitTest {
         typeInfo = elem.getSchemaTypeInfo();
         assertNotNull(typeInfo, "Typeinfoisderivedfrom17Assert1");
         typeName = typeInfo.getTypeName();
-         assertEquals( "emType", typeName, "Typeinfoisderivedfrom17Assert2");
+        assertEquals("emType", typeName, "Typeinfoisderivedfrom17Assert2");
         isDerived = typeInfo.isDerivedFrom("http://www.w3.org/1999/xhtml", "emp0001_3Type", 11);
         assertFalse(isDerived, "Typeinfoisderivedfrom17Assert3");
     }

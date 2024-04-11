@@ -39,9 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * Invoke replaceWholeText on an new Text Node to replace its value with a
  * new value.  Verify the repalceWholeText by verifying the values returned by
  * wholeText of the returned Text node.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Text3-replaceWholeText">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Text3-replaceWholeText</a>
  */
 public class Textreplacewholetext03Test extends LoboUnitTest {

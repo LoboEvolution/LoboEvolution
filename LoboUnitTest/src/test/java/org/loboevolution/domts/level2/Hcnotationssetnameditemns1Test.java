@@ -42,8 +42,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 /**
  * An attempt to add an element to the named node map returned by notations should
  * result in a NO_MODIFICATION_ERR or HIERARCHY_REQUEST_ERR.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-D46829EF">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-D46829EF</a>
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-setNamedItemNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-setNamedItemNS</a>
  */
@@ -51,7 +50,6 @@ public class Hcnotationssetnameditemns1Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

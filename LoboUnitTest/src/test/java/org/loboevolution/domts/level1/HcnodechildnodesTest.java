@@ -37,7 +37,7 @@ import org.loboevolution.html.node.NodeList;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -47,8 +47,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * Retrieve the second employee and check the NodeList
  * returned by the "getChildNodes()" method.   The
  * length of the list should be 13.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1451460987">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1451460987</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=246">http://www.w3.org/Bugs/Public/show_bug.cgi?id=246</a>
  */
@@ -56,7 +55,6 @@ public class HcnodechildnodesTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

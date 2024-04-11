@@ -43,9 +43,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * First use setAttribute to create two new attribute of the second and third strong element with different values.
  * Invoke setIdAttribute on the new  attributes. Verify by calling isID on the new attributes and getElementById
  * with two different values on document.
- *
- * @author IBM
- * @author Jenny Hsu
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-ElSetIdAttr">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-ElSetIdAttr</a>
  */
 public class Elementsetidattribute07Test extends LoboUnitTest {

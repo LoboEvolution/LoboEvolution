@@ -41,9 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * Invoke the method getTextContent on a new Comment node and check if the value returned
  * is the Comments data.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-textContent">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-textContent</a>
  */
 public class Nodegettextcontent12Test extends LoboUnitTest {

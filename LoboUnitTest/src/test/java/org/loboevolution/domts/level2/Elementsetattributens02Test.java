@@ -34,7 +34,7 @@ import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -43,16 +43,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * Retrieve an existing element node with attributes and add a new attribute node to it using
  * the setAttributeNS method.   Check if the attribute was correctly set by invoking the
  * getAttributeNodeNS method and checking the nodeName and nodeValue of the returned nodes.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElSetAttrNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElSetAttrNS</a>
  */
 public class Elementsetattributens02Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -69,8 +66,8 @@ public class Elementsetattributens02Test extends LoboUnitTest {
         attribute = element.getAttributeNodeNS("http://www.w3.org/DOM/Test/setAttributeNS", "street");
         attrName = attribute.getNodeName();
         attrValue = attribute.getNodeValue();
-        assertEquals( "this:street", attrName);
-        assertEquals( "Silver Street", attrValue);
+        assertEquals("this:street", attrName);
+        assertEquals("Silver Street", attrValue);
     }
 }
 

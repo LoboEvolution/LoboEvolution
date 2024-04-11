@@ -30,7 +30,10 @@ package org.loboevolution.domts.level3;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.node.*;
+import org.loboevolution.html.node.Document;
+import org.loboevolution.html.node.DocumentType;
+import org.loboevolution.html.node.EntityReference;
+import org.loboevolution.html.node.NamedNodeMap;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -38,9 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Invoke the adoptNode method on this document with the entity ent1 as the source.  Since this is
  * read-only verify if a NO_MODIFICATION_ALLOWED_ERR is thrown.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode</a>
  */
 public class Documentadoptnode17Test extends LoboUnitTest {

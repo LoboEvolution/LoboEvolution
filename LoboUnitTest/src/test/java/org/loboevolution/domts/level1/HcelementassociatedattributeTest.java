@@ -45,15 +45,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Elements can actually have attributes.  This test uses
  * the "getNamedItem(name)" method from the NamedNodeMap
  * interface.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-84CF096">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-84CF096</a>
  */
 public class HcelementassociatedattributeTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -65,7 +63,7 @@ public class HcelementassociatedattributeTest extends LoboUnitTest {
         final boolean specified;
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("acronym");
-        testEmployee = (Element)elementList.item(0);
+        testEmployee = (Element) elementList.item(0);
         attributes = testEmployee.getAttributes();
         domesticAttr = (Attr) attributes.getNamedItem("title");
         specified = domesticAttr.isSpecified();

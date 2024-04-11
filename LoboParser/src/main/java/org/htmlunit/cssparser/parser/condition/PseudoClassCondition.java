@@ -22,8 +22,6 @@ import org.htmlunit.cssparser.parser.Locator;
 /**
  * <p>PseudoClassCondition class.</p>
  *
- * @author Ronald Brill
- *
  */
 public class PseudoClassCondition extends AbstractLocatable implements Condition, Serializable {
 

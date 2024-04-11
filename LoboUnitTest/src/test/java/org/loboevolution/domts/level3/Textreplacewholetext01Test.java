@@ -42,9 +42,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * new value containing white space characters.  Verify the replaceWholeText by
  * verifying the values returned by wholeText
  * of the returned Text node.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Text3-replaceWholeText">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Text3-replaceWholeText</a>
  */
 public class Textreplacewholetext01Test extends LoboUnitTest {

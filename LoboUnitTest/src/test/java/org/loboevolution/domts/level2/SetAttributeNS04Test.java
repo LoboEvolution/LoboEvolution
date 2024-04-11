@@ -35,7 +35,8 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 /**
@@ -51,16 +52,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * by getting the attributes value, namespace URI, local Name and prefix.
  * The prefix will be changed to the prefix part of the "qualifiedName"
  * and its value changed to the "value" parameter.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#">http://www.w3.org/TR/DOM-Level-2-Core/core#</a>
  */
 public class SetAttributeNS04Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -76,16 +74,16 @@ public class SetAttributeNS04Test extends LoboUnitTest {
         elementList = doc.getElementsByTagName("address");
         testAddr = elementList.item(0);
         assertNotNull(testAddr);
-        ((Element) testAddr).setAttribute( "newprefix:zone", "newValue");
-        addrAttr = ((Element) testAddr).getAttributeNode( "zone");
-        resultAttr = ((Element) testAddr).getAttribute( "zone");
+        ((Element) testAddr).setAttribute("newprefix:zone", "newValue");
+        addrAttr = ((Element) testAddr).getAttributeNode("zone");
+        resultAttr = ((Element) testAddr).getAttribute("zone");
         assertEquals("newValue", resultAttr);
         resultNamespaceURI = addrAttr.getNamespaceURI();
         assertEquals("http://www.nist.gov", resultNamespaceURI);
         resultLocalName = addrAttr.getLocalName();
-        assertEquals( "zone", resultLocalName);
+        assertEquals("zone", resultLocalName);
         resultPrefix = addrAttr.getPrefix();
-        assertEquals( "newprefix", resultPrefix);
+        assertEquals("newprefix", resultPrefix);
     }
 }
 

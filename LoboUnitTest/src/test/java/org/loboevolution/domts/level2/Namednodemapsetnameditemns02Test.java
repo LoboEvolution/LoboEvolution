@@ -34,7 +34,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -45,16 +45,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * Create a new element and attribute Node and add the newly created attribute node to the elements
  * NamedNodeMap.  Verify if the new attr node has been successfully added to the map by checking
  * the nodeName of the retreived atttribute from the list of attribute nodes in this map.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-setNamedItemNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-setNamedItemNS</a>
  */
 public class Namednodemapsetnameditemns02Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

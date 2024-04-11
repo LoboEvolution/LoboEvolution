@@ -34,16 +34,14 @@ import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
  * The method getAttributeNodeNS retrieves an Attr node by local name and namespace URI.
  * Using the getAttributeNodeNS, retrieve and verify the value of the default
  * attribute node.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElGetAtNodeNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElGetAtNodeNS</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=259">http://www.w3.org/Bugs/Public/show_bug.cgi?id=259</a>
  */
@@ -51,7 +49,6 @@ public class Elementgetattributenodens03Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -63,7 +60,7 @@ public class Elementgetattributenodens03Test extends LoboUnitTest {
         final String nullNS = null;
 
         doc = sampleXmlFile("staffNS.xml");
-        childList = doc.getElementsByTagName( "employee");
+        childList = doc.getElementsByTagName("employee");
         element = (Element) childList.item(1);
         attribute = element.getAttributeNodeNS(nullNS, "defaultAttr");
         attrValue = attribute.getNodeValue();

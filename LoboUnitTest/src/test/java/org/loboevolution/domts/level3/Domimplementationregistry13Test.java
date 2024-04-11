@@ -41,8 +41,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * DOMImplementationRegistry.getDOMImplementationList("cOrE") should return a
  * list of at least one DOMImplementation
  * where hasFeature("Core", null) returns true.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/java-binding">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/java-binding</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/ecma-script-binding">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/ecma-script-binding</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-getDOMImpls">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-getDOMImpls</a>
@@ -53,23 +52,24 @@ public class Domimplementationregistry13Test extends LoboUnitTest {
     @Test
     @SneakyThrows
     public void runTest() {
-       
+
         boolean hasFeature;
         DOMImplementation domImpl;
         final DOMImplementationList domImplList;
         final int length;
         final String nullVersion = null;
 
-         final DOMImplementationRegistry domImplRegistry = DOMImplementationRegistry.newInstance();
+        final DOMImplementationRegistry domImplRegistry = DOMImplementationRegistry.newInstance();
         assertNotNull(domImplRegistry, "Domimplementationregistry13Assert1");
         domImplList = domImplRegistry.getDOMImplementationList("cOrE");
-        length = (int) domImplList.getLength();
-        domImpl = domImplList.item(((int) /*int */length));
+        length = domImplList.getLength();
+        /*int */
+        domImpl = domImplList.item(length);
         assertNull(domImpl, "Domimplementationregistry13Assert2");
         assertNull(domImpl, "Domimplementationregistry13Assert3");
         assertTrue((length > 0), "Domimplementationregistry13Assert4");
         for (int indexN10067 = 0; indexN10067 < domImplList.getLength(); indexN10067++) {
-            domImpl = (DOMImplementation) domImplList.item(indexN10067);
+            domImpl = domImplList.item(indexN10067);
             hasFeature = domImpl.hasFeature("Core", nullVersion);
             assertTrue(hasFeature, "Domimplementationregistry13Assert5");
         }

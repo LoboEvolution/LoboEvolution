@@ -41,9 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * <p>
  * Invoke the getElementById method on this Document object with an invalid elementId.
  * This should return a null element.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core">http://www.w3.org/TR/DOM-Level-2-Core/core</a>
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-getElBId">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-getElBId</a>
  */
@@ -51,7 +49,6 @@ public class Documentgetelementbyid01Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

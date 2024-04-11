@@ -38,9 +38,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
  * Retreive the xmlStandalone attribute of a document for which standalone was not specified, this
  * should return false since the default for standalone is no when external markup decls
  * are present.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-standalone">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-standalone</a>
  */
 public class Documentgetxmlstandalone01Test extends LoboUnitTest {

@@ -38,9 +38,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * Invoke the adoptNode method on this document using a new imported Element and a new attribute created in
  * a new Document as the source.  Verify if the node has been adopted correctly by checking the
  * nodeName of the adopted Element and by checking if the attribute was adopted.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode</a>
  */
 public class Documentadoptnode27Test extends LoboUnitTest {

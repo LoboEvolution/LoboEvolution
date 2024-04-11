@@ -41,9 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Invoke the normalizeDocument method on this document.  Retreive the documentElement node
  * and check the nodeName of this node to make sure it has not changed.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument</a>
  */
 public class DocumentnormalizeDocument01Test extends LoboUnitTest {

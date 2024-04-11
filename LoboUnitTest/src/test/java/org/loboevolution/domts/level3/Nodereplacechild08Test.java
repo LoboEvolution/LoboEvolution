@@ -29,8 +29,8 @@ package org.loboevolution.domts.level3;
 
 import org.htmlunit.cssparser.dom.DOMException;
 import org.junit.jupiter.api.Test;
-import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.driver.LoboUnitTest;
+import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.html.dom.nodeimpl.DOMImplementationImpl;
 import org.loboevolution.html.node.*;
 import org.loboevolution.http.UserAgentContext;
@@ -42,9 +42,7 @@ import static org.junit.jupiter.api.Assertions.fail;
  * Using replaceChild on this Document node attempt to replace this DocumentElement node
  * with  a new element that was created in another document and verify if a
  * WRONG_DOCUMENT_ERR is thrown.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307</a>
  */
 public class Nodereplacechild08Test extends LoboUnitTest {

@@ -32,7 +32,7 @@ import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -43,16 +43,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * Invoke method createElementNS(namespaceURI,qualifiedName on this document
  * with namespaceURI as "http://www.nist.gov" and qualifiedName as "gov:faculty".
  * Method should return a new Element object whose name is "gov:faculty".
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-104682815">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-104682815</a>
  */
 public class CreateElementNS05Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

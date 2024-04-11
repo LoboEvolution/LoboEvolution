@@ -32,7 +32,8 @@ import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.*;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 /**
@@ -51,8 +52,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * the new one and return the existing node.
  * This test uses the "createAttribute(name)" method from
  * the document interface.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1025163788">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1025163788</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-349467F9">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-349467F9</a>
  */
@@ -60,7 +60,6 @@ public class HcnamednodemapsetnameditemreturnvalueTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -73,7 +72,7 @@ public class HcnamednodemapsetnameditemreturnvalueTest extends LoboUnitTest {
         final String attrValue;
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("acronym");
-        testAddress = (Element)elementList.item(2);
+        testAddress = (Element) elementList.item(2);
         newAttribute = doc.createAttribute("class");
         attributes = testAddress.getAttributes();
         newNode = attributes.setNamedItem(newAttribute);

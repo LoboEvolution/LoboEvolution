@@ -44,16 +44,13 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * Retrieve the Text node form the second child of the first
  * employee and invoke the "getFirstChild()" method.   It
  * should return null.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-169727388">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-169727388</a>
  */
 public class NodegetfirstchildnullTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

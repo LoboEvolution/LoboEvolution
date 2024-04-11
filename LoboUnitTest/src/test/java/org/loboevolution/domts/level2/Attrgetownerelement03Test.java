@@ -42,16 +42,13 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * <p>
  * Create a new attribute node for this document node.  Since the newly attribute is
  * not it use its owner element should be null.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#Attr-ownerElement">http://www.w3.org/TR/DOM-Level-2-Core/core#Attr-ownerElement</a>
  */
 public class Attrgetownerelement03Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

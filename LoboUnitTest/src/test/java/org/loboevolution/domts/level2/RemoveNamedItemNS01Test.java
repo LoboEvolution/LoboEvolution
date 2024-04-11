@@ -46,16 +46,13 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * and namespace uri "http://www.usa.com" with
  * method removeNamedItemNS(namespaceURI,localName).
  * Check to see if the node has been removed.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-1074577549">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-1074577549</a>
  */
 public class RemoveNamedItemNS01Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

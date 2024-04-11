@@ -43,16 +43,13 @@ import static org.junit.jupiter.api.Assertions.assertSame;
  * be inappropriate to throw an INUSE_ATTRIBUTE_ERR.
  * This test was derived from elementinuserattributeerr which
  * inadvertanly made this test.
- *
- * @author Curt Arnold
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-887236154">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-887236154</a>
  */
 public class HcelementreplaceattributewithselfTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

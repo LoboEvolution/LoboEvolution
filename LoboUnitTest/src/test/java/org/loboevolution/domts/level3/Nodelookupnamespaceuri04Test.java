@@ -39,9 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * Using lookupNamespaceURI on an Entity and Notation node and check if the value returned is Null .
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-lookupNamespaceURI">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-lookupNamespaceURI</a>
  */
 public class Nodelookupnamespaceuri04Test extends LoboUnitTest {

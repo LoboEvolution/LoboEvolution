@@ -39,9 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Invoke setUserData on a Notation to set its UserData to a Comment node
  * twice using the same key.  Verify if the UserData object that was returned
  * by second setUserData is the Comment node set in the first setUserData call.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-setUserData">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-setUserData</a>
  */
 public class Nodesetuserdata07Test extends LoboUnitTest {

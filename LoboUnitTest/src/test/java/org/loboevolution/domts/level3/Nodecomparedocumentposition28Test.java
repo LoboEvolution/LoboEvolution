@@ -43,9 +43,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  * Using compareDocumentPosition check the document position of the EntityReference node ent4's
  * first child and last child.  Invoke compareDocumentPositon on first child with last child as a parameter
  * should return FOLLOWING, and should return PRECEDING vice versa.
- *
- * @author IBM
- * @author Jenny Hsu
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-compareDocumentPosition">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-compareDocumentPosition</a>
  */
 public class Nodecomparedocumentposition28Test extends LoboUnitTest {

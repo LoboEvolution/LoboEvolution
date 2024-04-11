@@ -41,9 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * <p>
  * Get the DOMConfiguration object of a document and verify that a NOT_FOUND_ERR is thrown if the parameter
  * is not found.
- *
- * @author IBM
- * @author Jenny Hsu
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration-getParameter">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration-getParameter</a>
  */
 public class Domconfigurationgetparameter02Test extends LoboUnitTest {

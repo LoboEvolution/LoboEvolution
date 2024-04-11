@@ -43,16 +43,13 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * Retrieve the documenttype.
  * Apply the "getInternalSubset()" method.  Null is returned since there
  * is not an internal subset.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-Core-DocType-internalSubset">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-Core-DocType-internalSubset</a>
  */
 public class InternalSubset01Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

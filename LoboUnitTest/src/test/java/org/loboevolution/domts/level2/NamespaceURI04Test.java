@@ -42,16 +42,13 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * <p>
  * Retrieve the third employee node and invoke the "getNamespaceURI()"
  * method. The method should return "null".
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSname">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSname</a>
  */
 public class NamespaceURI04Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -61,7 +58,7 @@ public class NamespaceURI04Test extends LoboUnitTest {
         final String employeeNamespace;
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagName("employee");
-        testEmployee = (Element)elementList.item(3);
+        testEmployee = (Element) elementList.item(3);
         employeeNamespace = testEmployee.getNamespaceURI();
         assertNull(employeeNamespace);
     }

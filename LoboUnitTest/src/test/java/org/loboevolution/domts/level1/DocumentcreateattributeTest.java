@@ -32,7 +32,8 @@ import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 /**
@@ -44,16 +45,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * new Attribute node with the given name. The name, value
  * and type of the newly created object are retrieved and
  * output.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1084891198">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1084891198</a>
  */
 public class DocumentcreateattributeTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -65,9 +63,9 @@ public class DocumentcreateattributeTest extends LoboUnitTest {
         doc = sampleXmlFile("staff.xml");
         newAttrNode = doc.createAttribute("district");
         attrValue = newAttrNode.getNodeValue();
-        assertEquals( null, attrValue, "DocumentcreateattributeAssert1");
+        assertNull(attrValue, "DocumentcreateattributeAssert1");
         attrName = newAttrNode.getNodeName();
-         assertEquals( "district", attrName, "DocumentcreateattributeAssert2");
+        assertEquals("district", attrName, "DocumentcreateattributeAssert2");
         attrType = newAttrNode.getNodeType();
         assertEquals(2, attrType, "DocumentcreateattributeAssert3");
     }

@@ -43,15 +43,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Retrieve the root node("staff") and invoke the
  * "hasChildNodes()" method.   It should return the boolean
  * value "true".
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-810594187">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-810594187</a>
  */
 public class HcnodehaschildnodesTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

@@ -22,8 +22,6 @@ import org.htmlunit.cssparser.parser.LexicalUnit.LexicalUnitType;
 /**
  * Implementation of Rect.
  *
- * @author Ronald Brill
- *
  */
 public class RectImpl implements Serializable {
 

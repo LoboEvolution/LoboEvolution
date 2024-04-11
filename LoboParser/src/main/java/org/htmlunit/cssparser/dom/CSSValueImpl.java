@@ -29,8 +29,6 @@ import org.htmlunit.cssparser.parser.LexicalUnitImpl;
  * The <code>CSSValueImpl</code> class can represent either a
  * <code>CSSPrimitiveValue</code> or a <code>CSSValueList</code> so that
  * the type can successfully change when using <code>setCssText</code>.
- *
- * @author Ronald Brill
  */
 public class CSSValueImpl extends AbstractLocatable implements Serializable {
 

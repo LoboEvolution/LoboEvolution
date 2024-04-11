@@ -22,8 +22,6 @@ import org.htmlunit.cssparser.parser.LexicalUnit.LexicalUnitType;
 
 /**
  * Implementation of HSLColor.
- *
- * @author Ronald Brill
  */
 public class HSLColorImpl implements Serializable {
     private final String function_;

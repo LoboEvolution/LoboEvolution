@@ -42,9 +42,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * Using compareDocumentPosition check if the document position of the first Text node
  * of the second element whose localName is name compared with the next CDATASection node
  * is PRECEDING and FOLLOWING vice versa.
- *
- * @author IBM
- * @author Jenny Hsu
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-compareDocumentPosition">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-compareDocumentPosition</a>
  */
 public class Nodecomparedocumentposition20Test extends LoboUnitTest {

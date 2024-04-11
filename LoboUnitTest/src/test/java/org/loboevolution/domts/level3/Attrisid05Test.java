@@ -42,9 +42,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Deep clone the element node and append it as a sibling of the acronym node.
  * We now have two id attributes of type ID with identical values.
  * Invoke isID on the class attribute, should this return true???
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Attr-isId">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Attr-isId</a>
  */
 public class Attrisid05Test extends LoboUnitTest {

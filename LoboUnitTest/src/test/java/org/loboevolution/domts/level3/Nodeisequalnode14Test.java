@@ -39,9 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
  * Using isEqualNode check if 2 Attr nodes having the same nodeName and a null namespaceURI
  * attribute, one created using createAttribute and the other createAttributeNS, are not equal.
  * Note the localName for an Attr created with DOM Level 1 methods is null.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isEqualNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isEqualNode</a>
  */
 public class Nodeisequalnode14Test extends LoboUnitTest {

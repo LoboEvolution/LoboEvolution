@@ -35,7 +35,8 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 /**
@@ -49,16 +50,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * Add a new attribute to the "address" element.
  * Check to see if the new attribute has been successfully added to the document
  * by getting the attributes value, namespace URI, local Name and prefix.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElSetAttrNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElSetAttrNS</a>
  */
 public class SetAttributeNS09Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -84,9 +82,9 @@ public class SetAttributeNS09Test extends LoboUnitTest {
         resultNamespaceURI = addrAttr.getNamespaceURI();
         assertEquals("http://www.newattr.com", resultNamespaceURI);
         resultLocalName = addrAttr.getLocalName();
-        assertEquals( "newAttr", resultLocalName);
+        assertEquals("newAttr", resultLocalName);
         resultPrefix = addrAttr.getPrefix();
-        assertEquals( "emp", resultPrefix);
+        assertEquals("emp", resultPrefix);
     }
 }
 

@@ -38,8 +38,6 @@ import org.w3c.dom.Node;
 
 /**
  * Implementation of CSSStyleSheet.
- *
- * @author Ronald Brill
  */
 public class CSSStyleSheetImpl implements Serializable {
 

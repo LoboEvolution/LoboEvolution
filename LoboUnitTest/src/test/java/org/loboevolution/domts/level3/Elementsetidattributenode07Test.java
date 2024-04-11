@@ -42,9 +42,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Invoke setIdAttributeNode on the 2nd and 3rd acronym element using the class attribute as a parameter .  Verify by calling
  * isID on the attribute node and getElementById on document node.
- *
- * @author IBM
- * @author Jenny Hsu
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-ElSetIdAttrNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-ElSetIdAttrNode</a>
  */
 public class Elementsetidattributenode07Test extends LoboUnitTest {

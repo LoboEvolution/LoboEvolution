@@ -33,7 +33,8 @@ import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 /**
@@ -46,9 +47,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * into the another document.
  * Check the nodeName, nodeType and nodeValue namespaceURI of the imported node to
  * verify if it has been imported correctly.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core">http://www.w3.org/TR/DOM-Level-2-Core/core</a>
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#Core-Document-importNode">http://www.w3.org/TR/DOM-Level-2-Core/core#Core-Document-importNode</a>
  */
@@ -56,7 +55,6 @@ public class Documentimportnode05Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -78,7 +76,7 @@ public class Documentimportnode05Test extends LoboUnitTest {
         namespaceURI = importedAttr.getNamespaceURI();
         assertEquals("a:b0", nodeName);
         assertEquals(2, nodeType);
-        assertEquals(null, nodeValue);
+        assertNull(nodeValue);
         assertEquals("http://www.w3.org/DOM/Test", namespaceURI);
     }
 }

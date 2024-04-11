@@ -39,9 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 /**
  * Create a document fragment with an entity reference, adopt the node and check
  * that the entity reference value comes from the adopting documents DTD.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode</a>
  */
 public class Documentadoptnode16Test extends LoboUnitTest {

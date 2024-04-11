@@ -33,7 +33,7 @@ import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -48,15 +48,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * used attribute("class") is already present in this
  * element, then its value should be changed to the new one
  * of the "value" parameter.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68F082">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68F082</a>
  */
 public class HcelementchangeattributevalueTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -69,7 +67,7 @@ public class HcelementchangeattributevalueTest extends LoboUnitTest {
         testEmployee = (Element) elementList.item(3);
         testEmployee.setAttribute("class", "Neither");
         attrValue = testEmployee.getAttribute("class");
-        assertEquals( "Neither", attrValue, "HcelementchangeattributevalueAssert1");
+        assertEquals("Neither", attrValue, "HcelementchangeattributevalueAssert1");
     }
 }
 

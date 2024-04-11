@@ -34,7 +34,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -44,9 +44,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * Append a newly created node to the child list of the
  * second employee and check the NodeName returned.   The
  * "getNodeName()" method should return "newChild".
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D095">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D095</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-184E7107">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-184E7107</a>
  */
@@ -54,7 +52,6 @@ public class NodeappendchildgetnodenameTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -72,7 +69,7 @@ public class NodeappendchildgetnodenameTest extends LoboUnitTest {
         newChild = doc.createElement("newChild");
         appendNode = employeeNode.appendChild(newChild);
         childName = appendNode.getNodeName();
-        assertEquals( "newChild", childName, "NodeappendchildgetnodenameAssert1");
+        assertEquals("newChild", childName, "NodeappendchildgetnodenameAssert1");
     }
 }
 

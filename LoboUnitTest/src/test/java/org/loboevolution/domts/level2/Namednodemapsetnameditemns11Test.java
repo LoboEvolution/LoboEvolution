@@ -48,9 +48,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Attempt to add a notation node to a NamedNodeMap of attribute nodes,
  * Since notations nodes do not belong in the attribute node map a HIERARCHY_REQUEST_ERR
  * should be raised.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-setNamedItemNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-setNamedItemNS</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=259">http://www.w3.org/Bugs/Public/show_bug.cgi?id=259</a>
  */

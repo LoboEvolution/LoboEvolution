@@ -40,9 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * this Document node.  Invoke getUserData on this Document node with the same
  * key of the UserData that was just set on the documentElement node and verify
  * if the returned node is null.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-setUserData">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-setUserData</a>
  */
 public class Nodesetuserdata09Test extends LoboUnitTest {

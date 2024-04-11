@@ -50,16 +50,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * being "entRef1".
  * Method should return a node of type Entity_Reference (whose value is null) that
  * belongs to this document whose systemId is "staff.dtd".
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#Core-Document-importNode">http://www.w3.org/TR/DOM-Level-2-Core/core#Core-Document-importNode</a>
  */
 public class ImportNode10Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

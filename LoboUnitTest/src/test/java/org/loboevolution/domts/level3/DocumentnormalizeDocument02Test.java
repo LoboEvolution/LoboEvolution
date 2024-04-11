@@ -40,9 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Normalize a document with the 'cdata-sections' parameter set to false and
  * check if the CDATASection has been preserved.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-cdata-sections">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-cdata-sections</a>
  */
@@ -63,7 +61,7 @@ public class DocumentnormalizeDocument02Test extends LoboUnitTest {
         elemName = (Element) elemList.item(1);
         cdata = (CDATASection) elemName.getLastChild();
         nodeName = cdata.getNodeName();
-        assertEquals( "#cdata-section", nodeName, "DocumentnormalizeDocument02Assert3");
+        assertEquals("#cdata-section", nodeName, "DocumentnormalizeDocument02Assert3");
         domConfig = doc.getDomConfig();
         domConfig.setParameter("cdata-sections", Boolean.TRUE);
         /*DOMErrorMonitor */
@@ -77,7 +75,7 @@ public class DocumentnormalizeDocument02Test extends LoboUnitTest {
         assertEquals("#cdata-section", nodeName, "DocumentnormalizeDocument02Assert5");
         domConfig.setParameter("cdata-sections", Boolean.FALSE);
         doc.normalizeDocument();
-        assertTrue( errorMonitor.assertLowerSeverity(2), "DocumentnormalizeDocument02Assert6");
+        assertTrue(errorMonitor.assertLowerSeverity(2), "DocumentnormalizeDocument02Assert6");
         elemList = doc.getElementsByTagName("strong");
         elemName = (Element) elemList.item(1);
         text = (Text) elemName.getLastChild();

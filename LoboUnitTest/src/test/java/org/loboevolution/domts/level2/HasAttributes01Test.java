@@ -41,16 +41,13 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
  * return false if the node does not have an attribute.
  * Retrieve the first "name" node and invoke the "hasAttributes()" method.
  * The method should return false since the node does not have an attribute.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeHasAttrs">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeHasAttrs</a>
  */
 public class HasAttributes01Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

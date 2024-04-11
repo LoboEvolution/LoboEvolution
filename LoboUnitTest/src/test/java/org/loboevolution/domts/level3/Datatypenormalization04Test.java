@@ -42,8 +42,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Normalize document with datatype-normalization set to true.
  * Check if float values were normalized.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-datatype-normalization">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-datatype-normalization</a>
  */
@@ -81,25 +80,25 @@ public class Datatypenormalization04Test extends LoboUnitTest {
             elemList = doc.getElementsByTagNameNS("http://www.w3.org/2001/DOM-Test-Suite/Level-3/datatype_normalization", "data:float");
             element = (Element) elemList.item(0);
             str = element.getAttribute("data:value");
-             assertEquals( "+0003.141592600E+0000", str, "Datatypenormalization04Assert4");
+            assertEquals("+0003.141592600E+0000", str, "Datatypenormalization04Assert4");
             str = element.getAttribute("data:union");
-             assertEquals( "+0003.141592600E+0000", str, "Datatypenormalization04Assert5");
+            assertEquals("+0003.141592600E+0000", str, "Datatypenormalization04Assert5");
             str = element.getTextContent();
-             assertEquals( "-31415926.00E-7 2.718", str, "Datatypenormalization04Assert6");
+            assertEquals("-31415926.00E-7 2.718", str, "Datatypenormalization04Assert6");
             element = (Element) elemList.item(1);
             str = element.getAttribute("data:value");
-             assertEquals( "NaN", str, "Datatypenormalization04Assert7");
+            assertEquals("NaN", str, "Datatypenormalization04Assert7");
             str = element.getAttribute("data:union");
-             assertEquals( "NaN", str, "Datatypenormalization04Assert8");
+            assertEquals("NaN", str, "Datatypenormalization04Assert8");
             str = element.getTextContent();
-             assertEquals( "INF -INF", str, "Datatypenormalization04Assert9");
+            assertEquals("INF -INF", str, "Datatypenormalization04Assert9");
             element = (Element) elemList.item(2);
             str = element.getAttribute("data:value");
-             assertEquals( "1", str, "Datatypenormalization04Assert10");
+            assertEquals("1", str, "Datatypenormalization04Assert10");
             str = element.getAttribute("data:union");
-            assertEquals( "1", str, "Datatypenormalization04Assert11");
+            assertEquals("1", str, "Datatypenormalization04Assert11");
             str = element.getTextContent();
-            assertEquals( "-0", str, "Datatypenormalization04Assert12");
+            assertEquals("-0", str, "Datatypenormalization04Assert12");
         }
     }
 }

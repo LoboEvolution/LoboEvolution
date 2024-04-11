@@ -108,7 +108,7 @@ public class HTMLImageElementImpl extends HTMLElementImpl implements HTMLImageEl
 	/** {@inheritDoc} */
 	@Override
 	public double getHeight() {
-		return getAttributeAsInt("height", -1);
+		return getAttributeAsInt("height", 24);
 	}
 
 	/** {@inheritDoc} */
@@ -171,7 +171,7 @@ public class HTMLImageElementImpl extends HTMLElementImpl implements HTMLImageEl
 	/** {@inheritDoc} */
 	@Override
 	public double getWidth() {
-		return getAttributeAsInt("width", -1);
+		return getAttributeAsInt("width", 24);
 	}
 
 	/** {@inheritDoc} */

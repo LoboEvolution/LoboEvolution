@@ -40,16 +40,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Create a new Document, Element and Attr node.  Add the Attr to the Element and append the
  * Element to the Document.  Retreive the newly created element node from the document and check
  * if it has attributes using hasAttributes.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeHasAttrs">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeHasAttrs</a>
  */
 public class Nodehasattributes04Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -67,7 +64,7 @@ public class Nodehasattributes04Test extends LoboUnitTest {
         final HTMLCollection elementList;
         final boolean hasAttributes;
         doc = sampleXmlFile("staffNS.xml");
-        
+
         domImpl = doc.getImplementation();
         newDoc = domImpl.createDocument("http://www.w3.org/DOM/Test", "test", docType);
         element = newDoc.createElementNS("http://www.w3.org/DOM/Test", "dom:elem");

@@ -42,16 +42,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * Retrieve the documenttype.
  * Apply the "getSystemId()" method.  The string "staffNS.dtd" should be
  * returned.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-Core-DocType-systemId">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-Core-DocType-systemId</a>
  */
 public class SystemId01Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

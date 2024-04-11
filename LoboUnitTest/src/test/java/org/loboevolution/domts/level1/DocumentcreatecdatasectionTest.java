@@ -32,7 +32,7 @@ import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.CDATASection;
 import org.loboevolution.html.node.Document;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -43,16 +43,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * new CDATASection node whose "data" is the specified
  * string.  The content, name and type are retrieved and
  * output.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-D26C0AF8">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-D26C0AF8</a>
  */
 public class DocumentcreatecdatasectionTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -64,9 +61,9 @@ public class DocumentcreatecdatasectionTest extends LoboUnitTest {
         doc = sampleXmlFile("staff.xml");
         newCDATASectionNode = doc.createCDATASection("This is a new CDATASection node");
         newCDATASectionValue = newCDATASectionNode.getNodeValue();
-         assertEquals( "This is a new CDATASection node", newCDATASectionValue, "DocumentcreatecdatasectionAssert1");
+        assertEquals("This is a new CDATASection node", newCDATASectionValue, "DocumentcreatecdatasectionAssert1");
         newCDATASectionName = newCDATASectionNode.getNodeName();
-         assertEquals( "#cdata-section", newCDATASectionName, "DocumentcreatecdatasectionAssert2");
+        assertEquals("#cdata-section", newCDATASectionName, "DocumentcreatecdatasectionAssert2");
         newCDATASectionType = newCDATASectionNode.getNodeType();
         assertEquals(4, newCDATASectionType, "DocumentcreatecdatasectionAssert3");
     }

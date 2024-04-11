@@ -32,7 +32,7 @@ import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.*;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -46,9 +46,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * attribute in the DTD file.  The test uses the
  * "getNamedItem(name)" method from the NamedNodeMap
  * interface.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-84CF096">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-84CF096</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1074577549">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1074577549</a>
  * @see <a href="http://lists.w3.org/Archives/Public/www-dom-ts/2002Mar/0002.html">http://lists.w3.org/Archives/Public/www-dom-ts/2002Mar/0002.html</a>
@@ -57,7 +55,6 @@ public class AttrDefaultValueTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -71,7 +68,7 @@ public class AttrDefaultValueTest extends LoboUnitTest {
         addressList = doc.getElementsByTagName("address");
         testNode = (Element) addressList.item(4);
         attributes = testNode.getAttributes();
-        streetAttr = (Attr) attributes.getNamedItem("street");
+        streetAttr = attributes.getNamedItem("street");
         value = streetAttr.getNodeValue();
         assertEquals("Yes", value, "AttrDefaultValueAssert1");
     }

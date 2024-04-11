@@ -54,8 +54,6 @@ import java.util.*;
 
 /**
  * <p>StyleSheetRenderState class.</p>
- *
- * Author J. H. S.
  */
 @Slf4j
 public class StyleSheetRenderState implements RenderState {

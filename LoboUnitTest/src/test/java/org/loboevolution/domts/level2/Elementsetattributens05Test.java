@@ -41,9 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * qualifiedName has a prefix and the namespaceURI is null.
  * Invoke the setAttributeNS method on a new Element object with null namespaceURI and a
  * qualifiedName that has a namespace prefix.  Check if the NAMESPACE_ERR was thrown.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElSetAttrNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElSetAttrNS</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=259">http://www.w3.org/Bugs/Public/show_bug.cgi?id=259</a>
  */
@@ -52,7 +50,6 @@ public class Elementsetattributens05Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

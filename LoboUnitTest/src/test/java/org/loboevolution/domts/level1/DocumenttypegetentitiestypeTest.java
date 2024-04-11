@@ -45,16 +45,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * a NamedNodeMap of all its entities.  Traverse the
  * entire list and examine the NodeType of each node
  * in the list.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1788794630">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1788794630</a>
  */
 public class DocumenttypegetentitiestypeTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

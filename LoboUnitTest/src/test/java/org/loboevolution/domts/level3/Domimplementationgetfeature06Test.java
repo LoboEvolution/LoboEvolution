@@ -38,9 +38,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 /**
  * Invoke getFeature method on this DOMImplementation with the value of the feature parameter
  * as "1-1" (some junk) and version equal to "*".  This should return a null DOMObject.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMImplementation3-getFeature">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMImplementation3-getFeature</a>
  */
 public class Domimplementationgetfeature06Test extends LoboUnitTest {

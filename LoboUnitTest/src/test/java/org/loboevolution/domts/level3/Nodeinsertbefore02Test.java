@@ -39,9 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * this DocumentType node and verify the name of the inserted Comment node.  Now
  * attempt to insert a new Processing Instruction node before the new Comment and
  * verify the target of the inserted ProcessingInstruction.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-952280727">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-952280727</a>
  */
 public class Nodeinsertbefore02Test extends LoboUnitTest {

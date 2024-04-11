@@ -43,16 +43,13 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * "createElement(name)" method from the Document interface.
  * Since this new node has not yet been added to the tree,
  * the "getParentNode()" method will return null.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1060184317">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1060184317</a>
  */
 public class NodeparentnodenullTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

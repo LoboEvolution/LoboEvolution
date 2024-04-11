@@ -42,9 +42,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * Invoke lookupPrefix on the default attribute node of the p node with
  * a namespaceURI and a node prefix and check if the value of the prefix returned by
  * using its namespaceURI as a parameter is valid.
- *
- * @author IBM
- * @author Jenny Hsu
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-lookupNamespacePrefix">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-lookupNamespacePrefix</a>
  */
 public class Nodelookupprefix18Test extends LoboUnitTest {

@@ -34,13 +34,12 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
  * Evaluate Node.ownerDocument on the second "p" element.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#node-ownerDoc">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#node-ownerDoc</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=251">http://www.w3.org/Bugs/Public/show_bug.cgi?id=251</a>
  */
@@ -48,7 +47,6 @@ public class HcnodegetownerdocumentTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -64,7 +62,7 @@ public class HcnodegetownerdocumentTest extends LoboUnitTest {
         ownerDocument = docNode.getOwnerDocument();
         docElement = ownerDocument.getDocumentElement();
         elementName = docElement.getNodeName();
-        assertEquals( "HTML", elementName, "HcnodegetownerdocumentAssert1");
+        assertEquals("HTML", elementName, "HcnodegetownerdocumentAssert1");
 
     }
 }

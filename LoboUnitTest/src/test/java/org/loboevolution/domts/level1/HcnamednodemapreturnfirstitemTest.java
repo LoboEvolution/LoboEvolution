@@ -38,7 +38,7 @@ import org.loboevolution.html.node.Node;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -48,8 +48,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * Retrieve the second "acronym" get the NamedNodeMap of the attributes. Since the
  * DOM does not specify an order of these nodes the contents
  * of the FIRST node can contain either "title", "class" or "dir".
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-349467F9">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-349467F9</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=236">http://www.w3.org/Bugs/Public/show_bug.cgi?id=236</a>
  * @see <a href="http://lists.w3.org/Archives/Public/www-dom-ts/2003Jun/0011.html">http://lists.w3.org/Archives/Public/www-dom-ts/2003Jun/0011.html</a>
@@ -59,7 +58,6 @@ public class HcnamednodemapreturnfirstitemTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

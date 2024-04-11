@@ -40,9 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * Using setTextContent on a new Document node, attempt to set the textContent of this
  * new Document node to textContent.  Check if it was not set by checking the nodeName
  * attribute of a new Element of this Document node.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-textContent">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-textContent</a>
  */
 public class Nodesettextcontent02Test extends LoboUnitTest {

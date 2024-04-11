@@ -43,9 +43,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Invoke the createAttributeNS method on this DOMImplementation object with
  * the qualifiedName as xmlns and namespaceURI as http://www.W3.org/2000/xmlns.
  * Check if the NAMESPACE_ERR exception is thrown.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core">http://www.w3.org/TR/DOM-Level-2-Core/core</a>
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-DocCrAttrNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-DocCrAttrNS</a>
  */
@@ -53,7 +51,6 @@ public class DocumentcreateattributeNS07Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

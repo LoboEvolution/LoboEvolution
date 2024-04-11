@@ -22,8 +22,6 @@ import org.htmlunit.cssparser.parser.Locator;
 /**
  * <p>ClassCondition class.</p>
  *
- * @author Ronald Brill
- *
  */
 public class ClassCondition extends AbstractLocatable implements Condition, Serializable {
 

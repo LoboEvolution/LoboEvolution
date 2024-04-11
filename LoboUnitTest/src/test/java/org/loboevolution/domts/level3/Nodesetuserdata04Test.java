@@ -41,9 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Invoke setUserData on a new Element to set its UserData to a new Text node
  * twice using different Keys.  Using getUserData with each Key and isNodeEqual
  * verify if the returned nodes are Equal.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-setUserData">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-setUserData</a>
  */
 public class Nodesetuserdata04Test extends LoboUnitTest {

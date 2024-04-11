@@ -42,9 +42,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * children, and returns the oldChild node.
  * Using replaceChild on an Element node attempt to replace an Element node with another
  * Element from another document and verify if a WRONG_DOCUMENT_ERR gets thrown.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307</a>
  */
 public class Nodereplacechild27Test extends LoboUnitTest {

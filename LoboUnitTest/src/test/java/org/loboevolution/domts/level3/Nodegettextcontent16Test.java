@@ -39,9 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * Invoke the method getTextContent on a new DocumentFragment node with new Text, EntityReferences
  * CDATASection, PI and Comment nodes and check if the value returned is a single
  * concatenated String with its content.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-textContent">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-textContent</a>
  */
 public class Nodegettextcontent16Test extends LoboUnitTest {
@@ -75,7 +73,7 @@ public class Nodegettextcontent16Test extends LoboUnitTest {
         appendedChild = docFrag.appendChild(elem);
         doc.normalizeDocument();
         textContent = docFrag.getTextContent();
-        assertEquals( "Text βCData", textContent, "Nodegettextcontent16Assert2");
+        assertEquals("Text βCData", textContent, "Nodegettextcontent16Assert2");
     }
 }
 

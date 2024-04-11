@@ -38,8 +38,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * Checks that element content whitespace is not added to textContent.  Determination
  * of element content whitespace is only assured if validating.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-textContent">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-textContent</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=538">http://www.w3.org/Bugs/Public/show_bug.cgi?id=538</a>
  */

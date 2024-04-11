@@ -42,9 +42,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * "getImplementation()" method.  It should return a
  * DOMImplementation whose "hasFeature("XML","1.0")
  * method returns the boolean value "true".
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1B793EBA">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1B793EBA</a>
  */
 public class DocumentgetimplementationTest extends LoboUnitTest {

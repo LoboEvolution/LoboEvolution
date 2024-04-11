@@ -38,8 +38,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Checks that isDerivedFrom(...,0) returns true when target type is a list
  * of a union of the ancestor type.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom</a>
  */
 public class Typeinfoisderivedfrom71Test extends LoboUnitTest {

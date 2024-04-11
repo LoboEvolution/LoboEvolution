@@ -39,8 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * An attempt to add a second document element should result in a HIERARCHY_REQUEST_ERR
  * or a NOT_SUPPORTED_ERR.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-184E7107">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-184E7107</a>
  */
 public class Nodeappendchild02Test extends LoboUnitTest {

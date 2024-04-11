@@ -52,9 +52,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  * This test uses the "removeAttribute(name)" method
  * from the Element interface and the "getNamedItem(name)"
  * method from the NamedNodeMap interface.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-6D6AC0F9">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-6D6AC0F9</a>
  * @see <a href="http://lists.w3.org/Archives/Public/www-dom-ts/2002Mar/0002.html">http://lists.w3.org/Archives/Public/www-dom-ts/2002Mar/0002.html</a>
  */
@@ -63,7 +61,6 @@ public class AttrSpecifiedValueRemoveTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

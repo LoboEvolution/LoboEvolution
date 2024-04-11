@@ -43,9 +43,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
  * the order of these two nodes is preserved.
  * Also compare the position of the Element node with respect to the Attr node and this should
  * be PRECEDING and contains, and the Attr node follows and is contained by the Element node
- *
- * @author IBM
- * @author Jenny Hsu
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-compareDocumentPosition">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-compareDocumentPosition</a>
  */
 public class Nodecomparedocumentposition33Test extends LoboUnitTest {

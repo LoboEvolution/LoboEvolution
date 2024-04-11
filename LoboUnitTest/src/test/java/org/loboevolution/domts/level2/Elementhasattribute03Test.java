@@ -43,16 +43,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Create an element Node and an attribute Node.  Invoke hasAttribute method
  * to verify that there is no attribute. Append the attribute node to the element node.
  * Invoke the hasAttribute method on the element and verify if it returns true.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeHasAttrs">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeHasAttrs</a>
  */
 public class Elementhasattribute03Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

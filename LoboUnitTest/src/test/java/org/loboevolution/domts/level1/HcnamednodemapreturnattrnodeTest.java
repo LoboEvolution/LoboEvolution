@@ -35,7 +35,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -44,8 +44,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * list is created an invocation of the "getNamedItem(name)"
  * method is done with name="class".  This should result
  * in the method returning an Attr node.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1074577549">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1074577549</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-84CF096">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-84CF096</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-637646024">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-637646024</a>
@@ -56,7 +55,6 @@ public class HcnamednodemapreturnattrnodeTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -72,10 +70,10 @@ public class HcnamednodemapreturnattrnodeTest extends LoboUnitTest {
         attributes = testEmployee.getAttributes();
         streetAttr = (Attr) attributes.getNamedItem("class");
         attrName = streetAttr.getNodeName();
-        assertEquals( "class", attrName, "HcnamednodemapreturnattrnodeAssert1");
-        
+        assertEquals("class", attrName, "HcnamednodemapreturnattrnodeAssert1");
+
         attrName = streetAttr.getName();
-        assertEquals( "class", attrName, "HcnamednodemapreturnattrnodeAssert2");
+        assertEquals("class", attrName, "HcnamednodemapreturnattrnodeAssert2");
     }
 }
 

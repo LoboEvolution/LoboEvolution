@@ -39,9 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * its namespaceURI is http://www.w3.org/2000/xmlns/ and qualifiedName is xmlns:xmlns.
  * Check if this element has been renamed successfully by verifying the
  * nodeName, attributes of the renamed node.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-renameNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-renameNode</a>
  */
 public class Documentrenamenode17Test extends LoboUnitTest {
@@ -71,9 +69,9 @@ public class Documentrenamenode17Test extends LoboUnitTest {
         nodeName = renamedNode.getNodeName();
         namespaceURI = renamedNode.getNamespaceURI();
         nodeType = renamedNode.getNodeType();
-        assertEquals( "xhtml:head", nodeName, "Documentrenamenode17Assert2");
-        assertEquals( 1, nodeType, "Documentrenamenode17Assert3");
-        assertEquals( "http://www.w3.org/1999/xhtml", namespaceURI, "Documentrenamenode17Assert4");
+        assertEquals("xhtml:head", nodeName, "Documentrenamenode17Assert2");
+        assertEquals(1, nodeType, "Documentrenamenode17Assert3");
+        assertEquals("http://www.w3.org/1999/xhtml", namespaceURI, "Documentrenamenode17Assert4");
     }
 }
 

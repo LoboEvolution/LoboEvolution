@@ -34,15 +34,12 @@ import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Using isDefaultNamespace on a new Child of a new Element node with a namespace URI
  * and prefix and using the childs namespace URI as an argument, verify if the
  * value returned is true.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isDefaultNamespace">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isDefaultNamespace</a>
  */
 public class Nodeisdefaultnamespace10Test extends LoboUnitTest {

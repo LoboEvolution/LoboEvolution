@@ -41,9 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Using insertBefore on a child Element of an EntityReference node attempt to insert
  * a new Element node, before a Text node child of an Entity Node's replacement
  * text and verify if a NO_MODIFICATION_ALLOWED_ERR is raised.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-952280727">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-952280727</a>
  */
 public class Nodeinsertbefore25Test extends LoboUnitTest {

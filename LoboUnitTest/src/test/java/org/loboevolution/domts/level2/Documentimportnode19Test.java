@@ -31,7 +31,8 @@ import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.*;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 /**
@@ -43,9 +44,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * Using the method importNode with deep=true/false, import a entity nodes ent2 and ent6
  * from this document to a new document object.  Verify if the nodes have been
  * imported correctly by checking the nodeNames of the imported nodes and public and system ids.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core">http://www.w3.org/TR/DOM-Level-2-Core/core</a>
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#Core-Document-importNode">http://www.w3.org/TR/DOM-Level-2-Core/core#Core-Document-importNode</a>
  */
@@ -53,7 +52,6 @@ public class Documentimportnode19Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -75,7 +73,7 @@ public class Documentimportnode19Test extends LoboUnitTest {
         String systemIdImp;
         String notationNameImp;
         doc = sampleXmlFile("staffNS.xml");
-        
+
         domImpl = doc.getImplementation();
         docType = doc.getDoctype();
         docImp = domImpl.createDocument("http://www.w3.org/DOM/Test", "a:b", docTypeNull);
@@ -87,22 +85,22 @@ public class Documentimportnode19Test extends LoboUnitTest {
         entityImp6 = (EntityReference) docImp.importNode(entity6, true);
         nodeName = entity2.getNodeName();
         nodeNameImp = entityImp2.getNodeName();
-        assertEquals( nodeName, nodeNameImp);
+        assertEquals(nodeName, nodeNameImp);
         nodeName = entity6.getNodeName();
         nodeNameImp = entityImp6.getNodeName();
-        assertEquals( nodeName, nodeNameImp);
+        assertEquals(nodeName, nodeNameImp);
         systemId = entity2.getSystemId();
         systemIdImp = entityImp2.getSystemId();
         assertEquals(systemId, systemIdImp);
         systemId = entity6.getSystemId();
         systemIdImp = entityImp6.getSystemId();
-        assertEquals( systemId, systemIdImp);
+        assertEquals(systemId, systemIdImp);
         notationName = entity2.getNotationName();
         notationNameImp = entityImp2.getNotationName();
         assertEquals(notationName, notationNameImp);
         notationName = entity6.getNotationName();
         notationNameImp = entityImp6.getNotationName();
-        assertEquals( notationName, notationNameImp);
+        assertEquals(notationName, notationNameImp);
     }
 
 }

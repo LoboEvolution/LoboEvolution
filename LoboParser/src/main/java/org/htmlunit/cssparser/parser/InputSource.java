@@ -20,8 +20,6 @@ import java.io.Reader;
 
 /**
  * The input supported by the parser.
- *
- * @author Ronald Brill
  */
 public class InputSource implements Closeable {
     private String uri_;

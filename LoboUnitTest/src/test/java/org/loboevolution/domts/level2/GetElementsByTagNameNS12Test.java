@@ -33,7 +33,7 @@ import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -46,15 +46,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * localName.
  * The method should return a NodeList whose length is "0".
  * This test is a modification of getElementsByTagName05
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-1938918D">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-1938918D</a>
  */
 public class GetElementsByTagNameNS12Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -63,8 +61,8 @@ public class GetElementsByTagNameNS12Test extends LoboUnitTest {
         final HTMLCollection elementList;
         doc = sampleXmlFile("staffNS.xml");
         docElem = doc.getDocumentElement();
-        elementList = docElem.getElementsByTagName( "nomatch");
-        assertEquals( 0, elementList.getLength());
+        elementList = docElem.getElementsByTagName("nomatch");
+        assertEquals(0, elementList.getLength());
     }
 }
 

@@ -45,16 +45,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Invoke the setAttributeNS method on this Element object with a valid value for
  * namespaceURI, and qualifiedNames that contain illegal characters.  Check if the an
  * INVALID_CHARACTER_ERR was thrown.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElSetAttrNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElSetAttrNS</a>
  */
 public class Elementsetattributens04Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

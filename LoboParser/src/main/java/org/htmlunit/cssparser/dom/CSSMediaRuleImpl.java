@@ -26,8 +26,6 @@ import org.htmlunit.cssparser.util.ThrowCssExceptionErrorHandler;
 /**
  * Implementation of CSSMediaRule.
  *
- * @author Ronald Brill
- *
  */
 public class CSSMediaRuleImpl extends AbstractCSSRuleImpl {
 

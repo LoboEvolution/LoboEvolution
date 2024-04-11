@@ -38,9 +38,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * Using compareDocumentPosition check if the document compared contains and precedes the new
  * newElement, and the newElement is contained and follows the document.
- *
- * @author IBM
- * @author Jenny Hsu
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-compareDocumentPosition">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-compareDocumentPosition</a>
  */
 public class Nodecomparedocumentposition07Test extends LoboUnitTest {

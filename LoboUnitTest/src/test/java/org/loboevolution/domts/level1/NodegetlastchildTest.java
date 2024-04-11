@@ -33,22 +33,19 @@ import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
  * The "getLastChild()" method returns the last child
  * of this node.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-61AD09FB">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-61AD09FB</a>
  */
 public class NodegetlastchildTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -67,7 +64,7 @@ public class NodegetlastchildTest extends LoboUnitTest {
             lchildNode = lchildNode.getPreviousSibling();
             childName = lchildNode.getNodeName();
         }
-         assertEquals( "ADDRESS", childName, "NodegetlastchildAssert1");
+        assertEquals("ADDRESS", childName, "NodegetlastchildAssert1");
     }
 }
 

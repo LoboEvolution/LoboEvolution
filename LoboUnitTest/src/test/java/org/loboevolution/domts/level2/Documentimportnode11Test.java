@@ -33,7 +33,8 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 
 /**
@@ -45,9 +46,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * Using the method importNode with deep=false, import this Document's documentElement
  * node.  Verify if the node has been imported correctly by its nodeName atttribute and
  * if the original document is not altered by checking if hasChildNodes returns false.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core">http://www.w3.org/TR/DOM-Level-2-Core/core</a>
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#Core-Document-importNode">http://www.w3.org/TR/DOM-Level-2-Core/core#Core-Document-importNode</a>
  */
@@ -55,7 +54,6 @@ public class Documentimportnode11Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -72,7 +70,7 @@ public class Documentimportnode11Test extends LoboUnitTest {
         assertFalse(success);
         nodeNameImported = imported.getNodeName();
         nodeNameOrig = docElement.getNodeName();
-        assertEquals( nodeNameImported, nodeNameOrig);
+        assertEquals(nodeNameImported, nodeNameOrig);
     }
 }
 

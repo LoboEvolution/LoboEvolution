@@ -40,9 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Using isSameNode check if 2 Entity nodes that reference the same object are
  * the same.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isSameNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isSameNode</a>
  */
 public class Nodeissamenode07Test extends LoboUnitTest {

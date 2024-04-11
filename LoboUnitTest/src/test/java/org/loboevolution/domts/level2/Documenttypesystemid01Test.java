@@ -29,11 +29,11 @@ package org.loboevolution.domts.level2;
 
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DOMImplementation;
+import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -41,16 +41,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * <p>
  * Create a new DocumentType node with the value "SYS" for its systemId and PUB for
  * its publicId.  Check the value of the systemId and pbulicId attributes.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-Core-DocType-systemId">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-Core-DocType-systemId</a>
  */
 public class Documenttypesystemid01Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -60,13 +57,13 @@ public class Documenttypesystemid01Test extends LoboUnitTest {
         final String publicId;
         final String systemId;
         doc = sampleXmlFile("staffNS.xml");
-        
+
         domImpl = doc.getImplementation();
         docType = domImpl.createDocumentType("l2:root", "PUB", "SYS");
         publicId = docType.getPublicId();
         systemId = docType.getSystemId();
         assertEquals("PUB", publicId);
-        assertEquals( "SYS", systemId);
+        assertEquals("SYS", systemId);
     }
 }
 

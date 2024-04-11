@@ -33,7 +33,7 @@ import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -42,9 +42,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * Ceate two new element nodes and atribute nodes, with and without namespace prefixes.
  * Retreive the local part of their qualified names using getLocalName and verrify
  * if it is correct.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSLocalN">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSLocalN</a>
  */
 public class Nodegetlocalname03Test extends LoboUnitTest {

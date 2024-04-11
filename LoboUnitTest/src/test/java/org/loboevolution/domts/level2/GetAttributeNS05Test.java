@@ -33,7 +33,8 @@ import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 /**
@@ -44,16 +45,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * and retrieve the domestic attribute.  The method returns an
  * Attr value as a string, the "value" can be examined to ensure the
  * proper attribute value was retrieved.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElGetAttrNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElGetAttrNS</a>
  */
 public class GetAttributeNS05Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -65,7 +63,7 @@ public class GetAttributeNS05Test extends LoboUnitTest {
         elementList = doc.getElementsByTagName("address");
         testAddr = (Element) elementList.item(0);
         assertNotNull(testAddr);
-        attrValue = testAddr.getAttribute( "domestic");
+        attrValue = testAddr.getAttribute("domestic");
         assertEquals("Yes", attrValue);
     }
 }

@@ -49,9 +49,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * Method should return an element node whose name matches "address"
  * and whose children are not imported. The returned node should
  * belong to this document whose systemId is "staff.dtd"
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#Core-Document-importNode">http://www.w3.org/TR/DOM-Level-2-Core/core#Core-Document-importNode</a>
  */
 public class ImportNode05Test extends LoboUnitTest {

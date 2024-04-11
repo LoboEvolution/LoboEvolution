@@ -38,9 +38,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 /**
  * Using isEqualNode check if 2 Attr nodes having the same nodeName but different namespaceURIs
  * are not equal.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isEqualNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isEqualNode</a>
  */
 public class Nodeisequalnode19Test extends LoboUnitTest {

@@ -26,17 +26,25 @@
 package org.loboevolution.css;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.loboevolution.annotation.Alerts;
+import org.loboevolution.annotation.AlertsExtension;
 import org.loboevolution.driver.LoboUnitTest;
+import org.loboevolution.html.js.css.CSSKeyFramesRuleImpl;
 
 /**
- * Tests for CSSKeyframesRule.
+ * Tests for {@link CSSKeyFramesRuleImpl}.
  */
+@ExtendWith(AlertsExtension.class)
 public class CSSKeyframesRuleTest extends LoboUnitTest {
 
+
     @Test
+    @Alerts({"[object CSSKeyframesRule]", "7"})
     public void simple() {
         final String html
-                = "<html><body>\n"
+                = "<html>"
+                + "<body>\n"
                 + "<style>\n"
                 + "  @keyframes identifier { 0% { top: 0; left: 0; } 100% { top: 100px; left: 100%; }}\n"
                 + "</style>\n"
@@ -44,22 +52,24 @@ public class CSSKeyframesRuleTest extends LoboUnitTest {
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  if (styleSheet.cssRules) {\n"
                 + "    var rule = styleSheet.cssRules[0];\n"
-                + "    alert(rule);\n"
-                + "    alert(rule.type);\n"
+                + "   alert(rule);\n"
+                + "   alert(rule.type);\n"
                 + "  } else {\n"
-                + "    alert('Your browser does not support this example');\n"
+                + "   alert('Your browser does not support this example');\n"
                 + "  }\n"
                 + "</script>\n"
+
                 + "</body></html>";
 
-        final String[] messages = {"[object CSSKeyFramesRule]", "7"};
-        checkHtmlAlert(html, messages);
+        checkHtmlAlert(html);
     }
 
     @Test
-    public void name() throws Exception {
+    @Alerts({"[object CSSKeyframesRule]", "identifier"})
+    public void name() {
         final String html
-                = "<html><body>\n"
+                = "<html>"
+                + "<body>\n"
                 + "<style>\n"
                 + "  @keyframes identifier { 0% { top: 0; left: 0; } 100% { top: 100px; left: 100%; }}\n"
                 + "</style>\n"
@@ -67,37 +77,40 @@ public class CSSKeyframesRuleTest extends LoboUnitTest {
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  if (styleSheet.cssRules) {\n"
                 + "    var rule = styleSheet.cssRules[0];\n"
-                + "    alert(rule);\n"
-                + "    alert(rule.name);\n"
+                + "   alert(rule);\n"
+                + "   alert(rule.name);\n"
                 + "  } else {\n"
-                + "    alert('Your browser does not support this example');\n"
+                + "   alert('Your browser does not support this example');\n"
                 + "  }\n"
                 + "</script>\n"
+
                 + "</body></html>";
 
-        final String[] messages = {"[object CSSKeyFramesRule]", "identifier"};
-        checkHtmlAlert(html, messages);
+        checkHtmlAlert(html);
     }
 
     @Test
-    public void cssRules() throws Exception {
+    @Alerts("[object CSSRuleList]")
+    public void cssRules() {
         final String html
-                = "<html><body>\n"
+                = "<html>"
+                + "<body>\n"
                 + "<style>\n"
                 + "  @keyframes identifier { 0% { top: 0; left: 0; } 100% { top: 100px; left: 100%; }}\n"
                 + "</style>\n"
+
                 + "<script>\n"
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  if (styleSheet.cssRules) {\n"
                 + "    var rule = styleSheet.cssRules[0];\n"
-                + "    alert(rule.cssRules);\n"
+                + "   alert(rule.cssRules);\n"
                 + "  } else {\n"
-                + "    alert('Your browser does not support this example');\n"
+                + "   alert('Your browser does not support this example');\n"
                 + "  }\n"
                 + "</script>\n"
+
                 + "</body></html>";
 
-        final String[] messages = {"[object CSSRuleList]"};
-        checkHtmlAlert(html, messages);
+        checkHtmlAlert(html);
     }
 }

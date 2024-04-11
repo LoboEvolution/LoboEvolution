@@ -29,7 +29,10 @@ package org.loboevolution.domts.level3;
 
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.node.*;
+import org.loboevolution.html.node.DOMConfiguration;
+import org.loboevolution.html.node.Document;
+import org.loboevolution.html.node.Element;
+import org.loboevolution.html.node.Text;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -42,9 +45,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * this Document.  If supported, invoke the setParameter method on this domconfiguration object to set the
  * "element-content-whitespace"  feature to false.  Invoke the normalizeDocument method and verify if
  * the text node has been discarded.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-element-content-whitespace">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-element-content-whitespace</a>
  */
@@ -73,7 +74,7 @@ public class DocumentnormalizeDocument10Test extends LoboUnitTest {
         doc.normalizeDocument();
         text = (Text) elem.getFirstChild();
         nodeValue = text.getNodeValue();
-        assertEquals( "Text          Node", nodeValue, "DocumentnormalizeDocument10Assert5");
+        assertEquals("Text          Node", nodeValue, "DocumentnormalizeDocument10Assert5");
         canSet = domConfig.canSetParameter("element-content-whitespace", Boolean.FALSE);
 
         if (canSet) {

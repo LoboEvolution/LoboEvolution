@@ -298,7 +298,7 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 		if (this.rcontext != null) {
 			if (this.rcontext.isTestEnabled()) {
 				if (msg == null) msg = new ArrayList<>();
-				msg.add(message);
+				msg.add(message == null ? "null" : message);
 			} else {
 				this.rcontext.alert(message);
 			}

@@ -42,9 +42,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 /**
  * Using compareDocumentPosition to check if the EntityReference node contains and precedes its last
  * childElement, and that this childElement is contained and follows the EntityReference node.
- *
- * @author IBM
- * @author Jenny Hsu
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-compareDocumentPosition">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-compareDocumentPosition</a>
  */
 public class Nodecomparedocumentposition27Test extends LoboUnitTest {

@@ -43,9 +43,7 @@ import static org.junit.jupiter.api.Assertions.fail;
  * Retreive an entity and notation node and remove the first notation from the
  * entity node map and first entity node from the notation map.  Since both these
  * maps are readonly, a NO_MODIFICATION_ALLOWED_ERR should be raised.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-setNamedItemNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-setNamedItemNS</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=259">http://www.w3.org/Bugs/Public/show_bug.cgi?id=259</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=407">http://www.w3.org/Bugs/Public/show_bug.cgi?id=407</a>
@@ -55,7 +53,6 @@ public class Namednodemapremovenameditemns05Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

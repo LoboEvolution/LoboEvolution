@@ -46,8 +46,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Add a L1 element to a L2 namespace aware document and perform namespace normalization.  Should result
  * in an error.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/namespaces-algorithms#normalizeDocumentAlgo">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/namespaces-algorithms#normalizeDocumentAlgo</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-namespaces">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-namespaces</a>
@@ -98,26 +97,26 @@ public class DocumentnormalizeDocument05Test extends LoboUnitTest {
             if (severity == 2) {
                 location = error.getLocation();
                 problemNode = location.getRelatedNode();
-                assertSame( newChild, problemNode, "DocumentnormalizeDocument05Assert1");
+                assertSame(newChild, problemNode, "DocumentnormalizeDocument05Assert1");
                 lineNumber = location.getLineNumber();
-                assertEquals( -1, lineNumber, "DocumentnormalizeDocument05Assert2");
+                assertEquals(-1, lineNumber, "DocumentnormalizeDocument05Assert2");
                 columnNumber = location.getColumnNumber();
-                assertEquals( -1, columnNumber, "DocumentnormalizeDocument05Assert3");
+                assertEquals(-1, columnNumber, "DocumentnormalizeDocument05Assert3");
                 byteOffset = location.getByteOffset();
-                assertEquals( -1, byteOffset, "DocumentnormalizeDocument05Assert4");
+                assertEquals(-1, byteOffset, "DocumentnormalizeDocument05Assert4");
                 utf16Offset = location.getUtf16Offset();
-                assertEquals( -1, utf16Offset, "DocumentnormalizeDocument05Assert5");
+                assertEquals(-1, utf16Offset, "DocumentnormalizeDocument05Assert5");
                 uri = location.getUri();
-                assertNull( uri, "DocumentnormalizeDocument05Assert6");
+                assertNull(uri, "DocumentnormalizeDocument05Assert6");
                 message = error.getMessage();
                 length = message.length();
-                assertTrue( (length > 0), "DocumentnormalizeDocument05Assert7");
+                assertTrue((length > 0), "DocumentnormalizeDocument05Assert7");
                 type = error.getType();
                 relatedData = error.getRelatedData();
                 relatedException = error.getRelatedException();
                 errorCount += 1;
             } else {
-                assertEquals( 1, severity, "DocumentnormalizeDocument05Assert8");
+                assertEquals(1, severity, "DocumentnormalizeDocument05Assert8");
             }
 
         }

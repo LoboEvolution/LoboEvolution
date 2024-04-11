@@ -41,8 +41,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * A notation is accessed, setNodeValue is called with a non-null argument, but getNodeValue
  * should still return null.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-5431D1B9">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-5431D1B9</a>
  */
@@ -50,7 +49,6 @@ public class Hcnodevalue08Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

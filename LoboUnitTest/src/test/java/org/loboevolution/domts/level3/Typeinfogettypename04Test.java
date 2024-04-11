@@ -43,9 +43,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * Invoke getSchemaTypeInfo method on an attribute having [member type definition]property.  Expose
  * {name} and {target namespace} properties of the [member type definition] property.
  * Verify that the typeName of an em element's schemaTypeInfo is correct.
- *
- * @author IBM
- * @author Jenny Hsu
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-typeName">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-typeName</a>
  */
 public class Typeinfogettypename04Test extends LoboUnitTest {

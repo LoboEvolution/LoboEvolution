@@ -45,16 +45,13 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * Import an attribute node to another document.  If an Attr node is imported, its
  * ownerElement attribute should be set to null.  Verify if the ownerElement has been set
  * to null.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#Attr-ownerElement">http://www.w3.org/TR/DOM-Level-2-Core/core#Attr-ownerElement</a>
  */
 public class Attrgetownerelement04Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -67,10 +64,10 @@ public class Attrgetownerelement04Test extends LoboUnitTest {
         final HTMLCollection addresses;
         doc = sampleXmlFile("staffNS.xml");
         docImp = sampleXmlFile("staff.xml");
-        addresses = doc.getElementsByTagName( "address");
+        addresses = doc.getElementsByTagName("address");
         element = (Element) addresses.item(1);
         assertNotNull(element);
-        attr = element.getAttributeNode( "zone");
+        attr = element.getAttributeNode("zone");
         attrImp = (Attr) docImp.importNode(attr, true);
         ownerElement = attrImp.getOwnerElement();
         assertNull(ownerElement);

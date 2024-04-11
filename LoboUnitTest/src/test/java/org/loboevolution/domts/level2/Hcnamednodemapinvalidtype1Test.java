@@ -41,8 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Attempt to insert an element into an attribute list,
  * should raise a HIERARCHY_REQUEST_ERR.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-258A00AF')/constant[@name='HIERARCHY_REQUEST_ERR'])">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#xpointer(id('ID-258A00AF')/constant[@name='HIERARCHY_REQUEST_ERR'])</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1025163788">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1025163788</a>
  * @see <a href="http://www.w3.org/2000/11/DOM-Level-2-errata#core-4">http://www.w3.org/2000/11/DOM-Level-2-errata#core-4</a>

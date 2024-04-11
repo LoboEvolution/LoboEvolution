@@ -45,9 +45,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * isID on the attribute node and getElementById on document node.
  * Call setIdAttributeNS on the same element to reset ID but with a non-existing attribute should generate
  * NOT_FOUND_ERR
- *
- * @author IBM
- * @author Jenny Hsu
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-ElSetIdAttrNS">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-ElSetIdAttrNS</a>
  */
 public class Elementsetidattributens13Test extends LoboUnitTest {

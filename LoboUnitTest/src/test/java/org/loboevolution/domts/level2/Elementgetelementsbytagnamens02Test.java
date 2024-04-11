@@ -33,7 +33,7 @@ import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -42,16 +42,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * of the Document tree.
  * Invoke getElementsByTagNameNS on the documentElement with values for namespaceURI '*' and
  * localName '*'. Verify if this returns a nodeList of 35 elements.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-getElBTNNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-getElBTNNS</a>
  */
 public class Elementgetelementsbytagnamens02Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -61,7 +58,7 @@ public class Elementgetelementsbytagnamens02Test extends LoboUnitTest {
         doc = sampleXmlFile("staffNS.xml");
         element = doc.getDocumentElement();
         elementList = element.getElementsByTagNameNS("*", "*");
-        assertEquals( 35, elementList.getLength());
+        assertEquals(35, elementList.getLength());
     }
 }
 

@@ -16,8 +16,6 @@ package org.htmlunit.cssparser.parser;
 
 /**
  * Lexical unit of css values.
- *
- * @author Ronald Brill
  */
 public interface LexicalUnit {
 

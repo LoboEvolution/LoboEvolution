@@ -17,8 +17,6 @@ package org.htmlunit.cssparser.parser.selector;
 /**
  * <p>GeneralAdjacentSelector class.</p>
  *
- * @author Ronald Brill
- *
  */
 public class GeneralAdjacentSelector extends AbstractSelector {
 

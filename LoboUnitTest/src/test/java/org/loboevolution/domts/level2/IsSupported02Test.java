@@ -47,16 +47,13 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
  * node object on which the "isSupported(feature,version)"
  * method is invoked with "feature" equal to "XML" and version to "9.0".
  * The method should return a boolean "false" since 9.0 is not a valid version.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#Level-2-Core-Node-supports">http://www.w3.org/TR/DOM-Level-2-Core/core#Level-2-Core-Node-supports</a>
  */
 public class IsSupported02Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

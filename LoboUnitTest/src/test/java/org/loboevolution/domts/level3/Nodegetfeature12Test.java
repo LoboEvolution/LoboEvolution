@@ -36,8 +36,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Check implementation of Node.getFeature on Entity.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-getFeature">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-getFeature</a>
  */
 public class Nodegetfeature12Test extends LoboUnitTest {
@@ -60,7 +59,7 @@ public class Nodegetfeature12Test extends LoboUnitTest {
         featureImpl = node.getFeature("Core", nullVersion);
         assertSame(node, featureImpl, "Nodegetfeature12Assert1");
         featureImpl = node.getFeature("cOrE", nullVersion);
-         assertSame(node, featureImpl, "Nodegetfeature12Assert2");
+        assertSame(node, featureImpl, "Nodegetfeature12Assert2");
         featureImpl = node.getFeature("+cOrE", nullVersion);
         assertSame(node, featureImpl, "Nodegetfeature12Assert3");
         featureImpl = node.getFeature("bogus.feature", nullVersion);

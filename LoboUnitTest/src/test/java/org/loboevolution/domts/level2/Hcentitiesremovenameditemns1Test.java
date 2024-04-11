@@ -41,8 +41,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 /**
  * An attempt to add remove an entity using removeNamedItemNS should result in
  * a NO_MODIFICATION_ERR or a NOT_FOUND_ERR.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-1788794630">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-1788794630</a>
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-removeNamedItemNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-removeNamedItemNS</a>
  */
@@ -51,7 +50,6 @@ public class Hcentitiesremovenameditemns1Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

@@ -38,9 +38,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Invoke the adoptNode method on a new document with the notation notation2 as the source.  Since this is
  * read-only verify if a NO_MODIFICATION_ALLOWED_ERR is thrown.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode</a>
  */
 public class Documentadoptnode20Test extends LoboUnitTest {

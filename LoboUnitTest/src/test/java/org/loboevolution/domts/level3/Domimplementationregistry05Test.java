@@ -40,8 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * DOMImplementationRegistry.getDOMImplementation("+cOrE 3.0") should return a DOMImplementation
  * where hasFeature("+Core", "3.0") returns true.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/java-binding">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/java-binding</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/ecma-script-binding">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/ecma-script-binding</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-getDOMImpl">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-getDOMImpl</a>
@@ -49,7 +48,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class Domimplementationregistry05Test extends LoboUnitTest {
     @SneakyThrows
     @Test
-    public void runTest()  {
+    public void runTest() {
         final DOMImplementation domImpl;
         final boolean hasFeature;
         final DOMImplementationRegistry domImplRegistry = DOMImplementationRegistry.newInstance();

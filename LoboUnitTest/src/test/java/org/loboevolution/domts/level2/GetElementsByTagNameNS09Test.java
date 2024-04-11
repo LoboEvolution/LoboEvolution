@@ -33,7 +33,7 @@ import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -48,16 +48,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * Retrieve the FOURTH element whose name should be "employee".
  * Derived from getElementsByTagNameNS02 and reflects its interpretation
  * that namespace="*" matches namespace unqualified tagnames.
- *
- * @author Curt Arnold
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-1938918D">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-1938918D</a>
  */
 public class GetElementsByTagNameNS09Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -70,12 +67,12 @@ public class GetElementsByTagNameNS09Test extends LoboUnitTest {
         doc = sampleXmlFile("staffNS.xml");
         docElem = doc.getDocumentElement();
         newList = docElem.getElementsByTagNameNS("*", "employee");
-        assertEquals( 5, newList.getLength());
+        assertEquals(5, newList.getLength());
         newElement = (Element) newList.item(3);
         prefix = newElement.getPrefix();
         assertEquals("EMP", prefix);
         lname = newElement.getLocalName();
-        assertEquals( "EMPLOYEE", lname);
+        assertEquals("EMPLOYEE", lname);
     }
 }
 

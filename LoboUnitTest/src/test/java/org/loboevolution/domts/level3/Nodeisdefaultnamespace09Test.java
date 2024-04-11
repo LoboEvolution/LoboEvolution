@@ -39,9 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
  * Using isDefaultNamespace on a new Child of a new Element node with a namespace URI
  * and prefix and using the parents namespace URI as an argument, verify if the
  * value returned is false.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isDefaultNamespace">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isDefaultNamespace</a>
  */
 public class Nodeisdefaultnamespace09Test extends LoboUnitTest {

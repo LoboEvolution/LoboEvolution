@@ -42,16 +42,13 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
  * Remove the attribute node using the removeAttributeNodeNS method.
  * Check if the attribute was remove by invoking the hasAttributeNS
  * method on the element and check if it returns false.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElRemAtNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElRemAtNS</a>
  */
 public class Elementremoveattributens01Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

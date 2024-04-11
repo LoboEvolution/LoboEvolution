@@ -37,9 +37,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * Using replaceChild on a DocumentFragment node attempt to replace an Element node with
  * another Element and the replaced element.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307</a>
  */
 public class Nodereplacechild15Test extends LoboUnitTest {
@@ -68,7 +66,7 @@ public class Nodereplacechild15Test extends LoboUnitTest {
         appendedChild = docFrag.appendChild(elem2);
         replaced = (Element) docFrag.replaceChild(elem, elem2);
         title = replaced.getAttribute("title");
-        assertEquals( "new element", title, "Nodereplacechild15Assert2");
+        assertEquals("new element", title, "Nodereplacechild15Assert2");
     }
 }
 

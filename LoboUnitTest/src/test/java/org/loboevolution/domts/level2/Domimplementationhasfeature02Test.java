@@ -29,8 +29,8 @@ package org.loboevolution.domts.level2;
 
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DOMImplementation;
+import org.loboevolution.html.node.Document;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
@@ -41,16 +41,13 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
  * <p>
  * Call the hasFeature method on this DOMImplementation with a unfimiliar values for
  * feature and version.  Check if the value returned was false.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-5CED94D7">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-5CED94D7</a>
  */
 public class Domimplementationhasfeature02Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -58,7 +55,7 @@ public class Domimplementationhasfeature02Test extends LoboUnitTest {
         final DOMImplementation domImpl;
         final boolean success;
         doc = sampleXmlFile("staffNS.xml");
-        
+
         domImpl = doc.getImplementation();
         success = domImpl.hasFeature("Blah Blah", "");
         assertFalse(success);

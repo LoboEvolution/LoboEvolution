@@ -17,8 +17,6 @@ package org.htmlunit.cssparser.parser.selector;
 /**
  * <p>DirectAdjacentSelector class.</p>
  *
- * @author Ronald Brill
- *
  */
 public class DirectAdjacentSelector extends AbstractSelector {
 

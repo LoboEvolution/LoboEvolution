@@ -33,7 +33,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -44,16 +44,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * Retrieve the Processing Instruction node in the XML file
  * and check the string returned by the "getNodeValue()"
  * method.   It should be equal to "PIDATA".
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080</a>
  */
 public class NodeprocessinginstructionnodevalueTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -65,7 +62,7 @@ public class NodeprocessinginstructionnodevalueTest extends LoboUnitTest {
         testList = doc.getChildNodes();
         piNode = testList.item(0);
         piValue = piNode.getNodeValue();
-        assertEquals( "PIDATA", piValue, "NodeprocessinginstructionnodevalueAssert1");
+        assertEquals("PIDATA", piValue, "NodeprocessinginstructionnodevalueAssert1");
     }
 
 }

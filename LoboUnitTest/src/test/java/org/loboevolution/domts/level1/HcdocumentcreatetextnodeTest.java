@@ -32,7 +32,7 @@ import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Text;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -42,15 +42,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * "createTextNode(data)" method.  It should create a
  * new Text node whose "data" is the specified string.
  * The NodeName and NodeType are also checked.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1975348127">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1975348127</a>
  */
 public class HcdocumentcreatetextnodeTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -62,7 +60,7 @@ public class HcdocumentcreatetextnodeTest extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         newTextNode = doc.createTextNode("This is a new Text node");
         newTextValue = newTextNode.getNodeValue();
-        assertEquals( "This is a new Text node", newTextValue, "HcdocumentcreatetextnodeAssert1");
+        assertEquals("This is a new Text node", newTextValue, "HcdocumentcreatetextnodeAssert1");
         newTextName = newTextNode.getNodeName();
         assertEquals("#text", newTextName, "HcdocumentcreatetextnodeAssert2");
         newTextType = newTextNode.getNodeType();

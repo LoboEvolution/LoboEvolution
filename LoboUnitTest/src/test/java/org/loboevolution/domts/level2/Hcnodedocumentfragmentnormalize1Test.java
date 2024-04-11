@@ -34,14 +34,14 @@ import org.loboevolution.html.node.DocumentFragment;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.Text;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 /**
  * Create a document fragment with two adjacent text nodes, normalize and see if the text nodes
  * were combined.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-F68D095">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-F68D095</a>
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-B63ED1A3">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-B63ED1A3</a>
  */
@@ -49,7 +49,6 @@ public class Hcnodedocumentfragmentnormalize1Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -67,7 +66,7 @@ public class Hcnodedocumentfragmentnormalize1Test extends LoboUnitTest {
         docFragment.normalize();
         txtNode = (Text) docFragment.getFirstChild();
         nodeValue = txtNode.getNodeValue();
-        assertEquals( "foobar", nodeValue);
+        assertEquals("foobar", nodeValue);
         retval = txtNode.getNextSibling();
         assertNull(retval);
     }

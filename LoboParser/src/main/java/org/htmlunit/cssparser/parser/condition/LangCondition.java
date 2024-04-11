@@ -20,8 +20,6 @@ import org.htmlunit.cssparser.parser.AbstractLocatable;
 import org.htmlunit.cssparser.parser.Locator;
 
 /**
- *
- * @author Ronald Brill
  */
 public class LangCondition extends AbstractLocatable implements Condition, Serializable {
 

@@ -45,9 +45,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * discard all Text nodes that contain whitespaces in element content, as described in [element content whitespace].
  * Check to see if this feature can be set to false by invoking canSetParameter method.  Verify that the text node
  * still exist after invoking canSetParameter.
- *
- * @author IBM
- * @author Jenny Hsu
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration</a>
  */
 public class Domconfigurationcansetparameter06Test extends LoboUnitTest {

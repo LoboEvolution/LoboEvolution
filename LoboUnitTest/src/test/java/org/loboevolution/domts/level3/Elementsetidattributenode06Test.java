@@ -42,9 +42,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Invoke setIdAttributeNode on the third strong element but with the title attribute of the acronym
  * element as a parameter.  Verify that NOT_FOUND_ERR is raised.
- *
- * @author IBM
- * @author Jenny Hsu
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-ElSetIdAttrNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-ElSetIdAttrNode</a>
  */
 public class Elementsetidattributenode06Test extends LoboUnitTest {

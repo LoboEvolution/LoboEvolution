@@ -36,9 +36,6 @@ import java.awt.*;
 
 /**
  * <p>ImageRenderState class.</p>
- *
- *
- *
  */
 public class ImageRenderState extends StyleSheetRenderState {
 	/**

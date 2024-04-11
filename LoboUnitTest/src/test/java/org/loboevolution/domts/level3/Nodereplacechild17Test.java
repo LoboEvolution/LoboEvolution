@@ -29,7 +29,10 @@ package org.loboevolution.domts.level3;
 
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.node.*;
+import org.loboevolution.html.node.Comment;
+import org.loboevolution.html.node.Document;
+import org.loboevolution.html.node.DocumentFragment;
+import org.loboevolution.html.node.ProcessingInstruction;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -37,9 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * Using replaceChild on a DocumentFragment node attempt to replace a Comment node with
  * a ProcessingInstruction and vice versa verify the data of the replaced nodes.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307</a>
  */
 public class Nodereplacechild17Test extends LoboUnitTest {
@@ -61,10 +62,10 @@ public class Nodereplacechild17Test extends LoboUnitTest {
         docFrag.appendChild(cmt);
         replacedCmt = (Comment) docFrag.replaceChild(pi, cmt);
         data = replacedCmt.getData();
-        assertEquals( "Comment", data, "Nodereplacechild17Assert2");
+        assertEquals("Comment", data, "Nodereplacechild17Assert2");
         replacedPi = (ProcessingInstruction) docFrag.replaceChild(cmt, pi);
         target = replacedPi.getTarget();
-        assertEquals( "target", target, "Nodereplacechild17Assert3");
+        assertEquals("target", target, "Nodereplacechild17Assert3");
     }
 }
 

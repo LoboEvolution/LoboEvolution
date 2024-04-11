@@ -22,8 +22,6 @@ import org.htmlunit.cssparser.parser.AbstractLocatable;
 /**
  * Implementation of MediaQueryList.
  *
- * @author Ronald Brill
- *
  */
 public class MediaQueryList extends AbstractLocatable {
 

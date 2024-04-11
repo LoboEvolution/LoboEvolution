@@ -48,16 +48,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * of the LAST node can contain either "domestic" or "street".
  * The test should return "true" if the LAST node is either
  * of these values.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-349467F9">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-349467F9</a>
  */
 public class NamednodemapreturnlastitemTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -73,7 +70,7 @@ public class NamednodemapreturnlastitemTest extends LoboUnitTest {
         attributes = testEmployee.getAttributes();
         child = attributes.item(1);
         name = child.getNodeName();
-        assertTrue(("domestic".equals(name) | "street".equals(name)) , "NamednodemapreturnlastitemAssert2");
+        assertTrue(("domestic".equals(name) | "street".equals(name)), "NamednodemapreturnlastitemAssert2");
     }
 }
 

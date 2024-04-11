@@ -43,9 +43,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * <p>
  * Invoke the first item on the list of parameters returned by the DOMConfiguration object and
  * make sure it is not null.  Then invoke the 100th item and verify that null is returned.
- *
- * @author IBM
- * @author Jenny Hsu
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMStringList-item">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMStringList-item</a>
  */
 public class Domstringlistitem02Test extends LoboUnitTest {

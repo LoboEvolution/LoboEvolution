@@ -40,9 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * Using setTextContent on a new Attr node with a null value, attempt to set its value to NA.  Retreive
  * the textContent and verify if it is was set to NA.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-textContent">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-textContent</a>
  */
 public class Nodesettextcontent06Test extends LoboUnitTest {

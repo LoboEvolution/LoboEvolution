@@ -42,9 +42,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Using insertBefore on a DocumentFragment node attempt to insert a new Element node
  * created by another Document, before this DocumentFragment's Element node and
  * verify if a WRONG_DOCUMENT_ERR is raised.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-952280727">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-952280727</a>
  */
 public class Nodeinsertbefore13Test extends LoboUnitTest {

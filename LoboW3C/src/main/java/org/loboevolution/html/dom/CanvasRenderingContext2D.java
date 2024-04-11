@@ -29,9 +29,6 @@ import java.awt.Font;
 
 /**
  * The public interface CanvasRenderingContext2D.
- *
- *
- *
  */
 public interface CanvasRenderingContext2D extends CanvasRenderingContext {
 

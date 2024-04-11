@@ -42,9 +42,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * First use setAttribute to create a new attribute on the third strong element.  Invoke setIdAttribute
  * on the new  attribute. Verify by calling isID on the new attribute and getElementById on document.
  * Invoke setIdAttribute again to reset. Calling isID should return false.
- *
- * @author IBM
- * @author Jenny Hsu
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-ElSetIdAttr">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-ElSetIdAttr</a>
  */
 public class Elementsetidattribute04Test extends LoboUnitTest {

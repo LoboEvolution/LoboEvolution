@@ -31,7 +31,8 @@ import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.*;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 /**
@@ -43,16 +44,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * Create a dom tree consisting of elements, comments, processing instructions, CDATA sections,
  * and entity references nodes seperated by text nodes.  Check the length of the node list of each
  * before and after normalize has been called.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-normalize">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-normalize</a>
  */
 public class Nodenormalize01Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -78,7 +76,7 @@ public class Nodenormalize01Test extends LoboUnitTest {
         EntityReference entRef;
         NodeList elementList;
         doc = sampleXmlFile("staffNS.xml");
-        
+
         domImpl = doc.getImplementation();
         newDoc = domImpl.createDocument("http://www.w3.org/DOM/Test", "dom:root", docTypeNull);
         element1 = newDoc.createElement("element1");
@@ -148,12 +146,12 @@ public class Nodenormalize01Test extends LoboUnitTest {
         elementList = element6.getChildNodes();
         assertEquals(3, elementList.getLength());
         elementList = element7.getChildNodes();
-        assertEquals( 4, elementList.getLength());
+        assertEquals(4, elementList.getLength());
         newDoc.normalize();
         elementList = element1.getChildNodes();
         assertEquals(6, elementList.getLength());
         elementList = element2.getChildNodes();
-        assertEquals(  1, elementList.getLength());
+        assertEquals(1, elementList.getLength());
         elementList = element3.getChildNodes();
         assertEquals(2, elementList.getLength());
         elementList = element4.getChildNodes();

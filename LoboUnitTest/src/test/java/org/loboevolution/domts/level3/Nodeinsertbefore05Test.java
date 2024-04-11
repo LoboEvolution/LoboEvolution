@@ -41,9 +41,7 @@ import static org.junit.jupiter.api.Assertions.fail;
  * Attempt to insert a second DocumentType node in a document using Node.insertBefore,
  * should raise either DOMException with either a HIERARCHY_REQUEST_ERR
  * or NOT_SUPPORTED_ERR code.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-952280727">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-952280727</a>
  */
 public class Nodeinsertbefore05Test extends LoboUnitTest {

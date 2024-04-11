@@ -34,23 +34,20 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
  * Create a list of all the children elements of the third
  * employee and access its first child by using an index
  * of 0.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-844377136">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-844377136</a>
  */
 public class NodelistindexequalzeroTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -68,7 +65,7 @@ public class NodelistindexequalzeroTest extends LoboUnitTest {
         childName = child.getNodeName();
 
         if (!"#text".equals(childName)) {
-            assertEquals( "EMPLOYEEID", childName, "NodelistindexequalzeroAssert1");
+            assertEquals("EMPLOYEEID", childName, "NodelistindexequalzeroAssert1");
         }
     }
 

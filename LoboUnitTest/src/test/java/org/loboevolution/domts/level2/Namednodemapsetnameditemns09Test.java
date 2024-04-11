@@ -44,9 +44,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * <p>
  * Create a new attribute node and attempt to add it to the nodemap of entities and notations
  * for this documenttype.  This should reaise a NO_MODIFICATION_ALLOWED_ERR.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-setNamedItemNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-setNamedItemNS</a>
  */
 public class Namednodemapsetnameditemns09Test extends LoboUnitTest {

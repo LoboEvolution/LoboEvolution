@@ -32,7 +32,7 @@ import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -43,16 +43,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * Invoke method getElementsByTagNameNS(namespaceURI,localName) on this document
  * with namespaceURI and localName as " ".
  * Method should return a new NodeList of 36 elements.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-getElBTNNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-getElBTNNS</a>
  */
 public class GetElementsByTagNameNS01Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -62,7 +59,7 @@ public class GetElementsByTagNameNS01Test extends LoboUnitTest {
         final HTMLCollection newList;
         doc = sampleXmlFile("staffNS.xml");
         newList = doc.getElementsByTagNameNS(namespaceURI, localName);
-        assertEquals( 36, newList.getLength());
+        assertEquals(36, newList.getLength());
     }
 }
 

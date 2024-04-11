@@ -30,8 +30,8 @@ package org.loboevolution.domts.level2;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DOMImplementation;
+import org.loboevolution.html.node.Document;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,9 +48,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * this domimplementation with qualifiedName containing an illegal character
  * from illegalChars[]. Method should raise INVALID_CHARACTER_ERR
  * DOMException for all characters in illegalChars[].
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#Level-2-Core-DOM-createDocType">http://www.w3.org/TR/DOM-Level-2-Core/core#Level-2-Core-DOM-createDocType</a>
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#xpointer(id('Level-2-Core-DOM-createDocType')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='INVALID_CHARACTER_ERR'])">http://www.w3.org/TR/DOM-Level-2-Core/core#xpointer(id('Level-2-Core-DOM-createDocType')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='INVALID_CHARACTER_ERR'])</a>
  */
@@ -58,7 +56,6 @@ public class CreateDocumentType02Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -97,7 +94,7 @@ public class CreateDocumentType02Test extends LoboUnitTest {
         illegalQNames.add("edi:\"");
 
         doc = sampleXmlFile("staffNS.xml");
-        
+
         for (final String qualifiedName : illegalQNames) {
             domImpl = doc.getImplementation();
             boolean success = false;

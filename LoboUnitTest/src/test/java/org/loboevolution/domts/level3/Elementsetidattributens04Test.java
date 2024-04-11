@@ -45,9 +45,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * Invoke setIdAttributeNS on newly added attribute on the third strong element.  Verify by calling
  * isID on the attribute node and getElementById on document node.
  * Call setIdAttributeNS with isId=false to reset. Method isId should now return false.
- *
- * @author IBM
- * @author Jenny Hsu
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-ElSetIdAttrNS">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-ElSetIdAttrNS</a>
  */
 public class Elementsetidattributens04Test extends LoboUnitTest {

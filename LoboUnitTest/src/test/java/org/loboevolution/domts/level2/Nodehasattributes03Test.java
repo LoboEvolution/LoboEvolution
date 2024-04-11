@@ -40,16 +40,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * The method hasAttributes returns whether this node (if it is an element) has any attributes.
  * Retreive an element node with a default attributes.  Verify if hasAttributes returns true.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeHasAttrs">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeHasAttrs</a>
  */
 public class Nodehasattributes03Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

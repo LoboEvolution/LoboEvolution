@@ -32,21 +32,19 @@ import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
  * Load a document and invoke its
  * "getDocumentElement()" method.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-87CD092">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-87CD092</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=251">http://www.w3.org/Bugs/Public/show_bug.cgi?id=251</a>
  */
 public class HcdocumentgetrootnodeTest extends LoboUnitTest {
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

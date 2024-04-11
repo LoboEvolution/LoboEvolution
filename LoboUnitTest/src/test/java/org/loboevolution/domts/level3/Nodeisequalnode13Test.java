@@ -44,9 +44,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Document with deep=false.  Using isEqualNode check if the original and the imported
  * Element Node are not equal.  Now import it once more with deep=true and using isEqual
  * verify if they are now equal.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isEqualNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isEqualNode</a>
  */
 public class Nodeisequalnode13Test extends LoboUnitTest {

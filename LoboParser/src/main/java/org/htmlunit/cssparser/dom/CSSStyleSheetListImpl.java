@@ -23,8 +23,6 @@ import org.htmlunit.cssparser.util.ParserUtils;
 /**
  * Implementation of StyleSheetList.
  *
- * @author Ronald Brill
- *
  */
 public class CSSStyleSheetListImpl {
     private List<CSSStyleSheetImpl> cssStyleSheets_;

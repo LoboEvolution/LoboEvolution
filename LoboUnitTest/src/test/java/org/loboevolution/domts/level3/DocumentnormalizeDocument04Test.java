@@ -39,9 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Append a Comment node and normalize with "comments" set to false.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=416">http://www.w3.org/Bugs/Public/show_bug.cgi?id=416</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-comments">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-comments</a>
@@ -75,10 +73,10 @@ public class DocumentnormalizeDocument04Test extends LoboUnitTest {
         elem = (Element) pList.item(0);
         lastChild = elem.getLastChild();
         nodeName = lastChild.getNodeName();
-        assertEquals( "#comment", nodeName, "DocumentnormalizeDocument04Assert4");
+        assertEquals("#comment", nodeName, "DocumentnormalizeDocument04Assert4");
         domConfig.setParameter("comments", Boolean.FALSE);
         doc.normalizeDocument();
-        assertTrue( errorMonitor.assertLowerSeverity(2), "DocumentnormalizeDocument04Assert5");
+        assertTrue(errorMonitor.assertLowerSeverity(2), "DocumentnormalizeDocument04Assert5");
         pList = doc.getElementsByTagName("p");
         elem = (Element) pList.item(0);
         lastChild = elem.getLastChild();

@@ -34,7 +34,8 @@ import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 /**
@@ -44,15 +45,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * Retrieve the last child of the third employee and
  * remove its "class" Attr node.  The method should
  * return the old attribute node.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-D589198">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-D589198</a>
  */
 public class HcelementremoveattributenodeTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -67,7 +66,7 @@ public class HcelementremoveattributenodeTest extends LoboUnitTest {
         testEmployee = (Element) elementList.item(2);
         streetAttr = testEmployee.getAttributeNode("class");
         removedAttr = testEmployee.removeAttributeNode(streetAttr);
-        assertNotNull( removedAttr, "HcelementremoveattributenodeAssert1");
+        assertNotNull(removedAttr, "HcelementremoveattributenodeAssert1");
         removedValue = removedAttr.getValue();
         assertEquals("No", removedValue, "HcelementremoveattributenodeAssert2");
     }

@@ -45,16 +45,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * <p>
  * Retreive an attribute node into a namednodemap.  While removing it from the map specify
  * an incorrect namespaceURI.  This should raise a NOT_FOUND_ERR.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-D58B193">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-D58B193</a>
  */
 public class Namednodemapremovenameditemns06Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

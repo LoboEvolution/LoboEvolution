@@ -35,7 +35,8 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 /**
@@ -48,9 +49,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * element node which is retreived by its elementId="CANADA", into the another document.
  * Check the parentNode, nodeName, nodeType and nodeValue of the imported node to
  * verify if it has been imported correctly.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core">http://www.w3.org/TR/DOM-Level-2-Core/core</a>
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#Core-Document-importNode">http://www.w3.org/TR/DOM-Level-2-Core/core#Core-Document-importNode</a>
  */
@@ -58,7 +57,6 @@ public class Documentimportnode02Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -74,9 +72,9 @@ public class Documentimportnode02Test extends LoboUnitTest {
         final Node attrsParent;
         doc = sampleXmlFile("staffNS.xml");
         docImported = sampleXmlFile("staff.xml");
-        addresses = doc.getElementsByTagName( "address");
+        addresses = doc.getElementsByTagName("address");
         element = (Element) addresses.item(1);
-        attr = element.getAttributeNode( "zone");
+        attr = element.getAttributeNode("zone");
         importedAttr = docImported.importNode(attr, false);
         nodeName = importedAttr.getNodeName();
         nodeType = importedAttr.getNodeType();

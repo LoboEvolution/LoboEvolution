@@ -37,9 +37,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Retreive the documentURI of a document for which standalone was specified as "yes", this
  * should return true.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-standalone">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-standalone</a>
  */
 public class Documentgetxmlstandalone04Test extends LoboUnitTest {

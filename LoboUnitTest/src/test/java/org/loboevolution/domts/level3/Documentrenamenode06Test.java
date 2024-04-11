@@ -42,9 +42,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * Invoke the renameNode method to rename the default attribute "dir" to xsi:schemaLocation.
  * Check if this attribute has been renamed successfully by verifying the
  * nodeName, namespaceURI, nodeType attributes of the renamed node.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-renameNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-renameNode</a>
  */
 public class Documentrenamenode06Test extends LoboUnitTest {

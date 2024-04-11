@@ -39,9 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 /**
  * Invoke lookupPrefix on a new Attribute node with with a namespace URI
  * and prefix and verify if the prefix returned is null.
- *
- * @author IBM
- * @author Jenny Hsu
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-lookupNamespacePrefix">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-lookupNamespacePrefix</a>
  */
 public class Nodelookupprefix16Test extends LoboUnitTest {

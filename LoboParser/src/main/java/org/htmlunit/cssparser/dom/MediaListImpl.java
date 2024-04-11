@@ -30,8 +30,6 @@ import org.htmlunit.cssparser.util.ThrowCssExceptionErrorHandler;
 /**
  * Implementation of MediaList.
  *
- * @author Ronald Brill
- *
  */
 public class MediaListImpl extends AbstractLocatable implements Serializable {
 

@@ -47,9 +47,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * descendants that are not EntityReference, Text, or CDATASection nodes, the replaceWholeText
  * method must fail, raising a NO_MODIFICATION_ALLOWED_ERR. Verify that the method does not raise
  * an exception and verify the content of the returned text node.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Text3-replaceWholeText">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Text3-replaceWholeText</a>
  */
 public class Textreplacewholetext06Test extends LoboUnitTest {

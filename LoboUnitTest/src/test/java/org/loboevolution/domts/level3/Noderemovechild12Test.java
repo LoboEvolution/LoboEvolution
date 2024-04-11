@@ -42,9 +42,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * Using removeChild on a new DocumentFragment node attempt to remove a new EntityReference node.
  * Also attempt to remove the document fragment node from the EntityReference.  Verify that a
  * NO_MODIFICATION_ALLOWED_ERR (EntityReference node is read-only) or a NOT_FOUND_ERR is thrown.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-1734834066">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-1734834066</a>
  */
 public class Noderemovechild12Test extends LoboUnitTest {

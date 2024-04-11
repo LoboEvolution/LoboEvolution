@@ -26,49 +26,55 @@
 package org.loboevolution.css;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.loboevolution.annotation.Alerts;
+import org.loboevolution.annotation.AlertsExtension;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.js.css.MediaQueryListImpl;
 
 /**
- * Tests for {@link MediaQueryListImpl}.
+ * Tests for {@link MediaQueryList}.
  */
+@ExtendWith(AlertsExtension.class)
 public class MediaQueryListTest extends LoboUnitTest {
 
+
     @Test
+    @Alerts("true")
     public void matches() {
         final String html
-                = "<html><head><script>\n"
-                + "  function test() {\n"
+                = "<html><head>\n"
+                + "<script>\n"                + "  function test() {\n"
                 + "    if (window.matchMedia) {\n"
-                + "      alert(window.matchMedia('(min-width: 400px)').matches);\n"
+                + "     alert(window.matchMedia('(min-width: 400px)').matches);\n"
                 + "    }\n"
                 + "  }\n"
                 + "</script></head><body onload='test()'>\n"
                 + "</body></html>";
-        final String[] messages = {"true"};
-        checkHtmlAlert(html, messages);
+
+        checkHtmlAlert(html);
     }
 
-
     @Test
+    @Alerts({"added", "removed"})
     public void listener() {
         final String html
-                = "<html><head><script>\n"
-                + "  function listener(mql) {\n"
-                + "    alert(mql);\n"
+                = "<html><head>\n"
+                + "<script>\n"                + "  function listener(mql) {\n"
+                + "   alert(mql);\n"
                 + "  }\n"
+
                 + "  function test() {\n"
                 + "    if (window.matchMedia) {\n"
                 + "      var mql = window.matchMedia('(min-width: 400px)');\n"
                 + "      mql.addListener(listener);\n"
-                + "      alert('added');\n"
+                + "     alert('added');\n"
                 + "      mql.removeListener(listener);\n"
-                + "      alert('removed');\n"
+                + "     alert('removed');\n"
                 + "    }\n"
                 + "  }\n"
                 + "</script></head><body onload='test()'>\n"
                 + "</body></html>";
-        final String[] messages = {"added", "removed"};
-        checkHtmlAlert(html, messages);
+
+        checkHtmlAlert(html);
     }
 }

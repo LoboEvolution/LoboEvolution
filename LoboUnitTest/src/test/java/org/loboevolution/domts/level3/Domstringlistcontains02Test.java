@@ -44,9 +44,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * DOMConfiguration object.
  * Verify that the list contains features that are required and supported by this DOMConfiguration object.
  * Verify that the contains method returns false for a string that is not contained in this DOMStringList.
- *
- * @author IBM
- * @author Jenny Hsu
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMStringList-contains">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMStringList-contains</a>
  */
 public class Domstringlistcontains02Test extends LoboUnitTest {

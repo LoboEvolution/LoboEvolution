@@ -44,16 +44,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Retrieve the first "address" element.
  * The boolean value returned by the "hasAttributeNS()" should be true
  * since the attribute has a default value.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElHasAttrNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElHasAttrNS</a>
  */
 public class HasAttributeNS04Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

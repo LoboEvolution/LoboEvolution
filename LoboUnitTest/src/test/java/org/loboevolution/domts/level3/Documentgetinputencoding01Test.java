@@ -37,9 +37,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * Call the getInputEncoding method on a UTF-8 encoded document and check if the
  * value returned is UTF-8.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-inputEncoding">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-inputEncoding</a>
  */
 public class Documentgetinputencoding01Test extends LoboUnitTest {

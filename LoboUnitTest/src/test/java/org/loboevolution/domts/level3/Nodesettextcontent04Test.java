@@ -40,9 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 /**
  * Using setTextContent on this DocumentType node, attempt to set the textContent of a
  * Notation node to textContent.  Retreive the textContent and verify if it is null.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-textContent">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-textContent</a>
  */
 public class Nodesettextcontent04Test extends LoboUnitTest {

@@ -21,8 +21,6 @@ import org.htmlunit.cssparser.parser.AbstractLocatable;
 /**
  * <p>Abstract AbstractCSSRuleImpl class.</p>
  *
- * @author Ronald Brill
- *
  */
 public abstract class AbstractCSSRuleImpl extends AbstractLocatable implements Serializable {
 

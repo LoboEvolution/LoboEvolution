@@ -30,7 +30,10 @@ package org.loboevolution.domts.level3;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.node.*;
+import org.loboevolution.html.node.DOMImplementation;
+import org.loboevolution.html.node.Document;
+import org.loboevolution.html.node.DocumentType;
+import org.loboevolution.html.node.Element;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,9 +48,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Invoke the renameNode method on a new document node to rename a node to nodes
  * with malformed qualifiedNames.
  * Check if a NAMESPACE_ERR gets thrown.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-renameNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-renameNode</a>
  */
 public class Documentrenamenode19Test extends LoboUnitTest {

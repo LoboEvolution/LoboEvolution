@@ -32,7 +32,7 @@ import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -46,8 +46,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * that are retrieved.
  * Modified on 27 June 2003 to avoid setting an invalid style
  * values and checked the node names to see if they matched expectations.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-2141741547">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-2141741547</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=243">http://www.w3.org/Bugs/Public/show_bug.cgi?id=243</a>
  */
@@ -55,7 +54,6 @@ public class HcdocumentcreateelementcasesensitiveTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -73,12 +71,12 @@ public class HcdocumentcreateelementcasesensitiveTest extends LoboUnitTest {
         newElement2.setAttribute("title", "Dallas");
         attribute1 = newElement1.getAttribute("lang");
         attribute2 = newElement2.getAttribute("title");
-        assertEquals( "EN", attribute1, "HcdocumentcreateelementcasesensitiveAssert1");
-        assertEquals( "Dallas", attribute2, "HcdocumentcreateelementcasesensitiveAssert2");
+        assertEquals("EN", attribute1, "HcdocumentcreateelementcasesensitiveAssert1");
+        assertEquals("Dallas", attribute2, "HcdocumentcreateelementcasesensitiveAssert2");
         nodeName1 = newElement1.getNodeName();
         nodeName2 = newElement2.getNodeName();
         assertEquals("ACRONYM", nodeName1, "HcdocumentcreateelementcasesensitiveAssert3");
-        assertEquals( "ACRONYM", nodeName2, "HcdocumentcreateelementcasesensitiveAssert4");
+        assertEquals("ACRONYM", nodeName2, "HcdocumentcreateelementcasesensitiveAssert4");
     }
 }
 

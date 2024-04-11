@@ -47,16 +47,13 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * Attr node, the "value" can be examined to ensure the
  * proper attribute node was retrieved.  This attribute
  * value should be null since there is no such attribute.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElGetAtNodeNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElGetAtNodeNS</a>
  */
 public class GetAttributeNodeNS01Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

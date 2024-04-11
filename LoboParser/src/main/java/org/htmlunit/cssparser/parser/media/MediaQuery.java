@@ -24,8 +24,6 @@ import org.htmlunit.cssparser.parser.AbstractLocatable;
 /**
  * <p>MediaQuery class.</p>
  *
- * @author Ronald Brill
- *
  */
 public class MediaQuery extends AbstractLocatable implements Serializable {
 

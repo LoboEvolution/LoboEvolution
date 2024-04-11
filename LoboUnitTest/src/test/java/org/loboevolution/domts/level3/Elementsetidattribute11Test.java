@@ -42,9 +42,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * Invoke setIdAttribute on the 4th acronym element's class attribute which contains
  * an entity reference.  Verify by calling isID on the class attribute and getElementById
  * on document. Invoke setIdAttribute again to reset.  Calling isID should return false.
- *
- * @author IBM
- * @author Jenny Hsu
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-ElSetIdAttr">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-ElSetIdAttr</a>
  */
 public class Elementsetidattribute11Test extends LoboUnitTest {

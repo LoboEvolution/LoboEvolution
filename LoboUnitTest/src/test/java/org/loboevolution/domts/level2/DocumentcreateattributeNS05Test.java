@@ -30,8 +30,8 @@ package org.loboevolution.domts.level2;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DOMImplementation;
+import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -43,9 +43,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * <p>
  * Invoke the createAttributeNS method on a new Document object with a null value for
  * namespaceURI, and a valid qualifiedName.  Check if a NAMESPACE_ERR is thrown.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core">http://www.w3.org/TR/DOM-Level-2-Core/core</a>
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-DocCrAttrNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-DocCrAttrNS</a>
  */
@@ -53,7 +51,6 @@ public class DocumentcreateattributeNS05Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -66,7 +63,7 @@ public class DocumentcreateattributeNS05Test extends LoboUnitTest {
 
         final String qualifiedName = "abc:def";
         doc = sampleXmlFile("staffNS.xml");
-        
+
         domImpl = doc.getImplementation();
         newDoc = domImpl.createDocument("http://www.w3.org/DOM/Test", "dom:doc", docType);
 

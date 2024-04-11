@@ -41,9 +41,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Invoke setIdAttribute on the third acronym element's class attribute consecutively with different
  * isId values. Verify by calling isId on the attribute.
- *
- * @author IBM
- * @author Jenny Hsu
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-ElSetIdAttr">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-ElSetIdAttr</a>
  */
 public class Elementsetidattribute10Test extends LoboUnitTest {

@@ -38,9 +38,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * Invoke the adoptNode method on this document using a new PI node created in a new doc
  * as the source.  Verify if the node has been adopted correctly by checking the nodeValue
  * of the adopted node.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode</a>
  */
 public class Documentadoptnode35Test extends LoboUnitTest {
@@ -70,8 +68,8 @@ public class Documentadoptnode35Test extends LoboUnitTest {
         if ((adoptedPI != null)) {
             piTarget = adoptedPI.getTarget();
             piData = adoptedPI.getData();
-            assertEquals( "PITarget", piTarget, "Documentadoptnode35Assert2");
-            assertEquals( "PIData", piData, "Documentadoptnode35Assert3");
+            assertEquals("PITarget", piTarget, "Documentadoptnode35Assert2");
+            assertEquals("PIData", piData, "Documentadoptnode35Assert3");
         }
     }
 }

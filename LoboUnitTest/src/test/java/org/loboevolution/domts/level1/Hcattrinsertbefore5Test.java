@@ -39,8 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Attempt to append a CDATASection to an attribute which should result
  * in a HIERARCHY_REQUEST_ERR.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-637646024">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-637646024</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-952280727">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-952280727</a>
  */
@@ -48,7 +47,6 @@ public class Hcattrinsertbefore5Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

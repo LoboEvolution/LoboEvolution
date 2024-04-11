@@ -41,9 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * <p>
  * Get the DOMConfiguration object of a document and verify that the default required features are set
  * to true.
- *
- * @author IBM
- * @author Jenny Hsu
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration-getParameter">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration-getParameter</a>
  */
 public class Domconfigurationgetparameter01Test extends LoboUnitTest {

@@ -38,9 +38,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Get the newline between the "body" and "p" element.  Since node is both in element content
  * and whitespace, isElementContentWhitespace should return true.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Text3-isElementContentWhitespace">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Text3-isElementContentWhitespace</a>
  */
 public class Textiselementcontentwhitespace03Test extends LoboUnitTest {

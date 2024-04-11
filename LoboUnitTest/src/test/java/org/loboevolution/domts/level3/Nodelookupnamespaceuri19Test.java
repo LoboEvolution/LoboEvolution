@@ -41,27 +41,25 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * Invoke lookupNamespaceURI on the an attribute node without a namespace prefix of
  * an Element node that has a namespaceURI and prefix, and check if the value of the namespaceURI
  * returned by using the Elements prefix as a parameter is valid.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-lookupNamespaceURI">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-lookupNamespaceURI</a>
  */
 public class Nodelookupnamespaceuri19Test extends LoboUnitTest {
-@Test
-public void runTest(){
+    @Test
+    public void runTest() {
         final Document doc;
         final Element elem;
         final HTMLCollection elemList;
         final NamedNodeMap attributesMap;
         final Attr attr;
         final String namespaceURI;
-        doc=sampleXmlFile("hc_staff.xml");
-        elemList=doc.getElementsByTagName("acronym");
-        elem=(Element)elemList.item(3);
-        attributesMap=elem.getAttributes();
-        attr=(Attr)attributesMap.getNamedItem("class");
-        namespaceURI=attr.lookupNamespaceURI("xsi");
-        assertEquals("http://www.w3.org/2001/XMLSchema-instance",namespaceURI, "Nodelookupnamespaceuri19Assert2");
-        }
-        }
+        doc = sampleXmlFile("hc_staff.xml");
+        elemList = doc.getElementsByTagName("acronym");
+        elem = (Element) elemList.item(3);
+        attributesMap = elem.getAttributes();
+        attr = (Attr) attributesMap.getNamedItem("class");
+        namespaceURI = attr.lookupNamespaceURI("xsi");
+        assertEquals("http://www.w3.org/2001/XMLSchema-instance", namespaceURI, "Nodelookupnamespaceuri19Assert2");
+    }
+}
 

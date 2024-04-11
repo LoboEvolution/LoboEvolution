@@ -28,8 +28,8 @@ package org.loboevolution.domts.level3;
 
 
 import org.junit.jupiter.api.Test;
-import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.driver.LoboUnitTest;
+import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.html.dom.nodeimpl.DOMImplementationImpl;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.http.UserAgentContext;
@@ -39,8 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * DOMImplementation.hasFeature("XML", "3.0") should return true.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-5CED94D7">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-5CED94D7</a>
  */
 public class HasFeature03Test extends LoboUnitTest {

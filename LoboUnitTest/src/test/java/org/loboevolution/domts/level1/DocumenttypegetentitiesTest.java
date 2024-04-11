@@ -35,10 +35,10 @@ import org.loboevolution.html.node.NamedNodeMap;
 import org.loboevolution.html.node.Node;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 /**
@@ -49,16 +49,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * a NamedNodeMap of all its entities.  The entire map is
  * traversed and the names of the entities are retrieved.
  * There should be 5 entities.  Duplicates should be ignored.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1788794630">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1788794630</a>
  */
 public class DocumenttypegetentitiesTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

@@ -41,16 +41,13 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 /**
  * The "getAttributes()" method invoked on an Entity
  * Node returns null.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-84CF096">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-84CF096</a>
  */
 public class NodeentitynodeattributesTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

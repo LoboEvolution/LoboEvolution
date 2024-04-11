@@ -34,23 +34,21 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.html.node.NamedNodeMap;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 /**
  * Retrieve the notation named "notation1" and access its
  * public identifier.  The string "notation1File" should be
  * returned.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-54F2B4D0">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-54F2B4D0</a>
  */
 public class NotationgetpublicidTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -66,7 +64,7 @@ public class NotationgetpublicidTest extends LoboUnitTest {
         assertNotNull(notations, "NotationgetpublicidAssert2");
         notationNode = (Notation) notations.getNamedItem("notation1");
         publicId = notationNode.getPublicId();
-        assertEquals( "notation1File", publicId, "NotationgetpublicidAssert3");
+        assertEquals("notation1File", publicId, "NotationgetpublicidAssert3");
     }
 
 }

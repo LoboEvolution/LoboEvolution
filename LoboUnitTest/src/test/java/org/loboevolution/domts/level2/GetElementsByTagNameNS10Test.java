@@ -37,7 +37,7 @@ import org.loboevolution.html.node.Node;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -51,16 +51,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * The method should return a NodeList of elements that have "http://www.nist.gov
  * as a namespace URI.
  * Derived from getElementsByTagNameNS03
- *
- * @author Curt Arnold
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-1938918D">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-1938918D</a>
  */
 public class GetElementsByTagNameNS10Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -110,7 +107,7 @@ public class GetElementsByTagNameNS10Test extends LoboUnitTest {
 
         doc = sampleXmlFile("staffNS.xml");
         docElem = doc.getDocumentElement();
-        elementList = docElem.getElementsByTagName( "*");
+        elementList = docElem.getElementsByTagName("*");
         for (int indexN1007E = 0; indexN1007E < elementList.getLength(); indexN1007E++) {
             child = elementList.item(indexN1007E);
             childName = child.getLocalName();

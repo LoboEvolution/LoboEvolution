@@ -43,16 +43,13 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * Retrieve the first child of the second employee and
  * invoke the "getNextSibling()" method.   It should
  * be set to null.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-6AC54C2F">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-6AC54C2F</a>
  */
 public class NodegetnextsiblingnullTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

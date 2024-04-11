@@ -38,9 +38,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 /**
  * Invoke isElementContentWhitespace on a newly created Text Node that contains only whitespace.
  * Should be false since there is no content model to determine if the node appears within element content.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Text3-isElementContentWhitespace">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Text3-isElementContentWhitespace</a>
  */
 public class Textiselementcontentwhitespace01Test extends LoboUnitTest {

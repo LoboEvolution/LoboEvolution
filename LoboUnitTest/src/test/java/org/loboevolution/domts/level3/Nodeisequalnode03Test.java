@@ -39,9 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Using isEqualNode check if 2 Document nodes created by parsing
  * documents only differing in declared encoding return false for isEqualNode on
  * the document and true on the document element.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isEqualNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isEqualNode</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=528">http://www.w3.org/Bugs/Public/show_bug.cgi?id=528</a>
  */

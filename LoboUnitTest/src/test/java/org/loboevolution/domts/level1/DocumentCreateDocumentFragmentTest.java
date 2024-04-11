@@ -33,7 +33,8 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentFragment;
 import org.loboevolution.html.node.NodeList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 /**
@@ -42,9 +43,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * Retrieve the entire DOM document and invoke its
  * "createDocumentFragment()" method.  The content, name,
  * type and value of the newly created object are output.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-35CB04B5">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-35CB04B5</a>
  */
 public class DocumentCreateDocumentFragmentTest extends LoboUnitTest {

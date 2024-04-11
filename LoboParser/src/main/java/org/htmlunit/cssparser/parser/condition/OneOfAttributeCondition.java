@@ -17,8 +17,6 @@ package org.htmlunit.cssparser.parser.condition;
 /**
  * <p>OneOfAttributeCondition class.</p>
  *
- * @author Ronald Brill
- *
  */
 public class OneOfAttributeCondition extends AttributeCondition {
 

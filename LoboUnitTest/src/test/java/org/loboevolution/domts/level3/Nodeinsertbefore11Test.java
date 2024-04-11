@@ -38,9 +38,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * Using insertBefore on a DocumentFragment node attempt to insert a child nodes before
  * other permissible nodes and verify the contents/name of each inserted node.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-952280727">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-952280727</a>
  */
 public class Nodeinsertbefore11Test extends LoboUnitTest {
@@ -73,13 +71,13 @@ public class Nodeinsertbefore11Test extends LoboUnitTest {
         appendedChild = docFrag.appendChild(eRef);
         inserted = docFrag.insertBefore(comment, pi);
         insertedVal = ((CharacterData) /*Node */inserted).getData();
-        assertEquals( "Comment", insertedVal, "Nodeinsertbefore11Assert2");
+        assertEquals("Comment", insertedVal, "Nodeinsertbefore11Assert2");
         inserted = docFrag.insertBefore(txt, comment);
         insertedVal = ((CharacterData) /*Node */inserted).getData();
         assertEquals("Text", insertedVal, "Nodeinsertbefore11Assert3");
         inserted = docFrag.insertBefore(cdata, txt);
         insertedVal = ((CharacterData) /*Node */inserted).getData();
-        assertEquals( "CDATA", insertedVal, "Nodeinsertbefore11Assert4");
+        assertEquals("CDATA", insertedVal, "Nodeinsertbefore11Assert4");
         inserted = docFrag.insertBefore(eRef, cdata);
         insertedVal = inserted.getNodeName();
         assertEquals("alpha", insertedVal, "Nodeinsertbefore11Assert5");

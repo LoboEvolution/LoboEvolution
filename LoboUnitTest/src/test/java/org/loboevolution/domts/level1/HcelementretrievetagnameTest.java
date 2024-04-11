@@ -33,7 +33,7 @@ import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -43,8 +43,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * Invoke the "getElementsByTagName()" method and create
  * a NodeList of "code" elements.  Retrieve the second
  * "code" element in the list and return the NodeName.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D095">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D095</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-104682815">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-104682815</a>
  */
@@ -52,7 +51,6 @@ public class HcelementretrievetagnameTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -62,11 +60,11 @@ public class HcelementretrievetagnameTest extends LoboUnitTest {
         String strong;
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("code");
-        testEmployee = (Element)elementList.item(1);
+        testEmployee = (Element) elementList.item(1);
         strong = testEmployee.getNodeName();
         assertEquals("CODE", strong, "HcelementretrievetagnameAssert1");
         strong = testEmployee.getTagName();
-        assertEquals( "CODE", strong, "HcelementretrievetagnameAssert2");
+        assertEquals("CODE", strong, "HcelementretrievetagnameAssert2");
     }
 }
 

@@ -41,9 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Invoke the renameNode method to attempt to rename an Element node of a XML1.0 document
  * with a name that contains an invalid XML 1.0 character and check if a INVALID_CHARACTER_ERR
  * gets thrown.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-renameNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-renameNode</a>
  */
 public class Documentrenamenode29Test extends LoboUnitTest {

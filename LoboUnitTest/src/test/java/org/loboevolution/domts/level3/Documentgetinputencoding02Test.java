@@ -40,9 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 /**
  * Call the getInputEncoding method on a new document and check if the value returned
  * is null.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-inputEncoding">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-inputEncoding</a>
  */
 public class Documentgetinputencoding02Test extends LoboUnitTest {

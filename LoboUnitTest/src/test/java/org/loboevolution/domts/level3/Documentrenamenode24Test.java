@@ -43,9 +43,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Invoke the renameNode method on this document node to attempt to rename itself.
  * The namespaceURI specified here is null and the name has a prefix.
  * Check if a NOT_SUPPORTED_ERR gets thrown.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-renameNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-renameNode</a>
  */
 public class Documentrenamenode24Test extends LoboUnitTest {

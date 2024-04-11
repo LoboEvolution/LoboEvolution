@@ -33,28 +33,27 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
 import static org.junit.jupiter.api.Assertions.assertNull;
+
 /**
  * Invoke lookupNamespaceURI on a new Attribute node with with a namespace URI
  * and prefix and verify if the namespaceURI returned is null.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-lookupNamespaceURI">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-lookupNamespaceURI</a>
  */
 public class Nodelookupnamespaceuri16Test extends LoboUnitTest {
-@Test
-public void runTest(){
+    @Test
+    public void runTest() {
         final Document doc;
         final Element elem;
         final Attr attr;
         final Attr attNode;
         final String namespaceURI;
-        doc=sampleXmlFile("hc_staff.xml");
-        elem=doc.createElementNS("http://www.w3.org/1999/xhtml","dom3:p");
-        attr=doc.createAttributeNS("http://www.w3.org/XML/1998/namespace","xml:lang");
-        attNode=elem.setAttributeNodeNS(attr);
-        namespaceURI=attr.lookupNamespaceURI("xml");
+        doc = sampleXmlFile("hc_staff.xml");
+        elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "dom3:p");
+        attr = doc.createAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:lang");
+        attNode = elem.setAttributeNodeNS(attr);
+        namespaceURI = attr.lookupNamespaceURI("xml");
         assertNull(namespaceURI, "Nodelookupnamespaceuri16Assert2");
-        }
-        }
+    }
+}
 

@@ -30,7 +30,10 @@ package org.loboevolution.domts.level3;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.node.*;
+import org.loboevolution.html.node.DOMImplementation;
+import org.loboevolution.html.node.Document;
+import org.loboevolution.html.node.DocumentType;
+import org.loboevolution.html.node.Element;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -38,8 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * An attempt to add a second doctype node should result in a HIERARCHY_REQUEST_ERR
  * or a NOT_SUPPORTED_ERR.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-184E7107">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-184E7107</a>
  */
 public class Nodeappendchild01Test extends LoboUnitTest {

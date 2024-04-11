@@ -29,13 +29,13 @@ package org.loboevolution.junit;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.loboevolution.css.CSSStyleSheet;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.html.dom.domimpl.HTMLCollectionImpl;
 import org.loboevolution.html.dom.domimpl.HTMLStyleElementImpl;
 import org.loboevolution.html.dom.nodeimpl.DOMImplementationImpl;
 import org.loboevolution.html.node.*;
-import org.loboevolution.css.CSSStyleSheet;
 import org.loboevolution.http.UserAgentContext;
 
 import java.util.Iterator;
@@ -747,21 +747,21 @@ public class DOMDocumentTest extends LoboUnitTest {
         final Element style = document.createElement("style");
         document.getDocumentElement().appendChild(style);
         style.setAttribute("type", "text/css");
-        CSSStyleSheet sheet = ((HTMLStyleElementImpl)style).getStyleSheet();
+        CSSStyleSheet sheet = ((HTMLStyleElementImpl) style).getStyleSheet();
         assertNotNull(sheet);
         assertEquals(0, sheet.getCssRules().getLength());
 
         style.removeAttributeNode(style.getAttributeNode("type"));
-        sheet = ((HTMLStyleElementImpl)style).getStyleSheet();
+        sheet = ((HTMLStyleElementImpl) style).getStyleSheet();
         assertNotNull(sheet);
         assertEquals(0, sheet.getCssRules().getLength());
 
         style.setAttribute("type", "text/xsl");
-        sheet = ((HTMLStyleElementImpl)style).getStyleSheet();
+        sheet = ((HTMLStyleElementImpl) style).getStyleSheet();
         assertNull(sheet);
 
         style.removeAttribute("type");
-        sheet = ((HTMLStyleElementImpl)style).getStyleSheet();
+        sheet = ((HTMLStyleElementImpl) style).getStyleSheet();
         assertNotNull(sheet);
         assertEquals(0, sheet.getCssRules().getLength());
         style.setTextContent("body {color: blue;}");
@@ -770,7 +770,7 @@ public class DOMDocumentTest extends LoboUnitTest {
 
         style.setTextContent("foo:");
         assertEquals("<style>foo:</style>", style.toString());
-        sheet = ((HTMLStyleElementImpl)style).getStyleSheet();
+        sheet = ((HTMLStyleElementImpl) style).getStyleSheet();
         assertEquals(0, sheet.getCssRules().getLength());
         assertEquals("<style>foo:</style>", style.toString());
         style.normalize();
@@ -793,7 +793,7 @@ public class DOMDocumentTest extends LoboUnitTest {
         final Element elem4 = document.createElement("div");
         elem4.setAttribute("id", "div4");
         docElm.appendChild(elem4);
-        HTMLCollectionImpl list = (HTMLCollectionImpl)document.getElementsByTagName("div");
+        HTMLCollectionImpl list = (HTMLCollectionImpl) document.getElementsByTagName("div");
         assertNotNull(list);
         assertEquals(4, list.getLength());
         assertNull(list.item(-1));
@@ -824,7 +824,7 @@ public class DOMDocumentTest extends LoboUnitTest {
         } catch (final NoSuchElementException e) {
         }
 
-        list = (HTMLCollectionImpl)elem4.getElementsByTagName("div");
+        list = (HTMLCollectionImpl) elem4.getElementsByTagName("div");
         assertNotNull(list);
         assertEquals(0, list.getLength());
         assertNull(list.item(-1));
@@ -859,7 +859,7 @@ public class DOMDocumentTest extends LoboUnitTest {
         final Element elem4 = document.createElementNS(Document.XML_NAMESPACE_URI, "div");
         elem4.setAttribute("id", "div4");
         docElm.appendChild(elem4);
-        final HTMLCollectionImpl list = (HTMLCollectionImpl)document.getElementsByTagNameNS(Document.XML_NAMESPACE_URI, "div");
+        final HTMLCollectionImpl list = (HTMLCollectionImpl) document.getElementsByTagNameNS(Document.XML_NAMESPACE_URI, "div");
         assertNotNull(list);
         assertEquals(4, list.getLength());
         assertNull(list.item(-1));
@@ -899,7 +899,7 @@ public class DOMDocumentTest extends LoboUnitTest {
         final Element elem4 = document.createElementNS(Document.XML_NAMESPACE_URI, "div");
         elem4.setAttribute("id", "div4");
         docElm.appendChild(elem4);
-        final HTMLCollectionImpl list = (HTMLCollectionImpl)document.getElementsByTagNameNS("*", "div");
+        final HTMLCollectionImpl list = (HTMLCollectionImpl) document.getElementsByTagNameNS("*", "div");
         assertNotNull(list);
         assertEquals(4, list.getLength());
         assertNull(list.item(-1));
@@ -956,7 +956,7 @@ public class DOMDocumentTest extends LoboUnitTest {
         } catch (final NoSuchElementException e) {
         }
 
-        list = (HTMLCollectionImpl)document.getElementsByTagNameNS("http://www.example.com/differentns", "div");
+        list = (HTMLCollectionImpl) document.getElementsByTagNameNS("http://www.example.com/differentns", "div");
         assertNotNull(list);
         assertEquals(3, list.getLength());
         assertNull(list.item(-1));
@@ -977,7 +977,7 @@ public class DOMDocumentTest extends LoboUnitTest {
         } catch (final NoSuchElementException e) {
         }
 
-        list = (HTMLCollectionImpl)elem1.getElementsByTagNameNS("http://www.example.com/differentns", "div");
+        list = (HTMLCollectionImpl) elem1.getElementsByTagNameNS("http://www.example.com/differentns", "div");
         assertNotNull(list);
         assertEquals(1, list.getLength());
         assertNull(list.item(-1));
@@ -994,7 +994,7 @@ public class DOMDocumentTest extends LoboUnitTest {
         } catch (final NoSuchElementException e) {
         }
 
-        list = (HTMLCollectionImpl)elem1.getElementsByTagNameNS(Document.XML_NAMESPACE_URI, "div");
+        list = (HTMLCollectionImpl) elem1.getElementsByTagNameNS(Document.XML_NAMESPACE_URI, "div");
         assertNotNull(list);
         assertEquals(1, list.getLength());
         assertNull(list.item(-1));
@@ -1011,7 +1011,7 @@ public class DOMDocumentTest extends LoboUnitTest {
         } catch (final NoSuchElementException e) {
         }
 
-        list = (HTMLCollectionImpl)elem3.getElementsByTagNameNS(Document.XML_NAMESPACE_URI, "div");
+        list = (HTMLCollectionImpl) elem3.getElementsByTagNameNS(Document.XML_NAMESPACE_URI, "div");
         assertNotNull(list);
         assertEquals(0, list.getLength());
         assertNull(list.item(-1));
@@ -1043,7 +1043,7 @@ public class DOMDocumentTest extends LoboUnitTest {
         elem4.setAttribute("id", "div4");
         docElm.appendChild(elem4);
 
-        HTMLCollectionImpl list = (HTMLCollectionImpl)document.getElementsByTagNameNS("*", "div");
+        HTMLCollectionImpl list = (HTMLCollectionImpl) document.getElementsByTagNameNS("*", "div");
         assertNotNull(list);
         assertEquals(4, list.getLength());
         assertNull(list.item(-1));
@@ -1066,7 +1066,7 @@ public class DOMDocumentTest extends LoboUnitTest {
         } catch (final NoSuchElementException e) {
         }
 
-        list = (HTMLCollectionImpl)elem1.getElementsByTagNameNS("*", "div");
+        list = (HTMLCollectionImpl) elem1.getElementsByTagNameNS("*", "div");
         assertNotNull(list);
         assertEquals(2, list.getLength());
         assertNull(list.item(-1));
@@ -1085,7 +1085,7 @@ public class DOMDocumentTest extends LoboUnitTest {
         } catch (final NoSuchElementException e) {
         }
 
-        list = (HTMLCollectionImpl)elem2.getElementsByTagNameNS("*", "div");
+        list = (HTMLCollectionImpl) elem2.getElementsByTagNameNS("*", "div");
         assertNotNull(list);
         assertEquals(1, list.getLength());
         assertNull(list.item(-1));
@@ -1102,7 +1102,7 @@ public class DOMDocumentTest extends LoboUnitTest {
         } catch (final NoSuchElementException e) {
         }
 
-        list = (HTMLCollectionImpl)elem3.getElementsByTagNameNS("*", "div");
+        list = (HTMLCollectionImpl) elem3.getElementsByTagNameNS("*", "div");
         assertNotNull(list);
         assertEquals(0, list.getLength());
         assertNull(list.item(-1));
@@ -1128,7 +1128,7 @@ public class DOMDocumentTest extends LoboUnitTest {
         final Element elem4 = document.createElement("section");
         elem4.setAttribute("class", "bar foo otherclass");
         docElm.appendChild(elem4);
-        HTMLCollectionImpl list = (HTMLCollectionImpl)document.getElementsByClassName("foo");
+        HTMLCollectionImpl list = (HTMLCollectionImpl) document.getElementsByClassName("foo");
         assertNotNull(list);
         assertEquals(4, list.getLength());
         assertNull(list.item(-1));
@@ -1158,7 +1158,7 @@ public class DOMDocumentTest extends LoboUnitTest {
         } catch (final NoSuchElementException e) {
         }
 
-        list = (HTMLCollectionImpl)document.getElementsByClassName("bar");
+        list = (HTMLCollectionImpl) document.getElementsByClassName("bar");
         assertNotNull(list);
         assertEquals(2, list.getLength());
         assertNull(list.item(-1));
@@ -1183,7 +1183,7 @@ public class DOMDocumentTest extends LoboUnitTest {
         } catch (final NoSuchElementException e) {
         }
 
-        list = (HTMLCollectionImpl)document.getElementsByClassName("foo bar");
+        list = (HTMLCollectionImpl) document.getElementsByClassName("foo bar");
         assertNotNull(list);
         assertEquals(2, list.getLength());
         assertNull(list.item(-1));
@@ -1208,7 +1208,7 @@ public class DOMDocumentTest extends LoboUnitTest {
         } catch (final NoSuchElementException e) {
         }
 
-        list = (HTMLCollectionImpl)document.getElementsByClassName("bar foo");
+        list = (HTMLCollectionImpl) document.getElementsByClassName("bar foo");
         assertNotNull(list);
         assertEquals(2, list.getLength());
         assertNull(list.item(-1));
@@ -1233,7 +1233,7 @@ public class DOMDocumentTest extends LoboUnitTest {
         } catch (final NoSuchElementException e) {
         }
 
-        list = (HTMLCollectionImpl)document.getElementsByClassName("otherclass");
+        list = (HTMLCollectionImpl) document.getElementsByClassName("otherclass");
         assertNotNull(list);
         assertEquals(1, list.getLength());
         assertNull(list.item(-1));
@@ -1256,7 +1256,7 @@ public class DOMDocumentTest extends LoboUnitTest {
         } catch (final NoSuchElementException e) {
         }
 
-        list = (HTMLCollectionImpl)document.getElementsByClassName("noclass");
+        list = (HTMLCollectionImpl) document.getElementsByClassName("noclass");
         assertNotNull(list);
         assertEquals(0, list.getLength());
         assertNull(list.item(-1));
@@ -1272,28 +1272,7 @@ public class DOMDocumentTest extends LoboUnitTest {
         it = list.iterator();
         assertFalse(it.hasNext());
 
-        list = (HTMLCollectionImpl)document.getElementsByClassName("");
-        assertNotNull(list);
-        assertEquals(0, list.getLength());
-        assertNull(list.item(-1));
-        assertNull(list.item(0));
-
-        assertTrue(list.isEmpty());
-        assertFalse(list.contains(elem1));
-        assertFalse(list.contains(elem2));
-        assertFalse(list.contains(elem3));
-        assertFalse(list.contains(elem4));
-        assertFalse(list.contains(docElm));
-
-        it = list.iterator();
-        assertFalse(it.hasNext());
-        try {
-            it.next();
-            fail("Must throw exception.");
-        } catch (final NoSuchElementException e) {
-        }
-
-        list = (HTMLCollectionImpl)elem2.getElementsByClassName("bar");
+        list = (HTMLCollectionImpl) document.getElementsByClassName("");
         assertNotNull(list);
         assertEquals(0, list.getLength());
         assertNull(list.item(-1));
@@ -1314,7 +1293,7 @@ public class DOMDocumentTest extends LoboUnitTest {
         } catch (final NoSuchElementException e) {
         }
 
-        list = (HTMLCollectionImpl)elem3.getElementsByClassName("foo");
+        list = (HTMLCollectionImpl) elem2.getElementsByClassName("bar");
         assertNotNull(list);
         assertEquals(0, list.getLength());
         assertNull(list.item(-1));
@@ -1335,7 +1314,28 @@ public class DOMDocumentTest extends LoboUnitTest {
         } catch (final NoSuchElementException e) {
         }
 
-        list = (HTMLCollectionImpl)elem2.getElementsByClassName("foo");
+        list = (HTMLCollectionImpl) elem3.getElementsByClassName("foo");
+        assertNotNull(list);
+        assertEquals(0, list.getLength());
+        assertNull(list.item(-1));
+        assertNull(list.item(0));
+
+        assertTrue(list.isEmpty());
+        assertFalse(list.contains(elem1));
+        assertFalse(list.contains(elem2));
+        assertFalse(list.contains(elem3));
+        assertFalse(list.contains(elem4));
+        assertFalse(list.contains(docElm));
+
+        it = list.iterator();
+        assertFalse(it.hasNext());
+        try {
+            it.next();
+            fail("Must throw exception.");
+        } catch (final NoSuchElementException e) {
+        }
+
+        list = (HTMLCollectionImpl) elem2.getElementsByClassName("foo");
         assertNotNull(list);
         assertEquals(1, list.getLength());
         assertNull(list.item(-1));
@@ -1418,7 +1418,7 @@ public class DOMDocumentTest extends LoboUnitTest {
     }
 
     @Test
-    public void testImportNodeForeign()  {
+    public void testImportNodeForeign() {
         final Document document = domImpl.createDocument(null, "doc", null);
         final Element docElm = document.getDocumentElement();
         final Element head = document.createElement("body");

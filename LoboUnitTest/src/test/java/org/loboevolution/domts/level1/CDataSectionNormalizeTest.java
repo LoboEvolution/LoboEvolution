@@ -35,7 +35,8 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NodeList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 /**
@@ -45,9 +46,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * the "normalize()" method.  The Element under contains
  * two CDATASection nodes that should not be merged together
  * by the "normalize()" method.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-162CF083">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-162CF083</a>
  */
 public class CDataSectionNormalizeTest extends LoboUnitTest {
@@ -55,7 +54,6 @@ public class CDataSectionNormalizeTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

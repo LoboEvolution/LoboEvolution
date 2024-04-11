@@ -47,9 +47,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Set the noNamespaceSchemaLocation attribute on the first acronym element to "No".  Invoke setIdAttributeNS on the
  * noNamespaceSchemaLocation attribute of the first, second and third acronym element.  Verify by calling isId on
  * the attributes.  Calling getElementById with "No" as a value should return the acronym element.
- *
- * @author IBM
- * @author Jenny Hsu
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-ElSetIdAttrNS">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-ElSetIdAttrNS</a>
  */
 public class Elementsetidattributens12Test extends LoboUnitTest {

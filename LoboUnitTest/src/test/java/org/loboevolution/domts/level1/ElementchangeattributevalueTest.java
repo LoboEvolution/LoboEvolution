@@ -33,7 +33,7 @@ import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -48,16 +48,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * used attribute("street") is already present in this
  * element, then its value should be changed to the new one
  * of the "value" parameter.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68F082">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68F082</a>
  */
 public class ElementchangeattributevalueTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -70,7 +67,7 @@ public class ElementchangeattributevalueTest extends LoboUnitTest {
         testEmployee = (Element) elementList.item(3);
         testEmployee.setAttribute("street", "Neither");
         attrValue = testEmployee.getAttribute("street");
-        assertEquals( "Neither", attrValue, "ElementchangeattributevalueAssert1");
+        assertEquals("Neither", attrValue, "ElementchangeattributevalueAssert1");
     }
 }
 

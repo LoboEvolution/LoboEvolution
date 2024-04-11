@@ -46,16 +46,13 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * Retrieve the first employeeId node and get the first child of this node.
  * Since the first child is Text node invoking the "getLocalName()"
  * method will cause "null" to be returned.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSLocalN">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSLocalN</a>
  */
 public class LocalName03Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -66,7 +63,7 @@ public class LocalName03Test extends LoboUnitTest {
         final String localName;
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagName("employeeId");
-        testEmployee = (Element)elementList.item(0);
+        testEmployee = (Element) elementList.item(0);
         textNode = testEmployee.getFirstChild();
         localName = textNode.getLocalName();
         assertNull(localName);

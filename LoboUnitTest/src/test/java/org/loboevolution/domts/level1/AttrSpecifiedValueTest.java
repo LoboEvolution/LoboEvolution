@@ -48,8 +48,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * the "getNamedItem(name)" method from the NamedNodeMap
  * interface.
  *
- * @author NIST
- * @author Mary Brady
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-862529273">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-862529273</a>
  */
 public class AttrSpecifiedValueTest extends LoboUnitTest {
@@ -57,7 +55,6 @@ public class AttrSpecifiedValueTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

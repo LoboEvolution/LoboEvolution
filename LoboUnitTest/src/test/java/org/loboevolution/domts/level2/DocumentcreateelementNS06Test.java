@@ -30,8 +30,8 @@ package org.loboevolution.domts.level2;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DOMImplementation;
+import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -45,9 +45,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Invoke the createElementNS method on this DOMImplementation object with
  * the qualifiedName as xml:root and namespaceURI as http://www.w3.org/xml/1998/namespace
  * Check if the NAMESPACE_ERR exception is thrown.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core">http://www.w3.org/TR/DOM-Level-2-Core/core</a>
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-DocCrElNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-DocCrElNS</a>
  */
@@ -55,7 +53,6 @@ public class DocumentcreateelementNS06Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -67,7 +64,7 @@ public class DocumentcreateelementNS06Test extends LoboUnitTest {
         final String namespaceURI = "http://www.w3.org/xml/1998/namespace ";
         final String qualifiedName = "xml:root";
         doc = sampleXmlFile("staffNS.xml");
-        
+
         domImpl = doc.getImplementation();
         newDoc = domImpl.createDocument("http://www.w3.org/DOM/Test", "dom:doc", docType);
 

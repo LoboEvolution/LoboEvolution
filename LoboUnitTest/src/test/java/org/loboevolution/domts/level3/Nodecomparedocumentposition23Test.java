@@ -41,9 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 /**
  * Using compareDocumentPosition check if the document position of an Entity node compared to another
  * Entity node following it in DocumentType is implementation specific.
- *
- * @author IBM
- * @author Jenny Hsu
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-compareDocumentPosition">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-compareDocumentPosition</a>
  */
 public class Nodecomparedocumentposition23Test extends LoboUnitTest {

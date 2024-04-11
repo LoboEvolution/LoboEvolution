@@ -40,8 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 /**
  * Create a document fragment with an empty text node, after normalization there should be no child nodes.
  * were combined.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-F68D095">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-F68D095</a>
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-B63ED1A3">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-B63ED1A3</a>
  */
@@ -49,7 +48,6 @@ public class Hcnodedocumentfragmentnormalize2Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

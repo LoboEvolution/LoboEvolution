@@ -40,9 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 /**
  * Retrieve the third acronyms element's class attribute, whose type is not ID.
  * Invoke isID on the class attribute, this should return false.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Attr-isId">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Attr-isId</a>
  */
 public class Attrisid01Test extends LoboUnitTest {

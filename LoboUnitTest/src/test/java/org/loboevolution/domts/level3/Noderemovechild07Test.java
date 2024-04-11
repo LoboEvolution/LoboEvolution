@@ -44,9 +44,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * DocumentType, not Document the operation should fail with a NOT_FOUND_ERR.  Attempting
  * to remove Document from a Notation should also fail either with a NOT_FOUND_ERR
  * or a NO_MODIFICATION_ALLOWED_ERR.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-1734834066">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-1734834066</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=418">http://www.w3.org/Bugs/Public/show_bug.cgi?id=418</a>
  */

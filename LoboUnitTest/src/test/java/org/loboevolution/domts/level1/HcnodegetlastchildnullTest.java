@@ -42,8 +42,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * method returns null.
  * Retrieve the text of the first "em" element and invoke the "getFirstChild()" method.   It
  * should return null.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-61AD09FB">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-61AD09FB</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=246">http://www.w3.org/Bugs/Public/show_bug.cgi?id=246</a>
  */
@@ -51,7 +50,6 @@ public class HcnodegetlastchildnullTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

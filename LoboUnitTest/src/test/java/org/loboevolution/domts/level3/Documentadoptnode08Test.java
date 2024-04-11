@@ -30,7 +30,10 @@ package org.loboevolution.domts.level3;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.node.*;
+import org.loboevolution.html.node.DOMImplementation;
+import org.loboevolution.html.node.Document;
+import org.loboevolution.html.node.DocumentType;
+import org.loboevolution.html.node.Element;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -38,9 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Invoke the adoptNode method on this document with a new document as the value of the
  * source parameter.  Verify if a NOT_SUPPORTED_ERR is thrown.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode</a>
  */
 public class Documentadoptnode08Test extends LoboUnitTest {

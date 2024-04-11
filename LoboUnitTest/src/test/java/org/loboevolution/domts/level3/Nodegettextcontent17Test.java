@@ -40,9 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * Invoke the method getTextContent on a new EntityReference node and check if the
  * value returned is the EntityReference's content.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-textContent">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-textContent</a>
  */
 public class Nodegettextcontent17Test extends LoboUnitTest {
@@ -58,7 +56,7 @@ public class Nodegettextcontent17Test extends LoboUnitTest {
         entRef = doc.createEntityReference("beta");
         appendedChild = elem.appendChild(entRef);
         textContent = entRef.getTextContent();
-        assertEquals( "β", textContent, "Nodegettextcontent17Assert2");
+        assertEquals("β", textContent, "Nodegettextcontent17Assert2");
     }
 }
 

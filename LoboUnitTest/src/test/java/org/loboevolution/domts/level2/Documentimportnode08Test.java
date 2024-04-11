@@ -30,8 +30,8 @@ package org.loboevolution.domts.level2;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DOMImplementation;
+import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -44,9 +44,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * <p>
  * Using the method importNode with deep=true, try to import a newly created DOcumentType
  * node. Since DocumentType nodes cannot be imported, a NOT_SUPPORTED_ERR should be raised.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core">http://www.w3.org/TR/DOM-Level-2-Core/core</a>
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#Core-Document-importNode">http://www.w3.org/TR/DOM-Level-2-Core/core#Core-Document-importNode</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=259">http://www.w3.org/Bugs/Public/show_bug.cgi?id=259</a>
@@ -55,7 +53,6 @@ public class Documentimportnode08Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

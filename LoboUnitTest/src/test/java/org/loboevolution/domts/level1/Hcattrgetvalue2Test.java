@@ -38,15 +38,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Checks the value of an attribute that contains entity references.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-221662474">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-221662474</a>
  */
 public class Hcattrgetvalue2Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

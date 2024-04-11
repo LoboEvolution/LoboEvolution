@@ -38,8 +38,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Normalize document using Node.normalize with element-content-whitespace set to false and validation set to true, check that
  * whitespace in element content is preserved.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-normalize">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-normalize</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-element-content-whitespace">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-element-content-whitespace</a>
  */
@@ -73,7 +72,7 @@ public class Elementcontentwhitespace03Test extends LoboUnitTest {
             child = body.getFirstChild();
             assertNotNull(child, "Elementcontentwhitespace03Assert2");
             childName = child.getNodeName();
-            assertEquals( "#text", childName, "Elementcontentwhitespace03Assert3");
+            assertEquals("#text", childName, "Elementcontentwhitespace03Assert3");
             child = child.getNextSibling();
             assertNotNull(child, "Elementcontentwhitespace03Assert4");
             childName = child.getNodeName();

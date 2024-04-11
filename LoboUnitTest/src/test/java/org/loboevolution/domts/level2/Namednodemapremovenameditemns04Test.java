@@ -40,16 +40,13 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * <p>
  * Attempt to remove the xmlns and dmstc attributes of the first element node with the localName
  * employee.  Verify if the 2 attributes were successfully removed.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-D58B193">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-D58B193</a>
  */
 public class Namednodemapremovenameditemns04Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -62,9 +59,9 @@ public class Namednodemapremovenameditemns04Test extends LoboUnitTest {
         elementList = doc.getElementsByTagNameNS("*", "employee");
         element = (Element) elementList.item(0);
         attributes = element.getAttributes();
-        attribute = (Attr) attributes.getNamedItemNS("http://www.w3.org/2000/xmlns/", "xmlns");
+        attribute = attributes.getNamedItemNS("http://www.w3.org/2000/xmlns/", "xmlns");
         assertNull(attribute);
-        attribute = (Attr) attributes.getNamedItemNS("http://www.w3.org/2000/xmlns/", "dmstc");
+        attribute = attributes.getNamedItemNS("http://www.w3.org/2000/xmlns/", "dmstc");
         assertNull(attribute);
     }
 }

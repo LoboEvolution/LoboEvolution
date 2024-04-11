@@ -43,8 +43,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 
 /**
  * Call setUserData on a node providing a UserDataHandler and clone the node.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-handleUserDataEvent">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-handleUserDataEvent</a>
  */
 public class Userdatahandler02Test extends LoboUnitTest {
@@ -73,8 +72,8 @@ public class Userdatahandler02Test extends LoboUnitTest {
         doc = sampleXmlFile("barfoo.xml");
         pList = doc.getElementsByTagName("p");
         node = pList.item(0);
-        oldUserData = node.setUserData("greeting", (Object) hello, userDataHandlerImpl);
-        oldUserData = node.setUserData("salutation", (Object) mister, userDataHandlerImpl);
+        oldUserData = node.setUserData("greeting", hello, userDataHandlerImpl);
+        oldUserData = node.setUserData("salutation", mister, userDataHandlerImpl);
         elementNS = node.getNamespaceURI();
         newNode = node.cloneNode(true);
         notifications = userDataHandlerImpl.getAllNotifications();

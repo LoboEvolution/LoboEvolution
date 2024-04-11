@@ -31,7 +31,8 @@ import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.*;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 /**
@@ -43,16 +44,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * Invoke method importNode(importedNode,deep) on this document with deep as false.
  * Method should return a node of type Entity whose descendant is copied.
  * The returned node should belong to this document whose systemId is "staffNS.dtd"
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#Core-Document-importNode">http://www.w3.org/TR/DOM-Level-2-Core/core#Core-Document-importNode</a>
  */
 public class ImportNode12Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

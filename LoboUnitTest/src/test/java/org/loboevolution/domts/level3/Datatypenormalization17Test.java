@@ -42,8 +42,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Normalize document with datatype-normalization set to false, string values
  * should not be normalized.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-datatype-normalization">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-datatype-normalization</a>
  */
@@ -84,15 +83,15 @@ public class Datatypenormalization17Test extends LoboUnitTest {
             element = (Element) elemList.item(1);
             childNode = element.getFirstChild();
             childValue = childNode.getNodeValue();
-            assertEquals( "EMP  0001", childValue, "Datatypenormalization17Assert2");
+            assertEquals("EMP  0001", childValue, "Datatypenormalization17Assert2");
             element = (Element) elemList.item(2);
             childNode = element.getFirstChild();
             childValue = childNode.getNodeValue();
-            assertEquals( "EMP 0001", childValue, "Datatypenormalization17Assert3");
+            assertEquals("EMP 0001", childValue, "Datatypenormalization17Assert3");
             element = (Element) elemList.item(0);
             childNode = element.getFirstChild();
             childValue = childNode.getNodeValue();
-            assertNotEquals( "EMP 0001", childValue, "Datatypenormalization17Assert4");
+            assertNotEquals("EMP 0001", childValue, "Datatypenormalization17Assert4");
         }
     }
 }

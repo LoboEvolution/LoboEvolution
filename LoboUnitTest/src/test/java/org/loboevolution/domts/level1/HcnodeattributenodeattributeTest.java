@@ -44,8 +44,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  * Retrieve the first attribute from the last child of the
  * first employee and invoke the "getAttributes()" method
  * on the Attribute Node.  It should return null.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-84CF096">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-84CF096</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-637646024">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-637646024</a>
  */
@@ -53,7 +52,6 @@ public class HcnodeattributenodeattributeTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

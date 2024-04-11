@@ -41,16 +41,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * return true if the node has attributes.
  * Retrieve the first address node and the "hasAttributes()" method
  * should return true since the node has "domestic" as an attribute.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeHasAttrs">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeHasAttrs</a>
  */
 public class HasAttributes02Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

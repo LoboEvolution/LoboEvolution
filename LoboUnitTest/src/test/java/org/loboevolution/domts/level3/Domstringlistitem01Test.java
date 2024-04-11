@@ -40,8 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 /**
  * Check implementation of DOMStringList.item by accessing items 0 and length-1 and expecting
  * a string and accessing items out of range and expecting null.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMStringList-item">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMStringList-item</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration-parameterNames">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration-parameterNames</a>
  */

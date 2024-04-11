@@ -39,8 +39,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Normalize document with entities set to false, check that
  * entity references are expanded and unused entity declaration are maintained.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-entities">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-entities</a>
  */
@@ -84,9 +83,9 @@ public class Entities02Test extends LoboUnitTest {
         child = pElem.getLastChild();
         assertNotNull(child, "Entities02Assert2");
         childName = child.getNodeName();
-        assertEquals( "#text", childName, "Entities02Assert3");
+        assertEquals("#text", childName, "Entities02Assert3");
         childValue = child.getNodeValue();
-        assertEquals( "barfoo", childValue, "Entities02Assert4");
+        assertEquals("barfoo", childValue, "Entities02Assert4");
         doctype = doc.getDoctype();
         entities = doctype.getEntities();
         ent2 = entities.getNamedItem("ent2");

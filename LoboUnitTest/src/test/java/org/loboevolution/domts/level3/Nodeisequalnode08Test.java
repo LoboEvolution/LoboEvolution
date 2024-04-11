@@ -41,9 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Retreive an element node of this Document having nodeName as employeeId and
  * namespaceURI as http://www.nist.gov.  Create a new Element node having the same attributes
  * in this Document and using isEqualNode check if 2 Element nodes are equal.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isEqualNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isEqualNode</a>
  */
 public class Nodeisequalnode08Test extends LoboUnitTest {

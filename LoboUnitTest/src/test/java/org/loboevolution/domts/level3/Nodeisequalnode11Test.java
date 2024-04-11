@@ -48,9 +48,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * new document does not provide the same default attributes.
  * Import it into another instance of the source document
  * and then the imported node and the source should be equal.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isEqualNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isEqualNode</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=529">http://www.w3.org/Bugs/Public/show_bug.cgi?id=529</a>
  */

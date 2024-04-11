@@ -40,8 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Check if anonymous type for p element is derived from pType by restriction.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom</a>
  */
 public class Typeinfoisderivedfrom30Test extends LoboUnitTest {

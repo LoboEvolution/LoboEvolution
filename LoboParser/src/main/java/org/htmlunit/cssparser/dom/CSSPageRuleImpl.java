@@ -24,8 +24,6 @@ import org.htmlunit.cssparser.util.ThrowCssExceptionErrorHandler;
 /**
  * Implementation of CSSPageRule.
  *
- * @author Ronald Brill
- *
  */
 public class CSSPageRuleImpl extends AbstractCSSRuleImpl {
 

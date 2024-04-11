@@ -39,9 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * <p>
  * Set the documentURI to a valid string and retreive the documentURI of this
  * document and verify if it is was correctly set.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-documentURI">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-documentURI</a>
  */
 public class DocumentsetDocumenturi01Test extends LoboUnitTest {

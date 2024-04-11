@@ -35,7 +35,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -49,16 +49,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * replaced with its value.  This test uses the
  * "getNamedItem(name)" method from the NamedNodeMap
  * interface.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-221662474">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-221662474</a>
  */
 public class AttrEntityReplacementTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -74,7 +71,7 @@ public class AttrEntityReplacementTest extends LoboUnitTest {
         attributes = testNode.getAttributes();
         streetAttr = (Attr) attributes.getNamedItem("street");
         value = streetAttr.getValue();
-        assertEquals( "Yes", value, "AttrEntityReplacementAssert1");
+        assertEquals("Yes", value, "AttrEntityReplacementAssert1");
     }
 
 }

@@ -32,7 +32,7 @@ import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Comment;
 import org.loboevolution.html.node.Document;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -42,16 +42,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * "createComment(data)" method.  It should create a new
  * Comment node whose "data" is the specified string.
  * The content, name and type are retrieved and output.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1334481328">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1334481328</a>
  */
 public class DocumentcreatecommentTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -63,9 +60,9 @@ public class DocumentcreatecommentTest extends LoboUnitTest {
         doc = sampleXmlFile("staff.xml");
         newCommentNode = doc.createComment("This is a new Comment node");
         newCommentValue = newCommentNode.getNodeValue();
-        assertEquals( "This is a new Comment node", newCommentValue, "DocumentcreatecommentAssert1");
+        assertEquals("This is a new Comment node", newCommentValue, "DocumentcreatecommentAssert1");
         newCommentName = newCommentNode.getNodeName();
-         assertEquals( "#comment", newCommentName, "DocumentcreatecommentAssert2");
+        assertEquals("#comment", newCommentName, "DocumentcreatecommentAssert2");
         newCommentType = newCommentNode.getNodeType();
         assertEquals(8, newCommentType, "DocumentcreatecommentAssert3");
     }

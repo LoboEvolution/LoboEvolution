@@ -42,16 +42,13 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * <p>
  * Retrieve the first employee node and invoke the getPrefix() method."
  * The method should return "null".
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSPrefix">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSPrefix</a>
  */
 public class Prefix04Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -61,7 +58,7 @@ public class Prefix04Test extends LoboUnitTest {
         final String prefix;
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagName("employee");
-        testEmployee = (Element)elementList.item(0);
+        testEmployee = (Element) elementList.item(0);
         prefix = testEmployee.getPrefix();
         assertNull(prefix);
     }

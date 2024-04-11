@@ -34,7 +34,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -44,16 +44,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * selected.  Further we evaluate its content(by using
  * the "getNodeName()" method) to ensure the proper
  * element was accessed.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-844377136">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-844377136</a>
  */
 public class NodelistindexnotzeroTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -77,7 +74,7 @@ public class NodelistindexnotzeroTest extends LoboUnitTest {
         }
 
         childName = child.getNodeName();
-         assertEquals( "NAME", childName, "NodelistindexnotzeroAssert1");
+        assertEquals("NAME", childName, "NodelistindexnotzeroAssert1");
     }
 }
 

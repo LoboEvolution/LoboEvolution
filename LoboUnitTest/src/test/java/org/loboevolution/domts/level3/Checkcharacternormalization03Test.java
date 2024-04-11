@@ -43,8 +43,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Normalize document using Node.normalize checking that "check-character-normalization"
  * is ignored.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-normalize">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-normalize</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-check-character-normalization">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-check-character-normalization</a>
  * @see <a href="http://www.w3.org/TR/2003/WD-charmod-20030822/">http://www.w3.org/TR/2003/WD-charmod-20030822/</a>
@@ -80,7 +79,7 @@ public class Checkcharacternormalization03Test extends LoboUnitTest {
             pElem = (Element) pList.item(0);
             text = (Text) pElem.getFirstChild();
             textValue = text.getNodeValue();
-            assertEquals( "barsuçon", textValue, "Checkcharacternormalization03Assert4");
+            assertEquals("barsuçon", textValue, "Checkcharacternormalization03Assert4");
         }
     }
 }

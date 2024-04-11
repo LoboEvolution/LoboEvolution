@@ -26,946 +26,1084 @@
 package org.loboevolution.css.property;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.loboevolution.annotation.Alerts;
+import org.loboevolution.annotation.AlertsExtension;
 import org.loboevolution.driver.LoboUnitTest;
 
 /**
  * Unit tests for {@code offsetWidth} of an element.
  */
+@ExtendWith(AlertsExtension.class)
 public class ElementOffsetWidthTest extends LoboUnitTest {
 
-    private static final String VALUE_ = "e == null ? e : (e.offsetWidth < 700 ? e.offsetWidth :"
+    private static final String VALUE_ = "e == null ? e : (e.offsetWidth < 1000 ? e.offsetWidth :"
             + "e.offsetWidth - document.documentElement.offsetWidth)";
 
     @Test
+    @Alerts("0")
     public void abbr() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("abbr"), messages);
+        test("abbr");
     }
 
+
     @Test
+    @Alerts("0")
     public void acronym() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("acronym"), messages);
+        test("acronym");
     }
 
+
     @Test
+    @Alerts("0")
     public void a() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("a"), messages);
+        test("a");
     }
 
+
     @Test
+    @Alerts("-16")
     public void address() {
-        final String[] messages = {"-17"};
-        checkHtmlAlert(test("address"), messages);
+        test("address");
     }
 
+
     @Test
+    @Alerts("0")
     public void applet() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("applet"), messages);
+        test("applet");
     }
 
+
     @Test
+    @Alerts("0")
     public void area() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("area"), messages);
+        test("area");
     }
 
+
     @Test
+    @Alerts("-16")
     public void article() {
-        final String[] messages = {"-17"};
-        checkHtmlAlert(test("article"), messages);
+        test("article");
     }
 
+
     @Test
+    @Alerts("-16")
     public void aside() {
-        final String[] messages = {"-17"};
-        checkHtmlAlert(test("aside"), messages);
+        test("aside");
     }
 
+
     @Test
+    @Alerts("0")
     public void audio() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("audio"), messages);
+        test("audio");
     }
 
     @Test
+    @Alerts("0")
     public void bgsound() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("bgsound"), messages);
+        test("bgsound");
     }
 
+
     @Test
+    @Alerts("0")
     public void base() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("base"), messages);
+        test("base");
     }
 
+
     @Test
+    @Alerts("0")
     public void basefont() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("basefont"), messages);
+        test("basefont");
     }
 
+
     @Test
+    @Alerts("0")
     public void bdi() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("bdi"), messages);
+        test("bdi");
     }
 
+
     @Test
+    @Alerts("0")
     public void bdo() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("bdo"), messages);
+        test("bdo");
     }
 
+
     @Test
+    @Alerts("0")
     public void big() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("big"), messages);
+        test("big");
     }
 
+
     @Test
+    @Alerts("0")
     public void blink() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("blink"), messages);
+        test("blink");
     }
 
+
     @Test
+    @Alerts("-96")
     public void blockquote() {
-        final String[] messages = {"-17"};
-        checkHtmlAlert(test("blockquote"), messages);
+        test("blockquote");
     }
 
+
     @Test
+    @Alerts("-16")
     public void body() {
-        final String[] messages = {"-17"};
-        checkHtmlAlert(test("body"), messages);
+        test("body");
     }
 
     @Test
+    @Alerts("0")
     public void b() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("b"), messages);
+        test("b");
     }
 
+
     @Test
+    @Alerts("0")
     public void br() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("br"), messages);
+        test("br");
     }
 
     @Test
+    @Alerts("16")
     public void button() {
-        final String[] messages = {"22"};
-        checkHtmlAlert(test("button"), messages);
+        test("button");
     }
 
     @Test
+    @Alerts("300")
     public void canvas() {
-        final String[] messages = {"300"};
-        checkHtmlAlert(test("canvas"), messages);
+        test("canvas");
     }
 
     @Test
+    @Alerts("null")
     public void caption() {
-        final String[] messages = {null};
-        checkHtmlAlert(test("caption"), messages);
+        test("caption");
     }
 
+
     @Test
+    @Alerts("-16")
     public void center() {
-        final String[] messages = {"-17"};
-        checkHtmlAlert(test("center"), messages);
+        test("center");
     }
 
+
     @Test
+    @Alerts("0")
     public void cite() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("cite"), messages);
+        test("cite");
     }
 
     @Test
+    @Alerts("0")
     public void code() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("code"), messages);
+        test("code");
     }
 
+
     @Test
+    @Alerts("0")
     public void command() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("command"), messages);
+        test("command");
     }
 
+
     @Test
+    @Alerts("0")
     public void datalist() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("datalist"), messages);
+        test("datalist");
     }
 
+
     @Test
+    @Alerts("-16")
     public void details() {
-        final String[] messages = {"-17"};
-        checkHtmlAlert(test("details"), messages);
+        test("details");
     }
 
+
     @Test
+    @Alerts("0")
     public void dfn() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("dfn"), messages);
+        test("dfn");
     }
 
+
     @Test
+    @Alerts("-56")
     public void dd() {
-        final String[] messages = {"-56"};
-        checkHtmlAlert(test("dd"), messages);
+        test("dd");
     }
 
+
     @Test
+    @Alerts("0")
     public void del() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("del"), messages);
+        test("del");
     }
 
-    @Test
-    public void dialog() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("dialog"), messages);
-    }
 
     @Test
+    @Alerts("0")
+    public void diaalert() {
+        test("dialog");
+    }
+
+
+    @Test
+    @Alerts("-16")
     public void dir() {
-        final String[] messages = {"-17"};
-        checkHtmlAlert(test("dir"), messages);
+        test("dir");
     }
 
+
     @Test
+    @Alerts("-16")
     public void div() {
-        final String[] messages = {"-17"};
-        checkHtmlAlert(test("div"), messages);
+        test("div");
     }
 
+
     @Test
+    @Alerts("-16")
     public void dl() {
-        final String[] messages = {"-17"};
-        checkHtmlAlert(test("dl"), messages);
+        test("dl");
     }
 
+
     @Test
+    @Alerts("-16")
     public void dt() {
-        final String[] messages = {"-17"};
-        checkHtmlAlert(test("dt"), messages);
+        test("dt");
     }
 
+
     @Test
+    @Alerts("0")
     public void embed() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("embed"), messages);
+        test("embed");
     }
 
+
     @Test
+    @Alerts("0")
     public void em() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("em"), messages);
+        test("em");
     }
 
+
     @Test
+    @Alerts("-20")
     public void fieldset() {
-        final String[] messages = {"-24"};
-        checkHtmlAlert(test("fieldset"), messages);
+        test("fieldset");
     }
 
+
     @Test
+    @Alerts("-16")
     public void figcaption() {
-        final String[] messages = {"-17"};
-        checkHtmlAlert(test("figcaption"), messages);
+        test("figcaption");
     }
 
 
     @Test
+    @Alerts("-96")
     public void figure() {
-        final String[] messages = {"-97"};
-        checkHtmlAlert(test("figure"), messages);
+        test("figure");
     }
 
+
     @Test
+    @Alerts("0")
     public void font() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("font"), messages);
+        test("font");
     }
 
+
     @Test
+    @Alerts("-16")
     public void footer() {
-        final String[] messages = {"-17"};
-        checkHtmlAlert(test("footer"), messages);
+        test("footer");
     }
 
+
     @Test
+    @Alerts("-16")
     public void form() {
-        final String[] messages = {"-17"};
-        checkHtmlAlert(test("form"), messages);
+        test("form");
     }
 
+
     @Test
+    @Alerts("0")
     public void frame() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("frame"), messages);
+        test("frame");
     }
 
+
     @Test
+    @Alerts("0")
     public void frameset() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("frameset"), messages);
+        test("frameset");
     }
 
+
     @Test
+    @Alerts("-16")
     public void h1() {
-        final String[] messages = {"-17"};
-        checkHtmlAlert(test("h1"), messages);
+        test("h1");
     }
 
+
     @Test
+    @Alerts("-16")
     public void h2() {
-        final String[] messages = {"-17"};
-        checkHtmlAlert(test("h2"), messages);
+        test("h2");
     }
 
+
     @Test
+    @Alerts("-16")
     public void h3() {
-        final String[] messages = {"-17"};
-        checkHtmlAlert(test("h3"), messages);
+        test("h3");
     }
 
+
     @Test
+    @Alerts("-16")
     public void h4() {
-        final String[] messages = {"-17"};
-        checkHtmlAlert(test("h4"), messages);
+        test("h4");
     }
 
+
     @Test
+    @Alerts("-16")
     public void h5() {
-        final String[] messages = {"-17"};
-        checkHtmlAlert(test("h5"), messages);
+        test("h5");
     }
 
+
     @Test
+    @Alerts("-16")
     public void h6() {
-        final String[] messages = {"-17"};
-        checkHtmlAlert(test("h6"), messages);
+        test("h6");
     }
 
+
     @Test
+    @Alerts("null")
     public void head() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("head"), messages);
+        test("head");
     }
 
+
     @Test
+    @Alerts("-16")
     public void header() {
-        final String[] messages = {"-17"};
-        checkHtmlAlert(test("header"), messages);
+        test("header");
     }
 
+
     @Test
+    @Alerts("-16")
     public void hr() {
-        final String[] messages = {"-17"};
-        checkHtmlAlert(test("hr"), messages);
+        test("hr");
     }
 
+
     @Test
+    @Alerts("0")
+    public void html() {
+        test("html");
+    }
+
+
+    @Test
+    @Alerts("304")
     public void iframe() {
-        final String[] messages = {"300"};
-        checkHtmlAlert(test("iframe"), messages);
+        test("iframe");
     }
 
+
     @Test
+    @Alerts("25")
     public void q() {
-        final String[] messages = {"25"};
-        checkHtmlAlert(test("q"), messages);
+        test("q");
     }
 
+
     @Test
+    @Alerts("0")
     public void image() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("image"), messages);
+        test("image");
     }
 
+
     @Test
+    @Alerts("0")
     public void img() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("img"), messages);
+        test("img");
     }
 
+
     @Test
+    @Alerts("0")
     public void ins() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("ins"), messages);
+        test("ins");
     }
 
+
     @Test
+    @Alerts("0")
     public void isindex() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("isindex"), messages);
+        test("isindex");
     }
 
+
     @Test
+    @Alerts("0")
     public void i() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("i"), messages);
+        test("i");
     }
 
+
     @Test
+    @Alerts("0")
     public void kbd() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("kbd"), messages);
+        test("kbd");
     }
 
     @Test
+    @Alerts("0")
     public void keygen() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("keygen"), messages);
+        test("keygen");
     }
 
+
     @Test
+    @Alerts("0")
     public void label() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("label"), messages);
+        test("label");
     }
 
+
     @Test
+    @Alerts("0")
     public void layer() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("layer"), messages);
+        test("layer");
     }
 
 
     @Test
+    @Alerts("-16")
     public void legend() {
-        final String[] messages = {"-17"};
-        checkHtmlAlert(test("legend"), messages);
+        test("legend");
     }
 
+
     @Test
+    @Alerts("-16")
+    public void listing() {
+        test("listing");
+    }
+
+
+    @Test
+    @Alerts("-16")
     public void li() {
-        final String[] messages = {"-17"};
-        checkHtmlAlert(test("li"), messages);
+        test("li");
     }
 
+
     @Test
+    @Alerts("0")
     public void link() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("link"), messages);
+        test("link");
     }
 
-    @Test
-    public void mainTag() {
-        final String[] messages = {"-17"};
-        checkHtmlAlert(test("main"), messages);
-    }
 
     @Test
+    @Alerts("-16")
+    public void mainTsg() {
+        test("main");
+    }
+
+
+    @Test
+    @Alerts("0")
     public void map() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("map"), messages);
+        test("map");
     }
 
+
     @Test
+    @Alerts("-16")
     public void marquee() {
-        final String[] messages = {"-17"};
-        checkHtmlAlert(test("marquee"), messages);
+        test("marquee");
     }
 
+
     @Test
+    @Alerts("0")
     public void mark() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("mark"), messages);
+        test("mark");
     }
 
+
     @Test
+    @Alerts("-16")
     public void menu() {
-        final String[] messages = {"-17"};
-        checkHtmlAlert(test("menu"), messages);
+        test("menu");
     }
 
+
     @Test
+    @Alerts("0")
     public void menuitem() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("menuitem"), messages);
+        test("menuitem");
     }
 
     @Test
+    @Alerts("0")
     public void meta() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("meta"), messages);
+        test("meta");
     }
 
     @Test
+    @Alerts("80")
     public void meter() {
-        final String[] messages = {"80"};
-        checkHtmlAlert(test("meter"), messages);
+        test("meter");
     }
 
+
     @Test
+    @Alerts("0")
+    public void multicol() {
+        test("multicol");
+    }
+
+
+    @Test
+    @Alerts("0")
     public void nobr() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("nobr"), messages);
+        test("nobr");
     }
 
+
     @Test
+    @Alerts("-16")
     public void nav() {
-        final String[] messages = {"-17"};
-        checkHtmlAlert(test("nav"), messages);
+        test("nav");
     }
 
+
     @Test
+    @Alerts("0")
     public void nextid() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("nextid"), messages);
+        test("nextid");
     }
 
+
     @Test
+    @Alerts("0")
     public void noembed() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("noembed"), messages);
+        test("noembed");
     }
 
+
     @Test
+    @Alerts("0")
     public void noframes() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("noframes"), messages);
+        test("noframes");
     }
 
+
     @Test
+    @Alerts("0")
     public void nolayer() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("nolayer"), messages);
+        test("nolayer");
     }
 
+
     @Test
+    @Alerts("0")
     public void noscript() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("noscript"), messages);
+        test("noscript");
     }
 
+
     @Test
+    @Alerts("0")
     public void object() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("object"), messages);
+        test("object");
     }
 
+
     @Test
+    @Alerts("-16")
     public void ol() {
-        final String[] messages = {"-17"};
-        checkHtmlAlert(test("ol"), messages);
+        test("ol");
     }
 
+
     @Test
+    @Alerts("-16")
     public void optgroup() {
-        final String[] messages = {"-17"};
-        checkHtmlAlert(test("optgroup"), messages);
+        test("optgroup");
     }
 
+
     @Test
+    @Alerts("-16")
     public void option() {
-        final String[] messages = {"-17"};
-        checkHtmlAlert(test("option"), messages);
+        test("option");
     }
 
+
     @Test
+    @Alerts("0")
     public void output() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("output"), messages);
+        test("output");
     }
 
+
     @Test
+    @Alerts("-16")
     public void p() {
-        final String[] messages = {"-17"};
-        checkHtmlAlert(test("p"), messages);
+        test("p");
     }
 
+
     @Test
+    @Alerts("0")
     public void param() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("param"), messages);
+        test("param");
     }
 
+
     @Test
+    @Alerts("-16")
+    public void plaintext() {
+        test("plaintext");
+    }
+
+
+    @Test
+    @Alerts("-16")
     public void pre() {
-        final String[] messages = {"-17"};
-        checkHtmlAlert(test("pre"), messages);
+        test("pre");
     }
 
+
     @Test
+    @Alerts("160")
     public void progress() {
-        final String[] messages = {"160"};
-        checkHtmlAlert(test("progress"), messages);
+        test("progress");
     }
 
+
     @Test
+    @Alerts("0")
     public void ruby() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("ruby"), messages);
+        test("ruby");
+    }
+
+
+    @Test
+    @Alerts("0")
+    public void rb() {
+        test("rb");
     }
 
     @Test
+    @Alerts("0")
     public void rp() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("rp"), messages);
+        test("rp");
     }
 
+
     @Test
+    @Alerts("0")
     public void rt() {
-        final String[] messages = {"-17"};
-        checkHtmlAlert(test("rt"), messages);
+        test("rt");
     }
 
+
     @Test
+    @Alerts("0")
+    public void rtc() {
+        test("rtc");
+    }
+
+
+    @Test
+    @Alerts("0")
     public void s() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("s"), messages);
+        test("s");
     }
 
+
     @Test
+    @Alerts("0")
     public void samp() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("samp"), messages);
+        test("samp");
     }
 
+
     @Test
+    @Alerts("0")
     public void script() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("script"), messages);
+        test("script");
     }
 
+
     @Test
+    @Alerts("-16")
     public void section() {
-        final String[] messages = {"-17"};
-        checkHtmlAlert(test("section"), messages);
+        test("section");
     }
 
+
     @Test
+    @Alerts("24")
     public void select() {
-        final String[] messages = {"24"};
-        checkHtmlAlert(test("select"), messages);
+        test("select");
     }
 
     @Test
+    @Alerts("0")
     public void small() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("small"), messages);
+        test("small");
     }
 
     @Test
+    @Alerts("0")
     public void source() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("source"), messages);
+        test("source");
     }
 
-
     @Test
+    @Alerts("0")
     public void spacer() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("spacer"), messages);
+        test("spacer");
     }
 
+
     @Test
+    @Alerts("0")
     public void span() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("span"), messages);
+        test("span");
     }
 
+
     @Test
+    @Alerts("0")
     public void strike() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("strike"), messages);
+        test("strike");
     }
 
+
     @Test
+    @Alerts("0")
     public void strong() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("strong"), messages);
+        test("strong");
     }
 
     @Test
+    @Alerts("0")
     public void style() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("style"), messages);
+        test("style");
     }
 
     @Test
+    @Alerts("0")
     public void sub() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("sub"), messages);
+        test("sub");
     }
 
     @Test
+    @Alerts("-16")
     public void summary() {
-        final String[] messages = {"-17"};
-        checkHtmlAlert(test("summary"), messages);
+        test("summary");
     }
 
     @Test
+    @Alerts("0")
     public void sup() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("sup"), messages);
+        test("sup");
     }
 
     @Test
+    @Alerts("NaN")
     public void svg() {
-        final String[] messages = {"300"};
-        checkHtmlAlert(test("svg"), messages);
+        test("svg");
     }
 
     @Test
+    @Alerts("0")
     public void table() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("table"), messages);
+        test("table");
     }
 
     @Test
+    @Alerts("null")
     public void col() {
-        final String[] messages = {null};
-        checkHtmlAlert(test("col"), messages);
+        test("col");
     }
 
     @Test
+    @Alerts("null")
     public void colgroup() {
-        final String[] messages = {null};
-        checkHtmlAlert(test("colgroup"), messages);
+        test("colgroup");
     }
 
     @Test
+    @Alerts("null")
     public void tbody() {
-        final String[] messages = {null};
-        checkHtmlAlert(test("tbody"), messages);
+        test("tbody");
     }
 
+
     @Test
+    @Alerts("null")
     public void td() {
-        final String[] messages = {null};
-        checkHtmlAlert(test("td"), messages);
+        test("td");
     }
 
     @Test
+    @Alerts("null")
     public void th() {
-        final String[] messages = {null};
-        checkHtmlAlert(test("th"), messages);
+        test("th");
     }
 
+
     @Test
+    @Alerts("null")
     public void tr() {
-        final String[] messages = {null};
-        checkHtmlAlert(test("tr"), messages);
+        test("tr");
     }
 
     @Test
+    @Alerts("0")
     public void track() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("track"), messages);
+        test("track");
     }
 
+
     @Test
+    @Alerts("170")
     public void textarea() {
-        final String[] messages = {"183"};
-        checkHtmlAlert(test("textarea"), messages);
+        test("textarea");
     }
 
+
     @Test
+    @Alerts("null")
     public void tfoot() {
-        final String[] messages = {null};
-        checkHtmlAlert(test("tfoot"), messages);
+        test("tfoot");
     }
 
     @Test
+    @Alerts("null")
     public void thead() {
-        final String[] messages = {null};
-        checkHtmlAlert(test("thead"), messages);
+        test("thead");
     }
 
     @Test
+    @Alerts("0")
     public void tt() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("tt"), messages);
+        test("tt");
     }
 
     @Test
+    @Alerts("0")
     public void time() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("time"), messages);
+        test("time");
+    }
+
+    @Test
+    @Alerts("0")
+    public void title() {
+        final String html = "<html><head>\n"
+                + "<script>\n"                + "function test() {\n"
+                + "  var e = document.getElementById('outer');\n"
+                + "  alert(" + VALUE_ + ");\n"
+                + "}\n"
+                + "</script>\n"
+                + "<title id='outer'><title></title>\n"
+                + "</head><body onload='test()'>\n"
+                + "</body></html>";
+
+        checkHtmlAlert(html);
     }
 
 
     @Test
+    @Alerts("0")
     public void u() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("u"), messages);
+        test("u");
     }
 
+
     @Test
+    @Alerts("-16")
     public void ul() {
-        final String[] messages = {"-17"};
-        checkHtmlAlert(test("ul"), messages);
+        test("ul");
     }
 
 
     @Test
+    @Alerts("0")
     public void var() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("var"), messages);
+        test("var");
     }
 
+
     @Test
+    @Alerts("300")
     public void video() {
-        final String[] messages = {"300"};
-        checkHtmlAlert(test("video"), messages);
+        test("video");
     }
 
+
     @Test
+    @Alerts("0")
     public void wbr() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("wbr"), messages);
+        test("wbr");
     }
 
+
     @Test
+    @Alerts("-16")
+    public void xmp() {
+        test("xmp");
+    }
+
+
+    @Test
+    @Alerts("177")
     public void input() {
-        final String[] messages = {"177"};
-        checkHtmlAlert(test("input"), messages);
+        test("input");
     }
 
+
     @Test
+    @Alerts("16")
     public void inputButton() {
-        final String[] messages = {"16"};
-        checkHtmlAlert(testInput("button"), messages);
+        checkHtmlAlert(testInput("button"));
     }
 
+
     @Test
+    @Alerts("13")
     public void inputCheckbox() {
-        final String[] messages = {"13"};
-        checkHtmlAlert(testInput("checkbox"), messages);
+        checkHtmlAlert(testInput("checkbox"));
     }
 
+
     @Test
+    @Alerts("253")
     public void inputFile() {
-        final String[] messages = {"253"};
-        checkHtmlAlert(testInput("file"), messages);
+        checkHtmlAlert(testInput("file"));
     }
 
+
     @Test
+    @Alerts("0")
     public void inputHidden() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(testInput("hidden"), messages);
+        checkHtmlAlert(testInput("hidden"));
     }
 
+
     @Test
+    @Alerts("177")
     public void inputPassword() {
-        final String[] messages = {"177"};
-        checkHtmlAlert(testInput("password"), messages);
+        checkHtmlAlert(testInput("password"));
     }
 
+
     @Test
+    @Alerts("13")
     public void inputRadio() {
-        final String[] messages = {"13"};
-        checkHtmlAlert(testInput("radio"), messages);
+        checkHtmlAlert(testInput("radio"));
     }
 
+
     @Test
+    @Alerts("51")
     public void inputReset() {
-        final String[] messages = {"51"};
-        checkHtmlAlert(testInput("reset"), messages);
+        checkHtmlAlert(testInput("reset"));
     }
 
+
     @Test
+    @Alerts("177")
+    public void inputSelect() {
+        checkHtmlAlert(testInput("select"));
+    }
+
+
+    @Test
+    @Alerts("58")
     public void inputSubmit() {
-        final String[] messages = {"58"};
-        checkHtmlAlert(testInput("submit"), messages);
+        checkHtmlAlert(testInput("submit"));
     }
 
+
     @Test
+    @Alerts("177")
     public void inputText() {
-        final String[] messages = {"177"};
-        checkHtmlAlert(testInput("text"), messages);
+        checkHtmlAlert(testInput("text"));
     }
 
+
     @Test
+    @Alerts("0")
     public void data() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("data"), messages);
+        test("data");
     }
 
+
     @Test
+    @Alerts("0")
     public void content() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("content"), messages);
+        test("content");
     }
 
+
     @Test
+    @Alerts("0")
     public void picture() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("picture"), messages);
+        test("picture");
     }
 
+
     @Test
+    @Alerts("0")
     public void template() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("template"), messages);
+        test("template");
     }
+
 
     @Test
+    @Alerts("0")
     public void slot() {
-        final String[] messages = {"0"};
-        checkHtmlAlert(test("slot"), messages);
-    }
-
-    private String test(final String tagName) {
-
-        switch (tagName) {
-            case "basefont":
-                return "<html><head>\n"
-                        + "<" + tagName + " id='outer'><" + tagName + ">\n"
-                        + "<script>\n"
-                        + "function test() {\n"
-                        + "  var e = document.getElementById('outer');\n"
-                        + "  alert(" + VALUE_ + ");\n"
-                        + "}\n"
-                        + "</script>\n"
-                        + "</head><body onload='test()'>\n"
-                        + "</body></html>";
-            case "title":
-                return "<html><head>\n"
-                        + "<script>\n"
-                        + "function test() {\n"
-                        + "  var e = document.getElementById('outer');\n"
-                        + "  alert(" + VALUE_ + ");\n"
-                        + "}\n"
-                        + "</script>\n"
-                        + "<title id='outer'><title></title>\n"
-                        + "</head><body onload='test()'>\n"
-                        + "</body></html>";
-            case "script":
-                return "<html><head>\n"
-                        + "<script>\n"
-                        + "function test() {\n"
-                        + "  var e = document.getElementById('outer');\n"
-                        + "  alert(" + VALUE_ + ");\n"
-                        + "}\n"
-                        + "</script>\n"
-                        + "</head><body onload='test()'>\n"
-                        + "<script id='outer'>//<script>\n"
-                        + "</script>\n"
-                        + "</body></html>";
-            default:
-                return "<html><head>\n"
-                        + "<script>\n"
-                        + "function test() {\n"
-                        + "  var e = document.getElementById('outer');\n"
-                        + "  alert(" + VALUE_ + ");\n"
-                        + "}\n"
-                        + "</script>\n"
-                        + "</head><body onload='test()'>\n"
-                        + "<" + tagName + " id='outer'><" + tagName + "></" + tagName + "></" + tagName + ">\n"
-                        + "</body></html>";
-        }
+        test("slot");
     }
 
     private static String testInput(final String type) {
@@ -973,12 +1111,99 @@ public class ElementOffsetWidthTest extends LoboUnitTest {
                 + "<script>\n"
                 + "function test() {\n"
                 + "  var e = document.getElementById('outer');\n"
-                + "  alert(" + VALUE_ + ");\n"
+                + " alert(" + VALUE_ + ");\n"
                 + "}\n"
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"
                 + "<input type='" + type + "' id='outer'>\n"
                 + "</body></html>";
+    }
+
+    private void test(final String tagName) {
+        String html = "<html><head>\n"
+                + "<script>\n"
+                + "function test() {\n"
+                + "  var e = document.getElementById('outer');\n"
+                + " alert(" + VALUE_ + ");\n"
+                + "}\n"
+                + "</script>\n"
+                + "</head><body onload='test()'>\n"
+                + "<" + tagName + " id='outer'><" + tagName + "></" + tagName + "></" + tagName + ">\n"
+                + "</body></html>";
+
+        if ("basefont".equals(tagName) || "isindex".equals(tagName)) {
+            html = "<html><head>\n"
+                    + "<" + tagName + " id='outer'><" + tagName + ">\n"
+                    + "<script>\n"                    + "function test() {\n"
+                    + "  var e = document.getElementById('outer');\n"
+                    + "  alert(" + VALUE_ + ");\n"
+                    + "}\n"
+                    + "</script>\n"
+                    + "</head><body onload='test()'>\n"
+                    + "</body></html>";
+        }
+
+        if ("title".equals(tagName)) {
+            // title is a bit special, we have to provide at least
+            // one closing tab otherwise title spans to the end of the file
+            html = "<html><head>\n"
+                    + "<script>\n"                    + "function test() {\n"
+                    + "  var e = document.getElementById('outer');\n"
+                    + "  alert(" + VALUE_ + ");\n"
+                    + "}\n"
+                    + "</script>\n"
+                    + "<title id='outer'><title></title>\n"
+                    + "</head><body onload='test()'>\n"
+                    + "</body></html>";
+        }
+
+        if ("frame".equals(tagName)) {
+            html = "<html><head>\n"
+                    + "<script>\n"
+                    + "function test() {\n"
+                    + "  var e = document.getElementById('outer');\n"
+                    + " alert(" + VALUE_ + ");\n"
+                    + "}\n"
+                    + "</script>\n"
+                    + "</head>\n"
+                    + "<frameset onload='test()'>\n"
+                    + "<frame id='outer'><frame>\n"
+                    + "</frameset></html>";
+        }
+        if ("script".equals(tagName)) {
+            html = "<html><head>\n"
+                    + "<script>\n"
+                    + "function test() {\n"
+                    + "  var e = document.getElementById('outer');\n"
+                    + " alert(" + VALUE_ + ");\n"
+                    + "}\n"
+                    + "</script>\n"
+                    + "</head><body onload='test()'>\n"
+                    + "<script id='outer'>//<script>\n"
+                    + "</script>\n"
+                    + "</body></html>";
+        }
+        if ("frameset".equals(tagName)) {
+            html = "<html><head>\n"
+                    + "<script>\n"
+                    + "function test() {\n"
+                    + "  var e = document.getElementById('outer');\n"
+                    + " alert(" + VALUE_ + ");\n"
+                    + "}\n"
+                    + "</script>\n"
+                    + "</head>\n"
+                    + "<frameset onload='test()' id='outer'>\n"
+                    + "<frameset>\n"
+                    + "</frameset></html>";
+        }
+
+        if ("basefont".equals(tagName)
+                || "isindex".equals(tagName)) {
+            checkHtmlAlert(html);
+            return;
+        }
+
+        checkHtmlAlert(html);
     }
 
 }

@@ -40,9 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Invoke setUserData on a new Attr to set its UserData to two Document nodes
  * obtained by parsing the same xml document.  Using getUserData and isNodeEqual
  * verify if the returned nodes are Equal.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-setUserData">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-setUserData</a>
  */
 public class Nodesetuserdata05Test extends LoboUnitTest {

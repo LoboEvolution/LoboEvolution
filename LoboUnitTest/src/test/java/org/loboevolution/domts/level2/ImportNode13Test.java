@@ -47,16 +47,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * contains the retrieved notation and deep is false.  Method should
  * return a node of type notation whose name is "notation1".
  * The returned node should belong to this document whose systemId is "staff.dtd"
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#Core-Document-importNode">http://www.w3.org/TR/DOM-Level-2-Core/core#Core-Document-importNode</a>
  */
 public class ImportNode13Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -82,7 +79,7 @@ public class ImportNode13Test extends LoboUnitTest {
         system = docType.getSystemId();
         assertEquals("staffNS.dtd", system);
         publicVal = aNode.getPublicId();
-        assertEquals( "notation1File", publicVal);
+        assertEquals("notation1File", publicVal);
         system = aNode.getSystemId();
         assertNull(system);
     }

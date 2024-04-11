@@ -43,16 +43,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * The method setPrefix raises a NAMESPACE_ERR if the specified prefix is malformed.
  * Create a new namespace aware element node and call the setPrefix method on it with several malformed
  * prefix values.  Check if a NAMESPACE_ERR is thrown.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSPrefix">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSPrefix</a>
  */
 public class Nodesetprefix05Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

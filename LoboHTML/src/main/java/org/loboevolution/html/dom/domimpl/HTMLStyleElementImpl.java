@@ -145,7 +145,6 @@ public class HTMLStyleElementImpl extends HTMLElementImpl implements HTMLStyleEl
 				final InputSource is = CSSUtilities.getCssInputSourceForStyleSheet(processedText, baseURI);
 				try {
 					final org.htmlunit.cssparser.dom.CSSStyleSheetImpl sheet = parser.parseStyleSheet(is, null);
-					sheet.setHref(baseURI);
 					sheet.setDisabled(this.disabled);
 					final CSSStyleSheetImpl cssStyleSheet = new CSSStyleSheetImpl(sheet);
 					cssStyleSheet.setOwnerNode(this);

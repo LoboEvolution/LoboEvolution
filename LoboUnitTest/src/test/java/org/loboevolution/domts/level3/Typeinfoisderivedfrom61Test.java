@@ -40,8 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Check if xs:byte is derived by restriction from xs:short
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom</a>
  */
 public class Typeinfoisderivedfrom61Test extends LoboUnitTest {

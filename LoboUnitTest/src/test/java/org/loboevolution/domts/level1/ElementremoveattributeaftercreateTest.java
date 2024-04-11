@@ -48,16 +48,13 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * "getNamedItem(name)" method from the NamedNodeMap
  * interface.  It also uses the "getAttributes()" method
  * from the Node interface.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-D589198">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-D589198</a>
  */
 public class ElementremoveattributeaftercreateTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

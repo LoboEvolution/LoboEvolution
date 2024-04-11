@@ -42,8 +42,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Normalize document with datatype-normalization set to true.
  * Check if dateTime values were correctly normalized.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-datatype-normalization">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-datatype-normalization</a>
  */
@@ -82,25 +81,25 @@ public class Datatypenormalization05Test extends LoboUnitTest {
             elemList = doc.getElementsByTagNameNS("http://www.w3.org/2001/DOM-Test-Suite/Level-3/datatype_normalization", "data:dateTime");
             element = (Element) elemList.item(0);
             str = element.getAttribute("data:value");
-             assertEquals( "2004-01-21T15:30:00-05:00", str, "Datatypenormalization05Assert4");
+            assertEquals("2004-01-21T15:30:00-05:00", str, "Datatypenormalization05Assert4");
             str = element.getAttribute("data:union");
-             assertEquals( "2004-01-21T20:30:00-05:00", str, "Datatypenormalization05Assert5");
+            assertEquals("2004-01-21T20:30:00-05:00", str, "Datatypenormalization05Assert5");
             str = element.getTextContent();
-             assertEquals( "2004-01-21T15:30:00 2004-01-21T15:30:00Z", str, "Datatypenormalization05Assert6");
+            assertEquals("2004-01-21T15:30:00 2004-01-21T15:30:00Z", str, "Datatypenormalization05Assert6");
             element = (Element) elemList.item(1);
             str = element.getAttribute("data:value");
-             assertEquals( "2004-01-21T15:30:00.0000-05:00", str, "Datatypenormalization05Assert7");
+            assertEquals("2004-01-21T15:30:00.0000-05:00", str, "Datatypenormalization05Assert7");
             str = element.getAttribute("data:union");
-             assertEquals( "2004-01-21T15:30:00.0000-05:00", str, "Datatypenormalization05Assert8");
+            assertEquals("2004-01-21T15:30:00.0000-05:00", str, "Datatypenormalization05Assert8");
             str = element.getTextContent();
-             assertEquals( "2004-01-21T15:30:00.0000", str, "Datatypenormalization05Assert9");
+            assertEquals("2004-01-21T15:30:00.0000", str, "Datatypenormalization05Assert9");
             element = (Element) elemList.item(2);
             str = element.getAttribute("data:value");
-             assertEquals( "2004-01-21T15:30:00.0001-05:00", str, "Datatypenormalization05Assert10");
+            assertEquals("2004-01-21T15:30:00.0001-05:00", str, "Datatypenormalization05Assert10");
             str = element.getAttribute("data:union");
-            assertEquals( "2004-01-21T15:30:00.0001-05:00", str, "Datatypenormalization05Assert11");
+            assertEquals("2004-01-21T15:30:00.0001-05:00", str, "Datatypenormalization05Assert11");
             str = element.getTextContent();
-            assertEquals( "2004-01-21T15:30:00.0001", str, "Datatypenormalization05Assert12");
+            assertEquals("2004-01-21T15:30:00.0001", str, "Datatypenormalization05Assert12");
         }
     }
 }

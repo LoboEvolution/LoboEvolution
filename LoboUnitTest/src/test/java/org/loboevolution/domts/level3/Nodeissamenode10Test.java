@@ -39,9 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * Using isSameNode check if an new Document and a new Element node are not the same.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isSameNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isSameNode</a>
  */
 public class Nodeissamenode10Test extends LoboUnitTest {

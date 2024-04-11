@@ -39,15 +39,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * If the implementation supports "XML", DOMImplementationRegistry.getDOMImplementation("xMl 3.0 cOrE") should
  * return a DOMImplementation where hasFeature("XML", "3.0"), and hasFeature("Core", null) returns true.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/java-binding">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/java-binding</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/ecma-script-binding">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/ecma-script-binding</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-getDOMImpl">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-getDOMImpl</a>
  */
 public class Domimplementationregistry06Test extends LoboUnitTest {
     @Test
-    public void runTest() throws Exception {
+    public void runTest() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
         DOMImplementation domImpl = null;
         boolean hasFeature;
         final String nullVersion = null;

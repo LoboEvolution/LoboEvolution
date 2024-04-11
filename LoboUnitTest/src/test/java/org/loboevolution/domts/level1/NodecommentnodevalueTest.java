@@ -33,7 +33,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -43,9 +43,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * Retrieve the comment in the XML file and
  * check the string returned by the "getNodeValue()" method.
  * It should be equal to "This is comment number 1".
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1728279322">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1728279322</a>
  */
@@ -53,7 +51,6 @@ public class NodecommentnodevalueTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -70,7 +67,7 @@ public class NodecommentnodevalueTest extends LoboUnitTest {
 
             if ("#comment".equals(commentName)) {
                 commentValue = commentNode.getNodeValue();
-                assertEquals( " This is comment number 1.", commentValue, "NodecommentnodevalueAssert1");
+                assertEquals(" This is comment number 1.", commentValue, "NodecommentnodevalueAssert1");
             }
         }
     }

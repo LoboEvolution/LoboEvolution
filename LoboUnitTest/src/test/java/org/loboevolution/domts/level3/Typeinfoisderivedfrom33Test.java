@@ -39,8 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Check is anonymous type of p element is derived by extension from part1.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom</a>
  */
 public class Typeinfoisderivedfrom33Test extends LoboUnitTest {

@@ -45,9 +45,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Retreieve the second element whose localName is address and its attributes into a named node map.
  * Invoke setNamedItemNS on the second NamedNodeMap specifying the first domestic attribute from
  * the first map.  This should raise an INUSE_ATTRIBIUTE_ERR.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-setNamedItemNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-setNamedItemNS</a>
  */
 public class Namednodemapsetnameditemns06Test extends LoboUnitTest {

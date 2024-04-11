@@ -42,8 +42,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 
 /**
  * Call setUserData on a node providing a UserDataHandler and import the node.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-handleUserDataEvent">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-handleUserDataEvent</a>
  */
 public class Userdatahandler03Test extends LoboUnitTest {
@@ -111,6 +110,6 @@ public class Userdatahandler03Test extends LoboUnitTest {
             assertSame(newNode, dst, "Userdatahandler03Assert9");
         }
         assertEquals(1, greetingCount, "Userdatahandler03Assert10");
-        assertEquals( 1, salutationCount, "Userdatahandler03Assert11");
+        assertEquals(1, salutationCount, "Userdatahandler03Assert11");
     }
 }

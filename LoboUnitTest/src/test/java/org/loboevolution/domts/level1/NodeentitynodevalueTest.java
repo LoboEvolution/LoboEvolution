@@ -41,16 +41,13 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 /**
  * The string returned by the "getNodeValue()" method for an
  * Entity Node is null.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080</a>
  */
 public class NodeentitynodevalueTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

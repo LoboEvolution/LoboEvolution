@@ -47,16 +47,13 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * public identifier.  Since a public identifier was not
  * specified for this notation, the "getPublicId()" method
  * should return null.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-54F2B4D0">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-54F2B4D0</a>
  */
 public class NotationgetpublicidnullTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

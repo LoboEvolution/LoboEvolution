@@ -38,9 +38,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * Invoke setUserData on this Entity node to set this its UserData to a new
  * Attr node and using getUserData with an invalid Key check if the returned
  * UserData object is Null.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-getUserData">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-getUserData</a>
  */
 public class Nodegetuserdata05Test extends LoboUnitTest {

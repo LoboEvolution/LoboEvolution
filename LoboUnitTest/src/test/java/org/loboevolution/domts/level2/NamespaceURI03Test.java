@@ -33,7 +33,8 @@ import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 /**
@@ -42,16 +43,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * <p>
  * Retrieve the first employee node and invoke the "getNamespaceURI()"
  * method.   The method should return "http://www.nist.gov".
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSname">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSname</a>
  */
 public class NamespaceURI03Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -61,10 +59,10 @@ public class NamespaceURI03Test extends LoboUnitTest {
         final String employeeNamespace;
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagName("employee");
-        testEmployee = (Element)elementList.item(0);
+        testEmployee = (Element) elementList.item(0);
         assertNotNull(testEmployee);
         employeeNamespace = testEmployee.getNamespaceURI();
-        assertEquals( "http://www.nist.gov", employeeNamespace);
+        assertEquals("http://www.nist.gov", employeeNamespace);
     }
 }
 

@@ -35,15 +35,14 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
  * Retrieve the attribute named class from the last
  * child of the second "p" element and examine its
  * NodeName.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D095">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D095</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1112119403">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1112119403</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=236">http://www.w3.org/Bugs/Public/show_bug.cgi?id=236</a>
@@ -53,7 +52,6 @@ public class HcattrnameTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -71,8 +69,8 @@ public class HcattrnameTest extends LoboUnitTest {
         streetAttr = (Attr) attributes.getNamedItem("class");
         strong1 = streetAttr.getNodeName();
         strong2 = streetAttr.getName();
-         assertEquals( "class", strong1, "HcattrnameAssert1");
-         assertEquals( "class", strong2, "HcattrnameAssert2");
+        assertEquals("class", strong1, "HcattrnameAssert1");
+        assertEquals("class", strong2, "HcattrnameAssert2");
     }
 }
 

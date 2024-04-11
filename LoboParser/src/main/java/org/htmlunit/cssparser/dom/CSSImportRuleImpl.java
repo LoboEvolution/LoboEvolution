@@ -23,8 +23,6 @@ import org.htmlunit.cssparser.util.ParserUtils;
 /**
  * Implementation of CSSImportRule.
  *
- * @author Ronald Brill
- *
  */
 public class CSSImportRuleImpl extends AbstractCSSRuleImpl {
 

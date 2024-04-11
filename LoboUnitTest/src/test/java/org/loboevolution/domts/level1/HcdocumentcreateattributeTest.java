@@ -32,7 +32,8 @@ import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 /**
@@ -41,8 +42,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * new Attribute node with the given name. The name, value
  * and type of the newly created object are retrieved and
  * output.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1084891198">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1084891198</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=236">http://www.w3.org/Bugs/Public/show_bug.cgi?id=236</a>
  * @see <a href="http://lists.w3.org/Archives/Public/www-dom-ts/2003Jun/0011.html">http://lists.w3.org/Archives/Public/www-dom-ts/2003Jun/0011.html</a>
@@ -52,7 +52,6 @@ public class HcdocumentcreateattributeTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -64,9 +63,9 @@ public class HcdocumentcreateattributeTest extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         newAttrNode = doc.createAttribute("title");
         attrValue = newAttrNode.getNodeValue();
-        assertEquals( null, attrValue, "HcdocumentcreateattributeAssert1");
+        assertNull(attrValue, "HcdocumentcreateattributeAssert1");
         attrName = newAttrNode.getNodeName();
-        assertEquals( "title", attrName, "HcdocumentcreateattributeAssert2");
+        assertEquals("title", attrName, "HcdocumentcreateattributeAssert2");
         attrType = newAttrNode.getNodeType();
         assertEquals(2, attrType, "HcdocumentcreateattributeAssert3");
     }

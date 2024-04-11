@@ -27,10 +27,13 @@
 package org.loboevolution.common;
 
 import lombok.extern.slf4j.Slf4j;
+import org.loboevolution.net.UserAgent;
 
+import java.io.File;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -115,17 +118,6 @@ public class Urls {
 	}
 
 	/**
-	 * <p>hasHost.</p>
-	 *
-	 * @param url a {@link java.net.URL} object.
-	 * @return a boolean.
-	 */
-	public static boolean hasHost(final URL url) {
-		final String host = url.getHost();
-		return Strings.isNotBlank(host);
-	}
-
-	/**
 	 * <p>isAbsolute.</p>
 	 *
 	 * @param url a {@link java.lang.String} object.
@@ -159,7 +151,7 @@ public class Urls {
 	 */
 	public static boolean isLocalFile(final URL url) {
 		final String scheme = url.getProtocol();
-		return "file".equalsIgnoreCase(scheme) && !hasHost(url);
+		return "file".equalsIgnoreCase(scheme);
 	}
 
 	/**
@@ -206,5 +198,14 @@ public class Urls {
 			}
 		}
 		return 0L;
+	}
+
+	public static boolean exists(URL url) {
+		try {
+			url.openConnection();
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 }

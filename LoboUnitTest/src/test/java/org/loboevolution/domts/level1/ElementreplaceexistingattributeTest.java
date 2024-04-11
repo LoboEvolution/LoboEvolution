@@ -34,7 +34,7 @@ import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 /**
@@ -50,15 +50,12 @@ import static org.junit.jupiter.api.Assertions.*;
  * method should replace the existing Attr node with the
  * new one.  This test uses the "createAttribute(name)"
  * method from the Document interface.
- *
- * @author NIST
- * @author Mary Brady
+
  */
 public class ElementreplaceexistingattributeTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

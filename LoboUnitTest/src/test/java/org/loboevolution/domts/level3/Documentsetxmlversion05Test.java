@@ -41,9 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Set the value of the version attribute of the XML declaration of a new document to "-"
  * and check if a NOT_SUPPORTED_ERR is thrown.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-version">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-version</a>
  */
 public class Documentsetxmlversion05Test extends LoboUnitTest {

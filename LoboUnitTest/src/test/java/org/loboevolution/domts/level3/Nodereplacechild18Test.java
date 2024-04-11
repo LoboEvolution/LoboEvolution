@@ -37,9 +37,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * Using replaceChild on a DocumentFragment node attempt to replace a CDATASection node with
  * a EntityReference and vice versa verify the data of the replaced nodes.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307</a>
  */
 public class Nodereplacechild18Test extends LoboUnitTest {
@@ -62,10 +60,10 @@ public class Nodereplacechild18Test extends LoboUnitTest {
         appendedChild = docFrag.appendChild(cdata);
         replacedCData = (CDATASection) docFrag.replaceChild(entRef, cdata);
         cdataName = replacedCData.getNodeValue();
-        assertEquals( "CDATASection", cdataName, "Nodereplacechild18Assert2");
+        assertEquals("CDATASection", cdataName, "Nodereplacechild18Assert2");
         replacedEref = (EntityReference) docFrag.replaceChild(cdata, entRef);
         erefName = replacedEref.getNodeName();
-        assertEquals( "alpha", erefName, "Nodereplacechild18Assert3");
+        assertEquals("alpha", erefName, "Nodereplacechild18Assert3");
     }
 }
 

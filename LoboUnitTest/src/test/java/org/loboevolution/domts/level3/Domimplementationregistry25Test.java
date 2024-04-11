@@ -40,8 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * DOMImplementationRegistry.getDOMImplementationList("cOrE 3.0 xMl 3.0 eVeNts 2.0 lS")
  * should return an empty list or a list of DOMImplementation that implements the specified features.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/java-binding">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/java-binding</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/ecma-script-binding">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/ecma-script-binding</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-getDOMImpls">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-getDOMImpls</a>
@@ -51,13 +50,13 @@ public class Domimplementationregistry25Test extends LoboUnitTest {
     @Test
     @SneakyThrows
     public void runTest() {
-       
+
         final DOMImplementationList domImplList;
         final int length;
-         final DOMImplementationRegistry domImplRegistry = DOMImplementationRegistry.newInstance();
+        final DOMImplementationRegistry domImplRegistry = DOMImplementationRegistry.newInstance();
         assertNotNull(domImplRegistry, "Domimplementationregistry25Assert3");
         domImplList = domImplRegistry.getDOMImplementationList("");
-        length = (int) domImplList.getLength();
+        length = domImplList.getLength();
         assertTrue((length > 0), "Domimplementationregistry25Assert4");
     }
 }

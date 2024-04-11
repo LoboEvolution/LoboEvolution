@@ -39,9 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Using removeChild on this Document node attempt to remove this Document node and
  * verify if a NOT_FOUND_ERR error is thrown.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-1734834066">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-1734834066</a>
  */
 public class Noderemovechild01Test extends LoboUnitTest {

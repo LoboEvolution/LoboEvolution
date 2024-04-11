@@ -42,16 +42,13 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * <p>
  * Invoke method getElementById(elementId) on this document
  * with elementId equals "Cancun". Method should return null.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-getElBId">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-getElBId</a>
  */
 public class GetElementById02Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

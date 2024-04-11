@@ -20,8 +20,6 @@ import java.util.List;
  * The SelectorList interface provides the abstraction of an ordered collection
  * of selectors, without defining or constraining how this collection is
  * implemented.
- *
- * @author Ronald Brill
  */
 public interface SelectorList extends List<Selector> {
 }

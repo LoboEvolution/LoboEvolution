@@ -39,9 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Verify if the (default)value of the strictErrorChecking attribute of a new Document object is true.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-strictErrorChecking">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-strictErrorChecking</a>
  */
 public class Documentgetstricterrorchecking02Test extends LoboUnitTest {

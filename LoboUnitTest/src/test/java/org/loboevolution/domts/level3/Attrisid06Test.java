@@ -37,9 +37,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * Invoke isId on a new Attr node.  Check if the value returned is false.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Attr-isId">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Attr-isId</a>
  */
 public class Attrisid06Test extends LoboUnitTest {

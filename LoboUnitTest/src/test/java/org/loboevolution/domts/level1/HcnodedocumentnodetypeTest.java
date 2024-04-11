@@ -31,7 +31,7 @@ import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -39,8 +39,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * returns the constant value 9.
  * Retrieve the document and invoke the "getNodeType()"
  * method.   The method should return 9.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#i-Document">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#i-Document</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-111237558">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-111237558</a>
  */
@@ -48,7 +47,6 @@ public class HcnodedocumentnodetypeTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -56,7 +54,7 @@ public class HcnodedocumentnodetypeTest extends LoboUnitTest {
         final int nodeType;
         doc = sampleXmlFile("hc_staff.xml");
         nodeType = doc.getNodeType();
-        assertEquals( 9, nodeType, "HcnodedocumentnodetypeAssert1");
+        assertEquals(9, nodeType, "HcnodedocumentnodetypeAssert1");
     }
 }
 

@@ -32,7 +32,7 @@ import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.*;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -41,9 +41,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * <p>
  * Retreive the default attribute defaultAttr and check its owner element.  Verify if the name
  * the nodeName of the returned ownerElement is employee.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#Attr-ownerElement">http://www.w3.org/TR/DOM-Level-2-Core/core#Attr-ownerElement</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=259">http://www.w3.org/Bugs/Public/show_bug.cgi?id=259</a>
  */
@@ -51,7 +49,6 @@ public class Attrgetownerelement01Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -64,13 +61,13 @@ public class Attrgetownerelement01Test extends LoboUnitTest {
         final NamedNodeMap attributes;
         final String nullNS = null;
         doc = sampleXmlFile("staffNS.xml");
-        elementList = doc.getElementsByTagName( "employee");
+        elementList = doc.getElementsByTagName("employee");
         element = (Element) elementList.item(1);
         attributes = element.getAttributes();
         attr = (Attr) attributes.getNamedItemNS(nullNS, "defaultAttr");
         ownerElement = attr.getOwnerElement();
         ownerElementName = ownerElement.getNodeName();
-        assertEquals( "EMPLOYEE", ownerElementName);
+        assertEquals("EMPLOYEE", ownerElementName);
     }
 }
 

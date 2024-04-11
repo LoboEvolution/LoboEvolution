@@ -21,8 +21,6 @@ import org.htmlunit.cssparser.parser.LexicalUnit.LexicalUnitType;
 
 /**
  * Implementation of Counter.
- *
- * @author Ronald Brill
  */
 public class CounterImpl implements Serializable {
 

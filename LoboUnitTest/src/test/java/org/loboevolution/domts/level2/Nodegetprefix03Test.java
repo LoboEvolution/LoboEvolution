@@ -33,7 +33,8 @@ import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 /**
@@ -42,16 +43,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * Ceate two new element nodes and atribute nodes, with and without namespace prefixes.
  * Retreive the prefix part of their qualified names using getPrefix and verify
  * if it is correct.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSPrefix">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSPrefix</a>
  */
 public class Nodegetprefix03Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -73,10 +71,10 @@ public class Nodegetprefix03Test extends LoboUnitTest {
         elemPrefix = qelement.getPrefix();
         attrNoPrefix = attr.getPrefix();
         attrPrefix = qattr.getPrefix();
-        assertNull( elemNoPrefix);
-        assertEquals( "qual", elemPrefix);
-        assertNull( attrNoPrefix);
-        assertEquals( "qual", attrPrefix);
+        assertNull(elemNoPrefix);
+        assertEquals("qual", elemPrefix);
+        assertNull(attrNoPrefix);
+        assertEquals("qual", attrPrefix);
     }
 }
 

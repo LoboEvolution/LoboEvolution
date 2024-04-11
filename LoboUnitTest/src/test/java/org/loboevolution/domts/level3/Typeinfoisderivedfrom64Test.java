@@ -41,9 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Check that the simpleType of an attributes derives by restriction from itself
  * and from its base type.
- *
- * @author IBM
- * @author Jenny Hsu
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom</a>
  */
 public class Typeinfoisderivedfrom64Test extends LoboUnitTest {

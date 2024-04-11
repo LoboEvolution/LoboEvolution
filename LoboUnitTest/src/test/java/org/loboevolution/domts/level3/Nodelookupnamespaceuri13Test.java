@@ -39,9 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * Invoke lookupNamespaceURI on a Element's new Text node, which has a namespace attribute declaration
  * with a namespace prefix in its parent Element node and check if the value of the namespaceURI
  * returned by using its prefix as a parameter is valid.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-lookupNamespaceURI">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-lookupNamespaceURI</a>
  */
 public class Nodelookupnamespaceuri13Test extends LoboUnitTest {
@@ -60,7 +58,7 @@ public class Nodelookupnamespaceuri13Test extends LoboUnitTest {
         appendedChild = elem.appendChild(txt);
         appendedChild = docElem.appendChild(elem);
         namespaceURI = txt.lookupNamespaceURI("dom3");
-        assertEquals( "http://www.w3.org/1999/xhtml", namespaceURI, "Nodelookupnamespaceuri13Assert2");
+        assertEquals("http://www.w3.org/1999/xhtml", namespaceURI, "Nodelookupnamespaceuri13Assert2");
     }
 }
 

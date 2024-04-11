@@ -49,16 +49,13 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * and namespace uri "http://www.usa.com" with
  * method getNamedItemNS(namespaceURI,localName).
  * This should return null because "domest" does not match any local names in this map.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-getNamedItemNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-getNamedItemNS</a>
  */
 public class GetNamedItemNS02Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -71,7 +68,7 @@ public class GetNamedItemNS02Test extends LoboUnitTest {
         final Attr newAttr;
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagName("address");
-        testEmployee = (Element)elementList.item(1);
+        testEmployee = (Element) elementList.item(1);
         attributes = testEmployee.getAttributes();
         newAttr = (Attr) attributes.getNamedItemNS(namespaceURI, localName);
         assertNull(newAttr);

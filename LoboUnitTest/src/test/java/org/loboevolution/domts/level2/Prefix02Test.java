@@ -47,16 +47,13 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * Retrieve the first employeeId node and get the first child of this node.
  * Since the first child is Text node invoking the "getPrefix()"
  * method will cause "null" to be returned.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSPrefix">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSPrefix</a>
  */
 public class Prefix02Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -67,11 +64,11 @@ public class Prefix02Test extends LoboUnitTest {
         final String prefix;
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagName("employeeId");
-        testEmployee = (Element)elementList.item(0);
+        testEmployee = (Element) elementList.item(0);
         assertNotNull(testEmployee);
         textNode = testEmployee.getFirstChild();
         prefix = textNode.getPrefix();
-        assertNull( prefix);
+        assertNull(prefix);
     }
 }
 

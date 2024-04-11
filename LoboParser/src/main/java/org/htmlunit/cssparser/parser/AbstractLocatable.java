@@ -16,8 +16,6 @@ package org.htmlunit.cssparser.parser;
 
 /**
  * Abstract base class of all locatables.
- *
- * @author Ronald Brill
  */
 public class AbstractLocatable implements Locatable {
 

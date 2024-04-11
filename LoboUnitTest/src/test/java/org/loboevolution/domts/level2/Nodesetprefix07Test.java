@@ -43,16 +43,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Create a new attribute node whose namespaceURI is different form "http://www.w3.org/2000/xmlns/"
  * and node prefix is "xmlns".
  * Check if the NAMESPACE_ERR was thrown.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSPrefix">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSPrefix</a>
  */
 public class Nodesetprefix07Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

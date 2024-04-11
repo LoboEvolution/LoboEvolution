@@ -42,8 +42,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 /**
  * An attempt to add an element to the named node map returned by notations should
  * result in a NO_MODIFICATION_ERR or HIERARCHY_REQUEST_ERR.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-D46829EF">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-D46829EF</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1025163788">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1025163788</a>
  */
@@ -51,7 +50,6 @@ public class Hcnotationssetnameditem1Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

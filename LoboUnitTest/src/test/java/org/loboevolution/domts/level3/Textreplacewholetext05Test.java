@@ -39,9 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * Invoke replaceWholeText on an existing text node with newly created text and CDATASection
  * nodes appended as children of its parent element node.  Verify repalceWholeText by
  * verifying the values returned by wholeText.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Text3-replaceWholeText">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Text3-replaceWholeText</a>
  */
 public class Textreplacewholetext05Test extends LoboUnitTest {

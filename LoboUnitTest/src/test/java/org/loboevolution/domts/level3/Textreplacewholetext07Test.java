@@ -41,10 +41,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * of that element.  Since the entity reference does not contain any
  * logically-adjacent text content, only the initial text element should
  * be replaced.
- *
- * @author IBM
- * @author Neil Delima
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Text3-replaceWholeText">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Text3-replaceWholeText</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=425">http://www.w3.org/Bugs/Public/show_bug.cgi?id=425</a>
  */

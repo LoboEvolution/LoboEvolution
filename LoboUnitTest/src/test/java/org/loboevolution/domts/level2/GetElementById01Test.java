@@ -32,7 +32,7 @@ import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -42,9 +42,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * Invoke method getElementById(elementId) on this document
  * with elementId equals "CANADA".  Method should return an element
  * whose tag name is "address".
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-104682815">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-104682815</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=383">http://www.w3.org/Bugs/Public/show_bug.cgi?id=383</a>
  */
@@ -52,7 +50,6 @@ public class GetElementById01Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

@@ -35,7 +35,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -47,8 +47,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * parsed and therefore should still be the same upon
  * retrieval. This test uses the "getNamedItem(name)" method
  * from the NamedNodeMap interface.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-221662474">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-221662474</a>
  * @see <a href="http://lists.w3.org/Archives/Public/www-dom-ts/2002Apr/0057.html">http://lists.w3.org/Archives/Public/www-dom-ts/2002Apr/0057.html</a>
  */
@@ -56,7 +55,6 @@ public class HcattrcreatetextnodeTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -73,9 +71,9 @@ public class HcattrcreatetextnodeTest extends LoboUnitTest {
         streetAttr = (Attr) attributes.getNamedItem("class");
         streetAttr.setValue("Y&ent1;");
         value = streetAttr.getValue();
-        assertEquals( "Y&ent1;", value, "HcattrcreatetextnodeAssert1");
+        assertEquals("Y&ent1;", value, "HcattrcreatetextnodeAssert1");
         value = streetAttr.getNodeValue();
-         assertEquals( "Y&ent1;", value, "HcattrcreatetextnodeAssert2");
+        assertEquals("Y&ent1;", value, "HcattrcreatetextnodeAssert2");
     }
 }
 

@@ -38,7 +38,7 @@ import org.loboevolution.html.node.NodeList;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -49,8 +49,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * After the removal, the second p element should have 5 element
  * children and the first child should now be the child
  * that used to be at the second position in the list.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1734834066">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1734834066</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=246">http://www.w3.org/Bugs/Public/show_bug.cgi?id=246</a>
  */
@@ -58,7 +57,6 @@ public class HcnoderemovechildnodeTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -100,7 +98,7 @@ public class HcnoderemovechildnodeTest extends LoboUnitTest {
                 actual.add(childName);
             } else {
                 assertEquals(3, nodeType, "HcnoderemovechildnodeAssert2");
-                assertEquals( "#text", childName, "HcnoderemovechildnodeAssert3");
+                assertEquals("#text", childName, "HcnoderemovechildnodeAssert3");
             }
 
         }

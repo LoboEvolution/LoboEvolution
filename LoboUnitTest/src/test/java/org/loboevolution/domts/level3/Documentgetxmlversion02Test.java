@@ -40,9 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * Check if the value of the version attribute in the XML declaration of a new document
  * is "1.0".
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-version">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-version</a>
  */
 public class Documentgetxmlversion02Test extends LoboUnitTest {
@@ -64,7 +62,7 @@ public class Documentgetxmlversion02Test extends LoboUnitTest {
         domImpl = doc.getImplementation();
         newDoc = domImpl.createDocument(rootNS, rootName, nullDocType);
         versionValue = newDoc.getXmlVersion();
-        assertEquals( "1.0", versionValue, "Documentgetxmlversion02Assert2");
+        assertEquals("1.0", versionValue, "Documentgetxmlversion02Assert2");
     }
 }
 

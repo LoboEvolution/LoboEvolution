@@ -43,9 +43,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * Using insertBefore on a DocumentFragment node attempt to insert a new DocumentFragment node
  * before this DocumentFragment's Element node and verify the last child is still the only child
  * appended to docFrag.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-952280727">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-952280727</a>
  */
 public class Nodeinsertbefore12Test extends LoboUnitTest {

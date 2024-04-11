@@ -40,9 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Set the strictErrorChecking attribute value on a new Document to true.
  * Call the createAttributeNS method on this document with a a null namespaceURI and a qualified name
  * with a prefix and check if the NAMESPACE_ERR is thrown.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-strictErrorChecking">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-strictErrorChecking</a>
  */
 public class Documentsetstricterrorchecking02Test extends LoboUnitTest {

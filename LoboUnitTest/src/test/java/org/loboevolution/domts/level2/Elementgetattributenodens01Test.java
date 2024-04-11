@@ -33,7 +33,8 @@ import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 /**
@@ -42,9 +43,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * local name but different namespaceURIs and prefixes.
  * Retrieve an attribute using namespace and localname and check its value, name and
  * namespaceURI.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElGetAtNodeNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElGetAtNodeNS</a>
  */
 public class Elementgetattributenodens01Test extends LoboUnitTest {
@@ -76,7 +75,7 @@ public class Elementgetattributenodens01Test extends LoboUnitTest {
         attNodeName = attribute.getNodeName();
         attrLocalName = attribute.getLocalName();
         attrNS = attribute.getNamespaceURI();
-        assertEquals(null, attrValue);
+        assertNull(attrValue);
         assertEquals("l2:att", attrName);
         assertEquals("l2:att", attNodeName);
         assertEquals("att", attrLocalName);

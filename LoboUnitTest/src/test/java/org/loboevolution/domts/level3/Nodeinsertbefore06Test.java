@@ -39,9 +39,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 /**
  * Using insertBefore on this Document node attempt to insert an Element node before
  * the existing element node and verify if a HIERARCHY_REQUEST_ERR or NOT_SUPPORTED_ERR is raised.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-952280727">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-952280727</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=415">http://www.w3.org/Bugs/Public/show_bug.cgi?id=415</a>
  */

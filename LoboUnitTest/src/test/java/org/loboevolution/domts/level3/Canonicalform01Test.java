@@ -39,8 +39,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Normalize document with 'canonical-form' set to true, check that
  * entity references are expanded and unused entity declaration are maintained.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-canonical-form">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-canonical-form</a>
  */
@@ -78,9 +77,9 @@ public class Canonicalform01Test extends LoboUnitTest {
             child = pElem.getLastChild();
             assertNotNull(child, "Canonicalform01Assert2");
             childName = child.getNodeName();
-            assertEquals( "#text", childName, "Canonicalform01Assert3");
+            assertEquals("#text", childName, "Canonicalform01Assert3");
             childValue = child.getNodeValue();
-            assertEquals( "barfoo", childValue, "Canonicalform01Assert4");
+            assertEquals("barfoo", childValue, "Canonicalform01Assert4");
         }
     }
 }

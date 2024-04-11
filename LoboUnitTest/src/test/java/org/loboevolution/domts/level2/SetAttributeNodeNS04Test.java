@@ -35,7 +35,8 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 /**
@@ -49,16 +50,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * returns the replaced "Attr" node.
  * This test uses the "createAttributeNS(namespaceURI,localName)
  * method from the Document interface to create the new attribute to add.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-F68D095">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-F68D095</a>
  */
 public class SetAttributeNodeNS04Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -75,7 +73,7 @@ public class SetAttributeNodeNS04Test extends LoboUnitTest {
         newAttr = doc.createAttributeNS("http://www.nist.gov", "xxx:domestic");
         newAddrAttr = ((Element) testAddr).setAttributeNodeNS(newAttr);
         newName = newAddrAttr.getNodeName();
-        assertEquals( "xxx:domestic", newName);
+        assertEquals("xxx:domestic", newName);
     }
 }
 

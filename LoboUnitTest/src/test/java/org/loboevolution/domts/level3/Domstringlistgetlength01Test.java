@@ -42,9 +42,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  * The range of valid child node indices is 0 to length-1 inclusive.
  * Invoke the length on the list of parameters returned by the DOMConfiguration object.
  * Verify that the list is not null and length is not 0.
- *
- * @author IBM
- * @author Jenny Hsu
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMStringList-length">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMStringList-length</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration-parameterNames">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration-parameterNames</a>
  */

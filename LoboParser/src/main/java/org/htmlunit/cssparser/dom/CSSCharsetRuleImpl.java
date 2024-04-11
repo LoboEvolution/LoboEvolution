@@ -23,8 +23,6 @@ import org.htmlunit.cssparser.util.ParserUtils;
 /**
  * Implementation of CSSCharsetRule.
  *
- * @author Ronald Brill
- *
  */
 public class CSSCharsetRuleImpl extends AbstractCSSRuleImpl {
 

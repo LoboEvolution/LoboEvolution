@@ -42,9 +42,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Using setTextContent on a new EntityReference node, attempt to set its value.
  * Since EntityReference nodes are ReadOnly, check if a NO_MODIFICATION_ALLOWED_ERR
  * is raised.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-textContent">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-textContent</a>
  */
 public class Nodesettextcontent12Test extends LoboUnitTest {

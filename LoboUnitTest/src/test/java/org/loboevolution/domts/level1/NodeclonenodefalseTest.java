@@ -34,7 +34,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -47,16 +47,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * length of the NodeList are checked.   The "getNodeName()"
  * method should return "employee" and the "getLength()"
  * method should return 0.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-3A0ED0A4">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-3A0ED0A4</a>
  */
 public class NodeclonenodefalseTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -72,10 +69,10 @@ public class NodeclonenodefalseTest extends LoboUnitTest {
         employeeNode = elementList.item(1);
         clonedNode = employeeNode.cloneNode(false);
         cloneName = clonedNode.getNodeName();
-         assertEquals( "EMPLOYEE", cloneName, "NodeclonenodefalseAssert1");
+        assertEquals("EMPLOYEE", cloneName, "NodeclonenodefalseAssert1");
         cloneChildren = clonedNode.getChildNodes();
         length = cloneChildren.getLength();
-        assertEquals( 0, length, "NodeclonenodefalseAssert2");
+        assertEquals(0, length, "NodeclonenodefalseAssert2");
     }
 }
 

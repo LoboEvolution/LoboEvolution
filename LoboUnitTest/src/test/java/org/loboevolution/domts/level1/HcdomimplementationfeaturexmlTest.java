@@ -29,8 +29,8 @@ package org.loboevolution.domts.level1;
 
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DOMImplementation;
+import org.loboevolution.html.node.Document;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -41,8 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * DOMImplementation object whose "hasFeature(feature,
  * version)" method is invoked with "feature" equal to "html" or "xml".
  * The method should return a boolean "true".
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-5CED94D7">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-5CED94D7</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=245">http://www.w3.org/Bugs/Public/show_bug.cgi?id=245</a>
  */
@@ -50,7 +49,6 @@ public class HcdomimplementationfeaturexmlTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -58,7 +56,7 @@ public class HcdomimplementationfeaturexmlTest extends LoboUnitTest {
         final DOMImplementation domImpl;
         final boolean state;
         doc = sampleXmlFile("hc_staff.xml");
-        
+
         domImpl = doc.getImplementation();
         state = domImpl.hasFeature("html", "1.0");
         assertTrue(state, "HcdomimplementationfeaturexmlAssert2");

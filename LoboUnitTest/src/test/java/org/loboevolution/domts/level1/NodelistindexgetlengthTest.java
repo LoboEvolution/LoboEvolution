@@ -40,16 +40,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * The "getLength()" method returns the number of nodes
  * in the list should be 6 (no whitespace) or 13.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-203510337">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-203510337</a>
  */
 public class NodelistindexgetlengthTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

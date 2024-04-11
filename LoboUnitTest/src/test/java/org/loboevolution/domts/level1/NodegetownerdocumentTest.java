@@ -34,7 +34,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -45,16 +45,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * returned by the "getOwnerDocument()" method.   Invoke
  * the "getDocumentElement()" on the Document which will
  * return an Element that is equal to "staff".
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#node-ownerDoc">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#node-ownerDoc</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=251">http://www.w3.org/Bugs/Public/show_bug.cgi?id=251</a>
  */
 public class NodegetownerdocumentTest extends LoboUnitTest {
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -70,7 +67,7 @@ public class NodegetownerdocumentTest extends LoboUnitTest {
         ownerDocument = docNode.getOwnerDocument();
         docElement = ownerDocument.getDocumentElement();
         elementName = docElement.getNodeName();
-        assertEquals( "STAFF", elementName, "NodegetownerdocumentAssert1");
+        assertEquals("STAFF", elementName, "NodegetownerdocumentAssert1");
 
     }
 }

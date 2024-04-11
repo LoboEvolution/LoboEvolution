@@ -30,8 +30,8 @@ package org.loboevolution.domts.level2;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DOMImplementation;
+import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 
 import java.util.ArrayList;
@@ -50,16 +50,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * doctype is null and qualifiedName contains an illegal character from
  * illegalChars[].  Method should raise INVALID_CHARACTER_ERR DOMException
  * for all characters in illegalChars[].
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#">http://www.w3.org/TR/DOM-Level-2-Core/core#</a>
  */
 public class CreateDocument05Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -99,7 +96,7 @@ public class CreateDocument05Test extends LoboUnitTest {
         illegalQNames.add("namespaceURI:\"");
 
         doc = sampleXmlFile("staffNS.xml");
-        
+
         for (int indexN1009A = 0; indexN1009A < illegalQNames.size(); indexN1009A++) {
             qualifiedName = illegalQNames.get(indexN1009A);
             domImpl = doc.getImplementation();

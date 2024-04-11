@@ -42,16 +42,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Invoke the setPrefix method on this Element object with namespaceURI that is different from
  * http://www..w3.org/xml/1998/namespace and a prefix whose values is xml.
  * Check if the NAMESPACE_ERR was thrown.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSPrefix">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSPrefix</a>
  */
 public class Nodesetprefix06Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

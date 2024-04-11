@@ -47,9 +47,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * Using the method importNode with deep=true/false, import two notaiton nodes into the
  * same and different documnet objects.  In each case check if valid public and systemids
  * are returned if any and if none, check if a null value was returned.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core">http://www.w3.org/TR/DOM-Level-2-Core/core</a>
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#Core-Document-importNode">http://www.w3.org/TR/DOM-Level-2-Core/core#Core-Document-importNode</a>
  */

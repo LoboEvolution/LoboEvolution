@@ -34,22 +34,19 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
  * Get the first child of the third employee using NodeList.item(0)
  * which will either be a Text node (whitespace) or employeeId element.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-844377136">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-844377136</a>
  */
 public class NodelistreturnfirstitemTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -69,9 +66,9 @@ public class NodelistreturnfirstitemTest extends LoboUnitTest {
         length = employeeList.getLength();
 
         if (length == 6) {
-            assertEquals("EMPLOYEEID",childName, "NodelistreturnfirstitemAssert1");
+            assertEquals("EMPLOYEEID", childName, "NodelistreturnfirstitemAssert1");
         } else {
-            assertEquals( "#text", childName, "NodelistreturnfirstitemAssert2");
+            assertEquals("#text", childName, "NodelistreturnfirstitemAssert2");
         }
 
     }

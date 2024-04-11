@@ -39,16 +39,13 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
  * The method hasAttribute returns true when an attribute with a given name is specified
  * on this element or has a default value, false otherwise
  * Invoke the hasAttribute method to check if the documentElement has attributres.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeHasAttrs">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeHasAttrs</a>
  */
 public class Elementhasattribute01Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

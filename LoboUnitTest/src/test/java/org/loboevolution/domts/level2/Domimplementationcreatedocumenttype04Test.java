@@ -30,8 +30,8 @@ package org.loboevolution.domts.level2;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DOMImplementation;
+import org.loboevolution.html.node.Document;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,16 +45,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * <p>
  * Invoke createDocument on this DOMImplementation with qualifiedNames having illegal characters.
  * Check if an INVALID_CHARACTER_ERR is raised in each case.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#Level-2-Core-DOM-createDocType">http://www.w3.org/TR/DOM-Level-2-Core/core#Level-2-Core-DOM-createDocType</a>
  */
 public class Domimplementationcreatedocumenttype04Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -80,7 +77,7 @@ public class Domimplementationcreatedocumenttype04Test extends LoboUnitTest {
         qualifiedNames.add(")");
 
         doc = sampleXmlFile("staffNS.xml");
-        
+
         domImpl = doc.getImplementation();
         for (int indexN10073 = 0; indexN10073 < qualifiedNames.size(); indexN10073++) {
             qualifiedName = qualifiedNames.get(indexN10073);

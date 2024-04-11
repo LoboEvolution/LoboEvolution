@@ -43,9 +43,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
  * will always return false.
  * Get schemaTypeInfo on an element that belongs to a document with an XML DTD.  Invoke method
  * isDerivedFrom and verify that returned the typeNamespace is null.
- *
- * @author IBM
- * @author Jenny Hsu
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom</a>
  */
 public class Typeinfoisderivedfrom63Test extends LoboUnitTest {

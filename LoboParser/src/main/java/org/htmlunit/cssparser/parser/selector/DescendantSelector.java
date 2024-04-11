@@ -17,8 +17,6 @@ package org.htmlunit.cssparser.parser.selector;
 /**
  * <p>DescendantSelector class.</p>
  *
- * @author Ronald Brill
- *
  */
 public class DescendantSelector extends AbstractSelector {
 

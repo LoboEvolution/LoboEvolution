@@ -20,8 +20,6 @@ import org.htmlunit.cssparser.util.ParserUtils;
 
 /**
  * For associating a CSS event with a document location.
- *
- * @author Ronald Brill
  */
 public class Locator implements Serializable {
 

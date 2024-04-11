@@ -29,8 +29,8 @@ package org.loboevolution.domts.level2;
 
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DOMImplementation;
+import org.loboevolution.html.node.Document;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,16 +46,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * versions as below.  Valid feature names are case insensitive and versions "2.0",
  * "1.0" and if the version is not specified, supporting any version of the feature
  * should return true.  Check if the value returned value was true.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-5CED94D7">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-5CED94D7</a>
  */
 public class Domimplementationhasfeature01Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -76,7 +73,7 @@ public class Domimplementationhasfeature01Test extends LoboUnitTest {
         featuresCore.add("CORE");
 
         doc = sampleXmlFile("staffNS.xml");
-        
+
         domImpl = doc.getImplementation();
         for (final Object o : featuresXML) {
             featureXML = (String) o;

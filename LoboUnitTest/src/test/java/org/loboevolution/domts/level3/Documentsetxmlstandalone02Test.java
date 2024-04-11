@@ -41,9 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Create a new document object and set standalone to false and check if it was correctly set.
  * Then repeat this by setting it to true.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-standalone">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-standalone</a>
  */
 public class Documentsetxmlstandalone02Test extends LoboUnitTest {

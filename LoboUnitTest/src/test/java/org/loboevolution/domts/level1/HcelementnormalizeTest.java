@@ -35,14 +35,13 @@ import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.Text;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
  * Append a couple of text nodes to the first sup element, normalize the
  * document element and check that the element has been normalized.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-162CF083">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-162CF083</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=546">http://www.w3.org/Bugs/Public/show_bug.cgi?id=546</a>
  */
@@ -50,7 +49,6 @@ public class HcelementnormalizeTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

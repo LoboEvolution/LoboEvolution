@@ -35,7 +35,7 @@ import org.loboevolution.html.node.DocumentFragment;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -49,16 +49,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * fourth child.   The second employee should now have two
  * extra children("newChild1" and "newChild2") at
  * positions fourth and fifth respectively.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-952280727">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-952280727</a>
  */
 public class NodeinsertbeforedocfragmentTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -90,7 +87,7 @@ public class NodeinsertbeforedocfragmentTest extends LoboUnitTest {
         assertEquals("newChild1", childName, "NodeinsertbeforedocfragmentAssert1");
         child = childList.item(4);
         childName = child.getNodeName();
-        assertEquals( "newChild2", childName, "NodeinsertbeforedocfragmentAssert2");
+        assertEquals("newChild2", childName, "NodeinsertbeforedocfragmentAssert2");
     }
 }
 

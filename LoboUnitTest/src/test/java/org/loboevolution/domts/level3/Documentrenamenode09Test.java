@@ -43,9 +43,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * ownerDocument attribute of this attribute has now changed, such that the attribute node is considered to
  * be created from this new document node. Verify that no exception is thrown upon renaming and verify
  * the new nodeName of this attribute node.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-renameNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-renameNode</a>
  */
 public class Documentrenamenode09Test extends LoboUnitTest {
@@ -61,7 +59,7 @@ public class Documentrenamenode09Test extends LoboUnitTest {
 
         final String attrNodeName;
         doc = sampleXmlFile("hc_staff.xml");
-        
+
         domImpl = doc.getImplementation();
         newDoc = domImpl.createDocument("http://www.w3.org/DOM/Test", "dom:newD", nullDocType);
         attr = doc.createAttributeNS("http://www.w3.org/DOM/Test", "test");

@@ -40,8 +40,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Check if classType is derived from xsd:string by any method.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom</a>
  */
 public class Typeinfoisderivedfrom08Test extends LoboUnitTest {
@@ -63,7 +62,7 @@ public class Typeinfoisderivedfrom08Test extends LoboUnitTest {
         typeInfo = attr.getSchemaTypeInfo();
         assertNotNull(typeInfo, "Typeinfoisderivedfrom08Assert1");
         typeName = typeInfo.getTypeName();
-        assertEquals( "classType", typeName, "Typeinfoisderivedfrom08Assert2");
+        assertEquals("classType", typeName, "Typeinfoisderivedfrom08Assert2");
         isDerived = typeInfo.isDerivedFrom("http://www.w3.org/2001/XMLSchema", "string", 15);
         assertTrue(isDerived, "Typeinfoisderivedfrom08Assert3");
     }

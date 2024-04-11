@@ -39,8 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Checks that isDerivedFrom(...,0) returns true when there
  * is both a union and list derivation steps between the target and
  * ancestor type.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom</a>
  */
 public class Typeinfoisderivedfrom70Test extends LoboUnitTest {
@@ -57,7 +56,7 @@ public class Typeinfoisderivedfrom70Test extends LoboUnitTest {
         elem = (Element) elemList.item(0);
         elemTypeInfo = elem.getSchemaTypeInfo();
         retValue = elemTypeInfo.isDerivedFrom("http://www.w3.org/2001/XMLSchema", "string", 0);
-         assertTrue(retValue, "Typeinfoisderivedfrom70Assert2");
+        assertTrue(retValue, "Typeinfoisderivedfrom70Assert2");
     }
 }
 

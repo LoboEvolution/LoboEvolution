@@ -40,9 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * Invoke wholetext on two newly created text nodes and verify if the value returned
  * is correct.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Text3-wholeText">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Text3-wholeText</a>
  */
 public class Textwholetext03Test extends LoboUnitTest {

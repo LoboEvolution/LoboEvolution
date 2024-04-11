@@ -39,9 +39,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * child.  Check if this attribute has been adopted successfully by verifying the nodeName, namespaceURI, prefix,
  * specified and ownerElement attributes of the adopted node.  Also verify the ownerDocument attribute
  * of the adopted node and the adopted children of the attribute node.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode</a>
  */
 public class Documentadoptnode06Test extends LoboUnitTest {
@@ -93,7 +91,7 @@ public class Documentadoptnode06Test extends LoboUnitTest {
             attrOwnerElem = adoptedAttr.getOwnerElement();
             isSpecified = adoptedAttr.isSpecified();
             assertEquals("xml:lang", nodeName, "Documentadoptnode06Assert1");
-            assertEquals( xmlNS, nodeNamespaceURI, "Documentadoptnode06Assert2");
+            assertEquals(xmlNS, nodeNamespaceURI, "Documentadoptnode06Assert2");
             assertEquals("xml", nodePrefix, "Documentadoptnode06Assert3");
             assertNull(attrOwnerElem, "Documentadoptnode06Assert4");
             assertTrue(isSpecified, "Documentadoptnode06Assert5");
@@ -103,7 +101,7 @@ public class Documentadoptnode06Test extends LoboUnitTest {
             adoptedTextNodeValue = adoptText.getNodeValue();
             adoptedEntRefNodeValue = adoptEntRef.getNodeName();
             assertEquals("Text Node", adoptedTextNodeValue, "Documentadoptnode06Assert6");
-            assertEquals( "alpha", adoptedEntRefNodeValue, "Documentadoptnode06Assert7");
+            assertEquals("alpha", adoptedEntRefNodeValue, "Documentadoptnode06Assert7");
         }
     }
 }

@@ -41,8 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * Call getSchemaTypeInfo on class attribute for the third acronym element.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Attr-schemaTypeInfo">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Attr-schemaTypeInfo</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-typeName">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-typeName</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-typeNamespace">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-typeNamespace</a>
@@ -66,7 +65,7 @@ public class Attrgetschematypeinfo05Test extends LoboUnitTest {
         typeInfo = attr.getSchemaTypeInfo();
         assertNotNull(typeInfo, "Attrgetschematypeinfo05Assert3");
         typeName = typeInfo.getTypeName();
-        assertEquals( "classType", typeName, "Attrgetschematypeinfo05Assert4");
+        assertEquals("classType", typeName, "Attrgetschematypeinfo05Assert4");
         typeNS = typeInfo.getTypeNamespace();
         assertEquals("http://www.w3.org/2001/XMLSchema", typeNS, "Attrgetschematypeinfo05Assert5");
     }

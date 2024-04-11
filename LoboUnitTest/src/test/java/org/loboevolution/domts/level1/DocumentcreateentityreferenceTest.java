@@ -44,10 +44,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * a new EntityReference node for the Entity with the
  * given name.  The name, value and type are retrieved and
  * output.
- *
- * @author NIST
- * @author Mary Brady
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-392B75AE">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-392B75AE</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080</a>
  */

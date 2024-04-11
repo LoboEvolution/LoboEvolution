@@ -35,7 +35,7 @@ import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -45,9 +45,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * last child of the third employee and traverse the
  * list from index 0 thru length -1.  All indices should
  * be valid.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-84CF096">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-84CF096</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-349467F9">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-349467F9</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-6D0FB19E">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-6D0FB19E</a>
@@ -56,7 +54,6 @@ public class NamednodemapchildnoderangeTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -71,7 +68,7 @@ public class NamednodemapchildnoderangeTest extends LoboUnitTest {
         testEmployee = (Element) elementList.item(2);
         attributes = testEmployee.getAttributes();
         length = attributes.getLength();
-        assertEquals( 2, length, "NamednodemapchildnoderangeAssert1");
+        assertEquals(2, length, "NamednodemapchildnoderangeAssert1");
         child = attributes.item(0);
         child = attributes.item(1);
     }

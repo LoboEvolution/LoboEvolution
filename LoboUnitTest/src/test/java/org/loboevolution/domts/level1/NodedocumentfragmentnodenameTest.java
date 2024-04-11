@@ -32,7 +32,7 @@ import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentFragment;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -42,9 +42,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * "createDocumentFragment()" method and check the string
  * returned by the "getNodeName()" method.   It should be
  * equal to "#document-fragment".
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D095">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D095</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-B63ED1A3">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-B63ED1A3</a>
  */
@@ -52,7 +50,6 @@ public class NodedocumentfragmentnodenameTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -62,7 +59,7 @@ public class NodedocumentfragmentnodenameTest extends LoboUnitTest {
         doc = sampleXmlFile("staff.xml");
         docFragment = doc.createDocumentFragment();
         documentFragmentName = docFragment.getNodeName();
-        assertEquals( "[object DocumentFragment]", documentFragmentName, "NodedocumentfragmentnodenameAssert1");
+        assertEquals("[object DocumentFragment]", documentFragmentName, "NodedocumentfragmentnodenameAssert1");
     }
 }
 

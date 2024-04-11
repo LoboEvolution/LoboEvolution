@@ -32,7 +32,8 @@ import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 /**
@@ -41,9 +42,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * Retrieve the Document Type for this document and examine
  * the string returned by the "getName()" method.
  * It should be set to "staff".
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-B63ED1A31">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-B63ED1A31</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1844763134">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1844763134</a>
  */
@@ -51,7 +50,6 @@ public class DocumenttypegetdoctypeTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

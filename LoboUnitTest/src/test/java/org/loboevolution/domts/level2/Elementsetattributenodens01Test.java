@@ -34,7 +34,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -46,16 +46,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * Add the two new attribute nodes to the element node using the
  * setAttributeNodeNS method.  Check that only one attribute is added, check
  * the value of this attribute.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElSetAtNodeNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElSetAtNodeNS</a>
  */
 public class Elementsetattributenodens01Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -82,7 +79,7 @@ public class Elementsetattributenodens01Test extends LoboUnitTest {
         assertEquals("http://www.w3.org/DOM/Test/att1", attrNS);
         attributes = element.getAttributes();
         length = attributes.getLength();
-        assertEquals( 1, length);
+        assertEquals(1, length);
     }
 }
 

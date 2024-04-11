@@ -37,9 +37,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Using isDefaultNamespace on this Document node with the
  * namespace of the document element check if the value returned is true.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isDefaultNamespace">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isDefaultNamespace</a>
  */
 public class Nodeisdefaultnamespace01Test extends LoboUnitTest {

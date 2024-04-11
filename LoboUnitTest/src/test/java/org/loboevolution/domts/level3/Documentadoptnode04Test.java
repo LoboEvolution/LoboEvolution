@@ -38,9 +38,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * Invoke adoptNode on a new document to adopt a new namespace aware attribute node created by
  * this document.  Check if this attribute has been adopted successfully by verifying the nodeName,
  * namespaceURI, prefix, specified and ownerElement attributes of the adopted node.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode</a>
  */
 public class Documentadoptnode04Test extends LoboUnitTest {
@@ -78,7 +76,7 @@ public class Documentadoptnode04Test extends LoboUnitTest {
             nodePrefix = adoptedAttr.getPrefix();
             attrOwnerElem = adoptedAttr.getOwnerElement();
             isSpecified = adoptedAttr.isSpecified();
-            assertEquals( "xml:lang", nodeName, "Documentadoptnode04Assert1");
+            assertEquals("xml:lang", nodeName, "Documentadoptnode04Assert1");
             assertEquals(xmlNS, nodeNamespaceURI, "Documentadoptnode04Assert2");
             assertEquals("xml", nodePrefix, "Documentadoptnode04Assert3");
             assertNull(attrOwnerElem, "Documentadoptnode04Assert4");

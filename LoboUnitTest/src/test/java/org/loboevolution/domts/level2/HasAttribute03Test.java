@@ -41,16 +41,13 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
  * return false if the element does not have an attribute with the given name.
  * Retrieve the first "address" element and the "hasAttribute()" method
  * should return false since the element does not have "nomatch" as an attribute.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElHasAttr">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElHasAttr</a>
  */
 public class HasAttribute03Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

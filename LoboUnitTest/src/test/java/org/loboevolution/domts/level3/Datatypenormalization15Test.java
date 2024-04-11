@@ -43,8 +43,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Normalize document with datatype-normalization set to true.
  * Check if string values were normalized per an explicit whitespace=collapse.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-datatype-normalization">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-datatype-normalization</a>
  */
@@ -86,15 +85,15 @@ public class Datatypenormalization15Test extends LoboUnitTest {
             element = (Element) elemList.item(0);
             childNode = element.getFirstChild();
             childValue = childNode.getNodeValue();
-            assertEquals( "EMP  0001", childValue, "Datatypenormalization15Assert4");
+            assertEquals("EMP  0001", childValue, "Datatypenormalization15Assert4");
             element = (Element) elemList.item(1);
             childNode = element.getFirstChild();
             childValue = childNode.getNodeValue();
-            assertEquals( "EMP  0001", childValue, "Datatypenormalization15Assert5");
+            assertEquals("EMP  0001", childValue, "Datatypenormalization15Assert5");
             element = (Element) elemList.item(2);
             childNode = element.getFirstChild();
             childValue = childNode.getNodeValue();
-            assertEquals( "EMP 0001", childValue, "Datatypenormalization15Assert6");
+            assertEquals("EMP 0001", childValue, "Datatypenormalization15Assert6");
         }
     }
 }

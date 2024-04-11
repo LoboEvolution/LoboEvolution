@@ -32,14 +32,14 @@ import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.*;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 /**
  * Replaces a text node of an attribute and checks if the value of
  * the attribute is changed.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-637646024">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-637646024</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-785887307">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-785887307</a>
  */
@@ -47,7 +47,6 @@ public class Hcattrreplacechild1Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -77,7 +76,7 @@ public class Hcattrreplacechild1Test extends LoboUnitTest {
         assertEquals("Yes", value, "Hcattrreplacechild1Assert4");
         firstChild = titleAttr.getFirstChild();
         value = firstChild.getNodeValue();
-        assertEquals( "terday", value, "Hcattrreplacechild1Assert5");
+        assertEquals("terday", value, "Hcattrreplacechild1Assert5");
     }
 }
 

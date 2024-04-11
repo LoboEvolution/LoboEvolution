@@ -34,7 +34,7 @@ import org.loboevolution.html.node.CharacterData;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -48,9 +48,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * The method should delete the characters from position
  * 16 thru position 24.  The new value of the character data
  * should be "1230 North Ave. Texas 98551".
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-72AB8359">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-72AB8359</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-7C603781">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-7C603781</a>
  */
@@ -58,7 +56,6 @@ public class CharacterdatadeletedatamiddleTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -73,7 +70,7 @@ public class CharacterdatadeletedatamiddleTest extends LoboUnitTest {
         child = (CharacterData) nameNode.getFirstChild();
         child.deleteData(16, 8);
         childData = child.getData();
-        assertEquals( "1230 North Ave. Texas 98551", childData, "CharacterdatadeletedatamiddleAssert1");
+        assertEquals("1230 North Ave. Texas 98551", childData, "CharacterdatadeletedatamiddleAssert1");
     }
 
 }

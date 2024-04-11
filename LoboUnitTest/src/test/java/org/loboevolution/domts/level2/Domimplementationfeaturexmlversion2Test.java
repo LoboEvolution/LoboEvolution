@@ -29,8 +29,8 @@ package org.loboevolution.domts.level2;
 
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DOMImplementation;
+import org.loboevolution.html.node.Document;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -46,16 +46,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * DOMImplementation object whose "hasFeature(feature,
  * version)" method is invoked with "feature" equal to "xml".
  * The method should return a boolean "true".
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-5CED94D7">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-5CED94D7</a>
  */
 public class Domimplementationfeaturexmlversion2Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -63,7 +60,7 @@ public class Domimplementationfeaturexmlversion2Test extends LoboUnitTest {
         final DOMImplementation domImpl;
         final boolean state;
         doc = sampleXmlFile("staff.xml");
-        
+
         domImpl = doc.getImplementation();
         state = domImpl.hasFeature("xml", "2.0");
         assertTrue(state);

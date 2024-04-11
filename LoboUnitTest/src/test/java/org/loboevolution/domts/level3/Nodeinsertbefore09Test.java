@@ -32,7 +32,6 @@ import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Comment;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentFragment;
-import org.loboevolution.html.node.Node;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -45,9 +44,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * Using insertBefore on this Document node attempt to insert a new DocumentFragment node
  * before a Comment node and verify the contents of the Comment node that is a child
  * of the DocumentFragment.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-952280727">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-952280727</a>
  */
 public class Nodeinsertbefore09Test extends LoboUnitTest {
@@ -68,7 +65,7 @@ public class Nodeinsertbefore09Test extends LoboUnitTest {
         doc.insertBefore(docFrag, newComment);
         comment = (Comment) newComment.getPreviousSibling();
         data = comment.getData();
-        assertEquals( "insertComment", data, "Nodeinsertbefore09Assert2");
+        assertEquals("insertComment", data, "Nodeinsertbefore09Assert2");
     }
 
 }

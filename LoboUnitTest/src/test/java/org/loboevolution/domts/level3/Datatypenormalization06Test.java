@@ -42,8 +42,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Normalize document with datatype-normalization set to true.
  * Check if time values were normalized.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-datatype-normalization">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-datatype-normalization</a>
  */
@@ -81,25 +80,25 @@ public class Datatypenormalization06Test extends LoboUnitTest {
             elemList = doc.getElementsByTagNameNS("http://www.w3.org/2001/DOM-Test-Suite/Level-3/datatype_normalization", "data:time");
             element = (Element) elemList.item(0);
             str = element.getAttribute("data:value");
-             assertEquals( "15:30:00-05:00", str, "Datatypenormalization06Assert4");
+            assertEquals("15:30:00-05:00", str, "Datatypenormalization06Assert4");
             str = element.getAttribute("data:union");
-             assertEquals( "15:30:00-05:00", str, "Datatypenormalization06Assert5");
+            assertEquals("15:30:00-05:00", str, "Datatypenormalization06Assert5");
             str = element.getTextContent();
-             assertEquals( "15:30:00", str, "Datatypenormalization06Assert6");
+            assertEquals("15:30:00", str, "Datatypenormalization06Assert6");
             element = (Element) elemList.item(1);
             str = element.getAttribute("data:value");
-             assertEquals( "15:30:00.0000-05:00", str, "Datatypenormalization06Assert7");
+            assertEquals("15:30:00.0000-05:00", str, "Datatypenormalization06Assert7");
             str = element.getAttribute("data:union");
-             assertEquals( "15:30:00.0000-05:00", str, "Datatypenormalization06Assert8");
+            assertEquals("15:30:00.0000-05:00", str, "Datatypenormalization06Assert8");
             str = element.getTextContent();
-             assertEquals( "15:30:00.0000", str, "Datatypenormalization06Assert9");
+            assertEquals("15:30:00.0000", str, "Datatypenormalization06Assert9");
             element = (Element) elemList.item(2);
             str = element.getAttribute("data:value");
-             assertEquals( "15:30:00.0001-05:00", str, "Datatypenormalization06Assert10");
+            assertEquals("15:30:00.0001-05:00", str, "Datatypenormalization06Assert10");
             str = element.getAttribute("data:union");
-            assertEquals( "15:30:00.0001-05:00", str, "Datatypenormalization06Assert11");
+            assertEquals("15:30:00.0001-05:00", str, "Datatypenormalization06Assert11");
             str = element.getTextContent();
-            assertEquals( "15:30:00.0001", str, "Datatypenormalization06Assert12");
+            assertEquals("15:30:00.0001", str, "Datatypenormalization06Assert12");
         }
     }
 }

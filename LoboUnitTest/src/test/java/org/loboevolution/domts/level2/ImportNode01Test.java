@@ -51,16 +51,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * Method should return a node whose name matches "attr1" and a child node
  * whose value equals "importedText".
  * The returned node should belong to this document whose systemId is "staff.dtd"
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#Core-Document-importNode">http://www.w3.org/TR/DOM-Level-2-Core/core#Core-Document-importNode</a>
  */
 public class ImportNode01Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -78,7 +75,7 @@ public class ImportNode01Test extends LoboUnitTest {
 
         doc = sampleXmlFile("staffNS.xml");
         aNewDoc = sampleXmlFile("staffNS.xml");
-        newAttr = aNewDoc.createAttribute( "attr1");
+        newAttr = aNewDoc.createAttribute("attr1");
         newAttr.setNodeValue("importedText");
         aNode = doc.importNode(newAttr, false);
         ownerDocument = aNode.getOwnerDocument();

@@ -39,9 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * <p>
  * Set the documentURI to null and retreive the documentURI of this document and verify
  * if it is was set to null.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-documentURI">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-documentURI</a>
  */
 public class DocumentsetDocumenturi02Test extends LoboUnitTest {

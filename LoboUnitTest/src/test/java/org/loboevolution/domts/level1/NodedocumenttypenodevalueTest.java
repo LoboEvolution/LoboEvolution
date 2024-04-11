@@ -38,15 +38,12 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 /**
  * The string returned by the "getNodeValue()" method for a
  * DocumentType Node is null.
- *
- * @author NIST
- * @author Mary Brady
+
  */
 public class NodedocumenttypenodevalueTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

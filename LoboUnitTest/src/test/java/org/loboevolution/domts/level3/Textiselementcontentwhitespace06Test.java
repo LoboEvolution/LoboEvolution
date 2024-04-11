@@ -38,9 +38,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Insert whitespace before the "p" element in barfoo and normalize with validation.
  * isElementContentWhitespace should be true since the node is whitespace and in element content.
- *
- * @author Curt Arnold
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Text3-isElementContentWhitespace">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Text3-isElementContentWhitespace</a>
  */
 public class Textiselementcontentwhitespace06Test extends LoboUnitTest {

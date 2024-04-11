@@ -33,7 +33,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -43,8 +43,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * Retrieve the Comment node in the XML file
  * and check the string returned by the "getNodeName()"
  * method.   It should be equal to "#comment".
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D095">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D095</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1728279322">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1728279322</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=248">http://www.w3.org/Bugs/Public/show_bug.cgi?id=248</a>
@@ -53,7 +52,6 @@ public class HcnodecommentnodenameTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -70,12 +68,12 @@ public class HcnodecommentnodenameTest extends LoboUnitTest {
 
             if (nodeType == 8) {
                 commentNodeName = commentNode.getNodeName();
-                assertEquals( "#comment", commentNodeName, "HcnodecommentnodenameAssert1");
+                assertEquals("#comment", commentNodeName, "HcnodecommentnodenameAssert1");
             }
         }
         commentNode = doc.createComment("This is a comment");
         commentNodeName = commentNode.getNodeName();
-        assertEquals( "#comment", commentNodeName, "HcnodecommentnodenameAssert2");
+        assertEquals("#comment", commentNodeName, "HcnodecommentnodenameAssert2");
     }
 }
 

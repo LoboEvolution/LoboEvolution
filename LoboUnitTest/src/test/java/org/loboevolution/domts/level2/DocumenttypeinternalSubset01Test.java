@@ -29,8 +29,8 @@ package org.loboevolution.domts.level2;
 
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DOMImplementation;
+import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -41,9 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * <p>
  * Create a new DocumentType node with null values for publicId and systemId.
  * Verify that its internal subset is null.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-Core-DocType-internalSubset">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-Core-DocType-internalSubset</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=259">http://www.w3.org/Bugs/Public/show_bug.cgi?id=259</a>
  */
@@ -51,7 +49,6 @@ public class DocumenttypeinternalSubset01Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

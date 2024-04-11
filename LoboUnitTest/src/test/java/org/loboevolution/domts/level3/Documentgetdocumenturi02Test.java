@@ -39,9 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * Create a new Document, retreive its documentURI, and verify if it is null.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-documentURI">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-documentURI</a>
  */
 public class Documentgetdocumenturi02Test extends LoboUnitTest {

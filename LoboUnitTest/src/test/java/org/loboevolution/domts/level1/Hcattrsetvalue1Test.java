@@ -37,15 +37,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Sets Attr.value on an attribute that only has a simple value.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-221662474">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-221662474</a>
  */
 public class Hcattrsetvalue1Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -69,10 +67,10 @@ public class Hcattrsetvalue1Test extends LoboUnitTest {
         value = titleAttr.getValue();
         assertEquals("Tomorrow", value, "Hcattrsetvalue1Assert2");
         value = titleAttr.getNodeValue();
-        assertEquals( "Tomorrow", value, "Hcattrsetvalue1Assert3");
+        assertEquals("Tomorrow", value, "Hcattrsetvalue1Assert3");
         firstChild = titleAttr.getLastChild();
         value = firstChild.getNodeValue();
-        assertEquals( "Tomorrow", value, "Hcattrsetvalue1Assert4");
+        assertEquals("Tomorrow", value, "Hcattrsetvalue1Assert4");
         otherChild = firstChild.getNextSibling();
         assertNull(otherChild, "Hcattrsetvalue1Assert5");
     }

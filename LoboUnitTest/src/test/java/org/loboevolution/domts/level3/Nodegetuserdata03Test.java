@@ -40,9 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Invoke setUserData on this Document to set this Documents UserData to a new
  * Element node and using getUserData and isEqualNode check if the returned
  * UserData object is the same as the object that was set.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-getUserData">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-getUserData</a>
  */
 public class Nodegetuserdata03Test extends LoboUnitTest {

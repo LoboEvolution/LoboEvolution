@@ -44,9 +44,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * to remove a non-child from an entity reference and expect either a NOT_FOUND_ERR or
  * a NO_MODIFICATION_ALLOWED_ERR.  Renove a child from an entity reference and expect
  * a NO_MODIFICATION_ALLOWED_ERR.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-1734834066">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-1734834066</a>
  */
 public class Noderemovechild19Test extends LoboUnitTest {
@@ -66,7 +64,7 @@ public class Noderemovechild19Test extends LoboUnitTest {
         child = (EntityReference) parent.getFirstChild();
         removed = (EntityReference) parent.removeChild(child);
         removedName = removed.getNodeName();
-        assertEquals( "beta", removedName, "Noderemovechild19Assert1");
+        assertEquals("beta", removedName, "Noderemovechild19Assert1");
 
         try {
             removedNode = child.removeChild(parent);

@@ -37,9 +37,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * Using replaceChild on an Element node attempt to replace a new Element child node with
  * new child nodes and vice versa and in each case verify the name of the replaced node.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307</a>
  */
 public class Nodereplacechild30Test extends LoboUnitTest {
@@ -75,31 +73,31 @@ public class Nodereplacechild30Test extends LoboUnitTest {
         appendedChild = parent.appendChild(newERef);
         replaced = parent.replaceChild(newElement, oldChild);
         nodeName = replaced.getNodeName();
-        assertEquals( "xhtml:head", nodeName, "Nodereplacechild30Assert2");
+        assertEquals("xhtml:head", nodeName, "Nodereplacechild30Assert2");
         replaced = parent.replaceChild(oldChild, newElement);
         nodeName = replaced.getNodeName();
-        assertEquals( "xhtml:body", nodeName, "Nodereplacechild30Assert3");
+        assertEquals("xhtml:body", nodeName, "Nodereplacechild30Assert3");
         replaced = parent.replaceChild(newText, oldChild);
         nodeName = replaced.getNodeName();
-        assertEquals( "xhtml:head", nodeName, "Nodereplacechild30Assert4");
+        assertEquals("xhtml:head", nodeName, "Nodereplacechild30Assert4");
         replaced = parent.replaceChild(oldChild, newText);
         nodeName = replaced.getNodeName();
-        assertEquals( "#text", nodeName, "Nodereplacechild30Assert5");
+        assertEquals("#text", nodeName, "Nodereplacechild30Assert5");
         replaced = parent.replaceChild(newComment, oldChild);
         nodeName = replaced.getNodeName();
-        assertEquals( "xhtml:head", nodeName, "Nodereplacechild30Assert6");
+        assertEquals("xhtml:head", nodeName, "Nodereplacechild30Assert6");
         replaced = parent.replaceChild(oldChild, newComment);
         nodeName = replaced.getNodeName();
         assertEquals("#comment", nodeName, "Nodereplacechild30Assert7");
         replaced = parent.replaceChild(oldChild, newPI);
         nodeName = replaced.getNodeName();
-        assertEquals( "target", nodeName, "Nodereplacechild30Assert8");
+        assertEquals("target", nodeName, "Nodereplacechild30Assert8");
         replaced = parent.replaceChild(oldChild, newCdata);
         nodeName = replaced.getNodeName();
-        assertEquals( "#cdata-section", nodeName, "Nodereplacechild30Assert9");
+        assertEquals("#cdata-section", nodeName, "Nodereplacechild30Assert9");
         replaced = parent.replaceChild(oldChild, newERef);
         nodeName = replaced.getNodeName();
-        assertEquals( "delta", nodeName, "Nodereplacechild30Assert10");
+        assertEquals("delta", nodeName, "Nodereplacechild30Assert10");
     }
 }
 

@@ -33,7 +33,7 @@ import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -44,9 +44,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * Test 1: invoke getElementsByTagNameNS to retrieve one of the children.
  * Test 2: invoke getElementsByTagNameNS with the value of namespace equals to '*', and
  * verify that the node list has length of 3.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-getElBTNNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-getElBTNNS</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=259">http://www.w3.org/Bugs/Public/show_bug.cgi?id=259</a>
  */
@@ -54,7 +52,6 @@ public class Elementgetelementsbytagnamens04Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -74,7 +71,7 @@ public class Elementgetelementsbytagnamens04Test extends LoboUnitTest {
         element.appendChild(child2);
         element.appendChild(child3);
         elementList = element.getElementsByTagNameNS(null, "child");
-        assertEquals( 1, elementList.getLength());
+        assertEquals(1, elementList.getLength());
         elementList = element.getElementsByTagNameNS("*", "child");
         assertEquals(3, elementList.getLength());
     }

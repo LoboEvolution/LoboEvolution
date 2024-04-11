@@ -16,8 +16,6 @@ package org.htmlunit.cssparser.parser.selector;
 
 /**
  * This interface is only for constraints on selectors.
- *
- * @author Ronald Brill
  */
 public interface SimpleSelector extends Selector {
 }

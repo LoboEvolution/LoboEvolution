@@ -34,7 +34,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -48,9 +48,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * Invoke method importNode(importedNode,deep) on this document which
  * defines default attribute for the element name "employee".
  * Method should return an the imported element with an assigned default attribute.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#Core-Document-importNode">http://www.w3.org/TR/DOM-Level-2-Core/core#Core-Document-importNode</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=238">http://www.w3.org/Bugs/Public/show_bug.cgi?id=238</a>
  */
@@ -58,7 +56,6 @@ public class ImportNode07Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -79,10 +76,10 @@ public class ImportNode07Test extends LoboUnitTest {
         attributes = aNode.getAttributes();
         assertEquals(1, attributes.getLength());
         name = aNode.getNodeName();
-         assertEquals( "employee", name);
+        assertEquals("employee", name);
         attr = (Attr) attributes.item(0);
         lname = attr.getLocalName();
-        assertEquals( "defaultAttr", lname);
+        assertEquals("defaultAttr", lname);
     }
 }
 

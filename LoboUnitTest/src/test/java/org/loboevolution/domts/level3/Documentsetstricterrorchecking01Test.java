@@ -40,9 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Set the strictErrorChecking attribute value on this documentNode to false and then to true.
  * Call the createAttributeNS method on this document with an illegal character in the qualifiedName
  * and check if the INVALID_CHARACTER_ERR is thrown.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-strictErrorChecking">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-strictErrorChecking</a>
  */
 public class Documentsetstricterrorchecking01Test extends LoboUnitTest {

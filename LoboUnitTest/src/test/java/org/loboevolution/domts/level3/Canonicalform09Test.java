@@ -41,8 +41,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Normalize document based on section 3.1 with canonical-form set to true
  * and comments to false and check normalized document.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-canonical-form">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-canonical-form</a>
  */
@@ -96,7 +95,7 @@ public class Canonicalform09Test extends LoboUnitTest {
             nodeType = node.getNodeType();
             assertEquals(7, nodeType, "Canonicalform09Assert9");
             nodeValue = ((ProcessingInstruction) /*Node */node).getData();
-            assertEquals( "", nodeValue, "Canonicalform09Assert10");
+            assertEquals("", nodeValue, "Canonicalform09Assert10");
             node = node.getNextSibling();
             assertNull(node, "Canonicalform09Assert11");
         }

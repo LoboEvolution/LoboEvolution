@@ -44,9 +44,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * Invoke setIdAttributeNode on the 4th acronym element using the class attribute (containing entity reference)
  * as a parameter .  Verify by calling isId on the attribute node and getElementById on document node.
  * Reset by invoking setIdAttributeNode with isId=false.
- *
- * @author IBM
- * @author Jenny Hsu
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-ElSetIdAttrNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-ElSetIdAttrNode</a>
  */
 public class Elementsetidattributenode10Test extends LoboUnitTest {

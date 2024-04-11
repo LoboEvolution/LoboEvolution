@@ -32,7 +32,7 @@ import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.ProcessingInstruction;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -44,9 +44,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * Using the method importNode with deep=true, import a newly created PI node for this
  * Document.  Verify if the node has been imported correctly by checking the PITarget and
  * PIData values of the imported PI node.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core">http://www.w3.org/TR/DOM-Level-2-Core/core</a>
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#Core-Document-importNode">http://www.w3.org/TR/DOM-Level-2-Core/core#Core-Document-importNode</a>
  */
@@ -55,7 +53,6 @@ public class Documentimportnode18Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -72,7 +69,7 @@ public class Documentimportnode18Test extends LoboUnitTest {
         piTarget = piImport.getTarget();
         piData = piImport.getData();
         assertEquals("Target", piTarget);
-        assertEquals( "Data", piData);
+        assertEquals("Data", piData);
     }
 }
 

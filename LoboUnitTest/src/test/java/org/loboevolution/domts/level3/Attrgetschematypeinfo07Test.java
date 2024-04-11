@@ -45,9 +45,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  * Invoke getSchemaTypeInfo method on an attribute having [type definition] property.  Expose {name} and {target namespace}
  * properties of the [type definition] property.  Verity that the typeName and typeNamespace of the title attribute's
  * schemaTypeInfo are correct. getSchemaTypeInfo on the 'id' attribute of the fourth 'acronym' element
- *
- * @author IBM
- * @author Jenny Hsu
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Attr-schemaTypeInfo">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Attr-schemaTypeInfo</a>
  */
 public class Attrgetschematypeinfo07Test extends LoboUnitTest {
@@ -70,7 +68,7 @@ public class Attrgetschematypeinfo07Test extends LoboUnitTest {
         typeName = attrTypeInfo.getTypeName();
         typeNamespace = attrTypeInfo.getTypeNamespace();
         assertEquals("ID", typeName, "Attrgetschematypeinfo07Assert4");
-        assertEquals( "http://www.w3.org/2001/XMLSchema", typeNamespace, "Attrgetschematypeinfo07Assert5");
+        assertEquals("http://www.w3.org/2001/XMLSchema", typeNamespace, "Attrgetschematypeinfo07Assert5");
     }
 }
 

@@ -44,8 +44,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 /**
  * Normalize document with check-character-normalization set to true, check that
  * non-normalized characters are signaled.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-check-character-normalization">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-check-character-normalization</a>
  * @see <a href="http://www.w3.org/TR/2003/WD-charmod-20030822/">http://www.w3.org/TR/2003/WD-charmod-20030822/</a>
@@ -89,7 +88,7 @@ public class Checkcharacternormalization02Test extends LoboUnitTest {
             doc.normalizeDocument();
             errors = errorMonitor.getErrors();
             for (int indexN100AA = 0; indexN100AA < errors.size(); indexN100AA++) {
-                error = (DOMError) errors.get(indexN100AA);
+                error = errors.get(indexN100AA);
                 severity = error.getSeverity();
 
                 if (severity == 2) {

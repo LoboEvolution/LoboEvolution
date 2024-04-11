@@ -41,16 +41,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * <p>
  * Create a new element node without a namespace prefix.  Call setPrefix on the newly created elemenent node.
  * Check if a NAMESPACE_ERR is thrown.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSPrefix">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSPrefix</a>
  */
 public class Nodesetprefix03Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

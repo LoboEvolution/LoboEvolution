@@ -39,9 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * Invoke setIdAttribute(false) on a newly created attribute and then check Attr.isID.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Attr-isId">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Attr-isId</a>
  */
 public class Attrisid03Test extends LoboUnitTest {

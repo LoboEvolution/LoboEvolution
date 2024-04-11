@@ -34,7 +34,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -45,9 +45,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * listing of the attributes of the last child.  Once the
  * list is created an invocation of the "getLength()"
  * method is executed.  The number of nodes should be 2.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-84CF096">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-84CF096</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-6D0FB19E">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-6D0FB19E</a>
  */
@@ -55,7 +53,6 @@ public class NamednodemapnumberofnodesTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -69,7 +66,7 @@ public class NamednodemapnumberofnodesTest extends LoboUnitTest {
         testEmployee = (Element) elementList.item(2);
         attributes = testEmployee.getAttributes();
         length = attributes.getLength();
-        assertEquals( 2, length, "NamednodemapnumberofnodesAssert1");
+        assertEquals(2, length, "NamednodemapnumberofnodesAssert1");
     }
 
 }

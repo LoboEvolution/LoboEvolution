@@ -32,7 +32,8 @@ import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.*;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 /**
@@ -40,9 +41,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * Document.  Verify if the node has been imported correctly by checking
  * if the default attribute present on this node has not been imported
  * and an explicit attribute has been imported.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core">http://www.w3.org/TR/DOM-Level-2-Core/core</a>
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#Core-Document-importNode">http://www.w3.org/TR/DOM-Level-2-Core/core#Core-Document-importNode</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=259">http://www.w3.org/Bugs/Public/show_bug.cgi?id=259</a>
@@ -52,7 +51,6 @@ public class Documentimportnode14Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -69,7 +67,7 @@ public class Documentimportnode14Test extends LoboUnitTest {
         final String nullNS = null;
 
         doc = sampleXmlFile("staffNS.xml");
-        
+
         childList = doc.getElementsByTagNameNS("*", "employee");
         employeeElem = childList.item(3);
         domImpl = doc.getImplementation();

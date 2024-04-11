@@ -33,7 +33,7 @@ import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -45,16 +45,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * the "appendChild(newChild)" method is invoked the first
  * child should be the one that was second and the last
  * child should be the one that was first.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-184E7107">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-184E7107</a>
  */
 public class NodeappendchildchildexistsTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -81,10 +78,10 @@ public class NodeappendchildchildexistsTest extends LoboUnitTest {
 
         if ("employeeId".equals(initialName)) {
             assertEquals("name", fchildName, "NodeappendchildchildexistsAssert1");
-            assertEquals( "EMPLOYEEID",lchildName, "NodeappendchildchildexistsAssert2");
+            assertEquals("EMPLOYEEID", lchildName, "NodeappendchildchildexistsAssert2");
         } else {
-            assertEquals( "EMPLOYEEID", fchildName, "NodeappendchildchildexistsAssert3");
-            assertEquals( "#text", lchildName, "NodeappendchildchildexistsAssert4");
+            assertEquals("EMPLOYEEID", fchildName, "NodeappendchildchildexistsAssert3");
+            assertEquals("#text", lchildName, "NodeappendchildchildexistsAssert4");
         }
 
     }

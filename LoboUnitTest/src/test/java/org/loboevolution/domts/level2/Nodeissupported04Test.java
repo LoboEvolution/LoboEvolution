@@ -42,16 +42,13 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  * <p>
  * Call the isSupported method specifying empty strings for feature and version on a
  * new EntityReference node.  Check if the value returned value was false.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#Level-2-Core-Node-supports">http://www.w3.org/TR/DOM-Level-2-Core/core#Level-2-Core-Node-supports</a>
  */
 public class Nodeissupported04Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

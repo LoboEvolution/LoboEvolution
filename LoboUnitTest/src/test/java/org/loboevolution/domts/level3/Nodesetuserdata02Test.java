@@ -37,9 +37,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 /**
  * Using setUserData with values for the UserData as this Document and the handler as null
  * parameters, check if returned the current userData object of this Document node is null.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-setUserData">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-setUserData</a>
  */
 public class Nodesetuserdata02Test extends LoboUnitTest {

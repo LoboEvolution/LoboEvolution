@@ -41,9 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Using replaceChild on a new EntityReference node attempt to replace an EntityReference node with
  * its Element parent, with itself and vice versa verify if a NO_MODIFICATION_ALLOWED_ERR is thrown.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307</a>
  */
 public class Nodereplacechild22Test extends LoboUnitTest {

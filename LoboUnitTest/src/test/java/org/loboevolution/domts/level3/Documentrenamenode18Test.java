@@ -39,9 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Invoke the renameNode method on this document and try to rename a new element
  * node of a new document.
  * Check if a WRONG_DOCUMENT_ERR gets thrown.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-renameNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-renameNode</a>
  */
 public class Documentrenamenode18Test extends LoboUnitTest {

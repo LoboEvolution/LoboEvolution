@@ -42,9 +42,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * Using compareDocumentPosition to check if the document position of the first class attribute
  * of the element acronym when compared with the elements text content as a parameter is
  * is FOLLOWING, and is PRECEDING vice versa.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-compareDocumentPosition">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-compareDocumentPosition</a>
  */
 public class Nodecomparedocumentposition37Test extends LoboUnitTest {

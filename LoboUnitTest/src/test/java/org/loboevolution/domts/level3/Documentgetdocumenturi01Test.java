@@ -36,9 +36,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * Retreive the documentURI of this document, and verify if it is not null.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-documentURI">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-documentURI</a>
  */
 public class Documentgetdocumenturi01Test extends LoboUnitTest {

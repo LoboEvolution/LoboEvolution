@@ -34,7 +34,7 @@ import org.loboevolution.html.node.CharacterData;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -48,9 +48,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * method is then called with offset=30 and count=5 and
  * arg="98665".  The method should replace characters 30
  * thru 34 of the character data with "98665".
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-72AB8359">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-72AB8359</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-E5CBA7FB">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-E5CBA7FB</a>
  */
@@ -58,7 +56,6 @@ public class CharacterdatareplacedataendTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -73,7 +70,7 @@ public class CharacterdatareplacedataendTest extends LoboUnitTest {
         child = (CharacterData) nameNode.getFirstChild();
         child.replaceData(30, 5, "98665");
         childData = child.getData();
-        assertEquals( "1230 North Ave. Dallas, Texas 98665", childData, "CharacterdatareplacedataendAssert1");
+        assertEquals("1230 North Ave. Dallas, Texas 98665", childData, "CharacterdatareplacedataendAssert1");
     }
 }
 

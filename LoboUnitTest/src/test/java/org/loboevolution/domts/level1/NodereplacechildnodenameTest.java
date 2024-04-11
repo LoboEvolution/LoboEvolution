@@ -34,7 +34,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -43,9 +43,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * returned by the "replaceChild(newChild,oldChild)"
  * method.   The returned node should have a NodeName equal
  * to "employeeId".
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D095">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D095</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-785887307">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-785887307</a>
  */
@@ -53,7 +51,6 @@ public class NodereplacechildnodenameTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -79,7 +76,7 @@ public class NodereplacechildnodenameTest extends LoboUnitTest {
         if (length == 6) {
             assertEquals("NAME", childName, "NodereplacechildnodenameAssert1");
         } else {
-            assertEquals( "EMPLOYEEID",childName, "NodereplacechildnodenameAssert2");
+            assertEquals("EMPLOYEEID", childName, "NodereplacechildnodenameAssert2");
         }
 
     }

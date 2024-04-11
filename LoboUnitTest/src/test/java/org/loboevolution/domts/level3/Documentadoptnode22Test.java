@@ -39,9 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Invoke the adoptNode method on this document with the documentElement as the source.
  * Verify if the node has been adopted correctly by its nodeName.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode</a>
  */
 public class Documentadoptnode22Test extends LoboUnitTest {

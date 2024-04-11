@@ -38,8 +38,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Normalize document using Node.normalize checking that "entities" parameter is ignored.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-normalize">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-normalize</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-entities">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-entities</a>
  */
@@ -76,7 +75,7 @@ public class Entities04Test extends LoboUnitTest {
         child = pElem.getLastChild();
         assertNotNull(child, "Entities04Assert2");
         childName = child.getNodeName();
-        assertEquals( "ent1", childName, "Entities04Assert3");
+        assertEquals("ent1", childName, "Entities04Assert3");
         doctype = doc.getDoctype();
         entities = doctype.getEntities();
         ent2 = entities.getNamedItem("ent2");

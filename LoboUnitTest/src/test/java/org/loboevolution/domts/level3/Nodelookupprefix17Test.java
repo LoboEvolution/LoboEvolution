@@ -41,9 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * Invoke lookupPrefix on the title attribute node of the acronym node with
  * a namespaceURI and a node prefix and check if the value of the prefix returned by
  * using its namespaceURI as a parameter is valid.
- *
- * @author IBM
- * @author Jenny Hsu
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-lookupNamespacePrefix">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-lookupNamespacePrefix</a>
  */
 public class Nodelookupprefix17Test extends LoboUnitTest {
@@ -62,7 +60,7 @@ public class Nodelookupprefix17Test extends LoboUnitTest {
         attributesMap = elem.getAttributes();
         attr = (Attr) attributesMap.getNamedItem("xsi:noNamespaceSchemaLocation");
         prefix = attr.lookupPrefix("http://www.netzero.com");
-        assertEquals( "dmstc", prefix, "Nodelookupprefix17Assert2");
+        assertEquals("dmstc", prefix, "Nodelookupprefix17Assert2");
     }
 }
 

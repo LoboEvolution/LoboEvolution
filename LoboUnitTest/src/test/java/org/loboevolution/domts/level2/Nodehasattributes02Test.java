@@ -39,16 +39,13 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
  * The method hasAttributes returns whether this node (if it is an element) has any attributes.
  * Retrieve the docType node.  Since this is not an element node check if hasAttributes returns
  * null.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeHasAttrs">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeHasAttrs</a>
  */
 public class Nodehasattributes02Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

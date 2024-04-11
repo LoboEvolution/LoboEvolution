@@ -35,7 +35,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -46,16 +46,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * Retreive the first element whose localName is address and namespaceURI http://www.nist.gov",
  * and put its attributes into a named node map.  Create a new attribute node and add it to this map.
  * Verify if the attr node was successfully added by checking the nodeName of the retreived atttribute.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-getNamedItemNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-getNamedItemNS</a>
  */
 public class Namednodemapsetnameditemns01Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -68,15 +65,15 @@ public class Namednodemapsetnameditemns01Test extends LoboUnitTest {
         final HTMLCollection elementList;
         final String attrName;
         doc = sampleXmlFile("staffNS.xml");
-        elementList = doc.getElementsByTagName( "address");
+        elementList = doc.getElementsByTagName("address");
         element = (Element) elementList.item(0);
         attributes = element.getAttributes();
         newAttr1 = doc.createAttributeNS("http://www.w3.org/DOM/L1", "streets");
-        
+
         newAttribute = element.setAttributeNodeNS(newAttr1);
         attribute = (Attr) attributes.getNamedItemNS("http://www.w3.org/DOM/L1", "streets");
         attrName = attribute.getNodeName();
-        assertEquals( "streets", attrName);
+        assertEquals("streets", attrName);
     }
 }
 

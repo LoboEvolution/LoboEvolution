@@ -44,9 +44,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * <p>
  * Invoke setIdAttributeNS on two existing namespace attributes with different values.  Verify by calling
  * isId on the attributes and getElementById with different values on document node.
- *
- * @author IBM
- * @author Jenny Hsu
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-ElSetIdAttrNS">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-ElSetIdAttrNS</a>
  */
 public class Elementsetidattributens10Test extends LoboUnitTest {

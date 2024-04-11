@@ -46,9 +46,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Import the newly created attribute node into this document.
  * Since user data assocated to the imported node is not carried over, verify that the method isId
  * returns false on the imported attribute node.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Attr-isId">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Attr-isId</a>
  */
 public class Attrisid07Test extends LoboUnitTest {

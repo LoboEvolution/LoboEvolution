@@ -37,9 +37,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 /**
  * Call the getXmlEncoding method on a UTF-8 encoded XML document that does not contain
  * the encoding pseudo attribute in its XMLDecl and check if the value returend is null.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-encoding">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-encoding</a>
  */
 public class Documentgetxmlencoding04Test extends LoboUnitTest {

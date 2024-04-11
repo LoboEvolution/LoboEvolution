@@ -41,9 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Using removeChild on an Attribute node attempt to remove its Text child node and
  * and verify the name of the returned node that was removed.  Now attempt the reverse
  * and verify if a NOT_FOUND_ERR is thrown.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-1734834066">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-1734834066</a>
  */
 public class Noderemovechild28Test extends LoboUnitTest {

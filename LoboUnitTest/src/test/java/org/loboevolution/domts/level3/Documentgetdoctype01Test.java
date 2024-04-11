@@ -34,7 +34,6 @@ import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 
@@ -42,9 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * Retreive the doctype node, create a new Doctype node, call replaceChild and try replacing the
  * docType node with a new docType node.  Check if the docType node was correctly replaced with
  * the new one.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-B63ED1A31">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-B63ED1A31</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307</a>
  */
@@ -66,7 +63,7 @@ public class Documentgetdoctype01Test extends LoboUnitTest {
         domImpl = doc.getImplementation();
         newDocType = domImpl.createDocumentType(rootName, nullPubID, nullSysID);
         try {
-             doc.replaceChild(newDocType, docType);
+            doc.replaceChild(newDocType, docType);
         } catch (final DOMException ex) {
             if (ex.getCode() == 9) {
                 return;

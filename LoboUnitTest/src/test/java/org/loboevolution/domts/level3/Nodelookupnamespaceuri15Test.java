@@ -40,14 +40,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * Invoke lookupNamespaceURI on a Element's new Comment node, which has a namespace attribute declaration
  * with a namespace prefix in its parent Element node and check if the value of the namespaceURI
  * returned by using its prefix as a parameter is valid.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-lookupNamespaceURI">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-lookupNamespaceURI</a>
  */
 public class Nodelookupnamespaceuri15Test extends LoboUnitTest {
-@Test
-public void runTest(){
+    @Test
+    public void runTest() {
         final Document doc;
         final Element docElem;
         final Element elem;
@@ -55,15 +53,15 @@ public void runTest(){
         final Comment clonedComment;
         final String namespaceURI;
         Node appendedChild;
-        doc=sampleXmlFile("hc_staff.xml");
-        docElem=doc.getDocumentElement();
-        elem=doc.createElementNS("http://www.w3.org/1999/xhtml","dom3:p");
-        comment=doc.createComment("Text");
-        clonedComment=(Comment)comment.cloneNode(true);
-        appendedChild=elem.appendChild(clonedComment);
-        appendedChild=docElem.appendChild(elem);
-        namespaceURI=clonedComment.lookupNamespaceURI("dom3");
-        assertEquals("http://www.w3.org/1999/xhtml",namespaceURI, "Nodelookupnamespaceuri15Assert2");
-        }
-        }
+        doc = sampleXmlFile("hc_staff.xml");
+        docElem = doc.getDocumentElement();
+        elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "dom3:p");
+        comment = doc.createComment("Text");
+        clonedComment = (Comment) comment.cloneNode(true);
+        appendedChild = elem.appendChild(clonedComment);
+        appendedChild = docElem.appendChild(elem);
+        namespaceURI = clonedComment.lookupNamespaceURI("dom3");
+        assertEquals("http://www.w3.org/1999/xhtml", namespaceURI, "Nodelookupnamespaceuri15Assert2");
+    }
+}
 

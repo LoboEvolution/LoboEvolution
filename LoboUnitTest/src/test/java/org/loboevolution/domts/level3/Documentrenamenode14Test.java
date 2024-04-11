@@ -48,9 +48,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * qualifiedName is "xmlns"and namespaceURI is "http://www.w3.org/2000/xmlns".
  * Check if a NOT_SUPPORTED_ERR gets thrown instead of a NAMESPACE_ERR since the type of node is
  * not valid for this method.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-renameNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-renameNode</a>
  */
 public class Documentrenamenode14Test extends LoboUnitTest {

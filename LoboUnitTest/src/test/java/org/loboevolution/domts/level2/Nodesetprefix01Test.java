@@ -33,7 +33,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentFragment;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -43,16 +43,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * <p>
  * Create a new element node with a namespace prefix.  Add it to a new DocumentFragment Node without
  * a prefix.  Call setPrefix on the elemen node.  Check if the prefix was set correctly on the element.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSPrefix">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSPrefix</a>
  */
 public class Nodesetprefix01Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -68,8 +65,8 @@ public class Nodesetprefix01Test extends LoboUnitTest {
         element.setPrefix("dmstc");
         elementTagName = element.getTagName();
         elementNodeName = element.getNodeName();
-        assertEquals( "dmstc:address", elementTagName);
-        assertEquals( "dmstc:address", elementNodeName);
+        assertEquals("dmstc:address", elementTagName);
+        assertEquals("dmstc:address", elementNodeName);
     }
 }
 

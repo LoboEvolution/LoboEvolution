@@ -47,9 +47,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * object.  Since NamedNodeMaps are live it should also automatically get removed from
  * the node map.  And so if an attempt is made to remove it using removeAttributeNS, this should
  * raise a NOT_FOUND_ERR.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-D58B193">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-D58B193</a>
  */
 public class Namednodemapremovenameditemns08Test extends LoboUnitTest {

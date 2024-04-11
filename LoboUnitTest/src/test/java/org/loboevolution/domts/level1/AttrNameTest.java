@@ -35,7 +35,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -45,8 +45,6 @@ import static org.junit.jupiter.api.Assertions.*;
  * NodeName.  This test uses the getNamedItem(name) method from the NamedNodeMap
  * interface.
  *
- * @author NIST
- * @author Mary Brady
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D095">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D095</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1112119403">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1112119403</a>
  */
@@ -54,7 +52,6 @@ public class AttrNameTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -70,9 +67,9 @@ public class AttrNameTest extends LoboUnitTest {
         attributes = testNode.getAttributes();
         streetAttr = (Attr) attributes.getNamedItem("street");
         name = streetAttr.getNodeName();
-         assertEquals( "street", name, "AttrNameAssert1");
+        assertEquals("street", name, "AttrNameAssert1");
         name = streetAttr.getName();
-         assertEquals( "street", name, "AttrNameAssert2");
+        assertEquals("street", name, "AttrNameAssert2");
     }
 }
 

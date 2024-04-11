@@ -38,7 +38,7 @@ import org.loboevolution.html.node.NodeList;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -50,8 +50,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * the "appendChild(newChild)" method is invoked the first
  * child should be the one that was second and the last
  * child should be the one that was first.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-184E7107">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-184E7107</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=246">http://www.w3.org/Bugs/Public/show_bug.cgi?id=246</a>
  */
@@ -59,7 +58,6 @@ public class HcnodeappendchildchildexistsTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -86,7 +84,7 @@ public class HcnodeappendchildchildexistsTest extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("p");
         childNode = elementList.item(1);
-        childList = ((Element)childNode).getElementsByTagName("*");
+        childList = ((Element) childNode).getElementsByTagName("*");
         newChild = childList.item(0);
         childNode.appendChild(newChild);
         for (int indexN10085 = 0; indexN10085 < childList.getLength(); indexN10085++) {

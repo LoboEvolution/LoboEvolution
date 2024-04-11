@@ -38,8 +38,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * Call getSchemaTypeInfo on title attribute for the first "em" element from schema-validated document.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Element-schemaTypeInfo">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Element-schemaTypeInfo</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-typeName">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-typeName</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-typeNamespace">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-typeNamespace</a>
@@ -61,7 +60,7 @@ public class Elementgetschematypeinfo02Test extends LoboUnitTest {
         typeName = typeInfo.getTypeName();
         assertEquals("emType", typeName, "Elementgetschematypeinfo02Assert4");
         typeNS = typeInfo.getTypeNamespace();
-        assertEquals( "http://www.w3.org/1999/xhtml", typeNS, "Elementgetschematypeinfo02Assert5");
+        assertEquals("http://www.w3.org/1999/xhtml", typeNS, "Elementgetschematypeinfo02Assert5");
     }
 }
 

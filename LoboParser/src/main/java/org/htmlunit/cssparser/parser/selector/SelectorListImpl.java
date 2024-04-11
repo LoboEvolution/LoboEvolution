@@ -26,8 +26,6 @@ import org.htmlunit.cssparser.parser.AbstractLocatable;
 
 /**
  * Implementation of SelectorList.
- *
- * @author Ronald Brill
  */
 public class SelectorListImpl extends AbstractLocatable implements SelectorList, Serializable {
 

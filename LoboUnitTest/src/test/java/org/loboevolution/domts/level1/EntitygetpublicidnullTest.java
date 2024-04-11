@@ -47,16 +47,13 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * public identifier.  Since a public identifier was not
  * specified for this entity, the "getPublicId()" method
  * should return null.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-D7303025">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-D7303025</a>
  */
 public class EntitygetpublicidnullTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

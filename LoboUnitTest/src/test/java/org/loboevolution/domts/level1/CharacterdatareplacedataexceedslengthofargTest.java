@@ -34,7 +34,7 @@ import org.loboevolution.html.node.CharacterData;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -49,9 +49,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * arg="260030".  The method should replace characters one
  * thru four with "260030".  Note that the length of the
  * specified string is greater that the specified offset.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-72AB8359">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-72AB8359</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-E5CBA7FB">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-E5CBA7FB</a>
  */
@@ -59,7 +57,6 @@ public class CharacterdatareplacedataexceedslengthofargTest extends LoboUnitTest
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -74,7 +71,7 @@ public class CharacterdatareplacedataexceedslengthofargTest extends LoboUnitTest
         child = (CharacterData) nameNode.getFirstChild();
         child.replaceData(0, 4, "260030");
         childData = child.getData();
-        assertEquals( "260030 North Ave. Dallas, Texas 98551", childData, "CharacterdatareplacedataexceedslengthofargAssert1");
+        assertEquals("260030 North Ave. Dallas, Texas 98551", childData, "CharacterdatareplacedataexceedslengthofargAssert1");
     }
 }
 

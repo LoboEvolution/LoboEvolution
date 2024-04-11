@@ -37,8 +37,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Calls isSupported("Core","") should return true for all implementations (by extension of core-14).
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#Level-2-Core-Node-supports">http://www.w3.org/TR/DOM-Level-2-Core/core#Level-2-Core-Node-supports</a>
  * @see <a href="http://www.w3.org/2000/11/DOM-Level-2-errata#core-14">http://www.w3.org/2000/11/DOM-Level-2-errata#core-14</a>
  */
@@ -46,7 +45,6 @@ public class IsSupported13Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -56,7 +54,7 @@ public class IsSupported13Test extends LoboUnitTest {
         doc = sampleXmlFile("staff.xml");
         rootNode = doc.getDocumentElement();
         state = rootNode.isSupported("Core", "");
-        assertTrue( state);
+        assertTrue(state);
     }
 }
 

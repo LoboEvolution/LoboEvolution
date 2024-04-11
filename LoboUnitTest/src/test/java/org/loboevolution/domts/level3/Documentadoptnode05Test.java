@@ -39,9 +39,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * Invoke adoptNode on a new document to adopt the default attribute "dir".  Check if
  * this attribute has been adopted successfully by verifying the nodeName, namespaceURI, prefix,
  * specified and ownerElement attributes of the adopted node.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode</a>
  */
 public class Documentadoptnode05Test extends LoboUnitTest {
@@ -83,8 +81,8 @@ public class Documentadoptnode05Test extends LoboUnitTest {
             nodePrefix = adoptedAttr.getPrefix();
             attrOwnerElem = (Element) ((Attr) /*Node */adoptedAttr).getOwnerElement();
             isSpecified = ((Attr) /*Node */adoptedAttr).isSpecified();
-            assertEquals( "dir", nodeName, "Documentadoptnode05Assert1");
-            assertNull( nodeNamespaceURI, "Documentadoptnode05Assert2");
+            assertEquals("dir", nodeName, "Documentadoptnode05Assert1");
+            assertNull(nodeNamespaceURI, "Documentadoptnode05Assert2");
             assertNull(nodePrefix, "Documentadoptnode05Assert3");
             assertNull(attrOwnerElem, "Documentadoptnode05Assert4");
             assertTrue(isSpecified, "Documentadoptnode05Assert5");

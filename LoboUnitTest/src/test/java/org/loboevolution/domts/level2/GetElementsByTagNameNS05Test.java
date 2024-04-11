@@ -32,7 +32,7 @@ import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -45,16 +45,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * localName.
  * The method should return a NodeList whose length is
  * "0".
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-getElBTNNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-getElBTNNS</a>
  */
 public class GetElementsByTagNameNS05Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -64,7 +61,7 @@ public class GetElementsByTagNameNS05Test extends LoboUnitTest {
         final HTMLCollection elementList;
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagNameNS(namespaceURI, localName);
-        assertEquals( 0, elementList.getLength());
+        assertEquals(0, elementList.getLength());
     }
 }
 

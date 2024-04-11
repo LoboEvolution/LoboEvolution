@@ -31,8 +31,6 @@ import org.htmlunit.cssparser.parser.selector.SelectorList;
 
 /**
  * Base implementation.
- *
- * @author Ronald Brill
  */
 public abstract class AbstractCSSParser {
     private DocumentHandler documentHandler_;

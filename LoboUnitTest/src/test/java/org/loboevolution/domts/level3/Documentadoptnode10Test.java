@@ -39,9 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Invoke the adoptNode method on this document with the value of the source parameter as this
  * documents doctype node.  Verify if a NOT_SUPPORTED_ERR is thrown.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode</a>
  */
 public class Documentadoptnode10Test extends LoboUnitTest {

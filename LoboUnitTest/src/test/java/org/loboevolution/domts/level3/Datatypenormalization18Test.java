@@ -42,8 +42,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Normalize document using Node.normalize which is not affected by DOMConfiguration unlike
  * Document.normalizeDocument.  Strings should not have been normalized.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-normalize">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-normalize</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-datatype-normalization">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-datatype-normalization</a>
  */
@@ -86,11 +85,11 @@ public class Datatypenormalization18Test extends LoboUnitTest {
             element = (Element) elemList.item(1);
             childNode = element.getFirstChild();
             childValue = childNode.getNodeValue();
-            assertEquals( "EMP  0001", childValue, "Datatypenormalization18Assert2");
+            assertEquals("EMP  0001", childValue, "Datatypenormalization18Assert2");
             element = (Element) elemList.item(2);
             childNode = element.getFirstChild();
             childValue = childNode.getNodeValue();
-            assertEquals( "EMP 0001", childValue, "Datatypenormalization18Assert3");
+            assertEquals("EMP 0001", childValue, "Datatypenormalization18Assert3");
             element = (Element) elemList.item(0);
             childNode = element.getFirstChild();
             childValue = childNode.getNodeValue();

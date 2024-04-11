@@ -39,9 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * to one whose namespaceURI is http://www.w3.org/XML/1998/namespace and name is xml:dom.
  * Check if this attribute has been renamed successfully by verifying the
  * nodeName and namespaceURI attributes of the renamed node.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-renameNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-renameNode</a>
  */
 public class Documentrenamenode07Test extends LoboUnitTest {

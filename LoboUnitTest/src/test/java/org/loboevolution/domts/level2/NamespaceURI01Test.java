@@ -34,7 +34,7 @@ import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -45,9 +45,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * that is specified in the DTD.
  * Invoke the "getNamespaceURI()" method on the attribute.
  * The method should return "http://www.nist.gov".
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSname">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSname</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=238">http://www.w3.org/Bugs/Public/show_bug.cgi?id=238</a>
  */
@@ -55,7 +53,6 @@ public class NamespaceURI01Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -69,7 +66,7 @@ public class NamespaceURI01Test extends LoboUnitTest {
         testAddr = (Element) elementList.item(0);
         addrAttr = testAddr.getAttributeNodeNS("http://www.nist.gov", "domestic");
         attrNamespaceURI = addrAttr.getNamespaceURI();
-        assertEquals( "http://www.nist.gov", attrNamespaceURI);
+        assertEquals("http://www.nist.gov", attrNamespaceURI);
     }
 }
 

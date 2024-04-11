@@ -34,7 +34,7 @@ import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -45,16 +45,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * the same localName as this attribute but different namespaceURI.  Change the prefix of the
  * newly created attribute using setPrefix.  Check if the new attribute nodeName has changed
  * and the existing attribute is the same.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSPrefix">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSPrefix</a>
  */
 public class Nodesetprefix02Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -74,8 +71,8 @@ public class Nodesetprefix02Test extends LoboUnitTest {
         attribute = element.getAttributeNodeNS("http://www.usa.com", "domestic");
         attrName = attribute.getNodeName();
         newAttrName = newAttribute.getNodeName();
-        assertEquals( "dmstc:domestic", attrName);
-        assertEquals( "dom:address", newAttrName);
+        assertEquals("dmstc:domestic", attrName);
+        assertEquals("dom:address", newAttrName);
     }
 }
 

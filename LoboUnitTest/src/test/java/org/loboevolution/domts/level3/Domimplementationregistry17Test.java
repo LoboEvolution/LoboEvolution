@@ -41,8 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * If the implementation supports "XML", DOMImplementationRegistry.getDOMImplementationList("xMl 3.0 cOrE") should
  * return a list of DOMImplementation where hasFeature("XML", "3.0"), and hasFeature("Core", null) returns true.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/java-binding">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/java-binding</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/ecma-script-binding">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/ecma-script-binding</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-getDOMImpls">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-getDOMImpls</a>
@@ -50,21 +49,21 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class Domimplementationregistry17Test extends LoboUnitTest {
     @Test
     @SneakyThrows
-    public void runTest() throws Exception {
-       
+    public void runTest() {
+
         DOMImplementation domImpl;
         boolean hasFeature;
         final String nullVersion = null;
 
         final DOMImplementationList domImplList;
         final int length;
-         final DOMImplementationRegistry domImplRegistry = DOMImplementationRegistry.newInstance();
+        final DOMImplementationRegistry domImplRegistry = DOMImplementationRegistry.newInstance();
         assertNotNull(domImplRegistry, "Domimplementationregistry17Assert3");
         domImplList = domImplRegistry.getDOMImplementationList("xMl 3.0 cOrE");
         length = domImplList.getLength();
         assertTrue((length > 0), "Domimplementationregistry17Assert4");
         for (int indexN1005A = 0; indexN1005A < domImplList.getLength(); indexN1005A++) {
-            domImpl = (DOMImplementation) domImplList.item(indexN1005A);
+            domImpl = domImplList.item(indexN1005A);
             hasFeature = domImpl.hasFeature("XML", "3.0");
             assertTrue(hasFeature, "Domimplementationregistry17Assert5");
             hasFeature = domImpl.hasFeature("Core", nullVersion);

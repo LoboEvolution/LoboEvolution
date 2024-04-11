@@ -20,8 +20,6 @@ import org.htmlunit.cssparser.parser.selector.SelectorList;
 
 /**
  * Empty implementation of the DocumentHandlerExt interface.
- *
- * @author Ronald Brill
  */
 @Slf4j
 public class HandlerBase implements DocumentHandler, CSSErrorHandler {

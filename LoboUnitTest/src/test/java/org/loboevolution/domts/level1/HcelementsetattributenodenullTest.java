@@ -48,8 +48,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * method should return the null value.
  * This test uses the "createAttribute(name)"
  * method from the Document interface.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-887236154">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-887236154</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=243">http://www.w3.org/Bugs/Public/show_bug.cgi?id=243</a>
  */
@@ -57,7 +56,6 @@ public class HcelementsetattributenodenullTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

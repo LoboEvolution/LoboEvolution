@@ -41,16 +41,13 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
  * <p>
  * Call the isSupported method specifying bad values for feature and version on a new
  * Processing Instruction node.  Check if the value returned from this method value was false.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#Level-2-Core-Node-supports">http://www.w3.org/TR/DOM-Level-2-Core/core#Level-2-Core-Node-supports</a>
  */
 public class Nodeissupported05Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

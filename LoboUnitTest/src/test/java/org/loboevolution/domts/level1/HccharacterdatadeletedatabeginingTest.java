@@ -34,7 +34,7 @@ import org.loboevolution.html.node.CharacterData;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -47,15 +47,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * The method should delete the characters from position
  * 0 thru position 16.  The new value of the character data
  * should be "Dallas, Texas 98551".
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-7C603781">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-7C603781</a>
  */
 public class HccharacterdatadeletedatabeginingTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -70,7 +68,7 @@ public class HccharacterdatadeletedatabeginingTest extends LoboUnitTest {
         child = (CharacterData) nameNode.getFirstChild();
         child.deleteData(0, 16);
         childData = child.getData();
-        assertEquals( "Dallas, Texas 98551", childData, "HccharacterdatadeletedatabeginingAssert1");
+        assertEquals("Dallas, Texas 98551", childData, "HccharacterdatadeletedatabeginingAssert1");
     }
 }
 

@@ -45,16 +45,13 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * <p>
  * Retreive an attribute node.  Remove the attribute node from the node map.
  * Check the element object to ensure that the attribute node has been removed from it.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-D58B193">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-D58B193</a>
  */
 public class Namednodemapremovenameditemns09Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

@@ -37,9 +37,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 /**
  * Using setUserData with null values for the UserData and the handler parameters, check
  * if returned the current userData object of this Document node is null.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-setUserData">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-setUserData</a>
  */
 public class Nodesetuserdata01Test extends LoboUnitTest {
@@ -49,7 +47,7 @@ public class Nodesetuserdata01Test extends LoboUnitTest {
         final Object prevUserData;
         doc = sampleXmlFile("hc_staff.xml");
         prevUserData = doc.setUserData("something", null, null);
-        assertNull( prevUserData, "Nodesetuserdata01Assert2");
+        assertNull(prevUserData, "Nodesetuserdata01Assert2");
     }
 }
 

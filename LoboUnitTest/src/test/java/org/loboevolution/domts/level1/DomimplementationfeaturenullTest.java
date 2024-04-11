@@ -37,9 +37,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * hasFeature("XML", null) should return true for implementations that can read staff documents.
- *
- * @author NIST
- * @author Curt Arnold
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-5CED94D7">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-5CED94D7</a>
  * @see <a href="http://www.w3.org/2000/11/DOM-Level-2-errata#core-14">http://www.w3.org/2000/11/DOM-Level-2-errata#core-14</a>
  */
@@ -47,7 +44,6 @@ public class DomimplementationfeaturenullTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

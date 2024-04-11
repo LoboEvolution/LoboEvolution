@@ -40,9 +40,7 @@ import org.loboevolution.html.node.Node;
  * Using replaceChild on this Document node attempt to replace this Document node with itself
  * and verify if a HIERARCHY_REQUEST_ERR error or a NOT_FOUND_ERR (since oldChild
  * is not a child of this node) is thrown.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307</a>
  */
 public class Nodereplacechild01Test extends LoboUnitTest {

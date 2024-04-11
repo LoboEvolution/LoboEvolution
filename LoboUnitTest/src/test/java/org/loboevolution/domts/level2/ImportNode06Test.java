@@ -47,16 +47,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * with importedNode being the element from above and deep is true.
  * Method should return an element node whose name matches "address" and
  * whose descendant is imported.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#Core-Document-importNode">http://www.w3.org/TR/DOM-Level-2-Core/core#Core-Document-importNode</a>
  */
 public class ImportNode06Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

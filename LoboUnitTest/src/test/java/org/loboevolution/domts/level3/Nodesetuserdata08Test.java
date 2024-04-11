@@ -39,9 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
  * Invoke setUserData on a CDATASection and EntityReference node to set their
  * UserData to this Document and DocumentElement node.  Verify if the UserData
  * object that was set for both nodes is different.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-setUserData">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-setUserData</a>
  */
 public class Nodesetuserdata08Test extends LoboUnitTest {

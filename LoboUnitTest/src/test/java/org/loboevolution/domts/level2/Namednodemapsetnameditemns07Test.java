@@ -51,9 +51,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * attribute that was retreived and removed from the first nodeMap as an argument.
  * Assuming that when an attribute is removed from a nodemap, it still remains in the domtree
  * his should raise an INUSE_ATTRIBIUTE_ERR.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-setNamedItemNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-setNamedItemNS</a>
  */
 public class Namednodemapsetnameditemns07Test extends LoboUnitTest {

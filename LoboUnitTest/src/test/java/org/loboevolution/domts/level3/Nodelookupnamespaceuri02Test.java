@@ -39,9 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * Using lookupNamespaceURI on a new Document node with a namespaceURI and prefix
  * and check if the value returned is the same namespaceURI.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-lookupNamespaceURI">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-lookupNamespaceURI</a>
  */
 public class Nodelookupnamespaceuri02Test extends LoboUnitTest {

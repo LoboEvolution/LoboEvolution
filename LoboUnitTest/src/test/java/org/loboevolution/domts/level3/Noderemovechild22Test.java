@@ -43,9 +43,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Using removeChild on a new Element node attempt to remove a new Comment child
  * and verify the name of the rturned node that was removed.  Now to remove the child
  * using removeChild on the parent and verify if a NOT_FOUND_ERR is thrown.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-1734834066">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-1734834066</a>
  */
 public class Noderemovechild22Test extends LoboUnitTest {
@@ -64,7 +62,7 @@ public class Noderemovechild22Test extends LoboUnitTest {
         appendedChild = parent.appendChild(child);
         removed = (Comment) parent.removeChild(child);
         removedName = removed.getNodeValue();
-        assertEquals( "DATA", removedName, "Noderemovechild22Assert3");
+        assertEquals("DATA", removedName, "Noderemovechild22Assert3");
 
         {
             boolean success = false;

@@ -29,8 +29,8 @@ package org.loboevolution.junit;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.driver.LoboUnitTest;
+import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.html.dom.nodeimpl.DOMImplementationImpl;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
@@ -60,7 +60,7 @@ public class DOMImplementationTest extends LoboUnitTest {
         final Document document = domImpl.createDocument(null, null, doctype);
         assertNull(doctype.getNextSibling());
         assertNull(doctype.getPreviousSibling());
-		assertSame(document, doctype.getOwnerDocument());
+        assertSame(document, doctype.getOwnerDocument());
         try {
             domImpl.createDocument(null, null, doctype);
             fail("Must throw an exception");
@@ -78,13 +78,13 @@ public class DOMImplementationTest extends LoboUnitTest {
         assertEquals("CSS1Compat", document.getCompatMode());
         final Element docelm = document.getDocumentElement();
         assertNotNull(docelm);
-		assertSame(docelm, doctype.getNextSibling());
+        assertSame(docelm, doctype.getNextSibling());
         assertNull(doctype.getPreviousSibling());
-		assertSame(doctype, docelm.getPreviousSibling());
+        assertSame(doctype, docelm.getPreviousSibling());
         assertNull(docelm.getNextSibling());
-		assertSame(document, docelm.getParentNode());
-		assertSame(document, docelm.getOwnerDocument());
-		assertSame(document, doctype.getOwnerDocument());
+        assertSame(document, docelm.getParentNode());
+        assertSame(document, docelm.getOwnerDocument());
+        assertSame(document, doctype.getOwnerDocument());
     }
 
     @Test

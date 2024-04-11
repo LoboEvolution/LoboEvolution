@@ -46,16 +46,13 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * to retrieve a non-existing attribute.  The method should
  * return "null".  The non-existing attribute to be used
  * is "invalidAttribute".
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-217A91B8">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-217A91B8</a>
  */
 public class ElementgetattributenodenullTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

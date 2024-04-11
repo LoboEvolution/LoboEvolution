@@ -40,9 +40,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * and verify the name of the returned node that was removed.  Now attempt the reverse
  * and verify if a NO_MODIFICATION_ALLOWED_ERR or NOT_FOUND_ERR is thrown.
  * Then remove an child of the entity reference and expect a NO_MODIFICATION_ALLOWED_ERR.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-1734834066">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-1734834066</a>
  */
 public class Noderemovechild31Test extends LoboUnitTest {

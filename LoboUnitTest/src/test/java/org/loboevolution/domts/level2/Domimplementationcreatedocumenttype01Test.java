@@ -44,16 +44,13 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * Invoke createDocument on this DOMImplementation with a valid qualifiedName and different
  * publicIds and systemIds. Check if the DocumentType node was created with its
  * ownerDocument attribute set to null.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#Level-2-Core-DOM-createDocument">http://www.w3.org/TR/DOM-Level-2-Core/core#Level-2-Core-DOM-createDocument</a>
  */
 public class Domimplementationcreatedocumenttype01Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -73,7 +70,7 @@ public class Domimplementationcreatedocumenttype01Test extends LoboUnitTest {
         systemIds.add("test");
 
         doc = sampleXmlFile("staffNS.xml");
-        
+
         domImpl = doc.getImplementation();
         for (int indexN1005D = 0; indexN1005D < publicIds.size(); indexN1005D++) {
             publicId = (String) publicIds.get(indexN1005D);

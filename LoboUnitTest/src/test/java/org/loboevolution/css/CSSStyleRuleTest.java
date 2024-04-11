@@ -25,20 +25,23 @@
  */
 package org.loboevolution.css;
 
-import org.htmlunit.cssparser.dom.CSSStyleRuleImpl;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.loboevolution.annotation.Alerts;
+import org.loboevolution.annotation.AlertsExtension;
 import org.loboevolution.driver.LoboUnitTest;
 
 /**
- * Tests for {@link CSSStyleRuleImpl}.
+ * Tests for {@link CSSStyleRule}.
  */
-
+@ExtendWith(AlertsExtension.class)
 public class CSSStyleRuleTest extends LoboUnitTest {
 
 
     @Test
+    @Alerts({"[object CSSStyleRule]", "1", "[object CSSStyleSheet]", "null", "h1", "", "10px", "", "red"})
     public void test() {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
                 + "<style>\n"
                 + "  BODY { background-color: white; color: black; }\n"
                 + "  H1 { font: 8pt Arial bold; }\n"
@@ -53,33 +56,33 @@ public class CSSStyleRuleTest extends LoboUnitTest {
                 + "    else\n"
                 + "      rules = document.styleSheets[0].rules;\n"
                 + "    var r = rules[1];\n"
-                + "    alert(r);\n"
+                + "   alert(r);\n"
                 + "    if (r.type) {\n"
-                + "      alert(r.type);\n"
-                + "      alert(r.parentStyleSheet);\n"
-                + "      alert(r.parentRule);\n"
-                + "      alert(r.selectorText);\n"
+                + "     alert(r.type);\n"
+                + "     alert(r.parentStyleSheet);\n"
+                + "     alert(r.parentRule);\n"
+                + "     alert(r.selectorText);\n"
                 + "    } else {\n"
-                + "      alert(r.selectorText);\n"
+                + "     alert(r.selectorText);\n"
                 + "    }\n"
-                + "    alert(r.style.marginTop);\n"
+                + "   alert(r.style.marginTop);\n"
                 + "    r.style.marginTop = '10px';\n"
-                + "    alert(r.style.marginTop);\n"
-                + "    alert(r.style.backgroundColor);\n"
+                + "   alert(r.style.marginTop);\n"
+                + "   alert(r.style.backgroundColor);\n"
                 + "    r.style.backgroundColor = 'red';\n"
-                + "    alert(r.style.backgroundColor);\n"
+                + "   alert(r.style.backgroundColor);\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"
                 + "</body></html>";
-        final String[] messages = {"[object CSSStyleRule]", "1", "[object CSSStyleSheet]", null, "H1", null, "10px", null, "red"};
-        checkHtmlAlert(html, messages);
+
+        checkHtmlAlert(html);
     }
 
-
     @Test
+    @Alerts({"4px", "4px", "4px", "4px"})
     public void styleSheet() {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
                 + "<style>\n"
                 + "  BODY { margin: 4px; }\n"
                 + "</style>\n"
@@ -91,21 +94,22 @@ public class CSSStyleRuleTest extends LoboUnitTest {
                 + "    else\n"
                 + "      rules = document.styleSheets[0].rules;\n"
                 + "    var r = rules[0];\n"
-                + "    alert(r.style.marginTop);\n"
-                + "    alert(r.style.marginRight);\n"
-                + "    alert(r.style.marginBottom);\n"
-                + "    alert(r.style.marginLeft);\n"
+                + "   alert(r.style.marginTop);\n"
+                + "   alert(r.style.marginRight);\n"
+                + "   alert(r.style.marginBottom);\n"
+                + "   alert(r.style.marginLeft);\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"
                 + "</body></html>";
-        final String[] messages = {"4px", "4px", "4px", "4px"};
-        checkHtmlAlert(html, messages);
+
+        checkHtmlAlert(html);
     }
 
     @Test
+    @Alerts("undefined")
     public void readOnly() {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
                 + "<style>\n"
                 + "  BODY { background-color: white; color: black; }\n"
                 + "  H1 { font: 8pt Arial bold; }\n"
@@ -120,18 +124,19 @@ public class CSSStyleRuleTest extends LoboUnitTest {
                 + "    else\n"
                 + "      rules = document.styleSheets[0].rules;\n"
                 + "    var r = rules[1];\n"
-                + "    alert(r.readOnly);\n"
+                + "   alert(r.readOnly);\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"
                 + "</body></html>";
-        final String[] messages = {"undefined"};
-        checkHtmlAlert(html, messages);
+
+        checkHtmlAlert(html);
     }
 
     @Test
+    @Alerts("1")
     public void type() {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
                 + "<style>\n"
                 + "  BODY { background-color: white; color: black; }\n"
                 + "  H1 { font: 8pt Arial bold; }\n"
@@ -146,18 +151,19 @@ public class CSSStyleRuleTest extends LoboUnitTest {
                 + "    else\n"
                 + "      rules = document.styleSheets[0].rules;\n"
                 + "    var r = rules[1];\n"
-                + "    alert(r.type);\n"
+                + "   alert(r.type);\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"
                 + "</body></html>";
-        final String[] messages = {"1"};
-        checkHtmlAlert(html, messages);
+
+        checkHtmlAlert(html);
     }
 
     @Test
+    @Alerts({"body", "h1", "a.foo", ".foo", ".foo .foo2", ".myFoo", "#byId"})
     public void selectorText() {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
                 + "<style>\n"
                 + "  BoDY { background-color: white; color: black; }\n"
                 + "  H1 { font: 8pt Arial bold; }\n"
@@ -172,41 +178,42 @@ public class CSSStyleRuleTest extends LoboUnitTest {
                 + "    var sheet = document.styleSheets[0];\n"
                 + "    var rules = sheet.cssRules || sheet.rules;\n"
                 + "    for (var i = 0; i < rules.length; i++)\n"
-                + "      alert(rules[i].selectorText);\n"
+                + "     alert(rules[i].selectorText);\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"
                 + "</body></html>";
-        final String[] messages = {"body", "h1", "a.foo", ".foo", ".foo .foo2", ".myFoo", "#byId"};
-        checkHtmlAlert(html, messages);
+
+        checkHtmlAlert(html);
     }
 
     @Test
+    @Alerts({"1", ""})
     public void oldIEStyleFilter() {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
                 + "<style>\n"
                 + "  BODY { filter: progid:DXImageTransform.Microsoft.AlphaImageLoader"
                 + "(src='rightCorner.gif', sizingMethod='crop'); }\n"
                 + "</style>\n"
-                + "<script>\n"
-                + "function test() {\n"
+                + "<script>\n"                + "function test() {\n"
                 + "  try {\n"
                 + "    var sheet = document.styleSheets[0];\n"
                 + "    var rules = sheet.cssRules || sheet.rules;\n"
-                + "    alert(rules.length);\n"
-                + "    alert(rules[0].style.filter);\n"
-                + "  } catch(e) { alert('exception'); }\n"
+                + "   alert(rules.length);\n"
+                + "   alert(rules[0].style.filter);\n"
+                + "  } catch(e) {alert('exception'); }\n"
                 + "}\n"
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"
                 + "</body></html>";
-        final String[] messages = {"1", ""};
-        checkHtmlAlert(html, messages);
+
+        checkHtmlAlert(html);
     }
 
     @Test
+    @Alerts({"1", "none"})
     public void filter() {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
                 + "<style>\n"
                 + "  BODY { filter: none; }\n"
                 + "</style>\n"
@@ -215,14 +222,14 @@ public class CSSStyleRuleTest extends LoboUnitTest {
                 + "  try {\n"
                 + "    var sheet = document.styleSheets[0];\n"
                 + "    var rules = sheet.cssRules || sheet.rules;\n"
-                + "    alert(rules.length);\n"
-                + "    alert(rules[0].style.filter);\n"
-                + "  } catch(e) { alert('exception'); }\n"
+                + "   alert(rules.length);\n"
+                + "   alert(rules[0].style.filter);\n"
+                + "  } catch(e) {alert('exception'); }\n"
                 + "}\n"
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"
                 + "</body></html>";
-        final String[] messages = {"1", "none"};
-        checkHtmlAlert(html, messages);
+
+        checkHtmlAlert(html);
     }
 }

@@ -33,7 +33,7 @@ import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -43,8 +43,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * Retrieve the second employee and invoke the
  * "getFirstChild()" method.   The NodeName returned
  * should be "#text" or "EM".
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-169727388">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-169727388</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=246">http://www.w3.org/Bugs/Public/show_bug.cgi?id=246</a>
  */
@@ -52,7 +51,6 @@ public class HcnodegetfirstchildTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -70,7 +68,7 @@ public class HcnodegetfirstchildTest extends LoboUnitTest {
         if ("#text".equals(childName)) {
             assertEquals("#text", childName, "HcnodegetfirstchildAssert1");
         } else {
-            assertEquals( "EM", childName, "HcnodegetfirstchildAssert2");
+            assertEquals("EM", childName, "HcnodegetfirstchildAssert2");
         }
 
     }

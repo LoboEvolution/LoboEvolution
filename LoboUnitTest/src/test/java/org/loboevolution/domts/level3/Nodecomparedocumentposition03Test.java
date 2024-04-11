@@ -39,9 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
  * Using compareDocumentPosition check if the document position of two Document nodes obtained from the
  * same xml document is disconnected, implementation specific, and that the order of these two documents
  * is reserved.
- *
- * @author IBM
- * @author Jenny Hsu
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-compareDocumentPosition">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-compareDocumentPosition</a>
  */
 public class Nodecomparedocumentposition03Test extends LoboUnitTest {

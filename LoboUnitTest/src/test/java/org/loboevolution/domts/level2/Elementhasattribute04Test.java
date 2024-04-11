@@ -41,16 +41,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * on this element or has a default value, false otherwise.
  * Create an element Node and an attribute Node and add the attribute node to the element.
  * Invoke the hasAttribute method on the element and verify if the method returns true.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeHasAttrs">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeHasAttrs</a>
  */
 public class Elementhasattribute04Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

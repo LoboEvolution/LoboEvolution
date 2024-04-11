@@ -38,9 +38,7 @@ import org.loboevolution.html.node.Node;
  * children, and returns the oldChild node.
  * Using replaceChild on this Document node attempt to replace this DocumentType node with
  * its DocumentType (replacing node with itself -- implementation dependent)
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307</a>
  */
 public class Nodereplacechild02Test extends LoboUnitTest {

@@ -40,9 +40,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * Invoke adoptNode on this document to adopt the a new namespace aware attribute node.  Check
  * if this attribute has been adopted successfully by verifying the nodeName, namespaceURI, prefix,
  * specified and ownerElement attributes of the adopted node.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode</a>
  */
 public class Documentadoptnode03Test extends LoboUnitTest {

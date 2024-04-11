@@ -30,8 +30,8 @@ package org.loboevolution.domts.level2;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DOMImplementation;
+import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -44,9 +44,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Call the createDocument on this DOMImplementation with null namespaceURI and a
  * qualifiedName that has a namespace prefix using this DOMImplementation.
  * Check if the NAMESPACE_ERR is thrown.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#Level-2-Core-DOM-createDocument">http://www.w3.org/TR/DOM-Level-2-Core/core#Level-2-Core-DOM-createDocument</a>
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#Level-2-Core-DOM-createDocument">http://www.w3.org/TR/DOM-Level-2-Core/core#Level-2-Core-DOM-createDocument</a>
  */
@@ -54,7 +52,6 @@ public class Domimplementationcreatedocument04Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -66,7 +63,7 @@ public class Domimplementationcreatedocument04Test extends LoboUnitTest {
         final DocumentType docType = null;
 
         doc = sampleXmlFile("staffNS.xml");
-        
+
         domImpl = doc.getImplementation();
 
         boolean success = false;

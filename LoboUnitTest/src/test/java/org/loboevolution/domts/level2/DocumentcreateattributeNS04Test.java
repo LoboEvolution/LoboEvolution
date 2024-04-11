@@ -42,9 +42,7 @@ import static org.junit.jupiter.api.Assertions.fail;
  * <p>
  * Invoke the createAttributeNS method on this Document object with a valid value for
  * namespaceURI, and malformed qualifiedNames.  Check if the a NAMESPACE_ERR was thrown.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core">http://www.w3.org/TR/DOM-Level-2-Core/core</a>
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-DocCrAttrNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-DocCrAttrNS</a>
  */
@@ -52,7 +50,6 @@ public class DocumentcreateattributeNS04Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

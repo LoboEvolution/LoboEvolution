@@ -46,16 +46,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * Retrieve the first address node and get the attributes of this node."
  * Then apply the getLocalName() method to the domestic attribute.
  * The method should return "domestic".
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSLocalN">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSLocalN</a>
  */
 public class LocalName01Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

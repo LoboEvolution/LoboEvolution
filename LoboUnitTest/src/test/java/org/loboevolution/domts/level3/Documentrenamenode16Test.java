@@ -44,9 +44,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * null and qualifiedName that is renamedNode.
  * Check if this element has been renamed successfully by verifying the
  * nodeName, attributes of the renamed node.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-renameNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-renameNode</a>
  */
 public class Documentrenamenode16Test extends LoboUnitTest {
@@ -68,10 +66,10 @@ public class Documentrenamenode16Test extends LoboUnitTest {
         nodeName = renamedclass.getNodeName();
         namespaceURI = renamedclass.getNamespaceURI();
         nodeType = renamedclass.getNodeType();
-        assertEquals( "renamedNode", nodeName, "Documentrenamenode16Assert3");
-        assertEquals( 1, nodeType, "Documentrenamenode16Assert4");
-        assertNull( namespaceURI, "Documentrenamenode16Assert5");
-        assertNull( namespaceURI, "Documentrenamenode16Assert6");
+        assertEquals("renamedNode", nodeName, "Documentrenamenode16Assert3");
+        assertEquals(1, nodeType, "Documentrenamenode16Assert4");
+        assertNull(namespaceURI, "Documentrenamenode16Assert5");
+        assertNull(namespaceURI, "Documentrenamenode16Assert6");
     }
 }
 

@@ -22,8 +22,6 @@ import org.htmlunit.cssparser.parser.Locator;
 /**
  * <p>IdCondition class.</p>
  *
- * @author Ronald Brill
- *
  */
 public class IdCondition extends AbstractLocatable implements Condition, Serializable {
 

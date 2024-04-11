@@ -41,27 +41,25 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * Invoke lookupNamespaceURI on the title attribute node of the acronym node with
  * a namespaceURI and a node prefix and check if the value of the namespaceURI returned by
  * using its prefix as a parameter is valid.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-lookupNamespaceURI">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-lookupNamespaceURI</a>
  */
 public class Nodelookupnamespaceuri17Test extends LoboUnitTest {
-@Test
-public void runTest(){
+    @Test
+    public void runTest() {
         final Document doc;
         final Element elem;
         final HTMLCollection elemList;
         final NamedNodeMap attributesMap;
         final Attr attr;
         final String namespaceURI;
-        doc=sampleXmlFile("hc_staff.xml");
-        elemList=doc.getElementsByTagName("acronym");
-        elem=(Element)elemList.item(2);
-        attributesMap=elem.getAttributes();
-        attr=(Attr)attributesMap.getNamedItem("xsi:noNamespaceSchemaLocation");
-        namespaceURI=attr.lookupNamespaceURI("dmstc");
-        assertEquals("http://www.netzero.com",namespaceURI, "Nodelookupnamespaceuri17Assert2");
-        }
-        }
+        doc = sampleXmlFile("hc_staff.xml");
+        elemList = doc.getElementsByTagName("acronym");
+        elem = (Element) elemList.item(2);
+        attributesMap = elem.getAttributes();
+        attr = (Attr) attributesMap.getNamedItem("xsi:noNamespaceSchemaLocation");
+        namespaceURI = attr.lookupNamespaceURI("dmstc");
+        assertEquals("http://www.netzero.com", namespaceURI, "Nodelookupnamespaceuri17Assert2");
+    }
+}
 

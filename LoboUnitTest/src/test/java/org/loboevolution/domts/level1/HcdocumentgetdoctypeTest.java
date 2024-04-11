@@ -32,21 +32,20 @@ import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 /**
  * Access Document.doctype for hc_staff, if not text/html should return DocumentType node.
  * HTML implementations may return null.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-B63ED1A31">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-B63ED1A31</a>
  */
 public class HcdocumentgetdoctypeTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -59,9 +58,9 @@ public class HcdocumentgetdoctypeTest extends LoboUnitTest {
 
         if ((docType != null)) {
             docTypeName = docType.getName();
-             assertEquals( "html", docTypeName, "HcdocumentgetdoctypeAssert1");
+            assertEquals("html", docTypeName, "HcdocumentgetdoctypeAssert1");
             nodeValue = docType.getNodeValue();
-            assertNull( nodeValue, "HcdocumentgetdoctypeAssert2");
+            assertNull(nodeValue, "HcdocumentgetdoctypeAssert2");
         }
     }
 }

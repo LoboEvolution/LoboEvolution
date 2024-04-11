@@ -41,8 +41,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Check that default attributes are made explicitly specified.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-canonical-form">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-canonical-form</a>
  */
@@ -77,7 +76,7 @@ public class Canonicalform11Test extends LoboUnitTest {
             attrSpecified = attr.isSpecified();
             assertTrue(attrSpecified, "Canonicalform11Assert3");
             attrValue = attr.getNodeValue();
-            assertEquals( "default", attrValue, "Canonicalform11Assert4");
+            assertEquals("default", attrValue, "Canonicalform11Assert4");
         }
     }
 }

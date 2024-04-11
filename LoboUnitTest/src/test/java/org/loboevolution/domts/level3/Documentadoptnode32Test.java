@@ -39,9 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * Invoke the adoptNode method on another document using a new CDataSection node created in this
  * Document as the source.  Verify if the node has been adopted correctly by checking the nodeValue
  * of the adopted node.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode</a>
  */
 public class Documentadoptnode32Test extends LoboUnitTest {
@@ -66,7 +64,7 @@ public class Documentadoptnode32Test extends LoboUnitTest {
 
         if ((adoptedCDATA != null)) {
             nodeValue = adoptedCDATA.getNodeValue();
-            assertEquals( "Document.adoptNode test for a CDATASECTION_NODE", nodeValue, "Documentadoptnode32Assert2");
+            assertEquals("Document.adoptNode test for a CDATASECTION_NODE", nodeValue, "Documentadoptnode32Assert2");
         }
     }
 }

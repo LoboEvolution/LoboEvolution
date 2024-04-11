@@ -39,9 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  * Create two entity reference nodes. Using compareDocumentPosition to check if the child of the first Entity
  * Ref node precedes the child of the second Entity Ref node, and that the child of the second Entity Ref node
  * follows the child of the first Entity Ref node.
- *
- * @author IBM
- * @author Jenny Hsu
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-compareDocumentPosition">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-compareDocumentPosition</a>
  */
 public class Nodecomparedocumentposition29Test extends LoboUnitTest {

@@ -37,9 +37,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 /**
  * Set the strictErrorChecking attribute value on a new Document to false and check if it was
  * correctly set using getStrictErrorChecking.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-strictErrorChecking">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-strictErrorChecking</a>
  */
 public class Documentsetstricterrorchecking03Test extends LoboUnitTest {

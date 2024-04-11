@@ -33,7 +33,7 @@ import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -44,16 +44,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * <p>
  * Retrieve the first employee node and invoke the "getLocalName()"
  * method.   The method should return "employee".
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSLocalN">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSLocalN</a>
  */
 public class LocalName04Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -63,9 +60,9 @@ public class LocalName04Test extends LoboUnitTest {
         final String employeeLocalName;
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagName("employee");
-        testEmployee = (Element)elementList.item(0);
+        testEmployee = (Element) elementList.item(0);
         employeeLocalName = testEmployee.getLocalName();
-        assertEquals( "EMPLOYEE", employeeLocalName);
+        assertEquals("EMPLOYEE", employeeLocalName);
     }
 }
 

@@ -40,16 +40,13 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * without a document type declaration.
  * Retrieve the XML document without a DTD and invoke the
  * "getDoctype()" method.  It should return null.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-B63ED1A31">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-B63ED1A31</a>
  */
 public class DocumentgetdoctypenodtdTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

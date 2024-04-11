@@ -32,14 +32,13 @@ import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
  * An processing instruction is created, setNodeValue is called with a non-null argument, but getNodeValue
  * should still return null.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D080</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1004215813">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1004215813</a>
  */
@@ -47,7 +46,6 @@ public class Nodevalue09Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -57,10 +55,10 @@ public class Nodevalue09Test extends LoboUnitTest {
         doc = sampleXmlFile("staff.xml");
         newNode = doc.createProcessingInstruction("TARGET", "DATA");
         newValue = newNode.getNodeValue();
-        assertEquals( "DATA", newValue, "Nodevalue09Assert1");
+        assertEquals("DATA", newValue, "Nodevalue09Assert1");
         newNode.setNodeValue("This should have an effect");
         newValue = newNode.getNodeValue();
-        assertEquals( "This should have an effect", newValue, "Nodevalue09Assert2");
+        assertEquals("This should have an effect", newValue, "Nodevalue09Assert2");
     }
 
 }

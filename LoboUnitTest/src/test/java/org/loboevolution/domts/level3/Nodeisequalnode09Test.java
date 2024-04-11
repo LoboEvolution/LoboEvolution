@@ -37,9 +37,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Get the first "em" node, construct an equivalent in a new document and see if isEqualNode
  * returns true.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isEqualNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isEqualNode</a>
  */
 public class Nodeisequalnode09Test extends LoboUnitTest {

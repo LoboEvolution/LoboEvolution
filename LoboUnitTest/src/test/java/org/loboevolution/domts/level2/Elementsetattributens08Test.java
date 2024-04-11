@@ -45,16 +45,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * http://www.w3.org/DOMTest/level2 and a qualifiedName that has the prefix xmlns and once
  * again with a qualifiedName that is xmlns.
  * Check if the NAMESPACE_ERR was thrown.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElSetAttrNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElSetAttrNS</a>
  */
 public class Elementsetattributens08Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

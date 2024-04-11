@@ -38,9 +38,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 /**
  * Invoke getFeature method on this DOMImplementation with the value of the feature parameter
  * as Core and version as "".  This should return a DOMImplementation object that's not null.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMImplementation3-getFeature">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMImplementation3-getFeature</a>
  */
 public class Domimplementationgetfeature02Test extends LoboUnitTest {

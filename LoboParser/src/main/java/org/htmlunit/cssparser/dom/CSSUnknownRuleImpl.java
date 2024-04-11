@@ -22,8 +22,6 @@ import org.htmlunit.cssparser.util.ParserUtils;
 
 /**
  * Implementation of CSSUnknownRule.
- *
- * @author Ronald Brill
  */
 public class CSSUnknownRuleImpl extends AbstractCSSRuleImpl {
 

@@ -40,9 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * Using replaceChild on this Document node attempt to replace this DocumentElement node
  * with  a new element and verify if the name of the replaced documentElement Node.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307</a>
  */
 public class Nodereplacechild07Test extends LoboUnitTest {
@@ -75,7 +73,7 @@ public class Nodereplacechild07Test extends LoboUnitTest {
         }
         replaced = doc.getDocumentElement();
         nodeName = replaced.getNodeName();
-        assertEquals( rootName, nodeName, "Nodereplacechild07Assert2");
+        assertEquals(rootName, nodeName, "Nodereplacechild07Assert2");
     }
 }
 

@@ -40,9 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * Invoke the method getTextContent on a new Attr node and check if the value returned
  * is the attributes Value.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-textContent">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-textContent</a>
  */
 public class Nodegettextcontent07Test extends LoboUnitTest {
@@ -59,7 +57,7 @@ public class Nodegettextcontent07Test extends LoboUnitTest {
         elem.setAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:lang", "en-US");
         attr = elem.getAttributeNodeNS("http://www.w3.org/XML/1998/namespace", "lang");
         textContent = attr.getTextContent();
-        assertEquals( "en-US", textContent, "Nodegettextcontent07Assert2");
+        assertEquals("en-US", textContent, "Nodegettextcontent07Assert2");
     }
 }
 

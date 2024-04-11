@@ -33,7 +33,7 @@ import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -43,15 +43,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * Retrieve the first child of the second employee and
  * invoke the "getNextSibling()" method.   It should return
  * a node with the NodeName of "#text".
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-6AC54C2F">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-6AC54C2F</a>
  */
 public class HcnodegetnextsiblingTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -65,7 +63,7 @@ public class HcnodegetnextsiblingTest extends LoboUnitTest {
         emNode = elementList.item(1);
         nsNode = emNode.getNextSibling();
         nsName = nsNode.getNodeName();
-        assertEquals( "#text", nsName, "HcnodegetnextsiblingAssert1");
+        assertEquals("#text", nsName, "HcnodegetnextsiblingAssert1");
     }
 }
 

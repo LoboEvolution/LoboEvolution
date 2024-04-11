@@ -34,7 +34,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -42,9 +42,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * and check the NodeName returned by the
  * "removeChild(oldChild)" method.   The returned node
  * should have a NodeName equal to "#text" or employeeId depending on whitespace.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D095">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-F68D095</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1734834066">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1734834066</a>
  */
@@ -52,7 +50,6 @@ public class NoderemovechildgetnodenameTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -74,9 +71,9 @@ public class NoderemovechildgetnodenameTest extends LoboUnitTest {
         childName = removedChild.getNodeName();
 
         if (length == 6) {
-            assertEquals( "EMPLOYEEID",childName, "NoderemovechildgetnodenameAssert1");
+            assertEquals("EMPLOYEEID", childName, "NoderemovechildgetnodenameAssert1");
         } else {
-            assertEquals( "#text", childName, "NoderemovechildgetnodenameAssert2");
+            assertEquals("#text", childName, "NoderemovechildgetnodenameAssert2");
         }
 
     }

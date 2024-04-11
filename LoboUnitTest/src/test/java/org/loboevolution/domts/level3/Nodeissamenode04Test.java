@@ -38,9 +38,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 /**
  * Using isSameNode check if 2 Element nodes that are equal but do not reference the
  * same object are not the same.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isSameNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isSameNode</a>
  */
 public class Nodeissamenode04Test extends LoboUnitTest {

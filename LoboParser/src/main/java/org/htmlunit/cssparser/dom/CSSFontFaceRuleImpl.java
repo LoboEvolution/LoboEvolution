@@ -23,8 +23,6 @@ import org.htmlunit.cssparser.util.ParserUtils;
 /**
  * Implementation of CSSFontFaceRule.
  *
- * @author Ronald Brill
- *
  */
 public class CSSFontFaceRuleImpl extends AbstractCSSRuleImpl {
 

@@ -37,9 +37,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Set the standalone attribute of this document to true and verify if the attribute was correctly
  * set.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-standalone">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-standalone</a>
  */
 public class Documentsetxmlstandalone01Test extends LoboUnitTest {

@@ -38,9 +38,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * Create a new Element node, add new Text, Element and Processing Instruction nodes to it.
  * Using compareDocumentPosition, compare the position of the Element with respect to the Text
  * and the Text with respect to the Processing Instruction.
- *
- * @author IBM
- * @author Jenny Hsu
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-compareDocumentPosition">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-compareDocumentPosition</a>
  */
 public class Nodecomparedocumentposition34Test extends LoboUnitTest {

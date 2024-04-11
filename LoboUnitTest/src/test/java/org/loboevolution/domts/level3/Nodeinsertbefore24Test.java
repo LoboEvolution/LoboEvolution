@@ -39,9 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Using insertBefore on an Element node attempt to insert a Comment node before
  * a CDATASection node that is not a child and verify if a NOT_FOUND_ERR is raised.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-952280727">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-952280727</a>
  */
 public class Nodeinsertbefore24Test extends LoboUnitTest {

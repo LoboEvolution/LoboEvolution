@@ -35,7 +35,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -50,8 +50,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * Access the FOURTH element in the NodeList.  The FOURTH
  * element, the first or second should be an "em" node with
  * the content "EMP0004".
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1938918D">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1938918D</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=246">http://www.w3.org/Bugs/Public/show_bug.cgi?id=246</a>
  */
@@ -59,7 +58,6 @@ public class HcelementgetelementsbytagnameaccessnodelistTest extends LoboUnitTes
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

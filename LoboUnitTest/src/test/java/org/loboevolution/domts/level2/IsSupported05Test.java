@@ -49,16 +49,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * node object on which the "isSupported(feature,version)"
  * method is invoked with "feature" equal to "core" and the version equal to 2.0.
  * The method should return a boolean "true".
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#Level-2-Core-Node-supports">http://www.w3.org/TR/DOM-Level-2-Core/core#Level-2-Core-Node-supports</a>
  */
 public class IsSupported05Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

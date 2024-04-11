@@ -35,7 +35,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -49,9 +49,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * localName="defaultAttr", into the same document.
  * Check the parentNode, nodeName, nodeType and nodeValue of the imported node to
  * verify if it has been imported correctly.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core">http://www.w3.org/TR/DOM-Level-2-Core/core</a>
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#Core-Document-importNode">http://www.w3.org/TR/DOM-Level-2-Core/core#Core-Document-importNode</a>
  */
@@ -60,7 +58,6 @@ public class Documentimportnode03Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -73,7 +70,7 @@ public class Documentimportnode03Test extends LoboUnitTest {
         final int nodeType;
         final String nodeValue;
         doc = sampleXmlFile("staffNS.xml");
-        childList = doc.getElementsByTagName( "employee");
+        childList = doc.getElementsByTagName("employee");
         element = (Element) childList.item(1);
         attr = element.getAttributeNode("defaultAttr");
         importedAttr = doc.importNode(attr, false);

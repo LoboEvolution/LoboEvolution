@@ -30,6 +30,7 @@ package org.loboevolution.html.dom.domimpl;
 
 import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.Strings;
+import org.loboevolution.common.Urls;
 import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.dom.HTMLScriptElement;
 import org.loboevolution.gui.HtmlPanel;
@@ -49,15 +50,13 @@ import org.mozilla.javascript.RhinoException;
 import org.mozilla.javascript.Scriptable;
 import org.loboevolution.html.dom.UserDataHandler;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.net.HttpURLConnection;
+import java.io.*;
 import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.Duration;
 import java.time.Instant;
 
@@ -184,13 +183,9 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 					final TimingInfo info = new TimingInfo();
 					final URL scriptURL = ((HTMLDocumentImpl) doc).getFullURL(src);
 					final String scriptURI = scriptURL == null ? src : scriptURL.toExternalForm();
-					final URL u = new URL(scriptURI);
-					info.setName(u.getFile());
+					info.setName(scriptURL != null ? scriptURL.getFile() : new URL(scriptURI).getFile());
 
-					final URLConnection connection = u.openConnection();
-					connection.setRequestProperty("User-Agent", UserAgent.getUserAgent());
-					connection.getHeaderField("Set-Cookie");
-					try (final InputStream in = HttpNetwork.openConnectionCheckRedirects(connection)) {
+					try (InputStream in = getStream(scriptURL, scriptURI, info)) {
 						if (AlgorithmDigest.validate(IOUtil.readFully(in), getIntegrity())) {
 							try (final Reader reader = new InputStreamReader(in, StandardCharsets.UTF_8)) {
 								final BufferedReader br = new BufferedReader(reader);
@@ -200,14 +195,7 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 							}
 						}
 					} catch (final SocketTimeoutException e) {
-						if (connection instanceof HttpURLConnection) {
-							final HttpURLConnection urlConnection = (HttpURLConnection) u.openConnection();
-							info.setHttpResponse(urlConnection.getResponseCode());
-						} else {
-							info.setHttpResponse(400);
-						}
-
-						log.error("More time elapsed {}", connection.getConnectTimeout());
+						info.setHttpResponse(400);
 					} catch (final Exception e) {
 						log.error(e.getMessage(), e);
 					} finally {
@@ -215,14 +203,7 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 						final long timeElapsed = Duration.between(start, finish).toMillis();
 						info.setTimeElapsed(timeElapsed);
 						info.setPath(scriptURI);
-						info.setType(connection.getContentType());
-
-						if (connection instanceof HttpURLConnection) {
-							final HttpURLConnection urlConnection = (HttpURLConnection) u.openConnection();
-							info.setHttpResponse(urlConnection.getResponseCode());
-						} else {
-							info.setHttpResponse(200);
-						}
+						info.setHttpResponse(200);
 
 						final HtmlRendererContext htmlRendererContext = this.getHtmlRendererContext();
 						final HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
@@ -241,6 +222,19 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 			}
 		}
 	}
+
+	private InputStream getStream(URL scriptURL, String scriptURI, TimingInfo info) throws Exception {
+		if (Urls.isLocalFile(scriptURL)) {
+			return Files.newInputStream(Paths.get(scriptURI.replace("file://", "")));
+		} else {
+			final URLConnection connection = scriptURL.openConnection();
+			connection.setRequestProperty("User-Agent", UserAgent.getUserAgent());
+			connection.getHeaderField("Set-Cookie");
+			info.setType(connection.getContentType());
+			return HttpNetwork.openConnectionCheckRedirects(connection);
+		}
+	}
+
 
 	/** {@inheritDoc} */
 	@Override

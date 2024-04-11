@@ -50,16 +50,13 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * the value "null" is returned.
  * This test uses the "createAttributeNS(namespaceURI,localName)
  * method from the Document interface to create the new attribute to add.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElSetAtNodeNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElSetAtNodeNS</a>
  */
 public class SetAttributeNodeNS03Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

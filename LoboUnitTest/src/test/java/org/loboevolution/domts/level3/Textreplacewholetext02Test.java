@@ -41,9 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * Invoke replaceWholeText on an existing Text Node to replace its value with an
  * empty string value.  Verify the repalceWholeText method by verifying if the value
  * returned is null.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Text3-replaceWholeText">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Text3-replaceWholeText</a>
  */
 public class Textreplacewholetext02Test extends LoboUnitTest {

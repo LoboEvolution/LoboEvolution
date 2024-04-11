@@ -39,9 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * Using getTextContent on this DocumentType node check if the value returned is Null .
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-textContent">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-textContent</a>
  */
 public class Nodegettextcontent05Test extends LoboUnitTest {

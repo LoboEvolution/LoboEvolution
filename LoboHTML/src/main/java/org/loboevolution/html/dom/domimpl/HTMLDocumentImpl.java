@@ -271,7 +271,6 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 			final URL documentURL = baseURI == null ? null : new URL(baseURI);
 			return Urls.createURL(documentURL, uri);
 		} catch (final Exception mfu) {
-			// Try agan, without the baseURI.
 			try {
 				return new URL(uri);
 			} catch (final Exception mfu2) {

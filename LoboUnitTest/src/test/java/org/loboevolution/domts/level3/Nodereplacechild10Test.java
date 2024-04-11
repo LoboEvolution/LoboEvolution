@@ -42,14 +42,12 @@ import org.loboevolution.html.node.Node;
  * Using replaceChild on this Document node attempt to replace an Entity node with
  * a notation node of retieved from the DTD of another document and verify if a
  * NOT_FOUND_ERR or WRONG_DOCUMENT_ERR or HIERARCHY_REQUEST err is thrown.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307</a>
  */
 public class Nodereplacechild10Test extends LoboUnitTest {
-@Test
-public void runTest(){
+    @Test
+    public void runTest() {
         final Document doc;
         final DocumentType docType;
         final NamedNodeMap entitiesMap;
@@ -59,30 +57,30 @@ public void runTest(){
         final NamedNodeMap notationsMap;
         final Notation notation;
         final Node replaced;
-        doc=sampleXmlFile("hc_staff.xml");
-        docType=doc.getDoctype();
-        entitiesMap=docType.getEntities();
-        ent=entitiesMap.getNamedItem("alpha");
-        doc1=sampleXmlFile("hc_staff.xml");
-        docType1=doc1.getDoctype();
-        notationsMap=docType1.getNotations();
-        notation=(Notation)notationsMap.getNamedItem("notation1");
+        doc = sampleXmlFile("hc_staff.xml");
+        docType = doc.getDoctype();
+        entitiesMap = docType.getEntities();
+        ent = entitiesMap.getNamedItem("alpha");
+        doc1 = sampleXmlFile("hc_staff.xml");
+        docType1 = doc1.getDoctype();
+        notationsMap = docType1.getNotations();
+        notation = (Notation) notationsMap.getNamedItem("notation1");
 
-        try{
-        replaced=doc.replaceChild(notation,ent);
+        try {
+            replaced = doc.replaceChild(notation, ent);
 
-        }catch(final DOMException ex){
-        switch(ex.getCode()){
-        case 8:
-        break;
-        case 4:
-        break;
-        case 3:
-        break;
-default:
-        throw ex;
+        } catch (final DOMException ex) {
+            switch (ex.getCode()) {
+                case 8:
+                    break;
+                case 4:
+                    break;
+                case 3:
+                    break;
+                default:
+                    throw ex;
+            }
         }
-        }
-        }
-        }
+    }
+}
 

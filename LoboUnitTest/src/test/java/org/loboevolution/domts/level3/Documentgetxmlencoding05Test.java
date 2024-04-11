@@ -37,9 +37,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Call the getXmlEncoding method on a cloned UTF-8 encoded document
  * and check if the value returned is UTF-8 or null (implementation dependent).
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-encoding">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-encoding</a>
  */
 public class Documentgetxmlencoding05Test extends LoboUnitTest {
@@ -52,6 +50,6 @@ public class Documentgetxmlencoding05Test extends LoboUnitTest {
         cloned = (Document) doc.cloneNode(true);
         encodingName = cloned.getXmlEncoding();
         assertTrue(("uTf-8".equals(encodingName) || (encodingName == null)), "documentgetxmlencoding05"
-                );
+        );
     }
 }

@@ -39,9 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * The value of the standalone pesudo-attribute for a new Document should be false.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-standalone">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-standalone</a>
  */
 public class Documentgetxmlstandalone02Test extends LoboUnitTest {

@@ -44,16 +44,13 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * Create an new Element with the createElement() method.
  * Invoke the "getLocalName()" method on the newly created element
  * node will cause "null" to be returned.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSLocalN">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSLocalN</a>
  */
 public class LocalName02Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

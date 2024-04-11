@@ -43,9 +43,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * Attribute "dir" as the source.  Verify if the node has been adopted correctly by
  * checking the nodeName of the adopted Element and by checking if the attribute was adopted.
  * Note the default attribute should be adopted in this case.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode</a>
  */
 public class Documentadoptnode28Test extends LoboUnitTest {

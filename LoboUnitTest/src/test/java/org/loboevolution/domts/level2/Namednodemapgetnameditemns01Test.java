@@ -43,9 +43,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * Using the method getNamedItemNS, retreive the entity "ent1" and notation "notation1"
  * from a NamedNodeMap of this DocumentTypes entities and notations.
  * Both should be null since entities and notations are not namespaced.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-getNamedItemNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-getNamedItemNS</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=259">http://www.w3.org/Bugs/Public/show_bug.cgi?id=259</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=407">http://www.w3.org/Bugs/Public/show_bug.cgi?id=407</a>
@@ -55,7 +53,6 @@ public class Namednodemapgetnameditemns01Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

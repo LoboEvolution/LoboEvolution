@@ -24,8 +24,6 @@ import org.htmlunit.cssparser.parser.condition.Condition;
 /**
  * <p>ElementSelector class.</p>
  *
- * @author Ronald Brill
- *
  */
 public class ElementSelector extends AbstractSelector implements SimpleSelector {
 

@@ -33,7 +33,7 @@ import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -43,15 +43,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * Retrieve the second employee and invoke the
  * "getLastChild()" method.   The NodeName returned
  * should be "#text".
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-61AD09FB">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-61AD09FB</a>
  */
 public class HcnodegetlastchildTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -65,7 +63,7 @@ public class HcnodegetlastchildTest extends LoboUnitTest {
         employeeNode = elementList.item(1);
         lchildNode = employeeNode.getLastChild();
         childName = lchildNode.getNodeName();
-        assertEquals( "#text", childName, "HcnodegetlastchildAssert1");
+        assertEquals("#text", childName, "HcnodegetlastchildAssert1");
     }
 }
 

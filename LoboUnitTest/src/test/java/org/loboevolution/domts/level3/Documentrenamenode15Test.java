@@ -40,9 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * Rename the fourth acronym element to svg:rect and verify the
  * nodeName, namespaceURI, nodeType attributes of the renamed node.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-renameNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-renameNode</a>
  */
 public class Documentrenamenode15Test extends LoboUnitTest {
@@ -62,9 +60,9 @@ public class Documentrenamenode15Test extends LoboUnitTest {
         nodeName = renamedclass.getNodeName();
         namespaceURI = renamedclass.getNamespaceURI();
         nodeType = renamedclass.getNodeType();
-        assertEquals( "qnam:renamedNode", nodeName, "Documentrenamenode15Assert2");
-        assertEquals( 1, nodeType, "Documentrenamenode15Assert3");
-        assertEquals( "http://www.w3.org/DOM/Test", namespaceURI, "Documentrenamenode15Assert4");
+        assertEquals("qnam:renamedNode", nodeName, "Documentrenamenode15Assert2");
+        assertEquals(1, nodeType, "Documentrenamenode15Assert3");
+        assertEquals("http://www.w3.org/DOM/Test", namespaceURI, "Documentrenamenode15Assert4");
     }
 }
 

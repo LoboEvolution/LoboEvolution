@@ -46,9 +46,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Add the attribute node to the element node.  Check if the newly created element
  * node has an attribute by invoking the hasAttributeNS method with appropriate
  * values for the namespaceURI and localName parameters.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElHasAttrNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElHasAttrNS</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=259">http://www.w3.org/Bugs/Public/show_bug.cgi?id=259</a>
  */
@@ -56,7 +54,6 @@ public class Elementhasattributens03Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

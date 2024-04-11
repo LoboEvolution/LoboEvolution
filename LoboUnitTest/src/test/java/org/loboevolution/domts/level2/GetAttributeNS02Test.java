@@ -46,16 +46,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * Add the new attribute with the "setAttributeNS()" method.
  * The value returned by the "getAttributeNS()" method should be the
  * empty string since the attribute does not have a default value.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElGetAttrNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElGetAttrNS</a>
  */
 public class GetAttributeNS02Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -76,7 +73,7 @@ public class GetAttributeNS02Test extends LoboUnitTest {
         elementList = doc.getElementsByTagName("address");
         testAddr = (Element) elementList.item(0);
         attrValue = testAddr.getAttributeNS(namespaceURI, localName);
-        assertEquals(null, attrValue);
+        assertNull(attrValue);
     }
 }
 

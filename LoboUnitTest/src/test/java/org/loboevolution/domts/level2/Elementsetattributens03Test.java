@@ -34,7 +34,8 @@ import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 /**
@@ -44,16 +45,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * default attribute but different namespaceURI to it using the setAttributeNS method.
  * Check if the attribute was correctly set by invoking the getAttributeNodeNS method
  * and checking the nodeName and nodeValue of the returned nodes.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElSetAttrNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElSetAttrNS</a>
  */
 public class Elementsetattributens03Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -73,6 +71,6 @@ public class Elementsetattributens03Test extends LoboUnitTest {
         attrName = attribute.getNodeName();
         attrValue = attribute.getNodeValue();
         assertEquals("defaultAttr", attrName);
-        assertEquals( "default1", attrValue);
+        assertEquals("default1", attrValue);
     }
 }

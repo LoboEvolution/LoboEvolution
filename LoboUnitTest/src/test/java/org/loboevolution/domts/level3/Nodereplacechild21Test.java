@@ -45,9 +45,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * a notation node of retieved from the DTD of another document and verify if a
  * NO_MODIFICATION_ALLOWED_ERR is thrown since DocumentType node is read-only.
  * Also try replacing the docType with an entity node and see if the same exception gets thrown.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307</a>
  */
 public class Nodereplacechild21Test extends LoboUnitTest {

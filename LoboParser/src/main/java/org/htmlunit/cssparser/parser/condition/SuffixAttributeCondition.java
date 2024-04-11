@@ -18,8 +18,6 @@ package org.htmlunit.cssparser.parser.condition;
 /**
  * <p>SuffixAttributeCondition class.</p>
  *
- * @author Ronald Brill
- *
  */
 public class SuffixAttributeCondition extends AttributeCondition {
 

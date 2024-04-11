@@ -33,7 +33,7 @@ import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -46,16 +46,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * with namespaceURI being " " and localName is "employee".
  * Method should return a new NodeList containing five Elements.
  * Retrieve the FOURTH element whose name should be "employee".
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-getElBTNNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-getElBTNNS</a>
  */
 public class GetElementsByTagNameNS02Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -66,7 +63,7 @@ public class GetElementsByTagNameNS02Test extends LoboUnitTest {
         final String lname;
         doc = sampleXmlFile("staffNS.xml");
         newList = doc.getElementsByTagNameNS("*", "employee");
-        assertEquals( 5, newList.getLength());
+        assertEquals(5, newList.getLength());
         newElement = (Element) newList.item(3);
         prefix = newElement.getPrefix();
         assertEquals("EMP", prefix);

@@ -48,43 +48,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * with qualifiedName containing an illegal character from illegalChars[].
  * Method should raise INVALID_CHARACTER_ERR DOMException for all characters
  * in illegalChars[].
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-DocCrElNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-DocCrElNS</a>
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#xpointer(id('ID-DocCrElNS')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='INVALID_CHARACTER_ERR'])">http://www.w3.org/TR/DOM-Level-2-Core/core#xpointer(id('ID-DocCrElNS')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='INVALID_CHARACTER_ERR'])</a>
  */
 public class CreateElementNS03Test extends LoboUnitTest {
-
-    /**
-     * Runs the test case.
-     *
-     */
-    @Test
-    public void runTest() {
-        final String namespaceURI = "http://www.wedding.com/";
-        String qualifiedName;
-        final Document doc;
-        boolean done;
-        Element newElement;
-        String charact;
-        final List<String> illegalQNames = getIllegalQNames();
-
-        doc = sampleXmlFile("staffNS.xml");
-        for (int indexN10098 = 0; indexN10098 < illegalQNames.size(); indexN10098++) {
-            qualifiedName = illegalQNames.get(indexN10098);
-
-            {
-                boolean success = false;
-                try {
-                    newElement = doc.createElementNS(namespaceURI, qualifiedName);
-                } catch (final DOMException ex) {
-                    success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
-                }
-                assertTrue(success);
-            }
-        }
-    }
 
     private static List<String> getIllegalQNames() {
         final List<String> illegalQNames = new ArrayList<>();
@@ -116,6 +84,35 @@ public class CreateElementNS03Test extends LoboUnitTest {
         illegalQNames.add("person:a ");
         illegalQNames.add("person:\"");
         return illegalQNames;
+    }
+
+    /**
+     * Runs the test case.
+     */
+    @Test
+    public void runTest() {
+        final String namespaceURI = "http://www.wedding.com/";
+        String qualifiedName;
+        final Document doc;
+        boolean done;
+        Element newElement;
+        String charact;
+        final List<String> illegalQNames = getIllegalQNames();
+
+        doc = sampleXmlFile("staffNS.xml");
+        for (int indexN10098 = 0; indexN10098 < illegalQNames.size(); indexN10098++) {
+            qualifiedName = illegalQNames.get(indexN10098);
+
+            {
+                boolean success = false;
+                try {
+                    newElement = doc.createElementNS(namespaceURI, qualifiedName);
+                } catch (final DOMException ex) {
+                    success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
+                }
+                assertTrue(success);
+            }
+        }
     }
 }
 

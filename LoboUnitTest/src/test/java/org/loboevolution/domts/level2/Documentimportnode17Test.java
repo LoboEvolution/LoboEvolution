@@ -32,7 +32,7 @@ import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -44,9 +44,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * Using the method importNode with deep=true, import a newly created Comment node for this
  * Document.  Verify if the node has been imported correctly by checking the value of the
  * imported Comment node.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core">http://www.w3.org/TR/DOM-Level-2-Core/core</a>
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#Core-Document-importNode">http://www.w3.org/TR/DOM-Level-2-Core/core#Core-Document-importNode</a>
  */
@@ -55,7 +53,6 @@ public class Documentimportnode17Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -65,7 +62,7 @@ public class Documentimportnode17Test extends LoboUnitTest {
         final Node commentToImport;
         final String nodeValue;
         doc = sampleXmlFile("staffNS.xml");
-        docImp =  sampleXmlFile("staffNS.xml");
+        docImp = sampleXmlFile("staffNS.xml");
         commentToImport = doc.createComment("Document.importNode test for a COMMENT_NODE");
         commentImport = doc.importNode(commentToImport, true);
         nodeValue = commentImport.getNodeValue();

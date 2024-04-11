@@ -44,8 +44,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 
 /**
  * Call setUserData on a node providing a UserDataHandler and rename the node.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-handleUserDataEvent">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-handleUserDataEvent</a>
  */
 public class Userdatahandler01Test extends LoboUnitTest {
@@ -74,8 +73,12 @@ public class Userdatahandler01Test extends LoboUnitTest {
         doc = sampleXmlFile("barfoo.xml");
         pList = doc.getElementsByTagName("p");
         node = pList.item(0);
-        oldUserData = node.setUserData("greeting", ((Object) /*DOMString */hello), ((UserDataHandler) /*UserDataHandlerImpl */userDataHandlerImpl));
-        oldUserData = node.setUserData("salutation", ((Object) /*DOMString */mister), ((UserDataHandler) /*UserDataHandlerImpl */userDataHandlerImpl));
+        /*UserDataHandlerImpl */
+        /*DOMString */
+        oldUserData = node.setUserData("greeting", hello, userDataHandlerImpl);
+        /*UserDataHandlerImpl */
+        /*DOMString */
+        oldUserData = node.setUserData("salutation", mister, userDataHandlerImpl);
         elementNS = node.getNamespaceURI();
         newNode = doc.renameNode(node, elementNS, "div");
         notifications = userDataHandlerImpl.getAllNotifications();

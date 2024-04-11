@@ -33,7 +33,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.NodeList;
 import org.loboevolution.html.node.ProcessingInstruction;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -47,16 +47,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * child nodes of this document.  Invoke the "getData()"
  * method on the first child in the list. This should
  * return the content of the ProcessingInstruction.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-837822393">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-837822393</a>
  */
 public class ProcessinginstructiongetdataTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

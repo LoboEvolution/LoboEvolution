@@ -25,8 +25,6 @@ import org.htmlunit.cssparser.util.ThrowCssExceptionErrorHandler;
 
 /**
  * Implementation of CSSStyleDeclaration.
- *
- * @author Ronald Brill
  */
 public class CSSStyleDeclarationImpl implements Serializable {
 

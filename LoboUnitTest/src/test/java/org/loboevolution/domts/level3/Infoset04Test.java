@@ -41,8 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Normalize a document with a created CDATA section with the
  * 'infoset' to true and check if
  * the CDATASection has been coalesced.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=416">http://www.w3.org/Bugs/Public/show_bug.cgi?id=416</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-infoset">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-infoset</a>
@@ -73,7 +72,7 @@ public class Infoset04Test extends LoboUnitTest {
         /*DOMErrorMonitor */
         domConfig.setParameter("error-handler", errorMonitor);
         doc.normalizeDocument();
-        assertTrue( errorMonitor.assertLowerSeverity(2), "Infoset04Assert3");
+        assertTrue(errorMonitor.assertLowerSeverity(2), "Infoset04Assert3");
         pList = doc.getElementsByTagName("p");
         elem = (Element) pList.item(0);
         text = elem.getLastChild();

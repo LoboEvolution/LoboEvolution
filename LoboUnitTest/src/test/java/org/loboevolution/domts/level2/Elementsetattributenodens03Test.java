@@ -44,16 +44,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * another Element object.
  * <p>
  * Retreive an attribute node of an existing element node.  Attempt to add it to an  * element node.  Check if the INUSE_ATTRIBUTE_ERR exception is thrown.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElSetAtNodeNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElSetAtNodeNS</a>
  */
 public class Elementsetattributenodens03Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -64,7 +61,7 @@ public class Elementsetattributenodens03Test extends LoboUnitTest {
         final HTMLCollection elementList;
 
         doc = sampleXmlFile("staffNS.xml");
-        elementList = doc.getElementsByTagName( "address");
+        elementList = doc.getElementsByTagName("address");
         element1 = (Element) elementList.item(1);
         attribute = element1.getAttributeNodeNS(null, "street");
         element2 = (Element) elementList.item(2);

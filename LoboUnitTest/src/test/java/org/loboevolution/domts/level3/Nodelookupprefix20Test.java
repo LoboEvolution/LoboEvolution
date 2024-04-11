@@ -41,9 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * Invoke lookupPrefix on the an attribute node without a namespace prefix of
  * an Element node that has a namespaceURI and prefix, and check if the value of the prefix
  * returned by using the Elements namespaceURI as a parameter is valid.
- *
- * @author IBM
- * @author Jenny Hsu
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-lookupNamespacePrefix">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-lookupNamespacePrefix</a>
  */
 public class Nodelookupprefix20Test extends LoboUnitTest {

@@ -34,7 +34,6 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 /**
@@ -42,9 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * namespaceURI is null and name is pf.
  * Check if this attribute has been renamed successfully by verifying the
  * nodeName, namespaceURI, nodeType attributes of the renamed node.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-renameNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-renameNode</a>
  */
 public class Documentrenamenode04Test extends LoboUnitTest {

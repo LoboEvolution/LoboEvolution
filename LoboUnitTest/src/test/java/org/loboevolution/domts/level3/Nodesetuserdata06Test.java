@@ -38,9 +38,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Invoke setUserData on a new Comment to set its UserData to an Entity node
  * twice using the same key.  Verify if the UserData object that was by the
  * second setUserData is the same as original Entity.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-setUserData">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-setUserData</a>
  */
 public class Nodesetuserdata06Test extends LoboUnitTest {

@@ -47,9 +47,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Invoke the renameNode method on a new document node to rename a node to nodes
  * with malformed qualifiedNames.
  * Check if a NOT_SUPPORTED_ERR gets thrown instead of a NAMESPACE_ERR.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-renameNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-renameNode</a>
  */
 public class Documentrenamenode10Test extends LoboUnitTest {

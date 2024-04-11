@@ -21,8 +21,6 @@ import java.util.Locale;
 
 /**
  * Implementation of {@link LexicalUnit}.
- *
- * @author Ronald Brill
  */
 public class LexicalUnitImpl extends AbstractLocatable implements LexicalUnit, Serializable {
 

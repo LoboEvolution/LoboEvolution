@@ -32,7 +32,8 @@ import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 /**
@@ -40,9 +41,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * <p>
  * Invoke the createAttributeNS method on this Document object with a valid values for
  * namespaceURI, and a qualifiedName as below.  This should return a valid Attr node.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core">http://www.w3.org/TR/DOM-Level-2-Core/core</a>
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-DocCrAttrNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-DocCrAttrNS</a>
  */
@@ -50,7 +49,6 @@ public class DocumentcreateattributeNS02Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -69,18 +67,18 @@ public class DocumentcreateattributeNS02Test extends LoboUnitTest {
         nodeValue = attribute1.getNodeValue();
         prefix = attribute1.getPrefix();
         namespaceURI = attribute1.getNamespaceURI();
-        assertEquals( "xml:xml", name);
+        assertEquals("xml:xml", name);
         assertEquals("xml:xml", nodeName);
         assertNull(nodeValue);
-        assertEquals( "xml", prefix);
-        assertEquals( "http://www.w3.org/XML/1998/namespace", namespaceURI);
+        assertEquals("xml", prefix);
+        assertEquals("http://www.w3.org/XML/1998/namespace", namespaceURI);
         attribute2 = doc.createAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns");
         name = attribute2.getName();
         nodeName = attribute2.getNodeName();
         nodeValue = attribute2.getNodeValue();
         namespaceURI = attribute2.getNamespaceURI();
-        assertEquals( "xmlns", name);
-        assertEquals( "xmlns", nodeName);
+        assertEquals("xmlns", name);
+        assertEquals("xmlns", nodeName);
         assertNull(nodeValue);
         assertEquals("http://www.w3.org/2000/xmlns/", namespaceURI);
     }

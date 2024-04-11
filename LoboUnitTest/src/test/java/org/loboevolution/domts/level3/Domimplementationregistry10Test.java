@@ -28,8 +28,8 @@ package org.loboevolution.domts.level3;
 
 
 import org.junit.jupiter.api.Test;
-import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.driver.LoboUnitTest;
+import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.html.dom.nodeimpl.DOMImplementationImpl;
 import org.loboevolution.html.dom.nodeimpl.bootstrap.DOMImplementationRegistry;
 import org.loboevolution.html.node.DOMImplementation;
@@ -41,15 +41,14 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * DOMImplementationRegistry.getDOMImplementation("LS") should return null or a DOMImplementation
  * where hasFeature("LS", null) returns true.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/java-binding">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/java-binding</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/ecma-script-binding">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/ecma-script-binding</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-getDOMImpl">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-getDOMImpl</a>
  */
 public class Domimplementationregistry10Test extends LoboUnitTest {
     @Test
-    public void runTest() throws Exception {
+    public void runTest() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
 
         final DOMImplementation domImpl;
         final boolean hasFeature;

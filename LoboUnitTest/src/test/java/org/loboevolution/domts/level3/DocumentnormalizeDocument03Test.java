@@ -41,9 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Normalize a document with a created CDATA section with the
  * 'cdata-sections' parameter set to true then to false and check if
  * the CDATASection has been preserved and then coalesced.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=416">http://www.w3.org/Bugs/Public/show_bug.cgi?id=416</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-cdata-sections">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-cdata-sections</a>
@@ -82,12 +80,12 @@ public class DocumentnormalizeDocument03Test extends LoboUnitTest {
         assertEquals("#cdata-section", nodeName, "DocumentnormalizeDocument03Assert4");
         domConfig.setParameter("cdata-sections", Boolean.FALSE);
         doc.normalizeDocument();
-        assertTrue( errorMonitor.assertLowerSeverity(2), "DocumentnormalizeDocument03Assert5");
+        assertTrue(errorMonitor.assertLowerSeverity(2), "DocumentnormalizeDocument03Assert5");
         pList = doc.getElementsByTagName("p");
         elem = (Element) pList.item(0);
         text = elem.getLastChild();
         nodeName = text.getNodeName();
-        assertEquals( "#text", nodeName, "DocumentnormalizeDocument03Assert6");
+        assertEquals("#text", nodeName, "DocumentnormalizeDocument03Assert6");
         nodeValue = text.getNodeValue();
         assertEquals("barCDATA", nodeValue, "DocumentnormalizeDocument03Assert7");
     }

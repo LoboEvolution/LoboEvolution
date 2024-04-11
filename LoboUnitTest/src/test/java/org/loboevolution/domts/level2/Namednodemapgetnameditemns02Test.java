@@ -35,7 +35,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -45,16 +45,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * and localName=domestic, from a NamedNodeMap of attribute nodes, for the second element
  * whose namespaceURI=http://www.nist.gov and localName=address.  Verify if the attr node
  * has been retreived successfully by checking its nodeName atttribute.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-getNamedItemNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-getNamedItemNS</a>
  */
 public class Namednodemapgetnameditemns02Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -70,7 +67,7 @@ public class Namednodemapgetnameditemns02Test extends LoboUnitTest {
         attributes = element.getAttributes();
         attribute = (Attr) attributes.getNamedItemNS("http://www.nist.gov", "domestic");
         attrName = attribute.getNodeName();
-        assertEquals( "emp:domestic", attrName);
+        assertEquals("emp:domestic", attrName);
     }
 }
 

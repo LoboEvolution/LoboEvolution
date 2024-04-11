@@ -46,16 +46,13 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * "removeChild(oldChild)" method and checking the
  * node returned by the "getParentNode()" method.
  * It should be set to null.
- *
- * @author NIST
- * @author Mary Brady
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1734834066">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1734834066</a>
  */
 public class NoderemovechildTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

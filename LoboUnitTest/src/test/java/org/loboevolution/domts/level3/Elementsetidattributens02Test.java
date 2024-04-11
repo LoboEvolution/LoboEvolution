@@ -40,9 +40,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * Invoke setIdAttributeNS on an existing attribute with a namespace URI and a qualified name.  Verify by calling
  * isID on the attribute node and getElementById on document node. Assume the grammar has not defined any
  * element of typeID. Call setIdAttributeNS with isId=false to reset. Method isId should now return false.
- *
- * @author IBM
- * @author Jenny Hsu
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-ElSetIdAttrNS">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-ElSetIdAttrNS</a>
  */
 public class Elementsetidattributens02Test extends LoboUnitTest {

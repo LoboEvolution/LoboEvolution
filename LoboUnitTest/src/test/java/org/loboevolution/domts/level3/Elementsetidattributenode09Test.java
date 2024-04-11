@@ -40,9 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * that this simply affects this node and does not change any grammar that may be in use.
  * <p>
  * Invoke setIdAttributeNode with the xmlns attribute of ent4.  Verify that NO_MODIFICATION_ALLOWED_ERR is raised.
- *
- * @author IBM
- * @author Jenny Hsu
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-ElSetIdAttrNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-ElSetIdAttrNode</a>
  */
 public class Elementsetidattributenode09Test extends LoboUnitTest {

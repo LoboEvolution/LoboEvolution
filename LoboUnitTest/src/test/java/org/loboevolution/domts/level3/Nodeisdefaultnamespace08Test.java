@@ -39,9 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
  * Using isDefaultNamespace on an Element node with a prefix, which has a namespace
  * attribute declaration with a namespace prefix and check if isDefaultNamespace
  * returns false with this namespaceURI as its parameter.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isDefaultNamespace">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isDefaultNamespace</a>
  */
 public class Nodeisdefaultnamespace08Test extends LoboUnitTest {

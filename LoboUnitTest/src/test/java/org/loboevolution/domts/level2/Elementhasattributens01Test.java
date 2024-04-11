@@ -43,16 +43,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * <p>
  * Retreive the first employee element node.  Invoke the hasAttributeNS method to check if it
  * has the xmlns attribute that belongs to the namespace http://www.w3.org/2000/xmlns/.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElHasAttrNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElHasAttrNS</a>
  */
 public class Elementhasattributens01Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {

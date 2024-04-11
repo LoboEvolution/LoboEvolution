@@ -39,9 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Using the method adoptNode in a new Document, adopt a newly created DocumentFragment node populated with
  * with the first acronym element of this Document as its newChild.  Since the decendants of a documentFragment
  * are recursively adopted, check if the adopted node has children.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode</a>
  */
 public class Documentadoptnode14Test extends LoboUnitTest {

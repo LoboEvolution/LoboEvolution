@@ -42,9 +42,7 @@ import org.loboevolution.html.node.Node;
  * of children, and returns it.
  * Using removeChild on a Notation node attempt to remove an Entity node
  * and verify if a NO_MODIFICATION_ALLOWED_ERR or a NOT_FOUND_ERR gets thrown.
- *
- * @author IBM
- * @author Neil Delima
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-1734834066">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-1734834066</a>
  */
 public class Noderemovechild27Test extends LoboUnitTest {

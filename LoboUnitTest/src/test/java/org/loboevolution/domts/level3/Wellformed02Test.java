@@ -28,8 +28,8 @@ package org.loboevolution.domts.level3;
 
 import org.htmlunit.cssparser.dom.DOMException;
 import org.junit.jupiter.api.Test;
-import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.driver.LoboUnitTest;
+import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.html.dom.DOMError;
 import org.loboevolution.html.dom.nodeimpl.DOMErrorMonitor;
 import org.loboevolution.html.dom.nodeimpl.DOMImplementationImpl;
@@ -44,8 +44,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Create a document with an XML 1.1 valid but XML 1.0 invalid element and
  * normalize document with well-formed set to false.
- *
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-well-formed">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-well-formed</a>
  */

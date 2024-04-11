@@ -29,8 +29,8 @@ package org.loboevolution.domts.level1;
 
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DOMImplementation;
+import org.loboevolution.html.node.Document;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -42,9 +42,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * version)" method is invoked with version equal to null.
  * If the version is not specified, supporting any version
  * feature will cause the method to return "true".
- *
- * @author Curt Arnold
- * @author Curt Arnold
+
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-5CED94D7">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-5CED94D7</a>
  * @see <a href="http://www.w3.org/2000/11/DOM-Level-2-errata#core-14">http://www.w3.org/2000/11/DOM-Level-2-errata#core-14</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=245">http://www.w3.org/Bugs/Public/show_bug.cgi?id=245</a>
@@ -53,7 +51,6 @@ public class HcDomimplementationFeatureNullTest extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
      */
     @Test
     public void runTest() {
@@ -61,7 +58,7 @@ public class HcDomimplementationFeatureNullTest extends LoboUnitTest {
         final DOMImplementation domImpl;
         final boolean state;
         doc = sampleXmlFile("hc_staff.xml");
-        
+
         domImpl = doc.getImplementation();
         state = domImpl.hasFeature("XML", null);
         assertTrue(state, "HcDomimplementationFeatureNullAssert2");
