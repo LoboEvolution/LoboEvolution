@@ -41,8 +41,8 @@ public class BeforeInstallPromptEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object BeforeInstallPromptEvent]", "before", "false", "false", "false"})
     public void createCtor() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new BeforeInstallPromptEvent('before');\n"
@@ -59,8 +59,8 @@ public class BeforeInstallPromptEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorWithoutType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new BeforeInstallPromptEvent();\n"
@@ -77,8 +77,8 @@ public class BeforeInstallPromptEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object BeforeInstallPromptEvent]", "42", "false", "false", "false"})
     public void createCtorNumericType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new BeforeInstallPromptEvent(42);\n"
@@ -95,8 +95,8 @@ public class BeforeInstallPromptEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object BeforeInstallPromptEvent]", "null", "false", "false", "false"})
     public void createCtorNullType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new BeforeInstallPromptEvent(null);\n"
@@ -113,8 +113,8 @@ public class BeforeInstallPromptEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorUnknownType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new BeforeInstallPromptEvent(unknown);\n"
@@ -131,8 +131,8 @@ public class BeforeInstallPromptEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object BeforeInstallPromptEvent]", "HtmlUnitEvent", "false", "false", "false"})
     public void createCtorArbitraryType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new BeforeInstallPromptEvent('HtmlUnitEvent');\n"
@@ -149,8 +149,8 @@ public class BeforeInstallPromptEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object BeforeInstallPromptEvent]", "click", "false", "false", "false"})
     public void createCtorAllDetails() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new BeforeInstallPromptEvent('click', {\n"

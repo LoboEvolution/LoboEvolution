@@ -42,14 +42,17 @@ public class CSSPageRuleTest extends LoboUnitTest {
     @Alerts({"[object CSSPageRule]", "[object CSSPageRule]"})
     public void scriptableToString() {
         final String html
-                = "<html><body>\n" + "<style>\n"
-                + "  @page { margin: 1cm; };\n"
-                + "</style>\n" + "<script>\n"
+                = "<html><body>\n" 
+                + "<style>\n"
+                + "  @page { margin: 1cm; }\n"
+                + "</style>\n" 
+                + "<script>\n"
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
                 + " alert(Object.prototype.toString.call(rule));\n"
                 + " alert(rule);\n"
-                + "</script>\n" + "</body></html>";
+                + "</script>\n" 
+                + "</body></html>";
 
         checkHtmlAlert(html);
     }
@@ -58,13 +61,16 @@ public class CSSPageRuleTest extends LoboUnitTest {
     @Alerts("@page { margin: 1cm; }")
     public void cssText() {
         final String html
-                = "<html><body>\n" + "<style>\n"
+                = "<html><body>\n" 
+                + "<style>\n"
                 + "  @page { margin: 1cm; }\n"
                 + "</style>\n"
-                + "<script>\n"                + "  var styleSheet = document.styleSheets[0];\n"
+                + "<script>\n"
+                + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
                 + " alert(rule.cssText);\n"
-                + "</script>\n" + "</body></html>";
+                + "</script>\n" 
+                + "</body></html>";
 
         checkHtmlAlert(html);
     }
@@ -73,10 +79,12 @@ public class CSSPageRuleTest extends LoboUnitTest {
     @Alerts("@page { }")
     public void cssTextEmpty() {
         final String html
-                = "<html><body>\n" + "<style>\n"
+                = "<html><body>\n" 
+                + "<style>\n"
                 + "  @page { }\n"
                 + "</style>\n"
-                + "<script>\n"                + "  var styleSheet = document.styleSheets[0];\n"
+                + "<script>\n"
+                + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
                 + " alert(rule.cssText);\n"
                 + "</script>\n"
@@ -89,12 +97,16 @@ public class CSSPageRuleTest extends LoboUnitTest {
     @Alerts("@page { margin-left: 4cm; margin-right: 3cm; }")
     public void cssTextMultipleRules() {
         final String html
-                = "<html><body>\n" + "<style>\n"
+                = "<html><body>\n" 
+                + "<style>\n"
                 + "  @page {   margin-left:4cm;margin-right:  3cm; }\n"
-                + "</style>\n" + "<script>\n"                + "  var styleSheet = document.styleSheets[0];\n"
+                + "</style>\n" 
+                + "<script>\n"
+                + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
                 + " alert(rule.cssText);\n"
-                + "</script>\n" + "</body></html>";
+                + "</script>\n" 
+                + "</body></html>";
 
         checkHtmlAlert(html);
     }
@@ -103,9 +115,12 @@ public class CSSPageRuleTest extends LoboUnitTest {
     @Alerts("@page { margin: 1cm; }")
     public void cssTextSet() {
         final String html
-                = "<html><body>\n" + "<style>\n"
+                = "<html><body>\n" 
+                + "<style>\n"
                 + "  @page { margin: 1cm; }\n"
-                + "</style>\n" + "<script>\n"                + "  var styleSheet = document.styleSheets[0];\n"
+                + "</style>\n" 
+                + "<script>\n"
+                + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
                 + "  try {"
                 + "    rule.cssText = '@page { margin: 2cm; }';\n"
@@ -113,7 +128,8 @@ public class CSSPageRuleTest extends LoboUnitTest {
                 + "  } catch(e) {\n"
                 + "   alert('exception');\n"
                 + "  }\n"
-                + "</script>\n" + "</body></html>";
+                + "</script>\n" 
+                + "</body></html>";
 
         checkHtmlAlert(html);
     }
@@ -122,13 +138,16 @@ public class CSSPageRuleTest extends LoboUnitTest {
     @Alerts("null")
     public void parentRule() {
         final String html
-                = "<html><body>\n" + "<style>\n"
+                = "<html><body>\n" 
+                + "<style>\n"
                 + "  @page { margin: 1cm; }\n"
-                + "</style>\n" + "<script>\n"
+                + "</style>\n" 
+                + "<script>\n"
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
                 + " alert(rule.parentRule);\n"
-                + "</script>\n" + "</body></html>";
+                + "</script>\n" 
+                + "</body></html>";
 
         checkHtmlAlert(html);
     }
@@ -137,9 +156,11 @@ public class CSSPageRuleTest extends LoboUnitTest {
     @Alerts("null")
     public void parentRuleSet() {
         final String html
-                = "<html><body>\n" + "<style>\n"
+                = "<html><body>\n" 
+                + "<style>\n"
                 + "  @page { margin: 1cm; }\n"
-                + "</style>\n" + "<script>\n"
+                + "</style>\n" 
+                + "<script>\n"
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
                 + "  try {"
@@ -148,7 +169,8 @@ public class CSSPageRuleTest extends LoboUnitTest {
                 + "  } catch(e) {\n"
                 + "   alert('exception');\n"
                 + "  }\n"
-                + "</script>\n" + "</body></html>";
+                + "</script>\n" 
+                + "</body></html>";
 
         checkHtmlAlert(html);
     }
@@ -157,13 +179,16 @@ public class CSSPageRuleTest extends LoboUnitTest {
     @Alerts("[object CSSStyleSheet]")
     public void parentStyleSheet() {
         final String html
-                = "<html><body>\n" + "<style>\n"
+                = "<html><body>\n" 
+                + "<style>\n"
                 + "  @page { margin: 1cm; }\n"
-                + "</style>\n" + "<script>\n"
+                + "</style>\n" 
+                + "<script>\n"
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
                 + " alert(rule.parentStyleSheet);\n"
-                + "</script>\n" + "</body></html>";
+                + "</script>\n" 
+                + "</body></html>";
 
         checkHtmlAlert(html);
     }
@@ -172,9 +197,11 @@ public class CSSPageRuleTest extends LoboUnitTest {
     @Alerts("[object CSSStyleSheet]")
     public void parentStyleSheetSet() {
         final String html
-                = "<html><body>\n" + "<style>\n"
+                = "<html><body>\n" 
+                + "<style>\n"
                 + "  @page { margin: 1cm; }\n"
-                + "</style>\n" + "<script>\n"
+                + "</style>\n" 
+                + "<script>\n"
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
                 + "  try {"
@@ -183,7 +210,8 @@ public class CSSPageRuleTest extends LoboUnitTest {
                 + "  } catch(e) {\n"
                 + "   alert('exception');\n"
                 + "  }\n"
-                + "</script>\n" + "</body></html>";
+                + "</script>\n" 
+                + "</body></html>";
 
         checkHtmlAlert(html);
     }
@@ -192,9 +220,11 @@ public class CSSPageRuleTest extends LoboUnitTest {
     @Alerts("")
     public void selectorTextEmpty() {
         final String html
-                = "<html><body>\n" + "<style>\n"
+                = "<html><body>\n" 
+                + "<style>\n"
                 + "  @page { margin: 1cm; }\n"
-                + "</style>\n" + "<script>\n"
+                + "</style>\n" 
+                + "<script>\n"
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
                 + "  try {"
@@ -202,7 +232,8 @@ public class CSSPageRuleTest extends LoboUnitTest {
                 + "  } catch(e) {\n"
                 + "   alert('exception');\n"
                 + "  }\n"
-                + "</script>\n" + "</body></html>";
+                + "</script>\n" 
+                + "</body></html>";
 
         checkHtmlAlert(html);
     }
@@ -211,9 +242,11 @@ public class CSSPageRuleTest extends LoboUnitTest {
     @Alerts(":first")
     public void selectorText() {
         final String html
-                = "<html><body>\n" + "<style>\n"
+                = "<html><body>\n" 
+                + "<style>\n"
                 + "  @page :first { margin: 1cm; }\n"
-                + "</style>\n" + "<script>\n"
+                + "</style>\n" 
+                + "<script>\n"
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
                 + "  try {"
@@ -221,7 +254,8 @@ public class CSSPageRuleTest extends LoboUnitTest {
                 + "  } catch(e) {\n"
                 + "   alert('exception');\n"
                 + "  }\n"
-                + "</script>\n" + "</body></html>";
+                + "</script>\n" 
+                + "</body></html>";
 
         checkHtmlAlert(html);
     }
@@ -230,9 +264,11 @@ public class CSSPageRuleTest extends LoboUnitTest {
     @Alerts(":first")
     public void selectorTextCaseInsensitive() {
         final String html
-                = "<html><body>\n" + "<style>\n"
+                = "<html><body>\n" 
+                + "<style>\n"
                 + "  @page :FiRsT { margin: 1cm; }\n"
-                + "</style>\n" + "<script>\n"
+                + "</style>\n" 
+                + "<script>\n"
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
                 + "  try {"
@@ -240,7 +276,8 @@ public class CSSPageRuleTest extends LoboUnitTest {
                 + "  } catch(e) {\n"
                 + "   alert('exception');\n"
                 + "  }\n"
-                + "</script>\n" + "</body></html>";
+                + "</script>\n" 
+                + "</body></html>";
 
         checkHtmlAlert(html);
     }
@@ -249,9 +286,11 @@ public class CSSPageRuleTest extends LoboUnitTest {
     @Alerts({":first", ":left"})
     public void selectorTextSet() {
         final String html
-                = "<html><body>\n" + "<style>\n"
+                = "<html><body>\n" 
+                + "<style>\n"
                 + "  @page :first { margin: 1cm; }\n"
-                + "</style>\n" + "<script>\n"
+                + "</style>\n" 
+                + "<script>\n"
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
                 + "  try {"
@@ -261,7 +300,8 @@ public class CSSPageRuleTest extends LoboUnitTest {
                 + "  } catch(e) {\n"
                 + "   alert('exception');\n"
                 + "  }\n"
-                + "</script>\n" + "</body></html>";
+                + "</script>\n" 
+                + "</body></html>";
 
         checkHtmlAlert(html);
     }
@@ -270,9 +310,12 @@ public class CSSPageRuleTest extends LoboUnitTest {
     @Alerts({":first", "null"})
     public void selectorTextSetNull() {
         final String html
-                = "<html><body>\n" + "<style>\n"
+                = "<html><body>\n" 
+                + "<style>\n"
                 + "  @page :first { margin: 1cm; }\n"
-                + "</style>\n" + "<script>\n"                + "  var styleSheet = document.styleSheets[0];\n"
+                + "</style>\n" 
+                + "<script>\n"
+                + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
                 + "  try {"
                 + "   alert(rule.selectorText);\n"
@@ -281,7 +324,8 @@ public class CSSPageRuleTest extends LoboUnitTest {
                 + "  } catch(e) {\n"
                 + "   alert('exception');\n"
                 + "  }\n"
-                + "</script>\n" + "</body></html>";
+                + "</script>\n" 
+                + "</body></html>";
 
         checkHtmlAlert(html);
     }
@@ -290,9 +334,11 @@ public class CSSPageRuleTest extends LoboUnitTest {
     @Alerts({":first", ""})
     public void selectorTextSetEmpty() {
         final String html
-                = "<html><body>\n" + "<style>\n"
+                = "<html><body>\n" 
+                + "<style>\n"
                 + "  @page :first { margin: 1cm; }\n"
-                + "</style>\n" + "<script>\n"
+                + "</style>\n" 
+                + "<script>\n"
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
                 + "  try {"
@@ -302,7 +348,8 @@ public class CSSPageRuleTest extends LoboUnitTest {
                 + "  } catch(e) {\n"
                 + "   alert('exception');\n"
                 + "  }\n"
-                + "</script>\n" + "</body></html>";
+                + "</script>\n" 
+                + "</body></html>";
 
         checkHtmlAlert(html);
     }
@@ -311,9 +358,11 @@ public class CSSPageRuleTest extends LoboUnitTest {
     @Alerts({":first", ":first"})
     public void selectorTextSetInvalid() {
         final String html
-                = "<html><body>\n" + "<style>\n"
+                = "<html><body>\n" 
+                + "<style>\n"
                 + "  @page :first { margin: 1cm; }\n"
-                + "</style>\n" + "<script>\n"
+                + "</style>\n" 
+                + "<script>\n"
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
                 + "  try {"
@@ -323,7 +372,8 @@ public class CSSPageRuleTest extends LoboUnitTest {
                 + "  } catch(e) {\n"
                 + "   alert('exception');\n"
                 + "  }\n"
-                + "</script>\n" + "</body></html>";
+                + "</script>\n" 
+                + "</body></html>";
 
         checkHtmlAlert(html);
     }
@@ -332,9 +382,11 @@ public class CSSPageRuleTest extends LoboUnitTest {
     @Alerts({":first", ":left"})
     public void selectorTextSetCaseInsensitive() {
         final String html
-                = "<html><body>\n" + "<style>\n"
+                = "<html><body>\n" 
+                + "<style>\n"
                 + "  @page :first { margin: 1cm; }\n"
-                + "</style>\n" + "<script>\n"
+                + "</style>\n" 
+                + "<script>\n"
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
                 + "  try {"
@@ -344,7 +396,8 @@ public class CSSPageRuleTest extends LoboUnitTest {
                 + "  } catch(e) {\n"
                 + "   alert('exception');\n"
                 + "  }\n"
-                + "</script>\n" + "</body></html>";
+                + "</script>\n" 
+                + "</body></html>";
 
         checkHtmlAlert(html);
     }
@@ -354,9 +407,12 @@ public class CSSPageRuleTest extends LoboUnitTest {
             "margin: 1cm;", "margin-top", "margin-right", "margin-bottom", "margin-left"})
     public void style() {
         final String html
-                = "<html><body>\n" + "<style>\n"
+                = "<html><body>\n" 
+                + "<style>\n"
                 + "  @page { margin: 1cm; }\n"
-                + "</style>\n" + "<script>\n"                + "  var styleSheet = document.styleSheets[0];\n"
+                + "</style>\n" 
+                + "<script>\n"
+                + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
                 + "  var style = rule.style;\n"
                 + " alert(Object.prototype.toString.call(style));\n"
@@ -367,7 +423,8 @@ public class CSSPageRuleTest extends LoboUnitTest {
                 + "  for (var i = 0; i < style.length; i++) {\n"
                 + "   alert(style.item(i));\n"
                 + "  }\n"
-                + "</script>\n" + "</body></html>";
+                + "</script>\n" 
+                + "</body></html>";
 
         checkHtmlAlert(html);
     }
@@ -376,9 +433,12 @@ public class CSSPageRuleTest extends LoboUnitTest {
     @Alerts({"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]", "0", "[object CSSPageRule]", ""})
     public void styleEmpty() {
         final String html
-                = "<html><body>\n" + "<style>\n"
+                = "<html><body>\n" 
+                + "<style>\n"
                 + "  @page { }\n"
-                + "</style>\n" + "<script>\n"                + "  var styleSheet = document.styleSheets[0];\n"
+                + "</style>\n" 
+                + "<script>\n"
+                + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
                 + "  var style = rule.style;\n"
                 + " alert(Object.prototype.toString.call(style));\n"
@@ -389,7 +449,8 @@ public class CSSPageRuleTest extends LoboUnitTest {
                 + "  for (var i = 0; i < style.length; i++) {\n"
                 + "   alert(style.item(i));\n"
                 + "  }\n"
-                + "</script>\n" + "</body></html>";
+                + "</script>\n" 
+                + "</body></html>";
 
         checkHtmlAlert(html);
     }

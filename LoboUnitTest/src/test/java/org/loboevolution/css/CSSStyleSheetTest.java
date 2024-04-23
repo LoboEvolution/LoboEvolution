@@ -46,7 +46,8 @@ public class CSSStyleSheetTest extends LoboUnitTest {
     @Alerts({"[object CSSStyleSheet]", "[object HTMLStyleElement]", "true", "undefined", "false"})
     public void owningNodeOwningElement() {
         final String html = "<html><head>\n"
-                + "<script>\n" + "function test() {\n"
+                + "<script>\n" 
+                + "function test() {\n"
                 + "  var myStyle = document.getElementById('myStyle');\n"
                 + "  var stylesheet = document.styleSheets[0];\n"
                 + " alert(stylesheet);\n"
@@ -110,7 +111,8 @@ public class CSSStyleSheetTest extends LoboUnitTest {
                         + "      for (i = 0; i < document.styleSheets.length; i++) {\n"
                         + "       alert(document.styleSheets[i].href);\n"
                         + "      }\n"
-                        + "    </script>\n" + "  </body>\n"
+                        + "    </script>\n" 
+                + "  </body>\n"
                         + "</html>";
 
         checkHtmlAlert(html);
@@ -134,7 +136,8 @@ public class CSSStyleSheetTest extends LoboUnitTest {
                         + "    <link href='" + URL_CSS + "style6.css' rel='stylesheet' ></link>\n"
                         + "    <link href='" + URL_CSS + "style7.css' rel='stylesheet' ></link>\n"
                         + "    <link href='" + URL_CSS + "style8.css' rel='stylesheet' ></link>\n"
-                        + "  </head>\n" + "  <body>\n"
+                        + "  </head>\n" 
+                + "  <body>\n"
                         + "    <script>\n"
 
                         + "     alert(document.styleSheets.length);\n"
@@ -142,7 +145,8 @@ public class CSSStyleSheetTest extends LoboUnitTest {
                         + "        var sheet = document.styleSheets[i];\n"
                         + "       alert(sheet.href + ' ' + sheet.cssRules.length);\n"
                         + "      }\n"
-                        + "    </script>\n" + "  </body>\n"
+                        + "    </script>\n" 
+                + "  </body>\n"
                         + "</html>";
 
         checkHtmlAlert(html);
@@ -633,7 +637,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
 
     @Test
     @Alerts("60")
-    public void rulePriority_specificity() {
+    public void rulePrioritySpecificity() {
         final String html = "<html><head>\n"
                 + "<style>\n"
                 + "div { z-index: 60 }\n"
@@ -654,7 +658,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
 
     @Test
     @Alerts("60")
-    public void rulePriority_specificity2() {
+    public void rulePrioritySpecificity2() {
         final String html = "<html><head>\n"
                 + "<style>\n"
                 + ".classA .classB .classC { z-index: 60 }\n"
@@ -1363,7 +1367,8 @@ public class CSSStyleSheetTest extends LoboUnitTest {
     public void insertRuleWithoutGetRules() {
         final String html = "<html>\n"
                 + "<head>\n"
-                + "<script>\n" + "function doTest() {\n"
+                + "<script>\n" 
+                + "function doTest() {\n"
                 + "  var f = document.getElementById('myStyle');\n"
                 + "  var s = f.sheet ? f.sheet : f.styleSheet;\n"
                 + "  try {\n"
@@ -1638,7 +1643,8 @@ public class CSSStyleSheetTest extends LoboUnitTest {
                 + "<link rel='stylesheet' type='text/css' href='" + URL_SECOND + "'/>\n"
                 + "</head>\n"
                 + "<body>\n"
-                + "<script>\n"                + " alert(document.body.currentStyle);\n"
+                + "<script>\n"
+                + " alert(document.body.currentStyle);\n"
                 + "</script>\n"
                 + "</body>\n"
                 + "</html>";

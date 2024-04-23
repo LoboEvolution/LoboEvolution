@@ -55,8 +55,8 @@ public class KeyboardEventTest extends LoboUnitTest {
     @Alerts({"[object KeyboardEvent]", "type", "false", "false", "false",
             ",,0,false,false,false,false,false,false,0,0"})
     public void createCtor() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new KeyboardEvent('type');\n"
@@ -91,8 +91,8 @@ public class KeyboardEventTest extends LoboUnitTest {
     @Alerts({"[object KeyboardEvent]", "42", "false", "false", "false",
             ",,0,false,false,false,false,false,false,0,0"})
     public void createCtorNumericType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new KeyboardEvent(42);\n"
@@ -110,8 +110,8 @@ public class KeyboardEventTest extends LoboUnitTest {
     @Alerts({"[object KeyboardEvent]", "null", "false", "false", "false",
             ",,0,false,false,false,false,false,false,0,0"})
     public void createCtorNullType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new KeyboardEvent(null);\n"
@@ -128,8 +128,8 @@ public class KeyboardEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorUnknownType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new KeyboardEvent(unknown);\n"
@@ -147,8 +147,8 @@ public class KeyboardEventTest extends LoboUnitTest {
     @Alerts({"[object KeyboardEvent]", "HtmlUnitEvent", "false", "false", "false",
             ",,0,false,false,false,false,false,false,0,0"})
     public void createCtorArbitraryType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new KeyboardEvent('HtmlUnitEvent');\n"
@@ -166,8 +166,8 @@ public class KeyboardEventTest extends LoboUnitTest {
     @Alerts({"[object KeyboardEvent]", "keyboard", "false", "false", "false",
             "key,code,123,true,true,true,true,true,true,456,789"})
     public void createCtorAllDetails() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new KeyboardEvent('keyboard', "
@@ -188,8 +188,8 @@ public class KeyboardEventTest extends LoboUnitTest {
     @Alerts({"[object KeyboardEvent]", "keyboard", "false", "false", "false",
             "null,,0,true,false,false,false,false,false,456,0"})
     public void createCtorSomeDetails() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new KeyboardEvent('keyboard', "
@@ -208,8 +208,8 @@ public class KeyboardEventTest extends LoboUnitTest {
     @Alerts({"[object KeyboardEvent]", "keyboard", "false", "false", "false",
             ",,0,false,false,false,false,false,false,0,0"})
     public void createCtorMissingData() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new KeyboardEvent('keyboard', {\n"
@@ -228,8 +228,8 @@ public class KeyboardEventTest extends LoboUnitTest {
     @Alerts({"[object KeyboardEvent]", "keyboard", "false", "false", "false",
             ",,0,false,false,false,false,false,false,0,0"})
     public void createCtorNullData() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new KeyboardEvent('keyboard', null);\n"
@@ -247,8 +247,8 @@ public class KeyboardEventTest extends LoboUnitTest {
     @Alerts({"[object KeyboardEvent]", "keyboard", "false", "false", "false",
             ",,0,false,false,false,false,false,false,0,0"})
     public void createCtorUndefinedData() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new KeyboardEvent('keyboard', undefined);\n"
@@ -266,8 +266,8 @@ public class KeyboardEventTest extends LoboUnitTest {
     @Alerts({"[object KeyboardEvent]", "keyboard", "false", "false", "false",
             ",,0,false,false,false,false,false,false,0,0"})
     public void createCtorWrongData() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new KeyboardEvent('keyboard', {\n"
@@ -286,8 +286,8 @@ public class KeyboardEventTest extends LoboUnitTest {
     @Test
     @Alerts({"DOM3: [object KeyboardEvent]", "vendor: exception"})
     public void createEvent() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "     alert('DOM3: ' + document.createEvent('KeyboardEvent'));\n"
@@ -304,8 +304,8 @@ public class KeyboardEventTest extends LoboUnitTest {
     @Test
     @Alerts({"exception", "0-0", "undefined-undefined"})
     public void keyCode() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var keyEvent = document.createEvent('KeyEvents');\n"
@@ -329,7 +329,6 @@ public class KeyboardEventTest extends LoboUnitTest {
     @Alerts({"exception", "exception"})
     public void initKeyEvent() {
         final String html = "<html><head><script>\n"
-
                 + "  var properties = ['type', 'bubbles', 'cancelable', /*'view',*/ 'ctrlKey', 'altKey',\n"
                 + "        'shiftKey', 'metaKey', 'keyCode', 'charCode'];\n"
                 + "  function dumpEvent(e) {\n"

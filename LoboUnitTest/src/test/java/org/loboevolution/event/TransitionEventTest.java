@@ -41,8 +41,8 @@ public class TransitionEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object TransitionEvent]", "transition", "false", "false", "false"})
     public void createCtor() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new TransitionEvent('transition');\n"
@@ -59,8 +59,8 @@ public class TransitionEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorWithoutType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new TransitionEvent();\n"
@@ -77,8 +77,8 @@ public class TransitionEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object TransitionEvent]", "42", "false", "false", "false"})
     public void createCtorNumericType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new TransitionEvent(42);\n"
@@ -95,8 +95,8 @@ public class TransitionEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object TransitionEvent]", "null", "false", "false", "false"})
     public void createCtorNullType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new TransitionEvent(null);\n"
@@ -113,8 +113,8 @@ public class TransitionEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorUnknownType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new TransitionEvent(unknown);\n"
@@ -131,8 +131,8 @@ public class TransitionEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object TransitionEvent]", "HtmlUnitEvent", "false", "false", "false"})
     public void createCtorArbitraryType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new TransitionEvent('HtmlUnitEvent');\n"
@@ -149,8 +149,8 @@ public class TransitionEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object TransitionEvent]", "transition", "false", "false", "false"})
     public void createCtorAllDetails() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var debug = {hello: 'world'};\n"
@@ -172,8 +172,8 @@ public class TransitionEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object TransitionEvent]", "transition", "false", "false", "false"})
     public void createCtorAllDetailsMissingData() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new TransitionEvent('transition', {\n"
@@ -191,8 +191,8 @@ public class TransitionEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorAllDetailsWrongData() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new TransitionEvent('transition', {\n"

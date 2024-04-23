@@ -80,7 +80,6 @@ public class XPathEvaluatorTest extends LoboUnitTest {
                 + "      </soap:book>"
                 + "    </soap:books>"
                 + "  </soap:Envelope>';\n"
-
                 + "  function test() {\n"
                 + "    if (window.XPathEvaluator) {\n"
                 + "      var doc = (new DOMParser).parseFromString(xml, 'text/xml');\n"
@@ -109,7 +108,6 @@ public class XPathEvaluatorTest extends LoboUnitTest {
                 + "  function nsResolver(prefix) {\n"
                 + "    return {s : 'http://schemas.xmlsoap.org/soap/envelope/'}[prefix] || null;\n"
                 + "  }\n"
-
                 + "  var xml = "
                 + "  '<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">"
                 + "    <soap:books>"
@@ -119,7 +117,6 @@ public class XPathEvaluatorTest extends LoboUnitTest {
                 + "      </soap:book>"
                 + "    </soap:books>"
                 + "  </soap:Envelope>';\n"
-
                 + "  function test() {\n"
                 + "    if (window.XPathEvaluator) {\n"
                 + "      var doc = (new DOMParser).parseFromString(xml, 'text/xml');\n"

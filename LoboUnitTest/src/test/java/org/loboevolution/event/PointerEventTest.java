@@ -65,8 +65,8 @@ public class PointerEventTest extends LoboUnitTest {
     @Alerts({"[object PointerEvent]", "click", "false", "false", "false",
             "0", "1", "1", "0", "0", "0", "", "false", "1.5707963267948966", "0"})
     public void createCtor() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new PointerEvent('click');\n"
@@ -84,8 +84,8 @@ public class PointerEventTest extends LoboUnitTest {
     @Alerts({"[object PointerEvent]", "click", "true", "false", "false",
             "2", "1", "1", "0", "0", "0", "mouse", "false", "1.5707963267948966", "0"})
     public void createCtorWithDetails() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new PointerEvent('click', {\n"
@@ -106,8 +106,8 @@ public class PointerEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCreateEvent() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = document.createEvent('PointerEvent');\n"
@@ -124,8 +124,8 @@ public class PointerEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void initPointerEvent() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = document.createEvent('PointerEvent');\n"
@@ -144,8 +144,8 @@ public class PointerEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void dispatchEvent() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = document.createEvent('PointerEvent');\n"

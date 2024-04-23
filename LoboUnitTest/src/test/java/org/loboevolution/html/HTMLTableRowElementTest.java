@@ -335,11 +335,9 @@ public class HTMLTableRowElementTest extends LoboUnitTest {
                 + "  var node = document.getElementById('tab_row');\n"
                 + "  alert(node.innerText);\n"
                 + "  alert(node.firstChild);\n"
-
                 + "  try { node.innerText = 'abc'; } catch(e) {alert('ex');}\n"
                 + "  alert(node.innerText);\n"
                 + "  alert(node.firstChild);\n"
-
                 + "  try { node.innerText = ''; } catch(e) {alert('ex');}\n"
                 + "  alert(node.innerText);\n"
                 + "</script></body></html>";
@@ -359,11 +357,9 @@ public class HTMLTableRowElementTest extends LoboUnitTest {
                 + "  var node = document.getElementById('tab_row');\n"
                 + "  alert(node.textContent);\n"
                 + "  alert(node.firstChild);\n"
-
                 + "  try { node.textContent = 'abc'; } catch(e) {alert('ex');}\n"
                 + "  alert(node.textContent);\n"
                 + "  alert(node.firstChild);\n"
-
                 + "  try { node.textContent = ''; } catch(e) {alert('ex');}\n"
                 + "  alert(node.textContent);\n"
                 + "</script></body></html>";
@@ -382,7 +378,6 @@ public class HTMLTableRowElementTest extends LoboUnitTest {
                 + "    </tr>\n"
                 + "  </table>\n"
                 + "  <script>\n"
-
                 + "    var row = document.getElementById('myRow');\n"
                 + "    alert(row.cells.length);\n"
                 + "    try {\n"
@@ -404,37 +399,37 @@ public class HTMLTableRowElementTest extends LoboUnitTest {
 
     @Test
     @Alerts({"2", "exception"})
-    public void insertCell_MinusTwo() {
+    public void insertCellMinusTwo() {
         insertCell("-2");
     }
 
     @Test
     @Alerts({"2", "3", "2"})
-    public void insertCell_MinusOne() {
+    public void insertCellMinusOne() {
         insertCell("-1");
     }
 
     @Test
     @Alerts({"2", "3", "0"})
-    public void insertCell_Zero() {
+    public void insertCellZero() {
         insertCell("0");
     }
 
     @Test
     @Alerts({"2", "3", "1"})
-    public void insertCell_One() {
+    public void insertCellOne() {
         insertCell("1");
     }
 
     @Test
     @Alerts({"2", "3", "2"})
-    public void insertCell_Two() {
+    public void insertCellTwo() {
         insertCell("2");
     }
 
     @Test
     @Alerts({"2", "exception"})
-    public void insertCell_Three() {
+    public void insertCellThree() {
         insertCell("3");
     }
 
@@ -450,20 +445,16 @@ public class HTMLTableRowElementTest extends LoboUnitTest {
                 + "    <script>\n"
                 + "  var node = document.getElementById('tabr1');\n"
                 + "  alert(node.borderColor);\n"
-
                 + "  node.borderColor = '#667788';\n"
                 + "  alert(node.borderColor);\n"
-
                 + "  node.borderColor = 'unknown';\n"
                 + "  alert(node.borderColor);\n"
-
                 + "  var node = document.getElementById('tabr2');\n"
                 + "  alert(node.borderColor);\n"
                 + "  var node = document.getElementById('tabr3');\n"
                 + "  alert(node.borderColor);\n"
                 + "  var node = document.getElementById('tabr4');\n"
                 + "  alert(node.borderColor);\n"
-
                 + "</script></body></html>";
 
         checkHtmlAlert(html);
@@ -481,20 +472,16 @@ public class HTMLTableRowElementTest extends LoboUnitTest {
                 + "    <script>\n"
                 + "  var node = document.getElementById('tabr1');\n"
                 + "  alert(node.borderColorDark);\n"
-
                 + "  node.borderColor = '#667788';\n"
                 + "  alert(node.borderColorDark);\n"
-
                 + "  node.borderColor = 'unknown';\n"
                 + "  alert(node.borderColorDark);\n"
-
                 + "  var node = document.getElementById('tabr2');\n"
                 + "  alert(node.borderColorDark);\n"
                 + "  var node = document.getElementById('tabr3');\n"
                 + "  alert(node.borderColorDark);\n"
                 + "  var node = document.getElementById('tabr4');\n"
                 + "  alert(node.borderColorDark);\n"
-
                 + "</script></body></html>";
         checkHtmlAlert(html);
     }
@@ -511,20 +498,16 @@ public class HTMLTableRowElementTest extends LoboUnitTest {
                 + "    <script>\n"
                 + "  var node = document.getElementById('tabr1');\n"
                 + "  alert(node.borderColorLight);\n"
-
                 + "  node.borderColor = '#667788';\n"
                 + "  alert(node.borderColorLight);\n"
-
                 + "  node.borderColor = 'unknown';\n"
                 + "  alert(node.borderColorLight);\n"
-
                 + "  var node = document.getElementById('tabr2');\n"
                 + "  alert(node.borderColorLight);\n"
                 + "  var node = document.getElementById('tabr3');\n"
                 + "  alert(node.borderColorLight);\n"
                 + "  var node = document.getElementById('tabr4');\n"
                 + "  alert(node.borderColorLight);\n"
-
                 + "</script></body></html>";
 
         checkHtmlAlert(html);
@@ -542,7 +525,6 @@ public class HTMLTableRowElementTest extends LoboUnitTest {
                 + "    <td style='height: 40px'>d</td>\n"
                 + "  </tr>\n"
                 + "</table>\n"
-
                 + "    <script>\n"
                 + "  var tr1 = document.getElementById('tr1');\n"
                 + "  alert(tr1.offsetHeight > 35);\n"

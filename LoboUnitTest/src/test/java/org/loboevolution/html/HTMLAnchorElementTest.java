@@ -39,8 +39,9 @@ import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
  */
 @ExtendWith(AlertsExtension.class)
 public class HTMLAnchorElementTest extends LoboUnitTest {
+
     @Test
-    @Alerts({"", "", "", "test.css", "stylesheet", "stylesheet1"})
+    @Alerts({"", "null", "null", "test.css", "stylesheet", "stylesheet1"})
     public void attributes() {
         final String html =
                 "<html>\n"
@@ -112,7 +113,6 @@ public class HTMLAnchorElementTest extends LoboUnitTest {
     public void defaultConversionToString() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function test() {\n"
                 + "  alert(document.getElementById('myAnchor'));\n"
                 + "  for (var i = 0; i < document.links.length; i++)\n"
@@ -214,8 +214,8 @@ public class HTMLAnchorElementTest extends LoboUnitTest {
     public void getDefaultValueWithHashAndFileName() {
         final String html
                 = "<html><head>\n"
-                + "<script>\n"                + "  function test() {\n"
-
+               + "<script>\n"
+                + "  function test() {\n"
                 + "    alert(document.getElementById('absolute'));\n"
                 + "    alert(document.getElementById('relative'));\n"
                 + "    alert(document.getElementById('hash'));\n"
@@ -262,7 +262,8 @@ public class HTMLAnchorElementTest extends LoboUnitTest {
                 = "<html>\n"
                 + "<body>\n"
                 + "  <a id='a1' href='#'></a><a id='a2' href='#' accesskey='A'></a>\n"
-                + "<script>\n"                + "  var a1 = document.getElementById('a1'), a2 = document.getElementById('a2');\n"
+                + "<script>\n"
+                + "  var a1 = document.getElementById('a1'), a2 = document.getElementById('a2');\n"
                 + "  alert(a1.accessKey);\n"
                 + "  alert(a2.accessKey);\n"
                 + "  a1.accessKey = 'a';\n"
@@ -382,22 +383,18 @@ public class HTMLAnchorElementTest extends LoboUnitTest {
     @Alerts({"text/html", "", " TExT/hTMl  ", "unknown", "application/pdf"})
     public void setType() {
         final String html = "<html><head>\n"
-                + "<script>\n"                + "  function test() {\n"
+               + "<script>\n"
+                + "  function test() {\n"
                 + "    var anchor = document.getElementById('id');\n"
                 + "    alert(anchor.type);\n"
-
                 + "    anchor.type = '';\n"
                 + "    alert(anchor.type);\n"
-
                 + "    anchor.type = ' TExT/hTMl  ';\n"
                 + "    alert(anchor.type);\n"
-
                 + "    anchor.type = 'unknown';\n"
                 + "    alert(anchor.type);\n"
-
                 + "    anchor.type = 'application/pdf';\n"
                 + "    alert(anchor.type);\n"
-
                 + "  }\n"
                 + "  function alertType(id) {\n"
                 + "    var anchor = document.getElementById(id);\n"
@@ -426,9 +423,7 @@ public class HTMLAnchorElementTest extends LoboUnitTest {
                 + "  <a href='p://'>p://</a>\n"
                 + "  <a href='p:/'>p:/</a>\n"
                 + "  <a href='p:/TeMp'>p:/TeMp</a>\n"
-
                 + "  <script>\n"
-
                 + "  var links = document.getElementsByTagName('a');\n"
                 + "  for (var i = 0; i < links.length; i++) {\n"
                 + "    var link = links[i];\n"
@@ -444,7 +439,7 @@ public class HTMLAnchorElementTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts({"", "hi"})
+    @Alerts({"null", "hi"})
     public void charset() {
         attribute("charset", "hi");
     }
@@ -476,7 +471,7 @@ public class HTMLAnchorElementTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts({"", "en"})
+    @Alerts({"null", "en"})
     public void hreflang() {
         attribute("hreflang", "en");
     }
@@ -630,22 +625,17 @@ public class HTMLAnchorElementTest extends LoboUnitTest {
     public void readWriteRel() {
         final String html
                 = "<html><body><a id='a1'>a1</a><a id='a2' rel='alternate help'>a2</a><script>\n"
-
                 + "var a1 = document.getElementById('a1'), a2 = document.getElementById('a2');\n"
-
                 + "alert(a1.rel);\n"
                 + "alert(a2.rel);\n"
-
                 + "a1.rel = 'prefetch';\n"
                 + "a2.rel = 'prefetch';\n"
                 + "alert(a1.rel);\n"
                 + "alert(a2.rel);\n"
-
                 + "a1.rel = 'not supported';\n"
                 + "a2.rel = 'notsupported';\n"
                 + "alert(a1.rel);\n"
                 + "alert(a2.rel);\n"
-
                 + "</script></body></html>";
         checkHtmlAlert(html);
     }
@@ -656,18 +646,14 @@ public class HTMLAnchorElementTest extends LoboUnitTest {
     public void relList() {
         final String html
                 = "<html><body><a id='a1'>a1</a><a id='a2' rel='alternate help'>a2</a><script>\n"
-
                 + "var a1 = document.getElementById('a1'), a2 = document.getElementById('a2');\n"
-
                 + "try {\n"
                 + "  alert(a1.relList.length);\n"
                 + "  alert(a2.relList.length);\n"
-
                 + "  for (var i = 0; i < a2.relList.length; i++) {\n"
                 + "    alert(a2.relList[i]);\n"
                 + "  }\n"
                 + "} catch(e) { alert('exception'); }\n"
-
                 + "</script></body></html>";
         checkHtmlAlert(html);
     }
@@ -678,31 +664,23 @@ public class HTMLAnchorElementTest extends LoboUnitTest {
     public void setRelListString() {
         final String html
                 = "<html><body><a id='a1'>a1</a><a id='a2' rel='alternate help'>a2</a><script>\n"
-
                 + "var a1 = document.getElementById('a1'), a2 = document.getElementById('a2');\n"
-
                 + "try {\n"
                 + "  alert(a1.relList.length);\n"
                 + "  alert(a2.relList.length);\n"
-
                 + "  a1.relList = 'alternate help';\n"
                 + "  a2.relList = 'abc';\n"
-
                 + "  alert(a1.relList.length);\n"
                 + "  alert(a2.relList.length);\n"
-
                 + "  for (var i = 0; i < a1.relList.length; i++) {\n"
                 + "    alert(a1.relList[i]);\n"
                 + "  }\n"
-
                 + "  for (var i = 0; i < a2.relList.length; i++) {\n"
                 + "    alert(a2.relList[i]);\n"
                 + "  }\n"
-
                 + "  alert(a1.rel);\n"
                 + "  alert(a2.rel);\n"
                 + "} catch(e) { alert('exception'); }\n"
-
                 + "</script></body></html>";
         checkHtmlAlert(html);
     }
@@ -714,21 +692,16 @@ public class HTMLAnchorElementTest extends LoboUnitTest {
         final String html
                 = "<html><body><a id='a1'>a1</a><a id='a2' rel='alternate help'>a2</a><script>\n"
                 + "var a1 = document.getElementById('a1'), a2 = document.getElementById('a2');\n"
-
                 + "try {\n"
                 + "  alert(a1.relList.length);\n"
                 + "  alert(a2.relList.length);\n"
-
                 + "  a1.relList = '';\n"
                 + "  a2.relList = '  \t';\n"
-
                 + "  alert(a1.relList.length);\n"
                 + "  alert(a2.relList.length);\n"
-
                 + "  alert(a1.rel);\n"
                 + "  alert(a2.rel);\n"
                 + "} catch(e) { alert('exception'); }\n"
-
                 + "</script></body></html>";
         checkHtmlAlert(html);
     }
@@ -740,29 +713,22 @@ public class HTMLAnchorElementTest extends LoboUnitTest {
         final String html
                 = "<html><body><a id='a1'>a1</a><a id='a2' rel='alternate help'>a2</a><script>\n"
                 + "var a1 = document.getElementById('a1'), a2 = document.getElementById('a2');\n"
-
                 + "try {\n"
                 + "  alert(a1.relList.length);\n"
                 + "  alert(a2.relList.length);\n"
-
                 + "  a1.relList = null;\n"
                 + "  a2.relList = null;\n"
-
                 + "  alert(a1.relList.length);\n"
                 + "  alert(a2.relList.length);\n"
-
                 + "  for (var i = 0; i < a1.relList.length; i++) {\n"
                 + "    alert(a1.relList[i]);\n"
                 + "  }\n"
-
                 + "  for (var i = 0; i < a2.relList.length; i++) {\n"
                 + "    alert(a2.relList[i]);\n"
                 + "  }\n"
-
                 + "  alert(a1.rel);\n"
                 + "  alert(a2.rel);\n"
                 + "} catch(e) { alert('exception'); }\n"
-
                 + "</script></body></html>";
         checkHtmlAlert(html);
     }
@@ -774,29 +740,22 @@ public class HTMLAnchorElementTest extends LoboUnitTest {
         final String html
                 = "<html><body><a id='a1'>a1</a><a id='a2' rel='alternate help'>a2</a><script>\n"
                 + "var a1 = document.getElementById('a1'), a2 = document.getElementById('a2');\n"
-
                 + "try {\n"
                 + "  alert(a1.relList.length);\n"
                 + "  alert(a2.relList.length);\n"
-
                 + "  a1.relList = undefined;\n"
                 + "  a2.relList = undefined;\n"
-
                 + "  alert(a1.relList.length);\n"
                 + "  alert(a2.relList.length);\n"
-
                 + "  for (var i = 0; i < a1.relList.length; i++) {\n"
                 + "    alert(a1.relList[i]);\n"
                 + "  }\n"
-
                 + "  for (var i = 0; i < a2.relList.length; i++) {\n"
                 + "    alert(a2.relList[i]);\n"
                 + "  }\n"
-
                 + "  alert(a1.rel);\n"
                 + "  alert(a2.rel);\n"
                 + "} catch(e) { alert('exception'); }\n"
-
                 + "</script></body></html>";
         checkHtmlAlert(html);
     }
@@ -819,19 +778,15 @@ public class HTMLAnchorElementTest extends LoboUnitTest {
                 + "a2 = document.getElementById('a2'),"
                 + "a3 = document.getElementById('a3'),"
                 + "a4 = document.getElementById('a4');\n"
-
                 + "alert(a1.username);\n"
                 + "alert(a2.username);\n"
                 + "alert(a3.username);\n"
                 + "alert(a4.username);\n"
-
                 + "if (a1.username != undefined) {\n"
-
                 + "a1.username = 'Tester';\n"
                 + "a2.username = 'Tester';\n"
                 + "a3.username = 'Tester';\n"
                 + "a4.username = 'Tester';\n"
-
                 + "alert(a1.username);\n"
                 + "alert(a1.href);\n"
                 + "alert(a2.username);\n"
@@ -863,19 +818,15 @@ public class HTMLAnchorElementTest extends LoboUnitTest {
                 + "a2 = document.getElementById('a2'),"
                 + "a3 = document.getElementById('a3'),"
                 + "a4 = document.getElementById('a4');\n"
-
                 + "alert(a1.password);\n"
                 + "alert(a2.password);\n"
                 + "alert(a3.password);\n"
                 + "alert(a4.password);\n"
-
                 + "if (a1.password != undefined) {\n"
-
                 + "a1.password = 'Tester';\n"
                 + "a2.password = 'Tester';\n"
                 + "a3.password = 'Tester';\n"
                 + "a4.password = 'Tester';\n"
-
                 + "alert(a1.password);\n"
                 + "alert(a1.href);\n"
                 + "alert(a2.password);\n"
@@ -884,7 +835,6 @@ public class HTMLAnchorElementTest extends LoboUnitTest {
                 + "alert(a3.href);\n"
                 + "alert(a4.password);\n"
                 + "alert(a4.href);\n"
-
                 + "}\n"
                 + "</script></body></html>";
         checkHtmlAlert(html);

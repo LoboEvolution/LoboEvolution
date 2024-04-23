@@ -98,7 +98,7 @@ public class HTMLOListElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"", "", "blah", "A", "null", "", "blah", "A", "1", "a", "A", "i", "I", "u"})
+    @Alerts({"null", "", "blah", "A", "null", "", "blah", "A", "1", "a", "A", "i", "I", "u"})
     public void type() {
         final String html =
                 "<html>\n"

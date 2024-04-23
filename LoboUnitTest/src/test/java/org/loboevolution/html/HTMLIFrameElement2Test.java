@@ -78,7 +78,8 @@ public class HTMLIFrameElement2Test extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "<body>\n"
-                        + "    <script>\n" + "document.write(\"<iframe id='i' onload='alert(\\\"loaded\\\");' src='" + URL_SECOND + "'></iframe>\");\n"
+                        + "    <script>\n" 
+                + "document.write(\"<iframe id='i' onload='alert(\\\"loaded\\\");' src='" + URL_SECOND + "'></iframe>\");\n"
                         + "</script>\n"
                         + "</body>\n"
                         + "</html>";
@@ -451,7 +452,6 @@ public class HTMLIFrameElement2Test extends LoboUnitTest {
 
     private void documentCreateElementOnLoadsrcX(final String iframeSrc) {
         final String html = "<html><body><script>\n"
-
                 + "function createIFrame() {\n"
                 + "  alert('createIFrame');\n"
                 + "  var myFrame = document.createElement('iframe');\n"
@@ -689,7 +689,6 @@ public class HTMLIFrameElement2Test extends LoboUnitTest {
                 + "  <iframe id='i5' align='top' ></iframe>\n"
                 + "  <iframe id='i6' align='wrong' ></iframe>\n"
                 + "  <iframe id='i7' ></iframe>\n"
-
                 + "<script>\n"
                 + "  for (var i = 1; i <= 7; i++) {\n"
                 + "    alert(document.getElementById('i' + i).align);\n"
@@ -706,7 +705,6 @@ public class HTMLIFrameElement2Test extends LoboUnitTest {
         final String html
                 = "<html><body>\n"
                 + "  <iframe id='i1' align='left' ></iframe>\n"
-
                 + "<script>\n"
                 + "  function setAlign(elem, value) {\n"
                 + "    try {\n"
@@ -714,13 +712,10 @@ public class HTMLIFrameElement2Test extends LoboUnitTest {
                 + "    } catch (e) { alert('error'); }\n"
                 + "    alert(elem.align);\n"
                 + "  }\n"
-
                 + "  var elem = document.getElementById('i1');\n"
                 + "  setAlign(elem, 'CenTer');\n"
-
                 + "  setAlign(elem, '8');\n"
                 + "  setAlign(elem, 'foo');\n"
-
                 + "  setAlign(elem, 'left');\n"
                 + "  setAlign(elem, 'right');\n"
                 + "  setAlign(elem, 'bottom');\n"

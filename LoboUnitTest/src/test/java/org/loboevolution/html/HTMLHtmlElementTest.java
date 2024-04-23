@@ -87,9 +87,8 @@ public class HTMLHtmlElementTest extends LoboUnitTest {
 
     @Test
     @Alerts({"1", "HEAD"})
-    public void childNodes_2() {
+    public void childNodes2() {
         final String html = "<html> \n <head> \n <script>\n"
-
                 + "var nodes = document.documentElement.childNodes;\n"
                 + "alert(nodes.length);\n"
                 + "alert(nodes[0].nodeName);\n"
@@ -122,7 +121,8 @@ public class HTMLHtmlElementTest extends LoboUnitTest {
     @Alerts("Hello World")
     public void innerText() {
         final String html = "<html><head>\n"
-                + "<script>\n"                + "  function test() {\n"
+                + "<script>\n"
+                + "  function test() {\n"
                 + "    document.documentElement.innerText = 'Hello World';\n"
                 + "    alert( document.documentElement.childNodes.item(0).data)\n"
                 + "  }\n"
@@ -174,7 +174,6 @@ public class HTMLHtmlElementTest extends LoboUnitTest {
                 + "  alert(elt.offsetLeft);\n"
                 + "  alert(elt.offsetTop);\n"
                 + "}\n"
-
                 + "alertOffsets(document.getElementById('my'));\n"
                 + "</script></body></html>";
         checkHtmlAlert(html);

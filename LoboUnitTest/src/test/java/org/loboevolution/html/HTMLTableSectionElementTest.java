@@ -332,11 +332,9 @@ public class HTMLTableSectionElementTest extends LoboUnitTest {
                 + "  var node = document.getElementById('tab_row');\n"
                 + "  alert(node.innerText);\n"
                 + "  alert(node.firstChild);\n"
-
                 + "  try { node.innerText = 'abc'; } catch(e) {alert('ex');}\n"
                 + "  alert(node.innerText);\n"
                 + "  alert(node.firstChild);\n"
-
                 + "  try { node.innerText = ''; } catch(e) {alert('ex');}\n"
                 + "  alert(node.innerText);\n"
                 + "</script></body></html>";
@@ -356,11 +354,9 @@ public class HTMLTableSectionElementTest extends LoboUnitTest {
                 + "  var node = document.getElementById('tab_row');\n"
                 + "  alert(node.innerText);\n"
                 + "  alert(node.firstChild);\n"
-
                 + "  try { node.innerText = 'abc'; } catch(e) {alert('ex');}\n"
                 + "  alert(node.innerText);\n"
                 + "  alert(node.firstChild);\n"
-
                 + "  try { node.innerText = ''; } catch(e) {alert('ex');}\n"
                 + "  alert(node.innerText);\n"
                 + "</script></body></html>";
@@ -380,11 +376,9 @@ public class HTMLTableSectionElementTest extends LoboUnitTest {
                 + "  var node = document.getElementById('tab_row');\n"
                 + "  alert(node.innerText);\n"
                 + "  alert(node.firstChild);\n"
-
                 + "  try { node.innerText = 'abc'; } catch(e) {alert('ex');}\n"
                 + "  alert(node.innerText);\n"
                 + "  alert(node.firstChild);\n"
-
                 + "  try { node.innerText = ''; } catch(e) {alert('ex');}\n"
                 + "  alert(node.innerText);\n"
                 + "</script></body></html>";
@@ -404,11 +398,9 @@ public class HTMLTableSectionElementTest extends LoboUnitTest {
                 + "  var node = document.getElementById('tab_row');\n"
                 + "  alert(node.textContent);\n"
                 + "  alert(node.firstChild);\n"
-
                 + "  try { node.textContent = 'abc'; } catch(e) {alert('ex');}\n"
                 + "  alert(node.textContent);\n"
                 + "  alert(node.firstChild);\n"
-
                 + "  try { node.textContent = ''; } catch(e) {alert('ex');}\n"
                 + "  alert(node.textContent);\n"
                 + "</script></body></html>";
@@ -428,11 +420,9 @@ public class HTMLTableSectionElementTest extends LoboUnitTest {
                 + "  var node = document.getElementById('tab_row');\n"
                 + "  alert(node.textContent);\n"
                 + "  alert(node.firstChild);\n"
-
                 + "  try { node.textContent = 'abc'; } catch(e) {alert('ex');}\n"
                 + "  alert(node.textContent);\n"
                 + "  alert(node.firstChild);\n"
-
                 + "  try { node.textContent = ''; } catch(e) {alert('ex');}\n"
                 + "  alert(node.textContent);\n"
                 + "</script></body></html>";
@@ -452,11 +442,9 @@ public class HTMLTableSectionElementTest extends LoboUnitTest {
                 + "  var node = document.getElementById('tab_row');\n"
                 + "  alert(node.textContent);\n"
                 + "  alert(node.firstChild);\n"
-
                 + "  try { node.textContent = 'abc'; } catch(e) {alert('ex');}\n"
                 + "  alert(node.textContent);\n"
                 + "  alert(node.firstChild);\n"
-
                 + "  try { node.textContent = ''; } catch(e) {alert('ex');}\n"
                 + "  alert(node.textContent);\n"
                 + "</script></body></html>";

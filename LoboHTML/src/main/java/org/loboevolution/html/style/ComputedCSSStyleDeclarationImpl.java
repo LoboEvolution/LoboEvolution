@@ -40,6 +40,7 @@ import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.laf.ColorFactory;
 
 import java.awt.*;
+import java.util.Arrays;
 
 /**
  * <p>ComputedCSSStyleDeclaration class.</p>
@@ -133,7 +134,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
     @Override
     public String getBackgroundColor() {
         if (Strings.isBlank(style.getBackgroundColor())) {
-            return this.element.getParentNode() == null ? null : "rgb(0, 0, 0)";
+            return this.element.getParentNode() == null ? null : "initial";
         }
 
         final Color c = ColorFactory.getInstance().getColor(style.getBackgroundColor());
@@ -141,7 +142,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
             final float alpha = (float) (c.getAlpha()) / 255.0f;
 
             if (c.getRed() == 0 && c.getGreen() == 0 && c.getBlue() == 0) {
-                return this.element.getParentNode() == null ? null : "rgb(0, 0, 0)";
+                return this.element.getParentNode() == null ? null : "initial";
             }
 
             if (alpha > 0 && alpha < 1) {
@@ -150,7 +151,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
                 return this.element.getParentNode() == null ? null : "rgb(" + c.getRed() + ", " + c.getGreen() + ", " + c.getBlue() + ")";
             }
         } else {
-            return this.element.getParentNode() == null ? null : "rgb(0, 0, 0)";
+            return this.element.getParentNode() == null ? null : "initial";
         }
     }
 
@@ -167,7 +168,42 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      */
     @Override
     public String getBackgroundPosition() {
-        return this.element.getParentNode() == null ? null : style.getBackgroundPosition();
+        String backgroundPosition = style.getBackgroundPosition();
+        if (this.element.getParentNode() != null && Strings.isNotBlank(backgroundPosition)) {
+            StringBuilder builder = new StringBuilder();
+            Arrays.stream(backgroundPosition.split(" ")).forEach(position -> {
+
+                if (builder.length() > 0) {
+                    builder.append(" ");
+                }
+
+                switch (CSSValues.get(position)) {
+                    case BOTTOM:
+                    case RIGHT:
+                        builder.append("100%");
+                        break;
+                    case TOP:
+                    case LEFT:
+                        System.out.println(builder.indexOf("100%"));
+                        if (builder.indexOf("100%") > -1) {
+                            builder.insert(0, "0% ");
+                        } else {
+                            builder.append("0%");
+                        }
+                        break;
+                    case CENTER:
+                        builder.append("50%");
+                        break;
+                    default:
+                        builder.append(position);
+                        break;
+                }
+            });
+
+            return builder.toString().trim();
+        }
+
+        return null;
     }
 
     /**

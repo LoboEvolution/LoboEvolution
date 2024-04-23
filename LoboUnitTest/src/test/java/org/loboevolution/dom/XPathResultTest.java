@@ -51,7 +51,6 @@ public class XPathResultTest extends LoboUnitTest {
                 + "       alert('XPathResult not available');\n"
                 + "        return;\n"
                 + "      }\n"
-
                 + "      try {\n"
                 + "       alert(typeof XPathResult);\n"
                 + "        new XPathResult();\n"
@@ -202,7 +201,6 @@ public class XPathResultTest extends LoboUnitTest {
                 + "        var doc=parser.parseFromString(text,'text/xml');\n"
                 + "        var result = doc.evaluate('" + "//div" + "', doc.documentElement, "
                 + "null, XPathResult.ANY_TYPE, null);\n"
-
                 + "        var thisNode = result.iterateNext();\n"
                 + "        while (thisNode) {\n"
                 + "         alert(thisNode.getAttribute('id'));\n"
@@ -311,18 +309,15 @@ public class XPathResultTest extends LoboUnitTest {
                 + "        var result = document.evaluate('//unknown', document, null, "
                 + "XPathResult.BOOLEAN_TYPE, null);\n"
                 + "       alert(result.booleanValue === false);\n"
-
                 + "        var result = document.evaluate('//title', document, null, "
                 + "XPathResult.BOOLEAN_TYPE, null);\n"
                 + "       alert(result.booleanValue === true);\n"
-
                 + "        result = document.evaluate('//div', document, null, "
                 + "XPathResult.BOOLEAN_TYPE, null);\n"
                 + "       alert(result.booleanValue === true);\n"
                 + "        result = document.evaluate('//div/@attr', document, null, "
                 + "XPathResult.BOOLEAN_TYPE, null);\n"
                 + "       alert(result.booleanValue === true);\n"
-
                 + "        result = document.evaluate('//span', document, null, "
                 + "XPathResult.BOOLEAN_TYPE, null);\n"
                 + "       alert(result.booleanValue === true);\n"
@@ -513,19 +508,15 @@ public class XPathResultTest extends LoboUnitTest {
                 + "        try {\n"
                 + "         alert(result.booleanValue);\n"
                 + "        } catch (e) {alert('not boolean'); }\n"
-
                 + "        try {\n"
                 + "         alert(result.numberValue);\n"
                 + "        } catch (e) {alert('not number'); }\n"
-
                 + "        try {\n"
                 + "         alert(result.stringValue);\n"
                 + "        } catch (e) {alert('not string'); }\n"
-
                 + "        try {\n"
                 + "         alert(result.singleNodeValue);\n"
                 + "        } catch (e) {alert('not node'); }\n"
-
                 + "        try {\n"
                 + "         alert(result.snapshotLength);\n"
                 + "        } catch (e) {alert('not length'); }\n"

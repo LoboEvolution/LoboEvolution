@@ -43,7 +43,8 @@ public class XMLHttpRequestTest extends LoboUnitTest {
         final String html =
                 "<html>\n"
                 +  "  <head>\n"
-                +  "    <script>\n"                +  "      function testSync() {\n"
+                +  "    <script>\n"
+                +  "      function testSync() {\n"
                 +  "        var request = new XMLHttpRequest();\n"
                 +  "       alert(request.readyState);\n"
                 +  "       alert(request.responseType);\n"
@@ -68,7 +69,8 @@ public class XMLHttpRequestTest extends LoboUnitTest {
         final String html =
                 "<html>\n"
                 +  "  <head>\n"
-                +  "<script>\n" + "  var xhr = new XMLHttpRequest();\n"
+                +  "<script>\n" 
+                + "  var xhr = new XMLHttpRequest();\n"
                 +  "  alertStatus('1: ');\n"
                 +  "  xhr.open('GET', '/foo.xml', false);\n"
                 +  " alert('2: ');\n"
@@ -98,7 +100,8 @@ public class XMLHttpRequestTest extends LoboUnitTest {
                 "<html>\n"
                 +  "  <head>\n"
                 +  "    <title>XMLHttpRequest Test</title>\n"
-                +  "<script>\n" + "  var xhr = new XMLHttpRequest();\n"
+                +  "<script>\n" 
+                + "  var xhr = new XMLHttpRequest();\n"
 
                 +  "  function test() {\n"
                 +  "    try {\n"
@@ -153,7 +156,8 @@ public class XMLHttpRequestTest extends LoboUnitTest {
         +  "<body>\n"
         +  "  <textarea id='log' cols='80' rows='40'></textarea>\n"
 
-        +  "<script>\n" + "    functionalert(x) {\n"
+        +  "<script>\n" 
+                + "    functionalert(x) {\n"
         +  "      document.getElementById('log').value += x + '\\n';\n"
         +  "    }\n"
 
@@ -186,7 +190,8 @@ public class XMLHttpRequestTest extends LoboUnitTest {
         final String html =
                 "<html>\n"
                 +  "  <head>\n"
-                +  "    <script>\n"                +  "      functionalert(x) {\n"
+                +  "    <script>\n"
+                +  "      functionalert(x) {\n"
                 +  "        document.getElementById('log').value += x + '\\n';\n"
                 +  "      }\n"
 
@@ -719,7 +724,7 @@ public class XMLHttpRequestTest extends LoboUnitTest {
 
     @Test
     @Alerts("myInput")
-    public void responseXMLHtml_form() {
+    public void responseXMLHtmlForm() {
         final String html =
                 "<html>\n"
                 +  "  <head>\n"
@@ -742,7 +747,7 @@ public class XMLHttpRequestTest extends LoboUnitTest {
 
     @Test
     @Alerts({"0", "undefined"})
-    public void caseSensitivity_XMLHttpRequest() {
+    public void caseSensitivityXMLHttpRequest() {
         final String html = "<html><head>\n"
         +  "<script>\n"
         +  "function test() {\n"
@@ -1327,7 +1332,8 @@ public class XMLHttpRequestTest extends LoboUnitTest {
         final String html =
                 "<html>\n"
                 +  "  <head>\n"
-                +  "    <script>\n"                +  "      var xhr;\n"
+                +  "    <script>\n"
+                +  "      var xhr;\n"
                 +  "      function test() {\n"
                 +  "        xhr = new XMLHttpRequest();\n"
                 +  "       alert(xhr.responseText);\n"
@@ -1361,7 +1367,8 @@ public class XMLHttpRequestTest extends LoboUnitTest {
         final String html =
                 "<html>\n"
                 +  "  <head>\n"
-                +  "    <script>\n"                +  "      var xhr;\n"
+                +  "    <script>\n"
+                +  "      var xhr;\n"
                 +  "      function test() {\n"
                 +  "        xhr = new XMLHttpRequest();\n"
                 +  "       alert(xhr.responseText);\n"
@@ -1582,7 +1589,8 @@ public class XMLHttpRequestTest extends LoboUnitTest {
         final String html =
                 "<html>\n"
                 +  "  <head>\n"
-                +  "    <script>\n"                +  "      var xhr;\n"
+                +  "    <script>\n"
+                +  "      var xhr;\n"
                 +  "      function test() {\n"
                 +  "        xhr = new XMLHttpRequest();\n"
                 +  "       alert(xhr.responseText);\n"

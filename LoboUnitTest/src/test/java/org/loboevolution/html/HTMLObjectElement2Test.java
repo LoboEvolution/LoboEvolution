@@ -60,8 +60,8 @@ public class HTMLObjectElement2Test extends LoboUnitTest {
     @Test
     @Alerts("[object XMLDocument]")
     public void responseXMLHtmlObject() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    var xhr = new XMLHttpRequest();\n"
                 + "    xhr.open('GET', 'foo.xml', false);\n"

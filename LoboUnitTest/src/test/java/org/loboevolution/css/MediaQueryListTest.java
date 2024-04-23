@@ -43,7 +43,8 @@ public class MediaQueryListTest extends LoboUnitTest {
     public void matches() {
         final String html
                 = "<html><head>\n"
-                + "<script>\n"                + "  function test() {\n"
+               + "<script>\n"
+                + "  function test() {\n"
                 + "    if (window.matchMedia) {\n"
                 + "     alert(window.matchMedia('(min-width: 400px)').matches);\n"
                 + "    }\n"
@@ -59,10 +60,10 @@ public class MediaQueryListTest extends LoboUnitTest {
     public void listener() {
         final String html
                 = "<html><head>\n"
-                + "<script>\n"                + "  function listener(mql) {\n"
+                + "<script>\n"
+                + "  function listener(mql) {\n"
                 + "   alert(mql);\n"
                 + "  }\n"
-
                 + "  function test() {\n"
                 + "    if (window.matchMedia) {\n"
                 + "      var mql = window.matchMedia('(min-width: 400px)');\n"

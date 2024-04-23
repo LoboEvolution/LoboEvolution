@@ -46,7 +46,6 @@ public class HTMLFormElementTest extends LoboUnitTest {
     public void elementsAccessor() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function doTest() {\n"
                 + "  alert(document.form1.length);\n"
                 + "  for (var i = 0; i < document.form1.length; i++) {\n"
@@ -91,7 +90,6 @@ public class HTMLFormElementTest extends LoboUnitTest {
     public void elementsAccessorOutOfBound() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function doTest() {\n"
                 + "  alert(document.form1[-1]);\n"
                 + "  alert(document.form1[2]);\n"
@@ -111,7 +109,6 @@ public class HTMLFormElementTest extends LoboUnitTest {
     public void elementsAccessorFormAttribute() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function doTest() {\n"
                 + "  alert(document.form1.length);\n"
                 + "  for (var i = 0; i < document.form1.length; i++) {\n"
@@ -121,14 +118,11 @@ public class HTMLFormElementTest extends LoboUnitTest {
                 + "}\n"
                 + "</script></head>\n"
                 + "<body onload='doTest()'>\n"
-
                 + "<input type='text' name='textInput1' form='myForm'/>\n"
                 + "<input type='text' name='textInput2' form='form1'/>\n"
-
                 + "<form id='myForm' name='form1'>\n"
                 + "  <input type='button' name='button1' />\n"
                 + "</form>\n"
-
                 + "<input type='text' name='textInput3' form='myForm'/>\n"
                 + "<input type='text' name='textInput4' form='form1'/>\n"
                 + "</body></html>";
@@ -141,7 +135,6 @@ public class HTMLFormElementTest extends LoboUnitTest {
     public void radioButtonArray() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function doTest() {\n"
                 + "  var radioArray = document.form1['radio1'];\n"
                 + "  alert(radioArray.length);\n"
@@ -170,10 +163,9 @@ public class HTMLFormElementTest extends LoboUnitTest {
      */
     @Test
     @Alerts("1")
-    public void radioButton_OnlyOne() {
+    public void radioButtonOnlyOne() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function doTest() {\n"
                 + "  alert(document.form1['radio1'].value);\n"
                 + "}\n"
@@ -257,7 +249,6 @@ public class HTMLFormElementTest extends LoboUnitTest {
     private void enctype(final String encoding) {
         String html
                 = "<html><head><script>\n"
-
                 + "function doTest() {\n"
                 + "  alert(document.forms[0].encoding);\n"
                 + "}\n"
@@ -356,7 +347,6 @@ public class HTMLFormElementTest extends LoboUnitTest {
                 = "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
-
                 + "  function doTest() {\n"
                 + "    try {\n"
                 + "      document.forms[0].enctype = '" + enctype + "';\n"
@@ -380,7 +370,6 @@ public class HTMLFormElementTest extends LoboUnitTest {
                 = "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
-
                 + "  function doTest() {\n"
                 + "    try {\n"
                 + "      document.forms[0].encoding = '" + encoding + "';\n"
@@ -434,7 +423,6 @@ public class HTMLFormElementTest extends LoboUnitTest {
 
         final String html
                 = "<html><head><script>\n"
-
                 + "function doTest() {\n"
                 + "  alert(document.forms[0]." + jsProperty + ");\n"
                 + "  try {\n"
@@ -468,7 +456,6 @@ public class HTMLFormElementTest extends LoboUnitTest {
     private void doTestInputWithName(final String name) {
         final String html
                 = "<html><head><script>\n"
-
                 + "function go() {\n"
                 + "  alert(document.simple_form." + name + ".value);\n"
                 + "  document.simple_form." + name + ".value = 'foo';\n"
@@ -494,7 +481,6 @@ public class HTMLFormElementTest extends LoboUnitTest {
                 + "<input type='radio' name='second' value='1'>\n"
                 + "<input type='radio' name='second' value='2' checked>\n"
                 + "</form><script>\n"
-
                 + "clickAction();\n"
                 + "function clickAction() {\n"
                 + "  var value = -1;\n"
@@ -536,7 +522,6 @@ public class HTMLFormElementTest extends LoboUnitTest {
     public void length() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function doTest() {\n"
                 + "  alert(document.form1.length);\n"
                 + "}\n"
@@ -556,7 +541,6 @@ public class HTMLFormElementTest extends LoboUnitTest {
     public void get() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function doTest() {\n"
                 + "  alert(document.form1[0].name);\n"
                 + "}\n"
@@ -581,7 +565,8 @@ public class HTMLFormElementTest extends LoboUnitTest {
                 + "alert(oElements.length);\n"
                 + "</script>\n"
                 + "<input type='text' name='foo'/>\n"
-                + "<script>\n"                + "alert(oElements.length);\n"
+                + "<script>\n"
+                + "alert(oElements.length);\n"
                 + "alert(document.myForm.elements.length);\n"
                 + "alert(oElements == document.myForm.elements);\n"
                 + "</script>\n"
@@ -611,7 +596,7 @@ public class HTMLFormElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("")
+    @Alerts("null")
     public void action() {
         final String html =
                 "<html>\n"
@@ -623,8 +608,6 @@ public class HTMLFormElementTest extends LoboUnitTest {
                         + "</form>\n"
                         + "</body>\n"
                         + "</html>";
-
-
         checkHtmlAlert(html);
     }
 
@@ -823,7 +806,8 @@ public class HTMLFormElementTest extends LoboUnitTest {
     @Alerts({"page 1: formPage1", "page 2: formPage2"})
     public void formAccessAfterBrowsing() {
         final String html = "<html><head>\n"
-                + "<script>\n"                + "function test() {\n"
+                + "<script>\n"
+                + "function test() {\n"
                 + "  window.name = 'page 1: ' + document.forms[0].name;\n"
                 + "  document.location = 'page2.html';\n"
                 + "}\n"
@@ -946,7 +930,7 @@ public class HTMLFormElementTest extends LoboUnitTest {
 
     @Test
     @Alerts("exception")
-    public void item_integer() {
+    public void itemInteger() {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
@@ -973,7 +957,6 @@ public class HTMLFormElementTest extends LoboUnitTest {
     public void enctypeDefaultValueHtml5() {
         final String html = "<html>\n"
                 + "<html><body><script>\n"
-
                 + "alert(document.createElement('form').enctype);\n"
                 + "</script></body></html>";
 
@@ -997,16 +980,13 @@ public class HTMLFormElementTest extends LoboUnitTest {
     public void accessByNameAfterNameChange() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function go() {\n"
                 + "  var field = document.simple_form.originalName;\n"
                 + "  alert(document.simple_form.originalName);\n"
                 + "  alert(document.simple_form.newName);\n"
-
                 + "  field.name = 'newName';\n"
                 + "  alert(document.simple_form.originalName);\n"
                 + "  alert(document.simple_form.newName);\n"
-
                 + "  field.name = 'brandNewName';\n"
                 + "  alert(document.simple_form.originalName);\n"
                 + "  alert(document.simple_form.newName);\n"
@@ -1032,7 +1012,6 @@ public class HTMLFormElementTest extends LoboUnitTest {
                 + "</div>\n"
                 + "<input name='b'/>\n"
                 + "</form><script>\n"
-
                 + "  alert(document.form1['b']);\n"
                 + "  alert(document.form1.elements['b']);\n"
                 + "</script>\n"
@@ -1046,7 +1025,6 @@ public class HTMLFormElementTest extends LoboUnitTest {
     public void onchangeHandler() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function test() {\n"
                 + "  var form = document.getElementsByTagName('form')[0];\n"
                 + "  alert(typeof form.onchange);\n"
@@ -1064,7 +1042,8 @@ public class HTMLFormElementTest extends LoboUnitTest {
             "target null: false", "target==form: true"})
     public void onSubmitEvent() {
         final String html = "<html><head>\n"
-                + "<script>\n"                + "function test(_event) {\n"
+                + "<script>\n"
+                + "function test(_event) {\n"
                 + "  var oEvent = _event ? _event : window.event;\n"
                 + "  alert('type: ' + oEvent.type);\n"
                 + "  alert('submitter: ' + oEvent.submitter);\n"
@@ -1072,7 +1051,6 @@ public class HTMLFormElementTest extends LoboUnitTest {
                 + "  alert('srcElement==form: ' + (oEvent.srcElement == document.forms[0]));\n"
                 + "  alert('target null: ' + (oEvent.target == null));\n"
                 + "  alert('target==form: ' + (oEvent.target == document.forms[0]));\n"
-
                 + "  if (_event.preventDefault) { _event.preventDefault(); }\n"
                 + "  return false;\n"
                 + "}\n"
@@ -1095,7 +1073,8 @@ public class HTMLFormElementTest extends LoboUnitTest {
                 + "<form id='form1' name='form1' method='get' action='" + URL_SECOND + "'>\n"
                 + "  <input type='button' name='button1' />\n"
                 + "</form>\n"
-                + "<script>\n"                + "  // Prepare the iframe for the target\n"
+                + "<script>\n"
+                + "  // Prepare the iframe for the target\n"
                 + "  alert('prepare frame');\n"
                 + "  var div = document.createElement('div');\n"
                 + "  div.style.display = 'none';\n"
@@ -1155,7 +1134,8 @@ public class HTMLFormElementTest extends LoboUnitTest {
         final String html
                 = "<html>\n"
                 + "<head><title>first</title>\n"
-                + "<script>\n"                + "function doTest() {\n"
+                + "<script>\n"
+                + "function doTest() {\n"
                 + "  var myForm = document.getElementById('form1');\n"
                 + "  if (myForm.requestSubmit) {\n"
                 + "    var sub = document.getElementById('submit2');\n"
@@ -1168,12 +1148,10 @@ public class HTMLFormElementTest extends LoboUnitTest {
                 + "}\n"
                 + "</script>\n"
                 + "</head>\n"
-
                 + "<body onload='doTest()'>\n"
                 + "  <form id='form1' name='form1' method='get' action='" + URL_SECOND + "' encoding='text/plain'>\n"
                 + "    <input name='param1' type='hidden' value='value1'>\n"
                 + "  </form>\n"
-
                 + "  <form id='form2' name='form2' method='get' action='" + URL_SECOND + "' encoding='text/plain'>\n"
                 + "    <input type='submit' id='submit2' />\n"
                 + "  </form>\n"
@@ -1188,7 +1166,8 @@ public class HTMLFormElementTest extends LoboUnitTest {
         final String html
                 = "<html>\n"
                 + "<head><title>first</title>\n"
-                + "<script>\n"                + "function doTest() {\n"
+                + "<script>\n"
+                + "function doTest() {\n"
                 + "  var myForm = document.getElementById('form1');\n"
                 + "  if (myForm.requestSubmit) {\n"
                 + "    var sub = document.getElementById('param1');\n"
@@ -1201,7 +1180,6 @@ public class HTMLFormElementTest extends LoboUnitTest {
                 + "}\n"
                 + "</script>\n"
                 + "</head>\n"
-
                 + "<body onload='doTest()'>\n"
                 + "  <form id='form1' name='form1' method='get' action='" + URL_SECOND + "' encoding='text/plain'>\n"
                 + "    <input id='param1' name='param1' type='hidden' value='value1'>\n"
@@ -1241,22 +1219,17 @@ public class HTMLFormElementTest extends LoboUnitTest {
     public void readWriteRel() {
         final String html
                 = "<html><body><form id='f1'>a1</form><form id='f2' rel='alternate help'>a2</form><script>\n"
-
                 + "var a1 = document.getElementById('f1'), a2 = document.getElementById('f2');\n"
-
                 + "alert(a1.rel);\n"
                 + "alert(a2.rel);\n"
-
                 + "a1.rel = 'prefetch';\n"
                 + "a2.rel = 'prefetch';\n"
                 + "alert(a1.rel);\n"
                 + "alert(a2.rel);\n"
-
                 + "a1.rel = 'not supported';\n"
                 + "a2.rel = 'notsupported';\n"
                 + "alert(a1.rel);\n"
                 + "alert(a2.rel);\n"
-
                 + "</script></body></html>";
         checkHtmlAlert(html);
     }
@@ -1266,18 +1239,14 @@ public class HTMLFormElementTest extends LoboUnitTest {
     public void relList() {
         final String html
                 = "<html><body><form id='f1'>a1</form><form id='f2' rel='alternate help'>a2</form><script>\n"
-
                 + "var a1 = document.getElementById('f1'), a2 = document.getElementById('f2');\n"
-
                 + "try {\n"
                 + "  alert(a1.relList.length);\n"
                 + "  alert(a2.relList.length);\n"
-
                 + "  for (var i = 0; i < a2.relList.length; i++) {\n"
                 + "    alert(a2.relList[i]);\n"
                 + "  }\n"
                 + "} catch(e) { alert('exception'); }\n"
-
                 + "</script></body></html>";
         checkHtmlAlert(html);
     }
@@ -1287,31 +1256,23 @@ public class HTMLFormElementTest extends LoboUnitTest {
     public void setRelListString() {
         final String html
                 = "<html><body><form id='f1'>a1</form><form id='f2' rel='alternate help'>a2</form><script>\n"
-
                 + "var a1 = document.getElementById('f1'), a2 = document.getElementById('f2');\n"
-
                 + "try {\n"
                 + "  alert(a1.relList.length);\n"
                 + "  alert(a2.relList.length);\n"
-
                 + "  a1.relList = 'alternate help';\n"
                 + "  a2.relList = 'abc';\n"
-
                 + "  alert(a1.relList.length);\n"
                 + "  alert(a2.relList.length);\n"
-
                 + "  for (var i = 0; i < a1.relList.length; i++) {\n"
                 + "    alert(a1.relList[i]);\n"
                 + "  }\n"
-
                 + "  for (var i = 0; i < a2.relList.length; i++) {\n"
                 + "    alert(a2.relList[i]);\n"
                 + "  }\n"
-
                 + "  alert(a1.rel);\n"
                 + "  alert(a2.rel);\n"
                 + "} catch(e) { alert('exception'); }\n"
-
                 + "</script></body></html>";
         checkHtmlAlert(html);
     }
@@ -1321,23 +1282,17 @@ public class HTMLFormElementTest extends LoboUnitTest {
     public void setRelListStringBlank() {
         final String html
                 = "<html><body><form id='f1'>a1</form><form id='f2' rel='alternate help'>a2</form><script>\n"
-
                 + "var a1 = document.getElementById('f1'), a2 = document.getElementById('f2');\n"
-
                 + "try {\n"
                 + "  alert(a1.relList.length);\n"
                 + "  alert(a2.relList.length);\n"
-
                 + "  a1.relList = '';\n"
                 + "  a2.relList = '  \t';\n"
-
                 + "  alert(a1.relList.length);\n"
                 + "  alert(a2.relList.length);\n"
-
                 + "  alert(a1.rel);\n"
                 + "  alert(a2.rel);\n"
                 + "} catch(e) { alert('exception'); }\n"
-
                 + "</script></body></html>";
         checkHtmlAlert(html);
     }
@@ -1347,31 +1302,23 @@ public class HTMLFormElementTest extends LoboUnitTest {
     public void setRelListNull() {
         final String html
                 = "<html><body><form id='f1'>a1</form><form id='f2' rel='alternate help'>a2</form><script>\n"
-
                 + "var a1 = document.getElementById('f1'), a2 = document.getElementById('f2');\n"
-
                 + "try {\n"
                 + "  alert(a1.relList.length);\n"
                 + "  alert(a2.relList.length);\n"
-
                 + "  a1.relList = null;\n"
                 + "  a2.relList = null;\n"
-
                 + "  alert(a1.relList.length);\n"
                 + "  alert(a2.relList.length);\n"
-
                 + "  for (var i = 0; i < a1.relList.length; i++) {\n"
                 + "    alert(a1.relList[i]);\n"
                 + "  }\n"
-
                 + "  for (var i = 0; i < a2.relList.length; i++) {\n"
                 + "    alert(a2.relList[i]);\n"
                 + "  }\n"
-
                 + "  alert(a1.rel);\n"
                 + "  alert(a2.rel);\n"
                 + "} catch(e) { alert('exception'); }\n"
-
                 + "</script></body></html>";
         checkHtmlAlert(html);
     }
@@ -1381,31 +1328,23 @@ public class HTMLFormElementTest extends LoboUnitTest {
     public void setRelListUndefined() {
         final String html
                 = "<html><body><form id='f1'>a1</form><form id='f2' rel='alternate help'>a2</form><script>\n"
-
                 + "var a1 = document.getElementById('f1'), a2 = document.getElementById('f2');\n"
-
                 + "try {\n"
                 + "  alert(a1.relList.length);\n"
                 + "  alert(a2.relList.length);\n"
-
                 + "  a1.relList = undefined;\n"
                 + "  a2.relList = undefined;\n"
-
                 + "  alert(a1.relList.length);\n"
                 + "  alert(a2.relList.length);\n"
-
                 + "  for (var i = 0; i < a1.relList.length; i++) {\n"
                 + "    alert(a1.relList[i]);\n"
                 + "  }\n"
-
                 + "  for (var i = 0; i < a2.relList.length; i++) {\n"
                 + "    alert(a2.relList[i]);\n"
                 + "  }\n"
-
                 + "  alert(a1.rel);\n"
                 + "  alert(a2.rel);\n"
                 + "} catch(e) { alert('exception'); }\n"
-
                 + "</script></body></html>";
         checkHtmlAlert(html);
     }

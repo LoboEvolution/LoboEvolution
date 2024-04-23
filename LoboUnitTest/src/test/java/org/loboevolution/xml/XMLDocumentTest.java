@@ -174,7 +174,8 @@ public class XMLDocumentTest extends LoboUnitTest {
     @Alerts("exception")
     public void loadRelativeURL() {
         final String html = "<html><head>\n"
-                + "<script>\n"                + "  function test() {\n"
+               + "<script>\n"
+                + "  function test() {\n"
                 + "    var doc = document.implementation.createDocument('', '', null);\n"
                 + "    doc.async = false;\n"
                 + "    try {\n"
@@ -314,11 +315,9 @@ public class XMLDocumentTest extends LoboUnitTest {
                 + "      var doc = " + callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
                 + "      var child = doc.documentElement.firstChild;\n"
                 + "     alert(child.tagName);\n"
-
                 + "      try {\n"
                 + "       alert(child.selectNodes('/title').length);\n"
                 + "      } catch(e) {alert('exception /title'); }\n"
-
                 + "      try {\n"
                 + "       alert(child.selectNodes('title').length);\n"
                 + "      } catch(e) {alert('exception title'); }\n"
@@ -534,7 +533,6 @@ public class XMLDocumentTest extends LoboUnitTest {
                 + " alert('in first: ' + doc1Root.childNodes.length);\n"
                 + "  var doc1RootOriginalFirstChild = doc1Root.firstChild;\n"
                 + " alert(doc1RootOriginalFirstChild.tagName);\n"
-
                 + "  var hasRootNode = doc1RootOriginalFirstChild.getRootNode !== undefined;\n"
                 + " alert('ownerDocument: ' + (doc1RootOriginalFirstChild.ownerDocument === doc1 ? 'doc1' : 'doc2'));\n"
                 + "  hasRootNode ?alert('getRootNode(): ' "
@@ -583,7 +581,8 @@ public class XMLDocumentTest extends LoboUnitTest {
     @Alerts({"1", "0", "1", "0"})
     public void getElementsByTagName() {
         final String html = "<html><head>\n"
-                + "<script>\n"                + "  function test() {\n"
+               + "<script>\n"
+                + "  function test() {\n"
                 + "    var doc = " + callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
                 + "   alert(doc.getElementsByTagName('book').length);\n"
                 + "   alert(doc.getElementsByTagName('soap:book').length);\n"

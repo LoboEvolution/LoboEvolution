@@ -56,8 +56,8 @@ public class HashChangeEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object HashChangeEvent]", "hashchange", "false", "false", "false", "", ""})
     public void createCtor() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new HashChangeEvent('hashchange');\n"
@@ -74,8 +74,8 @@ public class HashChangeEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object HashChangeEvent]", "hashchange", "true", "false", "false", "null", "#1"})
     public void createCtorWithDetails() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new HashChangeEvent('hashchange', {\n"
@@ -95,8 +95,8 @@ public class HashChangeEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object HashChangeEvent]", "", "false", "false", "false", "", ""})
     public void createCreateEvent() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = document.createEvent('HashChangeEvent');\n"
@@ -114,16 +114,14 @@ public class HashChangeEventTest extends LoboUnitTest {
     @Alerts({"[object HashChangeEvent]", "[object HashChangeEvent]",
             "hashchange", "true", "false", "false", "", "#1"})
     public void initHashChangeEvent() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = document.createEvent('HashChangeEvent');\n"
                 + "     alert(event);\n"
                 + "    } catch (e) {alert('exception createEvent'); return; }\n"
-
                 + "    if (!event.initHashChangeEvent) {alert('missing initHashChangeEvent'); return;}\n"
-
                 + "    try {\n"
                 + "      event.initHashChangeEvent('hashchange', true, false, '" + URL_CSS + "', '"
                 + URL_CSS + "#1');\n"
@@ -139,8 +137,8 @@ public class HashChangeEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object HashChangeEvent]", "hashchange", "true", "false", "false", "", "#1"})
     public void dispatchEvent() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = document.createEvent('HashChangeEvent');\n"
@@ -159,8 +157,8 @@ public class HashChangeEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object Event]", "hashchange", "true", "false", "false", "undefined", "undefined"})
     public void dispatchEventEvent() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = document.createEvent('Event');\n"
@@ -179,8 +177,8 @@ public class HashChangeEventTest extends LoboUnitTest {
     @Test
     @Alerts("supported")
     public void onHashChange_supported() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    if ('onhashchange' in window) {alert('supported') }\n"
                 + "  }\n"

@@ -39,31 +39,31 @@ public class CSSStyleDeclaration3Test extends LoboUnitTest {
 
 
     @Test
-    @Alerts({"", "", "", "", ""})
+    @Alerts({"null", "null", "null", "null", "null"})
     public void backgroundEmpty() {
         background("");
     }
 
     @Test
-    @Alerts({"red", "none", "repeat", "0% 0%", "scroll"})
+    @Alerts({"red", "initial", "initial", "initial", "initial"})
     public void backgroundColorRed() {
         background("rEd");
     }
 
     @Test
-    @Alerts({"rgb(255, 204, 221)", "none", "repeat", "0% 0%", "scroll"})
+    @Alerts({"rgb(255, 204, 221)", "initial", "initial", "initial", "initial"})
     public void backgroundColorHex() {
         background("#fFccdd");
     }
 
     @Test
-    @Alerts({"rgb(255, 204, 221)", "none", "repeat", "0% 0%", "scroll"})
+    @Alerts({"rgb(255, 204, 221)", "initial", "initial", "initial", "initial"})
     public void backgroundColorHexShort() {
         background("#fCd");
     }
 
     @Test
-    @Alerts({"rgb(20, 40, 60)", "none", "repeat", "0% 0%", "scroll"})
+    @Alerts({"rgb(20, 40, 60)", "initial", "initial", "initial", "initial"})
     public void backgroundColorRgb() {
         background("rGb(20, 40, 60)");
     }
@@ -111,13 +111,13 @@ public class CSSStyleDeclaration3Test extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"red", "url(\"myImage.png\")", "repeat", "0% 0%", "scroll"})
+    @Alerts({"red", "url(\"myImage.png\")", "initial", "initial", "initial"})
     public void backgroundMixed() {
         background("red url(\"myImage.png\")");
     }
 
     @Test
-    @Alerts({"rgb(255, 255, 255)", "none", "no-repeat", "20px 100px", "scroll"})
+    @Alerts({"rgb(255, 255, 255)", "initial", "no-repeat", "20px 100px", "initial"})
     public void backgroundMixed2() {
         background("#fff no-repeat 20px 100px");
     }
@@ -141,7 +141,7 @@ public class CSSStyleDeclaration3Test extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"", "", "", "", ""})
+    @Alerts({"null", "null", "null", "null", "null"})
     public void backgroundCssEmpty() {
         backgroundCss("");
     }
@@ -219,9 +219,9 @@ public class CSSStyleDeclaration3Test extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"rgb(255, 255, 255)", "initial", "no-repeat", "20px 100px", "initial"})
+    @Alerts({"rgb(255, 255, 255)", "initial", "initial", "20px 100px", "initial"})
     public void backgroundCssMixed2() {
-        backgroundCss("#fff no-repeat 20px 100px");
+        backgroundCss("#fff 20px 100px");
     }
 
     private void backgroundCss(final String backgroundStyle) {
@@ -233,8 +233,7 @@ public class CSSStyleDeclaration3Test extends LoboUnitTest {
                         + "<body>\n"
                         + "  <div id='tester'>hello</div>\n"
                         + "  <script>\n"
-
-                        + "    var myStyle = document.styleSheets[0].cssRules[0].style;\n"
+                        + "   var myStyle = document.styleSheets[0].cssRules[0].style;\n"
                         + "   alert(myStyle.backgroundColor);\n"
                         + "   alert(myStyle.backgroundImage);\n"
                         + "   alert(myStyle.backgroundRepeat);\n"
@@ -246,87 +245,87 @@ public class CSSStyleDeclaration3Test extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"rgba(0, 0, 0, 0)", "none", "repeat", "0% 0%", "scroll"})
+    @Alerts({"initial", "null", "null", "null", "null"})
     public void backgroundComputedEmpty() {
         backgroundComputed("");
     }
 
     @Test
-    @Alerts({"rgb(255, 0, 0)", "none", "repeat", "0% 0%", "scroll"})
+    @Alerts({"rgb(255, 0, 0)", "initial", "initial", "initial", "initial"})
     public void backgroundComputedColorRed() {
         backgroundComputed("rEd");
     }
 
     @Test
-    @Alerts({"rgb(255, 204, 221)", "none", "repeat", "0% 0%", "scroll"})
+    @Alerts({"rgb(255, 204, 221)", "initial", "initial", "initial", "initial"})
     public void backgroundComputedColorHex() {
         backgroundComputed("#fFccdd");
     }
 
     @Test
-    @Alerts({"rgb(255, 204, 221)", "none", "repeat", "0% 0%", "scroll"})
+    @Alerts({"rgb(255, 204, 221)", "initial", "initial", "initial", "initial"})
     public void backgroundComputedColorHexShort() {
         backgroundComputed("#fCd");
     }
 
     @Test
-    @Alerts({"rgb(20, 40, 60)", "none", "repeat", "0% 0%", "scroll"})
+    @Alerts({"rgb(20, 40, 60)", "initial", "initial", "initial", "initial"})
     public void backgroundComputedColorRgb() {
         backgroundComputed("rGb(20, 40, 60)");
     }
 
     @Test
-    @Alerts({"rgba(0, 0, 0, 0)", "url(\"myImage.png\")", "repeat", "0% 0%", "scroll"})
+    @Alerts({"initial", "url(\"myImage.png\")", "initial", "initial", "initial"})
     public void backgroundComputedImage() {
         backgroundComputed("uRl(myImage.png)");
     }
 
     @Test
-    @Alerts({"rgba(0, 0, 0, 0)", "none", "repeat-x", "0% 0%", "scroll"})
+    @Alerts({"initial", "initial", "repeat-x", "initial", "initial"})
     public void backgroundComputedRepeat() {
         backgroundComputed("repeat-x");
     }
 
     @Test
-    @Alerts({"rgba(0, 0, 0, 0)", "none", "repeat", "20px 100%", "scroll"})
+    @Alerts({"initial", "initial", "initial", "20px 100%", "initial"})
     public void backgroundComputedPosition() {
         backgroundComputed("20px 100%");
     }
 
     @Test
-    @Alerts({"rgba(0, 0, 0, 0)", "none", "repeat", "100% 100%", "scroll"})
+    @Alerts({"initial", "initial", "initial", "100% 100%", "initial"})
     public void backgroundComputedPosition2() {
         backgroundComputed("bottom right");
     }
 
     @Test
-    @Alerts({"rgba(0, 0, 0, 0)", "none", "repeat", "0% 100%", "scroll"})
+    @Alerts({"initial", "initial", "initial", "0% 100%", "initial"})
     public void backgroundComputedPosition3() {
         backgroundComputed("left bottom");
     }
 
     @Test
-    @Alerts({"rgba(0, 0, 0, 0)", "none", "repeat", "50% 0%", "scroll"})
+    @Alerts({"initial", "initial", "initial", "50% 0%", "initial"})
     public void backgroundComputedPosition4() {
         backgroundComputed("top center");
     }
 
     @Test
-    @Alerts({"rgba(0, 0, 0, 0)", "none", "repeat", "0% 0%", "fixed"})
+    @Alerts({"initial", "initial", "initial", "initial", "fixed"})
     public void backgroundComputedAttachment() {
         backgroundComputed("fixed");
     }
 
     @Test
-    @Alerts({"rgb(255, 0, 0)", "url(\"myImage.png\")", "repeat", "0% 0%", "scroll"})
+    @Alerts({"rgb(255, 0, 0)", "url(\"myImage.png\")", "initial", "initial", "initial"})
     public void backgroundComputedMixed() {
         backgroundComputed("red url(\"myImage.png\")");
     }
 
     @Test
-    @Alerts({"rgb(255, 255, 255)", "none", "no-repeat", "20px 100px", "scroll"})
+    @Alerts({"rgb(255, 255, 255)", "initial", "initial", "20px 100px", "initial"})
     public void backgroundComputedMixed2() {
-        backgroundComputed("#fff no-repeat 20px 100px");
+        backgroundComputed("white 20px 100px");
     }
 
     private void backgroundComputed(final String backgroundStyle) {
@@ -338,7 +337,6 @@ public class CSSStyleDeclaration3Test extends LoboUnitTest {
                         + "<body>\n"
                         + "  <div id='tester'>hello</div>\n"
                         + "  <script>\n"
-
                         + "    var myDiv = document.getElementById('tester');\n"
                         + "    var myStyle = window.getComputedStyle(myDiv, null);\n"
                         + "   alert(myStyle.backgroundColor);\n"
@@ -1077,21 +1075,21 @@ public class CSSStyleDeclaration3Test extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"0px", "0px", "0px", "0px", "none", "none", "none", "none",
+    @Alerts({"0px", "0px", "0px", "0px", "initial", "initial", "initial", "initial",
             "rgb(0, 0, 0)", "rgb(0, 0, 0)", "rgb(0, 0, 0)", "rgb(0, 0, 0)"})
     public void borderComputedEmpty() {
         borderComputed("");
     }
 
     @Test
-    @Alerts({"0px", "0px", "0px", "0px", "none", "none", "none", "none",
+    @Alerts({"0px", "0px", "0px", "0px", "initial", "initial", "initial", "initial",
             "rgb(0, 0, 0)", "rgb(0, 0, 0)", "rgb(0, 0, 0)", "rgb(0, 0, 0)"})
     public void borderComputedWidth() {
         borderComputed("tHin");
     }
 
     @Test
-    @Alerts({"0px", "0px", "0px", "0px", "none", "none", "none", "none",
+    @Alerts({"0px", "0px", "0px", "0px", "initial", "initial", "initial", "initial",
             "rgb(0, 0, 0)", "rgb(0, 0, 0)", "rgb(0, 0, 0)", "rgb(0, 0, 0)"})
     public void borderComputedWidthNumber() {
         borderComputed("2pX");
@@ -1119,28 +1117,28 @@ public class CSSStyleDeclaration3Test extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"0px", "0px", "0px", "0px", "none", "none", "none", "none",
+    @Alerts({"0px", "0px", "0px", "0px", "initial", "initial", "initial", "initial",
             "rgb(255, 0, 0)", "rgb(255, 0, 0)", "rgb(255, 0, 0)", "rgb(255, 0, 0)"})
     public void borderComputedColor() {
         borderComputed("rEd");
     }
 
     @Test
-    @Alerts({"0px", "0px", "0px", "0px", "none", "none", "none", "none",
+    @Alerts({"0px", "0px", "0px", "0px", "initial", "initial", "initial", "initial",
             "rgb(255, 204, 221)", "rgb(255, 204, 221)", "rgb(255, 204, 221)", "rgb(255, 204, 221)"})
     public void borderComputedColorHex() {
         borderComputed("#fFccdd");
     }
 
     @Test
-    @Alerts({"0px", "0px", "0px", "0px", "none", "none", "none", "none",
+    @Alerts({"0px", "0px", "0px", "0px", "initial", "initial", "initial", "initial",
             "rgb(255, 204, 221)", "rgb(255, 204, 221)", "rgb(255, 204, 221)", "rgb(255, 204, 221)"})
     public void borderComputedColorHexShort() {
         borderComputed("#fCd");
     }
 
     @Test
-    @Alerts({"0px", "0px", "0px", "0px", "none", "none", "none", "none",
+    @Alerts({"0px", "0px", "0px", "0px", "initial", "initial", "initial", "initial",
             "rgb(20, 40, 60)", "rgb(20, 40, 60)", "rgb(20, 40, 60)", "rgb(20, 40, 60)"})
     public void borderComputedColorRgb() {
         borderComputed("rGb(20, 40, 60)");

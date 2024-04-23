@@ -49,8 +49,8 @@ public class StorageEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object StorageEvent]", "storage", "false", "false", "false"})
     public void createCtor() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new StorageEvent('storage');\n"
@@ -67,8 +67,8 @@ public class StorageEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object StorageEvent]", "undefined", "false", "false", "false"})
     public void createCtorWithoutType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new StorageEvent();\n"
@@ -85,8 +85,8 @@ public class StorageEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object StorageEvent]", "42", "false", "false", "false"})
     public void createCtorNumericType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new StorageEvent(42);\n"
@@ -103,8 +103,8 @@ public class StorageEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object StorageEvent]", "null", "false", "false", "false"})
     public void createCtorNullType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new StorageEvent(null);\n"
@@ -121,8 +121,8 @@ public class StorageEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorUnknownType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new StorageEvent(unknown);\n"
@@ -139,8 +139,8 @@ public class StorageEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object StorageEvent]", "HtmlUnitEvent", "false", "false", "false"})
     public void createCtorArbitraryType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new StorageEvent('HtmlUnitEvent');\n"
@@ -157,8 +157,8 @@ public class StorageEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object StorageEvent]", "storage", "false", "false", "false"})
     public void createCtorAllDetails() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var debug = {hello: 'world'};\n"
@@ -182,8 +182,8 @@ public class StorageEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object StorageEvent]", "storage", "false", "false", "false"})
     public void createCtorAllDetailsMissingData() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new StorageEvent('storage', {\n"
@@ -201,8 +201,8 @@ public class StorageEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object StorageEvent]", "storage", "false", "false", "false"})
     public void createCtorAllDetailsWrongData() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new StorageEvent('storage', {\n"

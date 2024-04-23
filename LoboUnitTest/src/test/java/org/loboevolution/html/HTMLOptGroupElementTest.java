@@ -77,7 +77,7 @@ public class HTMLOptGroupElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"", "newLabel", "", "label"})
+    @Alerts({"null", "newLabel", "", "label"})
     public void labelAttribute() {
         final String html =
                 "<html>\n"

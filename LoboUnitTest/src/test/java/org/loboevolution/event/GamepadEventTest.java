@@ -41,8 +41,8 @@ public class GamepadEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object GamepadEvent]", "gamepad", "false", "false", "false"})
     public void createCtor() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new GamepadEvent('gamepad');\n"
@@ -59,8 +59,8 @@ public class GamepadEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorWithoutType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new GamepadEvent();\n"
@@ -77,8 +77,8 @@ public class GamepadEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object GamepadEvent]", "42", "false", "false", "false"})
     public void createCtorNumericType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new GamepadEvent(42);\n"
@@ -95,8 +95,8 @@ public class GamepadEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object GamepadEvent]", "null", "false", "false", "false"})
     public void createCtorNullType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new GamepadEvent(null);\n"
@@ -113,8 +113,8 @@ public class GamepadEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorUnknownType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new GamepadEvent(unknown);\n"
@@ -131,8 +131,8 @@ public class GamepadEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object GamepadEvent]", "HtmlUnitEvent", "false", "false", "false"})
     public void createCtorArbitraryType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new GamepadEvent('HtmlUnitEvent');\n"
@@ -149,8 +149,8 @@ public class GamepadEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object GamepadEvent]", "gamepad", "false", "false", "false"})
     public void createCtorAllDetails() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new GamepadEvent('gamepad', {\n"
@@ -169,8 +169,8 @@ public class GamepadEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object GamepadEvent]", "gamepad", "false", "false", "false"})
     public void createCtorAllDetailsMissingData() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new GamepadEvent('gamepad', {\n"
@@ -188,8 +188,8 @@ public class GamepadEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object GamepadEvent]", "gamepad", "false", "false", "false"})
     public void createCtorAllDetailsWrongData() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new GamepadEvent('gamepad', {\n"

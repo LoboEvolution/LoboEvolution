@@ -100,7 +100,6 @@ public class CSSSelectorTest extends LoboUnitTest {
                 + " alert(document.querySelectorAll('li:nth-child(2n+1)')[0].id);\n"
                 + " alert(document.querySelectorAll('li:nth-child(2n+1)')[1].id);\n"
                 + " alert(document.querySelectorAll('li:nth-child(2n-1)')[0].id);\n"
-
                 + " alert(document.querySelectorAll('li:nth-child(-n+2)').length);\n"
                 + " alert(document.querySelectorAll('li:nth-child(-n+2)')[0].id);\n"
                 + " alert(document.querySelectorAll('li:nth-child(-n+2)')[1].id);\n"
@@ -152,7 +151,6 @@ public class CSSSelectorTest extends LoboUnitTest {
                 + " alert(document.querySelectorAll('html > body').length);\n"
                 + " alert(document.querySelectorAll('html > body')[0]);\n"
                 + " alert(document.querySelectorAll('  \\t\\r\\n  html > body  \\t\\r\\n  ').length);\n"
-
                 + "  elem = document.getElementById('root');\n"
                 + " alert(elem.querySelectorAll('html > body').length);\n"
                 + "}\n"
@@ -192,7 +190,6 @@ public class CSSSelectorTest extends LoboUnitTest {
     public void nthChildEquation() {
         final String html
                 =  "<html><head><script>\n"
-
                 + "function test() {\n"
                 + "  var list = document.querySelectorAll('li:nth-child(3n+1)');\n"
                 + "  for (var i = 0 ; i < list.length; i++) {\n"
@@ -223,7 +220,6 @@ public class CSSSelectorTest extends LoboUnitTest {
     public void invalid() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function test() {\n"
                 + "  try {\n"
                 + "   alert(document.querySelectorAll('td:gt(4)').length);\n"
@@ -757,17 +753,14 @@ public class CSSSelectorTest extends LoboUnitTest {
                 + " alert(document.querySelectorAll('.nthchild1 > :nth-last-child(odd)').length);\n"
                 + " alert(document.querySelectorAll('.nthchild1 > :nth-last-child(odd)')[0].id);\n"
                 + " alert(document.querySelectorAll('.nthchild1 > :nth-last-child(odd)')[1].id);\n"
-
                 + "  elem = document.getElementById('root');\n"
                 + " alert(elem.querySelectorAll('.nthchild1 > :nth-last-child(odd)').length);\n"
                 + " alert(elem.querySelectorAll('.nthchild1 > :nth-last-child(odd)')[0].id);\n"
                 + " alert(elem.querySelectorAll('.nthchild1 > :nth-last-child(odd)')[1].id);\n"
-
                 + "  elem = document.getElementById('parent');\n"
                 + " alert(elem.querySelectorAll('.nthchild1 > :nth-last-child(odd)').length);\n"
                 + " alert(elem.querySelectorAll('.nthchild1 > :nth-last-child(odd)')[0].id);\n"
                 + " alert(elem.querySelectorAll('.nthchild1 > :nth-last-child(odd)')[1].id);\n"
-
                 + "  elem = document.getElementById('div1');\n"
                 + " alert(elem.querySelectorAll('.nthchild1 > :nth-last-child(odd)').length);\n"
                 + "}\n"
@@ -859,7 +852,6 @@ public class CSSSelectorTest extends LoboUnitTest {
                 + "  var list = document.querySelectorAll('input[type=checkbox]:checked');\n"
                 + " alert(list.length);\n"
                 + " alert(list[0].id);\n"
-
                 + "  var list = document.querySelectorAll('#t2 > input[type=checkbox]:checked');\n"
                 + " alert(list.length);\n"
                 + " alert(list[0].id);\n"
@@ -885,7 +877,6 @@ public class CSSSelectorTest extends LoboUnitTest {
                 + "  var list = document.querySelectorAll('input[type=radio]:checked');\n"
                 + " alert(list.length);\n"
                 + " alert(list[0].id);\n"
-
                 + "  var list = document.querySelectorAll('#t2 > input[type=radio]:checked');\n"
                 + " alert(list.length);\n"
                 + " alert(list[0].id);\n"
@@ -1190,17 +1181,14 @@ public class CSSSelectorTest extends LoboUnitTest {
                 + "   alert(res.length);\n"
                 + "   alert(res[0].id);\n"
                 + "   alert(res[1].id);\n"
-
                 + "    res = document.querySelectorAll('div:not(div:nth-of-type(2))');\n"
                 + "   alert(res.length);\n"
                 + "   alert(res[0].id);\n"
                 + "   alert(res[1].id);\n"
-
                 + "    res = document.querySelectorAll('div:not(div:nth-of-type(3))');\n"
                 + "   alert(res.length);\n"
                 + "   alert(res[0].id);\n"
                 + "   alert(res[1].id);\n"
-
                 + "    res = document.querySelectorAll('div:not(div:nth-of-type(4))');\n"
                 + "   alert(res.length);\n"
                 + "   alert(res[0].id);\n"
@@ -1252,17 +1240,14 @@ public class CSSSelectorTest extends LoboUnitTest {
                 + "   alert(res.length);\n"
                 + "   alert(res[0].id);\n"
                 + "   alert(res[1].id);\n"
-
                 + "    res = document.querySelectorAll('div:not(div:nth-last-of-type(2))');\n"
                 + "   alert(res.length);\n"
                 + "   alert(res[0].id);\n"
                 + "   alert(res[1].id);\n"
-
                 + "    res = document.querySelectorAll('div:not(div:nth-last-of-type(3))');\n"
                 + "   alert(res.length);\n"
                 + "   alert(res[0].id);\n"
                 + "   alert(res[1].id);\n"
-
                 + "    res = document.querySelectorAll('div:not(div:nth-last-of-type(4))');\n"
                 + "   alert(res.length);\n"
                 + "   alert(res[0].id);\n"
@@ -1465,7 +1450,6 @@ public class CSSSelectorTest extends LoboUnitTest {
                 + "  found = document.querySelectorAll(':checked');\n"
                 + " alert(found.length);\n"
                 + "  for (var i = 0; i < found.length; i++) {alert(found[i].id); }\n"
-
                 + "  document.getElementById('cb1').checked = false;\n"
                 + "  document.getElementById('cb2').checked = true;\n"
                 + "  document.getElementById('rd1').checked = false;\n"
@@ -1495,7 +1479,6 @@ public class CSSSelectorTest extends LoboUnitTest {
                 + "  found = document.querySelectorAll('[checked]');\n"
                 + " alert(found.length);\n"
                 + "  for (var i = 0; i < found.length; i++) {alert(found[i].id); }\n"
-
                 + "  document.getElementById('cb1').checked = false;\n"
                 + "  document.getElementById('cb2').checked = true;\n"
                 + "  document.getElementById('rd1').checked = false;\n"
@@ -1527,7 +1510,6 @@ public class CSSSelectorTest extends LoboUnitTest {
                 + " alert(sel.length + '-' + sel[0].id);\n"
                 + "  sel = document.querySelectorAll(':checked');\n"
                 + " alert(sel.length + '-' + sel[0].id);\n"
-
                 + "  document.getElementById('iz').selected = 'selected';\n"
                 + " alert(document.getElementById('s1').selectedIndex);\n"
                 + "  var sel = document.querySelectorAll('[selected]');\n"
@@ -1718,9 +1700,7 @@ public class CSSSelectorTest extends LoboUnitTest {
                 + "  <input id='first' class='foo bar'>\n"
                 + "  <input id='second' class='foo\tbar'>\n"
                 + "  <input id='third' class='foo\r\nbar'>\n"
-
                 + "  <input id='third' class='foobar foo'>\n"
-
                 + "  <input id='third' class='foobar'>\n"
                 + "  <input id='third' class='abcfoobar'>\n"
                 + "<script>\n"
@@ -1765,7 +1745,6 @@ public class CSSSelectorTest extends LoboUnitTest {
                 + "try {\n"
                 + " alert(document.querySelectorAll('#silly\\\\:id\\\\:\\\\:with\\\\:colons')[0].id);\n"
                 + " alert(document.querySelectorAll(\"#silly\\\\:id\\\\:\\\\:with\\\\:colons\")[0].id);\n"
-
                 + " alert(document.querySelectorAll('#silly\\\\~id')[0].id);\n"
                 + " alert(document.querySelectorAll(\"#silly\\\\~id\")[0].id);\n"
                 + "} catch(e) {alert('exception ' + e)}\n"
@@ -2011,19 +1990,15 @@ public class CSSSelectorTest extends LoboUnitTest {
                 + "  var xmlDoc = parser.parseFromString(xmlString, 'text/xml');\n"
                 + "  var de = xmlDoc.documentElement;\n"
                 + "  try {\n"
-
                 + "    var res = de.querySelectorAll('result');\n"
                 + "   alert(res.length);\n"
                 + "   alert(res[0].innerHTML);\n"
                 + "   alert(res[1].innerHTML);\n"
-
                 + "    res = de.querySelectorAll('RESULT');\n"
                 + "   alert(res.length);\n"
                 + "   alert(res[0].innerHTML);\n"
-
                 + "    res = de.querySelectorAll('resulT');\n"
                 + "   alert(res.length);\n"
-
                 + "    res = de.querySelectorAll('rEsulT');\n"
                 + "   alert(res.length);\n"
                 + "  } catch(e) {alert('exception ' + e)}\n"
@@ -2060,28 +2035,22 @@ public class CSSSelectorTest extends LoboUnitTest {
                 + "  var xmlDoc = parser.parseFromString(xmlString, 'text/xml');\n"
                 + "  var de = xmlDoc.documentElement;\n"
                 + "  try {\n"
-
                 + "    var res = de.querySelectorAll('RESULT');\n"
                 + "   alert(res.length);\n"
                 + "   alert(res[0].innerHTML);\n"
                 + "   alert(res[1].innerHTML);\n"
-
                 + "    res = de.querySelectorAll('RESULT[THINGER]');\n"
                 + "   alert(res.length);\n"
-
                 + "    res = de.querySelectorAll('RESULT[thinger]');\n"
                 + "   alert(res.length);\n"
                 + "   alert(res[0].innerHTML);\n"
                 + "   alert(res[1].innerHTML);\n"
-
                 + "    res = de.querySelectorAll('RESULT[thinger=blah]');\n"
                 + "   alert(res.length);\n"
                 + "   alert(res[0].innerHTML);\n"
-
                 + "    res = de.querySelectorAll('RESULT > CHILD');\n"
                 + "   alert(res.length);\n"
                 + "   alert(res[0].innerHTML);\n"
-
                 + "  } catch(e) {alert('exception ' + e)}\n"
                 + "</script></body></html>";
 
@@ -2090,7 +2059,7 @@ public class CSSSelectorTest extends LoboUnitTest {
 
     @Test
     @Alerts({"exception", "exception"})
-    public void querySelector_invalid() {
+    public void querySelectorInvalid() {
         final String html = "<html><head>\n"
                 + "<script>\n"
                 + "function test() {\n"
@@ -2126,17 +2095,14 @@ public class CSSSelectorTest extends LoboUnitTest {
                 + " alert(list.length);\n"
                 + " alert(list[0].innerHTML);\n"
                 + " alert(list[1].innerHTML );\n"
-
                 + "  var list = document.querySelectorAll('button[type=\"SubMit\"]');\n"
                 + " alert(list.length);\n"
                 + " alert(list[0].innerHTML);\n"
                 + " alert(list[1].innerHTML );\n"
-
                 + "  var list = document.querySelectorAll('button[type=\"SUBmit\"]');\n"
                 + " alert(list.length);\n"
                 + " alert(list[0].innerHTML);\n"
                 + " alert(list[1].innerHTML );\n"
-
                 + "  var list = document.querySelectorAll('button[type=\"SUBmit\" i]');\n"
                 + " alert(list.length);\n"
                 + " alert(list[0].innerHTML);\n"

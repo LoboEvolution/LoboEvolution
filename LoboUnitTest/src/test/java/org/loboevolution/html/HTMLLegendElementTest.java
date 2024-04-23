@@ -40,11 +40,11 @@ public class HTMLLegendElementTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts({"", "A", "a", "A", "a8", "8Afoo", "8", "@"})
+    @Alerts({"null", "A", "a", "A", "a8", "8Afoo", "8", "@"})
     public void accessKey() {
         final String html
-                = "<html><body><legend id='a1'>a1</legend><legend id='a2' accesskey='A'>a2</legend><script>\n"
-
+                = "<html><body><legend id='a1'>a1</legend><legend id='a2' accesskey='A'>a2</legend>"
+                +"<script>\n"
                 + "var a1 = document.getElementById('a1'), a2 = document.getElementById('a2');\n"
                 + "alert(a1.accessKey);\n"
                 + "alert(a2.accessKey);\n"
@@ -70,7 +70,6 @@ public class HTMLLegendElementTest extends LoboUnitTest {
     public void form() {
         final String html
                 = "<html><body><form><fieldset><legend id='a'>a</legend></fieldset></form><script>\n"
-
                 + "alert(document.getElementById('a').form);\n"
                 + "</script></body></html>";
 
@@ -90,7 +89,6 @@ public class HTMLLegendElementTest extends LoboUnitTest {
                 + "    <legend id='i5' align='wrong' ></legend>\n"
                 + "    <legend id='i6' ></legend>\n"
                 + "  </fieldset></form>\n"
-
                 + "    <script>\n"
                 + "  for (var i = 1; i <= 6; i++) {\n"
                 + "    alert(document.getElementById('i' + i).align);\n"
@@ -109,7 +107,6 @@ public class HTMLLegendElementTest extends LoboUnitTest {
                 + "  <form><fieldset>\n"
                 + "    <legend id='i1' align='left' ></legend>\n"
                 + "  </fieldset></form>\n"
-
                 + "    <script>\n"
                 + "  function setAlign(elem, value) {\n"
                 + "    try {\n"
@@ -117,13 +114,10 @@ public class HTMLLegendElementTest extends LoboUnitTest {
                 + "    } catch (e) { alert('error'); }\n"
                 + "    alert(elem.align);\n"
                 + "  }\n"
-
                 + "  var elem = document.getElementById('i1');\n"
                 + "  setAlign(elem, 'CenTer');\n"
-
                 + "  setAlign(elem, '8');\n"
                 + "  setAlign(elem, 'foo');\n"
-
                 + "  setAlign(elem, 'left');\n"
                 + "  setAlign(elem, 'right');\n"
                 + "  setAlign(elem, 'bottom');\n"

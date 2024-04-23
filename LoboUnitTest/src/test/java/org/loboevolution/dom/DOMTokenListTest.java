@@ -43,7 +43,6 @@ public class DOMTokenListTest extends LoboUnitTest {
     public void various() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function test() {\n"
                 + "  var list = document.body.classList;\n"
                 + " alert(list.length);\n"
@@ -66,7 +65,6 @@ public class DOMTokenListTest extends LoboUnitTest {
     public void noAttribute() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function test() {\n"
                 + "  var list = document.body.classList;\n"
                 + " alert(list.length);\n"
@@ -86,7 +84,6 @@ public class DOMTokenListTest extends LoboUnitTest {
     public void noAttributeAdd() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function test() {\n"
                 + "  var list = document.body.classList;\n"
                 + " alert(list.length);\n"
@@ -105,7 +102,6 @@ public class DOMTokenListTest extends LoboUnitTest {
     public void noAttributeToggle() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function test() {\n"
                 + "  var list = document.body.classList;\n"
                 + " alert(list.length);\n"
@@ -124,7 +120,6 @@ public class DOMTokenListTest extends LoboUnitTest {
     public void length() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function test() {\n"
                 + "  var list = document.getElementById('d1').classList;\n"
                 + " alert(list.length);\n"
@@ -150,7 +145,6 @@ public class DOMTokenListTest extends LoboUnitTest {
     public void item() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function test() {\n"
                 + "  var list = document.getElementById('d1').classList;\n"
                 + "  for (var i = 0; i < list.length; i++) {\n"
@@ -203,7 +197,6 @@ public class DOMTokenListTest extends LoboUnitTest {
                 + "<script>\n"
                 + "  function test() {\n"
                 + "    var elem = document.getElementById('d1');\n"
-
                 + "    var config = { attributes: true, attributeOldValue: true };\n"
                 + "    var observer = new MutationObserver(function(mutations) {\n"
                 + "      mutations.forEach(function(mutation) {\n"
@@ -214,7 +207,6 @@ public class DOMTokenListTest extends LoboUnitTest {
 
                 + "    var list = elem.classList;\n"
                 + "    if (!list) {alert('no list'); return; }\n"
-
                 + "   alert(elem.className);\n"
                 + "   alert(list.length);\n"
                 + "    try {\n"
@@ -328,9 +320,9 @@ public class DOMTokenListTest extends LoboUnitTest {
     private void contains(final String in, final String toAdd) {
         final String html
                 = "<html><head>\n"
-                + "<script>\n"                + "  function test() {\n"
+               + "<script>\n"
+                + "  function test() {\n"
                 + "    var elem = document.getElementById('d1');\n"
-
                 + "    var config = { attributes: true, attributeOldValue: true };\n"
                 + "    var observer = new MutationObserver(function(mutations) {\n"
                 + "      mutations.forEach(function(mutation) {\n"
@@ -341,7 +333,6 @@ public class DOMTokenListTest extends LoboUnitTest {
 
                 + "    var list = elem.classList;\n"
                 + "    if (!list) {alert('no list'); return; }\n"
-
                 + "   alert(elem.className);\n"
                 + "   alert(list.length);\n"
                 + "    try {\n"
@@ -452,7 +443,6 @@ public class DOMTokenListTest extends LoboUnitTest {
                 + "<script>\n"
                 + "  function test() {\n"
                 + "    var elem = document.getElementById('d1');\n"
-
                 + "    var config = { attributes: true, attributeOldValue: true };\n"
                 + "    var observer = new MutationObserver(function(mutations) {\n"
                 + "      mutations.forEach(function(mutation) {\n"
@@ -463,7 +453,6 @@ public class DOMTokenListTest extends LoboUnitTest {
 
                 + "    var list = elem.classList;\n"
                 + "    if (!list) {alert('no list'); return; }\n"
-
                 + "   alert(elem.className);\n"
                 + "   alert(list.length);\n"
                 + "    try {\n"
@@ -490,7 +479,6 @@ public class DOMTokenListTest extends LoboUnitTest {
                 + "    var elem = document.getElementById('myId');\n"
                 + "    var list = elem.classList;\n"
                 + "    if (!list) {alert('no list'); return; }\n"
-
                 + "   alert(list.length);\n"
                 + "    try {\n"
                 + "      list.add('new');\n"
@@ -518,7 +506,6 @@ public class DOMTokenListTest extends LoboUnitTest {
                 + "function test() {\n"
                 + "  var div1 = document.getElementById('d1');\n"
                 + "  var list = div1.classList;\n"
-
                 + " alert(getComputedStyle(div1, null).display);\n"
                 + "  list.add('hidden');\n"
                 + " alert(getComputedStyle(div1, null).display);\n"
@@ -623,7 +610,6 @@ public class DOMTokenListTest extends LoboUnitTest {
                 + "<script>\n"
                 + "  function test() {\n"
                 + "    var elem = document.getElementById('d1');\n"
-
                 + "    var config = { attributes: true, attributeOldValue: true };\n"
                 + "    var observer = new MutationObserver(function(mutations) {\n"
                 + "      mutations.forEach(function(mutation) {\n"
@@ -634,7 +620,6 @@ public class DOMTokenListTest extends LoboUnitTest {
 
                 + "    var list = elem.classList;\n"
                 + "    if (!list) {alert('no list'); return; }\n"
-
                 + "   alert(elem.className);\n"
                 + "   alert(list.length);\n"
                 + "    try {\n"
@@ -663,7 +648,6 @@ public class DOMTokenListTest extends LoboUnitTest {
                 + "function test() {\n"
                 + "  var div1 = document.getElementById('d1');\n"
                 + "  var list = div1.classList;\n"
-
                 + " alert(getComputedStyle(div1, null).display);\n"
                 + "  list.remove('hidden');\n"
                 + " alert(getComputedStyle(div1, null).display);\n"
@@ -683,10 +667,8 @@ public class DOMTokenListTest extends LoboUnitTest {
     public void toggle() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function test() {\n"
                 + "  var elem = document.getElementById('d1');\n"
-
                 + "    var config = { attributes: true, attributeOldValue: true };\n"
                 + "    var observer = new MutationObserver(function(mutations) {\n"
                 + "      mutations.forEach(function(mutation) {\n"
@@ -751,10 +733,8 @@ public class DOMTokenListTest extends LoboUnitTest {
                 + "  var div1 = document.getElementById('d1');\n"
                 + "  var list = div1.classList;\n"
                 + " alert(getComputedStyle(div1, null).display);\n"
-
                 + "  list.toggle('hidden');\n"
                 + " alert(getComputedStyle(div1, null).display);\n"
-
                 + "  list.toggle('hidden');\n"
                 + " alert(getComputedStyle(div1, null).display);\n"
                 + "}\n"

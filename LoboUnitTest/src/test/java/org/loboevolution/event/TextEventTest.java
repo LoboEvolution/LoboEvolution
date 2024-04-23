@@ -40,8 +40,8 @@ public class TextEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtor() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new TextEvent('text');\n"
@@ -58,8 +58,8 @@ public class TextEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorWithoutType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new TextEvent();\n"
@@ -76,8 +76,8 @@ public class TextEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorNumericType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new TextEvent(42);\n"
@@ -94,8 +94,8 @@ public class TextEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorNullType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new TextEvent(null);\n"
@@ -112,8 +112,8 @@ public class TextEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorUnknownType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new TextEvent(unknown);\n"
@@ -130,8 +130,8 @@ public class TextEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorArbitraryType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new TextEvent('HtmlUnitEvent');\n"
@@ -148,8 +148,8 @@ public class TextEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorAllDetails() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var debug = {hello: 'world'};\n"
@@ -169,8 +169,8 @@ public class TextEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorAllDetailsMissingData() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new TextEvent('text', {\n"
@@ -188,8 +188,8 @@ public class TextEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorAllDetailsWrongData() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new TextEvent('text', {\n"

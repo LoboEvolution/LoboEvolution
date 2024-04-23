@@ -40,8 +40,8 @@ public class TouchEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object TouchEvent]", "touch", "false", "false", "false"})
     public void createCtor() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new TouchEvent('touch');\n"
@@ -58,8 +58,8 @@ public class TouchEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorWithoutType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new TouchEvent();\n"
@@ -76,8 +76,8 @@ public class TouchEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object TouchEvent]", "42", "false", "false", "false"})
     public void createCtorNumericType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new TouchEvent(42);\n"
@@ -94,8 +94,8 @@ public class TouchEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object TouchEvent]", "null", "false", "false", "false"})
     public void createCtorNullType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new TouchEvent(null);\n"
@@ -112,8 +112,8 @@ public class TouchEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorUnknownType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new TouchEvent(unknown);\n"
@@ -130,8 +130,8 @@ public class TouchEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object TouchEvent]", "HtmlUnitEvent", "false", "false", "false"})
     public void createCtorArbitraryType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new TouchEvent('HtmlUnitEvent');\n"
@@ -148,8 +148,8 @@ public class TouchEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object TouchEvent]", "touch", "false", "false", "false"})
     public void createCtorAllDetails() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var debug = {hello: 'world'};\n"
@@ -175,8 +175,8 @@ public class TouchEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object TouchEvent]", "touch", "false", "false", "false"})
     public void createCtorAllDetailsMissingData() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new TouchEvent('touch', {\n"
@@ -194,8 +194,8 @@ public class TouchEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorAllDetailsWrongData() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new TouchEvent('touch', {\n"

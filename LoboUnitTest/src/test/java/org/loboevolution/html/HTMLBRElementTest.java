@@ -39,7 +39,7 @@ import org.loboevolution.html.dom.HTMLBRElement;
 public class HTMLBRElementTest extends LoboUnitTest {
 
     @Test
-    @Alerts({"", "left", "all", "right", "none", "2", "foo", "left",
+    @Alerts({"null", "left", "all", "right", "none", "2", "foo", "left",
             "none", "right", "all", "2", "abc", "8"})
     public void clear() {
         final String html
@@ -93,11 +93,11 @@ public class HTMLBRElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("<br id=\"myId\">")
+    @Alerts("<BR id=\"myId\"/>")
     public void outerHTML() {
         final String html
-                = "<html><head><script>\n"
-
+                = "<html><head>"
+                +"<script>\n"
                 + "function doTest() {\n"
                 + "  alert(document.getElementById('myId').outerHTML);\n"
                 + "}\n"

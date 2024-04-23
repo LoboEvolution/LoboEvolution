@@ -157,7 +157,7 @@ public class HTMLImageElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("")
+    @Alerts("null")
     public void getSrcNewImagesrcNotSet() {
         final String html
                 = "<html><head>\n"
@@ -193,7 +193,8 @@ public class HTMLImageElementTest extends LoboUnitTest {
     public void setSrcNewImage() {
         final String html
                 = "<html><head>\n"
-                + "<script>\n"                + "function doTest() {\n"
+                + "<script>\n"
+                + "function doTest() {\n"
                 + "  var preloadImage = new Image();\n"
                 + "  preloadImage.onload = alert('onLoad');\n"
                 + "  preloadImage.src = 'bar.gif';\n"
@@ -210,7 +211,8 @@ public class HTMLImageElementTest extends LoboUnitTest {
     public void attributeName() {
         final String html
                 = "<html><head>\n"
-                + "<script>\n"                + "function test() {\n"
+                + "<script>\n"
+                + "function test() {\n"
                 + "  var oImg = document.getElementById('myImage');\n"
                 + "  oImg.name = 'foo';\n"
                 + "  alert(oImg.name);\n"
@@ -223,7 +225,7 @@ public class HTMLImageElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"true", "relative", "", ""})
+    @Alerts({"true", "relative", "null", "null"})
     public void newImage() {
         final String html
                 = "<html><head>\n"
@@ -244,7 +246,7 @@ public class HTMLImageElementTest extends LoboUnitTest {
 
     @Test
     @Alerts({"left", "right", "center", "justify", "bottom", "middle",
-            "top", "absbottom", "absmiddle", "baseline", "texttop", "wrong", ""})
+            "top", "absbottom", "absmiddle", "baseline", "texttop", "wrong", "null"})
     public void getAlign() {
         final String html
                 = "<html><body>\n"
@@ -261,7 +263,8 @@ public class HTMLImageElementTest extends LoboUnitTest {
                 + "  <img id='i11' align='texttop' />\n"
                 + "  <img id='i12' align='wrong' />\n"
                 + "  <img id='i13' />\n"
-                + "<script>\n"                + "  for (var i = 1; i <= 13; i++) {\n"
+                + "<script>\n"
+                + "  for (var i = 1; i <= 13; i++) {\n"
                 + "    alert(document.getElementById('i' + i).align);\n"
                 + "  }\n"
                 + "</script>\n"
@@ -277,7 +280,6 @@ public class HTMLImageElementTest extends LoboUnitTest {
         final String html
                 = "<html><body>\n"
                 + "  <img id='i1' align='left' />\n"
-
                 + "    <script>\n"
                 + "  function setAlign(elem, value) {\n"
                 + "    try {\n"
@@ -285,13 +287,10 @@ public class HTMLImageElementTest extends LoboUnitTest {
                 + "    } catch (e) { alert('error'); }\n"
                 + "    alert(elem.align);\n"
                 + "  }\n"
-
                 + "  var elem = document.getElementById('i1');\n"
                 + "  setAlign(elem, 'CenTer');\n"
-
                 + "  setAlign(elem, '8');\n"
                 + "  setAlign(elem, 'foo');\n"
-
                 + "  setAlign(elem, 'left');\n"
                 + "  setAlign(elem, 'right');\n"
                 + "  setAlign(elem, 'center');\n"
@@ -365,7 +364,8 @@ public class HTMLImageElementTest extends LoboUnitTest {
     public void widthHeightEmptySource() {
 
         final String html = "<html><head>\n"
-                + "<script>\n"                + "  function showInfo(imageId) {\n"
+                + "<script>\n"
+                + "  function showInfo(imageId) {\n"
                 + "    var img = document.getElementById(imageId);\n"
                 + "    alert(typeof(img.width) + ': ' + img.width);\n"
                 + "    alert(typeof(img.height) + ': ' + img.height);\n"
@@ -441,7 +441,8 @@ public class HTMLImageElementTest extends LoboUnitTest {
     @Alerts({"true", "true", "true", "true"})
     public void complete() {
         final String html = "<html><head>\n"
-                + "<script>\n"                + "  function showInfo(imageId) {\n"
+                + "<script>\n"
+                + "  function showInfo(imageId) {\n"
                 + "    var img = document.getElementById(imageId);\n"
                 + "    alert(img.complete);\n"
                 + "  }\n"
@@ -466,7 +467,8 @@ public class HTMLImageElementTest extends LoboUnitTest {
     @Alerts({"error2;error3;error4;load5;", "3"})
     public void onload() {
         final String html = "<html><head>\n"
-                + "<script>\n"                + "  function showInfo(text) {\n"
+                + "<script>\n"
+                + "  function showInfo(text) {\n"
                 + "    document.title += text + ';';\n"
                 + "  }\n"
                 + "</script>\n"
@@ -486,7 +488,8 @@ public class HTMLImageElementTest extends LoboUnitTest {
     @Alerts({"load;", "2"})
     public void emptyMimeType() {
         final String html = "<html><head>\n"
-                + "<script>\n"                + "  function showInfo(text) {\n"
+                + "<script>\n"
+                + "  function showInfo(text) {\n"
                 + "    document.title += text + ';';\n"
                 + "  }\n"
                 + "</script>\n"
@@ -502,7 +505,8 @@ public class HTMLImageElementTest extends LoboUnitTest {
     @Alerts({"load;", "2"})
     public void wrongMimeType() {
         final String html = "<html><head>\n"
-                + "<script>\n"                + "  function showInfo(text) {\n"
+                + "<script>\n"
+                + "  function showInfo(text) {\n"
                 + "    document.title += text + ';';\n"
                 + "  }\n"
                 + "</script>\n"
@@ -577,7 +581,8 @@ public class HTMLImageElementTest extends LoboUnitTest {
     @Alerts("myImageWithMap clicked")
     public void clickWithMap() {
         final String html = "<html><head>\n"
-                + "<script>\n"                + "  function test() {\n"
+               + "<script>\n"
+                + "  function test() {\n"
                 + "    document.getElementById('myImageWithMap').click();\n"
                 + "  }\n"
                 + "</script>\n"
@@ -624,7 +629,6 @@ public class HTMLImageElementTest extends LoboUnitTest {
                 = "<html>\n"
                 + "  <head>\n"
                 + "    <script>\n"
-
                 + "      function doTest() {\n"
                 + "        try {\n"
                 + "          var htmlImageElement = new HTMLImageElement(1, 1);"

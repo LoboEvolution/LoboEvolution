@@ -40,7 +40,7 @@ public class HTMLHRElementTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts({"left", "right", "center", "wrong", ""})
+    @Alerts({"left", "right", "center", "wrong", "null"})
     public void getAlign() {
         final String html
                 = "<html><body>\n"
@@ -49,7 +49,6 @@ public class HTMLHRElementTest extends LoboUnitTest {
                 + "  <hr id='h3' align='center' />\n"
                 + "  <hr id='h4' align='wrong' />\n"
                 + "  <hr id='h5' />\n"
-
                 + "    <script>\n"
                 + "  for (var i = 1; i <= 5; i++) {\n"
                 + "    alert(document.getElementById('h' + i).align);\n"
@@ -66,7 +65,6 @@ public class HTMLHRElementTest extends LoboUnitTest {
         final String html
                 = "<html><body>\n"
                 + "  <hr id='h1' align='left' />\n"
-
                 + "    <script>\n"
                 + "  function setAlign(elem, value) {\n"
                 + "    try {\n"
@@ -74,13 +72,10 @@ public class HTMLHRElementTest extends LoboUnitTest {
                 + "    } catch (e) { alert('error'); }\n"
                 + "    alert(elem.align);\n"
                 + "  }\n"
-
                 + "  var elem = document.getElementById('h1');\n"
                 + "  setAlign(elem, 'CenTer');\n"
-
                 + "  setAlign(elem, '8');\n"
                 + "  setAlign(elem, 'foo');\n"
-
                 + "  setAlign(elem, 'left');\n"
                 + "  setAlign(elem, 'right');\n"
                 + "  setAlign(elem, 'center');\n"

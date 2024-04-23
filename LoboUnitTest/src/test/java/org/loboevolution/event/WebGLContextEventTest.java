@@ -41,8 +41,8 @@ public class WebGLContextEventTest extends LoboUnitTest {
     @Test
     @Alerts({"1", "2", "3"})
     public void constants() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "     alert(WebGLContextEvent.CAPTURING_PHASE);\n"

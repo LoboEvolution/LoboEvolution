@@ -44,7 +44,8 @@ public class CSSTest extends LoboUnitTest {
         final String html
                 = "<html><body>\n"
                 + "<style>@charset 'UTF-8';</style>\n"
-                + "<script>\n"                + "  try {\n"
+                + "<script>\n"
+                + "  try {\n"
                 + "   alert(CSS);"
                 + "   alert(CSS.prototype);"
                 + "  } catch (e) {alert('Exception'); }\n"
@@ -61,7 +62,8 @@ public class CSSTest extends LoboUnitTest {
         final String html
                 = "<html><body>\n"
                 + "<style>@charset 'UTF-8';</style>\n"
-                + "<script>\n"                + "  try {\n"
+                + "<script>\n"
+                + "  try {\n"
                 + "    var o = Object.create(CSS.prototype);\n"
                 + "   alert(o);"
                 + "  } catch (e) {alert('ctor Exception'); }\n"
@@ -77,7 +79,8 @@ public class CSSTest extends LoboUnitTest {
     public void supports() {
         final String html
                 = "<html><body>\n"
-                + "<script>\n"                + "  try {\n"
+                + "<script>\n"
+                + "  try {\n"
                 + "   alert(CSS.supports('display', 'flex'));"
                 + "   alert(CSS.supports('display', 'grid'));"
                 + "   alert(CSS.supports('color', 'red'));"
@@ -94,7 +97,8 @@ public class CSSTest extends LoboUnitTest {
     public void supportsCondition() {
         final String html
                 = "<html><body>\n"
-                + "<script>\n"                + "  try {\n"
+                + "<script>\n"
+                + "  try {\n"
                 + "   alert(CSS.supports('display: flex'));"
                 + "   alert(CSS.supports('color: red'));"
                 + "  } catch (e) {alert('Exception'); }\n"
@@ -110,7 +114,8 @@ public class CSSTest extends LoboUnitTest {
     public void supportsSelector() {
         final String html
                 = "<html><body>\n"
-                + "<script>\n"                + "  try {\n"
+                + "<script>\n"
+                + "  try {\n"
                 + "   alert(CSS.supports('selector(div)'));"
                 + "   alert(CSS.supports('selector(div, span)'));"
                 + "  } catch (e) {alert('Exception'); }\n"

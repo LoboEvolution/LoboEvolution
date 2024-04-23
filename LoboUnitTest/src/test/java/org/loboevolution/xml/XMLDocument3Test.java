@@ -88,7 +88,8 @@ public class XMLDocument3Test extends LoboUnitTest {
     public void parseUtf8Encoding() {
         final String html = "<html>\n"
                 + "  <head>\n"
-                + "<script>\n"                + "  function test(encoding) {\n"
+                + "<script>\n"
+                + "  function test(encoding) {\n"
                 + "    var text=\"<?xml version='1.0' encoding='\" + encoding + \"'?><body>Д</body>\";\n"
                 + "    var doc=" + callLoadXMLDocumentFromString("text") + ";\n"
                 + "    var value = doc.documentElement.firstChild.nodeValue;\n"

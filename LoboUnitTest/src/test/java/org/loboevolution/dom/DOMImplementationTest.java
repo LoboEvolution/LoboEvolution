@@ -214,8 +214,8 @@ public class DOMImplementationTest extends LoboUnitTest {
     @Test
     @Alerts("[object XMLDocument]")
     public void createDocument() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "   alert(document.implementation.createDocument('', '', null));\n"
                 + "  }\n"
@@ -228,8 +228,8 @@ public class DOMImplementationTest extends LoboUnitTest {
     @Test
     @Alerts({"mydoc", "null", "mydoc", "null"})
     public void createDocument_qualifiedName() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    var doc = document.implementation.createDocument('', 'mydoc', null);\n"
                 + "   alert(doc.documentElement.tagName);\n"
@@ -246,8 +246,8 @@ public class DOMImplementationTest extends LoboUnitTest {
     @Test
     @Alerts({"mydoc", "null", "mydoc", "http://mynamespace"})
     public void createDocumentNamespaceAndQualifiedName() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    var doc = document.implementation.createDocument('http://mynamespace', 'mydoc', null);\n"
                 + "   alert(doc.documentElement.tagName);\n"
@@ -264,8 +264,8 @@ public class DOMImplementationTest extends LoboUnitTest {
     @Test
     @Alerts({"m:mydoc", "m", "mydoc", "http://mynamespace"})
     public void createDocumentNamespaceAndQualifiedNameWithPrefix() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    var doc = document.implementation.createDocument('http://mynamespace', 'm:mydoc', null);\n"
                 + "   alert(doc.documentElement.tagName);\n"
@@ -283,9 +283,8 @@ public class DOMImplementationTest extends LoboUnitTest {
     @Alerts({"[object HTMLDocument]", "undefined"})
     public void createHTMLDocument() {
         final String html = "<html>\n"
-                + "<head>\n"
-                + "  <script>\n"
-
+                + "<head>\n"  
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var doc = document.implementation.createHTMLDocument();\n"
@@ -305,9 +304,8 @@ public class DOMImplementationTest extends LoboUnitTest {
     @Alerts({"[object HTMLDocument]", "newdoctitle"})
     public void createHTMLDocumentTitle() {
         final String html = "<html>\n"
-                + "<head>\n"
-                + "  <script>\n"
-
+                + "<head>\n"  
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var doc = document.implementation.createHTMLDocument('newdoctitle');\n"
@@ -327,9 +325,8 @@ public class DOMImplementationTest extends LoboUnitTest {
     @Alerts({"[object HTMLDocument]", ""})
     public void createHTMLDocumentTitleEmpty() {
         final String html = "<html>\n"
-                + "<head>\n"
-                + "  <script>\n"
-
+                + "<head>\n"  
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var doc = document.implementation.createHTMLDocument('');\n"
@@ -349,9 +346,8 @@ public class DOMImplementationTest extends LoboUnitTest {
     @Alerts("2")
     public void createHTMLDocument_jQuery() {
         final String html = "<html>\n"
-                + "<head>\n"
-                + "  <script>\n"
-
+                + "<head>\n"  
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var doc = document.implementation.createHTMLDocument('');\n"
@@ -371,9 +367,8 @@ public class DOMImplementationTest extends LoboUnitTest {
     @Alerts("createdElement")
     public void createHTMLDocumentCreateElement() {
         final String html = "<html>\n"
-                + "<head>\n"
-                + "  <script>\n"
-
+                + "<head>\n"  
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var doc = document.implementation.createHTMLDocument('');\n"
@@ -396,20 +391,17 @@ public class DOMImplementationTest extends LoboUnitTest {
             "<html><head><title>abc</title></head><body></body></html>"})
     public void createHTMLDocumentHtmlCode() {
         final String html = "<html>\n"
-                + "<head>\n"
-                + "  <script>\n"
-
+                + "<head>\n"  
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var doc = document.implementation.createHTMLDocument();\n"
                 + "     alert(doc.documentElement.outerHTML);\n"
                 + "    } catch(e) {alert('exception'); }\n"
-
                 + "    try {\n"
                 + "      var doc = document.implementation.createHTMLDocument('');\n"
                 + "     alert(doc.documentElement.outerHTML);\n"
                 + "    } catch(e) {alert('exception'); }\n"
-
                 + "    try {\n"
                 + "      var doc = document.implementation.createHTMLDocument('abc');\n"
                 + "     alert(doc.documentElement.outerHTML);\n"
@@ -428,9 +420,8 @@ public class DOMImplementationTest extends LoboUnitTest {
             + "<body><p>This is a new paragraph.</p></body></html>")
     public void createHTMLDocumentAddParagraph() {
         final String html = "<html>\n"
-                + "<head>\n"
-                + "  <script>\n"
-
+                + "<head>\n"  
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var doc = document.implementation.createHTMLDocument('test');\n"
@@ -452,9 +443,8 @@ public class DOMImplementationTest extends LoboUnitTest {
     @Alerts("<html><head><title>test</title></head><body><p>Hello</p></body></html>")
     public void createHTMLDocumentInnerAddParagraph() {
         final String html = "<html>\n"
-                + "<head>\n"
-                + "  <script>\n"
-
+                + "<head>\n"  
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var doc = document.implementation.createHTMLDocument('test');\n"
@@ -474,9 +464,8 @@ public class DOMImplementationTest extends LoboUnitTest {
     @Alerts("<html><head><title>test</title></head><body><img src=\"x\" onerror=\"alert(1)\"></body></html>")
     public void createHTMLDocumentInnerAddImg() {
         final String html = "<html>\n"
-                + "<head>\n"
-                + "  <script>\n"
-
+                + "<head>\n"  
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var doc = document.implementation.createHTMLDocument('test');\n"
@@ -531,7 +520,6 @@ public class DOMImplementationTest extends LoboUnitTest {
                 + "      var frame = document.getElementById('theFrame');\n"
                 + "      var doc = document.implementation.createHTMLDocument('test');\n"
                 + "      doc.body.innerHTML = '<img src=\"x\" onerror=\"window.parent.document.title += 1\">';\n"
-
                 + "      var destDocument = frame.contentDocument;\n"
                 + "      var srcNode = doc.documentElement;\n"
                 + "      document.title += 'before import;';\n"

@@ -84,63 +84,53 @@ public class CSSStyleDeclaration2Test extends LoboUnitTest {
         final String props = "'" + String.join("', '", properties) + "'";
         final String html
                 = "<html><head><script>\n"
-
                 + "function test() {\n"
                 + "  var properties = [" + props + "];\n"
                 + "\n"
                 + "  for (var prop in properties) {\n"
                 + "    prop = properties[prop];\n"
                 + "    var result = '';\n"
-
                 + "    var node = document.createElement('div');\n"
                 + "    if (node.style[prop] != '') {\n"
                 + "      if (result == '') { result += prop } else { result += '; ' }\n"
                 + "      result += ' initial ' + node.style[prop];\n"
                 + "    }\n"
-
                 + "    node.style[prop] = '42.0';\n"
                 + "    if (node.style[prop] != '42px') {\n"
                 + "      if (result == '') { result += prop } else { result += ';' }\n"
                 + "      result += ' 42.0 - ' + node.style[prop];\n"
                 + "    }\n"
-
                 + "    node.style[prop] = '42.7';\n"
                 + "    var expected = document.all ? '42px' : '42.7px';\n"
                 + "    if (node.style[prop] != expected) {\n"
                 + "      if (result == '') { result += prop } else { result += ';' }\n"
                 + "      result += ' 42.7 - ' + node.style[prop];\n"
                 + "    }\n"
-
                 + "    node.style[prop] = '42';\n"
                 + "    if (node.style[prop] != '42px') {\n"
                 + "      if (result == '') { result += prop } else { result += ';' }\n"
                 + "      result += ' 42 - ' + node.style[prop];\n"
                 + "    }\n"
-
                 + "    node.style[prop] = '42px';\n"
                 + "    if (node.style[prop] != '42px') {\n"
                 + "      if (result == '') { result += prop } else { result += ';' }\n"
                 + "      result += ' 42px - ' + node.style[prop];\n"
                 + "    }\n"
-
                 + "    node.style[prop] = '42mm';\n"
                 + "    if (node.style[prop] != '42mm') {\n"
                 + "      if (result == '') { result += prop } else { result += ';' }\n"
                 + "      result += ' 42mm - ' + node.style[prop];\n"
                 + "    }\n"
-
                 + "    node.style[prop] = '42em';\n"
                 + "    if (node.style[prop] != '42em') {\n"
                 + "      if (result == '') { result += prop } else { result += ';' }\n"
                 + "      result += ' 42em - ' + node.style[prop];\n"
                 + "    }\n"
-
                 + "    node.style[prop] = '42%';\n"
                 + "    if (node.style[prop] != '42%') {\n"
                 + "      if (result == '') { result += prop } else { result += ';' }\n"
                 + "      result += ' 42% - ' + node.style[prop];\n"
                 + "    }\n"
-
                 + "   alert(result == '' ? 'success' : result);\n"
                 + "  }\n"
                 + "}\n"
@@ -173,14 +163,12 @@ public class CSSStyleDeclaration2Test extends LoboUnitTest {
         final String propValues = "'" + String.join("', '", propertyValues) + "'";
         final String html
                 = "<html><head><script>\n"
-
                 + "function test() {\n"
                 + "  var propValues = [" + propValues + "];\n"
                 + "\n"
                 + "  var node = document.createElement('div');\n"
                 + "  var styleVal = node.style." + property + ";\n"
                 + " alert(styleVal);\n"
-
                 + "  propValues.forEach(propValue => {\n"
                 + "    node.style." + property + " = propValue;\n"
                 + "    styleVal = node.style." + property + ";\n"
@@ -197,14 +185,12 @@ public class CSSStyleDeclaration2Test extends LoboUnitTest {
         final String propValues = "'" + String.join("', '", propertyValues) + "'";
         final String html
                 = "<html><head><script>\n"
-
                 + "function test() {\n"
                 + "  var propValues = [" + propValues + "];\n"
                 + "\n"
                 + "  var node = document.createElement('div');\n"
                 + "  var styleVal = node.style['" + property + "'];\n"
                 + " alert(styleVal);\n"
-
                 + "  propValues.forEach(propValue => {\n"
                 + "    node.style['" + property + "'] = propValue;\n"
                 + "    styleVal = node.style['" + property + "'];\n"
@@ -270,19 +256,15 @@ public class CSSStyleDeclaration2Test extends LoboUnitTest {
                 + "<script>\n"
                 + "  function test() {\n"
                 + "    var style = document.body.style;\n"
-
                 + "    if (typeof Symbol != 'undefined') {\n"
                 + "     alert(style[Symbol.iterator]);\n"
                 + "    }\n"
-
                 + "    if (!style.forEach) {\n"
                 + "     alert('no for..of');\n"
                 + "    }\n"
-
                 + "    if (typeof Symbol === 'undefined') {\n"
                 + "      return;\n"
                 + "    }\n"
-
                 + "    for (var i of style) {\n"
                 + "     alert(i);\n"
                 + "    }\n"

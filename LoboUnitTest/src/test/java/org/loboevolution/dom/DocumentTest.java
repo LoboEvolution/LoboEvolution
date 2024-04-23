@@ -1640,7 +1640,9 @@ public class DocumentTest extends LoboUnitTest {
         +  "  if (!document.foo) document.foo = 123;\n"
         +  " alert(document.foo);\n"
         +  "</script>\n"
-        +  "</form>\n" + "</body>\n" + "</html>";
+        +  "</form>\n" 
+                + "</body>\n" 
+                + "</html>";
 
         checkHtmlAlert(html);
     }
@@ -1811,7 +1813,8 @@ public class DocumentTest extends LoboUnitTest {
                 "<html>\n"
                 +  "  <body onload='test()'>\n"
                 +  "    <div id='d' onclick='var c = arguments.callee.caller;alert(c ? c.name : c)'>abc</div>\n"
-                +  "    <script>\n"                +  "      function test() {\n"
+                +  "    <script>\n"
+                +  "      function test() {\n"
                 +  "        try {\n"
                 +  "          var event = document.createEvent('MouseEvents');\n"
                 +  "          event.initMouseEvent('click', true, true, window,\n"
@@ -2067,7 +2070,8 @@ public class DocumentTest extends LoboUnitTest {
                 +  "  </head>\n"
                 +  "  <body>\n"
                 +  "    <iframe id='i'></iframe>\n"
-                +  "    <script>\n"                +  "     alert('1: ' + document.getElementById('i').contentWindow.document.body);\n"
+                +  "    <script>\n"
+                +  "     alert('1: ' + document.getElementById('i').contentWindow.document.body);\n"
                 +  "      window.onload = function() {\n"
                 +  "       alert('2: ' + document.getElementById('i').contentWindow.document.body);\n"
                 +  "      };\n"
@@ -2089,7 +2093,8 @@ public class DocumentTest extends LoboUnitTest {
         +  "     alert(document.ownerDocument);\n"
         +  "    }\n"
         +  "  </script>\n"
-        +  "</body>\n" + "</html>";
+        +  "</body>\n" 
+                + "</html>";
 
         checkHtmlAlert(html);
     }
@@ -2108,7 +2113,8 @@ public class DocumentTest extends LoboUnitTest {
         +  "      } elsealert('-');\n"
         +  "    }\n"
         +  "  </script>\n"
-        +  "</body>\n" + "</html>";
+        +  "</body>\n" 
+                + "</html>";
 
         checkHtmlAlert(html);
     }

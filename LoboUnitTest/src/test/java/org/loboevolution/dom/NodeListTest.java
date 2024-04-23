@@ -42,7 +42,8 @@ public class NodeListTest extends LoboUnitTest {
     @Alerts("[object NodeList]")
     public void defaultValue() {
         final String html =  "<html><head>\n"
-                + "<script>\n"                + "  function test() {\n"
+               + "<script>\n"
+                + "  function test() {\n"
                 + "   alert(document.getElementById('myId').firstChild.childNodes);\n"
                 + "  }\n"
                 + "</script>\n"
@@ -64,7 +65,6 @@ public class NodeListTest extends LoboUnitTest {
                 + "   alert(0 in nodeList);\n"
                 + "   alert(3 in nodeList);\n"
                 + "   alert(4 in nodeList);\n"
-
                 + "   alert('entries' in nodeList);\n"
                 + "   alert('forEach' in nodeList);\n"
                 + "   alert('item' in nodeList);\n"
@@ -88,7 +88,6 @@ public class NodeListTest extends LoboUnitTest {
                 + "  function test() {\n"
                 + "    var nodeList = document.querySelectorAll('*');\n"
                 + "   alert(nodeList.length);\n"
-
                 + "   alert('length' in nodeList);\n"
                 + "   alert(Object.getOwnPropertyDescriptor(nodeList, 'length'));\n"
                 + "  }\n"
@@ -197,16 +196,13 @@ public class NodeListTest extends LoboUnitTest {
                 + "<script>\n"
                 + "  function test() {\n"
                 + "    var nodeList = document.querySelectorAll('*');\n"
-
                 + "    if (typeof Symbol != 'undefined') {\n"
                 + "     alert(nodeList[Symbol.iterator] === nodeList.values);\n"
                 + "    }\n"
-
                 + "    if (!nodeList.forEach) {\n"
                 + "     alert('no for..of');\n"
                 + "      return;\n"
                 + "    }\n"
-
                 + "    for (var i of nodeList) {\n"
                 + "     alert(i);\n"
                 + "    }\n"
@@ -281,10 +277,8 @@ public class NodeListTest extends LoboUnitTest {
                 + "<script>\n"
                 + "  function test() {\n"
                 + "    var nodeList = document.querySelectorAll('*');\n"
-
                 + "   alert('entries' in nodeList);\n"
                 + "   alert(Object.getOwnPropertyDescriptor(nodeList, 'entries'));\n"
-
                 + "    var desc = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(nodeList), 'entries');\n"
                 + "    if (desc === undefined) {alert('no entries'); return; }\n"
                 + "   alert(typeof desc.value);\n"
@@ -357,10 +351,8 @@ public class NodeListTest extends LoboUnitTest {
                 + "<script>\n"
                 + "  function test() {\n"
                 + "    var nodeList = document.querySelectorAll('*');\n"
-
                 + "   alert('keys' in nodeList);\n"
                 + "   alert(Object.getOwnPropertyDescriptor(nodeList, 'keys'));\n"
-
                 + "    var desc = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(nodeList), 'keys');\n"
                 + "    if (desc === undefined) {alert('no keys'); return; }\n"
                 + "   alert(typeof desc.value);\n"
@@ -407,7 +399,6 @@ public class NodeListTest extends LoboUnitTest {
                 + "  function test() {\n"
                 + "    var nodeList = document.querySelectorAll('*');\n"
                 + "   alert(Object.keys(nodeList));\n"
-
                 + "    nodeList = document.querySelectorAll('.notThere');\n"
                 + "   alert(Object.keys(nodeList));\n"
                 + "  }\n"
@@ -451,10 +442,8 @@ public class NodeListTest extends LoboUnitTest {
                 + "<script>\n"
                 + "  function test() {\n"
                 + "    var nodeList = document.querySelectorAll('*');\n"
-
                 + "   alert('values' in nodeList);\n"
                 + "   alert(Object.getOwnPropertyDescriptor(nodeList, 'values'));\n"
-
                 + "    var desc = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(nodeList), 'values');\n"
                 + "    if (desc === undefined) {alert('no values'); return; }\n"
                 + "   alert(typeof desc.value);\n"
@@ -500,19 +489,15 @@ public class NodeListTest extends LoboUnitTest {
         final String html = "<html><body>\n"
                 + "<script>\n"
                 + "  if (Object.getOwnPropertySymbols) {\n"
-
                 + "    var nodeList = document.querySelectorAll('*');\n"
-
                 + "    var objectSymbols = Object.getOwnPropertySymbols(nodeList);\n"
                 + "   alert(objectSymbols.length);\n"
-
                 + "    var objectNames = Object.getOwnPropertyNames(nodeList);\n"
                 + "   alert(objectNames.length);\n"
                 + "   alert(objectNames[0]);\n"
                 + "   alert(objectNames[1]);\n"
                 + "   alert(objectNames[2]);\n"
                 + "   alert(objectNames[3]);\n"
-
                 + "  } else {alert('not defined'); }\n"
                 + "</script>\n"
                 + "</body>\n"
@@ -527,15 +512,11 @@ public class NodeListTest extends LoboUnitTest {
         final String html = "<html><body>\n"
                 + "<script>\n"
                 + "  if (Object.getOwnPropertySymbols) {\n"
-
                 + "    var nodeList = document.querySelectorAll('.notThere');\n"
-
                 + "    var objectSymbols = Object.getOwnPropertySymbols(nodeList);\n"
                 + "   alert(objectSymbols.length);\n"
-
                 + "    var objectNames = Object.getOwnPropertyNames(nodeList);\n"
                 + "   alert(objectNames.length);\n"
-
                 + "  } else {alert('not defined'); }\n"
                 + "</script>\n"
                 + "</body>\n"

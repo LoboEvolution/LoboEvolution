@@ -43,7 +43,8 @@ public class XMLSerializerTest extends LoboUnitTest {
             "<html xmlns=\"http://www.w3.org/1999/xhtml\"><body id=\"bodyId\"></body></html>"})
     public void xhtmlDocument() {
         final String html = "<html><head>\n"
-                + "<script>\n" + "function test() {\n"
+                + "<script>\n" 
+                + "function test() {\n"
                 + "  var doc = document.implementation.createDocument('http://www.w3.org/1999/xhtml', 'html', null);\n"
                 + "  var body = document.createElementNS('http://www.w3.org/1999/xhtml', 'body');\n"
                 + "  body.setAttribute('id', 'bodyId');\n"
@@ -61,7 +62,8 @@ public class XMLSerializerTest extends LoboUnitTest {
             "<html xmlns=\"http://www.w3.org/1999/xhtml\"><body xmlns=\"\" id=\"bodyId\"/></html>"})
     public void xhtmlDocumentBodyEmptyNamespace() {
         final String html = "<html><head>\n"
-                + "<script>\n" + "function test() {\n"
+                + "<script>\n" 
+                + "function test() {\n"
                 + "  var doc = document.implementation.createDocument('http://www.w3.org/1999/xhtml', 'html', null);\n"
                 + "  var body = document.createElementNS('', 'body');\n"
                 + "  body.setAttribute('id', 'bodyId');\n"
@@ -80,7 +82,8 @@ public class XMLSerializerTest extends LoboUnitTest {
             "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Body/></soap:Envelope>"})
     public void soapTest() {
         final String html = "<html><head>\n"
-                + "<script>\n" + "function test() {\n"
+                + "<script>\n" 
+                + "function test() {\n"
                 + "  var dom = document.implementation.createDocument('http://schemas.xmlsoap.org/soap/envelope/', 'soap:Envelope', null);\n"
                 + "  var soapEnv = dom.documentElement;\n"
                 + "  soapBody = dom.createElementNS('http://schemas.xmlsoap.org/soap/envelope/', 'Body');\n"
@@ -97,7 +100,8 @@ public class XMLSerializerTest extends LoboUnitTest {
     @Alerts({"<foo/>", "<foo/>"})
     public void document() {
         final String html = "<html><head>\n"
-                + "<script>\n"                + "function test() {\n"
+                + "<script>\n"
+                + "function test() {\n"
                 + "  var doc = document.implementation.createDocument('', 'foo', null);\n"
                 + " alert(new XMLSerializer().serializeToString(doc));\n"
                 + " alert(new XMLSerializer().serializeToString(doc.documentElement));\n"
@@ -111,7 +115,8 @@ public class XMLSerializerTest extends LoboUnitTest {
     @Alerts("#")
     public void emptyDocumentFragment() {
         final String html = "<html><head>\n"
-                + "<script>\n"                + "function test() {\n"
+                + "<script>\n"
+                + "function test() {\n"
                 + "  var fragment = document.createDocumentFragment();\n"
                 + " alert('#' + new XMLSerializer().serializeToString(fragment));\n"
                 + "}\n"
@@ -124,17 +129,15 @@ public class XMLSerializerTest extends LoboUnitTest {
     @Alerts("<h1 xmlns=\"http://www.w3.org/1999/xhtml\">HtmlUnit</h1><h2 xmlns=\"http://www.w3.org/1999/xhtml\">is great</h2>")
     public void documentFragment() {
         final String html = "<html><head>\n"
-                + "<script>\n"                + "function test() {\n"
+                + "<script>\n"
+                + "function test() {\n"
                 + "  var fragment = document.createDocumentFragment();\n"
-
                 + "  var heading = document.createElement('h1');\n"
                 + "  heading.textContent = 'HtmlUnit';\n"
                 + "  fragment.appendChild(heading);\n"
-
                 + "  heading = document.createElement('h2');\n"
                 + "  heading.textContent = 'is great';\n"
                 + "  fragment.appendChild(heading);\n"
-
                 + " alert(new XMLSerializer().serializeToString(fragment));\n"
                 + "}\n"
                 + "</script></head><body onload='test()'>\n"
@@ -146,7 +149,8 @@ public class XMLSerializerTest extends LoboUnitTest {
     @Alerts({"<img/>", "<img xmlns=\"http://www.w3.org/1999/xhtml\" />", "<?myTarget myData?>"})
     public void xml() {
         final String html = "<html><head>\n"
-                + "<script>\n"                + "  function test() {\n"
+               + "<script>\n"
+                + "  function test() {\n"
                 + "    var doc = document.implementation.createDocument('', '', null);\n"
                 + "    testFragment(doc);\n"
                 + "    testFragment(document);\n"
@@ -168,7 +172,8 @@ public class XMLSerializerTest extends LoboUnitTest {
     @Alerts("<root><my:parent xmlns:my=\"myUri\"><my:child/><another_child/></my:parent></root>")
     public void namespace() {
         final String html = "<html><head>\n"
-                + "<script>\n"                + "  function test() {\n"
+               + "<script>\n"
+                + "  function test() {\n"
                 + "    var doc = document.implementation.createDocument('', '', null);\n"
                 + "    var root = doc.createElement('root');\n"
                 + "    doc.appendChild(root);\n"
@@ -192,7 +197,8 @@ public class XMLSerializerTest extends LoboUnitTest {
     @Alerts("<textarea xmlns=\"http://www.w3.org/1999/xhtml\"></textarea>")
     public void mixedCase() {
         final String html = "<html><head>\n"
-                + "<script>\n"                + "  function test() {\n"
+               + "<script>\n"
+                + "  function test() {\n"
                 + "    var t = document.createElement('teXtaREa');\n"
                 + "   alert(new XMLSerializer().serializeToString(t));\n"
                 + "  }\n"
@@ -212,7 +218,8 @@ public class XMLSerializerTest extends LoboUnitTest {
             "<meta xmlns=\"http://www.w3.org/1999/xhtml\" />"})
     public void noClosingTag() {
         final String html = "<html><head>\n"
-                + "<script>\n"                + "  function test() {\n"
+               + "<script>\n"
+                + "  function test() {\n"
                 + "    var t = document.createElement('area');\n"
                 + "   alert(new XMLSerializer().serializeToString(t));\n"
                 + "    var t = document.createElement('base');\n"
@@ -239,7 +246,8 @@ public class XMLSerializerTest extends LoboUnitTest {
     @Alerts("<input xmlns=\"http://www.w3.org/1999/xhtml\" />")
     public void inputTagWithoutType() {
         final String html = "<html><head>\n"
-                + "<script>\n"                + "  function test() {\n"
+               + "<script>\n"
+                + "  function test() {\n"
                 + "    var t = document.createElement('input');\n"
                 + "   alert(new XMLSerializer().serializeToString(t));\n"
                 + "  }\n"
@@ -256,7 +264,8 @@ public class XMLSerializerTest extends LoboUnitTest {
             "<textarea xmlns=\"http://www.w3.org/1999/xhtml\"></textarea>"})
     public void otherTags() {
         final String html = "<html><head>\n"
-                + "<script>\n"                + "  function test() {\n"
+               + "<script>\n"
+                + "  function test() {\n"
                 + "    var t = document.createElement('div');\n"
                 + "   alert(new XMLSerializer().serializeToString(t));\n"
                 + "    var t = document.createElement('h1');\n"
@@ -277,7 +286,8 @@ public class XMLSerializerTest extends LoboUnitTest {
     @Alerts("<img xmlns=\"http://www.w3.org/1999/xhtml\" href=\"mypage.htm\" />")
     public void noClosingTagWithAttribute() {
         final String html = "<html><head>\n"
-                + "<script>\n"                + "  function test() {\n"
+               + "<script>\n"
+                + "  function test() {\n"
                 + "    var t = document.createElement('img');\n"
                 + "    t.setAttribute('href', 'mypage.htm');\n"
                 + "   alert(new XMLSerializer().serializeToString(t));\n"

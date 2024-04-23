@@ -44,7 +44,6 @@ public class CharacterDataTest extends LoboUnitTest {
     public void textNode() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function doTest() {\n"
                 + "  var div1=document.getElementById('div1');\n"
                 + "  var text1=div1.firstChild;\n"
@@ -127,27 +126,22 @@ public class CharacterDataTest extends LoboUnitTest {
                 + "function doTest() {\n"
                 + "  var div1=document.getElementById('div1');\n"
                 + "  var text1=div1.firstChild;\n"
-
                 + "  try {\n"
                 + "    text1.deleteData(5, 11);\n"
                 + "   alert(text1.data);\n"
                 + "  } catch (e) {alert('exception') }\n"
-
                 + "  try {\n"
                 + "    text1.deleteData(4, 5);\n"
                 + "   alert(text1.data);\n"
                 + "  } catch (e) {alert('exception') }\n"
-
                 + "  try {\n"
                 + "    text1.deleteData(1, 0);\n"
                 + "   alert(text1.data);\n"
                 + "  } catch (e) {alert('exception') }\n"
-
                 + "  try {\n"
                 + "    text1.deleteData(0, 2);\n"
                 + "   alert(text1.data);\n"
                 + "  } catch (e) {alert('exception') }\n"
-
                 + "  try {\n"
                 + "    text1.deleteData(0, 2);\n"
                 + "   alert(text1.data);\n"
@@ -168,22 +162,18 @@ public class CharacterDataTest extends LoboUnitTest {
                 + "function doTest() {\n"
                 + "  var div1=document.getElementById('div1');\n"
                 + "  var text1=div1.firstChild;\n"
-
                 + "  try {\n"
                 + "    text1.deleteData(0, 1);\n"
                 + "   alert(text1.data);\n"
                 + "  } catch (e) {alert('exception') }\n"
-
                 + "  try {\n"
                 + "    text1.deleteData(0, 0);\n"
                 + "   alert(text1.data);\n"
                 + "  } catch (e) {alert('exception') }\n"
-
                 + "  try {\n"
                 + "    text1.deleteData(0, 1);\n"
                 + "   alert(text1.data);\n"
                 + "  } catch (e) {alert('exception') }\n"
-
                 + "  try {\n"
                 + "    text1.deleteData(0, -1);\n"
                 + "   alert(text1.data);\n"
@@ -208,17 +198,14 @@ public class CharacterDataTest extends LoboUnitTest {
                 + "    text1.deleteData(-1, 4);\n"
                 + "   alert(text1.data);\n"
                 + "  } catch (e) {alert('exception') }\n"
-
                 + "  try {\n"
                 + "    text1.deleteData(20, 4);\n"
                 + "   alert(text1.data);\n"
                 + "  } catch (e) {alert('exception') }\n"
-
                 + "  try {\n"
                 + "    text1.deleteData(20, 0);\n"
                 + "   alert(text1.data);\n"
                 + "  } catch (e) {alert('exception') }\n"
-
                 + "  try {\n"
                 + "    text1.deleteData(20, -18);\n"
                 + "   alert(text1.data);\n"
@@ -243,12 +230,10 @@ public class CharacterDataTest extends LoboUnitTest {
                 + "    text1.deleteData(18, -15);\n"
                 + "   alert(text1.data);\n"
                 + "  } catch (e) {alert('exception') }\n"
-
                 + "  try {\n"
                 + "    text1.deleteData(5, -4);\n"
                 + "   alert(text1.data);\n"
                 + "  } catch (e) {alert('exception') }\n"
-
                 + "  try {\n"
                 + "    text1.deleteData(2, -4);\n"
                 + "   alert(text1.data);\n"
@@ -265,7 +250,6 @@ public class CharacterDataTest extends LoboUnitTest {
     public void insertData() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function doTest() {\n"
                 + "  var div1=document.getElementById('div1');\n"
                 + "  var text1=div1.firstChild;\n"

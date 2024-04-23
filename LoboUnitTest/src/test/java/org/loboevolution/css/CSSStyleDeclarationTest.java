@@ -51,13 +51,17 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
                 + "<style>\n"
                 + "  p { background-color: #FFFFFF; }\n"
                 + "</style>\n"
-                + "<div id='myDiv' style='background-color: #FFFFFF;'></div>\n" + "<script>\n" + "  var styleSheet = document.styleSheets[0];\n"
+                + "<div id='myDiv' style='background-color: #FFFFFF;'></div>\n" 
+                + "<script>\n" 
+                + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var decl = styleSheet.cssRules[0].style;\n"
                 + " alert(Object.prototype.toString.call(decl));\n"
-                + " alert(decl);\n" + "  decl = document.getElementById('myDiv').style;\n"
+                + " alert(decl);\n" 
+                + "  decl = document.getElementById('myDiv').style;\n"
                 + " alert(Object.prototype.toString.call(decl));\n"
                 + " alert(decl);\n"
-                + "</script>\n" + "</body></html>";
+                + "</script>\n" 
+                + "</body></html>";
 
         checkHtmlAlert(html);
     }
@@ -66,13 +70,19 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     @Alerts({"background-color: rgb(255, 255, 255);", "background-color: rgb(255, 255, 255);"})
     public void cssText() {
         final String html
-                = "<html><body>\n" + "<style>\n"
+                = "<html><body>\n" 
+                + "<style>\n"
                 + "  p { background-color:#FFFFFF; }\n"
-                + "</style>\n" + "<div id='myDiv' style='background-color:#FFFFFF;'></div>\n" + "<script>\n"                + "  var styleSheet = document.styleSheets[0];\n"
+                + "</style>\n" 
+                + "<div id='myDiv' style='background-color:#FFFFFF;'></div>\n" 
+                + "<script>\n"
+                + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var decl = styleSheet.cssRules[0].style;\n"
-                + " alert(decl.cssText);\n" + "  decl = document.getElementById('myDiv').style;\n"
+                + " alert(decl.cssText);\n" 
+                + "  decl = document.getElementById('myDiv').style;\n"
                 + " alert(decl.cssText);\n"
-                + "</script>\n" + "</body></html>";
+                + "</script>\n" 
+                + "</body></html>";
 
         checkHtmlAlert(html);
     }
@@ -81,13 +91,19 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     @Alerts({"", ""})
     public void cssTextEmpty() {
         final String html
-                = "<html><body>\n" + "<style>\n"
+                = "<html><body>\n" 
+                + "<style>\n"
                 + "  p { }\n"
-                + "</style>\n" + "<div id='myDiv' style=''></div>\n" + "<script>\n"                + "  var styleSheet = document.styleSheets[0];\n"
+                + "</style>\n" 
+                + "<div id='myDiv' style=''></div>\n" 
+                + "<script>\n"
+                + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var decl = styleSheet.cssRules[0].style;\n"
-                + " alert(decl.cssText);\n" + "  decl = document.getElementById('myDiv').style;\n"
+                + " alert(decl.cssText);\n" 
+                + "  decl = document.getElementById('myDiv').style;\n"
                 + " alert(decl.cssText);\n"
-                + "</script>\n" + "</body></html>";
+                + "</script>\n" 
+                + "</body></html>";
 
         checkHtmlAlert(html);
     }
@@ -97,13 +113,19 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
             "background-color: rgb(255, 255, 255); color: red;"})
     public void cssTextMultipleProperties() {
         final String html
-                = "<html><body>\n" + "<style>\n"
+                = "<html><body>\n" 
+                + "<style>\n"
                 + "  p { background-color: #FFFFFF;color: red; }\n"
-                + "</style>\n" + "<div id='myDiv' style='background-color: #FFFFFF;color: red;'></div>\n" + "<script>\n"                + "  var styleSheet = document.styleSheets[0];\n"
+                + "</style>\n" 
+                + "<div id='myDiv' style='background-color: #FFFFFF;color: red;'></div>\n" 
+                + "<script>\n"
+                + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var decl = styleSheet.cssRules[0].style;\n"
-                + " alert(decl.cssText);\n" + "  decl = document.getElementById('myDiv').style;\n"
+                + " alert(decl.cssText);\n" 
+                + "  decl = document.getElementById('myDiv').style;\n"
                 + " alert(decl.cssText);\n"
-                + "</script>\n" + "</body></html>";
+                + "</script>\n" 
+                + "</body></html>";
 
         checkHtmlAlert(html);
     }
@@ -112,23 +134,29 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     @Alerts({"color: rgb(0, 0, 0);", "color: rgb(0, 0, 0);"})
     public void cssTextSet() {
         final String html
-                = "<html><body>\n" + "<style>\n"
+                = "<html><body>\n" 
+                + "<style>\n"
                 + "  p { background-color:#FFFFFF; }\n"
-                + "</style>\n" + "<div id='myDiv' style='background-color:#FFFFFF;'></div>\n" + "<script>\n"                + "  var styleSheet = document.styleSheets[0];\n"
+                + "</style>\n" 
+                + "<div id='myDiv' style='background-color:#FFFFFF;'></div>\n" 
+                + "<script>\n"
+                + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var decl = styleSheet.cssRules[0].style;\n"
                 + "  try {"
                 + "    decl.cssText = 'color:#000000;';\n"
                 + "   alert(decl.cssText);\n"
                 + "  } catch(e) {\n"
                 + "   alert('exception');\n"
-                + "  }\n" + "  decl = document.getElementById('myDiv').style;\n"
+                + "  }\n" 
+                + "  decl = document.getElementById('myDiv').style;\n"
                 + "  try {"
                 + "    decl.cssText = 'color:#000000;';\n"
                 + "   alert(decl.cssText);\n"
                 + "  } catch(e) {\n"
                 + "   alert('exception');\n"
                 + "  }\n"
-                + "</script>\n" + "</body></html>";
+                + "</script>\n" 
+                + "</body></html>";
 
         checkHtmlAlert(html);
     }
@@ -137,23 +165,29 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     @Alerts({"", ""})
     public void cssTextSetNull() {
         final String html
-                = "<html><body>\n" + "<style>\n"
+                = "<html><body>\n" 
+                + "<style>\n"
                 + "  p { background-color:#FFFFFF; }\n"
-                + "</style>\n" + "<div id='myDiv' style='background-color:#FFFFFF;'></div>\n" + "<script>\n"                + "  var styleSheet = document.styleSheets[0];\n"
+                + "</style>\n" 
+                + "<div id='myDiv' style='background-color:#FFFFFF;'></div>\n" 
+                + "<script>\n"
+                + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var decl = styleSheet.cssRules[0].style;\n"
                 + "  try {"
                 + "    decl.cssText = null;\n"
                 + "   alert(decl.cssText);\n"
                 + "  } catch(e) {\n"
                 + "   alert('exception');\n"
-                + "  }\n" + "  decl = document.getElementById('myDiv').style;\n"
+                + "  }\n" 
+                + "  decl = document.getElementById('myDiv').style;\n"
                 + "  try {"
                 + "    decl.cssText = null;\n"
                 + "   alert(decl.cssText);\n"
                 + "  } catch(e) {\n"
                 + "   alert('exception');\n"
                 + "  }\n"
-                + "</script>\n" + "</body></html>";
+                + "</script>\n" 
+                + "</body></html>";
 
         checkHtmlAlert(html);
     }
@@ -162,23 +196,29 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     @Alerts({"", ""})
     public void cssTextSetEmpty() {
         final String html
-                = "<html><body>\n" + "<style>\n"
+                = "<html><body>\n" 
+                + "<style>\n"
                 + "  p { background-color:#FFFFFF; }\n"
-                + "</style>\n" + "<div id='myDiv' style='background-color:#FFFFFF;'></div>\n" + "<script>\n"                + "  var styleSheet = document.styleSheets[0];\n"
+                + "</style>\n" 
+                + "<div id='myDiv' style='background-color:#FFFFFF;'></div>\n" 
+                + "<script>\n"
+                + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var decl = styleSheet.cssRules[0].style;\n"
                 + "  try {"
                 + "    decl.cssText = '';\n"
                 + "   alert(decl.cssText);\n"
                 + "  } catch(e) {\n"
                 + "   alert('exception');\n"
-                + "  }\n" + "  decl = document.getElementById('myDiv').style;\n"
+                + "  }\n" 
+                + "  decl = document.getElementById('myDiv').style;\n"
                 + "  try {"
                 + "    decl.cssText = '';\n"
                 + "   alert(decl.cssText);\n"
                 + "  } catch(e) {\n"
                 + "   alert('exception');\n"
                 + "  }\n"
-                + "</script>\n" + "</body></html>";
+                + "</script>\n" 
+                + "</body></html>";
 
         checkHtmlAlert(html);
     }
@@ -187,23 +227,29 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     @Alerts({"", ""})
     public void cssTextSetInvalid() {
         final String html
-                = "<html><body>\n" + "<style>\n"
+                = "<html><body>\n" 
+                + "<style>\n"
                 + "  p { background-color:#FFFFFF; }\n"
-                + "</style>\n" + "<div id='myDiv' style='background-color:#FFFFFF;'></div>\n" + "<script>\n"                + "  var styleSheet = document.styleSheets[0];\n"
+                + "</style>\n" 
+                + "<div id='myDiv' style='background-color:#FFFFFF;'></div>\n" 
+                + "<script>\n"
+                + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var decl = styleSheet.cssRules[0].style;\n"
                 + "  try {"
                 + "    decl.cssText = 'abc';\n"
                 + "   alert(decl.cssText);\n"
                 + "  } catch(e) {\n"
                 + "   alert('exception');\n"
-                + "  }\n" + "  decl = document.getElementById('myDiv').style;\n"
+                + "  }\n" 
+                + "  decl = document.getElementById('myDiv').style;\n"
                 + "  try {"
                 + "    decl.cssText = 'abc';\n"
                 + "   alert(decl.cssText);\n"
                 + "  } catch(e) {\n"
                 + "   alert('exception');\n"
                 + "  }\n"
-                + "</script>\n" + "</body></html>";
+                + "</script>\n" 
+                + "</body></html>";
 
         checkHtmlAlert(html);
     }
@@ -212,13 +258,19 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     @Alerts({"1", "1"})
     public void length() {
         final String html
-                = "<html><body>\n" + "<style>\n"
+                = "<html><body>\n" 
+                + "<style>\n"
                 + "  p { background-color:#FFFFFF; }\n"
-                + "</style>\n" + "<div id='myDiv' style='background-color:#FFFFFF;'></div>\n" + "<script>\n"                + "  var styleSheet = document.styleSheets[0];\n"
+                + "</style>\n" 
+                + "<div id='myDiv' style='background-color:#FFFFFF;'></div>\n" 
+                + "<script>\n"
+                + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var decl = styleSheet.cssRules[0].style;\n"
-                + " alert(decl.length);\n" + "  decl = document.getElementById('myDiv').style;\n"
+                + " alert(decl.length);\n" 
+                + "  decl = document.getElementById('myDiv').style;\n"
                 + " alert(decl.length);\n"
-                + "</script>\n" + "</body></html>";
+                + "</script>\n" 
+                + "</body></html>";
 
         checkHtmlAlert(html);
     }
@@ -227,13 +279,19 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     @Alerts({"0", "0"})
     public void lengthEmpty() {
         final String html
-                = "<html><body>\n" + "<style>\n"
+                = "<html><body>\n" 
+                + "<style>\n"
                 + "  p { }\n"
-                + "</style>\n" + "<div id='myDiv' style=''></div>\n" + "<script>\n"                + "  var styleSheet = document.styleSheets[0];\n"
+                + "</style>\n" 
+                + "<div id='myDiv' style=''></div>\n" 
+                + "<script>\n"
+                + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var decl = styleSheet.cssRules[0].style;\n"
-                + " alert(decl.length);\n" + "  decl = document.getElementById('myDiv').style;\n"
+                + " alert(decl.length);\n" 
+                + "  decl = document.getElementById('myDiv').style;\n"
                 + " alert(decl.length);\n"
-                + "</script>\n" + "</body></html>";
+                + "</script>\n" 
+                + "</body></html>";
 
         checkHtmlAlert(html);
     }
@@ -242,13 +300,19 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     @Alerts({"2", "2"})
     public void lengthMultipleProperties() {
         final String html
-                = "<html><body>\n" + "<style>\n"
+                = "<html><body>\n" 
+                + "<style>\n"
                 + "  p { background-color:#FFFFFF;color: red; }\n"
-                + "</style>\n" + "<div id='myDiv' style='background-color:#FFFFFF;color: red;'></div>\n" + "<script>\n"                + "  var styleSheet = document.styleSheets[0];\n"
+                + "</style>\n" 
+                + "<div id='myDiv' style='background-color:#FFFFFF;color: red;'></div>\n" 
+                + "<script>\n"
+                + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var decl = styleSheet.cssRules[0].style;\n"
-                + " alert(decl.length);\n" + "  decl = document.getElementById('myDiv').style;\n"
+                + " alert(decl.length);\n" 
+                + "  decl = document.getElementById('myDiv').style;\n"
                 + " alert(decl.length);\n"
-                + "</script>\n" + "</body></html>";
+                + "</script>\n" 
+                + "</body></html>";
 
         checkHtmlAlert(html);
     }
@@ -257,23 +321,29 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     @Alerts({"1", "1"})
     public void lengthSet() {
         final String html
-                = "<html><body>\n" + "<style>\n"
+                = "<html><body>\n" 
+                + "<style>\n"
                 + "  p { background-color:#FFFFFF; }\n"
-                + "</style>\n" + "<div id='myDiv' style='background-color:#FFFFFF;'></div>\n" + "<script>\n"                + "  var styleSheet = document.styleSheets[0];\n"
+                + "</style>\n" 
+                + "<div id='myDiv' style='background-color:#FFFFFF;'></div>\n" 
+                + "<script>\n"
+                + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var decl = styleSheet.cssRules[0].style;\n"
                 + "  try {"
                 + "    decl.length = 2;\n"
                 + "   alert(decl.length);\n"
                 + "  } catch(e) {\n"
                 + "   alert('exception');\n"
-                + "  }\n" + "  decl = document.getElementById('myDiv').style;\n"
+                + "  }\n" 
+                + "  decl = document.getElementById('myDiv').style;\n"
                 + "  try {"
                 + "    decl.length = 2;\n"
                 + "   alert(decl.length);\n"
                 + "  } catch(e) {\n"
                 + "   alert('exception');\n"
                 + "  }\n"
-                + "</script>\n" + "</body></html>";
+                + "</script>\n" 
+                + "</body></html>";
 
         checkHtmlAlert(html);
     }
@@ -282,13 +352,19 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     @Alerts({"[object CSSStyleRule]", "null"})
     public void parentRule() {
         final String html
-                = "<html><body>\n" + "<style>\n"
-                + "  p { background-color:#FFFFFF; };\n"
-                + "</style>\n" + "<div id='myDiv' style='background-color:#FFFFFF;'></div>\n" + "<script>\n" + "  var styleSheet = document.styleSheets[0];\n"
+                = "<html><body>\n" 
+                + "<style>\n"
+                + "  p { background-color:#FFFFFF; }\n"
+                + "</style>\n" 
+                + "<div id='myDiv' style='background-color:#FFFFFF;'></div>\n" 
+                + "<script>\n" 
+                + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var decl = styleSheet.cssRules[0].style;\n"
-                + " alert(decl.parentRule);\n" + "  decl = document.getElementById('myDiv').style;\n"
+                + " alert(decl.parentRule);\n" 
+                + "  decl = document.getElementById('myDiv').style;\n"
                 + " alert(decl.parentRule);\n"
-                + "</script>\n" + "</body></html>";
+                + "</script>\n" 
+                + "</body></html>";
 
         checkHtmlAlert(html);
     }
@@ -297,10 +373,14 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     @Alerts({"[object CSSStyleRule]", "p", "null"})
     public void parentRuleSet() {
         final String html
-                = "<html><body>\n" + "<style>\n"
-                + "  p { background-color:#FFFFFF; };\n"
-                + "  div { color:#000000; };\n"
-                + "</style>\n" + "<div id='myDiv' style='background-color:#FFFFFF;'></div>\n" + "<script>\n" + "  var styleSheet = document.styleSheets[0];\n"
+                = "<html><body>\n" 
+                + "<style>\n"
+                + "  p { background-color:#FFFFFF; }\n"
+                + "  div { color:#000000; }\n"
+                + "</style>\n" 
+                + "<div id='myDiv' style='background-color:#FFFFFF;'></div>\n" 
+                + "<script>\n" 
+                + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var decl = styleSheet.cssRules[0].style;\n"
                 + "  try {"
                 + "    decl.parentRule = styleSheet.cssRules[1];\n"
@@ -308,14 +388,16 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
                 + "   alert(decl.parentRule.selectorText);\n"
                 + "  } catch(e) {\n"
                 + "   alert('exception');\n"
-                + "  }\n" + "  decl = document.getElementById('myDiv').style;\n"
+                + "  }\n" 
+                + "  decl = document.getElementById('myDiv').style;\n"
                 + "  try {"
                 + "    decl.parentRule = styleSheet.cssRules[1];\n"
                 + "   alert(decl.parentRule);\n"
                 + "  } catch(e) {\n"
                 + "   alert('exception');\n"
                 + "  }\n"
-                + "</script>\n" + "</body></html>";
+                + "</script>\n" 
+                + "</body></html>";
 
         checkHtmlAlert(html);
     }
@@ -342,7 +424,8 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     @Alerts({"black", "pink", "color: pink; background: blue;"})
     public void style_MultipleCssAttributes() {
         final String html
-                = "<html><head><script>\n" + "function doTest() {\n"
+                = "<html><head><script>\n" 
+                + "function doTest() {\n"
                 + "  var style = document.getElementById('div1').style;\n"
                 + " alert(style.color);\n"
                 + "  style.color = 'pink';\n"
@@ -358,7 +441,8 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     @Alerts({"null", "", "pink", "color: pink;"})
     public void style_OneUndefinedCssAttribute() {
         final String html
-                = "<html><head><script>\n" + "function doTest() {\n"
+                = "<html><head><script>\n" 
+                + "function doTest() {\n"
                 + "  var style = document.getElementById('div1').style;\n"
                 + " alert(document.getElementById('nonexistingid'));\n"
                 + " alert(style.color);\n"
@@ -372,10 +456,11 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts({"", "hidden", "undefined"})
+    @Alerts({"null", "hidden", "undefined"})
     public void mozillaStyle() {
         final String content
-                = "<html><head><script>\n" + "function doTest() {\n"
+                = "<html><head><script>\n" 
+                + "function doTest() {\n"
                 + "  var oDiv = document.getElementById('div1');\n"
                 + " alert(oDiv.style.visibility);\n"
                 + "  oDiv.style.visibility = 'hidden';\n"
@@ -391,7 +476,8 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     @Alerts("undefined")
     public void behavior() {
         final String html
-                = "<html><head><script>\n" + "function doTest() {\n"
+                = "<html><head><script>\n" 
+                + "function doTest() {\n"
                 + "  var oDiv = document.getElementById('div1');\n"
                 + " alert(oDiv.style.behavior);\n"
                 + "}\n"
@@ -405,7 +491,8 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     @Test
     public void onclickAccessStyle() {
         final String html = "<html><head><title>Color Change Page</title>\n"
-                + "<script>\n"                + "function test(obj) {\n"
+                + "<script>\n"
+                + "function test(obj) {\n"
                 + "  obj.style.backgroundColor = 'yellow';\n"
                 + "}\n"
                 + "</script>\n"
@@ -423,7 +510,6 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     @Alerts({"string", "string", "string", "undefined"})
     public void accessProperties() {
         final String html = "<html><head><script>\n"
-
                 + "function doTest() {\n"
                 + "  var oDiv = document.getElementById('div1');\n"
                 + " alert(typeof oDiv.style.visibility);\n"
@@ -440,7 +526,6 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     @Alerts("123")
     public void setStylePropertyNonString() {
         final String html = "<html><head><script>\n"
-
                 + "function doTest() {\n"
                 + "  var oDiv1 = document.getElementById('div1');\n"
                 + "  oDiv1.style.pixelLeft = 123;\n"
@@ -454,7 +539,8 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     @Test
     @Alerts("blue")
     public void getPropertyValue() {
-        final String html = "<html><head><script>\n" + "function doTest() {\n"
+        final String html = "<html><head><script>\n" 
+                + "function doTest() {\n"
                 + "  try {\n"
                 + "    var oDiv1 = document.getElementById('div1');\n"
                 + "   alert(oDiv1.style.getPropertyValue('background'));\n"
@@ -469,7 +555,8 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     @Test
     @Alerts({"*blue* string", ""})
     public void removeProperty() {
-        final String html = "<html><head><script>\n" + "function doTest() {\n"
+        final String html = "<html><head><script>\n" 
+                + "function doTest() {\n"
                 + "  var oDiv1 = document.getElementById('div1');\n"
                 + "  if (oDiv1.style.removeProperty) {\n"
                 + "    var value = oDiv1.style.removeProperty('color');\n"
@@ -486,7 +573,8 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     @Test
     @Alerts({"** string", "blue"})
     public void removePropertyUnknown() {
-        final String html = "<html><head><script>\n" + "function doTest() {\n"
+        final String html = "<html><head><script>\n" 
+                + "function doTest() {\n"
                 + "  var oDiv1 = document.getElementById('div1');\n"
                 + "  if (oDiv1.style.removeProperty) {\n"
                 + "    var value = oDiv1.style.removeProperty('font-size');\n"
@@ -505,7 +593,8 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     public void removePropertyUndefined() {
         final String html = "<html>\n"
                 + "<head>\n"
-                + "<script>\n" + "function doTest() {\n"
+                + "<script>\n" 
+                + "function doTest() {\n"
                 + "  var oDiv1 = document.getElementById('div1');\n"
                 + "  if (!oDiv1.style.removeProperty) {\n"
                 + "   alert('removeProperty not available');\n"
@@ -525,12 +614,14 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     @Alerts({"30px", "", "30px", "arial", "", "arial"})
     public void getPropertyValue_WithDash() {
         final String html =
-                "<html><body onload='test()'><script>\n" + "    function prop(elem, prop) {\n"
+                "<html><body onload='test()'><script>\n" 
+                + "    function prop(elem, prop) {\n"
                         + "      try{\n"
                         + "        var p = span.style.getPropertyValue(prop);\n"
                         + "       alert(p);\n"
                         + "      } catch (e) {alert('exception'); }\n"
-                        + "    }\n" + "    function test() {\n"
+                        + "    }\n" 
+                + "    function test() {\n"
                         + "      var span = document.getElementById('span');\n"
                         + "      span.style['fontSize'] = '30px';\n"
                         + "     alert(span.style.fontSize);\n"
@@ -550,7 +641,8 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     @Test
     @Alerts({"", ""})
     public void styleFilter() {
-        final String html = "<html><body onload='test()'><script>\n" + "   function test() {\n"
+        final String html = "<html><body onload='test()'><script>\n" 
+                + "   function test() {\n"
                 + "     var div1 = document.getElementById('div1');\n"
                 + "    alert(div1.style.filter);\n"
                 + "     var div2 = document.getElementById('div2');\n"
@@ -575,7 +667,9 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
                 + "<div id='o6' style='opacity: 3'>d</div>\n"
                 + "<div id='o7' style='opacity: 10px'>d</div>\n"
                 + "<div id='o8' style='opacity: foo'>d</div>\n"
-                + "<div id='o9' style='opacity: auto'>d</div>\n" + "<script>\n" + "for (var i = 1; i < 10; i++) {\n"
+                + "<div id='o9' style='opacity: auto'>d</div>\n" 
+                + "<script>\n" 
+                + "for (var i = 1; i < 10; i++) {\n"
                 + "  d = document.getElementById('o' + i);\n"
                 + " alert(d.style.opacity);\n"
                 + "}\n"
@@ -589,7 +683,8 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     public void setOpacity() {
         final String html = "<html><body>\n"
                 + "<div id='d'>d</div>\n"
-                + "<script>\n" + "var d = document.getElementById('d');\n"
+                + "<script>\n" 
+                + "var d = document.getElementById('d');\n"
                 + "var s = '-';\n"
                 + "s += d.style.opacity + ' ';\n"
                 + "d.style.opacity = 0.5;\n"
@@ -625,7 +720,8 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     @Test
     @Alerts({"undefined", "exception"})
     public void setExpression() {
-        final String html = "<html><head><script>\n" + "function test() {\n"
+        final String html = "<html><head><script>\n" 
+                + "function test() {\n"
                 + "  try {\n"
                 + "    var div1 = document.getElementById('div1');\n"
                 + "   alert(typeof div1.style.setExpression);\n"
@@ -641,7 +737,8 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     @Test
     @Alerts({"undefined", "exception"})
     public void removeExpression() {
-        final String html = "<html><head><script>\n" + "function test() {\n"
+        final String html = "<html><head><script>\n" 
+                + "function test() {\n"
                 + "  try {\n"
                 + "    var div1 = document.getElementById('div1');\n"
                 + "   alert(typeof div1.style.removeExpression);\n"
@@ -659,7 +756,8 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     @Alerts({"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""})
     public void borderStylesNoStyle() {
         final String html
-                = "<html><head><script>\n" + "function doTest() {\n"
+                = "<html><head><script>\n" 
+                + "function doTest() {\n"
                 + "  var oDiv = document.getElementById('div1');\n"
                 + " alert(oDiv.style.borderBottom);\n"
                 + " alert(oDiv.style.borderBottomColor);\n"
@@ -688,7 +786,8 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     @Alerts({"3px", "4px", "2px", "1px"})
     public void borderXxxWidth() {
         final String html
-                = "<html><head><script>\n" + "function doTest() {\n"
+                = "<html><head><script>\n" 
+                + "function doTest() {\n"
                 + "  var oDiv = document.getElementById('div1');\n"
                 + " alert(oDiv.style.borderBottomWidth);\n"
                 + " alert(oDiv.style.borderLeftWidth);\n"
@@ -705,7 +804,8 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     @Alerts({"thin", "medium", "thick", "thick"})
     public void borderXxxWidthConstants() {
         final String html
-                = "<html><head><script>\n" + "function doTest() {\n"
+                = "<html><head><script>\n" 
+                + "function doTest() {\n"
                 + "  var oDiv = document.getElementById('div1');\n"
                 + " alert(oDiv.style.borderRightWidth);\n"
                 + "  oDiv = document.getElementById('div2');\n"
@@ -727,7 +827,9 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     @Alerts("undefined")
     public void initUnsupportdProperty() {
         final String html = "<html><body>\n"
-                + "<div id='my' style='htmlunit: foo'>d</div>\n" + "<script>\n" + "  d = document.getElementById('my');\n"
+                + "<div id='my' style='htmlunit: foo'>d</div>\n" 
+                + "<script>\n" 
+                + "  d = document.getElementById('my');\n"
                 + " alert(d.style.htmlunit);\n"
                 + "</script>\n"
                 + "</body></html>";
@@ -738,7 +840,9 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     @Alerts({"undefined", "foo"})
     public void setUnsupportdProperty() {
         final String html = "<html><body>\n"
-                + "<div id='my' style=''>d</div>\n" + "<script>\n" + "  d = document.getElementById('my');\n"
+                + "<div id='my' style=''>d</div>\n" 
+                + "<script>\n" 
+                + "  d = document.getElementById('my');\n"
                 + " alert(d.style.htmlunit);\n"
                 + "  d.style.htmlunit = 'foo';\n"
                 + " alert(d.style.htmlunit);\n"
@@ -751,7 +855,8 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     @Alerts({"string", "", "1", "2", "2", "2", "2", "5", "5", "5", "5"})
     public void zIndex() {
         final String html
-                = "<html><head><script>\n" + "function test() {\n"
+                = "<html><head><script>\n" 
+                + "function test() {\n"
                 + "  var style = document.getElementById('myDiv').style;\n"
                 + " alert(typeof style.zIndex);\n"
                 + " alert(style.zIndex);\n"
@@ -786,20 +891,27 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     @Alerts({"string", "", "string", "", "string", "4", "string", "", "string", "", "string", ""})
     public void zIndexDefault() {
         final String html
-                = "<html><head><script>\n" + "function test() {\n"
+                = "<html><head><script>\n" 
+                + "function test() {\n"
                 + "  var style = document.getElementById('divUndefined').style;\n"
                 + " alert(typeof style.zIndex);\n"
-                + " alert(style.zIndex);\n" + "  style = document.getElementById('divBlank').style;\n"
+                + " alert(style.zIndex);\n" 
+                + "  style = document.getElementById('divBlank').style;\n"
                 + " alert(typeof style.zIndex);\n"
-                + " alert(style.zIndex);\n" + "  style = document.getElementById('divInteger').style;\n"
+                + " alert(style.zIndex);\n" 
+                + "  style = document.getElementById('divInteger').style;\n"
                 + " alert(typeof style.zIndex);\n"
-                + " alert(style.zIndex);\n" + "  style = document.getElementById('divFloat').style;\n"
+                + " alert(style.zIndex);\n" 
+                + "  style = document.getElementById('divFloat').style;\n"
                 + " alert(typeof style.zIndex);\n"
-                + " alert(style.zIndex);\n" + "  style = document.getElementById('divFloat2').style;\n"
+                + " alert(style.zIndex);\n" 
+                + "  style = document.getElementById('divFloat2').style;\n"
                 + " alert(typeof style.zIndex);\n"
-                + " alert(style.zIndex);\n" + "  style = document.getElementById('invalidDiv').style;\n"
+                + " alert(style.zIndex);\n" 
+                + "  style = document.getElementById('invalidDiv').style;\n"
                 + " alert(typeof style.zIndex);\n"
-                + " alert(style.zIndex);\n" + "}\n"
+                + " alert(style.zIndex);\n" 
+                + "}\n"
                 + "</script></head>\n"
                 + "<body onload='test()'>\n"
                 + "  <div id='divUndefined'/>\n"
@@ -817,17 +929,22 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     @Alerts({"", "", "1", "1"})
     public void zIndexSetUndefined() {
         final String html
-                = "<html><head><script>\n" + "function test() {\n"
+                = "<html><head><script>\n" 
+                + "function test() {\n"
                 + "  var style = document.getElementById('myDiv').style;\n"
                 + "  var un_defined;\n"
-                + " alert(style.zIndex);\n" + "  try {\n"
+                + " alert(style.zIndex);\n" 
+                + "  try {\n"
                 + "    style.zIndex = un_defined;\n"
                 + "  } catch (e) {alert('error'); }\n"
-                + " alert(style.zIndex);\n" + "  style.zIndex = 1;\n"
-                + " alert(style.zIndex);\n" + "  try {\n"
+                + " alert(style.zIndex);\n" 
+                + "  style.zIndex = 1;\n"
+                + " alert(style.zIndex);\n" 
+                + "  try {\n"
                 + "    style.zIndex = un_defined;\n"
                 + "  } catch (e) {alert('error'); }\n"
-                + " alert(style.zIndex);\n" + "}\n"
+                + " alert(style.zIndex);\n" 
+                + "}\n"
                 + "</script></head>\n"
                 + "<body onload='test()'>\n"
                 + "  <div id='myDiv'/>\n"
@@ -840,16 +957,21 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     @Alerts({"", "", "1", ""})
     public void zIndexSetNull() {
         final String html
-                = "<html><head><script>\n" + "function test() {\n"
+                = "<html><head><script>\n" 
+                + "function test() {\n"
                 + "  var style = document.getElementById('myDiv').style;\n"
-                + " alert(style.zIndex);\n" + "  try {\n"
+                + " alert(style.zIndex);\n" 
+                + "  try {\n"
                 + "    style.zIndex = null;\n"
                 + "  } catch (e) {alert('error'); }\n"
-                + " alert(style.zIndex);\n" + "  style.zIndex = 1;\n"
-                + " alert(style.zIndex);\n" + "  try {\n"
+                + " alert(style.zIndex);\n" 
+                + "  style.zIndex = 1;\n"
+                + " alert(style.zIndex);\n" 
+                + "  try {\n"
                 + "    style.zIndex = null;\n"
                 + "  } catch (e) {alert('error'); }\n"
-                + " alert(style.zIndex);\n" + "}\n"
+                + " alert(style.zIndex);\n" 
+                + "}\n"
                 + "</script></head>\n"
                 + "<body onload='test()'>\n"
                 + "  <div id='myDiv'/>\n"
@@ -862,21 +984,28 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     @Alerts({"", "7", "7", "", "4", "1"})
     public void zIndexSetString() {
         final String html
-                = "<html><head><script>\n" + "function test() {\n"
+                = "<html><head><script>\n" 
+                + "function test() {\n"
                 + "  var style = document.getElementById('myDiv').style;\n"
                 + "  var unknown;\n"
-                + " alert(style.zIndex);\n" + "  style.zIndex = '7';\n"
-                + " alert(style.zIndex);\n" + "  style.zIndex = '7.6';\n"
-                + " alert(style.zIndex);\n" + "  style.zIndex = '';\n"
-                + " alert(style.zIndex);\n" + "  style.zIndex = '4';\n"
+                + " alert(style.zIndex);\n" 
+                + "  style.zIndex = '7';\n"
+                + " alert(style.zIndex);\n" 
+                + "  style.zIndex = '7.6';\n"
+                + " alert(style.zIndex);\n" 
+                + "  style.zIndex = '';\n"
+                + " alert(style.zIndex);\n" 
+                + "  style.zIndex = '4';\n"
                 + "  try {\n"
                 + "    style.zIndex = '   ';\n"
                 + "  } catch (e) {alert('error'); }\n"
-                + " alert(style.zIndex);\n" + "  style.zIndex = '1';\n"
+                + " alert(style.zIndex);\n" 
+                + "  style.zIndex = '1';\n"
                 + "  try {\n"
                 + "    style.zIndex = 'NAN';\n"
                 + "  } catch (e) {alert('error'); }\n"
-                + " alert(style.zIndex);\n" + "}\n"
+                + " alert(style.zIndex);\n" 
+                + "}\n"
                 + "</script></head>\n"
                 + "<body onload='test()'>\n"
                 + "  <div id='myDiv'/>\n"
@@ -889,19 +1018,22 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     @Alerts({"", "", "1", "1"})
     public void zIndexSetInvalid() {
         final String html
-                = "<html><head><script>\n" + "function test() {\n"
+                = "<html><head><script>\n" 
+                + "function test() {\n"
                 + "  var style = document.getElementById('myDiv').style;\n"
                 + " alert(style.zIndex);\n"
                 + "  try {\n"
                 + "    style.zIndex = 'hallo';\n"
                 + "  } catch (e) {alert('error'); }\n"
-                + " alert(style.zIndex);\n" + "  style.zIndex = 1;\n"
+                + " alert(style.zIndex);\n" 
+                + "  style.zIndex = 1;\n"
                 + " alert(style.zIndex);\n"
                 + "  try {\n"
                 + "    style.zIndex = 'hallo';\n"
                 + "  } catch (e) {alert('error'); }\n"
                 + " alert(style.zIndex);\n"
-                + "}\n" + "</script></head>\n"
+                + "}\n" 
+                + "</script></head>\n"
                 + "<body onload='test()'>\n"
                 + "  <div id='myDiv'/>\n"
                 + "</body></html>";
@@ -912,8 +1044,8 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     @Test
     @Alerts({"", "", "15px", "italic", "", "italic"})
     public void cssText2() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    var style = document.getElementById('myDiv').style;\n"
                 + "   alert(style.fontSize);\n"
@@ -967,14 +1099,15 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"", "", "none", "rgb(0, 128, 0)"})
+    @Alerts({"", "null", "none", "rgb(0, 128, 0)"})
     public void displayDefaultOverwritesNone() {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "  <style>\n"
                 + "    tt { display: none; color: green; }\n"
                 + "  </style>\n"
-                + "  <script>\n" + "    function test() {\n"
+                + "  <script>\n" 
+                + "    function test() {\n"
                 + "      var e = document.createElement('tt');\n"
                 + "      var style = window.getComputedStyle(e, null);\n"
                 + "     alert(style['display']);\n"
@@ -995,7 +1128,8 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     public void displayDefault() {
         final String html = "<html>\n"
                 + "<head>\n"
-                + "  <script>\n" + "    function test() {\n"
+                + "  <script>\n" 
+                + "    function test() {\n"
                 + "      var e = document.createElement('tt');\n"
                 + "      var style = window.getComputedStyle(e, null);\n"
                 + "     alert(style['display']);\n"
@@ -1014,7 +1148,8 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     public void colorDefault() {
         final String html = "<html>\n"
                 + "<head>\n"
-                + "  <script>\n" + "    function test() {\n"
+                + "  <script>\n"
+                + "    function test() {\n"
                 + "      var e = document.createElement('tt');\n"
                 + "      var style = window.getComputedStyle(e, null);\n"
                 + "     alert(style['color']);\n"
@@ -1077,7 +1212,8 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
                         + "      #m2 { margin-left: 3px; margin: 5px; }\n"
                         + "      #m3 { margin: 2px; margin-left: 7px; }\n"
                         + "    </style>\n"
-                        + "    <script>\n" + "      function test() {\n"
+                        + "    <script>\n" 
+                + "      function test() {\n"
                         + "        alertComputedMargins('m1');\n"
                         + "        alertComputedMargins('m2');\n"
                         + "        alertComputedMargins('m3');\n"
@@ -1123,7 +1259,8 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
                         + "      #m2 { padding-left: 3px; padding: 5px; }\n"
                         + "      #m3 { padding: 2px; padding-left: 7px; }\n"
                         + "    </style>\n"
-                        + "    <script>\n" + "      function test() {\n"
+                        + "    <script>\n" 
+                + "      function test() {\n"
                         + "        alertComputedPaddings('m1');\n"
                         + "        alertComputedPaddings('m2');\n"
                         + "        alertComputedPaddings('m3');\n"
@@ -1169,7 +1306,8 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
                         + "      #m2 { padding-left: 3px; padding: 5px; }\n"
                         + "      #m3 { padding: 2px; padding-left: 7px; }\n"
                         + "    </style>\n"
-                        + "    <script>\n" + "      function test() {\n"
+                        + "    <script>\n" 
+                + "      function test() {\n"
                         + "        alertComputedPaddings('m1');\n"
                         + "        alertComputedPaddings('m2');\n"
                         + "        alertComputedPaddings('m3');\n"
@@ -1248,7 +1386,8 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
 
     private void styleShorthand(final String style, final String attribute, final String expectedValue) {
         final String html = "<html><head>\n"
-                + "<script>\n"                + "  functionalert(msg) {\n"
+                + "<script>\n"
+                + "  functionalert(msg) {\n"
                 + "    var ta = document.getElementById('myTextArea');\n"
                 + "    ta.value += msg + '; ';\n"
                 + "  }\n"
@@ -1328,7 +1467,8 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
 
     private void getAttribute(final String params) {
         final String html =
-                "<html><head><script>\n" + "function test() {\n"
+                "<html><head><script>\n" 
+                + "function test() {\n"
                         + "  if (document.all['a'].style.getAttribute) {\n"
                         + "   alert(document.all['a'].style.getAttribute(" + params + "));\n"
                         + "  }\n"
@@ -2017,13 +2157,18 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
         final String html =
                 "<html><body onload='test()'>\n"
                         + "<a id='a1' href='#' style='color:green'>go</a>\n"
-                        + "<a id='a2' href='#' style='color:blue !important'>go</a>\n" + "<a id='a3' href='#' style='background-color:green'>go</a>\n"
-                        + "<a id='a4' href='#' style='background-color:blue !important'>go</a>\n" + "<script>\n"
-                        + "  function test() {\n"
+                        + "<a id='a2' href='#' style='color:blue !important'>go</a>\n" 
+                + "<a id='a3' href='#' style='background-color:green'>go</a>\n"
+                        + "<a id='a4' href='#' style='background-color:blue !important'>go</a>\n" 
+                + "<script>\n"
+                + "  function test() {\n"
                         + "    var node = document.getElementById('a1');\n"
-                        + "   alert(node.style.getPropertyPriority('color'));\n" + "    node = document.getElementById('a2');\n"
-                        + "   alert(node.style.getPropertyPriority('color'));\n" + "    node = document.getElementById('a3');\n"
-                        + "   alert(node.style.getPropertyPriority('background-color'));\n" + "    node = document.getElementById('a4');\n"
+                        + "   alert(node.style.getPropertyPriority('color'));\n" 
+                + "    node = document.getElementById('a2');\n"
+                        + "   alert(node.style.getPropertyPriority('color'));\n" 
+                + "    node = document.getElementById('a3');\n"
+                        + "   alert(node.style.getPropertyPriority('background-color'));\n" 
+                + "    node = document.getElementById('a4');\n"
                         + "   alert(node.style.getPropertyPriority('background-color'));\n"
                         + "  }\n"
                         + "</script>\n"
@@ -2037,8 +2182,9 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     public void getPropertyPriorityNoStyle() {
         final String html =
                 "<html><body onload='test()'>\n"
-                        + "<a id='a1' href='#'>go</a>\n" + "<script>\n"
-                        + "  function test() {\n"
+                        + "<a id='a1' href='#'>go</a>\n" 
+                + "<script>\n"
+                + "  function test() {\n"
                         + "    var node = document.getElementById('a1');\n"
                         + "   alert(node.style.getPropertyPriority('color'));\n"
                         + "  }\n"
@@ -2052,7 +2198,8 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     @Alerts({"black", "pink", "color: pink;", "color: pink;"})
     public void caseInsensitive() {
         final String html
-                = "<html><head><script>\n" + "function doTest() {\n"
+                = "<html><head><script>\n" 
+                + "function doTest() {\n"
                 + "  var node = document.getElementById('div1');\n"
                 + "  var style = node.style;\n"
                 + " alert(style.color);\n"
@@ -2072,7 +2219,8 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
         final String html = "<html><body>\n"
                 + "<div id='a' style='left: 5px; border: 1px solid black;'>a</div>\n"
                 + "<div id='b' style='left: 1em; border: 1px solid black;'>b</div>\n"
-                + "<script>\n" + "  var a = document.getElementById('a');\n"
+                + "<script>\n" 
+                + "  var a = document.getElementById('a');\n"
                 + "  var b = document.getElementById('b');\n"
                 + " alert(a.style.left);\n"
                 + " alert(a.style.pixelLeft);\n"
@@ -2094,7 +2242,8 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
         final String html = "<html><body>\n"
                 + "<div id='a' style='right: 5px; border: 1px solid black;'>a</div>\n"
                 + "<div id='b' style='right: 1em; border: 1px solid black;'>b</div>\n"
-                + "<script>\n" + "  var a = document.getElementById('a');\n"
+                + "<script>\n" 
+                + "  var a = document.getElementById('a');\n"
                 + "  var b = document.getElementById('b');\n"
                 + " alert(a.style.right);\n"
                 + " alert(a.style.pixelRight);\n"
@@ -2116,7 +2265,8 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
         final String html = "<html><body>\n"
                 + "<div id='a' style='top: 5px; border: 1px solid black;'>a</div>\n"
                 + "<div id='b' style='top: 1em; border: 1px solid black;'>b</div>\n"
-                + "<script>\n" + "  var a = document.getElementById('a');\n"
+                + "<script>\n" 
+                + "  var a = document.getElementById('a');\n"
                 + "  var b = document.getElementById('b');\n"
                 + " alert(a.style.top);\n"
                 + " alert(a.style.pixelTop);\n"
@@ -2138,7 +2288,8 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
         final String html = "<html><body>\n"
                 + "<div id='a' style='bottom: 5px; border: 1px solid black;'>a</div>\n"
                 + "<div id='b' style='bottom: 1em; border: 1px solid black;'>b</div>\n"
-                + "<script>\n" + "  var a = document.getElementById('a');\n"
+                + "<script>\n" 
+                + "  var a = document.getElementById('a');\n"
                 + "  var b = document.getElementById('b');\n"
                 + " alert(a.style.bottom);\n"
                 + " alert(a.style.pixelBottom);\n"
@@ -2160,16 +2311,19 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
         final String html = "<html>\n"
                 + "<body>\n"
                 + "<div id='d'>foo</div>\n"
-                + "<script>\n" + "  try {\n"
+                + "<script>\n" 
+                + "  try {\n"
                 + "    var css = window.CSSStyleDeclaration;\n"
                 + "    var oldDisplay = css.prototype.__lookupSetter__('display');\n"
-                + "   alert(typeof oldDisplay);\n" + "    var newDisplay = function(x){\n"
+                + "   alert(typeof oldDisplay);\n" 
+                + "    var newDisplay = function(x){\n"
                 + "                      alert('before');\n"
                 + "                      alert(x);\n"
                 + "                       oldDisplay.call(this, x);\n"
                 + "                      alert('after');\n"
                 + "                     };\n"
-                + "    css.prototype.__defineSetter__('display', newDisplay);\n" + "    var div = document.getElementById('d');\n"
+                + "    css.prototype.__defineSetter__('display', newDisplay);\n" 
+                + "    var div = document.getElementById('d');\n"
                 + "    div.style.display = 'none';\n"
                 + "   alert(div.style.display);\n"
                 + "  } catch(e) {alert('exception'); }\n"
@@ -2182,7 +2336,8 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     @Alerts({"", "", "", ""})
     public void setToNull() {
         final String html
-                = "<html><head><script>\n" + "function test() {\n"
+                = "<html><head><script>\n" 
+                + "function test() {\n"
                 + "  var div1 = document.getElementById('div1');\n"
                 + " alert(div1.style.border);\n"
                 + "  try {\n"
@@ -2232,7 +2387,8 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
                 + "<script>"
                 +  " function test() {\n"
                 + "    var style = document.getElementById('test').style;\n"
-                + "   alert(style.boxSizing === '');\n" + "    style = document.createElement('div').style;\n"
+                + "   alert(style.boxSizing === '');\n" 
+                + "    style = document.createElement('div').style;\n"
                 + "   alert(style.boxSizing === '');\n"
                 + "    style.boxSizing = 'border-box';\n"
                 + "   alert(style.boxSizing);\n"
@@ -2254,7 +2410,8 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
                 +  " function test() {\n"
                 + "    var div = document.getElementById('test');\n"
                 + "    var style = window.getComputedStyle(div, null);\n"
-                + "   alert(style.top);\n" + "    div = document.createElement('div');\n"
+                + "   alert(style.top);\n" 
+                + "    div = document.createElement('div');\n"
                 + "    style = window.getComputedStyle(div, null);\n"
                 + "   alert(style.top);\n"
                 + "  }\n"
@@ -2295,7 +2452,7 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"", "2", "", "2", "5", "5", "5", "5"})
+    @Alerts({"null", "2", "null", "2", "5", "5", "5", "5"})
     public void orphans() {
         final String html = "<html><head>\n"
                 + "<script>"
@@ -2322,7 +2479,7 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"", "static", "", "static", "", "static", "absolute", "absolute", "", "static"})
+    @Alerts({"null", "static", "null", "static", "null", "static", "absolute", "absolute", "null", "static"})
     public void position() {
         final String html = "<html><head>\n"
                 + "<script>"
@@ -2403,7 +2560,8 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
                         + "</head>\n"
                         + "<body>\n"
                         + "  <div id='tester'></div>\n"
-                        + "  <script>\n" + "    var myDiv = document.getElementById('tester');\n"
+                        + "  <script>\n" 
+                + "    var myDiv = document.getElementById('tester');\n"
                         + "    var myDivStyle = window.getComputedStyle(myDiv, null);\n"
                         + "   alert(myDivStyle.width);\n"
                         + "  </script>\n"
@@ -2438,14 +2596,19 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts({"background-color", "string", "font-weight", "", "string", "", "string"})
+    @Alerts({"background-color", "string", "font-weight", "null", "string", "null", "string"})
     public void item() {
         final String html
-                = "<html><body>\n" + "<style>\n"
+                = "<html><body>\n" 
+                + "<style>\n"
                 + "  p { background-color: #FFFFFF; }\n"
-                + "</style>\n" + "<div id='myDiv' style='background-color: #FFFFFF; font-weight: bold;'></div>\n" + "<script>\n" + "  decl = document.getElementById('myDiv').style;\n"
+                + "</style>\n" 
+                + "<div id='myDiv' style='background-color: #FFFFFF; font-weight: bold;'></div>\n" 
+                + "<script>\n" 
+                + "  decl = document.getElementById('myDiv').style;\n"
                 + " alert(decl.item(0));\n"
-                + " alert(typeof decl.item(0));\n" + " alert(decl.item(1));\n"
+                + " alert(typeof decl.item(0));\n" 
+                + " alert(decl.item(1));\n"
                 + " alert(decl.item(2));\n"
                 + " alert(typeof decl.item(2));\n"
                 + "  try {\n"
@@ -2454,7 +2617,8 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
                 + "  } catch(e) {\n"
                 + "   alert('exception ');\n"
                 + "  }\n"
-                + "</script>\n" + "</body></html>";
+                + "</script>\n" 
+                + "</body></html>";
 
         checkHtmlAlert(html);
     }
@@ -2469,7 +2633,8 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
                         + "</head>\n"
                         + "<body>\n"
                         + "  <div id='myDiv'></div>\n"
-                        + "  <script>\n" + "    var myDiv = document.getElementById('myDiv');\n"
+                        + "  <script>\n" 
+                + "    var myDiv = document.getElementById('myDiv');\n"
                         + "    var myDivStyle = window.getComputedStyle(myDiv, '::before');\n"
                         + "   alert(myDivStyle.content);\n"
                         + "  </script>\n"

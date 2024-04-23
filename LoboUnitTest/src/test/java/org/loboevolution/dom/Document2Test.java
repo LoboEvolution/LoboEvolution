@@ -88,7 +88,8 @@ public class Document2Test extends LoboUnitTest {
     @Alerts("false")
     public void createElementPrototype() {
         final String html = "<html><head>\n"
-                + "<script>\n" + "  var HAS_EXTENDED_CREATE_ELEMENT_SYNTAX = (function() {\n"
+                + "<script>\n" 
+                + "  var HAS_EXTENDED_CREATE_ELEMENT_SYNTAX = (function() {\n"
                 + "    try {\n"
                 + "      var el = document.createElement('<input name=\"x\">');\n"
                 + "      return el.tagName.toLowerCase() === 'input' && el.name === 'x';\n"
@@ -108,7 +109,8 @@ public class Document2Test extends LoboUnitTest {
     public void appendChild() {
         final String html
                 = "<html><head>\n"
-                + "<script>\n" + "function test() {\n"
+                + "<script>\n" 
+                + "function test() {\n"
                 + "  var span = document.createElement('SPAN');\n"
                 + "  var div = document.getElementById('d');\n"
                 + "  div.appendChild(span);\n"
@@ -173,7 +175,8 @@ public class Document2Test extends LoboUnitTest {
     @Alerts({"parent", "child"})
     public void importNodeWithNamespace() {
         final String html = "<html xmlns='http://www.w3.org/1999/xhtml'>\n"
-                + "<head><script>\n" + "function test() {\n"
+                + "<head><script>\n" 
+                + "function test() {\n"
                 + "  if (!document.evaluate) {alert('evaluate not available'); return; }\n"
                 + "  var xmlhttp = new XMLHttpRequest();\n"
                 + "  xmlhttp.open(\"GET\",\"content.xhtml\",true);\n"
@@ -204,7 +207,8 @@ public class Document2Test extends LoboUnitTest {
     @Alerts({"parent", "child", "child3"})
     public void importNodesWithNamespace() {
         final String html = "<html xmlns='http://www.w3.org/1999/xhtml'>\n"
-                + "<head><script>\n" + "function test() {\n"
+                + "<head><script>\n" 
+                + "function test() {\n"
                 + "  if (!document.evaluate) {alert('evaluate not available'); return; }\n"
                 + "  var xmlhttp = new XMLHttpRequest();\n"
                 + "  xmlhttp.open(\"GET\",\"content.xhtml\",true);\n"
@@ -299,7 +303,8 @@ public class Document2Test extends LoboUnitTest {
     @Alerts({"true", "true"})
     public void queryCommandEnabled() {
         final String html = "<html><body onload='x()'><iframe name='f' id='f'></iframe>\n"
-                + "<script>\n" + "function x() {\n"
+                + "<script>\n" 
+                + "function x() {\n"
                 + "  var d = window.frames['f'].document;\n"
                 + "  try {alert(d.queryCommandEnabled('SelectAll')); } catch(e) {alert('error'); }\n"
                 + "  try {alert(d.queryCommandEnabled('sElectaLL')); } catch(e) {alert('error'); }\n"
@@ -314,7 +319,8 @@ public class Document2Test extends LoboUnitTest {
     @Alerts({"true", "true", "true"})
     public void queryCommandEnabledDesignMode() {
         final String html = "<html><body onload='x()'><iframe name='f' id='f'></iframe>\n"
-                + "<script>\n" + "function x() {\n"
+                + "<script>\n" 
+                + "function x() {\n"
                 + "  var d = window.frames['f'].document;\n"
                 + "  d.designMode = 'on';\n"
                 + " alert(d.queryCommandEnabled('SelectAll'));\n"
@@ -331,7 +337,8 @@ public class Document2Test extends LoboUnitTest {
     public void getElementById() {
         final String html
                 = "<html><head>\n"
-                + "<script>\n" + "function doTest() {\n"
+                + "<script>\n" 
+                + "function doTest() {\n"
                 + " alert(top.document.getElementById('input1').value);\n"
                 + " alert(document.getElementById(''));\n"
                 + " alert(document.getElementById('non existing'));\n"
@@ -350,7 +357,8 @@ public class Document2Test extends LoboUnitTest {
     public void getElementByIdResetId() {
         final String html
                 = "<html><head>\n"
-                + "<script>\n" + "function doTest() {\n"
+                + "<script>\n" 
+                + "function doTest() {\n"
                 + "  var input1 = top.document.getElementById('input1');\n"
                 + "  input1.id = 'newId';\n"
                 + " alert(top.document.getElementById('newId').value);\n"
@@ -370,7 +378,8 @@ public class Document2Test extends LoboUnitTest {
     public void getElementById_setNewId() {
         final String html
                 = "<html><head>\n"
-                + "<script>\n" + "function doTest() {\n"
+                + "<script>\n" 
+                + "function doTest() {\n"
                 + "  var div1 = document.getElementById('div1');\n"
                 + "  div1.firstChild.id = 'newId';\n"
                 + " alert(document.getElementById('newId').value);\n"
@@ -389,7 +398,8 @@ public class Document2Test extends LoboUnitTest {
     public void getElementByIdDivId() {
         final String html
                 = "<html><head>\n"
-                + "<script>\n" + "function doTest() {\n"
+                + "<script>\n" 
+                + "function doTest() {\n"
                 + "  var element = document.getElementById('id1');\n"
                 + " alert(element.id);\n"
                 + "}\n"
@@ -404,7 +414,8 @@ public class Document2Test extends LoboUnitTest {
     public void getElementById_scriptId() {
         final String html
                 = "<html><head>\n"
-                + "<script id='script1'>\n" + "function doTest() {\n"
+                + "<script id='script1'>\n" 
+                + "function doTest() {\n"
                 + " alert(top.document.getElementById('script1').id);\n"
                 + "}\n"
                 + "</script></head><body onload='doTest()'>\n"
@@ -419,7 +430,8 @@ public class Document2Test extends LoboUnitTest {
         final String html = "<html><body>\n"
                 + "<span id='it' class='first'></span>\n"
                 + "<span id='it' class='second'></span>\n"
-                + "<script>\n" + "alert(document.getElementById('it').className);\n"
+                + "<script>\n" 
+                + "alert(document.getElementById('it').className);\n"
                 + "var s = document.createElement('span');\n"
                 + "s.id = 'it';\n"
                 + "s.className = 'newest';\n"
@@ -456,7 +468,9 @@ public class Document2Test extends LoboUnitTest {
     @Test
     public void createStyleSheetEmptyUrl() {
         final String html
-                = "<html><head>\n" + "<script>\n"                + "  function doTest() {\n"
+                = "<html><head>\n" 
+                + "<script>\n"
+                + "  function doTest() {\n"
                 + "    if (document.createStyleSheet) {\n"
                 + "      document.createStyleSheet(null);\n"
                 + "      document.createStyleSheet('');\n"
@@ -505,9 +519,11 @@ public class Document2Test extends LoboUnitTest {
     public void readyStateEventListener() {
         final String html
                 = "<html><head>\n"
-                + "<script>\n" + "</script></head>\n"
+                + "<script>\n" 
+                + "</script></head>\n"
                 + "<body>\n"
-                + "<script>\n"                + "   alert('Initial State:' + document.readyState);\n"
+                + "<script>\n"
+                + "   alert('Initial State:' + document.readyState);\n"
                 + "    document.addEventListener('readystatechange', function() {\n"
                 + "       alert('Changed:' + document.readyState);\n"
                 + "    });\r\n"

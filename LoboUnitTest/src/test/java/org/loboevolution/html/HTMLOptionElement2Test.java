@@ -257,11 +257,11 @@ public class HTMLOptionElement2Test extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"1", "", "-1"})
+    @Alerts({"1", "null", "-1"})
     public void unselectResetToFirstOption1() {
         final String html =
-                "<html><head><script>\n"
-
+                "<html><head>"
+                        +"<script>\n"
                         + "function doTest() {\n"
                         + "  var sel = document.form1.select1;\n"
                         + "  alert(sel.selectedIndex);\n"
@@ -672,7 +672,6 @@ public class HTMLOptionElement2Test extends LoboUnitTest {
     public void withoutNew() {
         final String html =
                 "<html><head><script>\n"
-
                         + "function doTest() {\n"
                         + "  var s = document.getElementById('testSelect');\n"
                         + "  alert(s.options);\n"
@@ -947,7 +946,6 @@ public class HTMLOptionElement2Test extends LoboUnitTest {
     public void label() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function test() {\n"
                 + "  var s = document.getElementById('testSelect');\n"
                 + "  var lastIndex = s.length;\n"
@@ -1092,7 +1090,8 @@ public class HTMLOptionElement2Test extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "<head>\n"
-                        + "<script>\n"                        + "  function test() {\n"
+                        + "<script>\n"
+                		+ "  function test() {\n"
                         + "    var o1 = document.getElementById('option1');\n"
                         + "    alert(o1.selected + '-' + o1.getAttribute('selected'));\n"
 

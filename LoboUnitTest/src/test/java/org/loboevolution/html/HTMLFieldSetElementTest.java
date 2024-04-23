@@ -57,7 +57,6 @@ public class HTMLFieldSetElementTest extends LoboUnitTest {
                 + "    <fieldset id='f10' align='wrong' ></fieldset>\n"
                 + "    <fieldset id='f11' ></fieldset>\n"
                 + "  </form>\n"
-
                 + "    <script>\n"
                 + "  for (var i = 1; i <= 11; i++) {\n"
                 + "    alert(document.getElementById('f' + i).align);\n"
@@ -77,7 +76,6 @@ public class HTMLFieldSetElementTest extends LoboUnitTest {
                 + "  <form>\n"
                 + "    <fieldset id='i1' align='left' />\n"
                 + "  <form>\n"
-
                 + "    <script>\n"
                 + "  function setAlign(elem, value) {\n"
                 + "    try {\n"
@@ -85,13 +83,10 @@ public class HTMLFieldSetElementTest extends LoboUnitTest {
                 + "    } catch (e) { alert('error'); }\n"
                 + "    alert(elem.align);\n"
                 + "  }\n"
-
                 + "  var elem = document.getElementById('i1');\n"
                 + "  setAlign(elem, 'CenTer');\n"
-
                 + "  setAlign(elem, '8');\n"
                 + "  setAlign(elem, 'foo');\n"
-
                 + "  setAlign(elem, 'left');\n"
                 + "  setAlign(elem, 'right');\n"
                 + "  setAlign(elem, 'bottom');\n"
@@ -117,7 +112,6 @@ public class HTMLFieldSetElementTest extends LoboUnitTest {
                 + "    <fieldset id='a' />\n"
                 + "  </form>"
                 + "  <script>\n"
-
                 + "    alert(document.getElementById('a').form);\n"
                 + "  </script>"
                 + "</body>"

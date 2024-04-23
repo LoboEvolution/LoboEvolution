@@ -39,11 +39,11 @@ import org.loboevolution.html.dom.HTMLAreaElement;
 public class HTMLAreaElementTest extends LoboUnitTest {
 
     @Test
-    @Alerts({"", "A", "a", "A", "a8", "8Afoo", "8", "@"})
+    @Alerts({"null", "A", "a", "A", "a8", "8Afoo", "8", "@"})
     public void readWriteAccessKey() {
         final String html
-                = "<html><body><map><area id='a1'/><area id='a2' accesskey='A'/></map><script>\n"
-
+                = "<html><body><map><area id='a1'/><area id='a2' accesskey='A'/></map>"
+                + "<script>\n"
                 + "var a1 = document.getElementById('a1'), a2 = document.getElementById('a2');\n"
                 + "alert(a1.accessKey);\n"
                 + "alert(a2.accessKey);\n"
@@ -167,7 +167,6 @@ public class HTMLAreaElementTest extends LoboUnitTest {
                 + "a2.rel = 'notsupported';\n"
                 + "alert(a1.rel);\n"
                 + "alert(a2.rel);\n"
-
                 + "</script></body></html>";
         checkHtmlAlert(html);
     }
@@ -181,12 +180,10 @@ public class HTMLAreaElementTest extends LoboUnitTest {
                 + "try {\n"
                 + "  alert(a1.relList.length);\n"
                 + "  alert(a2.relList.length);\n"
-
                 + "  for (var i = 0; i < a2.relList.length; i++) {\n"
                 + "    alert(a2.relList[i]);\n"
                 + "  }\n"
                 + "} catch(e) { alert('exception'); }\n"
-
                 + "</script></body></html>";
         checkHtmlAlert(html);
     }

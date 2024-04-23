@@ -51,8 +51,8 @@ public class OfflineAudioCompletionEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtor() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new OfflineAudioCompletionEvent('oac');\n"
@@ -69,8 +69,8 @@ public class OfflineAudioCompletionEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorWithoutType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new OfflineAudioCompletionEvent();\n"
@@ -87,8 +87,8 @@ public class OfflineAudioCompletionEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorNumericType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new OfflineAudioCompletionEvent(42);\n"
@@ -105,8 +105,8 @@ public class OfflineAudioCompletionEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorNullType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new OfflineAudioCompletionEvent(null);\n"
@@ -123,8 +123,8 @@ public class OfflineAudioCompletionEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorUnknownType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new OfflineAudioCompletionEvent(unknown);\n"
@@ -141,8 +141,8 @@ public class OfflineAudioCompletionEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorArbitraryType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new OfflineAudioCompletionEvent('HtmlUnitEvent');\n"
@@ -159,8 +159,8 @@ public class OfflineAudioCompletionEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorAllDetails() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new OfflineAudioCompletionEvent('oac', {\n"
@@ -179,8 +179,8 @@ public class OfflineAudioCompletionEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorAllDetailsMissingData() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new OfflineAudioCompletionEvent('oac', {\n"
@@ -198,8 +198,8 @@ public class OfflineAudioCompletionEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorAllDetailsWrongData() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new OfflineAudioCompletionEvent('oac', {\n"

@@ -63,13 +63,12 @@ public class StyleSheetListTest extends LoboUnitTest {
 
     @Test
     @Alerts({"rgb(255, 0, 0)", "rgb(255, 0, 0)"})
-    public void getComputedStyle_Link() {
+    public void getComputedStyleLink() {
         final String html =
                 "<html>\n"
                         + "  <head>\n"
                         + "    <link rel='stylesheet' type='text/css' href='" + URL_SECOND + "'/>\n"
                         + "    <script>\n"
-
                         + "      function test() {\n"
                         + "        var div = document.getElementById('myDiv');\n"
                         + "        try {\n"

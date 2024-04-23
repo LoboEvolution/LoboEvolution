@@ -50,8 +50,8 @@ public class CustomEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object CustomEvent]", "my", "false", "false", "false", "null"})
     public void createCtor() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new CustomEvent('my');\n"
@@ -68,8 +68,8 @@ public class CustomEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorWithoutType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new CustomEvent();\n"
@@ -86,8 +86,8 @@ public class CustomEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object CustomEvent]", "42", "false", "false", "false", "null"})
     public void createCtorNumericType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new CustomEvent(42);\n"
@@ -104,8 +104,8 @@ public class CustomEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object CustomEvent]", "null", "false", "false", "false", "null"})
     public void createCtorNullType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new CustomEvent(null);\n"
@@ -122,8 +122,8 @@ public class CustomEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorUnknownType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new CustomEvent(unknown);\n"
@@ -140,8 +140,8 @@ public class CustomEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object CustomEvent]", "HtmlUnitEvent", "false", "false", "false", "null"})
     public void createCtorArbitraryType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new CustomEvent('HtmlUnitEvent');\n"
@@ -158,8 +158,8 @@ public class CustomEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object CustomEvent]", "click", "false", "false", "false", "abcd"})
     public void createCtorAllDetails() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new CustomEvent('click', {\n"
@@ -178,8 +178,8 @@ public class CustomEventTest extends LoboUnitTest {
     @Test
     @Alerts("function")
     public void initCustomEvent() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var e = document.createEvent('CustomEvent');\n"

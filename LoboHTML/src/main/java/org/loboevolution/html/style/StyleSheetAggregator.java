@@ -178,7 +178,8 @@ public class StyleSheetAggregator {
 		case ELEMENT_NODE_SELECTOR:
 			final ElementSelector es = (ElementSelector) selector;
 			final String name = es.getLocalNameLowerCase();
-			if (name == null || name.equals(element.getNodeName().toLowerCase())) {
+			if (name == null || element != null &&
+					name.equals(element.getNodeName().toLowerCase())) {
 				final List<Condition> conditions = es.getConditions();
 				if (conditions != null) {
 					for (final Condition condition : conditions) {

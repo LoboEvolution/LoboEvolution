@@ -66,7 +66,6 @@ public class DocumentFragmentTest extends LoboUnitTest {
                 = "<html>\n"
                 + "  <head>\n"
                 + "    <script>\n"
-
                 + "      function test() {\n"
                 + "        var frag = document.createDocumentFragment();\n"
                 + "        if (frag.createElement) {\n"
@@ -94,7 +93,6 @@ public class DocumentFragmentTest extends LoboUnitTest {
                 + "  var frag = document.createDocumentFragment();\n"
                 + "  var d = document.createElement('div');\n"
                 + "  frag.appendChild(d);\n"
-
                 + " alert(frag.querySelectorAll('div').length);\n"
                 + " alert(frag.querySelectorAll('div')[0].tagName);\n"
                 + " alert(frag.querySelector('div').tagName);\n"
@@ -153,20 +151,16 @@ public class DocumentFragmentTest extends LoboUnitTest {
                 + "<script>\n"
                 + "  function test() {\n"
                 + "    var fragment = document.createDocumentFragment();\n"
-
                 + "   alert(fragment.childElementCount);\n"
                 + "   alert(fragment.firstElementChild);\n"
                 + "   alert(fragment.lastElementChild);\n"
-
                 + "    if (fragment.childElementCount === undefined) { return; };\n"
-
                 + "    var d = document.createElement('div');\n"
                 + "    d.id = 'myDiv';\n"
                 + "    fragment.appendChild(d);\n"
                 + "    var e = document.createElement('input');\n"
                 + "    e.id = 'first';\n"
                 + "    d.appendChild(e);\n"
-
                 + "   alert(fragment.childElementCount);\n"
                 + "   alert(fragment.firstElementChild.id);\n"
                 + "   alert(fragment.lastElementChild.id);\n"
@@ -188,24 +182,18 @@ public class DocumentFragmentTest extends LoboUnitTest {
                 + "<script>\n"
                 + "  function test() {\n"
                 + "    var fragment = document.createDocumentFragment();\n"
-
                 + "   alert(fragment.childElementCount);\n"
                 + "   alert(fragment.firstElementChild);\n"
                 + "   alert(fragment.lastElementChild);\n"
-
                 + "    if (fragment.childElementCount === undefined) { return; };\n"
-
                 + "    var txt = document.createTextNode('HtmlUnit');\n"
                 + "    fragment.appendChild(txt);\n"
-
                 + "   alert(fragment.childElementCount);\n"
                 + "   alert(fragment.firstElementChild);\n"
                 + "   alert(fragment.lastElementChild);\n"
-
                 + "    var d = document.createElement('div');\n"
                 + "    d.id = 'myDiv';\n"
                 + "    fragment.appendChild(d);\n"
-
                 + "   alert(fragment.childElementCount);\n"
                 + "   alert(fragment.firstElementChild.id);\n"
                 + "   alert(fragment.lastElementChild.id);\n"
@@ -222,9 +210,8 @@ public class DocumentFragmentTest extends LoboUnitTest {
     @Alerts({"null", "null", "null", "null", "[object HTMLDivElement]", "null", "null"})
     public void getElementById() {
         final String html = "<html>\n"
-                + "<head>\n"
-                + "  <script>\n"
-
+                + "<head>\n"  
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    var fragment = document.createDocumentFragment();\n"
                 + "    var d = document.createElement('div');\n"
@@ -233,7 +220,6 @@ public class DocumentFragmentTest extends LoboUnitTest {
                 + "    var e = document.createElement('input');\n"
                 + "    e.id = 'first';\n"
                 + "    d.appendChild(e);\n"
-
                 + "   alert(document.getElementById(''));\n"
                 + "   alert(document.getElementById(undefined));\n"
                 + "   alert(document.getElementById(null));\n"
@@ -263,7 +249,6 @@ public class DocumentFragmentTest extends LoboUnitTest {
                 + "    function test() {\n"
                 + "      var fragment = document.createDocumentFragment();\n"
                 + "     alert(document === fragment.ownerDocument);\n"
-
                 + "      var div = document.createElement('div');\n"
                 + "      fragment.appendChild(div);\n"
                 + "     alert(div.ownerDocument === document);\n"
@@ -290,12 +275,10 @@ public class DocumentFragmentTest extends LoboUnitTest {
                 + "      var fragment = document.createDocumentFragment();\n"
                 + "     alert(document === fragment.getRootNode());\n"
                 + "     alert(fragment === fragment.getRootNode());\n"
-
                 + "      var div = document.createElement('div');\n"
                 + "      fragment.appendChild(div);\n"
                 + "     alert(document === div.getRootNode());\n"
                 + "     alert(fragment === div.getRootNode());\n"
-
                 + "      document.body.appendChild(fragment);\n"
                 + "     alert(document === fragment.getRootNode());\n"
                 + "     alert(fragment === fragment.getRootNode());\n"

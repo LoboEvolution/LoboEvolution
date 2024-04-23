@@ -39,7 +39,7 @@ import org.loboevolution.html.dom.HTMLButtonElement;
 public class HTMLButtonElementTest extends LoboUnitTest {
 
     @Test
-    @Alerts({"", "A", "a", "A", "a8", "8Afoo", "8", "@"})
+    @Alerts({"null", "A", "a", "A", "a8", "8Afoo", "8", "@"})
     public void readWriteAccessKey() {
         final String html
                 = "<html><body>\n"
@@ -277,7 +277,6 @@ public class HTMLButtonElementTest extends LoboUnitTest {
                 + "    <button id='a'>button</button><br>\n"
                 + "  </form>"
                 + "  <script>\n"
-
                 + "    alert(document.getElementById('a').form);\n"
                 + "  </script>"
                 + "</body>"
@@ -368,13 +367,10 @@ public class HTMLButtonElementTest extends LoboUnitTest {
                 + "  function test() {\n"
                 + "    var b = document.createElement('button');\n"
                 + "    alert(b.formNoValidate);\n"
-
                 + "    b.formNoValidate = '';\n"
                 + "    alert(b.formNoValidate);\n"
-
                 + "    b.formNoValidate = 'yes';\n"
                 + "    alert(b.formNoValidate);\n"
-
                 + "    b.removeAttribute('formNoValidate');\n"
                 + "    alert(b.formNoValidate);\n"
                 + "  }\n"

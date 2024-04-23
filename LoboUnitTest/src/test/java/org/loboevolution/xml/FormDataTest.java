@@ -72,7 +72,6 @@ public class FormDataTest extends LoboUnitTest {
                 + "  try {\n"
                 + "    var formData = new FormData();\n"
                 + "    if (!formData.delete) { alert('no delete'); return; }\n"
-
                 + "    formData.append('myKey', 'myValue');\n"
                 + "    formData.append('myKey1', '');\n"
                 + "    formData.append('mykey 2', '');\n"
@@ -82,7 +81,6 @@ public class FormDataTest extends LoboUnitTest {
                 + "    alert('create: ' + e.message);\n"
                 + "    return;\n"
                 + "  }\n"
-
                 + "  try {\n"
                 + "    formData.delete('mykey');\n"
                 + "    formData.delete('mykey 2');\n"
@@ -111,7 +109,8 @@ public class FormDataTest extends LoboUnitTest {
     public void get() {
         final String html
                 = "<html><head>\n"
-                + "<script>\n"                + "function test() {\n"
+                + "<script>\n"
+                + "function test() {\n"
                 + "  try {\n"
                 + "    var formData = new FormData();\n"
                 + "    if (!formData.get) {alert('no get'); return; }\n"
@@ -149,7 +148,6 @@ public class FormDataTest extends LoboUnitTest {
                 + "  try {\n"
                 + "    var formData = new FormData();\n"
                 + "    if (!formData.get) {alert('no getAll'); return; }\n"
-
                 + "    formData.append('myKey', 'myValue');\n"
                 + "    formData.append('myKey', 'myValue2');\n"
                 + "    formData.append('mykey3', 'myValue3');\n"
@@ -158,7 +156,6 @@ public class FormDataTest extends LoboUnitTest {
                 + "   alert('create: ' + e.message);\n"
                 + "    return;\n"
                 + "  }\n"
-
                 + "  try {\n"
                 + "   alert(formData.getAll('myKey'));\n"
                 + "   alert(formData.getAll('mykey'));\n"
@@ -185,7 +182,6 @@ public class FormDataTest extends LoboUnitTest {
                 + "  try {\n"
                 + "    var formData = new FormData();\n"
                 + "    if (!formData.has) {alert('no has'); return; }\n"
-
                 + "    formData.append('myKey', 'myValue');\n"
                 + "    formData.append('myKey1', '');\n"
                 + "    formData.append('mykey 2', '');\n"
@@ -193,7 +189,6 @@ public class FormDataTest extends LoboUnitTest {
                 + "   alert('create: ' + e.message);\n"
                 + "    return;\n"
                 + "  }\n"
-
                 + "  try {\n"
                 + "   alert(formData.has('myKey'));\n"
                 + "   alert(formData.has('mykey'));\n"
@@ -425,11 +420,9 @@ public class FormDataTest extends LoboUnitTest {
                 + "   alert('no entries');\n"
                 + "    return;"
                 + "  }\n"
-
                 + "  formData.append('myKey', 'myValue');\n"
                 + "  formData.append('myKey2', '');\n"
                 + "  formData.append('myKey', 'myvalue2');\n"
-
                 + "  for (var pair of formData.entries()) {\n"
                 + "   alert(pair[0]);\n"
                 + "   alert(pair[1]);\n"
@@ -449,36 +442,29 @@ public class FormDataTest extends LoboUnitTest {
     public void entriesIterator() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function test() {\n"
                 + "  var formData = new FormData();\n"
                 + "  if (!formData.get) {\n"
                 + "   alert('no entries');\n"
                 + "    return;"
                 + "  }\n"
-
                 + "  formData.append('myKey', 'myValue');\n"
                 + "  formData.append('myKey2', '');\n"
                 + "  formData.append('myKey', 'myvalue2');\n"
-
                 + "  if (typeof Symbol != 'undefined') {\n"
                 + "   alert(formData[Symbol.iterator] === formData.entries);\n"
                 + "  }\n"
-
                 + "  var iterator = formData.entries();\n"
                 + " alert(iterator);\n"
-
                 + "  var nextItem = iterator.next();\n"
                 + "  for (var x in nextItem) {\n"
                 + "   alert(x);\n"
                 + "  }\n"
-
                 + "  while (nextItem.done == false) {\n"
                 + "   alert(nextItem.value[0]);\n"
                 + "   alert(nextItem.value[1]);\n"
                 + "    nextItem = iterator.next();\n"
                 + "  }\n"
-
                 + "}\n"
                 + "</script>\n"
                 + "</head>\n"

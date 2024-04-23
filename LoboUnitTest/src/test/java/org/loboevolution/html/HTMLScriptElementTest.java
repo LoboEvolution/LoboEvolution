@@ -44,7 +44,6 @@ public class HTMLScriptElementTest extends LoboUnitTest {
         final String html = "<html>\n"
                 + "  <head>\n"
                 + "    <script>\n"
-
                 + "      function test() {\n"
                 + "        var script = document.createElement('script');\n"
                 + "        script.id = 'b';\n"
@@ -475,7 +474,8 @@ public class HTMLScriptElementTest extends LoboUnitTest {
 
                         + "  alert('script');\n"
                         + "</script>\n"
-                        + "    <script>\n" + "  alert('start');\n"
+                        + "    <script>\n" 
+                + "  alert('start');\n"
                         + "  var script = document.getElementById('js1');\n"
                         + "  var source = document.createTextNode(\"alert('executed');\");\n"
                         + "  try {\n"
@@ -540,7 +540,8 @@ public class HTMLScriptElementTest extends LoboUnitTest {
 
                         + "  alert('script');\n"
                         + "</script>\n"
-                        + "    <script>\n" + "  alert('start');\n"
+                        + "    <script>\n" 
+                + "  alert('start');\n"
                         + "  var script = document.getElementById('js1');\n"
                         + "  script.text = \"alert('executed');\";\n"
                         + "  alert('end');\n"
@@ -561,7 +562,8 @@ public class HTMLScriptElementTest extends LoboUnitTest {
                         + "    <script>\n"
                         + "</script>\n"
                         + "<script id='js1'></script>\n"
-                        + "    <script>\n" + "  alert('start');\n"
+                        + "    <script>\n" 
+                + "  alert('start');\n"
                         + "  var script = document.getElementById('js1');\n"
                         + "  script.src = \"" + URL_SECOND + "\";\n"
                         + "  alert('end');\n"
@@ -579,7 +581,8 @@ public class HTMLScriptElementTest extends LoboUnitTest {
         final String html =
                 "<html><head></head><body>\n"
                         + "<script id='js1'> </script>\n"
-                        + "    <script>\n" + "  alert('start');\n"
+                        + "    <script>\n" 
+                + "  alert('start');\n"
                         + "  var script = document.getElementById('js1');\n"
                         + "  script.src = \"" + URL_SECOND + "\";\n"
                         + "  alert('end');\n"
@@ -600,7 +603,8 @@ public class HTMLScriptElementTest extends LoboUnitTest {
                         + "<script id='js1'>\n"
                         + "  alert('script');\n"
                         + "</script>\n"
-                        + "    <script>\n" + "  alert('start');\n"
+                        + "    <script>\n" 
+                + "  alert('start');\n"
                         + "  var script = document.getElementById('js1');\n"
                         + "  script.src = \"" + URL_SECOND + "\";\n"
                         + "  alert('end');\n"
@@ -621,7 +625,8 @@ public class HTMLScriptElementTest extends LoboUnitTest {
                         + "    <script>\n"
                         + "</script>\n"
                         + "<script id='js1'>alert('executed');</script>\n"
-                        + "    <script>\n" + "  alert('start');\n"
+                        + "    <script>\n" 
+                + "  alert('start');\n"
                         + "  var script = document.getElementById('js1');\n"
                         + "  document.body.appendChild(script);\n"
                         + "  alert('end');\n"
@@ -645,7 +650,8 @@ public class HTMLScriptElementTest extends LoboUnitTest {
 
                         + "  alert('executed');\n"
                         + "</script>\n"
-                        + "    <script>\n" + "  alert('start');\n"
+                        + "    <script>\n" 
+                + "  alert('start');\n"
                         + "  var script = document.getElementById('js1');\n"
                         + "  document.body.insertBefore(script, null);\n"
                         + "  alert('end');\n"
@@ -815,7 +821,7 @@ public class HTMLScriptElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("\\n\\s\\s<ul>{{for\\speople}}\\n\\s\\s\\s\\s<li>Name:\\s{{:name}}</li>\\n\\s\\s{{/for}}</ul>\\n")
+    @Alerts("<ul>{{for people}}<li>Name: {{:name}}</li>{{/for}}</ul>\\n")
     public void specialScriptType() {
         final String html
                 = "<html>\n"
@@ -827,13 +833,12 @@ public class HTMLScriptElementTest extends LoboUnitTest {
                 + "    <li>Name: {{:name}}</li>\n"
                 + "  {{/for}}</ul>\n"
                 + "</script>\n"
-
-                + "<script>\n"                + "function doTest() {\n"
+                + "<script>\n"
+                + "function doTest() {\n"
                 + "  script = document.getElementById('template');\n"
                 + "  alert(script.innerHTML);\n"
                 + "}\n"
                 + "</script>\n"
-
                 + "</head>\n"
                 + "<body onload='doTest()'>\n"
                 + "</body></html>";
@@ -895,49 +900,40 @@ public class HTMLScriptElementTest extends LoboUnitTest {
     public void innerHtml() {
         final String html
                 = "<html><head>\n"
-
                 + "<script id='script1'>function foo() { return a > b}</script>\n"
-
                 + "    <script>\n"
                 + "function doTest() {\n"
                 + "  script = document.getElementById('script1');\n"
                 + "  alert(script.innerHTML);\n"
-
                 + "  script = document.getElementById('mce');\n"
                 + "  alert(script.innerHTML);\n"
-
                 + "}\n"
                 + "</script>\n"
                 + "</head><body onload='doTest()'>\n"
                 // this is done by TinyMce
                 + "<script>document.write('<mce:script id=\"mce\">function mce() { return a > b}</mce:script>');</script>\n"
-
                 + "</body></html>";
 
         checkHtmlAlert(html);
     }
 
     @Test
-    @Alerts("\\n\\s\\s\\s\\s<script\\sid=\"testScript\">function\\sfoo()\\s{\\sreturn\\sa\\s>\\sb}</script>\\n\\s\\s")
+    @Alerts("<SCRIPT id=\"testScript\">function foo() { return a > b}</SCRIPT>")
     public void innerHTMLGetSet() {
         final String html
                 = "<html>\n"
                 + "<head></head>\n"
                 + "<body>\n"
-
                 + "  <div id='tester'>\n"
                 + "    <script id='testScript'>function foo() { return a > b}</script>\n"
                 + "  </div>\n"
-
                 + "  <script type='text/javascript'>\n"
-
                 + "    var div = document.getElementById('tester');\n"
                 + "    try {\n"
                 + "      div.innerHTML = div.innerHTML;\n"
                 + "    } catch (e) { alert('exception'); }\n"
                 + "    alert(div.innerHTML);\n"
                 + "  </script>\n"
-
                 + "</body>\n"
                 + "</html>\n";
 
@@ -948,8 +944,10 @@ public class HTMLScriptElementTest extends LoboUnitTest {
     @Alerts({"undefined", "append", "append done", "from script", "undefined"})
     public void asyncOnLoad() {
         final String html = "<html><body>\n"
-                + "<script>\n"                + "</script>\n"
-                + "<script>\n"                + "  var script = document.createElement('script');\n"
+                + "<script>\n"
+                + "</script>\n"
+                + "<script>\n"
+                + "  var script = document.createElement('script');\n"
                 + "  alert(script.readyState);\n"
                 + "  script.src = 'js.js';\n"
                 + "  script.async = true;\n"
@@ -977,19 +975,15 @@ public class HTMLScriptElementTest extends LoboUnitTest {
                 + "  var script = document.getElementById('script1');\n"
                 + "  alert(script.async);\n"
                 + "  alert(script.getAttribute('async'));\n"
-
                 + "  script.async = true;\n"
                 + "  alert(script.async);\n"
                 + "  alert(script.getAttribute('async'));\n"
-
                 + "  script = document.getElementById('script2');\n"
                 + "  alert(script.async);\n"
                 + "  alert(script.getAttribute('async'));\n"
-
                 + "  script.async = false;\n"
                 + "  alert(script.async);\n"
                 + "  alert(script.getAttribute('async'));\n"
-
                 + "}\n"
                 + "</script>\n"
                 + "</head><body onload='doTest()'>\n"
@@ -1010,19 +1004,15 @@ public class HTMLScriptElementTest extends LoboUnitTest {
                 + "  var script = document.getElementById('script1');\n"
                 + "  alert(script.async);\n"
                 + "  alert(script.getAttribute('async'));\n"
-
                 + "  script.setAttribute('async', true);\n"
                 + "  alert(script.async);\n"
                 + "  alert(script.getAttribute('async'));\n"
-
                 + "  script = document.getElementById('script2');\n"
                 + "  alert(script.async);\n"
                 + "  alert(script.getAttribute('async'));\n"
-
                 + "  script.setAttribute('async', true);\n"
                 + "  alert(script.async);\n"
                 + "  alert(script.getAttribute('async'));\n"
-
                 + "  script.removeAttribute('async');\n"
                 + "  alert(script.async);\n"
                 + "  alert(script.getAttribute('async'));\n"
@@ -1040,13 +1030,11 @@ public class HTMLScriptElementTest extends LoboUnitTest {
         final String html = "<html>\n"
                 + "  <head>\n"
                 + "    <script>\n"
-
                 + "      function test() {\n"
                 + "        var script = document.createElement('script');\n"
                 + "        script.type = 'text/javascript';\n"
                 + "        script.async = true;\n"
                 + "        script.src = 'script.js';\n"
-
                 + "        var s = document.getElementsByTagName('script')[0];\n"
                 + "        s.parentNode.insertBefore(script, s);\n"
                 + "      }\n"
@@ -1064,15 +1052,12 @@ public class HTMLScriptElementTest extends LoboUnitTest {
         final String html = "<html>\n"
                 + "  <head>\n"
                 + "    <script>\n"
-
                 + "      function test() {\n"
                 + "        var script = document.createElement('script');\n"
                 + "        script.type = 'true/text/javascript';\n"
                 + "        script.src = 'script.js';\n"
-
                 + "        var s = document.getElementsByTagName('script')[0];\n"
                 + "        s.parentNode.insertBefore(script, s);\n"
-
                 + "        alert('change type');\n"
                 + "        s.type = 'text/javascript';\n"
                 + "        alert('type changed');\n"
@@ -1085,7 +1070,7 @@ public class HTMLScriptElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"out", "\\n\\s\\s\\s\\s<!--\\syy\\s--!>\\n\\s\\s\\s\\salert('out');\\n\\s\\s"})
+    @Alerts({"out", "<!-- yy --!>alert('out');\\n  "})
     public void incorrectlyClosedComment() {
         final String html =
                 "<html>\n"
@@ -1204,7 +1189,6 @@ public class HTMLScriptElementTest extends LoboUnitTest {
         final String html = "<html>\n"
                 + "  <head>\n"
                 + "    <script>\n"
-
                 + "    </script>\n"
                 + "    <script src='http://www.unknown-host.xyz' onload='alert(\"onload\")' onerror='alert(\"onerror\")'></script>\n"
                 + "  </head>\n"

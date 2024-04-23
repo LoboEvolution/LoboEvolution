@@ -37,9 +37,6 @@ import org.loboevolution.driver.LoboUnitTest;
 @ExtendWith(AlertsExtension.class)
 public class CSSRuleListTest extends LoboUnitTest {
 
-    /**
-     * @throws Exception on test failure
-     */
     @Test
     @Alerts({"1", "[object CSSStyleRule]"})
     public void ruleList() {
@@ -59,9 +56,6 @@ public class CSSRuleListTest extends LoboUnitTest {
         checkHtmlAlert(html);
     }
 
-    /**
-     * @throws Exception on test failure
-     */
     @Test
     @Alerts("undefined")
     public void wrongRuleListAccess() {
@@ -81,9 +75,6 @@ public class CSSRuleListTest extends LoboUnitTest {
         checkHtmlAlert(html);
     }
 
-    /**
-     * @throws Exception on test failure
-     */
     @Test
     @Alerts("true")
     public void has() {
@@ -102,9 +93,6 @@ public class CSSRuleListTest extends LoboUnitTest {
         checkHtmlAlert(html);
     }
 
-    /**
-     * @throws Exception on test failure
-     */
     @Test
     @Alerts({"0", "undefined"})
     public void ruleListUnknownAtRule() {
@@ -124,11 +112,8 @@ public class CSSRuleListTest extends LoboUnitTest {
         checkHtmlAlert(html);
     }
 
-    /**
-     * @throws Exception on test failure
-     */
     @Test
-    @Alerts({"1", "[object CSSKeyframesRule]"})
+    @Alerts({"1", "[object CSSKeyFramesRule]"})
     public void ruleListKeyframes() {
         final String html = "<html><head>\n"
                 + "<style>\n"
@@ -146,9 +131,6 @@ public class CSSRuleListTest extends LoboUnitTest {
         checkHtmlAlert(html);
     }
 
-    /**
-     * @throws Exception on test failure
-     */
     @Test
     @Alerts({"1", "false", "true", "false", "false"})
     public void in() {
@@ -171,9 +153,6 @@ public class CSSRuleListTest extends LoboUnitTest {
         checkHtmlAlert(html);
     }
 
-    /**
-     * @throws Exception on test failure
-     */
     @Test
     @Alerts("[object CSSStyleRule]")
     public void item() {

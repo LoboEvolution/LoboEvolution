@@ -61,7 +61,8 @@ public class HTMLImageElement2Test extends LoboUnitTest {
     @Alerts("1")
     public void onLoadCalledWhenImageDownloadedDynamic() {
         final String html = "<html><body>\n"
-                + "<script>\n"                + "  var i = document.createElement('img');\n"
+                + "<script>\n"
+                + "  var i = document.createElement('img');\n"
                 + "  i.src = '" + URL_SECOND + "';\n"
                 + "  i.src = '" + URL_THIRD + "';\n"
                 + "  i.onload = function() { alert(1); };\n"
@@ -74,7 +75,8 @@ public class HTMLImageElement2Test extends LoboUnitTest {
     @Alerts("1")
     public void onLoadCalledWhenImageDownloadedDynamicOnLoadAlreadyset() {
         final String html = "<html><body>\n"
-                + "<script>\n"                + "  var i = document.createElement('img');\n"
+                + "<script>\n"
+                + "  var i = document.createElement('img');\n"
                 + "  i.onload = function() { alert(1); };\n"
                 + "  i.src = '" + URL_SECOND + "';\n"
                 + "</script></body></html>";
@@ -86,7 +88,8 @@ public class HTMLImageElement2Test extends LoboUnitTest {
     @Alerts({"1", "2"})
     public void onLoadCalledWhenImageDownloadedDynamicTwoSteps() {
         final String html = "<html><body>\n"
-                + "<script>\n"                + "  var i = document.createElement('img');\n"
+                + "<script>\n"
+                + "  var i = document.createElement('img');\n"
                 + "  i.src = '" + URL_SECOND + "';\n"
                 + "  i.onload = function() {\n"
                 + "    alert(1);\n"

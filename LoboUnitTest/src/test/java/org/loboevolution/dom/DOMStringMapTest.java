@@ -42,7 +42,8 @@ public class DOMStringMapTest extends LoboUnitTest {
     public void get() {
         final String html
                 = "<html><head>\n"
-                + "<script>\n"                + "function test() {\n"
+                + "<script>\n"
+                + "function test() {\n"
                 + "  if (document.body.dataset) {\n"
                 + "   alert(document.body.dataset.hi);\n"
                 + "   alert(document.body.dataset.hello);\n"
@@ -59,7 +60,8 @@ public class DOMStringMapTest extends LoboUnitTest {
     public void put() {
         final String html
                 = "<html><head>\n"
-                + "<script>\n"                + "function test() {\n"
+                + "<script>\n"
+                + "function test() {\n"
                 + "  if (document.body.dataset) {\n"
                 + "    document.body.dataset.dateOfBirth = 'old';\n"
                 + "   alert(document.body.dataset.dateOfBirth);\n"

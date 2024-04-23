@@ -276,7 +276,6 @@ public class HTMLOptionsCollectionTest extends LoboUnitTest {
                 + "        alert(oSelect.length);\n"
                 + "        var opt = new Option('foo', '123');\n"
                 + "        oSelect.options.add(opt" + param + ");\n"
-
                 + "        alert(oSelect.options.length);\n"
                 + "        for (var i = 0; i < oSelect.options.length; i++) {\n"
                 + "          alert(oSelect.options[i].text + (oSelect.options[i].selected ? '*' : ''));\n"
@@ -512,7 +511,6 @@ public class HTMLOptionsCollectionTest extends LoboUnitTest {
                 + "        alert(oSelect.length);\n"
                 + "        var opt = new Option('foo', '123');\n"
                 + "        oSelect.options[" + pos + "] = " + param + ";\n"
-
                 + "        alert(oSelect.options.length);\n"
                 + "        for (var i = 0; i < oSelect.options.length; i++) {\n"
                 + "          alert(oSelect.options[i].text + (oSelect.options[i].selected ? '*' : ''));\n"
@@ -643,7 +641,6 @@ public class HTMLOptionsCollectionTest extends LoboUnitTest {
                 + "      try {\n"
                 + "        var oSelect = document.forms.testForm.select1;\n"
                 + "        oSelect.options.remove(" + pos + ");\n"
-
                 + "        alert(oSelect.options.length);\n"
                 + "        for (var i = 0; i < oSelect.options.length; i++) {\n"
                 + "          alert(oSelect.options[i].text + (oSelect.options[i].selected ? '*' : ''));\n"
@@ -674,7 +671,6 @@ public class HTMLOptionsCollectionTest extends LoboUnitTest {
     public void length() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function test() {\n"
                 + "  var sel = document.form1.select0;\n"
                 + "  alert(sel.options.length);\n"
@@ -683,15 +679,12 @@ public class HTMLOptionsCollectionTest extends LoboUnitTest {
                 + "  sel = document.form1.select3;\n"
                 + "  alert(sel.options.length);\n"
                 + "}</script></head>\n"
-
                 + "<body onload='test()'>\n"
                 + "<form name='form1'>\n"
                 + "  <select name='select0'></select>\n"
-
                 + "  <select name='select1'>\n"
                 + "    <option>One</option>\n"
                 + "  </select>\n"
-
                 + "  <select name='select3'>\n"
                 + "    <option>One</option>\n"
                 + "    <option>Two</option>\n"
@@ -744,7 +737,6 @@ public class HTMLOptionsCollectionTest extends LoboUnitTest {
     private void setLength(final String lenght) {
         final String html
                 = "<html><head><script>\n"
-
                 + "function test() {\n"
                 + "  var sel = document.form1.select0;\n"
                 + "  try {\n"
@@ -754,7 +746,6 @@ public class HTMLOptionsCollectionTest extends LoboUnitTest {
                 + "      alert(sel.options[i].text);\n"
                 + "    }\n"
                 + "  } catch (e) { alert('exception'); }\n"
-
                 + "  var sel = document.form1.select1;\n"
                 + "  try {\n"
                 + "    sel.options.length = " + lenght + ";\n"
@@ -763,7 +754,6 @@ public class HTMLOptionsCollectionTest extends LoboUnitTest {
                 + "      alert(sel.options[i].text);\n"
                 + "    }\n"
                 + "  } catch (e) { alert('exception'); }\n"
-
                 + "  var sel = document.form1.select3;\n"
                 + "  try {\n"
                 + "    sel.options.length = " + lenght + ";\n"
@@ -773,15 +763,12 @@ public class HTMLOptionsCollectionTest extends LoboUnitTest {
                 + "    }\n"
                 + "  } catch (e) { alert('exception'); }\n"
                 + "}</script></head>\n"
-
                 + "<body onload='test()'>\n"
                 + "  <form name='form1'>\n"
                 + "    <select name='select0'></select>\n"
-
                 + "    <select name='select1'>\n"
                 + "      <option>One</option>\n"
                 + "    </select>\n"
-
                 + "    <select name='select3'>\n"
                 + "      <option>One</option>\n"
                 + "      <option>Two</option>\n"
@@ -798,7 +785,6 @@ public class HTMLOptionsCollectionTest extends LoboUnitTest {
     public void setLength_increase() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function test() {\n"
                 + "  var sel = document.form1.select0;\n"
                 + "  try {\n"
@@ -806,7 +792,6 @@ public class HTMLOptionsCollectionTest extends LoboUnitTest {
                 + "    alert(sel.options.length);\n"
                 + "    alert(sel.options[0].text);\n"
                 + "  } catch (e) { alert(e); }\n"
-
                 + "  sel = document.form1.select1;\n"
                 + "  try {\n"
                 + "    sel.options.length = 4;\n"
@@ -817,11 +802,9 @@ public class HTMLOptionsCollectionTest extends LoboUnitTest {
                 + "    alert(sel.options[1].childNodes.length);\n"
                 + "  } catch (e) { alert(e); }\n"
                 + "}</script></head>\n"
-
                 + "<body onload='test()'>\n"
                 + "<form name='form1'>\n"
                 + "  <select name='select0'></select>\n"
-
                 + "  <select name='select1'>\n"
                 + "    <option>One</option>\n"
                 + "  </select>\n"
@@ -836,7 +819,6 @@ public class HTMLOptionsCollectionTest extends LoboUnitTest {
     public void in() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function test() {\n"
                 + "  var opts = document.form1.select.options;\n"
                 + "  alert(opts.length);\n"
@@ -845,7 +827,6 @@ public class HTMLOptionsCollectionTest extends LoboUnitTest {
                 + "  alert(1 in opts);\n"
                 + "  alert(42 in opts);\n"
                 + "}</script></head>\n"
-
                 + "<body onload='test()'>\n"
                 + "  <form name='form1'>\n"
                 + "    <select name='select'>\n"

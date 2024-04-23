@@ -174,7 +174,7 @@ public class HTMLTableCellElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"", "#0000aa", "x"})
+    @Alerts({"null", "#0000aa", "x"})
     public void bgColor() {
         final String html =
                 "<html>\n"
@@ -233,7 +233,7 @@ public class HTMLTableCellElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"", "blah", "3", ""})
+    @Alerts({"null", "blah", "3", ""})
     public void abbr() {
         final String html =
                 "<html>\n"
@@ -498,7 +498,7 @@ public class HTMLTableCellElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"", "blah", "abc , xyz", "3", ""})
+    @Alerts({"null", "blah", "abc , xyz", "3", ""})
     public void axis() {
         final String html =
                 "<html>\n"
@@ -542,12 +542,9 @@ public class HTMLTableCellElementTest extends LoboUnitTest {
                 + "    <script>\n"
                 + "  var t = document.getElementById('t');\n"
                 + "  var td1 = document.getElementById('td1');\n"
-
                 + "  alert(td1.offsetWidth + ',' + td1.offsetHeight);\n"
-
                 + "  t.style.borderCollapse = 'collapse';\n"
                 + "  alert(td1.offsetWidth + ',' + td1.offsetHeight);\n"
-
                 + "</script></body></html>";
 
         checkHtmlAlert(html);
@@ -569,16 +566,13 @@ public class HTMLTableCellElementTest extends LoboUnitTest {
                 + "  var td1 = document.getElementById('td1');\n"
                 + "  var td2 = document.getElementById('td2');\n"
                 + "  var td3 = document.getElementById('td3');\n"
-
                 + "  alert(td1.offsetWidth + ',' + td1.offsetHeight);\n"
                 + "  alert(td2.offsetWidth + ',' + td2.offsetHeight);\n"
                 + "  alert(td3.offsetWidth + ',' + td3.offsetHeight);\n"
-
                 + "  t.style.borderCollapse = 'collapse';\n"
                 + "  alert(td1.offsetWidth + ',' + td1.offsetHeight);\n"
                 + "  alert(td2.offsetWidth + ',' + td2.offsetHeight);\n"
                 + "  alert(td3.offsetWidth + ',' + td3.offsetHeight);\n"
-
                 + "</script></body></html>";
 
         checkHtmlAlert(html);
@@ -603,11 +597,9 @@ public class HTMLTableCellElementTest extends LoboUnitTest {
                 + "  var td1 = document.getElementById('td1');\n"
                 + "  var td2 = document.getElementById('td2');\n"
                 + "  var td3 = document.getElementById('td3');\n"
-
                 + "  alert(td1.offsetWidth + ',' + td1.offsetHeight);\n"
                 + "  alert(td2.offsetWidth + ',' + td2.offsetHeight);\n"
                 + "  alert(td3.offsetWidth + ',' + td3.offsetHeight);\n"
-
                 + "  t.style.borderCollapse = 'collapse';\n"
                 + "  alert(td1.offsetWidth + ',' + td1.offsetHeight);\n"
                 + "  alert(td2.offsetWidth + ',' + td2.offsetHeight);\n"
@@ -688,20 +680,16 @@ public class HTMLTableCellElementTest extends LoboUnitTest {
                 + "    <script>\n"
                 + "  var node = document.getElementById('tabd1');\n"
                 + "  alert(node.borderColor);\n"
-
                 + "  node.borderColor = '#667788';\n"
                 + "  alert(node.borderColor);\n"
-
                 + "  node.borderColor = 'unknown';\n"
                 + "  alert(node.borderColor);\n"
-
                 + "  var node = document.getElementById('tabd2');\n"
                 + "  alert(node.borderColor);\n"
                 + "  var node = document.getElementById('tabd3');\n"
                 + "  alert(node.borderColor);\n"
                 + "  var node = document.getElementById('tabd4');\n"
                 + "  alert(node.borderColor);\n"
-
                 + "</script></body></html>";
 
         checkHtmlAlert(html);
@@ -719,20 +707,16 @@ public class HTMLTableCellElementTest extends LoboUnitTest {
                 + "    <script>\n"
                 + "  var node = document.getElementById('tabd1');\n"
                 + "  alert(node.borderColorDark);\n"
-
                 + "  node.borderColor = '#667788';\n"
                 + "  alert(node.borderColorDark);\n"
-
                 + "  node.borderColor = 'unknown';\n"
                 + "  alert(node.borderColorDark);\n"
-
                 + "  var node = document.getElementById('tabd2');\n"
                 + "  alert(node.borderColorDark);\n"
                 + "  var node = document.getElementById('tabd3');\n"
                 + "  alert(node.borderColorDark);\n"
                 + "  var node = document.getElementById('tabd4');\n"
                 + "  alert(node.borderColorDark);\n"
-
                 + "</script></body></html>";
 
         checkHtmlAlert(html);
@@ -750,20 +734,16 @@ public class HTMLTableCellElementTest extends LoboUnitTest {
                 + "    <script>\n"
                 + "  var node = document.getElementById('tabd1');\n"
                 + "  alert(node.borderColorLight);\n"
-
                 + "  node.borderColor = '#667788';\n"
                 + "  alert(node.borderColorLight);\n"
-
                 + "  node.borderColor = 'unknown';\n"
                 + "  alert(node.borderColorLight);\n"
-
                 + "  var node = document.getElementById('tabd2');\n"
                 + "  alert(node.borderColorLight);\n"
                 + "  var node = document.getElementById('tabd3');\n"
                 + "  alert(node.borderColorLight);\n"
                 + "  var node = document.getElementById('tabd4');\n"
                 + "  alert(node.borderColorLight);\n"
-
                 + "</script></body></html>";
 
         checkHtmlAlert(html);

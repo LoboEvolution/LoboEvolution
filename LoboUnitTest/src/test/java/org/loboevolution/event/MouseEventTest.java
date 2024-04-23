@@ -65,8 +65,8 @@ public class MouseEventTest extends LoboUnitTest {
     @Alerts({"[object MouseEvent]", "click", "false", "false", "false", "false",
             "0", "0", "0", "0", "false", "false", "false", "false", "0", "0", "1"})
     public void createCtor() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new MouseEvent('click');\n"
@@ -102,8 +102,8 @@ public class MouseEventTest extends LoboUnitTest {
     @Alerts({"[object MouseEvent]", "42", "false", "false", "false", "false",
             "0", "0", "0", "0", "false", "false", "false", "false", "0", "0", "1"})
     public void createCtorNumericType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new MouseEvent(42);\n"
@@ -121,8 +121,8 @@ public class MouseEventTest extends LoboUnitTest {
     @Alerts({"[object MouseEvent]", "null", "false", "false", "false", "false",
             "0", "0", "0", "0", "false", "false", "false", "false", "0", "0", "1"})
     public void createCtorNullType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new MouseEvent(null);\n"
@@ -139,8 +139,8 @@ public class MouseEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorUnknownType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new MouseEvent(unknown);\n"
@@ -158,8 +158,8 @@ public class MouseEventTest extends LoboUnitTest {
     @Alerts({"[object MouseEvent]", "HtmlUnitEvent", "false", "false", "false", "false",
             "0", "0", "0", "0", "false", "false", "false", "false", "0", "0", "1"})
     public void createCtorArbitraryType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new MouseEvent('HtmlUnitEvent');\n"
@@ -177,8 +177,8 @@ public class MouseEventTest extends LoboUnitTest {
     @Alerts({"[object MouseEvent]", "click", "false", "false", "false", "false",
             "7", "0", "13", "-15", "true", "true", "true", "true", "2", "4", "3"})
     public void createCtorAllDetails() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new MouseEvent('click', {\n"
@@ -186,12 +186,10 @@ public class MouseEventTest extends LoboUnitTest {
                 + "        'screenY': 0.4,\n"
                 + "        'clientX': 13.007,\n"
                 + "        'clientY': -15,\n"
-
                 + "        'ctrlKey': true,\n"
                 + "        'shiftKey': 'true',\n"
                 + "        'altKey': 1,\n"
                 + "        'metaKey': {},\n"
-
                 + "        'button': 2,\n"
                 + "        'buttons': 4\n"
                 + "      });\n"
@@ -208,8 +206,8 @@ public class MouseEventTest extends LoboUnitTest {
     @Test
     @Alerts({"DOM2: [object MouseEvent]", "DOM3: [object MouseEvent]"})
     public void createEvent() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "     alert('DOM2: ' + document.createEvent('MouseEvents'));\n"
@@ -227,7 +225,6 @@ public class MouseEventTest extends LoboUnitTest {
     @Alerts({"click", "true", "true", "true", "1", "2", "3", "4", "true", "true", "true", "true"})
     public void initMouseEvent() {
         final String html = "<html><body><script>\n"
-
                 + "  var e = document.createEvent('MouseEvents');\n"
                 + "  e.initMouseEvent('click', true, true, window, 0, 1, 2, 3, 4, true, true, true, true, 0, null);\n"
                 + " alert(e.type);\n"
@@ -251,7 +248,6 @@ public class MouseEventTest extends LoboUnitTest {
     @Alerts({"1", "1"})
     public void dispatchEvent() {
         final String html = "<html><head><script>\n"
-
                 + "  var clickCount = 0;\n"
                 + "  var dblClickCount = 0;\n"
                 + "  function test() {\n"
@@ -301,7 +297,8 @@ public class MouseEventTest extends LoboUnitTest {
     public void buttonOnclick() {
         final String html = "<html><body>\n"
                 + "<p id='clicker'>Click me!</p>\n"
-                + "<script>\n"                + "  function handler(event) {\n"
+                + "<script>\n"
+                + "  function handler(event) {\n"
                 + "   alert(event.button);\n"
                 + "  }\n"
                 + "  var p = document.getElementById('clicker');\n"
@@ -322,7 +319,8 @@ public class MouseEventTest extends LoboUnitTest {
     public void buttonOnmousedown() {
         final String html = "<html><body>\n"
                 + "<p id='clicker'>Click me!</p>\n"
-                + "<script>\n"                + "  function handler(event) {\n"
+                + "<script>\n"
+                + "  function handler(event) {\n"
                 + "   alert(event.button);\n"
                 + "  }\n"
                 + "  var p = document.getElementById('clicker');\n"

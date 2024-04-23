@@ -40,7 +40,8 @@ public class DedicatedWorkerGlobalScopeTest extends LoboUnitTest {
     @Alerts("Received: Result = 15")
     public void onmessage() {
         final String html = "<html><body>"
-                + "<script>\n"                + "try {\n"
+                + "<script>\n"
+                + "try {\n"
                 + "  var myWorker = new Worker('worker.js');\n"
                 + "  myWorker.onmessage = function(e) {\n"
                 + "   alert('Received: ' + e.data);\n"
@@ -56,7 +57,6 @@ public class DedicatedWorkerGlobalScopeTest extends LoboUnitTest {
     @Alerts("Received: Result = 15")
     public void selfOnmessage() {
         final String html = "<html><body><script>\n"
-
                 + "try {\n"
                 + "  var myWorker = new Worker('worker.js');\n"
                 + "  myWorker.onmessage = function(e) {\n"
@@ -73,7 +73,6 @@ public class DedicatedWorkerGlobalScopeTest extends LoboUnitTest {
     @Alerts("Received: Result = 15")
     public void selfAddEventListener() {
         final String html = "<html><body><script>\n"
-
                 + "try {\n"
                 + "  var myWorker = new Worker('worker.js');\n"
                 + "  myWorker.onmessage = function(e) {\n"
@@ -95,7 +94,6 @@ public class DedicatedWorkerGlobalScopeTest extends LoboUnitTest {
     @Alerts("Received: timeout")
     public void selfSetTimeout() {
         final String html = "<html><body><script>\n"
-
                 + "try {\n"
                 + "  var myWorker = new Worker('worker.js');\n"
                 + "  myWorker.onmessage = function(e) {\n"
@@ -111,7 +109,6 @@ public class DedicatedWorkerGlobalScopeTest extends LoboUnitTest {
     @Alerts("Received: interval")
     public void selfSetInterval() {
         final String html = "<html><body><script>\n"
-
                 + "try {\n"
                 + "  var myWorker = new Worker('worker.js');\n"
                 + "  myWorker.onmessage = function(e) {\n"
@@ -127,7 +124,6 @@ public class DedicatedWorkerGlobalScopeTest extends LoboUnitTest {
     @Alerts("Received: func=function addEventListener() { [native code] }")
     public void functionDefaultValue() {
         final String html = "<html><body><script>\n"
-
                 + "try {\n"
                 + "  var myWorker = new Worker('worker.js');\n"
                 + "  myWorker.onmessage = function(e) {\n"
@@ -143,7 +139,8 @@ public class DedicatedWorkerGlobalScopeTest extends LoboUnitTest {
     @Alerts("Received: Result = 15")
     public void workerCodeWithWrongMimeType() {
         final String html = "<html><body>"
-                + "<script>\n"                + "try {\n"
+                + "<script>\n"
+                + "try {\n"
                 + "  var myWorker = new Worker('worker.js');\n"
                 + "  myWorker.onmessage = function(e) {\n"
                 + "   alert('Received: ' + e.data);\n"

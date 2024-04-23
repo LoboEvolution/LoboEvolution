@@ -40,8 +40,8 @@ public class UIEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object UIEvent]", "event", "false", "false", "false", "false"})
     public void createCtor() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new UIEvent('event');\n"
@@ -58,8 +58,8 @@ public class UIEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object UIEvent]", "event", "true", "false", "false", "true"})
     public void createCtorWithDetails() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new UIEvent('event', {\n"
@@ -79,8 +79,8 @@ public class UIEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorWithDetailsViewNotWindow() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new UIEvent('event', {\n"
@@ -98,8 +98,8 @@ public class UIEventTest extends LoboUnitTest {
     @Test
     @Alerts({"DOM2: [object UIEvent]", "DOM3: [object UIEvent]"})
     public void createEvent() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "     alert('DOM2: ' + document.createEvent('UIEvents'));\n"
@@ -117,7 +117,6 @@ public class UIEventTest extends LoboUnitTest {
     @Alerts({"[object UIEvent]", "click", "true", "true", "true", "7"})
     public void initUIEvent() {
         final String html = "<html><body><script>\n"
-
                 + "try {\n"
                 + "  var e = document.createEvent('UIEvents');\n"
                 + " alert(e);\n"

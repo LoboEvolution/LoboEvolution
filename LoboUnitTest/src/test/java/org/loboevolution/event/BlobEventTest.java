@@ -40,8 +40,8 @@ public class BlobEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtor() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new BlobEvent('blob');\n"
@@ -58,8 +58,8 @@ public class BlobEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorWithoutType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new BlobEvent();\n"
@@ -76,8 +76,8 @@ public class BlobEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorNumericType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new BlobEvent(42);\n"
@@ -94,8 +94,8 @@ public class BlobEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorNullType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new BlobEvent(null);\n"
@@ -112,8 +112,8 @@ public class BlobEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorUnknownType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new BlobEvent(unknown);\n"
@@ -130,8 +130,8 @@ public class BlobEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorArbitraryType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new BlobEvent('HtmlUnitEvent');\n"
@@ -148,8 +148,8 @@ public class BlobEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object BlobEvent]", "blob", "false", "false", "false", "[object Blob]"})
     public void createCtorAllDetails() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var debug = {hello: 'world'};\n"
@@ -170,8 +170,8 @@ public class BlobEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorAllDetailsMissingData() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new BlobEvent('blob', {\n"
@@ -189,8 +189,8 @@ public class BlobEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorAllDetailsWrongData() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new BlobEvent('blob', {\n"

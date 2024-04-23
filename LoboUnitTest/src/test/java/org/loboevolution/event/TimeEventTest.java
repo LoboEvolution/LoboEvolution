@@ -39,8 +39,8 @@ public class TimeEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtor() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new TimeEvent('time');\n"
@@ -57,8 +57,8 @@ public class TimeEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorWithoutType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new TimeEvent();\n"
@@ -75,8 +75,8 @@ public class TimeEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorNumericType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new TimeEvent(42);\n"
@@ -93,8 +93,8 @@ public class TimeEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorNullType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new TimeEvent(null);\n"
@@ -111,8 +111,8 @@ public class TimeEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorUnknownType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new TimeEvent(unknown);\n"
@@ -129,8 +129,8 @@ public class TimeEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorArbitraryType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new TimeEvent('HtmlUnitEvent');\n"
@@ -147,8 +147,8 @@ public class TimeEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorAllDetails() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var debug = {hello: 'world'};\n"
@@ -168,8 +168,8 @@ public class TimeEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorAllDetailsMissingData() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new TimeEvent('time', {\n"
@@ -187,8 +187,8 @@ public class TimeEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorAllDetailsWrongData() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new TimeEvent('time', {\n"

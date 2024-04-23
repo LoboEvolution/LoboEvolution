@@ -50,24 +50,18 @@ public class HTMLTableElementTest extends LoboUnitTest {
                 + "    <tr><td colspan='2'>cell3</td></tr>\n"
                 + "  </table>\n"
                 + "  <script type='text/javascript' language='JavaScript'>\n"
-
                 + "    var table = document.getElementById('table_1');\n"
                 + "    alert(table.caption.innerHTML);\n"
-
                 + "    table.deleteCaption();\n"
                 + "    alert(table.caption.innerHTML);\n"
-
                 + "    table.deleteCaption();\n"
                 + "    alert(table.caption);\n"
-
                 + "    var newCaption = table.createCaption();\n"
                 + "    newCaption.innerHTML = 'caption3';\n"
                 + "    alert(table.caption.innerHTML);\n"
-
                 + "    try { table.caption = 123; } catch(e) { alert('exception') }\n"
                 + "    alert(table.caption);\n"
                 + "    if (table.caption) { alert(table.caption.innerHTML) }\n"
-
                 + "    var caption4 = document.createElement('caption');\n"
                 + "    caption4.innerHTML = 'caption4';\n"
                 + "    try { table.caption = caption4; } catch(e) { alert('exception') }\n"
@@ -92,24 +86,18 @@ public class HTMLTableElementTest extends LoboUnitTest {
                 + "    <tr><td colspan='2'>cell3</td></tr>\n"
                 + "  </table>\n"
                 + "  <script type='text/javascript' language='JavaScript'>\n"
-
                 + "    var table = document.getElementById('table_1');\n"
                 + "    alert(table.tHead.id);\n"
-
                 + "    table.deleteTHead();\n"
                 + "    alert(table.tHead.id);\n"
-
                 + "    table.deleteTHead();\n"
                 + "    alert(table.tHead);\n"
-
                 + "    var newTHead = table.createTHead();\n"
                 + "    newTHead.id = 'thead3';\n"
                 + "    alert(table.tHead.id);\n"
-
                 + "    try { table.tHead = 123; } catch(e) { alert('exception') }\n"
                 + "    alert(table.tHead);\n"
                 + "    if (table.tHead) { alert(table.tHead.id) }\n"
-
                 + "    var tHead4 = document.createElement('tHead');\n"
                 + "    tHead4.id = 'thead4';\n"
                 + "    try { table.tHead = tHead4; } catch(e) { alert('exception') }\n"
@@ -137,7 +125,6 @@ public class HTMLTableElementTest extends LoboUnitTest {
                 + "    </tbody>\n"
                 + "  </table>\n"
                 + "  <script type='text/javascript' language='JavaScript'>\n"
-
                 + "    var table = document.getElementById('table_1');\n"
                 + "    var bodies = table.tBodies;\n"
                 + "    alert(bodies.length);\n"
@@ -165,7 +152,6 @@ public class HTMLTableElementTest extends LoboUnitTest {
                 + "    <tr><td colspan='2'>cell3</td></tr>\n"
                 + "  </table>\n"
                 + "  <script type='text/javascript' language='JavaScript'>\n"
-
                 + "    var table = document.getElementById('table_1');\n"
                 + "    var rows = table.rows;\n"
                 + "    alert(rows.length);\n"
@@ -188,7 +174,8 @@ public class HTMLTableElementTest extends LoboUnitTest {
     @Alerts({"1", "1"})
     public void tableHeadRows() {
         final String html = "<html><head>\n"
-                + "<script>\n"                + "function test() {\n"
+                + "<script>\n"
+                + "function test() {\n"
                 + "  var t = document.getElementById('myTable');\n"
                 + "  alert(t.rows[0].cells.length);\n"
                 + "  alert(t.rows[1].cells.length);\n"
@@ -231,7 +218,6 @@ public class HTMLTableElementTest extends LoboUnitTest {
                 + "    </tfoot>\n"
                 + "  </table>\n"
                 + "  <script type='text/javascript' language='JavaScript'>\n"
-
                 + "  <!--\n"
                 + "    var table = document.getElementById('table_1');\n"
                 + "    var bodies = table.tBodies;\n"
@@ -276,24 +262,18 @@ public class HTMLTableElementTest extends LoboUnitTest {
                 + "    <tfoot id='tfoot2'><tr><td>cell7</td><td>cell8</td><td>cell9</td></tr></tfoot>\n"
                 + "  </table>\n"
                 + "  <script>\n"
-
                 + "    var table = document.getElementById('table_1');\n"
                 + "    alert(table.tFoot.id);\n"
-
                 + "    table.deleteTFoot();\n"
                 + "    alert(table.tFoot.id);\n"
-
                 + "    table.deleteTFoot();\n"
                 + "    alert(table.tFoot);\n"
-
                 + "    var newTFoot = table.createTFoot();\n"
                 + "    newTFoot.id = 'tfoot3';\n"
                 + "    alert(table.tFoot.id);\n"
-
                 + "    try { table.tFoot = 123; } catch(e) { alert('exception') }\n"
                 + "    alert(table.tFoot);\n"
                 + "    if (table.tFoot) { alert(table.tFoot.id) }\n"
-
                 + "    var tFoot4 = document.createElement('tFoot');\n"
                 + "    tFoot4.id = 'tfoot4';\n"
                 + "    try { table.tFoot = tFoot4; } catch(e) { alert('exception') }\n"
@@ -335,7 +315,6 @@ public class HTMLTableElementTest extends LoboUnitTest {
                 + "    <tr><td>second</td></tr>\n"
                 + "  </table>\n"
                 + "  <script>\n"
-
                 + "    var table = document.getElementById('table_1');\n"
                 + "    alert(table.rows.length);\n"
                 + "    try {\n"
@@ -375,19 +354,19 @@ public class HTMLTableElementTest extends LoboUnitTest {
 
     @Test
     @Alerts({"2", "3", "1"})
-    public void insertRow_One() {
+    public void insertRowOne() {
         insertRow("1");
     }
 
     @Test
     @Alerts({"2", "3", "2"})
-    public void insertRow_Two() {
+    public void insertRowTwo() {
         insertRow("2");
     }
 
     @Test
     @Alerts({"2", "exception"})
-    public void insertRow_Three() {
+    public void insertRowThree() {
         insertRow("3");
     }
 
@@ -536,7 +515,6 @@ public class HTMLTableElementTest extends LoboUnitTest {
                 + "<body>\n"
                 + "<table id='tableID' cellspacing='2'><tr><td></td></tr></table>\n"
                 + "<script language='javascript'>\n"
-
                 + "    var table = document.getElementById('tableID');\n"
                 + "    table.cellSpacing += 1;\n"
                 + "    alert(table.cellSpacing);\n"
@@ -553,7 +531,6 @@ public class HTMLTableElementTest extends LoboUnitTest {
                 + "<body>\n"
                 + "<table id='tableID' cellpadding='2'><tr><td></td></tr></table>\n"
                 + "<script language='javascript'>\n"
-
                 + "    var table = document.getElementById('tableID');\n"
                 + "    table.cellPadding += 1;\n"
                 + "    alert(table.cellPadding);\n"
@@ -587,7 +564,7 @@ public class HTMLTableElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"", "hello", "left", "hi", "right"})
+    @Alerts({"null", "hello", "left", "hi", "right"})
     public void align() {
         final String html =
                 "<html>\n"
@@ -627,7 +604,7 @@ public class HTMLTableElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"", "#0000aa", "x"})
+    @Alerts({"null", "#0000aa", "x"})
     public void bgColor() {
         final String html =
                 "<html>\n"
@@ -663,11 +640,9 @@ public class HTMLTableElementTest extends LoboUnitTest {
                 + "  var node = document.getElementById('tab');\n"
                 + "  alert(node.innerText);\n"
                 + "  alert(node.firstChild);\n"
-
                 + "  try { node.innerText = 'abc'; } catch(e) {alert('ex');}\n"
                 + "  alert(node.innerText);\n"
                 + "  alert(node.firstChild);\n"
-
                 + "  try { node.innerText = ''; } catch(e) {alert('ex');}\n"
                 + "  alert(node.innerText);\n"
                 + "</script></body></html>";
@@ -676,20 +651,20 @@ public class HTMLTableElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"\\n\\s\\s\\s\\scell1\\n\\s\\s", "[object\\sText]", "abc", "[object\\sText]", ""})
+    @Alerts({"cell1", "[object Text]", "abc", "[object Text]", ""})
     public void textContent() {
         final String html
                 = "<html><body>\n"
                 + "  <table id='tab'>\n"
                 + "    <tr><td>cell1</td></tr>\n"
                 + "  </table>\n"
-                + "<script>\n"                + "  var node = document.getElementById('tab');\n"
+                + "<script>\n"
+                + "  var node = document.getElementById('tab');\n"
                 + "  alert(node.textContent);\n"
                 + "  alert(node.firstChild);\n"
                 + "  try { node.textContent = 'abc'; } catch(e) {alert('ex');}\n"
                 + "  alert(node.textContent);\n"
                 + "  alert(node.firstChild);\n"
-
                 + "  try { node.textContent = ''; } catch(e) {alert('ex');}\n"
                 + "  alert(node.textContent);\n"
                 + "</script></body></html>";
@@ -709,20 +684,16 @@ public class HTMLTableElementTest extends LoboUnitTest {
                 + "    <script>\n"
                 + "  var node = document.getElementById('tab1');\n"
                 + "  alert(node.borderColor);\n"
-
                 + "  node.borderColor = '#667788';\n"
                 + "  alert(node.borderColor);\n"
-
                 + "  node.borderColor = 'unknown';\n"
                 + "  alert(node.borderColor);\n"
-
                 + "  var node = document.getElementById('tab2');\n"
                 + "  alert(node.borderColor);\n"
                 + "  var node = document.getElementById('tab3');\n"
                 + "  alert(node.borderColor);\n"
                 + "  var node = document.getElementById('tab4');\n"
                 + "  alert(node.borderColor);\n"
-
                 + "</script></body></html>";
 
         checkHtmlAlert(html);
@@ -740,20 +711,16 @@ public class HTMLTableElementTest extends LoboUnitTest {
                 + "    <script>\n"
                 + "  var node = document.getElementById('tab1');\n"
                 + "  alert(node.borderColorDark);\n"
-
                 + "  node.borderColor = '#667788';\n"
                 + "  alert(node.borderColorDark);\n"
-
                 + "  node.borderColor = 'unknown';\n"
                 + "  alert(node.borderColorDark);\n"
-
                 + "  var node = document.getElementById('tab2');\n"
                 + "  alert(node.borderColorDark);\n"
                 + "  var node = document.getElementById('tab3');\n"
                 + "  alert(node.borderColorDark);\n"
                 + "  var node = document.getElementById('tab4');\n"
                 + "  alert(node.borderColorDark);\n"
-
                 + "</script></body></html>";
 
         checkHtmlAlert(html);
@@ -771,20 +738,16 @@ public class HTMLTableElementTest extends LoboUnitTest {
                 + "    <script>\n"
                 + "  var node = document.getElementById('tab1');\n"
                 + "  alert(node.borderColorLight);\n"
-
                 + "  node.borderColor = '#667788';\n"
                 + "  alert(node.borderColorLight);\n"
-
                 + "  node.borderColor = 'unknown';\n"
                 + "  alert(node.borderColorLight);\n"
-
                 + "  var node = document.getElementById('tab2');\n"
                 + "  alert(node.borderColorLight);\n"
                 + "  var node = document.getElementById('tab3');\n"
                 + "  alert(node.borderColorLight);\n"
                 + "  var node = document.getElementById('tab4');\n"
                 + "  alert(node.borderColorLight);\n"
-
                 + "</script></body></html>";
 
         checkHtmlAlert(html);
@@ -801,21 +764,15 @@ public class HTMLTableElementTest extends LoboUnitTest {
                 + "    <script>\n"
                 + "  var node = document.getElementById('tab1');\n"
                 + "  alert(node.summary);\n"
-
                 + "  node.summary = 'hello';\n"
                 + "  alert(node.summary);\n"
-
                 + "  node.summary = 'unknown';\n"
                 + "  alert(node.summary);\n"
-
                 + "  try { node.summary = unknown; } catch(e) { alert('exception') }\n"
-
                 + "  var node = document.getElementById('tab2');\n"
                 + "  alert(node.summary);\n"
-
                 + "  var node = document.getElementById('tab3');\n"
                 + "  alert(node.summary);\n"
-
                 + "</script>\n"
                 + "</body></html>";
 
@@ -823,7 +780,7 @@ public class HTMLTableElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"none", "groups", "rows", "cols", "wrong", ""})
+    @Alerts({"none", "groups", "rows", "cols", "wrong", "null"})
     public void getRules() {
         final String html
                 = "<html><body>\n"
@@ -833,7 +790,6 @@ public class HTMLTableElementTest extends LoboUnitTest {
                 + "  <table id='t4' rules='cols'></table>\n"
                 + "  <table id='t5' rules='wrong'></table>\n"
                 + "  <table id='t6'></table>\n"
-
                 + "    <script>\n"
                 + "  for (var i = 1; i <= 6; i++) {\n"
                 + "    alert(document.getElementById('t' + i).rules);\n"
@@ -850,7 +806,6 @@ public class HTMLTableElementTest extends LoboUnitTest {
         final String html
                 = "<html><body>\n"
                 + "  <table id='t1' rules='groups'></table>\n"
-
                 + "    <script>\n"
                 + "  function setRules(elem, value) {\n"
                 + "    try {\n"
@@ -858,13 +813,10 @@ public class HTMLTableElementTest extends LoboUnitTest {
                 + "    } catch (e) { alert('error'); }\n"
                 + "    alert(elem.rules);\n"
                 + "  }\n"
-
                 + "  var elem = document.getElementById('t1');\n"
                 + "  setRules(elem, 'groUPs');\n"
-
                 + "  setRules(elem, '8');\n"
                 + "  setRules(elem, 'foo');\n"
-
                 + "  setRules(elem, 'rows');\n"
                 + "  setRules(elem, 'cols');\n"
                 + "</script>\n"

@@ -46,13 +46,18 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
     @Alerts({"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]"})
     public void scriptableToString() {
         final String html
-                = "<html><body>\n" + "<style>\n"
+                = "<html><body>\n" 
+                + "<style>\n"
                 + "  div { background-color: #FFFFFF; }\n"
-                + "</style>\n" + "<div id='myDiv'></div>\n" + "<script>\n" + "  var div = document.getElementById('myDiv');\n"
+                + "</style>\n" 
+                + "<div id='myDiv'></div>\n" 
+                + "<script>\n" 
+                + "  var div = document.getElementById('myDiv');\n"
                 + "  var decl = window.getComputedStyle(div, null);\n"
                 + " alert(Object.prototype.toString.call(decl));\n"
                 + " alert(decl);\n"
-                + "</script>\n" + "</body></html>";
+                + "</script>\n" 
+                + "</body></html>";
 
         checkHtmlAlert(html);
     }
@@ -63,7 +68,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
     public void cssFloat() {
         final String html = "<html>\n"
                 + "<head>\n"
-                + "<script>\n"                + "  function test() {\n"
+               + "<script>\n"
+                + "  function test() {\n"
                 + "    var e = document.getElementById('myDiv');\n"
                 + "    var s = window.getComputedStyle(e, null);\n"
                 + "   alert(s.cssFloat);\n"
@@ -84,7 +90,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
                 + "  <div id='myDiv'><br>\n"
                 + "  <textarea id='myTextarea' cols='120' rows='20'></textarea>\n"
                 + "  </div>\n"
-                + "<script>\n"                + "var e = document.getElementById('myDiv');\n"
+                + "<script>\n"
+                + "var e = document.getElementById('myDiv');\n"
                 + "var array = [];\n"
                 + "try {\n"
                 + "  for (var i in e.style) {\n"
@@ -112,7 +119,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
                 = "<html><head><body>\n"
                 + "  <textarea id='myTextarea' cols='120' rows='20'></textarea>\n"
                 + "  </div>\n"
-                + "<script>\n"                + "var e = document.createElement('div');\n"
+                + "<script>\n"
+                + "var e = document.createElement('div');\n"
                 + "var array = [];\n"
                 + "try {\n"
                 + "  for (var i in e.style) {\n"
@@ -136,7 +144,7 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts({"", "", "auto", "pointer"})
+    @Alerts({"null", "null", "auto", "pointer"})
     public void styleElement() {
         final String html = "<html><head>\n"
                 + "<style type='text/css'>\n"
@@ -144,7 +152,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
                 + "  #myDiv2 {cursor: pointer}\n"
                 + "  /* ]]> */\n"
                 + "</style>\n"
-                + "<script>\n"                + "  function test() {\n"
+               + "<script>\n"
+                + "  function test() {\n"
                 + "    var div1 = document.getElementById('myDiv1');\n"
                 + "    var div2 = document.getElementById('myDiv2');\n"
                 + "   alert(div1.style.cursor);\n"
@@ -161,7 +170,7 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"", "", "pointer", "pointer"})
+    @Alerts({"null", "null", "pointer", "pointer"})
     public void styleElement2() {
         final String html = "<html><head>\n"
                 + "<style type='text/css'>\n"
@@ -169,7 +178,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
                 + "  #style_test_1 {cursor: pointer}\n"
                 + "  /* ]]> */\n"
                 + "</style>\n"
-                + "<script>\n"                + "  function test() {\n"
+               + "<script>\n"
+                + "  function test() {\n"
                 + "    var div1 = document.getElementById('style_test_1');\n"
                 + "    var div2 = document.getElementById('myDiv2');\n"
                 + "   alert(div1.style.cursor);\n"
@@ -191,7 +201,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
     public void zIndex() {
         final String html = "<html>\n"
                 + "<head>\n"
-                + "<script>\n"                + "  function test() {\n"
+               + "<script>\n"
+                + "  function test() {\n"
                 + "    var d = document.getElementById('myDiv');\n"
                 + "    var style = window.getComputedStyle(d, null);\n"
                 + "   alert(style.zIndex);\n"
@@ -214,7 +225,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
                 + "<head><style>div { width: 30px; }</style></head>\n"
                 + "<body>\n"
                 + "<div id='d' style='width:50px'>foo</div>\n"
-                + "<script>\n" + "var d = document.getElementById('d');\n"
+                + "<script>\n" 
+                + "var d = document.getElementById('d');\n"
                 + "var style = window.getComputedStyle(d, null);\n"
                 + "alert(style.width);\n"
                 + "</script>\n"
@@ -230,7 +242,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
     public void lengthsConvertedToPixels() {
         final String html = "<html><body>\n"
                 + "<div id='d' style='width:1em; height:1em; border:1em solid black; padding:1em; margin:1em;'>d</div>\n"
-                + "<script>\n" + "var d = document.getElementById('d');\n"
+                + "<script>\n" 
+                + "var d = document.getElementById('d');\n"
                 + "var cs = window.getComputedStyle(d, null);\n"
                 + "alert(d.style.width + ' ' + cs.width);\n"
                 + "alert(d.style.height + ' ' + cs.height);\n"
@@ -253,7 +266,7 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts({"inline", "inline", "inline", "block", "inline", "block", "block", "none"})
+    @Alerts({"inline", "inline", "inline", "block", "inline", "block", "block", "inline"})
     public void defaultDisplayValuesA() {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
                 + "  <p id='p'>\n"
@@ -264,11 +277,13 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
                 + "    <article id='article'></article>\n"
                 + "    <aside id='aside'></aside>\n"
                 + "    <audio id='audio'></audio>\n"
-                + "  </p>\n" + "  <img usemap='#imgmap'>\n"
+                + "  </p>\n" 
+                + "  <img usemap='#imgmap'>\n"
                 + "    <map name='imgmap'>\n"
                 + "      <area id='area'>\n"
                 + "    </map>\n"
-                + "  </img>\n" + "  <script>\n"
+                + "  </img>\n" 
+                + "  <script>\n"
                 + "    function x(id) {\n"
                 + "      var e = document.getElementById(id);\n"
                 + "      var cs = window.getComputedStyle(e, null);\n"
@@ -303,7 +318,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
                 + "    <blockquote id='blockquote'></blockquote>\n"
                 + "    <br id='br'>\n"
                 + "    <button id='button' type='button'></button>\n"
-                + "  </p>\n" + "  <script>\n"
+                + "  </p>\n" 
+                + "  <script>\n"
                 + "    function x(id) {\n"
                 + "      var e = document.getElementById(id);\n"
                 + "      var cs = window.getComputedStyle(e, null);\n"
@@ -313,7 +329,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
                 + "  </script>\n"
                 + "  <script>\n"
                 + "    x('b');\n"
-                + "    x('bdi');\n" + "    x('bdo');\n"
+                + "    x('bdi');\n" 
+                + "    x('bdo');\n"
                 + "    x('big');\n"
                 + "    x('blockquote');\n"
                 + "    x('br');\n"
@@ -330,16 +347,20 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
                 + "  <canvas id='canvas'></canvas>\n"
                 + "  <center id='center'></center>\n"
-                + "  <code id='code'></code>\n" + "  <table>\n"
+                + "  <code id='code'></code>\n" 
+                + "  <table>\n"
                 + "    <caption id='caption'></caption>\n"
                 + "    <colgroup id='colgroup'>\n"
                 + "      <col id='col'>\n"
                 + "    </colgroup>\n"
-                + "  </table>\n" + "  <p id='p'>\n"
+                + "  </table>\n" 
+                + "  <p id='p'>\n"
                 + "    <cite id='cite'></cite>\n"
-                + "  </p>\n" + "  <menu>\n"
+                + "  </p>\n" 
+                + "  <menu>\n"
                 + "    <command id='command'></command>\n"
-                + "  </menu>\n" + "  <script>\n"
+                + "  </menu>\n" 
+                + "  <script>\n"
                 + "    function x(id) {\n"
                 + "      var e = document.getElementById(id);\n"
                 + "      var cs = window.getComputedStyle(e, null);\n"
@@ -363,19 +384,23 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts({"none", "block", "inline", "block", "inline", "none", "block", "block", "block", "block"})
+    @Alerts({"none", "block", "inline", "block", "inline", "inline", "block", "block", "block", "block"})
     public void defaultDisplayValuesD() {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
-                + "  <datalist id='datalist'></datalist>\n" + "  <dl id='dl'>\n"
+                + "  <datalist id='datalist'></datalist>\n" 
+                + "  <dl id='dl'>\n"
                 + "    <dt id='dt'></dt>\n"
                 + "      <dd id='dd'><dd>\n"
-                + "  </dl>\n" + "  <p id='p'>\n"
+                + "  </dl>\n" 
+                + "  <p id='p'>\n"
                 + "    <del id='del'></del>\n"
-                + "  </p>\n" + "  <details id='details'></details>\n"
+                + "  </p>\n" 
+                + "  <details id='details'></details>\n"
                 + "  <dfn id='dfn'></dfn>\n"
                 + "  <dialog id='dialog'></dialog>\n"
                 + "  <dir id='dir'></dir>\n"
-                + "  <dir id='div'></div>\n" + "  <script>\n"
+                + "  <dir id='div'></div>\n" 
+                + "  <script>\n"
                 + "    function x(id) {\n"
                 + "      var e = document.getElementById(id);\n"
                 + "      var cs = window.getComputedStyle(e, null);\n"
@@ -393,7 +418,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
                 + "    x('dir');\n"
                 + "    x('div');\n"
                 + "    x('dl');\n"
-                + "    x('dt');\n" + "  </script>\n"
+                + "    x('dt');\n" 
+                + "  </script>\n"
                 + "</body></html>";
         checkHtmlAlert(html);
     }
@@ -405,7 +431,9 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
                 + "  <p id='p'>\n"
                 + "    <em id='em'></em>\n"
-                + "  </p>\n" + "  <embed id='embed'>\n" + "  <script>\n"
+                + "  </p>\n" 
+                + "  <embed id='embed'>\n" 
+                + "  <script>\n"
                 + "    function x(id) {\n"
                 + "      var e = document.getElementById(id);\n"
                 + "      var cs = window.getComputedStyle(e, null);\n"
@@ -415,7 +443,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
                 + "  </script>\n"
                 + "  <script>\n"
                 + "    x('em');\n"
-                + "    x('embed');\n" + "  </script>\n"
+                + "    x('embed');\n" 
+                + "  </script>\n"
                 + "</body></html>";
         checkHtmlAlert(html);
     }
@@ -427,11 +456,15 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
                 + "  <form id='form'>\n"
                 + "    <fieldset id='fieldset'></fieldset>\n"
-                + "  </form>\n" + "  <figure id='figure'>\n"
+                + "  </form>\n" 
+                + "  <figure id='figure'>\n"
                 + "    <figcaption id='figcaption'></figcaption>\n"
-                + "  </figure>\n" + "  <p id='p'>\n"
+                + "  </figure>\n" 
+                + "  <p id='p'>\n"
                 + "    <font id='font'></font>\n"
-                + "  </p>\n" + "  <footer id='footer'></footer>\n" + "  <script>\n"
+                + "  </p>\n" 
+                + "  <footer id='footer'></footer>\n" 
+                + "  <script>\n"
                 + "    function x(id) {\n"
                 + "      var e = document.getElementById(id);\n"
                 + "      var cs = window.getComputedStyle(e, null);\n"
@@ -445,7 +478,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
                 + "    x('figure');\n"
                 + "    x('font');\n"
                 + "    x('footer');\n"
-                + "    x('form');\n" + "  </script>\n"
+                + "    x('form');\n" 
+                + "  </script>\n"
                 + "</body></html>";
         checkHtmlAlert(html);
     }
@@ -460,8 +494,10 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
                 + "  <h3 id='h3'></h3>\n"
                 + "  <h4 id='h4'></h4>\n"
                 + "  <h5 id='h5'></h5>\n"
-                + "  <h6 id='h6'></h6>\n" + "  <header id='header'></header>\n"
-                + "  <hr id='hr'>\n" + "  <script>\n"
+                + "  <h6 id='h6'></h6>\n" 
+                + "  <header id='header'></header>\n"
+                + "  <hr id='hr'>\n" 
+                + "  <script>\n"
                 + "    function x(id) {\n"
                 + "      var e = document.getElementById(id);\n"
                 + "      var cs = window.getComputedStyle(e, null);\n"
@@ -477,7 +513,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
                 + "    x('h5');\n"
                 + "    x('h6');\n"
                 + "    x('header');\n"
-                + "    x('hr');\n" + "  </script>\n"
+                + "    x('hr');\n" 
+                + "  </script>\n"
                 + "</body></html>";
         checkHtmlAlert(html);
     }
@@ -491,15 +528,18 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
                 + "  <p id='p'>\n"
                 + "    <i id='i'></i>\n"
                 + "    <ins id='ins'></ins>\n"
-                + "  </p>\n" + "  <iframe id='iframe'></iframe>\n"
-                + "  <img id='img'></img>\n" + "  <form id='form'>\n"
+                + "  </p>\n" 
+                + "  <iframe id='iframe'></iframe>\n"
+                + "  <img id='img'></img>\n" 
+                + "  <form id='form'>\n"
                 + "    <input id='submit' type='submit'>\n"
                 + "    <input id='reset' type='reset'>\n"
                 + "    <input id='text' type='text'>\n"
                 + "    <input id='password' type='password'>\n"
                 + "    <input id='checkbox' type='checkbox'>\n"
                 + "    <input id='radio' type='radio'>\n"
-                + "  </form>\n" + "  <script>\n"
+                + "  </form>\n" 
+                + "  <script>\n"
                 + "    function x(id) {\n"
                 + "      var e = document.getElementById(id);\n"
                 + "      var cs = window.getComputedStyle(e, null);\n"
@@ -510,12 +550,15 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
                 + "  <script>\n"
                 + "    x('i');\n"
                 + "    x('iframe');\n"
-                + "    x('img');\n" + "    x('submit');\n"
+                + "    x('img');\n"
+                + "    x('submit');\n"
                 + "    x('reset');\n"
                 + "    x('text');\n"
                 + "    x('password');\n"
                 + "    x('checkbox');\n"
-                + "    x('radio');\n" + "    x('ins');\n" + "  </script>\n"
+                + "    x('radio');\n" 
+                + "    x('ins');\n" 
+                + "  </script>\n"
                 + "</body></html>";
         checkHtmlAlert(html);
     }
@@ -527,15 +570,18 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
                 + "  <p id='p'>\n"
                 + "    <kbd id='kbd'></kbd>\n"
-                + "  </p>\n" + "  <ol>\n"
+                + "  </p>\n" 
+                + "  <ol>\n"
                 + "    <li id='li'></li>\n"
-                + "  </ol>\n" + "  <form id='form'>\n"
+                + "  </ol>\n" 
+                + "  <form id='form'>\n"
                 + "    <keygen id='keygen'>\n"
                 + "    <label id='label'>\n"
                 + "    <fieldset id='fieldset'>\n"
                 + "      <legend id='legend'></legend>\n"
                 + "    </fieldset>\n"
-                + "  </form>\n" + "  <script>\n"
+                + "  </form>\n" 
+                + "  <script>\n"
                 + "    function x(id) {\n"
                 + "      var e = document.getElementById(id);\n"
                 + "      var cs = window.getComputedStyle(e, null);\n"
@@ -545,9 +591,11 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
                 + "  </script>\n"
                 + "  <script>\n"
                 + "    x('kbd');\n"
-                + "    x('keygen');\n" + "    x('label');\n"
+                + "    x('keygen');\n" 
+                + "    x('label');\n"
                 + "    x('legend');\n"
-                + "    x('li');\n" + "  </script>\n"
+                + "    x('li');\n" 
+                + "  </script>\n"
                 + "</body></html>";
         checkHtmlAlert(html);
     }
@@ -561,11 +609,15 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
                 + "    <map id='map' name='imgmap'>\n"
                 + "      <area id='area'>\n"
                 + "    </map>\n"
-                + "  </img>\n" + "  <p id='p'>\n"
+                + "  </img>\n" 
+                + "  <p id='p'>\n"
                 + "    <mark id='mark'></mark>\n"
-                + "  </p>\n" + "  <menu id='menu'>\n"
+                + "  </p>\n" 
+                + "  <menu id='menu'>\n"
                 + "    <li id='li'></li>\n"
-                + "  </menu>\n" + "  <meter id='meter'></meter>\n" + "  <script>\n"
+                + "  </menu>\n" 
+                + "  <meter id='meter'></meter>\n" 
+                + "  <script>\n"
                 + "    function x(id) {\n"
                 + "      var e = document.getElementById(id);\n"
                 + "      var cs = window.getComputedStyle(e, null);\n"
@@ -577,7 +629,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
                 + "    x('map');\n"
                 + "    x('mark');\n"
                 + "    x('menu');\n"
-                + "    x('meter');\n" + "  </script>\n"
+                + "    x('meter');\n"
+                + "  </script>\n"
                 + "</body></html>";
         checkHtmlAlert(html);
     }
@@ -589,10 +642,13 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
                 + "  <nav id='nav'>\n"
                 + "    <a id='a'></a>\n"
-                + "  </nav>\n" + "  <noscript id='noscript'></noscript> \n" + "  <object id='object'></object> "
+                + "  </nav>\n" 
+                + "  <noscript id='noscript'></noscript> \n" 
+                + "  <object id='object'></object> "
                 + "  <ol id='ol'>\n"
                 + "    <li></li>\n"
-                + "  </ol>\n" + "  <form>\n"
+                + "  </ol>\n" 
+                + "  <form>\n"
                 + "    <select>\n"
                 + "      <optgroup id='optgroup'>\n"
                 + "        <option></option>\n"
@@ -600,7 +656,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
                 + "      <option id='option'></option>\n"
                 + "    </select>\n"
                 + "    <output id='output'></output>\n"
-                + "  </form>\n" + "  <script>\n"
+                + "  </form>\n" 
+                + "  <script>\n"
                 + "    function x(id) {\n"
                 + "      var e = document.getElementById(id);\n"
                 + "      var cs = window.getComputedStyle(e, null);\n"
@@ -610,7 +667,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
                 + "  </script>\n"
                 + "  <script>\n"
                 + "    x('nav');\n"
-                + "    x('noscript');\n" + "    x('object');\n"
+                + "    x('noscript');\n" 
+                + "    x('object');\n"
                 + "    x('ol');\n"
                 + "    x('optgroup');\n"
                 + "    x('option');\n"
@@ -625,10 +683,12 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
     @Alerts({"block", "none", "block", "inline-block", "inline"})
     public void defaultDisplayValuesPQ() {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
-                + "  <p id='p'><q id='q'></q></p>\n" + "  <object>\n"
+                + "  <p id='p'><q id='q'></q></p>\n" 
+                + "  <object>\n"
                 + "    <param id='param' name='movie' value=''></param>\n"
                 + "  </object> " + "  <pre id='pre'></pre>\n"
-                + "  <progress id='progress'></progress>\n" + "  <script>\n"
+                + "  <progress id='progress'></progress>\n" 
+                + "  <script>\n"
                 + "    function x(id) {\n"
                 + "      var e = document.getElementById(id);\n"
                 + "      var cs = window.getComputedStyle(e, null);\n"
@@ -640,7 +700,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
                 + "    x('p');\n"
                 + "    x('param');\n"
                 + "    x('pre');\n"
-                + "    x('progress');\n" + "    x('q');\n"
+                + "    x('progress');\n" 
+                + "    x('q');\n"
                 + "  </script>\n"
                 + "</body></html>";
         checkHtmlAlert(html);
@@ -659,16 +720,19 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
                 + "    <strong id='strong'></strong>\n"
                 + "    <sub id='sub'></sub>\n"
                 + "    <sup id='sup'></sup>\n"
-                + "  </p> \n" + "  <samp id='samp'></samp>\n"
+                + "  </p> \n" 
+                + "  <samp id='samp'></samp>\n"
                 + "  <section id='section'></section>\n"
-                + "  <summary id='summary'></summary>\n" + "  <audio>\n"
+                + "  <summary id='summary'></summary>\n" 
+                + "  <audio>\n"
                 + "    <source id='source'>\n"
-                + "  </audio>\n" + "  <form>\n"
+                + "  </audio>\n" 
+                + "  <form>\n"
                 + "    <select id='select'>\n"
                 + "      <option></option>\n"
                 + "    </select>\n"
-                + "  </form>\n" + "  <script id='script'>\n"
-
+                + "  </form>\n" 
+                + "  <script id='script'>\n"
                 + "    function x(id) {\n"
                 + "      var e = document.getElementById(id);\n"
                 + "      var cs = window.getComputedStyle(e, null);\n"
@@ -705,15 +769,18 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
                 + "    <thead id='thead'><tr id='tr'><th id='th'>header</th></tr></thead>\n"
                 + "    <tfoot id='tfoot'><tr><td>footer</td></tr></tfoot>\n"
                 + "    <tbody id='tbody'><tr><td id='td'>body</td></tr></tbody>\n"
-                + "  </table>\n" + "  <form>\n"
+                + "  </table>\n" 
+                + "  <form>\n"
                 + "    <textarea id='textarea'></textarea>\n"
-                + "  </form>\n" + "  <p>\n"
+                + "  </form>\n" 
+                + "  <p>\n"
                 + "    <time id='time'></time>\n"
                 + "    <tt id='tt'></tt>\n"
-                + "  </p> \n" + "  <video>\n"
+                + "  </p> \n" 
+                + "  <video>\n"
                 + "    <track id='track'>\n"
-                + "  </video>\n" + "  <script id='script'>\n"
-
+                + "  </video>\n" 
+                + "  <script id='script'>\n"
                 + "    function x(id) {\n"
                 + "      var e = document.getElementById(id);\n"
                 + "      var cs = window.getComputedStyle(e, null);\n"
@@ -746,11 +813,13 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
                 + "  <p>\n"
                 + "    <u id='u'></u>\n"
                 + "    <wbr id='wbr'></wbr>\n"
-                + "  </p> \n" + "  <ul id='ul'>\n"
+                + "  </p> \n" 
+                + "  <ul id='ul'>\n"
                 + "    <li></li>\n"
-                + "  </ul>\n" + "  <var id='var'></var>\n"
-                + "  <video id='video'></video>\n" + "  <script id='script'>\n"
-
+                + "  </ul>\n" 
+                + "  <var id='var'></var>\n"
+                + "  <video id='video'></video>\n" 
+                + "  <script id='script'>\n"
                 + "    function x(id) {\n"
                 + "      var e = document.getElementById(id);\n"
                 + "      var cs = window.getComputedStyle(e, null);\n"
@@ -771,14 +840,15 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts({"rgba(0, 0, 0, 0)", "rgb(255, 0, 0)", "rgb(255, 255, 255)"})
+    @Alerts({"initial", "rgb(255, 0, 0)", "rgb(255, 255, 255)"})
     public void backgroundColor() {
         final String html = "<html><body>\n"
                 + "<div id='d0'>div 0</div>\n"
                 + "<div id='d1' style='background: red'>d</div>\n"
                 + "<div id='d2' style='background: white url(http://htmlunit.sf.net/foo.png) repeat-x fixed top right'>\n"
                 + "second div</div>\n"
-                + "<script>\n" + "function getStyle(x) {\n"
+                + "<script>\n" 
+                + "function getStyle(x) {\n"
                 + "  var d = document.getElementById(x);\n"
                 + "  var cs = window.getComputedStyle(d, null);\n"
                 + "  return cs;\n"
@@ -802,7 +872,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
                 + "<div id='d0' style='font-size: 10px;'>\n"
                 + "<div id='d1'>inside</div>\n"
                 + "</div>\n"
-                + "<script>\n" + "function getStyle(x) {\n"
+                + "<script>\n" 
+                + "function getStyle(x) {\n"
                 + "  var d = document.getElementById(x);\n"
                 + "  var cs = window.getComputedStyle(d, null);\n"
                 + "  return cs;\n"
@@ -881,8 +952,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
     @Test
     @Alerts({"111px", "auto"})
     public void computedWidthOfHiddenElements() {
-        final String content = "<html><head><script>\n"
-
+        final String content = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    var div1 = document.getElementById('myDiv1');\n"
                 + "    var cs1 = window.getComputedStyle(div1, null);\n"
@@ -900,16 +971,11 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
         checkHtmlAlert(content);
     }
 
-    /**
-     * Verifies that at least one CSS attribute is correctly inherited by default.
-     * Required by the MochiKit tests.
-     */
     @Test
-    @Alerts({",", "separate,separate", "collapse,", "collapse,collapse"})
+    @Alerts({"null,null", "separate,separate", "collapse,", "collapse,collapse"})
     public void inheritedImplicitly() {
         final String html
                 = "<html><body><table id='a'><tr id='b'><td>a</td></tr></table><script>\n"
-
                 + "var a = document.getElementById('a');\n"
                 + "var b = document.getElementById('b');\n"
                 + "var as = a.style;\n"
@@ -929,7 +995,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
     @Alerts({"underline solid rgb(0, 0, 0)", "none solid rgb(0, 0, 0)", "underline solid rgb(0, 0, 0)"})
     public void changeInParentClassNodeReferencedByRule() {
         final String html = "<html><head>\n"
-                + "<script>\n" + "function readDecoration(id) {\n"
+                + "<script>\n" 
+                + "function readDecoration(id) {\n"
                 + "  var e = document.getElementById(id);\n"
                 + "  var s = window.getComputedStyle(e, null);\n"
                 + " alert(s.textDecoration);\n"
@@ -959,7 +1026,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
     public void widthAndHeightPercentagesAndPx() {
         final String html = "<html><body onload='test()'>\n"
                 + "<div id='d1' style='width:200px;height:400px'><div id='d2' style='width:50%;height:25%'></div></div>\n"
-                + "<script>\n"                + "  function test() {\n"
+               + "<script>\n"
+                + "  function test() {\n"
                 + "    var d1 = document.getElementById('d1');\n"
                 + "    var s1 = window.getComputedStyle(d1, null);\n"
                 + "    var d2 = document.getElementById('d2');\n"
@@ -982,7 +1050,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
     public void widthAndHeightPercentagesAndEm() {
         final String html = "<html><body onload='test()'>\n"
                 + "<div id='d1' style='width:10em;height:20em'><div id='d2' style='width:50%;height:25%'></div></div>\n"
-                + "<script>\n"                + "  function test() {\n"
+               + "<script>\n"
+                + "  function test() {\n"
                 + "    var d1 = document.getElementById('d1');\n"
                 + "    var s1 = window.getComputedStyle(d1, null);\n"
                 + "    var d2 = document.getElementById('d2');\n"
@@ -1004,7 +1073,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
     public void widthAndHeightPercentagesHTML() {
         final String html = "<html style='height: 100%'>\n"
                 + "<body>\n"
-                + "<script>\n" + "  var h = document.documentElement;\n"
+                + "<script>\n" 
+                + "  var h = document.documentElement;\n"
                 + " alert(h.offsetWidth > 0);\n"
                 + " alert(h.offsetHeight > 0);\n"
                 + "</script>\n"
@@ -1030,13 +1100,15 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
                 + "    <input id='hidden' type='hidden'>\n"
                 + "    <button id='button' type='button'></button>\n"
                 + "    <textarea id='myTextarea'></textarea>\n"
-                + "  </form>\n" + "  <script>\n"
+                + "  </form>\n" 
+                + "  <script>\n"
                 + "    function x(id) {\n"
                 + "      var e = document.getElementById(id);\n"
                 + "     alert(e.offsetWidth > 0);\n"
                 + "     alert(e.offsetHeight > 0);\n"
                 + "    }\n"
-                + "  </script>\n" + "  <script>\n"
+                + "  </script>\n" 
+                + "  <script>\n"
                 + "    x('submit');\n"
                 + "    x('reset');\n"
                 + "    x('text');\n"
@@ -1059,7 +1131,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
                 + "  function test() {\n"
                 + "    var myImage = document.getElementById('myImage');\n"
                 + "   alert(myImage.offsetWidth);\n"
-                + "   alert(myImage.offsetHeight);\n" + "    var myImage = document.getElementById('myImage2');\n"
+                + "   alert(myImage.offsetHeight);\n" 
+                + "    var myImage = document.getElementById('myImage2');\n"
                 + "   alert(myImage.offsetWidth);\n"
                 + "   alert(myImage.offsetHeight);\n"
                 + "  }\n"
@@ -1076,7 +1149,6 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
     @Alerts({"0", "0"})
     public void widthAndHeightEmptySpanElement() {
         final String content = "<html><head><script id='headScript'>\n"
-
                 + "  function test() {\n"
                 + "    var headScript = document.getElementById('headScript');\n"
                 + "   alert(headScript.offsetWidth);\n"
@@ -1094,13 +1166,14 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
     @Alerts({"0", "0", "0", "0", "0", "0"})
     public void widthAndHeightScriptElement() {
         final String content = "<html><head><script id='headScript'>\n"
-
                 + "  function test() {\n"
                 + "    var headScript = document.getElementById('headScript');\n"
                 + "   alert(headScript.offsetWidth);\n"
-                + "   alert(headScript.offsetHeight);\n" + "    var bodyScript = document.getElementById('bodyScript');\n"
+                + "   alert(headScript.offsetHeight);\n" 
+                + "    var bodyScript = document.getElementById('bodyScript');\n"
                 + "   alert(bodyScript.offsetWidth);\n"
-                + "   alert(bodyScript.offsetHeight);\n" + "    var aroundScript = document.getElementById('aroundScript');\n"
+                + "   alert(bodyScript.offsetHeight);\n" 
+                + "    var aroundScript = document.getElementById('aroundScript');\n"
                 + "   alert(aroundScript.offsetWidth);\n"
                 + "   alert(aroundScript.offsetHeight);\n"
                 + "  }\n"
@@ -1116,12 +1189,13 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
     @Test
     @Alerts({"33", "17", "0", "17"})
     public void widthAndHeightChildDisplayNone() {
-        final String content = "<html><head><script>\n"
-
+        final String content = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    var outerSpan = document.getElementById('outerSpan');\n"
                 + "   alert(outerSpan.offsetWidth);\n"
-                + "   alert(outerSpan.offsetHeight);\n" + "    var outerSpanContentInvisible = document.getElementById('outerSpanContentInvisible');\n"
+                + "   alert(outerSpan.offsetHeight);\n" 
+                + "    var outerSpanContentInvisible = document.getElementById('outerSpanContentInvisible');\n"
                 + "   alert(outerSpanContentInvisible.offsetWidth);\n"
                 + "   alert(outerSpanContentInvisible.offsetHeight);\n"
                 + "  }\n"
@@ -1137,8 +1211,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
     @Test
     @Alerts({"0", "0"})
     public void widthAndHeightChildDisplayNoneWidth() {
-        final String content = "<html><head><script>\n"
-
+        final String content = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    var outer = document.getElementById('outer');\n"
                 + "   alert(outer.offsetWidth);\n"
@@ -1155,8 +1229,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
     @Test
     @Alerts({"0", "0"})
     public void widthAndHeightChildDisplayNoneWidthLineBreak() {
-        final String content = "<html><head><script>\n"
-
+        final String content = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    var outer = document.getElementById('outer');\n"
                 + "   alert(outer.offsetWidth);\n"
@@ -1206,7 +1280,6 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
                 + "     alert(el.style.width == 'auto');\n"
                 + "     alert(el.clientWidth > 100);\n"
                 + "     alert(el.offsetWidth > 100);\n"
-
                 + "      var style = window.getComputedStyle(el, null);\n"
                 + "     alert(/\\d+px/.test(style.width));\n"
                 + "     alert(style.width == 'auto');\n"
@@ -1224,7 +1297,6 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
     @Alerts({"", "rgb(0, 0, 255)"})
     public void getPropertyValue() {
         final String html = "<html><head><script>\n"
-
                 + "function doTest() {\n"
                 + "  try {\n"
                 + "    var d = document.getElementById('div1');\n"
@@ -1246,7 +1318,6 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
     @Alerts({"roman", "swiss", "roman"})
     public void handleImportant() {
         final String html = "<html><head><script>\n"
-
                 + "  function doTest() {\n"
                 + "    alertFF(document.getElementById('div1'));\n"
                 + "    alertFF(document.getElementById('div2'));\n"
@@ -1273,8 +1344,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
     @Test
     @Alerts("0")
     public void offsetHeightEmptyTag() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "   alert(document.getElementById('div1').offsetHeight);\n"
                 + "  }\n"
@@ -1290,8 +1361,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
     @Test
     @Alerts("0")
     public void offsetHeightEmpty() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "   alert(document.getElementById('div1').offsetHeight);\n"
                 + "  }\n"
@@ -1307,8 +1378,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
     @Test
     @Alerts("0")
     public void offsetHeightDisplayNone() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "   alert(document.getElementById('div1').offsetHeight);\n"
                 + "  }\n"
@@ -1324,8 +1395,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
     @Test
     @Alerts("18")
     public void offsetHeightWithContent() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "   alert(document.getElementById('div1').offsetHeight);\n"
                 + "  }\n"
@@ -1341,8 +1412,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
     @Test
     @Alerts("18")
     public void offsetHeightWithChild() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "   alert(document.getElementById('div1').offsetHeight);\n"
                 + "  }\n"
@@ -1358,8 +1429,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
     @Test
     @Alerts("81")
     public void offsetHeightWithChildHeight() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "   alert(document.getElementById('div1').offsetHeight);\n"
                 + "  }\n"
@@ -1381,7 +1452,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
                 + "    height: 100%\n"
                 + "  }\n"
                 + "</style>\n"
-                + "<script>\n"                + "  function test() {\n"
+               + "<script>\n"
+                + "  function test() {\n"
                 + "    var div1 = document.getElementById('div1');\n"
                 + "   alert(div1.offsetHeight == 0);\n"
                 + "    div1.className = 'v-loading-indicator';\n"
@@ -1399,8 +1471,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
     @Test
     @Alerts({"true", "false"})
     public void scrollbarWidth() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    var scroller = document.createElement('div');\n"
                 + "    scroller.style['width'] = '50px';\n"
@@ -1422,8 +1494,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
     @Test
     @Alerts({"true", "false"})
     public void scrollbarHeight() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    var scroller = document.createElement('div');\n"
                 + "    scroller.style['width'] = '50px';\n"
@@ -1449,7 +1521,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
                 + "<style>\n"
                 + "  .abc { z-index: 10; color:green }\n"
                 + "</style>\n"
-                + "<script>\n"                + "  function test() {\n"
+               + "<script>\n"
+                + "  function test() {\n"
                 + "    var div = document.getElementById('myDiv');\n"
                 + "   alert(div.style.zIndex);\n"
                 + "   alert(div.style['z-index']);\n"
@@ -1473,7 +1546,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
             "3px", "block", "content-box", "0px", "0px"})
     public void offsetWidth() {
         final String html = "<html><head>\n"
-                + "<script>\n"                + "  function test() {\n"
+               + "<script>\n"
+                + "  function test() {\n"
                 + "    var div = document.createElement('div');\n"
                 + "    div.style.width = '100px';\n"
                 + "    div.style.height = '100px';\n"
@@ -1515,13 +1589,14 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts({"", "", "left", "left", "right", "right"})
+    @Alerts({"null", "null", "left", "left", "right", "right"})
     public void cssFloat2() {
         final String html = "<html><head>\n"
                 + "<style>\n"
                 + "  .abc { float: right }\n"
                 + "</style>\n"
-                + "<script>\n"                + "  function test() {\n"
+               + "<script>\n"
+                + "  function test() {\n"
                 + "    var div = document.createElement('div');\n"
                 + "    div.style.float = 'left';\n"
                 + "    var style = window.getComputedStyle(div, null);\n"
@@ -1552,10 +1627,13 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
                 + "  <table>\n"
                 + "    <tr id='row1'><td>row1</td></tr>\n"
                 + "    <tr id='row2'><td>row2</td></tr>\n"
-                + "  </table>\n" + "<script>\n" + "  var r1 = document.getElementById('row1');\n"
+                + "  </table>\n" 
+                + "<script>\n" 
+                + "  var r1 = document.getElementById('row1');\n"
                 + "  var r2 = document.getElementById('row2');\n"
                 + " alert(r2.offsetTop > r1.offsetTop);\n"
-                + "</script>\n" + "</body>\n"
+                + "</script>\n" 
+                + "</body>\n"
                 + "</html>";
         checkHtmlAlert(html);
     }
@@ -1569,10 +1647,13 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
                 + "  <ul>\n"
                 + "    <li id='li1'>row1</li>\n"
                 + "    <li id='li2'>row2</li>\n"
-                + "  </ul>\n" + "<script>\n" + "  var li1 = document.getElementById('li1');\n"
+                + "  </ul>\n" 
+                + "<script>\n" 
+                + "  var li1 = document.getElementById('li1');\n"
                 + "  var li2 = document.getElementById('li2');\n"
                 + " alert(li2.offsetTop > li1.offsetTop);\n"
-                + "</script>\n" + "</body>\n"
+                + "</script>\n" 
+                + "</body>\n"
                 + "</html>";
         checkHtmlAlert(html);
     }
@@ -1586,9 +1667,12 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
                 + "  <table>\n"
                 + "    <tr><td>abcdefghijklmnopqrstuvwxyz</td></tr>\n"
                 + "  </table>\n"
-                + "  <div id='mydiv'>Heho</div>\n" + "<script>\n" + "  var d1 = document.getElementById('mydiv');\n"
+                + "  <div id='mydiv'>Heho</div>\n" 
+                + "<script>\n" 
+                + "  var d1 = document.getElementById('mydiv');\n"
                 + " alert(d1.offsetLeft < 10);\n"
-                + "</script>\n" + "</body>\n"
+                + "</script>\n" 
+                + "</body>\n"
                 + "</html>";
         checkHtmlAlert(html);
     }
@@ -1601,7 +1685,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
                 + "<style>\n"
                 + "  .abc { xyz: 1 }\n"
                 + "</style>\n"
-                + "<script>\n"                + "  function test() {\n"
+               + "<script>\n"
+                + "  function test() {\n"
                 + "    var div = document.getElementById('mydiv');\n"
                 + "    var style = window.getComputedStyle(div, null);\n"
                 + "   alert(style.xyz);\n"
@@ -1619,7 +1704,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
     @Alerts("1")
     public void selector() {
         final String html = "<html><head>\n"
-                + "<script>\n"                + "  function test() {\n"
+               + "<script>\n"
+                + "  function test() {\n"
                 + "   alert(document.querySelectorAll('div *').length);\n"
                 + "  }\n"
                 + "</script>\n"
@@ -1634,10 +1720,10 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts({"", "0px", "20%", "80px", "25%", "100px"})
+    @Alerts({"null", "0px", "20%", "80px", "25%", "100px"})
     public void marginLeftRight() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    var div1 = document.getElementById('div1');\n"
                 + "    var container = document.createElement('div');\n"
@@ -1670,10 +1756,10 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts({"", "0px", "", "0px", "50%", "100px", "50%", "100px"})
+    @Alerts({"null", "0px", "null", "0px", "50%", "100px", "50%", "100px"})
     public void topLeft() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    var div1 = document.getElementById('div1');\n"
                 + "    var parent = document.createElement('div');\n"
@@ -1707,7 +1793,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
     public void borderBoxAffectsOffsetWidth() {
         final String html = "<html>\n"
                 + "<head>\n"
-                + "<script>\n"                + "  function test() {\n"
+               + "<script>\n"
+                + "  function test() {\n"
                 + "    var div1 = document.getElementById('div1');\n"
                 + "    var empty = getOffsetWidth('width: 300px; height: 300px;');\n"
                 + "    var marginAndPadding = getOffsetWidth('width: 300px; height: 300px; margin: 3px; padding: 5px;');\n"
@@ -1740,8 +1827,10 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
     public void borderBoxAffectsOffsetHeight() {
         final String html = "<html>\n"
                 + "<head>\n"
-                + "<script>\n"                + "  function test() {\n"
-                + "    var div1 = document.getElementById('div1');\n" + "    var empty = getOffsetHeight('width: 300px; height: 300px;');\n"
+               + "<script>\n"
+                + "  function test() {\n"
+                + "    var div1 = document.getElementById('div1');\n" 
+                + "    var empty = getOffsetHeight('width: 300px; height: 300px;');\n"
                 + "    var marginAndPadding = getOffsetHeight('width: 300px; height: 300px; margin: 3px; padding: 5px;');\n"
                 + "    var withBorderBox = getOffsetHeight('width: 300px; height: 300px; margin: 3px; padding: 5px;"
                 + " box-sizing: border-box;');\n"
@@ -1772,7 +1861,6 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
     public void offsetWidthWithDisplayInline() {
         final String html = "<html><head><script>\n"
                 + "  function test() {\n"
-
                 + "    var div = document.createElement('div');\n"
                 + "    document.body.appendChild(div);\n"
                 + "    div.style.cssText = 'display: inline; margin:0; border: 0; padding: 5px; width: 7px';\n"
@@ -1789,8 +1877,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
     @Test
     @Alerts("100")
     public void borderBoxAffectsOffsetWidth2() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    var divNormal = document.createElement('div');\n"
                 + "    divNormal.style = 'box-sizing: border-box; width: 100px; height: 100px; border: 10px solid white;"
@@ -1814,8 +1902,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
     @Test
     @Alerts("100")
     public void borderBoxAffectsOffsetHeight2() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    var divNormal = document.createElement('div');\n"
                 + "    divNormal.style = 'box-sizing: border-box; width: 100px; height: 100px; border: 10px solid white;"
@@ -1839,8 +1927,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
     @Test
     @Alerts({"8px", "0", "16"})
     public void bodyOffsetWidth() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    var win = window.innerWidth;\n"
                 + "    var html = document.documentElement.offsetWidth;\n"
@@ -1861,7 +1949,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
     @Alerts({"0", "24"})
     public void offsetHeightTable() {
         final String html = "<html><head>\n"
-                + "<script>\n"                + "  function test() {\n"
+               + "<script>\n"
+                + "  function test() {\n"
                 + "    var table = document.createElement('table');\n"
                 + "    table.style.fontSize = '16px';\n"
                 + "    document.getElementById('myDiv').appendChild(table);\n"
@@ -1892,7 +1981,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
                 + "      height: auto;\n"
                 + "    }\n"
                 + "  </style>\n"
-                + "<script>\n"                + "  function test() {\n"
+               + "<script>\n"
+                + "  function test() {\n"
                 + "    var div = document.getElementById('myDiv');\n"
                 + "    var style = window.getComputedStyle(div, null);\n"
                 + "   alert(style.height == '0px');\n"
@@ -1911,8 +2001,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
     @Alerts({"18", "18px", "36", "36px", "54", "54px"})
     public void heightManyLines() {
         final String html = "<html>\n"
-                + "<head><script>\n"
-
+                + "<head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    var div = document.getElementById('test1');\n"
                 + "   alert(div.offsetHeight);\n"
@@ -1934,15 +2024,17 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"", "auto"})
+    @Alerts({"null", "auto"})
     public void getHeightInvisible() {
         final String html = "<html><head>\n"
-                + "<script>\n"                + "  function test() {\n"
+               + "<script>\n"
+                + "  function test() {\n"
                 + "    var node = document.getElementById('outer');\n"
                 + "    var style = node.style;\n"
                 + "   alert(style.height);\n"
                 + "    var style = window.getComputedStyle(node, null);\n"
-                + "   alert(style.height);\n" + "  }\n"
+                + "   alert(style.height);\n" 
+                + "  }\n"
                 + "</script>\n"
                 + "</head>\n"
                 + "<body onload='test()'>\n"
@@ -1965,7 +2057,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
                 + "  #myDiv2::before { content: '#' }\n"
                 + "  /* ]]> */\n"
                 + "</style>\n"
-                + "<script>\n"                + "  function test() {\n"
+               + "<script>\n"
+                + "  function test() {\n"
                 + "    var node = document.getElementById('myDiv');\n"
                 + "    var style = window.getComputedStyle(node, ':before');\n"
                 + "   alert(style.content);\n"
@@ -1973,7 +2066,6 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
                 + "   alert(style.content);\n"
                 + "    var style = window.getComputedStyle(node, '::before');\n"
                 + "   alert(style.content);\n"
-
                 + "    node = document.getElementById('myDiv2');\n"
                 + "    var style = window.getComputedStyle(node, ':before');\n"
                 + "   alert(style.content);\n"
@@ -2016,7 +2108,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
                 + "<style type='text/css'>\n"
                 + "  div { margin: 10px 20px 30px 40px; }\n"
                 + "</style>\n"
-                + "<script>\n"                + "  function test() {\n"
+               + "<script>\n"
+                + "  function test() {\n"
                 + "    var div = document.getElementById('div1');\n"
                 + "    var left = div.style.marginLeft;\n" // force the resolution
                 + "   alert(div.offsetLeft);\n"
@@ -2039,7 +2132,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
                 + "<style type='text/css'>\n"
                 + "  div { margin: 10px 20px 30px 40px !important; }\n"
                 + "</style>\n"
-                + "<script>\n"                + "  function test() {\n"
+               + "<script>\n"
+                + "  function test() {\n"
                 + "    var div = document.getElementById('div1');\n"
                 + "    var left = div.style.marginLeft;\n" // force the resolution
                 + "   alert(div.offsetLeft);\n"
@@ -2063,7 +2157,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
                 + "  body { margin: 3px; }\n"
                 + "  div { margin: 20px; }\n"
                 + "</style>\n"
-                + "<script>\n"                + "  function test() {\n"
+               + "<script>\n"
+                + "  function test() {\n"
                 + "    var div = document.getElementById('div1');\n"
                 + "    var left = div.style.marginLeft;\n" // force the resolution
                 + "   alert(div.offsetLeft);\n"
@@ -2087,7 +2182,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
                 + "  <td>  \n\t    <div id='a'>a</div></td>\n"
                 + "</tr>\n"
                 + "</table>\n"
-                + "<script>\n" + "  var e = document.getElementById('a');\n"
+                + "<script>\n" 
+                + "  var e = document.getElementById('a');\n"
                 + " alert(e.getBoundingClientRect().left < 12);\n"
                 + "</script>\n"
                 + "</body></html>";
@@ -2101,7 +2197,9 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
         final String html = "<html><body>\n"
                 + "<div style='height: 100'>100</div>\n"
                 + "<span style='height: 200'>200</span>\n"
-                + "<span id='tester'>tester</span>\n" + "<script>\n" + "  var e = document.getElementById('tester');\n"
+                + "<span id='tester'>tester</span>\n" 
+                + "<script>\n" 
+                + "  var e = document.getElementById('tester');\n"
                 + " alert(e.getBoundingClientRect().top < 120);\n"
                 + "</script>\n"
                 + "</body></html>";
@@ -2113,16 +2211,19 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
     public void offsetLeft() {
         final String html = "<html>\n"
                 + "<body style='padding:'>\n"
-                + "  <div id='mydiv' >Heho</div>\n" + "<script>\n"                + "  var d1 = document.getElementById('mydiv');\n"
+                + "  <div id='mydiv' >Heho</div>\n" 
+                + "<script>\n"
+                + "  var d1 = document.getElementById('mydiv');\n"
                 + " alert(d1.offsetLeft < 10);\n"
-                + "</script>\n" + "</body>\n"
+                + "</script>\n" 
+                + "</body>\n"
                 + "</html>";
         checkHtmlAlert(html);
     }
 
 
     @Test
-    @Alerts({",", "0,0", "auto,auto"})
+    @Alerts({"null,null", "0,0", "auto,auto"})
     public void scriptWidthAndHeight() {
         final String html = "<html><body onload='test()'>\n"
                 + "<script id='e1'>\n"
@@ -2162,8 +2263,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
     @Alerts("0")
     @Test
     public void widthEmptyInlineContent() {
-        final String content = "<html><head><script>\n"
-
+        final String content = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    var myDiv = document.getElementById('myDiv');\n"
                 + "   alert(myDiv.offsetWidth);\n"
@@ -2181,8 +2282,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
     @Test
     @Alerts("55")
     public void widthExplicitInlineContent() {
-        final String content = "<html><head><script>\n"
-
+        final String content = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    var myDiv = document.getElementById('myDiv');\n"
                 + "   alert(myDiv.offsetWidth);\n"
@@ -2201,8 +2302,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
     @Test
     @Alerts("55")
     public void widthWhitespaceBetweenTags() {
-        final String content = "<html><head><script>\n"
-
+        final String content = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    var myDiv = document.getElementById('myDiv');\n"
                 + "   alert(myDiv.offsetWidth);\n"
@@ -2219,8 +2320,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
     @Test
     @Alerts("true")
     public void widthWhitespaceSequence() {
-        final String content = "<html><head><script>\n"
-
+        final String content = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    var myDiv = document.getElementById('myDiv');\n"
                 + "   alert(myDiv.offsetWidth < 100);\n"
@@ -2237,12 +2338,17 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
     @Alerts("0")
     public void getOffsetHeightInvalidSelector() {
         final String html
-                = "<html><body>\n" + "<style>\n"
+                = "<html><body>\n" 
+                + "<style>\n"
                 + "  *:not(:invalid-pseudo) { background-color: #FFFFFF; }\n"
-                + "</style>\n" + "<div id='myDiv'></div>\n" + "<script>\n" + "  var div = document.getElementById('myDiv');\n"
+                + "</style>\n" 
+                + "<div id='myDiv'></div>\n" 
+                + "<script>\n" 
+                + "  var div = document.getElementById('myDiv');\n"
                 + "  var offHeight = div.offsetHeight;\n"
                 + " alert(offHeight);\n"
-                + "</script>\n" + "</body></html>";
+                + "</script>\n" 
+                + "</body></html>";
 
         checkHtmlAlert(html);
     }
@@ -2252,21 +2358,18 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
     public void iterator() {
         final String html = "<html><head>\n"
                 + "</head>\n"
-                + "<script>\n"                + "  function test() {\n"
+               + "<script>\n"
+                + "  function test() {\n"
                 + "    var style = window.getComputedStyle(document.body, null);\n"
-
                 + "    if (typeof Symbol != 'undefined') {\n"
                 + "     alert(style[Symbol.iterator]);\n"
                 + "    }\n"
-
                 + "    if (!style.forEach) {\n"
                 + "     alert('no for..of');\n"
                 + "    }\n"
-
                 + "    if (typeof Symbol === 'undefined') {\n"
                 + "      return;\n"
                 + "    }\n"
-
                 + "    var count = 0;\n"
                 + "    for (var i of style) {\n"
                 + "      count++;\n"

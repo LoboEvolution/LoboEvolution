@@ -45,16 +45,14 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 = "<html>"
                 + "<body>\n"
                 + "<style>\n"
-                + "  @media screen { p { background-color:#FFFFFF; }};\n"
+                + "  @media screen { p { background-color:#FFFFFF; }}\n"
                 + "</style>\n"
-
                 + "<script>\n"
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
                 + " alert(Object.prototype.toString.call(rule));\n"
                 + " alert(rule);\n"
                 + "</script>\n"
-
                 + "</body></html>";
 
         checkHtmlAlert(html);
@@ -66,13 +64,13 @@ public class CSSMediaRuleTest extends LoboUnitTest {
         final String html
                 = "<html><body>\n"
                 + "<style>\n"
-                + "  @media screen { p { background-color:#FFFFFF; }};\n"
+                + "  @media screen { p { background-color:#FFFFFF; }}\n"
                 + "</style>\n"
-                + "<script>\n"                + "  var styleSheet = document.styleSheets[0];\n"
+                + "<script>\n"
+                + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
                 + " alert(rule.cssText);\n"
                 + "</script>\n"
-
                 + "</body></html>";
 
         checkHtmlAlert(html);
@@ -87,12 +85,11 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 + "<style>\n"
                 + "  @media screen {};\n"
                 + "</style>\n"
-
-                + "<script>\n"                + "  var styleSheet = document.styleSheets[0];\n"
+                + "<script>\n"
+                + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
                 + " alert(rule.cssText);\n"
                 + "</script>\n"
-
                 + "</body></html>";
 
         checkHtmlAlert(html);
@@ -105,14 +102,13 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 = "<html>"
                 + "<body>\n"
                 + "<style>\n"
-                + "  @media screen { p {} div {}};\n"
+                + "  @media screen { p {} div {}}\n"
                 + "</style>\n"
-
-                + "<script>\n"                + "  var styleSheet = document.styleSheets[0];\n"
+                + "<script>\n"
+                + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
                 + " alert(rule.cssText);\n"
                 + "</script>\n"
-
                 + "</body></html>";
 
         checkHtmlAlert(html);
@@ -128,11 +124,11 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 + "  @media print { #navigation { display: none }"
                 + "@media (max-width: 12cm) { .note { float: none } } }"
                 + "</style>\n"
-                + "<script>\n"                + "  var styleSheet = document.styleSheets[0];\n"
+                + "<script>\n"
+                + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
                 + " alert(rule.cssText);\n"
                 + "</script>\n"
-
                 + "</body></html>";
 
         checkHtmlAlert(html);
@@ -145,10 +141,10 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 = "<html>"
                 + "<body>\n"
                 + "<style>\n"
-                + "  @media screen { p { background-color:#FFFFFF; }};\n"
+                + "  @media screen { p { background-color:#FFFFFF; }}\n"
                 + "</style>\n"
-
-                + "<script>\n"                + "  var styleSheet = document.styleSheets[0];\n"
+                + "<script>\n"
+                + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
                 + "  try {"
                 + "    rule.cssText = '@media screen { span { color: rgb(0, 0, 0); }}';\n"
@@ -157,7 +153,6 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 + "   alert('exception');\n"
                 + "  }\n"
                 + "</script>\n"
-
                 + "</body></html>";
 
         checkHtmlAlert(html);
@@ -170,15 +165,13 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 = "<html>"
                 + "<body>\n"
                 + "<style>\n"
-                + "  @media screen { p { background-color:#FFFFFF; }};\n"
+                + "  @media screen { p { background-color:#FFFFFF; }}\n"
                 + "</style>\n"
-
                 + "<script>\n"
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
                 + " alert(rule.parentRule);\n"
                 + "</script>\n"
-
                 + "</body></html>";
 
         checkHtmlAlert(html);
@@ -194,7 +187,6 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 + "  @media print { #navigation { display: none; } "
                 + "@media (max-width: 12cm) { .note { float: none; } } }"
                 + "</style>\n"
-
                 + "<script>\n"
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var ruleOuter = styleSheet.cssRules[0];\n"
@@ -202,7 +194,6 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 + " alert(ruleInner);\n"
                 + " alert(ruleInner.parentRule);\n"
                 + "</script>\n"
-
                 + "</body></html>";
 
         checkHtmlAlert(html);
@@ -215,9 +206,8 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 = "<html>"
                 + "<body>\n"
                 + "<style>\n"
-                + "  @media screen { p { background-color:#FFFFFF; }};\n"
+                + "  @media screen { p { background-color:#FFFFFF; }}\n"
                 + "</style>\n"
-
                 + "<script>\n"
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
@@ -228,7 +218,6 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 + "   alert('exception');\n"
                 + "  }\n"
                 + "</script>\n"
-
                 + "</body></html>";
 
         checkHtmlAlert(html);
@@ -241,15 +230,13 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 = "<html>"
                 + "<body>\n"
                 + "<style>\n"
-                + "  @media screen { p { background-color:#FFFFFF; }};\n"
+                + "  @media screen { p { background-color:#FFFFFF; }}\n"
                 + "</style>\n"
-
                 + "<script>\n"
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
                 + " alert(rule.parentStyleSheet);\n"
                 + "</script>\n"
-
                 + "</body></html>";
 
         checkHtmlAlert(html);
@@ -262,9 +249,8 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 = "<html>"
                 + "<body>\n"
                 + "<style>\n"
-                + "  @media screen { p { background-color:#FFFFFF; }};\n"
+                + "  @media screen { p { background-color:#FFFFFF; }}\n"
                 + "</style>\n"
-
                 + "<script>\n"
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
@@ -275,7 +261,6 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 + "   alert('exception');\n"
                 + "  }\n"
                 + "</script>\n"
-
                 + "</body></html>";
 
         checkHtmlAlert(html);
@@ -288,9 +273,8 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 = "<html>"
                 + "<body>\n"
                 + "<style>\n"
-                + "  @media all { p { background-color:#FFFFFF; }};\n"
+                + "  @media all { p { background-color:#FFFFFF; }}\n"
                 + "</style>\n"
-
                 + "<script>\n"
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
@@ -304,7 +288,6 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 + " alert(mediaList.mediaText);\n"
                 + " alert(rule.conditionText);\n"
                 + "</script>\n"
-
                 + "</body></html>";
 
         checkHtmlAlert(html);
@@ -317,9 +300,8 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 = "<html>"
                 + "<body>\n"
                 + "<style>\n"
-                + "  @media screen { p { background-color:#FFFFFF; }};\n"
+                + "  @media screen { p { background-color:#FFFFFF; }}\n"
                 + "</style>\n"
-
                 + "<script>\n"
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
@@ -333,7 +315,6 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 + " alert(mediaList.mediaText);\n"
                 + " alert(rule.conditionText);\n"
                 + "</script>\n"
-
                 + "</body></html>";
 
         checkHtmlAlert(html);
@@ -349,9 +330,8 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 + "<body>\n"
                 + "<style>\n"
                 + "  @media only screen and  (color ),print and ( max-width:12cm) and (min-width: 30em) { "
-                + "p { background-color:#FFFFFF; }};\n"
+                + "p { background-color:#FFFFFF; }}\n"
                 + "</style>\n"
-
                 + "<script>\n"
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
@@ -363,7 +343,6 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 + " alert(mediaList.mediaText);\n"
                 + " alert(rule.conditionText);\n"
                 + "</script>\n"
-
                 + "</body></html>";
 
         checkHtmlAlert(html);
@@ -377,9 +356,8 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 = "<html>"
                 + "<body>\n"
                 + "<style>\n"
-                + "  @media screen { p { background-color:#FFFFFF; }};\n"
+                + "  @media screen { p { background-color:#FFFFFF; }}\n"
                 + "</style>\n"
-
                 + "<script>\n"
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
@@ -393,7 +371,6 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 + "   alert(rules.item(i).parentRule);\n"
                 + "  }\n"
                 + "</script>\n"
-
                 + "</body></html>";
 
         checkHtmlAlert(html);
@@ -407,9 +384,8 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 = "<html>"
                 + "<body>\n"
                 + "<style>\n"
-                + "  @media print { p { background-color:#FFFFFF; }};\n"
+                + "  @media print { p { background-color:#FFFFFF; }}\n"
                 + "</style>\n"
-
                 + "<script>\n"
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
@@ -423,7 +399,6 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 + "   alert(rules.item(i).parentRule);\n"
                 + "  }\n"
                 + "</script>\n"
-
                 + "</body></html>";
 
         checkHtmlAlert(html);
@@ -437,9 +412,8 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 = "<html>"
                 + "<body>\n"
                 + "<style>\n"
-                + "  @media screen { p { background-color:#FFFFFF; }};\n"
+                + "  @media screen { p { background-color:#FFFFFF; }}\n"
                 + "</style>\n"
-
                 + "<script>\n"
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
@@ -456,7 +430,6 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 + "   alert('exception');\n"
                 + "  }\n"
                 + "</script>\n"
-
                 + "</body></html>";
 
         checkHtmlAlert(html);
@@ -469,9 +442,8 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 = "<html>"
                 + "<body>\n"
                 + "<style>\n"
-                + "  @media screen { p { background-color:#FFFFFF; }};\n"
+                + "  @media screen { p { background-color:#FFFFFF; }}\n"
                 + "</style>\n"
-
                 + "<script>\n"
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
@@ -482,7 +454,6 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 + "   alert('exception');\n"
                 + "  }\n"
                 + "</script>\n"
-
                 + "</body></html>";
 
         checkHtmlAlert(html);
@@ -495,9 +466,8 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 = "<html>"
                 + "<body>\n"
                 + "<style>\n"
-                + "  @media screen { p { background-color:#FFFFFF; }};\n"
+                + "  @media screen { p { background-color:#FFFFFF; }}\n"
                 + "</style>\n"
-
                 + "<script>\n"
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
@@ -508,7 +478,6 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 + "   alert('exception');\n"
                 + "  }\n"
                 + "</script>\n"
-
                 + "</body></html>";
 
         checkHtmlAlert(html);
@@ -521,9 +490,8 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 = "<html>"
                 + "<body>\n"
                 + "<style>\n"
-                + "  @media screen { p { background-color:#FFFFFF; }};\n"
+                + "  @media screen { p { background-color:#FFFFFF; }}\n"
                 + "</style>\n"
-
                 + "<script>\n"
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
@@ -534,7 +502,6 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 + "   alert('exception');\n"
                 + "  }\n"
                 + "</script>\n"
-
                 + "</body></html>";
 
         checkHtmlAlert(html);
@@ -548,9 +515,8 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 = "<html>"
                 + "<body>\n"
                 + "<style>\n"
-                + "  @media screen { p { background-color:#FFFFFF; }};\n"
+                + "  @media screen { p { background-color:#FFFFFF; }}\n"
                 + "</style>\n"
-
                 + "<script>\n"
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
@@ -567,7 +533,6 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 + "   alert('exception');\n"
                 + "  }\n"
                 + "</script>\n"
-
                 + "</body></html>";
 
         checkHtmlAlert(html);
@@ -580,9 +545,8 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 = "<html>"
                 + "<body>\n"
                 + "<style>\n"
-                + "  @media screen { p { background-color:#FFFFFF; }};\n"
+                + "  @media screen { p { background-color:#FFFFFF; }}\n"
                 + "</style>\n"
-
                 + "<script>\n"
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
@@ -593,7 +557,6 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 + "   alert('exception');\n"
                 + "  }\n"
                 + "</script>\n"
-
                 + "</body></html>";
 
         checkHtmlAlert(html);
@@ -606,9 +569,8 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 = "<html>"
                 + "<body>\n"
                 + "<style>\n"
-                + "  @media screen { p { background-color:#FFFFFF; }};\n"
+                + "  @media screen { p { background-color:#FFFFFF; }}\n"
                 + "</style>\n"
-
                 + "<script>\n"
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
@@ -625,7 +587,6 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 + "   alert('exception');\n"
                 + "  }\n"
                 + "</script>\n"
-
                 + "</body></html>";
 
         checkHtmlAlert(html);
@@ -638,9 +599,8 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 = "<html>"
                 + "<body>\n"
                 + "<style>\n"
-                + "  @media screen { p { background-color:#FFFFFF; }};\n"
+                + "  @media screen { p { background-color:#FFFFFF; }}\n"
                 + "</style>\n"
-
                 + "<script>\n"
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
@@ -651,7 +611,6 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 + "   alert('exception');\n"
                 + "  }\n"
                 + "</script>\n"
-
                 + "</body></html>";
 
         checkHtmlAlert(html);
@@ -665,9 +624,8 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 = "<html>"
                 + "<body>\n"
                 + "<style>\n"
-                + "  @media screen { p { background-color:#FFFFFF; }};\n"
+                + "  @media screen { p { background-color:#FFFFFF; }}\n"
                 + "</style>\n"
-
                 + "<script>\n"
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
@@ -684,7 +642,6 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 + "   alert('exception'+e);\n"
                 + "  }\n"
                 + "</script>\n"
-
                 + "</body></html>";
 
         checkHtmlAlert(html);
@@ -698,9 +655,8 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 = "<html>"
                 + "<body>\n"
                 + "<style>\n"
-                + "  @media screen { p { background-color:#FFFFFF; }};\n"
+                + "  @media screen { p { background-color:#FFFFFF; }}\n"
                 + "</style>\n"
-
                 + "<script>\n"
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
@@ -717,7 +673,6 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 + "   alert('exception'+e);\n"
                 + "  }\n"
                 + "</script>\n"
-
                 + "</body></html>";
 
         checkHtmlAlert(html);
@@ -730,9 +685,8 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 = "<html>"
                 + "<body>\n"
                 + "<style>\n"
-                + "  @media screen { p { background-color:#FFFFFF; }};\n"
+                + "  @media screen { p { background-color:#FFFFFF; }}\n"
                 + "</style>\n"
-
                 + "<script>\n"
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
@@ -744,7 +698,6 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 + "   alert('exception');\n"
                 + "  }\n"
                 + "</script>\n"
-
                 + "</body></html>";
 
         checkHtmlAlert(html);
@@ -757,9 +710,8 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 = "<html>"
                 + "<body>\n"
                 + "<style>\n"
-                + "  @media screen { p { background-color:#FFFFFF; }};\n"
+                + "  @media screen { p { background-color:#FFFFFF; }}\n"
                 + "</style>\n"
-
                 + "<script>\n"
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
@@ -771,7 +723,6 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 + "   alert('exception');\n"
                 + "  }\n"
                 + "</script>\n"
-
                 + "</body></html>";
 
         checkHtmlAlert(html);
@@ -784,9 +735,8 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 = "<html>"
                 + "<body>\n"
                 + "<style>\n"
-                + "  @media screen { p { background-color:#FFFFFF; } span { color: rgb(0, 0, 0); }};\n"
+                + "  @media screen { p { background-color:#FFFFFF; } span { color: rgb(0, 0, 0); }}\n"
                 + "</style>\n"
-
                 + "<script>\n"
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
@@ -802,7 +752,6 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 + "   alert('exception');\n"
                 + "  }\n"
                 + "</script>\n"
-
                 + "</body></html>";
 
         checkHtmlAlert(html);
@@ -815,9 +764,8 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 = "<html>"
                 + "<body>\n"
                 + "<style>\n"
-                + "  @media screen { p { background-color:#FFFFFF; } span { color: rgb(0, 0, 0); }};\n"
+                + "  @media screen { p { background-color:#FFFFFF; } span { color: rgb(0, 0, 0); }}\n"
                 + "</style>\n"
-
                 + "<script>\n"
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
@@ -833,7 +781,6 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 + "   alert('exception');\n"
                 + "  }\n"
                 + "</script>\n"
-
                 + "</body></html>";
 
         checkHtmlAlert(html);
@@ -846,9 +793,8 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 = "<html>"
                 + "<body>\n"
                 + "<style>\n"
-                + "  @media screen { p { background-color:#FFFFFF; } span { color: rgb(0, 0, 0); }};\n"
+                + "  @media screen { p { background-color:#FFFFFF; } span { color: rgb(0, 0, 0); }}\n"
                 + "</style>\n"
-
                 + "<script>\n"
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
@@ -864,7 +810,6 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 + "   alert('exception');\n"
                 + "  }\n"
                 + "</script>\n"
-
                 + "</body></html>";
 
         checkHtmlAlert(html);
@@ -877,9 +822,8 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 = "<html>"
                 + "<body>\n"
                 + "<style>\n"
-                + "  @media screen { p { background-color:#FFFFFF; } span { color: rgb(0, 0, 0); }};\n"
+                + "  @media screen { p { background-color:#FFFFFF; } span { color: rgb(0, 0, 0); }}\n"
                 + "</style>\n"
-
                 + "<script>\n"
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
@@ -891,7 +835,6 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 + "   alert('exception');\n"
                 + "  }\n"
                 + "</script>\n"
-
                 + "</body></html>";
 
         checkHtmlAlert(html);
@@ -904,9 +847,8 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 = "<html>"
                 + "<body>\n"
                 + "<style>\n"
-                + "  @media screen { p { background-color:#FFFFFF; } span { color: rgb(0, 0, 0); }};\n"
+                + "  @media screen { p { background-color:#FFFFFF; } span { color: rgb(0, 0, 0); }}\n"
                 + "</style>\n"
-
                 + "<script>\n"
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
@@ -918,7 +860,6 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 + "   alert('exception');\n"
                 + "  }\n"
                 + "</script>\n"
-
                 + "</body></html>";
 
         checkHtmlAlert(html);

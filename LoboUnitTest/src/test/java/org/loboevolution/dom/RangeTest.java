@@ -352,13 +352,10 @@ public class RangeTest extends LoboUnitTest {
                 + "<script>\n"
                 + "function doTest() {\n"
                 + "  var range = document.createRange();\n"
-
                 + "  var elem = document.createElement('boundtest');\n"
                 + "  document.body.appendChild(elem);\n"
-
                 + "  range.selectNode(elem);\n"
                 + "  range.getBoundingClientRect();\n"
-
                 + " alert(elem.parentNode);\n"
                 + "}\n"
                 + "</script>\n"
@@ -377,13 +374,10 @@ public class RangeTest extends LoboUnitTest {
                 + "<script>\n"
                 + "function doTest() {\n"
                 + "  var range = document.createRange();\n"
-
                 + "  var elem = document.createElement('boundtest');\n"
                 + "  document.body.appendChild(elem);\n"
-
                 + "  range.selectNode(elem);\n"
                 + "  range.getClientRects();\n"
-
                 + " alert(elem.parentNode);\n"
                 + "}\n"
                 + "</script>\n"

@@ -43,7 +43,8 @@ public class DOMParserTest extends LoboUnitTest {
     @Alerts("[object DOMParser]")
     public void scriptableToString() {
         final String html = "<html><head>\n"
-                + "<script>\n"                + "  function test() {\n"
+               + "<script>\n"
+                + "  function test() {\n"
                 + "    try {\n"
                 + "     alert(new DOMParser());\n"
                 + "    } catch (e) {alert('exception');}\n"
@@ -58,7 +59,8 @@ public class DOMParserTest extends LoboUnitTest {
     @Alerts({"[object HTMLDocument]", "", ""})
     public void parseFromStringTextHtml() {
         final String content = "<html><head>\n"
-                + "<script>\n"                + "  function test() {\n"
+               + "<script>\n"
+                + "  function test() {\n"
                 + "    var text='<html></html>';\n"
                 + "    try {\n"
                 + "      var parser = new DOMParser();\n"
@@ -97,7 +99,8 @@ public class DOMParserTest extends LoboUnitTest {
     @Alerts("[object XMLDocument]")
     public void parseFromStringTextXml() {
         final String content = "<html><head>\n"
-                + "<script>\n"                + "  function test() {\n"
+               + "<script>\n"
+                + "  function test() {\n"
                 + "    var text='<note/>';\n"
                 + "    try {\n"
                 + "      var parser = new DOMParser();\n"
@@ -203,7 +206,6 @@ public class DOMParserTest extends LoboUnitTest {
                 + "      var parser = new DOMParser();\n"
                 + "      var doc = parser.parseFromString(text, 'text/xml');\n"
                 + "      if (doc.getElementsByTagName('parsererror').length > 0) {alert('parsererror'); return; }\n"
-
                 + "      var x = doc.documentElement;\n"
                 + "     alert(x.childNodes.length);\n"
                 + "    } catch(e) {alert('exception'); }\n"
@@ -334,8 +336,8 @@ public class DOMParserTest extends LoboUnitTest {
                 + "  <script>\n"
                 + "    function test() {\n"
                 + "      var html = '<svg viewBox=\"0 0 10 10\" xmlns=\"http://www.w3.org/2000/svg\">'\n"
-                + "                + '<script>document.title = \"parsed script executed\";</' + 'script>'\n"
-                + "                + '</svg>';\n"
+                + " '<script>document.title = \"parsed script executed\";</' + 'script>'\n"
+                + " '</svg>';\n"
                 + "      var parser = new DOMParser();\n"
                 + "     alert(parser.parseFromString(html, 'text/html'));\n"
                 + "  }\n"

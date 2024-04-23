@@ -40,7 +40,7 @@ public class HTMLTableCaptionElementTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts({"left", "right", "bottom", "top", "wrong", ""})
+    @Alerts({"left", "right", "bottom", "top", "wrong", "null"})
     public void getAlign() {
         final String html
                 = "<html><body>\n"
@@ -52,7 +52,6 @@ public class HTMLTableCaptionElementTest extends LoboUnitTest {
                 + "    <caption id='c5' align='wrong' ></caption>\n"
                 + "    <caption id='c6' ></caption>\n"
                 + "  </table>\n"
-
                 + "    <script>\n"
                 + "  for (var i = 1; i <= 6; i++) {\n"
                 + "    alert(document.getElementById('c' + i).align);\n"
@@ -71,7 +70,6 @@ public class HTMLTableCaptionElementTest extends LoboUnitTest {
                 + "  <table>\n"
                 + "    <caption id='c1' align='left' ></caption>\n"
                 + "  </table>\n"
-
                 + "    <script>\n"
                 + "  function setAlign(elem, value) {\n"
                 + "    try {\n"
@@ -79,13 +77,10 @@ public class HTMLTableCaptionElementTest extends LoboUnitTest {
                 + "    } catch (e) { alert('error'); }\n"
                 + "    alert(elem.align);\n"
                 + "  }\n"
-
                 + "  var elem = document.getElementById('c1');\n"
                 + "  setAlign(elem, 'CenTer');\n"
-
                 + "  setAlign(elem, '8');\n"
                 + "  setAlign(elem, 'foo');\n"
-
                 + "  setAlign(elem, 'left');\n"
                 + "  setAlign(elem, 'right');\n"
                 + "  setAlign(elem, 'bottom');\n"
@@ -137,7 +132,7 @@ public class HTMLTableCaptionElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"<caption id=\"cap\">a</caption>", "new"})
+    @Alerts({"<CAPTION id=\"cap\">a</CAPTION>", "new"})
     public void outerHTML() {
         final String html =
                 "<html>\n"

@@ -1391,7 +1391,8 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "<head>\n"
-                        + "<script>\n"                        + "  function test() {\n"
+                        + "<script>\n"
+                		+ "  function test() {\n"
                         + "    var s = document.getElementById('mySelect');\n"
                         + "    s.options.length = 0;\n"
                         + "    s.selectedIndex = 0;\n"
@@ -1504,7 +1505,8 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "<head>\n"
-                        + "<script>\n"                        + "  function test() {\n"
+                        + "<script>\n"
+                		+ "  function test() {\n"
                         + "    var select = document.getElementById('mySelect');\n"
                         + "    alert(select.size + 5);//to test if int or string\n"
                         + "  }\n"
@@ -1523,7 +1525,8 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "<head>\n"
-                        + "<script>\n"                        + "  function test() {\n"
+                       	+ "<script>\n"
+                		+ "  function test() {\n"
                         + "    alert(document.f['s1'].multiple);\n"
                         + "    alert(document.f['s2'].multiple);\n"
                         + "    document.f['s1'].multiple = false;\n"
@@ -1577,7 +1580,8 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "<head>\n"
-                        + "<script>\n"                        + "  function test() {\n"
+                       	+ "<script>\n"
+                		+ "  function test() {\n"
                         + "    var s = document.getElementById('mySelect');\n"
                         + "    alert(s.selectedIndex);\n"
                         + "    s.selectedIndex = 1;\n"
@@ -1601,7 +1605,8 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "<head>\n"
-                        + "<script>\n"                        + "  function test() {\n"
+                       	+ "<script>\n"
+                		+ "  function test() {\n"
                         + "    var s = document.getElementById('mySelect');\n"
                         + "    alert(s.value);\n"
                         + "    s.value = 'o2';\n"
@@ -1625,7 +1630,8 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "<head>\n"
-                        + "<script>\n"                        + "  function test() {\n"
+                     	+ "<script>\n"
+                		+ "  function test() {\n"
                         + "    var s = document.getElementById('mySelect');\n"
                         + "    var o = document.createElement('option');\n"
                         + "    alert(s.selectedIndex);\n"
@@ -1649,7 +1655,8 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "<head>\n"
-                        + "<script>\n"                        + "  function test() {\n"
+                        + "<script>\n"
+                		+ "  function test() {\n"
                         + "    var s = document.getElementById('mySelect');\n"
                         + "    var o = document.createElement('option');\n"
                         + "    alert(s.selectedIndex);\n"
@@ -1673,7 +1680,8 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "<head>\n"
-                        + "<script>\n"                        + "  function test() {\n"
+                        + "<script>\n"
+                		+ "  function test() {\n"
                         + "    var s = document.getElementById('mySelect');\n"
                         + "    var o1 = document.getElementById('option1');\n"
                         + "    var o = document.createElement('option');\n"
@@ -1702,7 +1710,8 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "<head>\n"
-                        + "<script>\n"                        + "  function test() {\n"
+                        + "<script>\n"
+                		+ "  function test() {\n"
                         + "    var s = document.getElementById('mySelect');\n"
                         + "    var o = document.createElement('option');\n"
                         + "    alert(s.selectedIndex);\n"
@@ -1752,7 +1761,8 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "<head>\n"
-                        + "<script>\n"                        + "  function test() {\n"
+                        + "<script>\n"
+                		+ "  function test() {\n"
                         + "    var select = document.getElementById('mySelect');\n"
                         + "    alert(select.value);\n"
                         + "    select.value = 'three';\n"
@@ -1775,7 +1785,8 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "<head>\n"
-                        + "<script>\n"                        + "  function test() {\n"
+                        + "<script>\n"
+                		+ "  function test() {\n"
                         + "    var select = document.getElementById('mySelect');\n"
                         + "    alert(select.value);\n"
                         + "    select.value = 'one';\n"
@@ -1798,7 +1809,8 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "<head>\n"
-                        + "<script>\n"                        + "  function test() {\n"
+                        + "<script>\n"
+                		+ "  function test() {\n"
                         + "    var select = document.getElementById('mySelect');\n"
                         + "    alert(select.value);\n"
                         + "    select.value = 'One';\n"
@@ -1821,7 +1833,8 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "<head>\n"
-                        + "<script>\n"                        + "  function test() {\n"
+                        + "<script>\n"
+                		+ "  function test() {\n"
                         + "    var select = document.getElementById('mySelect');\n"
                         + "    alert(select.value);\n"
                         + "    select.value = 'One';\n"
@@ -1845,7 +1858,8 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "<head>\n"
-                        + "<script>\n"                        + "  function test() {\n"
+                        + "<script>\n"
+                		+ "  function test() {\n"
                         + "    var select = document.getElementById('mySelect');\n"
                         + "    alert(select.value);\n"
                         + "    select.value = 'One';\n"
@@ -1868,7 +1882,8 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "<head>\n"
-                        + "<script>\n"                        + "  function test() {\n"
+                        + "<script>\n"
+                		+ "  function test() {\n"
                         + "    var select = document.getElementById('mySelect');\n"
                         + "    alert(select.value);\n"
                         + "    select.value = null;\n"
@@ -1892,7 +1907,8 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "<head>\n"
-                        + "<script>\n"                        + "  function test() {\n"
+                       	+ "<script>\n"
+                		+ "  function test() {\n"
                         + "    var select = document.getElementById('mySelect');\n"
                         + "    alert(select.value);\n"
                         + "    select.value = 1234;\n"
@@ -1918,7 +1934,8 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "<head>\n"
-                        + "<script>\n"                        + "  function test() {\n"
+                       	+ "<script>\n"
+                		+ "  function test() {\n"
                         + "    var form = document.getElementById('myForm');\n"
                         + "    var select = document.getElementById('mySelect');\n"
                         + "    alert(select.value);\n"
@@ -2118,7 +2135,6 @@ public class HTMLSelectElementTest extends LoboUnitTest {
                 + "    </select>\n"
                 + "  </form>"
                 + "  <script>\n"
-
                 + "    alert(document.getElementById('a').form);\n"
                 + "  </script>"
                 + "</body>"
@@ -2206,7 +2222,8 @@ public class HTMLSelectElementTest extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "<head>\n"
-                        + "<script>\n"                        + "  function test() {\n"
+                        + "<script>\n"
+                		+ "  function test() {\n"
                         + "    var s = document.getElementById('s');\n"
                         + "    for (var opt of s) {\n"
                         + "      alert(opt);\n"

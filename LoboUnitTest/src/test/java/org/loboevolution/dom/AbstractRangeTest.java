@@ -42,8 +42,8 @@ public class AbstractRangeTest extends LoboUnitTest {
     @Alerts("true")
     public void prototype() {
         final String html
-                = "<html><head><script>\n"
-
+                = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "     alert(typeof AbstractRange === 'function');\n"
@@ -59,8 +59,8 @@ public class AbstractRangeTest extends LoboUnitTest {
     @Alerts("exception")
     public void ctor() {
         final String html
-                = "<html><head><script>\n"
-
+                = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      new AbstractRange();\n"

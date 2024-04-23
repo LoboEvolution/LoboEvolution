@@ -56,8 +56,8 @@ public class CloseEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object CloseEvent]", "type-close", "false", "false", "false", "0", "", "false"})
     public void createCtor() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new CloseEvent('type-close');\n"
@@ -74,8 +74,8 @@ public class CloseEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object CloseEvent]", "type-close", "true", "false", "false", "42", "test-reason", "true"})
     public void createCtorWithDetails() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new CloseEvent('type-close', {\n"
@@ -97,8 +97,8 @@ public class CloseEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object CloseEvent]", "", "false", "false", "false", "0", "", "false"})
     public void createCreateEvent() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = document.createEvent('CloseEvent');\n"
@@ -115,8 +115,8 @@ public class CloseEventTest extends LoboUnitTest {
     @Test
     @Alerts("no initCloseEvent")
     public void initCloseEvent() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = document.createEvent('CloseEvent');\n"

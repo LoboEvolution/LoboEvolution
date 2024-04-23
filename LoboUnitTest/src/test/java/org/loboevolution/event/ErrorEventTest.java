@@ -51,8 +51,8 @@ public class ErrorEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object ErrorEvent]", "error", "false", "false", "false"})
     public void createCtor() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new ErrorEvent('error');\n"
@@ -69,8 +69,8 @@ public class ErrorEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorWithoutType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new ErrorEvent();\n"
@@ -87,8 +87,8 @@ public class ErrorEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object ErrorEvent]", "42", "false", "false", "false"})
     public void createCtorNumericType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new ErrorEvent(42);\n"
@@ -105,8 +105,8 @@ public class ErrorEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object ErrorEvent]", "null", "false", "false", "false"})
     public void createCtorNullType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new ErrorEvent(null);\n"
@@ -123,8 +123,8 @@ public class ErrorEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorUnknownType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new ErrorEvent(unknown);\n"
@@ -141,8 +141,8 @@ public class ErrorEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object ErrorEvent]", "HtmlUnitEvent", "false", "false", "false"})
     public void createCtorArbitraryType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new ErrorEvent('HtmlUnitEvent');\n"
@@ -159,8 +159,8 @@ public class ErrorEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object ErrorEvent]", "error", "false", "false", "false"})
     public void createCtorAllDetails() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new ErrorEvent('error', {\n"
@@ -179,8 +179,8 @@ public class ErrorEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object ErrorEvent]", "error", "false", "false", "false"})
     public void createCtorAllDetailsMissingData() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new ErrorEvent('error', {\n"
@@ -198,8 +198,8 @@ public class ErrorEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object ErrorEvent]", "error", "false", "false", "false"})
     public void createCtorAllDetailsWrongData() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new ErrorEvent('error', {\n"

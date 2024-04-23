@@ -108,11 +108,11 @@ public class HTMLMediaElementTest extends LoboUnitTest {
                 = "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
-
                 + "  </script>\n"
                 + "</head>\n"
                 + "<body>\n"
-                + "<script>\n"                + "try {\n"
+                + "<script>\n"
+                + "try {\n"
                 + "  var video = document.createElement('video');"
                 + "  alert(video.canPlayType('" + type + "'));\n"
                 + "} catch (e) { alert('exception'); }\n"

@@ -44,7 +44,8 @@ public class EventNodeTest extends LoboUnitTest {
     public void fireEvent() {
         final String html
                 = "<html><head>\n"
-                + "<script>\n"                + "  function test() {\n"
+               + "<script>\n"
+                + "  function test() {\n"
                 + "    var form = document.getElementById('myForm');\n"
                 + "    if (!form.fireEvent) {alert('fireEvent not available'); return }\n"
                 + "   alert(form.fireEvent('onsubmit'));\n"

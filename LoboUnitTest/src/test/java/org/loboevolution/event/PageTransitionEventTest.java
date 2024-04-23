@@ -51,8 +51,8 @@ public class PageTransitionEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object PageTransitionEvent]", "transition", "false", "false", "false"})
     public void createCtor() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new PageTransitionEvent('transition');\n"
@@ -69,8 +69,8 @@ public class PageTransitionEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorWithoutType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new PageTransitionEvent();\n"
@@ -87,8 +87,8 @@ public class PageTransitionEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object PageTransitionEvent]", "42", "false", "false", "false"})
     public void createCtorNumericType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new PageTransitionEvent(42);\n"
@@ -105,8 +105,8 @@ public class PageTransitionEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object PageTransitionEvent]", "null", "false", "false", "false"})
     public void createCtorNullType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new PageTransitionEvent(null);\n"
@@ -123,8 +123,8 @@ public class PageTransitionEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorUnknownType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new PageTransitionEvent(unknown);\n"
@@ -141,8 +141,8 @@ public class PageTransitionEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object PageTransitionEvent]", "HtmlUnitEvent", "false", "false", "false"})
     public void createCtorArbitraryType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new PageTransitionEvent('HtmlUnitEvent');\n"
@@ -159,8 +159,8 @@ public class PageTransitionEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object PageTransitionEvent]", "transition", "false", "false", "false"})
     public void createCtorAllDetails() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new PageTransitionEvent('transition', {\n"
@@ -179,8 +179,8 @@ public class PageTransitionEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object PageTransitionEvent]", "transition", "false", "false", "false"})
     public void createCtorAllDetailsMissingData() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new PageTransitionEvent('transition', {\n"
@@ -198,8 +198,8 @@ public class PageTransitionEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object PageTransitionEvent]", "transition", "false", "false", "false"})
     public void createCtorAllDetailsWrongData() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new PageTransitionEvent('transition', {\n"

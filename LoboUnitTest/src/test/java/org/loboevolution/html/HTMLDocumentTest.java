@@ -65,9 +65,8 @@ public class HTMLDocumentTest extends LoboUnitTest {
     @Alerts({"2", "DIV", "2"})
     public void getElementsByTagName() {
         final String html = "<html>\n"
-                + "<head>\n"
-                + "  <script>\n"
-
+                + "<head>\n"  
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    alert(document.getElementsByTagName('div').length);\n"
                 + "    document.getElementById('myDiv').innerHTML = \"<P><DIV id='secondDiv'></DIV></P>\";\n"
@@ -91,7 +90,6 @@ public class HTMLDocumentTest extends LoboUnitTest {
     public void getElementsByClassName() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function doTest() {\n"
                 + "  alert(typeof document.getElementsByClassName);\n"
                 + "  try {\n"
@@ -196,9 +194,8 @@ public class HTMLDocumentTest extends LoboUnitTest {
 
     private void compatMode(final String doctype) {
         final String html = doctype + "<html>\n"
-                + "<head>\n"
-                + "  <script>\n"
-
+                + "<head>\n"  
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    alert(document.compatMode);\n"
                 + "  }\n"
@@ -215,8 +212,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
     public void uniqueID() {
         final String html = "<html>\n"
                 + "<head>\n"
-                + "  <script>\n"
-
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    alert(document.uniqueID != undefined);\n"
                 + "  }\n"
@@ -234,8 +230,8 @@ public class HTMLDocumentTest extends LoboUnitTest {
     public void createDocumentNS() {
         final String html = "<html>\n"
                 + "<head>\n"
-                + "<script>\n"                + "function test() {\n"
-
+                + "<script>\n"                
+                + "function test() {\n"
                 + "  var elt = document.createElementNS('http://www.w3.org/1999/xhtml', 'div');\n"
                 + "  alert(elt);\n"
                 + "  var elt = document.createElementNS('http://www.w3.org/1999/xhtml', 'foo');\n"
@@ -339,7 +335,6 @@ public class HTMLDocumentTest extends LoboUnitTest {
     @Alerts({"imported: [object HTMLScriptElement]", "replaced"})
     public void importNodescript() {
         final String html = "<html><head><script>\n"
-
                 + "function test() {\n"
                 + "  try {\n"
                 + "    var d = document.implementation.createDocument(null, null, null);\n"
@@ -365,7 +360,6 @@ public class HTMLDocumentTest extends LoboUnitTest {
     @Alerts({"imported: [object HTMLDivElement]", "replaced"})
     public void importNodescriptChild() {
         final String html = "<html><head><script>\n"
-
                 + "function test() {\n"
                 + "  try {\n"
                 + "    var d = document.implementation.createDocument(null, null, null);\n"
@@ -505,7 +499,6 @@ public class HTMLDocumentTest extends LoboUnitTest {
     @Alerts("undefined")
     public void prefix() {
         final String html = "<html><head><script>\n"
-
                 + "function doTest() {\n"
                 + "  alert(document.forms.fmLogin);\n"
                 + "}\n"
@@ -526,7 +519,6 @@ public class HTMLDocumentTest extends LoboUnitTest {
     @Alerts({"string", ""})
     public void lastModifiedOnlyDate() {
         final String html = "<html><head><script>\n"
-
                 + "function doTest() {\n"
                 + "  alert(typeof document.lastModified);\n"
                 + "  var d = new Date(document.lastModified);\n"
@@ -542,7 +534,6 @@ public class HTMLDocumentTest extends LoboUnitTest {
     @Alerts({"true", "true"})
     public void lastModifiedNoDateHeader() {
         final String html = "<html><head><script>\n"
-
                 + "function doTest() {\n"
                 + "  var justBeforeLoading = " + System.currentTimeMillis() + ";\n"
                 + "  var d = new Date(document.lastModified);\n"
@@ -599,8 +590,8 @@ public class HTMLDocumentTest extends LoboUnitTest {
     @Test
     @Alerts("false")
     public void allDetection() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    alert(!(!document.all));\n"
                 + "  }\n"
@@ -612,8 +603,8 @@ public class HTMLDocumentTest extends LoboUnitTest {
     @Test
     @Alerts("[object HTMLAllCollection]")
     public void allscriptableToString() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    alert(document.all);\n"
                 + "  }\n"
@@ -626,7 +617,6 @@ public class HTMLDocumentTest extends LoboUnitTest {
     @Alerts("not defined")
     public void frames() {
         final String html = "<html><head><script>\n"
-
                 + "function test() {\n"
                 + "  if (document.frames) {\n"
                 + "    alert(document.frames == window.frames);\n"
@@ -645,7 +635,6 @@ public class HTMLDocumentTest extends LoboUnitTest {
     @Alerts({"[object Window]", "true"})
     public void frameAccessByName() {
         final String html = "<html><head><script>\n"
-
                 + "function test() {\n"
                 + "  alert(document.foo);\n"
                 + "  alert(window.frames[0] == document.foo);\n"
@@ -662,7 +651,6 @@ public class HTMLDocumentTest extends LoboUnitTest {
     public void getElementsByNameNotFound() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function doTest() {\n"
                 + "  alert(document.getElementsByName(null).length);\n"
                 + "  alert(document.getElementsByName('foo').length);\n"
@@ -676,8 +664,8 @@ public class HTMLDocumentTest extends LoboUnitTest {
     @Test
     @Alerts({"2", "0", "0"})
     public void getElementsByNameEmptyName() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    alert(document.getElementsByName('').length);\n"
                 + "    alert(document.getElementsByName(' ').length);\n"
@@ -696,8 +684,8 @@ public class HTMLDocumentTest extends LoboUnitTest {
     @Test
     @Alerts({"1", "2", "1", "2", "1", "2", "1", "2", "1", "2", "1", "2"})
     public void getElementsByNameElements() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      alert(document.getElementsByName('form1').length);\n"
@@ -762,11 +750,11 @@ public class HTMLDocumentTest extends LoboUnitTest {
 
     @Test
     @Alerts({"1", "2"})
-    public void getElementsByName_frame() {
+    public void getElementsByNameFrame() {
         final String html = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Frameset//EN\""
                 + "\"http://www.w3.org/TR/html4/frameset.dtd\">\n"
-                + "<html><head><script>\n"
-
+                + "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      alert(document.getElementsByName('frame1').length);\n"
@@ -789,8 +777,8 @@ public class HTMLDocumentTest extends LoboUnitTest {
     @Test
     @Alerts({"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "9"})
     public void getElementsByNameChangedAfterGet() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 // 1
                 + "    var collection = document.getElementsByName('image1');\n"
@@ -866,8 +854,8 @@ public class HTMLDocumentTest extends LoboUnitTest {
     @Test
     @Alerts({"1", "2"})
     public void getElementsByNameChangedAfterGet2() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    var collection = document.getElementsByName('image1');\n"
                 + "    alert(collection.length);\n"
@@ -885,8 +873,8 @@ public class HTMLDocumentTest extends LoboUnitTest {
     @Test
     @Alerts({"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "9"})
     public void getElementsByNameChangedAfterGetNested() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 // 1
                 + "    var collection = document.getElementsByName('image1');\n"
@@ -964,8 +952,8 @@ public class HTMLDocumentTest extends LoboUnitTest {
     @Test
     @Alerts({"1", "2"})
     public void getElementsByNameChangedAfterGetNested2() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    var collection = document.getElementsByName('image1');\n"
                 + "    alert(collection.length);\n"
@@ -1002,7 +990,6 @@ public class HTMLDocumentTest extends LoboUnitTest {
     @Alerts("exception")
     public void getBoxObjectFor() {
         final String html = "<html><head><script>\n"
-
                 + "function doTest() {\n"
                 + "  var e = document.getElementById('log');\n"
                 + "  try {\n"
@@ -1068,7 +1055,6 @@ public class HTMLDocumentTest extends LoboUnitTest {
     private void queryCommandSupported(final String... commands) {
         final String jsCommandArray = "['" + String.join("', '", commands) + "']";
         final String html = "<html><head><script>\n"
-
                 + "function doTest() {\n"
                 + "  var cmds = " + jsCommandArray + ";\n"
                 + "  var nbSupported = 0;\n"
@@ -1103,8 +1089,8 @@ public class HTMLDocumentTest extends LoboUnitTest {
                 + "  .green {color:#00FF00;}\n"
                 + "  .blue  {color:#0000FF;}\n"
                 + "</style>\n"
-                + "<script>\n"                + "function test() {\n"
-
+                + "<script>\n"
+                + "function test() {\n"
                 + "  var redTags = document.querySelectorAll('.green,.red');\n"
                 + "  alert(redTags.length);\n"
                 + "  alert(redTags.item(0).id);\n"
@@ -1144,7 +1130,6 @@ public class HTMLDocumentTest extends LoboUnitTest {
 
     private void doTestQuerySelectorAllBadSelector(final String selector) {
         final String html = "<html><body><script>\n"
-
                 + "try {\n"
                 + "  document.querySelectorAll('" + selector + "');\n"
                 + "  alert('working');\n"
@@ -1164,7 +1149,6 @@ public class HTMLDocumentTest extends LoboUnitTest {
 
     private void doTestQuerySelectorBadSelector(final String selector) {
         final String html = "<html><body><script>\n"
-
                 + "try {\n"
                 + "  document.querySelector('" + selector + "');\n"
                 + "  alert('working: " + selector + "');\n"
@@ -1297,7 +1281,8 @@ public class HTMLDocumentTest extends LoboUnitTest {
     @Test
     public void clear() {
         final String html = "<html><head>\n"
-                + "<script>\n"                + "document.clear();\n"
+                + "<script>\n"
+                + "document.clear();\n"
                 + "</script>\n"
                 + "</head><body>\n"
                 + "</body></html>";
@@ -1452,8 +1437,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
     public void getElementByIdCaseSensitivity() {
         final String html = "<html>\n"
                 + "<head>\n"
-                + "  <script>\n"
-
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    alert(document.getElementById('MYDIV'));\n"
                 + "  }\n"
@@ -1473,9 +1457,8 @@ public class HTMLDocumentTest extends LoboUnitTest {
     @Alerts({"null", "null", "null"})
     public void getElementByIdEmptyParams() {
         final String html = "<html>\n"
-                + "<head>\n"
-                + "  <script>\n"
-
+                + "<head>\n" 
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    alert(document.getElementById(''));\n"
                 + "    alert(document.getElementById(undefined));\n"
@@ -1963,7 +1946,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
 
     @Test
     @Alerts("details/abc")
-    public void baseURINoBaseTag_urlPath() {
+    public void baseURINoBaseTagurlPath() {
         final String html = "<html>\n"
                 + "<body>\n"
                 + "    <script>\n"
@@ -1975,7 +1958,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
 
     @Test
     @Alerts("?x=y&z=zz")
-    public void baseURINoBaseTag_urlParams() {
+    public void baseURINoBaseTagurlParams() {
         final String html = "<html>\n"
                 + "<body>\n"
                 + "    <script>\n"
@@ -1988,7 +1971,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
 
     @Test
     @Alerts("details/abc;jsessionid=42?x=y&z=zz")
-    public void baseURINoBaseTag_urlPathAndParams() {
+    public void baseURINoBaseTagurlPathAndParams() {
         final String html = "<html>\n"
                 + "<body>\n"
                 + "    <script>\n"
@@ -2267,7 +2250,6 @@ public class HTMLDocumentTest extends LoboUnitTest {
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      alert(document.body.id);\n"
-
                 + "      var newBody = document.createElement('body');\n"
                 + "      newBody.id = 'newBody';\n"
                 + "      document.body = newBody;\n"
@@ -2290,7 +2272,6 @@ public class HTMLDocumentTest extends LoboUnitTest {
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      alert(document.body.id);\n"
-
                 + "      var newDiv = document.createElement('div');\n"
                 + "      newDiv.id = 'newDiv';\n"
                 + "      document.body = newDiv;\n"
@@ -2313,7 +2294,6 @@ public class HTMLDocumentTest extends LoboUnitTest {
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      alert(document.body.id);\n"
-
                 + "      var newBody = '<body id=\"newBody\" onload=\"test()\"></body>';\n"
                 + "      document.body = newBody;\n"
                 + "      alert(document.body.id);\n"
@@ -2335,7 +2315,6 @@ public class HTMLDocumentTest extends LoboUnitTest {
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      alert(document.body.id);\n"
-
                 + "      var newBody = document.createElement('frameset');\n"
                 + "      newBody.id = 'newFrameset';\n"
                 + "      document.body = newBody;\n"

@@ -51,8 +51,8 @@ public class CompositionEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object CompositionEvent]", "composition", "false", "false", "false", "false", ""})
     public void createCtor() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new CompositionEvent('composition');\n"
@@ -86,8 +86,8 @@ public class CompositionEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object CompositionEvent]", "42", "false", "false", "false", "false", ""})
     public void createCtorNumericType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new CompositionEvent(42);\n"
@@ -104,8 +104,8 @@ public class CompositionEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object CompositionEvent]", "null", "false", "false", "false", "false", ""})
     public void createCtorNullType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new CompositionEvent(null);\n"
@@ -122,8 +122,8 @@ public class CompositionEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorUnknownType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new CompositionEvent(unknown);\n"
@@ -140,8 +140,8 @@ public class CompositionEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object CompositionEvent]", "HtmlUnitEvent", "false", "false", "false", "false", ""})
     public void createCtorArbitraryType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new CompositionEvent('HtmlUnitEvent');\n"
@@ -158,8 +158,8 @@ public class CompositionEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object CompositionEvent]", "composition", "false", "false", "false", "false", "mozart"})
     public void createCtorAllDetails() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new CompositionEvent('composition', {\n"
@@ -178,8 +178,8 @@ public class CompositionEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object CompositionEvent]", "composition", "false", "false", "false", "false", ""})
     public void createCtorAllDetailsMissingData() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new CompositionEvent('composition', {\n"
@@ -197,8 +197,8 @@ public class CompositionEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object CompositionEvent]", "composition", "false", "false", "false", "false", "Html,Unit"})
     public void createCtorAllDetailsWrongData() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new CompositionEvent('composition', {\n"

@@ -45,7 +45,8 @@ public class NodeTest extends LoboUnitTest {
     @Alerts({"[object HTMLSpanElement]", "[object Text]", "null"})
     public void lastChild() {
         final String html = "<html><head>\n"
-                + "<script>\n"                + "function doTest() {\n"
+                + "<script>\n"
+                + "function doTest() {\n"
                 + " alert(document.getElementById('myNode').lastChild);\n"
                 + " alert(document.getElementById('onlyTextNode').lastChild);\n"
                 + " alert(document.getElementById('emptyNode').lastChild);\n"
@@ -117,7 +118,6 @@ public class NodeTest extends LoboUnitTest {
     public void removeChild() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function doTest() {\n"
                 + "  var form = document.forms['form1'];\n"
                 + "  var div = form.firstChild;\n"
@@ -137,7 +137,6 @@ public class NodeTest extends LoboUnitTest {
     public void removeChildSibling() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function doTest() {\n"
                 + "  var div1 = document.getElementById('div1');\n"
                 + "  var div2 = document.getElementById('div2');\n"
@@ -159,7 +158,6 @@ public class NodeTest extends LoboUnitTest {
     public void replaceChild_Normal() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function doTest() {\n"
                 + "  var form = document.forms['form1'];\n"
                 + "  var div1 = form.firstChild;\n"
@@ -224,7 +222,6 @@ public class NodeTest extends LoboUnitTest {
         final String html = "<html><head>\n"
                 + "</head>\n"
                 + "<body><!-- comment --><script>\n"
-
                 + "var nodes = document.body.childNodes;\n"
                 + "alert('nb nodes: ' + nodes.length);\n"
                 + "for (var i = 0; i < nodes.length; i++)\n"
@@ -285,7 +282,8 @@ public class NodeTest extends LoboUnitTest {
     @Alerts("exception")
     public void attachEvent() {
         final String html = "<html><head>\n"
-                + "<script>\n"                + "function test() {\n"
+                + "<script>\n"
+                + "function test() {\n"
                 + "  var oField = document.getElementById('div1');\n"
                 + "  try {\n"
                 + "    oField.attachEvent('onclick', foo1);\n"
@@ -362,8 +360,8 @@ public class NodeTest extends LoboUnitTest {
     @Test
     @Alerts({"true", "false"})
     public void isSameNode() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    var d1 = document.getElementById('div1');\n"
                 + "    var d2 = document.getElementById('div2');\n"
@@ -407,7 +405,6 @@ public class NodeTest extends LoboUnitTest {
     @Alerts({"1", "exception", "1", "exception", "1", "exception", "1"})
     public void appendInsertHtmlNode() {
         final String html = "<html><head><script>\n"
-
                 + "function test() {\n"
                 + "  var htmlNode = document.documentElement;\n"
                 + "  var body = document.body;\n"
@@ -427,8 +424,8 @@ public class NodeTest extends LoboUnitTest {
     @Test
     @Alerts("2")
     public void appendChildOf_DocumentFragment() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    var fragment = document.createDocumentFragment();\n"
                 + "    var div1 = document.createElement('div');\n"
@@ -451,8 +448,8 @@ public class NodeTest extends LoboUnitTest {
     @Test
     @Alerts({"3", "3", "3", "3", "3", "3", "3", "3"})
     public void nodePrototype() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "     alert(document.body.TEXT_NODE);\n"
@@ -481,8 +478,8 @@ public class NodeTest extends LoboUnitTest {
     @Alerts({"<div id=\"myDiv2\"></div><div id=\"myDiv3\"></div>", "myDiv2",
             "<div>one</div><div>two</div><div id=\"myDiv3\"></div>"})
     public void replaceChild() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var element = document.getElementById('myDiv2');\n"
@@ -508,8 +505,8 @@ public class NodeTest extends LoboUnitTest {
     @Alerts({"<div id=\"myDiv2\"></div><div id=\"myDiv3\"></div>", "myDiv2",
             "<div id=\"myDiv3\"></div>"})
     public void replaceChild_EmptyDocumentFragment() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    var element = document.getElementById('myDiv2');\n"
                 + "    try {\n"
@@ -569,8 +566,8 @@ public class NodeTest extends LoboUnitTest {
     @Test
     @Alerts({"1", "1", "2", "4", "8", "16", "32"})
     public void documentPositionConstants() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "     alert(document.body.DOCUMENT_POSITION_DISCONNECTED);\n"
@@ -601,7 +598,6 @@ public class NodeTest extends LoboUnitTest {
                 + "  var div2 = document.getElementById('div2');\n"
                 + "  var div3 = document.getElementById('div3');\n"
                 + "  if (!div1.compareDocumentPosition) {alert('compareDocumentPosition not available'); return }\n"
-
                 + " alert(div1.compareDocumentPosition(div1));\n"
                 + " alert(div1.compareDocumentPosition(div2));\n"
                 + " alert(div1.compareDocumentPosition(div3));\n"
@@ -631,8 +627,8 @@ public class NodeTest extends LoboUnitTest {
     @Test
     @Alerts({"0", "16"})
     public void compareDocumentPosition2() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    var div = document.createElement('div');\n"
                 + "    var childDiv = document.createElement('div');\n"
@@ -652,7 +648,6 @@ public class NodeTest extends LoboUnitTest {
     @Alerts("bk")
     public void prefix() {
         final String html = "<html><head><script>\n"
-
                 + "function test() {\n"
                 + "  var text = \"<bk:book xmlns:bk='urn:loc.gov:books'></bk:book>\";\n"
                 + "  var doc = " + callLoadXMLDocumentFromString("text") + ";\n"
@@ -667,8 +662,8 @@ public class NodeTest extends LoboUnitTest {
     @Test
     @Alerts("<root><![CDATA[abc]]><![CDATA[def]]></root>")
     public void xml() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    var doc = document.implementation.createDocument('', '', null);\n"
                 + "    var root = doc.appendChild(doc.createElement('root'));\n"
@@ -811,8 +806,8 @@ public class NodeTest extends LoboUnitTest {
     @Test
     @Alerts({"null", "null"})
     public void insertBeforeparentNode() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    var div1 = document.createElement('div');\n"
                 + "    var div2 = document.createElement('div');\n"
@@ -869,8 +864,8 @@ public class NodeTest extends LoboUnitTest {
     @Test
     @Alerts({"4", "3", "abc", "def", "123456", "true", "0", "2", "123", "456", "1", "true"})
     public void normalize() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    var doc = document.implementation.createDocument('', '', null);\n"
                 + "    var root = doc.appendChild(doc.createElement('root'));\n"
@@ -905,7 +900,6 @@ public class NodeTest extends LoboUnitTest {
     @Alerts({"[object Element]", "[object HTMLHtmlElement]"})
     public void parentElement() {
         final String html = "<html><head><script>\n"
-
                 + "function test() {\n"
                 + "  var text = '<hello>hi</hello>';\n"
                 + "  var doc = " + callLoadXMLDocumentFromString("text") + ";\n"
@@ -922,7 +916,6 @@ public class NodeTest extends LoboUnitTest {
     @Alerts({"hi", "undefined", "abcd", "undefined"})
     public void attributes() {
         final String html = "<html><head><script>\n"
-
                 + "function test() {\n"
                 + "  var text = '<hello>hi</hello>';\n"
                 + "  var doc = " + callLoadXMLDocumentFromString("text") + ";\n"
@@ -968,7 +961,8 @@ public class NodeTest extends LoboUnitTest {
     public void event() {
         final String html = "<html>\n"
                 + "<head><title>First Page</title>\n"
-                + "<script>\n"                + "  function test() {\n"
+               + "<script>\n"
+                + "  function test() {\n"
                 + "    var iframe = document.createElement('iframe');\n"
                 + "    document.body.appendChild(iframe);\n"
                 + "    iframe.contentWindow.location.replace('" + URL_SECOND + "');\n"
@@ -1137,7 +1131,8 @@ public class NodeTest extends LoboUnitTest {
     public void eventListener() {
         final String html
                 = "<html><head>\n"
-                + "<script>\n"                + "  function clicking1() {\n"
+                + "<script>\n"
+                + "  function clicking1() {\n"
                 + "   alert(1);\n"
                 + "  }\n"
                 + "  function clicking2() {\n"
@@ -1160,7 +1155,8 @@ public class NodeTest extends LoboUnitTest {
     public void eventListenerReturn_false() {
         final String html
                 = "<html><head>\n"
-                + "<script>\n"                + "  function clicking1() {\n"
+                + "<script>\n"
+                + "  function clicking1() {\n"
                 + "   alert(1);\n"
                 + "  }\n"
                 + "  function clicking2() {\n"
@@ -1185,7 +1181,8 @@ public class NodeTest extends LoboUnitTest {
     public void eventListenerReturnValueFalse() {
         final String html
                 = "<html><head>\n"
-                + "<script>\n"                + "  function clicking1() {\n"
+                + "<script>\n"
+                + "  function clicking1() {\n"
                 + "   alert(1);\n"
                 + "  }\n"
                 + "  function clicking2() {\n"

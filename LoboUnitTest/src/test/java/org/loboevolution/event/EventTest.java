@@ -52,8 +52,8 @@ public class EventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object Event]", "event", "false", "false", "false"})
     public void createCtor() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new Event('event');\n"
@@ -70,8 +70,8 @@ public class EventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object Event]", "event", "true", "false", "false"})
     public void createCtorWithDetails() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new Event('event', {\n"
@@ -90,8 +90,8 @@ public class EventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object Event]", "event", "true", "false", "false"})
     public void createCtorWithDetailsBoolAsString() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new Event('event', {\n"
@@ -110,8 +110,8 @@ public class EventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object Event]", "event", "true", "false", "false"})
     public void createCtorWithDetailsBoolAsNumber() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new Event('event', {\n"
@@ -130,8 +130,8 @@ public class EventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object Event]", "event", "true", "false", "false"})
     public void createCtorWithDetailsBoolAsObject() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new Event('event', {\n"
@@ -150,8 +150,8 @@ public class EventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object Event]", "event", "false", "false", "false"})
     public void createCtorWithDetailsBoolAsUndefined() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new Event('event', {\n"
@@ -170,8 +170,8 @@ public class EventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object Event]", "event", "false", "false", "false"})
     public void createCtorWithDetailsBoolAsNull() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new Event('event', {\n"
@@ -190,8 +190,8 @@ public class EventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object Event]", "", "false", "false", "false"})
     public void createCreateEvent() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = document.createEvent('Event');\n"
@@ -208,8 +208,8 @@ public class EventTest extends LoboUnitTest {
     @Test
     @Alerts({"DOM2: [object Event]", "DOM3: [object Event]", "vendor: [object Event]"})
     public void createCreateEventForDifferentTypes() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "     alert('DOM2: ' + document.createEvent('HTMLEvents'));\n"
@@ -230,8 +230,8 @@ public class EventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object Event]", "event", "true", "false", "false"})
     public void initEvent() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = document.createEvent('Event');\n"
@@ -459,7 +459,8 @@ public class EventTest extends LoboUnitTest {
         final String html
                 = "<html>\n"
                 + "<head>\n"
-                + "<script>\n"                + "</script>\n"
+                + "<script>\n"
+                + "</script>\n"
                 + "</head>\n"
                 + "<body>\n"
                 + "  <button name='button1' id='button1' onclick='alert(this.name)'>1</button>\n"
@@ -486,7 +487,8 @@ public class EventTest extends LoboUnitTest {
                 + "</head>\n"
                 + "<body>\n"
                 + "<iframe src='default' name='frame1' id='frame1'></iframe>\n"
-                + "<script>\n"                + "  var e = document.getElementById('frame1');\n"
+                + "<script>\n"
+                + "  var e = document.getElementById('frame1');\n"
                 + "  e.onload = test;\n"
                 + "</script>\n"
                 + "</body></html>";
@@ -743,7 +745,8 @@ public class EventTest extends LoboUnitTest {
     public void document_focus() {
         final String html = "<html>\n"
                 + "<head>\n"
-                + "<script>\n"                + "  function test() {\n"
+               + "<script>\n"
+                + "  function test() {\n"
                 + "    handle(document);\n"
                 + "   alert('activeElement ' + document.activeElement.nodeName);\n"
                 + "  }\n"
@@ -784,7 +787,8 @@ public class EventTest extends LoboUnitTest {
     private void document_input(final String event) {
         final String html = "<html>\n"
                 + "<head>\n"
-                + "<script>\n"                + "  function test() {\n"
+               + "<script>\n"
+                + "  function test() {\n"
                 + "    handle(document);\n"
                 + "  }\n"
                 + "  function handle(obj) {\n"
@@ -827,7 +831,8 @@ public class EventTest extends LoboUnitTest {
                 + "</head>\n"
                 + "<body>\n"
                 + "<button name='button1' id='button1' onclick='alert(1 + foo)'>click me</button>\n"
-                + "<script>\n"                + "  window.addEventListener('click', function() {alert(2 + foo); }, true);\n"
+                + "<script>\n"
+                + "  window.addEventListener('click', function() {alert(2 + foo); }, true);\n"
                 + "  document.foo = 'from document';\n"
                 + "  var foo = 'from window';\n"
                 + "</script>\n"
@@ -874,7 +879,8 @@ public class EventTest extends LoboUnitTest {
     private void eventHandlersParentScopeChain(final String startTag, final String endTag) {
         final String html = "<html><html>\n"
                 + "<head>\n"
-                + "<script>\n"                + "</script>\n"
+                + "<script>\n"
+                + "</script>\n"
                 + "</head>\n"
                 + "<body id='body'>\n"
                 + "<form id='theForm'>\n"
@@ -882,7 +888,8 @@ public class EventTest extends LoboUnitTest {
                 + "    " + startTag + " id='theField' onclick='alert(foo); return false;'>click me" + endTag + "\n"
                 + "  </div>\n"
                 + "</form>\n"
-                + "<script>\n"                + "  var foo = 'from window';\n"
+                + "<script>\n"
+                + "  var foo = 'from window';\n"
                 + "  document.foo = 'from document';\n"
                 + "  document.body.foo = 'from body';\n"
                 + "  document.getElementById('theForm').foo = 'from theForm';\n"
@@ -901,7 +908,8 @@ public class EventTest extends LoboUnitTest {
     public void eventHandlers_functionOpen() {
         final String html = "<html><body>\n"
                 + "<button id='button1' onclick='identify(open)'>click me</button>\n"
-                + "<script>\n"                + "function identify(fnOpen) {\n"
+                + "<script>\n"
+                + "function identify(fnOpen) {\n"
                 + "  var origin = 'unknown';\n"
                 + "  if (fnOpen === window.open) {\n"
                 + "    origin = 'from window';\n"
@@ -922,8 +930,8 @@ public class EventTest extends LoboUnitTest {
     @Test
     @Alerts({"false", "boolean"})
     public void defaultPrevented() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = document.createEvent('Event');\n"
@@ -940,8 +948,8 @@ public class EventTest extends LoboUnitTest {
     @Test
     @Alerts({"true", "boolean"})
     public void returnValue() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = document.createEvent('Event');\n"
@@ -962,28 +970,24 @@ public class EventTest extends LoboUnitTest {
             "true", "boolean", "false - false",
             "true", "boolean"})
     public void returnValueSetter() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = document.createEvent('Event');\n"
                 + "     alert(event.returnValue);\n"
                 + "     alert(typeof event.returnValue);\n"
                 + "     alert(event.cancelable + ' - ' + event.defaultPrevented);\n"
-
                 + "      event.initEvent('click', 'true', 'true');\n"
                 + "     alert(event.returnValue);\n"
                 + "     alert(event.cancelable + ' - ' + event.defaultPrevented);\n"
-
                 + "      event.preventDefault();\n"
                 + "     alert(event.returnValue);\n"
                 + "     alert(typeof event.returnValue);\n"
-
                 + "      event = document.createEvent('Event');\n"
                 + "     alert(event.returnValue);\n"
                 + "     alert(typeof event.returnValue);\n"
                 + "     alert(event.cancelable + ' - ' + event.defaultPrevented);\n"
-
                 + "      event.preventDefault();\n"
                 + "     alert(event.returnValue);\n"
                 + "     alert(typeof event.returnValue);\n"
@@ -1084,7 +1088,6 @@ public class EventTest extends LoboUnitTest {
                 + "  <head></head>\n"
                 + "  <body onload='test()'>\n"
                 + "    <div><a id='triggerClick' href='#'>click event</a></div>\n"
-
                 + "    <script>\n"
 
 
@@ -1094,41 +1097,32 @@ public class EventTest extends LoboUnitTest {
                 + "         alert(event.returnValue);\n"
                 + "         alert(typeof event.returnValue);\n"
                 + "         alert(event.cancelable + ' - ' + event.defaultPrevented);\n"
-
                 + "          event.initEvent('click', 'true', 'true');\n"
                 + "         alert(event.returnValue);\n"
                 + "         alert(event.cancelable + ' - ' + event.defaultPrevented);\n"
-
                 + "          event.returnValue = " + value + ";\n"
                 + "         alert(event.returnValue);\n"
                 + "         alert(typeof event.returnValue);\n"
-
                 + "          event.returnValue = !event.returnValue;\n"
                 + "         alert(event.returnValue);\n"
-
                 + "          event = document.createEvent('Event');\n"
                 + "         alert(event.returnValue);\n"
                 + "         alert(typeof event.returnValue);\n"
                 + "         alert(event.cancelable + ' - ' + event.defaultPrevented);\n"
-
                 + "          event.returnValue = " + value + ";\n"
                 + "         alert(event.returnValue);\n"
                 + "         alert(typeof event.returnValue);\n"
-
                 + "          event.returnValue = !event.returnValue;\n"
                 + "         alert(event.returnValue);\n"
                 + "        } catch (e) {alert('exception') }\n"
                 + "      }\n"
-
                 + "      triggerClick.addEventListener('click', function (event) {\n"
                 + "         alert(event.returnValue);\n"
                 + "         alert(typeof event.returnValue);\n"
                 + "         alert(event.cancelable + ' - ' + event.defaultPrevented);\n"
-
                 + "          event.returnValue = " + value + ";\n"
                 + "         alert(event.returnValue);\n"
                 + "         alert(typeof event.returnValue);\n"
-
                 + "          event.returnValue = !event.returnValue;\n"
                 + "         alert(event.returnValue);\n"
                 + "        });\n"
@@ -1155,25 +1149,18 @@ public class EventTest extends LoboUnitTest {
                 + "        try {\n"
                 + "          var event = document.createEvent('Event');\n"
                 + "         alert(event.cancelable + ' - ' + event.defaultPrevented);\n"
-
                 + "          event.initEvent('click', 'true', 'true');\n"
                 + "         alert(event.cancelable + ' - ' + event.defaultPrevented);\n"
-
                 + "          event.preventDefault();\n"
                 + "         alert(event.cancelable + ' - ' + event.defaultPrevented);\n"
-
                 + "          event = document.createEvent('Event');\n"
                 + "         alert(event.cancelable + ' - ' + event.defaultPrevented);\n"
-
                 + "          event.preventDefault();\n"
                 + "         alert(event.cancelable + ' - ' + event.defaultPrevented);\n"
-
                 + "          event = document.createEvent('Event');\n"
                 + "         alert(event.cancelable + ' - ' + event.defaultPrevented);\n"
-
                 + "          event.preventDefault();\n"
                 + "         alert(event.cancelable + ' - ' + event.defaultPrevented);\n"
-
                 + "          event.initEvent('click', 'true', 'true');\n"
                 + "         alert(event.cancelable + ' - ' + event.defaultPrevented);\n"
                 + "        } catch (e) {alert('exception') }\n"

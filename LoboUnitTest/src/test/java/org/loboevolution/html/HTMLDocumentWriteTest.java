@@ -94,7 +94,8 @@ public class HTMLDocumentWriteTest extends LoboUnitTest {
     @Test
     public void write2HtmlEndhtml_inHead() {
         final String html = "<html><head>\n"
-                + "<script>\n"                + "document.write('<HTML></HTML>');\n"
+                + "<script>\n"
+                + "document.write('<HTML></HTML>');\n"
                 + "</script>\n"
                 + "</head><body>\n"
                 + "</body></html>\n";
@@ -138,7 +139,8 @@ public class HTMLDocumentWriteTest extends LoboUnitTest {
         final String html = "<html><head></head>\n"
                 + "<body>\n"
                 + "<iframe id='theIframe' src='about:blank'></iframe>\n"
-                + "<script>\n"                + "var doc = document.getElementById('theIframe').contentWindow.document;\n"
+                + "<script>\n"
+                + "var doc = document.getElementById('theIframe').contentWindow.document;\n"
                 + "doc.open();\n"
                 + "doc.write('<html>');\n"
                 + "doc.write('<body onload=\"document.getElementById(\\'foo\\')\">');\n"
@@ -152,7 +154,7 @@ public class HTMLDocumentWriteTest extends LoboUnitTest {
 
     @Test
     @Alerts({"null", "[object HTMLBodyElement]", "s1 s2 s3 s4 s5"})
-    public void write_Destination() {
+    public void writeDestination() {
         final String html =
                 "<html>\n"
                         + "  <head>\n"
@@ -208,7 +210,7 @@ public class HTMLDocumentWriteTest extends LoboUnitTest {
 
     @Test
     @Alerts({"1", "2", "3"})
-    public void write_ScriptExecutionOrder() {
+    public void writeScriptExecutionOrder() {
         final String html =
                 "<html>\n"
                         + "  <head>\n"
@@ -230,13 +232,13 @@ public class HTMLDocumentWriteTest extends LoboUnitTest {
     @Alerts("outer")
     public void writeInManyTimes() {
         final String html = "<html><head><title>foo</title><script>\n"
-
                 + "function doTest() {\n"
                 + "  alert(document.getElementById('inner').parentNode.id);\n"
                 + "}\n"
                 + "</script></head>\n"
                 + "<body onload='doTest()'>\n"
-                + "<script>\n"                + "document.write('<div id=\"outer\">');\n"
+                + "<script>\n"
+                + "document.write('<div id=\"outer\">');\n"
                 + "document.write('<div id=\"inner\"/>');\n"
                 + "document.write('</div>');\n"
                 + "</script>\n"
@@ -269,14 +271,14 @@ public class HTMLDocumentWriteTest extends LoboUnitTest {
     @Alerts({"outer", "inner1"})
     public void writeAddNodesToCorrectParentBug1678826() {
         final String html = "<html><head><title>foo</title><script>\n"
-
                 + "function doTest() {\n"
                 + "  alert(document.getElementById('inner1').parentNode.id);\n"
                 + "  alert(document.getElementById('inner2').parentNode.id);\n"
                 + "}\n"
                 + "</script></head>\n"
                 + "<body onload='doTest()'>\n"
-                + "<script>\n"                + "document.write('<div id=\"outer\">');\n"
+                + "<script>\n"
+                + "document.write('<div id=\"outer\">');\n"
                 + "document.write('<br id=\"br1\">');\n"
                 + "document.write('<div id=\"inner1\"/>');\n"
                 + "document.write('<hr id=\"hr1\"/>');\n"

@@ -50,8 +50,8 @@ public class SubmitEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object SubmitEvent]", "submit", "false", "false", "false", "null"})
     public void createCtor() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new SubmitEvent('submit');\n"
@@ -85,8 +85,8 @@ public class SubmitEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object SubmitEvent]", "42", "false", "false", "false", "null"})
     public void createCtorNumericType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new SubmitEvent(42);\n"
@@ -103,8 +103,8 @@ public class SubmitEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object SubmitEvent]", "null", "false", "false", "false", "null"})
     public void createCtorNullType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new SubmitEvent(null);\n"
@@ -121,8 +121,8 @@ public class SubmitEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorUnknownType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new SubmitEvent(unknown);\n"
@@ -139,8 +139,8 @@ public class SubmitEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object SubmitEvent]", "HtmlUnitEvent", "false", "false", "false", "null"})
     public void createCtorArbitraryType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new SubmitEvent('HtmlUnitEvent');\n"
@@ -157,8 +157,8 @@ public class SubmitEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object SubmitEvent]", "submit", "false", "false", "false", "null"})
     public void createCtorAllDetails() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var debug = {hello: 'world'};\n"
@@ -182,8 +182,8 @@ public class SubmitEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object SubmitEvent]", "submit", "false", "false", "false", "null"})
     public void createCtorAllDetailsMissingData() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new SubmitEvent('submit', {\n"
@@ -201,8 +201,8 @@ public class SubmitEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object SubmitEvent]", "submit", "false", "false", "false", "null"})
     public void createCtorAllDetailsWrongData() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new SubmitEvent('submit', {\n"

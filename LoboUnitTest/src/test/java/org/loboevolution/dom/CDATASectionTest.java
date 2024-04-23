@@ -44,7 +44,8 @@ public class CDATASectionTest extends LoboUnitTest {
     public void simpleScriptable() {
         final String html
                 = "<html><head>\n"
-                + "<script>\n" + "function test() {\n"
+                + "<script>\n" 
+                + "function test() {\n"
                 + " alert(document.body.firstChild);\n"
                 + "}\n"
                 + "</script></head><body onload='test()'><![CDATA[Jeep]]></body></html>";

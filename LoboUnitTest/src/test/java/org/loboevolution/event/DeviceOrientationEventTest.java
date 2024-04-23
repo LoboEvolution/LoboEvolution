@@ -56,8 +56,8 @@ public class DeviceOrientationEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object DeviceOrientationEvent]", "orientation", "false", "false", "false"})
     public void createCtor() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new DeviceOrientationEvent('orientation');\n"
@@ -91,8 +91,8 @@ public class DeviceOrientationEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object DeviceOrientationEvent]", "42", "false", "false", "false"})
     public void createCtorNumericType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new DeviceOrientationEvent(42);\n"
@@ -109,8 +109,8 @@ public class DeviceOrientationEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object DeviceOrientationEvent]", "null", "false", "false", "false"})
     public void createCtorNullType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new DeviceOrientationEvent(null);\n"
@@ -127,8 +127,8 @@ public class DeviceOrientationEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorUnknownType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new DeviceOrientationEvent(unknown);\n"
@@ -145,8 +145,8 @@ public class DeviceOrientationEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object DeviceOrientationEvent]", "HtmlUnitEvent", "false", "false", "false"})
     public void createCtorArbitraryType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new DeviceOrientationEvent('HtmlUnitEvent');\n"
@@ -163,8 +163,8 @@ public class DeviceOrientationEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object DeviceOrientationEvent]", "orientation", "false", "false", "false"})
     public void createCtorAllDetails() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new DeviceOrientationEvent('orientation', {\n"
@@ -183,8 +183,8 @@ public class DeviceOrientationEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object DeviceOrientationEvent]", "orientation", "false", "false", "false"})
     public void createCtorAllDetailsMissingData() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new DeviceOrientationEvent('orientation', {\n"
@@ -202,8 +202,8 @@ public class DeviceOrientationEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object DeviceOrientationEvent]", "orientation", "false", "false", "false"})
     public void createCtorAllDetailsWrongData() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new DeviceOrientationEvent('orientation', {\n"

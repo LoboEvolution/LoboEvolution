@@ -58,8 +58,8 @@ public class MessageEventTest extends LoboUnitTest {
     @Alerts({"[object MessageEvent]", "type-message", "false", "false", "false",
             "null", "", "", "null"})
     public void createCtor() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new MessageEvent('type-message');\n"
@@ -99,8 +99,8 @@ public class MessageEventTest extends LoboUnitTest {
     @Test
     @Alerts({"DOM2: exception", "DOM3: [object MessageEvent]"})
     public void createEvent() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "     alert('DOM2: ' + document.createEvent('MessageEvents'));\n"

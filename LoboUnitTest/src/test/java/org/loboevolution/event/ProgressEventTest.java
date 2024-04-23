@@ -57,8 +57,8 @@ public class ProgressEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object ProgressEvent]", "progress", "false", "false", "false", "false", "0", "0"})
     public void createCtor() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new ProgressEvent('progress');\n"
@@ -75,8 +75,8 @@ public class ProgressEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object ProgressEvent]", "test", "true", "false", "false", "true", "234", "666"})
     public void createCtorWithDetails() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new ProgressEvent('test', {\n"
@@ -98,8 +98,8 @@ public class ProgressEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCreateEvent() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = document.createEvent('ProgressEvent');\n"

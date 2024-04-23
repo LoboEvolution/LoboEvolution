@@ -40,8 +40,8 @@ public class TrackEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object TrackEvent]", "track", "false", "false", "false"})
     public void createCtor() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new TrackEvent('track');\n"
@@ -58,8 +58,8 @@ public class TrackEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object TrackEvent]", "undefined", "false", "false", "false"})
     public void createCtorWithoutType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new TrackEvent();\n"
@@ -76,8 +76,8 @@ public class TrackEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object TrackEvent]", "42", "false", "false", "false"})
     public void createCtorNumericType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new TrackEvent(42);\n"
@@ -94,8 +94,8 @@ public class TrackEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object TrackEvent]", "null", "false", "false", "false"})
     public void createCtorNullType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new TrackEvent(null);\n"
@@ -112,8 +112,8 @@ public class TrackEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorUnknownType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new TrackEvent(unknown);\n"
@@ -130,8 +130,8 @@ public class TrackEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object TrackEvent]", "HtmlUnitEvent", "false", "false", "false"})
     public void createCtorArbitraryType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new TrackEvent('HtmlUnitEvent');\n"
@@ -148,8 +148,8 @@ public class TrackEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object TrackEvent]", "track", "false", "false", "false"})
     public void createCtorAllDetails() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var debug = {hello: 'world'};\n"
@@ -169,8 +169,8 @@ public class TrackEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object TrackEvent]", "track", "false", "false", "false"})
     public void createCtorAllDetailsMissingData() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new TrackEvent('track', {\n"
@@ -188,8 +188,8 @@ public class TrackEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object TrackEvent]", "track", "false", "false", "false"})
     public void createCtorAllDetailsWrongData() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new TrackEvent('track', {\n"

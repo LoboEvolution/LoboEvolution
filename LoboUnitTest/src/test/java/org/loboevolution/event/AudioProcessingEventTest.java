@@ -41,8 +41,8 @@ public class AudioProcessingEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtor() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new AudioProcessingEvent('audioprocessing');\n"
@@ -57,8 +57,8 @@ public class AudioProcessingEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object AudioProcessingEvent]", "audioprocessing", "false", "false", "false"})
     public void createCtorAllDetails() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var audioCtx = new AudioContext();\n"
@@ -82,8 +82,8 @@ public class AudioProcessingEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorMissingDetails() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new AudioProcessingEvent('audioprocessing');\n"
@@ -100,8 +100,8 @@ public class AudioProcessingEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCreateEvent() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = document.createEvent('AudioProcessingEvent');\n"

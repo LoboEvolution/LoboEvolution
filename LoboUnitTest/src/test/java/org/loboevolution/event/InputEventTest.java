@@ -75,8 +75,8 @@ public class InputEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object InputEvent]", "42", "false", "false", "false", ",,false"})
     public void createCtorNumericType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new InputEvent(42);\n"
@@ -93,8 +93,8 @@ public class InputEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object InputEvent]", "null", "false", "false", "false", ",,false"})
     public void createCtorNullType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new InputEvent(null);\n"
@@ -128,8 +128,8 @@ public class InputEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object InputEvent]", "HtmlUnitEvent", "false", "false", "false", ",,false"})
     public void createCtorArbitraryType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new InputEvent('HtmlUnitEvent');\n"
@@ -165,8 +165,8 @@ public class InputEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object InputEvent]", "input", "false", "false", "false", ",,true"})
     public void createCtorSomeDetails() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new InputEvent('input', "
@@ -184,8 +184,8 @@ public class InputEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object InputEvent]", "input", "false", "false", "false", ",,false"})
     public void createCtorMissingData() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new InputEvent('input', {\n"
@@ -203,8 +203,8 @@ public class InputEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object InputEvent]", "input", "false", "false", "false", ",,false"})
     public void createCtorNullData() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new InputEvent('input', null);\n"
@@ -221,8 +221,8 @@ public class InputEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object InputEvent]", "input", "false", "false", "false", ",,false"})
     public void createCtorUndefinedData() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new InputEvent('input', undefined);\n"
@@ -239,8 +239,8 @@ public class InputEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object InputEvent]", "input", "false", "false", "false", "Html,Unit,,false"})
     public void createCtorWrongData() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new InputEvent('input', {\n"

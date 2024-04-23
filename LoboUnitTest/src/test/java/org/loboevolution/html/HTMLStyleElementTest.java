@@ -61,7 +61,6 @@ public class HTMLStyleElementTest extends LoboUnitTest {
     public void styleChildren() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function doTest() {\n"
                 + "  var doc = document;\n"
                 + "  var style = doc.createElement('style');\n"
@@ -85,11 +84,9 @@ public class HTMLStyleElementTest extends LoboUnitTest {
     public void innerHtml() {
         final String html
                 = "<html><head>\n"
-
                 + "<style id='style_none'>.a > .t { }</style>\n"
                 + "<style type='text/test' id='style_text'>.b > .t { }</style>\n"
                 + "<style type='text/html' id='style_html'>.c > .t { }</style>\n"
-
                 + "    <script>\n"
                 + "function doTest() {\n"
                 + "  style = document.getElementById('style_none');\n"
@@ -107,15 +104,13 @@ public class HTMLStyleElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"", "text/test", "text/css"})
+    @Alerts({"null", "text/test", "text/css"})
     public void type() {
         final String html
                 = "<html><head>\n"
-
                 + "<style id='style_none'>my { }</style>\n"
                 + "<style type='text/test' id='style_text'>my { }</style>\n"
                 + "<style type='text/css' id='style_css'>my { }</style>\n"
-
                 + "    <script>\n"
                 + "function doTest() {\n"
                 + "  style = document.getElementById('style_none');\n"
@@ -133,15 +128,13 @@ public class HTMLStyleElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"", "all", "screen, print,test"})
+    @Alerts({"null", "all", "screen, print,test"})
     public void media() {
         final String html
                 = "<html><head>\n"
-
                 + "<style id='style_none'>my { }</style>\n"
                 + "<style media='all' id='style_all'>my { }</style>\n"
                 + "<style media='screen, print,test' id='stylesome'>my { }</style>\n"
-
                 + "    <script>\n"
                 + "function doTest() {\n"
                 + "  style = document.getElementById('style_none');\n"
@@ -163,27 +156,19 @@ public class HTMLStyleElementTest extends LoboUnitTest {
     public void mediasetter() {
         final String html
                 = "<html><head>\n"
-
                 + "<style id='myStyle' media='all'>my { }</style>\n"
-
                 + "    <script>\n"
                 + "function doTest() {\n"
                 + "  style = document.getElementById('myStyle');\n"
-
                 + "  alert(style.media);\n"
-
                 + "  style.media = '';\n"
                 + "  alert(style.media);\n"
-
                 + "  style.media = 'screen';\n"
                 + "  alert(style.media + ':' + style.attributes['media'].value);\n"
-
                 + "  style.media = 'priNT';\n"
                 + "  alert(style.media);\n"
-
                 + "  style.media = 'screen, print';\n"
                 + "  alert(style.media);\n"
-
                 + "}\n"
                 + "</script>\n"
                 + "</head><body onload='doTest()'>\n"
@@ -197,9 +182,7 @@ public class HTMLStyleElementTest extends LoboUnitTest {
     public void scoped() {
         final String html
                 = "<html><head>\n"
-
                 + "<style id='style_none'>my { }</style>\n"
-
                 + "    <script>\n"
                 + "function doTest() {\n"
                 + "  style = document.getElementById('style_none');\n"
@@ -221,18 +204,13 @@ public class HTMLStyleElementTest extends LoboUnitTest {
     public void scopedsetter() {
         final String html
                 = "<html><head>\n"
-
                 + "<style id='myStyle' media='all'>my { }</style>\n"
-
                 + "    <script>\n"
                 + "function doTest() {\n"
                 + "  style = document.getElementById('myStyle');\n"
-
                 + "  alert(style.scoped);\n"
-
                 + "  style.scoped = true;\n"
                 + "  alert(style.scoped);\n"
-
                 + "  style.media = false;\n"
                 + "  alert(style.media);\n"
                 + "}\n"
@@ -244,12 +222,11 @@ public class HTMLStyleElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"", "text/css"})
+    @Alerts({"null", "text/css"})
     public void typesetter() {
         final String html
                 = "<html><head>\n"
                 + "<style id='style_none'></style>\n"
-
                 + "    <script>\n"
                 + "function doTest() {\n"
                 + "  style = document.getElementById('style_none');\n"
@@ -270,7 +247,6 @@ public class HTMLStyleElementTest extends LoboUnitTest {
         final String html
                 = "<html><head>\n"
                 + "<style id='myStyle'> .abc { color: green; }</style>\n"
-
                 + "    <script>\n"
                 + "function doTest() {\n"
                 + "  var div = document.getElementById('myDiv');\n"

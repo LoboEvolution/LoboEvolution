@@ -49,8 +49,8 @@ public class FocusEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object FocusEvent]", "focus", "false", "false", "false"})
     public void createCtor() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new FocusEvent('focus');\n"
@@ -84,8 +84,8 @@ public class FocusEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object FocusEvent]", "42", "false", "false", "false"})
     public void createCtorNumericType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new FocusEvent(42);\n"
@@ -102,8 +102,8 @@ public class FocusEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object FocusEvent]", "null", "false", "false", "false"})
     public void createCtorNullType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new FocusEvent(null);\n"
@@ -120,8 +120,8 @@ public class FocusEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorUnknownType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new FocusEvent(unknown);\n"
@@ -138,8 +138,8 @@ public class FocusEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object FocusEvent]", "HtmlUnitEvent", "false", "false", "false"})
     public void createCtorArbitraryType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new FocusEvent('HtmlUnitEvent');\n"
@@ -156,8 +156,8 @@ public class FocusEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object FocusEvent]", "focus", "false", "false", "false"})
     public void createCtorAllDetails() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new FocusEvent('focus', {\n"
@@ -176,8 +176,8 @@ public class FocusEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object FocusEvent]", "focus", "false", "false", "false"})
     public void createCtorAllDetailsMissingData() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new FocusEvent('focus', {\n"
@@ -195,8 +195,8 @@ public class FocusEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object FocusEvent]", "focus", "false", "false", "false"})
     public void createCtorAllDetailsWrongData() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new FocusEvent('focus', {\n"

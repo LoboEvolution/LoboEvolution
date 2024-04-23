@@ -50,7 +50,8 @@ public class HTMLLabelElementTest extends LoboUnitTest {
         final String html
                 = "<html>\n"
                 + "  <head>\n"
-                + "<script>\n"                + "      function doTest() {\n"
+                + "<script>\n"
+                + "      function doTest() {\n"
                 + "        alert(document.getElementById('label1').htmlFor);\n"
                 + "      }\n"
                 + "    </script>\n"
@@ -70,7 +71,8 @@ public class HTMLLabelElementTest extends LoboUnitTest {
         final String html
                 = "<html>\n"
                 + "  <head>\n"
-                + "<script>\n"                + "      function doTest() {\n"
+                + "<script>\n"
+                + "      function doTest() {\n"
                 + "        alert(document.getElementById('label1').htmlFor);\n"
                 + "      }\n"
                 + "    </script>\n"
@@ -90,7 +92,8 @@ public class HTMLLabelElementTest extends LoboUnitTest {
         final String html
                 = "<html>\n"
                 + "  <head>\n"
-                + "<script>\n"                + "      function doTest() {\n"
+                + "<script>\n"
+                + "      function doTest() {\n"
                 + "        alert(document.getElementById('label1').htmlFor);\n"
                 + "      }\n"
                 + "    </script>\n"
@@ -110,7 +113,8 @@ public class HTMLLabelElementTest extends LoboUnitTest {
         final String html
                 = "<html>\n"
                 + "  <head>\n"
-                + "<script>\n"                + "      function doTest() {\n"
+                + "<script>\n"
+                + "      function doTest() {\n"
                 + "        alert(document.getElementById('label1').htmlFor);\n"
                 + "      }\n"
                 + "    </script>\n"
@@ -130,7 +134,8 @@ public class HTMLLabelElementTest extends LoboUnitTest {
         final String html
                 = "<html>\n"
                 + "  <head>\n"
-                + "<script>\n"                + "      function doTest() {\n"
+                + "<script>\n"
+                + "      function doTest() {\n"
                 + "        try {\n"
                 + "          document.getElementById('label1').htmlFor = 'unknown';\n"
                 + "        } catch (e) {"
@@ -159,7 +164,8 @@ public class HTMLLabelElementTest extends LoboUnitTest {
         final String html
                 = "<html>\n"
                 + "  <head>\n"
-                + "<script>\n"                + "      function doTest() {\n"
+                + "<script>\n"
+                + "      function doTest() {\n"
                 + "        try {\n"
                 + "          document.getElementById('label1').htmlFor = 'div1';\n"
                 + "        } catch (e) {"
@@ -188,7 +194,8 @@ public class HTMLLabelElementTest extends LoboUnitTest {
         final String html
                 = "<html>\n"
                 + "  <head>\n"
-                + "<script>\n"                + "      function doTest() {\n"
+                + "<script>\n"
+                + "      function doTest() {\n"
                 + "        try {\n"
                 + "          document.getElementById('label1').htmlFor = 'text1';\n"
                 + "        } catch (e) {"
@@ -217,7 +224,8 @@ public class HTMLLabelElementTest extends LoboUnitTest {
         final String html
                 = "<html>\n"
                 + "  <head>\n"
-                + "<script>\n"                + "      function doTest() {\n"
+                + "<script>\n"
+                + "      function doTest() {\n"
                 + "        try {\n"
                 + "          document.getElementById('label1').control = document.getElementById('text1');\n"
                 + "        } catch (e) {"
@@ -242,7 +250,8 @@ public class HTMLLabelElementTest extends LoboUnitTest {
         final String html
                 = "<html>\n"
                 + "  <head>\n"
-                + "<script>\n"                + "      function doTest() {\n"
+                + "<script>\n"
+                + "      function doTest() {\n"
                 + "        try {\n"
                 + "          document.getElementById('label1').form = document.getElementById('form1');\n"
                 + "        } catch (e) {"
@@ -378,14 +387,15 @@ public class HTMLLabelElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"", "A", "a", "A", "a8", "8Afoo", "8", "@"})
+    @Alerts({"null", "A", "a", "A", "a8", "8Afoo", "8", "@"})
     public void accessKey() {
         final String html
                 = "<html>\n"
                 + "  <body>\n"
                 + "    <label id='a1'>a1</label>\n"
                 + "    <label id='a2' accesskey='A'>a2</label>\n"
-                + "<script>\n"                + "      var a1 = document.getElementById('a1'), a2 = document.getElementById('a2');\n"
+                + "<script>\n"
+                + "      var a1 = document.getElementById('a1'), a2 = document.getElementById('a2');\n"
                 + "      alert(a1.accessKey);\n"
                 + "      alert(a2.accessKey);\n"
                 + "      a1.accessKey = 'a';\n"

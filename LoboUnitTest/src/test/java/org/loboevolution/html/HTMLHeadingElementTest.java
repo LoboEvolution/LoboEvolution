@@ -40,7 +40,7 @@ public class HTMLHeadingElementTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts({"left", "right", "center", "justify", "wrong", ""})
+    @Alerts({"left", "right", "center", "justify", "wrong", "null"})
     public void getAlign() {
         final String html
                 = "<html><body>\n"
@@ -50,7 +50,6 @@ public class HTMLHeadingElementTest extends LoboUnitTest {
                 + "  <h2 id='h4' align='justify' ></h2>\n"
                 + "  <h2 id='h5' align='wrong' ></h2>\n"
                 + "  <h2 id='h6' ></h2>\n"
-
                 + "    <script>\n"
                 + "  for (var i = 1; i <= 6; i++) {\n"
                 + "    alert(document.getElementById('h' + i).align);\n"
@@ -67,7 +66,6 @@ public class HTMLHeadingElementTest extends LoboUnitTest {
         final String html
                 = "<html><body>\n"
                 + "  <h2 id='e1' align='left' ></h2>\n"
-
                 + "    <script>\n"
                 + "  function setAlign(elem, value) {\n"
                 + "    try {\n"
@@ -75,13 +73,10 @@ public class HTMLHeadingElementTest extends LoboUnitTest {
                 + "    } catch (e) { alert('error'); }\n"
                 + "    alert(elem.align);\n"
                 + "  }\n"
-
                 + "  var elem = document.getElementById('e1');\n"
                 + "  setAlign(elem, 'CenTer');\n"
-
                 + "  setAlign(elem, '8');\n"
                 + "  setAlign(elem, 'foo');\n"
-
                 + "  setAlign(elem, 'left');\n"
                 + "  setAlign(elem, 'right');\n"
                 + "  setAlign(elem, 'center');\n"

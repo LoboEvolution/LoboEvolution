@@ -918,7 +918,8 @@ public class ElementClientHeightTest extends LoboUnitTest {
     @Alerts("0")
     public void title() {
         final String html = "<html><head>\n"
-                + "<script>\n"                + "function test() {\n"
+                + "<script>\n"
+                + "function test() {\n"
                 + "  var e = document.getElementById('outer');\n"
                 + "  alert(" + VALUE_ + ");\n"
                 + "}\n"

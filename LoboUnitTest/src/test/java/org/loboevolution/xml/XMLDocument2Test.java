@@ -195,7 +195,8 @@ public class XMLDocument2Test extends LoboUnitTest {
     @Alerts("exception")
     public void text() {
         final String html = "<html><head>\n"
-                + "<script>\n"                + "  function test() {\n"
+               + "<script>\n"
+                + "  function test() {\n"
                 + "    try {\n"
                 + "      new ActiveXObject('Microsoft.XMLDOM');\n"
                 + "    } catch (e) {\n"
@@ -205,7 +206,6 @@ public class XMLDocument2Test extends LoboUnitTest {
                 + "    var xmldoc = new ActiveXObject('Microsoft.XMLDOM');\n"
                 + "    var xml = '<Envelope><Body>content</Body></Envelope>';\n"
                 + "    xmldoc.loadXML(xml);\n"
-
                 + "    var expression = '/Envelope/Body';\n"
                 + "    var body = xmldoc.documentElement.selectSingleNode(expression);\n"
                 + "   alert(body.text);\n"
@@ -419,13 +419,11 @@ public class XMLDocument2Test extends LoboUnitTest {
     @Test
     @Alerts({"foo", "fooc1", "null"})
     public void firstElementChild() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
-
                 + "    if (doc.firstElementChild == null) {alert('not available'); return };\n"
-
                 + "   alert(doc.firstElementChild.nodeName);\n"
                 + "   alert(doc.firstElementChild.firstElementChild.nodeName);\n"
                 + "   alert(doc.firstElementChild.firstElementChild.firstElementChild);\n"
@@ -444,9 +442,7 @@ public class XMLDocument2Test extends LoboUnitTest {
                 + "<script>\n"
                 + "  function test() {\n"
                 + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
-
                 + "    if (doc.firstElementChild == null) {alert('not available'); return };\n"
-
                 + "   alert(doc.lastElementChild.nodeName);\n"
                 + "   alert(doc.firstElementChild.lastElementChild.nodeName);\n"
                 + "   alert(doc.firstElementChild.firstElementChild.lastElementChild);\n"

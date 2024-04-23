@@ -54,7 +54,6 @@ public class NodeIteratorTest extends LoboUnitTest {
                 + "          NodeFilter.SHOW_ELEMENT,\n"
                 + "          null\n"
                 + "        );\n"
-
                 + "        var currentNode;\n"
                 + "        while (currentNode = nodeIterator.nextNode()) {\n"
                 + "         alert(currentNode);\n"
@@ -87,7 +86,6 @@ public class NodeIteratorTest extends LoboUnitTest {
                 + " : NodeFilter.FILTER_REJECT;\n"
                 + "          }\n"
                 + "        );\n"
-
                 + "        var currentNode;\n"
                 + "        while (currentNode = nodeIterator.nextNode()) {\n"
                 + "         alert(currentNode);\n"
@@ -121,7 +119,6 @@ public class NodeIteratorTest extends LoboUnitTest {
                 + "            }\n"
                 + "          } }\n"
                 + "        );\n"
-
                 + "        var currentNode;\n"
                 + "        while (currentNode = nodeIterator.nextNode()) {\n"
                 + "         alert(currentNode.data);\n"
@@ -154,7 +151,6 @@ public class NodeIteratorTest extends LoboUnitTest {
                 + "        var nodeIterator = document.createNodeIterator(\n"
                 + "          document.getElementById('1'),\n"
                 + "          NodeFilter.SHOW_ELEMENT );\n"
-
                 + "        var currentNode;\n"
                 + "        while (currentNode = nodeIterator.nextNode()) {\n"
                 + "         alert(currentNode.id);\n"

@@ -32,6 +32,7 @@ import org.htmlunit.cssparser.util.CSSProperties;
 import org.loboevolution.css.CSSStyleDeclaration;
 import org.loboevolution.css.CSSStyleRule;
 import org.loboevolution.css.CSSStyleSheet;
+import org.loboevolution.html.style.setter.BackgroundSetter;
 import org.loboevolution.html.style.setter.BorderStyleSetter;
 import org.loboevolution.html.style.setter.FourCornersSetter;
 import org.loboevolution.net.NameValuePair;
@@ -105,6 +106,8 @@ public class CSSStyleRuleImpl extends AbstractCSSStyleRule implements CSSStyleRu
                     case CSSProperties.BORDER_STYLE:
                         new BorderStyleSetter(p.getName(), p.getName() + "-", "-style").changeValue(atomicReference.get(), p.getValue());
                         break;
+                    case CSSProperties.BACKGROUND:
+                        new BackgroundSetter().changeValue(atomicReference.get(), p.getValue());
                     default:
                         break;
                 }

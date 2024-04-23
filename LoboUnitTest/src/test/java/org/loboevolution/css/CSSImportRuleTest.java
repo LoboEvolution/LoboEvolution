@@ -46,8 +46,8 @@ public class CSSImportRuleTest extends LoboUnitTest {
                 + "<style>\n"
                 + "  @import 'imp.css';\n"
                 + "</style>\n"
-
-                + "<script>\n" + "  var styleSheet = document.styleSheets[0];\n"
+                + "<script>\n" 
+                + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
                 + " alert(Object.prototype.toString.call(rule));\n"
                 + " alert(rule);\n"
@@ -66,12 +66,11 @@ public class CSSImportRuleTest extends LoboUnitTest {
                 + "<style>\n"
                 + "  @import 'imp.css';\n"
                 + "</style>\n"
-
-                + "<script>\n" + "  var styleSheet = document.styleSheets[0];\n"
+                + "<script>\n" 
+                + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
                 + " alert(rule.cssText);\n"
                 + "</script>\n"
-
                 + "</body></html>";
 
         checkHtmlAlert(html);
@@ -86,7 +85,8 @@ public class CSSImportRuleTest extends LoboUnitTest {
                 + "<style>\n"
                 + "  @import 'imp.css';\n"
                 + "</style>\n"
-                + "<script>\n" + "  var styleSheet = document.styleSheets[0];\n"
+                + "<script>\n" 
+                + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
                 + "  try {"
                 + "    rule.cssText = '@import \"imp2.css\";';\n"
@@ -109,7 +109,8 @@ public class CSSImportRuleTest extends LoboUnitTest {
                 + "<style>\n"
                 + "  @import 'imp.css';\n"
                 + "</style>\n"
-                + "<script>\n" + "  var styleSheet = document.styleSheets[0];\n"
+                + "<script>\n" 
+                + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
                 + " alert(rule.parentRule);\n"
                 + "</script>\n"
@@ -127,7 +128,8 @@ public class CSSImportRuleTest extends LoboUnitTest {
                 + "<style>\n"
                 + "  @import 'imp.css';\n"
                 + "</style>\n"
-                + "<script>\n" + "  var styleSheet = document.styleSheets[0];\n"
+                + "<script>\n" 
+                + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
                 + "  try {"
                 + "    rule.parentRule = rule;\n"
@@ -150,12 +152,11 @@ public class CSSImportRuleTest extends LoboUnitTest {
                 + "<style>\n"
                 + "  @import 'imp.css';\n"
                 + "</style>\n"
-
-                + "<script>\n" + "  var styleSheet = document.styleSheets[0];\n"
+                + "<script>\n" 
+                + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
                 + " alert(rule.parentStyleSheet);\n"
                 + "</script>\n"
-
                 + "</body></html>";
 
         checkHtmlAlert(html);
@@ -170,8 +171,8 @@ public class CSSImportRuleTest extends LoboUnitTest {
                 + "<style>\n"
                 + "  @media screen { p { background-color:#FFFFFF; }};\n"
                 + "</style>\n"
-
-                + "<script>\n" + "  var styleSheet = document.styleSheets[0];\n"
+                + "<script>\n" 
+                + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
                 + "  try {"
                 + "    rule.parentStyleSheet = null;\n"
@@ -180,7 +181,6 @@ public class CSSImportRuleTest extends LoboUnitTest {
                 + "   alert('exception');\n"
                 + "  }\n"
                 + "</script>\n"
-
                 + "</body></html>";
 
         checkHtmlAlert(html);
@@ -195,8 +195,8 @@ public class CSSImportRuleTest extends LoboUnitTest {
                 + "<style>\n"
                 + "  @import  'imp.css';\n"
                 + "</style>\n"
-
-                + "<script>\n" + "  var styleSheet = document.styleSheets[0];\n"
+                + "<script>\n" 
+                + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
                 + " alert(rule.href);\n"
                 + " alert(rule.cssText);\n"
@@ -214,12 +214,12 @@ public class CSSImportRuleTest extends LoboUnitTest {
                 + "<style>\n"
                 + "  @import  'imp.css';\n"
                 + "</style>\n"
-                + "<script>\n" + "  var styleSheet = document.styleSheets[0];\n"
+                + "<script>\n" 
+                + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
                 + " alert(rule.href);\n"
                 + " alert(rule.cssText);\n"
                 + "</script>\n"
-
                 + "</body></html>";
         checkHtmlAlert(html);
     }
@@ -233,7 +233,8 @@ public class CSSImportRuleTest extends LoboUnitTest {
                 + "<style>\n"
                 + "  @import url( 'imp.css' );\n"
                 + "</style>\n"
-                + "<script>\n" + "  var styleSheet = document.styleSheets[0];\n"
+                + "<script>\n" 
+                + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
                 + " alert(rule.href);\n"
                 + " alert(rule.cssText);\n"
@@ -272,7 +273,8 @@ public class CSSImportRuleTest extends LoboUnitTest {
                 + "<style>\n"
                 + "  @import 'imp.css';\n"
                 + "</style>\n"
-                + "<script>\n" + "  var styleSheet = document.styleSheets[0];\n"
+                + "<script>\n" 
+                + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
                 + "  var mediaList = rule.media;\n"
                 + " alert(Object.prototype.toString.call(mediaList));\n"
@@ -284,7 +286,6 @@ public class CSSImportRuleTest extends LoboUnitTest {
                 + " alert(mediaList.mediaText);\n"
                 + " alert(rule.cssText);\n"
                 + "</script>\n"
-
                 + "</body></html>";
 
         checkHtmlAlert(html);
@@ -299,8 +300,8 @@ public class CSSImportRuleTest extends LoboUnitTest {
                 + "<style>\n"
                 + "  @import 'imp.css' all;\n"
                 + "</style>\n"
-
-                + "<script>\n" + "  var styleSheet = document.styleSheets[0];\n"
+                + "<script>\n" 
+                + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
                 + "  var mediaList = rule.media;\n"
                 + " alert(Object.prototype.toString.call(mediaList));\n"
@@ -312,7 +313,6 @@ public class CSSImportRuleTest extends LoboUnitTest {
                 + " alert(mediaList.mediaText);\n"
                 + " alert(rule.cssText);\n"
                 + "</script>\n"
-
                 + "</body></html>";
 
         checkHtmlAlert(html);
@@ -327,8 +327,8 @@ public class CSSImportRuleTest extends LoboUnitTest {
                 + "<style>\n"
                 + "  @import 'imp.css' screen;\n"
                 + "</style>\n"
-
-                + "<script>\n" + "  var styleSheet = document.styleSheets[0];\n"
+                + "<script>\n" 
+                + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
                 + "  var mediaList = rule.media;\n"
                 + " alert(Object.prototype.toString.call(mediaList));\n"
@@ -340,7 +340,6 @@ public class CSSImportRuleTest extends LoboUnitTest {
                 + " alert(mediaList.mediaText);\n"
                 + " alert(rule.cssText);\n"
                 + "</script>\n"
-
                 + "</body></html>";
 
         checkHtmlAlert(html);
@@ -358,8 +357,8 @@ public class CSSImportRuleTest extends LoboUnitTest {
                 + "<style>\n"
                 + "  @import 'imp.css' only screen and  (color ),print and ( max-width:12cm) and (min-width: 30em);\n"
                 + "</style>\n"
-
-                + "<script>\n" + "  var styleSheet = document.styleSheets[0];\n"
+                + "<script>\n" 
+                + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
                 + "  var mediaList = rule.media;\n"
                 + " alert(mediaList.length);\n"
@@ -369,7 +368,6 @@ public class CSSImportRuleTest extends LoboUnitTest {
                 + " alert(mediaList.mediaText);\n"
                 + " alert(rule.cssText);\n"
                 + "</script>\n"
-
                 + "</body></html>";
 
         checkHtmlAlert(html);
@@ -385,8 +383,8 @@ public class CSSImportRuleTest extends LoboUnitTest {
                 + "<style>\n"
                 + "  @import 'imp.css';\n"
                 + "</style>\n"
-
-                + "<script>\n" + "  var styleSheet = document.styleSheets[0];\n"
+                + "<script>\n" 
+                + "  var styleSheet = document.styleSheets[0];\n"
                 + " alert(styleSheet.ownerNode);\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
                 + " alert(rule.styleSheet);\n"
@@ -394,7 +392,6 @@ public class CSSImportRuleTest extends LoboUnitTest {
                 + " alert(rule.styleSheet.ownerNode);\n"
                 + " alert(rule.styleSheet.cssRules[0].cssText);\n"
                 + "</script>\n"
-
                 + "</body></html>";
         checkHtmlAlert(html);
     }
@@ -409,8 +406,8 @@ public class CSSImportRuleTest extends LoboUnitTest {
                 + "<style>\n"
                 + "  @import 'imp.css';\n"
                 + "</style>\n"
-
-                + "<script>\n" + "  var styleSheet = document.styleSheets[0];\n"
+                + "<script>\n" 
+                + "  var styleSheet = document.styleSheets[0];\n"
                 + " alert(styleSheet.ownerNode);\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
                 + " alert(rule.styleSheet);\n"
@@ -419,7 +416,6 @@ public class CSSImportRuleTest extends LoboUnitTest {
                 + " alert(rule.styleSheet.ownerNode);\n"
                 + " alert(rule.styleSheet.cssRules.length);\n"
                 + "</script>\n"
-
                 + "</body></html>";
         checkHtmlAlert(html);
     }
@@ -433,14 +429,13 @@ public class CSSImportRuleTest extends LoboUnitTest {
                 + "<style>\n"
                 + "  @import 'imp.css' print;\n"
                 + "</style>\n"
-
-                + "<script>\n" + "  var styleSheet = document.styleSheets[0];\n"
+                + "<script>\n" 
+                + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
                 + " alert(rule.styleSheet);\n"
                 + " alert(rule.styleSheet.href);\n"
                 + " alert(rule.styleSheet.cssRules[0].cssText);\n"
                 + "</script>\n"
-
                 + "</body></html>";
         checkHtmlAlert(html);
     }
@@ -454,13 +449,12 @@ public class CSSImportRuleTest extends LoboUnitTest {
                 + "<style>\n"
                 + "  @import 'imp.css' print;\n"
                 + "</style>\n"
-
-                + "<script>\n" + "  var styleSheet = document.styleSheets[0];\n"
+                + "<script>\n" 
+                + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
                 + "  var sheet = rule.styleSheet;\n"
                 + " alert(rule.styleSheet === sheet);\n"
                 + "</script>\n"
-
                 + "</body></html>";
         checkHtmlAlert(html);
     }
@@ -481,7 +475,8 @@ public class CSSImportRuleTest extends LoboUnitTest {
         final String html
                 = "<html><body>\n"
                 + "<style>@import url('" + cssRef + "');</style><div id='d'>foo</div>\n"
-                + "<script>\n"                + "  var item = document.styleSheets.item(0);\n"
+                + "<script>\n"
+                + "  var item = document.styleSheets.item(0);\n"
                 + "  if (item.cssRules) {\n"
                 + "    var r = item.cssRules[0];\n"
                 + "   alert(r);\n"
@@ -505,7 +500,8 @@ public class CSSImportRuleTest extends LoboUnitTest {
                 = "<html><body>\n"
                 + "<style>@import url('" + URL_SECOND + "');</style>\n"
                 + "<div id='d'>foo</div>\n"
-                + "<script>\n" + "var d = document.getElementById('d');\n"
+                + "<script>\n" 
+                + "var d = document.getElementById('d');\n"
                 + "var s = window.getComputedStyle(d, null);\n"
                 + "alert(s.color.indexOf('128') > 0);\n"
                 + "</script>\n"
@@ -522,7 +518,8 @@ public class CSSImportRuleTest extends LoboUnitTest {
                 + "<link rel='stylesheet' type='text/css' href='dir1/dir2/file1.css'></link>\n"
                 + "<body>\n"
                 + "<div id='d'>foo</div>\n"
-                + "<script>\n" + "var d = document.getElementById('d');\n"
+                + "<script>\n" 
+                + "var d = document.getElementById('d');\n"
                 + "var s = window.getComputedStyle(d, null);\n"
                 + "alert(s.color.indexOf('128') > 0);\n"
                 + "</script>\n"
@@ -538,7 +535,8 @@ public class CSSImportRuleTest extends LoboUnitTest {
                 + "<link rel='stylesheet' type='text/css' href='dir1/dir2/file1.css'></link>\n"
                 + "<body>\n"
                 + "<div id='d'>foo</div>\n"
-                + "<script>\n" + "  var d = document.getElementById('d');\n"
+                + "<script>\n" 
+                + "  var d = document.getElementById('d');\n"
                 + "  var s = window.getComputedStyle(d, null);\n"
                 + " alert(s.color.indexOf('128') > 0);\n"
                 + "</script>\n"
@@ -557,7 +555,8 @@ public class CSSImportRuleTest extends LoboUnitTest {
                 + "<div id='d'>foo</div>\n"
                 + "<div id='e'>foo</div>\n"
                 + "<div id='f'>foo</div>\n"
-                + "<script>\n" + "var d = document.getElementById('d');\n"
+                + "<script>\n" 
+                + "var d = document.getElementById('d');\n"
                 + "var s = window.getComputedStyle(d, null);\n"
                 + "alert(s.color.indexOf('128') > 0);\n"
                 + "var e = document.getElementById('e');\n"
@@ -581,10 +580,10 @@ public class CSSImportRuleTest extends LoboUnitTest {
                 + "    @import url('" + URL_THIRD + "') print;\n"
                 + "  </style>\n"
                 + "</head>\n"
-
                 + "<body>\n"
                 + "  <div id='d'>foo</div>\n"
-                + "  <script>\n" + "    var d = document.getElementById('d');\n"
+                + "  <script>\n" 
+                + "    var d = document.getElementById('d');\n"
                 + "    var s = window.getComputedStyle(d, null);\n"
                 + "   alert(s.fontSize);\n"
                 + "</script>\n"

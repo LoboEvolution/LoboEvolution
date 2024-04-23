@@ -43,7 +43,6 @@ public class MutationObserverTest extends LoboUnitTest {
     public void observeNullNode() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function test() {\n"
                 + "  var observer = new MutationObserver(function(mutations) {});\n"
                 + "\n"
@@ -64,7 +63,6 @@ public class MutationObserverTest extends LoboUnitTest {
     public void observeNullInit() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function test() {\n"
                 + "  var div = document.getElementById('myDiv');\n"
                 + "  var observer = new MutationObserver(function(mutations) {});\n"
@@ -86,7 +84,6 @@ public class MutationObserverTest extends LoboUnitTest {
     public void observeEmptyInit() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function test() {\n"
                 + "  var div = document.getElementById('myDiv');\n"
                 + "  var observer = new MutationObserver(function(mutations) {});\n"
@@ -108,7 +105,6 @@ public class MutationObserverTest extends LoboUnitTest {
     public void observeRequiredMissingInit() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function test() {\n"
                 + "  var div = document.getElementById('myDiv');\n"
                 + "  var observer = new MutationObserver(function(mutations) {});\n"
@@ -142,7 +138,6 @@ public class MutationObserverTest extends LoboUnitTest {
     public void characterData() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function test() {\n"
                 + "  var div = document.getElementById('myDiv');\n"
                 + "  var observer = new MutationObserver(function(mutations) {\n"
@@ -173,7 +168,6 @@ public class MutationObserverTest extends LoboUnitTest {
     public void characterDataNoOldValue() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function test() {\n"
                 + "  var div = document.getElementById('myDiv');\n"
                 + "  var observer = new MutationObserver(function(mutations) {\n"
@@ -202,7 +196,6 @@ public class MutationObserverTest extends LoboUnitTest {
     public void characterDataNoSubtree() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function test() {\n"
                 + "  var div = document.getElementById('myDiv');\n"
                 + "  var observer = new MutationObserver(function(mutations) {\n"
@@ -231,7 +224,6 @@ public class MutationObserverTest extends LoboUnitTest {
     public void attributes() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function test() {\n"
                 + "  var div = document.getElementById('myDiv');\n"
                 + "  var observer = new MutationObserver(function(mutations) {\n"
@@ -264,8 +256,8 @@ public class MutationObserverTest extends LoboUnitTest {
     public void attributeValue() {
         final String html
                 = "<html>\n"
-                + "<head><script>\n"
-
+                + "<head>\n"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    var config = { attributes: true, childList: true, characterData: true, subtree: true };\n"
                 + "    var observer = new MutationObserver(function(mutations) {\n"
@@ -306,19 +298,16 @@ public class MutationObserverTest extends LoboUnitTest {
                 + "  functionalert(x) {\n"
                 + "    document.getElementById('log').value += x + '\\n';\n"
                 + "  }\n"
-
                 + "  function test() {\n"
                 + "    var mobs = new MutationObserver(function(mutations) {\n"
                 + "      mutations.forEach(print)\n"
                 + "    });\n"
-
                 + "    mobs.observe(document.getElementById('container'), {\n"
                 + "      attributes: true,\n"
                 + "      childList: true,\n"
                 + "      characterData: true,\n"
                 + "      subtree: true\n"
                 + "    });\n"
-
                 + "    document.addEventListener('beforeunload', function() {\n"
                 + "      mobs.disconnect();\n"
                 + "    });\n"
@@ -338,7 +327,6 @@ public class MutationObserverTest extends LoboUnitTest {
     public void callbackOrder() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function test() {\n"
                 + "  var div = document.getElementById('myDiv');\n"
                 + "  var divObserver = new MutationObserver(function() {\n"

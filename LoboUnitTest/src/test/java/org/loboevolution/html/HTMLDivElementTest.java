@@ -63,7 +63,7 @@ public class HTMLDivElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"left", "right", "justify", "center", "wrong", ""})
+    @Alerts({"left", "right", "justify", "center", "wrong", "null"})
     public void getAlign() {
         final String html
                 = "<html><body>\n"
@@ -75,8 +75,8 @@ public class HTMLDivElementTest extends LoboUnitTest {
                 + "    <div id='d5' align='wrong' ></div>\n"
                 + "    <div id='d6' ></div>\n"
                 + "  </table>\n"
-
-                + "<script>\n"                + "  for (var i = 1; i <= 6; i++) {\n"
+                + "<script>\n"
+                + "  for (var i = 1; i <= 6; i++) {\n"
                 + "    alert(document.getElementById('d' + i).align);\n"
                 + "  }\n"
                 + "</script>\n"
@@ -92,7 +92,8 @@ public class HTMLDivElementTest extends LoboUnitTest {
                 + "  <table>\n"
                 + "    <div id='d1' align='left' ></div>\n"
                 + "  </table>\n"
-                + "<script>\n"                + "  function setAlign(elem, value) {\n"
+                + "<script>\n"
+                + "  function setAlign(elem, value) {\n"
                 + "    try {\n"
                 + "      elem.align = value;\n"
                 + "    } catch (e) { alert('error'); }\n"
@@ -117,7 +118,8 @@ public class HTMLDivElementTest extends LoboUnitTest {
         final String html
                 = "<html><body>\n"
                 + "<div id='d1'></div>\n"
-                + "<script>\n"                + "  var d = document.getElementById('d1');\n"
+                + "<script>\n"
+                + "  var d = document.getElementById('d1');\n"
                 + "  alert(d.onchange);\n"
                 + "  alert('onchange' in d);\n"
                 + "  alert(d.onsubmit);\n"

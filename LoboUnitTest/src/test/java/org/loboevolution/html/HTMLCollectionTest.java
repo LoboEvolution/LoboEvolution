@@ -95,7 +95,7 @@ public class HTMLCollectionTest extends LoboUnitTest {
 
     @Test
     @Alerts({"string 0", "string item", "string length", "string namedItem"})
-    public void for_in() {
+    public void forIn() {
         final String html = "<html><head>\n"
                 + "    <script>\n"
                 + "  function test() {\n"
@@ -119,7 +119,7 @@ public class HTMLCollectionTest extends LoboUnitTest {
     @Test
     @Alerts({"string 0", "string 1", "string 2", "string 3", "string 4", "string 5",
             "string item", "string length", "string namedItem"})
-    public void for_in2() {
+    public void forIn2() {
         final String html = "<html><head>\n"
                 + "    <script>\n"
                 + "  function test() {\n"
@@ -247,7 +247,6 @@ public class HTMLCollectionTest extends LoboUnitTest {
     public void getElementWithDollarSign() {
         final String html
                 = "<h3 id='$h'>h</h3><script>\n"
-
                 + "var hs = document.getElementsByTagName('h3');\n"
                 + "alert(hs['$h']);\n"
                 + "alert(hs['$n']);\n"
@@ -345,7 +344,6 @@ public class HTMLCollectionTest extends LoboUnitTest {
                 + "        }\n"
                 + "        alert(f.name);\n"
                 + "      }\n"
-
                 + "      alert('-');\n"
                 + "      for (f of document.forms) {\n"
                 + "        alert(f.name);\n"
@@ -379,7 +377,6 @@ public class HTMLCollectionTest extends LoboUnitTest {
                 + "        }\n"
                 + "        alert(f.name);\n"
                 + "      }\n"
-
                 + "      alert('-');\n"
                 + "      for (f of document.forms) {\n"
                 + "        alert(f.name);\n"
@@ -398,7 +395,7 @@ public class HTMLCollectionTest extends LoboUnitTest {
 
     @Test
     @Alerts("b1-button1")
-    public void item_Unknown() {
+    public void itemUnknown() {
         item("'foo'");
     }
 
@@ -422,7 +419,7 @@ public class HTMLCollectionTest extends LoboUnitTest {
 
     @Test
     @Alerts("b1-button1")
-    public void item_ZeroIndex() {
+    public void itemZeroIndex() {
         item("0");
     }
 
@@ -475,7 +472,6 @@ public class HTMLCollectionTest extends LoboUnitTest {
                 + "      alert(result);\n"
                 + "    }\n"
                 + "  }\n"
-
                 + "  function doTest() {\n"
                 + "    try {\n"
                 + "      var col = document.getElementsByTagName('button');\n"
@@ -564,7 +560,6 @@ public class HTMLCollectionTest extends LoboUnitTest {
                 + "      alert(result);\n"
                 + "    }\n"
                 + "  }\n"
-
                 + "  function doTest() {\n"
                 + "    try {\n"
                 + "      var col = document.getElementsByTagName('button');\n"
@@ -653,7 +648,6 @@ public class HTMLCollectionTest extends LoboUnitTest {
                 + "      alert(result);\n"
                 + "    }\n"
                 + "  }\n"
-
                 + "  function doTest() {\n"
                 + "    try {\n"
                 + "      var col = document.getElementsByTagName('button');\n"
@@ -713,13 +707,13 @@ public class HTMLCollectionTest extends LoboUnitTest {
 
     @Test
     @Alerts("b1-button1")
-    public void namedItem_ZeroIndex() {
+    public void namedItemZeroIndex() {
         item("0");
     }
 
     @Test
     @Alerts("b2-button2")
-    public void namedItem_ValidIndex() {
+    public void namedItemValidIndex() {
         item("1");
     }
 
@@ -764,7 +758,6 @@ public class HTMLCollectionTest extends LoboUnitTest {
                 + "      }\n"
                 + "    }\n"
                 + "   }\n"
-
                 + "  function doTest() {\n"
                 + "    var col = document.getElementsByTagName('button');\n"
                 + "    report(col.namedItem('" + name + "'));\n"

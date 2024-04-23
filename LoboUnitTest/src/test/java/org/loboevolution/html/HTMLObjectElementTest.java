@@ -43,7 +43,8 @@ public class HTMLObjectElementTest extends LoboUnitTest {
     public void classid() {
         final String clsid = "clsid:TESTING-CLASS-ID";
         final String html = "<html><head>\n"
-                + "<script>\n"                + "  function test() {\n"
+               + "<script>\n"
+                + "  function test() {\n"
                 + "    var obj = document.all.id1;\n"
                 + "    alert(obj.MESSAGE);\n"
                 + "    if (obj.GetMessage) {\n"

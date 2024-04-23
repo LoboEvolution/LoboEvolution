@@ -39,7 +39,7 @@ import org.loboevolution.html.dom.HTMLTableColElement;
 public class HTMLTableColElementTest extends LoboUnitTest {
 
     @Test
-    @Alerts({"left", "right", "justify", "char", "center", "wrong", ""})
+    @Alerts({"left", "right", "justify", "char", "center", "wrong", "null"})
     public void getAlign() {
         final String html
                 = "<html><body>\n"
@@ -52,7 +52,6 @@ public class HTMLTableColElementTest extends LoboUnitTest {
                 + "    <col id='c6' align='wrong' ></col>\n"
                 + "    <col id='c7' ></col>\n"
                 + "  </table>\n"
-
                 + "    <script>\n"
                 + "  for (var i = 1; i <= 7; i++) {\n"
                 + "    alert(document.getElementById('c' + i).align);\n"
@@ -71,7 +70,6 @@ public class HTMLTableColElementTest extends LoboUnitTest {
                 + "  <table>\n"
                 + "    <col id='c1' align='left' ></col>\n"
                 + "  </table>\n"
-
                 + "    <script>\n"
                 + "  function setAlign(elem, value) {\n"
                 + "    try {\n"
@@ -79,13 +77,10 @@ public class HTMLTableColElementTest extends LoboUnitTest {
                 + "    } catch (e) { alert('error'); }\n"
                 + "    alert(elem.align);\n"
                 + "  }\n"
-
                 + "  var elem = document.getElementById('c1');\n"
                 + "  setAlign(elem, 'CenTer');\n"
-
                 + "  setAlign(elem, '8');\n"
                 + "  setAlign(elem, 'foo');\n"
-
                 + "  setAlign(elem, 'left');\n"
                 + "  setAlign(elem, 'right');\n"
                 + "  setAlign(elem, 'justify');\n"

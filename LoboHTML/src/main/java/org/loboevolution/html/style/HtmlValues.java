@@ -318,6 +318,17 @@ public class HtmlValues {
 	}
 
 	/**
+	 * <p>isBackgroundPosition.</p>
+	 *
+	 * @param token a {@link java.lang.String} object.
+	 * @return a boolean.
+	 */
+	public static boolean isBackgroundAttachment(final String token) {
+		return token.equalsIgnoreCase("scroll") || token.equalsIgnoreCase("fixed")
+				|| token.equalsIgnoreCase("local");
+	}
+
+	/**
 	 * <p>isBackgroundRepeat.</p>
 	 *
 	 * @param repeat a {@link java.lang.String} object.

@@ -39,7 +39,7 @@ import org.loboevolution.html.dom.HTMLParagraphElement;
 public class HTMLParagraphElementTest extends LoboUnitTest {
 
     @Test
-    @Alerts("[object HTMLParagraphElement]")
+    @Alerts("[object HTMLPElement]")
     public void simpleScriptable() {
         final String html = "<html><head>\n"
                 + "    <script>\n"
@@ -54,7 +54,7 @@ public class HTMLParagraphElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"", "hello", "left", "hi", "right"})
+    @Alerts({"null", "hello", "left", "hi", "right"})
     public void align() {
         final String html =
                 "<html>\n"

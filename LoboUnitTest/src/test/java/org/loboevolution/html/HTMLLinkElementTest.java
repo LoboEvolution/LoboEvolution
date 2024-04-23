@@ -40,7 +40,7 @@ public class HTMLLinkElementTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts({"", "", "", "", "test.css", "text/css", "stylesheet", "stylesheet1"})
+    @Alerts({"", "null", "null", "null", "test.css", "text/css", "stylesheet", "stylesheet1"})
     public void basicLinkAttributes() {
         final String html =
                 "<html>\n"
@@ -68,11 +68,10 @@ public class HTMLLinkElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"", "alternate help", "prefetch", "prefetch", "not supported", "notsupported"})
+    @Alerts({"null", "alternate help", "prefetch", "prefetch", "not supported", "notsupported"})
     public void readWriteRel() {
         final String html
                 = "<html><body><link id='l1'><link id='l2' rel='alternate help'><script>\n"
-
                 + "var l1 = document.getElementById('l1'), l2 = document.getElementById('l2');\n"
                 + "alert(l1.rel);\n"
                 + "alert(l2.rel);\n"
@@ -93,7 +92,6 @@ public class HTMLLinkElementTest extends LoboUnitTest {
     public void relList() {
         final String html
                 = "<html><body><link id='l1'><link id='l2' rel='alternate help'><script>\n"
-
                 + "var l1 = document.getElementById('l1'), l2 = document.getElementById('l2');\n"
                 + "try {\n"
                 + "  alert(l1.relList.length);\n"
@@ -111,7 +109,6 @@ public class HTMLLinkElementTest extends LoboUnitTest {
     public void setRelListString() {
         final String html
                 = "<html><body><link id='l1'><link id='l2' rel='alternate help'><script>\n"
-
                 + "var a1 = document.getElementById('l1'), a2 = document.getElementById('l2');\n"
                 + "try {\n"
                 + "  alert(a1.relList.length);\n"
@@ -134,7 +131,7 @@ public class HTMLLinkElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"0", "2", "0", "0", "", "\\s\\s\\t"})
+    @Alerts({"0", "2", "0", "0", "", "  \\t"})
     public void setRelListStringBlank() {
         final String html
                 = "<html><body><link id='l1'><link id='l2' rel='alternate help'><script>\n"

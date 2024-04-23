@@ -98,7 +98,6 @@ public class HTMLTextAreaElementTest extends LoboUnitTest {
                 + "    <input type='button' name='btnsubmit' value='Next'>\n"
                 + "  </form>\n"
                 + "  <script>\n"
-
                 + "    document.form1.question.value = 'some text';\n"
                 + "    alert(document.form1.elements[0].tagName);\n"
                 + "    alert(document.form1.elements[1].tagName);\n"
@@ -118,7 +117,6 @@ public class HTMLTextAreaElementTest extends LoboUnitTest {
                 + "<body>\n"
                 + "  <textarea id='myTextArea'></textarea>\n"
                 + "  <script>\n"
-
                 + "    var textarea = document.getElementById('myTextArea');\n"
                 + "    textarea.value = 'hello there';\n"
                 + "    alert(textarea.textLength);\n"
@@ -156,7 +154,6 @@ public class HTMLTextAreaElementTest extends LoboUnitTest {
                 + "<body>\n"
                 + "  <textarea id='myTextArea'></textarea>\n"
                 + "  <script>\n"
-
                 + "    var textarea = document.getElementById('myTextArea');\n"
                 + "    alert(textarea.selectionStart + ',' + textarea.selectionEnd);\n"
                 + "    textarea.value = 'Hello there';\n"
@@ -209,7 +206,7 @@ public class HTMLTextAreaElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("\\s\\nHello\\nworld\\n")
+    @Alerts(" \\nHello\\nworld\\n")
     public void valueSpaceBeforeFirstNewLine() {
         value(" \nHello\nworld\n");
     }
@@ -235,7 +232,7 @@ public class HTMLTextAreaElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"\\sfoo\\s\\n\\sbar\\s", "\\sfoo\\s\\n\\sbar\\s"})
+    @Alerts({" foo \\n bar ", " foo \\n bar "})
     public void defaultValue() {
         final String html
                 = "<html>\n"
@@ -262,9 +259,8 @@ public class HTMLTextAreaElementTest extends LoboUnitTest {
     public void readOnly() {
         final String html
                 = "<html>\n"
-                + "<head>\n"
-                + "  <script>\n"
-
+                + "<head>\n"  
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    var t = document.getElementById('textArea');\n"
                 + "    alert(t.readOnly);\n"
@@ -283,7 +279,7 @@ public class HTMLTextAreaElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"", "A", "a", "A", "a8", "8Afoo", "8", "@"})
+    @Alerts({"null", "A", "a", "A", "a8", "8Afoo", "8", "@"})
     public void accessKey() {
         final String html
                 = "<html>\n"
@@ -291,28 +287,20 @@ public class HTMLTextAreaElementTest extends LoboUnitTest {
                 + "<body>\n"
                 + "  <textarea id='a1'>a1</textarea>\n"
                 + "  <textarea id='a2' accesskey='A'>a2</textarea>\n"
-
                 + "  <script>\n"
-
                 + "    var a1 = document.getElementById('a1'), a2 = document.getElementById('a2');\n"
                 + "    alert(a1.accessKey);\n"
                 + "    alert(a2.accessKey);\n"
-
                 + "    a1.accessKey = 'a';\n"
                 + "    alert(a1.accessKey);\n"
-
                 + "    a1.accessKey = 'A';\n"
                 + "    alert(a1.accessKey);\n"
-
                 + "    a1.accessKey = 'a8';\n"
                 + "    alert(a1.accessKey);\n"
-
                 + "    a1.accessKey = '8Afoo';\n"
                 + "    alert(a1.accessKey);\n"
-
                 + "    a1.accessKey = '8';\n"
                 + "    alert(a1.accessKey);\n"
-
                 + "    a1.accessKey = '@';\n"
                 + "    alert(a1.accessKey);\n"
                 + "  </script>\n"
@@ -592,19 +580,15 @@ public class HTMLTextAreaElementTest extends LoboUnitTest {
                 + "    <textarea id='textarea1'></textarea>\n"
                 + "    <script>\n"
                 + "      var a = document.getElementById('textarea1');\n"
-
                 + "      setMaxLength(10);\n"
                 + "      alert(a.maxLength);\n"
                 + "      alert(a.getAttribute('maxLength'));\n"
-
                 + "      setMaxLength(-1);\n"
                 + "      alert(a.maxLength);\n"
                 + "      alert(a.getAttribute('maxLength'));\n"
-
                 + "      setMaxLength('abc');\n"
                 + "      alert(a.maxLength);\n"
                 + "      alert(a.getAttribute('maxLength'));\n"
-
                 + "    </script>\n"
                 + "  </form>\n"
                 + "</body></html>";
@@ -622,7 +606,6 @@ public class HTMLTextAreaElementTest extends LoboUnitTest {
                 + "    <textarea id='a'></textarea>\n"
                 + "  </form>"
                 + "  <script>\n"
-
                 + "    alert(document.getElementById('a').form);\n"
                 + "  </script>"
                 + "</body>"

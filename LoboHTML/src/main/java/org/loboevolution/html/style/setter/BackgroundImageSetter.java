@@ -27,14 +27,9 @@
 package org.loboevolution.html.style.setter;
 
 import lombok.extern.slf4j.Slf4j;
-import org.loboevolution.common.Urls;
-import org.loboevolution.html.js.css.AbstractCSSStyleRule;
-import org.loboevolution.html.js.css.CSSStyleDeclarationImpl;
 import org.loboevolution.css.CSSStyleDeclaration;
-import org.loboevolution.css.CSSStyleSheet;
 import org.loboevolution.html.style.HtmlValues;
 
-import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -49,36 +44,16 @@ public class BackgroundImageSetter implements SubPropertySetter {
 	/** {@inheritDoc} */
 	@Override
 	public void changeValue(final CSSStyleDeclaration declaration, final String newValue) {
-		String baseHref = null;
 		String finalValue;
-		final CSSStyleDeclarationImpl props = (CSSStyleDeclarationImpl) declaration;
-		final AbstractCSSStyleRule rule = props.getParentRule();
-		if (rule != null && rule.getParentStyleSheet() != null) {
-			final CSSStyleSheet ssheet = rule.getParentStyleSheet();
-			baseHref = ssheet.getHref();
-		}
 
-		if (baseHref == null) {
-			baseHref = props.getContext() != null ? props.getContext().getDocumentBaseURI() : null;
-		}
-
-		if (baseHref != null && newValue != null) {
-			final Matcher m = URL_PATTERN.matcher(newValue.toLowerCase());
+		if (newValue != null) {
+			final Matcher m = URL_PATTERN.matcher(newValue);
 			if (m.find()) {
 				final String tentativeUri = HtmlValues.unquoteAndUnescape(m.group(1));
-				try {
-					if (tentativeUri.contains("data:image")) {
-						finalValue = tentativeUri;
-					} else {
-						final URL resourcesUrl = Urls.createURL(null, baseHref);
-						finalValue = "url("
-								+ HtmlValues.quoteAndEscape(Urls.createURL(resourcesUrl, tentativeUri).toExternalForm())
-								+ ")";
-					}
-
-				} catch (final Exception mfu) {
-					log.error("Unable to create URL for URI= {} with base {}", tentativeUri, baseHref);
-					finalValue = newValue;
+				if (tentativeUri.contains("data:image")) {
+					finalValue = tentativeUri;
+				} else {
+					finalValue = "url("+ tentativeUri + ")";
 				}
 			} else {
 				finalValue = newValue;

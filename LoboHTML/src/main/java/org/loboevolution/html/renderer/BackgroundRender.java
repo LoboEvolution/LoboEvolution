@@ -250,7 +250,7 @@ public class BackgroundRender {
         }
     }
 
-    public void applyBackgroundImage(final BackgroundInfo binfo, final String backgroundImageText, final StyleSheetRenderState renderState, final CSSStyleDeclaration props) {
+    public void applyBackgroundImage(final BackgroundInfo binfo, String backgroundImageText, final StyleSheetRenderState renderState, final CSSStyleDeclaration props) {
         if (HtmlValues.isUrl(backgroundImageText)) {
             final String start = "url(";
             final int startIdx = start.length() + 1;
@@ -259,7 +259,7 @@ public class BackgroundRender {
             final String[] items = {"http", "https", "file"};
             if (Strings.containsWords(quotedUri, items)) {
                 try {
-                    binfo.setBackgroundImage(linkUri(document, quotedUri, backgroundImageText));
+                    binfo.setBackgroundImage(linkUri(document, backgroundImageText));
                 } catch (final Exception e) {
                     binfo.setBackgroundImage(null);
                 }
@@ -267,9 +267,9 @@ public class BackgroundRender {
                 if (quotedUri.contains(";base64,")) {
                     final String base64 = backgroundImageText.split(";base64,")[1];
                     final byte[] decodedBytes = Base64.getDecoder().decode(Strings.linearize(base64));
-                    quotedUri = Arrays.toString(decodedBytes);
+                    backgroundImageText = Arrays.toString(decodedBytes);
                 }
-                binfo.setBackgroundImage(linkUri(document, quotedUri, backgroundImageText));
+                binfo.setBackgroundImage(linkUri(document, backgroundImageText));
             }
         } else if (HtmlValues.isGradient(backgroundImageText)) {
             try {
@@ -286,7 +286,7 @@ public class BackgroundRender {
         }
     }
 
-    public URL linkUri(final HTMLDocumentImpl document, final String quotedUri, final String backgroundImageText) {
+    public URL linkUri(final HTMLDocumentImpl document, final String backgroundImageText) {
         if (element instanceof HTMLLinkElementImpl) {
             final HTMLLinkElementImpl elm = (HTMLLinkElementImpl) element;
             final String rel = elm.getAttribute("rel");
@@ -296,11 +296,11 @@ public class BackgroundRender {
                 final boolean isAltStyleSheet = cleanRel.equals("alternate stylesheet");
 
                 if ((isStyleSheet || isAltStyleSheet)) {
-                    return document.getFullURL(quotedUri, elm.getHref());
-
+                    return document.getFullURL(backgroundImageText, elm.getHref());
                 }
             }
         }
-        return document.getFullURL(quotedUri, backgroundImageText);
+
+        return document.getFullURL(backgroundImageText, document.getBaseURI());
     }
 }

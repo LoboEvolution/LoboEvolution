@@ -57,8 +57,8 @@ public class PopStateEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object PopStateEvent]", "null", "popstate", "false", "false", "false", "null"})
     public void createCtor() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new PopStateEvent('popstate');\n"
@@ -75,8 +75,8 @@ public class PopStateEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object PopStateEvent]", "null", "popstate", "true", "false", "false", "2"})
     public void createCtorWithDetails() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new PopStateEvent('popstate', {\n"
@@ -96,8 +96,8 @@ public class PopStateEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object PopStateEvent]", "null", "", "false", "false", "false", "null"})
     public void createCreateEvent() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = document.createEvent('PopStateEvent');\n"
@@ -114,8 +114,8 @@ public class PopStateEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object PopStateEvent]", "null", "", "false", "false", "false", "null"})
     public void setState() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = document.createEvent('PopStateEvent');\n"
@@ -133,14 +133,13 @@ public class PopStateEventTest extends LoboUnitTest {
     @Test
     @Alerts("dispatched")
     public void dispatchEvent() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = document.createEvent('PopStateEvent');\n"
                 + "      event.initEvent('', true, true);\n"
                 + "    } catch (e) {alert('exception ctor'); return; }\n"
-
                 + "    try {\n"
                 + "      dispatchEvent(event);\n"
                 + "     alert('dispatched');\n"
@@ -159,13 +158,12 @@ public class PopStateEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void dispatchEventWithoutInit() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = document.createEvent('PopStateEvent');\n"
                 + "    } catch (e) {alert('exception ctor'); return; }\n"
-
                 + "    try {\n"
                 + "      dispatchEvent(event);\n"
                 + "     alert('dispatched');\n"
@@ -184,13 +182,12 @@ public class PopStateEventTest extends LoboUnitTest {
     @Test
     @Alerts("no initPopStateEvent")
     public void initPopStateEvent() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = document.createEvent('PopStateEvent');\n"
                 + "    } catch (e) {alert('exception ctor'); return }\n"
-
                 + "    if (event.initPopStateEvent) {\n"
                 + "      event.initPopStateEvent('PopState', true, false, 'html');\n"
                 + "      dump(event);\n"

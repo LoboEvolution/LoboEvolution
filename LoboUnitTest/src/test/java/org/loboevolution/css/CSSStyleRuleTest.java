@@ -39,7 +39,7 @@ public class CSSStyleRuleTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts({"[object CSSStyleRule]", "1", "[object CSSStyleSheet]", "null", "h1", "", "10px", "", "red"})
+    @Alerts({"[object CSSStyleRule]", "1", "[object CSSStyleSheet]", "null", "H1", "null", "10px", "null", "red"})
     public void test() {
         final String html = "<html><head>\n"
                 + "<style>\n"
@@ -195,7 +195,8 @@ public class CSSStyleRuleTest extends LoboUnitTest {
                 + "  BODY { filter: progid:DXImageTransform.Microsoft.AlphaImageLoader"
                 + "(src='rightCorner.gif', sizingMethod='crop'); }\n"
                 + "</style>\n"
-                + "<script>\n"                + "function test() {\n"
+                + "<script>\n"
+                + "function test() {\n"
                 + "  try {\n"
                 + "    var sheet = document.styleSheets[0];\n"
                 + "    var rules = sheet.cssRules || sheet.rules;\n"

@@ -159,12 +159,10 @@ public class SelectionTest extends LoboUnitTest {
             "3:s2/1/s3/1/false/Range/1/foo[foo"})
     public void addRange() {
         final String jsSnippet = "      alertSelection(selection);\n"
-
                 + "      var range = document.createRange();\n"
                 + "      range.setStart(s2, 1);\n"
                 + "      range.setEnd(s3, 1);\n"
                 + "      alertSelection(selection);\n"
-
                 + "      selection.addRange(range);\n"
                 + "      alertSelection(selection);\n";
 
@@ -177,13 +175,11 @@ public class SelectionTest extends LoboUnitTest {
             "3:null/0/null/0/true/None/0/"})
     public void removeAllRanges() {
         final String jsSnippet = "      alertSelection(selection);\n"
-
                 + "      var range = document.createRange();\n"
                 + "      range.setStart(s1, 1);\n"
                 + "      range.setEnd(s3, 1);\n"
                 + "      selection.addRange(range);\n"
                 + "      alertSelection(selection);\n"
-
                 + "      selection.removeAllRanges();\n"
                 + "      alertSelection(selection);\n";
 
@@ -199,7 +195,6 @@ public class SelectionTest extends LoboUnitTest {
                 + "      range.setEnd(s3, 1);\n"
                 + "      selection.addRange(range);\n"
                 + "      alertSelection(selection);\n"
-
                 + "      selection.removeAllRanges();\n"
                 + "      alertSelection(selection);\n";
 
@@ -212,14 +207,12 @@ public class SelectionTest extends LoboUnitTest {
             "3:null/0/null/0/true/None/0/"})
     public void selectAllChildrenAddRange() {
         final String jsSnippet = "      alertSelection(selection);\n"
-
                 + "      selection.selectAllChildren(s1);\n"
                 + "      var range = document.createRange();\n"
                 + "      range.setStart(s1, 1);\n"
                 + "      range.setEnd(s3, 1);\n"
                 + "      selection.addRange(range);\n"
                 + "      alertSelection(selection);\n"
-
                 + "      selection.removeAllRanges();\n"
                 + "      alertSelection(selection);\n";
 
@@ -232,14 +225,12 @@ public class SelectionTest extends LoboUnitTest {
             "3:null/0/null/0/true/None/0/"})
     public void addRangeSelectAllChildren() {
         final String jsSnippet = "      alertSelection(selection);\n"
-
                 + "      var range = document.createRange();\n"
                 + "      range.setStart(s1, 1);\n"
                 + "      range.setEnd(s3, 1);\n"
                 + "      selection.addRange(range);\n"
                 + "      selection.selectAllChildren(s1);\n"
                 + "      alertSelection(selection);\n"
-
                 + "      selection.removeAllRanges();\n"
                 + "      alertSelection(selection);\n";
 
@@ -259,13 +250,11 @@ public class SelectionTest extends LoboUnitTest {
                 + "      range.setEnd(s2, 1);\n"
                 + "      selection.addRange(range);\n"
                 + "      alertSelection(selection);\n"
-
                 + "      var range = document.createRange();\n"
                 + "      range.setStart(s2, 1);\n"
                 + "      range.setEnd(s3, 3);\n"
                 + "      selection.addRange(range);\n"
                 + "      alertSelection(selection);\n"
-
                 + "      selection.removeAllRanges();\n"
                 + "      alertSelection(selection);\n";
 
@@ -295,7 +284,6 @@ public class SelectionTest extends LoboUnitTest {
         final String html = "<html>\n"
                 + "<body onload='test()'>\n"
                 + "  <span id='s1'>abc</span><span id='s2'>xyz</span><span id='s3'>foo<span>---</span>foo</span>\n"
-
                 + "<script>\n"
                 + "  var x = 1;\n"
                 + "  function test() {\n"
@@ -307,7 +295,6 @@ public class SelectionTest extends LoboUnitTest {
                 + jsSnippet
                 + "    } catch(e) {alert('exception'); }\n"
                 + "  }\n"
-
                 + "  function alertSelection(s) {\n"
                 + "    var anchorNode = (s.anchorNode && s.anchorNode.id ? s.anchorNode.id : s.anchorNode);\n"
                 + "    var focusNode = (s.focusNode && s.focusNode.id ? s.focusNode.id : s.focusNode);\n"
@@ -333,7 +320,6 @@ public class SelectionTest extends LoboUnitTest {
                 + "  <div style='display: none'>\n"
                 + "    <iframe id='frame3' src='about:blank'></iframe>\n"
                 + "  </div>\n"
-
                 + "  <script>\n"
                 + "    function sel(win) {\n"
                 + "      if (win.getSelection) {\n"
@@ -344,7 +330,6 @@ public class SelectionTest extends LoboUnitTest {
                 + "        }\n"
                 + "      }\n"
                 + "    }\n"
-
                 + "    function test() {\n"
                 + "      sel(window);\n"
                 + "      sel(document.getElementById('frame1').contentWindow);\n"

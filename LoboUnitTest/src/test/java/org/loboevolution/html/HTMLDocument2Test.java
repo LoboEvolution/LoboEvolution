@@ -138,7 +138,7 @@ public class HTMLDocument2Test extends LoboUnitTest {
 
     @Test
     @Alerts({"www.gargoylesoftware.com", "www.gargoylesoftware.com"})
-    public void domainset_forAboutBlank() {
+    public void domainsetForAboutBlank() {
         final String html = "<html><head><title>foo</title><script>\n"
                 + "function doTest() {\n"
                 + "  var domain = document.domain;\n"

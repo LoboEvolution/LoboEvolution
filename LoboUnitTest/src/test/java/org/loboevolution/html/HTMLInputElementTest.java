@@ -48,7 +48,6 @@ public class HTMLInputElementTest extends LoboUnitTest {
     public void standardProperties_Text() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function doTest() {\n"
                 + "  alert(document.form1.textfield1.value);\n"
                 + "  alert(document.form1.textfield1.type);\n"
@@ -116,7 +115,6 @@ public class HTMLInputElementTest extends LoboUnitTest {
         final String html = "<html><head><script>\n"
                 + "function alert(msg) { window.document.title += msg.replace(' ', '.') + '§';}\n"
                 + "function doTest() {\n"
-
                 + "  document.form1.button1.value = " + value + ";\n"
                 + "  document.form1.button2.value = " + value + ";\n"
                 + "  document.form1.checkbox1.value = " + value + ";\n"
@@ -145,7 +143,6 @@ public class HTMLInputElementTest extends LoboUnitTest {
                 + "  document.form1.email1.value = " + value + ";\n"
                 + "  document.form1.tel1.value = " + value + ";\n"
                 + "  document.form1.url1.value = " + value + ";\n"
-
                 + "  alert(document.form1.button1.value);\n"
                 + "  alert(document.form1.button2.value);\n"
                 + "  alert(document.form1.checkbox1.value);\n"
@@ -278,7 +275,6 @@ public class HTMLInputElementTest extends LoboUnitTest {
     private void testAttribute(final String property, final String attrib, final String value) {
         String html
                 = "<html><head><script>\n"
-
                 + "function doTest() {\n";
 
         if (value != null) {
@@ -584,7 +580,6 @@ public class HTMLInputElementTest extends LoboUnitTest {
                                final String attrib, final String value) {
         String html
                 = "<html><head><script>\n"
-
                 + "function doTest() {\n";
 
         if (value != null) {
@@ -642,14 +637,11 @@ public class HTMLInputElementTest extends LoboUnitTest {
     public void typeChangeNotDirty() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function doTest() {\n"
                 + "  var inpt = document.form1.textInput1;\n"
                 + "  alert(inpt.value + '-' + inpt.defaultValue);\n"
-
                 + "  inpt.type = 'password';\n"
                 + "  alert(inpt.value + '-' + inpt.defaultValue);\n"
-
                 + "  inpt.value = 'jkl';\n"
                 + "  alert(inpt.value + '-' + inpt.defaultValue);\n"
                 + "}\n"
@@ -669,20 +661,15 @@ public class HTMLInputElementTest extends LoboUnitTest {
     public void typeChangeDirty() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function doTest() {\n"
                 + "  var inpt = document.form1.textInput1;\n"
                 + "  alert(inpt.value + '-' + inpt.defaultValue);\n"
-
                 + "  inpt.value = 'def';\n"
                 + "  alert(inpt.value + '-' + inpt.defaultValue);\n"
-
                 + "  inpt.value = 'ghi';\n"
                 + "  alert(inpt.value + '-' + inpt.defaultValue);\n"
-
                 + "  inpt.type = 'password';\n"
                 + "  alert(inpt.value + '-' + inpt.defaultValue);\n"
-
                 + "  inpt.value = 'jkl';\n"
                 + "  alert(inpt.value + '-' + inpt.defaultValue);\n"
                 + "}\n"
@@ -701,7 +688,6 @@ public class HTMLInputElementTest extends LoboUnitTest {
     public void checkedAttribute_Checkbox() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function test() {\n"
                 + "  alert(document.form1.checkbox1.checked);\n"
                 + "  document.form1.checkbox1.checked = true;\n"
@@ -728,7 +714,6 @@ public class HTMLInputElementTest extends LoboUnitTest {
     public void checkedAttribute_Radio() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function test() {\n"
                 + "  alert(document.form1.radio1[0].checked);\n"
                 + "  alert(document.form1.radio1[1].checked);\n"
@@ -758,7 +743,6 @@ public class HTMLInputElementTest extends LoboUnitTest {
     public void disabledAttribute() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function test() {\n"
                 + "  alert(document.form1.button1.disabled);\n"
                 + "  alert(document.form1.button2.disabled);\n"
@@ -839,7 +823,8 @@ public class HTMLInputElementTest extends LoboUnitTest {
                 + "<form name='form1'>\n"
                 + "<input type='submit' id='clickMe' onClick=\"this.form.target='_blank'; return false;\">\n"
                 + "</form>\n"
-                + "    <script>\n" + "alert(document.forms[0].target == '');\n"
+                + "    <script>\n" 
+                + "alert(document.forms[0].target == '');\n"
                 + "</script>\n"
                 + "</body></html>";
 
@@ -1006,7 +991,6 @@ public class HTMLInputElementTest extends LoboUnitTest {
     public void createInputAndChangeType() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function doTest() {\n"
                 + "  var input = document.createElement('INPUT');\n"
                 + "  alert(input.type);\n"
@@ -1027,7 +1011,6 @@ public class HTMLInputElementTest extends LoboUnitTest {
     public void createInputAndChangeTypeToText() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function doTest() {\n"
                 + "  var input = document.createElement('INPUT');\n"
                 + "  alert(input.type);\n"
@@ -1089,7 +1072,6 @@ public class HTMLInputElementTest extends LoboUnitTest {
     public void minLength() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function doTest() {\n"
                 + "  var input = document.getElementById('text1');\n"
                 + "  alert(input.minlength);\n"
@@ -1164,7 +1146,6 @@ public class HTMLInputElementTest extends LoboUnitTest {
     public void typeCase() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function test() {\n"
                 + "  var t = document.getElementById('aText');\n"
                 + "  alert(t.type + ' ' + t.getAttribute('type'));\n"
@@ -1178,7 +1159,6 @@ public class HTMLInputElementTest extends LoboUnitTest {
                 + "  alert(r.type + ' ' + r.getAttribute('type'));\n"
                 + "  var f = document.getElementById('aFile');\n"
                 + "  alert(f.type + ' ' + f.getAttribute('type'));\n"
-
                 + "  try {\n"
                 + "    f.type = 'CHECKBOX';\n"
                 + "    alert(f.type + ' ' + f.getAttribute('type'));\n"
@@ -1204,7 +1184,8 @@ public class HTMLInputElementTest extends LoboUnitTest {
     public void typeTrim() {
         final String html
                 = "<html><head>\n"
-                + "<script>\n"                + "function alert(msg) { window.document.title += msg.replace('\t', '\\\\t') + '§';}\n"
+                + "<script>\n"
+                + "function alert(msg) { window.document.title += msg.replace('\t', '\\\\t') + '§';}\n"
                 + "function test() {\n"
                 + "  var t = document.getElementById('aText');\n"
                 + "  alert(t.type + '-' + t.getAttribute('type'));\n"
@@ -1289,7 +1270,6 @@ public class HTMLInputElementTest extends LoboUnitTest {
                 + "    <input id='i6' align='wrong' />\n"
                 + "    <input id='i7' />\n"
                 + "  </form>\n"
-
                 + "    <script>\n"
                 + "  for (var i = 1; i <= 7; i++) {\n"
                 + "    alert(document.getElementById('i' + i).align);\n"
@@ -1307,7 +1287,6 @@ public class HTMLInputElementTest extends LoboUnitTest {
                 + "  <form>\n"
                 + "    <input id='i1' type='text' align='left' value=''/>\n"
                 + "  </form>\n"
-
                 + "    <script>\n"
                 + "  function setAlign(elem, value) {\n"
                 + "    try {\n"
@@ -1315,13 +1294,10 @@ public class HTMLInputElementTest extends LoboUnitTest {
                 + "    } catch (e) { alert('error'); }\n"
                 + "    alert(elem.align);\n"
                 + "  }\n"
-
                 + "  var elem = document.getElementById('i1');\n"
                 + "  setAlign(elem, 'CenTer');\n"
-
                 + "  setAlign(elem, '8');\n"
                 + "  setAlign(elem, 'foo');\n"
-
                 + "  setAlign(elem, 'left');\n"
                 + "  setAlign(elem, 'right');\n"
                 + "  setAlign(elem, 'bottom');\n"
@@ -1333,34 +1309,27 @@ public class HTMLInputElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"", "A", "a", "A", "a8", "8Afoo", "8", "@"})
+    @Alerts({"null", "A", "a", "A", "a8", "8Afoo", "8", "@"})
     public void accessKey() {
         final String html
                 = "<html><body>\n"
                 + "  <input id='a1'>\n"
                 + "  <input id='a2' accesskey='A'>\n"
                 + "  <script>\n"
-
                 + "    var a1 = document.getElementById('a1');\n"
                 + "    var a2 = document.getElementById('a2');\n"
                 + "    alert(a1.accessKey);\n"
                 + "    alert(a2.accessKey);\n"
-
                 + "    a1.accessKey = 'a';\n"
                 + "    alert(a1.accessKey);\n"
-
                 + "    a1.accessKey = 'A';\n"
                 + "    alert(a1.accessKey);\n"
-
                 + "    a1.accessKey = 'a8';\n"
                 + "    alert(a1.accessKey);\n"
-
                 + "    a1.accessKey = '8Afoo';\n"
                 + "    alert(a1.accessKey);\n"
-
                 + "    a1.accessKey = '8';\n"
                 + "    alert(a1.accessKey);\n"
-
                 + "    a1.accessKey = '@';\n"
                 + "    alert(a1.accessKey);\n"
                 + "</script></body></html>";
@@ -1374,19 +1343,16 @@ public class HTMLInputElementTest extends LoboUnitTest {
                 = "<html>\n"
                 + "  <head>\n"
                 + "    <script>\n"
-
                 + "      function test() {\n"
                 + "        var t = document.getElementById('t');\n"
                 + "        t.value = 'test';\n"
                 + "        alert(t.value);\n"
                 + "        if (t.value != null)\n"
                 + "          alert(t.value.length);\n"
-
                 + "        t.value = 42;\n"
                 + "        alert(t.value);\n"
                 + "        if (t.value != null)\n"
                 + "          alert(t.value.length);\n"
-
                 + "        t.value = document.getElementById('t');\n"
                 + "        alert(t.value);\n"
                 + "        if (t.value != null)\n"
@@ -1409,14 +1375,12 @@ public class HTMLInputElementTest extends LoboUnitTest {
                 = "<html>\n"
                 + "  <head>\n"
                 + "    <script>\n"
-
                 + "      function test() {\n"
                 + "        var t = document.getElementById('t');\n"
                 + "        t.value = 'null';\n"
                 + "        alert(t.value);\n"
                 + "        if (t.value != null)\n"
                 + "          alert(t.value.length);\n"
-
                 + "        t.value = null;\n"
                 + "        alert(t.value);\n"
                 + "        if (t.value != null)\n"
@@ -1437,12 +1401,10 @@ public class HTMLInputElementTest extends LoboUnitTest {
     public void selectionRange() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function test() {\n"
                 + "  var input = document.getElementById('myInput');\n"
                 + "  alert(input.selectionStart);\n"
                 + "  alert(input.selectionEnd);\n"
-
                 + "  input.setSelectionRange(2, 7);\n"
                 + "  alert(input.selectionStart);\n"
                 + "  alert(input.selectionEnd);\n"
@@ -1493,8 +1455,8 @@ public class HTMLInputElementTest extends LoboUnitTest {
                 + "</body></html>";
 
         final HTMLDocument document = loadHtml(html);
-        HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("text1");
-        elem.getOnclick();
+        HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("myInput");
+        elem.getOnsubmit();
     }
 
     @Test
@@ -1591,7 +1553,6 @@ public class HTMLInputElementTest extends LoboUnitTest {
     public void max() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function doTest() {\n"
                 + "  var input = document.getElementById('text1');\n"
                 + "  alert(input.max);\n"
@@ -1688,7 +1649,6 @@ public class HTMLInputElementTest extends LoboUnitTest {
                 + "    <input type='text' id='a'>\n"
                 + "  </form>"
                 + "  <script>\n"
-
                 + "    alert(document.getElementById('a').form);\n"
                 + "  </script>"
                 + "</body>"
@@ -1854,7 +1814,6 @@ public class HTMLInputElementTest extends LoboUnitTest {
     public void getAttributeCase() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function test() {\n"
                 + "  var input = document.getElementById('myInput');\n"
                 + "  alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
@@ -1874,7 +1833,6 @@ public class HTMLInputElementTest extends LoboUnitTest {
     public void setAttribute() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function test() {\n"
                 + "  var input = document.getElementById('myInput');\n"
                 + "  alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
@@ -1894,7 +1852,6 @@ public class HTMLInputElementTest extends LoboUnitTest {
     public void setAttributeFromJavaScript() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function test() {\n"
                 + "  var input = document.getElementById('myInput');\n"
                 + "  input.setAttribute('value', 'text1');\n"
@@ -1981,13 +1938,10 @@ public class HTMLInputElementTest extends LoboUnitTest {
                 + "  function test() {\n"
                 + "    var i = document.createElement('input');\n"
                 + "    alert(i.formNoValidate);\n"
-
                 + "    i.formNoValidate = '';\n"
                 + "    alert(i.formNoValidate);\n"
-
                 + "    i.formNoValidate = 'yes';\n"
                 + "    alert(i.formNoValidate);\n"
-
                 + "    i.removeAttribute('formNoValidate');\n"
                 + "    alert(i.formNoValidate);\n"
                 + "  }\n"

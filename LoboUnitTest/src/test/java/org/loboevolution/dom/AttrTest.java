@@ -44,7 +44,6 @@ public class AttrTest extends LoboUnitTest {
     public void specified() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function doTest() {\n"
                 + "  try {\n"
                 + "    var s = document.getElementById('testSelect');\n"
@@ -89,7 +88,6 @@ public class AttrTest extends LoboUnitTest {
     public void ownerElement() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function doTest() {\n"
                 + "  var s = document.getElementById('testSelect');\n"
                 + "  var o1 = s.options[0];\n"
@@ -112,7 +110,6 @@ public class AttrTest extends LoboUnitTest {
     public void isId() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function test() {\n"
                 + "  var d = document.getElementById('d');\n"
                 + " alert(d.getAttributeNode('id').isId);\n"
@@ -132,7 +129,6 @@ public class AttrTest extends LoboUnitTest {
     public void expando() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function test() {\n"
                 + "  var d = document.getElementById('d');\n"
                 + " alert(d.attributes['id'].expando);\n"
@@ -154,7 +150,6 @@ public class AttrTest extends LoboUnitTest {
     public void expandoEvent() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function test() {\n"
                 + "  var d = document.getElementById('d');\n"
                 + "  d.setAttribute('onfocusin', 't');\n"
@@ -173,7 +168,6 @@ public class AttrTest extends LoboUnitTest {
     public void textContent() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function test() {\n"
                 + "  var a = document.body.getAttributeNode('onload');\n"
                 + " alert(a.textContent);\n"
@@ -189,7 +183,6 @@ public class AttrTest extends LoboUnitTest {
     public void getAttributeNodeUndefinedAttribute() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function test() {\n"
                 + "  var elem = document.getElementById('myDiv');\n"
                 + " alert(elem.getAttributeNode('class'));\n"
@@ -209,7 +202,6 @@ public class AttrTest extends LoboUnitTest {
     public void getAttributesUndefinedAttribute() {
         final String html
                 = "<html><head><script>\n"
-
                 + "function test() {\n"
                 + "  var elem = document.getElementById('myDiv');\n"
                 + " alert(elem.attributes.getNamedItem('class'));\n"
@@ -227,8 +219,8 @@ public class AttrTest extends LoboUnitTest {
     @Test
     @Alerts({"[object Attr]", "", "[object Attr]", ""})
     public void value() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    var attr = document.createAttribute('hi');\n"
                 + "   alert(attr);\n"

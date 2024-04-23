@@ -61,7 +61,6 @@ public class HTMLDataElementTest extends LoboUnitTest {
                 + "  alert(dat.value);\n"
                 + "  dat.value = '#12o';\n"
                 + "  alert(dat.value);\n"
-
                 + "  dat = document.getElementById('d2');\n"
                 + "  alert(dat.value);\n"
                 + "  dat.value = '#12o';\n"

@@ -66,7 +66,8 @@ public class HTMLBaseElementTest extends LoboUnitTest {
     @Alerts({"[object HTMLBaseElement]", "function HTMLBaseElement() { [native code] }"})
     public void type() {
         final String html = "<html><head>\n"
-                + "<script>\n"                + "  function test() {\n"
+                + "<script>\n"
+                + "  function test() {\n"
                 + "  var elem = document.getElementById('b1');\n"
                 + "    try {\n"
                 + "      alert(elem);\n"

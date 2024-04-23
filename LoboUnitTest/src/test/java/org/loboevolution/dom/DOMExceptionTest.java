@@ -78,9 +78,10 @@ public class DOMExceptionTest extends LoboUnitTest {
 
     @Test
     @Alerts({"3", "true", "undefined", "undefined", "HIERARCHY_REQUEST_ERR: 3", "1"})
-    public void appendChild_illegalNode() {
+    public void appendChildIllegalNode() {
         final String html = "<html><head>\n"
-                + "<script>\n"                + "function test() {\n"
+                + "<script>\n"
+                + "function test() {\n"
                 + "  var htmlNode = document.documentElement;\n"
                 + "  var body = document.body;\n"
                 + "  try {\n"

@@ -406,11 +406,9 @@ public class Event2Test extends LoboUnitTest {
                 + "  function preventDef(event) {\n"
                 + "    event.preventDefault();\n"
                 + "  }\n"
-
                 + "  function addHandler() {\n"
                 + "    document.getElementById('checkbox').addEventListener('click', preventDef, false);\n"
                 + "  }\n"
-
                 + "  function simulateClick() {\n"
                 + "    var evt = document.createEvent('MouseEvents');\n"
                 + "    evt.initMouseEvent('click', true, true, window, 0, 0, 0, 0, 0,"
@@ -425,7 +423,6 @@ public class Event2Test extends LoboUnitTest {
                 + "     alert('not canceled');\n"
                 + "    }\n"
                 + "  }\n"
-
                 + "  function test() {\n"
                 + "   alert(document.getElementById('checkbox').checked);\n"
                 + "    simulateClick();\n"
@@ -512,7 +509,6 @@ public class Event2Test extends LoboUnitTest {
                 + "  function t(_s) {\n"
                 + "    return function() {alert(_s) };\n"
                 + "  }\n"
-
                 + "  function init() {\n"
                 + "    window.addEventListener('click', t('window capturing'), true);\n"
                 + "    window.addEventListener('click', t('window bubbling'), false);\n"
@@ -680,14 +676,16 @@ public class Event2Test extends LoboUnitTest {
             "window onclick prevented=true"})
     public void returnPriority() {
         final String html = "<html><head>\n"
-                + "<script>\n"                + "  functionalert(msg) {\n"
+                + "<script>\n"
+                + "  functionalert(msg) {\n"
                 + "    window.document.title += msg + ';';\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head>\n"
                 + "<body>\n"
                 + "<a id='tester' href='javascript:alert(\"FIRED\")'>test: onclick return value</a>\n"
-                + "<script>\n"                + "  tester.onclick = function (event) { "
+                + "<script>\n"
+                + "  tester.onclick = function (event) { "
                 + "alert('anchor onclick prevented=' + event.defaultPrevented); return true }\n"
                 + "  document.onclick = function (event) { "
                 + "alert('document onclick prevented=' + event.defaultPrevented); return false }\n"

@@ -51,8 +51,8 @@ public class MutationEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtor() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new MutationEvent('mutant');\n"
@@ -69,8 +69,8 @@ public class MutationEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorWithoutType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new MutationEvent();\n"
@@ -87,8 +87,8 @@ public class MutationEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorNumericType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new MutationEvent(42);\n"
@@ -105,8 +105,8 @@ public class MutationEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorNullType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new MutationEvent(null);\n"
@@ -123,8 +123,8 @@ public class MutationEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorUnknownType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new MutationEvent(unknown);\n"
@@ -141,8 +141,8 @@ public class MutationEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorArbitraryType() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new MutationEvent('HtmlUnitEvent');\n"
@@ -159,8 +159,8 @@ public class MutationEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorAllDetails() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new MutationEvent('mutant', {\n"
@@ -179,8 +179,8 @@ public class MutationEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorAllDetailsMissingData() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new MutationEvent('mutant', {\n"
@@ -198,8 +198,8 @@ public class MutationEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtorAllDetailsWrongData() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new MutationEvent('mutant', {\n"
@@ -239,7 +239,6 @@ public class MutationEventTest extends LoboUnitTest {
     public void createEvent() {
         final String html = "<html><head><script>\n"
                 + "  function test() {\n"
-
                 + "    try {\n"
                 + "     alert('DOM2: ' + document.createEvent('MutationEvents'));\n"
                 + "    } catch(e) {alert('DOM2: exception')}\n"

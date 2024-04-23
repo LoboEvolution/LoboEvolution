@@ -41,7 +41,7 @@ public class HTMLAllCollectionTest extends LoboUnitTest {
 
     @Test
     @Alerts("null")
-    public void namedItem_Unknown() {
+    public void namedItemUnknown() {
         namedItem("'foo'");
     }
 
@@ -65,31 +65,31 @@ public class HTMLAllCollectionTest extends LoboUnitTest {
 
     @Test
     @Alerts({"coll 2", "b4-button4_1", "b4-button4_2"})
-    public void namedItem_DuplicateId() {
+    public void namedItemDuplicateId() {
         namedItem("'b4'");
     }
 
     @Test
     @Alerts({"coll 2", "b5_1-button5", "b5_2-button5"})
-    public void namedItem_DuplicateName() {
+    public void namedItemDuplicateName() {
         namedItem("'button5'");
     }
 
     @Test
     @Alerts({"coll 2", "b6-button6", "button6-button6_2"})
-    public void namedItem_DuplicateIdName() {
+    public void namedItemDuplicateIdName() {
         namedItem("'button6'");
     }
 
     @Test
     @Alerts("null")
-    public void namedItem_ZeroIndex() {
+    public void namedItemZeroIndex() {
         namedItem("0");
     }
 
     @Test
     @Alerts("null")
-    public void namedItem_ValidIndex() {
+    public void namedItemValidIndex() {
         namedItem("1");
     }
 
@@ -137,7 +137,6 @@ public class HTMLAllCollectionTest extends LoboUnitTest {
                 + "      alert(result);\n"
                 + "    }\n"
                 + "  }\n"
-
                 + "  function doTest() {\n"
                 + "    try {\n"
                 + "      var item = document.all.namedItem(" + name + ");\n"
@@ -162,7 +161,7 @@ public class HTMLAllCollectionTest extends LoboUnitTest {
 
     @Test
     @Alerts("null")
-    public void item_Unknown() {
+    public void itemUnknown() {
         item("'foo'");
     }
 
@@ -198,7 +197,7 @@ public class HTMLAllCollectionTest extends LoboUnitTest {
 
     @Test
     @Alerts("null")
-    public void item_DoubleIndex() {
+    public void itemDoubleIndex() {
         item("1.1");
     }
 
@@ -240,7 +239,6 @@ public class HTMLAllCollectionTest extends LoboUnitTest {
                 + "      alert(result);\n"
                 + "    }\n"
                 + "  }\n"
-
                 + "  function doTest() {\n"
                 + "    try {\n"
                 + "      var item = document.all.item(" + name + ");\n"
@@ -330,7 +328,6 @@ public class HTMLAllCollectionTest extends LoboUnitTest {
                 + "      alert(result);\n"
                 + "    }\n"
                 + "  }\n"
-
                 + "  function doTest() {\n"
                 + "    try {\n"
                 + "      var item = document.all[" + name + "];\n"
@@ -420,13 +417,11 @@ public class HTMLAllCollectionTest extends LoboUnitTest {
                 + "      alert(result);\n"
                 + "    }\n"
                 + "  }\n"
-
                 + "  function doTest() {\n"
                 + "    try {\n"
-                + "      var item = document.all(" + name + ");\n"
-                + "      report(item);\n"
-                + "    } catch(e) { alert('exception'); }\n"
-                + "    document.title = alerts;"
+                + "      var col = document.getElementsByTagName('button');\n"
+                + "      report(col.namedItem(" + name + "));\n"
+                + "    } catch(e) { alert(exception); }\n"
                 + "  }\n"
                 + "</script></head>\n"
                 + "<body onload='doTest()'>\n"

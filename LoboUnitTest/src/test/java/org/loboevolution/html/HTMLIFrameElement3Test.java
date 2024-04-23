@@ -123,7 +123,8 @@ public class HTMLIFrameElement3Test extends LoboUnitTest {
         final String html
                 = "<html>\n"
                 + "<html><head>\n"
-                + "<script>\n"                + "function test() {\n"
+                + "<script>\n"
+                + "function test() {\n"
                 + "  alert(document.getElementById('myFrame') == frames.foo.frameElement);\n"
                 + "}\n"
                 + "</script></head>\n"
@@ -169,11 +170,12 @@ public class HTMLIFrameElement3Test extends LoboUnitTest {
 
     @Test
     @Alerts("about:blank")
-    public void setSrc_JavascriptUrl() {
+    public void setSrcJavascriptUrl() {
         final String html
                 = "<html>\n"
                 + "<html><head>\n"
-                + "<script>\n"                + "  function test() {\n"
+                + "<script>\n"
+                + "  function test() {\n"
                 + "    document.getElementById('iframe1').src = 'javascript:void(0)';\n"
                 + "    alert(window.frames[0].location);\n"
                 + "  }\n"
@@ -294,7 +296,6 @@ public class HTMLIFrameElement3Test extends LoboUnitTest {
                 + "  <body>\n"
                 + "    <iframe id='i'></iframe>\n"
                 + "    <script>\n"
-
                 + "      alert(document.getElementById('i').contentWindow.document.readyState);\n"
                 + "      window.onload = function() {\n"
                 + "        alert(document.getElementById('i').contentWindow.document.readyState);\n"
@@ -356,7 +357,6 @@ public class HTMLIFrameElement3Test extends LoboUnitTest {
                 + "  var iframe = document.createElement('iframe');\n"
                 + "  var content = 'something';\n"
                 + "  document.body.appendChild(iframe);\n"
-
                 + "  iframe.onload = function() {alert('iframe onload')};\n"
                 + "  iframe.contentWindow.document.open('text/html', 'replace');\n"
                 + "  iframe.contentWindow.document.write(content);\n"
@@ -418,10 +418,8 @@ public class HTMLIFrameElement3Test extends LoboUnitTest {
                 + "      myFrame.id = 'idMyFrame';\n"
                 + "      myFrame.src = 'about:blank';\n"
                 + "      document.body.appendChild(myFrame);\n"
-
                 + "      var docDomain = document.domain;\n"
                 + "      var myFrameDomain = myFrame.contentDocument.domain;\n"
-
                 + "      alert(docDomain);\n"
                 + "      alert(myFrameDomain);\n"
                 + "      alert(docDomain === myFrameDomain);\n"

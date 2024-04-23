@@ -45,7 +45,8 @@ public class CSSCharsetRuleTest extends LoboUnitTest {
         final String html
                 = "<html><body>\n"
                 + "<style>@charset \"UTF-8\";</style>\n"
-                + "<script>\n"                + "  var rules = document.styleSheets[0].cssRules;\n"
+                + "<script>\n"
+                + "  var rules = document.styleSheets[0].cssRules;\n"
                 + " alert(rules.length);\n"
                 + "</script>\n"
                 + "</body></html>";
@@ -59,7 +60,8 @@ public class CSSCharsetRuleTest extends LoboUnitTest {
         final String html
                 = "<html><body>\n"
                 + "<link rel='stylesheet' href='imp.css'>\n"
-                + "<script>\n"                + "  var rules = document.styleSheets[0].cssRules;\n"
+                + "<script>\n"
+                + "  var rules = document.styleSheets[0].cssRules;\n"
                 + " alert(rules.length);\n"
                 + "</script>\n"
                 + "</body></html>";

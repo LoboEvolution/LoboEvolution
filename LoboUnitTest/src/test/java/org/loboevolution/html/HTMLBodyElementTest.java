@@ -134,7 +134,7 @@ public class HTMLBodyElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"", "http://www.foo.com/blah.gif", "blah.gif"})
+    @Alerts({"null", "http://www.foo.com/blah.gif", "blah.gif"})
     public void background() {
         final String html =
                 "<html>\n"
@@ -156,7 +156,7 @@ public class HTMLBodyElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"", "#0000aa", "x"})
+    @Alerts({"null", "#0000aa", "x"})
     public void bgColor() {
         final String html =
                 "<html>\n"
@@ -178,7 +178,7 @@ public class HTMLBodyElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"", "#0000aa", "x"})
+    @Alerts({"null", "#0000aa", "x"})
     public void link() {
         final String html =
                 "<html>\n"
@@ -200,7 +200,7 @@ public class HTMLBodyElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"", "#0000aa", "x"})
+    @Alerts({"null", "#0000aa", "x"})
     public void text() {
         final String html =
                 "<html>\n"
@@ -223,7 +223,7 @@ public class HTMLBodyElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"", "#0000aa", "x"})
+    @Alerts({"undefined", "#0000aa", "x"})
     public void vLink() {
         final String html =
                 "<html>\n"

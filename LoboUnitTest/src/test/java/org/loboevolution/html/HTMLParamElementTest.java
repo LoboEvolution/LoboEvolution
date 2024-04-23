@@ -43,7 +43,8 @@ public class HTMLParamElementTest extends LoboUnitTest {
     public void value() {
         final String html =
                 "<html><head>\n"
-                        + "<script>\n"                        + "  function test() {\n"
+                        + "<script>\n"
+                		+ "  function test() {\n"
                         + "    for(var i = 1; i < 5; i++) {\n"
                         + "      var param = document.getElementById('tester' + i);\n"
                         + "      alert(param.value);\n"

@@ -41,8 +41,8 @@ public class EventTargetTest extends LoboUnitTest {
     @Test
     @Alerts("not defined")
     public void cloneEvent() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    var div = document.getElementById('myId');\n"
                 + "    if (div.attachEvent) {\n"

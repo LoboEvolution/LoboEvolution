@@ -87,7 +87,8 @@ public class HTMLCanvasElementTest extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "<body><canvas id='myCanvas'></canvas>\n"
-                        + "    <script>\n" + "try {\n"
+                        + "    <script>\n" 
+                + "try {\n"
                         + "  var canvas = document.getElementById('myCanvas');\n"
                         + "  alert(canvas.toDataURL());\n"
                         + "}\n"
@@ -123,7 +124,8 @@ public class HTMLCanvasElementTest extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "<body><canvas id='myCanvas'></canvas>\n"
-                        + "    <script>\n" + "try {\n"
+                        + "    <script>\n" 
+                + "try {\n"
                         + "  var canvas = document.getElementById('myCanvas');\n"
                         + "  alert(canvas.toDataURL('image/png'));\n"
                         + "}\n"

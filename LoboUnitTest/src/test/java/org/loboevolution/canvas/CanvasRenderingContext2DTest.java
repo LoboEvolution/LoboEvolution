@@ -87,7 +87,8 @@ public class CanvasRenderingContext2DTest extends LoboUnitTest {
                 "setLineDash", "setTransform", "stroke", "strokeRect", "strokeText", "transform", "translate"};
         final String html = "<html><body>\n"
                 + "<canvas id='myCanvas'></canvas>\n"
-                + "<script>\n"                + "  var canvas = document.getElementById('myCanvas');\n"
+                + "<script>\n"
+                + "  var canvas = document.getElementById('myCanvas');\n"
                 + "  var nbMethods = 0;\n"
                 + "  var methods = ['" + String.join("', '", methods) + "'];\n"
                 + "  try {\n"
@@ -151,7 +152,8 @@ public class CanvasRenderingContext2DTest extends LoboUnitTest {
         final String html = "<html><body>\n"
                 + "<img id='myImage'>\n"
                 + "<canvas id='myCanvas'></canvas>\n"
-                + "<script>\n"                + "try {\n"
+                + "<script>\n"
+                + "try {\n"
                 + "  var img = document.getElementById('myImage');\n"
                 + "  var canvas = document.getElementById('myCanvas');\n"
                 + "  var context = canvas.getContext('2d');\n"
@@ -390,7 +392,8 @@ public class CanvasRenderingContext2DTest extends LoboUnitTest {
             + "+Le6xgUtrjPK4L8Fts+zlPoB1NMSC7MwsngAAAAASUVORK5CYII=")
     public void drawImageDataUrlPng() {
         final String html = "<html><head>\n"
-                + "<script>\n"                + "  function test() {\n"
+               + "<script>\n"
+                + "  function test() {\n"
                 + "    var img = document.getElementById('myImage');\n"
                 + "    var canvas = document.createElement('canvas');\n"
                 + "    canvas.width = img.width;\n"
@@ -423,7 +426,8 @@ public class CanvasRenderingContext2DTest extends LoboUnitTest {
             + "lBpYTiFKMTGKRg0kJpTwqxkNQ8rDEABatjIVyjXhJwAAAABJRU5ErkJggg==")
     public void drawImageDataUrlSvg() {
         final String html = "<html><head>\n"
-                + "<script>\n"                + "  function test() {\n"
+               + "<script>\n"
+                + "  function test() {\n"
                 + "    var img = document.getElementById('myImage');\n"
                 + "    var canvas = document.createElement('canvas');\n"
                 + "    canvas.width = 20;\n"
@@ -483,7 +487,8 @@ public class CanvasRenderingContext2DTest extends LoboUnitTest {
 
     private void draw(final String canvasSetup, final String drawJS) {
         final String html = "<html><head>\n"
-                + "<script>\n"                + "  function test() {\n"
+               + "<script>\n"
+                + "  function test() {\n"
                 + "    var canvas = document.getElementById('myCanvas');\n"
                 + "    if (canvas.getContext) {\n"
                 + "      var context = canvas.getContext('2d');\n"
@@ -1226,7 +1231,8 @@ public class CanvasRenderingContext2DTest extends LoboUnitTest {
             + "lBpYTiFKMTGKRg0kJpTwqxkNQ8rDEABatjIVyjXhJwAAAABJRU5ErkJggg==")
     public void imageOnLoad() {
         final String html = "<html><head>\n"
-                + "<script>\n"                + "  function test() {\n"
+               + "<script>\n"
+                + "  function test() {\n"
                 + "    var img = new Image();\n"
                 + "    img.onload = function() {\n"
                 + "      var canvas = document.createElement('canvas');\n"
@@ -1234,10 +1240,8 @@ public class CanvasRenderingContext2DTest extends LoboUnitTest {
                 + "      canvas.height = 20;\n"
                 + "      var context = canvas.getContext('2d');\n"
                 + "      context.drawImage(img, 0, 0);\n"
-
                 + "     alert(canvas.toDataURL());\n"
                 + "    }\n"
-
                 + "    img.src = 'data:image/svg+xml,"
                 + "<svg xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http://www.w3.org/2000/svg\" "
                 + "overflow=\"hidden\" width=\"10\" height=\"10\">"

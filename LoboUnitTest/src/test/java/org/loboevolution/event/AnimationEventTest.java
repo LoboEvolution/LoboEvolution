@@ -41,8 +41,8 @@ public class AnimationEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object AnimationEvent]", "animationstart", "false", "false", "false"})
     public void createCtor() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new AnimationEvent('animationstart');\n"
@@ -59,8 +59,8 @@ public class AnimationEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object AnimationEvent]", "", "false", "false", "false"})
     public void createCreateEvent() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = document.createEvent('AnimationEvent');\n"

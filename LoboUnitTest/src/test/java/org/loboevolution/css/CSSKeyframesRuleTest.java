@@ -40,7 +40,7 @@ public class CSSKeyframesRuleTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts({"[object CSSKeyframesRule]", "7"})
+    @Alerts({"[object CSSKeyFramesRule]", "7"})
     public void simple() {
         final String html
                 = "<html>"
@@ -58,14 +58,13 @@ public class CSSKeyframesRuleTest extends LoboUnitTest {
                 + "   alert('Your browser does not support this example');\n"
                 + "  }\n"
                 + "</script>\n"
-
                 + "</body></html>";
 
         checkHtmlAlert(html);
     }
 
     @Test
-    @Alerts({"[object CSSKeyframesRule]", "identifier"})
+    @Alerts({"[object CSSKeyFramesRule]", "identifier"})
     public void name() {
         final String html
                 = "<html>"
@@ -83,7 +82,6 @@ public class CSSKeyframesRuleTest extends LoboUnitTest {
                 + "   alert('Your browser does not support this example');\n"
                 + "  }\n"
                 + "</script>\n"
-
                 + "</body></html>";
 
         checkHtmlAlert(html);
@@ -98,7 +96,6 @@ public class CSSKeyframesRuleTest extends LoboUnitTest {
                 + "<style>\n"
                 + "  @keyframes identifier { 0% { top: 0; left: 0; } 100% { top: 100px; left: 100%; }}\n"
                 + "</style>\n"
-
                 + "<script>\n"
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  if (styleSheet.cssRules) {\n"
@@ -108,7 +105,6 @@ public class CSSKeyframesRuleTest extends LoboUnitTest {
                 + "   alert('Your browser does not support this example');\n"
                 + "  }\n"
                 + "</script>\n"
-
                 + "</body></html>";
 
         checkHtmlAlert(html);
