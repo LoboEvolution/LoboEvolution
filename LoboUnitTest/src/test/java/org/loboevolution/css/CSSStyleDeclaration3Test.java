@@ -652,7 +652,6 @@ public class CSSStyleDeclaration3Test extends LoboUnitTest {
                         + "<body>\n"
                         + "  <div id='tester'>hello</div>\n"
                         + "  <script>\n"
-
                         + "    var myStyle = document.styleSheets[0].cssRules[0].style;\n"
                         + "   alert(myStyle.fontStyle);\n"
                         + "   alert(myStyle.fontVariant);\n"
@@ -675,7 +674,6 @@ public class CSSStyleDeclaration3Test extends LoboUnitTest {
                         + "<body>\n"
                         + "  <div id='tester'>hello</div>\n"
                         + "  <script>\n"
-
                         + "    var myStyle = document.styleSheets[0].cssRules[0].style;\n"
                         + "   alert(myStyle.fontStyle);\n"
                         + "   alert(myStyle.fontVariant);\n"
@@ -868,7 +866,7 @@ public class CSSStyleDeclaration3Test extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"", "", "", "", "", "", "", "", "", "", "", ""})
+    @Alerts({"null", "null", "null", "null", "null", "null", "null", "null", "null", "null", "null", "null"})
     public void borderEmpty() {
         border("");
     }
@@ -949,7 +947,6 @@ public class CSSStyleDeclaration3Test extends LoboUnitTest {
                         + "<body>\n"
                         + "  <div id='tester' style='border: " + borderStyle + "' >hello</div>\n"
                         + "  <script>\n"
-
                         + "    var myStyle = document.getElementById('tester').style;\n"
                         + "   alert(myStyle.borderTopWidth);\n"
                         + "   alert(myStyle.borderRightWidth);\n"
@@ -970,7 +967,7 @@ public class CSSStyleDeclaration3Test extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"", "", "", "", "", "", "", "", "", "", "", ""})
+    @Alerts({"null", "null", "null", "null", "null", "null", "null", "null", "null", "null", "null", "null"})
     public void borderCssEmpty() {
         borderCss("");
     }
@@ -1054,8 +1051,7 @@ public class CSSStyleDeclaration3Test extends LoboUnitTest {
                         + "<body>\n"
                         + "  <div id='tester'>hello</div>\n"
                         + "  <script>\n"
-
-                        + "    var myStyle = document.styleSheets[0].cssRules[0].style;\n"
+                        + "   var myStyle = document.styleSheets[0].cssRules[0].style;\n"
                         + "   alert(myStyle.borderTopWidth);\n"
                         + "   alert(myStyle.borderRightWidth);\n"
                         + "   alert(myStyle.borderBottomWidth);\n"
@@ -1160,9 +1156,8 @@ public class CSSStyleDeclaration3Test extends LoboUnitTest {
                         + "<body>\n"
                         + "  <div id='tester'>hello</div>\n"
                         + "  <script>\n"
-
-                        + "    var myDiv = document.getElementById('tester');\n"
-                        + "    var myStyle = window.getComputedStyle(myDiv, null);\n"
+                        + "   var myDiv = document.getElementById('tester');\n"
+                        + "   var myStyle = window.getComputedStyle(myDiv, null);\n"
                         + "   alert(myStyle.borderTopWidth);\n"
                         + "   alert(myStyle.borderRightWidth);\n"
                         + "   alert(myStyle.borderBottomWidth);\n"

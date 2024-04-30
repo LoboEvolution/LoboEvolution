@@ -161,21 +161,22 @@ public class BorderInsets {
 		return CSSValues.INHERIT.equals(CSSValues.get(value));
 	}
 
-    private static String getBorderWidthValue(String value) {
-        if (CSSValues.THIN.isEqual(value)) {
-            value = "1px";
-        }
+	private static String getBorderWidthValue(String value) {
+		String width = value != null ? value.toLowerCase() : "";
+		if (CSSValues.THIN.isEqual(width)) {
+			width = "1px";
+		}
 
-        if (CSSValues.MEDIUM.isEqual(value)) {
-            value = "3px";
-        }
+		if (CSSValues.INITIAL.isEqual(width) || CSSValues.MEDIUM.isEqual(width)) {
+			width = "3px";
+		}
 
-        if (CSSValues.THICK.isEqual(value)) {
-            value = "5px";
-        }
+		if (CSSValues.THICK.isEqual(width)) {
+			width = "5px";
+		}
 
-        return value;
-    }
+		return width;
+	}
 
 	private static Color getBorderColor(final HTMLElementImpl element, final String colorSpec, final RenderState renderState) {
 		final ColorFactory cf = ColorFactory.getInstance();
@@ -218,8 +219,9 @@ public class BorderInsets {
 			return BORDER_STYLE_OUTSET;
 		case INHERIT:
 			return getBorderStyle(element, element.getParentStyle().getBorderStyle());
+		case INITIAL:
 		case NONE:
-			default:
+		default:
 			return BORDER_STYLE_NONE;
 		}
 	}

@@ -27,6 +27,7 @@
 package org.loboevolution.laf;
 
 import org.loboevolution.common.Strings;
+import org.loboevolution.html.dom.HTMLElement;
 
 import java.awt.*;
 import java.util.Map;
@@ -111,6 +112,36 @@ public final class ColorFactory {
 			return color;
 		}
 	}
+
+	/**
+	 * Gets the color string.
+	 *
+	 * @param element a {@link org.loboevolution.html.dom.HTMLElement} object.
+	 * @param colorSpec a {@link java.lang.String} object.
+	 * @param defaultValue a {@link java.lang.String} object.
+	 * @return the color
+	 */
+	public String getColorString(final HTMLElement element, final String colorSpec, String defaultValue) {
+
+	if (Strings.isBlank(colorSpec)) {
+		return element.getParentNode() == null ? null : defaultValue;
+	}
+	final Color c = ColorFactory.getInstance().getColor(colorSpec);
+        if (c != null) {
+		if (c.getRed() == 0 && c.getGreen() == 0 && c.getBlue() == 0) {
+			return element.getParentNode() == null ? null : defaultValue;
+		}
+		final float alpha = (float) (c.getAlpha()) / 255.0f;
+		if (alpha > 0 && alpha < 1) {
+			return element.getParentNode() == null ? null : "rgba(" + c.getRed() + ", " + c.getGreen() + ", " + c.getBlue() + ", " + alpha + ")";
+		} else {
+			return element.getParentNode() == null ? null : "rgb(" + c.getRed() + ", " + c.getGreen() + ", " + c.getBlue() + ")";
+		}
+	} else {
+		return element.getParentNode() == null ? null : defaultValue;
+	}
+
+		}
 
 	/**
 	 * Get HEX color.

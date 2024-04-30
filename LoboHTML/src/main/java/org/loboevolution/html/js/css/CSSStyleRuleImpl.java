@@ -33,6 +33,7 @@ import org.loboevolution.css.CSSStyleDeclaration;
 import org.loboevolution.css.CSSStyleRule;
 import org.loboevolution.css.CSSStyleSheet;
 import org.loboevolution.html.style.setter.BackgroundSetter;
+import org.loboevolution.html.style.setter.BorderSetter2;
 import org.loboevolution.html.style.setter.BorderStyleSetter;
 import org.loboevolution.html.style.setter.FourCornersSetter;
 import org.loboevolution.net.NameValuePair;
@@ -97,7 +98,6 @@ public class CSSStyleRuleImpl extends AbstractCSSStyleRule implements CSSStyleRu
             list.forEach(p -> {
                 switch (p.getName()) {
                     case CSSProperties.MARGIN:
-                    case CSSProperties.BORDER:
                     case CSSProperties.BORDER_COLOR:
                     case CSSProperties.BORDER_WIDTH:
                     case CSSProperties.PADDING:
@@ -105,6 +105,9 @@ public class CSSStyleRuleImpl extends AbstractCSSStyleRule implements CSSStyleRu
                         break;
                     case CSSProperties.BORDER_STYLE:
                         new BorderStyleSetter(p.getName(), p.getName() + "-", "-style").changeValue(atomicReference.get(), p.getValue());
+                        break;
+                    case CSSProperties.BORDER:
+                        new BorderSetter2(p.getName()).changeValue(atomicReference.get(), p.getValue());
                         break;
                     case CSSProperties.BACKGROUND:
                         new BackgroundSetter().changeValue(atomicReference.get(), p.getValue());

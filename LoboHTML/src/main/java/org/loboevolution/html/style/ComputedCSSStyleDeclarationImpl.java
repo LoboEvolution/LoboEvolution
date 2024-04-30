@@ -133,26 +133,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      */
     @Override
     public String getBackgroundColor() {
-        if (Strings.isBlank(style.getBackgroundColor())) {
-            return this.element.getParentNode() == null ? null : "initial";
-        }
-
-        final Color c = ColorFactory.getInstance().getColor(style.getBackgroundColor());
-        if (c != null) {
-            final float alpha = (float) (c.getAlpha()) / 255.0f;
-
-            if (c.getRed() == 0 && c.getGreen() == 0 && c.getBlue() == 0) {
-                return this.element.getParentNode() == null ? null : "initial";
-            }
-
-            if (alpha > 0 && alpha < 1) {
-                return this.element.getParentNode() == null ? null : "rgba(" + c.getRed() + ", " + c.getGreen() + ", " + c.getBlue() + ", " + alpha + ")";
-            } else {
-                return this.element.getParentNode() == null ? null : "rgb(" + c.getRed() + ", " + c.getGreen() + ", " + c.getBlue() + ")";
-            }
-        } else {
-            return this.element.getParentNode() == null ? null : "initial";
-        }
+        return ColorFactory.getInstance().getColorString(this.element, style.getBackgroundColor(), CSSValues.INITIAL.getValue());
     }
 
     /**
@@ -245,7 +226,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      */
     @Override
     public String getBorderBottomColor() {
-        return this.element.getParentNode() == null ? null : style.getBorderBottomColor();
+        return ColorFactory.getInstance().getColorString(this.element, style.getBorderBottomColor(), "rgb(0, 0, 0)");
     }
 
     /**
@@ -253,7 +234,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      */
     @Override
     public String getBorderBottomStyle() {
-        return this.element.getParentNode() == null ? null : style.getBorderBottomStyle();
+        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getBorderBottomStyle()) ? CSSValues.INITIAL.getValue() : style.getBorderBottomStyle();
     }
 
     /**
@@ -261,8 +242,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      */
     @Override
     public String getBorderBottomWidth() {
-        final String cssBorderBottomWidth = style.getBorderBottomWidth();
-        final int borderBottomWidth = HtmlValues.getPixelSize(cssBorderBottomWidth, renderState, window.getWindow(), -1, availHeight);
+        final int borderBottomWidth = ((HtmlInsets)renderState.getBorderInfo().getInsets()).getBottom();
         return this.element.getParentNode() == null ? "" : borderBottomWidth == -1 ? "0px" : borderBottomWidth + "px";
     }
 
@@ -279,7 +259,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      */
     @Override
     public String getBorderLeftColor() {
-        return this.element.getParentNode() == null ? null : style.getBorderLeftColor();
+        return ColorFactory.getInstance().getColorString(this.element, style.getBorderLeftColor(), "rgb(0, 0, 0)");
     }
 
     /**
@@ -287,7 +267,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      */
     @Override
     public String getBorderLeftStyle() {
-        return this.element.getParentNode() == null ? null : style.getBorderLeftStyle();
+        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getBorderLeftStyle()) ? CSSValues.INITIAL.getValue() : style.getBorderLeftStyle();
     }
 
     /**
@@ -295,9 +275,8 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      */
     @Override
     public String getBorderLeftWidth() {
-        final String cssBorderBottomLeft = style.getBorderLeftWidth();
-        final int borderBottomLeft = HtmlValues.getPixelSize(cssBorderBottomLeft, renderState, window.getWindow(), -1, availWidth);
-        return this.element.getParentNode() == null ? "" : borderBottomLeft == -1 ? "0px" : borderBottomLeft + "px";
+        final int borderLeftWidth = ((HtmlInsets)renderState.getBorderInfo().getInsets()).getLeft();
+        return this.element.getParentNode() == null ? "" : borderLeftWidth == -1 ? "0px" : borderLeftWidth + "px";
     }
 
     /**
@@ -313,7 +292,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      */
     @Override
     public String getBorderRightColor() {
-        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getBorderRightColor()) ? "rgb(0, 0, 0)" : style.getBorderRightColor();
+        return ColorFactory.getInstance().getColorString(this.element, style.getBorderRightColor(), "rgb(0, 0, 0)");
     }
 
     /**
@@ -321,7 +300,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      */
     @Override
     public String getBorderRightStyle() {
-        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getBorderRightStyle()) ? CSSValues.NONE.getValue() : style.getBorderRightStyle();
+        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getBorderRightStyle()) ? CSSValues.INITIAL.getValue() : style.getBorderRightStyle();
     }
 
     /**
@@ -329,8 +308,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      */
     @Override
     public String getBorderRightWidth() {
-        final String getBorderRightWidth = style.getBorderRightWidth();
-        final int borderRightWidth = HtmlValues.getPixelSize(getBorderRightWidth, renderState, window.getWindow(), -1, availWidth);
+        final int borderRightWidth = ((HtmlInsets)renderState.getBorderInfo().getInsets()).getRight();
         return this.element.getParentNode() == null ? "" : borderRightWidth == -1 ? "0px" : borderRightWidth + "px";
     }
 
@@ -347,7 +325,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      */
     @Override
     public String getBorderColor() {
-        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getBorderColor()) ? "rgb(0, 0, 0)" : style.getBorderColor();
+        return ColorFactory.getInstance().getColorString(this.element, style.getBorderColor(), "rgb(0, 0, 0)");
     }
 
     /**
@@ -355,15 +333,16 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      */
     @Override
     public String getBorderLeft() {
-        return this.element.getParentNode() == null ? null : style.getBorderSpacing();
+        return this.element.getParentNode() == null ? null : style.getBorderLeft();
     }
+
 
     /**
      * {@inheritDoc}
      */
     @Override
     public String getBorderTopColor() {
-        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getBorderTopColor()) ? "rgb(0, 0, 0)" : style.getBorderTopColor();
+        return ColorFactory.getInstance().getColorString(this.element, style.getBorderTopColor(), "rgb(0, 0, 0)");
     }
 
     /**
@@ -387,7 +366,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      */
     @Override
     public String getBorderTopStyle() {
-        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getBorderTopStyle()) ? CSSValues.NONE.getValue() : style.getBorderTopStyle();
+        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getBorderTopStyle()) ? CSSValues.INITIAL.getValue() : style.getBorderTopStyle();
     }
 
     /**
@@ -395,8 +374,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      */
     @Override
     public String getBorderTopWidth() {
-        final String cssBorderToptWidth = style.getBorderTopWidth();
-        final int borderTopWidth = HtmlValues.getPixelSize(cssBorderToptWidth, renderState, window.getWindow(), -1, availHeight);
+        final int borderTopWidth = ((HtmlInsets)renderState.getBorderInfo().getInsets()).getTop();
         return this.element.getParentNode() == null ? "" : borderTopWidth == -1 ? "0px" : borderTopWidth + "px";
     }
 
@@ -421,25 +399,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      */
     @Override
     public String getColor() {
-        final String col = style.getColor();
-
-        if (Strings.isBlank(col)) {
-            return this.element.getParentNode() == null ? null : "rgb(0, 0, 0)";
-        }
-        final Color c = ColorFactory.getInstance().getColor(col);
-        if (c != null) {
-            if (c.getRed() == 0 && c.getGreen() == 0 && c.getBlue() == 0) {
-                return this.element.getParentNode() == null ? null : "rgb(0, 0, 0)";
-            }
-            final float alpha = (float) (c.getAlpha()) / 255.0f;
-            if (alpha > 0 && alpha < 1) {
-                return this.element.getParentNode() == null ? null : "rgba(" + c.getRed() + ", " + c.getGreen() + ", " + c.getBlue() + ", " + alpha + ")";
-            } else {
-                return this.element.getParentNode() == null ? null : "rgb(" + c.getRed() + ", " + c.getGreen() + ", " + c.getBlue() + ")";
-            }
-        } else {
-            return this.element.getParentNode() == null ? null : "rgb(0, 0, 0)";
-        }
+        return ColorFactory.getInstance().getColorString(this.element, style.getColor(), "rgb(0, 0, 0)");
     }
 
     /**
@@ -1231,7 +1191,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      */
     @Override
     public String getOutlineColor() {
-        return this.element.getParentNode() == null ? null : style.getOutlineColor();
+        return ColorFactory.getInstance().getColorString(this.element, style.getOutlineColor(), CSSValues.INITIAL.getValue());
     }
 
     /**

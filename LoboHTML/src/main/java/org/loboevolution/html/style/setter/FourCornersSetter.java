@@ -55,11 +55,12 @@ public class FourCornersSetter implements SubPropertySetter {
 
 	/** {@inheritDoc} */
 	@Override
-	public void changeValue(final CSSStyleDeclaration declaration, final String newValue) {
+	public void changeValue(final CSSStyleDeclaration declaration, String newValue) {
 		final CSSStyleDeclarationImpl properties = (CSSStyleDeclarationImpl) declaration;
+
 		
 		if (Strings.isNotBlank(newValue)) {
-			
+			newValue = newValue.toLowerCase();
 			final String[] array = HtmlValues.splitCssValue(newValue);
 			switch (array.length) {
 			case 1:

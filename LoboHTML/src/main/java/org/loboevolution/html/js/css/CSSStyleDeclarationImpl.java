@@ -218,12 +218,13 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
                 } else if (NUMERIC_PATTERN.matcher(value).matches()) {
                     value += "px";
                     style.setProperty(lwPropertyName, value, priority);
-                } else if (CSSValues.AUTO.getValue().equals(value) ||
-                        CSSValues.INHERIT.getValue().equals(value) ||
-                        CSSValues.INITIAL.getValue().equals(value) ||
+                } else if (CSSValues.AUTO.isEqual(value) ||
+                        CSSValues.INHERIT.isEqual(value) ||
+                        CSSValues.INITIAL.isEqual(value) ||
+                        CSSValues.THICK.isEqual(value) ||
+                        CSSValues.THIN.isEqual(value) ||
+                        CSSValues.MEDIUM.isEqual(value) ||
                         value.endsWith("%")) {
-                    style.setProperty(lwPropertyName, value, priority);
-                } else if(CSSValues.THICK.isEqual(value) || CSSValues.THIN.isEqual(value) || CSSValues.MEDIUM.isEqual(value)) {
                     style.setProperty(lwPropertyName, value, priority);
                 }
             } else {

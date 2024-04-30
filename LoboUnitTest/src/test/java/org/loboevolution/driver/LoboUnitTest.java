@@ -30,9 +30,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.Strings;
-import org.loboevolution.css.ComputedCSSStyleDeclaration;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
-import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.nodeimpl.DocumentImpl;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.js.Window;
@@ -119,23 +117,6 @@ public class LoboUnitTest extends LoboWebDriver {
     }
 
     /**
-     * <p>checkSelectorsTest.</p>
-     *
-     * @param html    a {@link java.lang.String} object.
-     * @param result1 a {@link java.lang.String} object.
-     * @param result2 a {@link java.lang.String} object.
-     */
-    public void checkSelectorsTest(final String html, final String result1, final String result2) {
-        final HTMLDocumentImpl doc = loadHtml(html);
-        final HTMLElementImpl div = (HTMLElementImpl) doc.getElementById("myId");
-        final HTMLElementImpl div2 = (HTMLElementImpl) doc.getElementById("myId2");
-        final ComputedCSSStyleDeclaration computedStyle = div.getComputedStyle();
-        final ComputedCSSStyleDeclaration computedStyle2 = div2.getComputedStyle();
-        assertEquals(result1, computedStyle.getColor());
-        assertEquals(result2, computedStyle2.getColor());
-    }
-
-    /**
      * <p>checkHtmlAlert.</p>
      *
      * @param html a {@link java.lang.String} object.
@@ -154,24 +135,25 @@ public class LoboUnitTest extends LoboWebDriver {
         }
     }
 
+
     /**
      * <p>checkHtmlAlert.</p>
      *
-     * @param html     a {@link java.lang.String} object.
-     * @param messages an array of {@link java.lang.String} objects.
+     * @param html a {@link java.lang.String} object.
+     * @param messages a {@link java.lang.String} objects.
      */
-    public void checkHtmlAlert(final String html, final String[] messages) {
+    public void checkHtmlAlert(final String html, final String messages) {
         Window window = null;
         List<String> alerts = null;
 
         try {
-            final HTMLDocumentImpl doc = loadHtml(html);
+            HTMLDocumentImpl doc = loadHtml(html);
             window = doc.getDefaultView();
             alerts = messages != null ? Arrays.asList(messages) : null;
             assertEquals(alerts, window.getMsg());
-        } catch (final AssertionError e) {
-            throw new AssertionError("Result expected: " + alerts + " Result: " + window.getMsg());
-        } catch (final Exception ex) {
+        } catch (AssertionError e) {
+            throw new AssertionError("Result expected: " +  alerts + " Result: " + window.getMsg());
+        } catch (Exception ex) {
             log.error(ex.getMessage(), ex);
         }
     }

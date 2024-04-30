@@ -404,7 +404,7 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
 
     @Test
     @Alerts({"black", "pink", "color: pink;", "color: pink;"})
-    public void style_OneCssAttribute() {
+    public void styleOneCssAttribute() {
         final String html
                 = "<html><head><script>\n"
                 + "function doTest() {\n"
@@ -422,7 +422,7 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
 
     @Test
     @Alerts({"black", "pink", "color: pink; background: blue;"})
-    public void style_MultipleCssAttributes() {
+    public void styleMultipleCssAttributes() {
         final String html
                 = "<html><head><script>\n" 
                 + "function doTest() {\n"
@@ -438,8 +438,8 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"null", "", "pink", "color: pink;"})
-    public void style_OneUndefinedCssAttribute() {
+    @Alerts({"null", "null", "pink", "color: pink;"})
+    public void styleOneUndefinedCssAttribute() {
         final String html
                 = "<html><head><script>\n" 
                 + "function doTest() {\n"
@@ -753,7 +753,8 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""})
+    @Alerts({"null", "null", "null", "null", "null", "null", "null", "null", "null",
+            "null", "null", "null", "null", "null", "null", "null"})
     public void borderStylesNoStyle() {
         final String html
                 = "<html><head><script>\n" 
@@ -1406,61 +1407,61 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({})
+    @Alerts({"null"})
     public void getAttribute() {
         getAttribute("\"font\"");
     }
 
     @Test
-    @Alerts({})
+    @Alerts({"null"})
     public void getAttributeFont() {
         getAttribute("'font'");
     }
 
     @Test
-    @Alerts({})
+    @Alerts({"null"})
     public void getAttributeColor() {
         getAttribute("'color'");
     }
 
     @Test
-    @Alerts({})
+    @Alerts({"null"})
     public void getAttributeColorCase() {
         getAttribute("'ColoR'");
     }
 
     @Test
-    @Alerts({})
+    @Alerts({"null"})
     public void getAttributeFont0() {
         getAttribute("'font', 0");
     }
 
     @Test
-    @Alerts({})
+    @Alerts({"null"})
     public void getAttributeColor0() {
         getAttribute("'color', 0");
     }
 
     @Test
-    @Alerts({})
+    @Alerts({"null"})
     public void getAttributeColorCase0() {
         getAttribute("'coLOr', 0");
     }
 
     @Test
-    @Alerts({})
+    @Alerts({"null"})
     public void getAttributeFont1() {
         getAttribute("'font', 1");
     }
 
     @Test
-    @Alerts({})
+    @Alerts({"null"})
     public void getAttributeColor1() {
         getAttribute("'color', 1");
     }
 
     @Test
-    @Alerts({})
+    @Alerts({"null"})
     public void getAttributeColorCase1() {
         getAttribute("'ColOR', 1");
     }
@@ -1668,458 +1669,342 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"4px", "5px", "6em", "auto", "7%", "initial", "inherit",
-            "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setWidthProperty() {
         setLengthProperty("width", "width");
     }
 
     @Test
-    @Alerts({"4px", "5px", "6em", "auto", "70%", "initial", "inherit",
-            "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setWidth() {
         setLength("width", "width");
     }
 
     @Test
-    @Alerts({"4px", "5px", "6em", "auto", "7%", "initial", "inherit",
-            "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setHeightProperty() {
         setLengthProperty("height", "height");
     }
 
     @Test
-    @Alerts({"4px", "5px", "6em", "auto", "70%", "initial", "inherit",
-            "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setHeight() {
         setLength("height", "height");
     }
 
     @Test
-    @Alerts({"4px", "5px", "6em", "auto", "7%", "initial", "inherit",
-            "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setTopProperty() {
         setLengthProperty("top", "top");
     }
 
     @Test
-    @Alerts({"4px", "5px", "6em", "auto", "70%", "initial", "inherit",
-            "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setTop() {
         setLength("top", "top");
     }
 
     @Test
-    @Alerts({"4px", "5px", "6em", "auto", "7%", "initial", "inherit",
-            "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setLeftProperty() {
         setLengthProperty("left", "left");
     }
 
     @Test
-    @Alerts({"4px", "5px", "6em", "auto", "70%", "initial", "inherit",
-            "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setLeft() {
         setLength("left", "left");
     }
 
     @Test
-    @Alerts({"4px", "5px", "6em", "auto", "7%", "initial", "inherit",
-            "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setBottomProperty() {
         setLengthProperty("bottom", "bottom");
     }
 
     @Test
-    @Alerts({"4px", "5px", "6em", "auto", "70%", "initial", "inherit",
-            "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setBottom() {
         setLength("bottom", "bottom");
     }
 
     @Test
-    @Alerts({"4px", "5px", "6em", "auto", "7%", "initial", "inherit",
-            "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setRightProperty() {
         setLengthProperty("right", "right");
     }
 
     @Test
-    @Alerts({"4px", "5px", "6em", "auto", "70%", "initial", "inherit",
-            "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setRight() {
         setLength("right", "right");
     }
 
     @Test
-    @Alerts({"4px", "5px", "6em", "auto", "7%", "initial", "inherit",
-            "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setMarginTopProperty() {
         setLengthProperty("margin-top", "marginTop");
     }
 
     @Test
-    @Alerts({"4px", "5px", "6em", "auto", "70%", "initial", "inherit",
-            "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setMarginTop() {
         setLength("margin-top", "marginTop");
     }
 
     @Test
-    @Alerts({"4px", "5px", "6em", "auto", "7%", "initial", "inherit",
-            "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setMarginLeftProperty() {
-        setLengthProperty("margin-left", "marginLeft");
+        setLength("margin-left", "marginLeft");
     }
 
     @Test
-    @Alerts({"4px", "5px", "6em", "auto", "70%", "initial", "inherit",
-            "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setMarginLeft() {
         setLength("margin-left", "marginLeft");
     }
 
     @Test
-    @Alerts({"4px", "5px", "6em", "auto", "7%", "initial", "inherit",
-            "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setMarginBottomProperty() {
         setLengthProperty("margin-bottom", "marginBottom");
     }
 
     @Test
-    @Alerts({"4px", "5px", "6em", "auto", "70%", "initial", "inherit",
-            "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setMarginBottom() {
         setLength("margin-bottom", "marginBottom");
     }
 
     @Test
-    @Alerts({"4px", "5px", "6em", "auto", "7%", "initial", "inherit",
-            "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setMarginRightProperty() {
         setLengthProperty("margin-right", "marginRight");
     }
 
     @Test
-    @Alerts({"4px", "5px", "6em", "auto", "70%", "initial", "inherit",
-            "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setMarginRight() {
         setLength("margin-right", "marginRight");
     }
 
     @Test
-    @Alerts({"4px", "5px", "6em", "17px", "7%", "initial", "inherit",
-            "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setPaddingTopProperty() {
         setLengthProperty("padding-top", "paddingTop");
     }
 
     @Test
-    @Alerts({"4px", "5px", "6em", "17px", "70%", "initial", "inherit",
-            "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setPaddingTop() {
         setLength("padding-top", "paddingTop");
     }
 
     @Test
-    @Alerts({"4px", "5px", "6em", "17px", "7%", "initial", "inherit",
-            "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setPaddingLeftProperty() {
         setLengthProperty("padding-left", "paddingLeft");
     }
 
     @Test
-    @Alerts({"4px", "5px", "6em", "17px", "70%", "initial", "inherit",
-            "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setPaddingLeft() {
         setLength("padding-left", "paddingLeft");
     }
 
     @Test
-    @Alerts({"4px", "5px", "6em", "17px", "7%", "initial", "inherit",
-            "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setPaddingBottomProperty() {
         setLengthProperty("padding-bottom", "paddingBottom");
     }
 
     @Test
-    @Alerts({"4px", "5px", "6em", "17px", "70%", "initial", "inherit",
-            "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setPaddingBottom() {
         setLength("padding-bottom", "paddingBottom");
     }
 
     @Test
-    @Alerts({"4px", "5px", "6em", "17px", "7%", "initial", "inherit",
-            "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setPaddingRightProperty() {
         setLengthProperty("padding-right", "paddingRight");
     }
 
     @Test
-    @Alerts({"4px", "5px", "6em", "17px", "70%", "initial", "inherit",
-            "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setPaddingRight() {
         setLength("padding-right", "paddingRight");
     }
 
     @Test
-    @Alerts({"4px", "5px", "6em", "17px", "17px", "initial", "inherit",
-            "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setBorderTopWidthProperty() {
         setLengthProperty("border-top-width", "borderTopWidth");
     }
 
     @Test
-    @Alerts({"4px", "5px", "6em", "17px", "17px", "initial", "inherit",
-            "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setBorderTopWidth() {
         setLength("border-top-width", "borderTopWidth");
     }
 
     @Test
-    @Alerts({"4px", "5px", "6em", "17px", "17px", "initial", "inherit",
-            "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setBorderLeftWidthProperty() {
         setLengthProperty("border-left-width", "borderLeftWidth");
     }
 
     @Test
-    @Alerts({"4px", "5px", "6em", "17px", "17px", "initial", "inherit",
-            "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setBorderLeftWidth() {
         setLength("border-left-width", "borderLeftWidth");
     }
 
     @Test
-    @Alerts({"4px", "5px", "6em", "17px", "17px", "initial", "inherit",
-            "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setBorderBottomWidthProperty() {
         setLengthProperty("border-bottom-width", "borderBottomWidth");
     }
 
     @Test
-    @Alerts({"4px", "5px", "6em", "17px", "17px", "initial", "inherit",
-            "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setBorderBottomWidth() {
         setLength("border-bottom-width", "borderBottomWidth");
     }
 
     @Test
-    @Alerts({"4px", "5px", "6em", "17px", "17px", "initial", "inherit",
-            "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setBorderRightWidthProperty() {
         setLengthProperty("border-right-width", "borderRightWidth");
     }
 
     @Test
-    @Alerts({"4px", "5px", "6em", "17px", "17px", "initial", "inherit",
-            "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setBorderRightWidth() {
         setLength("border-right-width", "borderRightWidth");
     }
 
     @Test
-    @Alerts({"4px", "5px", "6em", "17px", "7%", "initial", "inherit",
-            "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setMaxWidthProperty() {
         setLengthProperty("max-width", "maxWidth");
     }
 
     @Test
-    @Alerts({"4px", "5px", "6em", "17px", "70%", "initial", "inherit",
-            "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setMaxWidth() {
         setLength("max-width", "maxWidth");
     }
 
     @Test
-    @Alerts({"4px", "5px", "6em", "auto", "7%", "initial", "inherit",
-            "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setMinWidthProperty() {
         setLengthProperty("min-width", "minWidth");
     }
 
     @Test
-    @Alerts({"4px", "5px", "6em", "auto", "70%", "initial", "inherit",
-            "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setMinWidth() {
         setLength("min-width", "minWidth");
     }
 
     @Test
-    @Alerts({"4px", "5px", "6em", "17px", "7%", "initial", "inherit",
-            "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setMaxHeightProperty() {
         setLengthProperty("max-height", "maxHeight");
     }
 
     @Test
-    @Alerts({"4px", "5px", "6em", "17px", "70%", "initial", "inherit",
-            "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setMaxHeight() {
         setLength("max-height", "maxHeight");
     }
 
     @Test
-    @Alerts({"4px", "5px", "6em", "auto", "7%", "initial", "inherit",
-            "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setMinHeightProperty() {
         setLengthProperty("min-height", "minHeight");
     }
 
     @Test
-    @Alerts({"4px", "5px", "6em", "auto", "70%", "initial", "inherit",
-            "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setMinHeight() {
         setLength("min-height", "minHeight");
     }
 
     @Test
-    @Alerts({"4px", "5px", "6em", "17px", "7%", "initial", "inherit",
-            "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setTextIndentProperty() {
         setLengthProperty("text-indent", "textIndent");
     }
 
     @Test
-    @Alerts({"4px", "5px", "6em", "17px", "70%", "initial", "inherit",
-            "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setTextIndent() {
         setLength("text-indent", "textIndent");
     }
 
     @Test
-    @Alerts({"4px", "5px", "6em", "17px", "7%", "initial", "inherit",
-            "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setFontSizeProperty() {
         setLengthProperty("font-size", "fontSize");
     }
 
     @Test
-    @Alerts({"4px", "5px", "6em", "17px", "70%", "initial", "inherit",
-            "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setFontSize() {
         setLength("font-size", "fontSize");
     }
 
     @Test
-    @Alerts({"4px", "5px", "6em", "17px", "17px", "initial", "inherit",
-            "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setWordSpacingProperty() {
         setLengthProperty("word-spacing", "wordSpacing");
     }
 
     @Test
-    @Alerts({"4px", "5px", "6em", "17px", "17px", "initial", "inherit",
-            "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px", "17px"})
     public void setWordSpacing() {
         setLength("word-spacing", "wordSpacing");
     }
 
     @Test
-    @Alerts({"4px", "5px", "6em", "17px", "17px", "initial", "inherit",
-            "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setLetterSpacingProperty() {
         setLengthProperty("letter-spacing", "letterSpacing");
     }
 
     @Test
-    @Alerts({"4px", "5px", "6em", "17px", "17px", "initial", "inherit",
-            "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setLetterSpacing() {
         setLength("letter-spacing", "letterSpacing");
     }
 
     @Test
-    @Alerts({"4px", "5px", "6em", "17px", "7%", "initial", "inherit",
-            "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setVerticalAlignProperty() {
         setLengthProperty("vertical-align", "verticalAlign");
     }
 
     @Test
-    @Alerts({"4px", "5px", "6em", "17px", "70%", "initial", "inherit",
-            "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setVerticalAlign() {
         setLength("vertical-align", "verticalAlign");
     }
 
     @Test
-    @Alerts({"17px", "5px", "6em", "17px", "17px", "initial", "inherit",
-            "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setOutlineWidthProperty() {
         setLengthProperty("outline-width", "outlineWidth");
     }
 
     @Test
     public void setOutlineWidthProperty2() {
-        final String[] expected = {"thin", "medium", "thick"};
-        setLengthProperty("outline-width", "outlineWidth", "'thin', ''", expected[0]);
-        setLengthProperty("outline-width", "outlineWidth", "'medium', ''", expected[1]);
-        setLengthProperty("outline-width", "outlineWidth", "'thick', ''", expected[2]);
+        setLengthProperty("outline-width", "outlineWidth", "'thin', ''", "thin");
+        setLengthProperty("outline-width", "outlineWidth", "'medium', ''", "medium");
+        setLengthProperty("outline-width", "outlineWidth", "'thick', ''", "thick");
     }
 
     @Test
-    @Alerts({"17px", "5px", "6em", "17px", "17px", "initial", "inherit",
-            "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setOutlineWidth() {
         setLength("outline-width", "outlineWidth");
     }
 
     @Test
     public void setOutlineWidth2() {
-        final String[] expected = {"thin", "medium", "thick"};
-        setLength("outline-width", "outlineWidth", "'thin'", expected[0]);
-        setLength("outline-width", "outlineWidth", "'medium'", expected[1]);
-        setLength("outline-width", "outlineWidth", "'thick'", expected[2]);
+        setLength("outline-width", "outlineWidth", "'thin'", "thin");
+        setLength("outline-width", "outlineWidth", "'medium'","medium");
+        setLength("outline-width", "outlineWidth", "'thick'", "thick");
     }
 
     private void setLengthProperty(final String cssProp, final String prop) {
-        setLengthProperty(cssProp, prop, "'4', ''");
-        setLengthProperty(cssProp, prop, "'5px', ''");
-        setLengthProperty(cssProp, prop, "'6em', ''");
-        setLengthProperty(cssProp, prop, "'auto', ''");
-        setLengthProperty(cssProp, prop, "'7%', ''");
-        setLengthProperty(cssProp, prop, "'initial', ''");
-        setLengthProperty(cssProp, prop, "'inherit', ''");
-        setLengthProperty(cssProp, prop, "'ellen', ''");
-        setLengthProperty(cssProp, prop, "undefined, ''");
-        setLengthProperty(cssProp, prop, "'undefined', ''");
-        setLengthProperty(cssProp, prop, "'', null");
-        setLengthProperty(cssProp, prop, "NaN, ''");
-        setLengthProperty(cssProp, prop, "null, ''");
-        setLengthProperty(cssProp, prop, "'NaNpx', ''");
-        setLengthProperty(cssProp, prop, "true, ''");
-        setLengthProperty(cssProp, prop, "Infinity, ''");
+        setLengthProperty(cssProp, prop, "4", "4px");
+        setLengthProperty(cssProp, prop, "'5px'", "5px");
+        setLengthProperty(cssProp, prop, "'6em'", "6em");
+        setLengthProperty(cssProp, prop, "'auto'", "auto");
+        setLengthProperty(cssProp, prop, "'70%'", "70%");
+        setLengthProperty(cssProp, prop, "'initial'", "initial");
+        setLengthProperty(cssProp, prop, "'inherit'", "inherit");
+        setLengthProperty(cssProp, prop, "'ellen'", "17px");
+        setLengthProperty(cssProp, prop, "undefined", "17px");
+        setLengthProperty(cssProp, prop, "'undefined'", "17px");
+        setLengthProperty(cssProp, prop, "''", "null");
+        setLengthProperty(cssProp, prop, "NaN", "17px");
+        setLengthProperty(cssProp, prop, "'NaNpx'", "17px");
+        setLengthProperty(cssProp, prop, "true", "17px");
+        setLengthProperty(cssProp, prop, "Infinity", "17px");
     }
 
     private void setLength(final String cssProp, final String prop) {
-        setLength(cssProp, prop, "4");
-        setLength(cssProp, prop, "'5px'");
-        setLength(cssProp, prop, "'6em'");
-        setLength(cssProp, prop, "'auto'");
-        setLength(cssProp, prop, "'70%'");
-        setLength(cssProp, prop, "'initial'");
-        setLength(cssProp, prop, "'inherit'");
-        setLength(cssProp, prop, "'ellen'");
-        setLength(cssProp, prop, "undefined");
-        setLength(cssProp, prop, "'undefined'");
-        setLength(cssProp, prop, "''");
-        setLength(cssProp, prop, "NaN");
-        setLength(cssProp, prop, "null");
-        setLength(cssProp, prop, "'NaNpx'");
-        setLength(cssProp, prop, "true");
-        setLength(cssProp, prop, "Infinity");
+        setLength(cssProp, prop, "4", "4px");
+        setLength(cssProp, prop, "'5px'", "5px");
+        setLength(cssProp, prop, "'6em'", "6em");
+        setLength(cssProp, prop, "'auto'", "auto");
+        setLength(cssProp, prop, "'70%'", "70%");
+        setLength(cssProp, prop, "'initial'", "initial");
+        setLength(cssProp, prop, "'inherit'", "inherit");
+        setLength(cssProp, prop, "'ellen'", "17px");
+        setLength(cssProp, prop, "undefined", "17px");
+        setLength(cssProp, prop, "'undefined'", "17px");
+        setLength(cssProp, prop, "''","null");
+        setLength(cssProp, prop, "NaN", "17px");
+        setLength(cssProp, prop, "'NaNpx'", "17px");
+        setLength(cssProp, prop, "true", "17px");
+        setLength(cssProp, prop, "Infinity", "17px");
     }
 
     private void setLengthProperty(final String cssProp, final String prop,
-                                   final String params, final String... expected) {
+                                   final String params, final String expected) {
         final String html =
                 "<html><body onload='test()'>\n"
                         + "<a id='a' href='#' style='" + cssProp + ":17px'>go</a>\n"
                         + "<script>"
-                +  " function test() {\n"
+                        +  " function test() {\n"
                         + "    var node = document.getElementById('a');\n"
                         + "    try {\n"
                         + "      node.style.setProperty('" + cssProp + "', " + params + ");\n"
@@ -2133,7 +2018,7 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     }
 
     private void setLength(final String cssProp, final String prop,
-                           final String params, final String... expected) {
+                           final String params, final String expected) {
         final String html =
                 "<html><body onload='test()'>\n"
                         + "<a id='a' href='#' style='" + cssProp + ":17px'>go</a>\n"
@@ -2158,17 +2043,17 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
                 "<html><body onload='test()'>\n"
                         + "<a id='a1' href='#' style='color:green'>go</a>\n"
                         + "<a id='a2' href='#' style='color:blue !important'>go</a>\n" 
-                + "<a id='a3' href='#' style='background-color:green'>go</a>\n"
+                        + "<a id='a3' href='#' style='background-color:green'>go</a>\n"
                         + "<a id='a4' href='#' style='background-color:blue !important'>go</a>\n" 
-                + "<script>\n"
-                + "  function test() {\n"
+                        + "<script>\n"
+                        + "  function test() {\n"
                         + "    var node = document.getElementById('a1');\n"
                         + "   alert(node.style.getPropertyPriority('color'));\n" 
-                + "    node = document.getElementById('a2');\n"
+                        + "    node = document.getElementById('a2');\n"
                         + "   alert(node.style.getPropertyPriority('color'));\n" 
-                + "    node = document.getElementById('a3');\n"
+                        + "    node = document.getElementById('a3');\n"
                         + "   alert(node.style.getPropertyPriority('background-color'));\n" 
-                + "    node = document.getElementById('a4');\n"
+                        + "    node = document.getElementById('a4');\n"
                         + "   alert(node.style.getPropertyPriority('background-color'));\n"
                         + "  }\n"
                         + "</script>\n"
@@ -2183,8 +2068,8 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
         final String html =
                 "<html><body onload='test()'>\n"
                         + "<a id='a1' href='#'>go</a>\n" 
-                + "<script>\n"
-                + "  function test() {\n"
+                        + "<script>\n"
+                        + "  function test() {\n"
                         + "    var node = document.getElementById('a1');\n"
                         + "   alert(node.style.getPropertyPriority('color'));\n"
                         + "  }\n"

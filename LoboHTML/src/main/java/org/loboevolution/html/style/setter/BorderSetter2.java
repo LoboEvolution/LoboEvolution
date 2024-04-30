@@ -27,6 +27,7 @@
 package org.loboevolution.html.style.setter;
 
 import org.loboevolution.common.Strings;
+import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.js.css.CSSStyleDeclarationImpl;
 import org.loboevolution.css.CSSStyleDeclaration;
 import org.loboevolution.html.style.HtmlValues;
@@ -53,35 +54,42 @@ public class BorderSetter2 implements SubPropertySetter {
 	public void changeValue(final CSSStyleDeclaration declaration, final String value) {
 		final CSSStyleDeclarationImpl properties = (CSSStyleDeclarationImpl) declaration;
 		properties.setProperty(this.name, value);
+		final String name = this.name;
 		if (Strings.isNotBlank(value)) {
 			final String[] array = HtmlValues.splitCssValue(value);
 			String color = null;
 			String style = null;
 			String width = null;
 			for (final String token : array) {
+
 				if (HtmlValues.isBorderStyle(token)) {
-					style = token;
+					style = token.toLowerCase();
 				} else if (ColorFactory.getInstance().isColor(token)) {
-					color = token;
+					color = token.toLowerCase();
 				} else {
-					width = token;
+					width = token.toLowerCase();
 				}
 			}
-			final String name = this.name;
-			if (style != null) {
-				properties.setProperty(name + "-style", style);
+
+			if (style == null) {
+				style = CSSValues.INITIAL.getValue();
 			}
 
 			if (color == null) {
-				color = "black";
+				color = CSSValues.INITIAL.getValue();
 			}
 
 			if (width == null) {
-				width = "2px";
+				width = CSSValues.INITIAL.getValue();
 			}
 
+			properties.setProperty(name + "-style", style);
 			properties.setProperty(name + "-color", color);
 			properties.setProperty(name + "-width", width);
+
+			new FourCornersSetter(name, name + "-", "-style").changeValue(declaration, style);
+			new BorderStyleSetter(name, name + "-", "-color").changeValue(declaration, color);
+			new FourCornersSetter(name, name + "-", "-width").changeValue(declaration, width);
 		}
 	}
 }
