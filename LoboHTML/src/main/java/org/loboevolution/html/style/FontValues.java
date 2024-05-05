@@ -370,7 +370,7 @@ public class FontValues extends HtmlValues {
 	public static String getFontWeight(final String fontWeight, final RenderState parentRenderState, final boolean isBold) {
 		if (fontWeight == null) {
 			if (parentRenderState != null) {
-				if(parentRenderState.getFont().getAttributes().get(TextAttribute.WEIGHT) == null){
+				if (parentRenderState.getFont().getAttributes().get(TextAttribute.WEIGHT) == null) {
 					return CSSValues.BOLD400.getValue();
 				}
 
@@ -379,6 +379,10 @@ public class FontValues extends HtmlValues {
 				if (isBold)
 					return CSSValues.BOLD400.getValue();
 			}
+		}
+
+		if (CSSValues.NORMAL.isEqual(fontWeight)) {
+			return CSSValues.BOLD400.getValue();
 		}
 
 		return fontWeight;
@@ -425,17 +429,40 @@ public class FontValues extends HtmlValues {
 	public static boolean isFontWeight(final String token) {
 		final CSSValues tok = CSSValues.get(token);
 		switch (tok) {
-		case BOLD:
-		case NORMAL:
-		case LIGHTER:
-			return true;
-		default:
-			try {
-				final int value = Integer.parseInt(token);
-				return value % 100 == 0 && value >= 100 && value <= 900;
-			} catch (final NumberFormatException nfe) {
+			case BOLD:
+			case NORMAL:
+			case LIGHTER:
+				return true;
+			default:
+				try {
+					final int value = Integer.parseInt(token);
+					return value % 100 == 0 && value >= 100 && value <= 900;
+				} catch (final NumberFormatException nfe) {
+					return false;
+				}
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Checks if is font stretch.
+	 */
+	public static boolean isFontStretch(final String token) {
+		final CSSValues tok = CSSValues.get(token);
+		switch (tok) {
+			case NORMAL:
+			case CONDENSED:
+			case EXPANDED:
+			case EXTRA_CONDENSED:
+			case EXTRA_EXPANDED:
+			case ULTRA_CONDENSED:
+			case ULTRA_EXPANDED:
+			case SEMI_CONDENSED:
+			case SEMI_EXPANDED:
+				return true;
+			default:
 				return false;
-			}
 		}
 	}
 }

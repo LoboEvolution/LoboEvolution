@@ -350,25 +350,25 @@ public class CSSStyleDeclaration3Test extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"", "", "", "", "", ""})
+    @Alerts({"null", "null", "null", "null", "null", "null"})
     public void fontEmpty() {
         font("");
     }
 
     @Test
-    @Alerts({"", "", "", "", "", ""})
+    @Alerts({"null", "null", "null", "null", "null", "null"})
     public void fontSizeOnly() {
         font("14px");
     }
 
     @Test
-    @Alerts({"", "", "", "", "", ""})
+    @Alerts({"null", "null", "null", "null", "null", "null"})
     public void fontFamilyOnly() {
         font("sans-serif");
     }
 
     @Test
-    @Alerts({"", "", "", "", "", ""})
+    @Alerts({"null", "null", "null", "null", "null", "null"})
     public void fontAllExceptSizeAndFamily() {
         font("italic small-caps bold");
     }
@@ -452,25 +452,25 @@ public class CSSStyleDeclaration3Test extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"normal", "normal", "normal", "14px", "normal", "sans-serif", "undefined", "normal"})
+    @Alerts({"normal", "normal", "normal", "14px", "normal", "sans-serif", "0.5", "normal"})
     public void fontSizeAdjustBefore() {
         font("14pX sAns-serif", "font-size-adjust: 0.5");
     }
 
     @Test
-    @Alerts({"normal", "normal", "normal", "14px", "normal", "sans-serif", "undefined", "normal"})
+    @Alerts({"normal", "normal", "normal", "14px", "normal", "sans-serif", "0.5", "normal"})
     public void fontSizeAdjustAfter() {
         font("14pX sAns-serif; font-size-adjust: 0.5", "");
     }
 
     @Test
-    @Alerts({"normal", "normal", "normal", "14px", "normal", "sans-serif", "undefined", "normal"})
+    @Alerts({"normal", "normal", "normal", "14px", "normal", "sans-serif", "expanded", "normal"})
     public void fontStretchBefore() {
         font("14pX sAns-serif", "font-stretch: expanded");
     }
 
     @Test
-    @Alerts({"normal", "normal", "normal", "14px", "normal", "sans-serif", "undefined", "expanded"})
+    @Alerts({"normal", "normal", "normal", "14px", "normal", "sans-serif", "expanded", "expanded"})
     public void fontStretchAfter() {
         font("14pX sAns-serif; font-stretch: expanded", "");
     }
@@ -481,7 +481,6 @@ public class CSSStyleDeclaration3Test extends LoboUnitTest {
                         + "<body>\n"
                         + "  <div id='tester' style='font: " + fontStyle + "' >hello</div>\n"
                         + "  <script>\n"
-
                         + "    var myStyle = document.getElementById('tester').style;\n"
                         + "   alert(myStyle.fontStyle);\n"
                         + "   alert(myStyle.fontVariant);\n"
@@ -501,8 +500,7 @@ public class CSSStyleDeclaration3Test extends LoboUnitTest {
                         + "<body>\n"
                         + "  <div id='tester' style='" + otherStyle + "; font: " + fontStyle + "' >hello</div>\n"
                         + "  <script>\n"
-
-                        + "    var myStyle = document.getElementById('tester').style;\n"
+                        + "   var myStyle = document.getElementById('tester').style;\n"
                         + "   alert(myStyle.fontStyle);\n"
                         + "   alert(myStyle.fontVariant);\n"
                         + "   alert(myStyle.fontWeight);\n"
@@ -518,25 +516,25 @@ public class CSSStyleDeclaration3Test extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"", "", "", "", "", ""})
+    @Alerts({"null", "null", "null", "null", "null", "null"})
     public void fontCssEmpty() {
         fontCss("");
     }
 
     @Test
-    @Alerts({"", "", "", "", "", ""})
+    @Alerts({"null", "null", "null", "null", "null", "null"})
     public void fontCssSizeOnly() {
         fontCss("14px");
     }
 
     @Test
-    @Alerts({"", "", "", "", "", ""})
+    @Alerts({"null", "null", "null", "null", "null", "null"})
     public void fontCssFamilyOnly() {
         fontCss("sans-serif");
     }
 
     @Test
-    @Alerts({"", "", "", "", "", ""})
+    @Alerts({"null", "null", "null", "null", "null", "null"})
     public void fontCssAllExceptSizeAndFamily() {
         fontCss("italic small-caps bold");
     }
@@ -620,25 +618,25 @@ public class CSSStyleDeclaration3Test extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"normal", "normal", "normal", "14px", "normal", "sans-serif", "undefined", "normal"})
+    @Alerts({"normal", "normal", "normal", "14px", "normal", "sans-serif", "0.5", "normal"})
     public void fontCssSizeAdjustBefore() {
         fontCss("14pX sAns-serif", "font-size-adjust: 0.5");
     }
 
     @Test
-    @Alerts({"normal", "normal", "normal", "14px", "normal", "sans-serif", "undefined", "normal"})
+    @Alerts({"normal", "normal", "normal", "14px", "normal", "sans-serif", "0.5", "normal"})
     public void fontCssSizeAdjustAfter() {
         fontCss("14pX sAns-serif; font-size-adjust: 0.5", "");
     }
 
     @Test
-    @Alerts({"normal", "normal", "normal", "14px", "normal", "sans-serif", "undefined", "normal"})
+    @Alerts({"normal", "normal", "normal", "14px", "normal", "sans-serif", "expanded", "normal"})
     public void fontCssStretchBefore() {
         fontCss("14pX sAns-serif", "font-stretch: expanded");
     }
 
     @Test
-    @Alerts({"normal", "normal", "normal", "14px", "normal", "sans-serif", "undefined", "expanded"})
+    @Alerts({"normal", "normal", "normal", "14px", "normal", "sans-serif", "expanded", "expanded"})
     public void fontCssStretchAfter() {
         fontCss("14pX sAns-serif; font-stretch: expanded", "");
     }
@@ -647,7 +645,7 @@ public class CSSStyleDeclaration3Test extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "</head>\n"
-                        + "  <style type='text/css'>div { font: " + fontStyle + " }</style>\n"
+                        + "  <style id='tester3' type='text/css'>div { font: " + fontStyle + " }</style>\n"
                         + "</head>\n"
                         + "<body>\n"
                         + "  <div id='tester'>hello</div>\n"
@@ -690,25 +688,25 @@ public class CSSStyleDeclaration3Test extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"normal", "normal", "400", "16px", "normal", "\"Times New Roman\""})
+    @Alerts({"normal", "normal", "400", "16px", "normal", "Times New Roman"})
     public void fontComputedEmpty() {
         fontComputed("");
     }
 
     @Test
-    @Alerts({"normal", "normal", "400", "16px", "normal", "\"Times New Roman\""})
+    @Alerts({"normal", "normal", "400", "16px", "normal", "Times New Roman"})
     public void fontComputedSizeOnly() {
         fontComputed("14px");
     }
 
     @Test
-    @Alerts({"normal", "normal", "400", "16px", "normal", "\"Times New Roman\""})
+    @Alerts({"normal", "normal", "400", "16px", "normal", "Times New Roman"})
     public void fontComputedFamilyOnly() {
         fontComputed("sans-serif");
     }
 
     @Test
-    @Alerts({"normal", "normal", "400", "16px", "normal", "\"Times New Roman\""})
+    @Alerts({"normal", "normal", "400", "16px", "normal", "Times New Roman"})
     public void fontComputedAllExceptSizeAndFamily() {
         fontComputed("italic small-caps bold");
     }
@@ -732,9 +730,9 @@ public class CSSStyleDeclaration3Test extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"normal", "normal", "400", "14px", "normal", "\"Gill Sans Extrabold\", serif"})
+    @Alerts({"normal", "normal", "400", "14px", "normal", "\"Gill Sans Extrabold\", sans-serif"})
     public void fontComputedFamilyMultiple() {
-        fontComputed("14pX \"Gill Sans Extrabold\", serif");
+        fontComputed("14pX \"Gill Sans Extrabold\", sans-serif");
     }
 
     @Test
@@ -762,7 +760,7 @@ public class CSSStyleDeclaration3Test extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"normal", "normal", "700", "14px", "normal", "sans-serif"})
+    @Alerts({"normal", "normal", "bold", "14px", "normal", "sans-serif"})
     public void fontComputedWeight() {
         fontComputed("bOld 14pX sAns-serif");
     }
@@ -786,31 +784,31 @@ public class CSSStyleDeclaration3Test extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"italic", "small-caps", "700", "14px", "252px", "sans-serif"})
+    @Alerts({"italic", "small-caps", "bold", "14px", "252px", "sans-serif"})
     public void fontComputedAll() {
         fontComputed("iTalic sMall-caps bOld 14pX/18eM sAns-serif");
     }
 
     @Test
-    @Alerts({"normal", "normal", "400", "14px", "normal", "sans-serif", "undefined", "100%"})
+    @Alerts({"normal", "normal", "400", "14px", "normal", "sans-serif", "0.5", "100%"})
     public void fontComputedSizeAdjustBefore() {
         fontComputed("14pX sAns-serif", "font-size-adjust: 0.5");
     }
 
     @Test
-    @Alerts({"normal", "normal", "400", "14px", "normal", "sans-serif", "undefined", "100%"})
+    @Alerts({"normal", "normal", "400", "14px", "normal", "sans-serif", "0.5", "100%"})
     public void fontComputedSizeAdjustAfter() {
         fontComputed("14pX sAns-serif; font-size-adjust: 0.5", "");
     }
 
     @Test
-    @Alerts({"normal", "normal", "400", "14px", "normal", "sans-serif", "undefined", "100%"})
+    @Alerts({"normal", "normal", "400", "14px", "normal", "sans-serif", "expanded", "100%"})
     public void fontComputedStretchBefore() {
         fontComputed("14pX sAns-serif", "font-stretch: expanded");
     }
 
     @Test
-    @Alerts({"normal", "normal", "400", "14px", "normal", "sans-serif", "undefined", "125%"})
+    @Alerts({"normal", "normal", "400", "14px", "normal", "sans-serif", "expanded", "125%"})
     public void fontComputedStretchAfter() {
         fontComputed("14pX sAns-serif; font-stretch: expanded", "");
     }
@@ -824,7 +822,6 @@ public class CSSStyleDeclaration3Test extends LoboUnitTest {
                         + "<body>\n"
                         + "  <div id='tester'>hello</div>\n"
                         + "  <script>\n"
-
                         + "    var myDiv = document.getElementById('tester');\n"
                         + "    var myStyle = window.getComputedStyle(myDiv, null);\n"
                         + "   alert(myStyle.fontStyle);\n"

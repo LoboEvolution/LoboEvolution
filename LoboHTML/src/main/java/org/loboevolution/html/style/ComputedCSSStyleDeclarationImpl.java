@@ -165,7 +165,6 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
                         break;
                     case TOP:
                     case LEFT:
-                        System.out.println(builder.indexOf("100%"));
                         if (builder.indexOf("100%") > -1) {
                             builder.insert(0, "0% ");
                         } else {
@@ -623,7 +622,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
         } else {
             fontSize = Float.valueOf(FontValues.getFontSize(style.getFontSize(), window, null)).intValue();
         }
-        return this.element.getParentNode() == null ? null : fontSize + "px";
+        return this.element.getParentNode() == null ? null : (fontSize < 7 ? 6 : fontSize) + "px";
     }
 
     /**
@@ -710,9 +709,21 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      */
     @Override
     public String getLineHeight() {
+        final HTMLElementImpl parent = (HTMLElementImpl) element.getParentElement();
         final CSSStyleDeclaration style = element.getStyle();
-        final String lineHeight = style.getLineHeight();
-        return this.element.getParentNode() == null ? null : Strings.isCssBlank(lineHeight) ? CSSValues.NORMAL.getValue() : lineHeight;
+        int lineHeight;
+
+        if (Strings.isCssBlank(style.getLineHeight()) && parent != null && parent.getStyle().getLength() > 0) {
+            final CSSStyleDeclaration currentStyle = parent.getStyle();
+            lineHeight = FontValues.getPixelSize(currentStyle.getLineHeight(), element.getRenderState(), window, -1);
+        } else {
+            if (style.getLineHeight() == null || CSSValues.NORMAL.isEqual(style.getLineHeight())) {
+                return CSSValues.NORMAL.getValue();
+            } else {
+                lineHeight = Float.valueOf(FontValues.getFontSize(style.getLineHeight(), window, element.getRenderState())).intValue();
+            }
+        }
+        return this.element.getParentNode() == null ? null : lineHeight + "px";
     }
 
     /**

@@ -196,7 +196,9 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
             if (Strings.isBlank(value)) value = "";
             style.setProperty(lwPropertyName, value, priority);
         } else {
-            value = HtmlValues.isUrl(value) ? value.trim() : value.trim().toLowerCase();
+            value = HtmlValues.isUrl(value) ? value.trim() :
+                    (FONT_FAMILY.equals(propertyName) && value.contains("\"")) ? value.trim() :
+                            value.trim().toLowerCase();
 
             if (HtmlValues.isUnits(value)) {
                 if (BACKGROUND_POSITION.equals(propertyName)) {

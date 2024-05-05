@@ -32,10 +32,7 @@ import org.htmlunit.cssparser.util.CSSProperties;
 import org.loboevolution.css.CSSStyleDeclaration;
 import org.loboevolution.css.CSSStyleRule;
 import org.loboevolution.css.CSSStyleSheet;
-import org.loboevolution.html.style.setter.BackgroundSetter;
-import org.loboevolution.html.style.setter.BorderSetter2;
-import org.loboevolution.html.style.setter.BorderStyleSetter;
-import org.loboevolution.html.style.setter.FourCornersSetter;
+import org.loboevolution.html.style.setter.*;
 import org.loboevolution.net.NameValuePair;
 
 import java.util.ArrayList;
@@ -45,7 +42,7 @@ import java.util.concurrent.atomic.AtomicReference;
 /**
  * <p>CSSStyleRuleImpl class.</p>
  */
-public class CSSStyleRuleImpl extends AbstractCSSStyleRule implements CSSStyleRule {
+public class CSSStyleRuleImpl extends AbstractCSSStyleRule implements CSSProperties, CSSStyleRule {
 
     private final AbstractCSSRuleImpl abstractCSSRule;
 
@@ -97,20 +94,22 @@ public class CSSStyleRuleImpl extends AbstractCSSStyleRule implements CSSStyleRu
 
             list.forEach(p -> {
                 switch (p.getName()) {
-                    case CSSProperties.MARGIN:
-                    case CSSProperties.BORDER_COLOR:
-                    case CSSProperties.BORDER_WIDTH:
-                    case CSSProperties.PADDING:
+                    case MARGIN:
+                    case BORDER_COLOR:
+                    case BORDER_WIDTH:
+                    case PADDING:
                         new FourCornersSetter(p.getName(), p.getName() + "-", "").changeValue(atomicReference.get(), p.getValue());
                         break;
-                    case CSSProperties.BORDER_STYLE:
+                    case BORDER_STYLE:
                         new BorderStyleSetter(p.getName(), p.getName() + "-", "-style").changeValue(atomicReference.get(), p.getValue());
                         break;
-                    case CSSProperties.BORDER:
+                    case BORDER:
                         new BorderSetter2(p.getName()).changeValue(atomicReference.get(), p.getValue());
                         break;
-                    case CSSProperties.BACKGROUND:
+                    case BACKGROUND:
                         new BackgroundSetter().changeValue(atomicReference.get(), p.getValue());
+                    case FONT:
+                        new FontSetter().changeValue(atomicReference.get(), p.getValue());
                     default:
                         break;
                 }

@@ -30,8 +30,10 @@ import org.loboevolution.common.Strings;
 import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.js.css.CSSStyleDeclarationImpl;
 import org.loboevolution.css.CSSStyleDeclaration;
-import org.loboevolution.html.style.FontValues;
+import org.loboevolution.html.parser.FontParser;
 import org.loboevolution.html.style.HtmlValues;
+
+import java.util.Arrays;
 
 /**
  * <p>FontSetter class.</p>
@@ -44,98 +46,55 @@ public class FontSetter implements SubPropertySetter {
     @Override
     public void changeValue(final CSSStyleDeclaration declaration, final String newValue) {
         final CSSStyleDeclarationImpl properties = (CSSStyleDeclarationImpl) declaration;
+        setDefaultFontValues(properties);
         if (Strings.isNotBlank(newValue)) {
-            final String fontSpecTL = newValue.toLowerCase();
-            final String[] tokens = fontSpecTL.split(" ");
-            String token;
-            boolean isSlash = false;
-            final int length = tokens.length;
-            int i;
+            FontParser fontParser = new FontParser();
+            String[] tokens = fontParser.fontParser(newValue);
+            if (tokens != null) {
+                properties.setProperty(FONT_FAMILY, tokens[FontParser.FONT_FAMILY_INDEX]);
+                properties.setProperty(FONT_SIZE, tokens[FontParser.FONT_SIZE_INDEX]);
 
-            if (length > 0) {
-                properties.setProperty(FONT, newValue);
-                setDefaultFontValus(properties);
-            }
-
-            for (i = 0; i < length; i++) {
-                token = tokens[i].trim().replace(",", "");
-
-                if (Strings.isBlank(token)) {
-                    continue;
+                if (tokens[FontParser.FONT_STYLE_INDEX] != null) {
+                    properties.setProperty(FONT_STYLE, tokens[FontParser.FONT_STYLE_INDEX]);
                 }
 
-                if (FontValues.isFontStyle(token)) {
-                    properties.setProperty(FONT_STYLE, token);
-                    continue;
+                if (tokens[FontParser.FONT_VARIANT_INDEX] != null) {
+                    properties.setProperty(FONT_VARIANT, tokens[FontParser.FONT_VARIANT_INDEX]);
                 }
 
-                if (FontValues.isFontVariant(token)) {
-                    properties.setProperty(FONT_VARIANT, token);
-                    continue;
+                if (tokens[FontParser.LINE_HEIGHT_INDEX] != null) {
+                    properties.setProperty(LINE_HEIGHT, tokens[FontParser.LINE_HEIGHT_INDEX]);
                 }
 
-                if (FontValues.isFontWeight(token)) {
-                    properties.setProperty(FONT_WEIGHT, token);
-                    continue;
+                if (tokens[FontParser.FONT_WEIGHT_INDEX] != null) {
+                    properties.setProperty(FONT_WEIGHT, tokens[FontParser.FONT_WEIGHT_INDEX]);
                 }
 
-                if ("/".equals(token)) {
-                    isSlash = true;
-                    continue;
+                if (tokens[FontParser.FONT_STRETCH_INDEX] != null) {
+                    properties.setProperty(FONT_STRETCH, tokens[FontParser.FONT_STRETCH_INDEX]);
                 }
 
-                if ((token.contains("/") || isSlash) && properties.getPropertyValue(FONT_SIZE) != null) {
-                    final int slashIdx = token.indexOf('/');
-                    final String lineHeightText = slashIdx == -1 ? null : token.substring(slashIdx + 1);
-
-
-                    if(lineHeightText == null) {
-                        properties.setProperty(LINE_HEIGHT, token);
-                    } else{
-                        properties.setProperty(LINE_HEIGHT, lineHeightText);
-                    }
-
-                    isSlash = false;
-                    continue;
-                }
-
-                if (token.contains("/") && properties.getPropertyValue(FONT_SIZE) == null) {
-
-                    final int slashIdx = token.indexOf('/');
-                    final String fontSizeText = slashIdx == -1 ? token : token.substring(0, slashIdx);
-                    final String lineHeightText = slashIdx == -1 ? null : token.substring(slashIdx + 1);
-
-                    if (HtmlValues.isUnits(fontSizeText)) {
-                        properties.setProperty(FONT_SIZE, fontSizeText);
-                    }
-
-                  if (lineHeightText != null && HtmlValues.isUnits(lineHeightText)) {
-                        properties.setProperty(LINE_HEIGHT, lineHeightText);
-                    } else {
-                        isSlash = true;
-                    }
-
-                    continue;
-                }
-
-                if (HtmlValues.isUnits(token)) {
-                    properties.setProperty(FONT_SIZE, token);
-                    continue;
-                }
-
-                final String fontFamily = properties.getPropertyValue(FONT_FAMILY);
-                if(Strings.isCssBlank(fontFamily)) {
-                    properties.setProperty(FONT_FAMILY, token.trim());
-                } else {
-                    properties.setProperty(FONT_FAMILY, fontFamily + ", " + token.trim());
-                }
-                continue;
+            } else {
+                setNullFontValues(properties);
             }
         }
     }
 
-    private void setDefaultFontValus(final CSSStyleDeclarationImpl properties) {
+    private void setDefaultFontValues(final CSSStyleDeclarationImpl properties) {
         properties.setProperty(FONT_STYLE, CSSValues.NORMAL.getValue());
         properties.setProperty(FONT_VARIANT, CSSValues.NORMAL.getValue());
+        properties.setProperty(FONT_STRETCH, CSSValues.NORMAL.getValue());
+        properties.setProperty(LINE_HEIGHT, CSSValues.NORMAL.getValue());
+        properties.setProperty(FONT_WEIGHT, CSSValues.NORMAL.getValue());
+        properties.setProperty(FONT_SIZE, CSSValues.NORMAL.getValue());
+    }
+
+    private void setNullFontValues(final CSSStyleDeclarationImpl properties) {
+        properties.setProperty(FONT_STYLE, null);
+        properties.setProperty(FONT_VARIANT, null);
+        properties.setProperty(FONT_STRETCH, null);
+        properties.setProperty(LINE_HEIGHT, null);
+        properties.setProperty(FONT_WEIGHT, null);
+        properties.setProperty(FONT_SIZE, null);
     }
 }

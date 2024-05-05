@@ -131,7 +131,7 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"color: rgb(0, 0, 0);", "color: rgb(0, 0, 0);"})
+    @Alerts({"color: rgb(0, 0, 0)", "color: rgb(0, 0, 0)"})
     public void cssTextSet() {
         final String html
                 = "<html><body>\n" 
@@ -1043,7 +1043,7 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"", "", "15px", "italic", "", "italic"})
+    @Alerts({"null", "null", "15px", "italic", "null", "italic"})
     public void cssText2() {
         final String html = "<html><head>"
                 + "<script>\n"

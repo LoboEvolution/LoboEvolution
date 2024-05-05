@@ -207,10 +207,15 @@ public class HtmlValues {
 			case "em":
 				final FontFactory FONT_FACTORY = FontFactory.getInstance();
 				final WindowImpl win = (WindowImpl) window;
+				if (win == null || win.getConfig() == null) {
+					return (int) Math.round(16.0f * Double.parseDouble(text));
+				}
+
 				final Font DEFAULT_FONT = FONT_FACTORY.getFont(FontValues.getDefaultFontKey(win.getConfig()));
 				final Font f = (renderState == null) ? DEFAULT_FONT : renderState.getFont();
 				final int fontSize = f.getSize();
 				return (int) Math.round(fontSize * Double.parseDouble(text));
+
 			case "rem":
 				final WindowImpl win2 = (WindowImpl) window;
 				final float fs = win2.getConfig() != null ? win2.getConfig().getFontSize() : 16.0f;
