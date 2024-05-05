@@ -46,9 +46,10 @@ public class NativeArray extends IdScriptableObject implements List {
     private static final Object ARRAY_TAG = "Array";
     private static final Long NEGATIVE_ONE = Long.valueOf(-1);
 
-    static void init(Scriptable scope, boolean sealed) {
+    static void init(Context cx, Scriptable scope, boolean sealed) {
         NativeArray obj = new NativeArray(0);
-        obj.exportAsJSClass(MAX_PROTOTYPE_ID, scope, sealed);
+        IdFunctionObject constructor = obj.exportAsJSClass(MAX_PROTOTYPE_ID, scope, sealed);
+        ScriptRuntimeES6.addSymbolSpecies(cx, scope, constructor);
     }
 
     static int getMaximumInitialCapacity() {
@@ -159,11 +160,6 @@ public class NativeArray extends IdScriptableObject implements List {
 
     @Override
     protected void initPrototypeId(int id) {
-        if (id == SymbolId_iterator) {
-            initPrototypeMethod(ARRAY_TAG, id, SymbolKey.ITERATOR, "[Symbol.iterator]", 0);
-            return;
-        }
-
         String s, fnName = null;
         int arity;
         switch (id) {
@@ -290,6 +286,18 @@ public class NativeArray extends IdScriptableObject implements List {
             case Id_copyWithin:
                 arity = 2;
                 s = "copyWithin";
+                break;
+            case Id_at:
+                arity = 1;
+                s = "at";
+                break;
+            case Id_flat:
+                arity = 0;
+                s = "flat";
+                break;
+            case Id_flatMap:
+                arity = 1;
+                s = "flatMap";
                 break;
             default:
                 throw new IllegalArgumentException(String.valueOf(id));
@@ -427,6 +435,15 @@ public class NativeArray extends IdScriptableObject implements List {
                 case Id_copyWithin:
                     return js_copyWithin(cx, scope, thisObj, args);
 
+                case Id_at:
+                    return js_at(cx, scope, thisObj, args);
+
+                case Id_flat:
+                    return js_flat(cx, scope, thisObj, args);
+
+                case Id_flatMap:
+                    return js_flatMap(cx, scope, thisObj, args);
+
                 case Id_every:
                 case Id_filter:
                 case Id_forEach:
@@ -450,13 +467,20 @@ public class NativeArray extends IdScriptableObject implements List {
                             scope, thisObj, NativeArrayIterator.ARRAY_ITERATOR_TYPE.ENTRIES);
 
                 case Id_values:
-                case SymbolId_iterator:
                     thisObj = ScriptRuntime.toObject(cx, scope, thisObj);
                     return new NativeArrayIterator(
                             scope, thisObj, NativeArrayIterator.ARRAY_ITERATOR_TYPE.VALUES);
             }
             throw new IllegalArgumentException(
                     "Array.prototype has no method: " + f.getFunctionName());
+        }
+    }
+
+    @Override
+    public void setPrototype(Scriptable p) {
+        super.setPrototype(p);
+        if (!(p instanceof NativeArray)) {
+            setDenseOnly(false);
         }
     }
 
@@ -472,6 +496,42 @@ public class NativeArray extends IdScriptableObject implements List {
         if (!denseOnly && isGetterOrSetter(null, index, false)) return super.has(index, start);
         if (dense != null && 0 <= index && index < dense.length) return dense[index] != NOT_FOUND;
         return super.has(index, start);
+    }
+
+    @Override
+    public boolean has(Symbol key, Scriptable start) {
+        if (SymbolKey.ITERATOR.equals(key)) {
+            return super.has("values", start);
+        }
+
+        return super.has(key, start);
+    }
+
+    @Override
+    public Object get(Symbol key, Scriptable start) {
+        if (SymbolKey.ITERATOR.equals(key)) {
+            return super.get("values", start);
+        }
+
+        return super.get(key, start);
+    }
+
+    @Override
+    public void put(Symbol key, Scriptable start, Object value) {
+        if (SymbolKey.ITERATOR.equals(key)) {
+            super.put("values", start, value);
+        }
+
+        super.put(key, start, value);
+    }
+
+    @Override
+    public void delete(Symbol key) {
+        if (SymbolKey.ITERATOR.equals(key)) {
+            super.delete("values");
+        }
+
+        super.delete(key);
     }
 
     private static long toArrayIndex(Object id) {
@@ -827,8 +887,16 @@ public class NativeArray extends IdScriptableObject implements List {
         final Scriptable result =
                 callConstructorOrCreateArray(cx, scope, thisObj, args.length, true);
 
-        for (int i = 0; i < args.length; i++) {
-            defineElem(cx, result, i, args[i]);
+        if (cx.getLanguageVersion() >= Context.VERSION_ES6 && result instanceof ScriptableObject) {
+            ScriptableObject desc = ScriptableObject.buildDataDescriptor(result, null, EMPTY);
+            for (int i = 0; i < args.length; i++) {
+                desc.put("value", desc, args[i]);
+                ((ScriptableObject) result).defineOwnProperty(cx, i, desc);
+            }
+        } else {
+            for (int i = 0; i < args.length; i++) {
+                defineElem(cx, result, i, args[i]);
+            }
         }
         setLengthProperty(cx, result, args.length);
 
@@ -1000,6 +1068,14 @@ public class NativeArray extends IdScriptableObject implements List {
         }
     }
 
+    private static void defineElemOrThrow(Context cx, Scriptable target, long index, Object value) {
+        if (index > NativeNumber.MAX_SAFE_INTEGER) {
+            throw ScriptRuntime.typeErrorById("msg.arraylength.too.big", String.valueOf(index));
+        } else {
+            defineElem(cx, target, index, value);
+        }
+    }
+
     private static void setElem(Context cx, Scriptable target, long index, Object value) {
         if (index > Integer.MAX_VALUE) {
             String id = Long.toString(index);
@@ -1109,6 +1185,27 @@ public class NativeArray extends IdScriptableObject implements List {
             else result.append(']');
         }
         return result.toString();
+    }
+
+    private static Function getCallbackArg(Context cx, Object callbackArg) {
+        if (!(callbackArg instanceof Function)) {
+            throw ScriptRuntime.notFunctionError(callbackArg);
+        }
+        if (cx.getLanguageVersion() >= Context.VERSION_ES6
+                && (callbackArg instanceof NativeRegExp)) {
+            // Previously, it was allowed to pass RegExp instance as a callback (it implements
+            // Function)
+            // But according to ES2015 21.2.6 Properties of RegExp Instances:
+            // > RegExp instances are ordinary objects that inherit properties from the RegExp
+            // prototype object.
+            // > RegExp instances have internal slots [[RegExpMatcher]], [[OriginalSource]], and
+            // [[OriginalFlags]].
+            // so, no [[Call]] for RegExp-s
+            throw ScriptRuntime.notFunctionError(callbackArg);
+        }
+
+        Function f = (Function) callbackArg;
+        return f;
     }
 
     /** See ECMA 15.4.4.3 */
@@ -1585,6 +1682,10 @@ public class NativeArray extends IdScriptableObject implements List {
         long srclen = getLengthProperty(cx, arg);
         long newlen = srclen + offset;
 
+        if (newlen > NativeNumber.MAX_SAFE_INTEGER) {
+            throw ScriptRuntime.typeErrorById("msg.arraylength.too.big", newlen);
+        }
+
         // First, optimize for a pair of native, dense arrays
         if ((newlen <= Integer.MAX_VALUE) && (result instanceof NativeArray)) {
             final NativeArray denseResult = (NativeArray) result;
@@ -1959,6 +2060,100 @@ public class NativeArray extends IdScriptableObject implements List {
         return thisObj;
     }
 
+    private static Object js_at(Context cx, Scriptable scope, Scriptable thisObj, Object[] args) {
+        Scriptable o = ScriptRuntime.toObject(cx, scope, thisObj);
+        long len = getLengthProperty(cx, o);
+
+        long relativeIndex = 0;
+        if (args.length >= 1) {
+            relativeIndex = (long) ScriptRuntime.toInteger(args[0]);
+        }
+        long k = (relativeIndex >= 0) ? relativeIndex : len + relativeIndex;
+        if ((k < 0) || (k >= len)) {
+            return Undefined.instance;
+        }
+        return getElem(cx, thisObj, k);
+    }
+
+    private static Object js_flat(Context cx, Scriptable scope, Scriptable thisObj, Object[] args) {
+        Scriptable o = ScriptRuntime.toObject(cx, scope, thisObj);
+        double depth;
+        if (args.length < 1 || Undefined.isUndefined(args[0])) {
+            depth = 1;
+        } else {
+            depth = ScriptRuntime.toInteger(args[0]);
+        }
+
+        return flat(cx, scope, o, depth);
+    }
+
+    private static Scriptable flat(Context cx, Scriptable scope, Scriptable source, double depth) {
+        long length = getLengthProperty(cx, source);
+
+        Scriptable result;
+        result = cx.newArray(scope, 0);
+        long j = 0;
+        for (long i = 0; i < length; i++) {
+            Object elem = getRawElem(source, i);
+            if (elem == Scriptable.NOT_FOUND) {
+                continue;
+            }
+            if (depth >= 1 && js_isArray(elem)) {
+                Scriptable arr = flat(cx, scope, (Scriptable) elem, depth - 1);
+                long arrLength = getLengthProperty(cx, arr);
+                for (long k = 0; k < arrLength; k++) {
+                    Object temp = getRawElem(arr, k);
+                    defineElemOrThrow(cx, result, j++, temp);
+                }
+            } else {
+                defineElemOrThrow(cx, result, j++, elem);
+            }
+        }
+        setLengthProperty(cx, result, j);
+        return result;
+    }
+
+    private static Object js_flatMap(
+            Context cx, Scriptable scope, Scriptable thisObj, Object[] args) {
+        Scriptable o = ScriptRuntime.toObject(cx, scope, thisObj);
+        Object callbackArg = args.length > 0 ? args[0] : Undefined.instance;
+
+        Function f = getCallbackArg(cx, callbackArg);
+        Scriptable parent = ScriptableObject.getTopLevelScope(f);
+        Scriptable thisArg;
+        if (args.length < 2 || args[1] == null || args[1] == Undefined.instance) {
+            thisArg = parent;
+        } else {
+            thisArg = ScriptRuntime.toObject(cx, scope, args[1]);
+        }
+
+        long length = getLengthProperty(cx, o);
+
+        Scriptable result;
+        result = cx.newArray(scope, 0);
+        long j = 0;
+        for (long i = 0; i < length; i++) {
+            Object elem = getRawElem(o, i);
+            if (elem == Scriptable.NOT_FOUND) {
+                continue;
+            }
+            Object[] innerArgs = new Object[] {elem, Long.valueOf(i), o};
+            Object mapCall = f.call(cx, parent, thisArg, innerArgs);
+            if (js_isArray(mapCall)) {
+                Scriptable arr = (Scriptable) mapCall;
+                long arrLength = getLengthProperty(cx, arr);
+                for (long k = 0; k < arrLength; k++) {
+                    Object temp = getRawElem(arr, k);
+                    defineElemOrThrow(cx, result, j++, temp);
+                }
+            } else {
+                defineElemOrThrow(cx, result, j++, mapCall);
+            }
+        }
+        setLengthProperty(cx, result, j);
+        return result;
+    }
+
     /** Implements the methods "every", "filter", "forEach", "map", and "some". */
     private static Object iterativeMethod(
             Context cx,
@@ -1984,23 +2179,8 @@ public class NativeArray extends IdScriptableObject implements List {
         }
 
         Object callbackArg = args.length > 0 ? args[0] : Undefined.instance;
-        if (callbackArg == null || !(callbackArg instanceof Function)) {
-            throw ScriptRuntime.notFunctionError(callbackArg);
-        }
-        if (cx.getLanguageVersion() >= Context.VERSION_ES6
-                && (callbackArg instanceof NativeRegExp)) {
-            // Previously, it was allowed to pass RegExp instance as a callback (it implements
-            // Function)
-            // But according to ES2015 21.2.6 Properties of RegExp Instances:
-            // > RegExp instances are ordinary objects that inherit properties from the RegExp
-            // prototype object.
-            // > RegExp instances have internal slots [[RegExpMatcher]], [[OriginalSource]], and
-            // [[OriginalFlags]].
-            // so, no [[Call]] for RegExp-s
-            throw ScriptRuntime.notFunctionError(callbackArg);
-        }
 
-        Function f = (Function) callbackArg;
+        Function f = getCallbackArg(cx, callbackArg);
         Scriptable parent = ScriptableObject.getTopLevelScope(f);
         Scriptable thisArg;
         if (args.length < 2 || args[1] == null || args[1] == Undefined.instance) {
@@ -2378,7 +2558,10 @@ public class NativeArray extends IdScriptableObject implements List {
     @Override
     protected int findPrototypeId(Symbol k) {
         if (SymbolKey.ITERATOR.equals(k)) {
-            return SymbolId_iterator;
+            // "Symbol.iterator" property of the prototype has the "same value"
+            // as the "values" property. We implement this by returning the
+            // ID of "values" when the iterator symbol is accessed.
+            return Id_values;
         }
         return 0;
     }
@@ -2538,6 +2721,15 @@ public class NativeArray extends IdScriptableObject implements List {
             case "copyWithin":
                 id = Id_copyWithin;
                 break;
+            case "at":
+                id = Id_at;
+                break;
+            case "flat":
+                id = Id_flat;
+                break;
+            case "flatMap":
+                id = Id_flatMap;
+                break;
             default:
                 id = 0;
                 break;
@@ -2576,8 +2768,10 @@ public class NativeArray extends IdScriptableObject implements List {
             Id_entries = 29,
             Id_includes = 30,
             Id_copyWithin = 31,
-            SymbolId_iterator = 32,
-            MAX_PROTOTYPE_ID = SymbolId_iterator;
+            Id_at = 32,
+            Id_flat = 33,
+            Id_flatMap = 34,
+            MAX_PROTOTYPE_ID = Id_flatMap;
     private static final int ConstructorId_join = -Id_join,
             ConstructorId_reverse = -Id_reverse,
             ConstructorId_sort = -Id_sort,

@@ -11,6 +11,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Optional;
 import java.util.RandomAccess;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ExternalArrayData;
@@ -46,11 +47,28 @@ public abstract class NativeTypedArrayView<T> extends NativeArrayBufferView
         length = len;
     }
 
-    // Array properties implementation
+    // Array properties implementation.
+    // Typed array objects are "Integer-indexed exotic objects" in the ECMAScript spec.
+    // Integer properties, and string properties that can be converted to integer indices,
+    // behave differently than in other types of JavaScript objects, in that they are
+    // silently ignored (and always valued as "undefined") when they are out of bounds.
 
     @Override
     public Object get(int index, Scriptable start) {
         return js_get(index);
+    }
+
+    @Override
+    public Object get(String name, Scriptable start) {
+        Optional<Double> num = ScriptRuntime.canonicalNumericIndexString(name);
+        if (num.isPresent()) {
+            // Now we had a valid number, so no matter what we try to return an array element
+            int ix = toIndex(num.get());
+            if (ix >= 0) {
+                return js_get(ix);
+            }
+        }
+        return super.get(name, start);
     }
 
     @Override
@@ -59,12 +77,46 @@ public abstract class NativeTypedArrayView<T> extends NativeArrayBufferView
     }
 
     @Override
+    public boolean has(String name, Scriptable start) {
+        Optional<Double> num = ScriptRuntime.canonicalNumericIndexString(name);
+        if (num.isPresent()) {
+            int ix = toIndex(num.get());
+            if (ix >= 0) {
+                return !checkIndex(ix);
+            }
+        }
+        return super.has(name, start);
+    }
+
+    @Override
     public void put(int index, Scriptable start, Object val) {
         js_set(index, val);
     }
 
     @Override
+    public void put(String name, Scriptable start, Object val) {
+        Optional<Double> num = ScriptRuntime.canonicalNumericIndexString(name);
+        if (num.isPresent()) {
+            int ix = toIndex(num.get());
+            if (ix >= 0) {
+                js_set(ix, val);
+            }
+        } else {
+            super.put(name, start, val);
+        }
+    }
+
+    @Override
     public void delete(int index) {}
+
+    @Override
+    public void delete(String name) {
+        Optional<Double> num = ScriptRuntime.canonicalNumericIndexString(name);
+        if (!num.isPresent()) {
+            // No delete for indexed elements, so only delete if "name" is not a number
+            super.delete(name);
+        }
+    }
 
     @Override
     public Object[] getIds() {
@@ -73,6 +125,18 @@ public abstract class NativeTypedArrayView<T> extends NativeArrayBufferView
             ret[i] = Integer.valueOf(i);
         }
         return ret;
+    }
+
+    /**
+     * To aid in parsing: Return a positive (or zero) integer if the double is a valid array index,
+     * and -1 if not.
+     */
+    private static int toIndex(double num) {
+        int ix = (int) num;
+        if (ix == num && ix >= 0) {
+            return ix;
+        }
+        return -1;
     }
 
     // Actual functions
@@ -254,6 +318,21 @@ public abstract class NativeTypedArrayView<T> extends NativeArrayBufferView
                 new Object[] {arrayBuffer, Integer.valueOf(byteOff), Integer.valueOf(len)});
     }
 
+    private Object js_at(Context cx, Scriptable scope, Scriptable thisObj, Object[] args) {
+        long relativeIndex = 0;
+        if (args.length >= 1) {
+            relativeIndex = (long) ScriptRuntime.toInteger(args[0]);
+        }
+
+        long k = (relativeIndex >= 0) ? relativeIndex : length + relativeIndex;
+
+        if ((k < 0) || (k >= length)) {
+            return Undefined.instance;
+        }
+
+        return getProperty(thisObj, (int) k);
+    }
+
     // Dispatcher
 
     @Override
@@ -323,6 +402,13 @@ public abstract class NativeTypedArrayView<T> extends NativeArrayBufferView
                 }
                 throw ScriptRuntime.constructError("Error", "invalid arguments");
 
+            case Id_at:
+                NativeTypedArrayView<T> atSelf = realThis(thisObj, f);
+                if (cx.getLanguageVersion() >= Context.VERSION_ES6 || args.length > 0) {
+                    return atSelf.js_at(cx, scope, thisObj, args);
+                }
+                throw ScriptRuntime.constructError("Error", "invalid arguments");
+
             case SymbolId_iterator:
                 return new NativeArrayIterator(scope, thisObj, ARRAY_ITERATOR_TYPE.VALUES);
         }
@@ -359,6 +445,10 @@ public abstract class NativeTypedArrayView<T> extends NativeArrayBufferView
                 arity = 2;
                 s = "subarray";
                 break;
+            case Id_at:
+                arity = 1;
+                s = "at";
+                break;
             default:
                 throw new IllegalArgumentException(String.valueOf(id));
         }
@@ -392,6 +482,9 @@ public abstract class NativeTypedArrayView<T> extends NativeArrayBufferView
             case "subarray":
                 id = Id_subarray;
                 break;
+            case "at":
+                id = Id_at;
+                break;
             default:
                 id = 0;
                 break;
@@ -405,7 +498,8 @@ public abstract class NativeTypedArrayView<T> extends NativeArrayBufferView
             Id_get = 3,
             Id_set = 4,
             Id_subarray = 5,
-            SymbolId_iterator = 6;
+            Id_at = 6,
+            SymbolId_iterator = 7;
 
     protected static final int MAX_PROTOTYPE_ID = SymbolId_iterator;
 

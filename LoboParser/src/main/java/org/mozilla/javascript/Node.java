@@ -8,7 +8,6 @@ package org.mozilla.javascript;
 
 import java.math.BigInteger;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.NoSuchElementException;
 import org.mozilla.javascript.ast.Comment;
 import org.mozilla.javascript.ast.FunctionNode;
@@ -17,7 +16,6 @@ import org.mozilla.javascript.ast.Name;
 import org.mozilla.javascript.ast.NumberLiteral;
 import org.mozilla.javascript.ast.Scope;
 import org.mozilla.javascript.ast.ScriptNode;
-import org.mozilla.javascript.ast.Symbol;
 
 /**
  * This class implements the root of the intermediate representation.
@@ -65,7 +63,8 @@ public class Node implements Iterable<Node> {
             SHORTHAND_PROPERTY_NAME = 26,
             ARROW_FUNCTION_PROP = 27,
             TEMPLATE_LITERAL_PROP = 28,
-            LAST_PROP = 28;
+            TRAILING_COMMA = 29,
+            LAST_PROP = 29;
 
     // values of ISNUMBER_PROP to specify
     // which of the children are Number types
@@ -431,6 +430,8 @@ public class Node implements Iterable<Node> {
                     return "expression_closure_prop";
                 case TEMPLATE_LITERAL_PROP:
                     return "template_literal";
+                case TRAILING_COMMA:
+                    return "trailing comma";
 
                 default:
                     Kit.codeBug();
@@ -1067,8 +1068,7 @@ public class Node implements Iterable<Node> {
                     sb.append(" [scope ");
                     appendPrintId(this, printIds, sb);
                     sb.append(": ");
-                    for (Map.Entry<String, Symbol> entry : ((Scope) this).getSymbolTable().entrySet()) {
-                        String s = entry.getKey();
+                    for (String s : ((Scope) this).getSymbolTable().keySet()) {
                         sb.append(s);
                         sb.append(" ");
                     }

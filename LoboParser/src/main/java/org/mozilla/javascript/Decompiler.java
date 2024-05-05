@@ -67,13 +67,20 @@ public class Decompiler {
         return sourceTop;
     }
 
-    int markFunctionStart(int functionType) {
+    int markFunctionStart(int functionType, boolean isGenerator) {
         int savedOffset = getCurrentOffset();
         if (functionType != FunctionNode.ARROW_FUNCTION) {
             addToken(Token.FUNCTION);
+            if (isGenerator) addToken(Token.MUL);
             append((char) functionType);
         }
         return savedOffset;
+    }
+
+    /** @deprecated use {@link #markFunctionStart(int, boolean)} instead */
+    @Deprecated
+    int markFunctionStart(int functionType) {
+        return markFunctionStart(functionType, false);
     }
 
     int markFunctionEnd(int functionStart) {
@@ -342,7 +349,10 @@ public class Decompiler {
 
                 case Token.FUNCTION:
                     ++i; // skip function type
-                    result.append("function ");
+                    if (source.charAt(i) == Token.MUL) {
+                        result.append("function* ");
+                        ++i;
+                    } else result.append("function ");
                     break;
 
                 case FUNCTION_END:
@@ -783,6 +793,10 @@ public class Decompiler {
                 case Token.TEMPLATE_CHARS:
                     i = printSourceString(source, i + 1, false, result);
                     continue;
+
+                case Token.DOTDOTDOT:
+                    result.append("...");
+                    break;
 
                 default:
                     // If we don't know how to decompile it, raise an exception.

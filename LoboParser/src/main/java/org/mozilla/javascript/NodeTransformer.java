@@ -8,14 +8,12 @@ package org.mozilla.javascript;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import lombok.extern.slf4j.Slf4j;
 import org.mozilla.javascript.ast.FunctionNode;
 import org.mozilla.javascript.ast.Jump;
 import org.mozilla.javascript.ast.Scope;
 import org.mozilla.javascript.ast.ScriptNode;
-import org.mozilla.javascript.ast.Symbol;
 
 /**
  * This class transforms a tree to a lower-level representation for codegen.
@@ -95,8 +93,7 @@ public class NodeTransformer {
                     Node let = new Node(type == Token.ARRAYCOMP ? Token.LETEXPR : Token.LET);
                     Node innerLet = new Node(Token.LET);
                     let.addChildToBack(innerLet);
-                    for (Map.Entry<String, Symbol> entry : newScope.getSymbolTable().entrySet()) {
-                        String name = entry.getKey();
+                    for (String name : newScope.getSymbolTable().keySet()) {
                         innerLet.addChildToBack(Node.newString(Token.NAME, name));
                     }
                     newScope.setSymbolTable(null); // so we don't transform again

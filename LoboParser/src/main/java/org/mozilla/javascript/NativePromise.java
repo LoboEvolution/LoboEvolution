@@ -48,19 +48,7 @@ public class NativePromise extends ScriptableObject {
         constructor.defineConstructorMethod(
                 scope, "race", 1, NativePromise::race, DONTENUM, DONTENUM | READONLY);
 
-        ScriptableObject speciesDescriptor = (ScriptableObject) cx.newObject(scope);
-        ScriptableObject.putProperty(speciesDescriptor, "enumerable", false);
-        ScriptableObject.putProperty(speciesDescriptor, "configurable", true);
-        ScriptableObject.putProperty(
-                speciesDescriptor,
-                "get",
-                new LambdaFunction(
-                        scope,
-                        "get [Symbol.species]",
-                        0,
-                        (Context lcx, Scriptable lscope, Scriptable thisObj, Object[] args) ->
-                                constructor));
-        constructor.defineOwnProperty(cx, SymbolKey.SPECIES, speciesDescriptor, false);
+        ScriptRuntimeES6.addSymbolSpecies(cx, scope, constructor);
 
         constructor.definePrototypeMethod(
                 scope,
@@ -318,13 +306,17 @@ public class NativePromise extends ScriptableObject {
             cx.enqueueMicrotask(() -> fulfillReaction.invoke(cx, scope, result));
         } else {
             assert (state == State.REJECTED);
-            if (!handled) {
-                cx.getUnhandledPromiseTracker().promiseHandled(this);
-            }
+            markHandled(cx);
             cx.enqueueMicrotask(() -> rejectReaction.invoke(cx, scope, result));
         }
-        handled = true;
         return capability.promise;
+    }
+
+    private void markHandled(Context cx) {
+        if (!handled) {
+            cx.getUnhandledPromiseTracker().promiseHandled(this);
+            handled = true;
+        }
     }
 
     // Promise.prototype.catch
@@ -457,6 +449,9 @@ public class NativePromise extends ScriptableObject {
         cx.getUnhandledPromiseTracker().promiseRejected(this);
         for (Reaction r : reactions) {
             cx.enqueueMicrotask(() -> r.invoke(cx, scope, reason));
+        }
+        if (!reactions.isEmpty()) {
+            markHandled(cx);
         }
         return Undefined.instance;
     }

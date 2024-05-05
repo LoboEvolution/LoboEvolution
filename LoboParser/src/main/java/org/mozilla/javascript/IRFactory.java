@@ -86,7 +86,7 @@ import org.mozilla.javascript.ast.Yield;
  * @author Norris Boyd
  */
 @Slf4j
-public final class IRFactory extends Parser {
+public final class IRFactory {
     private static final int LOOP_DO_WHILE = 0;
     private static final int LOOP_WHILE = 1;
     private static final int LOOP_FOR = 2;
@@ -94,18 +94,15 @@ public final class IRFactory extends Parser {
     private static final int ALWAYS_TRUE_BOOLEAN = 1;
     private static final int ALWAYS_FALSE_BOOLEAN = -1;
 
+    private Parser parser;
     private Decompiler decompiler = new Decompiler();
-
-    public IRFactory() {
-        super();
-    }
 
     public IRFactory(CompilerEnvirons env) {
         this(env, env.getErrorReporter());
     }
 
     public IRFactory(CompilerEnvirons env, ErrorReporter errorReporter) {
-        super(env, errorReporter);
+        parser = new Parser(env, errorReporter);
     }
 
     /**
@@ -113,8 +110,8 @@ public final class IRFactory extends Parser {
      * encoded source.
      */
     public ScriptNode transformTree(AstRoot root) {
-        currentScriptOrFn = root;
-        this.inUseStrictDirective = root.isInStrictMode();
+        parser.currentScriptOrFn = root;
+        parser.inUseStrictDirective = root.isInStrictMode();
         int sourceStartOffset = decompiler.getCurrentOffset();
 
         if (Token.printTrees) {
@@ -126,7 +123,7 @@ public final class IRFactory extends Parser {
         int sourceEndOffset = decompiler.getCurrentOffset();
         script.setEncodedSourceBounds(sourceStartOffset, sourceEndOffset);
 
-        if (compilerEnv.isGeneratingSource()) {
+        if (parser.compilerEnv.isGeneratingSource()) {
             script.setEncodedSource(decompiler.getEncodedSource());
         }
 
@@ -280,25 +277,25 @@ public final class IRFactory extends Parser {
         // }
 
         int lineno = node.getLineno();
-        Scope scopeNode = createScopeNode(Token.ARRAYCOMP, lineno);
-        String arrayName = currentScriptOrFn.getNextTempName();
-        pushScope(scopeNode);
+        Scope scopeNode = parser.createScopeNode(Token.ARRAYCOMP, lineno);
+        String arrayName = parser.currentScriptOrFn.getNextTempName();
+        parser.pushScope(scopeNode);
         try {
-            defineSymbol(Token.LET, arrayName, false);
+            parser.defineSymbol(Token.LET, arrayName, false);
             Node block = new Node(Token.BLOCK, lineno);
-            Node newArray = createCallOrNew(Token.NEW, createName("Array"));
+            Node newArray = createCallOrNew(Token.NEW, parser.createName("Array"));
             Node init =
                     new Node(
                             Token.EXPR_VOID,
-                            createAssignment(Token.ASSIGN, createName(arrayName), newArray),
+                            createAssignment(Token.ASSIGN, parser.createName(arrayName), newArray),
                             lineno);
             block.addChildToBack(init);
             block.addChildToBack(arrayCompTransformHelper(node, arrayName));
             scopeNode.addChildToBack(block);
-            scopeNode.addChildToBack(createName(arrayName));
+            scopeNode.addChildToBack(parser.createName(arrayName));
             return scopeNode;
         } finally {
-            popScope();
+            parser.popScope();
         }
     }
 
@@ -331,18 +328,18 @@ public final class IRFactory extends Parser {
             } else {
                 // destructuring assignment
                 decompile(iter);
-                name = currentScriptOrFn.getNextTempName();
-                defineSymbol(Token.LP, name, false);
+                name = parser.currentScriptOrFn.getNextTempName();
+                parser.defineSymbol(Token.LP, name, false);
                 expr =
                         createBinary(
                                 Token.COMMA,
-                                createAssignment(Token.ASSIGN, iter, createName(name)),
+                                createAssignment(Token.ASSIGN, iter, parser.createName(name)),
                                 expr);
             }
-            Node init = createName(name);
+            Node init = parser.createName(name);
             // Define as a let since we want the scope of the variable to
             // be restricted to the array comprehension
-            defineSymbol(Token.LET, name, false);
+            parser.defineSymbol(Token.LET, name, false);
             iterators[i] = init;
 
             if (acl.isForOf()) {
@@ -357,7 +354,8 @@ public final class IRFactory extends Parser {
         // generate code for tmpArray.push(body)
         Node call =
                 createCallOrNew(
-                        Token.CALL, createPropertyGet(createName(arrayName), null, "push", 0));
+                        Token.CALL,
+                        createPropertyGet(parser.createName(arrayName), null, "push", 0));
 
         Node body = new Node(Token.EXPR_VOID, call, lineno);
 
@@ -378,7 +376,7 @@ public final class IRFactory extends Parser {
                         createLoopNode(
                                 null, // no label
                                 acl.getLineno());
-                pushScope(loop);
+                parser.pushScope(loop);
                 pushed++;
                 body =
                         createForIn(
@@ -392,7 +390,7 @@ public final class IRFactory extends Parser {
             }
         } finally {
             for (int i = 0; i < pushed; i++) {
-                popScope();
+                parser.popScope();
             }
         }
 
@@ -436,7 +434,7 @@ public final class IRFactory extends Parser {
 
     private Node transformAssignment(Assignment node) {
         AstNode right = node.getRight();
-        AstNode left = removeParens(node.getLeft());
+        AstNode left = parser.removeParens(node.getLeft());
         left = transformAssignmentLeft(node, left, right);
 
         Node target = null;
@@ -483,7 +481,7 @@ public final class IRFactory extends Parser {
 
     private Node transformBlock(AstNode node) {
         if (node instanceof Scope) {
-            pushScope((Scope) node);
+            parser.pushScope((Scope) node);
         }
         try {
             List<Node> kids = new ArrayList<>();
@@ -497,7 +495,7 @@ public final class IRFactory extends Parser {
             return node;
         } finally {
             if (node instanceof Scope) {
-                popScope();
+                parser.popScope();
             }
         }
     }
@@ -531,7 +529,7 @@ public final class IRFactory extends Parser {
 
     private Node transformDoLoop(DoLoop loop) {
         loop.setType(Token.LOOP);
-        pushScope(loop);
+        parser.pushScope(loop);
         try {
             decompiler.addToken(Token.DO);
             decompiler.addEOL(Token.LC);
@@ -544,7 +542,7 @@ public final class IRFactory extends Parser {
             decompiler.addEOL(Token.SEMI);
             return createLoop(loop, LOOP_DO_WHILE, body, cond, null, null);
         } finally {
-            popScope();
+            parser.popScope();
         }
     }
 
@@ -570,7 +568,7 @@ public final class IRFactory extends Parser {
         decompiler.addToken(Token.LP);
 
         loop.setType(Token.LOOP);
-        pushScope(loop);
+        parser.pushScope(loop);
         try {
             int declType = -1;
             AstNode iter = loop.getIterator();
@@ -590,7 +588,7 @@ public final class IRFactory extends Parser {
             decompiler.addEOL(Token.RC);
             return createForIn(declType, loop, lhs, obj, body, loop.isForEach(), loop.isForOf());
         } finally {
-            popScope();
+            parser.popScope();
         }
     }
 
@@ -600,8 +598,8 @@ public final class IRFactory extends Parser {
         loop.setType(Token.LOOP);
         // XXX: Can't use pushScope/popScope here since 'createFor' may split
         // the scope
-        Scope savedScope = currentScope;
-        currentScope = loop;
+        Scope savedScope = parser.currentScope;
+        parser.currentScope = loop;
         try {
             Node init = transform(loop.getInitializer());
             decompiler.addToken(Token.SEMI);
@@ -614,17 +612,17 @@ public final class IRFactory extends Parser {
             decompiler.addEOL(Token.RC);
             return createFor(loop, init, test, incr, body);
         } finally {
-            currentScope = savedScope;
+            parser.currentScope = savedScope;
         }
     }
 
     private Node transformFunction(FunctionNode fn) {
         int functionType = fn.getFunctionType();
-        int start = decompiler.markFunctionStart(functionType);
+        int start = decompiler.markFunctionStart(functionType, fn.isES6Generator());
         Node mexpr = decompileFunctionHeader(fn);
-        int index = currentScriptOrFn.addFunction(fn);
+        int index = parser.currentScriptOrFn.addFunction(fn);
 
-        PerFunctionVariables savedVars = new PerFunctionVariables(fn);
+        Parser.PerFunctionVariables savedVars = parser.createPerFunctionVariables(fn);
         try {
             // If we start needing to record much more codegen metadata during
             // function parsing, we should lump it all into a helper class.
@@ -632,7 +630,7 @@ public final class IRFactory extends Parser {
             fn.removeProp(Node.DESTRUCTURING_PARAMS);
 
             int lineno = fn.getBody().getLineno();
-            ++nestingOfFunction; // only for body, not params
+            ++parser.nestingOfFunction; // only for body, not params
             Node body = transform(fn.getBody());
 
             if (!fn.isExpressionClosure()) {
@@ -661,7 +659,7 @@ public final class IRFactory extends Parser {
             return pn;
 
         } finally {
-            --nestingOfFunction;
+            --parser.nestingOfFunction;
             savedVars.restore();
         }
     }
@@ -686,17 +684,17 @@ public final class IRFactory extends Parser {
         Node pn;
 
         FunctionNode fn = new FunctionNode();
-        fn.setSourceName(currentScriptOrFn.getNextTempName());
+        fn.setSourceName(parser.currentScriptOrFn.getNextTempName());
         fn.setIsGenerator();
         fn.setFunctionType(FunctionNode.FUNCTION_EXPRESSION);
         fn.setRequiresActivation();
 
         int functionType = fn.getFunctionType();
-        int start = decompiler.markFunctionStart(functionType);
+        int start = decompiler.markFunctionStart(functionType, false);
         Node mexpr = decompileFunctionHeader(fn);
-        int index = currentScriptOrFn.addFunction(fn);
+        int index = parser.currentScriptOrFn.addFunction(fn);
 
-        PerFunctionVariables savedVars = new PerFunctionVariables(fn);
+        Parser.PerFunctionVariables savedVars = parser.createPerFunctionVariables(fn);
         try {
             // If we start needing to record much more codegen metadata during
             // function parsing, we should lump it all into a helper class.
@@ -704,7 +702,7 @@ public final class IRFactory extends Parser {
             fn.removeProp(Node.DESTRUCTURING_PARAMS);
 
             int lineno = node.lineno;
-            ++nestingOfFunction; // only for body, not params
+            ++parser.nestingOfFunction; // only for body, not params
             Node body = genExprTransformHelper(node);
 
             if (!fn.isExpressionClosure()) {
@@ -731,7 +729,7 @@ public final class IRFactory extends Parser {
                 }
             }
         } finally {
-            --nestingOfFunction;
+            --parser.nestingOfFunction;
             savedVars.restore();
         }
 
@@ -768,18 +766,18 @@ public final class IRFactory extends Parser {
             } else {
                 // destructuring assignment
                 decompile(iter);
-                name = currentScriptOrFn.getNextTempName();
-                defineSymbol(Token.LP, name, false);
+                name = parser.currentScriptOrFn.getNextTempName();
+                parser.defineSymbol(Token.LP, name, false);
                 expr =
                         createBinary(
                                 Token.COMMA,
-                                createAssignment(Token.ASSIGN, iter, createName(name)),
+                                createAssignment(Token.ASSIGN, iter, parser.createName(name)),
                                 expr);
             }
-            Node init = createName(name);
+            Node init = parser.createName(name);
             // Define as a let since we want the scope of the variable to
             // be restricted to the array comprehension
-            defineSymbol(Token.LET, name, false);
+            parser.defineSymbol(Token.LET, name, false);
             iterators[i] = init;
 
             if (acl.isForOf()) {
@@ -813,7 +811,7 @@ public final class IRFactory extends Parser {
                         createLoopNode(
                                 null, // no label
                                 acl.getLineno());
-                pushScope(loop);
+                parser.pushScope(loop);
                 pushed++;
                 body =
                         createForIn(
@@ -827,7 +825,7 @@ public final class IRFactory extends Parser {
             }
         } finally {
             for (int i = 0; i < pushed; i++) {
-                popScope();
+                parser.popScope();
             }
         }
 
@@ -897,7 +895,7 @@ public final class IRFactory extends Parser {
     }
 
     private Node transformLetNode(LetNode node) {
-        pushScope(node);
+        parser.pushScope(node);
         try {
             decompiler.addToken(Token.LET);
             decompiler.addToken(Token.LP);
@@ -918,7 +916,7 @@ public final class IRFactory extends Parser {
             }
             return node;
         } finally {
-            popScope();
+            parser.popScope();
         }
     }
 
@@ -1096,14 +1094,14 @@ public final class IRFactory extends Parser {
                 decompiler.addTemplateLiteral(chars.getRawValue());
             }
         }
-        currentScriptOrFn.addTemplateLiteral(templateLiteral);
+        parser.currentScriptOrFn.addTemplateLiteral(templateLiteral);
         decompiler.addToken(Token.TEMPLATE_LITERAL);
         return call;
     }
 
     private Node transformRegExp(RegExpLiteral node) {
         decompiler.addRegexp(node.getValue(), node.getFlags());
-        currentScriptOrFn.addRegExp(node);
+        parser.currentScriptOrFn.addRegExp(node);
         return node;
     }
 
@@ -1127,8 +1125,8 @@ public final class IRFactory extends Parser {
 
     private Node transformScript(ScriptNode node) {
         decompiler.addToken(Token.SCRIPT);
-        if (currentScope != null) Kit.codeBug();
-        currentScope = node;
+        if (parser.currentScope != null) Kit.codeBug();
+        parser.currentScope = node;
         Node body = new Node(Token.BLOCK);
         for (Node kid : node) {
             body.addChildToBack(transform((AstNode) kid));
@@ -1246,7 +1244,7 @@ public final class IRFactory extends Parser {
                 decompiler.addToken(Token.LP);
                 decompiler.addName(varName.getIdentifier());
 
-                varNameNode = createName(varName.getIdentifier());
+                varNameNode = parser.createName(varName.getIdentifier());
 
                 AstNode ccc = cc.getCatchCondition();
                 if (ccc != null) {
@@ -1337,7 +1335,7 @@ public final class IRFactory extends Parser {
                 if (right == null) { // TODO:  should this ever happen?
                     node.addChildToBack(left);
                 } else {
-                    Node d = createDestructuringAssignment(node.getType(), left, right);
+                    Node d = parser.createDestructuringAssignment(node.getType(), left, right);
                     node.addChildToBack(d);
                 }
             } else {
@@ -1356,7 +1354,7 @@ public final class IRFactory extends Parser {
     private Node transformWhileLoop(WhileLoop loop) {
         decompiler.addToken(Token.WHILE);
         loop.setType(Token.LOOP);
-        pushScope(loop);
+        parser.pushScope(loop);
         try {
             decompiler.addToken(Token.LP);
             Node cond = transform(loop.getCondition());
@@ -1366,7 +1364,7 @@ public final class IRFactory extends Parser {
             decompiler.addEOL(Token.RC);
             return createLoop(loop, LOOP_WHILE, body, cond, null, null);
         } finally {
-            popScope();
+            parser.popScope();
         }
     }
 
@@ -1397,7 +1395,7 @@ public final class IRFactory extends Parser {
 
         XmlString first = (XmlString) frags.get(0);
         boolean anon = first.getXml().trim().startsWith("<>");
-        pnXML.addChildToBack(createName(anon ? "XMLList" : "XML"));
+        pnXML.addChildToBack(parser.createName(anon ? "XMLList" : "XML"));
 
         Node pn = null;
         for (XmlFragment frag : frags) {
@@ -1598,7 +1596,7 @@ public final class IRFactory extends Parser {
      * createWhile|createDoWhile|createFor|createForIn to finish loop generation.
      */
     private Scope createLoopNode(Node loopLabel, int lineno) {
-        Scope result = createScopeNode(Token.LOOP, lineno);
+        Scope result = parser.createScopeNode(Token.LOOP, lineno);
         if (loopLabel != null) {
             ((Jump) loopLabel).setLoop(result);
         }
@@ -1694,7 +1692,7 @@ public final class IRFactory extends Parser {
             } else if (kidType == Token.NAME) {
                 lvalue = Node.newString(Token.NAME, kid.getString());
             } else {
-                reportError("msg.bad.for.in.lhs");
+                parser.reportError("msg.bad.for.in.lhs");
                 return null;
             }
         } else if (type == Token.ARRAYLIT || type == Token.OBJECTLIT) {
@@ -1706,7 +1704,7 @@ public final class IRFactory extends Parser {
         } else {
             lvalue = makeReference(lhs);
             if (lvalue == null) {
-                reportError("msg.bad.for.in.lhs");
+                parser.reportError("msg.bad.for.in.lhs");
                 return null;
             }
         }
@@ -1730,16 +1728,16 @@ public final class IRFactory extends Parser {
         Node newBody = new Node(Token.BLOCK);
         Node assign;
         if (destructuring != -1) {
-            assign = createDestructuringAssignment(declType, lvalue, id);
+            assign = parser.createDestructuringAssignment(declType, lvalue, id);
             if (!isForEach
                     && !isForOf
                     && (destructuring == Token.OBJECTLIT || destructuringLen != 2)) {
                 // destructuring assignment is only allowed in for..each or
                 // with an array type of length 2 (to hold key and value)
-                reportError("msg.bad.for.in.destruct");
+                parser.reportError("msg.bad.for.in.destruct");
             }
         } else {
-            assign = simpleAssignment(lvalue, id);
+            assign = parser.simpleAssignment(lvalue, id);
         }
         newBody.addChildToBack(new Node(Token.EXPR_VOID, assign));
         newBody.addChildToBack(body);
@@ -1929,7 +1927,7 @@ public final class IRFactory extends Parser {
     }
 
     private Node createWith(Node obj, Node body, int lineno) {
-        setRequiresActivation();
+        parser.setRequiresActivation();
         Node result = new Node(Token.BLOCK, lineno);
         result.addChildToBack(new Node(Token.ENTERWITH, obj));
         Node bodyNode = new Node(Token.WITH, body, lineno);
@@ -1946,6 +1944,7 @@ public final class IRFactory extends Parser {
             if (ifFalse != null) {
                 return ifFalse;
             }
+            // Replace if (false) xxx by empty block
             return new Node(Token.BLOCK, lineno);
         }
 
@@ -2067,7 +2066,7 @@ public final class IRFactory extends Parser {
         Node node = new Node(nodeType, child);
         if (type != Node.NON_SPECIALCALL) {
             // Calls to these functions require activation objects.
-            setRequiresActivation();
+            parser.setRequiresActivation();
             node.putIntProp(Node.SPECIALCALL_PROP, type);
         }
         return node;
@@ -2102,9 +2101,9 @@ public final class IRFactory extends Parser {
             Node target, String namespace, String name, int memberTypeFlags) {
         if (namespace == null && memberTypeFlags == 0) {
             if (target == null) {
-                return createName(name);
+                return parser.createName(name);
             }
-            checkActivationName(name, Token.GETPROP);
+            parser.checkActivationName(name, Token.GETPROP);
             if (ScriptRuntime.isSpecialProperty(name)) {
                 Node ref = new Node(Token.REF_SPECIAL, target);
                 ref.putProp(Node.NAME_PROP, name);
@@ -2142,7 +2141,7 @@ public final class IRFactory extends Parser {
             if (namespace.equals("*")) {
                 nsNode = new Node(Token.NULL);
             } else {
-                nsNode = createName(namespace);
+                nsNode = parser.createName(namespace);
             }
         }
         Node ref;
@@ -2300,12 +2299,12 @@ public final class IRFactory extends Parser {
         if (ref == null) {
             if (left.getType() == Token.ARRAYLIT || left.getType() == Token.OBJECTLIT) {
                 if (assignType != Token.ASSIGN) {
-                    reportError("msg.bad.destruct.op");
+                    parser.reportError("msg.bad.destruct.op");
                     return right;
                 }
-                return createDestructuringAssignment(-1, left, right);
+                return parser.createDestructuringAssignment(-1, left, right);
             }
-            reportError("msg.bad.assign.left");
+            parser.reportError("msg.bad.assign.left");
             return right;
         }
         left = ref;
@@ -2313,7 +2312,7 @@ public final class IRFactory extends Parser {
         int assignOp;
         switch (assignType) {
             case Token.ASSIGN:
-                return simpleAssignment(left, right);
+                return parser.simpleAssignment(left, right);
             case Token.ASSIGN_BITOR:
                 assignOp = Token.BITOR;
                 break;
@@ -2377,7 +2376,7 @@ public final class IRFactory extends Parser {
             case Token.GET_REF:
                 {
                     ref = left.getFirstChild();
-                    checkMutableReference(ref);
+                    parser.checkMutableReference(ref);
                     Node opLeft = new Node(Token.USE_STACK);
                     Node op = new Node(assignOp, opLeft, right);
                     return new Node(Token.SET_REF_OP, ref, op);
@@ -2454,11 +2453,15 @@ public final class IRFactory extends Parser {
             decompiler.addToken(Token.LP);
         }
         List<AstNode> params = fn.getParams();
-        for (int i = 0; i < params.size(); i++) {
-            decompile(params.get(i));
-            if (i < params.size() - 1) {
+        int last = params.size() - 1;
+        for (int i = 0; i <= last; i++) {
+            if (i > 0) {
                 decompiler.addToken(Token.COMMA);
             }
+            if (fn.hasRestParameter() && i == last) {
+                decompiler.addToken(Token.DOTDOTDOT);
+            }
+            decompile(params.get(i));
         }
         if (!noParen) {
             decompiler.addToken(Token.RP);

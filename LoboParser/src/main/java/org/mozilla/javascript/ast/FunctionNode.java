@@ -80,6 +80,7 @@ public class FunctionNode extends ScriptNode {
     private Form functionForm = Form.FUNCTION;
     private int lp = -1;
     private int rp = -1;
+    private boolean hasRestParameter;
 
     // codegen variables
     private int functionType;
@@ -284,6 +285,15 @@ public class FunctionNode extends ScriptNode {
         isGenerator = true;
     }
 
+    @Override
+    public boolean hasRestParameter() {
+        return hasRestParameter;
+    }
+
+    public void setHasRestParameter(boolean hasRestParameter) {
+        this.hasRestParameter = hasRestParameter;
+    }
+
     public void addResumptionPoint(Node target) {
         if (generatorResumePoints == null) generatorResumePoints = new ArrayList<>();
         generatorResumePoints.add(target);
@@ -391,6 +401,9 @@ public class FunctionNode extends ScriptNode {
         } else {
             sb.append("(");
             printList(params, sb);
+            if (getIntProp(TRAILING_COMMA, 0) == 1) {
+                sb.append(", ");
+            }
             sb.append(") ");
         }
         if (isArrow) {

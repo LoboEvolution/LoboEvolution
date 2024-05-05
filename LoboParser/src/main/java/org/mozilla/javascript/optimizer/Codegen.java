@@ -17,8 +17,6 @@ import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import lombok.extern.slf4j.Slf4j;
 import org.mozilla.classfile.ByteCode;
 import org.mozilla.classfile.ClassFileWriter;
 import org.mozilla.javascript.CompilerEnvirons;
@@ -46,7 +44,6 @@ import org.mozilla.javascript.ast.TemplateCharacters;
  * @author Norris Boyd
  * @author Roger Lawrence
  */
-@Slf4j
 public class Codegen implements Evaluator {
     @Override
     public void captureStackInfo(RhinoException ex) {
@@ -106,7 +103,7 @@ public class Codegen implements Evaluator {
 
         Script script;
         try {
-            script = (Script) cl.newInstance();
+            script = (Script) cl.getDeclaredConstructor().newInstance();
         } catch (Exception ex) {
             throw new RuntimeException("Unable to instantiate compiled class:" + ex.toString());
         }
@@ -163,7 +160,7 @@ public class Codegen implements Evaluator {
         transform(scriptOrFn);
 
         if (Token.printTrees) {
-            log.info(scriptOrFn.toStringTree(scriptOrFn));
+            System.out.println(scriptOrFn.toStringTree(scriptOrFn));
         }
 
         if (returnFunction) {
@@ -746,7 +743,8 @@ public class Codegen implements Evaluator {
         final int Do_getEncodedSource = 4;
         final int Do_getParamOrVarConst = 5;
         final int Do_isGeneratorFunction = 6;
-        final int SWITCH_COUNT = 7;
+        final int Do_hasRestParameter = 7;
+        final int SWITCH_COUNT = 8;
 
         for (int methodIndex = 0; methodIndex != SWITCH_COUNT; ++methodIndex) {
             if (methodIndex == Do_getEncodedSource && encodedSource == null) {
@@ -788,6 +786,10 @@ public class Codegen implements Evaluator {
                 case Do_isGeneratorFunction:
                     methodLocals = 1; // Only this
                     cfw.startMethod("isGeneratorFunction", "()Z", ACC_PROTECTED);
+                    break;
+                case Do_hasRestParameter:
+                    methodLocals = 1; // Only this
+                    cfw.startMethod("hasRestParameter", "()Z", ACC_PUBLIC);
                     break;
                 default:
                     throw Kit.codeBug();
@@ -833,7 +835,11 @@ public class Codegen implements Evaluator {
 
                     case Do_getParamCount:
                         // Push number of defined parameters
-                        cfw.addPush(n.getParamCount());
+                        if (n.hasRestParameter()) {
+                            cfw.addPush(n.getParamCount() - 1);
+                        } else {
+                            cfw.addPush(n.getParamCount());
+                        }
                         cfw.add(ByteCode.IRETURN);
                         break;
 
@@ -920,6 +926,12 @@ public class Codegen implements Evaluator {
                         } else {
                             cfw.addPush(false);
                         }
+                        cfw.add(ByteCode.IRETURN);
+                        break;
+
+                    case Do_hasRestParameter:
+                        // Push boolean of defined hasRestParameter
+                        cfw.addPush(n.hasRestParameter());
                         cfw.add(ByteCode.IRETURN);
                         break;
 

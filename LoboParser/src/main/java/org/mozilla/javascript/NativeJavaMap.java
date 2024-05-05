@@ -130,8 +130,7 @@ public class NativeJavaMap extends NativeJavaObject {
         Context cx = Context.getCurrentContext();
         if (cx != null && cx.hasFeature(Context.FEATURE_ENABLE_JAVA_MAP_ACCESS)) {
             List<Object> ids = new ArrayList<>(map.size());
-            for (Map.Entry<Object, Object> entry : map.entrySet()) {
-                Object key = entry.getKey();
+            for (Object key : map.keySet()) {
                 if (key instanceof Integer) {
                     ids.add(key);
                 } else {
@@ -141,6 +140,16 @@ public class NativeJavaMap extends NativeJavaObject {
             return ids.toArray();
         }
         return super.getIds();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 
     private static Callable symbol_iterator =

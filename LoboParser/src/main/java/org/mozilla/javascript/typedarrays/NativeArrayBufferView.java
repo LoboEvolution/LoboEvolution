@@ -9,6 +9,9 @@ package org.mozilla.javascript.typedarrays;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.IdScriptableObject;
 import org.mozilla.javascript.ScriptRuntime;
+import org.mozilla.javascript.Scriptable;
+import org.mozilla.javascript.Symbol;
+import org.mozilla.javascript.SymbolKey;
 import org.mozilla.javascript.Undefined;
 
 /**
@@ -127,6 +130,14 @@ public abstract class NativeArrayBufferView extends IdScriptableObject {
             return super.findInstanceIdInfo(s);
         }
         return instanceIdInfo(READONLY | PERMANENT, id);
+    }
+
+    @Override
+    public Object get(Symbol key, Scriptable start) {
+        if (SymbolKey.TO_STRING_TAG.equals(key)) {
+            return getClassName();
+        }
+        return super.get(key, start);
     }
 
     private static final int Id_buffer = 1, Id_byteOffset = 2, Id_byteLength = 3;

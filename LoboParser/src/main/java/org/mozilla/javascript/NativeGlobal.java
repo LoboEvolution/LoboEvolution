@@ -21,7 +21,7 @@ import org.mozilla.javascript.xml.XMLLib;
  * @author Mike Shaver
  */
 public class NativeGlobal implements Serializable, IdFunctionCall {
-    private static final long serialVersionUID = 6080442165748707530L;
+    static final long serialVersionUID = 6080442165748707530L;
 
     public static void init(Context cx, Scriptable scope, boolean sealed) {
         NativeGlobal obj = new NativeGlobal();
