@@ -92,7 +92,7 @@ public interface Document extends Node, NonElementParentNode, ParentNode, Docume
 	 * @return a {@link org.loboevolution.html.dom.HTMLAllCollection} object.
 	 */
 	@Deprecated
-	HTMLAllCollection getAll();
+	HTMLAllCollection getall();
 
 	/**
 	 * Retrieves a collection of all a objects that have a name and/or id property.

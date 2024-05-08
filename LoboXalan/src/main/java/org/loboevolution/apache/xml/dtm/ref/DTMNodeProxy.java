@@ -564,7 +564,7 @@ public class DTMNodeProxy
     }
 
     @Override
-    public HTMLAllCollection getAll() {
+    public HTMLAllCollection getall() {
         return null;
     }
 

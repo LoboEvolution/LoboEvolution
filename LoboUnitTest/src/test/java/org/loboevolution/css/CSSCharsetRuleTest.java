@@ -59,7 +59,7 @@ public class CSSCharsetRuleTest extends LoboUnitTest {
     public void inLink() {
         final String html
                 = "<html><body>\n"
-                + "<link rel='stylesheet' href='imp.css'>\n"
+                + "<link rel='stylesheet' href='" + URL_CSS + "imp.css'>\n"
                 + "<script>\n"
                 + "  var rules = document.styleSheets[0].cssRules;\n"
                 + " alert(rules.length);\n"

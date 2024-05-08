@@ -216,13 +216,8 @@ public class HttpNetwork {
 	 * @return a {@link java.lang.String} object.
 	 * @throws java.lang.Exception if any.
 	 */
-	public static String getSource(final String uri, final String integrity) throws Exception {
-
-		final URL url = new URL(uri);
-		final URLConnection connection = url.openConnection();
-		connection.setRequestProperty("User-Agent", UserAgent.getUserAgent());
-		connection.getHeaderField("Set-Cookie");
-		try (final InputStream in = openConnectionCheckRedirects(connection)) {
+	public static String getSource(String uri, final String integrity) throws Exception {
+		try (final InputStream in = openConnectionCheckRedirects(getURLConnection(uri))) {
 			if(AlgorithmDigest.validate(IOUtil.readFully(in), integrity)){
 				return toString(in);
 			}
@@ -230,6 +225,24 @@ public class HttpNetwork {
 			log.error("More time elapsed {}", TIMEOUT_VALUE);
 	    }
 		return "";
+	}
+
+	private static URLConnection getURLConnection(String uri) throws Exception {
+		URLConnection connection;
+		if (uri.contains("file")) {
+			uri = uri.replace("//", "///");
+			final URL url = new URL(uri);
+			connection = url.openConnection();
+			connection.setRequestProperty("User-Agent", UserAgent.getUserAgent());
+			connection.getHeaderField("Set-Cookie");
+			connection.connect();
+		} else {
+			final URL url = new URL(uri);
+			connection = url.openConnection();
+			connection.setRequestProperty("User-Agent", UserAgent.getUserAgent());
+			connection.getHeaderField("Set-Cookie");
+		}
+		return connection;
 	}
 
 	public static String sourceResponse(final String sUri, final String type, final String integrity) {

@@ -915,7 +915,7 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
 
 	/** {@inheritDoc} */
 	@Override
-	public HTMLAllCollection getAll() {
+	public HTMLAllCollection getall() {
 		final List<Node> list = new LinkedList<>(Arrays.asList(this.getNodeList(new ElementFilter(null)).toArray()));
 		return new HTMLAllCollectionImpl(this, list);
 	}

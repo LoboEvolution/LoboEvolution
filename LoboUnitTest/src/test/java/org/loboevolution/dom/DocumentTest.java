@@ -42,63 +42,60 @@ public class DocumentTest extends LoboUnitTest {
 
     @Test
     @Alerts({"2", "form1", "form2"})
-    public void formsAccessor_TwoForms() {
+    public void formsAccessorTwoForms() {
         final String html
                 = "<html><head><script>\n"
-
-        +  "function doTest() {\n"
-        +  " alert(document.forms.length);\n"
-        +  "  for(var i = 0; i < document.forms.length; i++) {\n"
-        +  "   alert(document.forms[i].name);\n"
-        +  "  }\n"
-        +  "}\n"
-        +  "</script></head><body onload='doTest()'>\n"
-        +  "<p>hello world</p>\n"
-        +  "<form name='form1'>\n"
-        +  "  <input type='text' name='textfield1' value='foo' />\n"
-        +  "</form>\n"
-        +  "<form name='form2'>\n"
-        +  "  <input type='text' name='textfield2' value='foo' />\n"
-        +  "</form>\n"
-        +  "</body></html>";
+                + "function doTest() {\n"
+                + " alert(document.forms.length);\n"
+                + "  for(var i = 0; i < document.forms.length; i++) {\n"
+                + "   alert(document.forms[i].name);\n"
+                + "  }\n"
+                + "}\n"
+                + "</script></head><body onload='doTest()'>\n"
+                + "<p>hello world</p>\n"
+                + "<form name='form1'>\n"
+                + "  <input type='text' name='textfield1' value='foo' />\n"
+                + "</form>\n"
+                + "<form name='form2'>\n"
+                + "  <input type='text' name='textfield2' value='foo' />\n"
+                + "</form>\n"
+                + "</body></html>";
 
         checkHtmlAlert(html);
     }
 
     @Test
     @Alerts("1")
-    public void formsAccessor_FormWithNoName() {
+    public void formsAccessorFormWithNoName() {
         final String html
                 = "<html><head><script>\n"
-
-        +  "function doTest() {\n"
-        +  " alert(document.forms.length);\n"
-        +  "}\n"
-        +  "</script></head><body onload='doTest()'>\n"
-        +  "<p>hello world</p>\n"
-        +  "<form>\n"
-        +  "  <input type='text' name='textfield1' value='foo' />\n"
-        +  "</form>\n"
-        +  "</body></html>";
+                + "function doTest() {\n"
+                + " alert(document.forms.length);\n"
+                + "}\n"
+                + "</script></head><body onload='doTest()'>\n"
+                + "<p>hello world</p>\n"
+                + "<form>\n"
+                + "  <input type='text' name='textfield1' value='foo' />\n"
+                + "</form>\n"
+                + "</body></html>";
 
         checkHtmlAlert(html);
     }
 
     @Test
     @Alerts("0")
-    public void formsAccessor_NoForms() {
+    public void formsAccessorNoForms() {
         final String html
                 = "<html><head><script>\n"
-
-        +  "function doTest() {\n"
-        +  " alert(document.forms.length);\n"
-        +  "  for(var i = 0; i < document.forms.length; i++) {\n"
-        +  "   alert(document.forms[i].name);\n"
-        +  "  }\n"
-        +  "}\n"
-        +  "</script></head><body onload='doTest()'>\n"
-        +  "<p>hello world</p>\n"
-        +  "</body></html>";
+                + "function doTest() {\n"
+                + " alert(document.forms.length);\n"
+                + "  for(var i = 0; i < document.forms.length; i++) {\n"
+                + "   alert(document.forms[i].name);\n"
+                + "  }\n"
+                + "}\n"
+                + "</script></head><body onload='doTest()'>\n"
+                + "<p>hello world</p>\n"
+                + "</body></html>";
 
         checkHtmlAlert(html);
     }
@@ -111,7 +108,6 @@ public class DocumentTest extends LoboUnitTest {
                 "<html>\n"
                 +  "<head>\n"
                 +  "<script>\n"
-
                 +  "var oCol = document.forms;\n"
                 +  "alert(oCol.length);\n"
                 +  "function test() {\n"
@@ -138,7 +134,6 @@ public class DocumentTest extends LoboUnitTest {
                 "<html>\n"
                 +  "<head>\n"
                 +  "<script>\n"
-
                 +  "var oCol = document.anchors;\n"
                 +  "alert(oCol.length);\n"
                 +  "function test() {\n"
@@ -171,7 +166,6 @@ public class DocumentTest extends LoboUnitTest {
                 "<html>\n"
                 +  "<head>\n"
                 +  "<script>\n"
-
                 +  "var oCol = document.anchors;\n"
                 +  "alert(oCol.length);\n"
                 +  "function test() {\n"
@@ -195,7 +189,6 @@ public class DocumentTest extends LoboUnitTest {
                 "<html>\n"
                 +  "<head>\n"
                 +  "<script>\n"
-
                 +  "var oCol = document.applets;\n"
                 +  "alert(oCol.length);\n"
                 +  "function test() {\n"
@@ -222,7 +215,6 @@ public class DocumentTest extends LoboUnitTest {
                 "<html>\n"
                 +  "<head>\n"
                 +  "<script>\n"
-
                 +  "var oCol = document.applets;\n"
                 +  "alert(oCol.length);\n"
                 +  "function test() {\n"
@@ -246,7 +238,6 @@ public class DocumentTest extends LoboUnitTest {
                 "<html>\n"
                 +  "<head>\n"
                 +  "<script>\n"
-
                 +  "var oCol = document.embeds;\n"
                 +  "alert(oCol.length);\n"
                 +  "function test() {\n"
@@ -274,7 +265,6 @@ public class DocumentTest extends LoboUnitTest {
                 "<html>\n"
                 +  "<head>\n"
                 +  "<script>\n"
-
                 +  "var oCol = document.embeds;\n"
                 +  "alert(oCol.length);\n"
                 +  "function test() {\n"
@@ -298,7 +288,6 @@ public class DocumentTest extends LoboUnitTest {
                 "<html>\n"
                 +  "<head>\n"
                 +  "<script>\n"
-
                 +  "var oCol = document.plugins;\n"
                 +  "alert(oCol.length);\n"
                 +  "function test() {\n"
@@ -326,7 +315,6 @@ public class DocumentTest extends LoboUnitTest {
                 "<html>\n"
                 +  "<head>\n"
                 +  "<script>\n"
-
                 +  "var oCol = document.plugins;\n"
                 +  "alert(oCol.length);\n"
                 +  "function test() {\n"
@@ -351,7 +339,6 @@ public class DocumentTest extends LoboUnitTest {
                 "<html>\n"
                 +  "<head>\n"
                 +  "<script>\n"
-
                 +  "var oCol = document.links;\n"
                 +  "alert(oCol.length);\n"
                 +  "function test() {\n"
@@ -381,7 +368,6 @@ public class DocumentTest extends LoboUnitTest {
                 "<html>\n"
                 +  "<head>\n"
                 +  "<script>\n"
-
                 +  "var oCol = document.links;\n"
                 +  "alert(oCol.length);\n"
                 +  "function test() {\n"
@@ -403,38 +389,39 @@ public class DocumentTest extends LoboUnitTest {
     public void createElement() {
         final String html
                 = "<html>\n"
-        +  "  <head>\n"
-        +  "    <script>\n"        +  "      function doTest() {\n"
-        +  "        // Create a DIV element.\n"
-        +  "        var div1 = document.createElement('div');\n"
-        +  "       alert('parentNode: ' + div1.parentNode);\n"
-        +  "        div1.id = 'div1';\n"
-        +  "        document.body.appendChild(div1);\n"
-        +  "       alert(div1.tagName);\n"
-        +  "       alert(div1.nodeType);\n"
-        +  "       alert(div1.nodeValue);\n"
-        +  "       alert(div1.nodeName);\n"
-        +  "        // Create an INPUT element.\n"
-        +  "        var input = document.createElement('input');\n"
-        +  "        input.id = 'text1id';\n"
-        +  "        input.name = 'text1name';\n"
-        +  "        input.value = 'text1value';\n"
-        +  "        var form = document.getElementById('form1');\n"
-        +  "        form.appendChild(input);\n"
-        +  "       alert(document.getElementById('button1id').value);\n"
-        +  "       alert(document.getElementById('text1id').value);\n"
-        +  "        // The default type of an INPUT element is 'text'.\n"
-        +  "       alert(document.getElementById('text1id').type);\n"
-        +  "      }\n"
-        +  "    </script>\n"
-        +  "  </head>\n"
-        +  "  <body onload='doTest()'>\n"
-        +  "    <form name='form1' id='form1'>\n"
-        +  "      <input type='button' id='button1id' name='button1name' value='button1value'/>\n"
-        +  "      This is form1.\n"
-        +  "    </form>\n"
-        +  "  </body>\n"
-        +  "</html>";
+                + "  <head>\n"
+                + "    <script>\n"
+                + "      function doTest() {\n"
+                + "        // Create a DIV element.\n"
+                + "        var div1 = document.createElement('div');\n"
+                + "       alert('parentNode: ' + div1.parentNode);\n"
+                + "        div1.id = 'div1';\n"
+                + "        document.body.appendChild(div1);\n"
+                + "       alert(div1.tagName);\n"
+                + "       alert(div1.nodeType);\n"
+                + "       alert(div1.nodeValue);\n"
+                + "       alert(div1.nodeName);\n"
+                + "        // Create an INPUT element.\n"
+                + "        var input = document.createElement('input');\n"
+                + "        input.id = 'text1id';\n"
+                + "        input.name = 'text1name';\n"
+                + "        input.value = 'text1value';\n"
+                + "        var form = document.getElementById('form1');\n"
+                + "        form.appendChild(input);\n"
+                + "       alert(document.getElementById('button1id').value);\n"
+                + "       alert(document.getElementById('text1id').value);\n"
+                + "        // The default type of an INPUT element is 'text'.\n"
+                + "       alert(document.getElementById('text1id').type);\n"
+                + "      }\n"
+                + "    </script>\n"
+                + "  </head>\n"
+                + "  <body onload='doTest()'>\n"
+                + "    <form name='form1' id='form1'>\n"
+                + "      <input type='button' id='button1id' name='button1name' value='button1value'/>\n"
+                + "      This is form1.\n"
+                + "    </form>\n"
+                + "  </body>\n"
+                + "</html>";
 
         checkHtmlAlert(html);
     }
@@ -445,21 +432,21 @@ public class DocumentTest extends LoboUnitTest {
     public void documentCreateElement2() {
         final String html
                 = "<html>\n"
-        +  "  <head>\n"
-        +  "    <script>\n"
-        +  "      function doTest() {\n"
-        +  "        div = document.createElement('Div');\n"
-        +  "       alert(div.nodeName + ',' + div.tagName + ',' + div.namespaceURI + ',' + "
-        +  "div.prefix + ',' + div.localName);\n"
-        +  "        div = document.createElement('Hi:Div');\n"
-        +  "       alert(div.nodeName + ',' + div.tagName + ',' + div.namespaceURI + ',' + "
-        +  "div.prefix + ',' + div.localName);\n"
-        +  "      }\n"
-        +  "    </script>\n"
-        +  "  </head>\n"
-        +  "  <body onload='doTest()'>\n"
-        +  "  </body>\n"
-        +  "</html>";
+                + "  <head>\n"
+                + "    <script>\n"
+                + "      function doTest() {\n"
+                + "        div = document.createElement('Div');\n"
+                + "       alert(div.nodeName + ',' + div.tagName + ',' + div.namespaceURI + ',' + "
+                + "div.prefix + ',' + div.localName);\n"
+                + "        div = document.createElement('Hi:Div');\n"
+                + "       alert(div.nodeName + ',' + div.tagName + ',' + div.namespaceURI + ',' + "
+                + "div.prefix + ',' + div.localName);\n"
+                + "      }\n"
+                + "    </script>\n"
+                + "  </head>\n"
+                + "  <body onload='doTest()'>\n"
+                + "  </body>\n"
+                + "</html>";
 
         checkHtmlAlert(html);
     }
@@ -469,26 +456,24 @@ public class DocumentTest extends LoboUnitTest {
     public void createElementNS() {
         final String html
                 = "<html><head>\n"
-        +  "<script>\n"
-
-        +  "  function doTest() {\n"
-        +  "    var div = document.createElementNS('myNS', 'Some:Div');\n"
-        +  "   alert(div.nodeName);\n"
-        +  "   alert(div.tagName);\n"
-        +  "   alert(div.namespaceURI);\n"
-        +  "   alert(div.prefix);\n"
-        +  "   alert(div.localName);\n"
-
-        +  "    var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');\n"
-        +  "   alert(svg.nodeName);\n"
-        +  "   alert(svg.tagName);\n"
-        +  "   alert(svg.namespaceURI);\n"
-        +  "   alert(svg.prefix);\n"
-        +  "   alert(svg.localName);\n"
-        +  "  }\n"
-        +  "</script></head>\n"
-        +  "<body onload='doTest()'>\n"
-        +  "</body></html>";
+                + "<script>\n"
+                + "  function doTest() {\n"
+                + "    var div = document.createElementNS('myNS', 'Some:Div');\n"
+                + "   alert(div.nodeName);\n"
+                + "   alert(div.tagName);\n"
+                + "   alert(div.namespaceURI);\n"
+                + "   alert(div.prefix);\n"
+                + "   alert(div.localName);\n"
+                + "    var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');\n"
+                + "   alert(svg.nodeName);\n"
+                + "   alert(svg.tagName);\n"
+                + "   alert(svg.namespaceURI);\n"
+                + "   alert(svg.prefix);\n"
+                + "   alert(svg.localName);\n"
+                + "  }\n"
+                + "</script></head>\n"
+                + "<body onload='doTest()'>\n"
+                + "</body></html>";
 
         checkHtmlAlert(html);
     }
@@ -498,20 +483,19 @@ public class DocumentTest extends LoboUnitTest {
     public void createTextNode() {
         final String html
                 = "<html><head>\n"
-        +  "<script>\n"
-
-        +  "function doTest() {\n"
-        +  "  var text1=document.createTextNode('Some Text');\n"
-        +  "  var body1=document.getElementById('body');\n"
-        +  "  body1.appendChild(text1);\n"
-        +  " alert(text1.data);\n"
-        +  " alert(text1.length);\n"
-        +  " alert(text1.nodeType);\n"
-        +  " alert(text1.nodeValue);\n"
-        +  " alert(text1.nodeName);\n"
-        +  "}\n"
-        +  "</script></head><body onload='doTest()' id='body'>\n"
-        +  "</body></html>";
+                + "<script>\n"
+                + "function doTest() {\n"
+                + "  var text1=document.createTextNode('Some Text');\n"
+                + "  var body1=document.getElementById('body');\n"
+                + "  body1.appendChild(text1);\n"
+                + " alert(text1.data);\n"
+                + " alert(text1.length);\n"
+                + " alert(text1.nodeType);\n"
+                + " alert(text1.nodeValue);\n"
+                + " alert(text1.nodeName);\n"
+                + "}\n"
+                + "</script></head><body onload='doTest()' id='body'>\n"
+                + "</body></html>";
 
         checkHtmlAlert(html);
     }
@@ -574,7 +558,6 @@ public class DocumentTest extends LoboUnitTest {
         final String html
                 = "<html><head>\n"
         +  "<script>\n"
-
         +  "  function doTest() {\n"
         +  "    var form = document.forms['form1'];\n"
         +  "    var child = document.createTextNode('Some Text');\n"
@@ -596,7 +579,6 @@ public class DocumentTest extends LoboUnitTest {
         final String html
                 = "<html><head>\n"
         +  "<script>\n"
-
         +  "  function doTest() {\n"
         +  "    var form = document.forms['form1'];\n"
         +  "    var cloneShallow = form.cloneNode(false);\n"
@@ -621,7 +603,6 @@ public class DocumentTest extends LoboUnitTest {
         final String html
                 = "<html><head>\n"
         +  "<script>\n"
-
         +  "  function doTest() {\n"
         +  "    var form = document.forms['form1'];\n"
         +  "    var oldChild = document.getElementById('oldChild');\n"
@@ -638,7 +619,7 @@ public class DocumentTest extends LoboUnitTest {
 
     @Test
     @Alerts("text/javascript")
-    public void getElementById_scriptType() {
+    public void getElementByIdScriptType() {
         final String html
                 = "<html><head>\n"
         +  "<script id='script1' type='text/javascript'>\n"
@@ -662,7 +643,7 @@ public class DocumentTest extends LoboUnitTest {
                 + " alert(top.document.getElementById('script1').src);\n"
                 + "}"
                 + "</script>\n"
-                + "<script src=" + URL_JS + "script.js" + "></script>"
+                + "<script id='script1' src=" + URL_JS + "script.js" + "></script>"
                 + "</script></head>\n"
                 + "<body onload='doTest()'>\n"
                 + "</body></html>";
@@ -672,7 +653,7 @@ public class DocumentTest extends LoboUnitTest {
 
     @Test
     @Alerts("parentDiv")
-    public void parentNode_Nested() {
+    public void parentNodeNested() {
         final String html
                 = "<html><head>\n"
         +  "<script>\n"
@@ -689,7 +670,7 @@ public class DocumentTest extends LoboUnitTest {
 
     @Test
     @Alerts("true")
-    public void parentNode_Document() {
+    public void parentNodeDocument() {
         final String html
                 = "<html><head>\n"
         +  "<script>\n"
@@ -705,11 +686,10 @@ public class DocumentTest extends LoboUnitTest {
 
     @Test
     @Alerts("true")
-    public void parentNode_CreateElement() {
+    public void parentNodeCreateElement() {
         final String html
                 = "<html><head>\n"
         +  "<script>\n"
-
         +  "  function doTest() {\n"
         +  "    var div1=document.createElement('div');\n"
         +  "   alert(div1.parentNode == null);\n"
@@ -722,20 +702,19 @@ public class DocumentTest extends LoboUnitTest {
 
     @Test
     @Alerts("parentDiv")
-    public void parentNode_AppendChild() {
+    public void parentNodeAppendChild() {
         final String html
                 = "<html><head>\n"
-        +  "<script>\n"
-
-        +  "  function doTest() {\n"
-        +  "    var childDiv=document.getElementById('childDiv');\n"
-        +  "    var parentDiv=document.getElementById('parentDiv');\n"
-        +  "    parentDiv.appendChild(childDiv);\n"
-        +  "   alert(childDiv.parentNode.id);\n"
-        +  "  }\n"
-        +  "</script></head><body onload='doTest()'>\n"
-        +  "<div id='parentDiv'></div><div id='childDiv'></div>\n"
-        +  "</body></html>";
+                + "<script>\n"
+                + "  function doTest() {\n"
+                + "    var childDiv=document.getElementById('childDiv');\n"
+                + "    var parentDiv=document.getElementById('parentDiv');\n"
+                + "    parentDiv.appendChild(childDiv);\n"
+                + "   alert(childDiv.parentNode.id);\n"
+                + "  }\n"
+                + "</script></head><body onload='doTest()'>\n"
+                + "<div id='parentDiv'></div><div id='childDiv'></div>\n"
+                + "</body></html>";
 
         checkHtmlAlert(html);
     }
@@ -746,7 +725,6 @@ public class DocumentTest extends LoboUnitTest {
         final String html
                 = "<html><head>\n"
         +  "<script>\n"
-
         +  "  function doTest() {\n"
         +  "   alert(document.documentElement != null);\n"
         +  "   alert(document.documentElement.tagName);\n"
@@ -761,7 +739,7 @@ public class DocumentTest extends LoboUnitTest {
 
     @Test
     @Alerts("childDiv")
-    public void firstChild_Nested() {
+    public void firstChildNested() {
         final String html
                 = "<html><head>\n"
         +  "<script>\n"
@@ -778,11 +756,10 @@ public class DocumentTest extends LoboUnitTest {
 
     @Test
     @Alerts("childDiv")
-    public void firstChild_AppendChild() {
+    public void firstChildAppendChild() {
         final String html
                 = "<html><head>\n"
         +  "<script>\n"
-
         +  "  function doTest() {\n"
         +  "    var childDiv=document.getElementById('childDiv');\n"
         +  "    var parentDiv=document.getElementById('parentDiv');\n"
@@ -800,11 +777,10 @@ public class DocumentTest extends LoboUnitTest {
 
     @Test
     @Alerts("childDiv")
-    public void lastChild_Nested() {
+    public void lastChildNested() {
         final String html
                 = "<html><head>\n"
         +  "<script>\n"
-
         +  "  function doTest() {\n"
         +  "    var div1=document.getElementById('parentDiv');\n"
         +  "   alert(div1.lastChild.id);\n"
@@ -818,7 +794,7 @@ public class DocumentTest extends LoboUnitTest {
 
     @Test
     @Alerts("childDiv")
-    public void lastChild_AppendChild() {
+    public void lastChildAppendChild() {
         final String html
                 = "<html><head><script>\n"
 
@@ -839,7 +815,7 @@ public class DocumentTest extends LoboUnitTest {
 
     @Test
     @Alerts("nextDiv")
-    public void nextSibling_Nested() {
+    public void nextSiblingNested() {
         final String html
                 = "<html><head><script>\n"
 
@@ -857,11 +833,10 @@ public class DocumentTest extends LoboUnitTest {
 
     @Test
     @Alerts("nextDiv")
-    public void nextSibling_AppendChild() {
+    public void nextSiblingAppendChild() {
         final String html
                 = "<html><head>\n"
         +  "<script>\n"
-
         +  "  function doTest() {\n"
         +  "    var previousDiv=document.getElementById('previousDiv');\n"
         +  "    var parentDiv=document.getElementById('parentDiv');\n"
@@ -879,11 +854,10 @@ public class DocumentTest extends LoboUnitTest {
 
     @Test
     @Alerts("previousDiv")
-    public void previousSibling_Nested() {
+    public void previousSiblingNested() {
         final String html
                 = "<html><head>\n"
         +  "<script>\n"
-
         +  "  function doTest() {\n"
         +  "    var div1 = document.getElementById('nextDiv');\n"
         +  "   alert(div1.previousSibling.id);\n"
@@ -897,11 +871,10 @@ public class DocumentTest extends LoboUnitTest {
 
     @Test
     @Alerts("previousDiv")
-    public void previousSibling_AppendChild() {
+    public void previousSiblingAppendChild() {
         final String html
                 = "<html><head>\n"
         +  "<script>\n"
-
         +  "  function doTest() {\n"
         +  "    var previousDiv=document.getElementById('previousDiv');\n"
         +  "    var parentDiv=document.getElementById('parentDiv');\n"
@@ -919,7 +892,7 @@ public class DocumentTest extends LoboUnitTest {
 
     @Test
     @Alerts({"tangerine", "ginger"})
-    public void allProperty_KeyByName() {
+    public void allPropertyKeyByName() {
         final String html
                 = "<html>\n"
         +  "<head>\n"
@@ -943,7 +916,7 @@ public class DocumentTest extends LoboUnitTest {
 
     @Test
     @Alerts("DIV")
-    public void allProperty_CalledDuringPageLoad() {
+    public void allPropertyCalledDuringPageLoad() {
         final String html
                 = "<html><body>\n"
         +  "<div id='ARSMenuDiv1' style='VISIBILITY: hidden; POSITION: absolute; z-index: 1000000'></div>\n"
@@ -957,16 +930,15 @@ public class DocumentTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("")
-    public void referrer_NoneSpecified() {
+    @Alerts("null")
+    public void referrerNoneSpecified() {
         final String html
                 = "<html><head>\n"
-        +  "<script>\n"
-
-        +  "</script>\n"
-        +  "</head>\n"
-        +  "<body onload='alert(document.referrer);'>\n"
-        +  "</form></body></html>";
+                + "<script>\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='alert(document.referrer);'>\n"
+                + "</form></body></html>";
 
         checkHtmlAlert(html);
     }
@@ -991,7 +963,6 @@ public class DocumentTest extends LoboUnitTest {
         final String html
                 = "<html><head>\n"
         +  "<script>\n"
-
         +  "  function doTest() {\n"
         +  "    var elements = document.getElementsByTagName('input');\n"
         +  "    for (var i = 0; i < elements.length; i++) {\n"
@@ -1009,11 +980,10 @@ public class DocumentTest extends LoboUnitTest {
 
     @Test
     @Alerts("button")
-    public void getElementsByTagName_CaseInsensitive() {
+    public void getElementsByTagNameCaseInsensitive() {
         final String html
                 = "<html><head>\n"
         +  "<script>\n"
-
         +  "  function doTest() {\n"
         +  "    var elements = document.getElementsByTagName('InPuT');\n"
         +  "    for(i = 0; i < elements.length; i++) {\n"
@@ -1029,7 +999,7 @@ public class DocumentTest extends LoboUnitTest {
 
     @Test
     @Alerts("1")
-    public void getElementsByTagName_Inline() {
+    public void getElementsByTagNameInline() {
         final String html
                 = "<html><body>\n"
         +  "<script type=\"text/javascript\">\n"
@@ -1095,37 +1065,35 @@ public class DocumentTest extends LoboUnitTest {
 
     @Test
     @Alerts({"HTML", "HEAD", "TITLE", "SCRIPT", "BODY"})
-    public void all_WithParentheses() {
+    public void allWithParentheses() {
         final String html
                 = "<html><head><title></title>\n"
-        +  "<script>\n"
-
-        +  "function doTest() {\n"
-        +  "  var length = document.all.length;\n"
-        +  "  for(i = 0; i < length; i++) {\n"
-        +  "    try {\n"
-        +  "      var all = document.all(i);\n"
-        +  "      if (all == null) {\n"
-        +  "       alert('all == null');\n"
-        +  "      } else {\n"
-        +  "       alert(all.tagName);\n"
-        +  "      }\n"
-        +  "    } catch(e) {alert(e); }\n"
-        +  "  }\n"
-        +  "}\n"
-        +  "</script></head><body onload='doTest()'>\n"
-        +  "</body></html>";
+                + "<script>\n"
+                + "function doTest() {\n"
+                + "  var length = document.all.length;\n"
+                + "  for(i = 0; i < length; i++) {\n"
+                + "    try {\n"
+                + "      var all = document.all(i);\n"
+                + "      if (all == null) {\n"
+                + "       alert('all == null');\n"
+                + "      } else {\n"
+                + "       alert(all.tagName);\n"
+                + "      }\n"
+                + "    } catch(e) {alert(e); }\n"
+                + "  }\n"
+                + "}\n"
+                + "</script></head><body onload='doTest()'>\n"
+                + "</body></html>";
 
         checkHtmlAlert(html);
     }
 
     @Test
     @Alerts({"HTML", "HEAD", "TITLE", "SCRIPT", "BODY"})
-    public void all_IndexByInt() {
+    public void allIndexByInt() {
         final String html
                 = "<html><head><title></title>\n"
         +  "<script>\n"
-
         +  "function doTest() {\n"
         +  "  var length = document.all.length;\n"
         +  "  for(i = 0; i < length; i++) {\n"
@@ -1140,11 +1108,10 @@ public class DocumentTest extends LoboUnitTest {
 
     @Test
     @Alerts("HTML")
-    public void all_Item() {
+    public void allItem() {
         final String html
                 = "<html><head>\n"
         +  "<script>\n"
-
         +  "function doTest() {\n"
         +  " alert(document.all.item(0).tagName);\n"
         +  "}\n"
@@ -1168,7 +1135,7 @@ public class DocumentTest extends LoboUnitTest {
 
     @Test
     @Alerts("<->form2")
-    public void allNamedItemByName_formWithoutId() {
+    public void allNamedItemByNameFormWithoutId() {
         namedItem("form2");
     }
 
@@ -1199,36 +1166,33 @@ public class DocumentTest extends LoboUnitTest {
     private void namedItem(final String name) {
         final String html
                 = "<!doctype html>\n"
-        +  "<html><head>\n"
-        +  "<script>\n"
-        +  "  var res = '';"
-        +  "  functionalert(msg) { res += msg + '§';}\n"
-        +  "  function doTest() {\n"
-        +  "    var result = document.all.namedItem('" + name + "');\n"
-        +  "    if (result == null) {\n"
-        +  "     alert(result);\n"
-        +  "    } else if (result.id || result.name) {\n"
-        +  "     alert(result.id + '<->' + result.name);\n"
-        +  "    } else {\n"
-        +  "     alert('coll ' + result.length);\n"
-        +  "      for(i = 0; i < result.length; i++) {\n"
-        +  "       alert(result.item(i).id + '<->' + result.item(i).name);\n"
-        +  "      }\n"
-        +  "    }\n"
-        +  "    window.document.title = res;"
-        +  "  }\n"
-        +  "</script></head>\n"
-        +  "<body onload='doTest()'>\n"
-        +  "  <form id='form1'></form>\n"
-        +  "  <form name='form2'></form>\n"
-        +  "  <form id='f3' name='form3'></form>\n"
-        +  "  <form id='f4' name='form4_1'></form>\n"
-        +  "  <form id='f4' name='form4_2'></form>\n"
-        +  "  <form id='f5_1' name='form5'></form>\n"
-        +  "  <form id='f5_2' name='form5'></form>\n"
-        +  "  <form id='f6' name='form6'></form>\n"
-        +  "  <form id='form6' name='form6_2'></form>\n"
-        +  "</body></html>";
+                + "<html><head>\n"
+                + "<script>\n"
+                + "  function doTest() {\n"
+                + "    var result = document.all.namedItem('" + name + "');\n"
+                + "    if (result == null) {\n"
+                + "     alert(result);\n"
+                + "    } else if (result.id || result.name) {\n"
+                + "     alert(result.id + '<->' + result.name);\n"
+                + "    } else {\n"
+                + "     alert('coll ' + result.length);\n"
+                + "      for(i = 0; i < result.length; i++) {\n"
+                + "       alert(result.item(i).id + '<->' + result.item(i).name);\n"
+                + "      }\n"
+                + "    }\n"
+                + "  }\n"
+                + "</script></head>\n"
+                + "<body onload='doTest()'>\n"
+                + "  <form id='form1'></form>\n"
+                + "  <form name='form2'></form>\n"
+                + "  <form id='f3' name='form3'></form>\n"
+                + "  <form id='f4' name='form4_1'></form>\n"
+                + "  <form id='f4' name='form4_2'></form>\n"
+                + "  <form id='f5_1' name='form5'></form>\n"
+                + "  <form id='f5_2' name='form5'></form>\n"
+                + "  <form id='f6' name='form6'></form>\n"
+                + "  <form id='form6' name='form6_2'></form>\n"
+                + "</body></html>";
 
         checkHtmlAlert(html);
     }
@@ -1238,26 +1202,25 @@ public class DocumentTest extends LoboUnitTest {
     public void allTags() {
         final String html
                 = "<html><head>\n"
-        +  "<script>\n"
-
-        +  "function doTest() {\n"
-        +  "  try {\n"
-        +  "    var inputs = document.all.tags('input');\n"
-        +  "    var inputCount = inputs.length;\n"
-        +  "    for(i = 0; i < inputCount; i++) {\n"
-        +  "     alert(inputs[i].name);\n"
-        +  "    }\n"
-        +  "    // Make sure tags() returns an element array that you can call item() on.\n"
-        +  "   alert(document.all.tags('input').item(0).name);\n"
-        +  "   alert(document.all.tags('input').item(1).name);\n"
-        +  "    // Make sure tags() returns an empty element array if there are no matches.\n"
-        +  "   alert(document.all.tags('xxx').length);\n"
-        +  "  } catch (e) {alert('exception') }\n"
-        +  "}\n"
-        +  "</script></head><body onload='doTest()'>\n"
-        +  "<input type='text' name='a' value='1'>\n"
-        +  "<input type='text' name='b' value='1'>\n"
-        +  "</body></html>";
+                + "<script>\n"
+                + "function doTest() {\n"
+                + "  try {\n"
+                + "    var inputs = document.all.tags('input');\n"
+                + "    var inputCount = inputs.length;\n"
+                + "    for(i = 0; i < inputCount; i++) {\n"
+                + "     alert(inputs[i].name);\n"
+                + "    }\n"
+                + "    // Make sure tags() returns an element array that you can call item() on.\n"
+                + "   alert(document.all.tags('input').item(0).name);\n"
+                + "   alert(document.all.tags('input').item(1).name);\n"
+                + "    // Make sure tags() returns an empty element array if there are no matches.\n"
+                + "   alert(document.all.tags('xxx').length);\n"
+                + "  } catch (e) {alert('exception') }\n"
+                + "}\n"
+                + "</script></head><body onload='doTest()'>\n"
+                + "<input type='text' name='a' value='1'>\n"
+                + "<input type='text' name='b' value='1'>\n"
+                + "</body></html>";
 
         checkHtmlAlert(html);
     }
@@ -1265,51 +1228,51 @@ public class DocumentTest extends LoboUnitTest {
     @Test
     @Alerts({"false", "false", "undefined"})
     public void all() {
-        final String html = "<html><head>\n"
-        +  "<script>\n"
-
-        +  "function doTest() {\n"
-        +  " alert(document.all ? true : false);\n"
-        +  " alert(Boolean(document.all));\n"
-        +  " alert(typeof document.all);\n"
-        +  "}\n"
-        +  "</script><body onload='doTest()'>\n"
-        +  "</body></html>";
+        final String html =
+                "<html><head>\n"
+                + "<script>\n"
+                + "function doTest() {\n"
+                + " alert(document.all);\n"
+                + " alert(document.all ? true : false);\n"
+                + " alert(Boolean(document.all));\n"
+                + " alert(typeof document.all);\n"
+                + "}\n"
+                + "</script><body onload='doTest()'>\n"
+                + "</body></html>";
 
         checkHtmlAlert(html);
     }
 
     @Test
     @Alerts({"1", "2"})
-    public void all_Caching() {
+    public void allCaching() {
         final String html
                 = "<html><head>\n"
-        +  "<script>\n"
-
-        +  "</script>\n"
-        +  "</head>\n"
-        +  "<body onload='alert(document.all.b.value)'>\n"
-        +  "<input type='text' name='a' value='1'>\n"
-        +  "<script>alert(document.all.a.value)</script>\n"
-        +  "<input type='text' name='b' value='2'>\n"
-        +  "</body></html>";
+                + "<script>\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='alert(document.all.b.value)'>\n"
+                + "<input type='text' name='a' value='1'>\n"
+                + "<script>alert(document.all.a.value)</script>\n"
+                + "<input type='text' name='b' value='2'>\n"
+                + "</body></html>";
 
         checkHtmlAlert(html);
     }
 
     @Test
     @Alerts({"null", "null", "null"})
-    public void all_NotExisting() {
-        final String html = "<html><head>\n"
-        +  "<script>\n"
-
-        +  "function doTest() {\n"
-        +  " alert(document.all('notExisting'));\n"
-        +  " alert(document.all.item('notExisting'));\n"
-        +  " alert(document.all.namedItem('notExisting'));\n"
-        +  "}\n"
-        +  "</script><body onload='doTest()'>\n"
-        +  "</body></html>";
+    public void allNotExisting() {
+        final String html =
+                "<html><head>\n"
+                + "<script>\n"
+                + "function doTest() {\n"
+                + " alert(document.all('notExisting'));\n"
+                + " alert(document.all.item('notExisting'));\n"
+                + " alert(document.all.namedItem('notExisting'));\n"
+                + "}\n"
+                + "</script><body onload='doTest()'>\n"
+                + "</body></html>";
 
         checkHtmlAlert(html);
     }
@@ -1319,22 +1282,21 @@ public class DocumentTest extends LoboUnitTest {
     public void getElementsByName() {
         final String html
                 = "<html><head>\n"
-        +  "<script>\n"
-
-        +  "function doTest() {\n"
-        +  "  var elements = document.getElementsByName('name1');\n"
-        +  "  for (var i = 0; i < elements.length; i++) {\n"
-        +  "   alert(elements[i].value);\n"
-        +  "   alert(elements.item(i).value);\n"
-        +  "  }\n"
-        +  "}\n"
-        +  "</script></head><body onload='doTest()'>\n"
-        +  "<form>\n"
-        +  "<input type='radio' name='name1' value='value1'>\n"
-        +  "<input type='radio' name='name1' value='value2'>\n"
-        +  "<input type='button' name='name2' value='value3'>\n"
-        +  "</form>\n"
-        +  "</body></html>";
+                + "<script>\n"
+                + "function doTest() {\n"
+                + "  var elements = document.getElementsByName('name1');\n"
+                + "  for (var i = 0; i < elements.length; i++) {\n"
+                + "   alert(elements[i].value);\n"
+                + "   alert(elements.item(i).value);\n"
+                + "  }\n"
+                + "}\n"
+                + "</script></head><body onload='doTest()'>\n"
+                + "<form>\n"
+                + "<input type='radio' name='name1' value='value1'>\n"
+                + "<input type='radio' name='name1' value='value2'>\n"
+                + "<input type='button' name='name2' value='value3'>\n"
+                + "</form>\n"
+                + "</body></html>";
 
         checkHtmlAlert(html);
     }
@@ -1343,12 +1305,11 @@ public class DocumentTest extends LoboUnitTest {
     @Alerts("IAmTheBody")
     public void bodyRead() {
         final String html = "<html><head>\n"
-        +  "<script>\n"
-
-        +  "</script>\n"
-        +  "</head>\n"
-        +  "<body id='IAmTheBody' onload='alert(document.body.id)'>\n"
-        +  "</body></html>";
+                + "<script>\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body id='IAmTheBody' onload='alert(document.body.id)'>\n"
+                + "</body></html>";
 
         checkHtmlAlert(html);
     }
@@ -1356,10 +1317,11 @@ public class DocumentTest extends LoboUnitTest {
     @Test
     @Alerts("FRAMESET")
     public void bodyReadFrameset() {
-        final String html = "<html>\n"
-        +  "<frameset onload='alert(document.body.tagName)'>\n"
-        +  "<frame src='about:blank' name='foo'>\n"
-        +  "</frameset></html>";
+        final String html =
+                "<html>\n"
+                + "<frameset onload='alert(document.body.tagName)'>\n"
+                + "<frame src='about:blank' name='foo'>\n"
+                + "</frameset></html>";
 
         checkHtmlAlert(html);
     }
@@ -1371,7 +1333,6 @@ public class DocumentTest extends LoboUnitTest {
                 "<html>\n"
                 +  "<head>\n"
                 +  "<script>\n"
-
                 +  "var oCol = document.images;\n"
                 +  "alert(oCol.length);\n"
                 +  "function test() {\n"
@@ -1399,7 +1360,6 @@ public class DocumentTest extends LoboUnitTest {
                 "<html>\n"
                 +  "<head>\n"
                 +  "<script>\n"
-
                 +  "var oCol = document.images;\n"
                 +  "alert(oCol.length);\n"
                 +  "function test() {\n"
@@ -1422,7 +1382,6 @@ public class DocumentTest extends LoboUnitTest {
         final String html
                 = "<html><head>\n"
         +  "<script>\n"
-
         +  "function doTest() {\n"
         +  " alert(document.images.length);\n"
         +  " alert(allImages.length);\n"
@@ -1504,7 +1463,6 @@ public class DocumentTest extends LoboUnitTest {
     public void readyState() {
         final String html = "<html><head>\n"
         +  "<script>\n"
-
         +  "function testIt() {\n"
         +  " alert(document.readyState);\n"
         +  "}\n"
@@ -1522,9 +1480,9 @@ public class DocumentTest extends LoboUnitTest {
     public void documentWithNoBody() {
         final String html
                 = "<html><head>\n"
-        +  "<script>\n"
-        +  " alert(document.body);\n"
-        +  "</script></head><body></body></html>";
+                + "<script>\n"
+                + " alert(document.body);\n"
+                + "</script></head><body></body></html>";
 
         checkHtmlAlert(html);
     }
@@ -1538,7 +1496,6 @@ public class DocumentTest extends LoboUnitTest {
         +  "<input type='text' name='findMe'>\n"
         +  "<input type='text' id='findMe2' name='byId'>\n"
         +  "<script>\n"
-
         +  "  var o = document.getElementById('findMe');\n"
         +  " alert(o ? o.name : 'null');\n"
         +  " alert(document.getElementById('findMe2').name);\n"
@@ -1552,7 +1509,6 @@ public class DocumentTest extends LoboUnitTest {
     public void directAccessByName() {
         final String html = "<html><head>\n"
         +  "<script>\n"
-
         +  "function doTest() {\n"
         +  " alert(document.myImage.id);\n"
         +  " alert(document.myImage2.length);\n"
@@ -1603,7 +1559,6 @@ public class DocumentTest extends LoboUnitTest {
     public void precedence() {
         final String html = "<html><head>\n"
         +  "<script>\n"
-
         +  "</script>\n"
         +  "</head>\n"
         +  "<body>\n"
@@ -1634,14 +1589,13 @@ public class DocumentTest extends LoboUnitTest {
     @Alerts({"undefined", "123"})
     public void put() {
         final String html = "<html><body>\n"
-        +  "<script>\n"
-
-        +  " alert(document.foo);\n"
-        +  "  if (!document.foo) document.foo = 123;\n"
-        +  " alert(document.foo);\n"
-        +  "</script>\n"
-        +  "</form>\n" 
-                + "</body>\n" 
+                + "<script>\n"
+                + " alert(document.foo);\n"
+                + "  if (!document.foo) document.foo = 123;\n"
+                + " alert(document.foo);\n"
+                + "</script>\n"
+                + "</form>\n"
+                + "</body>\n"
                 + "</html>";
 
         checkHtmlAlert(html);
@@ -1651,25 +1605,25 @@ public class DocumentTest extends LoboUnitTest {
     @Alerts({"[object HTMLDocument]", "[object HTMLBodyElement]",
             "true", "true", "true", "false", "true", "false"})
     public void documentCloneNode() {
-        final String html = "<html><body id='hello' onload='doTest()'>\n"
-        +  "  <script id='jscript'>\n"
-
-        +  "    function doTest() {\n"
-        +  "      var clone = document.cloneNode(true);\n"
-        +  "     alert(clone);\n"
-        +  "      if (clone != null) {\n"
-        +  "       alert(clone.body);\n"
-        +  "       alert(clone.body !== document.body);\n"
-        +  "       alert(clone.getElementById(\"id1\") !== document.getElementById(\"id1\"));\n"
-        +  "       alert(document.ownerDocument == null);\n"
-        +  "       alert(clone.ownerDocument == document);\n"
-        +  "       alert(document.getElementById(\"id1\").ownerDocument === document);\n"
-        +  "       alert(clone.getElementById(\"id1\").ownerDocument === document);\n"
-        +  "      }\n"
-        +  "    }\n"
-        +  "  </script>\n"
-        +  "  <div id='id1'>hello</div>\n"
-        +  "</body></html>";
+        final String html =
+                "<html><body id='hello' onload='doTest()'>\n"
+                + "  <script id='jscript'>\n"
+                + "    function doTest() {\n"
+                + "      var clone = document.cloneNode(true);\n"
+                + "     alert(clone);\n"
+                + "      if (clone != null) {\n"
+                + "       alert(clone.body);\n"
+                + "       alert(clone.body !== document.body);\n"
+                + "       alert(clone.getElementById(\"id1\") !== document.getElementById(\"id1\"));\n"
+                + "       alert(document.ownerDocument == null);\n"
+                + "       alert(clone.ownerDocument == document);\n"
+                + "       alert(document.getElementById(\"id1\").ownerDocument === document);\n"
+                + "       alert(clone.getElementById(\"id1\").ownerDocument === document);\n"
+                + "      }\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "  <div id='id1'>hello</div>\n"
+                + "</body></html>";
 
         checkHtmlAlert(html);
     }
@@ -1677,19 +1631,18 @@ public class DocumentTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createStyleSheet() {
-        final String html
-                = "<html><head>\n"
-        +  "<script>\n"
-
-        +  "try {\n"
-        +  "  var s = document.createStyleSheet('foo.css', 1);\n"
-        +  " alert(s);\n"
-        +  "}\n"
-        +  "catch(ex) {\n"
-        +  " alert('exception');\n"
-        +  "}\n"
-        +  "</script></head><body>\n"
-        +  "</body></html>";
+        final String html =
+                "<html><head>\n"
+                + "<script>\n"
+                + "try {\n"
+                + "  var s = document.createStyleSheet('foo.css', 1);\n"
+                + " alert(s);\n"
+                + "}\n"
+                + "catch(ex) {\n"
+                + " alert('exception');\n"
+                + "}\n"
+                + "</script></head><body>\n"
+                + "</body></html>";
 
         checkHtmlAlert(html);
     }
@@ -1717,25 +1670,25 @@ public class DocumentTest extends LoboUnitTest {
 
     @Test
     @Alerts({"true", "object", "[object Event]", "false"})
-    public void createEvent_Event() {
+    public void createEventEvent() {
         createEvent("Event");
     }
 
     @Test
     @Alerts({"true", "object", "[object Event]", "false"})
-    public void createEvent_Events() {
+    public void createEventEvents() {
         createEvent("Events");
     }
 
     @Test
     @Alerts({"true", "object", "[object Event]", "false"})
-    public void createEvent_HTMLEvents() {
+    public void createEventHTMLEvents() {
         createEvent("HTMLEvents");
     }
 
     @Test
     @Alerts("exception")
-    public void createEvent_Bogus() {
+    public void createEventBogus() {
         createEvent("Bogus");
     }
 
@@ -1743,7 +1696,6 @@ public class DocumentTest extends LoboUnitTest {
         final String html =
                 "<html><head>\n"
                 +  "<script>\n"
-
                 +  "try {\n"
                 +  "  var e = document.createEvent('" + eventType + "');\n"
                 +  " alert(e != null);\n"
@@ -1866,11 +1818,10 @@ public class DocumentTest extends LoboUnitTest {
 
     @Test
     @Alerts("exception")
-    public void createEventObject_IE() {
+    public void createEventObjectIE() {
         final String html =
                 "<html><head>\n"
                 +  "<script>\n"
-
                 +  "try {\n"
                 +  "  var e = document.createEventObject();\n"
                 +  " alert(e != null);\n"
@@ -1890,7 +1841,6 @@ public class DocumentTest extends LoboUnitTest {
     public void elementFromPoint() {
         final String html = "<html><head>\n"
         +  "<script>\n"
-
         +  "  function test() {\n"
         +  "    var e = document.elementFromPoint(-1,-1);\n"
         +  "   alert(e != null ? e.nodeName : null);\n"
@@ -1905,7 +1855,6 @@ public class DocumentTest extends LoboUnitTest {
     public void styleSheets() {
         final String html = "<html><head>\n"
         +  "<script>\n"
-
         +  "  function test() {\n"
         +  "   alert(document.styleSheets);\n"
         +  "   alert(document.styleSheets.length);\n"
@@ -1959,19 +1908,20 @@ public class DocumentTest extends LoboUnitTest {
     @Test
     @Alerts({"0", "0", "0"})
     public void designModeCreatesSelectionRange() {
-        final String html = "<html><body onload='test()'>\n"
-        +  "<script>\n"
-        +  "  var selection = document.selection;\n"
-        +  "  if(!selection) selection = window.getSelection();\n"
-        +  "  function test() {\n"
-        +  "    alert(selection.rangeCount);\n"
-        +  "    document.designMode = 'on';\n"
-        +  "    alert(selection.rangeCount);\n"
-        +  "    document.designMode = 'off';\n"
-        +  "    alert(selection.rangeCount);\n"
-        +  "  }\n"
-        +  "</script>\n"
-        +  "</body></html>";
+        final String html =
+                "<html><body onload='test()'>\n"
+                + "<script>\n"
+                + "  var selection = document.selection;\n"
+                + "  if(!selection) selection = window.getSelection();\n"
+                + "  function test() {\n"
+                + "    alert(selection.rangeCount);\n"
+                + "    document.designMode = 'on';\n"
+                + "    alert(selection.rangeCount);\n"
+                + "    document.designMode = 'off';\n"
+                + "    alert(selection.rangeCount);\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</body></html>";
 
         checkHtmlAlert(html);
     }
@@ -1981,7 +1931,6 @@ public class DocumentTest extends LoboUnitTest {
     public void execCommand() {
         final String html = "<html><head>\n"
         +  "<script>\n"
-
         +  "  function test() {\n"
         +  "    document.designMode = 'On';\n"
         +  "   alert(document.execCommand('Bold', false, null));\n"
@@ -2004,7 +1953,6 @@ public class DocumentTest extends LoboUnitTest {
     public void evaluateCaseInsensitiveAttribute() {
         final String html = "<html><head>\n"
         +  "<script>\n"
-
         +  "function test() {\n"
         +  "  if(document.evaluate) {\n"
         +  "    var expr = './/*[@CLASS]';\n"
@@ -2024,7 +1972,6 @@ public class DocumentTest extends LoboUnitTest {
     public void evaluateCaseInsensitiveTagName() {
         final String html = "<html><head>\n"
         +  "<script>\n"
-
         +  "  function test() {\n"
         +  "    if(document.evaluate) {\n"
         +  "      var expr = '/hTmL';\n"
@@ -2060,12 +2007,11 @@ public class DocumentTest extends LoboUnitTest {
 
     @Test
     @Alerts({"1: [object HTMLBodyElement]", "2: [object HTMLBodyElement]"})
-    public void noBodyTag_IFrame() {
+    public void noBodyTagIFrame() {
         final String html =
                 "<html>\n"
                 +  "  <head>\n"
                 +  "<script>\n"
-
                 +  "</script>\n"
                 +  "  </head>\n"
                 +  "  <body>\n"
@@ -2105,12 +2051,11 @@ public class DocumentTest extends LoboUnitTest {
         final String html = "<html>\n"
         +  "<body id='hello' onload='doTest()'>\n"
         +  "  <script>\n"
-
         +  "    function doTest() {\n"
         +  "      if (document.getRootNode) {\n"
         +  "       alert(document.getRootNode());\n"
         +  "       alert(document === document.getRootNode());\n"
-        +  "      } elsealert('-');\n"
+        +  "      } else {alert('-');}\n"
         +  "    }\n"
         +  "  </script>\n"
         +  "</body>\n" 
@@ -2166,26 +2111,23 @@ public class DocumentTest extends LoboUnitTest {
     @Test
     @Alerts({"true", "false", "true", "true", "true", "false", "false"})
     public void contains() {
-        final String html = "<html><head><script>\n"
-
-        +  "  function test() {\n"
-        +  "    var testnode = document.getElementById('myNode');\n"
-        +  "   alert(document.contains ? document.contains(testnode) : '-');\n"
-
-        +  "    var newnode = document.createComment('some comment');\n"
-        +  "   alert(document.contains ? document.contains(newnode) : '-');\n"
-
-        +  "   alert(document.contains ? document.contains(document.documentElement) : '-');\n"
-        +  "   alert(document.contains ? document.contains(document.body) : '-');\n"
-        +  "   alert(document.contains ? document.contains(document.firstElementChild) : '-');\n"
-
-        +  "   alert(document.contains ? document.contains(null) : '-');\n"
-        +  "   alert(document.contains ? document.contains(undefined) : '-');\n"
-        +  "  }\n"
-        +  "</script></head>\n"
-        +  "<body onload='test()'>\n"
-        +  "  <div id='myNode'></div>\n"
-        +  "</body></html>";
+        final String html =
+                "<html><head><script>\n"
+                + "  function test() {\n"
+                + "    var testnode = document.getElementById('myNode');\n"
+                + "    alert(document.contains ? document.contains(testnode) : '-');\n"
+                + "    var newnode = document.createComment('some comment');\n"
+                + "    alert(document.contains ? document.contains(newnode) : '-');\n"
+                + "    alert(document.contains ? document.contains(document.documentElement) : '-');\n"
+                + "    alert(document.contains ? document.contains(document.body) : '-');\n"
+                + "    alert(document.contains ? document.contains(document.firstElementChild) : '-');\n"
+                + "    alert(document.contains ? document.contains(null) : '-');\n"
+                + "    alert(document.contains ? document.contains(undefined) : '-');\n"
+                + "  }\n"
+                + "</script></head>\n"
+                + "<body onload='test()'>\n"
+                + "  <div id='myNode'></div>\n"
+                + "</body></html>";
         checkHtmlAlert(html);
     }
 
@@ -2195,7 +2137,6 @@ public class DocumentTest extends LoboUnitTest {
         final String html = "<html>\n"
         +  "<head>\n"
         +  "<script>\n"
-
         +  "function test() {\n"
         +  "  var elt = document.createComment('some comment');\n"
         +  " alert(elt);\n"
@@ -2383,19 +2324,19 @@ public class DocumentTest extends LoboUnitTest {
     @Test
     @Alerts({"null", "null"})
     public void rootElement() {
-        final String html = "<html>\n"
-        +  "<head>\n"
-        +  "  <script>\n"
-
-        +  "    function test() {\n"
-        +  "      var xmlDocument = document.implementation.createDocument('', '', null);\n"
-        +  "     alert(xmlDocument.rootElement);\n"
-        +  "     alert(document.rootElement);\n"
-        +  "    }\n"
-        +  "  </script>\n"
-        +  "</head>\n"
-        +  "<body onload='test()'></body>\n"
-        +  "</html>";
+        final String html =
+                "<html>\n"
+                + "<head>\n"
+                + "  <script>\n"
+                + "    function test() {\n"
+                + "      var xmlDocument = document.implementation.createDocument('', '', null);\n"
+                + "     alert(xmlDocument.rootElement);\n"
+                + "     alert(document.rootElement);\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'></body>\n"
+                + "</html>";
 
         checkHtmlAlert(html);
     }
@@ -2446,21 +2387,20 @@ public class DocumentTest extends LoboUnitTest {
     @Alerts({"true", "test"})
     public void useInMap() {
         final String html = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"\n"
-        +  "    \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n"
-        +  "<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\" lang=\"en\">\n"
-        +  "<head>\n"
-        +  "  <script>\n"
-
-        +  "    function test() {\n"
-        +  "      var map = new Map();\n"
-        +  "      map.set(document, 'test');\n"
-        +  "     alert(map.has(document));\n"
-        +  "     alert(map.get(document));\n"
-        +  "    }\n"
-        +  "  </script>\n"
-        +  "</head>\n"
-        +  "<body onload='test()'></body>\n"
-        +  "</html>";
+                + "    \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n"
+                + "<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\" lang=\"en\">\n"
+                + "<head>\n"
+                + "  <script>\n"
+                + "    function test() {\n"
+                + "      var map = new Map();\n"
+                + "      map.set(document, 'test');\n"
+                + "     alert(map.has(document));\n"
+                + "     alert(map.get(document));\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'></body>\n"
+                + "</html>";
 
         checkHtmlAlert(html);
     }
@@ -2469,21 +2409,20 @@ public class DocumentTest extends LoboUnitTest {
     @Alerts({"true", "test"})
     public void useInWeakMap() {
         final String html = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"\n"
-        +  "    \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n"
-        +  "<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\" lang=\"en\">\n"
-        +  "<head>\n"
-        +  "  <script>\n"
-
-        +  "    function test() {\n"
-        +  "      var map = new WeakMap();\n"
-        +  "      map.set(document, 'test');\n"
-        +  "     alert(map.has(document));\n"
-        +  "     alert(map.get(document));\n"
-        +  "    }\n"
-        +  "  </script>\n"
-        +  "</head>\n"
-        +  "<body onload='test()'></body>\n"
-        +  "</html>";
+                + "    \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n"
+                + "<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\" lang=\"en\">\n"
+                + "<head>\n"
+                + "  <script>\n"
+                + "    function test() {\n"
+                + "      var map = new WeakMap();\n"
+                + "      map.set(document, 'test');\n"
+                + "     alert(map.has(document));\n"
+                + "     alert(map.get(document));\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'></body>\n"
+                + "</html>";
 
         checkHtmlAlert(html);
     }
@@ -2492,20 +2431,19 @@ public class DocumentTest extends LoboUnitTest {
     @Alerts("true")
     public void useInSet() {
         final String html = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"\n"
-        +  "    \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n"
-        +  "<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\" lang=\"en\">\n"
-        +  "<head>\n"
-        +  "  <script>\n"
-
-        +  "    function test() {\n"
-        +  "      var set = new Set();\n"
-        +  "      set.add(document, 'test');\n"
-        +  "     alert(set.has(document));\n"
-        +  "    }\n"
-        +  "  </script>\n"
-        +  "</head>\n"
-        +  "<body onload='test()'></body>\n"
-        +  "</html>";
+                + "    \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n"
+                + "<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\" lang=\"en\">\n"
+                + "<head>\n"
+                + "  <script>\n"
+                + "    function test() {\n"
+                + "      var set = new Set();\n"
+                + "      set.add(document, 'test');\n"
+                + "     alert(set.has(document));\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'></body>\n"
+                + "</html>";
 
         checkHtmlAlert(html);
     }
@@ -2514,24 +2452,23 @@ public class DocumentTest extends LoboUnitTest {
     @Alerts("true")
     public void useInWeakSet() {
         final String html = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"\n"
-        +  "    \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n"
-        +  "<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\" lang=\"en\">\n"
-        +  "<head>\n"
-        +  "  <script>\n"
-
-        +  "    function test() {\n"
-        +  "      if (window.WeakSet) {\n"
-        +  "        var set = new WeakSet();\n"
-        +  "        set.add(document, 'test');\n"
-        +  "       alert(set.has(document));\n"
-        +  "      } else {\n"
-        +  "       alert('no WeakSet');\n"
-        +  "      }\n"
-        +  "    }\n"
-        +  "  </script>\n"
-        +  "</head>\n"
-        +  "<body onload='test()'></body>\n"
-        +  "</html>";
+                + "    \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n"
+                + "<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\" lang=\"en\">\n"
+                + "<head>\n"
+                + "  <script>\n"
+                + "    function test() {\n"
+                + "      if (window.WeakSet) {\n"
+                + "        var set = new WeakSet();\n"
+                + "        set.add(document, 'test');\n"
+                + "       alert(set.has(document));\n"
+                + "      } else {\n"
+                + "       alert('no WeakSet');\n"
+                + "      }\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'></body>\n"
+                + "</html>";
 
         checkHtmlAlert(html);
     }
@@ -2540,25 +2477,23 @@ public class DocumentTest extends LoboUnitTest {
     @Alerts({"about:blank", "about:blank", "undefined", "null", "null"})
     public void newDoc() {
         final String html = "<html>\n"
-        +  "<head>\n"
-        +  "  <script>\n"
-
-        +  "    function test() {\n"
-        +  "      if (typeof Document === 'object') {alert('no'); return ; }\n"
-
-        +  "      try {\n"
-        +  "        var doc = new Document();"
-        +  "       alert(doc.documentURI);\n"
-        +  "       alert(doc.URL);\n"
-        +  "       alert(doc.origin);\n"
-        +  "       alert(doc.firstElementChild);\n"
-        +  "       alert(doc.defaultView);\n"
-        +  "      } catch(e) {alert('exception'); }\n"
-        +  "    }\n"
-        +  "  </script>\n"
-        +  "</head>\n"
-        +  "<body onload='test()'></body>\n"
-        +  "</html>";
+                + "<head>\n"
+                + "  <script>\n"
+                + "    function test() {\n"
+                + "      if (typeof Document === 'object') {alert('no'); return ; }\n"
+                + "      try {\n"
+                + "        var doc = new Document();"
+                + "       alert(doc.documentURI);\n"
+                + "       alert(doc.URL);\n"
+                + "       alert(doc.origin);\n"
+                + "       alert(doc.firstElementChild);\n"
+                + "       alert(doc.defaultView);\n"
+                + "      } catch(e) {alert('exception'); }\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'></body>\n"
+                + "</html>";
 
         checkHtmlAlert(html);
     }

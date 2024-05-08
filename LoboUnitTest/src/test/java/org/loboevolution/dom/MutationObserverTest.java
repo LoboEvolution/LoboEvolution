@@ -295,7 +295,7 @@ public class MutationObserverTest extends LoboUnitTest {
                 + "  function print(mutation) {\n"
                 + "   alert(mutation.target + '-' + mutation.type);\n"
                 + "  }\n"
-                + "  functionalert(x) {\n"
+                + "  function alert(x) {\n"
                 + "    document.getElementById('log').value += x + '\\n';\n"
                 + "  }\n"
                 + "  function test() {\n"

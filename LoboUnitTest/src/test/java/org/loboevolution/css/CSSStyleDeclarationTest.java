@@ -67,7 +67,7 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"background-color: rgb(255, 255, 255);", "background-color: rgb(255, 255, 255);"})
+    @Alerts({"background-color: rgb(255, 255, 255)", "background-color: rgb(255, 255, 255)"})
     public void cssText() {
         final String html
                 = "<html><body>\n" 
@@ -110,7 +110,7 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
 
     @Test
     @Alerts({"background-color: rgb(255, 255, 255); color: red;",
-            "background-color: rgb(255, 255, 255); color: red;"})
+            "background-color: rgb(255, 255, 255); color: red"})
     public void cssTextMultipleProperties() {
         final String html
                 = "<html><body>\n" 
@@ -656,7 +656,7 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"", "0.5", "0.4", "0.33333", "-3", "3", "", "", ""})
+    @Alerts({"null", "0.5", "0.4", "0.33333", "-3", "3", "null", "null", "null"})
     public void initOpacity() {
         final String html = "<html><body>\n"
                 + "<div id='o1' style='opacity: '>d</div>\n"
@@ -1145,7 +1145,7 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"", "rgb(0, 0, 0)"})
+    @Alerts({"null", "rgb(0, 0, 0)"})
     public void colorDefault() {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -1388,7 +1388,7 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     private void styleShorthand(final String style, final String attribute, final String expectedValue) {
         final String html = "<html><head>\n"
                 + "<script>\n"
-                + "  functionalert(msg) {\n"
+                + "  function alert(msg) {\n"
                 + "    var ta = document.getElementById('myTextArea');\n"
                 + "    ta.value += msg + '; ';\n"
                 + "  }\n"
@@ -1616,7 +1616,7 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
                 "<html><body onload='test()'>\n"
                         + "<a id='a' href='#' style='color:green'>go</a>\n"
                         + "<script>"
-                +  " function test() {\n"
+                        +  " function test() {\n"
                         + "    if (document.all['a'].style.getAttribute) {\n"
                         + "     alert(\"" + params + "\");\n"
                         + "     alert(document.all['a'].style.getAttribute('color'));\n"

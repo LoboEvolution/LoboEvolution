@@ -230,7 +230,7 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 			return null;
 		}
 
-		final HTMLAllCollectionImpl all = (HTMLAllCollectionImpl) doc.getAll();
+		final HTMLAllCollectionImpl all = (HTMLAllCollectionImpl) doc.getall();
 		final AtomicReference<Node> find = new AtomicReference<>();
 		all.forEach(node -> {
 			if (node.hasAttributes()) {

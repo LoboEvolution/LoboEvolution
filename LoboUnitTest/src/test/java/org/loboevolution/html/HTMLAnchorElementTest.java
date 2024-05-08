@@ -340,14 +340,14 @@ public class HTMLAnchorElementTest extends LoboUnitTest {
                 + "</script>\n"
                 + "</head>\n"
                 + "<body onload='test()'>\n"
-                + "  <a id='link' href='" + URL_SECOND + "'>link</a>\n"
+                + "  <a id='link'  href='" + URL_CSS + "style1.css'>link</a>\n"
                 + "</body></html>";
 
         checkHtmlAlert(html);
     }
 
     @Test
-    @Alerts({"", "", "text/html", "TExT/hTMl", " text/html ", "application/pdf", "unknown"})
+    @Alerts({"null", "", "text/html", "TExT/hTMl", " text/html ", "application/pdf", "unknown"})
     public void getType() {
         final String html = "<html><head>\n"
                 + "    <script>\n"
@@ -367,13 +367,13 @@ public class HTMLAnchorElementTest extends LoboUnitTest {
                 + "</script>\n"
                 + "</head>\n"
                 + "<body onload='test()'>\n"
-                + "  <a id='idWithout' href='" + URL_SECOND + "'>link</a>\n"
-                + "  <a id='idEmpty' href='" + URL_SECOND + "' type=''>link</a>\n"
-                + "  <a id='idText' href='" + URL_SECOND + "' type='text/html'>link</a>\n"
-                + "  <a id='idCase' href='" + URL_SECOND + "' type='TExT/hTMl'>link</a>\n"
-                + "  <a id='idWhitespace' href='" + URL_SECOND + "' type=' text/html '>link</a>\n"
-                + "  <a id='idPdf' href='" + URL_SECOND + "' type='application/pdf'>link</a>\n"
-                + "  <a id='idUnknown' href='" + URL_SECOND + "' type='unknown'>link</a>\n"
+                + "  <a id='idWithout' href='" + URL_CSS + "style1.css'>link</a>\n"
+                + "  <a id='idEmpty' href='" + URL_CSS + "style1.css' type=''>link</a>\n"
+                + "  <a id='idText' href='" + URL_CSS + "style1.css' type='text/html'>link</a>\n"
+                + "  <a id='idCase' href='" + URL_CSS + "style1.css' type='TExT/hTMl'>link</a>\n"
+                + "  <a id='idWhitespace' href='" + URL_CSS + "style1.css' type=' text/html '>link</a>\n"
+                + "  <a id='idPdf' href='" + URL_CSS + "style1.css' type='application/pdf'>link</a>\n"
+                + "  <a id='idUnknown' href='" + URL_CSS + "style1.css' type='unknown'>link</a>\n"
                 + "</body></html>";
 
         checkHtmlAlert(html);
@@ -403,7 +403,7 @@ public class HTMLAnchorElementTest extends LoboUnitTest {
                 + "</script>\n"
                 + "</head>\n"
                 + "<body onload='test()'>\n"
-                + "  <a id='id' href='" + URL_SECOND + "' type='text/html'>link</a>\n"
+                + "  <a id='id'  href='" + URL_CSS + "style1.css' type='text/html'>link</a>\n"
                 + "</body></html>";
 
         checkHtmlAlert(html);

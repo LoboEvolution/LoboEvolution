@@ -157,7 +157,7 @@ public class XMLHttpRequestTest extends LoboUnitTest {
         +  "  <textarea id='log' cols='80' rows='40'></textarea>\n"
 
         +  "<script>\n" 
-                + "    functionalert(x) {\n"
+                + "    function alert(x) {\n"
         +  "      document.getElementById('log').value += x + '\\n';\n"
         +  "    }\n"
 
@@ -191,7 +191,7 @@ public class XMLHttpRequestTest extends LoboUnitTest {
                 "<html>\n"
                 +  "  <head>\n"
                 +  "    <script>\n"
-                +  "      functionalert(x) {\n"
+                +  "      function alert(x) {\n"
                 +  "        document.getElementById('log').value += x + '\\n';\n"
                 +  "      }\n"
 

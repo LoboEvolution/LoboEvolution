@@ -140,7 +140,7 @@ public class FormDataTest extends LoboUnitTest {
 
     @Test
     @Alerts({"myValue,myValue2", "", "", "", ""})
-    public void getAll() {
+    public void getall() {
         final String html
                 = "<html><head>\n"
                 + "<script>\n"

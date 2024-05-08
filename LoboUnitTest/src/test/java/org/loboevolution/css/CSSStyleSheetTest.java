@@ -785,22 +785,22 @@ public class CSSStyleSheetTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts({"none", "1"})
+    @Alerts({"block", "1"})
     public void mediaOnLinkTagWhitespace() {
         mediaOnLinkTag(" ");
     }
 
 
     @Test
-    @Alerts({"none", "1"})
+    @Alerts({"block", "1"})
     public void mediaOnLinkTagAll() {
         mediaOnLinkTag("all");
     }
 
 
     @Test
-    @Alerts({"none", "1"})
-    public void mediaOnLinkTag_screen() {
+    @Alerts({"block", "1"})
+    public void mediaOnLinkTagScreen() {
         mediaOnLinkTag("screen");
     }
 
@@ -813,7 +813,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts({"none", "1"})
+    @Alerts({"block", "1"})
     public void mediaOnLinkTagMultipleWithScreen() {
         mediaOnLinkTag("print, screen, tv");
     }
@@ -828,7 +828,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
     private void mediaOnLinkTag(final String media) {
         final String html
                 = "<html><head>\n"
-                + "<link rel='stylesheet' media='" + media + "' href='" + URL_SECOND + "'></link>\n"
+                + " <link rel='stylesheet' media='" + media + "' href='" + URL_CSS + "style1.css' type='text/css'></link>"
                 + "</head><body>\n"
                 + "<div id='d'>hello</div>\n"
                 + "<script>\n"
@@ -845,7 +845,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
 
     @Test
     @Alerts({"none", "1"})
-    public void mediaRule_screen() {
+    public void mediaRuleScreen() {
         mediaRule("screen");
     }
 
@@ -1640,7 +1640,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
     @Alerts("undefined")
     public void brokenExternalCSS() {
         final String html = "<html><head>\n"
-                + "<link rel='stylesheet' type='text/css' href='" + URL_SECOND + "'/>\n"
+                + " <link rel='stylesheet' href='" + URL_CSS + " style1.css' type='text/css'></link>"
                 + "</head>\n"
                 + "<body>\n"
                 + "<script>\n"

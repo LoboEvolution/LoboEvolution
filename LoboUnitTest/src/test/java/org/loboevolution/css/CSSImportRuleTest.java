@@ -247,11 +247,11 @@ public class CSSImportRuleTest extends LoboUnitTest {
 
     @Test
     @Alerts({"imp.css", "@import url(\"imp.css\");"})
-    public void hrefUrlAbsolute() throws Exception {
+    public void hrefUrlAbsolute() {
         final String html
                 = "<html><body>\n"
                 + "<style>\n"
-                + "  @import  url('" + URL_CSS + "imp.css" + "');\n"
+                + "  @import url('imp.css');\n"
                 + "</style>\n"
                 + "<script>\n"
                 + " var styleSheet = document.styleSheets[0];\n"
@@ -462,7 +462,7 @@ public class CSSImportRuleTest extends LoboUnitTest {
     @Test
     @Alerts({"[object CSSImportRule]", "second/", "", "0", "[object CSSStyleSheet]"})
     public void getImportFromCssRulesCollectionAbsolute() {
-        getImportFromCssRulesCollection(URL_SECOND);
+        getImportFromCssRulesCollection("second/");
     }
 
     @Test
@@ -492,13 +492,12 @@ public class CSSImportRuleTest extends LoboUnitTest {
         checkHtmlAlert(html);
     }
 
-
     @Test
     @Alerts("true")
     public void importedStylesheetsLoaded() {
         final String html
                 = "<html><body>\n"
-                + "<style>@import url('" + URL_SECOND + "');</style>\n"
+                + "<style> @import  url('" + URL_CSS + "imp.css" + "');</style>\n"
                 + "<div id='d'>foo</div>\n"
                 + "<script>\n" 
                 + "var d = document.getElementById('d');\n"
@@ -515,7 +514,7 @@ public class CSSImportRuleTest extends LoboUnitTest {
     @Alerts("true")
     public void importedStylesheetsURLResolution() {
         final String html = "<html><head>\n"
-                + "<link rel='stylesheet' type='text/css' href='dir1/dir2/file1.css'></link>\n"
+                + "<link rel='stylesheet' type='text/css' href='" + URL_CSS + "file1.css'></link>\n"
                 + "<body>\n"
                 + "<div id='d'>foo</div>\n"
                 + "<script>\n" 
@@ -532,7 +531,7 @@ public class CSSImportRuleTest extends LoboUnitTest {
     @Alerts("true")
     public void circularImportedStylesheets() {
         final String html = "<html><head>\n"
-                + "<link rel='stylesheet' type='text/css' href='dir1/dir2/file1.css'></link>\n"
+                + "<link rel='stylesheet' type='text/css' href='" + URL_CSS + "file1.css'></link>\n"
                 + "<body>\n"
                 + "<div id='d'>foo</div>\n"
                 + "<script>\n" 
@@ -550,7 +549,7 @@ public class CSSImportRuleTest extends LoboUnitTest {
     @Alerts({"true", "true", "true"})
     public void circularImportedStylesheetsComplexCase() {
         final String html = "<html><head>\n"
-                + "<link rel='stylesheet' type='text/css' href='dir1/dir2/file1.css'></link>\n"
+                + "<link rel='stylesheet' type='text/css' href='" + URL_CSS + "file1.css'></link>\n"
                 + "<body>\n"
                 + "<div id='d'>foo</div>\n"
                 + "<div id='e'>foo</div>\n"
@@ -576,8 +575,8 @@ public class CSSImportRuleTest extends LoboUnitTest {
         final String html
                 = "<html><head>\n"
                 + "  <style>\n"
-                + "    @import url('" + URL_SECOND + "');\n"
-                + "    @import url('" + URL_THIRD + "') print;\n"
+                + "    @import  url('" + URL_CSS + "imp.css" + "');\n"
+                + "    @import  url('" + URL_CSS + "imp.css" + "') print;\n"
                 + "  </style>\n"
                 + "</head>\n"
                 + "<body>\n"

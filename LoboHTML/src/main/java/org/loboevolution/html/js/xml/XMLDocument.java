@@ -692,8 +692,8 @@ public class XMLDocument implements Document {
 
 	/** {@inheritDoc} */
 	@Override
-	public HTMLAllCollection getAll() {
-		return doc.getAll();
+	public HTMLAllCollection getall() {
+		return doc.getall();
 	}
 
 	/** {@inheritDoc} */

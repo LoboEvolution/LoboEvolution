@@ -677,7 +677,7 @@ public class Event2Test extends LoboUnitTest {
     public void returnPriority() {
         final String html = "<html><head>\n"
                 + "<script>\n"
-                + "  functionalert(msg) {\n"
+                + "  function alert(msg) {\n"
                 + "    window.document.title += msg + ';';\n"
                 + "  }\n"
                 + "</script>\n"

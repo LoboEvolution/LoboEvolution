@@ -227,23 +227,22 @@ public class StyleSheetListTest extends LoboUnitTest {
     @Alerts({"1", "false", "true", "false", "false"})
     public void in() {
         final String html =
-                "<html>\n"
-                        + "  <head>\n"
-                        + "    <link rel='stylesheet' type='text/css' href='foo.css'/>\n"
-                        + "    <script>\n"
-
-                        + "      function test() {\n"
-                        + "        var sheets = document.styleSheets;\n"
-                        + "       alert(sheets.length);\n"
-                        + "       alert(-1 in sheets);\n"
-                        + "       alert(0 in sheets);\n"
-                        + "       alert(1 in sheets);\n"
-                        + "       alert(42 in sheets);\n"
-                        + "      }\n"
-                        + "    </script>\n"
-                        + "  </head>\n"
-                        + "  <body onload='test()'>abc</body>\n"
-                        + "</html>";
+                  "<html>\n"
+                + "  <head>\n"
+                + "    <link rel='stylesheet' type='text/css' href='src\\test\\resources\\org\\lobo\\css\\foo.css'/>\n"
+                + "    <script>\n"
+                + "      function test() {\n"
+                + "        var sheets = document.styleSheets;\n"
+                + "       alert(sheets.length);\n"
+                + "       alert(-1 in sheets);\n"
+                + "       alert(0 in sheets);\n"
+                + "       alert(1 in sheets);\n"
+                + "       alert(42 in sheets);\n"
+                + "      }\n"
+                + "    </script>\n"
+                + "  </head>\n"
+                + "  <body onload='test()'>abc</body>\n"
+                + "</html>";
 
         checkHtmlAlert(html);
     }

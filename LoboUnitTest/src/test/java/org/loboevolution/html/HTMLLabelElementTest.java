@@ -349,7 +349,7 @@ public class HTMLLabelElementTest extends LoboUnitTest {
         HTMLInputElementImpl checkbox = (HTMLInputElementImpl) document.getElementById("checkbox1");
         assertFalse(checkbox.isChecked());
 
-        HTMLButtonElementImpl button = (HTMLButtonElementImpl) document.getElementById("label1");
+        HTMLButtonElementImpl button = (HTMLButtonElementImpl) document.getElementById("button1");
         button.click();
         assertTrue(checkbox.isChecked());
     }
@@ -381,7 +381,7 @@ public class HTMLLabelElementTest extends LoboUnitTest {
         HTMLInputElementImpl checkbox = (HTMLInputElementImpl) document.getElementById("checkbox1");
         assertFalse(checkbox.isChecked());
 
-        HTMLButtonElementImpl button = (HTMLButtonElementImpl) document.getElementById("label1");
+        HTMLButtonElementImpl button = (HTMLButtonElementImpl) document.getElementById("button1");
         button.click();
         assertTrue(checkbox.isChecked());
     }
