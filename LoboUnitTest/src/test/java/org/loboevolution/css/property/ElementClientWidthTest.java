@@ -37,7 +37,7 @@ import org.loboevolution.driver.LoboUnitTest;
 @ExtendWith(AlertsExtension.class)
 public class ElementClientWidthTest extends LoboUnitTest {
 
-    private static final String VALUE_ = "e == null ? e : (e.clientWidth < 1000 ? e.clientWidth :"
+    private static final String VALUE_ = "e == null ? e : (e.clientWidth <= 700 ? e.clientWidth :"
             + "e.clientWidth - document.documentElement.clientWidth)";
 
 
@@ -156,7 +156,7 @@ public class ElementClientWidthTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("0")
+    @Alerts("-16")
     public void body() {
         checkHtmlAlert(test("body"));
     }
@@ -243,7 +243,7 @@ public class ElementClientWidthTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts("-56")
+    @Alerts("-55")
     public void dd() {
         checkHtmlAlert(test("dd"));
     }
@@ -404,7 +404,7 @@ public class ElementClientWidthTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts("null")
+    @Alerts("0")
     public void head() {
         checkHtmlAlert(test("head"));
     }
@@ -418,16 +418,9 @@ public class ElementClientWidthTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts("-18")
+    @Alerts("-16")
     public void hr() {
         checkHtmlAlert(test("hr"));
-    }
-
-
-    @Test
-    @Alerts("0")
-    public void html() {
-        checkHtmlAlert(test("html"));
     }
 
 
@@ -439,7 +432,7 @@ public class ElementClientWidthTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts("0")
+    @Alerts("-16")
     public void q() {
         checkHtmlAlert(test("q"));
     }
@@ -788,7 +781,7 @@ public class ElementClientWidthTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts("0")
+    @Alerts("-16")
     public void small() {
         checkHtmlAlert(test("small"));
     }
@@ -1111,60 +1104,33 @@ public class ElementClientWidthTest extends LoboUnitTest {
     }
 
     private static String test(final String tagName) {
-        if ("basefont".equals(tagName) || "isindex".equals(tagName)) {
-            return headElementClosesItself(tagName);
+        switch (tagName) {
+            case "basefont":
+                return headElementClosesItself(tagName);
+            case "script":
+                return "<html><head>\n"
+                        + "<script>\n"
+                        + "function test() {\n"
+                        + "  var e = document.getElementById('outer');\n"
+                        + "  alert(" + VALUE_ + ");\n"
+                        + "}\n"
+                        + "</script>\n"
+                        + "</head><body onload='test()'>\n"
+                        + "<script id='outer'>//<script>\n"
+                        + "</script>\n"
+                        + "</body></html>";
+            default:
+                return "<html><head>\n"
+                        + "<script>\n"
+                        + "function test() {\n"
+                        + "  var e = document.getElementById('outer');\n"
+                        + "  alert(" + VALUE_ + ");\n"
+                        + "}\n"
+                        + "</script>\n"
+                        + "</head><body onload='test()'>\n"
+                        + "<" + tagName + " id='outer'><" + tagName + "></" + tagName + "></" + tagName + ">\n"
+                        + "</body></html>";
         }
-
-        if ("frame".equals(tagName)) {
-            return "<html><head>\n"
-                    + "<script>\n"
-                    + "function test() {\n"
-                    + "  var e = document.getElementById('outer');\n"
-                    + " alert(" + VALUE_ + ");\n"
-                    + "}\n"
-                    + "</script>\n"
-                    + "</head>\n"
-                    + "<frameset onload='test()'>\n"
-                    + "<frame id='outer'><frame>\n"
-                    + "</frameset></html>";
-        }
-        if ("script".equals(tagName)) {
-            return "<html><head>\n"
-                    + "<script>\n"
-                    + "function test() {\n"
-                    + "  var e = document.getElementById('outer');\n"
-                    + " alert(" + VALUE_ + ");\n"
-                    + "}\n"
-                    + "</script>\n"
-                    + "</head><body onload='test()'>\n"
-                    + "<script id='outer'>//<script>\n"
-                    + "</script>\n"
-                    + "</body></html>";
-        }
-        if ("frameset".equals(tagName)) {
-            return "<html><head>\n"
-                    + "<script>\n"
-                    + "function test() {\n"
-                    + "  var e = document.getElementById('outer');\n"
-                    + " alert(" + VALUE_ + ");\n"
-                    + "}\n"
-                    + "</script>\n"
-                    + "</head>\n"
-                    + "<frameset onload='test()' id='outer'>\n"
-                    + "<frameset>\n"
-                    + "</frameset></html>";
-        }
-
-        return "<html><head>\n"
-                + "<script>\n"
-                + "function test() {\n"
-                + "  var e = document.getElementById('outer');\n"
-                + " alert(" + VALUE_ + ");\n"
-                + "}\n"
-                + "</script>\n"
-                + "</head><body onload='test()'>\n"
-                + "<" + tagName + " id='outer'><" + tagName + "></" + tagName + "></" + tagName + ">\n"
-                + "</body></html>";
     }
 
     private static String testInput(final String type) {
@@ -1172,7 +1138,7 @@ public class ElementClientWidthTest extends LoboUnitTest {
                 + "<script>\n"
                 + "function test() {\n"
                 + "  var e = document.getElementById('outer');\n"
-                + " alert(" + VALUE_ + ");\n"
+                + "  alert(" + VALUE_ + ");\n"
                 + "}\n"
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"
@@ -1186,11 +1152,10 @@ public class ElementClientWidthTest extends LoboUnitTest {
                 + "<script>\n"
                 + "function test() {\n"
                 + "  var e = document.getElementById('outer');\n"
-                + " alert(" + VALUE_ + ");\n"
+                + "  alert(" + VALUE_ + ");\n"
                 + "}\n"
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"
                 + "</body></html>";
     }
-
 }

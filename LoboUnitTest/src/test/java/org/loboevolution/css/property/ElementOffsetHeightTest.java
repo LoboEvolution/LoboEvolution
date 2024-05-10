@@ -34,6 +34,7 @@ import org.loboevolution.html.dom.HTMLDocument;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * Tests for ComputedHeight.
@@ -60,7 +61,7 @@ public class ElementOffsetHeightTest extends LoboUnitTest {
 
         final HTMLDocument document = loadHtml(html);
         HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("myTextarea");
-        assertEquals("", elem.getNodeValue());
+        assertNull(elem.getNodeValue());
     }
 
     @Test

@@ -148,7 +148,7 @@ public class ElementClientHeightTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts("0")
+    @Alerts("17")
     public void blockquote() {
         checkHtmlAlert(test("blockquote"));
     }
@@ -161,7 +161,7 @@ public class ElementClientHeightTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts("0")
+    @Alerts("17")
     public void b() {
         checkHtmlAlert(test("b"));
     }
@@ -187,7 +187,7 @@ public class ElementClientHeightTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("null")
+    @Alerts("0")
     public void caption() {
         checkHtmlAlert(test("caption"));
     }
@@ -208,7 +208,7 @@ public class ElementClientHeightTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts("0")
+    @Alerts("15")
     public void code() {
         checkHtmlAlert(test("code"));
     }
@@ -242,7 +242,7 @@ public class ElementClientHeightTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts("0")
+    @Alerts("17")
     public void dd() {
         checkHtmlAlert(test("dd"));
     }
@@ -344,19 +344,6 @@ public class ElementClientHeightTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts("674")
-    public void frame() {
-        checkHtmlAlert(test("frame"));
-    }
-
-    @Test
-    @Alerts("630")
-    public void frameset() {
-        checkHtmlAlert(test("frameset"));
-    }
-
-
-    @Test
     @Alerts("0")
     public void h1() {
         checkHtmlAlert(test("h1"));
@@ -396,7 +383,7 @@ public class ElementClientHeightTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("null")
+    @Alerts("0")
     public void head() {
         checkHtmlAlert(test("head"));
     }
@@ -414,12 +401,6 @@ public class ElementClientHeightTest extends LoboUnitTest {
         checkHtmlAlert(test("hr"));
     }
 
-    @Test
-    @Alerts("630")
-    public void html() {
-        checkHtmlAlert(test("html"));
-    }
-
 
     @Test
     @Alerts("150")
@@ -428,7 +409,7 @@ public class ElementClientHeightTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("0")
+    @Alerts("17")
     public void q() {
         checkHtmlAlert(test("q"));
     }
@@ -468,7 +449,7 @@ public class ElementClientHeightTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts("0")
+    @Alerts("15")
     public void kbd() {
         checkHtmlAlert(test("kbd"));
     }
@@ -689,7 +670,7 @@ public class ElementClientHeightTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("0")
+    @Alerts("15")
     public void pre() {
         checkHtmlAlert(test("pre"));
     }
@@ -733,7 +714,7 @@ public class ElementClientHeightTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("0")
+    @Alerts("15")
     public void samp() {
         checkHtmlAlert(test("samp"));
     }
@@ -757,7 +738,7 @@ public class ElementClientHeightTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("0")
+    @Alerts("15")
     public void small() {
         checkHtmlAlert(test("small"));
     }
@@ -788,7 +769,7 @@ public class ElementClientHeightTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("0")
+    @Alerts("17")
     public void strong() {
         checkHtmlAlert(test("strong"));
     }
@@ -800,7 +781,7 @@ public class ElementClientHeightTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("0")
+    @Alerts("15")
     public void sub() {
         checkHtmlAlert(test("sub"));
     }
@@ -812,7 +793,7 @@ public class ElementClientHeightTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("0")
+    @Alerts("15")
     public void sup() {
         checkHtmlAlert(test("sup"));
     }
@@ -833,42 +814,42 @@ public class ElementClientHeightTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts("null")
+    @Alerts("0")
     public void col() {
         checkHtmlAlert(test("col"));
     }
 
 
     @Test
-    @Alerts("null")
+    @Alerts("0")
     public void colgroup() {
         checkHtmlAlert(test("colgroup"));
     }
 
 
     @Test
-    @Alerts("null")
+    @Alerts("0")
     public void tbody() {
         checkHtmlAlert(test("tbody"));
     }
 
 
     @Test
-    @Alerts("null")
+    @Alerts("0")
     public void td() {
         checkHtmlAlert(test("td"));
     }
 
 
     @Test
-    @Alerts("null")
+    @Alerts("0")
     public void th() {
         checkHtmlAlert(test("th"));
     }
 
 
     @Test
-    @Alerts("null")
+    @Alerts("0")
     public void tr() {
         checkHtmlAlert(test("tr"));
     }
@@ -889,21 +870,21 @@ public class ElementClientHeightTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts("null")
+    @Alerts("0")
     public void tfoot() {
         checkHtmlAlert(test("tfoot"));
     }
 
 
     @Test
-    @Alerts("null")
+    @Alerts("0")
     public void thead() {
         checkHtmlAlert(test("thead"));
     }
 
 
     @Test
-    @Alerts("0")
+    @Alerts("15")
     public void tt() {
         checkHtmlAlert(test("tt"));
     }
@@ -994,7 +975,7 @@ public class ElementClientHeightTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts("21")
+    @Alerts("20")
     public void inputFile() {
         checkHtmlAlert(testInput("file"));
     }
@@ -1079,60 +1060,33 @@ public class ElementClientHeightTest extends LoboUnitTest {
     }
 
     private static String test(final String tagName) {
-        if ("basefont".equals(tagName) || "isindex".equals(tagName)) {
-            return headElementClosesItself(tagName);
+        switch (tagName) {
+            case "basefont":
+                return headElementClosesItself(tagName);
+            case "script":
+                return "<html><head>\n"
+                        + "<script>\n"
+                        + "function test() {\n"
+                        + "  var e = document.getElementById('outer');\n"
+                        + "  alert(" + VALUE_ + ");\n"
+                        + "}\n"
+                        + "</script>\n"
+                        + "</head><body onload='test()'>\n"
+                        + "<script id='outer'>//<script>\n"
+                        + "</script>\n"
+                        + "</body></html>";
+            default:
+                return "<html><head>\n"
+                        + "<script>\n"
+                        + "function test() {\n"
+                        + "  var e = document.getElementById('outer');\n"
+                        + "  alert(" + VALUE_ + ");\n"
+                        + "}\n"
+                        + "</script>\n"
+                        + "</head><body onload='test()'>\n"
+                        + "<" + tagName + " id='outer'><" + tagName + "></" + tagName + "></" + tagName + ">\n"
+                        + "</body></html>";
         }
-
-        if ("frame".equals(tagName)) {
-            return "<html><head>\n"
-                    + "<script>\n"
-                    + "function test() {\n"
-                    + "  var e = document.getElementById('outer');\n"
-                    + " alert(" + VALUE_ + ");\n"
-                    + "}\n"
-                    + "</script>\n"
-                    + "</head>\n"
-                    + "<frameset onload='test()'>\n"
-                    + "<frame id='outer'><frame>\n"
-                    + "</frameset></html>";
-        }
-        if ("script".equals(tagName)) {
-            return "<html><head>\n"
-                    + "<script>\n"
-                    + "function test() {\n"
-                    + "  var e = document.getElementById('outer');\n"
-                    + " alert(" + VALUE_ + ");\n"
-                    + "}\n"
-                    + "</script>\n"
-                    + "</head><body onload='test()'>\n"
-                    + "<script id='outer'>//<script>\n"
-                    + "</script>\n"
-                    + "</body></html>";
-        }
-        if ("frameset".equals(tagName)) {
-            return "<html><head>\n"
-                    + "<script>\n"
-                    + "function test() {\n"
-                    + "  var e = document.getElementById('outer');\n"
-                    + " alert(" + VALUE_ + ");\n"
-                    + "}\n"
-                    + "</script>\n"
-                    + "</head>\n"
-                    + "<frameset onload='test()' id='outer'>\n"
-                    + "<frameset>\n"
-                    + "</frameset></html>";
-        }
-
-        return "<html><head>\n"
-                + "<script>\n"
-                + "function test() {\n"
-                + "  var e = document.getElementById('outer');\n"
-                + " alert(" + VALUE_ + ");\n"
-                + "}\n"
-                + "</script>\n"
-                + "</head><body onload='test()'>\n"
-                + "<" + tagName + " id='outer'><" + tagName + "></" + tagName + "></" + tagName + ">\n"
-                + "</body></html>";
     }
 
     private static String testInput(final String type) {

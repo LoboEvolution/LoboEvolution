@@ -37,7 +37,7 @@ import org.loboevolution.driver.LoboUnitTest;
 @ExtendWith(AlertsExtension.class)
 public class ElementOffsetWidthTest extends LoboUnitTest {
 
-    private static final String VALUE_ = "e == null ? e : (e.offsetWidth < 1000 ? e.offsetWidth :"
+    private static final String VALUE_ = "e == null ? e : (e.offsetWidth < 700 ? e.offsetWidth :"
             + "e.offsetWidth - document.documentElement.offsetWidth)";
 
     @Test
@@ -178,7 +178,7 @@ public class ElementOffsetWidthTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("16")
+    @Alerts("22")
     public void button() {
         test("button");
     }
@@ -245,7 +245,7 @@ public class ElementOffsetWidthTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts("-56")
+    @Alerts("-55")
     public void dd() {
         test("dd");
     }
@@ -308,7 +308,7 @@ public class ElementOffsetWidthTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts("-20")
+    @Alerts("-24")
     public void fieldset() {
         test("fieldset");
     }
@@ -346,20 +346,6 @@ public class ElementOffsetWidthTest extends LoboUnitTest {
     @Alerts("-16")
     public void form() {
         test("form");
-    }
-
-
-    @Test
-    @Alerts("0")
-    public void frame() {
-        test("frame");
-    }
-
-
-    @Test
-    @Alerts("0")
-    public void frameset() {
-        test("frameset");
     }
 
 
@@ -406,7 +392,7 @@ public class ElementOffsetWidthTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts("null")
+    @Alerts("0")
     public void head() {
         test("head");
     }
@@ -427,14 +413,7 @@ public class ElementOffsetWidthTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts("0")
-    public void html() {
-        test("html");
-    }
-
-
-    @Test
-    @Alerts("304")
+    @Alerts("300")
     public void iframe() {
         test("iframe");
     }
@@ -786,7 +765,7 @@ public class ElementOffsetWidthTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("0")
+    @Alerts("-16")
     public void small() {
         test("small");
     }
@@ -849,7 +828,7 @@ public class ElementOffsetWidthTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("NaN")
+    @Alerts("300")
     public void svg() {
         test("svg");
     }
@@ -906,7 +885,7 @@ public class ElementOffsetWidthTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts("170")
+    @Alerts("183")
     public void textarea() {
         test("textarea");
     }

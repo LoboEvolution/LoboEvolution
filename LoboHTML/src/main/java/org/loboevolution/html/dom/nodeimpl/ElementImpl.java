@@ -76,7 +76,7 @@ import java.util.stream.Stream;
 @Slf4j
 public abstract class ElementImpl extends NodeImpl implements Element {
 
-	private static final int SCROLL_BAR_THICKNESS = 17;
+	private static final int SCROLL_BAR_THICKNESS = 16;
 
 	private final NamedNodeMapImpl map;
 
