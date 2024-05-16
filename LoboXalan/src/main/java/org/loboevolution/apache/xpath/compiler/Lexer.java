@@ -76,9 +76,9 @@ class Lexer {
    * Walk through the expression and build a token queue, and a map of the top-level elements.
    *
    * @param pat XSLT Expression.
-   * @throws org.loboevolution.javax.xml.transform.TransformerException if any
+   * @throws javax.xml.transform.TransformerException if any
    */
-  void tokenize(final String pat) throws org.loboevolution.javax.xml.transform.TransformerException {
+  void tokenize(final String pat) throws javax.xml.transform.TransformerException {
     tokenize(pat, null);
   }
 
@@ -87,10 +87,10 @@ class Lexer {
    *
    * @param pat XSLT Expression.
    * @param targetStrings Vector to hold Strings, may be null.
-   * @throws org.loboevolution.javax.xml.transform.TransformerException if any
+   * @throws javax.xml.transform.TransformerException if any
    */
   void tokenize(final String pat, final List<String> targetStrings)
-      throws org.loboevolution.javax.xml.transform.TransformerException {
+      throws javax.xml.transform.TransformerException {
 
     m_compiler.m_currentPattern = pat;
     m_patternMapSize = 0;
@@ -462,11 +462,11 @@ class Lexer {
    * @param startSubstring The start of the name string.
    * @param posOfNSSep The position of the namespace seperator (':').
    * @param posOfScan The end of the name index.
-   * @throws org.loboevolution.javax.xml.transform.TransformerException if any
+   * @throws javax.xml.transform.TransformerException if any
    * @return -1 always.
    */
   private int mapNSTokens(final String pat, final int startSubstring, final int posOfNSSep, final int posOfScan)
-      throws org.loboevolution.javax.xml.transform.TransformerException {
+      throws javax.xml.transform.TransformerException {
 
     String prefix = "";
 

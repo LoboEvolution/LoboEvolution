@@ -69,7 +69,7 @@ public class UnionPattern extends Expression {
 
   /** {@inheritDoc} */
   @Override
-  public XObject execute(final XPathContext xctxt) throws org.loboevolution.javax.xml.transform.TransformerException {
+  public XObject execute(final XPathContext xctxt) throws javax.xml.transform.TransformerException {
 
     XObject bestScore = null;
     for (final StepPattern m_pattern : m_patterns) {

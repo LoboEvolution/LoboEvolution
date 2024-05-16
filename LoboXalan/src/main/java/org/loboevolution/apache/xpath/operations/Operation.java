@@ -73,7 +73,7 @@ public class Operation extends Expression {
 
   /** {@inheritDoc} */
   @Override
-  public XObject execute(final XPathContext xctxt) throws org.loboevolution.javax.xml.transform.TransformerException {
+  public XObject execute(final XPathContext xctxt) throws javax.xml.transform.TransformerException {
 
     final XObject left = m_left.execute(xctxt, true);
     final XObject right = m_right.execute(xctxt, true);
@@ -90,10 +90,10 @@ public class Operation extends Expression {
    * @param left non-null reference to the evaluated left operand.
    * @param right non-null reference to the evaluated right operand.
    * @return non-null reference to the XObject that represents the result of the operation.
-   * @throws org.loboevolution.javax.xml.transform.TransformerException in case of error
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   public XObject operate(final XObject left, final XObject right)
-      throws org.loboevolution.javax.xml.transform.TransformerException {
+      throws javax.xml.transform.TransformerException {
     return null; // no-op
   }
 

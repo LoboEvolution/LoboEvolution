@@ -61,7 +61,7 @@ public abstract class UnaryOperation extends Expression {
 
   /** {@inheritDoc} */
   @Override
-  public XObject execute(final XPathContext xctxt) throws org.loboevolution.javax.xml.transform.TransformerException {
+  public XObject execute(final XPathContext xctxt) throws javax.xml.transform.TransformerException {
 
     return operate(m_right.execute(xctxt));
   }
@@ -71,9 +71,9 @@ public abstract class UnaryOperation extends Expression {
    *
    * @param right non-null reference to the evaluated right operand.
    * @return non-null reference to the XObject that represents the result of the operation.
-   * @throws org.loboevolution.javax.xml.transform.TransformerException in case of error
+   * @throws javax.xml.transform.TransformerException in case of error
    */
-  public abstract XObject operate(XObject right) throws org.loboevolution.javax.xml.transform.TransformerException;
+  public abstract XObject operate(XObject right) throws javax.xml.transform.TransformerException;
 
   /** {@inheritDoc} */
   @Override

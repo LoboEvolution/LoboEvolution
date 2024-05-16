@@ -47,10 +47,10 @@ public class ChildTestIterator extends BasicTestIterator {
    * @param compiler A reference to the Compiler that contains the op map.
    * @param opPos The position within the op map, which contains the location path expression for
    *     this itterator.
-   * @throws org.loboevolution.javax.xml.transform.TransformerException if any
+   * @throws javax.xml.transform.TransformerException if any
    */
   ChildTestIterator(final Compiler compiler, final int opPos, final int analysis)
-      throws org.loboevolution.javax.xml.transform.TransformerException {
+      throws javax.xml.transform.TransformerException {
     super(compiler, opPos, analysis);
   }
 

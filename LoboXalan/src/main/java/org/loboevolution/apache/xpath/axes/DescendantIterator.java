@@ -53,10 +53,10 @@ public class DescendantIterator extends LocPathIterator {
    * @param compiler A reference to the Compiler that contains the op map.
    * @param opPos The position within the op map, which contains the location path expression for
    *     this itterator.
-   * @throws org.loboevolution.javax.xml.transform.TransformerException if any
+   * @throws javax.xml.transform.TransformerException if any
    */
   DescendantIterator(final Compiler compiler, final int opPos, final int analysis)
-      throws org.loboevolution.javax.xml.transform.TransformerException {
+      throws javax.xml.transform.TransformerException {
 
     super(analysis);
 
@@ -186,7 +186,7 @@ public class DescendantIterator extends LocPathIterator {
 
   /** {@inheritDoc} */
   @Override
-  public int asNode(final XPathContext xctxt) throws org.loboevolution.javax.xml.transform.TransformerException {
+  public int asNode(final XPathContext xctxt) throws javax.xml.transform.TransformerException {
     if (getPredicateCount() > 0) return super.asNode(xctxt);
 
     final int current = xctxt.getCurrentNode();

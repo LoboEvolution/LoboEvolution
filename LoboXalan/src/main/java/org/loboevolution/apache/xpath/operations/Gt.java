@@ -34,7 +34,7 @@ public class Gt extends Operation {
   /** {@inheritDoc} */
   @Override
   public XObject operate(final XObject left, final XObject right)
-      throws org.loboevolution.javax.xml.transform.TransformerException {
+      throws javax.xml.transform.TransformerException {
     return left.greaterThan(right) ? XBoolean.S_TRUE : XBoolean.S_FALSE;
   }
 }

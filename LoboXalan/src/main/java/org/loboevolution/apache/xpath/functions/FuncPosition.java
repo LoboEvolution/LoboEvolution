@@ -60,7 +60,7 @@ public class FuncPosition extends Function {
 
   /** {@inheritDoc} */
   @Override
-  public XObject execute(final XPathContext xctxt) throws org.loboevolution.javax.xml.transform.TransformerException {
+  public XObject execute(final XPathContext xctxt) throws javax.xml.transform.TransformerException {
     final double pos = getPositionInContextNodeList(xctxt);
 
     return new XNumber(pos);

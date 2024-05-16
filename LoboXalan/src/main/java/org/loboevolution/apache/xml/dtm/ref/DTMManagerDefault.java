@@ -27,8 +27,7 @@ package org.loboevolution.apache.xml.dtm.ref;
 
 import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.html.node.Attr;
-import org.loboevolution.javax.xml.transform.Source;
-import org.loboevolution.javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.Source;
 
 import org.loboevolution.apache.xml.dtm.ref.dom2dtm.DOM2DTM;
 import org.loboevolution.apache.xml.dtm.ref.dom2dtm.DOM2DTMdefaultNamespaceDeclarationNode;
@@ -41,6 +40,7 @@ import org.loboevolution.apache.xml.dtm.DTMIterator;
 import org.loboevolution.apache.xml.dtm.DTMManager;
 import org.loboevolution.apache.xml.utils.PrefixResolver;
 import org.loboevolution.html.node.Node;
+import org.loboevolution.javax.xml.transform.dom.DOMSource;
 
 /**
  * The default implementation for the DTMManager.
@@ -162,7 +162,7 @@ public class DTMManagerDefault extends DTMManager {
     final int dtmPos = getFirstFreeDTMID();
     final int documentID = dtmPos << IDENT_DTM_NODE_BITS;
 
-    if ((null != source) && source instanceof DOMSource) {
+    if (source instanceof DOMSource) {
       final DOM2DTM dtm = new DOM2DTM(this, (DOMSource) source, documentID, doIndexing);
 
       addDTM(dtm, dtmPos, 0);

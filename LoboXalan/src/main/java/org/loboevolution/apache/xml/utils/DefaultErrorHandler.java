@@ -26,8 +26,8 @@
 package org.loboevolution.apache.xml.utils;
 
 import java.io.PrintWriter;
-import org.loboevolution.javax.xml.transform.ErrorListener;
-import org.loboevolution.javax.xml.transform.TransformerException;
+import javax.xml.transform.ErrorListener;
+import javax.xml.transform.TransformerException;
 
 /** Implement SAX error handler for default reporting. */
 public class DefaultErrorHandler implements ErrorListener {

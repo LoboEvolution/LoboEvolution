@@ -39,10 +39,10 @@ public class WalkingIteratorSorted extends WalkingIterator {
    *
    * @param compiler The Compiler which is creating this expression.
    * @param opPos The position of this iterator in the opcode list from the compiler.
-   * @throws org.loboevolution.javax.xml.transform.TransformerException if any
+   * @throws javax.xml.transform.TransformerException if any
    */
   WalkingIteratorSorted(final Compiler compiler, final int opPos, final int analysis)
-      throws org.loboevolution.javax.xml.transform.TransformerException {
+      throws javax.xml.transform.TransformerException {
     super(compiler, opPos, analysis, true);
   }
 

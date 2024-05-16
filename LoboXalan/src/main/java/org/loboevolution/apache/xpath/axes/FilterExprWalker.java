@@ -56,7 +56,7 @@ public class FilterExprWalker extends AxesWalker {
   /** {@inheritDoc} */
   @Override
   public void init(final Compiler compiler, final int opPos, final int stepType)
-      throws org.loboevolution.javax.xml.transform.TransformerException {
+      throws javax.xml.transform.TransformerException {
 
     super.init(compiler, opPos, stepType);
 
@@ -129,7 +129,7 @@ public class FilterExprWalker extends AxesWalker {
         result.setShouldCacheNodes(true);
       } else result = (XNodeSet) expr.execute(xctxt);
 
-    } catch (final org.loboevolution.javax.xml.transform.TransformerException se) {
+    } catch (final javax.xml.transform.TransformerException se) {
 
       // TODO: Fix...
       throw new WrappedRuntimeException(se);
@@ -163,7 +163,7 @@ public class FilterExprWalker extends AxesWalker {
       }
 
       return DTMIterator.FILTER_ACCEPT;
-    } catch (final org.loboevolution.javax.xml.transform.TransformerException se) {
+    } catch (final javax.xml.transform.TransformerException se) {
       throw new RuntimeException(se.getMessage());
     }
   }

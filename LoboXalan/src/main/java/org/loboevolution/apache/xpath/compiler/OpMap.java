@@ -25,7 +25,7 @@
  */
 package org.loboevolution.apache.xpath.compiler;
 
-import org.loboevolution.javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerException;
 import org.loboevolution.apache.xpath.patterns.NodeTest;
 import org.loboevolution.apache.xpath.res.XPATHErrorResources;
 import org.loboevolution.apache.xpath.res.XPATHMessages;

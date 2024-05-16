@@ -26,7 +26,7 @@
 package org.loboevolution.apache.xpath.compiler;
 
 import java.util.HashMap;
-import org.loboevolution.javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerException;
 import org.loboevolution.apache.xpath.functions.Function;
 
 /** The function table for XPath. */

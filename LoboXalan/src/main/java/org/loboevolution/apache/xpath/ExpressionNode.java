@@ -25,7 +25,7 @@
  */
 package org.loboevolution.apache.xpath;
 
-import org.loboevolution.javax.xml.transform.SourceLocator;
+import javax.xml.transform.SourceLocator;
 
 /**
  * A class that implements this interface can construct expressions, give information about child

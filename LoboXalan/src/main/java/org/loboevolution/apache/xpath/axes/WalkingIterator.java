@@ -43,10 +43,10 @@ public class WalkingIterator extends LocPathIterator {
    * @param opPos The position of this iterator in the opcode list from the compiler.
    * @param shouldLoadWalkers True if walkers should be loaded, or false if this is a derived
    *     iterator and it doesn't wish to load child walkers.
-   * @throws org.loboevolution.javax.xml.transform.TransformerException if any
+   * @throws javax.xml.transform.TransformerException if any
    */
   WalkingIterator(final Compiler compiler, final int opPos, final int analysis, final boolean shouldLoadWalkers)
-      throws org.loboevolution.javax.xml.transform.TransformerException {
+      throws javax.xml.transform.TransformerException {
     super(analysis);
 
     final int firstStepPos = OpMap.getFirstChildPos(opPos);

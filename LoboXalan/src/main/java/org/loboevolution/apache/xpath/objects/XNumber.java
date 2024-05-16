@@ -73,7 +73,7 @@ public class XNumber extends XObject {
 
   /** {@inheritDoc} */
   @Override
-  public double num(final XPathContext xctxt) throws org.loboevolution.javax.xml.transform.TransformerException {
+  public double num(final XPathContext xctxt) throws javax.xml.transform.TransformerException {
 
     return m_val;
   }
@@ -177,7 +177,7 @@ public class XNumber extends XObject {
       if (t == XObject.CLASS_NODESET) return obj2.equals(this);
       else if (t == XObject.CLASS_BOOLEAN) return obj2.bool() == bool();
       else return m_val == obj2.num();
-    } catch (final org.loboevolution.javax.xml.transform.TransformerException te) {
+    } catch (final javax.xml.transform.TransformerException te) {
       throw new WrappedRuntimeException(te);
     }
   }

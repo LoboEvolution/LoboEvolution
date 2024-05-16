@@ -25,8 +25,8 @@
  */
 package org.loboevolution.apache.xpath;
 
-import org.loboevolution.javax.xml.transform.ErrorListener;
-import org.loboevolution.javax.xml.transform.TransformerException;
+import javax.xml.transform.ErrorListener;
+import javax.xml.transform.TransformerException;
 import org.loboevolution.apache.xpath.objects.XObject;
 import org.loboevolution.apache.xpath.res.XPATHErrorResources;
 import org.loboevolution.apache.xpath.res.XPATHMessages;

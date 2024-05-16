@@ -35,7 +35,7 @@ public class FuncLocalPart extends FunctionDef1Arg {
 
   /** {@inheritDoc} */
   @Override
-  public XObject execute(final XPathContext xctxt) throws org.loboevolution.javax.xml.transform.TransformerException {
+  public XObject execute(final XPathContext xctxt) throws javax.xml.transform.TransformerException {
 
     final int context = getArg0AsNode(xctxt);
     if (DTM.NULL == context) return XString.EMPTYSTRING;

@@ -34,7 +34,7 @@ public class FuncNormalizeSpace extends FunctionDef1Arg {
 
   /** {@inheritDoc} */
   @Override
-  public XObject execute(final XPathContext xctxt) throws org.loboevolution.javax.xml.transform.TransformerException {
+  public XObject execute(final XPathContext xctxt) throws javax.xml.transform.TransformerException {
     final XString s1 = getArg0AsString(xctxt);
 
     return s1.fixWhiteSpace(true, true, false);

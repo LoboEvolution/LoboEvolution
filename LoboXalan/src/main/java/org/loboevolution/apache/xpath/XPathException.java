@@ -26,8 +26,8 @@
 package org.loboevolution.apache.xpath;
 
 import lombok.extern.slf4j.Slf4j;
-import org.loboevolution.javax.xml.transform.SourceLocator;
-import org.loboevolution.javax.xml.transform.TransformerException;
+import javax.xml.transform.SourceLocator;
+import javax.xml.transform.TransformerException;
 
 import java.io.PrintWriter;
 

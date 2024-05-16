@@ -92,7 +92,7 @@ public class FuncId extends FunctionOneArg {
 
   /** {@inheritDoc} */
   @Override
-  public XObject execute(final XPathContext xctxt) throws org.loboevolution.javax.xml.transform.TransformerException {
+  public XObject execute(final XPathContext xctxt) throws javax.xml.transform.TransformerException {
 
     final int context = xctxt.getCurrentNode();
     final DTM dtm = xctxt.getDTM(context);

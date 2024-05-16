@@ -32,7 +32,7 @@ import org.loboevolution.apache.xpath.objects.XNumber;
 import org.loboevolution.apache.xpath.objects.XObject;
 import org.loboevolution.apache.xml.dtm.DTM;
 import org.loboevolution.apache.xml.dtm.DTMIterator;
-import org.loboevolution.javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerException;
 
 /** Match pattern step that contains a function. */
 public class FunctionPattern extends StepPattern {
@@ -123,7 +123,7 @@ public class FunctionPattern extends StepPattern {
 
   /** {@inheritDoc} */
   @Override
-  public XObject execute(final XPathContext xctxt) throws org.loboevolution.javax.xml.transform.TransformerException {
+  public XObject execute(final XPathContext xctxt) throws javax.xml.transform.TransformerException {
 
     int context = xctxt.getCurrentNode();
     final DTMIterator nl = m_functionExpr.asIterator(xctxt, context);

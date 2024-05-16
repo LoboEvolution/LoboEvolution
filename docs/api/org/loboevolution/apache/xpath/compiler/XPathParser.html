@@ -165,7 +165,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <th class="colOne" scope="col">Constructor and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../../org/loboevolution/apache/xpath/compiler/XPathParser.html#XPathParser-org.loboevolution.javax.xml.transform.ErrorListener-">XPathParser</a></span>(<a href="../../../../../org/loboevolution/javax/xml/transform/ErrorListener.html" title="interface in org.loboevolution.javax.xml.transform">ErrorListener</a>&nbsp;errorListener)</code>
+<td class="colOne"><code><span class="memberNameLink"><a href="../../../../../org/loboevolution/apache/xpath/compiler/XPathParser.html#XPathParser-javax.xml.transform.ErrorListener-">XPathParser</a></span>(<a href="../../../../../org/loboevolution/javax/xml/transform/ErrorListener.html" title="interface in javax.xml.transform">ErrorListener</a>&nbsp;errorListener)</code>
 <div class="block">The parser constructor.</div>
 </td>
 </tr>
@@ -257,7 +257,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 </td>
 </tr>
 <tr id="i12" class="altColor">
-<td class="colFirst"><code><a href="../../../../../org/loboevolution/javax/xml/transform/ErrorListener.html" title="interface in org.loboevolution.javax.xml.transform">ErrorListener</a></code></td>
+<td class="colFirst"><code><a href="../../../../../org/loboevolution/javax/xml/transform/ErrorListener.html" title="interface in javax.xml.transform">ErrorListener</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/loboevolution/apache/xpath/compiler/XPathParser.html#getErrorListener--">getErrorListener</a></span>()</code>
 <div class="block">Return the current error listener.</div>
 </td>
@@ -400,7 +400,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 </tr>
 <tr id="i34" class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/loboevolution/apache/xpath/compiler/XPathParser.html#setErrorHandler-org.loboevolution.javax.xml.transform.ErrorListener-">setErrorHandler</a></span>(<a href="../../../../../org/loboevolution/javax/xml/transform/ErrorListener.html" title="interface in org.loboevolution.javax.xml.transform">ErrorListener</a>&nbsp;handler)</code>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/loboevolution/apache/xpath/compiler/XPathParser.html#setErrorHandler-javax.xml.transform.ErrorListener-">setErrorHandler</a></span>(<a href="../../../../../org/loboevolution/javax/xml/transform/ErrorListener.html" title="interface in javax.xml.transform">ErrorListener</a>&nbsp;handler)</code>
 <div class="block">Allow an application to register an error event handler, where syntax errors will be sent.</div>
 </td>
 </tr>
@@ -517,13 +517,13 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
-<a name="XPathParser-org.loboevolution.javax.xml.transform.ErrorListener-">
+<a name="XPathParser-javax.xml.transform.ErrorListener-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>XPathParser</h4>
-<pre>public&nbsp;XPathParser(<a href="../../../../../org/loboevolution/javax/xml/transform/ErrorListener.html" title="interface in org.loboevolution.javax.xml.transform">ErrorListener</a>&nbsp;errorListener)</pre>
+<pre>public&nbsp;XPathParser(<a href="../../../../../org/loboevolution/javax/xml/transform/ErrorListener.html" title="interface in javax.xml.transform">ErrorListener</a>&nbsp;errorListener)</pre>
 <div class="block">The parser constructor.</div>
 </li>
 </ul>
@@ -544,7 +544,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <pre>public&nbsp;void&nbsp;initXPath(<a href="../../../../../org/loboevolution/apache/xpath/compiler/Compiler.html" title="class in org.loboevolution.apache.xpath.compiler">Compiler</a>&nbsp;compiler,
                       <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;expression,
                       <a href="../../../../../org/loboevolution/apache/xml/utils/PrefixResolver.html" title="interface in org.loboevolution.apache.xml.utils">PrefixResolver</a>&nbsp;namespaceContext)
-               throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></pre>
+               throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></pre>
 <div class="block">Given an string, init an XPath object for selections, in order that a parse doesn't have to be
  done each time the expression is evaluated.</div>
 <dl>
@@ -553,7 +553,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <dd><code>expression</code> - A string conforming to the XPath grammar.</dd>
 <dd><code>namespaceContext</code> - An object that is able to resolve prefixes in the XPath to namespaces.</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></code> - in case of error</dd>
+<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></code> - in case of error</dd>
 </dl>
 </li>
 </ul>
@@ -566,7 +566,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <pre>public&nbsp;void&nbsp;initMatchPattern(<a href="../../../../../org/loboevolution/apache/xpath/compiler/Compiler.html" title="class in org.loboevolution.apache.xpath.compiler">Compiler</a>&nbsp;compiler,
                              <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;expression,
                              <a href="../../../../../org/loboevolution/apache/xml/utils/PrefixResolver.html" title="interface in org.loboevolution.apache.xml.utils">PrefixResolver</a>&nbsp;namespaceContext)
-                      throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></pre>
+                      throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></pre>
 <div class="block">Given an string, init an XPath object for pattern matches, in order that a parse doesn't have
  to be done each time the expression is evaluated.</div>
 <dl>
@@ -575,17 +575,17 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <dd><code>expression</code> - A String representing the XPath.</dd>
 <dd><code>namespaceContext</code> - An object that is able to resolve prefixes in the XPath to namespaces.</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></code> - in case of error</dd>
+<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></code> - in case of error</dd>
 </dl>
 </li>
 </ul>
-<a name="setErrorHandler-org.loboevolution.javax.xml.transform.ErrorListener-">
+<a name="setErrorHandler-javax.xml.transform.ErrorListener-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>setErrorHandler</h4>
-<pre>public&nbsp;void&nbsp;setErrorHandler(<a href="../../../../../org/loboevolution/javax/xml/transform/ErrorListener.html" title="interface in org.loboevolution.javax.xml.transform">ErrorListener</a>&nbsp;handler)</pre>
+<pre>public&nbsp;void&nbsp;setErrorHandler(<a href="../../../../../org/loboevolution/javax/xml/transform/ErrorListener.html" title="interface in javax.xml.transform">ErrorListener</a>&nbsp;handler)</pre>
 <div class="block">Allow an application to register an error event handler, where syntax errors will be sent. If
  the error listener is not set, syntax errors will be sent to System.err.</div>
 <dl>
@@ -600,7 +600,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <ul class="blockList">
 <li class="blockList">
 <h4>getErrorListener</h4>
-<pre>public&nbsp;<a href="../../../../../org/loboevolution/javax/xml/transform/ErrorListener.html" title="interface in org.loboevolution.javax.xml.transform">ErrorListener</a>&nbsp;getErrorListener()</pre>
+<pre>public&nbsp;<a href="../../../../../org/loboevolution/javax/xml/transform/ErrorListener.html" title="interface in javax.xml.transform">ErrorListener</a>&nbsp;getErrorListener()</pre>
 <div class="block">Return the current error listener.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -629,11 +629,11 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <li class="blockList">
 <h4>Expr</h4>
 <pre>protected&nbsp;void&nbsp;Expr()
-             throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></pre>
+             throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></pre>
 <div class="block">Expr ::= OrExpr</div>
 <dl>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></code> - in case of error</dd>
+<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></code> - in case of error</dd>
 </dl>
 </li>
 </ul>
@@ -644,11 +644,11 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <li class="blockList">
 <h4>OrExpr</h4>
 <pre>protected&nbsp;void&nbsp;OrExpr()
-               throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></pre>
+               throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></pre>
 <div class="block">OrExpr ::= AndExpr | OrExpr 'or' AndExpr</div>
 <dl>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></code> - in case of error</dd>
+<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></code> - in case of error</dd>
 </dl>
 </li>
 </ul>
@@ -659,11 +659,11 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <li class="blockList">
 <h4>AndExpr</h4>
 <pre>protected&nbsp;void&nbsp;AndExpr()
-                throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></pre>
+                throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></pre>
 <div class="block">AndExpr ::= EqualityExpr | AndExpr 'and' EqualityExpr</div>
 <dl>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></code> - in case of error</dd>
+<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></code> - in case of error</dd>
 </dl>
 </li>
 </ul>
@@ -674,7 +674,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <li class="blockList">
 <h4>EqualityExpr</h4>
 <pre>protected&nbsp;int&nbsp;EqualityExpr(int&nbsp;addPos)
-                    throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></pre>
+                    throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></pre>
 <div class="block">EqualityExpr ::= RelationalExpr | EqualityExpr '=' RelationalExpr</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -682,7 +682,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the position at the end of the equality expression.</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></code> - in case of error</dd>
+<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></code> - in case of error</dd>
 </dl>
 </li>
 </ul>
@@ -693,7 +693,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <li class="blockList">
 <h4>RelationalExpr</h4>
 <pre>protected&nbsp;int&nbsp;RelationalExpr(int&nbsp;addPos)
-                      throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></pre>
+                      throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></pre>
 <div class="block">RelationalExpr ::= AdditiveExpr | RelationalExpr '&#60;' AdditiveExpr | RelationalExpr '&#62;'
  AdditiveExpr | RelationalExpr '&#60;=' AdditiveExpr | RelationalExpr '&#60;=' AdditiveExpr</div>
 <dl>
@@ -702,7 +702,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the position at the end of the relational expression.</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></code> - in case of error</dd>
+<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></code> - in case of error</dd>
 </dl>
 </li>
 </ul>
@@ -713,7 +713,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <li class="blockList">
 <h4>AdditiveExpr</h4>
 <pre>protected&nbsp;int&nbsp;AdditiveExpr(int&nbsp;addPos)
-                    throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></pre>
+                    throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></pre>
 <div class="block">This has to handle construction of the operations so that they are evaluated in pre-fix order.
  So, for 9+7-6, instead of |+|9|-|7|6|, this needs to be evaluated as |-|+|9|7|6|.
 
@@ -725,7 +725,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the position at the end of the equality expression.</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></code> - in case of error</dd>
+<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></code> - in case of error</dd>
 </dl>
 </li>
 </ul>
@@ -736,7 +736,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <li class="blockList">
 <h4>MultiplicativeExpr</h4>
 <pre>protected&nbsp;int&nbsp;MultiplicativeExpr(int&nbsp;addPos)
-                          throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></pre>
+                          throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></pre>
 <div class="block">This has to handle construction of the operations so that they are evaluated in pre-fix order.
  So, for 9+7-6, instead of |+|9|-|7|6|, this needs to be evaluated as |-|+|9|7|6|.
 
@@ -749,7 +749,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the position at the end of the equality expression.</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></code> - in case of error</dd>
+<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></code> - in case of error</dd>
 </dl>
 </li>
 </ul>
@@ -760,11 +760,11 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <li class="blockList">
 <h4>UnaryExpr</h4>
 <pre>protected&nbsp;void&nbsp;UnaryExpr()
-                  throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></pre>
+                  throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></pre>
 <div class="block">UnaryExpr ::= UnionExpr | '-' UnaryExpr</div>
 <dl>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></code> - in case of error</dd>
+<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></code> - in case of error</dd>
 </dl>
 </li>
 </ul>
@@ -775,11 +775,11 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <li class="blockList">
 <h4>StringExpr</h4>
 <pre>protected&nbsp;void&nbsp;StringExpr()
-                   throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></pre>
+                   throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></pre>
 <div class="block">StringExpr ::= Expr</div>
 <dl>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></code> - in case of error</dd>
+<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></code> - in case of error</dd>
 </dl>
 </li>
 </ul>
@@ -790,11 +790,11 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <li class="blockList">
 <h4>BooleanExpr</h4>
 <pre>protected&nbsp;void&nbsp;BooleanExpr()
-                    throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></pre>
+                    throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></pre>
 <div class="block">StringExpr ::= Expr</div>
 <dl>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></code> - in case of error</dd>
+<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></code> - in case of error</dd>
 </dl>
 </li>
 </ul>
@@ -805,11 +805,11 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <li class="blockList">
 <h4>NumberExpr</h4>
 <pre>protected&nbsp;void&nbsp;NumberExpr()
-                   throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></pre>
+                   throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></pre>
 <div class="block">NumberExpr ::= Expr</div>
 <dl>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></code> - in case of error</dd>
+<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></code> - in case of error</dd>
 </dl>
 </li>
 </ul>
@@ -820,7 +820,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <li class="blockList">
 <h4>UnionExpr</h4>
 <pre>protected&nbsp;void&nbsp;UnionExpr()
-                  throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></pre>
+                  throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></pre>
 <div class="block">The context of the right hand side expressions is the context of the left hand side expression.
  The results of the right hand side expressions are node sets. The result of the left hand side
  UnionExpr is the union of the results of the right hand side expressions.
@@ -828,7 +828,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
  <p>UnionExpr ::= PathExpr | UnionExpr '|' PathExpr</div>
 <dl>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></code> - in case of error</dd>
+<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></code> - in case of error</dd>
 </dl>
 </li>
 </ul>
@@ -839,12 +839,12 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <li class="blockList">
 <h4>PathExpr</h4>
 <pre>protected&nbsp;void&nbsp;PathExpr()
-                 throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></pre>
+                 throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></pre>
 <div class="block">PathExpr ::= LocationPath | FilterExpr | FilterExpr '/' RelativeLocationPath | FilterExpr '//'
  RelativeLocationPath</div>
 <dl>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></code> - in case of error</dd>
+<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></code> - in case of error</dd>
 </dl>
 </li>
 </ul>
@@ -855,7 +855,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <li class="blockList">
 <h4>FilterExpr</h4>
 <pre>protected&nbsp;int&nbsp;FilterExpr()
-                  throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></pre>
+                  throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></pre>
 <div class="block">FilterExpr ::= PrimaryExpr | FilterExpr Predicate</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -864,7 +864,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
      that was just a PrimaryExpr; or FILTER_MATCH_FAILED, if this method did not match a
      FilterExpr</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></code> - in case of error</dd>
+<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></code> - in case of error</dd>
 </dl>
 </li>
 </ul>
@@ -875,13 +875,13 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <li class="blockList">
 <h4>PrimaryExpr</h4>
 <pre>protected&nbsp;boolean&nbsp;PrimaryExpr()
-                       throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></pre>
+                       throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></pre>
 <div class="block">PrimaryExpr ::= VariableReference | '(' Expr ')' | Literal | Number | FunctionCall</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>true if this method successfully matched a PrimaryExpr</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></code> - in case of error</dd>
+<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></code> - in case of error</dd>
 </dl>
 </li>
 </ul>
@@ -892,11 +892,11 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <li class="blockList">
 <h4>Argument</h4>
 <pre>protected&nbsp;void&nbsp;Argument()
-                 throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></pre>
+                 throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></pre>
 <div class="block">Argument ::= Expr</div>
 <dl>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></code> - in case of error</dd>
+<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></code> - in case of error</dd>
 </dl>
 </li>
 </ul>
@@ -907,13 +907,13 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <li class="blockList">
 <h4>FunctionCall</h4>
 <pre>protected&nbsp;boolean&nbsp;FunctionCall()
-                        throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></pre>
+                        throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></pre>
 <div class="block">FunctionCall ::= FunctionName '(' ( Argument ( ',' Argument)*)? ')'</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>true if, and only if, a FunctionCall was matched</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></code> - in case of error</dd>
+<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></code> - in case of error</dd>
 </dl>
 </li>
 </ul>
@@ -924,11 +924,11 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <li class="blockList">
 <h4>LocationPath</h4>
 <pre>protected&nbsp;void&nbsp;LocationPath()
-                     throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></pre>
+                     throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></pre>
 <div class="block">LocationPath ::= RelativeLocationPath | AbsoluteLocationPath</div>
 <dl>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></code> - in case of error</dd>
+<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></code> - in case of error</dd>
 </dl>
 </li>
 </ul>
@@ -939,13 +939,13 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <li class="blockList">
 <h4>RelativeLocationPath</h4>
 <pre>protected&nbsp;boolean&nbsp;RelativeLocationPath()
-                                throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></pre>
+                                throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></pre>
 <div class="block">RelativeLocationPath ::= Step | RelativeLocationPath '/' Step | AbbreviatedRelativeLocationPath</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>true if, and only if, a RelativeLocationPath was matched</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></code> - in case of error</dd>
+<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></code> - in case of error</dd>
 </dl>
 </li>
 </ul>
@@ -956,13 +956,13 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <li class="blockList">
 <h4>Step</h4>
 <pre>protected&nbsp;boolean&nbsp;Step()
-                throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></pre>
+                throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></pre>
 <div class="block">Step ::= Basis Predicate | AbbreviatedStep</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>false if step was empty (or only a '/'); true, otherwise</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></code> - in case of error</dd>
+<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></code> - in case of error</dd>
 </dl>
 </li>
 </ul>
@@ -973,11 +973,11 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <li class="blockList">
 <h4>Basis</h4>
 <pre>protected&nbsp;void&nbsp;Basis()
-              throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></pre>
+              throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></pre>
 <div class="block">Basis ::= AxisName '::' NodeTest | AbbreviatedBasis</div>
 <dl>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></code> - in case of error</dd>
+<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></code> - in case of error</dd>
 </dl>
 </li>
 </ul>
@@ -988,13 +988,13 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <li class="blockList">
 <h4>AxisName</h4>
 <pre>protected&nbsp;int&nbsp;AxisName()
-                throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></pre>
+                throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></pre>
 <div class="block">Basis ::= AxisName '::' NodeTest | AbbreviatedBasis</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>FROM_XXX axes type, found in <a href="../../../../../org/loboevolution/apache/xpath/compiler/Keywords.html" title="class in org.loboevolution.apache.xpath.compiler"><code>Keywords</code></a>.</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></code> - in case of error</dd>
+<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></code> - in case of error</dd>
 </dl>
 </li>
 </ul>
@@ -1005,13 +1005,13 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <li class="blockList">
 <h4>NodeTest</h4>
 <pre>protected&nbsp;void&nbsp;NodeTest(int&nbsp;axesType)
-                 throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></pre>
+                 throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></pre>
 <div class="block">NodeTest ::= WildcardName | NodeType '(' ')' | 'processing-instruction' '(' Literal ')'</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>axesType</code> - FROM_XXX axes type, found in <a href="../../../../../org/loboevolution/apache/xpath/compiler/Keywords.html" title="class in org.loboevolution.apache.xpath.compiler"><code>Keywords</code></a>.</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></code> - in case of error</dd>
+<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></code> - in case of error</dd>
 </dl>
 </li>
 </ul>
@@ -1022,11 +1022,11 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <li class="blockList">
 <h4>Predicate</h4>
 <pre>protected&nbsp;void&nbsp;Predicate()
-                  throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></pre>
+                  throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></pre>
 <div class="block">Predicate ::= '[' PredicateExpr ']'</div>
 <dl>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></code> - in case of error</dd>
+<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></code> - in case of error</dd>
 </dl>
 </li>
 </ul>
@@ -1037,11 +1037,11 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <li class="blockList">
 <h4>PredicateExpr</h4>
 <pre>protected&nbsp;void&nbsp;PredicateExpr()
-                      throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></pre>
+                      throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></pre>
 <div class="block">PredicateExpr ::= Expr</div>
 <dl>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></code> - in case of error</dd>
+<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></code> - in case of error</dd>
 </dl>
 </li>
 </ul>
@@ -1052,11 +1052,11 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <li class="blockList">
 <h4>QName</h4>
 <pre>protected&nbsp;void&nbsp;QName()
-              throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></pre>
+              throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></pre>
 <div class="block">QName ::= (Prefix ':')? LocalPart Prefix ::= NCName LocalPart ::= NCName</div>
 <dl>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></code> - in case of error</dd>
+<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></code> - in case of error</dd>
 </dl>
 </li>
 </ul>
@@ -1078,13 +1078,13 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <li class="blockList">
 <h4>Literal</h4>
 <pre>protected&nbsp;void&nbsp;Literal()
-                throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></pre>
+                throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></pre>
 <div class="block">The value of the Literal is the sequence of characters inside the " or ' characters.
 
  <p>Literal ::= '"' [^"]* '"' | "'" [^']* "'"</div>
 <dl>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></code> - in case of error</dd>
+<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></code> - in case of error</dd>
 </dl>
 </li>
 </ul>
@@ -1095,11 +1095,11 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <li class="blockList">
 <h4>Number</h4>
 <pre>protected&nbsp;void&nbsp;Number()
-               throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></pre>
+               throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></pre>
 <div class="block">Number ::= [0-9]+('.'[0-9]+)? | '.'[0-9]+</div>
 <dl>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></code> - in case of error</dd>
+<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></code> - in case of error</dd>
 </dl>
 </li>
 </ul>
@@ -1110,11 +1110,11 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <li class="blockList">
 <h4>Pattern</h4>
 <pre>protected&nbsp;void&nbsp;Pattern()
-                throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></pre>
+                throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></pre>
 <div class="block">Pattern ::= LocationPathPattern | Pattern '|' LocationPathPattern</div>
 <dl>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></code> - in case of error</dd>
+<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></code> - in case of error</dd>
 </dl>
 </li>
 </ul>
@@ -1125,12 +1125,12 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <li class="blockList">
 <h4>LocationPathPattern</h4>
 <pre>protected&nbsp;void&nbsp;LocationPathPattern()
-                            throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></pre>
+                            throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></pre>
 <div class="block">LocationPathPattern ::= '/' RelativePathPattern? | IdKeyPattern (('/' | '//')
  RelativePathPattern)? | '//'? RelativePathPattern</div>
 <dl>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></code> - in case of error</dd>
+<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></code> - in case of error</dd>
 </dl>
 </li>
 </ul>
@@ -1141,11 +1141,11 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <li class="blockList">
 <h4>IdKeyPattern</h4>
 <pre>protected&nbsp;void&nbsp;IdKeyPattern()
-                     throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></pre>
+                     throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></pre>
 <div class="block">IdKeyPattern ::= 'id' '(' Literal ')' | 'key' '(' Literal ',' Literal ')' (Also handle doc())</div>
 <dl>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></code> - in case of error</dd>
+<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></code> - in case of error</dd>
 </dl>
 </li>
 </ul>
@@ -1156,12 +1156,12 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <li class="blockList">
 <h4>RelativePathPattern</h4>
 <pre>protected&nbsp;void&nbsp;RelativePathPattern()
-                            throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></pre>
+                            throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></pre>
 <div class="block">RelativePathPattern ::= StepPattern | RelativePathPattern '/' StepPattern | RelativePathPattern
  '//' StepPattern</div>
 <dl>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></code> - in case of error</dd>
+<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></code> - in case of error</dd>
 </dl>
 </li>
 </ul>
@@ -1172,7 +1172,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <li class="blockList">
 <h4>StepPattern</h4>
 <pre>protected&nbsp;boolean&nbsp;StepPattern(boolean&nbsp;isLeadingSlashPermitted)
-                       throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></pre>
+                       throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></pre>
 <div class="block">StepPattern ::= AbbreviatedNodeTestStep</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -1181,7 +1181,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>boolean indicating whether a slash following the step was consumed</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></code> - in case of error</dd>
+<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></code> - in case of error</dd>
 </dl>
 </li>
 </ul>
@@ -1192,7 +1192,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <li class="blockList">
 <h4>AbbreviatedNodeTestStep</h4>
 <pre>protected&nbsp;boolean&nbsp;AbbreviatedNodeTestStep(boolean&nbsp;isLeadingSlashPermitted)
-                                   throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></pre>
+                                   throws <a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></pre>
 <div class="block">AbbreviatedNodeTestStep ::= '@'? NodeTest Predicate</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -1201,7 +1201,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>boolean indicating whether a slash following the step was consumed</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in org.loboevolution.javax.xml.transform">TransformerException</a></code> - in case of error</dd>
+<dd><code><a href="../../../../../org/loboevolution/javax/xml/transform/TransformerException.html" title="class in javax.xml.transform">TransformerException</a></code> - in case of error</dd>
 </dl>
 </li>
 </ul>

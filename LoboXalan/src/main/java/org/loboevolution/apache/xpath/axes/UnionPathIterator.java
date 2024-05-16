@@ -34,7 +34,7 @@ import org.loboevolution.apache.xpath.compiler.OpMap;
 import org.loboevolution.apache.xml.dtm.Axis;
 import org.loboevolution.apache.xml.dtm.DTM;
 import org.loboevolution.apache.xml.dtm.DTMIterator;
-import org.loboevolution.javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerException;
 
 /**
  * This class extends NodeSetDTM, which implements DTMIterator, and fetches nodes one at a time in
@@ -84,7 +84,7 @@ public class UnionPathIterator extends LocPathIterator
    *
    * @param compiler The Compiler which is creating this expression.
    * @param opPos The position of this iterator in the opcode list from the compiler.
-   * @throws org.loboevolution.javax.xml.transform.TransformerException if any
+   * @throws javax.xml.transform.TransformerException if any
    */
   public UnionPathIterator(final Compiler compiler, final int opPos)
       throws TransformerException {
@@ -98,10 +98,10 @@ public class UnionPathIterator extends LocPathIterator
    * @param compiler The Compiler which is creating this expression.
    * @param opPos The position of this iterator in the opcode list from the compiler.
    * @return Object that is derived from LocPathIterator.
-   * @throws org.loboevolution.javax.xml.transform.TransformerException if any
+   * @throws javax.xml.transform.TransformerException if any
    */
   public static LocPathIterator createUnionIterator(final Compiler compiler, final int opPos)
-      throws org.loboevolution.javax.xml.transform.TransformerException {
+      throws javax.xml.transform.TransformerException {
     // For the moment, I'm going to first create a full UnionPathIterator, and
     // then see if I can reduce it to a UnionChildIterator. It would obviously
     // be more effecient to just test for the conditions for a UnionChildIterator,
@@ -177,10 +177,10 @@ public class UnionPathIterator extends LocPathIterator
    * @param compiler The Compiler which is creating this expression.
    * @param opPos The position of this iterator in the
    * @return New location path iterator.
-   * @throws org.loboevolution.javax.xml.transform.TransformerException if any
+   * @throws javax.xml.transform.TransformerException if any
    */
   protected LocPathIterator createDTMIterator(final Compiler compiler, final int opPos)
-      throws org.loboevolution.javax.xml.transform.TransformerException {
+      throws javax.xml.transform.TransformerException {
     return (LocPathIterator)
         WalkerFactory.newDTMIterator(compiler, opPos, compiler.getLocationPathDepth() <= 0);
   }
@@ -191,10 +191,10 @@ public class UnionPathIterator extends LocPathIterator
    * @param compiler The Compiler which is creating this expression.
    * @param opPos The position of this iterator in the opcode list from the compiler.
    * @param count The insert position of the iterator.
-   * @throws org.loboevolution.javax.xml.transform.TransformerException if any
+   * @throws javax.xml.transform.TransformerException if any
    */
   protected void loadLocationPaths(final Compiler compiler, final int opPos, final int count)
-      throws org.loboevolution.javax.xml.transform.TransformerException {
+      throws javax.xml.transform.TransformerException {
 
     // TODO: Handle unwrapped FilterExpr
     final int steptype = compiler.getOp(opPos);

@@ -106,7 +106,7 @@ public class XBoolean extends XObject {
 
     try {
       return m_val == obj2.bool();
-    } catch (final org.loboevolution.javax.xml.transform.TransformerException te) {
+    } catch (final javax.xml.transform.TransformerException te) {
       throw new WrappedRuntimeException(te);
     }
   }

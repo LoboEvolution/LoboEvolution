@@ -32,7 +32,7 @@ import org.loboevolution.apache.xpath.XPathVisitor;
 import org.loboevolution.apache.xpath.compiler.Compiler;
 import org.loboevolution.apache.xpath.objects.XObject;
 import org.loboevolution.apache.xpath.res.XPATHMessages;
-import org.loboevolution.javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerException;
 
 /**
  * This is a superclass of all XPath functions. This allows two ways for the class to be called. One

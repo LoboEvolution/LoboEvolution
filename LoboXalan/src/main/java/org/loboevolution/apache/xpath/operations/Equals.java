@@ -35,13 +35,13 @@ public class Equals extends Operation {
   /** {@inheritDoc} */
   @Override
   public XObject operate(final XObject left, final XObject right)
-      throws org.loboevolution.javax.xml.transform.TransformerException {
+      throws javax.xml.transform.TransformerException {
     return left.equals(right) ? XBoolean.S_TRUE : XBoolean.S_FALSE;
   }
 
   /** {@inheritDoc} */
   @Override
-  public boolean bool(final XPathContext xctxt) throws org.loboevolution.javax.xml.transform.TransformerException {
+  public boolean bool(final XPathContext xctxt) throws javax.xml.transform.TransformerException {
     final XObject left = m_left.execute(xctxt, true);
     final XObject right = m_right.execute(xctxt, true);
 

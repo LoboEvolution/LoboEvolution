@@ -109,10 +109,10 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
    *
    * @param compiler The Compiler object that has information about this walker in the op map.
    * @param opPos The op code position of this location step.
-   * @throws org.loboevolution.javax.xml.transform.TransformerException if any
+   * @throws javax.xml.transform.TransformerException if any
    */
   protected void initPredicateInfo(final Compiler compiler, final int opPos)
-      throws org.loboevolution.javax.xml.transform.TransformerException {
+      throws javax.xml.transform.TransformerException {
 
     final int pos = compiler.getFirstPredicateOpPos(opPos);
 
@@ -218,10 +218,10 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
    * @param context The current context node.
    * @param xctxt The XPath runtime context.
    * @return the result of executing the predicate expressions.
-   * @throws org.loboevolution.javax.xml.transform.TransformerException if any
+   * @throws javax.xml.transform.TransformerException if any
    */
   boolean executePredicates(final int context, final XPathContext xctxt)
-      throws org.loboevolution.javax.xml.transform.TransformerException {
+      throws javax.xml.transform.TransformerException {
 
     final int nPredicates = getPredicateCount();
     if (nPredicates == 0) return true;
@@ -324,7 +324,7 @@ public abstract class PredicatedNodeTest extends NodeTest implements SubContextL
 
         return DTMIterator.FILTER_ACCEPT;
       }
-    } catch (final org.loboevolution.javax.xml.transform.TransformerException se) {
+    } catch (final javax.xml.transform.TransformerException se) {
 
       // TODO: Fix this.
       throw new RuntimeException(se.getMessage());

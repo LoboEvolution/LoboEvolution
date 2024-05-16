@@ -28,7 +28,7 @@ package org.loboevolution.apache.xpath.operations;
 import org.loboevolution.apache.xpath.XPathContext;
 import org.loboevolution.apache.xpath.objects.XNumber;
 import org.loboevolution.apache.xpath.objects.XObject;
-import org.loboevolution.javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerException;
 
 /** The 'div' operation expression executer. */
 public class Div extends Operation {

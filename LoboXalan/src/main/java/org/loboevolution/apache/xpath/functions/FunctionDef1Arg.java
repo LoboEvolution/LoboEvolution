@@ -41,10 +41,10 @@ public class FunctionDef1Arg extends FunctionOneArg {
    * @param xctxt Runtime XPath context.
    * @return The first node of the executed nodeset, or the current context node if the first
    *     argument is null.
-   * @throws org.loboevolution.javax.xml.transform.TransformerException if an error occurs while executing the
+   * @throws javax.xml.transform.TransformerException if an error occurs while executing the
    *     argument expression.
    */
-  protected int getArg0AsNode(final XPathContext xctxt) throws org.loboevolution.javax.xml.transform.TransformerException {
+  protected int getArg0AsNode(final XPathContext xctxt) throws javax.xml.transform.TransformerException {
 
     return (null == m_arg0) ? xctxt.getCurrentNode() : m_arg0.asNode(xctxt);
   }
@@ -56,11 +56,11 @@ public class FunctionDef1Arg extends FunctionOneArg {
    * @param xctxt Runtime XPath context.
    * @return The string value of the first argument, or the string value of the current context node
    *     if the first argument is null.
-   * @throws org.loboevolution.javax.xml.transform.TransformerException if an error occurs while executing the
+   * @throws javax.xml.transform.TransformerException if an error occurs while executing the
    *     argument expression.
    */
   protected XString getArg0AsString(final XPathContext xctxt)
-      throws org.loboevolution.javax.xml.transform.TransformerException {
+      throws javax.xml.transform.TransformerException {
     if (null == m_arg0) {
       final int currentNode = xctxt.getCurrentNode();
       if (DTM.NULL == currentNode) {
@@ -80,11 +80,11 @@ public class FunctionDef1Arg extends FunctionOneArg {
    * @param xctxt Runtime XPath context.
    * @return The number value of the first argument, or the number value of the current context node
    *     if the first argument is null.
-   * @throws org.loboevolution.javax.xml.transform.TransformerException if an error occurs while executing the
+   * @throws javax.xml.transform.TransformerException if an error occurs while executing the
    *     argument expression.
    */
   protected double getArg0AsNumber(final XPathContext xctxt)
-      throws org.loboevolution.javax.xml.transform.TransformerException {
+      throws javax.xml.transform.TransformerException {
 
     if (null == m_arg0) {
       final int currentNode = xctxt.getCurrentNode();

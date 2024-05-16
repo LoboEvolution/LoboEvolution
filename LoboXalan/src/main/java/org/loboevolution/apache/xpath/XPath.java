@@ -26,9 +26,9 @@
 package org.loboevolution.apache.xpath;
 
 import org.loboevolution.html.node.Node;
-import org.loboevolution.javax.xml.transform.ErrorListener;
-import org.loboevolution.javax.xml.transform.SourceLocator;
-import org.loboevolution.javax.xml.transform.TransformerException;
+import javax.xml.transform.ErrorListener;
+import javax.xml.transform.SourceLocator;
+import javax.xml.transform.TransformerException;
 
 import org.loboevolution.apache.xml.utils.DefaultErrorHandler;
 import org.loboevolution.apache.xml.utils.WrappedRuntimeException;

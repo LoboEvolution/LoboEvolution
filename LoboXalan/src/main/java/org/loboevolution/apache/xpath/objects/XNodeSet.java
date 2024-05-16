@@ -38,7 +38,7 @@ import org.loboevolution.apache.xml.dtm.DTMIterator;
 import org.loboevolution.apache.xml.dtm.DTMManager;
 import org.loboevolution.html.node.NodeList;
 import org.loboevolution.traversal.NodeIterator;
-import org.loboevolution.javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerException;
 
 /**
  * This class represents an XPath nodeset object, and is capable of converting the nodeset to other
@@ -423,7 +423,7 @@ public class XNodeSet extends NodeSequence {
   public boolean equals(final XObject obj2) {
     try {
       return compare(obj2, S_EQ);
-    } catch (final org.loboevolution.javax.xml.transform.TransformerException te) {
+    } catch (final javax.xml.transform.TransformerException te) {
       throw new WrappedRuntimeException(te);
     }
   }

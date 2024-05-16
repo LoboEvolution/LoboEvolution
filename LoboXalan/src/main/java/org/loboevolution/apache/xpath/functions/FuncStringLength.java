@@ -34,7 +34,7 @@ public class FuncStringLength extends FunctionDef1Arg {
 
   /** {@inheritDoc} */
   @Override
-  public XObject execute(final XPathContext xctxt) throws org.loboevolution.javax.xml.transform.TransformerException {
+  public XObject execute(final XPathContext xctxt) throws javax.xml.transform.TransformerException {
     return new XNumber(getArg0AsString(xctxt).length());
   }
 }

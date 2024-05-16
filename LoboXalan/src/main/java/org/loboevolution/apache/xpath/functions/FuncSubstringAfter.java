@@ -34,7 +34,7 @@ public class FuncSubstringAfter extends Function2Args {
 
   /** {@inheritDoc} */
   @Override
-  public XObject execute(final XPathContext xctxt) throws org.loboevolution.javax.xml.transform.TransformerException {
+  public XObject execute(final XPathContext xctxt) throws javax.xml.transform.TransformerException {
 
     final XString s1 = m_arg0.execute(xctxt).xstr();
     final XString s2 = m_arg1.execute(xctxt).xstr();

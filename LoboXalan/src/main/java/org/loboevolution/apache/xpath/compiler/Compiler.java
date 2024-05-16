@@ -26,8 +26,8 @@
 package org.loboevolution.apache.xpath.compiler;
 
 import lombok.extern.slf4j.Slf4j;
-import org.loboevolution.javax.xml.transform.ErrorListener;
-import org.loboevolution.javax.xml.transform.TransformerException;
+import javax.xml.transform.ErrorListener;
+import javax.xml.transform.TransformerException;
 import org.loboevolution.apache.xpath.Expression;
 import org.loboevolution.apache.xpath.axes.UnionPathIterator;
 import org.loboevolution.apache.xpath.axes.WalkerFactory;

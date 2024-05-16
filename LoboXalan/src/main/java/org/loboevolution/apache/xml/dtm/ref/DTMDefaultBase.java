@@ -37,7 +37,7 @@ import org.loboevolution.apache.xpath.objects.XString;
 import org.loboevolution.apache.xpath.res.XPATHErrorResources;
 import org.loboevolution.apache.xpath.res.XPATHMessages;
 import org.loboevolution.html.node.Node;
-import org.loboevolution.javax.xml.transform.Source;
+import javax.xml.transform.Source;
 
 import java.util.ArrayList;
 import java.util.List;

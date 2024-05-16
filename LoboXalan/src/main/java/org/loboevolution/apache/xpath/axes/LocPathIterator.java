@@ -66,9 +66,9 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    * Create a LocPathIterator object, including creation of step walkers from the opcode list, and
    * call back into the Compiler to create predicate expressions.
    *
-   * @throws org.loboevolution.javax.xml.transform.TransformerException if any
+   * @throws javax.xml.transform.TransformerException if any
    */
-  protected LocPathIterator(final int analysis) throws org.loboevolution.javax.xml.transform.TransformerException {
+  protected LocPathIterator(final int analysis) throws javax.xml.transform.TransformerException {
     this(analysis, true);
   }
 
@@ -78,10 +78,10 @@ public abstract class LocPathIterator extends PredicatedNodeTest
    *
    * @param shouldLoadWalkers True if walkers should be loaded, or false if this is a derived
    *     iterator and it doesn't wish to load child walkers.
-   * @throws org.loboevolution.javax.xml.transform.TransformerException if any
+   * @throws javax.xml.transform.TransformerException if any
    */
   protected LocPathIterator(final int analysis, final boolean shouldLoadWalkers)
-      throws org.loboevolution.javax.xml.transform.TransformerException {
+      throws javax.xml.transform.TransformerException {
     setLocPathIterator(this);
   }
 
@@ -107,7 +107,7 @@ public abstract class LocPathIterator extends PredicatedNodeTest
 
   /** {@inheritDoc} */
   @Override
-  public XObject execute(final XPathContext xctxt) throws org.loboevolution.javax.xml.transform.TransformerException {
+  public XObject execute(final XPathContext xctxt) throws javax.xml.transform.TransformerException {
 
     final XNodeSet iter = new XNodeSet(m_clones.getInstance());
 
@@ -128,7 +128,7 @@ public abstract class LocPathIterator extends PredicatedNodeTest
 
   /** {@inheritDoc} */
   @Override
-  public int asNode(final XPathContext xctxt) throws org.loboevolution.javax.xml.transform.TransformerException {
+  public int asNode(final XPathContext xctxt) throws javax.xml.transform.TransformerException {
     final DTMIterator iter = m_clones.getInstance();
 
     final int current = xctxt.getCurrentNode();
@@ -143,7 +143,7 @@ public abstract class LocPathIterator extends PredicatedNodeTest
 
   /** {@inheritDoc} */
   @Override
-  public boolean bool(final XPathContext xctxt) throws org.loboevolution.javax.xml.transform.TransformerException {
+  public boolean bool(final XPathContext xctxt) throws javax.xml.transform.TransformerException {
     return asNode(xctxt) != DTM.NULL;
   }
 

@@ -34,7 +34,7 @@ public class FuncRound extends FunctionOneArg {
 
   /** {@inheritDoc} */
   @Override
-  public XObject execute(final XPathContext xctxt) throws org.loboevolution.javax.xml.transform.TransformerException {
+  public XObject execute(final XPathContext xctxt) throws javax.xml.transform.TransformerException {
     final XObject obj = m_arg0.execute(xctxt);
     final double val = obj.num();
     if (val >= -0.5 && val < 0) return new XNumber(-0.0);

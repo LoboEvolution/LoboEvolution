@@ -26,39 +26,22 @@
 
 package org.loboevolution.javax.xml.transform.dom;
 
-import org.loboevolution.javax.xml.transform.Source;
+import javax.xml.transform.Source;
+
+import lombok.Data;
 import org.loboevolution.html.node.Node;
 
+@Data
 public class DOMSource
         implements Source {
 
     public static final String FEATURE = "http://org.loboevolution.javax.xml.transform.dom.DOMSource/feature";
 
-    public DOMSource() {
-        throw new RuntimeException("Stub!");
-    }
+    private Node node;
 
-    public DOMSource(final Node n) {
-        throw new RuntimeException("Stub!");
-    }
+    private String systemId;
 
-    public DOMSource(final Node node, final String systemID) {
-        throw new RuntimeException("Stub!");
-    }
-
-    public Node getNode() {
-        throw new RuntimeException("Stub!");
-    }
-
-    public void setNode(final Node node) {
-        throw new RuntimeException("Stub!");
-    }
-
-    public String getSystemId() {
-        throw new RuntimeException("Stub!");
-    }
-
-    public void setSystemId(final String systemID) {
-        throw new RuntimeException("Stub!");
+    public DOMSource(Node node) {
+        this.node = node;
     }
 }

@@ -43,7 +43,7 @@ import org.loboevolution.html.node.Node;
  * allow sharing of DTMs across multiple processes.
  *
  * <p>Note: this class is incomplete right now. It will be pretty much modeled after
- * org.loboevolution.javax.xml.transform.TransformerFactory in terms of its factory support.
+ * javax.xml.transform.TransformerFactory in terms of its factory support.
  *
  * <p>State: In progress!!
  */
@@ -96,7 +96,7 @@ public abstract class DTMManager {
    * @return a non-null DTM reference.
    */
   public abstract DTM getDTM(
-      org.loboevolution.javax.xml.transform.Source source, boolean unique, boolean incremental, boolean doIndexing);
+      javax.xml.transform.Source source, boolean unique, boolean incremental, boolean doIndexing);
 
   /**
    * Get the instance of DTM that "owns" a node handle.

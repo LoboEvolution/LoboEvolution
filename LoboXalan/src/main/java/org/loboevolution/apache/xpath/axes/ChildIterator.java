@@ -42,9 +42,9 @@ public class ChildIterator extends LocPathIterator {
    * Create a ChildIterator object.
    *
    * @param analysis Analysis bits of the entire pattern.
-   * @throws org.loboevolution.javax.xml.transform.TransformerException if any
+   * @throws javax.xml.transform.TransformerException if any
    */
-  ChildIterator(final int analysis) throws org.loboevolution.javax.xml.transform.TransformerException {
+  ChildIterator(final int analysis) throws javax.xml.transform.TransformerException {
     super(analysis);
 
     // This iterator matches all kinds of nodes

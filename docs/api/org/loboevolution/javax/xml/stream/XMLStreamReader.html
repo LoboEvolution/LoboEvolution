@@ -50,8 +50,8 @@ var activeTableTab = "activeTableTab";
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamException.html" title="class in org.loboevolution.javax.xml.stream"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamWriter.html" title="interface in org.loboevolution.javax.xml.stream"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamException.html" title="class in javax.xml.stream"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamWriter.html" title="interface in javax.xml.stream"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../index.html?org/loboevolution/javax/xml/stream/XMLStreamReader.html" target="_top">Frames</a></li>
@@ -93,7 +93,7 @@ var activeTableTab = "activeTableTab";
 <!-- ========= END OF TOP NAVBAR ========= -->
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
-<div class="subTitle">org.loboevolution.javax.xml.stream</div>
+<div class="subTitle">javax.xml.stream</div>
 <h2 title="Interface XMLStreamReader" class="title">Interface XMLStreamReader</h2>
 </div>
 <div class="contentContainer">
@@ -102,16 +102,16 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Superinterfaces:</dt>
-<dd><a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamConstants.html" title="interface in org.loboevolution.javax.xml.stream">XMLStreamConstants</a></dd>
+<dd><a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamConstants.html" title="interface in javax.xml.stream">XMLStreamConstants</a></dd>
 </dl>
 <dl>
 <dt>All Known Implementing Classes:</dt>
-<dd><a href="../../../../../org/loboevolution/javax/xml/stream/util/StreamReaderDelegate.html" title="class in org.loboevolution.javax.xml.stream.util">StreamReaderDelegate</a></dd>
+<dd><a href="../../../../../org/loboevolution/javax/xml/stream/util/StreamReaderDelegate.html" title="class in javax.xml.stream.util">StreamReaderDelegate</a></dd>
 </dl>
 <hr>
 <br>
 <pre>public interface <span class="typeNameLabel">XMLStreamReader</span>
-extends <a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamConstants.html" title="interface in org.loboevolution.javax.xml.stream">XMLStreamConstants</a></pre>
+extends <a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamConstants.html" title="interface in javax.xml.stream">XMLStreamConstants</a></pre>
 <div class="block">The XMLStreamReader interface allows forward, read-only access to XML.
   It is designed to be the lowest level and most efficient way to
   read XML data.
@@ -133,12 +133,12 @@ extends <a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamCons
  associated identifiers to the application.  This information is
  provided through the property API on this interface.
  The following two properties allow access to this information:
- org.loboevolution.javax.xml.stream.notations and org.loboevolution.javax.xml.stream.entities.
+ javax.xml.stream.notations and javax.xml.stream.entities.
  When the current event is a DTD the following call will return a
  list of Notations
-  <code>List l = (List) getProperty("org.loboevolution.javax.xml.stream.notations");</code>
+  <code>List l = (List) getProperty("javax.xml.stream.notations");</code>
  The following call will return a list of entity declarations:
- <code>List l = (List) getProperty("org.loboevolution.javax.xml.stream.entities");</code>
+ <code>List l = (List) getProperty("javax.xml.stream.entities");</code>
  These properties can only be accessed during a DTD event and
  are defined to return null if the information is not available.
 
@@ -241,9 +241,9 @@ extends <a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamCons
 <dt><span class="simpleTagLabel">Author:</span></dt>
 <dd>Copyright (c) 2009 by Oracle Corporation. All Rights Reserved.</dd>
 <dt><span class="seeLabel">See Also:</span></dt>
-<dd><a href="../../../../../org/loboevolution/javax/xml/stream/events/XMLEvent.html" title="interface in org.loboevolution.javax.xml.stream.events"><code>XMLEvent</code></a>, 
-<a href="../../../../../org/loboevolution/javax/xml/stream/XMLInputFactory.html" title="class in org.loboevolution.javax.xml.stream"><code>XMLInputFactory</code></a>, 
-<a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamWriter.html" title="interface in org.loboevolution.javax.xml.stream"><code>XMLStreamWriter</code></a></dd>
+<dd><a href="../../../../../org/loboevolution/javax/xml/stream/events/XMLEvent.html" title="interface in javax.xml.stream.events"><code>XMLEvent</code></a>,
+<a href="../../../../../org/loboevolution/javax/xml/stream/XMLInputFactory.html" title="class in javax.xml.stream"><code>XMLInputFactory</code></a>,
+<a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamWriter.html" title="interface in javax.xml.stream"><code>XMLStreamWriter</code></a></dd>
 </dl>
 </li>
 </ul>
@@ -258,10 +258,10 @@ extends <a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamCons
 </a>
 <h3>Field Summary</h3>
 <ul class="blockList">
-<li class="blockList"><a name="fields.inherited.from.class.org.loboevolution.javax.xml.stream.XMLStreamConstants">
+<li class="blockList"><a name="fields.inherited.from.class.javax.xml.stream.XMLStreamConstants">
 <!--   -->
 </a>
-<h3>Fields inherited from interface&nbsp;org.loboevolution.javax.xml.stream.<a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamConstants.html" title="interface in org.loboevolution.javax.xml.stream">XMLStreamConstants</a></h3>
+<h3>Fields inherited from interface&nbsp;javax.xml.stream.<a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamConstants.html" title="interface in javax.xml.stream">XMLStreamConstants</a></h3>
 <code><a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamConstants.html#ATTRIBUTE">ATTRIBUTE</a>, <a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamConstants.html#CDATA">CDATA</a>, <a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamConstants.html#CHARACTERS">CHARACTERS</a>, <a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamConstants.html#COMMENT">COMMENT</a>, <a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamConstants.html#DTD">DTD</a>, <a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamConstants.html#END_DOCUMENT">END_DOCUMENT</a>, <a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamConstants.html#END_ELEMENT">END_ELEMENT</a>, <a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamConstants.html#ENTITY_DECLARATION">ENTITY_DECLARATION</a>, <a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamConstants.html#ENTITY_REFERENCE">ENTITY_REFERENCE</a>, <a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamConstants.html#NAMESPACE">NAMESPACE</a>, <a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamConstants.html#NOTATION_DECLARATION">NOTATION_DECLARATION</a>, <a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamConstants.html#PROCESSING_INSTRUCTION">PROCESSING_INSTRUCTION</a>, <a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamConstants.html#SPACE">SPACE</a>, <a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamConstants.html#START_DOCUMENT">START_DOCUMENT</a>, <a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamConstants.html#START_ELEMENT">START_ELEMENT</a></code></li>
 </ul>
 </li>
@@ -299,7 +299,7 @@ extends <a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamCons
 </td>
 </tr>
 <tr id="i3" class="rowColor">
-<td class="colFirst"><code><a href="../../../../../org/loboevolution/javax/xml/namespace/QName.html" title="class in org.loboevolution.javax.xml.namespace">QName</a></code></td>
+<td class="colFirst"><code><a href="../../../../../org/loboevolution/javax/xml/namespace/QName.html" title="class in javax.xml.namespace">QName</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamReader.html#getAttributeName-int-">getAttributeName</a></span>(int&nbsp;index)</code>
 <div class="block">Returns the qname of the attribute at the provided index</div>
 </td>
@@ -376,19 +376,19 @@ extends <a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamCons
 </td>
 </tr>
 <tr id="i14" class="altColor">
-<td class="colFirst"><code><a href="../../../../../org/loboevolution/javax/xml/stream/Location.html" title="interface in org.loboevolution.javax.xml.stream">Location</a></code></td>
+<td class="colFirst"><code><a href="../../../../../org/loboevolution/javax/xml/stream/Location.html" title="interface in javax.xml.stream">Location</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamReader.html#getLocation--">getLocation</a></span>()</code>
 <div class="block">Return the current location of the processor.</div>
 </td>
 </tr>
 <tr id="i15" class="rowColor">
-<td class="colFirst"><code><a href="../../../../../org/loboevolution/javax/xml/namespace/QName.html" title="class in org.loboevolution.javax.xml.namespace">QName</a></code></td>
+<td class="colFirst"><code><a href="../../../../../org/loboevolution/javax/xml/namespace/QName.html" title="class in javax.xml.namespace">QName</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamReader.html#getName--">getName</a></span>()</code>
 <div class="block">Returns a QName for the current START_ELEMENT or END_ELEMENT event</div>
 </td>
 </tr>
 <tr id="i16" class="altColor">
-<td class="colFirst"><code><a href="../../../../../org/loboevolution/javax/xml/namespace/NamespaceContext.html" title="interface in org.loboevolution.javax.xml.namespace">NamespaceContext</a></code></td>
+<td class="colFirst"><code><a href="../../../../../org/loboevolution/javax/xml/namespace/NamespaceContext.html" title="interface in javax.xml.namespace">NamespaceContext</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamReader.html#getNamespaceContext--">getNamespaceContext</a></span>()</code>
 <div class="block">Returns a read only namespace context for the current
  position.</div>
@@ -630,10 +630,10 @@ extends <a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamCons
 <li class="blockList">
 <h4>next</h4>
 <pre>int&nbsp;next()
-  throws <a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamException.html" title="class in org.loboevolution.javax.xml.stream">XMLStreamException</a></pre>
+  throws <a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamException.html" title="class in javax.xml.stream">XMLStreamException</a></pre>
 <div class="block">Get next parsing event - a processor may return all contiguous
  character data in a single chunk, or it may split it into several chunks.
- If the property org.loboevolution.javax.xml.stream.isCoalescing is set to true
+ If the property javax.xml.stream.isCoalescing is set to true
  element content must be coalesced and only one CHARACTERS event
  must be returned for contiguous element content or
  CDATA Sections.
@@ -662,9 +662,9 @@ extends <a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamCons
 <dd>the integer code corresponding to the current parse event</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
 <dd><code><a href="http://docs.oracle.com/javase/7/docs/api/java/util/NoSuchElementException.html?is-external=true" title="class or interface in java.util">NoSuchElementException</a></code> - if this is called when hasNext() returns false</dd>
-<dd><code><a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamException.html" title="class in org.loboevolution.javax.xml.stream">XMLStreamException</a></code> - if there is an error processing the underlying XML source</dd>
+<dd><code><a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamException.html" title="class in javax.xml.stream">XMLStreamException</a></code> - if there is an error processing the underlying XML source</dd>
 <dt><span class="seeLabel">See Also:</span></dt>
-<dd><a href="../../../../../org/loboevolution/javax/xml/stream/events/XMLEvent.html" title="interface in org.loboevolution.javax.xml.stream.events"><code>XMLEvent</code></a></dd>
+<dd><a href="../../../../../org/loboevolution/javax/xml/stream/events/XMLEvent.html" title="interface in javax.xml.stream.events"><code>XMLEvent</code></a></dd>
 </dl>
 </li>
 </ul>
@@ -677,7 +677,7 @@ extends <a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamCons
 <pre>void&nbsp;require(int&nbsp;type,
              <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;namespaceURI,
              <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;localName)
-      throws <a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamException.html" title="class in org.loboevolution.javax.xml.stream">XMLStreamException</a></pre>
+      throws <a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamException.html" title="class in javax.xml.stream">XMLStreamException</a></pre>
 <div class="block">Test if the current event is of the given type and if the namespace and name match the current
  namespace and name of the current event.  If the namespaceURI is null it is not checked for equality,
  if the localName is null it is not checked for equality.</div>
@@ -687,7 +687,7 @@ extends <a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamCons
 <dd><code>namespaceURI</code> - the uri of the event, may be null</dd>
 <dd><code>localName</code> - the localName of the event, may be null</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamException.html" title="class in org.loboevolution.javax.xml.stream">XMLStreamException</a></code> - if the required values are not matched.</dd>
+<dd><code><a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamException.html" title="class in javax.xml.stream">XMLStreamException</a></code> - if the required values are not matched.</dd>
 </dl>
 </li>
 </ul>
@@ -698,10 +698,10 @@ extends <a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamCons
 <li class="blockList">
 <h4>getElementText</h4>
 <pre><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;getElementText()
-               throws <a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamException.html" title="class in org.loboevolution.javax.xml.stream">XMLStreamException</a></pre>
+               throws <a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamException.html" title="class in javax.xml.stream">XMLStreamException</a></pre>
 <div class="block">Reads the content of a text-only element, an exception is thrown if this is
  not a text-only element.
- Regardless of value of org.loboevolution.javax.xml.stream.isCoalescing this method always returns coalesced content.
+ Regardless of value of javax.xml.stream.isCoalescing this method always returns coalesced content.
  <p> Precondition: the current event is START_ELEMENT.</p>
  <p> Postcondition: the current event is the corresponding END_ELEMENT.</p>
  <p>The method does the following (implementations are free to optimized</p>
@@ -738,7 +738,7 @@ extends <a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamCons
  </pre></div>
 <dl>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamException.html" title="class in org.loboevolution.javax.xml.stream">XMLStreamException</a></code> - if the current event is not a START_ELEMENT
+<dd><code><a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamException.html" title="class in javax.xml.stream">XMLStreamException</a></code> - if the current event is not a START_ELEMENT
  or if a non text element is encountered</dd>
 </dl>
 </li>
@@ -750,7 +750,7 @@ extends <a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamCons
 <li class="blockList">
 <h4>nextTag</h4>
 <pre>int&nbsp;nextTag()
-     throws <a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamException.html" title="class in org.loboevolution.javax.xml.stream">XMLStreamException</a></pre>
+     throws <a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamException.html" title="class in javax.xml.stream">XMLStreamException</a></pre>
 <div class="block">Skips any white space (isWhiteSpace() returns true), COMMENT,
  or PROCESSING_INSTRUCTION,
  until a START_ELEMENT or END_ELEMENT is reached.
@@ -783,7 +783,7 @@ extends <a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamCons
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the event type of the element read (START_ELEMENT or END_ELEMENT)</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamException.html" title="class in org.loboevolution.javax.xml.stream">XMLStreamException</a></code> - if the current event is not white space, PROCESSING_INSTRUCTION,
+<dd><code><a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamException.html" title="class in javax.xml.stream">XMLStreamException</a></code> - if the current event is not white space, PROCESSING_INSTRUCTION,
  START_ELEMENT or END_ELEMENT</dd>
 <dd><code><a href="http://docs.oracle.com/javase/7/docs/api/java/util/NoSuchElementException.html?is-external=true" title="class or interface in java.util">NoSuchElementException</a></code> - if this is called when hasNext() returns false</dd>
 </dl>
@@ -796,7 +796,7 @@ extends <a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamCons
 <li class="blockList">
 <h4>hasNext</h4>
 <pre>boolean&nbsp;hasNext()
-         throws <a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamException.html" title="class in org.loboevolution.javax.xml.stream">XMLStreamException</a></pre>
+         throws <a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamException.html" title="class in javax.xml.stream">XMLStreamException</a></pre>
 <div class="block">Returns true if there are more parsing events and false
  if there are no more events.  This method will return
  false if the current state of the XMLStreamReader is
@@ -805,7 +805,7 @@ extends <a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamCons
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>true if there are more events, false otherwise</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamException.html" title="class in org.loboevolution.javax.xml.stream">XMLStreamException</a></code> - if there is a fatal error detecting the next state</dd>
+<dd><code><a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamException.html" title="class in javax.xml.stream">XMLStreamException</a></code> - if there is a fatal error detecting the next state</dd>
 </dl>
 </li>
 </ul>
@@ -816,12 +816,12 @@ extends <a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamCons
 <li class="blockList">
 <h4>close</h4>
 <pre>void&nbsp;close()
-    throws <a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamException.html" title="class in org.loboevolution.javax.xml.stream">XMLStreamException</a></pre>
+    throws <a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamException.html" title="class in javax.xml.stream">XMLStreamException</a></pre>
 <div class="block">Frees any resources associated with this Reader.  This method does not close the
  underlying input source.</div>
 <dl>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamException.html" title="class in org.loboevolution.javax.xml.stream">XMLStreamException</a></code> - if there are errors freeing associated resources</dd>
+<dd><code><a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamException.html" title="class in javax.xml.stream">XMLStreamException</a></code> - if there are errors freeing associated resources</dd>
 </dl>
 </li>
 </ul>
@@ -956,7 +956,7 @@ extends <a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamCons
 <ul class="blockList">
 <li class="blockList">
 <h4>getAttributeName</h4>
-<pre><a href="../../../../../org/loboevolution/javax/xml/namespace/QName.html" title="class in org.loboevolution.javax.xml.namespace">QName</a>&nbsp;getAttributeName(int&nbsp;index)</pre>
+<pre><a href="../../../../../org/loboevolution/javax/xml/namespace/QName.html" title="class in javax.xml.namespace">QName</a>&nbsp;getAttributeName(int&nbsp;index)</pre>
 <div class="block">Returns the qname of the attribute at the provided index</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -1147,7 +1147,7 @@ extends <a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamCons
 <ul class="blockList">
 <li class="blockList">
 <h4>getNamespaceContext</h4>
-<pre><a href="../../../../../org/loboevolution/javax/xml/namespace/NamespaceContext.html" title="interface in org.loboevolution.javax.xml.namespace">NamespaceContext</a>&nbsp;getNamespaceContext()</pre>
+<pre><a href="../../../../../org/loboevolution/javax/xml/namespace/NamespaceContext.html" title="interface in javax.xml.namespace">NamespaceContext</a>&nbsp;getNamespaceContext()</pre>
 <div class="block">Returns a read only namespace context for the current
  position.  The context is transient and only valid until
  a call to next() changes the state of the reader.</div>
@@ -1223,7 +1223,7 @@ extends <a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamCons
                       char[]&nbsp;target,
                       int&nbsp;targetStart,
                       int&nbsp;length)
-               throws <a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamException.html" title="class in org.loboevolution.javax.xml.stream">XMLStreamException</a></pre>
+               throws <a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamException.html" title="class in javax.xml.stream">XMLStreamException</a></pre>
 <div class="block">Gets the the text associated with a CHARACTERS, SPACE or CDATA event.
  Text starting a "sourceStart" is copied into "target" starting at "targetStart".
  Up to "length" characters are copied.  The number of characters actually copied is returned.
@@ -1257,7 +1257,7 @@ extends <a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamCons
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the number of characters actually copied</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamException.html" title="class in org.loboevolution.javax.xml.stream">XMLStreamException</a></code> - if the underlying XML source is not well-formed</dd>
+<dd><code><a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamException.html" title="class in javax.xml.stream">XMLStreamException</a></code> - if the underlying XML source is not well-formed</dd>
 <dd><code><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/IndexOutOfBoundsException.html?is-external=true" title="class or interface in java.lang">IndexOutOfBoundsException</a></code> - if targetStart &#60; 0 or &#62; than the length of target</dd>
 <dd><code><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/IndexOutOfBoundsException.html?is-external=true" title="class or interface in java.lang">IndexOutOfBoundsException</a></code> - if length &#60; 0 or targetStart + length &#62; length of target</dd>
 <dd><code><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/UnsupportedOperationException.html?is-external=true" title="class or interface in java.lang">UnsupportedOperationException</a></code> - if this method is not supported</dd>
@@ -1329,7 +1329,7 @@ extends <a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamCons
 <ul class="blockList">
 <li class="blockList">
 <h4>getLocation</h4>
-<pre><a href="../../../../../org/loboevolution/javax/xml/stream/Location.html" title="interface in org.loboevolution.javax.xml.stream">Location</a>&nbsp;getLocation()</pre>
+<pre><a href="../../../../../org/loboevolution/javax/xml/stream/Location.html" title="interface in javax.xml.stream">Location</a>&nbsp;getLocation()</pre>
 <div class="block">Return the current location of the processor.
  If the Location is unknown the processor should return
  an implementation of Location that returns -1 for the
@@ -1344,7 +1344,7 @@ extends <a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamCons
 <ul class="blockList">
 <li class="blockList">
 <h4>getName</h4>
-<pre><a href="../../../../../org/loboevolution/javax/xml/namespace/QName.html" title="class in org.loboevolution.javax.xml.namespace">QName</a>&nbsp;getName()</pre>
+<pre><a href="../../../../../org/loboevolution/javax/xml/namespace/QName.html" title="class in javax.xml.namespace">QName</a>&nbsp;getName()</pre>
 <div class="block">Returns a QName for the current START_ELEMENT or END_ELEMENT event</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -1531,8 +1531,8 @@ extends <a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamCons
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamException.html" title="class in org.loboevolution.javax.xml.stream"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamWriter.html" title="interface in org.loboevolution.javax.xml.stream"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamException.html" title="class in javax.xml.stream"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../../org/loboevolution/javax/xml/stream/XMLStreamWriter.html" title="interface in javax.xml.stream"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../index.html?org/loboevolution/javax/xml/stream/XMLStreamReader.html" target="_top">Frames</a></li>

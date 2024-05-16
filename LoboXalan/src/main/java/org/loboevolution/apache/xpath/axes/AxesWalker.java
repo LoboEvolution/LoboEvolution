@@ -60,10 +60,10 @@ public class AxesWalker extends PredicatedNodeTest implements Cloneable, PathCom
    * @param compiler The Compiler object that has information about this walker in the op map.
    * @param opPos The op code position of this location step.
    * @param stepType The type of location step.
-   * @throws org.loboevolution.javax.xml.transform.TransformerException if any
+   * @throws javax.xml.transform.TransformerException if any
    */
   public void init(final Compiler compiler, final int opPos, final int stepType)
-      throws org.loboevolution.javax.xml.transform.TransformerException {
+      throws javax.xml.transform.TransformerException {
 
     initPredicateInfo(compiler, opPos);
   }

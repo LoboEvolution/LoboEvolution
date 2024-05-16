@@ -89,7 +89,7 @@ public class UnionChildIterator extends ChildTestIterator {
           } else return DTMIterator.FILTER_ACCEPT;
         }
       }
-    } catch (final org.loboevolution.javax.xml.transform.TransformerException se) {
+    } catch (final javax.xml.transform.TransformerException se) {
 
       // TODO: Fix this.
       throw new RuntimeException(se.getMessage());

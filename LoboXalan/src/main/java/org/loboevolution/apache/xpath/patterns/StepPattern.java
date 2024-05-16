@@ -222,7 +222,7 @@ public class StepPattern extends NodeTest implements SubContextList {
   /** {@inheritDoc} */
   @Override
   public XObject execute(final XPathContext xctxt, final int currentNode)
-      throws org.loboevolution.javax.xml.transform.TransformerException {
+      throws javax.xml.transform.TransformerException {
 
     final DTM dtm = xctxt.getDTM(currentNode);
 
@@ -237,14 +237,14 @@ public class StepPattern extends NodeTest implements SubContextList {
 
   /** {@inheritDoc} */
   @Override
-  public XObject execute(final XPathContext xctxt) throws org.loboevolution.javax.xml.transform.TransformerException {
+  public XObject execute(final XPathContext xctxt) throws javax.xml.transform.TransformerException {
     return execute(xctxt, xctxt.getCurrentNode());
   }
 
   /** {@inheritDoc} */
   @Override
   public XObject execute(final XPathContext xctxt, final int currentNode, final DTM dtm, final int expType)
-      throws org.loboevolution.javax.xml.transform.TransformerException {
+      throws javax.xml.transform.TransformerException {
 
     if (m_whatToShow == NodeTest.SHOW_BYFUNCTION) {
       if (null != m_relativePathPattern) {
@@ -330,7 +330,7 @@ public class StepPattern extends NodeTest implements SubContextList {
           xctxt.popCurrentNode();
         }
       }
-    } catch (final org.loboevolution.javax.xml.transform.TransformerException se) {
+    } catch (final javax.xml.transform.TransformerException se) {
 
       // TODO: should keep throw sax exception...
       throw new RuntimeException(se.getMessage());
@@ -407,7 +407,7 @@ public class StepPattern extends NodeTest implements SubContextList {
           xctxt.popCurrentNode();
         }
       }
-    } catch (final org.loboevolution.javax.xml.transform.TransformerException se) {
+    } catch (final javax.xml.transform.TransformerException se) {
 
       // TODO: should keep throw sax exception...
       throw new RuntimeException(se.getMessage());
@@ -439,10 +439,10 @@ public class StepPattern extends NodeTest implements SubContextList {
    *     org.loboevolution.apache.xpath.patterns.NodeTest#SCORE_NSWILD}, {@link
    *     org.loboevolution.apache.xpath.patterns.NodeTest#SCORE_QNAME}, or {@link
    *     org.loboevolution.apache.xpath.patterns.NodeTest#SCORE_OTHER}.
-   * @throws org.loboevolution.javax.xml.transform.TransformerException in case of error
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   protected final XObject executeRelativePathPattern(final XPathContext xctxt, final DTM dtm, final int currentNode)
-      throws org.loboevolution.javax.xml.transform.TransformerException {
+      throws javax.xml.transform.TransformerException {
 
     XObject score = NodeTest.SCORE_NONE;
     final DTMAxisTraverser traverser;
@@ -474,10 +474,10 @@ public class StepPattern extends NodeTest implements SubContextList {
    * @param dtm The DTM of the current node.
    * @param currentNode The current node context.
    * @return true if the node should be accepted, false otherwise.
-   * @throws org.loboevolution.javax.xml.transform.TransformerException in case of error
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   protected final boolean executePredicates(final XPathContext xctxt, final DTM dtm, final int currentNode)
-      throws org.loboevolution.javax.xml.transform.TransformerException {
+      throws javax.xml.transform.TransformerException {
 
     boolean result = true;
     boolean positionAlreadySeen = false;

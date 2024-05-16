@@ -41,7 +41,7 @@ import org.loboevolution.apache.xpath.res.XPATHMessages;
 import org.loboevolution.apache.xml.dtm.Axis;
 import org.loboevolution.apache.xml.dtm.DTMFilter;
 import org.loboevolution.apache.xml.dtm.DTMIterator;
-import org.loboevolution.javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerException;
 
 /**
  * This class is both a factory for XPath location path expressions, which are built from the opcode
@@ -60,10 +60,10 @@ public class WalkerFactory {
    *     into an opcode map.
    * @param stepOpCodePos The opcode position for the step.
    * @return non-null AxesWalker derivative.
-   * @throws org.loboevolution.javax.xml.transform.TransformerException if any
+   * @throws javax.xml.transform.TransformerException if any
    */
   static AxesWalker loadWalkers(final WalkingIterator lpi, final Compiler compiler, final int stepOpCodePos)
-      throws org.loboevolution.javax.xml.transform.TransformerException {
+      throws javax.xml.transform.TransformerException {
 
     int stepType;
     AxesWalker firstWalker = null;
@@ -110,10 +110,10 @@ public class WalkerFactory {
    *     into an opcode map.
    * @param opPos The position of the operation code for this itterator.
    * @return non-null reference to a LocPathIterator or derivative.
-   * @throws org.loboevolution.javax.xml.transform.TransformerException if any
+   * @throws javax.xml.transform.TransformerException if any
    */
   public static DTMIterator newDTMIterator(final Compiler compiler, final int opPos, final boolean isTopLevel)
-      throws org.loboevolution.javax.xml.transform.TransformerException {
+      throws javax.xml.transform.TransformerException {
 
     final int firstStepPos = OpMap.getFirstChildPos(opPos);
     final int analysis = analyze(compiler, firstStepPos);
@@ -365,7 +365,7 @@ public class WalkerFactory {
 
   /** Tell if the predicates need to have proximity knowledge. */
   public static boolean mightBeProximate(final Compiler compiler, final int opPos, final int stepType)
-      throws org.loboevolution.javax.xml.transform.TransformerException {
+      throws javax.xml.transform.TransformerException {
 
     final boolean mightBeProximate = false;
 
@@ -426,7 +426,7 @@ public class WalkerFactory {
    *     into an opcode map.
    * @param stOpCodePos The opcode position for the step.
    * @return 32 bits as an integer that give information about the location path as a whole.
-   * @throws org.loboevolution.javax.xml.transform.TransformerException if any
+   * @throws javax.xml.transform.TransformerException if any
    */
   private static boolean isOptimizableForDescendantIterator(final Compiler compiler, final int stOpCodePos)
       throws TransformerException {
@@ -520,7 +520,7 @@ public class WalkerFactory {
    *     into an opcode map.
    * @param stOpCodePos The opcode position for the step.
    * @return 32 bits as an integer that give information about the location path as a whole.
-   * @throws org.loboevolution.javax.xml.transform.TransformerException if any
+   * @throws javax.xml.transform.TransformerException if any
    */
   private static int analyze(final Compiler compiler, final int stOpCodePos)
       throws TransformerException {
@@ -656,7 +656,7 @@ public class WalkerFactory {
    * @param compiler The compiler that holds the syntax tree/op map to construct from.
    * @param stOpCodePos The current op code position within the opmap.
    * @return A StepPattern object, which may contain relative StepPatterns.
-   * @throws org.loboevolution.javax.xml.transform.TransformerException if any
+   * @throws javax.xml.transform.TransformerException if any
    */
   static StepPattern loadSteps(final Compiler compiler, final int stOpCodePos)
       throws TransformerException {
@@ -778,10 +778,10 @@ public class WalkerFactory {
    *
    * @param compiler The compiler that holds the syntax tree/op map to construct from.
    * @return the head of the list.
-   * @throws org.loboevolution.javax.xml.transform.TransformerException if any
+   * @throws javax.xml.transform.TransformerException if any
    */
   private static StepPattern createDefaultStepPattern(final Compiler compiler, final int opPos)
-      throws org.loboevolution.javax.xml.transform.TransformerException {
+      throws javax.xml.transform.TransformerException {
 
     final int stepType = compiler.getOp(opPos);
 
@@ -882,10 +882,10 @@ public class WalkerFactory {
    * @param opPos The opcode position for the step.
    * @param stepType The type of step, one of OP_GROUP, etc.
    * @return true if step has a predicate.
-   * @throws org.loboevolution.javax.xml.transform.TransformerException if any
+   * @throws javax.xml.transform.TransformerException if any
    */
   static boolean analyzePredicate(final Compiler compiler, final int opPos, final int stepType)
-      throws org.loboevolution.javax.xml.transform.TransformerException {
+      throws javax.xml.transform.TransformerException {
 
     switch (stepType) {
       case OpCodes.OP_VARIABLE:

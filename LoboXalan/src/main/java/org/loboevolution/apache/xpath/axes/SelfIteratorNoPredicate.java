@@ -40,9 +40,9 @@ public class SelfIteratorNoPredicate extends LocPathIterator {
    * Create a SelfIteratorNoPredicate object.
    *
    * @param analysis Analysis bits.
-   * @throws org.loboevolution.javax.xml.transform.TransformerException if any
+   * @throws javax.xml.transform.TransformerException if any
    */
-  SelfIteratorNoPredicate(final int analysis) throws org.loboevolution.javax.xml.transform.TransformerException {
+  SelfIteratorNoPredicate(final int analysis) throws javax.xml.transform.TransformerException {
     super(analysis);
   }
 

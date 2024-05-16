@@ -46,10 +46,10 @@ public class FuncLast extends Function {
    *
    * @param xctxt non-null reference to XPath runtime context.
    * @return The number of nodes in the list.
-   * @throws org.loboevolution.javax.xml.transform.TransformerException in case of error
+   * @throws javax.xml.transform.TransformerException in case of error
    */
   public int getCountOfContextNodeList(final XPathContext xctxt)
-      throws org.loboevolution.javax.xml.transform.TransformerException {
+      throws javax.xml.transform.TransformerException {
     final SubContextList iter = m_isTopLevel ? null : xctxt.getSubContextList();
     if (null != iter) {
       return iter.getLastPos(xctxt);
@@ -60,7 +60,7 @@ public class FuncLast extends Function {
 
   /** {@inheritDoc} */
   @Override
-  public XObject execute(final XPathContext xctxt) throws org.loboevolution.javax.xml.transform.TransformerException {
+  public XObject execute(final XPathContext xctxt) throws javax.xml.transform.TransformerException {
     return new XNumber(getCountOfContextNodeList(xctxt));
   }
 }

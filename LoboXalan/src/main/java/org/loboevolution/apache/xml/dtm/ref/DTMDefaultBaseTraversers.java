@@ -25,7 +25,7 @@
  */
 package org.loboevolution.apache.xml.dtm.ref;
 
-import org.loboevolution.javax.xml.transform.Source;
+import javax.xml.transform.Source;
 
 import org.loboevolution.apache.xml.dtm.Axis;
 import org.loboevolution.apache.xml.dtm.DTMManager;

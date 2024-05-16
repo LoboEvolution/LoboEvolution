@@ -27,8 +27,8 @@ package org.loboevolution.apache.xpath;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
-import org.loboevolution.javax.xml.transform.ErrorListener;
-import org.loboevolution.javax.xml.transform.URIResolver;
+import javax.xml.transform.ErrorListener;
+import javax.xml.transform.URIResolver;
 
 import org.loboevolution.apache.xml.utils.DefaultErrorHandler;
 import org.loboevolution.apache.xpath.axes.SubContextList;
@@ -66,7 +66,7 @@ public class XPathContext extends DTMManager {
   /** {@inheritDoc} */
   @Override
   public DTM getDTM(
-          final org.loboevolution.javax.xml.transform.Source source, final boolean unique, final boolean incremental, final boolean doIndexing) {
+          final javax.xml.transform.Source source, final boolean unique, final boolean incremental, final boolean doIndexing) {
     return m_dtmManager.getDTM(source, unique, incremental, doIndexing);
   }
 

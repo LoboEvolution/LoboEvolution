@@ -190,7 +190,7 @@ public class XString extends XObject {
       // to be compared is converted to a number as if by applying the number
       // function.
       else if (XObject.CLASS_NUMBER == t) return obj2.num() == num();
-    } catch (final org.loboevolution.javax.xml.transform.TransformerException te) {
+    } catch (final javax.xml.transform.TransformerException te) {
       throw new WrappedRuntimeException(te);
     }
 

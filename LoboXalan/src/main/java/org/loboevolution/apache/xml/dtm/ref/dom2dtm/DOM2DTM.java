@@ -27,7 +27,6 @@ package org.loboevolution.apache.xml.dtm.ref.dom2dtm;
 
 import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.html.node.Attr;
-import org.loboevolution.javax.xml.transform.dom.DOMSource;
 import org.loboevolution.apache.xpath.objects.XString;
 import org.loboevolution.apache.xpath.res.XPATHErrorResources;
 import org.loboevolution.apache.xpath.res.XPATHMessages;
@@ -41,6 +40,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
 import org.loboevolution.html.node.Node;
+import org.loboevolution.javax.xml.transform.dom.DOMSource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +52,7 @@ import java.util.List;
  * a specific node and its subtree and the right things should happen. (I don't _think_ we currently
  * support DocumentFrgment nodes as roots, though that might be worth considering.)
  *
- * <p>Note too that we do not currently attempt to track document mutation. If you alter the DOM
+ * <p>Note to that we do not currently attempt to track document mutation. If you alter the DOM
  * after wrapping DOM2DTM around it, all bets are off.
  */
 @Slf4j
