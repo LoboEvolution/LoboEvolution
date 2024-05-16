@@ -30,10 +30,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.html.node.Document;
 import org.xml.sax.*;
 
-import org.loboevolution.javax.xml.XMLConstants;
-import org.loboevolution.javax.xml.parsers.ParserConfigurationException;
-import org.loboevolution.javax.xml.parsers.SAXParser;
-import org.loboevolution.javax.xml.parsers.SAXParserFactory;
+import javax.xml.XMLConstants;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 import java.io.IOException;
 
 /**

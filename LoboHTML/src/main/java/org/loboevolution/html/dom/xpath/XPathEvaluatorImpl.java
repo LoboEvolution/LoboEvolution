@@ -39,7 +39,7 @@ import org.loboevolution.html.xpath.XPathException;
 import org.loboevolution.html.xpath.XPathExpression;
 import org.loboevolution.html.xpath.XPathNSResolver;
 
-import org.loboevolution.javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerException;
 
 /**
  * <p>XPathEvaluatorImpl class.</p>

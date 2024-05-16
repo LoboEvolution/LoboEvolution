@@ -44,7 +44,7 @@ import org.loboevolution.events.EventTarget;
 import org.loboevolution.html.xpath.XPathException;
 import org.loboevolution.html.xpath.XPathResult;
 
-import org.loboevolution.javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerException;
 
 /**
  * The class provides an implementation XPathResult according to the DOM L3

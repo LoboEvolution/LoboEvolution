@@ -40,11 +40,10 @@ import org.loboevolution.html.node.Node;
 import org.loboevolution.html.xpath.XPathException;
 import org.loboevolution.html.xpath.XPathExpression;
 
-import org.loboevolution.javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerException;
 import java.util.Objects;
 
 /**
- *
  * The class provides an implementation of XPathExpression according to the DOM
  * L3 XPath Specification, Working Group Note 26 February 2004.
  *
@@ -63,79 +62,81 @@ import java.util.Objects;
  */
 public class XPathExpressionImpl implements XPathExpression {
 
-	/** The xpath object that this expression wraps. */
-	private final XPath m_xpath;
+    /**
+     * The xpath object that this expression wraps.
+     */
+    private final XPath m_xpath;
 
-	/**
-	 * The document to be searched to parallel the case where the XPathEvaluator
-	 * is obtained by casting a Document.
-	 */
-	private final Document m_doc;
+    /**
+     * The document to be searched to parallel the case where the XPathEvaluator
+     * is obtained by casting a Document.
+     */
+    private final Document m_doc;
 
-	/**
-	 * Constructor for XPathExpressionImpl.
-	 *
-	 * @param xpath
-	 *            The wrapped XPath object.
-	 * @param doc
-	 *            The document to be searched, to parallel the case where'' the
-	 *            XPathEvaluator is obtained by casting the document.
-	 */
-	XPathExpressionImpl(final XPath xpath, final Document doc) {
-		m_xpath = xpath;
-		m_doc = doc;
-	}
+    /**
+     * Constructor for XPathExpressionImpl.
+     *
+     * @param xpath The wrapped XPath object.
+     * @param doc   The document to be searched, to parallel the case where'' the
+     *              XPathEvaluator is obtained by casting the document.
+     */
+    XPathExpressionImpl(final XPath xpath, final Document doc) {
+        m_xpath = xpath;
+        m_doc = doc;
+    }
 
-	/** {@inheritDoc} */
-	@Override
-	public Object evaluate(final Node contextNode, final short type, final Object result) throws XPathException, DOMException {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object evaluate(final Node contextNode, final short type, final Object result) throws XPathException, DOMException {
 
-		// If the XPathEvaluator was determined by "casting" the document
-		if (m_doc != null) {
+        // If the XPathEvaluator was determined by "casting" the document
+        if (m_doc != null) {
 
-			// Check that the context node is owned by the same document
-			if (!Objects.equals(contextNode, m_doc) && !contextNode.getOwnerDocument().equals(m_doc)) {
-				final String fmsg = XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_WRONG_DOCUMENT, null);
-				throw new DOMException(DOMException.WRONG_DOCUMENT_ERR, fmsg);
-			}
+            // Check that the context node is owned by the same document
+            if (!Objects.equals(contextNode, m_doc) && !contextNode.getOwnerDocument().equals(m_doc)) {
+                final String fmsg = XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_WRONG_DOCUMENT, null);
+                throw new DOMException(DOMException.WRONG_DOCUMENT_ERR, fmsg);
+            }
 
-			// Check that the context node is an acceptable node type
-			final int nodeType = contextNode.getNodeType();
-			
-			switch (nodeType) {
-			case Node.DOCUMENT_NODE:
-			case Node.ELEMENT_NODE:
-			case Node.ATTRIBUTE_NODE:
-			case Node.TEXT_NODE:
-			case Node.CDATA_SECTION_NODE:
-			case Node.COMMENT_NODE:
-			case Node.PROCESSING_INSTRUCTION_NODE:
-				break;
-			default:
-				final String fmsg = XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_WRONG_NODETYPE, null);
-				throw new UnsupportedOperationException(fmsg);
-			}
-		}
+            // Check that the context node is an acceptable node type
+            final int nodeType = contextNode.getNodeType();
 
-		if (!XPathResultImpl.isValidType(type)) {
-			final String fmsg = XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_INVALID_XPATH_TYPE,
-					new Object[] {(int) type});
-			throw new XPathException(XPathException.TYPE_ERR, fmsg);
-		}
+            switch (nodeType) {
+                case Node.DOCUMENT_NODE:
+                case Node.ELEMENT_NODE:
+                case Node.ATTRIBUTE_NODE:
+                case Node.TEXT_NODE:
+                case Node.CDATA_SECTION_NODE:
+                case Node.COMMENT_NODE:
+                case Node.PROCESSING_INSTRUCTION_NODE:
+                    break;
+                default:
+                    final String fmsg = XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_WRONG_NODETYPE, null);
+                    throw new UnsupportedOperationException(fmsg);
+            }
+        }
 
-		final XPathContext xpathSupport = new XPathContext(false);
-		XObject xobj;
+        if (!XPathResultImpl.isValidType(type)) {
+            final String fmsg = XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_INVALID_XPATH_TYPE,
+                    new Object[]{(int) type});
+            throw new XPathException(XPathException.TYPE_ERR, fmsg);
+        }
 
-		if (null != m_doc) {
-			xpathSupport.getDTMHandleFromNode(m_doc);
-		}
+        final XPathContext xpathSupport = new XPathContext(false);
+        XObject xobj;
 
-		try {
-			xobj = m_xpath.execute(xpathSupport, contextNode, null);
-		} catch (final TransformerException te) {
-			throw new XPathException(XPathException.INVALID_EXPRESSION_ERR, te.getMessageAndLocation());
-		}
+        if (null != m_doc) {
+            xpathSupport.getDTMHandleFromNode(m_doc);
+        }
 
-		return new XPathResultImpl(type, xobj, contextNode, m_xpath);
-	}
+        try {
+            xobj = m_xpath.execute(xpathSupport, contextNode, null);
+        } catch (final Exception te) {
+            throw new XPathException(XPathException.INVALID_EXPRESSION_ERR, te.getLocalizedMessage());
+        }
+
+        return new XPathResultImpl(type, xobj, contextNode, m_xpath);
+    }
 }
