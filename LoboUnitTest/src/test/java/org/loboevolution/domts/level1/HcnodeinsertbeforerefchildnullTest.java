@@ -77,7 +77,7 @@ public class HcnodeinsertbeforerefchildnullTest extends LoboUnitTest {
         insertedNode = employeeNode.insertBefore(newChild, refChild);
         child = employeeNode.getLastChild();
         childName = child.getNodeName();
-        assertEquals("br", childName, "HcnodeinsertbeforerefchildnullAssert1");
+        assertEquals("BR", childName, "HcnodeinsertbeforerefchildnullAssert1");
     }
 }
 

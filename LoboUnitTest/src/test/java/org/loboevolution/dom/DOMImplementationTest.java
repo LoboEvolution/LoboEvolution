@@ -189,7 +189,7 @@ public class DOMImplementationTest extends LoboUnitTest {
     @Alerts({"http://www.w3.org/TR/SVG11/feature#Shape 1.0: true",
             "http://www.w3.org/TR/SVG11/feature#Shape 1.1: true",
             "http://www.w3.org/TR/SVG11/feature#Shape 1.2: true"})
-    public void hasFeatureSVG_Shape() {
+    public void hasFeatureSVGShape() {
         hasFeature("http://www.w3.org/TR/SVG11/feature#Shape", "['1.0', '1.1', '1.2']");
     }
 

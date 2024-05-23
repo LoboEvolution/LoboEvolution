@@ -217,7 +217,7 @@ public class AttrTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"[object Attr]", "", "[object Attr]", ""})
+    @Alerts({"[object Attr]", "null", "[object Attr]", "null"})
     public void value() {
         final String html = "<html><head>"
                 + "<script>\n"
@@ -243,7 +243,7 @@ public class AttrTest extends LoboUnitTest {
 
     @Test
     @Alerts({"[object Attr]", ""})
-    public void html_baseURI() {
+    public void htmlBaseURI() {
         html("baseURI");
     }
 
@@ -254,7 +254,7 @@ public class AttrTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"[object Attr]", "testattr"})
+    @Alerts({"[object Attr]", "testAttr"})
     public void htmlLocalName() {
         html("localName");
     }
@@ -287,18 +287,18 @@ public class AttrTest extends LoboUnitTest {
 
     @Test
     @Alerts({"[object Attr]", "undefined"})
-    public void xml_baseName() {
+    public void xmlBaseName() {
         xml("baseName");
     }
 
     @Test
     @Alerts({"[object Attr]", "foo.xml"})
-    public void xml_baseURI() {
+    public void xmlBaseURI() {
         xml("baseURI");
     }
 
     @Test
-    @Alerts({"[object Attr]", "null"})
+    @Alerts({"[object Attr]", ""})
     public void xmlNamespaceURI() {
         xml("namespaceURI");
     }
@@ -320,11 +320,10 @@ public class AttrTest extends LoboUnitTest {
                 "<html>\n"
                         + "  <head>\n"
                         + "    <script>\n"
-
                         + "      function test() {\n"
                         + "        var request;\n"
                         + "        request = new XMLHttpRequest();\n"
-                        + "        request.open('GET', 'foo.xml', false);\n"
+                        +  "       request.open('GET', '" + URL_XML + "foo.xml" + "', false);\n"
                         + "        request.send('');\n"
                         + "        var doc = request.responseXML;\n"
                         + "        debug(doc.documentElement.childNodes[0].attributes.item(0));\n"

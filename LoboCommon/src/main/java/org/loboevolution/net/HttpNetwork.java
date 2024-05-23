@@ -45,6 +45,7 @@ import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Base64;
+import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.zip.GZIPInputStream;
@@ -217,7 +218,7 @@ public class HttpNetwork {
 	 * @throws java.lang.Exception if any.
 	 */
 	public static String getSource(String uri, final String integrity) throws Exception {
-		try (final InputStream in = openConnectionCheckRedirects(getURLConnection(uri))) {
+		try (final InputStream in = openConnectionCheckRedirects(getURLConnection(uri, Proxy.NO_PROXY,null))) {
 			if(AlgorithmDigest.validate(IOUtil.readFully(in), integrity)){
 				return toString(in);
 			}
@@ -227,18 +228,52 @@ public class HttpNetwork {
 		return "";
 	}
 
-	private static URLConnection getURLConnection(String uri) throws Exception {
+	public static URLConnection getURLConnection(String uri, Proxy proxy, String method) throws Exception {
 		URLConnection connection;
 		if (uri.contains("file")) {
 			uri = uri.replace("//", "///");
 			final URL url = new URL(uri);
-			connection = url.openConnection();
+			connection = proxy == null || proxy.equals(Proxy.NO_PROXY) ? url.openConnection() : url.openConnection(proxy);
+
+			if ("POST".equals(method)) {
+				String boundary = UUID.randomUUID().toString();
+				connection.setUseCaches(false);
+				connection.setDoOutput(true);
+				connection.setDoInput(true);
+				connection.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + boundary);
+			} else{
+				connection.setDoInput(true);
+			}
+
 			connection.setRequestProperty("User-Agent", UserAgent.getUserAgent());
 			connection.getHeaderField("Set-Cookie");
+
+			if (Strings.isNotBlank(method) && connection instanceof HttpURLConnection) {
+				HttpURLConnection hc = (HttpURLConnection) connection;
+				hc.setRequestMethod(method.toUpperCase());
+			}
+
 			connection.connect();
 		} else {
 			final URL url = new URL(uri);
 			connection = url.openConnection();
+
+			if (Strings.isNotBlank(method) && connection instanceof HttpURLConnection) {
+				HttpURLConnection hc = (HttpURLConnection) connection;
+				hc.setRequestMethod(method.toUpperCase());
+			}
+
+			if ("POST".equals(method)) {
+				String boundary = UUID.randomUUID().toString();
+				connection.setUseCaches(false);
+				connection.setDoOutput(true);
+				connection.setDoInput(false);
+				connection.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + boundary);
+			} else {
+				connection.setDoInput(true);
+				connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+			}
+
 			connection.setRequestProperty("User-Agent", UserAgent.getUserAgent());
 			connection.getHeaderField("Set-Cookie");
 		}

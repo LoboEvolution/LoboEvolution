@@ -30,9 +30,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.loboevolution.annotation.Alerts;
 import org.loboevolution.annotation.AlertsExtension;
 import org.loboevolution.driver.LoboUnitTest;
+import org.loboevolution.html.node.FormData;
 
 /**
- * Tests for FormData.
+ * Tests for {@link FormData}.
  */
 @ExtendWith(AlertsExtension.class)
 public class FormDataTest extends LoboUnitTest {
@@ -64,7 +65,7 @@ public class FormDataTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"myKey", "myKey1"})
+    @Alerts({"myKey,myKey1"})
     public void delete() {
         final String html
                 = "<html><head><title>foo</title><script>\n"
@@ -92,7 +93,7 @@ public class FormDataTest extends LoboUnitTest {
                 + "  }\n"
                 + "  try {\n"
                 + "    var xhr = new XMLHttpRequest();\n"
-                + "    xhr.open('POST', '/test2', false);\n"
+                + "    xhr.open('POST','https://example.com/', false);\n"
                 + "    xhr.send(formData);\n"
                 + "    alert(xhr.responseText);\n"
                 + "  } catch (e) {\n"
@@ -202,7 +203,7 @@ public class FormDataTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("no set")
+    @Alerts("myKeyX")
     public void set() {
         final String html
                 = "<html><head><title>foo</title><script>\n"
@@ -223,7 +224,7 @@ public class FormDataTest extends LoboUnitTest {
                 + "  }\n"
                 + "  try {\n"
                 + "    var xhr = new XMLHttpRequest();\n"
-                + "    xhr.open('POST', '/test2', false);\n"
+                + "    xhr.open('POST','https://example.com/', false);\n"
                 + "    xhr.send(formData);\n"
                 + "    alert(xhr.responseText);\n"
                 + "  } catch (e) {\n"
@@ -237,47 +238,41 @@ public class FormDataTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts({"function keys() { [native code] }", "[object FormData Iterator]",
+    @Alerts({"function keys", "[object FormData Iterator]",
             "key1", "key2", "key1", "undefined", "true"})
     public void keys() {
         final String html =
                 "<html>\n"
-                        + "<head>\n"
-                        + "  <script>\n"
-                        + "    function test() {\n"
-                        + "      var formData = new FormData();\n"
-
-                        + "      if (!formData.forEach) {\n"
-                        + "       alert('no keys');\n"
-                        + "        return;"
-                        + "      }\n"
-
-                        + "      formData.append('key1', 'val1');\n"
-                        + "      formData.append('key2', undefined);\n"
-                        + "      formData.append('key1', 'val3');\n"
-                        + "      formData.append(undefined, 'val3');\n"
-
-
-                        + "     alert(formData.keys);\n"
-                        + "      var iter = formData.keys();\n"
-                        + "     alert(iter);\n"
-
-                        + "      var entry = iter.next().value;\n"
-                        + "     alert(entry);\n"
-                        + "      entry = iter.next().value;\n"
-                        + "     alert(entry);\n"
-                        + "      entry = iter.next().value;\n"
-                        + "     alert(entry);\n"
-                        + "      entry = iter.next().value;\n"
-                        + "     alert(entry);\n"
-
-                        + "     alert(iter.next().done);\n"
-                        + "    }\n"
-                        + "  </script>\n"
-                        + "</head>\n"
-                        + "<body onload='test()'>\n"
-                        + "</body>\n"
-                        + "</html>";
+                    + "<head>\n"
+                    + "  <script>\n"
+                    + "    function test() {\n"
+                    + "      var formData = new FormData();\n"
+                    + "      if (!formData.forEach) {\n"
+                    + "       alert('no keys');\n"
+                    + "        return;"
+                    + "      }\n"
+                    + "      formData.append('key1', 'val1');\n"
+                    + "      formData.append('key2', undefined);\n"
+                    + "      formData.append('key1', 'val3');\n"
+                    + "      formData.append(undefined, 'val3');\n"
+                    + "     alert(formData.keys);\n"
+                    + "      var iter = formData.keys();\n"
+                    + "     alert(iter);\n"
+                    + "      var entry = iter.next().value;\n"
+                    + "     alert(entry);\n"
+                    + "      entry = iter.next().value;\n"
+                    + "     alert(entry);\n"
+                    + "      entry = iter.next().value;\n"
+                    + "     alert(entry);\n"
+                    + "      entry = iter.next().value;\n"
+                    + "     alert(entry);\n"
+                    + "     alert(iter.next().done);\n"
+                    + "    }\n"
+                    + "  </script>\n"
+                    + "</head>\n"
+                    + "<body onload='test()'>\n"
+                    + "</body>\n"
+                    + "</html>";
 
         checkHtmlAlert(html);
     }
@@ -288,42 +283,36 @@ public class FormDataTest extends LoboUnitTest {
     public void values() {
         final String html =
                 "<html>\n"
-                        + "<head>\n"
-                        + "  <script>\n"
-
-                        + "    function test() {\n"
-                        + "      var formData = new FormData();\n"
-
-                        + "      if (!formData.forEach) {\n"
-                        + "       alert('no values');\n"
-                        + "        return;"
-                        + "      }\n"
-
-                        + "      formData.append('key1', 'val1');\n"
-                        + "      formData.append('key2', undefined);\n"
-                        + "      formData.append('key1', 'val3');\n"
-                        + "      formData.append(undefined, 'val4');\n"
-
-                        + "     alert(formData.values);\n"
-                        + "      var iter = formData.values();\n"
-                        + "     alert(iter);\n"
-
-                        + "      var entry = iter.next().value;\n"
-                        + "     alert(entry);\n"
-                        + "      entry = iter.next().value;\n"
-                        + "     alert(entry);\n"
-                        + "      entry = iter.next().value;\n"
-                        + "     alert(entry);\n"
-                        + "      entry = iter.next().value;\n"
-                        + "     alert(entry);\n"
-
-                        + "     alert(iter.next().done);\n"
-                        + "    }\n"
-                        + "  </script>\n"
-                        + "</head>\n"
-                        + "<body onload='test()'>\n"
-                        + "</body>\n"
-                        + "</html>";
+                    + "<head>\n"
+                    + "  <script>\n"
+                    + "    function test() {\n"
+                    + "      var formData = new FormData();\n"
+                    + "      if (!formData.forEach) {\n"
+                    + "       alert('no values');\n"
+                    + "        return;"
+                    + "      }\n"
+                    + "      formData.append('key1', 'val1');\n"
+                    + "      formData.append('key2', undefined);\n"
+                    + "      formData.append('key1', 'val3');\n"
+                    + "      formData.append(undefined, 'val4');\n"
+                    + "     alert(formData.values);\n"
+                    + "      var iter = formData.values();\n"
+                    + "     alert(iter);\n"
+                    + "      var entry = iter.next().value;\n"
+                    + "     alert(entry);\n"
+                    + "      entry = iter.next().value;\n"
+                    + "     alert(entry);\n"
+                    + "      entry = iter.next().value;\n"
+                    + "     alert(entry);\n"
+                    + "      entry = iter.next().value;\n"
+                    + "     alert(entry);\n"
+                    + "     alert(iter.next().done);\n"
+                    + "    }\n"
+                    + "  </script>\n"
+                    + "</head>\n"
+                    + "<body onload='test()'>\n"
+                    + "</body>\n"
+                    + "</html>";
 
         checkHtmlAlert(html);
     }
@@ -333,31 +322,27 @@ public class FormDataTest extends LoboUnitTest {
     public void valuesForOf() {
         final String html =
                 "<html>\n"
-                        + "<head>\n"
-                        + "  <script>\n"
-
-                        + "    function test() {\n"
-                        + "      var formData = new FormData();\n"
-
-                        + "      if (!formData.forEach) {\n"
-                        + "       alert('no values');\n"
-                        + "        return;"
-                        + "      }\n"
-
-                        + "      formData.append('key1', 'val1');\n"
-                        + "      formData.append('key2', undefined);\n"
-                        + "      formData.append('key1', 'val3');\n"
-                        + "      formData.append(undefined, 'val4');\n"
-
-                        + "      for (var i of formData.values()) {\n"
-                        + "       alert(i);\n"
-                        + "      }\n"
-                        + "    }\n"
-                        + "  </script>\n"
-                        + "</head>\n"
-                        + "<body onload='test()'>\n"
-                        + "</body>\n"
-                        + "</html>";
+                    + "<head>\n"
+                    + "  <script>\n"
+                    + "    function test() {\n"
+                    + "      var formData = new FormData();\n"
+                    + "      if (!formData.forEach) {\n"
+                    + "       alert('no values');\n"
+                    + "        return;"
+                    + "      }\n"
+                    + "      formData.append('key1', 'val1');\n"
+                    + "      formData.append('key2', undefined);\n"
+                    + "      formData.append('key1', 'val3');\n"
+                    + "      formData.append(undefined, 'val4');\n"
+                    + "      for (var i of formData.values()) {\n"
+                    + "       alert(i);\n"
+                    + "      }\n"
+                    + "    }\n"
+                    + "  </script>\n"
+                    + "</head>\n"
+                    + "<body onload='test()'>\n"
+                    + "</body>\n"
+                    + "</html>";
 
         checkHtmlAlert(html);
     }
@@ -369,48 +354,42 @@ public class FormDataTest extends LoboUnitTest {
     public void forEach() {
         final String html =
                 "<html>\n"
-                        + "<head>\n"
-                        + "  <script>\n"
-
-                        + "    function test() {\n"
-                        + "      var formData = new FormData();\n"
-
-                        + "      if (!formData.forEach) {\n"
-                        + "       alert('no forEach');\n"
-                        + "        return;"
-                        + "      }\n"
-
-                        + "      formData.append('key1', 'val1');\n"
-                        + "      formData.append('key2', 'val2');\n"
-                        + "      formData.append('key3', 'val3');\n"
-
-                        + "      formData.forEach((value, key) => {\n"
-                        + "       alert(key + '-' + value);\n"
-                        + "      });\n"
-
-                        + "      formData.forEach((value, key) => {\n"
-                        + "       alert(key + '-' + value);\n"
-                        + "        if (value == 'val1' || value == 'val2') {\n"
-                        + "          formData.delete(key);\n"
-                        + "        }\n"
-                        + "      });\n"
-
-                        + "      formData.forEach((value, key) => {\n"
-                        + "       alert(key + '-' + value);\n"
-                        + "      });\n"
-                        + "    }\n"
-                        + "  </script>\n"
-                        + "</head>\n"
-                        + "<body onload='test()'>\n"
-                        + "</body>\n"
-                        + "</html>";
+                    + "<head>\n"
+                    + "  <script>\n"
+                    + "    function test() {\n"
+                    + "      var formData = new FormData();\n"
+                    + "      if (!formData.forEach) {\n"
+                    + "       alert('no forEach');\n"
+                    + "        return;"
+                    + "      }\n"
+                    + "      formData.append('key1', 'val1');\n"
+                    + "      formData.append('key2', 'val2');\n"
+                    + "      formData.append('key3', 'val3');\n"
+                    + "      formData.forEach((value, key) => {\n"
+                    + "       alert(key + '-' + value);\n"
+                    + "      });\n"
+                    + "      formData.forEach((value, key) => {\n"
+                    + "       alert(key + '-' + value);\n"
+                    + "        if (value == 'val1' || value == 'val2') {\n"
+                    + "          formData.delete(key);\n"
+                    + "        }\n"
+                    + "      });\n"
+                    + "      formData.forEach((value, key) => {\n"
+                    + "       alert(key + '-' + value);\n"
+                    + "      });\n"
+                    + "    }\n"
+                    + "  </script>\n"
+                    + "</head>\n"
+                    + "<body onload='test()'>\n"
+                    + "</body>\n"
+                    + "</html>";
 
         checkHtmlAlert(html);
     }
 
     @Test
     @Alerts({"myKey", "myValue", "myKey2", "", "myKey", "myvalue2"})
-    public void entries_forOf() {
+    public void entriesForOf() {
         final String html
                 = "<html><head>\n"
                 + "<script>\n"

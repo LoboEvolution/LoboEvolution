@@ -75,7 +75,7 @@ public class EventTargetImpl implements EventTarget {
             } else {
                 removeEventListener(type, listener, useCapture);
                 if (mListenerEntries == null) {
-                    mListenerEntries = new ArrayList<EventListenerEntry>();
+                    mListenerEntries = new ArrayList<>();
                 }
                 mListenerEntries.add(new EventListenerEntry(type, listener, useCapture));
             }
@@ -160,7 +160,7 @@ public class EventTargetImpl implements EventTarget {
             }
         }
 
-        return null;
+        return searchFunction(subType);
     }
 
     private Function searchFunction(final String type) {
@@ -207,6 +207,6 @@ public class EventTargetImpl implements EventTarget {
     }
 
     private void onloadEvent(final Function onloadHandler) {
-        Executor.executeFunction(target, onloadHandler, null, new Object[0]);
+        Executor.executeFunction(onloadHandler.getParentScope(), onloadHandler);
     }
 }

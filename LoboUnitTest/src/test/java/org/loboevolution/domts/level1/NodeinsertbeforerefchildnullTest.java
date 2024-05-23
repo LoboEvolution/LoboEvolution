@@ -72,7 +72,7 @@ public class NodeinsertbeforerefchildnullTest extends LoboUnitTest {
         employeeNode.insertBefore(newChild, refChild);
         child = employeeNode.getLastChild();
         childName = child.getNodeName();
-        assertEquals("newChild", childName, "NodeinsertbeforerefchildnullAssert1");
+        assertEquals("NEWCHILD", childName, "NodeinsertbeforerefchildnullAssert1");
     }
 
 }

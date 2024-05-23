@@ -901,7 +901,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
 
     @Test
     @Alerts({"block", "1"})
-    public void mediaRuleMaxWidthWithout_value() {
+    public void mediaRuleMaxWidthWithoutValue() {
         mediaRule("screen and (max-width)");
         mediaRule("screen and (max-width:)");
     }
@@ -937,7 +937,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
 
     @Test
     @Alerts({"block", "1"})
-    public void mediaRuleMinWidthWithout_value() {
+    public void mediaRuleMinWidthWithoutValue() {
         mediaRule("screen and (min-width)");
         mediaRule("screen and (min-width:)");
     }
@@ -973,7 +973,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
 
     @Test
     @Alerts({"block", "1"})
-    public void mediaRuleMaxDeviceWidthWithout_value() {
+    public void mediaRuleMaxDeviceWidthWithoutValue() {
         mediaRule("screen and (max-device-width)");
         mediaRule("screen and (max-device-width:)");
     }
@@ -1009,7 +1009,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
 
     @Test
     @Alerts({"block", "1"})
-    public void mediaRuleMinDeviceWidthWithout_value() {
+    public void mediaRuleMinDeviceWidthWithoutValue() {
         mediaRule("screen and (min-device-width)");
         mediaRule("screen and (min-device-width:)");
     }
@@ -1045,7 +1045,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
 
     @Test
     @Alerts({"block", "1"})
-    public void mediaRuleMaxHeightWithout_value() {
+    public void mediaRuleMaxHeightWithoutValue() {
         mediaRule("screen and (max-height)");
         mediaRule("screen and (max-height:)");
     }
@@ -1081,7 +1081,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
 
     @Test
     @Alerts({"block", "1"})
-    public void mediaRuleMinHeightWithout_value() {
+    public void mediaRuleMinHeightWithoutValue() {
         mediaRule("screen and (min-height)");
         mediaRule("screen and (min-height:)");
     }
@@ -1117,7 +1117,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
 
     @Test
     @Alerts({"block", "1"})
-    public void mediaRuleMaxDeviceHeightWithout_value() {
+    public void mediaRuleMaxDeviceHeightWithoutValue() {
         mediaRule("screen and (max-device-height)");
         mediaRule("screen and (max-device-height:)");
     }
@@ -1153,7 +1153,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
 
     @Test
     @Alerts({"block", "1"})
-    public void mediaRuleMinDeviceHeightWithout_value() {
+    public void mediaRuleMinDeviceHeightWithoutValue() {
         mediaRule("screen and (min-device-height)");
         mediaRule("screen and (min-device-height:)");
     }
@@ -1189,14 +1189,14 @@ public class CSSStyleSheetTest extends LoboUnitTest {
 
     @Test
     @Alerts({"none", "1"})
-    public void mediaRuleResolutionWithout_value() {
+    public void mediaRuleResolutionWithoutValue() {
         mediaRule("screen and (resolution)");
     }
 
 
     @Test
     @Alerts({"block", "1"})
-    public void mediaRuleResolutionWithout_valueEmpty() {
+    public void mediaRuleResolutionWithoutValueEmpty() {
         mediaRule("screen and (resolution:)");
     }
 
@@ -1231,7 +1231,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
 
     @Test
     @Alerts({"block", "1"})
-    public void mediaRuleMaxResolutionWithout_value() {
+    public void mediaRuleMaxResolutionWithoutValue() {
         mediaRule("screen and (max-resolution)");
         mediaRule("screen and (max-resolution:)");
     }
@@ -1267,7 +1267,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
 
     @Test
     @Alerts({"block", "1"})
-    public void mediaRuleMinResolutionWithout_value() {
+    public void mediaRuleMinResolutionWithoutValue() {
         mediaRule("screen and (min-resolution)");
         mediaRule("screen and (min-resolution:)");
     }
@@ -1310,14 +1310,14 @@ public class CSSStyleSheetTest extends LoboUnitTest {
 
     @Test
     @Alerts({"none", "1"})
-    public void mediaRuleOrientationWithout_value() {
+    public void mediaRuleOrientationWithoutValue() {
         mediaRule("screen and (orientation)");
     }
 
 
     @Test
     @Alerts({"block", "1"})
-    public void mediaRuleOrientationWithout_valueEmpty() {
+    public void mediaRuleOrientationWithoutValueEmpty() {
         mediaRule("screen and (orientation:)");
     }
 

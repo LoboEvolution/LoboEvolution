@@ -43,7 +43,7 @@ public class XMLDocument3Test extends LoboUnitTest {
 
     @Test
     @Alerts({"1610", "1575", "32", "1604", "1610", "1610", "1610", "1610", "1610", "1610", "1604"})
-    public void load_Encoding() {
+    public void loadEncoding() {
         final String html = "<html><head>\n"
                 + "<script>\n"
                 + "  function test() {\n"

@@ -148,7 +148,6 @@ public class XMLHttpRequestEventTargetTest extends LoboUnitTest {
                 "<html>\n"
                         + "  <head>\n"
                         + "    <script>\n"
-
                         + "      var request;\n"
                         + "      function test() {\n"
                         + "        var desc = Object.getOwnPropertyDescriptor("

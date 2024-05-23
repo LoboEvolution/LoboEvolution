@@ -72,7 +72,7 @@ public class NodeappendchildTest extends LoboUnitTest {
         appendedChild = employeeNode.appendChild(createdNode);
         lchild = employeeNode.getLastChild();
         childName = lchild.getNodeName();
-        assertEquals("newChild", childName, "NodeappendchildAssert1");
+        assertEquals("NEWCHILD", childName, "NodeappendchildAssert1");
     }
 }
 

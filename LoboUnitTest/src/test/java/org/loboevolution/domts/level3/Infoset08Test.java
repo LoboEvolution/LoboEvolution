@@ -71,7 +71,7 @@ public class Infoset08Test extends LoboUnitTest {
         child = child.getNextSibling();
         assertNotNull(child, "Infoset08Assert4");
         childName = child.getNodeName();
-        assertEquals("p", childName, "Infoset08Assert5");
+        assertEquals("P", childName, "Infoset08Assert5");
     }
 }
 

@@ -62,7 +62,7 @@ public class DocumentcreateelementTest extends LoboUnitTest {
         doc = sampleXmlFile("staff.xml");
         newElement = doc.createElement("address");
         newElementName = newElement.getNodeName();
-        assertEquals("address", newElementName, "DocumentcreateelementAssert1");
+        assertEquals("ADDRESS", newElementName, "DocumentcreateelementAssert1");
         newElementType = newElement.getNodeType();
         assertEquals(1, newElementType, "DocumentcreateelementAssert2");
         newElementValue = newElement.getNodeValue();

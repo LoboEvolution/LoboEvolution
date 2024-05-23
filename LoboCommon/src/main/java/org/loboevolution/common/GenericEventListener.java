@@ -30,11 +30,9 @@ import java.util.EventObject;
 
 /**
  * <p>GenericEventListener interface.</p>
- *
- * Author J. H. S.
- *
  */
 public interface GenericEventListener extends EventListener {
+
 	/** Constant EMPTY_ARRAY */
 	GenericEventListener[] EMPTY_ARRAY = new GenericEventListener[0];
 

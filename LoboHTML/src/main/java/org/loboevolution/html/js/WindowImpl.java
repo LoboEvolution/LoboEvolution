@@ -38,10 +38,7 @@ import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.domimpl.*;
 import org.loboevolution.html.dom.filter.BodyFilter;
-import org.loboevolution.html.dom.nodeimpl.CommentImpl;
-import org.loboevolution.html.dom.nodeimpl.NodeImpl;
-import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
-import org.loboevolution.html.dom.nodeimpl.TextImpl;
+import org.loboevolution.html.dom.nodeimpl.*;
 import org.loboevolution.html.dom.nodeimpl.traversal.NodeFilterImpl;
 import org.loboevolution.html.dom.xpath.XPathResultImpl;
 import org.loboevolution.html.js.css.MediaQueryListImpl;
@@ -50,8 +47,7 @@ import org.loboevolution.html.js.events.MouseEventImpl;
 import org.loboevolution.html.js.events.UIEventImpl;
 import org.loboevolution.html.js.storage.LocalStorage;
 import org.loboevolution.html.js.storage.SessionStorage;
-import org.loboevolution.html.js.xml.XMLHttpRequest;
-import org.loboevolution.html.js.xml.XMLSerializerImpl;
+import org.loboevolution.html.js.xml.*;
 import org.loboevolution.html.node.*;
 import org.loboevolution.css.ComputedCSSStyleDeclaration;
 import org.loboevolution.events.Event;
@@ -1216,25 +1212,27 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 	private void initWindowScope(final Document doc) {
 		final Scriptable ws = this.getWindowScope();
 		final JavaScript js = JavaScript.getInstance();
-		final JavaInstantiator jiXhttp = () -> {
-			final HTMLDocumentImpl hd = (HTMLDocumentImpl) doc;
-			return new XMLHttpRequest(getUaContext(), hd.getDocumentURL(), ws);
-		};
-
+		final JavaInstantiator jiXTarget = () -> new XMLHttpRequestEventTargetImpl(document);
+		final JavaInstantiator jiXUpload = () -> new XMLHttpRequestUploadImpl(document);
+		final JavaInstantiator jiXhttp = () -> new XMLHttpRequestImpl(document, ws);
 		final JavaInstantiator jidomp = () -> new DOMParserImpl(document);
+		final JavaInstantiator jiform = () -> new FormDataImpl(document);
 		final JavaInstantiator jiloc = () -> new LocalStorage(this);
 
-		js.defineJsObject(ws, "XMLHttpRequest", XMLHttpRequest.class, jiXhttp);
+		js.defineJsObject(ws, "XMLHttpRequest", XMLHttpRequestImpl.class, jiXhttp);
+		js.defineJsObject(ws, "XMLHttpRequestUpload", XMLHttpRequestUploadImpl.class, jiXUpload);
+		js.defineJsObject(ws, "XMLHttpRequestEventTarget", XMLHttpRequestEventTargetImpl.class, jiXTarget);
 		js.defineJsObject(ws, "DOMParser",  DOMParserImpl.class, jidomp);
-
+		js.defineJsObject(ws, "Storage", LocalStorage.class, jiloc);
+		js.defineJsObject(ws, "FormData", FormDataImpl.class, jiform);
 		js.defineJsObject(ws, "XMLSerializer",  XMLSerializerImpl.class, XMLSerializerImpl::new);
 		js.defineJsObject(ws, "XPathResult", XPathResultImpl.class, XPathResultImpl::new);
+		js.defineJsObject(ws, "XMLDocument", XMLDocument.class, XMLDocument::new);
 		js.defineJsObject(ws, "MouseEvent", MouseEventImpl.class, MouseEventImpl::new);
 		js.defineJsObject(ws, "UIEvent",  UIEventImpl.class, MouseEventImpl::new);
 		js.defineJsObject(ws, "Element", Element.class, MouseEventImpl::new);
 		js.defineJsObject(ws, "Event", EventImpl.class, EventImpl::new);
 		js.defineJsObject(ws, "Text", TextImpl.class, TextImpl::new);
-		js.defineJsObject(ws, "Storage", LocalStorage.class, jiloc);
 
 
 		js.defineElementClass(ws, doc, "Comment", "comment", CommentImpl.class);

@@ -30,7 +30,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.loboevolution.annotation.Alerts;
 import org.loboevolution.annotation.AlertsExtension;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.js.xml.XMLHttpRequest;
+import org.loboevolution.js.xml.XMLHttpRequest;
 
 /**
  * Tests for {@link XMLHttpRequest}.
@@ -48,7 +48,7 @@ public class XMLHttpRequestTest extends LoboUnitTest {
                 +  "        var request = new XMLHttpRequest();\n"
                 +  "       alert(request.readyState);\n"
                 +  "       alert(request.responseType);\n"
-                +  "        request.open('GET', '" + URL_SECOND + "', false);\n"
+                +  "        request.open('GET','" + URL_HTML + "foo.html" + "', false);\n"
                 +  "       alert(request.readyState);\n"
                 +  "        request.send('');\n"
                 +  "       alert(request.readyState);\n"
@@ -72,7 +72,7 @@ public class XMLHttpRequestTest extends LoboUnitTest {
                 +  "<script>\n" 
                 + "  var xhr = new XMLHttpRequest();\n"
                 +  "  alertStatus('1: ');\n"
-                +  "  xhr.open('GET', '/foo.xml', false);\n"
+                +  "  xhr.open('GET', '" + URL_XML + "foo.xml" + "', false);\n"
                 +  " alert('2: ');\n"
                 +  "  xhr.send();\n"
                 +  "  alertStatus('3: ');\n"
@@ -102,37 +102,32 @@ public class XMLHttpRequestTest extends LoboUnitTest {
                 +  "    <title>XMLHttpRequest Test</title>\n"
                 +  "<script>\n" 
                 + "  var xhr = new XMLHttpRequest();\n"
-
                 +  "  function test() {\n"
                 +  "    try {\n"
                 +  "      logStatus('1: ');\n"
-
                 +  "      xhr.onreadystatechange = onReadyStateChange;\n"
                 +  "      logStatus('2: ');\n"
-
-                +  "      xhr.open('GET', '/foo.xml', true);\n"
+                +  "      xhr.open('GET', '" + URL_XML + "foo.xml" + "', true);\n"
                 +  "      logStatus('3: ');\n"
-
                 +  "      xhr.send();\n"
                 +  "      logStatus('4: ');\n"
                 +  "    } catch(e) {\n"
                 +  "      document.getElementById('log').value += e + '\\n';\n"
                 +  "    }\n"
                 +  "  }\n"
-
                 +  "  function onReadyStateChange() {\n"
                 +  "    logStatus('#' + xhr.readyState + ': ');\n"
                 +  "  }\n"
-
                 +  "  function logStatus(prefix) {\n"
                 +  "    var msg = prefix;\n"
                 +  "    try {\n"
                 +  "      msg = msg + xhr.status + '-';\n"
                 +  "    } catch(e) { msg = msg + 'ex: status' + '-' }\n"
                 +  "    try {\n"
-                +  "      msg = msg + xhr.statusText;;\n"
+                +  "      msg = msg + xhr.statusText;\n"
                 +  "    } catch(e) { msg = msg + 'ex: statusText' }\n"
-                +  "    document.getElementById('log').value += msg + '\\n';\n"
+                +  "    document.getElementById('log').value += msg;\n"
+                +  "    alert(document.getElementById('log').value);\n"
                 +  "  }\n"
                 +  "</script>\n"
                 +  "  </head>\n"
@@ -144,38 +139,29 @@ public class XMLHttpRequestTest extends LoboUnitTest {
         checkHtmlAlert(html);
     }
 
-    /**
-     * Checks that not passing the async flag to <code>open()</code>
-     * results in async execution.  If this gets interpreted as {@code false}
-     * then you will see the alert order 1-2-4-3 instead of 1-2-3-4.
-     */
     @Test
     @Alerts({"#1", "#2", "#3", "#4"})
     public void asyncIsDefault() {
         final String html = "<html>\n"
         +  "<body>\n"
         +  "  <textarea id='log' cols='80' rows='40'></textarea>\n"
-
         +  "<script>\n" 
-                + "    function alert(x) {\n"
+        + "    function alert(x) {\n"
         +  "      document.getElementById('log').value += x + '\\n';\n"
         +  "    }\n"
-
         +  "var xhr = new XMLHttpRequest();\n"
-
         +  "function onReadyStateChange() {\n"
-        +  "  if( xhr.readyState == 4 ) {\n"
+        +  "  if(xhr.readyState == 4) {\n"
         +  "   alert('#4');\n"
         +  "  }\n"
         +  "}\n"
-
         +  "try {\n"
-        +  " alert('#1');\n"
+        +  "  alert('#1');\n"
         +  "  xhr.onreadystatechange = onReadyStateChange;\n"
-        +  "  xhr.open('GET', '/foo.xml');\n"
-        +  " alert('#2');\n"
+        +  "  xhr.open('GET', '" + URL_XML + "foo.xml" + "');\n"
+        +  "  alert('#2');\n"
         +  "  xhr.send();\n"
-        +  " alert('#3');\n"
+        +  "  alert('#3');\n"
         +  "} catch(e) {alert(e); }\n"
         +  "</script>\n"
         +  "</body></html>";
@@ -191,21 +177,14 @@ public class XMLHttpRequestTest extends LoboUnitTest {
                 "<html>\n"
                 +  "  <head>\n"
                 +  "    <script>\n"
-                +  "      function alert(x) {\n"
-                +  "        document.getElementById('log').value += x + '\\n';\n"
-                +  "      }\n"
-
                 +  "      function test() {\n"
                 +  "        var xhr = new XMLHttpRequest();\n"
-
                 +  "        xhr.onreadystatechange = function() {alert('orsc' + xhr.readyState); };\n"
                 +  "        xhr.onload = function() {alert(xhr.readyState);alert(xhr.responseText);alert(this); }\n"
-
-                +  "        xhr.open('GET', '/foo.xml', true);\n"
-                +  "       alert('open-done');\n"
-
+                +  "        xhr.open('GET', '" + URL_XML + "foo.xml" + "', true);\n"
+                +  "        alert('open-done');\n"
                 +  "        xhr.send('');\n"
-                +  "       alert('send-done');\n"
+                +  "        alert('send-done');\n"
                 +  "      }\n"
                 +  "    </script>\n"
                 +  "  </head>\n"
@@ -225,9 +204,8 @@ public class XMLHttpRequestTest extends LoboUnitTest {
                 +  "  <head>\n"
                 +  "    <script>\n"
                 +  "        var request = new XMLHttpRequest();\n"
-
-                +  "       alert(request.getResponseHeader('content-length'));\n"
-                +  "        request.open('GET', '/foo.xml', false);\n"
+                +  "        alert(request.getResponseHeader('content-length'));\n"
+                +  "        request.open('GET', '" + URL_XML + "foo.xml" + "', false);\n"
                 +  "       alert(request.getResponseHeader('content-length'));\n"
                 +  "    </script>\n"
                 +  "  </head>\n"
@@ -238,7 +216,7 @@ public class XMLHttpRequestTest extends LoboUnitTest {
 
     @Test
     @Alerts("bla bla")
-    public void responseText_NotXml() {
+    public void responseTextNotXml() {
         final String html = "<html><head>\n"
         +  "<script>\n"
         +  "function test() {\n"
@@ -260,7 +238,7 @@ public class XMLHttpRequestTest extends LoboUnitTest {
         +  "<script>\n"
         +  "  function test() {\n"
         +  "    var xhr = new XMLHttpRequest();\n"
-        +  "    xhr.open('GET', 'foo.xml', false);\n"
+        +  "    xhr.open('GET', '" + URL_XML + "foo.xml" + "', false);\n"
         +  "    xhr.send('');\n"
         +  "    try {\n"
         +  "     alert(xhr.responseXML);\n"
@@ -278,7 +256,7 @@ public class XMLHttpRequestTest extends LoboUnitTest {
         +  "<script>\n"
         +  "  function test() {\n"
         +  "    var xhr = new XMLHttpRequest();\n"
-        +  "    xhr.open('GET', 'foo.xml', false);\n"
+        +  "    xhr.open('GET', '" + URL_XML + "foo.xml" + "', false);\n"
         +  "    xhr.send('');\n"
         +  "    try {\n"
         +  "     alert(xhr.responseXML);\n"
@@ -296,7 +274,7 @@ public class XMLHttpRequestTest extends LoboUnitTest {
         +  "<script>\n"
         +  "  function test() {\n"
         +  "    var xhr = new XMLHttpRequest();\n"
-        +  "    xhr.open('GET', 'foo.xml', false);\n"
+        +  "    xhr.open('GET', '" + URL_XML + "foo.xml" + "', false);\n"
         +  "    xhr.send('');\n"
         +  "    try {\n"
         +  "     alert(xhr.responseXML);\n"
@@ -314,7 +292,7 @@ public class XMLHttpRequestTest extends LoboUnitTest {
         +  "<script>\n"
         +  "  function test() {\n"
         +  "    var xhr = new XMLHttpRequest();\n"
-        +  "    xhr.open('GET', 'foo.xml', false);\n"
+        +  "    xhr.open('GET', '" + URL_XML + "foo.xml" + "', false);\n"
         +  "    xhr.send('');\n"
         +  "    try {\n"
         +  "     alert(xhr.responseXML);\n"
@@ -332,7 +310,7 @@ public class XMLHttpRequestTest extends LoboUnitTest {
         +  "<script>"
                 +  " function test() {\n"
         +  "    var xhr = new XMLHttpRequest();\n"
-        +  "    xhr.open('GET', 'foo.xml', false);\n"
+        +  "    xhr.open('GET', '" + URL_XML + "foo.xml" + "', false);\n"
         +  "    xhr.send('');\n"
         +  "    try {\n"
         +  "     alert(xhr.responseXML);\n"
@@ -350,7 +328,7 @@ public class XMLHttpRequestTest extends LoboUnitTest {
         +  "<script>\n"
         +  "function test() {\n"
         +  "  var request = new XMLHttpRequest();\n"
-        +  "  request.open('GET', 'foo.xml', false);\n"
+        +  "  request.open('GET', '" + URL_XML + "foo.xml" + "', false);\n"
         +  "  request.send('');\n"
         +  "  var childNodes = request.responseXML.childNodes;\n"
         +  " alert(childNodes.length);\n"
@@ -432,22 +410,22 @@ public class XMLHttpRequestTest extends LoboUnitTest {
     @Alerts({"true", "false"})
     public void overrideMimeType() {
         final String html = "<html><head>\n"
-        +  "<script>\n"
-        +  "function test() {\n"
-        +  "try {\n"
-        +  "  var request = new XMLHttpRequest();\n"
-        +  "  request.open('GET', 'foo.xml.txt', false);\n"
-        +  "  request.send('');\n"
-        +  " alert(request.responseXML == null);\n"
-        +  "  request.open('GET', 'foo.xml.txt', false);\n"
-        +  "  request.overrideMimeType('text/xml');\n"
-        +  "  request.send('');\n"
-        +  " alert(request.responseXML == null);\n"
-        +  "} catch (e) {alert('exception'); }\n"
-        +  "}\n"
-        +  "</script>\n"
-        +  "</head>\n"
-        +  "<body onload='test()'></body></html>";
+            +  "<script>\n"
+            +  "function test() {\n"
+            +  "try {\n"
+            +  "  var request = new XMLHttpRequest();\n"
+            +  "  request.open('GET','" + URL_XML + "foo.xml" + "', false);\n"
+            +  "  request.send('');\n"
+            +  "  alert(request.responseXML == null);\n"
+            +  "  request.open('GET','" + URL_XML + "foo.xml" + "', false);\n"
+            +  "  request.overrideMimeType('text/xml');\n"
+            +  "  request.send('');\n"
+            +  "  alert(request.responseXML == null);\n"
+            +  "} catch (e) {alert('exception'); }\n"
+            +  "}\n"
+            +  "</script>\n"
+            +  "</head>\n"
+            +  "<body onload='test()'></body></html>";
         checkHtmlAlert(html);
     }
 
@@ -455,20 +433,20 @@ public class XMLHttpRequestTest extends LoboUnitTest {
     @Alerts({"true", "exception"})
     public void overrideMimeTypeAfterSend() {
         final String html = "<html><head>\n"
-        +  "<script>\n"
-        +  "function test() {\n"
-        +  "  var request = new XMLHttpRequest();\n"
-        +  "  request.open('GET', 'foo.xml.txt', false);\n"
-        +  "  request.send('');\n"
-        +  " alert(request.responseXML == null);\n"
-        +  "  try {\n"
-        +  "    request.overrideMimeType('text/xml');\n"
-        +  "   alert('overwritten');\n"
-        +  "  } catch (e) {alert('exception'); }\n"
-        +  "}\n"
-        +  "</script>\n"
-        +  "</head>\n"
-        +  "<body onload='test()'></body></html>";
+            +  "<script>\n"
+            +  "function test() {\n"
+            +  "  var request = new XMLHttpRequest();\n"
+            +  "  request.open('GET','" + URL_XML + "foo.xml" + "', false);\n"
+            +  "  request.send('');\n"
+            +  " alert(request.responseXML == null);\n"
+            +  "  try {\n"
+            +  "    request.overrideMimeType('text/xml');\n"
+            +  "   alert('overwritten');\n"
+            +  "  } catch (e) {alert('exception'); }\n"
+            +  "}\n"
+            +  "</script>\n"
+            +  "</head>\n"
+            +  "<body onload='test()'></body></html>";
         checkHtmlAlert(html);
     }
 
@@ -480,7 +458,7 @@ public class XMLHttpRequestTest extends LoboUnitTest {
         +  "function test() {\n"
         +  "try {\n"
         +  "  var request = new XMLHttpRequest();\n"
-        +  "  request.open('GET', '" + URL_SECOND + "', false);\n"
+        +  "  request.open('GET','" + URL_HTML + "foo.html" + "', false);\n"
         +  "  request.overrideMimeType('text/plain; charset=GBK');\n"
         +  "  request.send('');\n"
         +  " alert(request.responseText.charCodeAt(0));\n"
@@ -494,13 +472,13 @@ public class XMLHttpRequestTest extends LoboUnitTest {
 
     @Test
     @Alerts("27035")
-    public void overrideMimeTypeCharset_upperCase() {
+    public void overrideMimeTypeCharsetUpperCase() {
         final String html = "<html><head>\n"
         +  "<script>\n"
         +  "function test() {\n"
         +  "try {\n"
         +  "  var request = new XMLHttpRequest();\n"
-        +  "  request.open('GET', '" + URL_SECOND + "', false);\n"
+        +  "  request.open('GET','" + URL_HTML + "foo.html" + "', false);\n"
         +  "  request.overrideMimeType('text/plain; chaRSet=GBK');\n"
         +  "  request.send('');\n"
         +  " alert(request.responseText.charCodeAt(0));\n"
@@ -520,7 +498,7 @@ public class XMLHttpRequestTest extends LoboUnitTest {
         +  "function test() {\n"
         +  "try {\n"
         +  "  var request = new XMLHttpRequest();\n"
-        +  "  request.open('GET', '" + URL_SECOND + "', false);\n"
+        +  "  request.open('GET','" + URL_HTML + "foo.html" + "', false);\n"
         +  "  request.overrideMimeType('text/plain; charset=');\n"
         +  "  request.send('');\n"
         +  " alert(request.responseText.charCodeAt(0));\n"
@@ -540,7 +518,7 @@ public class XMLHttpRequestTest extends LoboUnitTest {
         +  "function test() {\n"
         +  "  try {\n"
         +  "    var request = new XMLHttpRequest();\n"
-        +  "    request.open('GET', '" + URL_SECOND + "', false);\n"
+        +  "    request.open('GET','" + URL_HTML + "foo.html" + "', false);\n"
         +  "    request.overrideMimeType('text/plain; charset=abcdefg');\n"
         +  "    request.send('');\n"
         +  "    var text = request.responseText;\n"
@@ -566,7 +544,7 @@ public class XMLHttpRequestTest extends LoboUnitTest {
                 +  "      function testReplace() {\n"
                 +  "        request = new XMLHttpRequest();\n"
                 +  "        request.onreadystatechange = onReadyStateChange;\n"
-                +  "        request.open('GET', '" + URL_SECOND + "', false);\n"
+                +  "        request.open('GET','" + URL_HTML + "foo.html" + "', false);\n"
                 +  "        request.send('');\n"
                 +  "      }\n"
                 +  "      function onReadyStateChange() {\n"
@@ -599,7 +577,7 @@ public class XMLHttpRequestTest extends LoboUnitTest {
                 +  "    <script>\n"
                 +  "      function test() {\n"
                 +  "        var request = new XMLHttpRequest();\n"
-                +  "        request.open('GET', '" + URL_SECOND + "', false);\n"
+                +  "        request.open('GET','" + URL_HTML + "foo.html" + "', false);\n"
                 +  "        request.send('');\n"
                 +  "        if (!request.responseXML.selectNodes) {alert('selectNodes not available'); return }\n"
                 +  "       alert(request.responseXML.selectNodes('//content').length);\n"
@@ -622,7 +600,7 @@ public class XMLHttpRequestTest extends LoboUnitTest {
                 +  "    <script>\n"
                 +  "      function test() {\n"
                 +  "        var request = new XMLHttpRequest();\n"
-                +  "        request.open('GET', '" + URL_SECOND + "', false);\n"
+                +  "        request.open('GET','" + URL_HTML + "foo.html" + "', false);\n"
                 +  "        request.send('');\n"
                 +  "        if (request.responseXML.getElementById) {\n"
                 +  "         alert(request.responseXML.getElementById('id1'));\n"
@@ -655,7 +633,7 @@ public class XMLHttpRequestTest extends LoboUnitTest {
                 +  "    <script>\n"
                 +  "      function test() {\n"
                 +  "        var request = new XMLHttpRequest();\n"
-                +  "        request.open('GET', '" + URL_SECOND + "', false);\n"
+                +  "        request.open('GET','" + URL_HTML + "foo.html" + "', false);\n"
                 +  "        request.send('');\n"
                 +  "        var doc = request.responseXML;\n"
                 +  "       alert(doc.documentElement);\n"
@@ -687,7 +665,7 @@ public class XMLHttpRequestTest extends LoboUnitTest {
                 +  "    <script>\n"
                 +  "      function test() {\n"
                 +  "        var request = new XMLHttpRequest();\n"
-                +  "        request.open('GET', '" + URL_SECOND + "', false);\n"
+                +  "        request.open('GET','" + URL_HTML + "foo.html" + "', false);\n"
                 +  "        request.send('');\n"
                 +  "       alert(request.responseText);\n"
                 +  "      }\n"
@@ -709,7 +687,7 @@ public class XMLHttpRequestTest extends LoboUnitTest {
                 +  "      function test() {\n"
                 +  "        try {\n"
                 +  "          var request = new XMLHttpRequest();\n"
-                +  "          request.open('GET', '" + URL_SECOND + "', false);\n"
+                +  "          request.open('GET','" + URL_HTML + "foo.html" + "', false);\n"
                 +  "          request.send('');\n"
                 +  "         alert(request.responseXML.getElementById('myID').id);\n"
                 +  "        } catch (e) {alert('exception'); }\n"
@@ -732,7 +710,7 @@ public class XMLHttpRequestTest extends LoboUnitTest {
                 +  "      function test() {\n"
                 +  "        try {\n"
                 +  "          var request = new XMLHttpRequest();\n"
-                +  "          request.open('GET', '" + URL_SECOND + "', false);\n"
+                +  "          request.open('GET','" + URL_HTML + "foo.html" + "', false);\n"
                 +  "          request.send('');\n"
                 +  "         alert(request.responseXML.getElementById('myID').myInput.name);\n"
                 +  "        } catch (e) {alert('exception'); }\n"
@@ -770,7 +748,7 @@ public class XMLHttpRequestTest extends LoboUnitTest {
         +  "function test() {\n"
         +  "try {\n"
         +  "  var request = new XMLHttpRequest();\n"
-        +  "  request.open('GET', '" + URL_SECOND + "', false);\n"
+        +  "  request.open('GET','" + URL_HTML + "foo.html" + "', false);\n"
         +  "  request.overrideMimeType('text/plain; charset=GBK');\n"
         +  "  request.send('');\n"
         +  "  for (var i = 0; i < request.responseText.length; i++) {\n"
@@ -798,7 +776,7 @@ public class XMLHttpRequestTest extends LoboUnitTest {
                 +  "        try {\n"
                 +  "          var request = new XMLHttpRequest();\n"
                 +  "          request.onload = someLoad;\n"
-                +  "          request.open('GET', '" + URL_SECOND + "', false);\n"
+                +  "          request.open('GET','" + URL_HTML + "foo.html" + "', false);\n"
                 +  "          request.send('');\n"
                 +  "        } catch (e) {alert('exception'); }\n"
                 +  "      }\n"
@@ -828,9 +806,9 @@ public class XMLHttpRequestTest extends LoboUnitTest {
                 +  "        try {\n"
                 +  "          var request = new XMLHttpRequest();\n"
                 +  "          request.addEventListener('load', someLoad, false);\n"
-                +  "          request.open('GET', '" + URL_SECOND + "', false);\n"
+                +  "          request.open('GET', '" + URL_HTML + "foo.html" + "', false);\n"
                 +  "          request.send('');\n"
-                +  "        } catch (e) {alert('exception'); }\n"
+                +  "        } catch (e) {alert(e); }\n"
                 +  "      }\n"
                 +  "    </script>\n"
                 +  "  </head>\n"
@@ -858,7 +836,7 @@ public class XMLHttpRequestTest extends LoboUnitTest {
                 +  "        try {\n"
                 +  "          var request = new XMLHttpRequest();\n"
                 +  "          request.addEventListener('load', someLoad, false);\n"
-                +  "          request.open('GET', '" + URL_SECOND + "', false);\n"
+                +  "          request.open('GET','" + URL_HTML + "foo.html" + "', false);\n"
                 +  "          request.send('');\n"
                 +  "        } catch (e) {alert('exception'); }\n"
                 +  "      }\n"
@@ -879,13 +857,13 @@ public class XMLHttpRequestTest extends LoboUnitTest {
                 +  "    <script>\n"
                 +  "      function someLoad(event) {\n"
                 +  "        var caller = arguments.callee.caller;\n"
-                +  "       alert(typeof caller == 'function' ? 'function' : caller);\n"
+                +  "        alert(typeof caller == 'function' ? 'function' : caller);\n"
                 +  "      }\n"
                 +  "      function test() {\n"
                 +  "        try {\n"
                 +  "          var request = new XMLHttpRequest();\n"
                 +  "          request.addEventListener('load', someLoad, false);\n"
-                +  "          request.open('GET', '" + URL_SECOND + "', false);\n"
+                +  "          request.open('GET','" + URL_HTML + "foo.html" + "', false);\n"
                 +  "          request.send('');\n"
                 +  "        } catch (e) {alert('exception'); }\n"
                 +  "      }\n"
@@ -936,7 +914,7 @@ public class XMLHttpRequestTest extends LoboUnitTest {
                 +  "                                 configurable: !0,\n"
                 +  "                                 get: function() { return !0 }\n"
                 +  "                             });\n"
-                +  "        var desc = Object.getOwnPropertyDescriptor(XMLHttpRequest.prototype, 'onreadystatechange');\n"
+                +  "       var desc = Object.getOwnPropertyDescriptor(XMLHttpRequest.prototype, 'onreadystatechange');\n"
                 +  "       alert(desc);\n"
                 +  "       alert(desc.value);\n"
                 +  "       alert(desc.writable);\n"
@@ -997,93 +975,6 @@ public class XMLHttpRequestTest extends LoboUnitTest {
         +  "<body onload='doTest()'>\n"
         +  "</body>\n"
         +  "</html>";
-
-        checkHtmlAlert(html);
-    }
-
-
-    @Test
-    @Alerts("undefined")
-    public void getOwnPropertyDescriptorOnabort() {
-        getOwnPropertyDescriptor("onabort");
-    }
-
-
-    @Test
-    @Alerts("undefined")
-    public void getOwnPropertyDescriptorOnerror() {
-        getOwnPropertyDescriptor("onerror");
-    }
-
-
-    @Test
-    @Alerts("undefined")
-    public void getOwnPropertyDescriptorOnload() {
-        getOwnPropertyDescriptor("onload");
-    }
-
-
-    @Test
-    @Alerts("undefined")
-    public void getOwnPropertyDescriptorOnloadstart() {
-        getOwnPropertyDescriptor("onloadstart");
-    }
-
-
-    @Test
-    @Alerts("undefined")
-    public void getOwnPropertyDescriptorOnloadend() {
-        getOwnPropertyDescriptor("onloadend");
-    }
-
-
-    @Test
-    @Alerts("undefined")
-    public void getOwnPropertyDescriptorOnprogress() {
-        getOwnPropertyDescriptor("onprogress");
-    }
-
-
-    @Test
-    @Alerts({"[object Object]", "undefined", "undefined",
-            "function get onreadystatechange() { [native code] }",
-            "function set onreadystatechange() { [native code] }",
-            "true", "true"})
-    public void getOwnPropertyDescriptorOnreadystatechange() {
-        getOwnPropertyDescriptor("onreadystatechange");
-    }
-
-
-    @Test
-    @Alerts("undefined")
-    public void getOwnPropertyDescriptorOntimeout() {
-        getOwnPropertyDescriptor("ontimeout");
-    }
-
-    private void getOwnPropertyDescriptor(final String event) {
-        final String html =
-                "<html>\n"
-                +  "  <head>\n"
-                +  "    <script>\n"
-                +  "      var request;\n"
-                +  "      function test() {\n"
-                +  "        var desc = Object.getOwnPropertyDescriptor("
-                +  "XMLHttpRequest.prototype, '" + event + "');\n"
-                +  "       alert(desc);\n"
-                +  "        if(!desc) { return; }\n"
-
-                +  "       alert(desc.value);\n"
-                +  "       alert(desc.writable);\n"
-                +  "       alert(desc.get);\n"
-                +  "       alert(desc.set);\n"
-                +  "       alert(desc.configurable);\n"
-                +  "       alert(desc.enumerable);\n"
-                +  "      }\n"
-                +  "    </script>\n"
-                +  "  </head>\n"
-                +  "  <body onload='test()'>\n"
-                +  "  </body>\n"
-                +  "</html>";
 
         checkHtmlAlert(html);
     }
@@ -1151,7 +1042,7 @@ public class XMLHttpRequestTest extends LoboUnitTest {
                 +  "    <script>\n"
                 +  "      function testSync() {\n"
                 +  "        var request = new XMLHttpRequest();\n"
-                +  "        request.open('GET', '" + URL_SECOND + "', false);\n"
+                +  "        request.open('GET','" + URL_HTML + "foo.html" + "', false);\n"
 
                 +  "       alert(request.responseType);\n"
 
@@ -1224,7 +1115,7 @@ public class XMLHttpRequestTest extends LoboUnitTest {
                 +  "    <script>\n"
                 +  "      function testSync() {\n"
                 +  "        var request = new XMLHttpRequest();\n"
-                +  "        request.open('GET', '" + URL_SECOND + "', true);\n"
+                +  "        request.open('GET','" + URL_HTML + "foo.html" + "', true);\n"
 
                 +  "       alert(request.responseType);\n"
                 +  "      try {\n"
@@ -1298,7 +1189,7 @@ public class XMLHttpRequestTest extends LoboUnitTest {
                 +  "        xhr = new XMLHttpRequest();\n"
                 +  "       alert(xhr.responseText);\n"
 
-                +  "        xhr.open('GET', '" + URL_SECOND + "', true);\n"
+                +  "        xhr.open('GET','" + URL_HTML + "foo.html" + "', true);\n"
                 +  "       alert(xhr.responseText);\n"
 
                 +  "        xhr.responseType = 'arraybuffer';\n"
@@ -1338,7 +1229,7 @@ public class XMLHttpRequestTest extends LoboUnitTest {
                 +  "        xhr = new XMLHttpRequest();\n"
                 +  "       alert(xhr.responseText);\n"
 
-                +  "        xhr.open('GET', '" + URL_SECOND + "', true);\n"
+                +  "        xhr.open('GET','" + URL_HTML + "foo.html" + "', true);\n"
                 +  "       alert(xhr.responseType);\n"
 
                 +  "        xhr.onreadystatechange = onStateChange;\n"
@@ -1372,15 +1263,12 @@ public class XMLHttpRequestTest extends LoboUnitTest {
                 +  "      function test() {\n"
                 +  "        xhr = new XMLHttpRequest();\n"
                 +  "       alert(xhr.responseText);\n"
-
-                +  "        xhr.open('GET', '" + URL_SECOND + "', true);\n"
+                +  "        xhr.open('GET','" + URL_HTML + "foo.html" + "', true);\n"
                 +  "        xhr.responseType = 'text';\n"
                 +  "       alert(xhr.responseType);\n"
-
                 +  "        xhr.onreadystatechange = onStateChange;\n"
                 +  "        xhr.send('');\n"
                 +  "      }\n"
-
                 +  "      function onStateChange(e) {\n"
                 +  "        if (xhr.readyState == 4) {\n"
                 +  "          try {\n"
@@ -1409,7 +1297,7 @@ public class XMLHttpRequestTest extends LoboUnitTest {
                 +  "        xhr = new XMLHttpRequest();\n"
                 +  "       alert(xhr.responseText);\n"
 
-                +  "        xhr.open('GET', '" + URL_SECOND + "', true);\n"
+                +  "        xhr.open('GET','" + URL_HTML + "foo.html" + "', true);\n"
                 +  "        xhr.responseType = 'arraybuffer';\n"
                 +  "       alert(xhr.responseType);\n"
 
@@ -1446,7 +1334,7 @@ public class XMLHttpRequestTest extends LoboUnitTest {
                 +  "        xhr = new XMLHttpRequest();\n"
                 +  "       alert(xhr.responseText);\n"
 
-                +  "        xhr.open('GET', '" + URL_SECOND + "', true);\n"
+                +  "        xhr.open('GET','" + URL_HTML + "foo.html" + "', true);\n"
                 +  "        xhr.responseType = 'arraybuffer';\n"
                 +  "       alert(xhr.responseType);\n"
 
@@ -1483,7 +1371,7 @@ public class XMLHttpRequestTest extends LoboUnitTest {
                 +  "        xhr = new XMLHttpRequest();\n"
                 +  "       alert(xhr.responseText);\n"
 
-                +  "        xhr.open('GET', '" + URL_SECOND + "', true);\n"
+                +  "        xhr.open('GET','" + URL_HTML + "foo.html" + "', true);\n"
                 +  "        xhr.responseType = 'arraybuffer';\n"
                 +  "       alert(xhr.responseType);\n"
 
@@ -1519,15 +1407,12 @@ public class XMLHttpRequestTest extends LoboUnitTest {
                 +  "      function test() {\n"
                 +  "        xhr = new XMLHttpRequest();\n"
                 +  "       alert(xhr.responseText);\n"
-
-                +  "        xhr.open('GET', '" + URL_SECOND + "', true);\n"
+                +  "        xhr.open('GET','" + URL_HTML + "foo.html" + "', true);\n"
                 +  "        xhr.responseType = 'arraybuffer';\n"
                 +  "       alert(xhr.responseType);\n"
-
                 +  "        xhr.onreadystatechange = onStateChange;\n"
                 +  "        xhr.send('');\n"
                 +  "      }\n"
-
                 +  "      function onStateChange(e) {\n"
                 +  "        if (xhr.readyState == 4) {\n"
                 +  "          try {\n"
@@ -1557,7 +1442,7 @@ public class XMLHttpRequestTest extends LoboUnitTest {
                 +  "        xhr = new XMLHttpRequest();\n"
                 +  "       alert(xhr.responseText);\n"
 
-                +  "        xhr.open('GET', '" + URL_SECOND + "', true);\n"
+                +  "        xhr.open('GET','" + URL_HTML + "foo.html" + "', true);\n"
                 +  "        xhr.responseType = 'blob';\n"
                 +  "       alert(xhr.responseType);\n"
 
@@ -1594,7 +1479,7 @@ public class XMLHttpRequestTest extends LoboUnitTest {
                 +  "      function test() {\n"
                 +  "        xhr = new XMLHttpRequest();\n"
                 +  "       alert(xhr.responseText);\n"
-                +  "        xhr.open('GET', '" + URL_SECOND + "', true);\n"
+                +  "        xhr.open('GET','" + URL_HTML + "foo.html" + "', true);\n"
                 +  "        xhr.responseType = 'blob';\n"
                 +  "       alert(xhr.responseType);\n"
                 +  "        xhr.onreadystatechange = onStateChange;\n"
@@ -1629,7 +1514,7 @@ public class XMLHttpRequestTest extends LoboUnitTest {
                 +  "        xhr = new XMLHttpRequest();\n"
                 +  "       alert(xhr.responseText);\n"
 
-                +  "        xhr.open('GET', '" + URL_SECOND + "', true);\n"
+                +  "        xhr.open('GET','" + URL_HTML + "foo.html" + "', true);\n"
                 +  "        xhr.responseType = 'json';\n"
                 +  "       alert(xhr.responseType);\n"
 
@@ -1667,7 +1552,7 @@ public class XMLHttpRequestTest extends LoboUnitTest {
                 +  "        xhr = new XMLHttpRequest();\n"
                 +  "       alert(xhr.responseText);\n"
 
-                +  "        xhr.open('GET', '" + URL_SECOND + "', true);\n"
+                +  "        xhr.open('GET','" + URL_HTML + "foo.html" + "', true);\n"
                 +  "        xhr.responseType = 'json';\n"
                 +  "       alert(xhr.responseType);\n"
 
@@ -1692,7 +1577,7 @@ public class XMLHttpRequestTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"", "document", "[object XMLDocument]"})
+    @Alerts({"null", "document", "[object XMLDocument]"})
     public void responseResponseTypeDocumentXml() {
         final String html =
                 "<html>\n"
@@ -1701,17 +1586,16 @@ public class XMLHttpRequestTest extends LoboUnitTest {
                 +  "      var xhr;\n"
                 +  "      function test() {\n"
                 +  "        xhr = new XMLHttpRequest();\n"
-                +  "       alert(xhr.responseText);\n"
-
-                +  "        xhr.open('GET', '" + URL_SECOND + "', true);\n"
+                +  "        alert(xhr.responseText);\n"
+                +  "        xhr.open('GET','" + URL_XML + "foo.xml" + "', true);\n"
                 +  "        xhr.responseType = 'document';\n"
-                +  "       alert(xhr.responseType);\n"
-
+                +  "        alert(xhr.responseType);\n"
                 +  "        xhr.onreadystatechange = onStateChange;\n"
                 +  "        xhr.send('');\n"
                 +  "      }\n"
-
                 +  "      function onStateChange(e) {\n"
+                        +  "           alert(xhr);\n"
+                        +  "           alert(xhr.readyState);\n"
                 +  "        if (xhr.readyState == 4) {\n"
                 +  "          try {\n"
                 +  "           alert(xhr.response);\n"
@@ -1739,7 +1623,7 @@ public class XMLHttpRequestTest extends LoboUnitTest {
                 +  "        xhr = new XMLHttpRequest();\n"
                 +  "       alert(xhr.responseText);\n"
 
-                +  "        xhr.open('GET', '" + URL_SECOND + "', true);\n"
+                +  "        xhr.open('GET','" + URL_HTML + "foo.html" + "', true);\n"
                 +  "        xhr.responseType = 'document';\n"
                 +  "       alert(xhr.responseType);\n"
 

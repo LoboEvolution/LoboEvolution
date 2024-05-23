@@ -78,9 +78,8 @@ public class DocumentTypeTest extends LoboUnitTest {
                         + "  <head>\n"
                         + "    <script>\n"
                         + "      function test() {\n"
-
                         + "        var request = new XMLHttpRequest();\n"
-                        + "        request.open('GET', 'foo.xml', false);\n"
+                        +  "       request.open('GET', '" + URL_XML + "foo.xml" + "', false);\n"
                         + "        request.send('');\n"
                         + "        var doc = request.responseXML;\n"
                         + "        var t = doc.doctype;\n"

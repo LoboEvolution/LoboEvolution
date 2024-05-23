@@ -126,14 +126,14 @@ public class XMLSerializerTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("<h1 xmlns=\"http://www.w3.org/1999/xhtml\">HtmlUnit</h1><h2 xmlns=\"http://www.w3.org/1999/xhtml\">is great</h2>")
+    @Alerts("<H1 xmlns=\"http://www.w3.org/1999/xhtml\">LoboEvolution</H1><H2 xmlns=\"http://www.w3.org/1999/xhtml\">is great</hH>")
     public void documentFragment() {
         final String html = "<html><head>\n"
                 + "<script>\n"
                 + "function test() {\n"
                 + "  var fragment = document.createDocumentFragment();\n"
                 + "  var heading = document.createElement('h1');\n"
-                + "  heading.textContent = 'HtmlUnit';\n"
+                + "  heading.textContent = 'LoboEvolution';\n"
                 + "  fragment.appendChild(heading);\n"
                 + "  heading = document.createElement('h2');\n"
                 + "  heading.textContent = 'is great';\n"
@@ -146,7 +146,7 @@ public class XMLSerializerTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"<img/>", "<img xmlns=\"http://www.w3.org/1999/xhtml\" />", "<?myTarget myData?>"})
+    @Alerts({"<IMG xmlns=\"http://www.w3.org/1999/xhtml\" />", "<IMG xmlns=\"http://www.w3.org/1999/xhtml\" />", "<?myTarget myData?>"})
     public void xml() {
         final String html = "<html><head>\n"
                + "<script>\n"
@@ -169,7 +169,7 @@ public class XMLSerializerTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("<root><my:parent xmlns:my=\"myUri\"><my:child/><another_child/></my:parent></root>")
+    @Alerts("<ROOT><my:parent xmlns:my=\"myUri\"><my:child/><another_child/></my:parent></root>")
     public void namespace() {
         final String html = "<html><head>\n"
                + "<script>\n"
@@ -194,7 +194,7 @@ public class XMLSerializerTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("<textarea xmlns=\"http://www.w3.org/1999/xhtml\"></textarea>")
+    @Alerts("<TEXTAREA xmlns=\"http://www.w3.org/1999/xhtml\"></textarea>")
     public void mixedCase() {
         final String html = "<html><head>\n"
                + "<script>\n"
@@ -208,14 +208,14 @@ public class XMLSerializerTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"<area xmlns=\"http://www.w3.org/1999/xhtml\" />",
-            "<base xmlns=\"http://www.w3.org/1999/xhtml\" />",
-            "<basefont xmlns=\"http://www.w3.org/1999/xhtml\" />",
-            "<br xmlns=\"http://www.w3.org/1999/xhtml\" />",
-            "<hr xmlns=\"http://www.w3.org/1999/xhtml\" />",
-            "<input xmlns=\"http://www.w3.org/1999/xhtml\" />",
-            "<link xmlns=\"http://www.w3.org/1999/xhtml\" />",
-            "<meta xmlns=\"http://www.w3.org/1999/xhtml\" />"})
+    @Alerts({"<AREA xmlns=\"http://www.w3.org/1999/xhtml\" />",
+            "<BASE xmlns=\"http://www.w3.org/1999/xhtml\" />",
+            "<BASEFONT xmlns=\"http://www.w3.org/1999/xhtml\" />",
+            "<BR xmlns=\"http://www.w3.org/1999/xhtml\" />",
+            "<HR xmlns=\"http://www.w3.org/1999/xhtml\" />",
+            "<INUT xmlns=\"http://www.w3.org/1999/xhtml\" />",
+            "<LINK xmlns=\"http://www.w3.org/1999/xhtml\" />",
+            "<META xmlns=\"http://www.w3.org/1999/xhtml\" />"})
     public void noClosingTag() {
         final String html = "<html><head>\n"
                + "<script>\n"
@@ -243,7 +243,7 @@ public class XMLSerializerTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("<input xmlns=\"http://www.w3.org/1999/xhtml\" />")
+    @Alerts("<INPUT xmlns=\"http://www.w3.org/1999/xhtml\" />")
     public void inputTagWithoutType() {
         final String html = "<html><head>\n"
                + "<script>\n"
@@ -257,11 +257,11 @@ public class XMLSerializerTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"<div xmlns=\"http://www.w3.org/1999/xhtml\"></div>",
-            "<h1 xmlns=\"http://www.w3.org/1999/xhtml\"></h1>",
-            "<p xmlns=\"http://www.w3.org/1999/xhtml\"></p>",
-            "<li xmlns=\"http://www.w3.org/1999/xhtml\"></li>",
-            "<textarea xmlns=\"http://www.w3.org/1999/xhtml\"></textarea>"})
+    @Alerts({"<DIV xmlns=\"http://www.w3.org/1999/xhtml\"></DIV>",
+            "<H1 xmlns=\"http://www.w3.org/1999/xhtml\"></H1>",
+            "<P xmlns=\"http://www.w3.org/1999/xhtml\"></P>",
+            "<LI xmlns=\"http://www.w3.org/1999/xhtml\"></LI>",
+            "<TEXTAREA xmlns=\"http://www.w3.org/1999/xhtml\"></TEXTAREA>"})
     public void otherTags() {
         final String html = "<html><head>\n"
                + "<script>\n"
@@ -283,7 +283,7 @@ public class XMLSerializerTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("<img xmlns=\"http://www.w3.org/1999/xhtml\" href=\"mypage.htm\" />")
+    @Alerts("<IMG xmlns=\"http://www.w3.org/1999/xhtml\" href=\"mypage.htm\" />")
     public void noClosingTagWithAttribute() {
         final String html = "<html><head>\n"
                + "<script>\n"
@@ -381,7 +381,7 @@ public class XMLSerializerTest extends LoboUnitTest {
                 + "      var xml = new XMLSerializer().serializeToString(resultDocument);\n"
                 + "      ta.value = xml;\n"
                 + "      alert(ta.value);\n"
-                + "    } catch(e) { ta.value = 'exception'; }\n"
+                + "    } catch(e) { alert(e) }\n"
                 + "  }\n"
                 + "</script></head>\n"
                 + "<body onload='test()'>\n"

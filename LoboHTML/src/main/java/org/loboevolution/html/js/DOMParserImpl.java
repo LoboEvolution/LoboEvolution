@@ -49,8 +49,8 @@ public class DOMParserImpl extends AbstractScriptableDelegate implements DOMPars
 	/** {@inheritDoc} */
 	@Override
 	public Document parseFromString(final String html, final String type) {
-		final Element element = document.createElement("DIV");
-		element.setInnerHTML(html);
+		String xml = html.replace("<", "><").replace(">>", ">");
+		xml = xml.substring(1);
 		if (!"text/html".equals(type) &&
 				!"text/xml".equals(type) &&
 				!"application/xml".equals(type) &&
@@ -59,7 +59,7 @@ public class DOMParserImpl extends AbstractScriptableDelegate implements DOMPars
 			throw Context.reportRuntimeError("Invalid 'type' parameter: " + type);
 		}
 		final XMLDocument document = new XMLDocument();
-		document.loadXML(element.getInnerHTML());
+		document.loadXML(xml + ">");
 		return document;
 	}
 

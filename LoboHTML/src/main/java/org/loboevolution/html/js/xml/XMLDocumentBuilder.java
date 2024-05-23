@@ -49,13 +49,13 @@ public class XMLDocumentBuilder {
 
         try {
             parserFactory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
-            parserFactory.setFeature("http://xml.org/sax/features/namespace-prefixes", true);
-            parserFactory.setFeature("http://xml.org/sax/features/xmlns-uris", true);
+            parserFactory.setFeature("http://xml.org/sax/features/namespace-prefixes", false);
+            parserFactory.setFeature("http://xml.org/sax/features/xmlns-uris", false);
             parserFactory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", false);
             parserFactory.setFeature("http://xml.org/sax/features/external-general-entities", false);
             parserFactory.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
             parserFactory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
-            parserFactory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
+            parserFactory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, false);
             parserFactory.setXIncludeAware(false);
             parserFactory.setNamespaceAware(true);
         } catch (final SAXNotRecognizedException | SAXNotSupportedException | ParserConfigurationException e) {

@@ -969,7 +969,7 @@ public class DOMElementTest extends LoboUnitTest {
         assertTrue(cloneId.isId());
         elm = (Element) body.cloneNode(true);
         assertTrue(body.isEqualNode(elm));
-        assertEquals("div", elm.getChildNodes().item(0).getNodeName());
+        assertEquals("DIV", elm.getChildNodes().item(0).getNodeName());
         assertEquals("foo", elm.getChildNodes().item(0).getChildNodes().item(0).getNodeValue());
     }
 
@@ -1061,9 +1061,9 @@ public class DOMElementTest extends LoboUnitTest {
     public void testGetTagName() {
         document = sampleHtmlFile();
         Element elm = document.createElement("p");
-        assertEquals("p", elm.getTagName());
+        assertEquals("P", elm.getTagName());
         elm = document.createElementNS("http://www.example.com/examplens", "e:p");
-        assertEquals("p", elm.getLocalName());
-        assertEquals("e:p", elm.getTagName());
+        assertEquals("P", elm.getLocalName());
+        assertEquals("E:P", elm.getTagName());
     }
 }

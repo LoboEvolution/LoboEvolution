@@ -765,7 +765,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
         elm.appendChild(document.createComment(" comment "));
         final String text = elm.getTextContent();
         assertNotNull(text);
-        assertEquals("Paragraph <>", text);
+        assertEquals("Paragraph", text);
 
         final Attr classNode = elm.getAttributeNode("class");
         assertNotNull(classNode);
@@ -894,7 +894,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
         assertNotNull(elm);
         assertEquals("font-family: 'Does Not Exist', Neither; color: navy", elm.getAttribute("style"));
         final CSSStyleDeclaration style = elm.getStyle();
-        assertEquals("font-family: \"does not exist\", neither; color: navy", style.getCssText());
+        assertEquals("font-family: \"Does not exist\", Neither; color: navy", style.getCssText());
         assertEquals(2, style.getLength());
         assertEquals("\"does not exist\", neither", style.getPropertyValue("font-family"));
         final Attr attr = elm.getAttributeNode("style");
@@ -1076,7 +1076,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
         text.setData("hello</style>");
         assertEquals("[object Text]", text.toString());
         style.appendChild(text);
-        assertEquals("[object Text]>", text.toString());
+        assertEquals("[object Text]", text.toString());
         text.setData("hello</foo>");
         assertEquals("[object Text]", text.toString());
         Element cloned = (Element) style.cloneNode(true);

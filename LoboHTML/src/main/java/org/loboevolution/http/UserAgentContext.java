@@ -57,15 +57,6 @@ public class UserAgentContext {
 		settings = !test ? config.getGeneralInfo() : new GeneralInfo();
 		if (settings == null) settings = new GeneralInfo();
 	}
-
-	/**
-	 * <p>createHttpRequest.</p>
-	 *
-	 * @return a {@link org.loboevolution.http.HttpRequest} object.
-	 */
-	public HttpRequest createHttpRequest() {
-		return new HttpRequest(Proxy.NO_PROXY);
-	}
 	
 	/**
 	 * <p>isScriptingEnabled.</p>

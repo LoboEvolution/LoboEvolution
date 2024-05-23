@@ -1239,4 +1239,10 @@ public class XMLDocument implements Document {
 	public void setXml(final boolean xml) {
 		doc.setXml(xml);
 	}
+
+	/** {@inheritDoc} */
+	@Override
+	public String toString() {
+		return "[object XMLDocument]";
+	}
 }

@@ -70,7 +70,7 @@ public class HcnodeappendchildgetnodenameTest extends LoboUnitTest {
         newChild = doc.createElement("br");
         appendNode = employeeNode.appendChild(newChild);
         childName = appendNode.getNodeName();
-        assertEquals("br", childName, "HcnodeappendchildgetnodenameAssert1");
+        assertEquals("BR", childName, "HcnodeappendchildgetnodenameAssert1");
     }
 }
 

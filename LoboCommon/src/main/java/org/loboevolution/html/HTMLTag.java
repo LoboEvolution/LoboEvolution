@@ -39,6 +39,7 @@ import java.util.Map;
 public enum HTMLTag {
 
     A("A"),
+    AUDIO("AUDIO"),
     ADDRESS("ADDRESS"),
     ANCHOR("ANCHOR"),
     ANIMATE("ANIMATE"),

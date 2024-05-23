@@ -36,6 +36,7 @@ import java.util.LinkedList;
  *
  */
 public class EventDispatch {
+
 	private Collection<GenericEventListener> listeners;
 
 	/**

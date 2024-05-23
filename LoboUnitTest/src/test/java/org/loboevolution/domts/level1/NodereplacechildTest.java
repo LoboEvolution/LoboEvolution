@@ -73,7 +73,7 @@ public class NodereplacechildTest extends LoboUnitTest {
         replacedNode = employeeNode.replaceChild(newChild, oldChild);
         child = childList.item(0);
         childName = child.getNodeName();
-        assertEquals("newChild", childName, "NodereplacechildAssert1");
+        assertEquals("NEWCHILD", childName, "NodereplacechildAssert1");
     }
 
 }

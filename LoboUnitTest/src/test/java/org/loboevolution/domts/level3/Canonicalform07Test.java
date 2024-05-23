@@ -79,7 +79,7 @@ public class Canonicalform07Test extends LoboUnitTest {
             child = child.getNextSibling();
             assertNotNull(child, "Canonicalform07Assert4");
             childName = child.getNodeName();
-            assertEquals("p", childName, "Canonicalform07Assert5");
+            assertEquals("P", childName, "Canonicalform07Assert5");
         }
     }
 }

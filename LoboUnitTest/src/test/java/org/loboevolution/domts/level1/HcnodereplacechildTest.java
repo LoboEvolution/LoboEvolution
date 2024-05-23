@@ -74,7 +74,7 @@ public class HcnodereplacechildTest extends LoboUnitTest {
         replacedNode = employeeNode.replaceChild(newChild, oldChild);
         child = childList.item(0);
         childName = child.getNodeName();
-        assertEquals("br", childName, "HcnodereplacechildAssert1");
+        assertEquals("BR", childName, "HcnodereplacechildAssert1");
     }
 }
 

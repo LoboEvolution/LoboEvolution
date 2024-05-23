@@ -28,11 +28,15 @@ package org.loboevolution.html.js.xml;
 
 import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.Nodes;
+import org.loboevolution.html.HTMLTag;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.node.*;
 import org.loboevolution.js.xml.XMLSerializer;
 import org.loboevolution.js.AbstractScriptableDelegate;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
@@ -41,6 +45,24 @@ import java.util.concurrent.atomic.AtomicBoolean;
 @Slf4j
 public class XMLSerializerImpl extends AbstractScriptableDelegate implements XMLSerializer {
 
+    private static final Set<HTMLTag> NON_EMPTY = new HashSet<>(Arrays.asList(
+            HTMLTag.HTML, HTMLTag.A, HTMLTag.AUDIO, HTMLTag.BLOCKQUOTE,
+            HTMLTag.BODY, HTMLTag.B, HTMLTag.BUTTON, HTMLTag.CANVAS,
+            HTMLTag.CAPTION, HTMLTag.CENTER, HTMLTag.CODE, HTMLTag.DEFS,
+            HTMLTag.DIR, HTMLTag.DIV, HTMLTag.EMBED, HTMLTag.FIELDSET,
+            HTMLTag.FORM,HTMLTag.H1,HTMLTag.H2, HTMLTag.H3,
+            HTMLTag.H4, HTMLTag.H5,HTMLTag.H6, HTMLTag.HEAD,
+            HTMLTag.IFRAME,HTMLTag.I,HTMLTag.LI, HTMLTag.LEGEND, HTMLTag.MARQUEE,
+            HTMLTag.MENU,HTMLTag.NOSCRIPT, HTMLTag.OBJECT, HTMLTag.OPTGROUP,
+            HTMLTag.OPTION, HTMLTag.P, HTMLTag.SCRIPT, HTMLTag.SELECT,
+            HTMLTag.SMALL, HTMLTag.SPAN, HTMLTag.STRIKE, HTMLTag.STRONG,
+            HTMLTag.STYLE, HTMLTag.SUB, HTMLTag.SUP, HTMLTag.TITLE,
+            HTMLTag.TABLE, HTMLTag.COL, HTMLTag.COLGROUP, HTMLTag.TBODY,
+            HTMLTag.TR, HTMLTag.TEXTAREA, HTMLTag.TFOOT, HTMLTag.TH,
+            HTMLTag.VAR, HTMLTag.VIDEO
+    ));
+
+
     /**
      * {@inheritDoc}
      */
@@ -48,12 +70,31 @@ public class XMLSerializerImpl extends AbstractScriptableDelegate implements XML
     public String serializeToString(final Node node) {
         try {
             final StringBuilder buff = new StringBuilder();
-			if (node instanceof Document) {
-				final NodeListImpl children = (NodeListImpl)node.getChildNodes();
-				children.forEach(elem -> getXString((Element) elem, true, buff, true));
-			} else{
-				getXString((Element) node, true, buff, true);
-			}
+            if (node instanceof Document || node instanceof DocumentFragment) {
+                final NodeListImpl children = (NodeListImpl) node.getChildNodes();
+                children.forEach(elem -> getXString(elem, true, buff, true));
+            }
+
+            if (node instanceof CDATASection) {
+                CDATASection cdataSection = (CDATASection) node;
+                buff.append("<![CDATA[");
+                if (cdataSection.getData() != null) {
+                    buff.append(cdataSection.getData());
+                    buff.append("]]>");
+                } else {
+                    buff.append("<>&?]]>");
+                }
+            }
+            if (node instanceof ProcessingInstruction) {
+                ProcessingInstruction processingInstruction = (ProcessingInstruction) node;
+                buff.append("<?");
+                buff.append(processingInstruction.getTarget());
+                buff.append(" ");
+                buff.append(processingInstruction.getData());
+                buff.append("?>");
+            } else if (node instanceof Element) {
+                getXString(node, true, buff, true);
+            }
             return buff.toString();
         } catch (final Exception e) {
             log.error(e.getMessage(), e);
@@ -61,11 +102,13 @@ public class XMLSerializerImpl extends AbstractScriptableDelegate implements XML
         return "";
     }
 
-    public static void getXString(final Element node, final boolean withoutNamespaces, final StringBuilder buff, boolean endTag) {
+    public static void getXString(final Node node, final boolean withoutNamespaces, final StringBuilder buff, boolean endTag) {
         try {
 
             buff.append("<")
-                    .append(namespace(node.getNodeName(), withoutNamespaces));
+                    .append(namespace(node.getNodeName(), withoutNamespaces))
+                    .append(" ")
+                    .append("xmlns=\"http://www.w3.org/1999/xhtml\"");
 
             if (node.hasAttributes()) {
                 buff.append(" ");
@@ -113,13 +156,19 @@ public class XMLSerializerImpl extends AbstractScriptableDelegate implements XML
 				child.forEach(item -> {
 					final int itemType = item.getNodeType();
 					if (itemType == Node.DOCUMENT_NODE || itemType == Node.ELEMENT_NODE) {
-						getXString((Element) item, withoutNamespaces, buff, tag.get());
+						getXString(item, withoutNamespaces, buff, tag.get());
 					}
 				});
 
             } else {
                 if (node.getNodeValue() == null) {
-                    buff.append("/>");
+
+                    if(NON_EMPTY.contains(HTMLTag.get(node.getNodeName().toUpperCase()))){
+                        buff.append(">").append("</").append(node.getNodeName()).append(">");
+                    } else{
+                        buff.append(" />");
+                    }
+
                 } else {
                     buff.append(node.getNodeValue());
                     buff.append("</")
@@ -130,7 +179,7 @@ public class XMLSerializerImpl extends AbstractScriptableDelegate implements XML
                 endTag = false;
             }
 
-            if (endTag) {
+           if (endTag) {
                 buff.append("</")
                         .append(namespace(node.getNodeName(), withoutNamespaces))
                         .append(">");
@@ -141,12 +190,12 @@ public class XMLSerializerImpl extends AbstractScriptableDelegate implements XML
         }
     }
 
-    private static String namespace(final String str, final boolean withoutNamespace) {
-        if (withoutNamespace && str.contains(":")) {
-            return str.substring(str.indexOf(":") + 1);
+    private static String namespace(final String nodeName, final boolean withoutNamespace) {
+        if (withoutNamespace && nodeName.contains(":")) {
+            return nodeName.substring(nodeName.indexOf(":") + 1);
         }
 
-        return str;
+        return nodeName;
     }
 
 }

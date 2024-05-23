@@ -786,7 +786,7 @@ public class HTMLElementTest extends LoboUnitTest {
         assertFalse(body.isEqualNode(elm));
         elm = (Element) body.cloneNode(true);
         assertTrue(body.isEqualNode(elm));
-        assertEquals("div", elm.getChildNodes().item(0).getNodeName());
+        assertEquals("DIV", elm.getChildNodes().item(0).getNodeName());
         assertEquals("foo", elm.getChildNodes().item(0).getChildNodes().item(0).getNodeValue());
     }
 
@@ -803,7 +803,7 @@ public class HTMLElementTest extends LoboUnitTest {
     public void testGetTagName() {
         document = sampleHtmlFile();
         Element elm = document.createElement("p");
-        assertEquals("p", elm.getTagName());
+        assertEquals("P", elm.getTagName());
         elm = document.createElementNS("http://www.example.com/examplens", "e:p");
         assertEquals("e:p", elm.getTagName());
     }

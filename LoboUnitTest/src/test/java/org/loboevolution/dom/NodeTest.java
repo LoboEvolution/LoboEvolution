@@ -32,8 +32,7 @@ import org.loboevolution.annotation.AlertsExtension;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Node;
 
-import static org.loboevolution.xml.XMLDocumentTest.callLoadXMLDocumentFromString;
-import static org.loboevolution.xml.XMLDocumentTest.callSerializeXMLDocumentToString;
+import static org.loboevolution.xml.XMLDocumentTest.*;
 
 /**
  * Tests for {@link Node}.
@@ -423,7 +422,7 @@ public class NodeTest extends LoboUnitTest {
 
     @Test
     @Alerts("2")
-    public void appendChildOf_DocumentFragment() {
+    public void appendChildOfDocumentFragment() {
         final String html = "<html><head>"
                 + "<script>\n"
                 + "  function test() {\n"
@@ -767,7 +766,7 @@ public class NodeTest extends LoboUnitTest {
 
     @Test
     @Alerts("exception")
-    public void insertBeforeFragment_sibling() {
+    public void insertBeforeFragmentSibling() {
         insertBeforeFragment("aNode.insertBefore(fragment, siblingNode);");
     }
 
@@ -927,6 +926,7 @@ public class NodeTest extends LoboUnitTest {
                 + " alert(node.nodeValue);\n"
                 + " alert(node.attributes);\n"
                 + "}\n"
+                + LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION
                 + "</script></head><body onload='test()'>\n"
                 + "  <div id='myId'>abcd</div>\n"
                 + "</body></html>";

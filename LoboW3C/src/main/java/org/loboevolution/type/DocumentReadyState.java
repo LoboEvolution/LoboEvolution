@@ -32,9 +32,6 @@ import java.util.Map;
 
 /**
  * <p>DocumentReadyState class.</p>
- *
- *
- *
  */
 public enum DocumentReadyState {
 

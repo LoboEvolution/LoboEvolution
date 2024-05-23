@@ -73,7 +73,7 @@ public class HcnodeinsertbeforenodenameTest extends LoboUnitTest {
         newChild = doc.createElement("br");
         insertedNode = employeeNode.insertBefore(newChild, refChild);
         childName = insertedNode.getNodeName();
-        assertEquals("br", childName, "HcnodeinsertbeforenodenameAssert1");
+        assertEquals("BR", childName, "HcnodeinsertbeforenodenameAssert1");
     }
 }
 

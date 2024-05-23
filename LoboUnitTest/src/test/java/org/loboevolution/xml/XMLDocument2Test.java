@@ -87,7 +87,7 @@ public class XMLDocument2Test extends LoboUnitTest {
 
     @Test
     @Alerts({"#cdata-section,<>&?,4", "<>&?", "<![CDATA[<>&?]]>"})
-    public void createCDATASection_specialChars() {
+    public void createCDATASectionSpecialChars() {
         final String html = "<html><head>\n"
                 + "<script>\n"
                 + "  function test() {\n"
@@ -152,7 +152,7 @@ public class XMLDocument2Test extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"a", "null", "b"})
+    @Alerts({"A", "null", "B"})
     public void documentElementCaching() {
         final String html = "<html><head>\n"
                 + "<script>\n"
@@ -192,65 +192,16 @@ public class XMLDocument2Test extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("exception")
-    public void text() {
-        final String html = "<html><head>\n"
-               + "<script>\n"
-                + "  function test() {\n"
-                + "    try {\n"
-                + "      new ActiveXObject('Microsoft.XMLDOM');\n"
-                + "    } catch (e) {\n"
-                + "     alert('exception');\n"
-                + "      return;\n"
-                + "    }\n"
-                + "    var xmldoc = new ActiveXObject('Microsoft.XMLDOM');\n"
-                + "    var xml = '<Envelope><Body>content</Body></Envelope>';\n"
-                + "    xmldoc.loadXML(xml);\n"
-                + "    var expression = '/Envelope/Body';\n"
-                + "    var body = xmldoc.documentElement.selectSingleNode(expression);\n"
-                + "   alert(body.text);\n"
-                + "   alert(body.firstChild.text);\n"
-                + "  }\n"
-                + "</script></head>\n"
-                + "<body onload='test()'>\n"
-                + "</body></html>";
-        checkHtmlAlert(html);
-    }
-
-    @Test
     @Alerts({"foo", "foo"})
     public void firstChildElement() {
         final String html = "<html><head>\n"
                 + "<script>\n"
                 + "  function test() {\n"
-                + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
+                + "   var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_XML + "foo.xml" + "'") + ";\n"
                 + "   alert(doc.firstChild.nodeName);\n"
                 + "   alert(doc.documentElement.nodeName);\n"
                 + "  }\n"
                 + XMLDocumentTest.LOAD_NATIVE_XML_DOCUMENT_FROM_FILE_FUNCTION
-                + "</script></head>\n"
-                + "<body onload='test()'>\n"
-                + "</body></html>";
-        checkHtmlAlert(html);
-    }
-
-    @Test
-    @Alerts("exception")
-    public void firstChildElementActiveX() {
-        final String html = "<html><head>\n"
-                + "<script>\n"
-                + "  function test() {\n"
-                + "    try {\n"
-                + "      new ActiveXObject('Microsoft.XMLDOM');\n"
-                + "    } catch (e) {\n"
-                + "     alert('exception');\n"
-                + "      return;\n"
-                + "    }\n"
-                + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
-                + "   alert(doc.firstChild.nodeName);\n"
-                + "   alert(doc.documentElement.nodeName);\n"
-                + "  }\n"
-                + XMLDocumentTest.LOAD_ACTIVEX_XML_DOCUMENT_FROM_FILE_FUNCTION
                 + "</script></head>\n"
                 + "<body onload='test()'>\n"
                 + "</body></html>";
@@ -263,7 +214,7 @@ public class XMLDocument2Test extends LoboUnitTest {
         final String html = "<html><head>\n"
                 + "<script>\n"
                 + "  function test() {\n"
-                + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
+                + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_XML + "foo.xml" + "'") + ";\n"
                 + "   alert(doc.firstChild.nodeName);\n"
                 + "   alert(doc.documentElement.nodeName);\n"
                 + "  }\n"
@@ -274,63 +225,16 @@ public class XMLDocument2Test extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("exception")
-    // Xerces does not offer any way to access the XML declaration
-    public void firstChildXmlDeclarationActiveX() {
-        final String html = "<html><head>\n"
-                + "<script>\n"
-                + "  function test() {\n"
-                + "    try {\n"
-                + "      new ActiveXObject('Microsoft.XMLDOM');\n"
-                + "    } catch (e) {\n"
-                + "     alert('exception');\n"
-                + "      return;\n"
-                + "    }\n"
-                + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
-                + "   alert(doc.firstChild.nodeName);\n"
-                + "   alert(doc.documentElement.nodeName);\n"
-                + "  }\n"
-                + XMLDocumentTest.LOAD_ACTIVEX_XML_DOCUMENT_FROM_FILE_FUNCTION
-                + "</script></head>\n"
-                + "<body onload='test()'>\n"
-                + "</body></html>";
-        checkHtmlAlert(html);
-    }
-
-    @Test
     @Alerts({"apache", "foo"})
     public void firstChildProcessingInstruction() {
         final String html = "<html><head>\n"
                 + "<script>\n"
                 + "  function test() {\n"
-                + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
+                + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_XML + "foo.xml" + "'") + ";\n"
                 + "   alert(doc.firstChild.nodeName);\n"
                 + "   alert(doc.documentElement.nodeName);\n"
                 + "  }\n"
                 + XMLDocumentTest.LOAD_NATIVE_XML_DOCUMENT_FROM_FILE_FUNCTION
-                + "</script></head>\n"
-                + "<body onload='test()'>\n"
-                + "</body></html>";
-        checkHtmlAlert(html);
-    }
-
-    @Test
-    @Alerts("exception")
-    public void firstChildProcessingInstructionActiveX() {
-        final String html = "<html><head>\n"
-                + "<script>\n"
-                + "  function test() {\n"
-                + "    try {\n"
-                + "      new ActiveXObject('Microsoft.XMLDOM');\n"
-                + "    } catch (e) {\n"
-                + "     alert('exception');\n"
-                + "      return;\n"
-                + "    }\n"
-                + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
-                + "   alert(doc.firstChild.nodeName);\n"
-                + "   alert(doc.documentElement.nodeName);\n"
-                + "  }\n"
-                + XMLDocumentTest.LOAD_ACTIVEX_XML_DOCUMENT_FROM_FILE_FUNCTION
                 + "</script></head>\n"
                 + "<body onload='test()'>\n"
                 + "</body></html>";
@@ -343,7 +247,7 @@ public class XMLDocument2Test extends LoboUnitTest {
         final String html = "<html><head>\n"
                 + "<script>\n"
                 + "  function test() {\n"
-                + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
+                + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_HTML + "htmlsample.html" + "'") + ";\n"
                 + "   alert(doc.firstChild.nodeName);\n"
                 + "   alert(doc.documentElement.nodeName);\n"
                 + "  }\n"
@@ -355,61 +259,16 @@ public class XMLDocument2Test extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("exception")
-    public void firstChildDocumentTypeActiveX() {
+    @Alerts({"foo", "foo"})
+    public void firstChild() {
         final String html = "<html><head>\n"
                 + "<script>\n"
                 + "  function test() {\n"
-                + "    try {\n"
-                + "      new ActiveXObject('Microsoft.XMLDOM');\n"
-                + "    } catch (e) {\n"
-                + "     alert('exception');\n"
-                + "      return;\n"
-                + "    }\n"
-                + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
-                + "   alert(doc.firstChild.nodeName);\n"
-                + "   alert(doc.documentElement.nodeName);\n"
-                + "  }\n"
-                + XMLDocumentTest.LOAD_ACTIVEX_XML_DOCUMENT_FROM_FILE_FUNCTION
-                + "</script></head><body onload='test()'>\n"
-                + "</body></html>";
-        checkHtmlAlert(html);
-    }
-
-    @Test
-    @Alerts({"#comment", "foo"})
-    public void firstChildComment() {
-        final String html = "<html><head>\n"
-                + "<script>\n"
-                + "  function test() {\n"
-                + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
+                + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_XML + "foo.xml" + "'") + ";\n"
                 + "   alert(doc.firstChild.nodeName);\n"
                 + "   alert(doc.documentElement.nodeName);\n"
                 + "  }\n"
                 + XMLDocumentTest.LOAD_NATIVE_XML_DOCUMENT_FROM_FILE_FUNCTION
-                + "</script></head>\n"
-                + "<body onload='test()'>\n"
-                + "</body></html>";
-        checkHtmlAlert(html);
-    }
-
-    @Test
-    @Alerts("exception")
-    public void firstChildCommentActiveX() {
-        final String html = "<html><head>\n"
-                + "<script>\n"
-                + "  function test() {\n"
-                + "    try {\n"
-                + "      new ActiveXObject('Microsoft.XMLDOM');\n"
-                + "    } catch (e) {\n"
-                + "     alert('exception');\n"
-                + "      return;\n"
-                + "    }\n"
-                + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
-                + "   alert(doc.firstChild.nodeName);\n"
-                + "   alert(doc.documentElement.nodeName);\n"
-                + "  }\n"
-                + XMLDocumentTest.LOAD_ACTIVEX_XML_DOCUMENT_FROM_FILE_FUNCTION
                 + "</script></head>\n"
                 + "<body onload='test()'>\n"
                 + "</body></html>";
@@ -422,7 +281,7 @@ public class XMLDocument2Test extends LoboUnitTest {
         final String html = "<html><head>"
                 + "<script>\n"
                 + "  function test() {\n"
-                + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
+                + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_XML + "foo.xml" + "'") + ";\n"
                 + "    if (doc.firstElementChild == null) {alert('not available'); return };\n"
                 + "   alert(doc.firstElementChild.nodeName);\n"
                 + "   alert(doc.firstElementChild.firstElementChild.nodeName);\n"
@@ -441,7 +300,7 @@ public class XMLDocument2Test extends LoboUnitTest {
         final String html = "<html><head>\n"
                 + "<script>\n"
                 + "  function test() {\n"
-                + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
+                + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_XML + "foo.xml" + "'") + ";\n"
                 + "    if (doc.firstElementChild == null) {alert('not available'); return };\n"
                 + "   alert(doc.lastElementChild.nodeName);\n"
                 + "   alert(doc.firstElementChild.lastElementChild.nodeName);\n"
@@ -462,10 +321,10 @@ public class XMLDocument2Test extends LoboUnitTest {
                 + "  function test() {\n"
                 + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromString(
                 "'<items>"
-                        + "<item name=\"item1\" id=\"1\">value1</item>"
-                        + "<item id=\"2\" name=\"item2\">value2</item>"
-                        + "<item name=\"item3\" id=\"3\">value3</item>"
-                        + "</items>'") + ";\n"
+                + "<item name=\"item1\" id=\"1\">value1</item>"
+                + "<item id=\"2\" name=\"item2\">value2</item>"
+                + "<item name=\"item3\" id=\"3\">value3</item>"
+                + "</items>'") + ";\n"
                 + "    var items = doc.getElementsByTagName('item');\n"
                 + "    for(var i = 0; i < items.length; i++) {\n"
                 + "      var attribs = items[i].attributes;\n"

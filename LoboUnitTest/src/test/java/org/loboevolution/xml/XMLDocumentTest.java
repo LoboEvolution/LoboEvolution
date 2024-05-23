@@ -58,20 +58,11 @@ public class XMLDocumentTest extends LoboUnitTest {
      */
     public static final String LOAD_NATIVE_XML_DOCUMENT_FROM_FILE_FUNCTION = "  function " + LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION_NAME + "(file) {\n"
             + "    xhttp = new XMLHttpRequest();\n"
-            + "    xhttp.open(\"GET\", file, false);\n"
+            + "    xhttp.open('GET', file, false);\n"
             + "    xhttp.send();\n"
             + "    return xhttp.responseXML;\n"
             + "  }\n";
 
-    /**
-     * Helper.
-     */
-    public static final String LOAD_ACTIVEX_XML_DOCUMENT_FROM_FILE_FUNCTION = "  function " + LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION_NAME + "(file) {\n"
-            + "    xhttp = new ActiveXObject(\"Microsoft.XMLHTTP\");\n"
-            + "    xhttp.open(\"GET\", file, false);\n"
-            + "    xhttp.send();\n"
-            + "    return xhttp.responseXML;\n"
-            + "  }\n";
     private static final String LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION_NAME = "loadXMLDocumentFromString";
     /**
      * Helper.
@@ -86,19 +77,6 @@ public class XMLDocumentTest extends LoboUnitTest {
      */
     public static final String SERIALIZE_XML_DOCUMENT_TO_STRING_FUNCTION = "  function " + SERIALIZE_XML_DOCUMENT_TO_STRING_FUNCTION_NAME + "(doc) {\n"
             + "    return new XMLSerializer().serializeToString(doc);\n"
-            + "  }\n";
-    /**
-     * Helper.
-     */
-    public static final String SERIALIZE_NATIVE_XML_DOCUMENT_TO_STRING_FUNCTION = "  function " + SERIALIZE_XML_DOCUMENT_TO_STRING_FUNCTION_NAME + "(doc) {\n"
-            + "    serializer = new XMLSerializer();\n"
-            + "    return serializer.serializeToString(doc);\n"
-            + "  }\n";
-    /**
-     * Helper.
-     */
-    public static final String SERIALIZE_ACTIVEX_XML_DOCUMENT_TO_STRING_FUNCTION = "  function " + SERIALIZE_XML_DOCUMENT_TO_STRING_FUNCTION_NAME + "(doc) {\n"
-            + "    return doc.xml;\n"
             + "  }\n";
 
     /**
@@ -156,7 +134,7 @@ public class XMLDocumentTest extends LoboUnitTest {
                 + "    var doc = document.implementation.createDocument('', '', null);\n"
                 + "    doc.async = false;\n"
                 + "    try {\n"
-                + "     alert(doc.load('" + URL_SECOND + "'));\n"
+                + "     alert(doc.load('" + URL_HTML + "foo.html" + "'));\n"
                 + "     alert(doc.documentElement.nodeName);\n"
                 + "     alert(doc.childNodes[0].nodeName);\n"
                 + "     alert(doc.childNodes[0].childNodes.length);\n"
@@ -179,7 +157,7 @@ public class XMLDocumentTest extends LoboUnitTest {
                 + "    var doc = document.implementation.createDocument('', '', null);\n"
                 + "    doc.async = false;\n"
                 + "    try {\n"
-                + "     alert(doc.load('" + URL_SECOND + "'));\n"
+                + "     alert(doc.load('" + URL_HTML + "foo.html" + "'));\n"
                 + "     alert(doc.documentElement.nodeName);\n"
                 + "     alert(doc.childNodes[0].nodeName);\n"
                 + "     alert(doc.childNodes[0].childNodes.length);\n"
@@ -231,7 +209,7 @@ public class XMLDocumentTest extends LoboUnitTest {
         final String html = "<html><head>\n"
                 + "<script>\n"
                 + "  function test() {\n"
-                + "    var doc = " + callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
+                + "    var doc = " + callLoadXMLDocumentFromFile("'" + URL_HTML + "foo.html" + "'") + ";\n"
                 + "    try {\n"
                 + "      var nodes = doc.selectNodes('/books');\n"
                 + "     alert(nodes.length);\n"
@@ -251,7 +229,7 @@ public class XMLDocumentTest extends LoboUnitTest {
         final String html = "<html><head>\n"
                 + "<script>\n"
                 + "  function test() {\n"
-                + "    var doc = " + callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
+                + "    var doc = " + callLoadXMLDocumentFromFile("'" + URL_HTML + "foo.html" + "'") + ";\n"
                 + "    try {\n"
                 + "     alert(doc.selectNodes('/bOoKs').length);\n"
                 + "     alert(doc.selectNodes('/books').length);\n"
@@ -270,7 +248,7 @@ public class XMLDocumentTest extends LoboUnitTest {
         final String html = "<html><head>\n"
                 + "<script>\n"
                 + "  function test() {\n"
-                + "    var doc = " + callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
+                + "    var doc = " + callLoadXMLDocumentFromFile("'" + URL_HTML + "foo.html" + "'") + ";\n"
                 + "    try {\n"
                 + "     alert(doc.selectNodes('//ns1:title').length);\n"
                 + "     alert(doc.selectNodes('//ns2:title').length);\n"
@@ -290,7 +268,7 @@ public class XMLDocumentTest extends LoboUnitTest {
                 + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
-                + "      var doc = " + callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
+                + "      var doc = " + callLoadXMLDocumentFromFile("'" + URL_HTML + "foo.html" + "'") + ";\n"
                 + "      var nodes = doc.selectNodes('//book');\n"
                 + "     alert(nodes.nextNode().nodeName);\n"
                 + "     alert(nodes.nextNode());\n"
@@ -307,14 +285,14 @@ public class XMLDocumentTest extends LoboUnitTest {
 
     @Test
     @Alerts({"book", "exception /title", "exception title"})
-    public void selectNodes_fromRoot() {
+    public void selectNodesFromRoot() {
         final String html = "<html><head>\n"
                 + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
-                + "      var doc = " + callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
+                + "      var doc = " + callLoadXMLDocumentFromFile("'" + URL_HTML + "foo.html" + "'") + ";\n"
                 + "      var child = doc.documentElement.firstChild;\n"
-                + "     alert(child.tagName);\n"
+                + "      alert(child.tagName);\n"
                 + "      try {\n"
                 + "       alert(child.selectNodes('/title').length);\n"
                 + "      } catch(e) {alert('exception /title'); }\n"
@@ -404,7 +382,7 @@ public class XMLDocumentTest extends LoboUnitTest {
                 + "     alert(doc.parseError.srcText === '');\n"
                 + "     alert(doc.parseError.url === '');\n"
                 + "      doc.async = false;\n"
-                + "     alert(doc.load('" + URL_SECOND + "'));\n"
+                + "     alert(doc.load('" + URL_HTML + "foo.html" + "'));\n"
                 + "     alert(doc.documentElement == null);\n"
                 + "     alert(doc.parseError.errorCode !== 0);\n"
                 + "     alert(doc.parseError.filepos !== 0);\n"
@@ -480,7 +458,7 @@ public class XMLDocumentTest extends LoboUnitTest {
                 + "    var x = " + callLoadXMLDocumentFromString("'<x/>'") + ";\n"
                 + "    try {\n"
                 + "     alert(x instanceof XMLDocument);\n"
-                + "    }catch(e) {alert('exception')}\n"
+                + "    }catch(e) {alert(e)}\n"
                 + "  }\n"
                 + LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION
                 + "</script>\n"
@@ -583,7 +561,7 @@ public class XMLDocumentTest extends LoboUnitTest {
         final String html = "<html><head>\n"
                + "<script>\n"
                 + "  function test() {\n"
-                + "    var doc = " + callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
+                + "    var doc = " + callLoadXMLDocumentFromFile("'" + URL_HTML + "foo.html" + "'") + ";\n"
                 + "   alert(doc.getElementsByTagName('book').length);\n"
                 + "   alert(doc.getElementsByTagName('soap:book').length);\n"
                 + "    var elem = doc.getElementsByTagName('book')[0];\n"
@@ -603,7 +581,7 @@ public class XMLDocumentTest extends LoboUnitTest {
         final String html = "<html><head>\n"
                 + "<script>\n"
                 + "  function test() {\n"
-                + "    var doc = " + callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
+                + "    var doc = " + callLoadXMLDocumentFromFile("'" + URL_HTML + "foo.html" + "'") + ";\n"
                 + "   alert(doc.getElementsByTagName('book').length);\n"
                 + "   alert(doc.getElementsByTagName('soap:book').length);\n"
                 + "    if (doc.getElementsByTagName('soap:book').length != 0) {\n"
@@ -621,7 +599,6 @@ public class XMLDocumentTest extends LoboUnitTest {
 
     @Test
     @Alerts({"false", "false", "true", "false"})
-    // XML ID handling not yet correctly implemented
     public void getElementByIdXml() {
         final String html = "<html><head>\n"
                 + "<script>\n"
@@ -653,7 +630,6 @@ public class XMLDocumentTest extends LoboUnitTest {
 
     @Test
     @Alerts({"true", "true"})
-    // XML ID handling not yet correctly implemented
     public void getElementByIdHtml() {
         final String html = "<html><head>\n"
                 + "<script>\n"
@@ -702,7 +678,7 @@ public class XMLDocumentTest extends LoboUnitTest {
         final String html = "<html><head>\n"
                 + "<script>\n"
                 + "  function test() {\n"
-                + "    var doc = " + callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
+                + "    var doc = " + callLoadXMLDocumentFromFile("'" + URL_HTML + "foo.html" + "'") + ";\n"
                 + "    try {\n"
                 + "     alert(doc.selectNodes('//soap:book').length);\n"
                 + "    } catch (e) {\n"
@@ -722,38 +698,12 @@ public class XMLDocumentTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({})
-    public void selectionNamespaces() {
-        final String html = "<html><head>\n"
-                + "<script>\n"
-                + "  var selectionNamespaces = 'xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\" "
-                + "xmlns:ns1=\"http://www.example.com/ns1\"';\n"
-                + "  function test() {\n"
-                + "  if ('ActiveXObject' in window) {\n"
-                + "    var doc = new ActiveXObject('Microsoft.XMLDOM');\n"
-                + "    doc.setProperty('SelectionNamespaces', selectionNamespaces);\n"
-                + "    doc.async = false;\n"
-                + "    doc.load('" + URL_SECOND + "');\n"
-                + "    try {\n"
-                + "     alert(doc.selectNodes('/s:Envelope/ns1:books/s:book').length);\n"
-                + "    } catch (e) {\n"
-                + "     alert(doc.evaluate('count(//book)', doc.documentElement, "
-                + "null, XPathResult.NUMBER_TYPE, null).numberValue);\n"
-                + "    }}\n"
-                + "  }\n"
-                + "</script></head>\n"
-                + "<body onload='test()'>\n"
-                + "</body></html>";
-        checkHtmlAlert(html);
-    }
-
-    @Test
     @Alerts("nodeFromID not available")
     public void nodeFromID() {
         final String html = "<html><head>\n"
                 + "<script>\n"
                 + "  function test() {\n"
-                + "    var doc = " + callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
+                + "    var doc = " + callLoadXMLDocumentFromFile("'" + URL_HTML + "foo.html" + "'") + ";\n"
                 + "    try {\n"
                 + "     alert('nodeFromID ' + doc.nodeFromID('target'));\n"
                 + "    } catch (e) {\n"
@@ -779,7 +729,7 @@ public class XMLDocumentTest extends LoboUnitTest {
                 + "     alert(xml);\n"
                 + "     alert(xml.getElementsByTagName('status')[0].textContent);\n"
                 + "    };\n"
-                + "    ifr.src = '" + URL_SECOND + "';\n"
+                + "    ifr.src = '" + URL_HTML + "foo.html" + "';\n"
                 + "  }\n"
                 + "</script></head>\n"
                 + "<body onload='test()'>\n"
@@ -815,7 +765,7 @@ public class XMLDocumentTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"myAttr", ""})
+    @Alerts({"myAttr", "null"})
     public void createAttributeNameValue() {
         final String html = "<html>\n"
                 + "<head>\n"

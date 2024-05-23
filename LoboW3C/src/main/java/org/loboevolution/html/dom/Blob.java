@@ -28,12 +28,9 @@ package org.loboevolution.html.dom;
 
 /**
  * The Interface Blob.
- *
- *
- *
  */
 public interface Blob {
-	// Blob
+
     /**
      * Gets the size.
      *

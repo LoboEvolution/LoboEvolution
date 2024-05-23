@@ -720,7 +720,6 @@ public class HTMLScriptElementTest extends LoboUnitTest {
     public void onReadyStateChange_EventAvailable() {
         final String html =
                 "<html><body><script>\n"
-
                         + "var s = document.createElement('script');\n"
                         + "s.src = '//:';\n"
                         + "s.onreadystatechange = function() {alert(window.event);};\n"
@@ -730,14 +729,9 @@ public class HTMLScriptElementTest extends LoboUnitTest {
         checkHtmlAlert(html);
     }
 
-    /**
-     * Verifies the correct the ordering of script element execution, deferred script element
-     * execution, script ready state changes, deferred script ready state changes, and onload
-     * handlers when the document doesn't have an explicit <tt>body</tt> element.
-     */
     @Test
     @Alerts({"3", "4", "2"})
-    public void onReadyStateChange_Order_NoBody() {
+    public void onReadyStateChangeOrderNoBody() {
         final String html =
                 "<html>\n"
                         + "  <head>\n"

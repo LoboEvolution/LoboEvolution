@@ -157,7 +157,7 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
 		if ("rss".equalsIgnoreCase(tagName)) {
 			isrss = true;
 		}
-		return new ElementFactory(isrss).createElement((HTMLDocumentImpl) this, tagName);
+		return new ElementFactory(isrss).createElement((HTMLDocumentImpl) this, tagName.toUpperCase());
 	}
 
 	@Override

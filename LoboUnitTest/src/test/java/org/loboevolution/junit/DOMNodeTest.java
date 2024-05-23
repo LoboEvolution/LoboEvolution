@@ -245,7 +245,7 @@ public class DOMNodeTest extends LoboUnitTest {
     public void getNodeValue() {
         document = sampleHtmlFile();
         final Element elm = document.createElement("p");
-        assertEquals("p", elm.getNodeName());
+        assertEquals("P", elm.getNodeName());
         assertNull(elm.getNodeValue());
         final Text text = document.createTextNode("foo");
         assertEquals("#text", text.getNodeName());
@@ -849,8 +849,8 @@ public class DOMNodeTest extends LoboUnitTest {
         final DocumentFragment fragment = createDocumentFragment();
         body.insertBefore(fragment, elm3);
         assertEquals(4, body.getChildNodes().getLength());
-        assertEquals("span", body.getChildNodes().item(2).getNodeName());
-        assertEquals("p", body.getChildNodes().item(3).getNodeName());
+        assertEquals("SPAN", body.getChildNodes().item(2).getNodeName());
+        assertEquals("P", body.getChildNodes().item(3).getNodeName());
         assertNotNull(fragment.getFirstChild());
         assertNotNull(fragment.getLastChild());
         assertNotNull(fragment.getParentNode());
@@ -1194,7 +1194,7 @@ public class DOMNodeTest extends LoboUnitTest {
         final DocumentFragment fragment = createDocumentFragment();
         body.replaceChild(fragment, elm3);
         assertEquals(3, body.getChildNodes().getLength());
-        assertEquals("p", body.getChildNodes().item(2).getNodeName());
+        assertEquals("P", body.getChildNodes().item(2).getNodeName());
         assertNotNull(fragment.getFirstChild());
         assertNotNull(fragment.getLastChild());
         assertNotNull(fragment.getParentNode());
