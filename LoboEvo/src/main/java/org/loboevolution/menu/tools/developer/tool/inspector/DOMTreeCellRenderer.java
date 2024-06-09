@@ -33,12 +33,14 @@ import org.loboevolution.html.node.Node;
 import javax.swing.*;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import java.awt.*;
+import java.io.Serial;
 
 /**
  * <p>DOMTreeCellRenderer class.</p>
  */
 public class DOMTreeCellRenderer extends DefaultTreeCellRenderer {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**

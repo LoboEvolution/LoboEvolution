@@ -52,7 +52,7 @@ public class Noderemovechild08Test extends LoboUnitTest {
         final Node appendedChild;
         doc = sampleXmlFile("hc_staff.xml");
         comment = doc.createComment("Comment");
-        appendedChild = doc.appendChild(comment);
+        doc.appendChild(comment);
         removedCmt = (Comment) doc.removeChild(comment);
         data = removedCmt.getData();
         assertEquals("Comment", data, "Noderemovechild08Assert2");

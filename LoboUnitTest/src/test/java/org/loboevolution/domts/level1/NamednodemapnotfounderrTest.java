@@ -74,7 +74,7 @@ public class NamednodemapnotfounderrTest extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                removedNode = attributes.removeNamedItem("district");
+                attributes.removeNamedItem("district");
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
             }

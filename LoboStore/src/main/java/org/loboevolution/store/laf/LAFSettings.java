@@ -34,6 +34,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.store.DatabseSQLite;
 
 import java.awt.*;
+import java.io.Serial;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -55,6 +56,7 @@ public class LAFSettings implements Serializable {
     /**
      * The Constant serialVersionUID.
      */
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**

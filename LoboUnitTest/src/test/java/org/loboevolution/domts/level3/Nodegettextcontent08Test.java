@@ -56,7 +56,7 @@ public class Nodegettextcontent08Test extends LoboUnitTest {
         doc = sampleXmlFile("barfoo.xml");
         elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "p");
         att = doc.createAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:lang");
-        replacedAttr = elem.setAttributeNodeNS(att);
+        elem.setAttributeNodeNS(att);
         attr = elem.getAttributeNodeNS("http://www.w3.org/XML/1998/namespace", "lang");
         textContent = attr.getTextContent();
         assertEquals("", textContent, "Nodegettextcontent08Assert2");

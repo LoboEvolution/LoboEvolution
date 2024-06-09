@@ -58,7 +58,7 @@ public class Textwholetext02Test extends LoboUnitTest {
         itemList = doc.getElementsByTagName("strong");
         elementName = (Element) itemList.item(0);
         newTextNode = doc.createTextNode("New Text");
-        appendedChild = elementName.appendChild(newTextNode);
+        elementName.appendChild(newTextNode);
         textNode = (Text) elementName.getFirstChild();
         wholeText = textNode.getWholeText();
         assertEquals("Margaret MartinNew Text", wholeText, "Textwholetext02Assert2");

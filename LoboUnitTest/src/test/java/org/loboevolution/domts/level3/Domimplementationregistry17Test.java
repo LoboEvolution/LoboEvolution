@@ -53,8 +53,6 @@ public class Domimplementationregistry17Test extends LoboUnitTest {
 
         DOMImplementation domImpl;
         boolean hasFeature;
-        final String nullVersion = null;
-
         final DOMImplementationList domImplList;
         final int length;
         final DOMImplementationRegistry domImplRegistry = DOMImplementationRegistry.newInstance();
@@ -66,7 +64,7 @@ public class Domimplementationregistry17Test extends LoboUnitTest {
             domImpl = domImplList.item(indexN1005A);
             hasFeature = domImpl.hasFeature("XML", "3.0");
             assertTrue(hasFeature, "Domimplementationregistry17Assert5");
-            hasFeature = domImpl.hasFeature("Core", nullVersion);
+            hasFeature = domImpl.hasFeature("Core", null);
             assertTrue(hasFeature, "Domimplementationregistry17Assert6");
         }
     }

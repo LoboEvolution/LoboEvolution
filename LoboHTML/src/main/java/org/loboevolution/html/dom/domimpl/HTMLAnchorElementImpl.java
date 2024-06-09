@@ -35,7 +35,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.renderstate.LinkRenderState;
 import org.loboevolution.html.renderstate.RenderState;
 
-import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
@@ -314,7 +314,7 @@ public class HTMLAnchorElementImpl extends HTMLElementImpl implements HTMLAnchor
         URL url;
         try {
             final Document document = getOwnerDocument();
-            url = document == null ? null : new URL(document.getDocumentURI());
+            url = document == null ? null : new URI(document.getDocumentURI()).toURL();
         } catch (final Exception mfu) {
             url = null;
         }
@@ -336,8 +336,8 @@ public class HTMLAnchorElementImpl extends HTMLElementImpl implements HTMLAnchor
                     } else {
                         rcontext.linkClicked(url, false);
                     }
-                } catch (final MalformedURLException mfu) {
-                    this.warn("Malformed URI: [" + href + "].", mfu);
+                } catch (Exception mfu) {
+                    this.warn("Error URI: [" + href + "].", mfu);
                 }
             }
         }
@@ -357,8 +357,8 @@ public class HTMLAnchorElementImpl extends HTMLElementImpl implements HTMLAnchor
                 try {
                     final URL url = getFullURL(href);
                     return url == null ? null : url.toExternalForm();
-                } catch (final MalformedURLException mfu) {
-                    this.warn("Malformed URI: [" + href + "].", mfu);
+                } catch (Exception mfu) {
+                    this.warn("Error URI: [" + href + "].", mfu);
                 }
             }
         }

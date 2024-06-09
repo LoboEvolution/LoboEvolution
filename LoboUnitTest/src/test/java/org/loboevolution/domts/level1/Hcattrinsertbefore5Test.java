@@ -54,18 +54,15 @@ public class Hcattrinsertbefore5Test extends LoboUnitTest {
         final HTMLCollection acronymList;
         final Element testNode;
         final NamedNodeMap attributes;
-        final Attr titleAttr;
-        final Node textNode;
-
         doc = sampleXmlFile("hc_staff.xml");
         acronymList = doc.getElementsByTagName("acronym");
         testNode = (Element) acronymList.item(3);
         attributes = testNode.getAttributes();
-        titleAttr = (Attr) attributes.getNamedItem("title");
+        attributes.getNamedItem("title");
 
         boolean success = false;
         try {
-            textNode = doc.createCDATASection("terday");
+            doc.createCDATASection("terday");
         } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
         }

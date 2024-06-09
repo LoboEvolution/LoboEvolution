@@ -54,14 +54,12 @@ public class Documentgetdoctype01Test extends LoboUnitTest {
         final DocumentType replacedDocType;
         final DOMImplementation domImpl;
         final String newSysID;
-        final String nullPubID = null;
-        final String nullSysID = null;
         final String rootName;
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
         rootName = docType.getName();
         domImpl = doc.getImplementation();
-        newDocType = domImpl.createDocumentType(rootName, nullPubID, nullSysID);
+        newDocType = domImpl.createDocumentType(rootName, null, null);
         try {
             doc.replaceChild(newDocType, docType);
         } catch (final DOMException ex) {

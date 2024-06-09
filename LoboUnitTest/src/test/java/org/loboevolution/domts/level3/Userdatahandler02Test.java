@@ -72,9 +72,9 @@ public class Userdatahandler02Test extends LoboUnitTest {
         doc = sampleXmlFile("barfoo.xml");
         pList = doc.getElementsByTagName("p");
         node = pList.item(0);
-        oldUserData = node.setUserData("greeting", hello, userDataHandlerImpl);
-        oldUserData = node.setUserData("salutation", mister, userDataHandlerImpl);
-        elementNS = node.getNamespaceURI();
+        node.setUserData("greeting", hello, userDataHandlerImpl);
+        node.setUserData("salutation", mister, userDataHandlerImpl);
+        node.getNamespaceURI();
         newNode = node.cloneNode(true);
         notifications = userDataHandlerImpl.getAllNotifications();
         assertEquals(2, notifications.size(), "Userdatahandler02Assert3");

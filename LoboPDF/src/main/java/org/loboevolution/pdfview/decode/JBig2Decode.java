@@ -37,10 +37,10 @@ import java.nio.ByteBuffer;
  * **************************************************************************
  * Decoder for jbig2 images within PDFs.
  * Copied from
- * https://pdf-renderer.dev.java.net/issues/show_bug.cgi?id=67
+ * <a href="https://pdf-renderer.dev.java.net/issues/show_bug.cgi?id=67">...</a>
  * <p>
  * Problem is also described in:
- * http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4799898
+ * <a href="http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4799898">...</a>
  *
  * @since 17.11.2010
  * **************************************************************************

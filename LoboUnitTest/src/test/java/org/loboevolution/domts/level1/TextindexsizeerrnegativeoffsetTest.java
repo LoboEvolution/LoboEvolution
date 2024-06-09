@@ -72,7 +72,7 @@ public class TextindexsizeerrnegativeoffsetTest extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                splitNode = textNode.splitText(-69);
+                textNode.splitText(-69);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.INDEX_SIZE_ERR);
             }

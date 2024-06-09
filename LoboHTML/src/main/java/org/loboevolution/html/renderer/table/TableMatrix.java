@@ -271,12 +271,6 @@ class TableMatrix {
 		}
 	}
 
-	/** {@inheritDoc} */
-	@Override
-	protected void finalize() throws Throwable {
-		super.finalize();
-	}
-
 	
 	/**
 	 * <p>getLowestRenderableSpot.</p>
@@ -326,9 +320,8 @@ class TableMatrix {
 		final NodeListImpl cellList = (NodeListImpl)te.getDescendents(new ColumnsFilter(), false);
 
 		cellList.forEach( node-> {
-			if (node instanceof HTMLElementImpl) {
-				final HTMLElementImpl columnNode = (HTMLElementImpl) node;
-				final HTMLElementImpl rowElement = getParentRow(columnNode);
+			if (node instanceof HTMLElementImpl columnNode) {
+                final HTMLElementImpl rowElement = getParentRow(columnNode);
 				if (rowElement != null && rowElement.getRenderState().getDisplay() != RenderState.DISPLAY_NONE) {
 					RTableCell ac = (RTableCell) columnNode.getUINode();
 					if (ac == null) {

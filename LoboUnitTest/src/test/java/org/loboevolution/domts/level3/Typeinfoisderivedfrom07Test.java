@@ -44,11 +44,9 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom</a>
  */
 public class Typeinfoisderivedfrom07Test extends LoboUnitTest {
-
+    
     /**
      * Runs the test case.
-     *
-     * @throws Throwable Any uncaught exception causes test to fail
      */
     @Test
     public void runTest() {

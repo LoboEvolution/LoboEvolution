@@ -55,7 +55,7 @@ public class Nodesettextcontent06Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "p");
         attr = doc.createAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:lang");
-        attrNode = elem.setAttributeNodeNS(attr);
+        elem.setAttributeNodeNS(attr);
         attr.setTextContent("NA");
         textContent = attr.getTextContent();
         assertEquals("NA", textContent, "Nodesettextcontent06Assert2");

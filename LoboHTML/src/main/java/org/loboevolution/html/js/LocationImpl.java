@@ -38,6 +38,7 @@ import org.loboevolution.js.Location;
 import org.loboevolution.js.AbstractScriptableDelegate;
 
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 
 /**
@@ -171,8 +172,8 @@ public class LocationImpl extends AbstractScriptableDelegate implements Location
 		URL url;
 		try {
 			final Document document = this.window.getDocumentNode();
-			url = document == null ? null : new URL(document.getDocumentURI());
-		} catch (final java.net.MalformedURLException mfu) {
+			url = document == null ? null : new URI(document.getDocumentURI()).toURL();
+		} catch (final Exception mfu) {
 			url = null;
 		}
 		return url;
@@ -225,10 +226,10 @@ public class LocationImpl extends AbstractScriptableDelegate implements Location
 					final HTMLDocumentImpl docImpl = (HTMLDocumentImpl) document;
 					url = docImpl.getFullURL(uri);
 				} else {
-					url = new URL(uri);
+					url = new URI(uri).toURL();
 				}
 				rcontext.navigate(url, this.target);
-			} catch (final MalformedURLException mfu) {
+			} catch (Exception mfu) {
 				log.error("setHref(): Malformed location: {}", uri, mfu);
 			}
 		}

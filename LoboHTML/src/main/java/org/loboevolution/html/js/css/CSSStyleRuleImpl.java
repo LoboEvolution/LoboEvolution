@@ -54,21 +54,18 @@ public class CSSStyleRuleImpl extends AbstractCSSStyleRule implements CSSPropert
     /** {@inheritDoc} */
     @Override
     public String getSelectorText() {
-        if (abstractCSSRule instanceof org.htmlunit.cssparser.dom.CSSStyleRuleImpl) {
-            final org.htmlunit.cssparser.dom.CSSStyleRuleImpl styleRule = (org.htmlunit.cssparser.dom.CSSStyleRuleImpl) abstractCSSRule;
+        if (abstractCSSRule instanceof org.htmlunit.cssparser.dom.CSSStyleRuleImpl styleRule) {
             return styleRule.getSelectorText();
         }
 
-        if (abstractCSSRule instanceof CSSPageRuleImpl) {
-            final CSSPageRuleImpl styleRule = (CSSPageRuleImpl) abstractCSSRule;
+        if (abstractCSSRule instanceof CSSPageRuleImpl styleRule) {
             return styleRule.getSelectorText();
         }
         return null;
     }
 
     public void setSelectorText(final String selectorText) {
-        if (abstractCSSRule instanceof CSSPageRuleImpl) {
-            final CSSPageRuleImpl styleRule = (CSSPageRuleImpl) abstractCSSRule;
+        if (abstractCSSRule instanceof CSSPageRuleImpl styleRule) {
             styleRule.setSelectorText(selectorText);
         }
     }
@@ -82,13 +79,10 @@ public class CSSStyleRuleImpl extends AbstractCSSStyleRule implements CSSPropert
     @Override
     public CSSStyleDeclaration getStyle() {
         final AtomicReference<CSSStyleDeclarationImpl> atomicReference = new AtomicReference<>();
-        if (abstractCSSRule instanceof org.htmlunit.cssparser.dom.CSSStyleRuleImpl) {
-            final org.htmlunit.cssparser.dom.CSSStyleRuleImpl styleRule = (org.htmlunit.cssparser.dom.CSSStyleRuleImpl) abstractCSSRule;
+        if (abstractCSSRule instanceof org.htmlunit.cssparser.dom.CSSStyleRuleImpl styleRule) {
             final List<NameValuePair> list = new ArrayList<>();
 
-            styleRule.getStyle().getProperties().forEach(p -> {
-                list.add(new NameValuePair(p.getName(), p.getValue().toString()));
-            });
+            styleRule.getStyle().getProperties().forEach(p -> list.add(new NameValuePair(p.getName(), p.getValue().toString())));
 
             atomicReference.set(new CSSStyleDeclarationImpl(styleRule.getStyle()));
 
@@ -116,13 +110,10 @@ public class CSSStyleRuleImpl extends AbstractCSSStyleRule implements CSSPropert
             });
         }
 
-        if (abstractCSSRule instanceof CSSPageRuleImpl) {
-            final CSSPageRuleImpl styleRule = (CSSPageRuleImpl) abstractCSSRule;
+        if (abstractCSSRule instanceof CSSPageRuleImpl styleRule) {
             final List<NameValuePair> list = new ArrayList<>();
 
-            styleRule.getStyle().getProperties().forEach(p -> {
-                list.add(new NameValuePair(p.getName(), p.getValue().toString()));
-            });
+            styleRule.getStyle().getProperties().forEach(p -> list.add(new NameValuePair(p.getName(), p.getValue().toString())));
 
             atomicReference.set(new CSSStyleDeclarationImpl(styleRule.getStyle()));
 

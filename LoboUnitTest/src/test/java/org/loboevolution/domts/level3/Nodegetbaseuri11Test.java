@@ -59,7 +59,7 @@ public class Nodegetbaseuri11Test extends LoboUnitTest {
 
         doc = sampleXmlFile("barfoo_base.xml");
         domImpl = doc.getImplementation();
-        newDoc = domImpl.createDocument("http://www.w3.org/1999/xhtml", "html", nullDocType);
+        newDoc = domImpl.createDocument("http://www.w3.org/1999/xhtml", "html", null);
         newPI = newDoc.createProcessingInstruction("TARGET", "DATA");
         imported = (ProcessingInstruction) doc.importNode(newPI, true);
         doc.appendChild(imported);

@@ -57,8 +57,6 @@ public class Domimplementationregistry22Test extends LoboUnitTest {
         DOMImplementation domImpl;
         boolean hasFeature;
         final DOMImplementation baseImpl;
-        final String nullVersion = null;
-
         final DOMImplementationList domImplList;
         final int length;
         final DOMImplementationRegistry domImplRegistry = DOMImplementationRegistry.newInstance();
@@ -68,12 +66,12 @@ public class Domimplementationregistry22Test extends LoboUnitTest {
 
         if (length == 0) {
             baseImpl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(), true));
-            hasFeature = baseImpl.hasFeature("XPath", nullVersion);
+            hasFeature = baseImpl.hasFeature("XPath", null);
             assertFalse(hasFeature, "Domimplementationregistry22Assert2");
         } else {
             for (int indexN10068 = 0; indexN10068 < domImplList.getLength(); indexN10068++) {
                 domImpl = domImplList.item(indexN10068);
-                hasFeature = domImpl.hasFeature("XPath", nullVersion);
+                hasFeature = domImpl.hasFeature("XPath", null);
                 assertTrue(hasFeature, "Domimplementationregistry22Assert3");
             }
         }

@@ -28,6 +28,7 @@ package org.loboevolution.component;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.io.Serial;
 import java.util.List;
 
 import javax.swing.AbstractAction;
@@ -45,7 +46,8 @@ import org.loboevolution.store.TabStore;
  */
 public class BackAction extends AbstractAction {
 
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	private final JTextField addressBar;
 

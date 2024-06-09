@@ -76,7 +76,7 @@ public class Documentrenamenode10Test extends LoboUnitTest {
             {
                 boolean success = false;
                 try {
-                    renamedNode = doc.renameNode(textNode, "http://www.w3.org/XML/1998/namespace", qualifiedName);
+                    doc.renameNode(textNode, "http://www.w3.org/XML/1998/namespace", qualifiedName);
                 } catch (final DOMException ex) {
                     success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
                 }

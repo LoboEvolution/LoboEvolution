@@ -29,11 +29,14 @@ package org.loboevolution.html.control;
 import org.loboevolution.common.WrapperLayout;
 import org.loboevolution.html.dom.domimpl.HTMLSelectElementImpl;
 
+import java.io.Serial;
+
 /**
  * <p>SelectControl class.</p>
  */
 public class SelectControl extends BaseControl implements UIControl {
 
+@Serial
 private static final long serialVersionUID = 1L;
 	
 	private final HTMLSelectElementImpl  modelNode;

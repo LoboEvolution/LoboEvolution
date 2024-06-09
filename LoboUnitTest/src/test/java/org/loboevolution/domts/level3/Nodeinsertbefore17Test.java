@@ -64,7 +64,7 @@ public class Nodeinsertbefore17Test extends LoboUnitTest {
         element = (Element) childList.item(1);
         refNode = element.getFirstChild();
         newText = doc.createTextNode("newText");
-        inserted = element.insertBefore(newText, refNode);
+        element.insertBefore(newText, refNode);
         insertedText = (Text) element.getFirstChild();
         nodeName = insertedText.getNodeName();
         assertEquals("#text", nodeName, "Nodeinsertbefore17Assert2");

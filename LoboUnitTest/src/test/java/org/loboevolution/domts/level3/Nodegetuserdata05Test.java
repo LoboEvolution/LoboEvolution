@@ -59,7 +59,7 @@ public class Nodegetuserdata05Test extends LoboUnitTest {
         entity = entities.getNamedItem("delta");
         attr = doc.createAttributeNS("http://www.w3.org/XML/1998/namespace", "lang");
         /*Node */
-        prevUserData = entity.setUserData("key", attr, null);
+        entity.setUserData("key", attr, null);
         retUserData = entity.getUserData("Key");
         assertNull(retUserData, "Nodegetuserdata05Assert2");
     }

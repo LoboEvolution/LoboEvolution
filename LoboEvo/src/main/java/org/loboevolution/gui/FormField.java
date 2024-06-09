@@ -118,16 +118,10 @@ public class FormField {
 		if (fe != null) {
 			return fe;
 		}
-		switch (this.type) {
-		case TEXT:
-			fe = new LoboTextField();
-			break;
-		case PASSWORD:
-			fe = new LoboPasswordField();
-			break;
-		default:
-			throw new IllegalArgumentException("type=" + this.type);
-		}
+        fe = switch (this.type) {
+            case TEXT -> new LoboTextField();
+            case PASSWORD -> new LoboPasswordField();
+        };
 		this.fieldEditor = fe;
 		return fe;
 	}

@@ -50,8 +50,6 @@ public class Nodeissamenode10Test extends LoboUnitTest {
         final DOMImplementation domImpl;
         final Element element;
         final boolean isSame;
-        final DocumentType nullDocType = null;
-
         final Element docElem;
         final String rootNS;
         final String rootName;
@@ -60,7 +58,7 @@ public class Nodeissamenode10Test extends LoboUnitTest {
         rootNS = docElem.getNamespaceURI();
         rootName = docElem.getTagName();
         domImpl = doc.getImplementation();
-        newDoc = domImpl.createDocument(rootNS, rootName, nullDocType);
+        newDoc = domImpl.createDocument(rootNS, rootName, null);
         element = newDoc.createElementNS(rootNS, rootName);
         isSame = newDoc.isSameNode(element);
         assertFalse(isSame, "Nodeissamenode10Assert2");

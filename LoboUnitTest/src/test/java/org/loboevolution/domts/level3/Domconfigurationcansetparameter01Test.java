@@ -56,7 +56,7 @@ public class Domconfigurationcansetparameter01Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         newCommentNode = doc.createComment("This is a new Comment node");
         docElem = doc.getDocumentElement();
-        appendedChild = docElem.appendChild(newCommentNode);
+        docElem.appendChild(newCommentNode);
         domConfig = doc.getDomConfig();
         canSet = domConfig.canSetParameter("comments", Boolean.FALSE);
         assertTrue(canSet, "Domconfigurationcansetparameter01Assert3");

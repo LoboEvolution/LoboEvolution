@@ -76,7 +76,7 @@ public class HcnodeinsertbeforerefchildnonexistentTest extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                insertedNode = elementNode.insertBefore(newChild, refChild);
+                elementNode.insertBefore(newChild, refChild);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
             }

@@ -67,7 +67,7 @@ public class Entities04Test extends LoboUnitTest {
         pList = doc.getElementsByTagName("p");
         pElem = (Element) pList.item(0);
         entRef = doc.createEntityReference("ent1");
-        child = pElem.appendChild(entRef);
+        pElem.appendChild(entRef);
         doc.normalize();
         assertTrue(errorMonitor.assertLowerSeverity(2), "Entities04Assert1");
         pList = doc.getElementsByTagName("p");

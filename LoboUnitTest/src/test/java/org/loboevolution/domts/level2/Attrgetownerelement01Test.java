@@ -59,12 +59,11 @@ public class Attrgetownerelement01Test extends LoboUnitTest {
         final String ownerElementName;
         final HTMLCollection elementList;
         final NamedNodeMap attributes;
-        final String nullNS = null;
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagName("employee");
         element = (Element) elementList.item(1);
         attributes = element.getAttributes();
-        attr = (Attr) attributes.getNamedItemNS(nullNS, "defaultAttr");
+        attr = (Attr) attributes.getNamedItemNS(null, "defaultAttr");
         ownerElement = attr.getOwnerElement();
         ownerElementName = ownerElement.getNodeName();
         assertEquals("EMPLOYEE", ownerElementName);

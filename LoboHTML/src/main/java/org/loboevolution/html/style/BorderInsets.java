@@ -198,31 +198,18 @@ public class BorderInsets {
 			return BorderInsets.BORDER_STYLE_NONE;
 		}
 		final String stl = styleText.toLowerCase();
-		switch (CSSValues.get(stl)) {
-		case SOLID:
-			return BORDER_STYLE_SOLID;
-		case DASHED:
-			return BORDER_STYLE_DASHED;
-		case DOTTED:
-			return BORDER_STYLE_DOTTED;
-		case HIDDEN:
-			return BORDER_STYLE_HIDDEN;
-		case DOUBLE:
-			return BORDER_STYLE_DOUBLE;
-		case GROOVE:
-			return BORDER_STYLE_GROOVE;
-		case RIDGE:
-			return BORDER_STYLE_RIDGE;
-		case INSET:
-			return BORDER_STYLE_INSET;
-		case OUTSET:
-			return BORDER_STYLE_OUTSET;
-		case INHERIT:
-			return getBorderStyle(element, element.getParentStyle().getBorderStyle());
-		case INITIAL:
-		case NONE:
-		default:
-			return BORDER_STYLE_NONE;
-		}
+        return switch (CSSValues.get(stl)) {
+            case SOLID -> BORDER_STYLE_SOLID;
+            case DASHED -> BORDER_STYLE_DASHED;
+            case DOTTED -> BORDER_STYLE_DOTTED;
+            case HIDDEN -> BORDER_STYLE_HIDDEN;
+            case DOUBLE -> BORDER_STYLE_DOUBLE;
+            case GROOVE -> BORDER_STYLE_GROOVE;
+            case RIDGE -> BORDER_STYLE_RIDGE;
+            case INSET -> BORDER_STYLE_INSET;
+            case OUTSET -> BORDER_STYLE_OUTSET;
+            case INHERIT -> getBorderStyle(element, element.getParentStyle().getBorderStyle());
+            default -> BORDER_STYLE_NONE;
+        };
 	}
 }

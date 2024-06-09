@@ -52,9 +52,8 @@ public class ElementNameFilter implements NodeFilter {
 	/** {@inheritDoc} */
 	@Override
 	public short acceptNode(final Node node) {
-		if (node instanceof Element) {
-			final Element elm = (Element)node;
-			if (this.name != null) {
+		if (node instanceof Element elm) {
+            if (this.name != null) {
 				return this.name.equals(elm.getAttribute("name")) ?
 						NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
 			}

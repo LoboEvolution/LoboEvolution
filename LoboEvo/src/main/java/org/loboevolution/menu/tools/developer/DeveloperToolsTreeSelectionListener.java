@@ -55,8 +55,7 @@ public class DeveloperToolsTreeSelectionListener implements TreeSelectionListene
     public void valueChanged(final TreeSelectionEvent evt) {
         final TreePath path = evt.getPath();
         final DefaultMutableTreeNode node = (DefaultMutableTreeNode) path.getLastPathComponent();
-        if(node.getUserObject() instanceof ToolsInfo){
-            final ToolsInfo si = node == null ? null : (ToolsInfo) node.getUserObject();
+        if(node.getUserObject() instanceof ToolsInfo si){
             updateDeveloperPanel(si);
         }
     }

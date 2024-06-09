@@ -36,10 +36,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Invoke the renameNode method on a new document node to rename a new attribute node
- * to one whose namespaceURI is http://www.w3.org/XML/1998/namespace and name is xml:dom.
+ * to one whose namespaceURI is <a href="http://www.w3.org/XML/1998/namespace">...</a> and name is xml:dom.
  * Check if this attribute has been renamed successfully by verifying the
  * nodeName and namespaceURI attributes of the renamed node.
-
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-renameNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-renameNode</a>
  */
 public class Documentrenamenode07Test extends LoboUnitTest {
@@ -52,8 +51,6 @@ public class Documentrenamenode07Test extends LoboUnitTest {
         final Node renamedNode;
         final String nodeName;
         final String namespaceURI;
-        final DocumentType nullDocType = null;
-
         final Element docElem;
         final String rootNS;
         final String rootName;
@@ -62,7 +59,7 @@ public class Documentrenamenode07Test extends LoboUnitTest {
         rootNS = docElem.getNamespaceURI();
         rootName = docElem.getTagName();
         domImpl = doc.getImplementation();
-        newDoc = domImpl.createDocument(rootNS, rootName, nullDocType);
+        newDoc = domImpl.createDocument(rootNS, rootName, null);
         attr = newDoc.createAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:lang");
         renamedNode = newDoc.renameNode(attr, "http://www.w3.org/XML/1998/namespace", "xml:dom");
         nodeName = renamedNode.getNodeName();

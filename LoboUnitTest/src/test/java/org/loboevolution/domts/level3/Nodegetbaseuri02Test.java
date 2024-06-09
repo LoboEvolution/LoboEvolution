@@ -63,7 +63,7 @@ public class Nodegetbaseuri02Test extends LoboUnitTest {
         rootNS = docElem.getNamespaceURI();
         rootName = docElem.getTagName();
         domImpl = doc.getImplementation();
-        newDoc = domImpl.createDocument(rootNS, rootName, nullDocType);
+        newDoc = domImpl.createDocument(rootNS, rootName, null);
         baseURI = newDoc.getBaseURI();
         assertNull(baseURI, "Nodegetbaseuri02Assert3");
         newDoc.setDocumentURI("http://www.example.com/sample.xml");

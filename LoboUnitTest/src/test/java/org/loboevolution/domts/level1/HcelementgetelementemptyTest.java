@@ -70,7 +70,7 @@ public class HcelementgetelementemptyTest extends LoboUnitTest {
         newAttribute = doc.createAttribute("lang");
         elementList = doc.getElementsByTagName("acronym");
         testEmployee = (Element) elementList.item(3);
-        domesticAttr = testEmployee.setAttributeNode(newAttribute);
+        testEmployee.setAttributeNode(newAttribute);
         attrValue = testEmployee.getAttribute("lang");
         assertNull(attrValue, "HcelementgetelementemptyAssert1");
     }

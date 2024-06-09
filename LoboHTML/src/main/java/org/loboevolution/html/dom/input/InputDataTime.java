@@ -53,29 +53,26 @@ public class InputDataTime extends BasicInput {
 		try {
 			final String type = modelNode.getType();
 			JFormattedTextField tf;
-			MaskFormatter dateMask;
+			MaskFormatter dateMask = switch (type.toLowerCase()) {
+                case "datetime-local" -> {
+                    tf = new JFormattedTextField(new SimpleDateFormat("dd/MM/yyyy hh:mm"));
+                    yield new MaskFormatter("##/##/#### ##:##");
+                }
+                case "time" -> {
+                    tf = new JFormattedTextField(new SimpleDateFormat("hh:mm:ss"));
+                    yield new MaskFormatter("##:##:##");
+                }
+                case "month" -> {
+                    tf = new JFormattedTextField(new SimpleDateFormat("MM/yyyy"));
+                    yield new MaskFormatter("##/####");
+                }
+                default -> {
+                    tf = new JFormattedTextField(new SimpleDateFormat("dd/MM/yyyy"));
+                    yield new MaskFormatter("##/##/####");
+                }
+            };
 
-			switch (type.toLowerCase()) {
-			case "datetime-local":
-				tf = new JFormattedTextField(new SimpleDateFormat("dd/MM/yyyy hh:mm"));
-				dateMask = new MaskFormatter("##/##/#### ##:##");
-				break;
-			case "time":
-				tf = new JFormattedTextField(new SimpleDateFormat("hh:mm:ss"));
-				dateMask = new MaskFormatter("##:##:##");
-				break;
-			case "month":
-				tf = new JFormattedTextField(new SimpleDateFormat("MM/yyyy"));
-				dateMask = new MaskFormatter("##/####");
-				break;
-			case "date":
-			default:
-				tf = new JFormattedTextField(new SimpleDateFormat("dd/MM/yyyy"));
-				dateMask = new MaskFormatter("##/##/####");
-				break;
-			}
-
-			setElement(modelNode);
+            setElement(modelNode);
 			setJComponent(tf);
 			final Dimension ps = tf.getPreferredSize();
 			tf.setPreferredSize(new Dimension(128, ps.height));

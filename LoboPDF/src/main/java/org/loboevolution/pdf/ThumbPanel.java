@@ -37,6 +37,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
+import java.io.Serial;
 
 /**
  * A panel of thumbnails, one for each page of a PDFFile. You can add a
@@ -48,6 +49,7 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
     /**
      * The Constant serialVersionUID.
      */
+    @Serial
     private static final long serialVersionUID = -6761217072379594185L;
     /**
      * Size of the border between images.

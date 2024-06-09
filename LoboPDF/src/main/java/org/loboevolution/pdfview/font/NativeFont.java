@@ -229,8 +229,7 @@ public class NativeFont extends OutlineFont {
 
         // if it's an OpenType font, parse the relevant tables to get
         // glyph name to code mappings
-        if (f instanceof OpenType) {
-            final OpenType ot = (OpenType) f;
+        if (f instanceof OpenType ot) {
 
             final byte[] cmapData = ot.getFontTable(OpenType.TAG_CMAP);
             final byte[] postData = ot.getFontTable(OpenType.TAG_POST);

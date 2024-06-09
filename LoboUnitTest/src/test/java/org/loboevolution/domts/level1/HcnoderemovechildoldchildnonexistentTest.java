@@ -72,7 +72,7 @@ public class HcnoderemovechildoldchildnonexistentTest extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                removedChild = elementNode.removeChild(oldChild);
+                elementNode.removeChild(oldChild);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
             }

@@ -27,6 +27,8 @@
 package org.loboevolution.menu.tools.developer;
 
 import com.jtattoo.plaf.lobo.LoboTree;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.loboevolution.component.BrowserFrame;
 import org.loboevolution.menu.tools.AbstractToolsUI;
@@ -36,17 +38,21 @@ import org.loboevolution.menu.tools.developer.tool.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
+import java.io.Serial;
 
 /**
  * <p>DeveloperToolTree class.</p>
  */
+@EqualsAndHashCode(callSuper = true)
+@Data
 public class DeveloperToolTree extends LoboTree {
 
 	/** The Constant serialVersionUID. */
+	@Serial
 	private static final long serialVersionUID = 1L;
 
 	/** The Constant frame. */
-	private static BrowserFrame frame;
+	private BrowserFrame frame;
 
 	/**
 	 * Instantiates a new preferences tree.
@@ -125,7 +131,7 @@ public class DeveloperToolTree extends LoboTree {
 		return new ToolsInfo() {
 			@Override
 			public AbstractToolsUI createSettingsUI() {
-				return new SourceViewerUI(DeveloperToolTree.frame);
+				return new SourceViewerUI(DeveloperToolTree.this.getFrame());
 			}
 
 			@Override
@@ -149,7 +155,7 @@ public class DeveloperToolTree extends LoboTree {
 		return new ToolsInfo() {
 			@Override
 			public AbstractToolsUI createSettingsUI() {
-				return new DOMInspectorUI(DeveloperToolTree.frame);
+				return new DOMInspectorUI(DeveloperToolTree.this.getFrame());
 			}
 
 			@Override
@@ -173,7 +179,7 @@ public class DeveloperToolTree extends LoboTree {
 		return new ToolsInfo() {
 			@Override
 			public AbstractToolsUI createSettingsUI() {
-				return new HeadersPageUI(DeveloperToolTree.frame);
+				return new HeadersPageUI(DeveloperToolTree.this.getFrame());
 			}
 
 			@Override
@@ -197,7 +203,7 @@ public class DeveloperToolTree extends LoboTree {
 		return new ToolsInfo() {
 			@Override
 			public AbstractToolsUI createSettingsUI() {
-				return new TimingPageUI(DeveloperToolTree.frame);
+				return new TimingPageUI(DeveloperToolTree.this.getFrame());
 			}
 
 			@Override
@@ -221,7 +227,7 @@ public class DeveloperToolTree extends LoboTree {
 		return new ToolsInfo() {
 			@Override
 			public AbstractToolsUI createSettingsUI() {
-				return new ContentPageUI(DeveloperToolTree.frame, SyntaxConstants.SYNTAX_STYLE_CSS);
+				return new ContentPageUI(DeveloperToolTree.this.getFrame(), SyntaxConstants.SYNTAX_STYLE_CSS);
 			}
 
 			@Override
@@ -245,7 +251,7 @@ public class DeveloperToolTree extends LoboTree {
 		return new ToolsInfo() {
 			@Override
 			public AbstractToolsUI createSettingsUI() {
-				return new ContentPageUI(DeveloperToolTree.frame, SyntaxConstants.SYNTAX_STYLE_JAVASCRIPT);
+				return new ContentPageUI(DeveloperToolTree.this.getFrame(), SyntaxConstants.SYNTAX_STYLE_JAVASCRIPT);
 			}
 
 			@Override
@@ -269,7 +275,7 @@ public class DeveloperToolTree extends LoboTree {
 		return new ToolsInfo() {
 			@Override
 			public AbstractToolsUI createSettingsUI() {
-				return new ImagePageUI(DeveloperToolTree.frame);
+				return new ImagePageUI(DeveloperToolTree.this.getFrame());
 			}
 
 			@Override
@@ -293,7 +299,7 @@ public class DeveloperToolTree extends LoboTree {
 		return new ToolsInfo() {
 			@Override
 			public AbstractToolsUI createSettingsUI() {
-				return new CookieUI(DeveloperToolTree.frame);
+				return new CookieUI(DeveloperToolTree.this.getFrame());
 			}
 
 			@Override
@@ -317,7 +323,7 @@ public class DeveloperToolTree extends LoboTree {
 		return new ToolsInfo() {
 			@Override
 			public AbstractToolsUI createSettingsUI() {
-				return new StorageUI(DeveloperToolTree.frame, 0);
+				return new StorageUI(DeveloperToolTree.this.getFrame(), 0);
 			}
 
 			@Override
@@ -341,7 +347,7 @@ public class DeveloperToolTree extends LoboTree {
 		return new ToolsInfo() {
 			@Override
 			public AbstractToolsUI createSettingsUI() {
-				return new StorageUI(DeveloperToolTree.frame, 1);
+				return new StorageUI(DeveloperToolTree.this.getFrame(), 1);
 			}
 
 			@Override
@@ -365,7 +371,7 @@ public class DeveloperToolTree extends LoboTree {
 		return new ToolsInfo() {
 			@Override
 			public AbstractToolsUI createSettingsUI() {
-				return new InfoPageUI(DeveloperToolTree.frame);
+				return new InfoPageUI(DeveloperToolTree.this.getFrame());
 			}
 
 			@Override

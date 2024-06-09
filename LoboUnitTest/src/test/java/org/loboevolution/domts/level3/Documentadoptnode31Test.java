@@ -41,13 +41,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-adoptNode</a>
  */
-public class Documentadoptnode31Test extends LoboUnitTest {
-
-
+public class Documentadoptnode31Test extends LoboUnitTest {    
     /**
      * Runs the test case.
-     *
-     * @throws Throwable Any uncaught exception causes test to fail
      */
     @Test
     public void runTest() {
@@ -57,8 +53,6 @@ public class Documentadoptnode31Test extends LoboUnitTest {
         final Text newText;
         final Text adoptedText;
         final String nodeValue;
-        final DocumentType nullDocType = null;
-
         final Element docElem;
         final String rootNS;
         final String rootName;
@@ -67,7 +61,7 @@ public class Documentadoptnode31Test extends LoboUnitTest {
         rootName = docElem.getTagName();
         rootNS = docElem.getNamespaceURI();
         domImpl = doc.getImplementation();
-        newDoc = domImpl.createDocument(rootNS, rootName, nullDocType);
+        newDoc = domImpl.createDocument(rootNS, rootName, null);
         newText = newDoc.createTextNode("new Document.adoptNode test for a TEXT_NODE");
         adoptedText = (Text) doc.adoptNode(newText);
 

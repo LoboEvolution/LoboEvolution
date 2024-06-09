@@ -31,9 +31,6 @@ import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.js.css.CSSStyleDeclarationImpl;
 import org.loboevolution.css.CSSStyleDeclaration;
 import org.loboevolution.html.parser.FontParser;
-import org.loboevolution.html.style.HtmlValues;
-
-import java.util.Arrays;
 
 /**
  * <p>FontSetter class.</p>

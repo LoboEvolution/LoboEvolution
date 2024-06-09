@@ -201,12 +201,11 @@ public class TrueTypeFont {
     public TrueTypeTable getTable(final String tagString) {
         final Object tableObj = this.tables.get(tagString);
 
-        TrueTypeTable table = null;
+        TrueTypeTable table;
 
-        if (tableObj instanceof ByteBuffer) {
+        if (tableObj instanceof ByteBuffer data) {
             // the table has not yet been parsed.  Parse it, and add the
             // parsed version to the map of tables.
-            final ByteBuffer data = (ByteBuffer) tableObj;
 
             table = TrueTypeTable.createTable(this, tagString, data);
             addTable(tagString, table);
@@ -296,7 +295,7 @@ public class TrueTypeFont {
             final String tagString = entry.getKey();
             final int tag = TrueTypeTable.stringToTag(tagString);
 
-            ByteBuffer data = null;
+            ByteBuffer data;
 
             final Object tableObj = this.tables.get(tagString);
             if (tableObj instanceof TrueTypeTable) {
@@ -419,7 +418,7 @@ public class TrueTypeFont {
         log.info("RangeShift   : {} ", getRangeShift());
 
         for (final Map.Entry<String, Object> e : this.tables.entrySet()) {
-            TrueTypeTable table = null;
+            TrueTypeTable table;
             if (e.getValue() instanceof ByteBuffer) {
                 table = getTable(e.getKey());
             } else {

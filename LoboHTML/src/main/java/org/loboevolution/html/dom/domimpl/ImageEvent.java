@@ -25,6 +25,7 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
+import java.io.Serial;
 import java.util.EventObject;
 
 /**
@@ -37,7 +38,8 @@ public class ImageEvent extends EventObject {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 	public final java.awt.Image image;
 
 	/**

@@ -32,6 +32,7 @@ import org.loboevolution.pdfview.PDFFile;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.Serial;
 
 /**
  * <p>NavigationToolbar class.</p>
@@ -39,6 +40,7 @@ import java.awt.*;
 @Slf4j
 public class NavigationToolbar extends JToolBar {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     private static final int FIRSTPAGE = 0;

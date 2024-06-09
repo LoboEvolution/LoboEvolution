@@ -501,9 +501,7 @@ public class XHtmlParser {
 						safeAppendChild(parent, element);
 						final AtomicReference<ElementImpl> elementAtomicReference = new AtomicReference<>(element);
 
-						attributeInfo.forEach(info -> {
-							setAttributeNode(elementAtomicReference.get(), info.getAttributeName(), info.getAttributeValue());
-						});
+						attributeInfo.forEach(info -> setAttributeNode(elementAtomicReference.get(), info.getAttributeName(), info.getAttributeValue()));
 
 						if (stopTags != null && stopTags.contains(HTMLTag.get(normalTag))) {
 							throw new StopException(element);

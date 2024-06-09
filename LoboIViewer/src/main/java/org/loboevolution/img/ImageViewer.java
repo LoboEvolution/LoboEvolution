@@ -34,6 +34,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.io.Serial;
 
 
 /**
@@ -103,12 +104,14 @@ public final class ImageViewer {
 		propertyChangeSupport = new PropertyChangeSupport(this);
 		panel = new JPanel(new FlowLayout());
 		scroller = new JScrollPane() {
+			@Serial
 			private static final long serialVersionUID = 1L;
 
 			@Override
 			protected JViewport createViewport() {
 				return new JViewport() {
 
+					@Serial
 					private static final long serialVersionUID = 1L;
 
 					@Override

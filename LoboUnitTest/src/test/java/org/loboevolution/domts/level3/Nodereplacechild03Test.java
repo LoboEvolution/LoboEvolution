@@ -54,10 +54,10 @@ public class Nodereplacechild03Test extends LoboUnitTest {
         final Node replaced;
         doc = sampleXmlFile("hc_staff.xml");
         domImpl = doc.getImplementation();
-        newDoc = domImpl.createDocument("http://www.w3.org/DOM", "dom3:doc", nullDocType);
+        newDoc = domImpl.createDocument("http://www.w3.org/DOM", "dom3:doc", null);
 
         try {
-            replaced = doc.replaceChild(newDoc, doc);
+            doc.replaceChild(newDoc, doc);
 
         } catch (final DOMException ex) {
             switch (ex.getCode()) {

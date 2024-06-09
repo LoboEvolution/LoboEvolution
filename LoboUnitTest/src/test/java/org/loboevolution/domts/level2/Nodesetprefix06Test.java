@@ -38,11 +38,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * The method setPrefix raises a NAMESPACE_ERR if the specified prefix is "xml" and the namespaceURI
- * of this node is different from "http://www.w3.org/XML/1998/namespace".
+ * of this node is different from "<a href="http://www.w3.org/XML/1998/namespace">...</a>".
  * Invoke the setPrefix method on this Element object with namespaceURI that is different from
- * http://www..w3.org/xml/1998/namespace and a prefix whose values is xml.
+ * <a href="http://www..w3.org/xml/1998/namespace">...</a> and a prefix whose values is xml.
  * Check if the NAMESPACE_ERR was thrown.
-
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSPrefix">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSPrefix</a>
  */
 public class Nodesetprefix06Test extends LoboUnitTest {

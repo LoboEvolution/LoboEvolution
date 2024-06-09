@@ -57,20 +57,14 @@ public class CreateDocument02Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        final String namespaceURI = null;
-
         final String qualifiedName = "k:local";
         final Document doc;
-        final DocumentType docType = null;
-
         final DOMImplementation domImpl;
         doc = sampleXmlFile("staffNS.xml");
-
         domImpl = doc.getImplementation();
-
         boolean success = false;
         try {
-            domImpl.createDocument(namespaceURI, qualifiedName, docType);
+            domImpl.createDocument(null, qualifiedName, null);
         } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NAMESPACE_ERR);
         }

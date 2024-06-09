@@ -36,9 +36,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Invoke the renameNode method on this document node to rename a node such that its
- * qualifiedName has a prefix that is "xmlns:xml"and namespaceURI is "http://www.w3.org/2000/XMLNS/".
+ * qualifiedName has a prefix that is "xmlns:xml"and namespaceURI is "<a href="http://www.w3.org/2000/XMLNS/">...</a>".
  * Check if a NAMESPACE_ERR gets thrown.
-
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-renameNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-renameNode</a>
  */
 public class Documentrenamenode21Test extends LoboUnitTest {
@@ -51,8 +50,6 @@ public class Documentrenamenode21Test extends LoboUnitTest {
         final DOMImplementation domImpl;
         final Attr attr;
         final Node renamedNode;
-        final DocumentType nullDocType = null;
-
         final Element docElem;
         final String rootNS;
         final String rootName;
@@ -61,12 +58,12 @@ public class Documentrenamenode21Test extends LoboUnitTest {
         rootNS = docElem.getNamespaceURI();
         rootName = docElem.getTagName();
         domImpl = doc.getImplementation();
-        newDoc = domImpl.createDocument(rootNS, rootName, nullDocType);
+        newDoc = domImpl.createDocument(rootNS, rootName, null);
         attr = newDoc.createAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:lang");
 
         boolean success = false;
         try {
-            renamedNode = newDoc.renameNode(attr, "http://www.w3.org/2000/XMLNS/", "xmlns:xml");
+            newDoc.renameNode(attr, "http://www.w3.org/2000/XMLNS/", "xmlns:xml");
         } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NAMESPACE_ERR);
         }

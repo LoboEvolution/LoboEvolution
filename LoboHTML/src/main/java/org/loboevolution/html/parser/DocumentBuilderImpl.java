@@ -40,7 +40,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import java.io.*;
-import java.net.URL;
+import java.net.URI;
 import java.net.URLConnection;
 
 /**
@@ -78,7 +78,7 @@ public class DocumentBuilderImpl {
 	 * @return a {@link org.loboevolution.html.node.Document} object.
 	 * @throws java.io.IOException if any.
 	 */
-	public Document createDocument(final InputSource is) throws IOException {
+	public Document createDocument(final InputSource is) throws Exception {
 		final String uri = is.getSystemId();
 		if (uri == null) {
 			log.warn("parse(): InputSource has no SystemId (URI); document item URLs will not be resolvable.");
@@ -101,14 +101,13 @@ public class DocumentBuilderImpl {
 	 *
 	 * @param is a {@link org.xml.sax.InputSource} object.
 	 * @return a {@link org.loboevolution.html.node.Document} object.
-	 * @throws org.xml.sax.SAXException if any.
-	 * @throws java.io.IOException if any.
+	 * @throws java.lang.Exception if any.
 	 */
-	public Document parse(final InputSource is) throws SAXException, IOException {
+	public Document parse(final InputSource is) throws Exception {
 		return createDocument(is);
 	}
 
-	private WritableLineReader writableLineReader(final InputSource is, final String uri) throws IOException {
+	private WritableLineReader writableLineReader(final InputSource is, final String uri) throws Exception {
 		final String encoding = is.getEncoding();
 		String charset = encoding;
 		if (charset == null) {
@@ -124,7 +123,7 @@ public class DocumentBuilderImpl {
 			if (in != null) {
 				wis = new WritableLineReader(new InputStreamReader(in, charset));
 			} else if (uri != null) {
-				final URLConnection connection = new URL(uri).openConnection();
+				final URLConnection connection = new URI(uri).toURL().openConnection();
 				in = connection.getInputStream();
 				if (encoding == null) {
 					charset = Urls.getCharset(connection);

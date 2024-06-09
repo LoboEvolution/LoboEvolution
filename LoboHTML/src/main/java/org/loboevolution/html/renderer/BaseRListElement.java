@@ -56,10 +56,9 @@ class BaseRListElement extends RBlock {
 		this.listStyle = null;
 		super.applyStyle(availWidth, availHeight);
 		final Object rootNode = this.modelNode;
-		if (rootNode instanceof HTMLElementImpl) {
+		if (rootNode instanceof HTMLElementImpl rootElement) {
 
-			final HTMLElementImpl rootElement = (HTMLElementImpl) rootNode;
-			final CSSStyleDeclaration props = rootElement.getCurrentStyle();
+            final CSSStyleDeclaration props = rootElement.getCurrentStyle();
 			if (props != null) {
 				ListStyle listStyle = null;
 				final String listStyleText = props.getListStyle();

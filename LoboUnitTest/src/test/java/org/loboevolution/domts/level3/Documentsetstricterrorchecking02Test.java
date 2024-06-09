@@ -56,7 +56,7 @@ public class Documentsetstricterrorchecking02Test extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                newAttr = doc.createAttributeNS(nullValue, "dom:test");
+                doc.createAttributeNS(nullValue, "dom:test");
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NAMESPACE_ERR);
             }

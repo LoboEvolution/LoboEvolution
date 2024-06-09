@@ -92,14 +92,12 @@ public class SVGGradientElementImpl extends SVGStylableImpl implements SVGGradie
 	 * @return a {@link java.awt.Paint} object.
 	 */
 	public Paint gradient(final Element gradient, final Shape shape2d) {
-		if (gradient instanceof SVGRadialGradientElementImpl) {
-			final SVGRadialGradientElementImpl radial = (SVGRadialGradientElementImpl) gradient;
-			return radial(shape2d, radial, fractions(radial), colors(radial));
+		if (gradient instanceof SVGRadialGradientElementImpl radial) {
+            return radial(shape2d, radial, fractions(radial), colors(radial));
 		}
 
-		if (gradient instanceof SVGLinearGradientElementImpl) {
-			final SVGLinearGradientElementImpl linear = (SVGLinearGradientElementImpl) gradient;
-			return new LinearGradientPaint(linear.getX1().getBaseVal().getValue(),
+		if (gradient instanceof SVGLinearGradientElementImpl linear) {
+            return new LinearGradientPaint(linear.getX1().getBaseVal().getValue(),
 					linear.getY1().getBaseVal().getValue(), linear.getX2().getBaseVal().getValue(),
 					linear.getY2().getBaseVal().getValue(), fractions(linear), colors(linear));
 		}
@@ -129,9 +127,8 @@ public class SVGGradientElementImpl extends SVGStylableImpl implements SVGGradie
 		final ArrayList<Float> fractions = new ArrayList<>();
 		final NodeListImpl children = (NodeListImpl)elem.getChildNodes();
 		children.forEach(child -> {
-			if (child instanceof SVGStopElementImpl) {
-				final SVGStopElementImpl stop = (SVGStopElementImpl)child;
-				fractions.add(stop.getOffset().getBaseVal());
+			if (child instanceof SVGStopElementImpl stop) {
+                fractions.add(stop.getOffset().getBaseVal());
 			}
 		});
 		final float[] floatArray = new float[fractions.size()];
@@ -148,9 +145,8 @@ public class SVGGradientElementImpl extends SVGStylableImpl implements SVGGradie
 		final ArrayList<Color> colors = new ArrayList<>();
 		final NodeListImpl children = (NodeListImpl)elem.getChildNodes();
 		children.forEach(child -> {
-			if (child instanceof SVGStopElementImpl) {
-				final SVGStopElementImpl stop = (SVGStopElementImpl) child;
-				final Color stopColor = stop.getStopColor();
+			if (child instanceof SVGStopElementImpl stop) {
+                final Color stopColor = stop.getStopColor();
 				colors.add(stopColor);
 			}
 		});

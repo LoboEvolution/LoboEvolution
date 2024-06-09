@@ -179,21 +179,12 @@ public class StyleSheetRenderState implements RenderState {
 		}
 
 		final CSSValues aling = CSSValues.get(textAlign);
-		switch (aling) {
-		case CENTER:
-			axp = 50;
-			break;
-		case RIGHT:
-			axp = 100;
-			break;
-		case INHERIT:
-			axp = this.getPreviousRenderState().getAlignXPercent();
-			break;
-		case INITIAL:
-		default:
-			axp = 0;
-			break;
-		}
+        axp = switch (aling) {
+            case CENTER -> 50;
+            case RIGHT -> 100;
+            case INHERIT -> this.getPreviousRenderState().getAlignXPercent();
+            default -> 0;
+        };
 		this.alignXPercent = axp;
 		return axp;
 	}
@@ -440,54 +431,23 @@ public class StyleSheetRenderState implements RenderState {
 			display = CSSValues.get(displayTextTL);
 		}
 
-		switch (display) {
-		case BLOCK:
-			displayInt = DISPLAY_BLOCK;
-			break;
-		case NONE:
-			displayInt = DISPLAY_NONE;
-			break;
-		case LIST_ITEM:
-			displayInt = DISPLAY_LIST_ITEM;
-			break;
-		case TABLE:
-			displayInt = DISPLAY_TABLE;
-			break;
-		case TABLE_CELL:
-			displayInt = DISPLAY_TABLE_CELL;
-			break;
-		case TABLE_ROW:
-			displayInt = DISPLAY_TABLE_ROW;
-			break;
-		case TABLE_CAPTION:
-			displayInt = DISPLAY_TABLE_CAPTION;
-			break;
-		case TABLE_COLUMN:
-			displayInt = DISPLAY_TABLE_COLUMN;
-			break;
-		case TABLE_COLUMN_GROUP:
-			displayInt = DISPLAY_TABLE_COLUMN_GROUP;
-			break;
-		case INLINE:
-			displayInt = DISPLAY_INLINE;
-			break;
-		case INLINE_BLOCK:
-			displayInt = DISPLAY_INLINE_BLOCK;
-			break;
-		case INLINE_TABLE:
-			displayInt = DISPLAY_INLINE_TABLE;
-			break;
-		case FLEX:
-			displayInt = DISPLAY_FLEX_BOX;
-			break;	
-		case INHERIT:
-			displayInt = this.getPreviousRenderState().getDisplay();
-			break;
-		case INITIAL:
-		default:
-			displayInt = this.getDefaultDisplay();
-			break;
-		}
+        displayInt = switch (display) {
+            case BLOCK -> DISPLAY_BLOCK;
+            case NONE -> DISPLAY_NONE;
+            case LIST_ITEM -> DISPLAY_LIST_ITEM;
+            case TABLE -> DISPLAY_TABLE;
+            case TABLE_CELL -> DISPLAY_TABLE_CELL;
+            case TABLE_ROW -> DISPLAY_TABLE_ROW;
+            case TABLE_CAPTION -> DISPLAY_TABLE_CAPTION;
+            case TABLE_COLUMN -> DISPLAY_TABLE_COLUMN;
+            case TABLE_COLUMN_GROUP -> DISPLAY_TABLE_COLUMN_GROUP;
+            case INLINE -> DISPLAY_INLINE;
+            case INLINE_BLOCK -> DISPLAY_INLINE_BLOCK;
+            case INLINE_TABLE -> DISPLAY_INLINE_TABLE;
+            case FLEX -> DISPLAY_FLEX_BOX;
+            case INHERIT -> this.getPreviousRenderState().getDisplay();
+            default -> this.getDefaultDisplay();
+        };
 		this.iDisplay = displayInt;
 		return displayInt;
 	}
@@ -503,24 +463,13 @@ public class StyleSheetRenderState implements RenderState {
 		final String floatText = props == null ? null : props.getFloat();
 		final String floatTextTL = Strings.isBlank(floatText) ? "" : floatText;
 		final CSSValues flt = CSSValues.get(floatTextTL);
-		int floatValue;
-		switch (flt) {
-			case LEFT:
-				floatValue = FLOAT_LEFT;
-				break;
-			case RIGHT:
-				floatValue = FLOAT_RIGHT;
-				break;
-			case INHERIT:
-				floatValue = this.getPreviousRenderState().getFloat();
-				break;
-			case INITIAL:
-			case NONE:
-			default:
-				floatValue = FLOAT_NONE;
-				break;
-		}
-		this.cachedFloat = floatValue;
+		int floatValue = switch (flt) {
+            case LEFT -> FLOAT_LEFT;
+            case RIGHT -> FLOAT_RIGHT;
+            case INHERIT -> this.getPreviousRenderState().getFloat();
+            default -> FLOAT_NONE;
+        };
+        this.cachedFloat = floatValue;
 		return floatValue;
 	}
 
@@ -531,15 +480,10 @@ public class StyleSheetRenderState implements RenderState {
 		final String flexDir = props == null ? null : props.getFlexDirection();
 		final String flexDirText = Strings.isBlank(flexDir) ? "" : flexDir;
 		final CSSValues flt = CSSValues.get(flexDirText);
-		switch (flt) {
-		case COLUMN:
-		case COLUMN_REVERSE:
-		case ROW_REVERSE:
-		case ROW:
-			return flexDirText;
-		default:
-			return CSSValues.ROW.getValue();
-		}
+        return switch (flt) {
+            case COLUMN, COLUMN_REVERSE, ROW_REVERSE, ROW -> flexDirText;
+            default -> CSSValues.ROW.getValue();
+        };
 	}
 	
 	/** {@inheritDoc} */
@@ -650,27 +594,14 @@ public class StyleSheetRenderState implements RenderState {
 				}
 			}
 			final CSSValues overx = CSSValues.get(overflowText);
-			switch (overx) {
-			case SCROLL:
-				overflow = OVERFLOW_SCROLL;
-				break;
-			case AUTO:
-				overflow = OVERFLOW_AUTO;
-				break;
-			case HIDDEN:
-				overflow = OVERFLOW_HIDDEN;
-				break;
-			case VISIBLE:
-				overflow = OVERFLOW_VISIBLE;
-				break;
-			case INHERIT:
-				overflow = this.getPreviousRenderState().getOverflowX();
-				break;
-			case INITIAL:
-			default:
-				overflow = OVERFLOW_NONE;
-				break;
-			}
+            overflow = switch (overx) {
+                case SCROLL -> OVERFLOW_SCROLL;
+                case AUTO -> OVERFLOW_AUTO;
+                case HIDDEN -> OVERFLOW_HIDDEN;
+                case VISIBLE -> OVERFLOW_VISIBLE;
+                case INHERIT -> this.getPreviousRenderState().getOverflowX();
+                default -> OVERFLOW_NONE;
+            };
 		}
 		this.overflowX = overflow;
 		return overflow;
@@ -696,27 +627,14 @@ public class StyleSheetRenderState implements RenderState {
 				}
 			}
 			final CSSValues overy = CSSValues.get(overflowText);
-			switch (overy) {
-			case SCROLL:
-				overflow = OVERFLOW_SCROLL;
-				break;
-			case AUTO:
-				overflow = OVERFLOW_AUTO;
-				break;
-			case HIDDEN:
-				overflow = OVERFLOW_HIDDEN;
-				break;
-			case VISIBLE:
-				overflow = OVERFLOW_VISIBLE;
-				break;
-			case INHERIT:
-				overflow = this.getPreviousRenderState().getOverflowY();
-				break;
-			case INITIAL:
-			default:
-				overflow = OVERFLOW_NONE;
-				break;
-			}
+            overflow = switch (overy) {
+                case SCROLL -> OVERFLOW_SCROLL;
+                case AUTO -> OVERFLOW_AUTO;
+                case HIDDEN -> OVERFLOW_HIDDEN;
+                case VISIBLE -> OVERFLOW_VISIBLE;
+                case INHERIT -> this.getPreviousRenderState().getOverflowY();
+                default -> OVERFLOW_NONE;
+            };
 		}
 		this.overflowY = overflow;
 		return overflow;
@@ -775,25 +693,13 @@ public class StyleSheetRenderState implements RenderState {
 		final String positionText = props == null ? null : props.getPosition();
 		final String positionTextTL = Strings.isBlank(positionText) ? "" : positionText;
 		final CSSValues pos = CSSValues.get(positionTextTL);
-		switch (pos) {
-		case ABSOLUTE:
-			position = POSITION_ABSOLUTE;
-			break;
-		case RELATIVE:
-			position = POSITION_RELATIVE;
-			break;
-		case FIXED:
-			position = POSITION_FIXED;
-			break;
-		case INHERIT:
-			position = this.getPreviousRenderState().getPosition();
-			break;
-		case STATIC:
-		case INITIAL:
-		default:
-			position = POSITION_STATIC;
-			break;
-		}
+        position = switch (pos) {
+            case ABSOLUTE -> POSITION_ABSOLUTE;
+            case RELATIVE -> POSITION_RELATIVE;
+            case FIXED -> POSITION_FIXED;
+            case INHERIT -> this.getPreviousRenderState().getPosition();
+            default -> POSITION_STATIC;
+        };
 
 		this.cachedPosition = position;
 		return position;
@@ -973,22 +879,12 @@ public class StyleSheetRenderState implements RenderState {
 		final String visibText = props == null ? null : props.getVisibility();
 		final String visibTextTL = Strings.isBlank(visibText) ? "" : visibText;
 		final CSSValues visy = CSSValues.get(visibTextTL);
-		switch (visy) {
-		case HIDDEN:
-			visibility = VISIBILITY_HIDDEN;
-			break;
-		case COLLAPSE:
-			visibility = VISIBILITY_COLLAPSE;
-			break;
-		case INHERIT:
-			visibility = this.getPreviousRenderState().getVisibility();
-			break;
-		case VISIBLE:
-		case INITIAL:
-		default:
-			visibility = VISIBILITY_VISIBLE;
-			break;
-		}
+        visibility = switch (visy) {
+            case HIDDEN -> VISIBILITY_HIDDEN;
+            case COLLAPSE -> VISIBILITY_COLLAPSE;
+            case INHERIT -> this.getPreviousRenderState().getVisibility();
+            default -> VISIBILITY_VISIBLE;
+        };
 		this.cachedVisibility = visibility;
 		return visibility;
 	}
@@ -1188,15 +1084,10 @@ public class StyleSheetRenderState implements RenderState {
 		final String boxSizing = props != null ? props.getBoxSizing() : "";
 		final String visibTextTL = Strings.isBlank(boxSizing) ? "" : boxSizing;
 		final CSSValues box = CSSValues.get(visibTextTL);
-		switch (box) {
-		case INHERIT:
-			return this.getPreviousRenderState().getBoxSizing();
-		case INITIAL:
-		case BORDER_BOX:
-		case CONTENT_BOX:
-		default:
-			return boxSizing;
-		}
+        return switch (box) {
+            case INHERIT -> this.getPreviousRenderState().getBoxSizing();
+            default -> boxSizing;
+        };
 
 	}
 
@@ -1252,67 +1143,27 @@ public class StyleSheetRenderState implements RenderState {
 			final String cursor = props.getPropertyValue("cursor");
 			final CSSValues key = CSSValues.get(cursor);
 
-			switch (key) {
-				case AUTO:
-				case TEXT_CSS:
-					prevCursorOpt = Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR);
-					break;
-				case CROSSHAIR:
-					prevCursorOpt = Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR);
-					break;
-				case E_RESIZE:
-				case EW_RESIZE:
-					prevCursorOpt = Cursor.getPredefinedCursor(Cursor.E_RESIZE_CURSOR);
-					break;
-				case MOVE:
-					prevCursorOpt = Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR);
-					break;
-				case N_RESIZE:
-					prevCursorOpt = Cursor.getPredefinedCursor(Cursor.N_RESIZE_CURSOR);
-					break;
-				case NE_RESIZE:
-				case NESW_RESIZE:
-					prevCursorOpt = Cursor.getPredefinedCursor(Cursor.NE_RESIZE_CURSOR);
-					break;
-				case NW_RESIZE:
-				case NWSE_RESIZE:
-					prevCursorOpt = Cursor.getPredefinedCursor(Cursor.NW_RESIZE_CURSOR);
-					break;
-				case GRAB:
-				case POINTER:
-					prevCursorOpt = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);
-					break;
-				case S_RESIZE:
-					prevCursorOpt = Cursor.getPredefinedCursor(Cursor.S_RESIZE_CURSOR);
-					break;
-				case SE_RESIZE:
-					prevCursorOpt = Cursor.getPredefinedCursor(Cursor.SE_RESIZE_CURSOR);
-					break;
-				case SW_RESIZE:
-					prevCursorOpt = Cursor.getPredefinedCursor(Cursor.SW_RESIZE_CURSOR);
-					break;
-				case W_RESIZE:
-					prevCursorOpt = Cursor.getPredefinedCursor(Cursor.W_RESIZE_CURSOR);
-					break;
-				case WAIT:
-				case PROGRESS:
-					prevCursorOpt = Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
-					break;
-				case ZOOM_IN:
-					prevCursorOpt =  toolkit.createCustomCursor(new ImageIcon(config.getResourceFile("zoomin.png")).getImage(), new Point(5,5), "zoomin");
-					break;
-				case ZOOM_OUT:
-					prevCursorOpt =  toolkit.createCustomCursor(new ImageIcon(config.getResourceFile("zoomout.png")).getImage(), new Point(5,5), "zoomout");
-					break;
-				case INHERIT:
-					prevCursorOpt = this.getPreviousRenderState().getCursor();
-					break;
-				case DEFAULT:
-				case INITIAL:
-				default:
-					prevCursorOpt = Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR);
-					break;
-			}
+            prevCursorOpt = switch (key) {
+                case AUTO, TEXT_CSS -> Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR);
+                case CROSSHAIR -> Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR);
+                case E_RESIZE, EW_RESIZE -> Cursor.getPredefinedCursor(Cursor.E_RESIZE_CURSOR);
+                case MOVE -> Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR);
+                case N_RESIZE -> Cursor.getPredefinedCursor(Cursor.N_RESIZE_CURSOR);
+                case NE_RESIZE, NESW_RESIZE -> Cursor.getPredefinedCursor(Cursor.NE_RESIZE_CURSOR);
+                case NW_RESIZE, NWSE_RESIZE -> Cursor.getPredefinedCursor(Cursor.NW_RESIZE_CURSOR);
+                case GRAB, POINTER -> Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);
+                case S_RESIZE -> Cursor.getPredefinedCursor(Cursor.S_RESIZE_CURSOR);
+                case SE_RESIZE -> Cursor.getPredefinedCursor(Cursor.SE_RESIZE_CURSOR);
+                case SW_RESIZE -> Cursor.getPredefinedCursor(Cursor.SW_RESIZE_CURSOR);
+                case W_RESIZE -> Cursor.getPredefinedCursor(Cursor.W_RESIZE_CURSOR);
+                case WAIT, PROGRESS -> Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
+                case ZOOM_IN ->
+                        toolkit.createCustomCursor(new ImageIcon(config.getResourceFile("zoomin.png")).getImage(), new Point(5, 5), "zoomin");
+                case ZOOM_OUT ->
+                        toolkit.createCustomCursor(new ImageIcon(config.getResourceFile("zoomout.png")).getImage(), new Point(5, 5), "zoomout");
+                case INHERIT -> this.getPreviousRenderState().getCursor();
+                default -> Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR);
+            };
 		}
 		return prevCursorOpt;
 	}

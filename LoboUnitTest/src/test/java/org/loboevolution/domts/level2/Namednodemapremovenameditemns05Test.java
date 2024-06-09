@@ -71,14 +71,12 @@ public class Namednodemapremovenameditemns05Test extends LoboUnitTest {
         assertNotNull(notations);
 
         try {
-            removedNode = entities.removeNamedItemNS(nullNS, "ent1");
+            entities.removeNamedItemNS(nullNS, "ent1");
             fail("entity_throw_DOMException");
 
         } catch (final DOMException ex) {
             switch (ex.getCode()) {
-                case 8:
-                    break;
-                case 7:
+                case 8, 7:
                     break;
                 default:
                     throw ex;
@@ -86,7 +84,7 @@ public class Namednodemapremovenameditemns05Test extends LoboUnitTest {
         }
 
         try {
-            removedNode = notations.removeNamedItemNS(nullNS, "notation1");
+            notations.removeNamedItemNS(nullNS, "notation1");
             fail("notation_throw_DOMException");
 
         } catch (final DOMException ex) {

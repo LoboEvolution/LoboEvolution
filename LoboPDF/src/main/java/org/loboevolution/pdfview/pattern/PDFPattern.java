@@ -80,7 +80,7 @@ public abstract class PDFPattern {
 
         // read the pattern transform matrix
         final PDFObject matrix = patternObj.getDictRef("Matrix");
-        AffineTransform xform = null;
+        AffineTransform xform;
         if (matrix == null) {
             xform = new AffineTransform();
         } else {
@@ -92,16 +92,11 @@ public abstract class PDFPattern {
             xform = new AffineTransform(elts);
         }
 
-        switch (type) {
-            case 1:
-                pattern = new PatternType1();
-                break;
-            case 2:
-                pattern = new PatternType2();
-                break;
-            default:
-                throw new PDFParseException("Unknown pattern type " + type);
-        }
+        pattern = switch (type) {
+            case 1 -> new PatternType1();
+            case 2 -> new PatternType2();
+            default -> throw new PDFParseException("Unknown pattern type " + type);
+        };
 
         // set the transform
         pattern.setTransform(xform);

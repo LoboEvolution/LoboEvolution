@@ -64,7 +64,7 @@ public class Nodeisdefaultnamespace05Test extends LoboUnitTest {
         rootNS = docElem.getNamespaceURI();
         rootName = docElem.getLocalName();
         domImpl = doc.getImplementation();
-        newDoc = domImpl.createDocument(rootNS, rootName, nullDocType);
+        newDoc = domImpl.createDocument(rootNS, rootName, null);
         elem = newDoc.getDocumentElement();
         isDefault = elem.isDefaultNamespace(rootNS);
         assertTrue(isDefault, "Nodeisdefaultnamespace05Assert3");

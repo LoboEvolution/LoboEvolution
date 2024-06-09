@@ -56,8 +56,8 @@ public class Textwholetext03Test extends LoboUnitTest {
         elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "p");
         text1 = doc.createTextNode("Text I");
         text2 = doc.createTextNode(" Text II");
-        appendedChild = elem.appendChild(text1);
-        appendedChild = elem.appendChild(text2);
+        elem.appendChild(text1);
+        elem.appendChild(text2);
         combinedText = text1.getWholeText();
         assertEquals("Text I Text II", combinedText, "Textwholetext03Assert2");
     }

@@ -57,8 +57,7 @@ public class RSSItemElementImpl extends HTMLElementImpl {
 		if (hasChildNodes()) {
 			final NodeListImpl children = (NodeListImpl)getChildNodes();
             for (final Node child : children) {
-                if (child instanceof RSSDrawable) {
-                    final RSSDrawable channel = (RSSDrawable) child;
+                if (child instanceof RSSDrawable channel) {
                     channel.draw(graphics, y);
                     y = y + 20;
                 }

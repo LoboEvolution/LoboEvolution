@@ -73,7 +73,7 @@ public class HcnamednodemapnotfounderrTest extends LoboUnitTest {
         attributes = testEmployee.getAttributes();
         boolean success = false;
         try {
-            removedNode = attributes.removeNamedItem("lang");
+            attributes.removeNamedItem("lang");
         } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
         }

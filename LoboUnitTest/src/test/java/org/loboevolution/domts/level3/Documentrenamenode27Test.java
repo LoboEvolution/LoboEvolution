@@ -58,8 +58,6 @@ public class Documentrenamenode27Test extends LoboUnitTest {
         final Node renamedCdata;
         final Node renamedPi;
         final Node renamedEntRef;
-        final DocumentType nullDocType = null;
-
         final Element docElem;
         final String rootNS;
         final String rootName;
@@ -68,7 +66,7 @@ public class Documentrenamenode27Test extends LoboUnitTest {
         rootNS = docElem.getNamespaceURI();
         rootName = docElem.getTagName();
         domImpl = doc.getImplementation();
-        newDoc = domImpl.createDocument(rootNS, rootName, nullDocType);
+        newDoc = domImpl.createDocument(rootNS, rootName, null);
         text = newDoc.createTextNode("text");
         comment = newDoc.createComment("comment");
         cdata = newDoc.createCDATASection("cdata");
@@ -78,7 +76,7 @@ public class Documentrenamenode27Test extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                renamedTxt = newDoc.renameNode(text, "http://www.w3.org/DOM/Test", "text");
+                newDoc.renameNode(text, "http://www.w3.org/DOM/Test", "text");
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
             }
@@ -88,7 +86,7 @@ public class Documentrenamenode27Test extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                renamedComment = newDoc.renameNode(comment, "http://www.w3.org/DOM/Test", "comment");
+                newDoc.renameNode(comment, "http://www.w3.org/DOM/Test", "comment");
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
             }
@@ -98,7 +96,7 @@ public class Documentrenamenode27Test extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                renamedCdata = newDoc.renameNode(cdata, "http://www.w3.org/DOM/Test", "cdata");
+                newDoc.renameNode(cdata, "http://www.w3.org/DOM/Test", "cdata");
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
             }
@@ -108,7 +106,7 @@ public class Documentrenamenode27Test extends LoboUnitTest {
 
         boolean success = false;
         try {
-            renamedPi = newDoc.renameNode(pi, "http://www.w3.org/DOM/Test", "pi");
+            newDoc.renameNode(pi, "http://www.w3.org/DOM/Test", "pi");
         } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
         }
@@ -117,7 +115,7 @@ public class Documentrenamenode27Test extends LoboUnitTest {
 
         success = false;
         try {
-            renamedEntRef = newDoc.renameNode(entref, "http://www.w3.org/DOM/Test", "entref");
+            newDoc.renameNode(entref, "http://www.w3.org/DOM/Test", "entref");
         } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
         }

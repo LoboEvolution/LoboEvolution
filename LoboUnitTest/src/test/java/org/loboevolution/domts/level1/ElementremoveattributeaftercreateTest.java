@@ -68,8 +68,8 @@ public class ElementremoveattributeaftercreateTest extends LoboUnitTest {
         elementList = doc.getElementsByTagName("address");
         testEmployee = (Element) elementList.item(2);
         newAttribute = doc.createAttribute("district");
-        districtAttr = testEmployee.setAttributeNode(newAttribute);
-        districtAttr = testEmployee.removeAttributeNode(newAttribute);
+        testEmployee.setAttributeNode(newAttribute);
+        testEmployee.removeAttributeNode(newAttribute);
         attributes = testEmployee.getAttributes();
         districtAttr = (Attr) attributes.getNamedItem("district");
         assertNull(districtAttr, "ElementremoveattributeaftercreateAssert2");

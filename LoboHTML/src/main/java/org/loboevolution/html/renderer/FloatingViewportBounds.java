@@ -57,11 +57,10 @@ class FloatingViewportBounds implements FloatingBounds {
 		if (other == this) {
 			return true;
 		}
-		if (!(other instanceof FloatingViewportBounds)) {
+		if (!(other instanceof FloatingViewportBounds olm)) {
 			return false;
 		}
-		final FloatingViewportBounds olm = (FloatingViewportBounds) other;
-		return olm.leftFloat == this.leftFloat && olm.y == this.y && olm.height == this.height
+        return olm.leftFloat == this.leftFloat && olm.y == this.y && olm.height == this.height
 				&& olm.offsetFromBorder == this.offsetFromBorder
 				&& java.util.Objects.equals(olm.prevBounds, this.prevBounds);
 	}

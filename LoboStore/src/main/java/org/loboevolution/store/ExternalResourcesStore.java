@@ -26,6 +26,7 @@
 
 package org.loboevolution.store;
 
+import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
 import java.sql.Connection;
@@ -82,7 +83,7 @@ public class ExternalResourcesStore {
 	}
 
 	public void saveCache(final String baseUrl, final String source, final String type) throws Exception {
-		final URL url = new URL(baseUrl);
+		final URL url = new URI(baseUrl).toURL();
 		final URLConnection con = url.openConnection();
 		final String eTag = con.getHeaderField("Etag");
 		final long lastModified = Urls.getExpiration(con, System.currentTimeMillis());

@@ -526,11 +526,6 @@ public class HTMLTableCellElementTest extends LoboUnitTest {
         checkHtmlAlert(html);
     }
 
-    /**
-     * Tests some obscure table cell CSS calculations required by the MochiKit tests.
-     *
-     * @throws Exception if an error occurs
-     */
     @Test
     @Alerts({"100,42", "90,36"})
     public void cellWidthHeightWithBorderCollapse() {
@@ -578,11 +573,6 @@ public class HTMLTableCellElementTest extends LoboUnitTest {
         checkHtmlAlert(html);
     }
 
-    /**
-     * Tests some obscure table cell CSS calculations required by the MochiKit tests.
-     *
-     * @throws Exception if an error occurs
-     */
     @Test
     @Alerts({"84,34", "84,34", "84,34", "82,32", "82,32", "82,32"})
     public void cellWidthHeightWithBorderCollapseSameCellLayout() {

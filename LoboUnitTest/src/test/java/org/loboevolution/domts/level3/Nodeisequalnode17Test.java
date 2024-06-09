@@ -41,11 +41,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isEqualNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-isEqualNode</a>
  */
 public class Nodeisequalnode17Test extends LoboUnitTest {
-
+    
     /**
      * Runs the test case.
-     *
-     * @throws Throwable Any uncaught exception causes test to fail
      */
     @Test
     public void runTest() {
@@ -67,7 +65,7 @@ public class Nodeisequalnode17Test extends LoboUnitTest {
         rootNS = docElem.getNamespaceURI();
         rootName = docElem.getTagName();
         domImpl = doc.getImplementation();
-        newDoc = domImpl.createDocument(rootNS, rootName, nullDocType);
+        newDoc = domImpl.createDocument(rootNS, rootName, null);
         attr1 = doc.createAttributeNS(nullNSURI, "root");
         attr2 = (Attr) newDoc.importNode(attr1, true);
         isEqual = attr1.isEqualNode(attr2);

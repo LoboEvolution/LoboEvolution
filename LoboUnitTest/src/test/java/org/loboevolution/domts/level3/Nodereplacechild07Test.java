@@ -61,7 +61,7 @@ public class Nodereplacechild07Test extends LoboUnitTest {
         elem = doc.createElementNS(rootNS, rootName);
 
         try {
-            replacedNode = doc.replaceChild(elem, docElem);
+            doc.replaceChild(elem, docElem);
 
         } catch (final DOMException ex) {
             switch (ex.getCode()) {

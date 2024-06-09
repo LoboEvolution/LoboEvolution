@@ -62,9 +62,9 @@ public class Nodesetuserdata08Test extends LoboUnitTest {
         entRef = doc.createEntityReference("delta");
         cData = doc.createCDATASection("CDATASection");
         /*Node */
-        retUserData = entRef.setUserData("Key1", doc, null);
+        entRef.setUserData("Key1", doc, null);
         /*Node */
-        retUserData = cData.setUserData("Key2", docElem, null);
+        cData.setUserData("Key2", docElem, null);
         returned1 = entRef.getUserData("Key1");
         returned2 = cData.getUserData("Key2");
         success = ((Node) /*DOMUserData */returned1).isEqualNode(((Node) /*DOMUserData */returned2));

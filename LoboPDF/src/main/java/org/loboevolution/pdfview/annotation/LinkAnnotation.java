@@ -58,7 +58,7 @@ import java.io.IOException;
 @Getter
 public class LinkAnnotation extends PDFAnnotation {
 
-    private PDFAction action;
+    private final PDFAction action;
 
     /**
      * **********************************************************************
@@ -84,7 +84,7 @@ public class LinkAnnotation extends PDFAnnotation {
             } else {
                 throw new PDFParseException(
                         "Could not parse link annotation (no Action or Destination found): "
-                                + annotObject.toString());
+                                + annotObject);
             }
         }
     }

@@ -32,6 +32,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.Serial;
 
 /**
  * The Class ThumbAction.
@@ -41,6 +42,7 @@ public class ThumbAction extends AbstractAction implements PropertyChangeListene
     /**
      * The Constant serialVersionUID.
      */
+    @Serial
     private static final long serialVersionUID = 1L;
     private final PDFViewer dialog;
     /**

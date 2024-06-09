@@ -97,9 +97,7 @@ public class ListStyle {
 			return null;
 		}
 		final StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < n; i++) {
-			sb.append(s);
-		}
+        sb.append(s.repeat(Math.max(0, n)));
 		return sb.toString();
 	}
 }

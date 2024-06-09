@@ -79,7 +79,7 @@ public class HcnodeinsertbeforeinvalidnodetypeTest extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                insertedNode = rootNode.insertBefore(newChild, refChild);
+                rootNode.insertBefore(newChild, refChild);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.HIERARCHY_REQUEST_ERR);
             }

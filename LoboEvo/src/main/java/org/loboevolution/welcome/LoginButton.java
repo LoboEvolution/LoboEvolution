@@ -29,6 +29,7 @@ package org.loboevolution.welcome;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.Serial;
 import java.util.HashMap;
 import javax.swing.JLabel;
 
@@ -49,7 +50,8 @@ import org.loboevolution.store.ToolsStore;
  */
 public class LoginButton extends JLabel {
 
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	private final LoboBackground lb = new LoboBackground();
 
@@ -116,7 +118,8 @@ public class LoginButton extends JLabel {
 	private Graphics2D get2dGraphics(final Graphics g) {
 		final Graphics2D g2 = (Graphics2D) g;
 		g2.addRenderingHints(new HashMap<RenderingHints.Key, Object>() {
-			private static final long serialVersionUID = 1L;
+			@Serial
+            private static final long serialVersionUID = 1L;
 			{
 				put(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 				put(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_LCD_HRGB);

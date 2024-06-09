@@ -78,7 +78,7 @@ public class Infoset07Test extends LoboUnitTest {
 
         boolean success = false;
         try {
-            attr = doc.createAttribute("LegalNameࢎ");
+            doc.createAttribute("LegalNameࢎ");
         } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
         }

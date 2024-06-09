@@ -40,12 +40,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * The createDocument method should throw a NAMESPACE_ERR if the qualifiedName has
  * a prefix that is xml and the namespaceURI is different from
- * http://www..w3.org/XML/1998/namespace.
+ * <a href="http://www..w3.org/XML/1998/namespace">...</a>.
  * <p>
  * Call the createDocument on this DOMImplementation with namespaceURI that is
- * http://www.w3.org/xml/1998/namespace and a qualifiedName that has the prefix xml
+ * <a href="http://www.w3.org/xml/1998/namespace">...</a> and a qualifiedName that has the prefix xml
  * Check if the NAMESPACE_ERR is thrown.
-
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#Level-2-Core-DOM-createDocument">http://www.w3.org/TR/DOM-Level-2-Core/core#Level-2-Core-DOM-createDocument</a>
  */
 public class Domimplementationcreatedocument05Test extends LoboUnitTest {

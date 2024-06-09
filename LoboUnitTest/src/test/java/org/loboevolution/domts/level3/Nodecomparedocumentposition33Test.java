@@ -61,7 +61,7 @@ public class Nodecomparedocumentposition33Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "br");
         attr = doc.createAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:lang");
-        replacedAttr = elem.setAttributeNodeNS(attr);
+        elem.setAttributeNodeNS(attr);
         position4 = elem.compareDocumentPosition(attr);
         assertEquals(20, position4, "Nodecomparedocumentposition33Assert3");
         position5 = attr.compareDocumentPosition(elem);

@@ -73,28 +73,18 @@ public class PDFAction {
         }
 
         // create the action based on the type
-        PDFAction action = null;
+        PDFAction action;
         final String type = typeObj.getStringValue();
-        switch (type) {
-            case "GoTo":
-                action = new GoToAction(obj, root);
-                break;
-            case "GoToE":
-                action = new GoToEAction(obj, root);
-                break;
-            case "GoToR":
-                action = new GoToRAction(obj, root);
-                break;
-            case "URI":
-                action = new UriAction(obj, root);
-                break;
-            case "Launch":
-                action = new LaunchAction(obj, root);
-                break;
-            default:
-                /** [JK FIXME: Implement other action types! ] */
-                throw new PDFParseException("Unknown Action type: " + type);
-        }
+        action = switch (type) {
+            case "GoTo" -> new GoToAction(obj, root);
+            case "GoToE" -> new GoToEAction(obj, root);
+            case "GoToR" -> new GoToRAction(obj, root);
+            case "URI" -> new UriAction(obj, root);
+            case "Launch" -> new LaunchAction(obj, root);
+            default ->
+            /** [JK FIXME: Implement other action types! ] */
+                    throw new PDFParseException("Unknown Action type: " + type);
+        };
 
         // figure out if there is a next action
         final PDFObject nextObj = obj.getDictRef("Next");

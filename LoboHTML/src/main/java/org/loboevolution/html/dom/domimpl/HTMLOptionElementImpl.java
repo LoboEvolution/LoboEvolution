@@ -108,9 +108,8 @@ public class HTMLOptionElementImpl extends HTMLElementImpl implements HTMLOption
 	@Override
 	public Boolean isSelected() {
 		final Object parent = getParentNode();
-		if (parent instanceof HTMLSelectElement) {
-			final HTMLSelectElement selectElement = (HTMLSelectElement) parent;
-			if (selectElement.isMultiple()) {
+		if (parent instanceof HTMLSelectElement selectElement) {
+            if (selectElement.isMultiple()) {
 				return this.selected != null || getAttributeAsBoolean("selected");
 			} else {
 				if (selected == null) {

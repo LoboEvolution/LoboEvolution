@@ -75,7 +75,7 @@ public class NamednodemapsetnameditemTest extends LoboUnitTest {
         testAddress = (Element) elementList.item(1);
         newAttribute = doc.createAttribute("district");
         attributes = testAddress.getAttributes();
-        setNode = attributes.setNamedItem(newAttribute);
+        attributes.setNamedItem(newAttribute);
         districtNode = (Attr) attributes.getNamedItem("district");
         attrName = districtNode.getNodeName();
         assertEquals("district", attrName, "NamednodemapsetnameditemAssert1");

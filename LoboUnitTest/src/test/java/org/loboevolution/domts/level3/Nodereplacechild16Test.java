@@ -54,8 +54,8 @@ public class Nodereplacechild16Test extends LoboUnitTest {
         elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "dom3:p");
         docFrag = doc.createDocumentFragment();
         txt = doc.createTextNode("Comment");
-        appendedChild = docFrag.appendChild(txt);
-        appendedChild = docFrag.appendChild(elem);
+        docFrag.appendChild(txt);
+        docFrag.appendChild(elem);
         replaced = (Text) docFrag.replaceChild(txt, elem);
         nodeName = replaced.getNodeName();
         assertEquals("dom3:p", nodeName, "Nodereplacechild16Assert2");

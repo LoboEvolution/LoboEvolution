@@ -72,7 +72,7 @@ public class Nodereplacechild21Test extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                replacedChild = docType.replaceChild(notation, ent);
+                docType.replaceChild(notation, ent);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }
@@ -82,7 +82,7 @@ public class Nodereplacechild21Test extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                replacedChild = docType.replaceChild(ent, docType);
+                docType.replaceChild(ent, docType);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }

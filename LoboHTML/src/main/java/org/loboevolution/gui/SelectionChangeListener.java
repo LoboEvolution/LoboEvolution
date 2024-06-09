@@ -30,10 +30,8 @@ import java.util.EventListener;
 
 /**
  * Receives selection change events.
- *
  * Author J. H. S.
  * @see HtmlPanel#addSelectionChangeListener(SelectionChangeListener)
- *
  */
 public interface SelectionChangeListener extends EventListener {
 	/**

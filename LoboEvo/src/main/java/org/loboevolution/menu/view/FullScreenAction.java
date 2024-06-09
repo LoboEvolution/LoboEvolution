@@ -30,6 +30,7 @@ import java.awt.DisplayMode;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.event.ActionEvent;
+import java.io.Serial;
 
 import javax.swing.AbstractAction;
 
@@ -46,7 +47,8 @@ public class FullScreenAction extends AbstractAction {
 
 	private static final DisplayMode oldDisplayMode = device.getDisplayMode();
 
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	private int countFs = 0;
 
@@ -67,7 +69,7 @@ public class FullScreenAction extends AbstractAction {
 		if (this.countFs == 0) {
 			this.countFs = this.countFs + 1;
 			device.setFullScreenWindow(this.frame);
-			if (device != null && device.isDisplayChangeSupported()) {
+			if (device.isDisplayChangeSupported()) {
 				device.setDisplayMode(newDisplayMode);
 			}
 		} else {

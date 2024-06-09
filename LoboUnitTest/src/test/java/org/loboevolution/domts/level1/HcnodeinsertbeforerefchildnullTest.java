@@ -72,9 +72,9 @@ public class HcnodeinsertbeforerefchildnullTest extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("p");
         employeeNode = elementList.item(1);
-        childList = employeeNode.getChildNodes();
+        employeeNode.getChildNodes();
         newChild = doc.createElement("br");
-        insertedNode = employeeNode.insertBefore(newChild, refChild);
+        employeeNode.insertBefore(newChild, refChild);
         child = employeeNode.getLastChild();
         childName = child.getNodeName();
         assertEquals("BR", childName, "HcnodeinsertbeforerefchildnullAssert1");

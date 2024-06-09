@@ -99,9 +99,8 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 		if (renderables != null) {
 			for (final Renderable rn : renderables) {
 		        final Renderable robj = (rn instanceof PositionedRenderable) ? ((PositionedRenderable) rn).getRenderable() : rn;
-				if (robj instanceof BoundableRenderable) {
-					final BoundableRenderable renderable = (BoundableRenderable) robj;
-					if (!inSelection) {
+				if (robj instanceof BoundableRenderable renderable) {
+                    if (!inSelection) {
 						final Rectangle bounds = renderable.getVisualBounds();
 						if (checkPoint1 != null && checkStartSelection(bounds, checkPoint1)) {
 							if (checkPoint2 != null) {
@@ -151,9 +150,8 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 		if (renderables != null) {
 			renderables.forEach(rn -> {
 				final Renderable r = (rn instanceof PositionedRenderable) ? ((PositionedRenderable) rn).getRenderable() : rn;
-				if (r instanceof BoundableRenderable) {
-					final BoundableRenderable br = (BoundableRenderable) r;
-					if (br instanceof RBlockViewport) {
+				if (r instanceof BoundableRenderable br) {
+                    if (br instanceof RBlockViewport) {
 						renderable.set(br);
 					}
 					if ((!br.isDelegated()) && br.contains(x, y)) {
@@ -261,9 +259,8 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 		if (renderables != null) {
 			for (final Renderable rn : renderables) {
 		        final Renderable robj = (rn instanceof PositionedRenderable) ? ((PositionedRenderable) rn).getRenderable() : rn;
-				if (robj instanceof BoundableRenderable) {
-					final BoundableRenderable renderable = (BoundableRenderable) robj;
-					final Rectangle bounds = renderable.getVisualBounds();
+				if (robj instanceof BoundableRenderable renderable) {
+                    final Rectangle bounds = renderable.getVisualBounds();
 					if (!inSelection) {
 						if (checkPoint1 != null && checkStartSelection(bounds, checkPoint1)) {
 							if (checkPoint2 != null) {
@@ -319,9 +316,8 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 		if (renderables != null) {
 			renderables.forEach(rn -> {
 		        final Renderable r = (rn instanceof PositionedRenderable) ? ((PositionedRenderable) rn).getRenderable() : rn;
-				if (r instanceof RCollection) {
-					final RCollection rc = (RCollection) r;
-					final Point or = rc.getOriginRelativeTo(this);
+				if (r instanceof RCollection rc) {
+                    final Point or = rc.getOriginRelativeTo(this);
 					rc.updateWidgetBounds(guiX + or.x, guiY + or.y);
 				}
 			});

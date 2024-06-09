@@ -58,7 +58,7 @@ public class DocumentinvalidcharacterexceptioncreateentrefTest extends LoboUnitT
         doc = sampleXmlFile("hc_staff.xml");
         boolean success = false;
         try {
-            badEntityRef = doc.createEntityReference("foo");
+            doc.createEntityReference("foo");
         } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
         }

@@ -27,6 +27,7 @@ package org.loboevolution.js;
 
 import org.mozilla.javascript.*;
 
+import java.io.Serial;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -38,7 +39,8 @@ import java.util.List;
  */
 public class JavaFunctionObject extends ScriptableObject implements Function {
 
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 	private final String className;
 	private final String methodName;
 	private final List<Method> methods = new ArrayList<>();

@@ -96,7 +96,7 @@ public class CreateAttributeNS03Test extends LoboUnitTest {
             {
                 boolean success = false;
                 try {
-                    newAttr = doc.createAttributeNS(namespaceURI, qualifiedName);
+                    doc.createAttributeNS(namespaceURI, qualifiedName);
                 } catch (final DOMException ex) {
                     success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
                 }

@@ -28,6 +28,7 @@ package org.loboevolution.menu.tools.developer;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.io.Serial;
 
 /**
  * The Class CloseAction.
@@ -35,7 +36,8 @@ import java.awt.event.ActionEvent;
 public class CloseAction extends AbstractAction {
 
 	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	private final transient DeveloperToolsWindow window;
 

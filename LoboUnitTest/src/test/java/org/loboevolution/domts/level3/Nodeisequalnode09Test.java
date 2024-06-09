@@ -62,12 +62,12 @@ public class Nodeisequalnode09Test extends LoboUnitTest {
         rootNS = docElem.getNamespaceURI();
         rootName = docElem.getLocalName();
         domImpl = doc.getImplementation();
-        newDoc = domImpl.createDocument(rootNS, rootName, nullDocType);
+        newDoc = domImpl.createDocument(rootNS, rootName, null);
         employeeList = doc.getElementsByTagName("em");
         elem1 = (Element) employeeList.item(0);
         elem2 = newDoc.createElementNS("http://www.w3.org/1999/xhtml", "em");
         text = newDoc.createTextNode("EMP0001");
-        appendedChild = elem2.appendChild(text);
+        elem2.appendChild(text);
         isEqual = elem1.isEqualNode(elem2);
         assertTrue(isEqual, "Nodeisequalnode09Assert2");
     }

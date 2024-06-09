@@ -395,7 +395,7 @@ public class FunctionType0 extends PDFFunction {
      * a far lower cost, since every element is not evaluated at every
      * iteration.  Instead, a walk of the most significant axes is performed,
      * following the algorithm desribed at:
-     * http://osl.iu.edu/~tveldhui/papers/MAScThesis/node33.html
+     * <a href="http://osl.iu.edu/~tveldhui/papers/MAScThesis/node33.html">...</a>
      *
      * @param encoded the encoded input values
      * @param od      the output dimension

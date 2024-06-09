@@ -515,56 +515,24 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
             if (rs == null) {
                 return this.element.getParentNode() == null ? "" : style.getDisplay() == null ? "" : style.getDisplay();
             } else {
-                switch (rs.getDefaultDisplay()) {
-                    case RenderState.DISPLAY_BLOCK:
-                        display = CSSValues.BLOCK;
-                        break;
-                    case RenderState.DISPLAY_NONE:
-                        display = CSSValues.NONE;
-                        break;
-                    case RenderState.DISPLAY_LIST_ITEM:
-                        display = CSSValues.LIST_ITEM;
-                        break;
-                    case RenderState.DISPLAY_TABLE:
-                        display = CSSValues.TABLE;
-                        break;
-                    case RenderState.DISPLAY_TABLE_CELL:
-                        display = CSSValues.TABLE_CELL;
-                        break;
-                    case RenderState.DISPLAY_TABLE_ROW:
-                        display = CSSValues.TABLE_ROW;
-                        break;
-                    case RenderState.DISPLAY_TABLE_CAPTION:
-                        display = CSSValues.TABLE_CAPTION;
-                        break;
-                    case RenderState.DISPLAY_TABLE_COLUMN:
-                        display = CSSValues.TABLE_COLUMN;
-                        break;
-                    case RenderState.DISPLAY_TABLE_FOOTER_GROUP:
-                        display = CSSValues.TABLE_FOOTER_GROUP;
-                        break;
-                    case RenderState.DISPLAY_TABLE_HEADER_GROUP:
-                        display = CSSValues.TABLE_HEADER_GROUP;
-                        break;
-                    case RenderState.DISPLAY_TABLE_COLUMN_GROUP:
-                        display = CSSValues.TABLE_COLUMN_GROUP;
-                        break;
-                    case RenderState.DISPLAY_TABLE_ROW_GROUP:
-                        display = CSSValues.TABLE_ROW_GROUP;
-                        break;
-                    case RenderState.DISPLAY_INLINE_BLOCK:
-                        display = CSSValues.INLINE_BLOCK;
-                        break;
-                    case RenderState.DISPLAY_INLINE_TABLE:
-                        display = CSSValues.INLINE_TABLE;
-                        break;
-                    case RenderState.DISPLAY_FLEX_BOX:
-                        display = CSSValues.FLEX;
-                        break;
-                    default:
-                        display = CSSValues.INLINE;
-                        break;
-                }
+                display = switch (rs.getDefaultDisplay()) {
+                    case RenderState.DISPLAY_BLOCK -> CSSValues.BLOCK;
+                    case RenderState.DISPLAY_NONE -> CSSValues.NONE;
+                    case RenderState.DISPLAY_LIST_ITEM -> CSSValues.LIST_ITEM;
+                    case RenderState.DISPLAY_TABLE -> CSSValues.TABLE;
+                    case RenderState.DISPLAY_TABLE_CELL -> CSSValues.TABLE_CELL;
+                    case RenderState.DISPLAY_TABLE_ROW -> CSSValues.TABLE_ROW;
+                    case RenderState.DISPLAY_TABLE_CAPTION -> CSSValues.TABLE_CAPTION;
+                    case RenderState.DISPLAY_TABLE_COLUMN -> CSSValues.TABLE_COLUMN;
+                    case RenderState.DISPLAY_TABLE_FOOTER_GROUP -> CSSValues.TABLE_FOOTER_GROUP;
+                    case RenderState.DISPLAY_TABLE_HEADER_GROUP -> CSSValues.TABLE_HEADER_GROUP;
+                    case RenderState.DISPLAY_TABLE_COLUMN_GROUP -> CSSValues.TABLE_COLUMN_GROUP;
+                    case RenderState.DISPLAY_TABLE_ROW_GROUP -> CSSValues.TABLE_ROW_GROUP;
+                    case RenderState.DISPLAY_INLINE_BLOCK -> CSSValues.INLINE_BLOCK;
+                    case RenderState.DISPLAY_INLINE_TABLE -> CSSValues.INLINE_TABLE;
+                    case RenderState.DISPLAY_FLEX_BOX -> CSSValues.FLEX;
+                    default -> CSSValues.INLINE;
+                };
             }
             return this.element.getParentNode() == null ? "" : display.getValue();
         }

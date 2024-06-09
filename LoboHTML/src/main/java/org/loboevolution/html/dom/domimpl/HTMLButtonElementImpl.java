@@ -161,9 +161,8 @@ public class HTMLButtonElementImpl extends HTMLElementImpl implements HTMLButton
 		if (form != null && form.hasChildNodes()) {
 			final NodeListImpl childNodes = (NodeListImpl) form.getChildNodes();
 			childNodes.forEach(node -> {
-				if (node instanceof HTMLInputElementImpl) {
-					final HTMLInputElementImpl hie = (HTMLInputElementImpl) node;
-					hie.resetInput();
+				if (node instanceof HTMLInputElementImpl hie) {
+                    hie.resetInput();
 				}
 			});
 		}

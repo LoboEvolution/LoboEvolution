@@ -63,7 +63,7 @@ public class Domconfigschemalocation1Test extends LoboUnitTest {
 
         final String sampleSchemaLocation = "http://www.example.com/schemas/sampleschema.xsd";
         domImpl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(), true));
-        doc = domImpl.createDocument("http://www.w3.org/1999/xhtml", "html", nullDocType);
+        doc = domImpl.createDocument("http://www.w3.org/1999/xhtml", "html", null);
         domConfig = doc.getDomConfig();
         canSet = domConfig.canSetParameter(parameter, Boolean.TRUE);
         assertFalse(canSet, "Domconfigschemalocation1Assert1");

@@ -49,8 +49,6 @@ public class Documentgetstricterrorchecking02Test extends LoboUnitTest {
         final Document newDoc;
         final DOMImplementation domImpl;
         final boolean strictErrorCheckingValue;
-        final DocumentType nullDocType = null;
-
         final Element docElem;
         final String rootNS;
         final String rootName;
@@ -59,7 +57,7 @@ public class Documentgetstricterrorchecking02Test extends LoboUnitTest {
         rootNS = docElem.getNamespaceURI();
         rootName = docElem.getTagName();
         domImpl = doc.getImplementation();
-        newDoc = domImpl.createDocument(rootNS, rootName, nullDocType);
+        newDoc = domImpl.createDocument(rootNS, rootName, null);
         strictErrorCheckingValue = newDoc.getStrictErrorChecking();
         assertTrue(strictErrorCheckingValue, "Documentgetstricterrorchecking02Assert2");
     }

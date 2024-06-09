@@ -937,12 +937,11 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
 
         // get the color of the current paint
         final Paint paint = state.fillPaint.getPaint();
-        if (!(paint instanceof Color)) {
+        if (!(paint instanceof Color col)) {
             // TODO - support other types of Paint
             return bi;
         }
 
-        final Color col = (Color) paint;
         final ColorModel colorModel = bi.getColorModel();
         if (colorModel instanceof IndexColorModel) {
             final int mapSize = ((IndexColorModel) colorModel).getMapSize();

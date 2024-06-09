@@ -32,6 +32,7 @@ import org.loboevolution.pdfview.function.postscript.operation.PostScriptOperati
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.List;
@@ -41,7 +42,7 @@ import java.util.List;
  * written in a small subset of the PostScript language.
  * This reference is taken from the (3200-1:2008:7.10.5)<p>
  * <p>
- * http://www.adobe.com/devnet/acrobat/pdfs/adobe_supplement_iso32000.pdf
+ * <a href="http://www.adobe.com/devnet/acrobat/pdfs/adobe_supplement_iso32000.pdf">...</a>
  * </p>
  */
 public class FunctionType4 extends PDFFunction {
@@ -74,7 +75,7 @@ public class FunctionType4 extends PDFFunction {
 
         final byte[] byteA = new byte[buf.remaining()];
         buf.get(byteA);
-        final String scriptContent = new String(byteA, "UTF-8");
+        final String scriptContent = new String(byteA, StandardCharsets.UTF_8);
         this.tokens = new PostScriptParser().parse(scriptContent);
     }
 

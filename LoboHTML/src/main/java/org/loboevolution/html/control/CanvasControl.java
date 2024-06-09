@@ -30,6 +30,7 @@ import org.loboevolution.html.dom.domimpl.HTMLCanvasElementImpl;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
+import java.io.Serial;
 
 /**
  * The Class CanvasControl.
@@ -37,7 +38,8 @@ import java.awt.geom.AffineTransform;
 public class CanvasControl extends BaseControl {
 
 	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 	
 	/** The canvas. */
 	private final HTMLCanvasElementImpl canvas;

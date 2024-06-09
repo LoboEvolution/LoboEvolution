@@ -53,7 +53,7 @@ public class Nodelookupnamespaceuri10Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         parent = doc.createElementNS("http://www.w3.org/1999/xhtml", "xhtml:body");
         child = doc.createElement("p");
-        appendedChild = parent.appendChild(child);
+        parent.appendChild(child);
         namespaceURI = child.lookupNamespaceURI("xhtml");
         assertEquals("http://www.w3.org/1999/xhtml", namespaceURI, "Nodelookupnamespaceuri10Assert2");
     }

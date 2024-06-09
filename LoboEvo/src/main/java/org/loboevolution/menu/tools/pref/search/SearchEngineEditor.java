@@ -34,6 +34,8 @@ import org.loboevolution.gui.FormField;
 import org.loboevolution.gui.FormPanel;
 import org.loboevolution.store.SearchEngineStore;
 
+import java.io.Serial;
+
 /**
  * <p>SearchEngineEditor class.</p>
  *
@@ -43,7 +45,8 @@ import org.loboevolution.store.SearchEngineStore;
 public class SearchEngineEditor extends AbstractItemEditor<SearchEngineStore> {
 
 	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	/** The base url field. */
 	private final transient FormField baseUrlField = new FormField(FieldType.TEXT);

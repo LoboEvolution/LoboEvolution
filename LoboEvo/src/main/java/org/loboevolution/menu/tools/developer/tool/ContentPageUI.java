@@ -42,6 +42,7 @@ import org.loboevolution.net.HttpNetwork;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,6 +53,7 @@ import java.util.List;
 public class ContentPageUI extends AbstractToolsUI {
 
     /** The Constant serialVersionUID. */
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**

@@ -67,7 +67,7 @@ public class DocumentgetelementsbytagnameNS02Test extends LoboUnitTest {
         doc = sampleXmlFile("staffNS.xml");
         docElem = doc.getDocumentElement();
         element = doc.createElementNS("test", "employeeId");
-        appendedChild = docElem.appendChild(element);
+        docElem.appendChild(element);
         childList = doc.getElementsByTagNameNS("*", "employeeId");
         assertEquals(6, childList.getLength());
     }

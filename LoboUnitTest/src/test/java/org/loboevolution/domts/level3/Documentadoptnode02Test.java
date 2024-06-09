@@ -59,8 +59,6 @@ public class Documentadoptnode02Test extends LoboUnitTest {
         final int nodeType;
         final String nodeValue;
         final boolean isSpecified;
-        final DocumentType nullDocType = null;
-
         final Text firstChild;
         final String firstChildValue;
         final EntityReference secondChild;
@@ -74,7 +72,7 @@ public class Documentadoptnode02Test extends LoboUnitTest {
         rootName = docElem.getTagName();
         rootNS = docElem.getNamespaceURI();
         domImpl = doc.getImplementation();
-        newDoc = domImpl.createDocument(rootNS, rootName, nullDocType);
+        newDoc = domImpl.createDocument(rootNS, rootName, null);
         childList = doc.getElementsByTagName("acronym");
         element = (Element) childList.item(3);
         attr = element.getAttributeNode("class");

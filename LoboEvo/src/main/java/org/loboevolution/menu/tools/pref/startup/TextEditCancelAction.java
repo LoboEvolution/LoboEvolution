@@ -27,6 +27,7 @@
 package org.loboevolution.menu.tools.pref.startup;
 
 import java.awt.event.ActionEvent;
+import java.io.Serial;
 
 import javax.swing.AbstractAction;
 
@@ -39,7 +40,8 @@ import javax.swing.AbstractAction;
 public class TextEditCancelAction extends AbstractAction {
 
 	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	/** The search. */
 	private final transient TextEdit search;

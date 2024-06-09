@@ -50,8 +50,6 @@ public class Documentadoptnode34Test extends LoboUnitTest {
         final Node newComment;
         final Node adoptedComment;
         final String nodeValue;
-        final DocumentType nullDocType = null;
-
         final Element docElem;
         final String rootNS;
         final String rootName;
@@ -60,7 +58,7 @@ public class Documentadoptnode34Test extends LoboUnitTest {
         rootNS = docElem.getNamespaceURI();
         rootName = docElem.getTagName();
         domImpl = doc.getImplementation();
-        newDoc = domImpl.createDocument(rootNS, rootName, nullDocType);
+        newDoc = domImpl.createDocument(rootNS, rootName, null);
         newComment = newDoc.createComment("Document.adoptNode test for a COMMENT_NODE");
         adoptedComment = newDoc.adoptNode(newComment);
 

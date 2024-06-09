@@ -64,7 +64,7 @@ public class Textiselementcontentwhitespace04Test extends LoboUnitTest {
             pElem = (Element) pList.item(0);
             textNode = (Text) pElem.getFirstChild();
             blankNode = doc.createTextNode("   ");
-            replacedNode = pElem.replaceChild(blankNode, textNode);
+            pElem.replaceChild(blankNode, textNode);
             doc.normalizeDocument();
             textNode = (Text) pElem.getFirstChild();
             isElemContentWhitespace = textNode.isElementContentWhitespace();

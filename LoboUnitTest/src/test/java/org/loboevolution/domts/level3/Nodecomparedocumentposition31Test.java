@@ -61,7 +61,7 @@ public class Nodecomparedocumentposition31Test extends LoboUnitTest {
         positionList = doc.getElementsByTagName("code");
         code = (Element) positionList.item(1);
         newElem = doc.createElementNS("http://www.w3.org/1999/xhtml", "br");
-        appendedChild = code.appendChild(newElem);
+        code.appendChild(newElem);
         namePosition = strong.compareDocumentPosition(newElem);
         assertEquals(4, namePosition, "Nodecomparedocumentposition31Assert2");
         elemPosition = newElem.compareDocumentPosition(strong);

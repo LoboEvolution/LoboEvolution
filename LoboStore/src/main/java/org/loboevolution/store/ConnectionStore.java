@@ -26,6 +26,7 @@
 
 package org.loboevolution.store;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.net.InetSocketAddress;
 import java.net.PasswordAuthentication;
@@ -50,6 +51,7 @@ public class ConnectionStore implements QueryStore, Serializable {
 	/** The Constant DB_PATH. */
 	private static final String DB_PATH = DatabseSQLite.getDatabaseDirectory();
 
+	@Serial
 	private static final long serialVersionUID = 1L;
 
 	/** The authenticated. */

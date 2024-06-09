@@ -41,9 +41,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * are valid and correctly formed.
  * <p>
  * Invoke method createElementNS(namespaceURI,qualifiedName on this document
- * with namespaceURI as "http://www.nist.gov" and qualifiedName as "gov:faculty".
+ * with namespaceURI as "<a href="http://www.nist.gov">...</a>" and qualifiedName as "gov:faculty".
  * Method should return a new Element object whose name is "gov:faculty".
-
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-104682815">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-104682815</a>
  */
 public class CreateElementNS05Test extends LoboUnitTest {

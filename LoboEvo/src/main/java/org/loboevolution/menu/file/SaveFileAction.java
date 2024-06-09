@@ -30,6 +30,7 @@ import java.awt.event.ActionEvent;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.OutputStream;
+import java.io.Serial;
 import java.nio.file.Files;
 
 import javax.swing.AbstractAction;
@@ -48,6 +49,7 @@ import org.loboevolution.net.HttpNetwork;
 @Slf4j
 public class SaveFileAction extends AbstractAction {
 
+	@Serial
 	private static final long serialVersionUID = 1L;
 
 	private final BrowserFrame frame;
@@ -116,7 +118,7 @@ public class SaveFileAction extends AbstractAction {
 					return file;
 				}
 			}
-			file = new File(file.toString() + exts[0]);
+			file = new File(file + exts[0]);
 		}
 		return file;
 	}

@@ -29,6 +29,7 @@ package org.loboevolution.download;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.io.File;
+import java.io.Serial;
 
 /**
  * <p>ChoiceFolderDownloadAction class.</p>
@@ -38,6 +39,7 @@ import java.io.File;
  */
 public class ChoiceFolderDownloadAction extends AbstractAction {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     private final DownloadWindow action;

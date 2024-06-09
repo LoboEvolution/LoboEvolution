@@ -68,7 +68,7 @@ public class Documentimportnode09Test extends LoboUnitTest {
         docFragment = doc.createDocumentFragment();
         childList = doc.getElementsByTagNameNS("*", "address");
         addressNode = childList.item(0);
-        appendedChild = docFragment.appendChild(addressNode);
+        docFragment.appendChild(addressNode);
         importedDocFrag = doc.importNode(docFragment, false);
         success = importedDocFrag.hasChildNodes();
         assertFalse(success);

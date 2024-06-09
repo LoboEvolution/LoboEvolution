@@ -31,6 +31,7 @@ package org.loboevolution.html.renderer;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.io.Serial;
 import java.util.Collection;
 
 /**
@@ -40,7 +41,8 @@ import java.util.Collection;
 @Data
 class OverflowException extends Exception {
 
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	private final Collection<Renderable> renderables;
 

@@ -39,6 +39,7 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 import java.awt.*;
+import java.io.Serial;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Base64;
@@ -103,7 +104,8 @@ public class InputPassword extends BasicInput {
 	
 	private final class LimitedDocument extends PlainDocument {
 
-		private static final long serialVersionUID = 1L;
+		@Serial
+        private static final long serialVersionUID = 1L;
 
 		@Override
 		public void insertString(final int offs, final String str, final AttributeSet a) throws BadLocationException {

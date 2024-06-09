@@ -63,7 +63,7 @@ public class Nodecomparedocumentposition05Test extends LoboUnitTest {
         rootName = docElem.getTagName();
         rootNS = docElem.getNamespaceURI();
         domImpl = doc.getImplementation();
-        newDoc = domImpl.createDocument(rootNS, rootName, nullDocType);
+        newDoc = domImpl.createDocument(rootNS, rootName, null);
         documentPosition1 = doc.compareDocumentPosition(newDoc);
         assertEquals(33 & 57, documentPosition1 & 57, "Nodecomparedocumentposition05Assert3");
         documentPosition2 = newDoc.compareDocumentPosition(doc);

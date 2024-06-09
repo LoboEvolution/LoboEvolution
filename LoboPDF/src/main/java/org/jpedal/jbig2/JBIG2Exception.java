@@ -25,11 +25,14 @@
  */
 package org.jpedal.jbig2;
 
+import java.io.Serial;
+
 /**
  * <p>JBIG2Exception class.</p>
  */
 public class JBIG2Exception extends Exception {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**

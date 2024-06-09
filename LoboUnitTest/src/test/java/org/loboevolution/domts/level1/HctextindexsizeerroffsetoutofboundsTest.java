@@ -74,7 +74,7 @@ public class HctextindexsizeerroffsetoutofboundsTest extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                splitNode = textNode.splitText(300);
+                textNode.splitText(300);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.INDEX_SIZE_ERR);
             }

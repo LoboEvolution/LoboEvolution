@@ -57,12 +57,12 @@ public class Nodereplacechild22Test extends LoboUnitTest {
         elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "dom3:p");
         entRefMain = doc.createEntityReference("delta");
         entRef = doc.createEntityReference("beta");
-        appendedChild = elem.appendChild(entRef);
+        elem.appendChild(entRef);
 
         {
             boolean success = false;
             try {
-                replacedChild = entRefMain.replaceChild(elem, entRef);
+                entRefMain.replaceChild(elem, entRef);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }
@@ -72,7 +72,7 @@ public class Nodereplacechild22Test extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                replacedChild = entRefMain.replaceChild(entRef, elem);
+                entRefMain.replaceChild(entRef, elem);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }
@@ -82,7 +82,7 @@ public class Nodereplacechild22Test extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                replacedChild = entRefMain.replaceChild(entRefMain, entRef);
+                entRefMain.replaceChild(entRefMain, entRef);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }

@@ -65,12 +65,12 @@ public class Namednodemapremovenameditemns03Test extends LoboUnitTest {
         element = doc.createElementNS("http://www.w3.org/DOM/Test", "root");
         attribute1 = doc.createAttributeNS("http://www.w3.org/DOM/L1", "L1:att");
 
-        newAttribute = element.setAttributeNodeNS(attribute1);
+        element.setAttributeNodeNS(attribute1);
         attribute2 = doc.createAttributeNS("http://www.w3.org/DOM/L2", "L2:att");
 
-        newAttribute = element.setAttributeNodeNS(attribute2);
+        element.setAttributeNodeNS(attribute2);
         attributes = element.getAttributes();
-        attribute = (Attr) attributes.removeNamedItemNS("http://www.w3.org/DOM/L1", "att");
+        attributes.removeNamedItemNS("http://www.w3.org/DOM/L1", "att");
         attribute = (Attr) attributes.getNamedItemNS("http://www.w3.org/DOM/L2", "att");
         nodeName = attribute.getNodeName();
         assertEquals("L2:att", nodeName);

@@ -49,12 +49,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration-getParameter">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration-getParameter</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration-setParameter">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMConfiguration-setParameter</a>
  */
-public class Domconfigcheckcharacternormalization1Test extends LoboUnitTest {
-
+public class Domconfigcheckcharacternormalization1Test extends LoboUnitTest {    
     /**
      * Runs the test case.
-     *
-     * @throws Throwable Any uncaught exception causes test to fail
      */
     @Test
     public void runTest() {
@@ -67,7 +64,7 @@ public class Domconfigcheckcharacternormalization1Test extends LoboUnitTest {
         boolean state;
         final String parameter = "cHeCk-character-normalization";
         domImpl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(), true));
-        doc = domImpl.createDocument("http://www.w3.org/1999/xhtml", "html", nullDocType);
+        doc = domImpl.createDocument("http://www.w3.org/1999/xhtml", "html", null);
         domConfig = doc.getDomConfig();
         state = ((Boolean) domConfig.getParameter(parameter));
         assertFalse(state, "Domconfigcheckcharacternormalization1Assert3");

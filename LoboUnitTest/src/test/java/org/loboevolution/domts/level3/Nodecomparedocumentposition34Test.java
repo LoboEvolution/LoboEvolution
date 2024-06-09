@@ -57,9 +57,9 @@ public class Nodecomparedocumentposition34Test extends LoboUnitTest {
         elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "br");
         txt = doc.createTextNode("TEXT");
         pi = doc.createProcessingInstruction("PIT", "PID");
-        appendedChild = elemMain.appendChild(txt);
-        appendedChild = elemMain.appendChild(elem);
-        appendedChild = elemMain.appendChild(pi);
+        elemMain.appendChild(txt);
+        elemMain.appendChild(elem);
+        elemMain.appendChild(pi);
         elementToTxtPosition = txt.compareDocumentPosition(elem);
         assertEquals(4, elementToTxtPosition, "Nodecomparedocumentposition34Assert2");
         txtToPiPosition = pi.compareDocumentPosition(txt);

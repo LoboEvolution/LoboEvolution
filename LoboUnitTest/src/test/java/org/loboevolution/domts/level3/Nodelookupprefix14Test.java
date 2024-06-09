@@ -60,8 +60,8 @@ public class Nodelookupprefix14Test extends LoboUnitTest {
         bodyElem = (Element) bodyList.item(0);
         elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "dom3:p");
         cdata = doc.createCDATASection("Text");
-        appendedChild = elem.appendChild(cdata);
-        appendedChild = bodyElem.appendChild(elem);
+        elem.appendChild(cdata);
+        bodyElem.appendChild(elem);
         prefix = cdata.lookupPrefix("http://www.w3.org/1999/xhtml");
         assertEquals("dom3", prefix, "Nodelookupprefix14Assert2");
     }

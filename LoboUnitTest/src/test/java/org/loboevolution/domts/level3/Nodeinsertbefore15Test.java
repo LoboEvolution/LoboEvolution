@@ -64,7 +64,7 @@ public class Nodeinsertbefore15Test extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                inserted = entRef.insertBefore(cdata, elemChild);
+                entRef.insertBefore(cdata, elemChild);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }
@@ -75,7 +75,7 @@ public class Nodeinsertbefore15Test extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                inserted = entRef.insertBefore(pi, elemChild);
+                entRef.insertBefore(pi, elemChild);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }
@@ -86,7 +86,7 @@ public class Nodeinsertbefore15Test extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                inserted = entRef.insertBefore(comment, elemChild);
+                entRef.insertBefore(comment, elemChild);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }
@@ -97,7 +97,7 @@ public class Nodeinsertbefore15Test extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                inserted = entRef.insertBefore(txt, elemChild);
+                entRef.insertBefore(txt, elemChild);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }
@@ -108,7 +108,7 @@ public class Nodeinsertbefore15Test extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                inserted = entRef.insertBefore(elem, elemChild);
+                entRef.insertBefore(elem, elemChild);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }

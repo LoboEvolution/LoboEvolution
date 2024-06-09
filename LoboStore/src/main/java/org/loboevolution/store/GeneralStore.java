@@ -30,6 +30,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.info.GeneralInfo;
 
 import java.awt.*;
+import java.io.Serial;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -62,6 +63,7 @@ public class GeneralStore implements Serializable {
 	private static final String NETWORK = "SELECT DISTINCT js, css, cookie, cache, navigation, image FROM NETWORK";
 
 	/** The Constant serialVersionUID. */
+	@Serial
 	private static final long serialVersionUID = 22574500070000402L;
 
 	private static final String SIZE = "SELECT DISTINCT width, height FROM SIZE";

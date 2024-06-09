@@ -165,41 +165,27 @@ public class SVGPreserveAspectRatioImpl implements SVGPreserveAspectRatio {
     }
 
     public static String getAlignString(final short align) {
-        switch (align) {
-            case SVG_PRESERVEASPECTRATIO_NONE:
-                return "none";
-            case SVG_PRESERVEASPECTRATIO_XMINYMIN:
-                return "xMinYMin";
-            case SVG_PRESERVEASPECTRATIO_XMIDYMIN:
-                return "xMidYMin";
-            case SVG_PRESERVEASPECTRATIO_XMAXYMIN:
-                return "xMaxYMin";
-            case SVG_PRESERVEASPECTRATIO_XMINYMID:
-                return "xMinYMid";
-            case SVG_PRESERVEASPECTRATIO_XMIDYMID:
-                return "xMidYMid";
-            case SVG_PRESERVEASPECTRATIO_XMAXYMID:
-                return "xMinYMax";
-            case SVG_PRESERVEASPECTRATIO_XMINYMAX:
-                return "xMidYMax";
-            case SVG_PRESERVEASPECTRATIO_XMIDYMAX:
-                return "xMidYMax";
-            case SVG_PRESERVEASPECTRATIO_XMAXYMAX:
-                return "xMaxYMax";
-            default:
-                return "xMidYMid";
-        }
+        return switch (align) {
+            case SVG_PRESERVEASPECTRATIO_NONE -> "none";
+            case SVG_PRESERVEASPECTRATIO_XMINYMIN -> "xMinYMin";
+            case SVG_PRESERVEASPECTRATIO_XMIDYMIN -> "xMidYMin";
+            case SVG_PRESERVEASPECTRATIO_XMAXYMIN -> "xMaxYMin";
+            case SVG_PRESERVEASPECTRATIO_XMINYMID -> "xMinYMid";
+            case SVG_PRESERVEASPECTRATIO_XMIDYMID -> "xMidYMid";
+            case SVG_PRESERVEASPECTRATIO_XMAXYMID -> "xMinYMax";
+            case SVG_PRESERVEASPECTRATIO_XMINYMAX -> "xMidYMax";
+            case SVG_PRESERVEASPECTRATIO_XMIDYMAX -> "xMidYMax";
+            case SVG_PRESERVEASPECTRATIO_XMAXYMAX -> "xMaxYMax";
+            default -> "xMidYMid";
+        };
     }
 
     public static String getMeetOrSliceString(final short meetOrSlice) {
-        switch (meetOrSlice) {
-            case SVG_MEETORSLICE_MEET:
-                return "meet";
-            case SVG_MEETORSLICE_SLICE:
-                return "slice";
-            default:
-                return "meet";
-        }
+        return switch (meetOrSlice) {
+            case SVG_MEETORSLICE_MEET -> "meet";
+            case SVG_MEETORSLICE_SLICE -> "slice";
+            default -> "meet";
+        };
     }
 
     @Override

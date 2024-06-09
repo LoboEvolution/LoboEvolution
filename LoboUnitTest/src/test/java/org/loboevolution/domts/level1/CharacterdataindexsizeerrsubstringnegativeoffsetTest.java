@@ -72,7 +72,7 @@ public class CharacterdataindexsizeerrsubstringnegativeoffsetTest extends LoboUn
         {
             boolean success = false;
             try {
-                badString = child.substringData(-5, 3);
+                child.substringData(-5, 3);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.INDEX_SIZE_ERR);
             }

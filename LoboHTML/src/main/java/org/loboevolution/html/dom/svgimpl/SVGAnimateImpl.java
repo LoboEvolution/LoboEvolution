@@ -35,6 +35,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.Serial;
 import java.util.StringTokenizer;
 
 /**
@@ -45,7 +46,8 @@ import java.util.StringTokenizer;
  */
 public class SVGAnimateImpl extends JComponent implements ActionListener {
 
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	private int counter;
 	

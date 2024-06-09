@@ -52,8 +52,6 @@ public class Documentrenamenode08Test extends LoboUnitTest {
         final Element element;
         final Attr attr;
         final HTMLCollection childList;
-        final DocumentType nullDocType = null;
-
         final Element docElem;
         final String docElemNS;
         final String docElemName;
@@ -65,7 +63,7 @@ public class Documentrenamenode08Test extends LoboUnitTest {
         docElem = doc.getDocumentElement();
         docElemNS = docElem.getNamespaceURI();
         docElemName = docElem.getTagName();
-        newDoc = domImpl.createDocument(docElemNS, docElemName, nullDocType);
+        newDoc = domImpl.createDocument(docElemNS, docElemName, null);
 
         boolean success = false;
         try {

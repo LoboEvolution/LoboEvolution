@@ -198,10 +198,10 @@ public class TimeImpl implements Time {
 				if (clockVal.indexOf('h') != -1) {
 					final float hour = Float.parseFloat(clockVal.substring(0, clockVal.indexOf('h')));
 					return (hour * 3600) * 1000;
-				} else if (clockVal.indexOf("min") != -1) {
+				} else if (clockVal.contains("min")) {
 					final float min = Float.parseFloat(clockVal.substring(0, clockVal.indexOf("min")));
 					return (min * 60) * 1000;
-				} else if (clockVal.indexOf("ms") != -1) {
+				} else if (clockVal.contains("ms")) {
 					return Float.parseFloat(clockVal.substring(0, clockVal.indexOf("ms")));
 				} else if (clockVal.indexOf('s') != -1) {
 					final float secs = Float.parseFloat(clockVal.substring(0, clockVal.indexOf('s')));

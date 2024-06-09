@@ -51,7 +51,7 @@ public class Nodelookupprefix12Test extends LoboUnitTest {
         final Element renamedNode;
         final String prefix;
         doc = sampleXmlFile("hc_staff.xml");
-        domImpl = doc.getImplementation();
+        doc.getImplementation();
         elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "dom3:p");
         renamedNode = (Element) doc.renameNode(elem, "http://www.w3.org/1999/xhtml", "ren:br");
         prefix = renamedNode.lookupPrefix("http://www.w3.org/1999/xhtml");

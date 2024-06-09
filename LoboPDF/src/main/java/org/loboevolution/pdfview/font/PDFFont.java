@@ -128,7 +128,7 @@ public abstract class PDFFont {
 
         String baseFont = null;
         PDFFontEncoding encoding = null;
-        PDFFontDescriptor descriptor = null;
+        PDFFontDescriptor descriptor;
 
         String subType = obj.getDictRef("Subtype").getStringValue();
         if (subType == null) {
@@ -273,7 +273,7 @@ public abstract class PDFFont {
                                 // I'm not sure how much confidence we should have
                                 // in the font parsing, so we'll avoid relying on
                                 // this not to fail
-                                log.error("Problem parsing " + ttfFile);
+                                log.error("Problem parsing {}", ttfFile);
                                 BaseWatchable.getErrorHandler().publishException(t);
                             }
                         }
@@ -327,7 +327,7 @@ public abstract class PDFFont {
                     "/System Folder/Fonts"));
             // try and add the user font dir at the front
             try {
-                paths.add(0, System.getProperty("user.home") + "/Library/Fonts");
+                paths.addFirst(System.getProperty("user.home") + "/Library/Fonts");
             } catch (final SecurityException e) {
                 // I suppose we just won't use the user fonts
             }
@@ -346,7 +346,7 @@ public abstract class PDFFont {
      * @return a {@link java.util.List} object.
      */
     public List<PDFGlyph> getGlyphs(final String text) {
-        List<PDFGlyph> outList = null;
+        List<PDFGlyph> outList;
 
         // if we have an encoding, use it to get the commands
         // don't use the encoding if it is "OneByteIdentityH" (hack for case #205739)

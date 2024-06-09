@@ -65,7 +65,7 @@ public class NodechildnodesappendchildTest extends LoboUnitTest {
         expectedLength = childList.getLength();
         expectedLength += 1;
         createdNode = doc.createElement("text3");
-        employeeNode = employeeNode.appendChild(createdNode);
+        employeeNode.appendChild(createdNode);
         length = childList.getLength();
         assertEquals(expectedLength, length, "NodechildnodesappendchildAssert1");
     }

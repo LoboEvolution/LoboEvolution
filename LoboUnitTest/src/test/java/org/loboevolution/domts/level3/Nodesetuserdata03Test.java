@@ -59,7 +59,7 @@ public class Nodesetuserdata03Test extends LoboUnitTest {
         elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "xhtml:p");
         txt = doc.createTextNode("TEXT");
         /*Node */
-        returnedUserData = doc.setUserData("Key1", elem, null);
+        doc.setUserData("Key1", elem, null);
         /*Node */
         retUserData = doc.setUserData("Key1", txt, null);
         success = ((Node) /*DOMUserData */retUserData).isEqualNode(elem);

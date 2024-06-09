@@ -28,6 +28,7 @@ package org.loboevolution.menu.tools.pref;
 
 import java.awt.Component;
 import java.awt.Dimension;
+import java.io.Serial;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 
@@ -53,6 +54,7 @@ import com.jtattoo.plaf.lobo.LoboRadioButton;
 public class ConnectionSettingsUI extends AbstractToolsUI {
 
 	/** The Constant serialVersionUID. */
+	@Serial
 	private static final long serialVersionUID = 1L;
 
 

@@ -66,7 +66,7 @@ public class ElementremoveattributerestoredefaultvalueTest extends LoboUnitTest 
         elementList = doc.getElementsByTagName("address");
         testEmployee = (Element) elementList.item(2);
         streetAttr = testEmployee.getAttributeNode("street");
-        removedAttr = testEmployee.removeAttributeNode(streetAttr);
+        testEmployee.removeAttributeNode(streetAttr);
         attribute = testEmployee.getAttribute("street");
         assertEquals("Yes", attribute, "ElementremoveattributerestoredefaultvalueAssert1");
     }

@@ -64,9 +64,7 @@ public class HTMLDivElementImpl extends HTMLElementImpl implements HTMLDivElemen
 				}
 			}
 		}
-		for (int i = 0; i < 1 - lineBreaks; i++) {
-			buffer.append("\r\n");
-		}
+        buffer.append("\r\n".repeat(Math.max(0, 1 - lineBreaks)));
 		super.appendInnerTextImpl(buffer);
 		buffer.append("\r\n");
 	}

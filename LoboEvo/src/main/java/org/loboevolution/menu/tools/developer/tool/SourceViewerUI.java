@@ -36,6 +36,7 @@ import org.loboevolution.menu.tools.AbstractToolsUI;
 import org.loboevolution.net.HttpNetwork;
 
 import java.awt.*;
+import java.io.Serial;
 
 /**
  * <p>SourceViewerUI class.</p>
@@ -44,6 +45,7 @@ import java.awt.*;
 public class SourceViewerUI  extends AbstractToolsUI {
 
     /** The Constant serialVersionUID. */
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**

@@ -51,10 +51,9 @@ public class LayoutKey {
         if (obj == this) {
             return true;
         }
-        if (!(obj instanceof LayoutKey)) {
+        if (!(obj instanceof LayoutKey other)) {
             return false;
         }
-        final LayoutKey other = (LayoutKey) obj;
         return other.availWidth == this.availWidth && other.availHeight == this.availHeight
                 && other.whitespace == this.whitespace && Objects.equals(other.font, this.font);
     }

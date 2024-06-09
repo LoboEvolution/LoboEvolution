@@ -194,9 +194,8 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 		final Node check = getNamedItem(node.getNodeName());
 		this.attributes.remove(check);
 
-		if (node instanceof Attr) {
-			final Attr attr = (Attr) node;
-			final TextImpl t = new TextImpl(attr.getValue());
+		if (node instanceof Attr attr) {
+            final TextImpl t = new TextImpl(attr.getValue());
 			t.setOwnerDocument(attr.getOwnerDocument());
 			t.setParentImpl(attr.getParentNode());
 			attr.appendChild(t);
@@ -223,9 +222,8 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 			throw new DOMException(DOMException.INUSE_ATTRIBUTE_ERR, "Different Element");
 		}
 
-		if (node instanceof Attr) {
-			final Attr attr = (Attr) node;
-			final TextImpl t = new TextImpl(attr.getValue());
+		if (node instanceof Attr attr) {
+            final TextImpl t = new TextImpl(attr.getValue());
 			t.setOwnerDocument(attr.getOwnerDocument());
 			t.setParentImpl(attr.getParentNode());
 			attr.appendChild(t);

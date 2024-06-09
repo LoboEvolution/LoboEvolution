@@ -74,7 +74,7 @@ public class NodereplacechildoldchildnonexistentTest extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                replacedNode = elementNode.replaceChild(newChild, oldChild);
+                elementNode.replaceChild(newChild, oldChild);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
             }

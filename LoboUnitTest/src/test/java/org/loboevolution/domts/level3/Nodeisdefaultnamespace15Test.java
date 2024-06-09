@@ -62,8 +62,8 @@ public class Nodeisdefaultnamespace15Test extends LoboUnitTest {
         elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "p");
         comment = doc.createComment("Text");
         clonedComment = (Comment) comment.cloneNode(true);
-        appendedChild = elem.appendChild(clonedComment);
-        appendedChild = bodyElem.appendChild(elem);
+        elem.appendChild(clonedComment);
+        bodyElem.appendChild(elem);
         isDefault = clonedComment.isDefaultNamespace("http://www.w3.org/1999/xhtml");
         assertTrue(isDefault, "Nodeisdefaultnamespace15Assert2");
     }

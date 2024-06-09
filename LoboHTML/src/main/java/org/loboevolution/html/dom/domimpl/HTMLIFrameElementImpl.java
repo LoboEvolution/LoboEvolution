@@ -41,6 +41,7 @@ import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.net.UserAgent;
 
 import java.awt.*;
+import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
 
@@ -289,7 +290,7 @@ public class HTMLIFrameElementImpl extends HTMLElementImpl implements HTMLIFrame
 				frameControl.add(new HtmlPanel());
 			} else {
 				final HTMLDocumentImpl doc = (HTMLDocumentImpl) getDocumentNode();
-				final URL baseURL = new URL(doc.getBaseURI());
+				final URL baseURL = new URI(doc.getBaseURI()).toURL();
 				final URL createURL = Urls.createURL(baseURL, getSrc());
 				final URLConnection connection = createURL.openConnection();
 				connection.setRequestProperty("User-Agent", UserAgent.getUserAgent());

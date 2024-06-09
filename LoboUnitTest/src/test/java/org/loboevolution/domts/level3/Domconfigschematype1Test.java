@@ -62,13 +62,13 @@ public class Domconfigschematype1Test extends LoboUnitTest {
         final String xmlSchemaType = "http://www.w3.org/2001/XMLSchema";
         final String dtdType = "http://www.w3.org/TR/REC-xml";
         domImpl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(), true));
-        doc = domImpl.createDocument("http://www.w3.org/1999/xhtml", "html", nullDocType);
+        doc = domImpl.createDocument("http://www.w3.org/1999/xhtml", "html", null);
         domConfig = doc.getDomConfig();
         canSet = domConfig.canSetParameter(parameter, Boolean.TRUE);
         assertFalse(canSet, "Domconfigschematype1Assert1");
 
         try {
-            state = (String) domConfig.getParameter(parameter);
+            domConfig.getParameter(parameter);
 
         } catch (final DOMException ex) {
             if (ex.getCode() == 8) {

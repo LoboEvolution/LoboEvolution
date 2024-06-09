@@ -68,16 +68,12 @@ public class LineBreak {
 		if (clearAttr == null) {
 			return NONE;
 		} else {
-			switch (clearAttr) {
-			case "right":
-				return RIGHT;
-			case "left":
-				return LEFT;
-			case "both":
-				return BOTH;
-			default:
-				return NONE;
-			}
+            return switch (clearAttr) {
+                case "right" -> RIGHT;
+                case "left" -> LEFT;
+                case "both" -> BOTH;
+                default -> NONE;
+            };
 		}
 	}
 }

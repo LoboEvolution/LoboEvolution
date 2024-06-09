@@ -67,15 +67,11 @@ public class Nodereplacechild10Test extends LoboUnitTest {
         notation = (Notation) notationsMap.getNamedItem("notation1");
 
         try {
-            replaced = doc.replaceChild(notation, ent);
+            doc.replaceChild(notation, ent);
 
         } catch (final DOMException ex) {
             switch (ex.getCode()) {
-                case 8:
-                    break;
-                case 4:
-                    break;
-                case 3:
+                case 8, 3, 4:
                     break;
                 default:
                     throw ex;

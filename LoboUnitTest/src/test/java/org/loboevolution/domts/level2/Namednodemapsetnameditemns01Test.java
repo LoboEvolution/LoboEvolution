@@ -43,10 +43,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * that namespace URI and that local name is already present in this map, it is replaced
  * by the new one.
  * <p>
- * Retreive the first element whose localName is address and namespaceURI http://www.nist.gov",
+ * Retreive the first element whose localName is address and namespaceURI <a href="http://www.nist.gov">...</a>",
  * and put its attributes into a named node map.  Create a new attribute node and add it to this map.
  * Verify if the attr node was successfully added by checking the nodeName of the retreived atttribute.
-
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-getNamedItemNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-getNamedItemNS</a>
  */
 public class Namednodemapsetnameditemns01Test extends LoboUnitTest {
@@ -70,7 +69,7 @@ public class Namednodemapsetnameditemns01Test extends LoboUnitTest {
         attributes = element.getAttributes();
         newAttr1 = doc.createAttributeNS("http://www.w3.org/DOM/L1", "streets");
 
-        newAttribute = element.setAttributeNodeNS(newAttr1);
+        element.setAttributeNodeNS(newAttr1);
         attribute = (Attr) attributes.getNamedItemNS("http://www.w3.org/DOM/L1", "streets");
         attrName = attribute.getNodeName();
         assertEquals("streets", attrName);

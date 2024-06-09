@@ -108,9 +108,9 @@ public class DocumentnormalizeDocument13Test extends LoboUnitTest {
                 message = error.getMessage();
                 length = message.length();
                 assertTrue((length > 0), "DocumentnormalizeDocument13Assert7");
-                type = error.getType();
-                relatedData = error.getRelatedData();
-                relatedException = error.getRelatedException();
+                error.getType();
+                error.getRelatedData();
+                error.getRelatedException();
                 errorCount += 1;
             } else {
                 assertEquals(1, severity, "DocumentnormalizeDocument13Assert8");

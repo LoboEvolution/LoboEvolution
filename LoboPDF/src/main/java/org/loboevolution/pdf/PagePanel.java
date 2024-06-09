@@ -34,6 +34,7 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.ImageObserver;
+import java.io.Serial;
 
 /**
  * A Swing-based panel that displays a PDF page image.  If the zoom tool
@@ -43,6 +44,7 @@ import java.awt.image.ImageObserver;
 public class PagePanel extends JPanel implements ImageObserver, MouseListener {
 
 
+    @Serial
     private static final long serialVersionUID = 1L;
     /**
      * a flag indicating whether the current page is done or not.

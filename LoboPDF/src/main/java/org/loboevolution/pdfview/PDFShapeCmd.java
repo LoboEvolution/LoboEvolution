@@ -70,7 +70,7 @@ public class PDFShapeCmd extends PDFCmd {
      * the style
      */
     private final int style;
-    private boolean autoAdjustStroke = false;
+    private boolean autoAdjustStroke;
 
     /**
      * create a new PDFShapeCmd and check it against the previous one

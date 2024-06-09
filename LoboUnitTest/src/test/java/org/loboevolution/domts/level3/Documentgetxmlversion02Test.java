@@ -50,8 +50,6 @@ public class Documentgetxmlversion02Test extends LoboUnitTest {
         final Document newDoc;
         final String versionValue;
         final DOMImplementation domImpl;
-        final DocumentType nullDocType = null;
-
         final Element docElem;
         final String rootNS;
         final String rootName;
@@ -60,7 +58,7 @@ public class Documentgetxmlversion02Test extends LoboUnitTest {
         rootNS = docElem.getNamespaceURI();
         rootName = docElem.getTagName();
         domImpl = doc.getImplementation();
-        newDoc = domImpl.createDocument(rootNS, rootName, nullDocType);
+        newDoc = domImpl.createDocument(rootNS, rootName, null);
         versionValue = newDoc.getXmlVersion();
         assertEquals("1.0", versionValue, "Documentgetxmlversion02Assert2");
     }

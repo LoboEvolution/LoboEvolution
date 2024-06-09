@@ -86,7 +86,7 @@ public class SVGTransformListImpl implements SVGTransformList {
         transList.remove(newItem);
 
 		if (index < 0) {
-			transList.add(0, newItem);
+			transList.addFirst(newItem);
 		} else if (index > getNumberOfItems() - 1) { // insert at end
 			transList.add(newItem);
 		} else {

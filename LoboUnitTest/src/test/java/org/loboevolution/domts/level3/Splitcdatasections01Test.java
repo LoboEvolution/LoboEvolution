@@ -65,7 +65,7 @@ public class Splitcdatasections01Test extends LoboUnitTest {
         elem = (Element) elemList.item(0);
         oldChild = elem.getFirstChild();
         newChild = doc.createCDATASection("this is not ]]> good");
-        retval = elem.replaceChild(newChild, oldChild);
+        elem.replaceChild(newChild, oldChild);
         domConfig = doc.getDomConfig();
         domConfig.setParameter("split-cdata-sections", Boolean.FALSE);
         /*DOMErrorMonitor */

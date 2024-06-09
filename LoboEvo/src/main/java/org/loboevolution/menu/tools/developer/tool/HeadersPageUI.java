@@ -36,7 +36,9 @@ import org.loboevolution.net.UserAgent;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.io.Serial;
 import java.net.HttpURLConnection;
+import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +51,7 @@ import java.util.Map;
 public class HeadersPageUI extends AbstractToolsUI {
 
     /** The Constant serialVersionUID. */
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**
@@ -59,7 +62,7 @@ public class HeadersPageUI extends AbstractToolsUI {
     public HeadersPageUI(final BrowserFrame frame) {
         final ToolBar toolbar = frame.getToolbar();
         try {
-            final URL url = new URL(toolbar.getAddressBar().getText());
+            final URL url = new URI(toolbar.getAddressBar().getText()).toURL();
             final HttpURLConnection httpcon = (HttpURLConnection) url.openConnection();
             httpcon.addRequestProperty("User-Agent", UserAgent.getUserAgent());
             httpcon.getHeaderField("Set-Cookie");

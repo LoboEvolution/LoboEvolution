@@ -59,10 +59,10 @@ public class Nodesettextcontent02Test extends LoboUnitTest {
         final Element documentElem;
         doc = sampleXmlFile("hc_staff.xml");
         domImpl = doc.getImplementation();
-        newDoc = domImpl.createDocument("http://www.w3.org/DOM/Test", "dom3:elem", nullDocType);
+        newDoc = domImpl.createDocument("http://www.w3.org/DOM/Test", "dom3:elem", null);
         newElem = newDoc.createElementNS("http://www.w3.org/DOM/Test", "dom3:childElem");
         documentElem = newDoc.getDocumentElement();
-        appendedChild = documentElem.appendChild(newElem);
+        documentElem.appendChild(newElem);
         newDoc.setTextContent("textContent");
         elemList = newDoc.getElementsByTagNameNS("*", "childElem");
         elemChild = (Element) elemList.item(0);

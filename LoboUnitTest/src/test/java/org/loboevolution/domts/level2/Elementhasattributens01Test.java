@@ -42,8 +42,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * URI is specified on this element or has a default value, false otherwise.
  * <p>
  * Retreive the first employee element node.  Invoke the hasAttributeNS method to check if it
- * has the xmlns attribute that belongs to the namespace http://www.w3.org/2000/xmlns/.
-
+ * has the xmlns attribute that belongs to the namespace <a href="http://www.w3.org/2000/xmlns/">...</a>.
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElHasAttrNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElHasAttrNS</a>
  */
 public class Elementhasattributens01Test extends LoboUnitTest {

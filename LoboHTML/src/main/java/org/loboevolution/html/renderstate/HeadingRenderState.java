@@ -127,22 +127,15 @@ public class HeadingRenderState extends AbstractMarginRenderState {
 		final String tagName = element.getTagName();
 		try {
 			final int lastCharValue = tagName.charAt(1) - '0';
-			switch (lastCharValue) {
-				case 1:
-					return "2em";
-				case 2:
-					return "1.5em";
-				case 3:
-					return "1.17em";
-				case 4:
-					return "1.12em";
-				case 5:
-					return "0.83em";
-				case 6:
-					return "0.75em";
-				default:
-					return "";
-			}
+            return switch (lastCharValue) {
+                case 1 -> "2em";
+                case 2 -> "1.5em";
+                case 3 -> "1.17em";
+                case 4 -> "1.12em";
+                case 5 -> "0.83em";
+                case 6 -> "0.75em";
+                default -> "";
+            };
 		} catch (final Exception thrown) {
 			return "";
 		}

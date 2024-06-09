@@ -49,6 +49,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.io.InputStream;
+import java.io.Serial;
+import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
 
@@ -58,6 +60,7 @@ import java.net.URLConnection;
 @Slf4j
 public class GoAction extends AbstractAction {
 
+	@Serial
 	private static final long serialVersionUID = 1L;
 
 	private final JTextField addressBar;
@@ -83,7 +86,7 @@ public class GoAction extends AbstractAction {
 		String addressBarText = this.addressBar.getText();
 		try {
 
-			final URL url = new URL(addressBarText);
+			final URL url = new URI(addressBarText).toURL();
 			final String filename = url.getFile();
 
 			final URLConnection connection = url.openConnection();
@@ -208,54 +211,22 @@ public class GoAction extends AbstractAction {
 		final int lastDotIdx = path.lastIndexOf('.');
 		final String extension = lastDotIdx == -1 ? "" : path.substring(lastDotIdx + 1);
 		final String extensionTL = extension.toLowerCase();
-		final String mimeType;
-		switch (extensionTL) {
-			case "java":
-				mimeType = SyntaxConstants.SYNTAX_STYLE_JAVA;
-				break;
-			case "php":
-			case "ruby":
-				mimeType = SyntaxConstants.SYNTAX_STYLE_RUBY;
-				break;
-			case "bash":
-				mimeType = SyntaxConstants.SYNTAX_STYLE_UNIX_SHELL;
-				break;
-			case "javascript":
-			case "js":
-				mimeType = SyntaxConstants.SYNTAX_STYLE_JAVASCRIPT;
-				break;
-			case "css":
-				mimeType = SyntaxConstants.SYNTAX_STYLE_CSS;
-				break;
-			case "csharp":
-				mimeType = SyntaxConstants.SYNTAX_STYLE_CSHARP;
-				break;
-			case "sql":
-				mimeType = SyntaxConstants.SYNTAX_STYLE_SQL;
-				break;
-			case "xml":
-			case "xaml":
-				mimeType = SyntaxConstants.SYNTAX_STYLE_XML;
-				break;
-			case "c":
-				mimeType = SyntaxConstants.SYNTAX_STYLE_C;
-				break;
-			case "objc":
-				mimeType = SyntaxConstants.SYNTAX_STYLE_CPLUSPLUS;
-				break;
-			case "python":
-				mimeType = SyntaxConstants.SYNTAX_STYLE_PYTHON;
-				break;
-			case "perl":
-				mimeType = SyntaxConstants.SYNTAX_STYLE_PERL;
-				break;
-			case "json":
-				mimeType = SyntaxConstants.SYNTAX_STYLE_JSON;
-				break;
-			default:
-				mimeType = SyntaxConstants.SYNTAX_STYLE_NONE;
-				break;
-		}
-		return mimeType;
+		final String mimeType = switch (extensionTL) {
+            case "java" -> SyntaxConstants.SYNTAX_STYLE_JAVA;
+            case "php", "ruby" -> SyntaxConstants.SYNTAX_STYLE_RUBY;
+            case "bash" -> SyntaxConstants.SYNTAX_STYLE_UNIX_SHELL;
+            case "javascript", "js" -> SyntaxConstants.SYNTAX_STYLE_JAVASCRIPT;
+            case "css" -> SyntaxConstants.SYNTAX_STYLE_CSS;
+            case "csharp" -> SyntaxConstants.SYNTAX_STYLE_CSHARP;
+            case "sql" -> SyntaxConstants.SYNTAX_STYLE_SQL;
+            case "xml", "xaml" -> SyntaxConstants.SYNTAX_STYLE_XML;
+            case "c" -> SyntaxConstants.SYNTAX_STYLE_C;
+            case "objc" -> SyntaxConstants.SYNTAX_STYLE_CPLUSPLUS;
+            case "python" -> SyntaxConstants.SYNTAX_STYLE_PYTHON;
+            case "perl" -> SyntaxConstants.SYNTAX_STYLE_PERL;
+            case "json" -> SyntaxConstants.SYNTAX_STYLE_JSON;
+            default -> SyntaxConstants.SYNTAX_STYLE_NONE;
+        };
+        return mimeType;
 	}
 }

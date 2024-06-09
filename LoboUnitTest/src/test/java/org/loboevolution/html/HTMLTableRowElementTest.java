@@ -294,12 +294,6 @@ public class HTMLTableRowElementTest extends LoboUnitTest {
         checkHtmlAlert(html);
     }
 
-    /**
-     * Test for 3180939; same left offset for both
-     * rows is expected.
-     *
-     * @throws Exception if an error occurs
-     */
     @Test
     @Alerts("true")
     public void offsetLeftDifferentRows() {

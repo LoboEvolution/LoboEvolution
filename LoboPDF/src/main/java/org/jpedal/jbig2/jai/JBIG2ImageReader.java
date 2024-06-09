@@ -174,7 +174,7 @@ public class JBIG2ImageReader extends ImageReader {
 
             } else if (d == 8) {
 
-                int x = 0, y = 0, xx = 0, yy = 0, jj = 0, origLineLength = 0;
+                int x, y, xx, yy, jj, origLineLength;
                 try {
 
                     // black and white
@@ -212,17 +212,7 @@ public class JBIG2ImageReader extends ImageReader {
 
                                 // set value as white or average of pixels
                                 if (count > 0)
-                                    // if (index==null)
                                     newData[jj + (x * comp) + (newW * y * comp)] = (byte) ((byteTotal) / count);
-                                    // else
-                                    // newData[x+(newW*y)]=(byte)(((index[1] &
-                                    // 255)*byteTotal)/count);
-                                else {
-                                    // if (index==null)
-                                    // newData[jj+x+(newW*y*comp)]=(byte) 255;
-                                    // else
-                                    // newData[x+(newW*y)]=index[0];
-                                }
                             }
                         }
                     }
@@ -364,13 +354,13 @@ public class JBIG2ImageReader extends ImageReader {
 
             final BufferedImage scaledImage = scaleImage(image.getRaster(), newWidth, newHeight, 1, 1);
 
-            Raster raster = null;
+            Raster raster;
 
             if (scaledImage != null) {
                 raster = scaledImage.getRaster();
-            } else
+            } else {
                 raster = image.getRaster();
-
+            }
             wrDst.setRect(destinationOffset.x, destinationOffset.y, raster);
 
         } catch (final RuntimeException e) {
@@ -483,7 +473,7 @@ public class JBIG2ImageReader extends ImageReader {
             if (size == -1) {
                 final ByteArrayOutputStream bos = new ByteArrayOutputStream();
                 final byte[] temp = new byte[8192];
-                for (int len = 0; (len = stream.read(temp)) > 0; ) {
+                for (int len; (len = stream.read(temp)) > 0; ) {
                     bos.write(temp, 0, len);
                 }
                 bos.close();

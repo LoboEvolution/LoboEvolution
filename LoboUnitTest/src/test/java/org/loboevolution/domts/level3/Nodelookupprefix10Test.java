@@ -54,7 +54,7 @@ public class Nodelookupprefix10Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         parent = doc.createElementNS("http://www.w3.org/1999/xhtml", "dom3:p");
         child = doc.createElement("br");
-        appendedChild = parent.appendChild(child);
+        parent.appendChild(child);
         prefix = child.lookupPrefix("http://www.w3.org/1999/xhtml");
         assertEquals("dom3", prefix, "Nodelookupprefix10Assert2");
     }

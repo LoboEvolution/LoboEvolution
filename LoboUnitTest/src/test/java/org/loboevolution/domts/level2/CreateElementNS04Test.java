@@ -40,14 +40,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * The "createElementNS(namespaceURI,qualifiedName") method for
  * a Document should raise NAMESPACE_ERR DOMException if the
  * qualifiedName has an "xml" prefix and the namespaceURI is different
- * from http://www.w3.org/XML/1998/namespace".
+ * from <a href="http://www.w3.org/XML/1998/namespace">...</a>".
  * <p>
  * Invoke method createElementNS(namespaceURI,qualifiedName) on this document
  * with qualifiedName being "xml:element1" and namespaceURI equals the string
- * "http://www.w3.org/XML/1997/namespace" (which differs from the required
- * string "http://www.w3.org/XML/1998/namespace").
+ * "<a href="http://www.w3.org/XML/1997/namespace">...</a>" (which differs from the required
+ * string "<a href="http://www.w3.org/XML/1998/namespace">...</a>").
  * Method should raise NAMESPACE_ERR DOMException.
-
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#xpointer(id('ID-258A00AF')/constant[@name='NAMESPACE_ERR'])">http://www.w3.org/TR/DOM-Level-2-Core/core#xpointer(id('ID-258A00AF')/constant[@name='NAMESPACE_ERR'])</a>
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-DocCrElNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-DocCrElNS</a>
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#xpointer(id('ID-DocCrElNS')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='NAMESPACE_ERR'])">http://www.w3.org/TR/DOM-Level-2-Core/core#xpointer(id('ID-DocCrElNS')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='NAMESPACE_ERR'])</a>
@@ -68,7 +67,7 @@ public class CreateElementNS04Test extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                newElement = doc.createElementNS(namespaceURI, qualifiedName);
+                doc.createElementNS(namespaceURI, qualifiedName);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NAMESPACE_ERR);
             }

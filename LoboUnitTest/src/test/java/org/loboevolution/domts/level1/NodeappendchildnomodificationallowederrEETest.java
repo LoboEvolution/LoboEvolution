@@ -70,7 +70,7 @@ public class NodeappendchildnomodificationallowederrEETest extends LoboUnitTest 
         {
             boolean success = false;
             try {
-                appendedNode = entRef.appendChild(createdNode);
+                entRef.appendChild(createdNode);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }

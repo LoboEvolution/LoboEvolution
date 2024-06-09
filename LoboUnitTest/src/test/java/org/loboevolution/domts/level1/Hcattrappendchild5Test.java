@@ -66,7 +66,7 @@ public class Hcattrappendchild5Test extends LoboUnitTest {
         textNode = otherDoc.createTextNode("terday");
         boolean success = false;
         try {
-            retval = titleAttr.appendChild(textNode);
+            titleAttr.appendChild(textNode);
         } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
         }

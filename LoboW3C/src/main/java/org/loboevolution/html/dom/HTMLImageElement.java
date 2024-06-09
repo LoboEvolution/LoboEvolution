@@ -277,7 +277,6 @@ public interface HTMLImageElement extends HTMLElement {
      * @return a {@link java.lang.String} object.
      */
     String getSrc();
-
     
     /**
      * <p>setSrc.</p>
@@ -285,7 +284,6 @@ public interface HTMLImageElement extends HTMLElement {
      * @param src a {@link java.lang.String} object.
      */
     void setSrc(String src);
-
     
     /**
      * <p>getSrcset.</p>

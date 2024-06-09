@@ -54,14 +54,14 @@ public class Noderemovechild04Test extends LoboUnitTest {
         Node removed;
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
-        removed = doc.removeChild(docType);
+        doc.removeChild(docType);
         removedDocType = doc.getDoctype();
         assertNull(removedDocType, "Noderemovechild04Assert3");
 
         {
             boolean success = false;
             try {
-                removed = docType.removeChild(doc);
+                docType.removeChild(doc);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
             }

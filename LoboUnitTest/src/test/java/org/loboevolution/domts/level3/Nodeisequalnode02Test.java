@@ -51,8 +51,6 @@ public class Nodeisequalnode02Test extends LoboUnitTest {
         final Document doc1;
         final Document doc2;
         final boolean isEqual;
-        final DocumentType nullDocType = null;
-
         final Element docElem;
         final String rootNS;
         final String rootName;
@@ -61,8 +59,8 @@ public class Nodeisequalnode02Test extends LoboUnitTest {
         rootNS = docElem.getNamespaceURI();
         rootName = docElem.getTagName();
         domImpl = doc.getImplementation();
-        doc1 = domImpl.createDocument(rootNS, rootName, nullDocType);
-        doc2 = domImpl.createDocument(rootNS, rootName, nullDocType);
+        doc1 = domImpl.createDocument(rootNS, rootName, null);
+        doc2 = domImpl.createDocument(rootNS, rootName, null);
         isEqual = doc1.isEqualNode(doc2);
         assertTrue(isEqual, "Nodeisequalnode02Assert2");
     }

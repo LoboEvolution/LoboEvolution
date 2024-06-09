@@ -224,19 +224,16 @@ public class HTMLFormElementImpl extends HTMLElementImpl implements HTMLFormElem
 	@Override
 	public void reset() { 
 		visit(node -> {
-			if (node instanceof HTMLInputElementImpl) {
-				final HTMLInputElementImpl hie = (HTMLInputElementImpl) node;
-				hie.resetInput();
+			if (node instanceof HTMLInputElementImpl hie) {
+                hie.resetInput();
 			}
 			
-			if (node instanceof HTMLButtonElementImpl) {
-				final HTMLButtonElementImpl btn = (HTMLButtonElementImpl) node;
-				btn.resetInput();
+			if (node instanceof HTMLButtonElementImpl btn) {
+                btn.resetInput();
 			}
 			
-			if (node instanceof HTMLSelectElementImpl) {
-				final HTMLSelectElementImpl slct = (HTMLSelectElementImpl) node;
-				slct.resetInput();
+			if (node instanceof HTMLSelectElementImpl slct) {
+                slct.resetInput();
 			}
 		});
 	}
@@ -323,7 +320,7 @@ public class HTMLFormElementImpl extends HTMLElementImpl implements HTMLFormElem
 			try {
 				final URL url = getFullURL(href);
 				context.submitForm(getMethod(), url, getTarget(), getEnctype(), fia);
-			} catch (final MalformedURLException mfu) {
+			} catch (Exception mfu) {
 				this.warn("submit()", mfu);
 			}
 		}

@@ -28,6 +28,7 @@ package org.loboevolution.menu.tools.pref;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
+import java.io.Serial;
 
 import javax.swing.AbstractAction;
 
@@ -41,7 +42,8 @@ import org.loboevolution.component.BrowserFrame;
  */
 public class PreferencesAction extends AbstractAction {
 
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	private final BrowserFrame frame;
 

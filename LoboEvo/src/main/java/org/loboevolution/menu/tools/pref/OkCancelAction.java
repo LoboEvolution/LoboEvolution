@@ -27,6 +27,7 @@
 package org.loboevolution.menu.tools.pref;
 
 import java.awt.event.ActionEvent;
+import java.io.Serial;
 
 import javax.swing.AbstractAction;
 
@@ -40,7 +41,8 @@ import org.loboevolution.init.GuiInit;
 public class OkCancelAction extends AbstractAction {
 
 	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	private final transient PreferenceWindow prefer;
 

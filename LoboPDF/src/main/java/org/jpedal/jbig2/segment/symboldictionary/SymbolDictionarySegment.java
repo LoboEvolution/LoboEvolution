@@ -192,7 +192,7 @@ public class SymbolDictionarySegment extends Segment {
 
         while (i < noOfNewSymbols) {
 
-            int instanceDeltaHeight = 0;
+            int instanceDeltaHeight;
 
             if (sdHuffman) {
                 instanceDeltaHeight = huffmanDecoder.decodeInt(huffmanDHTable).intResult();
@@ -212,7 +212,7 @@ public class SymbolDictionarySegment extends Segment {
 
             while (true) {
 
-                int deltaWidth = 0;
+                int deltaWidth;
 
                 final DecodeIntResult decodeIntResult;
                 if (sdHuffman) {
@@ -239,7 +239,7 @@ public class SymbolDictionarySegment extends Segment {
 
                 } else if (sdRefinementAggregate == 1) {
 
-                    int refAggNum = 0;
+                    int refAggNum;
 
                     if (sdHuffman) {
                         refAggNum = huffmanDecoder.decodeInt(huffmanAggInstTable).intResult();
@@ -249,7 +249,7 @@ public class SymbolDictionarySegment extends Segment {
 
                     if (refAggNum == 1) {
 
-                        int symbolID = 0, referenceDX = 0, referenceDY = 0;
+                        int symbolID, referenceDX, referenceDY;
 
                         if (sdHuffman) {
                             symbolID = decoder.readBits(symbolCodeLength);
@@ -365,7 +365,7 @@ public class SymbolDictionarySegment extends Segment {
         boolean export = false;
         while (i < numberOfInputSymbols + noOfNewSymbols) {
 
-            int run = 0;
+            int run;
             if (sdHuffman) {
                 run = huffmanDecoder.decodeInt(HuffmanDecoder.huffmanTableA).intResult();
             } else {

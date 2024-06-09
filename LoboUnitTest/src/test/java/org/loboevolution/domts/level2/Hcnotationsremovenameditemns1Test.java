@@ -65,7 +65,7 @@ public class Hcnotationsremovenameditemns1Test extends LoboUnitTest {
         assertNotNull(notations);
 
         try {
-            retval = notations.removeNamedItemNS("http://www.w3.org/1999/xhtml", "alpha");
+            notations.removeNamedItemNS("http://www.w3.org/1999/xhtml", "alpha");
             fail("throw_NO_MOD_OR_NOT_FOUND_ERR");
 
         } catch (final DOMException ex) {

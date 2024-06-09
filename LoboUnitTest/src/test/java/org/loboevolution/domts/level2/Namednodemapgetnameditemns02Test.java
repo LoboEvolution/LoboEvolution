@@ -41,11 +41,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * The method getNamedItemNS retrieves a node specified by local name and namespace URI.
  * <p>
- * Using the method getNamedItemNS, retreive an attribute node having namespaceURI=http://www.nist.gov
+ * Using the method getNamedItemNS, retreive an attribute node having namespaceURI=<a href="http://www.nist.gov">...</a>
  * and localName=domestic, from a NamedNodeMap of attribute nodes, for the second element
- * whose namespaceURI=http://www.nist.gov and localName=address.  Verify if the attr node
+ * whose namespaceURI=<a href="http://www.nist.gov">...</a> and localName=address.  Verify if the attr node
  * has been retreived successfully by checking its nodeName atttribute.
-
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-getNamedItemNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-getNamedItemNS</a>
  */
 public class Namednodemapgetnameditemns02Test extends LoboUnitTest {

@@ -77,7 +77,7 @@ public class HcnodeinsertbeforenodeancestorTest extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                insertedNode = employeeNode.insertBefore(newChild, refChild);
+                employeeNode.insertBefore(newChild, refChild);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.HIERARCHY_REQUEST_ERR);
             }

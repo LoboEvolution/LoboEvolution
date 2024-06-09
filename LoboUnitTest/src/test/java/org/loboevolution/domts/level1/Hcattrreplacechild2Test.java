@@ -69,8 +69,8 @@ public class Hcattrreplacechild2Test extends LoboUnitTest {
         terNode = doc.createTextNode("ter");
         dayNode = doc.createTextNode("day");
         docFrag = doc.createDocumentFragment();
-        retval = docFrag.appendChild(terNode);
-        retval = docFrag.appendChild(dayNode);
+        docFrag.appendChild(terNode);
+        docFrag.appendChild(dayNode);
         firstChild = titleAttr.getFirstChild();
         assertNotNull(firstChild, "Hcattrreplacechild2Assert1");
         retval = titleAttr.replaceChild(docFrag, firstChild);

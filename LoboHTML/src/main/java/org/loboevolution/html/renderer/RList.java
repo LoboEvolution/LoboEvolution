@@ -51,9 +51,8 @@ class RList extends BaseRListElement {
 		ListStyle listStyle = this.listStyle;
 		if (listStyle == null || ListValues.get(listStyle.getType()) == ListValues.TYPE_UNSET) {
 			final Object rootNode = this.modelNode;
-			if (rootNode instanceof HTMLElementImpl) {
-				final HTMLElementImpl rootElement = (HTMLElementImpl) rootNode;
-				if (listStyle == null) {
+			if (rootNode instanceof HTMLElementImpl rootElement) {
+                if (listStyle == null) {
 					listStyle = new ListStyle();
 					this.listStyle = listStyle;
 				}
@@ -82,10 +81,9 @@ class RList extends BaseRListElement {
 		final RenderState renderState = this.modelNode.getRenderState();
 
 		final Object rootNode = this.modelNode;
-		if (rootNode instanceof HTMLElementImpl) {
+		if (rootNode instanceof HTMLElementImpl rootElement) {
 
-			final HTMLElementImpl rootElement = (HTMLElementImpl) rootNode;
-			final HTMLDocumentImpl doc = (HTMLDocumentImpl) rootElement.getDocumentNode();
+            final HTMLDocumentImpl doc = (HTMLDocumentImpl) rootElement.getDocumentNode();
 			final String startText = rootElement.getAttribute("start");
 			final int counterStart = HtmlValues.getPixelSize(startText, renderState, doc.getDefaultView(), 0);
 

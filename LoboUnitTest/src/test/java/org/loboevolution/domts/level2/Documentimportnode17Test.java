@@ -62,7 +62,7 @@ public class Documentimportnode17Test extends LoboUnitTest {
         final Node commentToImport;
         final String nodeValue;
         doc = sampleXmlFile("staffNS.xml");
-        docImp = sampleXmlFile("staffNS.xml");
+        sampleXmlFile("staffNS.xml");
         commentToImport = doc.createComment("Document.importNode test for a COMMENT_NODE");
         commentImport = doc.importNode(commentToImport, true);
         nodeValue = commentImport.getNodeValue();

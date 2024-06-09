@@ -307,7 +307,7 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
 					}
 				});
 			}
-			return ArrayUtilities.isNotBlank(elem) ? elem.get(0) : null;
+			return ArrayUtilities.isNotBlank(elem) ? elem.getFirst() : null;
 		} catch (final Exception e) {
 			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "Is not a valid selector.");
 		}

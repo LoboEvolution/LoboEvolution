@@ -67,7 +67,7 @@ public class Noderemovechild19Test extends LoboUnitTest {
         assertEquals("beta", removedName, "Noderemovechild19Assert1");
 
         try {
-            removedNode = child.removeChild(parent);
+            child.removeChild(parent);
             fail("throw_DOMException");
 
         } catch (final DOMException ex) {
@@ -86,7 +86,7 @@ public class Noderemovechild19Test extends LoboUnitTest {
             {
                 boolean success = false;
                 try {
-                    removedNode = child.removeChild(entRefChild);
+                    child.removeChild(entRefChild);
                 } catch (final DOMException ex) {
                     success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
                 }

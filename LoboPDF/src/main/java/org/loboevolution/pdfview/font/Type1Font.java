@@ -104,7 +104,7 @@ public class Type1Font extends OutlineFont {
     protected void parseFont(final byte[] font, final int start, final int len) {
         this.name2width = new HashMap<>();
 
-        byte[] data = null;
+        byte[] data;
 
         if (isASCII(font, start)) {
             final byte[] bData = readASCII(font, start, start + len);
@@ -195,7 +195,8 @@ public class Type1Font extends OutlineFont {
         // now find things that look like "dup id elt put"
         // end at "def"
         final PSParser psp = new PSParser(d, i);
-        String type = psp.readThing();     // read the key (i is the start of the key)
+        psp.readThing();
+        String type;     // read the key (i is the start of the key)
         double val;
         type = psp.readThing();
         if (type.equals("StandardEncoding")) {
@@ -212,7 +213,7 @@ public class Type1Font extends OutlineFont {
             final String s = psp.readThing();
             if (s.equals("dup")) {
                 final String thing = psp.readThing();
-                int id = 0;
+                int id;
                 try {
                     id = Integer.parseInt(thing);
                 } catch (final Exception e) {
@@ -286,7 +287,7 @@ public class Type1Font extends OutlineFont {
 
         for (int loc = start; loc < end; loc++) {
             final char c = (char) (data[loc] & 0xff);
-            byte b = (byte) 0;
+            byte b;
 
             if (c >= '0' && c <= '9') {
                 b = (byte) (c - '0');
@@ -906,7 +907,7 @@ public class Type1Font extends OutlineFont {
                 if (thing.endsWith("]")) {
                     thing = thing.substring(0, thing.length() - 1);
                 }
-                if (thing.length() > 0) {
+                if (!thing.isEmpty()) {
                     ary[idx++] = Float.parseFloat(thing);
                 }
             }

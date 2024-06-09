@@ -30,9 +30,6 @@ import org.loboevolution.html.dom.TextMetrics;
 
 /**
  * <p>CanvasTextMetricsImpl class.</p>
- *
- *
- *
  */
 public class CanvasTextMetricsImpl implements TextMetrics {
 	

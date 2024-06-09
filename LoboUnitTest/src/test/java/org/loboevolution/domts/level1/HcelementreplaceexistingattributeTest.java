@@ -70,7 +70,7 @@ public class HcelementreplaceexistingattributeTest extends LoboUnitTest {
         elementList = doc.getElementsByTagName("acronym");
         testEmployee = (Element) elementList.item(2);
         newAttribute = doc.createAttribute("class");
-        setAttr = testEmployee.setAttributeNode(newAttribute);
+        testEmployee.setAttributeNode(newAttribute);
         strong = testEmployee.getAttribute("class");
         assertNull(strong, "HcelementreplaceexistingattributeAssert1");
     }

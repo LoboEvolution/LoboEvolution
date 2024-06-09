@@ -66,7 +66,7 @@ public class HcattrcreatedocumentfragmentTest extends LoboUnitTest {
         docFragment = doc.createDocumentFragment();
         newOne = doc.createElement("html");
         newOne.setAttribute("lang", "EN");
-        appendedChild = docFragment.appendChild(newOne);
+        docFragment.appendChild(newOne);
         domesticNode = (Element) docFragment.getFirstChild();
         attributes = domesticNode.getAttributes();
         for (int indexN10078 = 0; indexN10078 < attributes.getLength(); indexN10078++) {

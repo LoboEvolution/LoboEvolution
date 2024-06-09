@@ -346,7 +346,7 @@ public class PDFImage {
         // bits per component
         ColorModel cm = createColorModel();
 
-        BufferedImage bi = null;
+        BufferedImage bi;
         if (jpegData != null) {
 
             // Use imageio to decode the JPEG into
@@ -445,8 +445,7 @@ public class PDFImage {
              * drawImage() due to the wrong data buffer type (?)
              */
             bi = null;
-            if (cm instanceof IndexColorModel) {
-                final IndexColorModel icm = (IndexColorModel) cm;
+            if (cm instanceof IndexColorModel icm) {
 
                 // choose the image type based on the size
                 int type = BufferedImage.TYPE_BYTE_BINARY;
@@ -512,7 +511,7 @@ public class PDFImage {
         // add in the alpha data supplied by the SMask, if any
         final PDFImage sMaskImage = getSMask();
         if (sMaskImage != null) {
-            BufferedImage si = null;
+            BufferedImage si;
             try {
                 int w = bi.getWidth();
                 int h = bi.getHeight();
@@ -750,8 +749,7 @@ public class PDFImage {
     private ColorModel getColorModel() {
         final PDFColorSpace cs = getColorSpace();
 
-        if (cs instanceof IndexedColor) {
-            final IndexedColor ics = (IndexedColor) cs;
+        if (cs instanceof IndexedColor ics) {
 
             byte[] components = ics.getColorComponents();
             int num = ics.getCount();
@@ -857,8 +855,7 @@ public class PDFImage {
     private ColorModel createColorModel() {
         final PDFColorSpace cs = getColorSpace();
 
-        if (cs instanceof IndexedColor) {
-            final IndexedColor ics = (IndexedColor) cs;
+        if (cs instanceof IndexedColor ics) {
 
             byte[] components = ics.getColorComponents();
             int num = ics.getCount();
@@ -951,10 +948,8 @@ public class PDFImage {
                 return new PixelInterleavedSampleModel(getTransferType(), width, height, numComponents,
                         width * numComponents, bandOffsets);
             } else {
-                switch (getPixelSize()) {
-                    case 1:
-                    case 2:
-                    case 4:
+                return switch (getPixelSize()) {
+                    case 1, 2, 4 ->
                         // pixels don't span byte boundaries, so we can use the
                         // standard multi pixel
                         // packing, which offers a slight performance advantage over
@@ -963,12 +958,13 @@ public class PDFImage {
                         // model interactions
                         // can dominate processing, this small distinction is
                         // worthwhile
-                        return new MultiPixelPackedSampleModel(getTransferType(), width, height, getPixelSize());
-                    default:
-                        // pixels will cross byte boundaries
+                            new MultiPixelPackedSampleModel(getTransferType(), width, height, getPixelSize());
+                    default -> {
                         assert getTransferType() == DataBuffer.TYPE_BYTE;
-                        return new PdfSubByteSampleModel(width, height, getNumComponents(), bitsPerComponent);
-                }
+                        yield new PdfSubByteSampleModel(width, height, getNumComponents(), bitsPerComponent);
+                        // pixels will cross byte boundaries
+                    }
+                };
             }
         }
 

@@ -40,14 +40,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * The "createAttributeNS(namespaceURI,qualifiedName)" method for a
  * Document should raise NAMESPACE_ERR DOMException
  * if qualifiedName has the "xml" prefix and namespaceURI is different
- * from "http://www.w3.org/XML/1998/namespace".
+ * from "<a href="http://www.w3.org/XML/1998/namespace">...</a>".
  * <p>
  * Invoke method createAttributeNS(namespaceURI,qualifiedName) on this document
  * with qualifiedName being "xml:attr1 and namespaceURI equals
- * the string "http://www.w3.org/XML/1998/namespaces" (which differs from the required
- * string "http://www.w3.org/XML/1998/namespace").
+ * the string "<a href="http://www.w3.org/XML/1998/namespaces">...</a>" (which differs from the required
+ * string "<a href="http://www.w3.org/XML/1998/namespace">...</a>").
  * Method should raise NAMESPACE_ERR DOMException.
-
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#xpointer(id('ID-258A00AF')/constant[@name='NAMESPACE_ERR'])">http://www.w3.org/TR/DOM-Level-2-Core/core#xpointer(id('ID-258A00AF')/constant[@name='NAMESPACE_ERR'])</a>
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-DocCrAttrNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-DocCrAttrNS</a>
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#xpointer(id('ID-DocCrAttrNS')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='NAMESPACE_ERR'])">http://www.w3.org/TR/DOM-Level-2-Core/core#xpointer(id('ID-DocCrAttrNS')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='NAMESPACE_ERR'])</a>
@@ -68,7 +67,7 @@ public class CreateAttributeNS04Test extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                newAttr = doc.createAttributeNS(namespaceURI, qualifiedName);
+                doc.createAttributeNS(namespaceURI, qualifiedName);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NAMESPACE_ERR);
             }

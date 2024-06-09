@@ -28,6 +28,7 @@ package org.loboevolution.menu.tools.pref;
 
 import java.awt.Component;
 import java.awt.Dimension;
+import java.io.Serial;
 import java.util.Collection;
 
 import javax.swing.Box;
@@ -61,7 +62,8 @@ public class SettingsUI extends AbstractToolsUI {
 
 	private static final String HISTORY = "HISTORY";
 
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
     /** The search engine list control. */
 	private ItemListControl<SearchEngineStore> searchEngineListControl;

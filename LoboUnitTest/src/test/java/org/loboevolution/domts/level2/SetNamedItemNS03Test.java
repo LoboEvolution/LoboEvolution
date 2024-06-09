@@ -40,12 +40,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * NamedNodeMap should add a node using its namespaceURI and localName given that
  * there is no existing node with the same namespaceURI and localName in the map.
  * <p>
- * Create an attr node with namespaceURI "http://www.nist.gov",qualifiedName
+ * Create an attr node with namespaceURI "<a href="http://www.nist.gov">...</a>",qualifiedName
  * "prefix:newAttr" and value "newValue".
  * Invoke method setNamedItemNS((Attr)arg) on the map of the first "address"
  * element where arg is identified by the namespaceURI and qualifiedName
  * from above.  Method should return the newly added attr node.
-
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-F68D080">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-F68D080</a>
  */
 public class SetNamedItemNS03Test extends LoboUnitTest {

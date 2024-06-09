@@ -29,6 +29,8 @@ package org.loboevolution.html.control;
 import org.loboevolution.common.WrapperLayout;
 import org.loboevolution.html.dom.domimpl.HTMLImageElementImpl;
 
+import java.io.Serial;
+
 /**
  * <p>
  * ImgControl class.
@@ -39,7 +41,8 @@ import org.loboevolution.html.dom.domimpl.HTMLImageElementImpl;
  */
 public class ImgSvgControl extends BaseControl {
 
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	private final HTMLImageElementImpl modelNode;
 

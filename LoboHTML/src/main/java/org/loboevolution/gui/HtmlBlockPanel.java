@@ -50,6 +50,7 @@ import java.awt.datatransfer.ClipboardOwner;
 import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.Transferable;
 import java.awt.event.*;
+import java.io.Serial;
 import java.util.List;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
@@ -67,6 +68,7 @@ import java.util.concurrent.atomic.AtomicReference;
 @Slf4j
 public class HtmlBlockPanel extends JComponent implements NodeRenderer, RenderableContainer, ClipboardOwner {
 
+	@Serial
 	private static final long serialVersionUID = 1L;
 	private Set<Component> components;
 	protected int defaultOverflowX = RenderState.OVERFLOW_AUTO;
@@ -242,12 +244,6 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 
 	/** {@inheritDoc} */
 	@Override
-	protected void finalize() throws Throwable {
-		super.finalize();
-	}
-
-	/** {@inheritDoc} */
-	@Override
 	public void focus() {
 		grabFocus();
 	}
@@ -309,9 +305,8 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 		}
 
 		/* cut off margins */
-		if (uiNode instanceof RElement) {
-			final RElement el = (RElement) uiNode;
-			final int top = el.getMarginTop();
+		if (uiNode instanceof RElement el) {
+            final int top = el.getMarginTop();
 			final int left = el.getMarginLeft();
 			bounds.x += left;
 			bounds.y += top;
@@ -326,9 +321,8 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 		Node currentNode = cNode;
 		UINode uiNode = null;
 		while (currentNode != null) {
-			if (currentNode instanceof HTMLElementImpl) {
-				final HTMLElementImpl element = (HTMLElementImpl) currentNode;
-				uiNode = element.getUINode();
+			if (currentNode instanceof HTMLElementImpl element) {
+                uiNode = element.getUINode();
 				if (uiNode != null) {
 					break;
 				}
@@ -583,9 +577,8 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 		Renderable r = block.getRenderable(x - block.getX(), y - block.getY());
 		Renderable inner;
 		do {
-			if (r instanceof RCollection) {
-				final RCollection rc = (RCollection) r;
-				inner = rc.getRenderable(x - rc.getX(), y - rc.getY());
+			if (r instanceof RCollection rc) {
+                inner = rc.getRenderable(x - rc.getX(), y - rc.getY());
 				if (inner != null) {
 					r = inner;
 				}
@@ -598,15 +591,11 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	}
 
 	private RBlock getContainingBlock(final Renderable r) {
-		if (r instanceof RBlock) {
-			return (RBlock) r;
-		} else if (r == null) {
-			return null;
-		} else if (r instanceof BoundableRenderable) {
-			return getContainingBlock(((BoundableRenderable) r).getParent());
-		} else {
-			return null;
-		}
+        return switch (r) {
+            case RBlock rBlock -> rBlock;
+            case BoundableRenderable boundableRenderable -> getContainingBlock(boundableRenderable.getParent());
+            default -> null;
+        };
 	}
 
 	private void onMouseWheelMoved(final MouseWheelEvent mwe) {
@@ -636,9 +625,8 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 				g.fillRect(clipBounds.x, clipBounds.y, clipBounds.width, clipBounds.height);
 			}
 		}
-		if (g instanceof Graphics2D) {
-			final Graphics2D g2 = (Graphics2D) g;
-			try {
+		if (g instanceof Graphics2D g2) {
+            try {
 				g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_GASP);
 			} catch (final NoSuchFieldError e) {
 				g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
@@ -784,13 +772,11 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 			renderables.forEach(rn -> {
 				final Renderable r = rn instanceof PositionedRenderable ? (((PositionedRenderable) rn).getRenderable()) : rn;
 				Rectangle subBounds = null;
-				if (r instanceof RCollection) {
-					final RCollection rc = (RCollection) r;
-					prevBoundable.set(rc);
+				if (r instanceof RCollection rc) {
+                    prevBoundable.set(rc);
 					subBounds = scanNodeBounds(rc, node, relativeTo);
-				} else if (r instanceof BoundableRenderable) {
-					final BoundableRenderable br = (BoundableRenderable) r;
-					prevBoundable.set(br);
+				} else if (r instanceof BoundableRenderable br) {
+                    prevBoundable.set(br);
 					if (Nodes.isSameOrAncestorOf(node, (Node) r.getModelNode())) {
 						final Point origin = br.getOriginRelativeTo(relativeTo);
 						final Dimension size = br.getSize();

@@ -154,7 +154,7 @@ public class PDFParser extends BaseWatchable {
                     c = this.stream[this.loc++];
                 }
             }
-            PDFDebugger.debug("Read comment: " + comment.toString(), -1);
+            PDFDebugger.debug("Read comment: " + comment, -1);
         }
         if (c == '[') {
             this.tok.type = Tok.ARYB;
@@ -320,7 +320,7 @@ public class PDFParser extends BaseWatchable {
         // read individual bytes and format into a character array
         while ((this.loc < this.stream.length) && (this.stream[this.loc] != '>')) {
             final char c = (char) this.stream[this.loc];
-            byte b = (byte) 0;
+            byte b;
             if (c >= '0' && c <= '9') {
                 b = (byte) (c - '0');
             } else if (c >= 'a' && c <= 'f') {
@@ -882,7 +882,7 @@ public class PDFParser extends BaseWatchable {
                     }
                     break;
             }
-            if (this.stack.size() != 0) {
+            if (!this.stack.isEmpty()) {
                 PDFDebugger.debug("**** WARNING! Stack not zero! (cmd=" + cmd + ", size=" + this.stack.size() + ") *************************", 10);
                 this.stack.clear();
             }
@@ -929,7 +929,7 @@ public class PDFParser extends BaseWatchable {
         }
         mDebugCommandIndex++;
         if (PDFDebugger.DEBUG_STOP_AT_INDEX > 0 && mDebugCommandIndex > PDFDebugger.DEBUG_STOP_AT_INDEX) {
-            log.error("Debugging: stopped at instruction #" + mDebugCommandIndex);
+            log.error("Debugging: stopped at instruction #{}", mDebugCommandIndex);
             throw new DebugStopException();
         }
         if (PDFDebugger.DRAW_DELAY > 0) {
@@ -1101,7 +1101,7 @@ public class PDFParser extends BaseWatchable {
         if (pattern == null) {
             throw new PDFParseException("Unknown pattern : " + patternName);
         }
-        if (this.stack.size() > 0) {
+        if (!this.stack.isEmpty()) {
             components = popFloat(this.stack.size());
         }
         return patternSpace.getPaint(pattern, components, this.resources);
@@ -1433,10 +1433,9 @@ public class PDFParser extends BaseWatchable {
      */
     private float[] popFloatArray() throws PDFParseException {
         final Object obj = this.stack.pop();
-        if (!(obj instanceof Object[])) {
+        if (!(obj instanceof Object[] source)) {
             throw new PDFParseException("Expected an [array] here.");
         }
-        final Object[] source = (Object[]) obj;
         final float[] ary = new float[source.length];
         for (int i = 0; i < ary.length; i++) {
             if (source[i] instanceof Double) {

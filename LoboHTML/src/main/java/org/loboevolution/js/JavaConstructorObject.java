@@ -30,6 +30,8 @@ import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 
+import java.io.Serial;
+
 /**
  * <p>JavaConstructorObject class.</p>
  *
@@ -52,7 +54,8 @@ public class JavaConstructorObject extends ScriptableObject implements Function 
 		}
 	}
 
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 	private final JavaClassWrapper classWrapper;
 	private final JavaInstantiator instantiator;
 

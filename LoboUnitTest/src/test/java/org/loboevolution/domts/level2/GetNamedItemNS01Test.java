@@ -45,9 +45,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * Retrieve a list of elements with tag name "address".
  * Access the second element from the list and get its attributes.
  * Try to retrieve the attribute node with local name "domestic"
- * and namespace uri "http://www.usa.com" with
+ * and namespace uri "<a href="http://www.usa.com">...</a>" with
  * method getNamedItemNS(namespaceURI,localName).
-
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-F68D095">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-F68D095</a>
  */
 public class GetNamedItemNS01Test extends LoboUnitTest {

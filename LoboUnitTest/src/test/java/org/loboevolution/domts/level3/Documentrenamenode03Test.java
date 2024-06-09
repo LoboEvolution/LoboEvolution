@@ -38,10 +38,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Invoke the renameNode method to rename a new attribute node to one whose
- * namespaceURI is http://www.w3.org/DOM/Test and name is pre0:fix1.
+ * namespaceURI is <a href="http://www.w3.org/DOM/Test">...</a> and name is pre0:fix1.
  * Check if this attribute has been renamed successfully by verifying the
  * nodeName, namespaceURI, nodeType attributes of the renamed node.
-
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-renameNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-renameNode</a>
  */
 public class Documentrenamenode03Test extends LoboUnitTest {

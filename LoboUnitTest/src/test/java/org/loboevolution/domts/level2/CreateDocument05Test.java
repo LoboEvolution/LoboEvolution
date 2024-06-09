@@ -46,11 +46,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * if parameter qualifiedName contains an illegal character.
  * <p>
  * Invoke method createDocument(namespaceURI,qualifiedName,doctype) on
- * this domimplementation with namespaceURI equals "http://www.ecommerce.org/schema",
+ * this domimplementation with namespaceURI equals "<a href="http://www.ecommerce.org/schema">...</a>",
  * doctype is null and qualifiedName contains an illegal character from
  * illegalChars[].  Method should raise INVALID_CHARACTER_ERR DOMException
  * for all characters in illegalChars[].
-
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#">http://www.w3.org/TR/DOM-Level-2-Core/core#</a>
  */
 public class CreateDocument05Test extends LoboUnitTest {
@@ -63,7 +62,6 @@ public class CreateDocument05Test extends LoboUnitTest {
         final String namespaceURI = "http://www.ecommerce.org/schema";
         String qualifiedName;
         final Document doc;
-        final DocumentType docType = null;
 
         DOMImplementation domImpl;
         final List<String> illegalQNames = new ArrayList<>();
@@ -97,14 +95,14 @@ public class CreateDocument05Test extends LoboUnitTest {
 
         doc = sampleXmlFile("staffNS.xml");
 
-        for (int indexN1009A = 0; indexN1009A < illegalQNames.size(); indexN1009A++) {
-            qualifiedName = illegalQNames.get(indexN1009A);
+        for (String illegalQName : illegalQNames) {
+            qualifiedName = illegalQName;
             domImpl = doc.getImplementation();
 
             {
                 boolean success = false;
                 try {
-                    domImpl.createDocument(namespaceURI, qualifiedName, docType);
+                    domImpl.createDocument(namespaceURI, qualifiedName, null);
                 } catch (final DOMException ex) {
                     success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
                 }

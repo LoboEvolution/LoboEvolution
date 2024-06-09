@@ -98,7 +98,7 @@ public class GlyfTable extends TrueTypeTable {
                 continue;
             }
 
-            ByteBuffer glyfData = null;
+            ByteBuffer glyfData;
             if (o instanceof ByteBuffer) {
                 glyfData = (ByteBuffer) o;
             } else {

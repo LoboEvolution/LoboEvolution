@@ -35,6 +35,7 @@ import org.loboevolution.store.DownloadStore;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.Serial;
 import java.util.List;
 
 /**
@@ -44,6 +45,7 @@ import java.util.List;
 public class ShowDowlaodWindow extends JFrame {
 
     /** The Constant serialVersionUID. */
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**

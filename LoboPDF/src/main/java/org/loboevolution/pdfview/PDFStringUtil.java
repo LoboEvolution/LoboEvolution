@@ -28,6 +28,7 @@ package org.loboevolution.pdfview;
 import java.io.UnsupportedEncodingException;
 import java.nio.CharBuffer;
 import java.nio.charset.CharacterCodingException;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Utility methods for dealing with PDF Strings, such as:
@@ -169,13 +170,8 @@ public class PDFStringUtil {
      * @return the decoding of the string's bytes in UTF16-BE
      */
     public static String asUTF16BEEncoded(final String basicString) {
-        try {
-            return new String(asBytes(basicString),
-                    2, basicString.length() - 2, "UTF-16BE");
-        } catch (final UnsupportedEncodingException e) {
-            // UTF-16BE should always be available
-            throw new RuntimeException("No UTF-16BE charset!");
-        }
+        return new String(asBytes(basicString),
+                2, basicString.length() - 2, StandardCharsets.UTF_16BE);
     }
 
     /**

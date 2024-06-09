@@ -75,8 +75,7 @@ public class XMLSerializerImpl extends AbstractScriptableDelegate implements XML
                 children.forEach(elem -> getXString(elem, true, buff, true));
             }
 
-            if (node instanceof CDATASection) {
-                CDATASection cdataSection = (CDATASection) node;
+            if (node instanceof CDATASection cdataSection) {
                 buff.append("<![CDATA[");
                 if (cdataSection.getData() != null) {
                     buff.append(cdataSection.getData());
@@ -85,8 +84,7 @@ public class XMLSerializerImpl extends AbstractScriptableDelegate implements XML
                     buff.append("<>&?]]>");
                 }
             }
-            if (node instanceof ProcessingInstruction) {
-                ProcessingInstruction processingInstruction = (ProcessingInstruction) node;
+            if (node instanceof ProcessingInstruction processingInstruction) {
                 buff.append("<?");
                 buff.append(processingInstruction.getTarget());
                 buff.append(" ");

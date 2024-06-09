@@ -513,9 +513,9 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 		final HTMLDocumentImpl document = (HTMLDocumentImpl) this.htmlPanel.getRootNode();
 		if (document != null) {
 			try {
-				final URL url = new URL(document.getDocumentURI());
+				final URL url = new URI(document.getDocumentURI()).toURL();
 				this.navigate(url, null);
-			} catch (final MalformedURLException throwable) {
+			} catch (Exception throwable) {
 				this.warn("reload(): Malformed URL", throwable);
 			}
 		}
@@ -746,7 +746,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 		final URL resolvedURL;
 		if ("GET".equals(actualMethod) && formInputs != null) {
 			boolean firstParam = true;
-			final URL noRefAction = new URL(action.getProtocol(), action.getHost(), action.getPort(), action.getFile());
+			final URL noRefAction = new URI(action.getProtocol(), action.getHost(), action.getFile(), null).toURL();
 			final StringBuilder newUrlBuffer = new StringBuilder(noRefAction.toExternalForm());
 			if (action.getQuery() == null) {
 				newUrlBuffer.append("?");
@@ -755,7 +755,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 			}
 			for (final FormInput parameter : formInputs) {
 				final String name = parameter.getName();
-				final String encName = URLEncoder.encode(name, "UTF-8");
+				final String encName = URLEncoder.encode(name, StandardCharsets.UTF_8);
 				if (parameter.isText()) {
 					if (firstParam) {
 						firstParam = false;
@@ -763,7 +763,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 						newUrlBuffer.append("&");
 					}
 					final String valueStr = parameter.getTextValue();
-					final String encValue = URLEncoder.encode(valueStr, "UTF-8");
+					final String encValue = URLEncoder.encode(valueStr, StandardCharsets.UTF_8);
 					newUrlBuffer.append(encName);
 					newUrlBuffer.append("=");
 					newUrlBuffer.append(encValue);
@@ -771,7 +771,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 					log.warn("postData(): Ignoring non-textual parameter for GET {} ", name);
 				}
 			}
-			resolvedURL = new java.net.URL(newUrlBuffer.toString());
+			resolvedURL = new URI(newUrlBuffer.toString()).toURL();
 		} else {
 			resolvedURL = action;
 		}
@@ -781,9 +781,9 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 			try {
 				final String ref = action.getRef();
 				final String refText = Strings.isCssBlank(ref) ? "" : "#" + ref;
-				urlForLoading = new URL(resolvedURL.getProtocol(), action.getHost(), action.getPort(),
-						action.getPath() + refText);
-			} catch (final java.net.MalformedURLException throwable) {
+				urlForLoading = new URI(resolvedURL.getProtocol(), action.getHost(),
+									action.getPath() + refText, null).toURL();
+			} catch (final Exception throwable) {
 				this.warn("malformed", throwable);
 				urlForLoading = action;
 			}
@@ -801,9 +801,8 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 		try {
 			connection.setRequestProperty("User-Agent", UserAgent.getUserAgent());
 			connection.getHeaderField("Set-Cookie");
-			if (connection instanceof HttpURLConnection) {
-				final HttpURLConnection hc = (HttpURLConnection) connection;
-				hc.setRequestMethod(actualMethod);
+			if (connection instanceof HttpURLConnection hc) {
+                hc.setRequestMethod(actualMethod);
 				hc.setInstanceFollowRedirects(false);
 			}
 			if (isPost) {
@@ -813,7 +812,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 				if (formInputs != null) {
 					for (final FormInput parameter : formInputs) {
 						final String name = parameter.getName();
-						final String encName = URLEncoder.encode(name, "UTF-8");
+						final String encName = URLEncoder.encode(name, StandardCharsets.UTF_8);
 						if (parameter.isText()) {
 							if (firstParam) {
 								firstParam = false;
@@ -821,7 +820,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 								bufOut.write((byte) '&');
 							}
 							final String valueStr = parameter.getTextValue();
-							final String encValue = URLEncoder.encode(valueStr, "UTF-8");
+							final String encValue = URLEncoder.encode(valueStr, StandardCharsets.UTF_8);
 							bufOut.write(encName.getBytes(StandardCharsets.UTF_8));
 							bufOut.write((byte) '=');
 							bufOut.write(encValue.getBytes(StandardCharsets.UTF_8));
@@ -841,9 +840,8 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 				postOut.write(postContent);
 				postOut.flush();
 			}
-			if (connection instanceof HttpURLConnection) {
-				final HttpURLConnection hc = (HttpURLConnection) connection;
-				final int responseCode = hc.getResponseCode();
+			if (connection instanceof HttpURLConnection hc) {
+                final int responseCode = hc.getResponseCode();
 				log.info("process(): HTTP response code {} ", responseCode);
 
 				if (responseCode == HttpURLConnection.HTTP_MOVED_PERM

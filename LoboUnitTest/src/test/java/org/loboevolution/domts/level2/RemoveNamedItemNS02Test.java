@@ -47,10 +47,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Retrieve a list of elements with tag name "address".
  * Access the second element from the list and get its attributes.
  * Try to remove an attribute node with local name "domest"
- * and namespace uri "http://www.usa.com" with
+ * and namespace uri "<a href="http://www.usa.com">...</a>" with
  * method removeNamedItemNS(namespaceURI,localName).
  * This should raise NOT_FOUND_ERR DOMException.
-
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#xpointer(id('ID-258A00AF')/constant[@name='NOT_FOUND_ERR'])">http://www.w3.org/TR/DOM-Level-2-Core/core#xpointer(id('ID-258A00AF')/constant[@name='NOT_FOUND_ERR'])</a>
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-removeNamedItemNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-removeNamedItemNS</a>
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#xpointer(id('ID-removeNamedItemNS')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='NOT_FOUND_ERR'])">http://www.w3.org/TR/DOM-Level-2-Core/core#xpointer(id('ID-removeNamedItemNS')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='NOT_FOUND_ERR'])</a>
@@ -77,7 +76,7 @@ public class RemoveNamedItemNS02Test extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                removedNode = attributes.removeNamedItemNS(namespaceURI, localName);
+                attributes.removeNamedItemNS(namespaceURI, localName);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
             }

@@ -49,8 +49,6 @@ public class Documentgetdocumenturi02Test extends LoboUnitTest {
         final Document newDoc;
         final String docURI;
         final DOMImplementation domImpl;
-        final DocumentType nullDocType = null;
-
         final Element docElem;
         final String rootNS;
         final String rootName;
@@ -59,7 +57,7 @@ public class Documentgetdocumenturi02Test extends LoboUnitTest {
         rootNS = docElem.getNamespaceURI();
         rootName = docElem.getTagName();
         domImpl = doc.getImplementation();
-        newDoc = domImpl.createDocument(rootNS, rootName, nullDocType);
+        newDoc = domImpl.createDocument(rootNS, rootName, null);
         docURI = newDoc.getDocumentURI();
         assertNull(docURI, "Documentgetdocumenturi02Assert2");
     }

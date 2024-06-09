@@ -477,84 +477,60 @@ public class SVGSVGElementImpl extends SVGLocatableImpl implements SVGSVGElement
 			if (meetOrSlice == SVGPreserveAspectRatio.SVG_MEETORSLICE_MEET) {
 				if (sy < sx) {
 					ty = vpY / scale - vbY;
-					switch (align) {
-						case SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMINYMIN:
-						case SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMINYMID:
-						case SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMINYMAX:
-							tx = vpX / scale - vbX;
-							break;
-
-						case SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMIDYMIN:
-						case SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMIDYMID:
-						case SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMIDYMAX:
-							tx = (vpX + vpWidth / 2) / scale - (vbX + vbWidth / 2);
-							break;
-						default:
-							tx = vpX + vpWidth / scale - (vbX + vbWidth);
-							break;
-					}
+                    tx = switch (align) {
+                        case SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMINYMIN,
+                             SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMINYMID,
+                             SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMINYMAX -> vpX / scale - vbX;
+                        case SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMIDYMIN,
+                             SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMIDYMID,
+                             SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMIDYMAX ->
+                                (vpX + vpWidth / 2) / scale - (vbX + vbWidth / 2);
+                        default -> vpX + vpWidth / scale - (vbX + vbWidth);
+                    };
 				} else {
 					tx = vpX / scale - vbX;
 
-					switch (align) {
-						case SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMINYMIN:
-						case SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMIDYMIN:
-						case SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMAXYMIN:
-							ty = vpY / scale - vbY;
-							break;
-
-						case SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMINYMID:
-						case SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMIDYMID:
-						case SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMAXYMID:
-							ty = (vpY + vpHeight / 2) / scale - (vbY + vbHeight / 2);
-							break;
-						default:
-							ty = (vpY + vpHeight) / scale - (vbY + vbHeight);
-							break;
-					}
+                    ty = switch (align) {
+                        case SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMINYMIN,
+                             SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMIDYMIN,
+                             SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMAXYMIN -> vpY / scale - vbY;
+                        case SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMINYMID,
+                             SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMIDYMID,
+                             SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMAXYMID ->
+                                (vpY + vpHeight / 2) / scale - (vbY + vbHeight / 2);
+                        default -> (vpY + vpHeight) / scale - (vbY + vbHeight);
+                    };
 				}
 			} else { // SLICE
 
 				if (sy > sx) {
 					ty = vpY / scale - vbY;
 
-					switch (align) {
-						case SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMINYMIN:
-						case SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMINYMID:
-						case SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMINYMAX:
-							tx = vpX / scale - vbX;
-							break;
-
-						case SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMIDYMIN:
-						case SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMIDYMID:
-						case SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMIDYMAX:
-							tx = (vpX + vpWidth / 2) / scale - (vbX + vbWidth / 2);
-							break;
-						default:
-							tx = (vpX + vpWidth) / scale - (vbX + vbWidth);
-							break;
-					}
+                    tx = switch (align) {
+                        case SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMINYMIN,
+                             SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMINYMID,
+                             SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMINYMAX -> vpX / scale - vbX;
+                        case SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMIDYMIN,
+                             SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMIDYMID,
+                             SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMIDYMAX ->
+                                (vpX + vpWidth / 2) / scale - (vbX + vbWidth / 2);
+                        default -> (vpX + vpWidth) / scale - (vbX + vbWidth);
+                    };
 
 
 				} else {
 					tx = vpX - vbX * scale;
 
-					switch (align) {
-						case SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMINYMIN:
-						case SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMIDYMIN:
-						case SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMAXYMIN:
-							ty = vpY / scale - vbY;
-							break;
-
-						case SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMINYMID:
-						case SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMIDYMID:
-						case SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMAXYMID:
-							ty = (vpY + vpHeight / 2) / scale - (vbY + vbHeight / 2);
-							break;
-						default:
-							ty = (vpY + vpHeight) / scale - (vbY + vbHeight);
-							break;
-					}
+                    ty = switch (align) {
+                        case SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMINYMIN,
+                             SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMIDYMIN,
+                             SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMAXYMIN -> vpY / scale - vbY;
+                        case SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMINYMID,
+                             SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMIDYMID,
+                             SVGPreserveAspectRatio.SVG_PRESERVEASPECTRATIO_XMAXYMID ->
+                                (vpY + vpHeight / 2) / scale - (vbY + vbHeight / 2);
+                        default -> (vpY + vpHeight) / scale - (vbY + vbHeight);
+                    };
 				}
 			}
 
@@ -581,9 +557,8 @@ public class SVGSVGElementImpl extends SVGLocatableImpl implements SVGSVGElement
 				} else if (child instanceof SVGUseElementImpl) {
 					SVGRect bbox = ((SVGUseElement) child).getBBox();
 					childShape = new Rectangle2D.Float(bbox.getX(), bbox.getY(), bbox.getWidth(), bbox.getHeight());
-				} else if (child instanceof SVGSVGElementImpl) {
-					SVGSVGElement svg = ( SVGSVGElement) child;
-					AffineTransform ctm = AffineTransform.getTranslateInstance(viewport.getX(), viewport.getY());
+				} else if (child instanceof SVGSVGElementImpl svg) {
+                    AffineTransform ctm = AffineTransform.getTranslateInstance(viewport.getX(), viewport.getY());
 					if (viewboxToViewportTransform != null) {
 						ctm.concatenate(viewboxToViewportTransform);
 					}

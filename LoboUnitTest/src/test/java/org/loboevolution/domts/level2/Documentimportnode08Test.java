@@ -59,11 +59,9 @@ public class Documentimportnode08Test extends LoboUnitTest {
         final Document doc;
         final DocumentType docType;
         final DOMImplementation domImpl;
-        final String nullNS = null;
         doc = sampleXmlFile("staffNS.xml");
         domImpl = doc.getImplementation();
-        docType = domImpl.createDocumentType("test:root", nullNS, nullNS);
-
+        docType = domImpl.createDocumentType("test:root", null, null);
         boolean success = false;
         try {
             doc.importNode(docType, true);

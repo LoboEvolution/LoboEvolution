@@ -39,12 +39,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * The method createAttributeNS raises a NAMESPACE_ERR if the qualifiedName has a prefix that
- * is "xml" and the namespaceURI is different from "http://www.w3.org/XML/1998/namespace".
+ * is "xml" and the namespaceURI is different from "<a href="http://www.w3.org/XML/1998/namespace">...</a>".
  * <p>
  * Invoke the createAttributeNS method on a new DOMImplementation object with  the qualifiedName
- * as xml:root and namespaceURI as http://www.w3.org/XML/1998 /namespace.
+ * as xml:root and namespaceURI as <a href="http://www.w3.org/XML/1998">...</a> /namespace.
  * Check if the NAMESPACE_ERR exception is thrown.
-
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core">http://www.w3.org/TR/DOM-Level-2-Core/core</a>
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-DocCrAttrNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-DocCrAttrNS</a>
  */
@@ -57,15 +56,12 @@ public class DocumentcreateattributeNS06Test extends LoboUnitTest {
     public void runTest() {
         final Document doc;
         final Document newDoc;
-        final DocumentType docType = null;
-
         final DOMImplementation domImpl;
         final String namespaceURI = "http://www.w3.org/XML/1998 /namespace";
         final String qualifiedName = "xml:root";
         doc = sampleXmlFile("staffNS.xml");
-
         domImpl = doc.getImplementation();
-        newDoc = domImpl.createDocument("http://www.w3.org/DOM/Test", "dom:doc", docType);
+        newDoc = domImpl.createDocument("http://www.w3.org/DOM/Test", "dom:doc", null);
 
         boolean success = false;
         try {

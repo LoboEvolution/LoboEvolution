@@ -42,8 +42,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  * returns the namespace URI of this node, or null if unspecified.
  * <p>
  * Retrieve the first employee node and invoke the "getNamespaceURI()"
- * method.   The method should return "http://www.nist.gov".
-
+ * method.   The method should return "<a href="http://www.nist.gov">...</a>".
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSname">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSname</a>
  */
 public class NamespaceURI03Test extends LoboUnitTest {

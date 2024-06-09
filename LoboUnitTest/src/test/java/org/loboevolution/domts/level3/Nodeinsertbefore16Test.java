@@ -61,7 +61,7 @@ public class Nodeinsertbefore16Test extends LoboUnitTest {
         firstChild = element.getFirstChild();
         refElem = (Element) firstChild.getNextSibling();
         newElem = doc.createElementNS("http://www.w3.org/1999/xhtml", "xhtml:br");
-        inserted = element.insertBefore(newElem, refElem);
+        element.insertBefore(newElem, refElem);
         childList = doc.getElementsByTagName("p");
         element = (Element) childList.item(0);
         firstChild = element.getFirstChild();

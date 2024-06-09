@@ -62,7 +62,7 @@ public class Nodeinsertbefore14Test extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                inserted = docType.insertBefore(newAttr, docType);
+                docType.insertBefore(newAttr, docType);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }

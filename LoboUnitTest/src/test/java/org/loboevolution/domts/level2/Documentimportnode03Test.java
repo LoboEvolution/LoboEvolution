@@ -45,11 +45,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * is created.
  * <p>
  * Using the method importNode with deep=false, import the default Attribute attribute,
- * "defaultAttr" of the second element node whose namespaceURI="http://www.nist.gov" and
+ * "defaultAttr" of the second element node whose namespaceURI="<a href="http://www.nist.gov">...</a>" and
  * localName="defaultAttr", into the same document.
  * Check the parentNode, nodeName, nodeType and nodeValue of the imported node to
  * verify if it has been imported correctly.
-
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core">http://www.w3.org/TR/DOM-Level-2-Core/core</a>
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#Core-Document-importNode">http://www.w3.org/TR/DOM-Level-2-Core/core#Core-Document-importNode</a>
  */

@@ -27,6 +27,7 @@
 package org.loboevolution.menu.tools.clear;
 
 import java.awt.event.ActionEvent;
+import java.io.Serial;
 
 import javax.swing.AbstractAction;
 
@@ -40,7 +41,8 @@ import com.jtattoo.plaf.lobo.LoboCheckBox;
  */
 public class ClearDataAction extends AbstractAction {
 
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	/** The bookmark . */
 	private final LoboCheckBox bookmark;

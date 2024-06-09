@@ -44,9 +44,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  * the specified type.
  * <p>
  * Call the createDocument on this DOMImplementation with
- * createDocument ("http://www.w3.org/DOMTest/L2",see the array below for valid QNames,null).
+ * createDocument ("<a href="http://www.w3.org/DOMTest/L2">...</a>",see the array below for valid QNames,null).
  * Check if the returned Document object is empty with no Document Element.
-
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#Level-2-Core-DOM-createDocument">http://www.w3.org/TR/DOM-Level-2-Core/core#Level-2-Core-DOM-createDocument</a>
  */
 public class Domimplementationcreatedocument03Test extends LoboUnitTest {
@@ -77,8 +76,8 @@ public class Domimplementationcreatedocument03Test extends LoboUnitTest {
 
         doc = sampleXmlFile("staffNS.xml");
         domImpl = doc.getImplementation();
-        for (final Object name : qualifiedNames) {
-            qualifiedName = (String) name;
+        for (final String name : qualifiedNames) {
+            qualifiedName = name;
             newDoc = domImpl.createDocument(namespaceURI, qualifiedName, docType);
             assertNotNull(newDoc);
         }

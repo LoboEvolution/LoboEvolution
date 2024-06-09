@@ -85,7 +85,7 @@ public class SVGLengthListImpl implements SVGLengthList {
 		pointList.remove(newItem);
 
 		if (index < 0) {
-			pointList.add(0, newItem);
+			pointList.addFirst(newItem);
 		} else if (index > getNumberOfItems() - 1) { // insert at end
 			pointList.add(newItem);
 		} else {

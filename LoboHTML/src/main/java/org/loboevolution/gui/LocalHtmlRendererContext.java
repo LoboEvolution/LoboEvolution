@@ -42,10 +42,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.Proxy;
-import java.net.URL;
-import java.net.URLConnection;
+import java.net.*;
 
 @Data
 @AllArgsConstructor
@@ -301,9 +298,9 @@ public class LocalHtmlRendererContext implements HtmlRendererContext{
         final HTMLDocumentImpl document = (HTMLDocumentImpl) this.htmlPanel.getRootNode();
         if (document != null) {
             try {
-                final URL url = new URL(document.getDocumentURI());
+                final URL url = new URI(document.getDocumentURI()).toURL();
                 this.navigate(url, null);
-            } catch (final MalformedURLException throwable) {
+            } catch (Exception throwable) {
                 this.warn("reload(): Malformed URL", throwable);
             }
         }

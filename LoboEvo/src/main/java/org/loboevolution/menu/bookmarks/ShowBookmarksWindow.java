@@ -31,6 +31,7 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
+import java.io.Serial;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -61,7 +62,8 @@ import org.loboevolution.store.TabStore;
 public class ShowBookmarksWindow extends JFrame {
 
 	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 		
 	/** The desc. */
 	private LoboTextField desc;

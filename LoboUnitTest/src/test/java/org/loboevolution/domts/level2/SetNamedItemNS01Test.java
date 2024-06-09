@@ -45,11 +45,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * arg is an Attr that is already an attribute of another Element object.
  * <p>
  * Retrieve an attr node from the third "address" element whose local name
- * is "domestic" and namespaceURI is "http://www.netzero.com".
+ * is "domestic" and namespaceURI is "<a href="http://www.netzero.com">...</a>".
  * Invoke method setNamedItemNS((Attr)arg) on the map of the first "address" element with
  * arg being the attr node from above.  Method should raise
  * INUSE_ATTRIBUTE_ERR DOMException.
-
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#xpointer(id('ID-258A00AF')/constant[@name='INUSE_ATTRIBUTE_ERR'])">http://www.w3.org/TR/DOM-Level-2-Core/core#xpointer(id('ID-258A00AF')/constant[@name='INUSE_ATTRIBUTE_ERR'])</a>
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-setNamedItemNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-setNamedItemNS</a>
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#xpointer(id('ID-setNamedItemNS')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='INUSE_ATTRIBUTE_ERR'])">http://www.w3.org/TR/DOM-Level-2-Core/core#xpointer(id('ID-setNamedItemNS')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='INUSE_ATTRIBUTE_ERR'])</a>

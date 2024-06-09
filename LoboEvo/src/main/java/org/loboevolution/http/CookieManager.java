@@ -26,6 +26,7 @@
 
 package org.loboevolution.http;
 
+import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
 import java.sql.Connection;
@@ -84,10 +85,10 @@ public class CookieManager {
 	 * @return a {@link java.util.List} object.
 	 */
 	public static List<CookieInfo> getCookieList(final String address) {
-		final URL url;
+		final URI url;
 		List<CookieInfo> cookies = new ArrayList<>();
 		try {
-			url = new URL(address);
+			url = new URI(address);
 			final String domain = url.getHost().replaceFirst("^www.*?\\.", "");
 			cookies = getCookies(domain, "/");
 		} catch (final Exception e) {
@@ -132,7 +133,7 @@ public class CookieManager {
 	 */
 	public static void putCookies(final String uri) {
 		try {
-			final URL url = new URL(uri);
+			final URL url = new URI(uri).toURL();
 			final URLConnection connection = url.openConnection();
 			final Map<String, List<String>> headerFields = connection.getHeaderFields();
 			for (final Map.Entry<String, List<String>> entry : headerFields.entrySet()) {

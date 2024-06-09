@@ -82,7 +82,7 @@ public class Nodes {
 	 * @return a {@link java.lang.Iterable} object.
 	 */
 	public static Iterable<Node> iterable(final NamedNodeMap attrList) {
-	    return () -> new Iterator<Node>() {
+	    return () -> new Iterator<>() {
 
             private int index = 0;
 

@@ -59,7 +59,7 @@ public class Hcnodedocumentfragmentnormalize2Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         docFragment = doc.createDocumentFragment();
         txtNode = doc.createTextNode("");
-        retval = docFragment.appendChild(txtNode);
+        docFragment.appendChild(txtNode);
         docFragment.normalize();
         txtNode = (Text) docFragment.getFirstChild();
         assertNull(txtNode);

@@ -26,6 +26,7 @@
 
 package org.loboevolution.gui;
 
+import java.io.Serial;
 import java.util.EventObject;
 
 /**
@@ -38,7 +39,8 @@ public class SelectionChangeEvent extends EventObject {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 	private final boolean hasSelection;
 
 	/**

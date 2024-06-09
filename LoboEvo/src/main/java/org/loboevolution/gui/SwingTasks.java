@@ -67,8 +67,7 @@ public class SwingTasks {
 	public static Component createHorizontalFill() {
 		final Dimension min = new Dimension(0, 0);
 		final Dimension pref = new Dimension(Short.MAX_VALUE, 0);
-		final Dimension max = pref;
-		return new Box.Filler(min, pref, max);
+        return new Box.Filler(min, pref, pref);
 	}
 
 	/**
@@ -79,8 +78,7 @@ public class SwingTasks {
 	public static Component createVerticalFill() {
 		final Dimension min = new Dimension(0, 0);
 		final Dimension pref = new Dimension(0, Short.MAX_VALUE);
-		final Dimension max = pref;
-		return new Box.Filler(min, pref, max);
+        return new Box.Filler(min, pref, pref);
 	}
 
 	/**
@@ -94,9 +92,8 @@ public class SwingTasks {
 		final int count = component.getComponentCount();
 		for (int i = 0; i < count; i++) {
 			final Component child = component.getComponent(i);
-			if (child instanceof JComponent) {
-				final JComponent jchild = (JComponent) child;
-				if (enabled) {
+			if (child instanceof JComponent jchild) {
+                if (enabled) {
 					final Boolean nestedEnabling = (Boolean) jchild.getClientProperty(NESTED_ENABLING);
 					if (nestedEnabling == null || nestedEnabling) {
 						setEnabledRecursive(jchild, true);

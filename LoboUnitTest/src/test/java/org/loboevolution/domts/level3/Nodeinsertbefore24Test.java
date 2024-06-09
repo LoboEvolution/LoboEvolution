@@ -59,7 +59,7 @@ public class Nodeinsertbefore24Test extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                inserted = element.insertBefore(newNode, refNode);
+                element.insertBefore(newNode, refNode);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
             }

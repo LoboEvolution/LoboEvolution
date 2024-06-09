@@ -72,11 +72,11 @@ public class Documentadoptnode16Test extends LoboUnitTest {
         childsAttr = doc.createAttribute("state");
         entRef = doc.createEntityReference("gamma");
         textNode = doc.createTextNode("Test");
-        appendedChild = childsAttr.appendChild(entRef);
-        attrNode = child.setAttributeNode(childsAttr);
-        appendedChild = child.appendChild(textNode);
-        appendedChild = parent.appendChild(child);
-        appendedChild = docFragment.appendChild(parent);
+        childsAttr.appendChild(entRef);
+        child.setAttributeNode(childsAttr);
+        child.appendChild(textNode);
+        parent.appendChild(child);
+        docFragment.appendChild(parent);
         adopted = doc.adoptNode(docFragment);
 
         if ((adopted != null)) {

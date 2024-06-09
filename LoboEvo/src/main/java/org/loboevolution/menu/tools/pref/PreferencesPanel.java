@@ -35,12 +35,15 @@ import org.loboevolution.common.WrapperLayout;
 import com.jtattoo.plaf.lobo.LoboPanel;
 import org.loboevolution.menu.tools.AbstractToolsUI;
 
+import java.io.Serial;
+
 /**
  * The Class PreferencesPanel.
  */
 public class PreferencesPanel extends LoboPanel {
 
 	/** The Constant serialVersionUID. */
+	@Serial
 	private static final long serialVersionUID = 1L;
 
 	/** The ui. */

@@ -30,6 +30,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.Strings;
 import org.loboevolution.info.BookmarkInfo;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.sql.*;
 import java.util.ArrayList;
@@ -41,7 +42,8 @@ import java.util.List;
 @Slf4j
 public class BookmarksStore implements QueryStore, Serializable {
 
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	/** The Constant DB_PATH. */
 	private static final String DB_PATH = DatabseSQLite.getDatabaseDirectory();

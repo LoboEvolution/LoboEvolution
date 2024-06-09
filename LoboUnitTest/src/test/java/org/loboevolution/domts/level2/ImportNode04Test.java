@@ -67,7 +67,7 @@ public class ImportNode04Test extends LoboUnitTest {
         aNewDoc = sampleXmlFile("staff.xml");
         docFrag = aNewDoc.createDocumentFragment();
         comment = aNewDoc.createComment("descendant1");
-        aNode = docFrag.appendChild(comment);
+        docFrag.appendChild(comment);
         aNode = doc.importNode(docFrag, true);
         children = aNode.getChildNodes();
         assertEquals(1, children.getLength());

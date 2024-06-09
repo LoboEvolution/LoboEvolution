@@ -60,13 +60,13 @@ public class Documentrenamenode18Test extends LoboUnitTest {
         rootNS = docElem.getNamespaceURI();
         rootTagname = docElem.getTagName();
         domImpl = doc.getImplementation();
-        newDoc = domImpl.createDocument(rootNS, rootTagname, nullDocType);
+        newDoc = domImpl.createDocument(rootNS, rootTagname, null);
         element = newDoc.createElementNS("http://www.w3.org/1999/xhtml", "body");
 
         {
             boolean success = false;
             try {
-                renamedNode = doc.renameNode(element, "http://www.w3.org/1999/xhtml", "head");
+                doc.renameNode(element, "http://www.w3.org/1999/xhtml", "head");
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.WRONG_DOCUMENT_ERR);
             }

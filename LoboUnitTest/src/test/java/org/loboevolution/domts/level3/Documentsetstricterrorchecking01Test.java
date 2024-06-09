@@ -55,7 +55,7 @@ public class Documentsetstricterrorchecking01Test extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                newAttr = doc.createAttributeNS("http://www.w3.org/DOM/Test", "@");
+                doc.createAttributeNS("http://www.w3.org/DOM/Test", "@");
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
             }

@@ -62,7 +62,7 @@ public class Documentadoptnode11Test extends LoboUnitTest {
 
         boolean success = false;
         try {
-            adoptedDocType = doc.adoptNode(docType);
+            doc.adoptNode(docType);
         } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
         }

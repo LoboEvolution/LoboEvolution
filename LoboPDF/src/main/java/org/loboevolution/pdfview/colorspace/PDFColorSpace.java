@@ -115,25 +115,14 @@ public class PDFColorSpace {
      * @return a {@link org.loboevolution.pdfview.colorspace.PDFColorSpace} object.
      */
     public static PDFColorSpace getColorSpace(final int name) {
-        switch (name) {
-            case COLORSPACE_GRAY:
-            case ColorSpace.CS_GRAY:
-            case ColorSpace.TYPE_GRAY:
-                return graySpace;
-
-            case COLORSPACE_RGB:
-                return rgbSpace;
-
-            case COLORSPACE_CMYK:
-                return cmykSpace;
-
-            case COLORSPACE_PATTERN:
-                return patternSpace;
-
-            default:
-                throw new IllegalArgumentException("Unknown Color Space name: " +
-                        name);
-        }
+        return switch (name) {
+            case COLORSPACE_GRAY, ColorSpace.CS_GRAY, ColorSpace.TYPE_GRAY -> graySpace;
+            case COLORSPACE_RGB -> rgbSpace;
+            case COLORSPACE_CMYK -> cmykSpace;
+            case COLORSPACE_PATTERN -> patternSpace;
+            default -> throw new IllegalArgumentException("Unknown Color Space name: " +
+                    name);
+        };
     }
 
     /**
@@ -176,7 +165,7 @@ public class PDFColorSpace {
             return (PDFColorSpace) csobj.getCache();
         }
 
-        PDFColorSpace value = null;
+        PDFColorSpace value;
 
         // csobj is [/name <<dict>>]
         final PDFObject[] ary = csobj.getArray();

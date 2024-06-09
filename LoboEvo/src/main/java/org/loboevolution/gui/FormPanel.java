@@ -31,6 +31,7 @@ import lombok.Setter;
 
 import java.awt.Component;
 import java.awt.Dimension;
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -47,6 +48,7 @@ import javax.swing.SwingConstants;
 public class FormPanel extends JComponent {
 
 	/** The Constant serialVersionUID. */
+	@Serial
 	private static final long serialVersionUID = 1L;
 
 	/** The fields. */
@@ -148,12 +150,9 @@ public class FormPanel extends JComponent {
 			entryPanel.setOpaque(false);
 			entryPanel.setLayout(new BoxLayout(entryPanel, BoxLayout.X_AXIS));
 			entryPanel.add(label);
-			// entryPanel.add(new FillerComponent(label, new Dimension(100, 24),
-			// new Dimension(100, 24), new Dimension(100, 24)));
+
 			entryPanel.add(Box.createRigidArea(new Dimension(4, 1)));
 			final Component editor = field.getFieldEditor();
-			// Dimension eps = editor.getPreferredSize();
-			// editor.setPreferredSize(new Dimension(100, eps.height));
 			editor.setEnabled(isEnabled());
 			entryPanel.add(editor);
 			final Dimension epps = entryPanel.getPreferredSize();

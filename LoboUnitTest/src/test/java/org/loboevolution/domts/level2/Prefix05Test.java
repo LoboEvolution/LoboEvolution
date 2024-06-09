@@ -43,13 +43,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * The "setPrefix(prefix)" method raises a
  * NAMESPACE_ERR DOMException if the specified node is an attribute
  * and the specified prefix is xmlns and the namespaceURI is different from
- * http://www.w3.org/2000/xmlns.
+ * <a href="http://www.w3.org/2000/xmlns">...</a>.
  * <p>
  * Attempt to insert "xmlns" as the new namespace prefix on the domestic
  * attribute within the address node.
  * An exception should be raised since the namespaceURI of this node is not
- * http://www.w3.org/2000/xmlns.
-
+ * <a href="http://www.w3.org/2000/xmlns">...</a>.
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#xpointer(id('ID-258A00AF')/constant[@name='NAMESPACE_ERR'])">http://www.w3.org/TR/DOM-Level-2-Core/core#xpointer(id('ID-258A00AF')/constant[@name='NAMESPACE_ERR'])</a>
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSPrefix">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSPrefix</a>
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#xpointer(id('ID-NodeNSPrefix')/setraises/exception[@name='DOMException']/descr/p[substring-before(.,':')='NAMESPACE_ERR'])">http://www.w3.org/TR/DOM-Level-2-Core/core#xpointer(id('ID-NodeNSPrefix')/setraises/exception[@name='DOMException']/descr/p[substring-before(.,':')='NAMESPACE_ERR'])</a>

@@ -62,11 +62,11 @@ public class Nodeinsertbefore18Test extends LoboUnitTest {
         newComment = doc.createComment("Comment");
         newCDATA = doc.createCDATASection("CDATASection");
         newPI = doc.createProcessingInstruction("target", "data");
-        appendedChild = element.appendChild(newElem);
-        appendedChild = element.appendChild(newComment);
-        appendedChild = element.appendChild(newPI);
-        appendedChild = element.appendChild(newCDATA);
-        inserted = element.insertBefore(newComment, newElem);
+        element.appendChild(newElem);
+        element.appendChild(newComment);
+        element.appendChild(newPI);
+        element.appendChild(newCDATA);
+        element.insertBefore(newComment, newElem);
         insertedNode = (Comment) element.getFirstChild();
         data = insertedNode.getData();
         assertEquals("Comment", data, "Nodeinsertbefore18Assert2");

@@ -74,7 +74,7 @@ public class HccharacterdataindexsizeerrsubstringoffsetgreaterTest extends LoboU
         {
             boolean success = false;
             try {
-                badString = child.substringData(40, 3);
+                child.substringData(40, 3);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.INDEX_SIZE_ERR);
             }

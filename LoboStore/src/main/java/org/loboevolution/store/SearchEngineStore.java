@@ -28,11 +28,14 @@ package org.loboevolution.store;
 
 import lombok.Data;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 /**
  * The Class SearchEngineStore.
@@ -41,6 +44,7 @@ import java.net.URLEncoder;
 public class SearchEngineStore implements Serializable {
 
 	/** The Constant serialVersionUID. */
+	@Serial
 	private static final long serialVersionUID = 225745010000001000L;
 
 	/** The base url. */
@@ -66,18 +70,15 @@ public class SearchEngineStore implements Serializable {
 	 *
 	 * @param query the query
 	 * @return the url
-	 * @throws java.net.MalformedURLException if any.
+	 * @throws java.lang.Exception if any.
 	 */
-	public URL getURL(final String query) throws MalformedURLException {
+	public URL getURL(final String query) throws Exception {
 		final String baseUrl = this.baseUrl;
 		final int qmIdx = baseUrl.indexOf('?');
 		final char join = qmIdx == -1 ? '?' : '&';
-		try {
-			return new URL(baseUrl + join + this.queryParameter + "=" + URLEncoder.encode(query, "UTF-8"));
-		} catch (final UnsupportedEncodingException uee) {
-			throw new IllegalStateException("not expected", uee);
-		}
-	}
+		final String url = baseUrl + join + this.queryParameter + "=" + URLEncoder.encode(query, StandardCharsets.UTF_8);
+        return new URI(url).toURL();
+    }
 
 
 	/** {@inheritDoc} */

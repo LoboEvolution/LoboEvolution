@@ -442,12 +442,9 @@ public class CCITT1D implements CCITTDecoder {
 
             if (out.get(j)) {
                 mask = 1 << bitPtr;
-
                 entry |= (byte) mask;
-                bitPtr--;
-            } else {
-                bitPtr--;
             }
+            bitPtr--;
 
             if (((j + 1) % (width)) == 0 && j != 0) {
                 bitPtr = -1;

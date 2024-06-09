@@ -61,12 +61,12 @@ public class Nodereplacechild14Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         elem = doc.createElementNS("http://www.w3.org/DOM/Test", "dom3:doc1elem");
         domImpl = doc.getImplementation();
-        newDoc = domImpl.createDocument("http://www.w3.org/DOM/test", "dom3:doc", nullDocType);
+        newDoc = domImpl.createDocument("http://www.w3.org/DOM/test", "dom3:doc", null);
         elem2 = newDoc.createElementNS("http://www.w3.org/DOM/Test", "dom3:doc2elem");
         imported = newDoc.importNode(elem, true);
         docElem = newDoc.getDocumentElement();
-        appendedChild = docElem.appendChild(imported);
-        appendedChild = docElem.appendChild(elem2);
+        docElem.appendChild(imported);
+        docElem.appendChild(elem2);
         replaced = (Element) docElem.replaceChild(imported, elem2);
         nodeName = replaced.getNodeName();
         assertEquals("dom3:doc2elem", nodeName, "Nodereplacechild14Assert2");

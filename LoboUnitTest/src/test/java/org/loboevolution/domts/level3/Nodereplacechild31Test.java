@@ -67,7 +67,7 @@ public class Nodereplacechild31Test extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                replaced = span.replaceChild(newChild, spanText);
+                span.replaceChild(newChild, spanText);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }

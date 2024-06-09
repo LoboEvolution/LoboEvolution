@@ -73,21 +73,15 @@ public class SVGAnimationImpl extends SVGElementImpl implements SMILAnimation {
 	 */
 	public short getType() {
 		final String type = this.getAttribute("type");
-			
-		switch (type) {
-		case "translate":
-			return SVGTransform.SVG_TRANSFORM_TRANSLATE;
-		case "scale":
-			return SVGTransform.SVG_TRANSFORM_SCALE;
-		case "rotate":
-			return SVGTransform.SVG_TRANSFORM_ROTATE;
-		case "skewX":
-			return SVGTransform.SVG_TRANSFORM_SKEWX;
-		case "skewY":
-			return SVGTransform.SVG_TRANSFORM_SKEWY;
-		default:
-			return SVGTransform.SVG_TRANSFORM_UNKNOWN;
-		}
+
+        return switch (type) {
+            case "translate" -> SVGTransform.SVG_TRANSFORM_TRANSLATE;
+            case "scale" -> SVGTransform.SVG_TRANSFORM_SCALE;
+            case "rotate" -> SVGTransform.SVG_TRANSFORM_ROTATE;
+            case "skewX" -> SVGTransform.SVG_TRANSFORM_SKEWX;
+            case "skewY" -> SVGTransform.SVG_TRANSFORM_SKEWY;
+            default -> SVGTransform.SVG_TRANSFORM_UNKNOWN;
+        };
 	}
 
 	/** {@inheritDoc} */
@@ -97,16 +91,11 @@ public class SVGAnimationImpl extends SVGElementImpl implements SMILAnimation {
 		if (type == null)
 			return ElementTargetAttributes.ATTRIBUTE_TYPE_AUTO;
 
-		switch (type) {
-		case "xml":
-		case "XML":
-			return ElementTargetAttributes.ATTRIBUTE_TYPE_XML;
-		case "css":
-		case "CSS":
-			return ElementTargetAttributes.ATTRIBUTE_TYPE_CSS;
-		default:
-			return ElementTargetAttributes.ATTRIBUTE_TYPE_AUTO;
-		}
+        return switch (type) {
+            case "xml", "XML" -> ElementTargetAttributes.ATTRIBUTE_TYPE_XML;
+            case "css", "CSS" -> ElementTargetAttributes.ATTRIBUTE_TYPE_CSS;
+            default -> ElementTargetAttributes.ATTRIBUTE_TYPE_AUTO;
+        };
 	}
 
 	/** {@inheritDoc} */

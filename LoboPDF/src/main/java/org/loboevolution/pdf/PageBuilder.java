@@ -26,6 +26,7 @@
 
 package org.loboevolution.pdf;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -33,6 +34,7 @@ import java.io.Serializable;
  */
 class PageBuilder implements Serializable, Runnable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
     private final PDFViewer PDFViewer;
     /**

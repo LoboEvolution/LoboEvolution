@@ -287,8 +287,7 @@ public class BackgroundRender {
     }
 
     public URL linkUri(final HTMLDocumentImpl document, final String backgroundImageText) {
-        if (element instanceof HTMLLinkElementImpl) {
-            final HTMLLinkElementImpl elm = (HTMLLinkElementImpl) element;
+        if (element instanceof HTMLLinkElementImpl elm) {
             final String rel = elm.getAttribute("rel");
             if (rel != null) {
                 final String cleanRel = rel.trim().toLowerCase();

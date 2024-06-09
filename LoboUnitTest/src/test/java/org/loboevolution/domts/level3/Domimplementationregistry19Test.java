@@ -57,8 +57,6 @@ public class Domimplementationregistry19Test extends LoboUnitTest {
         DOMImplementation domImpl;
         final DOMImplementation baseImpl;
         boolean hasFeature;
-        final String nullVersion = null;
-
         final DOMImplementationList domImplList;
         final int length;
         final DOMImplementationRegistry domImplRegistry = DOMImplementationRegistry.newInstance();
@@ -73,7 +71,7 @@ public class Domimplementationregistry19Test extends LoboUnitTest {
         } else {
             for (int indexN10067 = 0; indexN10067 < domImplList.getLength(); indexN10067++) {
                 domImpl = domImplList.item(indexN10067);
-                hasFeature = domImpl.hasFeature("SVG", nullVersion);
+                hasFeature = domImpl.hasFeature("SVG", null);
                 assertTrue(hasFeature, "Domimplementationregistry19Assert3");
             }
         }

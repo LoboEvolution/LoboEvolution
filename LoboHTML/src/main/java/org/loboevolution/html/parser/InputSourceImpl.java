@@ -37,9 +37,7 @@ import java.nio.charset.Charset;
 /**
  * The InputSourceImpl class implements the
  * InputSource interface.
- *
  * Author J. H. S.
- *
  */
 public class InputSourceImpl extends InputSource {
 

@@ -63,7 +63,7 @@ public class Noderemovechild27Test extends LoboUnitTest {
         parent = (Notation) notationsMap.getNamedItem("notation1");
 
         try {
-            removed = parent.removeChild(child);
+            parent.removeChild(child);
 
         } catch (final DOMException ex) {
             switch (ex.getCode()) {

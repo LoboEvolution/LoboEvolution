@@ -69,8 +69,8 @@ public class NamednodemapchildnoderangeTest extends LoboUnitTest {
         attributes = testEmployee.getAttributes();
         length = attributes.getLength();
         assertEquals(2, length, "NamednodemapchildnoderangeAssert1");
-        child = attributes.item(0);
-        child = attributes.item(1);
+        attributes.item(0);
+        attributes.item(1);
     }
 }
 

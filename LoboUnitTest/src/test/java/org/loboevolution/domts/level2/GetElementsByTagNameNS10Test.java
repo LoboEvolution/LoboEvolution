@@ -46,12 +46,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * order in which they are encountered in a preorder traversal of this Element tree.
  * <p>
  * Create a NodeList of all the descendant elements of the document element
- * using the "http://www.nist.gov" as the namespaceURI and the special value "*" as the
+ * using the "<a href="http://www.nist.gov">...</a>" as the namespaceURI and the special value "*" as the
  * localName.
- * The method should return a NodeList of elements that have "http://www.nist.gov
+ * The method should return a NodeList of elements that have "<a href="http://www.nist.gov">...</a>
  * as a namespace URI.
  * Derived from getElementsByTagNameNS03
-
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-1938918D">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-1938918D</a>
  */
 public class GetElementsByTagNameNS10Test extends LoboUnitTest {

@@ -63,8 +63,8 @@ public class Textreplacewholetext07Test extends LoboUnitTest {
         elementName = (Element) itemList.item(0);
         erefNode = doc.createEntityReference("ent4");
         textNode = doc.createTextNode("New Text");
-        appendedChild = elementName.appendChild(erefNode);
-        appendedChild = elementName.appendChild(textNode);
+        elementName.appendChild(erefNode);
+        elementName.appendChild(textNode);
         textNode = (Text) elementName.getFirstChild();
         replacedText = textNode.replaceWholeText("New Text and Cdata");
         textNode = (Text) elementName.getFirstChild();

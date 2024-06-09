@@ -72,7 +72,7 @@ public class HcnodeappendchildnodeancestorTest extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                appendedChild = employeeNode.appendChild(newChild);
+                employeeNode.appendChild(newChild);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.HIERARCHY_REQUEST_ERR);
             }

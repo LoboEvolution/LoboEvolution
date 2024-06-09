@@ -38,11 +38,6 @@ import org.loboevolution.html.dom.HTMLTimeElement;
 @ExtendWith(AlertsExtension.class)
 public class HTMLTimeElementTest extends LoboUnitTest {
 
-    /**
-     * Text attribute is no longer supported.
-     *
-     * @throws Exception if the test fails
-     */
     @Test
     @Alerts({"undefined", "undefined"})
     public void text() {

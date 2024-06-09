@@ -27,13 +27,15 @@
 package org.loboevolution.install;
 
 import javax.swing.*;
+import java.io.Serial;
 
 /**
  * <p>ProgressBar class.</p>
  */
 public class ProgressBar extends JFrame {
 
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	/**
 	 * <p>main.</p>

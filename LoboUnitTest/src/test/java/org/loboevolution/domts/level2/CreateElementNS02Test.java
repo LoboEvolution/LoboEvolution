@@ -56,22 +56,16 @@ public class CreateElementNS02Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        final String namespaceURI = null;
-
         final String qualifiedName = "prefix:local";
         final Document doc;
-        final Element newElement;
         doc = sampleXmlFile("staffNS.xml");
-
-        {
-            boolean success = false;
-            try {
-                newElement = doc.createElementNS(namespaceURI, qualifiedName);
-            } catch (final DOMException ex) {
-                success = (ex.getCode() == DOMException.NAMESPACE_ERR);
-            }
-            assertTrue(success);
+        boolean success = false;
+        try {
+            doc.createElementNS(null, qualifiedName);
+        } catch (final DOMException ex) {
+            success = (ex.getCode() == DOMException.NAMESPACE_ERR);
         }
+        assertTrue(success);
     }
 }
 

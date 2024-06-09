@@ -155,29 +155,19 @@ public class SVGAngleImpl implements SVGAngle {
 	}
 
 	private float convertToDegrees(final float value, final short unitType) {
-		switch (unitType) {
-			case SVG_ANGLETYPE_RAD:
-				return (float) Math.toDegrees(value);
-			case SVG_ANGLETYPE_GRAD:
-				return (float) (value * 9.0 / 10.0);
-			case SVG_ANGLETYPE_DEG:
-			case SVG_ANGLETYPE_UNSPECIFIED:
-			default:
-				return value;
-		}
+        return switch (unitType) {
+            case SVG_ANGLETYPE_RAD -> (float) Math.toDegrees(value);
+            case SVG_ANGLETYPE_GRAD -> (float) (value * 9.0 / 10.0);
+            default -> value;
+        };
 	}
 
 	private float convertFromDegrees(final float value, final short unitType) {
-		switch (unitType) {
-			case SVG_ANGLETYPE_RAD:
-				return (float) Math.toRadians(value);
-			case SVG_ANGLETYPE_GRAD:
-				return (float) (value * 10.0 / 9.0);
-			case SVG_ANGLETYPE_DEG:
-			case SVG_ANGLETYPE_UNSPECIFIED:
-			default:
-				return value;
-		}
+        return switch (unitType) {
+            case SVG_ANGLETYPE_RAD -> (float) Math.toRadians(value);
+            case SVG_ANGLETYPE_GRAD -> (float) (value * 10.0 / 9.0);
+            default -> value;
+        };
 	}
 
 	private static short getUnitTypeConst(final String unit) {
@@ -185,17 +175,12 @@ public class SVGAngleImpl implements SVGAngle {
 			return SVG_ANGLETYPE_UNSPECIFIED;
 		}
 
-		switch (unit.toLowerCase()) {
-			case "deg":
-				return SVG_ANGLETYPE_DEG;
-			case "grad":
-				return SVG_ANGLETYPE_GRAD;
-			case "rad":
-				return SVG_ANGLETYPE_RAD;
-			case "":
-				return SVG_ANGLETYPE_UNSPECIFIED;
-			default:
-				return SVG_ANGLETYPE_UNKNOWN;
-		}
+        return switch (unit.toLowerCase()) {
+            case "deg" -> SVG_ANGLETYPE_DEG;
+            case "grad" -> SVG_ANGLETYPE_GRAD;
+            case "rad" -> SVG_ANGLETYPE_RAD;
+            case "" -> SVG_ANGLETYPE_UNSPECIFIED;
+            default -> SVG_ANGLETYPE_UNKNOWN;
+        };
 	}
 }

@@ -27,13 +27,11 @@
 package org.loboevolution.common;
 
 import lombok.extern.slf4j.Slf4j;
-import org.loboevolution.net.UserAgent;
 
-import java.io.File;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
-import java.nio.file.Paths;
+import java.nio.charset.Charset;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -62,8 +60,8 @@ public class Urls {
 		if (relativeUrl.contains("javascript:void")) {
 			return null;
 		}
-		
-		return new URL(baseUrl, encodeIllegalCharacters(relativeUrl));
+
+		return baseUrl.toURI().resolve(encodeIllegalCharacters(relativeUrl)).toURL();
 	}
 
 	/**
@@ -110,7 +108,7 @@ public class Urls {
 	private static String getDefaultCharset(final URLConnection connection) {
 		final URL url = connection.getURL();
 		if (Urls.isLocalFile(url)) {
-			final String charset = System.getProperty("file.encoding");
+			final String charset = Charset.defaultCharset().displayName();
 			return charset == null ? "UTF-8" : charset;
 		} else {
 			return "UTF-8";

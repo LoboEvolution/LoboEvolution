@@ -25,7 +25,6 @@
  */
 package org.loboevolution.img;
 
-import java.applet.Applet;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -38,6 +37,7 @@ import java.awt.geom.NoninvertibleTransformException;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeSupport;
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -51,6 +51,7 @@ import javax.swing.*;
  */
 class ImageComponent extends JComponent {
 	
+	@Serial
 	private static final long serialVersionUID = 1L;
 	private transient ResizeStrategy resizeStrategy = ResizeStrategy.SHRINK_TO_FIT;
 	private transient BufferedImage image;
@@ -226,7 +227,7 @@ class ImageComponent extends JComponent {
 			if (!c.isDisplayable() || !c.isVisible()) {
 				return;
 			}
-			if (c instanceof Window || c instanceof Applet) {
+			if (c instanceof Window) {
 				break;
 			}
 		}
@@ -447,24 +448,14 @@ class ImageComponent extends JComponent {
 			throw new IllegalStateException("No image");
 		if (!hasSize())
 			throw new IllegalStateException("Viewer size is zero");
-		final double currentZoom;
-		switch (resizeStrategy) {
-		case NO_RESIZE:
-			currentZoom = 1;
-			break;
-		case SHRINK_TO_FIT:
-			currentZoom = Math.min(getSizeRatio(), 1);
-			break;
-		case RESIZE_TO_FIT:
-			currentZoom = getSizeRatio();
-			break;
-		case CUSTOM_ZOOM:
-			currentZoom = zoomFactor;
-			break;
-		default:
-			throw new Error("Unhandled resize strategy");
-		}
-		final AffineTransform tr = new AffineTransform();
+		final double currentZoom = switch (resizeStrategy) {
+            case NO_RESIZE -> 1;
+            case SHRINK_TO_FIT -> Math.min(getSizeRatio(), 1);
+            case RESIZE_TO_FIT -> getSizeRatio();
+            case CUSTOM_ZOOM -> zoomFactor;
+            default -> throw new Error("Unhandled resize strategy");
+        };
+        final AffineTransform tr = new AffineTransform();
 		tr.setToTranslation((getWidth() - image.getWidth() * currentZoom) / 2.0,
 				(getHeight() - image.getHeight() * currentZoom) / 2.0);
 		tr.scale(currentZoom, currentZoom);

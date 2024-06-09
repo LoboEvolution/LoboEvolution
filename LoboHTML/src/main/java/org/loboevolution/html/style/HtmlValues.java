@@ -125,14 +125,11 @@ public class HtmlValues {
 	public static ListValues getListStylePosition(final String token) {
 		final String tokenTL = token.toLowerCase();
 		final CSSValues tkn = CSSValues.get(tokenTL);
-		switch (tkn) {
-		case INSIDE:
-			return ListValues.POSITION_INSIDE;
-		case OUTSIDE:
-			return ListValues.POSITION_OUTSIDE;
-		default:
-			return ListValues.POSITION_UNSET;
-		}
+        return switch (tkn) {
+            case INSIDE -> ListValues.POSITION_INSIDE;
+            case OUTSIDE -> ListValues.POSITION_OUTSIDE;
+            default -> ListValues.POSITION_UNSET;
+        };
 	}
 
 	/**
@@ -144,32 +141,19 @@ public class HtmlValues {
 	public static ListValues getListStyleType(final String token) {
 		final String tokenTL = token.toLowerCase();
 		final CSSValues tkn = CSSValues.get(tokenTL);
-		switch (tkn) {
-		case NONE:
-			return ListValues.TYPE_NONE;
-		case DISC:
-			return ListValues.TYPE_DISC;
-		case CIRCLE:
-			return ListValues.TYPE_CIRCLE;
-		case SQUARE:
-			return ListValues.TYPE_SQUARE;
-		case DECIMAL:
-			return ListValues.TYPE_DECIMAL;
-		case DECIMAL_LEADING_ZERO:
-			return ListValues.TYPE_DECIMAL_LEADING_ZERO;
-		case LOWER_ALPHA:
-		case LOWER_LATIN:
-			return ListValues.TYPE_LOWER_ALPHA;
-		case UPPER_ALPHA:
-		case UPPER_LATIN:
-			return ListValues.TYPE_UPPER_ALPHA;
-		case LOWER_ROMAN:
-			return ListValues.TYPE_LOWER_ROMAN;
-		case UPPER_ROMAN:
-			return ListValues.TYPE_UPPER_ROMAN;
-		default:
-			return ListValues.TYPE_UNSET;
-		}
+        return switch (tkn) {
+            case NONE -> ListValues.TYPE_NONE;
+            case DISC -> ListValues.TYPE_DISC;
+            case CIRCLE -> ListValues.TYPE_CIRCLE;
+            case SQUARE -> ListValues.TYPE_SQUARE;
+            case DECIMAL -> ListValues.TYPE_DECIMAL;
+            case DECIMAL_LEADING_ZERO -> ListValues.TYPE_DECIMAL_LEADING_ZERO;
+            case LOWER_ALPHA, LOWER_LATIN -> ListValues.TYPE_LOWER_ALPHA;
+            case UPPER_ALPHA, UPPER_LATIN -> ListValues.TYPE_UPPER_ALPHA;
+            case LOWER_ROMAN -> ListValues.TYPE_LOWER_ROMAN;
+            case UPPER_ROMAN -> ListValues.TYPE_UPPER_ROMAN;
+            default -> ListValues.TYPE_UNSET;
+        };
 	}
 
 	/**
@@ -293,19 +277,17 @@ public class HtmlValues {
         
         if (cssValue.getPrimitiveType() == CSSPrimitiveValueType.CSS_DIMENSION) {
         	final String units = cssValue.getCssText().substring(cssValue.getCssText().length() - 3);
-        	switch (units) {
-        	case "dpi":
-        		return (int)cssValue.getDoubleValue();
-        	case "dpcm":
-        		return (int)( 2.54f * cssValue.getDoubleValue());
-        	case "dppx":
-        		return (int)( 96 * cssValue.getDoubleValue());
-        	default:
-				if (HtmlValues.isUnits(cssValue.getCssText())) {
-					return HtmlValues.getPixelSize(cssValue.getCssText(), null, null, -1);
-				}
-				return -1;
-        	}
+            return switch (units) {
+                case "dpi" -> (int) cssValue.getDoubleValue();
+                case "dpcm" -> (int) (2.54f * cssValue.getDoubleValue());
+                case "dppx" -> (int) (96 * cssValue.getDoubleValue());
+                default -> {
+                    if (HtmlValues.isUnits(cssValue.getCssText())) {
+                        yield HtmlValues.getPixelSize(cssValue.getCssText(), null, null, -1);
+                    }
+                    yield -1;
+                }
+            };
        }
         return -1;
     }

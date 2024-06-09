@@ -53,7 +53,7 @@ public class Nodelookupprefix16Test extends LoboUnitTest {
         doc = sampleXmlFile("barfoo.xml");
         elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "dom3:p");
         attr = doc.createAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:lang");
-        attNode = elem.setAttributeNodeNS(attr);
+        elem.setAttributeNodeNS(attr);
         prefix = attr.lookupPrefix("http://www.w3.org/XML/1998/namespace");
         assertNull(prefix, "Nodelookupprefix16Assert2");
     }

@@ -31,6 +31,7 @@ import org.loboevolution.laf.ColorFactory;
 import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
+import java.io.Serial;
 import java.util.Map;
 
 /**
@@ -38,6 +39,7 @@ import java.util.Map;
  */
 public class PropertiesJTable extends JTable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     private final Font propLabelFont;

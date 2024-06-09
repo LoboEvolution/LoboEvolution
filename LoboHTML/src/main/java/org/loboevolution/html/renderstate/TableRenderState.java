@@ -113,9 +113,8 @@ public class TableRenderState extends StyleSheetRenderState {
 			if (element != null) {
 
 				String border;
-				if (element instanceof HTMLTableElement) {
-					final HTMLTableElement table = (HTMLTableElement) element;
-					border = table.getBorder();
+				if (element instanceof HTMLTableElement table) {
+                    border = table.getBorder();
 				} else {
 					border = element.getAttribute("border");
 				}

@@ -41,6 +41,7 @@ import org.loboevolution.store.StyleStore;
 import javax.swing.*;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,7 +50,8 @@ import java.util.List;
  */
 public class StyleWindow extends JFrame {
 
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	/**
 	 * <p>Constructor for ClearstyleWindow.</p>

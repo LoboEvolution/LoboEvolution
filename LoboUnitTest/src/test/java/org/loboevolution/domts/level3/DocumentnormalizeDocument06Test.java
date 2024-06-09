@@ -71,24 +71,14 @@ public class DocumentnormalizeDocument06Test extends LoboUnitTest {
         final HTMLCollection elemList;
         CDATASection newChild;
         final Node oldChild;
-        final Node retval;
         final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
-
         final List<DOMError> errors;
-
-        DOMError error;
         int splittedCount = 0;
         int severity;
         Node problemNode;
         DOMLocator location;
-        int lineNumber;
-        int columnNumber;
-        int byteOffset;
-        int utf16Offset;
-        String uri;
         String type;
         String message;
-        Object relatedException;
         Object relatedData;
         int length;
         final int nodeType;
@@ -98,7 +88,7 @@ public class DocumentnormalizeDocument06Test extends LoboUnitTest {
         elem = (Element) elemList.item(0);
         newChild = doc.createCDATASection("this is not ]]> good");
         oldChild = elem.getFirstChild();
-        retval = elem.replaceChild(newChild, oldChild);
+        elem.replaceChild(newChild, oldChild);
         domConfig = doc.getDomConfig();
         domConfig.setParameter("split-cdata-sections", Boolean.TRUE);
         /*DOMErrorMonitor */
@@ -109,8 +99,7 @@ public class DocumentnormalizeDocument06Test extends LoboUnitTest {
         nodeType = newChild.getNodeType();
         assertFalse((nodeType == 4 & (nodeValue.indexOf("]]>") >= 0)), "DocumentnormalizeDocument06Assert1");
         errors = errorMonitor.getErrors();
-        for (final Object o : errors) {
-            error = (DOMError) o;
+        for (final DOMError error : errors) {
             type = error.getType();
             severity = error.getSeverity();
 
@@ -121,20 +110,19 @@ public class DocumentnormalizeDocument06Test extends LoboUnitTest {
                 message = error.getMessage();
                 length = message.length();
                 assertTrue((length > 0), "DocumentnormalizeDocument06Assert4");
-                relatedException = error.getRelatedException();
+                error.getRelatedException();
                 location = error.getLocation();
                 problemNode = location.getRelatedNode();
                 assertSame(newChild, problemNode, "DocumentnormalizeDocument06Assert5");
-                lineNumber = location.getLineNumber();
-                columnNumber = location.getColumnNumber();
-                byteOffset = location.getByteOffset();
-                utf16Offset = location.getUtf16Offset();
-                uri = location.getUri();
+                location.getLineNumber();
+                location.getColumnNumber();
+                location.getByteOffset();
+                location.getUtf16Offset();
+                location.getUri();
                 splittedCount += 1;
             } else {
                 assertEquals(1, severity, "DocumentnormalizeDocument06Assert6");
             }
-
         }
         assertEquals(1, splittedCount, "DocumentnormalizeDocument06Assert7");
     }

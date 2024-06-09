@@ -58,12 +58,12 @@ public class Nodereplacechild37Test extends LoboUnitTest {
         parent = doc.createAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:lang");
         oldChild = doc.createTextNode("Text");
         newChild = doc2.createEntityReference("delta");
-        appendedChild = parent.appendChild(oldChild);
+        parent.appendChild(oldChild);
 
         {
             boolean success = false;
             try {
-                replaced = parent.replaceChild(newChild, oldChild);
+                parent.replaceChild(newChild, oldChild);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.WRONG_DOCUMENT_ERR);
             }

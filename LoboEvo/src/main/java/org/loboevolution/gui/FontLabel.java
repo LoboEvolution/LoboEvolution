@@ -28,6 +28,7 @@ package org.loboevolution.gui;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.io.Serial;
 
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -41,7 +42,8 @@ import javax.swing.border.LineBorder;
  */
 public class FontLabel extends JLabel {
 
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	/**
 	 * <p>Constructor for FontLabel.</p>

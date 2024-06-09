@@ -37,7 +37,7 @@ import java.nio.ByteBuffer;
  * decode an LZW-encoded array of bytes.  LZW is a patented algorithm.
  *
  * <p>Feb 21, 2009 Legal statement on Intellectual Property from Unisys</p><pre>
- *   <b><u>LZW Patent Information</u></b> (http://www.unisys.com/about__unisys/lzw)
+ *   <b><u>LZW Patent Information</u></b> (<a href="http://www.unisys.com/about__unisys/lzw">...</a>)
  *   <u>License Information on GIF and Other LZW-based Technologies
  *   </u>
  *   <b><i>Unisys U.S. LZW Patent No. 4,558,302 expired on June 20, 2003,
@@ -81,8 +81,8 @@ public class LZWDecode {
     final byte[][] dict = new byte[4096][];
     int bytepos;
     int bitpos;
-    int dictlen = 0;
-    int bitspercode = 9;
+    int dictlen;
+    int bitspercode;
 
     /**
      * initialize this decoder with an array of encoded bytes
@@ -167,9 +167,6 @@ public class LZWDecode {
      * @return the uncompressed byte array
      */
     private ByteBuffer decode() throws PDFParseException {
-        // algorithm derived from:
-        // http://www.rasip.fer.hr/research/compress/algorithms/fund/lz/lzw.html
-        // and the PDFReference
         int cW = CLEARDICT;
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         while (true) {

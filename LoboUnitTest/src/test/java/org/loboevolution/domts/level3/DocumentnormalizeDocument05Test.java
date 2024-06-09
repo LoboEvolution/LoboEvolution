@@ -83,7 +83,7 @@ public class DocumentnormalizeDocument05Test extends LoboUnitTest {
         pList = doc.getElementsByTagName("p");
         elem = (Element) pList.item(0);
         newChild = doc.createElement("br");
-        retval = (Element) elem.appendChild(newChild);
+        elem.appendChild(newChild);
         domConfig = doc.getDomConfig();
         domConfig.setParameter("namespaces", Boolean.TRUE);
         /*DOMErrorMonitor */
@@ -111,9 +111,9 @@ public class DocumentnormalizeDocument05Test extends LoboUnitTest {
                 message = error.getMessage();
                 length = message.length();
                 assertTrue((length > 0), "DocumentnormalizeDocument05Assert7");
-                type = error.getType();
-                relatedData = error.getRelatedData();
-                relatedException = error.getRelatedException();
+                error.getType();
+                error.getRelatedData();
+                error.getRelatedException();
                 errorCount += 1;
             } else {
                 assertEquals(1, severity, "DocumentnormalizeDocument05Assert8");

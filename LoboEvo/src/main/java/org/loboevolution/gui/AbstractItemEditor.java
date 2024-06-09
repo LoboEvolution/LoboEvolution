@@ -27,6 +27,7 @@
 package org.loboevolution.gui;
 
 import javax.swing.JComponent;
+import java.io.Serial;
 
 /**
  * <p>Abstract AbstractItemEditor class.</p>
@@ -37,6 +38,7 @@ import javax.swing.JComponent;
 public abstract class AbstractItemEditor<T> extends JComponent {
 
 	/** The Constant serialVersionUID. */
+	@Serial
 	private static final long serialVersionUID = 1L;
 
 	/**

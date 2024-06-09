@@ -94,9 +94,8 @@ public class SVGAElementImpl extends SVGGraphic implements SVGAElement {
 				} else if (child instanceof SVGUseElementImpl) {
 					SVGRect bbox = ((SVGUseElement) child).getBBox();
 					childShape = new Rectangle2D.Float(bbox.getX(), bbox.getY(), bbox.getWidth(), bbox.getHeight());
-				} else if (child instanceof SVGSVGElementImpl) {
-					SVGSVGElement svg = ( SVGSVGElement) child;
-					AffineTransform ctm = getCTM().getAffineTransform();
+				} else if (child instanceof SVGSVGElementImpl svg) {
+                    AffineTransform ctm = getCTM().getAffineTransform();
 					AffineTransform inverseTransform;
 					try {
 						inverseTransform = ctm.createInverse();

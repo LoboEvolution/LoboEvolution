@@ -66,7 +66,7 @@ public class Nodeinsertbefore10Test extends LoboUnitTest {
         newElem = doc.createElementNS(rootNS, rootTagname);
 
         try {
-            inserted = doc.insertBefore(newElem, elem);
+            doc.insertBefore(newElem, elem);
             fail("throw_DOMException");
 
         } catch (final DOMException ex) {

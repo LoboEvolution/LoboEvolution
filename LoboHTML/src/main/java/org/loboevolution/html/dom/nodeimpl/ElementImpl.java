@@ -451,27 +451,24 @@ public abstract class ElementImpl extends NodeImpl implements Element {
 	protected String getRawInnerText(final boolean includeComment) {
 		StringBuilder sb = null;
 		for (final Node node : nodeList) {
-			if (node instanceof Text) {
-				final Text tn = (Text) node;
-				final String txt = tn.getNodeValue();
+			if (node instanceof Text tn) {
+                final String txt = tn.getNodeValue();
 				if (Strings.isNotBlank(txt)) {
 					if (sb == null) {
 						sb = new StringBuilder();
 					}
 					sb.append(txt);
 				}
-			} else if (node instanceof ElementImpl) {
-				final ElementImpl en = (ElementImpl) node;
-				final String txt = en.getRawInnerText(includeComment);
+			} else if (node instanceof ElementImpl en) {
+                final String txt = en.getRawInnerText(includeComment);
 				if (Strings.isNotBlank(txt)) {
 					if (sb == null) {
 						sb = new StringBuilder();
 					}
 					sb.append(txt);
 				}
-			} else if (includeComment && node instanceof Comment) {
-				final Comment cn = (Comment) node;
-				final String txt = cn.getNodeValue();
+			} else if (includeComment && node instanceof Comment cn) {
+                final String txt = cn.getNodeValue();
 				if (Strings.isNotBlank(txt)) {
 					if (sb == null) {
 						sb = new StringBuilder();
@@ -1152,7 +1149,7 @@ public abstract class ElementImpl extends NodeImpl implements Element {
 					}
 				});
 			}
-			return ArrayUtilities.isNotBlank(elem) ? elem.get(0) : null;
+			return ArrayUtilities.isNotBlank(elem) ? elem.getFirst() : null;
 		} catch (final Exception e) {
 			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "Is not a valid selector.");
 		}

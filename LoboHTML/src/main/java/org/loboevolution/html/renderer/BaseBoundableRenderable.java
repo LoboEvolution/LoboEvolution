@@ -411,9 +411,8 @@ abstract class BaseBoundableRenderable extends RRectangle implements BoundableRe
 		ModelNode node = limit;
 		while (node != null) {
 
-			if (node instanceof NodeImpl) {
-				final NodeImpl uiElement = (NodeImpl) node;
-				final RenderState rs = uiElement.getRenderState();
+			if (node instanceof NodeImpl uiElement) {
+                final RenderState rs = uiElement.getRenderState();
 				final Cursor cursorOpt = rs.getCursor();
 				foundCursorOpt = cursorOpt;
 				if (cursorOpt == null) {
@@ -423,9 +422,8 @@ abstract class BaseBoundableRenderable extends RRectangle implements BoundableRe
 			node = node.getParentModelNode();
 		}
 
-		if (nodeStart instanceof NodeImpl) {
-			final NodeImpl uiElement = (NodeImpl) nodeStart;
-			final HtmlRendererContext rcontext = uiElement.getHtmlRendererContext();
+		if (nodeStart instanceof NodeImpl uiElement) {
+            final HtmlRendererContext rcontext = uiElement.getHtmlRendererContext();
 			rcontext.setCursor(foundCursorOpt);
 		}
 	}

@@ -31,12 +31,14 @@ import org.loboevolution.component.BrowserFrame;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.io.Serial;
 
 /**
  * <p>DeveloperToolsAction class.</p>
  */
 public class DeveloperToolsAction extends AbstractAction {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     private final BrowserFrame frame;

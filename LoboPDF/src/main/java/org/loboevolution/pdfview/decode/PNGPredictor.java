@@ -52,7 +52,7 @@ public class PNGPredictor extends Predictor {
             throws IOException {
         final List<byte[]> rows = new ArrayList<>();
 
-        byte[] curLine = null;
+        byte[] curLine;
         byte[] prevLine = null;
 
         // get the number of bytes per row

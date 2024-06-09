@@ -29,13 +29,15 @@ import org.loboevolution.common.WrapperLayout;
 import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
 
 import java.awt.*;
+import java.io.Serial;
 
 /**
  * <p>InputControl class.</p>
  */
 public class InputControl extends BaseControl {
 
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 	
 	private final HTMLInputElementImpl  modelNode;
 

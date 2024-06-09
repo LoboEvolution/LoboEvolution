@@ -90,12 +90,6 @@ public class RTableCell extends RBlock {
 		return new Dimension(this.getWidth(), this.getHeight());
 	}
 
-	/** {@inheritDoc} */
-	@Override
-	public void finalize() throws Throwable {
-		super.finalize();
-	}
-
 	/**
 	 * <p>Getter for the field colSpan.</p>
 	 *
@@ -119,9 +113,8 @@ public class RTableCell extends RBlock {
         final CSSStyleDeclaration props = this.cellElement.getCurrentStyle();
         final String heightText = props == null ? null : props.getHeight();
         if (heightText == null) {
-			if (this.cellElement instanceof HTMLTableCellElement) {
-				final HTMLTableCellElement htmlTableCellElement = (HTMLTableCellElement) this.cellElement;
-				if (htmlTableCellElement.getHeight() != null) {
+			if (this.cellElement instanceof HTMLTableCellElement htmlTableCellElement) {
+                if (htmlTableCellElement.getHeight() != null) {
 					return htmlTableCellElement.getHeight();
 				}
 			}
@@ -176,9 +169,8 @@ public class RTableCell extends RBlock {
 		final CSSStyleDeclaration props = this.cellElement.getCurrentStyle();
 		final String widthText = props == null ? null : props.getWidth();
 		if (widthText == null) {
-			if (this.cellElement instanceof HTMLTableCellElement) {
-				final HTMLTableCellElement htmlTableCellElement = (HTMLTableCellElement) this.cellElement;
-				if (htmlTableCellElement.getWidth() != null) {
+			if (this.cellElement instanceof HTMLTableCellElement htmlTableCellElement) {
+                if (htmlTableCellElement.getWidth() != null) {
 					return htmlTableCellElement.getWidth();
 				}
 			}

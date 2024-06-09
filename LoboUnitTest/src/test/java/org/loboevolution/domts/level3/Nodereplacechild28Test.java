@@ -68,7 +68,7 @@ public class Nodereplacechild28Test extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                replacedChild = acronym.replaceChild(betaText, dallas);
+                acronym.replaceChild(betaText, dallas);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }

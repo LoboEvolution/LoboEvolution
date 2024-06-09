@@ -63,9 +63,7 @@ public class HTMLHeadingElementImpl extends HTMLElementImpl implements HTMLHeadi
 				}
 			}
 		}
-		for (int i = 0; i < 2 - lineBreaks; i++) {
-			buffer.append("\r\n");
-		}
+        buffer.append("\r\n".repeat(Math.max(0, 2 - lineBreaks)));
 		super.appendInnerTextImpl(buffer);
 		buffer.append("\r\n\r\n");
 	}

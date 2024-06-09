@@ -66,7 +66,6 @@ import javax.swing.event.ChangeListener;
  * {@link #doneRescrolling(ImageViewer)} function. At this point the
  * synchronizer adjusts the scroll panes of the other viewers to match the
  * originator.
- * 
  * Author Kazo Csaba
  */
 class Synchronizer {

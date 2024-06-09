@@ -59,7 +59,7 @@ public class Hcdocumentinvalidcharacterexceptioncreateattribute1Test extends Lob
         {
             boolean success = false;
             try {
-                createdAttr = doc.createAttribute("");
+                doc.createAttribute("");
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
             }

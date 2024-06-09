@@ -29,11 +29,14 @@ package org.loboevolution.html.control;
 import org.loboevolution.common.WrapperLayout;
 import org.loboevolution.html.dom.domimpl.HTMLButtonElementImpl;
 
+import java.io.Serial;
+
 /**
  * <p>ButtonControl class.</p>
  */
 public class ButtonControl extends BaseControl implements UIControl {
 
+@Serial
 private static final long serialVersionUID = 1L;
 	
 	private final HTMLButtonElementImpl  modelNode;

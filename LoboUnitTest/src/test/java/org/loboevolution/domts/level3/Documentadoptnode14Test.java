@@ -54,9 +54,6 @@ public class Documentadoptnode14Test extends LoboUnitTest {
         final boolean success;
         final Node acronymNode;
         final Node adoptedDocFrag;
-        Node appendedChild;
-        final DocumentType nullDocType = null;
-
         final Node imported;
         final String rootNS;
         final String rootName;
@@ -65,14 +62,14 @@ public class Documentadoptnode14Test extends LoboUnitTest {
         rootName = docElem.getTagName();
         rootNS = docElem.getNamespaceURI();
         domImpl = doc.getImplementation();
-        newDoc = domImpl.createDocument(rootNS, rootName, nullDocType);
+        newDoc = domImpl.createDocument(rootNS, rootName, null);
         docFragment = newDoc.createDocumentFragment();
         imported = newDoc.importNode(docElem, true);
         docElem = newDoc.getDocumentElement();
-        appendedChild = docElem.appendChild(imported);
+        docElem.appendChild(imported);
         childList = newDoc.getElementsByTagName("acronym");
         acronymNode = childList.item(0);
-        appendedChild = docFragment.appendChild(acronymNode);
+        docFragment.appendChild(acronymNode);
         adoptedDocFrag = newDoc.adoptNode(docFragment);
 
         if ((adoptedDocFrag != null)) {

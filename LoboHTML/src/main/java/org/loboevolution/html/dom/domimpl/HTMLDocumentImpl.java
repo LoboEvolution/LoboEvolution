@@ -63,10 +63,8 @@ import org.xml.sax.SAXException;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
-import java.security.AccessController;
-import java.security.PrivilegedAction;
 import java.util.*;
 /**
  * Implementation of the W3C HTMLDocument interface.
@@ -147,12 +145,12 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 		this.config = config;
 		try {
 			if (Strings.isNotBlank(documentURI)) {
-				final URL docURL = new URL(documentURI);
+				final URL docURL = new URI(documentURI).toURL();
 				this.documentURL = docURL;
 				setDomain(docURL.getHost());
 				this.setDocumentURI(documentURI);
 			}
-		} catch (final MalformedURLException mfu) {
+		} catch (Exception mfu) {
 			log.warn("HTMLDocumentImpl(): Document URI {} is malformed.",  documentURI);
 		}
 		this.document = this;
@@ -194,8 +192,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	 * Informs listeners that the whole document has been invalidated.
 	 */
 	public void allInvalidated() {
-		final List<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
-		for (final DocumentNotificationListener dnl : listenersList) {
+        for (final DocumentNotificationListener dnl : this.documentNotificationListeners) {
 			dnl.allInvalidated();
 		}
 	}
@@ -233,8 +230,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	 * @param node a {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} object.
 	 */
 	public void externalScriptLoading(final NodeImpl node) {
-		final List<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
-		for (final DocumentNotificationListener dnl : listenersList) {
+        for (final DocumentNotificationListener dnl : this.documentNotificationListeners) {
 			dnl.externalScriptLoading(node);
 		}
 	}
@@ -249,12 +245,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	/** {@inheritDoc} */
 	@Override
 	public String getCookie() {
-		final SecurityManager sm = System.getSecurityManager();
-		if (sm != null) {
-			return (String) AccessController.doPrivileged((PrivilegedAction<Object>) () -> HTMLDocumentImpl.this.getUcontext().getCookie(HTMLDocumentImpl.this.documentURL));
-		} else {
-			return this.getUcontext().getCookie(this.documentURL);
-		}
+		return this.getUcontext().getCookie(this.documentURL);
 	}
 
 	/** {@inheritDoc} */
@@ -266,18 +257,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	/** {@inheritDoc} */
 	@Override
 	public final URL getFullURL(final String uri) {
-		try {
-			final String baseURI = getBaseURI();
-			final URL documentURL = baseURI == null ? null : new URL(baseURI);
-			return Urls.createURL(documentURL, uri);
-		} catch (final Exception mfu) {
-			try {
-				return new URL(uri);
-			} catch (final Exception mfu2) {
-				log.error("Unable to create URL for URI= {} with base {} ", uri, baseURI);
-				return null;
-			}
-		}
+		return getFullURL(uri, getBaseURI());
 	}
 
 	/**
@@ -289,12 +269,12 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	 */
 	public final URL getFullURL(final String uri, final String baseURI) {
 		try {
-			final URL documentURL = baseURI == null ? null : new URL(baseURI);
+			final URL documentURL = baseURI == null ? null : new URI(baseURI).toURL();
 			return Urls.createURL(documentURL, uri);
 		} catch (final Exception mfu) {
 			// Try agan, without the baseURI.
 			try {
-				return new URL(uri);
+				return new URI(uri).toURL();
 			} catch (final Exception mfu2) {
 				log.error("Unable to create URL for URI= {} with base {}", uri, baseURI);
 				return null;
@@ -407,8 +387,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	 * @param node a {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} object.
 	 */
 	public void invalidated(final NodeImpl node) {
-		final List<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
-		for (final DocumentNotificationListener dnl : listenersList) {
+        for (final DocumentNotificationListener dnl : this.documentNotificationListeners) {
 			dnl.invalidated(node);
 		}
 	}
@@ -442,8 +421,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	 * @param node a {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} object.
 	 */
 	public void lookInvalidated(final NodeImpl node) {
-		final List<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
-		for (final DocumentNotificationListener dnl : listenersList) {
+        for (final DocumentNotificationListener dnl : this.documentNotificationListeners) {
 			dnl.lookInvalidated(node);
 		}
 	}
@@ -468,8 +446,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	 * @param node a {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} object.
 	 */
 	public void nodeLoaded(final NodeImpl node) {
-		final List<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
-		for (final DocumentNotificationListener dnl : listenersList) {
+        for (final DocumentNotificationListener dnl : this.documentNotificationListeners) {
 			dnl.nodeLoaded(node);
 		}
 	}
@@ -488,8 +465,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	 * @param node a {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} object.
 	 */
 	public void positionInParentInvalidated(final NodeImpl node) {
-		final List<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
-		for (final DocumentNotificationListener dnl : listenersList) {
+        for (final DocumentNotificationListener dnl : this.documentNotificationListeners) {
 			dnl.positionInvalidated(node);
 		}
 	}
@@ -523,15 +499,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	/** {@inheritDoc} */
 	@Override
 	public void setCookie(final String cookie) {
-		final SecurityManager sm = System.getSecurityManager();
-		if (sm != null) {
-			AccessController.doPrivileged((PrivilegedAction<Object>) () -> {
-				HTMLDocumentImpl.this.getUcontext().setCookie(HTMLDocumentImpl.this.documentURL, cookie);
-				return null;
-			});
-		} else {
-			this.getUcontext().setCookie(this.documentURL, cookie);
-		}
+		this.getUcontext().setCookie(this.documentURL, cookie);
 	}
 
 	/**
@@ -574,8 +542,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	 * @param node a {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} object.
 	 */
 	public void sizeInvalidated(final NodeImpl node) {
-		final List<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
-		for (final DocumentNotificationListener dnl : listenersList) {
+        for (final DocumentNotificationListener dnl : this.documentNotificationListeners) {
 			dnl.sizeInvalidated(node);
 		}
 	}
@@ -586,8 +553,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	 * @param node a {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} object.
 	 */
 	public void structureInvalidated(final NodeImpl node) {
-		final List<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
-		for (final DocumentNotificationListener dnl : listenersList) {
+        for (final DocumentNotificationListener dnl : this.documentNotificationListeners) {
 			dnl.structureInvalidated(node);
 		}
 	}

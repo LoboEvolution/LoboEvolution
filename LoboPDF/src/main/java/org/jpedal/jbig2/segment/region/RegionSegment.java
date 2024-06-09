@@ -86,6 +86,6 @@ public abstract class RegionSegment extends Segment {
         regionFlags.setFlags(regionFlagsField);
 
         if (JBIG2StreamDecoder.debug)
-            log.info("region Segment flags = " + regionFlagsField);
+            log.info("region Segment flags = {}", regionFlagsField);
     }
 }

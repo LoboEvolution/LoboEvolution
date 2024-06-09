@@ -30,6 +30,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -42,7 +43,8 @@ import java.io.Serializable;
 public class CaptionSizeInfo implements Serializable {
 
 	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = -699151415264714503L;
+	@Serial
+    private static final long serialVersionUID = -699151415264714503L;
 
 	/** The height. */
 	private int height;

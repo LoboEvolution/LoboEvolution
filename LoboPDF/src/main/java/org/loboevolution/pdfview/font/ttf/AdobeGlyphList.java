@@ -88,7 +88,7 @@ public final class AdobeGlyphList {
                                 break;
                             }
                             line = line.trim();
-                            if (line.length() > 0 && !line.startsWith("#")) {
+                            if (!line.isEmpty() && !line.startsWith("#")) {
                                 // ignore comment lines
                                 tokens = new StringTokenizer(line, ";");
                                 glyphName = tokens.nextToken();

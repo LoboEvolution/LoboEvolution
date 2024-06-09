@@ -85,9 +85,8 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 			if (hashIndex != -1) {
 				final String idElement = fill.substring(hashIndex + 1, fill.length() - 1);
 				final Element elementById = (Element) child(idElement);
-				if (elementById instanceof SVGGradientElementImpl) {
-					final SVGGradientElementImpl grad = ( SVGGradientElementImpl) elementById;
-					fillPaint = grad.gradient(elementById, shape);
+				if (elementById instanceof SVGGradientElementImpl grad) {
+                    fillPaint = grad.gradient(elementById, shape);
 				}
 			}
 		} else {
@@ -116,9 +115,8 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 			if (hashIndex != -1) {
 				final String idElement = stroke.substring(hashIndex + 1, stroke.length() - 1);
 				final Element elementById = (Element) child(idElement);
-				if (elementById instanceof SVGGradientElementImpl) {
-					final SVGGradientElementImpl grad = ( SVGGradientElementImpl) elementById;
-					strokePaint = grad.gradient(elementById, shape);
+				if (elementById instanceof SVGGradientElementImpl grad) {
+                    strokePaint = grad.gradient(elementById, shape);
 				}
 			}
 		} else {
@@ -140,20 +138,12 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 		final CSSStyleDeclaration style = getStyle();
 		final int intLineCap;
 		final String strokeLinecap = Strings.isNotBlank(style.getStrokeLineCap()) ? style.getStrokeLineCap() : getAttribute("stroke-linecap");
-		switch (Strings.isNotBlank(strokeLinecap) ? strokeLinecap : "") {
-			case "round":
-				intLineCap = BasicStroke.CAP_ROUND;
-				break;
-			case "square":
-				intLineCap = BasicStroke.CAP_SQUARE;
-				break;
-			case "miter":
-				intLineCap = BasicStroke.JOIN_MITER;
-				break;
-			default:
-				intLineCap = BasicStroke.CAP_BUTT;
-				break;
-		}
+        intLineCap = switch (Strings.isNotBlank(strokeLinecap) ? strokeLinecap : "") {
+            case "round" -> BasicStroke.CAP_ROUND;
+            case "square" -> BasicStroke.CAP_SQUARE;
+            case "miter" -> BasicStroke.JOIN_MITER;
+            default -> BasicStroke.CAP_BUTT;
+        };
 		return intLineCap;
 	}
 
@@ -166,17 +156,11 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 		final CSSStyleDeclaration style = getStyle();
 		final int lineJoin;
 		final String strokeLinejoin = Strings.isNotBlank(style.getStrokeLineJoin()) ? style.getStrokeLineJoin() : getAttribute("stroke-linejoin");
-		switch (Strings.isNotBlank(strokeLinejoin) ? strokeLinejoin : "") {
-			case "miter":
-				lineJoin = BasicStroke.JOIN_MITER;
-				break;
-			case "round":
-				lineJoin = BasicStroke.JOIN_ROUND;
-				break;
-			default:
-				lineJoin = BasicStroke.JOIN_BEVEL;
-				break;
-		}
+        lineJoin = switch (Strings.isNotBlank(strokeLinejoin) ? strokeLinejoin : "") {
+            case "miter" -> BasicStroke.JOIN_MITER;
+            case "round" -> BasicStroke.JOIN_ROUND;
+            default -> BasicStroke.JOIN_BEVEL;
+        };
 		return lineJoin;
 	}
 
@@ -492,9 +476,8 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 		for (final Node child : nodeList) {
 			final NodeListImpl nodeList1 = (NodeListImpl) child.getChildNodes();
 			for (final Node child1 : nodeList1) {
-				if (child1 instanceof Element) {
-					final Element elem1 = (Element) child1;
-					final NamedNodeMap attributes2 = elem1.getAttributes();
+				if (child1 instanceof Element elem1) {
+                    final NamedNodeMap attributes2 = elem1.getAttributes();
 					if (attributes2 != null) {
 						for (final Node nodeAttr : Nodes.iterable(attributes2)) {
 							final Attr attr = (Attr) nodeAttr;
@@ -506,9 +489,8 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 				}
 			}
 
-			if (child instanceof Element) {
-				final Element elem = (Element) child;
-				final NamedNodeMap attributes2 = elem.getAttributes();
+			if (child instanceof Element elem) {
+                final NamedNodeMap attributes2 = elem.getAttributes();
 				if (attributes2 != null) {
 					for (final Node nodeAttr : Nodes.iterable(attributes2)) {
 						final Attr attr = (Attr) nodeAttr;

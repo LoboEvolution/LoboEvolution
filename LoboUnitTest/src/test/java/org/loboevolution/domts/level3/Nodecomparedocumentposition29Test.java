@@ -58,8 +58,8 @@ public class Nodecomparedocumentposition29Test extends LoboUnitTest {
         entRef1 = doc.createEntityReference("ent4");
         entRef2 = doc.createEntityReference("ent4");
         docElem = doc.getDocumentElement();
-        appendedChild = docElem.appendChild(entRef1);
-        appendedChild = docElem.appendChild(entRef2);
+        docElem.appendChild(entRef1);
+        docElem.appendChild(entRef2);
         entRefChild1 = (Element) entRef1.getFirstChild();
         assertNotNull(entRefChild1, "Nodecomparedocumentposition29Assert3");
         entRefChild2 = (ProcessingInstruction) entRef2.getLastChild();

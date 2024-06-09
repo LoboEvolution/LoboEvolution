@@ -55,8 +55,8 @@ public class Noderemovechild11Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         docFrag = doc.createDocumentFragment();
         txt = doc.createTextNode("TEXT");
-        appendedChild = docFrag.appendChild(txt);
-        removedChild = docFrag.removeChild(txt);
+        docFrag.appendChild(txt);
+        docFrag.removeChild(txt);
         removedTxt = (Text) docFrag.getFirstChild();
         assertNull(removedTxt, "Noderemovechild11Assert2");
     }

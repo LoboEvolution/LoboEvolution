@@ -27,6 +27,7 @@
 package org.loboevolution.component;
 
 import java.awt.BorderLayout;
+import java.io.Serial;
 import java.util.List;
 
 import javax.swing.JPanel;
@@ -44,6 +45,7 @@ import org.loboevolution.welcome.WelcomePanel;
  */
 @Getter
 public class BrowserPanel extends JPanel implements IBrowserPanel {
+	@Serial
 	private static final long serialVersionUID = 1L;
 
 	private final JScrollPane scroll;
@@ -72,7 +74,7 @@ public class BrowserPanel extends JPanel implements IBrowserPanel {
 			this.tabbedPane.addTab("Welcome", this.welcome.getWelocome());
 		} else if (startupURLs.size() == 1) {
 			final TabbedHtml html = new TabbedHtml();
-			final String url = startupURLs.get(0);
+			final String url = startupURLs.getFirst();
 			html.tab(this, url, 1);
 		} else {
 			final TabbedHtml html = new TabbedHtml();

@@ -53,7 +53,7 @@ public class Nodeisdefaultnamespace10Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         parent = doc.createElementNS("http://www.w3.org/1999/xhtml", "xhtml:body");
         child = doc.createElementNS("http://www.w3.org/1999/xhtml", "p");
-        appendedChild = parent.appendChild(child);
+        parent.appendChild(child);
         isDefault = child.isDefaultNamespace("http://www.w3.org/1999/xhtml");
         assertFalse(isDefault, "Nodeisdefaultnamespace10Assert3");
         isDefault = parent.isDefaultNamespace("http://www.w3.org/1999/xhtml");

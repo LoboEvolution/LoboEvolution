@@ -68,7 +68,7 @@ public class Documentrenamenode19Test extends LoboUnitTest {
 
         doc = sampleXmlFile("hc_staff.xml");
         domImpl = doc.getImplementation();
-        domImpl.createDocument("http://www.w3.org/DOM/Test", "newD", nullDocType);
+        domImpl.createDocument("http://www.w3.org/DOM/Test", "newD", null);
         element = doc.createElementNS("http://www.w3.org/DOM/Test", "test");
         for (final String qualifiedName : qualifiedNames) {
             boolean success = false;

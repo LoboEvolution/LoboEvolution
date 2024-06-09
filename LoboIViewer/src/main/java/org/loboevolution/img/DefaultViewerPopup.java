@@ -32,6 +32,7 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serial;
 
 import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
@@ -57,6 +58,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class DefaultViewerPopup extends JPopupMenu {
 
+	@Serial
 	private static final long serialVersionUID = 1L;
 	private final ImageViewer viewer;
 	/*

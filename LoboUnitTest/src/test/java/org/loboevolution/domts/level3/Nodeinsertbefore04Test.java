@@ -55,7 +55,7 @@ public class Nodeinsertbefore04Test extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                inserted = doc.insertBefore(doc, docType);
+                doc.insertBefore(doc, docType);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.HIERARCHY_REQUEST_ERR);
             }

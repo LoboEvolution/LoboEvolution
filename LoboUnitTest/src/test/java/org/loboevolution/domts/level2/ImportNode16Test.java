@@ -69,7 +69,7 @@ public class ImportNode16Test extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                node = doc.importNode(docType, false);
+                doc.importNode(docType, false);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
             }

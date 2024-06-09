@@ -56,7 +56,7 @@ public class Nodegetuserdata04Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
         /*Node */
-        prevUserData = docType.setUserData("KeyDoc", doc, null);
+        docType.setUserData("KeyDoc", doc, null);
         retUserData = docType.getUserData("KeyDoc");
         success = ((Node) /*DOMUserData */retUserData).isEqualNode(doc);
         assertTrue(success, "Nodegetuserdata04Assert2");

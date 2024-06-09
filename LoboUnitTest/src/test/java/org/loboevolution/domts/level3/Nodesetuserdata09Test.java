@@ -54,7 +54,7 @@ public class Nodesetuserdata09Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         docElem = doc.getDocumentElement();
         /*Node */
-        retUserData = docElem.setUserData("Key1", doc, null);
+        docElem.setUserData("Key1", doc, null);
         returned = doc.getUserData("Key1");
         assertNull(returned, "Nodesetuserdata09Assert2");
     }

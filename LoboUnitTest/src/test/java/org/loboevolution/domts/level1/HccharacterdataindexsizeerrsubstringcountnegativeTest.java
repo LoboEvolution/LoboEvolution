@@ -72,7 +72,7 @@ public class HccharacterdataindexsizeerrsubstringcountnegativeTest extends LoboU
         {
             boolean success = false;
             try {
-                badSubstring = child.substringData(10, -3);
+                child.substringData(10, -3);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.INDEX_SIZE_ERR);
             }

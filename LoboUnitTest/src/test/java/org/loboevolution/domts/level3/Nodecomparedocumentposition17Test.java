@@ -54,8 +54,8 @@ public class Nodecomparedocumentposition17Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         pi1 = doc.createProcessingInstruction("PI1", "");
         pi2 = doc.createProcessingInstruction("PI2", "");
-        appendedChild = doc.appendChild(pi1);
-        appendedChild = doc.appendChild(pi2);
+        doc.appendChild(pi1);
+        doc.appendChild(pi2);
         pi1Position = pi1.compareDocumentPosition(pi2);
         assertEquals(4, pi1Position, "Nodecomparedocumentposition17Assert2");
         pi2Position = pi2.compareDocumentPosition(pi1);

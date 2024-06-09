@@ -270,45 +270,21 @@ public class SVGLengthImpl implements SVGLength {
 	}
 
 	private String getUnitTypeAsString(final short unitType) {
-		String suffix;
-		switch (unitType) {
-		case SVGLength.SVG_LENGTHTYPE_CM:
-			suffix = "cm";
-			break;
-		case SVGLength.SVG_LENGTHTYPE_EMS:
-			suffix = "ems";
-			break;
-		case SVGLength.SVG_LENGTHTYPE_EXS:
-			suffix = "exs";
-			break;
-		case SVGLength.SVG_LENGTHTYPE_IN:
-			suffix = "in";
-			break;
-		case SVGLength.SVG_LENGTHTYPE_MM:
-			suffix = "mm";
-			break;
-		case SVGLength.SVG_LENGTHTYPE_PC:
-			suffix = "pc";
-			break;
-		case SVGLength.SVG_LENGTHTYPE_PERCENTAGE:
-			suffix = "%";
-			break;
-		case SVGLength.SVG_LENGTHTYPE_PT:
-			suffix = "pt";
-			break;
-		case SVGLength.SVG_LENGTHTYPE_PX:
-			suffix = "px";
-			break;
-		case SVGLength.SVG_LENGTHTYPE_NUMBER:
-			suffix = "";
-			break;
-		case SVGLength.SVG_LENGTHTYPE_UNKNOWN:
-			suffix = "unknown";
-			break;
-		default:
-			throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Invalid unit type");
-		}
-		return suffix;
+		String suffix = switch (unitType) {
+            case SVGLength.SVG_LENGTHTYPE_CM -> "cm";
+            case SVGLength.SVG_LENGTHTYPE_EMS -> "ems";
+            case SVGLength.SVG_LENGTHTYPE_EXS -> "exs";
+            case SVGLength.SVG_LENGTHTYPE_IN -> "in";
+            case SVGLength.SVG_LENGTHTYPE_MM -> "mm";
+            case SVGLength.SVG_LENGTHTYPE_PC -> "pc";
+            case SVGLength.SVG_LENGTHTYPE_PERCENTAGE -> "%";
+            case SVGLength.SVG_LENGTHTYPE_PT -> "pt";
+            case SVGLength.SVG_LENGTHTYPE_PX -> "px";
+            case SVGLength.SVG_LENGTHTYPE_NUMBER -> "";
+            case SVGLength.SVG_LENGTHTYPE_UNKNOWN -> "unknown";
+            default -> throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Invalid unit type");
+        };
+        return suffix;
 	}
 	
 	

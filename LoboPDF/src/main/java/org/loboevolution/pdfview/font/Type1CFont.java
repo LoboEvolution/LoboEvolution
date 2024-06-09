@@ -328,7 +328,7 @@ public class Type1CFont extends OutlineFont {
      * within the dictionary.
      */
     private void readDict(final Range r) {
-        this.pos = r.getStart();
+        this.pos = r.start();
         while (this.pos < r.getEnd()) {
             final int cmd = readCommand(false);
             if (cmd == 1006) { // charstringtype, default=2
@@ -477,8 +477,8 @@ public class Type1CFont extends OutlineFont {
         //	safenames= new String[nextra];
         for (int i = 0; i < nextra; i++) {
             final Range r = getIndexEntry(base, i);
-            this.names[i] = new String(this.data, r.getStart(), r.getLen());
-            PDFDebugger.debug("Read name: " + i + " from " + r.getStart() + " to " + r.getEnd() + ": " + safe(names[i]), 1000);
+            this.names[i] = new String(this.data, r.start(), r.len());
+            PDFDebugger.debug("Read name: " + i + " from " + r.start() + " to " + r.getEnd() + ": " + safe(names[i]), 1000);
         }
     }
 
@@ -504,7 +504,7 @@ public class Type1CFont extends OutlineFont {
             throw new RuntimeException("More than one font in this file!");
         }
         final Range r = getIndexEntry(fnames, 0);
-        this.fontname = new String(this.data, r.getStart(), r.getLen());
+        this.fontname = new String(this.data, r.start(), r.len());
         // read first dict
         readDict(getIndexEntry(topdicts, 0));
         // read the private dictionary
@@ -647,7 +647,7 @@ public class Type1CFont extends OutlineFont {
      * @param pt a FlPoint representing the end of the current path
      */
     void parseGlyph(final Range r, final GeneralPath gp, final FlPoint pt) {
-        this.pos = r.getStart();
+        this.pos = r.start();
         int i;
         float x1, y1, x2, y2, ybase;
         int hold;
@@ -1120,35 +1120,18 @@ public class Type1CFont extends OutlineFont {
     }
 
     /**
-     * A range.  There's probably a version of this class floating around
-     * somewhere already in Java.
-     */
-    static class Range {
-
-        private final int start;
-
-        private final int len;
-
-        public Range(final int start, final int len) {
-            this.start = start;
-            this.len = len;
-        }
-
-        public final int getStart() {
-            return this.start;
-        }
-
-        public final int getLen() {
-            return this.len;
-        }
+         * A range.  There's probably a version of this class floating around
+         * somewhere already in Java.
+         */
+        record Range(int start, int len) {
 
         public final int getEnd() {
-            return this.start + this.len;
-        }
+                return this.start + this.len;
+            }
 
-        @Override
-        public String toString() {
-            return "Range: start: " + this.start + ", len: " + this.len;
+            @Override
+            public String toString() {
+                return "Range: start: " + this.start + ", len: " + this.len;
+            }
         }
-    }
 }

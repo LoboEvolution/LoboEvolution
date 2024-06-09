@@ -86,11 +86,11 @@ public class IsSupported12Test extends LoboUnitTest {
         assertTrue(state);
         for (int indexN10078 = 0; indexN10078 < features.size(); indexN10078++) {
             featureElement = (String) features.get(indexN10078);
-            state = rootNode.isSupported(featureElement, "1.0");
+            rootNode.isSupported(featureElement, "1.0");
         }
         for (int indexN10083 = 0; indexN10083 < features.size(); indexN10083++) {
             featureElement = (String) features.get(indexN10083);
-            state = rootNode.isSupported(featureElement, "2.0");
+            rootNode.isSupported(featureElement, "2.0");
         }
     }
 }

@@ -217,10 +217,10 @@ public class PDFDebugger {
             log.info("Current path: ");
             final Rectangle b = path.getBounds();
             if (b != null)
-                log.info("        Bounds [x=" + b.x + ",y=" + b.y + ",width=" + b.width + ",height=" + b.height + "]");
+                log.info("        Bounds [x={},y={},width={},height={}]", b.x, b.y, b.width, b.height);
             final Point2D p = path.getCurrentPoint();
             if (p != null)
-                log.info("        Point  [x=" + p.getX() + ",y=" + p.getY() + "]");
+                log.info("        Point  [x={},y={}]", p.getX(), p.getY());
         }
     }
 

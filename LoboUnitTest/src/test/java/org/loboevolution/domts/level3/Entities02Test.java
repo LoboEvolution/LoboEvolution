@@ -44,11 +44,8 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-entities">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-entities</a>
  */
 public class Entities02Test extends LoboUnitTest {
-
     /**
      * Runs the test case.
-     *
-     * @throws Throwable Any uncaught exception causes test to fail
      */
     @Test
     public void runTest() {
@@ -75,7 +72,7 @@ public class Entities02Test extends LoboUnitTest {
         pList = doc.getElementsByTagName("p");
         pElem = (Element) pList.item(0);
         entRef = doc.createEntityReference("ent1");
-        child = pElem.appendChild(entRef);
+        pElem.appendChild(entRef);
         doc.normalizeDocument();
         assertTrue(errorMonitor.assertLowerSeverity(2), "Entities02Assert1");
         pList = doc.getElementsByTagName("p");

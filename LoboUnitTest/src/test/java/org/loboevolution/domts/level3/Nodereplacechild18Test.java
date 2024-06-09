@@ -56,8 +56,8 @@ public class Nodereplacechild18Test extends LoboUnitTest {
         docFrag = doc.createDocumentFragment();
         cdata = doc.createCDATASection("CDATASection");
         entRef = doc.createEntityReference("alpha");
-        appendedChild = docFrag.appendChild(entRef);
-        appendedChild = docFrag.appendChild(cdata);
+        docFrag.appendChild(entRef);
+        docFrag.appendChild(cdata);
         replacedCData = (CDATASection) docFrag.replaceChild(entRef, cdata);
         cdataName = replacedCData.getNodeValue();
         assertEquals("CDATASection", cdataName, "Nodereplacechild18Assert2");

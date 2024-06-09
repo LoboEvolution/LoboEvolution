@@ -59,9 +59,9 @@ public class Nodesetuserdata05Test extends LoboUnitTest {
         doc2 = sampleXmlFile("hc_staff.xml");
         attr = doc.createAttributeNS("http://www.w3.org/XML/1998/namespace", "lang");
         /*Node */
-        retUserData = attr.setUserData("Key1", doc, null);
+        attr.setUserData("Key1", doc, null);
         /*Node */
-        retUserData = attr.setUserData("Key2", doc2, null);
+        attr.setUserData("Key2", doc2, null);
         returned1 = attr.getUserData("Key1");
         returned2 = attr.getUserData("Key2");
         success = ((Node) /*DOMUserData */returned1).isEqualNode(((Node) /*DOMUserData */returned2));

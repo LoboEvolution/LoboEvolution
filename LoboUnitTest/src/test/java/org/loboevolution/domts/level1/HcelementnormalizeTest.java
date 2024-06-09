@@ -64,9 +64,9 @@ public class HcelementnormalizeTest extends LoboUnitTest {
         elementList = doc.getElementsByTagName("sup");
         testName = (Element) elementList.item(0);
         textNode = doc.createTextNode("");
-        retNode = testName.appendChild(textNode);
+        testName.appendChild(textNode);
         textNode = doc.createTextNode(",000");
-        retNode = testName.appendChild(textNode);
+        testName.appendChild(textNode);
         root = doc.getDocumentElement();
         root.normalize();
         elementList = doc.getElementsByTagName("sup");

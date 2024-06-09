@@ -74,6 +74,7 @@ import java.awt.event.ActionListener;
 import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
@@ -582,9 +583,9 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 			url = document.getFullURL(relativeUrl);
 		} else {
 			try {
-				url = new URL(relativeUrl);
-			} catch (final MalformedURLException mfu) {
-				throw new IllegalArgumentException("Malformed URI: " + relativeUrl);
+				url = new URI(relativeUrl).toURL();
+			} catch (Exception mfu) {
+				throw new IllegalArgumentException("Error URI: " + relativeUrl);
 			}
 		}
 
@@ -665,14 +666,12 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 		final Integer timeIDInt = timeID;
 		ActionListener task = null;
 
-		if(aFunction instanceof Function){
-			final Function function = (Function) aFunction;
-			task = new FunctionTimerTask(this, timeIDInt, function, false);
+		if(aFunction instanceof Function function){
+            task = new FunctionTimerTask(this, timeIDInt, function, false);
 		}
 
-		if(aFunction instanceof String){
-			final String aExpression = (String) aFunction;
-			task = new ExpressionTimerTask(this, timeIDInt, aExpression, false);
+		if(aFunction instanceof String aExpression){
+            task = new ExpressionTimerTask(this, timeIDInt, aExpression, false);
 		}
 
 		int t = (int) aTimeInMs;
@@ -759,14 +758,12 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 		final Integer timeIDInt = timeID;
 		ActionListener task = null;
 
-		if(function instanceof Function) {
-			final Function fun = (Function) function;
-			task = new FunctionTimerTask(this, timeIDInt, fun, true);
+		if(function instanceof Function fun) {
+            task = new FunctionTimerTask(this, timeIDInt, fun, true);
 		}
 
-		if(function instanceof String){
-			final String expr = (String)function;
-			task = new ExpressionTimerTask(this, timeIDInt, expr, true);
+		if(function instanceof String expr){
+            task = new ExpressionTimerTask(this, timeIDInt, expr, true);
 		}
 
 		int t = (int) millis;

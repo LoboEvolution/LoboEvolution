@@ -61,9 +61,9 @@ public class NodereplacechildnewchildexistsTest extends LoboUnitTest {
         final HTMLCollection elementList;
         final Node employeeNode;
         final NodeList childList;
-        Node oldChild = null;
+        Node oldChild;
 
-        Node newChild = null;
+        Node newChild;
 
         String childName;
         Node childNode;

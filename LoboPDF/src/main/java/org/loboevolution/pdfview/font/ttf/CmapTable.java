@@ -258,51 +258,42 @@ public class CmapTable extends TrueTypeTable {
         return buf.toString();
     }
 
-    static class CmapSubtable implements Comparable {
-        /**
-         * The platformID for this subtable
-         */
-        final short platformID;
-
-        /**
-         * The platform-specific id
-         */
-        final short platformSpecificID;
-
+    /**
+     * @param platformID         The platformID for this subtable
+     * @param platformSpecificID The platform-specific id
+     */
+    record CmapSubtable(short platformID, short platformSpecificID) implements Comparable {
         /**
          * Create a Cmap subtable
          */
-        protected CmapSubtable(final short platformID, final short platformSpecificID) {
-            this.platformID = platformID;
-            this.platformSpecificID = platformSpecificID;
+        CmapSubtable {
         }
 
-        /**
-         * Compare two subtables
-         */
-        @Override
-        public boolean equals(final Object obj) {
-            return (compareTo(obj) == 0);
-        }
-
-        /**
-         * Sort ascending by platform ID and then specific ID
-         */
-        @Override
-        public int compareTo(final Object obj) {
-            if (!(obj instanceof CmapSubtable)) {
-                return -1;
+            /**
+             * Compare two subtables
+             */
+            @Override
+            public boolean equals(final Object obj) {
+                return (compareTo(obj) == 0);
             }
 
-            final CmapSubtable cms = (CmapSubtable) obj;
-            if (this.platformID < cms.platformID) {
-                return -1;
-            } else if (this.platformID > cms.platformID) {
-                return 1;
-            } else {
-                return Short.compare(this.platformSpecificID, cms.platformSpecificID);
+            /**
+             * Sort ascending by platform ID and then specific ID
+             */
+            @Override
+            public int compareTo(final Object obj) {
+                if (!(obj instanceof CmapSubtable cms)) {
+                    return -1;
+                }
+
+                if (this.platformID < cms.platformID) {
+                    return -1;
+                } else if (this.platformID > cms.platformID) {
+                    return 1;
+                } else {
+                    return Short.compare(this.platformSpecificID, cms.platformSpecificID);
+                }
             }
         }
-    }
 
 }

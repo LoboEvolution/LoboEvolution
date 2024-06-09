@@ -53,9 +53,9 @@ public class Nodereplacechild34Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         parent = doc.createAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:lang");
         oldChild = doc.createEntityReference("delta");
-        appendedChild = parent.appendChild(oldChild);
+        parent.appendChild(oldChild);
         newChild = doc.createTextNode("Text");
-        replaced = parent.replaceChild(newChild, oldChild);
+        parent.replaceChild(newChild, oldChild);
         nodeValue = parent.getValue();
         assertEquals("Text", nodeValue, "Nodereplacechild34Assert2");
     }

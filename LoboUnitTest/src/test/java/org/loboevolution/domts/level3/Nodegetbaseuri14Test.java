@@ -63,7 +63,7 @@ public class Nodegetbaseuri14Test extends LoboUnitTest {
         docElemNS = docElem.getNamespaceURI();
         docElemName = docElem.getLocalName();
         domImpl = doc.getImplementation();
-        newDoc = domImpl.createDocument(docElemNS, docElemName, nullDocType);
+        newDoc = domImpl.createDocument(docElemNS, docElemName, null);
         docType = doc.getDoctype();
         notationsMap = docType.getNotations();
         notation = (Notation) notationsMap.getNamedItem("notation2");

@@ -38,9 +38,8 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 /**
- * DOMImplementationRegistry.getDOMImplementation("http://www.example.com/bogus-feature 99.0") should return
+ * DOMImplementationRegistry.getDOMImplementation("<a href="http://www.example.com/bogus-feature">...</a> 99.0") should return
  * null.
-
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/java-binding">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/java-binding</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/ecma-script-binding">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/ecma-script-binding</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-getDOMImpl">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-getDOMImpl</a>

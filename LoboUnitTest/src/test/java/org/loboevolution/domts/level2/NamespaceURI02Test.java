@@ -44,8 +44,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  * <p>
  * Retrieve the first address node and get the domestic attribute.
  * Invoke the "getNamespaceURI()" method on the attribute.
- * The method should return "http://www.nist.gov".
-
+ * The method should return "<a href="http://www.nist.gov">...</a>".
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSname">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSname</a>
  */
 public class NamespaceURI02Test extends LoboUnitTest {

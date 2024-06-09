@@ -273,14 +273,11 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
 	/** {@inheritDoc} */
 	@Override
 	public String getLineCap() {
-		switch (intLineCap) {
-		case BasicStroke.CAP_ROUND:
-			 return "round";
-		case BasicStroke.CAP_SQUARE:
-			return "square";
-		default:
-			return "butt";
-		}
+        return switch (intLineCap) {
+            case BasicStroke.CAP_ROUND -> "round";
+            case BasicStroke.CAP_SQUARE -> "square";
+            default -> "butt";
+        };
 	}
 
 	/** {@inheritDoc} */
@@ -302,14 +299,11 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
 	/** {@inheritDoc} */
 	@Override
 	public String getLineJoin() {
-		switch (intlineJoin) {
-		case BasicStroke.JOIN_ROUND:
-			 return "round";
-		case BasicStroke.JOIN_MITER:
-			return "miter";
-		default:
-			return "bevel";
-		}
+        return switch (intlineJoin) {
+            case BasicStroke.JOIN_ROUND -> "round";
+            case BasicStroke.JOIN_MITER -> "miter";
+            default -> "bevel";
+        };
 	}
 
 	/** {@inheritDoc} */
@@ -547,9 +541,8 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
 	/** {@inheritDoc} */
 	@Override
 	public void drawImage(final Object oImage, final Integer x, final Integer y) {
-		if (oImage instanceof HTMLImageElementImpl) {
-			final HTMLImageElementImpl hImage = (HTMLImageElementImpl)oImage;
-			final TimingInfo info = new TimingInfo();
+		if (oImage instanceof HTMLImageElementImpl hImage) {
+            final TimingInfo info = new TimingInfo();
 			final Image image = HttpNetwork.getImage(hImage, info, false);
 			final Graphics2D graphics = createGraphics();
 			final AffineTransform at = new AffineTransform();
@@ -565,9 +558,8 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
 	/** {@inheritDoc} */
 	@Override
 	public void drawImage(final Object oImage, final Integer x, final Integer y, final Integer width, final Integer height) {
-		if (oImage instanceof HTMLImageElementImpl) {
-			final HTMLImageElementImpl hImage = (HTMLImageElementImpl)oImage;
-			final TimingInfo info = new TimingInfo();
+		if (oImage instanceof HTMLImageElementImpl hImage) {
+            final TimingInfo info = new TimingInfo();
 			final Image image = HttpNetwork.getImage(hImage, info, false);
 			final Graphics2D graphics = createGraphics();
 			final AffineTransform at = new AffineTransform(width / image.getWidth(null), 0, 0, height / image.getHeight(null), x, y);
@@ -583,9 +575,8 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
 	/** {@inheritDoc} */
 	@Override
 	public void drawImage(final Object oImage, final Integer sx, final Integer sy, final Integer sw, final Integer sh, final Integer dx, final Integer dy, final Integer dw, final Integer dh) {
-		if (oImage instanceof HTMLImageElementImpl) {
-			final HTMLImageElementImpl hImage = (HTMLImageElementImpl)oImage;
-			final TimingInfo info = new TimingInfo();
+		if (oImage instanceof HTMLImageElementImpl hImage) {
+            final TimingInfo info = new TimingInfo();
 			final Image image = HttpNetwork.getImage(hImage, info, false);
 			final Graphics2D graphics = createGraphics();
 			graphics.clip(new Rectangle2D.Float(dx, dy, dw, dh));
@@ -843,40 +834,19 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
 	}
 	
 	private AlphaComposite getComosite() {
-		final int alphaInt;
-		switch (globalCompositeOperation) {
-		case "source-atop":
-			alphaInt = AlphaComposite.SRC_ATOP;
-			break;
-		case "source-in":
-			alphaInt = AlphaComposite.SRC_IN;
-			break;
-		case "source-out":
-			alphaInt = AlphaComposite.SRC_OUT;
-			break;
-		case "destination-atop":
-			alphaInt = AlphaComposite.DST_ATOP;
-			break;
-		case "destination-in":
-			alphaInt = AlphaComposite.DST_IN;
-			break;
-		case "destination-out":
-			alphaInt = AlphaComposite.DST_OUT;
-			break;
-		case "destination-over":
-			alphaInt = AlphaComposite.DST_OVER;
-			break;
-		case "xor":
-			alphaInt = AlphaComposite.XOR;
-			break;
-		case "over":
-			alphaInt = AlphaComposite.CLEAR;
-			break;
-		default:
-			alphaInt = AlphaComposite.SRC_OVER;
-			break;
-		}
-		return AlphaComposite.getInstance(alphaInt, globalAlpha);
+		final int alphaInt = switch (globalCompositeOperation) {
+            case "source-atop" -> AlphaComposite.SRC_ATOP;
+            case "source-in" -> AlphaComposite.SRC_IN;
+            case "source-out" -> AlphaComposite.SRC_OUT;
+            case "destination-atop" -> AlphaComposite.DST_ATOP;
+            case "destination-in" -> AlphaComposite.DST_IN;
+            case "destination-out" -> AlphaComposite.DST_OUT;
+            case "destination-over" -> AlphaComposite.DST_OVER;
+            case "xor" -> AlphaComposite.XOR;
+            case "over" -> AlphaComposite.CLEAR;
+            default -> AlphaComposite.SRC_OVER;
+        };
+        return AlphaComposite.getInstance(alphaInt, globalAlpha);
 	}
 	
 	private Point2D.Float calcTextPos(final Graphics2D graphics, final String text, final int xTextPos, final int yTextPos) {
@@ -889,25 +859,14 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
 		} else if ("right".equals(textAlign)) {
 			x = x - metrics.stringWidth(text);
 		}
-		
-		switch (baseline) {
-		case "baseline":
-			y = y - metrics.getLeading() + metrics.getAscent();
-			break;
-		case "top":
-			y = y - metrics.getLeading();
-			break;
-		case "middle":
-			y = y - metrics.getLeading() - metrics.getAscent() / 2;
-			break;
-		case "bottom":
-		case "text-bottom":
-			y = y - metrics.getHeight();
-			break;
-		default:
-			y = y + metrics.getLeading() + metrics.getAscent();
-			break;
-		}		
+
+        y = switch (baseline) {
+            case "baseline" -> y - metrics.getLeading() + metrics.getAscent();
+            case "top" -> y - metrics.getLeading();
+            case "middle" -> y - metrics.getLeading() - metrics.getAscent() / 2;
+            case "bottom", "text-bottom" -> y - metrics.getHeight();
+            default -> y + metrics.getLeading() + metrics.getAscent();
+        };
 		return new Point2D.Float(x, y);
 	}
 	

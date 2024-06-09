@@ -90,21 +90,14 @@ public class JavaScript {
 				return getStringValue(javascriptObject);
 			}
 		} else if (type == int.class || type == Integer.class) {
-			if (javascriptObject instanceof Double) {
-				return ((Double) javascriptObject).intValue();
-			} else if (javascriptObject instanceof Integer) {
-				return javascriptObject;
-			} else if (javascriptObject instanceof String) {
-				return Strings.isNumeric((String) javascriptObject) ? Float.valueOf((String) javascriptObject) : null;
-			} else if (javascriptObject instanceof Short) {
-				return (int) (Short) javascriptObject;
-			} else if (javascriptObject instanceof Long) {
-				return ((Long) javascriptObject).intValue();
-			} else if (javascriptObject instanceof Float) {
-				return ((Float) javascriptObject).intValue();
-			} else {
-				return javascriptObject;
-			}
+            return switch (javascriptObject) {
+                case Double v -> v.intValue();
+                case String s -> Strings.isNumeric(s) ? Float.valueOf(s) : null;
+                case Short i -> (int) i;
+                case Long l -> l.intValue();
+                case Float v -> v.intValue();
+                default -> javascriptObject;
+            };
 		} else {
 			return javascriptObject;
 		}

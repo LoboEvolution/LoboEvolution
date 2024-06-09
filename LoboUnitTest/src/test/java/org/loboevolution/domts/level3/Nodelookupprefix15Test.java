@@ -62,8 +62,8 @@ public class Nodelookupprefix15Test extends LoboUnitTest {
         elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "dom3:p");
         comment = doc.createComment("Text");
         clonedComment = (Comment) comment.cloneNode(true);
-        appendedChild = elem.appendChild(clonedComment);
-        appendedChild = bodyElem.appendChild(elem);
+        elem.appendChild(clonedComment);
+        bodyElem.appendChild(elem);
         prefix = clonedComment.lookupPrefix("http://www.w3.org/1999/xhtml");
         assertEquals("dom3", prefix, "Nodelookupprefix15Assert2");
     }

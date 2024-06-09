@@ -125,7 +125,7 @@ public abstract class PDFFunction {
             throws IOException {
         final PDFFunction function;
         final int type;
-        float[] domain = null;
+        float[] domain;
         float[] range = null;
 
         // read the function type (required)
@@ -159,31 +159,26 @@ public abstract class PDFFunction {
         }
 
         // now create the acual function object
-        switch (type) {
-            case TYPE_0:
+        function = switch (type) {
+            case TYPE_0 -> {
                 if (rangeObj == null) {
                     throw new PDFParseException(
                             "No Range specified in Type 0 Function!");
                 }
-                function = new FunctionType0();
-                break;
-            case TYPE_2:
-                function = new FunctionType2();
-                break;
-            case TYPE_3:
-                function = new FunctionType3();
-                break;
-            case TYPE_4:
+                yield new FunctionType0();
+            }
+            case TYPE_2 -> new FunctionType2();
+            case TYPE_3 -> new FunctionType3();
+            case TYPE_4 -> {
                 if (rangeObj == null) {
                     throw new PDFParseException(
                             "No Range specified in Type 4 Function!");
                 }
-                function = new FunctionType4();
-                break;
-            default:
-                throw new PDFParseException(
-                        "Unsupported function type: " + type);
-        }
+                yield new FunctionType4();
+            }
+            default -> throw new PDFParseException(
+                    "Unsupported function type: " + type);
+        };
 
         // fill in the domain and optionally the range
         function.setDomain(domain);

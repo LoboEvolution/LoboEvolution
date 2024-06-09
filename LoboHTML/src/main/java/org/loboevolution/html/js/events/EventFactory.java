@@ -47,18 +47,11 @@ public class EventFactory {
 	public static Event createEvent(final String eventType) {
 		Event theEvent;
 		final String event = Strings.isNotBlank(eventType) ? eventType.toLowerCase() : "";
-		switch (event) {
-			case "mouseevent":
-				theEvent = new MouseEventImpl();
-				break;
-			case "uievent":
-				theEvent = new UIEventImpl();
-				break;
-			case "event":
-			default:
-				theEvent = new EventImpl();
-				break;
-		}
+        theEvent = switch (event) {
+            case "mouseevent" -> new MouseEventImpl();
+            case "uievent" -> new UIEventImpl();
+            default -> new EventImpl();
+        };
 		return theEvent;
 	}
 }

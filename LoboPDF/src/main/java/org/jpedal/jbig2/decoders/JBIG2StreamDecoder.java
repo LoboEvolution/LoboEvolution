@@ -538,7 +538,7 @@ public class JBIG2StreamDecoder {
 
         if (JBIG2StreamDecoder.debug) {
             for (final short s : retentionFlags) {
-                log.info(s + " ");
+                log.info("{} ", s);
             }
         }
     }
@@ -571,7 +571,7 @@ public class JBIG2StreamDecoder {
         if (JBIG2StreamDecoder.debug) {
             log.info("referredToSegments = ");
             for (final int i : referredToSegments)
-                log.info(i + " ");
+                log.info("{} ", i);
             log.info("");
         }
     }
@@ -598,7 +598,7 @@ public class JBIG2StreamDecoder {
         final short headerFlags = reader.readByte();
 
         if ((headerFlags & 0xfc) != 0) {
-            log.info("Warning, reserved bits (2-7) of file header flags are not zero " + headerFlags);
+            log.info("Warning, reserved bits (2-7) of file header flags are not zero {}", headerFlags);
         }
 
         final int fileOrganisation = headerFlags & 1;

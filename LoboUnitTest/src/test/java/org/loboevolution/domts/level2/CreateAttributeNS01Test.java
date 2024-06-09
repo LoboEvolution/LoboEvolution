@@ -42,10 +42,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * if qualifiedName is malformed.
  * <p>
  * Invoke method createAttributeNS(namespaceURI,qualifiedName) on
- * the XMLNS Document with namespaceURI being "http://www.ecommerce.org/",
+ * the XMLNS Document with namespaceURI being "<a href="<a">href="http://www.ecomm</a>erce.org/">...</a>",
  * qualifiedName as "prefix::local".  Method should raise
  * NAMESPACE_ERR DOMException.
-
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#xpointer(id('ID-258A00AF')/constant[@name='NAMESPACE_ERR'])">http://www.w3.org/TR/DOM-Level-2-Core/core#xpointer(id('ID-258A00AF')/constant[@name='NAMESPACE_ERR'])</a>
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-DocCrAttrNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-DocCrAttrNS</a>
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#xpointer(id('ID-DocCrAttrNS')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='NAMESPACE_ERR'])">http://www.w3.org/TR/DOM-Level-2-Core/core#xpointer(id('ID-DocCrAttrNS')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='NAMESPACE_ERR'])</a>
@@ -66,7 +65,7 @@ public class CreateAttributeNS01Test extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                newAttr = doc.createAttributeNS(namespaceURI, malformedName);
+                doc.createAttributeNS(namespaceURI, malformedName);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NAMESPACE_ERR);
             }

@@ -30,7 +30,6 @@ import org.loboevolution.common.ArrayUtilities;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.HTMLTag;
 import org.loboevolution.html.control.RUIControl;
-import org.loboevolution.html.control.UIControl;
 import org.loboevolution.html.dom.HTMLBodyElement;
 import org.loboevolution.html.dom.HTMLDocument;
 import org.loboevolution.html.dom.HTMLHtmlElement;
@@ -274,10 +273,9 @@ public class RBlockViewport extends BaseRCollection {
 		final boolean absolute = position == RenderState.POSITION_ABSOLUTE;
 		final boolean fixed = position == RenderState.POSITION_FIXED;
 		if (absolute || fixed) {
-			if (renderable instanceof RBlock) {
-				final RBlock block = (RBlock) renderable;
+			if (renderable instanceof RBlock block) {
 
-				block.layout(RLayoutInfo.builder()
+                block.layout(RLayoutInfo.builder()
 						.availWidth(this.availContentWidth)
 						.availHeight(this.availContentHeight)
 						.expandWidth(false)
@@ -409,18 +407,11 @@ public class RBlockViewport extends BaseRCollection {
 			newLineY = line.getY() + line.getHeight();
 		} else {
 			final int prevY = line.getY() + line.getHeight();
-			switch (breakType) {
-				case LineBreak.BOTH:
-				case LineBreak.LEFT:
-				newLineY = fb.getLeftClearY(prevY);
-				break;
-			case LineBreak.RIGHT:
-				newLineY = fb.getRightClearY(prevY);
-				break;
-			default:
-				newLineY = fb.getClearY(prevY);
-				break;
-			}
+            newLineY = switch (breakType) {
+                case LineBreak.BOTH, LineBreak.LEFT -> fb.getLeftClearY(prevY);
+                case LineBreak.RIGHT -> fb.getRightClearY(prevY);
+                default -> fb.getClearY(prevY);
+            };
 		}
 		this.currentLine = addLine(startNode, line, newLineY);
 	}
@@ -542,9 +533,8 @@ public class RBlockViewport extends BaseRCollection {
 			if (renderables != null) {
 				final Insets insets = this.paddingInsets;
 				for (final Object r : renderables) {
-					if (r instanceof BoundableRenderable) {
-						final BoundableRenderable seqRenderable = (BoundableRenderable) r;
-						final int y = seqRenderable.getY();
+					if (r instanceof BoundableRenderable seqRenderable) {
+                        final int y = seqRenderable.getY();
 						final boolean isVisibleBlock = seqRenderable instanceof RBlock && ((RBlock) seqRenderable).isOverflowVisibleX();
 						final int leftOffset = isVisibleBlock ? insets.left : fetchLeftOffset(y);
 						final int rightOffset = isVisibleBlock ? insets.right : fetchRightOffset(y);
@@ -585,9 +575,8 @@ public class RBlockViewport extends BaseRCollection {
 				if (rlist != null) {
 					// Try sequential renderables first.
 					for (final Object r : rlist) {
-						if (r instanceof BoundableRenderable) {
-							final BoundableRenderable line = (BoundableRenderable) r;
-							final int newY = line.getY() + shift;
+						if (r instanceof BoundableRenderable line) {
+                            final int newY = line.getY() + shift;
 							line.setY(newY);
 							if (newY + line.getHeight() > this.maxY) {
 								this.maxY = newY + line.getHeight();
@@ -696,9 +685,8 @@ public class RBlockViewport extends BaseRCollection {
 					if (blo != 0) {
 						return blo;
 					}
-				} else if (r instanceof RBlock) {
-					final RBlock block = (RBlock) r;
-					if (block.getHeight() > 0) {
+				} else if (r instanceof RBlock block) {
+                    if (block.getHeight() > 0) {
 						final Insets insets = block.getInsetsMarginBorder(false, false);
 						final Insets paddingInsets = this.paddingInsets;
 						return block.getFirstBaselineOffset() + insets.top + (paddingInsets == null ? 0 : paddingInsets.top);
@@ -722,7 +710,7 @@ public class RBlockViewport extends BaseRCollection {
 				return 0;
 			}
 			for (int i = 0; i < size; i++) {
-				final BoundableRenderable br = (BoundableRenderable) renderables.get(0);
+				final BoundableRenderable br = (BoundableRenderable) renderables.getFirst();
 				final int height = br.getHeight();
 				if (height != 0) {
 					return height;
@@ -746,11 +734,10 @@ public class RBlockViewport extends BaseRCollection {
 
 	private int getNewBlockY(final BoundableRenderable newBlock, final int expectedY) {
 		// Assumes the previous block is not a line with height > 0.
-		if (!(newBlock instanceof RElement)) {
+		if (!(newBlock instanceof RElement block)) {
 			return expectedY;
 		}
-		final RElement block = (RElement) newBlock;
-		final int ccm = this.currentCollapsibleMargin;
+        final int ccm = this.currentCollapsibleMargin;
 		final int topMargin = block.getMarginTop();
 		if (topMargin == 0 && ccm == 0) {
 			return expectedY;
@@ -889,11 +876,10 @@ public class RBlockViewport extends BaseRCollection {
 
 	private int initCollapsibleMargin() {
 		final Object parent = this.parent;
-		if (!(parent instanceof RBlock)) {
+		if (!(parent instanceof RBlock parentBlock)) {
 			return 0;
 		}
-		final RBlock parentBlock = (RBlock) parent;
-		return parentBlock.getCollapsibleMarginTop();
+        return parentBlock.getCollapsibleMarginTop();
 	}
 
 	/** {@inheritDoc} */
@@ -921,23 +907,21 @@ public class RBlockViewport extends BaseRCollection {
 
 	private Boolean isFloatLimitImpl() {
 		final Object parent = getOriginalOrCurrentParent();
-		if (!(parent instanceof RBlock)) {
+		if (!(parent instanceof RBlock blockParent)) {
 			return Boolean.TRUE;
 		}
-		final RBlock blockParent = (RBlock) parent;
-		final Object grandParent = blockParent.getOriginalOrCurrentParent();
+        final Object grandParent = blockParent.getOriginalOrCurrentParent();
 		if (!(grandParent instanceof RBlockViewport)) {
 			// Could be contained in a table, or it could
 			// be a list item, for example.
 			return Boolean.TRUE;
 		}
 		final ModelNode node = this.modelNode;
-		if (!(node instanceof HTMLElementImpl)) {
+		if (!(node instanceof HTMLElementImpl element)) {
 			// Can only be a document here.
 			return Boolean.TRUE;
 		}
-		final HTMLElementImpl element = (HTMLElementImpl) node;
-		final int position = getPosition(element);
+        final int position = getPosition(element);
 		if (position == RenderState.POSITION_ABSOLUTE || position == RenderState.POSITION_FIXED) {
 			return Boolean.TRUE;
 		}
@@ -1097,9 +1081,8 @@ public class RBlockViewport extends BaseRCollection {
 		if (layout) {
 			final int availWidth = this.availContentWidth;
 			final int availHeight = this.availContentHeight;
-			if (renderable instanceof RBlock) {
-				final RBlock block = (RBlock) renderable;
-				block.layout(RLayoutInfo.builder()
+			if (renderable instanceof RBlock block) {
+                block.layout(RLayoutInfo.builder()
 						.availWidth(availWidth)
 						.availHeight(availHeight)
 						.expandWidth(false)
@@ -1110,9 +1093,8 @@ public class RBlockViewport extends BaseRCollection {
 						.sizeOnly(sizeOnly)
 						.build());
 				this.lastSeqBlock = block;
-			} else if (renderable instanceof RElement) {
-				final RElement e = (RElement) renderable;
-				e.layout(availWidth, availHeight, this.sizeOnly);
+			} else if (renderable instanceof RElement e) {
+                e.layout(availWidth, availHeight, this.sizeOnly);
 			}
 		}
 		final RFloatInfo floatInfo = new RFloatInfo(renderable.getModelNode(), renderable, leftFloat);
@@ -1420,9 +1402,8 @@ public class RBlockViewport extends BaseRCollection {
 		final AtomicBoolean result = new AtomicBoolean(true);
 		if (renderables != null) {
 			renderables.forEach(rn -> {
-				if (rn instanceof BoundableRenderable) {
-					final BoundableRenderable br = (BoundableRenderable) rn;
-					final Rectangle bounds = br.getVisualBounds();
+				if (rn instanceof BoundableRenderable br) {
+                    final Rectangle bounds = br.getVisualBounds();
 					if (!br.onDoubleClick(event, x - bounds.x, y - bounds.y)) {
 						result.set(false);
 					}
@@ -1439,9 +1420,8 @@ public class RBlockViewport extends BaseRCollection {
 		final AtomicBoolean result = new AtomicBoolean(true);
 		if (renderables != null) {
 			renderables.forEach(rn -> {
-				if (rn instanceof BoundableRenderable) {
-					final BoundableRenderable br = (BoundableRenderable) rn;
-					final Rectangle bounds = br.getVisualBounds();
+				if (rn instanceof BoundableRenderable br) {
+                    final Rectangle bounds = br.getVisualBounds();
 					if (!br.onMouseClick(event, x - bounds.x, y - bounds.y)) {
 						result.set(false);
 					}
@@ -1472,9 +1452,8 @@ public class RBlockViewport extends BaseRCollection {
 		final AtomicBoolean result = new AtomicBoolean(true);
 		if (renderables != null) {
 			renderables.forEach(rn -> {
-				if (rn instanceof BoundableRenderable) {
-					final BoundableRenderable br = (BoundableRenderable) rn;
-					final Rectangle bounds = br.getVisualBounds();
+				if (rn instanceof BoundableRenderable br) {
+                    final Rectangle bounds = br.getVisualBounds();
 					if (!br.onMousePressed(event, x - bounds.x, y - bounds.y)) {
 						this.armedRenderable = br;
 						result.set(false);
@@ -1492,9 +1471,8 @@ public class RBlockViewport extends BaseRCollection {
 		final AtomicBoolean result = new AtomicBoolean(true);
 		if (renderables != null) {
 			renderables.forEach(rn -> {
-				if (rn instanceof BoundableRenderable) {
-					final BoundableRenderable br = (BoundableRenderable) rn;
-					final Rectangle bounds = br.getVisualBounds();
+				if (rn instanceof BoundableRenderable br) {
+                    final Rectangle bounds = br.getVisualBounds();
 					if (!br.onMouseReleased(event, x - bounds.x, y - bounds.y)) {
 						final BoundableRenderable oldArmedRenderable = this.armedRenderable;
 						if (oldArmedRenderable != null && br != oldArmedRenderable) {
@@ -1536,9 +1514,8 @@ public class RBlockViewport extends BaseRCollection {
 			final List<Renderable> renderables = getRenderables();
 			if (renderables != null) {
 				renderables.forEach(robj -> {
-					if (robj instanceof BoundableRenderable) {
-						final BoundableRenderable renderable = (BoundableRenderable) robj;
-						if (!renderable.isDelegated()) {
+					if (robj instanceof BoundableRenderable renderable) {
+                        if (!renderable.isDelegated()) {
 							renderable.paintTranslated(g);
 						}
 					} else {
@@ -1548,9 +1525,8 @@ public class RBlockViewport extends BaseRCollection {
 						if (getModelNode() instanceof HTMLDocument) {
 							Renderable htmlRenderable = robj.findHtmlRenderable(this);
 
-							if (htmlRenderable instanceof PositionedRenderable) {
-								final PositionedRenderable htmlPR = (PositionedRenderable) htmlRenderable;
-								htmlRenderable = htmlPR.getRenderable();
+							if (htmlRenderable instanceof PositionedRenderable htmlPR) {
+                                htmlRenderable = htmlPR.getRenderable();
 							}
 
 							if (htmlRenderable instanceof RBlock) {
@@ -1601,10 +1577,9 @@ public class RBlockViewport extends BaseRCollection {
 				break;
 			}
 			// At this point the float doesn't fit at the current Y position.
-			if (element instanceof RBlock) {
+			if (element instanceof RBlock relement) {
 				// Try shrinking it.
-				final RBlock relement = (RBlock) element;
-				if (!relement.hasDeclaredWidth()) {
+                if (!relement.hasDeclaredWidth()) {
 					final int availableBoxWidth = desiredWidth - rightOffset - leftOffset;
 					relement.layout(availableBoxWidth, this.availContentHeight, this.sizeOnly);
 					if (relement.getWidth() < boxWidth) {
@@ -1823,9 +1798,8 @@ public class RBlockViewport extends BaseRCollection {
 		for (;;) {
 			if (containingBlock instanceof Renderable) {
 				final ModelNode node = ((Renderable) containingBlock).getModelNode();
-				if (node instanceof HTMLElementImpl) {
-					final HTMLElementImpl element = (HTMLElementImpl) node;
-					if(element instanceof HTMLHtmlElement || element instanceof HTMLBodyElement || element.hasChildNodes()) break;
+				if (node instanceof HTMLElementImpl element) {
+                    if(element instanceof HTMLHtmlElement || element instanceof HTMLBodyElement || element.hasChildNodes()) break;
 					final int position = getPosition(element);
 					if (position != RenderState.POSITION_STATIC) {
 						break;
@@ -1891,21 +1865,18 @@ public class RBlockViewport extends BaseRCollection {
 		final List<Renderable> renderables = getRenderables();
 		if (renderables != null) {
 			renderables.forEach(r -> {
-				if (r instanceof BoundableRenderable) {
-					final BoundableRenderable br = (BoundableRenderable) r;
-					final double brMaxY = br.getVisualBounds().getMaxY();
+				if (r instanceof BoundableRenderable br) {
+                    final double brMaxY = br.getVisualBounds().getMaxY();
 					if (brMaxY > maxY.get()) {
 						maxY.set((int) brMaxY);
 					}
-				} else if (r instanceof RenderableContainer) {
-					final RenderableContainer rc = (RenderableContainer) r;
-					final double rcMaxY = rc.getVisualBounds().getMaxY();
+				} else if (r instanceof RenderableContainer rc) {
+                    final double rcMaxY = rc.getVisualBounds().getMaxY();
 					if (rcMaxY > maxY.get()) {
 						maxY.set((int) rcMaxY);
 					}
-				} else if (r instanceof PositionedRenderable) {
-					final PositionedRenderable rc = (PositionedRenderable) r;
-					final double rcMaxY = rc.getRenderable().getVisualBounds().getMaxY();
+				} else if (r instanceof PositionedRenderable rc) {
+                    final double rcMaxY = rc.getRenderable().getVisualBounds().getMaxY();
 					if (rcMaxY > maxY.get()) {
 						maxY.set((int) rcMaxY);
 					}
@@ -1927,21 +1898,18 @@ public class RBlockViewport extends BaseRCollection {
 		final List<Renderable> renderables = getRenderables();
 		if (renderables != null) {
 			renderables.forEach(r -> {
-				if (r instanceof BoundableRenderable) {
-					final BoundableRenderable br = (BoundableRenderable) r;
-					final double brMaxX = br.getVisualBounds().getMaxX();
+				if (r instanceof BoundableRenderable br) {
+                    final double brMaxX = br.getVisualBounds().getMaxX();
 					if (brMaxX > maxX.get()) {
 						maxX.set((int) brMaxX);
 					}
-				} else if (r instanceof RenderableContainer) {
-					final RenderableContainer rc = (RenderableContainer) r;
-					final double rcMaxX = rc.getVisualBounds().getMaxX();
+				} else if (r instanceof RenderableContainer rc) {
+                    final double rcMaxX = rc.getVisualBounds().getMaxX();
 					if (rcMaxX > maxX.get()) {
 						maxX.set((int) rcMaxX);
 					}
-				} else if (r instanceof PositionedRenderable) {
-					final PositionedRenderable rc = (PositionedRenderable) r;
-					final double rcMaxX = rc.getRenderable().getVisualBounds().getMaxX();
+				} else if (r instanceof PositionedRenderable rc) {
+                    final double rcMaxX = rc.getRenderable().getVisualBounds().getMaxX();
 					if (rcMaxX >maxX.get()) {
 						maxX.set((int) rcMaxX);
 					}

@@ -74,11 +74,6 @@ public class HTMLIFrameElement3Test extends LoboUnitTest {
         checkHtmlAlert(html);
     }
 
-    /**
-     * Regression test for bug 1562872.
-     *
-     * @throws Exception if the test fails
-     */
     @Test
     @Alerts({"about:blank", "about:blank"})
     public void directAccessPerName() {

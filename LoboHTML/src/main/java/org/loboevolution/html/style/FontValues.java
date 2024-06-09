@@ -395,14 +395,10 @@ public class FontValues extends HtmlValues {
 	 */
 	public static boolean isFontStyle(final String token) {
 		final CSSValues tok = CSSValues.get(token);
-		switch (tok) {
-		case ITALIC:
-		case NORMAL:
-		case OBLIQUE:
-			return true;
-		default:
-			return false;
-		}
+        return switch (tok) {
+            case ITALIC, NORMAL, OBLIQUE -> true;
+            default -> false;
+        };
 	}
 
 	/**
@@ -412,13 +408,10 @@ public class FontValues extends HtmlValues {
 	 */
 	public static boolean isFontVariant(final String token) {
 		final CSSValues tok = CSSValues.get(token);
-		switch (tok) {
-		case SMALL_CAPS:
-		case NORMAL:
-			return true;
-		default:
-			return false;
-		}
+        return switch (tok) {
+            case SMALL_CAPS, NORMAL -> true;
+            default -> false;
+        };
 	}
 
 	/**
@@ -450,19 +443,10 @@ public class FontValues extends HtmlValues {
 	 */
 	public static boolean isFontStretch(final String token) {
 		final CSSValues tok = CSSValues.get(token);
-		switch (tok) {
-			case NORMAL:
-			case CONDENSED:
-			case EXPANDED:
-			case EXTRA_CONDENSED:
-			case EXTRA_EXPANDED:
-			case ULTRA_CONDENSED:
-			case ULTRA_EXPANDED:
-			case SEMI_CONDENSED:
-			case SEMI_EXPANDED:
-				return true;
-			default:
-				return false;
-		}
+        return switch (tok) {
+            case NORMAL, CONDENSED, EXPANDED, EXTRA_CONDENSED, EXTRA_EXPANDED, ULTRA_CONDENSED, ULTRA_EXPANDED,
+                 SEMI_CONDENSED, SEMI_EXPANDED -> true;
+            default -> false;
+        };
 	}
 }

@@ -49,8 +49,6 @@ public class Documentgetxmlstandalone02Test extends LoboUnitTest {
         final Document newDoc;
         final DOMImplementation domImpl;
         final boolean standalone;
-        final DocumentType nullDocType = null;
-
         final Element docElem;
         final String rootNS;
         final String rootName;
@@ -59,7 +57,7 @@ public class Documentgetxmlstandalone02Test extends LoboUnitTest {
         rootNS = docElem.getNamespaceURI();
         rootName = docElem.getTagName();
         domImpl = doc.getImplementation();
-        newDoc = domImpl.createDocument(rootNS, rootName, nullDocType);
+        newDoc = domImpl.createDocument(rootNS, rootName, null);
         standalone = newDoc.getXmlStandalone();
         assertFalse(standalone, "Documentgetxmlstandalone02Assert2");
     }

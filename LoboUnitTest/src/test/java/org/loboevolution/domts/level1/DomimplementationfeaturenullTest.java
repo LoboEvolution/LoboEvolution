@@ -53,7 +53,7 @@ public class DomimplementationfeaturenullTest extends LoboUnitTest {
         final String nullVersion = null;
         doc = sampleXmlFile("staff.xml");
         domImpl = doc.getImplementation();
-        state = domImpl.hasFeature("XML", nullVersion);
+        state = domImpl.hasFeature("XML", null);
         assertTrue(state, "DomimplementationfeaturenullAssert2");
     }
 }

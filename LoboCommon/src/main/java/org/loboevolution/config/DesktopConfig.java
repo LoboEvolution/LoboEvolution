@@ -70,7 +70,7 @@ public class DesktopConfig {
      * @param name a {@link java.lang.String} object.
      */
     public void createFile(final InputStream inputStream, final String path, final String name) throws Exception {
-        final String filename = name.substring(name.lastIndexOf("/") +1, name.length());
+        final String filename = name.substring(name.lastIndexOf("/") +1);
         final Path pathFile = Files.createFile(Paths.get(System.getProperty("user.home"), "lobo", path, filename));
         org.loboevolution.common.Files.copyInputStreamToFile(inputStream, pathFile.toFile());
     }
@@ -98,7 +98,7 @@ public class DesktopConfig {
         try {
             final Path dir = Paths.get(System.getProperty("user.home"), "lobo", path, fileName);
             return dir.toUri().toURL();
-        } catch (final MalformedURLException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }

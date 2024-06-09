@@ -43,10 +43,9 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * Retrieve a list of elements with tag name "address".
  * Access the second element from the list and get its attributes.
  * Try to remove the attribute node with local name "domestic"
- * and namespace uri "http://www.usa.com" with
+ * and namespace uri "<a href="http://www.usa.com">...</a>" with
  * method removeNamedItemNS(namespaceURI,localName).
  * Check to see if the node has been removed.
-
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-1074577549">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-1074577549</a>
  */
 public class RemoveNamedItemNS01Test extends LoboUnitTest {

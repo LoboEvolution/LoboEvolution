@@ -68,17 +68,15 @@ public class IconFactory {
 				ImageIcon icon = this.iconMap.get(resourcePath);
 				if (icon == null) {
 					final InputStream in = this.getClass().getResourceAsStream(resourcePath);
-					if (in == null) {
-						log.info("getIcon(): Resource path  not found {}", resourcePath);
-						return null;
-					}
-					try {
-						final byte[] imageBytes = IORoutines.load(in, 4096);
-						icon = new ImageIcon(imageBytes);
-						this.iconMap.put(resourcePath, icon);
-					} finally {
-						in.close();
-					}
+                    try (in) {
+                        if (in == null) {
+                            log.info("getIcon(): Resource path  not found {}", resourcePath);
+                            return null;
+                        }
+                        final byte[] imageBytes = IORoutines.load(in, 4096);
+                        icon = new ImageIcon(imageBytes);
+                        this.iconMap.put(resourcePath, icon);
+                    }
 				}
 				return icon;
 			}

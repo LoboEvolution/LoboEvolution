@@ -69,8 +69,8 @@ public class HcelementremoveattributeaftercreateTest extends LoboUnitTest {
         elementList = doc.getElementsByTagName("acronym");
         testEmployee = (Element) elementList.item(2);
         newAttribute = doc.createAttribute("lang");
-        districtAttr = testEmployee.setAttributeNode(newAttribute);
-        districtAttr = testEmployee.removeAttributeNode(newAttribute);
+        testEmployee.setAttributeNode(newAttribute);
+        testEmployee.removeAttributeNode(newAttribute);
         attributes = testEmployee.getAttributes();
         districtAttr = (Attr) attributes.getNamedItem("lang");
         assertNull(districtAttr, "HcelementremoveattributeaftercreateAssert2");

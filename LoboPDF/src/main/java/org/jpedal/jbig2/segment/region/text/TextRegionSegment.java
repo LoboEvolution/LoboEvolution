@@ -146,7 +146,7 @@ public class TextRegionSegment extends RegionSegment {
 
         final boolean sbHuffman = textRegionFlags.getFlagValue(TextRegionFlags.SB_HUFF) != 0;
 
-        int i = 0;
+        int i;
         if (sbHuffman) {
             final int sbHuffFS = textRegionHuffmanFlags.getFlagValue(TextRegionHuffmanFlags.SB_HUFF_FS);
             if (sbHuffFS == 0) {
@@ -297,7 +297,7 @@ public class TextRegionSegment extends RegionSegment {
             final JBIG2Bitmap pageBitmap = pageSegment.getPageBitmap();
 
             if (JBIG2StreamDecoder.debug)
-                log.info(pageBitmap + " " + bitmap);
+                log.info("{} {}", pageBitmap, bitmap);
 
             final int externalCombinationOperator = regionFlags.getFlagValue(RegionFlags.EXTERNAL_COMBINATION_OPERATOR);
             pageBitmap.combine(bitmap, regionBitmapXLocation, regionBitmapYLocation, externalCombinationOperator);

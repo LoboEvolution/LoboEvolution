@@ -66,7 +66,7 @@ public class HcdocumentinvalidcharacterexceptioncreateelementTest extends LoboUn
         {
             boolean success = false;
             try {
-                badElement = doc.createElement("invalid^Name");
+                doc.createElement("invalid^Name");
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
             }

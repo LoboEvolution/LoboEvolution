@@ -28,6 +28,7 @@ package org.loboevolution.img;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.io.Serial;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -52,6 +53,7 @@ public class ImageSequenceViewer {
 	private JLabel locationLabel;
 
 	private final JPanel panel = new JPanel(new BorderLayout()) {
+		@Serial
 		private static final long serialVersionUID = 1L;
 
 		/**

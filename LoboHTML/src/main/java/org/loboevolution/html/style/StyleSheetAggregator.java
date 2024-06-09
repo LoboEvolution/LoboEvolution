@@ -467,9 +467,8 @@ public class StyleSheetAggregator {
 				return (element instanceof HTMLAnchorElementImpl);
 
 			case "visited":
-				if (element instanceof HTMLAnchorElementImpl) {
-					final HTMLAnchorElementImpl elem = (HTMLAnchorElementImpl)element;
-					final HtmlRendererConfig config = elem.getHtmlRendererConfig();
+				if (element instanceof HTMLAnchorElementImpl elem) {
+                    final HtmlRendererConfig config = elem.getHtmlRendererConfig();
 					return config.isVisited(elem.getHref());
 				} else{
 					return false;
@@ -623,7 +622,7 @@ public class StyleSheetAggregator {
 							}
 						}
 
-						return !selects(selectorList.get(0), element, null, mouseOver);
+						return !selects(selectorList.getFirst(), element, null, mouseOver);
 					} catch (final IOException e) {
 						throw new CSSException("Error parsing CSS selectors from '" + selectors + "': " + e.getMessage());
 					}
@@ -999,9 +998,8 @@ public class StyleSheetAggregator {
 
 	private void index(final CSSStyleSheetImpl.CSSStyleSheetRuleIndex index, final CSSRuleListImpl ruleList) {
 		for (final AbstractCSSRuleImpl rule : ruleList.getRules()) {
-			if (rule instanceof CSSStyleRuleImpl) {
-				final CSSStyleRuleImpl styleRule = (CSSStyleRuleImpl) rule;
-				final SelectorList selectors = styleRule.getSelectors();
+			if (rule instanceof CSSStyleRuleImpl styleRule) {
+                final SelectorList selectors = styleRule.getSelectors();
 				for (final Selector selector : selectors) {
 					final SimpleSelector simpleSel = selector.getSimpleSelector();
 					if (SelectorType.ELEMENT_NODE_SELECTOR == simpleSel.getSelectorType()) {
@@ -1009,7 +1007,7 @@ public class StyleSheetAggregator {
 						boolean wasClass = false;
 						final List<Condition> conds = es.getConditions();
 						if (conds != null && conds.size() == 1) {
-							final Condition c = conds.get(0);
+							final Condition c = conds.getFirst();
 							if (ConditionType.CLASS_CONDITION == c.getConditionType()) {
 								index.addClassSelector(es, c.getValue(), selector, styleRule);
 								wasClass = true;
@@ -1022,9 +1020,8 @@ public class StyleSheetAggregator {
 						index.addOtherSelector(selector, styleRule);
 					}
 				}
-			} else if (rule instanceof CSSMediaRuleImpl) {
-				final CSSMediaRuleImpl mediaRule = (CSSMediaRuleImpl) rule;
-				final MediaListImpl mediaList = mediaRule.getMediaList();
+			} else if (rule instanceof CSSMediaRuleImpl mediaRule) {
+                final MediaListImpl mediaList = mediaRule.getMediaList();
 				if (mediaList.getLength() == 0 && index.getMediaList().getLength() == 0) {
 					index(index, mediaRule.getCssRules());
 				} else {

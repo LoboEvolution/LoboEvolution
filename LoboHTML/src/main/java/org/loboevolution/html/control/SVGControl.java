@@ -29,6 +29,7 @@ package org.loboevolution.html.control;
 import org.loboevolution.html.dom.svgimpl.SVGSVGElementImpl;
 
 import java.awt.*;
+import java.io.Serial;
 
 /**
  * <p>SVGControl class.</p>
@@ -36,6 +37,7 @@ import java.awt.*;
 public class SVGControl extends BaseControl {
 
 	/** The Constant serialVersionUID. */
+	@Serial
 	private static final long serialVersionUID = 1L;
 
 	private final SVGSVGElementImpl modelNode;

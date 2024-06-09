@@ -27,6 +27,7 @@
 package org.loboevolution.menu.tools.developer.tool.inspector;
 
 import javax.swing.table.AbstractTableModel;
+import java.io.Serial;
 import java.util.Map;
 
 /**
@@ -34,6 +35,7 @@ import java.util.Map;
  */
 public class PropertiesTableModel extends AbstractTableModel {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     private final String[] colNames = {"Property", "Text", "Value"};

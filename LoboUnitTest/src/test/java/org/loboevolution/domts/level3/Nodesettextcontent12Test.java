@@ -56,7 +56,7 @@ public class Nodesettextcontent12Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         elem = doc.getDocumentElement();
         entRef = doc.createEntityReference("beta");
-        appendedChild = elem.appendChild(entRef);
+        elem.appendChild(entRef);
 
         {
             boolean success = false;

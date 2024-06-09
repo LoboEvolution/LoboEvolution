@@ -92,7 +92,7 @@ public class GlyfCompound extends Glyf {
 
         // read the contour end points
         final List<GlyfComponent> comps = new ArrayList<>();
-        GlyfComponent cur = null;
+        GlyfComponent cur;
         boolean hasInstructions = false;
 
         do {
@@ -143,7 +143,7 @@ public class GlyfCompound extends Glyf {
         comps.toArray(componentArray);
         setComponents(componentArray);
 
-        byte[] instr = null;
+        byte[] instr;
         if (hasInstructions) {
             // read the instructions
             final short numInstructions = data.getShort();

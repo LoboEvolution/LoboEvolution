@@ -65,7 +65,7 @@ public class Documentimportnode07Test extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                imported = doc.importNode(docType, true);
+                doc.importNode(docType, true);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
             }

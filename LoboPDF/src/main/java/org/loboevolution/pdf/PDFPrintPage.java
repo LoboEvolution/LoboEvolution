@@ -37,6 +37,7 @@ import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
+import java.io.Serial;
 
 /**
  * A class representing a print job for a particular PDFFile. The class
@@ -108,6 +109,7 @@ public class PDFPrintPage implements Printable {
         cancelbox.add(Box.createHorizontalGlue());
         cancel = new JButton(new AbstractAction("Cancel") {
 
+            @Serial
             private static final long serialVersionUID = 1L;
 
             @Override

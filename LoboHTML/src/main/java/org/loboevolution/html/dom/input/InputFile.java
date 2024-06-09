@@ -32,6 +32,7 @@ import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.io.Serial;
 
 /**
  * <p>InputFile class.</p>
@@ -78,7 +79,8 @@ public class InputFile extends BasicInput {
 	
 	private final class BrowseAction extends AbstractAction {
 
-		private static final long serialVersionUID = 1L;
+		@Serial
+        private static final long serialVersionUID = 1L;
 
 		@Override
 		public void actionPerformed(final ActionEvent e) {

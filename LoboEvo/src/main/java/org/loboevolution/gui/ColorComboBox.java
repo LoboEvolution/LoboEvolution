@@ -29,6 +29,7 @@ package org.loboevolution.gui;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
+import java.io.Serial;
 
 import javax.swing.JComboBox;
 import javax.swing.JList;
@@ -47,7 +48,8 @@ import javax.swing.border.MatteBorder;
 public class ColorComboBox extends JComboBox<Object> {
 
 	static class ColorComboRenderer extends JPanel implements ListCellRenderer<Object> {
-		private static final long serialVersionUID = 1L;
+		@Serial
+        private static final long serialVersionUID = 1L;
 		protected Color m_c = Color.black;
 
 		public ColorComboRenderer() {
@@ -72,7 +74,8 @@ public class ColorComboBox extends JComboBox<Object> {
 
 	}
 
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	/**
 	 * <p>Constructor for ColorComboBox.</p>

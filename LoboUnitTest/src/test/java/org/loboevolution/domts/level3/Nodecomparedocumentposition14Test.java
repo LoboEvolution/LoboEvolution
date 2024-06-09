@@ -56,7 +56,7 @@ public class Nodecomparedocumentposition14Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         docElem = doc.getDocumentElement();
         docFrag = doc.createDocumentFragment();
-        appendedChild = docFrag.appendChild(docElem);
+        docFrag.appendChild(docElem);
         docFragChild = docFrag.getFirstChild();
         docFragPosition = docFrag.compareDocumentPosition(docFragChild);
         assertEquals(20, docFragPosition, "Nodecomparedocumentposition14Assert2");

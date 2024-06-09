@@ -51,7 +51,7 @@ public class Elementsetidattributens02Test extends LoboUnitTest {
         final Element addressElem;
         final NamedNodeMap attributesMap;
         final Attr attr;
-        boolean id = false;
+        boolean id;
         final Element elem;
         final String elemName;
         final String xsiNS = "http://www.w3.org/2001/XMLSchema-instance";

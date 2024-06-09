@@ -142,13 +142,11 @@ public class EventTargetImpl implements EventTarget {
 
     public Function getFunction(final Object obj, final String type) {
         final String subType = type.startsWith("on") ? type.substring(2) : type;
-        if (obj instanceof WindowImpl) {
-            final WindowImpl window = (WindowImpl) obj;
+        if (obj instanceof WindowImpl window) {
             return window.getUserAgentContext().isScriptingEnabled() ? searchFunction(subType) : null;
         }
 
-        if (obj instanceof ElementImpl) {
-            final ElementImpl elem = (ElementImpl) obj;
+        if (obj instanceof ElementImpl elem) {
             final UserAgentContext uac = elem.getUserAgentContext();
             if (uac.isScriptingEnabled()) {
                 final Function func = searchFunction(subType);

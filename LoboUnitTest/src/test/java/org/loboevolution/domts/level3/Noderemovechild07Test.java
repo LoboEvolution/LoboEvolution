@@ -64,7 +64,7 @@ public class Noderemovechild07Test extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                removedChild = doc.removeChild(notation);
+                doc.removeChild(notation);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
             }
@@ -72,13 +72,11 @@ public class Noderemovechild07Test extends LoboUnitTest {
         }
 
         try {
-            removedChild = notation.removeChild(doc);
+            notation.removeChild(doc);
 
         } catch (final DOMException ex) {
             switch (ex.getCode()) {
-                case 8:
-                    break;
-                case 7:
+                case 8, 7:
                     break;
                 default:
                     throw ex;

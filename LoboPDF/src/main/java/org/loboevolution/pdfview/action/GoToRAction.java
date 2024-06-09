@@ -55,7 +55,7 @@ public class GoToRAction extends PDFAction {
     /**
      * Should the remote file be opened in a new window? (optional)
      */
-    private boolean newWindow = false;
+    private boolean newWindow;
 
     /**
      * **********************************************************************

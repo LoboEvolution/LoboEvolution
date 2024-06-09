@@ -55,11 +55,10 @@ class ShiftedFloatingBounds implements FloatingBounds {
 	@Override
 	public boolean equals(final Object obj) {
 		// Important for layout caching.
-		if (!(obj instanceof ShiftedFloatingBounds)) {
+		if (!(obj instanceof ShiftedFloatingBounds other)) {
 			return false;
 		}
-		final ShiftedFloatingBounds other = (ShiftedFloatingBounds) obj;
-		return this.shiftY == other.shiftY && this.shiftLeft == other.shiftLeft && this.shiftRight == other.shiftRight
+        return this.shiftY == other.shiftY && this.shiftLeft == other.shiftLeft && this.shiftRight == other.shiftRight
 				&& Objects.equals(this.prevBounds, other.prevBounds);
 	}
 

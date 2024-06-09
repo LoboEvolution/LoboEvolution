@@ -56,9 +56,8 @@ public class HtmlController {
 	 * @return a boolean.
 	 */
 	public boolean onChange(final ModelNode node) {
-		if (node instanceof HTMLSelectElementImpl) {
-			final HTMLSelectElementImpl uiElement = (HTMLSelectElementImpl) node;
-			final Function f = uiElement.getOnchange();
+		if (node instanceof HTMLSelectElementImpl uiElement) {
+            final Function f = uiElement.getOnchange();
 			if (f != null) {
 				final EventImpl evt = new EventImpl();
 				evt.initEvent("change", false, false);
@@ -80,9 +79,8 @@ public class HtmlController {
 	 * @return a boolean.
 	 */
 	public boolean onContextMenu(final ModelNode node, final MouseEvent event, final int x, final int y) {
-		if (node instanceof HTMLElementImpl) {
-			final HTMLElementImpl uiElement = (HTMLElementImpl) node;
-			final Function f = uiElement.getOncontextmenu();
+		if (node instanceof HTMLElementImpl uiElement) {
+            final Function f = uiElement.getOncontextmenu();
 			if (f != null) {
 				final MouseEventImpl evt = new MouseEventImpl();
 				evt.initMouseEvent("contextmenu", false, false, null, 0, 0, 0, x, y, true, true, true, true, (short) 0, null);
@@ -115,9 +113,8 @@ public class HtmlController {
 	 * @param y a {@link java.lang.Integer} object.
 	 */
 	public boolean onDoubleClick(final ModelNode node, final MouseEvent event, final int x, final int y) {
-		if (node instanceof HTMLElementImpl) {
-			final HTMLElementImpl uiElement = (HTMLElementImpl) node;
-			final Function f = uiElement.getOndblclick();
+		if (node instanceof HTMLElementImpl uiElement) {
+            final Function f = uiElement.getOndblclick();
 			if (f != null) {
 				final MouseEventImpl evt = new MouseEventImpl();
 				evt.initMouseEvent("dblclick", false, false, null, 0, 0, 0, x, y, true, true, true, true, (short) 0, null);
@@ -156,9 +153,8 @@ public class HtmlController {
 	 * @param y a {@link java.lang.Integer} object.
 	 */
 	public boolean onMouseClick(final ModelNode node, final MouseEvent event, final int x, final int y) {
-		if (node instanceof HTMLElementImpl) {
-			final HTMLElementImpl uiElement = (HTMLElementImpl) node;
-			final Function f = uiElement.getOnclick();
+		if (node instanceof HTMLElementImpl uiElement) {
+            final Function f = uiElement.getOnclick();
 			final MouseEventImpl evt = new MouseEventImpl();
 			evt.initMouseEvent("click", false, false, null, 0, 0, 0, x, y, true, true, true, true, (short) 0, null);
 			evt.setIe(event);
@@ -173,9 +169,8 @@ public class HtmlController {
 		if (node instanceof HTMLAnchorElementImpl) {
 			((HTMLAnchorElementImpl) node).navigate();
 			return false;
-		} else if (node instanceof HTMLButtonElementImpl) {
-			final HTMLButtonElementImpl btn = (HTMLButtonElementImpl) node;
-			switch (btn.getType()) {
+		} else if (node instanceof HTMLButtonElementImpl btn) {
+            switch (btn.getType()) {
 			case "submit":
 				btn.submit();
 				break;
@@ -227,9 +222,8 @@ public class HtmlController {
 	public boolean onMouseDown(final ModelNode node, final MouseEvent event, final int x, final int y) {
 		boolean pass = true;
 		
-		if (node instanceof HTMLElementImpl) {
-			final HTMLElementImpl uiElement = (HTMLElementImpl) node;
-			final Function f = uiElement.getOnmousedown();
+		if (node instanceof HTMLElementImpl uiElement) {
+            final Function f = uiElement.getOnmousedown();
 			if (f != null) {
 				final MouseEventImpl evt = new MouseEventImpl();
 				evt.initMouseEvent("mousedown", false, false, null, 0, 0, 0, x, y, true, true, true, true, (short) 0, null);
@@ -268,9 +262,8 @@ public class HtmlController {
 			if (node == limit) {
 				break;
 			}
-			if (node instanceof HTMLElementImpl) {
-				final HTMLElementImpl uiElement = (HTMLElementImpl) node;
-				uiElement.setMouseOver(false);
+			if (node instanceof HTMLElementImpl uiElement) {
+                uiElement.setMouseOver(false);
 				final Function f = uiElement.getOnmouseout();
 				if (f != null) {
 					final MouseEventImpl evt = new MouseEventImpl();
@@ -295,9 +288,8 @@ public class HtmlController {
 	public void onMouseMoved(final ModelNode modelNode, final MouseEvent event, final int x, final int y, final ModelNode limit) {
 		ModelNode node = modelNode;
 		while (node != null) {
-			if (node instanceof HTMLElementImpl) {
-				final HTMLElementImpl uiElement = (HTMLElementImpl) node;
-				uiElement.setMouseOver(true);
+			if (node instanceof HTMLElementImpl uiElement) {
+                uiElement.setMouseOver(true);
 				final Function f = uiElement.getOnmousemove();
 				if (f != null) {
 					final MouseEventImpl evt = new MouseEventImpl();
@@ -325,9 +317,8 @@ public class HtmlController {
 			if (node == limit) {
 				break;
 			}
-			if (node instanceof HTMLElementImpl) {
-				final HTMLElementImpl uiElement = (HTMLElementImpl) node;
-				uiElement.setMouseOver(true);
+			if (node instanceof HTMLElementImpl uiElement) {
+                uiElement.setMouseOver(true);
 				final Function f = uiElement.getOnmouseover();
 				if (f != null) {
 					final MouseEventImpl evt = new MouseEventImpl();
@@ -345,9 +336,8 @@ public class HtmlController {
 	 * @param node a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 */
 	public void onMouseScroll(final ModelNode node) {
-		if (node instanceof HTMLElementImpl) {
-			final HTMLElementImpl uiElement = (HTMLElementImpl) node;
-			final Function f = uiElement.getOnscroll();
+		if (node instanceof HTMLElementImpl uiElement) {
+            final Function f = uiElement.getOnscroll();
 			final MouseEventImpl evt = new MouseEventImpl();
 			evt.initMouseEvent("scroll", false, false, null, 0, 0, 0, 0, 0, true, true, true, true, (short) 0, null);
 			uiElement.dispatchEvent(uiElement, evt);
@@ -365,9 +355,8 @@ public class HtmlController {
 			if (node == limit) {
 				break;
 			}
-			if (node instanceof NodeImpl) {
-				final NodeImpl uiElement = (NodeImpl) node;
-				final HtmlRendererContext rcontext = uiElement.getHtmlRendererContext();
+			if (node instanceof NodeImpl uiElement) {
+                final HtmlRendererContext rcontext = uiElement.getHtmlRendererContext();
 				final RenderState rs = uiElement.getRenderState();
 				final Cursor cursorOpt = rs.getCursor();
 				if (cursorOpt != null) {
@@ -397,9 +386,8 @@ public class HtmlController {
 	public boolean onMouseUp(final ModelNode node, final MouseEvent event, final int x, final int y) {
 		boolean pass = true;
 				
-		if (node instanceof HTMLElementImpl) {
-			final HTMLElementImpl uiElement = (HTMLElementImpl) node;
-			final Function f = uiElement.getOnmouseup();
+		if (node instanceof HTMLElementImpl uiElement) {
+            final Function f = uiElement.getOnmouseup();
 			if (f != null) {
 				final MouseEventImpl evt = new MouseEventImpl();
 				evt.initMouseEvent("mouseup", false, false, null, 0, 0, 0, x, y, true, true, true, true, (short) 0, null);
@@ -434,9 +422,8 @@ public class HtmlController {
 	 */
 	public boolean onPressed(final ModelNode node, final InputEvent event, final int x, final int y) {
 		
-		if (node instanceof HTMLElementImpl) {
-			final HTMLElementImpl uiElement = (HTMLElementImpl) node;
-			final Function f = uiElement.getOnclick();
+		if (node instanceof HTMLElementImpl uiElement) {
+            final Function f = uiElement.getOnclick();
 			if (f != null) {
 				final MouseEventImpl evt = new MouseEventImpl();
 				evt.initMouseEvent("click", false, false, null, 0, 0, 0, x, y, true, true, true, true, (short) 0, null);
@@ -448,9 +435,8 @@ public class HtmlController {
 			}
 		}
 		
-		if (node instanceof HTMLInputElementImpl) {
-			final HTMLInputElementImpl hie = (HTMLInputElementImpl) node;
-			switch (hie.getType()) {
+		if (node instanceof HTMLInputElementImpl hie) {
+            switch (hie.getType()) {
 			case "submit":
 				hie.submit();
 				break;

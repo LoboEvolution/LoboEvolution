@@ -55,35 +55,26 @@ public class Canonicalform06Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final DOMImplementation domImpl;
-        final String nullString = null;
-
-        final DocumentType nullDoctype = null;
-
         final Document doc;
         Element elem;
         final DOMConfiguration domConfig;
         final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
-
         final List<DOMError> errors;
-
-        DOMError error;
         int severity;
         String type;
         DOMLocator locator;
         Node relatedNode;
         final boolean canSet;
         domImpl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(), true));
-        doc = domImpl.createDocument(nullString, nullString, nullDoctype);
+        doc = domImpl.createDocument(null, null, null);
 
-        {
-            boolean success = false;
-            try {
-                elem = doc.createElementNS("http://www.example.org/domts/wellformed01", "LegalNameࢎ");
-            } catch (final DOMException ex) {
-                success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
-            }
-            assertTrue(success, "Canonicalform06Assert1");
+        boolean success = false;
+        try {
+            doc.createElementNS("http://www.example.org/domts/wellformed01", "LegalNameࢎ");
+        } catch (final DOMException ex) {
+            success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
         }
+        assertTrue(success, "Canonicalform06Assert1");
 
         try {
             doc.setXmlVersion("1.1");
@@ -106,8 +97,7 @@ public class Canonicalform06Test extends LoboUnitTest {
             domConfig.setParameter("error-handler", errorMonitor);
             doc.normalizeDocument();
             errors = errorMonitor.getErrors();
-            for (final Object o : errors) {
-                error = (DOMError) o;
+            for (final DOMError error : errors) {
                 severity = error.getSeverity();
                 assertEquals(2, severity, "Canonicalform06Assert2");
                 type = error.getType();

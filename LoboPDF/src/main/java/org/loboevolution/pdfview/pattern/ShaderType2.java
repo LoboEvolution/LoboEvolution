@@ -255,7 +255,7 @@ public class ShaderType2 extends PDFShader {
 
             final float[] inputs = new float[1];
             final float[] outputs = new float[shadeCSpace.getNumComponents()];
-            float[] outputRBG = new float[numComponents];
+            float[] outputRBG;
 
             // all the data, plus alpha channel
             final int[] data = new int[w * h * (numComponents + 1)];

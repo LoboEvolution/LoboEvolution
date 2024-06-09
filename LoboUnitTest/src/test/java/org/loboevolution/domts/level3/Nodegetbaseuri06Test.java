@@ -51,7 +51,7 @@ public class Nodegetbaseuri06Test extends LoboUnitTest {
         final Element newElement;
         final String baseURI;
         doc = sampleXmlFile("barfoo.xml");
-        newElement = doc.createElementNS("http://www.w3.org/1999/xhtml", "br");
+        doc.createElementNS("http://www.w3.org/1999/xhtml", "br");
         baseURI = doc.getBaseURI();
         assertNotNull(baseURI, "Nodegetbaseuri06Assert2");
     }

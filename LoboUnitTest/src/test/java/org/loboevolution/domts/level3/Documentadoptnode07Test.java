@@ -46,8 +46,6 @@ public class Documentadoptnode07Test extends LoboUnitTest {
 
     /**
      * Runs the test case.
-     *
-     * @throws Throwable Any uncaught exception causes test to fail
      */
     @Test
     public void runTest() {

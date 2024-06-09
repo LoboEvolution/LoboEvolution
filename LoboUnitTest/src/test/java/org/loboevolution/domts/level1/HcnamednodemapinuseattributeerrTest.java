@@ -70,7 +70,7 @@ public class HcnamednodemapinuseattributeerrTest extends LoboUnitTest {
         firstNode = (Element) elementList.item(0);
         domesticAttr = doc.createAttribute("title");
         domesticAttr.setValue("Y\u03b1"); // Android-changed: GREEK LOWER CASE ALPHA
-        setAttr = firstNode.setAttributeNode(domesticAttr);
+        firstNode.setAttributeNode(domesticAttr);
         elementList = doc.getElementsByTagName("acronym");
         testNode = (Element) elementList.item(2);
         attributes = testNode.getAttributes();
@@ -78,7 +78,7 @@ public class HcnamednodemapinuseattributeerrTest extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                setNode = attributes.setNamedItem(domesticAttr);
+                attributes.setNamedItem(domesticAttr);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.INUSE_ATTRIBUTE_ERR);
             }

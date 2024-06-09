@@ -55,7 +55,7 @@ public class Documentrenamenode25Test extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                renamedNode = doc.renameNode(docType, "http://www.w3.org/DOM/Test", "root");
+                doc.renameNode(docType, "http://www.w3.org/DOM/Test", "root");
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
             }

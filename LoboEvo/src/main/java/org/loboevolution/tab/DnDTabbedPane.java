@@ -38,6 +38,7 @@ import org.sexydock.tabs.jhrome.JhromeTabbedPaneUI;
 import javax.swing.*;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
+import java.io.Serial;
 
 /**
  * <p>DnDTabbedPane class.</p>
@@ -46,7 +47,8 @@ import java.awt.*;
 @Data
 public class DnDTabbedPane extends JTabbedPane implements ITabbedPane {
 
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	private IBrowserPanel browserPanel;
 

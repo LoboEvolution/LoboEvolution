@@ -56,7 +56,7 @@ public class Nodegettextcontent09Test extends LoboUnitTest {
         doc = sampleXmlFile("barfoo.xml");
         elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "p");
         txt = doc.createTextNode("Replacement Text");
-        appendedChild = elem.appendChild(txt);
+        elem.appendChild(txt);
         textContent = txt.getTextContent();
         assertEquals("Replacement Text", textContent, "Nodegettextcontent09Assert2");
     }

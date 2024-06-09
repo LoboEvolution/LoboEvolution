@@ -32,6 +32,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -71,12 +72,11 @@ public class ToUnicodeMap extends PDFCMap {
 
     /*************************************************************************
      * @param map a {@link PDFObject} object.
-     * @throws {@link IOException} object.
      ************************************************************************/
 
     private void parseMappings(final PDFObject map) throws IOException {
         try {
-            final StringReader reader = new StringReader(new String(map.getStream(), "ASCII"));
+            final StringReader reader = new StringReader(new String(map.getStream(), StandardCharsets.US_ASCII));
             final BufferedReader bf = new BufferedReader(reader);
             String line = bf.readLine();
             while (line != null) {
@@ -136,7 +136,7 @@ public class ToUnicodeMap extends PDFCMap {
 
     /*************************************************************************
      * @param line a {@link String} object.
-     * @param isCID a {@link Boolean} object.
+     * @param isCid a {@link Boolean} object.
      ************************************************************************/
 
     private void parseRangeLine(final String line, final boolean isCid) {
@@ -292,49 +292,33 @@ public class ToUnicodeMap extends PDFCMap {
     }
 
     /*****************************************************************************
-     * Small helper class to define a code range.
-     ****************************************************************************/
+         * Small helper class to define a code range.
+         ****************************************************************************/
 
-    private static class CodeRangeMapping {
-        final char srcStart;
-        final char srcEnd;
-
-        CodeRangeMapping(final char srcStart, final char srcEnd) {
-            this.srcStart = srcStart;
-            this.srcEnd = srcEnd;
-        }
+        private record CodeRangeMapping(char srcStart, char srcEnd) {
 
         boolean contains(final char c) {
-            return this.srcStart <= c
-                    && c <= this.srcEnd;
-        }
+                return this.srcStart <= c
+                        && c <= this.srcEnd;
+            }
 
-    }
+        }
 
     /*****************************************************************************
-     * Small helper class to define a char range.
-     ****************************************************************************/
+         * Small helper class to define a char range.
+         ****************************************************************************/
 
-    private static class CharRangeMapping {
-        final char srcStart;
-        final char srcEnd;
-        final char destStart;
-
-        CharRangeMapping(final char srcStart, final char srcEnd, final char destStart) {
-            this.srcStart = srcStart;
-            this.srcEnd = srcEnd;
-            this.destStart = destStart;
-        }
+        private record CharRangeMapping(char srcStart, char srcEnd, char destStart) {
 
         boolean contains(final char c) {
-            return this.srcStart <= c
-                    && c <= this.srcEnd;
-        }
+                return this.srcStart <= c
+                        && c <= this.srcEnd;
+            }
 
-        char map(final char src) {
-            return (char) (this.destStart + (src - this.srcStart));
-        }
+            char map(final char src) {
+                return (char) (this.destStart + (src - this.srcStart));
+            }
 
-    }
+        }
 
 }

@@ -34,6 +34,7 @@ import org.loboevolution.store.WebStore;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -45,6 +46,7 @@ import java.util.Set;
 public class StorageUI  extends AbstractToolsUI {
 
     /** The Constant serialVersionUID. */
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**

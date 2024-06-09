@@ -29,6 +29,7 @@ package org.loboevolution.menu.tools.pref;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Rectangle;
+import java.io.Serial;
 import java.util.List;
 
 import javax.swing.BoxLayout;
@@ -57,7 +58,8 @@ public class GeneralSettingsUI extends AbstractToolsUI {
 	private static final String EDIT_LIST_CAPTION = "Startup URLs, one per line.";
 
 	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	/** The Constant TOOLTIP_STARTUP. */
 	private static final String TOOLTIP_STARTUP = "Pages launched when you first run the browser.";

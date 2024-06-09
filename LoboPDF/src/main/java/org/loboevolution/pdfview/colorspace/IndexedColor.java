@@ -56,7 +56,7 @@ public class IndexedColor extends PDFColorSpace {
     /**
      * number of channels in the base Color Space (unused)
      */
-    int nchannels = 1;
+    int nchannels;
 
     /**
      * create a new IndexColor PDFColorSpace based on another PDFColorSpace,

@@ -66,7 +66,7 @@ public class Hcnotationsremovenameditem1Test extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                retval = notations.removeNamedItem("notation1");
+                notations.removeNamedItem("notation1");
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }

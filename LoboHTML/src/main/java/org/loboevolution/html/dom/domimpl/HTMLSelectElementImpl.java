@@ -168,8 +168,7 @@ public class HTMLSelectElementImpl extends HTMLBasicInputElement implements HTML
     @Override
     public void remove(final Object element) {
         if (getOptions().getLength() > 0) {
-            if (element instanceof Double) {
-                final Double d = (Double) element;
+            if (element instanceof Double d) {
                 if (d > -1 && d.intValue() < getOptions().getLength()) {
                     getOptions().remove(d.intValue());
                 }
@@ -302,8 +301,7 @@ public class HTMLSelectElementImpl extends HTMLBasicInputElement implements HTML
             getOptions().add(element, d);
         }
 
-        if (element instanceof HTMLOptionElementImpl && before instanceof HTMLOptionElementImpl) {
-            final HTMLOptionElementImpl d = (HTMLOptionElementImpl) before;
+        if (element instanceof HTMLOptionElementImpl && before instanceof HTMLOptionElementImpl d) {
             getOptions().add(element, d);
         }
 

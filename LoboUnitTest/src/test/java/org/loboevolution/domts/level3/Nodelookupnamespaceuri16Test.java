@@ -51,7 +51,7 @@ public class Nodelookupnamespaceuri16Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "dom3:p");
         attr = doc.createAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:lang");
-        attNode = elem.setAttributeNodeNS(attr);
+        elem.setAttributeNodeNS(attr);
         namespaceURI = attr.lookupNamespaceURI("xml");
         assertNull(namespaceURI, "Nodelookupnamespaceuri16Assert2");
     }

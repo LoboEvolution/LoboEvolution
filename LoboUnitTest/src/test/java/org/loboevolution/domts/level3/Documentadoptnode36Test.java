@@ -53,8 +53,6 @@ public class Documentadoptnode36Test extends LoboUnitTest {
         final ProcessingInstruction adoptedPI2;
         String piTarget;
         String piData;
-        final DocumentType nullDocType = null;
-
         final Element docElem;
         final String rootNS;
         final String rootName;
@@ -63,7 +61,7 @@ public class Documentadoptnode36Test extends LoboUnitTest {
         rootNS = docElem.getNamespaceURI();
         rootName = docElem.getTagName();
         domImpl = doc.getImplementation();
-        newDoc = domImpl.createDocument(rootNS, rootName, nullDocType);
+        newDoc = domImpl.createDocument(rootNS, rootName, null);
         newPI1 = newDoc.createProcessingInstruction("PITarget", "PIData");
         newPI2 = doc.createProcessingInstruction("PITarget", "PIData");
         adoptedPI1 = (ProcessingInstruction) newDoc.adoptNode(newPI1);

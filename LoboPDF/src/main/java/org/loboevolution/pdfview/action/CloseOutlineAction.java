@@ -30,12 +30,14 @@ import org.loboevolution.pdf.PDFViewer;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.io.Serial;
 
 /**
  * <p>CloseOutlineAction class.</p>
  */
 public class CloseOutlineAction extends AbstractAction {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     private final PDFViewer dialog;

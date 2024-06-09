@@ -29,6 +29,7 @@ package org.loboevolution.html.control;
 import org.loboevolution.html.dom.rss.RSSElementImpl;
 
 import java.awt.*;
+import java.io.Serial;
 
 /**
  * <p>RSSControl class.</p>
@@ -38,7 +39,8 @@ import java.awt.*;
  */
 public class RSSControl extends BaseControl {
 
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 	
 	private final RSSElementImpl modelNode;
 

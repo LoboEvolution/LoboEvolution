@@ -56,9 +56,8 @@ public class RSSElementImpl extends RSSElement {
 		if (hasChildNodes()) {
 			final NodeListImpl children = (NodeListImpl)getChildNodes();
 			children.forEach(child -> {
-				if (child instanceof RSSChanelElementImpl) {
-					final RSSChanelElementImpl channel = (RSSChanelElementImpl) child;
-					channel.draw(graphics);
+				if (child instanceof RSSChanelElementImpl channel) {
+                    channel.draw(graphics);
 				}
 			});
 		}

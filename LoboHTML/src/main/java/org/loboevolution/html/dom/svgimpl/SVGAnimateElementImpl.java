@@ -507,13 +507,13 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 				beforeTime = times.get(i);
 				afterTime = times.get(i + 1);
 				if (percentageComplete >= beforeTime && percentageComplete <= afterTime) {
-					beforeNumber = new Float(vals.get(i));
-					afterNumber = new Float(vals.get(i + 1));
+					beforeNumber = Float.parseFloat(vals.get(i));
+					afterNumber = Float.parseFloat(vals.get(i + 1));
 					break;
 				}
 				if (i == times.size() - 2 && calcMode.equals("discrete") && percentageComplete > afterTime) {
-					beforeNumber = new Float(vals.get(i + 1));
-					afterNumber = new Float(vals.get(i + 1));
+					beforeNumber = Float.parseFloat(vals.get(i + 1));
+					afterNumber = Float.parseFloat(vals.get(i + 1));
 					break;
 				}
 				splineIndex++;
@@ -552,20 +552,16 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 			final String to = getAttribute("to");
 			final String by = getAttribute("by");
 
-			if (from.length() > 0 && to.length() > 0) { // is a from-to anim
-				final Float fromNumber = new Float(from);
-				final Float toNumber = new Float(to);
-				final float fromValue = fromNumber;
-				final float toValue = toNumber;
-				return fromValue + percentageComplete * (toValue - fromValue);
+			if (!from.isEmpty() && !to.isEmpty()) { // is a from-to anim
+				final float fromNumber = Float.parseFloat(from);
+                final float toValue = Float.parseFloat(to);
+				return fromNumber + percentageComplete * (toValue - fromNumber);
 
-			} else if (from.length() > 0 && by.length() > 0) { // is a from-by
+			} else if (!from.isEmpty() && !by.isEmpty()) { // is a from-by
 				// anim
-				final Float fromNumber = new Float(from);
-				final Float byNumber = new Float(by);
-				final float fromValue = fromNumber;
-				final float byValue = byNumber;
-				return fromValue + percentageComplete * byValue;
+				final float fromNumber = Float.parseFloat(from);
+                final float byValue = Float.parseFloat(by);
+				return fromNumber + percentageComplete * byValue;
 
 			}
 		}

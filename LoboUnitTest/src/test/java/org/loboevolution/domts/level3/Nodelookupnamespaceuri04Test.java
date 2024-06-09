@@ -57,7 +57,7 @@ public class Nodelookupnamespaceuri04Test extends LoboUnitTest {
         entitiesMap = docType.getEntities();
         notationsMap = docType.getNotations();
         entity = entitiesMap.getNamedItem("alpha");
-        notation = (Notation) notationsMap.getNamedItem("notation1");
+        notationsMap.getNamedItem("notation1");
         namespaceURI = entity.lookupNamespaceURI("");
         assertNull(namespaceURI, "Nodelookupnamespaceuri04Assert2");
     }

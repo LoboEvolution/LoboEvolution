@@ -70,7 +70,7 @@ public class Normalizecharacters06Test extends LoboUnitTest {
             pList = doc.getElementsByTagName("p");
             pElem = (Element) pList.item(0);
             text = doc.createTextNode("suçon");
-            retval = pElem.appendChild(text);
+            pElem.appendChild(text);
             doc.normalize();
             assertTrue(errorMonitor.assertLowerSeverity(2), "Normalizecharacters06Assert3");
             pList = doc.getElementsByTagName("p");

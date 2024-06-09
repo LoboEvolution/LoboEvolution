@@ -34,13 +34,16 @@ import com.jtattoo.plaf.lobo.LoboTree;
 import org.loboevolution.menu.tools.AbstractToolsUI;
 import org.loboevolution.menu.tools.ToolsInfo;
 
+import java.io.Serial;
+
 /**
  * <p>PreferencesTree class.</p>
  */
 public class PreferencesTree extends LoboTree {
 
 	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	/**
 	 * Instantiates a new preferences tree.

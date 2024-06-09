@@ -79,7 +79,7 @@ public class HcnodereplacechildinvalidnodetypeTest extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                replacedChild = rootNode.replaceChild(newChild, oldChild);
+                rootNode.replaceChild(newChild, oldChild);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.HIERARCHY_REQUEST_ERR);
             }

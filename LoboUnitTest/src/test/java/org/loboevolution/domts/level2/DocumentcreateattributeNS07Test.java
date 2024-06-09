@@ -38,12 +38,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * The method createAttributeNS raises a NAMESPACE_ERR if the qualifiedName is xmlns and
- * the namespaceURI is different from http://www.w3.org/2000/xmlns
+ * the namespaceURI is different from <a href="http://www.w3.org/2000/xmlns">...</a>
  * <p>
  * Invoke the createAttributeNS method on this DOMImplementation object with
- * the qualifiedName as xmlns and namespaceURI as http://www.W3.org/2000/xmlns.
+ * the qualifiedName as xmlns and namespaceURI as <a href="http://www.W3.org/2000/xmlns">...</a>.
  * Check if the NAMESPACE_ERR exception is thrown.
-
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core">http://www.w3.org/TR/DOM-Level-2-Core/core</a>
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-DocCrAttrNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-DocCrAttrNS</a>
  */
@@ -63,7 +62,7 @@ public class DocumentcreateattributeNS07Test extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                attribute = doc.createAttributeNS(namespaceURI, qualifiedName);
+                doc.createAttributeNS(namespaceURI, qualifiedName);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NAMESPACE_ERR);
             }

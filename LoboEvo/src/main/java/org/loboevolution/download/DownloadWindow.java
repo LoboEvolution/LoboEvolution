@@ -39,10 +39,8 @@ import org.loboevolution.gui.FormPanel;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
+import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
 
@@ -54,6 +52,7 @@ import java.net.URLConnection;
 @Data
 public class DownloadWindow extends JFrame implements IDownload {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     private final JProgressBar progressBar = new JProgressBar(0, 100);
@@ -193,7 +192,7 @@ public class DownloadWindow extends JFrame implements IDownload {
      */
     public void downloadFile(final String url)  {
     	try {
-            final DownloadWindow d = new DownloadWindow(new URL(url));
+            final DownloadWindow d = new DownloadWindow(new URI(url).toURL());
             d.setVisible(true);
         } catch (final Exception e) {
             log.error(e.getMessage(), e);

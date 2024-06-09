@@ -75,10 +75,10 @@ public class Userdatahandler01Test extends LoboUnitTest {
         node = pList.item(0);
         /*UserDataHandlerImpl */
         /*DOMString */
-        oldUserData = node.setUserData("greeting", hello, userDataHandlerImpl);
+        node.setUserData("greeting", hello, userDataHandlerImpl);
         /*UserDataHandlerImpl */
         /*DOMString */
-        oldUserData = node.setUserData("salutation", mister, userDataHandlerImpl);
+        node.setUserData("salutation", mister, userDataHandlerImpl);
         elementNS = node.getNamespaceURI();
         newNode = doc.renameNode(node, elementNS, "div");
         notifications = userDataHandlerImpl.getAllNotifications();

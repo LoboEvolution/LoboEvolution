@@ -65,7 +65,7 @@ public class PostScriptParser {
             String t = tok.nextToken();
             t = filterBlockStart(t);
             t = filterBlockEnd(t);
-            if (t.length() > 0) {
+            if (!t.isEmpty()) {
                 tokens.add(t.trim());
             }
         }

@@ -38,8 +38,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Append as a child of this documentElement a new Processing Instruction.  Using getBaseURI
- * check if the baseURI attribute of the new Processing Instruction node is "'http://www.w3.org/DOM/L3Test".
-
+ * check if the baseURI attribute of the new Processing Instruction node is "'<a href="http://www.w3.org/DOM/L3Test">...</a>".
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-baseURI">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Node3-baseURI</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=419">http://www.w3.org/Bugs/Public/show_bug.cgi?id=419</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/infoset-mapping#Infoset2ProcessingInstruction">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/infoset-mapping#Infoset2ProcessingInstruction</a>

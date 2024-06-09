@@ -35,6 +35,7 @@ import org.loboevolution.component.BrowserFrame;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.io.Serial;
 
 /**
  * <p>DeveloperToolsWindow class.</p>
@@ -42,7 +43,8 @@ import java.awt.*;
 public class DeveloperToolsWindow extends JFrame {
 
 	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	/** The Constant frame. */
 	@Getter

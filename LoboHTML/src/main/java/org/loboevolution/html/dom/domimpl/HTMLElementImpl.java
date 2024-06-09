@@ -288,9 +288,8 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, GlobalE
 	 */
 	public HTMLElementImpl getParent(final String elementTL) {
 		final Object nodeObj = getParentNode();
-		if (nodeObj instanceof HTMLElementImpl) {
-			final HTMLElementImpl parentElement = (HTMLElementImpl) nodeObj;
-			if ("*".equals(elementTL)) {
+		if (nodeObj instanceof HTMLElementImpl parentElement) {
+            if ("*".equals(elementTL)) {
 				return parentElement;
 			}
 			final String pelementTL = parentElement.getTagName().toLowerCase();
@@ -305,9 +304,8 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, GlobalE
 	@Override
 	public CSSStyleDeclaration getParentStyle() {
 		final Object parent = this.parentNode;
-		if (parent instanceof HTMLElementImpl) {
-			final HTMLElementImpl elementParent = (HTMLElementImpl) parent;
-			if (elementParent.currentStyleDeclarationState != null) {
+		if (parent instanceof HTMLElementImpl elementParent) {
+            if (elementParent.currentStyleDeclarationState != null) {
 				return elementParent.currentStyleDeclarationState;
 			}
 
@@ -363,9 +361,8 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, GlobalE
 		final NodeListImpl nodeList = this.getNodeList();
 		if (nodeList != null) {
 			nodeList.forEach(n -> {
-				if (n instanceof HTMLElementImpl) {
-					final HTMLElementImpl htmlElementImpl = (HTMLElementImpl) n;
-					htmlElementImpl.informInvalidRecursive();
+				if (n instanceof HTMLElementImpl htmlElementImpl) {
+                    htmlElementImpl.informInvalidRecursive();
 				}
 			});
 		}

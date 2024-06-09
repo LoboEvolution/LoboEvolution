@@ -56,10 +56,8 @@ public class DocumentgetelementsbytagnameNS04Test extends LoboUnitTest {
     public void runTest() {
         final Document doc;
         final HTMLCollection childList;
-        final String nullNS = null;
-
         doc = sampleXmlFile("staffNS.xml");
-        childList = doc.getElementsByTagNameNS(nullNS, "0");
+        childList = doc.getElementsByTagNameNS(null, "0");
         assertEquals(0, childList.getLength());
     }
 }

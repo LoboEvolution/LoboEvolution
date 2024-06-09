@@ -56,8 +56,8 @@ public class Nodelookupnamespaceuri14Test extends LoboUnitTest {
         docElem = doc.getDocumentElement();
         elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "dom3:p");
         cdata = doc.createCDATASection("Text");
-        appendedChild = elem.appendChild(cdata);
-        appendedChild = docElem.appendChild(elem);
+        elem.appendChild(cdata);
+        docElem.appendChild(elem);
         lookupNamespaceURI = cdata.lookupNamespaceURI("dom3");
         assertEquals("http://www.w3.org/1999/xhtml", lookupNamespaceURI, "Nodelookupnamespaceuri14Assert2");
     }

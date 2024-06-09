@@ -31,6 +31,7 @@ import org.loboevolution.component.BrowserFrame;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.io.Serial;
 
 /**
  * <p>StyleAction class.</p>
@@ -40,7 +41,8 @@ import java.awt.event.ActionEvent;
  */
 public class StyleAction extends AbstractAction {
 
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	private final BrowserFrame frame;
 

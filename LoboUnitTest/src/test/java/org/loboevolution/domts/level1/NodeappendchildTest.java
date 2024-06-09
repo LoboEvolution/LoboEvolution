@@ -67,9 +67,9 @@ public class NodeappendchildTest extends LoboUnitTest {
         doc = sampleXmlFile("staff.xml");
         elementList = doc.getElementsByTagName("employee");
         employeeNode = elementList.item(1);
-        childList = employeeNode.getChildNodes();
+        employeeNode.getChildNodes();
         createdNode = doc.createElement("newChild");
-        appendedChild = employeeNode.appendChild(createdNode);
+        employeeNode.appendChild(createdNode);
         lchild = employeeNode.getLastChild();
         childName = lchild.getNodeName();
         assertEquals("NEWCHILD", childName, "NodeappendchildAssert1");

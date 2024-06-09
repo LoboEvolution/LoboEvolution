@@ -79,15 +79,15 @@ public class Userdatahandler04Test extends LoboUnitTest {
         docElem = doc.getDocumentElement();
         rootNS = docElem.getNamespaceURI();
         rootName = docElem.getTagName();
-        newDoc = domImpl.createDocument(rootNS, rootName, docType);
+        domImpl.createDocument(rootNS, rootName, docType);
         pList = doc.getElementsByTagName("p");
         node = pList.item(0);
         /*DOMString */
-        oldUserData = node.setUserData("greeting", hello, userDataHandlerImpl);
+        node.setUserData("greeting", hello, userDataHandlerImpl);
         /*DOMString */
-        oldUserData = node.setUserData("salutation", mister, userDataHandlerImpl);
-        elementNS = node.getNamespaceURI();
-        newNode = doc.adoptNode(node);
+        node.setUserData("salutation", mister, userDataHandlerImpl);
+        node.getNamespaceURI();
+        doc.adoptNode(node);
         notifications = userDataHandlerImpl.getAllNotifications();
         assertEquals(2, notifications.size(), "Userdatahandler04Assert1");
         for (int indexN100CD = 0; indexN100CD < notifications.size(); indexN100CD++) {

@@ -31,7 +31,6 @@ import org.loboevolution.config.HtmlRendererConfig;
 import org.loboevolution.info.GeneralInfo;
 import org.loboevolution.net.Cookie;
 
-import java.net.Proxy;
 import java.net.URL;
 import java.util.List;
 

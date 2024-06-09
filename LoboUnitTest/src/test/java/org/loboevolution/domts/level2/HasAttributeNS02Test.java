@@ -42,8 +42,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
  * and/or namespace URI specified on this element or does not have a default value.
  * Retrieve the first "address" element and the "hasAttributeNS()" method
  * should return false since the element has "domestic" as the local name
- * and "http://www.nomatch.com" as the namespace URI.
-
+ * and "<a href="http://www.nomatch.com">...</a>" as the namespace URI.
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElHasAttrNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElHasAttrNS</a>
  */
 public class HasAttributeNS02Test extends LoboUnitTest {

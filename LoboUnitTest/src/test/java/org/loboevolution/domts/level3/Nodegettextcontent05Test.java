@@ -53,7 +53,7 @@ public class Nodegettextcontent05Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
         notationsMap = docType.getNotations();
-        notation1 = (Notation) notationsMap.getNamedItem("notation1");
+        notationsMap.getNamedItem("notation1");
         textContent = docType.getTextContent();
         assertNull(textContent, "Nodegettextcontent05Assert2");
     }

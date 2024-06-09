@@ -52,6 +52,7 @@ import org.loboevolution.html.dom.UserDataHandler;
 
 import java.io.*;
 import java.net.SocketTimeoutException;
+import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
@@ -183,7 +184,7 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 					final TimingInfo info = new TimingInfo();
 					final URL scriptURL = ((HTMLDocumentImpl) doc).getFullURL(src);
 					final String scriptURI = scriptURL == null ? src : scriptURL.toExternalForm();
-					info.setName(scriptURL != null ? scriptURL.getFile() : new URL(scriptURI).getFile());
+					info.setName(scriptURL != null ? scriptURL.getFile() : new URI(scriptURI).toURL().getFile());
 
 					try (InputStream in = getStream(scriptURL, scriptURI, info)) {
 						if (AlgorithmDigest.validate(IOUtil.readFully(in), getIntegrity())) {

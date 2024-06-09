@@ -72,7 +72,7 @@ public class HccharacterdataindexsizeerrdeletedatacountnegativeTest extends Lobo
         {
             boolean success = false;
             try {
-                childSubstring = child.substringData(10, -3);
+                child.substringData(10, -3);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.INDEX_SIZE_ERR);
             }

@@ -94,9 +94,8 @@ public class HTMLTableCellElementImpl extends HTMLElementImpl implements HTMLTab
 			if (getParentNode() != null) {
 				final NodeListImpl childNodes = (NodeListImpl) getParentNode().getChildNodes();
 				childNodes.forEach(node -> {
-					if (node instanceof HTMLTableCellElementImpl) {
-						final HTMLTableCellElementImpl cell = (HTMLTableCellElementImpl) node;
-						count.incrementAndGet();
+					if (node instanceof HTMLTableCellElementImpl cell) {
+                        count.incrementAndGet();
 						if (cell.getId().equals(getId()))
 							index.set(count.get());
 					}

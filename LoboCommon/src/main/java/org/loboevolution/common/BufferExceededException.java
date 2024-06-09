@@ -25,12 +25,15 @@
  */
 package org.loboevolution.common;
 
+import java.io.Serial;
+
 /**
  * <p>BufferExceededException class.</p>
  */
 public class BufferExceededException extends Exception {
 
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	/**
 	 * <p>Constructor for BufferExceededException.</p>

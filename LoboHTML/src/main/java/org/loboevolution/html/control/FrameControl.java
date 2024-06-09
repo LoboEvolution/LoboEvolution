@@ -29,6 +29,8 @@ package org.loboevolution.html.control;
 import org.loboevolution.common.WrapperLayout;
 import org.loboevolution.html.dom.domimpl.HTMLIFrameElementImpl;
 
+import java.io.Serial;
+
 /**
  * <p>FrameControl class.</p>
  *
@@ -37,7 +39,8 @@ import org.loboevolution.html.dom.domimpl.HTMLIFrameElementImpl;
  */
 public class FrameControl extends BaseControl {
 
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	/** The element. */
 	private final HTMLIFrameElementImpl modelNode;

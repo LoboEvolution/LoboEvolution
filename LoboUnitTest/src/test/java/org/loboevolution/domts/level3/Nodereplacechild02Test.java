@@ -49,7 +49,7 @@ public class Nodereplacechild02Test extends LoboUnitTest {
         final Node replaced;
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
-        replaced = doc.replaceChild(docType, docType);
+        doc.replaceChild(docType, docType);
     }
 }
 

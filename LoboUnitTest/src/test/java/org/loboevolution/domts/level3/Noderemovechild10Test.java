@@ -56,7 +56,7 @@ public class Noderemovechild10Test extends LoboUnitTest {
         doc = sampleXmlFile("barfoo.xml");
         docFrag = doc.createDocumentFragment();
         elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "dom3:br");
-        appendedChild = docFrag.appendChild(elem);
+        docFrag.appendChild(elem);
         removedElem = (Element) docFrag.removeChild(elem);
         elemName = removedElem.getNodeName();
         assertEquals("dom3:br", elemName, "Noderemovechild10Assert2");

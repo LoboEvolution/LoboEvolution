@@ -71,7 +71,7 @@ public class NamednodemapremovenameditemTest extends LoboUnitTest {
         testAddress = (Element) elementList.item(2);
         attributes = testAddress.getAttributes();
         assertNotNull(attributes, "NamednodemapremovenameditemAssert3");
-        removedNode = attributes.removeNamedItem("street");
+        attributes.removeNamedItem("street");
         streetAttr = (Attr) attributes.getNamedItem("street");
         assertNotNull(streetAttr, "NamednodemapremovenameditemAssert4");
         specified = streetAttr.isSpecified();

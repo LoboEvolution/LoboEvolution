@@ -42,11 +42,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * is created.
  * <p>
  * Using the method importNode with deep=true, import the default Attribute attribute,
- * "defaultAttr" of the second element node whose namespaceURI="http://www.nist.gov" and
+ * "defaultAttr" of the second element node whose namespaceURI="<a href="http://www.nist.gov">...</a>" and
  * localName="defaultAttr", into a new document.
  * Check the parentNode, nodeName, nodeType and nodeValue of the imported node to
  * verify if it has been imported correctly.
-
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core">http://www.w3.org/TR/DOM-Level-2-Core/core</a>
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#Core-Document-importNode">http://www.w3.org/TR/DOM-Level-2-Core/core#Core-Document-importNode</a>
  */
@@ -59,8 +58,6 @@ public class Documentimportnode04Test extends LoboUnitTest {
     public void runTest() {
         final Document doc;
         final Document newDoc;
-        final DocumentType docType = null;
-
         final DOMImplementation domImpl;
         final Element element;
         final Attr attr;
@@ -70,9 +67,8 @@ public class Documentimportnode04Test extends LoboUnitTest {
         final int nodeType;
         final String nodeValue;
         doc = sampleXmlFile("staffNS.xml");
-
         domImpl = doc.getImplementation();
-        newDoc = domImpl.createDocument("http://www.w3.org/DOM/Test", "l2:root", docType);
+        newDoc = domImpl.createDocument("http://www.w3.org/DOM/Test", "l2:root", null);
         childList = doc.getElementsByTagName("employee");
         element = (Element) childList.item(1);
         attr = element.getAttributeNode("defaultAttr");

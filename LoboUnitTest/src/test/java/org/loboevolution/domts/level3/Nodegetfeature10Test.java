@@ -47,8 +47,6 @@ public class Nodegetfeature10Test extends LoboUnitTest {
     public void runTest() {
         final Document doc;
         final Node node;
-        final String nullVersion = null;
-
         Node featureImpl;
         boolean isSupported;
         final HTMLCollection nodeList;
@@ -57,68 +55,68 @@ public class Nodegetfeature10Test extends LoboUnitTest {
         nodeList = doc.getElementsByTagName("p");
         elem = (Element) nodeList.item(0);
         node = elem.getFirstChild();
-        featureImpl = node.getFeature("Core", nullVersion);
+        featureImpl = node.getFeature("Core", null);
         assertSame(node, featureImpl, "Nodegetfeature10Assert1");
-        featureImpl = node.getFeature("cOrE", nullVersion);
+        featureImpl = node.getFeature("cOrE", null);
         assertSame(node, featureImpl, "Nodegetfeature10Assert2");
-        featureImpl = node.getFeature("+cOrE", nullVersion);
+        featureImpl = node.getFeature("+cOrE", null);
         assertSame(node, featureImpl, "Nodegetfeature10Assert3");
-        featureImpl = node.getFeature("bogus.feature", nullVersion);
+        featureImpl = node.getFeature("bogus.feature", null);
         assertNull(featureImpl, "Nodegetfeature10Assert4");
         featureImpl = node.getFeature("cOrE", "2.0");
         assertSame(node, featureImpl, "Nodegetfeature10Assert5");
         featureImpl = node.getFeature("cOrE", "3.0");
         assertSame(node, featureImpl, "Nodegetfeature10Assert6");
-        isSupported = node.isSupported("XML", nullVersion);
-        featureImpl = node.getFeature("XML", nullVersion);
+        isSupported = node.isSupported("XML", null);
+        featureImpl = node.getFeature("XML", null);
 
         if (isSupported) {
             assertSame(node, featureImpl, "Nodegetfeature10Assert7");
         }
-        isSupported = node.isSupported("SVG", nullVersion);
-        featureImpl = node.getFeature("SVG", nullVersion);
+        isSupported = node.isSupported("SVG", null);
+        featureImpl = node.getFeature("SVG", null);
 
         if (isSupported) {
             assertSame(node, featureImpl, "Nodegetfeature10Assert8");
         }
-        isSupported = node.isSupported("HTML", nullVersion);
-        featureImpl = node.getFeature("HTML", nullVersion);
+        isSupported = node.isSupported("HTML", null);
+        featureImpl = node.getFeature("HTML", null);
 
         if (isSupported) {
             assertSame(node, featureImpl, "Nodegetfeature10Assert9");
         }
-        isSupported = node.isSupported("Events", nullVersion);
-        featureImpl = node.getFeature("Events", nullVersion);
+        isSupported = node.isSupported("Events", null);
+        featureImpl = node.getFeature("Events", null);
 
         if (isSupported) {
             assertSame(node, featureImpl, "Nodegetfeature10Assert10");
         }
-        isSupported = node.isSupported("LS", nullVersion);
-        featureImpl = node.getFeature("LS", nullVersion);
+        isSupported = node.isSupported("LS", null);
+        featureImpl = node.getFeature("LS", null);
 
         if (isSupported) {
             assertSame(node, featureImpl, "Nodegetfeature10Assert11");
         }
-        isSupported = node.isSupported("LS-Async", nullVersion);
-        featureImpl = node.getFeature("LS-Async", nullVersion);
+        isSupported = node.isSupported("LS-Async", null);
+        featureImpl = node.getFeature("LS-Async", null);
 
         if (isSupported) {
             assertSame(node, featureImpl, "Nodegetfeature10Assert12");
         }
-        isSupported = node.isSupported("XPath", nullVersion);
-        featureImpl = node.getFeature("XPath", nullVersion);
+        isSupported = node.isSupported("XPath", null);
+        featureImpl = node.getFeature("XPath", null);
 
         if (isSupported) {
             assertSame(node, featureImpl, "Nodegetfeature10Assert13");
         }
-        isSupported = node.isSupported("+HTML", nullVersion);
-        featureImpl = node.getFeature("HTML", nullVersion);
+        isSupported = node.isSupported("+HTML", null);
+        featureImpl = node.getFeature("HTML", null);
 
         if (isSupported) {
             assertNotNull(featureImpl, "Nodegetfeature10Assert14");
         }
-        isSupported = node.isSupported("+SVG", nullVersion);
-        featureImpl = node.getFeature("SVG", nullVersion);
+        isSupported = node.isSupported("+SVG", null);
+        featureImpl = node.getFeature("SVG", null);
 
         if (isSupported) {
             assertNotNull(featureImpl, "Nodegetfeature10Assert15");

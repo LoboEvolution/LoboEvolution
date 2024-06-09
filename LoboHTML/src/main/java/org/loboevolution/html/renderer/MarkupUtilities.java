@@ -53,9 +53,8 @@ final class MarkupUtilities {
   private static BoundableRenderable findRenderable(final Renderable[] renderables, final int x, final int y, final int firstIndex,
       final int length, final boolean vertical) {
     for (int i = firstIndex + length - 1; i >= firstIndex; i--) {
-      if (renderables[i] instanceof BoundableRenderable) {
-        final BoundableRenderable br2 = (BoundableRenderable) renderables[i];
-        if ((!br2.isDelegated()) && br2.contains(x, y)) {
+      if (renderables[i] instanceof BoundableRenderable br2) {
+          if ((!br2.isDelegated()) && br2.contains(x, y)) {
           return br2;
         }
       }
@@ -76,9 +75,8 @@ final class MarkupUtilities {
   public static List<BoundableRenderable> findRenderables(final Renderable[] renderables, final int x, final int y, final boolean vertical) {
     List<BoundableRenderable> found = null;
     for (final Renderable renderable : renderables) {
-      if (renderable instanceof BoundableRenderable) {
-        final BoundableRenderable br = (BoundableRenderable) renderable;
-        if ((!br.isDelegated()) && br.contains(x, y)) {
+      if (renderable instanceof BoundableRenderable br) {
+          if ((!br.isDelegated()) && br.contains(x, y)) {
           if (found == null) {
             found = new ArrayList<>();
           }

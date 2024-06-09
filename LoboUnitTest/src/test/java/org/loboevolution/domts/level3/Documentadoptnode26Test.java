@@ -62,11 +62,11 @@ public class Documentadoptnode26Test extends LoboUnitTest {
         rootNS = docElem.getNamespaceURI();
         rootTagname = docElem.getTagName();
         domImpl = doc.getImplementation();
-        newDoc = domImpl.createDocument(rootNS, rootTagname, nullDocType);
+        newDoc = domImpl.createDocument(rootNS, rootTagname, null);
         newElem = newDoc.createElementNS("http://www.w3.org/1999/xhtml", "head");
         newElem.setAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:lang", "en-US");
         docElem = newDoc.getDocumentElement();
-        appendedChild = docElem.appendChild(newElem);
+        docElem.appendChild(newElem);
         adoptedNode = doc.adoptNode(newElem);
 
         if ((adoptedNode != null)) {

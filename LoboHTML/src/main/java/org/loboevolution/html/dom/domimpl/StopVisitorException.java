@@ -28,11 +28,14 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
+import java.io.Serial;
+
 class StopVisitorException extends RuntimeException {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 	private final Object tag;
 
 	/**

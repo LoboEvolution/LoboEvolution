@@ -32,8 +32,6 @@ import org.loboevolution.html.node.DOMImplementationList;
 import org.loboevolution.html.node.DOMImplementationSource;
 
 import java.lang.reflect.InvocationTargetException;
-import java.security.AccessController;
-import java.security.PrivilegedAction;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 import java.util.List;
@@ -97,13 +95,7 @@ public final class DOMImplementationRegistry {
         final StringTokenizer st = new StringTokenizer(FALLBACK_CLASS);
         while (st.hasMoreTokens()) {
             final String sourceName = st.nextToken();
-            // make sure we have access to restricted packages
-            boolean internal = false;
-            if (System.getSecurityManager() != null) {
-                if (sourceName != null && sourceName.startsWith(DEFAULT_PACKAGE)) {
-                    internal = true;
-                }
-            }
+            boolean internal = sourceName != null && sourceName.startsWith(DEFAULT_PACKAGE);
             Class sourceClass;
             if (classLoader != null && !internal) {
                 sourceClass = classLoader.loadClass(sourceName);
@@ -133,9 +125,7 @@ public final class DOMImplementationRegistry {
      * or <code>null</code> if none found.
      */
     public DOMImplementation getDOMImplementation(final String features) {
-        final int size = sources.size();
-        for (int i = 0; i < size; i++) {
-            final DOMImplementationSource source = sources.get(i);
+        for (final DOMImplementationSource source : sources) {
             final DOMImplementation impl = source.getDOMImplementation(features);
             if (impl != null) {
                 return impl;
@@ -156,9 +146,7 @@ public final class DOMImplementationRegistry {
      */
     public DOMImplementationList getDOMImplementationList(final String features) {
         final List<DOMImplementation> implementations = new ArrayList<>();
-        final int size = sources.size();
-        for (int i = 0; i < size; i++) {
-            final DOMImplementationSource source = sources.get(i);
+        for (final DOMImplementationSource source : sources) {
             final DOMImplementationList impls = source.getDOMImplementationList(features);
             for (int j = 0; j < impls.getLength(); j++) {
                 final DOMImplementation impl = impls.item(j);
@@ -203,57 +191,6 @@ public final class DOMImplementationRegistry {
      * @return A class loader, possibly <code>null</code>
      */
     private static ClassLoader getClassLoader() {
-        try {
-            final ClassLoader contextClassLoader = getContextClassLoader();
-
-            if (contextClassLoader != null) {
-                return contextClassLoader;
-            }
-        } catch (final Exception e) {
-            // Assume that the DOM application is in a JRE 1.1, use the
-            // current ClassLoader
-            return DOMImplementationRegistry.class.getClassLoader();
-        }
         return DOMImplementationRegistry.class.getClassLoader();
-    }
-
-    /**
-     * A simple JRE (Java Runtime Environment) 1.1 test
-     *
-     * @return <code>true</code> if JRE 1.1
-     */
-    private static boolean isJRE11() {
-        try {
-            final Class c = Class.forName("java.security.AccessController");
-            // java.security.AccessController existed since 1.2 so, if no
-            // exception was thrown, the DOM application is running in a JRE
-            // 1.2 or higher
-            return false;
-        } catch (final Exception ex) {
-            // ignore
-        }
-        return true;
-    }
-
-    /**
-     * This method returns the ContextClassLoader or <code>null</code> if
-     * running in a JRE 1.1
-     *
-     * @return The Context Classloader
-     */
-    private static ClassLoader getContextClassLoader() {
-        return isJRE11()
-                ? null
-                : (ClassLoader)
-                AccessController.doPrivileged((PrivilegedAction) () -> {
-                    ClassLoader classLoader = null;
-                    try {
-                        classLoader =
-                                Thread.currentThread().getContextClassLoader();
-                    } catch (final SecurityException ex) {
-                        log.info(ex.getMessage());
-                    }
-                    return classLoader;
-                });
     }
 }

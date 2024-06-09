@@ -103,9 +103,8 @@ public class InputImage {
 	}
 
 	private static boolean hasAlpha(final Image image) {
-		if (image instanceof BufferedImage) {
-			final BufferedImage bimage = (BufferedImage) image;
-			return bimage.getColorModel().hasAlpha();
+		if (image instanceof BufferedImage bimage) {
+            return bimage.getColorModel().hasAlpha();
 		}
 
 		final PixelGrabber pg = new PixelGrabber(image, 0, 0, 1, 1, false);

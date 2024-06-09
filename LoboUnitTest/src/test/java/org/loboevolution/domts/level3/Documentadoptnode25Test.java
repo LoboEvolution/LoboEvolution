@@ -62,7 +62,7 @@ public class Documentadoptnode25Test extends LoboUnitTest {
         rootName = docElem.getTagName();
         newElem = doc.createElementNS("http://www.w3.org/1999/xhtml", "th");
         domImpl = doc.getImplementation();
-        newDoc = domImpl.createDocument(rootNS, rootName, nullDocType);
+        newDoc = domImpl.createDocument(rootNS, rootName, null);
         adoptedNode = newDoc.adoptNode(newElem);
 
         if ((adoptedNode != null)) {

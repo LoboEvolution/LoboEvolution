@@ -100,13 +100,11 @@ public class PositionedRenderable implements Renderable {
 		final RCollection rparent = renderable.getParent();
 		if (!isFixed && rparent.getModelNode() instanceof HTMLDocument) {
 			Renderable htmlRenderable = renderable.findHtmlRenderable(rparent);
-			if (htmlRenderable instanceof PositionedRenderable) {
-				final PositionedRenderable htmlPR = (PositionedRenderable) htmlRenderable;
-				htmlRenderable = htmlPR.renderable;
+			if (htmlRenderable instanceof PositionedRenderable htmlPR) {
+                htmlRenderable = htmlPR.renderable;
 			}
-			if (htmlRenderable instanceof RBlock) {
-				final RBlock htmlBlock = ((RBlock) htmlRenderable);
-				final Point htmlOffset = htmlBlock.bodyLayout.getOrigin();
+			if (htmlRenderable instanceof RBlock htmlBlock) {
+                final Point htmlOffset = htmlBlock.bodyLayout.getOrigin();
 				final Insets htmlInsets = htmlBlock.getInsetsMarginBorder(htmlBlock.hasHScrollBar, htmlBlock.hasVScrollBar);
 				return new Point((int) htmlOffset.getX() - htmlInsets.left, (int) htmlOffset.getY() - htmlInsets.top);
 			}

@@ -141,7 +141,7 @@ public class RefinementRegionSegment extends RegionSegment {
         refinementRegionFlags.setFlags(refinementRegionFlagsField);
 
         if (JBIG2StreamDecoder.debug)
-            log.info("generic region Segment flags = " + refinementRegionFlagsField);
+            log.info("generic region Segment flags = {}", refinementRegionFlagsField);
     }
 
     /**

@@ -63,11 +63,10 @@ public class ParentFloatingBoundsSource implements FloatingBoundsSource {
 	@Override
 	public boolean equals(final Object obj) {
 		// Important for layout caching.
-		if (!(obj instanceof ParentFloatingBoundsSource)) {
+		if (!(obj instanceof ParentFloatingBoundsSource other)) {
 			return false;
 		}
-		final ParentFloatingBoundsSource other = (ParentFloatingBoundsSource) obj;
-		return this.blockShiftRight == other.blockShiftRight && this.expectedBlockWidth == other.expectedBlockWidth
+        return this.blockShiftRight == other.blockShiftRight && this.expectedBlockWidth == other.expectedBlockWidth
 				&& this.newX == other.newX && this.newY == other.newY
 				&& Objects.equals(this.floatBounds, other.floatBounds);
 

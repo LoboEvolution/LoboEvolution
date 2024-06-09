@@ -59,6 +59,7 @@ import java.awt.event.ActionEvent;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.io.Serial;
 import java.net.SocketTimeoutException;
 import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
@@ -138,7 +139,8 @@ public class HtmlPanel extends JComponent implements FrameContext {
 
 	private static final int NOTIF_TIMER_DELAY = 300;
 
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	private volatile int defaultOverflowX = RenderState.OVERFLOW_AUTO;
 	
@@ -466,9 +468,8 @@ public class HtmlPanel extends JComponent implements FrameContext {
 
 	private void scrollToElementImpl(final String nameOrId) {
 		final NodeImpl node = this.rootNode;
-		if (node instanceof HTMLDocument) {
-			final HTMLDocument doc = (HTMLDocument) node;
-			final Element element = doc.getElementById(nameOrId);
+		if (node instanceof HTMLDocument doc) {
+            final Element element = doc.getElementById(nameOrId);
 			if (element != null) {
 				this.scrollTo(element);
 			}

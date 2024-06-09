@@ -63,7 +63,7 @@ public class Nodereplacechild26Test extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                replaced = elem.replaceChild(docElem, firstChild);
+                elem.replaceChild(docElem, firstChild);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.HIERARCHY_REQUEST_ERR);
             }

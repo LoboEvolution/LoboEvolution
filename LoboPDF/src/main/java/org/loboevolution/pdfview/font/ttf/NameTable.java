@@ -136,17 +136,10 @@ public class NameTable extends TrueTypeTable {
      * @return a {@link java.lang.String} object.
      */
     public static String getCharsetName(final int platformID, final int encodingID) {
-        String charset = "";
-
-        switch (platformID) {
-            case PLATFORMID_UNICODE:
-            case PLATFORMID_MICROSOFT:
-                charset = "UTF-16";
-                break;
-            default:
-                charset = "US-ASCII";
-                break;
-        }
+        String charset = switch (platformID) {
+            case PLATFORMID_UNICODE, PLATFORMID_MICROSOFT -> "UTF-16";
+            default -> "US-ASCII";
+        };
 
         return charset;
     }
@@ -422,37 +415,18 @@ public class NameTable extends TrueTypeTable {
 
     /**
      * A class to hold the data associated with each record
+     *
+     * @param platformID         Platform ID
+     * @param platformSpecificID Platform Specific ID (Encoding)
+     * @param languageID         Language ID
+     * @param nameID             Name ID
      */
-    static class NameRecord implements Comparable {
-        /**
-         * Platform ID
-         */
-        final short platformID;
-
-        /**
-         * Platform Specific ID (Encoding)
-         */
-        final short platformSpecificID;
-
-        /**
-         * Language ID
-         */
-        final short languageID;
-
-        /**
-         * Name ID
-         */
-        final short nameID;
-
+    record NameRecord(short platformID, short platformSpecificID, short languageID,
+                      short nameID) implements Comparable {
         /**
          * Create a new record
          */
-        NameRecord(final short platformID, final short platformSpecificID,
-                   final short languageID, final short nameID) {
-            this.platformID = platformID;
-            this.platformSpecificID = platformSpecificID;
-            this.languageID = languageID;
-            this.nameID = nameID;
+        NameRecord {
         }
 
 
@@ -469,11 +443,9 @@ public class NameTable extends TrueTypeTable {
          */
         @Override
         public int compareTo(final Object obj) {
-            if (!(obj instanceof NameRecord)) {
+            if (!(obj instanceof NameRecord rec)) {
                 return -1;
             }
-
-            final NameRecord rec = (NameRecord) obj;
 
             if (this.platformID > rec.platformID) {
                 return 1;
@@ -489,7 +461,5 @@ public class NameTable extends TrueTypeTable {
                 return -1;
             } else return Short.compare(this.nameID, rec.nameID);
         }
-
-
     }
 }

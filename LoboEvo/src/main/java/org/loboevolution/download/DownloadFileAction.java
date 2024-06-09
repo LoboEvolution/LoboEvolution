@@ -34,6 +34,7 @@ import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
+import java.io.Serial;
 
 /**
  * <p>DownloadFileAction class.</p>
@@ -41,6 +42,7 @@ import java.io.File;
 @Slf4j
 public class DownloadFileAction extends AbstractAction implements PropertyChangeListener {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     private final DownloadWindow action;

@@ -61,7 +61,7 @@ public class Nodeinsertbefore08Test extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                inserted = doc.insertBefore(newComment, docElem);
+                doc.insertBefore(newComment, docElem);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
             }

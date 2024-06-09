@@ -50,8 +50,6 @@ public class Documentgetxmlencoding02Test extends LoboUnitTest {
         final Document newDoc;
         final DOMImplementation domImpl;
         final String encodingName;
-        final DocumentType nullDocType = null;
-
         final Element docElem;
         final String rootNS;
         final String rootName;
@@ -60,7 +58,7 @@ public class Documentgetxmlencoding02Test extends LoboUnitTest {
         rootNS = docElem.getNamespaceURI();
         rootName = docElem.getTagName();
         domImpl = doc.getImplementation();
-        newDoc = domImpl.createDocument(rootNS, rootName, nullDocType);
+        newDoc = domImpl.createDocument(rootNS, rootName, null);
         encodingName = newDoc.getXmlEncoding();
         assertNull(encodingName, "Documentgetxmlencoding02Assert2");
     }

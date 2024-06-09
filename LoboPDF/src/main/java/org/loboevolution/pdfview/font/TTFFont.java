@@ -90,23 +90,13 @@ public class TTFFont extends OutlineFont {
                 font = TrueTypeFont.parseFont(ttfObj.getStreamBuffer());
             } else {
                 final RandomAccessFile raFile = fontFile != null ? new RandomAccessFile(fontFile, "r") : null;
-                final FileChannel fc = raFile.getChannel();
-                try {
+                try (raFile; FileChannel fc = raFile.getChannel()) {
                     MappedByteBuffer mappedFont = fc.map(FileChannel.MapMode.READ_ONLY, 0, fc.size());
                     font = TrueTypeFont.parseFont(mappedFont);
                     mappedFont = null;
-                } finally {
-                    try {
-                        fc.close();
-                    } catch (final IOException ioEx) {
-                        // swallow
-                    }
-                    try {
-                        raFile.close();
-                    } catch (final IOException ioEx) {
-                        // swallow
-                    }
                 }
+                // swallow
+                // swallow
             }
             // read the units per em from the head table
             final HeadTable head = (HeadTable) font.getTable("head");
@@ -232,7 +222,7 @@ public class TTFFont extends OutlineFont {
         final GlyfTable glyf = (GlyfTable) this.font.getTable("glyf");
         final Glyf g = glyf.getGlyph(glyphId);
 
-        GeneralPath gp = null;
+        GeneralPath gp;
         if (g instanceof GlyfSimple) {
             gp = renderSimpleGlyph((GlyfSimple) g);
         } else if (g instanceof GlyfCompound) {
@@ -316,7 +306,7 @@ public class TTFFont extends OutlineFont {
         for (int i = 0; i < g.getNumComponents(); i++) {
             // find and render the component glyf
             final Glyf gl = glyf.getGlyph(g.getGlyphIndex(i));
-            GeneralPath path = null;
+            GeneralPath path;
             if (gl instanceof GlyfSimple) {
                 path = renderSimpleGlyph((GlyfSimple) gl);
             } else if (gl instanceof GlyfCompound) {

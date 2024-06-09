@@ -125,7 +125,7 @@ public class CMYKColorSpace extends ColorSpace {
      * to do the conversion. Details on this colorspace are available on
      * wikipedia:
      * <p>
-     * http://en.wikipedia.org/wiki/CIE_XYZ_color_space
+     * <a href="http://en.wikipedia.org/wiki/CIE_XYZ_color_space">...</a>
      * <p>
      * There is also an "ideal relationship" to CMYK, which might be implemented
      * in the future (don't recall the reference we got this from, probably
@@ -140,7 +140,7 @@ public class CMYKColorSpace extends ColorSpace {
      * Y = 21.2671 71.5160 07.2169 | 1-M'
      * Z   01.9334 11.9193 95.0227 | 1-Y'
      *
-     * @see java.awt.color.ColorSpace#toCIEXYZ(float[])
+     * @see ColorSpace#toCIEXYZ(float[])
      */
     @Override
     public float[] toCIEXYZ(final float[] p_colorvalue) {

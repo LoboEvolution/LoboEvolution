@@ -30,8 +30,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.SocketTimeoutException;
+import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import lombok.extern.slf4j.Slf4j;
@@ -67,12 +69,12 @@ public class NavigationManager {
 	public static Document getDocument(final String uri) {
 		final HtmlPanel panel = new HtmlPanel();
 		try {
-			final URL url = new URL(uri);
+			final URL url = new URI(uri).toURL();
 			final URLConnection connection = url.openConnection();
 			connection.setRequestProperty("User-Agent", UserAgent.getUserAgent());
 			connection.getHeaderField("Set-Cookie");
 			try (final InputStream in = HttpNetwork.openConnectionCheckRedirects(connection);
-                 final Reader reader = new InputStreamReader(in, "utf-8")) {
+                 final Reader reader = new InputStreamReader(in, StandardCharsets.UTF_8)) {
 
 				final InputSource is = new InputSourceImpl(reader, uri);
 				final UserAgentContext ucontext = new UserAgentContext(new HtmlRendererConfigImpl());

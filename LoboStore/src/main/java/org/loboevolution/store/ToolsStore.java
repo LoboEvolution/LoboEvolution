@@ -28,6 +28,7 @@ package org.loboevolution.store;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -43,6 +44,7 @@ import java.util.List;
 @Slf4j
 public class ToolsStore implements QueryStore, Serializable {
 
+	@Serial
 	private static final long serialVersionUID = 1L;
 
 	/** The Constant DB_PATH. */

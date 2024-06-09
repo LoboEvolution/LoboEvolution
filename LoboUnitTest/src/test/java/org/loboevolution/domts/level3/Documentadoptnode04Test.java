@@ -55,8 +55,6 @@ public class Documentadoptnode04Test extends LoboUnitTest {
         final String nodePrefix;
         final Node attrOwnerElem;
         final boolean isSpecified;
-        final DocumentType nullDocType = null;
-
         final Element docElem;
         final String rootNS;
         final String rootName;
@@ -66,7 +64,7 @@ public class Documentadoptnode04Test extends LoboUnitTest {
         rootName = docElem.getTagName();
         rootNS = docElem.getNamespaceURI();
         domImpl = doc.getImplementation();
-        newDoc = domImpl.createDocument(rootNS, rootName, nullDocType);
+        newDoc = domImpl.createDocument(rootNS, rootName, null);
         newAttr = doc.createAttributeNS(xmlNS, "xml:lang");
         adoptedAttr = (Attr) newDoc.adoptNode(newAttr);
 

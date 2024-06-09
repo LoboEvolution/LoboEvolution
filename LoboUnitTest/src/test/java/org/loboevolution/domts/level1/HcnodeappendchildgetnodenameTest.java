@@ -66,7 +66,7 @@ public class HcnodeappendchildgetnodenameTest extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("p");
         employeeNode = elementList.item(1);
-        childList = employeeNode.getChildNodes();
+        employeeNode.getChildNodes();
         newChild = doc.createElement("br");
         appendNode = employeeNode.appendChild(newChild);
         childName = appendNode.getNodeName();

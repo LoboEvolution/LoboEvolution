@@ -56,7 +56,7 @@ public class Elementsetidattribute09Test extends LoboUnitTest {
         final Element salaryElem;
         NamedNodeMap attributesMap;
         Attr attr;
-        boolean id = false;
+        boolean id;
         Element elem;
         String elemName;
         doc = sampleXmlFile("hc_staff.xml");

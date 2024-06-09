@@ -50,8 +50,6 @@ public class Nodelookupprefix02Test extends LoboUnitTest {
         final DOMImplementation domImpl;
         final Document newDoc;
         final String prefix;
-        final DocumentType nullDocType = null;
-
         final Element docElem;
         final String rootNS;
         final String rootName;
@@ -62,7 +60,7 @@ public class Nodelookupprefix02Test extends LoboUnitTest {
         rootName = docElem.getTagName();
         domImpl = doc.getImplementation();
         qname = "dom3:" + rootName;
-        newDoc = domImpl.createDocument(rootNS, qname, nullDocType);
+        newDoc = domImpl.createDocument(rootNS, qname, null);
         prefix = newDoc.lookupPrefix(rootNS);
         assertEquals("dom3", prefix, "Nodelookupprefix02Assert2");
     }

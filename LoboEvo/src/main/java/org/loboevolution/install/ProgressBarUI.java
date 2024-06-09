@@ -31,6 +31,7 @@ import java.awt.Cursor;
 import java.awt.Insets;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.Serial;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
@@ -44,7 +45,8 @@ import javax.swing.JTextArea;
  */
 public class ProgressBarUI extends JPanel implements PropertyChangeListener {
 
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	private final JProgressBar progressBar;
 	private final StorageManager storage;

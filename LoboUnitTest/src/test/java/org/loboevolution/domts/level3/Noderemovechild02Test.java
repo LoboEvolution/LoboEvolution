@@ -48,8 +48,6 @@ public class Noderemovechild02Test extends LoboUnitTest {
         final DOMImplementation domImpl;
         final Document newDoc;
         Node removed;
-        final DocumentType nullDocType = null;
-
         final Element docElem;
         final String rootNS;
         final String rootName;
@@ -58,12 +56,12 @@ public class Noderemovechild02Test extends LoboUnitTest {
         rootNS = docElem.getNamespaceURI();
         rootName = docElem.getTagName();
         domImpl = doc.getImplementation();
-        newDoc = domImpl.createDocument(rootNS, rootName, nullDocType);
+        newDoc = domImpl.createDocument(rootNS, rootName, null);
 
         {
             boolean success = false;
             try {
-                removed = doc.removeChild(newDoc);
+                doc.removeChild(newDoc);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
             }
@@ -73,7 +71,7 @@ public class Noderemovechild02Test extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                removed = newDoc.removeChild(doc);
+                newDoc.removeChild(doc);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
             }

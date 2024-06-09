@@ -175,13 +175,12 @@ public class GoToEAction extends PDFAction {
 
         @Override
         public boolean equals(final Object obj) {
-            if (!(obj instanceof GoToETarget)) {
+            if (!(obj instanceof GoToETarget that)) {
                 return false;
             }
             if (super.equals(obj)) {
                 return true;
             }
-            final GoToETarget that = (GoToETarget) obj;
             // compare the strng values, as the attributes may also be null
             return String.valueOf(this.annotNo).equals(String.valueOf(that.annotNo))
                     && String.valueOf(this.nameInTree).equals(String.valueOf(that.nameInTree))

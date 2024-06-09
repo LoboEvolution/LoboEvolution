@@ -41,15 +41,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * The "createDocument(namespaceURI,qualifiedName,doctype)" method for a
  * DOMImplementation should raise NAMESPACE_ERR DOMException
  * if qualifiedName has the "xml" prefix and namespaceURI different from
- * "http://www.w3.org/XML/1998/namespace"
+ * "<a href="http://www.w3.org/XML/1998/namespace">...</a>"
  * <p>
  * Invoke method createDocument(namespaceURI,qualifiedName,doctype) on
  * this domimplementation with qualifiedName "xml:local"
  * and namespaceURI as the string
- * "http://www.ecommerce.org/schema" (which is different from the required
- * "http://www.w3.org/XML/1998/namespace"). Method should raise
+ * "<a href="http://www.ecommerce.org/schema">...</a>" (which is different from the required
+ * "<a href="http://www.w3.org/XML/1998/namespace">...</a>"). Method should raise
  * NAMESPACE_ERR DOMException.
-
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#xpointer(id('ID-258A00AF')/constant[@name='NAMESPACE_ERR'])">http://www.w3.org/TR/DOM-Level-2-Core/core#xpointer(id('ID-258A00AF')/constant[@name='NAMESPACE_ERR'])</a>
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#Level-2-Core-DOM-createDocument">http://www.w3.org/TR/DOM-Level-2-Core/core#Level-2-Core-DOM-createDocument</a>
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#xpointer(id('Level-2-Core-DOM-createDocument')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='NAMESPACE_ERR'])">http://www.w3.org/TR/DOM-Level-2-Core/core#xpointer(id('Level-2-Core-DOM-createDocument')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='NAMESPACE_ERR'])</a>
@@ -64,16 +63,12 @@ public class CreateDocument06Test extends LoboUnitTest {
         final String namespaceURI = "http://ecommerce.org/schema";
         final String qualifiedName = "xml:local";
         final Document doc;
-        final DocumentType docType = null;
-
         final DOMImplementation domImpl;
         doc = sampleXmlFile("staffNS.xml");
-
         domImpl = doc.getImplementation();
-
         boolean success = false;
         try {
-            domImpl.createDocument(namespaceURI, qualifiedName, docType);
+            domImpl.createDocument(namespaceURI, qualifiedName, null);
         } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NAMESPACE_ERR);
         }

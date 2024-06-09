@@ -71,7 +71,7 @@ public class FlateDecode {
         // know how big the output will be
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         final byte[] decomp = new byte[bufSize];
-        int read = 0;
+        int read;
 
         try {
             while (!inf.finished()) {

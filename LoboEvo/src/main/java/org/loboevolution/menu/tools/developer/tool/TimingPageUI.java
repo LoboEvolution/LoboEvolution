@@ -34,6 +34,7 @@ import org.loboevolution.menu.tools.AbstractToolsUI;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,6 +47,7 @@ public class TimingPageUI extends AbstractToolsUI {
     /**
      * The Constant serialVersionUID.
      */
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**

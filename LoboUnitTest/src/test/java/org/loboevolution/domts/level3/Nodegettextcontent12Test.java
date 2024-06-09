@@ -56,7 +56,7 @@ public class Nodegettextcontent12Test extends LoboUnitTest {
         doc = sampleXmlFile("barfoo.xml");
         elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "body");
         comment = doc.createComment("Comment");
-        appendedChild = elem.appendChild(comment);
+        elem.appendChild(comment);
         textContent = comment.getTextContent();
         assertEquals("Comment", textContent, "Nodegettextcontent12Assert2");
     }

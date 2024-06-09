@@ -52,8 +52,6 @@ public class Nodehasattributes04Test extends LoboUnitTest {
     public void runTest() {
         final Document doc;
         final Document newDoc;
-        final DocumentType docType = null;
-
         final DOMImplementation domImpl;
         final Element element;
         final Element elementTest;
@@ -69,9 +67,9 @@ public class Nodehasattributes04Test extends LoboUnitTest {
         newDoc = domImpl.createDocument("http://www.w3.org/DOM/Test", "test", docType);
         element = newDoc.createElementNS("http://www.w3.org/DOM/Test", "dom:elem");
         attribute = newDoc.createAttribute("attr");
-        setNode = element.setAttributeNode(attribute);
+        element.setAttributeNode(attribute);
         elementDoc = newDoc.getDocumentElement();
-        appendedChild = elementDoc.appendChild(element);
+        elementDoc.appendChild(element);
         elementList = newDoc.getElementsByTagNameNS("http://www.w3.org/DOM/Test", "elem");
         elementTest = (Element) elementList.item(0);
         hasAttributes = elementTest.hasAttributes();

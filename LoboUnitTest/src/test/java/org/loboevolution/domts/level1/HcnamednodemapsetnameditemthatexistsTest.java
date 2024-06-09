@@ -76,7 +76,7 @@ public class HcnamednodemapsetnameditemthatexistsTest extends LoboUnitTest {
         testAddress = (Element) elementList.item(1);
         newAttribute = doc.createAttribute("class");
         attributes = testAddress.getAttributes();
-        setNode = attributes.setNamedItem(newAttribute);
+        attributes.setNamedItem(newAttribute);
         districtNode = (Attr) attributes.getNamedItem("class");
         attrValue = districtNode.getNodeValue();
         assertNull(attrValue, "HcnamednodemapsetnameditemthatexistsAssert1");

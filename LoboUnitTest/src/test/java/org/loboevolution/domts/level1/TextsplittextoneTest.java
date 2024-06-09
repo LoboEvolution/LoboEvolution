@@ -69,7 +69,7 @@ public class TextsplittextoneTest extends LoboUnitTest {
         elementList = doc.getElementsByTagName("name");
         nameNode = elementList.item(2);
         textNode = (Text) nameNode.getFirstChild();
-        splitNode = textNode.splitText(7);
+        textNode.splitText(7);
         secondPart = textNode.getNextSibling();
         value = secondPart.getNodeValue();
         assertEquals("Jones", value, "TextsplittextoneAssert1");

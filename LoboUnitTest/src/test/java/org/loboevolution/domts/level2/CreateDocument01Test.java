@@ -45,10 +45,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Retrieve the DOMImplementation on the XMLNS Document.
  * Invoke method createDocument(namespaceURI,qualifiedName,doctype)
  * on the retrieved DOMImplementation with namespaceURI being
- * the literal string "http://www.ecommerce.org/", qualifiedName as
+ * the literal string "<a href="http://www.ecommerce.org/">...</a>", qualifiedName as
  * "prefix::local", and doctype as null.  Method should raise
  * NAMESPACE_ERR DOMException.
-
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#xpointer(id('ID-258A00AF')/constant[@name='NAMESPACE_ERR'])">http://www.w3.org/TR/DOM-Level-2-Core/core#xpointer(id('ID-258A00AF')/constant[@name='NAMESPACE_ERR'])</a>
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#Level-2-Core-DOM-createDocument">http://www.w3.org/TR/DOM-Level-2-Core/core#Level-2-Core-DOM-createDocument</a>
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#xpointer(id('Level-2-Core-DOM-createDocument')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='NAMESPACE_ERR'])">http://www.w3.org/TR/DOM-Level-2-Core/core#xpointer(id('Level-2-Core-DOM-createDocument')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='NAMESPACE_ERR'])</a>
@@ -63,16 +62,12 @@ public class CreateDocument01Test extends LoboUnitTest {
         final String namespaceURI = "http://www.ecommerce.org/";
         final String malformedName = "prefix::local";
         final Document doc;
-        final DocumentType docType = null;
-
         final DOMImplementation domImpl;
         doc = sampleXmlFile("staffNS.xml");
-
         domImpl = doc.getImplementation();
-
         boolean success = false;
         try {
-            domImpl.createDocument(namespaceURI, malformedName, docType);
+            domImpl.createDocument(namespaceURI, malformedName, null);
         } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NAMESPACE_ERR);
         }

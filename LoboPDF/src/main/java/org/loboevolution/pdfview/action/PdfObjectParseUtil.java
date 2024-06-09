@@ -60,7 +60,7 @@ public class PdfObjectParseUtil {
             val = val.getDictRef(key);
             if (val == null) {
                 if (mandatory) {
-                    throw new PDFParseException(key + "value could not be parsed : " + parent.toString());
+                    throw new PDFParseException(key + "value could not be parsed : " + parent);
                 }
                 return null;
             }
@@ -83,7 +83,7 @@ public class PdfObjectParseUtil {
         final PDFObject val = parent.getDictRef(key);
         if (val == null) {
             if (mandatory) {
-                throw new PDFParseException(key + "value could not be parsed : " + parent.toString());
+                throw new PDFParseException(key + "value could not be parsed : " + parent);
             }
             return false;
         }
@@ -105,7 +105,7 @@ public class PdfObjectParseUtil {
         final PDFObject val = parent.getDictRef(key);
         if (val == null) {
             if (mandatory) {
-                throw new PDFParseException(key + "value could not be parsed : " + parent.toString());
+                throw new PDFParseException(key + "value could not be parsed : " + parent);
             }
             return 0;
         }

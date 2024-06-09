@@ -66,12 +66,12 @@ public class Nodeinsertbefore13Test extends LoboUnitTest {
         docFrag = doc.createDocumentFragment();
         elem = doc.createElementNS(rootNS, rootTagname);
         elemAlt = docAlt.createElementNS(rootNS, rootTagname);
-        appendedChild = docFrag.appendChild(elem);
+        docFrag.appendChild(elem);
 
         {
             boolean success = false;
             try {
-                inserted = docFrag.insertBefore(elemAlt, elem);
+                docFrag.insertBefore(elemAlt, elem);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.WRONG_DOCUMENT_ERR);
             }

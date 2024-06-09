@@ -26,11 +26,14 @@
 
 package org.loboevolution.html.renderer;
 
+import java.io.Serial;
+
 class SizeExceededException extends RuntimeException {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	/**
 	 * <p>Constructor for SizeExceededException.</p>

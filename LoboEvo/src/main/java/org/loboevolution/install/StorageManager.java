@@ -127,7 +127,7 @@ public class StorageManager extends SwingWorker<Void, Void> {
 	private List<String> getList() {
 		final List<String> files = new ArrayList<>();
 
-		files.add(0, "org/lobo/storage/table.sql");
+		files.addFirst("org/lobo/storage/table.sql");
 		files.add(PATH_STORE + "char.sql");
 		files.add(PATH_STORE + "font_size.sql");
 		files.add(PATH_STORE + "font.sql");

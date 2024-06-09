@@ -140,13 +140,13 @@ public class HttpNetwork {
 			} else {
 				String scriptURI = href;
 				if (Strings.isNotBlank(baseUri)) {
-					final URL baseURL = new URL(baseUri);
+					final URL baseURL = new URI(baseUri).toURL();
 					final URL scriptURL = Urls.createURL(baseURL, href);
 					scriptURI = scriptURL == null ? href : scriptURL.toExternalForm();
 				}
 
 				info.setPath(scriptURI);
-				final URL u = new URL(scriptURI);
+				final URL u = new URI(scriptURI).toURL();
 				info.setName(u.getFile());
 				URLConnection connection = u.openConnection();
 				if (connection instanceof HttpURLConnection) {
@@ -232,7 +232,7 @@ public class HttpNetwork {
 		URLConnection connection;
 		if (uri.contains("file")) {
 			uri = uri.replace("//", "///");
-			final URL url = new URL(uri);
+			final URL url = new URI(uri).toURL();
 			connection = proxy == null || proxy.equals(Proxy.NO_PROXY) ? url.openConnection() : url.openConnection(proxy);
 
 			if ("POST".equals(method)) {
@@ -248,19 +248,17 @@ public class HttpNetwork {
 			connection.setRequestProperty("User-Agent", UserAgent.getUserAgent());
 			connection.getHeaderField("Set-Cookie");
 
-			if (Strings.isNotBlank(method) && connection instanceof HttpURLConnection) {
-				HttpURLConnection hc = (HttpURLConnection) connection;
-				hc.setRequestMethod(method.toUpperCase());
+			if (Strings.isNotBlank(method) && connection instanceof HttpURLConnection hc) {
+                hc.setRequestMethod(method.toUpperCase());
 			}
 
 			connection.connect();
 		} else {
-			final URL url = new URL(uri);
+			final URL url = new URI(uri).toURL();
 			connection = url.openConnection();
 
-			if (Strings.isNotBlank(method) && connection instanceof HttpURLConnection) {
-				HttpURLConnection hc = (HttpURLConnection) connection;
-				hc.setRequestMethod(method.toUpperCase());
+			if (Strings.isNotBlank(method) && connection instanceof HttpURLConnection hc) {
+                hc.setRequestMethod(method.toUpperCase());
 			}
 
 			if ("POST".equals(method)) {
@@ -289,17 +287,17 @@ public class HttpNetwork {
 					if (scriptURI.startsWith("//")) {
 						scriptURI = "http:" + scriptURI;
 					}
-					url = new URL(scriptURI);
-				} catch (final MalformedURLException mfu) {
+					url = new URI(scriptURI).toURL();
+				} catch (Exception mfu) {
 					final int idx = scriptURI.indexOf(':');
 					if (idx == -1 || idx == 1) {
-						url = new URL("file:" + scriptURI);
+						url = new URI("file:" + scriptURI).toURL();
 					} else {
 						throw mfu;
 					}
 				}
 			} else {
-				url = new URL(scriptURI);
+				url = new URI(scriptURI).toURL();
 				final URI uri = new URI(url.getProtocol(), url.getUserInfo(), url.getHost(), url.getPort(), url.getPath(), url.getQuery(), url.getRef());
 				url = uri.toURL();
 			}
@@ -334,15 +332,13 @@ public class HttpNetwork {
 			}
 			in = getInputStream(c);
 			redir = false;
-			if (c instanceof HttpURLConnection) {
-				final HttpURLConnection http = (HttpURLConnection) c;
-				final int stat = http.getResponseCode();
+			if (c instanceof HttpURLConnection http) {
+                final int stat = http.getResponseCode();
 				if (stat >= 300 && stat <= 307 && stat != 306 && stat != HttpURLConnection.HTTP_NOT_MODIFIED) {
-					final URL base = http.getURL();
 					final String loc = http.getHeaderField("Location");
 					URL target = null;
 					if (loc != null) {
-						target = new URL(base, loc);
+						target = new URI(loc).toURL();
 					}
 					http.disconnect();
 					if (target == null || !(target.getProtocol().equals("http") || target.getProtocol().equals("https"))

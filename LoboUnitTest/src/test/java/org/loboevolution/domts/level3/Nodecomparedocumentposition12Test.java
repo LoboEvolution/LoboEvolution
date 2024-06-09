@@ -52,7 +52,7 @@ public class Nodecomparedocumentposition12Test extends LoboUnitTest {
         final Node appendedChild;
         doc = sampleXmlFile("hc_staff.xml");
         pi = doc.createProcessingInstruction("PITarget", "PIDATA");
-        appendedChild = doc.appendChild(pi);
+        doc.appendChild(pi);
         documentPosition = doc.compareDocumentPosition(pi);
         assertEquals(20, documentPosition, "Nodecomparedocumentposition12Assert2");
         piPosition = pi.compareDocumentPosition(doc);

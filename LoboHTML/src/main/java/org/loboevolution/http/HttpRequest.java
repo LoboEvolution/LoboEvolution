@@ -44,10 +44,7 @@ import org.loboevolution.net.HttpNetwork;
 import org.loboevolution.net.ReadyStateType;
 
 import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.Proxy;
-import java.net.URL;
-import java.net.URLConnection;
+import java.net.*;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
@@ -61,6 +58,7 @@ public class HttpRequest extends XMLHttpRequestEventTargetImpl {
 
 	private URLConnection connection;
 	private URL requestURL;
+	
 	@Getter
 	@Setter
 	private String baseURL;
@@ -291,12 +289,12 @@ public class HttpRequest extends XMLHttpRequestEventTargetImpl {
 	 *
 	 * @param method a {@link java.lang.String} object.
 	 * @param url a {@link java.net.URL} object.
-	 * @param asyncFlag a boolean.
-	 * @param username a {@link java.lang.String} object.
+	 * @param async a boolean.
+	 * @param username a {@link java.lang.String} object.   
 	 * @throws java.lang.Exception if any.
 	 */
-	public void open(String method, String url, boolean asyncFlag, String username) throws Exception {
-		this.open(method, url, asyncFlag, username);
+	public void open(String method, String url, boolean async, String username) throws Exception {
+		this.open(method, new URI(url).toURL(), async, username, null);
 	}
 
 	/**
@@ -304,13 +302,13 @@ public class HttpRequest extends XMLHttpRequestEventTargetImpl {
 	 *
 	 * @param method a {@link java.lang.String} object.
 	 * @param url a {@link java.net.URL} object.
-	 * @param asyncFlag a boolean.
+	 * @param async a boolean.
 	 * @param username a {@link java.lang.String} object.
 	 * @param password a {@link java.lang.String} object.
 	 * @throws java.lang.Exception if any.
 	 */
-	 public void open(String method, String url, boolean asyncFlag, String username, String password) throws Exception {
-		this.open(method, url, asyncFlag, username, password);
+	public void open(String method, String url, boolean async, String username, String password) throws Exception {
+		this.open(method, new URI(url).toURL(), async, username, password);
 	}
 
 	/**
@@ -418,8 +416,7 @@ public class HttpRequest extends XMLHttpRequestEventTargetImpl {
 	}
 
 	private URLConnection postURLConnection(Object obj, URLConnection urlConnection) throws IOException {
-            if (obj instanceof FormData) {
-                FormData content = (FormData) obj;
+            if (obj instanceof FormData content) {
                 final OutputStream outputStream = urlConnection.getOutputStream();
                 writer = new PrintWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8), true);
 
@@ -438,11 +435,9 @@ public class HttpRequest extends XMLHttpRequestEventTargetImpl {
                 }
             }
 
-            if (obj instanceof String) {
-                String content = (String) obj;
+            if (obj instanceof String content) {
                 final byte[] contentBytes = content.getBytes(getPostCharset());
-                if (urlConnection instanceof HttpURLConnection) {
-                    HttpURLConnection hc = (HttpURLConnection) urlConnection;
+                if (urlConnection instanceof HttpURLConnection hc) {
                     hc.setFixedLengthStreamingMode(contentBytes.length);
                 }
                 final OutputStream out = urlConnection.getOutputStream();

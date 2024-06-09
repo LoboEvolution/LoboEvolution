@@ -66,7 +66,7 @@ public class DocumentinvalidcharacterexceptioncreateattributeTest extends LoboUn
         {
             boolean success = false;
             try {
-                createdAttr = doc.createAttribute("invalid^Name");
+                doc.createAttribute("invalid^Name");
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
             }

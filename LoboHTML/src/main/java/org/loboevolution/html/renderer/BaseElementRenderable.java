@@ -308,9 +308,8 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 
 	private void zIndexApplyStyle(final CSSStyleDeclaration props) {
 		final String zIndex = props.getzIndex();
-		if (Strings.isNotBlank(zIndex) && this.modelNode instanceof HTMLElementImpl) {
-			final HTMLElementImpl element = (HTMLElementImpl) this.modelNode;
-			final HTMLDocumentImpl doc =  (HTMLDocumentImpl)element.getDocumentNode();
+		if (Strings.isNotBlank(zIndex) && this.modelNode instanceof HTMLElementImpl element) {
+            final HTMLDocumentImpl doc =  (HTMLDocumentImpl)element.getDocumentNode();
 			try {
 				this.zIndex =  HtmlValues.getPixelSize(zIndex, null, doc.getDefaultView(), 0);
 			} catch (final NumberFormatException err) {
@@ -563,9 +562,8 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 	private Integer getDeclaredHelper(final RenderState renderState, final int baseValue,
 										final Function<CSS3Properties, String> propertyGetter, final boolean ignorePercentage) {
 		final Object rootNode = this.modelNode;
-		if (rootNode instanceof HTMLElementImpl) {
-			final HTMLElementImpl element = (HTMLElementImpl) rootNode;
-			final HTMLDocumentImpl doc =  (HTMLDocumentImpl)element.getDocumentNode();
+		if (rootNode instanceof HTMLElementImpl element) {
+            final HTMLDocumentImpl doc =  (HTMLDocumentImpl)element.getDocumentNode();
 			final CSS3Properties props = element.getCurrentStyle();
 			final String valueText = propertyGetter.apply(props);
 			if (Strings.isBlank(valueText) || "none".equals(valueText) || (ignorePercentage && valueText.endsWith("%"))) {
@@ -579,9 +577,8 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 
 	private boolean isParentWidthDeclared() {
 		final ModelNode parentNode = getModelNode().getParentModelNode();
-		if (parentNode instanceof HTMLElementImpl) {
-			final HTMLElementImpl element = (HTMLElementImpl) parentNode;
-			final CSS2Properties props = element.getCurrentStyle();
+		if (parentNode instanceof HTMLElementImpl element) {
+            final CSS2Properties props = element.getCurrentStyle();
 			final String decWidth = props.getWidth();
 			return !(Strings.isBlank(decWidth) || "auto".equals(decWidth));
 		}
@@ -590,9 +587,8 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 
 	private boolean isParentHeightDeclared() {
 		final ModelNode parentNode = getModelNode().getParentModelNode();
-		if (parentNode instanceof HTMLElementImpl) {
-			final HTMLElementImpl element = (HTMLElementImpl) parentNode;
-			final CSS2Properties props = element.getCurrentStyle();
+		if (parentNode instanceof HTMLElementImpl element) {
+            final CSS2Properties props = element.getCurrentStyle();
 			final String decHeight = props.getHeight();
 			return !(Strings.isBlank(decHeight) || "auto".equals(decHeight));
 		}
@@ -614,9 +610,8 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 			return doc.getHtmlRendererContext().getInnerWidth();
 		}
 
-		if (rootNode instanceof HTMLElementImpl) {
-			final HTMLElementImpl elem = (HTMLElementImpl) rootNode;
-			return elem.getHtmlRendererContext().getInnerWidth();
+		if (rootNode instanceof HTMLElementImpl elem) {
+            return elem.getHtmlRendererContext().getInnerWidth();
 		}
 
 		return getWidth();
@@ -631,9 +626,8 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 			return doc.getHtmlRendererContext().getInnerHeight();
 		}
 
-		if (rootNode instanceof HTMLElementImpl) {
-			final HTMLElementImpl elem = (HTMLElementImpl) rootNode;
-			return elem.getHtmlRendererContext().getInnerHeight();
+		if (rootNode instanceof HTMLElementImpl elem) {
+            return elem.getHtmlRendererContext().getInnerHeight();
 		}
 
 		return getHeight();
@@ -752,9 +746,8 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 		final Integer dw = this.declaredWidth;
 		if (INVALID_SIZE.equals(dw)) {
 			final Object rootNode = this.modelNode;
-			if (rootNode instanceof HTMLElementImpl) {
-				final HTMLElementImpl element = (HTMLElementImpl) rootNode;
-				final CSSStyleDeclaration props = element.getCurrentStyle();
+			if (rootNode instanceof HTMLElementImpl element) {
+                final CSSStyleDeclaration props = element.getCurrentStyle();
 				if (props == null) {
 					return false;
 				}
@@ -931,9 +924,8 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 		if (marginInsets != null) {
 			final Object rootNode = this.modelNode;
 			RenderState rs = null;
-			if (rootNode instanceof HTMLElementImpl) {
-				final HTMLElementImpl element = (HTMLElementImpl) rootNode;
-				rs = element.getRenderState();
+			if (rootNode instanceof HTMLElementImpl element) {
+                rs = element.getRenderState();
 			}
 
 			if (rs == null || (RenderState.POSITION_ABSOLUTE != rs.getPosition() && RenderState.POSITION_FIXED != rs.getPosition())) {

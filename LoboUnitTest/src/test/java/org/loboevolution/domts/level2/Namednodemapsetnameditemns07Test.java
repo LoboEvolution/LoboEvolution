@@ -45,13 +45,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * attribute of another Element object.
  * <p>
  * Retreieve the attributes of first element whose localName is address into a named node map.
- * Retreive the attribute whose namespaceURI=http://www.usa.com and localName=domestic
+ * Retreive the attribute whose namespaceURI=<a href="http://www.usa.com">...</a> and localName=domestic
  * from the NamedNodeMap.  Retreieve the attributes of second element whose localName is address
  * into a named node map.  Call the setNamedItemNS method on the second nodemap with the domestic
  * attribute that was retreived and removed from the first nodeMap as an argument.
  * Assuming that when an attribute is removed from a nodemap, it still remains in the domtree
  * his should raise an INUSE_ATTRIBIUTE_ERR.
-
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-setNamedItemNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-setNamedItemNS</a>
  */
 public class Namednodemapsetnameditemns07Test extends LoboUnitTest {

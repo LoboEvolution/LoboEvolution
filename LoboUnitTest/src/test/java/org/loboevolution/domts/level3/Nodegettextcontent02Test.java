@@ -49,8 +49,6 @@ public class Nodegettextcontent02Test extends LoboUnitTest {
         final DOMImplementation domImpl;
         final Document newDoc;
         final String textContent;
-        final DocumentType nullDocType = null;
-
         final Element docElem;
         final String rootName;
         final String rootNS;
@@ -59,7 +57,7 @@ public class Nodegettextcontent02Test extends LoboUnitTest {
         rootNS = docElem.getNamespaceURI();
         rootName = docElem.getTagName();
         domImpl = doc.getImplementation();
-        newDoc = domImpl.createDocument(rootNS, rootName, nullDocType);
+        newDoc = domImpl.createDocument(rootNS, rootName, null);
         textContent = newDoc.getTextContent();
         assertNull(textContent, "Nodegettextcontent02Assert2");
     }

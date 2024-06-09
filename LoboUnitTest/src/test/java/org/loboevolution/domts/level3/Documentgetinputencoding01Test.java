@@ -40,13 +40,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-inputEncoding">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-inputEncoding</a>
  */
-public class Documentgetinputencoding01Test extends LoboUnitTest {
-
-
+public class Documentgetinputencoding01Test extends LoboUnitTest {    
     /**
      * Runs the test case.
-     *
-     * @throws Throwable Any uncaught exception causes test to fail
      */
     @Test
     public void runTest() {

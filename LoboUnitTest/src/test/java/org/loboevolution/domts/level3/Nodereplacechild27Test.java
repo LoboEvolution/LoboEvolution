@@ -68,7 +68,7 @@ public class Nodereplacechild27Test extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                replaced = elem.replaceChild(elem2, firstChild);
+                elem.replaceChild(elem2, firstChild);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.WRONG_DOCUMENT_ERR);
             }

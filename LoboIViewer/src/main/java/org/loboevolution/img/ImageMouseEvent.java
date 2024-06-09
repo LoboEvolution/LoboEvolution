@@ -27,6 +27,7 @@ package org.loboevolution.img;
 
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.io.Serial;
 import java.util.EventObject;
 
 /**
@@ -36,7 +37,8 @@ import java.util.EventObject;
  *
  */
 public class ImageMouseEvent extends EventObject {
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 	private final transient BufferedImage image;
 	private final int x;
     private final int y;

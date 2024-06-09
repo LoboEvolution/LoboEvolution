@@ -57,7 +57,7 @@ public class Textreplacewholetext08Test extends LoboUnitTest {
         itemList = doc.getElementsByTagName("p");
         p = (Element) itemList.item(0);
         entRef = doc.createEntityReference("ent2");
-        node = p.appendChild(entRef);
+        p.appendChild(entRef);
         node = p.getFirstChild();
 
         {

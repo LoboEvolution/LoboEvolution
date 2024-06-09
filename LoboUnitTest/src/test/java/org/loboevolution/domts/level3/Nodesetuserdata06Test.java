@@ -60,7 +60,7 @@ public class Nodesetuserdata06Test extends LoboUnitTest {
         entity = entities.getNamedItem("delta");
         comment = doc.createComment("COMMENT_NODE");
         /*Node */
-        retUserData = comment.setUserData("Key1", entity, null);
+        comment.setUserData("Key1", entity, null);
         /*Node */
         returned = comment.setUserData("Key1", entity, null);
         success = ((Node) /*DOMUserData */returned).isEqualNode(entity);

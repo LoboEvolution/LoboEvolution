@@ -45,10 +45,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * neither ELEMENT_NODE nor ATTRIBUTE_NODE.
  * <p>
  * Invoke the renameNode method on this document node to rename a text node such that its
- * qualifiedName is "xmlns"and namespaceURI is "http://www.w3.org/2000/xmlns".
+ * qualifiedName is "xmlns"and namespaceURI is "<a href="http://www.w3.org/2000/xmlns">...</a>".
  * Check if a NOT_SUPPORTED_ERR gets thrown instead of a NAMESPACE_ERR since the type of node is
  * not valid for this method.
-
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-renameNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-renameNode</a>
  */
 public class Documentrenamenode14Test extends LoboUnitTest {
@@ -66,7 +65,7 @@ public class Documentrenamenode14Test extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                renamedNode = doc.renameNode(textNode, "http://www.w3.org/2000/xmlns", "xmlns");
+                doc.renameNode(textNode, "http://www.w3.org/2000/xmlns", "xmlns");
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
             }

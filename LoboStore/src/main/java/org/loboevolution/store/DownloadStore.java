@@ -28,6 +28,7 @@ package org.loboevolution.store;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.net.URI;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -53,7 +54,7 @@ public class DownloadStore implements QueryStore{
 	public void addAsRecent(final String uri) {
 		try (final Connection conn = DriverManager.getConnection(DB_PATH);
              final PreparedStatement pstmt = conn.prepareStatement(INSERT_DOWNLOAD)) {
-			pstmt.setString(1, new URL(uri).toExternalForm());
+			pstmt.setString(1, new URI(uri).toURL().toExternalForm());
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
 			log.error(e.getMessage(), e);

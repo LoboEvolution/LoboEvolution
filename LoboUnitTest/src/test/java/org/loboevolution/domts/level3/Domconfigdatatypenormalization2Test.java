@@ -58,7 +58,7 @@ public class Domconfigdatatypenormalization2Test extends LoboUnitTest {
         final boolean state;
         final String parameter = "datatype-normalization";
         domImpl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(), true));
-        doc = domImpl.createDocument("http://www.w3.org/1999/xhtml", "html", nullDocType);
+        doc = domImpl.createDocument("http://www.w3.org/1999/xhtml", "html", null);
         domConfig = doc.getDomConfig();
         domConfig.setParameter("validate", Boolean.FALSE);
         canSet = domConfig.canSetParameter(parameter, Boolean.TRUE);

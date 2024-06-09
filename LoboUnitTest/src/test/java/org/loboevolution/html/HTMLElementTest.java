@@ -1644,8 +1644,6 @@ public class HTMLElementTest extends LoboUnitTest {
     /**
      * NOTE: When running this test with Firefox (3.6, at least), it's important to reload the page with Ctrl+F5
      * in order to completely clear the cache; otherwise, Firefox appears to incorrectly cache some style attributes.
-     *
-     * @if an error occurs
      */
     private void scrollLeft(final String overflow) {
         final String html
@@ -1719,8 +1717,6 @@ public class HTMLElementTest extends LoboUnitTest {
     /**
      * NOTE: When running this test with Firefox (3.6, at least), it's important to reload the page with Ctrl+F5
      * in order to completely clear the cache; otherwise, Firefox appears to incorrectly cache some style attributes.
-     *
-     * @if an error occurs
      */
     private void scrollTop(final String overflow) {
         final String html
@@ -3489,7 +3485,6 @@ public class HTMLElementTest extends LoboUnitTest {
      * @param afterEnd    data to insert
      * @param beforeBegin data to insert
      * @param afterBegin  data to insert
-     * @throws Exception if the test fails
      */
     private void insertAdjacentHTML(final String beforeEnd,
                                     final String afterEnd, final String beforeBegin, final String afterBegin) {
@@ -3735,11 +3730,6 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html);
     }
 
-    /**
-     * Simple test that calls setCapture.
-     *
-     * @throws Exception if the test fails
-     */
     @Test
     @Alerts({"undefined", "undefined", "undefined", "setCapture available"})
     public void setCapture() {
@@ -3802,11 +3792,6 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html);
     }
 
-    /**
-     * See issue #1702.
-     *
-     * @throws Exception if the test fails
-     */
     @Test
     @Alerts("true")
     public void oninput() {
@@ -4343,9 +4328,6 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html);
     }
 
-    /**
-     * @throws Exception on test failure
-     */
     @Test
     @Alerts({"true", "", "true", "7", "true", "seven", "false", "null"})
     public void autofocus() {
@@ -4380,9 +4362,6 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html);
     }
 
-    /**
-     * @throws Exception on test failure
-     */
     @Test
     @Alerts({"true", "", "true", "", "false", "null", "true", "7",
             "true", "", "false", "null", "true", "", "false", "null",

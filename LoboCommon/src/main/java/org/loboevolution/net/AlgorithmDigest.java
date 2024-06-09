@@ -55,11 +55,10 @@ public class AlgorithmDigest implements Comparable<AlgorithmDigest> {
         if (algDigests == null) {
             return true;
         }
-        final boolean matchFound = algDigests.stream().anyMatch((algDigest) -> {
+        return algDigests.stream().anyMatch((algDigest) -> {
             final String encodedResult = algDigest.getHash(input);
             return encodedResult.equals(algDigest.digest);
         });
-        return matchFound;
     }
 
     public static List<AlgorithmDigest> parseMetadata(final String integrity) {
@@ -75,7 +74,7 @@ public class AlgorithmDigest implements Comparable<AlgorithmDigest> {
     }
 
     private static List<AlgorithmDigest> getHashes(final String[] tokens) {
-        final List<AlgorithmDigest> hashes = new ArrayList<AlgorithmDigest>();
+        final List<AlgorithmDigest> hashes = new ArrayList<>();
         for (final String token : tokens) {
             final int hyphen = token.indexOf("-");
             if (hyphen < 0) {
@@ -99,13 +98,13 @@ public class AlgorithmDigest implements Comparable<AlgorithmDigest> {
 
     public static List<AlgorithmDigest> strongestAlgDigests(final List<AlgorithmDigest> hashes) {
         hashes.sort(AlgorithmDigest::compareTo);
-        final Integer strongest = hashes.get(0).strength;
+        final Integer strongest = hashes.getFirst().strength;
         return hashes.stream().filter((h) -> Objects.equals(h.strength, strongest))
                 .collect(Collectors.toList());
     }
 
     private static Map<String, Integer> createMap() {
-        final Map<String, Integer> stren = new HashMap<String, Integer>();
+        final Map<String, Integer> stren = new HashMap<>();
         stren.put("sha256", 1);
         stren.put("sha384", 2);
         stren.put("sha512", 3);

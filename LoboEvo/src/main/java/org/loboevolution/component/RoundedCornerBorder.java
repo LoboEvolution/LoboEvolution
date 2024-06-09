@@ -36,6 +36,7 @@ import java.awt.Shape;
 import java.awt.geom.Area;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.RoundRectangle2D;
+import java.io.Serial;
 
 import javax.swing.border.AbstractBorder;
 
@@ -46,6 +47,7 @@ import javax.swing.border.AbstractBorder;
  *
  */
 public class RoundedCornerBorder extends AbstractBorder {
+	@Serial
 	private static final long serialVersionUID = 1L;
 	private final Color ALPHA_ZERO = new Color(0x0, true);
 
@@ -72,8 +74,7 @@ public class RoundedCornerBorder extends AbstractBorder {
 	 * @return a {@link java.awt.Shape} object.
 	 */
 	public Shape getBorderShape(final int x, final int y, final int w, final int h) {
-		final int r = h;
-		return new RoundRectangle2D.Double(x, y, w, h, r, r);
+        return new RoundRectangle2D.Double(x, y, w, h, h, h);
 	}
 
 	/** {@inheritDoc} */

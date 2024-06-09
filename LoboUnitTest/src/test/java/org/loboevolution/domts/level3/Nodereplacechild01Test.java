@@ -51,13 +51,11 @@ public class Nodereplacechild01Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
 
         try {
-            replaced = doc.replaceChild(doc, doc);
+            doc.replaceChild(doc, doc);
 
         } catch (final DOMException ex) {
             switch (ex.getCode()) {
-                case 8:
-                    break;
-                case 3:
+                case 8, 3:
                     break;
                 default:
                     throw ex;

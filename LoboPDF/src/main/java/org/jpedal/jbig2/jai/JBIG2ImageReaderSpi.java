@@ -71,10 +71,8 @@ public class JBIG2ImageReaderSpi extends ImageReaderSpi {
         // as the only type of input source that it will deal with to its
         // superclass.
 
-        if (!(input instanceof ImageInputStream))
+        if (!(input instanceof ImageInputStream stream))
             return false;
-
-        final ImageInputStream stream = (ImageInputStream) input;
 
         // Read and validate the input source's header.
         final byte[] header = new byte[8];

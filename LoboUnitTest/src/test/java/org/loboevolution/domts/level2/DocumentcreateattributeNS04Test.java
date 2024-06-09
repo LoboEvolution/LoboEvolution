@@ -72,7 +72,7 @@ public class DocumentcreateattributeNS04Test extends LoboUnitTest {
                 // BEGIN Android-changed
                 //     Our exception priorities differ from the spec
                 try {
-                    attribute = doc.createAttributeNS(namespaceURI, qualifiedName);
+                    doc.createAttributeNS(namespaceURI, qualifiedName);
                     fail("documentcreateattributeNS04");
                 } catch (final DOMException expected) {
                 }

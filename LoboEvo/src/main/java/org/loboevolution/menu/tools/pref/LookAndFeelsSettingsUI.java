@@ -41,6 +41,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.font.TextAttribute;
+import java.io.Serial;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -52,7 +53,8 @@ import static java.awt.font.TextAttribute.*;
 public class LookAndFeelsSettingsUI extends AbstractToolsUI {
 
 	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	/** The Acryl Box. */
 	private final LoboCheckBox acrylCheckBox;

@@ -249,21 +249,12 @@ public class XPathResultImpl implements XPathResult {
      * @return true If the specified type is supported; otherwise, returns false.
      */
     public static boolean isValidType(final short type) {
-        switch (type) {
-            case ANY_TYPE:
-            case NUMBER_TYPE:
-            case STRING_TYPE:
-            case BOOLEAN_TYPE:
-            case UNORDERED_NODE_ITERATOR_TYPE:
-            case ORDERED_NODE_ITERATOR_TYPE:
-            case UNORDERED_NODE_SNAPSHOT_TYPE:
-            case ORDERED_NODE_SNAPSHOT_TYPE:
-            case ANY_UNORDERED_NODE_TYPE:
-            case FIRST_ORDERED_NODE_TYPE:
-                return true;
-            default:
-                return false;
-        }
+        return switch (type) {
+            case ANY_TYPE, NUMBER_TYPE, STRING_TYPE, BOOLEAN_TYPE, UNORDERED_NODE_ITERATOR_TYPE,
+                 ORDERED_NODE_ITERATOR_TYPE, UNORDERED_NODE_SNAPSHOT_TYPE, ORDERED_NODE_SNAPSHOT_TYPE,
+                 ANY_UNORDERED_NODE_TYPE, FIRST_ORDERED_NODE_TYPE -> true;
+            default -> false;
+        };
     }
 
     /**
@@ -483,30 +474,19 @@ public class XPathResultImpl implements XPathResult {
      * @return type string
      */
     private String getTypeString(final int type) {
-        switch (type) {
-            case ANY_TYPE:
-                return "ANY_TYPE";
-            case ANY_UNORDERED_NODE_TYPE:
-                return "ANY_UNORDERED_NODE_TYPE";
-            case BOOLEAN_TYPE:
-                return "BOOLEAN";
-            case FIRST_ORDERED_NODE_TYPE:
-                return "FIRST_ORDERED_NODE_TYPE";
-            case NUMBER_TYPE:
-                return "NUMBER_TYPE";
-            case ORDERED_NODE_ITERATOR_TYPE:
-                return "ORDERED_NODE_ITERATOR_TYPE";
-            case ORDERED_NODE_SNAPSHOT_TYPE:
-                return "ORDERED_NODE_SNAPSHOT_TYPE";
-            case STRING_TYPE:
-                return "STRING_TYPE";
-            case UNORDERED_NODE_ITERATOR_TYPE:
-                return "UNORDERED_NODE_ITERATOR_TYPE";
-            case UNORDERED_NODE_SNAPSHOT_TYPE:
-                return "UNORDERED_NODE_SNAPSHOT_TYPE";
-            default:
-                return "#UNKNOWN";
-        }
+        return switch (type) {
+            case ANY_TYPE -> "ANY_TYPE";
+            case ANY_UNORDERED_NODE_TYPE -> "ANY_UNORDERED_NODE_TYPE";
+            case BOOLEAN_TYPE -> "BOOLEAN";
+            case FIRST_ORDERED_NODE_TYPE -> "FIRST_ORDERED_NODE_TYPE";
+            case NUMBER_TYPE -> "NUMBER_TYPE";
+            case ORDERED_NODE_ITERATOR_TYPE -> "ORDERED_NODE_ITERATOR_TYPE";
+            case ORDERED_NODE_SNAPSHOT_TYPE -> "ORDERED_NODE_SNAPSHOT_TYPE";
+            case STRING_TYPE -> "STRING_TYPE";
+            case UNORDERED_NODE_ITERATOR_TYPE -> "UNORDERED_NODE_ITERATOR_TYPE";
+            case UNORDERED_NODE_SNAPSHOT_TYPE -> "UNORDERED_NODE_SNAPSHOT_TYPE";
+            default -> "#UNKNOWN";
+        };
     }
 
     /**
@@ -516,19 +496,13 @@ public class XPathResultImpl implements XPathResult {
      * @return type string
      */
     private short getTypeFromXObject(final XObject object) {
-        switch (object.getType()) {
-            case XObject.CLASS_BOOLEAN:
-                return BOOLEAN_TYPE;
-            case XObject.CLASS_NODESET:
-            case XObject.CLASS_RTREEFRAG:
-                return UNORDERED_NODE_ITERATOR_TYPE;
-            case XObject.CLASS_NUMBER:
-                return NUMBER_TYPE;
-            case XObject.CLASS_STRING:
-                return STRING_TYPE;
-            default:
-                return ANY_TYPE; // throw exception ?
-        }
+        return switch (object.getType()) {
+            case XObject.CLASS_BOOLEAN -> BOOLEAN_TYPE;
+            case XObject.CLASS_NODESET, XObject.CLASS_RTREEFRAG -> UNORDERED_NODE_ITERATOR_TYPE;
+            case XObject.CLASS_NUMBER -> NUMBER_TYPE;
+            case XObject.CLASS_STRING -> STRING_TYPE;
+            default -> ANY_TYPE; // throw exception ?
+        };
 
     }
 

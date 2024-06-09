@@ -61,8 +61,8 @@ public class Nodeinsertbefore12Test extends LoboUnitTest {
         docFrag = doc.createDocumentFragment();
         docFragNew = doc.createDocumentFragment();
         elem = doc.createElementNS("http://www.w3.org/DOM/Test", "dom3:elem");
-        appendedChild = docFrag.appendChild(elem);
-        inserted = docFrag.insertBefore(docFragNew, elem);
+        docFrag.appendChild(elem);
+        docFrag.insertBefore(docFragNew, elem);
         last = docFrag.getLastChild();
         name = last.getNodeName();
         assertEquals("dom3:elem", name, "Nodeinsertbefore12Assert2");

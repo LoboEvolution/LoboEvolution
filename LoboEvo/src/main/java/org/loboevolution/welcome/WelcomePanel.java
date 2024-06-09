@@ -39,6 +39,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serial;
 import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
@@ -50,6 +51,7 @@ import java.util.Random;
 @Slf4j
 public class WelcomePanel extends JPanel implements IWelcomePanel {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     private final LoginButton button;

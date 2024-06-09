@@ -28,12 +28,14 @@ package org.loboevolution.pdfview;
 import org.loboevolution.pdfview.action.PDFAction;
 
 import javax.swing.tree.DefaultMutableTreeNode;
+import java.io.Serial;
 
 /**
  * <p>OutlineNode class.</p>
  */
 public class OutlineNode extends DefaultMutableTreeNode {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     private final String title;

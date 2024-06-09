@@ -65,8 +65,6 @@ public class Nodeisequalnode11Test extends LoboUnitTest {
         final Element elem3;
         final Element elem4;
         boolean isEqual;
-        final DocumentType nullDocType = null;
-
         final Element docElem;
         final String rootNS;
         final String rootName;
@@ -75,7 +73,7 @@ public class Nodeisequalnode11Test extends LoboUnitTest {
         rootNS = docElem.getNamespaceURI();
         rootName = docElem.getTagName();
         domImpl = doc.getImplementation();
-        newDoc = domImpl.createDocument(rootNS, rootName, nullDocType);
+        newDoc = domImpl.createDocument(rootNS, rootName, null);
         employeeList = doc.getElementsByTagName("p");
         elem1 = (Element) employeeList.item(0);
         elem2 = (Element) newDoc.importNode(elem1, false);

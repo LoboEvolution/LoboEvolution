@@ -47,17 +47,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class Domimplementationregistry06Test extends LoboUnitTest {
     @Test
     public void runTest() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-        DOMImplementation domImpl = null;
+        DOMImplementation domImpl;
         boolean hasFeature;
-        final String nullVersion = null;
-
         final DOMImplementationRegistry domImplRegistry = DOMImplementationRegistry.newInstance();
         assertNotNull(domImplRegistry, "Domimplementationregistry06Assert3");
         domImpl = domImplRegistry.getDOMImplementation("xMl 3.0 cOrE");
         assertNotNull(domImpl, "Domimplementationregistry06Assert4");
         hasFeature = domImpl.hasFeature("XML", "3.0");
         assertTrue(hasFeature, "Domimplementationregistry06Assert5");
-        hasFeature = domImpl.hasFeature("Core", nullVersion);
+        hasFeature = domImpl.hasFeature("Core", null);
         assertTrue(hasFeature, "Domimplementationregistry06Assert6");
     }
 }

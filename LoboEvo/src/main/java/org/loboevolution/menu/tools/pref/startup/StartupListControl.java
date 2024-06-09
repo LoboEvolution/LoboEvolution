@@ -28,6 +28,7 @@ package org.loboevolution.menu.tools.pref.startup;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.Serial;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +47,8 @@ import lombok.Setter;
 public class StartupListControl extends JComponent {
 
 	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	/** The combo box. */
 	private final JComboBox<String> comboBox;
@@ -84,7 +86,7 @@ public class StartupListControl extends JComponent {
 	 * @return the strings as text
 	 */
 	public String getStringsAsText() {
-		final String lineSeparator = System.getProperty("line.separator");
+		final String lineSeparator = System.lineSeparator();
 		final List<String> strings = this.strings;
 		if (strings == null) {
 			return null;

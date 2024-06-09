@@ -73,7 +73,7 @@ public class HccharacterdataindexsizeerrreplacedatacountnegativeTest extends Lob
         {
             boolean success = false;
             try {
-                badString = child.substringData(10, -3);
+                child.substringData(10, -3);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.INDEX_SIZE_ERR);
             }

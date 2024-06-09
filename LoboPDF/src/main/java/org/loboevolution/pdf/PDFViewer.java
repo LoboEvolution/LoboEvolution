@@ -41,11 +41,9 @@ import java.awt.event.KeyListener;
 import java.awt.print.Book;
 import java.awt.print.PageFormat;
 import java.awt.print.PrinterJob;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.RandomAccessFile;
+import java.io.*;
 import java.lang.reflect.InvocationTargetException;
+import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.ByteBuffer;
@@ -64,6 +62,7 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
     /**
      * The Constant serialVersionUID.
      */
+    @Serial
     private static final long serialVersionUID = 1L;
     private final float ZOOM_FACTOR = 1.2f;
     /**
@@ -445,8 +444,8 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
      */
     public void doOpen(final String name) {
         try {
-            openFile(new URL(name));
-        } catch (final IOException ioe) {
+            openFile(new URI(name).toURL());
+        } catch (final Exception ioe) {
             try {
                 openFile(new File(name));
             } catch (final IOException ex) {

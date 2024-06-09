@@ -61,7 +61,7 @@ public class Nodeisequalnode18Test extends LoboUnitTest {
         rootName = docElem.getTagName();
         rootNS = docElem.getNamespaceURI();
         domImpl = doc.getImplementation();
-        newDoc = domImpl.createDocument(rootNS, rootName, nullDocType);
+        newDoc = domImpl.createDocument(rootNS, rootName, null);
         attr1 = doc.createAttributeNS(nullNSURI, "title");
         attr2 = (Attr) newDoc.adoptNode(attr1);
 

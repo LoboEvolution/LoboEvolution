@@ -54,7 +54,7 @@ public class Nodegettextcontent17Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         elem = doc.getDocumentElement();
         entRef = doc.createEntityReference("beta");
-        appendedChild = elem.appendChild(entRef);
+        elem.appendChild(entRef);
         textContent = entRef.getTextContent();
         assertEquals("β", textContent, "Nodegettextcontent17Assert2");
     }

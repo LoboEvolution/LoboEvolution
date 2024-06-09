@@ -33,6 +33,7 @@ import org.loboevolution.menu.tools.AbstractToolsUI;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
+import java.io.Serial;
 
 /**
  * The Class DeveloperToolPanel.
@@ -40,7 +41,8 @@ import javax.swing.border.EtchedBorder;
 public class DeveloperToolPanel extends LoboPanel {
 
 	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	/**
 	 * Instantiates a new preferences panel.

@@ -29,6 +29,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.Serial;
 
 import javax.swing.JComponent;
 
@@ -40,6 +41,7 @@ import javax.swing.JComponent;
  */
 public class OverlayComponent extends JComponent {
 	
+	@Serial
 	private static final long serialVersionUID = 1L;
 	private transient Overlay overlay;
 	private transient ImageComponent theImage;

@@ -50,8 +50,6 @@ public class Documentadoptnode33Test extends LoboUnitTest {
         final Node newCDATA;
         final Node adoptedCDATA;
         final String nodeValue;
-        final DocumentType nullDocType = null;
-
         final Element docElem;
         final String rootNS;
         final String rootName;
@@ -60,7 +58,7 @@ public class Documentadoptnode33Test extends LoboUnitTest {
         rootNS = docElem.getNamespaceURI();
         rootName = docElem.getTagName();
         domImpl = doc.getImplementation();
-        newDoc = domImpl.createDocument(rootNS, rootName, nullDocType);
+        newDoc = domImpl.createDocument(rootNS, rootName, null);
         newCDATA = newDoc.createCDATASection("Document.adoptNode test for a CDATASECTION_NODE");
         adoptedCDATA = doc.adoptNode(newCDATA);
 

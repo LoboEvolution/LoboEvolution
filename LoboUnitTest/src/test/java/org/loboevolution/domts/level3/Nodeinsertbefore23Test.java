@@ -61,12 +61,12 @@ public class Nodeinsertbefore23Test extends LoboUnitTest {
         element = doc.createElementNS("http://www.w3.org/1999/xhtml", "xhtml:body");
         refNode = doc.createElementNS("http://www.w3.org/1999/xhtml", "xhtml:p");
         newNode = doc2.createTextNode("TextNode");
-        appendedChild = element.appendChild(refNode);
+        element.appendChild(refNode);
 
         {
             boolean success = false;
             try {
-                inserted = element.insertBefore(newNode, refNode);
+                element.insertBefore(newNode, refNode);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.WRONG_DOCUMENT_ERR);
             }

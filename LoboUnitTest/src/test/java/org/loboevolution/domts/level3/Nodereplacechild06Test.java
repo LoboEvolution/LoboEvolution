@@ -60,7 +60,7 @@ public class Nodereplacechild06Test extends LoboUnitTest {
         elem = (Element) childList.item(0);
 
         try {
-            replacedNode = doc.replaceChild(elem, docElem);
+            doc.replaceChild(elem, docElem);
 
         } catch (final DOMException ex) {
             if (ex.getCode() == 9) {

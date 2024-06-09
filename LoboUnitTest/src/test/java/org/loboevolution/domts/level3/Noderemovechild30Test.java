@@ -70,7 +70,7 @@ public class Noderemovechild30Test extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                removedNode = child.removeChild(parent);
+                child.removeChild(parent);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
             }

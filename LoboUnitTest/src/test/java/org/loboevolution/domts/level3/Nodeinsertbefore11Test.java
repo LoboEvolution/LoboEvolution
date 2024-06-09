@@ -63,12 +63,12 @@ public class Nodeinsertbefore11Test extends LoboUnitTest {
         txt = doc.createTextNode("Text");
         cdata = doc.createCDATASection("CDATA");
         eRef = doc.createEntityReference("alpha");
-        appendedChild = docFrag.appendChild(elem);
-        appendedChild = docFrag.appendChild(pi);
-        appendedChild = docFrag.appendChild(comment);
-        appendedChild = docFrag.appendChild(txt);
-        appendedChild = docFrag.appendChild(cdata);
-        appendedChild = docFrag.appendChild(eRef);
+        docFrag.appendChild(elem);
+        docFrag.appendChild(pi);
+        docFrag.appendChild(comment);
+        docFrag.appendChild(txt);
+        docFrag.appendChild(cdata);
+        docFrag.appendChild(eRef);
         inserted = docFrag.insertBefore(comment, pi);
         insertedVal = ((CharacterData) /*Node */inserted).getData();
         assertEquals("Comment", insertedVal, "Nodeinsertbefore11Assert2");

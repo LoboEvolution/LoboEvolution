@@ -27,6 +27,7 @@
 package org.loboevolution.menu.tools.screen;
 
 import java.awt.*;
+import java.io.Serial;
 
 import javax.swing.*;
 
@@ -40,6 +41,7 @@ public class ScreenShootWindow extends JFrame {
     /**
      * The Constant serialVersionUID.
      */
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**

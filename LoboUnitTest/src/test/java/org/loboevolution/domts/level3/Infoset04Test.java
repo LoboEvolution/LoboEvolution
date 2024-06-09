@@ -66,7 +66,7 @@ public class Infoset04Test extends LoboUnitTest {
         pList = doc.getElementsByTagName("p");
         elem = (Element) pList.item(0);
         newCdata = doc.createCDATASection("CDATA");
-        appendedChild = elem.appendChild(newCdata);
+        elem.appendChild(newCdata);
         domConfig = doc.getDomConfig();
         domConfig.setParameter("infoset", Boolean.TRUE);
         /*DOMErrorMonitor */

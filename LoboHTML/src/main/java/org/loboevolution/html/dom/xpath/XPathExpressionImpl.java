@@ -40,7 +40,6 @@ import org.loboevolution.html.node.Node;
 import org.loboevolution.html.xpath.XPathException;
 import org.loboevolution.html.xpath.XPathExpression;
 
-import javax.xml.transform.TransformerException;
 import java.util.Objects;
 
 /**

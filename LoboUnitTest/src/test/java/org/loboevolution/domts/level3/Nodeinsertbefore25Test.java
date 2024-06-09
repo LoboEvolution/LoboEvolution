@@ -68,7 +68,7 @@ public class Nodeinsertbefore25Test extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                inserted = span.insertBefore(newNode, spanText);
+                span.insertBefore(newNode, spanText);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }

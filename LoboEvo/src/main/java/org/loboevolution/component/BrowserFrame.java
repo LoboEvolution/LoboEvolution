@@ -35,6 +35,7 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.Serial;
 
 import javax.swing.*;
 
@@ -55,7 +56,8 @@ import org.loboevolution.store.WebStore;
 @Data
 public class BrowserFrame extends JFrame implements IBrowserFrame {
 
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	private BrowserPanel panel;
 

@@ -31,6 +31,7 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.Serial;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -54,7 +55,8 @@ import org.loboevolution.store.BookmarksStore;
 public class AddBookmarkWindow extends JFrame implements ActionListener {
 
 	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	/** The description field. */
 	private LoboTextField descriptionField;

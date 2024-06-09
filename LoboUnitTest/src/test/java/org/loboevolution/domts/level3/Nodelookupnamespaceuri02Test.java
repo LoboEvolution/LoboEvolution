@@ -49,8 +49,6 @@ public class Nodelookupnamespaceuri02Test extends LoboUnitTest {
         final DOMImplementation domImpl;
         final Document newDoc;
         final String namespaceURI;
-        final DocumentType nullDocType = null;
-
         final Element docElem;
         final String rootNS;
         final String rootName;
@@ -61,7 +59,7 @@ public class Nodelookupnamespaceuri02Test extends LoboUnitTest {
         rootName = docElem.getTagName();
         domImpl = doc.getImplementation();
         qname = "dom3:" + rootName;
-        newDoc = domImpl.createDocument(rootNS, qname, nullDocType);
+        newDoc = domImpl.createDocument(rootNS, qname, null);
         namespaceURI = newDoc.lookupNamespaceURI("dom3");
         assertEquals(rootNS, namespaceURI, "Nodelookupnamespaceuri02Assert2");
     }

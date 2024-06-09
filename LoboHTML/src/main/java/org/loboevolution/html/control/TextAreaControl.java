@@ -29,13 +29,15 @@ import org.loboevolution.common.WrapperLayout;
 import org.loboevolution.html.dom.domimpl.HTMLTextAreaElementImpl;
 
 import java.awt.*;
+import java.io.Serial;
 
 /**
  * <p>TextAreaControl class.</p>
  */
 public class TextAreaControl extends BaseControl {
 
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 	
 	private final HTMLTextAreaElementImpl  modelNode;
 	

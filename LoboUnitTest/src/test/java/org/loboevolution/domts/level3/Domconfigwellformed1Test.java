@@ -61,7 +61,7 @@ public class Domconfigwellformed1Test extends LoboUnitTest {
         boolean state;
         final String parameter = "wElL-formed";
         domImpl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(), true));
-        doc = domImpl.createDocument("http://www.w3.org/1999/xhtml", "html", nullDocType);
+        doc = domImpl.createDocument("http://www.w3.org/1999/xhtml", "html", null);
         domConfig = doc.getDomConfig();
         state = ((Boolean) domConfig.getParameter(parameter));
         assertTrue(state, "Domconfigwellformed1Assert3");

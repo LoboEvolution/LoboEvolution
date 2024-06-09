@@ -94,8 +94,7 @@ public class CSSRuleListImpl extends AbstractList<CSSStyleRule> implements CSSRu
                 add(new CSSCharsetRuleImpl(rule));
             }
 
-            if (rule instanceof org.htmlunit.cssparser.dom.CSSUnknownRuleImpl) {
-                final org.htmlunit.cssparser.dom.CSSUnknownRuleImpl unknownRule = (org.htmlunit.cssparser.dom.CSSUnknownRuleImpl) rule;
+            if (rule instanceof org.htmlunit.cssparser.dom.CSSUnknownRuleImpl unknownRule) {
                 if (unknownRule.getCssText().startsWith("@keyframes")) {
                     add(new CSSKeyFramesRuleImpl(this, rule));
                 }

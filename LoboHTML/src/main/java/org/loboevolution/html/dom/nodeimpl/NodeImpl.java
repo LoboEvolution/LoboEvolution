@@ -57,6 +57,7 @@ import org.mozilla.javascript.Function;
 import org.w3c.dom.events.EventException;
 
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -238,9 +239,8 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 				final NodeListImpl childNodes = (NodeListImpl) getChildNodes();
 				childNodes.forEach(child -> newNode.appendChild(child.cloneNode(true)));
 
-				if (newNode instanceof Element) {
-					final Element elem = (Element) newNode;
-					final NamedNodeMap nnmap = elem.getAttributes();
+				if (newNode instanceof Element elem) {
+                    final NamedNodeMap nnmap = elem.getAttributes();
 					if (nnmap != null) {
 						for (final Node attr : Nodes.iterable(nnmap)) {
 							elem.setAttributeNode((Attr) attr.cloneNode(true));
@@ -508,13 +508,13 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 
 	/** {@inheritDoc} */
 	@Override
-	public URL getFullURL(final String spec) throws MalformedURLException {
+	public URL getFullURL(final String spec) throws Exception {
 		final Object doc = this.document;
 		final String cleanSpec  = Urls.encodeIllegalCharacters(spec);
 		if (doc instanceof HTMLDocument) {
 			return ((HTMLDocumentImpl) doc).getFullURL(cleanSpec );
 		} else {
-			return new URL(cleanSpec );
+			return new URI(cleanSpec).toURL();
 		}
 	}
 

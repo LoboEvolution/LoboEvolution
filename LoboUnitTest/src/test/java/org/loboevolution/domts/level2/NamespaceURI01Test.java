@@ -44,8 +44,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * Retrieve the first "address" node which has an attribute of "domestic"
  * that is specified in the DTD.
  * Invoke the "getNamespaceURI()" method on the attribute.
- * The method should return "http://www.nist.gov".
-
+ * The method should return "<a href="http://www.nist.gov">...</a>".
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSname">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSname</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=238">http://www.w3.org/Bugs/Public/show_bug.cgi?id=238</a>
  */

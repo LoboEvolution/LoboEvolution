@@ -176,21 +176,19 @@ public class PDFFile {
      * @return a boolean.
      */
     public static boolean isDelimiter(final int c) {
-        switch (c) {
-            case '(':   // LEFT PARENTHESIS
-            case ')':   // RIGHT PARENTHESIS
-            case '<':   // LESS-THAN-SIGN
-            case '>':   // GREATER-THAN-SIGN
-            case '[':   // LEFT SQUARE BRACKET
-            case ']':   // RIGHT SQUARE BRACKET
-            case '{':   // LEFT CURLY BRACKET
-            case '}':   // RIGHT CURLY BRACKET
-            case '/':   // SOLIDUS
-            case '%':   // PERCENT SIGN
-                return true;
-            default:
-                return false;
-        }
+        return switch (c) {   // LEFT PARENTHESIS
+            // RIGHT PARENTHESIS
+            // LESS-THAN-SIGN
+            // GREATER-THAN-SIGN
+            // LEFT SQUARE BRACKET
+            // RIGHT SQUARE BRACKET
+            // LEFT CURLY BRACKET
+            // RIGHT CURLY BRACKET
+            // SOLIDUS
+            case '(', ')', '<', '>', '[', ']', '{', '}', '/', '%' ->   // PERCENT SIGN
+                    true;
+            default -> false;
+        };
     }
 
     /**

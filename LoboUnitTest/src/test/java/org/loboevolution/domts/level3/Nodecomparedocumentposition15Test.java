@@ -56,8 +56,8 @@ public class Nodecomparedocumentposition15Test extends LoboUnitTest {
         docElem = doc.getDocumentElement();
         docFrag = doc.createDocumentFragment();
         attr = doc.createAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:lang");
-        attrNode = docElem.setAttributeNodeNS(attr);
-        appendedChild = docFrag.appendChild(docElem);
+        docElem.setAttributeNodeNS(attr);
+        docFrag.appendChild(docElem);
         docFragChild = docFrag.getFirstChild();
         docFragChildPosition = docFragChild.compareDocumentPosition(attr);
         assertEquals(20, docFragChildPosition, "Nodecomparedocumentposition15Assert2");

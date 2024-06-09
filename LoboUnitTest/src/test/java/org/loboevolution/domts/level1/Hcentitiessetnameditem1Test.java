@@ -63,7 +63,7 @@ public class Hcentitiessetnameditem1Test extends LoboUnitTest {
         elem = doc.createElement("br");
 
         try {
-            retval = entities.setNamedItem(elem);
+            entities.setNamedItem(elem);
             fail("throw_HIER_OR_NO_MOD_ERR");
 
         } catch (final DOMException ex) {

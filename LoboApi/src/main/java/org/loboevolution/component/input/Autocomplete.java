@@ -30,6 +30,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.Serial;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
@@ -53,8 +54,9 @@ public class Autocomplete {
 	 */
 	public static void setupAutoComplete(final JTextField txtInput, final List<String> items) {
 		final DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
-		final JComboBox<String> cbInput = new JComboBox<String>(model) {
-            private static final long serialVersionUID = 1L;
+		final JComboBox<String> cbInput = new JComboBox<>(model) {
+            @Serial
+			private static final long serialVersionUID = 1L;
 
             public Dimension getPreferredSize() {
                 return new Dimension(super.getPreferredSize().width, 0);

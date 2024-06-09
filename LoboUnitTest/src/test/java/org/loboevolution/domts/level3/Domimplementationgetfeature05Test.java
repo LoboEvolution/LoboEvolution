@@ -47,11 +47,9 @@ public class Domimplementationgetfeature05Test extends LoboUnitTest {
         final Document doc;
         final DOMImplementation domImpl;
         final DOMImplementation domImplReturned;
-        final String nullVersion = null;
-
         doc = sampleXmlFile("hc_staff.xml");
         domImpl = doc.getImplementation();
-        domImplReturned = (DOMImplementation) domImpl.getFeature("", nullVersion);
+        domImplReturned = (DOMImplementation) domImpl.getFeature("", null);
         assertNull(domImplReturned, "Domimplementationgetfeature05Assert2");
     }
 }

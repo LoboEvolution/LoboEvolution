@@ -578,18 +578,11 @@ public class PDFPage {
      */
     public void addEndCap(final int capstyle) {
         final PDFChangeStrokeCmd sc = new PDFChangeStrokeCmd();
-        final int cap;
-        switch (capstyle) {
-            case 1:
-                cap = BasicStroke.CAP_ROUND;
-                break;
-            case 2:
-                cap = BasicStroke.CAP_SQUARE;
-                break;
-            default:
-                cap = BasicStroke.CAP_BUTT;
-                break;
-        }
+        final int cap = switch (capstyle) {
+            case 1 -> BasicStroke.CAP_ROUND;
+            case 2 -> BasicStroke.CAP_SQUARE;
+            default -> BasicStroke.CAP_BUTT;
+        };
         sc.setEndCap(cap);
         addCommand(sc);
     }
@@ -601,18 +594,11 @@ public class PDFPage {
      */
     public void addLineJoin(final int joinstyle) {
         final PDFChangeStrokeCmd sc = new PDFChangeStrokeCmd();
-        final int join;
-        switch (joinstyle) {
-            case 1:
-                join = BasicStroke.JOIN_ROUND;
-                break;
-            case 2:
-                join = BasicStroke.JOIN_BEVEL;
-                break;
-            default:
-                join = BasicStroke.JOIN_MITER;
-                break;
-        }
+        final int join = switch (joinstyle) {
+            case 1 -> BasicStroke.JOIN_ROUND;
+            case 2 -> BasicStroke.JOIN_BEVEL;
+            default -> BasicStroke.JOIN_MITER;
+        };
         sc.setLineJoin(join);
         addCommand(sc);
     }

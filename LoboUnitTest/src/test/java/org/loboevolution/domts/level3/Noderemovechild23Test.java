@@ -59,7 +59,7 @@ public class Noderemovechild23Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         parent = doc.createElementNS("http://www.w3.org/1999/xhtml", "dom3:p");
         child = doc.createProcessingInstruction("TARGET", "DATA");
-        appendedChild = parent.appendChild(child);
+        parent.appendChild(child);
         removed = (ProcessingInstruction) parent.removeChild(child);
         removedName = removed.getTarget();
         assertEquals("TARGET", removedName, "Noderemovechild23Assert3");
@@ -67,7 +67,7 @@ public class Noderemovechild23Test extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                removedNode = parent.removeChild(child);
+                parent.removeChild(child);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
             }

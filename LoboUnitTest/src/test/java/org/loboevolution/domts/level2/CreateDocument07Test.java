@@ -44,10 +44,9 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * valid and correctly formed.
  * <p>
  * Invoke method createDocument(namespaceURI,qualifiedName,doctype) on
- * this domimplementation. namespaceURI is "http://www.ecommerce.org/schema"
+ * this domimplementation. namespaceURI is "<a href="http://www.ecommerce.org/schema">...</a>"
  * qualifiedName is "y:x" and doctype is null.
  * Method should return a new xml Document as specified by the listed parameters.
-
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#Level-2-Core-DOM-createDocument">http://www.w3.org/TR/DOM-Level-2-Core/core#Level-2-Core-DOM-createDocument</a>
  */
 public class CreateDocument07Test extends LoboUnitTest {
@@ -60,16 +59,13 @@ public class CreateDocument07Test extends LoboUnitTest {
         final String namespaceURI = "http://www.ecommerce.org/schema";
         final String qualifiedName = "y:x";
         final Document doc;
-        final DocumentType docType = null;
-
         final DOMImplementation domImpl;
         final Document aNewDoc;
         final String nodeName;
         final String nodeValue;
         doc = sampleXmlFile("staffNS.xml");
-
         domImpl = doc.getImplementation();
-        aNewDoc = domImpl.createDocument(namespaceURI, qualifiedName, docType);
+        aNewDoc = domImpl.createDocument(namespaceURI, qualifiedName, null);
         nodeName = aNewDoc.getNodeName();
         nodeValue = aNewDoc.getNodeValue();
         assertEquals("[object HTMLDocument]", nodeName);

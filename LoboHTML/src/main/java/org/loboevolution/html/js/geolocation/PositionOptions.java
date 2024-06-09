@@ -32,7 +32,6 @@ import lombok.Data;
  * The PositionOptions class provides a way for the application to set options
  * that the Geolocation object can then use when calculating the position. These
  * include parameters such as enabling high accuracy, API timeout, cache age, etc.
- *
  * Note: This class must not have any sub-classes to ensure W3C Specifications are being
  * strictly followed by the system or application that uses this geolocation package. These
  * specifications are avilable at <a href="http://www.w3.org/TR/geolocation-API/#position-options">...</a>

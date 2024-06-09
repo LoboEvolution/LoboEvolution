@@ -141,13 +141,9 @@ public class CalRGBColor extends ColorSpace {
     @Override
     public float[] toRGB(final float[] comp) {
         if (comp.length == 3) {
-            // compute r', g' and b' by raising the given values to the
-            // correct gamma
             final float a = (float) Math.pow(comp[0], this.gamma[0]);
             final float b = (float) Math.pow(comp[1], this.gamma[1]);
             final float c = (float) Math.pow(comp[2], this.gamma[2]);
-
-            // now multiply by the matrix to get X, Y and Z values
             float[] xyz = new float[]{
                     this.matrix[0] * a + this.matrix[3] * b + this.matrix[6] * c,
                     this.matrix[1] * a + this.matrix[4] * b + this.matrix[7] * c,

@@ -38,9 +38,7 @@ import java.io.InputStream;
  * <p>
  * Note: Buffered streams should wrap this class as opposed to the other way
  * around.
- *
  * Author J. H. S.
- *
  */
 public class RecordedInputStream extends InputStream {
 	private final InputStream delegate;

@@ -151,18 +151,11 @@ class RLine extends BaseRCollection {
 		final int requiredHeight;
 		final int valign = relement.getVAlign();
 		final AlignValues key = AlignValues.get(valign);
-		switch (key) {
-		case BASELINE:
-		case BOTTOM:
-			requiredHeight = ph + boundsh - this.baseLineOffset;
-			break;
-		case MIDDLE:
-			requiredHeight = Math.max(ph, ph / 2 + boundsh - this.baseLineOffset);
-			break;
-		default:
-			requiredHeight = ph;
-			break;
-		}
+        requiredHeight = switch (key) {
+            case BASELINE, BOTTOM -> ph + boundsh - this.baseLineOffset;
+            case MIDDLE -> Math.max(ph, ph / 2 + boundsh - this.baseLineOffset);
+            default -> ph;
+        };
 		if (requiredHeight > boundsh) {
 			// Height adjustment depends on bounds being already set.
 			adjustHeight(requiredHeight, ph, valign);
@@ -237,12 +230,11 @@ class RLine extends BaseRCollection {
 						// No need to set offset - set later.
 						break;
 					}
-					overflow.add(0, renderable);
+					overflow.addFirst(renderable);
 					renderables.remove(i);
 				} else {
-					if (renderable instanceof RBlank) {
-						final RBlank rblank = (RBlank) renderable;
-						newWidth = rblank.getX();
+					if (renderable instanceof RBlank rblank) {
+                        newWidth = rblank.getX();
 						newOffset = newWidth + rblank.getWidth();
 					} else {
 						final BoundableRenderable br = (BoundableRenderable) renderable;
@@ -268,14 +260,14 @@ class RLine extends BaseRCollection {
 			}
 		}
 
-		
+
 
 	    int extraHeight = 0;
 	    final int maxAscentPlusLeading = this.baseLineOffset;
 	    if (rword.ascentPlusLeading > maxAscentPlusLeading) {
 	      extraHeight += (rword.ascentPlusLeading - maxAscentPlusLeading) + rword.descent;
 	    }
-	    
+
 	    if (extraHeight > 0) {
 	      final int newHeight = (this.getHeight() + extraHeight);
 	      this.adjustHeight(newHeight, newHeight, AlignValues.BOTTOM.getValue());
@@ -306,9 +298,8 @@ class RLine extends BaseRCollection {
 		int maxDescent = firstFm.getDescent();
 		int maxAscentPlusLeading = firstFm.getAscent() + firstFm.getLeading();
 		for (final Object r : renderables) {
-			if (r instanceof RStyleChanger) {
-				final RStyleChanger rstyleChanger = (RStyleChanger) r;
-				final FontMetrics fm = rstyleChanger.getModelNode().getRenderState().getFontMetrics();
+			if (r instanceof RStyleChanger rstyleChanger) {
+                final FontMetrics fm = rstyleChanger.getModelNode().getRenderState().getFontMetrics();
 				final int descent = fm.getDescent();
 				if (descent > maxDescent) {
 					maxDescent = descent;
@@ -322,44 +313,26 @@ class RLine extends BaseRCollection {
 		final int textHeight = maxDescent + maxAscentPlusLeading;
 		final int baseline;
 		final AlignValues key = AlignValues.get(valign);
-		switch (key) {
-		case ABSBOTTOM:
-			baseline = newHeight - maxDescent;
-			break;
-		case ABSMIDDLE:
-			baseline = (newHeight + textHeight) / 2 - maxDescent;
-			break;
-		case BASELINE:
-		case BOTTOM:
-			baseline = elementHeight;
-			break;
-		case MIDDLE:
-			baseline = newHeight / 2;
-			break;
-		case TOP:
-			baseline = maxAscentPlusLeading;
-			break;
-		default:
-			baseline = elementHeight;
-			break;
-		}
+        baseline = switch (key) {
+            case ABSBOTTOM -> newHeight - maxDescent;
+            case ABSMIDDLE -> (newHeight + textHeight) / 2 - maxDescent;
+            case BASELINE, BOTTOM -> elementHeight;
+            case MIDDLE -> newHeight / 2;
+            case TOP -> maxAscentPlusLeading;
+            default -> elementHeight;
+        };
 		this.baseLineOffset = baseline;
 
 		// Change bounds of renderables accordingly
 		for (final Object r : renderables) {
-			if (r instanceof RWord) {
-				final RWord rword = (RWord) r;
-				rword.setY(baseline - rword.ascentPlusLeading);
-			} else if (r instanceof RBlank) {
-				final RBlank rblank = (RBlank) r;
-				rblank.setY(baseline - rblank.ascentPlusLeading);
-			} else if (r instanceof RElement) {
-				final RElement relement = (RElement) r;
-				// int w = relement.getWidth();
-				setElementY(relement, relement.getHeight(), relement.getVAlign());
-			} else {
-				// RSpacing and RStyleChanger don't matter?
-			}
+            switch (r) {
+                case RWord rword -> rword.setY(baseline - rword.ascentPlusLeading);
+                case RBlank rblank -> rblank.setY(baseline - rblank.ascentPlusLeading);
+                case RElement relement -> setElementY(relement, relement.getHeight(), relement.getVAlign());
+                case null, default -> {
+                    // RSpacing and RStyleChanger don't matter?
+                }
+            }
 		}
 		// TODO: Could throw OverflowException when we add floating widgets
 	}
@@ -383,7 +356,7 @@ class RLine extends BaseRCollection {
 		if (result) {
 			final LineBreak br = this.lineBreak;
 			if (br != null) {
-				buffer.append(System.getProperty("line.separator"));
+				buffer.append(System.lineSeparator());
 			} else {
 				final List<Renderable> renderables = this.renderables;
 				final int size = renderables.size();
@@ -538,9 +511,8 @@ class RLine extends BaseRCollection {
 			g.setFont(font);
 			final List<Renderable> renderables = this.renderables;
 			renderables.forEach(r -> {
-				if (r instanceof RElement) {
-					final RElement relement = (RElement) r;
-					if (!relement.isDelegated()) {
+				if (r instanceof RElement relement) {
+                    if (!relement.isDelegated()) {
 						final Graphics newG = g.create();
 						newG.translate(relement.getX(), relement.getY());
 						try {
@@ -550,9 +522,8 @@ class RLine extends BaseRCollection {
 						}
 					}
 
-				} else if (r instanceof BoundableRenderable) {
-					final BoundableRenderable br = (BoundableRenderable) r;
-					if (!br.isDelegated()) br.paintTranslated(g);
+				} else if (r instanceof BoundableRenderable br) {
+                    if (!br.isDelegated()) br.paintTranslated(g);
 				} else {
 					r.paint(g);
 				}
@@ -578,7 +549,7 @@ class RLine extends BaseRCollection {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param relement a {@link RElement} object.
 	 * @param elementHeight a {@link java.lang.Integer} object.
 	 * @param valign a {@link java.lang.Integer} object.
@@ -586,20 +557,12 @@ class RLine extends BaseRCollection {
 	private void setElementY(final RElement relement, final int elementHeight, final int valign) {
 		final int yoffset;
 		final AlignValues key = AlignValues.get(valign);
-		switch (key) {
-			case BOTTOM:
-				yoffset = this.getHeight() - elementHeight;
-				break;
-			case MIDDLE:
-				yoffset = (this.getHeight() - elementHeight) / 2;
-				break;
-			case TOP:
-				yoffset = 0;
-				break;
-			default:
-			case BASELINE:
-				yoffset = this.baseLineOffset - elementHeight;
-		}
+        yoffset = switch (key) {
+            case BOTTOM -> this.getHeight() - elementHeight;
+            case MIDDLE -> (this.getHeight() - elementHeight) / 2;
+            case TOP -> 0;
+            default -> this.baseLineOffset - elementHeight;
+        };
 		relement.setY(yoffset);
 	}
 

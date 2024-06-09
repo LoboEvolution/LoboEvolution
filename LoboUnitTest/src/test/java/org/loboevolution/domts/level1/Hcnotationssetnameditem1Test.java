@@ -71,9 +71,7 @@ public class Hcnotationssetnameditem1Test extends LoboUnitTest {
 
         } catch (final DOMException ex) {
             switch (ex.getCode()) {
-                case 3:
-                    break;
-                case 7:
+                case 3, 7:
                     break;
                 default:
                     throw ex;

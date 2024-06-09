@@ -134,11 +134,6 @@ public class NodeIteratorTest extends LoboUnitTest {
         checkHtmlAlert(html);
     }
 
-    /**
-     * Test case for issue 1982.
-     *
-     * @throws Exception if the test fails
-     */
     @Test
     @Alerts({"1", "11", "12"})
     public void subroot() {

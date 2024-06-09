@@ -67,7 +67,7 @@ public class Documentrenamenode11Test extends LoboUnitTest {
 
         boolean success = false;
         try {
-            renamedNode = doc.renameNode(textNode, nullNSURI, "pre:fix");
+            doc.renameNode(textNode, nullNSURI, "pre:fix");
         } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
         }

@@ -434,9 +434,8 @@ public class RBlock extends BaseElementRenderable {
 	private Dimension applyAutoStyles(final int availWidth) {
 		final Object rootNode = this.modelNode;
 		final HTMLElementImpl rootElement;
-		if (rootNode instanceof HTMLDocumentImpl) {
-			final HTMLDocumentImpl doc = (HTMLDocumentImpl) rootNode;
-			rootElement = (HTMLElementImpl) doc.getBody();
+		if (rootNode instanceof HTMLDocumentImpl doc) {
+            rootElement = (HTMLElementImpl) doc.getBody();
 		} else {
 			if (rootNode instanceof HTMLElementImpl) {
 				rootElement = (HTMLElementImpl) rootNode;
@@ -508,7 +507,7 @@ public class RBlock extends BaseElementRenderable {
 	public boolean extractSelectionText(final StringBuilder buffer, final boolean inSelection, final RenderableSpot startPoint,
 										final RenderableSpot endPoint) {
 		final boolean result = super.extractSelectionText(buffer, inSelection, startPoint, endPoint);
-		final String br = System.getProperty("line.separator");
+		final String br = System.lineSeparator();
 		if (inSelection) {
 			buffer.insert(0, br);
 		}
@@ -516,12 +515,6 @@ public class RBlock extends BaseElementRenderable {
 			buffer.append(br);
 		}
 		return result;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	protected void finalize() throws Throwable {
-		super.finalize();
 	}
 
 	/**

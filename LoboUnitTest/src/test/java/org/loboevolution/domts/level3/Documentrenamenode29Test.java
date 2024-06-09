@@ -57,7 +57,7 @@ public class Documentrenamenode29Test extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                renamed = doc.renameNode(docElem, "http://www.w3.org/DOM/Test", "@");
+                doc.renameNode(docElem, "http://www.w3.org/DOM/Test", "@");
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
             }

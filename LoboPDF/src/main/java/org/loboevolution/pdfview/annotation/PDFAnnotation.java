@@ -145,21 +145,14 @@ public class PDFAnnotation {
     }
 
     private static boolean displayAnnotation(final ANNOTATION_TYPE annotationType) {
-        switch (annotationType) {
-            case STAMP:
-                return Configuration.getInstance().isPrintStampAnnotations();
-            case WIDGET:
-                return Configuration.getInstance().isPrintWidgetAnnotations();
-            case FREETEXT:
-                return Configuration.getInstance().isPrintFreetextAnnotations();
-            case LINK:
-                return Configuration.getInstance().isPrintLinkAnnotations();
-            case SIGNATURE:
-                return Configuration.getInstance().isPrintSigantureFields();
-            case UNKNOWN:
-            default:
-                return false;
-        }
+        return switch (annotationType) {
+            case STAMP -> Configuration.getInstance().isPrintStampAnnotations();
+            case WIDGET -> Configuration.getInstance().isPrintWidgetAnnotations();
+            case FREETEXT -> Configuration.getInstance().isPrintFreetextAnnotations();
+            case LINK -> Configuration.getInstance().isPrintLinkAnnotations();
+            case SIGNATURE -> Configuration.getInstance().isPrintSigantureFields();
+            default -> false;
+        };
     }
 
     /**

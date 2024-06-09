@@ -56,7 +56,7 @@ public class Nodegetuserdata07Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         pi = doc.createProcessingInstruction("PITARGET", "PIDATA");
         /*Node */
-        prevUserData = pi.setUserData("key", pi, null);
+        pi.setUserData("key", pi, null);
         retUserData = pi.getUserData("key");
         success = ((Node) /*DOMUserData */retUserData).isEqualNode(pi);
         assertTrue(success, "Nodegetuserdata07Assert2");

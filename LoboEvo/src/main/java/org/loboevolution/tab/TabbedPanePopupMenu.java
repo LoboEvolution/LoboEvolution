@@ -35,6 +35,7 @@ import org.loboevolution.welcome.WelcomePanel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.Serial;
 import java.util.List;
 
 /**
@@ -42,7 +43,8 @@ import java.util.List;
  */
 public class TabbedPanePopupMenu extends JPopupMenu {
 
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	private final JMenuItem closeAll;
 
@@ -116,9 +118,8 @@ public class TabbedPanePopupMenu extends JPopupMenu {
 	/** {@inheritDoc} */
 	@Override
 	public void show(final Component c, final int x, final int y) {
-		if (c instanceof DnDTabbedPane) {
-			final DnDTabbedPane tabbedPane = (DnDTabbedPane) c;
-			this.closePage.setVisible(tabbedPane.indexAtLocation(x, y) >= 0);
+		if (c instanceof DnDTabbedPane tabbedPane) {
+            this.closePage.setVisible(tabbedPane.indexAtLocation(x, y) >= 0);
 			this.closeAll.setVisible(tabbedPane.getTabCount() > 0);
 			this.closeAllButActive.setVisible(tabbedPane.getTabCount() > 0);
 			this.closeRight.setVisible(tabbedPane.indexAtLocation(x, y) > 0

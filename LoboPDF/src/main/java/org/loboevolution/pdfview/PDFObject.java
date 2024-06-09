@@ -211,8 +211,7 @@ public class PDFObject {
             this.type = NAME;
         } else if (obj instanceof PDFObject[]) {
             this.type = ARRAY;
-        } else if (obj instanceof Object[]) {
-            final Object[] srcary = (Object[]) obj;
+        } else if (obj instanceof Object[] srcary) {
             final PDFObject[] dstary = new PDFObject[srcary.length];
             for (int i = 0; i < srcary.length; i++) {
                 dstary[i] = new PDFObject(srcary[i]);
@@ -223,12 +222,11 @@ public class PDFObject {
             this.type = DICTIONARY;
         } else if (obj instanceof Boolean) {
             this.type = BOOLEAN;
-        } else if (obj instanceof PDFParser.Tok) {
-            final PDFParser.Tok tok = (PDFParser.Tok) obj;
-            if (tok != null && tok.name != null && tok.name.equals("true")) {
+        } else if (obj instanceof PDFParser.Tok tok) {
+            if (tok.name != null && tok.name.equals("true")) {
                 this.value = Boolean.TRUE;
                 this.type = BOOLEAN;
-            } else if (tok != null && tok.name != null && tok.name.equals("false")) {
+            } else if (tok.name != null && tok.name.equals("false")) {
                 this.value = Boolean.FALSE;
                 this.type = BOOLEAN;
             } else {
@@ -311,7 +309,7 @@ public class PDFObject {
         if (type == INDIRECT) {
             return dereference().getStream(filterLimits);
         } else if (type == STREAM && stream != null) {
-            byte[] data = null;
+            byte[] data;
 
             synchronized (stream) {
                 // decode
@@ -421,7 +419,7 @@ public class PDFObject {
             stream.rewind();
             outStream = PDFDecoder.decodeStream(this, stream, filterLimits);
             decodedStreamFilterLimits = new HashSet<>(filterLimits);
-            decodedStream = new SoftReference(outStream);
+            decodedStream = new SoftReference<>(outStream);
         }
 
         return outStream;
@@ -708,7 +706,7 @@ public class PDFObject {
                 try {
                     str.append("\n").append(dereference().toString());
                 } catch (final Throwable t) {
-                    str.append(t.toString());
+                    str.append(t);
                 }
                 return str.toString();
             } else if (type == BOOLEAN) {
@@ -826,9 +824,8 @@ public class PDFObject {
         if (super.equals(o)) {
             // they are the same object
             return true;
-        } else if (type == INDIRECT && o instanceof PDFObject) {
+        } else if (type == INDIRECT && o instanceof PDFObject obj) {
             // they are both PDFObjects.  Check type and xref.
-            final PDFObject obj = (PDFObject) o;
 
             if (obj.type == INDIRECT) {
                 final PDFXref lXref = (PDFXref) value;

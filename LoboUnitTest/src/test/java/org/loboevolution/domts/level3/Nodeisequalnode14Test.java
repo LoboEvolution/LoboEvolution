@@ -44,11 +44,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
  */
 public class Nodeisequalnode14Test extends LoboUnitTest {
 
-
+    
     /**
      * Runs the test case.
-     *
-     * @throws Throwable Any uncaught exception causes test to fail
      */
     @Test
     public void runTest() {

@@ -490,11 +490,9 @@ public class CMapFormat4 extends CMap {
          */
         @Override
         public int compareTo(final Object o) {
-            if (!(o instanceof Segment)) {
+            if (!(o instanceof Segment s)) {
                 return -1;
             }
-
-            final Segment s = (Segment) o;
 
             // if regions overlap at all, declare the segments equal,
             // to avoid overlap in the segment list

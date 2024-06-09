@@ -60,8 +60,8 @@ public class Nodeisdefaultnamespace14Test extends LoboUnitTest {
         bodyElem = (Element) bodyList.item(0);
         elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "p");
         cdata = doc.createCDATASection("CDATASection");
-        appendedChild = elem.appendChild(cdata);
-        appendedChild = bodyElem.appendChild(elem);
+        elem.appendChild(cdata);
+        bodyElem.appendChild(elem);
         isDefault = cdata.isDefaultNamespace("http://www.w3.org/1999/xhtml");
         assertTrue(isDefault, "Nodeisdefaultnamespace14Assert2");
     }

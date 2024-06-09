@@ -63,7 +63,7 @@ public class Elementhasattribute03Test extends LoboUnitTest {
         attribute = doc.createAttribute("domestic");
         state = element.hasAttribute("domestic");
         assertFalse(state);
-        newAttribute = element.setAttributeNode(attribute);
+        element.setAttributeNode(attribute);
         state = element.hasAttribute("domestic");
         assertTrue(state);
     }

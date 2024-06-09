@@ -26,6 +26,7 @@
 
 package org.loboevolution.store;
 
+import java.net.URI;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -56,7 +57,7 @@ public class NavigationStore implements QueryStore {
 	public void addAsRecent(final String uri, final String title, final int index) {
 		try (final Connection conn = DriverManager.getConnection(DB_PATH);
              final PreparedStatement pstmt = conn.prepareStatement(INSERT_HOST)) {
-			pstmt.setString(1, new URL(uri).toExternalForm());
+			pstmt.setString(1, new URI(uri).toURL().toExternalForm());
 			pstmt.setString(2, title);
 			pstmt.setInt(3, index);
 			pstmt.executeUpdate();

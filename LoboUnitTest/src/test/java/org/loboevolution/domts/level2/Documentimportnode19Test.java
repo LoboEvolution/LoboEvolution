@@ -56,8 +56,6 @@ public class Documentimportnode19Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
-        final DocumentType docTypeNull = null;
-
         final Document docImp;
         final DOMImplementation domImpl;
         final DocumentType docType;
@@ -73,10 +71,9 @@ public class Documentimportnode19Test extends LoboUnitTest {
         String systemIdImp;
         String notationNameImp;
         doc = sampleXmlFile("staffNS.xml");
-
         domImpl = doc.getImplementation();
         docType = doc.getDoctype();
-        docImp = domImpl.createDocument("http://www.w3.org/DOM/Test", "a:b", docTypeNull);
+        docImp = domImpl.createDocument("http://www.w3.org/DOM/Test", "a:b", null);
         nodeMap = docType.getEntities();
         assertNotNull(nodeMap);
         entity2 = (EntityReference) nodeMap.getNamedItem("ent2");

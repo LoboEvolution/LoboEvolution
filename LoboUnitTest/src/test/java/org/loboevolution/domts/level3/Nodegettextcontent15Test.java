@@ -61,11 +61,11 @@ public class Nodegettextcontent15Test extends LoboUnitTest {
         entRef = doc.createEntityReference("beta");
         pi = doc.createProcessingInstruction("PIT", "PIData ");
         cdata = doc.createCDATASection("CData");
-        appendedChild = elem.appendChild(txt);
-        appendedChild = elem.appendChild(comment);
-        appendedChild = elem.appendChild(entRef);
-        appendedChild = elem.appendChild(pi);
-        appendedChild = elem.appendChild(cdata);
+        elem.appendChild(txt);
+        elem.appendChild(comment);
+        elem.appendChild(entRef);
+        elem.appendChild(pi);
+        elem.appendChild(cdata);
         textContent = elem.getTextContent();
         doc.normalizeDocument();
         assertEquals("Text βCData", textContent, "Nodegettextcontent15Assert2");

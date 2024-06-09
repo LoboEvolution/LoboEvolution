@@ -44,6 +44,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-standalone">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-standalone</a>
  */
 public class Documentgetxmlstandalone05Test extends LoboUnitTest {
+
     @Test
     public void runTest() {
         final Document doc;
@@ -51,8 +52,6 @@ public class Documentgetxmlstandalone05Test extends LoboUnitTest {
         final DocumentType newDocType;
         final DOMImplementation domImpl;
         final boolean standalone;
-        final String nullPubId = null;
-
         final Element docElem;
         final String rootNS;
         final String rootName;
@@ -65,7 +64,7 @@ public class Documentgetxmlstandalone05Test extends LoboUnitTest {
         docType = doc.getDoctype();
         sysId = docType.getSystemId();
         domImpl = doc.getImplementation();
-        newDocType = domImpl.createDocumentType(rootName, nullPubId, sysId);
+        newDocType = domImpl.createDocumentType(rootName, null, sysId);
         newDoc = domImpl.createDocument(rootNS, rootName, newDocType);
         standalone = newDoc.getXmlStandalone();
         assertFalse(standalone, "Documentgetxmlstandalone05Assert2");

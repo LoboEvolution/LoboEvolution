@@ -41,11 +41,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * order in which they are encountered in a preorder traversal of this Element tree.
  * <p>
  * Create a NodeList of all the descendant elements
- * using the "http://www.nist.gov" as the namespaceURI and "nomatch" as the
+ * using the "<a href="http://www.nist.gov">...</a>" as the namespaceURI and "nomatch" as the
  * localName.
  * The method should return a NodeList whose length is
  * "0".
-
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-getElBTNNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-getElBTNNS</a>
  */
 public class GetElementsByTagNameNS05Test extends LoboUnitTest {

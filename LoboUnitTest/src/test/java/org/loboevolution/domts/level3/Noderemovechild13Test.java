@@ -60,7 +60,7 @@ public class Noderemovechild13Test extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                removed = eRef.removeChild(txt);
+                eRef.removeChild(txt);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
             }

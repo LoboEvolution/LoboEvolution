@@ -28,27 +28,23 @@ package org.jpedal.jbig2.decoders;
 /**
  * <p>DecodeIntResult class.</p>
  */
-public class DecodeIntResult {
-
-    private final int intResult;
-    private final boolean booleanResult;
+public record DecodeIntResult(int intResult, boolean booleanResult) {
 
     /**
      * <p>Constructor for DecodeIntResult.</p>
      *
-     * @param intResult     a {@link java.lang.Integer} object.
+     * @param intResult     a {@link Integer} object.
      * @param booleanResult a boolean.
      */
-    public DecodeIntResult(final int intResult, final boolean booleanResult) {
-        this.intResult = intResult;
-        this.booleanResult = booleanResult;
+    public DecodeIntResult {
     }
 
     /**
      * <p>intResult.</p>
      *
-     * @return a {@link java.lang.Integer} object.
+     * @return a {@link Integer} object.
      */
+    @Override
     public int intResult() {
         return intResult;
     }
@@ -58,6 +54,7 @@ public class DecodeIntResult {
      *
      * @return a boolean.
      */
+    @Override
     public boolean booleanResult() {
         return booleanResult;
     }

@@ -27,6 +27,7 @@ package org.loboevolution.img;
 
 import java.awt.Dimension;
 import java.awt.Rectangle;
+import java.io.Serial;
 
 import javax.swing.JLayeredPane;
 import javax.swing.JViewport;
@@ -40,6 +41,7 @@ import javax.swing.Scrollable;
  */
 public class ScrollableLayeredPane extends JLayeredPane implements Scrollable {
 	
+	@Serial
 	private static final long serialVersionUID = 1L;
 	private final transient LayeredImageView layeredImageView;
 	

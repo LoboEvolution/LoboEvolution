@@ -48,8 +48,6 @@ public class Documentadoptnode09Test extends LoboUnitTest {
         final Document newDoc;
         final DOMImplementation domImpl;
         final Node adoptedDoc;
-        final DocumentType nullDocType = null;
-
         final Element docElem;
         final String rootNS;
         final String rootName;
@@ -58,12 +56,12 @@ public class Documentadoptnode09Test extends LoboUnitTest {
         rootName = docElem.getTagName();
         rootNS = docElem.getNamespaceURI();
         domImpl = doc.getImplementation();
-        newDoc = domImpl.createDocument(rootNS, rootName, nullDocType);
+        newDoc = domImpl.createDocument(rootNS, rootName, null);
 
 
         boolean success = false;
         try {
-            adoptedDoc = newDoc.adoptNode(doc);
+            newDoc.adoptNode(doc);
         } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
         }

@@ -94,7 +94,7 @@ public class DocumentnormalizeDocument07Test extends LoboUnitTest {
         elem = (Element) elemList.item(0);
         oldChild = elem.getFirstChild();
         newChild = doc.createCDATASection("this is not ]]> good");
-        retval = elem.replaceChild(newChild, oldChild);
+        elem.replaceChild(newChild, oldChild);
         domConfig = doc.getDomConfig();
         domConfig.setParameter("split-cdata-sections", Boolean.FALSE);
         /*DOMErrorMonitor */
@@ -109,17 +109,17 @@ public class DocumentnormalizeDocument07Test extends LoboUnitTest {
                 location = error.getLocation();
                 problemNode = location.getRelatedNode();
                 assertSame(newChild, problemNode, "DocumentnormalizeDocument07Assert1");
-                lineNumber = location.getLineNumber();
-                columnNumber = location.getColumnNumber();
-                byteOffset = location.getByteOffset();
-                utf16Offset = location.getUtf16Offset();
-                uri = location.getUri();
+                location.getLineNumber();
+                location.getColumnNumber();
+                location.getByteOffset();
+                location.getUtf16Offset();
+                location.getUri();
                 message = error.getMessage();
                 length = message.length();
                 assertTrue(length > 0, "DocumentnormalizeDocument07Assert2");
-                type = error.getType();
-                relatedData = error.getRelatedData();
-                relatedException = error.getRelatedException();
+                error.getType();
+                error.getRelatedData();
+                error.getRelatedException();
                 errorCount += 1;
             } else {
                 assertEquals(1, severity, "DocumentnormalizeDocument07Assert3");

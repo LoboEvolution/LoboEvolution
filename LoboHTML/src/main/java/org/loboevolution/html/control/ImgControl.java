@@ -46,13 +46,15 @@ import org.loboevolution.net.HttpNetwork;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.Serial;
 
 /**
  * <p>ImgControl class.</p>
  */
 public class ImgControl extends BaseControl {
 
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	private Image image;
 
@@ -207,21 +209,14 @@ public class ImgControl extends BaseControl {
 			alignText = Strings.isNotBlank(style.getVerticalAlign()) ? style.getVerticalAlign() : "";
 		}
 
-		switch (alignText) {
-			case "middle":
-				return AlignValues.MIDDLE.getValue();
-			case "absmiddle":
-				return AlignValues.ABSMIDDLE.getValue();
-			case "top":
-				return AlignValues.TOP.getValue();
-			case "bottom":
-				return AlignValues.BOTTOM.getValue();
-			case "absbottom":
-				return AlignValues.ABSBOTTOM.getValue();
-			default:
-			case "baseline":
-				return AlignValues.BASELINE.getValue();
-		}
+        return switch (alignText) {
+            case "middle" -> AlignValues.MIDDLE.getValue();
+            case "absmiddle" -> AlignValues.ABSMIDDLE.getValue();
+            case "top" -> AlignValues.TOP.getValue();
+            case "bottom" -> AlignValues.BOTTOM.getValue();
+            case "absbottom" -> AlignValues.ABSBOTTOM.getValue();
+            default -> AlignValues.BASELINE.getValue();
+        };
 	}
 	
 	

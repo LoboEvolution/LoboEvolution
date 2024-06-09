@@ -28,6 +28,7 @@ package org.loboevolution.menu;
 
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
+import java.io.Serial;
 
 import javax.swing.Action;
 import javax.swing.JMenu;
@@ -54,6 +55,7 @@ import org.loboevolution.menu.view.*;
  */
 public class MenuBar extends JMenuBar {
 
+	@Serial
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -113,7 +115,7 @@ public class MenuBar extends JMenuBar {
 		menu.addSeparator();
 		menu.add(menuItem("Close", 'C', new ExitAction(frame)));
 		menu.addSeparator();
-		menu.add(menuItemBlank("Blank Window", 'B', new OpenInTabAction(frame, null)));
+		menu.add(menuItemBlank(new OpenInTabAction(frame, null)));
 		return menu;
 	}
 
@@ -238,13 +240,11 @@ public class MenuBar extends JMenuBar {
 	/**
 	 * Menu item blank.
 	 *
-	 * @param title       the title
-	 * @param mnemonic    the mnemonic
-	 * @param action      the action
+	 * @param action the action
 	 * @return the j menu item
 	 */
-	private JMenuItem menuItemBlank(final String title, final char mnemonic, final Action action) {
-		final KeyStroke keyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_B, InputEvent.CTRL_MASK | InputEvent.SHIFT_MASK);
-		return menuItem(title, mnemonic, keyStroke, action);
+	private JMenuItem menuItemBlank(final Action action) {
+		final KeyStroke keyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_B, InputEvent.CTRL_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK);
+		return menuItem("Blank Window", 'B', keyStroke, action);
 	}
 }

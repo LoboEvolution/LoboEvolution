@@ -59,7 +59,7 @@ public class Documentgetdocumenturi03Test extends LoboUnitTest {
         docElem = doc.getDocumentElement();
         rootNS = docElem.getNamespaceURI();
         rootName = docElem.getTagName();
-        newDoc = domImpl.createDocument(rootNS, rootName, nullDocType);
+        newDoc = domImpl.createDocument(rootNS, rootName, null);
         docElemImported = newDoc.importNode(docElem, false);
         importedOwner = docElemImported.getOwnerDocument();
         docURI = importedOwner.getDocumentURI();

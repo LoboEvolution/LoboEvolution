@@ -56,7 +56,7 @@ public class Nodesettextcontent08Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "xhtml:p");
         pi = doc.createProcessingInstruction("PIT", "PID");
-        appendedChild = elem.appendChild(pi);
+        elem.appendChild(pi);
         pi.setTextContent("PID");
         textContent = pi.getTextContent();
         assertEquals("PID", textContent, "Nodesettextcontent08Assert2");

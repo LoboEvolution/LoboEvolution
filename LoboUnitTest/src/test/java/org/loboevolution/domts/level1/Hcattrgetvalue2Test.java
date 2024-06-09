@@ -58,11 +58,11 @@ public class Hcattrgetvalue2Test extends LoboUnitTest {
         acronymList = doc.getElementsByTagName("acronym");
         testNode = (Element) acronymList.item(3);
         attributes = testNode.getAttributes();
-        titleAttr = (Attr) attributes.getNamedItem("class");
+        attributes.getNamedItem("class");
 
         boolean success = false;
         try {
-            alphaRef = doc.createEntityReference("alpha");
+            doc.createEntityReference("alpha");
         } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
         }

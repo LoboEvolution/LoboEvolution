@@ -33,6 +33,7 @@ import lombok.Setter;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 /**
  * The Class Cookie.
@@ -82,7 +83,7 @@ public class Cookie extends NameValuePair {
 	 * @throws java.io.UnsupportedEncodingException if any.
 	 */
 	public String getEncodedName() throws UnsupportedEncodingException {
-		return URLEncoder.encode(this.name, "UTF-8");
+		return URLEncoder.encode(this.name, StandardCharsets.UTF_8);
 	}
 
 	/**
@@ -92,7 +93,7 @@ public class Cookie extends NameValuePair {
 	 * @throws java.io.UnsupportedEncodingException if any.
 	 */
 	public String getEncodedValue() throws UnsupportedEncodingException {
-		return URLEncoder.encode(this.value, "UTF-8");
+		return URLEncoder.encode(this.value, StandardCharsets.UTF_8);
 	}
 
 	/**

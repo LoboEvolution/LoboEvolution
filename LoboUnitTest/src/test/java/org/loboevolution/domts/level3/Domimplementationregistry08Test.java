@@ -53,8 +53,6 @@ public class Domimplementationregistry08Test extends LoboUnitTest {
     public void runTest() {
         final DOMImplementation domImpl;
         final boolean hasFeature;
-        final String nullVersion = null;
-
         final DOMImplementationRegistry domImplRegistry = DOMImplementationRegistry.newInstance();
         assertNotNull(domImplRegistry, "Domimplementationregistry08Assert1");
         domImpl = domImplRegistry.getDOMImplementation("SVG");
@@ -64,7 +62,7 @@ public class Domimplementationregistry08Test extends LoboUnitTest {
             hasFeature = baseImpl.hasFeature("SVG", null);
             assertFalse(hasFeature, "Domimplementationregistry08Assert2");
         } else {
-            hasFeature = domImpl.hasFeature("SVG", nullVersion);
+            hasFeature = domImpl.hasFeature("SVG", null);
             assertTrue(hasFeature, "Domimplementationregistry08Assert3");
         }
 

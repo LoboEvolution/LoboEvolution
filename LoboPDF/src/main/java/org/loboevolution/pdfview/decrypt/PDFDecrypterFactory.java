@@ -198,23 +198,19 @@ public class PDFDecrypterFactory {
             final PDFObject cfmObj = cryptFilter.getDictRef("CFM");
             final String cfm = cfmObj != null ?
                     cfmObj.getStringValue() : "None";
-            final PDFDecrypter cfDecrypter;
-            if ("None".equals(cfm)) {
-                cfDecrypter = IdentityDecrypter.getInstance();
-            } else if ("V2".equals(cfm)) {
-                cfDecrypter = createStandardDecrypter(
+            final PDFDecrypter cfDecrypter = switch (cfm) {
+                case "None" -> IdentityDecrypter.getInstance();
+                case "V2" -> createStandardDecrypter(
                         encryptDict, documentId, password, length,
                         encryptMetadata,
                         StandardDecrypter.EncryptionAlgorithm.RC4);
-            } else if ("AESV2".equals(cfm)) {
-                cfDecrypter = createStandardDecrypter(
+                case "AESV2" -> createStandardDecrypter(
                         encryptDict, documentId, password, length,
                         encryptMetadata,
                         StandardDecrypter.EncryptionAlgorithm.AESV2);
-            } else {
-                throw new UnsupportedOperationException(
+                case null, default -> throw new UnsupportedOperationException(
                         "Unknown CryptFilter method: " + cfm);
-            }
+            };
             cfDecrypters.put(cfName, cfDecrypter);
         }
 

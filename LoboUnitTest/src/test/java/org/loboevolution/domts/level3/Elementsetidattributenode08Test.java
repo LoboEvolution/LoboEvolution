@@ -57,7 +57,7 @@ public class Elementsetidattributenode08Test extends LoboUnitTest {
         final Element pElem;
         NamedNodeMap attributesMap;
         Attr attr;
-        boolean id = false;
+        boolean id;
         Element elem;
         String elemName;
         doc = sampleXmlFile("hc_staff.xml");

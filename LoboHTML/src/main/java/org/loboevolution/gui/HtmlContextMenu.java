@@ -41,6 +41,7 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.net.URI;
 import java.net.URL;
 import java.util.Base64;
 
@@ -143,7 +144,7 @@ public class HtmlContextMenu {
 			try {
 				final IDownload d = bpanel.getBrowserFrame().getDownload();
 				if (!href.contains(";base64,")) {
-					final URL scriptURL = Urls.createURL(new URL(img.getBaseURI()), href);
+					final URL scriptURL = Urls.createURL(new URI(img.getBaseURI()).toURL(), href);
 					d.downloadFile(scriptURL);
 				} else {
 					final String base64 = href.split(";base64,")[1];
@@ -171,7 +172,7 @@ public class HtmlContextMenu {
 		menuItem.setIcon(IconFactory.getInstance().getIcon(SEARCH));
 		menuItem.addActionListener(e -> {
 			try {
-				final URL url = new URL(link.getAbsoluteHref());
+				final URL url = new URI(link.getAbsoluteHref()).toURL();
 				context.linkClicked(url, true);
 			} catch (final Exception e0) {
 				log.error(e0.getMessage(), e0);
@@ -190,7 +191,7 @@ public class HtmlContextMenu {
 		saveImage.addActionListener(e -> {
 			try {
 				final IDownload d = bpanel.getBrowserFrame().getDownload();
-				d.downloadFile(new URL(link.getAbsoluteHref()));
+				d.downloadFile(new URI(link.getAbsoluteHref()).toURL());
 			} catch (final Exception e1) {
 				log.error(e1.getMessage(), e1);
 			}

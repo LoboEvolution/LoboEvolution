@@ -80,12 +80,12 @@ public class Userdatahandler03Test extends LoboUnitTest {
         docElem = doc.getDocumentElement();
         rootNS = docElem.getNamespaceURI();
         rootName = docElem.getTagName();
-        newDoc = domImpl.createDocument(rootNS, rootName, docType);
+        domImpl.createDocument(rootNS, rootName, docType);
         pList = doc.getElementsByTagName("p");
         node = pList.item(0);
-        oldUserData = node.setUserData("greeting", hello, userDataHandlerImpl);
-        oldUserData = node.setUserData("salutation", mister, userDataHandlerImpl);
-        elementNS = node.getNamespaceURI();
+        node.setUserData("greeting", hello, userDataHandlerImpl);
+        node.setUserData("salutation", mister, userDataHandlerImpl);
+        node.getNamespaceURI();
         newNode = doc.importNode(node, true);
         notifications = userDataHandlerImpl.getAllNotifications();
         assertEquals(2, notifications.size(), "Userdatahandler03Assert3");

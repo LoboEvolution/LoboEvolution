@@ -69,7 +69,7 @@ public class Infoset01Test extends LoboUnitTest {
         pList = doc.getElementsByTagName("p");
         pElem = (Element) pList.item(0);
         entRef = doc.createEntityReference("ent1");
-        child = pElem.appendChild(entRef);
+        pElem.appendChild(entRef);
         doc.normalizeDocument();
         assertTrue(errorMonitor.assertLowerSeverity(2), "Infoset01Assert1");
         pList = doc.getElementsByTagName("p");

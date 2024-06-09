@@ -58,8 +58,6 @@ public class Domimplementationregistry12Test extends LoboUnitTest {
         final boolean hasEvents;
         final boolean hasLS;
         final DOMImplementation baseImpl;
-        final String nullVersion = null;
-
         final DOMImplementationRegistry domImplRegistry = DOMImplementationRegistry.newInstance();
         assertNotNull(domImplRegistry, "Domimplementationregistry12Assert1");
         domImpl = domImplRegistry.getDOMImplementation("cOrE 3.0 xMl 3.0 eVeNts 2.0 lS");
@@ -69,7 +67,7 @@ public class Domimplementationregistry12Test extends LoboUnitTest {
             hasCore = baseImpl.hasFeature("Core", "3.0");
             hasXML = baseImpl.hasFeature("XML", "3.0");
             hasEvents = baseImpl.hasFeature("Events", "2.0");
-            hasLS = baseImpl.hasFeature("LS", nullVersion);
+            hasLS = baseImpl.hasFeature("LS", null);
             assertFalse((hasCore & hasXML & hasEvents & hasLS), "Domimplementationregistry12Assert2");
         } else {
             hasCore = domImpl.hasFeature("Core", "3.0");
@@ -78,7 +76,7 @@ public class Domimplementationregistry12Test extends LoboUnitTest {
             assertTrue(hasXML, "Domimplementationregistry12Assert4");
             hasEvents = domImpl.hasFeature("Events", "2.0");
             assertTrue(hasEvents, "Domimplementationregistry12Assert5");
-            hasLS = domImpl.hasFeature("LS", nullVersion);
+            hasLS = domImpl.hasFeature("LS", null);
             assertTrue(hasLS, "Domimplementationregistry12Assert6");
         }
 

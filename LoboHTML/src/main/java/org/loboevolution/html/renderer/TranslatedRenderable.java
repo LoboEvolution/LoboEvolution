@@ -357,8 +357,7 @@ public class TranslatedRenderable extends BaseBoundableRenderable implements RCo
     /** {@inheritDoc} */
     @Override
     public void updateWidgetBounds(final int guiX, final int guiY) {
-        if (translatedChild instanceof RCollection) {
-            final RCollection tc = (RCollection) translatedChild;
+        if (translatedChild instanceof RCollection tc) {
             tc.updateWidgetBounds(guiX, guiY);
         }
 
@@ -375,8 +374,7 @@ public class TranslatedRenderable extends BaseBoundableRenderable implements RCo
     /** {@inheritDoc} */
     @Override
     public void invalidateLayoutDeep() {
-        if (translatedChild instanceof RCollection) {
-            final RCollection tc = (RCollection) translatedChild;
+        if (translatedChild instanceof RCollection tc) {
             tc.invalidateLayoutDeep();
         }
 
@@ -397,8 +395,7 @@ public class TranslatedRenderable extends BaseBoundableRenderable implements RCo
     /** {@inheritDoc} */
     @Override
     public BoundableRenderable getRenderable(final int x, final int y) {
-        if (translatedChild instanceof RCollection) {
-            final RCollection tc = (RCollection) translatedChild;
+        if (translatedChild instanceof RCollection tc) {
             return tc.getRenderable(x, y);
         }
 
@@ -408,8 +405,7 @@ public class TranslatedRenderable extends BaseBoundableRenderable implements RCo
     /** {@inheritDoc} */
     @Override
     public Rectangle getClipBounds() {
-        if (translatedChild instanceof RCollection) {
-            final RCollection tc = (RCollection) translatedChild;
+        if (translatedChild instanceof RCollection tc) {
             return tc.getClipBounds();
         }
 

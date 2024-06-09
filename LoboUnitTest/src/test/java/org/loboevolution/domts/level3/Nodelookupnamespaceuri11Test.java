@@ -52,8 +52,6 @@ public class Nodelookupnamespaceuri11Test extends LoboUnitTest {
         final Element elem;
         final Element importedNode;
         final String namespaceURI;
-        final DocumentType nullDocType = null;
-
         final Element docElem;
         final String rootNS;
         final String rootName;
@@ -62,7 +60,7 @@ public class Nodelookupnamespaceuri11Test extends LoboUnitTest {
         rootNS = docElem.getNamespaceURI();
         rootName = docElem.getTagName();
         domImpl = doc.getImplementation();
-        newDoc = domImpl.createDocument(rootNS, rootName, nullDocType);
+        newDoc = domImpl.createDocument(rootNS, rootName, null);
         elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "dom3:p");
         importedNode = (Element) newDoc.importNode(elem, true);
         namespaceURI = importedNode.lookupNamespaceURI("dom3");

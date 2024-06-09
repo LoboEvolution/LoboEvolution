@@ -43,12 +43,9 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-inputEncoding">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-inputEncoding</a>
  */
-public class Documentgetinputencoding02Test extends LoboUnitTest {
-
+public class Documentgetinputencoding02Test extends LoboUnitTest {    
     /**
      * Runs the test case.
-     *
-     * @throws Throwable Any uncaught exception causes test to fail
      */
     @Test
     public void runTest() {
@@ -56,8 +53,6 @@ public class Documentgetinputencoding02Test extends LoboUnitTest {
         final Document newDoc;
         final DOMImplementation domImpl;
         final String encodingName;
-        final DocumentType nullDocType = null;
-
         final Element docElem;
         final String rootNS;
         final String rootName;
@@ -66,7 +61,7 @@ public class Documentgetinputencoding02Test extends LoboUnitTest {
         docElem = doc.getDocumentElement();
         rootNS = docElem.getNamespaceURI();
         rootName = docElem.getTagName();
-        newDoc = domImpl.createDocument(rootNS, rootName, nullDocType);
+        newDoc = domImpl.createDocument(rootNS, rootName, null);
         encodingName = newDoc.getInputEncoding();
         assertNull(encodingName, "Documentgetinputencoding02Assert2");
     }

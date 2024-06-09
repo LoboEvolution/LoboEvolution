@@ -64,7 +64,7 @@ public class Documentadoptnode24Test extends LoboUnitTest {
 
         doc = sampleXmlFile("hc_staff.xml");
         domImpl = doc.getImplementation();
-        newDoc = domImpl.createDocument("http://www.w3.org/DOM/Test", "dom:test", nullDocType);
+        newDoc = domImpl.createDocument("http://www.w3.org/DOM/Test", "dom:test", null);
         childList = doc.getElementsByTagNameNS("*", "code");
         codeElem = (Element) childList.item(0);
         adoptedNode = newDoc.adoptNode(codeElem);

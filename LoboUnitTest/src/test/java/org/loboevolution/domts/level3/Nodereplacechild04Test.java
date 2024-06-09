@@ -52,13 +52,11 @@ public class Nodereplacechild04Test extends LoboUnitTest {
         docElem = doc.getDocumentElement();
 
         try {
-            replaced = doc.replaceChild(doc, docElem);
+            doc.replaceChild(doc, docElem);
 
         } catch (final DOMException ex) {
             switch (ex.getCode()) {
-                case 8:
-                    break;
-                case 3:
+                case 8, 3:
                     break;
                 default:
                     throw ex;

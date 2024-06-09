@@ -465,7 +465,7 @@ public class HTMLElementTest extends LoboUnitTest {
         body.removeAttribute("CLASS");
         assertEquals("foo bar", attr.getValue());
 
-        foobarelms = (HTMLCollectionImpl) document.getElementsByClassName("foo");
+        document.getElementsByClassName("foo");
         barelms = (HTMLCollectionImpl) document.getElementsByClassName("bar");
 
         assertEquals(0, fooelms.getLength());

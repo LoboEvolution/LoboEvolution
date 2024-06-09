@@ -80,9 +80,9 @@ public class HcnodeinsertbeforedocfragmentTest extends LoboUnitTest {
         newdocFragment = doc.createDocumentFragment();
         newChild1 = doc.createElement("br");
         newChild2 = doc.createElement("b");
-        appendedChild = newdocFragment.appendChild(newChild1);
-        appendedChild = newdocFragment.appendChild(newChild2);
-        insertedNode = employeeNode.insertBefore(newdocFragment, refChild);
+        newdocFragment.appendChild(newChild1);
+        newdocFragment.appendChild(newChild2);
+        employeeNode.insertBefore(newdocFragment, refChild);
         child = childList.item(3);
         childName = child.getNodeName();
         assertEquals("BR", childName, "HcnodeinsertbeforedocfragmentAssert1");

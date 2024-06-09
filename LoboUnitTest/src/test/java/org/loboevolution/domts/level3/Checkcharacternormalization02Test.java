@@ -84,7 +84,7 @@ public class Checkcharacternormalization02Test extends LoboUnitTest {
             pList = doc.getElementsByTagName("p");
             pElem = (Element) pList.item(0);
             text = doc.createTextNode("suçon");
-            retval = pElem.appendChild(text);
+            pElem.appendChild(text);
             doc.normalizeDocument();
             errors = errorMonitor.getErrors();
             for (int indexN100AA = 0; indexN100AA < errors.size(); indexN100AA++) {

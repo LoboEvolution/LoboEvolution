@@ -53,8 +53,6 @@ public class Nodelookupprefix11Test extends LoboUnitTest {
         final Element elem;
         final Element importedNode;
         final String prefix;
-        final DocumentType nullDocType = null;
-
         final Element docElem;
         final String rootNS;
         final String rootName;
@@ -65,7 +63,7 @@ public class Nodelookupprefix11Test extends LoboUnitTest {
         rootName = docElem.getTagName();
         qname = "dom3doc:" + rootName;
         domImpl = doc.getImplementation();
-        newDoc = domImpl.createDocument(rootNS, qname, nullDocType);
+        newDoc = domImpl.createDocument(rootNS, qname, null);
         elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "dom3:br");
         importedNode = (Element) newDoc.importNode(elem, true);
         prefix = importedNode.lookupPrefix("http://www.w3.org/1999/xhtml");

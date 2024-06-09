@@ -56,11 +56,10 @@ public class RenderableSpot {
 	/** {@inheritDoc} */
 	@Override
 	public boolean equals(final Object other) {
-		if (!(other instanceof RenderableSpot)) {
+		if (!(other instanceof RenderableSpot otherRp)) {
 			return false;
 		}
-		final RenderableSpot otherRp = (RenderableSpot) other;
-		return otherRp.renderable == this.renderable && otherRp.x == this.x && otherRp.y == this.y;
+        return otherRp.renderable == this.renderable && otherRp.x == this.x && otherRp.y == this.y;
 	}
 
 	/**

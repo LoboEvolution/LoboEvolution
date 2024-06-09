@@ -34,6 +34,7 @@ import org.loboevolution.html.js.storage.SessionStorage;
 import org.loboevolution.menu.tools.AbstractToolsUI;
 
 import java.awt.*;
+import java.io.Serial;
 
 /**
  * <p>ConsoleUI class.</p>
@@ -41,6 +42,7 @@ import java.awt.*;
 public class ConsoleUI extends AbstractToolsUI {
 
     /** The Constant serialVersionUID. */
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**

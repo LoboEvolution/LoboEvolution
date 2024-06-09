@@ -72,7 +72,7 @@ public class NodeappendchildinvalidnodetypeTest extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                appendedChild = rootNode.appendChild(newChild);
+                rootNode.appendChild(newChild);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.HIERARCHY_REQUEST_ERR);
             }

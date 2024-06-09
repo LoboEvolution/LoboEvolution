@@ -63,7 +63,7 @@ public class Noderemovechild20Test extends LoboUnitTest {
         parentList = doc.getElementsByTagName("p");
         parent = (Element) parentList.item(0);
         child = doc.createElementNS("http://www.w3.org/1999/xhtml", "dom3:br");
-        appendedChild = parent.appendChild(child);
+        parent.appendChild(child);
         removed = (Element) parent.removeChild(child);
         removedName = removed.getNodeName();
         assertEquals("dom3:br", removedName, "Noderemovechild20Assert3");
@@ -72,7 +72,7 @@ public class Noderemovechild20Test extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                removedNode = parent.removeChild(clonedChild);
+                parent.removeChild(clonedChild);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
             }

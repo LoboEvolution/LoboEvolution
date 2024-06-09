@@ -30,6 +30,7 @@ import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.HeadlessException;
+import java.io.Serial;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -54,7 +55,8 @@ import com.jtattoo.plaf.lobo.LoboLabel;
 public class ItemEditor<T> extends JFrame {
 
 	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 	
 	/** The cancel button. */
 	private final LoboButton cancelButton = new LoboButton();

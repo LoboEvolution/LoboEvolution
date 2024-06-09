@@ -70,7 +70,7 @@ public class NodeappendchildchildexistsTest extends LoboUnitTest {
         childNode = elementList.item(1);
         newChild = childNode.getFirstChild();
         initialName = newChild.getNodeName();
-        appendedChild = childNode.appendChild(newChild);
+        childNode.appendChild(newChild);
         fchild = childNode.getFirstChild();
         fchildName = fchild.getNodeName();
         lchild = childNode.getLastChild();

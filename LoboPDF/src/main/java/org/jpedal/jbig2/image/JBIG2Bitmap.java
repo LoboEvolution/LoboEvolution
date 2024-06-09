@@ -884,57 +884,16 @@ public final class JBIG2Bitmap {
     public void combine(final JBIG2Bitmap bitmap, final int x, final int y, final long combOp) {
         final int srcWidth = bitmap.width;
         int srcHeight = bitmap.height;
-
-//		int maxRow = y + srcHeight;
-//		int maxCol = x + srcWidth;
-//
-//		for (int row = y; row < maxRow; row++) {
-//			for (int col = x; col < maxCol; srcCol += 8, col += 8) {
-//
-//				byte srcPixelByte = bitmap.getPixelByte(srcCol, srcRow);
-//				byte dstPixelByte = getPixelByte(col, row);
-//				byte endPixelByte;
-//
-//				switch ((int) combOp) {
-//				case 0: // or
-//					endPixelByte = (byte) (dstPixelByte | srcPixelByte);
-//					break;
-//				case 1: // and
-//					endPixelByte = (byte) (dstPixelByte & srcPixelByte);
-//					break;
-//				case 2: // xor
-//					endPixelByte = (byte) (dstPixelByte ^ srcPixelByte);
-//					break;
-//				case 3: // xnor
-//					endPixelByte = (byte) ~(dstPixelByte ^ srcPixelByte);
-//					break;
-//				case 4: // replace
-//				default:
-//					endPixelByte = srcPixelByte;
-//					break;
-//				}
-//				int used = maxCol - col;
-//				if (used < 8) {
-//					// mask bits
-//					endPixelByte = (byte) ((endPixelByte & (0xFF >> (8 - used))) | (dstPixelByte & (0xFF << (used))));
-//				}
-//				setPixelByte(col, row, endPixelByte);
-//			}
-//
-//			srcCol = 0;
-//			srcRow++;
         int minWidth = srcWidth;
         if (x + srcWidth > width) {
-            //Should not happen but occurs sometimes because there is something wrong with halftone pics
             minWidth = width - x;
         }
         if (y + srcHeight > height) {
-            //Should not happen but occurs sometimes because there is something wrong with halftone pics
             srcHeight = height - y;
         }
 
         int srcIndx = 0;
-        int indx = y * width + x;
+        int indx;
         if (combOp == 0) {
             if (x == 0 && y == 0 && srcHeight == height && srcWidth == width) {
                 for (int i = 0; i < data.w.length; i++) {
@@ -944,11 +903,6 @@ public final class JBIG2Bitmap {
             for (int row = y; row < y + srcHeight; row++) {
                 indx = row * width + x;
                 data.or(indx, bitmap.data, srcIndx, minWidth);
-				/*for (int col = 0; col < minWidth; col++) {
-					if (bitmap.data.get(srcIndx + col)) data.set(indx);
-					//data.set(indx, bitmap.data.get(srcIndx + col) || data.get(indx));
-					indx++;
-				}*/
                 srcIndx += srcWidth;
             }
         } else if (combOp == 1) {

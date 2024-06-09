@@ -39,11 +39,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Invoke the renameNode method to rename the class attribute node of the
- * second element whose localName is acronym and namespaceURI http://www.nist.gov
- * with the new namespaceURI as http://www.w3.org/DOM/Test and name as prefi0x:renamedNode.
+ * second element whose localName is acronym and namespaceURI <a href="http://www.nist.gov">...</a>
+ * with the new namespaceURI as <a href="http://www.w3.org/DOM/Test">...</a> and name as prefi0x:renamedNode.
  * Check if this attribute has been renamed successfully by verifying the
  * nodeName, namespaceURI, nodeType attributes of the renamed node.
-
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-renameNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-renameNode</a>
  */
 public class Documentrenamenode02Test extends LoboUnitTest {
@@ -63,7 +62,7 @@ public class Documentrenamenode02Test extends LoboUnitTest {
         renamedclass = doc.renameNode(attr, "http://www.w3.org/DOM/Test", "prefi0x:renamedNode");
         nodeName = renamedclass.getNodeName();
         namespaceURI = renamedclass.getNamespaceURI();
-        nodeType = renamedclass.getNodeType();
+        renamedclass.getNodeType();
         assertEquals("prefi0x:renamedNode", nodeName, "Documentrenamenode02Assert2");
         assertEquals("http://www.w3.org/DOM/Test", namespaceURI, "Documentrenamenode02Assert3");
     }

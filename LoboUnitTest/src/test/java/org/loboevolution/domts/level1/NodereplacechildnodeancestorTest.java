@@ -78,7 +78,7 @@ public class NodereplacechildnodeancestorTest extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                replacedNode = employeeNode.replaceChild(newChild, oldChild);
+                employeeNode.replaceChild(newChild, oldChild);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.HIERARCHY_REQUEST_ERR);
             }

@@ -64,18 +64,16 @@ public class Nodereplacechild08Test extends LoboUnitTest {
         rootName = docElem.getTagName();
         rootNS = docElem.getNamespaceURI();
         domImpl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(), true));
-        doc2 = domImpl.createDocument(rootNS, rootName, nullDocType);
+        doc2 = domImpl.createDocument(rootNS, rootName, null);
         elem = doc2.createElementNS(rootNS, rootName);
 
         try {
-            replaced = doc.replaceChild(elem, docElem);
+            doc.replaceChild(elem, docElem);
             fail("throw_WRONG_DOCUMENT_OR_NOT_SUPPORTED");
 
         } catch (final DOMException ex) {
             switch (ex.getCode()) {
-                case 4:
-                    break;
-                case 9:
+                case 4, 9:
                     break;
                 default:
                     throw ex;

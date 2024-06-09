@@ -52,19 +52,17 @@ public class Domimplementationregistry10Test extends LoboUnitTest {
 
         final DOMImplementation domImpl;
         final boolean hasFeature;
-        DOMImplementation baseImpl = null;
-        final String nullVersion = null;
-
+        DOMImplementation baseImpl;
         final DOMImplementationRegistry domImplRegistry = DOMImplementationRegistry.newInstance();
         assertNotNull(domImplRegistry, "Domimplementationregistry10Assert1");
         domImpl = domImplRegistry.getDOMImplementation("LS");
 
         if ((domImpl == null)) {
             baseImpl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(), true));
-            hasFeature = baseImpl.hasFeature("LS", nullVersion);
+            hasFeature = baseImpl.hasFeature("LS", null);
             assertFalse(hasFeature, "Domimplementationregistry10Assert2");
         } else {
-            hasFeature = domImpl.hasFeature("LS", nullVersion);
+            hasFeature = domImpl.hasFeature("LS", null);
             assertTrue(hasFeature, "Domimplementationregistry10Assert3");
         }
     }

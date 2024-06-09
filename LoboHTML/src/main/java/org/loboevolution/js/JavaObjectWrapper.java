@@ -32,6 +32,7 @@ import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 
+import java.io.Serial;
 import java.lang.reflect.Method;
 
 /**
@@ -41,7 +42,8 @@ import java.lang.reflect.Method;
 public class JavaObjectWrapper extends ScriptableObject {
 
 	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	/** The delegate. */
 	private final Object delegate;

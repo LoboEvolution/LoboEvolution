@@ -69,7 +69,7 @@ public class Textiselementcontentwhitespace06Test extends LoboUnitTest {
             bodyElem = (Element) bodyList.item(0);
             refChild = bodyElem.getFirstChild();
             blankNode = doc.createTextNode("     ");
-            replacedNode = bodyElem.insertBefore(blankNode, refChild);
+            bodyElem.insertBefore(blankNode, refChild);
             doc.normalizeDocument();
             assertTrue(errorMonitor.assertLowerSeverity(2), "Textiselementcontentwhitespace06Assert2");
             bodyList = doc.getElementsByTagName("body");

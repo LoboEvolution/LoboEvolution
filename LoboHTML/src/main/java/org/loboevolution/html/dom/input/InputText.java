@@ -48,6 +48,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -240,7 +241,8 @@ public class InputText extends BasicInput {
 
 	private final class LimitedDocument extends PlainDocument {
 
-		private static final long serialVersionUID = 1L;
+		@Serial
+        private static final long serialVersionUID = 1L;
 
 		@Override
 		public void insertString(final int offs, final String str, final AttributeSet a) throws BadLocationException {

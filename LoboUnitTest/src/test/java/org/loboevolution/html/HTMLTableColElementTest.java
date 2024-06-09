@@ -316,8 +316,6 @@ public class HTMLTableColElementTest extends LoboUnitTest {
 
     /**
      * Regression test for bug 2948498.
-     *
-     * @throws Exception if an error occurs
      */
     @Test
     @Alerts({"null", "string"})

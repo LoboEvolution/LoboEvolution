@@ -154,18 +154,13 @@ public class HtmlInsets {
 	}
 
 	private int getInsetPixels(final int value, final int type, final int availSize, final int autoValue) {
-		switch (type) {
-			case TYPE_PIXELS:
-				return value;
-			case TYPE_UNDEFINED:
-				return 0;
-			case TYPE_AUTO:
-				return autoValue;
-			case TYPE_PERCENT:
-				return availSize * value / 100;
-			default:
-				throw new IllegalStateException();
-		}
+        return switch (type) {
+            case TYPE_PIXELS -> value;
+            case TYPE_UNDEFINED -> 0;
+            case TYPE_AUTO -> autoValue;
+            case TYPE_PERCENT -> availSize * value / 100;
+            default -> throw new IllegalStateException();
+        };
 	}
 
 	/** {@inheritDoc} */

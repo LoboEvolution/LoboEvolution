@@ -64,8 +64,6 @@ public class Documentadoptnode06Test extends LoboUnitTest {
         final boolean isSpecified;
         final String adoptedTextNodeValue;
         final String adoptedEntRefNodeValue;
-        final DocumentType nullDocType = null;
-
         Node appendedChild;
         final Element docElem;
         final String rootNS;
@@ -76,12 +74,12 @@ public class Documentadoptnode06Test extends LoboUnitTest {
         rootName = docElem.getTagName();
         rootNS = docElem.getNamespaceURI();
         domImpl = doc.getImplementation();
-        newDoc = domImpl.createDocument(rootNS, rootName, nullDocType);
+        newDoc = domImpl.createDocument(rootNS, rootName, null);
         newAttr = doc.createAttributeNS(xmlNS, "xml:lang");
         newText = doc.createTextNode("Text Node");
         newEntRef = doc.createEntityReference("alpha");
-        appendedChild = newAttr.appendChild(newText);
-        appendedChild = newAttr.appendChild(newEntRef);
+        newAttr.appendChild(newText);
+        newAttr.appendChild(newEntRef);
         adoptedAttr = (Attr) newDoc.adoptNode(newAttr);
 
         if ((adoptedAttr != null)) {

@@ -40,10 +40,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * Returns a NodeList of all the Elements with a given local name and namespace URI in the
  * order in which they are encountered in a preorder traversal of the Document tree.
  * Invoke getElementsByTagNameNS on the documentElement with the following values:
- * namespaceURI: 'http://www.altavista.com'
+ * namespaceURI: '<a href="http://www.altavista.com">...</a>'
  * localName: '*'.
  * Verify if this returns a nodeList of 1 elements.
-
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-getElBTNNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-getElBTNNS</a>
  */
 public class Elementgetelementsbytagnamens05Test extends LoboUnitTest {

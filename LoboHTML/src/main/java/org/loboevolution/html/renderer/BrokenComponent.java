@@ -27,6 +27,7 @@
 package org.loboevolution.html.renderer;
 
 import java.awt.*;
+import java.io.Serial;
 
 /**
  * <p>BrokenComponent class.</p>
@@ -36,7 +37,8 @@ import java.awt.*;
  */
 public class BrokenComponent extends Component {
 
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	/** {@inheritDoc} */
 	@Override

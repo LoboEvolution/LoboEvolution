@@ -28,6 +28,7 @@ package org.loboevolution.menu.file;
 
 import java.awt.event.ActionEvent;
 import java.io.File;
+import java.io.Serial;
 
 import javax.swing.AbstractAction;
 import javax.swing.JFileChooser;
@@ -47,7 +48,8 @@ import org.loboevolution.store.TabStore;
  */
 public class OpenFileAction extends AbstractAction {
 
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	private final BrowserFrame frame;
 

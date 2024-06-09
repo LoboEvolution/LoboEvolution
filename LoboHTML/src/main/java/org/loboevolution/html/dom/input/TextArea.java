@@ -41,6 +41,7 @@ import java.awt.*;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseEvent;
+import java.io.Serial;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -181,7 +182,8 @@ public class TextArea extends BasicInput {
 	
 	private final class LimitedDocument extends PlainDocument {
 
-		private static final long serialVersionUID = 1L;
+		@Serial
+        private static final long serialVersionUID = 1L;
 
 		@Override
 		public void insertString(final int offs, final String str, final AttributeSet a) throws BadLocationException {

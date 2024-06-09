@@ -123,38 +123,24 @@ public class TrueTypeTable {
 
         final int tag = stringToTag(tagString);
 
-        switch (tag) {
-            case CMAP_TABLE: // cmap table
-                outTable = new CmapTable();
-                break;
-            case GLYF_TABLE:
-                outTable = new GlyfTable(ttf);
-                break;
-            case HEAD_TABLE: // head table
-                outTable = new HeadTable();
-                break;
-            case HHEA_TABLE:  // hhea table
-                outTable = new HheaTable();
-                break;
-            case HMTX_TABLE:
-                outTable = new HmtxTable(ttf);
-                break;
-            case LOCA_TABLE:
-                outTable = new LocaTable(ttf);
-                break;
-            case MAXP_TABLE:  // maxp table
-                outTable = new MaxpTable();
-                break;
-            case NAME_TABLE: // name table
-                outTable = new NameTable();
-                break;
-            case POST_TABLE: // post table
-                outTable = new PostTable();
-                break;
-            default:
-                outTable = new TrueTypeTable(tag);
-                break;
-        }
+        outTable = switch (tag) {
+            case CMAP_TABLE -> // cmap table
+                    new CmapTable();
+            case GLYF_TABLE -> new GlyfTable(ttf);
+            case HEAD_TABLE -> // head table
+                    new HeadTable();
+            case HHEA_TABLE ->  // hhea table
+                    new HheaTable();
+            case HMTX_TABLE -> new HmtxTable(ttf);
+            case LOCA_TABLE -> new LocaTable(ttf);
+            case MAXP_TABLE ->  // maxp table
+                    new MaxpTable();
+            case NAME_TABLE -> // name table
+                    new NameTable();
+            case POST_TABLE -> // post table
+                    new PostTable();
+            default -> new TrueTypeTable(tag);
+        };
 
         if (data != null) {
             outTable.setData(data);

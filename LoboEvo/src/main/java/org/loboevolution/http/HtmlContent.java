@@ -68,9 +68,8 @@ public class HtmlContent {
 		}
 
 		nodeList.forEach(node -> {
-			if (node instanceof HTMLElement) {
-				final HTMLElement element = (HTMLElement) node;
-				String src = element.getAttribute("src");
+			if (node instanceof HTMLElement element) {
+                String src = element.getAttribute("src");
 				if (Strings.isNotBlank(src)) {
 					if (!Urls.isAbsolute(src)) {
 						src = doc.getFullURL(src).toString();
@@ -100,9 +99,8 @@ public class HtmlContent {
 		}
 		
 		nodeList.forEach(node -> {
-			if (node instanceof HTMLElement) {
-				final HTMLElement element = (HTMLElement) node;
-				String src = element.getAttribute("src");
+			if (node instanceof HTMLElement element) {
+                String src = element.getAttribute("src");
 				if (Strings.isNotBlank(src)) {
 					if (!Urls.isAbsolute(src)) {
 						src = doc.getFullURL(src).toString();
@@ -118,9 +116,8 @@ public class HtmlContent {
 
 		nodeList = (HTMLCollectionImpl) doc.getElementsByTagName("link");
 		nodeList.forEach(node -> {
-			if (node instanceof HTMLElement) {
-				final HTMLElement element = (HTMLElement) node;
-				final String rel = element.getAttribute("rel");
+			if (node instanceof HTMLElement element) {
+                final String rel = element.getAttribute("rel");
 				String href = element.getAttribute("href");
 				if ("icon".equalsIgnoreCase(rel) && Strings.isNotBlank(href)) {
 					if (!Urls.isAbsolute(href)) {
@@ -151,9 +148,8 @@ public class HtmlContent {
 		}
 
 		nodeList.forEach(node -> {
-			if (node instanceof HTMLElement) {
-				final HTMLElement element = (HTMLElement) node;
-				infoList.add(MetaInfo.builder()
+			if (node instanceof HTMLElement element) {
+                infoList.add(MetaInfo.builder()
 						.name(element.getAttribute("name"))
 						.itemprop(element.getAttribute("itemprop"))
 						.property(element.getAttribute("property"))
@@ -182,9 +178,8 @@ public class HtmlContent {
 		}
 
 		nodeList.forEach(node -> {
-			if (node instanceof HTMLElement) {
-				final HTMLElement element = (HTMLElement) node;
-				final String rel = element.getAttribute("rel");
+			if (node instanceof HTMLElement element) {
+                final String rel = element.getAttribute("rel");
 				String href = element.getAttribute("href");
 				if ("stylesheet".equalsIgnoreCase(rel) && Strings.isNotBlank(href)) {
 					if (!Urls.isAbsolute(href)) {

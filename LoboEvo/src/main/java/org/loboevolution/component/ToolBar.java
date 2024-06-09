@@ -33,6 +33,7 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,7 +56,8 @@ import org.loboevolution.store.BookmarksStore;
 @Getter
 public class ToolBar extends JToolBar implements IToolBar {
 
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	private JTextField addressBar;
 
@@ -76,7 +78,8 @@ public class ToolBar extends JToolBar implements IToolBar {
 		setFloatable(false);
 
 		this.addressBar = new JTextField() {
-			private static final long serialVersionUID = 1L;
+			@Serial
+            private static final long serialVersionUID = 1L;
 
 			@Override
 			protected void paintComponent(final Graphics g) {

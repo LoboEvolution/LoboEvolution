@@ -106,7 +106,7 @@ public class CreateElementNS03Test extends LoboUnitTest {
             {
                 boolean success = false;
                 try {
-                    newElement = doc.createElementNS(namespaceURI, qualifiedName);
+                    doc.createElementNS(namespaceURI, qualifiedName);
                 } catch (final DOMException ex) {
                     success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
                 }

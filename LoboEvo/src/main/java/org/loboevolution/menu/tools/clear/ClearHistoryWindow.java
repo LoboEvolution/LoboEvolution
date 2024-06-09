@@ -27,6 +27,7 @@
 package org.loboevolution.menu.tools.clear;
 
 import java.awt.Component;
+import java.io.Serial;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -45,6 +46,7 @@ import com.jtattoo.plaf.lobo.LoboPanel;
  */
 public class ClearHistoryWindow extends JFrame {
 
+	@Serial
 	private static final long serialVersionUID = 1L;
 
 	/** The bookmark panel. */

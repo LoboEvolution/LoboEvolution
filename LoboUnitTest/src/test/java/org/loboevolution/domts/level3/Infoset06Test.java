@@ -75,7 +75,7 @@ public class Infoset06Test extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                elem = doc.createElementNS("http://www.example.org/domts/wellformed01", "LegalNameࢎ");
+                doc.createElementNS("http://www.example.org/domts/wellformed01", "LegalNameࢎ");
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
             }
@@ -92,7 +92,7 @@ public class Infoset06Test extends LoboUnitTest {
             throw ex;
         }
         elem = doc.createElementNS("http://www.example.org/domts/wellformed01", "LegalName");
-        retval = doc.appendChild(elem);
+        doc.appendChild(elem);
         doc.setXmlVersion("1.0");
         domConfig = doc.getDomConfig();
         domConfig.setParameter("infoset", Boolean.TRUE);

@@ -62,7 +62,7 @@ public class Nodeinsertbefore21Test extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                inserted = element.insertBefore(newNode, refNode);
+                element.insertBefore(newNode, refNode);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.HIERARCHY_REQUEST_ERR);
             }

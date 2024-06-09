@@ -210,15 +210,11 @@ public class RBlockScroll {
      * @return a a {@link java.lang.Boolean} object.
      */
     public boolean scrollBy(final int orientation, final double offset) {
-        switch (orientation) {
-            case JScrollBar.HORIZONTAL:
-                return scrollHorizontalTo(- offset);
-            case JScrollBar.VERTICAL:
-                return scrollVerticalTo(- offset);
-            default:
-                break;
-        }
-        return false;
+        return switch (orientation) {
+            case JScrollBar.HORIZONTAL -> scrollHorizontalTo(-offset);
+            case JScrollBar.VERTICAL -> scrollVerticalTo(-offset);
+            default -> false;
+        };
     }
 
     private void scrollToSBValue(final int orientation, final double value) {
@@ -298,8 +294,7 @@ public class RBlockScroll {
 
         public void stateChanged(final ChangeEvent changeEvent) {
             final Object source = changeEvent.getSource();
-            if (source instanceof BoundedRangeModel) {
-                final BoundedRangeModel aModel = (BoundedRangeModel) source;
+            if (source instanceof BoundedRangeModel aModel) {
                 if (!aModel.getValueIsAdjusting()) {
                     if (orientation == JScrollBar.HORIZONTAL) rBlock.rendererContext.setScrollx(aModel.getValue());
                     if (orientation == JScrollBar.VERTICAL) rBlock.rendererContext.setScrolly(aModel.getValue());

@@ -58,8 +58,8 @@ public class Nodelookupnamespaceuri15Test extends LoboUnitTest {
         elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "dom3:p");
         comment = doc.createComment("Text");
         clonedComment = (Comment) comment.cloneNode(true);
-        appendedChild = elem.appendChild(clonedComment);
-        appendedChild = docElem.appendChild(elem);
+        elem.appendChild(clonedComment);
+        docElem.appendChild(elem);
         namespaceURI = clonedComment.lookupNamespaceURI("dom3");
         assertEquals("http://www.w3.org/1999/xhtml", namespaceURI, "Nodelookupnamespaceuri15Assert2");
     }

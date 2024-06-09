@@ -31,6 +31,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -43,6 +44,7 @@ import java.io.Serializable;
 public class BookmarkInfo implements Serializable {
 
 	/** The Constant serialVersionUID. */
+	@Serial
 	private static final long serialVersionUID = 2257845000007000400L;
 
 	/** The description. */

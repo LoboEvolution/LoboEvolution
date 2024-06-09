@@ -55,18 +55,16 @@ public class Domimplementationregistry11Test extends LoboUnitTest {
         final DOMImplementation domImpl;
         final boolean hasFeature;
         final DOMImplementation baseImpl;
-        final String nullVersion = null;
-
         final DOMImplementationRegistry domImplRegistry = DOMImplementationRegistry.newInstance();
         assertNotNull(domImplRegistry, "Domimplementationregistry11Assert1");
         domImpl = domImplRegistry.getDOMImplementation("XPath");
 
         if ((domImpl == null)) {
             baseImpl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(), true));
-            hasFeature = baseImpl.hasFeature("XPath", nullVersion);
+            hasFeature = baseImpl.hasFeature("XPath", null);
             assertFalse(hasFeature, "Domimplementationregistry11Assert2");
         } else {
-            hasFeature = domImpl.hasFeature("XPath", nullVersion);
+            hasFeature = domImpl.hasFeature("XPath", null);
             assertTrue(hasFeature, "Domimplementationregistry11Assert3");
         }
 

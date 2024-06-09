@@ -65,7 +65,7 @@ public class Documentrenamenode28Test extends LoboUnitTest {
 
         boolean success = false;
         try {
-            renamedEntityNode = doc.renameNode(entity, "http://www.w3.org/DOM/Test", "beta");
+            doc.renameNode(entity, "http://www.w3.org/DOM/Test", "beta");
         } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
         }
@@ -74,7 +74,7 @@ public class Documentrenamenode28Test extends LoboUnitTest {
 
         success = false;
         try {
-            renamedNotationNode = doc.renameNode(notation, "http://www.w3.org/DOM/Test", "notation2");
+            doc.renameNode(notation, "http://www.w3.org/DOM/Test", "notation2");
         } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
         }

@@ -72,9 +72,9 @@ public class DocumentnormalizeDocument08Test extends LoboUnitTest {
         elem = (Element) elemList.item(0);
         newChild = doc.createCDATASection("this is not ]]> good");
         oldChild = elem.getFirstChild();
-        retval = elem.replaceChild(newChild, oldChild);
+        elem.replaceChild(newChild, oldChild);
         newChild = doc.createCDATASection("this is not ]]> good");
-        retval = elem.appendChild(newChild);
+        elem.appendChild(newChild);
         domConfig = doc.getDomConfig();
         domConfig.setParameter("split-cdata-sections", Boolean.TRUE);
         /*DOMErrorMonitor */

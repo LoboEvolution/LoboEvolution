@@ -68,14 +68,14 @@ public class HcelementinuseattributeerrTest extends LoboUnitTest {
         addressElementList = doc.getElementsByTagName("body");
         testAddress = (Element) addressElementList.item(0);
         newElement = doc.createElement("p");
-        appendedChild = testAddress.appendChild(newElement);
+        testAddress.appendChild(newElement);
         newAttribute = doc.createAttribute("title");
-        setAttr1 = newElement.setAttributeNode(newAttribute);
+        newElement.setAttributeNode(newAttribute);
 
         {
             boolean success = false;
             try {
-                setAttr2 = testAddress.setAttributeNode(newAttribute);
+                testAddress.setAttributeNode(newAttribute);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.INUSE_ATTRIBUTE_ERR);
             }

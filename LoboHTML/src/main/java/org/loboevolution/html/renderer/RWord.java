@@ -284,20 +284,13 @@ final class RWord extends BaseBoundableRenderable {
 	}
 
 	private String transformText(final String word, final int textTransform) {
-		final String string;
-		switch (textTransform) {
-		case RenderState.TEXTTRANSFORM_CAPITALIZE:
-			string = Character.toTitleCase(word.charAt(0)) + word.substring(1).toLowerCase();
-			break;
-		case RenderState.TEXTTRANSFORM_LOWERCASE:
-			string = word.toLowerCase();
-			break;
-		case RenderState.TEXTTRANSFORM_UPPERCASE:
-			string = word.toUpperCase();
-			break;
-		default:
-			string = word;
-		}
-		return string;
+		final String string = switch (textTransform) {
+            case RenderState.TEXTTRANSFORM_CAPITALIZE ->
+                    Character.toTitleCase(word.charAt(0)) + word.substring(1).toLowerCase();
+            case RenderState.TEXTTRANSFORM_LOWERCASE -> word.toLowerCase();
+            case RenderState.TEXTTRANSFORM_UPPERCASE -> word.toUpperCase();
+            default -> word;
+        };
+        return string;
 	}
 }

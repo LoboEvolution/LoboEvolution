@@ -82,7 +82,7 @@ public class Nodeissupported02Test extends LoboUnitTest {
             featureCore = (String) featuresCore.get(indexN1007D);
             success = attribute.isSupported(featureCore, version);
             assertTrue(success);
-            success = attribute.isSupported(featureCore, version1);
+            attribute.isSupported(featureCore, version1);
             success = attribute.isSupported(featureCore, version2);
             assertTrue(success);
         }

@@ -52,7 +52,7 @@ public class Noderemovechild09Test extends LoboUnitTest {
         final Node appendedChild;
         doc = sampleXmlFile("hc_staff.xml");
         pi = doc.createProcessingInstruction("PIT", "PID");
-        appendedChild = doc.appendChild(pi);
+        doc.appendChild(pi);
         removedPi = (ProcessingInstruction) doc.removeChild(pi);
         target = removedPi.getTarget();
         assertEquals("PIT", target, "Noderemovechild09Assert2");

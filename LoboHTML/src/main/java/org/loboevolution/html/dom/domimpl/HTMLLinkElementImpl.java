@@ -45,10 +45,8 @@ import org.loboevolution.html.dom.UserDataHandler;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.Duration;
 import java.time.Instant;
@@ -102,7 +100,7 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 
 				if ((isStyleSheet || isAltStyleSheet)) {
 					String title = getAttribute("title");
-					final URL baseURL = new URL(baseURI);
+					final URL baseURL = new URI(baseURI).toURL();
 					final URL scriptURL = Urls.createURL(baseURL, href);
 					if (Strings.isBlank(title)) {
 						final URI uri = scriptURL.toURI();
@@ -120,7 +118,7 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 						if (styles.isEmpty()) {
 							config.insertStyle(title, href, currentUrl, isStyleSheet ? 1 : 0);
 						} else {
-							styleEnabled = styles.get(0);
+							styleEnabled = styles.getFirst();
 						}
 					}
 
@@ -139,7 +137,7 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 									exist = Urls.exists(scriptURL);
 								} else {
 									fileName = href.substring(href.lastIndexOf('/') + 1);
-									exist = Urls.exists(new URL(href));
+									exist = Urls.exists(new URI(href).toURL());
 								}
 
 								sheet.setHref(exist ? fileName : null);
@@ -164,8 +162,8 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 					}
 				}
 
-			} catch (final MalformedURLException | FileNotFoundException mfe) {
-				this.warn("Will not parse CSS. URI=[" + getHref() + "] with BaseURI=[" + baseURI + "] does not appear to be a valid URI.");
+			} catch (Exception ex) {
+				this.warn("Will not parse CSS. URI=[" + getHref() + "] with BaseURI=[" + baseURI + "] does not appear to be a valid URI.", ex);
 			} catch (final Throwable err) {
 				this.warn("Unable to parse CSS. URI=[" + getHref() + "].", err);
 			}

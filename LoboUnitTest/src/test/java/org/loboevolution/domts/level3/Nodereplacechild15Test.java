@@ -59,11 +59,11 @@ public class Nodereplacechild15Test extends LoboUnitTest {
         rootName = docElem.getTagName();
         rootNS = docElem.getNamespaceURI();
         elem = doc.createElementNS(rootNS, rootName);
-        domImpl = doc.getImplementation();
+        doc.getImplementation();
         docFrag = doc.createDocumentFragment();
         elem2 = doc.createElementNS(rootNS, rootName);
         elem2.setAttribute("title", "new element");
-        appendedChild = docFrag.appendChild(elem2);
+        docFrag.appendChild(elem2);
         replaced = (Element) docFrag.replaceChild(elem, elem2);
         title = replaced.getAttribute("title");
         assertEquals("new element", title, "Nodereplacechild15Assert2");

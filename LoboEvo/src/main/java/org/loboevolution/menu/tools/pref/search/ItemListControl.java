@@ -26,6 +26,7 @@
 
 package org.loboevolution.menu.tools.pref.search;
 
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -49,7 +50,8 @@ import com.jtattoo.plaf.lobo.LoboButton;
 public class ItemListControl<T> extends JComponent {
 
 	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	/** The combo box. */
 	private final JComboBox<T> comboBox;

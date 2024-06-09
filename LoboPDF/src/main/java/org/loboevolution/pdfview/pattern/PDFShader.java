@@ -170,23 +170,11 @@ public abstract class PDFShader {
         final int type = typeObj.getIntValue();
 
         // create the shader
-        switch (type) {
-            case AXIAL_SHADING:
-                shader = new ShaderType2();
-                break;
-
-            case RADIAL_SHADING:
-                shader = new ShaderType3();
-                break;
-
-            case FUNCTION_SHADING:
-            case FREE_FORM_SHADING:
-            case LATTICE_SHADING:
-            case COONS_PATCH_MESH_SHADING:
-            case TENSOR_PRODUCTS_MESH_SHADING:
-            default:
-                shader = new DummyShader(type);
-        }
+        shader = switch (type) {
+            case AXIAL_SHADING -> new ShaderType2();
+            case RADIAL_SHADING -> new ShaderType3();
+            default -> new DummyShader(type);
+        };
 
         // read the color space (required)
         final PDFObject csObj = shaderObj.getDictRef("ColorSpace");

@@ -88,11 +88,9 @@ public class ImageInfo {
      */
     @Override
     public boolean equals(final Object o) {
-        if (!(o instanceof ImageInfo)) {
+        if (!(o instanceof ImageInfo ii)) {
             return false;
         }
-
-        final ImageInfo ii = (ImageInfo) o;
 
         if (this.width != ii.width || this.height != ii.height) {
             return false;

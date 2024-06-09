@@ -58,7 +58,7 @@ public class DOMTreeModel implements TreeModel {
     /**
      * Description of the Field
      */
-    private final List listeners = new ArrayList<>();
+    private final List<TreeModelListener> listeners = new ArrayList<>();
 
     /**
      * Constructor for the DOMTreeModel object

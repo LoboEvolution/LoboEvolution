@@ -30,6 +30,7 @@ import org.loboevolution.component.BrowserFrame;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.io.Serial;
 
 /**
  * <p>ShowRecentDownloadAction class.</p>
@@ -39,6 +40,7 @@ import java.awt.event.ActionEvent;
  */
 public class ShowRecentDownloadAction extends AbstractAction {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     private final BrowserFrame frame;

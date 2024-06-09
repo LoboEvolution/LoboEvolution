@@ -27,6 +27,7 @@
 package org.loboevolution.menu;
 
 import java.awt.event.ActionEvent;
+import java.io.Serial;
 
 import javax.swing.AbstractAction;
 import javax.swing.JComponent;
@@ -47,7 +48,8 @@ import org.loboevolution.welcome.WelcomePanel;
  */
 public class OpenInTabAction extends AbstractAction {
 
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	private final String address;
 

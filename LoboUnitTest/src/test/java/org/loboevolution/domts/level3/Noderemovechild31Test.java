@@ -64,21 +64,19 @@ public class Noderemovechild31Test extends LoboUnitTest {
         attrsMap = elem.getAttributes();
         parent = (Attr) attrsMap.getNamedItem("class");
         entRef = doc.createEntityReference("delta");
-        appendedChild = parent.appendChild(entRef);
+        parent.appendChild(entRef);
         child = (EntityReference) parent.getLastChild();
         removed = (EntityReference) parent.removeChild(child);
         removedName = removed.getNodeName();
         assertEquals("delta", removedName, "Noderemovechild31Assert1");
 
         try {
-            removedNode = child.removeChild(parent);
+            child.removeChild(parent);
             fail("throw_DOMException");
 
         } catch (final DOMException ex) {
             switch (ex.getCode()) {
-                case 7:
-                    break;
-                case 8:
+                case 7, 8:
                     break;
                 default:
                     throw ex;
@@ -91,7 +89,7 @@ public class Noderemovechild31Test extends LoboUnitTest {
             {
                 boolean success = false;
                 try {
-                    removedNode = child.removeChild(entRefChild);
+                    child.removeChild(entRefChild);
                 } catch (final DOMException ex) {
                     success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
                 }

@@ -41,12 +41,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * The "setPrefix(prefix)" method raises a
  * NAMESPACE_ERR DOMException if the specified
  * prefix is xml and the namespaceURI is different from
- * http://www.w3.org/XML/1998/namespace.
+ * <a href="http://www.w3.org/XML/1998/namespace">...</a>.
  * <p>
  * Attempt to insert "xml" as the new namespace prefix on the first employee node.
  * An exception should be raised since the namespaceURI of this node is not
- * http://www.w3.org/XML/1998/namespace.
-
+ * <a href="http://www.w3.org/XML/1998/namespace">...</a>.
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#xpointer(id('ID-258A00AF')/constant[@name='NAMESPACE_ERR'])">http://www.w3.org/TR/DOM-Level-2-Core/core#xpointer(id('ID-258A00AF')/constant[@name='NAMESPACE_ERR'])</a>
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSPrefix">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSPrefix</a>
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#xpointer(id('ID-NodeNSPrefix')/setraises/exception[@name='DOMException']/descr/p[substring-before(.,':')='NAMESPACE_ERR'])">http://www.w3.org/TR/DOM-Level-2-Core/core#xpointer(id('ID-NodeNSPrefix')/setraises/exception[@name='DOMException']/descr/p[substring-before(.,':')='NAMESPACE_ERR'])</a>

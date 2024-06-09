@@ -43,6 +43,7 @@ import org.loboevolution.type.Decoding;
 import org.mozilla.javascript.Function;
 
 import java.awt.*;
+import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
 
@@ -402,7 +403,7 @@ public class HTMLImageElementImpl extends HTMLElementImpl implements HTMLImageEl
 			if (document instanceof HTMLDocument) {
 				try {
 					final HTMLDocument doc = (HTMLDocument) document;
-					final URL baseURL = new URL(doc.getBaseURI());
+					final URL baseURL = new URI(doc.getBaseURI()).toURL();
 					final String src = getSrc();
 					final URL scriptURL = Urls.createURL(baseURL, src);
 					uri = scriptURL == null ? src : scriptURL.toExternalForm();
@@ -414,7 +415,7 @@ public class HTMLImageElementImpl extends HTMLElementImpl implements HTMLImageEl
 				uri = getSrc();
 			}
 
-			final URL url = new URL(uri);
+			final URL url = new URI(uri).toURL();
 			final URLConnection connection = url.openConnection();
 			connection.setRequestProperty("User-Agent", UserAgent.getUserAgent());
 			connection.getHeaderField("Set-Cookie");
