@@ -39,8 +39,8 @@ public class CSSSelector2Test extends LoboUnitTest {
 
     private static final String PLACEHOLDER_SHOWN_HTML_HEAD = "<html><head>\n"
             + "<style>:placeholder-shown {border: 10px solid;}</style>\n"
-            + "<script>\n"            + "  function test() {\n"
-
+            + "<script>" +
+            " function test() {\n"
             + "    try {\n"
             + "     alert(document.querySelector(':placeholder-shown'));\n"
             + "    } catch (exception) {\n"

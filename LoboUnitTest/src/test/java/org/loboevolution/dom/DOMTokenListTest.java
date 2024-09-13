@@ -222,37 +222,37 @@ public class DOMTokenListTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"a\\sb", "2", "false"})
+    @Alerts({"a b", "2", "false"})
     public void containsEmpty() {
         contains("a b", "");
     }
 
     @Test
-    @Alerts({"a\\sb", "2", "false"})
+    @Alerts({"a b", "2", "false"})
     public void containsBlank() {
         contains("a b", " ");
     }
 
     @Test
-    @Alerts({"a\\sb", "2", "false"})
+    @Alerts({"a b", "2", "false"})
     public void containsTab() {
         contains("a b", "\t");
     }
 
     @Test
-    @Alerts({"a\\sb", "2", "false"})
+    @Alerts({"a b", "2", "false"})
     public void containsCr() {
         contains("a b", "\\r");
     }
 
     @Test
-    @Alerts({"a\\sb", "2", "false"})
+    @Alerts({"a b", "2", "false"})
     public void containsNl() {
         contains("a b", "\\n");
     }
 
     @Test
-    @Alerts({"a\\sb", "2", "false"})
+    @Alerts({"a b", "2", "false"})
     public void containsVt() {
         contains("a b", "\u000B");
     }
@@ -264,55 +264,55 @@ public class DOMTokenListTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"\\s\\t\\s\\n\\s\\s", "0", "false"})
+    @Alerts({" \\t \\n  ", "0", "false"})
     public void containsInsideWhitespace() {
         contains(" \t \r  ", "a");
     }
 
     @Test
-    @Alerts({"a\\sb", "2", "true"})
+    @Alerts({"a b", "2", "true"})
     public void containsInsideAtStart() {
         contains("a b", "a");
     }
 
     @Test
-    @Alerts({"a\\sb", "2", "true"})
+    @Alerts({"a b", "2", "true"})
     public void containsInsideAtEnd() {
         contains("a b", "b");
     }
 
     @Test
-    @Alerts({"abc\\sdef", "2", "false"})
+    @Alerts({"abc def", "2", "false"})
     public void containsInsideSubstringAtStart() {
         contains("abc def", "ab");
     }
 
     @Test
-    @Alerts({"abc\\sdef", "2", "false"})
+    @Alerts({"abc def", "2", "false"})
     public void containsInsideSubstringAtEnd() {
         contains("abc def", "bc");
     }
 
     @Test
-    @Alerts({"abcd\\sef", "2", "false"})
+    @Alerts({"abcd ef", "2", "false"})
     public void containsInsideSubstringInside() {
         contains("abcd ef", "bc");
     }
 
     @Test
-    @Alerts({"a\\s\\s", "1", "true"})
+    @Alerts({"a  ", "1", "true"})
     public void containsInsideWhitespaceAtEnd() {
         contains("a  ", "a");
     }
 
     @Test
-    @Alerts({"\\s\\sa", "1", "true"})
+    @Alerts({"  a", "1", "true"})
     public void containsInsideWhitespaceInFront() {
         contains("  a", "a");
     }
 
     @Test
-    @Alerts({"a\\s\\t\\sc\\s\\n\\sd\\s\\se", "4", "true"})
+    @Alerts({"a \\t c \\n d  e", "4", "true"})
     public void containsWhitespaceExisting() {
         contains("a \t c \n d  e", "c");
     }
@@ -347,92 +347,92 @@ public class DOMTokenListTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"a\\sb", "2", "exception", "2", "a\\sb"})
+    @Alerts({"a b", "2", "exception", "2", "a b"})
     public void addEmpty() {
         add("a b", "");
     }
 
     @Test
-    @Alerts({"a\\sb", "2", "exception", "2", "a\\sb"})
+    @Alerts({"a b", "2", "exception", "2", "a b"})
     public void addBlank() {
         add("a b", " ");
     }
 
     @Test
-    @Alerts({"a\\sb", "2", "exception", "2", "a\\sb"})
+    @Alerts({"a b", "2", "exception", "2", "a b"})
     public void addTab() {
         add("a b", "\t");
     }
 
     @Test
-    @Alerts({"a\\sb", "2", "exception", "2", "a\\sb"})
+    @Alerts({"a b", "2", "exception", "2", "a b"})
     public void addCr() {
         add("a b", "\\r");
     }
 
     @Test
-    @Alerts({"a\\sb", "2", "exception", "2", "a\\sb"})
+    @Alerts({"a b", "2", "exception", "2", "a b"})
     public void addNl() {
         add("a b", "\\n");
     }
 
     @Test
-    @Alerts({"a\\sb", "2", "3", "a\\sb\\s\u000B", "class\\schanged\\sold:\\sa\\sb"})
+    @Alerts({"a b", "2", "3", "a b \u000B", "class changed old: a b"})
     public void addVt() {
         add("a b", "\u000B");
     }
 
     @Test
-    @Alerts({"", "0", "1", "a", "class\\schanged\\sold:\\s"})
+    @Alerts({"", "0", "1", "a", "class changed old: "})
     public void addToEmpty() {
         add("", "a");
     }
 
     @Test
-    @Alerts({"\\s\\t\\s\\n\\s\\s", "0", "1", "a", "class\\schanged\\sold:\\s\\s\\t\\s\\n\\s\\s"})
+    @Alerts({" \\t \\n  ", "0", "1", "a", "class changed old:  \\t \\n  "})
     public void addToWhitespace() {
         add(" \t \r  ", "a");
     }
 
     @Test
-    @Alerts({"a\\s\\s", "1", "2", "a\\sb", "class\\schanged\\sold:\\sa\\s\\s"})
+    @Alerts({"a  ", "1", "2", "a b", "class changed old: a  "})
     public void addToWhitespaceAtEnd() {
         add("a  ", "b");
     }
 
     @Test
-    @Alerts({"a\\sb", "2", "3", "a\\sb\\sc", "class\\schanged\\sold:\\sa\\sb"})
+    @Alerts({"a b", "2", "3", "a b c", "class changed old: a b"})
     public void addNotExisting() {
         add("a b", "c");
     }
 
     @Test
-    @Alerts({"a\\sb", "2", "2", "a\\sb", "class\\schanged\\sold:\\sa\\sb"})
+    @Alerts({"a b", "2", "2", "a b", "class changed old: a b"})
     public void addExisting() {
         add("a b", "a");
     }
 
     @Test
-    @Alerts({"b\\sa", "2", "2", "b\\sa", "class\\schanged\\sold:\\sb\\sa"})
+    @Alerts({"b a", "2", "2", "b a", "class changed old: b a"})
     public void addExisting2() {
         add("b a", "a");
     }
 
     @Test
-    @Alerts({"a\\sb\\sa", "2", "exception", "2", "a\\sb\\sa"})
+    @Alerts({"a b a", "2", "exception", "2", "a b a"})
     public void addElementWithBlank() {
         add("a b a", "a b");
     }
 
     @Test
-    @Alerts({"a\\sb\\sa\\tb", "2", "exception", "2", "a\\sb\\sa\\tb"})
+    @Alerts({"a b a\\tb", "2", "exception", "2", "a b a\\tb"})
     public void addElementWithTab() {
         add("a b a\tb", "a\tb");
     }
 
     @Test
-    @Alerts({"a\\s\\t\\sc\\s\\n\\sd\\s\\se", "4", "4", "a\\sc\\sd\\se",
-            "class\\schanged\\sold:\\sa\\s\\t\\sc\\s\\n\\sd\\s\\se"})
+    @Alerts({"a \\t c \\n d  e", "4", "4", "a c d e",
+            "class changed old: a \\t c \\n d  e"})
     public void addToWhitespaceExisting() {
         add("a \t c \n d  e", "c");
     }
@@ -520,86 +520,86 @@ public class DOMTokenListTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"a\\sb", "2", "exception", "2", "a\\sb"})
+    @Alerts({"a b", "2", "exception", "2", "a b"})
     public void removeEmpty() {
         remove("a b", "");
     }
 
     @Test
-    @Alerts({"a\\sb", "2", "exception", "2", "a\\sb"})
+    @Alerts({"a b", "2", "exception", "2", "a b"})
     public void removeBlank() {
         remove("a b", " ");
     }
 
     @Test
-    @Alerts({"a\\sb", "2", "exception", "2", "a\\sb"})
+    @Alerts({"a b", "2", "exception", "2", "a b"})
     public void removeTab() {
         remove("a b", "\t");
     }
 
     @Test
-    @Alerts({"a\\sb", "2", "exception", "2", "a\\sb"})
+    @Alerts({"a b", "2", "exception", "2", "a b"})
     public void removeCr() {
         remove("a b", "\\r");
     }
 
     @Test
-    @Alerts({"a\\sb", "2", "exception", "2", "a\\sb"})
+    @Alerts({"a b", "2", "exception", "2", "a b"})
     public void removeNl() {
         remove("a b", "\\n");
     }
 
     @Test
-    @Alerts({"a\\sb", "2", "2", "a\\sb", "class\\schanged\\sold:\\sa\\sb"})
+    @Alerts({"a b", "2", "2", "a b", "class changed old: a b"})
     public void removeVt() {
         remove("a b", "\u000B");
     }
 
     @Test
-    @Alerts({"", "0", "0", "", "class\\schanged\\sold:\\s"})
+    @Alerts({"", "0", "0", "", "class changed old: "})
     public void removeFromEmpty() {
         remove("", "a");
     }
 
     @Test
-    @Alerts({"\\s\\t\\s\\n\\s\\s", "0", "0", "", "class\\schanged\\sold:\\s\\s\\t\\s\\n\\s\\s"})
+    @Alerts({" \\t \\n  ", "0", "0", "", "class changed old:  \\t \\n  "})
     public void removeFromWhitespace() {
         remove(" \t \r  ", "a");
     }
 
     @Test
-    @Alerts({"a\\sb", "2", "2", "a\\sb", "class\\schanged\\sold:\\sa\\sb"})
+    @Alerts({"a b", "2", "2", "a b", "class changed old: a b"})
     public void removeNotExisting() {
         remove("a b", "c");
     }
 
     @Test
-    @Alerts({"a\\sb\\sa", "2", "1", "b", "class\\schanged\\sold:\\sa\\sb\\sa"})
+    @Alerts({"a b a", "2", "1", "b", "class changed old: a b a"})
     public void removeDuplicated() {
         remove("a b a", "a");
     }
 
     @Test
-    @Alerts({"a\\sb\\sa", "2", "exception", "2", "a\\sb\\sa"})
+    @Alerts({"a b a", "2", "exception", "2", "a b a"})
     public void removeElementWithBlank() {
         remove("a b a", "a b");
     }
 
     @Test
-    @Alerts({"a\\sb\\sa\\tb", "2", "exception", "2", "a\\sb\\sa\\tb"})
+    @Alerts({"a b a\\tb", "2", "exception", "2", "a b a\\tb"})
     public void removeElementWithTab() {
         remove("a b a\tb", "a\tb");
     }
 
     @Test
-    @Alerts({"a", "1", "0", "", "class\\schanged\\sold:\\sa"})
+    @Alerts({"a", "1", "0", "", "class changed old: a"})
     public void removeLast() {
         remove("a", "a");
     }
 
     @Test
-    @Alerts({"a\\s\\t\\sc\\s\\n\\sd\\s\\se", "4", "3", "a\\sd\\se",
-            "class\\schanged\\sold:\\sa\\s\\t\\sc\\s\\n\\sd\\s\\se"})
+    @Alerts({"a \\t c \\n d  e", "4", "3", "a d e",
+            "class changed old: a \\t c \\n d  e"})
     public void removeWhitespace() {
         remove("a \t c \n d  e", "c");
     }

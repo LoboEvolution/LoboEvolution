@@ -256,7 +256,7 @@ public class HTMLAnchorElementTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts({"", "A", "a", "A", "a8", "8Afoo", "8", "@"})
+    @Alerts({"null", "A", "a", "A", "a8", "8Afoo", "8", "@"})
     public void readWriteAccessKey() {
         final String html
                 = "<html>\n"
@@ -464,7 +464,7 @@ public class HTMLAnchorElementTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts({"", "0,0"})
+    @Alerts({"null", "0,0"})
     public void coords() {
         attribute("coords", "0,0");
     }
@@ -477,7 +477,7 @@ public class HTMLAnchorElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"", "", "", "", "http://www.htmlunit.org",
+    @Alerts({"null", "null", "null", "null", "http://www.htmlunit.org",
             "http://www.htmlunit.org:1234", "https://www.htmlunit.org:1234"})
     public void originAttrib() {
         final String html =
@@ -589,20 +589,16 @@ public class HTMLAnchorElementTest extends LoboUnitTest {
                 "<html>\n"
                         + "<head>\n"
                         + "  <script>\n"
-
                         + "    function test() {\n"
                         + "      var testNode = document.getElementById('myButton');\n"
                         + "      testNode.focus();\n"
                         + "      alert(document.activeElement);\n"
-
                         + "      testNode = document.getElementById('myA');\n"
                         + "      testNode.focus();\n"
                         + "      alert(document.activeElement);\n"
-
                         + "      testNode = document.getElementById('myHrefEmpty');\n"
                         + "      testNode.focus();\n"
                         + "      alert(document.activeElement);\n"
-
                         + "      testNode = document.getElementById('myHref');\n"
                         + "      testNode.focus();\n"
                         + "      alert(document.activeElement);\n"
@@ -621,7 +617,7 @@ public class HTMLAnchorElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"", "alternate help", "prefetch", "prefetch", "not supported", "notsupported"})
+    @Alerts({"null", "alternate help", "prefetch", "prefetch", "not supported", "notsupported"})
     public void readWriteRel() {
         final String html
                 = "<html><body><a id='a1'>a1</a><a id='a2' rel='alternate help'>a2</a><script>\n"
@@ -687,7 +683,7 @@ public class HTMLAnchorElementTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts({"0", "2", "0", "0", "", "\\s\\s\\t"})
+    @Alerts({"0", "2", "0", "0", "", "  \\t"})
     public void setRelListStringBlank() {
         final String html
                 = "<html><body><a id='a1'>a1</a><a id='a2' rel='alternate help'>a2</a><script>\n"

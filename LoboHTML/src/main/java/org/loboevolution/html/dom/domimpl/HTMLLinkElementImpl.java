@@ -100,14 +100,13 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 
 				if ((isStyleSheet || isAltStyleSheet)) {
 					String title = getAttribute("title");
-					final URL baseURL = new URI(baseURI).toURL();
-					final URL scriptURL = Urls.createURL(baseURL, href);
+					final URI scriptURI = Urls.createURI(baseURI, href);
+					final URL scriptURL = scriptURI.toURL();
 					if (Strings.isBlank(title)) {
-						final URI uri = scriptURL.toURI();
 						if (Urls.isLocalFile(scriptURL)) {
-							title = Paths.get(uri).getFileName().toString();
+							title = Paths.get(scriptURI).getFileName().toString();
 						} else {
-							title = new File(uri.getPath()).getName();
+							title = new File(scriptURI.getPath()).getName();
 						}
 					}
 
@@ -129,17 +128,9 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 							if (CSSUtilities.matchesMedia(media, doc.getDefaultView())) {
 								final Instant start = Instant.now();
 								final TimingInfo info = new TimingInfo();
-								final org.htmlunit.cssparser.dom.CSSStyleSheetImpl sheet = CSSUtilities.parseCssExternal(getHtmlRendererConfig(), href, scriptURL, baseURI, getIntegrity(), rcontext.isTestEnabled());
-								String fileName;
-								boolean exist;
-								if (scriptURL != null) {
-									fileName = scriptURL.getFile().substring(scriptURL.getFile().lastIndexOf('/') + 1);
-									exist = Urls.exists(scriptURL);
-								} else {
-									fileName = href.substring(href.lastIndexOf('/') + 1);
-									exist = Urls.exists(new URI(href).toURL());
-								}
-
+								final org.htmlunit.cssparser.dom.CSSStyleSheetImpl sheet = CSSUtilities.parseCssExternal(getHtmlRendererConfig(), scriptURI, baseURI, getIntegrity(), rcontext.isTestEnabled());
+								String fileName = scriptURL.getFile().substring(scriptURL.getFile().lastIndexOf('/') + 1);
+								boolean exist = Urls.exists(scriptURL);
 								sheet.setHref(exist ? fileName : null);
 								sheet.setDisabled(this.disabled);
 

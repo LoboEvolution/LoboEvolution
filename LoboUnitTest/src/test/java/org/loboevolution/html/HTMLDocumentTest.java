@@ -86,7 +86,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"function", "div1", "span2", "span3", "2", "1", "1", "0", "0", "0"})
+    @Alerts({"object", "div1", "span2", "span3", "2", "1", "1", "0", "0", "0"})
     public void getElementsByClassName() {
         final String html
                 = "<html><head><script>\n"
@@ -445,7 +445,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"", "", "#0000aa", "#0000aa", "x", "x"})
+    @Alerts({"null", "null", "#0000aa", "#0000aa", "x", "x"})
     public void bgColor() {
         final String html =
                 "<html>\n"
@@ -780,57 +780,36 @@ public class HTMLDocumentTest extends LoboUnitTest {
         final String html = "<html><head>"
                 + "<script>\n"
                 + "  function test() {\n"
-                // 1
                 + "    var collection = document.getElementsByName('image1');\n"
                 + "    alert(collection.length);\n"
-
-                // 2
                 + "    var newImage1 = document.createElement('img');\n"
                 + "    newImage1.name = 'image1';\n"
                 + "    document.getElementById('outer1').appendChild(newImage1);\n"
                 + "    alert(collection.length);\n"
-
-                // 3
                 + "    var newImage2 = document.createElement('img');\n"
                 + "    newImage2.name = 'image1';\n"
                 + "    document.getElementById('outer2').insertBefore(newImage2, null);\n"
                 + "    alert(collection.length);\n"
-
-                // 4
                 + "    var newImage3 = document.createElement('img');\n"
                 + "    newImage3.name = 'image1';\n"
                 + "    document.getElementById('outer3').replaceChild(newImage3, document.getElementById('inner3'));\n"
                 + "    alert(collection.length);\n"
-
-                // 5
                 + "    document.getElementById('outer4').outerHTML = '<img name=\"image1\">';\n"
                 + "    alert(collection.length);\n"
-
-                // 6
                 + "    document.getElementById('outer5').innerHTML = '<img name=\"image1\">';\n"
                 + "    alert(collection.length);\n"
-
-                // 7
                 + "    document.getElementById('outer6').insertAdjacentHTML('beforeend', '<img name=\"image1\">');\n"
                 + "    alert(collection.length);\n"
-
-                // 8
                 + "    document.getElementById('image3').setAttribute('name', 'image1');\n"
                 + "    alert(collection.length);\n"
-
-                // 9
                 + "    var newAttr = document.createAttribute('name');\n"
                 + "    newAttr.nodeValue = 'image1';\n"
                 + "    document.getElementById('image4').setAttributeNode(newAttr);\n"
                 + "    alert(collection.length);\n"
-
-                // 10
                 + "    try {\n"
                 + "      document.getElementById('image5').setAttributeNS(null, 'name', 'image1');\n"
                 + "      alert(collection.length);\n"
                 + "    } catch (e) { alert('exception:setAttributeNS') }\n"
-
-                // 9
                 + "    document.getElementById('outer1').removeChild(newImage1);\n"
                 + "    alert(collection.length);\n"
                 + "  }\n"
@@ -876,57 +855,36 @@ public class HTMLDocumentTest extends LoboUnitTest {
         final String html = "<html><head>"
                 + "<script>\n"
                 + "  function test() {\n"
-                // 1
                 + "    var collection = document.getElementsByName('image1');\n"
                 + "    alert(collection.length);\n"
-
-                // 2
                 + "    var newImage1 = document.createElement('img');\n"
                 + "    newImage1.name = 'image1';\n"
                 + "    document.getElementById('outer1').appendChild(newImage1);\n"
                 + "    alert(collection.length);\n"
-
-                // 3
                 + "    var newImage2 = document.createElement('img');\n"
                 + "    newImage2.name = 'image1';\n"
                 + "    document.getElementById('outer2').insertBefore(newImage2, null);\n"
                 + "    alert(collection.length);\n"
-
-                // 4
                 + "    var newImage3 = document.createElement('img');\n"
                 + "    newImage3.name = 'image1';\n"
                 + "    document.getElementById('outer3').replaceChild(newImage3, document.getElementById('inner3'));\n"
                 + "    alert(collection.length);\n"
-
-                // 5
                 + "    document.getElementById('outer4').outerHTML = '<img name=\"image1\">';\n"
                 + "    alert(collection.length);\n"
-
-                // 6
                 + "    document.getElementById('outer5').innerHTML = '<img name=\"image1\">';\n"
                 + "    alert(collection.length);\n"
-
-                // 7
                 + "    document.getElementById('outer6').insertAdjacentHTML('beforeend', '<img name=\"image1\">');\n"
                 + "    alert(collection.length);\n"
-
-                // 8
                 + "    document.getElementById('image3').setAttribute('name', 'image1');\n"
                 + "    alert(collection.length);\n"
-
-                // 9
                 + "    var newAttr = document.createAttribute('name');\n"
                 + "    newAttr.nodeValue = 'image1';\n"
                 + "    document.getElementById('image4').setAttributeNode(newAttr);\n"
                 + "    alert(collection.length);\n"
-
-                // 10
                 + "    try {\n"
                 + "      document.getElementById('image5').setAttributeNS(null, 'name', 'image1');\n"
                 + "      alert(collection.length);\n"
                 + "    } catch (e) { alert('exception:setAttributeNS') }\n"
-
-                // 9
                 + "    document.getElementById('outer1').removeChild(newImage1);\n"
                 + "    alert(collection.length);\n"
                 + "  }\n"
@@ -979,7 +937,6 @@ public class HTMLDocumentTest extends LoboUnitTest {
         final String html
                 = "<html><body>\n"
                 + "<script>"
-
                 + "alert(document.body.parentNode.parentNode === document)\n"
                 + "</script>\n"
                 + "</body></html>";
@@ -1387,7 +1344,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"myattr", ""})
+    @Alerts({"myAttr", "null"})
     public void createAttributeNameValue() {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -1489,7 +1446,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"", "", "#0000aa", "#0000aa", "x", "x"})
+    @Alerts({"null", "null", "#0000aa", "#0000aa", "x", "x"})
     public void alinkColor() {
         final String html =
                 "<html>\n"
@@ -1567,7 +1524,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"", "", "#0000aa", "#0000aa", "x", "x"})
+    @Alerts({"null", "null", "#0000aa", "#0000aa", "x", "x"})
     public void fgColor() {
         final String html =
                 "<html>\n"
@@ -1636,7 +1593,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"windows-1252", "windows-1252", "windows-1252", "undefined"})
+    @Alerts({"UTF-8", "UTF-8", "UTF-8", "undefined"})
     public void encoding() {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -1655,7 +1612,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"windows-1252", "windows-1252", "windows-1252", "undefined"})
+    @Alerts({"UTF-8", "UTF-8", "UTF-8", "undefined"})
     public void encoding2() {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -1675,7 +1632,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"windows-1252", "windows-1252", "windows-1252", "undefined"})
+    @Alerts({"UTF-8", "UTF-8", "UTF-8", "undefined"})
     public void encoding3() {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -1756,82 +1713,82 @@ public class HTMLDocumentTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"undefined", "BackCompat", "function", "function"})
+    @Alerts({"undefined", "BackCompat", "object", "object"})
     public void documentMode() {
         documentMode("", "");
     }
 
     @Test
-    @Alerts({"undefined", "CSS1Compat", "function", "function"})
+    @Alerts({"undefined", "CSS1Compat", "object", "object"})
     public void documentModeDoctypeStrict() {
         documentMode(STANDARDS_MODE_PREFIX_, "");
     }
 
     @Test
-    @Alerts({"undefined", "BackCompat", "function", "function"})
+    @Alerts({"undefined", "BackCompat", "object", "object"})
     public void documentModeDoctypeTransitional() {
         documentMode("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\""
                 + " \"http://www.w3.org/TR/html4/loose.dtd\">\n", "");
     }
 
     @Test
-    @Alerts({"undefined", "CSS1Compat", "function", "function"})
+    @Alerts({"undefined", "CSS1Compat", "object", "object"})
     public void documentModeDoctypeHTML5() {
         documentMode("<html>\n", "");
     }
 
     @Test
-    @Alerts({"undefined", "BackCompat", "function", "function"})
+    @Alerts({"undefined", "BackCompat", "object", "object"})
     public void documentModeMetaIE5() {
         documentMode("", "  <meta http-equiv='X-UA-Compatible' content='IE=5'>\n");
     }
 
     @Test
-    @Alerts({"undefined", "BackCompat", "function", "function"})
+    @Alerts({"undefined", "BackCompat", "object", "object"})
     public void documentModeMetaIE8() {
         documentMode("", "  <meta http-equiv='X-UA-Compatible' content='IE=8'>\n");
     }
 
     @Test
-    @Alerts({"undefined", "CSS1Compat", "function", "function"})
+    @Alerts({"undefined", "CSS1Compat", "object", "object"})
     public void documentModeMetaIE8DoctypeStrict() {
         documentMode(STANDARDS_MODE_PREFIX_, "  <meta http-equiv='X-UA-Compatible' content='IE=8'>\n");
     }
 
     @Test
-    @Alerts({"undefined", "BackCompat", "function", "function"})
+    @Alerts({"undefined", "BackCompat", "object", "object"})
     public void documentModeMetaEmulateIE8() {
         documentMode("", "  <meta http-equiv='X-UA-Compatible' content='IE=Emulate8'>\n");
     }
 
     @Test
-    @Alerts({"undefined", "CSS1Compat", "function", "function"})
+    @Alerts({"undefined", "CSS1Compat", "object", "object"})
     public void documentModeMetaEmulateIE8DoctypeStrict() {
         documentMode(STANDARDS_MODE_PREFIX_,
                 "  <meta http-equiv='X-UA-Compatible' content='IE=Emulate8'>\n");
     }
 
     @Test
-    @Alerts({"undefined", "BackCompat", "function", "function"})
+    @Alerts({"undefined", "BackCompat", "object", "object"})
     public void documentModeMetaIE9() {
         documentMode("", "  <meta http-equiv='X-UA-Compatible' content='IE=9'>\n");
     }
 
     @Test
-    @Alerts({"undefined", "CSS1Compat", "function", "function"})
+    @Alerts({"undefined", "CSS1Compat", "object", "object"})
     public void documentModeMetaIE9DoctypeStrict() {
         documentMode(STANDARDS_MODE_PREFIX_,
                 "  <meta http-equiv='X-UA-Compatible' content='IE=9'>\n");
     }
 
     @Test
-    @Alerts({"undefined", "BackCompat", "function", "function"})
+    @Alerts({"undefined", "BackCompat", "object", "object"})
     public void documentModeMetaIEEdge() {
         documentMode("", "  <meta http-equiv='X-UA-Compatible' content='IE=edge'>\n");
     }
 
     @Test
-    @Alerts({"undefined", "CSS1Compat", "function", "function"})
+    @Alerts({"undefined", "CSS1Compat", "object", "object"})
     public void documentModeMetaIEEdgeDoctypeStrict() {
         documentMode(STANDARDS_MODE_PREFIX_,
                 "  <meta http-equiv='X-UA-Compatible' content='IE=edge'>\n");

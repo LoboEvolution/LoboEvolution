@@ -35,6 +35,7 @@ import org.loboevolution.net.Cookie;
 import org.loboevolution.net.HttpNetwork;
 
 import java.awt.*;
+import java.net.URI;
 import java.net.URL;
 import java.util.*;
 import java.util.List;
@@ -55,8 +56,8 @@ public class LocalHtmlRendererConfig implements HtmlRendererConfig {
     }
 
     @Override
-    public String getSourceCache(final String baseUrl, final String type, final String integrity, final boolean test) {
-        return HttpNetwork.sourceResponse(baseUrl, type, integrity);
+    public String getSourceCache(final URI scriptURI, final String type, final String integrity, final boolean test) throws Exception {
+        return HttpNetwork.getSource(scriptURI, integrity);
     }
 
     @Override

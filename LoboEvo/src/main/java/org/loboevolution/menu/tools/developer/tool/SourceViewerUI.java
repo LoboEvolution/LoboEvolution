@@ -37,6 +37,7 @@ import org.loboevolution.net.HttpNetwork;
 
 import java.awt.*;
 import java.io.Serial;
+import java.net.URI;
 
 /**
  * <p>SourceViewerUI class.</p>
@@ -56,7 +57,7 @@ public class SourceViewerUI  extends AbstractToolsUI {
     public SourceViewerUI(final BrowserFrame frame) {
         try {
             final ToolBar toolbar = frame.getToolbar();
-            add(addTextArea(HttpNetwork.getSource(toolbar.getAddressBar().getText(), null)));
+            add(addTextArea(HttpNetwork.getSource(new URI(toolbar.getAddressBar().getText()), null)));
         } catch (final Exception ex) {
             log.error(ex.getMessage(), ex);
         }

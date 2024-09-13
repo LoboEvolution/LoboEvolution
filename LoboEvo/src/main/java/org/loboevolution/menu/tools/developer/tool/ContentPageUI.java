@@ -43,6 +43,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.io.Serial;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -113,7 +114,7 @@ public class ContentPageUI extends AbstractToolsUI {
                     for (final int selectedColumn : selectedColumns) {
                         try {
                             final String href = (String) jtable.getValueAt(element, selectedColumn);
-                            textArea.setText(HttpNetwork.getSource(href, null));
+                            textArea.setText(HttpNetwork.getSource(new URI(href), null));
                             textArea.repaint();
                         } catch (final Exception ex) {
                             log.error(ex.getMessage(), ex);

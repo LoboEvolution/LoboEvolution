@@ -29,6 +29,8 @@ package org.loboevolution.html.js.geolocation;
 import org.json.JSONObject;
 import org.loboevolution.net.HttpNetwork;
 
+import java.net.URI;
+
 /**
  * <p>IPAddressBasedGeoAcquirer class.</p>
  */
@@ -41,7 +43,7 @@ public class IPAddressBasedGeoAcquirer {
 	 * @throws java.lang.Exception if any.
 	 */
 	protected Position acquireLocation() throws Exception {
-		final String source = HttpNetwork.getSource("https://freegeoip.app/json/", null);
+		final String source = HttpNetwork.getSource(new URI("https://freegeoip.app/json/"), null);
 		final JSONObject children = new JSONObject(source);
 		final double latitude = Double.parseDouble(children.optString("latitude"));
 		final double longitude = Double.parseDouble(children.optString("longitude"));

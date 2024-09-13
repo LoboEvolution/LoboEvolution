@@ -41,8 +41,8 @@ public class BeforeUnloadEventTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void createCtor() {
-        final String html = "<html><head>"
-                + "<script>\n"
+        final String html = "<html><head><script>\n"
+
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new BeforeUnloadEvent('beforeunload');\n"
@@ -57,8 +57,8 @@ public class BeforeUnloadEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object BeforeUnloadEvent]", "", "false", "false", "false", ""})
     public void createCreateEvent() {
-        final String html = "<html><head>"
-                + "<script>\n"
+        final String html = "<html><head><script>\n"
+
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = document.createEvent('BeforeUnloadEvent');\n"
@@ -75,8 +75,8 @@ public class BeforeUnloadEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object BeforeUnloadEvent]", "beforeunload", "true", "false", "false", ""})
     public void initEvent() {
-        final String html = "<html><head>"
-                + "<script>\n"
+        final String html = "<html><head><script>\n"
+
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = document.createEvent('BeforeUnloadEvent');\n"
@@ -94,8 +94,8 @@ public class BeforeUnloadEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object BeforeUnloadEvent]", "beforeunload", "true", "false", "false", ""})
     public void dispatchEvent() {
-        final String html = "<html><head>"
-                + "<script>\n"
+        final String html = "<html><head><script>\n"
+
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = document.createEvent('BeforeUnloadEvent');\n"
@@ -114,8 +114,8 @@ public class BeforeUnloadEventTest extends LoboUnitTest {
     @Test
     @Alerts({"[object Event]", "beforeunload", "true", "false", "false", "true"})
     public void dispatchEventEvent() {
-        final String html = "<html><head>"
-                + "<script>\n"
+        final String html = "<html><head><script>\n"
+
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = document.createEvent('Event');\n"
@@ -134,8 +134,8 @@ public class BeforeUnloadEventTest extends LoboUnitTest {
     @Test
     @Alerts("supported")
     public void onBeforeUnload_supported() {
-        final String html = "<html><head>"
-                + "<script>\n"
+        final String html = "<html><head><script>\n"
+
                 + "  function test() {\n"
                 + "    if ('onbeforeunload' in window) {alert('supported') }\n"
                 + "  }\n"

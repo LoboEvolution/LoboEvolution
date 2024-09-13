@@ -36,6 +36,7 @@ import org.loboevolution.net.HttpNetwork;
 import org.loboevolution.store.*;
 
 import java.awt.*;
+import java.net.URI;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -133,12 +134,13 @@ public class HtmlRendererConfigImpl implements HtmlRendererConfig {
     }
 
     @Override
-    public String getSourceCache(final String baseUrl, final String type, final String integrity, final boolean test) {
+    public String getSourceCache(final URI baseUri, final String type, final String integrity, final boolean test) {
         try {
             final ExternalResourcesStore resourcesStore = new ExternalResourcesStore();
+            String baseUrl = baseUri.toString();
             String source = resourcesStore.getSourceCache(baseUrl, type, test);
             if (Strings.isBlank(source)) {
-                source = HttpNetwork.sourceResponse(baseUrl, type, integrity);
+                source = HttpNetwork.sourceResponse(baseUri, integrity);
                 if (!test) {
                     resourcesStore.saveCache(baseUrl, source, type);
                 }

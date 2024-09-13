@@ -399,37 +399,42 @@ public class HTMLImageElementImpl extends HTMLElementImpl implements HTMLImageEl
 	public void draw(final ImgSvgControl imgSvgControl) {
 		try {
 			final Object document = this.document;
-			String uri = null;
+			URL url = null;
 			if (document instanceof HTMLDocument) {
 				try {
 					final HTMLDocument doc = (HTMLDocument) document;
-					final URL baseURL = new URI(doc.getBaseURI()).toURL();
-					final String src = getSrc();
-					final URL scriptURL = Urls.createURL(baseURL, src);
-					uri = scriptURL == null ? src : scriptURL.toExternalForm();
-
+					URI uri = Urls.createURI(doc.getBaseURI(), getSrc());
+					if (uri != null) {
+						url = uri.toURL();
+					}
 				} catch (final Exception e) {
 					log.error(e.getMessage(), e);
 				}
 			} else {
-				uri = getSrc();
+				URI uri = Urls.createURI(null, getSrc());
+				if (uri != null) {
+					url = uri.toURL();
+				}
 			}
 
-			final URL url = new URI(uri).toURL();
-			final URLConnection connection = url.openConnection();
-			connection.setRequestProperty("User-Agent", UserAgent.getUserAgent());
-			connection.getHeaderField("Set-Cookie");
-			connection.connect();
+			if (url != null) {
 
-			final NodeImpl mode = (NodeImpl) document;
-			HtmlPanel panel = new HtmlPanel();
-			panel.setBrowserPanel(null);
-			final HtmlRendererContext htmlRendererContext = mode.getHtmlRendererContext();
-			panel = HtmlPanel.createlocalPanel(connection, panel, mode.getHtmlRendererContext(), mode.getHtmlRendererConfig(), uri);
-			final double height = getHeight() == -1 ? htmlRendererContext.getInnerWidth() : getHeight();
-			final double width = getWidth() == -1 ? htmlRendererContext.getInnerWidth() : getWidth();
-			panel.setPreferredSize(new Dimension((int) width, (int) height));
-			imgSvgControl.add(panel);
+				final URLConnection connection = url.openConnection();
+				connection.setRequestProperty("User-Agent", UserAgent.getUserAgent());
+				connection.getHeaderField("Set-Cookie");
+				connection.connect();
+
+				final NodeImpl mode = (NodeImpl) document;
+				HtmlPanel panel = new HtmlPanel();
+				panel.setBrowserPanel(null);
+				final HtmlRendererContext htmlRendererContext = mode.getHtmlRendererContext();
+				panel = HtmlPanel.createlocalPanel(connection, panel, mode.getHtmlRendererContext(), mode.getHtmlRendererConfig(), url.toString());
+				final double height = getHeight() == -1 ? htmlRendererContext.getInnerWidth() : getHeight();
+				final double width = getWidth() == -1 ? htmlRendererContext.getInnerWidth() : getWidth();
+				panel.setPreferredSize(new Dimension((int) width, (int) height));
+
+				imgSvgControl.add(panel);
+			}
 		} catch (final Exception e) {
 			log.error(e.getMessage(), e);
 		}

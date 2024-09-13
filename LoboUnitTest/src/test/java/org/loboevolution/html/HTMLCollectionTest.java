@@ -54,11 +54,8 @@ public class HTMLCollectionTest extends LoboUnitTest {
         checkHtmlAlert(html);
     }
 
-    /**
-     * Test that <tt>toString</tt> is accessible.
-     */
     @Test
-    @Alerts("function")
+    @Alerts("object")
     public void toStringFunction() {
         final String html = "<html><head>\n"
                 + "    <script>\n"

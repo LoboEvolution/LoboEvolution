@@ -255,8 +255,10 @@ public class LocalHtmlRendererContext implements HtmlRendererContext{
     /** {@inheritDoc} */
     @Override
     public void navigate(final String fullURL) throws Exception {
-        final URL href = Urls.createURL(null, fullURL);
-        this.navigate(href, "_this");
+        URI uri = Urls.createURI(null, fullURL);
+        if (uri != null) {
+            this.navigate(uri.toURL(), "_this");
+        }
     }
 
     /** {@inheritDoc} */

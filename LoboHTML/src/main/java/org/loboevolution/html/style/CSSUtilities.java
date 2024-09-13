@@ -43,6 +43,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
+import java.net.URI;
 import java.net.URL;
 import java.util.StringTokenizer;
 
@@ -110,17 +111,15 @@ public final class CSSUtilities {
 	 * <p>parseCssExternal.</p>
 	 *
 	 * @param config a {@link HtmlRendererConfig} object.
-	 * @param href                a {@link String} object.
-	 * @param scriptURL           a {@link URL} object.
+	 * @param scriptURI           a {@link URI} object.
 	 * @param baseURI             a {@link String} object.
 	 * @param integrity             a {@link String} object.
 	 * @return a {@link CSSStyleSheetImpl} object.
 	 * @throws java.lang.Exception if any.
 	 */
-	public static CSSStyleSheetImpl parseCssExternal(final HtmlRendererConfig config, final String href, final URL scriptURL,
+	public static CSSStyleSheetImpl parseCssExternal(final HtmlRendererConfig config, final URI scriptURI,
 													 final String baseURI, final String integrity, final boolean test) throws Exception {
 		final CSSOMParser parser = new CSSOMParser();
-		final String scriptURI = scriptURL == null ? href : scriptURL.toExternalForm();
 		final String source = config.getSourceCache(scriptURI, "CSS", integrity, test);
 		final InputSource is = getCssInputSourceForStyleSheet(source, baseURI);
 		return parser.parseStyleSheet(is, null);

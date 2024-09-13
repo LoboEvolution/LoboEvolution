@@ -140,9 +140,8 @@ public class HttpNetwork {
 			} else {
 				String scriptURI = href;
 				if (Strings.isNotBlank(baseUri)) {
-					final URL baseURL = new URI(baseUri).toURL();
-					final URL scriptURL = Urls.createURL(baseURL, href);
-					scriptURI = scriptURL == null ? href : scriptURL.toExternalForm();
+					URI uri = Urls.createURI(baseUri, href);
+					scriptURI = uri == null ? href : uri.toURL().toExternalForm();
 				}
 
 				info.setPath(scriptURI);
@@ -217,7 +216,7 @@ public class HttpNetwork {
 	 * @return a {@link java.lang.String} object.
 	 * @throws java.lang.Exception if any.
 	 */
-	public static String getSource(String uri, final String integrity) throws Exception {
+	public static String getSource(URI uri, final String integrity) throws Exception {
 		try (final InputStream in = openConnectionCheckRedirects(getURLConnection(uri, Proxy.NO_PROXY,null))) {
 			if(AlgorithmDigest.validate(IOUtil.readFully(in), integrity)){
 				return toString(in);
@@ -228,11 +227,12 @@ public class HttpNetwork {
 		return "";
 	}
 
-	public static URLConnection getURLConnection(String uri, Proxy proxy, String method) throws Exception {
+
+	public static URLConnection getURLConnection(URI uri, Proxy proxy, String method) throws Exception {
 		URLConnection connection;
-		if (uri.contains("file")) {
-			uri = uri.replace("//", "///");
-			final URL url = new URI(uri).toURL();
+		URL url = uri.toURL();
+		if (url.toString().contains("file")) {
+			url = new URI(url.toString().replace("//", "///")).toURL();
 			connection = proxy == null || proxy.equals(Proxy.NO_PROXY) ? url.openConnection() : url.openConnection(proxy);
 
 			if ("POST".equals(method)) {
@@ -241,7 +241,7 @@ public class HttpNetwork {
 				connection.setDoOutput(true);
 				connection.setDoInput(true);
 				connection.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + boundary);
-			} else{
+			} else {
 				connection.setDoInput(true);
 			}
 
@@ -249,16 +249,16 @@ public class HttpNetwork {
 			connection.getHeaderField("Set-Cookie");
 
 			if (Strings.isNotBlank(method) && connection instanceof HttpURLConnection hc) {
-                hc.setRequestMethod(method.toUpperCase());
+				hc.setRequestMethod(method.toUpperCase());
 			}
 
 			connection.connect();
 		} else {
-			final URL url = new URI(uri).toURL();
+
 			connection = url.openConnection();
 
 			if (Strings.isNotBlank(method) && connection instanceof HttpURLConnection hc) {
-                hc.setRequestMethod(method.toUpperCase());
+				hc.setRequestMethod(method.toUpperCase());
 			}
 
 			if ("POST".equals(method)) {
@@ -278,31 +278,9 @@ public class HttpNetwork {
 		return connection;
 	}
 
-	public static String sourceResponse(final String sUri, final String type, final String integrity) {
-		URL url;
-		String scriptURI = sUri;
+	public static String sourceResponse(final URI scriptURI, final String integrity) {
 		try {
-			if ("CSS".equals(type)) {
-				try {
-					if (scriptURI.startsWith("//")) {
-						scriptURI = "http:" + scriptURI;
-					}
-					url = new URI(scriptURI).toURL();
-				} catch (Exception mfu) {
-					final int idx = scriptURI.indexOf(':');
-					if (idx == -1 || idx == 1) {
-						url = new URI("file:" + scriptURI).toURL();
-					} else {
-						throw mfu;
-					}
-				}
-			} else {
-				url = new URI(scriptURI).toURL();
-				final URI uri = new URI(url.getProtocol(), url.getUserInfo(), url.getHost(), url.getPort(), url.getPath(), url.getQuery(), url.getRef());
-				url = uri.toURL();
-			}
-
-			return getSource(url.toString(), integrity);
+			return getSource(scriptURI, integrity);
 		} catch (final Exception err) {
 			log.error(err.getMessage(), err);
 			return "";

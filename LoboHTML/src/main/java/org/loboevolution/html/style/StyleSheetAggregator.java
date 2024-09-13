@@ -43,6 +43,7 @@ import org.htmlunit.cssparser.parser.selector.*;
 import org.htmlunit.cssparser.parser.selector.Selector.SelectorType;
 import org.htmlunit.cssparser.dom.*;
 import org.loboevolution.common.Strings;
+import org.loboevolution.common.Urls;
 import org.loboevolution.config.HtmlRendererConfig;
 import org.loboevolution.html.dom.*;
 import org.loboevolution.html.dom.domimpl.*;
@@ -54,6 +55,7 @@ import org.loboevolution.css.CSSStyleSheet;
 import org.loboevolution.js.Window;
 
 import java.io.IOException;
+import java.net.URI;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -1032,8 +1034,8 @@ public class StyleSheetAggregator {
 					final CSSImportRuleImpl importRule = (CSSImportRuleImpl) rule;
 					final MediaListImpl mediaList = importRule.getMedia();
 					final HTMLDocumentImpl doc = getDoc();
-					final String uri = doc.getFullURL(importRule.getHref(), doc.getBaseURI()).toString();
-					final CSSStyleSheetImpl sheet = CSSUtilities.parseCssExternal(getDoc().getHtmlRendererConfig(), uri, null, doc.getBaseURI(), null, false);
+					final URI uri = Urls.createURI(doc.getBaseURI(), importRule.getHref());
+					final CSSStyleSheetImpl sheet = CSSUtilities.parseCssExternal(getDoc().getHtmlRendererConfig(), uri, doc.getBaseURI(), null, false);
 					if (mediaList.getLength() == 0 && index.getMediaList().getLength() == 0) {
 						index(index, sheet.getCssRules());
 					} else {

@@ -44,7 +44,7 @@ public class HTMLElementTest extends LoboUnitTest {
         return "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
-                + "  function doTest() {\n"
+                + "function doTest() {\n"
                 + "    var myNode = document.getElementById('myNode');\n"
                 + "    alert('Outer = ' + myNode.outerHTML);\n"
                 + "  }\n"
@@ -66,7 +66,7 @@ public class HTMLElementTest extends LoboUnitTest {
         return "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
-                + "  function doTest() {\n"
+                + "function doTest() {\n"
                 + "    var myNode = document.getElementById('myNode');\n"
                 + "    var innerNode = document.getElementById('innerNode');\n"
                 + "    alert('Old = ' + myNode.innerHTML);\n"
@@ -87,8 +87,7 @@ public class HTMLElementTest extends LoboUnitTest {
             "all is not supported", "all is not supported", "all is not supported"})
     public void allIndexByInt() {
         final String html = "<html><head>\n"
-                + "<script>\n"
-                + "function test() {\n"
+                + "<script>\n"                + "function test() {\n"
                 + "  dumpAll('body');\n"
                 + "  dumpAll('testDiv');\n"
                 + "  dumpAll('testA');\n"
@@ -126,7 +125,7 @@ public class HTMLElementTest extends LoboUnitTest {
                 + "<head>\n"
                 + "  <title>test</title>\n"
                 + "<script>\n"
-                + "  function doTest() {\n"
+                + "function doTest() {\n"
                 + "    var myNode = document.getElementById('myNode');\n"
                 + "    alert(myNode.title);\n"
                 + "    alert(myNode.getAttribute('title'));\n"
@@ -146,8 +145,7 @@ public class HTMLElementTest extends LoboUnitTest {
     @Test
     @Alerts("null")
     public void getAttributestyleAttribute() {
-        final String html = "<html><head>"
-                + "<script>\n"
+        final String html = "<html><head><script>\n"
                 + "  function test() {\n"
                 + "    var elem = document.getElementById('tester');\n"
                 + "    alert(elem.getAttribute('style'));\n"
@@ -165,7 +163,7 @@ public class HTMLElementTest extends LoboUnitTest {
     public void getAttributestyleAttributeWithFlag() {
         final String html =
                 "<html><body onload='test()'><div id='div' style='color: green;'>abc</div>\n"
-                        + "<script>\n"
+                        + "<script>\n"                        
                         + "  function test() {\n"
                         + "    var div = document.getElementById('div');\n"
                         + "    alert(div.getAttribute('style', 2));\n"
@@ -181,7 +179,7 @@ public class HTMLElementTest extends LoboUnitTest {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
-                + "  function doTest() {\n"
+                + "function doTest() {\n"
                 + "    var myNode = document.body.firstChild;\n"
                 + "    if (myNode.attributes.length == 0)\n"
                 + "      alert('0 attribute');\n"
@@ -203,7 +201,7 @@ public class HTMLElementTest extends LoboUnitTest {
     public void getSetAttributeNS() {
         final String html = "<html>\n"
                 + "<head>\n"
-                + "<script>\n"
+               + "<script>\n"
                 + "function doTest() {\n"
                 + "  var myNode = document.getElementById('myNode');\n"
                 + "  alert(myNode.getAttributeNS('myNamespaceURI', 'my:foo'));\n"
@@ -227,13 +225,11 @@ public class HTMLElementTest extends LoboUnitTest {
     public void attributesAccess() {
         final String html
                 = "<html><head>\n"
-                + "<script>\n"
-                + "  </script>\n"
+                + "<script>\n"                + "  </script>\n"
                 + "</head>\n"
                 + "<body>\n"
                 + "  <input type='text' id='i' name='i' style='color:red' onclick='alert(1)' custom1='a' />\n"
-                + "<script>\n" 
-                + "    var i = document.getElementById('i');\n"
+                + "<script>\n" + "    var i = document.getElementById('i');\n"
                 + "    alert(i.type);\n"
                 + "    alert(i.id);\n"
                 + "    alert(i.name);\n"
@@ -252,7 +248,7 @@ public class HTMLElementTest extends LoboUnitTest {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
-                + "  function doTest() {\n"
+                + "function doTest() {\n"
                 + "    var myNode = document.getElementById('myNode');\n"
                 + "    alert(myNode.title);\n"
                 + "    myNode.setAttribute('title', 'b');\n"
@@ -292,7 +288,8 @@ public class HTMLElementTest extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "<head>\n"
-                        + "<script>\n"                        + "    function test() {\n"
+                        + "<script>\n"
+                        + "  function test() {\n"
                         + "      var div = document.getElementById('div2');\n"
                         + "      alert(div.getAttributeNode('notExisting'));\n"
                         + "      var customAtt = div.getAttributeNode('custom_attribute');\n"
@@ -481,8 +478,7 @@ public class HTMLElementTest extends LoboUnitTest {
     @Test
     @Alerts({"inform(\"onclick\")", "inform('newHandler')", "newHandler"})
     public void getAttributeEventHandler() {
-        final String html = "<html><head>"
-                + "<script>\n"
+        final String html = "<html><head><script>\n"
                 + "  function test() {\n"
                 + "    var text = document.getElementById('login');\n"
                 + "    alert(text.getAttribute('onclick'));\n"
@@ -511,7 +507,8 @@ public class HTMLElementTest extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "<head>\n"
-                        + "<script>\n"                        + "    function test() {\n"
+                        + "<script>\n"
+                        + "  function test() {\n"
                         + "      // Get the old alignment.\n"
                         + "      var div1 = document.getElementById('div1');\n"
                         + "      var a1 = div1.getAttributeNode('align');\n"
@@ -559,8 +556,7 @@ public class HTMLElementTest extends LoboUnitTest {
     @Test
     @Alerts({"div1", "div2"})
     public void getElementsByTagName2() {
-        final String html = "<html><head>"
-                + "<script>\n"
+        final String html = "<html><head><script>\n"
                 + "  function test() {\n"
                 + "    for (var f = 0; (formnode = document.getElementsByTagName('form').item(f)); f++)\n"
                 + "      for (var i = 0; (node = formnode.getElementsByTagName('div').item(i)); i++)\n"
@@ -581,8 +577,7 @@ public class HTMLElementTest extends LoboUnitTest {
     public void getElementsByTagNameCollection() {
         final String html
                 = "<html><head>\n"
-                + "<script>\n"
-                + "function test() {\n"
+                + "<script>\n"                + "function test() {\n"
                 + "  var form1 = document.getElementById('form1');\n"
                 + "  var elements = form1.getElementsByTagName('input');\n"
                 + "  alert(elements['one'].name);\n"
@@ -604,8 +599,7 @@ public class HTMLElementTest extends LoboUnitTest {
     @Test
     @Alerts({"8", "3"})
     public void getElementsByTagNameAsterisk() {
-        final String html = "<html><body onload='test()'>"
-                + "<script>\n"
+        final String html = "<html><body onload='test()'><script>\n"
                 + "  function test() {\n"
                 + "    alert(document.getElementsByTagName('*').length);\n"
                 + "    alert(document.getElementById('div').getElementsByTagName('*').length);\n"
@@ -655,7 +649,7 @@ public class HTMLElementTest extends LoboUnitTest {
     public void getClassNameWhitespace() {
         final String html
                 = "<html><head>\n"
-                + "<script>\n"
+               + "<script>\n"
                 + "function doTest() {\n"
                 + "  var elem = document.getElementById('pid1');\n"
                 + "  alert('*' + elem.className + '#' + elem.getAttribute('class') + '*');\n"
@@ -688,7 +682,7 @@ public class HTMLElementTest extends LoboUnitTest {
     public void setClassName() {
         final String html
                 = "<html><head><style>.x { font: 8pt Arial bold; }</style>\n"
-                + "<script>\n"
+               + "<script>\n"
                 + "function doTest() {\n"
                 + "  var ele = document.getElementById('pid');\n"
                 + "  ele.className = 'z';\n"
@@ -709,7 +703,7 @@ public class HTMLElementTest extends LoboUnitTest {
                 + "<head>\n"
                 + "  <script id='theScript'>if (1 > 2 & 3 < 2) willNotHappen('yo');</script>\n"
                 + "<script>\n"
-                + "  function doTest() {\n"
+                + "function doTest() {\n"
                 + "    var myNode = document.getElementById('theScript');\n"
                 + "    alert(myNode.innerHTML);\n"
                 + "  }\n"
@@ -728,7 +722,7 @@ public class HTMLElementTest extends LoboUnitTest {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
-                + "  function doTest() {\n"
+                + "function doTest() {\n"
                 + "    var myNode = document.getElementById('myNode');\n"
                 + "    if (myNode.getInnerHTML) {\n"
                 + "      alert(myNode.getInnerHTML());\n"
@@ -746,19 +740,18 @@ public class HTMLElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("<DIV id=\"i\" foo=\"\" name=\"\"></DIV>")
+    @Alerts("<DIV id=\"i\" foo=\"\" name=\"\"/>")
     public void getInnerHTMLEmptyAttributes() {
         final String html = "<body onload='alert(document.body.innerHTML)'><div id='i' foo='' name=''></div></body>";
         checkHtmlAlert(html);
     }
 
     @Test
-    @Alerts({"Old#=#<B>Old#innerHTML</B>", "New#=#New##cell#value"})
+    @Alerts({"Old = <B>Old innerHTML</B>", "New = New  cell value"})
     public void getSetInnerHTMLSimpleFF() {
         final String html = "<html>\n"
                 + "<head>\n"
-                + "<script>\n" 
-                + "function alert(msg) { window.document.title += msg.replace(/\\s/g, '#') + '§';}\n"
+                + "<script>\n" + "function alert(msg) { window.document.title += msg.replace(/\\s/g, '#') + '§';}\n"
                 + "  function doTest() {\n"
                 + "    var myNode = document.getElementById('myNode');\n"
                 + "    alert('Old = ' + myNode.innerHTML);\n"
@@ -780,7 +773,7 @@ public class HTMLElementTest extends LoboUnitTest {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
-                + "  function doTest() {\n"
+                + "function doTest() {\n"
                 + "    var myNode = document.getElementById('myNode');\n"
                 + "    myNode.innerHTML = '<input type=\"checkbox\" name=\"myCb\" checked>';\n"
                 + "    alert(myNode.myCb.checked);\n"
@@ -795,13 +788,12 @@ public class HTMLElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"Old#=#<B>Old innerHTML</B>",
-            "New#=#New##cell#value#&amp;#Đ#Đ"})
+    @Alerts({"Old = <B>Old innerHTML</B>",
+            "New  cell value  Đ "})
     public void getSetInnerHTMLCharFF() {
         final String html = "<html>\n"
                 + "<head>\n"
-                + "<script>\n"
-                + "function alert(msg) { window.document.title += msg.replace(/\\s/g, '#') + '§';}\n"
+                + "<script>\n" + "function alert(msg) { window.document.title += msg.replace(/\\s/g, '#') + '§';}\n"
                 + "  function doTest() {\n"
                 + "    var myNode = document.getElementById('myNode');\n"
                 + "    alert('Old = ' + myNode.innerHTML);\n"
@@ -819,8 +811,7 @@ public class HTMLElementTest extends LoboUnitTest {
 
     @Test
     public void setInnerHTMLExecuteJavaScript() {
-        final String html = "<html><head>"
-                + "<script>\n"
+        final String html = "<html><head><script>\n"
                 + "  function test() {\n"
                 + "    var newnode = '<scr'+'ipt>alerter();</scr'+'ipt>';\n"
                 + "    var outernode = document.getElementById('myNode');\n"
@@ -855,8 +846,7 @@ public class HTMLElementTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void setInnerHTMLDeclareJavaScript() {
-        final String html = "<html><head>"
-                + "<script>\n"
+        final String html = "<html><head><script>\n"
                 + "  function test() {\n"
                 + "    var newnode = '<scr'+'ipt>function tester() { alerter(); }</scr'+'ipt>';\n"
                 + "    var outernode = document.getElementById('myNode');\n"
@@ -877,8 +867,7 @@ public class HTMLElementTest extends LoboUnitTest {
     @Test
     @Alerts({"true", "true", "true"})
     public void outerHTMLinNewDiv() {
-        final String html = "<html><body onload='test()'>\n"
-                + "<script>\n"
+        final String html = "<html><body onload='test()'><script>\n"
                 + "  function test() {\n"
                 + "    var div = document.createElement('div');\n"
                 + "    alert('outerHTML' in div);\n"
@@ -892,10 +881,9 @@ public class HTMLElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"<div id=\"div\"><ul></ul></div>", "<ul></ul>", ""})
+    @Alerts({"<DIV id=\"div\"><UL/></DIV>", "<UL/>", ""})
     public void getSetInnerHtmlEmptyTagFF() {
-        final String html = "<html><body onload='test()'>\n"
-                + "<script>\n"
+        final String html = "<html><body onload='test()'><script>\n"
                 + "  function test() {\n"
                 + "    var div = document.getElementById('div');\n"
                 + "    alert(div.outerHTML);\n"
@@ -909,10 +897,9 @@ public class HTMLElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"<DIV id=\"div\"><SPAN class=\"a b\"></SPAN></DIV>", "<SPAN class=\"a b\"></SPAN>", ""})
+    @Alerts({"<DIV id=\"div\"><SPAN class=\"a b\"/></DIV>", "<SPAN class=\"a b\"/>", ""})
     public void getSetInnerHtmlAttributeWithWhitespaceFF() {
-        final String html = "<html><body onload='test()'>\n"
-                + "<script>\n"
+        final String html = "<html><body onload='test()'><script>\n"
                 + "  function test() {\n"
                 + "    var div = document.getElementById('div');\n"
                 + "    alert(div.outerHTML);\n"
@@ -1049,7 +1036,7 @@ public class HTMLElementTest extends LoboUnitTest {
      * Test setting outerHTML to ''.
      */
     @Test
-    @Alerts({"Old = <SPAN id=\"innerNode\">Old outerHTML</SPAN>", "New = ", "Children: 1"})
+    @Alerts({"Old = <SPAN id=\"innerNode\">Old outerHTML</SPAN>", "New =   ", "Children: 1"})
     public void setOuterHTMLBlank() {
         final String html = createPageForSetOuterHTML("div", "  ");
         checkHtmlAlert(html);
@@ -1089,7 +1076,7 @@ public class HTMLElementTest extends LoboUnitTest {
      * Test setting <code>outerHTML</code> of a <code>span</code> (inline) to a <code>div</code> (block).
      */
     @Test
-    @Alerts({"Old = <SPAN id=\"innerNode\">Old outerHTML</SPAN>", "New = <DIV>test</DIV>", "Children: 1"})
+    @Alerts({"Old = <SPAN id=\"innerNode\">Old outerHTML</SPAN>", "New = <div>test</div>", "Children: 1"})
     public void setOuterHTMLAddBlockToInline() {
         final String html = createPageForSetOuterHTML("span", "<div>test</div>");
         checkHtmlAlert(html);
@@ -1214,7 +1201,7 @@ public class HTMLElementTest extends LoboUnitTest {
      * Test setting <code>outerHTML</code> to an XHTML self-closing <code>div</code> (block).
      */
     @Test
-    @Alerts({"Old = <SPAN id=\"innerNode\">Old outerHTML</SPAN>", "New = <DIV/>", "Children: 1"})
+    @Alerts({"Old = <SPAN id=\"innerNode\">Old outerHTML</SPAN>", "New = <div></div>", "Children: 1"})
     public void setOuterHTMLAddSelfClosingBlock() {
         final String html = createPageForSetOuterHTML("div", "<div/>");
         checkHtmlAlert(html);
@@ -1232,7 +1219,7 @@ public class HTMLElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"Old = <SPAN id=\"innerNode\">Old outerHTML</SPAN>", "New = <SPAN/>", "Children: 1"})
+    @Alerts({"Old = <SPAN id=\"innerNode\">Old outerHTML</SPAN>", "New = <span></SPAN>", "Children: 1"})
     public void setOuterHTMLAddSelfClosingInline() {
         final String html = createPageForSetOuterHTML("div", "<span/>");
         checkHtmlAlert(html);
@@ -1242,7 +1229,7 @@ public class HTMLElementTest extends LoboUnitTest {
      * Test setting <code>outerHTML</code> to an XHTML self-closing <code>br</code> (empty).
      */
     @Test
-    @Alerts({"Old = <SPAN id=\"innerNode\">Old outerHTML</SPAN>", "New = <BR/>", "Children: 1"})
+    @Alerts({"Old = <SPAN id=\"innerNode\">Old outerHTML</SPAN>", "New = <br>", "Children: 1"})
     public void setOuterHTMLAddSelfClosingEmpty() {
         final String html = createPageForSetOuterHTML("div", "<br/>");
         checkHtmlAlert(html);
@@ -1284,7 +1271,7 @@ public class HTMLElementTest extends LoboUnitTest {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
-                + "  function doTest() {\n"
+                + "function doTest() {\n"
                 + "    var myNode = document.getElementById('myNode');\n"
                 + "    document.body.removeChild(myNode);\n"
                 + "    alert('Old = ' + myNode.innerHTML);\n"
@@ -1310,7 +1297,7 @@ public class HTMLElementTest extends LoboUnitTest {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
-                + "  function doTest() {\n"
+                + "function doTest() {\n"
                 + "    var myNode = document.getElementById('myNode');\n"
                 + "    document.body.removeChild(myNode);\n"
                 + "    alert('Old = ' + myNode.innerHTML);\n"
@@ -1366,7 +1353,7 @@ public class HTMLElementTest extends LoboUnitTest {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
-                + "  function doTest() {\n"
+                + "function doTest() {\n"
                 + "    var myNode = document.getElementById('myNode');\n"
                 + "    document.body.removeChild(myNode);\n"
                 + "    alert('Old = ' + myNode.innerHTML);\n"
@@ -1387,8 +1374,7 @@ public class HTMLElementTest extends LoboUnitTest {
 
     @Test
     public void setOuterHTMLExecuteJavaScript() {
-        final String html = "<html><head>"
-                + "<script>\n"
+        final String html = "<html><head><script>\n"
                 + "  function test() {\n"
                 + "    var newnode = '<scr'+'ipt>alerter();</scr'+'ipt>';\n"
                 + "    var oldnode = document.getElementById('myNode');\n"
@@ -1405,8 +1391,7 @@ public class HTMLElementTest extends LoboUnitTest {
 
     @Test
     public void setOuterHTMLExecuteNestedJavaScript() {
-        final String html = "<html><head>"
-                + "<script>\n"
+        final String html = "<html><head><script>\n"
                 + "  function test() {\n"
                 + "    var newnode = '<div><scr'+'ipt>alerter();</scr'+'ipt></div>';\n"
                 + "    var oldnode = document.getElementById('myNode');\n"
@@ -1424,8 +1409,7 @@ public class HTMLElementTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void setOuterHTMLDeclareJavaScript() {
-        final String html = "<html><head>"
-                + "<script>\n"
+        final String html = "<html><head><script>\n"
                 + "  function test() {\n"
                 + "    var newnode = '<scr'+'ipt>function tester() { alerter(); }</scr'+'ipt>';\n"
                 + "    var oldnode = document.getElementById('myNode');\n"
@@ -1489,8 +1473,7 @@ public class HTMLElementTest extends LoboUnitTest {
     public void children() {
         final String html = "<html><body>\n"
                 + "<div id='myDiv'><br/><div><SPAN>test</SPAN></div></div>\n"
-                + "<script>\n"
-                + "  var oDiv = document.getElementById('myDiv');\n"
+                + "<script>\n"                + "  var oDiv = document.getElementById('myDiv');\n"
                 + "  for (var i = 0; i < oDiv.children.length; i++) {\n"
                 + "    alert(oDiv.children[i].tagName);\n"
                 + "  }\n"
@@ -1524,8 +1507,7 @@ public class HTMLElementTest extends LoboUnitTest {
     public void childrenFunctionAccess() {
         final String html = "<html><body>\n"
                 + "<div id='myDiv'><br/><div>\n"
-                + "<script>\n"
-                + "try {\n"
+                + "<script>\n"                + "try {\n"
                 + "  var oDiv = document.getElementById('myDiv');\n"
                 + "  alert(oDiv.children.length);\n"
                 + "  alert(oDiv.children(0).tagName);\n"
@@ -1540,7 +1522,7 @@ public class HTMLElementTest extends LoboUnitTest {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
-                + "  function doTest() {\n"
+                + "function doTest() {\n"
                 + "    var myNode = document.getElementById('myNode');\n"
                 + "    alert('Old = ' + myNode.innerText);\n"
                 + "    myNode.innerText = 'New cell value';\n"
@@ -1565,7 +1547,7 @@ public class HTMLElementTest extends LoboUnitTest {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
-                + "  function doTest() {\n"
+                + "function doTest() {\n"
                 + "    var myDiv = document.getElementById('aDiv');\n"
                 + "    alert(myDiv.getAttribute('name'));\n"
                 + "    myDiv.removeAttribute('name');\n"
@@ -1588,7 +1570,7 @@ public class HTMLElementTest extends LoboUnitTest {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
-                + "  function doTest() {\n"
+                + "function doTest() {\n"
                 + "    var myDiv = document.getElementById('aDiv');\n"
                 + "    myDiv.foo = 'hello';\n"
                 + "    alert(myDiv.foo);\n"
@@ -1614,8 +1596,7 @@ public class HTMLElementTest extends LoboUnitTest {
                 + "<body>\n"
                 + "</div></body>\n"
                 + "<div id='div1'>foo</div>\n"
-                + "<script>\n"
-                + "function alertScrolls(_oElt) {\n"
+                + "<script>\n"                + "function alertScrolls(_oElt) {\n"
                 + "  alert(typeof _oElt.scrollHeight);\n"
                 + "  alert(typeof _oElt.scrollWidth);\n"
                 + "  alert(typeof _oElt.scrollLeft);\n"
@@ -1644,6 +1625,8 @@ public class HTMLElementTest extends LoboUnitTest {
     /**
      * NOTE: When running this test with Firefox (3.6, at least), it's important to reload the page with Ctrl+F5
      * in order to completely clear the cache; otherwise, Firefox appears to incorrectly cache some style attributes.
+     *
+     * @if an error occurs
      */
     private void scrollLeft(final String overflow) {
         final String html
@@ -1651,8 +1634,7 @@ public class HTMLElementTest extends LoboUnitTest {
                 + "<div id='d1' style='width:100px;height:100px;background-color:green;'>\n"
                 + "  <div id='d2' style='width:50px;height:50px;background-color:blue;'></div>\n"
                 + "</div>\n"
-                + "<script>\n"
-                + "function test() {\n"
+                + "<script>\n"                + "function test() {\n"
                 + "  var d1 = document.getElementById('d1'), d2 = document.getElementById('d2');\n"
                 + "  alert(d1.scrollLeft);\n"
                 + "  d1.scrollLeft = -1;\n"
@@ -1682,7 +1664,7 @@ public class HTMLElementTest extends LoboUnitTest {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
-                + "  function doTest() {\n"
+                + "function doTest() {\n"
                 + "    var outer = document.getElementById('outer');\n"
                 + "    var inner = document.getElementById('inner');\n"
                 + "    alert(outer.scrollLeft);\n"
@@ -1717,6 +1699,8 @@ public class HTMLElementTest extends LoboUnitTest {
     /**
      * NOTE: When running this test with Firefox (3.6, at least), it's important to reload the page with Ctrl+F5
      * in order to completely clear the cache; otherwise, Firefox appears to incorrectly cache some style attributes.
+     *
+     * @if an error occurs
      */
     private void scrollTop(final String overflow) {
         final String html
@@ -1724,8 +1708,7 @@ public class HTMLElementTest extends LoboUnitTest {
                 + "<div id='d1' style='width:100px;height:100px;background-color:green;'>\n"
                 + "  <div id='d2' style='width:50px;height:50px;background-color:blue;'></div>\n"
                 + "</div>\n"
-                + "<script>\n"
-                + "function test() {\n"
+                + "<script>\n"                + "function test() {\n"
                 + "  var d1 = document.getElementById('d1'), d2 = document.getElementById('d2');\n"
                 + "  alert(d1.scrollTop);\n"
                 + "  d1.scrollTop = -1;\n"
@@ -1835,8 +1818,7 @@ public class HTMLElementTest extends LoboUnitTest {
     @Alerts({"null", "null"})
     public void offsetParentNewElement() {
         final String html = "<html><body>\n"
-                + "<script>\n"
-                + "  var oNew = document.createElement('span');\n"
+                + "<script>\n"                + "  var oNew = document.createElement('span');\n"
                 + "  alert(oNew.offsetParent);\n"
                 + "  var fragment = document.createDocumentFragment();\n"
                 + "  fragment.appendChild(oNew);\n"
@@ -1931,8 +1913,7 @@ public class HTMLElementTest extends LoboUnitTest {
             "undefined", "123", "from myFunction", "123", "from myFunction"})
     public void prototype() {
         final String html = "<html><head>\n"
-                + "<script>\n"
-                + "function test() {\n"
+                + "<script>\n"                + "function test() {\n"
                 + "  var d = document.getElementById('foo');\n"
                 + "  alert(d.foo);\n"
                 + "  alert(d.myFunction);\n"
@@ -1977,8 +1958,7 @@ public class HTMLElementTest extends LoboUnitTest {
     @Alerts({"true", "true"})
     public void instanceOf() {
         final String html = "<html><head>\n"
-                + "<script>\n"
-                + "function test() {\n"
+                + "<script>\n"                + "function test() {\n"
                 + "  var d = document.getElementById('foo');\n"
                 + "  alert(d instanceof HTMLDivElement);\n"
                 + "  var link = document.getElementById('testLink');\n"
@@ -2098,8 +2078,7 @@ public class HTMLElementTest extends LoboUnitTest {
     @Test
     @Alerts({"400", "100"})
     public void getBoundingClientRect2() {
-        final String html = "<html><head>"
-                + "<script>\n"
+        final String html = "<html><head><script>\n"
                 + "  function test() {\n"
                 + "    var d1 = document.getElementById('div1');\n"
                 + "    var pos = d1.getBoundingClientRect();\n"
@@ -2116,8 +2095,7 @@ public class HTMLElementTest extends LoboUnitTest {
     @Test
     @Alerts({"0", "100", "100", "50"})
     public void getBoundingClientRect_Scroll() {
-        final String html = "<html><head>"
-                + "<script>\n"
+        final String html = "<html><head><script>\n"
                 + "  function test() {\n"
                 + "    var d1 = document.getElementById('outer');\n"
                 + "    d1.scrollTop = 150;\n"
@@ -2148,9 +2126,8 @@ public class HTMLElementTest extends LoboUnitTest {
     @Alerts({"[object DOMRect]", "0", "0"})
     public void getBoundingClientRectDisconnected() {
         final String html = "<html>\n"
-                + "<head>\n"
-                + "<script>\n"
-                 + "  function test() {\n"
+                + "<head><script>\n"
+                + "  function test() {\n"
                 + "    var d1 = document.createElement('div');\n"
                 + "    try {\n"
                 + "      var pos = d1.getBoundingClientRect();\n"
@@ -2169,8 +2146,7 @@ public class HTMLElementTest extends LoboUnitTest {
     @Test
     @Alerts({"[object DOMRectList]", "1"})
     public void getClientRects() {
-        final String html = "<html><head>"
-                + "<script>\n"
+        final String html = "<html><head><script>\n"
                 + "  function test() {\n"
                 + "    var d1 = document.getElementById('div1');\n"
                 + "    var rects = d1.getClientRects();\n"
@@ -2230,8 +2206,7 @@ public class HTMLElementTest extends LoboUnitTest {
     @Test
     @Alerts({"null", "null"})
     public void innerHTMLParentNode() {
-        final String html = "<html><head>"
-                + "<script>\n"
+        final String html = "<html><head><script>\n"
                 + "  function test() {\n"
                 + "    var div1 = document.createElement('div');\n"
                 + "    alert(div1.parentNode);\n"
@@ -2249,8 +2224,7 @@ public class HTMLElementTest extends LoboUnitTest {
     @Test
     @Alerts({"null", "null"})
     public void innerTextParentNode() {
-        final String html = "<html><head>"
-                + "<script>\n"
+        final String html = "<html><head><script>\n"
                 + "  function test() {\n"
                 + "    var div1 = document.createElement('div');\n"
                 + "    alert(div1.parentNode);\n"
@@ -2268,8 +2242,7 @@ public class HTMLElementTest extends LoboUnitTest {
     @Test
     @Alerts({"true", "true", "true"})
     public void uniqueID() {
-        final String html = "<html><head>"
-                + "<script>\n"
+        final String html = "<html><head><script>\n"
                 + "  function test() {\n"
                 + "    var div1 = document.getElementById('div1');\n"
                 + "    var div2 = document.getElementById('div2');\n"
@@ -2291,8 +2264,7 @@ public class HTMLElementTest extends LoboUnitTest {
     @Test
     @Alerts("undefined")
     public void uniqueIDFormatIE() {
-        final String html = "<html><head>"
-                + "<script>\n"
+        final String html = "<html><head><script>\n"
                 + "  function test() {\n"
                 + "    var div1 = document.getElementById('div1');\n"
                 + "    var div2 = document.getElementById('div2');\n"
@@ -2315,8 +2287,7 @@ public class HTMLElementTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void setExpression() {
-        final String html = "<html><head>"
-                + "<script>\n"
+        final String html = "<html><head><script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var div1 = document.getElementById('div1');\n"
@@ -2332,8 +2303,7 @@ public class HTMLElementTest extends LoboUnitTest {
     @Test
     @Alerts({"ex setExpression", "ex removeExpression"})
     public void removeExpression() {
-        final String html = "<html><head>"
-                + "<script>\n"
+        final String html = "<html><head><script>\n"
                 + "  function test() {\n"
                 + "    var div1 = document.getElementById('div1');\n"
                 + "    try {\n"
@@ -2389,7 +2359,7 @@ public class HTMLElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("function")
+    @Alerts("object")
     public void hasAttributeTypeOf() {
         final String html
                 = "<html>\n"
@@ -2408,23 +2378,23 @@ public class HTMLElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"function", "true", "true", "false"})
+    @Alerts({"object", "true", "true", "false"})
     public void hasAttributeQuirksMode() {
         final String html =
                 "<html>\n"
-	                + "<head>\n"
-	                + "<script>\n"
-	                + "  function test() {\n"
-	                + "    var elt = document.body;\n"
-	                + "    alert(typeof elt.hasAttribute);\n"
-	                + "    alert(elt.hasAttribute('onload'));\n"
-	                + "    alert(elt.hasAttribute('onLoad'));\n"
-	                + "    alert(elt.hasAttribute('foo'));\n"
-	                + "  }\n"
-	                + "</script>\n"
-	                + "</head>\n"
-	                + "<body onload='test()'></body>\n"
-	                + "</html>";
+                        + "<head>\n"
+                        + "<script>\n"
+                        + "  function test() {\n"
+                        + "    var elt = document.body;\n"
+                        + "    alert(typeof elt.hasAttribute);\n"
+                        + "    alert(elt.hasAttribute('onload'));\n"
+                        + "    alert(elt.hasAttribute('onLoad'));\n"
+                        + "    alert(elt.hasAttribute('foo'));\n"
+                        + "  }\n"
+                        + "</script>\n"
+                        + "</head>\n"
+                        + "<body onload='test()'></body>\n"
+                        + "</html>";
         checkHtmlAlert(html);
     }
 
@@ -2589,8 +2559,7 @@ public class HTMLElementTest extends LoboUnitTest {
     public void classClassNameAttribute() {
         final String html
                 = "<html><head>\n"
-                + "<script>\n" 
-                + "function doTest() {\n"
+                + "<script>\n" + "function doTest() {\n"
                 + "  var e = document.getElementById('pid');\n"
                 + "  alert(e.getAttribute('class'));\n"
                 + "  alert(e.getAttribute('className'));\n"
@@ -2613,7 +2582,7 @@ public class HTMLElementTest extends LoboUnitTest {
     public void classClassNameAttribute2() {
         final String html
                 = "<html><head>\n"
-                + "<script>\n"
+               + "<script>\n"
                 + "function doTest() {\n"
                 + "  var e = document.getElementById('pid');\n"
                 + "  alert(e['lang'] + '-' + e['class'] + '-' + e['className']);\n"
@@ -2641,8 +2610,7 @@ public class HTMLElementTest extends LoboUnitTest {
     public void contains() {
         final String html
                 = "<html><head>\n"
-                + "<script>\n"
-                + "function test() {\n"
+                + "<script>\n"                + "function test() {\n"
                 + "try {\n"
                 + "  var div1 = document.getElementById('div1');\n"
                 + "  var div2 = document.getElementById('div2');\n"
@@ -2677,9 +2645,10 @@ public class HTMLElementTest extends LoboUnitTest {
 
     @Test
     @Alerts({"exception[]", "false", "false"})
-    public void containsInvalidArgument() {
-        final String html = "<html><body>"
-                + "<script>\n"
+    public void contains_invalidArgument() {
+        final String html = "<html><body><script>\n"
+
+
                 + "try {\n"
                 + "  alert(document.body.contains([]));\n"
                 + "} catch(e) { alert('exception[]'); }\n"
@@ -2699,8 +2668,7 @@ public class HTMLElementTest extends LoboUnitTest {
     public void filters() {
         final String html
                 = "<html><head>\n"
-                + "<script>\n"
-                + "function test() {\n"
+                + "<script>\n"                + "function test() {\n"
                 + "  var div1 = document.getElementById('div1');\n"
                 + "  var defined = typeof(div1.filters) != 'undefined';\n"
                 + "  alert(defined ? 'defined' : 'undefined');\n"
@@ -2718,8 +2686,7 @@ public class HTMLElementTest extends LoboUnitTest {
     public void attributesTrimmed() {
         final String html
                 = "<html><head>\n"
-                + "<script>\n" 
-                + "function alert(msg) { window.document.title += msg.replace(/\\s/g, '#') + '§';}\n"
+                + "<script>\n" + "function alert(msg) { window.document.title += msg.replace(/\\s/g, '#') + '§';}\n"
                 + "function test() {\n"
                 + "  var div1 = document.body.firstChild;\n"
                 + "  alert('>' + div1.className + '<');\n"
@@ -2775,8 +2742,7 @@ public class HTMLElementTest extends LoboUnitTest {
     public void parentElement2() {
         final String html
                 = "<html><head>\n"
-                + "<script>\n"
-                + "function test() {\n"
+                + "<script>\n"                + "function test() {\n"
                 + "  var fragment = document.createDocumentFragment();\n"
                 + "  var div = document.createElement('div');\n"
                 + "  var bold = document.createElement('b');\n"
@@ -2800,8 +2766,7 @@ public class HTMLElementTest extends LoboUnitTest {
     public void doScroll() {
         final String html
                 = "<html><head>\n"
-                + "<script>\n"
-                + "function test() {\n"
+                + "<script>\n"                + "function test() {\n"
                 + "  try {\n"
                 + "    document.documentElement.doScroll('left');\n"
                 + "    alert('success');\n"
@@ -2821,8 +2786,7 @@ public class HTMLElementTest extends LoboUnitTest {
     public void removeNode() {
         final String html
                 = "<html><head>\n"
-                + "<script>\n"
-                + "function test() {\n"
+                + "<script>\n"                + "function test() {\n"
                 + "  var div1 = document.getElementById('div1');\n"
                 + "  var div2 = document.getElementById('div2');\n"
                 + "  if (!div2.removeNode) { alert('removeNode not available'); return }\n"
@@ -2850,13 +2814,11 @@ public class HTMLElementTest extends LoboUnitTest {
     public void clearAttributes() {
         final String html
                 = "<html><head>\n"
-                + "<script>\n"
-                + "  function u(o) { return typeof o == 'undefined'; }\n"
+                + "<script>\n"                + "  function u(o) { return typeof o == 'undefined'; }\n"
                 + "</script></head>\n"
                 + "<body>\n"
                 + "  <input type='text' id='i' name='i' style='color:red' onclick='alert(1)' custom1='a' />\n"
-                + "<script>\n" 
-                + "    var i = document.getElementById('i');\n"
+                + "<script>\n" + "    var i = document.getElementById('i');\n"
                 + "    i.custom2 = 'b';\n"
                 + "    alert([u(i.type), u(i.id), u(i.name), u(i.style), u(i.onclick),"
                 + "           u(i.custom1), u(i.custom2)].join(','));\n"
@@ -2897,8 +2859,7 @@ public class HTMLElementTest extends LoboUnitTest {
                 + "<body>"
                 + "<input type='text' id='i' />\n"
                 + "<input type='text' id='i2' name='i2' style='color:red' onclick='alert(1)' custom1='a' />\n"
-                + "<script>\n" 
-                + "function u(o) { return typeof o == 'undefined'; }\n"
+                + "<script>\n" + "function u(o) { return typeof o == 'undefined'; }\n"
                 + "  var i = document.getElementById('i');\n"
                 + "  if (i.mergeAttributes) {\n"
                 + "    var i2 = document.getElementById('i2');\n"
@@ -2925,8 +2886,7 @@ public class HTMLElementTest extends LoboUnitTest {
     public void document() {
         final String html
                 = "<html><head>\n"
-                + "<script>\n"
-                + "function test() {\n"
+                + "<script>\n"                + "function test() {\n"
                 + "  alert(document.body.document === document);\n"
                 + "}\n"
                 + "</script></head><body onload='test()'>\n"
@@ -2939,8 +2899,7 @@ public class HTMLElementTest extends LoboUnitTest {
     @Alerts({"exception call", "exception set"})
     public void prototype_innerHTML() {
         final String html = "<html><body>\n"
-                + "<script>\n"
-                + "try {\n"
+                + "<script>\n"                + "try {\n"
                 + "  alert(HTMLElement.prototype.innerHTML);\n"
                 + "} catch (e) { alert('exception call') }\n"
                 + "try {\n"
@@ -2987,8 +2946,7 @@ public class HTMLElementTest extends LoboUnitTest {
     public void innerHTMLwithQuotes() {
         final String html = "<html>\n"
                 + "<head>\n"
-                + "<script>\n"
-                + "    function test() {\n"
+                + "<script>\n"                + "    function test() {\n"
                 + "      alert(document.getElementById('foo').innerHTML);\n"
                 + "    }\n"
                 + "  </script>\n"
@@ -3004,7 +2962,7 @@ public class HTMLElementTest extends LoboUnitTest {
     public void attributeNS() {
         final String html
                 = "<html><head>\n"
-               + "<script>\n"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    var e = document.getElementById('foo');\n"
                 + "    alert(e.getAttribute('type'));\n"
@@ -3029,7 +2987,7 @@ public class HTMLElementTest extends LoboUnitTest {
     public void dataset() {
         final String html
                 = "<html><head>\n"
-               + "<script>\n"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    alert(document.body.dataset);\n"
                 + "  }\n"
@@ -3046,7 +3004,7 @@ public class HTMLElementTest extends LoboUnitTest {
     @Alerts("")
     public void setAttributeClassName() {
         final String html = "<html><head>\n"
-               + "<script>\n"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    var div = document.createElement('div');\n"
                 + "    div.setAttribute('className', 't');\n"
@@ -3064,7 +3022,7 @@ public class HTMLElementTest extends LoboUnitTest {
     @Alerts("t")
     public void setAttributeClass() {
         final String html = "<html><head>\n"
-               + "<script>\n"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    var div = document.createElement('div');\n"
                 + "    div.setAttribute('class', 't');\n"
@@ -3115,12 +3073,12 @@ public class HTMLElementTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts({"null", "null", "null", "undefined"})
+    @Alerts({"null", "", "null", "undefined"})
     public void getAttribute2() {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
-                + "  function doTest() {\n"
+                + "function doTest() {\n"
                 + "    var form = document.getElementById('testForm');\n"
                 + "    alert(form.getAttribute('target'));\n"
                 + "    alert(form.target);\n"
@@ -3140,7 +3098,7 @@ public class HTMLElementTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts({"null", "", "null", "undefined"})
+    @Alerts({"null", "null", "null", "undefined"})
     public void getAttribute2standards() {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -3168,8 +3126,7 @@ public class HTMLElementTest extends LoboUnitTest {
     public void nodeNameVsOuterElement() {
         final String html = "<html>\n"
                 + "<head>\n"
-                + "<script>\n"                
-                + "    function test() {\n"                
+                + "<script>\n"                + "    function test() {\n"
                 + "      alert(document.createElement('div').tagName);\n"
                 + "      alert(document.createElement('section').tagName);\n"
                 + "      alert(document.createElement('div').cloneNode( true ).outerHTML);\n"
@@ -3233,8 +3190,7 @@ public class HTMLElementTest extends LoboUnitTest {
     public void innerHTMLsvg() {
         final String html = "<html>\n"
                 + "<head>\n"
-                + "<script>\n"
-                + "    function test() {\n"
+                + "<script>\n"                + "    function test() {\n"
                 + "      var div = document.createElement('div');\n"
                 + "      document.body.appendChild(div);\n"
                 + "      var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');\n"
@@ -3252,8 +3208,7 @@ public class HTMLElementTest extends LoboUnitTest {
     @Test
     @Alerts("executed")
     public void appendChildExecuteJavaScript() {
-        final String html = "<html><head>"
-                + "<script>\n"
+        final String html = "<html><head><script>\n"
                 + "  function test() {\n"
                 + "    var newnode = document.createElement('script');\n"
                 + "    try {\n"
@@ -3274,8 +3229,7 @@ public class HTMLElementTest extends LoboUnitTest {
     @Test
     @Alerts("executed")
     public void appendChildExecuteNestedJavaScript() {
-        final String html = "<html><head>"
-                + "<script>\n"
+        final String html = "<html><head><script>\n"
                 + "  function test() {\n"
                 + "    var newnode = document.createElement('div');\n"
                 + "    var newscript = document.createElement('script');\n"
@@ -3298,8 +3252,7 @@ public class HTMLElementTest extends LoboUnitTest {
     @Test
     @Alerts("declared")
     public void appendChildDeclareJavaScript() {
-        final String html = "<html><head>"
-                + "<script>\n"
+        final String html = "<html><head><script>\n"
                 + "  function test() {\n"
                 + "    var newnode = document.createElement('script');\n"
                 + "    newnode.appendChild(document.createTextNode('function tester() { alerter(); }'));\n"
@@ -3319,8 +3272,7 @@ public class HTMLElementTest extends LoboUnitTest {
     @Test
     @Alerts("executed")
     public void insertBeforeExecuteJavaScript() {
-        final String html = "<html><head>"
-                + "<script>\n"
+        final String html = "<html><head><script>\n"
                 + "  function test() {\n"
                 + "    var newnode = document.createElement('script');\n"
                 + "    try {\n"
@@ -3341,8 +3293,7 @@ public class HTMLElementTest extends LoboUnitTest {
     @Test
     @Alerts("executed")
     public void insertBeforeExecuteNestedJavaScript() {
-        final String html = "<html><head>"
-                + "<script>\n"
+        final String html = "<html><head><script>\n"
                 + "  function test() {\n"
                 + "    var newnode = document.createElement('div');\n"
                 + "    var newscript = document.createElement('script');\n"
@@ -3365,8 +3316,7 @@ public class HTMLElementTest extends LoboUnitTest {
     @Test
     @Alerts("declared")
     public void insertBeforeDeclareJavaScript() {
-        final String html = "<html><head>"
-                + "<script>\n"
+        final String html = "<html><head><script>\n"
                 + "  function test() {\n"
                 + "    var newnode = document.createElement('script');\n"
                 + "    newnode.appendChild(document.createTextNode('function tester() { alerter(); }'));\n"
@@ -3386,8 +3336,7 @@ public class HTMLElementTest extends LoboUnitTest {
     @Test
     @Alerts("executed")
     public void replaceChildExecuteJavaScript() {
-        final String html = "<html><head>"
-                + "<script>\n"
+        final String html = "<html><head><script>\n"
                 + "  function test() {\n"
                 + "    var newnode = document.createElement('script');\n"
                 + "    try {\n"
@@ -3408,9 +3357,8 @@ public class HTMLElementTest extends LoboUnitTest {
     @Test
     @Alerts("executed")
     public void replaceChildExecuteNestedJavaScript() {
-        final String html = "<html><head>"
-                + "<script>\n"
-                 + "  function test() {\n"
+        final String html = "<html><head><script>\n"
+                + "  function test() {\n"
                 + "    var newnode = document.createElement('div');\n"
                 + "    var newscript = document.createElement('script');\n"
                 + "    newnode.appendChild(newscript);\n"
@@ -3432,8 +3380,7 @@ public class HTMLElementTest extends LoboUnitTest {
     @Test
     @Alerts("declared")
     public void replaceChildDeclareJavaScript() {
-        final String html = "<html><head>"
-                + "<script>\n"
+        final String html = "<html><head><script>\n"
                 + "  function test() {\n"
                 + "    var newnode = document.createElement('script');\n"
                 + "    newnode.appendChild(document.createTextNode('function tester() { alerter(); }'));\n"
@@ -3453,8 +3400,7 @@ public class HTMLElementTest extends LoboUnitTest {
     @Test
     @Alerts({"false", "<!--some comment-->", "true", "false"})
     public void replaceChildAddNewChildToDocument() {
-        final String html = "<html><head>"
-                + "<script>\n"
+        final String html = "<html><head><script>\n"
                 + "  function test() {\n"
                 + "    var newnode = document.createComment('some comment');\n"
                 + "    alert(document.contains ? document.contains(newnode) : '-');\n"
@@ -3485,12 +3431,12 @@ public class HTMLElementTest extends LoboUnitTest {
      * @param afterEnd    data to insert
      * @param beforeBegin data to insert
      * @param afterBegin  data to insert
+     * @throws Exception if the test fails
      */
     private void insertAdjacentHTML(final String beforeEnd,
                                     final String afterEnd, final String beforeBegin, final String afterBegin) {
         final String html = "<html><head>\n"
-                + "<script>\n"
-                + "function test() {\n"
+                + "<script>\n"                + "function test() {\n"
                 + "  var oNode = document.getElementById('middle');\n"
                 + "  oNode.insertAdjacentHTML('" + beforeEnd + "', ' <SPAN id=3>before-end</SPAN> ');\n"
                 + "  oNode.insertAdjacentHTML('" + afterEnd + "', ' <SPAN id=4>after-end</SPAN> ');\n"
@@ -3521,8 +3467,7 @@ public class HTMLElementTest extends LoboUnitTest {
 
     @Test
     public void insertAdjacentHTMLExecuteJavaScript() {
-        final String html = "<html><head>"
-                + "<script>\n"
+        final String html = "<html><head><script>\n"
                 + "  function test() {\n"
                 + "    var outernode = document.getElementById('myNode');\n"
                 + "    outernode.insertAdjacentHTML('afterend', '<scr'+'ipt>alerter();</scr'+'ipt>');\n"
@@ -3538,8 +3483,7 @@ public class HTMLElementTest extends LoboUnitTest {
 
     @Test
     public void insertAdjacentHTMLExecuteNestedJavaScript() {
-        final String html = "<html><head>"
-                + "<script>\n"
+        final String html = "<html><head><script>\n"
                 + "  function test() {\n"
                 + "    var outernode = document.getElementById('myNode');\n"
                 + "    outernode.insertAdjacentHTML('afterend', '<div><scr'+'ipt>alerter();</scr'+'ipt></div>');\n"
@@ -3556,8 +3500,7 @@ public class HTMLElementTest extends LoboUnitTest {
     @Test
     @Alerts("exception")
     public void insertAdjacentHTMLDeclareJavaScript() {
-        final String html = "<html><head>"
-                + "<script>\n"
+        final String html = "<html><head><script>\n"
                 + "  function test() {\n"
                 + "    var outernode = document.getElementById('myNode');\n"
                 + "    outernode.insertAdjacentHTML('afterend', "
@@ -3587,8 +3530,7 @@ public class HTMLElementTest extends LoboUnitTest {
     private void insertAdjacentElement(final String beforeEnd,
                                        final String afterEnd, final String beforeBegin, final String afterBegin) {
         final String html = "<html><head>\n"
-                + "<script>\n"
-                + "function test() {\n"
+                + "<script>\n"                + "function test() {\n"
                 + "  var oNode = document.getElementById('middle');\n"
                 + "  if (!oNode.insertAdjacentElement) { alert('insertAdjacentElement not available'); return }\n"
                 + "  oNode.insertAdjacentElement('" + beforeEnd + "', makeElement(3, 'before-end'));\n"
@@ -3627,8 +3569,7 @@ public class HTMLElementTest extends LoboUnitTest {
     @Test
     @Alerts("executed")
     public void insertAdjacentElementExecuteJavaScript() {
-        final String html = "<html><head>"
-                + "<script>\n"
+        final String html = "<html><head><script>\n"
                 + "  function test() {\n"
                 + "    var newnode = document.createElement('script');\n"
                 + "    newnode.appendChild(document.createTextNode('alerter();'));\n"
@@ -3648,8 +3589,7 @@ public class HTMLElementTest extends LoboUnitTest {
     @Test
     @Alerts("executed")
     public void insertAdjacentElementExecuteNestedJavaScript() {
-        final String html = "<html><head>"
-                + "<script>\n"
+        final String html = "<html><head><script>\n"
                 + "  function test() {\n"
                 + "    var newnode = document.createElement('div');\n"
                 + "    var newscript = document.createElement('script');\n"
@@ -3671,8 +3611,7 @@ public class HTMLElementTest extends LoboUnitTest {
     @Test
     @Alerts("declared")
     public void insertAdjacentElementDeclareJavaScript() {
-        final String html = "<html><head>"
-                + "<script>\n"
+        final String html = "<html><head><script>\n"
                 + "  function test() {\n"
                 + "    var newnode = document.createElement('script');\n"
                 + "    newnode.appendChild(document.createTextNode('function tester() { alerter(); }'));\n"
@@ -3730,11 +3669,16 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html);
     }
 
+    /**
+     * Simple test that calls setCapture.
+     *
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"undefined", "undefined", "undefined", "setCapture available"})
     public void setCapture() {
         final String html = "<html><head>\n"
-               + "<script>\n"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    var div = document.getElementById('myDiv');\n"
                 + "    try {\n"
@@ -3756,7 +3700,7 @@ public class HTMLElementTest extends LoboUnitTest {
     @Alerts({"undefined", "releaseCapture available"})
     public void releaseCapture() {
         final String html = "<html><head>\n"
-               + "<script>\n"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    var div = document.getElementById('myDiv');\n"
                 + "    try {\n"
@@ -3776,7 +3720,7 @@ public class HTMLElementTest extends LoboUnitTest {
     @Alerts({"inherit", "false", "string", "boolean"})
     public void contentEditable() {
         final String html = "<html><head>\n"
-               + "<script>\n"
+                + "<script>\n"
                 + "  function test() {\n"
                 + "    var div = document.getElementById('myDiv');\n"
                 + "    alert(div.contentEditable);\n"
@@ -3792,13 +3736,17 @@ public class HTMLElementTest extends LoboUnitTest {
         checkHtmlAlert(html);
     }
 
+    /**
+     * See issue #1702.
+     *
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("true")
     public void oninput() {
         final String html = "<html>\n"
                 + "<head>\n"
-                + "<script>\n"
-                + "    function test() {\n"
+                + "<script>\n"                + "    function test() {\n"
                 + "      var testNode = document.createElement('div');\n"
                 + "      alert('oninput' in testNode);\n"
                 + "    }\n"
@@ -3818,7 +3766,8 @@ public class HTMLElementTest extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "<head>\n"
-                        + "<script>\n"                        + "    function test() {\n"
+                        + "<script>\n"
+                        + "  function test() {\n"
                         + "      alert(document.activeElement);\n"
 
                         + "      var testNode = document.getElementById('myButton');\n"
@@ -3865,17 +3814,16 @@ public class HTMLElementTest extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "<head>\n"
-                        + "<script>\n"                        + "  function handler(ev) {\n"
+                        + "<script>\n"
+                        + "  function handler(ev) {\n"
                         + "    alert(ev.currentTarget);\n"
                         + "  }\n"
 
                         + "  function test() {\n"
                         + "    var byId = document.getElementById.bind(document);\n"
-
                         + "    var under = byId('under');\n"
                         + "    var over = byId('over');\n"
                         + "    var body = document.body;\n"
-
                         + "    var types = ['click'];\n"
                         + "    for (var i = 0, type; (type = types[i]); ++i) {\n"
                         + "      under.addEventListener(type, handler);\n"
@@ -3909,14 +3857,11 @@ public class HTMLElementTest extends LoboUnitTest {
                         + "  function handler(ev) {\n"
                         + "    alert(ev.currentTarget);\n"
                         + "  }\n"
-
                         + "  function test() {\n"
                         + "    var byId = document.getElementById.bind(document);\n"
-
                         + "    var under = byId('under');\n"
                         + "    var over = byId('over');\n"
                         + "    var body = document.body;\n"
-
                         + "    var types = ['click'];\n"
                         + "    for (var i = 0, type; (type = types[i]); ++i) {\n"
                         + "      over.addEventListener(type, handler);\n"
@@ -3941,17 +3886,15 @@ public class HTMLElementTest extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "<head>\n"
-                        + "<script>\n"                        + "  function handler(ev) {\n"
+                        + "<script>\n"
+                        + "  function handler(ev) {\n"
                         + "    alert(ev.currentTarget);\n"
                         + "  }\n"
-
                         + "  function test() {\n"
                         + "    var byId = document.getElementById.bind(document);\n"
-
                         + "    var under = byId('under');\n"
                         + "    var over = byId('over');\n"
                         + "    var body = document.body;\n"
-
                         + "    var types = ['click'];\n"
                         + "    for (var i = 0, type; (type = types[i]); ++i) {\n"
                         + "      over.addEventListener(type, handler);\n"
@@ -3976,20 +3919,18 @@ public class HTMLElementTest extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "<head>\n"
-                        + "<script>\n"                        + "  function handler(ev) {\n"
+                        + "<script>\n"
+                        + "  function handler(ev) {\n"
                         + "    alert(ev.currentTarget);\n"
                         + "  }\n"
-
                         + "  function test() {\n"
                         + "    var under = document.getElementById('under');\n"
                         + "    var over = document.getElementById('over');\n"
                         + "    var body = document.body;\n"
-
                         + "    over.addEventListener('click', handler);\n"
                         + "    body.addEventListener('click', handler);\n"
                         + "    window.addEventListener('click', handler);\n"
                         + "    alert('added');\n"
-
                         + "    body.removeEventListener('click', handler);\n"
                         + "    alert('removed');\n"
                         + "  }\n"
@@ -4010,19 +3951,16 @@ public class HTMLElementTest extends LoboUnitTest {
                 "<html>\n"
                         + "<head>\n"
                         + "    <script>"
-                +  " function handler(ev) {\n"
+                        +  " function handler(ev) {\n"
                         + "    alert(ev.currentTarget);\n"
                         + "  }\n"
-
                         + "  function test() {\n"
                         + "    var under = document.getElementById('under');\n"
                         + "    var over = document.getElementById('over');\n"
                         + "    var body = document.body;\n"
-
                         + "    over.addEventListener('click', handler);\n"
                         + "    window.addEventListener('click', handler);\n"
                         + "    alert('added');\n"
-
                         + "    body.removeEventListener('click', handler);\n"
                         + "    alert('removed');\n"
                         + "  }\n"
@@ -4045,20 +3983,18 @@ public class HTMLElementTest extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "<head>\n"
-                        + "<script>\n"                        + "  function handler(ev) {\n"
+                        + "<script>\n"
+                        + "  function handler(ev) {\n"
                         + "    alert(ev.currentTarget);\n"
                         + "  }\n"
-
                         + "  function test() {\n"
                         + "    var under = document.getElementById('under');\n"
                         + "    var over = document.getElementById('over');\n"
                         + "    var body = document.body;\n"
-
                         + "    over.addEventListener('click', handler);\n"
                         + "    body.addEventListener('click', handler);\n"
                         + "    window.addEventListener('click', handler);\n"
                         + "    alert('added');\n"
-
                         + "    window.removeEventListener('click', handler);\n"
                         + "    alert('removed');\n"
                         + "  }\n"
@@ -4081,20 +4017,18 @@ public class HTMLElementTest extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "<head>\n"
-                        + "<script>\n"                        + "  function handler(ev) {\n"
+                        + "<script>\n"
+                        + "  function handler(ev) {\n"
                         + "    alert(ev.currentTarget);\n"
                         + "  }\n"
-
                         + "  function test() {\n"
                         + "    var under = document.getElementById('under');\n"
                         + "    var over = document.getElementById('over');\n"
                         + "    var body = document.body;\n"
-
                         + "    over.addEventListener('click', handler);\n"
                         + "    window.addEventListener('click', handler);\n"
                         + "    body.addEventListener('click', handler);\n"
                         + "    alert('added');\n"
-
                         + "    window.removeEventListener('click', handler);\n"
                         + "    alert('removed');\n"
                         + "  }\n"
@@ -4119,7 +4053,7 @@ public class HTMLElementTest extends LoboUnitTest {
                         + "<head>\n"
                         + "<title>Test</title>\n"
                         + "    <script>"
-                +  " function handler(e) {\n"
+                        +  " function handler(e) {\n"
                         + "    var log = document.getElementById('log');\n"
                         + "    log.innerHTML += '<p></p>';\n"
                         + "    log.lastElementChild.textContent = e.type + '-' + e.target.id + '-' + e.currentTarget.id;\n"
@@ -4127,14 +4061,12 @@ public class HTMLElementTest extends LoboUnitTest {
                         + "  function test() {\n"
                         + "    var over = document.getElementById('over');\n"
                         + "    var body = document.body;\n"
-
                         + "    var types = ['click', 'mousedown', 'mouseup'];\n"
                         + "    for (var i = 0, type; (type = types[i]); ++i) {\n"
                         + "      over.addEventListener(type, handler);\n"
                         + "      body.addEventListener(type, handler);\n"
                         + "      window.addEventListener(type, handler);\n"
                         + "    }\n"
-
                         + "    over.addEventListener('mousedown', function () {\n"
                         + "      over.style.display = 'none';\n"
                         + "    });\n"
@@ -4154,12 +4086,13 @@ public class HTMLElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("<SELECT id=\"myId\"><option>Two</option></SELECT>")
+    @Alerts("<SELECT id=\"myId\"><OPTION>Two</OPTION></SELECT>")
     public void innerHTML() {
         final String html =
                 "<html>\n"
                         + "<head>\n"
-                        + "<script>\n"                        + "    function test() {\n"
+                        + "<script>\n"
+                        + "    function test() {\n"
                         + "      var select = document.getElementById('myId');\n"
                         + "      select.innerHTML = \"<select id='myId2'><option>Two</option></select>\";\n"
                         + "      alert(document.body.innerHTML.trim());\n"
@@ -4180,7 +4113,8 @@ public class HTMLElementTest extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "<head>\n"
-                        + "<script>\n"                        + "    function test() {\n"
+                        + "<script>\n"
+                        + "  function test() {\n"
                         + "      var div = document.createElement('div');\n"
                         + "      div.innerHTML = \"<table></table><a href='/a'>a</a>\";\n"
                         + "      alert(div.getElementsByTagName('a').length);\n"
@@ -4199,7 +4133,6 @@ public class HTMLElementTest extends LoboUnitTest {
     public void hidden() {
         final String html =
                 "<html><head><script>\n"
-
                         + "  function test() {\n"
                         + "    var d1 = document.getElementById('div1');\n"
                         + "    alert(d1.hidden);\n"
@@ -4221,35 +4154,25 @@ public class HTMLElementTest extends LoboUnitTest {
     public void enterKeyHint() {
         final String html =
                 "<html><head><script>\n"
-
                         + "  function test() {\n"
                         + "    var d1 = document.getElementById('div1');\n"
                         + "    alert(d1.enterKeyHint);\n"
-
                         + "    d1.enterKeyHint = 'GO';\n"
                         + "    alert(d1.enterKeyHint);\n"
-
                         + "    d1.enterKeyHint = 'run';\n"
                         + "    alert(d1.enterKeyHint);\n"
-
                         + "    d1.enterKeyHint = 'enter';\n"
                         + "    alert(d1.enterKeyHint);\n"
-
                         + "    d1.enterKeyHint = 'done';\n"
                         + "    alert(d1.enterKeyHint);\n"
-
                         + "    d1.enterKeyHint = 'go';\n"
                         + "    alert(d1.enterKeyHint);\n"
-
                         + "    d1.enterKeyHint = 'next';\n"
                         + "    alert(d1.enterKeyHint);\n"
-
                         + "    d1.enterKeyHint = 'previous';\n"
                         + "    alert(d1.enterKeyHint);\n"
-
                         + "    d1.enterKeyHint = 'search';\n"
                         + "    alert(d1.enterKeyHint);\n"
-
                         + "    d1.enterKeyHint = 'send';\n"
                         + "    alert(d1.enterKeyHint);\n"
                         + "  }\n"
@@ -4268,20 +4191,15 @@ public class HTMLElementTest extends LoboUnitTest {
     public void enterKeyHint2() {
         final String html =
                 "<html><head><script>\n"
-
                         + "  function test() {\n"
                         + "    var d1 = document.getElementById('div1');\n"
                         + "    alert(d1.enterKeyHint);\n"
-
                         + "    d1.enterKeyHint = 'GO';\n"
                         + "    alert(d1.enterKeyHint);\n"
-
                         + "    d1.enterKeyHint = 'run';\n"
                         + "    alert(d1.enterKeyHint);\n"
-
                         + "    d1.enterKeyHint = undefined;\n"
                         + "    alert(d1.enterKeyHint);\n"
-
                         + "    d1.enterKeyHint = null;\n"
                         + "    alert(d1.enterKeyHint);\n"
                         + "  }\n"
@@ -4299,20 +4217,15 @@ public class HTMLElementTest extends LoboUnitTest {
     public void enterKeyHintDefaults() {
         final String html =
                 "<html><head><script>\n"
-
                         + "  function test() {\n"
                         + "    var input1 = document.getElementById('input1');\n"
                         + "    alert(input1.enterKeyHint);\n"
-
                         + "    var input2 = document.getElementById('input2');\n"
                         + "    alert(input2.enterKeyHint);\n"
-
                         + "    var input3 = document.getElementById('input3');\n"
                         + "    alert(input3.enterKeyHint);\n"
-
                         + "    var input4 = document.getElementById('input4');\n"
                         + "    alert(input4.enterKeyHint);\n"
-
                         + "    var input5 = document.getElementById('input5');\n"
                         + "    alert(input5.enterKeyHint);\n"
                         + "  }\n"
@@ -4327,7 +4240,7 @@ public class HTMLElementTest extends LoboUnitTest {
 
         checkHtmlAlert(html);
     }
-
+    
     @Test
     @Alerts({"true", "", "true", "7", "true", "seven", "false", "null"})
     public void autofocus() {
@@ -4335,7 +4248,7 @@ public class HTMLElementTest extends LoboUnitTest {
                 + "<head>\n"
                 + "  <title>test</title>\n"
                 + "<script>\n"
-                + "  function doTest() {\n"
+                + "function doTest() {\n"
                 + "    var myNode1 = document.getElementById('myNode1');\n"
                 + "    alert(myNode1.autofocus);\n"
                 + "    alert(myNode1.getAttribute('autofocus'));\n"
@@ -4371,7 +4284,7 @@ public class HTMLElementTest extends LoboUnitTest {
                 + "<head>\n"
                 + "  <title>test</title>\n"
                 + "<script>\n"
-                + "  function doTest() {\n"
+                + "function doTest() {\n"
                 + "    var myNode1 = document.getElementById('myNode1');\n"
                 + "    alert(myNode1.autofocus);\n"
                 + "    alert(myNode1.getAttribute('autofocus'));\n"

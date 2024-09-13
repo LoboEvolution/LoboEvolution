@@ -30,6 +30,7 @@ import org.loboevolution.info.TabInfo;
 import org.loboevolution.net.Cookie;
 
 import java.awt.*;
+import java.net.URI;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
@@ -236,7 +237,7 @@ public interface HtmlRendererConfig {
     void deleteInput(final String text, final String baseUrl);
     void insertLogin(final String type, final String value, final String baseUrl, boolean navigationEnabled);
 
-    String getSourceCache(final String baseUrl, final String type, String integrity, boolean test);
+    String getSourceCache(final URI baseUrl, final String type, String integrity, boolean test) throws Exception;
 
     List<String> getStyles(final String href, final String baseUrl);
 

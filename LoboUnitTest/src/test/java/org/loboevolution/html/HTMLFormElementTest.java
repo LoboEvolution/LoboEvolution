@@ -163,7 +163,7 @@ public class HTMLFormElementTest extends LoboUnitTest {
      */
     @Test
     @Alerts("1")
-    public void radioButtonOnlyOne() {
+    public void radioButton_OnlyOne() {
         final String html
                 = "<html><head><script>\n"
                 + "function doTest() {\n"
@@ -608,6 +608,8 @@ public class HTMLFormElementTest extends LoboUnitTest {
                         + "</form>\n"
                         + "</body>\n"
                         + "</html>";
+
+
         checkHtmlAlert(html);
     }
 
@@ -683,7 +685,8 @@ public class HTMLFormElementTest extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "<head>\n"
-                        + "<script>\n"                        + "function test() {\n"
+                        + "<script>\n"
+                        + "function test() {\n"
                         + "  if (document.login.submit.tagName)\n"
                         + "    alert(document.login.submit.tagName);\n"
                         + "  else"
@@ -806,8 +809,7 @@ public class HTMLFormElementTest extends LoboUnitTest {
     @Alerts({"page 1: formPage1", "page 2: formPage2"})
     public void formAccessAfterBrowsing() {
         final String html = "<html><head>\n"
-                + "<script>\n"
-                + "function test() {\n"
+                + "<script>\n"                + "function test() {\n"
                 + "  window.name = 'page 1: ' + document.forms[0].name;\n"
                 + "  document.location = 'page2.html';\n"
                 + "}\n"
@@ -930,7 +932,7 @@ public class HTMLFormElementTest extends LoboUnitTest {
 
     @Test
     @Alerts("exception")
-    public void itemInteger() {
+    public void item_integer() {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
@@ -1042,8 +1044,7 @@ public class HTMLFormElementTest extends LoboUnitTest {
             "target null: false", "target==form: true"})
     public void onSubmitEvent() {
         final String html = "<html><head>\n"
-                + "<script>\n"
-                + "function test(_event) {\n"
+                + "<script>\n"                + "function test(_event) {\n"
                 + "  var oEvent = _event ? _event : window.event;\n"
                 + "  alert('type: ' + oEvent.type);\n"
                 + "  alert('submitter: ' + oEvent.submitter);\n"
@@ -1073,8 +1074,7 @@ public class HTMLFormElementTest extends LoboUnitTest {
                 + "<form id='form1' name='form1' method='get' action='" + URL_SECOND + "'>\n"
                 + "  <input type='button' name='button1' />\n"
                 + "</form>\n"
-                + "<script>\n"
-                + "  // Prepare the iframe for the target\n"
+                + "<script>\n"                + "  // Prepare the iframe for the target\n"
                 + "  alert('prepare frame');\n"
                 + "  var div = document.createElement('div');\n"
                 + "  div.style.display = 'none';\n"
@@ -1134,7 +1134,7 @@ public class HTMLFormElementTest extends LoboUnitTest {
         final String html
                 = "<html>\n"
                 + "<head><title>first</title>\n"
-                + "<script>\n"
+               + "<script>\n"
                 + "function doTest() {\n"
                 + "  var myForm = document.getElementById('form1');\n"
                 + "  if (myForm.requestSubmit) {\n"
@@ -1166,7 +1166,7 @@ public class HTMLFormElementTest extends LoboUnitTest {
         final String html
                 = "<html>\n"
                 + "<head><title>first</title>\n"
-                + "<script>\n"
+               + "<script>\n"
                 + "function doTest() {\n"
                 + "  var myForm = document.getElementById('form1');\n"
                 + "  if (myForm.requestSubmit) {\n"

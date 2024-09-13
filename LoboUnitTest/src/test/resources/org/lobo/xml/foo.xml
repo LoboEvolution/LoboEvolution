@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <foo testAttr="fooid">
-    <fooc1></fooc1>
-    <fooc2></fooc2>
+    <fooc1 prefix="1">tesst</fooc1>
+    <fooc2>test</fooc2>
 </foo>

@@ -144,8 +144,11 @@ public class HtmlContextMenu {
 			try {
 				final IDownload d = bpanel.getBrowserFrame().getDownload();
 				if (!href.contains(";base64,")) {
-					final URL scriptURL = Urls.createURL(new URI(img.getBaseURI()).toURL(), href);
-					d.downloadFile(scriptURL);
+					URI uri = Urls.createURI(img.getBaseURI(), href);
+					if (uri != null) {
+						d.downloadFile(uri.toURL());
+					}
+
 				} else {
 					final String base64 = href.split(";base64,")[1];
 					final byte[] decodedBytes = Base64.getDecoder().decode(Strings.linearize(base64));

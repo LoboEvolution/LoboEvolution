@@ -591,11 +591,15 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	}
 
 	private RBlock getContainingBlock(final Renderable r) {
-        return switch (r) {
-            case RBlock rBlock -> rBlock;
-            case BoundableRenderable boundableRenderable -> getContainingBlock(boundableRenderable.getParent());
-            default -> null;
-        };
+		if (r != null) {
+			return switch (r) {
+				case RBlock rBlock -> rBlock;
+				case BoundableRenderable boundableRenderable -> getContainingBlock(boundableRenderable.getParent());
+				default -> null;
+			};
+		} else {
+			return null;
+		}
 	}
 
 	private void onMouseWheelMoved(final MouseWheelEvent mwe) {

@@ -57,7 +57,7 @@ public class HttpRequest extends XMLHttpRequestEventTargetImpl {
 	private static final String LINE = "\r\n";
 
 	private URLConnection connection;
-	private URL requestURL;
+	private URI requestURI;
 	
 	@Getter
 	@Setter
@@ -227,13 +227,13 @@ public class HttpRequest extends XMLHttpRequestEventTargetImpl {
 	 * <p>open.</p>
 	 *
 	 * @param method a {@link java.lang.String} object.
-	 * @param url a {@link java.net.URL} object.
+	 * @param uri a {@link java.net.URL} object.
 	 * @param asyncFlag a boolean.
 	 * @param userName a {@link java.lang.String} object.
 	 * @throws java.io.IOException if any.
 	 */
-	public void open(final String method, final URL url, final boolean asyncFlag, final String userName) throws Exception {
-		this.open(method, url, asyncFlag, userName, null);
+	public void open(final String method, final URI uri, final boolean asyncFlag, final String userName) throws Exception {
+		this.open(method, uri, asyncFlag, userName, null);
 	}
 
 	/**
@@ -256,32 +256,33 @@ public class HttpRequest extends XMLHttpRequestEventTargetImpl {
 	 * @throws java.lang.Exception if any.
 	 */
 	public void open(final String method, final String url, final boolean asyncFlag) throws Exception {
-		final URL base = Urls.createURL(null, baseURL);
-		final URL urlObj = Urls.createURL(base, url);
-		this.open(method, urlObj, asyncFlag, null);
+		URI uri = Urls.createURI(baseURL, url);
+		if (uri != null) {
+			this.open(method, uri, asyncFlag, null);
+		}
 	}
 
 	/**
 	 * <p>open.</p>
 	 *
 	 * @param method a {@link java.lang.String} object.
-	 * @param url a {@link java.net.URL} object.
+	 * @param uri a {@link java.net.URL} object.
 	 * @throws java.lang.Exception if any.
 	 */
-	public void open(final String method, final URL url) throws Exception {
-		this.open(method, url, true, null, null);
+	public void open(final String method, final URI uri) throws Exception {
+		this.open(method, uri, true, null, null);
 	}
 
 	/**
 	 * <p>open.</p>
 	 *
 	 * @param method a {@link java.lang.String} object.
-	 * @param url a {@link java.net.URL} object.
+	 * @param uri a {@link java.net.URL} object.
 	 * @param asyncFlag a boolean.
 	 * @throws java.lang.Exception if any.
 	 */
-	public void open(final String method, final URL url, final boolean asyncFlag) throws Exception {
-		this.open(method, url, asyncFlag, null, null);
+	public void open(final String method, final URI uri, final boolean asyncFlag) throws Exception {
+		this.open(method, uri, asyncFlag, null, null);
 	}
 
 	/**
@@ -294,7 +295,7 @@ public class HttpRequest extends XMLHttpRequestEventTargetImpl {
 	 * @throws java.lang.Exception if any.
 	 */
 	public void open(String method, String url, boolean async, String username) throws Exception {
-		this.open(method, new URI(url).toURL(), async, username, null);
+		this.open(method, new URI(url), async, username, null);
 	}
 
 	/**
@@ -308,27 +309,27 @@ public class HttpRequest extends XMLHttpRequestEventTargetImpl {
 	 * @throws java.lang.Exception if any.
 	 */
 	public void open(String method, String url, boolean async, String username, String password) throws Exception {
-		this.open(method, new URI(url).toURL(), async, username, password);
+		this.open(method, new URI(url), async, username, password);
 	}
 
 	/**
 	 * Opens the request. Call send to complete it.
 	 *
 	 * @param method    The request method.
-	 * @param url       The request URL.
+	 * @param uri       The request URL.
 	 * @param asyncFlag Whether the request should be asynchronous.
 	 * @param userName  The user name of the request (not supported.)
 	 * @param password  The password of the request (not supported.)
 	 * @throws java.io.IOException if any.
 	 */
-	public void open(final String method, final URL url, final boolean asyncFlag, final String userName,
+	public void open(final String method, final URI uri, final boolean asyncFlag, final String userName,
                      final String password) throws Exception {
 
 		synchronized (this) {
-			this.connection = HttpNetwork.getURLConnection(url.toString(),this.proxy, method);
+			this.connection = HttpNetwork.getURLConnection(uri,this.proxy, method);
 			this.isAsync = asyncFlag;
 			this.requestMethod = method;
-			this.requestURL = url;
+			this.requestURI = uri;
 			this.requestUserName = userName;
 			this.requestPassword = password;
 
@@ -349,18 +350,18 @@ public class HttpRequest extends XMLHttpRequestEventTargetImpl {
 	 * @throws java.lang.Exception if any.
 	 */
 	public void send(final Object content, final int timeout) throws Exception {
-		final URL url = this.requestURL;
-		if (url == null) {
+		final URI uri = this.requestURI;
+		if (uri == null) {
 			throw new Exception("No URL has been provided.");
 		}
 		if (this.isAsync) {
-			new Thread("SimpleHttpRequest-" + url.getHost()) {
+			new Thread("SimpleHttpRequest-" + uri.getHost()) {
 				@Override
 				public void run() {
 					try {
 						sendSync(content, timeout);
 					} catch (final Throwable thrown) {
-						log.error("send(): Error in asynchronous request on {} ", url, thrown);
+						log.error("send(): Error in asynchronous request on {} ", uri, thrown);
 					}
 				}
 			}.start();
@@ -407,7 +408,7 @@ public class HttpRequest extends XMLHttpRequestEventTargetImpl {
 			}
 
 		} catch (Exception e) {
-			log.error("sendSync(): Error send request on {} ", requestURL, e);
+			log.error("sendSync(): Error send request on {} ", requestURI, e);
 		} finally {
 			synchronized (this) {
 				this.connection = null;
@@ -464,18 +465,6 @@ public class HttpRequest extends XMLHttpRequestEventTargetImpl {
 		writer.append("Content-Transfer-Encoding: binary").append(LINE);
 		writer.append(LINE);
 		writer.flush();
-		/*
-
-		FileInputStream inputStream = new FileInputStream(uploadFile);
-		byte[] buffer = new byte[4096];
-		int bytesRead = -1;
-		while ((bytesRead = inputStream.read(buffer)) != -1) {
-			outputStream.write(buffer, 0, bytesRead);
-		}
-		outputStream.flush();
-		inputStream.close();
-		writer.append(LINE);
-		writer.flush();*/
 	}
 
 	private void changeState(final ReadyStateType readyState, final int status, final String statusMessage, final byte[] bytes) {

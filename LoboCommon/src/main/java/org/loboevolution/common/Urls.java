@@ -28,10 +28,12 @@ package org.loboevolution.common;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.File;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.Charset;
+import java.nio.file.Path;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -49,19 +51,35 @@ public class Urls {
 	public static final DateFormat PATTERN_RFC1123 = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz", Locale.US);
 
 	/**
-	 * <p>createURL.</p>
+	 * <p>createURI.</p>
 	 *
-	 * @param baseUrl a {@link java.net.URL} object.
-	 * @param relativeUrl a {@link java.lang.String} object.
-	 * @return a {@link java.net.URL} object.
-	 * @throws java.lang.Exception if any.
+	 * @param baseUri a {@link URL} object.
+	 * @param relativeUrl a {@link String} object.
+	 * @return a {@link URI} object.
+	 * @throws Exception if any.
 	 */
-	public static URL createURL(final URL baseUrl, final String relativeUrl) throws Exception {
+	public static URI createURI(final String baseUri, final String relativeUrl) throws Exception {
 		if (relativeUrl.contains("javascript:void")) {
 			return null;
 		}
 
-		return baseUrl.toURI().resolve(encodeIllegalCharacters(relativeUrl)).toURL();
+		String relUrl = relativeUrl;
+
+		if (baseUri == null) {
+			final int idx = relUrl.indexOf(':');
+			if (idx == -1 || idx == 1) {
+				return new URI("file:" + relUrl);
+			} else if (relUrl.startsWith("//")) {
+				relUrl = "http:" + relUrl;
+				return new URI(relUrl);
+			}
+		} else {
+			if (baseUri.contains("file:") && !relativeUrl.contains("..")) {
+				return new URI(baseUri + relativeUrl);
+			} else
+				return new URI(baseUri).resolve(encodeIllegalCharacters(relativeUrl));
+		}
+		return null;
 	}
 
 	/**
@@ -70,7 +88,7 @@ public class Urls {
 	 * (Firefox 3 also encodes other non-ASCII and some ASCII characters).
 	 *
 	 * @return the encoded URL
-	 * @param url a {@link java.lang.String} object.
+	 * @param url a {@link String} object.
 	 */
 	public static String encodeIllegalCharacters(final String url) {
 		return url.replace(" ", "%20");
@@ -79,8 +97,8 @@ public class Urls {
 	/**
 	 * <p>getCharset.</p>
 	 *
-	 * @param connection a {@link java.net.URLConnection} object.
-	 * @return a {@link java.lang.String} object.
+	 * @param connection a {@link URLConnection} object.
+	 * @return a {@link String} object.
 	 */
 	public static String getCharset(final URLConnection connection) {
 		final String contentType = connection.getContentType();
@@ -118,7 +136,7 @@ public class Urls {
 	/**
 	 * <p>isAbsolute.</p>
 	 *
-	 * @param url a {@link java.lang.String} object.
+	 * @param url a {@link String} object.
 	 * @return a boolean.
 	 */
 	public static boolean isAbsolute(final String url) {
@@ -144,7 +162,7 @@ public class Urls {
 	/**
 	 * <p>isLocalFile.</p>
 	 *
-	 * @param url a {@link java.net.URL} object.
+	 * @param url a {@link URL} object.
 	 * @return a boolean.
 	 */
 	public static boolean isLocalFile(final URL url) {
@@ -155,9 +173,9 @@ public class Urls {
 	/**
 	 * <p>getExpiration.</p>
 	 *
-	 * @param connection a {@link java.net.URLConnection} object.
+	 * @param connection a {@link URLConnection} object.
 	 * @param baseTime a long.
-	 * @return a {@link java.lang.Long} object.
+	 * @return a {@link Long} object.
 	 */
 	public static Long getExpiration(final URLConnection connection, final long baseTime) {
 		final String cacheControl = connection.getHeaderField("Cache-Control");

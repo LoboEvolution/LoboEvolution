@@ -64,7 +64,7 @@ public class Nodehasattributes04Test extends LoboUnitTest {
         doc = sampleXmlFile("staffNS.xml");
 
         domImpl = doc.getImplementation();
-        newDoc = domImpl.createDocument("http://www.w3.org/DOM/Test", "test", docType);
+        newDoc = domImpl.createDocument("http://www.w3.org/DOM/Test", "test", null);
         element = newDoc.createElementNS("http://www.w3.org/DOM/Test", "dom:elem");
         attribute = newDoc.createAttribute("attr");
         element.setAttributeNode(attribute);

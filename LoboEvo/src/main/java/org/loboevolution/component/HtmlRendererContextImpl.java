@@ -391,8 +391,10 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 	/** {@inheritDoc} */
 	@Override
 	public void navigate(final String fullURL) throws Exception {
-		final URL href = Urls.createURL(null, fullURL);
-		this.navigate(href, "_this");
+		URI uri = Urls.createURI(null, fullURL);
+		if (uri != null) {
+			this.navigate(uri.toURL(), "_this");
+		}
 	}
 
 	/** {@inheritDoc} */
@@ -740,7 +742,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 		return Proxy.NO_PROXY;
 	}
 
-	private void submitFormSync(final String method, final java.net.URL action, final String target, final String enctype,
+	private void submitFormSync(final String method, final URL action, final String target, final String enctype,
 								final FormInput[] formInputs) throws Exception {
 		final String actualMethod = method.toUpperCase();
 		final URL resolvedURL;
@@ -851,9 +853,10 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 					if (location == null) {
 						log.warn("No Location header in redirect from {} ", action);
 					} else {
-						final URL href;
-						href = Urls.createURL(action, location);
-						navigate(href, target);
+						URI uri = Urls.createURI(action.toString(), location);
+						if (uri != null) {
+							navigate(uri.toURL(), target);
+						}
 					}
 					return;
 				}

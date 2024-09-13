@@ -290,23 +290,25 @@ public class HTMLIFrameElementImpl extends HTMLElementImpl implements HTMLIFrame
 				frameControl.add(new HtmlPanel());
 			} else {
 				final HTMLDocumentImpl doc = (HTMLDocumentImpl) getDocumentNode();
-				final URL baseURL = new URI(doc.getBaseURI()).toURL();
-				final URL createURL = Urls.createURL(baseURL, getSrc());
-				final URLConnection connection = createURL.openConnection();
-				connection.setRequestProperty("User-Agent", UserAgent.getUserAgent());
-				connection.getHeaderField("Set-Cookie");
-				connection.connect();
-				final HtmlPanel panel = new HtmlPanel();
-				panel.setBrowserPanel(null);
-				final HtmlPanel newpanel = HtmlPanel.createlocalPanel(connection, panel, doc.getHtmlRendererContext(), doc.getHtmlRendererConfig(), createURL.toString());
-				final String width = getWidth();
-				final String height = getHeight();
-				if (Strings.isNotBlank(width) && Strings.isNotBlank(height)) {
-					final int w = HtmlValues.getPixelSize(width, doc.getRenderState(), doc.getDefaultView(), -1);
-					final int h = HtmlValues.getPixelSize(height, doc.getRenderState(), doc.getDefaultView(), -1);
-					newpanel.setPreferredSize(new Dimension(w, h));
+				URI uri = Urls.createURI(doc.getBaseURI(), getSrc());
+				if (uri != null) {
+					URL createURL = uri.toURL();
+					final URLConnection connection = createURL.openConnection();
+					connection.setRequestProperty("User-Agent", UserAgent.getUserAgent());
+					connection.getHeaderField("Set-Cookie");
+					connection.connect();
+					final HtmlPanel panel = new HtmlPanel();
+					panel.setBrowserPanel(null);
+					final HtmlPanel newpanel = HtmlPanel.createlocalPanel(connection, panel, doc.getHtmlRendererContext(), doc.getHtmlRendererConfig(), createURL.toString());
+					final String width = getWidth();
+					final String height = getHeight();
+					if (Strings.isNotBlank(width) && Strings.isNotBlank(height)) {
+						final int w = HtmlValues.getPixelSize(width, doc.getRenderState(), doc.getDefaultView(), -1);
+						final int h = HtmlValues.getPixelSize(height, doc.getRenderState(), doc.getDefaultView(), -1);
+						newpanel.setPreferredSize(new Dimension(w, h));
+					}
+					frameControl.add(newpanel);
 				}
-				frameControl.add(newpanel);
 			}
 		} catch (final Exception e) {
 			log.error(e.getMessage(), e);

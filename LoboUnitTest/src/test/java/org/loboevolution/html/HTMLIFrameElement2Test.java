@@ -250,7 +250,6 @@ public class HTMLIFrameElement2Test extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "<head><script type='text/javascript'>\n"
-
                         + "  function createIFrame() {\n"
                         + "    alert('createIFrame');\n"
                         + "    var myFrame = document.createElement('iframe');\n"
@@ -266,7 +265,6 @@ public class HTMLIFrameElement2Test extends LoboUnitTest {
                         + "    alert(myFrame.contentWindow.document.body.innerHTML);\n"
                         + "  }\n"
                         + "</script></head>\n"
-
                         + "  <body onload='createIFrame();' >\n"
                         + "  </body>\n"
                         + "</html>";

@@ -263,23 +263,18 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	/**
 	 * <p>getFullURL.</p>
 	 *
-	 * @param uri a {@link java.lang.String} object.
+	 * @param relativeUrl a {@link java.lang.String} object.
 	 * @param baseURI a {@link java.lang.String} object.
 	 * @return a {@link java.net.URL} object.
 	 */
-	public final URL getFullURL(final String uri, final String baseURI) {
+	public final URL getFullURL(final String relativeUrl, final String baseURI) {
 		try {
-			final URL documentURL = baseURI == null ? null : new URI(baseURI).toURL();
-			return Urls.createURL(documentURL, uri);
+			URI uri = Urls.createURI(baseURI, relativeUrl);
+			return uri != null ? uri.toURL() : null;
 		} catch (final Exception mfu) {
-			// Try agan, without the baseURI.
-			try {
-				return new URI(uri).toURL();
-			} catch (final Exception mfu2) {
-				log.error("Unable to create URL for URI= {} with base {}", uri, baseURI);
-				return null;
-			}
+			log.error("Unable to create URL for URI= {} with base {}", relativeUrl, baseURI);
 		}
+		return null;
 	}
 
 	/** {@inheritDoc} */

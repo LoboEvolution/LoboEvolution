@@ -39,7 +39,7 @@ import org.loboevolution.html.dom.HTMLTableColElement;
 public class HTMLTableColElementTest extends LoboUnitTest {
 
     @Test
-    @Alerts({"left", "right", "justify", "char", "center", "wrong", "null"})
+    @Alerts({"left", "right", "justify", "char", "center", "wrong", ""})
     public void getAlign() {
         final String html
                 = "<html><body>\n"

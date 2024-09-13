@@ -43,8 +43,9 @@ public class AttrTest extends LoboUnitTest {
     @Alerts({"true", "exception thrown"})
     public void specified() {
         final String html
-                = "<html><head><script>\n"
-                + "function doTest() {\n"
+                = "<html><head>"
+                + "<script>\n"
+                + "function test() {\n"
                 + "  try {\n"
                 + "    var s = document.getElementById('testSelect');\n"
                 + "    var o1 = s.options[0];\n"
@@ -55,7 +56,7 @@ public class AttrTest extends LoboUnitTest {
                 + "   alert('exception thrown');\n"
                 + "  }\n"
                 + "}\n"
-                + "</script></head><body onload='doTest()'>\n"
+                + "</script></head><body onload='test()'>\n"
                 + "<form name='form1'>\n"
                 + "  <select name='select1' id='testSelect'>\n"
                 + "    <option name='option1' value='foo'>One</option>\n"
@@ -87,13 +88,14 @@ public class AttrTest extends LoboUnitTest {
     @Alerts("[object HTMLOptionElement]")
     public void ownerElement() {
         final String html
-                = "<html><head><script>\n"
-                + "function doTest() {\n"
+                = "<html><head>"
+                + "<script>\n"
+                + "function test() {\n"
                 + "  var s = document.getElementById('testSelect');\n"
                 + "  var o1 = s.options[0];\n"
                 + " alert(o1.getAttributeNode('value').ownerElement);\n"
                 + "}\n"
-                + "</script></head><body onload='doTest()'>\n"
+                + "</script></head><body onload='test()'>\n"
                 + "<form name='form1'>\n"
                 + "  <select name='select1' id='testSelect'>\n"
                 + "    <option name='option1' value='foo'>One</option>\n"
@@ -109,7 +111,8 @@ public class AttrTest extends LoboUnitTest {
     @Alerts({"undefined", "undefined", "undefined"})
     public void isId() {
         final String html
-                = "<html><head><script>\n"
+                = "<html><head>"
+                + "<script>\n"
                 + "function test() {\n"
                 + "  var d = document.getElementById('d');\n"
                 + " alert(d.getAttributeNode('id').isId);\n"
@@ -128,7 +131,8 @@ public class AttrTest extends LoboUnitTest {
     @Alerts({"undefined", "undefined", "undefined", "undefined", "undefined"})
     public void expando() {
         final String html
-                = "<html><head><script>\n"
+                = "<html><head>"
+                + "<script>\n"
                 + "function test() {\n"
                 + "  var d = document.getElementById('d');\n"
                 + " alert(d.attributes['id'].expando);\n"
@@ -149,7 +153,8 @@ public class AttrTest extends LoboUnitTest {
     @Alerts("undefined")
     public void expandoEvent() {
         final String html
-                = "<html><head><script>\n"
+                = "<html><head>"
+                + "<script>\n"
                 + "function test() {\n"
                 + "  var d = document.getElementById('d');\n"
                 + "  d.setAttribute('onfocusin', 't');\n"
@@ -167,7 +172,8 @@ public class AttrTest extends LoboUnitTest {
     @Alerts("test()")
     public void textContent() {
         final String html
-                = "<html><head><script>\n"
+                = "<html><head>"
+                + "<script>\n"
                 + "function test() {\n"
                 + "  var a = document.body.getAttributeNode('onload');\n"
                 + " alert(a.textContent);\n"
@@ -182,7 +188,8 @@ public class AttrTest extends LoboUnitTest {
     @Alerts({"null", "null", "null", "null"})
     public void getAttributeNodeUndefinedAttribute() {
         final String html
-                = "<html><head><script>\n"
+                = "<html><head>"
+                + "<script>\n"
                 + "function test() {\n"
                 + "  var elem = document.getElementById('myDiv');\n"
                 + " alert(elem.getAttributeNode('class'));\n"
@@ -201,7 +208,8 @@ public class AttrTest extends LoboUnitTest {
     @Alerts({"null", "null", "null", "null"})
     public void getAttributesUndefinedAttribute() {
         final String html
-                = "<html><head><script>\n"
+                = "<html><head>"
+                + "<script>\n"
                 + "function test() {\n"
                 + "  var elem = document.getElementById('myDiv');\n"
                 + " alert(elem.attributes.getNamedItem('class'));\n"
@@ -219,8 +227,7 @@ public class AttrTest extends LoboUnitTest {
     @Test
     @Alerts({"[object Attr]", "null", "[object Attr]", "null"})
     public void value() {
-        final String html = "<html><head>"
-                + "<script>\n"
+        final String html = "<html><head><script>\n"
                 + "  function test() {\n"
                 + "    var attr = document.createAttribute('hi');\n"
                 + "   alert(attr);\n"
@@ -298,7 +305,7 @@ public class AttrTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"[object Attr]", ""})
+    @Alerts({"[object Attr]", "null"})
     public void xmlNamespaceURI() {
         xml("namespaceURI");
     }
@@ -323,10 +330,10 @@ public class AttrTest extends LoboUnitTest {
                         + "      function test() {\n"
                         + "        var request;\n"
                         + "        request = new XMLHttpRequest();\n"
-                        +  "       request.open('GET', '" + URL_XML + "foo.xml" + "', false);\n"
+                        + "        request.open('GET', '" + URL_XML + "foo.xml" + "', false);\n"
                         + "        request.send('');\n"
                         + "        var doc = request.responseXML;\n"
-                        + "        debug(doc.documentElement.childNodes[0].attributes.item(0));\n"
+                        + "        alert(doc.documentElement.childNodes[0].attributes.item(0));\n"
                         + "      }\n"
                         + "      function debug(e) {\n"
                         + "        try {\n"

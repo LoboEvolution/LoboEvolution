@@ -37,20 +37,18 @@ import org.loboevolution.driver.LoboUnitTest;
 @ExtendWith(AlertsExtension.class)
 public class StyleSheetListTest extends LoboUnitTest {
 
-
     @Test
     @Alerts("4")
     public void length() {
         final String html =
                 "<html>\n"
                         + "  <head>\n"
-                        + "    <link href='style1.css'></link>\n"
-                        + "    <link href='style2.css' rel='stylesheet'></link>\n"
-                        + "    <link href='style3.css' type='text/css'></link>\n"
-                        + "    <link href='style4.css' rel='stylesheet' type='text/css'></link>\n"
+                        + "    <link href='" + URL_CSS + "style1.css'></link>\n"
+                        + "    <link href='" + URL_CSS + "style2.css' rel='stylesheet'></link>\n"
+                        + "    <link href='" + URL_CSS + "style3.css' type='text/css'></link>\n"
+                        + "    <link href='" + URL_CSS + "style4.css' rel='stylesheet' type='text/css'></link>\n"
                         + "    <style>div.x { color: red; }</style>\n"
                         + "    <script>\n"
-
                         + "    </script></head>\n"
                         + "  </head>\n"
                         + "  <body onload='alert(document.styleSheets.length)'>\n"
@@ -67,7 +65,7 @@ public class StyleSheetListTest extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "  <head>\n"
-                        + "    <link rel='stylesheet' type='text/css' href='" + URL_SECOND + "'/>\n"
+                        + "    <link rel='stylesheet' type='text/css' href='" + URL_CSS + "foo.css'/>\n"
                         + "    <script>\n"
                         + "      function test() {\n"
                         + "        var div = document.getElementById('myDiv');\n"
@@ -94,24 +92,20 @@ public class StyleSheetListTest extends LoboUnitTest {
                 "<html>\n"
                         + "  <head>\n"
                         + "    <script>\n"
-
                         + "      function test() {\n"
                         + "       alert(document.styleSheets.length);\n"
-
                         + "        try {\n"
                         + "         alert(document.styleSheets[0]);\n"
                         + "        }\n"
                         + "        catch (e) {\n"
                         + "         alert('exception for 0');\n"
                         + "        }\n"
-
                         + "        try {\n"
                         + "         alert(document.styleSheets[46]);\n"
                         + "        }\n"
                         + "        catch (e) {\n"
                         + "         alert('exception for 46');\n"
                         + "        }\n"
-
                         + "        try {\n"
                         + "         alert(document.styleSheets[-2]);\n"
                         + "        }\n"
@@ -134,9 +128,8 @@ public class StyleSheetListTest extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "  <head>\n"
-                        + "    <link rel='stylesheet' type='text/css' href='foo.css'/>\n"
+                        + "    <link rel='stylesheet' type='text/css' href='" + URL_CSS + "foo.css'/>\n"
                         + "    <script>\n"
-
                         + "      function test() {\n"
                         + "       alert(document.styleSheets.length);\n"
                         + "       alert(document.styleSheets.item(0));\n"
@@ -155,9 +148,8 @@ public class StyleSheetListTest extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "  <head>\n"
-                        + "    <link rel='stylesheet' type='text/css' href='foo.css'/>\n"
+                        + "    <link rel='stylesheet' type='text/css' href='" + URL_CSS + "foo.css'/>\n"
                         + "    <script>\n"
-
                         + "      function test() {\n"
                         + "       alert(document.styleSheets.length);\n"
                         + "       alert(document.styleSheets.item(0));\n"
@@ -177,9 +169,8 @@ public class StyleSheetListTest extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "  <head>\n"
-                        + "    <link rel='stylesheet' type='text/css' href='foo.css'/>\n"
+                        + "    <link rel='stylesheet' type='text/css' href='" + URL_CSS + "foo.css'/>\n"
                         + "    <script>\n"
-
                         + "      function test() {\n"
                         + "       alert(document.styleSheets.length);\n"
                         + "       alert(document.styleSheets.item(0));\n"
@@ -199,18 +190,15 @@ public class StyleSheetListTest extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "  <head>\n"
-                        + "    <link rel='stylesheet' type='text/css' href='" + URL_SECOND + "'/>\n"
+                        + "    <link rel='stylesheet' type='text/css' href='" + URL_CSS + "foo.css'/>\n"
                         + "    <script>\n"
-
                         + "      function test() {\n"
                         + "       alert(document.styleSheets.length);\n"
-
                         + "        var linkTag = document.createElement ('link');\n"
                         + "        linkTag.href = 'new.css';\n"
                         + "        linkTag.rel = 'stylesheet';\n"
                         + "        var head = document.getElementsByTagName ('head')[0];\n"
                         + "        head.appendChild (linkTag);\n"
-
                         + "       alert(document.styleSheets.length);\n"
                         + "      }\n"
                         + "    </script>\n"
@@ -229,10 +217,10 @@ public class StyleSheetListTest extends LoboUnitTest {
         final String html =
                   "<html>\n"
                 + "  <head>\n"
-                + "    <link rel='stylesheet' type='text/css' href='src\\test\\resources\\org\\lobo\\css\\foo.css'/>\n"
+                + "    <link rel='stylesheet' type='text/css' href='" + URL_CSS + "foo.css'/>\n"
                 + "    <script>\n"
                 + "      function test() {\n"
-                + "        var sheets = document.styleSheets;\n"
+                + "       var sheets = document.styleSheets;\n"
                 + "       alert(sheets.length);\n"
                 + "       alert(-1 in sheets);\n"
                 + "       alert(0 in sheets);\n"
@@ -253,9 +241,8 @@ public class StyleSheetListTest extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "  <head>\n"
-                        + "    <link rel='stylesheet' type='text/css' href='foo.css'/>\n"
+                        + "    <link rel='stylesheet' type='text/css' href='" + URL_CSS + "foo.css'/>\n"
                         + "    <script>\n"
-
                         + "      function test() {\n"
                         + "        var sheets = document.styleSheets;\n"
                         + "       alert(sheets == document.styleSheets);\n"

@@ -31,6 +31,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.OutputStream;
 import java.io.Serial;
+import java.net.URI;
 import java.nio.file.Files;
 
 import javax.swing.AbstractAction;
@@ -90,7 +91,7 @@ public class SaveFileAction extends AbstractAction {
 			}
 
 			try (final ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
-				final String source = HttpNetwork.getSource(toolbar.getAddressBar().getText(), null);
+				final String source = HttpNetwork.getSource(new URI(toolbar.getAddressBar().getText()), null);
 				baos.write(source.getBytes());
 				final OutputStream ops = Files.newOutputStream(selectedFile.toPath());
 				baos.writeTo(ops);
