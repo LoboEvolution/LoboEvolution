@@ -32,7 +32,6 @@ import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
-import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.Text;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -53,7 +52,6 @@ public class Textwholetext02Test extends LoboUnitTest {
         final Text textNode;
         final Text newTextNode;
         final String wholeText;
-        final Node appendedChild;
         doc = sampleXmlFile("hc_staff.xml");
         itemList = doc.getElementsByTagName("strong");
         elementName = (Element) itemList.item(0);

@@ -51,7 +51,6 @@ public class Nodecomparedocumentposition16Test extends LoboUnitTest {
         final DocumentFragment docFrag;
         final Attr attr;
         final Attr attrCloned;
-        int docFragPosition;
         final int position1;
         final int position2;
         final int position3;

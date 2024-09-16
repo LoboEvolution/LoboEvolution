@@ -66,7 +66,6 @@ public class HcnodeinsertbeforerefchildnonexistentTest extends LoboUnitTest {
         final Node newChild;
         final HTMLCollection elementList;
         final Node elementNode;
-        final Node insertedNode;
         doc = sampleXmlFile("hc_staff.xml");
         newChild = doc.createElement("br");
         refChild = doc.createElement("b");

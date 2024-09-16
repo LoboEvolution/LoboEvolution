@@ -68,7 +68,6 @@ public class HcnodeinsertbeforeTest extends LoboUnitTest {
         final Node newChild;
         Node child;
         String childName;
-        final Node insertedNode;
         final List<String> actual = new ArrayList<>();
 
         final List<String> expected = new ArrayList<>();

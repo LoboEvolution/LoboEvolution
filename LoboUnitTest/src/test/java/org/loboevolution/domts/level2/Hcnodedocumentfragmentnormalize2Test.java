@@ -31,7 +31,6 @@ import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentFragment;
-import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.Text;
 
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -53,9 +52,7 @@ public class Hcnodedocumentfragmentnormalize2Test extends LoboUnitTest {
     public void runTest() {
         final Document doc;
         final DocumentFragment docFragment;
-        String nodeValue;
         Text txtNode;
-        final Node retval;
         doc = sampleXmlFile("hc_staff.xml");
         docFragment = doc.createDocumentFragment();
         txtNode = doc.createTextNode("");

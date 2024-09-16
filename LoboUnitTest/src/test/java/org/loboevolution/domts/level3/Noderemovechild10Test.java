@@ -26,13 +26,11 @@
 
 package org.loboevolution.domts.level3;
 
-
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentFragment;
 import org.loboevolution.html.node.Element;
-import org.loboevolution.html.node.Node;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -51,8 +49,6 @@ public class Noderemovechild10Test extends LoboUnitTest {
         final Element elem;
         final Element removedElem;
         final String elemName;
-        final Node appendedChild;
-        Node removedChild;
         doc = sampleXmlFile("barfoo.xml");
         docFrag = doc.createDocumentFragment();
         elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "dom3:br");

@@ -212,14 +212,14 @@ public class XHtmlParser {
 	 * @return {@link java.lang.Number} object.
 	 */
 	private int parseToken(final Node parent, final LineNumberReader reader, final Set<HTMLTag> stopTags,
-						   final LinkedList<String> ancestors) throws IOException, StopException {
+						   final List<String> ancestors) throws IOException, StopException {
 		final Document doc = this.document;
 		final HTMLDocumentImpl htmlDoc = (HTMLDocumentImpl) doc;
 		final StringBuilder textSb = this.readUpToTagBegin(reader);
 		if (textSb == null) {
 			return TOKEN_EOD;
 		}
-		if (textSb.length() > 0) {
+		if (!textSb.isEmpty()) {
 			final String text = textSb.toString();
 			if (Strings.isNotBlank(text.trim())) {
 
@@ -234,7 +234,7 @@ public class XHtmlParser {
 							.forEach(i -> {
 								final char ch = (char) i;
 								if (ch == '&') {
-									if (txt.length() > 0) {
+									if (!txt.isEmpty()) {
 										final Node textNode = doc.createTextNode(txt.toString());
 										safeAppendChild(parent, textNode);
 										txt.setLength(0);
@@ -272,7 +272,7 @@ public class XHtmlParser {
 								}
 							});
 
-					if (txt.length() > 0) {
+					if (!txt.isEmpty()) {
 						final Node textNode = doc.createTextNode(txt.toString());
 						safeAppendChild(parent, textNode);
 						txt.setLength(0);
@@ -921,7 +921,7 @@ public class XHtmlParser {
 				}
 			}
 		}
-		if (sb.length() > 0) {
+		if (!sb.isEmpty()) {
 			this.justReadTagEnd = false;
 			this.justReadTagBegin = false;
 			this.justReadEmptyElement = false;
@@ -991,7 +991,7 @@ public class XHtmlParser {
 				sb.append(ch);
 			}
 		}
-		if (sb.length() > 0) {
+		if (!sb.isEmpty()) {
 			this.justReadTagBegin = false;
 			this.justReadTagEnd = false;
 		}

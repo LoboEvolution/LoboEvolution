@@ -59,7 +59,21 @@ public class Domimplementationcreatedocumenttype04Test extends LoboUnitTest {
         final DOMImplementation domImpl;
         final String publicId = "http://www.w3.org/DOM/Test/dom2.dtd";
         final String systemId = "dom2.dtd";
-        String qualifiedName;
+        final List<String> qualifiedNames = getStrings();
+        doc = sampleXmlFile("staffNS.xml");
+        domImpl = doc.getImplementation();
+        for (String qualifiedName : qualifiedNames) {
+            boolean success = false;
+            try {
+                domImpl.createDocumentType(qualifiedName, publicId, systemId);
+            } catch (final DOMException ex) {
+                success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
+            }
+            assertTrue(success);
+        }
+    }
+
+    private static List<String> getStrings() {
         final List<String> qualifiedNames = new ArrayList<>();
         qualifiedNames.add("{");
         qualifiedNames.add("}");
@@ -75,23 +89,7 @@ public class Domimplementationcreatedocumenttype04Test extends LoboUnitTest {
         qualifiedNames.add("*");
         qualifiedNames.add("(");
         qualifiedNames.add(")");
-
-        doc = sampleXmlFile("staffNS.xml");
-
-        domImpl = doc.getImplementation();
-        for (int indexN10073 = 0; indexN10073 < qualifiedNames.size(); indexN10073++) {
-            qualifiedName = qualifiedNames.get(indexN10073);
-
-            {
-                boolean success = false;
-                try {
-                    domImpl.createDocumentType(qualifiedName, publicId, systemId);
-                } catch (final DOMException ex) {
-                    success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
-                }
-                assertTrue(success);
-            }
-        }
+        return qualifiedNames;
     }
 }
 

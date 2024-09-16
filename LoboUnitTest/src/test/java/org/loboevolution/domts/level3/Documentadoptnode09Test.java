@@ -47,7 +47,6 @@ public class Documentadoptnode09Test extends LoboUnitTest {
         final Document doc;
         final Document newDoc;
         final DOMImplementation domImpl;
-        final Node adoptedDoc;
         final Element docElem;
         final String rootNS;
         final String rootName;

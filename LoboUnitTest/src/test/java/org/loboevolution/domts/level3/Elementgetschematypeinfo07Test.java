@@ -53,7 +53,6 @@ public class Elementgetschematypeinfo07Test extends LoboUnitTest {
         final TypeInfo elemTypeInfo;
         final String typeName;
         final String typeNamespace;
-        String docElemNodeName;
         final HTMLCollection elemList;
         doc = sampleXmlFile("hc_staff.xml");
         elemList = doc.getElementsByTagName("sup");

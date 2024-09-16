@@ -30,6 +30,7 @@ import org.loboevolution.pdfview.PDFObject;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A CMap maps from a character in a composite font to a font/glyph number
@@ -41,7 +42,7 @@ public abstract class PDFCMap {
     /**
      * A cache of known CMaps by name
      */
-    private static HashMap<String, PDFCMap> cache;
+    private static Map<String, PDFCMap> cache;
 
     /**
      * Creates a new instance of CMap

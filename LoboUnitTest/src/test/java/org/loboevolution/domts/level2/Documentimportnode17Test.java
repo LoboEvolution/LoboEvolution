@@ -57,7 +57,6 @@ public class Documentimportnode17Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
-        final Document docImp;
         final Node commentImport;
         final Node commentToImport;
         final String nodeValue;

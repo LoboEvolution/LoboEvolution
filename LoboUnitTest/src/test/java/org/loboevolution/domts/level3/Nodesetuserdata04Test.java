@@ -48,10 +48,8 @@ public class Nodesetuserdata04Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
-        Object userData;
         final Object returned1;
         final Object returned2;
-        Object retUserData;
         final boolean success;
         final Element elem;
         final Text txt;

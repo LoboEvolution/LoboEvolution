@@ -55,9 +55,6 @@ public class Nodeinsertbefore02Test extends LoboUnitTest {
         final ProcessingInstruction newPI;
         final ProcessingInstruction insertedPI;
         final String target;
-        final String nullPubId = null;
-
-        final String nullSysId = null;
 
         final String rootNS;
         final String rootName;
@@ -67,7 +64,7 @@ public class Nodeinsertbefore02Test extends LoboUnitTest {
         rootNS = docElem.getNamespaceURI();
         rootName = docElem.getTagName();
         domImpl = doc.getImplementation();
-        newDocType = domImpl.createDocumentType(rootName, nullPubId, nullSysId);
+        newDocType = domImpl.createDocumentType(rootName, null, null);
         newDoc = domImpl.createDocument(rootNS, rootName, newDocType);
         newComment = newDoc.createComment("Comment");
         newPI = newDoc.createProcessingInstruction("PITarget", "PIData");

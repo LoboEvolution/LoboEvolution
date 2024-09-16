@@ -59,7 +59,6 @@ public class Namednodemapgetnameditemns03Test extends LoboUnitTest {
         final Attr attribute;
         final Attr newAttr1;
         final Attr newAttr2;
-        Attr newAttribute;
         final String attrName;
         doc = sampleXmlFile("staffNS.xml");
         element = doc.createElementNS("http://www.w3.org/DOM/Test", "root");

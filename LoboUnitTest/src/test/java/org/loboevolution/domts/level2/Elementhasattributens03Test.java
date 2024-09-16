@@ -61,14 +61,12 @@ public class Elementhasattributens03Test extends LoboUnitTest {
         final Element element;
         final boolean state;
         final Attr attribute;
-        final String nullNS = null;
-
         doc = sampleXmlFile("staff.xml");
         element = doc.createElementNS("http://www.w3.org/DOM", "address");
         assertNotNull(element);
-        attribute = doc.createAttributeNS(nullNS, "domestic");
+        attribute = doc.createAttributeNS(null, "domestic");
         element.setAttributeNode(attribute);
-        state = element.hasAttributeNS(nullNS, "domestic");
+        state = element.hasAttributeNS(null, "domestic");
         assertTrue(state);
     }
 }

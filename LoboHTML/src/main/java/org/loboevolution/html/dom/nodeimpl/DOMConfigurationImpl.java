@@ -73,38 +73,25 @@ public class DOMConfigurationImpl implements DOMConfiguration {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean canSetParameter(final String name, final Object value) {
+	public boolean canSetParameter(String name, final Object value) {
 		if (value == null) {
 			return true;
 		}
 
-		if (name.equalsIgnoreCase("supported-media-types-only")
-				|| name.equalsIgnoreCase("normalize-characters")
-				|| name.equalsIgnoreCase("check-character-normalization")
-				|| name.equalsIgnoreCase("canonical-form")
-				|| name.equalsIgnoreCase("namespace-declarations")
-				|| name.equalsIgnoreCase("infoset")
-				|| name.equalsIgnoreCase("cdata-sections")
-				|| name.equalsIgnoreCase("charset-overrides-xml-encoding")
-				|| name.equalsIgnoreCase("comments")
-				|| name.equalsIgnoreCase("datatype-normalization")
-				|| name.equalsIgnoreCase("entities")
-				|| name.equalsIgnoreCase("validate")
-				|| name.equalsIgnoreCase("validate-if-schema")
-				|| name.equalsIgnoreCase("element-content-whitespace")
-				|| name.equalsIgnoreCase("split-cdata-sections")){
-			return true;
-		} else if (name.equalsIgnoreCase("well-formed")
-				|| name.equalsIgnoreCase("namespaces")
-				|| name.equalsIgnoreCase("ignore-unknown-character-denormalizations")) {
-			return (Boolean) value;
-		} else if (name.equalsIgnoreCase("error-handler")) {
-			return value instanceof DOMErrorHandler;
-		} else if (name.equalsIgnoreCase("schema-type")
-				|| name.equalsIgnoreCase("schema-location")) {
-			return value instanceof String;
+		if (name == null) {
+			return false;
 		}
-		return false;
+
+		return switch (name.toLowerCase()) {
+			case "supported-media-types-only", "normalize-characters", "check-character-normalization",
+				 "canonical-form", "namespace-declarations", "infoset", "cdata-sections",
+				 "charset-overrides-xml-encoding", "comments", "datatype-normalization", "entities", "validate",
+				 "validate-if-schema", "element-content-whitespace", "split-cdata-sections" -> true;
+			case "well-formed", "namespaces", "ignore-unknown-character-denormalizations" -> (Boolean) value;
+			case "error-handler" -> value instanceof DOMErrorHandler;
+			case "schema-type", "schema-location" -> value instanceof String;
+			default -> false;
+		};
 	}
 
 	/** {@inheritDoc} */

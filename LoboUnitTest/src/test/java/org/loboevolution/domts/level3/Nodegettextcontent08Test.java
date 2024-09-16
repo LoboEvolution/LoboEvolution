@@ -29,7 +29,6 @@ package org.loboevolution.domts.level3;
 
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
@@ -47,11 +46,9 @@ public class Nodegettextcontent08Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
-        HTMLCollection elemList;
         final Element elem;
         final Attr att;
         final Attr attr;
-        final Attr replacedAttr;
         final String textContent;
         doc = sampleXmlFile("barfoo.xml");
         elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "p");

@@ -48,11 +48,10 @@ public class Nodeisequalnode19Test extends LoboUnitTest {
         final Attr attr1;
         final Attr attr2;
         final boolean isEqual;
-        final String nullNSURI = null;
 
         doc = sampleXmlFile("hc_staff.xml");
         attr1 = doc.createAttributeNS("http://www.w3.org/XML/1998/namespace", "lang");
-        attr2 = doc.createAttributeNS(nullNSURI, "lang");
+        attr2 = doc.createAttributeNS(null, "lang");
         isEqual = attr1.isEqualNode(attr2);
         assertFalse(isEqual, "Nodeisequalnode19Assert2");
     }

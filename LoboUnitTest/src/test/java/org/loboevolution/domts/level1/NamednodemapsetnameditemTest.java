@@ -69,7 +69,6 @@ public class NamednodemapsetnameditemTest extends LoboUnitTest {
         final NamedNodeMap attributes;
         final Attr districtNode;
         final String attrName;
-        final Node setNode;
         doc = sampleXmlFile("staff.xml");
         elementList = doc.getElementsByTagName("address");
         testAddress = (Element) elementList.item(1);

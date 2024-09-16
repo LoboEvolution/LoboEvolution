@@ -33,6 +33,9 @@ import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
@@ -59,23 +62,19 @@ public class Domimplementationcreatedocumenttype01Test extends LoboUnitTest {
         DocumentType newDocType;
         Document ownerDocument;
         final String qualifiedName = "test:root";
-        String publicId;
-        String systemId;
-        final java.util.List publicIds = new java.util.ArrayList();
+        List<String> publicIds = new ArrayList<>();
         publicIds.add("1234");
         publicIds.add("test");
 
-        final java.util.List systemIds = new java.util.ArrayList();
+        List<String> systemIds = new ArrayList<>();
         systemIds.add("");
         systemIds.add("test");
 
         doc = sampleXmlFile("staffNS.xml");
 
         domImpl = doc.getImplementation();
-        for (int indexN1005D = 0; indexN1005D < publicIds.size(); indexN1005D++) {
-            publicId = (String) publicIds.get(indexN1005D);
-            for (int indexN10061 = 0; indexN10061 < systemIds.size(); indexN10061++) {
-                systemId = (String) systemIds.get(indexN10061);
+        for (String publicId : publicIds) {
+            for (String systemId : systemIds) {
                 newDocType = domImpl.createDocumentType(qualifiedName, publicId, systemId);
                 assertNotNull(newDocType);
                 ownerDocument = newDocType.getOwnerDocument();

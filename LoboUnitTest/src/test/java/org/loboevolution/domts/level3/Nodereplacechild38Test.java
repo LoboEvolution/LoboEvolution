@@ -57,7 +57,6 @@ public class Nodereplacechild38Test extends LoboUnitTest {
         final Comment comment;
         final ProcessingInstruction pi;
         final CDATASection cdata;
-        Node replaced;
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
         entitiesMap = docType.getEntities();

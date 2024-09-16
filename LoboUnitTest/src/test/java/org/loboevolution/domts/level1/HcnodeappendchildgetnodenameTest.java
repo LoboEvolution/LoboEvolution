@@ -32,7 +32,6 @@ import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
-import org.loboevolution.html.node.NodeList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -59,7 +58,6 @@ public class HcnodeappendchildgetnodenameTest extends LoboUnitTest {
         final Document doc;
         final HTMLCollection elementList;
         final Node employeeNode;
-        final NodeList childList;
         final Node newChild;
         final Node appendNode;
         final String childName;

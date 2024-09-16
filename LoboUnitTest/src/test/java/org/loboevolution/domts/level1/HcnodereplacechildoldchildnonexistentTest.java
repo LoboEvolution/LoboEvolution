@@ -64,7 +64,6 @@ public class HcnodereplacechildoldchildnonexistentTest extends LoboUnitTest {
         final Node newChild;
         final HTMLCollection elementList;
         final Node elementNode;
-        final Node replacedNode;
         doc = sampleXmlFile("hc_staff.xml");
         newChild = doc.createElement("br");
         oldChild = doc.createElement("b");

@@ -63,7 +63,6 @@ public class CharacterdataindexsizeerrsubstringnegativeoffsetTest extends LoboUn
         final HTMLCollection elementList;
         final Node nameNode;
         final CharacterData child;
-        final String badString;
         doc = sampleXmlFile("staff.xml");
         elementList = doc.getElementsByTagName("address");
         nameNode = elementList.item(0);

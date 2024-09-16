@@ -69,7 +69,6 @@ public class DocumentnormalizeDocument07Test extends LoboUnitTest {
         final HTMLCollection elemList;
         final CDATASection newChild;
         final Node oldChild;
-        final Node retval;
         final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
 
         final List<DOMError> errors;
@@ -79,15 +78,7 @@ public class DocumentnormalizeDocument07Test extends LoboUnitTest {
         int severity;
         Node problemNode;
         DOMLocator location;
-        int lineNumber;
-        int columnNumber;
-        int byteOffset;
-        int utf16Offset;
-        String uri;
-        String type;
         String message;
-        Object relatedException;
-        Object relatedData;
         int length;
         doc = sampleXmlFile("barfoo.xml");
         elemList = doc.getElementsByTagName("p");
@@ -101,8 +92,8 @@ public class DocumentnormalizeDocument07Test extends LoboUnitTest {
         domConfig.setParameter("error-handler", errorMonitor);
         doc.normalizeDocument();
         errors = errorMonitor.getErrors();
-        for (int indexN100E0 = 0; indexN100E0 < errors.size(); indexN100E0++) {
-            error = errors.get(indexN100E0);
+        for (DOMError domError : errors) {
+            error = domError;
             severity = error.getSeverity();
 
             if (severity == 2) {

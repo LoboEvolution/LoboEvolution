@@ -37,7 +37,6 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.js.Location;
 import org.loboevolution.js.AbstractScriptableDelegate;
 
-import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 

@@ -68,21 +68,7 @@ public class NodeinsertbeforeTest extends LoboUnitTest {
         final int length;
         final List<String> actual = new java.util.ArrayList<>();
 
-        final List<String> expectedWithWhitespace = new ArrayList<>();
-        expectedWithWhitespace.add("#text");
-        expectedWithWhitespace.add("employeeId");
-        expectedWithWhitespace.add("#text");
-        expectedWithWhitespace.add("name");
-        expectedWithWhitespace.add("#text");
-        expectedWithWhitespace.add("position");
-        expectedWithWhitespace.add("#text");
-        expectedWithWhitespace.add("newChild");
-        expectedWithWhitespace.add("salary");
-        expectedWithWhitespace.add("#text");
-        expectedWithWhitespace.add("gender");
-        expectedWithWhitespace.add("#text");
-        expectedWithWhitespace.add("ADDRESS");
-        expectedWithWhitespace.add("#text");
+        final List<String> expectedWithWhitespace = getStrings();
 
         final List<String> expectedWithoutWhitespace = new ArrayList<>();
         expectedWithoutWhitespace.add("EMPLOYEEID");
@@ -117,6 +103,25 @@ public class NodeinsertbeforeTest extends LoboUnitTest {
             actual.add(childName);
         }
         assertEquals(expected, actual, "NodeinsertbeforeAssert1");
+    }
+
+    private static List<String> getStrings() {
+        final List<String> expectedWithWhitespace = new ArrayList<>();
+        expectedWithWhitespace.add("#text");
+        expectedWithWhitespace.add("employeeId");
+        expectedWithWhitespace.add("#text");
+        expectedWithWhitespace.add("name");
+        expectedWithWhitespace.add("#text");
+        expectedWithWhitespace.add("position");
+        expectedWithWhitespace.add("#text");
+        expectedWithWhitespace.add("newChild");
+        expectedWithWhitespace.add("salary");
+        expectedWithWhitespace.add("#text");
+        expectedWithWhitespace.add("gender");
+        expectedWithWhitespace.add("#text");
+        expectedWithWhitespace.add("ADDRESS");
+        expectedWithWhitespace.add("#text");
+        return expectedWithWhitespace;
     }
 
 }

@@ -50,9 +50,6 @@ public class Nodereplacechild37Test extends LoboUnitTest {
         final Attr parent;
         final Text oldChild;
         final EntityReference newChild;
-        String nodeValue;
-        final Node replaced;
-        final Node appendedChild;
         doc = sampleXmlFile("hc_staff.xml");
         doc2 = sampleXmlFile("hc_staff.xml");
         parent = doc.createAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:lang");

@@ -33,7 +33,6 @@ import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
-import org.loboevolution.html.node.Node;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -53,7 +52,6 @@ public class Nodeinsertbefore10Test extends LoboUnitTest {
         final HTMLCollection elemList;
         final Element elem;
         final Element newElem;
-        final Node inserted;
         final Element docElem;
         final String rootNS;
         final String rootTagname;

@@ -62,12 +62,9 @@ public class Nodegetownerdocument02Test extends LoboUnitTest {
         final Document ownerDocElem;
         final DOMImplementation domImpl;
         final DocumentType docType;
-        final String nullNS = null;
-
         doc = sampleXmlFile("staff.xml");
-
         domImpl = doc.getImplementation();
-        docType = domImpl.createDocumentType("mydoc", nullNS, nullNS);
+        docType = domImpl.createDocumentType("mydoc", null, null);
         newDoc = domImpl.createDocument("http://www.w3.org/DOM/Test", "mydoc", docType);
         ownerDocDoc = newDoc.getOwnerDocument();
         assertNull(ownerDocDoc);

@@ -233,7 +233,7 @@ public class HTMLEntities {
 		entities.put(Entities.OR, (char) 8744);
 		entities.put(Entities.CAP, (char) 8745);
 		entities.put(Entities.CUP, (char) 8746);
-		entities.put(Entities.INT_, (char) 8747);
+		entities.put(Entities.INT, (char) 8747);
 		entities.put(Entities.THERE4, (char) 8756);
 		entities.put(Entities.SIM, (char) 8764);
 		entities.put(Entities.CONG, (char) 8773);

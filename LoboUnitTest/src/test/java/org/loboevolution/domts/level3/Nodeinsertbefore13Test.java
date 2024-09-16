@@ -26,14 +26,12 @@
 
 package org.loboevolution.domts.level3;
 
-
 import org.htmlunit.cssparser.dom.DOMException;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentFragment;
 import org.loboevolution.html.node.Element;
-import org.loboevolution.html.node.Node;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -53,8 +51,6 @@ public class Nodeinsertbefore13Test extends LoboUnitTest {
         final DocumentFragment docFrag;
         final Element elemAlt;
         final Element elem;
-        final Node appendedChild;
-        final Node inserted;
         final Element docElem;
         final String rootNS;
         final String rootTagname;

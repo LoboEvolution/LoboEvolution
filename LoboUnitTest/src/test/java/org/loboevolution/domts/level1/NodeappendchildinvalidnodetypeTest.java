@@ -64,7 +64,6 @@ public class NodeappendchildinvalidnodetypeTest extends LoboUnitTest {
         final Document doc;
         final Element rootNode;
         final Node newChild;
-        final Node appendedChild;
         doc = sampleXmlFile("staff.xml");
         rootNode = doc.getDocumentElement();
         newChild = doc.createAttribute("newAttribute");

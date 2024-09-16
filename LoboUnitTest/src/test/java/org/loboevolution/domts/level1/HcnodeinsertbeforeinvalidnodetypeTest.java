@@ -69,7 +69,6 @@ public class HcnodeinsertbeforeinvalidnodetypeTest extends LoboUnitTest {
         final Node newChild;
         final HTMLCollection elementList;
         final Node refChild;
-        final Node insertedNode;
         doc = sampleXmlFile("hc_staff.xml");
         newChild = doc.createAttribute("title");
         elementList = doc.getElementsByTagName("p");

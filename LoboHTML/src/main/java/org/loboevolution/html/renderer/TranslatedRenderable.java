@@ -51,6 +51,7 @@ public class TranslatedRenderable extends BaseBoundableRenderable implements RCo
     }
 
     /** {@inheritDoc} */
+    @Override
     public void paint(final Graphics g) {
         translatedChild.paintTranslated(g);
     }

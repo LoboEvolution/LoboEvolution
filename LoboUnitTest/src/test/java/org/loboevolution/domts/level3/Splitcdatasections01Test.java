@@ -29,12 +29,9 @@ package org.loboevolution.domts.level3;
 
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.dom.DOMError;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.nodeimpl.DOMErrorMonitor;
 import org.loboevolution.html.node.*;
-
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -55,10 +52,7 @@ public class Splitcdatasections01Test extends LoboUnitTest {
         final HTMLCollection elemList;
         final CDATASection newChild;
         final Node oldChild;
-        final Node retval;
         final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
-
-        List<DOMError> errors;
 
         doc = sampleXmlFile("barfoo.xml");
         elemList = doc.getElementsByTagName("p");

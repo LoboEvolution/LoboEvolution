@@ -49,7 +49,6 @@ public class Normalizecharacters03Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
-        Element docElem;
         final DOMConfiguration domConfig;
         final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
 
@@ -57,7 +56,6 @@ public class Normalizecharacters03Test extends LoboUnitTest {
         Element pElem;
         Text text;
         final String textValue;
-        final Node retval;
         doc = sampleXmlFile("barfoo.xml");
         domConfig = doc.getDomConfig();
         domConfig.setParameter("normalize-characters", Boolean.FALSE);

@@ -34,7 +34,6 @@ import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
-import org.loboevolution.html.node.Node;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -61,9 +60,6 @@ public class HcelementinuseattributeerrTest extends LoboUnitTest {
         final HTMLCollection addressElementList;
         final Element testAddress;
         final Element newElement;
-        final Node appendedChild;
-        final Attr setAttr1;
-        final Attr setAttr2;
         doc = sampleXmlFile("hc_staff.xml");
         addressElementList = doc.getElementsByTagName("body");
         testAddress = (Element) addressElementList.item(0);

@@ -80,8 +80,8 @@ public class Documentsetxmlversion01Test extends LoboUnitTest {
         illegalVersion.add("---");
 
         doc = sampleXmlFile("hc_staff.xml");
-        for (int indexN10087 = 0; indexN10087 < illegalVersion.size(); indexN10087++) {
-            versionValue = illegalVersion.get(indexN10087);
+        for (String s : illegalVersion) {
+            versionValue = s;
 
             {
                 boolean success = false;

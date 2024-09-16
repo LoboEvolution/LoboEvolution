@@ -52,7 +52,6 @@ public class Nodesettextcontent13Test extends LoboUnitTest {
         final DocumentType docType;
         final Node entity;
         final NamedNodeMap entitymap;
-        String textContent;
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
         entitymap = docType.getEntities();

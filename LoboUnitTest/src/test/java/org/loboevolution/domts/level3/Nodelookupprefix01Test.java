@@ -44,10 +44,9 @@ public class Nodelookupprefix01Test extends LoboUnitTest {
     public void runTest() {
         final Document doc;
         final String prefix;
-        final String nullNSURI = null;
 
         doc = sampleXmlFile("hc_staff.xml");
-        prefix = doc.lookupPrefix(nullNSURI);
+        prefix = doc.lookupPrefix(null);
         assertNull(prefix, "Nodelookupprefix01Assert2");
     }
 }

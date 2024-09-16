@@ -55,7 +55,6 @@ public class Documentrenamenode17Test extends LoboUnitTest {
         final Element docElem;
         final String rootNS;
         final String rootTagname;
-        final DocumentType nullDocType = null;
 
         doc = sampleXmlFile("barfoo.xml");
         docElem = doc.getDocumentElement();

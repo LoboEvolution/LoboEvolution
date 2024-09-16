@@ -62,13 +62,13 @@ class TableMatrix {
 	private final RElement relement;
 	@Getter
 	private int tableWidth;
-	
+
 	protected SizeInfo[] columnSizes;
 	protected SizeInfo[] rowSizes;
 	protected CaptionSizeInfo captionSize;
 	protected RBlock caption;
 	protected HtmlLength tableWidthLength;
-	protected HTMLElementImpl tableElement;
+	protected final HTMLElementImpl tableElement;
 
 	protected int cellSpacingX;
 	protected int cellSpacingY;

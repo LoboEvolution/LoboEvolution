@@ -52,7 +52,6 @@ public class Textreplacewholetext05Test extends LoboUnitTest {
         final CDATASection cdataNode;
         final Text replacedText;
         final String wholeText;
-        Node appendedChild;
         doc = sampleXmlFile("hc_staff.xml");
         itemList = doc.getElementsByTagName("strong");
         elementName = (Element) itemList.item(0);

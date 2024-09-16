@@ -31,7 +31,6 @@ import org.htmlunit.cssparser.dom.DOMException;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.Node;
 
 /**
  * The method replaceChild replaces the child node oldChild with newChild in the list of
@@ -47,7 +46,6 @@ public class Nodereplacechild01Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
-        final Node replaced;
         doc = sampleXmlFile("hc_staff.xml");
 
         try {

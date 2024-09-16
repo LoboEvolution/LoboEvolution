@@ -51,7 +51,6 @@ public class Nodecomparedocumentposition34Test extends LoboUnitTest {
         final ProcessingInstruction pi;
         final int elementToTxtPosition;
         final int txtToPiPosition;
-        Node appendedChild;
         doc = sampleXmlFile("hc_staff.xml");
         elemMain = doc.createElementNS("http://www.w3.org/1999/xhtml", "p");
         elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "br");

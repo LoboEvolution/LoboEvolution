@@ -56,7 +56,6 @@ public class Hcattrinsertbefore1Test extends LoboUnitTest {
         final NamedNodeMap attributes;
         final Attr titleAttr;
         final Text textNode;
-        final Node refChild = null;
 
         doc = sampleXmlFile("hc_staff.xml");
         acronymList = doc.getElementsByTagName("acronym");
@@ -67,7 +66,7 @@ public class Hcattrinsertbefore1Test extends LoboUnitTest {
 
         boolean success = false;
         try {
-            titleAttr.insertBefore(textNode, refChild);
+            titleAttr.insertBefore(textNode, null);
         } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
         }

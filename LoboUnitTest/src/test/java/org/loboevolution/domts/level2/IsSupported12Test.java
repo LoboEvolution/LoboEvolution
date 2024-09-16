@@ -32,6 +32,9 @@ import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
@@ -59,7 +62,27 @@ public class IsSupported12Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        final java.util.List features = new java.util.ArrayList();
+        final List<String> features = getStrings();
+        final Document doc;
+        final Node rootNode;
+        String featureElement;
+        boolean state;
+        doc = sampleXmlFile("staff.xml");
+        rootNode = doc.getDocumentElement();
+        state = rootNode.isSupported("Core", "2.0");
+        assertTrue(state);
+        for (String feature : features) {
+            featureElement = feature;
+            rootNode.isSupported(featureElement, "1.0");
+        }
+        for (String feature : features) {
+            featureElement = feature;
+            rootNode.isSupported(featureElement, "2.0");
+        }
+    }
+
+    private static List<String> getStrings() {
+        final List<String> features = new ArrayList<>();
         features.add("Core");
         features.add("XML");
         features.add("HTML");
@@ -75,23 +98,7 @@ public class IsSupported12Test extends LoboUnitTest {
         features.add("Range");
         features.add("Traversal");
         features.add("bogus.bogus.bogus");
-
-        final Document doc;
-        final Node rootNode;
-        String featureElement;
-        boolean state;
-        doc = sampleXmlFile("staff.xml");
-        rootNode = doc.getDocumentElement();
-        state = rootNode.isSupported("Core", "2.0");
-        assertTrue(state);
-        for (int indexN10078 = 0; indexN10078 < features.size(); indexN10078++) {
-            featureElement = (String) features.get(indexN10078);
-            rootNode.isSupported(featureElement, "1.0");
-        }
-        for (int indexN10083 = 0; indexN10083 < features.size(); indexN10083++) {
-            featureElement = (String) features.get(indexN10083);
-            rootNode.isSupported(featureElement, "2.0");
-        }
+        return features;
     }
 }
 

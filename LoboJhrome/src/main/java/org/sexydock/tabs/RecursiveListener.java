@@ -29,6 +29,7 @@ package org.sexydock.tabs;
 import java.awt.*;
 import java.awt.event.ContainerEvent;
 import java.awt.event.ContainerListener;
+import java.util.Set;
 import java.util.HashSet;
 
 /**
@@ -38,9 +39,10 @@ import java.util.HashSet;
  * @author andy.edwards
  */
 public abstract class RecursiveListener {
+
     private final ContainerListener containerListener = new HierarchyChangeListener();
 
-    private final HashSet<Component> excluded = new HashSet<>();
+    private final Set<Component> excluded = new HashSet<>();
 
     public void addExcludedComponent(final Component c) {
         excluded.add(c);
@@ -76,6 +78,7 @@ public abstract class RecursiveListener {
     protected abstract void uninstall(final Component c);
 
     private final class HierarchyChangeListener implements ContainerListener {
+
         @Override
         public void componentAdded(final ContainerEvent e) {
             installRecursively(e.getChild());

@@ -69,7 +69,6 @@ public class HcnodereplacechildinvalidnodetypeTest extends LoboUnitTest {
         final Node newChild;
         final HTMLCollection elementList;
         final Node oldChild;
-        final Node replacedChild;
         doc = sampleXmlFile("hc_staff.xml");
         newChild = doc.createAttribute("lang");
         elementList = doc.getElementsByTagName("p");

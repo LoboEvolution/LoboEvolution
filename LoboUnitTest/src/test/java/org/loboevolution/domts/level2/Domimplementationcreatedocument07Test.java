@@ -56,7 +56,6 @@ public class Domimplementationcreatedocument07Test extends LoboUnitTest {
         final Document doc;
         final DOMImplementation domImpl;
         final String namespaceURI = "http://www.w3.org/DOMTest/level2";
-        final DocumentType docType = null;
 
         doc = sampleXmlFile("staffNS.xml");
 
@@ -65,7 +64,7 @@ public class Domimplementationcreatedocument07Test extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                domImpl.createDocument(namespaceURI, ":", docType);
+                domImpl.createDocument(namespaceURI, ":", null);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
             }

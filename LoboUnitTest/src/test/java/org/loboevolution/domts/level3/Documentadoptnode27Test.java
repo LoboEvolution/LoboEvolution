@@ -53,8 +53,6 @@ public class Documentadoptnode27Test extends LoboUnitTest {
         final Node adoptedNode;
         final String adoptedName;
         final String adoptedNS;
-        final Node appendedChild;
-        final DocumentType nullDocType = null;
 
         final String rootNS;
         final String rootTagname;

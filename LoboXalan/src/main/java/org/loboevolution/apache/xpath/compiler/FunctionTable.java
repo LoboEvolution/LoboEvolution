@@ -26,6 +26,7 @@
 package org.loboevolution.apache.xpath.compiler;
 
 import java.util.HashMap;
+import java.util.Map;
 import javax.xml.transform.TransformerException;
 import org.loboevolution.apache.xpath.functions.Function;
 
@@ -120,13 +121,13 @@ public class FunctionTable {
   private static final Class<?>[] m_functions;
 
   /** Table of function name to function ID associations. */
-  private static final HashMap<String, Integer> m_functionID = new HashMap<>();
+  private static final Map<String, Integer> m_functionID = new HashMap<>();
 
   /** The function table contains customized functions */
   private final Class<?>[] m_functions_customer = new Class[NUM_ALLOWABLE_ADDINS];
 
   /** Table of function name to function ID associations for customized functions */
-  private final HashMap<String, Integer> m_functionID_customer = new HashMap<>();
+  private final Map<String, Integer> m_functionID_customer = new HashMap<>();
 
   /** Number of built in functions. Be sure to update this as built-in functions are added. */
   private static final int NUM_BUILT_IN_FUNCS = 37;

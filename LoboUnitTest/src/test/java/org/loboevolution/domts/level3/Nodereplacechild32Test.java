@@ -48,11 +48,9 @@ public class Nodereplacechild32Test extends LoboUnitTest {
         final HTMLCollection childList;
         final Element elem;
         final Attr parent;
-        Node oldChild;
         final Text newChild;
         final Node replaced;
         final String nodeName;
-        int nodeType;
         final EntityReference enRef;
         final EntityReference enRefChild;
         final String reference = "entity1";

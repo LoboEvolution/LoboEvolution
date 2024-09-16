@@ -30,7 +30,6 @@ package org.loboevolution.domts.level3;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.ProcessingInstruction;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -49,7 +48,6 @@ public class Noderemovechild09Test extends LoboUnitTest {
         final ProcessingInstruction pi;
         final ProcessingInstruction removedPi;
         final String target;
-        final Node appendedChild;
         doc = sampleXmlFile("hc_staff.xml");
         pi = doc.createProcessingInstruction("PIT", "PID");
         doc.appendChild(pi);

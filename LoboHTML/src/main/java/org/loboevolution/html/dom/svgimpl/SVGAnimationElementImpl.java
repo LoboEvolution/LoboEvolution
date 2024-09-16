@@ -108,7 +108,7 @@ public abstract class SVGAnimationElementImpl extends SVGAnimationImpl implement
 	// returns begin time in seconds
 	float getBeginTime() {
 		final String beginTime = getAttribute("begin");
-		if (!beginTime.equalsIgnoreCase("indefinite") && beginTime.length() > 0) {
+		if (!beginTime.equalsIgnoreCase("indefinite") && !beginTime.isEmpty()) {
 			return getClockSecs(beginTime);
 		} else {
 			return 0;
@@ -118,7 +118,7 @@ public abstract class SVGAnimationElementImpl extends SVGAnimationImpl implement
 	// returns the duration time in secs, will be -1 if indefinite
 	float getDuration() {
 		final String duration = getAttribute("dur");
-		if (duration.equalsIgnoreCase("indefinite") || duration.length() == 0) {
+		if (duration.equalsIgnoreCase("indefinite") || duration.isEmpty()) {
 			return -1;
 		} else {
 			final float clockSecs = getClockSecs(duration);
@@ -133,7 +133,7 @@ public abstract class SVGAnimationElementImpl extends SVGAnimationImpl implement
 	// returns the end time in secs, will be -1 if indefinite
 	float getEndTime() {
 		final String endTime = getAttribute("end");
-		if (endTime.equalsIgnoreCase("indefinite") || endTime.length() == 0) {
+		if (endTime.equalsIgnoreCase("indefinite") || endTime.isEmpty()) {
 			return -1;
 		} else {
 			final float clockSecs = getClockSecs(endTime);
@@ -148,13 +148,13 @@ public abstract class SVGAnimationElementImpl extends SVGAnimationImpl implement
 	protected float getNumRepeats(final float duration) {
 		final String repeatCount = getAttribute("repeatCount");
 		final String repeatDur = getAttribute("repeatDur");
-		if (repeatCount.length() > 0 || repeatDur.length() > 0) { // should
+		if (!repeatCount.isEmpty() || !repeatDur.isEmpty()) { // should
 			// maybe
 			// repeat
 			if (!(repeatCount.equalsIgnoreCase("indefinite") || repeatDur.equalsIgnoreCase("indefinite"))) {
-				if (repeatCount.length() > 0 && repeatDur.length() == 0) {
+				if (!repeatCount.isEmpty() && repeatDur.isEmpty()) {
 					return Float.parseFloat(repeatCount);
-				} else if (repeatCount.length() == 0 && repeatDur.length() > 0) {
+				} else if (repeatCount.isEmpty() && !repeatDur.isEmpty()) {
 					return getClockSecs(repeatDur) / duration;
 				} else { // take the min of both
 					return Math.min(Float.parseFloat(repeatCount), getClockSecs(repeatDur) / duration);
@@ -302,7 +302,7 @@ public abstract class SVGAnimationElementImpl extends SVGAnimationImpl implement
 			}
 		}
 
-		if (calcMode.equals("spline") && getAttribute("keySplines").length() > 0) {
+		if (calcMode.equals("spline") && !getAttribute("keySplines").isEmpty()) {
 			splines = new ArrayList<>();
 			final String keySplines = getAttribute("keySplines");
 			final StringTokenizer st = new StringTokenizer(keySplines, ";");

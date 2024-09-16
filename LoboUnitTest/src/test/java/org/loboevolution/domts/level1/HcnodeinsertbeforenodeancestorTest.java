@@ -66,7 +66,6 @@ public class HcnodeinsertbeforenodeancestorTest extends LoboUnitTest {
         final Node employeeNode;
         final NodeList childList;
         final Node refChild;
-        final Node insertedNode;
         doc = sampleXmlFile("hc_staff.xml");
         newChild = doc.getDocumentElement();
         elementList = doc.getElementsByTagName("p");

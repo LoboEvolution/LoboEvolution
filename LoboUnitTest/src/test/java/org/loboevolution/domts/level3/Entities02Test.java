@@ -53,8 +53,6 @@ public class Entities02Test extends LoboUnitTest {
         HTMLCollection pList;
         Element pElem;
         final DOMConfiguration domConfig;
-        boolean canSet;
-        boolean canSetValidate;
         final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
 
         Node child;

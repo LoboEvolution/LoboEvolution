@@ -1673,7 +1673,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, GlobalE
 	 * @param onoffline a {@link org.mozilla.javascript.Function} object.
 	 */
 	public void setOnoffline(final Function onoffline) {
-
+		// TODO Auto-generated method stub
 	}
 
 	/**

@@ -53,7 +53,6 @@ public class Nodegetbaseuri19Test extends LoboUnitTest {
     public void runTest() {
         final Document doc;
         final String baseURI;
-        String entBaseURI;
         final EntityReference entRef;
         final HTMLCollection pList;
         final Element pElem;

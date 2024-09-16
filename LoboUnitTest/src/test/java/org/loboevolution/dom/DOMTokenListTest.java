@@ -164,34 +164,34 @@ public class DOMTokenListTest extends LoboUnitTest {
     @Test
     @Alerts({"a b", "2", "null", "undefined"})
     public void itemNegative() {
-        item("a b", -1);
+        item(-1);
     }
 
     @Test
     @Alerts({"a b", "2", "null", "undefined"})
     public void itemNegative2() {
-        item("a b", -123);
+        item(-123);
     }
 
     @Test
     @Alerts({"a b", "2", "a", "a"})
     public void itemFirst() {
-        item("a b", 0);
+        item(0);
     }
 
     @Test
     @Alerts({"a b", "2", "b", "b"})
     public void itemLast() {
-        item("a b", 1);
+        item(1);
     }
 
     @Test
     @Alerts({"a b", "2", "null", "undefined"})
     public void itemOutside() {
-        item("a b", 13);
+        item(13);
     }
 
-    private void item(final String in, final int pos) {
+    private void item(final int pos) {
         final String html
                 = "<html><head>\n"
                 + "<script>\n"
@@ -215,7 +215,7 @@ public class DOMTokenListTest extends LoboUnitTest {
                 + "    } catch(e) {alert('exception');}\n"
                 + "  }\n"
                 + "</script></head><body onload='test()'>\n"
-                + "  <div id='d1' class='" + in + "'></div>\n"
+                + "  <div id='d1' class='" + "a b" + "'></div>\n"
                 + "</body></html>";
 
         checkHtmlAlert(html);

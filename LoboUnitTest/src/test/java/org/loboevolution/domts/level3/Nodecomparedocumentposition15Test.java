@@ -50,8 +50,6 @@ public class Nodecomparedocumentposition15Test extends LoboUnitTest {
         final Node docFragChild;
         final int attrPosition;
         final int docFragChildPosition;
-        final Node appendedChild;
-        final Node attrNode;
         doc = sampleXmlFile("hc_staff.xml");
         docElem = doc.getDocumentElement();
         docFrag = doc.createDocumentFragment();

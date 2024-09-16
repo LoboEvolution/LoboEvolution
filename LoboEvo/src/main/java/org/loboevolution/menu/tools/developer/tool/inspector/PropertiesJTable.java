@@ -63,6 +63,7 @@ public class PropertiesJTable extends JTable {
      * @param col a {@link java.lang.Integer} object
      * @return The cellRenderer value
      */
+    @Override
     public TableCellRenderer getCellRenderer(final int row, final int col) {
         final JLabel label = (JLabel) super.getCellRenderer(row, col);
         label.setBackground(Color.white);

@@ -45,11 +45,10 @@ public class Nodelookupnamespaceuri03Test extends LoboUnitTest {
         final Document doc;
         final DocumentType docType;
         final String namespaceURI;
-        final String nullPrefix = null;
 
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
-        namespaceURI = docType.lookupNamespaceURI(nullPrefix);
+        namespaceURI = docType.lookupNamespaceURI(null);
         assertNull(namespaceURI, "Nodelookupnamespaceuri03Assert2");
     }
 }

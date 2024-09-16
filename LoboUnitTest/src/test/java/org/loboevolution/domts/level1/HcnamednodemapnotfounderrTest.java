@@ -34,7 +34,6 @@ import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
-import org.loboevolution.html.node.Node;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -66,7 +65,6 @@ public class HcnamednodemapnotfounderrTest extends LoboUnitTest {
         final HTMLCollection elementList;
         final Element testEmployee;
         final NamedNodeMap attributes;
-        final Node removedNode;
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("acronym");
         testEmployee = (Element) elementList.item(2);

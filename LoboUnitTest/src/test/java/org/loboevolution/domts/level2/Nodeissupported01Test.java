@@ -32,6 +32,9 @@ import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
@@ -58,28 +61,24 @@ public class Nodeissupported01Test extends LoboUnitTest {
         final String version = "";
         final String version1 = "1.0";
         final String version2 = "2.0";
-        String featureCore;
-        String featureXML;
         boolean success;
-        final java.util.List featuresXML = new java.util.ArrayList();
+        List<String> featuresXML = new ArrayList<>();
         featuresXML.add("XML");
         featuresXML.add("xmL");
 
-        final java.util.List featuresCore = new java.util.ArrayList();
+        List<String> featuresCore = new ArrayList<>();
         featuresCore.add("Core");
         featuresCore.add("CORE");
 
         doc = sampleXmlFile("staffNS.xml");
         element = doc.getDocumentElement();
-        for (int indexN10063 = 0; indexN10063 < featuresXML.size(); indexN10063++) {
-            featureXML = (String) featuresXML.get(indexN10063);
+        for (String featureXML : featuresXML) {
             success = element.isSupported(featureXML, version);
             assertTrue(success);
             success = element.isSupported(featureXML, version1);
             assertTrue(success);
         }
-        for (int indexN1007C = 0; indexN1007C < featuresCore.size(); indexN1007C++) {
-            featureCore = (String) featuresCore.get(indexN1007C);
+        for (String featureCore : featuresCore) {
             success = element.isSupported(featureCore, version);
             assertTrue(success);
             element.isSupported(featureCore, version1);

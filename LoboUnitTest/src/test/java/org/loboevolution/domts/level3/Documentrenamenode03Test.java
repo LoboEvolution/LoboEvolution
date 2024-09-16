@@ -51,10 +51,9 @@ public class Documentrenamenode03Test extends LoboUnitTest {
         final Node renamedNode;
         final String nodeName;
         final String namespaceURI;
-        final String nullNSURI = null;
 
         doc = sampleXmlFile("hc_staff.xml");
-        attr = doc.createAttributeNS(nullNSURI, "test");
+        attr = doc.createAttributeNS(null, "test");
         renamedNode = doc.renameNode(attr, "http://www.w3.org/DOM/Test", "pre0:fix1");
         nodeName = renamedNode.getNodeName();
         namespaceURI = renamedNode.getNamespaceURI();

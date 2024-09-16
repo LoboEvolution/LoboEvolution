@@ -32,7 +32,6 @@ import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
-import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.Text;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -52,7 +51,6 @@ public class Nodeisequalnode08Test extends LoboUnitTest {
         final HTMLCollection employeeList;
         final Text text;
         final boolean isEqual;
-        final Node appendedChild;
         doc = sampleXmlFile("hc_staff.xml");
         employeeList = doc.getElementsByTagName("em");
         elem1 = (Element) employeeList.item(0);

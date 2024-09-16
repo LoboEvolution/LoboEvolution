@@ -50,12 +50,10 @@ public class Nodereplacechild12Test extends LoboUnitTest {
     public void runTest() {
         final Document doc;
         final ProcessingInstruction pi;
-        Node replaced;
         final Comment comment;
         final Node lastChild;
         String nodeName;
         final Node replacedNode;
-        Node appendedChild;
         doc = sampleXmlFile("barfoo.xml");
         comment = doc.createComment("dom3:doc");
         pi = doc.createProcessingInstruction("PITarget", "PIData");

@@ -53,8 +53,6 @@ public class Nodereplacechild28Test extends LoboUnitTest {
         final EntityReference betaRef;
         final Text dallas;
         final Node betaText;
-        Node appendedChild;
-        final Node replacedChild;
         doc = sampleXmlFile("hc_staff.xml");
         childList = doc.getElementsByTagName("acronym");
         acronym = (Element) childList.item(1);

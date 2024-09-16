@@ -32,7 +32,6 @@ import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
-import org.loboevolution.html.node.Node;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -61,7 +60,6 @@ public class ImportNode16Test extends LoboUnitTest {
         final Document doc;
         final Document anotherDoc;
         final DocumentType docType;
-        final Node node;
         doc = sampleXmlFile("staffNS.xml");
         anotherDoc = sampleXmlFile("staffNS.xml");
         docType = anotherDoc.getDoctype();

@@ -53,15 +53,13 @@ public class Typeinfoisderivedfrom63Test extends LoboUnitTest {
         final HTMLCollection elemList;
         final Element acronymElem;
         final boolean retValue;
-        String typeNamespace;
-        final String nullName = null;
 
         final TypeInfo elemTypeInfo;
         doc = sampleXmlFile("hc_staff.xml");
         elemList = doc.getElementsByTagName("acronym");
         acronymElem = (Element) elemList.item(0);
         elemTypeInfo = acronymElem.getSchemaTypeInfo();
-        retValue = elemTypeInfo.isDerivedFrom("http://www.w3.org/TR/REC-xml", nullName, 0);
+        retValue = elemTypeInfo.isDerivedFrom("http://www.w3.org/TR/REC-xml", null, 0);
         assertFalse(retValue, "Typeinfoisderivedfrom63Assert2");
     }
 }

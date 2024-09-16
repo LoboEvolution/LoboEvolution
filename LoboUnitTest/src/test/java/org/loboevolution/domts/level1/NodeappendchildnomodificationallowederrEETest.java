@@ -61,7 +61,6 @@ public class NodeappendchildnomodificationallowederrEETest extends LoboUnitTest 
         final Document doc;
         final Node entRef;
         final Node createdNode;
-        final Node appendedNode;
         doc = sampleXmlFile("staff.xml");
         entRef = doc.createEntityReference("ent4");
         assertNotNull(entRef, "NodeappendchildnomodificationallowederrEEAssert3");

@@ -45,7 +45,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Invoke the setAttributeNS method on this Element object with a valid value for
  * namespaceURI, and qualifiedNames that contain illegal characters.  Check if the an
  * INVALID_CHARACTER_ERR was thrown.
-
+ *
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElSetAttrNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-ElSetAttrNS</a>
  */
 public class Elementsetattributens04Test extends LoboUnitTest {
@@ -57,7 +57,6 @@ public class Elementsetattributens04Test extends LoboUnitTest {
     public void runTest() {
         final Document doc;
         final Element element;
-        String qualifiedName;
         final List<String> qualifiedNames = new ArrayList<>();
         qualifiedNames.add("/");
         qualifiedNames.add("//");
@@ -71,18 +70,15 @@ public class Elementsetattributens04Test extends LoboUnitTest {
 
         doc = sampleXmlFile("staffNS.xml");
         element = doc.createElementNS("http://www.w3.org/DOM/Test/L2", "dom:elem");
-        for (int indexN10058 = 0; indexN10058 < qualifiedNames.size(); indexN10058++) {
-            qualifiedName = qualifiedNames.get(indexN10058);
-
-            {
-                boolean success = false;
-                try {
-                    element.setAttributeNS("http://www.w3.org/DOM/Test/L2", qualifiedName, "test");
-                } catch (final DOMException ex) {
-                    success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
-                }
-                assertTrue(success);
+        for (String qualifiedName : qualifiedNames) {
+            boolean success = false;
+            try {
+                element.setAttributeNS("http://www.w3.org/DOM/Test/L2", qualifiedName, "test");
+            } catch (final DOMException ex) {
+                success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
             }
+            assertTrue(success);
+
         }
     }
 }

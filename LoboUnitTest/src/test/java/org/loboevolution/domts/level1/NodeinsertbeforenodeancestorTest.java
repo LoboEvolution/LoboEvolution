@@ -67,7 +67,6 @@ public class NodeinsertbeforenodeancestorTest extends LoboUnitTest {
         final Node employeeNode;
         final NodeList childList;
         final Node refChild;
-        final Node insertedNode;
         doc = sampleXmlFile("staff.xml");
         newChild = doc.getDocumentElement();
         elementList = doc.getElementsByTagName("employee");

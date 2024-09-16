@@ -68,7 +68,7 @@ public class Domimplementationregistry12Test extends LoboUnitTest {
             hasXML = baseImpl.hasFeature("XML", "3.0");
             hasEvents = baseImpl.hasFeature("Events", "2.0");
             hasLS = baseImpl.hasFeature("LS", null);
-            assertFalse((hasCore & hasXML & hasEvents & hasLS), "Domimplementationregistry12Assert2");
+            assertFalse((hasCore && hasXML && hasEvents && hasLS), "Domimplementationregistry12Assert2");
         } else {
             hasCore = domImpl.hasFeature("Core", "3.0");
             assertTrue(hasCore, "Domimplementationregistry12Assert3");

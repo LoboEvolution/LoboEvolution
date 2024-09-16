@@ -30,7 +30,6 @@ package org.loboevolution.domts.level3;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.*;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -49,8 +48,6 @@ public class Nodeinsertbefore24Test extends LoboUnitTest {
         final Element element;
         final CDATASection refNode;
         final Comment newNode;
-        HTMLCollection childList;
-        final Node inserted;
         doc = sampleXmlFile("hc_staff.xml");
         element = doc.createElementNS("http://www.w3.org/1999/xhtml", "xhtml:p");
         refNode = doc.createCDATASection("CDATASection");

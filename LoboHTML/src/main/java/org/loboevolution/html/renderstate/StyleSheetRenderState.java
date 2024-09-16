@@ -1014,13 +1014,6 @@ public class StyleSheetRenderState implements RenderState {
 		return this.iHighlight;
 	}
 
-	/**
-	 * <p>repaint.</p>
-	 */
-	public void repaint() {
-		// Dummy implementation
-	}
-
 	/** {@inheritDoc} */
 	@Override
 	public void resetCount(final String counter, final int nesting, final int value) {

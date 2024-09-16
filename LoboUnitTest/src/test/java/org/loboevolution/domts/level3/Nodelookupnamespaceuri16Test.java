@@ -46,7 +46,6 @@ public class Nodelookupnamespaceuri16Test extends LoboUnitTest {
         final Document doc;
         final Element elem;
         final Attr attr;
-        final Attr attNode;
         final String namespaceURI;
         doc = sampleXmlFile("hc_staff.xml");
         elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "dom3:p");

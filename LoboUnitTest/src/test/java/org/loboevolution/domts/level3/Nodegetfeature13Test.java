@@ -46,7 +46,6 @@ public class Nodegetfeature13Test extends LoboUnitTest {
         final Node node;
         Node featureImpl;
         boolean isSupported;
-        final DOMImplementation domImpl;
         final NamedNodeMap notations;
         final DocumentType doctype;
         doc = sampleXmlFile("hc_staff.xml");

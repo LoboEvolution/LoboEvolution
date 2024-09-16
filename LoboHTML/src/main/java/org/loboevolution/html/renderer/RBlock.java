@@ -57,6 +57,7 @@ import java.util.List;
  * {@link org.loboevolution.html.renderer.RBlockViewport}.
  */
 public class RBlock extends BaseElementRenderable {
+
 	private BoundableRenderable armedRenderable;
 	protected final RBlockViewport bodyLayout;
 	@Getter

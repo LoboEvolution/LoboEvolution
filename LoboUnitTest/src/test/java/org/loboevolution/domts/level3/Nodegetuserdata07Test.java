@@ -48,11 +48,9 @@ public class Nodegetuserdata07Test extends LoboUnitTest {
     public void runTest() {
         final Document doc;
         final ProcessingInstruction pi;
-        Object userData;
         final Object retUserData;
         final boolean success;
 
-        final Object prevUserData;
         doc = sampleXmlFile("hc_staff.xml");
         pi = doc.createProcessingInstruction("PITARGET", "PIDATA");
         /*Node */

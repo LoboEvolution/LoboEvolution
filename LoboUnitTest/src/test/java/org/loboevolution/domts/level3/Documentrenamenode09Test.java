@@ -54,8 +54,6 @@ public class Documentrenamenode09Test extends LoboUnitTest {
         final DOMImplementation domImpl;
         final Attr attr;
         final Node renamedNode;
-        final Node adopted;
-        final DocumentType nullDocType = null;
 
         final String attrNodeName;
         doc = sampleXmlFile("hc_staff.xml");

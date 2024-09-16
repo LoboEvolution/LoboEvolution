@@ -42,19 +42,19 @@ import org.loboevolution.traversal.NodeIterator;
 @Setter
 public class NodeIteratorImpl extends AbstractList<Node> implements NodeIterator {
 
-    private Node root;
+    private final Node root;
 
     private Node currentNode;
 
     private Document document;
 
-    private NodeFilter filter;
+    private final NodeFilter filter;
 
     private boolean fForward = true;
 
     private boolean fDetach = false;
 
-    private int whatToShow;
+    private final int whatToShow;
 
     public NodeIteratorImpl(final Node root, final int whatToShow, final NodeFilter filter) {
         this.root = root;

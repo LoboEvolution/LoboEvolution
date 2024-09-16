@@ -32,7 +32,6 @@ import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
-import org.loboevolution.html.node.Node;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -51,7 +50,6 @@ public class Nodereplacechild07Test extends LoboUnitTest {
         final Element replaced;
         final Element elem;
         final String nodeName;
-        final Node replacedNode;
         final String rootNS;
         final String rootName;
         doc = sampleXmlFile("hc_staff.xml");
@@ -64,11 +62,8 @@ public class Nodereplacechild07Test extends LoboUnitTest {
             doc.replaceChild(elem, docElem);
 
         } catch (final DOMException ex) {
-            switch (ex.getCode()) {
-                case 9:
-                    return;
-                default:
-                    throw ex;
+            if (ex.getCode() != 9) {
+                throw ex;
             }
         }
         replaced = doc.getDocumentElement();

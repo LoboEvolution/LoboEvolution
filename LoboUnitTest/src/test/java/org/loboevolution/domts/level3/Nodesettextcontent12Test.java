@@ -33,7 +33,6 @@ import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.EntityReference;
-import org.loboevolution.html.node.Node;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -51,8 +50,6 @@ public class Nodesettextcontent12Test extends LoboUnitTest {
         final Document doc;
         final Element elem;
         final EntityReference entRef;
-        String textContent;
-        final Node appendedChild;
         doc = sampleXmlFile("hc_staff.xml");
         elem = doc.getDocumentElement();
         entRef = doc.createEntityReference("beta");

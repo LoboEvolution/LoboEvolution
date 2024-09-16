@@ -49,9 +49,6 @@ public class Nodeisequalnode18Test extends LoboUnitTest {
         final Attr attr1;
         final Attr attr2;
         final boolean isEqual;
-        final DocumentType nullDocType = null;
-
-        final String nullNSURI = null;
 
         final Element docElem;
         final String rootNS;
@@ -62,7 +59,7 @@ public class Nodeisequalnode18Test extends LoboUnitTest {
         rootNS = docElem.getNamespaceURI();
         domImpl = doc.getImplementation();
         newDoc = domImpl.createDocument(rootNS, rootName, null);
-        attr1 = doc.createAttributeNS(nullNSURI, "title");
+        attr1 = doc.createAttributeNS(null, "title");
         attr2 = (Attr) newDoc.adoptNode(attr1);
 
         if ((attr2 != null)) {

@@ -30,8 +30,10 @@ package org.loboevolution.domts.level2;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -42,7 +44,7 @@ import static org.junit.jupiter.api.Assertions.fail;
  * <p>
  * Invoke the createAttributeNS method on this Document object with a valid value for
  * namespaceURI, and malformed qualifiedNames.  Check if the a NAMESPACE_ERR was thrown.
-
+ *
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core">http://www.w3.org/TR/DOM-Level-2-Core/core</a>
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-DocCrAttrNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-DocCrAttrNS</a>
  */
@@ -54,10 +56,8 @@ public class DocumentcreateattributeNS04Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
-        Attr attribute;
         final String namespaceURI = "http://www.w3.org/DOM/Test/Level2";
-        String qualifiedName;
-        final java.util.List qualifiedNames = new java.util.ArrayList();
+        final List<String> qualifiedNames = new ArrayList<>();
         qualifiedNames.add("_:");
         qualifiedNames.add(":0a");
         qualifiedNames.add(":");
@@ -65,20 +65,12 @@ public class DocumentcreateattributeNS04Test extends LoboUnitTest {
         qualifiedNames.add("_::a");
 
         doc = sampleXmlFile("staffNS.xml");
-        for (int indexN1004E = 0; indexN1004E < qualifiedNames.size(); indexN1004E++) {
-            qualifiedName = (String) qualifiedNames.get(indexN1004E);
-
-            {
-                // BEGIN Android-changed
-                //     Our exception priorities differ from the spec
-                try {
-                    doc.createAttributeNS(namespaceURI, qualifiedName);
-                    fail("documentcreateattributeNS04");
-                } catch (final DOMException expected) {
-                }
-                // END Android-changed
+        for (String qualifiedName : qualifiedNames) {
+            try {
+                doc.createAttributeNS(namespaceURI, qualifiedName);
+                fail("documentcreateattributeNS04");
+            } catch (final DOMException expected) {
             }
         }
     }
 }
-

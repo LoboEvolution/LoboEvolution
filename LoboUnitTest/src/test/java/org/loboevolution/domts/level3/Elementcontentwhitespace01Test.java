@@ -50,13 +50,10 @@ public class Elementcontentwhitespace01Test extends LoboUnitTest {
         final HTMLCollection bodyList;
         final Element body;
         final DOMConfiguration domConfig;
-        boolean canSet;
-        boolean canSetValidate;
         final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
 
         Node child;
         String childName;
-        Text text;
         doc = sampleXmlFile("barfoo.xml");
         domConfig = doc.getDomConfig();
         domConfig.setParameter("element-content-whitespace", Boolean.TRUE);

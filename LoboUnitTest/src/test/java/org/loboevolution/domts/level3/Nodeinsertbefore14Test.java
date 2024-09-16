@@ -33,7 +33,6 @@ import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
-import org.loboevolution.html.node.Node;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -54,7 +53,6 @@ public class Nodeinsertbefore14Test extends LoboUnitTest {
         final Document doc;
         final DocumentType docType;
         final Attr newAttr;
-        final Node inserted;
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
         newAttr = doc.createAttributeNS("http://www.w3.org/DOM/Test", "dom3:attr");

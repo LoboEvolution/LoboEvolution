@@ -30,7 +30,6 @@ package org.loboevolution.domts.level3;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.Element;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -48,7 +47,6 @@ public class Nodegetbaseuri06Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
-        final Element newElement;
         final String baseURI;
         doc = sampleXmlFile("barfoo.xml");
         doc.createElementNS("http://www.w3.org/1999/xhtml", "br");

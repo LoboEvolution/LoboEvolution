@@ -54,8 +54,6 @@ public class Documentrenamenode28Test extends LoboUnitTest {
         final NamedNodeMap notationNodeMap;
         final Node entity;
         final Notation notation;
-        final Node renamedEntityNode;
-        final Node renamedNotationNode;
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
         entityNodeMap = docType.getEntities();

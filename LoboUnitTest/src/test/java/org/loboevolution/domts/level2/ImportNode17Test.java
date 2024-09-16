@@ -31,7 +31,6 @@ import org.htmlunit.cssparser.dom.DOMException;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.Node;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -59,7 +58,6 @@ public class ImportNode17Test extends LoboUnitTest {
     public void runTest() {
         final Document doc;
         final Document anotherDoc;
-        final Node node;
         doc = sampleXmlFile("staffNS.xml");
         anotherDoc = sampleXmlFile("staffNS.xml");
 

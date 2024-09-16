@@ -45,11 +45,10 @@ public class Nodeisdefaultnamespace03Test extends LoboUnitTest {
         final Document doc;
         final DocumentType docType;
         final boolean isDefault;
-        final String nullNSURI = null;
 
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
-        isDefault = docType.isDefaultNamespace(nullNSURI);
+        isDefault = docType.isDefaultNamespace(null);
         assertFalse(isDefault, "Nodeisdefaultnamespace03Assert2");
     }
 }

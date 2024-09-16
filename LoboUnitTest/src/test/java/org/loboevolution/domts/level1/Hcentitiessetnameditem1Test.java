@@ -53,7 +53,6 @@ public class Hcentitiessetnameditem1Test extends LoboUnitTest {
         final Document doc;
         final NamedNodeMap entities;
         final DocumentType docType;
-        final Node retval;
         final Element elem;
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();

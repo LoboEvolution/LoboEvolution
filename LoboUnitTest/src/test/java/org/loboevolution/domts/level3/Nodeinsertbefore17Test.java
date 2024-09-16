@@ -54,11 +54,9 @@ public class Nodeinsertbefore17Test extends LoboUnitTest {
         final Element element;
         final Text newText;
         final Node refNode;
-        Node firstChild;
         final Text insertedText;
         final HTMLCollection childList;
         final String nodeName;
-        final Node inserted;
         doc = sampleXmlFile("hc_staff.xml");
         childList = doc.getElementsByTagNameNS("*", "p");
         element = (Element) childList.item(1);

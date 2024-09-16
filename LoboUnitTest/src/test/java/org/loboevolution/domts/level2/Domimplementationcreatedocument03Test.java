@@ -58,7 +58,6 @@ public class Domimplementationcreatedocument03Test extends LoboUnitTest {
         final Document doc;
         final DOMImplementation domImpl;
         Document newDoc;
-        final DocumentType docType = null;
 
         final String namespaceURI = "http://www.w3.org/DOMTest/L2";
         String qualifiedName;
@@ -78,7 +77,7 @@ public class Domimplementationcreatedocument03Test extends LoboUnitTest {
         domImpl = doc.getImplementation();
         for (final String name : qualifiedNames) {
             qualifiedName = name;
-            newDoc = domImpl.createDocument(namespaceURI, qualifiedName, docType);
+            newDoc = domImpl.createDocument(namespaceURI, qualifiedName, null);
             assertNotNull(newDoc);
         }
     }

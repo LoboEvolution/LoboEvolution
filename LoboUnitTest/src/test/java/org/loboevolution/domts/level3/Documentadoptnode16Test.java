@@ -29,7 +29,6 @@ package org.loboevolution.domts.level3;
 
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -47,7 +46,6 @@ public class Documentadoptnode16Test extends LoboUnitTest {
     public void runTest() {
         final Document doc;
         final DocumentFragment docFragment;
-        HTMLCollection childList;
         final Element parent;
         final Element child;
         final Attr childsAttr;
@@ -58,9 +56,6 @@ public class Documentadoptnode16Test extends LoboUnitTest {
         final Element childImp;
         final NamedNodeMap attributes;
         final Attr childAttrImp;
-        String nodeValue;
-        Node appendedChild;
-        final Attr attrNode;
         final Node firstChild;
         final int firstChildType;
         final String firstChildName;

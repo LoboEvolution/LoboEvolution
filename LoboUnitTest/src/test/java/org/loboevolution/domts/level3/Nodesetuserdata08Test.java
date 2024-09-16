@@ -29,7 +29,6 @@ package org.loboevolution.domts.level3;
 
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.*;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -49,13 +48,9 @@ public class Nodesetuserdata08Test extends LoboUnitTest {
         final Element docElem;
         final EntityReference entRef;
         final CDATASection cData;
-        HTMLCollection elemList;
-        Element elemName;
-        Object userData;
         final Object returned1;
         final Object returned2;
         final boolean success;
-        Object retUserData;
 
         doc = sampleXmlFile("hc_staff.xml");
         docElem = doc.getDocumentElement();

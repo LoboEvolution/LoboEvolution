@@ -60,8 +60,6 @@ public class NodeinsertbeforerefchildnullTest extends LoboUnitTest {
         final Document doc;
         final HTMLCollection elementList;
         final Node employeeNode;
-        final Node refChild = null;
-
         final Node newChild;
         final Node child;
         final String childName;
@@ -69,7 +67,7 @@ public class NodeinsertbeforerefchildnullTest extends LoboUnitTest {
         elementList = doc.getElementsByTagName("employee");
         employeeNode = elementList.item(1);
         newChild = doc.createElement("newChild");
-        employeeNode.insertBefore(newChild, refChild);
+        employeeNode.insertBefore(newChild, null);
         child = employeeNode.getLastChild();
         childName = child.getNodeName();
         assertEquals("NEWCHILD", childName, "NodeinsertbeforerefchildnullAssert1");

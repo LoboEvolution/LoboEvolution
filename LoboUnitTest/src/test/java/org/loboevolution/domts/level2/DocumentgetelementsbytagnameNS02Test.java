@@ -32,7 +32,6 @@ import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
-import org.loboevolution.html.node.Node;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -63,7 +62,6 @@ public class DocumentgetelementsbytagnameNS02Test extends LoboUnitTest {
         final Element docElem;
         final Element element;
         final HTMLCollection childList;
-        final Node appendedChild;
         doc = sampleXmlFile("staffNS.xml");
         docElem = doc.getDocumentElement();
         element = doc.createElementNS("test", "employeeId");

@@ -70,7 +70,7 @@ public class FastSliderUI extends BaseSliderUI {
 
 		@Override
 		public void paintIcon(final Component c, final Graphics g, final int iconX, final int y) {
-final int x = iconX;
+			final int x = iconX;
 			final int w = WIDTH - 1;
 			final int h = HEIGHT - 1;
 			final int dw = WIDTH / 2;
@@ -111,7 +111,7 @@ final int x = iconX;
 
 		@Override
 		public void paintIcon(final Component c, final Graphics g, final int iconX, final int y) {
-final int x = iconX;
+			final int x = iconX;
 			final int w = WIDTH - 1;
 			final int h = HEIGHT - 1;
 			final int dh = HEIGHT / 2;

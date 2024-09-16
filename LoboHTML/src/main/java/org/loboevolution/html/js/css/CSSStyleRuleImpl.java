@@ -102,8 +102,10 @@ public class CSSStyleRuleImpl extends AbstractCSSStyleRule implements CSSPropert
                         break;
                     case BACKGROUND:
                         new BackgroundSetter().changeValue(atomicReference.get(), p.getValue());
+                        break;
                     case FONT:
                         new FontSetter().changeValue(atomicReference.get(), p.getValue());
+                        break;
                     default:
                         break;
                 }

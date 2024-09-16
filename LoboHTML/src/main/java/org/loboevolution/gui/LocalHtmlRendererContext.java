@@ -58,7 +58,7 @@ public class LocalHtmlRendererContext implements HtmlRendererContext{
 
     private final HtmlRendererContext parentRcontext;
 
-    private boolean testEnabled = false;
+    private final boolean testEnabled = false;
 
     private double scrollx;
 

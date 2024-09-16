@@ -31,7 +31,6 @@ import org.htmlunit.cssparser.dom.DOMException;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.Element;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +47,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * with qualifiedName containing an illegal character from illegalChars[].
  * Method should raise INVALID_CHARACTER_ERR DOMException for all characters
  * in illegalChars[].
-
+ *
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-DocCrElNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-DocCrElNS</a>
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#xpointer(id('ID-DocCrElNS')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='INVALID_CHARACTER_ERR'])">http://www.w3.org/TR/DOM-Level-2-Core/core#xpointer(id('ID-DocCrElNS')/raises/exception[@name='DOMException']/descr/p[substring-before(.,':')='INVALID_CHARACTER_ERR'])</a>
  */
@@ -92,26 +91,18 @@ public class CreateElementNS03Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final String namespaceURI = "http://www.wedding.com/";
-        String qualifiedName;
         final Document doc;
-        boolean done;
-        Element newElement;
-        String charact;
         final List<String> illegalQNames = getIllegalQNames();
 
         doc = sampleXmlFile("staffNS.xml");
-        for (int indexN10098 = 0; indexN10098 < illegalQNames.size(); indexN10098++) {
-            qualifiedName = illegalQNames.get(indexN10098);
-
-            {
-                boolean success = false;
-                try {
-                    doc.createElementNS(namespaceURI, qualifiedName);
-                } catch (final DOMException ex) {
-                    success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
-                }
-                assertTrue(success);
+        for (String qualifiedName : illegalQNames) {
+            boolean success = false;
+            try {
+                doc.createElementNS(namespaceURI, qualifiedName);
+            } catch (final DOMException ex) {
+                success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
             }
+            assertTrue(success);
         }
     }
 }

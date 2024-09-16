@@ -30,9 +30,11 @@ package org.loboevolution.domts.level3;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.DOMConfiguration;
-import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.DOMStringList;
 import org.loboevolution.html.node.Document;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -60,12 +62,11 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-element-content-whitespace">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-element-content-whitespace</a>
  */
 public class Domconfigparameternames01Test extends LoboUnitTest {
+
     @Test
     public void runTest() {
-        DOMImplementation domImpl;
         final Document doc;
         final DOMConfiguration config;
-        boolean state;
         final DOMStringList parameterNames;
         String parameterName;
         int matchCount = 0;
@@ -83,19 +84,32 @@ public class Domconfigparameternames01Test extends LoboUnitTest {
             assertTrue(canSet, "Domconfigparameternames01Assert3");
             config.setParameter(parameterName, paramValue);
 
-            if (
-                    ("canonical-form".equalsIgnoreCase(parameterName) ||
-                            "cdata-sections".equalsIgnoreCase(parameterName) ||
-                            "check-character-normalization".equalsIgnoreCase(parameterName) ||
-                            "comments".equalsIgnoreCase(parameterName) ||
-                            "datatype-normalization".equalsIgnoreCase(parameterName) ||
-                            "entities".equalsIgnoreCase(parameterName) ||
-                            "error-handler".equalsIgnoreCase(parameterName) || "infoset".equalsIgnoreCase(parameterName) || "namespaces".equalsIgnoreCase(parameterName) || "namespace-declarations".equalsIgnoreCase(parameterName) || "normalize-characters".equalsIgnoreCase(parameterName) || "split-cdata-sections".equalsIgnoreCase(parameterName) || "validate".equalsIgnoreCase(parameterName) || "validate-if-schema".equalsIgnoreCase(parameterName) || "well-formed".equalsIgnoreCase(parameterName) || "element-content-whitespace".equalsIgnoreCase(parameterName))
-            ) {
+            if (isCount(parameterName)) {
                 matchCount += 1;
             }
         }
         assertEquals(16, matchCount, "Domconfigparameternames01Assert4");
+    }
+
+    private boolean isCount(String parameterName) {
+        List<String> list = new ArrayList<>();
+        list.add("canonical-form");
+        list.add("cdata-sections");
+        list.add("check-character-normalization");
+        list.add("comments");
+        list.add("datatype-normalization");
+        list.add("entities");
+        list.add("error-handler");
+        list.add("infoset");
+        list.add("namespaces");
+        list.add("namespace-declarations");
+        list.add("normalize-characters");
+        list.add("split-cdata-sections");
+        list.add("validate");
+        list.add("validate-if-schema");
+        list.add("well-formed");
+        list.add("element-content-whitespace");
+        return list.stream().anyMatch(l -> l.equals(parameterName.toLowerCase()));
     }
 }
 

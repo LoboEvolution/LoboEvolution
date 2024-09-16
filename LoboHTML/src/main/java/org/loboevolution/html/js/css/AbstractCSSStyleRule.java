@@ -51,21 +51,6 @@ public abstract class AbstractCSSStyleRule extends CSSRuleImpl implements CSSSty
     }
 
     @Override
-    public CSSStyleSheet getParentStyleSheet() {
-        return super.getParentStyleSheet();
-    }
-
-    @Override
-    public int getType() {
-        return super.getType();
-    }
-
-    @Override
-    public String getCssText() {
-        return super.getCssText();
-    }
-
-    @Override
     public String getSelectorText() {
         return null;
     }

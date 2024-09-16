@@ -67,7 +67,7 @@ public class HcnodelisttraverselistTest extends LoboUnitTest {
         int nodeType;
         final List<String> result = new ArrayList<>();
 
-        final List expected = new ArrayList();
+        final List<String> expected = new ArrayList<>();
         expected.add("EM");
         expected.add("STRONG");
         expected.add("CODE");

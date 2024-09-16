@@ -31,7 +31,6 @@ import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
-import org.loboevolution.html.node.Node;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
@@ -49,7 +48,6 @@ public class Nodeisdefaultnamespace09Test extends LoboUnitTest {
         final Element parent;
         final Element child;
         boolean isDefault;
-        final Node appendedChild;
         doc = sampleXmlFile("hc_staff.xml");
         parent = doc.createElementNS("http://www.w3.org/1999/xhtml", "xhtml:body");
         child = doc.createElement("xhtml:p");

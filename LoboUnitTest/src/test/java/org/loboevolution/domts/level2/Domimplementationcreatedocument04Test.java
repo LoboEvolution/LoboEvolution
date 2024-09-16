@@ -57,10 +57,8 @@ public class Domimplementationcreatedocument04Test extends LoboUnitTest {
     public void runTest() {
         final Document doc;
         final DOMImplementation domImpl;
-        final String namespaceURI = null;
 
         final String qualifiedName = "dom:root";
-        final DocumentType docType = null;
 
         doc = sampleXmlFile("staffNS.xml");
 
@@ -68,7 +66,7 @@ public class Domimplementationcreatedocument04Test extends LoboUnitTest {
 
         boolean success = false;
         try {
-            domImpl.createDocument(namespaceURI, qualifiedName, docType);
+            domImpl.createDocument(null, qualifiedName, null);
         } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NAMESPACE_ERR);
         }

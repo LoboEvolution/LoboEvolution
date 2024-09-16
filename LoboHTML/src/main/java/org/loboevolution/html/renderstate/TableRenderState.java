@@ -41,9 +41,6 @@ import java.util.Base64;
 
 /**
  * <p>TableRenderState class.</p>
- *
- *
- *
  */
 public class TableRenderState extends StyleSheetRenderState {
 	private BackgroundInfo backgroundInfo = INVALID_BACKGROUND_INFO;
@@ -168,12 +165,6 @@ public class TableRenderState extends StyleSheetRenderState {
 	@Override
 	public int getDefaultDisplay() {
 		return DISPLAY_TABLE;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Color getTextBackgroundColor() {
-		return super.getTextBackgroundColor();
 	}
 
 	/** {@inheritDoc} */

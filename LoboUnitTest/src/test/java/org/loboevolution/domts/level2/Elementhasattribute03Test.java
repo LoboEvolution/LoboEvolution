@@ -57,7 +57,6 @@ public class Elementhasattribute03Test extends LoboUnitTest {
         final Element element;
         boolean state;
         final Attr attribute;
-        final Attr newAttribute;
         doc = sampleXmlFile("staff.xml");
         element = doc.createElement("address");
         attribute = doc.createAttribute("domestic");

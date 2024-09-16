@@ -60,7 +60,6 @@ public class ImportNode09Test extends LoboUnitTest {
     public void runTest() {
         final Document doc;
         final Document aNewDoc;
-        DocumentType doc1Type;
         final NamedNodeMap entityList;
         final EntityReference entity2;
         final EntityReference entity1;

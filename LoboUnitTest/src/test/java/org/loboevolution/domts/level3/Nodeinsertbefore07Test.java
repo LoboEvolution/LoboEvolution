@@ -33,7 +33,6 @@ import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Comment;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
-import org.loboevolution.html.node.Node;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -53,7 +52,6 @@ public class Nodeinsertbefore07Test extends LoboUnitTest {
         final Document docAlt;
         final Element docElem;
         final Comment newComment;
-        final Node inserted;
         doc = sampleXmlFile("hc_staff.xml");
         docAlt = sampleXmlFile("hc_staff.xml");
         docElem = doc.getDocumentElement();

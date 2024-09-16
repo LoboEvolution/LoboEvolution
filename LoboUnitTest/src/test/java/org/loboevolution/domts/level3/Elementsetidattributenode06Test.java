@@ -55,7 +55,6 @@ public class Elementsetidattributenode06Test extends LoboUnitTest {
         final Element acronymElem;
         final NamedNodeMap attributesMap;
         final Attr attr;
-        Element nameElement;
         doc = sampleXmlFile("hc_staff.xml");
         elemList1 = doc.getElementsByTagName("strong");
         elemList2 = doc.getElementsByTagName("acronym");

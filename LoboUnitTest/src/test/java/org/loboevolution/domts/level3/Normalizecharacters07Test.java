@@ -49,7 +49,6 @@ public class Normalizecharacters07Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
-        Element docElem;
         final DOMConfiguration domConfig;
         final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
 

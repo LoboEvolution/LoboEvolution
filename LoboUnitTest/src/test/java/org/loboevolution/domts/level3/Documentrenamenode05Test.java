@@ -53,11 +53,10 @@ public class Documentrenamenode05Test extends LoboUnitTest {
         final Node renamedNode;
         final String nodeName;
         final String namespaceURI;
-        final String nullNSURI = null;
 
         doc = sampleXmlFile("hc_staff.xml");
         attr = doc.createAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:lang");
-        renamedNode = doc.renameNode(attr, nullNSURI, "title");
+        renamedNode = doc.renameNode(attr, null, "title");
         nodeName = renamedNode.getNodeName();
         namespaceURI = renamedNode.getNamespaceURI();
         assertNull(namespaceURI, "Documentrenamenode05Assert3");

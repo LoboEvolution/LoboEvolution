@@ -37,7 +37,6 @@ import org.loboevolution.html.node.Node;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.renderstate.TableRenderState;
 
-import java.util.Iterator;
 import java.util.concurrent.atomic.AtomicInteger;
 
 

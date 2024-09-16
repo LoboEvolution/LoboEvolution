@@ -63,7 +63,6 @@ public class HccharacterdataindexsizeerrsubstringcountnegativeTest extends LoboU
         final HTMLCollection elementList;
         final Node nameNode;
         final CharacterData child;
-        final String badSubstring;
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("acronym");
         nameNode = elementList.item(0);

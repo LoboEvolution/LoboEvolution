@@ -130,7 +130,7 @@ public class StyleSheetAggregator {
 	public final List<CSSStyleSheetImpl.SelectorEntry> getActiveStyleDeclarations(final HTMLElementImpl element, final String elementName, final String[] classes, final boolean mouseOver) {
 		List<CSSStyleSheetImpl.SelectorEntry> matchingRules = new ArrayList<>();
 		for (final CSSStyleSheetImpl sheet : styleSheets) {
-			if (matchingRules.size() == 0) {
+			if (matchingRules.isEmpty()) {
 				matchingRules = selects(sheet.getRuleIndex(), element, elementName, mouseOver, classes);
 			} else {
 				final List<CSSStyleSheetImpl.SelectorEntry> _matchingRules = selects(sheet.getRuleIndex(), element, elementName, mouseOver, classes);
@@ -245,7 +245,7 @@ public class StyleSheetAggregator {
 			}
 			return false;
 		case PSEUDO_ELEMENT_SELECTOR:
-			if (pseudoElement != null && pseudoElement.length() != 0 && pseudoElement.charAt(0) == ':') {
+			if (pseudoElement != null && !pseudoElement.isEmpty() && pseudoElement.charAt(0) == ':') {
 				final String pseudoName = ((PseudoElementSelector) selector).getLocalName();
 				return pseudoName.equals(pseudoElement.substring(1));
 			}
@@ -967,7 +967,7 @@ public class StyleSheetAggregator {
 			if ("-".equals(value)) {
 				a = -1;
 			} else {
-				if (value.length() > 0 && value.charAt(0) == '+') {
+				if (!value.isEmpty() && value.charAt(0) == '+') {
 					value = value.substring(1);
 				}
 				a = HtmlValues.getPixelSize(value, null, doc.getDefaultView(), 1);
@@ -975,7 +975,7 @@ public class StyleSheetAggregator {
 		}
 
 		String value = nth.substring(nIndex + 1).trim();
-		if (value.length() > 0 && value.charAt(0) == '+') {
+		if (!value.isEmpty() && value.charAt(0) == '+') {
 			value = value.substring(1);
 		}
 		final int b = HtmlValues.getPixelSize(value, null, doc.getDefaultView(), 0);

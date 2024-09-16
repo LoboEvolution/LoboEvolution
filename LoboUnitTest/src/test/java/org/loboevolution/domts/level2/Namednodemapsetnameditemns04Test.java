@@ -59,22 +59,18 @@ public class Namednodemapsetnameditemns04Test extends LoboUnitTest {
         final Document doc;
         final DOMImplementation domImpl;
         final Document docAlt;
-        final DocumentType docType = null;
 
         final NamedNodeMap attributes;
         final HTMLCollection elementList;
         final Element element;
         final Attr attrAlt;
-        final String nullNS = null;
-
         doc = sampleXmlFile("staffNS.xml");
-
         elementList = doc.getElementsByTagNameNS("*", "address");
         element = (Element) elementList.item(1);
         attributes = element.getAttributes();
         domImpl = doc.getImplementation();
-        docAlt = domImpl.createDocument(nullNS, "newDoc", docType);
-        attrAlt = docAlt.createAttributeNS(nullNS, "street");
+        docAlt = domImpl.createDocument(null, "newDoc", null);
+        attrAlt = docAlt.createAttributeNS(null, "street");
 
         boolean success = false;
         try {

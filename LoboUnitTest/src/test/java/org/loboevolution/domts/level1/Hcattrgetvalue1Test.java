@@ -62,7 +62,7 @@ public class Hcattrgetvalue1Test extends LoboUnitTest {
         attributes = testNode.getAttributes();
         titleAttr = (Attr) attributes.getNamedItem("class");
         value = titleAttr.getValue();
-        assertEquals("Y\u03b1", value, "Hcattrgetvalue1Assert1"); // Android-changed: GREEK LOWER CASE ALPHA
+        assertEquals("Yα", value, "Hcattrgetvalue1Assert1"); // Android-changed: GREEK LOWER CASE ALPHA
     }
 }
 

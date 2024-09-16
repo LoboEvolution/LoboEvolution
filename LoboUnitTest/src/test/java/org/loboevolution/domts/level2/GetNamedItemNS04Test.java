@@ -56,13 +56,12 @@ public class GetNamedItemNS04Test extends LoboUnitTest {
         final DocumentType docType;
         final NamedNodeMap notations;
         final Notation notation;
-        final String nullNS = null;
 
         doc = sampleXmlFile("staffNS.xml");
         docType = doc.getDoctype();
         notations = docType.getNotations();
         assertNotNull(notations);
-        notation = (Notation) notations.getNamedItemNS(nullNS, "notation1");
+        notation = (Notation) notations.getNamedItemNS(null, "notation1");
         assertNull(notation);
     }
 }

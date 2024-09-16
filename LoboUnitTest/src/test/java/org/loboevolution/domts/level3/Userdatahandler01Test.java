@@ -30,7 +30,6 @@ package org.loboevolution.domts.level3;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
-import org.loboevolution.html.dom.UserDataHandler;
 import org.loboevolution.html.dom.nodeimpl.UserDataHandlerImpl;
 import org.loboevolution.html.dom.nodeimpl.UserDataNotification;
 import org.loboevolution.html.node.Document;
@@ -55,12 +54,10 @@ public class Userdatahandler01Test extends LoboUnitTest {
         final HTMLCollection pList;
         final UserDataHandlerImpl userDataHandlerImpl = new UserDataHandlerImpl();
 
-        Object oldUserData;
         final String elementNS;
         final Node newNode;
         final List<UserDataNotification> notifications;
 
-        UserDataNotification notification;
         short operation;
         String key;
         String data;

@@ -68,13 +68,13 @@ public class HctextparseintolistofelementsTest extends LoboUnitTest {
         final java.util.List<String> result = new java.util.ArrayList<>();
 
         final java.util.List<String> expectedNormal = new java.util.ArrayList<>();
-        expectedNormal.add("\u03b2"); // Android-changed: GREEK LOWER CASE BETA
+        expectedNormal.add("β"); // Android-changed: GREEK LOWER CASE BETA
         expectedNormal.add(" Dallas, ");
-        expectedNormal.add("\u03b3"); // Android-changed: GREEK LOWER CASE GAMMA
+        expectedNormal.add("γ"); // Android-changed: GREEK LOWER CASE GAMMA
         expectedNormal.add("\n 98554");
 
-        final java.util.List<String> expectedExpanded = new java.util.ArrayList<String>();
-        expectedExpanded.add("\u03b2 Dallas, \u03b3\n 98554"); // Android-changed: GREEK LOWER CASE BETA, GREEK LOWER CASE GAMMA
+        final java.util.List<String> expectedExpanded = new java.util.ArrayList<>();
+        expectedExpanded.add("β Dallas, γ\n 98554"); // Android-changed: GREEK LOWER CASE BETA, GREEK LOWER CASE GAMMA
 
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("acronym");

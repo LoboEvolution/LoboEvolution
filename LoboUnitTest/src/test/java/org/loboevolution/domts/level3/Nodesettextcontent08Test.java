@@ -29,10 +29,8 @@ package org.loboevolution.domts.level3;
 
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
-import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.ProcessingInstruction;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -48,11 +46,9 @@ public class Nodesettextcontent08Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
-        HTMLCollection elemList;
         final Element elem;
         final ProcessingInstruction pi;
         final String textContent;
-        final Node appendedChild;
         doc = sampleXmlFile("hc_staff.xml");
         elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "xhtml:p");
         pi = doc.createProcessingInstruction("PIT", "PID");

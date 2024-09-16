@@ -50,11 +50,10 @@ public class IsSupported14Test extends LoboUnitTest {
         final Document doc;
         final Node rootNode;
         final boolean state;
-        final String nullString = null;
 
         doc = sampleXmlFile("staff.xml");
         rootNode = doc.getDocumentElement();
-        state = rootNode.isSupported("Core", nullString);
+        state = rootNode.isSupported("Core", null);
         assertTrue(state);
     }
 }

@@ -62,12 +62,10 @@ public class Elementsetattributenodens02Test extends LoboUnitTest {
         final HTMLCollection elementList;
         final String attrName;
         final String attrValue;
-        final String nullNS = null;
-
         doc = sampleXmlFile("staffNS.xml");
         elementList = doc.getElementsByTagName("address");
         element = (Element) elementList.item(1);
-        attribute = element.getAttributeNodeNS(nullNS, "street");
+        attribute = element.getAttributeNodeNS(null, "street");
         attributeCloned = (Attr) attribute.cloneNode(true);
         element2 = (Element) elementList.item(2);
         newAttr = element2.setAttributeNodeNS(attributeCloned);

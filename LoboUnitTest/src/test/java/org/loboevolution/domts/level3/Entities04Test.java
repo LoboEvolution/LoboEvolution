@@ -49,8 +49,6 @@ public class Entities04Test extends LoboUnitTest {
         HTMLCollection pList;
         Element pElem;
         final DOMConfiguration domConfig;
-        boolean canSet;
-        boolean canSetValidate;
         final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
 
         Node child;

@@ -48,11 +48,9 @@ public class Nodegetuserdata04Test extends LoboUnitTest {
     public void runTest() {
         final Document doc;
         final DocumentType docType;
-        Object userData;
         final Object retUserData;
         final boolean success;
 
-        final Object prevUserData;
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
         /*Node */

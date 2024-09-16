@@ -30,7 +30,6 @@ package org.loboevolution.domts.level1;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -53,7 +52,6 @@ public class Hcdocumentinvalidcharacterexceptioncreateattribute1Test extends Lob
     @Test
     public void runTest() {
         final Document doc;
-        final Attr createdAttr;
         doc = sampleXmlFile("hc_staff.xml");
 
         {

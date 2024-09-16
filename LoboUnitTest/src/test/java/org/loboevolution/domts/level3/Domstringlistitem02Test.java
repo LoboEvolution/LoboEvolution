@@ -52,7 +52,6 @@ public class Domstringlistitem02Test extends LoboUnitTest {
         final Document doc;
         final DOMStringList paramList;
         final DOMConfiguration domConfig;
-        int listSize;
         String retStr;
         doc = sampleXmlFile("hc_staff.xml");
         domConfig = doc.getDomConfig();

@@ -70,7 +70,6 @@ public class HcnamednodemapsetnameditemthatexistsTest extends LoboUnitTest {
         final NamedNodeMap attributes;
         final Attr districtNode;
         final String attrValue;
-        final Node setNode;
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("acronym");
         testAddress = (Element) elementList.item(1);

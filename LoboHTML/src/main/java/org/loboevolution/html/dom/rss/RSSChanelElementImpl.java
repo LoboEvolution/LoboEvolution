@@ -31,7 +31,6 @@ import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.node.Node;
 
 import java.awt.*;
-import java.util.Iterator;
 
 /**
  * <p>RSSChanelElementImpl class.</p>

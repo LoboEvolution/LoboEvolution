@@ -35,7 +35,6 @@ import org.loboevolution.html.dom.nodeimpl.DOMImplementationImpl;
 import org.loboevolution.html.node.DOMConfiguration;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.http.UserAgentContext;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -55,7 +54,6 @@ public class Domconfigvalidateifschema1Test extends LoboUnitTest {
         final DOMImplementation domImpl;
         final Document doc;
         final DOMConfiguration domConfig;
-        final DocumentType nullDocType = null;
 
         boolean canSet;
         boolean state;

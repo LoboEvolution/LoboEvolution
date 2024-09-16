@@ -52,8 +52,6 @@ public class Hcattrgetvalue2Test extends LoboUnitTest {
         final HTMLCollection acronymList;
         final Element testNode;
         final NamedNodeMap attributes;
-        final Attr titleAttr;
-        final EntityReference alphaRef;
         doc = sampleXmlFile("hc_staff.xml");
         acronymList = doc.getElementsByTagName("acronym");
         testNode = (Element) acronymList.item(3);

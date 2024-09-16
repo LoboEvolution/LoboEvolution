@@ -56,12 +56,9 @@ public class Documenttypepublicid01Test extends LoboUnitTest {
         final DocumentType docType;
         final DOMImplementation domImpl;
         final String publicId;
-        final String nullNS = null;
-
         doc = sampleXmlFile("staffNS.xml");
-
         domImpl = doc.getImplementation();
-        docType = domImpl.createDocumentType("l2:root", "PUB", nullNS);
+        docType = domImpl.createDocumentType("l2:root", "PUB", null);
         publicId = docType.getPublicId();
         assertEquals("PUB", publicId);
     }

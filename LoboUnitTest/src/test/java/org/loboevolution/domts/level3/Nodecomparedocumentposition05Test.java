@@ -31,7 +31,6 @@ import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.html.node.Element;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -53,7 +52,6 @@ public class Nodecomparedocumentposition05Test extends LoboUnitTest {
         final int documentPosition1;
         final int documentPosition2;
         final int documentPosition3;
-        final DocumentType nullDocType = null;
 
         final String rootName;
         final String rootNS;

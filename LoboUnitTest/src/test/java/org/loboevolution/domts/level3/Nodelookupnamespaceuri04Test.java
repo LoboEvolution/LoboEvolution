@@ -29,7 +29,6 @@ package org.loboevolution.domts.level3;
 
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.dom.Notation;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.html.node.NamedNodeMap;
@@ -48,7 +47,6 @@ public class Nodelookupnamespaceuri04Test extends LoboUnitTest {
         final Document doc;
         final DocumentType docType;
         final Node entity;
-        final Notation notation;
         final NamedNodeMap entitiesMap;
         final NamedNodeMap notationsMap;
         final String namespaceURI;

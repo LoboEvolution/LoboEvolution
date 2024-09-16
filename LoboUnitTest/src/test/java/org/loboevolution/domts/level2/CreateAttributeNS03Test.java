@@ -30,8 +30,10 @@ package org.loboevolution.domts.level2;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -57,10 +59,22 @@ public class CreateAttributeNS03Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final String namespaceURI = "http://www.wedding.com/";
-        String qualifiedName;
-        final Document doc;
-        Attr newAttr;
-        final java.util.List illegalQNames = new java.util.ArrayList();
+        final Document doc = sampleXmlFile("staffNS.xml");
+        final List<String> illegalQNames = getStrings();
+        for (String qualifiedName : illegalQNames) {
+            boolean success = false;
+            try {
+                doc.createAttributeNS(namespaceURI, qualifiedName);
+            } catch (final DOMException ex) {
+                success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
+            }
+            assertTrue(success);
+
+        }
+    }
+
+    private static List<String> getStrings() {
+        final List<String> illegalQNames = new ArrayList<>();
         illegalQNames.add("person:{");
         illegalQNames.add("person:}");
         illegalQNames.add("person:~");
@@ -88,21 +102,7 @@ public class CreateAttributeNS03Test extends LoboUnitTest {
         illegalQNames.add("person:,");
         illegalQNames.add("person:a ");
         illegalQNames.add("person:\"");
-
-        doc = sampleXmlFile("staffNS.xml");
-        for (int indexN10090 = 0; indexN10090 < illegalQNames.size(); indexN10090++) {
-            qualifiedName = (String) illegalQNames.get(indexN10090);
-
-            {
-                boolean success = false;
-                try {
-                    doc.createAttributeNS(namespaceURI, qualifiedName);
-                } catch (final DOMException ex) {
-                    success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
-                }
-                assertTrue(success);
-            }
-        }
+        return illegalQNames;
     }
 }
 

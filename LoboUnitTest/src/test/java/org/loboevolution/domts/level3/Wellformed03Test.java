@@ -53,12 +53,10 @@ public class Wellformed03Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final DOMImplementation domImpl;
-        final DocumentType nullDoctype = null;
 
         final Document doc;
         final Element docElem;
         Attr attr;
-        Node retval;
         final DOMConfiguration domConfig;
         final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
 
@@ -70,7 +68,7 @@ public class Wellformed03Test extends LoboUnitTest {
         DOMLocator locator;
         Node relatedNode;
         domImpl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(), true));
-        doc = domImpl.createDocument("http://www.w3.org/1999/xhtml", "html", nullDoctype);
+        doc = domImpl.createDocument("http://www.w3.org/1999/xhtml", "html", null);
         docElem = doc.getDocumentElement();
 
         {

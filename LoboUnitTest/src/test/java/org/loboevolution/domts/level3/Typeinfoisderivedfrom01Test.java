@@ -51,8 +51,6 @@ public class Typeinfoisderivedfrom01Test extends LoboUnitTest {
         final HTMLCollection elemList;
         final Element acronymElem;
         final Attr attr;
-        Element elem;
-        String elemName;
         final TypeInfo typeInfo;
         boolean isDerived;
         doc = sampleXmlFile("hc_staff.xml");

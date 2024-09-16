@@ -56,12 +56,11 @@ public class Nodegetownerdocument01Test extends LoboUnitTest {
         final Document ownerDoc;
         final DOMImplementation domImpl;
         final DocumentType docType;
-        final String nullID = null;
 
         doc = sampleXmlFile("staff.xml");
 
         domImpl = doc.getImplementation();
-        docType = domImpl.createDocumentType("mydoc", nullID, nullID);
+        docType = domImpl.createDocumentType("mydoc", null, null);
         ownerDoc = docType.getOwnerDocument();
         assertNull(ownerDoc);
     }

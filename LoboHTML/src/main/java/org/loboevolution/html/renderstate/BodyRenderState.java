@@ -118,14 +118,6 @@ public class BodyRenderState extends StyleSheetRenderState {
         return insets;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void invalidate() {
-        super.invalidate();
-    }
-
     @Override
     public int getDefaultDisplay() {
         return DISPLAY_BLOCK;

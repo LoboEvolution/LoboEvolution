@@ -33,6 +33,9 @@ import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
@@ -60,8 +63,19 @@ public class Domimplementationcreatedocumenttype02Test extends LoboUnitTest {
         Document ownerDocument;
         final String publicId = "http://www.w3.org/DOM/Test/dom2.dtd";
         final String systemId = "dom2.dtd";
-        String qualifiedName;
-        final java.util.List qualifiedNames = new java.util.ArrayList();
+        final List<String> qualifiedNames = getList();
+        doc = sampleXmlFile("staffNS.xml");
+        domImpl = doc.getImplementation();
+        for (String qualifiedName : qualifiedNames) {
+            newDocType = domImpl.createDocumentType(qualifiedName, publicId, systemId);
+            assertNotNull(newDocType);
+            ownerDocument = newDocType.getOwnerDocument();
+            assertNull(ownerDocument);
+        }
+    }
+
+    private static List<String> getList() {
+        final List<String> qualifiedNames = new ArrayList<>();
         qualifiedNames.add("_:_");
         qualifiedNames.add("_:h0");
         qualifiedNames.add("_:test");
@@ -76,17 +90,7 @@ public class Domimplementationcreatedocumenttype02Test extends LoboUnitTest {
         qualifiedNames.add("a.b:c");
         qualifiedNames.add("a-b:c.j");
         qualifiedNames.add("a-b:c");
-
-        doc = sampleXmlFile("staffNS.xml");
-
-        domImpl = doc.getImplementation();
-        for (int indexN10077 = 0; indexN10077 < qualifiedNames.size(); indexN10077++) {
-            qualifiedName = (String) qualifiedNames.get(indexN10077);
-            newDocType = domImpl.createDocumentType(qualifiedName, publicId, systemId);
-            assertNotNull(newDocType);
-            ownerDocument = newDocType.getOwnerDocument();
-            assertNull(ownerDocument);
-        }
+        return qualifiedNames;
     }
 }
 

@@ -766,7 +766,7 @@ public class RBlockViewport extends BaseRCollection {
 	@Override
 	public List<Renderable> getRenderables() {
 		final SortedSet<PositionedRenderable> others = this.positionedRenderables;
-		if (others == null || others.size() == 0) {
+		if (others == null || others.isEmpty()) {
 			final List<Renderable> sr = this.seqRenderables;
 			return sr;
 		} else {
@@ -1339,7 +1339,7 @@ public class RBlockViewport extends BaseRCollection {
 						word.append(ch);
 					}
 				}
-				if (word.length() > 0) {
+				if (!word.isEmpty()) {
 					final RWord rword = new RWord(textNode, word.toString(), this.container, fm, descent,
 							ascentPlusLeading, wordHeight, textTransform);
 					addWordToLine(rword);
@@ -1374,7 +1374,7 @@ public class RBlockViewport extends BaseRCollection {
 					break;
 				}
 			}
-			if (line.length() > 0) {
+			if (!line.isEmpty()) {
 				final RWord rword = new RWord(textNode, line.toString(), this.container, fm, descent, ascentPlusLeading,
 						wordHeight, textTransform);
 				addWordToLine(rword);

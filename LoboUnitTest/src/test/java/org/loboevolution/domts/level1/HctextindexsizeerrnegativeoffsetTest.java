@@ -63,7 +63,6 @@ public class HctextindexsizeerrnegativeoffsetTest extends LoboUnitTest {
         final HTMLCollection elementList;
         final Node nameNode;
         final Text textNode;
-        final Text splitNode;
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("strong");
         nameNode = elementList.item(2);

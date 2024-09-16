@@ -62,17 +62,15 @@ public class Namednodemapgetnameditemns01Test extends LoboUnitTest {
         final NamedNodeMap notations;
         final EntityReference entity;
         final Notation notation;
-        final String nullNS = null;
-
         doc = sampleXmlFile("staffNS.xml");
         docType = doc.getDoctype();
         entities = docType.getEntities();
         assertNotNull(entities);
         notations = docType.getNotations();
         assertNotNull(notations);
-        entity = (EntityReference) entities.getNamedItemNS(nullNS, "ent1");
+        entity = (EntityReference) entities.getNamedItemNS(null, "ent1");
         assertNull(entity);
-        notation = (Notation) notations.getNamedItemNS(nullNS, "notation1");
+        notation = (Notation) notations.getNamedItemNS(null, "notation1");
         assertNull(notation);
     }
 }

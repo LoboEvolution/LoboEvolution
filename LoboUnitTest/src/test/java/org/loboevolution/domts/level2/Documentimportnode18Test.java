@@ -57,7 +57,6 @@ public class Documentimportnode18Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
-        final Document docImp;
         final ProcessingInstruction piImport;
         final ProcessingInstruction piToImport;
         final String piData;

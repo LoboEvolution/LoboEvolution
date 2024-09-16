@@ -31,8 +31,6 @@ import org.htmlunit.cssparser.dom.DOMException;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.DocumentType;
-import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.Text;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -56,10 +54,6 @@ public class Documentrenamenode11Test extends LoboUnitTest {
         final Document doc;
         final String textEntry = "hello";
         final Text textNode;
-        final Node renamedNode;
-        final DocumentType nullDocType = null;
-
-        final String nullNSURI = null;
 
         doc = sampleXmlFile("hc_staff.xml");
         textNode = doc.createTextNode(textEntry);
@@ -67,7 +61,7 @@ public class Documentrenamenode11Test extends LoboUnitTest {
 
         boolean success = false;
         try {
-            doc.renameNode(textNode, nullNSURI, "pre:fix");
+            doc.renameNode(textNode, null, "pre:fix");
         } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
         }

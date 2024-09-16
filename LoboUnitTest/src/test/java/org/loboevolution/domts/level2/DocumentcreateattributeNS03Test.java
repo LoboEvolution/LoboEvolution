@@ -30,7 +30,6 @@ package org.loboevolution.domts.level2;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 
 import java.util.ArrayList;
@@ -46,7 +45,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Invoke the createAttributeNS method on this Document object with a valid value for
  * namespaceURI, and qualifiedNames that contain illegal characters.  Check if the an
  * INVALID_CHARACTER_ERR was thrown.
-
+ *
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core">http://www.w3.org/TR/DOM-Level-2-Core/core</a>
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-DocCrAttrNS">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-DocCrAttrNS</a>
  */
@@ -58,9 +57,7 @@ public class DocumentcreateattributeNS03Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
-        Attr attribute;
         final String namespaceURI = "http://www.w3.org/DOM/Test/Level2";
-        String qualifiedName;
         final List<String> qualifiedNames = new ArrayList<>();
         qualifiedNames.add("/");
         qualifiedNames.add("//");
@@ -73,18 +70,14 @@ public class DocumentcreateattributeNS03Test extends LoboUnitTest {
         qualifiedNames.add("<");
 
         doc = sampleXmlFile("staffNS.xml");
-        for (int indexN1005A = 0; indexN1005A < qualifiedNames.size(); indexN1005A++) {
-            qualifiedName = qualifiedNames.get(indexN1005A);
-
-            {
-                boolean success = false;
-                try {
-                    doc.createAttributeNS(namespaceURI, qualifiedName);
-                } catch (final DOMException ex) {
-                    success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
-                }
-                assertTrue(success);
+        for (String qualifiedName : qualifiedNames) {
+            boolean success = false;
+            try {
+                doc.createAttributeNS(namespaceURI, qualifiedName);
+            } catch (final DOMException ex) {
+                success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
             }
+            assertTrue(success);
         }
     }
 }

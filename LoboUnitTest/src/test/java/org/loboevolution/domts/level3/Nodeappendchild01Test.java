@@ -50,15 +50,13 @@ public class Nodeappendchild01Test extends LoboUnitTest {
         final Document doc;
         final DOMImplementation domImpl;
         final DocumentType docType;
-        final String nullPubId = null;
-        final String nullSysId = null;
         final String tagName;
         final Element docElem;
         doc = sampleXmlFile("barfoo.xml");
         docElem = doc.getDocumentElement();
         tagName = docElem.getTagName();
         domImpl = doc.getImplementation();
-        docType = domImpl.createDocumentType(tagName, nullPubId, nullSysId);
+        docType = domImpl.createDocumentType(tagName, null, null);
 
         boolean success = false;
         try {

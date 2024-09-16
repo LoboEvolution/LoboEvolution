@@ -59,8 +59,6 @@ public class Documentimportnode22Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
-        final DocumentType docTypeNull = null;
-
         final Document docImp;
         final DOMImplementation domImpl;
         final DocumentType docType;
@@ -80,7 +78,7 @@ public class Documentimportnode22Test extends LoboUnitTest {
 
         domImpl = doc.getImplementation();
         docType = doc.getDoctype();
-        docImp = domImpl.createDocument("http://www.w3.org/DOM/Test", "a:b", docTypeNull);
+        docImp = domImpl.createDocument("http://www.w3.org/DOM/Test", "a:b", null);
         nodeMap = docType.getNotations();
         assertNotNull(nodeMap);
         notation1 = (Notation) nodeMap.getNamedItem("notation1");
@@ -105,7 +103,7 @@ public class Documentimportnode22Test extends LoboUnitTest {
         assertEquals(systemId2, systemId2Imp);
         assertEquals(systemId2, systemId2NewImp);
         assertNull(publicId2Imp);
-        assertNull(publicId2Imp);
+        assertNull(null);
     }
 }
 

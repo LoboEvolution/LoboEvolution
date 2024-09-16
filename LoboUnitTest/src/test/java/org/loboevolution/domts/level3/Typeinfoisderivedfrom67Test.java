@@ -50,7 +50,6 @@ public class Typeinfoisderivedfrom67Test extends LoboUnitTest {
         final Document doc;
         final Element elem;
         final TypeInfo elemTypeInfo;
-        String typeName;
         final HTMLCollection elemList;
         final boolean retValue;
         doc = sampleXmlFile("hc_staff.xml");

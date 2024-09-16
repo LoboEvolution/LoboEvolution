@@ -52,9 +52,6 @@ public class Documentadoptnode26Test extends LoboUnitTest {
         final Node adoptedNode;
         final String adoptedName;
         final String adoptedNS;
-        final DocumentType nullDocType = null;
-
-        final Node appendedChild;
         final String rootNS;
         final String rootTagname;
         doc = sampleXmlFile("hc_staff.xml");

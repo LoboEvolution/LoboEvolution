@@ -61,7 +61,6 @@ public class NodeinsertbeforenomodificationallowederrEETest extends LoboUnitTest
         final Document doc;
         final Node entRef;
         final Node createdNode;
-        final Node refChild = null;
 
         doc = sampleXmlFile("staff.xml");
         entRef = doc.createEntityReference("ent4");
@@ -69,7 +68,7 @@ public class NodeinsertbeforenomodificationallowederrEETest extends LoboUnitTest
         createdNode = doc.createElement("text3");
         boolean success = false;
         try {
-            entRef.insertBefore(createdNode, refChild);
+            entRef.insertBefore(createdNode, null);
         } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
         }

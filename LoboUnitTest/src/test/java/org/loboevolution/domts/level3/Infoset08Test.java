@@ -53,7 +53,6 @@ public class Infoset08Test extends LoboUnitTest {
 
         Node child;
         String childName;
-        Text text;
         doc = sampleXmlFile("barfoo.xml");
         domConfig = doc.getDomConfig();
         domConfig.setParameter("infoset", Boolean.TRUE);

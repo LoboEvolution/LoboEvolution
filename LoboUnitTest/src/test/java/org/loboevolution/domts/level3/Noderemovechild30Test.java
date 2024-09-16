@@ -26,7 +26,6 @@
 
 package org.loboevolution.domts.level3;
 
-
 import org.htmlunit.cssparser.dom.DOMException;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
@@ -54,9 +53,7 @@ public class Noderemovechild30Test extends LoboUnitTest {
         final Text child;
         final Element elem;
         final Text removed;
-        final Node removedNode;
         final String removedName;
-        Node appendedChild;
         doc = sampleXmlFile("hc_staff.xml");
         parentList = doc.getElementsByTagName("p");
         elem = (Element) parentList.item(3);

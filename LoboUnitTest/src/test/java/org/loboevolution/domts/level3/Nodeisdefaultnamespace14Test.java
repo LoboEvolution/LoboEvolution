@@ -33,7 +33,6 @@ import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.CDATASection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
-import org.loboevolution.html.node.Node;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -52,7 +51,6 @@ public class Nodeisdefaultnamespace14Test extends LoboUnitTest {
         final Element elem;
         final CDATASection cdata;
         final boolean isDefault;
-        Node appendedChild;
         final HTMLCollection bodyList;
         final Element bodyElem;
         doc = sampleXmlFile("hc_staff.xml");

@@ -55,7 +55,6 @@ public class Datatypenormalization17Test extends LoboUnitTest {
         final HTMLCollection elemList;
         Element element;
         final DOMConfiguration domConfig;
-        String str;
         final boolean canSetValidate;
         final boolean canSetXMLSchema;
         final String xsdNS = "http://www.w3.org/2001/XMLSchema";

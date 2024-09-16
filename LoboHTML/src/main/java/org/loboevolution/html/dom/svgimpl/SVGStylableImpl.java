@@ -63,12 +63,6 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 		this.setStyle(getAttribute("style"));
 	}
 
-	/** {@inheritDoc} */
-	@Override
-	public CSSStyleDeclaration getStyle() {
-		return super.getStyle();
-	}
-
 	/**
 	 * <p>getFillPaint.</p>
 	 *
@@ -430,7 +424,7 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 		final SVGFontFaceElementImpl fontFace = getFontFace();
 		if (fontFace != null) {
 			final String fontDescentString = fontFace.getAttribute("descent");
-			if (fontDescentString.length() > 0) {
+			if (!fontDescentString.isEmpty()) {
 				return Float.parseFloat(fontDescentString);
 			}
 		}
@@ -439,7 +433,7 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 
 	public float getHorizAdvX() {
 		final String horizAdvX = getAttribute("horiz-adv-x");
-		if (horizAdvX.length() > 0) {
+		if (!horizAdvX.isEmpty()) {
 			return Float.parseFloat(horizAdvX);
 		}
 		return 0;

@@ -68,7 +68,7 @@ public class HcattrspecifiedvaluechangedTest extends LoboUnitTest {
         addressList = doc.getElementsByTagName("acronym");
         testNode = (Element) addressList.item(2);
 
-        testNode.setAttribute("class", "Y\u03b1"); // Android-changed: GREEK LOWER CASE ALPHA
+        testNode.setAttribute("class", "Yα"); // Android-changed: GREEK LOWER CASE ALPHA
         attributes = testNode.getAttributes();
         streetAttr = (Attr) attributes.getNamedItem("class");
         state = streetAttr.isSpecified();

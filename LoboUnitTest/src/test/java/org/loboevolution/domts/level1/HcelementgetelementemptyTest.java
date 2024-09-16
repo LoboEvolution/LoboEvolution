@@ -64,7 +64,6 @@ public class HcelementgetelementemptyTest extends LoboUnitTest {
         final Attr newAttribute;
         final HTMLCollection elementList;
         final Element testEmployee;
-        final Attr domesticAttr;
         final String attrValue;
         doc = sampleXmlFile("hc_staff.xml");
         newAttribute = doc.createAttribute("lang");

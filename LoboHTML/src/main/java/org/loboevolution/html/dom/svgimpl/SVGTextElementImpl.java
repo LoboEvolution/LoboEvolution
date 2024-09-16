@@ -213,7 +213,7 @@ public class SVGTextElementImpl extends SVGGraphic implements SVGTextElement {
 		Font font = getFont();
 		String text = getText();
 
-		if (text.length() > 0 && font != null) {
+		if (!text.isEmpty() && font != null) {
 			TextLayout tl = new TextLayout(text, font, new FontRenderContext(null, true, true));
 			Shape textShape = tl.getOutline(null);
 			path.append(textShape, false);
@@ -274,7 +274,7 @@ public class SVGTextElementImpl extends SVGGraphic implements SVGTextElement {
 				}
 			});
 		}
-		if (text.length() > 0) {
+		if (!text.isEmpty()) {
 			return text.substring(0, text.length() - 1);
 		} else {
 			return text.toString();

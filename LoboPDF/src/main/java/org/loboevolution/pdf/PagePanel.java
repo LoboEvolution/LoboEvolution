@@ -120,6 +120,7 @@ public class PagePanel extends JPanel implements ImageObserver, MouseListener {
      *
      * @return a {@link java.awt.Dimension} object.
      */
+    @Override
     public Dimension getPreferredSize() {
         return size == null ? super.getPreferredSize() : this.size;
     }
@@ -141,6 +142,7 @@ public class PagePanel extends JPanel implements ImageObserver, MouseListener {
      * <p>
      * Draw the image.
      */
+    @Override
     public void paint(final Graphics g) {
         final Dimension sz = getSize();
         g.setColor(getBackground());

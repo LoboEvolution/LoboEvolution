@@ -151,7 +151,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
             StringBuilder builder = new StringBuilder();
             Arrays.stream(backgroundPosition.split(" ")).forEach(position -> {
 
-                if (builder.length() > 0) {
+                if (!builder.isEmpty()) {
                     builder.append(" ");
                 }
 

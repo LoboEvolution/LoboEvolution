@@ -51,7 +51,6 @@ public class Nodereplacechild18Test extends LoboUnitTest {
         final EntityReference replacedEref;
         final String cdataName;
         final String erefName;
-        Node appendedChild;
         doc = sampleXmlFile("hc_staff.xml");
         docFrag = doc.createDocumentFragment();
         cdata = doc.createCDATASection("CDATASection");

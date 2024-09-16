@@ -132,7 +132,7 @@ public final class AdobeGlyphList {
                 try {
                     glyphToUnicodes.wait(250);
                 } catch (final InterruptedException ex) {
-                    // ignore
+                    Thread.currentThread().interrupt();
                 }
             }
         }
@@ -167,7 +167,7 @@ public final class AdobeGlyphList {
                 try {
                     glyphToUnicodes.wait(250);
                 } catch (final InterruptedException ex) {
-                    // ignore
+                    Thread.currentThread().interrupt();
                 }
             }
         }

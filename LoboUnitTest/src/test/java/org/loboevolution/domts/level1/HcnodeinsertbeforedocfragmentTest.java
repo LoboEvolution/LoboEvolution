@@ -70,8 +70,6 @@ public class HcnodeinsertbeforedocfragmentTest extends LoboUnitTest {
         final Node newChild2;
         Node child;
         String childName;
-        Node appendedChild;
-        final Node insertedNode;
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("p");
         employeeNode = elementList.item(1);

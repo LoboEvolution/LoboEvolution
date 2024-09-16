@@ -56,7 +56,6 @@ public class Hcattrinsertbefore6Test extends LoboUnitTest {
         final NamedNodeMap attributes;
         final Attr titleAttr;
         final Node textNode;
-        final Node refChild = null;
 
         final Document otherDoc;
         doc = sampleXmlFile("hc_staff.xml");
@@ -68,7 +67,7 @@ public class Hcattrinsertbefore6Test extends LoboUnitTest {
         textNode = otherDoc.createTextNode("terday");
         boolean success = false;
         try {
-            titleAttr.insertBefore(textNode, refChild);
+            titleAttr.insertBefore(textNode, null);
         } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.WRONG_DOCUMENT_ERR);
         }

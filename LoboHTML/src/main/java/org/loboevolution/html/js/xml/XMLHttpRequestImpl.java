@@ -50,7 +50,7 @@ public class XMLHttpRequestImpl extends HttpRequest implements XMLHttpRequest {
 
     private int timeout = 0;
     private boolean listenerAdded = false;
-    private Scriptable scriptable;
+    private final Scriptable scriptable;
 
     /**
      * <p>Constructor for XMLHttpRequestImpl.</p>

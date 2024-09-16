@@ -35,7 +35,6 @@ import org.loboevolution.html.dom.nodeimpl.DOMImplementationImpl;
 import org.loboevolution.html.node.DOMConfiguration;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.http.UserAgentContext;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -54,12 +53,10 @@ public class Domconfigschemalocation1Test extends LoboUnitTest {
         final DOMImplementation domImpl;
         final Document doc;
         final DOMConfiguration domConfig;
-        final DocumentType nullDocType = null;
 
         boolean canSet;
         String state;
         final String parameter = "sChEma-location";
-        final String nullSchemaLocation = null;
 
         final String sampleSchemaLocation = "http://www.example.com/schemas/sampleschema.xsd";
         domImpl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(), true));
@@ -82,14 +79,14 @@ public class Domconfigschemalocation1Test extends LoboUnitTest {
         canSet = domConfig.canSetParameter(parameter, sampleSchemaLocation);
         assertTrue(canSet, "Domconfigschemalocation1Assert3");
         /*DOMString */
-        canSet = domConfig.canSetParameter(parameter, nullSchemaLocation);
+        canSet = domConfig.canSetParameter(parameter, null);
         assertTrue(canSet, "Domconfigschemalocation1Assert4");
         /*DOMString */
         domConfig.setParameter(parameter, sampleSchemaLocation);
         state = (String) domConfig.getParameter(parameter);
         assertEquals(sampleSchemaLocation, state, "Domconfigschemalocation1Assert5");
         /*DOMString */
-        domConfig.setParameter(parameter, nullSchemaLocation);
+        domConfig.setParameter(parameter, null);
         state = (String) domConfig.getParameter(parameter);
         assertNull(state, "Domconfigschemalocation1Assert6");
     }

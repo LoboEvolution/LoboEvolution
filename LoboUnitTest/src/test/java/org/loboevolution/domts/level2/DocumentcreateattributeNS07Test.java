@@ -30,7 +30,6 @@ package org.loboevolution.domts.level2;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -54,7 +53,6 @@ public class DocumentcreateattributeNS07Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
-        final Attr attribute;
         final String namespaceURI = "http://www.W3.org/2000/xmlns";
         final String qualifiedName = "xmlns";
         doc = sampleXmlFile("staffNS.xml");

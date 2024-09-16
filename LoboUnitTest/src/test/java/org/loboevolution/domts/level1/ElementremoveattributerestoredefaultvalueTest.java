@@ -61,7 +61,6 @@ public class ElementremoveattributerestoredefaultvalueTest extends LoboUnitTest 
         final Element testEmployee;
         final Attr streetAttr;
         final String attribute;
-        final Attr removedAttr;
         doc = sampleXmlFile("staff.xml");
         elementList = doc.getElementsByTagName("address");
         testEmployee = (Element) elementList.item(2);

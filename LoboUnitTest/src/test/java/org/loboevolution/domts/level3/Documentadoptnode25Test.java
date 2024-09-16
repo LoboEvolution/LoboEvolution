@@ -54,7 +54,6 @@ public class Documentadoptnode25Test extends LoboUnitTest {
         final Element docElem;
         final String rootNS;
         final String rootName;
-        final DocumentType nullDocType = null;
 
         doc = sampleXmlFile("hc_staff.xml");
         docElem = doc.getDocumentElement();

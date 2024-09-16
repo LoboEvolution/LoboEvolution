@@ -62,9 +62,7 @@ public class NodereplacechildnewchildexistsTest extends LoboUnitTest {
         final Node employeeNode;
         final NodeList childList;
         Node oldChild;
-
         Node newChild;
-
         String childName;
         Node childNode;
         final int length;
@@ -78,19 +76,7 @@ public class NodereplacechildnewchildexistsTest extends LoboUnitTest {
         expectedWithoutWhitespace.add("GENDER");
         expectedWithoutWhitespace.add("EMPLOYEEID");
 
-        final List<String> expectedWithWhitespace = new ArrayList<>();
-        expectedWithWhitespace.add("#text");
-        expectedWithWhitespace.add("#text");
-        expectedWithWhitespace.add("name");
-        expectedWithWhitespace.add("#text");
-        expectedWithWhitespace.add("position");
-        expectedWithWhitespace.add("#text");
-        expectedWithWhitespace.add("salary");
-        expectedWithWhitespace.add("#text");
-        expectedWithWhitespace.add("gender");
-        expectedWithWhitespace.add("#text");
-        expectedWithWhitespace.add("employeeId");
-        expectedWithWhitespace.add("#text");
+        final List<String> expectedWithWhitespace = getStrings();
 
         final Node replacedChild;
         doc = sampleXmlFile("staff.xml");
@@ -117,5 +103,22 @@ public class NodereplacechildnewchildexistsTest extends LoboUnitTest {
             actual.add(childName);
         }
         assertEquals(expected, actual, "NodereplacechildnewchildexistsAssert2");
+    }
+
+    private static List<String> getStrings() {
+        final List<String> expectedWithWhitespace = new ArrayList<>();
+        expectedWithWhitespace.add("#text");
+        expectedWithWhitespace.add("#text");
+        expectedWithWhitespace.add("name");
+        expectedWithWhitespace.add("#text");
+        expectedWithWhitespace.add("position");
+        expectedWithWhitespace.add("#text");
+        expectedWithWhitespace.add("salary");
+        expectedWithWhitespace.add("#text");
+        expectedWithWhitespace.add("gender");
+        expectedWithWhitespace.add("#text");
+        expectedWithWhitespace.add("employeeId");
+        expectedWithWhitespace.add("#text");
+        return expectedWithWhitespace;
     }
 }

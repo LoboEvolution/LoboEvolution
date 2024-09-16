@@ -58,7 +58,6 @@ public class Domimplementationcreatedocument05Test extends LoboUnitTest {
         final DOMImplementation domImpl;
         final String namespaceURI = "http://www.w3.org/xml/1998/namespace";
         final String qualifiedName = "xml:root";
-        final DocumentType docType = null;
 
         doc = sampleXmlFile("staffNS.xml");
 
@@ -66,7 +65,7 @@ public class Domimplementationcreatedocument05Test extends LoboUnitTest {
 
         boolean success = false;
         try {
-            domImpl.createDocument(namespaceURI, qualifiedName, docType);
+            domImpl.createDocument(namespaceURI, qualifiedName, null);
         } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NAMESPACE_ERR);
         }

@@ -49,14 +49,12 @@ public class Nodegettextcontent16Test extends LoboUnitTest {
         final Document doc;
         final DocumentFragment docFrag;
         final Element elem;
-        Element elemChild;
         final Text txt;
         final Comment comment;
         final EntityReference entRef;
         final CDATASection cdata;
         final ProcessingInstruction pi;
         final String textContent;
-        Node appendedChild;
         doc = sampleXmlFile("hc_staff.xml");
         docFrag = doc.createDocumentFragment();
         elem = doc.createElementNS("http://www.w3.org/DOM/Test", "dom3:elem");

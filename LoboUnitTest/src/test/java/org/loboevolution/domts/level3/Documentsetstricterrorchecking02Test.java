@@ -30,7 +30,6 @@ package org.loboevolution.domts.level3;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -47,8 +46,6 @@ public class Documentsetstricterrorchecking02Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
-        final Attr newAttr;
-        final String nullValue = null;
 
         doc = sampleXmlFile("hc_staff.xml");
         doc.setStrictErrorChecking(true);
@@ -56,7 +53,7 @@ public class Documentsetstricterrorchecking02Test extends LoboUnitTest {
         {
             boolean success = false;
             try {
-                doc.createAttributeNS(nullValue, "dom:test");
+                doc.createAttributeNS(null, "dom:test");
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.NAMESPACE_ERR);
             }

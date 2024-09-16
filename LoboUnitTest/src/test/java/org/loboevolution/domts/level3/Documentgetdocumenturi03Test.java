@@ -50,7 +50,6 @@ public class Documentgetdocumenturi03Test extends LoboUnitTest {
         final Node docElemImported;
         final String docURI;
         final DOMImplementation domImpl;
-        final DocumentType nullDocType = null;
 
         final String rootNS;
         final String rootName;

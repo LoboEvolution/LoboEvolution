@@ -32,7 +32,6 @@ import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.html.node.Element;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;

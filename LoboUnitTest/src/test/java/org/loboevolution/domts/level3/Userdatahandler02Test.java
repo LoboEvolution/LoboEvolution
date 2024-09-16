@@ -54,12 +54,9 @@ public class Userdatahandler02Test extends LoboUnitTest {
         final HTMLCollection pList;
         final UserDataHandlerImpl userDataHandlerImpl = new UserDataHandlerImpl();
 
-        Object oldUserData;
-        final String elementNS;
         final Node newNode;
         final List<UserDataNotification> notifications;
 
-        UserDataNotification notification;
         short operation;
         String key;
         String data;

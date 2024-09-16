@@ -33,7 +33,6 @@ import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Comment;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
-import org.loboevolution.html.node.Node;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -54,7 +53,6 @@ public class Nodelookupprefix15Test extends LoboUnitTest {
         final Comment comment;
         final Comment clonedComment;
         final String prefix;
-        Node appendedChild;
         final HTMLCollection bodyList;
         doc = sampleXmlFile("hc_staff.xml");
         bodyList = doc.getElementsByTagName("body");

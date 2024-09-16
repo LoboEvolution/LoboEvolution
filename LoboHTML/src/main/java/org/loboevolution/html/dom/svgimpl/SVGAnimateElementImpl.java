@@ -101,7 +101,7 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 			return null;
 		}
 
-		if (getAttribute("values").length() > 0) {
+		if (!getAttribute("values").isEmpty()) {
 
 			final String values = getAttribute("values");
 			String calcMode = getAttribute("calcMode");
@@ -158,8 +158,8 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 				}
 			}
 
-		} else if (getAttribute("from").length() > 0 || getAttribute("to").length() > 0
-				|| getAttribute("by").length() > 0) {
+		} else if (!getAttribute("from").isEmpty() || !getAttribute("to").isEmpty()
+				|| !getAttribute("by").isEmpty()) {
 
 			String from = getAttribute("from");
 			if (Strings.isCssBlank(from)) {
@@ -168,7 +168,7 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 			final String to = getAttribute("to");
 			final String by = getAttribute("by");
 
-			if (from.length() > 0 && to.length() > 0) { // is a from-to or to
+			if (!from.isEmpty() && !to.isEmpty()) { // is a from-to or to
 				// anim
 				final SVGLengthImpl fromLength = new SVGLengthImpl(from);
 				final SVGLengthImpl toLength = new SVGLengthImpl(to);
@@ -177,7 +177,7 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 				final float value = fromValue + percentageComplete * (toValue - fromValue);
 				return new SVGLengthImpl(value);
 
-			} else if (from.length() > 0 && by.length() > 0) { // is a from-by
+			} else if (!from.isEmpty() && !by.isEmpty()) { // is a from-by
 				// or to anim
 				final SVGLengthImpl fromLength = new SVGLengthImpl(from);
 				final SVGLengthImpl byLength = new SVGLengthImpl(by);
@@ -209,7 +209,7 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 			return null; // indicates to use the baseVal
 		}
 
-		if (getAttribute("values").length() > 0) {
+		if (!getAttribute("values").isEmpty()) {
 
 			final String values = getAttribute("values");
 			String calcMode = getAttribute("calcMode");
@@ -273,8 +273,8 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 				}
 			}
 
-		} else if (getAttribute("from").length() > 0 || getAttribute("to").length() > 0
-				|| getAttribute("by").length() > 0) {
+		} else if (!getAttribute("from").isEmpty() || !getAttribute("to").isEmpty()
+				|| !getAttribute("by").isEmpty()) {
 
 			String from = getAttribute("from");
 			if (Strings.isCssBlank(from)) {
@@ -283,7 +283,7 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 			final String to = getAttribute("to");
 			final String by = getAttribute("by");
 
-			if (from.length() > 0 && to.length() > 0) { // is a from-to anim
+			if (!from.isEmpty() && !to.isEmpty()) { // is a from-to anim
 				final SVGLengthList fromLengthList = makeLengthList(from);
 				final SVGLengthList toLengthList = makeLengthList(to);
 				if (fromLengthList.getNumberOfItems() == toLengthList.getNumberOfItems()) {
@@ -301,7 +301,7 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 					return null;
 				}
 
-			} else if (from.length() > 0 && by.length() > 0) { // is a from-by
+			} else if (!from.isEmpty() && !by.isEmpty()) { // is a from-by
 				// anim
 				final SVGLengthList fromLengthList = makeLengthList(from);
 				final SVGLengthList byLengthList = makeLengthList(by);
@@ -352,7 +352,7 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 			return null; // indicates to use the baseVal
 		}
 
-		if (getAttribute("values").length() > 0) {
+		if (!getAttribute("values").isEmpty()) {
 
 			final String values = getAttribute("values");
 			String calcMode = getAttribute("calcMode");
@@ -410,7 +410,7 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 			return null; // indicates to use the baseVal
 		}
 
-		if (getAttribute("from").length() > 0 && getAttribute("to").length() > 0) {
+		if (!getAttribute("from").isEmpty() && !getAttribute("to").isEmpty()) {
 			String from = getAttribute("from");
 			if (Strings.isCssBlank(from)) {
 				from = getTargetElement().getAttribute(getAttribute("attributeName"));
@@ -422,7 +422,7 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 				return to;
 			}
 
-		} else if (getAttribute("values").length() > 0) {
+		} else if (!getAttribute("values").isEmpty()) {
 
 			final String values = getAttribute("values");
 			String calcMode = getAttribute("calcMode");
@@ -485,7 +485,7 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 			return null; // indicates to use the baseVal
 		}
 
-		if (getAttribute("values").length() > 0) {
+		if (!getAttribute("values").isEmpty()) {
 
 			final String values = getAttribute("values");
 			String calcMode = getAttribute("calcMode");
@@ -541,8 +541,8 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 				}
 			}
 
-		} else if (getAttribute("from").length() > 0 || getAttribute("to").length() > 0
-				|| getAttribute("by").length() > 0) {
+		} else if (!getAttribute("from").isEmpty() || !getAttribute("to").isEmpty()
+				|| !getAttribute("by").isEmpty()) {
 			// it is either a from-to, from-by, by or to animation
 
 			String from = getAttribute("from");
@@ -587,7 +587,7 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 			return null; // indicates to use the baseVal
 		}
 
-		if (getAttribute("values").length() > 0) {
+		if (!getAttribute("values").isEmpty()) {
 
 			final String values = getAttribute("values");
 			String calcMode = getAttribute("calcMode");
@@ -652,8 +652,8 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 				}
 			}
 
-		} else if (getAttribute("from").length() > 0 || getAttribute("to").length() > 0
-				|| getAttribute("by").length() > 0) {
+		} else if (!getAttribute("from").isEmpty() || !getAttribute("to").isEmpty()
+				|| !getAttribute("by").isEmpty()) {
 
 			String from = getAttribute("from");
 			if (Strings.isCssBlank(from)) {
@@ -662,7 +662,7 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 			final String to = getAttribute("to");
 			final String by = getAttribute("by");
 
-			if (from.length() > 0 && to.length() > 0) { // is a from-to anim
+			if (!from.isEmpty() && !to.isEmpty()) { // is a from-to anim
 				final SVGNumberList fromNumberList = new SVGNumberListImpl(from);
 				final SVGNumberList toNumberList = new SVGNumberListImpl(to);
 				if (fromNumberList.getNumberOfItems() == toNumberList.getNumberOfItems()) {
@@ -680,7 +680,7 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 					return null;
 				}
 
-			} else if (from.length() > 0 && by.length() > 0) { // is a from-by
+			} else if (!from.isEmpty() && !by.isEmpty()) { // is a from-by
 				// anim
 				final SVGNumberList fromNumberList = new SVGNumberListImpl(from);
 				final SVGNumberList byNumberList = new SVGNumberListImpl(by);
@@ -722,7 +722,7 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 			return null; // indicates to use the baseVal
 		}
 
-		if (getAttribute("values").length() > 0) {
+		if (!getAttribute("values").isEmpty()) {
 
 			final String values = getAttribute("values");
 			String calcMode = getAttribute("calcMode");
@@ -783,8 +783,8 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 				}
 			}
 
-		} else if (getAttribute("from").length() > 0 || getAttribute("to").length() > 0
-				|| getAttribute("by").length() > 0) {
+		} else if (!getAttribute("from").isEmpty() || !getAttribute("to").isEmpty()
+				|| !getAttribute("by").isEmpty()) {
 			// it is either a from-to or a from-by animation
 
 			String from = getAttribute("from");
@@ -794,14 +794,14 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 			final String to = getAttribute("to");
 			final String by = getAttribute("by");
 
-			if (from.length() > 0 && to.length() > 0) { // is a from-to anim
+			if (!from.isEmpty() && !to.isEmpty()) { // is a from-to anim
 				final SVGAngleImpl fromAngle = new SVGAngleImpl(from);
 				final SVGAngleImpl toAngle = new SVGAngleImpl(to);
 				final float fromValue = fromAngle.getValue();
 				final float toValue = toAngle.getValue();
 				return new SVGAngleImpl(fromValue + percentageComplete * (toValue - fromValue));
 
-			} else if (from.length() > 0 && by.length() > 0) { // is a from-by
+			} else if (!from.isEmpty() && !by.isEmpty()) { // is a from-by
 				final SVGAngleImpl fromAngle = new SVGAngleImpl(from);
 				final SVGAngleImpl byAngle = new SVGAngleImpl(by);
 				final float fromValue = fromAngle.getValue();

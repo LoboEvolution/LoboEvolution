@@ -32,7 +32,6 @@ import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
-import org.loboevolution.html.node.Node;
 
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -51,7 +50,6 @@ public class Noderemovechild04Test extends LoboUnitTest {
         final Document doc;
         final DocumentType docType;
         final DocumentType removedDocType;
-        Node removed;
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
         doc.removeChild(docType);

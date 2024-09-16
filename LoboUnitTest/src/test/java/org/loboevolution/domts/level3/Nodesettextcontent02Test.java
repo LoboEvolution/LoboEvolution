@@ -53,9 +53,6 @@ public class Nodesettextcontent02Test extends LoboUnitTest {
         final Element elemChild;
         final Element newElem;
         final HTMLCollection elemList;
-        final DocumentType nullDocType = null;
-
-        final Node appendedChild;
         final Element documentElem;
         doc = sampleXmlFile("hc_staff.xml");
         domImpl = doc.getImplementation();

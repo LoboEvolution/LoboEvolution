@@ -26,7 +26,6 @@
 
 package org.loboevolution.domts.level3;
 
-
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.*;
@@ -53,7 +52,6 @@ public class Nodegettextcontent15Test extends LoboUnitTest {
         final CDATASection cdata;
         final ProcessingInstruction pi;
         final String textContent;
-        Node appendedChild;
         doc = sampleXmlFile("hc_staff.xml");
         elem = doc.createElementNS("http://www.w3.org/DOM/Test", "dom3:elem");
         txt = doc.createTextNode("Text ");

@@ -54,7 +54,6 @@ public class Documentimportnode06Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
-        final Document docImported;
         doc = sampleXmlFile("staffNS.xml");
 
         {

@@ -56,7 +56,6 @@ import org.loboevolution.js.AbstractScriptableDelegate;
 import org.mozilla.javascript.Function;
 import org.w3c.dom.events.EventException;
 
-import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 import java.util.*;
@@ -365,7 +364,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	 * @param filter a {@link NodeFilter} object.
 	 * @param al a {@link java.util.ArrayList} object.
 	 */
-	private void extractDescendentsArrayImpl(final NodeFilter filter, final ArrayList<Node> al, final boolean nestIntoMatchingNodes) {
+	private void extractDescendentsArrayImpl(final NodeFilter filter, final List<Node> al, final boolean nestIntoMatchingNodes) {
 		nodeList.forEach(child -> {
 			final NodeImpl n = (NodeImpl) child;
 			if (filter.acceptNode(n) == NodeFilter.FILTER_ACCEPT) {
@@ -779,7 +778,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 			}
 		});
 
-		return sb.length() == 0 ? null : sb.toString();
+		return sb.isEmpty() ? null : sb.toString();
 	}
 
 	/**

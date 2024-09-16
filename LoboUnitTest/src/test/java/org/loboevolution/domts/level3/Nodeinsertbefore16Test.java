@@ -54,7 +54,6 @@ public class Nodeinsertbefore16Test extends LoboUnitTest {
         final Element insertedElem;
         HTMLCollection childList;
         final String nodeName;
-        final Node inserted;
         doc = sampleXmlFile("hc_staff.xml");
         childList = doc.getElementsByTagName("p");
         element = (Element) childList.item(0);

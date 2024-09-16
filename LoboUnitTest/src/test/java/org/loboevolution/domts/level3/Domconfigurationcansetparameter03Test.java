@@ -51,8 +51,6 @@ public class Domconfigurationcansetparameter03Test extends LoboUnitTest {
         final DOMConfiguration domConfig;
         final DocumentType docType;
         final NamedNodeMap entitiesMap;
-        final String nullNS = null;
-
         final Node entity;
         final String entityName;
         final boolean canSet;
@@ -63,7 +61,7 @@ public class Domconfigurationcansetparameter03Test extends LoboUnitTest {
         doc.normalizeDocument();
         docType = doc.getDoctype();
         entitiesMap = docType.getEntities();
-        entity = entitiesMap.getNamedItemNS(nullNS, "epsilon");
+        entity = entitiesMap.getNamedItemNS(null, "epsilon");
         entityName = entity.getNodeName();
         assertEquals("epsilon", entityName, "Domconfigurationcansetparameter03Assert4");
     }

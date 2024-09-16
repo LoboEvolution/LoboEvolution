@@ -53,7 +53,6 @@ public class Nodecomparedocumentposition29Test extends LoboUnitTest {
         final ProcessingInstruction entRefChild2;
         final int entRefChild1Position;
         final int entRefChild2Position;
-        Node appendedChild;
         doc = sampleXmlFile("hc_staff.xml");
         entRef1 = doc.createEntityReference("ent4");
         entRef2 = doc.createEntityReference("ent4");

@@ -30,7 +30,6 @@ package org.loboevolution.domts.level3;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
-import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.TypeInfo;
@@ -51,7 +50,6 @@ public class Typeinfoisderivedfrom58Test extends LoboUnitTest {
         final Document doc;
         final HTMLCollection elemList;
         final Element codeElem;
-        Attr attr;
         final TypeInfo typeInfo;
         final boolean isDerived;
         doc = sampleXmlFile("typeinfo.xml");

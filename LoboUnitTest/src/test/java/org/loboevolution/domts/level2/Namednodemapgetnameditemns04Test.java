@@ -61,7 +61,6 @@ public class Namednodemapgetnameditemns04Test extends LoboUnitTest {
         final Element element;
         final Attr attribute;
         final Attr newAttr1;
-        final Attr newAttribute;
         final HTMLCollection elementList;
         final String attrName;
         doc = sampleXmlFile("staffNS.xml");

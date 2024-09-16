@@ -63,7 +63,6 @@ public class NodeappendchildnodeancestorTest extends LoboUnitTest {
         final Node newChild;
         final HTMLCollection elementList;
         final Node employeeNode;
-        final Node appendedChild;
         doc = sampleXmlFile("staff.xml");
         newChild = doc.getDocumentElement();
         elementList = doc.getElementsByTagName("employee");

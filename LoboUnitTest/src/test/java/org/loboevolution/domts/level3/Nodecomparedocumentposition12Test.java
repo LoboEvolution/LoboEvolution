@@ -30,7 +30,6 @@ package org.loboevolution.domts.level3;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.ProcessingInstruction;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -49,7 +48,6 @@ public class Nodecomparedocumentposition12Test extends LoboUnitTest {
         final ProcessingInstruction pi;
         final int documentPosition;
         final int piPosition;
-        final Node appendedChild;
         doc = sampleXmlFile("hc_staff.xml");
         pi = doc.createProcessingInstruction("PITarget", "PIDATA");
         doc.appendChild(pi);

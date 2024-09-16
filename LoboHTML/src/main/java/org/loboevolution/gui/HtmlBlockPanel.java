@@ -85,7 +85,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	 * width The preferred blocked width. Use -1 to unset.
 	 */
 	@Setter
-	protected int preferredWidth = -1;
+	private int preferredWidth = -1;
 	private boolean processingDocumentNotification = false;
 	protected RBlock rblock;
 

@@ -49,11 +49,9 @@ public class Documentrenamenode18Test extends LoboUnitTest {
         final Document newDoc;
         final DOMImplementation domImpl;
         final Element element;
-        final Node renamedNode;
         final Element docElem;
         final String rootNS;
         final String rootTagname;
-        final DocumentType nullDocType = null;
 
         doc = sampleXmlFile("barfoo.xml");
         docElem = doc.getDocumentElement();

@@ -62,7 +62,6 @@ public class TextsplittextoneTest extends LoboUnitTest {
         final HTMLCollection elementList;
         final Node nameNode;
         final Text textNode;
-        final Text splitNode;
         final Node secondPart;
         final String value;
         doc = sampleXmlFile("staff.xml");

@@ -55,7 +55,6 @@ public class Datatypenormalization18Test extends LoboUnitTest {
         final HTMLCollection elemList;
         Element element;
         final DOMConfiguration domConfig;
-        String str;
         final boolean canSetValidate;
         final boolean canSetXMLSchema;
         final boolean canSetDataNorm;

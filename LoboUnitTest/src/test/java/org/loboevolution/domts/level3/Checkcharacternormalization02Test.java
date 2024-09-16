@@ -55,15 +55,12 @@ public class Checkcharacternormalization02Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
-        Element docElem;
         final DOMConfiguration domConfig;
         final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
 
         final HTMLCollection pList;
         final Element pElem;
         final Text text;
-        String textValue;
-        final Node retval;
         final boolean canSet;
         final List<DOMError> errors;
 
@@ -87,8 +84,8 @@ public class Checkcharacternormalization02Test extends LoboUnitTest {
             pElem.appendChild(text);
             doc.normalizeDocument();
             errors = errorMonitor.getErrors();
-            for (int indexN100AA = 0; indexN100AA < errors.size(); indexN100AA++) {
-                error = errors.get(indexN100AA);
+            for (DOMError domError : errors) {
+                error = domError;
                 severity = error.getSeverity();
 
                 if (severity == 2) {

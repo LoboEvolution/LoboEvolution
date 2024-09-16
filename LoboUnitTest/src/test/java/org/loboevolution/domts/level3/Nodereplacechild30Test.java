@@ -54,7 +54,6 @@ public class Nodereplacechild30Test extends LoboUnitTest {
         final EntityReference newERef;
         Node replaced;
         String nodeName;
-        Node appendedChild;
         doc = sampleXmlFile("hc_staff.xml");
         parent = doc.createElementNS("http://www.w3.org/1999/xhtml", "xhtml:html");
         oldChild = doc.createElementNS("http://www.w3.org/1999/xhtml", "xhtml:head");

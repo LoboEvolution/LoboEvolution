@@ -48,9 +48,7 @@ public class Nodereplacechild15Test extends LoboUnitTest {
         final Element elem;
         final Element elem2;
         final Element replaced;
-        final DOMImplementation domImpl;
         final String title;
-        final Node appendedChild;
         final Element docElem;
         final String rootName;
         final String rootNS;

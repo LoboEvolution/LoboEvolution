@@ -62,8 +62,7 @@ public class Canonicalform05Test extends LoboUnitTest {
         final HTMLCollection pList;
         final Element newChild;
         final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
-        final List errors;
-        DOMError error;
+        final List<DOMError> errors;
         int errorCount = 0;
         int severity;
         Node problemNode;
@@ -90,10 +89,8 @@ public class Canonicalform05Test extends LoboUnitTest {
             domConfig.setParameter("error-handler", errorMonitor);
             doc.normalizeDocument();
             errors = errorMonitor.getErrors();
-            for (final Object o : errors) {
-                error = (DOMError) o;
+            for (final DOMError error : errors) {
                 severity = error.getSeverity();
-
                 if (severity == 2) {
                     location = error.getLocation();
                     problemNode = location.getRelatedNode();

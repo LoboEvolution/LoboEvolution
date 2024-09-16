@@ -56,11 +56,9 @@ public class DocumenttypeinternalSubset01Test extends LoboUnitTest {
         final DocumentType docType;
         final DOMImplementation domImpl;
         final String internal;
-        final String nullNS = null;
-
         doc = sampleXmlFile("staffNS.xml");
         domImpl = doc.getImplementation();
-        docType = domImpl.createDocumentType("l2:root", nullNS, nullNS);
+        docType = domImpl.createDocumentType("l2:root", null, null);
         internal = docType.getInternalSubset();
         assertNull(internal);
     }

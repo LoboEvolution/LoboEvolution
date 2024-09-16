@@ -220,11 +220,6 @@ public final class FontFactory {
 			case BOLD300:
 				attributes.put(TextAttribute.WEIGHT, TextAttribute.WEIGHT_DEMILIGHT);
 				break;
-			case NORMAL:
-			case BOLD400:
-			default:
-				attributes.put(TextAttribute.WEIGHT, TextAttribute.WEIGHT_REGULAR);
-				break;
 			case BOLD500:
 				attributes.put(TextAttribute.WEIGHT, TextAttribute.WEIGHT_MEDIUM);
 				break;
@@ -241,6 +236,11 @@ public final class FontFactory {
 				break;
 			case BOLD900:
 				attributes.put(TextAttribute.WEIGHT, TextAttribute.WEIGHT_EXTRABOLD);
+				break;
+			case NORMAL:
+			case BOLD400:
+			default:
+				attributes.put(TextAttribute.WEIGHT, TextAttribute.WEIGHT_REGULAR);
 				break;
 		}
 		return attributes;

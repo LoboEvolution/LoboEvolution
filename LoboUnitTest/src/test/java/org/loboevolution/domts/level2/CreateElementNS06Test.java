@@ -31,7 +31,6 @@ import org.htmlunit.cssparser.dom.DOMException;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.Element;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -51,11 +50,7 @@ public class CreateElementNS06Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final String namespaceURI = "http://www.example.com/";
-        String qualifiedName;
         final Document doc;
-        boolean done;
-        final Element newElement;
-        String charact;
         doc = sampleXmlFile("hc_staff.xml");
 
         {

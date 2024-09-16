@@ -64,7 +64,6 @@ public class HccharacterdataindexsizeerrreplacedatacountnegativeTest extends Lob
         final HTMLCollection elementList;
         final Node nameNode;
         final CharacterData child;
-        final String badString;
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("acronym");
         nameNode = elementList.item(0);

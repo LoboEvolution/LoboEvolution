@@ -54,11 +54,10 @@ public class Nodeisequalnode14Test extends LoboUnitTest {
         final Attr attr1;
         final Attr attr2;
         final boolean isEqual;
-        final String nullNSURI = null;
 
         doc = sampleXmlFile("hc_staff.xml");
         attr1 = doc.createAttribute("root");
-        attr2 = doc.createAttributeNS(nullNSURI, "root");
+        attr2 = doc.createAttributeNS(null, "root");
         isEqual = attr1.isEqualNode(attr2);
         assertFalse(isEqual, "Nodeisequalnode14Assert2");
     }

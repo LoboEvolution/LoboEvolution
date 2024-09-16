@@ -72,7 +72,7 @@ public class Domimplementationregistry23Test extends LoboUnitTest {
             hasXML = baseImpl.hasFeature("XML", "3.0");
             hasEvents = baseImpl.hasFeature("Events", "2.0");
             hasLS = baseImpl.hasFeature("LS", null);
-            assertFalse((hasCore & hasXML & hasEvents & hasLS), "Domimplementationregistry23Assert2");
+            assertFalse((hasCore && hasXML && hasEvents && hasLS), "Domimplementationregistry23Assert2");
         } else {
             for (int indexN10096 = 0; indexN10096 < domImplList.getLength(); indexN10096++) {
                 domImpl = domImplList.item(indexN10096);

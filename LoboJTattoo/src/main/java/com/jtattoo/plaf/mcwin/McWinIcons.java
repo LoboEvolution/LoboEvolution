@@ -288,7 +288,7 @@ int x = iconX;
 
 		@Override
 		public void paintIcon(final Component c, final Graphics g, final int iconX, final int y) {
-final int x = iconX;
+			final int x = iconX;
 			final Graphics2D g2D = (Graphics2D) g;
 			final Color[] colors;
 			if (isRollover) {

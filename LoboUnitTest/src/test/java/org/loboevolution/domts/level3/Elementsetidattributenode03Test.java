@@ -53,7 +53,6 @@ public class Elementsetidattributenode03Test extends LoboUnitTest {
         final Element nameElem;
         final NamedNodeMap attributesMap;
         final Attr attr;
-        Attr newAttr;
         boolean id;
         final Element elem;
         final String elemName;

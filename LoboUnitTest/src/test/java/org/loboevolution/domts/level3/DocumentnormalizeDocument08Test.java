@@ -56,7 +56,6 @@ public class DocumentnormalizeDocument08Test extends LoboUnitTest {
         HTMLCollection elemList;
         CDATASection newChild;
         final Node oldChild;
-        Node retval;
         final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
 
         final List<DOMError> errors;
@@ -81,8 +80,8 @@ public class DocumentnormalizeDocument08Test extends LoboUnitTest {
         domConfig.setParameter("error-handler", errorMonitor);
         doc.normalizeDocument();
         errors = errorMonitor.getErrors();
-        for (int indexN100A3 = 0; indexN100A3 < errors.size(); indexN100A3++) {
-            error = errors.get(indexN100A3);
+        for (DOMError domError : errors) {
+            error = domError;
             type = error.getType();
             severity = error.getSeverity();
 

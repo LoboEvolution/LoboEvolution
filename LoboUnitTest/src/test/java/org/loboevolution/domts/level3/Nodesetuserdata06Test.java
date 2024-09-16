@@ -49,9 +49,7 @@ public class Nodesetuserdata06Test extends LoboUnitTest {
         final NamedNodeMap entities;
         final Node entity;
         final Comment comment;
-        Object userData;
         final Object returned;
-        final Object retUserData;
         final boolean success;
 
         doc = sampleXmlFile("hc_staff.xml");

@@ -56,7 +56,6 @@ public class Datatypenormalization15Test extends LoboUnitTest {
         final HTMLCollection elemList;
         Element element;
         final DOMConfiguration domConfig;
-        String str;
         final boolean canSetNormalization;
         final boolean canSetValidate;
         final boolean canSetXMLSchema;
@@ -72,7 +71,7 @@ public class Datatypenormalization15Test extends LoboUnitTest {
         /*DOMString */
         canSetXMLSchema = domConfig.canSetParameter("schema-type", xsdNS);
 
-        if (canSetNormalization & canSetValidate & canSetXMLSchema) {
+        if (canSetNormalization && canSetValidate && canSetXMLSchema) {
             domConfig.setParameter("datatype-normalization", Boolean.TRUE);
             domConfig.setParameter("validate", Boolean.TRUE);
             /*DOMString */

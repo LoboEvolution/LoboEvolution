@@ -56,7 +56,6 @@ public class Nodegetbaseuri14Test extends LoboUnitTest {
         final Notation notation;
         final Notation notationImported;
         final String baseURI;
-        final DocumentType nullDocType = null;
 
         doc = sampleXmlFile("hc_staff.xml");
         docElem = doc.getDocumentElement();

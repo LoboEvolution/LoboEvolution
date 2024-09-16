@@ -35,7 +35,6 @@ import org.loboevolution.html.dom.nodeimpl.DOMImplementationImpl;
 import org.loboevolution.html.node.DOMConfiguration;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.http.UserAgentContext;
 
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -56,10 +55,8 @@ public class Domconfigerrorhandler2Test extends LoboUnitTest {
         final DOMImplementation domImpl;
         final Document doc;
         final DOMConfiguration domConfig;
-        final DocumentType nullDocType = null;
 
         final boolean canSet;
-        final DOMErrorHandler errorHandler = null;
 
         final String parameter = "error-handler";
         final DOMErrorHandler state;
@@ -67,10 +64,10 @@ public class Domconfigerrorhandler2Test extends LoboUnitTest {
         doc = domImpl.createDocument("http://www.w3.org/1999/xhtml", "html", null);
         domConfig = doc.getDomConfig();
         /*DOMErrorHandler */
-        canSet = domConfig.canSetParameter(parameter, errorHandler);
+        canSet = domConfig.canSetParameter(parameter, null);
         assertTrue(canSet, "Domconfigerrorhandler2Assert3");
         /*DOMErrorHandler */
-        domConfig.setParameter(parameter, errorHandler);
+        domConfig.setParameter(parameter, null);
         state = (DOMErrorHandler) domConfig.getParameter(parameter);
         assertNull(state, "Domconfigerrorhandler2Assert4");
     }

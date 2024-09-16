@@ -79,7 +79,7 @@ public class TableCellRenderState extends DisplayRenderState {
 		final CSSStyleDeclaration props = getCssProperties();
 		if (props != null) {
 			final String textAlign = props.getTextAlign();
-			if (textAlign != null && textAlign.length() != 0) {
+			if (textAlign != null && !textAlign.isEmpty()) {
 				return super.getAlignXPercent();
 			}
 		}
@@ -131,7 +131,7 @@ public class TableCellRenderState extends DisplayRenderState {
 		final CSSStyleDeclaration props = getCssProperties();
 		if (props != null) {
 			final String textAlign = props.getVerticalAlign();
-			if (textAlign != null && textAlign.length() != 0) {
+			if (textAlign != null && !textAlign.isEmpty()) {
 				return super.getAlignYPercent();
 			}
 		}
@@ -303,7 +303,7 @@ public class TableCellRenderState extends DisplayRenderState {
 			String width = props == null ? null : props.getWidth();
 			if (width == null) {
 				width = element.getAttribute("width");
-				if (width != null && width.length() > 0 && !width.endsWith("%")) {
+				if (width != null && !width.isEmpty() && !width.endsWith("%")) {
 					wsValue = WS_NORMAL;
 				}
 			} else {

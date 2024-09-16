@@ -33,7 +33,6 @@ import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.html.node.NamedNodeMap;
-import org.loboevolution.html.node.Node;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -60,9 +59,6 @@ public class Namednodemapremovenameditemns05Test extends LoboUnitTest {
         final DocumentType docType;
         final NamedNodeMap entities;
         final NamedNodeMap notations;
-        Node removedNode;
-        final String nullNS = null;
-
         doc = sampleXmlFile("staffNS.xml");
         docType = doc.getDoctype();
         entities = docType.getEntities();
@@ -71,7 +67,7 @@ public class Namednodemapremovenameditemns05Test extends LoboUnitTest {
         assertNotNull(notations);
 
         try {
-            entities.removeNamedItemNS(nullNS, "ent1");
+            entities.removeNamedItemNS(null, "ent1");
             fail("entity_throw_DOMException");
 
         } catch (final DOMException ex) {
@@ -84,7 +80,7 @@ public class Namednodemapremovenameditemns05Test extends LoboUnitTest {
         }
 
         try {
-            notations.removeNamedItemNS(nullNS, "notation1");
+            notations.removeNamedItemNS(null, "notation1");
             fail("notation_throw_DOMException");
 
         } catch (final DOMException ex) {

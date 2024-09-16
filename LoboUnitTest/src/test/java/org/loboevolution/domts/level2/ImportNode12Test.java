@@ -64,8 +64,6 @@ public class ImportNode12Test extends LoboUnitTest {
         final DocumentType docType;
         final String system;
         final String entityName;
-        Node child;
-        String childName;
         doc = sampleXmlFile("staffNS.xml");
         aNewDoc = sampleXmlFile("staffNS.xml");
         doc1Type = aNewDoc.getDoctype();

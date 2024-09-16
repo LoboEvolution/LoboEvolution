@@ -54,13 +54,9 @@ public class Infoset06Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final DOMImplementation domImpl;
-        final String nullString = null;
-
-        final DocumentType nullDoctype = null;
 
         final Document doc;
         Element elem;
-        final Node retval;
         final DOMConfiguration domConfig;
         final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
 
@@ -70,7 +66,7 @@ public class Infoset06Test extends LoboUnitTest {
         DOMLocator locator;
         Node relatedNode;
         domImpl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(), true));
-        doc = domImpl.createDocument(nullString, nullString, nullDoctype);
+        doc = domImpl.createDocument(null, null, null);
 
         {
             boolean success = false;

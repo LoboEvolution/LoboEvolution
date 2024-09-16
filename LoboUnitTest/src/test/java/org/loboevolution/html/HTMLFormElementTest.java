@@ -681,7 +681,7 @@ public class HTMLFormElementTest extends LoboUnitTest {
         fieldNamedSubmit("<input type='IMAGE' name='submit'>\n", "function");
     }
 
-    private void fieldNamedSubmit(final String htmlSnippet, final String expected) {
+    private void fieldNamedSubmit(final String htmlSnippet, final String ignoredExpected) {
         final String html =
                 "<html>\n"
                         + "<head>\n"

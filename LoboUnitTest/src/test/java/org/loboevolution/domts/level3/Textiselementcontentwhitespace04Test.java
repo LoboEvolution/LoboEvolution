@@ -49,11 +49,9 @@ public class Textiselementcontentwhitespace04Test extends LoboUnitTest {
         final Element pElem;
         Text textNode;
         final Text blankNode;
-        Node returnedNode;
         final boolean isElemContentWhitespace;
         final DOMConfiguration domConfig;
         final boolean canSetValidation;
-        final Node replacedNode;
         doc = sampleXmlFile("barfoo.xml");
         domConfig = doc.getDomConfig();
         canSetValidation = domConfig.canSetParameter("validate", Boolean.TRUE);

@@ -33,8 +33,6 @@ import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
-import org.loboevolution.html.node.Node;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
@@ -61,7 +59,6 @@ public class NamednodemapchildnoderangeTest extends LoboUnitTest {
         final HTMLCollection elementList;
         final Element testEmployee;
         final NamedNodeMap attributes;
-        Node child;
         final int length;
         doc = sampleXmlFile("staff.xml");
         elementList = doc.getElementsByTagName("address");

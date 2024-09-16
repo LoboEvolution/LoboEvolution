@@ -32,7 +32,6 @@ import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
-import org.loboevolution.html.node.Node;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -49,7 +48,6 @@ public class Documentrenamenode20Test extends LoboUnitTest {
     public void runTest() {
         final Document doc;
         final Element element;
-        final Node renamedNode;
         Element docElem;
         String rootNS;
         String rootTagname;

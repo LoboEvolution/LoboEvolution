@@ -31,7 +31,6 @@ import org.htmlunit.cssparser.dom.DOMException;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.Element;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -61,7 +60,6 @@ public class CreateElementNS04Test extends LoboUnitTest {
         final String namespaceURI = "http://www.w3.org/XML/1998/namespaces";
         final String qualifiedName = "xml:element1";
         final Document doc;
-        final Element newElement;
         doc = sampleXmlFile("staffNS.xml");
 
         {

@@ -57,19 +57,18 @@ public class Documentrenamenode16Test extends LoboUnitTest {
         final String nodeName;
         final int nodeType;
         final String namespaceURI;
-        final String nullNSURI = null;
 
         doc = sampleXmlFile("hc_staff.xml");
         childList = doc.getElementsByTagName("acronym");
         element = (Element) childList.item(3);
-        renamedclass = doc.renameNode(element, nullNSURI, "renamedNode");
+        renamedclass = doc.renameNode(element, null, "renamedNode");
         nodeName = renamedclass.getNodeName();
         namespaceURI = renamedclass.getNamespaceURI();
         nodeType = renamedclass.getNodeType();
         assertEquals("renamedNode", nodeName, "Documentrenamenode16Assert3");
         assertEquals(1, nodeType, "Documentrenamenode16Assert4");
         assertNull(namespaceURI, "Documentrenamenode16Assert5");
-        assertNull(namespaceURI, "Documentrenamenode16Assert6");
+        assertNull(null, "Documentrenamenode16Assert6");
     }
 }
 

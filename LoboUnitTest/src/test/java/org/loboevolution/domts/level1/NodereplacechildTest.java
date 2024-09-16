@@ -63,7 +63,6 @@ public class NodereplacechildTest extends LoboUnitTest {
         final Node newChild;
         final Node child;
         final String childName;
-        final Node replacedNode;
         doc = sampleXmlFile("staff.xml");
         elementList = doc.getElementsByTagName("employee");
         employeeNode = elementList.item(1);

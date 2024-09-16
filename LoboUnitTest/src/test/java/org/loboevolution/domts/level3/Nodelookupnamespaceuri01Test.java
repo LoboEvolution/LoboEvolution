@@ -43,10 +43,9 @@ public class Nodelookupnamespaceuri01Test extends LoboUnitTest {
     public void runTest() {
         final Document doc;
         final String namespaceURI;
-        final String nullPrefix = null;
 
         doc = sampleXmlFile("barfoo_nodefaultns.xml");
-        namespaceURI = doc.lookupNamespaceURI(nullPrefix);
+        namespaceURI = doc.lookupNamespaceURI(null);
         assertNull(namespaceURI, "Nodelookupnamespaceuri01Assert2");
     }
 }

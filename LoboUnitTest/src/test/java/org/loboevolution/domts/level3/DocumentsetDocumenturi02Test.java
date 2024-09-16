@@ -47,10 +47,9 @@ public class DocumentsetDocumenturi02Test extends LoboUnitTest {
     public void runTest() {
         final Document doc;
         final String docURI;
-        final String nullValue = null;
 
         doc = sampleXmlFile("hc_staff.xml");
-        doc.setDocumentURI(nullValue);
+        doc.setDocumentURI(null);
         docURI = doc.getDocumentURI();
         assertNull(docURI, "DocumentsetDocumenturi02Assert2");
     }

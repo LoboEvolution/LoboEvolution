@@ -57,7 +57,6 @@ public class Namednodemapremovenameditemns03Test extends LoboUnitTest {
         final NamedNodeMap attributes;
         final Element element;
         Attr attribute;
-        Attr newAttribute;
         final Attr attribute1;
         final Attr attribute2;
         final String nodeName;

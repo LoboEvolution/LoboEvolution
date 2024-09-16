@@ -69,22 +69,9 @@ public class NodeinsertbeforenewchildexistsTest extends LoboUnitTest {
         Node child;
         final int length;
         String childName;
-        final List<String> expectedWhitespace = new ArrayList<>();
-        expectedWhitespace.add("#text");
-        expectedWhitespace.add("#text");
-        expectedWhitespace.add("name");
-        expectedWhitespace.add("#text");
-        expectedWhitespace.add("position");
-        expectedWhitespace.add("#text");
-        expectedWhitespace.add("salary");
-        expectedWhitespace.add("#text");
-        expectedWhitespace.add("gender");
-        expectedWhitespace.add("#text");
-        expectedWhitespace.add("employeeId");
-        expectedWhitespace.add("ADDRESS");
-        expectedWhitespace.add("#text");
+        final List<String> expectedWhitespace = getStrings();
 
-        final List<String> expectedNoWhitespace = new ArrayList<String>();
+        final List<String> expectedNoWhitespace = new ArrayList<>();
         expectedNoWhitespace.add("EMPLOYEEID");
         expectedNoWhitespace.add("NAME");
         expectedNoWhitespace.add("POSITION");
@@ -118,6 +105,24 @@ public class NodeinsertbeforenewchildexistsTest extends LoboUnitTest {
             result.add(childName);
         }
         assertEquals(expected, result, "NodeinsertbeforenewchildexistsAssert1");
+    }
+
+    private static List<String> getStrings() {
+        final List<String> expectedWhitespace = new ArrayList<>();
+        expectedWhitespace.add("#text");
+        expectedWhitespace.add("#text");
+        expectedWhitespace.add("name");
+        expectedWhitespace.add("#text");
+        expectedWhitespace.add("position");
+        expectedWhitespace.add("#text");
+        expectedWhitespace.add("salary");
+        expectedWhitespace.add("#text");
+        expectedWhitespace.add("gender");
+        expectedWhitespace.add("#text");
+        expectedWhitespace.add("employeeId");
+        expectedWhitespace.add("ADDRESS");
+        expectedWhitespace.add("#text");
+        return expectedWhitespace;
     }
 
 }

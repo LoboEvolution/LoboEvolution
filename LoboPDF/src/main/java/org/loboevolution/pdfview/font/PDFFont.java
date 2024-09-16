@@ -119,7 +119,7 @@ public abstract class PDFFont {
      * @throws java.io.IOException if any.
      */
     public synchronized static PDFFont getFont(final PDFObject obj,
-                                               final HashMap<String, PDFObject> resources)
+                                               final Map<String, PDFObject> resources)
             throws IOException {
         PDFFont font = (PDFFont) obj.getCache();
         if (font != null) {

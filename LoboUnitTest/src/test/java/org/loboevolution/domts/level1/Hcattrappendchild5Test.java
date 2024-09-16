@@ -55,7 +55,6 @@ public class Hcattrappendchild5Test extends LoboUnitTest {
         final NamedNodeMap attributes;
         final Attr titleAttr;
         final Node textNode;
-        final Node retval;
         final Document otherDoc;
         doc = sampleXmlFile("hc_staff.xml");
         otherDoc = sampleXmlFile("hc_staff.xml");

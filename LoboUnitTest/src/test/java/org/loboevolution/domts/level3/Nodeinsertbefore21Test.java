@@ -52,7 +52,6 @@ public class Nodeinsertbefore21Test extends LoboUnitTest {
         final Node refNode;
         final Element newNode;
         final HTMLCollection childList;
-        final Node inserted;
         doc = sampleXmlFile("hc_staff.xml");
         childList = doc.getElementsByTagName("var");
         element = (Element) childList.item(2);

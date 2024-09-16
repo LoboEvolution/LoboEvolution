@@ -49,7 +49,6 @@ public class Documentrenamenode21Test extends LoboUnitTest {
         final Document newDoc;
         final DOMImplementation domImpl;
         final Attr attr;
-        final Node renamedNode;
         final Element docElem;
         final String rootNS;
         final String rootName;

@@ -65,7 +65,7 @@ public class HcnodereplacechildnewchildexistsTest extends LoboUnitTest {
         final Node newChild;
         String childName;
         Node childNode;
-        final List<String> actual = new ArrayList<String>();
+        final List<String> actual = new ArrayList<>();
 
         final List<String> expected = new ArrayList<>();
         expected.add("STRONG");

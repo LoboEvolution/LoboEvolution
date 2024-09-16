@@ -50,7 +50,6 @@ public class Textiselementcontentwhitespace05Test extends LoboUnitTest {
         Element bodyElem;
         final Text textNode;
         final Text nonBlankNode;
-        final Node returnedNode;
         final boolean isElemContentWhitespace;
         final DOMConfiguration domConfig;
         final boolean canSetValidation;

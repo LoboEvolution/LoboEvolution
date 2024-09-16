@@ -97,7 +97,7 @@ public class DocumentnormalizeDocument06Test extends LoboUnitTest {
         newChild = (CDATASection) elem.getFirstChild();
         nodeValue = newChild.getNodeValue();
         nodeType = newChild.getNodeType();
-        assertFalse((nodeType == 4 & (nodeValue.indexOf("]]>") >= 0)), "DocumentnormalizeDocument06Assert1");
+        assertFalse((nodeType == 4 & (nodeValue.contains("]]>"))), "DocumentnormalizeDocument06Assert1");
         errors = errorMonitor.getErrors();
         for (final DOMError error : errors) {
             type = error.getType();

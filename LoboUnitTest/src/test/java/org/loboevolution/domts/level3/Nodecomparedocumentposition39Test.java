@@ -60,9 +60,9 @@ public class Nodecomparedocumentposition39Test extends LoboUnitTest {
         attr1 = elem.getAttributeNode("class");
         attr2 = elem.getAttributeNode("xsi:noNamespaceSchemaLocation");
         attrPosition = attr1.compareDocumentPosition(attr2);
-        assertEquals(32 & 32, attrPosition & 32, "Nodecomparedocumentposition39Assert3");
-        assertEquals(0 & 25, attrPosition & 25, "Nodecomparedocumentposition39Assert4");
-        assertNotEquals(0 & 6, attrPosition & 6, "Nodecomparedocumentposition39Assert5");
+        assertEquals(32, attrPosition & 32, "Nodecomparedocumentposition39Assert3");
+        assertEquals(0, attrPosition & 25, "Nodecomparedocumentposition39Assert4");
+        assertNotEquals(0, attrPosition & 6, "Nodecomparedocumentposition39Assert5");
         swappedPosition = attr2.compareDocumentPosition(attr1);
         assertNotEquals(swappedPosition & 2, attrPosition & 2, "Nodecomparedocumentposition39Assert6");
         assertNotEquals(swappedPosition & 4, attrPosition & 4, "Nodecomparedocumentposition39Assert7");

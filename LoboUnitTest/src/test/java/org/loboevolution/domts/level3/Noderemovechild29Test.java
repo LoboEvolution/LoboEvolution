@@ -55,7 +55,6 @@ public class Noderemovechild29Test extends LoboUnitTest {
         final Element elem;
         final Text removed;
         final String removedName;
-        final Node removedNode;
         doc = sampleXmlFile("hc_staff.xml");
         parentList = doc.getElementsByTagName("p");
         elem = (Element) parentList.item(0);

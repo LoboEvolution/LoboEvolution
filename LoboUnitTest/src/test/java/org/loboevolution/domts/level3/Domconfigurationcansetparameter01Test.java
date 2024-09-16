@@ -50,7 +50,6 @@ public class Domconfigurationcansetparameter01Test extends LoboUnitTest {
         final boolean canSet;
         final Comment newCommentNode;
         final Element docElem;
-        final Node appendedChild;
         final Node lastChild;
         final String commentValue;
         doc = sampleXmlFile("hc_staff.xml");

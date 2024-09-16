@@ -54,11 +54,9 @@ public class Nodesetuserdata10Test extends LoboUnitTest {
         final CDATASection cData;
         final HTMLCollection varList;
         final Element varElem;
-        Object userData;
         final Object returned1;
         final Object returned2;
         final boolean success;
-        Object retUserData;
 
         doc = sampleXmlFile("hc_staff.xml");
         docElem = doc.getDocumentElement();

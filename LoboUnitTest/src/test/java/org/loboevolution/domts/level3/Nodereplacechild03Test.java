@@ -31,8 +31,6 @@ import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.DocumentType;
-import org.loboevolution.html.node.Node;
 
 /**
  * The method replaceChild replaces the child node oldChild with newChild in the list of
@@ -49,9 +47,7 @@ public class Nodereplacechild03Test extends LoboUnitTest {
         final Document doc;
         final Document newDoc;
         final DOMImplementation domImpl;
-        final DocumentType nullDocType = null;
 
-        final Node replaced;
         doc = sampleXmlFile("hc_staff.xml");
         domImpl = doc.getImplementation();
         newDoc = domImpl.createDocument("http://www.w3.org/DOM", "dom3:doc", null);

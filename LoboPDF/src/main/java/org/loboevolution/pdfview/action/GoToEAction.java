@@ -34,6 +34,7 @@ import org.loboevolution.pdfview.PDFParseException;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * **************************************************************************
@@ -112,7 +113,7 @@ public class GoToEAction extends PDFAction {
      * 					of this method will stop).
      * @throws IOException - in case a value can not be parsed
      ************************************************************************/
-    private GoToETarget parseTargetDistionary(final PDFObject targetObj, final ArrayList<GoToETarget> list) throws IOException {
+    private GoToETarget parseTargetDistionary(final PDFObject targetObj, final List<GoToETarget> list) throws IOException {
         GoToETarget target = null;
         if (targetObj != null) {
             target = new GoToETarget();

@@ -49,10 +49,8 @@ public class Nodegetuserdata05Test extends LoboUnitTest {
         final NamedNodeMap entities;
         final Node entity;
         final Attr attr;
-        Object userData;
         final Object retUserData;
 
-        final Object prevUserData;
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
         entities = docType.getEntities();

@@ -55,8 +55,6 @@ public class Nodereplacechild14Test extends LoboUnitTest {
         final Element replaced;
         final DOMImplementation domImpl;
         final String nodeName;
-        Node appendedChild;
-        final DocumentType nullDocType = null;
 
         doc = sampleXmlFile("hc_staff.xml");
         elem = doc.createElementNS("http://www.w3.org/DOM/Test", "dom3:doc1elem");

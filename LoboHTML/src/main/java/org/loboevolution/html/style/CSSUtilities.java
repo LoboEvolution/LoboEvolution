@@ -44,7 +44,6 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
 import java.net.URI;
-import java.net.URL;
 import java.util.StringTokenizer;
 
 /**
@@ -152,7 +151,7 @@ public final class CSSUtilities {
 			// Only last line should be trimmed.
 			while ((line = reader.readLine()) != null) {
 				final String tline = line.trim();
-				if (tline.length() != 0) {
+				if (!tline.isEmpty()) {
 					if (pendingLine != null) {
 						sb.append(pendingLine);
 						sb.append("\r\n");

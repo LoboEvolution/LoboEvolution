@@ -52,7 +52,6 @@ public class Nodeisdefaultnamespace04Test extends LoboUnitTest {
         final NamedNodeMap entitiesMap;
         final NamedNodeMap notationsMap;
         boolean isDefault;
-        final String nullNSURI = null;
 
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
@@ -60,9 +59,9 @@ public class Nodeisdefaultnamespace04Test extends LoboUnitTest {
         notationsMap = docType.getNotations();
         entity = entitiesMap.getNamedItem("alpha");
         notation = (Notation) notationsMap.getNamedItem("notation1");
-        isDefault = entity.isDefaultNamespace(nullNSURI);
+        isDefault = entity.isDefaultNamespace(null);
         assertFalse(isDefault, "Nodeisdefaultnamespace04Assert2");
-        isDefault = notation.isDefaultNamespace(nullNSURI);
+        isDefault = notation.isDefaultNamespace(null);
         assertFalse(isDefault, "Nodeisdefaultnamespace04Assert3");
     }
 }

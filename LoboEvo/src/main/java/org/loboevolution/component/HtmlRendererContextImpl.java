@@ -793,7 +793,6 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 			urlForLoading = resolvedURL;
 		}
 
-		System.currentTimeMillis();
 		// Using potentially different URL for loading.
 		final Proxy proxy = getProxy();
 		final boolean isPost = "POST".equals(actualMethod);

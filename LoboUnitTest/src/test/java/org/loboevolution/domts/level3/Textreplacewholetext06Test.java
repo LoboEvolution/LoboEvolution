@@ -51,6 +51,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Text3-replaceWholeText">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Text3-replaceWholeText</a>
  */
 public class Textreplacewholetext06Test extends LoboUnitTest {
+
     @Test
     public void runTest() {
         final Document doc;
@@ -58,8 +59,6 @@ public class Textreplacewholetext06Test extends LoboUnitTest {
         final Element elementStrong;
         Text textNode;
         final EntityReference erefNode;
-        final Text replacedText;
-        Node appendedChild;
         final String nodeValue;
         doc = sampleXmlFile("hc_staff.xml");
         itemList = doc.getElementsByTagName("strong");

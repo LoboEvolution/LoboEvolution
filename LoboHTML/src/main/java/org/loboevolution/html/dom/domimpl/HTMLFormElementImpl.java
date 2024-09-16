@@ -42,7 +42,6 @@ import org.loboevolution.html.renderstate.FormRenderState;
 import org.loboevolution.html.renderstate.RenderState;
 import org.mozilla.javascript.Function;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;

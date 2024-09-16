@@ -76,7 +76,7 @@ public class SVGClipPathElementImpl extends SVGGraphic implements SVGClipPathEle
 			for (final Node child : children) {
 				if (child instanceof SVGUseElementImpl) {
 					final String href = ((SVGUseElementImpl) child).getHref().getAnimVal();
-					if (href.length() > 0) {
+					if (!href.isEmpty()) {
 						final int index = href.indexOf('#');
 						if (index != -1) {
 							final String id = href.substring(index + 1).trim();

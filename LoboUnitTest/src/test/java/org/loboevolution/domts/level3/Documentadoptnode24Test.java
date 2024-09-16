@@ -60,7 +60,6 @@ public class Documentadoptnode24Test extends LoboUnitTest {
         final NodeList adoptedChildren;
         final int codeElemLen;
         final int adoptedLen;
-        final DocumentType nullDocType = null;
 
         doc = sampleXmlFile("hc_staff.xml");
         domImpl = doc.getImplementation();

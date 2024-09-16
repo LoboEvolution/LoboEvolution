@@ -56,7 +56,7 @@ import java.util.concurrent.atomic.AtomicReference;
 public class EventTargetImpl implements EventTarget {
 
     private final NodeImpl target;
-    private ArrayList<EventListenerEntry> mListenerEntries;
+    private List<EventListenerEntry> mListenerEntries;
 
     public EventTargetImpl(final NodeImpl target) {
         this.target = target;

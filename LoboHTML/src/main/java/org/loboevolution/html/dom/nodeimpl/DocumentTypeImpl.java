@@ -40,6 +40,7 @@ import org.loboevolution.html.node.Node;
  */
 @NoArgsConstructor
 public class DocumentTypeImpl extends NodeImpl implements DocumentType {
+
 	private String publicId;
 	private String qualifiedName;
 	private String systemId;

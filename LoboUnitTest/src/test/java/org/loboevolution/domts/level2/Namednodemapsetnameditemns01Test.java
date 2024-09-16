@@ -59,7 +59,6 @@ public class Namednodemapsetnameditemns01Test extends LoboUnitTest {
         final NamedNodeMap attributes;
         final Element element;
         final Attr attribute;
-        final Attr newAttribute;
         final Attr newAttr1;
         final HTMLCollection elementList;
         final String attrName;

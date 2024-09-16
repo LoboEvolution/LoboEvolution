@@ -36,6 +36,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * **************************************************************************
@@ -164,7 +165,7 @@ public class StampAnnotation extends PDFAnnotation {
             }
             formCmds.addXform(at);
 
-            final HashMap<String, PDFObject> r = new HashMap<>(new HashMap<>());
+            final Map<String, PDFObject> r = new HashMap<>(new HashMap<>());
             final PDFObject rsrc = obj.getDictRef("Resources");
             if (rsrc != null) {
                 r.putAll(rsrc.getDictionary());

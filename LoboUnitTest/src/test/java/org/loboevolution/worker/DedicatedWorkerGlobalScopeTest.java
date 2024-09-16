@@ -82,11 +82,6 @@ public class DedicatedWorkerGlobalScopeTest extends LoboUnitTest {
                 + "} catch(e) {alert('exception'); }\n"
                 + "</script></body></html>\n";
 
-        final String workerJs = "self.addEventListener('message', (e) => {\n"
-                + "  var workerResult = 'Result = ' + (e.data[0] * e.data[1]);\n"
-                + "  postMessage(workerResult);\n"
-                + "});\n";
-
         checkHtmlAlert(html);
     }
 

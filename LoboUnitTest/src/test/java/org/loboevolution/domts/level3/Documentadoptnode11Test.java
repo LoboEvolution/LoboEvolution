@@ -47,10 +47,6 @@ public class Documentadoptnode11Test extends LoboUnitTest {
         final Document doc;
         final DOMImplementation domImpl;
         final DocumentType docType;
-        final Node adoptedDocType;
-        final String nullPubID = null;
-
-        final String nullSysID = null;
 
         final Element docElem;
         final String rootName;
@@ -58,7 +54,7 @@ public class Documentadoptnode11Test extends LoboUnitTest {
         docElem = doc.getDocumentElement();
         rootName = docElem.getTagName();
         domImpl = doc.getImplementation();
-        docType = domImpl.createDocumentType(rootName, nullPubID, nullSysID);
+        docType = domImpl.createDocumentType(rootName, null, null);
 
         boolean success = false;
         try {

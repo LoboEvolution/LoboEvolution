@@ -59,7 +59,6 @@ public class HcelementnormalizeTest extends LoboUnitTest {
         final Node firstChild;
         final String childValue;
         Text textNode;
-        Node retNode;
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("sup");
         testName = (Element) elementList.item(0);

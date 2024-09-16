@@ -55,7 +55,6 @@ public class Nodeinsertbefore15Test extends LoboUnitTest {
         final Comment comment;
         final ProcessingInstruction pi;
         final CDATASection cdata;
-        Node inserted;
         doc = sampleXmlFile("hc_staff.xml");
         entRef = doc.createEntityReference("delta");
         elemChild = entRef.getFirstChild();

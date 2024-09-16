@@ -32,7 +32,6 @@ import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
-import org.loboevolution.html.node.Node;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -54,7 +53,6 @@ public class Nodecomparedocumentposition31Test extends LoboUnitTest {
         final Element newElem;
         final int namePosition;
         final int elemPosition;
-        final Node appendedChild;
         doc = sampleXmlFile("hc_staff.xml");
         nameList = doc.getElementsByTagName("strong");
         strong = (Element) nameList.item(0);

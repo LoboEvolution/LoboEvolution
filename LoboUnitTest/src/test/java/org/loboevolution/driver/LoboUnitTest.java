@@ -83,17 +83,14 @@ public class LoboUnitTest extends LoboWebDriver {
      */
     public static Document sampleHtmlFile() {
         URL url = LoboWebDriver.class.getResource("/org/lobo/html/htmlsample.html");
-        if (url != null) {
-            final DocumentImpl doc;
-            try (InputStream stream = HttpNetwork.getInputStream(url.openConnection())) {
-                doc = loadHtml(stream, url.toString());
-                doc.setTest(true);
-                return doc;
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+        final DocumentImpl doc;
+        try (InputStream stream = HttpNetwork.getInputStream(url.openConnection())) {
+            doc = loadHtml(stream, url.toString());
+            doc.setTest(true);
+            return doc;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-        return null;
     }
 
     /**
@@ -104,18 +101,15 @@ public class LoboUnitTest extends LoboWebDriver {
      */
     public static Document sampleXmlFile(final String fileName) {
         URL url = LoboWebDriver.class.getResource("/org/lobo/xml/" + fileName);
-        if (url != null) {
-            final DocumentImpl doc;
-            try (InputStream stream = HttpNetwork.getInputStream(url.openConnection())) {
-                doc = loadHtml(stream, url.toString());
-                doc.setTest(true);
-                doc.setXml(true);
-                return doc;
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+        final DocumentImpl doc;
+        try (InputStream stream = HttpNetwork.getInputStream(url.openConnection())) {
+            doc = loadHtml(stream, url.toString());
+            doc.setTest(true);
+            doc.setXml(true);
+            return doc;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-        return null;
     }
 
     /**

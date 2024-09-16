@@ -31,7 +31,6 @@ import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.html.node.Element;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -52,9 +51,6 @@ public class Nodeisdefaultnamespace05Test extends LoboUnitTest {
         final DOMImplementation domImpl;
         final Document newDoc;
         boolean isDefault;
-        final DocumentType nullDocType = null;
-
-        final String nullNSURI = null;
 
         final Element docElem;
         final String rootNS;
@@ -68,7 +64,7 @@ public class Nodeisdefaultnamespace05Test extends LoboUnitTest {
         elem = newDoc.getDocumentElement();
         isDefault = elem.isDefaultNamespace(rootNS);
         assertTrue(isDefault, "Nodeisdefaultnamespace05Assert3");
-        isDefault = elem.isDefaultNamespace(nullNSURI);
+        isDefault = elem.isDefaultNamespace(null);
         assertFalse(isDefault, "Nodeisdefaultnamespace05Assert4");
     }
 }

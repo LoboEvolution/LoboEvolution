@@ -50,7 +50,6 @@ public class Typeinfogettypename04Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
-        Element docElem;
         final HTMLCollection elemList;
         final Element emElem;
         final TypeInfo elemTypeInfo;

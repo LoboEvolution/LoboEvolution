@@ -26,7 +26,6 @@
 
 package org.loboevolution.domts.level3;
 
-
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.*;
@@ -53,9 +52,6 @@ public class Nodeinsertbefore18Test extends LoboUnitTest {
         final CDATASection newCDATA;
         final Comment insertedNode;
         final String data;
-        String target;
-        Node appendedChild;
-        final Node inserted;
         doc = sampleXmlFile("hc_staff.xml");
         element = doc.createElement("element");
         newElem = doc.createElementNS("http://www.w3.org/DOM", "dom3:elem");

@@ -51,14 +51,12 @@ public class Nodecomparedocumentposition02Test extends LoboUnitTest {
         final DocumentType docType;
         final int documentPositionDoc;
         final int documentPositionDocType;
-        final String nullPubId = null;
-        final String nullSysId = null;
         final String rootName;
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
         rootName = docType.getName();
         domImpl = doc.getImplementation();
-        newDocType = domImpl.createDocumentType(rootName, nullPubId, nullSysId);
+        newDocType = domImpl.createDocumentType(rootName, null, null);
         doc.replaceChild(newDocType, docType);
         documentPositionDoc = doc.compareDocumentPosition(newDocType);
         assertEquals(20, documentPositionDoc, "Nodecomparedocumentposition02Assert2");

@@ -57,8 +57,6 @@ public class Nodehasattributes04Test extends LoboUnitTest {
         final Element elementTest;
         final Element elementDoc;
         final Attr attribute;
-        final Node setNode;
-        final Node appendedChild;
         final HTMLCollection elementList;
         final boolean hasAttributes;
         doc = sampleXmlFile("staffNS.xml");

@@ -1075,7 +1075,7 @@ public class PDFParser extends BaseWatchable {
             bbox = new Rectangle2D.Float(bobj.getAt(0).getFloatValue(), bobj.getAt(1).getFloatValue(), bobj.getAt(2).getFloatValue(), bobj.getAt(3).getFloatValue());
             formCmds = new PDFPage(bbox, 0);
             formCmds.addXform(at);
-            final HashMap<String, PDFObject> r = new HashMap<>(this.resources);
+            final Map<String, PDFObject> r = new HashMap<>(this.resources);
             final PDFObject rsrc = obj.getDictRef("Resources");
             if (rsrc != null) {
                 r.putAll(rsrc.getDictionary());
@@ -1121,7 +1121,7 @@ public class PDFParser extends BaseWatchable {
         } else if (t.type == Tok.NAME) {
             return this.tok.name;
         } else if (t.type == Tok.BRKB) {
-            final HashMap<String, PDFObject> hm = new HashMap<>();
+            final Map<String, PDFObject> hm = new HashMap<>();
             String name = null;
             Object obj;
             while ((obj = parseObject()) != null) {
@@ -1162,7 +1162,7 @@ public class PDFParser extends BaseWatchable {
      */
     private void parseInlineImage() throws IOException, DebugStopException {
         // build dictionary until ID, then read image until EI
-        final HashMap<String, PDFObject> hm = new HashMap<>();
+        final Map<String, PDFObject> hm = new HashMap<>();
         while (true) {
             final Tok t = nextToken();
             if (t.type == Tok.CMD) {

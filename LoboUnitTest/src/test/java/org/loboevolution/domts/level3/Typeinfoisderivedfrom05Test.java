@@ -50,8 +50,6 @@ public class Typeinfoisderivedfrom05Test extends LoboUnitTest {
         final HTMLCollection elemList;
         final Element acronymElem;
         final Attr attr;
-        Element elem;
-        String elemName;
         final TypeInfo typeInfo;
         final boolean isDerived;
         final String typeName;

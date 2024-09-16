@@ -98,21 +98,15 @@ class RLine extends BaseRCollection {
 	 * @throws org.loboevolution.html.renderer.OverflowException if any.
 	 */
 	public final void add(final Renderable renderable) throws OverflowException {
-		if (renderable instanceof RWord) {
-			addWord((RWord) renderable);
-		} else if (renderable instanceof RBlank) {
-			addBlank((RBlank) renderable);
-		} else if (renderable instanceof RElement) {
-			addElement((RElement) renderable);
-		} else if (renderable instanceof RSpacing) {
-			addSpacing((RSpacing) renderable);
-		} else if (renderable instanceof RStyleChanger) {
-			addStyleChanger((RStyleChanger) renderable);
-		} else if (renderable instanceof RFloatInfo) {
-			simplyAdd(renderable);
-		} else {
-			throw new IllegalArgumentException("Can't add " + renderable);
-		}
+        switch (renderable) {
+            case RWord rWord -> addWord(rWord);
+            case RBlank rBlank -> addBlank(rBlank);
+            case RElement rElement -> addElement(rElement);
+            case RSpacing rSpacing -> addSpacing(rSpacing);
+            case RStyleChanger rStyleChanger -> addStyleChanger(rStyleChanger);
+            case RFloatInfo rFloatInfo -> simplyAdd(renderable);
+            case null, default -> throw new IllegalArgumentException("Can't add " + renderable);
+        }
 	}
 
 	/**
@@ -316,7 +310,6 @@ class RLine extends BaseRCollection {
         baseline = switch (key) {
             case ABSBOTTOM -> newHeight - maxDescent;
             case ABSMIDDLE -> (newHeight + textHeight) / 2 - maxDescent;
-            case BASELINE, BOTTOM -> elementHeight;
             case MIDDLE -> newHeight / 2;
             case TOP -> maxAscentPlusLeading;
             default -> elementHeight;

@@ -50,7 +50,6 @@ public class Nodesetuserdata09Test extends LoboUnitTest {
         final Element docElem;
         final Object returned;
 
-        final Object retUserData;
         doc = sampleXmlFile("hc_staff.xml");
         docElem = doc.getDocumentElement();
         /*Node */

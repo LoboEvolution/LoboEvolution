@@ -50,7 +50,6 @@ public class Noderemovechild24Test extends LoboUnitTest {
         final NamedNodeMap entitiesMap;
         final Node alphaEntity;
         final Text alphaText;
-        final Text removed;
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
         entitiesMap = docType.getEntities();

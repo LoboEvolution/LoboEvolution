@@ -34,6 +34,9 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.NodeList;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -65,15 +68,15 @@ public class TextparseintolistofelementsTest extends LoboUnitTest {
         final int length;
         String value;
         Node grandChild;
-        final java.util.List result = new java.util.ArrayList();
+        final List<String> result = new ArrayList<>();
 
-        final java.util.List expectedNormal = new java.util.ArrayList();
+        final List<String> expectedNormal = new ArrayList<>();
         expectedNormal.add("1900 Dallas Road");
         expectedNormal.add(" Dallas, ");
         expectedNormal.add("Texas");
         expectedNormal.add("\n 98554");
 
-        final java.util.List expectedExpanded = new java.util.ArrayList();
+        final List<String> expectedExpanded = new ArrayList<>();
         expectedExpanded.add("1900 Dallas Road Dallas, Texas\n 98554");
 
         doc = sampleXmlFile("staff.xml");

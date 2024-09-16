@@ -33,7 +33,6 @@ import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
-import org.loboevolution.html.node.Node;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -53,7 +52,6 @@ public class Nodereplacechild06Test extends LoboUnitTest {
         final Element elem;
         final HTMLCollection childList;
         final String nodeName;
-        final Node replacedNode;
         doc = sampleXmlFile("hc_staff.xml");
         docElem = doc.getDocumentElement();
         childList = doc.getElementsByTagName("p");

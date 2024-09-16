@@ -544,7 +544,7 @@ public class PDFFile {
      */
     private PDFObject readDictionary(
             final int objNum, final int objGen, final PDFDecrypter decrypter) throws IOException {
-        final HashMap<String, PDFObject> hm = new HashMap<>();
+        final Map<String, PDFObject> hm = new HashMap<>();
         // we've already read the <<.  Now get /Name obj pairs until >>
         PDFObject name;
         while ((name = readObject(objNum, objGen, decrypter)) != null) {
@@ -1576,7 +1576,7 @@ public class PDFFile {
      */
     public PDFPage getPage(final int pagenum, final boolean wait) {
         final Integer key = pagenum;
-        final HashMap<String, PDFObject> resources;
+        final Map<String, PDFObject> resources;
         final PDFObject pageObj;
 
         PDFPage page = this.cache.getPage(key);

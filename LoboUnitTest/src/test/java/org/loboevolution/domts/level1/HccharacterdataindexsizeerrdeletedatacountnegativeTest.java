@@ -63,7 +63,6 @@ public class HccharacterdataindexsizeerrdeletedatacountnegativeTest extends Lobo
         final HTMLCollection elementList;
         final Node nameNode;
         final CharacterData child;
-        final String childSubstring;
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("acronym");
         nameNode = elementList.item(0);

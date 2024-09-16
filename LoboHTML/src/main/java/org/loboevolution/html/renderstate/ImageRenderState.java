@@ -127,7 +127,7 @@ public class ImageRenderState extends StyleSheetRenderState {
 			int vspace = 0;
 			boolean createNew = false;
 			final String hspaceText = this.element.getAttribute("hspace");
-			if (hspaceText != null && hspaceText.length() != 0) {
+			if (hspaceText != null && !hspaceText.isEmpty()) {
 				createNew = true;
 				try {
 					hspace = Integer.parseInt(hspaceText);
@@ -136,7 +136,7 @@ public class ImageRenderState extends StyleSheetRenderState {
 				}
 			}
 			final String vspaceText = this.element.getAttribute("vspace");
-			if (vspaceText != null && vspaceText.length() != 0) {
+			if (vspaceText != null && !vspaceText.isEmpty()) {
 				createNew = true;
 				try {
 					vspace = Integer.parseInt(vspaceText);

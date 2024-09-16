@@ -34,7 +34,6 @@ import org.loboevolution.html.dom.Notation;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.html.node.NamedNodeMap;
-import org.loboevolution.html.node.Node;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -55,7 +54,6 @@ public class Noderemovechild07Test extends LoboUnitTest {
         final DocumentType docType;
         final NamedNodeMap notations;
         final Notation notation;
-        Node removedChild;
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
         notations = docType.getNotations();

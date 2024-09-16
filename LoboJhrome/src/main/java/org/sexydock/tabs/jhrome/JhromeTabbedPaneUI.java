@@ -117,7 +117,7 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
     private ITabbedPaneDndPolicy dndPolicy = null;
     private final List<ITabbedPaneListener> tabListeners = new ArrayList<>();
     private Handler handler = new Handler();
-    private HashMap<Integer, Integer> mnemonicToIndexMap;
+    private Map<Integer, Integer> mnemonicToIndexMap;
     /**
      * InputMap used for mnemonics. Only non-null if the JTabbedPane has mnemonics associated with it. Lazily created in initMnemonics.
      */

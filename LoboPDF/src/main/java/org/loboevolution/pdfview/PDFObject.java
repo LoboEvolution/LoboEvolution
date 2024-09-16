@@ -629,7 +629,7 @@ public class PDFObject {
             return dereference().getDictRef(key);
         } else if (type == DICTIONARY || type == STREAM) {
             key = key.intern();
-            final HashMap h = (HashMap) value;
+            final Map h = (HashMap) value;
             final PDFObject obj = (PDFObject) h.get(key.intern());
             return obj;
         }
@@ -735,7 +735,7 @@ public class PDFObject {
                     sb.append("Untyped");
                 }
                 sb.append(" dictionary. Keys:");
-                final HashMap hm = (HashMap) value;
+                final Map hm = (HashMap) value;
                 final Iterator it = hm.entrySet().iterator();
                 Map.Entry entry;
                 while (it.hasNext()) {

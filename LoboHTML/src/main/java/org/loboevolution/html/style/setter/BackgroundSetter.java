@@ -102,7 +102,7 @@ public class BackgroundSetter implements SubPropertySetter {
                 properties.setProperty(BACKGROUND_REPEAT, CSSValues.INITIAL.toString());
             }
 
-            if (position.length() > 0) {
+            if (!position.isEmpty()) {
                 properties.setProperty(BACKGROUND_POSITION, position.toString());
             } else {
                 properties.setProperty(BACKGROUND_POSITION, CSSValues.INITIAL.toString());

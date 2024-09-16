@@ -47,7 +47,6 @@ public class Noderemovechild02Test extends LoboUnitTest {
         final Document doc;
         final DOMImplementation domImpl;
         final Document newDoc;
-        Node removed;
         final Element docElem;
         final String rootNS;
         final String rootName;

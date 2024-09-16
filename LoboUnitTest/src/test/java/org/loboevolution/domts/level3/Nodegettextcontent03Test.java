@@ -46,7 +46,6 @@ public class Nodegettextcontent03Test extends LoboUnitTest {
     public void runTest() {
         final Document doc;
         final DocumentType docType;
-        Document newDoc;
         final String textContent;
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();

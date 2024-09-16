@@ -41,6 +41,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -249,11 +250,11 @@ public class GradientStyle {
 				build();
 	}
 
-	private static void setFractions(final ArrayList<Float> listFractions, final char[] charArray, final int index, final String color) {
+	private static void setFractions(final List<Float> listFractions, final char[] charArray, final int index, final String color) {
 		final boolean isPercent = color.contains("%");
 		final float numberOnly = isPercent ? Float.parseFloat(color.replaceAll("[^0-9]", "")) /100 : 0f;
 		
-		if (listFractions.size() == 0) {
+		if (listFractions.isEmpty()) {
 			listFractions.add(isPercent ? numberOnly : 0F);
 		} else if (index == charArray.length - 1) {
 			listFractions.add(isPercent ? numberOnly : 1F);

@@ -29,7 +29,6 @@ package org.loboevolution.domts.level3;
 
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
@@ -46,7 +45,6 @@ public class Nodelookupprefix12Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
-        final DOMImplementation domImpl;
         final Element elem;
         final Element renamedNode;
         final String prefix;

@@ -102,7 +102,7 @@ public class LazyImageIcon implements Icon {
 	/** {@inheritDoc} */
 	@Override
 	public void paintIcon(final Component c, final Graphics g, final int iconX, final int y) {
-final int x = iconX;
+		final int x = iconX;
 		if (getIcon() != null) {
 			icon.paintIcon(c, g, x, y);
 		} else {

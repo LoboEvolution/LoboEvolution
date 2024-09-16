@@ -34,26 +34,21 @@ import java.util.WeakHashMap;
  */
 public final class JavaClassWrapperFactory {
 
-	private static JavaClassWrapperFactory instance;
-
-	private final Map<Class, WeakReference<JavaClassWrapper>> classWrappers = new WeakHashMap();
+    private final Map<Class, WeakReference<JavaClassWrapper>> classWrappers = new WeakHashMap();
 
 	private JavaClassWrapperFactory() { }
 
-	/**
+    private static final class InstanceHolder {
+        private static final JavaClassWrapperFactory instance = new JavaClassWrapperFactory();
+    }
+
+    /**
 	 * <p>Getter for the field instance.</p>
 	 *
 	 * @return a {@link org.loboevolution.js.JavaClassWrapperFactory} object.
 	 */
 	public static JavaClassWrapperFactory getInstance() {
-		if (instance == null) {
-			synchronized (JavaClassWrapperFactory.class) {
-				if (instance == null) {
-					instance = new JavaClassWrapperFactory();
-				}
-			}
-		}
-		return instance;
+        return InstanceHolder.instance;
 	}
 
 	/**

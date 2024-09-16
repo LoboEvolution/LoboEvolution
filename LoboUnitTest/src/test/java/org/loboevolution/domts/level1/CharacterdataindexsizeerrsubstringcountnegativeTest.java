@@ -63,7 +63,6 @@ public class CharacterdataindexsizeerrsubstringcountnegativeTest extends LoboUni
         final HTMLCollection elementList;
         final Node nameNode;
         final CharacterData child;
-        final String badSubstring;
         doc = sampleXmlFile("staff.xml");
         elementList = doc.getElementsByTagName("address");
         nameNode = elementList.item(0);
@@ -72,7 +71,7 @@ public class CharacterdataindexsizeerrsubstringcountnegativeTest extends LoboUni
         {
             boolean success = false;
             try {
-                badSubstring = child.substringData(10, -3);
+                child.substringData(10, -3);
             } catch (final DOMException ex) {
                 success = (ex.getCode() == DOMException.INDEX_SIZE_ERR);
             }

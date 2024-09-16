@@ -66,10 +66,10 @@ public class NodeappendchilddocfragmentTest extends LoboUnitTest {
         final Node newChild2;
         Node child;
         String childName;
-        final List<String> result = new java.util.ArrayList<String>();
+        final List<String> result = new java.util.ArrayList<>();
 
         int nodeType;
-        final List<String> expected = new ArrayList<String>();
+        final List<String> expected = new ArrayList<>();
         expected.add("EMPLOYEEID");
         expected.add("NAME");
         expected.add("POSITION");

@@ -53,12 +53,9 @@ public class Userdatahandler03Test extends LoboUnitTest {
         final HTMLCollection pList;
         final UserDataHandlerImpl userDataHandlerImpl = new UserDataHandlerImpl();
 
-        Object oldUserData;
-        final String elementNS;
         final Node newNode;
         final List<UserDataNotification> notifications;
 
-        UserDataNotification notification;
         short operation;
         String key;
         String data;
@@ -68,11 +65,9 @@ public class Userdatahandler03Test extends LoboUnitTest {
         int salutationCount = 0;
         final String hello = "Hello";
         final String mister = "Mr.";
-        final Document newDoc;
         final String rootName;
         final String rootNS;
         final DOMImplementation domImpl;
-        final DocumentType docType = null;
 
         final Element docElem;
         doc = sampleXmlFile("barfoo.xml");
@@ -80,7 +75,7 @@ public class Userdatahandler03Test extends LoboUnitTest {
         docElem = doc.getDocumentElement();
         rootNS = docElem.getNamespaceURI();
         rootName = docElem.getTagName();
-        domImpl.createDocument(rootNS, rootName, docType);
+        domImpl.createDocument(rootNS, rootName, null);
         pList = doc.getElementsByTagName("p");
         node = pList.item(0);
         node.setUserData("greeting", hello, userDataHandlerImpl);

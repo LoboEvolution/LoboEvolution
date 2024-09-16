@@ -51,9 +51,9 @@ public interface ModelNode {
 	 *
 	 * @param spec a {@link java.lang.String} object.
 	 * @return a {@link java.net.URL} object.
-	 * @throws java.net.MalformedURLException if any.
+	 * @throws java.lang.Exception if any.
 	 */
-	URL getFullURL(final String spec) throws MalformedURLException, Exception;
+	URL getFullURL(final String spec) throws Exception;
 
 	/**
 	 * <p>getParentModelNode.</p>

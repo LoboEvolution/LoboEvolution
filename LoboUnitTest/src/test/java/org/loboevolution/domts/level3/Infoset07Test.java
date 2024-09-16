@@ -56,24 +56,18 @@ public class Infoset07Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final DOMImplementation domImpl;
-        final DocumentType nullDoctype = null;
-
         final Document doc;
         final Element docElem;
         Attr attr;
-        Node retval;
         final DOMConfiguration domConfig;
         final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
-
-        final List errors;
-
-        DOMError error;
+        final List<DOMError> errors;
         int severity;
         String type;
         DOMLocator locator;
         Node relatedNode;
         domImpl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(), true));
-        doc = domImpl.createDocument("http://www.w3.org/1999/xhtml", "html", nullDoctype);
+        doc = domImpl.createDocument("http://www.w3.org/1999/xhtml", "html", null);
         docElem = doc.getDocumentElement();
 
         boolean success = false;
@@ -103,8 +97,7 @@ public class Infoset07Test extends LoboUnitTest {
         domConfig.setParameter("error-handler", errorMonitor);
         doc.normalizeDocument();
         errors = errorMonitor.getErrors();
-        for (final Object o : errors) {
-            error = (DOMError) o;
+        for (final DOMError error : errors) {
             severity = error.getSeverity();
             assertEquals(2, severity, "Infoset07Assert2");
             type = error.getType();

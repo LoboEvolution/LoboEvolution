@@ -46,6 +46,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=425">http://www.w3.org/Bugs/Public/show_bug.cgi?id=425</a>
  */
 public class Textreplacewholetext07Test extends LoboUnitTest {
+
     @Test
     public void runTest() {
         final Document doc;
@@ -54,7 +55,6 @@ public class Textreplacewholetext07Test extends LoboUnitTest {
         Text textNode;
         final EntityReference erefNode;
         final Text replacedText;
-        Node appendedChild;
         final Node node;
         final String nodeValue;
         final int nodeType;

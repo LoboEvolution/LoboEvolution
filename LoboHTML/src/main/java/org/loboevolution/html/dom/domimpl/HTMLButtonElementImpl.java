@@ -185,7 +185,7 @@ public class HTMLButtonElementImpl extends HTMLElementImpl implements HTMLButton
 			});
 		}
 
-		if (text.length() > 0) {
+		if (!text.isEmpty()) {
 			return text.substring(0, text.length() - 1);
 		} else {
 			return text.toString();

@@ -37,6 +37,7 @@ import javax.swing.tree.TreePath;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DOMTreeModel implements TreeModel {
 
@@ -53,7 +54,7 @@ public class DOMTreeModel implements TreeModel {
     /**
      * Description of the Field
      */
-    private final HashMap<Node, List<Node>> displayableNodes;
+    private final Map<Node, List<Node>> displayableNodes;
 
     /**
      * Description of the Field

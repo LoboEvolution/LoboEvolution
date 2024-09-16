@@ -64,7 +64,7 @@ public class Domimplementationregistry13Test extends LoboUnitTest {
         /*int */
         domImpl = domImplList.item(length);
         assertNull(domImpl, "Domimplementationregistry13Assert2");
-        assertNull(domImpl, "Domimplementationregistry13Assert3");
+        assertNull(null, "Domimplementationregistry13Assert3");
         assertTrue((length > 0), "Domimplementationregistry13Assert4");
         for (int indexN10067 = 0; indexN10067 < domImplList.getLength(); indexN10067++) {
             domImpl = domImplList.item(indexN10067);

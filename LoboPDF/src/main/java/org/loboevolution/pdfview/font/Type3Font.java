@@ -47,7 +47,7 @@ public class Type3Font extends PDFFont {
     /**
      * resources for the character definitions
      */
-    final HashMap<String, PDFObject> rsrc;
+    final Map<String, PDFObject> rsrc;
     /**
      * the character processes, mapped by name
      */
@@ -86,7 +86,7 @@ public class Type3Font extends PDFFont {
      * @throws java.io.IOException if any.
      */
     public Type3Font(final String baseFont, final PDFObject fontObj,
-                     final HashMap<String, PDFObject> resources, final PDFFontDescriptor descriptor) throws IOException {
+                     final Map<String, PDFObject> resources, final PDFFontDescriptor descriptor) throws IOException {
         super(baseFont, descriptor);
 
         this.rsrc = new HashMap<>();

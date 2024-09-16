@@ -53,8 +53,6 @@ public class Nodeinsertbefore12Test extends LoboUnitTest {
         final DocumentFragment docFrag;
         final DocumentFragment docFragNew;
         final Element elem;
-        final Node inserted;
-        final Node appendedChild;
         final Node last;
         final String name;
         doc = sampleXmlFile("hc_staff.xml");

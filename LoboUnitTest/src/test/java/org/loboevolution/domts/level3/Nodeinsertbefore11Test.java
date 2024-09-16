@@ -54,7 +54,6 @@ public class Nodeinsertbefore11Test extends LoboUnitTest {
         final EntityReference eRef;
         Node inserted;
         String insertedVal;
-        Node appendedChild;
         doc = sampleXmlFile("hc_staff.xml");
         docFrag = doc.createDocumentFragment();
         elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "body");

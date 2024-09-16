@@ -31,7 +31,6 @@ import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentFragment;
-import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.Text;
 
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -50,8 +49,6 @@ public class Noderemovechild11Test extends LoboUnitTest {
         final DocumentFragment docFrag;
         final Text txt;
         final Text removedTxt;
-        final Node appendedChild;
-        final Node removedChild;
         doc = sampleXmlFile("hc_staff.xml");
         docFrag = doc.createDocumentFragment();
         txt = doc.createTextNode("TEXT");

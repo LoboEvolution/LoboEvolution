@@ -151,32 +151,40 @@ public class Type1CFont extends OutlineFont {
         this.number = (this.data[this.pos++]) & 0xff;
         if (this.number == 30 && !charstring) { // goofy floatingpoint rep
             readFNum();
-            return this.type = FLT;
+            this.type = FLT;
+            return FLT;
         } else if (this.number == 28) {
             this.number = ((this.data[this.pos]) << 8) + ((this.data[this.pos + 1]) & 0xff);
             this.pos += 2;
-            return this.type = NUM;
+            this.type = NUM;
+            return NUM;
         } else if (this.number == 29 && !charstring) {
             this.number = ((this.data[this.pos] & 0xff) << 24) |
                     ((this.data[this.pos + 1] & 0xff) << 16) |
                     ((this.data[this.pos + 2] & 0xff) << 8) |
                     ((this.data[this.pos + 3] & 0xff));
             this.pos += 4;
-            return this.type = NUM;
+            this.type = NUM;
+            return NUM;
         } else if (this.number == 12) {  // two-byte command
             this.number = 1000 + ((this.data[this.pos++]) & 0xff);
-            return this.type = CMD;
+            this.type = CMD;
+            return CMD;
         } else if (this.number < 32) {
-            return this.type = CMD;
+            this.type = CMD;
+            return CMD;
         } else if (this.number < 247) {
             this.number -= 139;
-            return this.type = NUM;
+            this.type = NUM;
+            return NUM;
         } else if (this.number < 251) {
             this.number = (this.number - 247) * 256 + ((this.data[this.pos++]) & 0xff) + 108;
-            return this.type = NUM;
+            this.type = NUM;
+            return NUM;
         } else if (this.number < 255) {
             this.number = -(this.number - 251) * 256 - ((this.data[this.pos++]) & 0xff) - 108;
-            return this.type = NUM;
+             this.type = NUM;
+            return NUM;
         } else if (!charstring) { // dict shouldn't have a 255 code
             printData();
             throw new RuntimeException("Got a 255 code while reading dict");
@@ -186,7 +194,8 @@ public class Type1CFont extends OutlineFont {
                     ((this.data[this.pos + 2] & 0xff) << 8) |
                     ((this.data[this.pos + 3] & 0xff))) / 65536f;
             this.pos += 4;
-            return this.type = FLT;
+            this.type = FLT;
+            return FLT;
         }
     }
 

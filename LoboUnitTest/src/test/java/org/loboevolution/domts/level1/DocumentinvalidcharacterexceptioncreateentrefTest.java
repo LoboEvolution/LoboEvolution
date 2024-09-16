@@ -31,7 +31,6 @@ import org.htmlunit.cssparser.dom.DOMException;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.EntityReference;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -54,7 +53,6 @@ public class DocumentinvalidcharacterexceptioncreateentrefTest extends LoboUnitT
     @Test
     public void runTest() {
         final Document doc;
-        final EntityReference badEntityRef;
         doc = sampleXmlFile("hc_staff.xml");
         boolean success = false;
         try {

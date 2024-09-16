@@ -64,7 +64,23 @@ public class CreateDocumentType02Test extends LoboUnitTest {
         final Document doc;
 
         DOMImplementation domImpl;
-        final List<String> illegalQNames = new ArrayList<String>();
+        final List<String> illegalQNames = getStrings();
+        doc = sampleXmlFile("staffNS.xml");
+        for (final String qualifiedName : illegalQNames) {
+            domImpl = doc.getImplementation();
+            boolean success = false;
+            try {
+                domImpl.createDocumentType(qualifiedName, publicId, systemId);
+            } catch (final DOMException ex) {
+                success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
+            }
+            assertTrue(success);
+
+        }
+    }
+
+    private static List<String> getStrings() {
+        final List<String> illegalQNames = new ArrayList<>();
         illegalQNames.add("edi:{");
         illegalQNames.add("edi:}");
         illegalQNames.add("edi:~");
@@ -92,20 +108,7 @@ public class CreateDocumentType02Test extends LoboUnitTest {
         illegalQNames.add("edi:,");
         illegalQNames.add("edi:a ");
         illegalQNames.add("edi:\"");
-
-        doc = sampleXmlFile("staffNS.xml");
-
-        for (final String qualifiedName : illegalQNames) {
-            domImpl = doc.getImplementation();
-            boolean success = false;
-            try {
-                domImpl.createDocumentType(qualifiedName, publicId, systemId);
-            } catch (final DOMException ex) {
-                success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
-            }
-            assertTrue(success);
-
-        }
+        return illegalQNames;
     }
 }
 

@@ -30,7 +30,6 @@ import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
-import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.Text;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -50,7 +49,6 @@ public class Nodelookupnamespaceuri13Test extends LoboUnitTest {
         final Element elem;
         final Text txt;
         final String namespaceURI;
-        Node appendedChild;
         doc = sampleXmlFile("hc_staff.xml");
         docElem = doc.getDocumentElement();
         elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "dom3:p");

@@ -105,6 +105,7 @@ public class RInlineBlock extends BaseElementRenderable {
 	}
 
 	/** {@inheritDoc} */
+	@Override
 	public void paint(final Graphics g) {
 		this.child.paint(g);
 	}

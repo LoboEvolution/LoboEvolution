@@ -32,7 +32,6 @@ import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
-import org.loboevolution.html.node.NodeList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -62,19 +61,16 @@ public class HcnodeinsertbeforerefchildnullTest extends LoboUnitTest {
         final Document doc;
         final HTMLCollection elementList;
         final Node employeeNode;
-        final NodeList childList;
-        final Node refChild = null;
 
         final Node newChild;
         final Node child;
         final String childName;
-        final Node insertedNode;
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("p");
         employeeNode = elementList.item(1);
         employeeNode.getChildNodes();
         newChild = doc.createElement("br");
-        employeeNode.insertBefore(newChild, refChild);
+        employeeNode.insertBefore(newChild, null);
         child = employeeNode.getLastChild();
         childName = child.getNodeName();
         assertEquals("BR", childName, "HcnodeinsertbeforerefchildnullAssert1");

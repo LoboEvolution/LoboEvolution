@@ -49,7 +49,6 @@ public class Nodereplacechild16Test extends LoboUnitTest {
         final Text txt;
         final Text replaced;
         final String nodeName;
-        Node appendedChild;
         doc = sampleXmlFile("hc_staff.xml");
         elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "dom3:p");
         docFrag = doc.createDocumentFragment();

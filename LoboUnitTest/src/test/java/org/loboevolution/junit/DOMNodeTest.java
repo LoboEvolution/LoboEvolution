@@ -665,8 +665,6 @@ public class DOMNodeTest extends LoboUnitTest {
         assertFalse(meta.hasChildNodes());
         assertNull(meta.getChildNodes().item(0));
         assertNull(meta.getChildren().item(0));
-        // Document fragment
-        final Node last = fragment.getLastChild();
         assertEquals(2, elm.getChildNodes().getLength());
         elm.appendChild(fragment);
         assertEquals(3, elm.getChildNodes().getLength());

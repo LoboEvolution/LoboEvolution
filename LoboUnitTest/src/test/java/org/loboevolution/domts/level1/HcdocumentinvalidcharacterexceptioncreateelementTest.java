@@ -31,7 +31,6 @@ import org.htmlunit.cssparser.dom.DOMException;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.Element;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -60,7 +59,6 @@ public class HcdocumentinvalidcharacterexceptioncreateelementTest extends LoboUn
     @Test
     public void runTest() {
         final Document doc;
-        final Element badElement;
         doc = sampleXmlFile("hc_staff.xml");
 
         {

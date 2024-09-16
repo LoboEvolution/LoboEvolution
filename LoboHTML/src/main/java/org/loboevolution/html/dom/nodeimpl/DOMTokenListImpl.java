@@ -32,6 +32,7 @@ import org.loboevolution.html.node.DOMTokenList;
 
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.StringTokenizer;
 
 /**
@@ -41,7 +42,7 @@ public class DOMTokenListImpl implements DOMTokenList {
 
 	private final ElementImpl element;
 
-	private final LinkedList<String> tokenset;
+	private final List<String> tokenset;
 
 	/**
 	 * <p>Constructor for DOMTokenListImpl.</p>

@@ -57,12 +57,10 @@ public class Elementgetattributenodens03Test extends LoboUnitTest {
         final Attr attribute;
         final String attrValue;
         final HTMLCollection childList;
-        final String nullNS = null;
-
         doc = sampleXmlFile("staffNS.xml");
         childList = doc.getElementsByTagName("employee");
         element = (Element) childList.item(1);
-        attribute = element.getAttributeNodeNS(nullNS, "defaultAttr");
+        attribute = element.getAttributeNodeNS(null, "defaultAttr");
         attrValue = attribute.getNodeValue();
         assertEquals("defaultVal", attrValue);
     }

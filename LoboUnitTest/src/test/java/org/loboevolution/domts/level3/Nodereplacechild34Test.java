@@ -26,7 +26,6 @@
 
 package org.loboevolution.domts.level3;
 
-
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.*;
@@ -48,8 +47,6 @@ public class Nodereplacechild34Test extends LoboUnitTest {
         final EntityReference oldChild;
         final Text newChild;
         final String nodeValue;
-        final Node appendedChild;
-        final Node replaced;
         doc = sampleXmlFile("hc_staff.xml");
         parent = doc.createAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:lang");
         oldChild = doc.createEntityReference("delta");

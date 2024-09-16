@@ -33,7 +33,6 @@ import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.CDATASection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
-import org.loboevolution.html.node.Node;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -53,7 +52,6 @@ public class Nodelookupprefix14Test extends LoboUnitTest {
         final Element elem;
         final CDATASection cdata;
         final String prefix;
-        Node appendedChild;
         final HTMLCollection bodyList;
         doc = sampleXmlFile("hc_staff.xml");
         bodyList = doc.getElementsByTagName("body");

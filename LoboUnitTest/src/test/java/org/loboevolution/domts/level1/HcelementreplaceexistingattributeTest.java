@@ -34,7 +34,6 @@ import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 
@@ -65,7 +64,6 @@ public class HcelementreplaceexistingattributeTest extends LoboUnitTest {
         final Element testEmployee;
         final Attr newAttribute;
         final String strong;
-        final Attr setAttr;
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("acronym");
         testEmployee = (Element) elementList.item(2);

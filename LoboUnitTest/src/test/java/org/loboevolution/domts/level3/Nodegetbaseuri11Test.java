@@ -31,7 +31,6 @@ import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.html.node.ProcessingInstruction;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -55,7 +54,6 @@ public class Nodegetbaseuri11Test extends LoboUnitTest {
         final ProcessingInstruction imported;
         final String baseURI;
         final String docURI;
-        final DocumentType nullDocType = null;
 
         doc = sampleXmlFile("barfoo_base.xml");
         domImpl = doc.getImplementation();

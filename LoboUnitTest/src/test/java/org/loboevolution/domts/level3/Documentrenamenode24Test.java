@@ -31,7 +31,6 @@ import org.htmlunit.cssparser.dom.DOMException;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.Node;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -50,16 +49,13 @@ public class Documentrenamenode24Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
-        final Node renamedNode;
-        final String nullNSURI = null;
 
-        Document docowner;
         doc = sampleXmlFile("hc_staff.xml");
 
 
         boolean success = false;
         try {
-            doc.renameNode(doc, nullNSURI, "doc:root");
+            doc.renameNode(doc, null, "doc:root");
         } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
         }

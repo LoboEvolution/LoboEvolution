@@ -41,7 +41,7 @@ import java.util.List;
 @Data
 public class DOMErrorMonitor implements DOMErrorHandler {
 
-    private List<DOMError> errors;
+    private final List<DOMError> errors;
 
     public DOMErrorMonitor(){
         errors = new ArrayList<>();

@@ -29,7 +29,6 @@ package org.loboevolution.domts.level3;
 
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.node.DOMImplementation;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 
@@ -48,7 +47,6 @@ public class Nodegetfeature11Test extends LoboUnitTest {
         final Node node;
         Node featureImpl;
         boolean isSupported;
-        final DOMImplementation domImpl;
         doc = sampleXmlFile("barfoo.xml");
         doc.getImplementation();
         node = doc.createCDATASection("some text");

@@ -306,7 +306,7 @@ public abstract class BaseWatchable implements Watchable, Runnable {
                 try {
                     this.statusLock.wait();
                 } catch (final InterruptedException ex) {
-                    // ignore
+                    Thread.currentThread().interrupt();
                 }
             }
         }
@@ -346,7 +346,7 @@ public abstract class BaseWatchable implements Watchable, Runnable {
                 try {
                     statusLock.wait();
                 } catch (final InterruptedException ex) {
-                    // ignore
+                    Thread.currentThread().interrupt();
                 }
             }
         }

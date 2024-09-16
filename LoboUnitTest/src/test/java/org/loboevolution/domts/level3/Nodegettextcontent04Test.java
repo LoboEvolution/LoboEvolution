@@ -48,9 +48,6 @@ public class Nodegettextcontent04Test extends LoboUnitTest {
         final DOMImplementation domImpl;
         final DocumentType docType;
         final String textContent;
-        final String nullPubId = null;
-
-        final String nullSysId = null;
 
         final DocumentType oldDocType;
         final String rootName;
@@ -58,7 +55,7 @@ public class Nodegettextcontent04Test extends LoboUnitTest {
         oldDocType = doc.getDoctype();
         rootName = oldDocType.getName();
         domImpl = doc.getImplementation();
-        docType = domImpl.createDocumentType(rootName, nullPubId, nullSysId);
+        docType = domImpl.createDocumentType(rootName, null, null);
         textContent = docType.getTextContent();
         assertNull(textContent, "Nodegettextcontent04Assert2");
     }

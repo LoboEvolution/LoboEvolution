@@ -53,11 +53,6 @@ public class Documentrenamenode27Test extends LoboUnitTest {
         final CDATASection cdata;
         final ProcessingInstruction pi;
         final EntityReference entref;
-        final Node renamedTxt;
-        final Node renamedComment;
-        final Node renamedCdata;
-        final Node renamedPi;
-        final Node renamedEntRef;
         final Element docElem;
         final String rootNS;
         final String rootName;

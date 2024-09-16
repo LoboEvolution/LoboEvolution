@@ -401,7 +401,7 @@ public enum Entities {
 
     CUP("cup"),
 
-    INT_("int"),
+    INT("int"),
 
     THERE4("there4"),
 

@@ -26,7 +26,6 @@
 
 package org.loboevolution.domts.level3;
 
-
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
@@ -51,9 +50,6 @@ public class Nodeisequalnode09Test extends LoboUnitTest {
         final HTMLCollection employeeList;
         final Text text;
         final boolean isEqual;
-        final DocumentType nullDocType = null;
-
-        final Node appendedChild;
         final Element docElem;
         final String rootNS;
         final String rootName;

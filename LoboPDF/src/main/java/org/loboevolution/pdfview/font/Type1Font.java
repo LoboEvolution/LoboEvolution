@@ -375,7 +375,7 @@ public class Type1Font extends OutlineFont {
      */
     private Map<String, byte[]> readChars(final byte[] d) {
         // skip thru data until we find "/"+key
-        final HashMap<String, byte[]> hm = new HashMap<>();
+        final Map<String, byte[]> hm = new HashMap<>();
         final int i = findSlashName(d, "CharStrings");
         if (i < 0) {
             // not found

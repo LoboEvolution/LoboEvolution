@@ -63,7 +63,6 @@ public class HcnoderemovechildoldchildnonexistentTest extends LoboUnitTest {
         final Node oldChild;
         final HTMLCollection elementList;
         final Node elementNode;
-        final Node removedChild;
         doc = sampleXmlFile("hc_staff.xml");
         oldChild = doc.createElement("br");
         elementList = doc.getElementsByTagName("p");

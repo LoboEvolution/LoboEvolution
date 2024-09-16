@@ -52,12 +52,9 @@ public class Nodereplacechild08Test extends LoboUnitTest {
         final Document doc2;
         final Element docElem;
         final Element elem;
-        String nodeName;
-        final Node replaced;
         final String rootNS;
         final String rootName;
         final DOMImplementation domImpl;
-        final DocumentType nullDocType = null;
 
         doc = sampleXmlFile("barfoo.xml");
         docElem = doc.getDocumentElement();

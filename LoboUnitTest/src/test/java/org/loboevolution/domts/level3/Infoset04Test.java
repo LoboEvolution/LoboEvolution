@@ -53,11 +53,9 @@ public class Infoset04Test extends LoboUnitTest {
         final Document doc;
         Element elem;
         final CDATASection newCdata;
-        CDATASection cdata;
         final Node text;
         final String nodeName;
         final String nodeValue;
-        final Node appendedChild;
         final DOMConfiguration domConfig;
         HTMLCollection pList;
         final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();

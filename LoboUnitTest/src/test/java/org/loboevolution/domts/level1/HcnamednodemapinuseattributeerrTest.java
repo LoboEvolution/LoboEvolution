@@ -63,13 +63,11 @@ public class HcnamednodemapinuseattributeerrTest extends LoboUnitTest {
         final Element testNode;
         final NamedNodeMap attributes;
         final Attr domesticAttr;
-        final Attr setAttr;
-        final Node setNode;
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("acronym");
         firstNode = (Element) elementList.item(0);
         domesticAttr = doc.createAttribute("title");
-        domesticAttr.setValue("Y\u03b1"); // Android-changed: GREEK LOWER CASE ALPHA
+        domesticAttr.setValue("Yα"); // Android-changed: GREEK LOWER CASE ALPHA
         firstNode.setAttributeNode(domesticAttr);
         elementList = doc.getElementsByTagName("acronym");
         testNode = (Element) elementList.item(2);

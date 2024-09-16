@@ -26,21 +26,22 @@
 package org.loboevolution.apache.xpath.compiler;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /** Table of strings to operation code lookups. */
 public class Keywords {
 
   /** Table of keywords to opcode associations. */
-  private static final HashMap<String, Integer> m_keywords = new HashMap<>();
+  private static final Map<String, Integer> m_keywords = new HashMap<>();
 
   /** Table of axes names to opcode associations. */
-  private static final HashMap<String, Integer> m_axisnames = new HashMap<>();
+  private static final Map<String, Integer> m_axisnames = new HashMap<>();
 
   /** Table of function name to function ID associations. */
-  private static final HashMap<String, Integer> m_nodetests = new HashMap<>();
+  private static final Map<String, Integer> m_nodetests = new HashMap<>();
 
   /** Table of node type strings to opcode associations. */
-  private static final HashMap<String, Integer> m_nodetypes = new HashMap<>();
+  private static final Map<String, Integer> m_nodetypes = new HashMap<>();
 
   /** ancestor axes string. */
   private static final String FROM_ANCESTORS_STRING = "ancestor";

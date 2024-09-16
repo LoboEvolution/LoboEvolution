@@ -47,9 +47,6 @@ public class Nodereplacechild40Test extends LoboUnitTest {
         final Document doc;
         final Element docElem;
         final String rootName;
-        final String publicId = null;
-
-        final String systemId = null;
 
         final Comment newComment;
         final DocumentType newDocType;
@@ -58,7 +55,7 @@ public class Nodereplacechild40Test extends LoboUnitTest {
         docElem = doc.getDocumentElement();
         rootName = docElem.getTagName();
         domImpl = doc.getImplementation();
-        newDocType = domImpl.createDocumentType(rootName, publicId, systemId);
+        newDocType = domImpl.createDocumentType(rootName, null, null);
         newComment = doc.createComment("second element goes here");
         doc.insertBefore(newComment, docElem);
 

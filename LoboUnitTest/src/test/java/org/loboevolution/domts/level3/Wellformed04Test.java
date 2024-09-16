@@ -54,7 +54,6 @@ public class Wellformed04Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final DOMImplementation domImpl;
-        final DocumentType nullDoctype = null;
 
         final Document doc;
         final Element docElem;
@@ -63,15 +62,14 @@ public class Wellformed04Test extends LoboUnitTest {
 
         final List<DOMError> errors;
         final boolean canSet;
-        final String nullNS = null;
 
         domImpl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(), true));
-        doc = domImpl.createDocument("http://www.w3.org/1999/xhtml", "html", nullDoctype);
+        doc = domImpl.createDocument("http://www.w3.org/1999/xhtml", "html", null);
         docElem = doc.getDocumentElement();
 
         boolean success = false;
         try {
-            doc.createAttributeNS(nullNS, "LegalNameࢎ");
+            doc.createAttributeNS(null, "LegalNameࢎ");
         } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
         }
@@ -87,7 +85,7 @@ public class Wellformed04Test extends LoboUnitTest {
             }
             throw ex;
         }
-        docElem.setAttributeNS(nullNS, "LegalName", "foo");
+        docElem.setAttributeNS(null, "LegalName", "foo");
         doc.setXmlVersion("1.0");
         domConfig = doc.getDomConfig();
         canSet = domConfig.canSetParameter("well-formed", Boolean.FALSE);

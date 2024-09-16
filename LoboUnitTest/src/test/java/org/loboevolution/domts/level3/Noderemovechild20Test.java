@@ -33,7 +33,6 @@ import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
-import org.loboevolution.html.node.Node;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -51,14 +50,11 @@ public class Noderemovechild20Test extends LoboUnitTest {
     public void runTest() {
         final Document doc;
         final HTMLCollection parentList;
-        HTMLCollection childList;
         final Element parent;
         final Element child;
         final Element clonedChild;
         final Element removed;
         final String removedName;
-        final Node appendedChild;
-        final Node removedNode;
         doc = sampleXmlFile("hc_staff.xml");
         parentList = doc.getElementsByTagName("p");
         parent = (Element) parentList.item(0);

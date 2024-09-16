@@ -54,7 +54,6 @@ public class Elementsetidattribute10Test extends LoboUnitTest {
         final Attr attr;
         boolean id;
         final Element elem;
-        String elemName;
         doc = sampleXmlFile("hc_staff.xml");
         elemList = doc.getElementsByTagName("acronym");
         acronymElem = (Element) elemList.item(2);

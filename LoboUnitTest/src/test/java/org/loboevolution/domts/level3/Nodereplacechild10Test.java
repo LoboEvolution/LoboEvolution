@@ -56,7 +56,6 @@ public class Nodereplacechild10Test extends LoboUnitTest {
         final DocumentType docType1;
         final NamedNodeMap notationsMap;
         final Notation notation;
-        final Node replaced;
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
         entitiesMap = docType.getEntities();

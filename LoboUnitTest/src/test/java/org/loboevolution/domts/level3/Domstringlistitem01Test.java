@@ -50,9 +50,7 @@ public class Domstringlistitem01Test extends LoboUnitTest {
         final Document doc;
         final DOMStringList paramList;
         final DOMConfiguration domConfig;
-        boolean contains;
         int length;
-        int index;
         String parameter;
         doc = sampleXmlFile("hc_staff.xml");
         domConfig = doc.getDomConfig();

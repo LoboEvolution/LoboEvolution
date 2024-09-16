@@ -62,7 +62,6 @@ public class HctextsplittextoneTest extends LoboUnitTest {
         final HTMLCollection elementList;
         final Node nameNode;
         final Text textNode;
-        final Text splitNode;
         final Node secondPart;
         final String value;
         doc = sampleXmlFile("hc_staff.xml");

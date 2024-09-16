@@ -31,9 +31,10 @@ import org.htmlunit.cssparser.dom.DOMException;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.DocumentType;
-import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.Text;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -56,11 +57,7 @@ public class Documentrenamenode10Test extends LoboUnitTest {
         final Document doc;
         final String textEntry = "hello";
         final Text textNode;
-        Node renamedNode;
-        String qualifiedName;
-        final DocumentType nullDocType = null;
-
-        final java.util.List qualifiedNames = new java.util.ArrayList();
+        List<String> qualifiedNames = new ArrayList<>();
         qualifiedNames.add("_:");
         qualifiedNames.add(":0");
         qualifiedNames.add(":");
@@ -70,18 +67,14 @@ public class Documentrenamenode10Test extends LoboUnitTest {
 
         doc = sampleXmlFile("hc_staff.xml");
         textNode = doc.createTextNode(textEntry);
-        for (final Object name : qualifiedNames) {
-            qualifiedName = (String) name;
-
-            {
-                boolean success = false;
-                try {
-                    doc.renameNode(textNode, "http://www.w3.org/XML/1998/namespace", qualifiedName);
-                } catch (final DOMException ex) {
-                    success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
-                }
-                assertTrue(success, "Documentrenamenode10Assert2");
+        for (final String qualifiedName : qualifiedNames) {
+            boolean success = false;
+            try {
+                doc.renameNode(textNode, "http://www.w3.org/XML/1998/namespace", qualifiedName);
+            } catch (final DOMException ex) {
+                success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
             }
+            assertTrue(success, "Documentrenamenode10Assert2");
         }
     }
 }

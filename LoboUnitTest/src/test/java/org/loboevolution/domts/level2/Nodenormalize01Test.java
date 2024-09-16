@@ -57,7 +57,6 @@ public class Nodenormalize01Test extends LoboUnitTest {
         final Document doc;
         final Document newDoc;
         final DOMImplementation domImpl;
-        final DocumentType docTypeNull = null;
 
         final Element documentElement;
         final Element element1;
@@ -78,7 +77,7 @@ public class Nodenormalize01Test extends LoboUnitTest {
         doc = sampleXmlFile("staffNS.xml");
 
         domImpl = doc.getImplementation();
-        newDoc = domImpl.createDocument("http://www.w3.org/DOM/Test", "dom:root", docTypeNull);
+        newDoc = domImpl.createDocument("http://www.w3.org/DOM/Test", "dom:root", null);
         element1 = newDoc.createElement("element1");
         element2 = newDoc.createElement("element2");
         element3 = newDoc.createElement("element3");

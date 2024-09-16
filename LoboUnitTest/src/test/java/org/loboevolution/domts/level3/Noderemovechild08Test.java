@@ -31,7 +31,6 @@ import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Comment;
 import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.Node;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -49,7 +48,6 @@ public class Noderemovechild08Test extends LoboUnitTest {
         final Comment comment;
         final Comment removedCmt;
         final String data;
-        final Node appendedChild;
         doc = sampleXmlFile("hc_staff.xml");
         comment = doc.createComment("Comment");
         doc.appendChild(comment);

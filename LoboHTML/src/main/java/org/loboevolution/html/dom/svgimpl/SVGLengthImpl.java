@@ -204,9 +204,7 @@ public class SVGLengthImpl implements SVGLength {
 
 		float inchValue = this.valueInSpecifiedUnits;
 		switch (this.unitType) {
-		case SVGLength.SVG_LENGTHTYPE_IN:
-			break;
-		case SVGLength.SVG_LENGTHTYPE_CM:
+            case SVGLength.SVG_LENGTHTYPE_CM:
 			inchValue = this.valueInSpecifiedUnits / 2.54f;
 			break;
 		case SVGLength.SVG_LENGTHTYPE_MM:
@@ -229,10 +227,7 @@ public class SVGLengthImpl implements SVGLength {
 		}
 
 		switch (unitType) {
-		case SVGLength.SVG_LENGTHTYPE_IN:
-			this.valueInSpecifiedUnits = inchValue;
-			break;
-		case SVGLength.SVG_LENGTHTYPE_MM:
+            case SVGLength.SVG_LENGTHTYPE_MM:
 			this.valueInSpecifiedUnits = inchValue * 25.40013f;
 			break;
 		case SVGLength.SVG_LENGTHTYPE_CM:

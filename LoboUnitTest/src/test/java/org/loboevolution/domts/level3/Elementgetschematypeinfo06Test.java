@@ -54,7 +54,6 @@ public class Elementgetschematypeinfo06Test extends LoboUnitTest {
         final String typeName;
         final String typeNamespace;
         final HTMLCollection elemList;
-        String docElemNodeName;
         doc = sampleXmlFile("hc_staff.xml");
         elemList = doc.getElementsByTagName("strong");
         strongElem = (Element) elemList.item(1);

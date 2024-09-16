@@ -55,10 +55,12 @@ public class Autocomplete {
 	public static void setupAutoComplete(final JTextField txtInput, final List<String> items) {
 		final DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
 		final JComboBox<String> cbInput = new JComboBox<>(model) {
-            @Serial
+
+			@Serial
 			private static final long serialVersionUID = 1L;
 
-            public Dimension getPreferredSize() {
+			@Override
+			public Dimension getPreferredSize() {
                 return new Dimension(super.getPreferredSize().width, 0);
             }
         };

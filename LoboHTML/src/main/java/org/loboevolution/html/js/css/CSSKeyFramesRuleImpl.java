@@ -34,7 +34,7 @@ import org.loboevolution.css.CSSRuleList;
  */
 public class CSSKeyFramesRuleImpl extends AbstractCSSStyleRule {
 
-    private CSSRuleListImpl cssStyleRules;
+    private final CSSRuleListImpl cssStyleRules;
     private final org.htmlunit.cssparser.dom.AbstractCSSRuleImpl abstractCSSRule;
 
     public CSSKeyFramesRuleImpl(CSSRuleListImpl cssStyleRules, AbstractCSSRuleImpl abstractCSSRule) {

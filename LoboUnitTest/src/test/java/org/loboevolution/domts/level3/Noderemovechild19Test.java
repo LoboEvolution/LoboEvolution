@@ -56,7 +56,6 @@ public class Noderemovechild19Test extends LoboUnitTest {
         final EntityReference child;
         final EntityReference removed;
         final String removedName;
-        Node removedNode;
         final Node entRefChild;
         doc = sampleXmlFile("hc_staff.xml");
         parentList = doc.getElementsByTagName("acronym");

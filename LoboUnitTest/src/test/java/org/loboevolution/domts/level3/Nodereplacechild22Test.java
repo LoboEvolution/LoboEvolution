@@ -33,7 +33,6 @@ import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.EntityReference;
-import org.loboevolution.html.node.Node;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -51,8 +50,6 @@ public class Nodereplacechild22Test extends LoboUnitTest {
         final EntityReference entRefMain;
         final EntityReference entRef;
         final Element elem;
-        final Node appendedChild;
-        Node replacedChild;
         doc = sampleXmlFile("hc_staff.xml");
         elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "dom3:p");
         entRefMain = doc.createEntityReference("delta");

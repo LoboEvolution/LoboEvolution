@@ -64,12 +64,10 @@ public class Nodegetnamespaceuri03Test extends LoboUnitTest {
         final String elemNSURINull;
         final String attrNSURI;
         final String attrNSURINull;
-        final String nullNS = null;
-
         doc = sampleXmlFile("staff.xml");
-        element = doc.createElementNS(nullNS, "elem");
+        element = doc.createElementNS(null, "elem");
         elementNS = doc.createElementNS("http://www.w3.org/DOM/Test/elem", "qual:qelem");
-        attr = doc.createAttributeNS(nullNS, "attr");
+        attr = doc.createAttributeNS(null, "attr");
         attrNS = doc.createAttributeNS("http://www.w3.org/DOM/Test/attr", "qual:qattr");
         elemNSURI = elementNS.getNamespaceURI();
         elemNSURINull = element.getNamespaceURI();

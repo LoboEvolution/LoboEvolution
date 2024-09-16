@@ -71,10 +71,10 @@ public class WritableLineReader extends LineNumberReader {
 	@Override
 	public int read() throws IOException {
 		final StringBuilder sb = this.writeBuffer;
-		if (sb != null && sb.length() > 0) {
+		if (sb != null && !sb.isEmpty()) {
 			final char ch = sb.charAt(0);
 			sb.deleteCharAt(0);
-			if (sb.length() == 0) {
+			if (sb.isEmpty()) {
 				this.writeBuffer = null;
 			}
 			return ch;
@@ -86,11 +86,11 @@ public class WritableLineReader extends LineNumberReader {
 	@Override
 	public int read(final char[] b, final int off, final int len) throws IOException {
 		final StringBuilder sb = this.writeBuffer;
-		if (sb != null && sb.length() > 0) {
+		if (sb != null && !sb.isEmpty()) {
 			final int srcEnd = Math.min(sb.length(), len);
 			sb.getChars(0, srcEnd, b, off);
 			sb.delete(0, srcEnd);
-			if (sb.length() == 0) {
+			if (sb.isEmpty()) {
 				this.writeBuffer = null;
 			}
 			return srcEnd;
@@ -102,7 +102,7 @@ public class WritableLineReader extends LineNumberReader {
 	@Override
 	public boolean ready() throws IOException {
 		final StringBuilder sb = this.writeBuffer;
-		if (sb != null && sb.length() > 0) {
+		if (sb != null && !sb.isEmpty()) {
 			return true;
 		}
 		return super.ready();

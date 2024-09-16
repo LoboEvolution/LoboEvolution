@@ -32,7 +32,6 @@ import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.EntityReference;
-import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.Text;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -51,7 +50,6 @@ public class Noderemovechild13Test extends LoboUnitTest {
         final Document doc;
         final Text txt;
         final EntityReference eRef;
-        final Node removed;
         doc = sampleXmlFile("hc_staff.xml");
         eRef = doc.createEntityReference("alpha");
         txt = (Text) eRef.getFirstChild();

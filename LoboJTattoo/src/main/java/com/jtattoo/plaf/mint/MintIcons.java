@@ -80,7 +80,7 @@ public class MintIcons extends BaseIcons {
 
 		@Override
 		public void paintIcon(final Component c, final Graphics g, final int iconX, final int y) {
-final int x = iconX;
+
 			final int w = c.getWidth();
 			final int h = c.getHeight();
 

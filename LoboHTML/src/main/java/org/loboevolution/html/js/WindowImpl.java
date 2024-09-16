@@ -73,7 +73,6 @@ import javax.swing.Timer;
 import java.awt.event.ActionListener;
 import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
-import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;

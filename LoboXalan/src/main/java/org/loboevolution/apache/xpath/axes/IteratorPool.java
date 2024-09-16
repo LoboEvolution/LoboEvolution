@@ -26,6 +26,8 @@
 package org.loboevolution.apache.xpath.axes;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import org.loboevolution.apache.xml.dtm.DTMIterator;
 import org.loboevolution.apache.xml.utils.WrappedRuntimeException;
 
@@ -36,7 +38,7 @@ public final class IteratorPool {
   private final DTMIterator m_orig;
 
   /** Stack of given objects this points to. */
-  private final ArrayList<DTMIterator> m_freeStack;
+  private final List<DTMIterator> m_freeStack;
 
   /**
    * Constructor IteratorPool

@@ -63,7 +63,6 @@ public class NodeappendchildchildexistsTest extends LoboUnitTest {
         final Node fchild;
         final String lchildName;
         final String fchildName;
-        final Node appendedChild;
         final String initialName;
         doc = sampleXmlFile("staff.xml");
         elementList = doc.getElementsByTagName("employee");

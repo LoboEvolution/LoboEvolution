@@ -65,7 +65,6 @@ public class NamednodemapremovenameditemTest extends LoboUnitTest {
         final NamedNodeMap attributes;
         final Attr streetAttr;
         final boolean specified;
-        final Node removedNode;
         doc = sampleXmlFile("staff.xml");
         elementList = doc.getElementsByTagName("address");
         testAddress = (Element) elementList.item(2);

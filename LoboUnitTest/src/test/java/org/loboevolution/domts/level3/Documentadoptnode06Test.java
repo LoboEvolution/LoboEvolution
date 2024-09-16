@@ -64,7 +64,6 @@ public class Documentadoptnode06Test extends LoboUnitTest {
         final boolean isSpecified;
         final String adoptedTextNodeValue;
         final String adoptedEntRefNodeValue;
-        Node appendedChild;
         final Element docElem;
         final String rootNS;
         final String rootName;

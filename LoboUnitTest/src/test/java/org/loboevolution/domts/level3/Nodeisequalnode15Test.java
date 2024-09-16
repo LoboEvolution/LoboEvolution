@@ -53,13 +53,11 @@ public class Nodeisequalnode15Test extends LoboUnitTest {
         final Element addrElement;
         final HTMLCollection elementList;
         final boolean isEqual;
-        final String nullNS = null;
-
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("acronym");
         addrElement = (Element) elementList.item(3);
-        attr1 = addrElement.getAttributeNodeNS(nullNS, "title");
-        attr2 = doc.createAttributeNS(nullNS, "title");
+        attr1 = addrElement.getAttributeNodeNS(null, "title");
+        attr2 = doc.createAttributeNS(null, "title");
         attr2.setValue("Yes");
         isEqual = attr1.isEqualNode(attr2);
         assertTrue(isEqual, "Nodeisequalnode15Assert2");

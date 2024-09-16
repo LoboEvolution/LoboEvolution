@@ -51,15 +51,13 @@ public class Nodeinsertbefore05Test extends LoboUnitTest {
         final DocumentType docType;
         final DOMImplementation domImpl;
         final DocumentType newDocType;
-        final String nullPubId = null;
-        final String nullSysId = null;
 
         final String rootName;
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
         rootName = docType.getName();
         domImpl = doc.getImplementation();
-        newDocType = domImpl.createDocumentType(rootName, nullPubId, nullSysId);
+        newDocType = domImpl.createDocumentType(rootName, null, null);
 
         try {
             doc.insertBefore(newDocType, docType);

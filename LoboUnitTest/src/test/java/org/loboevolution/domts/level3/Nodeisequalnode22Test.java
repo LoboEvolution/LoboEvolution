@@ -52,9 +52,6 @@ public class Nodeisequalnode22Test extends LoboUnitTest {
         final DocumentType docType1;
         final DocumentType docType2;
         final boolean isEqual;
-        final String nullPubId = null;
-
-        final String nullSysId = null;
 
         final DocumentType oldDocType;
         final String rootName;
@@ -64,8 +61,8 @@ public class Nodeisequalnode22Test extends LoboUnitTest {
         doc2 = sampleXmlFile("barfoo.xml");
         domImpl1 = doc1.getImplementation();
         domImpl2 = doc2.getImplementation();
-        docType1 = domImpl1.createDocumentType(rootName, nullPubId, nullSysId);
-        docType2 = domImpl2.createDocumentType(rootName, nullPubId, nullSysId);
+        docType1 = domImpl1.createDocumentType(rootName, null, null);
+        docType2 = domImpl2.createDocumentType(rootName, null, null);
         isEqual = docType1.isEqualNode(docType2);
         assertTrue(isEqual, "Nodeisequalnode22Assert2");
     }

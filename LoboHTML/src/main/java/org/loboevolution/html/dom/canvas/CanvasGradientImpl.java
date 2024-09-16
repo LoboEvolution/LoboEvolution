@@ -42,22 +42,22 @@ import java.util.List;
 public class CanvasGradientImpl implements CanvasGradient {
 
 	/** The fractions. */
-	private List<Float> fractions;
+	private final List<Float> fractions;
 
 	/** The colors. */
-	private List<Color> colors;
+	private final List<Color> colors;
 
 	/** The linear x. */
-	private Double linearX;
+	private final Double linearX;
 
 	/** The linear x1. */
-	private Double linearX1;
+	private final Double linearX1;
 
 	/** The linear y. */
-	private Double linearY;
+	private final Double linearY;
 
 	/** The linear y1. */
-	private Double linearY1;
+	private final Double linearY1;
 
 	/** The r1. */
 	private Double r1;
