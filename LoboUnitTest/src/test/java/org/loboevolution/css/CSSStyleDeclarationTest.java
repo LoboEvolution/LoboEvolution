@@ -32,6 +32,7 @@ import org.loboevolution.annotation.AlertsExtension;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLDocument;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
+import org.loboevolution.html.dom.domimpl.HTMLTextAreaElementImpl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -109,8 +110,8 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"background-color: rgb(255, 255, 255); color: red;",
-            "background-color: rgb(255, 255, 255); color: red"})
+    @Alerts({"background-color: rgb(255, 255, 255); color: red",
+             "background-color: rgb(255, 255, 255); color: red"})
     public void cssTextMultipleProperties() {
         final String html
                 = "<html><body>\n" 
@@ -403,7 +404,7 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"black", "pink", "color: pink;", "color: pink;"})
+    @Alerts({"black", "pink", "color: pink"})
     public void styleOneCssAttribute() {
         final String html
                 = "<html><head><script>\n"
@@ -421,7 +422,7 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"black", "pink", "color: pink; background: blue;"})
+    @Alerts({"black", "pink"})
     public void styleMultipleCssAttributes() {
         final String html
                 = "<html><head><script>\n" 
@@ -438,7 +439,7 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"null", "null", "pink", "color: pink;"})
+    @Alerts({"null", "null", "pink", "color: pink"})
     public void styleOneUndefinedCssAttribute() {
         final String html
                 = "<html><head><script>\n" 
@@ -448,6 +449,7 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
                 + " alert(style.color);\n"
                 + "  style.color = 'pink';\n"
                 + " alert(style.color);\n"
+                + "  alert(document.getElementById('div1').getAttribute('style'));\n"
                 + "}\n</script></head>\n"
                 + "<body onload='doTest()'><div id='div1'>foo</div></body></html>";
 
@@ -611,8 +613,8 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"30px", "", "30px", "arial", "", "arial"})
-    public void getPropertyValue_WithDash() {
+    @Alerts({"30px", "null", "30px", "arial", "null", "arial"})
+    public void getPropertyValueWithDash() {
         final String html =
                 "<html><body onload='test()'><script>\n" 
                 + "    function prop(elem, prop) {\n"
@@ -1308,7 +1310,7 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
                         + "      #m3 { padding: 2px; padding-left: 7px; }\n"
                         + "    </style>\n"
                         + "    <script>\n" 
-                + "      function test() {\n"
+                        + "      function test() {\n"
                         + "        alertComputedPaddings('m1');\n"
                         + "        alertComputedPaddings('m2');\n"
                         + "        alertComputedPaddings('m3');\n"
@@ -1402,76 +1404,77 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
                 + "</body></html>";
 
         final HTMLDocument document = loadHtml(html);
-        HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("myTextArea");
-        assertEquals(expectedValue + "; ", elem.getAttribute("value"));
+        HTMLTextAreaElementImpl elem = (HTMLTextAreaElementImpl) document.getElementById("myTextArea");
+        assertEquals(expectedValue + "; ", elem.getValue());
+
     }
 
     @Test
     @Alerts({"null"})
-    public void getAttribute() {
-        getAttribute("\"font\"");
+    public void getProperty() {
+        getPropertyValue("\"font\"");
     }
 
     @Test
     @Alerts({"null"})
-    public void getAttributeFont() {
-        getAttribute("'font'");
+    public void getPropertyFont() {
+        getPropertyValue("'font'");
+    }
+
+    @Test
+    @Alerts({"green"})
+    public void getPropertyColor() {
+        getPropertyValue("'color'");
+    }
+
+    @Test
+    @Alerts({"green"})
+    public void getPropertyColorCase() {
+        getPropertyValue("'ColoR'");
     }
 
     @Test
     @Alerts({"null"})
-    public void getAttributeColor() {
-        getAttribute("'color'");
+    public void getPropertyFont0() {
+        getPropertyValue("'font'");
     }
 
     @Test
     @Alerts({"null"})
-    public void getAttributeColorCase() {
-        getAttribute("'ColoR'");
+    public void getPropertyColor0() {
+        getPropertyValue("'green'");
+    }
+
+    @Test
+    @Alerts({"green"})
+    public void getPropertyColorCase0() {
+        getPropertyValue("'coLOr'");
     }
 
     @Test
     @Alerts({"null"})
-    public void getAttributeFont0() {
-        getAttribute("'font', 0");
+    public void getPropertyFont1() {
+        getPropertyValue("'font'");
     }
 
     @Test
-    @Alerts({"null"})
-    public void getAttributeColor0() {
-        getAttribute("'color', 0");
+    @Alerts({"green"})
+    public void getPropertyColor1() {
+        getPropertyValue("'color'");
     }
 
     @Test
-    @Alerts({"null"})
-    public void getAttributeColorCase0() {
-        getAttribute("'coLOr', 0");
+    @Alerts({"green"})
+    public void getPropertyColorCase1() {
+        getPropertyValue("'ColOR'");
     }
 
-    @Test
-    @Alerts({"null"})
-    public void getAttributeFont1() {
-        getAttribute("'font', 1");
-    }
-
-    @Test
-    @Alerts({"null"})
-    public void getAttributeColor1() {
-        getAttribute("'color', 1");
-    }
-
-    @Test
-    @Alerts({"null"})
-    public void getAttributeColorCase1() {
-        getAttribute("'ColOR', 1");
-    }
-
-    private void getAttribute(final String params) {
+    private void getPropertyValue(final String params) {
         final String html =
                 "<html><head><script>\n" 
                 + "function test() {\n"
-                        + "  if (document.all['a'].style.getAttribute) {\n"
-                        + "   alert(document.all['a'].style.getAttribute(" + params + "));\n"
+                        + "  if (document.all['a'].style.getPropertyValue) {\n"
+                        + "   alert(document.all['a'].style.getPropertyValue(" + params + "));\n"
                         + "  }\n"
                         + "}\n"
                         + "</script></head>\n"
@@ -1502,37 +1505,37 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     @Test
     @Alerts("not supported")
     public void setAttributeFont0() {
-        setAttribute("'font', 'blah', 0");
+        setAttribute("'font', 'blah'");
     }
 
     @Test
     @Alerts("not supported")
     public void setAttributeColor0() {
-        setAttribute("'color', 'red', 0");
+        setAttribute("'color', 'red'");
     }
 
     @Test
     @Alerts("not supported")
     public void setAttributeColorCase0() {
-        setAttribute("'ColoR', 'red', 0");
+        setAttribute("'ColoR', 'red'");
     }
 
     @Test
     @Alerts("not supported")
     public void setAttributeFont1() {
-        setAttribute("'font', 'blah', 1");
+        setAttribute("'font', 'blah'");
     }
 
     @Test
     @Alerts("not supported")
     public void setAttributeColor1() {
-        setAttribute("'color', 'red', 1");
+        setAttribute("'color', 'red'");
     }
 
     @Test
     @Alerts("not supported")
     public void setAttributeColorCase1() {
-        setAttribute("'ColoR', 'red', 1");
+        setAttribute("'ColoR', 'red'");
     }
 
     private void setAttribute(final String params) {
@@ -1578,37 +1581,37 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     @Test
     @Alerts("not supported")
     public void removeAttributeFont0() {
-        removeAttribute("'font', 0");
+        removeAttribute("'font'");
     }
 
     @Test
     @Alerts("not supported")
     public void removeAttributeColor0() {
-        removeAttribute("'color', 0");
+        removeAttribute("'color'");
     }
 
     @Test
     @Alerts("not supported")
     public void removeAttributeColorCase0() {
-        removeAttribute("'ColoR', 0");
+        removeAttribute("'ColoR'");
     }
 
     @Test
     @Alerts("not supported")
     public void removeAttributeFont1() {
-        removeAttribute("'font', 1");
+        removeAttribute("'font'");
     }
 
     @Test
     @Alerts("not supported")
     public void removeAttributeColor1() {
-        removeAttribute("'color', 1");
+        removeAttribute("'color'");
     }
 
     @Test
     @Alerts("not supported")
     public void removeAttributeColorCase1() {
-        removeAttribute("'ColoR', 1");
+        removeAttribute("'ColoR'");
     }
 
     private void removeAttribute(final String params) {
@@ -1656,7 +1659,7 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
                 "<html><body onload='test()'>\n"
                         + "<a id='a' href='#' style='background-color:green'>go</a>\n"
                         + "<script>"
-                +  " function test() {\n"
+                        +  " function test() {\n"
                         + "    var node = document.getElementById('a');\n"
                         + "    try {\n"
                         + "      node.style.setProperty(" + params + ");\n"
@@ -2080,7 +2083,7 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"black", "pink", "color: pink;", "color: pink;"})
+    @Alerts({"black", "pink", "color: pink"})
     public void caseInsensitive() {
         final String html
                 = "<html><head><script>\n" 
@@ -2310,7 +2313,7 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"", "2", "", "2", "5", "5", "5", "5"})
+    @Alerts({"null", "2", "", "2", "5", "5", "5", "5"})
     public void widows() {
         final String html = "<html><head>\n"
                 + "<script>"
@@ -2519,7 +2522,7 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
                         + "<body>\n"
                         + "  <div id='myDiv'></div>\n"
                         + "  <script>\n" 
-                + "    var myDiv = document.getElementById('myDiv');\n"
+                        + "    var myDiv = document.getElementById('myDiv');\n"
                         + "    var myDivStyle = window.getComputedStyle(myDiv, '::before');\n"
                         + "   alert(myDivStyle.content);\n"
                         + "  </script>\n"

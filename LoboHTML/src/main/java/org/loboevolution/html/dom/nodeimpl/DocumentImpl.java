@@ -49,6 +49,7 @@ import org.loboevolution.html.js.WindowImpl;
 import org.loboevolution.html.js.events.EventFactory;
 import org.loboevolution.html.node.*;
 import org.loboevolution.events.Event;
+import org.loboevolution.html.node.ranges.Range;
 import org.loboevolution.js.Location;
 import org.loboevolution.js.Window;
 import org.loboevolution.traversal.NodeFilter;
@@ -355,7 +356,6 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
 	 */
 	@Override
 	public DocumentType getDoctype() {
-
         return (DocumentType) nodeList.
                 stream().
                 filter(node -> node.getNodeType() == Node.DOCUMENT_TYPE_NODE).
@@ -651,22 +651,6 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
 
 	/** {@inheritDoc} */
 	@Override
-	public String getAlinkColor() {
-		final HTMLElement elem = getBody();
-		final HTMLBodyElement body = (HTMLBodyElement) elem;
-		return body.getALink();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setAlinkColor(final String alinkColor) {
-		final HTMLElement elem = getBody();
-		final HTMLBodyElement body = (HTMLBodyElement) elem;
-		body.setALink(alinkColor);
-	}
-
-	/** {@inheritDoc} */
-	@Override
 	public String getBgColor() {
 		final HTMLElement elem = getBody();
 		final HTMLBodyElement body = (HTMLBodyElement) elem;
@@ -698,7 +682,30 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
 	/** {@inheritDoc} */
 	@Override
 	public String getCompatMode() {
-		return (getDoctype() != null && getDoctype().getName() != null) ? CSSValues.CSS1COMPAT.getValue() : CSSValues.BACKCOMPAT.getValue();
+		final DocumentType docType = getDoctype();
+		if (docType != null) {
+			final String systemId = docType.getSystemId();
+			if (systemId != null) {
+				if ("http://www.w3.org/TR/html4/strict.dtd".equals(systemId)) {
+					return CSSValues.CSS1COMPAT.getValue();
+				}
+
+				if ("http://www.w3.org/TR/html4/loose.dtd".equals(systemId)) {
+					final String publicId = docType.getPublicId();
+					if ("-//W3C//DTD HTML 4.01 Transitional//EN".equals(publicId)) {
+						return CSSValues.CSS1COMPAT.getValue();
+					}
+				}
+
+				if ("http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd".equals(systemId)
+						|| "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd".equals(systemId)) {
+					return CSSValues.CSS1COMPAT.getValue();
+				}
+			} else if (docType.getPublicId() == null) {
+				return docType.getName() == null ? CSSValues.BACKCOMPAT.getValue() : CSSValues.CSS1COMPAT.getValue();
+			}
+		}
+		return CSSValues.BACKCOMPAT.getValue();
 	}
 
 	/** {@inheritDoc} */
@@ -1045,8 +1052,7 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
 	/** {@inheritDoc} */
 	@Override
 	public Range createRange() {
-		// TODO Auto-generated method stub
-		return null;
+		return new RangeImpl(this);
 	}
 
 	@Override

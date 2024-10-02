@@ -384,5 +384,6 @@ public interface Node extends EventTarget {
 	boolean hasAttributes();
 
 	boolean isSupported(String feature, String version);
+
 	Node getFeature(String feature, String version);
 }

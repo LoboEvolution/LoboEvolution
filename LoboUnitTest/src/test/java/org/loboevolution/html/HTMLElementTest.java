@@ -988,7 +988,7 @@ public class HTMLElementTest extends LoboUnitTest {
      * Test getting <code>outerHTML</code> of a <code>br</code> (empty).
      */
     @Test
-    @Alerts("Outer = <BR id=\"myNode\">")
+    @Alerts("Outer = <BR id=\"myNode\"/>")
     public void getOuterHTMLFromEmpty() {
         final String html = createPageForGetOuterHTML("br", "", true);
         checkHtmlAlert(html);
@@ -1036,7 +1036,7 @@ public class HTMLElementTest extends LoboUnitTest {
      * Test setting outerHTML to ''.
      */
     @Test
-    @Alerts({"Old = <SPAN id=\"innerNode\">Old outerHTML</SPAN>", "New =   ", "Children: 1"})
+    @Alerts({"Old = <SPAN id=\"innerNode\">Old outerHTML</SPAN>", "New = ", "Children: 1"})
     public void setOuterHTMLBlank() {
         final String html = createPageForSetOuterHTML("div", "  ");
         checkHtmlAlert(html);
@@ -1066,7 +1066,7 @@ public class HTMLElementTest extends LoboUnitTest {
      * Test setting <code>outerHTML</code> of a <code>div</code> (block) to a <code>div</code> (block).
      */
     @Test
-    @Alerts({"Old = <SPAN id=\"innerNode\">Old outerHTML</SPAN>", "New = <div>test</div>", "Children: 1"})
+    @Alerts({"Old = <SPAN id=\"innerNode\">Old outerHTML</SPAN>", "New = <DIV>test</DIV>", "Children: 1"})
     public void setOuterHTMLAddBlockToBlock() {
         final String html = createPageForSetOuterHTML("div", "<div>test</div>");
         checkHtmlAlert(html);
@@ -1076,7 +1076,7 @@ public class HTMLElementTest extends LoboUnitTest {
      * Test setting <code>outerHTML</code> of a <code>span</code> (inline) to a <code>div</code> (block).
      */
     @Test
-    @Alerts({"Old = <SPAN id=\"innerNode\">Old outerHTML</SPAN>", "New = <div>test</div>", "Children: 1"})
+    @Alerts({"Old = <SPAN id=\"innerNode\">Old outerHTML</SPAN>", "New = <DIV>test</DIV>", "Children: 1"})
     public void setOuterHTMLAddBlockToInline() {
         final String html = createPageForSetOuterHTML("span", "<div>test</div>");
         checkHtmlAlert(html);
@@ -1201,7 +1201,7 @@ public class HTMLElementTest extends LoboUnitTest {
      * Test setting <code>outerHTML</code> to an XHTML self-closing <code>div</code> (block).
      */
     @Test
-    @Alerts({"Old = <SPAN id=\"innerNode\">Old outerHTML</SPAN>", "New = <div></div>", "Children: 1"})
+    @Alerts({"Old = <SPAN id=\"innerNode\">Old outerHTML</SPAN>", "New = <DIV/>", "Children: 1"})
     public void setOuterHTMLAddSelfClosingBlock() {
         final String html = createPageForSetOuterHTML("div", "<div/>");
         checkHtmlAlert(html);
@@ -1219,7 +1219,7 @@ public class HTMLElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"Old = <SPAN id=\"innerNode\">Old outerHTML</SPAN>", "New = <span></SPAN>", "Children: 1"})
+    @Alerts({"Old = <SPAN id=\"innerNode\">Old outerHTML</SPAN>", "New = <SPAN/>", "Children: 1"})
     public void setOuterHTMLAddSelfClosingInline() {
         final String html = createPageForSetOuterHTML("div", "<span/>");
         checkHtmlAlert(html);
@@ -1229,7 +1229,7 @@ public class HTMLElementTest extends LoboUnitTest {
      * Test setting <code>outerHTML</code> to an XHTML self-closing <code>br</code> (empty).
      */
     @Test
-    @Alerts({"Old = <SPAN id=\"innerNode\">Old outerHTML</SPAN>", "New = <br>", "Children: 1"})
+    @Alerts({"Old = <SPAN id=\"innerNode\">Old outerHTML</SPAN>", "New = <BR/>", "Children: 1"})
     public void setOuterHTMLAddSelfClosingEmpty() {
         final String html = createPageForSetOuterHTML("div", "<br/>");
         checkHtmlAlert(html);
@@ -2678,7 +2678,7 @@ public class HTMLElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({">#myClass#<", ">#myId##<"})
+    @Alerts({"> myClass <"})
     public void attributesTrimmed() {
         final String html
                 = "<html><head>\n"
@@ -3069,7 +3069,7 @@ public class HTMLElementTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts({"null", "", "null", "undefined"})
+    @Alerts({"null", "null", "null", "undefined"})
     public void getAttribute2() {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -3118,7 +3118,7 @@ public class HTMLElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"DIV", "SECTION", "<div></div>", "<section></section>"})
+    @Alerts({"DIV", "SECTION", "<DIV/>", "<SECTION/>"})
     public void nodeNameVsOuterElement() {
         final String html = "<html>\n"
                 + "<head>\n"

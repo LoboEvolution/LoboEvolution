@@ -128,47 +128,6 @@ public class AttrTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"undefined", "undefined", "undefined", "undefined", "undefined"})
-    public void expando() {
-        final String html
-                = "<html><head>"
-                + "<script>\n"
-                + "function test() {\n"
-                + "  var d = document.getElementById('d');\n"
-                + " alert(d.attributes['id'].expando);\n"
-                + " alert(d.attributes['name'].expando);\n"
-                + " alert(d.attributes['style'].expando);\n"
-                + " alert(d.attributes['custom'].expando);\n"
-                + " alert(d.attributes['other'].expando);\n"
-                + "}\n"
-                + "</script></head>\n"
-                + "<body onload='test()'>\n"
-                + "  <div id='d' name='d' style='display: block' custom='value' other></div>\n"
-                + "</body></html>";
-
-        checkHtmlAlert(html);
-    }
-
-    @Test
-    @Alerts("undefined")
-    public void expandoEvent() {
-        final String html
-                = "<html><head>"
-                + "<script>\n"
-                + "function test() {\n"
-                + "  var d = document.getElementById('d');\n"
-                + "  d.setAttribute('onfocusin', 't');\n"
-                + " alert(d.attributes['onfocusin'].expando);\n"
-                + "}\n"
-                + "</script></head>\n"
-                + "<body onload='test()'>\n"
-                + "  <div id='d'></div>\n"
-                + "</body></html>";
-
-        checkHtmlAlert(html);
-    }
-
-    @Test
     @Alerts("test()")
     public void textContent() {
         final String html

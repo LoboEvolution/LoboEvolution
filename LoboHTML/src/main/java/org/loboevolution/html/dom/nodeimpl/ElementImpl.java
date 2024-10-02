@@ -929,16 +929,15 @@ public abstract class ElementImpl extends NodeImpl implements Element {
 		if (document != null) {
 			final XHtmlParser parser = new XHtmlParser(document.getUserAgentContext(), document, false);
 			try (final Reader reader = new StringReader(text)) {
+				parser.parse(reader, this);
 				switch (position) {
 					case "afterbegin":
-						parser.parse(reader, this);
 						final NodeListImpl list = ((NodeListImpl) this.getChildNodes());
 						final Node last  = getChildNodes().item(getChildNodes().getLength()-1);
 						list.remove(last);
 						insertBefore(last, getFirstChild());
 						break;
 					case "beforebegin":
-						parser.parse(reader, this);
 						final NodeListImpl nodeList = ((NodeListImpl) this.getChildNodes());
 						final Node nodeLast = getChildNodes().item(getChildNodes().getLength() - 1);
 						nodeList.remove(nodeLast);
@@ -953,12 +952,9 @@ public abstract class ElementImpl extends NodeImpl implements Element {
 						final NodeListImpl beforeEndList = ((NodeListImpl) this.getChildNodes());
 						final Node beforeEndLast = getChildNodes().item(getChildNodes().getLength() - 1);
 						beforeEndList.remove(beforeEndLast);
-
-						parser.parse(reader, this);
 						appendChild(beforeEndLast);
 						break;
 					case "afterend":
-						parser.parse(reader, this);
 						final NodeListImpl nodeList2 = ((NodeListImpl) this.getChildNodes());
 						final Node nodeLast2 = getChildNodes().item(getChildNodes().getLength() - 1);
 						nodeList2.remove(nodeLast2);

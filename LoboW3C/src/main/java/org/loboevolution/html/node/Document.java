@@ -29,6 +29,8 @@ package org.loboevolution.html.node;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.html.dom.*;
 import org.loboevolution.events.Event;
+import org.loboevolution.html.node.ranges.DocumentRange;
+import org.loboevolution.html.node.ranges.Range;
 import org.loboevolution.js.Location;
 import org.loboevolution.js.Window;
 import org.loboevolution.traversal.DocumentTraversal;
@@ -42,7 +44,7 @@ import org.loboevolution.type.VisibilityState;
  * Any web page loaded in the browser and serves as an entry point into the web
  * page's content, which is the DOM tree.
  */
-public interface Document extends Node, NonElementParentNode, ParentNode, DocumentTraversal {
+public interface Document extends Node, NonElementParentNode, ParentNode, DocumentTraversal, DocumentRange {
 
 	/** Constant <code>XMLNS_NAMESPACE_URI="<a href="http://www.w3.org/2000/xmlns/">...</a>"</code> */
 	String XMLNS_NAMESPACE_URI = "http://www.w3.org/2000/xmlns/";
@@ -69,22 +71,6 @@ public interface Document extends Node, NonElementParentNode, ParentNode, Docume
 	 * @return a {@link org.loboevolution.html.node.Element} object.
 	 */
 	Element getActiveElement();
-
-	/**
-	 * Sets or gets the color of all active links in the document.
-	 *
-	 * @return a {@link java.lang.String} object.
-	 */
-	@Deprecated
-	String getAlinkColor();
-
-	/**
-	 * <p>setAlinkColor.</p>
-	 *
-	 * @param alinkColor a {@link java.lang.String} object.
-	 */
-	@Deprecated
-	void setAlinkColor(String alinkColor);
 
 	/**
 	 * Returns a reference to the collection of elements contained by the object.
@@ -483,7 +469,7 @@ public interface Document extends Node, NonElementParentNode, ParentNode, Docume
 	 *
 	 * @param x a double.
 	 * @param y a double.
-	 * @return a {@link org.loboevolution.html.node.Range} object.
+	 * @return a {@link org.loboevolution.html.node.ranges.Range} object.
 	 */
 	@Deprecated
 	Range caretRangeFromPoint(double x, double y);
@@ -602,14 +588,6 @@ public interface Document extends Node, NonElementParentNode, ParentNode, Docume
 	 * @return a {@link org.loboevolution.html.node.ProcessingInstruction} object.
 	 */
 	ProcessingInstruction createProcessingInstruction(String target, String data);
-
-	/**
-	 * Returns an empty range object that has both of its boundary points positioned
-	 * at the beginning of the document.
-	 *
-	 * @return a {@link org.loboevolution.html.node.Range} object.
-	 */
-	Range createRange();
 
 	/**
 	 * Creates a text string from the specified value.

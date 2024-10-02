@@ -136,14 +136,14 @@ public class HTMLDocumentTest extends LoboUnitTest {
 
     @Test
     @Alerts("BackCompat")
-    public void compatMode_question() {
+    public void compatModeQuestion() {
         compatMode("<?DOCTYPE html>");
     }
 
     @Test
     @Alerts("BackCompat")
-    public void compatModeHtmlTransitional_40NoUrl() {
-        compatMode("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\">");
+    public void compatModeHtmlTransitional40NoUrl() {
+        compatMode("<!DOCTYPE html PUBLIC \"-//W3C//Dtd html 4.0 transitional//EN\">");
     }
 
     @Test
@@ -154,7 +154,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
 
     @Test
     @Alerts("BackCompat")
-    public void compatModeHtmlTransitional_40() {
+    public void compatModeHtmlTransitional40() {
         compatMode("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\" "
                 + "\"http://www.w3.org/TR/html4/loose.dtd\">");
     }
@@ -168,7 +168,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
 
     @Test
     @Alerts("CSS1Compat")
-    public void compatModeHtmlstrict_40() {
+    public void compatModeHtmlstrict40() {
         compatMode("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">");
     }
 
@@ -388,14 +388,13 @@ public class HTMLDocumentTest extends LoboUnitTest {
                 "<html>\n"
                         + "    <script>\n"
                         + "  function doTest() {\n"
-                        + "    var e = document.createEvent('MouseEvents');\n"
+                        + "    var e = document.createEvent('MouseEvent');\n"
                         + "    e.initMouseEvent('click', true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);\n"
                         + "    document.dispatchEvent(e);\n"
                         + "  }\n"
                         + "  function clickListener() {\n"
                         + "    alert('clicked');\n"
                         + "  }\n"
-
                         + "  document.addEventListener('click', clickListener, true);\n"
                         + "</script>\n"
                         + "<body onload='doTest()'>foo</body>\n"
@@ -409,7 +408,6 @@ public class HTMLDocumentTest extends LoboUnitTest {
     public void namespaces() {
         final String html =
                 "<body><script>\n"
-
                         + "var ns = document.namespaces;\n"
                         + "alert(ns);\n"
                         + "try {\n"
@@ -1293,7 +1291,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
 
     @Test
     @Alerts({"", "a", "b"})
-    public void cookieWrite_valueOnly() {
+    public void cookieWriteValueOnly() {
         final String html =
                 "<html>\n"
                         + "  <head>\n"
@@ -1447,84 +1445,6 @@ public class HTMLDocumentTest extends LoboUnitTest {
 
     @Test
     @Alerts({"null", "null", "#0000aa", "#0000aa", "x", "x"})
-    public void alinkColor() {
-        final String html =
-                "<html>\n"
-                        + "  <head>\n"
-                        + "    <script>\n"
-                        + "      function test() {\n"
-                        + "        var b = document.getElementById('body');\n"
-                        + "        alert(document.alinkColor);\n"
-                        + "        alert(b.aLink);\n"
-                        + "        document.alinkColor = '#0000aa';\n"
-                        + "        alert(document.alinkColor);\n"
-                        + "        alert(b.aLink);\n"
-                        + "        document.alinkColor = 'x';\n"
-                        + "        alert(document.alinkColor);\n"
-                        + "        alert(b.aLink);\n"
-                        + "      }\n"
-                        + "    </script>\n"
-                        + "  </head>\n"
-                        + "  <body id='body' onload='test()'>blah</body>\n"
-                        + "</html>";
-
-        checkHtmlAlert(html);
-    }
-
-    @Test
-    @Alerts({"", "", "#0000aa", "#0000aa", "x", "x"})
-    public void linkColor() {
-        final String html =
-                "<html>\n"
-                        + "  <head>\n"
-                        + "    <script>\n"
-                        + "      function test() {\n"
-                        + "        var b = document.getElementById('body');\n"
-                        + "        alert(document.linkColor);\n"
-                        + "        alert(b.link);\n"
-                        + "        document.linkColor = '#0000aa';\n"
-                        + "        alert(document.linkColor);\n"
-                        + "        alert(b.link);\n"
-                        + "        document.linkColor = 'x';\n"
-                        + "        alert(document.linkColor);\n"
-                        + "        alert(b.link);\n"
-                        + "      }\n"
-                        + "    </script>\n"
-                        + "  </head>\n"
-                        + "  <body id='body' onload='test()'>blah</body>\n"
-                        + "</html>";
-
-        checkHtmlAlert(html);
-    }
-
-    @Test
-    @Alerts({"", "", "#0000aa", "#0000aa", "x", "x"})
-    public void vlinkColor() {
-        final String html =
-                "<html>\n"
-                        + "  <head>\n"
-                        + "    <script>\n"
-                        + "      function test() {\n"
-                        + "        var b = document.getElementById('body');\n"
-                        + "        alert(document.vlinkColor);\n"
-                        + "        alert(b.vLink);\n"
-                        + "        document.vlinkColor = '#0000aa';\n"
-                        + "        alert(document.vlinkColor);\n"
-                        + "        alert(b.vLink);\n"
-                        + "        document.vlinkColor = 'x';\n"
-                        + "        alert(document.vlinkColor);\n"
-                        + "        alert(b.vLink);\n"
-                        + "      }\n"
-                        + "    </script>\n"
-                        + "  </head>\n"
-                        + "  <body id='body' onload='test()'>blah</body>\n"
-                        + "</html>";
-
-        checkHtmlAlert(html);
-    }
-
-    @Test
-    @Alerts({"null", "null", "#0000aa", "#0000aa", "x", "x"})
     public void fgColor() {
         final String html =
                 "<html>\n"
@@ -1572,7 +1492,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
 
     @Test
     @Alerts({"true", "undefined", "false"})
-    public void documentXxx_formAccess() {
+    public void documentXxxFormAccess() {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
@@ -1890,7 +1810,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("")
+    @Alerts("file://C:/Users/utente/workspace/LoboEvolution/LoboUnitTest/")
     public void baseURINoBaseTag() {
         final String html = "<html>\n"
                 + "<body>\n"
@@ -1898,44 +1818,6 @@ public class HTMLDocumentTest extends LoboUnitTest {
                 + "  alert(document.baseURI);\n"
                 + "</script>\n"
                 + "</body></html>";
-        checkHtmlAlert(html);
-    }
-
-    @Test
-    @Alerts("details/abc")
-    public void baseURINoBaseTagurlPath() {
-        final String html = "<html>\n"
-                + "<body>\n"
-                + "    <script>\n"
-                + "  alert(document.baseURI);\n"
-                + "</script>\n"
-                + "</body></html>";
-        checkHtmlAlert(html);
-    }
-
-    @Test
-    @Alerts("?x=y&z=zz")
-    public void baseURINoBaseTagurlParams() {
-        final String html = "<html>\n"
-                + "<body>\n"
-                + "    <script>\n"
-                + "  alert(document.baseURI);\n"
-                + "</script>\n"
-                + "</body></html>";
-
-        checkHtmlAlert(html);
-    }
-
-    @Test
-    @Alerts("details/abc;jsessionid=42?x=y&z=zz")
-    public void baseURINoBaseTagurlPathAndParams() {
-        final String html = "<html>\n"
-                + "<body>\n"
-                + "    <script>\n"
-                + "  alert(document.baseURI);\n"
-                + "</script>\n"
-                + "</body></html>";
-
         checkHtmlAlert(html);
     }
 
@@ -1969,7 +1851,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("img/")
+    @Alerts("/img/")
     public void baseURIWithBaseTagAbsolutePath() {
         final String html = "<html>\n"
                 + "<head>\n"

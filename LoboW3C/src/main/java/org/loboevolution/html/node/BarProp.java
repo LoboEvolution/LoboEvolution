@@ -28,9 +28,6 @@ package org.loboevolution.html.node;
 
 /**
  * <p>BarProp interface.</p>
- *
- *
- *
  */
 public interface BarProp {
     

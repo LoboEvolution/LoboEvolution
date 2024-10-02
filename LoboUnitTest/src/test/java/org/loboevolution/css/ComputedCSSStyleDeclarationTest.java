@@ -87,7 +87,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
                 + "  <div id='myDiv'><br>\n"
                 + "  <textarea id='myTextarea' cols='120' rows='20'></textarea>\n"
                 + "  </div>\n"
-                + "<script>\n"                + "var e = document.getElementById('myDiv');\n"
+                + "<script>\n"
+                + "var e = document.getElementById('myDiv');\n"
                 + "var array = [];\n"
                 + "try {\n"
                 + "  for (var i in e.style) {\n"
@@ -1134,15 +1135,15 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
     @Test
     @Alerts({"33", "17", "0", "17"})
     public void widthAndHeightChildDisplayNone() {
-        final String content = "<html><head><script>\n"
-
+        final String content = "<html><head>"
+                + " <script>\n"
                 + "  function test() {\n"
                 + "    var outerSpan = document.getElementById('outerSpan');\n"
-                + "   alert(outerSpan.offsetWidth);\n"
-                + "   alert(outerSpan.offsetHeight);\n" 
+                + "    alert(outerSpan.offsetWidth);\n"
+                + "    alert(outerSpan.offsetHeight);\n"
 				+ "    var outerSpanContentInvisible = document.getElementById('outerSpanContentInvisible');\n"
-                + "   alert(outerSpanContentInvisible.offsetWidth);\n"
-                + "   alert(outerSpanContentInvisible.offsetHeight);\n"
+                + "    alert(outerSpanContentInvisible.offsetWidth);\n"
+                + "    alert(outerSpanContentInvisible.offsetHeight);\n"
                 + "  }\n"
                 + "</script></head>\n"
                 + "<body onload='test()'>\n"

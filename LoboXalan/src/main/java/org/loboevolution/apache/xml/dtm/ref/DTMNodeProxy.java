@@ -36,6 +36,7 @@ import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.html.dom.*;
 import org.loboevolution.html.node.*;
 import org.loboevolution.events.Event;
+import org.loboevolution.html.node.ranges.Range;
 import org.loboevolution.js.Location;
 import org.loboevolution.js.Window;
 import org.loboevolution.js.geom.DOMRect;
@@ -551,16 +552,6 @@ public class DTMNodeProxy
     @Override
     public Element getActiveElement() {
         return null;
-    }
-
-    @Override
-    public String getAlinkColor() {
-        return null;
-    }
-
-    @Override
-    public void setAlinkColor(final String alinkColor) {
-
     }
 
     @Override

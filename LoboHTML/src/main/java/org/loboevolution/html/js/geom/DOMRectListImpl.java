@@ -31,6 +31,7 @@ import org.loboevolution.js.geom.DOMRect;
 import org.loboevolution.js.geom.DOMRectList;
 
 public class DOMRectListImpl extends AbstractList<DOMRect>  implements DOMRectList {
+
     /**
      * <p>getLength.</p>
      *

@@ -153,86 +153,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"1", "false", "-1", "div", "color: red;", "2"})
-    public void addRule() {
-        final String html = "<html>\n"
-                + "<head>\n"
-                + "<script>\n"
-                + "  function doTest() {\n"
-                + "    var f = document.getElementById('myStyle');\n"
-                + "    var s = f.sheet ? f.sheet : f.styleSheet;\n"
-                + "    var rules = s.cssRules || s.rules;\n"
-                + "   alert(rules.length);\n"
-                + "   alert(s.addRule == undefined);\n"
-                + "    if (s.addRule) {\n"
-                + "     alert(s.addRule('div', 'color: red;'));\n"
-                + "     alert(rules[rules.length - 1].selectorText);\n"
-                + "     alert(rules[rules.length - 1].style.cssText);\n"
-                + "    }\n"
-                + "   alert(rules.length);\n"
-                + "  }\n"
-                + "</script>\n"
-                + "<style id='myStyle'>p { vertical-align:top }</style>\n"
-                + "</head>\n"
-                + "<body onload='doTest()'>\n"
-                + "</body></html>";
-
-        checkHtmlAlert(html);
-    }
-
-
-    @Test
-    @Alerts({"2", "-1", "div", "", "3"})
-    public void addRuleInvalidRule() {
-        final String html = "<html>\n"
-                + "<head>\n"
-                + "<script>"
-                +  " function doTest() {\n"
-                + "    var f = document.getElementById('myStyle');\n"
-                + "    var s = f.sheet ? f.sheet : f.styleSheet;\n"
-                + "    var rules = s.cssRules || s.rules;\n"
-                + "   alert(rules.length);\n"
-                + "    if (s.addRule) {\n"
-                + "     alert(s.addRule('div', 'invalid'));\n"
-                + "     alert(rules[rules.length - 1].selectorText);\n"
-                + "     alert(rules[rules.length - 1].style.cssText);\n"
-                + "    }\n"
-                + "   alert(rules.length);\n"
-                + "  }\n"
-                + "  </script>\n"
-                + "  <style id='myStyle'>p { vertical-align: top } h1 { color: blue; }</style>\n"
-                + "</head>\n"
-                + "<body onload='doTest()'>\n"
-                + "</body></html>";
-
-        checkHtmlAlert(html);
-    }
-
-    @Test
-    @Alerts("exception")
-    public void addInvalidRule() {
-        final String html = "<html><head>\n"
-                + "<script>\n"
-                + "function doTest() {\n"
-                + "  var f = document.getElementById('myStyle');\n"
-                + "  var s = f.sheet ? f.sheet : f.styleSheet;\n"
-                + "  var rules = s.cssRules || s.rules;\n"
-                + "  try {\n"
-                + "    if (s.addRule)\n"
-                + "      s.addRule('.testStyle1;', '', 1);\n"
-                + "   alert('added');\n"
-                + "  } catch(err) {alert('exception'); }\n"
-                + "}</script>\n"
-                + "<style id='myStyle'></style>\n"
-                + "</head><body onload='doTest()'>\n"
-                + "</body></html>";
-
-        checkHtmlAlert(html);
-    }
-
-
-    @Test
-    @Alerts({"1", "false", "0", "div", "color: red;", "2"})
+    @Alerts({"1", "false", "0", "div", "color: red", "2"})
     public void insertRule() {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -296,13 +217,13 @@ public class CSSStyleSheetTest extends LoboUnitTest {
                 + "<head>\n"
                 + "<script>\n"
                 + "function doTest() {\n"
-                + "  var f = document.getElementById('myStyle');\n"
-                + "  var s = f.sheet ? f.sheet : f.styleSheet;\n"
-                + "  var rules = s.cssRules || s.rules;\n"
                 + "  try {\n"
-                + "    if (s.insertRule)\n"
-                + "      s.insertRule('.testStyle1', 0);\n"
-                + "   alert('inserted');\n"
+                + "     var f = document.getElementById('myStyle');\n"
+                + "     var s = f.sheet ? f.sheet : f.styleSheet;\n"
+                + "     var rules = s.cssRules || s.rules;\n"
+                + "         if (s.insertRule)\n"
+                + "             s.insertRule('.testStyle1', 0);\n"
+                + "     alert('inserted');\n"
                 + "  } catch(err) {alert('exception'); }\n"
                 + "}</script>\n"
                 + "<style id='myStyle'></style>\n"
@@ -346,15 +267,15 @@ public class CSSStyleSheetTest extends LoboUnitTest {
                 + "<head>\n"
                 + "<script>\n"
                 + "function doTest() {\n"
-                + "  var f = document.getElementById('myStyle');\n"
-                + "  var s = f.sheet ? f.sheet : f.styleSheet;\n"
-                + "  var rules = s.cssRules || s.rules;\n"
                 + "  try {\n"
-                + "    if (s.deleteRule)\n"
-                + "      s.deleteRule(19);\n"
-                + "    else\n"
-                + "      s.removeRule(19);\n"
-                + "   alert('deleted');\n"
+                + "     var f = document.getElementById('myStyle');\n"
+                + "     var s = f.sheet ? f.sheet : f.styleSheet;\n"
+                + "     var rules = s.cssRules || s.rules;\n"
+                + "         if (s.deleteRule)\n"
+                + "             s.deleteRule(19);\n"
+                + "         else\n"
+                + "             s.removeRule(19);\n"
+                + "     alert('deleted');\n"
                 + "  } catch(err) {alert('exception'); }\n"
                 + "}</script>\n"
                 + "<style id='myStyle'></style>\n"
@@ -366,7 +287,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts({"2", "1", "div", "color: red;"})
+    @Alerts({"2", "1", "div", "color: red"})
     public void deleteRuleIgnored() {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -435,11 +356,10 @@ public class CSSStyleSheetTest extends LoboUnitTest {
     public void insertRuleLeadingWhitespace() {
         final String html =
                 "<html><head><script>\n"
-
                         + "function doTest() {\n"
                         + "  var f = document.getElementById('myStyle');\n"
                         + "  var s = f.sheet ? f.sheet : f.styleSheet;\n"
-                        + "  var rules = s.cssRules || s.rules;\n"
+                        + "  var rules = s.rules;\n"
                         + "  if (s.insertRule) {\n"
                         + "    s.insertRule('.testStyle { width: 24px; }', 0);\n"
                         + "    s.insertRule(' .testStyleDef { height: 42px; }', 0);\n"
@@ -1411,9 +1331,9 @@ public class CSSStyleSheetTest extends LoboUnitTest {
 
         final HTMLDocument document = loadHtml(html);
         HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("anchor");
-        assertEquals("none", elem.getStyle().getDisplay());
+        assertEquals("none", elem.getComputedStyle().getDisplay());
         elem = (HTMLElementImpl) elem.querySelector("#anchor");
-        assertEquals("block", elem.getStyle().getDisplay());
+        assertEquals("block", elem.getComputedStyle().getDisplay());
     }
 
 
@@ -1433,7 +1353,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
 
         final HTMLDocument document = loadHtml(html);
         HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("di");
-        assertEquals("none", elem.getStyle().getDisplay());
+        assertEquals("none", elem.getComputedStyle().getDisplay());
     }
 
 
@@ -1453,7 +1373,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
 
         final HTMLDocument document = loadHtml(html);
         HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("di");
-        assertEquals("none", elem.getStyle().getDisplay());
+        assertEquals("none", elem.getComputedStyle().getDisplay());
     }
 
 
@@ -1473,7 +1393,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
 
         final HTMLDocument document = loadHtml(html);
         HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("di");
-        assertEquals("none", elem.getStyle().getDisplay());
+        assertEquals("none", elem.getComputedStyle().getDisplay());
     }
 
 
@@ -1493,7 +1413,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
 
         final HTMLDocument document = loadHtml(html);
         HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("di");
-        assertEquals("none", elem.getStyle().getDisplay());
+        assertEquals("none", elem.getComputedStyle().getDisplay());
     }
 
 
@@ -1513,7 +1433,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
 
         final HTMLDocument document = loadHtml(html);
         HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("di");
-        assertEquals("block", elem.getStyle().getDisplay());
+        assertEquals("block", elem.getComputedStyle().getDisplay());
     }
 
 
@@ -1533,7 +1453,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
 
         final HTMLDocument document = loadHtml(html);
         HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("di");
-        assertEquals("block", elem.getStyle().getDisplay());
+        assertEquals("block", elem.getComputedStyle().getDisplay());
     }
 
 
@@ -1553,7 +1473,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
 
         final HTMLDocument document = loadHtml(html);
         HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("di");
-        assertEquals("none", elem.getStyle().getDisplay());
+        assertEquals("none", elem.getComputedStyle().getDisplay());
     }
 
 
@@ -1573,7 +1493,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
 
         final HTMLDocument document = loadHtml(html);
         HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("di");
-        assertEquals("none", elem.getStyle().getDisplay());
+        assertEquals("none", elem.getComputedStyle().getDisplay());
     }
 
 
@@ -1593,7 +1513,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
 
         final HTMLDocument document = loadHtml(html);
         HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("di");
-        assertEquals("block", elem.getStyle().getDisplay());
+        assertEquals("block", elem.getComputedStyle().getDisplay());
     }
 
 
@@ -1613,7 +1533,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
 
         final HTMLDocument document = loadHtml(html);
         HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("di");
-        assertEquals("block", elem.getStyle().getDisplay());
+        assertEquals("block", elem.getComputedStyle().getDisplay());
     }
 
 
@@ -1633,14 +1553,14 @@ public class CSSStyleSheetTest extends LoboUnitTest {
 
         final HTMLDocument document = loadHtml(html);
         HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("di");
-        assertEquals("none", elem.getStyle().getDisplay());
+        assertEquals("none", elem.getComputedStyle().getDisplay());
     }
 
     @Test
     @Alerts("undefined")
     public void brokenExternalCSS() {
         final String html = "<html><head>\n"
-                + " <link rel='stylesheet' href='" + URL_CSS + " style1.css' type='text/css'></link>"
+                + " <link rel='stylesheet' href='" + URL_CSS + "style1.css' type='text/css'></link>"
                 + "</head>\n"
                 + "<body>\n"
                 + "<script>\n"

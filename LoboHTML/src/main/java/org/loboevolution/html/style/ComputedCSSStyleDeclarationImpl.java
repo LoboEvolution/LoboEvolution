@@ -1734,7 +1734,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      */
     @Override
     public String getzIndex() {
-        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getzIndex()) ? CSSValues.AUTO.getValue() : style.getzIndex() + "px";
+        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getzIndex()) ? CSSValues.AUTO.getValue() : style.getzIndex();
     }
 
     /**

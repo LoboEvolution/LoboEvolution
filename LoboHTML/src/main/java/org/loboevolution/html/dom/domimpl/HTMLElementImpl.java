@@ -38,7 +38,10 @@ import org.htmlunit.cssparser.parser.javacc.CSS3Parser;
 import org.loboevolution.common.Strings;
 import org.loboevolution.css.ComputedCSSStyleDeclaration;
 import org.loboevolution.html.CSSValues;
+import org.loboevolution.html.dom.HTMLBodyElement;
 import org.loboevolution.html.dom.HTMLElement;
+import org.loboevolution.html.dom.HTMLTableCellElement;
+import org.loboevolution.html.dom.HTMLTableElement;
 import org.loboevolution.html.dom.input.FormInput;
 import org.loboevolution.html.dom.nodeimpl.ElementImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
@@ -457,18 +460,41 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, GlobalE
 
 	/** {@inheritDoc} */
 	@Override
-	public Element getOffsetParent() {
-		final Node node = getParentNode();
-		if (node instanceof HTMLElement) {
-			final HTMLElementImpl element = (HTMLElementImpl) node;
-			final ComputedCSSStyleDeclaration style = this.computedStyles;
-			if (!CSSValues.STATIC.isEqual(style.getPosition())) {
-				return element;
-			}
-		}
+    public Element getOffsetParent() {
+        final Node parent = getParentNode();
+        final RenderState rs = getRenderState();
+        if (parent == null || rs == null) {
+            return null;
+        }
 
-		return null;
-	}
+        Node currentElement = this;
+
+        if (RenderState.POSITION_FIXED == rs.getPosition()) {
+            return null;
+        }
+
+        final boolean staticPos = RenderState.POSITION_STATIC == rs.getPosition();
+        while (currentElement != null) {
+            final Node parentNode = currentElement.getParentNode();
+            if (parentNode instanceof HTMLBodyElement
+                    || (staticPos && parentNode instanceof HTMLTableElement)
+                    || (staticPos && parentNode instanceof HTMLTableCellElement)) {
+                return (HTMLElementImpl) parentNode;
+            }
+
+            if (parentNode instanceof HTMLElement) {
+                final HTMLElementImpl parentElement = (HTMLElementImpl) parentNode;
+                final RenderState parentRs = parentElement.getRenderState();
+                if (parentRs != null && RenderState.POSITION_STATIC != parentRs.getPosition()) {
+                    return (HTMLElementImpl) parentNode;
+                }
+            }
+
+            currentElement = currentElement.getParentNode();
+        }
+
+        return null;
+    }
 
 	/** {@inheritDoc} */
 	@Override

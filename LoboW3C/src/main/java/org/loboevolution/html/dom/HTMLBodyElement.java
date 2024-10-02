@@ -34,20 +34,6 @@ import org.loboevolution.js.WindowEventHandlers;
  */
 public interface HTMLBodyElement extends HTMLElement, WindowEventHandlers {
 
-	/**
-	 * <p>getALink.</p>
-	 *
-	 * @return a {@link java.lang.String} object.
-	 */
-	@Deprecated
-	String getALink();
-
-	/**
-	 * <p>setALink.</p>
-	 *
-	 * @param aLink a {@link java.lang.String} object.
-	 */
-	void setALink(String aLink);
 
 	/**
 	 * <p>getBackground.</p>

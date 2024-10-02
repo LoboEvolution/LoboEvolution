@@ -32,6 +32,7 @@ import org.loboevolution.html.dom.*;
 import org.loboevolution.html.dom.nodeimpl.traversal.TreeWalkerImpl;
 import org.loboevolution.html.node.*;
 import org.loboevolution.events.Event;
+import org.loboevolution.html.node.ranges.Range;
 import org.loboevolution.js.Location;
 import org.loboevolution.js.Window;
 import org.loboevolution.traversal.NodeFilter;
@@ -679,19 +680,6 @@ public class XMLDocument implements Document {
 
 	/** {@inheritDoc} */
 	@Override
-	public String getAlinkColor() {
-
-		return doc.getAlinkColor();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setAlinkColor(final String alinkColor) {
-		doc.setAlinkColor(alinkColor);
-	}
-
-	/** {@inheritDoc} */
-	@Override
 	public HTMLAllCollection getall() {
 		return doc.getall();
 	}
@@ -996,7 +984,6 @@ public class XMLDocument implements Document {
 	/** {@inheritDoc} */
 	@Override
 	public Range caretRangeFromPoint(final double x, final double y) {
-
 		return doc.caretRangeFromPoint(x, y);
 	}
 

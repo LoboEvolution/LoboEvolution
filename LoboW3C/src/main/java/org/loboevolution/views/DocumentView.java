@@ -28,9 +28,6 @@ package org.loboevolution.views;
 
 /**
  * <p>DocumentView interface.</p>
- *
- *
- *
  */
 public interface DocumentView {
 	

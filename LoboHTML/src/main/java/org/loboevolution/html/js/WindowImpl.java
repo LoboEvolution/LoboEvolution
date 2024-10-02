@@ -39,6 +39,7 @@ import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.domimpl.*;
 import org.loboevolution.html.dom.filter.BodyFilter;
 import org.loboevolution.html.dom.nodeimpl.*;
+import org.loboevolution.html.dom.nodeimpl.RangeImpl;
 import org.loboevolution.html.dom.nodeimpl.traversal.NodeFilterImpl;
 import org.loboevolution.html.dom.xpath.XPathResultImpl;
 import org.loboevolution.html.js.css.MediaQueryListImpl;
@@ -1119,8 +1120,7 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 	/** {@inheritDoc} */
 	@Override
 	public Selection getSelection() {
-		// TODO Auto-generated method stub
-		return null;
+		return new SelectionImpl();
 	}
 
 	/** {@inheritDoc} */
@@ -1230,7 +1230,6 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 		js.defineJsObject(ws, "Event", EventImpl.class, EventImpl::new);
 		js.defineJsObject(ws, "Text", TextImpl.class, TextImpl::new);
 
-
 		js.defineElementClass(ws, doc, "Comment", "comment", CommentImpl.class);
 		js.defineElementClass(ws, doc, "Image", "img", HTMLImageElementImpl.class);
 		js.defineElementClass(ws, doc, "Script", "script", HTMLScriptElementImpl.class);
@@ -1245,6 +1244,7 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 
 		js.defineElementClass(ws, doc, "NodeFilter", "NodeFilter", NodeFilterImpl.class);
 		js.defineElementClass(ws, doc, "Node", "Node", NodeImpl.class);
+		js.defineElementClass(ws, doc, "Range", "Range", RangeImpl.class);
 
 	}
 

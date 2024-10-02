@@ -26,13 +26,12 @@
 
 package org.loboevolution.html.node;
 
+import org.loboevolution.html.node.ranges.Range;
+
 /**
- * A Selection object represents the range of text selected by the user or the
+ * A Selection object presents the range of text selected by the user or the
  * current position of the caret. To obtain a Selection object for examination
- * or modification, call Window.getSelection().
- *
- *
- *
+ * or modification, call Window.getSelection().
  */
 public interface Selection {
 
@@ -88,7 +87,7 @@ public interface Selection {
 	/**
 	 * <p>addRange.</p>
 	 *
-	 * @param range a {@link org.loboevolution.html.node.Range} object.
+	 * @param range a {@link org.loboevolution.html.node.ranges.Range} object.
 	 */
 	void addRange(Range range);
 
@@ -163,7 +162,7 @@ public interface Selection {
 	 * <p>getRangeAt.</p>
 	 *
 	 * @param index a {@link java.lang.Integer} object.
-	 * @return a {@link org.loboevolution.html.node.Range} object.
+	 * @return a {@link org.loboevolution.html.node.ranges.Range} object.
 	 */
 	Range getRangeAt(int index);
 
@@ -175,7 +174,7 @@ public interface Selection {
 	/**
 	 * <p>removeRange.</p>
 	 *
-	 * @param range a {@link org.loboevolution.html.node.Range} object.
+	 * @param range a {@link org.loboevolution.html.node.ranges.Range} object.
 	 */
 	void removeRange(Range range);
 

@@ -211,7 +211,7 @@ public class Document2Test extends LoboUnitTest {
                 + "function test() {\n"
                 + "  if (!document.evaluate) {alert('evaluate not available'); return; }\n"
                 + "  var xmlhttp = new XMLHttpRequest();\n"
-                +  " hmlhttp.open('GET', '" + URL_HTML + "content.xhtml" + "', true);\n"
+                +  " xmlhttp.open('GET', '" + URL_HTML + "content.xhtml" + "', true);\n"
                 + "  xmlhttp.send();\n"
                 + "  xmlhttp.onreadystatechange = function() {\n"
                 + "    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {\n"

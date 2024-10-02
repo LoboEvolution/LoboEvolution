@@ -74,12 +74,6 @@ public class HTMLBodyElementImpl extends HTMLElementImpl implements HTMLBodyElem
 
 	/** {@inheritDoc} */
 	@Override
-	public String getALink() {
-		return getAttribute("alink");
-	}
-
-	/** {@inheritDoc} */
-	@Override
 	public String getBackground() {
 		return getAttribute("background");
 	}
@@ -120,12 +114,6 @@ public class HTMLBodyElementImpl extends HTMLElementImpl implements HTMLBodyElem
 	@Override
 	public String getVLink() {
 		return getAttribute("vlink");
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setALink(final String aLink) {
-		setAttribute("alink", aLink);
 	}
 
 	/** {@inheritDoc} */
