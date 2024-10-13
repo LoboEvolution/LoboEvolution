@@ -252,7 +252,7 @@ public class HTMLElement2Test extends LoboUnitTest {
 
     @Test
     @Alerts({"0", "0"})
-    public void offsetTopAndLeft_Nothing() {
+    public void offsetTopAndLeftNothing() {
         final String html =
                 "<html>\n"
                         + "  <head>\n"
@@ -277,7 +277,7 @@ public class HTMLElement2Test extends LoboUnitTest {
 
     @Test
     @Alerts({"50", "50"})
-    public void offsetTopAndLeft_AbsolutelyPositioned() {
+    public void offsetTopAndLeftAbsolutelyPositioned() {
         final String html =
                 "<html>\n"
                         + "  <head>\n"
@@ -305,7 +305,7 @@ public class HTMLElement2Test extends LoboUnitTest {
             "5 fixed_length 50", "6 fixed_inherit 10", "7 relative_auto 0", "8 relative_length 50",
             "9 relative_inherit 10", "10 static_auto 0", "11 static_length 0", "12 static_inherit 0",
             "13 inherit_auto 0", "14 inherit_length 50", "15 inherit_inherit 10"})
-    public void offsetLeft_PositionLeft_DifferentCombinations() {
+    public void offsetLeftPositionLeftDifferentCombinations() {
         final String html = "<html><body onload='test()'><script language='javascript'>\n"
                 + "String.prototype.trim = function() {\n"
                 + "  return this.replace(/^\\s+|\\s+$/g, '');\n"
@@ -388,12 +388,6 @@ public class HTMLElement2Test extends LoboUnitTest {
         checkHtmlAlert(html);
     }
 
-    /**
-     * Minimal flow/layouting test: verifies that the <tt>offsetTop</tt> property changes depending
-     * on previous siblings. In the example below, the second div is below the first one, so its
-     * offsetTop must be greater than zero. This sort of test is part of the Dojo unit tests, so
-     * this needs to pass for the Dojo unit tests to pass.
-     */
     @Test
     @Alerts({"true", "true", "2", "3", "4", "5", "6", "7", "8", "9", "99", "199", "5999"})
     public void offsetTopWithPreviousSiblings() {
@@ -636,8 +630,6 @@ public class HTMLElement2Test extends LoboUnitTest {
                 + "alert(eltWithoutFloat1.offsetWidth / eltWithoutFloat1.nextSibling.offsetWidth);\n"
                 + "var eltWithFloat1 = document.getElementById('withFloat1');\n"
                 + "alert(eltWithFloat1.offsetWidth / eltWithFloat1.nextSibling.offsetWidth);\n"
-                // we don't make any strong assumption on the screen size here,
-                // but expect it to be big enough to show 10 times "hello" on one line
                 + "alert(eltWithoutFloat1.offsetWidth > 10 * eltWithFloat1.offsetWidth);\n"
                 + "</script>\n"
                 + "</body>\n"
@@ -1185,7 +1177,7 @@ public class HTMLElement2Test extends LoboUnitTest {
 
     @Test
     @Alerts({"Old = <B id=\"innerNode\">Old outerHTML</B>",
-            "New = <B><I id=\"newElt\">New cell value</I></B",
+            "New = <B><I id=\"newElt\">New cell value</I></B>",
             "I"})
     public void getSetOuterHTMLComplex() {
         final String html = "<html>\n"
@@ -1238,11 +1230,10 @@ public class HTMLElement2Test extends LoboUnitTest {
 
     @Test
     @Alerts("true")
-    public void offsetLeft_PositionFixed() {
+    public void offsetLeftPositionFixed() {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
-
                 + "  </script>\n"
                 + "  <style>\n"
                 + "    body {\n"

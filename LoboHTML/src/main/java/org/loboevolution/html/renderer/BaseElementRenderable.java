@@ -431,22 +431,6 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 
 	/** {@inheritDoc} */
 	@Override
-	public Rectangle getBoundsRelativeToBlock() {
-		RCollection parent = this;
-		int x = 0, y = 0;
-		while (parent != null) {
-			x += parent.getX();
-			y += parent.getY();
-			parent = parent.getParent();
-			if (parent instanceof RElement) {
-				break;
-			}
-		}
-		return new Rectangle(x, y, getWidth(), getHeight());
-	}
-
-	/** {@inheritDoc} */
-	@Override
 	public int getCollapsibleMarginBottom() {
 		int cm;
 		final Insets paddingInsets = this.paddingInsets;

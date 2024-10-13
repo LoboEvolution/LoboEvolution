@@ -1077,39 +1077,63 @@ public class StyleSheetRenderState implements RenderState {
 		final String boxSizing = props != null ? props.getBoxSizing() : "";
 		final String visibTextTL = Strings.isBlank(boxSizing) ? "" : boxSizing;
 		final CSSValues box = CSSValues.get(visibTextTL);
-        return switch (box) {
-            case INHERIT -> this.getPreviousRenderState().getBoxSizing();
-            default -> boxSizing;
-        };
-
+		if (box.equals(CSSValues.INHERIT)) {
+			return this.getPreviousRenderState().getBoxSizing();
+		} else {
+			return boxSizing;
+		}
 	}
 
     /** {@inheritDoc} */
     @Override
-    public String getLeft() {
-        final CSSStyleDeclaration props = this.getCssProperties();
-        return props == null ? null : props.getLeft();
-    }
+	public String getLeft() {
+		final CSSStyleDeclaration props = this.getCssProperties();
+		final String left = props != null ? props.getLeft() : "";
+		final CSSValues box = CSSValues.get(left);
+		if (box.equals(CSSValues.INHERIT)) {
+			return this.getPreviousRenderState().getLeft();
+		} else {
+			return left;
+		}
+	}
 
     /** {@inheritDoc} */
     @Override
     public String getTop() {
-        final CSSStyleDeclaration props = this.getCssProperties();
-        return props == null ? null : props.getTop();
+		final CSSStyleDeclaration props = this.getCssProperties();
+		final String top = props != null ? props.getTop() : "";
+		final CSSValues box = CSSValues.get(top);
+		if (box.equals(CSSValues.INHERIT)) {
+			return this.getPreviousRenderState().getTop();
+		} else {
+			return top;
+		}
     }
 
     /** {@inheritDoc} */
     @Override
     public String getRight() {
-        final CSSStyleDeclaration props = this.getCssProperties();
-        return props == null ? null : props.getRight();
+		final CSSStyleDeclaration props = this.getCssProperties();
+		final String right = props != null ? props.getRight() : "";
+		final CSSValues box = CSSValues.get(right);
+		if (box.equals(CSSValues.INHERIT)) {
+			return this.getPreviousRenderState().getRight();
+		} else {
+			return right;
+		}
     }
 
     /** {@inheritDoc} */
     @Override
     public String getBottom() {
-        final CSSStyleDeclaration props = this.getCssProperties();
-        return props == null ? null : props.getBottom();
+		final CSSStyleDeclaration props = this.getCssProperties();
+		final String bottom = props != null ? props.getBottom() : "";
+		final CSSValues box = CSSValues.get(bottom);
+		if (box.equals(CSSValues.INHERIT)) {
+			return this.getPreviousRenderState().getBottom();
+		} else {
+			return bottom;
+		}
     }
     
     /** {@inheritDoc} */

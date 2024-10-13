@@ -2090,7 +2090,7 @@ public class HTMLElementTest extends LoboUnitTest {
 
     @Test
     @Alerts({"0", "100", "100", "50"})
-    public void getBoundingClientRect_Scroll() {
+    public void getBoundingClientRectScroll() {
         final String html = "<html><head><script>\n"
                 + "  function test() {\n"
                 + "    var d1 = document.getElementById('outer');\n"

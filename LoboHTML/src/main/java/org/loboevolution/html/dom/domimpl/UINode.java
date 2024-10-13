@@ -46,13 +46,6 @@ public interface UINode {
 	Rectangle getBounds();
 
 	/**
-	 * <p>getBoundsRelativeToBlock.</p>
-	 *
-	 * @return a {@link java.awt.Rectangle} object.
-	 */
-	Rectangle getBoundsRelativeToBlock();
-
-	/**
 	 * Called
 	 *
 	 * @param modelNode a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.

@@ -1669,7 +1669,6 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
     @Alerts({"null", "0px", "20%", "80px", "25%", "100px"})
     public void marginLeftRight() {
         final String html = "<html><head><script>\n"
-
                 + "  function test() {\n"
                 + "    var div1 = document.getElementById('div1');\n"
                 + "    var container = document.createElement('div');\n"
@@ -1677,14 +1676,12 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
                 + "    div1.appendChild(container);\n"
                 + "   alert(container.style.marginRight);\n"
                 + "   alert(window.getComputedStyle(container, null).marginRight);\n"
-                + "\n"
                 + "    var el = document.createElement('div');\n"
                 + "    el.style.width = '10%';\n"
                 + "    el.style.marginRight = '20%';\n"
                 + "    container.appendChild(el);\n"
                 + "   alert(el.style.marginRight);\n"
                 + "   alert(window.getComputedStyle(el, null).marginRight);\n"
-                + "\n"
                 + "    el = document.createElement('div');\n"
                 + "    el.style.width = '30%';\n"
                 + "    el.style.minWidth = '300px';\n"
@@ -1705,18 +1702,14 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
     @Alerts({"null", "0px", "null", "0px", "50%", "100px", "50%", "100px"})
     public void topLeft() {
         final String html = "<html><head><script>\n"
-
                 + "  function test() {\n"
                 + "    var div1 = document.getElementById('div1');\n"
                 + "    var parent = document.createElement('div');\n"
-                + "    parent.style = 'position: relative; width: 200px; height: 200px; margin: 0; padding: 0;"
-                + " border-width: 0';\n"
+                + "    parent.style = 'position: relative; width: 200px; height: 200px; margin: 0; padding: 0; border-width: 0';\n"
                 + "    div1.appendChild(parent);\n"
-                + "\n"
                 + "    var div = document.createElement('div');\n"
                 + "    div.style = 'position: absolute; width: 20px; height: 20px; top: 50%; left: 50%';\n"
                 + "    parent.appendChild(div);\n"
-                + "\n"
                 + "   alert(parent.style.top);\n"
                 + "   alert(window.getComputedStyle(parent, null).top);\n"
                 + "   alert(parent.style.left);\n"
@@ -1744,8 +1737,7 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
                 + "    var div1 = document.getElementById('div1');\n"
                 + "    var empty = getOffsetWidth('width: 300px; height: 300px;');\n"
                 + "    var marginAndPadding = getOffsetWidth('width: 300px; height: 300px; margin: 3px; padding: 5px;');\n"
-                + "    var withBorderBox = getOffsetWidth('width: 300px; height: 300px; margin: 3px; padding: 5px;"
-                + " box-sizing: border-box;');\n"
+                + "    var withBorderBox = getOffsetWidth('width: 300px; height: 300px; margin: 3px; padding: 5px;box-sizing: border-box;');\n"
                 + "   alert(marginAndPadding - empty);\n"
                 + "   alert(withBorderBox - empty);\n"
                 + "  }\n"
@@ -1778,8 +1770,7 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
                 + "    var div1 = document.getElementById('div1');\n" 
 				+ "    var empty = getOffsetHeight('width: 300px; height: 300px;');\n"
                 + "    var marginAndPadding = getOffsetHeight('width: 300px; height: 300px; margin: 3px; padding: 5px;');\n"
-                + "    var withBorderBox = getOffsetHeight('width: 300px; height: 300px; margin: 3px; padding: 5px;"
-                + " box-sizing: border-box;');\n"
+                + "    var withBorderBox = getOffsetHeight('width: 300px; height: 300px; margin: 3px; padding: 5px;box-sizing: border-box;');\n"
                 + "   alert(marginAndPadding - empty);\n"
                 + "   alert(withBorderBox - empty);\n"
                 + "  }\n"
@@ -1807,7 +1798,6 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
     public void offsetWidthWithDisplayInline() {
         final String html = "<html><head><script>\n"
                 + "  function test() {\n"
-
                 + "    var div = document.createElement('div');\n"
                 + "    document.body.appendChild(div);\n"
                 + "    div.style.cssText = 'display: inline; margin:0; border: 0; padding: 5px; width: 7px';\n"
@@ -1825,7 +1815,6 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
     @Alerts("100")
     public void borderBoxAffectsOffsetWidth2() {
         final String html = "<html><head><script>\n"
-
                 + "  function test() {\n"
                 + "    var divNormal = document.createElement('div');\n"
                 + "    divNormal.style = 'box-sizing: border-box; width: 100px; height: 100px; border: 10px solid white;"
@@ -1850,13 +1839,11 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
     @Alerts("100")
     public void borderBoxAffectsOffsetHeight2() {
         final String html = "<html><head><script>\n"
-
                 + "  function test() {\n"
                 + "    var divNormal = document.createElement('div');\n"
                 + "    divNormal.style = 'box-sizing: border-box; width: 100px; height: 100px; border: 10px solid white;"
                 + " padding: 2px; margin: 3px';\n"
                 + "    document.body.appendChild(divNormal);\n"
-                + "\n"
                 + "   if (window.navigator.userAgent.indexOf('Trident/') == -1) {\n"
                 + "    alert(divNormal.offsetHeight);\n"
                 + "   } else {\n"
@@ -1875,7 +1862,6 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
     @Alerts({"8px", "0", "16"})
     public void bodyOffsetWidth() {
         final String html = "<html><head><script>\n"
-
                 + "  function test() {\n"
                 + "    var win = window.innerWidth;\n"
                 + "    var html = document.documentElement.offsetWidth;\n"
@@ -1902,7 +1888,6 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
                 + "    table.style.fontSize = '16px';\n"
                 + "    document.getElementById('myDiv').appendChild(table);\n"
                 + "   alert(table.offsetHeight);\n"
-                + "\n"
                 + "    var tr = document.createElement('tr');\n"
                 + "    table.appendChild(tr);\n"
                 + "    var td = document.createElement('td');\n"
@@ -1949,7 +1934,6 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
     public void heightManyLines() {
         final String html = "<html>\n"
                 + "<head><script>\n"
-
                 + "  function test() {\n"
                 + "    var div = document.getElementById('test1');\n"
                 + "   alert(div.offsetHeight);\n"
@@ -2058,7 +2042,6 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
                 + "<script>\n"
                 + "  function test() {\n"
                 + "    var div = document.getElementById('div1');\n"
-                + "    var left = div.style.marginLeft;\n" // force the resolution
                 + "   alert(div.offsetLeft);\n"
                 + "  }\n"
                 + "</script>\n"
@@ -2082,7 +2065,6 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
                 + "<script>\n"
                 + "  function test() {\n"
                 + "    var div = document.getElementById('div1');\n"
-                + "    var left = div.style.marginLeft;\n" // force the resolution
                 + "   alert(div.offsetLeft);\n"
                 + "  }\n"
                 + "</script>\n"
@@ -2107,7 +2089,6 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
                 + "<script>\n"
                 + "  function test() {\n"
                 + "    var div = document.getElementById('div1');\n"
-                + "    var left = div.style.marginLeft;\n" // force the resolution
                 + "   alert(div.offsetLeft);\n"
                 + "  }\n"
                 + "</script>\n"
@@ -2158,7 +2139,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
     public void offsetLeft() {
         final String html = "<html>\n"
                 + "<body style='padding:'>\n"
-                + "  <div id='mydiv' >Heho</div>\n" + "<script>\n"                + "  var d1 = document.getElementById('mydiv');\n"
+                + "  <div id='mydiv' >Heho</div>\n" + "<script>\n"
+                + "  var d1 = document.getElementById('mydiv');\n"
                 + " alert(d1.offsetLeft < 10);\n"
                 + "</script>\n" + "</body>\n"
                 + "</html>";
@@ -2208,10 +2190,9 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
     @Test
     public void widthEmptyInlineContent() {
         final String content = "<html><head><script>\n"
-
                 + "  function test() {\n"
                 + "    var myDiv = document.getElementById('myDiv');\n"
-                + "   alert(myDiv.offsetWidth);\n"
+                + "    alert(myDiv.offsetWidth);\n"
                 + "  }\n"
                 + "</script></head><body onload='test()'>\n"
                 + "<div id='myDiv' style='display: inline-block'>\n"

@@ -732,16 +732,15 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      */
     @Override
     public String getLeft() {
-        if (Strings.isCssBlank(style.getLeft())) {
-            if (element.getParentNode() != null && !(element.getParentNode() instanceof HTMLBodyElement)) {
-                return "0px";
-            } else if (element.getParentNode() != null && element.getParentNode() instanceof HTMLBodyElement) {
-                return CSSValues.AUTO.getValue();
-            } else {
-                return "";
-            }
+        final String left = style.getLeft();
+        if (this.element.getParentNode() == null) {
+            return null;
+        }
+        if (Strings.isBlank(left)) {
+            return "0px";
         } else {
-            return this.element.getParentNode() == null ? "" : HtmlValues.getPixelSize(style.getLeft(), element.getRenderState(), window, 0, availHeight) + "px";
+            final int lft = HtmlValues.getPixelSize(left, element.getRenderState(), window.getWindow(), -1, availHeight);
+            return lft + "px";
         }
     }
 
@@ -1009,7 +1008,16 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      */
     @Override
     public String getRight() {
-        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getRight()) ? CSSValues.AUTO.getValue() : style.getRight();
+        final String right = style.getRight();
+        if (this.element.getParentNode() == null) {
+            return null;
+        }
+        if (Strings.isBlank(right)) {
+            return "0px";
+        } else {
+            final int lft = HtmlValues.getPixelSize(right, element.getRenderState(), window.getWindow(), -1, availHeight);
+            return lft + "px";
+        }
     }
 
     /**

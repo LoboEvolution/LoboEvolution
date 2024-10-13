@@ -54,10 +54,7 @@ import org.loboevolution.events.GlobalEventHandlers;
 import org.loboevolution.html.renderer.HtmlController;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.renderstate.StyleSheetRenderState;
-import org.loboevolution.html.style.CSSPropertiesContext;
-import org.loboevolution.html.style.ComputedCSSStyleDeclarationImpl;
-import org.loboevolution.html.style.HtmlValues;
-import org.loboevolution.html.style.StyleSheetAggregator;
+import org.loboevolution.html.style.*;
 import org.loboevolution.info.PropertyCssInfo;
 import org.mozilla.javascript.Function;
 
@@ -266,13 +263,94 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, GlobalE
 	/** {@inheritDoc} */
 	@Override
 	public double getOffsetLeft() {
-		return getBoundingClientRect().getX();
+
+		StyleSheetRenderState renderState = (StyleSheetRenderState) getRenderState();
+		final String left = renderState.getLeft();
+		if (this instanceof HTMLBodyElement || (left != null && RenderState.POSITION_STATIC == renderState.getPosition())) {
+			return 0;
+		}
+
+		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
+        if(CSSValues.AUTO.isEqual(left) && RenderState.POSITION_FIXED == renderState.getPosition()){
+			return HtmlValues.getPixelSize(renderState.getPreviousRenderState().getLeft(), getRenderState(), doc.getDefaultView(), 0);
+		}
+
+		int offseLeft = HtmlValues.getPixelSize(left, getRenderState(), doc.getDefaultView(), 0);
+		int borderLeftWidth = 0;
+		int marginLeft = renderState.getMarginInsets() != null ? renderState.getMarginInsets().getLeft() : 0;
+		int paddingLeft = RenderState.POSITION_STATIC != renderState.getPosition() ? renderState.getPaddingInsets() != null ? renderState.getPaddingInsets().getLeft() : 0 : 0;
+
+		Node currentElement = this;
+		while (currentElement != null) {
+			final Node parentNode = currentElement.getParentNode();
+            if (parentNode instanceof HTMLBodyElement && RenderState.POSITION_STATIC == renderState.getPosition() &&
+					RenderState.POSITION_RELATIVE == renderState.getPosition()) {
+                offseLeft += 8;
+            } else if (parentNode instanceof HTMLElement) {
+				final HTMLElementImpl parentElement = (HTMLElementImpl) parentNode;
+				final CSSStyleDeclaration css = parentElement.getCurrentStyle();
+				borderLeftWidth += HtmlValues.getPixelSize(css.getBorderLeftWidth(), getRenderState(), doc.getDefaultView(), 0);
+				marginLeft += HtmlValues.getPixelSize(css.getMarginLeft(), getRenderState(), doc.getDefaultView(), 0);
+				paddingLeft += HtmlValues.getPixelSize(css.getPaddingLeft(), getRenderState(), doc.getDefaultView(), 0);
+			}
+			currentElement = currentElement.getParentNode();
+		}
+
+		offseLeft += marginLeft;
+		offseLeft += borderLeftWidth;
+		offseLeft += paddingLeft;
+
+		if (offseLeft == 0 && getParentNode() instanceof HTMLBodyElement) {
+			return 8;
+		}
+
+		return offseLeft;
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public int getOffsetTop() {
-		return getBoundingClientRect().getY();
+
+		StyleSheetRenderState renderState = (StyleSheetRenderState) getRenderState();
+		final String top = renderState.getTop();
+		if (this instanceof HTMLBodyElement || (top != null && RenderState.POSITION_STATIC == renderState.getPosition())) {
+			return 0;
+		}
+
+		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
+		if(CSSValues.AUTO.isEqual(top) && RenderState.POSITION_FIXED == renderState.getPosition()){
+			return HtmlValues.getPixelSize(renderState.getPreviousRenderState().getTop(), getRenderState(), doc.getDefaultView(), 0);
+		}
+
+		int offsetTop = HtmlValues.getPixelSize(top, getRenderState(), doc.getDefaultView(), 0);
+		int borderTopWidth = 0;
+		int marginTop = renderState.getMarginInsets() != null ? renderState.getMarginInsets().getTop() : 0;
+		int paddingTop = RenderState.POSITION_STATIC != renderState.getPosition() ? renderState.getPaddingInsets() != null ? renderState.getPaddingInsets().getTop() : 0 : 0;
+
+		Node currentElement = this;
+		while (currentElement != null) {
+			final Node parentNode = currentElement.getParentNode();
+			if (parentNode instanceof HTMLElement) {
+				final HTMLElementImpl parentElement = (HTMLElementImpl) parentNode;
+				final CSSStyleDeclaration css = parentElement.getCurrentStyle();
+				borderTopWidth += HtmlValues.getPixelSize(css.getBorderTopWidth(), getRenderState(), doc.getDefaultView(), 0);
+				if(RenderState.POSITION_STATIC != renderState.getPosition()){
+					marginTop += HtmlValues.getPixelSize(css.getMarginTop(), getRenderState(), doc.getDefaultView(), 0);
+				}
+				paddingTop += HtmlValues.getPixelSize(css.getPaddingTop(), getRenderState(), doc.getDefaultView(), 0);
+			}
+			currentElement = currentElement.getParentNode();
+		}
+
+		offsetTop += marginTop;
+		offsetTop += borderTopWidth;
+		offsetTop += paddingTop;
+
+		if (offsetTop == 0 && getParentNode() instanceof HTMLBodyElement) {
+			return 8;
+		}
+
+		return offsetTop;
 	}
 
 	/**
