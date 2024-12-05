@@ -27,18 +27,21 @@
 package org.loboevolution.html.renderer;
 
 import lombok.Getter;
+import org.loboevolution.events.Event;
 import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.dom.domimpl.*;
 import org.loboevolution.html.dom.nodeimpl.ModelNode;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.js.Executor;
+import org.loboevolution.html.js.WindowImpl;
 import org.loboevolution.html.js.events.EventImpl;
 import org.loboevolution.html.js.events.MouseEventImpl;
-import org.loboevolution.html.renderstate.RenderState;
+import org.loboevolution.js.JavaScript;
+import org.loboevolution.js.LoboContextFactory;
+import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
-
-import java.awt.*;
-import java.awt.event.InputEvent;
+import org.mozilla.javascript.Scriptable;
+import org.mozilla.javascript.ScriptableObject;
 import java.awt.event.MouseEvent;
 
 /**
@@ -61,9 +64,9 @@ public class HtmlController {
 			if (f != null) {
 				final EventImpl evt = new EventImpl();
 				evt.initEvent("change", false, false);
-				if (!Executor.executeFunction(uiElement, f, evt, new Object[0])) {
-					return false;
-				}
+				evt.setTarget(uiElement);
+				boolean isEx = execute(uiElement, f, evt);
+				if (!isEx) return false;
 			}
 		}
 		return false;
@@ -82,12 +85,11 @@ public class HtmlController {
 		if (node instanceof HTMLElementImpl uiElement) {
             final Function f = uiElement.getOncontextmenu();
 			if (f != null) {
-				final MouseEventImpl evt = new MouseEventImpl();
-				evt.initMouseEvent("contextmenu", false, false, null, 0, 0, 0, x, y, true, true, true, true, (short) 0, null);
-				evt.setIe(event);
-				if (!Executor.executeFunction(uiElement, f, evt, new Object[0])) {
-					return false;
-				}
+				final MouseEventImpl evt = new MouseEventImpl(event);
+				evt.initMouseEvent("contextmenu", false, false, null, 0d, 0d, 0d,
+						(double)x, (double)y, true, true, true, true, 0d,  uiElement);
+				boolean isEx = execute(uiElement, f, evt);
+				if (!isEx) return false;
 			}
 			final HtmlRendererContext rcontext = uiElement.getHtmlRendererContext();
 			if (rcontext != null) {
@@ -116,12 +118,11 @@ public class HtmlController {
 		if (node instanceof HTMLElementImpl uiElement) {
             final Function f = uiElement.getOndblclick();
 			if (f != null) {
-				final MouseEventImpl evt = new MouseEventImpl();
-				evt.initMouseEvent("dblclick", false, false, null, 0, 0, 0, x, y, true, true, true, true, (short) 0, null);
-				evt.setIe(event);
-				if (!Executor.executeFunction(uiElement, f, evt, new Object[0])) {
-					return false;
-				}
+				final MouseEventImpl evt = new MouseEventImpl(event);
+				evt.initMouseEvent("dblclick", false, false, null, 0d, 0d,
+						0d, (double)x, (double)y, true, true, true, true, 0d, uiElement);
+				boolean isEx = execute(uiElement, f, evt);
+				if (!isEx) return false;
 			}
 		}
 		final ModelNode parent = node.getParentModelNode();
@@ -154,18 +155,16 @@ public class HtmlController {
 	 */
 	public boolean onMouseClick(final ModelNode node, final MouseEvent event, final int x, final int y) {
 		if (node instanceof HTMLElementImpl uiElement) {
-            final Function f = uiElement.getOnclick();
-			final MouseEventImpl evt = new MouseEventImpl();
-			evt.initMouseEvent("click", false, false, null, 0, 0, 0, x, y, true, true, true, true, (short) 0, null);
-			evt.setIe(event);
-			uiElement.dispatchEvent(uiElement, evt);
+			final Function f = uiElement.getOnclick();
 			if (f != null) {
-				if (!Executor.executeFunction(uiElement, f, evt, new Object[0])) {
-					return false;
-				}
+				final MouseEventImpl evt = new MouseEventImpl(event);
+				evt.initMouseEvent("click", true, true, null, 0d, 0d, 0d,
+						(double) x, (double) y, true, true, true, true, 0d, uiElement);
+				boolean isEx = execute(uiElement, f, evt);
+				if (!isEx) return false;
 			}
 		}
-		
+
 		if (node instanceof HTMLAnchorElementImpl) {
 			((HTMLAnchorElementImpl) node).navigate();
 			return false;
@@ -182,8 +181,8 @@ public class HtmlController {
 				break;
 			}
 			return false;
-		} 
-				
+		}
+
 		final ModelNode parent = node.getParentModelNode();
 		if (parent == null) {
 			return true;
@@ -220,26 +219,23 @@ public class HtmlController {
 	 * @param y a {@link java.lang.Integer} object.
 	 */
 	public boolean onMouseDown(final ModelNode node, final MouseEvent event, final int x, final int y) {
-		boolean pass = true;
-		
+
 		if (node instanceof HTMLElementImpl uiElement) {
             final Function f = uiElement.getOnmousedown();
 			if (f != null) {
-				final MouseEventImpl evt = new MouseEventImpl();
-				evt.initMouseEvent("mousedown", false, false, null, 0, 0, 0, x, y, true, true, true, true, (short) 0, null);
-				evt.setIe(event);
-				pass = Executor.executeFunction(uiElement, f, evt, new Object[0]);
+				final MouseEventImpl evt = new MouseEventImpl(event);
+				evt.initMouseEvent("mousedown", false, false, null, 0d, 0d, 0d,
+						(double)x, (double)y, true, true, true, true, 0d, uiElement);
+				boolean isEx = execute(uiElement, f, evt);
+				if (!isEx) return false;
 			}
 		}
-		
+
 		if (node instanceof HTMLAnchorElementImpl) {
-			((HTMLAnchorElementImpl) node).getCurrentStyle().setOverlayColor("#9090FF80");
+			((HTMLAnchorElementImpl) node).getCurrentStyle().setOverlayColor("#90d90dFF80d");
 			return false;
 		}
-		
-		if (!pass) {
-			return false;
-		}
+
 		final ModelNode parent = node.getParentModelNode();
 		if (parent == null) {
 			return true;
@@ -266,10 +262,10 @@ public class HtmlController {
                 uiElement.setMouseOver(false);
 				final Function f = uiElement.getOnmouseout();
 				if (f != null) {
-					final MouseEventImpl evt = new MouseEventImpl();
-					evt.initMouseEvent("mouseout", false, false, null, 0, 0, 0, x, y, true, true, true, true, (short) 0, null);
-					evt.setIe(event);
-					Executor.executeFunction(uiElement, f, evt, new Object[0]);
+					final MouseEventImpl evt = new MouseEventImpl(event);
+					evt.initMouseEvent("mouseout", false, false, null, 0d, 0d,
+							0d, (double)x, (double)y, true, true, true, true, 0d, uiElement);
+					execute(uiElement, f, evt);
 				}
 			}
 			node = node.getParentModelNode();
@@ -292,10 +288,10 @@ public class HtmlController {
                 uiElement.setMouseOver(true);
 				final Function f = uiElement.getOnmousemove();
 				if (f != null) {
-					final MouseEventImpl evt = new MouseEventImpl();
-					evt.initMouseEvent("mousemove", false, false, null, 0, 0, 0, x, y, true, true, true, true, (short) 0, null);
-					evt.setIe(event);
-					Executor.executeFunction(uiElement, f, evt, new Object[0]);
+					final MouseEventImpl evt = new MouseEventImpl(event);
+					evt.initMouseEvent("mousemove", false, false, null, 0d,
+							0d, 0d, (double)x, (double)y, true, true, true, true, 0d, uiElement);
+					execute(uiElement, f, evt);
 				}
 			}
 			node = node.getParentModelNode();
@@ -321,10 +317,10 @@ public class HtmlController {
                 uiElement.setMouseOver(true);
 				final Function f = uiElement.getOnmouseover();
 				if (f != null) {
-					final MouseEventImpl evt = new MouseEventImpl();
-					evt.initMouseEvent("mouseover", false, false, null, 0, 0, 0, x, y, true, true, true, true, (short) 0, null);
-					evt.setIe(event);
-					Executor.executeFunction(uiElement, f, evt, new Object[0]);
+					final MouseEventImpl evt = new MouseEventImpl(event);
+					evt.initMouseEvent("mouseover", false, false, null, 0d,
+							0d, 0d, (double)x, (double)y, true, true, true, true, 0d, uiElement);
+					execute(uiElement, f, evt);
 				}
 			}
 			node = node.getParentModelNode();
@@ -339,38 +335,9 @@ public class HtmlController {
 		if (node instanceof HTMLElementImpl uiElement) {
             final Function f = uiElement.getOnscroll();
 			final MouseEventImpl evt = new MouseEventImpl();
-			evt.initMouseEvent("scroll", false, false, null, 0, 0, 0, 0, 0, true, true, true, true, (short) 0, null);
-			uiElement.dispatchEvent(uiElement, evt);
-			if (f != null) {
-				Executor.executeFunction(uiElement, f, evt, new Object[0]);
-			}
-		}
-	}
-
-
-
-	private static void setMouseOnMouseOver(final BaseBoundableRenderable renderable, final ModelNode nodeStart, final ModelNode limit) {
-		ModelNode node = nodeStart;
-		while (node != null) {
-			if (node == limit) {
-				break;
-			}
-			if (node instanceof NodeImpl uiElement) {
-                final HtmlRendererContext rcontext = uiElement.getHtmlRendererContext();
-				final RenderState rs = uiElement.getRenderState();
-				final Cursor cursorOpt = rs.getCursor();
-				if (cursorOpt != null) {
-					rcontext.setCursor(cursorOpt);
-					break;
-				} else {
-					if (node.getParentModelNode() == limit) {
-						if (renderable instanceof RWord || renderable instanceof RBlank) {
-							rcontext.setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
-						}
-					}
-				}
-			}
-			node = node.getParentModelNode();
+			evt.initMouseEvent("scroll", false, false, null, 0d, 0d, 0d,
+					0d, 0d, true, true, true, true, 0d, uiElement);
+			execute(uiElement, f, evt);
 		}
 	}
 
@@ -384,26 +351,21 @@ public class HtmlController {
 	 * @param y a {@link java.lang.Integer} object.
 	 */
 	public boolean onMouseUp(final ModelNode node, final MouseEvent event, final int x, final int y) {
-		boolean pass = true;
-				
 		if (node instanceof HTMLElementImpl uiElement) {
             final Function f = uiElement.getOnmouseup();
 			if (f != null) {
-				final MouseEventImpl evt = new MouseEventImpl();
-				evt.initMouseEvent("mouseup", false, false, null, 0, 0, 0, x, y, true, true, true, true, (short) 0, null);
-				evt.setIe(event);
-				pass = Executor.executeFunction(uiElement, f, evt, new Object[0]);
+				final MouseEventImpl evt = new MouseEventImpl(event);
+				evt.initMouseEvent("mouseup", false, false, null, 0d, 0d, 0d,
+						(double)x, (double)y, true, true, true, true, 0d, uiElement);
+				execute(uiElement, f, evt);
 			}
 		}
-		
+
 		if (node instanceof HTMLAnchorElementImpl) {
 			((HTMLAnchorElementImpl) node).getCurrentStyle().setOverlayColor(null);
 			return false;
 		}
 
-		if (!pass) {
-			return false;
-		}
 		final ModelNode parent = node.getParentModelNode();
 		if (parent == null) {
 			return true;
@@ -418,20 +380,17 @@ public class HtmlController {
 	 * @param x    For images only, x coordinate of mouse click.
 	 * @param y    For images only, y coordinate of mouse click.
 	 * @return True to propagate further, false if consumed.
-	 * @param event a {@link java.awt.event.InputEvent} object.
+	 * @param event a {@link java.awt.event.MouseEvent} object.
 	 */
-	public boolean onPressed(final ModelNode node, final InputEvent event, final int x, final int y) {
-		
+	public boolean onPressed(final ModelNode node, final MouseEvent event, final int x, final int y) {
+
 		if (node instanceof HTMLElementImpl uiElement) {
             final Function f = uiElement.getOnclick();
 			if (f != null) {
-				final MouseEventImpl evt = new MouseEventImpl();
-				evt.initMouseEvent("click", false, false, null, 0, 0, 0, x, y, true, true, true, true, (short) 0, null);
-				evt.setIe(event);
-				uiElement.dispatchEvent(uiElement, evt);
-				if (!Executor.executeFunction(uiElement, f, evt, new Object[0])) {
-					return false;
-				}
+				final MouseEventImpl evt = new MouseEventImpl(event);
+				evt.initMouseEvent("click", false, false, null, 0d, 0d, 0d,
+						(double)x, (double)y, true, true, true, true, 0d, uiElement);
+				execute(uiElement, f, evt);
 			}
 		}
 		
@@ -453,5 +412,24 @@ public class HtmlController {
 		}
 
 		return false;
+	}
+
+	public boolean execute(final NodeImpl node, final Function f, Event evt) {
+		WindowImpl win = getWindow(node);
+		LoboContextFactory contextFactory = win.getContextFactory();
+		try (Context ctx = contextFactory.enterContext()) {
+			Scriptable windowScope = win.getWindowScope(ctx);
+			final Object eventJSObj = JavaScript.getInstance().getJavascriptObject(evt, windowScope);
+			ScriptableObject.putProperty(windowScope, "event", eventJSObj);
+			if (!Executor.executeFunction(node, f, new Object[0], contextFactory)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	private WindowImpl getWindow(final NodeImpl e) {
+		final HTMLDocumentImpl doc = (HTMLDocumentImpl) e.getOwnerDocument();
+		return (WindowImpl) doc.getDefaultView();
 	}
 }

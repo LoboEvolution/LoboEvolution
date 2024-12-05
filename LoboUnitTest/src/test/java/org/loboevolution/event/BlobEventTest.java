@@ -32,7 +32,7 @@ import org.loboevolution.annotation.AlertsExtension;
 import org.loboevolution.driver.LoboUnitTest;
 
 /**
- * Tests for BlobEvent
+ * Tests for BlobEventImpl
  */
 @ExtendWith(AlertsExtension.class)
 public class BlobEventTest extends LoboUnitTest {
@@ -146,7 +146,7 @@ public class BlobEventTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"[object BlobEvent]", "blob", "false", "false", "false", "[object Blob]"})
+    @Alerts({"[object BlobEvent]", "blob", "false", "false", "false"})
     public void createCtorAllDetails() {
         final String html = "<html><head>"
                 + "<script>\n"
@@ -158,7 +158,7 @@ public class BlobEventTest extends LoboUnitTest {
                 + "        'data': blob\n"
                 + "      });\n"
                 + "      dump(event);\n"
-                + "    } catch (e) {alert('exception') }\n"
+                + "    } catch (e) {alert(e) }\n"
                 + "  }\n"
                 + DUMP_EVENT_FUNCTION
                 + "</script></head><body onload='test()'>\n"

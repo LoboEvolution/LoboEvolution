@@ -35,6 +35,7 @@ import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.dom.HTMLScriptElement;
 import org.loboevolution.gui.HtmlPanel;
 import org.loboevolution.html.js.Executor;
+import org.loboevolution.html.js.WindowImpl;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.parser.XHtmlParser;
 import org.loboevolution.html.renderstate.DisplayRenderState;
@@ -174,9 +175,8 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 		}
 
 		if (bcontext.isScriptingEnabled()) {
-			try (Context ctx = Executor.createContext()) {
-				ctx.setLanguageVersion(Context.VERSION_1_8);
-				ctx.setOptimizationLevel(-1);
+			final WindowImpl window = (WindowImpl) doc.getDefaultView();
+			try (Context ctx = Executor.createContext(window.getContextFactory())) {
 				final String src = getSrc();
 				final Instant start = Instant.now();
 

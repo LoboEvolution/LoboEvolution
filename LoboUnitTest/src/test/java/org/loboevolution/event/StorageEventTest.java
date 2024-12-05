@@ -65,7 +65,7 @@ public class StorageEventTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"[object StorageEvent]", "undefined", "false", "false", "false"})
+    @Alerts({"exception"})
     public void createCtorWithoutType() {
         final String html = "<html><head>"
                 + "<script>\n"

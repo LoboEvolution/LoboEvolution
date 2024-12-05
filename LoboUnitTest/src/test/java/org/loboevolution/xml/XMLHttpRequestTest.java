@@ -1441,15 +1441,12 @@ public class XMLHttpRequestTest extends LoboUnitTest {
                 +  "      function test() {\n"
                 +  "        xhr = new XMLHttpRequest();\n"
                 +  "       alert(xhr.responseText);\n"
-
                 +  "        xhr.open('GET','" + URL_HTML + "foo.html" + "', true);\n"
                 +  "        xhr.responseType = 'blob';\n"
                 +  "       alert(xhr.responseType);\n"
-
                 +  "        xhr.onreadystatechange = onStateChange;\n"
                 +  "        xhr.send('');\n"
                 +  "      }\n"
-
                 +  "      function onStateChange(e) {\n"
                 +  "        if (xhr.readyState == 4) {\n"
                 +  "          try {\n"

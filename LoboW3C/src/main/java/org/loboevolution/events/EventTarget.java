@@ -35,56 +35,56 @@ import org.w3c.dom.events.EventException;
  */
 public interface EventTarget {
 
-	/**
-	 * <p>addEventListener.</p>
-	 *
-	 * @param type a {@link java.lang.String} object.
-	 * @param listener a {@link org.mozilla.javascript.Function} object.
-	 */
-	void addEventListener(String type, final Function listener);
-	
-	/**
-	 * <p>addEventListener.</p>
-	 *
-	 * @param type a {@link java.lang.String} object.
-	 * @param listener a {@link org.mozilla.javascript.Function} object.
-	 * @param useCapture a boolean.
-	 */
-	void addEventListener(String type, Function listener, boolean useCapture);
-	
-	/**
-	 * <p>removeEventListener.</p>
-	 *
-	 * @param script a {@link java.lang.String} object.
-	 * @param function a {@link org.mozilla.javascript.Function} object.
-	 */
-	void removeEventListener(String script, Function function);
-	
-	/**
-	 * <p>removeEventListener.</p>
-	 *
-	 * @param type a {@link java.lang.String} object.
-	 * @param listener a {@link org.mozilla.javascript.Function} object.
-	 * @param useCapture a boolean.
-	 */
-	void removeEventListener(String type, Function listener, boolean useCapture);
-	
-	/**
-	 * <p>dispatchEvent.</p>
-	 *
-	 * @param element a {@link org.loboevolution.html.node.Node} object.
-	 * @param evt a {@link Event} object.
-	 * @return a boolean.
-	 */
-	boolean dispatchEvent(Node element, Event evt);
+    /**
+     * <p>addEventListener.</p>
+     *
+     * @param type     a {@link java.lang.String} object.
+     * @param listener a {@link org.mozilla.javascript.Function} object.
+     */
+    void addEventListener(String type, final Function listener);
 
-	/**
-	 * <p>dispatchEvent.</p>
-	 *
-	 * @param evt a {@link Event} object.
-	 * @return a boolean.
-	 * @throws org.w3c.dom.events.EventException if any.
-	 */
-	boolean dispatchEvent(Event evt) throws EventException;
+    /**
+     * <p>addEventListener.</p>
+     *
+     * @param type       a {@link java.lang.String} object.
+     * @param listener   a {@link org.mozilla.javascript.Function} object.
+     * @param useCapture a boolean.
+     */
+    void addEventListener(String type, Function listener, boolean useCapture);
+
+    /**
+     * <p>removeEventListener.</p>
+     *
+     * @param script   a {@link java.lang.String} object.
+     * @param function a {@link org.mozilla.javascript.Function} object.
+     */
+    void removeEventListener(String script, Function function);
+
+    /**
+     * <p>removeEventListener.</p>
+     *
+     * @param type       a {@link java.lang.String} object.
+     * @param listener   a {@link org.mozilla.javascript.Function} object.
+     * @param useCapture a boolean.
+     */
+    void removeEventListener(String type, Function listener, boolean useCapture);
+
+    /**
+     * <p>dispatchEvent.</p>
+     *
+     * @param element a {@link org.loboevolution.html.node.Node} object.
+     * @param evt     a {@link Event} object.
+     * @return a boolean.
+     */
+    boolean dispatchEvent(Node element, Event evt);
+
+    /**
+     * <p>dispatchEvent.</p>
+     *
+     * @param evt a {@link Event} object.
+     * @return a boolean.
+     * @throws org.w3c.dom.events.EventException if any.
+     */
+    boolean dispatchEvent(Event evt) throws EventException;
 
 }

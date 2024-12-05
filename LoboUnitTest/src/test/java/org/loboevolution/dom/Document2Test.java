@@ -32,6 +32,7 @@ import org.loboevolution.annotation.AlertsExtension;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLDocument;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
+import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
 import org.loboevolution.html.node.Document;
 
 /**
@@ -266,10 +267,12 @@ public class Document2Test extends LoboUnitTest {
                 + "</script></head>\n"
                 + "<body>\n"
                 + "  <input id='text1' onclick='test()'>\n"
-                + "</body></html>";
-        final HTMLDocument document = loadHtml(html);
-        HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("text1");
-        elem.getOnclick();
+                + "</body>"
+                + " <script>"
+                + "  document.getElementById('text1').click();"
+                + "  </script>"
+                + "</html>";
+        checkHtmlAlert(html);
     }
 
     @Test

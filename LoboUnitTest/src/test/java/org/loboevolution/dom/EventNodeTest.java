@@ -30,8 +30,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.loboevolution.annotation.Alerts;
 import org.loboevolution.annotation.AlertsExtension;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.dom.HTMLDocument;
-import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 
 /**
  * Tests for EventNode.
@@ -108,23 +106,16 @@ public class EventNodeTest extends LoboUnitTest {
                 + " onmouseup=\"alert('mouseup textarea')\" onfocus=\"alert('focus textarea')\"></textarea>\n"
                 + "  </form>\n"
                 + "  <textarea id='myTextarea' cols='80' rows='10'></textarea>\n"
-                + "</body></html>";
-
-        final HTMLDocument document = loadHtml(html);
-        HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("testSpan");
-        elem.getOnclick();
-
-        elem = (HTMLElementImpl) document.getElementById("testInput");
-        elem.getOnclick();
-
-        elem = (HTMLElementImpl) document.getElementById("testSpan");
-        elem.getOnclick();
-
-        elem = (HTMLElementImpl) document.getElementById("testImage");
-        elem.getOnclick();
-
-        elem = (HTMLElementImpl) document.getElementById("testTextarea");
-        elem.getOnclick();
+                + "</body>"
+                + " <script>"
+                + "  document.getElementById('testSpan').click();"
+                + "  document.getElementById('testInput').click();"
+                + "  document.getElementById('testSpan').click();"
+                + "  document.getElementById('testImage').click();"
+                + "  document.getElementById('testTextarea').click();"
+                + "  </script>"
+                + "</html>";
+        checkHtmlAlert(html);
     }
 
     @Test
@@ -147,10 +138,11 @@ public class EventNodeTest extends LoboUnitTest {
                 + " onclick=\"alert('click text')\" onmouseup=\"alert('mouseup text')\" onfocus=\"alert('focus text')\">\n"
                 + "  </form>\n"
                 + "  <textarea id='myTextarea' cols='80' rows='10'></textarea>\n"
-                + "</body></html>";
-
-        final HTMLDocument document = loadHtml(html);
-        HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("testLabel");
-        elem.getOnclick();
+                + "</body>"
+                + " <script>"
+                + "  document.getElementById('testLabel').click();"
+                + "  </script>"
+                + "</html>";
+        checkHtmlAlert(html);
     }
 }

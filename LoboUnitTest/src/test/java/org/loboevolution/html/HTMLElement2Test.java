@@ -30,9 +30,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.loboevolution.annotation.Alerts;
 import org.loboevolution.annotation.AlertsExtension;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.dom.HTMLDocument;
 import org.loboevolution.html.dom.HTMLElement;
-import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 
 /**
  * Tests for {@link HTMLElement}.
@@ -942,12 +940,11 @@ public class HTMLElement2Test extends LoboUnitTest {
                 + "var eventType = '" + type + "';\n"
                 + "addListener('div', eventType);\n"
                 + "addListener('input', eventType);\n"
+                + "  document.getElementById('input')."+ type + "();"
                 + "</script>\n"
                 + "</body></html>";
 
-        final HTMLDocument document = loadHtml(html);
-        HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("input");
-        elem.getOnclick();
+        checkHtmlAlert(html);
     }
 
     @Test
@@ -1208,7 +1205,7 @@ public class HTMLElement2Test extends LoboUnitTest {
                 + "<head>\n"
                 + "<script>\n"
                 + "  function simulateClick() {\n"
-                + "    var evt = document.createEvent('MouseEvents');\n"
+                + "    var evt = document.createEvent('MouseEvent');\n"
                 + "    evt.initMouseEvent('click', true, true, window, 0, 0, 0, 0, 0,"
                 + " false, false, false, false, 0, null);\n"
                 + "    var cb = document.getElementById('checkbox');\n"
@@ -1260,28 +1257,26 @@ public class HTMLElement2Test extends LoboUnitTest {
     @Test
     @Alerts({"clicked", "fireEvent not available"})
     public void fireEventWithoutTemplate() {
-        final String html =
-                "<html>\n"
-                        + "  <head>\n"
-                        + "    <script>\n"
-                        + "    function doTest() {\n"
-                        + "      var elem = document.getElementById('a');\n"
-                        + "      if (!elem.fireEvent) { alert('fireEvent not available'); return }\n"
-                        + "      elem.fireEvent('onclick');\n"
-                        + "    }\n"
-                        + "    </script>\n"
-                        + "  </head>\n"
-                        + "<body>\n"
-                        + "  <div id='a' onclick='alert(\"clicked\")'>foo</div>\n"
-                        + "  <div id='b' onmouseover='doTest()'>bar</div>\n"
-                        + "</body></html>";
-
-        final HTMLDocument document = loadHtml(html);
-        HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("a");
-        elem.getOnclick();
-
-        elem = (HTMLElementImpl) document.getElementById("b");
-        elem.getOnmouseover();
+        final String html = "<html>\n"
+                + "  <head>\n"
+                + "    <script>\n"
+                + "    function doTest() {\n"
+                + "      var elem = document.getElementById('a');\n"
+                + "      if (!elem.fireEvent) { alert('fireEvent not available'); return }\n"
+                + "      elem.fireEvent('onclick');\n"
+                + "    }\n"
+                + "    </script>\n"
+                + "  </head>\n"
+                + "<body>\n"
+                + "  <div id='a' onclick='alert(\"clicked\")'>foo</div>\n"
+                + "  <div id='b' onclick='doTest()'>bar</div>\n"
+                + "</body>"
+                + " <script>"
+                + "  document.getElementById('a').click();"
+                + "  document.getElementById('b').click();"
+                + "  </script>"
+                + "</html>";
+        checkHtmlAlert(html);
     }
 
     @Test

@@ -46,7 +46,6 @@ public class PopStateEventTest extends LoboUnitTest {
                     + "     alert(event.bubbles);\n"
                     + "     alert(event.cancelable);\n"
                     + "     alert(event.composed);\n"
-
                     + "     alert(event.state);\n"
                     + "    } else {\n"
                     + "     alert('no event');\n"
@@ -94,7 +93,7 @@ public class PopStateEventTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"[object PopStateEvent]", "null", "", "false", "false", "false", "null"})
+    @Alerts({"[object PopStateEvent]", "null", "null", "false", "false", "false", "null"})
     public void createCreateEvent() {
         final String html = "<html><head>"
                 + "<script>\n"
@@ -112,7 +111,7 @@ public class PopStateEventTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"[object PopStateEvent]", "null", "", "false", "false", "false", "null"})
+    @Alerts({"[object PopStateEvent]", "null", "null", "false", "false", "false", "null"})
     public void setState() {
         final String html = "<html><head>"
                 + "<script>\n"
@@ -163,7 +162,7 @@ public class PopStateEventTest extends LoboUnitTest {
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = document.createEvent('PopStateEvent');\n"
-                + "    } catch (e) {alert('exception ctor'); return; }\n"
+                + "    } catch (e) {alert('exception'); return; }\n"
                 + "    try {\n"
                 + "      dispatchEvent(event);\n"
                 + "     alert('dispatched');\n"

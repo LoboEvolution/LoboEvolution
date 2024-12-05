@@ -56,7 +56,7 @@ public class TrackEventTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"[object TrackEvent]", "undefined", "false", "false", "false"})
+    @Alerts({"exception"})
     public void createCtorWithoutType() {
         final String html = "<html><head>"
                 + "<script>\n"

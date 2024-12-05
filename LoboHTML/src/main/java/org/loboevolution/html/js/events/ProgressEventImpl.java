@@ -26,44 +26,41 @@
 
 package org.loboevolution.html.js.events;
 
+import lombok.*;
 import org.loboevolution.events.ProgressEvent;
+import org.mozilla.javascript.NativeObject;
 
 /**
  * ProgressEventImpl class.
  */
+@Getter
+@Setter
+@NoArgsConstructor
 public class ProgressEventImpl extends EventImpl implements ProgressEvent {
 
-    private int loaded;
-    private int total;
+    private Double loaded = 0d;
+    private Double total = 0d;
 
-    @Override
-    public void initProgressEvent(String typeArg, boolean canBubbleArg, boolean cancelableArg, boolean lengthComputableArg, int loadedArg, int totalArg) {
-
-        setType(typeArg);
-        setCancelBubble(canBubbleArg);
-        setCancelable(cancelableArg);
-        total = (lengthComputableArg) ? total : -1;
-        loaded = Math.max(loaded, 0);
-    }
-
-    @Override
-    public void initProgressEventNS(String namespaceURI, String typeArg, boolean canBubbleArg, boolean cancelableArg, boolean lengthComputableArg, int loadedArg, int totalArg) {
-
+    /**
+     * <p>Constructor for EventImpl.</p>
+     *
+     * @param params event constructor parameters
+     */
+    public ProgressEventImpl(Object[] params) {
+        setParams(params);
+        if (params != null && params.length > 0) {
+            if (params.length > 1) {
+                if (params[1] != null && params[1] instanceof NativeObject obj) {
+                    this.loaded = (Double) obj.get("loaded");
+                    this.total = (Double) obj.get("total");
+                }
+            }
+        }
     }
 
     @Override
     public boolean getLengthComputable() {
-        return (total >= 0);
-    }
-
-    @Override
-    public int getLoaded() {
-        return loaded;
-    }
-
-    @Override
-    public int getTotal() {
-        return Math.max(total, 0);
+        return (total > 0);
     }
 
     @Override

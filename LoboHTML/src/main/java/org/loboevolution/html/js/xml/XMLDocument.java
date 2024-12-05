@@ -977,12 +977,6 @@ public class XMLDocument implements Document {
 
 	/** {@inheritDoc} */
 	@Override
-	public void captureEvents() {
-		doc.captureEvents();
-	}
-
-	/** {@inheritDoc} */
-	@Override
 	public Range caretRangeFromPoint(final double x, final double y) {
 		return doc.caretRangeFromPoint(x, y);
 	}

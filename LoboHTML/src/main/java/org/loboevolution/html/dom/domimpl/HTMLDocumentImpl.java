@@ -34,6 +34,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.Strings;
 import org.loboevolution.common.Urls;
 import org.loboevolution.config.HtmlRendererConfig;
+import org.loboevolution.events.Event;
 import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.HTMLDocument;
@@ -44,13 +45,13 @@ import org.loboevolution.html.dom.nodeimpl.DocumentImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.dom.nodeimpl.event.DocumentNotificationListener;
 import org.loboevolution.html.io.WritableLineReader;
-import org.loboevolution.html.js.Executor;
 import org.loboevolution.html.js.WindowImpl;
 import org.loboevolution.html.js.css.CSSStyleSheetImpl;
 import org.loboevolution.html.js.css.StyleSheetListImpl;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.css.StyleSheetList;
+import org.loboevolution.html.renderer.HtmlController;
 import org.loboevolution.views.DocumentView;
 import org.loboevolution.html.parser.XHtmlParser;
 import org.loboevolution.html.renderstate.RenderState;
@@ -525,7 +526,9 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 		final Function onloadHandler = this.onloadHandler;
 		if (onloadHandler != null) {
 			if (XHtmlParser.MODIFYING_KEY.equals(key) && data == Boolean.FALSE) {
-				Executor.executeFunction(this, onloadHandler, null, new Object[0]);
+				final Event domContentLoadedEvent = createEvent("DOMContentLoaded");
+				domContentLoadedEvent.initEvent("load");
+				HtmlController.getInstance().execute(this, onloadHandler, domContentLoadedEvent);
 			}
 		}
 		return super.setUserData(key, data, handler);

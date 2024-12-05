@@ -30,19 +30,18 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.loboevolution.annotation.Alerts;
 import org.loboevolution.annotation.AlertsExtension;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.dom.HTMLDocument;
-import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 
 /**
  * Tests that the events triggered in the right order.
  */
 @ExtendWith(AlertsExtension.class)
 public class Event2Test extends LoboUnitTest {
+
     @Test
     @Alerts("[object Event] change b:true c:false [select] [-]"
             + " [object MouseEvent] click b:true c:true [clickMe] [1]")
     public void optionClick() {
-        final String firstSnippet = "       <select name='select' id='select' size='2'\n";
+        final String firstSnippet = "<select name='select' id='select' size='2'\n";
         final String secondSnippet = ">\n"
                 + "               <option id='o_id1' value='o_value1'>option1</option>\n"
                 + "               <option id='clickMe' value='o_value2'>option2</option>\n"
@@ -55,7 +54,7 @@ public class Event2Test extends LoboUnitTest {
      @Test
     @Alerts("[object MouseEvent] click b:true c:true [clickMe] [1]")
     public void optionClick2() {
-        final String firstSnippet = "       <select name='select' id='select' size='2'>\n"
+        final String firstSnippet = "<select name='select' id='select' size='2'>\n"
                 + "               <option id='o_id1' value='o_value1'>option1</option>\n"
                 + "               <option id='clickMe' value='o_value2'\n";
         final String secondSnippet = ">option2</option>\n"
@@ -70,7 +69,7 @@ public class Event2Test extends LoboUnitTest {
     @Alerts("[object MouseEvent] click b:true c:true [radio] [1]"
             + " [object Event] change b:true c:false [radio] [-]")
     public void radioClick() {
-        final String firstSnippet = "       <input type='radio' name='radio' id='clickMe' value='2'\n";
+        final String firstSnippet = "<input type='radio' name='radio' id='clickMe' value='2'\n";
         final String secondSnippet = ">Radio\n";
 
         testClickEvents(firstSnippet, secondSnippet);
@@ -80,7 +79,7 @@ public class Event2Test extends LoboUnitTest {
     @Alerts("[object MouseEvent] click b:true c:true [checkbox] [1]"
             + " [object Event] change b:true c:false [checkbox] [-]")
     public void checkboxClick() {
-        final String firstSnippet = "       <input type='checkbox' name='checkbox' id='clickMe' value='2'\n";
+        final String firstSnippet = "<input type='checkbox' name='checkbox' id='clickMe' value='2'\n";
         final String secondSnippet = ">Checkbox\n";
 
         testClickEvents(firstSnippet, secondSnippet);
@@ -90,7 +89,7 @@ public class Event2Test extends LoboUnitTest {
     @Test
     @Alerts("[object MouseEvent] click b:true c:true [clickMe] [1]")
     public void inputTextClick() {
-        final String firstSnippet = "       <input type='text' name='clickMe' id='clickMe' size='2'\n";
+        final String firstSnippet = "<input type='text' name='clickMe' id='clickMe' size='2'\n";
         final String secondSnippet = ">\n";
 
         testClickEvents(firstSnippet, secondSnippet);
@@ -100,7 +99,7 @@ public class Event2Test extends LoboUnitTest {
     @Test
     @Alerts("[object MouseEvent] click b:true c:true [clickMe] [1]")
     public void inputPasswordClick() {
-        final String firstSnippet = "       <input type='password' name='clickMe' id='clickMe' size='2'\n";
+        final String firstSnippet = "<input type='password' name='clickMe' id='clickMe' size='2'\n";
         final String secondSnippet = ">\n";
 
         testClickEvents(firstSnippet, secondSnippet);
@@ -110,7 +109,7 @@ public class Event2Test extends LoboUnitTest {
     @Test
     @Alerts("[object MouseEvent] click b:true c:true [clickMe] [1]")
     public void textareaClick() {
-        final String firstSnippet = "       <textarea name='clickMe' id='clickMe' size='2'\n";
+        final String firstSnippet = "<textarea name='clickMe' id='clickMe' size='2'\n";
         final String secondSnippet = "></textarea>\n";
 
         testClickEvents(firstSnippet, secondSnippet);
@@ -120,7 +119,7 @@ public class Event2Test extends LoboUnitTest {
     @Test
     @Alerts("")
     public void submitClick() {
-        final String firstSnippet = "       <input type='submit' name='clickMe' id='clickMe'\n";
+        final String firstSnippet = "<input type='submit' name='clickMe' id='clickMe'\n";
         final String secondSnippet = ">\n";
 
         testClickEvents(firstSnippet, secondSnippet);
@@ -129,7 +128,7 @@ public class Event2Test extends LoboUnitTest {
     @Test
     @Alerts("[object MouseEvent] click b:true c:true [clickMe] [1]")
     public void resetClick() {
-        final String firstSnippet = "       <input type='reset' name='clickMe' id='clickMe'\n";
+        final String firstSnippet = "<input type='reset' name='clickMe' id='clickMe'\n";
         final String secondSnippet = ">\n";
 
         testClickEvents(firstSnippet, secondSnippet);
@@ -139,7 +138,7 @@ public class Event2Test extends LoboUnitTest {
     @Test
     @Alerts("[object MouseEvent] click b:true c:true [clickMe] [1]")
     public void buttonClick() {
-        final String firstSnippet = "       <input type='button' name='clickMe' id='clickMe'\n";
+        final String firstSnippet = "<input type='button' name='clickMe' id='clickMe'\n";
         final String secondSnippet = ">\n";
 
         testClickEvents(firstSnippet, secondSnippet);
@@ -149,44 +148,36 @@ public class Event2Test extends LoboUnitTest {
     @Test
     @Alerts("[object MouseEvent] click b:true c:true [clickMe] [1]")
     public void anchorClick() {
-        final String firstSnippet = "       <a href='#' name='clickMe' id='clickMe'\n";
+        final String firstSnippet = "<a href='#' name='clickMe' id='clickMe'\n";
         final String secondSnippet = ">anchor</a>\n";
 
         testClickEvents(firstSnippet, secondSnippet);
     }
 
     private void testClickEvents(final String firstSnippet, final String secondSnippet) {
-        final String html =
-                "<html>\n"
+        final String html =  "<html>\n"
                         + "<head>\n"
                         + "  <title></title>\n"
                         + "  <script type='text/javascript'>\n"
-                        + "  <!--\n"
                         + "    function dumpEvent(event) {\n"
                         + "      var msg = event;\n"
                         + "      msg = msg + ' ' + event.type;\n"
                         + "      msg = msg + ' b:' + event.bubbles;\n"
                         + "      msg = msg + ' c:' + event.cancelable;\n"
-                        + "\n"
-                        + "      // target\n"
                         + "      var eTarget;\n"
                         + "      if (event.target) {\n"
                         + "        eTarget = event.target;\n"
                         + "      } else if (event.srcElement) {\n"
                         + "        eTarget = event.srcElement;\n"
                         + "      }\n"
-                        + "      // defeat Safari bug\n"
                         + "      if (eTarget.nodeType == 3) {\n"
                         + "        eTarget = eTarget.parentNode;\n"
                         + "      }\n"
-                        + "\n"
                         + "      if (eTarget.name) {\n"
                         + "        msg = msg + ' [' + eTarget.name + ']';\n"
                         + "      } else {\n"
                         + "        msg = msg + ' [' + eTarget.id + ']';\n"
                         + "      }\n"
-                        + "\n"
-                        + "      // key code\n"
                         + "      var eCode;\n"
                         + "      if (event.keyCode) {\n"
                         + "        eCode = event.keyCode;\n"
@@ -201,26 +192,24 @@ public class Event2Test extends LoboUnitTest {
                         + "      } else {\n"
                         + "        msg = msg + ' [-]';\n"
                         + "      }\n"
-                        + "\n"
-                        + "      document.title += ' ' + msg;\n"
+                        + "      document.title = msg;\n"
+                        + "      alert(document.title);"
                         + "    }\n"
-                        + "  //-->\n"
                         + "  </script>\n"
                         + "</head>\n"
                         + "  <form id='form' name='form' action='#'>\n"
                         + "    <input type='text' id='start' name='startText'/>\n"
-                        + "\n"
                         + firstSnippet
                         + "      onclick='dumpEvent(event);'\n"
                         + "      onchange = 'dumpEvent(event);'"
                         + secondSnippet
                         + "   </form>\n"
-                        + "</body>\n"
-                        + "</html>\n";
-
-        final HTMLDocument document = loadHtml(html);
-        HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("clickMe");
-        elem.getOnclick();
+                        + "</body>"
+                        + " <script>"
+                        + "  document.getElementById('clickMe').click();"
+                        + "  </script>"
+                        + "</html>";
+        checkHtmlAlert(html);
     }
 
 
@@ -229,7 +218,7 @@ public class Event2Test extends LoboUnitTest {
             + "[object KeyboardEvent] keypress b:true c:true [typeHere] [97] "
             + "[object KeyboardEvent] keyup b:true c:true [typeHere] [65]")
     public void inputTextType() {
-        final String firstSnippet = "       <input type='text' id='typeHere'\n";
+        final String firstSnippet = "<input type='text' id='typeHere'\n";
         final String secondSnippet = "/>\n";
 
         testTypeEvents(firstSnippet, secondSnippet);
@@ -241,7 +230,7 @@ public class Event2Test extends LoboUnitTest {
             + "[object KeyboardEvent] keypress b:true c:true [typeHere] [97] "
             + "[object KeyboardEvent] keyup b:true c:true [typeHere] [65]")
     public void inputPasswordType() {
-        final String firstSnippet = "       <input type='password' id='typeHere'\n";
+        final String firstSnippet = "<input type='password' id='typeHere'\n";
         final String secondSnippet = "/>\n";
 
         testTypeEvents(firstSnippet, secondSnippet);
@@ -252,7 +241,7 @@ public class Event2Test extends LoboUnitTest {
             + "[object KeyboardEvent] keypress b:true c:true [typeHere] [97] "
             + "[object KeyboardEvent] keyup b:true c:true [typeHere] [65]")
     public void textAreaType() {
-        final String firstSnippet = "       <textarea id='typeHere' rows='4' cols='2'\n";
+        final String firstSnippet = "<textarea id='typeHere' rows='4' cols='2'\n";
         final String secondSnippet = "></textarea >\n";
 
         testTypeEvents(firstSnippet, secondSnippet);
@@ -263,13 +252,11 @@ public class Event2Test extends LoboUnitTest {
                 "<html>\n"
                         + "<head>\n"
                         + "  <script type='text/javascript'>\n"
-                        + "  <!--\n"
                         + "    function dumpEvent(event) {\n"
                         + "      var msg = event;\n"
                         + "      msg = msg + ' ' + event.type;\n"
                         + "      msg = msg + ' b:' + event.bubbles;\n"
                         + "      msg = msg + ' c:' + event.cancelable;\n"
-                        + "\n"
                         + "      // target\n"
                         + "      var eTarget;\n"
                         + "      if (event.target) {\n"
@@ -281,13 +268,11 @@ public class Event2Test extends LoboUnitTest {
                         + "      if (eTarget.nodeType == 3) {\n"
                         + "        eTarget = eTarget.parentNode;\n"
                         + "      }\n"
-                        + "\n"
                         + "      if (eTarget.name) {\n"
                         + "        msg = msg + ' [' + eTarget.name + ']';\n"
                         + "      } else {\n"
                         + "        msg = msg + ' [' + eTarget.id + ']';\n"
                         + "      }\n"
-                        + "\n"
                         + "      // key code\n"
                         + "      var eCode;\n"
                         + "      if (event.keyCode) {\n"
@@ -303,15 +288,13 @@ public class Event2Test extends LoboUnitTest {
                         + "      } else {\n"
                         + "        msg = msg + ' [-]';\n"
                         + "      }\n"
-                        + "\n"
                         + "      document.title += ' ' + msg;\n"
+                        + "      alert(document.title);"
                         + "    }\n"
-                        + "  //-->\n"
                         + "  </script>\n"
                         + "</head>\n"
                         + "  <form id='form' name='form' action='#'>\n"
                         + "    <input type='text' id='start' name='startText'/>\n"
-                        + "\n"
                         + firstSnippet
                         + "    onclick='dumpEvent(event);'\n"
                         + "    onkeydown = 'dumpEvent(event);'\n"
@@ -320,12 +303,12 @@ public class Event2Test extends LoboUnitTest {
                         + "    onchange = 'dumpEvent(event);'"
                         + secondSnippet
                         + "   </form>\n"
-                        + "</body>\n"
-                        + "</html>\n";
-
-        final HTMLDocument document = loadHtml(html);
-        HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("typeHere");
-        elem.getOnclick();
+                        + "</body>"
+                        + " <script>"
+                        + "  document.getElementById('typeHere').click();"
+                        + "  </script>"
+                        + "</html>";
+        checkHtmlAlert(html);
     }
 
     @Test
@@ -349,11 +332,12 @@ public class Event2Test extends LoboUnitTest {
                 + "    document.getElementById('clickId').onkeydown = handler;\n"
                 + "    document.getElementById('clickId').onclick = handler;\n"
                 + "  </script>\n"
-                + "</body></html>";
-
-        final HTMLDocument document = loadHtml(html);
-        HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("clickId");
-        elem.getOnclick();
+                + "</body>"
+                + " <script>"
+                + "  document.getElementById('clickId').click();"
+                + "  </script>"
+                + "</html>";
+        checkHtmlAlert(html);
     }
 
     @Test
@@ -362,7 +346,6 @@ public class Event2Test extends LoboUnitTest {
     public void keys() {
         final String html =
                 "<html><body onload='test(event)'><script>\n"
-
                         + "  function test(e) {\n"
                         + "   alert(typeof e);\n"
                         + "   alert(e.shiftKey);\n"
@@ -372,11 +355,11 @@ public class Event2Test extends LoboUnitTest {
                         + "  }\n"
                         + "</script>\n"
                         + "<div id='div' onclick='test(event)'>abc</div>\n"
-                        + "</body></html>";
-
-        final HTMLDocument document = loadHtml(html);
-        HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("div");
-        elem.getOnclick();
+                        + "</body>"
+                        + " <script>"
+                        + "  </script>"
+                        + "</html>";
+        checkHtmlAlert(html);
     }
 
     @Test
@@ -410,7 +393,7 @@ public class Event2Test extends LoboUnitTest {
                 + "    document.getElementById('checkbox').addEventListener('click', preventDef, false);\n"
                 + "  }\n"
                 + "  function simulateClick() {\n"
-                + "    var evt = document.createEvent('MouseEvents');\n"
+                + "    var evt = document.createEvent('MouseEvent');\n"
                 + "    evt.initMouseEvent('click', true, true, window, 0, 0, 0, 0, 0,"
                 + " false, false, false, false, 0, null);\n"
                 + "    var cb = document.getElementById('checkbox');\n"
@@ -443,59 +426,56 @@ public class Event2Test extends LoboUnitTest {
     @Test
     @Alerts({"false", "false", "SPAN"})
     public void eventTransmission() {
-        final String html =
-                "<html>\n"
-                        + "<body>\n"
-                        + "  <span id='clickMe'>foo</span>\n"
-                        + "  <script>\n"
-
-                        + "    function handler(e) {\n"
-                        + "     alert(e == null);\n"
-                        + "     alert(window.event == null);\n"
-                        + "      var theEvent = (e != null) ? e : window.event;\n"
-                        + "      var target = theEvent.target ? theEvent.target : theEvent.srcElement;\n"
-                        + "     alert(target.tagName);\n"
-                        + "    }\n"
-                        + "    document.getElementById('clickMe').onclick = handler;\n"
-                        + "</script>\n"
-                        + "</body></html>";
-
-        final HTMLDocument document = loadHtml(html);
-        HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("clickMe");
-        elem.getOnclick();
+        final String html = "<html>\n"
+                + "<body>\n"
+                + "  <span id='clickme'>foo</span>\n"
+                + "  <script>\n"
+                + "    function handler(e) {\n"
+                + "     alert(e == null);\n"
+                + "     alert(window.event == null);\n"
+                + "      var theEvent = (e != null) ? e : window.event;\n"
+                + "      var target = theEvent.target ? theEvent.target : theEvent.srcElement;\n"
+                + "     alert(target.tagName);\n"
+                + "    }\n"
+                + "    document.getElementById('clickme').onclick = handler;\n"
+                + "</script>\n"
+                + "</body>"
+                + " <script>"
+                + "  document.getElementById('clickme').click();"
+                + "  </script>"
+                + "</html>";
+        checkHtmlAlert(html);
     }
 
     @Test
     @Alerts({"capturing", "at target", "bubbling"})
     public void eventPhase() {
-        final String html =
-                "<html>\n"
-                        + "<head><script>\n"
-
-                        + "  function init() {\n"
-                        + "    var form = document.forms[0];\n"
-                        + "    form.addEventListener('click', alertPhase, true);\n"
-                        + "    form.addEventListener('click', alertPhase, false);\n"
-                        + "  }\n"
-
-                        + "  function alertPhase(e) {\n"
-                        + "    switch (e.eventPhase) {\n"
-                        + "      case 1:alert('capturing'); break;\n"
-                        + "      case 2:alert('at target'); break;\n"
-                        + "      case 3:alert('bubbling'); break;\n"
-                        + "      default:alert('unknown');\n"
-                        + "    }\n"
-                        + "  }\n"
-                        + "</script></head>\n"
-                        + "<body onload='init()'>\n"
-                        + "  <form>\n"
-                        + "    <input type='button' onclick='alertPhase(event)' id='b'>\n"
-                        + "  </form>\n"
-                        + "</body></html>";
-
-        final HTMLDocument document = loadHtml(html);
-        HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("b");
-        elem.getOnclick();
+        final String html = "<html>\n"
+                + "<head><script>\n"
+                + "  function init() {\n"
+                + "    var form = document.forms[0];\n"
+                + "    form.addEventListener('click', alertPhase, true);\n"
+                + "    form.addEventListener('click', alertPhase, false);\n"
+                + "  }\n"
+                + "  function alertPhase(e) {\n"
+                + "    switch (e.eventPhase) {\n"
+                + "      case 1:alert('capturing'); break;\n"
+                + "      case 2:alert('at target'); break;\n"
+                + "      case 3:alert('bubbling'); break;\n"
+                + "      default:alert('unknown');\n"
+                + "    }\n"
+                + "  }\n"
+                + "</script></head>\n"
+                + "<body onload='init()'>\n"
+                + "  <form>\n"
+                + "    <input type='button' onclick='alertPhase(event)' id='b'>\n"
+                + "  </form>\n"
+                + "</body>"
+                + " <script>"
+                + "  document.getElementById('b').click();"
+                + "  </script>"
+                + "</html>";
+        checkHtmlAlert(html);
     }
 
 
@@ -525,11 +505,12 @@ public class Event2Test extends LoboUnitTest {
                 + "  <div onclick=\"alert('div')\" id='theDiv'>\n"
                 + "    <span id='theSpan'>blabla</span>\n"
                 + "  </div>\n"
-                + "</body></html>";
-
-        final HTMLDocument document = loadHtml(html);
-        HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("theSpan");
-        elem.getOnclick();
+                + "</body>"
+                + " <script>"
+                + "  document.getElementById('theSpan').click();"
+                + "  </script>"
+                + "</html>";
+        checkHtmlAlert(html);
     }
 
 
@@ -575,16 +556,17 @@ public class Event2Test extends LoboUnitTest {
                 + "  <div onclick=\"alert('div')\" id='theDiv'>\n"
                 + "    <span id='theSpan'>blabla</span>\n"
                 + "  </div>\n"
-                + "</body></html>";
-
-        final HTMLDocument document = loadHtml(html);
-        HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("theSpan");
-        elem.getOnclick();
+                + "</body>"
+                + " <script>"
+                + "  document.getElementById('theSpan').click();"
+                + "  </script>"
+                + "</html>";
+        checkHtmlAlert(html);
     }
 
     @Test
     @Alerts({"w", "w 2", "d", "d 2", "s", "s 2", "w", "w 2"})
-    public void stopPropagation_WithMultipleEventHandlers() {
+    public void stopPropagationWithMultipleEventHandlers() {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
@@ -607,11 +589,12 @@ public class Event2Test extends LoboUnitTest {
                 + "<div id='theDiv'>\n"
                 + "<span id='theSpan'>blabla</span>\n"
                 + "</div>\n"
-                + "</body></html>";
-
-        final HTMLDocument document = loadHtml(html);
-        HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("theSpan");
-        elem.getOnclick();
+                + "</body>"
+                + " <script>"
+                + "  document.getElementById('theSpan').click();"
+                + "  </script>"
+                + "</html>";
+        checkHtmlAlert(html);
     }
 
 
@@ -624,7 +607,7 @@ public class Event2Test extends LoboUnitTest {
 
     @Test
     @Alerts({"w", "w 2", "d", "d 2", "s", "w"})
-    public void stopImmediatePropagation_WithMultipleEventHandlers() {
+    public void stopImmediatePropagationWithMultipleEventHandlers() {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
@@ -647,11 +630,12 @@ public class Event2Test extends LoboUnitTest {
                 + "<div id='theDiv'>\n"
                 + "<span id='theSpan'>blabla</span>\n"
                 + "</div>\n"
-                + "</body></html>";
-
-        final HTMLDocument document = loadHtml(html);
-        HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("theSpan");
-        elem.getOnclick();
+                + "</body>"
+                + " <script>"
+                + "  document.getElementById('theSpan').click();"
+                + "  </script>"
+                + "</html>";
+        checkHtmlAlert(html);
     }
 
     @Test
@@ -692,10 +676,11 @@ public class Event2Test extends LoboUnitTest {
                 + "  window.onclick = function (event) { "
                 + "alert('window onclick prevented=' + event.defaultPrevented); return true; }\n"
                 + "</script>\n"
-                + "</body></html>";
-
-        final HTMLDocument document = loadHtml(html);
-        HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("tester");
-        elem.getOnclick();
+                + "</body>"
+                + " <script>"
+                + "  document.getElementById('tester').click();"
+                + "  </script>"
+                + "</html>";
+        checkHtmlAlert(html);
     }
 }

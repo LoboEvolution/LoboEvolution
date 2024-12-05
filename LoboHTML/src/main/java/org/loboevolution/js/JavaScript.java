@@ -111,10 +111,10 @@ public class JavaScript {
 	 * @return a {@link java.lang.Object} object.
 	 */
 	public Object getJavascriptObject(final Object raw, final Scriptable scope) {
-		if (raw instanceof String || raw instanceof Scriptable) {
-			return raw;
-		} else if (raw == null) {
+		if (raw == null) {
 			return null;
+		} else if (raw instanceof String || raw instanceof Scriptable) {
+			return raw;
 		} else if (raw.getClass().isPrimitive()) {
 			return raw;
 		} else if (raw instanceof ScriptableDelegate) {
@@ -154,7 +154,7 @@ public class JavaScript {
 	}
 
 	public void defineElementClass(final Scriptable scope, final Document document, final String jsClassName, final String elementName, final Class<?> javaClass) {
-		final JavaInstantiator ji = () -> {
+		final JavaInstantiator ji = (final Object[] args) -> {
 			final Document d = document;
 			if (d == null) {
 				throw new IllegalStateException("Document not set in current context.");
@@ -164,6 +164,11 @@ public class JavaScript {
 		final JavaClassWrapper classWrapper = JavaClassWrapperFactory.getInstance().getClassWrapper(javaClass);
 		final Function constructorFunction = new JavaConstructorObject(jsClassName, classWrapper, ji);
 		ScriptableObject.defineProperty(scope, jsClassName, constructorFunction, ScriptableObject.READONLY);
+	}
+
+	public void putJsObject(final Scriptable scope, final String jsClassName, final Class<?> javaClass) {
+		final Object consoleJSObj = JavaScript.getInstance().getJavascriptObject(javaClass, scope);
+		ScriptableObject.putProperty(scope, "console", consoleJSObj);
 	}
 
 	public void defineJsObject(final Scriptable scope, final String jsClassName, final Class<?> javaClass, final JavaInstantiator instantiator) {

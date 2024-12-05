@@ -54,7 +54,7 @@ public class CloseEventTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts({"[object CloseEvent]", "type-close", "false", "false", "false", "0", "", "false"})
+    @Alerts({"[object CloseEvent]", "type-close", "false", "false", "false", "0", "null", "false"})
     public void createCtor() {
         final String html = "<html><head>"
                 + "<script>\n"
@@ -95,7 +95,7 @@ public class CloseEventTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"[object CloseEvent]", "", "false", "false", "false", "0", "", "false"})
+    @Alerts({"[object CloseEvent]", "null", "false", "false", "false", "0", "null", "false"})
     public void createCreateEvent() {
         final String html = "<html><head>"
                 + "<script>\n"

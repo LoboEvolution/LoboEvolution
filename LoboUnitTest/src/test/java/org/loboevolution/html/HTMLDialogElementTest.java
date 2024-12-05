@@ -866,40 +866,33 @@ public class HTMLDialogElementTest extends LoboUnitTest {
             "Show dialog\nHello World\nDismiss", "true",
             "Show dialog", "false"})
     public void useCaseIssue598() {
-        final String html =
-                "<html>\n"
-                        + "  <body>\n"
-                        + "    <button id='showMyDialog'>Show dialog</button><br/>\n"
-                        + "    <dialog id='mydialog'>\n"
-                        + "      Hello World<br/>\n"
-                        + "      <button id='dismiss'>Dismiss</button>\n"
-                        + "    </dialog>\n"
-
-                        + "    <script>\n"
-                        + "      showButton = document.getElementById('showMyDialog');\n"
-                        + "      showButton.addEventListener('click', showMyDialog);\n"
-
-                        + "      dismissButton = document.getElementById('dismiss');\n"
-                        + "      dismissButton.addEventListener('click', closeMyDialog);\r\n"
-
-                        + "      function showMyDiaalert() {\n"
-                        + "        mydialog = document.getElementById('mydialog');\n"
-                        + "        mydialog.showModal();\n"
-                        + "      }\n"
-
-                        + "      function closeMyDiaalert() {\n"
-                        + "        mydialog = document.getElementById('mydialog');\n"
-                        + "        mydialog.close();\n"
-                        + "      }\n"
-                        + "    </script>\n"
-                        + "  </body>\n"
-                        + "</html>";
-
-        final HTMLDocument document = loadHtml(html);
-        HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("showMyDialog");
-        elem.getOnclick();
-
-        elem = (HTMLElementImpl) document.getElementById("dismiss");
-        elem.getOnclick();
+        final String html = "<html>\n"
+                + "  <body>\n"
+                + "    <button id='showMyDialog'>Show dialog</button><br/>\n"
+                + "    <dialog id='mydialog'>\n"
+                + "      Hello World<br/>\n"
+                + "      <button id='dismiss'>Dismiss</button>\n"
+                + "    </dialog>\n"
+                + "    <script>\n"
+                + "      showButton = document.getElementById('showMyDialog');\n"
+                + "      showButton.addEventListener('click', showMyDialog);\n"
+                + "      dismissButton = document.getElementById('dismiss');\n"
+                + "      dismissButton.addEventListener('click', closeMyDialog);\r\n"
+                + "      function showMyDiaalert() {\n"
+                + "        mydialog = document.getElementById('mydialog');\n"
+                + "        mydialog.showModal();\n"
+                + "      }\n"
+                + "      function closeMyDiaalert() {\n"
+                + "        mydialog = document.getElementById('mydialog');\n"
+                + "        mydialog.close();\n"
+                + "      }\n"
+                + "    </script>\n"
+                + "</body>"
+                + " <script>"
+                + "  document.getElementById('showMyDialog').click();"
+                + "  document.getElementById('dismiss').click();"
+                + "  </script>"
+                + "</html>";
+        checkHtmlAlert(html);
     }
 }

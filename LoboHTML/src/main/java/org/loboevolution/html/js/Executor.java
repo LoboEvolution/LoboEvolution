@@ -29,11 +29,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.events.Event;
+import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.js.JavaScript;
-import org.mozilla.javascript.Context;
-import org.mozilla.javascript.Function;
-import org.mozilla.javascript.Scriptable;
-import org.mozilla.javascript.ScriptableObject;
+import org.loboevolution.js.LoboContextFactory;
+import org.mozilla.javascript.*;
 
 /**
  * <p>Executor class.</p>
@@ -47,14 +46,11 @@ public class Executor {
 	 */
 	public static final String SCOPE_KEY = "cobra.js.scope";
 
-	/**
-	 * This method should be invoked instead of Context.enter.
-	 * @return a {@link org.mozilla.javascript.Context} object.
-	 */
-	public static Context createContext() {
-		final Context ctx = Context.enter();
-		ctx.setLanguageVersion(Context.VERSION_1_8);
-		ctx.setOptimizationLevel(-1);
+	public static Context createContext(final LoboContextFactory factory) {
+		final Context ctx = factory.enterContext();
+		if (!ctx.isSealed()) {
+			ctx.seal(null);
+		}
 		return ctx;
 	}
 
@@ -63,54 +59,12 @@ public class Executor {
 	 *
 	 * @param element a {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} object.
 	 * @param f a {@link org.mozilla.javascript.Function} object.
-	 * @param event a {@link Event} object.
 	 * @param obj an array of {@link java.lang.Object} objects.
+	 *            * @param contextFactory a {@link LoboContextFactory} object.
 	 * @return a boolean.
 	 */
-	public static boolean executeFunction(final NodeImpl element, final Function f, final Event event, final Object[] obj) {
-		return Executor.executeFunction(element, element, f, event, obj);
-	}
-
-	/**
-	 * <p>executeFunction.</p>
-	 *
-	 * @param element a {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} object.
-	 * @param thisObject a {@link java.lang.Object} object.
-	 * @param f a {@link org.mozilla.javascript.Function} object.
-	 * @param event a {@link Event} object.
-	 * @param obj an array of {@link java.lang.Object} objects.
-	 * @return a boolean.
-	 */
-	public static boolean executeFunction(final NodeImpl element, final Object thisObject, final Function f, final Event event, final Object[] obj) {
-		final Document doc = element.getOwnerDocument();
-		if (doc == null) {
-			throw new IllegalStateException("Element does not belong to a document.");
-		}
-		final Context ctx = createContext();
-		try {
-			final Scriptable scope = (Scriptable) doc.getUserData(Executor.SCOPE_KEY);
-			if (scope == null) {
-				throw new IllegalStateException(
-						"Scriptable (scope) instance was expected to be keyed as UserData to document using "
-								+ Executor.SCOPE_KEY);
-			}
-			final JavaScript js = JavaScript.getInstance();
-			final Scriptable thisScope = (Scriptable) js.getJavascriptObject(thisObject, scope);
-			try {
-				final Scriptable eventScriptable = (Scriptable) js.getJavascriptObject(event, thisScope);
-				ScriptableObject.defineProperty(thisScope, "event", eventScriptable, ScriptableObject.READONLY);
-				final Object result = f.call(ctx, thisScope, thisScope, obj);
-				if (!(result instanceof Boolean)) {
-					return true;
-				}
-				return (Boolean) result;
-			} catch (final Throwable thrown) {
-				log.error("executeFunction(): There was an error in Javascript code.", thrown);
-				return true;
-			}
-		} finally {
-			Context.exit();
-		}
+	public static boolean executeFunction(final NodeImpl element, final Function f, final Object[] obj, final LoboContextFactory contextFactory) {
+		return executeFunction(element, element, f, obj, contextFactory);
 	}
 
 	/**
@@ -118,10 +72,11 @@ public class Executor {
 	 *
 	 * @param thisScope a {@link org.mozilla.javascript.Scriptable} object.
 	 * @param f a {@link org.mozilla.javascript.Function} object.
+	 * @param contextFactory a {@link LoboContextFactory} object
 	 * @return a boolean.
 	 */
-	public static boolean executeFunction(final Scriptable thisScope, final Function f) {
-		final Context ctx = createContext();
+	public static boolean executeFunction(final Scriptable thisScope, final Function f, final LoboContextFactory contextFactory) {
+		final Context ctx = createContext(contextFactory);
 		try {
 			try {
 				final Object result = f.call(ctx, thisScope, thisScope, new Object[0]);
@@ -135,6 +90,35 @@ public class Executor {
 			}
 		} finally {
 			Context.exit();
+		}
+	}
+
+	private static boolean executeFunction(final NodeImpl element, final Object thisObject, final Function f,
+										   final Object[] obj, final LoboContextFactory contextFactory) {
+		final Document doc = element.getOwnerDocument();
+		if (doc == null) {
+			throw new IllegalStateException("Element does not belong to a document.");
+		}
+
+		try(Context ctx = createContext(contextFactory)) {
+			final Scriptable scope = (Scriptable) doc.getUserData(Executor.SCOPE_KEY);
+			if (scope == null) {
+				throw new IllegalStateException(
+						"Scriptable (scope) instance was expected to be keyed as UserData to document using "
+								+ Executor.SCOPE_KEY);
+			}
+			final JavaScript js = JavaScript.getInstance();
+			final Scriptable thisScope = (Scriptable) js.getJavascriptObject(thisObject, scope);
+			try {
+				final Object result = f.call(ctx, thisScope, thisScope, obj);
+				if (!(result instanceof Boolean)) {
+					return true;
+				}
+				return (Boolean) result;
+			} catch (final Throwable thrown) {
+				log.error("executeFunction(): There was an error in Javascript code.", thrown);
+				return true;
+			}
 		}
 	}
 }

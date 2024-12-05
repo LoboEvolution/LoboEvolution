@@ -165,9 +165,8 @@ public class HTMLInputElementImpl extends HTMLBasicInputElement implements HTMLI
     public void blur() {
         if (text != null) {
             text.blur();
-        } else {
-            setFocusable(false);
         }
+        setFocusable(false);
     }
 
     /**
@@ -176,8 +175,18 @@ public class HTMLInputElementImpl extends HTMLBasicInputElement implements HTMLI
     public void focus() {
         if (text != null) {
             text.focus();
+        }
+        setFocusable(true);
+    }
+
+    @Override
+    public void click() {
+        final String type = getType();
+        if("checkbox".equals(type)){
+            setChecked(!isChecked());
         } else {
-            setFocusable(true);
+            focus();
+            super.click();
         }
     }
 

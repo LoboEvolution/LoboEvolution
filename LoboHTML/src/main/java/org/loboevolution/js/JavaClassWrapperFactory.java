@@ -34,13 +34,8 @@ import java.util.WeakHashMap;
  */
 public final class JavaClassWrapperFactory {
 
-    private final Map<Class, WeakReference<JavaClassWrapper>> classWrappers = new WeakHashMap();
+    private final Map<Class<?>, WeakReference<JavaClassWrapper>> classWrappers = new WeakHashMap<>();
 
-	private JavaClassWrapperFactory() { }
-
-    private static final class InstanceHolder {
-        private static final JavaClassWrapperFactory instance = new JavaClassWrapperFactory();
-    }
 
     /**
 	 * <p>Getter for the field instance.</p>
@@ -57,11 +52,8 @@ public final class JavaClassWrapperFactory {
 	 * @param clazz a {@link java.lang.Class} object.
 	 * @return a {@link org.loboevolution.js.JavaClassWrapper} object.
 	 */
-	public JavaClassWrapper getClassWrapper(final Class clazz) {
+	public JavaClassWrapper getClassWrapper(final Class<?> clazz) {
 		synchronized (this) {
-			// WeakHashMaps where the value refers to
-			// the key will retain keys. Must make it
-			// refer to the value weakly too.
 			final WeakReference<JavaClassWrapper> jcwr = this.classWrappers.get(clazz);
 			JavaClassWrapper jcw = null;
 			if (jcwr != null) {

@@ -34,8 +34,7 @@ public interface JavaInstantiator {
 	 * <p>newInstance.</p>
 	 *
 	 * @return a {@link java.lang.Object} object.
-	 * @throws java.lang.InstantiationException if any.
-	 * @throws java.lang.IllegalAccessException if any.
+	 * @throws java.lang.Exception if any.
 	 */
-	Object newInstance() throws InstantiationException, IllegalAccessException;
+	Object newInstance(Object[] args) throws Exception;
 }

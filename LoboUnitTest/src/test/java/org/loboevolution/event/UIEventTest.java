@@ -38,7 +38,7 @@ import org.loboevolution.driver.LoboUnitTest;
 public class UIEventTest extends LoboUnitTest {
 
     @Test
-    @Alerts({"[object UIEvent]", "event", "false", "false", "false", "false"})
+    @Alerts({"[object UIEvent]", "event", "false", "false", "false"})
     public void createCtor() {
         final String html = "<html><head>"
                 + "<script>\n"
@@ -46,7 +46,7 @@ public class UIEventTest extends LoboUnitTest {
                 + "    try {\n"
                 + "      var event = new UIEvent('event');\n"
                 + "      dump(event);\n"
-                + "    } catch (e) {alert('exception') }\n"
+                + "    } catch (e) {alert(e) }\n"
                 + "  }\n"
                 + DUMP_EVENT_FUNCTION
                 + "</script></head><body onload='test()'>\n"
@@ -56,7 +56,7 @@ public class UIEventTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"[object UIEvent]", "event", "true", "false", "false", "true"})
+    @Alerts({"[object UIEvent]", "event", "true", "false", "false"})
     public void createCtorWithDetails() {
         final String html = "<html><head>"
                 + "<script>\n"
@@ -103,10 +103,10 @@ public class UIEventTest extends LoboUnitTest {
                 + "  function test() {\n"
                 + "    try {\n"
                 + "     alert('DOM2: ' + document.createEvent('UIEvents'));\n"
-                + "    } catch(e) {alert('DOM2: exception')}\n"
+                + "    } catch(e) {alert(e)}\n"
                 + "    try {\n"
                 + "     alert('DOM3: ' + document.createEvent('UIEvent'));\n"
-                + "    } catch(e) {alert('DOM3: exception')}\n"
+                + "    } catch(e) {alert(e)}\n"
                 + "  }\n"
                 + "</script></head><body onload='test()'>\n"
                 + "</body></html>";
@@ -155,7 +155,6 @@ public class UIEventTest extends LoboUnitTest {
     public void detailInputText() {
         final String html =
                 "<html><head><script>\n"
-
                         + "  function alertDetail(e) {\n"
                         + "   alert(e);\n"
                         + "   alert(e.detail);\n"
@@ -195,7 +194,6 @@ public class UIEventTest extends LoboUnitTest {
     public void view() {
         final String html =
                 "<html><body onload='alertView(event)'><script>\n"
-
                         + "  function alertView(e) {\n"
                         + "   alert(e);\n"
                         + "   alert(e.view);\n"

@@ -31,9 +31,11 @@ import org.loboevolution.common.Strings;
 import org.loboevolution.config.HtmlRendererConfig;
 import org.loboevolution.html.dom.HTMLInputElement;
 import org.loboevolution.html.dom.domimpl.HTMLBasicInputElement;
+import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
 import org.loboevolution.html.js.Executor;
 import org.loboevolution.html.js.WindowImpl;
+import org.loboevolution.js.LoboContextFactory;
 
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
@@ -55,11 +57,11 @@ public class BasicInput implements FocusListener, KeyListener, CaretListener, Mo
     @Override
     public void focusGained(final FocusEvent e) {
         if (element.getOnfocus() != null) {
-            Executor.executeFunction(element, element.getOnfocus(), null, new Object[]{});
+            Executor.executeFunction(element, element.getOnfocus(), new Object[]{}, getWindowFactory());
         }
 
         if (element.getOnfocusin() != null) {
-            Executor.executeFunction(element, element.getOnfocusin(), null, new Object[]{});
+            Executor.executeFunction(element, element.getOnfocusin(), new Object[]{}, getWindowFactory());
         }
     }
 
@@ -90,28 +92,28 @@ public class BasicInput implements FocusListener, KeyListener, CaretListener, Mo
         }
 
         if (element.getOnblur() != null) {
-            Executor.executeFunction(element, element.getOnblur(), null, new Object[]{});
+            Executor.executeFunction(element, element.getOnblur(), new Object[]{}, getWindowFactory());
         }
 
         if (element.getOnfocusout() != null) {
             jComponent.setText(element.getValue());
-            Executor.executeFunction(element, element.getOnfocusout(), null, new Object[]{});
+            Executor.executeFunction(element, element.getOnfocusout(), new Object[]{}, getWindowFactory());
         }
     }
 
     @Override
     public void keyTyped(final KeyEvent e) {
         if (element.getOnkeydown() != null) {
-            Executor.executeFunction(element, element.getOnkeydown(), null, new Object[]{});
+            Executor.executeFunction(element, element.getOnkeydown(), new Object[]{}, getWindowFactory());
         }
 
         if (element.getOnkeypress() != null) {
-            Executor.executeFunction(element, element.getOnkeypress(), null, new Object[]{});
+            Executor.executeFunction(element, element.getOnkeypress(), new Object[]{}, getWindowFactory());
         }
 
         if (element.getOninput() != null) {
             element.setValue(Strings.isBlank(element.getValue()) ? String.valueOf(e.getKeyChar()) : element.getValue() + e.getKeyChar());
-            Executor.executeFunction(element, element.getOninput(), null, new Object[]{});
+            Executor.executeFunction(element, element.getOninput(), new Object[]{}, getWindowFactory());
         }
     }
 
@@ -123,7 +125,7 @@ public class BasicInput implements FocusListener, KeyListener, CaretListener, Mo
     @Override
     public void keyReleased(final KeyEvent e) {
         if (element.getOnkeyup() != null) {
-            Executor.executeFunction(element, element.getOnkeyup(), null, new Object[]{});
+            Executor.executeFunction(element, element.getOnkeyup(), new Object[]{}, getWindowFactory());
         }
     }
 
@@ -133,30 +135,30 @@ public class BasicInput implements FocusListener, KeyListener, CaretListener, Mo
         final int mark = e.getMark();
 
         if (dot != mark && element.getOnselect() != null) {
-            Executor.executeFunction(element, element.getOnselect(), null, new Object[]{});
+            Executor.executeFunction(element, element.getOnselect(), new Object[]{}, getWindowFactory());
         }
     }
 
     @Override
     public void mouseEntered(final MouseEvent e) {
         if (element.getOnmouseover() != null) {
-            Executor.executeFunction(element, element.getOnmouseover(), null, new Object[]{});
+            Executor.executeFunction(element, element.getOnmouseover(), new Object[]{}, getWindowFactory());
         }
     }
 
     public void mousePressed(final MouseEvent e) {
         if (element.getOnkeypress() != null) {
-            Executor.executeFunction(element, element.getOnkeypress(), null, new Object[]{});
+            Executor.executeFunction(element, element.getOnkeypress(), new Object[]{}, getWindowFactory());
         }
 
         if (element.getOnkeydown() != null) {
-            Executor.executeFunction(element, element.getOnkeydown(), null, new Object[]{});
+            Executor.executeFunction(element, element.getOnkeydown(), new Object[]{}, getWindowFactory());
         }
     }
 
     public void mouseReleased(final MouseEvent e) {
         if (element.getOnkeyup() != null) {
-            Executor.executeFunction(element, element.getOnkeyup(), null, new Object[]{});
+            Executor.executeFunction(element, element.getOnkeyup(), new Object[]{}, getWindowFactory());
         }
     }
 
@@ -168,5 +170,11 @@ public class BasicInput implements FocusListener, KeyListener, CaretListener, Mo
     @Override
     public void mouseClicked(final MouseEvent e) {
         // TODO Auto-generated method stub
+    }
+
+    private LoboContextFactory getWindowFactory() {
+        final HTMLDocumentImpl doc = (HTMLDocumentImpl) element.getOwnerDocument();
+        final WindowImpl window = (WindowImpl) doc.getDefaultView();
+        return window.getContextFactory();
     }
 }

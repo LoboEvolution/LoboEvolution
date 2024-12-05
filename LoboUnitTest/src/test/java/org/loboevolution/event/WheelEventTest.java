@@ -46,7 +46,7 @@ public class WheelEventTest extends LoboUnitTest {
                 + "    try {\n"
                 + "      var event = new WheelEvent('wheel');\n"
                 + "      dump(event);\n"
-                + "    } catch (e) {alert('exception') }\n"
+                + "    } catch (e) {alert(e) }\n"
                 + "  }\n"
                 + DUMP_EVENT_FUNCTION
                 + "</script></head><body onload='test()'>\n"
@@ -56,7 +56,7 @@ public class WheelEventTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"[object WheelEvent]", "undefined", "false", "false", "false"})
+    @Alerts({"[object WheelEvent]", "null", "false", "false", "false"})
     public void createCtorWithoutType() {
         final String html = "<html><head>"
                 + "<script>\n"
@@ -64,7 +64,7 @@ public class WheelEventTest extends LoboUnitTest {
                 + "    try {\n"
                 + "      var event = new WheelEvent();\n"
                 + "      dump(event);\n"
-                + "    } catch (e) {alert('exception') }\n"
+                + "    } catch (e) {alert(e) }\n"
                 + "  }\n"
                 + DUMP_EVENT_FUNCTION
                 + "</script></head><body onload='test()'>\n"

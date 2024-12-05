@@ -28,6 +28,8 @@
  */
 package org.loboevolution.html.dom.nodeimpl;
 
+import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
+import org.loboevolution.html.js.WindowImpl;
 import org.loboevolution.html.node.AbstractList;
 import org.loboevolution.html.js.Executor;
 import org.loboevolution.html.node.Node;
@@ -103,7 +105,10 @@ public class NodeListImpl extends AbstractList<Node> implements NodeList {
 		this.forEach(node -> {
 			final int i = integer.getAndIncrement();
 			final NodeImpl n = (NodeImpl) node;
-			Executor.executeFunction(n, function, null, new Object[] { n.getScriptable(), i, this});
+			if (n instanceof HTMLElementImpl element) {
+				final WindowImpl win = (WindowImpl) element.getDocumentNode().getDefaultView();
+				Executor.executeFunction(n, function, new Object[]{n.getScriptable(), i, this}, win.getContextFactory());
+			}
 		});
 	}
 

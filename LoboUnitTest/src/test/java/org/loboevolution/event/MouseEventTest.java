@@ -30,8 +30,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.loboevolution.annotation.Alerts;
 import org.loboevolution.annotation.AlertsExtension;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.dom.HTMLDocument;
-import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 
 /**
  * Tests for mouse events support.
@@ -45,7 +43,6 @@ public class MouseEventTest extends LoboUnitTest {
             + "   alert(event.bubbles);\n"
             + "   alert(event.cancelable);\n"
             + "   alert(event.composed);\n"
-
             + "   alert(event.view == window);\n"
             + "   alert(event.screenX);\n"
             + "   alert(event.screenY);\n"
@@ -210,7 +207,7 @@ public class MouseEventTest extends LoboUnitTest {
                 + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
-                + "     alert('DOM2: ' + document.createEvent('MouseEvents'));\n"
+                + "     alert('DOM2: ' + document.createEvent('MouseEvent'));\n"
                 + "    } catch(e) {alert('DOM2: exception')}\n"
                 + "    try {\n"
                 + "     alert('DOM3: ' + document.createEvent('MouseEvent'));\n"
@@ -225,7 +222,7 @@ public class MouseEventTest extends LoboUnitTest {
     @Alerts({"click", "true", "true", "true", "1", "2", "3", "4", "true", "true", "true", "true"})
     public void initMouseEvent() {
         final String html = "<html><body><script>\n"
-                + "  var e = document.createEvent('MouseEvents');\n"
+                + "  var e = document.createEvent('MouseEvent');\n"
                 + "  e.initMouseEvent('click', true, true, window, 0, 1, 2, 3, 4, true, true, true, true, 0, null);\n"
                 + " alert(e.type);\n"
                 + " alert(e.bubbles);\n"
@@ -280,7 +277,7 @@ public class MouseEventTest extends LoboUnitTest {
                 + "  function $createMouseEvent(doc, type, canBubble, cancelable, detail, screenX, screenY, clientX,"
                 + " clientY, ctrlKey, altKey, shiftKey, metaKey, button, relatedTarget) {\n"
                 + "    button == 1?(button = 0):button == 4?(button = 1):(button = 2);\n"
-                + "    var evt = doc.createEvent('MouseEvents');\n"
+                + "    var evt = doc.createEvent('MouseEvent');\n"
                 + "    evt.initMouseEvent(type, canBubble, cancelable, null, detail, screenX, screenY, clientX,"
                 + " clientY, ctrlKey, altKey, shiftKey, metaKey, button, relatedTarget);\n"
                 + "    return evt;\n"
@@ -307,11 +304,9 @@ public class MouseEventTest extends LoboUnitTest {
                 + "  } else if (p.attachEvent) {\n"
                 + "    p.attachEvent('onclick', handler);\n"
                 + "  }\n"
+                + "  document.getElementById('clicker').click();"
                 + "</script></body></html>";
-
-        final HTMLDocument document = loadHtml(html);
-        HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("clicker");
-        elem.getOnclick();
+        checkHtmlAlert(html);
     }
 
     @Test
@@ -329,18 +324,16 @@ public class MouseEventTest extends LoboUnitTest {
                 + "  } else if (p.attachEvent) {\n"
                 + "    p.attachEvent('onmousedown', handler);\n"
                 + "  }\n"
+                + "  document.getElementById('clicker').click();"
                 + "</script></body></html>";
-
-        final HTMLDocument document = loadHtml(html);
-        HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("clicker");
-        elem.getOnclick();
+        checkHtmlAlert(html);
     }
 
     @Test
     @Alerts({"0", "0"})
     public void pageX() {
         final String html = "<html><body><script>\n"
-                + "  var e = document.createEvent('MouseEvents');\n"
+                + "  var e = document.createEvent('MouseEvent');\n"
                 + " alert(e.pageX);\n"
                 + " alert(e.pageY);\n"
                 + "</script></body></html>";

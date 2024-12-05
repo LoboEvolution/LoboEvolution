@@ -46,8 +46,8 @@ public class HTMLInputElementTest extends LoboUnitTest {
     @Test
     @Alerts({"foo", "text", "textfield1", "form1", "cat"})
     public void standardProperties_Text() {
-        final String html
-                = "<html><head><script>\n"
+        final String html = "<html>" +
+                "<head><script>\n"
                 + "function doTest() {\n"
                 + "  alert(document.form1.textfield1.value);\n"
                 + "  alert(document.form1.textfield1.type);\n"
@@ -273,8 +273,8 @@ public class HTMLInputElementTest extends LoboUnitTest {
     }
 
     private void testAttribute(final String property, final String attrib, final String value) {
-        String html
-                = "<html><head><script>\n"
+        String html = "<html>" +
+                "<head><script>\n"
                 + "function doTest() {\n";
 
         if (value != null) {
@@ -578,8 +578,8 @@ public class HTMLInputElementTest extends LoboUnitTest {
 
     private void testAttribute(final String itemId, final String property,
                                final String attrib, final String value) {
-        String html
-                = "<html><head><script>\n"
+        String html = "<html>" +
+                "<head><script>\n"
                 + "function doTest() {\n";
 
         if (value != null) {
@@ -635,8 +635,8 @@ public class HTMLInputElementTest extends LoboUnitTest {
     @Alerts({"abc-abc", "abc-abc", "jkl-abc"})
     @Test
     public void typeChangeNotDirty() {
-        final String html
-                = "<html><head><script>\n"
+        final String html = "<html>" +
+                "<head><script>\n"
                 + "function doTest() {\n"
                 + "  var inpt = document.form1.textInput1;\n"
                 + "  alert(inpt.value + '-' + inpt.defaultValue);\n"
@@ -659,8 +659,8 @@ public class HTMLInputElementTest extends LoboUnitTest {
     @Alerts({"abc-abc", "def-abc", "ghi-abc", "ghi-abc", "jkl-abc"})
     @Test
     public void typeChangeDirty() {
-        final String html
-                = "<html><head><script>\n"
+        final String html = "<html>" +
+                "<head><script>\n"
                 + "function doTest() {\n"
                 + "  var inpt = document.form1.textInput1;\n"
                 + "  alert(inpt.value + '-' + inpt.defaultValue);\n"
@@ -686,8 +686,8 @@ public class HTMLInputElementTest extends LoboUnitTest {
     @Test
     @Alerts({"false", "true"})
     public void checkedAttribute_Checkbox() {
-        final String html
-                = "<html><head><script>\n"
+        final String html = "<html>" +
+                "<head><script>\n"
                 + "function test() {\n"
                 + "  alert(document.form1.checkbox1.checked);\n"
                 + "  document.form1.checkbox1.checked = true;\n"
@@ -699,21 +699,20 @@ public class HTMLInputElementTest extends LoboUnitTest {
                 + "  <input type='cheCKbox' name='checkbox1' id='checkbox1' value='foo' />\n"
                 + "</form>\n"
                 + "<a href='javascript:test()' id='clickme'>click me</a>\n"
-                + "</body></html>";
-
-        final HTMLDocument document = loadHtml(html);
-        HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("checkbox1");
-        elem.getOnclick();
-
-        elem = (HTMLElementImpl) document.getElementById("clickme");
-        elem.getOnclick();
+                + "</body>"
+                + " <script>"
+                + "  document.getElementById('checkbox1').click();"
+                + "  document.getElementById('clickme').click();"
+                + "  </script>"
+                + "</html>";
+        checkHtmlAlert(html);
     }
 
     @Test
     @Alerts({"true", "false", "false", "false", "true", "false"})
     public void checkedAttribute_Radio() {
-        final String html
-                = "<html><head><script>\n"
+        final String html = "<html>" +
+                "<head><script>\n"
                 + "function test() {\n"
                 + "  alert(document.form1.radio1[0].checked);\n"
                 + "  alert(document.form1.radio1[1].checked);\n"
@@ -731,18 +730,19 @@ public class HTMLInputElementTest extends LoboUnitTest {
                 + "  <input type='radio' name='radio1' id='radioC' value='c' />\n"
                 + "</form>\n"
                 + "<a href='javascript:test()' id='clickme'>click me</a>\n"
-                + "</body></html>";
-
-        final HTMLDocument document = loadHtml(html);
-        HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("clickme");
-        elem.getOnclick();
+                + "</body>"
+                + " <script>"
+                + "  document.getElementById('clickme').click();"
+                + "  </script>"
+                + "</html>";
+        checkHtmlAlert(html);
     }
 
     @Test
     @Alerts({"false", "true", "false", "true", "false", "true"})
     public void disabledAttribute() {
-        final String html
-                = "<html><head><script>\n"
+        final String html = "<html>" +
+                "<head><script>\n"
                 + "function test() {\n"
                 + "  alert(document.form1.button1.disabled);\n"
                 + "  alert(document.form1.button2.disabled);\n"
@@ -762,18 +762,19 @@ public class HTMLInputElementTest extends LoboUnitTest {
                 + "  <input type='submit' name='button3' value='3'/>\n"
                 + "</form>\n"
                 + "<a href='javascript:test()' id='clickme'>click me</a>\n"
-                + "</body></html>";
-
-        final HTMLDocument document = loadHtml(html);
-        HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("clickme");
-        elem.getOnclick();
+                + "</body>"
+                + " <script>"
+                + "  document.getElementById('clickme').click();"
+                + "  </script>"
+                + "</html>";
+        checkHtmlAlert(html);
     }
 
     @Test
     @Alerts({"blue"})
     public void inputValue() {
-        final String html
-                = "<html><head><title>foo</title><script>\n"
+        final String html = "<html>" +
+                "<head><title>foo</title><script>\n"
                 + "function doTest() {\n"
                 + "  document.form1.textfield1.value = 'blue';\n"
                 + " alert(document.form1.textfield1.value);\n"
@@ -785,18 +786,19 @@ public class HTMLInputElementTest extends LoboUnitTest {
                 + "  <input type='text' name='textfield1' id='textfield1' value='foo' />\n"
                 + "  <input type='submit' id='clickMe'/>\n"
                 + "</form>\n"
-                + "</body></html>";
-
-        final HTMLDocument document = loadHtml(html);
-        HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("clickMe");
-        elem.getOnclick();
+                + "</body>"
+                + " <script>"
+                + "  document.getElementById('clickme').click();"
+                + "  </script>"
+                + "</html>";
+        checkHtmlAlert(html);
     }
 
     @Test
     @Alerts({"true"})
     public void inputSelect_NotDefinedAsPropertyAndFunction() {
-        final String html
-                = "<html><head><title>foo</title><script>\n"
+        final String html = "<html>" +
+                "<head><title>foo</title><script>\n"
                 + "function doTest() {\n"
                 + "  alert(document.form1.textfield1.select()9;\n"
                 + "}\n"
@@ -807,11 +809,12 @@ public class HTMLInputElementTest extends LoboUnitTest {
                 + "  <input type='text' name='textfield1' id='textfield1' value='foo' />\n"
                 + "  <input type='submit' id='clickMe'/>\n"
                 + "</form>\n"
-                + "</body></html>";
-
-        final HTMLDocument document = loadHtml(html);
-        HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("clickMe");
-        elem.getOnclick();
+                + "</body>"
+                + " <script>"
+                + "  document.getElementById('clickme').click();"
+                + "  </script>"
+                + "</html>";
+        checkHtmlAlert(html);
     }
 
     @Test
@@ -823,14 +826,15 @@ public class HTMLInputElementTest extends LoboUnitTest {
                 + "<form name='form1'>\n"
                 + "<input type='submit' id='clickMe' onClick=\"this.form.target='_blank'; return false;\">\n"
                 + "</form>\n"
-                + "    <script>\n" 
+                + "    <script>\n"
                 + "alert(document.forms[0].target == '');\n"
                 + "</script>\n"
-                + "</body></html>";
-
-        final HTMLDocument document = loadHtml(html);
-        HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("clickMe");
-        elem.getOnclick();
+                + "</body>"
+                + " <script>"
+                + "  document.getElementById('clickme').click();"
+                + "  </script>"
+                + "</html>";
+        checkHtmlAlert(html);
     }
 
     @Test
@@ -863,8 +867,8 @@ public class HTMLInputElementTest extends LoboUnitTest {
 
     @Test
     public void inputNameChange() {
-        final String html
-                = "<html><head><title>foo</title><script>\n"
+        final String html = "<html>" +
+                "<head><title>foo</title><script>\n"
                 + "function doTest() {\n"
                 + "  document.form1.textfield1.name = 'changed';\n"
                 + "}\n"
@@ -874,18 +878,19 @@ public class HTMLInputElementTest extends LoboUnitTest {
                 + "  <input type='text' name='textfield1' id='textfield1' value='foo' />\n"
                 + "  <input type='submit' name='button1' id='clickMe' value='pushme' />\n"
                 + "</form>\n"
-                + "</body></html>";
-
-        final HTMLDocument document = loadHtml(html);
-        HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("clickMe");
-        elem.getOnclick();
+                + "</body>"
+                + " <script>"
+                + "  document.getElementById('clickme').click();"
+                + "  </script>"
+                + "</html>";
+        checkHtmlAlert(html);
     }
 
     @Test
     @Alerts({"on", "on"})
     public void defautValue() {
-        final String html
-                = "<html><head><script>\n"
+        final String html = "<html>" +
+                "<head><script>\n"
                 + "function doTest() {\n"
                 + "  alert(document.myForm.myRadio.value);\n"
                 + "  alert(document.myForm.myCheckbox.value);\n"
@@ -906,8 +911,8 @@ public class HTMLInputElementTest extends LoboUnitTest {
             "text, checkbox, date, datetime-local, month, time, week, color, email, text, submit, radio, "
                     + "hidden, password, image, reset, button, file, number, range, search, tel, url, text, text"})
     public void changeType() {
-        final String html
-                = "<html><head><script>\n"
+        final String html = "<html>" +
+                "<head><script>\n"
                 + "function doTest() {\n"
                 + "  var input = document.myForm.myInput;\n"
                 + "  var types = ['checkbox', 'date', 'datetime-local', 'month', 'time', 'week', 'color'"
@@ -950,8 +955,8 @@ public class HTMLInputElementTest extends LoboUnitTest {
             "text: false, false, function, function, , ",
             "password: false, false, function, function, , "})
     public void defaultValues() {
-        final String html
-                = "<html><head></head><body>\n"
+        final String html = "<html>" +
+                "<head></head><body>\n"
                 + "<form name='myForm'>\n"
                 + "<input type='button' name='myButton'/>\n"
                 + "<input type='submit' name='mySubmit' value='submit it!'/>\n"
@@ -989,8 +994,8 @@ public class HTMLInputElementTest extends LoboUnitTest {
     @Test
     @Alerts({"text", "null", "hidden", "hidden"})
     public void createInputAndChangeType() {
-        final String html
-                = "<html><head><script>\n"
+        final String html = "<html>" +
+                "<head><script>\n"
                 + "function doTest() {\n"
                 + "  var input = document.createElement('INPUT');\n"
                 + "  alert(input.type);\n"
@@ -1009,8 +1014,8 @@ public class HTMLInputElementTest extends LoboUnitTest {
     @Test
     @Alerts({"text", "null", "text", "text"})
     public void createInputAndChangeTypeToText() {
-        final String html
-                = "<html><head><script>\n"
+        final String html = "<html>" +
+                "<head><script>\n"
                 + "function doTest() {\n"
                 + "  var input = document.createElement('INPUT');\n"
                 + "  alert(input.type);\n"
@@ -1029,21 +1034,22 @@ public class HTMLInputElementTest extends LoboUnitTest {
     @Test
     @Alerts("123")
     public void buttonOutsideForm() {
-        final String html
-                = "<html><head></head><body>\n"
+        final String html = "<html>" +
+                "<head></head><body>\n"
                 + "<button id='clickme' onclick='alert(123)'>click me</button>\n"
-                + "</body></html>";
-
-        final HTMLDocument document = loadHtml(html);
-        HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("clickme");
-        elem.getOnclick();
+                + "</body>"
+                + " <script>"
+                + "  document.getElementById('clickme').click();"
+                + "  </script>"
+                + "</html>";
+        checkHtmlAlert(html);
     }
 
     @Test
     @Alerts({"undefined", "30", "undefined", "30", "30", "30", "40", "50", "string", "number"})
     public void maxLength() {
-        final String html
-                = "<html><head><script>\n"
+        final String html = "<html>" +
+                "<head><script>\n"
                 + "function doTest() {\n"
                 + "  var input = document.getElementById('text1');\n"
                 + "  alert(input.maxlength);\n"
@@ -1070,8 +1076,8 @@ public class HTMLInputElementTest extends LoboUnitTest {
     @Test
     @Alerts({"undefined", "30", "undefined", "30", "30", "30", "40", "50", "string", "number"})
     public void minLength() {
-        final String html
-                = "<html><head><script>\n"
+        final String html = "<html>" +
+                "<head><script>\n"
                 + "function doTest() {\n"
                 + "  var input = document.getElementById('text1');\n"
                 + "  alert(input.minlength);\n"
@@ -1144,8 +1150,8 @@ public class HTMLInputElementTest extends LoboUnitTest {
     @Alerts({"text TeXt", "password PassWord", "hidden Hidden",
             "checkbox CheckBox", "radio rAdiO", "file FILE", "checkbox CHECKBOX"})
     public void typeCase() {
-        final String html
-                = "<html><head><script>\n"
+        final String html = "<html>" +
+                "<head><script>\n"
                 + "function test() {\n"
                 + "  var t = document.getElementById('aText');\n"
                 + "  alert(t.type + ' ' + t.getAttribute('type'));\n"
@@ -1182,8 +1188,8 @@ public class HTMLInputElementTest extends LoboUnitTest {
     @Test
     @Alerts({"text-text", "text- password", "text-hidden ", "text-checkbox ", "text-\\tradio"})
     public void typeTrim() {
-        final String html
-                = "<html><head>\n"
+        final String html = "<html>" +
+                "<head>\n"
                 + "<script>\n"
                 + "function alert(msg) { window.document.title += msg.replace('\t', '\\\\t') + '§';}\n"
                 + "function test() {\n"
@@ -1399,8 +1405,8 @@ public class HTMLInputElementTest extends LoboUnitTest {
     @Test
     @Alerts({"0", "0", "2", "7"})
     public void selectionRange() {
-        final String html
-                = "<html><head><script>\n"
+        final String html = "<html>" +
+                "<head><script>\n"
                 + "function test() {\n"
                 + "  var input = document.getElementById('myInput');\n"
                 + "  alert(input.selectionStart);\n"
@@ -1420,8 +1426,8 @@ public class HTMLInputElementTest extends LoboUnitTest {
     @Test
     @Alerts("onsubmit")
     public void submitNonRequired() {
-        final String html
-                = "<html><head><script>\n"
+        final String html = "<html>" +
+                "<head><script>\n"
                 + "function submitMe() {\n"
                 + "  alert('onsubmit');\n"
                 + "}\n"
@@ -1431,18 +1437,19 @@ public class HTMLInputElementTest extends LoboUnitTest {
                 + "    <input id='myInput' name='myName' value=''>\n"
                 + "    <input id='mySubmit' type='submit'>\n"
                 + "  </form>\n"
-                + "</body></html>";
-
-        final HTMLDocument document = loadHtml(html);
-        HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("mySubmit");
-        elem.getOnclick();
+                + "</body>"
+                + " <script>"
+                + "  document.getElementById('mySubmit').click();"
+                + "  </script>"
+                + "</html>";
+        checkHtmlAlert(html);
     }
 
     @Test
     @Alerts({"1", ""})
     public void submitRequired() {
-        final String html
-                = "<html><head><script>\n"
+        final String html = "<html>" +
+                "<head><script>\n"
                 + "function submitMe() {\n"
                 + "  alert('onsubmit');\n"
                 + "}\n"
@@ -1462,8 +1469,8 @@ public class HTMLInputElementTest extends LoboUnitTest {
     @Test
     @Alerts({"false", "true"})
     public void checkValidity() {
-        final String html
-                = "<html><head><script>\n"
+        final String html = "<html>" +
+                "<head><script>\n"
                 + "function checkStatus() {\n"
                 + "  var elem = document.getElementById('myInput');\n"
                 + "  alert(elem.checkValidity());\n"
@@ -1475,18 +1482,19 @@ public class HTMLInputElementTest extends LoboUnitTest {
                 + "    <input id='mySubmit' type='submit'>\n"
                 + "  </form>\n"
                 + "  <button id='myButton' onclick='checkStatus()'>Check Status</button>\n"
-                + "</body></html>";
-
-        final HTMLDocument document = loadHtml(html);
-        HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("myButton");
-        elem.getOnclick();
+                + "</body>"
+                + " <script>"
+                + "  document.getElementById('myButton').click();"
+                + "  </script>"
+                + "</html>";
+        checkHtmlAlert(html);
     }
 
     @Test
     @Alerts("?myName=abcdefg")
     public void maxLengthJavaScript() {
-        final String html
-                = "<html><head><script>\n"
+        final String html = "<html>" +
+                "<head><script>\n"
                 + "function updateValue() {\n"
                 + "  document.getElementById('myInput').value = 'abcdefg';\n"
                 + "}\n"
@@ -1497,36 +1505,38 @@ public class HTMLInputElementTest extends LoboUnitTest {
                 + "    <input id='mySubmit' type='submit'>\n"
                 + "  </form>\n"
                 + "  <button id='myButton' onclick='updateValue()'>Update Value</button>\n"
-                + "</body></html>";
-
-        final HTMLDocument document = loadHtml(html);
-        HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("myButton");
-        elem.getOnclick();
+                + "</body>"
+                + " <script>"
+                + "  document.getElementById('myButton').click();"
+                + "  </script>"
+                + "</html>";
+        checkHtmlAlert(html);
     }
 
     @Test
     @Alerts("?myName=ab")
     public void maxLength2() {
-        final String html
-                = "<html><head><script>\n"
+        final String html = "<html>" +
+                "<head><script>\n"
                 + "</script></head>\n"
                 + "<body>\n"
                 + "  <form>\n"
                 + "    <input id='myInput' name='myName' maxlength='2'>\n"
                 + "    <input id='mySubmit' type='submit'>\n"
                 + "  </form>\n"
-                + "</body></html>";
-
-        final HTMLDocument document = loadHtml(html);
-        HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("mySubmit");
-        elem.getOnclick();
+                + "</body>"
+                + " <script>"
+                + "  document.getElementById('mySubmit').click();"
+                + "  </script>"
+                + "</html>";
+        checkHtmlAlert(html);
     }
 
     @Test
     @Alerts({"30", "undefined", "30", "30", "40", "50", "string", "string"})
     public void min() {
-        final String html
-                = "<html><head><script>\n"
+        final String html = "<html>" +
+                "<head><script>\n"
                 + "function doTest() {\n"
                 + "  var input = document.getElementById('text1');\n"
                 + "  alert(input.min);\n"
@@ -1551,8 +1561,8 @@ public class HTMLInputElementTest extends LoboUnitTest {
     @Test
     @Alerts({"30", "undefined", "30", "30", "40", "50", "string", "string"})
     public void max() {
-        final String html
-                = "<html><head><script>\n"
+        final String html = "<html>" +
+                "<head><script>\n"
                 + "function doTest() {\n"
                 + "  var input = document.getElementById('text1');\n"
                 + "  alert(input.max);\n"
@@ -1793,8 +1803,8 @@ public class HTMLInputElementTest extends LoboUnitTest {
     @Test
     @Alerts({"Test-Test-Test", "text1-text1-text1"})
     public void getAttribute() {
-        final String html
-                = "<html><head><script>\n"
+        final String html = "<html>" +
+                "<head><script>\n"
                 + "function test() {\n"
                 + "  var input = document.getElementById('myInput');\n"
                 + "  alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
@@ -1812,8 +1822,8 @@ public class HTMLInputElementTest extends LoboUnitTest {
     @Test
     @Alerts({"Test-Test-Test", "text1-text1-text1"})
     public void getAttributeCase() {
-        final String html
-                = "<html><head><script>\n"
+        final String html = "<html>" +
+                "<head><script>\n"
                 + "function test() {\n"
                 + "  var input = document.getElementById('myInput');\n"
                 + "  alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
@@ -1831,8 +1841,8 @@ public class HTMLInputElementTest extends LoboUnitTest {
     @Test
     @Alerts({"Test-Test-Test", "Test-Test-Test"})
     public void setAttribute() {
-        final String html
-                = "<html><head><script>\n"
+        final String html = "<html>" +
+                "<head><script>\n"
                 + "function test() {\n"
                 + "  var input = document.getElementById('myInput');\n"
                 + "  alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
@@ -1850,8 +1860,8 @@ public class HTMLInputElementTest extends LoboUnitTest {
     @Test
     @Alerts("finish")
     public void setAttributeFromJavaScript() {
-        final String html
-                = "<html><head><script>\n"
+        final String html = "<html>" +
+                "<head><script>\n"
                 + "function test() {\n"
                 + "  var input = document.getElementById('myInput');\n"
                 + "  input.setAttribute('value', 'text1');\n"
@@ -1868,8 +1878,8 @@ public class HTMLInputElementTest extends LoboUnitTest {
     @Test
     @Alerts({"changed"})
     public void clear() {
-        final String html
-                = "<html><head><script>\n"
+        final String html = "<html>" +
+                "<head><script>\n"
                 + "</script></head>\n"
                 + "<body>\n"
                 + "  <input id='myInput' value='Test' onchange=\"alert('changed')\">\n"

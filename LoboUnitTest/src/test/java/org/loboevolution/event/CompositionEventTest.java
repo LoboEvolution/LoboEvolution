@@ -49,7 +49,7 @@ public class CompositionEventTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts({"[object CompositionEvent]", "composition", "false", "false", "false", "false", ""})
+    @Alerts({"[object CompositionEvent]", "composition", "false", "false", "false", "false", "null"})
     public void createCtor() {
         final String html = "<html><head>"
                 + "<script>\n"
@@ -84,7 +84,7 @@ public class CompositionEventTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"[object CompositionEvent]", "42", "false", "false", "false", "false", ""})
+    @Alerts({"[object CompositionEvent]", "42", "false", "false", "false", "false", "null"})
     public void createCtorNumericType() {
         final String html = "<html><head>"
                 + "<script>\n"
@@ -102,7 +102,7 @@ public class CompositionEventTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"[object CompositionEvent]", "null", "false", "false", "false", "false", ""})
+    @Alerts({"[object CompositionEvent]", "null", "false", "false", "false", "false", "null"})
     public void createCtorNullType() {
         final String html = "<html><head>"
                 + "<script>\n"
@@ -138,7 +138,7 @@ public class CompositionEventTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"[object CompositionEvent]", "HtmlUnitEvent", "false", "false", "false", "false", ""})
+    @Alerts({"[object CompositionEvent]", "HtmlUnitEvent", "false", "false", "false", "false", "null"})
     public void createCtorArbitraryType() {
         final String html = "<html><head>"
                 + "<script>\n"
@@ -176,7 +176,7 @@ public class CompositionEventTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"[object CompositionEvent]", "composition", "false", "false", "false", "false", ""})
+    @Alerts({"[object CompositionEvent]", "composition", "false", "false", "false", "false", "null"})
     public void createCtorAllDetailsMissingData() {
         final String html = "<html><head>"
                 + "<script>\n"

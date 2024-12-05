@@ -76,11 +76,12 @@ public class HTMLTextAreaElementTest extends LoboUnitTest {
                 + "    <textarea name='textarea1' onchange='alert(this.value)'></textarea>\n"
                 + "    <input id='tester' name='myButton' type='button' onclick='document.form1.textarea1.value=\"from button\"'>\n"
                 + "  </form>\n"
-                + "</body></html>";
-
-        final HTMLDocument document = loadHtml(html);
-        HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("tester");
-        elem.getOnclick();
+                + "</body>"
+                + " <script>"
+                + "  document.getElementById('tester\"').click();"
+                + "  </script>"
+                + "</html>";
+        checkHtmlAlert(html);
     }
 
     /**
@@ -627,40 +628,40 @@ public class HTMLTextAreaElementTest extends LoboUnitTest {
     }
 
     private void mouseOver(final String element) {
-        final String html =
-                "<html>\n"
-                        + "  <head>\n"
-                        + "    <script>\n"
-                        + "    function dumpEvent(event) {\n"
-                        + "      // target\n"
-                        + "      var eTarget;\n"
-                        + "      if (event.target) {\n"
-                        + "        eTarget = event.target;\n"
-                        + "      } else if (event.srcElement) {\n"
-                        + "        eTarget = event.srcElement;\n"
-                        + "      }\n"
-                        + "      // defeat Safari bug\n"
-                        + "      if (eTarget.nodeType == 3) {\n"
-                        + "        eTarget = eTarget.parentNode;\n"
-                        + "      }\n"
-                        + "      var msg = 'mouse over';\n"
-                        + "      if (eTarget.name) {\n"
-                        + "        msg = msg + ' [' + eTarget.name + ']';\n"
-                        + "      } else {\n"
-                        + "        msg = msg + ' [' + eTarget.id + ']';\n"
-                        + "      }\n"
-                        + "      document.title += msg;\n"
-                        + "    }\n"
-                        + "    </script>\n"
-                        + "  </head>\n"
-                        + "<body>\n"
-                        + "  <form id='form1'>\n"
-                        + "    " + element + "\n"
-                        + "  </form>\n"
-                        + "</body></html>";
-
-        final HTMLDocument document = loadHtml(html);
-        HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("tester");
-        elem.getOnclick();
+        final String html = "<html>\n"
+                + "  <head>\n"
+                + "    <script>\n"
+                + "    function dumpEvent(event) {\n"
+                + "      // target\n"
+                + "      var eTarget;\n"
+                + "      if (event.target) {\n"
+                + "        eTarget = event.target;\n"
+                + "      } else if (event.srcElement) {\n"
+                + "        eTarget = event.srcElement;\n"
+                + "      }\n"
+                + "      // defeat Safari bug\n"
+                + "      if (eTarget.nodeType == 3) {\n"
+                + "        eTarget = eTarget.parentNode;\n"
+                + "      }\n"
+                + "      var msg = 'mouse over';\n"
+                + "      if (eTarget.name) {\n"
+                + "        msg = msg + ' [' + eTarget.name + ']';\n"
+                + "      } else {\n"
+                + "        msg = msg + ' [' + eTarget.id + ']';\n"
+                + "      }\n"
+                + "      document.title += msg;\n"
+                + "    }\n"
+                + "    </script>\n"
+                + "  </head>\n"
+                + "<body>\n"
+                + "  <form id='form1'>\n"
+                + "    " + element + "\n"
+                + "  </form>\n"
+                + "</body>"
+                + " <script>"
+                + "  document.getElementById('tester').click();"
+                + "  </script>"
+                + "</html>";
+        checkHtmlAlert(html);
     }
 }

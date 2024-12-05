@@ -43,8 +43,6 @@ public class PageTransitionEventTest extends LoboUnitTest {
             + "   alert(event.bubbles);\n"
             + "   alert(event.cancelable);\n"
             + "   alert(event.composed);\n"
-
-            // TODO all properties
             + "  }\n";
 
 

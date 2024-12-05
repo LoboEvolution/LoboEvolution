@@ -72,11 +72,12 @@ public class HTMLOptionElement2Test extends LoboUnitTest {
                         + "    <option value='opt-c'>C</option>\n"
                         + "  </select>\n"
                         + "</form>\n"
-                        + "</body></html>";
-
-        final HTMLDocument document = loadHtml(html);
-        HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("s");
-        elem.getOnclick();
+                        + "</body>"
+                        + " <script>"
+                        + "  document.getElementById('s').click();"
+                        + "  </script>"
+                        + "</html>";
+        checkHtmlAlert(html);
     }
 
     @Test
@@ -107,43 +108,41 @@ public class HTMLOptionElement2Test extends LoboUnitTest {
                         + "    <option value='opt-c'>C</option>\n"
                         + "  </select>\n"
                         + "</form>\n"
-                        + "</body></html>";
-
-        final HTMLDocument document = loadHtml(html);
-        HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("s");
-        elem.getOnclick();
-
-        elem = (HTMLElementImpl) document.getElementById("opt-b");
-        elem.getOnclick();
+                        + "</body>"
+                        + " <script>"
+                        + "  document.getElementById('s').click();"
+                        + "  document.getElementById('opt-b').click();"
+                        + "  </script>"
+                        + "</html>";
+        checkHtmlAlert(html);
     }
 
 
     @Test
     @Alerts("onchange-select; onclick-option; onclick-select;")
     public void clickOptionEventSequence1() {
-        final String html =
-                "<html><head>\n"
-                        + "<script>\n"                        + "  function alert(x) {\n"
-                        + "    document.getElementById('log_').value += x + '; ';\n"
-                        + "  }\n"
-                        + "</script></head>\n"
-
-                        + "<body>\n"
-                        + "<form>\n"
-                        + "  <textarea id='log_' rows='4' cols='50'></textarea>\n"
-                        + "  <select id='s' size='2' onclick=\"alert('onclick-select')\""
-                        + " onchange=\"alert('onchange-select')\">\n"
-                        + "    <option id='clickId' value='a' onclick=\"alert('onclick-option')\""
-                        + " onchange=\"alert('onchange-option')\">A</option>\n"
-                        + "  </select>\n"
-                        + "</form>\n"
-
-                        + "</body></html>";
-
-        final HTMLDocument document = loadHtml(html);
-        HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("s");
-        elem.getOnclick();
-        elem.getOnchange();
+        final String html = "<html>"
+                + "<head>\n"
+                + "<script>\n"
+                + "  function alert(x) {\n"
+                + "    document.getElementById('log_').value += x + '; ';\n"
+                + "  }\n"
+                + "</script></head>\n"
+                + "<body>\n"
+                + "<form>\n"
+                + "  <textarea id='log_' rows='4' cols='50'></textarea>\n"
+                + "  <select id='s' size='2' onclick=\"alert('onclick-select')\""
+                + " onchange=\"alert('onchange-select')\">\n"
+                + "    <option id='clickId' value='a' onclick=\"alert('onclick-option')\""
+                + " onchange=\"alert('onchange-option')\">A</option>\n"
+                + "  </select>\n"
+                + "</form>\n"
+                + "</body>"
+                + " <script>"
+                + "  document.getElementById('s').click();"
+                + "  </script>"
+                + "</html>";
+        checkHtmlAlert(html);
     }
 
 
@@ -181,12 +180,12 @@ public class HTMLOptionElement2Test extends LoboUnitTest {
                         + "    <option id='clickId' value='a' >A</option>\n"
                         + "  </select>\n"
                         + "</form>\n"
-
-                        + "</body></html>";
-
-        final HTMLDocument document = loadHtml(html);
-        HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("clickId");
-        elem.getOnclick();
+                        + "</body>"
+                        + " <script>"
+                        + "  document.getElementById('clickId').click();"
+                        + "  </script>"
+                        + "</html>";
+        checkHtmlAlert(html);
     }
 
     @Test
@@ -194,10 +193,10 @@ public class HTMLOptionElement2Test extends LoboUnitTest {
     public void clickOptionEventSequence3() {
         final String html =
                 "<html><head>\n"
-                        + "<script>\n"                        + "  function alert(x) {\n"
+                        + "<script>\n"
+                        + "  function alert(x) {\n"
                         + "    document.getElementById('log_').value += x + '; ';\n"
                         + "  }\n"
-
                         + "  function init() {\n"
                         + "    var s = document.getElementById('s');\n"
                         + "    var o = document.getElementById('clickId');\n"
@@ -206,7 +205,6 @@ public class HTMLOptionElement2Test extends LoboUnitTest {
                         + "    o.addEventListener('click', handle, false);\n"
                         + "    o.addEventListener('change', handle, false);\n"
                         + "  }\n"
-
                         + "  function handle(event) {\n"
                         + "    if (event.target) {\n"
                         + "      alert(event.type + '-' + event.target.nodeName);\n"
@@ -215,7 +213,6 @@ public class HTMLOptionElement2Test extends LoboUnitTest {
                         + "    }\n"
                         + "  }\n"
                         + "</script></head>\n"
-
                         + "<body onload='init()'>\n"
                         + "<form>\n"
                         + "  <textarea id='log_' rows='4' cols='50'></textarea>\n"
@@ -225,12 +222,12 @@ public class HTMLOptionElement2Test extends LoboUnitTest {
                         + " onchange=\"alert('onchange-option')\">A</option>\n"
                         + "  </select>\n"
                         + "</form>\n"
-
-                        + "</body></html>";
-
-        final HTMLDocument document = loadHtml(html);
-        HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("clickId");
-        elem.getOnclick();
+                        + "</body>"
+                        + " <script>"
+                        + "  document.getElementById('clickId').click();"
+                        + "  </script>"
+                        + "</html>";
+        checkHtmlAlert(html);
     }
 
     @Test

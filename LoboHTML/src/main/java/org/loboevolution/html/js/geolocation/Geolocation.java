@@ -75,7 +75,7 @@ public class Geolocation extends AbstractScriptableDelegate {
 		final IPAddressBasedGeoAcquirer ip = new IPAddressBasedGeoAcquirer();
 		final Position acquireLocation = ip.acquireLocation();
 		final NodeImpl node = (NodeImpl) window.getDocumentNode();
-		Executor.executeFunction(node, success, null, new Object[] { acquireLocation });
+		Executor.executeFunction(node, success, new Object[] { acquireLocation }, window.getContextFactory());
 	}
 
 	/**
@@ -146,6 +146,6 @@ public class Geolocation extends AbstractScriptableDelegate {
 		} else if (e instanceof TimeoutException) {
 			pError = new PositionError(PositionError.TIMEOUT);
 		}
-		Executor.executeFunction(node, error, null, new Object[] { pError });
+		Executor.executeFunction(node, error, new Object[] { pError }, window.getContextFactory());
 	}
 }

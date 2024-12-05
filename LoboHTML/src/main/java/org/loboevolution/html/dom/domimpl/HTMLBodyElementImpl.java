@@ -57,7 +57,7 @@ public class HTMLBodyElementImpl extends HTMLElementImpl implements HTMLBodyElem
 	@Override
 	public void assignAttributeField(final String normalName, final String value) {
 		if ("onload".equals(normalName)) {
-			final Function onload = getEventTarget().getFunction(this, normalName);
+			final Function onload = getFunction(this, normalName);
 			if (onload != null) {
 				setOnload(onload);
 			}
@@ -218,67 +218,67 @@ public class HTMLBodyElementImpl extends HTMLElementImpl implements HTMLBodyElem
 	/** {@inheritDoc} */
 	@Override
 	public Function getOnafterprint() {
-		return getEventTarget().getFunction(this, "afterprint");
+		return getFunction(this, "afterprint");
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void setOnafterprint(final Function onafterprint) {
-		getEventTarget().addEventListener("afterprint", onafterprint, false);
+		addEventListener("afterprint", onafterprint, false);
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public Function getOnbeforeprint() {
-		return getEventTarget().getFunction(this, "afterprint");
+		return getFunction(this, "afterprint");
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void setOnbeforeprint(final Function onbeforeprint) {
-		getEventTarget().addEventListener("beforeprint", onbeforeprint, false);
+		addEventListener("beforeprint", onbeforeprint, false);
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public Function getOnlanguagechange() {
-		return getEventTarget().getFunction(this, "languagechange");
+		return getFunction(this, "languagechange");
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void setOnlanguagechange(final Function onlanguagechange) {
-		getEventTarget().addEventListener("languagechange", onlanguagechange, false);
+		addEventListener("languagechange", onlanguagechange, false);
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public Function getOnoffline() {
-		return getEventTarget().getFunction(this, "offline");
+		return getFunction(this, "offline");
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public Function getOnonline() {
-		return getEventTarget().getFunction(this, "online");
+		return getFunction(this, "online");
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void setOnonline(final Function ononline) {
-		getEventTarget().addEventListener("online", ononline, false);
+		addEventListener("online", ononline, false);
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public Function getOnunload() {
-		return getEventTarget().getFunction(this, "unload");
+		return getFunction(this, "unload");
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void setOnunload(final Function onunload) {
-		getEventTarget().addEventListener("unload", onunload, false);
+		addEventListener("unload", onunload, false);
 	}
 
 	/** {@inheritDoc} */

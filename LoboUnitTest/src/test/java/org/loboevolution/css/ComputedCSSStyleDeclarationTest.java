@@ -376,12 +376,15 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
     @Alerts({"none", "block", "inline", "block", "inline", "none", "block", "block", "block", "block"})
     public void defaultDisplayValuesD() {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
-                + "  <datalist id='datalist'></datalist>\n" + "  <dl id='dl'>\n"
+                + "  <datalist id='datalist'></datalist>\n"
+                + "<dl id='dl'>\n"
                 + "    <dt id='dt'></dt>\n"
                 + "      <dd id='dd'><dd>\n"
-                + "  </dl>\n" + "  <p id='p'>\n"
+                + "  </dl>\n"
+                + "  <p id='p'>\n"
                 + "    <del id='del'></del>\n"
-                + "  </p>\n" + "  <details id='details'></details>\n"
+                + "  </p>\n"
+                + "  <details id='details'></details>\n"
                 + "  <dfn id='dfn'></dfn>\n"
                 + "  <dialog id='dialog'></dialog>\n"
                 + "  <dir id='dir'></dir>\n"
@@ -574,9 +577,11 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
                 + "    <map id='map' name='imgmap'>\n"
                 + "      <area id='area'>\n"
                 + "    </map>\n"
-                + "  </img>\n" + "  <p id='p'>\n"
+                + "  </img>\n"
+                + "  <p id='p'>\n"
                 + "    <mark id='mark'></mark>\n"
-                + "  </p>\n" + "  <menu id='menu'>\n"
+                + "  </p>\n"
+                + "  <menu id='menu'>\n"
                 + "    <li id='li'></li>\n"
                 + "  </menu>\n" + "  <meter id='meter'></meter>\n" + "  <script>\n"
                 + "    function x(id) {\n"
@@ -590,7 +595,8 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
                 + "    x('map');\n"
                 + "    x('mark');\n"
                 + "    x('menu');\n"
-                + "    x('meter');\n" + "  </script>\n"
+                + "    x('meter');\n"
+                + "  </script>\n"
                 + "</body></html>";
         checkHtmlAlert(html);
     }

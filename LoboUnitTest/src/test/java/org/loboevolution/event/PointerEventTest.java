@@ -44,7 +44,6 @@ public class PointerEventTest extends LoboUnitTest {
             + "     alert(event.bubbles);\n"
             + "     alert(event.cancelable);\n"
             + "     alert(event.composed);\n"
-
             + "     alert(event.pointerId);\n"
             + "     alert(event.width);\n"
             + "     alert(event.height);\n"
@@ -63,7 +62,7 @@ public class PointerEventTest extends LoboUnitTest {
 
     @Test
     @Alerts({"[object PointerEvent]", "click", "false", "false", "false",
-            "0", "1", "1", "0", "0", "0", "", "false", "1.5707963267948966", "0"})
+            "0", "1", "1", "0", "0", "0", "null", "false", "1.5707963267948966", "0"})
     public void createCtor() {
         final String html = "<html><head>"
                 + "<script>\n"

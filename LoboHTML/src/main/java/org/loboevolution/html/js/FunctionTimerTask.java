@@ -28,6 +28,8 @@ package org.loboevolution.html.js;
 
 import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
+import org.loboevolution.js.LoboContextFactory;
+import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 
 import java.awt.event.ActionEvent;
@@ -80,7 +82,10 @@ class FunctionTimerTask extends WeakWindowTask {
 			}
 			final Function function = this.functionRef.get();
 			if (function != null) {
-				Executor.executeFunction(window.getWindowScope(), function);
+				LoboContextFactory contextFactory = window.getContextFactory();
+				try (Context ctx = contextFactory.enterContext()) {
+					Executor.executeFunction(window.getWindowScope(ctx), function, window.getContextFactory());
+				}
 			}
 
 		} catch (final Throwable err) {

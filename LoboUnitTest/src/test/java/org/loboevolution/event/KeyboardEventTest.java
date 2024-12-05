@@ -43,17 +43,23 @@ public class KeyboardEventTest extends LoboUnitTest {
             + "   alert(event.bubbles);\n"
             + "   alert(event.cancelable);\n"
             + "   alert(event.composed);\n"
-
-            + "    var details = [event.key, event.code, event.location, event.ctrlKey,\n"
-            + "                 event.shiftKey, event.altKey, event.metaKey, event.repeat, \n"
-            + "                 event.isComposing, event.charCode, event.which].join(',');\n"
-            + "   alert(details);\n"
+            + "   alert(event.key);\n"
+            + "   alert(event.code);\n"
+            + "   alert(event.location);\n"
+            + "   alert(event.ctrlKey);\n"
+            + "   alert(event.shiftKey);\n"
+            + "   alert(event.altKey);\n"
+            + "   alert(event.metaKey);\n"
+            + "   alert(event.repeat);\n"
+            + "   alert(event.isComposing);\n"
+            + "   alert(event.charCode);\n"
+            + "   alert(event.which);\n"
             + "  }\n";
 
 
     @Test
-    @Alerts({"[object KeyboardEvent]", "type", "false", "false", "false",
-            ",,0,false,false,false,false,false,false,0,0"})
+    @Alerts({"[object KeyboardEvent]", "type", "false", "false", "false", "", "",
+            "0", "false", "false", "false", "false", "false", "false", "0", "0"})
     public void createCtor() {
         final String html = "<html><head>"
                 + "<script>\n"
@@ -88,8 +94,8 @@ public class KeyboardEventTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"[object KeyboardEvent]", "42", "false", "false", "false",
-            ",,0,false,false,false,false,false,false,0,0"})
+    @Alerts({"[object KeyboardEvent]", "42", "false", "false", "false", "", "",
+            "0", "false", "false", "false", "false", "false", "false","0","0"})
     public void createCtorNumericType() {
         final String html = "<html><head>"
                 + "<script>\n"
@@ -107,8 +113,8 @@ public class KeyboardEventTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"[object KeyboardEvent]", "null", "false", "false", "false",
-            ",,0,false,false,false,false,false,false,0,0"})
+    @Alerts({"[object KeyboardEvent]", "null", "false", "false", "false", "", "",
+            "0", "false", "false", "false", "false", "false", "false","0","0"})
     public void createCtorNullType() {
         final String html = "<html><head>"
                 + "<script>\n"
@@ -144,8 +150,8 @@ public class KeyboardEventTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"[object KeyboardEvent]", "HtmlUnitEvent", "false", "false", "false",
-            ",,0,false,false,false,false,false,false,0,0"})
+    @Alerts({"[object KeyboardEvent]", "HtmlUnitEvent", "false", "false", "false", "", "",
+            "0", "false", "false", "false", "false", "false", "false","0","0"})
     public void createCtorArbitraryType() {
         final String html = "<html><head>"
                 + "<script>\n"
@@ -164,7 +170,7 @@ public class KeyboardEventTest extends LoboUnitTest {
 
     @Test
     @Alerts({"[object KeyboardEvent]", "keyboard", "false", "false", "false",
-            "key,code,123,true,true,true,true,true,true,456,789"})
+            "key", "code", "123", "true", "true", "true", "true", "true", "true", "456", "789"})
     public void createCtorAllDetails() {
         final String html = "<html><head>"
                 + "<script>\n"
@@ -175,7 +181,7 @@ public class KeyboardEventTest extends LoboUnitTest {
                 + "ctrlKey: true, shiftKey: true, altKey: true, metaKey: true,"
                 + "repeat: true, isComposing: true, charCode: 456, which: 789 });\n"
                 + "      dump(event);\n"
-                + "    } catch (e) {alert('exception') }\n"
+                + "    } catch (e) {alert(e) }\n"
                 + "  }\n"
                 + DUMP_EVENT_FUNCTION
                 + "</script></head><body onload='test()'>\n"
@@ -185,8 +191,8 @@ public class KeyboardEventTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"[object KeyboardEvent]", "keyboard", "false", "false", "false",
-            "null,,0,true,false,false,false,false,false,456,0"})
+    @Alerts({"[object KeyboardEvent]", "keyboard", "false", "false", "false", "", "",
+            "0","true", "false", "false", "false", "false", "false","456","0"})
     public void createCtorSomeDetails() {
         final String html = "<html><head>"
                 + "<script>\n"
@@ -205,8 +211,8 @@ public class KeyboardEventTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"[object KeyboardEvent]", "keyboard", "false", "false", "false",
-            ",,0,false,false,false,false,false,false,0,0"})
+    @Alerts({"[object KeyboardEvent]", "keyboard", "false", "false", "false", "", "",
+            "0", "false", "false", "false", "false", "false", "false", "0", "0"})
     public void createCtorMissingData() {
         final String html = "<html><head>"
                 + "<script>\n"
@@ -225,8 +231,8 @@ public class KeyboardEventTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"[object KeyboardEvent]", "keyboard", "false", "false", "false",
-            ",,0,false,false,false,false,false,false,0,0"})
+    @Alerts({"[object KeyboardEvent]", "keyboard", "false", "false", "false", "", "",
+            "0", "false", "false", "false", "false", "false", "false","0","0"})
     public void createCtorNullData() {
         final String html = "<html><head>"
                 + "<script>\n"
@@ -244,8 +250,8 @@ public class KeyboardEventTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"[object KeyboardEvent]", "keyboard", "false", "false", "false",
-            ",,0,false,false,false,false,false,false,0,0"})
+    @Alerts({"[object KeyboardEvent]", "keyboard", "false", "false", "false", "", "",
+            "0", "false", "false", "false", "false", "false", "false","0","0"})
     public void createCtorUndefinedData() {
         final String html = "<html><head>"
                 + "<script>\n"
@@ -253,7 +259,7 @@ public class KeyboardEventTest extends LoboUnitTest {
                 + "    try {\n"
                 + "      var event = new KeyboardEvent('keyboard', undefined);\n"
                 + "      dump(event);\n"
-                + "    } catch (e) {alert('exception') }\n"
+                + "    } catch (e) {alert(e) }\n"
                 + "  }\n"
                 + DUMP_EVENT_FUNCTION
                 + "</script></head><body onload='test()'>\n"
@@ -263,8 +269,8 @@ public class KeyboardEventTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"[object KeyboardEvent]", "keyboard", "false", "false", "false",
-            ",,0,false,false,false,false,false,false,0,0"})
+    @Alerts({"[object KeyboardEvent]", "keyboard", "false", "false", "false", "", "",
+            "0", "false", "false", "false", "false", "false", "false","0","0"})
     public void createCtorWrongData() {
         final String html = "<html><head>"
                 + "<script>\n"
@@ -316,7 +322,7 @@ public class KeyboardEventTest extends LoboUnitTest {
                 + "     alert(keyEvent.keyCode + '-' + keyEvent.charCode);\n"
                 + "    } catch(e) {alert('exception')}\n"
                 + "    try {\n"
-                + "      var mouseEvent = document.createEvent('MouseEvents');\n"
+                + "      var mouseEvent = document.createEvent('MouseEvent');\n"
                 + "     alert(mouseEvent.keyCode + '-' + mouseEvent.charCode);\n"
                 + "    } catch(e) {alert('exception')}\n"
                 + "  }\n"
@@ -397,7 +403,7 @@ public class KeyboardEventTest extends LoboUnitTest {
 
     @Test
     @Alerts({"13", "13", "13"})
-    public void keyCodeEnter_keypress() {
+    public void keyCodeEnterKeypress() {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "<script>\n"

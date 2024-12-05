@@ -33,7 +33,9 @@ import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLDocument;
 import org.loboevolution.html.dom.HTMLLabelElement;
 import org.loboevolution.html.dom.domimpl.HTMLButtonElementImpl;
+import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
+import org.loboevolution.html.dom.domimpl.HTMLLabelElementImpl;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -292,7 +294,7 @@ public class HTMLLabelElementTest extends LoboUnitTest {
         final HTMLDocument document = loadHtml(html);
         HTMLInputElementImpl checkbox = (HTMLInputElementImpl) document.getElementById("checkbox1");
         assertFalse(checkbox.isChecked());
-        checkbox.getOnclick();
+        checkbox.click();
         assertTrue(checkbox.isChecked());
     }
 
@@ -316,8 +318,8 @@ public class HTMLLabelElementTest extends LoboUnitTest {
         final HTMLDocument document = loadHtml(html);
         HTMLInputElementImpl checkbox = (HTMLInputElementImpl) document.getElementById("checkbox1");
         assertFalse(checkbox.isChecked());
-        checkbox.getOnclick();
-        HTMLLabelElement label = (HTMLLabelElement) document.getElementById("label1");
+        checkbox.click();
+        HTMLElementImpl label = (HTMLElementImpl) document.getElementById("label1");
         label.click();
         assertTrue(checkbox.isChecked());
     }
@@ -349,7 +351,7 @@ public class HTMLLabelElementTest extends LoboUnitTest {
         HTMLInputElementImpl checkbox = (HTMLInputElementImpl) document.getElementById("checkbox1");
         assertFalse(checkbox.isChecked());
 
-        HTMLButtonElementImpl button = (HTMLButtonElementImpl) document.getElementById("button1");
+        HTMLElementImpl button = (HTMLElementImpl) document.getElementById("button1");
         button.click();
         assertTrue(checkbox.isChecked());
     }
@@ -381,8 +383,8 @@ public class HTMLLabelElementTest extends LoboUnitTest {
         HTMLInputElementImpl checkbox = (HTMLInputElementImpl) document.getElementById("checkbox1");
         assertFalse(checkbox.isChecked());
 
-        HTMLButtonElementImpl button = (HTMLButtonElementImpl) document.getElementById("button1");
-        button.click();
+        HTMLElementImpl label = (HTMLElementImpl) document.getElementById("button1");
+        label.click();
         assertTrue(checkbox.isChecked());
     }
 

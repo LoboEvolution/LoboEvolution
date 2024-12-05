@@ -37,6 +37,7 @@ import org.loboevolution.common.Strings;
 import org.loboevolution.config.HtmlRendererConfig;
 import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.CSSValues;
+import org.loboevolution.html.HTMLTag;
 import org.loboevolution.html.dom.*;
 import org.loboevolution.html.dom.domimpl.*;
 import org.loboevolution.html.dom.filter.*;
@@ -68,6 +69,7 @@ import org.loboevolution.type.VisibilityState;
 import java.io.IOException;
 import java.io.LineNumberReader;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Stream;
 
 /**
@@ -600,7 +602,7 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
 
 	/** {@inheritDoc} */
 	@Override
-	public Event createEvent(final String eventType) {
+	public Event createEvent(final String eventType) throws DOMException {
 		return EventFactory.createEvent(eventType);
 	}
 
@@ -645,8 +647,26 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
 	/** {@inheritDoc} */
 	@Override
 	public Element getActiveElement() {
-		// TODO Auto-generated method stub
-		return null;
+		HTMLCollectionImpl collection = (HTMLCollectionImpl) getElementsByTagName(HTMLTag.INPUT.name());
+		AtomicReference<Element> rNpde = new AtomicReference<>(null);
+		collection.forEach(elem -> {
+			HTMLInputElementImpl input = (HTMLInputElementImpl) elem;
+			if (input.isFocusable()) {
+				rNpde.set((Element) elem);
+			}
+		});
+
+		if (rNpde.get() == null) {
+			collection = (HTMLCollectionImpl) getElementsByTagName(HTMLTag.TEXTAREA.name());
+			collection.forEach(elem -> {
+				HTMLTextAreaElementImpl input = (HTMLTextAreaElementImpl) elem;
+				if (input.isFocusable()) {
+					rNpde.set((Element) elem);
+				}
+			});
+		}
+
+		return rNpde.get();
 	}
 
 	/** {@inheritDoc} */
@@ -741,6 +761,7 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
 	public Window getDefaultView() {
 		return this.window;
 	}
+
 	public void setWindow(final HtmlRendererContext rcontext, final UserAgentContext ucontext, final HtmlRendererConfig config){
 		if (rcontext != null) {
 			window = WindowImpl.getWindow(rcontext, config);
@@ -976,7 +997,7 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
 	/** {@inheritDoc} */
 	@Override
 	public String getTitle() {
-		return this.title;
+		return this.title != null ? this.title : "";
 	}
 
 	/** {@inheritDoc} */
@@ -990,13 +1011,6 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
 	public VisibilityState getVisibilityState() {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void captureEvents() {
-		// TODO Auto-generated method stub
-
 	}
 
 	/** {@inheritDoc} */

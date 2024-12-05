@@ -90,10 +90,10 @@ public class IsSupported12Test extends LoboUnitTest {
         features.add("StyleSheets");
         features.add("CSS");
         features.add("CSS2");
-        features.add("Events");
-        features.add("UIEvents");
-        features.add("MouseEvents");
-        features.add("MutationEvents");
+        features.add("Event");
+        features.add("UIEvent");
+        features.add("MouseEvent");
+        features.add("MutationEvent");
         features.add("HTMLEvents");
         features.add("Range");
         features.add("Traversal");

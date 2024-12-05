@@ -30,8 +30,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.loboevolution.annotation.Alerts;
 import org.loboevolution.annotation.AlertsExtension;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.dom.HTMLDocument;
-import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.node.Document;
 
 /**
@@ -2082,30 +2080,12 @@ public class DocumentTest extends LoboUnitTest {
         +  "<body>\n"
         +  "  <input id='text1' onclick='test()'>\n"
         +  "  <input id='text2' onfocus='alert(\"onfocus text2\")'>\n"
-        +  "</body></html>";
-
-        final HTMLDocument document = loadHtml(html);
-        HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("text1");
-        elem.getOnclick();
-    }
-
-    @Test
-    @Alerts({"123", "captured"})
-    public void captureEvents() {
-        final String html = "<html><head>\n"
-        +  "<script>\n"
-        +  "  function t() {alert('captured'); }\n"
-        +  "  if(document.captureEvents) {\n"
-        +  "    document.captureEvents(Event.CLICK);\n"
-        +  "    document.onclick = t;\n"
-        +  "  } else {alert('not available'); }\n"
-        +  "</script></head><body>\n"
-        +  "<div id='theDiv' onclick='alert(123)'>foo</div>\n"
-        +  "</body></html>";
-
-        final HTMLDocument document = loadHtml(html);
-        HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("theDiv");
-        elem.getOnclick();
+        + "</body>"
+        + " <script>"
+        + "  document.getElementById('text1').click();"
+        + "  </script>"
+        + "</html>";
+        checkHtmlAlert(html);
     }
 
     @Test

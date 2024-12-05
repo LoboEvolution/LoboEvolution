@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2014 - 2024 LoboEvolution
+ * Copyright (c) 2014 - 2023 LoboEvolution
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,36 +23,37 @@
  *
  * Contact info: ivan.difrancesco@yahoo.it
  */
-package org.loboevolution.event;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.loboevolution.annotation.Alerts;
-import org.loboevolution.annotation.AlertsExtension;
-import org.loboevolution.driver.LoboUnitTest;
+package org.loboevolution.html.js.events;
 
-/**
- * Tests for WebGLContextEvent
- */
-@ExtendWith(AlertsExtension.class)
-public class WebGLContextEventTest extends LoboUnitTest {
+import lombok.NoArgsConstructor;
+import org.loboevolution.events.HashChangeEvent;
+
+@NoArgsConstructor
+public class HashChangeEventImpl extends EventImpl implements HashChangeEvent {
+
+    /**
+     * <p>Constructor for HashChangeEventImpl.</p>
+     *
+     * @param params event constructor parameters
+     */
+    public HashChangeEventImpl(Object[] params) {
+        setParams(params);
+    }
 
 
-    @Test
-    @Alerts({"1", "2", "3"})
-    public void constants() {
-        final String html = "<html><head>"
-                + "<script>\n"
-                + "  function test() {\n"
-                + "    try {\n"
-                + "     alert(WebGLContextEvent.CAPTURING_PHASE);\n"
-                + "     alert(WebGLContextEvent.AT_TARGET);\n"
-                + "     alert(WebGLContextEvent.BUBBLING_PHASE);\n"
-                + "    } catch(e) {alert('exception')}\n"
-                + "  }\n"
-                + "</script></head><body onload='test()'>\n"
-                + "</body></html>";
+    @Override
+    public String getNewURL() {
+        return "";
+    }
 
-        checkHtmlAlert(html);
+    @Override
+    public String getOldURL() {
+        return "";
+    }
+
+    @Override
+    public String toString() {
+        return "[object HashChangeEvent]";
     }
 }

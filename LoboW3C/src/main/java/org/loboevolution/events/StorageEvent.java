@@ -29,72 +29,45 @@ package org.loboevolution.events;
 import org.loboevolution.js.webstorage.Storage;
 
 /**
- * A StorageEvent is sent to a window when a storage area it has access to is
- * changed within the context of another document.
+ * The StorageEvent interface is implemented by the storage event, which is sent to a window when a storage
+ * area the window has access to is changed within the context of another document.
  *
- *
- *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/StorageEvent">StorageEvent - MDN</a>
+ * @see <a href="https://html.spec.whatwg.org/multipage/webstorage.html#the-storageevent-interface"># the-storageevent-interface</a>
  */
 public interface StorageEvent extends Event {
 
-	/**
-	 * <p>getKey.</p>
-	 *
-	 * @return a {@link java.lang.String} object.
-	 */
-	String getKey();
 
-	/**
-	 * Returns the new value of the key of the storage item whose value is being
-	 * changed.
-	 *
-	 * @return a {@link java.lang.String} object.
-	 */
-	String getNewValue();
+    String getKey();
 
-	/**
-	 * Returns the old value of the key of the storage item whose value is being
-	 * changed.
-	 *
-	 * @return a {@link java.lang.String} object.
-	 */
-	String getOldValue();
+    String getNewValue();
 
-	/**
-	 * Returns the Storage object that was affected.
-	 *
-	 * @return a {@link Storage} object.
-	 */
-	Storage getStorageArea();
+    String getOldValue();
 
-	/**
-	 * Returns the URL of the document whose storage item changed.
-	 *
-	 * @return a {@link java.lang.String} object.
-	 */
-	String getUrl();
+    Storage getStorageArea();
 
-	interface StorageEventInit extends EventInit {
+    String getUrl();
 
-		String getKey();
+    void initStorageEvent(String type, Boolean bubbles, boolean cancelable,
+                          String key, String oldValue, String newValue,
+                          String url, Storage storageArea);
 
-		void setKey(String key);
+    void initStorageEvent(String type, Boolean bubbles, boolean cancelable,
+                          String key, String oldValue, String newValue,
+                          String url);
 
-		String getNewValue();
+    void initStorageEvent(String type, Boolean bubbles, boolean cancelable,
+                          String key, String oldValue, String newValue);
 
-		void setNewValue(String newValue);
+    void initStorageEvent(String type, Boolean bubbles, boolean cancelable,
+                          String key, String oldValue);
 
-		String getOldValue();
+    void initStorageEvent(String type, Boolean bubbles, boolean cancelable,
+                          String key);
 
-		void setOldValue(String oldValue);
+    void initStorageEvent(String type, Boolean bubbles, boolean cancelable);
 
-		Storage getStorageArea();
+    void initStorageEvent(String type, Boolean bubbles);
 
-		void setStorageArea(Storage storageArea);
-
-		String getUrl();
-
-		void setUrl(String url);
-
-	}
+    void initStorageEvent(String type);
 }

@@ -66,7 +66,7 @@ public class SubmitEventTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"[object SubmitEvent]", "undefined", "false", "false", "false", "null"})
+    @Alerts({"exception"})
     public void createCtorWithoutType() {
         final String html = "<html><head><script>\n"
                 + "  function test() {\n"

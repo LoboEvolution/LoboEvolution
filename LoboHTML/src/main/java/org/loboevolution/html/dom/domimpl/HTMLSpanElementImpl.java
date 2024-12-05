@@ -32,9 +32,6 @@ import org.loboevolution.html.dom.HTMLElement;
 
 /**
  * <p>HTMLSpanElementImpl class.</p>
- *
- *
- *
  */
 public class HTMLSpanElementImpl extends HTMLElementImpl implements HTMLElement {
 	/**

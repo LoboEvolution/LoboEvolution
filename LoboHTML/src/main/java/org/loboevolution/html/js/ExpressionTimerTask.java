@@ -28,6 +28,7 @@ package org.loboevolution.html.js;
 
 import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
+import org.loboevolution.js.LoboContextFactory;
 import org.mozilla.javascript.Context;
 
 import java.awt.event.ActionEvent;
@@ -82,10 +83,11 @@ class ExpressionTimerTask extends WeakWindowTask {
 		}
 	}
 
-	private Object evalInScope(final WindowImpl window, final String javascript) {
-		try (Context ctx = Executor.createContext()) {
+	private void evalInScope(final WindowImpl window, final String javascript) {
+		LoboContextFactory contextFactory =  window.getContextFactory();
+		try (Context ctx = contextFactory.enterContext()) {
 			final String scriptURI = "window.eval";
-			return ctx.evaluateString(window.getWindowScope(), javascript, scriptURI, 1, null);
+			ctx.evaluateString(window.getWindowScope(ctx), javascript, scriptURI, 1, null);
 		}
 	}
 }

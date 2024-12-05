@@ -29,23 +29,10 @@ package org.loboevolution.events;
 /**
  * PopStateEvent is an event handler for the popstate event on the window.
  *
- *
- *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/PopStateEvent">PopStateEvent - MDN</a>
+ * @see <a href="https://html.spec.whatwg.org/multipage/browsing-the-web.html#the-popstateevent-interface"># the-popstateevent-interface</a>
  */
 public interface PopStateEvent extends Event {
 
-	/**
-	 * <p>getState.</p>
-	 *
-	 * @return a {@link java.lang.Object} object.
-	 */
-	Object getState();
-
-	interface PopStateEventInit extends EventInit {
-
-		Object getState();
-
-		void setState(Object state);
-
-	}
+    Object getState();
 }

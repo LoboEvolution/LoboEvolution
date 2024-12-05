@@ -176,7 +176,7 @@ public class CustomEventTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("function")
+    @Alerts("object")
     public void initCustomEvent() {
         final String html = "<html><head>"
                 + "<script>\n"
@@ -204,7 +204,6 @@ public class CustomEventTest extends LoboUnitTest {
                         + "    x.foo = 'I was here';\n"
                         + "  }\n"
                         + "  document.addEventListener('HTMLImportsLoaded', listener);\n"
-
                         + "  var myEvent = document.createEvent('CustomEvent');\n"
                         + "  myEvent.initCustomEvent('HTMLImportsLoaded', true, true, 'details');\n"
                         + "  document.dispatchEvent(myEvent);\n"

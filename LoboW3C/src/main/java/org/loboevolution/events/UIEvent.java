@@ -29,49 +29,78 @@ package org.loboevolution.events;
 import org.loboevolution.js.Window;
 
 /**
- * Simple user interface events.
+ * The UIEvent interface represents simple user interface events.
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/UIEvent">UIEvent - MDN</a>
+ * @see <a href="https://w3c.github.io/uievents/#idl-uievent"># idl-uievent</a>
  */
 public interface UIEvent extends Event {
 
     /**
-     * <p>getDetail.</p>
+     * The UIEvent.detail read-only property, when non-zero, provides the current (or next, depending on the event) click count.
      *
-     * @return a double.
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/detail">UIEvent.detail - MDN</a>
+     * @see <a href="https://www.w3.org/TR/2014/WD-DOM-Level-3-Events-20140925/#widl-UIEvent-detail">UIEvent.detail - Document Object Model (DOM) Level 3 Events Specification</a>
+     * @see <a href="https://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-UIEvent-detail">UIEvent.detail - Document Object Model (DOM) Level 2 Events Specification</a>
      */
-    double getDetail();
-
+    Double getDetail();
 
     /**
-     * <p>getView.</p>
+     * The UIEvent.view read-only property returns the WindowProxy object from which the event was generated. In browsers, this is the Window object the event happened in.
      *
-     * @return a {@link Window} object.
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/view">UIEvent.view - MDN</a>
+     * @see <a href="https://www.w3.org/TR/2014/WD-DOM-Level-3-Events-20140925/#interface-UIEvent">UIEvent - Document Object Model (DOM) Level 3 Events Specification</a>
+     * @see <a href="https://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-UIEvent">UIEvent - Document Object Model (DOM) Level 2 Events Specification</a>
      */
     Window getView();
 
+    Double getWhich();
+
     /**
-     * <p>initUIEvent.</p>
+     * The UIEvent.initUIEvent() method initializes a UI event once it's been created.
      *
-     * @param typeArg       a {@link java.lang.String} object.
-     * @param canBubbleArg  a boolean.
-     * @param cancelableArg a boolean.
-     * @param viewArg       a {@link Window} object.
-     * @param detailArg     a double.
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/initUIEvent">UIEvent.initUIEvent - MDN</a>
+     * @see <a href="https://www.w3.org/TR/2014/WD-DOM-Level-3-Events-20140925/#widl-UIEvent-initUIEvent">UIEvent.initUIEvent() - Document Object Model (DOM) Level 3 Events Specification</a>
+     * @see <a href="https://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-UIEvent">UIEvent.initUIEvent() - Document Object Model (DOM) Level 2 Events Specification</a>
      */
-    void initUIEvent(String typeArg, boolean canBubbleArg, boolean cancelableArg, Window viewArg, double detailArg);
+    void initUIEvent(String typeArg, Boolean bubblesArg, boolean cancelableArg,
+                     Window viewArg, Double detailArg);
 
+    /**
+     * The UIEvent.initUIEvent() method initializes a UI event once it's been created.
+     *
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/initUIEvent">UIEvent.initUIEvent - MDN</a>
+     * @see <a href="https://www.w3.org/TR/2014/WD-DOM-Level-3-Events-20140925/#widl-UIEvent-initUIEvent">UIEvent.initUIEvent() - Document Object Model (DOM) Level 3 Events Specification</a>
+     * @see <a href="https://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-UIEvent">UIEvent.initUIEvent() - Document Object Model (DOM) Level 2 Events Specification</a>
+     */
+    void initUIEvent(String typeArg, Boolean bubblesArg, boolean cancelableArg,
+                     Window viewArg);
 
-    interface UIEventInit extends EventInit {
+    /**
+     * The UIEvent.initUIEvent() method initializes a UI event once it's been created.
+     *
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/initUIEvent">UIEvent.initUIEvent - MDN</a>
+     * @see <a href="https://www.w3.org/TR/2014/WD-DOM-Level-3-Events-20140925/#widl-UIEvent-initUIEvent">UIEvent.initUIEvent() - Document Object Model (DOM) Level 3 Events Specification</a>
+     * @see <a href="https://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-UIEvent">UIEvent.initUIEvent() - Document Object Model (DOM) Level 2 Events Specification</a>
+     */
+    void initUIEvent(String typeArg, Boolean bubblesArg,
+                     boolean cancelableArg);
 
-        int getDetail();
+    /**
+     * The UIEvent.initUIEvent() method initializes a UI event once it's been created.
+     *
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/initUIEvent">UIEvent.initUIEvent - MDN</a>
+     * @see <a href="https://www.w3.org/TR/2014/WD-DOM-Level-3-Events-20140925/#widl-UIEvent-initUIEvent">UIEvent.initUIEvent() - Document Object Model (DOM) Level 3 Events Specification</a>
+     * @see <a href="https://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-UIEvent">UIEvent.initUIEvent() - Document Object Model (DOM) Level 2 Events Specification</a>
+     */
+    void initUIEvent(String typeArg, Boolean bubblesArg);
 
-
-        void setDetail(int detail);
-
-
-        Window getView();
-
-
-        void setView(Window view);
-
-    }
+    /**
+     * The UIEvent.initUIEvent() method initializes a UI event once it's been created.
+     *
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/initUIEvent">UIEvent.initUIEvent - MDN</a>
+     * @see <a href="https://www.w3.org/TR/2014/WD-DOM-Level-3-Events-20140925/#widl-UIEvent-initUIEvent">UIEvent.initUIEvent() - Document Object Model (DOM) Level 3 Events Specification</a>
+     * @see <a href="https://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-UIEvent">UIEvent.initUIEvent() - Document Object Model (DOM) Level 2 Events Specification</a>
+     */
+    void initUIEvent(String typeArg);
 }

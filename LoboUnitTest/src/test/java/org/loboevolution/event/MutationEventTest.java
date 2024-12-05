@@ -43,13 +43,11 @@ public class MutationEventTest extends LoboUnitTest {
             + "   alert(event.bubbles);\n"
             + "   alert(event.cancelable);\n"
             + "   alert(event.composed);\n"
-
-            // TODO all properties
             + "  }\n";
 
 
     @Test
-    @Alerts("exception")
+    @Alerts({"[object MutationEvent]", "mutant", "false", "false", "false"})
     public void createCtor() {
         final String html = "<html><head>"
                 + "<script>\n"
@@ -85,7 +83,7 @@ public class MutationEventTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("exception")
+    @Alerts({"[object MutationEvent]", "42", "false", "false", "false"})
     public void createCtorNumericType() {
         final String html = "<html><head>"
                 + "<script>\n"
@@ -139,7 +137,7 @@ public class MutationEventTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("exception")
+    @Alerts({"[object MutationEvent]", "HtmlUnitEvent", "false", "false", "false"})
     public void createCtorArbitraryType() {
         final String html = "<html><head>"
                 + "<script>\n"
@@ -157,14 +155,13 @@ public class MutationEventTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("exception")
+    @Alerts({"[object MutationEvent]", "mutant", "false", "false", "false"})
     public void createCtorAllDetails() {
         final String html = "<html><head>"
                 + "<script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new MutationEvent('mutant', {\n"
-                // + "        'data': 'mozart'\n"
                 + "      });\n"
                 + "      dump(event);\n"
                 + "    } catch (e) {alert('exception') }\n"
@@ -177,7 +174,7 @@ public class MutationEventTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("exception")
+    @Alerts({"[object MutationEvent]", "mutant", "false", "false", "false"})
     public void createCtorAllDetailsMissingData() {
         final String html = "<html><head>"
                 + "<script>\n"
@@ -196,7 +193,7 @@ public class MutationEventTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("exception")
+    @Alerts({"[object MutationEvent]", "mutant", "false", "false", "false"})
     public void createCtorAllDetailsWrongData() {
         final String html = "<html><head>"
                 + "<script>\n"

@@ -152,10 +152,12 @@ public class HTMLAnchorElementTest extends LoboUnitTest {
                 + "<body>\n"
                 + "  <a href='testsite1.html' id='13' name='testanchor' onClick='doTest(this);return false'>bla</a>\n"
                 + "  <a href='mailto:' id='link2'>mail</a>\n"
-                + "</body></html>";
-        final HTMLDocument document = loadHtml(html);
-        HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("13");
-        elem.getOnclick();
+                + "</body>"
+                + " <script>"
+                + "  document.getElementById('13').click();"
+                + "  </script>"
+                + "</html>";
+        checkHtmlAlert(html);
     }
 
     @Test

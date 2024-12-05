@@ -44,7 +44,6 @@ public class ProgressEventTest extends LoboUnitTest {
             + "     alert(event.bubbles);\n"
             + "     alert(event.cancelable);\n"
             + "     alert(event.composed);\n"
-
             + "     alert(event.lengthComputable);\n"
             + "     alert(event.loaded);\n"
             + "     alert(event.total);\n"

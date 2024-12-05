@@ -120,14 +120,7 @@ public interface Element extends Node, InnerHTML, NonDocumentTypeChildNode, Pare
      * @return a {@link java.lang.String} object.
      */
     String getNamespaceURI();
-
-
-    /**
-     * <p>getOnfullscreenchange.</p>
-     *
-     * @return a {@link org.mozilla.javascript.Function} object.
-     */
-    Function getOnfullscreenchange();
+    
 
     /**
      * <p>getOuterHTML.</p>

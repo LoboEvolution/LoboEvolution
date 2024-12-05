@@ -359,11 +359,12 @@ public class HTMLIFrameElement3Test extends LoboUnitTest {
                 + "}\n</script></head>\n"
                 + "<body>\n"
                 + "  <button type='button' id='clickme' onClick='test();'>Click me</a>\n"
-                + "</body></html>";
-
-        final HTMLDocument document = loadHtml(html);
-        HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("clickme");
-        elem.getOnclick();
+                + "</body>"
+                + " <script>"
+                + "  document.getElementById('clickme').click();"
+                + "  </script>"
+                + "</html>";
+        checkHtmlAlert(html);
     }
 
     @Test

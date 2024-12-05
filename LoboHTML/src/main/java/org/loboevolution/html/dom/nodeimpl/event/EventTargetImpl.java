@@ -26,9 +26,11 @@
 
 package org.loboevolution.html.dom.nodeimpl.event;
 
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.ArrayUtilities;
 import org.loboevolution.common.Strings;
+import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.nodeimpl.ElementImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.js.Executor;
@@ -39,6 +41,7 @@ import org.loboevolution.html.node.Node;
 import org.loboevolution.events.Event;
 import org.loboevolution.events.EventTarget;
 import org.loboevolution.http.UserAgentContext;
+import org.loboevolution.js.AbstractScriptableDelegate;
 import org.loboevolution.js.JavaScript;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
@@ -53,14 +56,11 @@ import java.util.concurrent.atomic.AtomicReference;
  * <p>EventTargetImpl class.</p>
  */
 @Slf4j
-public class EventTargetImpl implements EventTarget {
+public class EventTargetImpl extends AbstractScriptableDelegate implements EventTarget {
 
-    private final NodeImpl target;
-    private List<EventListenerEntry> mListenerEntries;
-
-    public EventTargetImpl(final NodeImpl target) {
-        this.target = target;
-    }
+   @Setter
+   private NodeImpl target;
+   private List<EventListenerEntry> mListenerEntries;
 
     @Override
     public void addEventListener(final String type, final Function listener) {
@@ -103,41 +103,47 @@ public class EventTargetImpl implements EventTarget {
     @Override
     public boolean dispatchEvent(final Node element, final Event evt) {
         final EventImpl eventImpl = (EventImpl) evt;
-        eventImpl.setTarget(this);
         eventImpl.setEventPhase(Event.AT_TARGET);
-        eventImpl.setCurrentTarget(this);
         if (!eventImpl.isPropogationStopped() && mListenerEntries != null) {
             mListenerEntries.forEach(listenerEntry -> {
                 if (!listenerEntry.isUseCapture() && listenerEntry.getType().equals(eventImpl.getType())) {
                     try {
-                        Executor.executeFunction((NodeImpl) element, listenerEntry.getFunction(), eventImpl, new Object[0]);
+                        if (element instanceof HTMLElementImpl elem) {
+                            eventImpl.setTarget(elem);
+                            eventImpl.setCurrentTarget(elem);
+                            final WindowImpl window = (WindowImpl) elem.getDocumentNode().getDefaultView();
+                            Executor.executeFunction((NodeImpl) element, listenerEntry.getFunction(), new Object[0], window.getContextFactory());
+                        }
                     } catch (Exception e) {
                         log.error("Catched EventListener exception", e);
                     }
                 }
             });
         }
-        return eventImpl.isPreventDefault();
+        return eventImpl.getDefaultPrevented();
     }
 
     @Override
     public boolean dispatchEvent(final Event evt) throws EventException {
         final EventImpl eventImpl = (EventImpl) evt;
-        eventImpl.setTarget(this);
         eventImpl.setEventPhase(Event.AT_TARGET);
-        eventImpl.setCurrentTarget(this);
-        if (!eventImpl.isPropogationStopped() && mListenerEntries != null) {
+        if (!eventImpl.getDefaultPrevented() && mListenerEntries != null) {
             mListenerEntries.forEach(listenerEntry -> {
                 if (!listenerEntry.isUseCapture() && listenerEntry.getType().equals(eventImpl.getType())) {
                     try {
-                        Executor.executeFunction(target, listenerEntry.getFunction(), eventImpl, new Object[0]);
+                        if (target instanceof HTMLElementImpl elem) {
+                            eventImpl.setTarget(elem);
+                            eventImpl.setCurrentTarget(elem);
+                            final WindowImpl window = (WindowImpl) elem.getDocumentNode().getDefaultView();
+                            Executor.executeFunction(target, listenerEntry.getFunction(), new Object[0], window.getContextFactory());
+                        }
                     } catch (Exception e) {
                         log.error("Catched EventListener exception", e);
                     }
                 }
             });
         }
-        return eventImpl.isPreventDefault();
+        return eventImpl.getDefaultPrevented();
     }
 
     public Function getFunction(final Object obj, final String type) {
@@ -184,14 +190,14 @@ public class EventTargetImpl implements EventTarget {
                 throw new IllegalStateException("Element does not belong to a document.");
             }
 
-            try (final Context ctx = Executor.createContext()) {
+            final WindowImpl window = (WindowImpl) doc.getDefaultView();
+            try (Context ctx = Executor.createContext(window.getContextFactory())) {
                 final Scriptable scope = (Scriptable) doc.getUserData(Executor.SCOPE_KEY);
                 if (scope == null) {
                     throw new IllegalStateException("Scriptable (scope) instance was expected to be keyed as UserData to document using " + Executor.SCOPE_KEY);
                 }
                 final Scriptable thisScope = (Scriptable) JavaScript.getInstance().getJavascriptObject(this, scope);
                 try {
-                    ctx.setLanguageVersion(Context.VERSION_1_8);
                     func = ctx.compileFunction(thisScope, functionCode, elem.getTagName() + "[" + elem.getId() + "]." + normalAttributeName, 1, null);
                 } catch (final RhinoException ecmaError) {
                     final String error = ecmaError.sourceName() + ":" + ecmaError.lineNumber() + ": " + ecmaError.getMessage();
@@ -205,6 +211,9 @@ public class EventTargetImpl implements EventTarget {
     }
 
     private void onloadEvent(final Function onloadHandler) {
-        Executor.executeFunction(onloadHandler.getParentScope(), onloadHandler);
+         if(target instanceof HTMLElementImpl elem){
+            final WindowImpl window = (WindowImpl) elem.getDocumentNode().getDefaultView();
+            Executor.executeFunction(onloadHandler.getParentScope(), onloadHandler, window.getContextFactory());
+        }
     }
 }

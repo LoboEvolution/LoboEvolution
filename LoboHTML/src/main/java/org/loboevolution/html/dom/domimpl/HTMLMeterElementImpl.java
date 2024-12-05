@@ -28,6 +28,8 @@ package org.loboevolution.html.dom.domimpl;
 
 import org.loboevolution.html.dom.HTMLMeterElement;
 import org.loboevolution.html.node.NodeList;
+import org.loboevolution.html.renderstate.DisplayRenderState;
+import org.loboevolution.html.renderstate.RenderState;
 
 public class HTMLMeterElementImpl extends HTMLElementImpl implements HTMLMeterElement {
     /**
@@ -37,6 +39,11 @@ public class HTMLMeterElementImpl extends HTMLElementImpl implements HTMLMeterEl
      */
     public HTMLMeterElementImpl(String name) {
         super(name);
+    }
+
+    @Override
+    protected RenderState createRenderState(final RenderState prevRenderState) {
+        return new DisplayRenderState(prevRenderState, this, RenderState.DISPLAY_INLINE_BLOCK);
     }
 
     @Override

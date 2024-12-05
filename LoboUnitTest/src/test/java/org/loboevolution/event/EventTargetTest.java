@@ -30,9 +30,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.loboevolution.annotation.Alerts;
 import org.loboevolution.annotation.AlertsExtension;
 import org.loboevolution.driver.LoboUnitTest;
+import org.loboevolution.events.EventTarget;
+import org.loboevolution.events.InputEvent;
 
 /**
- * Tests for EventTarget
+ * Tests for {@link EventTarget}.
  */
 @ExtendWith(AlertsExtension.class)
 public class EventTargetTest extends LoboUnitTest {

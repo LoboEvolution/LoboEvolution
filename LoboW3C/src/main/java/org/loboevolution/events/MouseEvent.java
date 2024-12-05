@@ -29,213 +29,352 @@ package org.loboevolution.events;
 import org.loboevolution.js.Window;
 
 /**
- * Events that occur due to the user interacting with a pointing device (such as
- * a mouse). Common events using this interface include click, dblclick,
- * mouseup, mousedown.
+ * The MouseEvent interface represents events that occur due to the user interacting with a pointing device (such as a mouse). Common events using this interface include click, dblclick, mouseup, mousedown.
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent">MouseEvent - MDN</a>
+ * @see <a href="https://w3c.github.io/uievents/#interface-mouseevent"># interface-mouseevent</a>
+ * @see <a href="https://drafts.csswg.org/cssom-view/#extensions-to-the-mouseevent-interface"># extensions-to-the-mouseevent-interface</a>
+ * @see <a href="https://w3c.github.io/pointerlock/#extensions-to-the-mouseevent-interface"># extensions-to-the-mouseevent-interface</a>
  */
 public interface MouseEvent extends UIEvent {
 
-	/**
-	 * <p>isAltKey.</p>
-	 *
-	 * @return a boolean.
-	 */
-	boolean isAltKey();
+    /**
+     * The MouseEvent.altKey read-only property is a Boolean that indicates whether the alt key was pressed or not when a given mouse event occurs.
+     *
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/altKey">MouseEvent.altKey - MDN</a>
+     * @see <a href="https://www.w3.org/TR/2014/WD-DOM-Level-3-Events-20140925/#widl-MouseEvent-altKey">MouseEvent.altkey - Document Object Model (DOM) Level 3 Events Specification</a>
+     * @see <a href="https://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-MouseEvent">MouseEvent.altkey - Document Object Model (DOM) Level 2 Events Specification</a>
+     */
+    Boolean getAltKey();
 
-	/**
-	 * <p>getButton.</p>
-	 *
-	 * @return a {@link java.lang.Integer} object.
-	 */
-	int getButton();
+    /**
+     * The MouseEvent.button read-only property indicates which button was pressed on the mouse to trigger the event.
+     *
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/button">MouseEvent.button - MDN</a>
+     * @see <a href="https://www.w3.org/TR/2014/WD-DOM-Level-3-Events-20140925/#widl-MouseEvent-button">MouseEvent.button - Document Object Model (DOM) Level 3 Events Specification</a>
+     * @see <a href="https://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-MouseEvent">MouseEvent.button - Document Object Model (DOM) Level 2 Events Specification</a>
+     */
+    Long getButton();
 
-	/**
-	 * <p>getButtons.</p>
-	 *
-	 * @return a {@link java.lang.Integer} object.
-	 */
-	int getButtons();
+    /**
+     * The MouseEvent.buttons read-only property indicates which buttons are pressed on the mouse (or other input device) when a mouse event is triggered.
+     *
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/buttons">MouseEvent.buttons - MDN</a>
+     * @see <a href="https://w3c.github.io/uievents/#dom-mouseevent-buttons">MouseEvent.buttons - UI Events</a>
+     * @see <a href="https://www.w3.org/TR/2014/WD-DOM-Level-3-Events-20140925/#widl-MouseEvent-buttons">MouseEvent.buttons - Document Object Model (DOM) Level 3 Events Specification</a>
+     */
+    Long getButtons();
 
-	/**
-	 * <p>getClientX.</p>
-	 *
-	 * @return a double.
-	 */
-	double getClientX();
+    /**
+     * The clientX read-only property of the MouseEvent interface provides the horizontal coordinate within the application's viewport at which the event occurred (as opposed to the coordinate within the page).
+     *
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/clientX">MouseEvent.clientX - MDN</a>
+     * @see <a href="https://drafts.csswg.org/cssom-view/#dom-mouseevent-clientx">clientX - CSS Object Model (CSSOM) View Module</a>
+     * @see <a href="https://www.w3.org/TR/2014/WD-DOM-Level-3-Events-20140925/#widl-MouseEvent-clientX">MouseEvent.clientX - Document Object Model (DOM) Level 3 Events Specification</a>
+     * @see <a href="https://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-MouseEvent">MouseEvent.clientX - Document Object Model (DOM) Level 2 Events Specification</a>
+     */
+    Long getClientX();
 
-	/**
-	 * <p>getClientY.</p>
-	 *
-	 * @return a double.
-	 */
-	double getClientY();
+    /**
+     * The clientY read-only property of the MouseEvent interface provides the vertical coordinate within the application's viewport at which the event occurred (as opposed to the coordinate within the page).
+     *
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/clientY">MouseEvent.clientY - MDN</a>
+     * @see <a href="https://drafts.csswg.org/cssom-view/#dom-mouseevent-clienty">clientY - CSS Object Model (CSSOM) View Module</a>
+     * @see <a href="https://www.w3.org/TR/2014/WD-DOM-Level-3-Events-20140925/#widl-MouseEvent-clientY">MouseEvent.clientY - Document Object Model (DOM) Level 3 Events Specification</a>
+     * @see <a href="https://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-MouseEvent">MouseEvent.clientY - Document Object Model (DOM) Level 2 Events Specification</a>
+     */
+    Long getClientY();
 
-	/**
-	 * <p>isCtrlKey.</p>
-	 *
-	 * @return a boolean.
-	 */
-	boolean isCtrlKey();
+    /**
+     * The MouseEvent.ctrlKey read-only property is a Boolean that indicates whether the ctrl key was pressed or not when a given mouse event occurs.
+     *
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/ctrlKey">MouseEvent.ctrlKey - MDN</a>
+     * @see <a href="https://www.w3.org/TR/2014/WD-DOM-Level-3-Events-20140925/#widl-MouseEvent-ctrlKey">MouseEvent.ctrlKey - Document Object Model (DOM) Level 3 Events Specification</a>
+     * @see <a href="https://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-MouseEvent">MouseEvent.ctrlKey - Document Object Model (DOM) Level 2 Events Specification</a>
+     */
+    Boolean getCtrlKey();
 
-	/**
-	 * <p>isMetaKey.</p>
-	 *
-	 * @return a boolean.
-	 */
-	boolean isMetaKey();
+    /**
+     * The MouseEvent.metaKey read-only property is a Boolean that indicates whether the meta key was pressed or not when a given mouse event occurs.
+     *
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/metaKey">MouseEvent.metaKey - MDN</a>
+     * @see <a href="https://www.w3.org/TR/2014/WD-DOM-Level-3-Events-20140925/#widl-MouseEvent-metaKey">MouseEvent.metaKey - Document Object Model (DOM) Level 3 Events Specification</a>
+     * @see <a href="https://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-MouseEvent">MouseEvent.metaKey - Document Object Model (DOM) Level 2 Events Specification</a>
+     */
+    Boolean getMetaKey();
 
-	/**
-	 * <p>getMovementX.</p>
-	 *
-	 * @return a double.
-	 */
-	double getMovementX();
+    /**
+     * The movementX read-only property of the MouseEvent interface provides the difference in the X coordinate of the mouse pointer between the given event and the previous mousemove event. In other words, the value of the property is computed like this: currentEvent.movementX = currentEvent.screenX - previousEvent.screenX.
+     *
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/movementX">MouseEvent.movementX - MDN</a>
+     * @see <a href="https://w3c.github.io/pointerlock/#dom-mouseevent-movementx">MouseEvent.movementX - Pointer Lock</a>
+     */
+    Long getMovementX();
 
-	/**
-	 * <p>getMovementY.</p>
-	 *
-	 * @return a double.
-	 */
-	double getMovementY();
+    /**
+     * The movementY read-only property of the MouseEvent interface provides the difference in the Y coordinate of the mouse pointer between the given event and the previous mousemove event. In other words, the value of the property is computed like this: currentEvent.movementY = currentEvent.screenY - previousEvent.screenY.
+     *
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/movementY">MouseEvent.movementY - MDN</a>
+     * @see <a href="https://w3c.github.io/pointerlock/#dom-mouseevent-movementy">MouseEvent.movementY - Pointer Lock</a>
+     */
+    Long getMovementY();
 
-	/**
-	 * <p>getOffsetX.</p>
-	 *
-	 * @return a double.
-	 */
-	double getOffsetX();
+    /**
+     * The offsetX read-only property of the MouseEvent interface provides the offset in the X coordinate of the mouse pointer between that event and the padding edge of the target node.
+     *
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/offsetX">MouseEvent.offsetX - MDN</a>
+     * @see <a href="https://drafts.csswg.org/cssom-view/#dom-mouseevent-offsetx">MouseEvent - CSS Object Model (CSSOM) View Module</a>
+     */
+    Long getOffsetX();
 
-	/**
-	 * <p>getOffsetY.</p>
-	 *
-	 * @return a double.
-	 */
-	double getOffsetY();
+    /**
+     * The offsetY read-only property of the MouseEvent interface provides the offset in the Y coordinate of the mouse pointer between that event and the padding edge of the target node.
+     *
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/offsetY">MouseEvent.offsetY - MDN</a>
+     * @see <a href="https://drafts.csswg.org/cssom-view/#dom-mouseevent-offsety">MouseEvent - CSS Object Model (CSSOM) View Module</a>
+     */
+    Long getOffsetY();
 
-	/**
-	 * <p>getPageX.</p>
-	 *
-	 * @return a double.
-	 */
-	double getPageX();
+    /**
+     * The pageX read-only property of the MouseEvent interface returns the X (horizontal) coordinate (in pixels) at which the mouse was clicked, relative to the left edge of the entire document.
+     *
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/pageX">MouseEvent.pageX - MDN</a>
+     * @see <a href="https://drafts.csswg.org/cssom-view/#dom-mouseevent-pagex">pageX - CSS Object Model (CSSOM) View Module</a>
+     * @see <a href="https://www.w3.org/TR/touch-events/#widl-Touch-pageX">pageX - Touch Events</a>
+     */
+    Long getPageX();
 
-	/**
-	 * <p>getPageY.</p>
-	 *
-	 * @return a double.
-	 */
-	double getPageY();
+    /**
+     * The pageY read-only property of the MouseEvent interface returns the Y (vertical) coordinate in pixels of the event relative to the whole document. This property takes into account any vertical scrolling of the page.
+     *
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/pageY">MouseEvent.pageY - MDN</a>
+     * @see <a href="https://drafts.csswg.org/cssom-view/#dom-mouseevent-pagey">pageY - CSS Object Model (CSSOM) View Module</a>
+     * @see <a href="https://www.w3.org/TR/touch-events/#widl-Touch-pageY">pageY - Touch Events</a>
+     */
+    Long getPageY();
 
-	/**
-	 * <p>getRelatedTarget.</p>
-	 *
-	 * @return a {@link EventTarget} object.
-	 */
-	EventTarget getRelatedTarget();
+    /**
+     * The MouseEvent.relatedTarget read-only property is the secondary target for the mouse event, if there is one. That is:
+     *
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/relatedTarget">MouseEvent.relatedTarget - MDN</a>
+     * @see <a href="https://w3c.github.io/uievents/#dom-mouseevent-relatedtarget">MouseEvent.relatedTarget - UI Events</a>
+     * @see <a href="https://www.w3.org/TR/2014/WD-DOM-Level-3-Events-20140925/#widl-MouseEvent-relatedTarget">MouseEvent.relatedTarget - Document Object Model (DOM) Level 3 Events Specification</a>
+     * @see <a href="https://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-MouseEvent">MouseEvent.altkey - Document Object Model (DOM) Level 2 Events Specification</a>
+     */
+    EventTarget relatedTarget();
 
-	/**
-	 * <p>getScreenX.</p>
-	 *
-	 * @return a double.
-	 */
-	double getScreenX();
+    /**
+     * The screenX read-only property of the MouseEvent interface provides the horizontal coordinate (offset) of the mouse pointer in global (screen) coordinates.
+     *
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/screenX">MouseEvent.screenX - MDN</a>
+     * @see <a href="https://drafts.csswg.org/cssom-view/#dom-mouseevent-screenx">screenX - CSS Object Model (CSSOM) View Module</a>
+     * @see <a href="https://www.w3.org/TR/2014/WD-DOM-Level-3-Events-20140925/#widl-MouseEvent-screenX">MouseEvent.screenX - Document Object Model (DOM) Level 3 Events Specification</a>
+     * @see <a href="https://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-MouseEvent">MouseEvent.sceenX - Document Object Model (DOM) Level 2 Events Specification</a>
+     */
+    Long getScreenX();
 
-	/**
-	 * <p>getScreenY.</p>
-	 *
-	 * @return a double.
-	 */
-	double getScreenY();
+    /**
+     * The screenY read-only property of the MouseEvent interface provides the vertical coordinate (offset) of the mouse pointer in global (screen) coordinates.
+     *
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/screenY">MouseEvent.screenY - MDN</a>
+     * @see <a href="https://drafts.csswg.org/cssom-view/#dom-mouseevent-screeny">screenY - CSS Object Model (CSSOM) View Module</a>
+     * @see <a href="https://www.w3.org/TR/2014/WD-DOM-Level-3-Events-20140925/#widl-MouseEvent-screenY">MouseEvent.screenY - Document Object Model (DOM) Level 3 Events Specification</a>
+     * @see <a href="https://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-MouseEvent">MouseEvent.sceenY - Document Object Model (DOM) Level 2 Events Specification</a>
+     */
+    Long getScreenY();
 
-	/**
-	 * <p>isShiftKey.</p>
-	 *
-	 * @return a boolean.
-	 */
-	boolean isShiftKey();
+    /**
+     * The MouseEvent.shiftKey read-only property is a Boolean that indicates whether the shift key was pressed or not when a given mouse event occurs.
+     *
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/shiftKey">MouseEvent.shiftKey - MDN</a>
+     * @see <a href="https://www.w3.org/TR/2014/WD-DOM-Level-3-Events-20140925/#widl-MouseEvent-shiftKey">MouseEvent.shiftKey - Document Object Model (DOM) Level 3 Events Specification</a>
+     * @see <a href="https://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-MouseEvent">MouseEvent.shiftKey - Document Object Model (DOM) Level 2 Events Specification</a>
+     */
+    Boolean getShiftKey();
 
-	/**
-	 * <p>getX.</p>
-	 *
-	 * @return a double.
-	 */
-	double getX();
+    /**
+     * The MouseEvent.x property is an alias for the MouseEvent.clientX property.
+     *
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/x">MouseEvent.x - MDN</a>
+     * @see <a href="https://drafts.csswg.org/cssom-view/#dom-mouseevent-x">MouseEvent.x - CSS Object Model (CSSOM) View Module</a>
+     */
+    Long getX();
 
-	/**
-	 * <p>getY.</p>
-	 *
-	 * @return a double.
-	 */
-	double getY();
+    /**
+     * The MouseEvent.y property is an alias for the MouseEvent.clientY property.
+     *
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/y">MouseEvent.y - MDN</a>
+     * @see <a href="https://drafts.csswg.org/cssom-view/#dom-mouseevent-y">MouseEvent.y - CSS Object Model (CSSOM) View Module</a>
+     */
+    Long getY();
 
-	/**
-	 * <p>getModifierState.</p>
-	 *
-	 * @param keyArg a {@link java.lang.String} object.
-	 * @return a boolean.
-	 */
-	boolean getModifierState(String keyArg);
+    /**
+     * The MouseEvent.getModifierState() method returns the current state of the specified modifier key: true if the modifier is active (i.e., the modifier key is pressed or locked), otherwise, false.
+     *
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/getModifierState">MouseEvent.getModifierState - MDN</a>
+     * @see <a href="https://www.w3.org/TR/2014/WD-DOM-Level-3-Events-20140925/#widl-MouseEvent-getModifierState">getModifierState() - Document Object Model (DOM) Level 3 Events Specification</a>
+     */
+    Boolean getModifierState(String keyArg);
 
-	/**
-	 * <p>initMouseEvent.</p>
-	 *
-	 * @param typeArg a {@link java.lang.String} object.
-	 * @param canBubbleArg a boolean.
-	 * @param cancelableArg a boolean.
-	 * @param viewArg a {@link Window} object.
-	 * @param detailArg a double.
-	 * @param screenXArg a double.
-	 * @param screenYArg a double.
-	 * @param clientXArg a double.
-	 * @param clientYArg a double.
-	 * @param ctrlKeyArg a boolean.
-	 * @param altKeyArg a boolean.
-	 * @param shiftKeyArg a boolean.
-	 * @param metaKeyArg a boolean.
-	 * @param buttonArg a {@link java.lang.Integer} object.
-	 * @param relatedTargetArg a {@link EventTarget} object.
-	 */
-	void initMouseEvent(String typeArg, boolean canBubbleArg, boolean cancelableArg, Window viewArg, double detailArg,
-			double screenXArg, double screenYArg, double clientXArg, double clientYArg, boolean ctrlKeyArg,
-			boolean altKeyArg, boolean shiftKeyArg, boolean metaKeyArg, int buttonArg, EventTarget relatedTargetArg);
+    /**
+     * The MouseEvent.initMouseEvent() method initializes the value of a mouse event once it's been created (normally using the Document.createEvent() method).
+     *
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/initMouseEvent">MouseEvent.initMouseEvent - MDN</a>
+     * @see <a href="https://www.w3.org/TR/2014/WD-DOM-Level-3-Events-20140925/#idl-interface-MouseEvent-initializers">MouseEvent.initMouseEvent() - Document Object Model (DOM) Level 3 Events Specification</a>
+     * @see <a href="https://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-Event-initMouseEvent">MouseEvent.initMouseEvent() - Document Object Model (DOM) Level 2 Events Specification</a>
+     */
+    void initMouseEvent(String typeArg, Boolean bubblesArg,
+                        Boolean cancelableArg, Window viewArg, Double detailArg, Double screenXArg,
+                        Double screenYArg, Double clientXArg, Double clientYArg, Boolean ctrlKeyArg, Boolean altKeyArg,
+                        Boolean shiftKeyArg, Boolean metaKeyArg, Double buttonArg,
+                        EventTarget relatedTargetArg);
 
-	interface MouseEventInit extends EventModifierInit {
+    /**
+     * The MouseEvent.initMouseEvent() method initializes the value of a mouse event once it's been created (normally using the Document.createEvent() method).
+     *
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/initMouseEvent">MouseEvent.initMouseEvent - MDN</a>
+     * @see <a href="https://www.w3.org/TR/2014/WD-DOM-Level-3-Events-20140925/#idl-interface-MouseEvent-initializers">MouseEvent.initMouseEvent() - Document Object Model (DOM) Level 3 Events Specification</a>
+     * @see <a href="https://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-Event-initMouseEvent">MouseEvent.initMouseEvent() - Document Object Model (DOM) Level 2 Events Specification</a>
+     */
+    void initMouseEvent(String typeArg, Boolean bubblesArg,
+                        Boolean cancelableArg, Window viewArg, Double detailArg, Double screenXArg,
+                        Double screenYArg, Double clientXArg, Double clientYArg, Boolean ctrlKeyArg, Boolean altKeyArg,
+                        Boolean shiftKeyArg, Boolean metaKeyArg, Double buttonArg);
 
-		int getButton();
+    /**
+     * The MouseEvent.initMouseEvent() method initializes the value of a mouse event once it's been created (normally using the Document.createEvent() method).
+     *
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/initMouseEvent">MouseEvent.initMouseEvent - MDN</a>
+     * @see <a href="https://www.w3.org/TR/2014/WD-DOM-Level-3-Events-20140925/#idl-interface-MouseEvent-initializers">MouseEvent.initMouseEvent() - Document Object Model (DOM) Level 3 Events Specification</a>
+     * @see <a href="https://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-Event-initMouseEvent">MouseEvent.initMouseEvent() - Document Object Model (DOM) Level 2 Events Specification</a>
+     */
+    void initMouseEvent(String typeArg, Boolean bubblesArg,
+                        Boolean cancelableArg, Window viewArg, Double detailArg, Double screenXArg,
+                        Double screenYArg, Double clientXArg, Double clientYArg, Boolean ctrlKeyArg, Boolean altKeyArg,
+                        Boolean shiftKeyArg, Boolean metaKeyArg);
 
-		void setButton(int button);
+    /**
+     * The MouseEvent.initMouseEvent() method initializes the value of a mouse event once it's been created (normally using the Document.createEvent() method).
+     *
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/initMouseEvent">MouseEvent.initMouseEvent - MDN</a>
+     * @see <a href="https://www.w3.org/TR/2014/WD-DOM-Level-3-Events-20140925/#idl-interface-MouseEvent-initializers">MouseEvent.initMouseEvent() - Document Object Model (DOM) Level 3 Events Specification</a>
+     * @see <a href="https://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-Event-initMouseEvent">MouseEvent.initMouseEvent() - Document Object Model (DOM) Level 2 Events Specification</a>
+     */
+    void initMouseEvent(String typeArg, Boolean bubblesArg,
+                        Boolean cancelableArg, Window viewArg, Double detailArg, Double screenXArg,
+                        Double screenYArg, Double clientXArg, Double clientYArg, Boolean ctrlKeyArg, Boolean altKeyArg,
+                        Boolean shiftKeyArg);
 
-		int getButtons();
+    /**
+     * The MouseEvent.initMouseEvent() method initializes the value of a mouse event once it's been created (normally using the Document.createEvent() method).
+     *
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/initMouseEvent">MouseEvent.initMouseEvent - MDN</a>
+     * @see <a href="https://www.w3.org/TR/2014/WD-DOM-Level-3-Events-20140925/#idl-interface-MouseEvent-initializers">MouseEvent.initMouseEvent() - Document Object Model (DOM) Level 3 Events Specification</a>
+     * @see <a href="https://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-Event-initMouseEvent">MouseEvent.initMouseEvent() - Document Object Model (DOM) Level 2 Events Specification</a>
+     */
+    void initMouseEvent(String typeArg, Boolean bubblesArg,
+                        Boolean cancelableArg, Window viewArg, Double detailArg, Double screenXArg,
+                        Double screenYArg, Double clientXArg, Double clientYArg, Boolean ctrlKeyArg, Boolean altKeyArg);
 
-		void setButtons(int buttons);
+    /**
+     * The MouseEvent.initMouseEvent() method initializes the value of a mouse event once it's been created (normally using the Document.createEvent() method).
+     *
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/initMouseEvent">MouseEvent.initMouseEvent - MDN</a>
+     * @see <a href="https://www.w3.org/TR/2014/WD-DOM-Level-3-Events-20140925/#idl-interface-MouseEvent-initializers">MouseEvent.initMouseEvent() - Document Object Model (DOM) Level 3 Events Specification</a>
+     * @see <a href="https://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-Event-initMouseEvent">MouseEvent.initMouseEvent() - Document Object Model (DOM) Level 2 Events Specification</a>
+     */
+    void initMouseEvent(String typeArg, Boolean bubblesArg,
+                        Boolean cancelableArg, Window viewArg, Double detailArg, Double screenXArg,
+                        Double screenYArg, Double clientXArg, Double clientYArg, Boolean ctrlKeyArg);
 
-		double getClientX();
+    /**
+     * The MouseEvent.initMouseEvent() method initializes the value of a mouse event once it's been created (normally using the Document.createEvent() method).
+     *
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/initMouseEvent">MouseEvent.initMouseEvent - MDN</a>
+     * @see <a href="https://www.w3.org/TR/2014/WD-DOM-Level-3-Events-20140925/#idl-interface-MouseEvent-initializers">MouseEvent.initMouseEvent() - Document Object Model (DOM) Level 3 Events Specification</a>
+     * @see <a href="https://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-Event-initMouseEvent">MouseEvent.initMouseEvent() - Document Object Model (DOM) Level 2 Events Specification</a>
+     */
+    void initMouseEvent(String typeArg, Boolean bubblesArg,
+                        Boolean cancelableArg, Window viewArg, Double detailArg, Double screenXArg,
+                        Double screenYArg, Double clientXArg, Double clientYArg);
 
-		void setClientX(double clientX);
+    /**
+     * The MouseEvent.initMouseEvent() method initializes the value of a mouse event once it's been created (normally using the Document.createEvent() method).
+     *
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/initMouseEvent">MouseEvent.initMouseEvent - MDN</a>
+     * @see <a href="https://www.w3.org/TR/2014/WD-DOM-Level-3-Events-20140925/#idl-interface-MouseEvent-initializers">MouseEvent.initMouseEvent() - Document Object Model (DOM) Level 3 Events Specification</a>
+     * @see <a href="https://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-Event-initMouseEvent">MouseEvent.initMouseEvent() - Document Object Model (DOM) Level 2 Events Specification</a>
+     */
+    void initMouseEvent(String typeArg, Boolean bubblesArg,
+                        Boolean cancelableArg, Window viewArg, Double detailArg, Double screenXArg,
+                        Double screenYArg, Double clientXArg);
 
-		double getClientY();
+    /**
+     * The MouseEvent.initMouseEvent() method initializes the value of a mouse event once it's been created (normally using the Document.createEvent() method).
+     *
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/initMouseEvent">MouseEvent.initMouseEvent - MDN</a>
+     * @see <a href="https://www.w3.org/TR/2014/WD-DOM-Level-3-Events-20140925/#idl-interface-MouseEvent-initializers">MouseEvent.initMouseEvent() - Document Object Model (DOM) Level 3 Events Specification</a>
+     * @see <a href="https://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-Event-initMouseEvent">MouseEvent.initMouseEvent() - Document Object Model (DOM) Level 2 Events Specification</a>
+     */
+    void initMouseEvent(String typeArg, Boolean bubblesArg,
+                        Boolean cancelableArg, Window viewArg, Double detailArg, Double screenXArg,
+                        Double screenYArg);
 
-		void setClientY(double clientY);
+    /**
+     * The MouseEvent.initMouseEvent() method initializes the value of a mouse event once it's been created (normally using the Document.createEvent() method).
+     *
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/initMouseEvent">MouseEvent.initMouseEvent - MDN</a>
+     * @see <a href="https://www.w3.org/TR/2014/WD-DOM-Level-3-Events-20140925/#idl-interface-MouseEvent-initializers">MouseEvent.initMouseEvent() - Document Object Model (DOM) Level 3 Events Specification</a>
+     * @see <a href="https://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-Event-initMouseEvent">MouseEvent.initMouseEvent() - Document Object Model (DOM) Level 2 Events Specification</a>
+     */
+    void initMouseEvent(String typeArg, Boolean bubblesArg,
+                        Boolean cancelableArg, Window viewArg, Double detailArg, Double screenXArg);
 
-		double getMovementX();
+    /**
+     * The MouseEvent.initMouseEvent() method initializes the value of a mouse event once it's been created (normally using the Document.createEvent() method).
+     *
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/initMouseEvent">MouseEvent.initMouseEvent - MDN</a>
+     * @see <a href="https://www.w3.org/TR/2014/WD-DOM-Level-3-Events-20140925/#idl-interface-MouseEvent-initializers">MouseEvent.initMouseEvent() - Document Object Model (DOM) Level 3 Events Specification</a>
+     * @see <a href="https://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-Event-initMouseEvent">MouseEvent.initMouseEvent() - Document Object Model (DOM) Level 2 Events Specification</a>
+     */
+    void initMouseEvent(String typeArg, Boolean bubblesArg,
+                        Boolean cancelableArg, Window viewArg, Double detailArg);
 
-		void setMovementX(double movementX);
+    /**
+     * The MouseEvent.initMouseEvent() method initializes the value of a mouse event once it's been created (normally using the Document.createEvent() method).
+     *
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/initMouseEvent">MouseEvent.initMouseEvent - MDN</a>
+     * @see <a href="https://www.w3.org/TR/2014/WD-DOM-Level-3-Events-20140925/#idl-interface-MouseEvent-initializers">MouseEvent.initMouseEvent() - Document Object Model (DOM) Level 3 Events Specification</a>
+     * @see <a href="https://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-Event-initMouseEvent">MouseEvent.initMouseEvent() - Document Object Model (DOM) Level 2 Events Specification</a>
+     */
+    void initMouseEvent(String typeArg, Boolean bubblesArg,
+                        Boolean cancelableArg, Window viewArg);
 
-		double getMovementY();
+    /**
+     * The MouseEvent.initMouseEvent() method initializes the value of a mouse event once it's been created (normally using the Document.createEvent() method).
+     *
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/initMouseEvent">MouseEvent.initMouseEvent - MDN</a>
+     * @see <a href="https://www.w3.org/TR/2014/WD-DOM-Level-3-Events-20140925/#idl-interface-MouseEvent-initializers">MouseEvent.initMouseEvent() - Document Object Model (DOM) Level 3 Events Specification</a>
+     * @see <a href="https://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-Event-initMouseEvent">MouseEvent.initMouseEvent() - Document Object Model (DOM) Level 2 Events Specification</a>
+     */
+    void initMouseEvent(String typeArg, Boolean bubblesArg,
+                        Boolean cancelableArg);
 
-		void setMovementY(double movementY);
+    /**
+     * The MouseEvent.initMouseEvent() method initializes the value of a mouse event once it's been created (normally using the Document.createEvent() method).
+     *
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/initMouseEvent">MouseEvent.initMouseEvent - MDN</a>
+     * @see <a href="https://www.w3.org/TR/2014/WD-DOM-Level-3-Events-20140925/#idl-interface-MouseEvent-initializers">MouseEvent.initMouseEvent() - Document Object Model (DOM) Level 3 Events Specification</a>
+     * @see <a href="https://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-Event-initMouseEvent">MouseEvent.initMouseEvent() - Document Object Model (DOM) Level 2 Events Specification</a>
+     */
+    void initMouseEvent(String typeArg, Boolean bubblesArg);
 
-		EventTarget getRelatedTarget();
-
-		void setRelatedTarget(EventTarget relatedTarget);
-
-		double getScreenX();
-
-		void setScreenX(double screenX);
-
-		double getScreenY();
-
-		void setScreenY(double screenY);
-
-	}
+    /**
+     * The MouseEvent.initMouseEvent() method initializes the value of a mouse event once it's been created (normally using the Document.createEvent() method).
+     *
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/initMouseEvent">MouseEvent.initMouseEvent - MDN</a>
+     * @see <a href="https://www.w3.org/TR/2014/WD-DOM-Level-3-Events-20140925/#idl-interface-MouseEvent-initializers">MouseEvent.initMouseEvent() - Document Object Model (DOM) Level 3 Events Specification</a>
+     * @see <a href="https://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-Event-initMouseEvent">MouseEvent.initMouseEvent() - Document Object Model (DOM) Level 2 Events Specification</a>
+     */
+    void initMouseEvent(String typeArg);
 }

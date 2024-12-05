@@ -29,208 +29,181 @@ package org.loboevolution.events;
 import java.util.List;
 
 /**
- * An event which takes place in the DOM.
+ * The Event interface represents an event which takes place in the DOM.
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Event">Event - MDN</a>
+ * @see <a href="https://dom.spec.whatwg.org/#interface-event"># interface-event</a>
  */
+
 public interface Event {
 
-    /**
-     * The current event phase is the capturing phase.
-     */
-    short CAPTURING_PHASE = 1;
-
-    /**
-     * The event is currently being evaluated at the target
-     * <code>EventTarget</code>.
-     */
     short AT_TARGET = 2;
 
-    /**
-     * The current event phase is the bubbling phase.
-     */
     short BUBBLING_PHASE = 3;
 
-    /**
-     * Returns true or false depending on how event was initialized. True if event
-     * goes through its target's ancestors in reverse tree order, and false
-     * otherwise.
-     *
-     * @return a boolean.
-     */
-    boolean isBubbles();
+    short CAPTURING_PHASE = 1;
+
+    short NONE = 0;
 
     /**
-     * <p>isCancelBubble.</p>
+     * The bubbles read-only property of the Event interface indicates whether the event bubbles up through the DOM or not.
      *
-     * @return a boolean.
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Event/bubbles">Event.bubbles - MDN</a>
+     * @see <a href="https://dom.spec.whatwg.org/#dom-event-bubbles">Event.bubbles - DOM</a>
+     * @see <a href="https://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-Event-canBubble">Event.bubbles - Document Object Model (DOM) Level 2 Events Specification</a>
      */
-    boolean isCancelBubble();
+    Object getBubbles();
 
     /**
-     * <p>setCancelBubble.</p>
+     * The cancelable read-only property of the Event interface indicates whether the event can be canceled, and therefore prevented as if the event never happened.
      *
-     * @param cancelBubble a boolean.
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Event/cancelable">Event.cancelable - MDN</a>
+     * @see <a href="https://dom.spec.whatwg.org/#dom-event-cancelable">Event.cancelable - DOM</a>
+     * @see <a href="https://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-Event-canCancel">Event.cancelable - Document Object Model (DOM) Level 2 Events Specification</a>
      */
-    void setCancelBubble(boolean cancelBubble);
+    Boolean getCancelable();
 
     /**
-     * Returns true or false depending on how event was initialized. Its return
-     * value does not always carry meaning, but true can indicate that part of the
-     * operation during which event was dispatched, can be canceled by invoking the
-     * preventDefault() method.
+     * The read-only composed property of the Event interface returns a Boolean which indicates whether or not the event will propagate across the shadow DOM boundary into the standard DOM.
      *
-     * @return a boolean.
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Event/composed">Event.composed - MDN</a>
+     * @see <a href="https://dom.spec.whatwg.org/#dom-event-composed">composed - DOM</a>
      */
-    boolean isCancelable();
+    Boolean getComposed();
 
     /**
-     * Returns true or false depending on how event was initialized. True if event
-     * invokes listeners past a ShadowRoot node that is the root of its target, and
-     * false otherwise.
+     * The currentTarget read-only property of the Event interface identifies the current target for the event, as the event traverses the DOM. It always refers to the element to which the event handler has been attached, as opposed to Event.target, which identifies the element on which the event occurred and which may be its descendant.
      *
-     * @return a boolean.
-     */
-    boolean isComposed();
-
-    /**
-     * Returns the object whose event listener's callback is currently being
-     * invoked.
-     *
-     * @return a {@link EventTarget} object.
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Event/currentTarget">Event.currentTarget - MDN</a>
+     * @see <a href="https://dom.spec.whatwg.org/#dom-event-currenttarget">Event.currentTarget - DOM</a>
+     * @see <a href="https://www.w3.org/TR/dom/#dom-event-currenttarget">Event.currentTarget - DOM4</a>
+     * @see <a href="https://www.w3.org/TR/2014/WD-DOM-Level-3-Events-20140925/#dfn-current-event-target">current event target - Document Object Model (DOM) Level 3 Events Specification</a>
+     * @see <a href="https://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-Event-currentTarget">Event.currentTarget - Document Object Model (DOM) Level 2 Events Specification</a>
      */
     EventTarget getCurrentTarget();
 
     /**
-     * Returns true if preventDefault() was invoked successfully to indicate
-     * cancelation, and false otherwise.
+     * The defaultPrevented read-only property of the Event interface returns a Boolean indicating whether or not the call to Event.preventDefault() canceled the event.
      *
-     * @return a boolean.
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Event/defaultPrevented">Event.defaultPrevented - MDN</a>
+     * @see <a href="https://dom.spec.whatwg.org/#dom-event-defaultprevented">Event.defaultPrevented() - DOM</a>
      */
-    boolean isDefaultPrevented();
+    Boolean getDefaultPrevented();
+
+    Boolean getReturnValue();
 
     /**
-     * @return the event's phase, which is one of NONE, CAPTURING_PHASE, AT_TARGET,
-     * and BUBBLING_PHASE.
+     * The eventPhase read-only property of the Event interface indicates which phase of the event flow is currently being evaluated.
+     *
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Event/eventPhase">Event.eventPhase - MDN</a>
+     * @see <a href="https://dom.spec.whatwg.org/#dom-event-eventphase">Event.eventPhase - DOM</a>
+     * @see <a href="https://www.w3.org/TR/dom/#dom-event-eventphase">Event.eventPhase - DOM4</a>
+     * @see <a href="https://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-Event-eventPhase">Event.eventPhase - Document Object Model (DOM) Level 2 Events Specification</a>
      */
     short getEventPhase();
 
     /**
-     * Returns true if event was dispatched by the user agent, and false otherwise.
+     * The isTrusted read-only property of the Event interface is a Boolean that is true when the event was generated by a user action, and false when the event was created or modified by a script or dispatched via EventTarget.dispatchEvent().
      *
-     * @return a boolean.
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted">Event.isTrusted - MDN</a>
      */
-    boolean isIsTrusted();
+    Boolean getTrusted();
 
     /**
-     * <p>isReturnValue.</p>
+     * Initially implemented in Internet Explorer, Event.srcElement is a now-standard alias (defined in the DOM Standard but flagged as &quot;historical&quot;) for the Event.target property. It's supported in all major browser engines, but only for compatibility reasons. Use Event.target instead.
      *
-     * @return a boolean.
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Event/srcElement">Event.srcElement - MDN</a>
+     * @see <a href="https://dom.spec.whatwg.org/#dom-event-srcelement">Event.srcElement - DOM</a>
      */
-    boolean isReturnValue();
-
-    /**
-     * <p>setReturnValue.</p>
-     *
-     * @param returnValue a boolean.
-     */
-    void setReturnValue(boolean returnValue);
-
-    /**
-     * <p>getSrcElement.</p>
-     *
-     * @return a {@link EventTarget} object.
-     */
-    @Deprecated
     EventTarget getSrcElement();
 
     /**
-     * Returns the object to which event is dispatched (its target).
+     * The target property of the Event interface is a reference to the object onto which the event was dispatched. It is different from Event.currentTarget when the event handler is called during the bubbling or capturing phase of the event.
      *
-     * @return a {@link EventTarget} object.
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Event/target">Event.target - MDN</a>
+     * @see <a href="https://dom.spec.whatwg.org/#dom-event-target">Event.target - DOM</a>
+     * @see <a href="https://www.w3.org/TR/dom/#dom-event-target">Event.target - DOM4</a>
+     * @see <a href="https://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-Event-target">Event.target - Document Object Model (DOM) Level 2 Events Specification</a>
      */
     EventTarget getTarget();
 
     /**
-     * Returns the event's timestamp as the number of milliseconds measured relative
-     * to the time origin.
+     * The timeStamp read-only property of the Event interface returns the time (in milliseconds) at which the event was created.
      *
-     * @return a double.
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Event/timeStamp">Event.timeStamp - MDN</a>
+     * @see <a href="https://dom.spec.whatwg.org/#dom-event-timestamp">Event.timeStamp - DOM</a>
      */
+
     double getTimeStamp();
 
     /**
-     * Returns the type of event, e.g. "click", "hashchange", or "submit".
+     * The type read-only property of the Event interface returns a string containing the event's type. It is set when the event is constructed and is the name commonly used to refer to the specific event, such as click, load, or error.
      *
-     * @return a {@link java.lang.String} object.
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Event/type">Event.type - MDN</a>
+     * @see <a href="https://dom.spec.whatwg.org/#dom-event-type">Event.type - DOM</a>
+     * @see <a href="https://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-Event-type">Event.type - Document Object Model (DOM) Level 2 Events Specification</a>
      */
-    String getType();
+    Object getType();
 
     /**
-     * Returns the invocation target objects of event's path (objects on which
-     * listeners will be invoked), except for any nodes in shadow trees of which the
-     * shadow root's mode is "closed" that are not reachable from event's
-     * currentTarget.
+     * The composedPath() method of the Event interface returns the event&rsquo;s path which is an array of the objects on which listeners will be invoked. This does not include nodes in shadow trees if the shadow root was created with its ShadowRoot.mode closed.
      *
-     * @return a {@link java.util.List} object.
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Event/composedPath">Event.composedPath - MDN</a>
+     * @see <a href="https://dom.spec.whatwg.org/#dom-event-composedpath">composedPath() - DOM</a>
      */
-    List<EventTarget> composedPath();
+    List<EventTarget> getComposedPath();
 
     /**
-     * <p>initEvent.</p>
+     * The Event.initEvent() method is used to initialize the value of an event created using Document.createEvent().
      *
-     * @param type       a {@link java.lang.String} object.
-     * @param bubbles    a boolean.
-     * @param cancelable a boolean.
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Event/initEvent">Event.initEvent - MDN</a>
+     * @see <a href="https://dom.spec.whatwg.org/#dom-event-initevent">Event.initEvent() - DOM</a>
+     * @see <a href="https://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-Event-initEvent">Event.initEvent() - Document Object Model (DOM) Level 2 Events Specification</a>
      */
-    void initEvent(String type, boolean bubbles, boolean cancelable);
+    void initEvent(String type, Boolean bubbles, boolean cancelable);
 
     /**
-     * <p>initEvent.</p>
+     * The Event.initEvent() method is used to initialize the value of an event created using Document.createEvent().
      *
-     * @param type    a {@link java.lang.String} object.
-     * @param bubbles a boolean.
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Event/initEvent">Event.initEvent - MDN</a>
+     * @see <a href="https://dom.spec.whatwg.org/#dom-event-initevent">Event.initEvent() - DOM</a>
+     * @see <a href="https://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-Event-initEvent">Event.initEvent() - Document Object Model (DOM) Level 2 Events Specification</a>
      */
-    void initEvent(String type, boolean bubbles);
+    void initEvent(String type, Boolean bubbles);
 
     /**
-     * <p>initEvent.</p>
+     * The Event.initEvent() method is used to initialize the value of an event created using Document.createEvent().
      *
-     * @param type a {@link java.lang.String} object.
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Event/initEvent">Event.initEvent - MDN</a>
+     * @see <a href="https://dom.spec.whatwg.org/#dom-event-initevent">Event.initEvent() - DOM</a>
+     * @see <a href="https://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-Event-initEvent">Event.initEvent() - Document Object Model (DOM) Level 2 Events Specification</a>
      */
     void initEvent(String type);
 
     /**
-     * If invoked when the cancelable attribute value is true, and while executing a
-     * listener for the event with passive set to false, signals to the operation
-     * that caused event to be dispatched that it needs to be canceled.
+     * The Event interface's preventDefault() method tells the user agent that if the event does not get explicitly handled, its default action should not be taken as it normally would be.
+     *
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault">Event.preventDefault - MDN</a>
+     * @see <a href="https://dom.spec.whatwg.org/#dom-event-preventdefault">Event.preventDefault() - DOM</a>
+     * @see <a href="https://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-Event-preventDefault">Event.preventDefault() - Document Object Model (DOM) Level 2 Events Specification</a>
      */
     void preventDefault();
 
     /**
-     * Invoking this method prevents event from reaching any registered event
-     * listeners after the current one finishes running and, when dispatched in a
-     * tree, also prevents event from reaching any other objects.
+     * The stopImmediatePropagation() method of the Event interface prevents other listeners of the same event from being called.
+     *
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Event/stopImmediatePropagation">Event.stopImmediatePropagation - MDN</a>
+     * @see <a href="https://dom.spec.whatwg.org/#dom-event-stopimmediatepropagation">Event.stopImmediatePropagation() - DOM</a>
      */
-    void stopImmediatePropagation();
+    void getStopImmediatePropagation();
 
     /**
-     * When dispatched in a tree, invoking this method prevents event from reaching
-     * any objects other than the current object.
+     * The stopPropagation() method of the Event interface prevents further propagation of the current event in the capturing and bubbling phases. It does not, however, prevent any default behaviors from occurring; for instance, clicks on links are still processed. If you want to stop those behaviors, see the preventDefault() method.
+     *
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation">Event.stopPropagation - MDN</a>
+     * @see <a href="https://dom.spec.whatwg.org/#dom-event-stoppropagation">Event.stopPropagation() - DOM</a>
+     * @see <a href="https://www.w3.org/TR/dom/#dom-event-stoppropagation">Event.stopPropagation() - DOM4</a>
+     * @see <a href="https://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-Event-stopPropagation">Event.stopPropagation() - Document Object Model (DOM) Level 2 Events Specification</a>
      */
-    void stopPropagation();
-
-    interface EventInit {
-
-        boolean isBubbles();
-
-        void setBubbles(boolean bubbles);
-
-        boolean isCancelable();
-
-        void setCancelable(boolean cancelable);
-
-        boolean isComposed();
-
-        void setComposed(boolean composed);
-
-    }
+    void getStopPropagation();
 }

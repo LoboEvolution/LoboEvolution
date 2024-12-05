@@ -37,7 +37,7 @@ import org.mozilla.javascript.Function;
 public class XMLHttpRequestEventTargetImpl extends EventTargetImpl implements XMLHttpRequestEventTarget {
 
     public XMLHttpRequestEventTargetImpl(NodeImpl target) {
-        super(target);
+        setTarget(target);
     }
 
     @Override

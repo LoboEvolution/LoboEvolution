@@ -136,6 +136,7 @@ public class JavaClassWrapper {
 	private boolean isPropertyMethod(final String name, final Method method) {
 		if ((name.startsWith("get") || name.startsWith("is")) &&
 				!name.equals("getBoundingClientRect") &&
+				!name.equals("click") &&
 				!name.equals("getClientRects") &&
 				!name.equals("getComputedStyle") &&
 				!name.equals("getPropertyCSSValue") &&

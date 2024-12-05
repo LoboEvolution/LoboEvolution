@@ -106,9 +106,9 @@ public class DOMImplementationTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"MouseEvents 1.0: true", "MouseEvents 2.0: true", "MouseEvents 3.0: true"})
-    public void hasFeatureMouseEvents() {
-        hasFeature("MouseEvents", "['1.0', '2.0', '3.0']");
+    @Alerts({"MouseEvent 1.0: true", "MouseEvent 2.0: true", "MouseEvent 3.0: true"})
+    public void hasFeatureMouseEvent() {
+        hasFeature("MouseEvent", "['1.0', '2.0', '3.0']");
     }
 
     @Test

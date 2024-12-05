@@ -491,24 +491,6 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     }
 
     @Test
-    public void onclickAccessStyle() {
-        final String html = "<html><head><title>Color Change Page</title>\n"
-                + "<script>\n"
-                + "function test(obj) {\n"
-                + "  obj.style.backgroundColor = 'yellow';\n"
-                + "}\n"
-                + "</script>\n"
-                + "</head>\n"
-                + "<body>\n"
-                + "<span id='red' onclick='test(this)'>foo</span>\n"
-                + "</body></html>";
-
-        final HTMLDocument document = loadHtml(html);
-        HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("red");
-        elem.getOnclick();
-    }
-
-    @Test
     @Alerts({"string", "string", "string", "undefined"})
     public void accessProperties() {
         final String html = "<html><head><script>\n"

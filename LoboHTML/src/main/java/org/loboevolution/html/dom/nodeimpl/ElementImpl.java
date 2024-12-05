@@ -74,7 +74,7 @@ import java.util.stream.Stream;
  * <p>ElementImpl class.</p>
  */
 @Slf4j
-public abstract class ElementImpl extends NodeImpl implements Element {
+public class ElementImpl extends NodeImpl implements Element {
 
 	private static final int SCROLL_BAR_THICKNESS = 16;
 
@@ -217,7 +217,6 @@ public abstract class ElementImpl extends NodeImpl implements Element {
 		if (node != null) {
 			removeAttributeNode((AttrImpl) node);
 		}
-
 
 		final AttrImpl attr = new AttrImpl(name, value, "id".equalsIgnoreCase(name), this, true);
 		final Document doc = getOwnerDocument();
@@ -1485,7 +1484,10 @@ public abstract class ElementImpl extends NodeImpl implements Element {
 		final AtomicInteger h = new AtomicInteger(0);
 		elm.getNodeList().forEach(child -> {
 			final int type = child.getNodeType();
-            if (type == Node.ELEMENT_NODE) {
+			if(type == Node.TEXT_NODE){
+				final Text text = (Text) child;
+				h.addAndGet(text.getLength() * 8);
+			} else if (type == Node.ELEMENT_NODE) {
                 final CSSStyleDeclaration currentStyle = ((HTMLElementImpl) child).getCurrentStyle();
                 final String width = currentStyle.getWidth();
                 if (Strings.isNotBlank(width)) {

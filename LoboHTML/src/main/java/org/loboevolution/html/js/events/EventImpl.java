@@ -25,71 +25,85 @@
  */
 package org.loboevolution.html.js.events;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.events.Event;
 import org.loboevolution.events.EventTarget;
+import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.js.AbstractScriptableDelegate;
+import org.mozilla.javascript.NativeObject;
 
+import java.awt.event.InputEvent;
 import java.util.List;
 
 /**
  * <p>EventImpl class.</p>
  */
-@EqualsAndHashCode(callSuper = true)
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 public class EventImpl extends AbstractScriptableDelegate implements Event {
 
     private final long mTimeStamp = System.currentTimeMillis();
-    private EventTarget target;
-    private EventTarget currentTarget;
+    private HTMLElementImpl target;
+    private HTMLElementImpl currentTarget;
     private short eventPhase;
     private int mSeekTo;
-    private String type;
+    private Object type;
 
-    private boolean bubbles;
-    private boolean cancelBubble;
-    private boolean cancelable;
-    private boolean composed;
-    private boolean defaultPrevented;
-    private boolean initialized;
-    private boolean stopPropagation;
-    private boolean preventDefault;
+    private Boolean bubbles = false;
+    private Boolean cancelable = false;
+    private Boolean composed = false;
+    private Boolean stopPropagation = false;
+    private Boolean trusted = false;
+    private Boolean defaultPrevented = false;
+    private InputEvent inputEvent;
 
 
     /**
      * <p>Constructor for EventImpl.</p>
-     *
-     * @param type a {@link java.lang.String} object.
-     * @param bubbles a boolean.
-     * @param cancelable a boolean.
      */
-    public EventImpl(final String type, final boolean bubbles, final boolean cancelable) {
-        this.type = type;
-        this.bubbles = bubbles;
-        this.cancelable = cancelable;
-        this.initialized = true;
+    public EventImpl(InputEvent inputEvent){
+        this.inputEvent = inputEvent;
     }
 
+    /**
+     * <p>Constructor for EventImpl.</p>
+     */
+    public EventImpl(final Object[] params) throws DOMException {
+        setParams(params);
+    }
+
+    protected void setParams(final Object[] params) throws DOMException {
+        if (params != null && params.length > 0) {
+            this.type = params[0];
+            if (params.length > 1) {
+                if (params[1] != null && params[1] instanceof NativeObject obj) {
+                    this.bubbles = obj.get("bubbles") != null;
+                    this.cancelable = obj.get("cancelable") != null ? (Boolean) obj.get("cancelable") : false;
+                    this.composed = obj.get("composed") != null ? (Boolean) obj.get("composed") : false;
+                }
+            }
+        } else {
+            throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Failed : 1 argument required, but only 0 present.");
+        }
+    }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void initEvent(final String type, final boolean bubbles, final boolean cancelable) {
+    public void initEvent(final String type, final Boolean bubbles, final boolean cancelable) {
         this.type = type;
         this.bubbles = bubbles;
         this.cancelable = cancelable;
-        this.initialized = true;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void initEvent(final String type, final boolean bubbles) {
+    public void initEvent(final String type, final Boolean bubbles) {
         initEvent(type, bubbles, false);
 
     }
@@ -103,18 +117,20 @@ public class EventImpl extends AbstractScriptableDelegate implements Event {
     }
 
     @Override
-    public boolean isIsTrusted() {
-        return false;
+    public void preventDefault() {
+        if (cancelable) {
+            defaultPrevented = true;
+        }
     }
 
     @Override
-    public boolean isReturnValue() {
-        return false;
+    public Boolean getDefaultPrevented() {
+        return cancelable && defaultPrevented;
     }
 
     @Override
-    public void setReturnValue(final boolean returnValue) {
-		// TODO Auto-generated method stub
+    public Boolean getReturnValue() {
+        return !defaultPrevented;
     }
 
     @Override
@@ -124,32 +140,63 @@ public class EventImpl extends AbstractScriptableDelegate implements Event {
 
     @Override
     public double getTimeStamp() {
-        return mTimeStamp;
+        return System.currentTimeMillis();
     }
 
     @Override
-    public List<EventTarget> composedPath() {
-        return null;
+    public List<EventTarget> getComposedPath() {
+        return List.of();
     }
 
     @Override
-    public void preventDefault() {
-        preventDefault = true;
+    public void getStopImmediatePropagation() {
+        getStopPropagation();
     }
 
     @Override
-    public void stopImmediatePropagation() {
-        // TODO Auto-generated method stub
-    }
-
-    @Override
-    public void stopPropagation() {
+    public void getStopPropagation() {
         stopPropagation = true;
     }
 
-	public boolean isPropogationStopped() {
-		return stopPropagation;
-	}
+    public boolean isPropogationStopped() {
+        return stopPropagation;
+    }
+
+    public void setReturnValue(final Object newValue) {
+        if (newValue instanceof Boolean) {
+            if (cancelable) {
+                defaultPrevented = (Boolean) newValue;
+            }
+        }
+    }
+
+    protected String getStringVal(NativeObject obj, String key) {
+        return obj.get(key) != null ? (String) obj.get(key) : "";
+    }
+
+    protected Double getDoubleVal(NativeObject obj, String key) {
+        return obj.get(key) != null ? ((Double) obj.get(key)) : 0d;
+    }
+
+    protected Long getLongVal(NativeObject obj, String key) {
+        return obj.get(key) != null ? ((Double) obj.get(key)).longValue() : 0;
+    }
+
+    protected Boolean getBoolVal(NativeObject obj, String key) {
+        if (obj.get(key) instanceof String) {
+            return "true".equals(obj.get(key)) || "1.0".equals(obj.get(key));
+        }
+
+        if (obj.get(key) instanceof Double) {
+            return ((Double) obj.get(key) == 1d);
+        }
+
+        if (obj.get(key) instanceof Boolean) {
+            return (Boolean) obj.get(key);
+        }
+
+        return obj.get(key) != null;
+    }
 
     @Override
     public String toString() {

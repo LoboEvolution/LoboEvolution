@@ -78,8 +78,8 @@ public class HTMLIFrameElement2Test extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "<body>\n"
-                        + "    <script>\n" 
-                + "document.write(\"<iframe id='i' onload='alert(\\\"loaded\\\");' src='" + URL_SECOND + "'></iframe>\");\n"
+                        + "    <script>\n"
+                        + "document.write(\"<iframe id='i' onload='alert(\\\"loaded\\\");' src='" + URL_SECOND + "'></iframe>\");\n"
                         + "</script>\n"
                         + "</body>\n"
                         + "</html>";
@@ -221,53 +221,50 @@ public class HTMLIFrameElement2Test extends LoboUnitTest {
     @Test
     @Alerts({"createIFrame", "loaded"})
     public void documentCreateElement_iFrameInsideDiv() {
-        final String html =
-                "<html>\n"
-                        + "<head><script type='text/javascript'>\n"
-                        + "  function createIFrame() {\n"
-                        + "    alert('createIFrame');\n"
-                        + "    var content = document.getElementById('content');\n"
-                        + "    var newContent = document.createElement('div');\n"
-                        + "    newContent.innerHTML = '<iframe name=\"iFrame\" src=\"" + URL_SECOND + "\"></iframe>';\n"
-                        + "    content.appendChild(newContent);\n"
-                        + "  }\n"
-                        + "</script></head>\n"
-
-                        + "  <body>\n"
-                        + "    <div id='content'>content</div>\n"
-                        + "    <a id='test' onclick='createIFrame();'>insert frame</a>\n"
-                        + "  </body>\n"
-                        + "</html>";
-
-        final HTMLDocument document = loadHtml(html);
-        HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("test");
-        elem.getOnclick();
+        final String html = "<html>\n"
+                + "<head><script type='text/javascript'>\n"
+                + "  function createIFrame() {\n"
+                + "    alert('createIFrame');\n"
+                + "    var content = document.getElementById('content');\n"
+                + "    var newContent = document.createElement('div');\n"
+                + "    newContent.innerHTML = '<iframe name=\"iFrame\" src=\"" + URL_SECOND + "\"></iframe>';\n"
+                + "    content.appendChild(newContent);\n"
+                + "  }\n"
+                + "</script></head>\n"
+                + "  <body>\n"
+                + "    <div id='content'>content</div>\n"
+                + "    <a id='test' onclick='createIFrame();'>insert frame</a>\n"
+                + "</body>"
+                + " <script>"
+                + "  document.getElementById('test').click();"
+                + "  </script>"
+                + "</html>";
+        checkHtmlAlert(html);
     }
 
     @Test
     @Alerts({"createIFrame", "loaded", "foo"})
     public void documentCreateElementOnLoad3() {
-        final String html =
-                "<html>\n"
-                        + "<head><script type='text/javascript'>\n"
-                        + "  function createIFrame() {\n"
-                        + "    alert('createIFrame');\n"
-                        + "    var myFrame = document.createElement('iframe');\n"
-                        + "    myFrame.id = 'myFrame';\n"
-                        + "    myFrame.onload = handleFrameLoad;\n"
-                        + "    myFrame.src = '" + URL_SECOND + "';\n"
-                        + "    var body = document.getElementsByTagName('body')[0];\n"
-                        + "    body.appendChild(myFrame);\n"
-                        + "  }\n"
-                        + "  function handleFrameLoad() {\n"
-                        + "    alert('loaded');\n"
-                        + "    var myFrame = document.getElementById('myFrame');\n"
-                        + "    alert(myFrame.contentWindow.document.body.innerHTML);\n"
-                        + "  }\n"
-                        + "</script></head>\n"
-                        + "  <body onload='createIFrame();' >\n"
-                        + "  </body>\n"
-                        + "</html>";
+        final String html = "<html>\n"
+                + "<head><script type='text/javascript'>\n"
+                + "  function createIFrame() {\n"
+                + "    alert('createIFrame');\n"
+                + "    var myFrame = document.createElement('iframe');\n"
+                + "    myFrame.id = 'myFrame';\n"
+                + "    myFrame.onload = handleFrameLoad;\n"
+                + "    myFrame.src = '" + URL_SECOND + "';\n"
+                + "    var body = document.getElementsByTagName('body')[0];\n"
+                + "    body.appendChild(myFrame);\n"
+                + "  }\n"
+                + "  function handleFrameLoad() {\n"
+                + "    alert('loaded');\n"
+                + "    var myFrame = document.getElementById('myFrame');\n"
+                + "    alert(myFrame.contentWindow.document.body.innerHTML);\n"
+                + "  }\n"
+                + "</script></head>\n"
+                + "  <body onload='createIFrame();' >\n"
+                + "  </body>\n"
+                + "</html>";
         checkHtmlAlert(html);
     }
 
@@ -278,7 +275,6 @@ public class HTMLIFrameElement2Test extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "<head><script type='text/javascript'>\n"
-
                         + "  function createIFrame() {\n"
                         + "    alert('createIFrame');\n"
                         + "    var myFrame = document.createElement('iframe');\n"
@@ -293,7 +289,6 @@ public class HTMLIFrameElement2Test extends LoboUnitTest {
                         + "    alert(myFrame.contentWindow.document.body.innerHTML);\n"
                         + "  }\n"
                         + "</script></head>\n"
-
                         + "  <body onload='createIFrame();' >\n"
                         + "  </body>\n"
                         + "</html>";
@@ -306,12 +301,10 @@ public class HTMLIFrameElement2Test extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "<head><script type='text/javascript'>\n"
-
                         + "  function handleFrameLoad() {\n"
                         + "    alert('loaded');\n"
                         + "  }\n"
                         + "</script></head>\n"
-
                         + "  <body>\n"
                         + "    <script>\n"
                         + "      var myFrame = document.createElement('iframe');\n"
@@ -332,12 +325,10 @@ public class HTMLIFrameElement2Test extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "<head><script type='text/javascript'>\n"
-
                         + "  function handleFrameLoad() {\n"
                         + "    alert('loaded');\n"
                         + "  }\n"
                         + "</script></head>\n"
-
                         + "  <body>\n"
                         + "    <script>\n"
                         + "      var myFrame = document.createElement('iframe');\n"
@@ -358,7 +349,6 @@ public class HTMLIFrameElement2Test extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "<head><script type='text/javascript'>\n"
-
                         + "  function createIFrame() {\n"
                         + "    alert('createIFrame');\n"
                         + "    var myFrame = document.createElement('iframe');\n"
@@ -372,7 +362,6 @@ public class HTMLIFrameElement2Test extends LoboUnitTest {
                         + "    alert('loaded');\n"
                         + "  }\n"
                         + "</script></head>\n"
-
                         + "  <body onload='createIFrame();' >\n"
                         + "  </body>\n"
                         + "</html>";
@@ -386,7 +375,6 @@ public class HTMLIFrameElement2Test extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "<head><script type='text/javascript'>\n"
-
                         + "  function createIFrame() {\n"
                         + "    alert('createIFrame');\n"
                         + "    var myFrame = document.createElement('iframe');\n"
@@ -399,7 +387,6 @@ public class HTMLIFrameElement2Test extends LoboUnitTest {
                         + "    alert('loaded');\n"
                         + "  }\n"
                         + "</script></head>\n"
-
                         + "  <body onload='createIFrame();' >\n"
                         + "  </body>\n"
                         + "</html>";
@@ -413,7 +400,6 @@ public class HTMLIFrameElement2Test extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "<head><script type='text/javascript'>\n"
-
                         + "  function createIFrame() {\n"
                         + "    alert('createIFrame');\n"
                         + "    var myFrame = document.createElement('iframe');\n"
@@ -427,7 +413,6 @@ public class HTMLIFrameElement2Test extends LoboUnitTest {
                         + "    alert('loaded');\n"
                         + "  }\n"
                         + "</script></head>\n"
-
                         + "  <body onload='createIFrame();' >\n"
                         + "  </body>\n"
                         + "</html>";
@@ -462,11 +447,12 @@ public class HTMLIFrameElement2Test extends LoboUnitTest {
                 + "}\n"
                 + "</script>\n"
                 + "<button id='it' onclick='createIFrame()'>click me</button>\n"
-                + "</body></html>";
-
-        final HTMLDocument document = loadHtml(html);
-        HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("it");
-        elem.getOnclick();
+                + "</body>"
+                + " <script>"
+                + "  document.getElementById('it').click();"
+                + "  </script>"
+                + "</html>";
+        checkHtmlAlert(html);
     }
 
 
@@ -476,7 +462,6 @@ public class HTMLIFrameElement2Test extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "<head><script type='text/javascript'>\n"
-
                         + "  function createIFrame() {\n"
                         + "    alert('createIFrame');\n"
                         + "    var myFrame = document.createElement('iframe');\n"
@@ -489,7 +474,6 @@ public class HTMLIFrameElement2Test extends LoboUnitTest {
                         + "    alert('loaded');\n"
                         + "  }\n"
                         + "</script></head>\n"
-
                         + "  <body onload='createIFrame();' >\n"
                         + "  </body>\n"
                         + "</html>";
@@ -503,7 +487,6 @@ public class HTMLIFrameElement2Test extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "<head><script type='text/javascript'>\n"
-
                         + "  function handleFrameLoad() {\n"
                         + "    alert('loaded');\n"
                         + "  }\n"
@@ -537,7 +520,6 @@ public class HTMLIFrameElement2Test extends LoboUnitTest {
                         + "    alert('loaded');\n"
                         + "  }\n"
                         + "</script></head>\n"
-
                         + "  <body>\n"
                         + "    <script>\n"
                         + "      var myFrame = document.createElement('iframe');\n"
@@ -728,24 +710,20 @@ public class HTMLIFrameElement2Test extends LoboUnitTest {
     @Test
     @Alerts({"loaded", "loaded", "loaded"})
     public void onLoadCalledEachTimeFrameContentChanges() {
-        final String html =
-                "<html>\n"
-                        + "  <body>\n"
-                        + "    <script>\n"
-                        + "    </script>\n"
-                        + "    <iframe id='testFrame' onload='alert(\"loaded\");'></iframe>\n"
-                        + "    <div id='d1' onclick='i.contentWindow.location.replace(\"blah.html\")'>1</div>\n"
-                        + "    <div id='d2' onclick='i.contentWindow.location.href=\"blah.html\"'>2</div>\n"
-                        + "    <script>var i = document.getElementById('testFrame')</script>\n"
-                        + "  </body>\n"
-                        + "</html>";
-
-        final HTMLDocument document = loadHtml(html);
-        HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("d1");
-        elem.getOnclick();
-
-        elem = (HTMLElementImpl) document.getElementById("d2");
-        elem.getOnclick();
+        final String html = "<html>\n"
+                + "  <body>\n"
+                + "    <script>\n"
+                + "    </script>\n"
+                + "    <iframe id='testFrame' onload='alert(\"loaded\");'></iframe>\n"
+                + "    <div id='d1' onclick='i.contentWindow.location.replace(\"blah.html\")'>1</div>\n"
+                + "    <div id='d2' onclick='i.contentWindow.location.href=\"blah.html\"'>2</div>\n"
+                + "    <script>var i = document.getElementById('testFrame')"
+                + "  document.getElementById('d1').click();"
+                + "  document.getElementById('d2').click();"
+                + "</script>\n"
+                + "  </body>\n"
+                + "</html>";
+        checkHtmlAlert(html);
     }
 
 
@@ -779,44 +757,37 @@ public class HTMLIFrameElement2Test extends LoboUnitTest {
     @Test
     @Alerts({"loaded", "", "", "loaded", "about:blank"})
     public void removeSourceAttribute() {
-        final String html =
-                "<html>\n"
-                        + "<head><script>\n"
-                        + "  function alert(msg) {\n"
-                        + "    var ta = document.getElementById('myTextArea');\n"
-                        + "    ta.value += msg + '; ';\n"
-                        + "  }\n"
-
-                        + "  function test() {\n"
-                        + "    var myFrame = document.getElementById('i');\n"
-                        + "    var win = myFrame.contentWindow;\n"
-                        + "    alert(win.location);\n"
-
-                        + "    myFrame.removeAttribute('src');\n"
-                        + "    alert(win.location);\n"
-                        + "  }\n"
-
-                        + "  function test2() {\n"
-                        + "    var myFrame = document.getElementById('i');\n"
-                        + "    var win = myFrame.contentWindow;\n"
-                        + "    alert(win.location);\n"
-                        + "  }\n"
-                        + "</script></head>\n"
-                        + "  <body>\n"
-                        + "    <iframe id='i' onload='alert(\"loaded\");' src='" + URL_SECOND + "'></iframe>\n"
-
-                        + "    <textarea id='myTextArea' cols='80' rows='30'></textarea>\n"
-                        + "    <button id='clickMe' onclick='test()'>Click Me</button>\n"
-                        + "    <button id='clickMe2' onclick='test2()'>Click Me</button>\n"
-                        + "  </body>\n"
-                        + "</html>";
-
-        final HTMLDocument document = loadHtml(html);
-        HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("clickMe");
-        elem.getOnclick();
-
-        elem = (HTMLElementImpl) document.getElementById("clickMe2");
-        elem.getOnclick();
+        final String html = "<html>\n"
+                + "<head><script>\n"
+                + "  function alert(msg) {\n"
+                + "    var ta = document.getElementById('myTextArea');\n"
+                + "    ta.value += msg + '; ';\n"
+                + "  }\n"
+                + "  function test() {\n"
+                + "    var myFrame = document.getElementById('i');\n"
+                + "    var win = myFrame.contentWindow;\n"
+                + "    alert(win.location);\n"
+                + "    myFrame.removeAttribute('src');\n"
+                + "    alert(win.location);\n"
+                + "  }\n"
+                + "  function test2() {\n"
+                + "    var myFrame = document.getElementById('i');\n"
+                + "    var win = myFrame.contentWindow;\n"
+                + "    alert(win.location);\n"
+                + "  }\n"
+                + "</script></head>\n"
+                + "  <body>\n"
+                + "    <iframe id='i' onload='alert(\"loaded\");' src='" + URL_SECOND + "'></iframe>\n"
+                + "    <textarea id='myTextArea' cols='80' rows='30'></textarea>\n"
+                + "    <button id='clickMe' onclick='test()'>Click Me</button>\n"
+                + "    <button id='clickMe2' onclick='test2()'>Click Me</button>\n"
+                + "</body>"
+                + " <script>"
+                + "  document.getElementById('clickMe').click();"
+                + "  document.getElementById('clickMe2').click();"
+                + "  </script>"
+                + "</html>";
+        checkHtmlAlert(html);
     }
 
 
@@ -825,47 +796,39 @@ public class HTMLIFrameElement2Test extends LoboUnitTest {
             "1", "[object Window]", "[object HTMLDocument]", "http://localhost:22222/second/",
             "0", "#[object Window]", "#[object HTMLDocument]", "http://localhost:22222/second/"})
     public void detach() {
-        final String html =
-                "<html>\n"
-                        + "<head><script>\n"
-                        + "  function alert(msg) {\n"
-                        + "    var ta = document.getElementById('myTextArea');\n"
-                        + "    ta.value += msg + '; ';\n"
-                        + "  }\n"
-
-                        + "  function test() {\n"
-                        + "    var myFrame = document.getElementById('i');\n"
-                        + "    var win = myFrame.contentWindow;\n"
-                        + "    alert(win.location);\n"
-                        + "    alert(win.document);\n"
-                        + "    alert(win.document.URL);\n"
-                        + "    alert(window.frames.length);\n"
-
-                        + "    myFrame.parentNode.removeChild(myFrame);\n"
-                        + "    alert(win);\n"
-                        + "    alert(win.document);\n"
-                        + "    alert(win.document.URL);\n"
-                        + "    alert(window.frames.length);\n"
-
-                        + "    window.setTimeout(function () "
-                        + "{ alert('#' + win); alert('#' + win.document); alert(win.document.URL); }, 42);\n"
-                        + "  }\n"
-
-                        + "</script></head>\n"
-                        + "  <body>\n"
-                        + "    <iframe id='i' onload='alert(\"loaded\");' src='" + URL_SECOND + "'></iframe>\n"
-
-                        + "    <textarea id='myTextArea' cols='80' rows='30'></textarea>\n"
-                        + "    <button id='clickMe' onclick='test()'>Click Me</button>\n"
-                        + "  </body>\n"
-                        + "</html>";
-
-        final HTMLDocument document = loadHtml(html);
-        HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("d2");
-        elem.getOnclick();
-
-        elem = (HTMLElementImpl) document.getElementById("");
-        elem.getOnclick();
+        final String html = "<html>\n"
+                + "<head><script>\n"
+                + "  function alert(msg) {\n"
+                + "    var ta = document.getElementById('myTextArea');\n"
+                + "    ta.value += msg + '; ';\n"
+                + "  }\n"
+                + "  function test() {\n"
+                + "    var myFrame = document.getElementById('i');\n"
+                + "    var win = myFrame.contentWindow;\n"
+                + "    alert(win.location);\n"
+                + "    alert(win.document);\n"
+                + "    alert(win.document.URL);\n"
+                + "    alert(window.frames.length);\n"
+                + "    myFrame.parentNode.removeChild(myFrame);\n"
+                + "    alert(win);\n"
+                + "    alert(win.document);\n"
+                + "    alert(win.document.URL);\n"
+                + "    alert(window.frames.length);\n"
+                + "    window.setTimeout(function () "
+                + "{ alert('#' + win); alert('#' + win.document); alert(win.document.URL); }, 42);\n"
+                + "  }\n"
+                + "</script></head>\n"
+                + "  <body>\n"
+                + "    <iframe id='i' onload='alert(\"loaded\");' src='" + URL_SECOND + "'></iframe>\n"
+                + "    <textarea id='myTextArea' cols='80' rows='30'></textarea>\n"
+                + "    <button id='clickMe' onclick='test()'>Click Me</button>\n"
+                + "</body>"
+                + " <script>"
+                + "  document.getElementById('clickMe').click();"
+                + "  document.getElementById('myTextArea').click();"
+                + "  </script>"
+                + "</html>";
+        checkHtmlAlert(html);
     }
 
 
@@ -873,37 +836,31 @@ public class HTMLIFrameElement2Test extends LoboUnitTest {
     @Alerts({"iframe script", "loaded", "null", "[object Window]",
             "about:blank", "iframe script", "loaded"})
     public void detachAppend() {
-        final String html =
-                "<html>\n"
-                        + "<head><script>\n"
-                        + "  function alert(msg) {\n"
-                        + "    var ta = document.getElementById('myTextArea');\n"
-                        + "    ta.value += msg + '; ';\n"
-                        + "  }\n"
-
-                        + "  function test() {\n"
-                        + "    var myFrame = document.getElementById('i');\n"
-
-                        + "    var parent = myFrame.parentNode;\n"
-                        + "    parent.removeChild(myFrame);\n"
-                        + "    alert(myFrame.contentWindow);\n"
-
-                        + "    parent.appendChild(myFrame);\n"
-                        + "    alert(myFrame.contentWindow);\n"
-                        + "    alert(myFrame.contentWindow.location);\n"
-                        + "  }\n"
-
-                        + "</script></head>\n"
-                        + "  <body>\n"
-                        + "    <iframe id='i' onload='alert(\"loaded\");' src='" + URL_SECOND + "'></iframe>\n"
-
-                        + "    <textarea id='myTextArea' cols='80' rows='30'></textarea>\n"
-                        + "    <button id='clickMe' onclick='test()'>Click Me</button>\n"
-                        + "  </body>\n"
-                        + "</html>";
-
-        final HTMLDocument document = loadHtml(html);
-        HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("clickMe");
-        elem.getOnclick();
+        final String html = "<html>\n"
+                + "<head><script>\n"
+                + "  function alert(msg) {\n"
+                + "    var ta = document.getElementById('myTextArea');\n"
+                + "    ta.value += msg + '; ';\n"
+                + "  }\n"
+                + "  function test() {\n"
+                + "    var myFrame = document.getElementById('i');\n"
+                + "    var parent = myFrame.parentNode;\n"
+                + "    parent.removeChild(myFrame);\n"
+                + "    alert(myFrame.contentWindow);\n"
+                + "    parent.appendChild(myFrame);\n"
+                + "    alert(myFrame.contentWindow);\n"
+                + "    alert(myFrame.contentWindow.location);\n"
+                + "  }\n"
+                + "</script></head>\n"
+                + "  <body>\n"
+                + "    <iframe id='i' onload='alert(\"loaded\");' src='" + URL_SECOND + "'></iframe>\n"
+                + "    <textarea id='myTextArea' cols='80' rows='30'></textarea>\n"
+                + "    <button id='clickMe' onclick='test()'>Click Me</button>\n"
+                + "</body>"
+                + " <script>"
+                + "  document.getElementById('\"clickMe\"').click();"
+                + "  </script>"
+                + "</html>";
+        checkHtmlAlert(html);
     }
 }

@@ -25,34 +25,14 @@
  */
 package org.loboevolution.js;
 
-import org.mozilla.javascript.Context;
-import org.mozilla.javascript.Function;
-import org.mozilla.javascript.Scriptable;
-import org.mozilla.javascript.ScriptableObject;
+import org.mozilla.javascript.*;
 
 import java.io.Serial;
 
 /**
  * <p>JavaConstructorObject class.</p>
- *
- *
- *
  */
 public class JavaConstructorObject extends ScriptableObject implements Function {
-
-	public static class SimpleInstantiator implements JavaInstantiator {
-		private final JavaClassWrapper classWrapper;
-
-		public SimpleInstantiator(final JavaClassWrapper classWrapper) {
-			super();
-			this.classWrapper = classWrapper;
-		}
-
-		@Override
-		public Object newInstance() throws InstantiationException, IllegalAccessException {
-			return this.classWrapper.newInstance();
-		}
-	}
 
 	@Serial
     private static final long serialVersionUID = 1L;
@@ -70,7 +50,7 @@ public class JavaConstructorObject extends ScriptableObject implements Function 
 	public JavaConstructorObject(final String name, final JavaClassWrapper classWrapper) {
 		this.name = name;
 		this.classWrapper = classWrapper;
-		this.instantiator = new SimpleInstantiator(classWrapper);
+		this.instantiator = new JavaInstantiatorImpl(classWrapper);
 	}
 
 	/**
@@ -96,12 +76,12 @@ public class JavaConstructorObject extends ScriptableObject implements Function 
 	@Override
 	public Scriptable construct(final Context cx, final Scriptable scope, final Object[] args) {
 		try {
-			final Object javaObject = this.instantiator.newInstance();
+			final Object javaObject = this.instantiator.newInstance(args);
 			final Scriptable newObject = new JavaObjectWrapper(this.classWrapper, javaObject);
 			newObject.setParentScope(scope);
 			return newObject;
 		} catch (final Exception err) {
-			throw new IllegalStateException(err.getMessage());
+			throw new WrappedException(err);
 		}
 	}
 
@@ -113,7 +93,7 @@ public class JavaConstructorObject extends ScriptableObject implements Function 
 
 	/** {@inheritDoc} */
 	@Override
-	public java.lang.Object getDefaultValue(final java.lang.Class hint) {
+	public Object getDefaultValue(final Class<?> hint) {
 		if (String.class.equals(hint)) {
 			return "function " + this.name;
 		} else {

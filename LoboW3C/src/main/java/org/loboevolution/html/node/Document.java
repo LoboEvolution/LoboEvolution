@@ -459,12 +459,6 @@ public interface Document extends Node, NonElementParentNode, ParentNode, Docume
 	Node adoptNode(Node source);
 
 	/**
-	 * <p>captureEvents.</p>
-	 */
-	@Deprecated
-	void captureEvents();
-
-	/**
 	 * <p>caretRangeFromPoint.</p>
 	 *
 	 * @param x a double.

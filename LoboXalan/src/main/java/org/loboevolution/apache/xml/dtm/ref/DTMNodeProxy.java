@@ -284,11 +284,6 @@ public class DTMNodeProxy
     }
 
     @Override
-    public Function getOnfullscreenchange() {
-        return null;
-    }
-
-    @Override
     public String getOuterHTML() {
         return null;
     }
@@ -1336,11 +1331,6 @@ public class DTMNodeProxy
     public Node adoptNode(final Node source) throws DOMException {
 
         throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
-    }
-
-    @Override
-    public void captureEvents() {
-
     }
 
     @Override

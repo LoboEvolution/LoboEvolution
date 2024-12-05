@@ -745,10 +745,11 @@ public class XMLDocumentTest extends LoboUnitTest {
                 = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
                 + "<svg xmlns=\"http://www.w3.org/2000/svg\">\n"
                 + "  <rect id=\"rect\" width=\"50\" height=\"50\" fill=\"green\" onclick=\"alert(document)\"/>\n"
+                + " <script>"
+                + "  document.getElementById('rect').click();"
+                + "  </script>"
                 + "</svg>";
-        final HTMLDocument document = loadHtml(svg);
-        HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("rect");
-        elem.getOnclick();
+        checkHtmlAlert(svg);
     }
 
     @Test
@@ -758,10 +759,11 @@ public class XMLDocumentTest extends LoboUnitTest {
                 = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
                 + "<svg xmlns=\"http://www.w3.org/2000/svg\">\n"
                 + "  <rect id=\"rect\" width=\"50\" height=\"50\" fill=\"green\" onclick=\"alert(document)\"/>\n"
+                + " <script>"
+                + "  document.getElementById('rect').click();"
+                + "  </script>"
                 + "</svg>";
-        final HTMLDocument document = loadHtml(svg);
-        HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("rect");
-        elem.getOnclick();
+        checkHtmlAlert(svg);
     }
 
     @Test

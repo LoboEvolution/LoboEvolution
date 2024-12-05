@@ -57,7 +57,7 @@ public class AnimationEventTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"[object AnimationEvent]", "", "false", "false", "false"})
+    @Alerts({"[object AnimationEvent]", "null", "false", "false", "false"})
     public void createCreateEvent() {
         final String html = "<html><head>"
                 + "<script>\n"

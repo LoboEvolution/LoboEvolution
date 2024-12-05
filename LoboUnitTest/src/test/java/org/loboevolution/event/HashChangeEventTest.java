@@ -93,7 +93,7 @@ public class HashChangeEventTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"[object HashChangeEvent]", "", "false", "false", "false", "", ""})
+    @Alerts({"[object HashChangeEvent]", "null", "false", "false", "false", "", ""})
     public void createCreateEvent() {
         final String html = "<html><head>"
                 + "<script>\n"
@@ -176,7 +176,7 @@ public class HashChangeEventTest extends LoboUnitTest {
 
     @Test
     @Alerts("supported")
-    public void onHashChange_supported() {
+    public void onHashChangeSupported() {
         final String html = "<html><head>"
                 + "<script>\n"
                 + "  function test() {\n"

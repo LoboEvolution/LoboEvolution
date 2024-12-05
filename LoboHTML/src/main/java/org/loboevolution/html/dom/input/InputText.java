@@ -37,6 +37,7 @@ import org.loboevolution.html.control.InputControl;
 import org.loboevolution.html.control.RUIControl;
 import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
 import org.loboevolution.html.js.Executor;
+import org.loboevolution.html.js.WindowImpl;
 import org.loboevolution.html.renderer.HtmlController;
 
 import javax.swing.*;
@@ -129,7 +130,8 @@ public class InputText extends BasicInput {
 			});
 			
 			if (modelNode.getOnselect() != null) {
-				Executor.executeFunction(modelNode, modelNode.getOnselect(), null, new Object[] {});
+				final WindowImpl win = (WindowImpl) modelNode.getDocumentNode().getDefaultView();
+				Executor.executeFunction(modelNode, modelNode.getOnselect(), new Object[] {}, win.getContextFactory());
 			}
 		}
 

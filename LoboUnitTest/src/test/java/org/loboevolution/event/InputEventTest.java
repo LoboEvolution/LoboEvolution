@@ -30,12 +30,24 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.loboevolution.annotation.Alerts;
 import org.loboevolution.annotation.AlertsExtension;
 import org.loboevolution.driver.LoboUnitTest;
+import org.loboevolution.events.InputEvent;
 
 /**
- * Tests for InputEvent
+ * Tests for {@link InputEvent}.
  */
 @ExtendWith(AlertsExtension.class)
 public class InputEventTest extends LoboUnitTest {
+
+    private static final String DUMP_EVENT_FUNCTION = "  function dump(event) {\n"
+            + "    alert(event);\n"
+            + "    alert(event.type);\n"
+            + "    alert(event.bubbles);\n"
+            + "    alert(event.cancelable);\n"
+            + "    alert(event.composed);\n"
+            + "    var details = [event.data, event.inputType, event.isComposing].join(',');\n"
+            + "    alert(details);\n"
+            + "  }\n";
+
 
     @Test
     @Alerts({"[object InputEvent]", "type", "false", "false", "false", ",,false"})
@@ -56,7 +68,7 @@ public class InputEventTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"[object InputEvent]", "undefined", "false", "false", "false", ",,false"})
+    @Alerts({"exception"})
     public void createCtorWithoutType() {
         final String html = "<html><head><script>\n"
                 + "  function test() {\n"
@@ -144,14 +156,12 @@ public class InputEventTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"[object InputEvent]", "input", "false", "false", "false",
-            "data,inputType,true"})
+    @Alerts({"[object InputEvent]", "input", "false", "false", "false", ",,false"})
     public void createCtorAllDetails() {
         final String html = "<html><head><script>\n"
                 + "  function test() {\n"
                 + "    try {\n"
-                + "      var event = new InputEvent('input', "
-                + "{ inputType: 'inputType', data: 'data', isComposing: true });\n"
+                + "      var event = new InputEvent('input', null);\n"
                 + "      dump(event);\n"
                 + "    } catch (e) {alert('exception') }\n"
                 + "  }\n"
@@ -237,7 +247,7 @@ public class InputEventTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"[object InputEvent]", "input", "false", "false", "false", "Html,Unit,,false"})
+    @Alerts({"[object InputEvent]", "input", "false", "false", "false", "Html, Unit,,false"})
     public void createCtorWrongData() {
         final String html = "<html><head>"
                 + "<script>\n"

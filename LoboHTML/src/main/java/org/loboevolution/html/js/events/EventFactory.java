@@ -31,9 +31,6 @@ import org.loboevolution.events.Event;
 
 /**
  * <p>EventFactory class.</p>
- *
- *
- *
  */
 public class EventFactory {
 
@@ -44,13 +41,33 @@ public class EventFactory {
 	 * @return a {@link Event} object.
 	 * @throws DOMException if any.
 	 */
-	public static Event createEvent(final String eventType) {
+	public static Event createEvent(final String eventType) throws DOMException {
 		Event theEvent;
 		final String event = Strings.isNotBlank(eventType) ? eventType.toLowerCase() : "";
         theEvent = switch (event) {
             case "mouseevent" -> new MouseEventImpl();
-            case "uievent" -> new UIEventImpl();
-            default -> new EventImpl();
+			case "uievents", "uievent" -> new UIEventImpl();
+            case "inputvent" -> new InputEventImpl();
+			case "submitevent" -> new SubmitEventImpl();
+			case "animationevent" -> new AnimationEventImpl();
+			case "htmlevents", "event", "events", "domcontentloaded" -> new EventImpl();
+            case "keyboardevent"  -> new KeyboardEventImpl();
+			case "messageevent"  -> new MessageEventImpl();
+			case "mutationevent"  -> new MutationEventImpl();
+			case "customevent"  -> new CustomEventImpl();
+			case "closeevent"  -> new CloseEventImpl();
+			case "compositionevent"  -> new CompositionEventImpl();
+			case "popstateevent" -> new PopStateEventImpl();
+			case "focusevent" -> new FocusEventImpl();
+			case "wheelevent" -> new WheelEventImpl();
+			case "blobevent" -> new BlobEventImpl();
+			case "dragevent" -> new DragEventImpl();
+			case "gamepadevent" -> new GamepadEventimpl();
+			case "transitionevent" -> new TransitionEventImpl();
+			case "beforeunloadevent" -> new BeforeUnloadEventImpl();
+			case "hashchangeevent" -> new HashChangeEventImpl();
+            default -> throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Failed to execute 'createEvent' on 'Document': " +
+					"The provided event type " + eventType + " is invalid.");
         };
 		return theEvent;
 	}

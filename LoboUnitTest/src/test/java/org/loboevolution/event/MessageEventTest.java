@@ -56,7 +56,7 @@ public class MessageEventTest extends LoboUnitTest {
 
     @Test
     @Alerts({"[object MessageEvent]", "type-message", "false", "false", "false",
-            "null", "", "", "null"})
+            "null", "null", "null", "null"})
     public void createCtor() {
         final String html = "<html><head>"
                 + "<script>\n"

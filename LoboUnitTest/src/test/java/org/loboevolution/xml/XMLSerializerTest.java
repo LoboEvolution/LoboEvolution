@@ -126,7 +126,7 @@ public class XMLSerializerTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("<H1 xmlns=\"http://www.w3.org/1999/xhtml\">LoboEvolution</H1><H2 xmlns=\"http://www.w3.org/1999/xhtml\">is great</hH>")
+    @Alerts("<H1 xmlns=\"http://www.w3.org/1999/xhtml\">LoboEvolution</H1><H2 xmlns=\"http://www.w3.org/1999/xhtml\">is great</H2>")
     public void documentFragment() {
         final String html = "<html><head>\n"
                 + "<script>\n"

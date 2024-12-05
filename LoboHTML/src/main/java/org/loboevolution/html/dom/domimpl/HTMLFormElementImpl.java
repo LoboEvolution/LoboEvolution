@@ -35,6 +35,7 @@ import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeVisitor;
 import org.loboevolution.html.js.Executor;
+import org.loboevolution.html.js.WindowImpl;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NamedNodeMap;
 import org.loboevolution.html.node.Node;
@@ -287,8 +288,9 @@ public class HTMLFormElementImpl extends HTMLElementImpl implements HTMLFormElem
 	 */
 	public final void submit(final FormInput[] extraFormInputs) {
 		final Function onsubmit = getOnsubmit();
+		final WindowImpl window = (WindowImpl) this.getDocumentNode().getDefaultView();
 		if (onsubmit != null) {
-			if (!Executor.executeFunction(this, onsubmit, null, new Object[0])) {
+			if (!Executor.executeFunction(this, onsubmit, new Object[0], window.getContextFactory())) {
 				return;
 			}
 		}
