@@ -198,7 +198,7 @@ public final class ColorFactory {
 			final int blue =  (int) parseValue(splitComma[2].trim(), 255);
 			if (splitComma.length > 3) {
 				final float alpha = parseAlpha(splitComma[splitComma.length - 1].trim());
-				color = new Color(normalize(red), normalize(green), normalize(blue), Math.round(alpha));
+				color = new Color(normalize(red), normalize(green), normalize(blue), Math.round(alpha  * 255));
 			} else {
 				color = new Color(normalize(red), normalize(green), normalize(blue));
 			}
