@@ -86,8 +86,8 @@ public class HtmlController {
             final Function f = uiElement.getOncontextmenu();
 			if (f != null) {
 				final MouseEventImpl evt = new MouseEventImpl(event);
-				evt.initMouseEvent("contextmenu", false, false, null, 0d, 0d, 0d,
-						(double)x, (double)y, true, true, true, true, 0d,  uiElement);
+				evt.initMouseEvent("contextmenu", false, false, null, 0, 0, 0,
+						x, y, true, true, true, true, 0,  uiElement);
 				boolean isEx = execute(uiElement, f, evt);
 				if (!isEx) return false;
 			}
@@ -119,8 +119,8 @@ public class HtmlController {
             final Function f = uiElement.getOndblclick();
 			if (f != null) {
 				final MouseEventImpl evt = new MouseEventImpl(event);
-				evt.initMouseEvent("dblclick", false, false, null, 0d, 0d,
-						0d, (double)x, (double)y, true, true, true, true, 0d, uiElement);
+				evt.initMouseEvent("dblclick", false, false, null, 0, 0,
+						0, x, y, true, true, true, true, 0, uiElement);
 				boolean isEx = execute(uiElement, f, evt);
 				if (!isEx) return false;
 			}
@@ -158,8 +158,8 @@ public class HtmlController {
 			final Function f = uiElement.getOnclick();
 			if (f != null) {
 				final MouseEventImpl evt = new MouseEventImpl(event);
-				evt.initMouseEvent("click", true, true, null, 0d, 0d, 0d,
-						(double) x, (double) y, true, true, true, true, 0d, uiElement);
+				evt.initMouseEvent("click", true, true, null, 0, 0, 0,
+						x, y, true, true, true, true, 0, uiElement);
 				boolean isEx = execute(uiElement, f, evt);
 				if (!isEx) return false;
 			}
@@ -224,15 +224,15 @@ public class HtmlController {
             final Function f = uiElement.getOnmousedown();
 			if (f != null) {
 				final MouseEventImpl evt = new MouseEventImpl(event);
-				evt.initMouseEvent("mousedown", false, false, null, 0d, 0d, 0d,
-						(double)x, (double)y, true, true, true, true, 0d, uiElement);
+				evt.initMouseEvent("mousedown", false, false, null, 0, 0, 0,
+						x, y, true, true, true, true, 0, uiElement);
 				boolean isEx = execute(uiElement, f, evt);
 				if (!isEx) return false;
 			}
 		}
 
 		if (node instanceof HTMLAnchorElementImpl) {
-			((HTMLAnchorElementImpl) node).getCurrentStyle().setOverlayColor("#90d90dFF80d");
+			((HTMLAnchorElementImpl) node).getCurrentStyle().setOverlayColor("#9090FF80");
 			return false;
 		}
 
@@ -263,8 +263,8 @@ public class HtmlController {
 				final Function f = uiElement.getOnmouseout();
 				if (f != null) {
 					final MouseEventImpl evt = new MouseEventImpl(event);
-					evt.initMouseEvent("mouseout", false, false, null, 0d, 0d,
-							0d, (double)x, (double)y, true, true, true, true, 0d, uiElement);
+					evt.initMouseEvent("mouseout", false, false, null, 0, 0,
+							0, x, y, true, true, true, true, 0, uiElement);
 					execute(uiElement, f, evt);
 				}
 			}
@@ -289,8 +289,8 @@ public class HtmlController {
 				final Function f = uiElement.getOnmousemove();
 				if (f != null) {
 					final MouseEventImpl evt = new MouseEventImpl(event);
-					evt.initMouseEvent("mousemove", false, false, null, 0d,
-							0d, 0d, (double)x, (double)y, true, true, true, true, 0d, uiElement);
+					evt.initMouseEvent("mousemove", false, false, null, 0,
+							0, 0, x, y, true, true, true, true, 0, uiElement);
 					execute(uiElement, f, evt);
 				}
 			}
@@ -318,8 +318,8 @@ public class HtmlController {
 				final Function f = uiElement.getOnmouseover();
 				if (f != null) {
 					final MouseEventImpl evt = new MouseEventImpl(event);
-					evt.initMouseEvent("mouseover", false, false, null, 0d,
-							0d, 0d, (double)x, (double)y, true, true, true, true, 0d, uiElement);
+					evt.initMouseEvent("mouseover", false, false, null, 0,
+							0, 0, x, y, true, true, true, true, 0, uiElement);
 					execute(uiElement, f, evt);
 				}
 			}
@@ -335,8 +335,8 @@ public class HtmlController {
 		if (node instanceof HTMLElementImpl uiElement) {
             final Function f = uiElement.getOnscroll();
 			final MouseEventImpl evt = new MouseEventImpl();
-			evt.initMouseEvent("scroll", false, false, null, 0d, 0d, 0d,
-					0d, 0d, true, true, true, true, 0d, uiElement);
+			evt.initMouseEvent("scroll", false, false, null, 0, 0, 0,
+					0, 0, true, true, true, true, 0, uiElement);
 			execute(uiElement, f, evt);
 		}
 	}
@@ -355,8 +355,8 @@ public class HtmlController {
             final Function f = uiElement.getOnmouseup();
 			if (f != null) {
 				final MouseEventImpl evt = new MouseEventImpl(event);
-				evt.initMouseEvent("mouseup", false, false, null, 0d, 0d, 0d,
-						(double)x, (double)y, true, true, true, true, 0d, uiElement);
+				evt.initMouseEvent("mouseup", false, false, null, 0, 0, 0,
+						x, y, true, true, true, true, 0, uiElement);
 				execute(uiElement, f, evt);
 			}
 		}
@@ -388,8 +388,8 @@ public class HtmlController {
             final Function f = uiElement.getOnclick();
 			if (f != null) {
 				final MouseEventImpl evt = new MouseEventImpl(event);
-				evt.initMouseEvent("click", false, false, null, 0d, 0d, 0d,
-						(double)x, (double)y, true, true, true, true, 0d, uiElement);
+				evt.initMouseEvent("click", false, false, null, 0, 0, 0,
+						x, y, true, true, true, true, 0, uiElement);
 				execute(uiElement, f, evt);
 			}
 		}

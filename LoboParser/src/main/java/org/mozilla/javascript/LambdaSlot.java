@@ -14,8 +14,23 @@ import java.util.function.Supplier;
 public class LambdaSlot extends Slot {
     private static final long serialVersionUID = -3046681698806493052L;
 
+    LambdaSlot(Object name, int index) {
+        super(name, index, 0);
+    }
+
     LambdaSlot(Slot oldSlot) {
         super(oldSlot);
+    }
+
+    @Override
+    LambdaSlot copySlot() {
+        var newSlot = new LambdaSlot(this);
+        newSlot.value = value;
+        newSlot.getter = getter;
+        newSlot.setter = setter;
+        newSlot.next = null;
+        newSlot.orderedNext = null;
+        return newSlot;
     }
 
     transient Supplier<Object> getter;

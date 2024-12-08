@@ -8,6 +8,8 @@
 
 package org.mozilla.javascript;
 
+import java.util.ArrayList;
+
 /**
  * Class ImporterTopLevel
  *
@@ -59,7 +61,7 @@ public class ImporterTopLevel extends TopLevel {
 
     @Override
     public String getClassName() {
-        return (topScopeFlag) ? "global" : "JavaImporter";
+        return topScopeFlag ? "global" : "JavaImporter";
     }
 
     public static void init(Context cx, Scriptable scope, boolean sealed) {
@@ -129,7 +131,9 @@ public class ImporterTopLevel extends TopLevel {
         synchronized (scope) {
             if (scope instanceof ScriptableObject) {
                 ScriptableObject so = (ScriptableObject) scope;
-                ObjArray importedPackages = (ObjArray) so.getAssociatedValue(AKEY);
+                @SuppressWarnings("unchecked")
+                ArrayList<Object> importedPackages =
+                        (ArrayList<Object>) so.getAssociatedValue(AKEY);
                 if (importedPackages != null) {
                     return importedPackages.toArray();
                 }
@@ -138,7 +142,9 @@ public class ImporterTopLevel extends TopLevel {
         return null;
     }
 
-    /** @deprecated Kept only for compatibility. */
+    /**
+     * @deprecated Kept only for compatibility.
+     */
     @Deprecated
     public void importPackage(Context cx, Scriptable thisObj, Object[] args, Function funObj) {
         js_importPackage(this, args);
@@ -194,9 +200,10 @@ public class ImporterTopLevel extends TopLevel {
             return;
         }
         synchronized (scope) {
-            ObjArray importedPackages = (ObjArray) scope.getAssociatedValue(AKEY);
+            @SuppressWarnings("unchecked")
+            ArrayList<Object> importedPackages = (ArrayList<Object>) scope.getAssociatedValue(AKEY);
             if (importedPackages == null) {
-                importedPackages = new ObjArray();
+                importedPackages = new ArrayList<>();
                 scope.associateValue(AKEY, importedPackages);
             }
             for (int j = 0; j != importedPackages.size(); j++) {

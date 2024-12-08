@@ -20,7 +20,7 @@ public class EvaluatorException extends RhinoException {
      * <p>Errors internal to the JavaScript engine will simply throw a RuntimeException.
      *
      * @param detail the error message
-     * @param sourceName the name of the source reponsible for the error
+     * @param sourceName the name of the source responsible for the error
      * @param lineNumber the line number of the source
      */
     public EvaluatorException(String detail, String sourceName, int lineNumber) {
@@ -44,25 +44,33 @@ public class EvaluatorException extends RhinoException {
         recordErrorOrigin(sourceName, lineNumber, lineSource, columnNumber);
     }
 
-    /** @deprecated Use {@link RhinoException#sourceName()} from the super class. */
+    /**
+     * @deprecated Use {@link RhinoException#sourceName()} from the super class.
+     */
     @Deprecated
     public String getSourceName() {
         return sourceName();
     }
 
-    /** @deprecated Use {@link RhinoException#lineNumber()} from the super class. */
+    /**
+     * @deprecated Use {@link RhinoException#lineNumber()} from the super class.
+     */
     @Deprecated
     public int getLineNumber() {
         return lineNumber();
     }
 
-    /** @deprecated Use {@link RhinoException#columnNumber()} from the super class. */
+    /**
+     * @deprecated Use {@link RhinoException#columnNumber()} from the super class.
+     */
     @Deprecated
     public int getColumnNumber() {
         return columnNumber();
     }
 
-    /** @deprecated Use {@link RhinoException#lineSource()} from the super class. */
+    /**
+     * @deprecated Use {@link RhinoException#lineSource()} from the super class.
+     */
     @Deprecated
     public String getLineSource() {
         return lineSource();

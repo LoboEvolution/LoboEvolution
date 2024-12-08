@@ -16,7 +16,6 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 final class TypeInfo {
-
     private TypeInfo() {}
 
     static final int TOP = 0;
@@ -230,9 +229,9 @@ final class TypeInfo {
     }
 
     static void print(int[] locals, int localsTop, int[] stack, int stackTop, ConstantPool pool) {
-        log.info("locals: ");
-        log.info(toString(locals, localsTop, pool));
-        log.info("stack: ");
-        log.info(toString(stack, stackTop, pool));
+       log.info("locals: ");
+       log.info(toString(locals, localsTop, pool));
+       log.info("stack: ");
+       log.info(toString(stack, stackTop, pool));
     }
 }

@@ -12,8 +12,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.Set;
 import org.mozilla.javascript.ScriptRuntime.StringIdOrIndex;
 
@@ -42,6 +44,7 @@ public class NativeObject extends IdScriptableObject implements Map {
         return ScriptRuntime.defaultObjectToString(this);
     }
 
+    @SuppressWarnings("resource")
     @Override
     protected void fillConstructorProperties(IdFunctionObject ctor) {
         addIdFunctionProperty(ctor, OBJECT_TAG, ConstructorId_getPrototypeOf, "getPrototypeOf", 1);
@@ -83,6 +86,7 @@ public class NativeObject extends IdScriptableObject implements Map {
         addIdFunctionProperty(ctor, OBJECT_TAG, ConstructorId_freeze, "freeze", 1);
         addIdFunctionProperty(ctor, OBJECT_TAG, ConstructorId_assign, "assign", 2);
         addIdFunctionProperty(ctor, OBJECT_TAG, ConstructorId_is, "is", 2);
+        addIdFunctionProperty(ctor, OBJECT_TAG, ConstructorId_groupBy, "groupBy", 2);
         super.fillConstructorProperties(ctor);
     }
 
@@ -685,6 +689,37 @@ public class NativeObject extends IdScriptableObject implements Map {
                     return ScriptRuntime.wrapBoolean(ScriptRuntime.same(a1, a2));
                 }
 
+            case ConstructorId_groupBy:
+                {
+                    Object items = args.length < 1 ? Undefined.instance : args[0];
+                    Object callback = args.length < 2 ? Undefined.instance : args[1];
+
+                    Map<Object, List<Object>> groups =
+                            AbstractEcmaObjectOperations.groupBy(
+                                    cx,
+                                    scope,
+                                    f,
+                                    items,
+                                    callback,
+                                    AbstractEcmaObjectOperations.KEY_COERCION.PROPERTY);
+
+                    NativeObject obj = (NativeObject) cx.newObject(scope);
+                    obj.setPrototype(null);
+
+                    for (Entry<Object, List<Object>> entry : groups.entrySet()) {
+                        Scriptable elements = cx.newArray(scope, entry.getValue().toArray());
+
+                        ScriptableObject desc = (ScriptableObject) cx.newObject(scope);
+                        desc.put("enumerable", desc, Boolean.TRUE);
+                        desc.put("configurable", desc, Boolean.TRUE);
+                        desc.put("value", desc, elements);
+
+                        obj.defineOwnProperty(cx, entry.getKey(), desc);
+                    }
+
+                    return obj;
+                }
+
             default:
                 throw new IllegalArgumentException(String.valueOf(id));
         }
@@ -743,7 +778,7 @@ public class NativeObject extends IdScriptableObject implements Map {
     @Override
     public boolean containsValue(Object value) {
         for (Object obj : values()) {
-            if (value == obj || value != null && value.equals(obj)) {
+            if (Objects.equals(value, obj)) {
                 return true;
             }
         }
@@ -772,7 +807,7 @@ public class NativeObject extends IdScriptableObject implements Map {
     }
 
     @Override
-    public Set<Map.Entry<Object, Object>> entrySet() {
+    public Set<Entry<Object, Object>> entrySet() {
         return new EntrySet();
     }
 
@@ -794,7 +829,7 @@ public class NativeObject extends IdScriptableObject implements Map {
     class EntrySet extends AbstractSet<Entry<Object, Object>> {
         @Override
         public Iterator<Entry<Object, Object>> iterator() {
-            return new Iterator<Map.Entry<Object, Object>>() {
+            return new Iterator<Entry<Object, Object>>() {
                 Object[] ids = getIds();
                 Object key = null;
                 int index = 0;
@@ -805,10 +840,10 @@ public class NativeObject extends IdScriptableObject implements Map {
                 }
 
                 @Override
-                public Map.Entry<Object, Object> next() {
+                public Entry<Object, Object> next() {
                     final Object ekey = key = ids[index++];
                     final Object value = get(key);
-                    return new Map.Entry<Object, Object>() {
+                    return new Entry<Object, Object>() {
                         @Override
                         public Object getKey() {
                             return ekey;
@@ -829,7 +864,7 @@ public class NativeObject extends IdScriptableObject implements Map {
                             if (!(other instanceof Map.Entry)) {
                                 return false;
                             }
-                            Map.Entry<?, ?> e = (Map.Entry<?, ?>) other;
+                            Entry<?, ?> e = (Entry<?, ?>) other;
                             return (ekey == null ? e.getKey() == null : ekey.equals(e.getKey()))
                                     && (value == null
                                             ? e.getValue() == null
@@ -1019,6 +1054,7 @@ public class NativeObject extends IdScriptableObject implements Map {
             ConstructorId_fromEntries = -20,
             ConstructorId_values = -21,
             ConstructorId_hasOwn = -22,
+            ConstructorId_groupBy = -23,
             Id_constructor = 1,
             Id_toString = 2,
             Id_toLocaleString = 3,

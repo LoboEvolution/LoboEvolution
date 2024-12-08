@@ -14,57 +14,74 @@ import java.util.Map;
  * properties. One of them is that some objects can have an "internal data slot" that makes them a
  * Symbol and others cannot.
  */
-public class NativeSymbol extends IdScriptableObject implements Symbol {
+public class NativeSymbol extends ScriptableObject implements Symbol {
     private static final long serialVersionUID = -589539749749830003L;
 
     public static final String CLASS_NAME = "Symbol";
     public static final String TYPE_NAME = "symbol";
 
     private static final Object GLOBAL_TABLE_KEY = new Object();
-    private static final Object CONSTRUCTOR_SLOT = new Object();
 
     private final SymbolKey key;
     private final NativeSymbol symbolData;
 
     public static void init(Context cx, Scriptable scope, boolean sealed) {
-        NativeSymbol obj = new NativeSymbol("");
-        ScriptableObject ctor = obj.exportAsJSClass(MAX_PROTOTYPE_ID, scope, false);
+        LambdaConstructor ctor =
+                new LambdaConstructor(
+                        scope,
+                        CLASS_NAME,
+                        0,
+                        LambdaConstructor.CONSTRUCTOR_FUNCTION,
+                        NativeSymbol::js_constructor);
 
-        cx.putThreadLocal(CONSTRUCTOR_SLOT, Boolean.TRUE);
-        try {
-            createStandardSymbol(cx, scope, ctor, "iterator", SymbolKey.ITERATOR);
-            createStandardSymbol(cx, scope, ctor, "species", SymbolKey.SPECIES);
-            createStandardSymbol(cx, scope, ctor, "toStringTag", SymbolKey.TO_STRING_TAG);
-            createStandardSymbol(cx, scope, ctor, "hasInstance", SymbolKey.HAS_INSTANCE);
-            createStandardSymbol(
-                    cx, scope, ctor, "isConcatSpreadable", SymbolKey.IS_CONCAT_SPREADABLE);
-            createStandardSymbol(cx, scope, ctor, "isRegExp", SymbolKey.IS_REGEXP);
-            createStandardSymbol(cx, scope, ctor, "toPrimitive", SymbolKey.TO_PRIMITIVE);
-            createStandardSymbol(cx, scope, ctor, "match", SymbolKey.MATCH);
-            createStandardSymbol(cx, scope, ctor, "replace", SymbolKey.REPLACE);
-            createStandardSymbol(cx, scope, ctor, "search", SymbolKey.SEARCH);
-            createStandardSymbol(cx, scope, ctor, "split", SymbolKey.SPLIT);
-            createStandardSymbol(cx, scope, ctor, "unscopables", SymbolKey.UNSCOPABLES);
+        ctor.setPrototypePropertyAttributes(DONTENUM | READONLY | PERMANENT);
 
-        } finally {
-            cx.removeThreadLocal(CONSTRUCTOR_SLOT);
-        }
+        ctor.defineConstructorMethod(
+                scope,
+                "for",
+                1,
+                (lcx, lscope, thisObj, args) -> NativeSymbol.js_for(lcx, lscope, args, ctor),
+                DONTENUM,
+                DONTENUM | READONLY);
+        ctor.defineConstructorMethod(
+                scope, "keyFor", 1, NativeSymbol::js_keyFor, DONTENUM, DONTENUM | READONLY);
+
+        ctor.definePrototypeMethod(
+                scope, "toString", 0, NativeSymbol::js_toString, DONTENUM, DONTENUM | READONLY);
+        ctor.definePrototypeMethod(
+                scope, "valueOf", 0, NativeSymbol::js_valueOf, DONTENUM, DONTENUM | READONLY);
+        ctor.definePrototypeMethod(
+                scope,
+                SymbolKey.TO_PRIMITIVE,
+                1,
+                NativeSymbol::js_valueOf,
+                DONTENUM | READONLY,
+                DONTENUM | READONLY);
+        ctor.definePrototypeProperty(SymbolKey.TO_STRING_TAG, CLASS_NAME, DONTENUM | READONLY);
+        ctor.definePrototypeProperty(
+                cx, "description", NativeSymbol::js_description, DONTENUM | READONLY);
+
+        ScriptableObject.defineProperty(scope, CLASS_NAME, ctor, DONTENUM);
+
+        // Create all the predefined symbols and bind them to the scope.
+        createStandardSymbol(cx, scope, ctor, "iterator", SymbolKey.ITERATOR);
+        createStandardSymbol(cx, scope, ctor, "species", SymbolKey.SPECIES);
+        createStandardSymbol(cx, scope, ctor, "toStringTag", SymbolKey.TO_STRING_TAG);
+        createStandardSymbol(cx, scope, ctor, "hasInstance", SymbolKey.HAS_INSTANCE);
+        createStandardSymbol(cx, scope, ctor, "isConcatSpreadable", SymbolKey.IS_CONCAT_SPREADABLE);
+        createStandardSymbol(cx, scope, ctor, "isRegExp", SymbolKey.IS_REGEXP);
+        createStandardSymbol(cx, scope, ctor, "toPrimitive", SymbolKey.TO_PRIMITIVE);
+        createStandardSymbol(cx, scope, ctor, "match", SymbolKey.MATCH);
+        createStandardSymbol(cx, scope, ctor, "matchAll", SymbolKey.MATCH_ALL);
+        createStandardSymbol(cx, scope, ctor, "replace", SymbolKey.REPLACE);
+        createStandardSymbol(cx, scope, ctor, "search", SymbolKey.SEARCH);
+        createStandardSymbol(cx, scope, ctor, "split", SymbolKey.SPLIT);
+        createStandardSymbol(cx, scope, ctor, "unscopables", SymbolKey.UNSCOPABLES);
 
         if (sealed) {
             // Can't seal until we have created all the stuff above!
             ctor.sealObject();
         }
-    }
-
-    /**
-     * This has to be used only for constructing the prototype instance. This sets symbolData to
-     * null (see isSymbol() for more).
-     *
-     * @param desc the description
-     */
-    private NativeSymbol(String desc) {
-        this.key = new SymbolKey(desc);
-        this.symbolData = null;
     }
 
     NativeSymbol(SymbolKey key) {
@@ -77,153 +94,39 @@ public class NativeSymbol extends IdScriptableObject implements Symbol {
         this.symbolData = s.symbolData;
     }
 
-    /**
-     * Use this when we need to create symbols internally because of the convoluted way we have to
-     * construct them.
-     */
-    public static NativeSymbol construct(Context cx, Scriptable scope, Object[] args) {
-        cx.putThreadLocal(CONSTRUCTOR_SLOT, Boolean.TRUE);
-        try {
-            return (NativeSymbol) cx.newObject(scope, CLASS_NAME, args);
-        } finally {
-            cx.removeThreadLocal(CONSTRUCTOR_SLOT);
-        }
-    }
-
     @Override
     public String getClassName() {
         return CLASS_NAME;
     }
 
-    @Override
-    protected void fillConstructorProperties(IdFunctionObject ctor) {
-        super.fillConstructorProperties(ctor);
-        addIdFunctionProperty(ctor, CLASS_NAME, ConstructorId_for, "for", 1);
-        addIdFunctionProperty(ctor, CLASS_NAME, ConstructorId_keyFor, "keyFor", 1);
+    /**
+     * Create a symbol directly. We use this internally to construct new symbols as if the
+     * constructor was called directly.
+     */
+    private static NativeSymbol constructSymbol(
+            Context cx, Scriptable scope, LambdaConstructor ctor, SymbolKey key) {
+        return (NativeSymbol) ctor.call(cx, scope, null, new Object[] {Undefined.instance, key});
+    }
+
+    private static NativeSymbol constructSymbol(
+            Context cx, Scriptable scope, LambdaConstructor ctor, String name) {
+        return (NativeSymbol) ctor.call(cx, scope, null, new Object[] {name});
     }
 
     private static void createStandardSymbol(
-            Context cx, Scriptable scope, ScriptableObject ctor, String name, SymbolKey key) {
-        Scriptable sym = cx.newObject(scope, CLASS_NAME, new Object[] {name, key});
+            Context cx, Scriptable scope, LambdaConstructor ctor, String name, SymbolKey key) {
+        NativeSymbol sym = constructSymbol(cx, scope, ctor, key);
         ctor.defineProperty(name, sym, DONTENUM | READONLY | PERMANENT);
     }
 
-    @Override
-    protected int findPrototypeId(String s) {
-        int id = 0;
-        switch (s) {
-            case "constructor":
-                id = Id_constructor;
-                break;
-            case "toString":
-                id = Id_toString;
-                break;
-            case "valueOf":
-                id = Id_valueOf;
-                break;
-            default:
-                id = 0;
-                break;
-        }
-        return id;
+    private static NativeSymbol getSelf(Scriptable thisObj) {
+        return LambdaConstructor.convertThisObject(thisObj, NativeSymbol.class);
     }
 
-    @Override
-    protected int findPrototypeId(Symbol key) {
-        if (SymbolKey.TO_STRING_TAG.equals(key)) {
-            return SymbolId_toStringTag;
-        } else if (SymbolKey.TO_PRIMITIVE.equals(key)) {
-            return SymbolId_toPrimitive;
-        }
-        return 0;
-    }
-
-    private static final int ConstructorId_keyFor = -2,
-            ConstructorId_for = -1,
-            Id_constructor = 1,
-            Id_toString = 2,
-            Id_valueOf = 4,
-            SymbolId_toStringTag = 3,
-            SymbolId_toPrimitive = 5,
-            MAX_PROTOTYPE_ID = SymbolId_toPrimitive;
-
-    @Override
-    protected void initPrototypeId(int id) {
-        switch (id) {
-            case Id_constructor:
-                initPrototypeMethod(CLASS_NAME, id, "constructor", 0);
-                break;
-            case Id_toString:
-                initPrototypeMethod(CLASS_NAME, id, "toString", 0);
-                break;
-            case Id_valueOf:
-                initPrototypeMethod(CLASS_NAME, id, "valueOf", 0);
-                break;
-            case SymbolId_toStringTag:
-                initPrototypeValue(id, SymbolKey.TO_STRING_TAG, CLASS_NAME, DONTENUM | READONLY);
-                break;
-            case SymbolId_toPrimitive:
-                initPrototypeMethod(
-                        CLASS_NAME, id, SymbolKey.TO_PRIMITIVE, "Symbol.toPrimitive", 1);
-                break;
-            default:
-                super.initPrototypeId(id);
-                break;
-        }
-    }
-
-    @Override
-    public Object execIdCall(
-            IdFunctionObject f, Context cx, Scriptable scope, Scriptable thisObj, Object[] args) {
-        if (!f.hasTag(CLASS_NAME)) {
-            return super.execIdCall(f, cx, scope, thisObj, args);
-        }
-        int id = f.methodId();
-        switch (id) {
-            case ConstructorId_for:
-                return js_for(cx, scope, args);
-            case ConstructorId_keyFor:
-                return js_keyFor(cx, scope, args);
-
-            case Id_constructor:
-                if (thisObj == null) {
-                    if (cx.getThreadLocal(CONSTRUCTOR_SLOT) == null) {
-                        // We should never get to this via "new".
-                        throw ScriptRuntime.typeErrorById("msg.no.symbol.new");
-                    }
-                    // Unless we are being called by our own internal "new"
-                    return js_constructor(args);
-                }
-                return construct(cx, scope, args);
-
-            case Id_toString:
-                return getSelf(cx, scope, thisObj).toString();
-            case Id_valueOf:
-            case SymbolId_toPrimitive:
-                return getSelf(cx, scope, thisObj).js_valueOf();
-            default:
-                return super.execIdCall(f, cx, scope, thisObj, args);
-        }
-    }
-
-    private static NativeSymbol getSelf(Context cx, Scriptable scope, Object thisObj) {
-        try {
-            return (NativeSymbol) ScriptRuntime.toObject(cx, scope, thisObj);
-        } catch (ClassCastException cce) {
-            throw ScriptRuntime.typeErrorById("msg.invalid.type", thisObj.getClass().getName());
-        }
-    }
-
-    private static NativeSymbol js_constructor(Object[] args) {
-        String desc;
-        if (args.length > 0) {
-            if (Undefined.instance.equals(args[0])) {
-                desc = "";
-            } else {
-                desc = ScriptRuntime.toString(args[0]);
-            }
-        } else {
-            desc = "";
+    private static NativeSymbol js_constructor(Context cx, Scriptable scope, Object[] args) {
+        String desc = null;
+        if (args.length > 0 && !Undefined.isUndefined(args[0])) {
+            desc = ScriptRuntime.toString(args[0]);
         }
 
         if (args.length > 1) {
@@ -233,35 +136,41 @@ public class NativeSymbol extends IdScriptableObject implements Symbol {
         return new NativeSymbol(new SymbolKey(desc));
     }
 
-    private Object js_valueOf() {
-        // In the case that "Object()" was called we actually have a different "internal slot"
-        return symbolData;
+    private static String js_toString(
+            Context cx, Scriptable scope, Scriptable thisObj, Object[] args) {
+        return getSelf(thisObj).toString();
     }
 
-    private Object js_for(Context cx, Scriptable scope, Object[] args) {
+    private static Object js_valueOf(
+            Context cx, Scriptable scope, Scriptable thisObj, Object[] args) {
+        return getSelf(thisObj).symbolData;
+    }
+
+    private static Object js_description(Scriptable thisObj) {
+        return getSelf(thisObj).getKey().getDescription();
+    }
+
+    private static Object js_for(
+            Context cx, Scriptable scope, Object[] args, LambdaConstructor constructor) {
         String name =
                 (args.length > 0
                         ? ScriptRuntime.toString(args[0])
                         : ScriptRuntime.toString(Undefined.instance));
 
-        Map<String, NativeSymbol> table = getGlobalMap();
-        NativeSymbol ret = table.get(name);
-
-        if (ret == null) {
-            ret = construct(cx, scope, new Object[] {name});
-            table.put(name, ret);
-        }
-        return ret;
+        Map<String, NativeSymbol> table = getGlobalMap(scope);
+        return table.computeIfAbsent(name, (k) -> constructSymbol(cx, scope, constructor, name));
     }
 
-    private Object js_keyFor(Context cx, Scriptable scope, Object[] args) {
+    @SuppressWarnings("ReferenceEquality")
+    private static Object js_keyFor(
+            Context cx, Scriptable scope, Scriptable thisObj, Object[] args) {
         Object s = (args.length > 0 ? args[0] : Undefined.instance);
         if (!(s instanceof NativeSymbol)) {
             throw ScriptRuntime.throwCustomError(cx, scope, "TypeError", "Not a Symbol");
         }
         NativeSymbol sym = (NativeSymbol) s;
 
-        Map<String, NativeSymbol> table = getGlobalMap();
+        Map<String, NativeSymbol> table = getGlobalMap(scope);
         for (Map.Entry<String, NativeSymbol> e : table.entrySet()) {
             if (e.getValue().key == sym.key) {
                 return e.getKey();
@@ -315,6 +224,7 @@ public class NativeSymbol extends IdScriptableObject implements Symbol {
      * object is still used. Account for that here: an "Object" that was created from a Symbol has a
      * different value of the slot.
      */
+    @SuppressWarnings("ReferenceEquality")
     public boolean isSymbol() {
         return (symbolData == this);
     }
@@ -338,9 +248,14 @@ public class NativeSymbol extends IdScriptableObject implements Symbol {
         return key;
     }
 
+    /**
+     * Return the Map that stores global symbols for the 'for' and 'keyFor' operations. It must work
+     * across "realms" in the same top-level Rhino scope, so we store it there as an associated
+     * property.
+     */
     @SuppressWarnings("unchecked")
-    private Map<String, NativeSymbol> getGlobalMap() {
-        ScriptableObject top = (ScriptableObject) getTopLevelScope(this);
+    private static Map<String, NativeSymbol> getGlobalMap(Scriptable scope) {
+        ScriptableObject top = (ScriptableObject) getTopLevelScope(scope);
         Map<String, NativeSymbol> map =
                 (Map<String, NativeSymbol>) top.getAssociatedValue(GLOBAL_TABLE_KEY);
         if (map == null) {

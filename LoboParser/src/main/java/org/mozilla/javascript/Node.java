@@ -7,7 +7,9 @@
 package org.mozilla.javascript;
 
 import java.math.BigInteger;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.NoSuchElementException;
 import org.mozilla.javascript.ast.Comment;
 import org.mozilla.javascript.ast.FunctionNode;
@@ -60,11 +62,12 @@ public class Node implements Iterable<Node> {
             DESTRUCTURING_PARAMS = 23,
             JSDOC_PROP = 24,
             EXPRESSION_CLOSURE_PROP = 25, // JS 1.8 expression closure pseudo-return
-            SHORTHAND_PROPERTY_NAME = 26,
-            ARROW_FUNCTION_PROP = 27,
-            TEMPLATE_LITERAL_PROP = 28,
-            TRAILING_COMMA = 29,
-            LAST_PROP = 29;
+            ARROW_FUNCTION_PROP = 26,
+            TEMPLATE_LITERAL_PROP = 27,
+            TRAILING_COMMA = 28,
+            OBJECT_LITERAL_DESTRUCTURING = 29,
+            OPTIONAL_CHAINING = 30,
+            LAST_PROP = OPTIONAL_CHAINING;
 
     // values of ISNUMBER_PROP to specify
     // which of the children are Number types
@@ -115,24 +118,24 @@ public class Node implements Iterable<Node> {
         right.next = null;
     }
 
-    public Node(int nodeType, int line) {
+    public Node(int nodeType, int line, int column) {
         type = nodeType;
-        lineno = line;
+        setLineColumnNumber(line, column);
     }
 
-    public Node(int nodeType, Node child, int line) {
+    public Node(int nodeType, Node child, int line, int column) {
         this(nodeType, child);
-        lineno = line;
+        setLineColumnNumber(line, column);
     }
 
-    public Node(int nodeType, Node left, Node right, int line) {
+    public Node(int nodeType, Node left, Node right, int line, int column) {
         this(nodeType, left, right);
-        lineno = line;
+        setLineColumnNumber(line, column);
     }
 
-    public Node(int nodeType, Node left, Node mid, Node right, int line) {
+    public Node(int nodeType, Node left, Node mid, Node right, int line, int column) {
         this(nodeType, left, mid, right);
-        lineno = line;
+        setLineColumnNumber(line, column);
     }
 
     public static Node newNumber(double number) {
@@ -291,6 +294,7 @@ public class Node implements Iterable<Node> {
     }
 
     public void replaceChild(Node child, Node newChild) {
+        if (child == newChild) return;
         newChild.next = child.next;
         if (child == first) {
             first = newChild;
@@ -367,7 +371,7 @@ public class Node implements Iterable<Node> {
         }
     }
 
-    /** Returns an {@link java.util.Iterator} over the node's children. */
+    /** Returns an {@link Iterator} over the node's children. */
     @Override
     public Iterator<Node> iterator() {
         return new NodeIterator();
@@ -432,6 +436,8 @@ public class Node implements Iterable<Node> {
                     return "template_literal";
                 case TRAILING_COMMA:
                     return "trailing comma";
+                case OPTIONAL_CHAINING:
+                    return "optional_chaining";
 
                 default:
                     Kit.codeBug();
@@ -525,8 +531,9 @@ public class Node implements Iterable<Node> {
         return lineno;
     }
 
-    public void setLineno(int lineno) {
+    public void setLineColumnNumber(int lineno, int column) {
         this.lineno = lineno;
+        this.column = column;
     }
 
     /** Can only be called when <code>getType() == Token.NUMBER</code> */
@@ -805,7 +812,7 @@ public class Node implements Iterable<Node> {
         Node n;
         int rv = END_DROPS_OFF;
 
-        // check each statment and if the statement can continue onto the next
+        // check each statement and if the statement can continue onto the next
         // one, then check the next statement
         for (n = first; ((rv & END_DROPS_OFF) != 0) && n != null; n = n.next) {
             rv &= ~END_DROPS_OFF;
@@ -931,11 +938,15 @@ public class Node implements Iterable<Node> {
             case Token.ASSIGN_DIV:
             case Token.ASSIGN_MOD:
             case Token.ASSIGN_BITOR:
+            case Token.ASSIGN_LOGICAL_OR:
             case Token.ASSIGN_BITXOR:
             case Token.ASSIGN_BITAND:
+            case Token.ASSIGN_LOGICAL_AND:
             case Token.ASSIGN_LSH:
             case Token.ASSIGN_RSH:
             case Token.ASSIGN_URSH:
+            case Token.ASSIGN_EXP:
+            case Token.ASSIGN_NULLISH:
             case Token.ENTERWITH:
             case Token.LEAVEWITH:
             case Token.RETURN:
@@ -1028,13 +1039,13 @@ public class Node implements Iterable<Node> {
     public String toString() {
         if (Token.printTrees) {
             StringBuilder sb = new StringBuilder();
-            toString(new ObjToIntMap(), sb);
+            toString(new HashMap<>(), sb);
             return sb.toString();
         }
         return String.valueOf(type);
     }
 
-    private void toString(ObjToIntMap printIds, StringBuilder sb) {
+    private void toString(Map<Node, Integer> printIds, StringBuilder sb) {
         if (Token.printTrees) {
             sb.append(Token.name(type));
             if (this instanceof Name) {
@@ -1056,8 +1067,8 @@ public class Node implements Iterable<Node> {
                     }
                     sb.append(" [source name: ");
                     sb.append(sof.getSourceName());
-                    sb.append("] [encoded source length: ");
-                    sb.append(sof.getEncodedSourceEnd() - sof.getEncodedSourceStart());
+                    sb.append("] [raw source length: ");
+                    sb.append(sof.getRawSourceEnd() - sof.getRawSourceStart());
                     sb.append("] [base line: ");
                     sb.append(sof.getBaseLineno());
                     sb.append("] [end line: ");
@@ -1197,10 +1208,10 @@ public class Node implements Iterable<Node> {
     }
 
     private static void toStringTreeHelper(
-            ScriptNode treeTop, Node n, ObjToIntMap printIds, int level, StringBuilder sb) {
+            ScriptNode treeTop, Node n, Map<Node, Integer> printIds, int level, StringBuilder sb) {
         if (Token.printTrees) {
             if (printIds == null) {
-                printIds = new ObjToIntMap();
+                printIds = new HashMap<>();
                 generatePrintIds(treeTop, printIds);
             }
             for (int i = 0; i != level; ++i) {
@@ -1220,7 +1231,7 @@ public class Node implements Iterable<Node> {
         }
     }
 
-    private static void generatePrintIds(Node n, ObjToIntMap map) {
+    private static void generatePrintIds(Node n, Map<Node, Integer> map) {
         if (Token.printTrees) {
             map.put(n, map.size());
             for (Node cursor = n.getFirstChild(); cursor != null; cursor = cursor.getNext()) {
@@ -1229,10 +1240,10 @@ public class Node implements Iterable<Node> {
         }
     }
 
-    private static void appendPrintId(Node n, ObjToIntMap printIds, StringBuilder sb) {
+    private static void appendPrintId(Node n, Map<Node, Integer> printIds, StringBuilder sb) {
         if (Token.printTrees) {
             if (n != null) {
-                int id = printIds.get(n, -1);
+                int id = printIds.getOrDefault(n, -1);
                 sb.append('#');
                 if (id != -1) {
                     sb.append(id + 1);
@@ -1243,11 +1254,21 @@ public class Node implements Iterable<Node> {
         }
     }
 
+    /**
+     * @return the column of where a Node is defined in source. If the column is -1, it was never
+     *     initialized. One-based.
+     *     <p>May be overridden by sub classes
+     */
+    public int getColumn() {
+        return column;
+    }
+
     protected int type = Token.ERROR; // type of the node, e.g. Token.NAME
     protected Node next; // next sibling
     protected Node first; // first element of a linked list of children
     protected Node last; // last element of a linked list of children
     protected int lineno = -1;
+    private int column = -1;
 
     /**
      * Linked list of properties. Since vast majority of nodes would have no more then 2 properties,

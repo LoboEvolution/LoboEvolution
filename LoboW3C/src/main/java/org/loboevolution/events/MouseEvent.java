@@ -224,9 +224,9 @@ public interface MouseEvent extends UIEvent {
      * @see <a href="https://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-Event-initMouseEvent">MouseEvent.initMouseEvent() - Document Object Model (DOM) Level 2 Events Specification</a>
      */
     void initMouseEvent(String typeArg, Boolean bubblesArg,
-                        Boolean cancelableArg, Window viewArg, Double detailArg, Double screenXArg,
-                        Double screenYArg, Double clientXArg, Double clientYArg, Boolean ctrlKeyArg, Boolean altKeyArg,
-                        Boolean shiftKeyArg, Boolean metaKeyArg, Double buttonArg,
+                        Boolean cancelableArg, Window viewArg, Integer detailArg, Integer screenXArg,
+                        Integer screenYArg, Integer clientXArg, Integer clientYArg, Boolean ctrlKeyArg, Boolean altKeyArg,
+                        Boolean shiftKeyArg, Boolean metaKeyArg, Integer buttonArg,
                         EventTarget relatedTargetArg);
 
     /**
@@ -237,9 +237,9 @@ public interface MouseEvent extends UIEvent {
      * @see <a href="https://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-Event-initMouseEvent">MouseEvent.initMouseEvent() - Document Object Model (DOM) Level 2 Events Specification</a>
      */
     void initMouseEvent(String typeArg, Boolean bubblesArg,
-                        Boolean cancelableArg, Window viewArg, Double detailArg, Double screenXArg,
-                        Double screenYArg, Double clientXArg, Double clientYArg, Boolean ctrlKeyArg, Boolean altKeyArg,
-                        Boolean shiftKeyArg, Boolean metaKeyArg, Double buttonArg);
+                        Boolean cancelableArg, Window viewArg, Integer detailArg, Integer screenXArg,
+                        Integer screenYArg, Integer clientXArg, Integer clientYArg, Boolean ctrlKeyArg, Boolean altKeyArg,
+                        Boolean shiftKeyArg, Boolean metaKeyArg, Integer buttonArg);
 
     /**
      * The MouseEvent.initMouseEvent() method initializes the value of a mouse event once it's been created (normally using the Document.createEvent() method).
@@ -249,8 +249,8 @@ public interface MouseEvent extends UIEvent {
      * @see <a href="https://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-Event-initMouseEvent">MouseEvent.initMouseEvent() - Document Object Model (DOM) Level 2 Events Specification</a>
      */
     void initMouseEvent(String typeArg, Boolean bubblesArg,
-                        Boolean cancelableArg, Window viewArg, Double detailArg, Double screenXArg,
-                        Double screenYArg, Double clientXArg, Double clientYArg, Boolean ctrlKeyArg, Boolean altKeyArg,
+                        Boolean cancelableArg, Window viewArg, Integer detailArg, Integer screenXArg,
+                        Integer screenYArg, Integer clientXArg, Integer clientYArg, Boolean ctrlKeyArg, Boolean altKeyArg,
                         Boolean shiftKeyArg, Boolean metaKeyArg);
 
     /**
@@ -261,8 +261,8 @@ public interface MouseEvent extends UIEvent {
      * @see <a href="https://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-Event-initMouseEvent">MouseEvent.initMouseEvent() - Document Object Model (DOM) Level 2 Events Specification</a>
      */
     void initMouseEvent(String typeArg, Boolean bubblesArg,
-                        Boolean cancelableArg, Window viewArg, Double detailArg, Double screenXArg,
-                        Double screenYArg, Double clientXArg, Double clientYArg, Boolean ctrlKeyArg, Boolean altKeyArg,
+                        Boolean cancelableArg, Window viewArg, Integer detailArg, Integer screenXArg,
+                        Integer screenYArg, Integer clientXArg, Integer clientYArg, Boolean ctrlKeyArg, Boolean altKeyArg,
                         Boolean shiftKeyArg);
 
     /**
@@ -273,8 +273,8 @@ public interface MouseEvent extends UIEvent {
      * @see <a href="https://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-Event-initMouseEvent">MouseEvent.initMouseEvent() - Document Object Model (DOM) Level 2 Events Specification</a>
      */
     void initMouseEvent(String typeArg, Boolean bubblesArg,
-                        Boolean cancelableArg, Window viewArg, Double detailArg, Double screenXArg,
-                        Double screenYArg, Double clientXArg, Double clientYArg, Boolean ctrlKeyArg, Boolean altKeyArg);
+                        Boolean cancelableArg, Window viewArg, Integer detailArg, Integer screenXArg,
+                        Integer screenYArg, Integer clientXArg, Integer clientYArg, Boolean ctrlKeyArg, Boolean altKeyArg);
 
     /**
      * The MouseEvent.initMouseEvent() method initializes the value of a mouse event once it's been created (normally using the Document.createEvent() method).
@@ -284,8 +284,8 @@ public interface MouseEvent extends UIEvent {
      * @see <a href="https://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-Event-initMouseEvent">MouseEvent.initMouseEvent() - Document Object Model (DOM) Level 2 Events Specification</a>
      */
     void initMouseEvent(String typeArg, Boolean bubblesArg,
-                        Boolean cancelableArg, Window viewArg, Double detailArg, Double screenXArg,
-                        Double screenYArg, Double clientXArg, Double clientYArg, Boolean ctrlKeyArg);
+                        Boolean cancelableArg, Window viewArg, Integer detailArg, Integer screenXArg,
+                        Integer screenYArg, Integer clientXArg, Integer clientYArg, Boolean ctrlKeyArg);
 
     /**
      * The MouseEvent.initMouseEvent() method initializes the value of a mouse event once it's been created (normally using the Document.createEvent() method).
@@ -295,8 +295,8 @@ public interface MouseEvent extends UIEvent {
      * @see <a href="https://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-Event-initMouseEvent">MouseEvent.initMouseEvent() - Document Object Model (DOM) Level 2 Events Specification</a>
      */
     void initMouseEvent(String typeArg, Boolean bubblesArg,
-                        Boolean cancelableArg, Window viewArg, Double detailArg, Double screenXArg,
-                        Double screenYArg, Double clientXArg, Double clientYArg);
+                        Boolean cancelableArg, Window viewArg, Integer detailArg, Integer screenXArg,
+                        Integer screenYArg, Integer clientXArg, Integer clientYArg);
 
     /**
      * The MouseEvent.initMouseEvent() method initializes the value of a mouse event once it's been created (normally using the Document.createEvent() method).
@@ -306,8 +306,8 @@ public interface MouseEvent extends UIEvent {
      * @see <a href="https://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-Event-initMouseEvent">MouseEvent.initMouseEvent() - Document Object Model (DOM) Level 2 Events Specification</a>
      */
     void initMouseEvent(String typeArg, Boolean bubblesArg,
-                        Boolean cancelableArg, Window viewArg, Double detailArg, Double screenXArg,
-                        Double screenYArg, Double clientXArg);
+                        Boolean cancelableArg, Window viewArg, Integer detailArg, Integer screenXArg,
+                        Integer screenYArg, Integer clientXArg);
 
     /**
      * The MouseEvent.initMouseEvent() method initializes the value of a mouse event once it's been created (normally using the Document.createEvent() method).
@@ -317,8 +317,8 @@ public interface MouseEvent extends UIEvent {
      * @see <a href="https://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-Event-initMouseEvent">MouseEvent.initMouseEvent() - Document Object Model (DOM) Level 2 Events Specification</a>
      */
     void initMouseEvent(String typeArg, Boolean bubblesArg,
-                        Boolean cancelableArg, Window viewArg, Double detailArg, Double screenXArg,
-                        Double screenYArg);
+                        Boolean cancelableArg, Window viewArg, Integer detailArg, Integer screenXArg,
+                        Integer screenYArg);
 
     /**
      * The MouseEvent.initMouseEvent() method initializes the value of a mouse event once it's been created (normally using the Document.createEvent() method).
@@ -328,7 +328,7 @@ public interface MouseEvent extends UIEvent {
      * @see <a href="https://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-Event-initMouseEvent">MouseEvent.initMouseEvent() - Document Object Model (DOM) Level 2 Events Specification</a>
      */
     void initMouseEvent(String typeArg, Boolean bubblesArg,
-                        Boolean cancelableArg, Window viewArg, Double detailArg, Double screenXArg);
+                        Boolean cancelableArg, Window viewArg, Integer detailArg, Integer screenXArg);
 
     /**
      * The MouseEvent.initMouseEvent() method initializes the value of a mouse event once it's been created (normally using the Document.createEvent() method).
@@ -338,7 +338,7 @@ public interface MouseEvent extends UIEvent {
      * @see <a href="https://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-Event-initMouseEvent">MouseEvent.initMouseEvent() - Document Object Model (DOM) Level 2 Events Specification</a>
      */
     void initMouseEvent(String typeArg, Boolean bubblesArg,
-                        Boolean cancelableArg, Window viewArg, Double detailArg);
+                        Boolean cancelableArg, Window viewArg, Integer detailArg);
 
     /**
      * The MouseEvent.initMouseEvent() method initializes the value of a mouse event once it's been created (normally using the Document.createEvent() method).

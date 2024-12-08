@@ -9,7 +9,10 @@ package org.mozilla.javascript.regexp;
 import java.io.Serializable;
 
 import lombok.extern.slf4j.Slf4j;
+import org.mozilla.javascript.AbstractEcmaObjectOperations;
+import org.mozilla.javascript.Constructable;
 import org.mozilla.javascript.Context;
+import org.mozilla.javascript.Function;
 import org.mozilla.javascript.IdFunctionObject;
 import org.mozilla.javascript.IdScriptableObject;
 import org.mozilla.javascript.Kit;
@@ -156,7 +159,7 @@ public class NativeRegExp extends IdScriptableObject {
     /**
      * Gets the value to be returned by the typeof operator called on this object.
      *
-     * @see org.mozilla.javascript.ScriptableObject#getTypeOf()
+     * @see ScriptableObject#getTypeOf()
      * @return "object"
      */
     @Override
@@ -165,22 +168,37 @@ public class NativeRegExp extends IdScriptableObject {
     }
 
     Scriptable compile(Context cx, Scriptable scope, Object[] args) {
-        if (args.length > 0 && args[0] instanceof NativeRegExp) {
-            if (args.length > 1 && args[1] != Undefined.instance) {
-                // report error
+        if (args.length >= 1
+                && args[0] instanceof NativeRegExp
+                && (args.length == 1 || args[1] == Undefined.instance)) {
+            // Avoid recompiling the regex
+            this.re = ((NativeRegExp) args[0]).re;
+        } else {
+            String pattern;
+            if (args.length == 0 || args[0] == Undefined.instance) {
+                pattern = "";
+            } else if (args[0] instanceof NativeRegExp) {
+                pattern = new String(((NativeRegExp) args[0]).re.source);
+            } else {
+                pattern = escapeRegExp(args[0]);
+            }
+
+            String flags =
+                    args.length > 1 && args[1] != Undefined.instance
+                            ? ScriptRuntime.toString(args[1])
+                            : null;
+
+            // Passing a regex and flags is allowed in ES6, but forbidden in ES5 and lower.
+            // Spec ref: 15.10.4.1 in ES5, 22.2.4.1 in ES6
+            if (args.length > 0
+                    && args[0] instanceof NativeRegExp
+                    && flags != null
+                    && cx.getLanguageVersion() < Context.VERSION_ES6) {
                 throw ScriptRuntime.typeErrorById("msg.bad.regexp.compile");
             }
-            NativeRegExp thatObj = (NativeRegExp) args[0];
-            this.re = thatObj.re;
-            setLastIndex(thatObj.lastIndex);
-            return this;
+
+            this.re = compileRE(cx, pattern, flags, false);
         }
-        String s = args.length == 0 || args[0] instanceof Undefined ? "" : escapeRegExp(args[0]);
-        String global =
-                args.length > 1 && args[1] != Undefined.instance
-                        ? ScriptRuntime.toString(args[1])
-                        : null;
-        this.re = compileRE(cx, s, global, false);
         setLastIndex(ScriptRuntime.zeroObj);
         return this;
     }
@@ -305,7 +323,7 @@ public class NativeRegExp extends IdScriptableObject {
         CompilerState state = new CompilerState(cx, regexp.source, length, flags);
         if (flat && length > 0) {
             if (debug) {
-                log.info("flat = {} ", str);
+                log.info("flat = \"{}\"", str);
             }
             state.result = new RENode(REOP_FLAT);
             state.result.chr = state.cpbegin[0];
@@ -333,9 +351,9 @@ public class NativeRegExp extends IdScriptableObject {
         regexp.program[endPC++] = REOP_END;
 
         if (debug) {
-            log.info("Prog. length = {} ", endPC);
+            log.info("Prog. length = {}", endPC);
             for (int i = 0; i < endPC; i++) {
-                log.info("{}", regexp.program[i]);
+                System.out.print(regexp.program[i]);
                 if (i < (endPC - 1)) System.out.print(", ");
             }
         }
@@ -369,7 +387,7 @@ public class NativeRegExp extends IdScriptableObject {
 
         if (debug) {
             if (regexp.anchorCh >= 0) {
-                log.info("Anchor ch = '{}' ", (char) regexp.anchorCh);
+                log.info("Anchor ch = '{}'", (char) regexp.anchorCh);
             }
         }
         return regexp;
@@ -550,106 +568,103 @@ public class NativeRegExp extends IdScriptableObject {
         while (index != end) {
             int localMax = 0;
             nDigits = 2;
-            switch (src[index]) {
-                case '\\':
-                    ++index;
-                    c = src[index++];
-                    switch (c) {
-                        case 'b':
-                            localMax = 0x8;
-                            break;
-                        case 'f':
-                            localMax = 0xC;
-                            break;
-                        case 'n':
-                            localMax = 0xA;
-                            break;
-                        case 'r':
-                            localMax = 0xD;
-                            break;
-                        case 't':
-                            localMax = 0x9;
-                            break;
-                        case 'v':
-                            localMax = 0xB;
-                            break;
-                        case 'c':
-                            if ((index < end) && isControlLetter(src[index]))
-                                localMax = (char) (src[index++] & 0x1F);
-                            else --index;
-                            localMax = '\\';
-                            break;
-                        case 'u':
-                            nDigits += 2;
-                            // fall through
-                        case 'x':
-                            n = 0;
-                            for (i = 0; (i < nDigits) && (index < end); i++) {
-                                c = src[index++];
-                                n = Kit.xDigitToInt(c, n);
-                                if (n < 0) {
-                                    // Back off to accepting the original
-                                    // '\' as a literal
-                                    index -= (i + 1);
-                                    n = '\\';
-                                    break;
-                                }
+            if (src[index] == '\\') {
+                ++index;
+                c = src[index++];
+                switch (c) {
+                    case 'b':
+                        localMax = 0x8;
+                        break;
+                    case 'f':
+                        localMax = 0xC;
+                        break;
+                    case 'n':
+                        localMax = 0xA;
+                        break;
+                    case 'r':
+                        localMax = 0xD;
+                        break;
+                    case 't':
+                        localMax = 0x9;
+                        break;
+                    case 'v':
+                        localMax = 0xB;
+                        break;
+                    case 'c':
+                        if ((index < end) && isControlLetter(src[index]))
+                            localMax = (char) (src[index++] & 0x1F);
+                        else --index;
+                        localMax = '\\';
+                        break;
+                    case 'u':
+                        nDigits += 2;
+                    // fall through
+                    case 'x':
+                        n = 0;
+                        for (i = 0; (i < nDigits) && (index < end); i++) {
+                            c = src[index++];
+                            n = Kit.xDigitToInt(c, n);
+                            if (n < 0) {
+                                // Back off to accepting the original
+                                // '\' as a literal
+                                index -= (i + 1);
+                                n = '\\';
+                                break;
                             }
-                            localMax = n;
-                            break;
-                        case 'd':
-                            if (inRange) {
-                                target.bmsize = 65536;
-                                return true;
-                            }
-                            localMax = '9';
-                            break;
-                        case 'D':
-                        case 'w':
-                        case 'W':
-                        case 'S':
-                        case 's':
+                        }
+                        localMax = n;
+                        break;
+                    case 'd':
+                        if (inRange) {
                             target.bmsize = 65536;
                             return true;
+                        }
+                        localMax = '9';
+                        break;
+                    case 'D':
+                    case 'w':
+                    case 'W':
+                    case 'S':
+                    case 's':
+                        target.bmsize = 65536;
+                        return true;
 
-                        case '0':
-                        case '1':
-                        case '2':
-                        case '3':
-                        case '4':
-                        case '5':
-                        case '6':
-                        case '7':
-                            /*
-                             *  This is a non-ECMA extension - decimal escapes (in this
-                             *  case, octal!) are supposed to be an error inside class
-                             *  ranges, but supported here for backwards compatibility.
-                             *
-                             */
-                            n = (c - '0');
+                    case '0':
+                    case '1':
+                    case '2':
+                    case '3':
+                    case '4':
+                    case '5':
+                    case '6':
+                    case '7':
+                        /*
+                         *  This is a non-ECMA extension - decimal escapes (in this
+                         *  case, octal!) are supposed to be an error inside class
+                         *  ranges, but supported here for backwards compatibility.
+                         *
+                         */
+                        n = (c - '0');
+                        c = src[index];
+                        if ('0' <= c && c <= '7') {
+                            index++;
+                            n = 8 * n + (c - '0');
                             c = src[index];
                             if ('0' <= c && c <= '7') {
                                 index++;
-                                n = 8 * n + (c - '0');
-                                c = src[index];
-                                if ('0' <= c && c <= '7') {
-                                    index++;
-                                    i = 8 * n + (c - '0');
-                                    if (i <= 0377) n = i;
-                                    else index--;
-                                }
+                                i = 8 * n + (c - '0');
+                                if (i <= 0377) n = i;
+                                else index--;
                             }
-                            localMax = n;
-                            break;
+                        }
+                        localMax = n;
+                        break;
 
-                        default:
-                            localMax = c;
-                            break;
-                    }
-                    break;
-                default:
-                    localMax = src[index++];
-                    break;
+                    default:
+                        localMax = c;
+                        break;
+                }
+            } else {
+                localMax = src[index++];
             }
             if (inRange) {
                 if (rangeStart > localMax) {
@@ -740,8 +755,7 @@ public class NativeRegExp extends IdScriptableObject {
         state.progLength += 3;
     }
 
-    private static int getDecimalValue(
-            char c, CompilerState state, int maxValue, String overflowMessageId) {
+    private static int getDecimalValue(char c, CompilerState state, String overflowMessageId) {
         boolean overflow = false;
         int start = state.cp;
         char[] src = state.cpbegin;
@@ -753,11 +767,11 @@ public class NativeRegExp extends IdScriptableObject {
             }
             if (!overflow) {
                 int v = value * 10 + (c - '0');
-                if (v < maxValue) {
+                if (v < 65535) {
                     value = v;
                 } else {
                     overflow = true;
-                    value = maxValue;
+                    value = 65535;
                 }
             }
         }
@@ -777,7 +791,7 @@ public class NativeRegExp extends IdScriptableObject {
         int termStart;
 
         switch (c) {
-                /* assertions and atoms */
+            /* assertions and atoms */
             case '^':
                 state.result = new RENode(REOP_BOL);
                 state.progLength++;
@@ -790,7 +804,7 @@ public class NativeRegExp extends IdScriptableObject {
                 if (state.cp < state.cpend) {
                     c = src[state.cp++];
                     switch (c) {
-                            /* assertion escapes */
+                        /* assertion escapes */
                         case 'b':
                             state.result = new RENode(REOP_WBDRY);
                             state.progLength++;
@@ -799,7 +813,7 @@ public class NativeRegExp extends IdScriptableObject {
                             state.result = new RENode(REOP_WNONBDRY);
                             state.progLength++;
                             return true;
-                            /* Decimal escape */
+                        /* Decimal escape */
                         case '0':
                             /*
                              * We're deliberately violating the ECMA 5.1 specification and allow octal
@@ -819,7 +833,7 @@ public class NativeRegExp extends IdScriptableObject {
                                     num = 8 * num + (c - '0');
                                 } else break;
                             }
-                            c = (char) (num);
+                            c = (char) num;
                             doFlat(state, c);
                             break;
                         case '1':
@@ -832,7 +846,7 @@ public class NativeRegExp extends IdScriptableObject {
                         case '8':
                         case '9':
                             termStart = state.cp - 1;
-                            num = getDecimalValue(c, state, 0xFFFF, "msg.overlarge.backref");
+                            num = getDecimalValue(c, state, "msg.overlarge.backref");
                             if (num > state.backReferenceLimit)
                                 reportWarning(state.cx, "msg.bad.backref", "");
                             /*
@@ -857,7 +871,7 @@ public class NativeRegExp extends IdScriptableObject {
                                         num = 8 * num + (c - '0');
                                     } else break;
                                 }
-                                c = (char) (num);
+                                c = (char) num;
                                 doFlat(state, c);
                                 break;
                             }
@@ -869,7 +883,7 @@ public class NativeRegExp extends IdScriptableObject {
                                 state.maxBackReference = num;
                             }
                             break;
-                            /* Control escape */
+                        /* Control escape */
                         case 'f':
                             c = 0xC;
                             doFlat(state, c);
@@ -890,7 +904,7 @@ public class NativeRegExp extends IdScriptableObject {
                             c = 0xB;
                             doFlat(state, c);
                             break;
-                            /* Control letter */
+                        /* Control letter */
                         case 'c':
                             if ((state.cp < state.cpend) && isControlLetter(src[state.cp]))
                                 c = (char) (src[state.cp++] & 0x1F);
@@ -901,10 +915,10 @@ public class NativeRegExp extends IdScriptableObject {
                             }
                             doFlat(state, c);
                             break;
-                            /* UnicodeEscapeSequence */
+                        /* UnicodeEscapeSequence */
                         case 'u':
                             nDigits += 2;
-                            /* fall through */ case 'x': /* HexEscapeSequence */
+                        /* fall through */ case 'x': /* HexEscapeSequence */
                             {
                                 int n = 0;
                                 int i;
@@ -919,11 +933,11 @@ public class NativeRegExp extends IdScriptableObject {
                                         break;
                                     }
                                 }
-                                c = (char) (n);
+                                c = (char) n;
                             }
                             doFlat(state, c);
                             break;
-                            /* Character class escapes */
+                        /* Character class escapes */
                         case 'd':
                             state.result = new RENode(REOP_DIGIT);
                             state.progLength++;
@@ -948,7 +962,7 @@ public class NativeRegExp extends IdScriptableObject {
                             state.result = new RENode(REOP_NONALNUM);
                             state.progLength++;
                             break;
-                            /* IdentityEscape */
+                        /* IdentityEscape */
                         default:
                             state.result = new RENode(REOP_FLAT);
                             state.result.chr = c;
@@ -1092,13 +1106,13 @@ public class NativeRegExp extends IdScriptableObject {
 
                     if (++state.cp < src.length && isDigit(c = src[state.cp])) {
                         ++state.cp;
-                        min = getDecimalValue(c, state, 0xFFFF, "msg.overlarge.min");
+                        min = getDecimalValue(c, state, "msg.overlarge.min");
                         if (state.cp < src.length) {
                             c = src[state.cp];
                             if (c == ',' && ++state.cp < src.length) {
                                 c = src[state.cp];
                                 if (isDigit(c) && ++state.cp < src.length) {
-                                    max = getDecimalValue(c, state, 0xFFFF, "msg.overlarge.max");
+                                    max = getDecimalValue(c, state, "msg.overlarge.max");
                                     c = src[state.cp];
                                     if (min > max) {
                                         String msg =
@@ -1156,7 +1170,7 @@ public class NativeRegExp extends IdScriptableObject {
         if (index < 0) throw Kit.codeBug();
         if (index > 0xFFFF) throw Context.reportRuntimeError("Too complex regexp");
         array[pc] = (byte) (index >> 8);
-        array[pc + 1] = (byte) (index);
+        array[pc + 1] = (byte) index;
         return pc + 2;
     }
 
@@ -1185,7 +1199,7 @@ public class NativeRegExp extends IdScriptableObject {
                     pc += INDEX_LEN;
                     addIndex(program, pc, ignoreCase ? upcase((char) t.index) : t.index);
                     pc += INDEX_LEN;
-                    // fall through to REOP_ALT
+                // fall through to REOP_ALT
                 case REOP_ALT:
                     nextAlt = t.kid2;
                     nextAltFixup = pc; /* address of next alternate */
@@ -1225,7 +1239,7 @@ public class NativeRegExp extends IdScriptableObject {
                         if (t.chr < 256) {
                             if ((state.flags & JSREG_FOLD) != 0) program[pc - 1] = REOP_FLAT1i;
                             else program[pc - 1] = REOP_FLAT1;
-                            program[pc++] = (byte) (t.chr);
+                            program[pc++] = (byte) t.chr;
                         } else {
                             if ((state.flags & JSREG_FOLD) != 0) program[pc - 1] = REOP_UCFLAT1i;
                             else program[pc - 1] = REOP_UCFLAT1;
@@ -1258,11 +1272,11 @@ public class NativeRegExp extends IdScriptableObject {
                     break;
                 case REOP_QUANT:
                     if ((t.min == 0) && (t.max == -1))
-                        program[pc - 1] = (t.greedy) ? REOP_STAR : REOP_MINIMALSTAR;
+                        program[pc - 1] = t.greedy ? REOP_STAR : REOP_MINIMALSTAR;
                     else if ((t.min == 0) && (t.max == 1))
-                        program[pc - 1] = (t.greedy) ? REOP_OPT : REOP_MINIMALOPT;
+                        program[pc - 1] = t.greedy ? REOP_OPT : REOP_MINIMALOPT;
                     else if ((t.min == 1) && (t.max == -1))
-                        program[pc - 1] = (t.greedy) ? REOP_PLUS : REOP_MINIMALPLUS;
+                        program[pc - 1] = t.greedy ? REOP_PLUS : REOP_MINIMALPLUS;
                     else {
                         if (!t.greedy) program[pc - 1] = REOP_MINIMALQUANT;
                         pc = addIndex(program, pc, t.min);
@@ -1414,7 +1428,7 @@ public class NativeRegExp extends IdScriptableObject {
         if (c >= cs.length) {
             throw ScriptRuntime.constructError("SyntaxError", "invalid range in character class");
         }
-        cs.bits[byteIndex] |= 1 << (c & 0x7);
+        cs.bits[byteIndex] |= (byte) (1 << (c & 0x7));
     }
 
     /* Add a character range, c1 to c2 (inclusive) to the RECharSet */
@@ -1428,15 +1442,15 @@ public class NativeRegExp extends IdScriptableObject {
             throw ScriptRuntime.constructError("SyntaxError", "invalid range in character class");
         }
 
-        c1 &= 0x7;
-        c2 &= 0x7;
+        c1 = (char) (c1 & 0x7);
+        c2 = (char) (c2 & 0x7);
 
         if (byteIndex1 == byteIndex2) {
-            cs.bits[byteIndex1] |= ((0xFF) >> (7 - (c2 - c1))) << c1;
+            cs.bits[byteIndex1] |= (byte) ((0xFF >> (7 - (c2 - c1))) << c1);
         } else {
-            cs.bits[byteIndex1] |= 0xFF << c1;
+            cs.bits[byteIndex1] |= (byte) (0xFF << c1);
             for (i = byteIndex1 + 1; i < byteIndex2; i++) cs.bits[i] = (byte) 0xFF;
-            cs.bits[byteIndex2] |= (0xFF) >> (7 - c2);
+            cs.bits[byteIndex2] |= (byte) (0xFF >> (7 - c2));
         }
     }
 
@@ -1468,152 +1482,148 @@ public class NativeRegExp extends IdScriptableObject {
         if (src == end) return;
 
         if (gData.regexp.source[src] == '^') {
-            assert (!charSet.sense);
+            assert !charSet.sense;
             ++src;
         } else {
-            assert (charSet.sense);
+            assert charSet.sense;
         }
 
         while (src != end) {
             nDigits = 2;
-            switch (gData.regexp.source[src]) {
-                case '\\':
-                    ++src;
-                    c = gData.regexp.source[src++];
-                    switch (c) {
-                        case 'b':
-                            thisCh = 0x8;
-                            break;
-                        case 'f':
-                            thisCh = 0xC;
-                            break;
-                        case 'n':
-                            thisCh = 0xA;
-                            break;
-                        case 'r':
-                            thisCh = 0xD;
-                            break;
-                        case 't':
-                            thisCh = 0x9;
-                            break;
-                        case 'v':
-                            thisCh = 0xB;
-                            break;
-                        case 'c':
-                            if ((src < end) && isControlLetter(gData.regexp.source[src]))
-                                thisCh = (char) (gData.regexp.source[src++] & 0x1F);
-                            else {
-                                --src;
-                                thisCh = '\\';
+            if (gData.regexp.source[src] == '\\') {
+                ++src;
+                c = gData.regexp.source[src++];
+                switch (c) {
+                    case 'b':
+                        thisCh = 0x8;
+                        break;
+                    case 'f':
+                        thisCh = 0xC;
+                        break;
+                    case 'n':
+                        thisCh = 0xA;
+                        break;
+                    case 'r':
+                        thisCh = 0xD;
+                        break;
+                    case 't':
+                        thisCh = 0x9;
+                        break;
+                    case 'v':
+                        thisCh = 0xB;
+                        break;
+                    case 'c':
+                        if ((src < end) && isControlLetter(gData.regexp.source[src]))
+                            thisCh = (char) (gData.regexp.source[src++] & 0x1F);
+                        else {
+                            --src;
+                            thisCh = '\\';
+                        }
+                        break;
+                    case 'u':
+                        nDigits += 2;
+                    // fall through
+                    case 'x':
+                        n = 0;
+                        for (i = 0; (i < nDigits) && (src < end); i++) {
+                            c = gData.regexp.source[src++];
+                            int digit = toASCIIHexDigit(c);
+                            if (digit < 0) {
+                                /* back off to accepting the original '\'
+                                 * as a literal
+                                 */
+                                src -= (i + 1);
+                                n = '\\';
+                                break;
                             }
-                            break;
-                        case 'u':
-                            nDigits += 2;
-                            // fall through
-                        case 'x':
-                            n = 0;
-                            for (i = 0; (i < nDigits) && (src < end); i++) {
-                                c = gData.regexp.source[src++];
-                                int digit = toASCIIHexDigit(c);
-                                if (digit < 0) {
-                                    /* back off to accepting the original '\'
-                                     * as a literal
-                                     */
-                                    src -= (i + 1);
-                                    n = '\\';
-                                    break;
-                                }
-                                n = (n << 4) | digit;
-                            }
-                            thisCh = (char) (n);
-                            break;
-                        case '0':
-                        case '1':
-                        case '2':
-                        case '3':
-                        case '4':
-                        case '5':
-                        case '6':
-                        case '7':
-                            /*
-                             *  This is a non-ECMA extension - decimal escapes (in this
-                             *  case, octal!) are supposed to be an error inside class
-                             *  ranges, but supported here for backwards compatibility.
-                             *
-                             */
-                            n = (c - '0');
+                            n = (n << 4) | digit;
+                        }
+                        thisCh = (char) n;
+                        break;
+                    case '0':
+                    case '1':
+                    case '2':
+                    case '3':
+                    case '4':
+                    case '5':
+                    case '6':
+                    case '7':
+                        /*
+                         *  This is a non-ECMA extension - decimal escapes (in this
+                         *  case, octal!) are supposed to be an error inside class
+                         *  ranges, but supported here for backwards compatibility.
+                         *
+                         */
+                        n = (c - '0');
+                        c = gData.regexp.source[src];
+                        if ('0' <= c && c <= '7') {
+                            src++;
+                            n = 8 * n + (c - '0');
                             c = gData.regexp.source[src];
                             if ('0' <= c && c <= '7') {
                                 src++;
-                                n = 8 * n + (c - '0');
-                                c = gData.regexp.source[src];
-                                if ('0' <= c && c <= '7') {
-                                    src++;
-                                    i = 8 * n + (c - '0');
-                                    if (i <= 0377) n = i;
-                                    else src--;
-                                }
+                                i = 8 * n + (c - '0');
+                                if (i <= 0377) n = i;
+                                else src--;
                             }
-                            thisCh = (char) (n);
-                            break;
+                        }
+                        thisCh = (char) n;
+                        break;
 
-                        case 'd':
-                            if (inRange) {
-                                addCharacterToCharSet(charSet, '-');
-                                inRange = false;
-                            }
-                            addCharacterRangeToCharSet(charSet, '0', '9');
-                            continue; /* don't need range processing */
-                        case 'D':
-                            if (inRange) {
-                                addCharacterToCharSet(charSet, '-');
-                                inRange = false;
-                            }
-                            addCharacterRangeToCharSet(charSet, (char) 0, (char) ('0' - 1));
-                            addCharacterRangeToCharSet(
-                                    charSet, (char) ('9' + 1), (char) (charSet.length - 1));
-                            continue;
-                        case 's':
-                            if (inRange) {
-                                addCharacterToCharSet(charSet, '-');
-                                inRange = false;
-                            }
-                            for (i = (charSet.length - 1); i >= 0; i--)
-                                if (isREWhiteSpace(i)) addCharacterToCharSet(charSet, (char) (i));
-                            continue;
-                        case 'S':
-                            if (inRange) {
-                                addCharacterToCharSet(charSet, '-');
-                                inRange = false;
-                            }
-                            for (i = (charSet.length - 1); i >= 0; i--)
-                                if (!isREWhiteSpace(i)) addCharacterToCharSet(charSet, (char) (i));
-                            continue;
-                        case 'w':
-                            if (inRange) {
-                                addCharacterToCharSet(charSet, '-');
-                                inRange = false;
-                            }
-                            for (i = (charSet.length - 1); i >= 0; i--)
-                                if (isWord((char) i)) addCharacterToCharSet(charSet, (char) (i));
-                            continue;
-                        case 'W':
-                            if (inRange) {
-                                addCharacterToCharSet(charSet, '-');
-                                inRange = false;
-                            }
-                            for (i = (charSet.length - 1); i >= 0; i--)
-                                if (!isWord((char) i)) addCharacterToCharSet(charSet, (char) (i));
-                            continue;
-                        default:
-                            thisCh = c;
-                            break;
-                    }
-                    break;
-
-                default:
-                    thisCh = gData.regexp.source[src++];
-                    break;
+                    case 'd':
+                        if (inRange) {
+                            addCharacterToCharSet(charSet, '-');
+                            inRange = false;
+                        }
+                        addCharacterRangeToCharSet(charSet, '0', '9');
+                        continue; /* don't need range processing */
+                    case 'D':
+                        if (inRange) {
+                            addCharacterToCharSet(charSet, '-');
+                            inRange = false;
+                        }
+                        addCharacterRangeToCharSet(charSet, (char) 0, (char) ('0' - 1));
+                        addCharacterRangeToCharSet(
+                                charSet, (char) ('9' + 1), (char) (charSet.length - 1));
+                        continue;
+                    case 's':
+                        if (inRange) {
+                            addCharacterToCharSet(charSet, '-');
+                            inRange = false;
+                        }
+                        for (i = (charSet.length - 1); i >= 0; i--)
+                            if (isREWhiteSpace(i)) addCharacterToCharSet(charSet, (char) i);
+                        continue;
+                    case 'S':
+                        if (inRange) {
+                            addCharacterToCharSet(charSet, '-');
+                            inRange = false;
+                        }
+                        for (i = (charSet.length - 1); i >= 0; i--)
+                            if (!isREWhiteSpace(i)) addCharacterToCharSet(charSet, (char) i);
+                        continue;
+                    case 'w':
+                        if (inRange) {
+                            addCharacterToCharSet(charSet, '-');
+                            inRange = false;
+                        }
+                        for (i = (charSet.length - 1); i >= 0; i--)
+                            if (isWord((char) i)) addCharacterToCharSet(charSet, (char) i);
+                        continue;
+                    case 'W':
+                        if (inRange) {
+                            addCharacterToCharSet(charSet, '-');
+                            inRange = false;
+                        }
+                        for (i = (charSet.length - 1); i >= 0; i--)
+                            if (!isWord((char) i)) addCharacterToCharSet(charSet, (char) i);
+                        continue;
+                    default:
+                        thisCh = c;
+                        break;
+                }
+            } else {
+                thisCh = gData.regexp.source[src++];
             }
             if (inRange) {
                 if ((gData.regexp.flags & JSREG_FOLD) != 0) {
@@ -1889,8 +1899,11 @@ public class NativeRegExp extends IdScriptableObject {
             if (!anchor) return false;
         }
 
+        final boolean instructionCounting = cx.getInstructionObserverThreshold() != 0;
         for (; ; ) {
-            ScriptRuntime.addInstructionCount(cx, 5);
+            if (instructionCounting) {
+                ScriptRuntime.addInstructionCount(cx, 5);
+            }
 
             if (reopIsSimple(op)) {
                 int match = simpleMatch(gData, input, op, program, pc, end, true);
@@ -1928,8 +1941,8 @@ public class NativeRegExp extends IdScriptableObject {
                                 }
                             }
                         }
-                        /* else false thru... */
-                        // fall through
+                    /* else false thru... */
+                    // fall through
                     case REOP_ALT:
                         {
                             int nextpc = pc + getOffset(program, pc);
@@ -2054,28 +2067,28 @@ public class NativeRegExp extends IdScriptableObject {
                             switch (op) {
                                 case REOP_STAR:
                                     greedy = true;
-                                    // fallthrough
+                                // fallthrough
                                 case REOP_MINIMALSTAR:
                                     min = 0;
                                     max = -1;
                                     break;
                                 case REOP_PLUS:
                                     greedy = true;
-                                    // fallthrough
+                                // fallthrough
                                 case REOP_MINIMALPLUS:
                                     min = 1;
                                     max = -1;
                                     break;
                                 case REOP_OPT:
                                     greedy = true;
-                                    // fallthrough
+                                // fallthrough
                                 case REOP_MINIMALOPT:
                                     min = 0;
                                     max = 1;
                                     break;
                                 case REOP_QUANT:
                                     greedy = true;
-                                    // fallthrough
+                                // fallthrough
                                 case REOP_MINIMALQUANT:
                                     min = getOffset(program, pc);
                                     pc += INDEX_LEN;
@@ -2100,22 +2113,20 @@ public class NativeRegExp extends IdScriptableObject {
                                 continuationPc = pc;
                                 /* Step over <parencount>, <parenindex> & <next> */
                                 pc += 3 * INDEX_LEN;
-                                op = program[pc++];
                             } else {
                                 if (min != 0) {
                                     continuationOp = REOP_MINIMALREPEAT;
                                     continuationPc = pc;
                                     /* <parencount> <parenindex> & <next> */
                                     pc += 3 * INDEX_LEN;
-                                    op = program[pc++];
                                 } else {
                                     pushBackTrackState(gData, REOP_MINIMALREPEAT, pc);
                                     popProgState(gData);
                                     pc += 2 * INDEX_LEN; // <parencount> & <parenindex>
                                     pc = pc + getOffset(program, pc);
-                                    op = program[pc++];
                                 }
                             }
+                            op = program[pc++];
                         }
                         continue;
 
@@ -2275,7 +2286,6 @@ public class NativeRegExp extends IdScriptableObject {
                                 for (int k = 0; k < parenCount; k++) {
                                     gData.setParens(parenIndex + k, -1, 0);
                                 }
-                                op = program[pc++];
                             } else {
                                 continuationPc = state.continuationPc;
                                 continuationOp = state.continuationOp;
@@ -2283,8 +2293,8 @@ public class NativeRegExp extends IdScriptableObject {
                                 popProgState(gData);
                                 pc += 2 * INDEX_LEN;
                                 pc = pc + getOffset(program, pc);
-                                op = program[pc++];
                             }
+                            op = program[pc++];
                             continue;
                         }
 
@@ -2677,10 +2687,9 @@ public class NativeRegExp extends IdScriptableObject {
 
     @Override
     protected void setInstanceIdAttributes(int id, int attr) {
-        switch (id) {
-            case Id_lastIndex:
-                lastIndexAttr = attr;
-                return;
+        if (id == Id_lastIndex) {
+            lastIndexAttr = attr;
+            return;
         }
         super.setInstanceIdAttributes(id, attr);
     }
@@ -2689,6 +2698,10 @@ public class NativeRegExp extends IdScriptableObject {
     protected void initPrototypeId(int id) {
         if (id == SymbolId_match) {
             initPrototypeMethod(REGEXP_TAG, id, SymbolKey.MATCH, "[Symbol.match]", 1);
+            return;
+        }
+        if (id == SymbolId_matchAll) {
+            initPrototypeMethod(REGEXP_TAG, id, SymbolKey.MATCH_ALL, "[Symbol.matchAll]", 1);
             return;
         }
         if (id == SymbolId_search) {
@@ -2757,7 +2770,7 @@ public class NativeRegExp extends IdScriptableObject {
                 return realThis(thisObj, f).toString();
 
             case Id_exec:
-                return realThis(thisObj, f).execSub(cx, scope, args, MATCH);
+                return js_exec(cx, scope, thisObj, args);
 
             case Id_test:
                 {
@@ -2771,6 +2784,9 @@ public class NativeRegExp extends IdScriptableObject {
             case SymbolId_match:
                 return realThis(thisObj, f).execSub(cx, scope, args, MATCH);
 
+            case SymbolId_matchAll:
+                return js_SymbolMatchAll(cx, scope, thisObj, args);
+
             case SymbolId_search:
                 Scriptable scriptable =
                         (Scriptable) realThis(thisObj, f).execSub(cx, scope, args, MATCH);
@@ -2779,14 +2795,53 @@ public class NativeRegExp extends IdScriptableObject {
         throw new IllegalArgumentException(String.valueOf(id));
     }
 
+    static Object js_exec(Context cx, Scriptable scope, Scriptable thisObj, Object[] args) {
+        return realThis(thisObj, "exec").execSub(cx, scope, args, MATCH);
+    }
+
+    private Object js_SymbolMatchAll(
+            Context cx, Scriptable scope, Scriptable thisObj, Object[] args) {
+        // See ECMAScript spec 22.2.6.9
+        if (!ScriptRuntime.isObject(thisObj)) {
+            throw ScriptRuntime.typeErrorById("msg.arg.not.object", ScriptRuntime.typeof(thisObj));
+        }
+
+        String s = ScriptRuntime.toString(args.length > 0 ? args[0] : Undefined.instance);
+
+        Scriptable topLevelScope = ScriptableObject.getTopLevelScope(scope);
+        Function defaultConstructor =
+                ScriptRuntime.getExistingCtor(cx, topLevelScope, getClassName());
+        Constructable c =
+                AbstractEcmaObjectOperations.speciesConstructor(cx, thisObj, defaultConstructor);
+
+        String flags = ScriptRuntime.toString(ScriptRuntime.getObjectProp(thisObj, "flags", cx));
+
+        Scriptable matcher = c.construct(cx, scope, new Object[] {thisObj, flags});
+
+        long lastIndex =
+                ScriptRuntime.toLength(ScriptRuntime.getObjectProp(thisObj, "lastIndex", cx));
+        ScriptRuntime.setObjectProp(matcher, "lastIndex", lastIndex, cx);
+        boolean global = flags.indexOf('g') != -1;
+        boolean fullUnicode = flags.indexOf('u') != -1 || flags.indexOf('v') != -1;
+
+        return new NativeRegExpStringIterator(scope, matcher, s, global, fullUnicode);
+    }
+
     private static NativeRegExp realThis(Scriptable thisObj, IdFunctionObject f) {
-        return ensureType(thisObj, NativeRegExp.class, f);
+        return realThis(thisObj, f.getFunctionName());
+    }
+
+    private static NativeRegExp realThis(Scriptable thisObj, String functionName) {
+        return ensureType(thisObj, NativeRegExp.class, functionName);
     }
 
     @Override
     protected int findPrototypeId(Symbol k) {
         if (SymbolKey.MATCH.equals(k)) {
             return SymbolId_match;
+        }
+        if (SymbolKey.MATCH_ALL.equals(k)) {
+            return SymbolId_matchAll;
         }
         if (SymbolKey.SEARCH.equals(k)) {
             return SymbolId_search;
@@ -2830,7 +2885,8 @@ public class NativeRegExp extends IdScriptableObject {
             Id_test = 5,
             Id_prefix = 6,
             SymbolId_match = 7,
-            SymbolId_search = 8,
+            SymbolId_matchAll = 8,
+            SymbolId_search = 9,
             MAX_PROTOTYPE_ID = SymbolId_search;
 
     private RECompiled re;
@@ -2982,7 +3038,7 @@ class REGlobalData {
 
     /** Get start of parenthesis capture contents, -1 for empty. */
     int parensIndex(int i) {
-        return (int) (parens[i]);
+        return (int) parens[i];
     }
 
     /** Get length of parenthesis capture contents. */

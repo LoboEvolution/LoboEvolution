@@ -475,7 +475,7 @@ public class NativeJavaObject implements Scriptable, SymbolScriptable, Wrapper, 
      * Not intended for public use. Callers should use the public API Context.toType.
      *
      * @deprecated as of 1.5 Release 4
-     * @see org.mozilla.javascript.Context#jsToJava(Object, Class)
+     * @see Context#jsToJava(Object, Class)
      */
     @Deprecated
     public static Object coerceType(Class<?> type, Object value) {
@@ -739,7 +739,7 @@ public class NativeJavaObject implements Scriptable, SymbolScriptable, Wrapper, 
             /* Long values cannot be expressed exactly in doubles.
              * We thus use the largest and smallest double value that
              * has a value expressible as a long value. We build these
-             * numerical values from their hexidecimal representations
+             * numerical values from their hexadecimal representations
              * to avoid any problems caused by attempting to parse a
              * decimal representation.
              */
@@ -833,6 +833,7 @@ public class NativeJavaObject implements Scriptable, SymbolScriptable, Wrapper, 
         return (long) d;
     }
 
+    @SuppressWarnings("DoNotCallSuggester")
     static void reportConversionError(Object value, Class<?> type) {
         // It uses String.valueOf(value), not value.toString() since
         // value can be null, bug 282447.
@@ -989,6 +990,7 @@ public class NativeJavaObject implements Scriptable, SymbolScriptable, Wrapper, 
     }
 
     @Override
+    @SuppressWarnings("EqualsGetClass")
     public boolean equals(Object obj) {
         return obj != null
                 && obj.getClass().equals(getClass())

@@ -32,7 +32,7 @@ public interface Script {
      * @param cx the Context associated with the current thread
      * @param scope the scope to execute relative to
      * @return the result of executing the script
-     * @see org.mozilla.javascript.Context#initStandardObjects()
+     * @see Context#initStandardObjects()
      */
     public Object exec(Context cx, Scriptable scope);
 }

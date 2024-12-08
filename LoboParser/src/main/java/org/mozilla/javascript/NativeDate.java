@@ -6,9 +6,15 @@
 
 package org.mozilla.javascript;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
 /**
  * This class implements the Date native object. See ECMA 15.9.
@@ -17,11 +23,11 @@ import java.util.Date;
  *     <p>Significant parts of this code are adapted from the venerable jsdate.cpp (also Mozilla):
  *     https://dxr.mozilla.org/mozilla-central/source/js/src/jsdate.cpp
  */
+@SuppressWarnings("AndroidJdkLibsChecker")
 final class NativeDate extends IdScriptableObject {
     private static final long serialVersionUID = -8307438915861678966L;
 
     private static final Object DATE_TAG = "Date";
-
     private static final String js_NaN_date_str = "Invalid Date";
 
     static void init(Scriptable scope, boolean sealed) {
@@ -249,6 +255,10 @@ final class NativeDate extends IdScriptableObject {
                 arity = 1;
                 s = "toJSON";
                 break;
+            case SymbolId_toPrimitive:
+                initPrototypeMethod(
+                        DATE_TAG, id, SymbolKey.TO_PRIMITIVE, "[Symbol.toPrimitive]", 1);
+                return;
             default:
                 throw new IllegalArgumentException(String.valueOf(id));
         }
@@ -317,6 +327,24 @@ final class NativeDate extends IdScriptableObject {
                     }
                     return result;
                 }
+            case SymbolId_toPrimitive:
+                {
+                    Scriptable o = ScriptRuntime.toObject(cx, scope, thisObj);
+                    final Object arg0 = args.length > 0 ? args[0] : Undefined.instance;
+                    final String hint = (arg0 instanceof CharSequence) ? arg0.toString() : null;
+                    Class<?> typeHint = null;
+                    if ("string".equals(hint) || "default".equals(hint)) {
+                        typeHint = ScriptRuntime.StringClass;
+                    } else if ("number".equals(hint)) {
+                        typeHint = ScriptRuntime.NumberClass;
+                    }
+                    if (typeHint == null) {
+                        throw ScriptRuntime.typeErrorById(
+                                "msg.invalid.toprimitive.hint", ScriptRuntime.toString(arg0));
+                    }
+
+                    return ScriptableObject.getDefaultValue(o, typeHint);
+                }
         }
 
         // The rest of Date.prototype methods require thisObj to be Date
@@ -336,7 +364,7 @@ final class NativeDate extends IdScriptableObject {
             case Id_toLocaleTimeString:
             case Id_toLocaleDateString:
                 if (!Double.isNaN(t)) {
-                    return toLocale_helper(t, id);
+                    return toLocale_helper(cx, t, id, args);
                 }
                 return js_NaN_date_str;
 
@@ -529,10 +557,10 @@ final class NativeDate extends IdScriptableObject {
      *  floor((1968 - 1969) / 4) == -1
      */
     private static double DayFromYear(double y) {
-        return ((365 * ((y) - 1970)
-                + Math.floor(((y) - 1969) / 4.0)
-                - Math.floor(((y) - 1901) / 100.0)
-                + Math.floor(((y) - 1601) / 400.0)));
+        return (365 * (y - 1970))
+                + Math.floor((y - 1969) / 4.0)
+                - Math.floor((y - 1901) / 100.0)
+                + Math.floor((y - 1601) / 400.0);
     }
 
     private static double TimeFromYear(double y) {
@@ -1348,10 +1376,8 @@ final class NativeDate extends IdScriptableObject {
                 t = MakeDate(day, TimeWithinDay(t));
             }
             result.append(" (");
-            Date date = new Date((long) t);
-            synchronized (timeZoneFormatter) {
-                result.append(timeZoneFormatter.format(date));
-            }
+            final ZoneId zoneid = cx.getTimeZone().toZoneId();
+            result.append(timeZoneFormatter.format(Instant.ofEpochMilli((long) t).atZone(zoneid)));
             result.append(')');
         }
         return result.toString();
@@ -1370,21 +1396,19 @@ final class NativeDate extends IdScriptableObject {
 
         // if called with just one arg -
         if (args.length == 1) {
-            Object arg0 = args[0];
-            if (arg0 instanceof NativeDate) {
-                obj.date = ((NativeDate) arg0).date;
+            final Object value = args[0];
+            if (value instanceof NativeDate) {
+                obj.date = ((NativeDate) value).date;
                 return obj;
             }
-            if (arg0 instanceof Scriptable) {
-                arg0 = ((Scriptable) arg0).getDefaultValue(null);
-            }
-            double date;
-            if (arg0 instanceof CharSequence) {
+            final Object v = ScriptRuntime.toPrimitive(value);
+            final double date;
+            if (v instanceof CharSequence) {
                 // it's a string; parse it.
-                date = date_parseString(cx, arg0.toString());
+                date = date_parseString(cx, v.toString());
             } else {
                 // if it's not a string, use it as a millisecond date
-                date = ScriptRuntime.toNumber(arg0);
+                date = ScriptRuntime.toNumber(v);
             }
             obj.date = TimeClip(date);
             return obj;
@@ -1399,25 +1423,59 @@ final class NativeDate extends IdScriptableObject {
         return obj;
     }
 
-    private static String toLocale_helper(double t, int methodId) {
-        DateFormat formatter;
+    private static String toLocale_helper(Context cx, double t, int methodId, Object[] args) {
+        DateTimeFormatter formatter;
         switch (methodId) {
             case Id_toLocaleString:
-                formatter = localeDateTimeFormatter;
+                formatter =
+                        cx.getLanguageVersion() >= Context.VERSION_ES6
+                                ? localeDateTimeFormatterES6
+                                : localeDateTimeFormatter;
                 break;
             case Id_toLocaleTimeString:
-                formatter = localeTimeFormatter;
+                formatter =
+                        cx.getLanguageVersion() >= Context.VERSION_ES6
+                                ? localeTimeFormatterES6
+                                : localeTimeFormatter;
                 break;
             case Id_toLocaleDateString:
-                formatter = localeDateFormatter;
+                formatter =
+                        cx.getLanguageVersion() >= Context.VERSION_ES6
+                                ? localeDateFormatterES6
+                                : localeDateFormatter;
                 break;
             default:
                 throw new AssertionError(); // unreachable
         }
 
-        synchronized (formatter) {
-            return formatter.format(new Date((long) t));
+        final List<String> languageTags = new ArrayList<>();
+        if (args.length != 0) {
+            // we use the 'locales' argument but ignore the second 'options' argument as per spec of
+            // an
+            // implementation that has no Intl.DateTimeFormat support
+            if (args[0] instanceof NativeArray) {
+                final NativeArray array = (NativeArray) args[0];
+                for (Object languageTag : array) {
+                    languageTags.add(Context.toString(languageTag));
+                }
+            } else {
+                languageTags.add(Context.toString(args[0]));
+            }
         }
+
+        final List<Locale> availableLocales = Arrays.asList(Locale.getAvailableLocales());
+        for (String languageTag : languageTags) {
+            Locale locale = Locale.forLanguageTag(languageTag);
+            if (availableLocales.contains(locale)) {
+                formatter = formatter.withLocale(locale);
+                break;
+            }
+        }
+
+        final ZoneId zoneid = cx.getTimeZone().toZoneId();
+        final String formatted = formatter.format(Instant.ofEpochMilli((long) t).atZone(zoneid));
+        // jdk 21 uses a nnbsp in front of 'PM'
+        return formatted.replace("\u202f", " ");
     }
 
     private static String js_toUTCString(double date) {
@@ -1546,28 +1604,28 @@ final class NativeDate extends IdScriptableObject {
         switch (methodId) {
             case Id_setUTCMilliseconds:
                 local = false;
-                // fallthrough
+            // fallthrough
             case Id_setMilliseconds:
                 maxargs = 1;
                 break;
 
             case Id_setUTCSeconds:
                 local = false;
-                // fallthrough
+            // fallthrough
             case Id_setSeconds:
                 maxargs = 2;
                 break;
 
             case Id_setUTCMinutes:
                 local = false;
-                // fallthrough
+            // fallthrough
             case Id_setMinutes:
                 maxargs = 3;
                 break;
 
             case Id_setUTCHours:
                 local = false;
-                // fallthrough
+            // fallthrough
             case Id_setHours:
                 maxargs = 4;
                 break;
@@ -1633,21 +1691,21 @@ final class NativeDate extends IdScriptableObject {
         switch (methodId) {
             case Id_setUTCDate:
                 local = false;
-                // fallthrough
+            // fallthrough
             case Id_setDate:
                 maxargs = 1;
                 break;
 
             case Id_setUTCMonth:
                 local = false;
-                // fallthrough
+            // fallthrough
             case Id_setMonth:
                 maxargs = 2;
                 break;
 
             case Id_setUTCFullYear:
                 local = false;
-                // fallthrough
+            // fallthrough
             case Id_setFullYear:
                 maxargs = 3;
                 break;
@@ -1862,6 +1920,14 @@ final class NativeDate extends IdScriptableObject {
         return id;
     }
 
+    @Override
+    protected int findPrototypeId(Symbol key) {
+        if (SymbolKey.TO_PRIMITIVE.equals(key)) {
+            return SymbolId_toPrimitive;
+        }
+        return 0;
+    }
+
     private static final int ConstructorId_now = -3,
             ConstructorId_parse = -2,
             ConstructorId_UTC = -1,
@@ -1912,16 +1978,27 @@ final class NativeDate extends IdScriptableObject {
             Id_setYear = 45,
             Id_toISOString = 46,
             Id_toJSON = 47,
-            MAX_PROTOTYPE_ID = Id_toJSON;
+            SymbolId_toPrimitive = 48,
+            MAX_PROTOTYPE_ID = SymbolId_toPrimitive;
 
     private static final int Id_toGMTString = Id_toUTCString; // Alias, see Ecma B.2.6
 
-    // not thread safe
-    private static final DateFormat timeZoneFormatter = new SimpleDateFormat("zzz");
-    private static final DateFormat localeDateTimeFormatter =
-            new SimpleDateFormat("MMMM d, yyyy h:mm:ss a z");
-    private static final DateFormat localeDateFormatter = new SimpleDateFormat("MMMM d, yyyy");
-    private static final DateFormat localeTimeFormatter = new SimpleDateFormat("h:mm:ss a z");
+    private static final DateTimeFormatter timeZoneFormatter = DateTimeFormatter.ofPattern("zzz");
 
+    private static final DateTimeFormatter localeDateTimeFormatter =
+            DateTimeFormatter.ofPattern("MMMM d, yyyy h:mm:ss a z");
+    private static final DateTimeFormatter localeDateFormatter =
+            DateTimeFormatter.ofPattern("MMMM d, yyyy");
+    private static final DateTimeFormatter localeTimeFormatter =
+            DateTimeFormatter.ofPattern("h:mm:ss a z");
+
+    // use FormatStyle.SHORT for these as per spec of an implementation that has no
+    // Intl.DateTimeFormat support
+    private static final DateTimeFormatter localeDateTimeFormatterES6 =
+            DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT);
+    private static final DateTimeFormatter localeDateFormatterES6 =
+            DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT);
+    private static final DateTimeFormatter localeTimeFormatterES6 =
+            DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT);
     private double date;
 }

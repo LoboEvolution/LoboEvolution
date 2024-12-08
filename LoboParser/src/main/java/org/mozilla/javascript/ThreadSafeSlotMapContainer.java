@@ -13,6 +13,7 @@ import java.util.concurrent.locks.StampedLock;
  * This class extends the SlotMapContainer so that we have thread-safe access to all the properties
  * of an object.
  */
+@SuppressWarnings("AndroidJdkLibsChecker")
 class ThreadSafeSlotMapContainer extends SlotMapContainer {
 
     private final StampedLock lock = new StampedLock();
@@ -41,7 +42,7 @@ class ThreadSafeSlotMapContainer extends SlotMapContainer {
 
     @Override
     public int dirtySize() {
-        assert (lock.isReadLocked());
+        assert lock.isReadLocked();
         return map.size();
     }
 
@@ -73,10 +74,10 @@ class ThreadSafeSlotMapContainer extends SlotMapContainer {
     }
 
     @Override
-    public void replace(Slot oldSlot, Slot newSlot) {
+    public <S extends Slot> S compute(Object key, int index, SlotComputer<S> c) {
         final long stamp = lock.writeLock();
         try {
-            map.replace(oldSlot, newSlot);
+            return map.compute(key, index, c);
         } finally {
             lock.unlockWrite(stamp);
         }
@@ -109,16 +110,6 @@ class ThreadSafeSlotMapContainer extends SlotMapContainer {
         }
     }
 
-    @Override
-    public void remove(Object key, int index) {
-        final long stamp = lock.writeLock();
-        try {
-            map.remove(key, index);
-        } finally {
-            lock.unlockWrite(stamp);
-        }
-    }
-
     /**
      * Take out a read lock on the slot map, if locking is implemented. The caller MUST call this
      * method before using the iterator, and MUST NOT call this method otherwise.
@@ -140,7 +131,7 @@ class ThreadSafeSlotMapContainer extends SlotMapContainer {
 
     @Override
     public Iterator<Slot> iterator() {
-        assert (lock.isReadLocked());
+        assert lock.isReadLocked();
         return map.iterator();
     }
 
@@ -150,7 +141,7 @@ class ThreadSafeSlotMapContainer extends SlotMapContainer {
      */
     @Override
     protected void checkMapSize() {
-        assert (lock.isWriteLocked());
+        assert lock.isWriteLocked();
         super.checkMapSize();
     }
 }

@@ -9,12 +9,11 @@ package org.mozilla.classfile;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
-
-import lombok.extern.slf4j.Slf4j;
+import java.util.HashMap;
 import org.mozilla.javascript.Kit;
-import org.mozilla.javascript.ObjArray;
-import org.mozilla.javascript.UintMap;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * ClassFileWriter
@@ -214,7 +213,7 @@ public class ClassFileWriter {
         int descriptorIndex = itsConstantPool.addUtf8(type);
         int[] chunk = {nameIndex, descriptorIndex, startPC, register};
         if (itsVarDescriptors == null) {
-            itsVarDescriptors = new ObjArray();
+            itsVarDescriptors = new ArrayList<>();
         }
         itsVarDescriptors.add(chunk);
     }
@@ -233,7 +232,7 @@ public class ClassFileWriter {
         short methodNameIndex = itsConstantPool.addUtf8(methodName);
         short typeIndex = itsConstantPool.addUtf8(type);
         itsCurrentMethod = new ClassFileMethod(methodName, methodNameIndex, type, typeIndex, flags);
-        itsJumpFroms = new UintMap();
+        itsJumpFroms = new HashMap<>();
         itsMethods.add(itsCurrentMethod);
         addSuperBlockStart(0);
     }
@@ -247,7 +246,7 @@ public class ClassFileWriter {
      * @param maxLocals the maximum number of local variable slots (a.k.a. Java registers) used by
      *     the method
      */
-    public void stopMethod(short maxLocals) {
+    public void stopMethod(int maxLocals) {
         if (itsCurrentMethod == null) throw new IllegalStateException("No method to stop");
 
         fixLabelGotos();
@@ -453,7 +452,7 @@ public class ClassFileWriter {
                 // generated and Sun's verifier is expecting type state to be
                 // placed even at dead blocks of code.
                 addSuperBlockStart(itsCodeBufferTop + 3);
-                // fall through...
+            // fall through...
             case ByteCode.IFEQ:
             case ByteCode.IFNE:
             case ByteCode.IFLT:
@@ -826,7 +825,7 @@ public class ClassFileWriter {
         BootstrapEntry bsmEntry = new BootstrapEntry(bsm, bsmArgs);
 
         if (itsBootstrapMethods == null) {
-            itsBootstrapMethods = new ObjArray();
+            itsBootstrapMethods = new ArrayList<>();
         }
         int bootstrapIndex = itsBootstrapMethods.indexOf(bsmEntry);
         if (bootstrapIndex == -1) {
@@ -1125,7 +1124,7 @@ public class ClassFileWriter {
 
     public final void markTableSwitchCase(int switchStart, int caseIndex, int stackTop) {
         if (!(0 <= stackTop && stackTop <= itsMaxStack))
-            throw new IllegalArgumentException("Bad stack index: " +  stackTop);
+            throw new IllegalArgumentException("Bad stack index: " + stackTop);
         itsStackTop = (short) stackTop;
         addSuperBlockStart(itsCodeBufferTop);
         itsJumpFroms.put(itsCodeBufferTop, switchStart);
@@ -1138,8 +1137,8 @@ public class ClassFileWriter {
      */
     public void setTableSwitchJump(int switchStart, int caseIndex, int jumpTarget) {
         if (jumpTarget < 0 || itsCodeBufferTop < jumpTarget)
-            throw new IllegalArgumentException("Bad jump target:  " + jumpTarget);
-        if (caseIndex < -1) throw new IllegalArgumentException("Bad case index:  " +caseIndex);
+            throw new IllegalArgumentException("Bad jump target: " + jumpTarget);
+        if (caseIndex < -1) throw new IllegalArgumentException("Bad case index: " + caseIndex);
 
         int padSize = 3 & ~switchStart; // == 3 - switchStart % 4
         int caseOffset;
@@ -1162,7 +1161,7 @@ public class ClassFileWriter {
         if (caseOffset < 0 || itsCodeBufferTop < caseOffset + 4) {
             // caseIndex >= -1 does not guarantee that caseOffset >= 0 due
             // to a possible overflow.
-            throw new ClassFileFormatException("Too big case index: " +  caseIndex);
+            throw new ClassFileFormatException("Too big case index: " + caseIndex);
         }
         // ALERT: perhaps check against case bounds?
         putInt32(jumpTarget - switchStart, itsCodeBuffer, caseOffset);
@@ -1197,7 +1196,7 @@ public class ClassFileWriter {
         itsLabelTable[label] = itsCodeBufferTop;
     }
 
-    public void markLabel(int label, short stackTop) {
+    public void markLabel(int label, int stackTop) {
         markLabel(label);
         itsStackTop = stackTop;
     }
@@ -1265,7 +1264,7 @@ public class ClassFileWriter {
         return itsCodeBufferTop;
     }
 
-    public short getStackTop() {
+    public int getStackTop() {
         return itsStackTop;
     }
 
@@ -1424,7 +1423,7 @@ public class ClassFileWriter {
                 if (offset < sb.getStart() || offset >= sb.getEnd()) Kit.codeBug();
                 return sb;
             }
-            throw new IllegalArgumentException("bad offset: " +  offset);
+            throw new IllegalArgumentException("bad offset: " + offset);
         }
 
         /**
@@ -1526,8 +1525,7 @@ public class ClassFileWriter {
             executeWorkList();
 
             // Replace dead code with no-ops.
-            for (int i = 0; i < superBlocks.length; i++) {
-                SuperBlock sb = superBlocks[i];
+            for (SuperBlock sb : superBlocks) {
                 if (!sb.isInitialized()) {
                     killSuperBlock(sb);
                 }
@@ -1805,7 +1803,7 @@ public class ClassFileWriter {
                 case ByteCode.CASTORE:
                 case ByteCode.SASTORE:
                     pop();
-                    // fall through
+                // fall through
                 case ByteCode.PUTFIELD: // pop; pop
                 case ByteCode.IF_ICMPEQ:
                 case ByteCode.IF_ICMPNE:
@@ -1816,7 +1814,7 @@ public class ClassFileWriter {
                 case ByteCode.IF_ACMPEQ:
                 case ByteCode.IF_ACMPNE:
                     pop();
-                    // fall through
+                // fall through
                 case ByteCode.IFEQ: // pop
                 case ByteCode.IFNE:
                 case ByteCode.IFLT:
@@ -1858,7 +1856,7 @@ public class ClassFileWriter {
                 case ByteCode.DCMPL:
                 case ByteCode.DCMPG:
                     pop();
-                    // fall through
+                // fall through
                 case ByteCode.INEG: // pop; push(INTEGER)
                 case ByteCode.L2I:
                 case ByteCode.F2I:
@@ -1869,7 +1867,7 @@ public class ClassFileWriter {
                 case ByteCode.ARRAYLENGTH:
                 case ByteCode.INSTANCEOF:
                     pop();
-                    // fall through
+                // fall through
                 case ByteCode.ICONST_M1: // push(INTEGER)
                 case ByteCode.ICONST_0:
                 case ByteCode.ICONST_1:
@@ -1899,13 +1897,13 @@ public class ClassFileWriter {
                 case ByteCode.LOR:
                 case ByteCode.LXOR:
                     pop();
-                    // fall through
+                // fall through
                 case ByteCode.LNEG: // pop; push(LONG)
                 case ByteCode.I2L:
                 case ByteCode.F2L:
                 case ByteCode.D2L:
                     pop();
-                    // fall through
+                // fall through
                 case ByteCode.LCONST_0: // push(LONG)
                 case ByteCode.LCONST_1:
                 case ByteCode.LLOAD:
@@ -1922,13 +1920,13 @@ public class ClassFileWriter {
                 case ByteCode.FDIV:
                 case ByteCode.FREM:
                     pop();
-                    // fall through
+                // fall through
                 case ByteCode.FNEG: // pop; push(FLOAT)
                 case ByteCode.I2F:
                 case ByteCode.L2F:
                 case ByteCode.D2F:
                     pop();
-                    // fall through
+                // fall through
                 case ByteCode.FCONST_0: // push(FLOAT)
                 case ByteCode.FCONST_1:
                 case ByteCode.FCONST_2:
@@ -1946,13 +1944,13 @@ public class ClassFileWriter {
                 case ByteCode.DDIV:
                 case ByteCode.DREM:
                     pop();
-                    // fall through
+                // fall through
                 case ByteCode.DNEG: // pop; push(DOUBLE)
                 case ByteCode.I2D:
                 case ByteCode.L2D:
                 case ByteCode.F2D:
                     pop();
-                    // fall through
+                // fall through
                 case ByteCode.DCONST_0: // push(DOUBLE)
                 case ByteCode.DCONST_1:
                 case ByteCode.DLOAD:
@@ -2070,14 +2068,14 @@ public class ClassFileWriter {
                 case ByteCode.NEWARRAY:
                     pop();
                     char componentType = arrayTypeToName(itsCodeBuffer[bci + 1]);
-                    index = itsConstantPool.addClass("[ " + componentType);
+                    index = itsConstantPool.addClass("[" + componentType);
                     push(TypeInfo.OBJECT((short) index));
                     break;
                 case ByteCode.ANEWARRAY:
                     index = getOperand(bci + 1, 2);
                     className = (String) itsConstantPool.getConstantData(index);
                     pop();
-                    push(TypeInfo.OBJECT("[ " +  className + ';', itsConstantPool));
+                    push(TypeInfo.OBJECT("[L" + className + ';', itsConstantPool));
                     break;
                 case ByteCode.INVOKEVIRTUAL:
                 case ByteCode.INVOKESPECIAL:
@@ -2132,7 +2130,7 @@ public class ClassFileWriter {
                     break;
                 case ByteCode.GETFIELD:
                     pop();
-                    // fall through
+                // fall through
                 case ByteCode.GETSTATIC:
                     index = getOperand(bci + 1, 2);
                     FieldOrMethodRef f = (FieldOrMethodRef) itsConstantPool.getConstantData(index);
@@ -2203,7 +2201,7 @@ public class ClassFileWriter {
                     break;
                 case ByteCode.MULTIANEWARRAY:
                 case ByteCode.LOOKUPSWITCH:
-                    // Currently not used in any part of Rhino, so ignore it
+                // Currently not used in any part of Rhino, so ignore it
                 case ByteCode.JSR: // TODO: JSR is deprecated
                 case ByteCode.RET:
                 case ByteCode.JSR_W:
@@ -2229,7 +2227,8 @@ public class ClassFileWriter {
                     || tag == TypeInfo.NULL) {
                 push(type);
             } else {
-                throw new IllegalStateException("bad local variable type: " + type + " at index: " + localIndex);
+                throw new IllegalStateException(
+                        "bad local variable type: " + type + " at index: " + localIndex);
             }
         }
 
@@ -2565,7 +2564,7 @@ public class ClassFileWriter {
             case 'L':
                 return classDescriptorToInternalName(descriptor);
             default:
-                throw new IllegalArgumentException("bad descriptor: " + descriptor);
+                throw new IllegalArgumentException("bad descriptor:" + descriptor);
         }
     }
 
@@ -2662,12 +2661,12 @@ public class ClassFileWriter {
 
         size += 2; // writeShort(itsFields.size());
         for (int i = 0; i < itsFields.size(); i++) {
-            size += ((ClassFileField) (itsFields.get(i))).getWriteSize();
+            size += ((ClassFileField) itsFields.get(i)).getWriteSize();
         }
 
         size += 2; // writeShort(itsMethods.size());
         for (int i = 0; i < itsMethods.size(); i++) {
-            size += ((ClassFileMethod) (itsMethods.get(i))).getWriteSize();
+            size += ((ClassFileMethod) itsMethods.get(i)).getWriteSize();
         }
 
         size += 2; // writeShort(1);  attributes count, could be zero
@@ -2717,7 +2716,7 @@ public class ClassFileWriter {
         offset = putInt16(itsSuperClassIndex, data, offset);
         offset = putInt16(itsInterfaces.size(), data, offset);
         for (int i = 0; i < itsInterfaces.size(); i++) {
-            int interfaceIndex = ((Short) (itsInterfaces.get(i))).shortValue();
+            int interfaceIndex = ((Short) itsInterfaces.get(i)).shortValue();
             offset = putInt16(interfaceIndex, data, offset);
         }
         offset = putInt16(itsFields.size(), data, offset);
@@ -2798,7 +2797,7 @@ public class ClassFileWriter {
                     case 'J':
                     case 'D':
                         --stackDiff;
-                        // fall through
+                    // fall through
                     case 'B':
                     case 'S':
                     case 'C':
@@ -2835,7 +2834,7 @@ public class ClassFileWriter {
                             case 'L':
                                 // fall through
                         }
-                        // fall through
+                    // fall through
                     case 'L':
                         {
                             --stackDiff;
@@ -2859,7 +2858,7 @@ public class ClassFileWriter {
                     case 'J':
                     case 'D':
                         ++stackDiff;
-                        // fall through
+                    // fall through
                     case 'B':
                     case 'S':
                     case 'C':
@@ -2869,7 +2868,7 @@ public class ClassFileWriter {
                     case 'L':
                     case '[':
                         ++stackDiff;
-                        // fall through
+                    // fall through
                     case 'V':
                         break;
                 }
@@ -2878,7 +2877,7 @@ public class ClassFileWriter {
                 }
             }
         }
-        throw new IllegalArgumentException("Bad parameter signature " + pString);
+        throw new IllegalArgumentException("Bad parameter signature: " + pString);
     }
 
     static int putInt16(int value, byte[] array, int offset) {
@@ -3123,7 +3122,7 @@ public class ClassFileWriter {
                     return -1;
                 */
         }
-        throw new IllegalArgumentException("Bad opcode " + opcode);
+        throw new IllegalArgumentException("Bad opcode: " + opcode);
     }
 
     /** Number of operands accompanying the opcode. */
@@ -4290,7 +4289,7 @@ public class ClassFileWriter {
     // Necessary for generating type information for dead code, which is
     // expected by the Sun verifier. It is only necessary to store a single
     // jump source to determine if a block is reachable or not.
-    private UintMap itsJumpFroms = null;
+    private HashMap<Integer, Integer> itsJumpFroms = null;
 
     private static final int LineNumberTableSize = 16;
     private static final int ExceptionTableSize = 4;
@@ -4310,39 +4309,42 @@ public class ClassFileWriter {
         // Based on the version numbers we scrape, we can also determine what
         // bytecode features we need. For example, Java 6 bytecode (classfile
         // version 50) should have stack maps generated.
-        InputStream is = null;
-        int major = 48, minor = 0;
-        try {
-            is = ClassFileWriter.class.getResourceAsStream("ClassFileWriter.class");
-            if (is == null) {
-                is =
-                        ClassLoader.getSystemResourceAsStream(
-                                "org/mozilla/classfile/ClassFileWriter.class");
+        int minor = 0;
+        int major = 48;
+        try (InputStream is = readClassFile()) {
+            if (is != null) {
+                byte[] header = new byte[8];
+                // read loop is required since JDK7 will only provide 2 bytes
+                // on the first read() - see bug #630111
+                int read = 0;
+                while (read < 8) {
+                    int c = is.read(header, read, 8 - read);
+                    if (c < 0) throw new IOException();
+                    read += c;
+                }
+                minor = (header[4] << 8) | (header[5] & 0xff);
+                major = (header[6] << 8) | (header[7] & 0xff);
+            } else {
+                System.err.println(
+                        "Warning: Unable to read ClassFileWriter.class, using default bytecode version");
             }
-            byte[] header = new byte[8];
-            // read loop is required since JDK7 will only provide 2 bytes
-            // on the first read() - see bug #630111
-            int read = 0;
-            while (read < 8) {
-                int c = is.read(header, read, 8 - read);
-                if (c < 0) throw new IOException();
-                read += c;
-            }
-            minor = (header[4] << 8) | (header[5] & 0xff);
-            major = (header[6] << 8) | (header[7] & 0xff);
-        } catch (Exception e) {
-            // Unable to get class file, use default bytecode version
+        } catch (IOException ioe) {
+            throw new AssertionError("Can't read ClassFileWriter.class to get bytecode version");
         } finally {
             MinorVersion = minor;
             MajorVersion = major;
-            GenerateStackMap = major >= 50;
-            if (is != null) {
-                try {
-                    is.close();
-                } catch (IOException e) {
-                }
-            }
+            GenerateStackMap = MajorVersion >= 50;
         }
+    }
+
+    static InputStream readClassFile() {
+        InputStream is = ClassFileWriter.class.getResourceAsStream("ClassFileWriter.class");
+        if (is == null) {
+            is =
+                    ClassLoader.getSystemResourceAsStream(
+                            "org/mozilla/classfile/ClassFileWriter.class");
+        }
+        return is;
     }
 
     final class BootstrapEntry {
@@ -4432,19 +4434,19 @@ public class ClassFileWriter {
     private ConstantPool itsConstantPool;
 
     private ClassFileMethod itsCurrentMethod;
-    private short itsStackTop;
+    private int itsStackTop;
 
-    private short itsMaxStack;
-    private short itsMaxLocals;
+    private int itsMaxStack;
+    private int itsMaxLocals;
 
-    private ObjArray itsMethods = new ObjArray();
-    private ObjArray itsFields = new ObjArray();
-    private ObjArray itsInterfaces = new ObjArray();
+    private ArrayList<ClassFileMethod> itsMethods = new ArrayList<>();
+    private ArrayList<ClassFileField> itsFields = new ArrayList<>();
+    private ArrayList<Short> itsInterfaces = new ArrayList<>();
 
-    private short itsFlags;
-    private short itsThisClassIndex;
-    private short itsSuperClassIndex;
-    private short itsSourceFileNameIndex;
+    private int itsFlags;
+    private int itsThisClassIndex;
+    private int itsSuperClassIndex;
+    private int itsSourceFileNameIndex;
 
     private static final int MIN_LABEL_TABLE_SIZE = 32;
     private int[] itsLabelTable;
@@ -4454,8 +4456,8 @@ public class ClassFileWriter {
     private static final int MIN_FIXUP_TABLE_SIZE = 40;
     private long[] itsFixupTable;
     private int itsFixupTableTop;
-    private ObjArray itsVarDescriptors;
-    private ObjArray itsBootstrapMethods;
+    private ArrayList<int[]> itsVarDescriptors;
+    private ArrayList<BootstrapEntry> itsBootstrapMethods;
     private int itsBootstrapMethodsLength = 0;
 
     private char[] tmpCharBuffer = new char[64];

@@ -37,7 +37,7 @@ public class Undefined implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        return isUndefined(obj) || super.equals(obj);
+        return isUndefined(obj) || obj == this;
     }
 
     @Override
@@ -49,7 +49,7 @@ public class Undefined implements Serializable {
     /**
      * An alternate representation of undefined, to be used only when we need to pass it to a method
      * that takes as Scriptable as a parameter. This is used when we need to pass undefined as the
-     * "this" parmeter of a Callable instance, because we cannot change that interface without
+     * "this" parameter of a Callable instance, because we cannot change that interface without
      * breaking backward compatibility.
      */
     public static final Scriptable SCRIPTABLE_UNDEFINED =
@@ -132,7 +132,7 @@ public class Undefined implements Serializable {
 
                 @Override
                 public boolean equals(Object obj) {
-                    return isUndefined(obj) || super.equals(obj);
+                    return isUndefined(obj) || (obj == this);
                 }
 
                 @Override

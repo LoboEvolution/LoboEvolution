@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -310,6 +311,7 @@ class JavaMembers {
         return map.values().toArray(new Method[0]);
     }
 
+    @SuppressWarnings("deprecation")
     private void discoverAccessibleMethods(
             Class<?> clazz,
             Map<MethodSignature, Method> map,
@@ -325,11 +327,11 @@ class JavaMembers {
                                 int mods = method.getModifiers();
 
                                 if (isPublic(mods) || isProtected(mods) || includePrivate) {
-                                    MethodSignature sig = new MethodSignature(method);
-                                    if (!map.containsKey(sig)) {
-                                        if (includePrivate && !method.isAccessible())
-                                            method.setAccessible(true);
-                                        map.put(sig, method);
+                                    Method registered = registerMethod(map, method);
+                                    // We don't want to replace the deprecated method here
+                                    // because it is not available on Android.
+                                    if (includePrivate && !registered.isAccessible()) {
+                                        registered.setAccessible(true);
                                     }
                                 }
                             }
@@ -343,11 +345,7 @@ class JavaMembers {
                             // Some security settings (i.e., applets) disallow
                             // access to Class.getDeclaredMethods. Fall back to
                             // Class.getMethods.
-                            Method[] methods = clazz.getMethods();
-                            for (Method method : methods) {
-                                MethodSignature sig = new MethodSignature(method);
-                                if (!map.containsKey(sig)) map.put(sig, method);
-                            }
+                            discoverPublicMethods(clazz, map);
                             break; // getMethods gets superclass methods, no
                             // need to loop any more
                         }
@@ -384,11 +382,20 @@ class JavaMembers {
         }
     }
 
-    static void registerMethod(Map<MethodSignature, Method> map, Method method) {
+    static Method registerMethod(Map<MethodSignature, Method> map, Method method) {
         MethodSignature sig = new MethodSignature(method);
-        // Array may contain methods with same signature but different return value!
-        if (!map.containsKey(sig)) {
-            map.put(sig, method);
+        // Array may contain methods with same parameter signature but different return value!
+        // (which is allowed in bytecode, but not in JLS) we will take the best method
+        return map.merge(sig, method, JavaMembers::getMoreConcreteMethod);
+    }
+
+    private static Method getMoreConcreteMethod(Method oldValue, Method newValue) {
+        if (oldValue.getReturnType().equals(newValue.getReturnType())) {
+            return oldValue; // same return type. Do not overwrite existing method
+        } else if (oldValue.getReturnType().isAssignableFrom(newValue.getReturnType())) {
+            return newValue; // more concrete return type. Replace method
+        } else {
+            return oldValue;
         }
     }
 
@@ -420,6 +427,7 @@ class JavaMembers {
         }
     }
 
+    @SuppressWarnings("unchecked")
     private void reflect(
             Context cx, Scriptable scope, boolean includeProtected, boolean includePrivate) {
         // We reflect methods first, because we want overloaded field/method
@@ -436,14 +444,14 @@ class JavaMembers {
             if (value == null) {
                 ht.put(name, method);
             } else {
-                ObjArray overloadedMethods;
-                if (value instanceof ObjArray) {
-                    overloadedMethods = (ObjArray) value;
+                ArrayList<Object> overloadedMethods;
+                if (value instanceof ArrayList) {
+                    overloadedMethods = (ArrayList<Object>) value;
                 } else {
                     if (!(value instanceof Method)) Kit.codeBug();
                     // value should be instance of Method as at this stage
                     // staticMembers and members can only contain methods
-                    overloadedMethods = new ObjArray();
+                    overloadedMethods = new ArrayList<>();
                     overloadedMethods.add(value);
                     ht.put(name, overloadedMethods);
                 }
@@ -463,7 +471,7 @@ class JavaMembers {
                     methodBoxes = new MemberBox[1];
                     methodBoxes[0] = new MemberBox((Method) value);
                 } else {
-                    ObjArray overloadedMethods = (ObjArray) value;
+                    ArrayList<Object> overloadedMethods = (ArrayList<Object>) value;
                     int N = overloadedMethods.size();
                     if (N < 2) Kit.codeBug();
                     methodBoxes = new MemberBox[N];
@@ -476,7 +484,7 @@ class JavaMembers {
                 if (scope != null) {
                     ScriptRuntime.setFunctionProtoAndParent(fun, cx, scope, false);
                 }
-                ht.put(entry.getKey(), fun);
+                entry.setValue(fun);
             }
         }
 
@@ -556,7 +564,7 @@ class JavaMembers {
                     char ch0 = nameComponent.charAt(0);
                     if (Character.isUpperCase(ch0)) {
                         if (nameComponent.length() == 1) {
-                            beanPropertyName = nameComponent.toLowerCase();
+                            beanPropertyName = nameComponent.toLowerCase(Locale.ROOT);
                         } else {
                             char ch1 = nameComponent.charAt(1);
                             if (!Character.isUpperCase(ch1)) {
@@ -594,23 +602,21 @@ class JavaMembers {
                     NativeJavaMethod setters = null;
                     String setterName = "set".concat(nameComponent);
 
-                    if (ht.containsKey(setterName)) {
-                        // Is this value a method?
-                        Object member = ht.get(setterName);
-                        if (member instanceof NativeJavaMethod) {
-                            NativeJavaMethod njmSet = (NativeJavaMethod) member;
-                            if (getter != null) {
-                                // We have a getter. Now, do we have a matching
-                                // setter?
-                                Class<?> type = getter.method().getReturnType();
-                                setter = extractSetMethod(type, njmSet.methods, isStatic);
-                            } else {
-                                // No getter, find any set method
-                                setter = extractSetMethod(njmSet.methods, isStatic);
-                            }
-                            if (njmSet.methods.length > 1) {
-                                setters = njmSet;
-                            }
+                    // Is this value a method?
+                    Object member = ht.get(setterName);
+                    if (member instanceof NativeJavaMethod) {
+                        NativeJavaMethod njmSet = (NativeJavaMethod) member;
+                        if (getter != null) {
+                            // We have a getter. Now, do we have a matching
+                            // setter?
+                            Class<?> type = getter.method().getReturnType();
+                            setter = extractSetMethod(type, njmSet.methods, isStatic);
+                        } else {
+                            // No getter, find any set method
+                            setter = extractSetMethod(njmSet.methods, isStatic);
+                        }
+                        if (njmSet.methods.length > 1) {
+                            setters = njmSet;
                         }
                     }
                     // Make the property.
@@ -653,6 +659,7 @@ class JavaMembers {
         return cl.getConstructors();
     }
 
+    @SuppressWarnings("deprecation")
     private Field[] getAccessibleFields(boolean includeProtected, boolean includePrivate) {
         if (includePrivate || includeProtected) {
             try {
@@ -686,13 +693,11 @@ class JavaMembers {
     private static MemberBox findGetter(
             boolean isStatic, Map<String, Object> ht, String prefix, String propertyName) {
         String getterName = prefix.concat(propertyName);
-        if (ht.containsKey(getterName)) {
-            // Check that the getter is a method.
-            Object member = ht.get(getterName);
-            if (member instanceof NativeJavaMethod) {
-                NativeJavaMethod njmGet = (NativeJavaMethod) member;
-                return extractGetMethod(njmGet.methods, isStatic);
-            }
+        // Check that the getter is a method.
+        Object member = ht.get(getterName);
+        if (member instanceof NativeJavaMethod) {
+            NativeJavaMethod njmGet = (NativeJavaMethod) member;
+            return extractGetMethod(njmGet.methods, isStatic);
         }
         return null;
     }

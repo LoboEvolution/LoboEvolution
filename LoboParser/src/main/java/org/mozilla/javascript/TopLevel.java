@@ -23,11 +23,11 @@ import java.util.EnumMap;
  * ScriptRuntime#setBuiltinProtoAndParent ScriptRuntime.setBuiltinProtoAndParent} methods should be
  * used to create and initialize objects of built-in classes instead of their generic counterparts.
  *
- * <p>Calling {@link org.mozilla.javascript.Context#initStandardObjects()} with an instance of this
+ * <p>Calling {@link Context#initStandardObjects()} with an instance of this
  * class as argument will automatically cache built-in classes after initialization. For other
- * setups involving top-level scopes that inherit global properties from their proptotypes (e.g.
- * with dynamic scopes) embeddings should explicitly call {@link #cacheBuiltins(Scriptable,
- * boolean)} to initialize the class cache for each top-level scope.
+ * setups involving top-level scopes that inherit global properties from their prototypes (e.g. with
+ * dynamic scopes) embeddings should explicitly call {@link #cacheBuiltins(Scriptable, boolean)} to
+ * initialize the class cache for each top-level scope.
  */
 public class TopLevel extends IdScriptableObject {
 
@@ -61,6 +61,8 @@ public class TopLevel extends IdScriptableObject {
 
     /** An enumeration of built-in native errors. [ECMAScript 5 - 15.11.6] */
     enum NativeErrors {
+        /** The AggregateError */
+        AggregateError,
         /** Basic Error */
         Error,
         /** The native EvalError. */

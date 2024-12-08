@@ -19,10 +19,13 @@ import java.io.Writer;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.TimeZone;
 import java.util.function.UnaryOperator;
@@ -134,7 +137,7 @@ public class Context implements Closeable {
      * when applied to objects and arrays. If <code>hasFeature(FEATURE_TO_STRING_AS_SOURCE)</code>
      * returns true, calling <code>toString()</code> on JS objects gives the same result as calling
      * <code>toSource()</code>. That is it returns JS source with code to create an object with all
-     * enumeratable fields of the original object instead of printing <code>[object <i>result of
+     * enumerable fields of the original object instead of printing <code>[object <i>result of
      * {@link Scriptable#getClassName()}</i>]</code>.
      *
      * <p>By default {@link #hasFeature(int)} returns true only if the current JS version is set to
@@ -158,7 +161,9 @@ public class Context implements Closeable {
      */
     public static final int FEATURE_PARENT_PROTO_PROPERTIES = 5;
 
-    /** @deprecated In previous releases, this name was given to FEATURE_PARENT_PROTO_PROPERTIES. */
+    /**
+     * @deprecated In previous releases, this name was given to FEATURE_PARENT_PROTO_PROPERTIES.
+     */
     @Deprecated public static final int FEATURE_PARENT_PROTO_PROPRTIES = 5;
 
     /**
@@ -551,7 +556,7 @@ public class Context implements Closeable {
 
     /**
      * @deprecated
-     * @see ContextFactory#addListener(org.mozilla.javascript.ContextFactory.Listener)
+     * @see ContextFactory#addListener(ContextFactory.Listener)
      * @see ContextFactory#getGlobal()
      */
     @Deprecated
@@ -577,7 +582,7 @@ public class Context implements Closeable {
 
     /**
      * @deprecated
-     * @see ContextFactory#removeListener(org.mozilla.javascript.ContextFactory.Listener)
+     * @see ContextFactory#removeListener(ContextFactory.Listener)
      * @see ContextFactory#getGlobal()
      */
     @Deprecated
@@ -618,7 +623,7 @@ public class Context implements Closeable {
 
     /**
      * Unseal previously sealed Context object. The <code>sealKey</code> argument should not be null
-     * and should match <code>sealKey</code> suplied with the last call to {@link #seal(Object)} or
+     * and should match <code>sealKey</code> supplied with the last call to {@link #seal(Object)} or
      * an exception will be thrown.
      *
      * @see #isSealed()
@@ -632,6 +637,7 @@ public class Context implements Closeable {
         this.sealKey = null;
     }
 
+    @SuppressWarnings("DoNotCallSuggester")
     static void onSealedMutation() {
         throw new IllegalStateException();
     }
@@ -717,7 +723,7 @@ public class Context implements Closeable {
     /**
      * Get the current error reporter.
      *
-     * @see org.mozilla.javascript.ErrorReporter
+     * @see ErrorReporter
      */
     public final ErrorReporter getErrorReporter() {
         if (errorReporter == null) {
@@ -730,7 +736,7 @@ public class Context implements Closeable {
      * Change the current error reporter.
      *
      * @return the previous error reporter
-     * @see org.mozilla.javascript.ErrorReporter
+     * @see ErrorReporter
      */
     public final ErrorReporter setErrorReporter(ErrorReporter reporter) {
         if (sealed) onSealedMutation();
@@ -752,7 +758,7 @@ public class Context implements Closeable {
     /**
      * Get the current locale. Returns the default locale if none has been set.
      *
-     * @see java.util.Locale
+     * @see Locale
      */
     public final Locale getLocale() {
         if (locale == null) locale = Locale.getDefault();
@@ -763,7 +769,7 @@ public class Context implements Closeable {
      * Set the current locale.
      *
      * @return the old value of the locale
-     * @see java.util.Locale
+     * @see Locale
      */
     public final Locale setLocale(Locale loc) {
         if (sealed) onSealedMutation();
@@ -776,7 +782,7 @@ public class Context implements Closeable {
      * Get the current timezone. Returns the default timezone if none has been set.
      *
      * @return the old value of the timezone
-     * @see java.util.TimeZone
+     * @see TimeZone
      */
     public final TimeZone getTimeZone() {
         if (timezone == null) timezone = TimeZone.getDefault();
@@ -786,7 +792,7 @@ public class Context implements Closeable {
     /**
      * Set the current timezone.
      *
-     * @see java.util.TimeZone
+     * @see TimeZone
      */
     public final TimeZone setTimeZone(TimeZone tz) {
         if (sealed) onSealedMutation();
@@ -798,8 +804,8 @@ public class Context implements Closeable {
     /**
      * Register an object to receive notifications when a bound property has changed
      *
-     * @see java.beans.PropertyChangeEvent
-     * @see #removePropertyChangeListener(java.beans.PropertyChangeListener)
+     * @see PropertyChangeEvent
+     * @see #removePropertyChangeListener(PropertyChangeListener)
      * @param l the listener
      */
     public final void addPropertyChangeListener(PropertyChangeListener l) {
@@ -811,8 +817,8 @@ public class Context implements Closeable {
      * Remove an object from the list of objects registered to receive notification of changes to a
      * bounded property
      *
-     * @see java.beans.PropertyChangeEvent
-     * @see #addPropertyChangeListener(java.beans.PropertyChangeListener)
+     * @see PropertyChangeEvent
+     * @see #addPropertyChangeListener(PropertyChangeListener)
      * @param l the listener
      */
     public final void removePropertyChangeListener(PropertyChangeListener l) {
@@ -823,10 +829,10 @@ public class Context implements Closeable {
     /**
      * Notify any registered listeners that a bounded property has changed
      *
-     * @see #addPropertyChangeListener(java.beans.PropertyChangeListener)
-     * @see #removePropertyChangeListener(java.beans.PropertyChangeListener)
-     * @see java.beans.PropertyChangeListener
-     * @see java.beans.PropertyChangeEvent
+     * @see #addPropertyChangeListener(PropertyChangeListener)
+     * @see #removePropertyChangeListener(PropertyChangeListener)
+     * @see PropertyChangeListener
+     * @see PropertyChangeEvent
      * @param property the bound property
      * @param oldValue the old value
      * @param newValue the new value
@@ -858,7 +864,7 @@ public class Context implements Closeable {
      * @param lineno the starting line number
      * @param lineSource the text of the line (may be null)
      * @param lineOffset the offset into lineSource where problem was detected
-     * @see org.mozilla.javascript.ErrorReporter
+     * @see ErrorReporter
      */
     public static void reportWarning(
             String message, String sourceName, int lineno, String lineSource, int lineOffset) {
@@ -872,7 +878,7 @@ public class Context implements Closeable {
      * Report a warning using the error reporter for the current thread.
      *
      * @param message the warning message to report
-     * @see org.mozilla.javascript.ErrorReporter
+     * @see ErrorReporter
      */
     public static void reportWarning(String message) {
         int[] linep = {0};
@@ -899,7 +905,7 @@ public class Context implements Closeable {
      * @param lineno the starting line number
      * @param lineSource the text of the line (may be null)
      * @param lineOffset the offset into lineSource where problem was detected
-     * @see org.mozilla.javascript.ErrorReporter
+     * @see ErrorReporter
      */
     public static void reportError(
             String message, String sourceName, int lineno, String lineSource, int lineOffset) {
@@ -915,7 +921,7 @@ public class Context implements Closeable {
      * Report an error using the error reporter for the current thread.
      *
      * @param message the error message to report
-     * @see org.mozilla.javascript.ErrorReporter
+     * @see ErrorReporter
      */
     public static void reportError(String message) {
         int[] linep = {0};
@@ -932,7 +938,7 @@ public class Context implements Closeable {
      * @param lineSource the text of the line (may be null)
      * @param lineOffset the offset into lineSource where problem was detected
      * @return a runtime exception that will be thrown to terminate the execution of the script
-     * @see org.mozilla.javascript.ErrorReporter
+     * @see ErrorReporter
      */
     public static EvaluatorException reportRuntimeError(
             String message, String sourceName, int lineno, String lineSource, int lineOffset) {
@@ -949,28 +955,36 @@ public class Context implements Closeable {
         return reportRuntimeError(msg);
     }
 
-    /** @deprecated Use {@link #reportRuntimeErrorById(String messageId, Object... args)} instead */
+    /**
+     * @deprecated Use {@link #reportRuntimeErrorById(String messageId, Object... args)} instead
+     */
     @Deprecated
     static EvaluatorException reportRuntimeError0(String messageId) {
         String msg = ScriptRuntime.getMessageById(messageId);
         return reportRuntimeError(msg);
     }
 
-    /** @deprecated Use {@link #reportRuntimeErrorById(String messageId, Object... args)} instead */
+    /**
+     * @deprecated Use {@link #reportRuntimeErrorById(String messageId, Object... args)} instead
+     */
     @Deprecated
     static EvaluatorException reportRuntimeError1(String messageId, Object arg1) {
         String msg = ScriptRuntime.getMessageById(messageId, arg1);
         return reportRuntimeError(msg);
     }
 
-    /** @deprecated Use {@link #reportRuntimeErrorById(String messageId, Object... args)} instead */
+    /**
+     * @deprecated Use {@link #reportRuntimeErrorById(String messageId, Object... args)} instead
+     */
     @Deprecated
     static EvaluatorException reportRuntimeError2(String messageId, Object arg1, Object arg2) {
         String msg = ScriptRuntime.getMessageById(messageId, arg1, arg2);
         return reportRuntimeError(msg);
     }
 
-    /** @deprecated Use {@link #reportRuntimeErrorById(String messageId, Object... args)} instead */
+    /**
+     * @deprecated Use {@link #reportRuntimeErrorById(String messageId, Object... args)} instead
+     */
     @Deprecated
     static EvaluatorException reportRuntimeError3(
             String messageId, Object arg1, Object arg2, Object arg3) {
@@ -978,7 +992,9 @@ public class Context implements Closeable {
         return reportRuntimeError(msg);
     }
 
-    /** @deprecated Use {@link #reportRuntimeErrorById(String messageId, Object... args)} instead */
+    /**
+     * @deprecated Use {@link #reportRuntimeErrorById(String messageId, Object... args)} instead
+     */
     @Deprecated
     static EvaluatorException reportRuntimeError4(
             String messageId, Object arg1, Object arg2, Object arg3, Object arg4) {
@@ -990,7 +1006,7 @@ public class Context implements Closeable {
      * Report a runtime error using the error reporter for the current thread.
      *
      * @param message the error message to report
-     * @see org.mozilla.javascript.ErrorReporter
+     * @see ErrorReporter
      */
     public static EvaluatorException reportRuntimeError(String message) {
         int[] linep = {0};
@@ -1163,7 +1179,7 @@ public class Context implements Closeable {
      *     origin or owner of the script. For implementations that don't care about security, this
      *     value may be null.
      * @return the result of evaluating the string
-     * @see org.mozilla.javascript.SecurityController
+     * @see SecurityController
      */
     public final Object evaluateString(
             Scriptable scope, String source, String sourceName, int lineno, Object securityDomain) {
@@ -1287,7 +1303,7 @@ public class Context implements Closeable {
             throws ContinuationPending {
         Object[] args = {functionResult};
         return Interpreter.restartContinuation(
-                (org.mozilla.javascript.NativeContinuation) continuation, this, scope, args);
+                (NativeContinuation) continuation, this, scope, args);
     }
 
     /**
@@ -1347,7 +1363,7 @@ public class Context implements Closeable {
      *     value may be null.
      * @return a script that may later be executed
      * @exception IOException if an IOException was generated by the Reader
-     * @see org.mozilla.javascript.Script
+     * @see Script
      */
     public final Script compileReader(
             Reader in, String sourceName, int lineno, Object securityDomain) throws IOException {
@@ -1381,7 +1397,7 @@ public class Context implements Closeable {
      *     origin or owner of the script. For implementations that don't care about security, this
      *     value may be null.
      * @return a script that may later be executed
-     * @see org.mozilla.javascript.Script
+     * @see Script
      */
     public final Script compileString(
             String source, String sourceName, int lineno, Object securityDomain) {
@@ -1399,21 +1415,16 @@ public class Context implements Closeable {
             String sourceName,
             int lineno,
             Object securityDomain) {
-        try {
-            return (Script)
-                    compileImpl(
-                            null,
-                            source,
-                            sourceName,
-                            lineno,
-                            securityDomain,
-                            false,
-                            compiler,
-                            compilationErrorReporter);
-        } catch (IOException ioe) {
-            // Should not happen when dealing with source as string
-            throw new RuntimeException(ioe);
-        }
+        return (Script)
+                compileImpl(
+                        null,
+                        source,
+                        sourceName,
+                        lineno,
+                        securityDomain,
+                        false,
+                        compiler,
+                        compilationErrorReporter);
     }
 
     /**
@@ -1430,7 +1441,7 @@ public class Context implements Closeable {
      *     origin or owner of the script. For implementations that don't care about security, this
      *     value may be null.
      * @return a Function that may later be called
-     * @see org.mozilla.javascript.Function
+     * @see Function
      */
     public final Function compileFunction(
             Scriptable scope, String source, String sourceName, int lineno, Object securityDomain) {
@@ -1445,22 +1456,16 @@ public class Context implements Closeable {
             String sourceName,
             int lineno,
             Object securityDomain) {
-        try {
-            return (Function)
-                    compileImpl(
-                            scope,
-                            source,
-                            sourceName,
-                            lineno,
-                            securityDomain,
-                            true,
-                            compiler,
-                            compilationErrorReporter);
-        } catch (IOException ioe) {
-            // Should never happen because we just made the reader
-            // from a String
-            throw new RuntimeException(ioe);
-        }
+        return (Function)
+                compileImpl(
+                        scope,
+                        source,
+                        sourceName,
+                        lineno,
+                        securityDomain,
+                        true,
+                        compiler,
+                        compilationErrorReporter);
     }
 
     /**
@@ -1474,7 +1479,7 @@ public class Context implements Closeable {
      */
     public final String decompileScript(Script script, int indent) {
         NativeFunction scriptImpl = (NativeFunction) script;
-        return scriptImpl.decompile(indent, 0);
+        return scriptImpl.decompile(indent, EnumSet.noneOf(DecompilerFlag.class));
     }
 
     /**
@@ -1489,7 +1494,8 @@ public class Context implements Closeable {
      * @return a string representing the function source
      */
     public final String decompileFunction(Function fun, int indent) {
-        if (fun instanceof BaseFunction) return ((BaseFunction) fun).decompile(indent, 0);
+        if (fun instanceof BaseFunction)
+            return ((BaseFunction) fun).decompile(indent, EnumSet.noneOf(DecompilerFlag.class));
 
         return "function " + fun.getClassName() + "() {\n\t[native code]\n}\n";
     }
@@ -1509,7 +1515,7 @@ public class Context implements Closeable {
     public final String decompileFunctionBody(Function fun, int indent) {
         if (fun instanceof BaseFunction) {
             BaseFunction bf = (BaseFunction) fun;
-            return bf.decompile(indent, Decompiler.ONLY_BODY_FLAG);
+            return bf.decompile(indent, EnumSet.of(DecompilerFlag.ONLY_BODY));
         }
         // ALERT: not sure what the right response here is.
         return "[native code]\n";
@@ -1790,8 +1796,8 @@ public class Context implements Closeable {
      * Returns the javaToJSONConverter for this Context.
      *
      * <p>The converter is used by the JSON.stringify method for Java objects other than instances
-     * of {@link java.util.Map Map}, {@link java.util.Collection Collection}, or {@link
-     * java.lang.Object Object[]}.
+     * of {@link Map Map}, {@link java.util.Collection Collection}, or {@link
+     * Object Object[]}.
      *
      * <p>The default converter if unset will convert Java Objects to their toString() value.
      *
@@ -1808,8 +1814,8 @@ public class Context implements Closeable {
      * Sets the javaToJSONConverter for this Context.
      *
      * <p>The converter is used by the JSON.stringify method for Java objects other than instances
-     * of {@link java.util.Map Map}, {@link java.util.Collection Collection}, or {@link
-     * java.lang.Object Object[]}.
+     * of {@link Map Map}, {@link java.util.Collection Collection}, or {@link
+     * Object Object[]}.
      *
      * <p>Objects returned by the converter will converted with {@link #javaToJS(Object,
      * Scriptable)} and then stringified themselves.
@@ -2278,6 +2284,11 @@ public class Context implements Closeable {
         this.generateObserverCount = generateObserverCount;
     }
 
+    /** Determine if observer counts should be generated. */
+    public boolean isGenerateObserverCount() {
+        return this.generateObserverCount;
+    }
+
     /**
      * Allow application to monitor counter of executed script instructions in Context subclasses.
      * Run-time calls this when instruction counting is enabled and the counter reaches limit set by
@@ -2413,8 +2424,7 @@ public class Context implements Closeable {
             Object securityDomain,
             boolean returnFunction,
             Evaluator compiler,
-            ErrorReporter compilationErrorReporter)
-            throws IOException {
+            ErrorReporter compilationErrorReporter) {
         if (sourceName == null) {
             sourceName = "unnamed script";
         }
@@ -2447,7 +2457,7 @@ public class Context implements Closeable {
                 compiler = createCompiler();
             }
 
-            bytecode = compiler.compile(compilerEnv, tree, tree.getEncodedSource(), returnFunction);
+            bytecode = compiler.compile(compilerEnv, tree, sourceString, returnFunction);
         } catch (ClassFileFormatException e) {
             // we hit some class file limit, fall back to interpreter or report
 
@@ -2463,7 +2473,7 @@ public class Context implements Closeable {
                             returnFunction);
 
             compiler = createInterpreter();
-            bytecode = compiler.compile(compilerEnv, tree, tree.getEncodedSource(), returnFunction);
+            bytecode = compiler.compile(compilerEnv, tree, sourceString, returnFunction);
         }
 
         if (debugger != null) {
@@ -2492,8 +2502,7 @@ public class Context implements Closeable {
             int lineno,
             CompilerEnvirons compilerEnv,
             ErrorReporter compilationErrorReporter,
-            boolean returnFunction)
-            throws IOException {
+            boolean returnFunction) {
         Parser p = new Parser(compilerEnv, compilationErrorReporter);
         if (returnFunction) {
             p.calledByCompileFunction = true;
@@ -2515,8 +2524,14 @@ public class Context implements Closeable {
             }
         }
 
-        IRFactory irf = new IRFactory(compilerEnv, compilationErrorReporter);
+        IRFactory irf = new IRFactory(compilerEnv, sourceString, compilationErrorReporter);
         ScriptNode tree = irf.transformTree(ast);
+
+        if (compilerEnv.isGeneratingSource()) {
+            tree.setRawSource(sourceString);
+            tree.setRawSourceBounds(0, sourceString.length());
+        }
+
         return tree;
     }
 
@@ -2554,23 +2569,29 @@ public class Context implements Closeable {
             Evaluator evaluator = createInterpreter();
             if (evaluator != null) return evaluator.getSourcePositionFromStack(cx, linep);
         }
-        /**
-         * A bit of a hack, but the only way to get filename and line number from an enclosing
-         * frame.
-         */
-        StackTraceElement[] stackTrace = new Throwable().getStackTrace();
-        for (StackTraceElement st : stackTrace) {
-            String file = st.getFileName();
-            if (!(file == null || file.endsWith(".java"))) {
-                int line = st.getLineNumber();
-                if (line >= 0) {
-                    linep[0] = line;
-                    return file;
-                }
-            }
-        }
 
-        return null;
+        return getSourcePositionFromJavaStack(linep);
+    }
+
+    /** Returns the current filename in the java stack. */
+    @SuppressWarnings("AndroidJdkLibsChecker")
+    // Android uses interpreter, so we should not get here.
+    static String getSourcePositionFromJavaStack(int[] linep) {
+        Optional<StackWalker.StackFrame> frame =
+                StackWalker.getInstance()
+                        .walk(stream -> stream.filter(Context::frameMatches).findFirst());
+        return frame.map(
+                        f -> {
+                            linep[0] = f.getLineNumber();
+                            return f.getFileName();
+                        })
+                .orElse(null);
+    }
+
+    @SuppressWarnings("AndroidJdkLibsChecker")
+    private static boolean frameMatches(StackWalker.StackFrame frame) {
+        return (frame.getFileName() == null || !frame.getFileName().endsWith(".java"))
+                && frame.getLineNumber() > 0;
     }
 
     RegExpProxy getRegExpProxy() {
@@ -2660,7 +2681,7 @@ public class Context implements Closeable {
     // for Objects, Arrays to tag themselves as being printed out,
     // so they don't print themselves out recursively.
     // Use ObjToIntMap instead of java.util.HashSet for JDK 1.1 compatibility
-    ObjToIntMap iterating;
+    Set<Scriptable> iterating;
 
     Object interpreterSecurityDomain;
 
@@ -2698,7 +2719,7 @@ public class Context implements Closeable {
 
     // For the interpreter to store information about previous invocations
     // interpreter invocations
-    ObjArray previousInterpreterInvocations;
+    Deque<Object> previousInterpreterInvocations;
 
     // For instruction counting (interpreter only)
     int instructionCount;
@@ -2711,7 +2732,7 @@ public class Context implements Closeable {
     Scriptable scratchScriptable;
 
     // Generate an observer count on compiled code
-    public boolean generateObserverCount = false;
+    boolean generateObserverCount = false;
 
     boolean isTopLevelStrict;
 }

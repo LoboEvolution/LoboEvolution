@@ -20,19 +20,33 @@ public class SymbolKey implements Symbol, Serializable {
     public static final SymbolKey IS_REGEXP = new SymbolKey("Symbol.isRegExp");
     public static final SymbolKey TO_PRIMITIVE = new SymbolKey("Symbol.toPrimitive");
     public static final SymbolKey MATCH = new SymbolKey("Symbol.match");
+    public static final SymbolKey MATCH_ALL = new SymbolKey("Symbol.matchAll");
     public static final SymbolKey REPLACE = new SymbolKey("Symbol.replace");
     public static final SymbolKey SEARCH = new SymbolKey("Symbol.search");
     public static final SymbolKey SPLIT = new SymbolKey("Symbol.split");
     public static final SymbolKey UNSCOPABLES = new SymbolKey("Symbol.unscopables");
 
-    private String name;
+    // If passed a javascript undefined, this will be a (java) null
+    private final String name;
 
     public SymbolKey(String name) {
         this.name = name;
     }
 
+    /**
+     * Returns the symbol's name. Returns empty string for anonymous symbol (i.e. something created
+     * with <code>Symbol()</code>).
+     */
     public String getName() {
-        return name;
+        return name != null ? name : "";
+    }
+
+    /**
+     * Returns the symbol's description - will return {@link Undefined#instance} if we have an
+     * anonymous symbol (i.e. something created with <code>Symbol()</code>).
+     */
+    public Object getDescription() {
+        return name != null ? name : Undefined.instance;
     }
 
     @Override

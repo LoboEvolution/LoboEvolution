@@ -82,6 +82,35 @@ public class FunctionNode extends ScriptNode {
     private int rp = -1;
     private boolean hasRestParameter;
 
+    @Override
+    public List<Object> getDefaultParams() {
+        return defaultParams;
+    }
+
+    public void putDefaultParams(Object left, Object right) {
+        if (defaultParams == null) {
+            defaultParams = new ArrayList<>();
+        }
+        defaultParams.add(left);
+        defaultParams.add(right);
+    }
+
+    @Override
+    public List<Node[]> getDestructuringRvalues() {
+        return destructuringRvalues;
+    }
+
+    @Override
+    public void putDestructuringRvalues(Node left, Node right) {
+        if (destructuringRvalues == null) {
+            destructuringRvalues = new ArrayList<>();
+        }
+        destructuringRvalues.add(new Node[] {left, right});
+    }
+
+    ArrayList<Object> defaultParams;
+    ArrayList<Node[]> destructuringRvalues;
+
     // codegen variables
     private int functionType;
     private boolean needsActivation;
@@ -213,7 +242,7 @@ public class FunctionNode extends ScriptNode {
         int absEnd = body.getPosition() + body.getLength();
         body.setParent(this);
         this.setLength(absEnd - this.position);
-        setEncodedSourceBounds(this.position, absEnd);
+        setRawSourceBounds(this.position, absEnd);
     }
 
     /** Returns left paren position, -1 if missing */
@@ -283,6 +312,10 @@ public class FunctionNode extends ScriptNode {
     public void setIsES6Generator() {
         isES6Generator = true;
         isGenerator = true;
+        // Generators always need activation, because their calling convention is always
+        // different. Make sure that this is set now, even if the generator does not
+        // have any "yield" statements.
+        needsActivation = true;
     }
 
     @Override

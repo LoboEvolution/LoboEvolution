@@ -11,7 +11,7 @@ package org.mozilla.javascript;
  *
  * <p>See ECMA 10.1.6
  *
- * @see org.mozilla.javascript.Arguments
+ * @see Arguments
  * @author Norris Boyd
  */
 public final class NativeCall extends IdScriptableObject {

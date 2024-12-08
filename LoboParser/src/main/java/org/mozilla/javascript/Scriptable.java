@@ -20,7 +20,7 @@ package org.mozilla.javascript;
  *
  * <p>
  *
- * @see org.mozilla.javascript.ScriptableObject
+ * @see ScriptableObject
  * @author Norris Boyd
  * @author Nick Thompson
  * @author Brendan Eich
@@ -49,6 +49,7 @@ public interface Scriptable {
      * <code>get</code> that takes an integer:
      *
      * <table>
+     * <caption style="display:none">Code examples</caption>
      * <tr><th>JavaScript code</th><th>Java code</th></tr>
      * <tr><td>a.b      </td><td>a.get("b", a)</td></tr>
      * <tr><td>a["foo"] </td><td>a.get("foo", a)</td></tr>
@@ -75,7 +76,7 @@ public interface Scriptable {
      * @param name the name of the property
      * @param start the object in which the lookup began
      * @return the value of the property (may be null), or NOT_FOUND
-     * @see org.mozilla.javascript.Context#getUndefinedValue
+     * @see Context#getUndefinedValue
      */
     public Object get(String name, Scriptable start);
 
@@ -88,7 +89,7 @@ public interface Scriptable {
      * @param index the numeric index for the property
      * @param start the object in which the lookup began
      * @return the value of the property (may be null), or NOT_FOUND
-     * @see org.mozilla.javascript.Scriptable#get(String,Scriptable)
+     * @see Scriptable#get(String,Scriptable)
      */
     public Object get(int index, Scriptable start);
 
@@ -104,8 +105,8 @@ public interface Scriptable {
      * @param name the name of the property
      * @param start the object in which the lookup began
      * @return true if and only if the named property is found in the object
-     * @see org.mozilla.javascript.Scriptable#get(String, Scriptable)
-     * @see org.mozilla.javascript.ScriptableObject#getProperty(Scriptable, String)
+     * @see Scriptable#get(String, Scriptable)
+     * @see ScriptableObject#getProperty(Scriptable, String)
      */
     public boolean has(String name, Scriptable start);
 
@@ -121,8 +122,8 @@ public interface Scriptable {
      * @param index the numeric index for the property
      * @param start the object in which the lookup began
      * @return true if and only if the indexed property is found in the object
-     * @see org.mozilla.javascript.Scriptable#get(int, Scriptable)
-     * @see org.mozilla.javascript.ScriptableObject#getProperty(Scriptable, int)
+     * @see Scriptable#get(int, Scriptable)
+     * @see ScriptableObject#getProperty(Scriptable, int)
      */
     public boolean has(int index, Scriptable start);
 
@@ -168,10 +169,10 @@ public interface Scriptable {
      * @param name the name of the property
      * @param start the object whose property is being set
      * @param value value to set the property to
-     * @see org.mozilla.javascript.Scriptable#has(String, Scriptable)
-     * @see org.mozilla.javascript.Scriptable#get(String, Scriptable)
-     * @see org.mozilla.javascript.ScriptableObject#putProperty(Scriptable, String, Object)
-     * @see org.mozilla.javascript.Context#toObject(Object, Scriptable)
+     * @see Scriptable#has(String, Scriptable)
+     * @see Scriptable#get(String, Scriptable)
+     * @see ScriptableObject#putProperty(Scriptable, String, Object)
+     * @see Context#toObject(Object, Scriptable)
      */
     public void put(String name, Scriptable start, Object value);
 
@@ -186,10 +187,10 @@ public interface Scriptable {
      * @param index the numeric index for the property
      * @param start the object whose property is being set
      * @param value value to set the property to
-     * @see org.mozilla.javascript.Scriptable#has(int, Scriptable)
-     * @see org.mozilla.javascript.Scriptable#get(int, Scriptable)
-     * @see org.mozilla.javascript.ScriptableObject#putProperty(Scriptable, int, Object)
-     * @see org.mozilla.javascript.Context#toObject(Object, Scriptable)
+     * @see Scriptable#has(int, Scriptable)
+     * @see Scriptable#get(int, Scriptable)
+     * @see ScriptableObject#putProperty(Scriptable, int, Object)
+     * @see Context#toObject(Object, Scriptable)
      */
     public void put(int index, Scriptable start, Object value);
 
@@ -207,8 +208,8 @@ public interface Scriptable {
      * <p>To delete properties defined in a prototype chain, see deleteProperty in ScriptableObject.
      *
      * @param name the identifier for the property
-     * @see org.mozilla.javascript.Scriptable#get(String, Scriptable)
-     * @see org.mozilla.javascript.ScriptableObject#deleteProperty(Scriptable, String)
+     * @see Scriptable#get(String, Scriptable)
+     * @see ScriptableObject#deleteProperty(Scriptable, String)
      */
     public void delete(String name);
 
@@ -223,8 +224,8 @@ public interface Scriptable {
      * the property.
      *
      * @param index the numeric index for the property
-     * @see org.mozilla.javascript.Scriptable#get(int, Scriptable)
-     * @see org.mozilla.javascript.ScriptableObject#deleteProperty(Scriptable, int)
+     * @see Scriptable#get(int, Scriptable)
+     * @see ScriptableObject#deleteProperty(Scriptable, int)
      */
     public void delete(int index);
 

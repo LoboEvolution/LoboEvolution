@@ -19,7 +19,7 @@ import java.util.Map;
  * context), Rhino will call the methods of this class whenever it needs to wrap a value resulting
  * from a call to a Java method or an access to a Java field.
  *
- * @see org.mozilla.javascript.Context#setWrapFactory(WrapFactory)
+ * @see Context#setWrapFactory(WrapFactory)
  * @since 1.5 Release 4
  */
 public class WrapFactory {
@@ -57,6 +57,7 @@ public class WrapFactory {
             if (obj instanceof String
                     || obj instanceof Boolean
                     || obj instanceof Integer
+                    || obj instanceof Byte
                     || obj instanceof Short
                     || obj instanceof Long
                     || obj instanceof Float
@@ -148,7 +149,9 @@ public class WrapFactory {
         return javaPrimitiveWrap;
     }
 
-    /** @see #isJavaPrimitiveWrap() */
+    /**
+     * @see #isJavaPrimitiveWrap()
+     */
     public final void setJavaPrimitiveWrap(boolean value) {
         Context cx = Context.getCurrentContext();
         if (cx != null && cx.isSealed()) {

@@ -103,9 +103,9 @@ public class HTMLOptionsCollectionImpl extends HTMLCollectionImpl implements HTM
 				addElements((HTMLOptionElement) element, (HTMLOptionElement) before);
 			}
 
-			if (before instanceof Double) {
+			if (before instanceof Integer) {
 				final HTMLSelectElementImpl selctElement = (HTMLSelectElementImpl) rootNode;
-				final double d = (double) before;
+				final int d = (Integer) before;
 
 				if (d > -1 && d < getLength()) {
 					addElementIndex((HTMLOptionElementImpl) element, d);
@@ -145,6 +145,12 @@ public class HTMLOptionsCollectionImpl extends HTMLCollectionImpl implements HTM
 
 			if (element instanceof HTMLOptionElementImpl) {
 				getList().remove(element);
+			}
+
+			if (element instanceof Integer) {
+				final int d = (Integer) element;
+				if (d > -1 && d < getList().size())
+					getList().remove(d);
 			}
 
 			if (element instanceof Double) {
@@ -210,7 +216,7 @@ public class HTMLOptionsCollectionImpl extends HTMLCollectionImpl implements HTM
 				}
 			}
 		} else {
-			remove(index.doubleValue());
+			remove(index);
 		}
 	}
 
@@ -219,7 +225,7 @@ public class HTMLOptionsCollectionImpl extends HTMLCollectionImpl implements HTM
 		return this.size();
 	}
 
-	private void addElementIndex(final HTMLOptionElement element, final double before) {
+	private void addElementIndex(final HTMLOptionElement element, final int before) {
 		final List<Node> nodeList = getList();
 		if (before > nodeList.size() || before < 0) {
 			add(element);
@@ -231,7 +237,7 @@ public class HTMLOptionsCollectionImpl extends HTMLCollectionImpl implements HTM
 				nodeList.add(element);
 			} else {
 				((NodeImpl) element).setParentImpl(selctElement);
-				nodeList.add(before < 0 ? 0 : (int) before, element);
+				nodeList.add(before < 0 ? 0 : before, element);
 			}
 		}
 	}

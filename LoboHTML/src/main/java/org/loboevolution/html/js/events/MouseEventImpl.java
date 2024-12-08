@@ -95,9 +95,9 @@ public class MouseEventImpl extends UIEventImpl implements MouseEvent {
 
     @Override
     public void initMouseEvent(String type, Boolean bubbles, Boolean cancelable, Window view,
-                               Double detail, Double screenX, Double screenY, Double clientX, Double clientY,
+                               Integer detail, Integer screenX, Integer screenY, Integer clientX, Integer clientY,
                                Boolean ctrlKey, Boolean altKey, Boolean shiftKey, Boolean metaKey,
-                               Double button, EventTarget relatedTarget) {
+                               Integer button, EventTarget relatedTarget) {
         initMouseEvent(type, bubbles, cancelable, view, detail, screenX, screenY, clientX, clientY,
                 ctrlKey, altKey, shiftKey, metaKey, button);
         this.relatedTarget = relatedTarget;
@@ -106,8 +106,8 @@ public class MouseEventImpl extends UIEventImpl implements MouseEvent {
 
     @Override
     public void initMouseEvent(String type, Boolean bubbles, Boolean cancelable, Window view,
-                               Double detail, Double screenX, Double screenY, Double clientX, Double clientY,
-                               Boolean ctrlKey, Boolean altKey, Boolean shiftKey, Boolean metaKey, Double button) {
+                               Integer detail, Integer screenX, Integer screenY, Integer clientX, Integer clientY,
+                               Boolean ctrlKey, Boolean altKey, Boolean shiftKey, Boolean metaKey, Integer button) {
         initMouseEvent(type, bubbles, cancelable, view, detail, screenX, screenY, clientX, clientY,
                 ctrlKey, altKey, shiftKey, metaKey);
         this.button = button != null ? button.longValue() : 0;
@@ -115,7 +115,7 @@ public class MouseEventImpl extends UIEventImpl implements MouseEvent {
 
     @Override
     public void initMouseEvent(String type, Boolean bubbles, Boolean cancelable, Window view,
-                               Double detail, Double screenX, Double screenY, Double clientX, Double clientY, Boolean ctrlKey, Boolean altKey, Boolean shiftKey, Boolean metaKey) {
+                               Integer detail, Integer screenX, Integer screenY, Integer clientX, Integer clientY, Boolean ctrlKey, Boolean altKey, Boolean shiftKey, Boolean metaKey) {
         initMouseEvent(type, bubbles, cancelable, view, detail, screenX, screenY, clientX, clientY,
                 ctrlKey, altKey, shiftKey);
         this.metaKey = metaKey;
@@ -123,7 +123,7 @@ public class MouseEventImpl extends UIEventImpl implements MouseEvent {
 
     @Override
     public void initMouseEvent(String type, Boolean bubbles, Boolean cancelable, Window view,
-                               Double detail, Double screenX, Double screenY, Double clientX, Double clientY,
+                               Integer detail, Integer screenX, Integer screenY, Integer clientX, Integer clientY,
                                Boolean ctrlKey, Boolean altKey, Boolean shiftKey) {
         initMouseEvent(type, bubbles, cancelable, view, detail, screenX, screenY, clientX, clientY, ctrlKey, altKey);
         this.shiftKey = shiftKey;
@@ -131,7 +131,7 @@ public class MouseEventImpl extends UIEventImpl implements MouseEvent {
 
     @Override
     public void initMouseEvent(String type, Boolean bubbles, Boolean cancelable, Window view,
-                               Double detail, Double screenX, Double screenY, Double clientX, Double clientY,
+                               Integer detail, Integer screenX, Integer screenY, Integer clientX, Integer clientY,
                                Boolean ctrlKey, Boolean altKey) {
         initMouseEvent(type, bubbles, cancelable, view, detail, screenX, screenY, clientX, clientY, ctrlKey);
         this.altKey = altKey;
@@ -139,41 +139,41 @@ public class MouseEventImpl extends UIEventImpl implements MouseEvent {
 
     @Override
     public void initMouseEvent(String type, Boolean bubbles, Boolean cancelable, Window view,
-                               Double detail, Double screenX, Double screenY, Double clientX, Double clientY, Boolean ctrlKey) {
+                               Integer detail, Integer screenX, Integer screenY, Integer clientX, Integer clientY, Boolean ctrlKey) {
         initMouseEvent(type, bubbles, cancelable, view, detail, screenX, screenY, clientX, clientY);
         this.ctrlKey = ctrlKey;
     }
 
     @Override
     public void initMouseEvent(String type, Boolean bubbles, Boolean cancelable, Window view,
-                               Double detail, Double screenX, Double screenY, Double clientX, Double clientY) {
+                               Integer detail, Integer screenX, Integer screenY, Integer clientX, Integer clientY) {
         initMouseEvent(type, bubbles, cancelable, view, detail, screenX, screenY, clientX);
         this.clientY = clientY != null ? clientY.longValue() : 0;
     }
 
     @Override
     public void initMouseEvent(String type, Boolean bubbles, Boolean cancelable, Window view,
-                               Double detail, Double screenX, Double screenY, Double clientX) {
+                               Integer detail, Integer screenX, Integer screenY, Integer clientX) {
         initMouseEvent(type, bubbles, cancelable, view, detail, screenX, screenY);
         this.clientX = clientX != null ? clientX.longValue() : 0;
     }
 
     @Override
     public void initMouseEvent(String type, Boolean bubbles, Boolean cancelable, Window view,
-                               Double detail, Double screenX, Double screenY) {
+                               Integer detail, Integer screenX, Integer screenY) {
         initMouseEvent(type, bubbles, cancelable, view, detail, screenX);
         this.screenY = screenY != null ? screenY.longValue() : 0;
     }
 
     @Override
-    public void initMouseEvent(String type, Boolean bubbles, Boolean cancelable, Window view, Double detail, Double screenX) {
-        initUIEvent(type, bubbles, cancelable, view, detail);
+    public void initMouseEvent(String type, Boolean bubbles, Boolean cancelable, Window view, Integer detail, Integer screenX) {
+        initUIEvent(type, bubbles, cancelable, view, Double.valueOf(detail));
         this.screenX = screenX != null ? screenX.longValue() : 0;
     }
 
     @Override
-    public void initMouseEvent(String type, Boolean bubbles, Boolean cancelable, Window view, Double detail) {
-        initUIEvent(type, bubbles, cancelable, view, detail);
+    public void initMouseEvent(String type, Boolean bubbles, Boolean cancelable, Window view, Integer detail) {
+        initUIEvent(type, bubbles, cancelable, view, Double.valueOf(detail));
     }
 
     @Override

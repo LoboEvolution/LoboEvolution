@@ -14,9 +14,12 @@ import static org.mozilla.classfile.ClassFileWriter.ACC_STATIC;
 import static org.mozilla.classfile.ClassFileWriter.ACC_VOLATILE;
 
 import java.lang.reflect.Constructor;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import lombok.extern.slf4j.Slf4j;
 import org.mozilla.classfile.ByteCode;
 import org.mozilla.classfile.ClassFileWriter;
 import org.mozilla.javascript.CompilerEnvirons;
@@ -26,8 +29,6 @@ import org.mozilla.javascript.Function;
 import org.mozilla.javascript.GeneratedClassLoader;
 import org.mozilla.javascript.Kit;
 import org.mozilla.javascript.NativeFunction;
-import org.mozilla.javascript.ObjArray;
-import org.mozilla.javascript.ObjToIntMap;
 import org.mozilla.javascript.RhinoException;
 import org.mozilla.javascript.Script;
 import org.mozilla.javascript.Scriptable;
@@ -44,6 +45,7 @@ import org.mozilla.javascript.ast.TemplateCharacters;
  * @author Norris Boyd
  * @author Roger Lawrence
  */
+@Slf4j
 public class Codegen implements Evaluator {
     @Override
     public void captureStackInfo(RhinoException ex) {
@@ -74,7 +76,7 @@ public class Codegen implements Evaluator {
     public Object compile(
             CompilerEnvirons compilerEnv,
             ScriptNode tree,
-            String encodedSource,
+            String rawSource,
             boolean returnFunction) {
         int serial;
         synchronized (globalLock) {
@@ -92,7 +94,7 @@ public class Codegen implements Evaluator {
         String mainClassName = "org.mozilla.javascript.gen." + baseName + "_" + serial;
 
         byte[] mainClassBytes =
-                compileToClassFile(compilerEnv, mainClassName, tree, encodedSource, returnFunction);
+                compileToClassFile(compilerEnv, mainClassName, tree, rawSource, returnFunction);
 
         return new Object[] {mainClassName, mainClassBytes};
     }
@@ -153,14 +155,14 @@ public class Codegen implements Evaluator {
             CompilerEnvirons compilerEnv,
             String mainClassName,
             ScriptNode scriptOrFn,
-            String encodedSource,
+            String rawSource,
             boolean returnFunction) {
         this.compilerEnv = compilerEnv;
 
         transform(scriptOrFn);
 
         if (Token.printTrees) {
-            System.out.println(scriptOrFn.toStringTree(scriptOrFn));
+           log.info(scriptOrFn.toStringTree(scriptOrFn));
         }
 
         if (returnFunction) {
@@ -172,7 +174,7 @@ public class Codegen implements Evaluator {
         this.mainClassName = mainClassName;
         this.mainClassSignature = ClassFileWriter.classNameToSignature(mainClassName);
 
-        return generateCode(encodedSource);
+        return generateCode(rawSource);
     }
 
     private void transform(ScriptNode tree) {
@@ -205,14 +207,14 @@ public class Codegen implements Evaluator {
         }
 
         if (possibleDirectCalls != null) {
-            directCallTargets = new ObjArray();
+            directCallTargets = new ArrayList<>();
         }
 
         OptTransformer ot = new OptTransformer(possibleDirectCalls, directCallTargets);
         ot.transform(tree, compilerEnv);
 
         if (optLevel > 0) {
-            (new Optimizer()).optimize(tree);
+            new Optimizer().optimize(tree);
         }
     }
 
@@ -225,20 +227,20 @@ public class Codegen implements Evaluator {
     }
 
     private void initScriptNodesData(ScriptNode scriptOrFn) {
-        ObjArray x = new ObjArray();
+        ArrayList<ScriptNode> x = new ArrayList<>();
         collectScriptNodes_r(scriptOrFn, x);
 
         int count = x.size();
         scriptOrFnNodes = new ScriptNode[count];
         x.toArray(scriptOrFnNodes);
 
-        scriptOrFnIndexes = new ObjToIntMap(count);
+        scriptOrFnIndexes = new HashMap<>();
         for (int i = 0; i != count; ++i) {
             scriptOrFnIndexes.put(scriptOrFnNodes[i], i);
         }
     }
 
-    private static void collectScriptNodes_r(ScriptNode n, ObjArray x) {
+    private static void collectScriptNodes_r(ScriptNode n, List<ScriptNode> x) {
         x.add(n);
         int nestedCount = n.getFunctionCount();
         for (int i = 0; i != nestedCount; ++i) {
@@ -246,7 +248,7 @@ public class Codegen implements Evaluator {
         }
     }
 
-    private byte[] generateCode(String encodedSource) {
+    private byte[] generateCode(String rawSource) {
         boolean hasScript = (scriptOrFnNodes[0].getType() == Token.SCRIPT);
         boolean hasFunctions = (scriptOrFnNodes.length > 1 || !hasScript);
         boolean isStrictMode = scriptOrFnNodes[0].isInStrictMode();
@@ -273,7 +275,7 @@ public class Codegen implements Evaluator {
         generateCallMethod(cfw, isStrictMode);
         generateResumeGenerator(cfw);
 
-        generateNativeFunctionOverrides(cfw, encodedSource);
+        generateNativeFunctionOverrides(cfw, rawSource);
 
         int count = scriptOrFnNodes.length;
         for (int i = 0; i != count; ++i) {
@@ -721,7 +723,7 @@ public class Codegen implements Evaluator {
         cfw.stopMethod((short) 3);
     }
 
-    private void generateNativeFunctionOverrides(ClassFileWriter cfw, String encodedSource) {
+    private void generateNativeFunctionOverrides(ClassFileWriter cfw, String rawSource) {
         // Override NativeFunction.getLanguageVersion() with
         // public int getLanguageVersion() { return <version-constant>; }
 
@@ -740,14 +742,15 @@ public class Codegen implements Evaluator {
         final int Do_getParamCount = 1;
         final int Do_getParamAndVarCount = 2;
         final int Do_getParamOrVarName = 3;
-        final int Do_getEncodedSource = 4;
+        final int Do_getRawSource = 4;
         final int Do_getParamOrVarConst = 5;
         final int Do_isGeneratorFunction = 6;
         final int Do_hasRestParameter = 7;
-        final int SWITCH_COUNT = 8;
+        final int Do_hasDefaultParameters = 8;
+        final int SWITCH_COUNT = 9;
 
         for (int methodIndex = 0; methodIndex != SWITCH_COUNT; ++methodIndex) {
-            if (methodIndex == Do_getEncodedSource && encodedSource == null) {
+            if (methodIndex == Do_getRawSource && rawSource == null) {
                 continue;
             }
 
@@ -778,10 +781,10 @@ public class Codegen implements Evaluator {
                     methodLocals = 1 + 1 + 1; // this + paramOrVarName
                     cfw.startMethod("getParamOrVarConst", "(I)Z", ACC_PUBLIC);
                     break;
-                case Do_getEncodedSource:
+                case Do_getRawSource:
                     methodLocals = 1; // Only this
-                    cfw.startMethod("getEncodedSource", "()Ljava/lang/String;", ACC_PUBLIC);
-                    cfw.addPush(encodedSource);
+                    cfw.startMethod("getRawSource", "()Ljava/lang/String;", ACC_PUBLIC);
+                    cfw.addPush(rawSource);
                     break;
                 case Do_isGeneratorFunction:
                     methodLocals = 1; // Only this
@@ -790,6 +793,10 @@ public class Codegen implements Evaluator {
                 case Do_hasRestParameter:
                     methodLocals = 1; // Only this
                     cfw.startMethod("hasRestParameter", "()Z", ACC_PUBLIC);
+                    break;
+                case Do_hasDefaultParameters:
+                    methodLocals = 1; // Only this
+                    cfw.startMethod("hasDefaultParameters", "()Z", ACC_PUBLIC);
                     break;
                 default:
                     throw Kit.codeBug();
@@ -935,11 +942,20 @@ public class Codegen implements Evaluator {
                         cfw.add(ByteCode.IRETURN);
                         break;
 
-                    case Do_getEncodedSource:
-                        // Push number encoded source start and end
-                        // to prepare for encodedSource.substring(start, end)
-                        cfw.addPush(n.getEncodedSourceStart());
-                        cfw.addPush(n.getEncodedSourceEnd());
+                    case Do_hasDefaultParameters:
+                        if (n instanceof FunctionNode) {
+                            cfw.addPush(n.getDefaultParams() != null);
+                        } else {
+                            cfw.addPush(false);
+                        }
+                        cfw.add(ByteCode.IRETURN);
+                        break;
+
+                    case Do_getRawSource:
+                        // Push number raw source start and end
+                        // to prepare for rawSource.substring(start, end)
+                        cfw.addPush(n.getRawSourceStart());
+                        cfw.addPush(n.getRawSourceEnd());
                         cfw.addInvoke(
                                 ByteCode.INVOKEVIRTUAL,
                                 "java/lang/String",
@@ -1144,7 +1160,7 @@ public class Codegen implements Evaluator {
                         ByteCode.GETSTATIC,
                         "org/mozilla/javascript/ScriptRuntime",
                         "zeroObj",
-                        "Ljava/lang/Double;");
+                        "Ljava/lang/Integer;");
             } else {
                 cfw.addPush(num);
                 addDoubleWrap(cfw);
@@ -1155,7 +1171,7 @@ public class Codegen implements Evaluator {
                     ByteCode.GETSTATIC,
                     "org/mozilla/javascript/optimizer/OptRuntime",
                     "oneObj",
-                    "Ljava/lang/Double;");
+                    "Ljava/lang/Integer;");
             return;
 
         } else if (num == -1.0) {
@@ -1163,7 +1179,7 @@ public class Codegen implements Evaluator {
                     ByteCode.GETSTATIC,
                     "org/mozilla/javascript/optimizer/OptRuntime",
                     "minusOneObj",
-                    "Ljava/lang/Double;");
+                    "Ljava/lang/Integer;");
 
         } else if (Double.isNaN(num)) {
             cfw.add(
@@ -1231,7 +1247,7 @@ public class Codegen implements Evaluator {
     }
 
     int getIndex(ScriptNode n) {
-        return scriptOrFnIndexes.getExisting(n);
+        return scriptOrFnIndexes.get(n);
     }
 
     String getDirectCtorName(ScriptNode n) {
@@ -1322,9 +1338,9 @@ public class Codegen implements Evaluator {
 
     private CompilerEnvirons compilerEnv;
 
-    private ObjArray directCallTargets;
+    private List<OptFunctionNode> directCallTargets;
     ScriptNode[] scriptOrFnNodes;
-    private ObjToIntMap scriptOrFnIndexes;
+    private HashMap<ScriptNode, Integer> scriptOrFnIndexes;
 
     private String mainMethodClass = DEFAULT_MAIN_METHOD_CLASS;
 

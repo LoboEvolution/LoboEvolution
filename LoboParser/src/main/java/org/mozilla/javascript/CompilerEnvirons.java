@@ -41,7 +41,7 @@ public class CompilerEnvirons {
         activationNames = cx.activationNames;
 
         // Observer code generation in compiled code :
-        generateObserverCount = cx.generateObserverCount;
+        generateObserverCount = cx.isGenerateObserverCount();
     }
 
     public final ErrorReporter getErrorReporter() {
@@ -142,7 +142,9 @@ public class CompilerEnvirons {
         this.generatingSource = generatingSource;
     }
 
-    /** @return true iff code will be generated with callbacks to enable instruction thresholds */
+    /**
+     * @return true iff code will be generated with callbacks to enable instruction thresholds
+     */
     public boolean isGenerateObserverCount() {
         return generateObserverCount;
     }

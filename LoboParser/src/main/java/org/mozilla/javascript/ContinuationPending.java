@@ -7,12 +7,12 @@
 package org.mozilla.javascript;
 
 /**
- * Exception thrown by {@link org.mozilla.javascript.Context#executeScriptWithContinuations(Script,
- * Scriptable)} and {@link org.mozilla.javascript.Context#callFunctionWithContinuations(Callable,
+ * Exception thrown by {@link Context#executeScriptWithContinuations(Script,
+ * Scriptable)} and {@link Context#callFunctionWithContinuations(Callable,
  * Scriptable, Object[])} when execution encounters a continuation captured by {@link
- * org.mozilla.javascript.Context#captureContinuation()}. Exception will contain the captured state
+ * Context#captureContinuation()}. Exception will contain the captured state
  * needed to restart the continuation with {@link
- * org.mozilla.javascript.Context#resumeContinuation(Object, Scriptable, Object)}.
+ * Context#resumeContinuation(Object, Scriptable, Object)}.
  *
  * @author Norris Boyd
  */
@@ -24,8 +24,8 @@ public class ContinuationPending extends RuntimeException {
     /**
      * Construct a ContinuationPending exception. Internal call only; users of the API should get
      * continuations created on their behalf by calling {@link
-     * org.mozilla.javascript.Context#executeScriptWithContinuations(Script, Scriptable)} and {@link
-     * org.mozilla.javascript.Context#callFunctionWithContinuations(Callable, Scriptable, Object[])}
+     * Context#executeScriptWithContinuations(Script, Scriptable)} and {@link
+     * Context#callFunctionWithContinuations(Callable, Scriptable, Object[])}
      * Creating subclasses allowed.
      *
      * @param continuationState Internal Continuation object
@@ -36,7 +36,7 @@ public class ContinuationPending extends RuntimeException {
 
     /**
      * Get continuation object. The only use for this object is to be passed to {@link
-     * org.mozilla.javascript.Context#resumeContinuation(Object, Scriptable, Object)}.
+     * Context#resumeContinuation(Object, Scriptable, Object)}.
      *
      * @return continuation object
      */
@@ -53,7 +53,9 @@ public class ContinuationPending extends RuntimeException {
         this.continuationState = continuation;
     }
 
-    /** @return internal continuation state */
+    /**
+     * @return internal continuation state
+     */
     NativeContinuation getContinuationState() {
         return continuationState;
     }
@@ -68,7 +70,9 @@ public class ContinuationPending extends RuntimeException {
         this.applicationState = applicationState;
     }
 
-    /** @return arbitrary application state */
+    /**
+     * @return arbitrary application state
+     */
     public Object getApplicationState() {
         return applicationState;
     }

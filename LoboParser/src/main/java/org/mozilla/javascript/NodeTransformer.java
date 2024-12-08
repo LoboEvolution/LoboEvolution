@@ -6,12 +6,17 @@
 
 package org.mozilla.javascript;
 
+import static org.mozilla.javascript.Context.reportError;
+
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
 
 import lombok.extern.slf4j.Slf4j;
 import org.mozilla.javascript.ast.FunctionNode;
 import org.mozilla.javascript.ast.Jump;
+import org.mozilla.javascript.ast.Name;
 import org.mozilla.javascript.ast.Scope;
 import org.mozilla.javascript.ast.ScriptNode;
 
@@ -46,8 +51,8 @@ public class NodeTransformer {
     }
 
     private void transformCompilationUnit(ScriptNode tree, boolean inStrictMode) {
-        loops = new ObjArray();
-        loopEnds = new ObjArray();
+        loops = new ArrayDeque<>();
+        loopEnds = new ArrayDeque<>();
 
         // to save against upchecks if no finally blocks are used.
         hasFinally = false;
@@ -58,7 +63,7 @@ public class NodeTransformer {
         tree.flattenSymbolTable(!createScopeObjects);
 
         // uncomment to print tree before transformation
-        if (Token.printTrees) log.info(tree.toStringTree(tree));
+        if (Token.printTrees)log.info(tree.toStringTree(tree));
         transformCompilationUnit_r(tree, tree, tree, createScopeObjects, inStrictMode);
     }
 
@@ -165,8 +170,8 @@ public class NodeTransformer {
                          */
                         if (!hasFinally) break; // skip the whole mess.
                         Node unwindBlock = null;
-                        for (int i = loops.size() - 1; i >= 0; i--) {
-                            Node n = (Node) loops.get(i);
+                        // Iterate from the top of the stack (most recently inserted) and down
+                        for (Node n : loops) {
                             int elemtype = n.getType();
                             if (elemtype == Token.TRY || elemtype == Token.WITH) {
                                 Node unwind;
@@ -178,7 +183,8 @@ public class NodeTransformer {
                                     unwind = new Node(Token.LEAVEWITH);
                                 }
                                 if (unwindBlock == null) {
-                                    unwindBlock = new Node(Token.BLOCK, node.getLineno());
+                                    unwindBlock = new Node(Token.BLOCK);
+                                    unwind.setLineColumnNumber(node.getLineno(), node.getColumn());
                                 }
                                 unwindBlock.addChildToBack(unwind);
                             }
@@ -211,15 +217,14 @@ public class NodeTransformer {
                         Jump jumpStatement = jump.getJumpStatement();
                         if (jumpStatement == null) Kit.codeBug();
 
-                        for (int i = loops.size(); ; ) {
-                            if (i == 0) {
-                                // Parser/IRFactory ensure that break/continue
-                                // always has a jump statement associated with it
-                                // which should be found
-                                throw Kit.codeBug();
-                            }
-                            --i;
-                            Node n = (Node) loops.get(i);
+                        if (loops.isEmpty()) {
+                            // Parser/IRFactory ensure that break/continue
+                            // always has a jump statement associated with it
+                            // which should be found
+                            throw Kit.codeBug();
+                        }
+                        // Iterate from the top of the stack (most recently inserted) and down
+                        for (Node n : loops) {
                             if (n == jumpStatement) {
                                 break;
                             }
@@ -269,7 +274,7 @@ public class NodeTransformer {
                         }
                         // fall through to process let declaration...
                     }
-                    /* fall through */
+                /* fall through */
                 case Token.CONST:
                 case Token.VAR:
                     {
@@ -296,7 +301,8 @@ public class NodeTransformer {
                                 // to a LETEXPR
                                 if (n.getType() != Token.LETEXPR) throw Kit.codeBug();
                             }
-                            Node pop = new Node(Token.EXPR_VOID, n, node.getLineno());
+                            Node pop = new Node(Token.EXPR_VOID, n);
+                            pop.setLineColumnNumber(node.getLineno(), node.getColumn());
                             result.addChildToBack(pop);
                         }
                         node = replaceCurrent(parent, previous, node, result);
@@ -345,8 +351,16 @@ public class NodeTransformer {
                 case Token.SETNAME:
                     if (inStrictMode) {
                         node.setType(Token.STRICT_SETNAME);
+                        if (node.getFirstChild().getType() == Token.BINDNAME) {
+                            Node name = node.getFirstChild();
+                            if (name instanceof Name
+                                    && ((Name) name).getIdentifier().equals("eval")) {
+                                // Don't allow set of `eval` in strict mode
+                                reportError("syntax error");
+                            }
+                        }
                     }
-                    /* fall through */
+                /* fall through */
                 case Token.NAME:
                 case Token.SETCONST:
                 case Token.DELPROP:
@@ -391,6 +405,22 @@ public class NodeTransformer {
                             }
                         }
                         break;
+                    }
+
+                case Token.OBJECTLIT:
+                    {
+                        Object[] propertyIds = (Object[]) node.getProp(Node.OBJECT_IDS_PROP);
+                        if (propertyIds != null) {
+                            for (Object propertyId : propertyIds) {
+                                if (!(propertyId instanceof Node)) continue;
+                                transformCompilationUnit_r(
+                                        tree,
+                                        (Node) propertyId,
+                                        node instanceof Scope ? (Scope) node : scope,
+                                        createScopeObjects,
+                                        inStrictMode);
+                            }
+                        }
                     }
             }
 
@@ -536,7 +566,7 @@ public class NodeTransformer {
         return replacement;
     }
 
-    private ObjArray loops;
-    private ObjArray loopEnds;
+    private Deque<Node> loops;
+    private Deque<Node> loopEnds;
     private boolean hasFinally;
 }

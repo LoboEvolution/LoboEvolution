@@ -115,12 +115,11 @@ public class Scope extends Jump {
      * a scope chain.
      */
     public static Scope splitScope(Scope scope) {
-        Scope result = new Scope(scope.getType());
+        Scope result = new Scope(scope.getPosition(), scope.getLength());
         result.symbolTable = scope.symbolTable;
         scope.symbolTable = null;
         result.parent = scope.parent;
         result.setParentScope(scope.getParentScope());
-        result.setParentScope(result);
         scope.parent = result;
         result.top = scope.top;
         return result;

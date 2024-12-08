@@ -24,6 +24,7 @@ import java.util.NoSuchElementException;
  * allow the collection to be modified, or even cleared completely, while iterators exist, and even
  * lets an iterator keep on iterating on a collection that was empty when it was created..
  */
+@SuppressWarnings("ReferenceEquality")
 public class Hashtable implements Serializable, Iterable<Hashtable.Entry> {
 
     private static final long serialVersionUID = -7151554912419543747L;
@@ -37,12 +38,12 @@ public class Hashtable implements Serializable, Iterable<Hashtable.Entry> {
      */
     public static final class Entry implements Serializable {
         private static final long serialVersionUID = 4086572107122965503L;
-        protected Object key;
-        protected Object value;
-        protected boolean deleted;
-        protected Entry next;
-        protected Entry prev;
-        private final int hashCode;
+        Object key;
+        Object value;
+        boolean deleted;
+        Entry next;
+        Entry prev;
+        final int hashCode;
 
         Entry() {
             hashCode = 0;
@@ -122,26 +123,32 @@ public class Hashtable implements Serializable, Iterable<Hashtable.Entry> {
     public void put(Object key, Object value) {
         final Entry nv = new Entry(key, value);
 
-        if (!map.containsKey(nv)) {
-            // New value -- insert to end of doubly-linked list
-            map.put(nv, nv);
-            if (first == null) {
-                first = last = nv;
-            } else {
-                last.next = nv;
-                nv.prev = last;
-                last = nv;
-            }
-        } else {
-            // Update the existing value and keep it in the same place in the list
-            map.get(nv).value = value;
-        }
+        map.compute(
+                nv,
+                (k, existing) -> {
+                    if (existing == null) {
+                        // New value -- insert to end of doubly-linked list
+                        if (first == null) {
+                            first = last = nv;
+                        } else {
+                            last.next = nv;
+                            nv.prev = last;
+                            last = nv;
+                        }
+                        return nv;
+                    } else {
+                        // Update the existing value and keep it in the same place in the list
+                        existing.value = value;
+                        return existing;
+                    }
+                });
     }
 
     /**
      * @deprecated use getEntry(Object key) instead because this returns null if the entry was not
      *     found or the value of the entry is null
      */
+    @Deprecated
     public Object get(Object key) {
         final Entry e = new Entry(key, null);
         final Entry v = map.get(e);
@@ -165,6 +172,7 @@ public class Hashtable implements Serializable, Iterable<Hashtable.Entry> {
      * @deprecated use deleteEntry(Object key) instead because this returns null if the entry was
      *     not found or the value of the entry is null
      */
+    @Deprecated
     public Object delete(Object key) {
         final Entry e = new Entry(key, null);
         final Entry v = map.remove(e);

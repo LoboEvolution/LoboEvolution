@@ -802,7 +802,6 @@ public class HTMLSelectElementTest extends LoboUnitTest {
                 "<html>\n"
                         + "<head>\n"
                         + "  <script>\n"
-
                         + "    function doTest() {\n"
                         + "      try {\n"
                         + "        var oSelect = document.forms.testForm.testSelect;\n"

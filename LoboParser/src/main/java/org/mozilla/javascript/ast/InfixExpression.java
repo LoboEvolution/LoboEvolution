@@ -94,8 +94,8 @@ public class InfixExpression extends AstNode {
     public void setLeft(AstNode left) {
         assertNotNull(left);
         this.left = left;
-        // line number should agree with source position
-        setLineno(left.getLineno());
+        // line and column number should agree with source position
+        setLineColumnNumber(left.getLineno(), left.getColumn());
         left.setParent(this);
     }
 
@@ -142,8 +142,8 @@ public class InfixExpression extends AstNode {
                 return right != null && right.hasSideEffects();
             case Token.AND:
             case Token.OR:
-                return left != null && left.hasSideEffects()
-                        || (right != null && right.hasSideEffects());
+                return ((left != null) && left.hasSideEffects())
+                        || ((right != null) && right.hasSideEffects());
             default:
                 return super.hasSideEffects();
         }

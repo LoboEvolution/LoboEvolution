@@ -6,14 +6,15 @@ package org.mozilla.javascript.optimizer;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import lombok.extern.slf4j.Slf4j;
 import org.mozilla.javascript.Node;
-import org.mozilla.javascript.ObjArray;
-import org.mozilla.javascript.ObjToIntMap;
 import org.mozilla.javascript.Token;
 import org.mozilla.javascript.ast.Jump;
 
@@ -22,14 +23,12 @@ class Block {
 
     private static class FatBlock {
 
-        private static Block[] reduceToArray(ObjToIntMap map) {
+        private static Block[] reduceToArray(Set<FatBlock> map) {
             Block[] result = null;
             if (!map.isEmpty()) {
                 result = new Block[map.size()];
                 int i = 0;
-                ObjToIntMap.Iterator iter = map.newIterator();
-                for (iter.start(); !iter.done(); iter.next()) {
-                    FatBlock fb = (FatBlock) (iter.getKey());
+                for (FatBlock fb : map) {
                     result[i++] = fb.realBlock;
                 }
             }
@@ -37,11 +36,11 @@ class Block {
         }
 
         void addSuccessor(FatBlock b) {
-            successors.put(b, 0);
+            successors.add(b);
         }
 
         void addPredecessor(FatBlock b) {
-            predecessors.put(b, 0);
+            predecessors.add(b);
         }
 
         Block[] getSuccessors() {
@@ -53,9 +52,9 @@ class Block {
         }
 
         // all the Blocks that come immediately after this
-        private ObjToIntMap successors = new ObjToIntMap();
+        private final HashSet<FatBlock> successors = new HashSet<>();
         // all the Blocks that come immediately before this
-        private ObjToIntMap predecessors = new ObjToIntMap();
+        private final HashSet<FatBlock> predecessors = new HashSet<>();
 
         Block realBlock;
     }
@@ -83,9 +82,9 @@ class Block {
 
         if (DEBUG) {
             ++debug_blockCount;
-            log.info("------------------- {} {} ------", fn.fnode.getFunctionName(), debug_blockCount);
-            log.info(fn.fnode.toStringTree(fn.fnode));
-            log.info(toString(theBlocks, statementNodes));
+            log.info("-------------------{}  {}--------", fn.fnode.getFunctionName(), debug_blockCount);
+           log.info(fn.fnode.toStringTree(fn.fnode));
+           log.info(toString(theBlocks, statementNodes));
         }
 
         reachingDefDataFlow(fn, statementNodes, theBlocks, varTypes);
@@ -93,12 +92,12 @@ class Block {
 
         if (DEBUG) {
             for (Block theBlock : theBlocks) {
-                log.info("For block {} ", theBlock.itsBlockID);
+                log.info("For block {}", theBlock.itsBlockID);
                 theBlock.printLiveOnEntrySet(fn);
             }
-            log.info("Variable Table, size = {} " + varCount);
+            log.info("Variable Table, size = {}", varCount);
             for (int i = 0; i != varCount; i++) {
-                log.info("[" + i + "] type: {} ", varTypes[i]);
+                log.info("[{}] type: {}", i, varTypes[i]);
             }
         }
 
@@ -112,7 +111,7 @@ class Block {
     private static Block[] buildBlocks(Node[] statementNodes) {
         // a mapping from each target node to the block it begins
         Map<Node, FatBlock> theTargetBlocks = new HashMap<>();
-        ObjArray theBlocks = new ObjArray();
+        ArrayList<FatBlock> theBlocks = new ArrayList<>();
 
         // there's a block that starts at index 0
         int beginNodeIndex = 0;
@@ -159,13 +158,13 @@ class Block {
         // build successor and predecessor links
 
         for (int i = 0; i < theBlocks.size(); i++) {
-            FatBlock fb = (FatBlock) (theBlocks.get(i));
+            FatBlock fb = (FatBlock) theBlocks.get(i);
 
             Node blockEndNode = statementNodes[fb.realBlock.itsEndNodeIndex];
             int blockEndNodeType = blockEndNode.getType();
 
             if ((blockEndNodeType != Token.GOTO) && (i < (theBlocks.size() - 1))) {
-                FatBlock fallThruTarget = (FatBlock) (theBlocks.get(i + 1));
+                FatBlock fallThruTarget = (FatBlock) theBlocks.get(i + 1);
                 fb.addSuccessor(fallThruTarget);
                 fallThruTarget.addPredecessor(fb);
             }
@@ -184,7 +183,7 @@ class Block {
         Block[] result = new Block[theBlocks.size()];
 
         for (int i = 0; i < theBlocks.size(); i++) {
-            FatBlock fb = (FatBlock) (theBlocks.get(i));
+            FatBlock fb = (FatBlock) theBlocks.get(i);
             Block b = fb.realBlock;
             b.itsSuccessors = fb.getSuccessors();
             b.itsPredecessors = fb.getPredecessors();
@@ -526,7 +525,7 @@ class Block {
             case Token.TEMPLATE_LITERAL:
             case Token.BIGINT:
                 return Optimizer.AnyType; // XXX: actually, we know it's not
-                // number, but no type yet for that
+            // number, but no type yet for that
 
             case Token.ADD:
                 {
@@ -617,10 +616,10 @@ class Block {
         if (DEBUG) {
             for (int i = 0; i < fn.getVarCount(); i++) {
                 String name = fn.fnode.getParamOrVarName(i);
-                if (itsUseBeforeDefSet.get(i)) log.info(name + " is used before def'd");
-                if (itsNotDefSet.get(i)) log.info(name + " is not def'd");
-                if (itsLiveOnEntrySet.get(i)) log.info(name + " is live on entry");
-                if (itsLiveOnExitSet.get(i)) log.info(name + " is live on exit");
+                if (itsUseBeforeDefSet.get(i)) log.info("{} is used before def'd", name);
+                if (itsNotDefSet.get(i)) log.info("{} is not def'd", name);
+                if (itsLiveOnEntrySet.get(i)) log.info("{} is live on entry", name);
+                if (itsLiveOnExitSet.get(i)) log.info("{} is live on exit", name);
             }
         }
     }

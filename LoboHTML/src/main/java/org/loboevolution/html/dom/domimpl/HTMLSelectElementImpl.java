@@ -172,6 +172,10 @@ public class HTMLSelectElementImpl extends HTMLBasicInputElement implements HTML
                 if (d > -1 && d.intValue() < getOptions().getLength()) {
                     getOptions().remove(d.intValue());
                 }
+            } else if (element instanceof Integer d) {
+                if (d > -1 && d < getOptions().getLength()) {
+                    getOptions().remove(d);
+                }
             } else {
                 getOptions().remove(0);
             }
@@ -296,9 +300,8 @@ public class HTMLSelectElementImpl extends HTMLBasicInputElement implements HTML
             getOptions().add((HTMLOptionElement) element);
         }
 
-        if (element instanceof HTMLOptionElementImpl && before instanceof Double) {
-            final double d = (double) before;
-            getOptions().add(element, d);
+        if (element instanceof HTMLOptionElementImpl && before instanceof Double d) {
+            getOptions().add(element, d.intValue());
         }
 
         if (element instanceof HTMLOptionElementImpl && before instanceof HTMLOptionElementImpl d) {

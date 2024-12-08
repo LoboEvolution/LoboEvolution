@@ -77,7 +77,7 @@ public class FunctionObject extends BaseFunction {
      * @param methodOrConstructor a java.lang.reflect.Method or a java.lang.reflect.Constructor that
      *     defines the object
      * @param scope enclosing scope of function
-     * @see org.mozilla.javascript.Scriptable
+     * @see Scriptable
      */
     public FunctionObject(String name, Member methodOrConstructor, Scriptable scope) {
         if (methodOrConstructor instanceof Constructor) {
@@ -147,7 +147,7 @@ public class FunctionObject extends BaseFunction {
 
     /**
      * @return One of <code>JAVA_*_TYPE</code> constants to indicate desired type or {@link
-     *     #JAVA_UNSUPPORTED_TYPE} if the convertion is not possible
+     *     #JAVA_UNSUPPORTED_TYPE} if the conversion is not possible
      */
     public static int getTypeTag(Class<?> type) {
         if (type == ScriptRuntime.StringClass) return JAVA_STRING_TYPE;
@@ -278,9 +278,9 @@ public class FunctionObject extends BaseFunction {
      *
      * @param scope the scope in which to define the constructor (typically the global object)
      * @param prototype the prototype object
-     * @see org.mozilla.javascript.Scriptable#setParentScope
-     * @see org.mozilla.javascript.Scriptable#setPrototype
-     * @see org.mozilla.javascript.Scriptable#getClassName
+     * @see Scriptable#setParentScope
+     * @see Scriptable#setPrototype
+     * @see Scriptable#getClassName
      */
     public void addAsConstructor(Scriptable scope, Scriptable prototype) {
         initAsConstructor(
@@ -300,9 +300,9 @@ public class FunctionObject extends BaseFunction {
      * @param scope the scope in which to define the constructor (typically the global object)
      * @param prototype the prototype object
      * @param attributes the attributes of the constructor property
-     * @see org.mozilla.javascript.Scriptable#setParentScope
-     * @see org.mozilla.javascript.Scriptable#setPrototype
-     * @see org.mozilla.javascript.Scriptable#getClassName
+     * @see Scriptable#setParentScope
+     * @see Scriptable#setPrototype
+     * @see Scriptable#getClassName
      */
     public void addAsConstructor(Scriptable scope, Scriptable prototype, int attributes) {
         initAsConstructor(scope, prototype, attributes);
@@ -338,7 +338,7 @@ public class FunctionObject extends BaseFunction {
      *
      * <p>Implements Function.call.
      *
-     * @see org.mozilla.javascript.Function#call( Context, Scriptable, Scriptable, Object[])
+     * @see Function#call( Context, Scriptable, Scriptable, Object[])
      */
     @Override
     public Object call(Context cx, Scriptable scope, Scriptable thisObj, Object[] args) {
@@ -363,7 +363,7 @@ public class FunctionObject extends BaseFunction {
                 Boolean b = inNewExpr ? Boolean.TRUE : Boolean.FALSE;
                 Object[] invokeArgs = {cx, args, this, b};
                 result =
-                        (member.isCtor())
+                        member.isCtor()
                                 ? member.newInstance(invokeArgs)
                                 : member.invoke(null, invokeArgs);
             }

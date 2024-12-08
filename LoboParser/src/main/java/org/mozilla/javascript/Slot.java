@@ -19,10 +19,17 @@ public class Slot implements Serializable {
     transient Slot next; // next in hash table bucket
     transient Slot orderedNext; // next in linked list
 
-    Slot(Object name, int indexOrHash, int attributes) {
+    Slot(Object name, int index, int attributes) {
         this.name = name;
-        this.indexOrHash = indexOrHash;
+        this.indexOrHash = name == null ? index : name.hashCode();
         this.attributes = (short) attributes;
+    }
+
+    Slot copySlot() {
+        var newSlot = new Slot(this);
+        newSlot.next = null;
+        newSlot.orderedNext = null;
+        return newSlot;
     }
 
     /**
@@ -82,7 +89,7 @@ public class Slot implements Serializable {
         return attributes;
     }
 
-    synchronized void setAttributes(int value) {
+    void setAttributes(int value) {
         ScriptableObject.checkValidAttributes(value);
         attributes = (short) value;
     }

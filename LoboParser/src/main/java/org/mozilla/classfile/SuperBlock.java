@@ -90,10 +90,10 @@ final class SuperBlock {
             return localsChanged || stackChanged;
         } else {
             if (ClassFileWriter.StackMapTable.DEBUGSTACKMAP) {
-                log.info("bad merge");
-                log.info("current type state:");
+               log.info("bad merge");
+               log.info("current type state:");
                 TypeInfo.print(this.locals, this.stack, pool);
-                log.info("incoming type state:");
+               log.info("incoming type state:");
                 TypeInfo.print(locals, localsTop, stack, stackTop, pool);
             }
             throw new IllegalArgumentException("bad merge attempt");

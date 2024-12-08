@@ -8,8 +8,23 @@ package org.mozilla.javascript;
 public class AccessorSlot extends Slot {
     private static final long serialVersionUID = 1677840254177335827L;
 
+    AccessorSlot(Object name, int index) {
+        super(name, index, 0);
+    }
+
     AccessorSlot(Slot oldSlot) {
         super(oldSlot);
+    }
+
+    @Override
+    AccessorSlot copySlot() {
+        var newSlot = new AccessorSlot(this);
+        newSlot.value = value;
+        newSlot.getter = getter;
+        newSlot.setter = setter;
+        newSlot.next = null;
+        newSlot.orderedNext = null;
+        return newSlot;
     }
 
     // The Getter and Setter may each be of a different type (JavaScript function, Java

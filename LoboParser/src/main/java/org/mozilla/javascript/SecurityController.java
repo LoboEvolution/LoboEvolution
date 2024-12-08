@@ -22,8 +22,8 @@ package org.mozilla.javascript;
  *
  * <p>These three pieces of functionality are encapsulated in the SecurityController class.
  *
- * @see org.mozilla.javascript.Context#setSecurityController(SecurityController)
- * @see java.lang.ClassLoader
+ * @see Context#setSecurityController(SecurityController)
+ * @see ClassLoader
  * @since 1.5 Release 4
  */
 public abstract class SecurityController {

@@ -25,7 +25,7 @@ public interface GeneratedClassLoader {
      *
      * @param cl Class instance returned from the previous call to {@link #defineClass(String,
      *     byte[])}
-     * @see java.lang.ClassLoader
+     * @see ClassLoader
      */
     public void linkClass(Class<?> cl);
 }

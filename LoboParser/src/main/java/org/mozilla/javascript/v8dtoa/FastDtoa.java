@@ -355,7 +355,7 @@ public class FastDtoa {
         int integrals = (int) ((too_high.f() >>> -one.e()) & 0xffffffffL);
         // Modulo by one is an and.
         long fractionals = too_high.f() & (one.f() - 1);
-        long result = biggestPowerTen(integrals, DiyFp.kSignificandSize - (-one.e()));
+        long result = biggestPowerTen(integrals, DiyFp.kSignificandSize - -one.e());
         int divider = (int) ((result >>> 32) & 0xffffffffL);
         int divider_exponent = (int) (result & 0xffffffffL);
         int kappa = divider_exponent + 1;
@@ -472,7 +472,7 @@ public class FastDtoa {
         // the difference between w and boundary_minus/plus (a power of 2) and to
         // compute scaled_boundary_minus/plus by subtracting/adding from
         // scaled_w. However the code becomes much less readable and the speed
-        // enhancements are not terriffic.
+        // enhancements are not terrific.
         DiyFp scaled_boundary_minus = DiyFp.times(boundary_minus, ten_mk);
         DiyFp scaled_boundary_plus = DiyFp.times(boundary_plus, ten_mk);
 
@@ -487,8 +487,8 @@ public class FastDtoa {
 
     public static boolean dtoa(double v, FastDtoaBuilder buffer) {
         assert (v > 0);
-        assert (!Double.isNaN(v));
-        assert (!Double.isInfinite(v));
+        assert !Double.isNaN(v);
+        assert !Double.isInfinite(v);
 
         return grisu3(v, buffer);
     }

@@ -21,12 +21,20 @@ import org.mozilla.javascript.ScriptableObject;
 import org.mozilla.javascript.Undefined;
 
 public final class OptRuntime extends ScriptRuntime {
-    public static final Double oneObj = Double.valueOf(1.0);
-    public static final Double minusOneObj = Double.valueOf(-1.0);
+    public static final Integer oneObj = Integer.valueOf(1);
+    public static final Integer minusOneObj = Integer.valueOf(-1);
 
     /** Implement ....() call shrinking optimizer code. */
     public static Object call0(Callable fun, Scriptable thisObj, Context cx, Scriptable scope) {
         return fun.call(cx, scope, thisObj, ScriptRuntime.emptyArgs);
+    }
+
+    public static Object call0Optional(
+            Callable fun, Scriptable thisObj, Context cx, Scriptable scope) {
+        if (fun == null) {
+            return Undefined.instance;
+        }
+        return call0(fun, thisObj, cx, scope);
     }
 
     /** Implement ....(arg) call shrinking optimizer code. */
@@ -66,9 +74,28 @@ public final class OptRuntime extends ScriptRuntime {
         return f.call(cx, scope, thisObj, ScriptRuntime.emptyArgs);
     }
 
+    public static Object callName0Optional(String name, Context cx, Scriptable scope) {
+        Callable f = getNameFunctionAndThisOptional(name, cx, scope);
+        if (f == null) {
+            return Undefined.instance;
+        }
+        Scriptable thisObj = lastStoredScriptable(cx);
+        return f.call(cx, scope, thisObj, ScriptRuntime.emptyArgs);
+    }
+
     /** Implement x.property() call shrinking optimizer code. */
     public static Object callProp0(Object value, String property, Context cx, Scriptable scope) {
         Callable f = getPropFunctionAndThis(value, property, cx, scope);
+        Scriptable thisObj = lastStoredScriptable(cx);
+        return f.call(cx, scope, thisObj, ScriptRuntime.emptyArgs);
+    }
+
+    public static Object callProp0Optional(
+            Object value, String property, Context cx, Scriptable scope) {
+        Callable f = getPropFunctionAndThisOptional(value, property, cx, scope);
+        if (f == null) {
+            return Undefined.instance;
+        }
         Scriptable thisObj = lastStoredScriptable(cx);
         return f.call(cx, scope, thisObj, ScriptRuntime.emptyArgs);
     }
@@ -93,7 +120,9 @@ public final class OptRuntime extends ScriptRuntime {
         return ScriptRuntime.add(val1, val2, cx);
     }
 
-    /** @deprecated Use {@link #elemIncrDecr(Object, double, Context, Scriptable, int)} instead */
+    /**
+     * @deprecated Use {@link #elemIncrDecr(Object, double, Context, Scriptable, int)} instead
+     */
     @Deprecated
     public static Object elemIncrDecr(Object obj, double index, Context cx, int incrDecrMask) {
         return elemIncrDecr(obj, index, cx, getTopCallScope(cx), incrDecrMask);
@@ -129,9 +158,19 @@ public final class OptRuntime extends ScriptRuntime {
             Scriptable callerThis,
             int callType,
             String fileName,
-            int lineNumber) {
+            int lineNumber,
+            boolean isOptionalChainingCall) {
         return ScriptRuntime.callSpecial(
-                cx, fun, thisObj, args, scope, callerThis, callType, fileName, lineNumber);
+                cx,
+                fun,
+                thisObj,
+                args,
+                scope,
+                callerThis,
+                callType,
+                fileName,
+                lineNumber,
+                isOptionalChainingCall);
     }
 
     public static Object newObjectSpecial(
@@ -145,16 +184,7 @@ public final class OptRuntime extends ScriptRuntime {
     }
 
     public static Double wrapDouble(double num) {
-        if (num == 0.0) {
-            if (1 / num > 0) {
-                // +0.0
-                return zeroObj;
-            }
-        } else if (num == 1.0) {
-            return oneObj;
-        } else if (num == -1.0) {
-            return minusOneObj;
-        } else if (Double.isNaN(num)) {
+        if (Double.isNaN(num)) {
             return NaNobj;
         }
         return Double.valueOf(num);
@@ -260,6 +290,10 @@ public final class OptRuntime extends ScriptRuntime {
     public static Object getGeneratorReturnValue(Object obj) {
         GeneratorState rgs = (GeneratorState) obj;
         return (rgs.returnValue == null ? Undefined.instance : rgs.returnValue);
+    }
+
+    public static boolean isNullOrUndefined(Object obj) {
+        return obj == null || Undefined.isUndefined(obj);
     }
 
     public static class GeneratorState {
