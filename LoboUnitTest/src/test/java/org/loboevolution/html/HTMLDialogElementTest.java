@@ -60,35 +60,27 @@ public class HTMLDialogElementTest extends LoboUnitTest {
                         + DUMP_EVENT_FUNCTION
                         + "      function test() {\n"
                         + "        var dia = document.getElementById('tester');\n"
-                        + "        if (typeof HTMLDialogElement !== 'function') { alert('No'); return; }\n"
-
+                        + "        if (typeof HTMLDialogElement !== 'object') { alert('No'); return; }\n"
                         + "        dia.addEventListener('close', (event) => {\n"
                         + "          dump(event);\n"
                         + "        });\n"
-
                         + "        alert(dia.open);\n"
                         + "        alert(dia.getAttribute('open'));\n"
-
                         + "        dia.open = true;\n"
                         + "        alert(dia.open);\n"
                         + "        alert(dia.getAttribute('open'));\n"
-
                         + "        dia.open = false;\n"
                         + "        alert(dia.open);\n"
                         + "        alert(dia.getAttribute('open'));\n"
-
                         + "        dia.open = 'true';\n"
                         + "        alert(dia.open);\n"
                         + "        alert(dia.getAttribute('open'));\n"
-
                         + "        dia.open = 'faLSE';\n"
                         + "        alert(dia.open);\n"
                         + "        alert(dia.getAttribute('open'));\n"
-
                         + "        dia.setAttribute('open', 'TrUE');\n"
                         + "        alert(dia.open);\n"
                         + "        alert(dia.getAttribute('open'));\n"
-
                         + "        dia.removeAttribute('open');\n"
                         + "        alert(dia.open);\n"
                         + "        alert(dia.getAttribute('open'));\n"
@@ -115,27 +107,21 @@ public class HTMLDialogElementTest extends LoboUnitTest {
                         + DUMP_EVENT_FUNCTION
                         + "      function test() {\n"
                         + "        var dia = document.getElementById('tester');\n"
-                        + "        if (typeof HTMLDialogElement !== 'function') { alert('No'); return; }\n"
-
+                        + "        if (typeof HTMLDialogElement !== 'object') { alert('No'); return; }\n"
                         + "        dia.addEventListener('close', (event) => {\n"
                         + "          dump(event);\n"
                         + "        });\n"
-
                         + "        alert(dia.open);\n"
                         + "        alert(dia.getAttribute('open'));\n"
-
                         + "        dia.open = '';\n"
                         + "        alert(dia.open);\n"
                         + "        alert(dia.getAttribute('open'));\n"
-
                         + "        dia.open = 'abc';\n"
                         + "        alert(dia.open);\n"
                         + "        alert(dia.getAttribute('open'));\n"
-
                         + "        dia.setAttribute('open', 'blah');\n"
                         + "        alert(dia.open);\n"
                         + "        alert(dia.getAttribute('open'));\n"
-
                         + "        dia.removeAttribute('open');\n"
                         + "        alert(dia.open);\n"
                         + "        alert(dia.getAttribute('open'));\n"
@@ -162,19 +148,15 @@ public class HTMLDialogElementTest extends LoboUnitTest {
                         + DUMP_EVENT_FUNCTION
                         + "      function test() {\n"
                         + "        var dia = document.getElementById('tester');\n"
-                        + "        if (typeof HTMLDialogElement !== 'function') { alert('No'); return; }\n"
-
+                        + "        if (typeof HTMLDialogElement !== 'object') { alert('No'); return; }\n"
                         + "        dia.addEventListener('close', (event) => {\n"
                         + "          dump(event);\n"
                         + "        });\n"
-
                         + "        alert(dia.open);\n"
                         + "        alert(dia.getAttribute('open'));\n"
-
                         + "        dia.show();\n"
                         + "        alert(dia.open);\n"
                         + "        alert(dia.getAttribute('open'));\n"
-
                         + "        dia.show();\n"
                         + "        alert(dia.open);\n"
                         + "        alert(dia.getAttribute('open'));\n"
@@ -201,15 +183,12 @@ public class HTMLDialogElementTest extends LoboUnitTest {
                         + DUMP_EVENT_FUNCTION
                         + "      function test() {\n"
                         + "        var dia = document.getElementById('tester');\n"
-                        + "        if (typeof HTMLDialogElement !== 'function') { alert('No'); return; }\n"
-
+                        + "        if (typeof HTMLDialogElement !== 'object') { alert('No'); return; }\n"
                         + "        dia.addEventListener('close', (event) => {\n"
                         + "          dump(event);\n"
                         + "        });\n"
-
                         + "        alert(dia.open);\n"
                         + "        alert(dia.getAttribute('open'));\n"
-
                         + "        dia.show();\n"
                         + "        alert(dia.open);\n"
                         + "        alert(dia.getAttribute('open'));\n"
@@ -236,19 +215,15 @@ public class HTMLDialogElementTest extends LoboUnitTest {
                         + DUMP_EVENT_FUNCTION
                         + "      function test() {\n"
                         + "        var dia = document.getElementById('tester');\n"
-                        + "        if (typeof HTMLDialogElement !== 'function') { alert('No'); return; }\n"
-
+                        + "        if (typeof HTMLDialogElement !== 'object') { alert('No'); return; }\n"
                         + "        dia.addEventListener('close', (event) => {\n"
                         + "          dump(event);\n"
                         + "        });\n"
-
                         + "        alert(dia.open);\n"
                         + "        alert(dia.getAttribute('open'));\n"
-
                         + "        dia.showModal();\n"
                         + "        alert(dia.open);\n"
                         + "        alert(dia.getAttribute('open'));\n"
-
                         + "        try {\n"
                         + "          dia.showModal();\n"
                         + "        } catch(e) { alert('InvalidStateError'); }"
@@ -277,15 +252,12 @@ public class HTMLDialogElementTest extends LoboUnitTest {
                         + DUMP_EVENT_FUNCTION
                         + "      function test() {\n"
                         + "        var dia = document.getElementById('tester');\n"
-                        + "        if (typeof HTMLDialogElement !== 'function') { alert('No'); return; }\n"
-
+                        + "        if (typeof HTMLDialogElement !== 'object') { alert('No'); return; }\n"
                         + "        dia.addEventListener('close', (event) => {\n"
                         + "          dump(event);\n"
                         + "        });\n"
-
                         + "        alert(dia.open);\n"
                         + "        alert(dia.getAttribute('open'));\n"
-
                         + "        try {\n"
                         + "          dia.showModal();\n"
                         + "        } catch(e) { alert('InvalidStateError'); }"
@@ -314,19 +286,15 @@ public class HTMLDialogElementTest extends LoboUnitTest {
                         + DUMP_EVENT_FUNCTION
                         + "      function test() {\n"
                         + "        var dia = document.getElementById('tester');\n"
-                        + "        if (typeof HTMLDialogElement !== 'function') { alert('No'); return; }\n"
-
+                        + "        if (typeof HTMLDialogElement !== 'object') { alert('No'); return; }\n"
                         + "        dia.addEventListener('close', (event) => {\n"
                         + "          dump(event);\n"
                         + "        });\n"
-
                         + "        alert(dia.open);\n"
                         + "        alert(dia.getAttribute('open'));\n"
-
                         + "        dia.show();\n"
                         + "        alert(dia.open);\n"
                         + "        alert(dia.getAttribute('open'));\n"
-
                         + "        try {\n"
                         + "          dia.show();\n"
                         + "        } catch(e) { alert('InvalidStateError'); }"
@@ -355,19 +323,15 @@ public class HTMLDialogElementTest extends LoboUnitTest {
                         + DUMP_EVENT_FUNCTION
                         + "      function test() {\n"
                         + "        var dia = document.getElementById('tester');\n"
-                        + "        if (typeof HTMLDialogElement !== 'function') { alert('No'); return; }\n"
-
+                        + "        if (typeof HTMLDialogElement !== 'object') { alert('No'); return; }\n"
                         + "        dia.addEventListener('close', (event) => {\n"
                         + "          dump(event);\n"
                         + "        });\n"
-
                         + "        alert(dia.open);\n"
                         + "        alert(dia.getAttribute('open'));\n"
-
                         + "        dia.showModal();\n"
                         + "        alert(dia.open);\n"
                         + "        alert(dia.getAttribute('open'));\n"
-
                         + "        try {\n"
                         + "          dia.show();\n"
                         + "        } catch(e) { alert('InvalidStateError'); }"
@@ -396,19 +360,15 @@ public class HTMLDialogElementTest extends LoboUnitTest {
                         + DUMP_EVENT_FUNCTION
                         + "      function test() {\n"
                         + "        var dia = document.getElementById('tester');\n"
-                        + "        if (typeof HTMLDialogElement !== 'function') { alert('No'); return; }\n"
-
+                        + "        if (typeof HTMLDialogElement !== 'object') { alert('No'); return; }\n"
                         + "        dia.addEventListener('close', (event) => {\n"
                         + "          dump(event);\n"
                         + "        });\n"
-
                         + "        alert(dia.open);\n"
                         + "        alert(dia.getAttribute('open'));\n"
-
                         + "        dia.show();\n"
                         + "        alert(dia.open);\n"
                         + "        alert(dia.getAttribute('open'));\n"
-
                         + "        try {\n"
                         + "          dia.showModal();\n"
                         + "        } catch(e) { alert('InvalidStateError'); }"
@@ -437,19 +397,15 @@ public class HTMLDialogElementTest extends LoboUnitTest {
                         + DUMP_EVENT_FUNCTION
                         + "      function test() {\n"
                         + "        var dia = document.getElementById('tester');\n"
-                        + "        if (typeof HTMLDialogElement !== 'function') { alert('No'); return; }\n"
-
+                        + "        if (typeof HTMLDialogElement !== 'object') { alert('No'); return; }\n"
                         + "        dia.addEventListener('close', (event) => {\n"
                         + "          dump(event);\n"
                         + "        });\n"
-
                         + "        alert(dia.open);\n"
                         + "        alert(dia.getAttribute('open'));\n"
-
                         + "        dia.showModal();\n"
                         + "        alert(dia.open);\n"
                         + "        alert(dia.getAttribute('open'));\n"
-
                         + "        try {\n"
                         + "          dia.showModal();\n"
                         + "        } catch(e) { alert('InvalidStateError'); }"
@@ -469,8 +425,8 @@ public class HTMLDialogElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"false", "null", "", "true", "", "",
-            "false", "null", "", "false", "null", "",
+    @Alerts({"false", "null", "null", "true", "", "null",
+            "false", "null", "null", "false", "null", "null",
             "[object Event]", "close", "false", "false", "false", "[object HTMLDialogElement]"})
     public void close() {
         final String html =
@@ -480,26 +436,21 @@ public class HTMLDialogElementTest extends LoboUnitTest {
                         + DUMP_EVENT_FUNCTION
                         + "      function test() {\n"
                         + "        var dia = document.getElementById('tester');\n"
-                        + "        if (typeof HTMLDialogElement !== 'function') { alert('No'); return; }\n"
-
+                        + "        if (typeof HTMLDialogElement !== 'object') { alert('No'); return; }\n"
                         + "        dia.addEventListener('close', (event) => {\n"
                         + "          dump(event);\n"
                         + "        });\n"
-
                         + "        alert(dia.open);\n"
                         + "        alert(dia.getAttribute('open'));\n"
                         + "        alert(dia.returnValue);\n"
-
                         + "        dia.show();\n"
                         + "        alert(dia.open);\n"
                         + "        alert(dia.getAttribute('open'));\n"
                         + "        alert(dia.returnValue);\n"
-
                         + "        dia.close();\n"
                         + "        alert(dia.open);\n"
                         + "        alert(dia.getAttribute('open'));\n"
                         + "        alert(dia.returnValue);\n"
-
                         + "        dia.close();\n"
                         + "        alert(dia.open);\n"
                         + "        alert(dia.getAttribute('open'));\n"
@@ -518,7 +469,7 @@ public class HTMLDialogElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"false", "null", "", "true", "", "",
+    @Alerts({"false", "null", "null", "true", "", "null",
             "false", "null", "", "false", "null", "", "closed"})
     public void closeOnclose() {
         final String html =
@@ -528,22 +479,18 @@ public class HTMLDialogElementTest extends LoboUnitTest {
                         + DUMP_EVENT_FUNCTION
                         + "      function test() {\n"
                         + "        var dia = document.getElementById('tester');\n"
-                        + "        if (typeof HTMLDialogElement !== 'function') { alert('No'); return; }\n"
-
+                        + "        if (typeof HTMLDialogElement !== 'object') { alert('No'); return; }\n"
                         + "        alert(dia.open);\n"
                         + "        alert(dia.getAttribute('open'));\n"
                         + "        alert(dia.returnValue);\n"
-
                         + "        dia.show();\n"
                         + "        alert(dia.open);\n"
                         + "        alert(dia.getAttribute('open'));\n"
                         + "        alert(dia.returnValue);\n"
-
                         + "        dia.close();\n"
                         + "        alert(dia.open);\n"
                         + "        alert(dia.getAttribute('open'));\n"
                         + "        alert(dia.returnValue);\n"
-
                         + "        dia.close();\n"
                         + "        alert(dia.open);\n"
                         + "        alert(dia.getAttribute('open'));\n"
@@ -573,26 +520,21 @@ public class HTMLDialogElementTest extends LoboUnitTest {
                         + DUMP_EVENT_FUNCTION
                         + "      function test() {\n"
                         + "        var dia = document.getElementById('tester');\n"
-                        + "        if (typeof HTMLDialogElement !== 'function') { alert('No'); return; }\n"
-
+                        + "        if (typeof HTMLDialogElement !== 'object') { alert('No'); return; }\n"
                         + "        dia.addEventListener('close', (event) => {\n"
                         + "          dump(event);\n"
                         + "        });\n"
-
                         + "        alert(dia.open);\n"
                         + "        alert(dia.getAttribute('open'));\n"
                         + "        alert(dia.returnValue);\n"
-
                         + "        dia.show();\n"
                         + "        alert(dia.open);\n"
                         + "        alert(dia.getAttribute('open'));\n"
                         + "        alert(dia.returnValue);\n"
-
                         + "        dia.close('Html');\n"
                         + "        alert(dia.open);\n"
                         + "        alert(dia.getAttribute('open'));\n"
                         + "        alert(dia.returnValue);\n"
-
                         + "        dia.close('unit');\n"
                         + "        alert(dia.open);\n"
                         + "        alert(dia.getAttribute('open'));\n"
@@ -621,29 +563,22 @@ public class HTMLDialogElementTest extends LoboUnitTest {
                         + DUMP_EVENT_FUNCTION
                         + "      function test() {\n"
                         + "        var dia = document.getElementById('tester');\n"
-                        + "        if (typeof HTMLDialogElement !== 'function') { alert('No'); return; }\n"
-
+                        + "        if (typeof HTMLDialogElement !== 'object') { alert('No'); return; }\n"
                         + "        dia.addEventListener('close', (event) => {\n"
                         + "          dump(event);\n"
                         + "        });\n"
-
                         + "        alert(dia.open);\n"
                         + "        alert(dia.returnValue);\n"
-
                         + "        dia.returnValue = '1';\n"
                         + "        alert(dia.returnValue);\n"
-
                         + "        dia.show();\n"
                         + "        alert(dia.open);\n"
                         + "        alert(dia.returnValue);\n"
-
                         + "        dia.returnValue = '2';\n"
                         + "        alert(dia.returnValue);\n"
-
                         + "        dia.close('3');\n"
                         + "        alert(dia.open);\n"
                         + "        alert(dia.returnValue);\n"
-
                         + "        dia.returnValue = '4';\n"
                         + "        alert(dia.returnValue);\n"
                         + "      }\n"
@@ -669,24 +604,18 @@ public class HTMLDialogElementTest extends LoboUnitTest {
                         + DUMP_EVENT_FUNCTION
                         + "      function test() {\n"
                         + "        var dia = document.getElementById('tester');\n"
-                        + "        if (typeof HTMLDialogElement !== 'function') { alert('No'); return; }\n"
-
+                        + "        if (typeof HTMLDialogElement !== 'object') { alert('No'); return; }\n"
                         + "        dia.addEventListener('close', (event) => {\n"
                         + "          dump(event);\n"
                         + "        });\n"
-
                         + "        alert(dia.open);\n"
                         + "        alert(typeof dia.returnValue + ' ' + dia.returnValue);\n"
-
                         + "        dia.returnValue = null;\n"
                         + "        alert(typeof dia.returnValue + ' ' + dia.returnValue);\n"
-
                         + "        dia.returnValue = undefined;\n"
                         + "        alert(typeof dia.returnValue + ' ' + dia.returnValue);\n"
-
                         + "        dia.returnValue = 4;\n"
                         + "        alert(typeof dia.returnValue + ' ' + dia.returnValue);\n"
-
                         + "        dia.returnValue = { a: '#' };\n"
                         + "        alert(typeof dia.returnValue + ' ' + dia.returnValue);\n"
                         + "      }\n"
@@ -713,17 +642,13 @@ public class HTMLDialogElementTest extends LoboUnitTest {
                         + DUMP_EVENT_FUNCTION
                         + "      function test() {\n"
                         + "        var dia = document.getElementById('tester');\n"
-                        + "        if (typeof HTMLDialogElement !== 'function') { alert('No'); return; }\n"
-
+                        + "        if (typeof HTMLDialogElement !== 'object') { alert('No'); return; }\n"
                         + "        dia.addEventListener('close', (event) => {\n"
                         + "          dump(event);\n"
                         + "        });\n"
-
                         + "        alert(dia.open);\n"
-
                         + "        dia.show();\n"
                         + "        alert(dia.open);\n"
-
                         + "        document.getElementById('close').click();\n"
                         + "        alert(dia.open);\n"
                         + "      }\n"
@@ -753,17 +678,13 @@ public class HTMLDialogElementTest extends LoboUnitTest {
                         + DUMP_EVENT_FUNCTION
                         + "      function test() {\n"
                         + "        var dia = document.getElementById('tester');\n"
-                        + "        if (typeof HTMLDialogElement !== 'function') { alert('No'); return; }\n"
-
+                        + "        if (typeof HTMLDialogElement !== 'object') { alert('No'); return; }\n"
                         + "        dia.addEventListener('close', (event) => {\n"
                         + "          dump(event);\n"
                         + "        });\n"
-
                         + "        alert(dia.open);\n"
-
                         + "        dia.show();\n"
                         + "        alert(dia.open);\n"
-
                         + "        document.getElementById('close').click();\n"
                         + "        alert(dia.open);\n"
                         + "      }\n"
@@ -791,17 +712,13 @@ public class HTMLDialogElementTest extends LoboUnitTest {
                         + "    <script>\n"
                         + "      function test() {\n"
                         + "        var dia = document.getElementById('tester');\n"
-                        + "        if (typeof HTMLDialogElement !== 'function') { alert('No'); return; }\n"
-
+                        + "        if (typeof HTMLDialogElement !== 'object') { alert('No'); return; }\n"
                         + "        dia.addEventListener('close', (event) => {\n"
                         + "          dump(event);\n"
                         + "        });\n"
-
                         + "        alert(dia.open);\n"
-
                         + "        dia.show();\n"
                         + "        alert(dia.open);\n"
-
                         + "        document.getElementById('close').click();\n"
                         + "        alert(dia.open);\n"
                         + "      }\n"
@@ -830,17 +747,13 @@ public class HTMLDialogElementTest extends LoboUnitTest {
                         + DUMP_EVENT_FUNCTION
                         + "      function test() {\n"
                         + "        var dia = document.getElementById('tester');\n"
-                        + "        if (typeof HTMLDialogElement !== 'function') { alert('No'); return; }\n"
-
+                        + "        if (typeof HTMLDialogElement !== 'object') { alert('No'); return; }\n"
                         + "        dia.addEventListener('close', (event) => {\n"
                         + "          dump(event);\n"
                         + "        });\n"
-
                         + "        alert(dia.open);\n"
-
                         + "        dia.show();\n"
                         + "        alert(dia.open);\n"
-
                         + "        document.getElementById('close').click();\n"
                         + "        alert(dia.open);\n"
                         + "      }\n"
@@ -850,11 +763,9 @@ public class HTMLDialogElementTest extends LoboUnitTest {
                         + "    <dialog id='tester'>\n"
                         + "      <p>HtmlUNit dialog</p>\n"
                         + "    </dialog>\n"
-
                         + "    <form method='dialog'>\n"
                         + "      <button id='close'>OK</button>\n"
                         + "    </form>\n"
-
                         + "  </body>\n"
                         + "</html>";
 

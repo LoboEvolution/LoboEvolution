@@ -705,13 +705,13 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
 		final DocumentType docType = getDoctype();
 		if (docType != null) {
 			final String systemId = docType.getSystemId();
+			final String publicId = docType.getPublicId();
 			if (systemId != null) {
 				if ("http://www.w3.org/TR/html4/strict.dtd".equals(systemId)) {
 					return CSSValues.CSS1COMPAT.getValue();
 				}
 
 				if ("http://www.w3.org/TR/html4/loose.dtd".equals(systemId)) {
-					final String publicId = docType.getPublicId();
 					if ("-//W3C//DTD HTML 4.01 Transitional//EN".equals(publicId)) {
 						return CSSValues.CSS1COMPAT.getValue();
 					}
@@ -721,7 +721,9 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
 						|| "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd".equals(systemId)) {
 					return CSSValues.CSS1COMPAT.getValue();
 				}
-			} else if (docType.getPublicId() == null) {
+			}
+
+			if (Strings.isBlank(publicId)) {
 				return docType.getName() == null ? CSSValues.BACKCOMPAT.getValue() : CSSValues.CSS1COMPAT.getValue();
 			}
 		}

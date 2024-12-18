@@ -40,6 +40,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.events.Event;
 import org.loboevolution.events.EventTarget;
+import org.loboevolution.html.renderer.HtmlController;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.js.AbstractScriptableDelegate;
 import org.loboevolution.js.JavaScript;
@@ -134,8 +135,7 @@ public class EventTargetImpl extends AbstractScriptableDelegate implements Event
                         if (target instanceof HTMLElementImpl elem) {
                             eventImpl.setTarget(elem);
                             eventImpl.setCurrentTarget(elem);
-                            final WindowImpl window = (WindowImpl) elem.getDocumentNode().getDefaultView();
-                            Executor.executeFunction(target, listenerEntry.getFunction(), new Object[0], window.getContextFactory());
+                            HtmlController.getInstance().execute(target, listenerEntry.getFunction(), eventImpl);
                         }
                     } catch (Exception e) {
                         log.error("Catched EventListener exception", e);

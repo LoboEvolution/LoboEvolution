@@ -37,7 +37,7 @@ public interface HTMLDialogElement extends HTMLElement {
      *
      * @return a boolean.
      */
-    boolean isOpen();
+    boolean getOpen();
 
     
     /**

@@ -150,19 +150,19 @@ public class DelayedPair {
 	}
 
 	private Integer getLeft() {
-		return helperGetPixelSize(left, rs, 0, containingBlock.getInnerWidth());
+		return helperGetPixelSize(left == null ? rs.getLeft() : left, rs, 0, containingBlock.getInnerWidth());
 	}
 
 	private Integer getRight() {
-		return helperGetPixelSize(right, rs, 0, containingBlock.getInnerWidth());
+		return helperGetPixelSize(right == null ? rs.getRight() : right, rs, 0, containingBlock.getInnerWidth());
 	}
 
 	private Integer getTop() {
-		return helperGetPixelSize(top, rs, 0, containingBlock.getInnerHeight());
+		return helperGetPixelSize(top == null ? rs.getTop() : top, rs, 0, containingBlock.getInnerHeight());
 	}
 
 	private Integer getBottom() {
-		return helperGetPixelSize(bottom, rs, 0, containingBlock.getInnerHeight());
+		return helperGetPixelSize(bottom == null ? rs.getBottom() : bottom, rs, 0, containingBlock.getInnerHeight());
 	}
 
 	private Integer getWidth() {

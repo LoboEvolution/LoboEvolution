@@ -388,9 +388,10 @@ public class HTMLEntities {
 		final Set<HTMLTag> optionStopElements = new HashSet<>();
 		optionStopElements.add(HTMLTag.OPTION);
 		optionStopElements.add(HTMLTag.SELECT);
+
 		final ElementInfo optionElement = ElementInfo.builder()
 				.childElementOk(true)
-				.endElementType(ElementInfo.END_ELEMENT_OPTIONAL)
+				.endElementType(ElementInfo.END_ELEMENT_REQUIRED)
 				.stopTags(optionStopElements)
 				.noScriptElement(false)
 				.decodeEntities(true)
@@ -403,9 +404,10 @@ public class HTMLEntities {
 		paragraphStopElements.add(HTMLTag.PRE);
 		paragraphStopElements.add(HTMLTag.UL);
 		paragraphStopElements.add(HTMLTag.OL);
+
 		final ElementInfo paragraphElement = ElementInfo.builder()
 				.childElementOk(true)
-				.endElementType(ElementInfo.END_ELEMENT_OPTIONAL)
+				.endElementType(ElementInfo.END_ELEMENT_REQUIRED)
 				.stopTags(paragraphStopElements)
 				.noScriptElement(false)
 				.decodeEntities(true)

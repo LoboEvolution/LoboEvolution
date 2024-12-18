@@ -25,14 +25,22 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.loboevolution.html.dom.HTMLDialogElement;
-import org.loboevolution.html.renderstate.DisplayRenderState;
+import org.loboevolution.html.js.events.EventImpl;
+import org.loboevolution.html.renderstate.DialogRenderState;
 import org.loboevolution.html.renderstate.RenderState;
 
 /**
  * <p>HTMLDialogElementImpl class.</p>
  */
-public class HTMLDialogElementImpl extends  HTMLElementImpl implements HTMLDialogElement {
+@Getter
+@Setter
+public class HTMLDialogElementImpl extends HTMLElementImpl implements HTMLDialogElement {
+
+    private boolean modal;
+    private String returnValue;
 
     /**
      * <p>Constructor for HTMLElementImpl.</p>
@@ -46,46 +54,66 @@ public class HTMLDialogElementImpl extends  HTMLElementImpl implements HTMLDialo
     /** {@inheritDoc} */
     @Override
     protected RenderState createRenderState(final RenderState prevRenderState) {
-        return new DisplayRenderState(prevRenderState, this, RenderState.DISPLAY_NONE);
+        return new DialogRenderState(prevRenderState, this);
     }
 
     @Override
-    public boolean isOpen() {
-        return false;
+    public boolean getOpen() {
+        return hasAttribute("open");
     }
 
     @Override
-    public void setOpen(final boolean open) {
-
-    }
-
-    @Override
-    public String getReturnValue() {
-        return null;
-    }
-
-    @Override
-    public void setReturnValue(final String returnValue) {
-
+    public void setOpen(final boolean newValue) {
+        if (newValue) {
+            setAttribute("open", "");
+        }
+        else {
+            removeAttribute("open");
+            modal = false;
+        }
     }
 
     @Override
     public void close(final String returnValue) {
-
+        if (getOpen()) {
+            setReturnValue(returnValue);
+            modal = false;
+            close();
+        }
     }
 
     @Override
     public void close() {
-
+        if (getOpen()) {
+            removeAttribute("open");
+            modal = false;
+            informNodeLoaded();
+            final EventImpl evt = new EventImpl();
+            evt.initEvent("close");
+            evt.setTarget(this);
+            dispatchEvent(evt);
+        }
     }
 
     @Override
     public void show() {
-
+        if (!getOpen()) {
+            setOpen(true);
+            informNodeLoaded();
+        }
     }
 
     @Override
     public void showModal() {
+        if (!getOpen()) {
+            setOpen(true);
+            informNodeLoaded();
+            modal = true;
+        }
+    }
 
+    @Override
+    public String toString() {
+        return "[object HTMLDialogElement]";
     }
 }

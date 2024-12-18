@@ -1314,6 +1314,7 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 		js.defineElementClass(ws, doc, "HTMLDivElement", "div", HTMLDivElementImpl.class);
 		js.defineElementClass(ws, doc, "HTMLElement", "html", HTMLElementImpl.class);
 		js.defineElementClass(ws, doc, "NodeFilter", "NodeFilter", NodeFilterImpl.class);
+		js.defineElementClass(ws, doc, "HTMLDialogElement", "HTMLDialogElement", HTMLDialogElementImpl.class);
 		js.defineElementClass(ws, doc, "Node", "Node", NodeImpl.class);
 		js.defineElementClass(ws, doc, "Range", "Range", RangeImpl.class);
 
