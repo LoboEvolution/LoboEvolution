@@ -30,7 +30,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.loboevolution.annotation.Alerts;
 import org.loboevolution.annotation.AlertsExtension;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.dom.CanvasGradient;
+import org.loboevolution.html.dom.canvas.CanvasGradient;
 
 /**
  * Unit tests for {@link CanvasGradient}.
@@ -40,11 +40,10 @@ public class CanvasGradientTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts("function")
+    @Alerts("object")
     public void functions() {
         final String html =
                 "<html><head><script>\n"
-
                         + "function test() {\n"
                         + "  var canvas = document.getElementById('myCanvas');\n"
                         + "  var ctx = canvas.getContext('2d');\n"
@@ -63,7 +62,6 @@ public class CanvasGradientTest extends LoboUnitTest {
     public void addColorStop() {
         final String html =
                 "<html><head><script>\n"
-
                         + "function test() {\n"
                         + "  var canvas = document.getElementById('myCanvas');\n"
                         + "  var ctx = canvas.getContext('2d');\n"

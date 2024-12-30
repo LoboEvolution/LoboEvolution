@@ -515,8 +515,7 @@ public interface CanvasRenderingContext2D extends CanvasRenderingContext {
 	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/arc">CanvasRenderingContext2D.arc - MDN</a>
 	 * @see <a href="https://html.spec.whatwg.org/multipage/scripting.html#dom-context-2d-arc">CanvasRenderingContext2D.arc - HTML Living Standard</a>
 	 */
-	void arc(Integer x, Integer y, Integer radius, Integer startAngle, Integer endAngle,
-						   boolean counterclockwise);
+	void arc(Double x, Double y, Double radius, Integer startAngle, Double endAngle, boolean counterclockwise);
 
 	/**
 	 * The CanvasRenderingContext2D.arc() method of the Canvas 2D API adds a circular arc to the current sub-path.
@@ -524,7 +523,7 @@ public interface CanvasRenderingContext2D extends CanvasRenderingContext {
 	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/arc">CanvasRenderingContext2D.arc - MDN</a>
 	 * @see <a href="https://html.spec.whatwg.org/multipage/scripting.html#dom-context-2d-arc">CanvasRenderingContext2D.arc - HTML Living Standard</a>
 	 */
-	void arc(Integer x, Integer y, Integer radius, Integer startAngle, Integer endAngle);
+	void arc(Double x, Double y, Double radius, Integer startAngle, Double endAngle);
 
 	/**
 	 * The CanvasRenderingContext2D.arcTo() method of the Canvas 2D API adds a circular arc to the current sub-path, using the given control points and radius. The arc is automatically connected to the path's latest poInteger with a straight line, if necessary for the specified parameters.
@@ -667,7 +666,7 @@ public interface CanvasRenderingContext2D extends CanvasRenderingContext {
 
 	void setFont(String fontSpec);
 
-	void setGlobalAlpha(Integer globalAlpha);
+	void setGlobalAlpha(Float globalAlpha);
 
 	void setLineCap(String lineCap);
 

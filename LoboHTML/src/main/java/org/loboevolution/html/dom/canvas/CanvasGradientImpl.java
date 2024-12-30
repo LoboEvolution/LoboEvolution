@@ -26,7 +26,6 @@
 package org.loboevolution.html.dom.canvas;
 
 import lombok.Data;
-import org.loboevolution.html.dom.CanvasGradient;
 import org.loboevolution.laf.ColorFactory;
 
 import java.awt.*;
@@ -143,5 +142,11 @@ public class CanvasGradientImpl implements CanvasGradient {
 			return new LinearGradientPaint(linearX.floatValue(), linearX1.floatValue(), linearY.floatValue(),
 					linearY1.floatValue(), floatArray, colorArray);
 		}
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public String toString() {
+		return "[object CanvasGradient]";
 	}
 }

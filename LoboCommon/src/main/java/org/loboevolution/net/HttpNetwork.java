@@ -128,6 +128,7 @@ public class HttpNetwork {
 
 		final String baseUri = useBaseUri ? element.getBaseURI() : null;
 		try {
+
 			if (Strings.isBlank(href))
 				return null;
 
@@ -138,27 +139,8 @@ public class HttpNetwork {
 					return ImageIO.read(stream);
 				}
 			} else {
-				String scriptURI = href;
-				if (Strings.isNotBlank(baseUri)) {
-					URI uri = Urls.createURI(baseUri, href);
-					scriptURI = uri == null ? href : uri.toURL().toExternalForm();
-				}
-
-				info.setPath(scriptURI);
-				final URL u = new URI(scriptURI).toURL();
-				info.setName(u.getFile());
-				URLConnection connection = u.openConnection();
-				if (connection instanceof HttpURLConnection) {
-					final HttpURLConnection conn =(HttpURLConnection)u.openConnection();
-					conn.setRequestProperty("User-Agent", UserAgent.getUserAgent());
-					conn.getHeaderField("Set-Cookie");
-					info.setHttpResponse(conn.getResponseCode());
-					connection = conn;
-				}
-
-				try (final InputStream in = HttpNetwork.openConnectionCheckRedirects(connection)) {
-					info.setType(connection.getContentType());
-
+				URI uri = Strings.isNotBlank(baseUri) ? Urls.createURI(baseUri, href) : new URI(href);
+				try (final InputStream in = HttpNetwork.openConnectionCheckRedirects(getURLConnection(uri, Proxy.NO_PROXY,null))) {
 					if (href.contains(";base64,")) {
 						final String base64 = href.split(";base64,")[1];
 						final byte[] decodedBytes = Base64.getDecoder().decode(base64);
@@ -176,7 +158,7 @@ public class HttpNetwork {
 						return null;
 					} else if (href.endsWith(".gif")) {
 						try {
-							return new ImageIcon(u).getImage();
+							return new ImageIcon(uri.toURL()).getImage();
 						} catch (final Exception e) {
 							return ImageIO.read(in);
 						}
@@ -189,11 +171,6 @@ public class HttpNetwork {
 					} else {
 						return ImageIO.read(in);
 					}
-				} catch (final SocketTimeoutException e) {
-					if (connection instanceof HttpURLConnection) {
-						info.setHttpResponse(((HttpURLConnection)connection).getResponseCode());
-					}
-					log.error("More time elapsed {}", TIMEOUT_VALUE);
 				} catch (final FileNotFoundException e) {
 					log.error(e.getMessage(), e);
 				}

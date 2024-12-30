@@ -25,23 +25,27 @@
  */
 package org.loboevolution.html.dom.canvas;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.loboevolution.html.dom.ImageData;
 
 import java.awt.image.BufferedImage;
 
 /**
  * <p>ImageDataImpl class.</p>
- *
- *
- *
  */
+@Getter
+@Setter
+@NoArgsConstructor
 public class ImageDataImpl implements ImageData {
 
-	private final int width;
+	private int width;
 	
-	private final int height;
-	
-	private final BufferedImage image;
+	private int height;
+
+	private Object data;
+
 
 	/**
 	 * <p>Constructor for ImageDataImpl.</p>
@@ -51,26 +55,8 @@ public class ImageDataImpl implements ImageData {
 	 * @param sh a {@link java.lang.Integer} object.
 	 */
 	public ImageDataImpl(final BufferedImage image, final int sw, final int sh) {
-		this.image = image;
+		this.data = image;
 		this.width = sw;
 		this.height = sh;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Object getData() {
-		return image;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public int getHeight() {
-		return height;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public int getWidth() {
-		return width;
 	}
 }

@@ -30,7 +30,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.loboevolution.annotation.Alerts;
 import org.loboevolution.annotation.AlertsExtension;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.dom.CanvasRenderingContext2D;
+import org.loboevolution.html.dom.canvas.CanvasRenderingContext2D;
 
 /**
  * Unit tests for {@link CanvasRenderingContext2D}.
@@ -106,40 +106,27 @@ public class CanvasRenderingContext2DTest extends LoboUnitTest {
         checkHtmlAlert(html);
     }
 
-    private void drawImage(final String png, final String canvasSetup, final String drawJS) {
-        final String html = "<html><head>\n"
-                + "<script>"
-                + "  function test() {\n"
-                + "    var img = document.getElementById('myImage');\n"
-                + "    var canvas = document.createElement('canvas');\n"
-                + canvasSetup
-                + "    if (canvas.getContext) {\n"
-                + "      var context = canvas.getContext('2d');\n"
-                + drawJS
-                + "     alert(canvas.toDataURL());\n"
-                + "    }\n"
-                + "  }\n"
-                + "</script>\n"
-                + "</head><body onload='test()'>\n"
-                + "  <img id='myImage' src='" + png + "'>\n"
-                + "</body></html>";
-
-        checkHtmlAlert(html);
-    }
-
     @Test
-    @Alerts("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAutJREFUO"
-            + "E99k19sU1Ucxz/3du1du94tLcE1IjIUHlASRcEOtnVccWyIJWRmuhD02cBQlMTnvfsiIUQy9uIDCf+hWYFN3Q0mBAIJSCQy"
-            + "yIgORMtGHe1u71273T/m3qYN2wPn5OSc3znn90nO+X2/AsDF8XGp5vGT/QFJahBFEVEE0T14vtkwndfuf9Sp/Pj8tuAGF0Z"
-            + "GExveXferaVoIgoAggOD28qI8Ow6iKHD1xs3Dya4P+ioQD3AilVbaNzar86aF6AEqo5xcGQG/D8uyuHzlxnfdyc5v3VwPcC"
-            + "Y1rLRu2qDOmyaiIHoJmYJJtlS+EpFgZURC1wsYuo7P53P+fPRwfdeWLbeqgLaW91T3CaYNV/8tUQzIyLVBHBxkDMyiwVuxE"
-            + "HUBHwIOw+qVZG/39nQVkHABls21v3UyVpBwnUy0XiImWQTMWXIFg4fPSux8cwn+mhpSl0YXAVrj6jNjjsHbOfyhMCuW1LNU"
-            + "riXeKDKllZjRNCayM7yzPMrrS8OkLv6yENDeGlfHJgucvJcnFAoRDtaxIiLR0RQk7LO5l8lx7PcpNq+M0vVGI+cv/LwQsLk"
-            + "trv6R0bj56D86VkcY+Qf+0mws2+bjVUG0gs7315/wdUsT29bGOJdeDEg0q5pR4sDQGH3rGjhyd47peQHHceh6VWIiq3F7qs"
-            + "jgJ2/zWmMDZxcA0sOK0tKszhaLnLo+jjpR4Lenc95ngYNgWZ46e9ZEOLB1LXK9TOrST8meHdUqpBWlvU21TItsNsvZOxlOj"
-            + "+WYnjWxbYew5KN7TZTP17/CspdjSAGJ80MjyZ5KGY+dSCkfdiqqKxvbtjEMg+kZjQdPdWwHVr0kE4vKyLJMwO9HFH0cP51K"
-            + "7u7tLuvg0A9H3/9s16ejrgkqUva07jgIokDZYGJVpa4nDh4+suObL/cOeYB4IrF63xd7ByORSF3Vad5J2ZMLnClAbiY/u7/"
-            + "vqz2Tk4/veNf6+/tr8vm8f7GDXxTrum4ODAzM/w8TKTogggbXQgAAAABJRU5ErkJggg==")
+    @Alerts("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAF7ElEQVR4XqWVaUxUZxSGEVpESkEFQVJbBBXxh" +
+            "zYWaUOXNE1M0yYmNraNxFqXpC61sUmLS0wBAQeibRNojUtiVaitYqEIyCrLILLK4gwwjDMwc2e5s907+wyzgb797mDHqhB/9Eue3G1ynnO+" +
+            "c++ZoCCyvi8vD/k8MTFeqnN+lXfql5yDx3ILv8vm+Tmcyys8NhfkeVlFXeZH2/ds1tD0Qi7WrOvngwcXHTx+/J2M7btLV6xZ2/Zq0qqOhK" +
+            "SUjoSVKR2Jq1I6kvysCbAy5RHkfENaeuOu3fsvrVj/9rbh4OBVT8f2L6EwOmH162/tCAuPoPSMEVo9C63BCB2BuzYwJj8MawZjnIE1WcCS" +
+            "o5EcPb4pK0mmbl5k7M6EhPHo4uLiF54QpGbWLH8pPnHX/AXhFBec1jHQELhzHccjkV/Gmp6QmC1W2B3Oaa/PZ01Lf69qQGLelTA+Hv2EIJ" +
+            "MIFsUnE0EEpTVwAkNAoCHIaAZjKgZCBYNhBYsxNbmnJTKjhYhM0BsY0BoNnC63KnVDelntwEDa+Ph4xKwCnV/A+AMrtSwkagZ3ZQz4EgaNY" +
+            "pZgRLuUxQDFQq4zQUV+q1DTmJBRBDkeBs2Tbdy0KeOC1/vKM4Kw8Eh/D7jgah2L/gk9qoU6/DViRrnYgRsSNyolLtRJ7WiRmtAm1vur0hhm" +
+            "+mMk2zY/LFxpmQraW6uNWzmrgGumimQ+OKFD7bAOlwcMKBm2o+y+BzXUNJqUPrQrJnFHbkErEfDFOvSTCg0mG+x2JyIjo1RSrf3AvmJ+8j" +
+            "OCBf4KTJCSbakaVOFCD43TfSwuCp24LvWhQf0A/YZpCPRuDKlt6BxnUCOgUTmkhoIhzXZOYvHiaJWSdc8hiIiiaL0RgzIdivgyHG9WgNehx" +
+            "7khG/4Ue9ConIbEQjB6MaRxoHOCJQIVyvspCEjz9RYHFkfHzCFIXOcXyDQs+CI18holOFw3gexWGj91G3FBYMfNCRcmzD7QVi9krBP9cgZl" +
+            "JPhpvgRNoxrIDLa5BfFEEE4E91UG1AsUyK0fQ1aDBIVtChS0a1HUw+CK0Iw+tQNyoxO00Y4BUun521IcqhrGH30URmkzomNiny9oEpCsmkd" +
+            "wrfs+mkcUONOlRG6rEkdvKZHdokTpAI0OiRYN9+TIqREgo6QPl7pkzxdEREZRFHmDbo8qkVc9iIut99A8KEZevQh7K0aRcW0UW6+OILtejN" +
+            "JOCX5tEmLvlR589lsX/h5QQG6wIiY2lryEcwoWUjryHfRLVMgs6wGvshsXm+7iy5JufHiuG++fmWF7aS+OlPdhT0kHPj3Xhp2XO9EhpsGSJ" +
+            "s8uqCGCZCKIWkgZWCNEMhXO1vfh0BU+tp69hfUF9Vid34AUXiNSTjRiXUEDNhTW4w1eLT45fQu8G70QUVpuJhFBnEprdx8o5j8tSEz2C1iT" +
+            "GZRai5a7Iyiq7sKO87dIoJtYmV2N5VmEH6qwIqsKa3Or8XFRA7Kud6KuTwSaDMRJlwuxRMBygme3aEZgMlvJaDZCJlegsXcYJyu7kEGq+OD" +
+            "HOrxZUIO0EzV49ySXeRPyyrtQ1zsKJZlFNrsdHo+XCJb6t+gJQWpqJvnQEndFRi2iLFY7GcE2MltMkKu0GBLL0dwvwtW2QZyp68Xp2l5caR" +
+            "1CU/8Y7kkoMuwM/uBujwc+3xTi4paqlNyo2Ff8WOBwpC73zgvdHUkqsNjs+Bd/NaQnaq0eEoqGQKrEPYJEoQGtZ2CyWOBwOknmXHAfpqami" +
+            "SBOJZIqD4hCQlYHBDyB4DXXw9AvIhYuGiMVuKw2h9tmd7hJ056BBHQ7JyfdZL/dLo/H7fH63F7vlJtk756annbFLFki4fM79/BaWh5P0yNh" +
+            "YUsUPt/GoODQKpKZQKc3iQIY/otZpOdgzSKDH0sA8u/G3Rc+DAqpzck5tSks7Nv4gGBJRUX45s28pM5BUcbVqzX7y280fDM7zQFuzMLv1yu" +
+            "/vtMr3Hb06NHkBw8evBwQtLe3B2/ZsuVFq9Ualp+fv+D/wMVYtmxZaHp6eggX+x+Yf5QWVVGNkQAAAABJRU5ErkJggg==")
     public void drawImage() {
         drawImage("html.png",
                 "canvas.width = img.width; canvas.height = img.height;\n",
@@ -170,7 +157,7 @@ public class CanvasRenderingContext2DTest extends LoboUnitTest {
     @Alerts("data:image/png;base64,"
             + "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUGFdj+M/A8B8ABQAB/6Zcm10A"
             + "AAAASUVORK5CYII=")
-    public void drawImage_1x1_32bits() {
+    public void drawImage1x132bits() {
         drawImage("1x1red_32_bit_depth.png",
                 "canvas.width = img.width; canvas.height = img.height;\n",
                 "context.drawImage(img, 0, 0, canvas.width, canvas.height);\n");
@@ -180,7 +167,7 @@ public class CanvasRenderingContext2DTest extends LoboUnitTest {
     @Alerts("data:image/png;base64,"
             + "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUGFdj+M/A8B8ABQAB/6Zcm10A"
             + "AAAASUVORK5CYII=")
-    public void drawImage_1x1_24bits() {
+    public void drawImage1x124bits() {
         drawImage("1x1red_24_bit_depth.png",
                 "canvas.width = img.width; canvas.height = img.height;\n",
                 "context.drawImage(img, 0, 0, canvas.width, canvas.height);\n");
@@ -197,9 +184,8 @@ public class CanvasRenderingContext2DTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAABpJREFUGFdjZEADjFgF/jMw/GdkYABL"
-            + "YqgAADfmAgXboMAzAAAAAElFTkSuQmCC")
+    @Alerts("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAEElEQVR4XmNgIAr8ByMcAAA3DQH/KdQW9QAAA" +
+            "ABJRU5ErkJggg==")
     public void drawImage3ArgumentsPlacement() {
         drawImage("1x1red_32_bit_depth.png",
                 "canvas.width = 4; canvas.height = 4;\n",
@@ -208,9 +194,8 @@ public class CanvasRenderingContext2DTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts("data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAAC1JREFUGFc1yNENACAQwlAYxUllU0ep4aL9"
-            + "ap6RMEv4yJKdhJ2oDXQABtqHt76KMBEFpp4gUgAAAABJRU5ErkJggg==")
+    @Alerts("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAJElEQVR4XmP4z8Dwn+G/4n8wDQINDQ1gDlwAB" +
+            "P5DAYoAiAKxAZKKGYoK5P6JAAAAAElFTkSuQmCC")
     public void drawImage3ArgumentsPlacementNegative() {
         drawImage("4x6.png",
                 "canvas.width = 4; canvas.height = 4;\n",
@@ -218,9 +203,8 @@ public class CanvasRenderingContext2DTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAAAXNSR0IArs4c6QAAACpJREFUGFctyLERACAMxDD/KDTMGbbk0jC"
-            + "KKUClwlQ7RJANwaE5b1YV4buKVA5Xbm45TAAAAABJRU5ErkJggg==")
+    @Alerts("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAD0lEQVR4XmP4z8AARBQBAILBAf+2w76XAAAAA" +
+            "ElFTkSuQmCC")
     public void drawImage3ArgumentsImageTooLarge() {
         drawImage("4x6.png",
                 "canvas.width = 2; canvas.height = 5;\n",
@@ -268,9 +252,8 @@ public class CanvasRenderingContext2DTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAAAXNSR0IArs4c6QAAACpJREFUGFctyLERACAMxDD/KDTMGbbk0jC"
-            + "KKUClwlQ7RJANwaE5b1YV4buKVA5Xbm45TAAAAABJRU5ErkJggg==")
+    @Alerts("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAAIUlEQVR4XmNgUPv//z8Dw38GEPH/BphSRIg0N" +
+            "DQAKSgAANNmEZGOihfmAAAAAElFTkSuQmCC")
     public void drawImage5ArgumentsImageTooLarge() {
         drawImage("4x6.png",
                 "canvas.width = 2; canvas.height = 5;\n",
@@ -278,10 +261,9 @@ public class CanvasRenderingContext2DTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAJFJREFUKFONkMENAjEMBNclIBoIH0QF"
-            + "9z0XRA+Re6CgpZM0gO538DM4CaeDV1aRrI0mazuCQUnlzu66Evlh1dox1xpen4QAUkGPMwG49vhbr+EnQC4dhJ9c+UK2pSXm"
-            + "Q0u0BXH/k1hSwl21AjOJVMo2/Qbu93H3oGPI9urTQUL/S39BkmpmINnYwd+JOcc0DL4B84cwC7JlTrYAAAAASUVORK5CYII=")
+    @Alerts("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAcUlEQVR4Xr2NsQmAQAxFU4obWAjaOIJ1hrgBb" +
+            "jRxkaxh5xrXfS/hoofa2Pjhwf/wSIg+ZQK4F0jLhnbfIMLp6cCcWQvafW+VSBjB0kG4MbT7flzchwFLjIZ2+1K4LlZJKXEIQVDl7lhczAEz" +
+            "q/Qu/pcDT9lg9uH/l/YAAAAASUVORK5CYII=")
     public void drawImage5ArgumentsStretchX() {
         drawImage("4x6.png",
                 "canvas.width = 10; canvas.height = 10;\n",
@@ -289,10 +271,8 @@ public class CanvasRenderingContext2DTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAFFJREFUKFNjZCASMILUNQg3/K+PbGBoXN7"
-            + "AAKIZpzCAxZEBRGGDwH/7AwYMBx0uMNQ3fACpwq4QpvP/////GxsbGRoaGvArxOdcDJ24FA8FhQDPFBULZWbihAAAAABJRU5Erk"
-            + "Jggg==")
+    @Alerts("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAM0lEQVR4XmNgIAU0CDf8/5/D8B9Go8vDQUOD4" +
+            "P8DDg7/QTRQFW6FMPAfCBoaGggrHDEAAKb5F9FEFw3bAAAAAElFTkSuQmCC")
     public void drawImage5ArgumentsShrinkY() {
         drawImage("4x6.png",
                 "canvas.width = 10; canvas.height = 10;\n",
@@ -300,9 +280,8 @@ public class CanvasRenderingContext2DTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAAAXNSR0IArs4c6QAAADhJREFUGFcBLQDS/wEAJv//QPbAAAFAHL/"
-            + "/MAfQAAG/CUD/ECfwAAG/QAj/EBj+AAFAvxn/MN76AI+DEbp3TIWcAAAAAElFTkSuQmCC")
+    @Alerts("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAAMklEQVR4XmNgUPv/30F2/38GEFGg3P+fYT+Xw" +
+            "//zBgZAhgPH//MRbECp/ZL/C+YK/wcA0u8VGt7iqWcAAAAASUVORK5CYII=")
     public void drawImage5ArgumentsStretchImageTooLarge() {
         drawImage("4x6.png",
                 "canvas.width = 2; canvas.height = 5;\n",
@@ -310,10 +289,8 @@ public class CanvasRenderingContext2DTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAFpJREFUKFO10EEKgDAMRNE/R+mm9JbGW4ob"
-            + "jzJiUFetdGM2A+GRwIjJ0aTjD1ht70LVZNL/IoPZgAZXqg0gLrYO5ELm18U1giUiCxjCpx7bTih1m3iXF7xNF57OsB8LLeYw9AAA"
-            + "AABJRU5ErkJggg==")
+    @Alerts("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAPUlEQVR4XmNgGALgPwip/f8Po9Hl4eD/DQaw" +
+            "IhiNLg8HYMn/ihBFQBpdHg7ApgFxQ0MDAROhAF0cGyBKIQD0Ty+TtoVybAAAAABJRU5ErkJggg==")
     public void drawImage5ArgumentsNegativeWidth() {
         drawImage("4x6.png",
                 "canvas.width = 10; canvas.height = 10;\n",
@@ -619,29 +596,26 @@ public class CanvasRenderingContext2DTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAAXNSR0IArs4c6QAAADxJREFUOE9jZKAyYISa10AlcxtoZmA9"
-            + "AwMDyHByXQrTB3ch1Q2E20BmWGK4kGYGkulAuDbaxTKlLoPrBwDnlwwLU3fVIAAAAABJRU5ErkJggg==")
+    @Alerts("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAASUlEQVR4XrWLwQkAMAgD3czROpqrtT4UIT6aF" +
+            "g/yMPFEhtCT9RmVghfWPN0m3CSGV8CHggR8KEjAh4IEfD+sDGzCTbR5YqMywQbWciupGutcxAAAAABJRU5ErkJggg==")
     public void strokeRect() {
-        draw("<canvas id='myCanvas' width='20', height='10' style='border: 1px solid red;'></canvas>\n",
+        draw("<canvas id='myCanvas' width='20' height='10' style='border: 1px solid red;'></canvas>\n",
                 "context.strokeRect(2, 2, 16, 6);\n");
     }
 
     @Test
-    @Alerts("data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAAXNSR0IArs4c6QAAAChJREFUOE9jZKAyYKSyeQzIBv6n0HCw"
-            + "WaMGUhSKtA9DipwH00z1dAgAPKcGC8XskzoAAAAASUVORK5CYII=")
+    @Alerts("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAALElEQVR4XtXKIQ4AMAyAwP7/050HRaZ6CY6Z" +
+            "S/Yz4VATDjXhUBMONeFQO+IBxKRfoTrXu2gAAAAASUVORK5CYII=")
     public void fillRect() {
-        draw("<canvas id='myCanvas' width='20', height='10' style='border: 1px solid red;'></canvas>\n",
+        draw("<canvas id='myCanvas' width='20' height='10' style='border: 1px solid red;'></canvas>\n",
                 "context.fillRect(2, 2, 16, 6);\n");
     }
 
     @Test
-    @Alerts("data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAACxJREFUOE9jZICA/1CaUoqRcdTA0TAk"
-            + "OQRGkw3JQYahYTQMR8OQjBCgfrIBABkEFBUHz6OrAAAAAElFTkSuQmCC")
+    @Alerts("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAASUlEQVR4Xq3JsQkAMACEwN9/6aQIWFhKhKvcX" +
+            "ucT8qjIoyKPijwq8qjIoyKPijwq8qjIoyKPijwq8qjIoyKPijwq8qjIoyKPahfLtGaoz+pcPgAAAABJRU5ErkJggg==")
     public void fillRectWidthHeight() {
-        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+        draw("<canvas id='myCanvas' width='20' height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.fillRect(1, 0, 18, 20);\n");
     }
 
@@ -650,8 +624,8 @@ public class CanvasRenderingContext2DTest extends LoboUnitTest {
             + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAADdJREFUOE9jZKAyYKSyeQzIBv6n0HCw"
             + "WaMGUhSKtA9DipwH00zTdDjqQvJCYDRSyAs3ZF2DPwwBbfkGFYXESWwAAAAASUVORK5CYII=")
     public void fillRectRotate() {
-        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
-                "context.fillRect(2, 2, 16, 6); context.rotate(.5);\n");
+        draw("<canvas id='myCanvas' width='20' height='20' style='border: 1px solid red;'></canvas>\n",
+                "context.fillRect(2, 2, 16, 6); context.rotate(0.5);\n");
     }
 
     @Test
@@ -661,25 +635,23 @@ public class CanvasRenderingContext2DTest extends LoboUnitTest {
             + "Dm6BVkxYCnxPqsbBhqXVmcAvFxwHz0DZsuEp6NyGKrAHrFynS/wGTID1t3wFZoCRzGxC+ARU9Vz9UXKCDhOgNeDoAlU8L3DX"
             + "AG+Ajq1lU0EVgetaQgG4pgHVnjYwBorAAhiYKvD9HPofdAc8QoHOt/Kt8A/AN1+PHBVxaGY3AAAAAElFTkSuQmCC")
     public void rotateFillRect() {
-        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
-                "context.rotate(.5); context.fillRect(6, 2, 12, 6);\n");
+        draw("<canvas id='myCanvas' width='20' height='20' style='border: 1px solid red;'></canvas>\n",
+                "context.rotate(0.5); context.fillRect(6, 2, 12, 6);\n");
     }
 
     @Test
-    @Alerts("data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAADdJREFUOE9jZKAyYKSyeQzIBv6n0HCw"
-            + "WaMGUhSKtA9DipwH00zTdDjqQvJCYDRSyAs3ZF2DPwwBbfkGFYXESWwAAAAASUVORK5CYII=")
+    @Alerts("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAMElEQVR4Xu3KIQ4AMAzDwP7/0xuPkTXUKSeZe" +
+            "WaT8xjkYIMcbJCDDXKwQQ62qvrIBWnPX6Ertk7gAAAAAElFTkSuQmCC=")
     public void fillRectTranslate() {
-        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+        draw("<canvas id='myCanvas' width='20' height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.fillRect(2, 2, 16, 6); context.translate(3, 4);\n");
     }
 
     @Test
-    @Alerts("data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAADFJREFUOE9jZKAyYKSyeQyjBlIeorjC"
-            + "8D+5Ro8aCA+5wR+G5EbyaNYjO+QQGkdg8QUAebwGD4ULeHoAAAAASUVORK5CYII=")
+    @Alerts("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAMUlEQVR4Xu3KIQ4AMAzDwP7/0xuPTKyBguUkM" +
+            "8/Uv85DKCcTysmEcjKhnEwoJ1PVugsWLVmnH2BILAAAAABJRU5ErkJggg==")
     public void translateFillRect() {
-        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+        draw("<canvas id='myCanvas' width='20' height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.translate(3, 4); context.fillRect(2, 2, 16, 6);\n");
     }
 
@@ -690,7 +662,7 @@ public class CanvasRenderingContext2DTest extends LoboUnitTest {
             + "w8FH95Qm19gmCjaB14dNd4Nro1uoXsEBsIs9hasT0KbYSzoFZ8CyImjLz0BbPii4BiYJ4AYYW3AF9IA+UPsCngMLC6ohJxZU"
             + "cXmXWTaGwDYEhjbWvQbSrOsVtoBnLBhq0vCSTG3EsjiV1rP/HN50hx8VahodiQAAAABJRU5ErkJggg==")
     public void rotateTranslateFillRect() {
-        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+        draw("<canvas id='myCanvas' width='20' height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.rotate(0.2); context.translate(0, 4); context.fillRect(4, 4, 16, 6);\n");
     }
 
@@ -701,34 +673,31 @@ public class CanvasRenderingContext2DTest extends LoboUnitTest {
             + "Hs7lZwu3orcSm+ERWAYqUol0oqJOYoFbYBcAekdqYCMbFjgHTj2BDTBLgbK+AdOeUAE23j8cAVUyIxJpuY5+bJVILCqbJJ0c"
             + "gFUU6KXgSRY5QDfq3we+AOdFHSeUoHcMAAAAAElFTkSuQmCC")
     public void transformTranslateFillRect() {
-        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+        draw("<canvas id='myCanvas' width='20' height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.setTransform(1, .2, .3, 1, 0, 0); context.translate(-5, 4); context.fillRect(4, 4, 16, 6);\n");
     }
 
     @Test
-    @Alerts("data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAAXNSR0IArs4c6QAAAC1JREFUOE9jZKAyYKSyeQxwA88wMPyn"
-            + "xHATBohZowaSH4q0D0Py3Yaqk+rpEAAqPQwLveqeQwAAAABJRU5ErkJggg==")
+    @Alerts("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAIElEQVR4XmNgGDLgDAPDf0owunmjBpKO0c2" +
+            "jvoGDFgAARQqsIQpYrPwAAAAASUVORK5CYII=")
     public void fillStyleNullFillRect() {
-        draw("<canvas id='myCanvas' width='20', height='10' style='border: 1px solid red;'></canvas>\n",
+        draw("<canvas id='myCanvas' width='20' height='10' style='border: 1px solid red;'></canvas>\n",
                 "context.fillStyle = '#cc0000'; context.fillStyle = null; context.fillRect(2, 2, 16, 6);\n");
     }
 
     @Test
-    @Alerts("data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAAXNSR0IArs4c6QAAAC1JREFUOE9jZKAyYKSyeQxwA88wMPyn"
-            + "xHATBohZowaSH4q0D0Py3Yaqk+rpEAAqPQwLveqeQwAAAABJRU5ErkJggg==")
+    @Alerts("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAIElEQVR4XmNgGDLgDAPDf0owunmjBpKO0c2jv" +
+            "oGDFgAARQqsIQpYrPwAAAAASUVORK5CYII=")
     public void fillStyleUndefinedFillRect() {
-        draw("<canvas id='myCanvas' width='20', height='10' style='border: 1px solid red;'></canvas>\n",
+        draw("<canvas id='myCanvas' width='20' height='10' style='border: 1px solid red;'></canvas>\n",
                 "context.fillStyle = '#cc0000'; context.fillStyle = undefined; context.fillRect(2, 2, 16, 6);\n");
     }
 
     @Test
-    @Alerts("data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAAXNSR0IArs4c6QAAAC1JREFUOE9jZKAyYKSyeQxwA88wMPyn"
-            + "xHATBohZowaSH4q0D0Py3Yaqk+rpEAAqPQwLveqeQwAAAABJRU5ErkJggg==")
+    @Alerts("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAIElEQVR4XmNgGDLgDAPDf0owunmjBpKO0c2j" +
+            "voGDFgAARQqsIQpYrPwAAAAASUVORK5CYII=")
     public void fillStyleUnknownFillRect() {
-        draw("<canvas id='myCanvas' width='20', height='10' style='border: 1px solid red;'></canvas>\n",
+        draw("<canvas id='myCanvas' width='20' height='10' style='border: 1px solid red;'></canvas>\n",
                 "context.fillStyle = '#cc0000'; context.fillStyle = 'pipi'; context.fillRect(2, 2, 16, 6);\n");
     }
 
@@ -737,7 +706,7 @@ public class CanvasRenderingContext2DTest extends LoboUnitTest {
             + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAAXNSR0IArs4c6QAAAC1JREFUOE9jZKAyYKSyeQzIBv6n0HCw"
             + "WXQxEFcwEPIBTheOIAMpjGSIdqqnQwA/UgoLxnfNlgAAAABJRU5ErkJggg==")
     public void clearRect() {
-        draw("<canvas id='myCanvas' width='20', height='10' style='border: 1px solid red;'></canvas>\n",
+        draw("<canvas id='myCanvas' width='20' height='10' style='border: 1px solid red;'></canvas>\n",
                 "context.fillRect(2, 2, 16, 6); context.clearRect(4, 4, 6, 6);\n");
     }
 
@@ -747,52 +716,45 @@ public class CanvasRenderingContext2DTest extends LoboUnitTest {
             + "hyHjHgZGWABSkpTgYYhsILaYIdYSog0k1hKUWCbkSnxpCuaDIWYgupdICQKsXiYm3+GzBGQoVbIezBKqGYjsM6q4kKYGAgB9"
             + "kkg955Wz+gAAAABJRU5ErkJggg==")
     public void transformTranslateClearRect() {
-        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+        draw("<canvas id='myCanvas' width='20' height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.fillStyle = '#ff4400'; context.fillRect(0, 0, 20, 20); "
                         + "context.setTransform(1, .2, .3, 1, 0, 0); "
                         + "context.translate(-5, 4); context.clearRect(4, 4, 16, 6);\n");
     }
 
     @Test
-    @Alerts("data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAAXNSR0IArs4c6QAAAHVJREFUOE9jZKAyYEQyL5GBgWEXAwPD"
-            + "U0rsgBmozMDA0MLAwODGwMBwF2owyPBDpBqO7EKYXjuowSDDQRaBDIZhgq7HZiCyo6SRDHdnYGC4Q8j1hAxE9zHM9SDDlaCG"
-            + "10CDCayWVAOxuX4+siAlBmKNr8FvIAB+fhILDX78/QAAAABJRU5ErkJggg==")
+    @Alerts("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAS0lEQVR4XmNgoCEIB2IJdEFyAScQrwDi90B8F" +
+            "ohbgNgGiJmRFZEDQAaADAIZCDIYZAHIogQGKrkeZEgCA51dDwouqgCQ60EROdIBAKhdDn1kgq4CAAAAAElFTkSuQmCC")
     public void moveToLineToStroke() {
-        draw("<canvas id='myCanvas' width='20', height='10' style='border: 1px solid red;'></canvas>\n",
+        draw("<canvas id='myCanvas' width='20' height='10' style='border: 1px solid red;'></canvas>\n",
                 "context.moveTo(2, 2); context.lineTo(16, 6); context.stroke();\n");
     }
 
     @Test
-    @Alerts("data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAOlJREFUOE+t0z1KRDEQAOBvS+32AHoI"
-            + "EbzAoh7ARhAR3N6txUL8W7CzshEbwcbOxhU9idVaWNsoFoL6Igm8Qpbn20kzIWG+TEKmI3h0gj0F3M9wia3PKeAlvrHdWsqJ"
-            + "dfAL/SjwAJ84jAKP8IHjKDBB7ziJAq8wg7UocAG3WMcrXnL8t1//2DtYRhdzeMMI9zk2wid1Sqp6FStYwg2uq/ndJLlp681i"
-            + "CwM8Vbc4w8NfcFOwnpu6KX2z9ObD6qBxfbMNWPJPsYk9XJTFacBkLOI8P8MunqcFS2GpITYwHwUmuIfHSPC32nDwBzgGJBXR"
-            + "dXO7AAAAAElFTkSuQmCC")
+    @Alerts("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAsUlEQVR4XmNgGCqgHoqpBhqAuA5dkBLQyEADA" +
+            "2vRBSkBDQxUdmEVELegC1ICMoB4GrogJcAAiB8BsQcQawExN6o0eSASiDcD8TUg/gbEN4B4LhD7AzEHkjqygS4QZwPxXiB+A8R9QKyEooIC" +
+            "IAvE7UD8kgHiagUUWQoAPwMkzb4G4lYg5kKVJh9IAPEiIH7IAAljqgE7IL4NxAsYIK6nCgB5ewoDxLXiaHIUAVCqGAIAAOBRGeFsLCNQAAA" +
+            "AAElFTkSuQmCC")
     public void moveToBezierCurveToStroke() {
-        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+        draw("<canvas id='myCanvas' width='20' height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.moveTo(2, 2); context.bezierCurveTo(2, 17, 1, 4, 19, 17); context.stroke();\n");
     }
 
     @Test
-    @Alerts("data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAOhJREFUOE/N1LErxVEUB/DP+xNke4OS"
-            + "LAZlNkmxSIoy2ZRks5n0bDIoI6NNBmWQUW+RgZXF8AazySi/I7+6vXp63juDW3e59f3cM5xzGpJPo/B28YrnnzvQVyV4jElM"
-            + "YQT3uMMtnvrVS7DMjGIW81jCO85xio/f8F5gd2YOm1jEIY56of2CdX4a+1WlTezgsRv+K1jnt3CCdVyV6KBgGAu4xgpuanQY"
-            + "MIxlnGEGb/EwLBjGAcaxkQWG08EaHjIqDHAPY9jOAieqIWhHO2WBUeULVjPBy2oPXGSCsVw6mWALn5ng97D8f/ALi58fh0da"
-            + "GhQAAAAASUVORK5CYII=")
+    @Alerts("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAtklEQVR4XuXUvwpBYRjH8VeMVmU1UAYuwcQkg" +
+            "1wGGWQyWawGA7dgUhajW+AWFJHkGnyfUMdvfB8m3/rU6XneTp3jTwg/rIsmCrqIKY0ZNjji/roeopQ4F10OHSxwwj48nyCbPBRbCnWscMUA" +
+            "mY8TjirYYoey7Fz1cENDF57sNdhNa7rw1MIZeV14mmKpQ0/2VbJPv6oLT2PMdeipiIsOvR3Cl36m79Zo69CT/bn0dehpgpEO/6AHWNcZgo3" +
+            "2NvQAAAAASUVORK5CYII=")
     public void moveToQuadraticCurveToStroke() {
-        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+        draw("<canvas id='myCanvas' width='20' height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.moveTo(2, 2); context.quadraticCurveTo(19, 4, 19, 17); context.stroke();\n");
     }
 
     @Test
-    @Alerts("data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAADRJREFUOE9jZKAyYKSyeQyjBlIeokMr"
-            + "DP9T6GGwb5G9PAINpDAIIdqHVrIZ9TJ5IUD1WAYAYokEFfnLcNAAAAAASUVORK5CYII=")
+    @Alerts("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAKUlEQVR4XmNgGAWjYHCB/xRiDICugFSMAdAVk" +
+            "IoxALoCUvEoGAWDBgAAZ/s/wU2nygUAAAAASUVORK5CYII=")
     public void lineWidthMoveToLineToStroke() {
-        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+        draw("<canvas id='myCanvas' width='20' height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.lineWidth = 4; context.moveTo(2, 10); context.lineTo(18, 10); context.stroke();\n");
     }
 
@@ -803,7 +765,7 @@ public class CanvasRenderingContext2DTest extends LoboUnitTest {
             + "FsGXmkYDjoGjI+4AKKs6ayl3oFMDlRRrL3ADzGuAkkIW+FaWwymwd8TuVq/BAraBHTACeh/AC2Ab/3sOW4DDAJcGcZMDMGsK"
             + "1AzGTYoUQHMKnsiO3bwkf2Cjcani5DN8AnFEGRVy9qdcAAAAAElFTkSuQmCC")
     public void setTransformFillRect() {
-        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+        draw("<canvas id='myCanvas' width='20' height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.setTransform(1, .2, .3, 1, 0, 0); context.fillRect(3, 3, 10, 7);\n");
     }
 
@@ -814,7 +776,7 @@ public class CanvasRenderingContext2DTest extends LoboUnitTest {
             + "FsGXmkYDjoGjI+4AKKs6ayl3oFMDlRRrL3ADzGuAkkIW+FaWwymwd8TuVq/BAraBHTACeh/AC2Ab/3sOW4DDAJcGcZMDMGsK"
             + "1AzGTYoUQHMKnsiO3bwkf2Cjcani5DN8AnFEGRVy9qdcAAAAAElFTkSuQmCC")
     public void transformFillRect() {
-        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+        draw("<canvas id='myCanvas' width='20' height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.transform(1, .2, .3, 1, 0, 0); context.fillRect(3, 3, 10, 7);\n");
     }
 
@@ -823,7 +785,7 @@ public class CanvasRenderingContext2DTest extends LoboUnitTest {
             + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAEFJREFUOE9jZKAyYKSyeQyjBlIeoiM4"
             + "DBUYGBiSSAjBOlxqkcOwiQQD5zEwMDzApn4ERwoJwYdf6WgYUh6UVA9DAJn9AxWRWUx3AAAAAElFTkSuQmCC")
     public void moveToLineToTransformStroke() {
-        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+        draw("<canvas id='myCanvas' width='20' height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.moveTo(2, 10); context.lineTo(13, 10);"
                         + "context.transform(1, .2, .3, 1, 0, 0); context.stroke();\n");
     }
@@ -834,7 +796,7 @@ public class CanvasRenderingContext2DTest extends LoboUnitTest {
             + "CA5DFgYGhj/khiauMHzAwMBwm4GB4QISvkqMJfgiRZuBgcEADSNbAGJjWEJqLKNbosrAwKCA7HJSDcTma5Qwp4aBKJaMGkhM"
             + "SsOvhuphCABLbg0VZ88YdgAAAABJRU5ErkJggg==")
     public void transformMoveToLineToStroke() {
-        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+        draw("<canvas id='myCanvas' width='20' height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.transform(1, .2, .3, 1, 0, 0); context.moveTo(2, 10);"
                         + "context.lineTo(13, 10); context.stroke();\n");
     }
@@ -844,7 +806,7 @@ public class CanvasRenderingContext2DTest extends LoboUnitTest {
             + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAADNJREFUOE9jZKAyYKSyeQyjBlIeoiM8"
             + "DBsoDEGwfuQwpLqBFDoQon2Ex/JoGJIXAlRPNgCWIAIVwMrcFwAAAABJRU5ErkJggg==")
     public void moveToLineToRotateStroke() {
-        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+        draw("<canvas id='myCanvas' width='20' height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.moveTo(2, 10); context.lineTo(18, 10); context.rotate(90); context.stroke();\n");
     }
 
@@ -855,16 +817,15 @@ public class CanvasRenderingContext2DTest extends LoboUnitTest {
             + "eFuChqDnR2o8FLzLgZtAz48FPwGb4ZgCx0DPTzXFWY1PMTgF9PxMjQ+Cr01wDmj5rtB58CPqEM4FPTsQbLta4/eVgh9nbMGU"
             + "rxt/0274hxu+AE0JGRUWB25NAAAAAElFTkSuQmCC")
     public void rotateMoveToLineToStroke() {
-        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
-                "context.rotate(.5); context.moveTo(1, 1); context.lineTo(18, 1); context.stroke();\n");
+        draw("<canvas id='myCanvas' width='20' height='20' style='border: 1px solid red;'></canvas>\n",
+                "context.rotate(0.5); context.moveTo(1, 1); context.lineTo(18, 1); context.stroke();\n");
     }
 
     @Test
-    @Alerts("data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAADdJREFUOE9jZKAyYKSyeQzIBv6n0HCw"
-            + "WaMGUhSKtA9DipwH00zTdDjqQvJCYDRSyAs3ZF2DPwwBbfkGFYXESWwAAAAASUVORK5CYII=")
+    @Alerts("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAMElEQVR4Xu3KIQ4AMAzDwP7/0xuPkTXUKSeZe" +
+            "WaT8xjkYIMcbJCDDXKwQQ62qvrIBWnPX6Ertk7gAAAAAElFTkSuQmCC")
     public void rectFill() {
-        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+        draw("<canvas id='myCanvas' width='20' height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.rect(2, 2, 16, 6); context.fill();\n");
     }
 
@@ -876,7 +837,7 @@ public class CanvasRenderingContext2DTest extends LoboUnitTest {
             + "E02B4RzhDat10bJNGcRJNpOX2KqD/rZ6QzjAfZ1Mq3Y5Mt3GCJZTGlUFflUbjdrAA3r5JAznjdv9/iWpYMTESC1kazmDwA6z"
             + "/31Hp18wqTd1Mvwf8AMXuSUVr2KpOAAAAABJRU5ErkJggg==")
     public void ellipseStroke() {
-        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+        draw("<canvas id='myCanvas' width='20' height='20' style='border: 1px solid red;'></canvas>\n",
                 "if (!context.ellipse) {alert('context.ellipse not supported'); return; }\n"
                         + "context.ellipse(10, 10, 8, 4, Math.PI / 4, 0, 1.5 * Math.PI); context.stroke();\n");
     }
@@ -889,87 +850,75 @@ public class CanvasRenderingContext2DTest extends LoboUnitTest {
             + "aUPqv0YA6pTtvRRVBpDOyQd1yg6eXgTqlB295Uz+0jNTS3YU+JmhKmb784KlLNmlgTlw931NHeDh8mJlYOyD+H/gC77COxVH"
             + "Ilo+AAAAAElFTkSuQmCC")
     public void ellipseFill() {
-        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+        draw("<canvas id='myCanvas' width='20' height='20' style='border: 1px solid red;'></canvas>\n",
                 "if (!context.ellipse) {alert('context.ellipse not supported'); return; }\n"
                         + "context.fillStyle = 'yellow';"
                         + "context.ellipse(10, 10, 8, 4, Math.PI / 4, 0, 1.5 * Math.PI); context.fill();\n");
     }
 
     @Test
-    @Alerts("data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAMZJREFUOE/t1CFuAkEYxfHfolAIAjcg"
-            + "wXEGHAh0UdXQNEgcqqoXaBoSHKo9QWXPUFfFASCIKkQFu8mSkGV3s5uMZJIRk3nf/5vv5WUigVcUmOcOzHW0jWNVr8s87GGJ"
-            + "HV5DADf4x7wqLNEVvXCEBSZ1YGXAFRrxfgkFfMYAswLgGj94y94XjTzFE4YFwG+846MqMNF94Q8PmaJPtDDOa1YWmy62cWSa"
-            + "+E2L+zjhEfu6wIs+Gb+THg55Y16D759D3Rjf6oN7eAYSbhYVZnnVXgAAAABJRU5ErkJggg==")
+    @Alerts("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAjUlEQVR4XmNgGAVDEjCjC5AL+IB4ORDnokuQC" +
+            "1YA8TwgZkOXIAfoAfFdBioZBgIgb05BF6QEpAHxNHRBJDAdiDPQBfEBAyC+D8Ss6BJAwM4ACQ5DdAlCYA0DJFKQkw3IApDYKiQxogEnA8TQ" +
+            "h0A8E4j7gfgeEK8GYm4kdSQDXSCOB+ICINZEkxsFQwEAADWFELkabrywAAAAAElFTkSuQmCC")
     public void arcStroke() {
-        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+        draw("<canvas id='myCanvas' width='20' height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.arc(10, 10, 4, 0, 4.3); context.stroke();\n");
     }
 
     @Test
-    @Alerts("data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAALNJREFUOE/l0jEOAVEUheFPIVGpLECn"
-            + "U1mEVkNlLUarF7EEGluwAIlEJxo9tUgUeC+qiUnMZBTiJq95uefPvfecCpLnK1J3VNLC8BGARaFpXvKnwNHzuOMirrzR/OsN"
-            + "fyeHAzRezp2xKOB8dHmCNmrYvyAtXDHEKQc4Ag/Yop8SLlFHNy/wiGaGaI1ZjvXjhBt0MoBz7DD9cMrvAEtfuXRTQmx6qCLk"
-            + "L1TI4w0rXD68X2x7AH8dMhXIajp1AAAAAElFTkSuQmCC")
+    @Alerts("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAuElEQVR4XmNgYGDYD8T1VML7GaAMagGwWaMG" +
+            "UgRGDaQc0NZALSCOh2JNmAoSAdisZiBeDcSPgXg+EPcA8UMgXgXEnHClxAGwgVcZIAaxIEmA2CAxkKGkALCBHxhQDYMBNgaIZbLoEngA2MB" +
+            "T6KIUAIIGzgDidHRBPABs4HsgZkWTAAF2IL4LxAboEngA2MArDJAIAIUZDIDY84B4GZIYMQBs4EEGiKHvgPgMEJ+Esi8DcRtUEbF4PwBc8D" +
+            "dTpqOF5wAAAABJRU5ErkJggg==")
     public void arcCircleStroke() {
-        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+        draw("<canvas id='myCanvas' width='20' height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.arc(4, 16, 4, 0, 2 * Math.PI); context.stroke(); context.strokeRect(0, 0, 20, 20);\n");
     }
 
     @Test
-    @Alerts("data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAHlJREFUOE/t1LENwjAQBdDnkiZtGno6"
-            + "qgzBEmnZCCFGgCmYIWuEAVKGtJGDLMcFha/30/c/6YLCEwp7KhhttMMZB3zw/NV7SodXtDjihAk9xhicAq7fvdDgUgpcnPc3"
-            + "9T32/ZyEC/jAgNs6ZS64uZcK7j8VtcM/7HAGnYcKFQzb6fQAAAAASUVORK5CYII=")
+    @Alerts("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAASklEQVR4XmNgGAVDEhgAcTkQFwGxCZocWSAPi" +
+            "LuBuA+IbwHxJiDmQ1FBAWAG4hkMEEOpBlgYIC41RZegBEwA4nx0wVEwCkYBsQAAdPgHzrmnyqAAAAAASUVORK5CYII=")
     public void arcAnticlockwiseStroke() {
-        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+        draw("<canvas id='myCanvas' width='20' height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.arc(10, 10, 4, 0, 4.3, true); context.stroke();\n");
     }
 
     @Test
-    @Alerts("data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAJpJREFUOE/t1KENAkEQRuHvHAoFNeCo"
-            + "AUkFoNCEXD2EoFFQAZIacNQACoUkmxyCy+4mXDaoWzuZl33/TKZS+FWFeXpgNNElRk3lgWMu91yGYxwwwK2BTPDCCvcYOAc8"
-            + "44lFq/GEIea/AIPmBrOE3gW7mH7qhzWmWCeAe1yxbdf/BiyuHEyKDiUAi6/NJ+9ii93pEPXXplNsX01vh5geFQJIQ80AAAAA"
-            + "SUVORK5CYII=")
+    @Alerts("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAa0lEQVR4XmNgGAVDEugCcToUg9hkAz4gXgLE9" +
+            "4B4BhSD2CAxkBzJYDEQzwdidiQxEBskBpIjCegB8V0GVMNgACQGkgOpIRqkAvFMdEEkAJIDqSEaUN1AqnsZBKgaKSBA9WQDA1RL2KNggAAA" +
+            "4BIYVSO8nnwAAAAASUVORK5CYII=")
     public void arcCircleAnticlockwiseStroke() {
-        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+        draw("<canvas id='myCanvas' width='20' height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.arc(10, 10, 4, 0, 2 * Math.PI, true); context.stroke();\n");
     }
 
     @Test
-    @Alerts("data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAHpJREFUOE/tlMENgCAMRR8upFN50CW6"
-            + "hB6cSlwIQ/SgScsBG0/0COmDPn4IOFdw5tGA342WHQoTMAI9kIAD2BBW62gbeMEWo3G2oCXgft9MY0aEQdsoAfOIViWEzhMI"
-            + "omf415GdHyULescmr8T62FRmvH0OleIebe4OT5UrGhUWjbLDAAAAAElFTkSuQmCC")
+    @Alerts("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAVElEQVR4XmNgGAUjHfQxyDAcZljG0MvwDIxBb" +
+            "JAYWQCksYvhLUMDw38UDBIjy1CQa9ANg2GQHMmgn+EphkEwDJIjGVDdQKp7meqRAgJUTTajYPgAAB45UfFhKNbjAAAAAElFTkSuQmCC")
     public void arcFillPath() {
-        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+        draw("<canvas id='myCanvas' width='20' height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.fillStyle = 'green'; context.beginPath();"
                         + "context.arc(10, 10, 4, 0, 2 * Math.PI); context.fill();\n");
     }
 
     @Test
-    @Alerts("data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAQlJREFUOE/N1EtKA0EUheGvxYUoug4F"
-            + "0W0IKuguzEXcg61oEEfOXICCj4kLcKRCsgdHghIf3Qlp207SCUG8oyo49XPq1j2VmHIlU+YZDNyzrGMdS5jDLNq4+dqfCndV"
-            + "ZqqB4RhbI9wfCTtlzW9guMRqzVZcCWtF7U9gOMR2TVhP1hT92/SBkfXqdkxYLk+saLjOl70KTWxMBMwfKTtbBLYwPyGwJSyU"
-            + "gR8TwvJjkZsrOnzrztq43HMzUrt5/4vAZyzWpL0i9S6177F6bMIJNocCE20dqUQqvAxPSh6171hV1X3mKJyNukF5sMuRu5A4"
-            + "0MjSU6sGRe+p2+iHWpSC6A+/r3GtdfX/3+EnUB03FTaS9zwAAAAASUVORK5CYII=")
+    @Alerts("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABBUlEQVR4Xt2UPU5CQRSFv4REsTG2ViSWYsEKl" +
+            "DWwFOIChAh2EhBCgIaShrgAYkJHQ6XRhmi00NpgDCQI+u6z8d0Zh8nr9CSnmbnny/zcGfi7SpDmiSpN7jhlFrrDNY/UwjlvjdjknjoFlpzw" +
+            "+YtXPHDBK0kdj0pgfa4sALsvGbihsjIdWmfJWPXCwZpt2i2ZLfY1jvCwdbGvJWtIblAX+rrFrcZBiXej0Ndl3jQuPrDCM+fkNE62fGMUu70" +
+            "KDqnNnB2N+pa8CjNkd4MJ2xxpRFQ+bVNkwZQzdzP/lKuxu4zpkdERt7JsGE9PLmuXY/LBlxBLApWVFvkI4UP2dEk8HZLSQ/9DXx52C0mebI" +
+            "nWAAAAAElFTkSuQmCC")
     public void arcFillPathAngle() {
-        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+        draw("<canvas id='myCanvas' width='20' height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.fillStyle = 'green'; context.beginPath();"
                         + "context.arc(10, 10, 8, 2.3, 2 * Math.PI); context.fill();\n");
     }
 
     @Test
-    @Alerts("data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAALhJREFUOE/Fk7ENAjEMRd/NQsEOLMAC"
-            + "tFQ3AQwCE1DRsgALsMMV7AKW7lAUYn8XEaSKlO/n7+RnoPMaOvP4CfAKPJPOV2/tvtTWDnfAGbgkgSNwAG6LvjXyAziVIgdu"
-            + "zY/AJnJoZ01hA9ps7D2Kcuk29YDKpdswio1XFDaLgF5heB0q2HWxugr5U2qAeiwJtLQsENt/5a6Okxq5zKXtZeAzQANNs5O1"
-            + "+pJZ4HYG3XsBFedznnX4P+ALwKAjFWklBKcAAAAASUVORK5CYII=")
+    @Alerts("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAeklEQVR4Xu2O0Q2AQAhDcQYHcBz/XEkXdBz/" +
+            "pYkk58Eh5PzTl/SLlpbo84ysNSlkmsysg7WRDtaCB15kmgysnbXUBwN44EXGJWLMFIfMkdIbXiBSqPBCXpmLFfSKHrHCVkmK8oFVkKZ80r" +
+            "1OkEfd6wRZ+co6Ybr0ozkB6l4lkzKnMkkAAAAASUVORK5CYII=")
     public void closePath() {
-        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+        draw("<canvas id='myCanvas' width='20' height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.moveTo(4,4); context.lineTo(10,16);"
                         + "context.lineTo(16,4); context.closePath(); context.stroke();\n");
     }
@@ -979,7 +928,7 @@ public class CanvasRenderingContext2DTest extends LoboUnitTest {
             + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAChJREFUOE9jZKAyYKSyeQyjBlIeoqNh"
             + "OBqGZITAaLIhI9DQtIzAMAQASMYAFTvklLAAAAAASUVORK5CYII=")
     public void closePathNoSubpath() {
-        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+        draw("<canvas id='myCanvas' width='20' height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.closePath();context.stroke();\n");
     }
 
@@ -988,7 +937,7 @@ public class CanvasRenderingContext2DTest extends LoboUnitTest {
             + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAChJREFUOE9jZKAyYKSyeQyjBlIeoqNh"
             + "OBqGZITAaLIhI9DQtIzAMAQASMYAFTvklLAAAAAASUVORK5CYII=")
     public void closePathPointOnly() {
-        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+        draw("<canvas id='myCanvas' width='20' height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.moveTo(4,4); context.closePath(); context.stroke();\n");
     }
 
@@ -997,18 +946,16 @@ public class CanvasRenderingContext2DTest extends LoboUnitTest {
             + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAChJREFUOE9jZKAyYKSyeQyjBlIeoqNh"
             + "OBqGZITAaLIhI9DQtIzAMAQASMYAFTvklLAAAAAASUVORK5CYII=")
     public void closePathTwice() {
-        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+        draw("<canvas id='myCanvas' width='20' height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.closePath(); context.closePath(); context.stroke();\n");
     }
 
     @Test
-    @Alerts("data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAK9JREFUOE/tk7ERgkAQRR+1ENiDDdgA"
-            + "qREVYCFSgZGpDdiAPRDYCy5z66zLyeGsIRcx/89/t3yWij+fyvAOwN3xrXYFns6vX9rRagpsgBOwd4EHcE5aD1yc3wIdcFPd"
-            + "TqhhNf0lJX9iWuCvAH/BDCiCfcVSBTn/Y0IB6pTyLN29u0kdlfwZUHJDCu++bNSibzvUvKyKHL9Cq/wcMLTqGzBUX3axw8Tt"
-            + "o4QrzP7LIeoI3pwhFeJpA+wAAAAASUVORK5CYII=")
+    @Alerts("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAcklEQVR4XmNgoCHgRxdgQIgJA3E9DgySwwD2Q" +
+            "HwWiBmRxEBskBhIzh2IvwJxAwPCIBAbJAaSwwAwzX5IYiA2zBJC8lgBKQZgk8cAyIqw2U5IHiuAKcRlOyF5DABzBS7bCcljBfJQjAsQkh8F" +
+            "o2AU0B8AAAOwHz+v+l3oAAAAAElFTkSuQmCC")
     public void closePathClosesOnlyLastSubpath() {
-        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+        draw("<canvas id='myCanvas' width='20' height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.moveTo(2,2); context.lineTo(5,8); context.lineTo(8,2);"
                         + "context.moveTo(10,2); context.lineTo(13,8); context.lineTo(16,2); context.closePath();"
                         + "context.stroke();\n");
@@ -1020,8 +967,8 @@ public class CanvasRenderingContext2DTest extends LoboUnitTest {
             + "6WekuoH7GFBd6MRAmgvR9TNS3UB4EFEallCDEBFAbQMp9TrMp3AXUt1AQsmNWHnSEjERpo4aSEQgEVAyEsIQozykNNiobSBG"
             + "eUixA9EKaAA0fyYV+TYpjQAAAABJRU5ErkJggg==")
     public void putImageDataInside() {
-        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
-                "if (typeof ImageData != 'function') {alert('no ctor'); return; }\n"
+        draw("<canvas id='myCanvas' width='20' height='20' style='border: 1px solid red;'></canvas>\n",
+                "if (typeof ImageData != 'object') {alert('no ctor'); return; }\n"
                         + "      var arr = new Uint8ClampedArray(64);\n"
                         + "      for (var i = 0; i < 32; i += 4) {\n"
                         + "        arr[i + 0] = 0; arr[i + 1] = 190; arr[i + 2] = 3; arr[i + 3] = 255;\n"
@@ -1042,8 +989,8 @@ public class CanvasRenderingContext2DTest extends LoboUnitTest {
             + "hr+MqCLE8RipbuA+BogLyXURursZqW4g3AZoWML5TuSGIcwEahsI8zrMfHLDFJ40qG4gcamMsCqyEi8+Y0cNJBzohFSMhiGh"
             + "ECIsT70whBYuVDcQAEALHZVK+V18AAAAAElFTkSuQmCC")
     public void putImageDataOutside() {
-        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
-                "if (typeof ImageData != 'function') {alert('no ctor'); return; }\n"
+        draw("<canvas id='myCanvas' width='20' height='20' style='border: 1px solid red;'></canvas>\n",
+                "if (typeof ImageData != 'object') {alert('no ctor'); return; }\n"
                         + "      var arr = new Uint8ClampedArray(64);\n"
                         + "      for (var i = 0; i < 32; i += 4) {\n"
                         + "        arr[i + 0] = 0; arr[i + 1] = 190; arr[i + 2] = 3; arr[i + 3] = 255;\n"
@@ -1064,8 +1011,8 @@ public class CanvasRenderingContext2DTest extends LoboUnitTest {
             + "jxBhPfap38AwDqtCfkrlWaodaJJqlvIMd84zZP4hHehwquES6Np+uG0aDOnAMCMbxpL3VoAb0oGHy8eGH4gK/IaoEL7TGzaf"
             + "lBRV53guuAAAAABJRU5ErkJggg==")
     public void putImageDataDirty() {
-        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
-                "if (typeof ImageData != 'function') {alert('no ctor'); return; }\n"
+        draw("<canvas id='myCanvas' width='20' height='20' style='border: 1px solid red;'></canvas>\n",
+                "if (typeof ImageData != 'object') {alert('no ctor'); return; }\n"
                         + "      var arr = new Uint8ClampedArray(64);\n"
                         + "      for (var i = 0; i < 32; i += 4) {\n"
                         + "        arr[i + 0] = 0; arr[i + 1] = 190; arr[i + 2] = 3; arr[i + 3] = 255;\n"
@@ -1090,8 +1037,8 @@ public class CanvasRenderingContext2DTest extends LoboUnitTest {
             + "XM5Hsk42TWu4lTS8hCu5KuqE3RQYQ3CnTtjhoBy9EPXPBjoMWCyJsaptdTkMpAk4sw/wD0J7ARvZbzmUdzHXo7iUNk/U6FT6"
             + "DkhEdDrtxM9FNnuurx0UblcV1Fz/YwAAAABJRU5ErkJggg==")
     public void clip() {
-        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
-                "if (typeof ImageData != 'function') {alert('no ctor'); return; }\n"
+        draw("<canvas id='myCanvas' width='20' height='20' style='border: 1px solid red;'></canvas>\n",
+                "if (typeof ImageData != 'object') {alert('no ctor'); return; }\n"
                         + "context.moveTo(2,2); context.lineTo(5,8); context.lineTo(8,2);"
                         + "context.arc(8, 12, 8, 0, 2 * Math.PI); context.stroke();"
                         + "context.clip(); context.fillRect(4, 9, 19, 14);\n");
@@ -1104,8 +1051,8 @@ public class CanvasRenderingContext2DTest extends LoboUnitTest {
             + "KXMZGP8nkWXgf8Z5sByF5MJJ9gwMjAfIMpDhvwPjm7yDKC4Ecf6LTJ7FwMCQipzliAjD2YxvctPgDsEVyEMhHVK5+CKlDERW"
             + "S1JZR4wlAO50XRUscFdZAAAAAElFTkSuQmCC")
     public void clipWindingEvenOdd() {
-        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
-                "if (typeof ImageData != 'function') {alert('no ctor'); return; }\n"
+        draw("<canvas id='myCanvas' width='20' height='20' style='border: 1px solid red;'></canvas>\n",
+                "if (typeof ImageData != 'object') {alert('no ctor'); return; }\n"
                         + "context.rect(6, 2, 2, 16); context.rect(2, 10, 16, 5); context.clip('evenodd');"
                         + "context.beginPath(); context.arc(10, 10, 8, 0, 2 * Math.PI);"
                         + "context.fillStyle = 'deeppink';context.fill();\n");
@@ -1119,8 +1066,8 @@ public class CanvasRenderingContext2DTest extends LoboUnitTest {
             + "MFxOA1Zx+CcwDfbWDIfvrHZYmGd3wO1rXp8e7WVmT3hconXN2h7DEdHIWPHKGbD7Qv+pek9/Z06pYT1s8/Sa36bG5Pz72HwC"
             + "6OxElc5l3LEAAAAASUVORK5CYII=")
     public void fillTextAndTransform() {
-        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
-                "if (typeof ImageData != 'function') {alert('no ctor'); return; }\n"
+        draw("<canvas id='myCanvas' width='20' height='20' style='border: 1px solid red;'></canvas>\n",
+                "if (typeof ImageData != 'object') {alert('no ctor'); return; }\n"
                         + "context.moveTo(0, 0);\n"
                         + "      context.lineTo(20, 0);\n"
                         + "      context.moveTo(2, 0);\n"
@@ -1136,12 +1083,11 @@ public class CanvasRenderingContext2DTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("data:image/png;base64,"
-            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAJBJREFUOE+t1FsOgCAMRNFhc7pmXZ0p"
-            + "CQSkj6GhP4YQL+erBYenHO5hDD4AruQDL4Bb/h2DEpNoZiQm0Sko54yy67RgRtl1WnBXOems4I5y0llBVrnovCCjXHReMFKq"
-            + "uijoKVVdFLSUpo4JakpTxwT/SlfHBkelq2ODTSnfulG8YfdhW2t1o5wIRp1+zwrp4Ac9kx4V/3bxXQAAAABJRU5ErkJggg==")
+    @Alerts("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAe0lEQVR4Xt2OUQqAMAxDc7Tc3KOpAQvSbnZ2+" +
+            "9EH72ckXYAvsZ3uRdUNEDE4qrpN9JMPZ6rThYiFTHUe0Y++1FPZFCIWeyo7hH72Za8ywxDxgFeZV2iBP1JaZxDxUHmd0VpZWmcQ8aDepriv" +
+            "nFpnEAvXGVq2ZJ3Byx9wAPcPf4F+X2rSAAAAAElFTkSuQmCC")
     public void pathFill() {
-        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+        draw("<canvas id='myCanvas' width='20' height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.moveTo(2, 2);\n"
                         + "      context.lineTo(10, 18);\n"
                         + "      context.lineTo(18, 2);\n"
@@ -1157,7 +1103,7 @@ public class CanvasRenderingContext2DTest extends LoboUnitTest {
             + "1hYBR/GYAHzHCN7qgHHad781nSmB/0m1KuXg28UGJnCI6Rz0GvN1gx37x9GHY6x27sz/jQF8NAHG2p5sJDrGFZymbkqZ7gZz"
             + "uMJCk00p07axhX58dQMYNqgXF3Xj9K8fbF3wJP8PpH0mFcFq5PIAAAAASUVORK5CYII=")
     public void pathFillTransform() {
-        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+        draw("<canvas id='myCanvas' width='20' height='20' style='border: 1px solid red;'></canvas>\n",
                 "      context.moveTo(2, 2);\n"
                         + "      context.lineTo(6, 14);\n"
                         + "      context.lineTo(14, 2);\n"
@@ -1178,7 +1124,7 @@ public class CanvasRenderingContext2DTest extends LoboUnitTest {
             + "vEEL1QhI7ZEDXAF74K5qBOyWVXUqF13VNJAbq3TKxPMAZ189d59ot07tqdo/pL6Hoj3qAf4rYfT50fdTCbcAP2uOMhXdBSkP"
             + "AAAAAElFTkSuQmCC")
     public void pathFillTransform2() {
-        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+        draw("<canvas id='myCanvas' width='20' height='20' style='border: 1px solid red;'></canvas>\n",
                 "      context.beginPath();\n"
                         + "      context.moveTo(2, 2);\n"
                         + "      context.lineTo(6, 14);\n"
@@ -1201,7 +1147,7 @@ public class CanvasRenderingContext2DTest extends LoboUnitTest {
             + "mhIOfccnmYwFYfjRMA9/BDLExcC1Lp4tbwGF/bgI30xTwzmgignOLClECtDrZqTFceCdoPipdw0XgX7aFoX9xumXT28NSGFP"
             + "oRfVNhwDXonGE9VC2XAPaORg2jdMgAdeyiQRQvsTZgAAAABJRU5ErkJggg==")
     public void saveRestore() {
-        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+        draw("<canvas id='myCanvas' width='20' height='20' style='border: 1px solid red;'></canvas>\n",
                 "      context.fillStyle = 'green';\n"
                         + "      context.save();\n"
                         + "      context.fillRect(4, 4, 4, 4);\n"
@@ -1251,6 +1197,27 @@ public class CanvasRenderingContext2DTest extends LoboUnitTest {
                 + "</script>\n"
                 + "</head>\n"
                 + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        checkHtmlAlert(html);
+    }
+
+    private void drawImage(final String png, final String canvasSetup, final String drawJS) {
+        final String html = "<html><head>\n"
+                + "<script>"
+                + "  function test() {\n"
+                + "    var img = document.getElementById('myImage');\n"
+                + "    var canvas = document.createElement('canvas');\n"
+                + canvasSetup
+                + "    if (canvas.getContext) {\n"
+                + "      var context = canvas.getContext('2d');\n"
+                + drawJS
+                + "     alert(canvas.toDataURL());\n"
+                + "    }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head><body onload='test()'>\n"
+                + "  <img id='myImage' src='" + URL_CANVAS + png + "'>\n"
                 + "</body></html>";
 
         checkHtmlAlert(html);

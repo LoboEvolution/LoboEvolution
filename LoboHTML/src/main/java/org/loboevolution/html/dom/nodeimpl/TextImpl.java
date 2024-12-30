@@ -34,6 +34,7 @@ import org.loboevolution.html.node.Text;
  * <p>TextImpl class.</p>
  */
 public class TextImpl extends CharacterDataImpl implements Text {
+
 	/**
 	 * <p>Constructor for TextImpl.</p>
 	 */

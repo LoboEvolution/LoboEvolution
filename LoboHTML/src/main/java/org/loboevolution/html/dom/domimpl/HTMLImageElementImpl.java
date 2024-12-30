@@ -35,6 +35,7 @@ import org.loboevolution.html.control.ImgSvgControl;
 import org.loboevolution.html.dom.HTMLDocument;
 import org.loboevolution.html.dom.HTMLImageElement;
 import org.loboevolution.gui.HtmlPanel;
+import org.loboevolution.html.dom.canvas.CanvasImageSource;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.renderstate.ImageRenderState;
 import org.loboevolution.html.renderstate.RenderState;
@@ -51,7 +52,7 @@ import java.net.URLConnection;
  * <p>HTMLImageElementImpl class.</p>
  */
 @Slf4j
-public class HTMLImageElementImpl extends HTMLElementImpl implements HTMLImageElement {
+public class HTMLImageElementImpl extends HTMLElementImpl implements HTMLImageElement, CanvasImageSource {
 
 	/**
 	 * <p>Constructor for HTMLImageElementImpl.</p>

@@ -166,11 +166,6 @@ public class JavaScript {
 		ScriptableObject.defineProperty(scope, jsClassName, constructorFunction, ScriptableObject.READONLY);
 	}
 
-	public void putJsObject(final Scriptable scope, final String jsClassName, final Class<?> javaClass) {
-		final Object consoleJSObj = JavaScript.getInstance().getJavascriptObject(javaClass, scope);
-		ScriptableObject.putProperty(scope, "console", consoleJSObj);
-	}
-
 	public void defineJsObject(final Scriptable scope, final String jsClassName, final Class<?> javaClass, final JavaInstantiator instantiator) {
 		final JavaClassWrapper classWrapper = JavaClassWrapperFactory.getInstance().getClassWrapper(javaClass);
 		final Function constructorFunction = new JavaConstructorObject(jsClassName, classWrapper, instantiator);

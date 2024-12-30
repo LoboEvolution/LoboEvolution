@@ -36,6 +36,7 @@ import org.loboevolution.common.Strings;
 import org.loboevolution.config.HtmlRendererConfig;
 import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.dom.HTMLCollection;
+import org.loboevolution.html.dom.canvas.ImageDataImpl;
 import org.loboevolution.html.dom.domimpl.*;
 import org.loboevolution.html.dom.filter.BodyFilter;
 import org.loboevolution.html.dom.nodeimpl.*;
@@ -1256,6 +1257,8 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 		final JavaInstantiator jiText = (args) -> new TextImpl();
 		final JavaInstantiator jiAudioContext = (args) -> new AudioContextImpl();
 		final JavaInstantiator jiBlob = (args) -> new BlobImpl();
+		final JavaInstantiator jiImageData = (args) -> new ImageDataImpl();
+
 
 		js.defineJsObject(ws, "Event", EventImpl.class, jiEvent);
 		js.defineJsObject(ws, "UIEvent", UIEventImpl.class, jiUIEvent);
@@ -1304,6 +1307,7 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 		js.defineJsObject(ws, "Text", TextImpl.class, jiText);
 		js.defineJsObject(ws, "AudioContext", AudioContextImpl.class, jiAudioContext);
 		js.defineJsObject(ws, "Blob", BlobImpl.class, jiBlob);
+		js.defineJsObject(ws, "ImageData", ImageDataImpl.class, jiImageData);
 
 		js.defineElementClass(ws, doc, "Comment", "comment", CommentImpl.class);
 		js.defineElementClass(ws, doc, "Image", "img", HTMLImageElementImpl.class);

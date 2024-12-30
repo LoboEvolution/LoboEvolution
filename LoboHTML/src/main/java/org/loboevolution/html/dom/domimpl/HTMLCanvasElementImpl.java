@@ -28,13 +28,17 @@ package org.loboevolution.html.dom.domimpl;
 
 import lombok.Getter;
 import org.loboevolution.common.Strings;
-import org.loboevolution.html.dom.CanvasRenderingContext2D;
+import org.loboevolution.html.dom.canvas.CanvasRenderingContext2D;
 import org.loboevolution.html.dom.FileCallback;
 import org.loboevolution.html.dom.HTMLCanvasElement;
 import org.loboevolution.html.dom.canvas.CanvasRenderingImpl;
 import org.loboevolution.html.style.HtmlValues;
 
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.Base64;
 
 
 /**
@@ -91,8 +95,7 @@ public class HTMLCanvasElementImpl extends HTMLElementImpl implements HTMLCanvas
 	/** {@inheritDoc} */
 	@Override
 	public String toDataURL() {
-		// TODO Auto-generated method stub
-		return null;
+		return "data:image/png;base64," + Base64.getEncoder().encodeToString(toBytesCompressed(image));
 	}
 
 	/** {@inheritDoc} */
@@ -138,6 +141,16 @@ public class HTMLCanvasElementImpl extends HTMLElementImpl implements HTMLCanvas
 	@Override
 	public Integer getOffsetWidth() {
 		return getClientWidth();
+	}
+
+	private byte[] toBytesCompressed(BufferedImage image) {
+		try {
+			ByteArrayOutputStream out = new ByteArrayOutputStream();
+			ImageIO.write(image, "png", out);
+			return out.toByteArray();
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	
