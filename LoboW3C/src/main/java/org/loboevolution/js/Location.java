@@ -26,7 +26,7 @@
 
 package org.loboevolution.js;
 
-import org.loboevolution.html.node.DOMStringList;
+import org.loboevolution.html.dom.DOMStringList;
 
 /**
  * The location (URL) of the object it is linked to. Changes done on it are
@@ -39,7 +39,7 @@ public interface Location {
 	/**
 	 * <p>getAncestorOrigins.</p>
 	 *
-	 * @return a {@link org.loboevolution.html.node.DOMStringList} object.
+	 * @return a {@link DOMStringList} object.
 	 */
 	DOMStringList getAncestorOrigins();
 

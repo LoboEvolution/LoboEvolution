@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2014 - 2024 LoboEvolution
+ * Copyright (c) 2014 - 2023 LoboEvolution
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,17 +23,39 @@
  *
  * Contact info: ivan.difrancesco@yahoo.it
  */
+
 package org.loboevolution.html.dom;
 
-/**
- * The public interface CanvasRenderingContext.
- */
-public interface CanvasRenderingContext {
 
-	/**
-	 * Gets the canvas.
-	 *
-	 * @return the canvas
-	 */
-	HTMLCanvasElement getCanvas();
+/**
+ * A type returned by some APIs which contains a list of DOMString (strings).
+ *
+ *
+ *
+ */
+public interface DOMStringList {
+   
+    /**
+     * Returns the number of strings in strings.
+     *
+     * @return a {@link java.lang.Integer} object.
+     */
+    int getLength();
+
+    /**
+     * Returns true if strings contains string, and false otherwise.
+     *
+     * @param string a {@link java.lang.String} object.
+     * @return a boolean.
+     */
+    boolean contains(String string);
+
+    /**
+     * Returns the string with index index from strings.
+     *
+     * @param index a {@link java.lang.Integer} object.
+     * @return a {@link java.lang.String} object.
+     */
+    String item(int index);
+
 }

@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2014 - 2024 LoboEvolution
+ * Copyright (c) 2014 - 2023 LoboEvolution
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -26,12 +26,12 @@
 /*
  * Created on Oct 15, 2005
  */
-package org.loboevolution.html.dom.nodeimpl;
+package org.loboevolution.html.dom.domimpl;
 
 import org.loboevolution.gui.LocalHtmlRendererConfig;
-import org.loboevolution.html.node.DOMImplementation;
-import org.loboevolution.html.node.DOMImplementationList;
-import org.loboevolution.html.node.DOMImplementationSource;
+import org.loboevolution.html.dom.DOMImplementation;
+import org.loboevolution.html.dom.DOMImplementationList;
+import org.loboevolution.html.dom.DOMImplementationSource;
 import org.loboevolution.http.UserAgentContext;
 
 import java.util.ArrayList;

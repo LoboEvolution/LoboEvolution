@@ -36,7 +36,6 @@ public interface File extends Blob {
      *
      * @return the name
      */
-	// File
     String getName();
 
     /**

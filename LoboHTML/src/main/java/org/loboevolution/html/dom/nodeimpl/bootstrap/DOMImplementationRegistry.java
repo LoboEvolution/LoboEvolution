@@ -26,10 +26,10 @@
 package org.loboevolution.html.dom.nodeimpl.bootstrap;
 
 import lombok.extern.slf4j.Slf4j;
-import org.loboevolution.html.dom.nodeimpl.DOMImplementationSourceImpl;
-import org.loboevolution.html.node.DOMImplementation;
-import org.loboevolution.html.node.DOMImplementationList;
-import org.loboevolution.html.node.DOMImplementationSource;
+import org.loboevolution.html.dom.domimpl.DOMImplementationSourceImpl;
+import org.loboevolution.html.dom.DOMImplementation;
+import org.loboevolution.html.dom.DOMImplementationList;
+import org.loboevolution.html.dom.DOMImplementationSource;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -48,7 +48,7 @@ public final class DOMImplementationRegistry {
      * Default class name.
      */
     private static final String FALLBACK_CLASS =
-            "org.loboevolution.html.dom.nodeimpl.DOMImplementationSourceImpl";
+            "org.loboevolution.html.dom.domimpl.DOMImplementationSourceImpl";
     private static final String DEFAULT_PACKAGE =
             "org.loboevolution.html.dom.nodeimpl";
 

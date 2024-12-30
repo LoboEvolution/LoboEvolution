@@ -26,11 +26,10 @@
 
 package org.loboevolution.html.dom;
 
+import org.loboevolution.html.dom.canvas.CanvasRenderingContext2D;
+
 /**
  * The Interface HTMLCanvasElement.
- *
- *
- *
  */
 public interface HTMLCanvasElement extends HTMLElement {
 	

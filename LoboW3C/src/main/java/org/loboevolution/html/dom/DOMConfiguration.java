@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2014 - 2024 LoboEvolution
+ * Copyright (c) 2014 - 2023 LoboEvolution
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,7 +24,7 @@
  * Contact info: ivan.difrancesco@yahoo.it
  */
 
-package org.loboevolution.html.node;
+package org.loboevolution.html.dom;
 
 /**
  * <p>DOMConfiguration interface.</p>
@@ -51,7 +51,7 @@ public interface DOMConfiguration {
 	/**
 	 * <p>getParameterNames.</p>
 	 *
-	 * @return a {@link org.loboevolution.html.node.DOMStringList} object.
+	 * @return a {@link DOMStringList} object.
 	 */
 	DOMStringList getParameterNames();
 

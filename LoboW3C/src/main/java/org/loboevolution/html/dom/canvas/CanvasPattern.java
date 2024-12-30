@@ -23,23 +23,11 @@
  *
  * Contact info: ivan.difrancesco@yahoo.it
  */
-package org.loboevolution.html.dom;
+package org.loboevolution.html.dom.canvas;
 
 /**
- * The public interface CanvasGradient.
- *
- *
- *
+ * The public interface CanvasPattern.
  */
-public interface CanvasGradient {
+public interface CanvasPattern {
 
-	/**
-	 * Adds the color stop.
-	 *
-	 * @param offset
-	 *            the offset
-	 * @param color
-	 *            the color
-	 */
-	void addColorStop(String offset, String color);
 }

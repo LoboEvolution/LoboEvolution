@@ -27,8 +27,6 @@
 package org.loboevolution.html.dom;
 
 
-import org.loboevolution.html.node.DOMTokenList;
-
 /**
  * Hyperlink elements and provides special properties
  * and methods (beyond those of the regular HTMLElement object interface that they inherit from)
@@ -167,7 +165,7 @@ public interface HTMLAnchorElement extends HTMLElement, HTMLHyperlinkElementUtil
     /**
      * <p>getRelList.</p>
      *
-     * @return a {@link org.loboevolution.html.node.DOMTokenList} object.
+     * @return a {@link DOMTokenList} object.
      */
     DOMTokenList getRelList();
 

@@ -24,39 +24,55 @@
  * Contact info: ivan.difrancesco@yahoo.it
  */
 
-package org.loboevolution.html.dom.nodeimpl;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import org.loboevolution.html.dom.DOMError;
-import org.loboevolution.html.dom.DOMLocator;
+package org.loboevolution.html.dom;
 
 /**
- * This is a utility implementation of EventListener
- * that captures all events and provides access
- * to lists of all events by mode
+ * The Interface DOMMatrixInit.
  */
-@Data
-@AllArgsConstructor
-public class DOMErrorImpl implements DOMError {
-  private final short severity;
-  private final String message;
-  private final String type;
-  private final Object relatedException;
-  private final Object relatedData;
+public interface DOMMatrixInit extends DOMMatrix2DInit {
 
-  private final DOMLocator location;
+    Boolean getIs2D();
 
-  /**
-   * Public constructor
-   *
-   */
-  public DOMErrorImpl(final DOMError src) {
-    this.severity = src.getSeverity();
-    this.message = src.getMessage();
-    this.type = src.getType();
-    this.relatedException = src.getRelatedException();
-    this.relatedData = src.getRelatedData();
-    this.location = new DOMLocatorImpl(src.getLocation());
-  }
+    void setIs2D(Boolean val);
+
+    Double getM13();
+
+    void setM13(Double val);
+
+    Double getM14();
+
+    void setM14(Double val);
+
+    Double getM23();
+
+    void setM23(Double val);
+
+    Double getM24();
+
+    void setM24(Double val);
+
+    Double getM31();
+
+    void setM31(Double val);
+
+    Double getM32();
+
+    void setM32(Double val);
+
+    Double getM33();
+
+    void setM33(Double val);
+
+    Double getM34();
+
+    void setM34(Double val);
+
+    Double getM43();
+
+    void setM43(Double val);
+
+    Double getM44();
+
+    void setM44(Double val);
+
 }

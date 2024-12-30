@@ -32,7 +32,7 @@ import org.loboevolution.common.Urls;
 import org.loboevolution.html.control.FrameControl;
 import org.loboevolution.html.dom.HTMLIFrameElement;
 import org.loboevolution.gui.HtmlPanel;
-import org.loboevolution.html.node.DOMTokenList;
+import org.loboevolution.html.dom.DOMTokenList;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.js.WindowProxy;
 import org.loboevolution.html.renderstate.IFrameRenderState;

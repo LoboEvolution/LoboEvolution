@@ -62,6 +62,7 @@ public class LoboUnitTest extends LoboWebDriver {
     public static final String URL_JS = "src/test/resources/org/lobo/js/";
     public static final String URL_HTML = "src/test/resources/org/lobo/html/";
     public static final String URL_XML = "src/test/resources/org/lobo/xml/";
+    public static final String URL_CANVAS = "src/test/resources/org/lobo/canvas/";
     public static final String URL_SECOND = "http://localhost:8080/second/";
 
     public static final String URL_THIRD = "http://localhost:8080/third/";

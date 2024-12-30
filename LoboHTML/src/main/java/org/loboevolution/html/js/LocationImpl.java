@@ -32,7 +32,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.dom.HTMLDocument;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
-import org.loboevolution.html.node.DOMStringList;
+import org.loboevolution.html.dom.DOMStringList;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.js.Location;
 import org.loboevolution.js.AbstractScriptableDelegate;

@@ -341,7 +341,7 @@ public interface Document extends Node, NonElementParentNode, ParentNode, Docume
 	/**
 	 * Gets the implementation object of the current document.
 	 *
-	 * @return a {@link org.loboevolution.html.node.DOMImplementation} object.
+	 * @return a {@link DOMImplementation} object.
 	 */
 	DOMImplementation getImplementation();
 
@@ -725,7 +725,7 @@ public interface Document extends Node, NonElementParentNode, ParentNode, Docume
 	/**
 	 * <p>getDomConfig.</p>
 	 *
-	 * @return a {@link org.loboevolution.html.node.DOMConfiguration} object.
+	 * @return a {@link DOMConfiguration} object.
 	 */
 	DOMConfiguration getDomConfig();
 

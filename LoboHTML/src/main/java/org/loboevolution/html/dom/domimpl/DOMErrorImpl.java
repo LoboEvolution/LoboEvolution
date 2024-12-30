@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2014 - 2024 LoboEvolution
+ * Copyright (c) 2014 - 2023 LoboEvolution
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,38 +24,39 @@
  * Contact info: ivan.difrancesco@yahoo.it
  */
 
-package org.loboevolution.html.node;
+package org.loboevolution.html.dom.domimpl;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import org.loboevolution.html.dom.DOMError;
+import org.loboevolution.html.dom.DOMLocator;
 
 /**
- * A type returned by some APIs which contains a list of DOMString (strings).
- *
- *
- *
+ * This is a utility implementation of EventListener
+ * that captures all events and provides access
+ * to lists of all events by mode
  */
-public interface DOMStringList {
-   
-    /**
-     * Returns the number of strings in strings.
-     *
-     * @return a {@link java.lang.Integer} object.
-     */
-    int getLength();
+@Data
+@AllArgsConstructor
+public class DOMErrorImpl implements DOMError {
+  private final short severity;
+  private final String message;
+  private final String type;
+  private final Object relatedException;
+  private final Object relatedData;
 
-    /**
-     * Returns true if strings contains string, and false otherwise.
-     *
-     * @param string a {@link java.lang.String} object.
-     * @return a boolean.
-     */
-    boolean contains(String string);
+  private final DOMLocator location;
 
-    /**
-     * Returns the string with index index from strings.
-     *
-     * @param index a {@link java.lang.Integer} object.
-     * @return a {@link java.lang.String} object.
-     */
-    String item(int index);
-
+  /**
+   * Public constructor
+   *
+   */
+  public DOMErrorImpl(final DOMError src) {
+    this.severity = src.getSeverity();
+    this.message = src.getMessage();
+    this.type = src.getType();
+    this.relatedException = src.getRelatedException();
+    this.relatedData = src.getRelatedData();
+    this.location = new DOMLocatorImpl(src.getLocation());
+  }
 }

@@ -29,8 +29,8 @@ package org.loboevolution.domts.level3;
 
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.node.DOMConfiguration;
-import org.loboevolution.html.node.DOMStringList;
+import org.loboevolution.html.dom.DOMConfiguration;
+import org.loboevolution.html.dom.DOMStringList;
 import org.loboevolution.html.node.Document;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;

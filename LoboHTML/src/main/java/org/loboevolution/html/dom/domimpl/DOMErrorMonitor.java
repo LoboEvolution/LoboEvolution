@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2014 - 2024 LoboEvolution
+ * Copyright (c) 2014 - 2023 LoboEvolution
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,41 +23,46 @@
  *
  * Contact info: ivan.difrancesco@yahoo.it
  */
-/*
- * Created on Oct 15, 2005
- */
-package org.loboevolution.html.dom.nodeimpl;
+package org.loboevolution.html.dom.domimpl;
 
-import org.loboevolution.html.node.DOMImplementationList;
-import org.loboevolution.html.node.DOMImplementation;
+import lombok.Data;
+import org.loboevolution.html.dom.DOMError;
+import org.loboevolution.html.dom.DOMErrorHandler;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <p>DOMImplementationImpl class.</p>
+ * This is a utility implementation of EventListener
+ * that captures all events and provides access
+ * to lists of all events by mode
  */
-public class DOMImplementationListImpl implements DOMImplementationList {
 
-    private final List<DOMImplementation> domImplementations;
+@Data
+public class DOMErrorMonitor implements DOMErrorHandler {
 
-    public DOMImplementationListImpl(final List<DOMImplementation> implementations) {
-        this.domImplementations = implementations;
+    private final List<DOMError> errors;
+
+    public DOMErrorMonitor(){
+        errors = new ArrayList<>();
     }
 
-    /** {@inheritDoc} */
+    /**
+     * Implementation of DOMErrorHandler.handleError that
+     * adds copy of error to list for later retrieval.
+     */
     @Override
-    public DOMImplementation item(final int index) {
-        final int length = getLength();
-        if (index >= 0 && index < length) {
-            return domImplementations.get(index);
+    public boolean handleError(final DOMError error) {
+        errors.add(new DOMErrorImpl(error));
+        return true;
+    }
+
+    public boolean assertLowerSeverity(final int severity) {
+        for (final DOMError error : errors) {
+            if (error.getSeverity() >= severity) {
+                return false;
+            }
         }
-        return null;
+        return true;
     }
-
-    /** {@inheritDoc} */
-    @Override
-    public int getLength() {
-        return domImplementations.size();
-    }
-
 }

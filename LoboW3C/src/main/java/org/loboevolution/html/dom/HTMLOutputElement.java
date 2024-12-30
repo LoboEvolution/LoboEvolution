@@ -27,7 +27,6 @@
 package org.loboevolution.html.dom;
 
 
-import org.loboevolution.html.node.DOMTokenList;
 import org.loboevolution.html.node.NodeList;
 import org.loboevolution.html.node.ValidityState;
 
@@ -68,7 +67,7 @@ public interface HTMLOutputElement extends HTMLElement {
     /**
      * <p>getHtmlFor.</p>
      *
-     * @return a {@link org.loboevolution.html.node.DOMTokenList} object.
+     * @return a {@link DOMTokenList} object.
      */
     DOMTokenList getHtmlFor();
 

@@ -23,24 +23,18 @@
  *
  * Contact info: ivan.difrancesco@yahoo.it
  */
-package org.loboevolution.html.node;
+package org.loboevolution.html.dom.canvas;
 
-public interface DOMImplementationSource {
+/**
+ * The public interface CanvasGradient.
+ */
+public interface CanvasGradient {
 
-    /**
-     * <p>getDOMImplementation.</p>
-     *
-     * @param features a {@link java.lang.String} object.
-     * @return a {@link org.loboevolution.html.node.DOMImplementation} object.
-     */
-    DOMImplementation getDOMImplementation(String features);
-
-
-    /**
-     * <p>getDOMImplementation.</p>
-     *
-     * @param features a {@link java.lang.String} object.
-     * @return a {@link org.loboevolution.html.node.DOMImplementation} object.
-     */
-    DOMImplementationList getDOMImplementationList(String features);
+	/**
+	 * Adds the color stop.
+	 *
+	 * @param offset the offset
+	 * @param color  the color
+	 */
+	void addColorStop(String offset, String color);
 }

@@ -26,9 +26,9 @@
 
 package org.loboevolution.html.node;
 
+import org.loboevolution.html.dom.DOMTokenList;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.js.geom.DOMRectList;
-import org.mozilla.javascript.Function;
 import org.loboevolution.js.geom.DOMRect;
 
 /**
@@ -41,7 +41,7 @@ public interface Element extends Node, InnerHTML, NonDocumentTypeChildNode, Pare
      /**
      * Allows for manipulation of element's class content attribute as a set of whitespace-separated tokens through a DOMTokenList object.
      *
-     * @return a {@link org.loboevolution.html.node.DOMTokenList} object.
+     * @return a {@link DOMTokenList} object.
      */
     DOMTokenList getClassList();
 

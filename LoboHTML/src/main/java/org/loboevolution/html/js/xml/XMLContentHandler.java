@@ -32,7 +32,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.html.dom.domimpl.HTMLProcessingInstruction;
 import org.loboevolution.html.dom.nodeimpl.CommentImpl;
-import org.loboevolution.html.dom.nodeimpl.DOMImplementationImpl;
+import org.loboevolution.html.dom.domimpl.DOMImplementationImpl;
 import org.loboevolution.html.dom.nodeimpl.TextImpl;
 import org.loboevolution.html.node.*;
 import org.loboevolution.http.UserAgentContext;

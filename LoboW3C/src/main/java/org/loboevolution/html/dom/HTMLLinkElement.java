@@ -26,7 +26,6 @@
 
 package org.loboevolution.html.dom;
 
-import org.loboevolution.html.node.DOMTokenList;
 import org.loboevolution.css.StyleSheet;
 
 /**
@@ -209,7 +208,7 @@ public interface HTMLLinkElement extends HTMLElement {
 	/**
 	 * <p>getRelList.</p>
 	 *
-	 * @return a {@link org.loboevolution.html.node.DOMTokenList} object.
+	 * @return a {@link org.loboevolution.html.dom.DOMTokenList} object.
 	 */
 	DOMTokenList getRelList();
 
@@ -232,7 +231,7 @@ public interface HTMLLinkElement extends HTMLElement {
 	/**
 	 * <p>getSizes.</p>
 	 *
-	 * @return a {@link org.loboevolution.html.node.DOMTokenList} object.
+	 * @return a {@link org.loboevolution.html.dom.DOMTokenList} object.
 	 */
 	DOMTokenList getSizes();
 

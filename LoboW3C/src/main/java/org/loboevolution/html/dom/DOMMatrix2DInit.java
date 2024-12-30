@@ -23,30 +23,56 @@
  *
  * Contact info: ivan.difrancesco@yahoo.it
  */
-package org.loboevolution.html.dom.nodeimpl;
+package org.loboevolution.html.dom;
 
-import lombok.Data;
-import org.loboevolution.html.dom.DOMLocator;
-import org.loboevolution.html.node.Node;
 
-/**
- * Implementation of DOMLocator
- */
-@Data
-public class DOMLocatorImpl implements DOMLocator {
-    private final int lineNumber;
-    private final int columnNumber;
-    private final int byteOffset;
-    private final int utf16Offset;
-    private final Node relatedNode;
-    private final String uri;
+public interface DOMMatrix2DInit {
 
-    public DOMLocatorImpl(final DOMLocator src) {
-        this.lineNumber = src.getLineNumber();
-        this.columnNumber = src.getColumnNumber();
-        this.byteOffset = src.getByteOffset();
-        this.utf16Offset = src.getUtf16Offset();
-        this.relatedNode = src.getRelatedNode();
-        this.uri = src.getUri();
-    }
+  Double getA();
+
+  void setA(Double val);
+
+  Double getB();
+
+  void setB(Double val);
+
+  Double getC();
+
+  void setC(Double val);
+
+  Double getD();
+
+  void setD(Double val);
+
+  Double getE();
+
+  void setE(Double val);
+
+  Double getF();
+
+  void setF(Double val);
+
+  Double getM11();
+
+  void setM11(Double val);
+
+  Double getM12();
+
+  void setM12(Double val);
+
+  Double getM21();
+
+  void setM21(Double val);
+
+  Double getM22();
+
+  void setM22(Double val);
+
+  Double getM41();
+
+  void setM41(Double val);
+
+  Double getM42();
+
+  void setM42(Double val);
 }

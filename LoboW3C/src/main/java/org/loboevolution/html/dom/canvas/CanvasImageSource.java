@@ -23,11 +23,10 @@
  *
  * Contact info: ivan.difrancesco@yahoo.it
  */
-package org.loboevolution.html.dom;
+package org.loboevolution.html.dom.canvas;
 
 /**
- * The public interface CanvasPattern.
+ * The public interface CanvasImageSource.
  */
-public interface CanvasPattern {
-
+public interface CanvasImageSource extends ImageBitmapSource {
 }

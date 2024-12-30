@@ -23,8 +23,8 @@
  *
  * Contact info: ivan.difrancesco@yahoo.it
  */
- 
- package org.loboevolution.html.dom;
+
+package org.loboevolution.html.dom;
 
 /**
  * The public interface DOMErrorHandler.

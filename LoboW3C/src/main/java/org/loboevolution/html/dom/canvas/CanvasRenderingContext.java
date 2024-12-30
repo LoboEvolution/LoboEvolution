@@ -23,46 +23,19 @@
  *
  * Contact info: ivan.difrancesco@yahoo.it
  */
-package org.loboevolution.html.dom.nodeimpl;
+package org.loboevolution.html.dom.canvas;
 
-import lombok.Data;
-import org.loboevolution.html.dom.DOMError;
-import org.loboevolution.html.dom.DOMErrorHandler;
-
-import java.util.ArrayList;
-import java.util.List;
+import org.loboevolution.html.dom.HTMLCanvasElement;
 
 /**
- * This is a utility implementation of EventListener
- * that captures all events and provides access
- * to lists of all events by mode
+ * The public interface CanvasRenderingContext.
  */
+public interface CanvasRenderingContext {
 
-@Data
-public class DOMErrorMonitor implements DOMErrorHandler {
-
-    private final List<DOMError> errors;
-
-    public DOMErrorMonitor(){
-        errors = new ArrayList<>();
-    }
-
-    /**
-     * Implementation of DOMErrorHandler.handleError that
-     * adds copy of error to list for later retrieval.
-     */
-    @Override
-    public boolean handleError(final DOMError error) {
-        errors.add(new DOMErrorImpl(error));
-        return true;
-    }
-
-    public boolean assertLowerSeverity(final int severity) {
-        for (final DOMError error : errors) {
-            if (error.getSeverity() >= severity) {
-                return false;
-            }
-        }
-        return true;
-    }
+	/**
+	 * Gets the canvas.
+	 *
+	 * @return the canvas
+	 */
+	HTMLCanvasElement getCanvas();
 }
