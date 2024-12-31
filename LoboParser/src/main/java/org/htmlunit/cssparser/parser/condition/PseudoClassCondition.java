@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2023 Ronald Brill.
+ * Copyright (c) 2019-2024 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,7 @@ import org.htmlunit.cssparser.parser.Locator;
 /**
  * <p>PseudoClassCondition class.</p>
  *
+ * @author Ronald Brill
  */
 public class PseudoClassCondition extends AbstractLocatable implements Condition, Serializable {
 
@@ -30,7 +31,6 @@ public class PseudoClassCondition extends AbstractLocatable implements Condition
 
     /**
      * Ctor.
-     *
      * @param value the value
      * @param locator the locator
      * @param doubleColon true if was prefixed by double colon

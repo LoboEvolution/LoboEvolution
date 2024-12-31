@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2023 Ronald Brill.
+ * Copyright (c) 2019-2024 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,8 @@ package org.htmlunit.cssparser.parser;
 
 /**
  * Abstract base class of all locatables.
+ *
+ * @author Ronald Brill
  */
 public class AbstractLocatable implements Locatable {
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2023 Ronald Brill.
+ * Copyright (c) 2019-2024 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,8 @@ import java.util.List;
  * The SelectorList interface provides the abstraction of an ordered collection
  * of selectors, without defining or constraining how this collection is
  * implemented.
+ *
+ * @author Ronald Brill
  */
 public interface SelectorList extends List<Selector> {
 }

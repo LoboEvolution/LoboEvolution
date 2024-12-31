@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2023 Ronald Brill.
+ * Copyright (c) 2019-2024 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,8 @@ import org.htmlunit.cssparser.util.ParserUtils;
 
 /**
  * Implementation of CSSUnknownRule.
+ *
+ * @author Ronald Brill
  */
 public class CSSUnknownRuleImpl extends AbstractCSSRuleImpl {
 
@@ -29,7 +31,6 @@ public class CSSUnknownRuleImpl extends AbstractCSSRuleImpl {
 
     /**
      * Ctor.
-     *
      * @param parentStyleSheet the parent style sheet
      * @param parentRule the parent rule
      * @param text the text

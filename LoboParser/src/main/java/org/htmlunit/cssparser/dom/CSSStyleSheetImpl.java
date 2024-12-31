@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2023 Ronald Brill.
+ * Copyright (c) 2019-2024 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,6 +38,8 @@ import org.w3c.dom.Node;
 
 /**
  * Implementation of CSSStyleSheet.
+ *
+ * @author Ronald Brill
  */
 public class CSSStyleSheetImpl implements Serializable {
 
@@ -135,7 +137,7 @@ public class CSSStyleSheetImpl implements Serializable {
     /**
      * inserts a new rule.
      *
-     * @param rule  the rule to insert
+     * @param rule the rule to insert
      * @param index the insert pos
      * @throws DOMException in case of error
      */
@@ -235,7 +237,6 @@ public class CSSStyleSheetImpl implements Serializable {
 
     /**
      * Set the owner node.
-     *
      * @param ownerNode the new node
      */
     public void setOwnerNode(final Node ownerNode) {
@@ -244,7 +245,6 @@ public class CSSStyleSheetImpl implements Serializable {
 
     /**
      * Set the href.
-     *
      * @param href the new href
      */
     public void setHref(final String href) {
@@ -253,7 +253,6 @@ public class CSSStyleSheetImpl implements Serializable {
 
     /**
      * Set the title.
-     *
      * @param title the new title
      */
     public void setTitle(final String title) {
@@ -262,7 +261,6 @@ public class CSSStyleSheetImpl implements Serializable {
 
     /**
      * Set the media text.
-     *
      * @param mediaText the new media text
      */
     public void setMediaText(final String mediaText) {
@@ -374,7 +372,6 @@ public class CSSStyleSheetImpl implements Serializable {
 
     /**
      * Set the CSSStyleSheetRuleIndex.
-     *
      * @param index the new index
      */
     public void setRuleIndex(final CSSStyleSheetRuleIndex index) {
@@ -494,7 +491,6 @@ public class CSSStyleSheetImpl implements Serializable {
 
         /**
          * Add a media list.
-         *
          * @param mediaList the list to add
          * @return the CSSStyleSheetRuleIndex
          */

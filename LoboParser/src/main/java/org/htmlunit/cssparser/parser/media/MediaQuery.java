@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2023 Ronald Brill.
+ * Copyright (c) 2019-2024 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@ import org.htmlunit.cssparser.parser.AbstractLocatable;
 /**
  * <p>MediaQuery class.</p>
  *
+ * @author Ronald Brill
  */
 public class MediaQuery extends AbstractLocatable implements Serializable {
 
@@ -35,7 +36,6 @@ public class MediaQuery extends AbstractLocatable implements Serializable {
 
     /**
      * Ctor.
-     *
      * @param media the media string
      */
     public MediaQuery(final String media) {
@@ -44,7 +44,6 @@ public class MediaQuery extends AbstractLocatable implements Serializable {
 
     /**
      * Ctor.
-     *
      * @param media the media string
      * @param isOnly is only flag
      * @param isNot is not flag

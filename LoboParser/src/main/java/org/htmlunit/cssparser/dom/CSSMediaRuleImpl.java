@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2023 Ronald Brill.
+ * Copyright (c) 2019-2024 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,6 +25,8 @@ import org.htmlunit.cssparser.util.ThrowCssExceptionErrorHandler;
 
 /**
  * Implementation of CSSMediaRule.
+ *
+ * @author Ronald Brill
  *
  */
 public class CSSMediaRuleImpl extends AbstractCSSRuleImpl {
@@ -157,7 +159,6 @@ public class CSSMediaRuleImpl extends AbstractCSSRuleImpl {
 
     /**
      * Removes a rule at the given index.
-     *
      * @param index the insert pos
      * @throws DOMException in case of error
      */
@@ -175,7 +176,6 @@ public class CSSMediaRuleImpl extends AbstractCSSRuleImpl {
 
     /**
      * Replaces the rule list.
-     *
      * @param rules the new rule list
      */
     public void setRuleList(final CSSRuleListImpl rules) {

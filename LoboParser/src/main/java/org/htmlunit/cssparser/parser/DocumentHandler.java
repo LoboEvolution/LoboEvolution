@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2023 Ronald Brill.
+ * Copyright (c) 2019-2024 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,8 @@ import org.htmlunit.cssparser.parser.selector.SelectorList;
  * application needs to be informed of basic parsing events, it implements this
  * interface and registers an instance with the CSS parser using the
  * setCSSHandler method.
+ *
+ * @author Ronald Brill
  */
 public interface DocumentHandler {
 
@@ -34,7 +36,6 @@ public interface DocumentHandler {
      * @param source the input source to parse
      * @exception CSSException Any CSS exception, possibly wrapping another
      *                         exception.
-     * @throws CSSException if any.
      */
     void startDocument(InputSource source) throws CSSException;
 
@@ -49,7 +50,6 @@ public interface DocumentHandler {
      * @param source the input source to parse
      * @exception CSSException Any CSS exception, possibly wrapping another
      *                         exception.
-     * @throws CSSException if any.
      */
     void endDocument(InputSource source) throws CSSException;
 
@@ -59,7 +59,6 @@ public interface DocumentHandler {
      * @param media The intended destination media for style information.
      * @exception CSSException Any CSS exception, possibly wrapping another
      *                         exception.
-     * @throws CSSException if any.
      */
     void endMedia(MediaQueryList media) throws CSSException;
 
@@ -70,7 +69,6 @@ public interface DocumentHandler {
      * @param pseudoPage the pseudo page (if any, null otherwise)
      * @exception CSSException Any CSS exception, possibly wrapping another
      *                         exception.
-     * @throws CSSException if any.
      */
     void endPage(String name, String pseudoPage) throws CSSException;
 
@@ -79,7 +77,6 @@ public interface DocumentHandler {
      *
      * @exception CSSException Any CSS exception, possibly wrapping another
      *                         exception.
-     * @throws CSSException if any.
      */
     void endFontFace() throws CSSException;
 
@@ -89,7 +86,6 @@ public interface DocumentHandler {
      * @param selectors All intended selectors for all declarations.
      * @exception CSSException Any CSS exception, possibly wrapping another
      *                         exception.
-     * @throws CSSException if any.
      */
     void endSelector(SelectorList selectors) throws CSSException;
 
@@ -113,7 +109,6 @@ public interface DocumentHandler {
      * @param locator the locator
      * @exception CSSException Any CSS exception, possibly wrapping another
      *  exception.
-     * @throws CSSException if any.
      */
     void importStyle(String uri, MediaQueryList media,
         String defaultNamespaceURI, Locator locator) throws CSSException;
@@ -126,7 +121,6 @@ public interface DocumentHandler {
      * @param locator the locator
      * @exception CSSException Any CSS exception, possibly wrapping another
      *  exception.
-     * @throws CSSException if any.
      */
     void ignorableAtRule(String atRule, Locator locator) throws CSSException;
 
@@ -140,7 +134,6 @@ public interface DocumentHandler {
      * @param locator the locator
      * @exception CSSException Any CSS exception, possibly wrapping another
      *  exception.
-     * @throws CSSException if any.
      */
     void startFontFace(Locator locator) throws CSSException;
 
@@ -156,7 +149,6 @@ public interface DocumentHandler {
      * @param locator the locator
      * @exception CSSException Any CSS exception, possibly wrapping another
      *  exception.
-     * @throws CSSException if any.
      */
     void startPage(String name, String pseudoPage, Locator locator) throws CSSException;
 
@@ -171,7 +163,6 @@ public interface DocumentHandler {
      * @param locator the locator
      * @exception CSSException Any CSS exception, possibly wrapping another
      *  exception.
-     * @throws CSSException if any.
      */
     void startMedia(MediaQueryList media, Locator locator) throws CSSException;
 
@@ -182,7 +173,6 @@ public interface DocumentHandler {
      * @param locator the locator
      * @exception CSSException Any CSS exception, possibly wrapping another
      *  exception.
-     * @throws CSSException if any.
      */
     void startSelector(SelectorList selectors, Locator locator) throws CSSException;
 

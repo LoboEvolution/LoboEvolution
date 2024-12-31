@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2023 Ronald Brill.
+ * Copyright (c) 2019-2024 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,8 @@ import java.util.Locale;
 
 /**
  * Implementation of {@link LexicalUnit}.
+ *
+ * @author Ronald Brill
  */
 public class LexicalUnitImpl extends AbstractLocatable implements LexicalUnit, Serializable {
 
@@ -407,6 +409,24 @@ public class LexicalUnitImpl extends AbstractLocatable implements LexicalUnit, S
                 appendParams(sb);
                 sb.append(")");
                 break;
+            case HWBCOLOR:
+                sb.append("hwb(");
+                appendParams(sb);
+                sb.append(")");
+                break;
+            case LABCOLOR:
+                sb.append("lab(");
+                appendParams(sb);
+                sb.append(")");
+                break;
+            case LCHCOLOR:
+                sb.append("lch(");
+                appendParams(sb);
+                sb.append(")");
+                break;
+            case NONE:
+                sb.append("none");
+                break;
             case IDENT:
                 sb.append(getStringValue());
                 break;
@@ -688,6 +708,22 @@ public class LexicalUnitImpl extends AbstractLocatable implements LexicalUnit, S
                 appendParams(sb);
                 sb.append("))");
                 break;
+            case HWBCOLOR:
+                sb.append("HWBCOLOR(hwb(");
+                appendParams(sb);
+                sb.append("))");
+                break;
+            case LABCOLOR:
+                sb.append("LABCOLOR(lab(");
+                appendParams(sb);
+                sb.append("))");
+                break;
+            case LCHCOLOR:
+                sb.append("LCHCOLOR(lch(");
+                appendParams(sb);
+                sb.append("))");
+                break;
+
             case IDENT:
                 sb.append("IDENT(")
                     .append(getStringValue())
@@ -1066,12 +1102,50 @@ public class LexicalUnitImpl extends AbstractLocatable implements LexicalUnit, S
 
     /**
      * @param prev the previous LexicalUnit
-     * @param funct the name rgb or rgba
+     * @param funct the name hsl or hsla
      * @param params the params
-     * @return lexical unit with type rgb color
+     * @return lexical unit with type hsl color
      */
     public static LexicalUnit createHslColor(final LexicalUnit prev, final String funct, final LexicalUnit params) {
         return new LexicalUnitImpl(prev, LexicalUnitType.HSLCOLOR, funct, params);
+    }
+
+    /**
+     * @param prev the previous LexicalUnit
+     * @param funct the name hwb
+     * @param params the params
+     * @return lexical unit with type hwb color
+     */
+    public static LexicalUnit createHwbColor(final LexicalUnit prev, final String funct, final LexicalUnit params) {
+        return new LexicalUnitImpl(prev, LexicalUnitType.HWBCOLOR, funct, params);
+    }
+
+    /**
+     * @param prev the previous LexicalUnit
+     * @param funct the name lab
+     * @param params the params
+     * @return lexical unit with type lab color
+     */
+    public static LexicalUnit createLabColor(final LexicalUnit prev, final String funct, final LexicalUnit params) {
+        return new LexicalUnitImpl(prev, LexicalUnitType.LABCOLOR, funct, params);
+    }
+
+    /**
+     * @param prev the previous LexicalUnit
+     * @param funct the name lch
+     * @param params the params
+     * @return lexical unit with type lch color
+     */
+    public static LexicalUnit createLchColor(final LexicalUnit prev, final String funct, final LexicalUnit params) {
+        return new LexicalUnitImpl(prev, LexicalUnitType.LCHCOLOR, funct, params);
+    }
+
+    /**
+     * @param prev the previous LexicalUnit
+     * @return lexical unit with type rgb color
+     */
+    public static LexicalUnit createNone(final LexicalUnit prev) {
+        return new LexicalUnitImpl(prev, LexicalUnitType.NONE);
     }
 
     /**
@@ -1126,6 +1200,14 @@ public class LexicalUnitImpl extends AbstractLocatable implements LexicalUnit, S
      */
     public static LexicalUnit createComma(final LexicalUnit prev) {
         return new LexicalUnitImpl(prev, LexicalUnitType.OPERATOR_COMMA);
+    }
+
+    /**
+     * @param prev the previous LexicalUnit
+     * @return lexical unit with type comma
+     */
+    public static LexicalUnit createInherit(final LexicalUnit prev) {
+        return new LexicalUnitImpl(prev, LexicalUnitType.INHERIT);
     }
 
     /**

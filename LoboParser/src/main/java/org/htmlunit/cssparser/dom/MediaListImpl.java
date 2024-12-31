@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2023 Ronald Brill.
+ * Copyright (c) 2019-2024 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,6 +30,7 @@ import org.htmlunit.cssparser.util.ThrowCssExceptionErrorHandler;
 /**
  * Implementation of MediaList.
  *
+ * @author Ronald Brill
  */
 public class MediaListImpl extends AbstractLocatable implements Serializable {
 
@@ -37,7 +38,6 @@ public class MediaListImpl extends AbstractLocatable implements Serializable {
 
     /**
      * Creates new MediaList.
-     *
      * @param mediaList the media list
      */
     public MediaListImpl(final MediaQueryList mediaList) {
@@ -119,7 +119,6 @@ public class MediaListImpl extends AbstractLocatable implements Serializable {
 
     /**
      * Resets the list of media queries.
-     *
      * @param media the media queries string to be parsed
      */
     public void setMedia(final List<String> media) {

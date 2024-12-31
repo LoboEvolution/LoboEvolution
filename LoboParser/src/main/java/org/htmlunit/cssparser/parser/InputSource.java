@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2023 Ronald Brill.
+ * Copyright (c) 2019-2024 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,8 @@ import java.io.Reader;
 
 /**
  * The input supported by the parser.
+ *
+ * @author Ronald Brill
  */
 public class InputSource implements Closeable {
     private String uri_;
@@ -29,7 +31,6 @@ public class InputSource implements Closeable {
 
     /**
      * Create a new input source backed by a reader.
-     *
      * @param reader the reader
      */
     public InputSource(final Reader reader) {

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2023 Ronald Brill.
+ * Copyright (c) 2019-2024 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,8 @@ package org.htmlunit.cssparser.parser;
 
 /**
  * Encapsulate a CSS parse error or warning.
+ *
+ * @author Ronald Brill
  */
 public class CSSParseException extends CSSException {
 
@@ -97,7 +99,7 @@ public class CSSParseException extends CSSException {
      */
     public CSSParseException(final String message, final String uri,
             final int lineNumber, final int columnNumber, final Exception e) {
-        super(ErrorCode.SYNTAX_ERR, message, e);
+        super(message, e);
         uri_ = uri;
         lineNumber_ = lineNumber;
         columnNumber_ = columnNumber;

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2023 Ronald Brill.
+ * Copyright (c) 2019-2024 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@ package org.htmlunit.cssparser.parser.selector;
 /**
  * <p>DirectAdjacentSelector class.</p>
  *
+ * @author Ronald Brill
  */
 public class DirectAdjacentSelector extends AbstractSelector {
 
@@ -25,7 +26,6 @@ public class DirectAdjacentSelector extends AbstractSelector {
 
     /**
      * Ctor.
-     *
      * @param child the child selector
      * @param simpleSelector the simple selector
      */

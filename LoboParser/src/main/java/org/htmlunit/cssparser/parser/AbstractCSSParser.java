@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2023 Ronald Brill.
+ * Copyright (c) 2019-2024 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,6 +31,8 @@ import org.htmlunit.cssparser.parser.selector.SelectorList;
 
 /**
  * Base implementation.
+ *
+ * @author Ronald Brill
  */
 public abstract class AbstractCSSParser {
     private DocumentHandler documentHandler_;
@@ -795,6 +797,21 @@ public abstract class AbstractCSSParser {
     protected LexicalUnit hslColorInternal(final LexicalUnit prev, final String funct,
             final LexicalUnit param) {
         return LexicalUnitImpl.createHslColor(prev, funct, param);
+    }
+
+    protected LexicalUnit hwbColorInternal(final LexicalUnit prev, final String funct,
+            final LexicalUnit param) {
+        return LexicalUnitImpl.createHwbColor(prev, funct, param);
+    }
+
+    protected LexicalUnit labColorInternal(final LexicalUnit prev, final String funct,
+            final LexicalUnit param) {
+        return LexicalUnitImpl.createLabColor(prev, funct, param);
+    }
+
+    protected LexicalUnit lchColorInternal(final LexicalUnit prev, final String funct,
+            final LexicalUnit param) {
+        return LexicalUnitImpl.createLchColor(prev, funct, param);
     }
 
     /**

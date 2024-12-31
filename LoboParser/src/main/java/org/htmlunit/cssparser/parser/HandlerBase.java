@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2023 Ronald Brill.
+ * Copyright (c) 2019-2024 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,8 @@ import org.htmlunit.cssparser.parser.selector.SelectorList;
 
 /**
  * Empty implementation of the DocumentHandlerExt interface.
+ *
+ * @author Ronald Brill
  */
 @Slf4j
 public class HandlerBase implements DocumentHandler, CSSErrorHandler {

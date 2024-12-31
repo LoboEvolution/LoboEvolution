@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2023 Ronald Brill.
+ * Copyright (c) 2019-2024 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,11 +17,24 @@ package org.htmlunit.cssparser.parser;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.Deque;
-import java.util.List;
-
 import org.htmlunit.cssparser.dom.*;
+import java.util.Iterator;
+
+import org.htmlunit.cssparser.dom.AbstractCSSRuleImpl;
+import org.htmlunit.cssparser.dom.CSSCharsetRuleImpl;
+import org.htmlunit.cssparser.dom.CSSFontFaceRuleImpl;
+import org.htmlunit.cssparser.dom.CSSImportRuleImpl;
+import org.htmlunit.cssparser.dom.CSSMediaRuleImpl;
+import org.htmlunit.cssparser.dom.CSSPageRuleImpl;
+import org.htmlunit.cssparser.dom.CSSRuleListImpl;
+import org.htmlunit.cssparser.dom.CSSStyleDeclarationImpl;
+import org.htmlunit.cssparser.dom.CSSStyleRuleImpl;
+import org.htmlunit.cssparser.dom.CSSStyleSheetImpl;
+import org.htmlunit.cssparser.dom.CSSUnknownRuleImpl;
+import org.htmlunit.cssparser.dom.CSSValueImpl;
+import org.htmlunit.cssparser.dom.MediaListImpl;
+import org.htmlunit.cssparser.dom.Property;
 import org.htmlunit.cssparser.parser.javacc.CSS3Parser;
 import org.htmlunit.cssparser.parser.media.MediaQueryList;
 import org.htmlunit.cssparser.parser.selector.SelectorList;
@@ -99,7 +112,7 @@ public class CSSOMParser {
      * @throws IOException if the underlying SAC parser throws an IOException
      */
     public void parseStyleDeclaration(final CSSStyleDeclarationImpl sd, final String styleDecl) throws IOException {
-        try (final InputSource source = new InputSource(new StringReader(styleDecl))) {
+        try (InputSource source = new InputSource(new StringReader(styleDecl))) {
             final Deque<Object> nodeStack = new ArrayDeque<>();
             nodeStack.push(sd);
             final CSSOMHandler handler = new CSSOMHandler(nodeStack);
@@ -116,7 +129,7 @@ public class CSSOMParser {
      * @throws IOException if the underlying SAC parser throws an IOException
      */
     public CSSValueImpl parsePropertyValue(final String propertyValue) throws IOException {
-        try (final InputSource source = new InputSource(new StringReader(propertyValue))) {
+        try (InputSource source = new InputSource(new StringReader(propertyValue))) {
             final CSSOMHandler handler = new CSSOMHandler();
             parser_.setDocumentHandler(handler);
             final LexicalUnit lu = parser_.parsePropertyValue(source);
@@ -135,7 +148,7 @@ public class CSSOMParser {
      * @throws IOException if the underlying SAC parser throws an IOException
      */
     public AbstractCSSRuleImpl parseRule(final String rule) throws IOException {
-        try (final InputSource source = new InputSource(new StringReader(rule))) {
+        try (InputSource source = new InputSource(new StringReader(rule))) {
             final CSSOMHandler handler = new CSSOMHandler();
             parser_.setDocumentHandler(handler);
             parser_.parseRule(source);
@@ -151,7 +164,7 @@ public class CSSOMParser {
      * @throws IOException if the underlying SAC parser throws an IOException
      */
     public SelectorList parseSelectors(final String selectors) throws IOException {
-        try (final InputSource source = new InputSource(new StringReader(selectors))) {
+        try (InputSource source = new InputSource(new StringReader(selectors))) {
             final HandlerBase handler = new HandlerBase();
             parser_.setDocumentHandler(handler);
             return parser_.parseSelectors(source);
@@ -166,7 +179,7 @@ public class CSSOMParser {
      * @throws IOException if the underlying SAC parser throws an IOException
      */
     public MediaQueryList parseMedia(final String media) throws IOException {
-        try (final InputSource source = new InputSource(new StringReader(media))) {
+        try (InputSource source = new InputSource(new StringReader(media))) {
             final HandlerBase handler = new HandlerBase();
             parser_.setDocumentHandler(handler);
             return parser_.parseMedia(source);
@@ -409,8 +422,9 @@ public class CSSOMParser {
 
         private AbstractCSSRuleImpl getParentRule() {
             if (!nodeStack_.isEmpty() && nodeStack_.size() > 1) {
-                final List<Object> nodesStack_ = new ArrayList<>(nodeStack_);
-                final Object node = nodesStack_.get(nodesStack_.size() - 2);
+                final Iterator<Object> iter = nodeStack_.iterator();
+                iter.next(); // skip first
+                final Object node = iter.next();
                 if (node instanceof AbstractCSSRuleImpl) {
                     return (AbstractCSSRuleImpl) node;
                 }

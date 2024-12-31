@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2023 Ronald Brill.
+ * Copyright (c) 2019-2024 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,8 @@ package org.htmlunit.cssparser.parser;
 
 /**
  * Lexical unit of css values.
+ *
+ * @author Ronald Brill
  */
 public interface LexicalUnit {
 
@@ -91,10 +93,20 @@ public interface LexicalUnit {
         COUNTER_FUNCTION,
         /** COUNTERS_FUNCTION. */
         COUNTERS_FUNCTION,
+
         /** RGBCOLOR. */
         RGBCOLOR,
         /** HSLCOLOR. */
         HSLCOLOR,
+        /** HWBCOLOR. */
+        HWBCOLOR,
+        /** LABCOLOR. */
+        LABCOLOR,
+        /** LCHCOLOR. */
+        LCHCOLOR,
+        /** NONE. */
+        NONE,
+
         /** DEGREE. */
         DEGREE,
         /** GRADIAN. */
@@ -103,6 +115,7 @@ public interface LexicalUnit {
         RADIAN,
         /** TURN. */
         TURN,
+
         /** MILLISECOND. */
         MILLISECOND,
         /** SECOND. */
