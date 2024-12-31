@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2014 - 2024 LoboEvolution
+ * Copyright (c) 2014 - 2025 LoboEvolution
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -44,7 +44,7 @@ public class AboutAction extends AbstractAction {
 	@Override
 	public void actionPerformed(final ActionEvent e) {
 		final String text = "This is Lobo Evolution 4.0, a pure Java web browser.\r\n"
-				+ "Copyright (c) 2023 The Lobo Evolution.\r\n https://github.com/LoboEvolution/LoboEvolution/";
+				+ "Copyright (c) 2025 The Lobo Evolution.\r\n https://github.com/LoboEvolution/LoboEvolution/";
 		JOptionPane.showMessageDialog(null, text, "About", JOptionPane.INFORMATION_MESSAGE);
 
 	}
