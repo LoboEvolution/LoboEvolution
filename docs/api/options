@@ -1,0 +1,24 @@
+--class-path
+'C:/Users/utente/workspace/LoboEvolution/target/classes;C:/Users/utente/workspace/LoboEvolution/target/LoboW3C/classes;C:/Users/utente/workspace/LoboEvolution/target/LoboCommon/classes;C:/Users/utente/workspace/LoboEvolution/target/LoboStore/classes;C:/Users/utente/workspace/LoboEvolution/target/LoboApi/classes;C:/Users/utente/workspace/LoboEvolution/target/LoboXalan/classes;C:/Users/utente/workspace/LoboEvolution/target/LoboParser/classes;C:/Users/utente/workspace/LoboEvolution/target/LoboPDF/classes;C:/Users/utente/workspace/LoboEvolution/target/LoboIViewer/classes;C:/Users/utente/workspace/LoboEvolution/target/LoboJtattoo/classes;C:/Users/utente/workspace/LoboEvolution/target/LoboHTML/classes;C:/Users/utente/workspace/LoboEvolution/target/LoboUnitTest/classes;C:/Users/utente/workspace/LoboEvolution/target/LoboJhrome/classes;C:/Users/utente/workspace/LoboEvolution/target/LoboEvo/classes;C:/Users/utente/.m2/repository/ch/qos/logback/logback-classic/1.5.15/logback-classic-1.5.15.jar;C:/Users/utente/.m2/repository/ch/qos/logback/logback-core/1.5.15/logback-core-1.5.15.jar;C:/Users/utente/.m2/repository/org/slf4j/slf4j-api/2.0.15/slf4j-api-2.0.15.jar;C:/Users/utente/.m2/repository/org/projectlombok/lombok/1.18.34/lombok-1.18.34.jar;C:/Users/utente/.m2/repository/org/json/json/20240303/json-20240303.jar;C:/Users/utente/.m2/repository/org/glassfish/corba/glassfish-corba-omgapi/4.2.5/glassfish-corba-omgapi-4.2.5.jar;C:/Users/utente/.m2/repository/org/xerial/sqlite-jdbc/3.46.0.0/sqlite-jdbc-3.46.0.0.jar;C:/Users/utente/.m2/repository/com/fifesoft/rsyntaxtextarea/3.5.1/rsyntaxtextarea-3.5.1.jar'
+-encoding
+'UTF-8'
+-protected
+-source
+'21'
+-sourcepath
+'C:/Users/utente/workspace/LoboEvolution/LoboW3C/src/main/java;C:/Users/utente/workspace/LoboEvolution/target/LoboW3C/generated-sources/annotations;C:/Users/utente/workspace/LoboEvolution/LoboCommon/src/main/java;C:/Users/utente/workspace/LoboEvolution/target/LoboCommon/generated-sources/annotations;C:/Users/utente/workspace/LoboEvolution/LoboStore/src/main/java;C:/Users/utente/workspace/LoboEvolution/target/LoboStore/generated-sources/annotations;C:/Users/utente/workspace/LoboEvolution/LoboApi/src/main/java;C:/Users/utente/workspace/LoboEvolution/target/LoboApi/generated-sources/annotations;C:/Users/utente/workspace/LoboEvolution/LoboXalan/src/main/java;C:/Users/utente/workspace/LoboEvolution/target/LoboXalan/generated-sources/annotations;C:/Users/utente/workspace/LoboEvolution/LoboParser/src/main/java;C:/Users/utente/workspace/LoboEvolution/target/LoboParser/generated-sources/annotations;C:/Users/utente/workspace/LoboEvolution/LoboPDF/src/main/java;C:/Users/utente/workspace/LoboEvolution/target/LoboPDF/generated-sources/annotations;C:/Users/utente/workspace/LoboEvolution/LoboIViewer/src/main/java;C:/Users/utente/workspace/LoboEvolution/target/LoboIViewer/generated-sources/annotations;C:/Users/utente/workspace/LoboEvolution/LoboJTattoo/src/main/java;C:/Users/utente/workspace/LoboEvolution/target/LoboJtattoo/generated-sources/annotations;C:/Users/utente/workspace/LoboEvolution/LoboHTML/src/main/java;C:/Users/utente/workspace/LoboEvolution/target/LoboHTML/generated-sources/annotations;C:/Users/utente/workspace/LoboEvolution/LoboJhrome/src/main/java;C:/Users/utente/workspace/LoboEvolution/target/LoboJhrome/generated-sources/annotations;C:/Users/utente/workspace/LoboEvolution/LoboEvo/src/main/java;C:/Users/utente/workspace/LoboEvolution/target/LoboEvo/generated-sources/annotations'
+-author
+-bottom
+'Copyright &#169; 2025. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'C:/Users/utente/workspace/LoboEvolution/target/site/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'Lobo Evolution 5.0 API'
+-use
+-version
+-windowtitle
+'Lobo Evolution 5.0 API'

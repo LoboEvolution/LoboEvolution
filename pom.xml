@@ -6,7 +6,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.oswetto</groupId>
     <artifactId>loboevolution</artifactId>
-    <version>4.0</version>
+    <version>5.0</version>
     <packaging>pom</packaging>
     <name>Lobo Evolution</name>
     <description>Lobo Evolution Java Web Browser</description>
@@ -277,7 +277,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.6.2</version>
+                <version>3.11.2</version>
                 <configuration>
                     <stylesheetfile>${basedir}/javadoc/stylesheet.css</stylesheetfile>
                 </configuration>

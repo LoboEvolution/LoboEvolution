@@ -89,7 +89,7 @@ public class NavigatorImpl extends AbstractScriptableDelegate implements Navigat
 	 * @return a {@link java.lang.String} object.
 	 */
 	public String getAppVersion() {
-		return "1.0";
+		return "5.0";
 	}
 
 	/**
