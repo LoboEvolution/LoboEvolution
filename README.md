@@ -16,8 +16,8 @@
 </p>
 <p align="center">
 	<a href="https://github.com/LoboEvolution/LoboEvolution/blob/master/LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="MIT"></a>		
-	<img src="https://img.shields.io/badge/version-4.0-blue" alt="Stable Version"/>
-        <a href="https://github.com/LoboEvolution/LoboEvolution/releases/download/4.0/loboevolution-4.0.jar"><img src="https://img.shields.io/github/downloads/LoboEvolution/LoboEvolution/total.svg" alt="Download"></a>
+	<img src="https://img.shields.io/badge/version-5.0-blue" alt="Stable Version"/>
+        <a href="https://github.com/LoboEvolution/LoboEvolution/releases/download/5.0/loboevolution-5.0.jar"><img src="https://img.shields.io/github/downloads/LoboEvolution/LoboEvolution/total.svg" alt="Download"></a>
 	<a href="https://github.com/LoboEvolution/LoboEvolution/packages/1550365"><img src="https://github.com/LoboEvolution/LoboEvolution/actions/workflows/publish-github.yml/badge.svg" alt="Github Package"></a>
 	<a href="https://github.com/oswetto"><img src="https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg" alt="Ask Me"></a>
 </p>
@@ -35,9 +35,9 @@ See CobraEvolution in action
 * Html Parser => [CobraParser](https://github.com/LoboEvolution/CobraEvolution/blob/main/LoboUnitTest/src/test/java/org/loboevolution/driver/CobraParser.java)
 * Html Render and Parser => [CobraHtmlPanel](https://github.com/LoboEvolution/CobraEvolution/blob/main/LoboUnitTest/src/test/java/org/loboevolution/driver/CobraHtmlPanel.java)
 
-After <a href="https://github.com/LoboEvolution/LoboEvolution/releases/download/4.0/loboevolution-4.0.jar">download<a/> to run
+After <a href="https://github.com/LoboEvolution/LoboEvolution/releases/download/5.0/loboevolution-5.0.jar">download<a/> to run
 ```
-java -jar loboevolution-4.0.jar
+java -jar loboevolution-5.0.jar
 ```
 
 ### Local Building
