@@ -29,11 +29,7 @@ package org.loboevolution.html.dom;
 /**
  * Provides special properties (beyond those defined on the regular HTMLElement
  * interface it also has available to it by inheritance) for manipulating
- * ordered list elements.
- *
- *
- *
- */
+ * ordered list elements. */
 public interface HTMLOListElement extends HTMLElement {
 
 	/**

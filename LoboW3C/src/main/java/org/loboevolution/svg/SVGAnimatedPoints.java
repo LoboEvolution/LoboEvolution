@@ -26,7 +26,8 @@
 package org.loboevolution.svg;
 
 /**
- * <p>SVGAnimatedPoints interface.</p> */
+ * <p>SVGAnimatedPoints interface.</p>
+ */
 public interface SVGAnimatedPoints {
 	/**
 	 * <p>getPoints.</p>

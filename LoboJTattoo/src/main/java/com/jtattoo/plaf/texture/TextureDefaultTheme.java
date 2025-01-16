@@ -36,9 +36,6 @@ import com.jtattoo.plaf.ColorHelper;
 
 /**
  * <p>TextureDefaultTheme class.</p>
- *
- *
- *
  */
 public class TextureDefaultTheme extends AbstractTheme {
 

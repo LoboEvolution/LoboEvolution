@@ -26,6 +26,7 @@
 package org.loboevolution.svg;
 
 /**
- * <p>SVGPathSegClosePath interface.</p> */
+ * <p>SVGPathSegClosePath interface.</p> 
+ */
 public interface SVGPathSegClosePath extends SVGPathSeg {
 }

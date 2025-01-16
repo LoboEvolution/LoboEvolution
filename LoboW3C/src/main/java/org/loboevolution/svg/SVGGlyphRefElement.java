@@ -29,7 +29,8 @@ package org.loboevolution.svg;
 import org.htmlunit.cssparser.dom.DOMException;
 
 /**
- * <p>SVGGlyphRefElement interface.</p> */
+ * <p>SVGGlyphRefElement interface.</p>
+ */
 public interface SVGGlyphRefElement extends SVGElement, SVGURIReference, SVGStylable {
 	/**
 	 * <p>getGlyphRef.</p>

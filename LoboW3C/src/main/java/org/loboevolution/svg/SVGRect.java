@@ -30,7 +30,8 @@ package org.loboevolution.svg;
 import org.htmlunit.cssparser.dom.DOMException;
 
 /**
- * <p>SVGRect interface.</p> */
+ * <p>SVGRect interface.</p>
+ */
 public interface SVGRect {
 	/**
 	 * <p>getX.</p>

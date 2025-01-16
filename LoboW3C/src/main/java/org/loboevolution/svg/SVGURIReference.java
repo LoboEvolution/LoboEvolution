@@ -26,7 +26,8 @@
 package org.loboevolution.svg;
 
 /**
- * <p>SVGURIReference interface.</p> */
+ * <p>SVGURIReference interface.</p>
+ */
 public interface SVGURIReference {
 	/**
 	 * <p>getHref.</p>

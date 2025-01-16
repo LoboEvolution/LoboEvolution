@@ -27,7 +27,8 @@
 package org.loboevolution.svg;
 
 /**
- * <p>SVGAnimatedRect interface.</p> */
+ * <p>SVGAnimatedRect interface.</p>
+ */
 public interface SVGAnimatedRect {
 
 	/**

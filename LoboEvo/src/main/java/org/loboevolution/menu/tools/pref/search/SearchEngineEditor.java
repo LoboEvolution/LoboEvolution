@@ -37,10 +37,7 @@ import org.loboevolution.store.SearchEngineStore;
 import java.io.Serial;
 
 /**
- * <p>SearchEngineEditor class.</p>
- *
- *
- *
+ * <p>SearchEngineEditor class.</p> 
  */
 public class SearchEngineEditor extends AbstractItemEditor<SearchEngineStore> {
 

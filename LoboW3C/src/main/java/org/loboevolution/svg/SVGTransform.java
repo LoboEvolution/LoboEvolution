@@ -26,7 +26,8 @@
 package org.loboevolution.svg;
 
 /**
- * <p>SVGTransform interface.</p> */
+ * <p>SVGTransform interface.</p>
+ */
 public interface SVGTransform {
 	// Transform Types
 	/** Constant SVG_TRANSFORM_UNKNOWN=0 */

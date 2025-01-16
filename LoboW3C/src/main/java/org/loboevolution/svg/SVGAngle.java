@@ -29,7 +29,8 @@ package org.loboevolution.svg;
 import org.htmlunit.cssparser.dom.DOMException;
 
 /**
- * <p>SVGAngle interface.</p> */
+ * <p>SVGAngle interface.</p>
+ */
 public interface SVGAngle {
 	// Angle Unit Types
 	/** Constant SVG_ANGLETYPE_UNKNOWN=0 */

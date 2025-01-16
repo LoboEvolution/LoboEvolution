@@ -26,7 +26,8 @@
 package org.loboevolution.svg;
 
 /**
- * <p>SVGFEPointLightElement interface.</p> */
+ * <p>SVGFEPointLightElement interface.</p>
+ */
 public interface SVGFEPointLightElement extends SVGElement {
 	/**
 	 * <p>getX.</p>

@@ -29,7 +29,8 @@ package org.loboevolution.svg;
 import org.htmlunit.cssparser.dom.DOMException;
 
 /**
- * <p>SVGPathSegLinetoHorizontalRel interface.</p> */
+ * <p>SVGPathSegLinetoHorizontalRel interface.</p> 
+ */
 public interface SVGPathSegLinetoHorizontalRel extends SVGPathSeg {
 
 	/**

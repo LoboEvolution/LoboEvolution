@@ -34,10 +34,7 @@ import javax.swing.JViewport;
 import javax.swing.Scrollable;
 
 /**
- * <p>ScrollableLayeredPane class.</p>
- *
- *
- *
+ * <p>ScrollableLayeredPane class.</p> 
  */
 public class ScrollableLayeredPane extends JLayeredPane implements Scrollable {
 	

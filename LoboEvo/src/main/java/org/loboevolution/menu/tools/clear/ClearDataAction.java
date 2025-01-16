@@ -35,9 +35,6 @@ import com.jtattoo.plaf.lobo.LoboCheckBox;
 
 /**
  * <p>ClearDataAction class.</p>
- *
- *
- *
  */
 public class ClearDataAction extends AbstractAction {
 

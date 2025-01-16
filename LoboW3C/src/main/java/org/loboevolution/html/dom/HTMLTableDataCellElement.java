@@ -27,10 +27,7 @@
 package org.loboevolution.html.dom;
 
 /**
- * <p>HTMLTableDataCellElement interface.</p>
- *
- *
- *
+ * <p>HTMLTableDataCellElement interface.</p> 
  */
 public interface HTMLTableDataCellElement extends HTMLTableCellElement {
 

@@ -26,6 +26,7 @@
 package org.loboevolution.svg;
 
 /**
- * <p>SVGAnimateTransformElement interface.</p> */
+ * <p>SVGAnimateTransformElement interface.</p> 
+ */
 public interface SVGAnimateTransformElement extends SVGAnimationElement {
 }

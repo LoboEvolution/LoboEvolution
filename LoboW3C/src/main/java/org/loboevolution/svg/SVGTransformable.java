@@ -26,7 +26,8 @@
 package org.loboevolution.svg;
 
 /**
- * <p>SVGTransformable interface.</p> */
+ * <p>SVGTransformable interface.</p> 
+ */
 public interface SVGTransformable extends SVGLocatable {
 
 	/**

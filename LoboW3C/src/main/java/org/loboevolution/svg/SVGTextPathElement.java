@@ -26,7 +26,8 @@
 package org.loboevolution.svg;
 
 /**
- * <p>SVGTextPathElement interface.</p> */
+ * <p>SVGTextPathElement interface.</p> 
+ */
 public interface SVGTextPathElement extends SVGTextContentElement, SVGURIReference {
 	// textPath Method Types
 	/** Constant TEXTPATH_METHODTYPE_UNKNOWN=0 */

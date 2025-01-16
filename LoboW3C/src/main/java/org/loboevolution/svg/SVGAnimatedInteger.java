@@ -29,7 +29,8 @@ package org.loboevolution.svg;
 import org.htmlunit.cssparser.dom.DOMException;
 
 /**
- * <p>SVGAnimatedInteger interface.</p> */
+ * <p>SVGAnimatedInteger interface.</p>
+ */
 public interface SVGAnimatedInteger {
 	/**
 	 * <p>getBaseVal.</p>

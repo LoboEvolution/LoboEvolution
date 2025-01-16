@@ -26,7 +26,8 @@
 package org.loboevolution.svg;
 
 /**
- * <p>SVGPaint interface.</p> */
+ * <p>SVGPaint interface.</p>
+ */
 public interface SVGPaint extends SVGColor {
 	// Paint Types
 	/** Constant SVG_PAINTTYPE_UNKNOWN=0 */

@@ -35,9 +35,6 @@ import com.jtattoo.plaf.ColorHelper;
 
 /**
  * <p>AcrylDefaultTheme class.</p>
- *
- *
- *
  */
 public class AcrylDefaultTheme extends AbstractTheme {
 

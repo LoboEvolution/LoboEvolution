@@ -32,7 +32,8 @@ import org.loboevolution.html.node.NodeList;
 import org.loboevolution.events.Event;
 
 /**
- * <p>SVGSVGElement interface.</p> */
+ * <p>SVGSVGElement interface.</p>
+ */
 public interface SVGSVGElement extends SVGElement, SVGTests, SVGLangSpace, SVGExternalResourcesRequired, SVGStylable,
 		SVGLocatable, SVGFitToViewBox, SVGZoomAndPan {
 	/**

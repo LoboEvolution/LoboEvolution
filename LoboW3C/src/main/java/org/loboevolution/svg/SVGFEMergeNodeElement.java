@@ -26,7 +26,8 @@
 package org.loboevolution.svg;
 
 /**
- * <p>SVGFEMergeNodeElement interface.</p> */
+ * <p>SVGFEMergeNodeElement interface.</p>
+ */
 public interface SVGFEMergeNodeElement extends SVGElement {
 	/**
 	 * <p>getIn1.</p>

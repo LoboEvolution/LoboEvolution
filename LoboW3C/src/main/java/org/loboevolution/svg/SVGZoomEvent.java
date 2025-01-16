@@ -28,7 +28,8 @@ package org.loboevolution.svg;
 import org.loboevolution.events.UIEvent;
 
 /**
- * <p>SVGZoomEvent interface.</p> */
+ * <p>SVGZoomEvent interface.</p> 
+ */
 public interface SVGZoomEvent extends UIEvent {
 	/**
 	 * <p>getZoomRectScreen.</p>

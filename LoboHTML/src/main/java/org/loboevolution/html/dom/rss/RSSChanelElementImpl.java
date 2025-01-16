@@ -34,9 +34,6 @@ import java.awt.*;
 
 /**
  * <p>RSSChanelElementImpl class.</p>
- *
- *
- *
  */
 public class RSSChanelElementImpl extends HTMLElementImpl {
 	

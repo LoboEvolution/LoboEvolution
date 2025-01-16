@@ -27,7 +27,8 @@
 package org.loboevolution.svg;
 
 /**
- * <p>SVGAnimatedAngle interface.</p> */
+ * <p>SVGAnimatedAngle interface.</p> 
+ */
 public interface SVGAnimatedAngle {
 	/**
 	 * <p>getBaseVal.</p>

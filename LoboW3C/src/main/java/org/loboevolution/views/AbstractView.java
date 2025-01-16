@@ -27,10 +27,7 @@
 package org.loboevolution.views;
 
 /**
- * <p>AbstractView interface.</p>
- *
- *
- *
+ * <p>AbstractView interface.</p> 
  */
 public interface AbstractView {
 	

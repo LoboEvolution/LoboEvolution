@@ -52,9 +52,6 @@ import javax.swing.plaf.basic.BasicComboBoxUI;
 
 /**
  * <p>BaseComboBoxUI class.</p>
- *
- *
- *
  */
 public class BaseComboBoxUI extends BasicComboBoxUI {
 

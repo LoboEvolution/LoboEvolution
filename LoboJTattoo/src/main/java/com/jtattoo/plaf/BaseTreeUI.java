@@ -33,11 +33,7 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicTreeUI;
 
 /**
- * author Michael Hagen
- *
- *
- *
- */
+ * author Michael Hagen */
 public class BaseTreeUI extends BasicTreeUI {
 
 	/** {@inheritDoc} */

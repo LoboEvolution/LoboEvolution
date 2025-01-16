@@ -29,10 +29,7 @@ package org.loboevolution.html.dom;
 
 
 /**
- * <p>HTMLMenuElement interface.</p>
- *
- *
- *
+ * <p>HTMLMenuElement interface.</p> 
  */
 public interface HTMLMenuElement extends HTMLElement {
  

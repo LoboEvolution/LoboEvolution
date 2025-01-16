@@ -32,9 +32,6 @@ import java.util.Map;
 
 /**
  * <p>Decoding class.</p>
- *
- *
- *
  */
 public enum Decoding {
 

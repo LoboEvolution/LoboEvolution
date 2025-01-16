@@ -36,9 +36,6 @@ import org.loboevolution.component.BrowserFrame;
 
 /**
  * <p>PreferencesAction class.</p>
- *
- *
- *
  */
 public class PreferencesAction extends AbstractAction {
 

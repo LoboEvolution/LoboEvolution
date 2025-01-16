@@ -29,7 +29,8 @@ package org.loboevolution.svg;
 import org.htmlunit.cssparser.dom.DOMException;
 
 /**
- * <p>SVGLangSpace interface.</p> */
+ * <p>SVGLangSpace interface.</p> 
+ */
 public interface SVGLangSpace {
 	/**
 	 * <p>getXMLlang.</p>

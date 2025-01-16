@@ -26,7 +26,7 @@
 
 package org.loboevolution.html.control;
 
-import org.loboevolution.html.dom.svgimpl.SVGSVGElementImpl;
+import org.loboevolution.svg.SVGSVGElementImpl;
 
 import java.awt.*;
 import java.io.Serial;
@@ -45,7 +45,7 @@ public class SVGControl extends BaseControl {
 	/**
 	 * <p>Constructor for SVGControl.</p>
 	 *
-	 * @param modelNode a {@link org.loboevolution.html.dom.svgimpl.SVGSVGElementImpl} object.
+	 * @param modelNode a {@link org.loboevolution.svg.SVGSVGElementImpl} object.
 	 */
 	public SVGControl(final SVGSVGElementImpl modelNode) {
 		super(modelNode);

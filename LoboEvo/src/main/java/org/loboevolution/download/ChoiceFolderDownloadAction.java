@@ -32,10 +32,7 @@ import java.io.File;
 import java.io.Serial;
 
 /**
- * <p>ChoiceFolderDownloadAction class.</p>
- *
- *
- *
+ * <p>ChoiceFolderDownloadAction class.</p> 
  */
 public class ChoiceFolderDownloadAction extends AbstractAction {
 

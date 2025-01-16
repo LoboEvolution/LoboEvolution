@@ -34,10 +34,7 @@ import java.io.Serial;
 /**
  * <p>
  * ImgControl class.
- * </p>
- *
- *
- *
+ * </p> 
  */
 public class ImgSvgControl extends BaseControl {
 

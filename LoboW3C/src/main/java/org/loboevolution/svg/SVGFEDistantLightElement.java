@@ -26,7 +26,8 @@
 package org.loboevolution.svg;
 
 /**
- * <p>SVGFEDistantLightElement interface.</p> */
+ * <p>SVGFEDistantLightElement interface.</p> 
+ */
 public interface SVGFEDistantLightElement extends SVGElement {
 	/**
 	 * <p>getAzimuth.</p>

@@ -32,9 +32,6 @@ import org.loboevolution.html.dom.UserDataHandler;
 
 /**
  * <p>HTMLTitleElementImpl class.</p>
- *
- *
- *
  */
 public class HTMLTitleElementImpl extends HTMLElementImpl {
 	/**

@@ -31,7 +31,8 @@ import java.awt.Shape;
 import java.awt.geom.AffineTransform;
 
 /**
- * <p>Drawable interface.</p> */
+ * <p>Drawable interface.</p>
+ */
 public interface Drawable {
 
 	/**

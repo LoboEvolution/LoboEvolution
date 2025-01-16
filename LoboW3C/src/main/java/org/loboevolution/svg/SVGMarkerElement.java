@@ -26,7 +26,8 @@
 package org.loboevolution.svg;
 
 /**
- * <p>SVGMarkerElement interface.</p> */
+ * <p>SVGMarkerElement interface.</p> 
+ */
 public interface SVGMarkerElement
 		extends SVGElement, SVGLangSpace, SVGExternalResourcesRequired, SVGStylable, SVGFitToViewBox {
 	// Marker Unit Types

@@ -29,11 +29,7 @@ import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 
 /**
  * Provides direct access to the GUI component where the document is rendered,
- * typically a browser frame of some sort.
- *
- *
- *
- */
+ * typically a browser frame of some sort. */
 public interface FrameContext {
 	/**
 	 * <p>delayedRelayout.</p>

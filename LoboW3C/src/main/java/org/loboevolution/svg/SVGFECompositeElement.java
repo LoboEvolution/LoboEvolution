@@ -26,7 +26,8 @@
 package org.loboevolution.svg;
 
 /**
- * <p>SVGFECompositeElement interface.</p> */
+ * <p>SVGFECompositeElement interface.</p>
+ */
 public interface SVGFECompositeElement extends SVGElement, SVGFilterPrimitiveStandardAttributes {
 	// Composite Operators
 	/** Constant SVG_FECOMPOSITE_OPERATOR_UNKNOWN=0 */

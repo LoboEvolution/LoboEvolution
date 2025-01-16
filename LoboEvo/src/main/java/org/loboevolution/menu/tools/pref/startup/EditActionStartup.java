@@ -33,10 +33,7 @@ import java.io.Serial;
 import javax.swing.AbstractAction;
 
 /**
- * <p>EditActionStartup class.</p>
- *
- *
- *
+ * <p>EditActionStartup class.</p> 
  */
 public class EditActionStartup extends AbstractAction {
 

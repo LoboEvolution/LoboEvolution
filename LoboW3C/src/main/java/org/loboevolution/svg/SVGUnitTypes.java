@@ -26,7 +26,8 @@
 package org.loboevolution.svg;
 
 /**
- * <p>SVGUnitTypes interface.</p> */
+ * <p>SVGUnitTypes interface.</p> 
+ */
 public interface SVGUnitTypes {
 	
 	/** Constant SVG_UNIT_TYPE_UNKNOWN=0 */

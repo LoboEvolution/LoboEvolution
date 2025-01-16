@@ -34,9 +34,6 @@ import java.awt.*;
 
 /**
  * <p>Abstract UIControl interface.</p>
- *
- *
- *
  */
 public interface UIControl {
 	/**

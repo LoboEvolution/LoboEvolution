@@ -27,9 +27,6 @@ package org.loboevolution.html.renderer;
 
 /**
  * <p>ExportableFloat class.</p>
- *
- *
- *
  */
 public class ExportableFloat {
 	/** Constant EMPTY_ARRAY */

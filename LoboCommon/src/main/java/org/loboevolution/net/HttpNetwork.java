@@ -32,7 +32,7 @@ import org.loboevolution.common.Urls;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.HTMLImageElement;
 import org.loboevolution.html.dom.HTMLInputElement;
-import org.loboevolution.html.dom.svg.SVGImageElement;
+import org.loboevolution.svg.SVGImageElement;
 import org.loboevolution.info.TimingInfo;
 
 import javax.imageio.ImageIO;

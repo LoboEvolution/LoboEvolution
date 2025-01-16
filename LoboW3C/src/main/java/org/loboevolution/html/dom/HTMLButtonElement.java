@@ -32,11 +32,7 @@ import org.loboevolution.html.node.ValidityState;
 /**
  * Provides properties and methods (beyond the regular HTMLElement interface it
  * also has available to it by inheritance) for manipulating &lt;button&gt;
- * elements.
- *
- *
- *
- */
+ * elements. */
 public interface HTMLButtonElement extends HTMLElement {
 
 	/**

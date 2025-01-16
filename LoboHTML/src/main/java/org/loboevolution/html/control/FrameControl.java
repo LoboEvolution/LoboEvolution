@@ -33,9 +33,6 @@ import java.io.Serial;
 
 /**
  * <p>FrameControl class.</p>
- *
- *
- *
  */
 public class FrameControl extends BaseControl {
 

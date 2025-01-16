@@ -35,9 +35,6 @@ import org.loboevolution.component.BrowserFrame;
 
 /**
  * <p>ShowBookmarksAction class.</p>
- *
- *
- *
  */
 public class ShowBookmarksAction extends AbstractAction {
 

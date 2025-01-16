@@ -34,9 +34,6 @@ import com.jtattoo.plaf.ColorHelper;
 
 /**
  * <p>SmartDefaultTheme class.</p>
- *
- *
- *
  */
 public class SmartDefaultTheme extends AbstractTheme {
 

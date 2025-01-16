@@ -30,7 +30,8 @@ import org.htmlunit.cssparser.dom.DOMException;
 /**
  * <p>
  * SVGScriptElement interface.
- * </p> */
+ * </p> 
+ */
 public interface SVGScriptElement extends SVGElement, SVGURIReference, SVGExternalResourcesRequired {
 	/**
 	 * <p>

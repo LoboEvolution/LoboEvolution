@@ -36,9 +36,6 @@ import org.loboevolution.component.BrowserFrame;
 
 /**
  * <p>ClearHistoryAction class.</p>
- *
- *
- *
  */
 public class ClearHistoryAction extends AbstractAction {
 

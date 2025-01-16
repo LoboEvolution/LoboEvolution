@@ -27,7 +27,8 @@
 package org.loboevolution.svg;
 
 /**
- * <p>SVGFEBlendElement interface.</p> */
+ * <p>SVGFEBlendElement interface.</p> 
+ */
 public interface SVGFEBlendElement extends SVGElement, SVGFilterPrimitiveStandardAttributes {
 	// Blend Mode Types
 	/** Constant SVG_FEBLEND_MODE_UNKNOWN=0 */

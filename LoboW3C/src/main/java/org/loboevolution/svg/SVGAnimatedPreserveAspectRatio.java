@@ -26,7 +26,8 @@
 package org.loboevolution.svg;
 
 /**
- * <p>SVGAnimatedPreserveAspectRatio interface.</p> */
+ * <p>SVGAnimatedPreserveAspectRatio interface.</p>
+ */
 public interface SVGAnimatedPreserveAspectRatio {
 	/**
 	 * <p>getBaseVal.</p>

@@ -39,9 +39,6 @@ import com.jtattoo.plaf.JTattooUtilities;
 
 /**
  * <p>LunaToolBarUI class.</p>
- *
- *
- *
  */
 public class LunaToolBarUI extends AbstractToolBarUI {
 

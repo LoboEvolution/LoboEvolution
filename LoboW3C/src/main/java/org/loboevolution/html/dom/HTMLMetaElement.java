@@ -29,11 +29,7 @@ package org.loboevolution.html.dom;
 
 
 /**
- * Contains descriptive metadata about a document. It inherits all of the properties and methods described in the HTMLElement interface.
- *
- *
- *
- */
+ * Contains descriptive metadata about a document. It inherits all of the properties and methods described in the HTMLElement interface. */
 public interface HTMLMetaElement extends HTMLElement {
   
     /**

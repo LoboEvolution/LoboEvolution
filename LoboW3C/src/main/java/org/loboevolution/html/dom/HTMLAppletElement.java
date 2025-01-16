@@ -34,10 +34,7 @@ package org.loboevolution.html.dom;
 
 
 /**
- * <p>HTMLAppletElement interface.</p>
- *
- *
- *
+ * <p>HTMLAppletElement interface.</p> 
  */
 public interface HTMLAppletElement extends HTMLElement {
 

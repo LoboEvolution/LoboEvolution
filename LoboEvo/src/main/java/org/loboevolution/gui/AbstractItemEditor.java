@@ -31,9 +31,6 @@ import java.io.Serial;
 
 /**
  * <p>Abstract AbstractItemEditor class.</p>
- *
- *
- *
  */
 public abstract class AbstractItemEditor<T> extends JComponent {
 

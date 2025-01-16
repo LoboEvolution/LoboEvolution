@@ -34,10 +34,7 @@ import javax.swing.AbstractAction;
 import org.loboevolution.component.BrowserFrame;
 
 /**
- * <p>ShowRecentHostsAction class.</p>
- *
- *
- *
+ * <p>ShowRecentHostsAction class.</p> 
  */
 public class ShowRecentHostsAction extends AbstractAction {
 

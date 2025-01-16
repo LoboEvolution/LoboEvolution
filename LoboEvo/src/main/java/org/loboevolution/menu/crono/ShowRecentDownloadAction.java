@@ -34,9 +34,6 @@ import java.io.Serial;
 
 /**
  * <p>ShowRecentDownloadAction class.</p>
- *
- *
- *
  */
 public class ShowRecentDownloadAction extends AbstractAction {
 

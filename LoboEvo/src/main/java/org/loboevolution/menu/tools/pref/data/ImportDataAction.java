@@ -35,9 +35,6 @@ import com.jtattoo.plaf.lobo.LoboCheckBox;
 
 /**
  * <p>ImportDataAction class.</p>
- *
- *
- *
  */
 public class ImportDataAction extends AbstractAction {
 

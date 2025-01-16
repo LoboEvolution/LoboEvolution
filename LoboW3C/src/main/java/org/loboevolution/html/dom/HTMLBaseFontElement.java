@@ -27,11 +27,7 @@
 package org.loboevolution.html.dom;
 
 /**
- * Provides special properties (beyond the regular HTMLElement interface it also has available to it by inheritance) for manipulating &lt;basefont&gt; elements.
- *
- *
- *
- */
+ * Provides special properties (beyond the regular HTMLElement interface it also has available to it by inheritance) for manipulating &lt;basefont&gt; elements. */
 public interface HTMLBaseFontElement extends HTMLElement {
 
     /**

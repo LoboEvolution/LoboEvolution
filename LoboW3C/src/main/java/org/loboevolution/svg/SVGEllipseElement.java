@@ -26,7 +26,8 @@
 package org.loboevolution.svg;
 
 /**
- * <p>SVGEllipseElement interface.</p> */
+ * <p>SVGEllipseElement interface.</p>
+ */
 public interface SVGEllipseElement extends SVGElement, SVGTests, SVGLangSpace, SVGExternalResourcesRequired,
 		SVGStylable, SVGTransformable, Drawable {
 

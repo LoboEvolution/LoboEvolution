@@ -30,11 +30,7 @@ package org.loboevolution.html.dom;
 
 
 /**
- * Exposes specific properties and methods (beyond those defined by regular HTMLElement interface it also has available to it by inheritance) for manipulating list elements.
- *
- *
- *
- */
+ * Exposes specific properties and methods (beyond those defined by regular HTMLElement interface it also has available to it by inheritance) for manipulating list elements. */
 public interface HTMLLIElement extends HTMLElement {
    
 

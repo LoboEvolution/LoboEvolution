@@ -26,7 +26,8 @@
 package org.loboevolution.svg;
 
 /**
- * <p>SVGTextPositioningElement interface.</p> */
+ * <p>SVGTextPositioningElement interface.</p> 
+ */
 public interface SVGTextPositioningElement extends SVGTextContentElement {
 
 	/**

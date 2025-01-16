@@ -35,10 +35,7 @@ import com.jtattoo.plaf.AbstractTheme;
 import com.jtattoo.plaf.ColorHelper;
 
 /**
- * <p>GraphiteDefaultTheme class.</p>
- *
- *
- *
+ * <p>GraphiteDefaultTheme class.</p> 
  */
 public class GraphiteDefaultTheme extends AbstractTheme {
 

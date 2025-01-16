@@ -27,11 +27,7 @@
 package org.loboevolution.gui;
 
 /**
- * The Enum FieldType.
- *
- *
- *
- */
+ * The Enum FieldType. */
 public enum FieldType {
 
 	/** The password. */

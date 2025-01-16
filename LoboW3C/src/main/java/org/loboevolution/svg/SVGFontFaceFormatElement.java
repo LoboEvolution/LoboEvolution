@@ -26,6 +26,7 @@
 package org.loboevolution.svg;
 
 /**
- * <p>SVGFontFaceFormatElement interface.</p> */
+ * <p>SVGFontFaceFormatElement interface.</p>
+ */
 public interface SVGFontFaceFormatElement extends SVGElement {
 }

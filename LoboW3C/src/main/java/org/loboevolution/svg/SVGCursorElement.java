@@ -26,7 +26,8 @@
 package org.loboevolution.svg;
 
 /**
- * <p>SVGCursorElement interface.</p> */
+ * <p>SVGCursorElement interface.</p>
+ */
 public interface SVGCursorElement extends SVGElement, SVGURIReference, SVGTests, SVGExternalResourcesRequired {
 
 	/**

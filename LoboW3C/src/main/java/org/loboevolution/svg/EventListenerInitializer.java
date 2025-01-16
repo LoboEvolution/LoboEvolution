@@ -26,7 +26,8 @@
 package org.loboevolution.svg;
 
 /**
- * <p>EventListenerInitializer interface.</p> */
+ * <p>EventListenerInitializer interface.</p> 
+ */
 public interface EventListenerInitializer {
 
 	/**

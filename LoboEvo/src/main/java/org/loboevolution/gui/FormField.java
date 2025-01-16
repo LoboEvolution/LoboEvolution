@@ -35,11 +35,7 @@ import com.jtattoo.plaf.lobo.LoboTextField;
 import lombok.Getter;
 
 /**
- * The Class FormField.
- *
- *
- *
- */
+ * The Class FormField. */
 public class FormField {
 
 	/** The field editor. */

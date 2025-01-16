@@ -27,7 +27,8 @@
 package org.loboevolution.svg;
 
 /**
- * <p>SVGLinearGradientElement interface.</p> */
+ * <p>SVGLinearGradientElement interface.</p> 
+ */
 public interface SVGLinearGradientElement extends SVGGradientElement {
 	/**
 	 * <p>getX1.</p>

@@ -34,9 +34,6 @@ import javax.swing.JOptionPane;
 
 /**
  * <p>RemoveAction class.</p>
- *
- *
- *
  */
 public class RemoveAction<T> extends AbstractAction {
 

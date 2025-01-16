@@ -34,9 +34,6 @@ import javax.swing.JTextArea;
 
 /**
  * <p>TextEditOkAction class.</p>
- *
- *
- *
  */
 public class TextEditOkAction extends AbstractAction {
 

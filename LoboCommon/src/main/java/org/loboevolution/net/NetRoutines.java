@@ -29,9 +29,6 @@ import java.net.InetAddress;
 
 /**
  * <p>NetRoutines class.</p>
- *
- *
- *
  */
 public class NetRoutines {
 	/**

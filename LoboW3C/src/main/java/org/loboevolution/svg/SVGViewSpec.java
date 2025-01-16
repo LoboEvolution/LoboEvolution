@@ -26,7 +26,8 @@
 package org.loboevolution.svg;
 
 /**
- * <p>SVGViewSpec interface.</p> */
+ * <p>SVGViewSpec interface.</p>
+ */
 public interface SVGViewSpec extends SVGZoomAndPan, SVGFitToViewBox {
 	/**
 	 * <p>getTransform.</p>

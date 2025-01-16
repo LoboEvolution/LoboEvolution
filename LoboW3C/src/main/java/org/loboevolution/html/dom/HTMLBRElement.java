@@ -30,11 +30,7 @@ package org.loboevolution.html.dom;
 
 
 /**
- * A HTML line break element (&lt;br&gt;). It inherits from HTMLElement.
- *
- *
- *
- */
+ * A HTML line break element (&lt;br&gt;). It inherits from HTMLElement. */
 public interface HTMLBRElement extends HTMLElement {
 
 

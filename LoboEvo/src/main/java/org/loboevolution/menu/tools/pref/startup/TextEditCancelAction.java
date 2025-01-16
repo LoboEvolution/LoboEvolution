@@ -33,9 +33,6 @@ import javax.swing.AbstractAction;
 
 /**
  * <p>TextEditCancelAction class.</p>
- *
- *
- *
  */
 public class TextEditCancelAction extends AbstractAction {
 

@@ -30,9 +30,6 @@ import java.util.EventObject;
 
 /**
  * <p>ImageEvent class.</p>
- *
- *
- *
  */
 public class ImageEvent extends EventObject {
 	/**

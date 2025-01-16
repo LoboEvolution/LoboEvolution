@@ -31,10 +31,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * <p>VisibilityState class.</p>
- *
- *
- *
+ * <p>VisibilityState class.</p> 
  */
 public enum VisibilityState {
 	HIDDEN("hidden"),

@@ -32,11 +32,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
 /**
- * Helper class that manages the actual painting.
- *
- *
- *
- */
+ * Helper class that manages the actual painting. */
 public class PaintManager {
 	private BufferedImage cachedImage = null;
 	private boolean cachedImageChanged = false;

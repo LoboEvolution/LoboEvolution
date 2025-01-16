@@ -35,9 +35,6 @@ import java.awt.LayoutManager;
 */
 /**
  * <p>OverlayLayout class.</p>
- *
- *
- *
  */
 public class OverlayLayout implements LayoutManager {
 	

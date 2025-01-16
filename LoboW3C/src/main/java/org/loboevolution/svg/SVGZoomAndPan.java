@@ -29,7 +29,8 @@ package org.loboevolution.svg;
 import org.htmlunit.cssparser.dom.DOMException;
 
 /**
- * <p>SVGZoomAndPan interface.</p> */
+ * <p>SVGZoomAndPan interface.</p> 
+ */
 public interface SVGZoomAndPan {
 	// Zoom and Pan Types
 	/** Constant SVG_ZOOMANDPAN_UNKNOWN=0 */

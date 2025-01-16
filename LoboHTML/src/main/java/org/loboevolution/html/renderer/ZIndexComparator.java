@@ -30,9 +30,6 @@ import java.util.Comparator;
 
 /**
  * <p>ZIndexComparator class.</p>
- *
- *
- *
  */
 public class ZIndexComparator implements Comparator<Object> {
 

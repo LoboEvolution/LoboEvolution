@@ -30,7 +30,8 @@ package org.loboevolution.svg;
 import org.htmlunit.cssparser.dom.DOMException;
 
 /**
- * <p>SVGLengthList interface.</p> */
+ * <p>SVGLengthList interface.</p>
+ */
 public interface SVGLengthList {
 	/**
 	 * <p>getNumberOfItems.</p>

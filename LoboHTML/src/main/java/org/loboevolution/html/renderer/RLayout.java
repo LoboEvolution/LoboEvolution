@@ -31,7 +31,7 @@ import org.loboevolution.html.HtmlObject;
 import org.loboevolution.html.control.*;
 import org.loboevolution.html.dom.domimpl.*;
 import org.loboevolution.html.dom.rss.RSSElementImpl;
-import org.loboevolution.html.dom.svgimpl.SVGSVGElementImpl;
+import org.loboevolution.svg.SVGSVGElementImpl;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.http.UserAgentContext;
 

@@ -33,7 +33,7 @@ import org.htmlunit.cssparser.parser.InputSource;
 import org.htmlunit.cssparser.parser.javacc.CSS3Parser;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.HTMLStyleElement;
-import org.loboevolution.html.dom.svg.SVGSVGElement;
+import org.loboevolution.svg.SVGSVGElement;
 import org.loboevolution.html.js.css.CSSStyleSheetImpl;
 import org.loboevolution.css.CSSStyleSheet;
 import org.loboevolution.html.parser.XHtmlParser;

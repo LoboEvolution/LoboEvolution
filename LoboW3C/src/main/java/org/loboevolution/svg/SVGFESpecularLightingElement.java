@@ -26,7 +26,8 @@
 package org.loboevolution.svg;
 
 /**
- * <p>SVGFESpecularLightingElement interface.</p> */
+ * <p>SVGFESpecularLightingElement interface.</p>
+ */
 public interface SVGFESpecularLightingElement extends SVGElement, SVGFilterPrimitiveStandardAttributes {
 	/**
 	 * <p>getIn1.</p>

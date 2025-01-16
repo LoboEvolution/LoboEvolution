@@ -51,10 +51,7 @@ import javax.swing.plaf.UIResource;
 import javax.swing.plaf.basic.BasicToolBarUI;
 
 /**
- * <p>Abstract AbstractToolBarUI class.</p>
- *
- *
- *
+ * <p>Abstract AbstractToolBarUI class.</p> 
  */
 public abstract class AbstractToolBarUI extends BasicToolBarUI {
 

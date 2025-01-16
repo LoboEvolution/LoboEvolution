@@ -28,9 +28,6 @@ package org.loboevolution.html.dom;
 
 /**
  * <p>HTMLSlotElement interface.</p>
- *
- *
- *
  */
 public interface HTMLSlotElement extends HTMLElement {
 

@@ -26,7 +26,8 @@
 package org.loboevolution.svg;
 
 /**
- * <p>SVGViewElement interface.</p> */
+ * <p>SVGViewElement interface.</p>
+ */
 public interface SVGViewElement extends SVGElement, SVGExternalResourcesRequired, SVGFitToViewBox, SVGZoomAndPan {
 	/**
 	 * <p>getViewTarget.</p>

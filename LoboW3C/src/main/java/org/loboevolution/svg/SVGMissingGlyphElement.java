@@ -27,6 +27,7 @@
 package org.loboevolution.svg;
 
 /**
- * <p>SVGMissingGlyphElement interface.</p> */
+ * <p>SVGMissingGlyphElement interface.</p>
+ */
 public interface SVGMissingGlyphElement extends SVGElement, SVGStylable {
 }

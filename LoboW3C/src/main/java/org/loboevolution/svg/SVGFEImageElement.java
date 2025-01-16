@@ -26,7 +26,8 @@
 package org.loboevolution.svg;
 
 /**
- * <p>SVGFEImageElement interface.</p> */
+ * <p>SVGFEImageElement interface.</p>
+ */
 public interface SVGFEImageElement extends SVGElement, SVGURIReference, SVGLangSpace, SVGExternalResourcesRequired,
 		SVGFilterPrimitiveStandardAttributes {
 

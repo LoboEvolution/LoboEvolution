@@ -35,9 +35,6 @@ import com.jtattoo.plaf.ColorHelper;
 
 /**
  * <p>AeroDefaultTheme class.</p>
- *
- *
- *
  */
 public class AeroDefaultTheme extends AbstractTheme {
 

@@ -29,9 +29,6 @@ import java.util.Objects;
 
 /**
  * <p>ParentFloatingBoundsSource class.</p>
- *
- *
- *
  */
 public class ParentFloatingBoundsSource implements FloatingBoundsSource {
 	private final int blockShiftRight;

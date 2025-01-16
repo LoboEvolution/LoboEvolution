@@ -31,11 +31,7 @@ import org.loboevolution.html.node.NodeList;
 import org.loboevolution.html.node.ValidityState;
 
 /**
- * Provides properties and methods (beyond those inherited from HTMLElement) for manipulating the layout and presentation of &lt;output&gt; elements.
- *
- *
- *
- */
+ * Provides properties and methods (beyond those inherited from HTMLElement) for manipulating the layout and presentation of &lt;output&gt; elements. */
 public interface HTMLOutputElement extends HTMLElement {
 
     

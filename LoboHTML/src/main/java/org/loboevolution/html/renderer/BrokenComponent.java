@@ -30,10 +30,7 @@ import java.awt.*;
 import java.io.Serial;
 
 /**
- * <p>BrokenComponent class.</p>
- *
- *
- *
+ * <p>BrokenComponent class.</p> 
  */
 public class BrokenComponent extends Component {
 

@@ -26,6 +26,7 @@
 package org.loboevolution.svg;
 
 /**
- * <p>SVGFEFuncBElement interface.</p> */
+ * <p>SVGFEFuncBElement interface.</p>
+ */
 public interface SVGFEFuncBElement extends SVGComponentTransferFunctionElement {
 }

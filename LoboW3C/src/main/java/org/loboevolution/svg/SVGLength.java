@@ -29,7 +29,8 @@ package org.loboevolution.svg;
 import org.htmlunit.cssparser.dom.DOMException;
 
 /**
- * <p>SVGLength interface.</p> */
+ * <p>SVGLength interface.</p> 
+ */
 public interface SVGLength {
 	// Length Unit Types
 	/** Constant SVG_LENGTHTYPE_UNKNOWN=0 */

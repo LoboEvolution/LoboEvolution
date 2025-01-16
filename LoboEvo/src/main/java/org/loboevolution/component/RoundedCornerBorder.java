@@ -42,9 +42,6 @@ import javax.swing.border.AbstractBorder;
 
 /**
  * <p>RoundedCornerBorder class.</p>
- *
- *
- *
  */
 public class RoundedCornerBorder extends AbstractBorder {
 	@Serial

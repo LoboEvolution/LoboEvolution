@@ -38,11 +38,7 @@ import com.jtattoo.plaf.AbstractLookAndFeel;
 import com.jtattoo.plaf.BaseTabbedPaneUI;
 
 /**
- * author Michael Hagen
- *
- *
- *
- */
+ * author Michael Hagen */
 public class SmartTabbedPaneUI extends BaseTabbedPaneUI {
 
 	/** {@inheritDoc} */

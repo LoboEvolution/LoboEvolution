@@ -30,11 +30,7 @@ package org.loboevolution.html.dom;
 
 
 /**
- * Contains the base URI for a document. This object inherits all of the properties and methods as described in the HTMLElement interface.
- *
- *
- *
- */
+ * Contains the base URI for a document. This object inherits all of the properties and methods as described in the HTMLElement interface. */
 public interface HTMLBaseElement extends HTMLElement {
 
 

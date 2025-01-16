@@ -26,6 +26,7 @@
 package org.loboevolution.svg;
 
 /**
- * <p>SVGTRefElement interface.</p> */
+ * <p>SVGTRefElement interface.</p>
+ */
 public interface SVGTRefElement extends SVGTextPositioningElement, SVGURIReference {
 }

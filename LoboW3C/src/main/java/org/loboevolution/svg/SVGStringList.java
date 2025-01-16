@@ -29,7 +29,8 @@ package org.loboevolution.svg;
 import org.htmlunit.cssparser.dom.DOMException;
 
 /**
- * <p>SVGStringList interface.</p> */
+ * <p>SVGStringList interface.</p>
+ */
 public interface SVGStringList {
 	/**
 	 * <p>getNumberOfItems.</p>

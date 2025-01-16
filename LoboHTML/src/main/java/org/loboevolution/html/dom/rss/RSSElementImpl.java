@@ -32,9 +32,6 @@ import java.awt.*;
 
 /**
  * <p>RSSElementImpl class.</p>
- *
- *
- *
  */
 public class RSSElementImpl extends RSSElement {
 

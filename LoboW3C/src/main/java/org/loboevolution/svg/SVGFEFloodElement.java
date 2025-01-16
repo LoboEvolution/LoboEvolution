@@ -26,7 +26,8 @@
 package org.loboevolution.svg;
 
 /**
- * <p>SVGFEFloodElement interface.</p> */
+ * <p>SVGFEFloodElement interface.</p>
+ */
 public interface SVGFEFloodElement extends SVGElement, SVGFilterPrimitiveStandardAttributes {
 	/**
 	 * <p>getIn1.</p>

@@ -38,9 +38,6 @@ import com.jtattoo.plaf.JTattooUtilities;
 
 /**
  * <p>FastScrollButton class.</p>
- *
- *
- *
  */
 public class FastScrollButton extends BaseScrollButton {
 

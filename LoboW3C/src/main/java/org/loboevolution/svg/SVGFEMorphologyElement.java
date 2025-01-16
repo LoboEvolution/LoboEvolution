@@ -26,7 +26,8 @@
 package org.loboevolution.svg;
 
 /**
- * <p>SVGFEMorphologyElement interface.</p> */
+ * <p>SVGFEMorphologyElement interface.</p>
+ */
 public interface SVGFEMorphologyElement extends SVGElement, SVGFilterPrimitiveStandardAttributes {
 	// Morphology Operators
 	/** Constant SVG_MORPHOLOGY_OPERATOR_UNKNOWN=0 */

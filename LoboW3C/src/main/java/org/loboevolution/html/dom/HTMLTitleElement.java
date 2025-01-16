@@ -28,11 +28,7 @@ package org.loboevolution.html.dom;
 
 /**
  * Contains the title for a document. This element inherits all of the
- * properties and methods of the HTMLElement interface.
- *
- *
- *
- */
+ * properties and methods of the HTMLElement interface. */
 public interface HTMLTitleElement extends HTMLElement {
 
 	/**

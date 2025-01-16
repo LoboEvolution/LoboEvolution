@@ -28,7 +28,8 @@ package org.loboevolution.svg;
 import org.loboevolution.events.EventTarget;
 
 /**
- * <p>SVGElementInstance interface.</p> */
+ * <p>SVGElementInstance interface.</p>
+ */
 public interface SVGElementInstance extends EventTarget {
 	/**
 	 * <p>getCorrespondingElement.</p>

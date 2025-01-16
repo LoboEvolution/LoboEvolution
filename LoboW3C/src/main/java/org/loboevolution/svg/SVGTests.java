@@ -26,7 +26,8 @@
 package org.loboevolution.svg;
 
 /**
- * <p>SVGTests interface.</p> */
+ * <p>SVGTests interface.</p>
+ */
 public interface SVGTests {
 	/**
 	 * <p>getRequiredFeatures.</p>

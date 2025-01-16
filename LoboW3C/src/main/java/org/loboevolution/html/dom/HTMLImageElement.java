@@ -29,11 +29,7 @@ package org.loboevolution.html.dom;
 import org.loboevolution.type.Decoding;
 
 /**
- * Provides special properties and methods for manipulating &lt;img&gt; elements.
- *
- *
- *
- */
+ * Provides special properties and methods for manipulating &lt;img&gt; elements. */
 public interface HTMLImageElement extends HTMLElement {
    
     /**

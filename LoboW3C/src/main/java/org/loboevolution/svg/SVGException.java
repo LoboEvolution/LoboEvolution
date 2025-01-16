@@ -26,7 +26,8 @@
 package org.loboevolution.svg;
 
 /**
- * <p>Abstract SVGException class.</p> */
+ * <p>Abstract SVGException class.</p> 
+ */
 public abstract class SVGException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;

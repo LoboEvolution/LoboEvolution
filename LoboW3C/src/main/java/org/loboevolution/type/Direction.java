@@ -31,10 +31,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * <p>Direction class.</p>
- *
- *
- *
+ * <p>Direction class.</p> 
  */
 public enum Direction {
 

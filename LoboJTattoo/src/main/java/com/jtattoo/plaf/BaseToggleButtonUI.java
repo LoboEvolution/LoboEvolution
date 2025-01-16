@@ -52,10 +52,7 @@ import javax.swing.plaf.basic.BasicToggleButtonUI;
 import javax.swing.text.View;
 
 /**
- * <p>BaseToggleButtonUI class.</p>
- *
- *
- *
+ * <p>BaseToggleButtonUI class.</p> 
  */
 public class BaseToggleButtonUI extends BasicToggleButtonUI {
 

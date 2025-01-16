@@ -30,11 +30,7 @@ import java.io.Serial;
 import java.util.EventObject;
 
 /**
- * Event associated with {@link SelectionChangeListener}.
- *
- *
- *
- */
+ * Event associated with {@link SelectionChangeListener}. */
 public class SelectionChangeEvent extends EventObject {
 	/**
 	 * 

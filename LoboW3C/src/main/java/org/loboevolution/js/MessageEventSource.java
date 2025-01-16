@@ -28,9 +28,6 @@ package org.loboevolution.js;
 
 /**
  * <p>MessageEventSource interface.</p>
- *
- *
- *
  */
 public interface MessageEventSource {
 

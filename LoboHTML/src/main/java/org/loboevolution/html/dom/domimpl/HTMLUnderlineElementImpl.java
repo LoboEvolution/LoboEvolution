@@ -29,11 +29,7 @@ import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.renderstate.TextDecorationRenderState;
 
 /**
- * Element used for U.
- *
- *
- *
- */
+ * Element used for U. */
 public class HTMLUnderlineElementImpl extends HTMLElementImpl {
 	/**
 	 * <p>Constructor for HTMLUnderlineElementImpl.</p>

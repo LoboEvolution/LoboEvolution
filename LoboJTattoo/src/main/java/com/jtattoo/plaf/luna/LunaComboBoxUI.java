@@ -46,9 +46,6 @@ import com.jtattoo.plaf.NoFocusButton;
 
 /**
  * <p>LunaComboBoxUI class.</p>
- *
- *
- *
  */
 public class LunaComboBoxUI extends BaseComboBoxUI {
 

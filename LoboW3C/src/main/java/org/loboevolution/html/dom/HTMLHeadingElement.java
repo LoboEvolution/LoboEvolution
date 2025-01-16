@@ -30,11 +30,7 @@ package org.loboevolution.html.dom;
 
 
 /**
- * The different heading elements. It inherits methods and properties from the HTMLElement interface.
- *
- *
- *
- */
+ * The different heading elements. It inherits methods and properties from the HTMLElement interface. */
 public interface HTMLHeadingElement extends HTMLElement {
 
     /**

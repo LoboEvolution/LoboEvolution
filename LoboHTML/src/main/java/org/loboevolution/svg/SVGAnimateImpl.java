@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2014 - 2023 LoboEvolution
+ * Copyright (c) 2014 - 2025 LoboEvolution
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -38,7 +38,8 @@ import java.io.Serial;
 import java.util.StringTokenizer;
 
 /**
- * <p>SVGAnimateImpl class.</p> */
+ * <p>SVGAnimateImpl class.</p>
+ */
 public class SVGAnimateImpl extends JComponent implements ActionListener {
 
 	@Serial

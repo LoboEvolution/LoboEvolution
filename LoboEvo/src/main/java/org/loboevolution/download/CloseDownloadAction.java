@@ -31,10 +31,7 @@ import java.awt.event.ActionEvent;
 import java.io.Serial;
 
 /**
- * <p>CloseDownloadAction class.</p>
- *
- *
- *
+ * <p>CloseDownloadAction class.</p> 
  */
 public class CloseDownloadAction extends AbstractAction {
 

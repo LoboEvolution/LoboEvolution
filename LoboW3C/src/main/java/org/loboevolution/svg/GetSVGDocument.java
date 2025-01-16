@@ -28,7 +28,8 @@ package org.loboevolution.svg;
 import org.htmlunit.cssparser.dom.DOMException;
 
 /**
- * <p>GetSVGDocument interface.</p> */
+ * <p>GetSVGDocument interface.</p>
+ */
 public interface GetSVGDocument {
 	/**
 	 * <p>getSVGDocument.</p>

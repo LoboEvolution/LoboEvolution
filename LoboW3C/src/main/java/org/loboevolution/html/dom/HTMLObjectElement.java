@@ -31,11 +31,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.ValidityState;
 
 /**
- * Provides special properties and methods (beyond those on the HTMLElement interface it also has available to it by inheritance) for manipulating the layout and presentation of &lt;object&gt; element, representing external resources.
- *
- *
- *
- */
+ * Provides special properties and methods (beyond those on the HTMLElement interface it also has available to it by inheritance) for manipulating the layout and presentation of &lt;object&gt; element, representing external resources. */
 public interface HTMLObjectElement extends HTMLElement {
 
     /**

@@ -29,7 +29,8 @@ package org.loboevolution.svg;
 import org.htmlunit.cssparser.dom.DOMException;
 
 /**
- * <p>SVGICCColor interface.</p> */
+ * <p>SVGICCColor interface.</p> 
+ */
 public interface SVGICCColor {
 	/**
 	 * <p>getColorProfile.</p>

@@ -34,9 +34,6 @@ import com.jtattoo.plaf.ColorHelper;
 
 /**
  * <p>LunaDefaultTheme class.</p>
- *
- *
- *
  */
 public class LunaDefaultTheme extends AbstractTheme {
 

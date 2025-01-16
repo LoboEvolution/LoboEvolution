@@ -26,7 +26,8 @@
 package org.loboevolution.svg;
 
 /**
- * <p>SVGAnimatedPathData interface.</p> */
+ * <p>SVGAnimatedPathData interface.</p>
+ */
 public interface SVGAnimatedPathData {
 	/**
 	 * <p>getPathSegList.</p>

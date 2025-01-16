@@ -33,10 +33,7 @@ import org.loboevolution.info.BorderInfo;
 import java.awt.*;
 
 /**
- * <p>IFrameRenderState class.</p>
- *
- *
- *
+ * <p>IFrameRenderState class.</p> 
  */
 public class IFrameRenderState extends StyleSheetRenderState {
 

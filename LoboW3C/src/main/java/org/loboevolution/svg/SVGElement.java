@@ -29,7 +29,8 @@ package org.loboevolution.svg;
 import org.loboevolution.html.node.Element;
 
 /**
- * <p>SVGElement interface.</p> */
+ * <p>SVGElement interface.</p>
+ */
 public interface SVGElement extends Element {
 
 	/**

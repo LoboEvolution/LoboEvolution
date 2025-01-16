@@ -26,7 +26,8 @@
 package org.loboevolution.svg;
 
 /**
- * <p>SVGAnimatedNumberList interface.</p> */
+ * <p>SVGAnimatedNumberList interface.</p>
+ */
 public interface SVGAnimatedNumberList {
 	/**
 	 * <p>getBaseVal.</p>

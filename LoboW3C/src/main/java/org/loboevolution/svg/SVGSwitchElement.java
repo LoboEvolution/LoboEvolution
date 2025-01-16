@@ -26,7 +26,8 @@
 package org.loboevolution.svg;
 
 /**
- * <p>SVGSwitchElement interface.</p> */
+ * <p>SVGSwitchElement interface.</p>
+ */
 public interface SVGSwitchElement
 		extends SVGElement, SVGTests, SVGLangSpace, SVGExternalResourcesRequired, SVGStylable, SVGTransformable {
 }

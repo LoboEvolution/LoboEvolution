@@ -36,9 +36,6 @@ import javax.swing.border.LineBorder;
 
 /**
  * <p>FontLabel class.</p>
- *
- *
- *
  */
 public class FontLabel extends JLabel {
 

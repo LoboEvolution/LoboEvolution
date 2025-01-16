@@ -30,11 +30,7 @@ package org.loboevolution.html.dom;
 import org.loboevolution.html.node.NodeList;
 
 /**
- * Provides special properties and methods (beyond the regular HTMLElement interface it also has available to it by inheritance) for manipulating the layout and presentation of &lt;progress&gt; elements.
- *
- *
- *
- */
+ * Provides special properties and methods (beyond the regular HTMLElement interface it also has available to it by inheritance) for manipulating the layout and presentation of &lt;progress&gt; elements. */
 public interface HTMLProgressElement extends HTMLElement {
 
     

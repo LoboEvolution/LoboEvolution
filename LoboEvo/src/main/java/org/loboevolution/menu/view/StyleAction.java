@@ -35,9 +35,6 @@ import java.io.Serial;
 
 /**
  * <p>StyleAction class.</p>
- *
- *
- *
  */
 public class StyleAction extends AbstractAction {
 

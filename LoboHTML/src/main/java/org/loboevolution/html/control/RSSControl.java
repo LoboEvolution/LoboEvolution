@@ -32,10 +32,7 @@ import java.awt.*;
 import java.io.Serial;
 
 /**
- * <p>RSSControl class.</p>
- *
- *
- *
+ * <p>RSSControl class.</p> 
  */
 public class RSSControl extends BaseControl {
 

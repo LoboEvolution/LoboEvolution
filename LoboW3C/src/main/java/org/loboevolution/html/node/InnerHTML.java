@@ -27,10 +27,7 @@
 package org.loboevolution.html.node;
 
 /**
- * <p>InnerHTML interface.</p>
- *
- *
- *
+ * <p>InnerHTML interface.</p> 
  */
 public interface InnerHTML {
 

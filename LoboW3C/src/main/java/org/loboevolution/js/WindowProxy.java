@@ -29,9 +29,6 @@ package org.loboevolution.js;
 
 /**
  * <p>WindowProxy interface.</p>
- *
- *
- *
  */
 public interface WindowProxy extends Window, MessageEventSource {
 }

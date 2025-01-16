@@ -30,9 +30,6 @@ import java.awt.*;
 
 /**
  * <p>RSSDrawable interface.</p>
- *
- *
- *
  */
 public interface RSSDrawable {
 	

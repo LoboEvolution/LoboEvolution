@@ -29,7 +29,8 @@ package org.loboevolution.svg;
 import org.htmlunit.cssparser.dom.DOMException;
 
 /**
- * <p>SVGPathSegCurvetoQuadraticAbs interface.</p> */
+ * <p>SVGPathSegCurvetoQuadraticAbs interface.</p>
+ */
 public interface SVGPathSegCurvetoQuadraticAbs extends SVGPathSeg {
 
 	/**

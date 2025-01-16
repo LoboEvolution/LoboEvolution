@@ -26,7 +26,8 @@
 package org.loboevolution.svg;
 
 /**
- * <p>SVGColor interface.</p> */
+ * <p>SVGColor interface.</p>
+ */
 public interface SVGColor {
 	// Color Types
 	/** Constant SVG_COLORTYPE_UNKNOWN=0 */

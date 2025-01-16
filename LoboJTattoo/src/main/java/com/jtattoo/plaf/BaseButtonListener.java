@@ -34,9 +34,6 @@ import javax.swing.plaf.basic.BasicButtonListener;
 
 /**
  * <p>BaseButtonListener class.</p>
- *
- *
- *
  */
 public class BaseButtonListener extends BasicButtonListener {
 

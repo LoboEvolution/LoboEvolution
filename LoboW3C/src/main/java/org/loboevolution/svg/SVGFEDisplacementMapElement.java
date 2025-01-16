@@ -26,7 +26,8 @@
 package org.loboevolution.svg;
 
 /**
- * <p>SVGFEDisplacementMapElement interface.</p> */
+ * <p>SVGFEDisplacementMapElement interface.</p>
+ */
 public interface SVGFEDisplacementMapElement extends SVGElement, SVGFilterPrimitiveStandardAttributes {
 	// Channel Selectors
 	/** Constant SVG_CHANNEL_UNKNOWN=0 */

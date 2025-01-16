@@ -38,11 +38,7 @@ import com.jtattoo.plaf.AbstractLookAndFeel;
 import com.jtattoo.plaf.BaseTabbedPaneUI;
 
 /**
- * author Michael Hagen
- *
- *
- *
- */
+ * author Michael Hagen */
 public class LunaTabbedPaneUI extends BaseTabbedPaneUI {
 
 	private static final Color[] SELECTED_TAB_COLOR = new Color[] { AbstractLookAndFeel.getBackgroundColor() };

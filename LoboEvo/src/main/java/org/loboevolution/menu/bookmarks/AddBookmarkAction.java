@@ -35,10 +35,7 @@ import org.loboevolution.component.BrowserFrame;
 import org.loboevolution.component.ToolBar;
 
 /**
- * <p>AddBookmarkAction class.</p>
- *
- *
- *
+ * <p>AddBookmarkAction class.</p> 
  */
 public class AddBookmarkAction extends AbstractAction {
 

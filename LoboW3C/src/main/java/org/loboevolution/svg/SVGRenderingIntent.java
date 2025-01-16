@@ -26,7 +26,8 @@
 package org.loboevolution.svg;
 
 /**
- * <p>SVGRenderingIntent interface.</p> */
+ * <p>SVGRenderingIntent interface.</p>
+ */
 public interface SVGRenderingIntent {
 	// Rendering Intent Types
 	/** Constant RENDERING_INTENT_UNKNOWN=0 */

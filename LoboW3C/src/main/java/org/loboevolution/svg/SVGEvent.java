@@ -29,6 +29,7 @@ package org.loboevolution.svg;
 import org.loboevolution.events.Event;
 
 /**
- * <p>SVGEvent interface.</p> */
+ * <p>SVGEvent interface.</p> 
+ */
 public interface SVGEvent extends Event {
 }

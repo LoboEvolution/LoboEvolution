@@ -27,11 +27,7 @@
 package org.loboevolution.html.dom;
 
 /**
- * The Interface TextMetrics.
- *
- *
- *
- */
+ * The Interface TextMetrics. */
 public interface TextMetrics {
 
     /**

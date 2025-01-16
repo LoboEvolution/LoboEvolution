@@ -26,7 +26,8 @@
 package org.loboevolution.svg;
 
 /**
- * <p>SVGFitToViewBox interface.</p> */
+ * <p>SVGFitToViewBox interface.</p>
+ */
 public interface SVGFitToViewBox {
 	/**
 	 * <p>getViewBox.</p>

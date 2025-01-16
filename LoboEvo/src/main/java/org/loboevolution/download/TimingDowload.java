@@ -28,9 +28,6 @@ package org.loboevolution.download;
 
 /**
  * <p>TimingDowload class.</p>
- *
- *
- *
  */
 public class TimingDowload {
 

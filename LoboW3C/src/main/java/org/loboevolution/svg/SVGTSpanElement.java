@@ -26,6 +26,7 @@
 package org.loboevolution.svg;
 
 /**
- * <p>SVGTSpanElement interface.</p> */
+ * <p>SVGTSpanElement interface.</p> 
+ */
 public interface SVGTSpanElement extends SVGTextPositioningElement {
 }

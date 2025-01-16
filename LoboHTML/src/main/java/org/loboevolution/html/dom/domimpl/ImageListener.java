@@ -26,10 +26,7 @@
 package org.loboevolution.html.dom.domimpl;
 
 /**
- * <p>ImageListener interface.</p>
- *
- *
- *
+ * <p>ImageListener interface.</p> 
  */
 public interface ImageListener extends java.util.EventListener {
 	/** Constant EMPTY_ARRAY */

@@ -27,7 +27,8 @@
 package org.loboevolution.svg;
 
 /**
- * <p>SVGLocatable interface.</p> */
+ * <p>SVGLocatable interface.</p>
+ */
 public interface SVGLocatable {
 	/**
 	 * <p>getNearestViewportElement.</p>

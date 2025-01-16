@@ -44,9 +44,6 @@ import com.jtattoo.plaf.NoFocusButton;
 
 /**
  * <p>MintComboBoxUI class.</p>
- *
- *
- *
  */
 public class MintComboBoxUI extends BaseComboBoxUI {
 

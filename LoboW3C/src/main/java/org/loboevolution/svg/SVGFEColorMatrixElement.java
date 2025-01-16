@@ -27,7 +27,8 @@
 package org.loboevolution.svg;
 
 /**
- * <p>SVGFEColorMatrixElement interface.</p> */
+ * <p>SVGFEColorMatrixElement interface.</p> 
+ */
 public interface SVGFEColorMatrixElement extends SVGElement, SVGFilterPrimitiveStandardAttributes {
 	// Color Matrix Types
 	/** Constant SVG_FECOLORMATRIX_TYPE_UNKNOWN=0 */

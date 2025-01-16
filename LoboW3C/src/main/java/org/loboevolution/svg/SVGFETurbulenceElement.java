@@ -26,7 +26,8 @@
 package org.loboevolution.svg;
 
 /**
- * <p>SVGFETurbulenceElement interface.</p> */
+ * <p>SVGFETurbulenceElement interface.</p>
+ */
 public interface SVGFETurbulenceElement extends SVGElement, SVGFilterPrimitiveStandardAttributes {
 	// Turbulence Types
 	/** Constant SVG_TURBULENCE_TYPE_UNKNOWN=0 */

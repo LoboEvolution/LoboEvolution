@@ -31,10 +31,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * <p>ListValues class.</p>
- *
- *
- *
+ * <p>ListValues class.</p> 
  */
 public enum ListValues {
 	

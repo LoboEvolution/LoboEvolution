@@ -29,11 +29,7 @@ import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.renderstate.TextDecorationRenderState;
 
 /**
- * Element used for STRIKE.
- *
- *
- *
- */
+ * Element used for STRIKE. */
 public class HTMLStrikeElementImpl extends HTMLElementImpl {
 	/**
 	 * <p>Constructor for HTMLStrikeElementImpl.</p>

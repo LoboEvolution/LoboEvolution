@@ -30,11 +30,7 @@ package org.loboevolution.html.dom;
 
 
 /**
- * Provides special properties (beyond those of the HTMLElement interface it also has available to it by inheritance) for manipulating &lt;hr&gt; elements.
- *
- *
- *
- */
+ * Provides special properties (beyond those of the HTMLElement interface it also has available to it by inheritance) for manipulating &lt;hr&gt; elements. */
 public interface HTMLHRElement extends HTMLElement {
 
 

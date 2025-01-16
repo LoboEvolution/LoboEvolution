@@ -27,11 +27,7 @@
 package org.loboevolution.html.dom;
 
 /**
- * Provides special properties (beyond the regular HTMLElement object interface it also has available to it by inheritance) for manipulating &lt;source&gt; elements.
- *
- *
- *
- */
+ * Provides special properties (beyond the regular HTMLElement object interface it also has available to it by inheritance) for manipulating &lt;source&gt; elements. */
 public interface HTMLSourceElement extends HTMLElement {
 
     /**

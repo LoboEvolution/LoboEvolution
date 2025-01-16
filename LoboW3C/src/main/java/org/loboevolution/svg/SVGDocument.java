@@ -26,7 +26,8 @@
 package org.loboevolution.svg;
 
 /**
- * <p>SVGDocument interface.</p> */
+ * <p>SVGDocument interface.</p>
+ */
 public interface SVGDocument {
 
 	/**

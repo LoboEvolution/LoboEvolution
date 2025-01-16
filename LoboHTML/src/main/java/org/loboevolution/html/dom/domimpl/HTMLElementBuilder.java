@@ -29,7 +29,7 @@
 package org.loboevolution.html.dom.domimpl;
 
 import org.loboevolution.html.dom.rss.*;
-import org.loboevolution.html.dom.svgimpl.*;
+import org.loboevolution.svg.*;
 
 import java.awt.font.TextAttribute;
 

@@ -26,7 +26,8 @@
 package org.loboevolution.svg;
 
 /**
- * <p>SVGPathSegLinetoHorizontalAbs interface.</p> */
+ * <p>SVGPathSegLinetoHorizontalAbs interface.</p>
+ */
 public interface SVGPathSegLinetoHorizontalAbs extends SVGPathSeg {
 
 	/**

@@ -29,11 +29,7 @@ package org.loboevolution.html.dom;
 import org.loboevolution.html.node.Document;
 
 /**
- * Provides special properties (beyond the regular HTMLElement interface it also has available to it by inheritance) for manipulating &lt;embed&gt; elements.
- *
- *
- *
- */
+ * Provides special properties (beyond the regular HTMLElement interface it also has available to it by inheritance) for manipulating &lt;embed&gt; elements. */
 public interface HTMLEmbedElement extends HTMLElement {
 
 

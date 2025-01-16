@@ -26,7 +26,8 @@
 package org.loboevolution.svg;
 
 /**
- * <p>SVGPolylineElement interface.</p> */
+ * <p>SVGPolylineElement interface.</p> 
+ */
 public interface SVGPolylineElement extends SVGElement, SVGTests, SVGLangSpace, SVGExternalResourcesRequired,
 		SVGStylable, SVGTransformable, SVGAnimatedPoints, Drawable {
 }

@@ -27,6 +27,7 @@
 package org.loboevolution.svg;
 
 /**
- * <p>SVGMPathElement interface.</p> */
+ * <p>SVGMPathElement interface.</p>
+ */
 public interface SVGMPathElement extends SVGElement, SVGURIReference, SVGExternalResourcesRequired {
 }

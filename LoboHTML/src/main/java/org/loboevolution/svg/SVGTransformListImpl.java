@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2014 - 2023 LoboEvolution
+ * Copyright (c) 2014 - 2025 LoboEvolution
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -32,7 +32,8 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 /**
- * <p>SVGTransformListImpl class.</p> */
+ * <p>SVGTransformListImpl class.</p>
+ */
 public class SVGTransformListImpl implements SVGTransformList {
 	
 	private List<SVGTransform> transList;

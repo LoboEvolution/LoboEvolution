@@ -26,7 +26,8 @@
 package org.loboevolution.svg;
 
 /**
- * <p>SVGCSSRule interface.</p> */
+ * <p>SVGCSSRule interface.</p>
+ */
 public interface SVGCSSRule {
     /** Constant <code>COLOR_PROFILE_RULE=7</code> */
     short COLOR_PROFILE_RULE = 7;

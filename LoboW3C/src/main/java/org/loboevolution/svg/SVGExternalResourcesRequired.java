@@ -26,7 +26,8 @@
 package org.loboevolution.svg;
 
 /**
- * <p>SVGExternalResourcesRequired interface.</p> */
+ * <p>SVGExternalResourcesRequired interface.</p> 
+ */
 public interface SVGExternalResourcesRequired {
 	/**
 	 * <p>getExternalResourcesRequired.</p>

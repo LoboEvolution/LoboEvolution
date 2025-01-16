@@ -27,7 +27,8 @@
 package org.loboevolution.svg;
 
 /**
- * <p>SVGGradientElement interface.</p> */
+ * <p>SVGGradientElement interface.</p>
+ */
 public interface SVGGradientElement
 		extends SVGElement, SVGURIReference, SVGExternalResourcesRequired, SVGStylable, SVGUnitTypes {
 	// Spread Method Types

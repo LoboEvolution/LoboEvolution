@@ -26,7 +26,8 @@
 package org.loboevolution.svg;
 
 /**
- * <p>SVGFEGaussianBlurElement interface.</p> */
+ * <p>SVGFEGaussianBlurElement interface.</p>
+ */
 public interface SVGFEGaussianBlurElement extends SVGElement, SVGFilterPrimitiveStandardAttributes {
 	/**
 	 * <p>getIn1.</p>

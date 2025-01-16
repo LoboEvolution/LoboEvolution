@@ -28,7 +28,8 @@ package org.loboevolution.svg;
 import org.htmlunit.cssparser.dom.DOMException;
 
 /**
- * <p>SVGAnimationElement interface.</p> */
+ * <p>SVGAnimationElement interface.</p>
+ */
 public interface SVGAnimationElement extends SVGElement, SVGTests, SVGExternalResourcesRequired {
 
 	/**

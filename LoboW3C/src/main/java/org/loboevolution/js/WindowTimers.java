@@ -29,9 +29,6 @@ package org.loboevolution.js;
 
 /**
  * <p>WindowTimers interface.</p>
- *
- *
- *
  */
 public interface WindowTimers {
 }

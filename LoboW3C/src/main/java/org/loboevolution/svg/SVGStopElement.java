@@ -26,7 +26,8 @@
 package org.loboevolution.svg;
 
 /**
- * <p>SVGStopElement interface.</p> */
+ * <p>SVGStopElement interface.</p>
+ */
 public interface SVGStopElement extends SVGElement, SVGStylable {
 	/**
 	 * <p>getOffset.</p>

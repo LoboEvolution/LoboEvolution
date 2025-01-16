@@ -36,11 +36,7 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
 /**
- * The Class SwingTasks.
- *
- *
- *
- */
+ * The Class SwingTasks. */
 public class SwingTasks {
 
 	/** The Constant NESTED_ENABLING. */

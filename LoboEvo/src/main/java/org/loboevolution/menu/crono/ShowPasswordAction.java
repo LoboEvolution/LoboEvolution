@@ -35,9 +35,6 @@ import org.loboevolution.component.BrowserFrame;
 
 /**
  * <p>ShowPasswordAction class.</p>
- *
- *
- *
  */
 public class ShowPasswordAction extends AbstractAction {
 

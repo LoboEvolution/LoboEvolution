@@ -26,7 +26,8 @@
 package org.loboevolution.svg;
 
 /**
- * <p>SVGPathSeg interface.</p> */
+ * <p>SVGPathSeg interface.</p>
+ */
 public interface SVGPathSeg {
 
 	/** Constant PATHSEG_UNKNOWN=0 */

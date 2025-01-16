@@ -29,11 +29,7 @@ package org.loboevolution.html.renderer;
 import java.awt.*;
 
 /**
- * Contains a renderer node and a position in that node.
- *
- *
- *
- */
+ * Contains a renderer node and a position in that node. */
 public class RenderableSpot {
 	public final BoundableRenderable renderable;
 	public final int x;

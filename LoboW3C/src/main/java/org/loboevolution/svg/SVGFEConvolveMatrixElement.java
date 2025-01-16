@@ -26,7 +26,8 @@
 package org.loboevolution.svg;
 
 /**
- * <p>SVGFEConvolveMatrixElement interface.</p> */
+ * <p>SVGFEConvolveMatrixElement interface.</p> 
+ */
 public interface SVGFEConvolveMatrixElement extends SVGElement, SVGFilterPrimitiveStandardAttributes {
 	// Edge Mode Values
 	/** Constant SVG_EDGEMODE_UNKNOWN=0 */

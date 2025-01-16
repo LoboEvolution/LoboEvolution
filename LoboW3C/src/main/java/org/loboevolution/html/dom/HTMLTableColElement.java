@@ -29,11 +29,7 @@ package org.loboevolution.html.dom;
 /**
  * Provides special properties (beyond the HTMLElement interface it also has
  * available to it inheritance) for manipulating single or grouped table column
- * elements.
- *
- *
- *
- */
+ * elements. */
 public interface HTMLTableColElement extends HTMLElement {
 
 	/**

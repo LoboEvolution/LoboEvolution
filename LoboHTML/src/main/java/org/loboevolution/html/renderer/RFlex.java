@@ -32,9 +32,6 @@ import org.loboevolution.html.renderstate.RenderState;
 
 /**
  * <p>RFlex class.</p>
- *
- *
- *
  */
 public class RFlex {
 

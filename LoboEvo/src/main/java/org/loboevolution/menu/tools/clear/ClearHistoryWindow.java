@@ -40,9 +40,6 @@ import com.jtattoo.plaf.lobo.LoboPanel;
 
 /**
  * <p>ClearHistoryWindow class.</p>
- *
- *
- *
  */
 public class ClearHistoryWindow extends JFrame {
 

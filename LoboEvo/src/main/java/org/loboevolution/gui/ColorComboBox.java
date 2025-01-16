@@ -41,9 +41,6 @@ import javax.swing.border.MatteBorder;
 
 /**
  * <p>ColorComboBox class.</p>
- *
- *
- *
  */
 public class ColorComboBox extends JComboBox<Object> {
 

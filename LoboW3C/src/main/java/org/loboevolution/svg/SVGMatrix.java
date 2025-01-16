@@ -32,7 +32,8 @@ import java.awt.geom.AffineTransform;
 
 
 /**
- * <p>SVGMatrix interface.</p> */
+ * <p>SVGMatrix interface.</p> 
+ */
 public interface SVGMatrix {
 
 	/**

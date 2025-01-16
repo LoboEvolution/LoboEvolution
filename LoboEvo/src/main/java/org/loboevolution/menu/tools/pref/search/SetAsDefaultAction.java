@@ -36,9 +36,6 @@ import org.loboevolution.store.ToolsStore;
 
 /**
  * <p>SetAsDefaultAction class.</p>
- *
- *
- *
  */
 public class SetAsDefaultAction<T> extends AbstractAction {
 

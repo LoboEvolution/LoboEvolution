@@ -27,11 +27,7 @@
 package org.loboevolution.html.dom;
 
 /**
- * The Interface FileCallback.
- *
- *
- *
- */
+ * The Interface FileCallback. */
 public interface FileCallback {
 
     /**

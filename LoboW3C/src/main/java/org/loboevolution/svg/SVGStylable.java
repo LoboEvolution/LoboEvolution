@@ -28,7 +28,8 @@ package org.loboevolution.svg;
 import org.htmlunit.cssparser.util.CSSProperties;
 
 /**
- * <p>SVGStylable interface.</p> */
+ * <p>SVGStylable interface.</p>
+ */
 public interface SVGStylable {
 
 	/**

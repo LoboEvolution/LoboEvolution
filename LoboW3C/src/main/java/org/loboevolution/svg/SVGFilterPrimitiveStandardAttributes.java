@@ -26,7 +26,8 @@
 package org.loboevolution.svg;
 
 /**
- * <p>SVGFilterPrimitiveStandardAttributes interface.</p> */
+ * <p>SVGFilterPrimitiveStandardAttributes interface.</p> 
+ */
 public interface SVGFilterPrimitiveStandardAttributes extends SVGStylable {
 	/**
 	 * <p>getX.</p>

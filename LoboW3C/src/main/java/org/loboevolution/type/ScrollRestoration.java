@@ -31,10 +31,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * <p>ScrollRestoration class.</p>
- *
- *
- *
+ * <p>ScrollRestoration class.</p> 
  */
 public enum ScrollRestoration {
 	AUTO("auto"),

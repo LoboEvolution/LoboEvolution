@@ -28,11 +28,7 @@ package org.loboevolution.html.dom;
 
 
 /**
- * Provides special properties and methods (beyond the regular HTMLElement object interface it also has available to it by inheritance) for manipulating the layout and presentation of tables in an HTML document.
- *
- *
- *
- */
+ * Provides special properties and methods (beyond the regular HTMLElement object interface it also has available to it by inheritance) for manipulating the layout and presentation of tables in an HTML document. */
 public interface HTMLTableElement extends HTMLElement {
     
     /**
