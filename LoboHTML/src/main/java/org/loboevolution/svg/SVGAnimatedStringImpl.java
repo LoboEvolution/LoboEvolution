@@ -27,33 +27,19 @@
 package org.loboevolution.svg;
 
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * <p>SVGAnimatedStringImpl class.</p> 
  */
+@Getter
+@Setter
+@AllArgsConstructor
 public class SVGAnimatedStringImpl implements SVGAnimatedString {
 
 	private String baseVal;
-
-	/**
-	 * <p>Constructor for SVGAnimatedStringImpl.</p>
-	 *
-	 * @param baseVal a {@link java.lang.String} object.
-	 */
-	public SVGAnimatedStringImpl(final String baseVal) {
-		this.baseVal = baseVal;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public String getBaseVal() {
-		return baseVal;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setBaseVal(final String baseVal) {
-		this.baseVal = baseVal;
-	}
 
 	/** {@inheritDoc} */
 	@Override

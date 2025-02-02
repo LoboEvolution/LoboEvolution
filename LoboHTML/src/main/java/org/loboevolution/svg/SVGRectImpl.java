@@ -26,95 +26,39 @@
 
 package org.loboevolution.svg;
 
-import java.awt.geom.Rectangle2D;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import java.awt.geom.Rectangle2D;
 
 /**
  * <p>SVGRectImpl class.</p>
  */
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class SVGRectImpl implements SVGRect {
 
-	private float x;
+    private float x = 0;
 
-	private float y;
+    private float y = 0;
 
-	private float width;
+    private float width = 0;
 
-	private float height;
+    private float height = 0;
 
-	/**
-	 * <p>Constructor for SVGRectImpl.</p>
-	 *
-	 * @param x a {@link java.lang.Float} object.
-	 * @param y a {@link java.lang.Float} object.
-	 * @param width a {@link java.lang.Float} object.
-	 * @param height a {@link java.lang.Float} object.
-	 */
-	public SVGRectImpl(final float x, final float y, final float width, final float height) {
-		this.x = x;
-		this.y = y;
-		this.width = width;
-		this.height = height;
-	}
-
-	/**
-	 * <p>Constructor for SVGRectImpl.</p>
-	 *
-	 * @param rect a {@link java.awt.geom.Rectangle2D} object.
-	 */
-	public SVGRectImpl(final Rectangle2D rect) {
-		x = (float) rect.getX();
-		y = (float) rect.getY();
-		width = (float) rect.getWidth();
-		height = (float) rect.getHeight();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public float getX() {
-		return x;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setX(final float x) {
-		this.x = x;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public float getY() {
-		return y;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setY(final float y) {
-		this.y = y;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public float getWidth() {
-		return width;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setWidth(final float width) {
-		this.width = width;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public float getHeight() {
-		return height;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setHeight(final float height) {
-		this.height = height;
-	}
-
+    /**
+     * <p>Constructor for SVGRectImpl.</p>
+     *
+     * @param rect a {@link java.awt.geom.Rectangle2D} object.
+     */
+    public SVGRectImpl(final Rectangle2D rect) {
+        x = (float) rect.getX();
+        y = (float) rect.getY();
+        width = (float) rect.getWidth();
+        height = (float) rect.getHeight();
+    }
 }

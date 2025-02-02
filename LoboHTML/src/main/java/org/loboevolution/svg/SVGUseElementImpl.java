@@ -36,14 +36,14 @@ import java.awt.geom.NoninvertibleTransformException;
 /**
  * <p>SVGUseElementImpl class.</p>
  */
-public class SVGUseElementImpl extends SVGGraphic implements SVGUseElement {
+public class SVGUseElementImpl extends SVGTransformableImpl implements SVGUseElement {
 	
 	private Graphics2D graphics;
 
 	/**
 	 * <p>Constructor for SVGUseElementImpl.</p>
 	 *
-	 * @param name a {@link java.lang.String} object.
+	 * @param name a {@link String} object.
 	 */
 	public SVGUseElementImpl(final String name) {
 		super(name);
@@ -118,13 +118,13 @@ public class SVGUseElementImpl extends SVGGraphic implements SVGUseElement {
 	public void draw(final Graphics2D graphics) {
 		this.graphics = graphics;
 		final SVGMatrix ctm = getCTM();
-		createShape(ctm.getAffineTransform());
+		createShape();
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Shape createShape(final AffineTransform transform) {
-		final String href = getHref().getBaseVal();
+	public Shape createShape() {
+	/*	final String href = getHref().getBaseVal();
 		if (href.toLowerCase().contains("#")) {
 			final int hashIndex = href.indexOf('#');
 			if (hashIndex != -1) {
@@ -141,7 +141,7 @@ public class SVGUseElementImpl extends SVGGraphic implements SVGUseElement {
                     drawable.draw(graphics);
 				}
 			}
-		}
+		}*/
 		return null;
 	}
 }

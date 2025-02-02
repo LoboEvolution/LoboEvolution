@@ -26,132 +26,163 @@
 
 package org.loboevolution.svg;
 
-import org.htmlunit.cssparser.dom.DOMException;
+import lombok.Getter;
+import org.loboevolution.common.Strings;
+import org.loboevolution.css.CSSStyleDeclaration;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
+import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
+import org.loboevolution.html.node.Node;
+
+import java.awt.*;
 
 
 /**
- * <p>SVGElementImpl class.</p> 
+ * <p>SVGElementImpl class.</p>
  */
-public class SVGElementImpl extends HTMLElementImpl implements SVGElement {
+@Getter
+public class SVGElementImpl extends HTMLElementImpl implements SVGElement, SVGStylable, Drawable {
 
-	private SVGSVGElement ownerSvg;
+    private SVGSVGElement ownerSVGElement;
 
-	private SVGStringListImpl requiredFeatures;
+    /**
+     * <p>Constructor for SVGElementImpl.</p>
+     *
+     * @param name a {@link String} object.
+     */
+    public SVGElementImpl(final String name) {
+        super(name);
+    }
 
-	private SVGStringListImpl requiredExtensions;
+    @Override
+    public void draw(Graphics2D graphics){
+        if (hasChildNodes()) {
+            final NodeListImpl children = (NodeListImpl) getChildNodes();
+            children.forEach(node -> {
+                if (node instanceof Drawable child) {
+                    final SVGElement selem = (SVGElement) node;
+                    selem.setOwnerSVGElement(getOwnerSVGElement());
+                    System.out.println(selem.getClass());
+                    if (selem instanceof SVGAnimateTransformElement) {
+                        child.animation(selem);
+                    }
+                    child.draw(graphics);
+                }
+            });
+        }
+    }
 
-	private SVGStringListImpl systemLanguage;
+    public SVGAnimatedBoolean getExternalResourcesRequired() {
+        return new SVGAnimatedBooleanImpl(false);
+    }
 
-	/**
-	 * <p>Constructor for SVGElementImpl.</p>
-	 *
-	 * @param name a {@link java.lang.String} object.
-	 */
-	public SVGElementImpl(final String name) {
-		super(name);
-	}
+    public SVGStringList getRequiredFeatures() {
+        return new SVGStringListImpl();
+    }
 
-	/** {@inheritDoc} */
-	@Override
-	public SVGSVGElement getOwnerSVGElement() {
-		return ownerSvg;
-	}
+    public SVGStringList getRequiredExtensions() {
+        return new SVGStringListImpl();
+    }
 
-	/** {@inheritDoc} */
-	@Override
-	public SVGElement getViewportElement() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public SVGStringList getSystemLanguage() {
+        return new SVGStringListImpl();
+    }
 
-	/**
-	 * <p>getExternalResourcesRequired.</p>
-	 *
-	 * @return a {@link SVGAnimatedBoolean} object.
-	 */
-	public SVGAnimatedBoolean getExternalResourcesRequired() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public boolean hasExtension(String extension) {
+        return false;
+    }
 
-	/**
-	 * <p>Getter for the field requiredFeatures.</p>
-	 *
-	 * @return a {@link SVGStringList} object.
-	 */
-	public SVGStringList getRequiredFeatures() {
-		return requiredFeatures;
-	}
+    @Override
+    public SVGSVGElement getOwnerSVGElement() {
+        Node parent = getParentNode();
+        if (parent == getDocumentNode()) {
+            return null;
+        }
+        while (parent != null && !(parent instanceof SVGSVGElement)) {
+            parent = parent.getParentNode();
+        }
+        return (SVGSVGElement) parent;
+    }
 
-	/**
-	 * <p>Getter for the field requiredExtensions.</p>
-	 *
-	 * @return a {@link SVGStringList} object.
-	 */
-	public SVGStringList getRequiredExtensions() {
-		return requiredExtensions;
-	}
+    @Override
+    public void setOwnerSVGElement(SVGSVGElement elem) {
+        this.ownerSVGElement = elem;
+    }
 
-	/**
-	 * <p>Getter for the field systemLanguage.</p>
-	 *
-	 * @return a {@link SVGStringList} object.
-	 */
-	public SVGStringList getSystemLanguage() {
-		return systemLanguage;
-	}
+    @Override
+    public SVGElement getViewportElement() {
+        if(ownerSVGElement != null) {
+            return ownerSVGElement;
+        }
+        Node parent = getParentNode();
+        if (parent == getDocumentNode()) {
+            return null;
+        }
 
-	/**
-	 * <p>hasExtension.</p>
-	 *
-	 * @param extension a {@link java.lang.String} object.
-	 * @return a boolean.
-	 */
-	public boolean hasExtension(final String extension) {
-		return extension.equalsIgnoreCase("svg");
-	}
-	
-	/**
-	 * <p>getXMLlang.</p>
-	 *
-	 * @return a {@link java.lang.String} object.
-	 */
-	public String getXMLlang() {
-		return getAttribute("xml:lang");
-	}
+        while (parent != null && !(parent instanceof SVGSVGElement || parent instanceof SVGSymbolElement)) {
+            parent = parent.getParentNode();
+        }
+        return (SVGElement) parent;
+    }
 
-	/**
-	 * <p>setXMLlang.</p>
-	 *
-	 * @param xmllang a {@link java.lang.String} object.
-	 * @throws DOMException if any.
-	 */
-	public void setXMLlang(final String xmllang) {
-		setAttribute("xml:lang", xmllang);
-	}
 
-	/**
-	 * <p>getXMLspace.</p>
-	 *
-	 * @return a {@link java.lang.String} object.
-	 */
-	public String getXMLspace() {
-		return getAttribute("xml:space");
-	}
+    public String getXMLlang() {
+        return getAttribute("xml:lang");
+    }
 
-	/**
-	 * <p>setXMLspace.</p>
-	 *
-	 * @param xmlspace a {@link java.lang.String} object.
-	 * @throws DOMException if any.
-	 */
-	public void setXMLspace(final String xmlspace) {
-		setAttribute("xml:space", xmlspace);
-	}
 
-	/** {@inheritDoc} */
-	public void setOwnerSVGElement(final SVGSVGElement ownerSvg) {
-		this.ownerSvg = ownerSvg;
-	}
+    public void setXMLlang(final String xmllang) {
+        setAttribute("xml:lang", xmllang);
+
+    }
+
+    public String getXMLspace() {
+        return getAttribute("xml:space");
+    }
+
+    public void setXMLspace(final String xmlspace) {
+        setAttribute("xml:space", xmlspace);
+    }
+
+    /**
+     * <p>getVisibility.</p>
+     *
+     * @return a boolean.
+     */
+    public boolean getVisibility() {
+        final CSSStyleDeclaration style = getStyle();
+        final String visibility = Strings.isNotBlank(style.getVisibility()) ? style.getVisibility() : getAttribute("visibility");
+        return "visible".equals(visibility);
+    }
+
+    /**
+     * <p>getDisplay.</p>
+     *
+     * @return a boolean.
+     */
+    public boolean getDisplay() {
+        final CSSStyleDeclaration style = getStyle();
+        final String display = Strings.isNotBlank(style.getDisplay()) ? style.getDisplay() : getAttribute("display");
+        return !"none".equals(display);
+    }
+
+    /**
+     * <p>getOpacity.</p>
+     *
+     * @return a float.
+     */
+    public float getOpacity() {
+        final CSSStyleDeclaration style = getStyle();
+        final String opacityStr = Strings.isNotBlank(style.getOpacity()) ? style.getOpacity() : getAttribute("opacity");
+        float opacity = 1;
+        if (opacityStr != null) {
+            opacity = Float.parseFloat(opacityStr);
+        }
+        if (opacity > 1) {
+            opacity = 1;
+        }
+        if (opacity < 0) {
+            opacity = 0;
+        }
+        return opacity;
+    }
 }

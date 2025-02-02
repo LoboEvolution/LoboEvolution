@@ -24,34 +24,28 @@
  * Contact info: ivan.difrancesco@yahoo.it
  */
 
-package org.loboevolution.svg;
+package org.loboevolution;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import org.loboevolution.svg.SVGAnimatedTransformList;
+import org.loboevolution.svg.SVGTransformList;
+import org.loboevolution.svg.SVGTransformListImpl;
 
 /**
- * <p>SVGSymbolElementImpl class.</p>
+ * <p>SVGAnimatedTransformListImpl class.</p>
  */
-public class SVGSymbolElementImpl extends SVGStylableImpl implements SVGSymbolElement {
-
-	/**
-	 * <p>Constructor for SVGSymbolElementImpl.</p>
-	 *
-	 * @param name a {@link java.lang.String} object.
-	 */
-	public SVGSymbolElementImpl(final String name) {
-		super(name);
-	}
+@Getter
+@Setter
+@AllArgsConstructor
+public class SVGAnimatedTransformListImpl implements SVGAnimatedTransformList {
+	
+	private final SVGTransformListImpl baseVal;
 
 	/** {@inheritDoc} */
 	@Override
-	public SVGAnimatedRect getViewBox() {
-		// TODO Auto-generated method stub
-		return null;
+	public SVGTransformList getAnimVal() {
+		return baseVal;
 	}
-
-	/** {@inheritDoc} */
-	@Override
-	public SVGAnimatedPreserveAspectRatio getPreserveAspectRatio() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

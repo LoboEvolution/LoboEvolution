@@ -49,7 +49,7 @@ public class SVGNumberListImpl implements SVGNumberList {
 	/**
 	 * <p>Constructor for SVGNumberListImpl.</p>
 	 *
-	 * @param numb a {@link java.lang.String} object.
+	 * @param numb a {@link String} object.
 	 */
 	public SVGNumberListImpl(final String numb) {
 		pointList = new ArrayList<>();

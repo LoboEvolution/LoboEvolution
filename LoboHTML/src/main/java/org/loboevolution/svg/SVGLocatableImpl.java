@@ -28,7 +28,9 @@ package org.loboevolution.svg;
 
 import org.loboevolution.html.node.Node;
 
+import java.awt.*;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Rectangle2D;
 
 /**
  * <p>SVGLocatableImpl class.</p>
@@ -38,9 +40,9 @@ public abstract class SVGLocatableImpl extends SVGStylableImpl implements SVGLoc
 	/**
 	 * <p>Constructor for SVGLocatableImpl.</p>
 	 *
-	 * @param name a {@link java.lang.String} object.
+	 * @param name a {@link String} object.
 	 */
-	public SVGLocatableImpl(final String name) {
+	public SVGLocatableImpl(String name) {
 		super(name);
 	}
 
@@ -150,4 +152,10 @@ public abstract class SVGLocatableImpl extends SVGStylableImpl implements SVGLoc
 		return null;
 	}
 
+	@Override
+	public SVGRect getBBox() {
+		Shape compositeShape = createShape();
+		Rectangle2D bounds = compositeShape.getBounds2D();
+		return new SVGRectImpl(bounds);
+	}
 }

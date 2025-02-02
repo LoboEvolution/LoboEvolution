@@ -26,29 +26,241 @@
 
 package org.loboevolution.svg;
 
+import org.loboevolution.SVGAnimatedTransformListImpl;
 import org.loboevolution.common.Strings;
 import org.loboevolution.css.CSSStyleDeclaration;
+
+import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.util.StringTokenizer;
 
 /**
  * <p>SVGTransformableImpl class.</p>
  */
 public abstract class SVGTransformableImpl extends SVGLocatableImpl implements SVGTransformable {
 
+    /**
+     * <p>Constructor for SVGTransformableImpl.</p>
+     *
+     * @param name a {@link String} object.
+     */
+    public SVGTransformableImpl(final String name) {
+        super(name);
+    }
+
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public SVGAnimatedTransformList getTransform() {
+        CSSStyleDeclaration style = getStyle();
+        String transformString = Strings.isNotBlank(style.getTransform()) ? style.getTransform() : this.getAttribute("transform");
+        SVGTransformList createTransformList = createTransformList(transformString);
+        return new SVGAnimatedTransformListImpl((SVGTransformListImpl) createTransformList);
+    }
+
 	/**
-	 * <p>Constructor for SVGTransformableImpl.</p>
+	 * <p>drawable.</p>
 	 *
-	 * @param name a {@link java.lang.String} object.
+	 * @param graphics a {@link java.awt.Graphics2D} object.
+	 * @param shape a {@link java.awt.Shape} object.
 	 */
-	public SVGTransformableImpl(final String name) {
-		super(name);
+	protected void drawable(final Graphics2D graphics, final Shape shape) {
+		final Paint fillPaint = getFillPaint(shape);
+		final Paint strokePaint = getStrokelPaint(shape);
+		final BasicStroke stroke = getStroke();
+		final SVGClipPathElementImpl clipPath = getClippingPath();
+		final SVGAnimatedTransformList animateTransformList = getTransform();
+		graphics.setStroke(stroke);
+
+		if (clipPath != null) {
+			final Shape clipShape = clipPath.getClippingShape(this);
+			if (clipShape != null) {
+				graphics.setClip(clipShape);
+			}
+		}
+
+		if (animateTransformList != null) {
+			final SVGTransformList transformList = animateTransformList.getBaseVal();
+			if (transformList != null) {
+				transform(graphics, transformList);
+			}
+		}
+
+		if (fillPaint == null && strokePaint == null) {
+			graphics.setPaint(Color.BLACK);
+			graphics.fill(shape);
+		}
+
+		if (fillPaint != null) {
+			graphics.setPaint(fillPaint);
+			graphics.fill(shape);
+		}
+
+		if (strokePaint != null) {
+			graphics.setPaint(strokePaint);
+			graphics.draw(shape);
+		}
+
+		super.draw(graphics);
 	}
 
-	/** {@inheritDoc} */
-	@Override
-	public SVGAnimatedTransformList getTransform() {
-		CSSStyleDeclaration style = getStyle();
-		String transformString = Strings.isNotBlank(style.getTransform()) ? style.getTransform() : this.getAttribute("transform");
-		SVGTransformList createTransformList = SVGTransformListImpl.createTransformList(transformString);
-		return new SVGAnimatedTransformListImpl((SVGTransformListImpl) createTransformList);
+	private void transform(final Graphics2D graphics, final SVGTransformList transformList) {
+		final int numPoints = transformList.getNumberOfItems();
+		for (int i = 0; i < numPoints; i++) {
+			final SVGTransform point = transformList.getItem(i);
+			final SVGMatrixImpl mtrx = (SVGMatrixImpl) point.getMatrix();
+			final AffineTransform affine = new AffineTransform();
+			switch (point.getType()) {
+				case SVGTransform.SVG_TRANSFORM_MATRIX:
+				case SVGTransform.SVG_TRANSFORM_SKEWY:
+				case SVGTransform.SVG_TRANSFORM_SKEWX:
+					affine.concatenate(new AffineTransform(mtrx.getA(), mtrx.getB(), mtrx.getC(), mtrx.getD(), mtrx.getE(), mtrx.getF()));
+					break;
+				case SVGTransform.SVG_TRANSFORM_TRANSLATE:
+					affine.translate(mtrx.getE(), mtrx.getF());
+					break;
+				case SVGTransform.SVG_TRANSFORM_SCALE:
+					affine.scale(mtrx.getA(), mtrx.getD());
+					break;
+				case SVGTransform.SVG_TRANSFORM_ROTATE:
+					affine.rotate(Math.toRadians(mtrx.getA()), mtrx.getB(), mtrx.getC());
+					break;
+				default:
+					break;
+			}
+			graphics.transform(affine);
+		}
+	}
+
+	private SVGTransformList createTransformList(final String transformStr) {
+		String transformString = transformStr;
+		final String SCALE = "scale";
+		final String TRANSLATE = "translate";
+		final String MATRIX = "matrix";
+		final String ROTATE = "rotate";
+		final String SKEW_X = "skewX";
+		final String SKEW_Y = "skewY";
+
+		if (transformString == null) {
+			return null;
+		}
+
+		transformString = transformString.trim();
+		final SVGTransformListImpl transformList = new SVGTransformListImpl();
+		final StringTokenizer st = new StringTokenizer(transformString, "()", false);
+		while (st.hasMoreTokens()) {
+			final String transformType = st.nextToken().trim();
+			if (!st.hasMoreTokens()) {
+				break;
+			}
+			final String transformArgs = st.nextToken().trim();
+			if (transformType.contains(MATRIX)) {
+				final StringTokenizer st1 = new StringTokenizer(transformArgs, ", ", false);
+				final int numArgs = st1.countTokens();
+				if (numArgs == 6) {
+					final float a = Float.parseFloat(st1.nextToken());
+					final float b = Float.parseFloat(st1.nextToken());
+					final float c = Float.parseFloat(st1.nextToken());
+					final float d = Float.parseFloat(st1.nextToken());
+					final float e = Float.parseFloat(st1.nextToken());
+					final float f = Float.parseFloat(st1.nextToken());
+					final SVGTransformImpl transform = new SVGTransformImpl(SVGTransform.SVG_TRANSFORM_MATRIX);
+					final SVGMatrixImpl matrix = new SVGMatrixImpl(a, b, c, d, e, f);
+					transform.setMatrix(matrix);
+					transformList.appendItem(transform);
+				}
+			} else if (transformType.contains(TRANSLATE)) {
+				final SVGTransformImpl transform = getSvgTransform1(transformArgs);
+				transformList.appendItem(transform);
+			} else if (transformType.contains(SCALE)) {
+				final SVGTransformImpl transform = getSvgTransform(transformArgs);
+				transformList.appendItem(transform);
+			} else if (transformType.contains(ROTATE)) {
+				final SVGTransformImpl transform = getTransform(transformArgs);
+				transformList.appendItem(transform);
+			} else if (transformType.contains(SKEW_X)) {
+				final float skewAngle = Float.parseFloat(transformArgs);
+				final SVGTransformImpl transform = new SVGTransformImpl(SVGTransform.SVG_TRANSFORM_SKEWX);
+				transform.setSkewX(skewAngle);
+				transformList.appendItem(transform);
+			} else if (transformType.contains(SKEW_Y)) {
+				final float skewAngle = Float.parseFloat(transformArgs);
+				final SVGTransformImpl transform = new SVGTransformImpl(SVGTransform.SVG_TRANSFORM_SKEWY);
+				transform.setSkewY(skewAngle);
+				transformList.appendItem(transform);
+			}
+		}
+		return transformList;
+	}
+
+	private static SVGTransformImpl getSvgTransform1(String transformArgs) {
+		final StringTokenizer st1 = new StringTokenizer(transformArgs, ", ", false);
+		final int numArgs = st1.countTokens();
+		float tx = 0;
+		float ty = 0;
+		if (numArgs == 1) {
+			tx = Float.parseFloat(st1.nextToken());
+		} else if (numArgs == 2) {
+			tx = Float.parseFloat(st1.nextToken());
+			ty = Float.parseFloat(st1.nextToken());
+		} else {
+			if (numArgs > 2) {
+				tx = Float.parseFloat(st1.nextToken());
+				ty = Float.parseFloat(st1.nextToken());
+			}
+		}
+		final SVGTransformImpl transform = new SVGTransformImpl(SVGTransform.SVG_TRANSFORM_TRANSLATE);
+		transform.setTranslate(tx, ty);
+		return transform;
+	}
+
+	private static SVGTransformImpl getTransform(String transformArgs) {
+		final StringTokenizer st1 = new StringTokenizer(transformArgs, ", ", false);
+		final int numArgs = st1.countTokens();
+		float angle = 0;
+		float cx = 0;
+		float cy = 0;
+		if (numArgs == 1) {
+			angle = Float.parseFloat(st1.nextToken());
+		} else if (numArgs == 3) {
+			angle = Float.parseFloat(st1.nextToken());
+			cx = Float.parseFloat(st1.nextToken());
+			cy = Float.parseFloat(st1.nextToken());
+		} else {
+			if (numArgs == 2) {
+				angle = Float.parseFloat(st1.nextToken());
+			} else if (numArgs > 3) {
+				angle = Float.parseFloat(st1.nextToken());
+				cx = Float.parseFloat(st1.nextToken());
+				cy = Float.parseFloat(st1.nextToken());
+			}
+		}
+		final SVGTransformImpl transform = new SVGTransformImpl(SVGTransform.SVG_TRANSFORM_ROTATE);
+		transform.setRotate(angle, cx, cy);
+		return transform;
+	}
+
+	private static SVGTransformImpl getSvgTransform(String transformArgs) {
+		final StringTokenizer st1 = new StringTokenizer(transformArgs, ", ", false);
+		final int numArgs = st1.countTokens();
+		float sx = 0;
+		float sy = 0;
+		if (numArgs == 1) {
+			sx = Float.parseFloat(st1.nextToken());
+			sy = sx;
+		} else if (numArgs == 2) {
+			sx = Float.parseFloat(st1.nextToken());
+			sy = Float.parseFloat(st1.nextToken());
+		} else {
+			if (numArgs > 2) {
+				sx = Float.parseFloat(st1.nextToken());
+				sy = Float.parseFloat(st1.nextToken());
+			}
+		}
+		final SVGTransformImpl transform = new SVGTransformImpl(SVGTransform.SVG_TRANSFORM_SCALE);
+		transform.setScale(sx, sy);
+		return transform;
 	}
 }

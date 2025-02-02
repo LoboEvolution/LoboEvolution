@@ -29,7 +29,6 @@ package org.loboevolution.svg;
 import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.StringTokenizer;
 
 /**
  * <p>SVGTransformListImpl class.</p>
@@ -144,7 +143,7 @@ public class SVGTransformListImpl implements SVGTransformList {
 	/**
 	 * <p>getAffineTransform.</p>
 	 *
-	 * @return a {@link java.awt.geom.AffineTransform} object.
+	 * @return a {@link AffineTransform} object.
 	 */
 	protected AffineTransform getAffineTransform() {
 		final int numTransforms = getNumberOfItems();
@@ -159,125 +158,5 @@ public class SVGTransformListImpl implements SVGTransformList {
 			result = result.multiply(transform.getMatrix());
 		}
 		return new AffineTransform(result.getA(), result.getB(), result.getC(), result.getD(), result.getE(), result.getF());
-	}
-
-	/**
-	 * <p>createTransformList.</p>
-	 * @param transformStr a {@link java.lang.String} object.
-	 * @return a {@link SVGTransformList} object.
-	 */
-	public static SVGTransformList createTransformList(final String transformStr) {
-		String transformString = transformStr;
-		final String SCALE = "scale";
-		final String TRANSLATE = "translate";
-		final String MATRIX = "matrix";
-		final String ROTATE = "rotate";
-		final String SKEW_X = "skewX";
-		final String SKEW_Y = "skewY";
-
-		if (transformString == null) {
-			return null;
-		}
-
-		transformString = transformString.trim();
-		final SVGTransformListImpl transformList = new SVGTransformListImpl();
-		final StringTokenizer st = new StringTokenizer(transformString, "()", false);
-		while (st.hasMoreTokens()) {
-			final String transformType = st.nextToken().trim();
-			if (!st.hasMoreTokens()) {
-				break;
-			}
-			final String transformArgs = st.nextToken().trim();
-			if (transformType.contains(MATRIX)) {
-				final StringTokenizer st1 = new StringTokenizer(transformArgs, ", ", false);
-				final int numArgs = st1.countTokens();
-				if (numArgs == 6) {
-					final float a = Float.parseFloat(st1.nextToken());
-					final float b = Float.parseFloat(st1.nextToken());
-					final float c = Float.parseFloat(st1.nextToken());
-					final float d = Float.parseFloat(st1.nextToken());
-					final float e = Float.parseFloat(st1.nextToken());
-					final float f = Float.parseFloat(st1.nextToken());
-					final SVGTransformImpl transform = new SVGTransformImpl(SVGTransform.SVG_TRANSFORM_MATRIX);
-					final SVGMatrixImpl matrix = new SVGMatrixImpl(a, b, c, d, e, f);
-					transform.setMatrix(matrix);
-					transformList.appendItem(transform);
-				}
-			} else if (transformType.contains(TRANSLATE)) {
-				final StringTokenizer st1 = new StringTokenizer(transformArgs, ", ", false);
-				final int numArgs = st1.countTokens();
-				float tx = 0;
-				float ty = 0;
-				if (numArgs == 1) {
-					tx = Float.parseFloat(st1.nextToken());
-				} else if (numArgs == 2) {
-					tx = Float.parseFloat(st1.nextToken());
-					ty = Float.parseFloat(st1.nextToken());
-				} else {
-					if (numArgs > 2) {
-						tx = Float.parseFloat(st1.nextToken());
-						ty = Float.parseFloat(st1.nextToken());
-					}
-				}
-				final SVGTransformImpl transform = new SVGTransformImpl(SVGTransform.SVG_TRANSFORM_TRANSLATE);
-				transform.setTranslate(tx, ty);
-				transformList.appendItem(transform);
-			} else if (transformType.contains(SCALE)) {
-				final StringTokenizer st1 = new StringTokenizer(transformArgs, ", ", false);
-				final int numArgs = st1.countTokens();
-				float sx = 0;
-				float sy = 0;
-				if (numArgs == 1) {
-					sx = Float.parseFloat(st1.nextToken());
-					sy = sx;
-				} else if (numArgs == 2) {
-					sx = Float.parseFloat(st1.nextToken());
-					sy = Float.parseFloat(st1.nextToken());
-				} else {
-					if (numArgs > 2) {
-						sx = Float.parseFloat(st1.nextToken());
-						sy = Float.parseFloat(st1.nextToken());
-					}
-				}
-				final SVGTransformImpl transform = new SVGTransformImpl(SVGTransform.SVG_TRANSFORM_SCALE);
-				transform.setScale(sx, sy);
-				transformList.appendItem(transform);
-			} else if (transformType.contains(ROTATE)) {
-				final StringTokenizer st1 = new StringTokenizer(transformArgs, ", ", false);
-				final int numArgs = st1.countTokens();
-				float angle = 0;
-				float cx = 0;
-				float cy = 0;
-				if (numArgs == 1) {
-					angle = Float.parseFloat(st1.nextToken());
-				} else if (numArgs == 3) {
-					angle = Float.parseFloat(st1.nextToken());
-					cx = Float.parseFloat(st1.nextToken());
-					cy = Float.parseFloat(st1.nextToken());
-				} else {
-					if (numArgs == 2) {
-						angle = Float.parseFloat(st1.nextToken());
-					} else if (numArgs > 3) {
-						angle = Float.parseFloat(st1.nextToken());
-						cx = Float.parseFloat(st1.nextToken());
-						cy = Float.parseFloat(st1.nextToken());
-					}
-				}
-				final SVGTransformImpl transform = new SVGTransformImpl(SVGTransform.SVG_TRANSFORM_ROTATE);
-				transform.setRotate(angle, cx, cy);
-				transformList.appendItem(transform);
-			} else if (transformType.contains(SKEW_X)) {
-				final float skewAngle = Float.parseFloat(transformArgs);
-				final SVGTransformImpl transform = new SVGTransformImpl(SVGTransform.SVG_TRANSFORM_SKEWX);
-				transform.setSkewX(skewAngle);
-				transformList.appendItem(transform);
-			} else if (transformType.contains(SKEW_Y)) {
-				final float skewAngle = Float.parseFloat(transformArgs);
-				final SVGTransformImpl transform = new SVGTransformImpl(SVGTransform.SVG_TRANSFORM_SKEWY);
-				transform.setSkewY(skewAngle);
-				transformList.appendItem(transform);
-			}
-		}
-		return transformList;
 	}
 }

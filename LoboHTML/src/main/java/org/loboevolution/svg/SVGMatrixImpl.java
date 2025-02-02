@@ -271,7 +271,7 @@ public class SVGMatrixImpl implements SVGMatrix {
 	/**
 	 * <p>getAffineTransform.</p>
 	 *
-	 * @return a {@link java.awt.geom.AffineTransform} object.
+	 * @return a {@link AffineTransform} object.
 	 */
 	public AffineTransform getAffineTransform() {
 		return transform;

@@ -26,59 +26,20 @@
 
 package org.loboevolution.svg;
 
+import org.loboevolution.html.dom.nodeimpl.DocumentImpl;
+import org.loboevolution.html.node.Document;
+
 /**
- * <p>SVGPathSegLinetoRelImpl class.</p>
+ * <p>SVGDocumentImpl class.</p>
  */
-public class SVGPathSegLinetoRelImpl implements SVGPathSegLinetoRel {
+public class SVGDocumentImpl extends DocumentImpl implements SVGDocument {
 
-	private float x;
+    public SVGDocumentImpl(Document doc) {
 
-	private float y;
+    }
 
-	/**
-	 * <p>Constructor for SVGPathSegLinetoRelImpl.</p>
-	 *
-	 * @param x a float.
-	 * @param y a float.
-	 */
-	public SVGPathSegLinetoRelImpl(final float x, final float y) {
-		this.x = x;
-		this.y = y;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public short getPathSegType() {
-		return PATHSEG_LINETO_REL;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public String getPathSegTypeAsLetter() {
-		return "l";
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public float getX() {
-		return x;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setX(final float x) {
-		this.x = x;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public float getY() {
-		return y;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setY(final float y) {
-		this.y = y;
-	}
+    @Override
+    public SVGSVGElement getRootElement() {
+        return (SVGSVGElement) getDocumentElement();
+    }
 }

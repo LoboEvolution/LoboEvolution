@@ -27,16 +27,16 @@
 package org.loboevolution.svg;
 
 /**
- * <p>SVGAnimateTransformElementImpl class.</p> 
+ * <p>SVGAnimateTransformElementImpl class.</p>
  */
 public class SVGAnimateTransformElementImpl extends SVGAnimateElementImpl implements SVGAnimateTransformElement {
 
-	/**
-	 * <p>Constructor for SVGAnimateTransformElementImpl.</p>
-	 *
-	 * @param name a {@link java.lang.String} object.
-	 */
-	public SVGAnimateTransformElementImpl(final String name) {
-		super(name);
-	}
+    /**
+     * <p>Constructor for SVGAnimateTransformElementImpl.</p>
+     *
+     * @param name a {@link java.lang.String} object.
+     */
+    public SVGAnimateTransformElementImpl(final String name) {
+        super(name);
+    }
 }

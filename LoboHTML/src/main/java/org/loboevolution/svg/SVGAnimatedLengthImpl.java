@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2014 - 2025 LoboEvolution
+ * Copyright (c) 2014 - 2023 LoboEvolution
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -26,34 +26,26 @@
 
 package org.loboevolution.svg;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * <p>SVGAnimatedLengthImpl class.</p>
  */
+@Getter
+@Setter
 public class SVGAnimatedLengthImpl implements SVGAnimatedLength {
 
-	private final SVGLength baseValue;
-	private final SVGLength animValue;
+    private SVGLength baseVal;
+    private SVGLength animVal;
 
-	/**
-	 * <p>Constructor for SVGAnimatedLengthImpl.</p>
-	 *
-	 * @param baseValue a {@link SVGLength} object.
-	 */
+    /**
+     * <p>Constructor for SVGAnimatedLengthImpl.</p>
+     *
+     * @param baseValue a {@link SVGLength} object.
+     */
 	public SVGAnimatedLengthImpl(final SVGLength baseValue) {
-		this.baseValue = baseValue;
-		this.animValue = baseValue;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public SVGLength getBaseVal() {
-		return this.baseValue;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public SVGLength getAnimVal() {
-		return this.animValue;
-	}
-
+        this.baseVal = baseValue;
+        this.animVal = baseValue;
+    }
 }

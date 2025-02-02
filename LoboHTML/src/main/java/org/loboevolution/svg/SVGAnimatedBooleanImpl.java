@@ -26,42 +26,41 @@
 
 package org.loboevolution.svg;
 
-import java.awt.geom.GeneralPath;
+import lombok.AllArgsConstructor;
+import lombok.Setter;
+
+import java.util.List;
+import java.util.Objects;
 
 /**
- * <p>SVGPolylineElementImpl class.</p>
+ * <p>SVGAnimatedBooleanImpl class.</p>
  */
-public class SVGPolylineElementImpl extends SVGPolygonElementImpl implements SVGPolylineElement {
+@Setter
+@AllArgsConstructor
+public class SVGAnimatedBooleanImpl extends SVGAnimatedValue implements SVGAnimatedBoolean {
 
-	/**
-	 * <p>Constructor for SVGPolylineElementImpl.</p>
-	 *
-	 * @param name a {@link java.lang.String} object.
-	 */
-	public SVGPolylineElementImpl(final String name) {
-		super(name);
+	private boolean baseVal;
+
+	@Override
+	public boolean getBaseVal() {
+		return baseVal;
 	}
 
 	@Override
-	public SVGRect getBBox() {
-		final GeneralPath shape = createShape();
-		return new SVGRectImpl(shape.getBounds2D());
-	}
-
-	private GeneralPath createShape() {
-		final GeneralPath path = new GeneralPath();
-		final SVGPointList points = getAnimatedPoints();
-		final int numPoints = points.getNumberOfItems();
-		for (int i = 0; i < numPoints; i++) {
-			final SVGPoint point = points.getItem(i);
-			final float x = point.getX();
-			final float y = point.getY();
-			if (i == 0) {
-				path.moveTo(x, y);
-			} else {
-				path.lineTo(x, y);
-			}
+	public boolean getAnimVal() {
+		List<SVGAnimationElementImpl> animations = getAnimations();
+		if (animations == null) {
+			return baseVal;
+		} else {
+			Boolean result = null;
+            for (SVGAnimationElementImpl svgAnimationElement : animations) {
+                Boolean animVal = (Boolean) svgAnimationElement.getCurrentValue(ANIMTYPE_BOOLEAN);
+                if (animVal != null) {
+                    result = animVal;
+                    break;
+                }
+            }
+            return Objects.requireNonNullElseGet(result, () -> baseVal);
 		}
-		return path;
 	}
 }

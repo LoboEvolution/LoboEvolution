@@ -40,14 +40,15 @@ public interface Drawable {
 	 *
 	 * @param graphics a {@link java.awt.Graphics2D} object.
 	 */
-	void draw(Graphics2D graphics);
+    void draw(Graphics2D graphics);
 
 	/**
 	 * <p>createShape.</p>
-	 *
-	 * @param transform a {@link java.awt.geom.AffineTransform} object.
+
 	 * @return a {@link java.awt.Shape} object.
 	 */
-	Shape createShape(AffineTransform transform);
+	default Shape createShape() {return null;}
+
+	default void animation(SVGElement transform) {}
 
 }

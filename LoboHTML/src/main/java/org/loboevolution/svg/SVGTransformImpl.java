@@ -26,91 +26,88 @@
 
 package org.loboevolution.svg;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * <p>SVGTransformImpl class.</p>
  */
-public class SVGTransformImpl implements SVGTransform {
+@Getter
+@Setter
+public class SVGTransformImpl extends SVGLocatableImpl implements SVGTransform {
 
-	private short transformType;
-	private SVGMatrix matrix;
+    protected float angle;
+    private short type;
+    private SVGMatrix matrix;
 
-	/**
-	 * <p>Constructor for SVGTransformImpl.</p>
-	 */
-	public SVGTransformImpl() {
-		this.transformType = SVGTransform.SVG_TRANSFORM_UNKNOWN;
-	}
+    /**
+     * <p>Constructor for SVGTransformImpl.</p>
+     */
+    public SVGTransformImpl() {
+        super("");
+        type = SVG_TRANSFORM_MATRIX;
+        matrix = new SVGMatrixImpl();
+        angle = 0;
+    }
 
-	/**
-	 * <p>Constructor for SVGTransformImpl.</p>
-	 *
-	 * @param transformType a short.
-	 */
-	public SVGTransformImpl(final short transformType) {
-		this.transformType = transformType;
-	}
+    /**
+     * <p>Constructor for SVGTransformImpl.</p>
+     *
+     * @param transformType a short.
+     */
+    public SVGTransformImpl(final short transformType) {
+        super("");
+        this.type = transformType;
+    }
 
-	/** {@inheritDoc} */
-	@Override
-	public short getType() {
-		return transformType;
-	}
+    @Override
+    public void setMatrix(SVGMatrix matrix) {
+        type = SVG_TRANSFORM_MATRIX;
+        this.matrix = matrix;
+        angle = 0;
+    }
 
-	/** {@inheritDoc} */
-	@Override
-	public SVGMatrix getMatrix() {
-		return matrix;
-	}
 
-	/** {@inheritDoc} */
-	@Override
-	public float getAngle() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    @Override
+    public void setTranslate(float tx, float ty) {
+        type = SVG_TRANSFORM_TRANSLATE;
+        matrix = new SVGMatrixImpl();
+        matrix = matrix.translate(tx, ty);
+        angle = 0;
+    }
 
-	/** {@inheritDoc} */
-	@Override
-	public void setMatrix(final SVGMatrix matrix) {
-		this.matrix = matrix;
+    @Override
+    public void setScale(float sx, float sy) {
+        type = SVG_TRANSFORM_SCALE;
+        matrix = new SVGMatrixImpl();
+        matrix = matrix.scaleNonUniform(sx, sy);
+        angle = 0;
+    }
 
-	}
+    @Override
+    public void setRotate(float angle, float cx, float cy) {
+        type = SVG_TRANSFORM_ROTATE;
+        matrix = new SVGMatrixImpl();
+        matrix = matrix.translate(cx, cy);
+        matrix = matrix.rotate(angle);
+        matrix = matrix.translate(-cx, -cy);
+        this.angle = angle;
+    }
 
-	/** {@inheritDoc} */
-	@Override
-	public void setTranslate(final float tx, final float ty) {
-		this.transformType = SVGTransform.SVG_TRANSFORM_TRANSLATE;
-		this.matrix = new SVGMatrixImpl(1, 0, 0, 1, tx, ty);
 
-	}
+    @Override
+    public void setSkewX(float angle) {
+        type = SVG_TRANSFORM_SKEWX;
+        matrix = new SVGMatrixImpl();
+        matrix = matrix.skewX(angle);
+        this.angle = angle;
+    }
 
-	/** {@inheritDoc} */
-	@Override
-	public void setScale(final float sx, final float sy) {
-		this.transformType = SVGTransform.SVG_TRANSFORM_SCALE;
-		this.matrix = new SVGMatrixImpl(sx, 0.0f, 0.0f, sy, 0.0f, 0.0f);
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setRotate(final float angle, final float cx, final float cy) {
-		this.transformType = SVGTransform.SVG_TRANSFORM_ROTATE;
-		this.matrix = new SVGMatrixImpl(angle, cx, cy, 0.0f, 0.0f, 0.0f);
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setSkewX(final float angle) {
-		this.transformType = SVGTransform.SVG_TRANSFORM_SKEWX;
-		this.matrix = new SVGMatrixImpl(1.0f, 0.0f, (float) Math.tan(angle), 1.0f, 0.0f, 0.0f);
-
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setSkewY(final float angle) {
-		this.transformType = SVGTransform.SVG_TRANSFORM_SKEWY;
-		this.matrix = new SVGMatrixImpl(1.0f, (float) Math.tan(angle), 0.0f, 1.0f, 0.0f, 0.0f);
-
-	}
+    @Override
+    public void setSkewY(float angle) {
+        type = SVG_TRANSFORM_SKEWY;
+        matrix = new SVGMatrixImpl();
+        matrix = matrix.skewY(angle);
+        this.angle = angle;
+    }
 }

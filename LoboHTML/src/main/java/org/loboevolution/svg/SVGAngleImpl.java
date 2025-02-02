@@ -26,9 +26,12 @@
 
 package org.loboevolution.svg;
 
+import lombok.Getter;
+
 /**
  * <p>SVGAngleImpl class.</p>
  */
+@Getter
 public class SVGAngleImpl implements SVGAngle {
 
 	private short unitType;
@@ -62,19 +65,6 @@ public class SVGAngleImpl implements SVGAngle {
 		setCSSText(valueAndUnit);
 	}
 
-
-	/** {@inheritDoc} */
-	@Override
-	public short getUnitType() {
-		return unitType;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public float getValue() {
-		return value;
-	}
-
 	/** {@inheritDoc} */
 	@Override
 	public void setValue(final float value) {
@@ -86,22 +76,10 @@ public class SVGAngleImpl implements SVGAngle {
 
 	/** {@inheritDoc} */
 	@Override
-	public float getValueInSpecifiedUnits() {
-		return valueInSpecifiedUnits;
-	}
-
-	/** {@inheritDoc} */
-	@Override
 	public void setValueInSpecifiedUnits(final float valueInSpecifiedUnits) {
 		this.valueInSpecifiedUnits = valueInSpecifiedUnits;
 		valueAsString = String.valueOf(valueInSpecifiedUnits);
 		value = convertToDegrees(valueInSpecifiedUnits, unitType);
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public String getValueAsString() {
-		return valueAsString;
 	}
 
 	/** {@inheritDoc} */

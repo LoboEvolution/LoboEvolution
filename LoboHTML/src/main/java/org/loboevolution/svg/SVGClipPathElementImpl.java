@@ -26,6 +26,7 @@
 
 package org.loboevolution.svg;
 
+import org.loboevolution.SVGAnimatedTransformListImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
@@ -36,13 +37,13 @@ import java.awt.geom.*;
 /**
  * <p>SVGClipPathElementImpl class.</p>
  */
-public class SVGClipPathElementImpl extends SVGGraphic implements SVGClipPathElement {
+public class SVGClipPathElementImpl extends SVGTransformableImpl implements SVGClipPathElement {
 	
 	
 	/**
 	 * <p>Constructor for SVGClipPathElementImpl.</p>
 	 *
-	 * @param name a {@link java.lang.String} object.
+	 * @param name a {@link String} object.
 	 */
 	public SVGClipPathElementImpl(final String name) {
 		super(name);
@@ -65,7 +66,7 @@ public class SVGClipPathElementImpl extends SVGGraphic implements SVGClipPathEle
 	 * <p>getClippingShape.</p>
 	 *
 	 * @param clippedElement a {@link SVGElement} object.
-	 * @return a {@link java.awt.Shape} object.
+	 * @return a {@link Shape} object.
 	 */
 	protected Shape getClippingShape(final SVGElement clippedElement) {
 		Area clipArea = null;
@@ -81,19 +82,18 @@ public class SVGClipPathElementImpl extends SVGGraphic implements SVGClipPathEle
 							final String id = href.substring(index + 1).trim();
 							final Element ref = (Element) child(id);
 							if (ref != null) {
-								final Shape childShape = ((Drawable) ref).createShape(clipTransform);
+								final Shape childShape = ((Drawable) ref).createShape();
 
 								if (childShape != null) {
-									final AffineTransform childAffineTransform = clipTransform;
-									if (ref instanceof SVGTransformable) {
+                                    if (ref instanceof SVGTransformable) {
 										final SVGTransformListImpl childTransform = ( SVGTransformListImpl) ((SVGTransformable) ref).getTransform().getAnimVal();
 										if (childTransform != null) {
-											childAffineTransform.concatenate(childTransform.getAffineTransform());
+											clipTransform.concatenate(childTransform.getAffineTransform());
 										}
 									}
 
 									final GeneralPath path = new GeneralPath(childShape);
-									path.transform(childAffineTransform);
+									path.transform(clipTransform);
 									final String clipRule = ((SVGStylableImpl) child).getClipRule();
 									final SVGClipPathElementImpl clipPath = ((SVGStylableImpl) child).getClippingPath();
 
@@ -121,10 +121,10 @@ public class SVGClipPathElementImpl extends SVGGraphic implements SVGClipPathEle
 						}
 					}
 				} else if (child instanceof Drawable) {
-					final Shape childShape = ((Drawable) child).createShape(clipTransform);
+					final Shape childShape = ((Drawable) child).createShape();
 					if (childShape != null) {
 						if (child instanceof SVGTransformable) {
-							final SVGAnimatedTransformListImpl childTransform = ( SVGAnimatedTransformListImpl) ((SVGTransformable) child)
+							final SVGAnimatedTransformListImpl childTransform = (SVGAnimatedTransformListImpl) ((SVGTransformable) child)
 									.getTransform();
 							if (childTransform != null) {
 								clipTransform.concatenate(

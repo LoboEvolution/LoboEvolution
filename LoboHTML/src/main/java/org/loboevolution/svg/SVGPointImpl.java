@@ -26,12 +26,19 @@
 
 package org.loboevolution.svg;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 
 /**
  * <p>SVGPointImpl class.</p>
  */
+@Getter
+@Setter
+@AllArgsConstructor
 public class SVGPointImpl implements SVGPoint {
 
 	private float x;
@@ -49,46 +56,11 @@ public class SVGPointImpl implements SVGPoint {
 	/**
 	 * <p>Constructor for SVGPointImpl.</p>
 	 *
-	 * @param x a float.
-	 * @param y a float.
-	 */
-	public SVGPointImpl(final float x, final float y) {
-		this.x = x;
-		this.y = y;
-	}
-
-	/**
-	 * <p>Constructor for SVGPointImpl.</p>
-	 *
 	 * @param point a {@link SVGPoint} object.
 	 */
 	public SVGPointImpl(final SVGPoint point) {
 		x = point.getX();
 		y = point.getY();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public float getX() {
-		return x;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setX(final float x) {
-		this.x = x;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public float getY() {
-		return y;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setY(final float y) {
-		this.y = y;
 	}
 
 	/** {@inheritDoc} */

@@ -39,6 +39,8 @@ import java.io.Serial;
  * <p>Abstract BaseControl class.</p>
  */
 public abstract class BaseControl extends JComponent implements UIControl {
+
+	/** The Constant serialVersionUID. */
 	@Serial
     private static final long serialVersionUID = 1L;
 	protected final HTMLElementImpl controlElement;

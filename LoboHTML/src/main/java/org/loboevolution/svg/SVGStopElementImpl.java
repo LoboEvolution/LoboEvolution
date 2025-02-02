@@ -34,7 +34,7 @@ public class SVGStopElementImpl extends SVGStylableImpl implements SVGStopElemen
 	/**
 	 * <p>Constructor for SVGStopElementImpl.</p>
 	 *
-	 * @param name a {@link java.lang.String} object.
+	 * @param name a {@link String} object.
 	 */
 	public SVGStopElementImpl(final String name) {
 		super(name);

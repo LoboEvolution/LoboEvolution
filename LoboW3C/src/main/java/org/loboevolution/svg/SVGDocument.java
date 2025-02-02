@@ -25,10 +25,12 @@
  */
 package org.loboevolution.svg;
 
+import org.loboevolution.html.node.Document;
+
 /**
  * <p>SVGDocument interface.</p>
  */
-public interface SVGDocument {
+public interface SVGDocument extends Document {
 
 	/**
 	 * <p>getTitle.</p>

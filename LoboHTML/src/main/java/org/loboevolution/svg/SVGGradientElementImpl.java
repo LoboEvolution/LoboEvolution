@@ -43,7 +43,7 @@ public class SVGGradientElementImpl extends SVGStylableImpl implements SVGGradie
 	/**
 	 * <p>Constructor for SVGGradientElementImpl.</p>
 	 *
-	 * @param name a {@link java.lang.String} object.
+	 * @param name a {@link String} object.
 	 */
 	public SVGGradientElementImpl(final String name) {
 		super(name);
@@ -83,9 +83,9 @@ public class SVGGradientElementImpl extends SVGStylableImpl implements SVGGradie
 	/**
 	 * <p>gradient.</p>
 	 *
-	 * @param gradient a {@link org.loboevolution.html.node.Element} object.
-	 * @param shape2d a {@link java.awt.Shape} object.
-	 * @return a {@link java.awt.Paint} object.
+	 * @param gradient a {@link Element} object.
+	 * @param shape2d a {@link Shape} object.
+	 * @return a {@link Paint} object.
 	 */
 	public Paint gradient(final Element gradient, final Shape shape2d) {
 		if (gradient instanceof SVGRadialGradientElementImpl radial) {

@@ -476,7 +476,6 @@ public abstract class HTMLElementBuilder {
 			return new SVGSVGElementImpl(name);
 		}		
 	}
-
 	public static final class SVGAnimateTrasform extends HTMLElementBuilder {
 		@Override
 		protected HTMLElementImpl build(final String name) {
@@ -490,123 +489,10 @@ public abstract class HTMLElementBuilder {
 			return new SVGAnimateElementImpl(name);
 		}
 	}
-
-	public static final class SVGStop extends HTMLElementBuilder {
-		@Override
-		protected HTMLElementImpl build(final String name) {
-			return new SVGStopElementImpl(name);
-		}
-	}
-
-	public static final class SVGClipPath extends HTMLElementBuilder {
-		@Override
-		protected HTMLElementImpl build(final String name) {
-			return new SVGClipPathElementImpl(name);
-		}
-	}
-
-	public static final class SVGLinearGradient extends HTMLElementBuilder {
-		@Override
-		protected HTMLElementImpl build(final String name) {
-			return new SVGLinearGradientElementImpl(name);
-		}
-	}
-
-	public static final class SVGRadialGradient extends HTMLElementBuilder {
-		@Override
-		protected HTMLElementImpl build(final String name) {
-			return new SVGRadialGradientElementImpl(name);
-		}
-	}
-
-	public static final class SVGSymbol extends HTMLElementBuilder {
-		@Override
-		protected HTMLElementImpl build(final String name) {
-			return new SVGSymbolElementImpl(name);
-		}
-	}
-
-	public static final class SVGText extends HTMLElementBuilder {
-		@Override
-		protected HTMLElementImpl build(final String name) {
-			return new SVGTextElementImpl(name);
-		}
-	}
-
-	public static final class SVGUse extends HTMLElementBuilder {
-		@Override
-		protected HTMLElementImpl build(final String name) {
-			return new SVGUseElementImpl(name);
-		}
-	}
-
-	public static final class SVGG extends HTMLElementBuilder {
-		@Override
-		protected HTMLElementImpl build(final String name) {
-			return new SVGGElementImpl(name);
-		}
-	}
-
-	public static final class SVGDefs extends HTMLElementBuilder {
-		@Override
-		protected HTMLElementImpl build(final String name) {
-			return new SVGDefsElementImpl(name);
-		}
-	}
-
 	public static final class SVGRect extends HTMLElementBuilder {
 		@Override
 		protected HTMLElementImpl build(final String name) {
 			return new SVGRectElementImpl(name);
-		}
-	}
-	
-	public static final class SVGCircle extends HTMLElementBuilder {
-		@Override
-		protected HTMLElementImpl build(final String name) {
-			return new SVGCircleElementImpl(name);
-		}
-	}
-	
-	public static final class SVGEllipse extends HTMLElementBuilder {
-		@Override
-		protected HTMLElementImpl build(final String name) {
-			return new SVGEllipseElementImpl(name);
-		}
-	}
-	
-	public static final class SVGLine extends HTMLElementBuilder {
-		@Override
-		protected HTMLElementImpl build(final String name) {
-			return new SVGLineElementImpl(name);
-		}
-	}
-	
-	public static final class SVGPolyline extends HTMLElementBuilder {
-		@Override
-		protected HTMLElementImpl build(final String name) {
-			return new SVGPolylineElementImpl(name);
-		}
-	}
-
-	public static final class SVGPolygon extends HTMLElementBuilder {
-		@Override
-		protected HTMLElementImpl build(final String name) {
-			return new SVGPolygonElementImpl(name);
-		}
-	}
-	
-	public static final class SVGPath extends HTMLElementBuilder {
-		@Override
-		protected HTMLElementImpl build(final String name) {
-			return new SVGPathElementImpl(name);
-		}
-	}
-	
-	public static final class SVGImage extends HTMLElementBuilder {
-		@Override
-		protected HTMLElementImpl build(final String name) {
-			return new SVGImageElementImpl(name);
 		}
 	}
 	

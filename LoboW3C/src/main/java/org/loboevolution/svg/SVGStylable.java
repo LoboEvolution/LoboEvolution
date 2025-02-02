@@ -25,7 +25,7 @@
  */
 package org.loboevolution.svg;
 
-import org.htmlunit.cssparser.util.CSSProperties;
+import org.loboevolution.css.CSSStyleDeclaration;
 
 /**
  * <p>SVGStylable interface.</p>
@@ -35,7 +35,7 @@ public interface SVGStylable {
 	/**
 	 * <p>getStyle.</p>
 	 *
-	 * @return a {@link CSSProperties} object.
+	 * @return a {@link CSSStyleDeclaration} object.
 	 */
-	CSSProperties getStyle();
+	CSSStyleDeclaration getStyle();
 }

@@ -26,9 +26,14 @@
 
 package org.loboevolution.svg;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * <p>SVGNumberImpl class.</p>
  */
+@Getter
+@Setter
 public class SVGNumberImpl implements SVGNumber {
 
 	private float value;
@@ -43,7 +48,7 @@ public class SVGNumberImpl implements SVGNumber {
 	/**
 	 * <p>Constructor for SVGNumberImpl.</p>
 	 *
-	 * @param value a {@link java.lang.Float} object.
+	 * @param value a {@link Float} object.
 	 */
 	public SVGNumberImpl(final float value) {
 		this.value = value;
@@ -52,21 +57,9 @@ public class SVGNumberImpl implements SVGNumber {
 	/**
 	 * <p>Constructor for SVGNumberImpl.</p>
 	 *
-	 * @param strValue a {@link java.lang.String} object.
+	 * @param strValue a {@link String} object.
 	 */
 	public SVGNumberImpl(final String strValue) {
 		this.value = Float.parseFloat(strValue);
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public float getValue() {
-		return value;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setValue(final float value) {
-		this.value = value;
 	}
 }

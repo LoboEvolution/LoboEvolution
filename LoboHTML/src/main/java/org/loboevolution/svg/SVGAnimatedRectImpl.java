@@ -27,36 +27,22 @@
 package org.loboevolution.svg;
 
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * <p>SVGAnimatedRectImpl class.</p>
  */
+@Getter
+@Setter
+@AllArgsConstructor
 public class SVGAnimatedRectImpl implements SVGAnimatedRect {
 
 	private SVGRect baseVal;
 
-	/**
-	 * <p>Constructor for SVGAnimatedRectImpl.</p>
-	 *
-	 * @param baseVal a {@link SVGRect} object.
-	 */
-	public SVGAnimatedRectImpl(final SVGRect baseVal) {
-		this.baseVal = baseVal;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public SVGRect getBaseVal() {
-		return baseVal;
-	}
-
-	void setBaseVal(final SVGRect baseVal) {
-		this.baseVal = baseVal;
-	}
-
-	/** {@inheritDoc} */
 	@Override
 	public SVGRect getAnimVal() {
 		return baseVal;
 	}
-
 }

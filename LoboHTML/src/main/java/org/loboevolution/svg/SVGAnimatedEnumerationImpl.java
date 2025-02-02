@@ -27,33 +27,19 @@
 package org.loboevolution.svg;
 
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * <p>SVGAnimatedEnumerationImpl class.</p>
  */
+@Getter
+@Setter
+@AllArgsConstructor
 public class SVGAnimatedEnumerationImpl implements SVGAnimatedEnumeration {
 
 	private short baseVal;
-
-	/**
-	 * <p>Constructor for SVGAnimatedEnumerationImpl.</p>
-	 *
-	 * @param baseVal a short.
-	 */
-	public SVGAnimatedEnumerationImpl(final short baseVal) {
-		this.baseVal = baseVal;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public short getBaseVal() {
-		return baseVal;
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setBaseVal(final short baseVal) {
-		this.baseVal = baseVal;
-	}
 
 	/** {@inheritDoc} */
 	@Override

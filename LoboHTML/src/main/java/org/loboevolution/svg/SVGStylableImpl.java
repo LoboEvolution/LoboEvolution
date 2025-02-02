@@ -54,7 +54,7 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	/**
 	 * <p>Constructor for SVGStylableImpl.</p>
 	 *
-	 * @param name a {@link java.lang.String} object.
+	 * @param name a {@link String} object.
 	 */
 	public SVGStylableImpl(final String name) {
 		super(name);
@@ -64,8 +64,8 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	/**
 	 * <p>getFillPaint.</p>
 	 *
-	 * @param shape a {@link java.awt.Shape} object.
-	 * @return a {@link java.awt.Paint} object.
+	 * @param shape a {@link Shape} object.
+	 * @return a {@link Paint} object.
 	 */
 	public Paint getFillPaint(final Shape shape) {
 		final CSSStyleDeclaration style = getStyle();
@@ -94,8 +94,8 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	/**
 	 * <p>getStrokelPaint.</p>
 	 *
-	 * @param shape a {@link java.awt.Shape} object.
-	 * @return a {@link java.awt.Paint} object.
+	 * @param shape a {@link Shape} object.
+	 * @return a {@link Paint} object.
 	 */
 	public Paint getStrokelPaint(final Shape shape) {
 		final CSSStyleDeclaration style = getStyle();
@@ -124,7 +124,7 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	/**
 	 * <p>getStrokeLineCap.</p>
 	 *
-	 * @return a {@link java.lang.Integer} object.
+	 * @return a {@link Integer} object.
 	 */
 	public int getStrokeLineCap() {
 		final CSSStyleDeclaration style = getStyle();
@@ -142,7 +142,7 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	/**
 	 * <p>getStrokeLinejoin.</p>
 	 *
-	 * @return a {@link java.lang.Integer} object.
+	 * @return a {@link Integer} object.
 	 */
 	public int getStrokeLinejoin() {
 		final CSSStyleDeclaration style = getStyle();
@@ -159,7 +159,7 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	/**
 	 * <p>getStrokeWidth.</p>
 	 *
-	 * @return a {@link java.lang.Integer} object.
+	 * @return a {@link Integer} object.
 	 */
 	public int getStrokeWidth() {
 		final CSSStyleDeclaration style = getStyle();
@@ -176,7 +176,7 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	/**
 	 * <p>getStrokeMiterlimit.</p>
 	 *
-	 * @return a {@link java.lang.Integer} object.
+	 * @return a {@link Integer} object.
 	 */
 	public int getStrokeMiterlimit() {
 		final CSSStyleDeclaration style = getStyle();
@@ -280,7 +280,7 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	/**
 	 * <p>getClipRule.</p>
 	 *
-	 * @return a {@link java.lang.String} object.
+	 * @return a {@link String} object.
 	 */
 	public String getClipRule() {
 		final CSSStyleDeclaration style = getStyle();
@@ -295,7 +295,7 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	/**
 	 * <p>getStopColor.</p>
 	 *
-	 * @return a {@link java.awt.Color} object.
+	 * @return a {@link Color} object.
 	 */
 	public Color getStopColor() {
 		final CSSStyleDeclaration style = getStyle();
@@ -310,7 +310,7 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	/**
 	 * <p>getStopOpacity.</p>
 	 *
-	 * @return a {@link java.lang.String} object.
+	 * @return a {@link String} object.
 	 */
 	public String getStopOpacity() {
 		final CSSStyleDeclaration style = getStyle();
@@ -325,7 +325,7 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	/**
 	 * <p>getTextAnchor.</p>
 	 *
-	 * @return a {@link java.lang.String} object.
+	 * @return a {@link String} object.
 	 */
 	public String getTextAnchor() {
 		return getAttribute("text-anchor");
@@ -334,7 +334,7 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	/**
 	 * <p>getFont.</p>
 	 *
-	 * @return a {@link java.awt.Font} object.
+	 * @return a {@link Font} object.
 	 */
 	public Font getFont() {
 		final CSSStyleDeclaration style = getStyle();
@@ -440,7 +440,7 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	/**
 	 * <p>getStroke.</p>
 	 *
-	 * @return a {@link java.awt.BasicStroke} object.
+	 * @return a {@link BasicStroke} object.
 	 */
 	public BasicStroke getStroke() {
 		final int strokeWidth = getStrokeWidth();
@@ -459,8 +459,8 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	/**
 	 * <p>child.</p>
 	 *
-	 * @param elementId a {@link java.lang.String} object.
-	 * @return a {@link org.loboevolution.html.node.Node} object.
+	 * @param elementId a {@link String} object.
+	 * @return a {@link Node} object.
 	 */
 	protected Node child(final String elementId) {
 		final SVGElement ownerSVGElement = getOwnerSVGElement();
@@ -500,11 +500,11 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	/**
 	 * <p>drawStyle.</p>
 	 *
-	 * @param node a {@link org.loboevolution.html.node.Node} object.
+	 * @param node a {@link Node} object.
 	 */
 	protected void drawStyle(final Node node) {
 		final CSSStyleDeclaration style = getStyle();
-		final SVGElement child = ( SVGElement) node;
+		final SVGElement child = (SVGElement) node;
 
 		final String fill = Strings.isNotBlank(style.getFill()) ? style.getFill() : getAttribute("fill");
 		if (Strings.isNotBlank(fill)) {

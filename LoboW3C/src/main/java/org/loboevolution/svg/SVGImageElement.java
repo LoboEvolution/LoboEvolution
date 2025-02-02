@@ -28,8 +28,9 @@ package org.loboevolution.svg;
 /**
  * <p>SVGImageElement interface.</p> 
  */
-public interface SVGImageElement extends SVGElement, SVGURIReference, SVGTests, SVGLangSpace,
-		SVGExternalResourcesRequired, SVGStylable, SVGTransformable, Drawable {
+public interface SVGImageElement
+		extends SVGURIReference, SVGTests, SVGLangSpace, SVGExternalResourcesRequired, SVGStylable, SVGTransformable {
+
 	/**
 	 * <p>getX.</p>
 	 *

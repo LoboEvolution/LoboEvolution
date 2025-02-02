@@ -38,12 +38,12 @@ import java.awt.geom.NoninvertibleTransformException;
 /**
  * <p>SVGImageElementImpl class.</p>
  */
-public class SVGImageElementImpl extends SVGGraphic implements SVGImageElement {
+public class SVGImageElementImpl extends SVGTransformableImpl implements SVGImageElement {
 
 	/**
 	 * <p>Constructor for SVGImageElementImpl.</p>
 	 *
-	 * @param name a {@link java.lang.String} object.
+	 * @param name a {@link String} object.
 	 */
 	public SVGImageElementImpl(final String name) {
 		super(name);
@@ -97,11 +97,9 @@ public class SVGImageElementImpl extends SVGGraphic implements SVGImageElement {
 		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute("height")));
 	}
 
-	/** {@inheritDoc} */
 	@Override
 	public SVGAnimatedPreserveAspectRatio getPreserveAspectRatio() {
-		// TODO Auto-generated method stub
-		return null;
+		return new SVGAnimatedPreserveAspectRatioImpl(new SVGPreserveAspectRatioImpl(), this);
 	}
 
 	/** {@inheritDoc} */
@@ -123,11 +121,5 @@ public class SVGImageElementImpl extends SVGGraphic implements SVGImageElement {
 		final HtmlRendererContext htmlRendererContext = this.getHtmlRendererContext();
 		final HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
 		htmlPanel.getBrowserPanel().getTimingList.add(info);
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Shape createShape(final AffineTransform transform) {
-		return null;
 	}
 }

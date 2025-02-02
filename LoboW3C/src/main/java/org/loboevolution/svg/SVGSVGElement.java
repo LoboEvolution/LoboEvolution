@@ -146,18 +146,18 @@ public interface SVGSVGElement extends SVGElement, SVGTests, SVGLangSpace, SVGEx
 	/**
 	 * <p>suspendRedraw.</p>
 	 *
-	 * @param max_wait_milliseconds a {@link java.lang.Integer} object.
+	 * @param maxWaitMilliseconds a {@link java.lang.Integer} object.
 	 * @return a {@link java.lang.Integer} object.
 	 */
-	int suspendRedraw(int max_wait_milliseconds);
+	long suspendRedraw(long maxWaitMilliseconds);
 
 	/**
 	 * <p>unsuspendRedraw.</p>
 	 *
-	 * @param suspend_handle_id a {@link java.lang.Integer} object.
+	 * @param suspendHandleID a {@link java.lang.Long} object.
 	 * @throws DOMException if any.
 	 */
-	void unsuspendRedraw(int suspend_handle_id);
+	void unsuspendRedraw(long suspendHandleID);
 
 	/**
 	 * <p>unsuspendRedrawAll.</p>

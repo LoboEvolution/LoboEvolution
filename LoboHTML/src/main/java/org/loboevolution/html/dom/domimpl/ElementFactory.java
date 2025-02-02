@@ -153,7 +153,9 @@ public class ElementFactory {
 
 		builders.put(HTMLTag.SVG, new HTMLElementBuilder.SVG());
 		builders.put(HTMLTag.RECT, new HTMLElementBuilder.SVGRect());
-		builders.put(HTMLTag.CIRCLE, new HTMLElementBuilder.SVGCircle());
+		builders.put(HTMLTag.ANIMATE, new HTMLElementBuilder.SVGAnimate());
+		builders.put(HTMLTag.ANIMATE_TRASFORM, new HTMLElementBuilder.SVGAnimateTrasform());
+		/*builders.put(HTMLTag.CIRCLE, new HTMLElementBuilder.SVGCircle());
 		builders.put(HTMLTag.ELLIPSE, new HTMLElementBuilder.SVGEllipse());
 		builders.put(HTMLTag.LINE, new HTMLElementBuilder.SVGLine());
 		builders.put(HTMLTag.POLYGON, new HTMLElementBuilder.SVGPolygon());
@@ -167,10 +169,8 @@ public class ElementFactory {
 		builders.put(HTMLTag.RADIAL_GRADIENT, new HTMLElementBuilder.SVGRadialGradient());
 		builders.put(HTMLTag.LINEAR_GRADIENT, new HTMLElementBuilder.SVGLinearGradient());
 		builders.put(HTMLTag.STOP, new HTMLElementBuilder.SVGStop());
-		builders.put(HTMLTag.CLIPPATH, new HTMLElementBuilder.SVGClipPath());
-		builders.put(HTMLTag.ANIMATE, new HTMLElementBuilder.SVGAnimate());
-		builders.put(HTMLTag.ANIMATE_TRASFORM, new HTMLElementBuilder.SVGAnimateTrasform());
-		builders.put(HTMLTag.IMAGE, new HTMLElementBuilder.SVGImage());
+		builders.put(HTMLTag.CLIPPATH, new HTMLElementBuilder.SVGClipPath());	
+		builders.put(HTMLTag.IMAGE, new HTMLElementBuilder.SVGImage());*/
 		builders.put(HTMLTag.LINK, new HTMLElementBuilder.Link());
 		builders.put(HTMLTag.LEGEND, new HTMLElementBuilder.Legend());
 		builders.put(HTMLTag.VIDEO, new HTMLElementBuilder.Video());

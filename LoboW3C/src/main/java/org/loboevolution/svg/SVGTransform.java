@@ -28,87 +28,103 @@ package org.loboevolution.svg;
 /**
  * <p>SVGTransform interface.</p>
  */
-public interface SVGTransform {
-	// Transform Types
-	/** Constant SVG_TRANSFORM_UNKNOWN=0 */
+public interface SVGTransform extends SVGLocatable {
+    /**
+     * Constant SVG_TRANSFORM_UNKNOWN=0
+     */
     short SVG_TRANSFORM_UNKNOWN = 0;
-	/** Constant SVG_TRANSFORM_MATRIX=1 */
+    /**
+     * Constant SVG_TRANSFORM_MATRIX=1
+     */
     short SVG_TRANSFORM_MATRIX = 1;
-	/** Constant SVG_TRANSFORM_TRANSLATE=2 */
+    /**
+     * Constant SVG_TRANSFORM_TRANSLATE=2
+     */
     short SVG_TRANSFORM_TRANSLATE = 2;
-	/** Constant SVG_TRANSFORM_SCALE=3 */
+    /**
+     * Constant SVG_TRANSFORM_SCALE=3
+     */
     short SVG_TRANSFORM_SCALE = 3;
-	/** Constant SVG_TRANSFORM_ROTATE=4 */
+    /**
+     * Constant SVG_TRANSFORM_ROTATE=4
+     */
     short SVG_TRANSFORM_ROTATE = 4;
-	/** Constant SVG_TRANSFORM_SKEWX=5 */
+    /**
+     * Constant SVG_TRANSFORM_SKEWX=5
+     */
     short SVG_TRANSFORM_SKEWX = 5;
-	/** Constant SVG_TRANSFORM_SKEWY=6 */
+    /**
+     * Constant SVG_TRANSFORM_SKEWY=6
+     */
     short SVG_TRANSFORM_SKEWY = 6;
 
-	/**
-	 * <p>getType.</p>
-	 *
-	 * @return a short.
-	 */
-	short getType();
+    /**
+     * <p>getType.</p>
+     *
+     * @return a short.
+     */
+    short getType();
 
-	/**
-	 * <p>getMatrix.</p>
-	 *
-	 * @return a {@link SVGMatrix} object.
-	 */
-	SVGMatrix getMatrix();
+    /**
+     * <p>getMatrix.</p>
+     *
+     * @return a {@link SVGMatrix} object.
+     */
+    SVGMatrix getMatrix();
 
-	/**
-	 * <p>getAngle.</p>
-	 *
-	 * @return a float.
-	 */
-	float getAngle();
+    /**
+     * <p>setMatrix.</p>
+     *
+     * @param matrix a {@link SVGMatrix} object.
+     */
+    void setMatrix(SVGMatrix matrix);
 
-	/**
-	 * <p>setMatrix.</p>
-	 *
-	 * @param matrix a {@link SVGMatrix} object.
-	 */
-	void setMatrix(SVGMatrix matrix);
+    /**
+     * <p>getAngle.</p>
+     *
+     * @return a float.
+     */
+    float getAngle();
 
-	/**
-	 * <p>setTranslate.</p>
-	 *
-	 * @param tx a float.
-	 * @param ty a float.
-	 */
-	void setTranslate(float tx, float ty);
+    /**
+     * Sets the transform type to SVG_TRANSFORM_TRANSLATE, with parameters tx
+     * and ty defining the translation amounts.
+     *
+     * @param tx The translation amount in X.
+     * @param ty The translation amount in Y.
+     */
+    void setTranslate(float tx, float ty);
 
-	/**
-	 * <p>setScale.</p>
-	 *
-	 * @param sx a float.
-	 * @param sy a float.
-	 */
-	void setScale(float sx, float sy);
+    /**
+     * Sets the transform type to SVG_TRANSFORM_SCALE, with parameters sx and sy
+     * defining the scale amounts.
+     *
+     * @param sx The scale factor in X.
+     * @param sy The scale factor in Y.
+     */
+    void setScale(float sx, float sy);
 
-	/**
-	 * <p>setRotate.</p>
-	 *
-	 * @param angle a float.
-	 * @param cx a float.
-	 * @param cy a float.
-	 */
-	void setRotate(float angle, float cx, float cy);
+    /**
+     * Sets the transform type to SVG_TRANSFORM_ROTATE, with parameter angle
+     * defining the rotation angle.
+     *
+     * @param angle The rotation angle.
+     */
+    void setRotate(float angle, float cx, float cy);
 
-	/**
-	 * <p>setSkewX.</p>
-	 *
-	 * @param angle a float.
-	 */
-	void setSkewX(float angle);
+    /**
+     * Sets the transform type to SVG_TRANSFORM_SKEWX, with parameter angle
+     * defining the amount of skew.
+     *
+     * @param angle The skew angle.
+     */
+    void setSkewX(float angle);
 
-	/**
-	 * <p>setSkewY.</p>
-	 *
-	 * @param angle a float.
-	 */
-	void setSkewY(float angle);
+    /**
+     * Sets the transform type to SVG_TRANSFORM_SKEWY, with parameter angle
+     * defining the amount of skew.
+     *
+     * @param angle The skew angle.
+     */
+    void setSkewY(float angle);
 }

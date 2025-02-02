@@ -28,109 +28,84 @@ package org.loboevolution.svg;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
-import java.awt.geom.NoninvertibleTransformException;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.RoundRectangle2D;
 
-/**
- * <p>SVGRectElementImpl class.</p>
- */
-public class SVGRectElementImpl extends SVGGraphic implements SVGRectElement {
+public class SVGRectElementImpl extends SVGTransformableImpl implements SVGRectElement {
 
-	/**
-	 * <p>Constructor for SVGRectElementImpl.</p>
-	 *
-	 * @param name a {@link java.lang.String} object.
-	 */
-	public SVGRectElementImpl(final String name) {
-		super(name);
-	}
+    /**
+     * <p>Constructor for SVGRectElementImpl.</p>
+     *
+     * @param name a {@link String} object.
+     */
+    public SVGRectElementImpl(String name) {
+        super(name);
+    }
 
-	@Override
-	public SVGRect getBBox() {
-		final Shape shape = createShape(null);
-		return new SVGRectImpl(shape.getBounds2D());
-	}
+    @Override
+    public void draw(Graphics2D graphics) {
+        final Shape shape = createShape();
+        drawable(graphics, shape);
+    }
 
-	/** {@inheritDoc} */
-	@Override
-	public SVGAnimatedLength getX() {
-		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute("x")));
-	}
+    @Override
+    public Shape createShape() {
 
-	/** {@inheritDoc} */
-	@Override
-	public SVGAnimatedLength getY() {
-		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute("y")));
-	}
+        AffineTransform inverseTransform;
+        try {
+            final SVGMatrix ctm = getCTM();
+            inverseTransform = ctm.getAffineTransform().createInverse();
+        } catch (Exception e) {
+            inverseTransform = null;
+        }
+        float x = ((SVGLengthImpl) getX().getAnimVal()).getTransformedLength(inverseTransform);
+        float y = ((SVGLengthImpl) getY().getAnimVal()).getTransformedLength(inverseTransform);
+        float rx = ((SVGLengthImpl) getRx().getAnimVal()).getTransformedLength(inverseTransform);
+        float ry = ((SVGLengthImpl) getRy().getAnimVal()).getTransformedLength(inverseTransform);
+        float width = ((SVGLengthImpl) getWidth().getAnimVal()).getTransformedLength(inverseTransform);
+        float height = ((SVGLengthImpl) getHeight().getAnimVal()).getTransformedLength(inverseTransform);
 
-	/** {@inheritDoc} */
-	@Override
-	public SVGAnimatedLength getRx() {
-		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute("rx")));
-	}
+        Shape rect;
+        if (rx > 0 || ry > 0) {
+            if (rx > 0 && ry == 0) {
+                ry = rx;
+            } else if (rx == 0 && ry > 0) {
+                rx = ry;
+            }
+            rect = new RoundRectangle2D.Float(x, y, width, height, rx * 2, ry * 2);
+        } else {
+            rect = new Rectangle2D.Float(x, y, width, height);
+        }
+        return rect;
+    }
 
-	/** {@inheritDoc} */
-	@Override
-	public SVGAnimatedLength getRy() {
-		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute("ry")));
-	}
+    @Override
+    public SVGAnimatedLength getX() {
+        return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute("x")));
+    }
 
-	/** {@inheritDoc} */
-	@Override
-	public SVGAnimatedLength getWidth() {
-		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute("width")));
-	}
+    @Override
+    public SVGAnimatedLength getY() {
+        return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute("y")));
+    }
 
-	/** {@inheritDoc} */
-	@Override
-	public SVGAnimatedLength getHeight() {
-		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute("height")));
-	}
+    @Override
+    public SVGAnimatedLength getWidth() {
+        return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute("width")));
+    }
 
-	/** {@inheritDoc} */
-	@Override
-	public void draw(final Graphics2D graphics) {
-		final SVGMatrix ctm = getCTM();
-		final Shape shape = createShape(ctm.getAffineTransform());
-		animate(this);
-		drawable(graphics, shape);
-	}
+    @Override
+    public SVGAnimatedLength getHeight() {
+        return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute("height")));
+    }
 
-	/** {@inheritDoc} */
-	@Override
-	public Shape createShape(final AffineTransform transform) {
+    @Override
+    public SVGAnimatedLength getRx() {
+        return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute("rx")));
+    }
 
-		AffineTransform inverseTransform;
-		try {
-			inverseTransform = transform.createInverse();
-		} catch (NoninvertibleTransformException e) {
-			inverseTransform = null;
-		}
-		float x = ((SVGLengthImpl) getX().getAnimVal()).getTransformedLength(inverseTransform);
-		float y = ((SVGLengthImpl) getY().getAnimVal()).getTransformedLength(inverseTransform);
-		float rx = ((SVGLengthImpl) getRx().getAnimVal()).getTransformedLength(inverseTransform);
-		float ry = ((SVGLengthImpl) getRy().getAnimVal()).getTransformedLength(inverseTransform);
-		float width = ((SVGLengthImpl) getWidth().getAnimVal()).getTransformedLength(inverseTransform);
-		float height = ((SVGLengthImpl) getHeight().getAnimVal()).getTransformedLength(inverseTransform);
-
-		Shape rect;
-		if (rx > 0 || ry > 0) {
-			if (rx > 0 && ry == 0) {
-				ry = rx;
-			} else if (rx == 0 && ry > 0) {
-				rx = ry;
-			}
-			rect = new RoundRectangle2D.Float(x, y, width, height, rx * 2, ry * 2);
-		} else {
-			rect = new Rectangle2D.Float(x, y, width, height);
-		}
-		return rect;
-	}
-	
-	/** {@inheritDoc} */
-	@Override
-	public String toString() {
-		return "[object SVGRectElement]";
-	}
+    @Override
+    public SVGAnimatedLength getRy() {
+        return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute("ry")));
+    }
 }

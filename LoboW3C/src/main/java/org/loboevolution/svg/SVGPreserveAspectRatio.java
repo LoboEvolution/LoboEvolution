@@ -33,64 +33,92 @@ import org.htmlunit.cssparser.dom.DOMException;
  * <p>SVGPreserveAspectRatio interface.</p>
  */
 public interface SVGPreserveAspectRatio {
-	// Alignment Types
-	/** Constant SVG_PRESERVEASPECTRATIO_UNKNOWN=0 */
+
+    /**
+     * Constant SVG_PRESERVEASPECTRATIO_UNKNOWN=0
+     */
     short SVG_PRESERVEASPECTRATIO_UNKNOWN = 0;
-	/** Constant SVG_PRESERVEASPECTRATIO_NONE=1 */
+    /**
+     * Constant SVG_PRESERVEASPECTRATIO_NONE=1
+     */
     short SVG_PRESERVEASPECTRATIO_NONE = 1;
-	/** Constant SVG_PRESERVEASPECTRATIO_XMINYMIN=2 */
+    /**
+     * Constant SVG_PRESERVEASPECTRATIO_XMINYMIN=2
+     */
     short SVG_PRESERVEASPECTRATIO_XMINYMIN = 2;
-	/** Constant SVG_PRESERVEASPECTRATIO_XMIDYMIN=3 */
+    /**
+     * Constant SVG_PRESERVEASPECTRATIO_XMIDYMIN=3
+     */
     short SVG_PRESERVEASPECTRATIO_XMIDYMIN = 3;
-	/** Constant SVG_PRESERVEASPECTRATIO_XMAXYMIN=4 */
+    /**
+     * Constant SVG_PRESERVEASPECTRATIO_XMAXYMIN=4
+     */
     short SVG_PRESERVEASPECTRATIO_XMAXYMIN = 4;
-	/** Constant SVG_PRESERVEASPECTRATIO_XMINYMID=5 */
+    /**
+     * Constant SVG_PRESERVEASPECTRATIO_XMINYMID=5
+     */
     short SVG_PRESERVEASPECTRATIO_XMINYMID = 5;
-	/** Constant SVG_PRESERVEASPECTRATIO_XMIDYMID=6 */
+    /**
+     * Constant SVG_PRESERVEASPECTRATIO_XMIDYMID=6
+     */
     short SVG_PRESERVEASPECTRATIO_XMIDYMID = 6;
-	/** Constant SVG_PRESERVEASPECTRATIO_XMAXYMID=7 */
+    /**
+     * Constant SVG_PRESERVEASPECTRATIO_XMAXYMID=7
+     */
     short SVG_PRESERVEASPECTRATIO_XMAXYMID = 7;
-	/** Constant SVG_PRESERVEASPECTRATIO_XMINYMAX=8 */
+    /**
+     * Constant SVG_PRESERVEASPECTRATIO_XMINYMAX=8
+     */
     short SVG_PRESERVEASPECTRATIO_XMINYMAX = 8;
-	/** Constant SVG_PRESERVEASPECTRATIO_XMIDYMAX=9 */
+    /**
+     * Constant SVG_PRESERVEASPECTRATIO_XMIDYMAX=9
+     */
     short SVG_PRESERVEASPECTRATIO_XMIDYMAX = 9;
-	/** Constant SVG_PRESERVEASPECTRATIO_XMAXYMAX=10 */
+    /**
+     * Constant SVG_PRESERVEASPECTRATIO_XMAXYMAX=10
+     */
     short SVG_PRESERVEASPECTRATIO_XMAXYMAX = 10;
-	// Meet-or-slice Types
-	/** Constant SVG_MEETORSLICE_UNKNOWN=0 */
+    // Meet-or-slice Types
+    /**
+     * Constant SVG_MEETORSLICE_UNKNOWN=0
+     */
     short SVG_MEETORSLICE_UNKNOWN = 0;
-	/** Constant SVG_MEETORSLICE_MEET=1 */
+    /**
+     * Constant SVG_MEETORSLICE_MEET=1
+     */
     short SVG_MEETORSLICE_MEET = 1;
-	/** Constant SVG_MEETORSLICE_SLICE=2 */
+    /**
+     * Constant SVG_MEETORSLICE_SLICE=2
+     */
     short SVG_MEETORSLICE_SLICE = 2;
 
-	/**
-	 * <p>getAlign.</p>
-	 *
-	 * @return a short.
-	 */
-	short getAlign();
+    /**
+     * <p>getAlign.</p>
+     *
+     * @return a short.
+     */
+    short getAlign();
 
-	/**
-	 * <p>setAlign.</p>
-	 *
-	 * @param align a short.
-	 * @throws DOMException if any.
-	 */
-	void setAlign(short align);
+    /**
+     * <p>setAlign.</p>
+     *
+     * @param align a short.
+     * @throws DOMException if any.
+     */
+    void setAlign(short align);
 
-	/**
-	 * <p>getMeetOrSlice.</p>
-	 *
-	 * @return a short.
-	 */
-	short getMeetOrSlice();
+    /**
+     * <p>getMeetOrSlice.</p>
+     *
+     * @return a short.
+     */
+    short getMeetOrSlice();
 
-	/**
-	 * <p>setMeetOrSlice.</p>
-	 *
-	 * @param meetOrSlice a short.
-	 * @throws DOMException if any.
-	 */
-	void setMeetOrSlice(short meetOrSlice);
+    /**
+     * <p>setMeetOrSlice.</p>
+     *
+     * @param meetOrSlice a short.
+     * @throws DOMException if any.
+     */
+    void setMeetOrSlice(short meetOrSlice);
 }

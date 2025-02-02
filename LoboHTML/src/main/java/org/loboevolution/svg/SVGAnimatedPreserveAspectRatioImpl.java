@@ -26,6 +26,8 @@
 
 package org.loboevolution.svg;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.htmlunit.cssparser.dom.DOMException;
 
 import java.util.List;
@@ -33,21 +35,14 @@ import java.util.List;
 /**
  * <p>SVGAnimatedPreserveAspectRatioImpl class.</p>
  */
+@Getter
+@Setter
 public class SVGAnimatedPreserveAspectRatioImpl extends SVGAnimatedValue implements SVGAnimatedPreserveAspectRatio {
 
     private SVGPreserveAspectRatio baseVal;
 
     public SVGAnimatedPreserveAspectRatioImpl(final SVGPreserveAspectRatio baseVal, final SVGElementImpl owner) {
         this.setOwner(owner);
-        this.baseVal = baseVal;
-    }
-
-    @Override
-    public SVGPreserveAspectRatio getBaseVal() {
-        return baseVal;
-    }
-
-    void setBaseVal(final SVGPreserveAspectRatio baseVal) throws DOMException {
         this.baseVal = baseVal;
     }
 
