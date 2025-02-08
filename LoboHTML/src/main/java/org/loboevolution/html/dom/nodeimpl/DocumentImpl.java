@@ -35,6 +35,7 @@ import org.loboevolution.common.ArrayUtilities;
 import org.loboevolution.common.Nodes;
 import org.loboevolution.common.Strings;
 import org.loboevolution.config.HtmlRendererConfig;
+import org.loboevolution.events.DocumentEvent;
 import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.HTMLTag;
@@ -75,7 +76,7 @@ import java.util.stream.Stream;
 /**
  * <p>DocumentImpl class.</p>
  */
-public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
+public class DocumentImpl extends NodeImpl implements Document, DocumentEvent, XPathEvaluator {
 
 	private boolean strictErrorChecking = true;
 

@@ -24,28 +24,19 @@
  * Contact info: ivan.difrancesco@yahoo.it
  */
 
-package org.loboevolution;
+package org.loboevolution.svg;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import org.loboevolution.svg.SVGAnimatedTransformList;
-import org.loboevolution.svg.SVGTransformList;
-import org.loboevolution.svg.SVGTransformListImpl;
+import java.io.Serial;
 
 /**
- * <p>SVGAnimatedTransformListImpl class.</p>
+ * SVGExceptionImpl class
  */
-@Getter
-@Setter
-@AllArgsConstructor
-public class SVGAnimatedTransformListImpl implements SVGAnimatedTransformList {
+public class SVGExceptionImpl extends SVGException {
 
-	private final SVGTransformListImpl baseVal;
+	@Serial
+	private static final long serialVersionUID = 1L;
 
-	/** {@inheritDoc} */
-	@Override
-	public SVGTransformList getAnimVal() {
-		return baseVal;
+	public SVGExceptionImpl(short code, String message) {
+		super(code, message);
 	}
 }

@@ -28,6 +28,7 @@ package org.loboevolution.html.js.xml;
 
 import lombok.extern.slf4j.Slf4j;
 import org.htmlunit.cssparser.dom.DOMException;
+import org.loboevolution.events.DocumentEvent;
 import org.loboevolution.html.dom.*;
 import org.loboevolution.html.dom.nodeimpl.traversal.TreeWalkerImpl;
 import org.loboevolution.html.node.*;
@@ -57,7 +58,7 @@ import java.nio.file.Files;
  * XMLDocument class.
  */
 @Slf4j
-public class XMLDocument implements Document {
+public class XMLDocument implements Document{
 
 	private static Document doc;
 
@@ -1000,13 +1001,6 @@ public class XMLDocument implements Document {
 	public Element createElementNS(final String namespace, final String qualifiedName, final String options) {
 
 		return doc.createElementNS(namespace, qualifiedName, options);
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public Event createEvent(final String eventInterface) {
-
-		return doc.createEvent(eventInterface);
 	}
 
 	/** {@inheritDoc} */

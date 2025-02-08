@@ -63,7 +63,7 @@ public abstract class SVGLocatableImpl extends SVGStylableImpl implements SVGLoc
 	/** {@inheritDoc} */
 	@Override
 	public SVGMatrix getCTM() {
-		SVGMatrix thisMatrix = new SVGMatrixImpl();
+		SVGMatrix thisMatrix = new SVGMatrixImpl(null);
 		if (this instanceof SVGTransformable) {
 			SVGTransformList transofrm = ((SVGTransformable) this).getTransform().getAnimVal();
 			if (transofrm != null) {
@@ -135,14 +135,8 @@ public abstract class SVGLocatableImpl extends SVGStylableImpl implements SVGLoc
 			}
 		}
 
-		SVGMatrix screenCTMMatrix = new SVGMatrixImpl();
-		screenCTMMatrix.setA((float) screenCTM.getScaleX());
-		screenCTMMatrix.setB((float) screenCTM.getShearY());
-		screenCTMMatrix.setC((float) screenCTM.getShearX());
-		screenCTMMatrix.setD((float) screenCTM.getScaleY());
-		screenCTMMatrix.setE((float) screenCTM.getTranslateX());
-		screenCTMMatrix.setF((float) screenCTM.getTranslateY());
-		return screenCTMMatrix;
+		return new SVGMatrixImpl((float) screenCTM.getScaleX(), (float) screenCTM.getShearY(), (float) screenCTM.getShearX(),
+				(float) screenCTM.getScaleY(), (float) screenCTM.getTranslateX(), (float) screenCTM.getTranslateY());
 	}
 
 	/** {@inheritDoc} */

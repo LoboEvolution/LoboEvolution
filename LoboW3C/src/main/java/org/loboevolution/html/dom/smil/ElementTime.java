@@ -126,17 +126,17 @@ public interface ElementTime {
 	 * @exception DOMException
 	 *                NO_MODIFICATION_ALLOWED_ERR: Raised if this attribute is
 	 *                readonly.
-	 * @return a {@link java.lang.String} object.
+     * @return a short.
 	 */
-	String getFill();
+    short getFill();
 
 	/**
 	 * <p>setFill.</p>
 	 *
-	 * @param fill a {@link java.lang.String} object.
+	 * @param fill a short. object.
 	 * @throws DOMException if any.
 	 */
-	void setFill(String fill) throws DOMException;
+	void setFill(short fill) throws DOMException;
 
 	/**
 	 * The repeatCount attribute causes the element to play repeatedly (loop)

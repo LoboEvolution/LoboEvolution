@@ -928,11 +928,6 @@ public class DTMNodeProxy
         throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
     }
 
-    @Override
-    public Event createEvent(final String eventInterface) {
-        return null;
-    }
-
     /**
      * {@inheritDoc}
      */

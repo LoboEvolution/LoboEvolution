@@ -187,10 +187,6 @@ public interface SVGMatrix {
 	 * @param y a float.
 	 * @return a {@link SVGMatrix} object.
 	 * @throws SVGException if any.
-	 * @throws SVGException if any.
-	 * @throws SVGException if any.
-	 * @throws SVGException if any.
-	 * @throws SVGException if any.
 	 */
 	SVGMatrix rotateFromVector(float x, float y) throws SVGException;
 

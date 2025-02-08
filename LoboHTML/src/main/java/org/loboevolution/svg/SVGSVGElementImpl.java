@@ -303,7 +303,7 @@ public class SVGSVGElementImpl extends SVGElementImpl implements SVGSVGElement, 
 
     @Override
     public SVGMatrix createSVGMatrix() {
-        return new SVGMatrixImpl();
+        return new SVGMatrixImpl(null);
     }
 
     @Override

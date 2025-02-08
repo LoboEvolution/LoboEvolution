@@ -24,28 +24,14 @@
  * Contact info: ivan.difrancesco@yahoo.it
  */
 
-package org.loboevolution;
+package org.loboevolution.events;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import org.loboevolution.svg.SVGAnimatedTransformList;
-import org.loboevolution.svg.SVGTransformList;
-import org.loboevolution.svg.SVGTransformListImpl;
-
-/**
- * <p>SVGAnimatedTransformListImpl class.</p>
- */
-@Getter
-@Setter
-@AllArgsConstructor
-public class SVGAnimatedTransformListImpl implements SVGAnimatedTransformList {
-
-	private final SVGTransformListImpl baseVal;
-
-	/** {@inheritDoc} */
-	@Override
-	public SVGTransformList getAnimVal() {
-		return baseVal;
-	}
+public interface DocumentEvent {
+    /**
+     * <p>createEvent.</p>
+     *
+     * @param eventInterface a {@link java.lang.String} object.
+     * @return a {@link Event} object.
+     */
+    Event createEvent(String eventInterface);
 }

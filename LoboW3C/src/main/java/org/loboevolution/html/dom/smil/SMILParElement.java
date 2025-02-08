@@ -24,28 +24,8 @@
  * Contact info: ivan.difrancesco@yahoo.it
  */
 
-package org.loboevolution;
+package org.loboevolution.html.dom.smil;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import org.loboevolution.svg.SVGAnimatedTransformList;
-import org.loboevolution.svg.SVGTransformList;
-import org.loboevolution.svg.SVGTransformListImpl;
+public interface SMILParElement extends ElementParallelTimeContainer, SMILElement {
 
-/**
- * <p>SVGAnimatedTransformListImpl class.</p>
- */
-@Getter
-@Setter
-@AllArgsConstructor
-public class SVGAnimatedTransformListImpl implements SVGAnimatedTransformList {
-
-	private final SVGTransformListImpl baseVal;
-
-	/** {@inheritDoc} */
-	@Override
-	public SVGTransformList getAnimVal() {
-		return baseVal;
-	}
 }

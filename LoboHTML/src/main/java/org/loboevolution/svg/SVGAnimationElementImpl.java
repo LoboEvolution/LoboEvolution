@@ -30,28 +30,47 @@ import lombok.extern.slf4j.Slf4j;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.HTMLElement;
+import org.loboevolution.html.dom.smil.SMILAnimationImpl;
 
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
-import java.util.concurrent.atomic.AtomicInteger;
+
+import static org.loboevolution.svg.SVGTransform.*;
 
 /**
  * <p>SVGAnimationElementImpl class.</p>
  */
 @Slf4j
-public abstract class SVGAnimationElementImpl extends SVGElementImpl implements SVGAnimationElement {
+public abstract class SVGAnimationElementImpl extends SMILAnimationImpl implements SVGAnimationElement {
 
     public List<Float> times = null;
     public List<String> vals = null;
     public List<SVGPathSegCurvetoCubicAbsImpl> splines = null;
 
+    private int counter;
     private boolean started = false;
     private boolean active = false;
     protected boolean finished = false;
     private float startTime;
     private float endTime;
+    private float sxFrom = 0;
+    private float sxTo = 0;
+    private float syFrom = 0;
+    private float syTo = 0;
+    private float txFrom = 0;
+    private  float tyFrom = 0;
+    private float txTo = 0;
+    float tyTo = 0;
+    private float angleFrom = 0;
+    private float cxFrom = 0;
+    private float cyFrom = 0;
+    private float angleTo = 0;
+    private  float cxTo = 0;
+    private float cyTo = 0;
+    private long dur;
+    private Timer timer;
 
 
     /**
@@ -69,7 +88,37 @@ public abstract class SVGAnimationElementImpl extends SVGElementImpl implements 
     @Override
     public void animation(SVGElement transform) {
         if (!started) {
-            setTimer();
+            dur = System.currentTimeMillis();
+            HTMLElement parentElement = getParentElement();
+            timer = new Timer((int) getDuration(), e -> {
+                final String attribute = getAttribute("attributeName").toLowerCase();
+                switch (attribute) {
+                    case "width":
+                    case "height":
+                    case "x":
+                    case "y":
+                    case "cx":
+                    case "cy":
+                    case "x1":
+                    case "x2":
+                    case "y1":
+                    case "y2":
+                    case "r":
+                        //   animateSize(elem, attribute);
+                        break;
+                    case "fill":
+                    case "stroke":
+                        // animateColor(elem);
+                        break;
+                    case "transform":
+                        animateTransform(parentElement);
+                        break;
+                    default:
+                        break;
+                }
+            });
+            timer.start();
+            started = true;
         }
     }
 
@@ -126,7 +175,7 @@ public abstract class SVGAnimationElementImpl extends SVGElementImpl implements 
     }
 
     // returns begin time in seconds
-    float getBeginTime() {
+    private float getBeginTime() {
         final String beginTime = getAttribute("begin");
         if (!beginTime.equalsIgnoreCase("indefinite") && !beginTime.isEmpty()) {
             return getClockSecs(beginTime);
@@ -136,7 +185,7 @@ public abstract class SVGAnimationElementImpl extends SVGElementImpl implements 
     }
 
     // returns the duration time in secs, will be -1 if indefinite
-    float getDuration() {
+    private float getDuration() {
         final String duration = getAttribute("dur");
         if (duration.equalsIgnoreCase("indefinite") || duration.isEmpty()) {
             return -1;
@@ -151,7 +200,7 @@ public abstract class SVGAnimationElementImpl extends SVGElementImpl implements 
     }
 
     // returns the end time in secs, will be -1 if indefinite
-    float getEndTime() {
+    protected float getEndTime() {
         final String endTime = getAttribute("end");
         if (endTime.equalsIgnoreCase("indefinite") || endTime.isEmpty()) {
             return -1;
@@ -341,15 +390,161 @@ public abstract class SVGAnimationElementImpl extends SVGElementImpl implements 
         return bezierSeg.getYAt(percent, new SVGPointImpl(0, 0));
     }
 
-    private void setTimer() {
-        HTMLElement parentElement = getParentElement();
-        AtomicInteger i = new AtomicInteger(100);
-        Timer timer = new Timer(10, e -> {
-            parentElement.setAttribute("width", String.valueOf(i.getAndIncrement()));
-            parentElement.setAttribute("height", String.valueOf(i.getAndIncrement()));
-        });
-        timer.start();
-        started = true;
+    private void animateTransform(final HTMLElement elem) {
+        String transformString = "";
+        String fromTrans = "";
+        String toTrans = "";
+
+        if (counter == 0) {
+            fromTrans = getFrom();
+            toTrans = getTo();
+        }
+
+        final StringTokenizer stFrom = new StringTokenizer(fromTrans, " ,");
+        final StringTokenizer stTo = new StringTokenizer(toTrans, " ,");
+
+        switch (getType()) {
+            case SVG_TRANSFORM_TRANSLATE:
+
+                if (stFrom.countTokens() == 1) {
+                    txFrom = Float.parseFloat(stFrom.nextToken());
+                } else if (stFrom.countTokens() == 2) {
+                    txFrom = Float.parseFloat(stFrom.nextToken());
+                    tyFrom = Float.parseFloat(stFrom.nextToken());
+                }
+
+                if (stTo.countTokens() == 1) {
+                    txTo = Float.parseFloat(stTo.nextToken());
+                } else if (stTo.countTokens() == 2) {
+                    txTo = Float.parseFloat(stTo.nextToken());
+                    tyTo = Float.parseFloat(stTo.nextToken());
+                }
+
+                if (txFrom > txTo)
+                    txFrom--;
+
+                if (txFrom < txTo)
+                    txFrom++;
+
+                if (tyFrom > tyTo)
+                    tyFrom--;
+
+                if (tyFrom < tyTo)
+                    tyFrom++;
+
+                fromTrans = txFrom + ", " + tyFrom;
+                transformString = "translate(" + fromTrans + ")";
+                break;
+            case SVG_TRANSFORM_SCALE:
+                if (stFrom.countTokens() == 1) {
+                    sxFrom = Float.parseFloat(stFrom.nextToken());
+                } else if (stFrom.countTokens() == 2) {
+                    sxFrom = Float.parseFloat(stFrom.nextToken());
+                    syFrom = Float.parseFloat(stFrom.nextToken());
+                }
+
+                if (stTo.countTokens() == 1) {
+                    sxTo = Float.parseFloat(stTo.nextToken());
+                } else if (stTo.countTokens() == 2) {
+                    sxTo = Float.parseFloat(stTo.nextToken());
+                    syTo = Float.parseFloat(stTo.nextToken());
+                }
+
+                if (sxFrom > sxTo)
+                    sxFrom--;
+
+                if (sxFrom < sxTo)
+                    sxFrom++;
+
+                if (syFrom > syTo)
+                    syFrom--;
+
+                if (syFrom < syTo)
+                    syFrom++;
+
+                if (syFrom == 0) {
+                    toTrans = String.valueOf(Float.parseFloat(toTrans));
+                } else {
+                    fromTrans = sxFrom + ", " + syFrom;
+                }
+
+                transformString = "scale(" + fromTrans + ")";
+                break;
+            case SVG_TRANSFORM_ROTATE:
+
+                if (stFrom.countTokens() == 1) {
+                    angleFrom = Float.parseFloat(stFrom.nextToken());
+                } else if (stFrom.countTokens() == 3) {
+                    angleFrom = Float.parseFloat(stFrom.nextToken());
+                    cxFrom = Float.parseFloat(stFrom.nextToken());
+                    cyFrom = Float.parseFloat(stFrom.nextToken());
+                }
+
+                if (stTo.countTokens() == 1) {
+                    angleTo = Float.parseFloat(stTo.nextToken());
+                } else if (stTo.countTokens() == 3) {
+                    angleTo = Float.parseFloat(stTo.nextToken());
+                    cxTo = Float.parseFloat(stTo.nextToken());
+                    cyTo = Float.parseFloat(stTo.nextToken());
+                }
+
+                if (angleFrom > angleTo)
+                    angleFrom--;
+
+                if (angleFrom < angleTo)
+                    angleFrom++;
+
+                if (cxFrom > cxTo)
+                    cxFrom--;
+
+                if (cxFrom < cxTo)
+                    cxFrom++;
+
+                if (cyFrom > cyTo)
+                    cyFrom--;
+
+                if (cyFrom < cyTo)
+                    cyFrom++;
+
+                fromTrans = angleFrom + ", " + cxFrom + ", " + cyFrom;
+                transformString = "rotate(" + fromTrans + ")";
+                break;
+            case SVG_TRANSFORM_SKEWX:
+
+                sxFrom = Float.parseFloat(fromTrans);
+                sxTo = Float.parseFloat(toTrans);
+
+                if (sxFrom > sxTo)
+                    sxFrom--;
+
+                if (sxFrom < sxTo)
+                    sxFrom++;
+
+                transformString = "skewX(" + sxFrom + ")";
+                break;
+            case SVG_TRANSFORM_SKEWY:
+
+                sxFrom = Float.parseFloat(fromTrans);
+                sxTo = Float.parseFloat(toTrans);
+
+                if (sxFrom > sxTo)
+                    sxFrom--;
+
+                if (sxFrom < sxTo)
+                    sxFrom++;
+                transformString = "skewY(" + sxFrom + ")";
+                break;
+            default:
+                break;
+        }
+
+        System.out.println("elem " + elem.getNodeName());
+
+        elem.setAttribute("transform", transformString);
+        if (getDur() > 0 && getDur() <= (System.currentTimeMillis() - dur)) {
+            timer.stop();
+        }
+        counter++;
     }
 }
 

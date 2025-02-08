@@ -61,7 +61,6 @@ public class SVGElementImpl extends HTMLElementImpl implements SVGElement, SVGSt
                 if (node instanceof Drawable child) {
                     final SVGElement selem = (SVGElement) node;
                     selem.setOwnerSVGElement(getOwnerSVGElement());
-                    System.out.println(selem.getClass());
                     if (selem instanceof SVGAnimateTransformElement) {
                         child.animation(selem);
                     }

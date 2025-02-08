@@ -28,6 +28,7 @@ package org.loboevolution.svg;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.w3c.dom.DOMException;
 
 /**
  * <p>SVGTransformImpl class.</p>
@@ -36,78 +37,63 @@ import lombok.Setter;
 @Setter
 public class SVGTransformImpl extends SVGLocatableImpl implements SVGTransform {
 
-    protected float angle;
-    private short type;
+    private short type = SVG_TRANSFORM_UNKNOWN;
     private SVGMatrix matrix;
+    private float angle;
+    public float[] rotateValues;
 
     /**
      * <p>Constructor for SVGTransformImpl.</p>
      */
     public SVGTransformImpl() {
         super("");
-        type = SVG_TRANSFORM_MATRIX;
-        matrix = new SVGMatrixImpl();
-        angle = 0;
-    }
-
-    /**
-     * <p>Constructor for SVGTransformImpl.</p>
-     *
-     * @param transformType a short.
-     */
-    public SVGTransformImpl(final short transformType) {
-        super("");
-        this.type = transformType;
     }
 
     @Override
-    public void setMatrix(SVGMatrix matrix) {
-        type = SVG_TRANSFORM_MATRIX;
+    public void setMatrix(SVGMatrix matrix) throws DOMException {
         this.matrix = matrix;
+        type = SVG_TRANSFORM_MATRIX;
         angle = 0;
     }
 
-
     @Override
-    public void setTranslate(float tx, float ty) {
-        type = SVG_TRANSFORM_TRANSLATE;
-        matrix = new SVGMatrixImpl();
+    public void setTranslate(float tx, float ty) throws DOMException {
+        this.matrix = new SVGMatrixImpl(1, 0, 0, 1, tx, ty);
         matrix = matrix.translate(tx, ty);
+        type = SVG_TRANSFORM_TRANSLATE;
         angle = 0;
     }
 
     @Override
-    public void setScale(float sx, float sy) {
+    public void setScale(float sx, float sy) throws DOMException {
+        this.matrix = new SVGMatrixImpl(sx, 0, 0, sy, 0, 0);
+        this.matrix = matrix.scaleNonUniform(sx, sy);
         type = SVG_TRANSFORM_SCALE;
-        matrix = new SVGMatrixImpl();
-        matrix = matrix.scaleNonUniform(sx, sy);
         angle = 0;
     }
 
     @Override
-    public void setRotate(float angle, float cx, float cy) {
+    public void setRotate(float angle, float cx, float cy) throws DOMException {
+        this.matrix = new SVGMatrixImpl(1, 0, 0, 1, 0, 0);
+        this.matrix = matrix.translate(cx, cy);
+        this.matrix = matrix.rotate(angle);
+        this.matrix = matrix.translate(-cx, -cy);
         type = SVG_TRANSFORM_ROTATE;
-        matrix = new SVGMatrixImpl();
-        matrix = matrix.translate(cx, cy);
-        matrix = matrix.rotate(angle);
-        matrix = matrix.translate(-cx, -cy);
         this.angle = angle;
+        rotateValues = new float[] { angle, cx, cy };
     }
 
-
     @Override
-    public void setSkewX(float angle) {
+    public void setSkewX(float angle) throws DOMException {
+        this.matrix = new SVGMatrixImpl(1, 0, (float) Math.tan(angle), 1, 0, 0);
         type = SVG_TRANSFORM_SKEWX;
-        matrix = new SVGMatrixImpl();
-        matrix = matrix.skewX(angle);
         this.angle = angle;
     }
 
     @Override
-    public void setSkewY(float angle) {
+    public void setSkewY(float angle) throws DOMException {
+        this.matrix = new SVGMatrixImpl(1, (float) Math.tan(angle), 0, 1, 0, 0);
         type = SVG_TRANSFORM_SKEWY;
-        matrix = new SVGMatrixImpl();
-        matrix = matrix.skewY(angle);
         this.angle = angle;
     }
 }

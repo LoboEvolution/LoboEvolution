@@ -564,14 +564,6 @@ public interface Document extends Node, NonElementParentNode, ParentNode, Docume
 	Element createElementNS(String namespace, String qualifiedName);
 
 	/**
-	 * <p>createEvent.</p>
-	 *
-	 * @param eventInterface a {@link java.lang.String} object.
-	 * @return a {@link Event} object.
-	 */
-	Event createEvent(String eventInterface);
-
-	/**
 	 * Returns a ProcessingInstruction node whose target is target and data is data.
 	 * If target does not match the Name production an "InvalidCharacterError"
 	 * DOMException will be thrown. If data contains "?&gt;" an

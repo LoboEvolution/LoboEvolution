@@ -24,28 +24,33 @@
  * Contact info: ivan.difrancesco@yahoo.it
  */
 
-package org.loboevolution;
+package org.loboevolution.html.dom.smil;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import org.loboevolution.svg.SVGAnimatedTransformList;
-import org.loboevolution.svg.SVGTransformList;
-import org.loboevolution.svg.SVGTransformListImpl;
+import java.util.ArrayList;
 
 /**
- * <p>SVGAnimatedTransformListImpl class.</p>
+ * <p>TimeListImpl class.</p>
  */
-@Getter
-@Setter
-@AllArgsConstructor
-public class SVGAnimatedTransformListImpl implements SVGAnimatedTransformList {
+public class TimeListImpl implements TimeList {
 
-	private final SVGTransformListImpl baseVal;
+    private final ArrayList<Time> mTimes;
 
-	/** {@inheritDoc} */
-	@Override
-	public SVGTransformList getAnimVal() {
-		return baseVal;
-	}
+    TimeListImpl(ArrayList<Time> times) {
+        mTimes = times;
+    }
+
+    public int getLength() {
+        return mTimes.size();
+    }
+
+    public Time item(int index) {
+        Time time = null;
+        try {
+            time = mTimes.get(index);
+        } catch (IndexOutOfBoundsException e) {
+            // Do nothing and return null
+        }
+        return time;
+    }
+
 }
