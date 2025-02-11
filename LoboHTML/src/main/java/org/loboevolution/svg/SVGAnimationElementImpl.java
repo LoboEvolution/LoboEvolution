@@ -436,39 +436,25 @@ public abstract class SVGAnimationElementImpl extends SMILAnimationImpl implemen
                 transformString = "translate(" + fromTrans + ")";
                 break;
             case SVG_TRANSFORM_SCALE:
-                if (stFrom.countTokens() == 1) {
+
+                if (stFrom.countTokens() == 1 || stFrom.countTokens() == 2) {
                     sxFrom = Float.parseFloat(stFrom.nextToken());
-                } else if (stFrom.countTokens() == 2) {
-                    sxFrom = Float.parseFloat(stFrom.nextToken());
-                    syFrom = Float.parseFloat(stFrom.nextToken());
                 }
 
-                if (stTo.countTokens() == 1) {
+                if (stTo.countTokens() == 1 || stTo.countTokens() == 2) {
                     sxTo = Float.parseFloat(stTo.nextToken());
-                } else if (stTo.countTokens() == 2) {
-                    sxTo = Float.parseFloat(stTo.nextToken());
-                    syTo = Float.parseFloat(stTo.nextToken());
                 }
 
-                if (sxFrom > sxTo)
-                    sxFrom--;
+                long currentTime = System.currentTimeMillis();
+                double elapsedTime = (currentTime - dur) / 1000.0;
 
-                if (sxFrom < sxTo)
-                    sxFrom++;
-
-                if (syFrom > syTo)
-                    syFrom--;
-
-                if (syFrom < syTo)
-                    syFrom++;
-
-                if (syFrom == 0) {
-                    toTrans = String.valueOf(Float.parseFloat(toTrans));
-                } else {
-                    fromTrans = sxFrom + ", " + syFrom;
+                if (elapsedTime > getDuration()) {
+                    elapsedTime = getDuration();
                 }
 
-                transformString = "scale(" + fromTrans + ")";
+                double scale = sxFrom + (elapsedTime / getDuration()) * (sxTo - sxFrom);
+                transformString = "scale(" + scale + ", " + scale + ")";
+
                 break;
             case SVG_TRANSFORM_ROTATE:
 
@@ -537,9 +523,6 @@ public abstract class SVGAnimationElementImpl extends SMILAnimationImpl implemen
             default:
                 break;
         }
-
-        System.out.println("elem " + elem.getNodeName());
-
         elem.setAttribute("transform", transformString);
         if (getDur() > 0 && getDur() <= (System.currentTimeMillis() - dur)) {
             timer.stop();

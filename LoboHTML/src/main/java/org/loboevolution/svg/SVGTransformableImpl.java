@@ -136,7 +136,6 @@ public abstract class SVGTransformableImpl extends SVGLocatableImpl implements S
 				break;
 			}
 			final String transformArgs = st.nextToken().trim();
-			System.out.println("transformType " + transformType);
 			switch (transformType) {
 				case "matrix":
 					final StringTokenizer st1 = new StringTokenizer(transformArgs, ", ", false);
@@ -210,7 +209,6 @@ public abstract class SVGTransformableImpl extends SVGLocatableImpl implements S
 		float angle = 0;
 		float cx = 0;
 		float cy = 0;
-		System.out.println("numArgs " + numArgs);
 		if (numArgs == 1) {
 			angle = Float.parseFloat(st1.nextToken());
 		} else if (numArgs == 3) {
