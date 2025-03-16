@@ -24,13 +24,19 @@
  * Contact info: ivan.difrancesco@yahoo.it
  */
 
-package org.loboevolution.html.renderer;
+package org.loboevolution.html.renderer.layout;
 
-import lombok.Data;
+import org.loboevolution.html.dom.HTMLElement;
+import org.loboevolution.html.dom.domimpl.HTMLBRElementImpl;
+import org.loboevolution.html.renderer.LineBreak;
+import org.loboevolution.html.renderer.RBlockViewport;
 
-@Data
-public abstract class BaseRenderable implements Renderable {
-	
-	private int ordinal = 0;
-	private int zIndex = 0;
+public class BrLayout implements MarkupLayout {
+
+    @Override
+    public void layoutMarkup(final RBlockViewport bodyLayout, final HTMLElement markupElement) {
+        final HTMLBRElementImpl markupElementImpl = (HTMLBRElementImpl) markupElement;
+        final String clear = markupElementImpl.getAttribute("clear");
+        bodyLayout.addLineBreak(markupElementImpl, LineBreak.getBreakType(clear));
+    }
 }

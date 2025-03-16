@@ -27,6 +27,7 @@ package org.loboevolution.html.dom.domimpl;
 
 import org.loboevolution.html.HTMLTag;
 import org.loboevolution.html.dom.HTMLElement;
+import org.loboevolution.html.builder.*;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -34,7 +35,7 @@ import java.util.Map;
 
 
 public class ElementFactory {
-	
+
 	private final Map<HTMLTag, HTMLElementBuilder> builders = new HashMap<>();
 
 	/**
@@ -43,13 +44,12 @@ public class ElementFactory {
 	 * @param isRss a boolean.
 	 */
 	public  ElementFactory(final boolean isRss) {
-		// This sets up builders for each known element tag.
 		final Map<HTMLTag, HTMLElementBuilder> builders = this.builders;
-		builders.put(HTMLTag.HTML, new HTMLElementBuilder.Html());		
-		builders.put(HTMLTag.BASE, new HTMLElementBuilder.Base());
-        builders.put(HTMLTag.HEAD, new HTMLElementBuilder.Head());
+		builders.put(HTMLTag.HTML, new HtmlBuilder());
+		builders.put(HTMLTag.BASE, new BaseBuilder());
+        builders.put(HTMLTag.HEAD, new HeadBuilder());
 
-		final HTMLElementBuilder div = new HTMLElementBuilder.Div();
+		final HTMLElementBuilder div = new DivBuilder();
 		builders.put(HTMLTag.ARTICLE, div);
 		builders.put(HTMLTag.ADDRESS, div);
 		builders.put(HTMLTag.ASIDE, div);
@@ -64,81 +64,81 @@ public class ElementFactory {
 		builders.put(HTMLTag.HEADER, div);
 		builders.put(HTMLTag.FOOTER, div);
 
-		builders.put(HTMLTag.MARQUEE, new HTMLElementBuilder.Marquee());
-		builders.put(HTMLTag.METER, new HTMLElementBuilder.Meter());
-		builders.put(HTMLTag.DIR, new HTMLElementBuilder.Dir());
-		builders.put(HTMLTag.DETAILS, new HTMLElementBuilder.Details());
-		builders.put(HTMLTag.DIALOG, new HTMLElementBuilder.Dialog());
-		builders.put(HTMLTag.DL, new HTMLElementBuilder.Dl());
-		builders.put(HTMLTag.BODY, new HTMLElementBuilder.Body());
-		builders.put(HTMLTag.CENTER, new HTMLElementBuilder.Center());
-		builders.put(HTMLTag.CAPTION, new HTMLElementBuilder.Caption());
-		builders.put(HTMLTag.PRE, new HTMLElementBuilder.Pre());
-		builders.put(HTMLTag.P, new HTMLElementBuilder.P());
-		builders.put(HTMLTag.PROGRESS, new HTMLElementBuilder.Progress());
-		builders.put(HTMLTag.DD, new HTMLElementBuilder.Dd());
+		builders.put(HTMLTag.MARQUEE, new MarqueeBuilder());
+		builders.put(HTMLTag.METER, new MeterBuilder());
+		builders.put(HTMLTag.DIR, new DirBuilder());
+		builders.put(HTMLTag.DETAILS, new DetailsBuilder());
+		builders.put(HTMLTag.DIALOG, new DialogBuilder());
+		builders.put(HTMLTag.DL, new DlBuilder());
+		builders.put(HTMLTag.BODY, new BodyBuilder());
+		builders.put(HTMLTag.CENTER, new CenterBuilder());
+		builders.put(HTMLTag.CAPTION, new CaptionBuilder());
+		builders.put(HTMLTag.PRE, new PreBuilder());
+		builders.put(HTMLTag.P, new PBuilder());
+		builders.put(HTMLTag.PROGRESS, new ProgressBuilder());
+		builders.put(HTMLTag.DD, new DdBuilder());
 
-		final HTMLElementBuilder quote = new HTMLElementBuilder.Quote();
+		final HTMLElementBuilder quote = new QuoteBuilder();
 		builders.put(HTMLTag.BLOCKQUOTE, quote);
 		builders.put(HTMLTag.FIGURE, quote);
 		builders.put(HTMLTag.Q, quote);
 
-		builders.put(HTMLTag.SPAN, new HTMLElementBuilder.Span());
-		builders.put(HTMLTag.SCRIPT, new HTMLElementBuilder.Script());
-		builders.put(HTMLTag.IMG, new HTMLElementBuilder.Img());
-		builders.put(HTMLTag.STYLE, new HTMLElementBuilder.Style());
-		builders.put(HTMLTag.A, new HTMLElementBuilder.Anchor());
-		builders.put(HTMLTag.ANCHOR, new HTMLElementBuilder.Anchor());
-		builders.put(HTMLTag.TABLE, new HTMLElementBuilder.Table());
-		builders.put(HTMLTag.TD, new HTMLElementBuilder.Td());
-		builders.put(HTMLTag.TH, new HTMLElementBuilder.Th());
-		builders.put(HTMLTag.TR, new HTMLElementBuilder.Tr());
-		builders.put(HTMLTag.TFOOT, new HTMLElementBuilder.TFoot());
-		builders.put(HTMLTag.THEAD, new HTMLElementBuilder.THead());
-		builders.put(HTMLTag.TBODY, new HTMLElementBuilder.TBody());
-		builders.put(HTMLTag.COL, new HTMLElementBuilder.Col());
-		builders.put(HTMLTag.COLGROUP, new HTMLElementBuilder.ColGroup());
-		
-		builders.put(HTMLTag.FORM, new HTMLElementBuilder.Form());
-		builders.put(HTMLTag.INPUT, new HTMLElementBuilder.Input());
-		builders.put(HTMLTag.BUTTON, new HTMLElementBuilder.Button());
-		builders.put(HTMLTag.TEXTAREA, new HTMLElementBuilder.Textarea());
-		builders.put(HTMLTag.SELECT, new HTMLElementBuilder.Select());
-		builders.put(HTMLTag.OPTION, new HTMLElementBuilder.Option());
-		builders.put(HTMLTag.IFRAME, new HTMLElementBuilder.IFrame());
-		builders.put(HTMLTag.UL, new HTMLElementBuilder.Ul());
-		builders.put(HTMLTag.OL, new HTMLElementBuilder.Ol());
-		builders.put(HTMLTag.LI, new HTMLElementBuilder.Li());
-		builders.put(HTMLTag.HR, new HTMLElementBuilder.Hr());
-		builders.put(HTMLTag.BR, new HTMLElementBuilder.Br());
-		builders.put(HTMLTag.OBJECT, new HTMLElementBuilder.HtmlObject());
-		builders.put(HTMLTag.EMBED,new HTMLElementBuilder.NonStandard());
-		builders.put(HTMLTag.NOSCRIPT, new HTMLElementBuilder.NoScript());
-		builders.put(HTMLTag.OPTGROUP, new HTMLElementBuilder.OptGroup());
+		builders.put(HTMLTag.SPAN, new SpanBuilder());
+		builders.put(HTMLTag.SCRIPT, new ScriptBuilder());
+		builders.put(HTMLTag.IMG, new ImgBuilder());
+		builders.put(HTMLTag.STYLE, new StyleBuilder());
+		builders.put(HTMLTag.A, new AnchorBuilder());
+		builders.put(HTMLTag.ANCHOR, new AnchorBuilder());
+		builders.put(HTMLTag.TABLE, new TableBuilder());
+		builders.put(HTMLTag.TD, new TdBuilder());
+		builders.put(HTMLTag.TH, new ThBuilder());
+		builders.put(HTMLTag.TR, new TrBuilder());
+		builders.put(HTMLTag.TFOOT, new TFootBuilder());
+		builders.put(HTMLTag.THEAD, new THeadBuilder());
+		builders.put(HTMLTag.TBODY, new TBodyBuilder());
+		builders.put(HTMLTag.COL, new ColBuilder());
+		builders.put(HTMLTag.COLGROUP, new ColGroupBuilder());
+
+		builders.put(HTMLTag.FORM, new FormBuilder());
+		builders.put(HTMLTag.INPUT, new InputBuilder());
+		builders.put(HTMLTag.BUTTON, new ButtonBuilder());
+		builders.put(HTMLTag.TEXTAREA, new TextareaBuilder());
+		builders.put(HTMLTag.SELECT, new SelectBuilder());
+		builders.put(HTMLTag.OPTION, new OptionBuilder());
+		builders.put(HTMLTag.IFRAME, new IFrameBuilder());
+		builders.put(HTMLTag.UL, new UlBuilder());
+		builders.put(HTMLTag.OL, new OlBuilder());
+		builders.put(HTMLTag.LI, new LiBuilder());
+		builders.put(HTMLTag.HR, new HrBuilder());
+		builders.put(HTMLTag.BR, new BrBuilder());
+		builders.put(HTMLTag.OBJECT, new HtmlObjectBuilder());
+		builders.put(HTMLTag.EMBED,new NonStandardBuilder());
+		builders.put(HTMLTag.NOSCRIPT, new NoScriptBuilder());
+		builders.put(HTMLTag.OPTGROUP, new OptGroupBuilder());
 
 
-		builders.put(HTMLTag.TT, new HTMLElementBuilder.Tt());
-		builders.put(HTMLTag.SMALL, new HTMLElementBuilder.Small());
-		builders.put(HTMLTag.B, new HTMLElementBuilder.Strong());
-		builders.put(HTMLTag.STRONG, new HTMLElementBuilder.Strong());
+		builders.put(HTMLTag.TT, new TtBuilder());
+		builders.put(HTMLTag.SMALL, new SmallBuilder());
+		builders.put(HTMLTag.B, new StrongBuilder());
+		builders.put(HTMLTag.STRONG, new StrongBuilder());
 
-		builders.put(HTMLTag.U, new HTMLElementBuilder.Underline());
-		builders.put(HTMLTag.STRIKE, new HTMLElementBuilder.Strike());
-		builders.put(HTMLTag.SUP, new HTMLElementBuilder.Sup());
-		builders.put(HTMLTag.SUB, new HTMLElementBuilder.Sub());
+		builders.put(HTMLTag.U, new UnderlineBuilder());
+		builders.put(HTMLTag.STRIKE, new StrikeBuilder());
+		builders.put(HTMLTag.SUP, new SupBuilder());
+		builders.put(HTMLTag.SUB, new SubBuilder());
 
-		final HTMLElementBuilder code = new HTMLElementBuilder.Code();
+		final HTMLElementBuilder code = new CodeBuilder();
 		builders.put(HTMLTag.CODE, code);
 		builders.put(HTMLTag.SAMP, code);
 		builders.put(HTMLTag.KBD, code);
 
-		final HTMLElementBuilder em = new HTMLElementBuilder.Em();
+		final HTMLElementBuilder em = new EmBuilder();
 		builders.put(HTMLTag.I, em);
 		builders.put(HTMLTag.EM, em);
 		builders.put(HTMLTag.CITE, em);
 		builders.put(HTMLTag.VAR, em);
 
-		final HTMLElementBuilder heading = new HTMLElementBuilder.Heading();
+		final HTMLElementBuilder heading = new HeadingBuilder();
 		builders.put(HTMLTag.H1, heading);
 		builders.put(HTMLTag.H2, heading);
 		builders.put(HTMLTag.H3, heading);
@@ -147,40 +147,40 @@ public class ElementFactory {
 		builders.put(HTMLTag.H6, heading);
 
 
-		builders.put(HTMLTag.FIGURE, new HTMLElementBuilder.Figure());
-		builders.put(HTMLTag.FIELDSET, new HTMLElementBuilder.Fieldset());
-		builders.put(HTMLTag.CANVAS, new HTMLElementBuilder.Canvas());
+		builders.put(HTMLTag.FIGURE, new FigureBuilder());
+		builders.put(HTMLTag.FIELDSET, new FieldsetBuilder());
+		builders.put(HTMLTag.CANVAS, new CanvasBuilder());
 
-		builders.put(HTMLTag.SVG, new HTMLElementBuilder.SVG());
-		builders.put(HTMLTag.RECT, new HTMLElementBuilder.SVGRect());
-		builders.put(HTMLTag.CIRCLE, new HTMLElementBuilder.SVGCircle());
-		builders.put(HTMLTag.ELLIPSE, new HTMLElementBuilder.SVGEllipse());
-		builders.put(HTMLTag.LINE, new HTMLElementBuilder.SVGLine());
-		builders.put(HTMLTag.POLYGON, new HTMLElementBuilder.SVGPolygon());
-		builders.put(HTMLTag.POLYLINE, new HTMLElementBuilder.SVGPolyline());
-		builders.put(HTMLTag.PATH, new HTMLElementBuilder.SVGPath());
-		builders.put(HTMLTag.G, new HTMLElementBuilder.SVGG());
-		builders.put(HTMLTag.DEFS, new HTMLElementBuilder.SVGDefs());
-		builders.put(HTMLTag.USE, new HTMLElementBuilder.SVGUse());
-		builders.put(HTMLTag.SYMBOL, new HTMLElementBuilder.SVGSymbol());
-		builders.put(HTMLTag.TEXT, new HTMLElementBuilder.SVGText());
-		builders.put(HTMLTag.RADIAL_GRADIENT, new HTMLElementBuilder.SVGRadialGradient());
-		builders.put(HTMLTag.LINEAR_GRADIENT, new HTMLElementBuilder.SVGLinearGradient());
-		builders.put(HTMLTag.STOP, new HTMLElementBuilder.SVGStop());
-		builders.put(HTMLTag.CLIPPATH, new HTMLElementBuilder.SVGClipPath());
-		builders.put(HTMLTag.ANIMATE, new HTMLElementBuilder.SVGAnimate());
-		builders.put(HTMLTag.ANIMATE_TRASFORM, new HTMLElementBuilder.SVGAnimateTrasform());
-		builders.put(HTMLTag.IMAGE, new HTMLElementBuilder.SVGImage());
-		builders.put(HTMLTag.LINK, new HTMLElementBuilder.Link());
-		builders.put(HTMLTag.LEGEND, new HTMLElementBuilder.Legend());
-		builders.put(HTMLTag.VIDEO, new HTMLElementBuilder.Video());
+		builders.put(HTMLTag.SVG, new SVGBuilder());
+		builders.put(HTMLTag.RECT, new SVGRectBuilder());
+		builders.put(HTMLTag.CIRCLE, new SVGCircleBuilder());
+		builders.put(HTMLTag.ELLIPSE, new SVGEllipseBuilder());
+		builders.put(HTMLTag.LINE, new SVGLineBuilder());
+		builders.put(HTMLTag.POLYGON, new SVGPolygonBuilder());
+		builders.put(HTMLTag.POLYLINE, new SVGPolylineBuilder());
+		builders.put(HTMLTag.PATH, new SVGPathBuilder());
+		builders.put(HTMLTag.G, new SVGGBuilder());
+		builders.put(HTMLTag.DEFS, new SVGDefsBuilder());
+		builders.put(HTMLTag.USE, new SVGUseBuilder());
+		builders.put(HTMLTag.SYMBOL, new SVGSymbolBuilder());
+		builders.put(HTMLTag.TEXT, new SVGTextBuilder());
+		builders.put(HTMLTag.RADIAL_GRADIENT, new SVGRadialGradientBuilder());
+		builders.put(HTMLTag.LINEAR_GRADIENT, new SVGLinearGradientBuilder());
+		builders.put(HTMLTag.STOP, new SVGStopBuilder());
+		builders.put(HTMLTag.CLIPPATH, new SVGClipPathBuilder());
+		builders.put(HTMLTag.ANIMATE, new SVGAnimateBuilder());
+		builders.put(HTMLTag.ANIMATE_TRASFORM, new SVGAnimateTrasformBuilder());
+		builders.put(HTMLTag.IMAGE, new SVGImageBuilder());
+		builders.put(HTMLTag.LINK, new LinkBuilder());
+		builders.put(HTMLTag.LEGEND, new LegendBuilder());
+		builders.put(HTMLTag.VIDEO, new VideoBuilder());
 
-		builders.put(HTMLTag.RSS, new HTMLElementBuilder.RSS());
-		builders.put(HTMLTag.CHANNEL, new HTMLElementBuilder.Channel());
-		builders.put(HTMLTag.TITLE, isRss ? new HTMLElementBuilder.RSSTitle() : new HTMLElementBuilder.Title());
-		builders.put(HTMLTag.DESCRIPTION, new HTMLElementBuilder.RSSDescription());
-		builders.put(HTMLTag.ITEM, new HTMLElementBuilder.RSSItem());
-	
+		builders.put(HTMLTag.RSS, new RSSBuilder());
+		builders.put(HTMLTag.CHANNEL, new ChannelBuilder());
+		builders.put(HTMLTag.TITLE, isRss ? new RSSTitleBuilder() : new TitleBuilder());
+		builders.put(HTMLTag.DESCRIPTION, new RSSDescriptionBuilder());
+		builders.put(HTMLTag.ITEM, new RSSItemBuilder());
+
 	}
 
 	/**

@@ -24,13 +24,29 @@
  * Contact info: ivan.difrancesco@yahoo.it
  */
 
-package org.loboevolution.html.renderer;
+package org.loboevolution.html.renderer.layout;
 
-import lombok.Data;
+import org.loboevolution.html.control.RSSControl;
+import org.loboevolution.html.control.RUIControl;
+import org.loboevolution.html.control.UIControl;
+import org.loboevolution.html.dom.HTMLElement;
+import org.loboevolution.html.dom.rss.RSSElementImpl;
+import org.loboevolution.html.renderer.RBlockViewport;
+import org.loboevolution.html.renderer.RElement;
 
-@Data
-public abstract class BaseRenderable implements Renderable {
-	
-	private int ordinal = 0;
-	private int zIndex = 0;
+/**
+ * <p>SelectLayout class.</p>
+ */
+public class RSSLayout extends CommonWidgetLayout {
+
+    public RSSLayout() {
+        super(ADD_AS_BLOCK);
+    }
+
+    @Override
+    public  RElement createRenderable(final RBlockViewport bodyLayout, final HTMLElement markupElement) {
+        final RSSElementImpl markupElementImpl = (RSSElementImpl) markupElement;
+        final UIControl control = new RSSControl(markupElementImpl);
+        return new RUIControl(markupElementImpl, control, bodyLayout.getContainer(), bodyLayout.getUserAgentContext());
+    }
 }

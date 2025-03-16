@@ -23,14 +23,20 @@
  *
  * Contact info: ivan.difrancesco@yahoo.it
  */
+package org.loboevolution.html.builder;
 
-package org.loboevolution.html.renderer;
+import org.loboevolution.html.dom.HTMLElement;
 
-import lombok.Data;
+/**
+ * <p>HTMLElementBuilder interface.</p>
+ */
+public interface HTMLElementBuilder {
 
-@Data
-public abstract class BaseRenderable implements Renderable {
-	
-	private int ordinal = 0;
-	private int zIndex = 0;
+    /**
+     * <p>build.</p>
+     *
+     * @param name a {@link String} object.
+     * @return a {@link HTMLElement} object.
+     */
+     HTMLElement build(final String name);
 }

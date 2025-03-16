@@ -40,7 +40,6 @@ import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.net.HttpNetwork;
 import org.loboevolution.net.UserAgent;
 import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
 
 import javax.net.ssl.SSLHandshakeException;
 import java.awt.*;

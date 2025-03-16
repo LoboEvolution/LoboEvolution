@@ -43,7 +43,7 @@ import java.awt.event.MouseEvent;
  * Author J. H. S.
  */
 @Slf4j
-abstract class BaseBoundableRenderable extends RRectangle implements BoundableRenderable {
+public abstract class BaseBoundableRenderable extends RRectangle implements BoundableRenderable {
 
 	/** Constant SELECTION_COLOR */
 	protected static final Color SELECTION_COLOR = Color.BLUE;

@@ -23,19 +23,16 @@
  *
  * Contact info: ivan.difrancesco@yahoo.it
  */
-/*
- * Created on Nov 6, 2005
- */
-package org.loboevolution.html.renderer;
 
-import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
+package org.loboevolution.html.builder;
 
-public interface MarkupLayout {
-	/**
-	 * <p>layoutMarkup.</p>
-	 *
-	 * @param bodyLayout a {@link org.loboevolution.html.renderer.RBlockViewport} object.
-	 * @param markupElement a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
-	 */
-	void layoutMarkup(RBlockViewport bodyLayout, HTMLElementImpl markupElement);
+import org.loboevolution.html.dom.HTMLElement;
+import org.loboevolution.html.dom.domimpl.HTMLPreElementImpl;
+
+public class PreBuilder implements HTMLElementBuilder {
+
+    @Override
+    public HTMLElement build(final String name) {
+        return new HTMLPreElementImpl(name);
+    }
 }

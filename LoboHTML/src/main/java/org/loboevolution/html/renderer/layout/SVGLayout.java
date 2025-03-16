@@ -24,13 +24,26 @@
  * Contact info: ivan.difrancesco@yahoo.it
  */
 
-package org.loboevolution.html.renderer;
+package org.loboevolution.html.renderer.layout;
 
-import lombok.Data;
+import org.loboevolution.html.control.*;
+import org.loboevolution.html.dom.HTMLElement;
+import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
+import org.loboevolution.html.renderer.RBlockViewport;
+import org.loboevolution.html.renderer.RElement;
+import org.loboevolution.svg.SVGSVGElementImpl;
 
-@Data
-public abstract class BaseRenderable implements Renderable {
-	
-	private int ordinal = 0;
-	private int zIndex = 0;
+/**
+ * <p>RLayout class.</p>
+ */
+public class SVGLayout extends CommonWidgetLayout {
+	public SVGLayout() {
+		super(ADD_AS_BLOCK);
+	}
+
+	@Override
+	public  RElement createRenderable(final RBlockViewport bodyLayout, final HTMLElement markupElement) {
+		final UIControl control = new SVGControl((SVGSVGElementImpl) markupElement);
+		return new RUIControl((HTMLElementImpl)markupElement,control, bodyLayout.getContainer(), bodyLayout.getUserAgentContext());
+	}
 }

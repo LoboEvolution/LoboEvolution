@@ -41,7 +41,7 @@ import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
-abstract class BaseRCollection extends BaseBoundableRenderable implements RCollection {
+public abstract class BaseRCollection extends BaseBoundableRenderable implements RCollection {
 
 	private BoundableRenderable renderableWithMouse = null;
 

@@ -23,14 +23,20 @@
  *
  * Contact info: ivan.difrancesco@yahoo.it
  */
+/*
+ * Created on Nov 6, 2005
+ */
+package org.loboevolution.html.renderer.layout;
 
-package org.loboevolution.html.renderer;
+import org.loboevolution.html.dom.HTMLElement;
+import org.loboevolution.html.renderer.RBlockViewport;
 
-import lombok.Data;
-
-@Data
-public abstract class BaseRenderable implements Renderable {
-	
-	private int ordinal = 0;
-	private int zIndex = 0;
+public interface MarkupLayout {
+	/**
+	 * <p>layoutMarkup.</p>
+	 *
+	 * @param bodyLayout a {@link org.loboevolution.html.renderer.RBlockViewport} object.
+	 * @param markupElement a {@link org.loboevolution.html.dom.HTMLElement} object.
+	 */
+	void layoutMarkup(RBlockViewport bodyLayout, HTMLElement markupElement);
 }

@@ -24,13 +24,15 @@
  * Contact info: ivan.difrancesco@yahoo.it
  */
 
-package org.loboevolution.html.renderer;
+package org.loboevolution.html.builder;
 
-import lombok.Data;
+import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
+import org.loboevolution.svg.SVGLinearGradientElementImpl;
 
-@Data
-public abstract class BaseRenderable implements Renderable {
-	
-	private int ordinal = 0;
-	private int zIndex = 0;
+public class SVGRadialGradientBuilder implements HTMLElementBuilder {
+
+    @Override
+    public HTMLElementImpl build(final String name) {
+        return new SVGLinearGradientElementImpl(name);
+    }
 }

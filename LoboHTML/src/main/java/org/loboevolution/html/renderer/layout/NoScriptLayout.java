@@ -24,13 +24,21 @@
  * Contact info: ivan.difrancesco@yahoo.it
  */
 
-package org.loboevolution.html.renderer;
+package org.loboevolution.html.renderer.layout;
 
-import lombok.Data;
+import org.loboevolution.html.dom.HTMLElement;
+import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
+import org.loboevolution.html.renderer.RBlockViewport;
+import org.loboevolution.http.UserAgentContext;
 
-@Data
-public abstract class BaseRenderable implements Renderable {
-	
-	private int ordinal = 0;
-	private int zIndex = 0;
+public class NoScriptLayout implements MarkupLayout {
+
+    @Override
+    public void layoutMarkup(final RBlockViewport bodyLayout, final HTMLElement markupElement) {
+        final UserAgentContext ucontext = bodyLayout.getUserAgentContext();
+        if (!ucontext.isScriptingEnabled()) {
+            final HTMLElementImpl markupElementImpl = (HTMLElementImpl) markupElement;
+            bodyLayout.layoutMarkup(markupElementImpl);
+        }
+    }
 }

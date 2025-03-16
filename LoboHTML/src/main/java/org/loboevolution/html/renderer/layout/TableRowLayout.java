@@ -24,13 +24,12 @@
  * Contact info: ivan.difrancesco@yahoo.it
  */
 
-package org.loboevolution.html.renderer;
+package org.loboevolution.html.renderer.layout;
 
-import lombok.Data;
+import org.loboevolution.html.renderstate.RenderState;
 
-@Data
-public abstract class BaseRenderable implements Renderable {
-	
-	private int ordinal = 0;
-	private int zIndex = 0;
+public class TableRowLayout extends CommonLayout {
+    public TableRowLayout() {
+        super(RenderState.DISPLAY_TABLE_ROW);
+    }
 }

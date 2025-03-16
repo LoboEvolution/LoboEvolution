@@ -25,6 +25,7 @@
  */
 package org.loboevolution.html.renderer;
 
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.ArrayUtilities;
 import org.loboevolution.common.Strings;
@@ -42,9 +43,11 @@ import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.css.CSSStyleDeclaration;
-import org.loboevolution.html.renderer.RLayout.MiscLayout;
+import org.loboevolution.html.renderer.layout.RLayout;
+import org.loboevolution.html.renderer.layout.MiscLayout;
 import org.loboevolution.html.renderer.info.RBlockInfo;
 import org.loboevolution.html.renderer.info.RLayoutInfo;
+import org.loboevolution.html.renderer.layout.MarkupLayout;
 import org.loboevolution.html.renderer.table.RTable;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.style.HtmlInsets;
@@ -116,10 +119,12 @@ public class RBlockViewport extends BaseRCollection {
 	private int yLimit;
 	
 	protected final HtmlRendererContext rendererContext;
-	
-	protected final UserAgentContext userAgentContext;
-	
-	protected final RenderableContainer container;
+
+	@Getter
+	private UserAgentContext userAgentContext;
+
+	@Getter
+	private RenderableContainer container;
 	
 	protected final FrameContext frameContext;
 
@@ -388,7 +393,7 @@ public class RBlockViewport extends BaseRCollection {
 	 * @param startNode a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 * @param breakType a {@link java.lang.Integer} object.
 	 */
-	protected void addLineBreak(final ModelNode startNode, final int breakType) {
+	public void addLineBreak(final ModelNode startNode, final int breakType) {
 		RLine line = this.currentLine;
 		if (line == null) {
 			final Insets insets = this.paddingInsets;
@@ -479,7 +484,7 @@ public class RBlockViewport extends BaseRCollection {
 	 * @param renderable a {@link org.loboevolution.html.renderer.RElement} object.
 	 * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
 	 */
-	protected void addRenderableToLineCheckStyle(final RElement renderable, final HTMLElementImpl element) {
+    public void addRenderableToLineCheckStyle(final RElement renderable, final HTMLElementImpl element) {
 		if (!addElsewhereIfPositioned(renderable, element, true)) {
 			renderable.layout(this.availContentWidth, this.availContentHeight, this.sizeOnly);
 			addRenderableToLine(renderable);
@@ -1107,7 +1112,7 @@ public class RBlockViewport extends BaseRCollection {
 	 *
 	 * @param markupElement a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
 	 */
-	protected final void layoutList(final HTMLElementImpl markupElement) {
+	public final void layoutList(final HTMLElementImpl markupElement) {
 		RList renderable = (RList) markupElement.getUINode();
 		if (renderable == null) {
 			info.setModelNode(markupElement);
@@ -1123,7 +1128,7 @@ public class RBlockViewport extends BaseRCollection {
 	 *
 	 * @param markupElement a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
 	 */
-	protected final void layoutListItem(final HTMLElementImpl markupElement) {
+	public final void layoutListItem(final HTMLElementImpl markupElement) {
 		RListItem renderable = (RListItem) markupElement.getUINode();
 		if (renderable == null) {
 			info.setModelNode(markupElement);
@@ -1139,7 +1144,7 @@ public class RBlockViewport extends BaseRCollection {
 	 *
 	 * @param node a {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} object.
 	 */
-	protected void layoutMarkup(final NodeImpl node) {
+    public void layoutMarkup(final NodeImpl node) {
 		// This is the "inline" layout of an element.
 		// The difference with layoutChildren is that this
 		// method checks for padding and margin insets.
@@ -1203,7 +1208,7 @@ public class RBlockViewport extends BaseRCollection {
 	 *
 	 * @param markupElement a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
 	 */
-	protected final void layoutRBlock(final HTMLElementImpl markupElement) {
+	public final void layoutRBlock(final HTMLElementImpl markupElement) {
 		final UINode uiNode = markupElement.getUINode();
 		RBlock renderable = null;
 		if (uiNode instanceof RBlock) {
@@ -1224,7 +1229,7 @@ public class RBlockViewport extends BaseRCollection {
 	 *
 	 * @param markupElement a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
 	 */
-	protected final void layoutRTable(final HTMLElementImpl markupElement) {
+	public final void layoutRTable(final HTMLElementImpl markupElement) {
 		RElement renderable = (RElement) markupElement.getUINode();
 		if (renderable == null) {
 			info.setModelNode(markupElement);
@@ -1720,8 +1725,8 @@ public class RBlockViewport extends BaseRCollection {
 	 * @param obeysFloats a boolean.
 	 * @param alignCenterAttribute a boolean.
 	 */
-	protected final void positionRElement(final HTMLElementImpl markupElement, final RElement renderable, final boolean usesAlignAttribute,
-										  final boolean obeysFloats, final boolean alignCenterAttribute) {
+	public final void positionRElement(final HTMLElementImpl markupElement, final RElement renderable, final boolean usesAlignAttribute,
+                                       final boolean obeysFloats, final boolean alignCenterAttribute) {
 		if (!addElsewhereIfPositioned(renderable, markupElement, usesAlignAttribute)) {
 			int availContentWidth = this.availContentWidth;
 			final int availContentHeight = this.availContentHeight;

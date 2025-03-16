@@ -24,13 +24,25 @@
  * Contact info: ivan.difrancesco@yahoo.it
  */
 
-package org.loboevolution.html.renderer;
+package org.loboevolution.html.renderer.layout;
 
-import lombok.Data;
+import org.loboevolution.html.control.FrameControl;
+import org.loboevolution.html.control.RUIControl;
+import org.loboevolution.html.control.UIControl;
+import org.loboevolution.html.dom.HTMLElement;
+import org.loboevolution.html.dom.domimpl.HTMLIFrameElementImpl;
+import org.loboevolution.html.renderer.RBlockViewport;
+import org.loboevolution.html.renderer.RElement;
 
-@Data
-public abstract class BaseRenderable implements Renderable {
-	
-	private int ordinal = 0;
-	private int zIndex = 0;
+public class IFrameLayout extends CommonWidgetLayout {
+    public IFrameLayout() {
+        super(ADD_INLINE);
+    }
+
+    @Override
+    public  RElement createRenderable(final RBlockViewport bodyLayout, final HTMLElement markupElement) {
+        final HTMLIFrameElementImpl markupElementImpl = (HTMLIFrameElementImpl)markupElement;
+        final UIControl control = new FrameControl(markupElementImpl);
+        return new RUIControl(markupElementImpl, control, bodyLayout.getContainer(), bodyLayout.getUserAgentContext());
+    }
 }
