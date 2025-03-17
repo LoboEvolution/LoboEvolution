@@ -26,13 +26,14 @@
 
 package org.loboevolution.html.builder;
 
+import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
-import org.loboevolution.svg.SVGCircleElementImpl;
+import org.loboevolution.svg.dom.SVGCircleElementImpl;
 
 public class SVGCircleBuilder implements HTMLElementBuilder {
 
     @Override
-    public HTMLElementImpl build(final String name) {
-        return new SVGCircleElementImpl(name);
+    public HTMLElement build(final String name) {
+        return new SVGCircleElementImpl(new HTMLElementImpl(name));
     }
 }

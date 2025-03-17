@@ -28,7 +28,7 @@ package org.loboevolution.html.renderer.layout;
 
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
-import org.loboevolution.html.dom.domimpl.UINode;
+import org.loboevolution.html.node.UINode;
 import org.loboevolution.html.renderer.BaseBoundableRenderable;
 import org.loboevolution.html.renderer.RBlockViewport;
 import org.loboevolution.html.renderstate.RenderState;

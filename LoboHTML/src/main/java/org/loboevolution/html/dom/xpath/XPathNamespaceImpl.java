@@ -34,9 +34,14 @@ import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.node.*;
 import org.loboevolution.events.Event;
 import org.loboevolution.html.xpath.XPathNamespace;
+import org.loboevolution.traversal.NodeFilter;
 import org.mozilla.javascript.Function;
 import org.loboevolution.html.dom.UserDataHandler;
 import org.w3c.dom.events.EventException;
+
+import java.net.URL;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * The XPathNamespace interface is returned by
@@ -274,6 +279,11 @@ public class XPathNamespaceImpl implements XPathNamespace {
 	}
 
 	@Override
+	public Document getDocumentNode() {
+		return null;
+	}
+
+	@Override
 	public NamedNodeMap getAttributes() {
 		return null;
 	}
@@ -326,10 +336,55 @@ public class XPathNamespaceImpl implements XPathNamespace {
 		return null; // PENDING
 	}
 
+	@Override
+	public void setParentImpl(Node parent) {
+
+	}
+
+	@Override
+	public void setNamespaceURI(String namespaceURI) {
+
+	}
+
 	/** {@inheritDoc} */
 	@Override
 	public Object getUserData(final String key) {
 		return null;
+	}
+
+	@Override
+	public Node getPreviousTo(Node node) {
+		return null;
+	}
+
+	@Override
+	public Node getNextTo(Node node) {
+		return null;
+	}
+
+	@Override
+	public void forgetRenderState() {
+
+	}
+
+	@Override
+	public void appendChildrenToCollectionImpl(NodeFilter filter, Collection<Node> collection) {
+
+	}
+
+	@Override
+	public void extractDescendentsArrayImpl(NodeFilter filter, List<Node> al, boolean nestIntoMatchingNodes) {
+
+	}
+
+	@Override
+	public UINode findUINode() {
+		return null;
+	}
+
+	@Override
+	public void visit(NodeVisitor visitor) {
+
 	}
 
 	/** {@inheritDoc} */
@@ -359,6 +414,11 @@ public class XPathNamespaceImpl implements XPathNamespace {
 	@Override
 	public void setOwnerDocument(final Document document) {
 		m_attributeNode.setOwnerDocument(document);
+	}
+
+	@Override
+	public void setOwnerDocument(Document value, boolean deep) {
+
 	}
 
 	/** {@inheritDoc} */
@@ -404,5 +464,40 @@ public class XPathNamespaceImpl implements XPathNamespace {
 	@Override
 	public boolean dispatchEvent(final Event evt) throws EventException {
 		return m_attributeNode.dispatchEvent(evt);
+	}
+
+	@Override
+	public Object getDocumentItem(String name) {
+		return null;
+	}
+
+	@Override
+	public URL getFullURL(String spec) throws Exception {
+		return null;
+	}
+
+	@Override
+	public ModelNode getParentModelNode() {
+		return null;
+	}
+
+	@Override
+	public boolean isEqualOrDescendentOf(ModelNode otherNode) {
+		return false;
+	}
+
+	@Override
+	public Object getRenderState() {
+		return null;
+	}
+
+	@Override
+	public void setDocumentItem(String name, Object value) {
+
+	}
+
+	@Override
+	public void warn(String message, Throwable err) {
+
 	}
 }

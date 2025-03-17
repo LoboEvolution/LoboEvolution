@@ -38,7 +38,7 @@ class RFlexChild {
 	/**
 	 * <p>Constructor for RFlexChild.</p>
 	 *
-	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 * @param renderState a {@link RenderState} object.
 	 */
 	protected RFlexChild(final RenderState renderState) {
 		this.renderState = renderState;

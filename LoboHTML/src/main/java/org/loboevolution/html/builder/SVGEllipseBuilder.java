@@ -26,13 +26,14 @@
 
 package org.loboevolution.html.builder;
 
+import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
-import org.loboevolution.svg.SVGEllipseElementImpl;
+import org.loboevolution.svg.dom.SVGEllipseElementImpl;
 
 public class SVGEllipseBuilder implements HTMLElementBuilder {
 
     @Override
-    public HTMLElementImpl build(final String name) {
-        return new SVGEllipseElementImpl(name);
+    public HTMLElement build(final String name) {
+        return new SVGEllipseElementImpl(new HTMLElementImpl(name));
     }
 }

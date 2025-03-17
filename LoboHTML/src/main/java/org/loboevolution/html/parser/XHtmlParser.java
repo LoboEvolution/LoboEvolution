@@ -35,7 +35,6 @@ import org.loboevolution.html.HTMLEntities;
 import org.loboevolution.html.HTMLTag;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.nodeimpl.DocumentTypeImpl;
-import org.loboevolution.html.dom.nodeimpl.ElementImpl;
 import org.loboevolution.html.dom.nodeimpl.EntityReferenceImpl;
 import org.loboevolution.html.dom.nodeimpl.NotationImpl;
 import org.loboevolution.html.node.*;
@@ -458,7 +457,7 @@ public class XHtmlParser {
 					}
 				} else {
 					final List<AttributeInfo> attributeInfo = new ArrayList<>();
-					ElementImpl element = null;
+					Element element = null;
 					try {
 						if (!this.justReadTagEnd) {
 							while (this.readAttribute(reader, attributeInfo)) {
@@ -490,16 +489,16 @@ public class XHtmlParser {
 									}
 								}
 							});
-							element = (ElementImpl) doc.createElementNS(reference.get(), normalTag);
+							element = doc.createElementNS(reference.get(), normalTag);
 
 						} else {
-							element = (ElementImpl) doc.createElement(normalTag);
+							element = doc.createElement(normalTag);
 						}
 
 						element.setUserData(MODIFYING_KEY, Boolean.TRUE, null);
 
 						safeAppendChild(parent, element);
-						final AtomicReference<ElementImpl> elementAtomicReference = new AtomicReference<>(element);
+						final AtomicReference<Element> elementAtomicReference = new AtomicReference<>(element);
 
 						attributeInfo.forEach(info -> setAttributeNode(elementAtomicReference.get(), info.getAttributeName(), info.getAttributeValue()));
 
@@ -601,7 +600,7 @@ public class XHtmlParser {
 											// Switch element
 											element.setUserData(MODIFYING_KEY, Boolean.FALSE, null);
 											// newElement should have been suspended.
-											element = (ElementImpl) newElement;
+											element = newElement;
 											// Add to parent
 											safeAppendChild(parent, element);
 											if (this.justReadEmptyElement) {
@@ -663,7 +662,7 @@ public class XHtmlParser {
 	 * ending tag is found.
 	 */
 	private int parseForEndTag(final Node parent, final LineNumberReader reader, final String tagName,
-                               final boolean addTextNode, final boolean decodeEntities) throws IOException {
+							   final boolean addTextNode, final boolean decodeEntities) throws IOException {
 		final Document doc = this.document;
 		int intCh;
 		StringBuilder sb = new StringBuilder();
@@ -1356,7 +1355,7 @@ public class XHtmlParser {
 		return c;
 	}
 
-	private void setAttributeNode(final ElementImpl element, final String attributeName, final String attributeValue) {
+	private void setAttributeNode(final Element element, final String attributeName, final String attributeValue) {
 
 		if (this.document.isXml()) {
 			String namespaceURI = null;

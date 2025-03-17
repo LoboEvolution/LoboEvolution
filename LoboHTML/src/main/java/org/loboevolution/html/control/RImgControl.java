@@ -25,7 +25,7 @@
  */
 package org.loboevolution.html.control;
 
-import org.loboevolution.html.dom.nodeimpl.ModelNode;
+import org.loboevolution.html.node.ModelNode;
 import org.loboevolution.html.renderer.RenderableContainer;
 import org.loboevolution.http.UserAgentContext;
 
@@ -38,7 +38,7 @@ public class RImgControl extends RUIControl {
 	/**
 	 * <p>Constructor for RImgControl.</p>
 	 *
-	 * @param me a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
+	 * @param me a {@link ModelNode} object.
 	 * @param widget a {@link org.loboevolution.html.control.UIControl} object.
 	 * @param container a {@link org.loboevolution.html.renderer.RenderableContainer} object.
 	 * @param ucontext a {@link org.loboevolution.http.UserAgentContext} object.

@@ -30,13 +30,18 @@ import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.UserDataHandler;
 import org.loboevolution.events.EventTarget;
+import org.loboevolution.js.IgnoreJs;
+import org.loboevolution.traversal.NodeFilter;
+
+import java.util.Collection;
+import java.util.List;
 
 /**
  * Node is an interface from which a number of DOM API object types inherit. It
  * allows those types to be treated similarly; for example, inheriting the same
  * set of methods, or being tested in the same way.
  */
-public interface Node extends EventTarget {
+public interface Node extends ModelNode, EventTarget {
 
 	short NONE = -1;
 	short ELEMENT_NODE = 1;
@@ -193,6 +198,46 @@ public interface Node extends EventTarget {
 	 */
 	Object getUserData(String key);
 
+	@IgnoreJs
+	Node getPreviousTo(final Node node);
+
+	@IgnoreJs
+	Node getNextTo(final Node node);
+
+	@IgnoreJs
+	void forgetRenderState();
+
+	@IgnoreJs
+	void appendChildrenToCollectionImpl(final NodeFilter filter, final Collection<Node> collection);
+
+	/**
+	 * Extracts all descendents that match the filter, except those descendents of
+	 * nodes that match the filter.
+	 *
+	 * @param filter a {@link NodeFilter} object.
+	 * @param al a {@link java.util.ArrayList} object.
+	 */
+	@IgnoreJs
+	void extractDescendentsArrayImpl(final NodeFilter filter, final List<Node> al, final boolean nestIntoMatchingNodes);
+
+	/**
+	 * Tries to get a UINode associated with the current node. Failing that, it
+	 * tries ancestors recursively. This method will return the closest
+	 * <i>block-level</i> renderer node, if any.
+	 *
+	 * @return a {@link UINode} object.
+	 */
+	@IgnoreJs
+	UINode findUINode();
+
+	/**
+	 * <p>visit.</p>
+	 *
+	 * @param visitor a {@link NodeVisitor} object.
+	 */
+	@IgnoreJs
+	void visit(final NodeVisitor visitor);
+
 	/**
 	 * Returns a copy of node. If deep is true, the copy also includes the node's
 	 * descendants.
@@ -215,8 +260,16 @@ public interface Node extends EventTarget {
 	 *
 	 * @param document a  {@link org.loboevolution.html.node.Document} object.
 	 */
-
 	void setOwnerDocument(Document document);
+
+	/**
+	 * <p>setOwnerDocument.</p>
+	 *
+	 * @param value a {@link org.loboevolution.html.node.Document} object.
+	 * @param deep a boolean.
+	 */
+	@IgnoreJs
+	void setOwnerDocument(Document value, final boolean deep);
 
 	/**
 	 * <p>setNodeValue.</p>
@@ -248,6 +301,17 @@ public interface Node extends EventTarget {
 	 * @return a {@link java.lang.Object} object.
 	 */
 	Object setUserData(final String key, final Object data, final UserDataHandler handler);
+
+	/**
+	 * <p>setParentImpl.</p>
+	 *
+	 * @param parent a {@link org.loboevolution.html.node.Node} object.
+	 */
+	@IgnoreJs
+	void setParentImpl(final Node parent);
+
+	@IgnoreJs
+	void setNamespaceURI(final String namespaceURI);
 
 	/**
 	 * Returns true if other is an inclusive descendant of node, and false
@@ -386,4 +450,6 @@ public interface Node extends EventTarget {
 	boolean isSupported(String feature, String version);
 
 	Node getFeature(String feature, String version);
+
+	Document getDocumentNode();
 }

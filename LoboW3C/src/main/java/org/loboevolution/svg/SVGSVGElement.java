@@ -35,7 +35,7 @@ import org.loboevolution.events.Event;
  * <p>SVGSVGElement interface.</p>
  */
 public interface SVGSVGElement extends SVGElement, SVGTests, SVGLangSpace, SVGExternalResourcesRequired, SVGStylable,
-		SVGLocatable, SVGFitToViewBox, SVGZoomAndPan {
+		SVGLocatable, SVGFitToViewBox, SVGZoomAndPan, Drawable {
 	/**
 	 * <p>getX.</p>
 	 *
@@ -303,14 +303,15 @@ public interface SVGSVGElement extends SVGElement, SVGTests, SVGLangSpace, SVGEx
      *
      * @param elementId a {@link java.lang.String} object.
      * @return a {@link org.loboevolution.html.node.Element} object.
-     */
+
     Element getElementById(String elementId);
     
-    /**
+
      * <p>createEvent.</p>
      *
      * @param eventType a {@link java.lang.String} object.
      * @return a {@link Event} object.
-     */
+
     Event createEvent(String eventType);
+	 */
 }

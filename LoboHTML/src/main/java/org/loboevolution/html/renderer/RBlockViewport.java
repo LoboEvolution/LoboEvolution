@@ -37,8 +37,8 @@ import org.loboevolution.html.dom.HTMLHtmlElement;
 import org.loboevolution.html.dom.nodeimpl.DocumentFragmentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLTableElementImpl;
-import org.loboevolution.html.dom.domimpl.UINode;
-import org.loboevolution.html.dom.nodeimpl.ModelNode;
+import org.loboevolution.html.node.UINode;
+import org.loboevolution.html.node.ModelNode;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.node.Node;
@@ -325,7 +325,7 @@ public class RBlockViewport extends BaseRCollection {
 		final boolean initialAllowOverflow;
 		if (prevLine == null) {
 			// Note: Assumes that prevLine == null means it's the first line.
-			final RenderState rs = this.modelNode.getRenderState();
+			final RenderState rs = (RenderState)this.modelNode.getRenderState();
 			initialAllowOverflow = rs != null && rs.getWhiteSpace() == RenderState.WS_NOWRAP;
 			// Text indentation only applies to the first line in the block.
 			final int textIndent = rs == null ? 0 : rs.getTextIndent(this.availContentWidth);
@@ -390,7 +390,7 @@ public class RBlockViewport extends BaseRCollection {
 	/**
 	 * <p>addLineBreak.</p>
 	 *
-	 * @param startNode a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
+	 * @param startNode a {@link ModelNode} object.
 	 * @param breakType a {@link java.lang.Integer} object.
 	 */
 	public void addLineBreak(final ModelNode startNode, final int breakType) {
@@ -401,7 +401,7 @@ public class RBlockViewport extends BaseRCollection {
 			line = this.currentLine;
 		}
 		if (line.getHeight() == 0) {
-			final RenderState rs = startNode.getRenderState();
+			final RenderState rs = (RenderState) startNode.getRenderState();
 			final int fontHeight = rs.getFontMetrics().getHeight();
 			line.setHeight(fontHeight);
 		}
@@ -1671,7 +1671,7 @@ public class RBlockViewport extends BaseRCollection {
 
 	private void positionRBlock(final HTMLElementImpl markupElement, final RBlock renderable) {
 		
-		final RenderState rs = renderable.getModelNode().getRenderState();
+		final RenderState rs = (RenderState) renderable.getModelNode().getRenderState();
 		final int clear = rs.getClear();
 		if (clear != LineBreak.NONE) {
 			addLineBreak(renderable.getModelNode(), clear);

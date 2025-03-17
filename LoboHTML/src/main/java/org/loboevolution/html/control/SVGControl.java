@@ -26,7 +26,10 @@
 
 package org.loboevolution.html.control;
 
-import org.loboevolution.svg.SVGSVGElementImpl;
+import org.loboevolution.html.dom.HTMLElement;
+import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
+import org.loboevolution.html.node.Element;
+import org.loboevolution.svg.SVGSVGElement;
 
 import java.awt.*;
 import java.io.Serial;
@@ -40,26 +43,24 @@ public class SVGControl extends BaseControl {
 	@Serial
 	private static final long serialVersionUID = 1L;
 
-	private final SVGSVGElementImpl modelNode;
+	private final SVGSVGElement modelNode;
 
 	/**
 	 * <p>Constructor for SVGControl.</p>
 	 *
-	 * @param modelNode a {@link org.loboevolution.svg.SVGSVGElementImpl} object.
+	 * @param modelNode a {@link org.loboevolution.svg.SVGSVGElement} object.
 	 */
-	public SVGControl(final SVGSVGElementImpl modelNode) {
-		super(modelNode);
-		this.modelNode = modelNode;
-		modelNode.setPainted(false);
+	public SVGControl(final HTMLElement modelNode) {
+		super((HTMLElementImpl) modelNode);
+		this.modelNode = (SVGSVGElement)modelNode;
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void paint(final Graphics g) {
 		super.paint(g);
-		/*Graphics2D g2d = (Graphics2D) g;
+		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		modelNode.draw(g2d);
-		modelNode.setPainted(true);*/
 	}
 }

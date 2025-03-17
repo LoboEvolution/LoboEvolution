@@ -148,7 +148,7 @@ public class ImgControl extends BaseControl {
 	@Override
 	public void reset(final int availWidth, final int availHeight) {
 		super.reset(availWidth, availHeight);
-		final HTMLElementImpl element = this.controlElement;
+		final HTMLElementImpl element = (HTMLElementImpl) this.controlElement;
 		final CSSStyleDeclaration currentStyle = element.getCurrentStyle();
 		final int dw = getValueSize(element.getAttribute("width"), currentStyle.getWidth(), availWidth);
 		final int dh = getValueSize(element.getAttribute("height"), currentStyle.getHeight(), availHeight);
@@ -227,8 +227,7 @@ public class ImgControl extends BaseControl {
 		} else{
 			size = Strings.isNotBlank(styleAttribute) ? styleAttribute : "";
 		}
-		final HTMLElementImpl element = this.controlElement;
-		final HTMLDocumentImpl doc = (HTMLDocumentImpl)element.getDocumentNode();
+        final HTMLDocumentImpl doc = (HTMLDocumentImpl)this.controlElement.getDocumentNode();
 		return  HtmlValues.getPixelSize(size, null, doc.getDefaultView(), -1, availSize);
 	}
 }

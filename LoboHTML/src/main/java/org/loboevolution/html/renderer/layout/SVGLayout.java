@@ -31,7 +31,7 @@ import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.renderer.RBlockViewport;
 import org.loboevolution.html.renderer.RElement;
-import org.loboevolution.svg.SVGSVGElementImpl;
+import org.loboevolution.svg.SVGSVGElement;
 
 /**
  * <p>RLayout class.</p>
@@ -43,7 +43,7 @@ public class SVGLayout extends CommonWidgetLayout {
 
 	@Override
 	public  RElement createRenderable(final RBlockViewport bodyLayout, final HTMLElement markupElement) {
-		final UIControl control = new SVGControl((SVGSVGElementImpl) markupElement);
+		final UIControl control = new SVGControl(markupElement);
 		return new RUIControl((HTMLElementImpl)markupElement,control, bodyLayout.getContainer(), bodyLayout.getUserAgentContext());
 	}
 }

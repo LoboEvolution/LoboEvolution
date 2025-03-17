@@ -230,7 +230,7 @@ public class FontValues extends HtmlValues {
 	 * <p>getFontFamily.</p>
 	 *
 	 * @param fontFamily a {@link java.lang.String} object.
-	 * @param parentRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 * @param parentRenderState a {@link RenderState} object.
 	 * @return a {@link java.lang.String} object.
 	 */
 	public static String getFontFamily(final String fontFamily, final RenderState parentRenderState) {
@@ -248,7 +248,7 @@ public class FontValues extends HtmlValues {
 	 * <p>getFontStrikeThrough.</p>
 	 *
 	 * @param strikethrough a {@link java.lang.String} object.
-	 * @param parentRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 * @param parentRenderState a {@link RenderState} object.
 	 * @param isStrikethrough a {@link Boolean} object.
 	 * @return a boolean.
 	 */
@@ -274,7 +274,7 @@ public class FontValues extends HtmlValues {
 	 * <p>getFontStyle.</p>
 	 *
 	 * @param fontStyle a {@link java.lang.String} object.
-	 * @param parentRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 * @param parentRenderState a {@link RenderState} object.
 	 * @param isItalic a {@link Boolean} object.
 	 * @return a {@link java.lang.String} object.
 	 */
@@ -310,7 +310,7 @@ public class FontValues extends HtmlValues {
 	 * <p>getFontSuperScript.</p>
 	 *
 	 * @param verticalAlign a {@link java.lang.String} object.
-	 * @param parentRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 * @param parentRenderState a {@link RenderState} object.
 	 * @param isSuperscript a {@link Boolean} object.
 	 * @param isSubscript a {@link Boolean} object.
 	 * @return a {@link java.lang.Integer} object.
@@ -337,7 +337,7 @@ public class FontValues extends HtmlValues {
 	 * <p>getFontUnderline.</p>
 	 *
 	 * @param underline a {@link java.lang.String} object.
-	 * @param parentRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 * @param parentRenderState a {@link RenderState} object.
 	 * @param isStrikethrough a {@link Boolean} object.
 	 * @return a {@link java.lang.Integer} object.
 	 */
@@ -363,7 +363,7 @@ public class FontValues extends HtmlValues {
 	 * <p>getFontWeight.</p>
 	 *
 	 * @param fontWeight a {@link java.lang.String} object.
-	 * @param parentRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 * @param parentRenderState a {@link RenderState} object.
 	 * @param isBold a {@link Boolean} object.
 	 * @return a {@link java.lang.String} object.
 	 */

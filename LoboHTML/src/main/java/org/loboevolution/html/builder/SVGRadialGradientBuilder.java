@@ -26,13 +26,14 @@
 
 package org.loboevolution.html.builder;
 
+import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
-import org.loboevolution.svg.SVGLinearGradientElementImpl;
+import org.loboevolution.svg.dom.SVGLinearGradientElementImpl;
 
 public class SVGRadialGradientBuilder implements HTMLElementBuilder {
 
     @Override
-    public HTMLElementImpl build(final String name) {
-        return new SVGLinearGradientElementImpl(name);
+    public HTMLElement build(final String name) {
+        return new SVGLinearGradientElementImpl(new HTMLElementImpl(name));
     }
 }

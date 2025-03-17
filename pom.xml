@@ -123,6 +123,7 @@
         <module>LoboIViewer</module>
         <module>LoboJTattoo</module>
         <module>LoboHTML</module>
+        <module>LoboSVG</module>
         <module>LoboUnitTest</module>
         <module>LoboJhrome</module>
         <module>LoboEvo</module>
@@ -172,6 +173,11 @@
         <dependency>
             <groupId>org.loboevolution</groupId>
             <artifactId>LoboHTML</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.loboevolution</groupId>
+            <artifactId>LoboSVG</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>

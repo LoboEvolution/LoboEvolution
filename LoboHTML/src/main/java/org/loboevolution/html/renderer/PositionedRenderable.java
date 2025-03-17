@@ -30,7 +30,7 @@ import lombok.Builder;
 import lombok.Data;
 import org.loboevolution.html.dom.HTMLDocument;
 import org.loboevolution.html.dom.HTMLHtmlElement;
-import org.loboevolution.html.dom.nodeimpl.ModelNode;
+import org.loboevolution.html.node.ModelNode;
 import org.loboevolution.html.renderstate.RenderState;
 
 import java.awt.*;
@@ -60,7 +60,7 @@ public class PositionedRenderable implements Renderable {
 	/** {@inheritDoc} */
 	@Override
 	public void paint(final Graphics gIn) {
-		final int pos = this.renderable.getModelNode().getRenderState().getPosition();
+		final int pos = ((RenderState)this.renderable.getModelNode().getRenderState()).getPosition();
 		if (isFloat || pos == RenderState.POSITION_ABSOLUTE || pos == RenderState.POSITION_FIXED) {
 			final Graphics g2 = gIn.create();
 			final Point some = getSome();

@@ -31,9 +31,13 @@ import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.UserDataHandler;
 import org.loboevolution.html.node.*;
 import org.loboevolution.events.Event;
+import org.loboevolution.traversal.NodeFilter;
 import org.mozilla.javascript.Function;
 import org.w3c.dom.events.EventException;
 
+import java.net.URL;
+import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -134,6 +138,11 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
 
   @Override
   public Node getFeature(final String name, final String version) {
+    return null;
+  }
+
+  @Override
+  public Document getDocumentNode() {
     return null;
   }
 
@@ -283,6 +292,11 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
 
   }
 
+  @Override
+  public void setOwnerDocument(Document value, boolean deep) {
+
+  }
+
   /** {@inheritDoc} */
   @Override
   public String getTypeName() {
@@ -325,6 +339,16 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
   }
 
   @Override
+  public void setParentImpl(Node parent) {
+
+  }
+
+  @Override
+  public void setNamespaceURI(String namespaceURI) {
+
+  }
+
+  @Override
   public boolean contains(final Node other) {
     return false;
   }
@@ -333,6 +357,41 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
   @Override
   public Object getUserData(final String key) {
     return getOwnerDocument().getUserData(key);
+  }
+
+  @Override
+  public Node getPreviousTo(Node node) {
+    return null;
+  }
+
+  @Override
+  public Node getNextTo(Node node) {
+    return null;
+  }
+
+  @Override
+  public void forgetRenderState() {
+
+  }
+
+  @Override
+  public void appendChildrenToCollectionImpl(NodeFilter filter, Collection<Node> collection) {
+
+  }
+
+  @Override
+  public void extractDescendentsArrayImpl(NodeFilter filter, List<Node> al, boolean nestIntoMatchingNodes) {
+
+  }
+
+  @Override
+  public UINode findUINode() {
+    return null;
+  }
+
+  @Override
+  public void visit(NodeVisitor visitor) {
+
   }
 
   /** {@inheritDoc} */
@@ -543,5 +602,40 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
   @Override
   public boolean dispatchEvent(final Event evt) throws EventException {
     return false;
+  }
+
+  @Override
+  public Object getDocumentItem(String name) {
+    return null;
+  }
+
+  @Override
+  public URL getFullURL(String spec) throws Exception {
+    return null;
+  }
+
+  @Override
+  public ModelNode getParentModelNode() {
+    return null;
+  }
+
+  @Override
+  public boolean isEqualOrDescendentOf(ModelNode otherNode) {
+    return false;
+  }
+
+  @Override
+  public Object getRenderState() {
+    return null;
+  }
+
+  @Override
+  public void setDocumentItem(String name, Object value) {
+
+  }
+
+  @Override
+  public void warn(String message, Throwable err) {
+
   }
 }
