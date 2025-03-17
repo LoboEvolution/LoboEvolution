@@ -36,7 +36,7 @@ public class DisplayRenderState extends StyleSheetRenderState {
 	/**
 	 * <p>Constructor for DisplayRenderState.</p>
 	 *
-	 * @param prevRenderState a {@link RenderState} object.
+	 * @param prevRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
 	 * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
 	 * @param defaultDisplay a {@link java.lang.Integer} object.
 	 */

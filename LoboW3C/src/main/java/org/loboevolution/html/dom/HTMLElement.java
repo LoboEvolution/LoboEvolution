@@ -26,7 +26,6 @@
 
 package org.loboevolution.html.dom;
 
-import org.loboevolution.css.CSSStyleDeclaration;
 import org.loboevolution.html.node.Element;
 
 /**
@@ -125,8 +124,6 @@ public interface HTMLElement extends Element {
      * @return a {@link java.lang.Integer} object.
      */
 	Integer getOffsetWidth();
-
-	CSSStyleDeclaration getStyle();
 
 	/**
 	 * <p>isSpellcheck.</p>

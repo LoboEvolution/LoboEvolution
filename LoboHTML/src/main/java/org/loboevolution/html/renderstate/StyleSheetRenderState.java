@@ -146,7 +146,7 @@ public class StyleSheetRenderState implements RenderState {
 	/**
 	 * <p>Constructor for StyleSheetRenderState.</p>
 	 *
-	 * @param prevRenderState a {@link RenderState} object.
+	 * @param prevRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
 	 * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
 	 */
 	public StyleSheetRenderState(final RenderState prevRenderState,final HTMLElementImpl element) {

@@ -33,8 +33,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.Nodes;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
-import org.loboevolution.html.node.ModelNode;
-import org.loboevolution.html.node.UINode;
+import org.loboevolution.html.dom.domimpl.UINode;
+import org.loboevolution.html.dom.nodeimpl.ModelNode;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.renderer.*;
@@ -747,7 +747,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	/**
 	 * Implementation of UINode.repaint().
 	 *
-	 * @param modelNode a {@link ModelNode} object.
+	 * @param modelNode a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 */
 	public void repaint(final ModelNode modelNode) {
 		// this.rblock.invalidateRenderStyle();

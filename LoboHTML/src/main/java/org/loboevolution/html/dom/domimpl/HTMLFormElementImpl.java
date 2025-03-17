@@ -33,7 +33,7 @@ import org.loboevolution.html.dom.filter.FormFilter;
 import org.loboevolution.html.dom.input.FormInput;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
-import org.loboevolution.html.node.NodeVisitor;
+import org.loboevolution.html.dom.nodeimpl.NodeVisitor;
 import org.loboevolution.html.js.Executor;
 import org.loboevolution.html.js.WindowImpl;
 import org.loboevolution.html.node.Element;

@@ -160,7 +160,7 @@ public class HtmlValues {
 	 * <p>getPixelSize.</p>
 	 *
 	 * @param spec a {@link java.lang.String} object.
-	 * @param renderState a {@link RenderState} object.
+	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
 	 * @param errorValue a {@link java.lang.Integer} object.
 	 * @return a {@link java.lang.Integer} object.
 	 */
@@ -245,7 +245,7 @@ public class HtmlValues {
 	 * <p>getPixelSize.</p>
 	 *
 	 * @param spec a {@link java.lang.String} object.
-	 * @param renderState a {@link RenderState} object.
+	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
 	 * @param errorValue a {@link java.lang.Integer} object.
 	 * @param availSize a {@link java.lang.Integer} object.
 	 * @return a {@link java.lang.Integer} object.

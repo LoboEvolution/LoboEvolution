@@ -26,14 +26,13 @@
 
 package org.loboevolution.html.builder;
 
-import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
-import org.loboevolution.svg.dom.SVGDefsElementImpl;
+import org.loboevolution.svg.SVGDefsElementImpl;
 
 public class SVGDefsBuilder implements HTMLElementBuilder {
 
     @Override
-    public HTMLElement build(final String name) {
-        return new SVGDefsElementImpl(new HTMLElementImpl(name));
+    public HTMLElementImpl build(final String name) {
+        return new SVGDefsElementImpl(name);
     }
 }

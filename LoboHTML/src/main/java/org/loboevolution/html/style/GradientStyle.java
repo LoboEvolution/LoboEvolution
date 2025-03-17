@@ -55,7 +55,7 @@ public class GradientStyle {
 	 * <p>gradientToImg.</p>
 	 * @param document a {@link org.loboevolution.html.dom.domimpl.HTMLDocumentImpl} object.
 	 * @param props a {@link CSSStyleDeclaration} object.
-	 * @param renderState a {@link RenderState} object.
+	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
 	 * @param backgroundImage a {@link java.lang.String} object.
 	 * @return a {@link java.awt.image.BufferedImage} object.
 	 */

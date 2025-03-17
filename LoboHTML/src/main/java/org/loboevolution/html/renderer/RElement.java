@@ -27,7 +27,7 @@
 package org.loboevolution.html.renderer;
 
 import org.loboevolution.html.AlignValues;
-import org.loboevolution.html.node.UINode;
+import org.loboevolution.html.dom.domimpl.UINode;
 
 /**
  * A renderer node for elements such as blocks, lists, tables, inputs, images,

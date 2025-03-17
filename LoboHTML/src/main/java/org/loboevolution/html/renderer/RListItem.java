@@ -62,7 +62,7 @@ class RListItem extends BaseRListElement {
 	@Override
 	public void doLayout(final RLayoutInfo info) {
 		super.doLayout(info);
-		final RenderState renderState = (RenderState)this.modelNode.getRenderState();
+		final RenderState renderState = this.modelNode.getRenderState();
 		final Integer value = getValue();
 		if (Objects.equals(value, UNSET)) {
 			this.count = renderState.incrementCount(DEFAULT_COUNTER_NAME, this.listNesting);
@@ -109,7 +109,7 @@ class RListItem extends BaseRListElement {
 	@Override
 	public void paint(final Graphics g) {
 		super.paint(g);
-		final RenderState rs = (RenderState)this.modelNode.getRenderState();
+		final RenderState rs = this.modelNode.getRenderState();
 		final Insets marginInsets = this.marginInsets;
 		final RBlockViewport layout = this.bodyLayout;
 		if (layout != null) {

@@ -35,7 +35,7 @@ public abstract class AbstractMarginRenderState extends BlockRenderState {
 	/**
 	 * <p>Constructor for AbstractMarginRenderState.</p>
 	 *
-	 * @param prevRenderState a {@link RenderState} object.
+	 * @param prevRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
 	 * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
 	 */
 	public AbstractMarginRenderState(final RenderState prevRenderState, final HTMLElementImpl element) {

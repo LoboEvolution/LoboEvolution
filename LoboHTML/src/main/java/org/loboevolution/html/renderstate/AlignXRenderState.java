@@ -36,7 +36,7 @@ public class AlignXRenderState extends BlockRenderState {
     /**
      * <p>Constructor for AlignXRenderState.</p>
      *
-     * @param prevRenderState a {@link RenderState} object.
+     * @param prevRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
      * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
      * @param alignXPercent a {@link java.lang.Integer} object.
      */

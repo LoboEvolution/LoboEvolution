@@ -30,7 +30,7 @@ import lombok.Getter;
 import org.loboevolution.events.Event;
 import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.dom.domimpl.*;
-import org.loboevolution.html.node.ModelNode;
+import org.loboevolution.html.dom.nodeimpl.ModelNode;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.js.Executor;
 import org.loboevolution.html.js.WindowImpl;
@@ -55,7 +55,7 @@ public class HtmlController {
 	/**
 	 * <p>onChange.</p>
 	 *
-	 * @param node a {@link org.loboevolution.html.node.ModelNode} object.
+	 * @param node a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 * @return a boolean.
 	 */
 	public boolean onChange(final ModelNode node) {
@@ -75,7 +75,7 @@ public class HtmlController {
 	/**
 	 * <p>onContextMenu.</p>
 	 *
-	 * @param node a {@link ModelNode} object.
+	 * @param node a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 * @param event a {@link java.awt.event.MouseEvent} object.
 	 * @param x a {@link java.lang.Integer} object.
 	 * @param y a {@link java.lang.Integer} object.
@@ -109,7 +109,7 @@ public class HtmlController {
 	 * <p>onDoubleClick.</p>
 	 *
 	 * @return True to propagate further, false if consumed.
-	 * @param node a {@link org.loboevolution.html.node.ModelNode} object.
+	 * @param node a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 * @param event a {@link java.awt.event.MouseEvent} object.
 	 * @param x a {@link java.lang.Integer} object.
 	 * @param y a {@link java.lang.Integer} object.
@@ -136,7 +136,7 @@ public class HtmlController {
 	 * <p>onEnterPressed.</p>
 	 *
 	 * @return True to propagate further and false if the event was consumed.
-	 * @param node a {@link org.loboevolution.html.node.ModelNode} object.
+	 * @param node a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 */
 	public boolean onEnterPressed(final ModelNode node) {
 		final HTMLInputElementImpl hie = (HTMLInputElementImpl) node;
@@ -148,7 +148,7 @@ public class HtmlController {
 	 * <p>onMouseClick.</p>
 	 *
 	 * @return True to propagate further and false if the event was consumed.
-	 * @param node a {@link org.loboevolution.html.node.ModelNode} object.
+	 * @param node a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 * @param event a {@link java.awt.event.MouseEvent} object.
 	 * @param x a {@link java.lang.Integer} object.
 	 * @param y a {@link java.lang.Integer} object.
@@ -194,7 +194,7 @@ public class HtmlController {
 	 * <p>onMouseDisarmed.</p>
 	 *
 	 * @return True to propagate further, false if consumed.
-	 * @param node a {@link ModelNode} object.
+	 * @param node a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 * @param event a {@link java.awt.event.MouseEvent} object.
 	 */
 	public boolean onMouseDisarmed(final ModelNode node, final MouseEvent event) {
@@ -213,7 +213,7 @@ public class HtmlController {
 	 * <p>onMouseDown.</p>
 	 *
 	 * @return True to propagate further, false if consumed.
-	 * @param node a {@link ModelNode} object.
+	 * @param node a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 * @param event a {@link java.awt.event.MouseEvent} object.
 	 * @param x a {@link java.lang.Integer} object.
 	 * @param y a {@link java.lang.Integer} object.
@@ -246,11 +246,11 @@ public class HtmlController {
 	/**
 	 * <p>onMouseOut.</p>
 	 *
-	 * @param modelNode a {@link ModelNode} object.
+	 * @param modelNode a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 * @param event a {@link java.awt.event.MouseEvent} object.
 	 * @param x a {@link java.lang.Integer} object.
 	 * @param y a {@link java.lang.Integer} object.
-	 * @param limit a {@link org.loboevolution.html.node.ModelNode} object.
+	 * @param limit a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 */
 	public void onMouseOut(final ModelNode modelNode, final MouseEvent event, final int x, final int y, final ModelNode limit) {
 		ModelNode node = modelNode;
@@ -275,11 +275,11 @@ public class HtmlController {
 	/**
 	 * <p>onMouseMoved.</p>
 	 *
-	 * @param modelNode a {@link ModelNode} object.
+	 * @param modelNode a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 * @param event a {@link java.awt.event.MouseEvent} object.
 	 * @param x a {@link java.lang.Integer} object.
 	 * @param y a {@link java.lang.Integer} object.
-	 * @param limit a {@link ModelNode} object.
+	 * @param limit a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 */
 	public void onMouseMoved(final ModelNode modelNode, final MouseEvent event, final int x, final int y, final ModelNode limit) {
 		ModelNode node = modelNode;
@@ -301,11 +301,11 @@ public class HtmlController {
 	/**
 	 * <p>onMouseOver.</p>
 	 *
-	 * @param modelNode a {@link ModelNode} object.
+	 * @param modelNode a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 * @param event a {@link java.awt.event.MouseEvent} object.
 	 * @param x a {@link java.lang.Integer} object.
 	 * @param y a {@link java.lang.Integer} object.
-	 * @param limit a {@link org.loboevolution.html.node.ModelNode} object.
+	 * @param limit a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 */
 	public void onMouseOver(final ModelNode modelNode, final MouseEvent event, final int x, final int y, final ModelNode limit) {
 		ModelNode node = modelNode;
@@ -329,7 +329,7 @@ public class HtmlController {
 
 	/**
 	 * <p>onMouseScroll.</p>
-	 * @param node a {@link ModelNode} object.
+	 * @param node a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 */
 	public void onMouseScroll(final ModelNode node) {
 		if (node instanceof HTMLElementImpl uiElement) {
@@ -345,7 +345,7 @@ public class HtmlController {
 	 * <p>onMouseUp.</p>
 	 *
 	 * @return True to propagate further, false if consumed.
-	 * @param node a {@link ModelNode} object.
+	 * @param node a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 * @param event a {@link java.awt.event.MouseEvent} object.
 	 * @param x a {@link java.lang.Integer} object.
 	 * @param y a {@link java.lang.Integer} object.

@@ -134,28 +134,24 @@ public class JavaClassWrapper {
 	}
 
 	private boolean isPropertyMethod(final String name, final Method method) {
-		if (method.isAnnotationPresent(IgnoreJs.class)) {
-			return false;
+		if ((name.startsWith("get") || name.startsWith("is")) &&
+				!name.equals("getBoundingClientRect") &&
+				!name.equals("click") &&
+				!name.equals("getClientRects") &&
+				!name.equals("getComputedStyle") &&
+				!name.equals("getPropertyCSSValue") &&
+				!name.equals("getSelection")) {
+			return method.getParameterTypes().length == 0;
+		} else if (name.startsWith("set") &&
+				!name.equals("setTimeout") &&
+				!name.equals("setNamedItem") &&
+				!name.equals("setProperty") &&
+				!name.equals("setAttributeNode") &&
+				!name.equals("setStartAfter") &&
+				!name.equals("setStart")) {
+			return method.getParameterTypes().length == 1;
 		} else {
-			if ((name.startsWith("get") || name.startsWith("is")) &&
-					!name.equals("getBoundingClientRect") &&
-					!name.equals("click") &&
-					!name.equals("getClientRects") &&
-					!name.equals("getComputedStyle") &&
-					!name.equals("getPropertyCSSValue") &&
-					!name.equals("getSelection")) {
-				return method.getParameterTypes().length == 0;
-			} else if (name.startsWith("set") &&
-					!name.equals("setTimeout") &&
-					!name.equals("setNamedItem") &&
-					!name.equals("setProperty") &&
-					!name.equals("setAttributeNode") &&
-					!name.equals("setStartAfter") &&
-					!name.equals("setStart")) {
-				return method.getParameterTypes().length == 1;
-			} else {
-				return false;
-			}
+			return false;
 		}
 	}
 

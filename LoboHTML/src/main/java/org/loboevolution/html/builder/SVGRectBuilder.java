@@ -27,13 +27,12 @@
 package org.loboevolution.html.builder;
 
 import org.loboevolution.html.dom.HTMLElement;
-import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
-import org.loboevolution.svg.dom.SVGRectElementImpl;
+import org.loboevolution.svg.SVGRectElementImpl;
 
 public class SVGRectBuilder implements HTMLElementBuilder {
 
     @Override
     public HTMLElement build(final String name) {
-        return new SVGRectElementImpl(new HTMLElementImpl(name));
+        return new SVGRectElementImpl(name);
     }
 }

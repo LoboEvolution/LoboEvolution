@@ -29,7 +29,6 @@
 package org.loboevolution.html.control;
 
 import org.loboevolution.html.AlignValues;
-import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 
 import javax.swing.*;
@@ -42,13 +41,13 @@ import java.io.Serial;
 public abstract class BaseControl extends JComponent implements UIControl {
 	@Serial
     private static final long serialVersionUID = 1L;
-	protected final HTMLElement controlElement;
+	protected final HTMLElementImpl controlElement;
 	protected RUIControl ruicontrol;
 
 	/**
 	 * <p>Constructor for BaseControl.</p>
 	 *
-	 * @param modelNode a {@link org.loboevolution.html.dom.HTMLElement} object.
+	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
 	 */
 	public BaseControl(final HTMLElementImpl modelNode) {
 		this.controlElement = modelNode;

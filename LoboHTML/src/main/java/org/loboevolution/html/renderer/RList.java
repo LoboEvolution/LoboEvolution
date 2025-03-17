@@ -78,7 +78,7 @@ class RList extends BaseRListElement {
 	/** {@inheritDoc} */
 	@Override
 	public void doLayout(final RLayoutInfo info) {
-		final RenderState renderState = (RenderState)this.modelNode.getRenderState();
+		final RenderState renderState = this.modelNode.getRenderState();
 
 		final Object rootNode = this.modelNode;
 		if (rootNode instanceof HTMLElementImpl rootElement) {

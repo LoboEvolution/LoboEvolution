@@ -25,7 +25,7 @@
  */
 package org.loboevolution.html.renderer;
 
-import org.loboevolution.html.node.ModelNode;
+import org.loboevolution.html.dom.nodeimpl.ModelNode;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -127,7 +127,7 @@ public interface BoundableRenderable extends Renderable {
 	/**
 	 * <p>getModelNode.</p>
 	 *
-	 * @return a {@link org.loboevolution.html.node.ModelNode} object.
+	 * @return a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 */
 	ModelNode getModelNode();
 
@@ -250,7 +250,7 @@ public interface BoundableRenderable extends Renderable {
 	 * @param x a {@link java.lang.Integer} object.
 	 * @param y a {@link java.lang.Integer} object.
 	 * @param triggerEvent a boolean.
-	 * @param limit a {@link org.loboevolution.html.node.ModelNode} object.
+	 * @param limit a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 */
 	void onMouseMoved(final MouseEvent event, final int x, final int y, boolean triggerEvent, ModelNode limit);
 
@@ -320,7 +320,7 @@ public interface BoundableRenderable extends Renderable {
 	 * @param event a {@link java.awt.event.MouseEvent} object.
 	 * @param x a {@link java.lang.Integer} object.
 	 * @param y a {@link java.lang.Integer} object.
-	 * @param limit a {@link org.loboevolution.html.node.ModelNode} object.
+	 * @param limit a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 */
 	void onMouseOut(final MouseEvent event, final int x, final int y, ModelNode limit);
 

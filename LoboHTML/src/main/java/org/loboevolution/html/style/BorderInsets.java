@@ -80,7 +80,7 @@ public class BorderInsets {
 	 *
 	 * @param properties a {@link CSSStyleDeclaration} object.
 	 * @param element a {@link  org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
-	 * @param renderState a {@link RenderState} object.
+	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
 	 * @return a {@link org.loboevolution.info.BorderInfo} object.
 	 */
 	public static BorderInfo getBorderInfo(final CSSStyleDeclaration properties, final HTMLElementImpl element, final RenderState renderState) {
@@ -117,7 +117,7 @@ public class BorderInsets {
 	 * @param binfo a {@link org.loboevolution.info.BorderInfo} object.
 	 * @param cssProperties a {@link CSSStyleDeclaration} object.
 	 * @param element a {@link  org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
-	 * @param renderState a {@link RenderState} object.
+	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
 	 */
 	private static void populateBorderInsets(final BorderInfo binfo, final CSSStyleDeclaration cssProperties, final HTMLElementImpl element, final RenderState renderState) {
 		final CSSStyleDeclaration parentStyle = element.getParentStyle();

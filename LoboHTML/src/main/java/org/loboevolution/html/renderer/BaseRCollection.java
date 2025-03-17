@@ -30,7 +30,7 @@ import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.domimpl.HTMLAnchorElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
-import org.loboevolution.html.node.ModelNode;
+import org.loboevolution.html.dom.nodeimpl.ModelNode;
 import org.loboevolution.css.CSSStyleDeclaration;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.style.HtmlInsets;
@@ -49,7 +49,7 @@ public abstract class BaseRCollection extends BaseBoundableRenderable implements
 	 * <p>Constructor for BaseRCollection.</p>
 	 *
 	 * @param container a {@link org.loboevolution.html.renderer.RenderableContainer} object.
-	 * @param modelNode a {@link ModelNode} object.
+	 * @param modelNode a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 */
 	public BaseRCollection(final RenderableContainer container, final ModelNode modelNode) {
 		super(container, modelNode);

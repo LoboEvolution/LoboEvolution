@@ -31,7 +31,7 @@ package org.loboevolution.html.renderer;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.gui.HtmlRendererContext;
-import org.loboevolution.html.node.ModelNode;
+import org.loboevolution.html.dom.nodeimpl.ModelNode;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.renderstate.RenderState;
 
@@ -68,7 +68,7 @@ public abstract class BaseBoundableRenderable extends RRectangle implements Boun
 	 * <p>Constructor for BaseBoundableRenderable.</p>
 	 *
 	 * @param container a {@link org.loboevolution.html.renderer.RenderableContainer} object.
-	 * @param modelNode a {@link org.loboevolution.html.node.ModelNode} object.
+	 * @param modelNode a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 */
 	public BaseBoundableRenderable(final RenderableContainer container, final ModelNode modelNode) {
 		this.container = container;

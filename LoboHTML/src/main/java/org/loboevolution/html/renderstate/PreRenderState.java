@@ -36,7 +36,7 @@ public class PreRenderState extends BlockRenderState {
 	/**
 	 * <p>Constructor for PreRenderState.</p>
 	 *
-	 * @param prevRenderState a {@link RenderState} object.
+	 * @param prevRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
 	 * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
 	 */
 	public PreRenderState(final RenderState prevRenderState, final HTMLElementImpl element) {

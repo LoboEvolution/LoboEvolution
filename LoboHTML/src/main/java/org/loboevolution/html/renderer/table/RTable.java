@@ -28,7 +28,7 @@ package org.loboevolution.html.renderer.table;
 import org.loboevolution.html.control.LayoutKey;
 import org.loboevolution.html.control.LayoutValue;
 import org.loboevolution.html.control.RUIControl;
-import org.loboevolution.html.node.ModelNode;
+import org.loboevolution.html.dom.nodeimpl.ModelNode;
 import org.loboevolution.html.renderer.*;
 import org.loboevolution.html.renderer.info.RBlockInfo;
 import org.loboevolution.html.renderstate.RenderState;
@@ -90,7 +90,7 @@ public class RTable extends BaseElementRenderable {
 	@Override
 	public void doLayout(final int availWidth, final int availHeight, final boolean sizeOnly) {
 		final Map<LayoutKey, LayoutValue> cachedLayout = this.cachedLayout;
-		final RenderState rs = (RenderState)this.modelNode.getRenderState();
+		final RenderState rs = this.modelNode.getRenderState();
 
 		final int whitespace = rs == null ? RenderState.WS_NORMAL : rs.getWhiteSpace();
 		final Font font = rs == null ? null : rs.getFont();
@@ -302,7 +302,7 @@ public class RTable extends BaseElementRenderable {
 	/** {@inheritDoc} */
 	@Override
 	public void paint(final Graphics g) {
-		final RenderState rs = (RenderState)this.modelNode.getRenderState();
+		final RenderState rs = this.modelNode.getRenderState();
 		if (rs != null && rs.getVisibility() != RenderState.VISIBILITY_VISIBLE) {
 			// Just don't paint it.
 			return;

@@ -46,7 +46,7 @@ public class DialogRenderState extends BlockRenderState {
     /**
      * <p>Constructor for DialogRenderState.</p>
      *
-     * @param prevRenderState a {@link RenderState} object.
+     * @param prevRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
      * @param element         a {@link org.loboevolution.html.dom.domimpl.HTMLDialogElementImpl} object.
      */
     public DialogRenderState(final RenderState prevRenderState, final HTMLDialogElementImpl element) {

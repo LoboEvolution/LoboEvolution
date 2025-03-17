@@ -48,7 +48,7 @@ public class TableRenderState extends StyleSheetRenderState {
 	/**
 	 * <p>Constructor for TableRenderState.</p>
 	 *
-	 * @param prevRenderState a {@link RenderState} object.
+	 * @param prevRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
 	 * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
 	 */
 	public TableRenderState(final RenderState prevRenderState, final HTMLElementImpl element) {

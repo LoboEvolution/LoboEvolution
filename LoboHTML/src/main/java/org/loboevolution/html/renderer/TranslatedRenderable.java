@@ -26,7 +26,7 @@
 
 package org.loboevolution.html.renderer;
 
-import org.loboevolution.html.node.ModelNode;
+import org.loboevolution.html.dom.nodeimpl.ModelNode;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -68,7 +68,7 @@ public class TranslatedRenderable extends BaseBoundableRenderable implements RCo
     /**
      * <p>getModelNode.</p>
      *
-     * @return a {@link org.loboevolution.html.node.ModelNode} object.
+     * @return a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
      */
     public ModelNode getModelNode() {
         return translatedChild.getModelNode();

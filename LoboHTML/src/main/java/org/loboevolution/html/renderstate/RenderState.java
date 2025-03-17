@@ -364,7 +364,7 @@ public interface RenderState {
 	/**
 	 * <p>getPreviousRenderState.</p>
 	 *
-	 * @return a {@link RenderState} object.
+	 * @return a {@link org.loboevolution.html.renderstate.RenderState} object.
 	 */
 	RenderState getPreviousRenderState();
 

@@ -28,7 +28,7 @@
  */
 package org.loboevolution.html.renderer;
 
-import org.loboevolution.html.node.ModelNode;
+import org.loboevolution.html.dom.nodeimpl.ModelNode;
 import org.loboevolution.html.renderstate.RenderState;
 
 import java.awt.*;
@@ -41,7 +41,7 @@ final class RBlank extends BaseBoundableRenderable {
 	/**
 	 * <p>Constructor for RBlank.</p>
 	 *
-	 * @param me a {@link ModelNode} object.
+	 * @param me a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 * @param fm a {@link java.awt.FontMetrics} object.
 	 * @param container a {@link org.loboevolution.html.renderer.RenderableContainer} object.
 	 * @param ascentPlusLeading a {@link java.lang.Integer} object.
@@ -92,7 +92,7 @@ final class RBlank extends BaseBoundableRenderable {
 	/** {@inheritDoc} */
 	@Override
 	public void paint(final Graphics g) {
-		final RenderState rs = (RenderState)this.modelNode.getRenderState();
+		final RenderState rs = this.modelNode.getRenderState();
 		final Color bkg = rs.getTextBackgroundColor();
 		if (bkg != null) {
 			final Color oldColor = g.getColor();

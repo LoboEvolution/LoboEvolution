@@ -40,7 +40,7 @@ public class IFrameRenderState extends StyleSheetRenderState {
 	/**
 	 * <p>Constructor for IFrameRenderState.</p>
 	 *
-	 * @param prevRenderState a {@link RenderState} object.
+	 * @param prevRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
 	 * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
 	 */
 	public IFrameRenderState(final RenderState prevRenderState, final HTMLElementImpl element) {

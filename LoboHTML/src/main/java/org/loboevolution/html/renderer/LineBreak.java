@@ -26,7 +26,7 @@
 package org.loboevolution.html.renderer;
 
 import lombok.Data;
-import org.loboevolution.html.node.ModelNode;
+import org.loboevolution.html.dom.nodeimpl.ModelNode;
 
 /**
  * <p>LineBreak class.</p>
@@ -51,7 +51,7 @@ public class LineBreak {
 	 * <p>Constructor for LineBreak.</p>
 	 *
 	 * @param breakType a {@link java.lang.Integer} object.
-	 * @param newLineNode a {@link ModelNode} object.
+	 * @param newLineNode a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
 	 */
 	public LineBreak(final int breakType, final ModelNode newLineNode) {
 		this.breakType = breakType;

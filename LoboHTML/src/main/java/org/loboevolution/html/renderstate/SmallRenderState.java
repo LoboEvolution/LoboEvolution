@@ -49,7 +49,7 @@ public class SmallRenderState extends RenderStateDelegator {
     /**
      * <p>Constructor for SmallRenderState.</p>
      *
-     * @param prevRenderState a {@link RenderState} object.
+     * @param prevRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
      * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
      */
     public SmallRenderState(final RenderState prevRenderState, final HTMLElementImpl element) {
