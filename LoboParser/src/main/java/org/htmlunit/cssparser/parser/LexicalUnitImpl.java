@@ -427,6 +427,9 @@ public class LexicalUnitImpl extends AbstractLocatable implements LexicalUnit, S
             case NONE:
                 sb.append("none");
                 break;
+            case FROM:
+                sb.append("from");
+                break;
             case IDENT:
                 sb.append(getStringValue());
                 break;
@@ -1146,6 +1149,14 @@ public class LexicalUnitImpl extends AbstractLocatable implements LexicalUnit, S
      */
     public static LexicalUnit createNone(final LexicalUnit prev) {
         return new LexicalUnitImpl(prev, LexicalUnitType.NONE);
+    }
+
+    /**
+     * @param prev the previous LexicalUnit
+     * @return lexical unit with type rgb color
+     */
+    public static LexicalUnit createFrom(final LexicalUnit prev) {
+        return new LexicalUnitImpl(prev, LexicalUnitType.FROM);
     }
 
     /**

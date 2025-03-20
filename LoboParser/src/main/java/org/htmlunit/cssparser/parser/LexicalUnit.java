@@ -106,6 +106,8 @@ public interface LexicalUnit {
         LCHCOLOR,
         /** NONE. */
         NONE,
+        /** FROM. */
+        FROM,
 
         /** DEGREE. */
         DEGREE,
