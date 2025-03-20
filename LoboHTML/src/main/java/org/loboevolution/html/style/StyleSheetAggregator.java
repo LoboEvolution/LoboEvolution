@@ -387,7 +387,7 @@ public class StyleSheetAggregator {
 				return mouseOver;
 
 			case "root":
-				final NodeImpl parentDOMNodeImpl = (NodeImpl) element.getParentNode();
+				final Node parentDOMNodeImpl = element.getParentNode();
 				return parentDOMNodeImpl != null && parentDOMNodeImpl.getNodeType() == Node.DOCUMENT_NODE;
 
 			case "enabled":

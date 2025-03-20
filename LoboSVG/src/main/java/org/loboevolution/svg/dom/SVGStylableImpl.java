@@ -47,7 +47,7 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	/**
 	 * <p>Constructor for SVGStylableImpl.</p>
 	 *
-	 * @param name a {@link java.lang.String} object.
+	 * @param element a {@link HTMLElement} object.
 	 */
 	public SVGStylableImpl(HTMLElement element) {
 		super(element);

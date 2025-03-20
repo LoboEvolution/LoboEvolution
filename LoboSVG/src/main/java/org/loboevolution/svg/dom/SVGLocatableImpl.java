@@ -40,7 +40,7 @@ public abstract class SVGLocatableImpl extends SVGStylableImpl implements SVGLoc
 	/**
 	 * <p>Constructor for SVGLocatableImpl.</p>
 	 *
-	 * @param name a {@link java.lang.String} object.
+	 * @param element a {@link HTMLElement} object.
 	 */
 	public SVGLocatableImpl(HTMLElement element) {
 		super(element);
