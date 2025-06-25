@@ -165,7 +165,8 @@ public abstract class BaseWatchable implements Watchable, Runnable {
                                 try {
                                     this.statusLock.wait();
                                 } catch (final InterruptedException ie) {
-                                    // ignore
+                                    Thread.currentThread().interrupt(); // ← Preserve the interrupt status
+                                    PDFDebugger.debug("Thread interrupted while waiting for status change.");
                                 }
                             }
                         }
@@ -307,6 +308,7 @@ public abstract class BaseWatchable implements Watchable, Runnable {
                     this.statusLock.wait();
                 } catch (final InterruptedException ex) {
                     Thread.currentThread().interrupt();
+                    PDFDebugger.debug("Thread interrupted while waiting for status change.");
                 }
             }
         }
@@ -347,6 +349,7 @@ public abstract class BaseWatchable implements Watchable, Runnable {
                     statusLock.wait();
                 } catch (final InterruptedException ex) {
                     Thread.currentThread().interrupt();
+                    PDFDebugger.debug("Thread interrupted while waiting for status change.");
                 }
             }
         }

@@ -43,11 +43,13 @@ import javax.imageio.ImageReadParam;
 import javax.imageio.ImageReader;
 import javax.imageio.metadata.IIOMetadata;
 import javax.imageio.metadata.IIOMetadataFormatImpl;
+import javax.imageio.stream.ImageInputStream;
 import java.awt.*;
 import java.awt.color.ColorSpace;
 import java.awt.color.ICC_ColorSpace;
 import java.awt.geom.AffineTransform;
 import java.awt.image.*;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
@@ -1089,64 +1091,39 @@ public class PDFImage {
          *                     or some IO problem
          */
         private BufferedImage decode() throws IOException {
+            byte[] jpegBytes = jpegData.hasArray()
+                    ? Arrays.copyOfRange(jpegData.array(), jpegData.position(), jpegData.limit())
+                    : ByteBuffer.allocate(jpegData.remaining()).put(jpegData.duplicate()).array();
 
             ImageReadParam readParam = null;
             if (getDecode() != null) {
-                // we have to allocate our own buffered image so that we can
-                // install our colour model which will do the desired decode
                 readParam = new ImageReadParam();
-                final SampleModel sm = cm.createCompatibleSampleModel(getWidth(), getHeight());
-                final WritableRaster raster = Raster.createWritableRaster(sm, new Point(0, 0));
+                SampleModel sm = cm.createCompatibleSampleModel(getWidth(), getHeight());
+                WritableRaster raster = Raster.createWritableRaster(sm, new Point(0, 0));
                 readParam.setDestination(new BufferedImage(cm, raster, true, null));
             }
 
-            final Iterator<ImageReader> jpegReaderIt = ImageIO.getImageReadersByFormatName("jpeg");
             IIOException lastIioEx = null;
-            while (jpegReaderIt.hasNext()) {
-                try {
-                    final ImageReader jpegReader = jpegReaderIt.next();
-                    jpegReader.setInput(ImageIO.createImageInputStream(new ByteBufferInputStream(jpegData)), true,
-                            false);
-                    try {
-                        return readImage(jpegReader, readParam);
-                    } catch (final Exception e) {
-                        if (e instanceof IIOException) {
-                            throw (IIOException) e;
-                        }
-                        // Any other exceptions here are probably due to
-                        // internal
-                        // problems with the image reader.
-                        // A concrete example of this happening is described
-                        // here:
-                        // http://java.net/jira/browse/PDF_RENDERER-132 where
-                        // JAI imageio extension throws an
-                        // IndexOutOfBoundsException on progressive JPEGs.
-                        // We'll just treat it as an IIOException for
-                        // convenience
-                        // and hopefully a subsequent reader can handle it
-                        throw new IIOException("Internal reader error?", e);
-                    } finally {
-                        jpegReader.dispose();
-                    }
-                } catch (final IIOException e) {
-                    // its most likely complaining about an unsupported image
-                    // type; hopefully the next image reader will be able to
-                    // understand it
-                    jpegData.reset();
-                    lastIioEx = e;
+            for (Iterator<ImageReader> it = ImageIO.getImageReadersByFormatName("jpeg"); it.hasNext(); ) {
+                ImageReader reader = it.next();
+                try (ByteArrayInputStream bais = new ByteArrayInputStream(jpegBytes);
+                     ImageInputStream iis = ImageIO.createImageInputStream(bais)) {
+                    reader.setInput(iis, true, false);
+                    return readImage(reader, readParam);
+                } catch (IIOException e) {
+                    lastIioEx = e; // try next reader
+                } catch (Exception e) {
+                    throw new IIOException("Internal reader error?", e);
+                } finally {
+                    reader.dispose();
                 }
             }
 
-            throw lastIioEx;
-
+            throw lastIioEx != null ? lastIioEx : new IIOException("No suitable JPEG reader found.");
         }
 
-        private BufferedImage readImage(final ImageReader jpegReader, final ImageReadParam param) throws IOException {
+        private BufferedImage readImage(ImageReader jpegReader, ImageReadParam param) throws IOException {
             if (ycckcmykDecodeMode) {
-                // The standard Oracle Java JPEG readers can't deal with CMYK
-                // YCCK encoded images
-                // without a little help from us. We'll try and pick up such
-                // instances and work around it.
                 final IIOMetadata imageMeta = jpegReader.getImageMetadata(0);
                 if (imageMeta != null) {
                     final Node standardMeta = imageMeta.getAsTree(IIOMetadataFormatImpl.standardMetadataFormatName);
@@ -1160,29 +1137,10 @@ public class PDFImage {
                                     final String typeName = csTypeNameNode.getValue();
                                     final boolean YCCK;
                                     if ((YCCK = "YCCK".equals(typeName)) || "CMYK".equals(typeName)) {
-                                        // If it's a YCCK image, then we can
-                                        // coax a workable image out of it
-                                        // by grabbing the raw raster and
-                                        // installing a YCCK converting
-                                        // color space wrapper around the
-                                        // existing (CMYK) color space; this
-                                        // will
-                                        // do the YCCK conversion for us
-                                        //
-                                        // If it's a CMYK image - just raster it
-                                        // in existing CMYK color space
-
-                                        // first make sure we can get the
-                                        // unadjusted raster
                                         final Raster raster = jpegReader.readRaster(0, param);
-
                                         if (YCCK) {
-                                            // and now use it with a YCCK
-                                            // converting color space.
                                             PDFImage.this.colorSpace = new PDFColorSpace(
                                                     new YCCKColorSpace(colorSpace.getColorSpace()));
-                                            // re-calculate the color model
-                                            // since the color space has changed
                                             cm = PDFImage.this.createColorModel();
                                         }
 
@@ -1208,11 +1166,11 @@ public class PDFImage {
                     // otherwise we'll create a new buffered image with the
                     // desired color model
                     //return new BufferedImage(cm, jpegReader.read(0, param).getRaster(), true, null);
-                    final BufferedImage bi = jpegReader.read(0, param);
+                    BufferedImage bi = jpegReader.read(0, param);
                     try {
                         return new BufferedImage(cm, bi.getRaster(), true, null);
-                    } catch (final IllegalArgumentException raster_ByteInterleavedRaster) {
-                        final BufferedImage bi2 = new BufferedImage(bi.getWidth(), bi.getHeight(),
+                    } catch (IllegalArgumentException raster_ByteInterleavedRaster) {
+                        BufferedImage bi2 = new BufferedImage(bi.getWidth(), bi.getHeight(),
                                 BufferedImage.TYPE_BYTE_INDEXED,
                                 new IndexColorModel(8, 1, new byte[]{0}, new byte[]{0}, new byte[]{0}, 0));
                         cm = bi2.getColorModel();

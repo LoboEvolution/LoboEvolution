@@ -52,13 +52,11 @@ public class PDFFile {
      * Constant <code>NUL_CHAR=0</code>
      */
     public static final int NUL_CHAR = 0;
-    /**
-     * Constant <code>FF_CHAR=12</code>
-     */
+    
+    /** the end of line character */
     public static final int FF_CHAR = 12;
-    /**
-     * the comment text to begin the file to determine it's version
-     */
+
+    /** the comment text to begin the file to determine it's version */
     private static final String VERSION_COMMENT = "%PDF-";
     /**
      * A ByteBuffer containing the file data
@@ -69,21 +67,15 @@ public class PDFFile {
      * in the PDF file
      */
     PDFXref[] objIdx;
-        /**
-     * the root PDFObject, as specified in the PDF file
-     */
+    /** the root PDFObject, as specified in the PDF file */
     PDFObject root = null;
-    /**
-     * the Encrypt PDFObject, from the trailer
-     */
+    /** the Encrypt PDFObject, from the trailer */
     PDFObject encrypt = null;
-    /**
-     * The Info PDFPbject, from the trailer, for simple metadata
-     */
+
+    /** The Info PDFPbject, from the trailer, for simple metadata */
     PDFObject info = null;
-    /**
-     * a mapping of page numbers to parsed PDF commands
-     */
+
+    /** a mapping of page numbers to parsed PDF commands */
     Cache cache;
     private String versionString = "1.1";
     private int majorVersion = 1;
@@ -110,7 +102,14 @@ public class PDFFile {
      * Use the getPage(...) methods to get a page from the PDF file.
      *
      * @param buf the RandomAccessFile containing the PDF.
-     * @throws java.io.IOException if any.
+     * @throws IOException                       if there's a problem reading from the buffer
+     * @throws PDFParseException                 if the document appears to be malformed, or
+     *                                           its features are unsupported. If the file is encrypted in a manner that
+     *                                           the product or platform does not support then the exception's {@link
+     *                                           PDFParseException#getCause() cause} will be an instance of {@link
+     *                                           UnsupportedEncryptionException}.
+     * @throws PDFAuthenticationFailureException if the file is password
+     *                                           protected and requires a password
      */
     public PDFFile(final ByteBuffer buf) throws IOException {
         this(buf, null);
@@ -135,7 +134,14 @@ public class PDFFile {
      *
      * @param buf      the RandomAccessFile containing the PDF.
      * @param password the user or owner password
-     * @throws java.io.IOException if any.
+     * @throws IOException                       if there's a problem reading from the buffer
+     * @throws PDFParseException                 if the document appears to be malformed, or
+     *                                           its features are unsupported. If the file is encrypted in a manner that
+     *                                           the product or platform does not support then the exception's {@link
+     *                                           PDFParseException#getCause() cause} will be an instance of {@link
+     *                                           UnsupportedEncryptionException}.
+     * @throws PDFAuthenticationFailureException if the file is password
+     *                                           protected and the supplied password does not decrypt the document
      */
     public PDFFile(final ByteBuffer buf, final PDFPassword password) throws IOException {
         this.buf = buf;
@@ -143,6 +149,18 @@ public class PDFFile {
         this.cache = new Cache();
 
         parseFile(password);
+    }
+
+    /**
+     * return the number of pages in this PDFFile.  The pages will be
+     * numbered from 1 to getNumPages(), inclusive.
+     */
+    public int getNumPages() {
+        try {
+            return this.root.getDictRef("Pages").getDictRef("Count").getIntValue();
+        } catch (Exception ioe) {
+            return 0;
+        }
     }
 
     /**
@@ -154,17 +172,6 @@ public class PDFFile {
      */
     public static boolean isWhiteSpace(final int c) {
         return c == ' ' || c == NUL_CHAR || c == '\t' || c == '\n' || c == '\r' || c == FF_CHAR;
-    	/*switch (c) {
-            case NUL_CHAR:  // Null (NULL)
-            case '\t':      // Horizontal Tab (HT)
-            case '\n':      // Line Feed (LF)
-            case FF_CHAR:   // Form Feed (FF)
-            case '\r':      // Carriage Return (CR)
-            case ' ':       // Space (SP)
-                return true;
-            default:
-                return false;
-        }*/
     }
 
     /**
@@ -176,15 +183,7 @@ public class PDFFile {
      * @return a boolean.
      */
     public static boolean isDelimiter(final int c) {
-        return switch (c) {   // LEFT PARENTHESIS
-            // RIGHT PARENTHESIS
-            // LESS-THAN-SIGN
-            // GREATER-THAN-SIGN
-            // LEFT SQUARE BRACKET
-            // RIGHT SQUARE BRACKET
-            // LEFT CURLY BRACKET
-            // RIGHT CURLY BRACKET
-            // SOLIDUS
+        return switch (c) {
             case '(', ')', '<', '>', '[', ']', '{', '}', '/', '%' ->   // PERCENT SIGN
                     true;
             default -> false;
@@ -250,21 +249,6 @@ public class PDFFile {
             }
         } else {
             throw new PDFParseException("Rectangle not present");
-        }
-
-    }
-
-    /**
-     * return the number of pages in this PDFFile.  The pages will be
-     * numbered from 1 to getNumPages(), inclusive.
-     *
-     * @return a {@link java.lang.Integer} object.
-     */
-    public int getNumPages() {
-        try {
-            return this.root.getDictRef("Pages").getDictRef("Count").getIntValue();
-        } catch (final Exception ioe) {
-            return 0;
         }
     }
 
@@ -617,7 +601,7 @@ public class PDFFile {
      * and reset the read head.  If there is only one hex character,
      * return its value as if there were an implicit 0 after it.
      */
-    private int readHexPair() throws IOException {
+    private int readHexPair() {
         final int first = readHexDigit();
         if (first < 0) {
             this.buf.position(this.buf.position() - 1);
@@ -946,8 +930,9 @@ public class PDFFile {
         // see if it's a dictionary.  If so, this could be a stream.
         PDFObject endkey = readObject(objNum, objGen, decrypter);
         if (endkey.getType() != PDFObject.KEYWORD && endkey.getType() != PDFObject.STREAM) {
-            PDFDebugger.debug("WARNING: Expected 'stream' or 'endobj' but was " + endkey.getType() + " " + String.valueOf(endkey.getStringValue()));
+            PDFDebugger.debug("WARNING: Expected 'stream' or 'endobj' but was " + endkey.getType() + " " + endkey.getStringValue());
         }
+
         if (obj.getType() == PDFObject.DICTIONARY && endkey.getStringValue() != null && endkey.getStringValue().equals("stream")) {
             // skip until we see \n
             readLine();
@@ -1179,11 +1164,9 @@ public class PDFFile {
         if (this.encrypt != null && newDefaultDecrypter != null) {
             final PDFObject permissions = this.encrypt.getDictRef("P");
             if (permissions != null && !newDefaultDecrypter.isOwnerAuthorised()) {
-                final int perms = permissions != null ? permissions.getIntValue() : 0;
-                if (permissions != null) {
-                    this.printable = (perms & 4) != 0;
-                    this.saveable = (perms & 16) != 0;
-                }
+                final int perms = permissions.getIntValue();
+                this.printable = (perms & 4) != 0;
+                this.saveable = (perms & 16) != 0;
             }
             // Install the new default decrypter only after the trailer has
             // been read, as nothing we're reading passing through is encrypted

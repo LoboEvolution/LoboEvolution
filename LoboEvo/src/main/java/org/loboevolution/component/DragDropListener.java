@@ -30,6 +30,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.gui.HtmlPanel;
+import org.loboevolution.pdf.PDFViewer;
 import org.loboevolution.store.TabStore;
 
 import java.awt.*;
@@ -66,36 +67,40 @@ public class DragDropListener implements DropTargetListener {
 					dtde.acceptDrop(DnDConstants.ACTION_COPY);
 					final List<Object> list = (List<Object>) tr.getTransferData(dataFlavor);
 					for (final Object object : list) {
-						openFileDrop("file:///" + object);
+						final String uri = "file:///" + String.valueOf(object).replace(" ", "%20");
+						openFileDrop(uri);
 					}
 					dtde.dropComplete(true);
 					return;
 				}
 			}
-			dtde.rejectDrop();
 		} catch (final Exception e) {
 			log.error(e.getMessage(), e);
-			dtde.rejectDrop();
 		}
 	}
-	
+
 	private void openFileDrop(final String fullURL) {
 		final String fUrl = fullURL.replace("\\", "/");
-		final ITabbedPane tabbedPane = bpanel.getTabbedPane();
-		tabbedPane.setComponentPopupMenu(bpanel);
-		final int index = TabStore.getTabs().size();
-		final HtmlPanel hpanel = NavigatorFrame.createHtmlPanel(bpanel, fUrl);
-		final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) hpanel.getRootNode();
-		final String title = Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";
-		tabbedPane.insertTab(title, null, hpanel, title, index+1);
-		tabbedPane.setSelectedIndex(index+1);
-		final IBrowserFrame browserFrame = bpanel.getBrowserFrame();
-		final IBrowserPanel panel = browserFrame.getPanel();
-		final IWelcomePanel welcome = panel.getWelcome();
-		browserFrame.getToolbar().getAddressBar().setText(fUrl);
-		TabStore.insertTab(index+1, fUrl, title);
-		welcome.setBackground(new Color(37, 51, 61));		
-		bpanel.getScroll().getViewport().add((Component)tabbedPane);
+		if (fUrl.endsWith(".pdf")) {
+			final PDFViewer viewer = new PDFViewer(true);
+			viewer.doOpen(fUrl);
+		} else {
+			final ITabbedPane tabbedPane = bpanel.getTabbedPane();
+			tabbedPane.setComponentPopupMenu(bpanel);
+			final int index = TabStore.getTabs().size();
+			final HtmlPanel hpanel = NavigatorFrame.createHtmlPanel(bpanel, fUrl);
+			final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) hpanel.getRootNode();
+			final String title = Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";
+			tabbedPane.insertTab(title, null, hpanel, title, index + 1);
+			tabbedPane.setSelectedIndex(index + 1);
+			final IBrowserFrame browserFrame = bpanel.getBrowserFrame();
+			final IBrowserPanel panel = browserFrame.getPanel();
+			final IWelcomePanel welcome = panel.getWelcome();
+			browserFrame.getToolbar().getAddressBar().setText(fUrl);
+			TabStore.insertTab(index + 1, fUrl, title);
+			welcome.setBackground(new Color(37, 51, 61));
+			bpanel.getScroll().getViewport().add((Component) tabbedPane);
+		}
 	}
 
 	/** {@inheritDoc} */

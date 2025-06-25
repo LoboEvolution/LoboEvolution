@@ -73,7 +73,7 @@ public class PDFColorSpace {
     /**
      * the pattern space
      */
-    private static final PDFColorSpace patternSpace = new PatternSpace();
+    private static PDFColorSpace patternSpace;
 
     /**
      * graySpace and the gamma correction for it.
@@ -119,9 +119,8 @@ public class PDFColorSpace {
             case COLORSPACE_GRAY, ColorSpace.CS_GRAY, ColorSpace.TYPE_GRAY -> graySpace;
             case COLORSPACE_RGB -> rgbSpace;
             case COLORSPACE_CMYK -> cmykSpace;
-            case COLORSPACE_PATTERN -> patternSpace;
-            default -> throw new IllegalArgumentException("Unknown Color Space name: " +
-                    name);
+            case COLORSPACE_PATTERN -> patternSpace == null ? new PatternSpace() : patternSpace;
+            default -> throw new IllegalArgumentException("Unknown Color Space name: " + name);
         };
     }
 

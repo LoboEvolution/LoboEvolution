@@ -32,6 +32,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.NoninvertibleTransformException;
 import java.io.IOException;
+import java.security.SecureRandom;
 
 /**
  * A representation, with parser, of an Adobe Type 1C font.
@@ -238,7 +239,7 @@ public class Type1CFont extends OutlineFont {
                 break;
             }
         }
-        this.fnum = (neg ? -1 : 1) * f * (float) Math.pow(10, eval * exp);
+        this.fnum = (float) (((neg ? -1f : 1f) * (double) f) * Math.pow(10.0, eval * exp));
     }
 
     /**
@@ -946,7 +947,7 @@ public class Type1CFont extends OutlineFont {
                     this.stackptr -= 3;
                     break;
                 case 1023: // random
-                    this.stack[this.stackptr++] = (float) Math.random();
+                    this.stack[this.stackptr++] = new SecureRandom().nextFloat();
                     break;
                 case 1024: // mul
                     x1 = this.stack[--this.stackptr];

@@ -292,7 +292,6 @@ public class PDFObject {
     public void setCache(final Object obj) throws IOException {
         if (type == INDIRECT) {
             dereference().setCache(obj);
-            return;
         } else {
             cache = new SoftReference<>(obj);
         }
@@ -374,7 +373,7 @@ public class PDFObject {
      * @throws java.io.IOException if any.
      */
     public ByteBuffer getStreamBuffer() throws IOException {
-        return getStreamBuffer(Collections.<String>emptySet());
+        return getStreamBuffer(Collections.emptySet());
     }
 
     /**
@@ -529,8 +528,7 @@ public class PDFObject {
         if (type == INDIRECT) {
             return dereference().getArray();
         } else if (type == ARRAY) {
-            final PDFObject[] ary = (PDFObject[]) value;
-            return ary;
+            return (PDFObject[]) value;
         } else {
             final PDFObject[] ary = new PDFObject[1];
             ary[0] = this;
@@ -789,10 +787,9 @@ public class PDFObject {
             if (obj == null || obj.value == null) {
                 if (owner == null) {
                     PDFDebugger.debug("Bad seed (owner==null)!  Object=" + this);
+                    throw new IOException("Cannot dereference: owner is null for object " + this);
                 }
-
                 obj = owner.dereference((PDFXref) value, getDecrypter());
-
                 cache = new SoftReference<>(obj);
             }
 

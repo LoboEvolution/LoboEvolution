@@ -170,7 +170,7 @@ public class PNGPredictor extends Predictor {
             }
 
             // add the average
-            curLine[i] += (byte) (double) ((raw + prior) / 2);
+            curLine[i] += (byte) Math.floor((raw + prior) / 2.0);
         }
     }
 
