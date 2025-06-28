@@ -30,6 +30,7 @@ import lombok.Setter;
 import org.loboevolution.info.PropertyInfo;
 import org.mozilla.javascript.Function;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
 
@@ -162,8 +163,8 @@ public class JavaClassWrapper {
 	 * @throws java.lang.InstantiationException if any.
 	 * @throws java.lang.IllegalAccessException if any.
 	 */
-	public Object newInstance() throws InstantiationException, IllegalAccessException {
-		return this.javaClass.newInstance();
+	public Object newInstance() throws InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
+		return this.javaClass.getDeclaredConstructor().newInstance();
 	}
 
 	private String propertyUncapitalize(final String text) {

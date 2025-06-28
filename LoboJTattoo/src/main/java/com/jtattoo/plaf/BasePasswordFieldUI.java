@@ -69,7 +69,7 @@ public class BasePasswordFieldUI extends BasicPasswordFieldUI {
 		super.installKeyboardActions();
 		if (JTattooUtilities.isMac()) {
 			final InputMap im = (InputMap) UIManager.get("TextField.focusInputMap");
-			final int commandKey = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
+			final int commandKey = Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx();
 			im.put(KeyStroke.getKeyStroke(KeyEvent.VK_C, commandKey), DefaultEditorKit.copyAction);
 			im.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, commandKey), DefaultEditorKit.pasteAction);
 			im.put(KeyStroke.getKeyStroke(KeyEvent.VK_X, commandKey), DefaultEditorKit.cutAction);

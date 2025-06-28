@@ -30,23 +30,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
 
-import java.awt.AlphaComposite;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Composite;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Insets;
-import java.awt.LayoutManager;
-import java.awt.Point;
-import java.awt.Polygon;
-import java.awt.Rectangle;
-import java.awt.RenderingHints;
-import java.awt.Shape;
+import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.Area;
 import java.awt.geom.Rectangle2D;
@@ -1362,7 +1346,9 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 			//
 			if (selectedComponent != null) {
 				if (selectedComponent != visibleComponent && visibleComponent != null) {
-					if (SwingUtilities.findFocusOwner(visibleComponent) != null) {
+					Component focusOwner = KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner();
+
+					if (focusOwner != null && focusOwner == visibleComponent) {
 						shouldChangeFocus = true;
 					}
 				}
@@ -1769,7 +1755,9 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 			//
 			if (selectedComponent != null) {
 				if (selectedComponent != visibleComponent && visibleComponent != null) {
-					if (SwingUtilities.findFocusOwner(visibleComponent) != null) {
+					Component focusOwner = KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner();
+
+					if (focusOwner != null && focusOwner == visibleComponent) {
 						shouldChangeFocus = true;
 					}
 				}
@@ -2270,7 +2258,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 		if (mnemonicToIndexMap == null) {
 			initMnemonics();
 		}
-		mnemonicInputMap.put(KeyStroke.getKeyStroke(mnemonic, InputEvent.ALT_MASK), "setSelectedIndex");
+		mnemonicInputMap.put(KeyStroke.getKeyStroke(mnemonic, InputEvent.ALT_DOWN_MASK), "setSelectedIndex");
 		mnemonicToIndexMap.put(mnemonic, index);
 	}
 
@@ -4442,7 +4430,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 			vc.requestFocus();
 			return true;
 		} else if (vc instanceof JComponent) {
-			return ((JComponent) vc).requestDefaultFocus();
+			return vc.requestFocusInWindow();
 		}
 		return false;
 	}

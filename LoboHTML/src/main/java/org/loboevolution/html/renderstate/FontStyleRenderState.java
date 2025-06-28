@@ -123,8 +123,7 @@ public class FontStyleRenderState extends RenderStateDelegator {
 	public FontMetrics getFontMetrics() {
 		FontMetrics fm = this.iFontMetrics;
 		if (fm == null) {
-			// TODO getFontMetrics deprecated. How to get text width?
-			fm = Toolkit.getDefaultToolkit().getFontMetrics(getFont());
+			fm = new Canvas().getFontMetrics(getFont());
 			this.iFontMetrics = fm;
 		}
 		return fm;

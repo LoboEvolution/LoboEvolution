@@ -105,7 +105,6 @@ public interface Node extends EventTarget {
 	 *
 	 * @return a {@link java.lang.String} object.
 	 */
-	@Deprecated
 	String getNamespaceURI();
 
 	/**

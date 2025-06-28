@@ -826,7 +826,7 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
                     final int state = frame.getExtendedState();
                     if (titlePane != null && titlePane instanceof TitlePane && titlePane.contains(convertedPoint)
                             && frame.isResizable()) {
-                        if (ev.getClickCount() % 2 == 0 && (ev.getModifiers() & InputEvent.BUTTON1_MASK) != 0) {
+                        if (ev.getClickCount() % 2 == 0 && (ev.getModifiersEx() & InputEvent.BUTTON1_DOWN_MASK) != 0) {
                             if ((state & BaseRootPaneUI.MAXIMIZED_BOTH) != 0) {
                                 ((TitlePane) titlePane).restore();
                             } else {

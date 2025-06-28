@@ -26,6 +26,8 @@
 
 package org.loboevolution.js;
 
+import java.lang.reflect.InvocationTargetException;
+
 /**
  * <p>JavaInstantiatorImpl class.</p>
  */
@@ -37,7 +39,7 @@ class JavaInstantiatorImpl implements JavaInstantiator {
     }
 
     @Override
-    public Object newInstance(Object[] args) throws InstantiationException, IllegalAccessException {
+    public Object newInstance(Object[] args) throws InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
         return this.classWrapper.newInstance();
     }
 }

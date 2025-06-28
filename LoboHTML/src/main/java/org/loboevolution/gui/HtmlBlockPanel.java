@@ -123,7 +123,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 			this.registerKeyboardAction(actionListener, "copy", KeyStroke.getKeyStroke(KeyEvent.VK_COPY, 0),
 					JComponent.WHEN_FOCUSED);
 			this.registerKeyboardAction(actionListener, "copy",
-					KeyStroke.getKeyStroke(KeyEvent.VK_C, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
+					KeyStroke.getKeyStroke(KeyEvent.VK_C, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()),
 					JComponent.WHEN_FOCUSED);
 		}
 		addMouseListener(new MouseListener() {

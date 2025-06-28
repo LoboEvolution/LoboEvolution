@@ -726,7 +726,10 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
             if (newContent != null && !newContent.isVisible()) {
                 newContent.setVisible(true);
             }
-            if (SwingUtilities.findFocusOwner(currentContent) != null) {
+
+            Component focusOwner = KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner();
+
+            if (focusOwner != null && focusOwner == currentContent) {
                 if (!requestFocusForVisibleComponent()) {
                     tabbedPane.requestFocus();
                 }
@@ -1149,7 +1152,7 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
         if (mnemonicToIndexMap == null) {
             initMnemonics();
         }
-        mnemonicInputMap.put(KeyStroke.getKeyStroke(mnemonic, InputEvent.ALT_MASK), "setSelectedIndex");
+        mnemonicInputMap.put(KeyStroke.getKeyStroke(mnemonic, InputEvent.ALT_DOWN_MASK), "setSelectedIndex");
         mnemonicToIndexMap.put(mnemonic, index);
     }
 
@@ -1190,11 +1193,8 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
             if (currentContent.isFocusable()) {
                 compositeRequestFocus(currentContent);
                 return true;
-            } else if (currentContent instanceof JComponent
-                    && ((JComponent) currentContent).requestDefaultFocus()) {
-
-                return true;
-            }
+            } else return currentContent instanceof JComponent
+                    && currentContent.requestFocusInWindow();
         }
         return false;
     }

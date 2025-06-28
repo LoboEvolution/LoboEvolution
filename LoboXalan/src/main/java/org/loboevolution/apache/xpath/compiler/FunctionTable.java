@@ -25,6 +25,8 @@
  */
 package org.loboevolution.apache.xpath.compiler;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 import javax.xml.transform.TransformerException;
@@ -237,9 +239,15 @@ public class FunctionTable {
    */
   Function getFunction(final int which) throws TransformerException {
     try {
-      if (which < NUM_BUILT_IN_FUNCS) return (Function) m_functions[which].newInstance();
-      else return (Function) m_functions_customer[which - NUM_BUILT_IN_FUNCS].newInstance();
-    } catch (final IllegalAccessException | InstantiationException ex) {
+      if (which < NUM_BUILT_IN_FUNCS) {
+        Constructor<?> mFunctions = m_functions[which].getDeclaredConstructor();
+        return (Function) mFunctions.newInstance();
+      } else {
+        Constructor<?> mFunctionsCustomer = m_functions_customer[which - NUM_BUILT_IN_FUNCS].getDeclaredConstructor();
+        return (Function) mFunctionsCustomer.newInstance();
+      }
+    } catch (final IllegalAccessException | InstantiationException | InvocationTargetException |
+                   NoSuchMethodException ex) {
       throw new TransformerException(ex.getMessage());
     }
   }

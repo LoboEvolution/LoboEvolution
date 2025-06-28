@@ -626,7 +626,7 @@ public class StyleSheetAggregator {
 
 						return !selects(selectorList.getFirst(), element, null, mouseOver);
 					} catch (final IOException e) {
-						throw new CSSException("Error parsing CSS selectors from '" + selectors + "': " + e.getMessage());
+						throw new CSSException("Error parsing CSS selectors from '" + selectors + "': " + e.getMessage(), e);
 					}
 				}
 				return false;
@@ -760,7 +760,7 @@ public class StyleSheetAggregator {
 
 			if (!CSS2_PSEUDO_CLASSES.contains(value)
 					&& !domNode.hasChildNodes()) {
-				throw new CSSException("Syntax Error");
+				throw new CSSException("Syntax Error", new Exception());
 			}
 
 			if ("nth-child(".equals(value)) {

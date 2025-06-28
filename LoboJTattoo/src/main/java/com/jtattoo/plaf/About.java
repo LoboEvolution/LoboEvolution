@@ -31,6 +31,7 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.Serial;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -55,6 +56,7 @@ public class About extends JDialog {
 	/**
 	 *
 	 */
+	@Serial
 	private static final long serialVersionUID = 1L;
 
 	/** Constant JTATTOO_VERSION="Version: 1.6.12" */

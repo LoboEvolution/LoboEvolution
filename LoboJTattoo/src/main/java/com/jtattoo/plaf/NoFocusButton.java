@@ -38,11 +38,6 @@ import javax.swing.JButton;
 public class NoFocusButton extends JButton {
 
 	/**
-	 *
-	 */
-	private static final long serialVersionUID = 1L;
-
-	/**
 	 * <p>Constructor for NoFocusButton.</p>
 	 */
 	public NoFocusButton() {
@@ -64,12 +59,6 @@ public class NoFocusButton extends JButton {
 		setFocusPainted(false);
 		setRolloverEnabled(true);
 		setFocusable(false);
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public boolean isFocusTraversable() {
-		return false;
 	}
 
 	/** {@inheritDoc} */
