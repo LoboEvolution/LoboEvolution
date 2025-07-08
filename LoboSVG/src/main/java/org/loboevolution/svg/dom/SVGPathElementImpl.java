@@ -26,6 +26,7 @@
 
 package org.loboevolution.svg.dom;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.svg.*;
@@ -35,12 +36,15 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Arc2D;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Point2D;
-import java.util.NoSuchElementException;
-import java.util.StringTokenizer;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * <p>SVGPathElementImpl class.</p>
  */
+@Slf4j
 public class SVGPathElementImpl extends SVGGraphic implements SVGPathElement {
 
 	private SVGPathSegList pathSegList;
@@ -634,394 +638,150 @@ public class SVGPathElementImpl extends SVGGraphic implements SVGPathElement {
 
 	private void constructPathSegList(final String d) {
 		pathSegList = new SVGPathSegListImpl();
-		final String commands = "ZzMmLlCcQqAaHhVvSsTt";
-		final StringTokenizer st = new StringTokenizer(d, commands, true);
-		while (st.hasMoreTokens()) {
-			String command = st.nextToken();
-			while (!commands.contains(command) && st.hasMoreTokens()) {
-				command = st.nextToken();
-			}
-			if (commands.contains(command)) {
-				if (command.equals("Z") || command.equals("z")) {
-					addCommand(command, null);
-				} else {
-					if (st.hasMoreTokens()) {
-						final String parameters = st.nextToken();
-						addCommand(command, parameters);
-					}
+		final Pattern pattern = Pattern.compile("([MmLlHhVvCcSsQqTtAaZz])|(-?\\d*\\.?\\d+(?:[eE][-+]?\\d+)?)");
+		final Matcher matcher = pattern.matcher(d);
+		String currentCommand = null;
+		List<Float> params = new ArrayList<>();
+		while (matcher.find()) {
+			String command = matcher.group(1);
+			String number = matcher.group(2);
+			if (command != null) {
+				if (currentCommand != null) {
+					addCommand(currentCommand, params);
+					params.clear();
 				}
+				currentCommand = command;
+				if (command.equalsIgnoreCase("Z")) {
+					addCommand(currentCommand, null);
+					currentCommand = null;
+				}
+			} else if (number != null) {
+				params.add(Float.parseFloat(number));
 			}
+		}
+		if (currentCommand != null) {
+			addCommand(currentCommand, params);
 		}
 	}
 
-	private void addCommand(final String command, final String parameters) {
+	private void addCommand(final String command, final List<Float> params) {
+		if (params == null) {
+			pathSegList.appendItem(new SVGPathSegClosePathImpl());
+			return;
+		}
 		switch (command) {
-			case "Z":
-			case "z":
-				final SVGPathSeg seg = new SVGPathSegClosePathImpl();
-				pathSegList.appendItem(seg);
-				break;
-
 			case "M":
 			case "m":
-				addMoveTo(command, parameters);
+				for (int i = 0; i < params.size(); i += 2) {
+					float x = params.get(i);
+					float y = params.get(i + 1);
+					if (i == 0) {
+						pathSegList.appendItem(command.equals("M")
+								? new SVGPathSegMovetoAbsImpl(x, y)
+								: new SVGPathSegMovetoRelImpl(x, y));
+					} else {
+						pathSegList.appendItem(command.equals("M")
+								? new SVGPathSegLinetoAbsImpl(x, y)
+								: new SVGPathSegLinetoRelImpl(x, y));
+					}
+				}
 				break;
-
 			case "L":
 			case "l":
-				addLineTo(command, parameters);
+				for (int i = 0; i < params.size(); i += 2) {
+					float x = params.get(i);
+					float y = params.get(i + 1);
+					pathSegList.appendItem(command.equals("L")
+							? new SVGPathSegLinetoAbsImpl(x, y)
+							: new SVGPathSegLinetoRelImpl(x, y));
+				}
 				break;
-
-			case "C":
-			case "c":
-				addCurveTo(command, parameters);
-				break;
-
-			case "S":
-			case "s":
-				addSmoothCurveTo(command, parameters);
-				break;
-
 			case "H":
 			case "h":
-				addHorizontalLineTo(command, parameters);
+				for (float x : params) {
+					pathSegList.appendItem(command.equals("H")
+							? new SVGPathSegLinetoHorizontalAbsImpl(x)
+							: new SVGPathSegLinetoHorizontalRelImpl(x));
+				}
 				break;
-
 			case "V":
 			case "v":
-				addVerticalLineTo(command, parameters);
+				for (float y : params) {
+					pathSegList.appendItem(command.equals("V")
+							? new SVGPathSegLinetoVerticalAbsImpl(y)
+							: new SVGPathSegLinetoVerticalRelImpl(y));
+				}
 				break;
-
+			case "C":
+			case "c":
+				for (int i = 0; i < params.size(); i += 6) {
+					float x1 = params.get(i);
+					float y1 = params.get(i + 1);
+					float x2 = params.get(i + 2);
+					float y2 = params.get(i + 3);
+					float x = params.get(i + 4);
+					float y = params.get(i + 5);
+					pathSegList.appendItem(command.equals("C")
+							? new SVGPathSegCurvetoCubicAbsImpl(x, y, x1, y1, x2, y2)
+							: new SVGPathSegCurvetoCubicRelImpl(x, y, x1, y1, x2, y2));
+				}
+				break;
+			case "S":
+			case "s":
+				for (int i = 0; i < params.size(); i += 4) {
+					float x2 = params.get(i);
+					float y2 = params.get(i + 1);
+					float x = params.get(i + 2);
+					float y = params.get(i + 3);
+					pathSegList.appendItem(command.equals("S")
+							? new SVGPathSegCurvetoCubicSmoothAbsImpl(x, y, x2, y2)
+							: new SVGPathSegCurvetoCubicSmoothRelImpl(x, y, x2, y2));
+				}
+				break;
 			case "Q":
 			case "q":
-				addQuadraticBezierCurveTo(command, parameters);
+				for (int i = 0; i < params.size(); i += 4) {
+					float x1 = params.get(i);
+					float y1 = params.get(i + 1);
+					float x = params.get(i + 2);
+					float y = params.get(i + 3);
+					pathSegList.appendItem(command.equals("Q")
+							? new SVGPathSegCurvetoQuadraticAbsImpl(x, y, x1, y1)
+							: new SVGPathSegCurvetoQuadraticRelImpl(x, y, x1, y1));
+				}
 				break;
-
 			case "T":
 			case "t":
-				addTruetypeQuadraticBezierCurveTo(command, parameters);
+				for (int i = 0; i < params.size(); i += 2) {
+					float x = params.get(i);
+					float y = params.get(i + 1);
+					pathSegList.appendItem(command.equals("T")
+							? new SVGPathSegCurvetoQuadraticSmoothAbsImpl(x, y)
+							: new SVGPathSegCurvetoQuadraticSmoothRelImpl(x, y));
+				}
 				break;
-
 			case "A":
 			case "a":
-				addEllipticArc(command, parameters);
+				for (int i = 0; i < params.size(); i += 7) {
+					float r1 = params.get(i);
+					float r2 = params.get(i + 1);
+					float angle = params.get(i + 2);
+					boolean largeArcFlag = params.get(i + 3) != 0;
+					boolean sweepFlag = params.get(i + 4) != 0;
+					float x = params.get(i + 5);
+					float y = params.get(i + 6);
+					pathSegList.appendItem(command.equals("A")
+							? new SVGPathSegArcAbsImpl(x, y, r1, r2, angle, largeArcFlag, sweepFlag)
+							: new SVGPathSegArcRelImpl(x, y, r1, r2, angle, largeArcFlag, sweepFlag));
+				}
 				break;
-
+			case "Z":
+			case "z":
+				pathSegList.appendItem(new SVGPathSegClosePathImpl());
+				break;
 			default:
+				log.error("Unsupported command: {} ", command);
 				break;
 		}
-	}
-
-	private void addMoveTo(final String command, final String param) {
-		final boolean absolute = !command.equals("m");
-		boolean firstPoint = true;
-		final String parameters = trimCommas(param);
-		final String delims = " ,-\n\t\r";
-		final StringTokenizer st = new StringTokenizer(parameters, delims, true);
-		while (st.hasMoreTokens()) {
-			String token = getNextToken(st, delims);
-			final float x = Float.parseFloat(token);
-			token = getNextToken(st, delims);
-			final float y = Float.parseFloat(token);
-			if (firstPoint) {
-				if (absolute) {
-					pathSegList.appendItem(new SVGPathSegMovetoAbsImpl(x, y));
-				} else {
-					pathSegList.appendItem(new SVGPathSegMovetoRelImpl(x, y));
-				}
-				firstPoint = false;
-			} else {
-				if (absolute) {
-					pathSegList.appendItem(new SVGPathSegLinetoAbsImpl(x, y));
-				} else {
-					pathSegList.appendItem(new SVGPathSegLinetoRelImpl(x, y));
-				}
-			}
-		}
-	}
-
-	private void addLineTo(final String command, final String param) {
-		final boolean absolute = !command.equals("l");
-		final String delims = " ,-\n\t\r";
-		final String parameters = trimCommas(param);
-		final StringTokenizer st = new StringTokenizer(parameters, delims, true);
-		while (st.hasMoreTokens()) {
-
-			// get x coordinate
-			String token = getNextToken(st, delims);
-			final float x = Float.parseFloat(token);
-
-			// get y coordinate
-			token = getNextToken(st, delims);
-			final float y = Float.parseFloat(token);
-
-			// add new seg to path seg list
-			if (absolute) {
-				pathSegList.appendItem(new SVGPathSegLinetoAbsImpl(x, y));
-			} else {
-				pathSegList.appendItem(new SVGPathSegLinetoRelImpl(x, y));
-			}
-		}
-	}
-
-	private void addCurveTo(final String command, final String param) {
-		final boolean absolute = !command.equals("c");
-		final String delims = " ,-\n\t\r";
-		final String parameters = trimCommas(param);
-		final StringTokenizer st = new StringTokenizer(parameters, delims, true);
-		while (st.hasMoreTokens()) {
-			// get x1 coordinate
-			String token = getNextToken(st, delims);
-			final float x1 = Float.parseFloat(token);
-
-			// get y1 coordinate
-			token = getNextToken(st, delims);
-			final float y1 = Float.parseFloat(token);
-
-			// get x2 coordinate
-			token = getNextToken(st, delims);
-			final float x2 = Float.parseFloat(token);
-
-			// get y2 coordinate
-			token = getNextToken(st, delims);
-			final float y2 = Float.parseFloat(token);
-
-			// get x coordinate
-			token = getNextToken(st, delims);
-			final float x = Float.parseFloat(token);
-
-			// get y coordinate
-			token = getNextToken(st, delims);
-			final float y = Float.parseFloat(token);
-
-			// add new seg to path seg list
-			if (absolute) {
-				pathSegList.appendItem(new SVGPathSegCurvetoCubicAbsImpl(x, y, x1, y1, x2, y2));
-			} else {
-				pathSegList.appendItem(new SVGPathSegCurvetoCubicRelImpl(x, y, x1, y1, x2, y2));
-			}
-		}
-	}
-
-	private void addSmoothCurveTo(final String command, final String param) {
-		final boolean absolute = !command.equals("s");
-		final String delims = " ,-\n\t\r";
-		final String parameters = trimCommas(param);
-		final StringTokenizer st = new StringTokenizer(parameters, delims, true);
-
-		while (st.hasMoreTokens()) {
-
-			// get x2 coordinate
-			String token = getNextToken(st, delims);
-			final float x2 = Float.parseFloat(token);
-
-			// get y2 coordinate
-			token = getNextToken(st, delims);
-			final float y2 = Float.parseFloat(token);
-
-			// get x coordinate
-			token = getNextToken(st, delims);
-			final float x = Float.parseFloat(token);
-
-			// get y coordinate
-			token = getNextToken(st, delims);
-			final float y = Float.parseFloat(token);
-
-			// add new seg to path seg list
-			if (absolute) {
-				pathSegList.appendItem(new SVGPathSegCurvetoCubicSmoothAbsImpl(x, y, x2, y2));
-			} else {
-				pathSegList.appendItem(new SVGPathSegCurvetoCubicSmoothRelImpl(x, y, x2, y2));
-			}
-		}
-	}
-
-	private void addHorizontalLineTo(final String command, final String param) {
-		final boolean absolute = !command.equals("h");
-		final String delims = " ,-\n\t\r";
-		final String parameters = trimCommas(param);
-		final StringTokenizer st = new StringTokenizer(parameters, delims, true);
-
-		while (st.hasMoreTokens()) {
-
-			// get x coordinate
-			final String token = getNextToken(st, delims);
-			final float x = Float.parseFloat(token);
-
-			// add new seg to path seg list
-			if (absolute) {
-				pathSegList.appendItem(new SVGPathSegLinetoHorizontalAbsImpl(x));
-			} else {
-				pathSegList.appendItem(new SVGPathSegLinetoHorizontalRelImpl(x));
-			}
-		}
-	}
-
-	private void addVerticalLineTo(final String command, final String param) {
-		final boolean absolute = !command.equals("v");
-		final String delims = " ,-\n\t\r";
-		final String parameters = trimCommas(param);
-		final StringTokenizer st = new StringTokenizer(parameters, delims, true);
-
-		while (st.hasMoreTokens()) {
-
-			// get y coordinate
-			final String token = getNextToken(st, delims);
-			final float y = Float.parseFloat(token);
-
-			// add new seg to path seg list
-			if (absolute) {
-				pathSegList.appendItem(new SVGPathSegLinetoVerticalAbsImpl(y));
-			} else {
-				pathSegList.appendItem(new SVGPathSegLinetoVerticalRelImpl(y));
-			}
-		}
-	}
-
-	private void addEllipticArc(final String command, final String param) {
-		final boolean absolute = !command.equals("a");
-		final String delims = " ,-\n\t\r";
-		final String parameters = trimCommas(param);
-		final StringTokenizer st = new StringTokenizer(parameters, delims, true);
-		while (st.hasMoreTokens()) {
-
-			// get rx coordinate
-			String token = getNextToken(st, delims);
-			final float r1 = Float.parseFloat(token);
-
-			// get ry coordinate
-			token = getNextToken(st, delims);
-			final float r2 = Float.parseFloat(token);
-
-			// get x-axis-rotation
-			token = getNextToken(st, delims);
-			final float angle = Float.parseFloat(token);
-
-			// get large-arc-flag
-			token = getNextToken(st, delims);
-			final float largeArc = Float.parseFloat(token);
-
-			// get sweep-flag
-			token = getNextToken(st, delims);
-			final float sweepFlag = Float.parseFloat(token);
-
-			// get x coordinate
-			token = getNextToken(st, delims);
-			final float x = Float.parseFloat(token);
-
-			// get y coordinate
-			token = getNextToken(st, delims);
-			final float y = Float.parseFloat(token);
-
-			// add new seg to path seg list
-			if (absolute) {
-				pathSegList.appendItem(new SVGPathSegArcAbsImpl(x, y, r1, r2, angle, largeArc == 1, sweepFlag == 1));
-			} else {
-				pathSegList.appendItem(new SVGPathSegArcRelImpl(x, y, r1, r2, angle, largeArc == 1, sweepFlag == 1));
-			}
-		}
-	}
-
-	private void addQuadraticBezierCurveTo(final String command, final String param) {
-		final boolean absolute = !command.equals("q");
-		final String delims = " ,-\n\t\r";
-		final String parameters = trimCommas(param);
-		final StringTokenizer st = new StringTokenizer(parameters, delims, true);
-		while (st.hasMoreTokens()) {
-
-			// get x1 coordinate
-			String token = getNextToken(st, delims);
-			final float x1 = Float.parseFloat(token);
-
-			// get y1 coordinate
-			token = getNextToken(st, delims);
-			final float y1 = Float.parseFloat(token);
-
-			// get x coordinate
-			token = getNextToken(st, delims);
-			final float x = Float.parseFloat(token);
-
-			// get y coordinate
-			token = getNextToken(st, delims);
-			final float y = Float.parseFloat(token);
-
-			// add new seg to path seg list
-			if (absolute) {
-				pathSegList.appendItem(new SVGPathSegCurvetoQuadraticAbsImpl(x, y, x1, y1));
-			} else {
-				pathSegList.appendItem(new SVGPathSegCurvetoQuadraticRelImpl(x, y, x1, y1));
-			}
-		}
-	}
-
-	private void addTruetypeQuadraticBezierCurveTo(final String command, final String param) {
-		final boolean absolute = !command.equals("t");
-		final String delims = " ,-\n\t\r";
-		final String parameters = trimCommas(param);
-
-		final StringTokenizer st = new StringTokenizer(parameters, delims, true);
-
-		while (st.hasMoreTokens()) {
-
-			// get x coordinate
-			String token = getNextToken(st, delims);
-			final float x = Float.parseFloat(token);
-
-			// get y coordinate
-			token = getNextToken(st, delims);
-			final float y = Float.parseFloat(token);
-
-			// add new seg to path seg list
-			if (absolute) {
-				pathSegList.appendItem(new SVGPathSegCurvetoQuadraticSmoothAbsImpl(x, y));
-			} else {
-				pathSegList.appendItem(new SVGPathSegCurvetoQuadraticSmoothRelImpl(x, y));
-			}
-		}
-	}
-
-	private String getNextToken(final StringTokenizer st, final String delims) {
-
-		String token;
-		boolean neg = false;
-		try {
-			token = st.nextToken();
-			while (st.hasMoreTokens() && delims.contains(token)) {
-				neg = token.equals("-");
-				token = st.nextToken();
-			}
-			if (delims.contains(token)) {
-				token = "0";
-			}
-		} catch (final NoSuchElementException e) {
-			token = "0";
-		}
-
-		if (neg) {
-			token = "-" + token;
-		}
-
-		if (token.endsWith("e") || token.endsWith("E")) {
-			// is an exponential number, need to read the exponent too
-			try {
-				String exponent = st.nextToken(); // get the '-'
-				exponent += st.nextToken(); // get the exponent digits
-				token += exponent;
-			} catch (final NoSuchElementException e) {
-				token += '0';
-			}
-		}
-		return token;
-	}
-
-	private String trimCommas(final String params) {
-		String result = params;
-		while (result.startsWith(",")) {
-			result = result.substring(1);
-		}
-		while (result.endsWith(",")) {
-			result = result.substring(0, result.length() - 1);
-		}
-		return result;
 	}
 }

@@ -218,7 +218,7 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
 				}
 			}
 		}
-		final ElementImpl elem = (ElementImpl) new ElementFactory(false).createElement((HTMLDocumentImpl) this, qualifiedName);
+		final Element elem = new ElementFactory(false).createElement((HTMLDocumentImpl) this, qualifiedName);
 		elem.setNamespaceURI(namespaceURI);
 		if (Strings.isNotBlank(prefix) && Strings.isNotBlank(namespaceURI)) {
 			elem.setPrefix(prefix);
