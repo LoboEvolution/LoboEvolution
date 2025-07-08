@@ -26,17 +26,15 @@
 
 package org.loboevolution.html.renderer.layout;
 
-import org.loboevolution.html.dom.HTMLElement;
-import org.loboevolution.html.dom.domimpl.HTMLBRElementImpl;
+import org.loboevolution.html.node.Element;
 import org.loboevolution.html.renderer.LineBreak;
 import org.loboevolution.html.renderer.RBlockViewport;
 
 public class BrLayout implements MarkupLayout {
 
     @Override
-    public void layoutMarkup(final RBlockViewport bodyLayout, final HTMLElement markupElement) {
-        final HTMLBRElementImpl markupElementImpl = (HTMLBRElementImpl) markupElement;
-        final String clear = markupElementImpl.getAttribute("clear");
-        bodyLayout.addLineBreak(markupElementImpl, LineBreak.getBreakType(clear));
+    public void layoutMarkup(final RBlockViewport bodyLayout, final Element markupElement) {
+        final String clear = markupElement.getAttribute("clear");
+        bodyLayout.addLineBreak(markupElement, LineBreak.getBreakType(clear));
     }
 }

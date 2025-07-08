@@ -40,7 +40,7 @@ public class DListRenderState extends AbstractMarginRenderState {
     /**
      * <p>Constructor for DListRenderState.</p>
      *
-     * @param prevRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
+     * @param prevRenderState a {@link RenderState} object.
      * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
      */
     public DListRenderState(final RenderState prevRenderState, final HTMLElementImpl element) {

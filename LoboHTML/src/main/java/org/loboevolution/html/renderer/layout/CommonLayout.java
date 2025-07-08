@@ -26,9 +26,9 @@
 
 package org.loboevolution.html.renderer.layout;
 
-import org.loboevolution.html.dom.HTMLElement;
+import org.loboevolution.html.node.Element;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
-import org.loboevolution.html.dom.domimpl.UINode;
+import org.loboevolution.html.node.UINode;
 import org.loboevolution.html.renderer.BaseBoundableRenderable;
 import org.loboevolution.html.renderer.RBlockViewport;
 import org.loboevolution.html.renderstate.RenderState;
@@ -42,7 +42,7 @@ public class CommonLayout implements MarkupLayout {
     }
 
     @Override
-    public void layoutMarkup(final RBlockViewport bodyLayout, final HTMLElement markupElement) {
+    public void layoutMarkup(final RBlockViewport bodyLayout, final Element markupElement) {
         final HTMLElementImpl markupElementImpl = (HTMLElementImpl)markupElement;
         final int display = calculateLayout(markupElementImpl);
 

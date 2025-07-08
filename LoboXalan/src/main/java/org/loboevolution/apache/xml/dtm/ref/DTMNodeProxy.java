@@ -25,7 +25,9 @@
  */
 package org.loboevolution.apache.xml.dtm.ref;
 
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
@@ -466,6 +468,11 @@ public class DTMNodeProxy
 
     @Override
     public void setOwnerDocument(final Document document) {
+
+    }
+
+    @Override
+    public void setOwnerDocument(Document value, boolean deep) {
 
     }
 
@@ -1223,6 +1230,11 @@ public class DTMNodeProxy
         return null;
     }
 
+    @Override
+    public Document getDocumentNode() {
+        return null;
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -1564,6 +1576,41 @@ public class DTMNodeProxy
         return null;
     }
 
+    @Override
+    public Object getDocumentItem(String name) {
+        return null;
+    }
+
+    @Override
+    public URL getFullURL(String spec) throws Exception {
+        return null;
+    }
+
+    @Override
+    public ModelNode getParentModelNode() {
+        return null;
+    }
+
+    @Override
+    public boolean isEqualOrDescendentOf(ModelNode otherNode) {
+        return false;
+    }
+
+    @Override
+    public Object getRenderState() {
+        return null;
+    }
+
+    @Override
+    public void setDocumentItem(String name, Object value) {
+
+    }
+
+    @Override
+    public void warn(String message, Throwable err) {
+
+    }
+
     /**
      * Inner class to support getDOMImplementation.
      */
@@ -1619,6 +1666,16 @@ public class DTMNodeProxy
     }
 
     @Override
+    public void setParentImpl(Node parent) {
+
+    }
+
+    @Override
+    public void setNamespaceURI(String namespaceURI) {
+
+    }
+
+    @Override
     public boolean contains(final Node other) {
         return false;
     }
@@ -1629,6 +1686,41 @@ public class DTMNodeProxy
     @Override
     public Object getUserData(final String key) {
         return getOwnerDocument().getUserData(key);
+    }
+
+    @Override
+    public Node getPreviousTo(Node node) {
+        return null;
+    }
+
+    @Override
+    public Node getNextTo(Node node) {
+        return null;
+    }
+
+    @Override
+    public void forgetRenderState() {
+
+    }
+
+    @Override
+    public void appendChildrenToCollectionImpl(NodeFilter filter, Collection<Node> collection) {
+
+    }
+
+    @Override
+    public void extractDescendentsArrayImpl(NodeFilter filter, List<Node> al, boolean nestIntoMatchingNodes) {
+
+    }
+
+    @Override
+    public UINode findUINode() {
+        return null;
+    }
+
+    @Override
+    public void visit(NodeVisitor visitor) {
+
     }
 
     /**

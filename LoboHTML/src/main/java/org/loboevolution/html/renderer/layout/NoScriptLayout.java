@@ -26,7 +26,7 @@
 
 package org.loboevolution.html.renderer.layout;
 
-import org.loboevolution.html.dom.HTMLElement;
+import org.loboevolution.html.node.Element;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.renderer.RBlockViewport;
 import org.loboevolution.http.UserAgentContext;
@@ -34,7 +34,7 @@ import org.loboevolution.http.UserAgentContext;
 public class NoScriptLayout implements MarkupLayout {
 
     @Override
-    public void layoutMarkup(final RBlockViewport bodyLayout, final HTMLElement markupElement) {
+    public void layoutMarkup(final RBlockViewport bodyLayout, final Element markupElement) {
         final UserAgentContext ucontext = bodyLayout.getUserAgentContext();
         if (!ucontext.isScriptingEnabled()) {
             final HTMLElementImpl markupElementImpl = (HTMLElementImpl) markupElement;

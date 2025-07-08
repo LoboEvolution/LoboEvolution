@@ -28,8 +28,8 @@
  */
 package org.loboevolution.html.control;
 
-import org.loboevolution.html.dom.domimpl.UINode;
-import org.loboevolution.html.dom.nodeimpl.ModelNode;
+import org.loboevolution.html.node.UINode;
+import org.loboevolution.html.node.ModelNode;
 import org.loboevolution.html.renderer.*;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.http.UserAgentContext;
@@ -63,7 +63,7 @@ public class RUIControl extends BaseElementRenderable {
     /**
      * <p>Constructor for RUIControl.</p>
      *
-     * @param me a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
+     * @param me a {@link ModelNode} object.
      * @param widget a {@link org.loboevolution.html.control.UIControl} object.
      * @param container a {@link org.loboevolution.html.renderer.RenderableContainer} object.
      * @param ucontext a {@link org.loboevolution.http.UserAgentContext} object.
@@ -80,7 +80,7 @@ public class RUIControl extends BaseElementRenderable {
 	@Override
 	public void doLayout(final int availWidth, final int availHeight, final boolean sizeOnly) {
 		final Map<LayoutKey, LayoutValue> cachedLayout = this.cachedLayout;
-		final RenderState rs = this.modelNode.getRenderState();
+		final RenderState rs = (RenderState)this.modelNode.getRenderState();
 		final int whitespace = rs == null ? RenderState.WS_NORMAL : rs.getWhiteSpace();
 		final Font font = rs == null ? null : rs.getFont();
 		final LayoutKey layoutKey = new LayoutKey(availWidth, availHeight, whitespace, font);
@@ -178,7 +178,7 @@ public class RUIControl extends BaseElementRenderable {
 	 * @return a {@link java.awt.Color} object.
 	 */
 	public Color getForegroundColor() {
-		final RenderState rs = this.modelNode.getRenderState();
+		final RenderState rs = (RenderState)this.modelNode.getRenderState();
 		return rs == null ? null : rs.getColor();
 	}
 
@@ -232,7 +232,7 @@ public class RUIControl extends BaseElementRenderable {
 	/** {@inheritDoc} */
 	@Override
 	public final void paint(final Graphics g) {
-		final RenderState rs = this.modelNode.getRenderState();
+		final RenderState rs = (RenderState)this.modelNode.getRenderState();
 		if ((rs != null) && (rs.getVisibility() == RenderState.VISIBILITY_VISIBLE)) {
 			// Prepaint borders, background images, etc.
 			this.prePaint(g);

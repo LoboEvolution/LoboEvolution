@@ -29,7 +29,7 @@ package org.loboevolution.html.renderer.layout;
 import org.loboevolution.html.control.CanvasControl;
 import org.loboevolution.html.control.RUIControl;
 import org.loboevolution.html.control.UIControl;
-import org.loboevolution.html.dom.HTMLElement;
+import org.loboevolution.html.node.Element;
 import org.loboevolution.html.dom.domimpl.HTMLCanvasElementImpl;
 import org.loboevolution.html.renderer.RBlockViewport;
 import org.loboevolution.html.renderer.RElement;
@@ -41,7 +41,7 @@ public class CanvasLayout extends CommonWidgetLayout {
     }
 
     @Override
-    public  RElement createRenderable(final RBlockViewport bodyLayout, final HTMLElement markupElement) {
+    public  RElement createRenderable(final RBlockViewport bodyLayout, final Element markupElement) {
         final HTMLCanvasElementImpl markupElementImpl = (HTMLCanvasElementImpl) markupElement;
         final UIControl control = new CanvasControl(markupElementImpl);
         return new RUIControl(markupElementImpl, control, bodyLayout.getContainer(), bodyLayout.getUserAgentContext());

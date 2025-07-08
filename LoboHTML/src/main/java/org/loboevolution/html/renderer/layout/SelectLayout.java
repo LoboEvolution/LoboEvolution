@@ -29,7 +29,7 @@ package org.loboevolution.html.renderer.layout;
 import org.loboevolution.html.control.RUIControl;
 import org.loboevolution.html.control.SelectControl;
 import org.loboevolution.html.control.UIControl;
-import org.loboevolution.html.dom.HTMLElement;
+import org.loboevolution.html.node.Element;
 import org.loboevolution.html.dom.domimpl.HTMLSelectElementImpl;
 import org.loboevolution.html.renderer.RBlockViewport;
 import org.loboevolution.html.renderer.RElement;
@@ -45,7 +45,7 @@ public class SelectLayout extends CommonWidgetLayout {
     }
 
     @Override
-    public  RElement createRenderable(final RBlockViewport bodyLayout, final HTMLElement markupElement) {
+    public  RElement createRenderable(final RBlockViewport bodyLayout, final Element markupElement) {
         final HTMLSelectElementImpl markupElementImpl = (HTMLSelectElementImpl) markupElement;
         final UIControl control = new SelectControl(markupElementImpl);
         return new RUIControl(markupElementImpl, control, bodyLayout.getContainer(), bodyLayout.getUserAgentContext());

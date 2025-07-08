@@ -185,22 +185,22 @@ public class HTMLOptionsCollectionImpl extends HTMLCollectionImpl implements HTM
 					super.setItem(i, opt);
 				}
 				final List<Node> list = new ArrayList<>(nodeList);
-				((NodeImpl) node).setParentImpl(selctElement);
+				node.setParentImpl(selctElement);
 				list.add(node);
 				setList(list);
 			} else {
 				final List<Node> list;
 				if (index == 0 && ArrayUtilities.isBlank(nodeList)) {
 					list = new ArrayList<>();
-					((NodeImpl) node).setParentImpl(selctElement);
+					node.setParentImpl(selctElement);
 					list.add(node);
 				} else if (nodeList.size() == index) {
 					list = new ArrayList<>(nodeList);
-					((NodeImpl) node).setParentImpl(selctElement);
+					node.setParentImpl(selctElement);
 					list.add(node);
 				} else {
 					list = new ArrayList<>(nodeList);
-					((NodeImpl) node).setParentImpl(selctElement);
+					node.setParentImpl(selctElement);
 					list.set(index, node);
 				}
 				setList(list);
@@ -233,10 +233,10 @@ public class HTMLOptionsCollectionImpl extends HTMLCollectionImpl implements HTM
 			final HTMLSelectElementImpl selctElement = (HTMLSelectElementImpl) rootNode;
 			if (ArrayUtilities.isBlank(nodeList) && !selctElement.isMultiple()) {
 				element.setSelected(true);
-				((NodeImpl) element).setParentImpl(selctElement);
+				element.setParentImpl(selctElement);
 				nodeList.add(element);
 			} else {
-				((NodeImpl) element).setParentImpl(selctElement);
+				element.setParentImpl(selctElement);
 				nodeList.add(before < 0 ? 0 : before, element);
 			}
 		}
@@ -249,7 +249,7 @@ public class HTMLOptionsCollectionImpl extends HTMLCollectionImpl implements HTM
 		for (int i = 0; i < nodeList.size(); i++) {
 			final HTMLOptionElement elem = (HTMLOptionElement) nodeList.get(i);
 			if (elem.getText().equals(before.getText())) {
-				((NodeImpl) element).setParentImpl(selctElement);
+				element.setParentImpl(selctElement);
 				nodeList.add(i, element);
 				found = true;
 				break;

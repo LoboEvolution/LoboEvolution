@@ -40,7 +40,7 @@ public class RFlex {
 	/**
 	 * <p>Constructor for RFlex.</p>
 	 *
-	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 * @param renderState a {@link RenderState} object.
 	 */
 	public RFlex(final RenderState renderState) {
 		this.renderState = renderState;

@@ -50,8 +50,11 @@ import org.xml.sax.SAXException;
 
 import java.io.File;
 import java.io.*;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * XMLDocument class.
@@ -187,6 +190,11 @@ public class XMLDocument implements Document {
 		return doc.getFeature(name, version);
 	}
 
+	@Override
+	public Document getDocumentNode() {
+		return null;
+	}
+
 	/** {@inheritDoc} */
 	@Override
 	public String getBaseURI() {
@@ -283,6 +291,41 @@ public class XMLDocument implements Document {
 		return doc.getUserData(key);
 	}
 
+	@Override
+	public Node getPreviousTo(Node node) {
+		return doc.getPreviousTo(node);
+	}
+
+	@Override
+	public Node getNextTo(Node node) {
+		return doc.getNextTo(node);
+	}
+
+	@Override
+	public void forgetRenderState() {
+		doc.forgetRenderState();
+	}
+
+	@Override
+	public void appendChildrenToCollectionImpl(NodeFilter filter, Collection<Node> collection) {
+		doc.appendChildrenToCollectionImpl(filter, collection);
+	}
+
+	@Override
+	public void extractDescendentsArrayImpl(NodeFilter filter, List<Node> al, boolean nestIntoMatchingNodes) {
+		doc.extractDescendentsArrayImpl(filter, al, nestIntoMatchingNodes);
+	}
+
+	@Override
+	public UINode findUINode() {
+		return doc.findUINode();
+	}
+
+	@Override
+	public void visit(NodeVisitor visitor) {
+		doc.visit(visitor);
+	}
+
 	/** {@inheritDoc} */
 	@Override
 	public boolean hasChildNodes() {
@@ -370,6 +413,16 @@ public class XMLDocument implements Document {
 	@Override
 	public Object setUserData(final String key, final Object data, final UserDataHandler handler) {
 		return doc.setUserData(key, data, handler);
+	}
+
+	@Override
+	public void setParentImpl(Node parent) {
+
+	}
+
+	@Override
+	public void setNamespaceURI(String namespaceURI) {
+
 	}
 
 	/** {@inheritDoc} */
@@ -577,6 +630,11 @@ public class XMLDocument implements Document {
 	@Override
 	public void setOwnerDocument(final Document document) {
 		doc.setOwnerDocument(document);
+	}
+
+	@Override
+	public void setOwnerDocument(Document value, boolean deep) {
+
 	}
 
 	/** {@inheritDoc} */
@@ -1225,5 +1283,40 @@ public class XMLDocument implements Document {
 	@Override
 	public String toString() {
 		return "[object XMLDocument]";
+	}
+
+	@Override
+	public Object getDocumentItem(String name) {
+		return null;
+	}
+
+	@Override
+	public URL getFullURL(String spec) throws Exception {
+		return null;
+	}
+
+	@Override
+	public ModelNode getParentModelNode() {
+		return null;
+	}
+
+	@Override
+	public boolean isEqualOrDescendentOf(ModelNode otherNode) {
+		return false;
+	}
+
+	@Override
+	public Object getRenderState() {
+		return null;
+	}
+
+	@Override
+	public void setDocumentItem(String name, Object value) {
+
+	}
+
+	@Override
+	public void warn(String message, Throwable err) {
+
 	}
 }

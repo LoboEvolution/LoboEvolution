@@ -45,7 +45,7 @@ public class BlockRenderState extends StyleSheetRenderState {
 	/**
 	 * <p>Constructor for BlockRenderState.</p>
 	 *
-	 * @param prevRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 * @param prevRenderState a {@link RenderState} object.
 	 * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
 	 */
 	public BlockRenderState(final RenderState prevRenderState, final HTMLElementImpl element) {

@@ -31,7 +31,7 @@ import org.loboevolution.html.dom.HTMLBodyElement;
 import org.loboevolution.html.dom.HTMLHtmlElement;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
-import org.loboevolution.html.dom.nodeimpl.ModelNode;
+import org.loboevolution.html.node.ModelNode;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.renderer.info.RBlockInfo;
 import org.loboevolution.html.renderer.info.RBlockLayoutInfo;
@@ -130,7 +130,7 @@ public class RBlock extends BaseElementRenderable {
 	 */
 	public void doLayout(final RLayoutInfo info) {
 
-		final RenderState renderState = this.modelNode.getRenderState();
+		final RenderState renderState = (RenderState)this.modelNode.getRenderState();
         final RBlockLayoutInfo value = forceLayout(renderState, info);
 		this.setWidth(value.getWidth());
 		this.setHeight(value.getHeight());
@@ -774,7 +774,7 @@ public class RBlock extends BaseElementRenderable {
 	/** {@inheritDoc} */
 	@Override
 	public void paint(final Graphics gIn) {
-		final RenderState rs = this.modelNode.getRenderState();
+		final RenderState rs = (RenderState)this.modelNode.getRenderState();
 		if (rs != null && rs.getVisibility() == RenderState.VISIBILITY_VISIBLE) {
 			final boolean isRelative = (relativeOffsetX | relativeOffsetY) != 0;
 			final Graphics g = isRelative ? gIn.create() : gIn;

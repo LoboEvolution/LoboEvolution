@@ -29,7 +29,7 @@ package org.loboevolution.html.renderer.layout;
 import org.loboevolution.html.control.FrameControl;
 import org.loboevolution.html.control.RUIControl;
 import org.loboevolution.html.control.UIControl;
-import org.loboevolution.html.dom.HTMLElement;
+import org.loboevolution.html.node.Element;
 import org.loboevolution.html.dom.domimpl.HTMLIFrameElementImpl;
 import org.loboevolution.html.renderer.RBlockViewport;
 import org.loboevolution.html.renderer.RElement;
@@ -40,7 +40,7 @@ public class IFrameLayout extends CommonWidgetLayout {
     }
 
     @Override
-    public  RElement createRenderable(final RBlockViewport bodyLayout, final HTMLElement markupElement) {
+    public  RElement createRenderable(final RBlockViewport bodyLayout, final Element markupElement) {
         final HTMLIFrameElementImpl markupElementImpl = (HTMLIFrameElementImpl)markupElement;
         final UIControl control = new FrameControl(markupElementImpl);
         return new RUIControl(markupElementImpl, control, bodyLayout.getContainer(), bodyLayout.getUserAgentContext());

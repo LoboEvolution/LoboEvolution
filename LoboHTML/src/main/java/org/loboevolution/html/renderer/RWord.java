@@ -28,7 +28,7 @@
  */
 package org.loboevolution.html.renderer;
 
-import org.loboevolution.html.dom.nodeimpl.ModelNode;
+import org.loboevolution.html.node.ModelNode;
 import org.loboevolution.html.renderstate.RenderState;
 
 import java.awt.*;
@@ -42,7 +42,7 @@ final class RWord extends BaseBoundableRenderable {
 	/**
 	 * <p>Constructor for RWord.</p>
 	 *
-	 * @param me a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
+	 * @param me a {@link org.loboevolution.html.node.ModelNode} object.
 	 * @param word a {@link java.lang.String} object.
 	 * @param container a {@link org.loboevolution.html.renderer.RenderableContainer} object.
 	 * @param fontMetrics a {@link java.awt.FontMetrics} object.
@@ -154,7 +154,7 @@ final class RWord extends BaseBoundableRenderable {
 	/** {@inheritDoc} */
 	@Override
 	public void paint(final Graphics g) {
-		final RenderState rs = this.modelNode.getRenderState();
+		final RenderState rs = (RenderState)this.modelNode.getRenderState();
 		if (rs != null && rs.getVisibility() == RenderState.VISIBILITY_VISIBLE) {
 
 			final String word = this.shownWord;

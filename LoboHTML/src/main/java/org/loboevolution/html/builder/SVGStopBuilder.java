@@ -26,13 +26,14 @@
 
 package org.loboevolution.html.builder;
 
+import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
-import org.loboevolution.svg.SVGStopElementImpl;
+import org.loboevolution.svg.dom.SVGStopElementImpl;
 
 public class SVGStopBuilder implements HTMLElementBuilder {
 
     @Override
-    public HTMLElementImpl build(final String name) {
-        return new SVGStopElementImpl(name);
+    public HTMLElement build(final String name) {
+        return new SVGStopElementImpl(new HTMLElementImpl(name));
     }
 }

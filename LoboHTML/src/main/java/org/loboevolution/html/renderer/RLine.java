@@ -31,7 +31,7 @@ package org.loboevolution.html.renderer;
 import lombok.Getter;
 import lombok.Setter;
 import org.loboevolution.html.AlignValues;
-import org.loboevolution.html.dom.nodeimpl.ModelNode;
+import org.loboevolution.html.node.ModelNode;
 import org.loboevolution.html.renderstate.RenderState;
 
 import java.awt.*;
@@ -68,7 +68,7 @@ class RLine extends BaseRCollection {
 	/**
 	 * <p>Constructor for RLine.</p>
 	 *
-	 * @param modelNode a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
+	 * @param modelNode a {@link org.loboevolution.html.node.ModelNode} object.
 	 * @param container a {@link org.loboevolution.html.renderer.RenderableContainer} object.
 	 * @param x a {@link java.lang.Integer} object.
 	 * @param y a {@link java.lang.Integer} object.
@@ -288,12 +288,12 @@ class RLine extends BaseRCollection {
 		this.setHeight(newHeight);
 		final List<Renderable> renderables = this.renderables;
 		// Find max baseline
-		final FontMetrics firstFm = this.modelNode.getRenderState().getFontMetrics();
+		final FontMetrics firstFm = ((RenderState)this.modelNode.getRenderState()).getFontMetrics();
 		int maxDescent = firstFm.getDescent();
 		int maxAscentPlusLeading = firstFm.getAscent() + firstFm.getLeading();
 		for (final Object r : renderables) {
 			if (r instanceof RStyleChanger rstyleChanger) {
-                final FontMetrics fm = rstyleChanger.getModelNode().getRenderState().getFontMetrics();
+                final FontMetrics fm = ((RenderState)rstyleChanger.getModelNode().getRenderState()).getFontMetrics();
 				final int descent = fm.getDescent();
 				if (descent > maxDescent) {
 					maxDescent = descent;
@@ -496,7 +496,7 @@ class RLine extends BaseRCollection {
 	/** {@inheritDoc} */
 	@Override
 	public void paint(final Graphics g) {
-		final RenderState rs = this.modelNode.getRenderState();
+		final RenderState rs = (RenderState)this.modelNode.getRenderState();
 		if (rs != null && rs.getVisibility() == RenderState.VISIBILITY_VISIBLE) {
 			final Color textColor = rs.getColor();
 			g.setColor(textColor);

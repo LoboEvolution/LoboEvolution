@@ -221,6 +221,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, GlobalE
 	 *
 	 * @return a {@link CSSStyleDeclaration} object.
 	 */
+	@Override
 	public CSSStyleDeclaration getCurrentStyle() {
 		CSSStyleDeclarationImpl style = (CSSStyleDeclarationImpl) this.currentStyleDeclarationState;
 		if (style != null) {

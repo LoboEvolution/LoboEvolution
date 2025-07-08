@@ -26,13 +26,14 @@
 
 package org.loboevolution.html.builder;
 
+import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
-import org.loboevolution.svg.SVGPolygonElementImpl;
+import org.loboevolution.svg.dom.SVGPolygonElementImpl;
 
 public class SVGPolygonBuilder implements HTMLElementBuilder {
 
     @Override
-    public HTMLElementImpl build(final String name) {
-        return new SVGPolygonElementImpl(name);
+    public HTMLElement build(final String name) {
+        return new SVGPolygonElementImpl(new HTMLElementImpl(name));
     }
 }

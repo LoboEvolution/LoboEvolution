@@ -28,7 +28,7 @@
  */
 package org.loboevolution.html.renderer;
 
-import org.loboevolution.html.dom.nodeimpl.ModelNode;
+import org.loboevolution.html.node.ModelNode;
 
 import java.awt.*;
 
@@ -39,7 +39,7 @@ final class RSpacing extends BaseBoundableRenderable {
 	/**
 	 * <p>Constructor for RSpacing.</p>
 	 *
-	 * @param me a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
+	 * @param me a {@link org.loboevolution.html.node.ModelNode} object.
 	 * @param container a {@link org.loboevolution.html.renderer.RenderableContainer} object.
 	 * @param width a {@link java.lang.Integer} object.
 	 * @param height a {@link java.lang.Integer} object.

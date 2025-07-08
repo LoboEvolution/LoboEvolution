@@ -37,7 +37,8 @@ import org.loboevolution.html.dom.HTMLDocument;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLImageElementImpl;
-import org.loboevolution.html.dom.nodeimpl.ModelNode;
+import org.loboevolution.html.node.Element;
+import org.loboevolution.html.node.ModelNode;
 import org.loboevolution.gui.HtmlPanel;
 import org.loboevolution.css.CSSStyleDeclaration;
 import org.loboevolution.html.renderstate.RenderState;
@@ -50,6 +51,7 @@ import org.loboevolution.info.BorderInfo;
 import org.loboevolution.info.TimingInfo;
 import org.loboevolution.laf.ColorFactory;
 import org.loboevolution.net.HttpNetwork;
+import org.loboevolution.svg.dom.SVGElementImpl;
 
 import java.awt.*;
 import java.awt.image.ImageObserver;
@@ -124,7 +126,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 	 * <p>Constructor for BaseElementRenderable.</p>
 	 *
 	 * @param container a {@link org.loboevolution.html.renderer.RenderableContainer} object.
-	 * @param modelNode a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
+	 * @param modelNode a {@link ModelNode} object.
 	 * @param ucontext a {@link org.loboevolution.http.UserAgentContext} object.
 	 */
 	public BaseElementRenderable(final RenderableContainer container, final ModelNode modelNode, final UserAgentContext ucontext) {
@@ -171,8 +173,8 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 	 * @param availHeight a {@link java.lang.Integer} object.
 	 */
 	protected void applyStyle(final int availWidth, final int availHeight) {
-		final Object rootNode = this.modelNode;
-		final HTMLElementImpl rootElement;
+		final ModelNode rootNode = this.modelNode;
+		final Element rootElement;
 		final boolean isRootBlock;
 
 		if (rootNode instanceof HTMLDocument) {
@@ -181,7 +183,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 			rootElement = (HTMLElementImpl) doc.getElementsByName(HTMLTag.HTML.getValue()).item(0);
 		} else {
 			isRootBlock = false;
-			rootElement = (HTMLElementImpl) rootNode;
+			rootElement = (Element) rootNode;
 		}
 
 
@@ -189,21 +191,26 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 			clearStyle(isRootBlock);
 			return;
 		}
-		final RenderState rs = rootElement.getRenderState();
+		final RenderState rs = (RenderState) rootElement.getRenderState();
 		if (rs == null) {
 			throw new IllegalStateException("Element without render state: " + rootElement + "; parent=" + rootElement.getParentNode());
 		}
 
 		backgroundApplyStyle(rs);
 
-		final CSSStyleDeclaration props = rootElement.getCurrentStyle();
-		if (props == null) {
+		CSSStyleDeclaration style;
+		if (rootElement instanceof SVGElementImpl) {
+			style = ((SVGElementImpl)rootElement).getCurrentStyle();
+		} else{
+			style = ((HTMLElementImpl)rootElement).getCurrentStyle();
+		}
+		if (style == null) {
 			clearStyle(isRootBlock);
 		} else {
 
 			insetsApplyStyle(rs, availWidth, availHeight, isRootBlock);
 
-			zIndexApplyStyle(props);
+			zIndexApplyStyle(style);
 
 			this.overflowX = rs.getOverflowX();
 			this.overflowY = rs.getOverflowY();
@@ -364,7 +371,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 
 	/** {@inheritDoc} */
 	public void setupRelativePosition(final RenderableContainer container) {
-		setupRelativePosition(getModelNode().getRenderState(), container.getInnerWidth(), container.getInnerHeight());
+		setupRelativePosition((RenderState)getModelNode().getRenderState(), container.getInnerWidth(), container.getInnerHeight());
 	}
 
 	private void setupRelativePosition(final RenderState rs, final int availWidth, final int availHeight) {
@@ -445,7 +452,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 			}
 		}
 		if (isMarginBoundary()) {
-			final RenderState rs = this.modelNode.getRenderState();
+			final RenderState rs = (RenderState)this.modelNode.getRenderState();
 			if (rs != null) {
 				final FontMetrics fm = rs.getFontMetrics();
 				final int fontHeight = fm.getHeight();
@@ -473,7 +480,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 			}
 		}
 		if (isMarginBoundary()) {
-			final RenderState rs = this.modelNode.getRenderState();
+			final RenderState rs = (RenderState)this.modelNode.getRenderState();
 			if (rs != null) {
 				final FontMetrics fm = rs.getFontMetrics();
 				final int fontHeight = fm.getHeight();
@@ -804,7 +811,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 	/** {@inheritDoc} */
 	@Override
 	protected void invalidateLayoutLocal() {
-		final RenderState rs = this.modelNode.getRenderState();
+		final RenderState rs = (RenderState)this.modelNode.getRenderState();
 		if (rs != null) {
 			rs.invalidate();
 		}
@@ -927,7 +934,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 	}
 
 	private void prePaintBackground(final Graphics g, final ModelNode node, final int totalWidth, final int totalHeight, final int startX, final int startY) {
-		final RenderState rs = node.getRenderState();
+		final RenderState rs = (RenderState) node.getRenderState();
 		final Graphics clientG = g.create(startX, startY, totalWidth, totalHeight);
 		try {
 			Rectangle bkgBounds = null;

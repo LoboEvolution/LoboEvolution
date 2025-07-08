@@ -26,7 +26,7 @@
 
 package org.loboevolution.html.renderer;
 
-import org.loboevolution.html.dom.nodeimpl.ModelNode;
+import org.loboevolution.html.node.ModelNode;
 import org.loboevolution.html.renderer.info.RBlockInfo;
 import org.loboevolution.html.renderer.table.RTable;
 import org.loboevolution.html.renderstate.RenderState;
@@ -50,7 +50,7 @@ public class RInlineBlock extends BaseElementRenderable {
 	 */
 	public RInlineBlock(final RenderableContainer container, final RBlockInfo info) {
 		super(container, info.getModelNode(), info.getPcontext());
-		final int display = modelNode.getRenderState().getDisplay();
+		final int display = ((RenderState)modelNode.getRenderState()).getDisplay();
 		final BaseElementRenderable child = (display == RenderState.DISPLAY_INLINE_TABLE) ? new RTable(info) : new RBlock(info);
 		child.setOriginalParent(this);
 		child.setParent(this);

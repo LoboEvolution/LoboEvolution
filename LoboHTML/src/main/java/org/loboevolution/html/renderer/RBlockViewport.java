@@ -37,8 +37,9 @@ import org.loboevolution.html.dom.HTMLHtmlElement;
 import org.loboevolution.html.dom.nodeimpl.DocumentFragmentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLTableElementImpl;
-import org.loboevolution.html.dom.domimpl.UINode;
-import org.loboevolution.html.dom.nodeimpl.ModelNode;
+import org.loboevolution.html.node.Element;
+import org.loboevolution.html.node.UINode;
+import org.loboevolution.html.node.ModelNode;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
 import org.loboevolution.html.node.Node;
@@ -55,6 +56,7 @@ import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.info.FloatingInfo;
+import org.loboevolution.svg.dom.SVGElementImpl;
 
 import javax.swing.*;
 import java.awt.*;
@@ -153,9 +155,9 @@ public class RBlockViewport extends BaseRCollection {
 		this.info = info;
 	}
 
-	private static int getPosition(final HTMLElementImpl element) {
+	private static int getPosition(final Element element) {
 		if(element == null) return RenderState.POSITION_STATIC;
-		final RenderState rs = element.getRenderState();
+		final RenderState rs = (RenderState) element.getRenderState();
 		return rs == null ? RenderState.POSITION_STATIC : rs.getPosition();
 	}
 
@@ -239,7 +241,7 @@ public class RBlockViewport extends BaseRCollection {
 		this.addAsSeqBlock(block, true, true, true, false);
 	}
 
-	private boolean addElsewhereIfFloat(final BoundableRenderable renderable, final HTMLElementImpl element,
+	private boolean addElsewhereIfFloat(final BoundableRenderable renderable, final Element element,
 										final boolean usesAlignAttribute, final CSSStyleDeclaration style) {
 
 		String align = null;
@@ -272,8 +274,14 @@ public class RBlockViewport extends BaseRCollection {
 	 * @param usesAlignAttribute usesAlignAttribute
 	 * @return True if it was added elsewhere.
 	 */
-	private boolean addElsewhereIfPositioned(final RElement renderable, final HTMLElementImpl element, final boolean usesAlignAttribute) {
-		final CSSStyleDeclaration style = element.getCurrentStyle();
+	private boolean addElsewhereIfPositioned(final RElement renderable, final Element element, final boolean usesAlignAttribute) {
+
+		CSSStyleDeclaration style;
+		if (element instanceof SVGElementImpl) {
+			style = ((SVGElementImpl)element).getCurrentStyle();
+		} else{
+			style = ((HTMLElementImpl)element).getCurrentStyle();
+		}
 		final int position = getPosition(element);
 		final boolean absolute = position == RenderState.POSITION_ABSOLUTE;
 		final boolean fixed = position == RenderState.POSITION_FIXED;
@@ -325,7 +333,7 @@ public class RBlockViewport extends BaseRCollection {
 		final boolean initialAllowOverflow;
 		if (prevLine == null) {
 			// Note: Assumes that prevLine == null means it's the first line.
-			final RenderState rs = this.modelNode.getRenderState();
+			final RenderState rs = (RenderState)this.modelNode.getRenderState();
 			initialAllowOverflow = rs != null && rs.getWhiteSpace() == RenderState.WS_NOWRAP;
 			// Text indentation only applies to the first line in the block.
 			final int textIndent = rs == null ? 0 : rs.getTextIndent(this.availContentWidth);
@@ -390,7 +398,7 @@ public class RBlockViewport extends BaseRCollection {
 	/**
 	 * <p>addLineBreak.</p>
 	 *
-	 * @param startNode a {@link org.loboevolution.html.dom.nodeimpl.ModelNode} object.
+	 * @param startNode a {@link ModelNode} object.
 	 * @param breakType a {@link java.lang.Integer} object.
 	 */
 	public void addLineBreak(final ModelNode startNode, final int breakType) {
@@ -401,7 +409,7 @@ public class RBlockViewport extends BaseRCollection {
 			line = this.currentLine;
 		}
 		if (line.getHeight() == 0) {
-			final RenderState rs = startNode.getRenderState();
+			final RenderState rs = (RenderState) startNode.getRenderState();
 			final int fontHeight = rs.getFontMetrics().getHeight();
 			line.setHeight(fontHeight);
 		}
@@ -1049,33 +1057,42 @@ public class RBlockViewport extends BaseRCollection {
 		final NodeListImpl nodeList = node.getNodeList();
 		if (nodeList != null) {
 			nodeList.forEach(nd -> {
-				final NodeImpl child = (NodeImpl) nd;
-				final int nodeType = child.getNodeType();
-				switch (nodeType) {
-					case Node.TEXT_NODE:
-						layoutText(child);
-						break;
-					case Node.ELEMENT_NODE:
-						this.currentLine.addStyleChanger(new RStyleChanger(child));
-						final String nodeName = child.getNodeName().toUpperCase();
-						MarkupLayout ml = RLayout.elementLayout.get(HTMLTag.get(nodeName));
-						if (ml == null) {
-							ml = miscLayout;
-						}
-						ml.layoutMarkup(this, (HTMLElementImpl) child);
-						this.currentLine.addStyleChanger(new RStyleChanger(node));
-						break;
-					case Node.DOCUMENT_FRAGMENT_NODE:
-						final DocumentFragmentImpl fragment = (DocumentFragmentImpl) child;
-						fragment.getNodeList().forEach(fragNode -> {
-							final NodeImpl fragChild = (NodeImpl) fragNode;
-							layoutChildren(fragChild);
-						});
-						break;
-					case Node.COMMENT_NODE:
-					case Node.PROCESSING_INSTRUCTION_NODE:
-					default:
-						break;
+
+				if (nd instanceof SVGElementImpl child) {
+					this.currentLine.addStyleChanger(new RStyleChanger(child));
+					final String nodeName = child.getNodeName().toUpperCase();
+					MarkupLayout ml = RLayout.elementLayout.get(HTMLTag.get(nodeName));
+					ml.layoutMarkup(this, child);
+					this.currentLine.addStyleChanger(new RStyleChanger(node));
+				} else {
+					final NodeImpl child = (NodeImpl) nd;
+					final int nodeType = child.getNodeType();
+					switch (nodeType) {
+						case Node.TEXT_NODE:
+							layoutText(child);
+							break;
+						case Node.ELEMENT_NODE:
+							this.currentLine.addStyleChanger(new RStyleChanger(child));
+							final String nodeName = child.getNodeName().toUpperCase();
+							MarkupLayout ml = RLayout.elementLayout.get(HTMLTag.get(nodeName));
+							if (ml == null) {
+								ml = miscLayout;
+							}
+							ml.layoutMarkup(this, (HTMLElementImpl) child);
+							this.currentLine.addStyleChanger(new RStyleChanger(node));
+							break;
+						case Node.DOCUMENT_FRAGMENT_NODE:
+							final DocumentFragmentImpl fragment = (DocumentFragmentImpl) child;
+							fragment.getNodeList().forEach(fragNode -> {
+								final NodeImpl fragChild = (NodeImpl) fragNode;
+								layoutChildren(fragChild);
+							});
+							break;
+						case Node.COMMENT_NODE:
+						case Node.PROCESSING_INSTRUCTION_NODE:
+						default:
+							break;
+					}
 				}
 			});
 		}
@@ -1671,7 +1688,7 @@ public class RBlockViewport extends BaseRCollection {
 
 	private void positionRBlock(final HTMLElementImpl markupElement, final RBlock renderable) {
 		
-		final RenderState rs = renderable.getModelNode().getRenderState();
+		final RenderState rs = (RenderState) renderable.getModelNode().getRenderState();
 		final int clear = rs.getClear();
 		if (clear != LineBreak.NONE) {
 			addLineBreak(renderable.getModelNode(), clear);
@@ -1719,14 +1736,14 @@ public class RBlockViewport extends BaseRCollection {
 	/**
 	 * <p>positionRElement.</p>
 	 *
-	 * @param markupElement a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
+	 * @param markupElement a {@link org.loboevolution.html.node.Element} object.
 	 * @param renderable a {@link org.loboevolution.html.renderer.RElement} object.
 	 * @param usesAlignAttribute a boolean.
 	 * @param obeysFloats a boolean.
 	 * @param alignCenterAttribute a boolean.
 	 */
-	public final void positionRElement(final HTMLElementImpl markupElement, final RElement renderable, final boolean usesAlignAttribute,
-                                       final boolean obeysFloats, final boolean alignCenterAttribute) {
+	public final void positionRElement(final Element markupElement, final RElement renderable, final boolean usesAlignAttribute,
+									   final boolean obeysFloats, final boolean alignCenterAttribute) {
 		if (!addElsewhereIfPositioned(renderable, markupElement, usesAlignAttribute)) {
 			int availContentWidth = this.availContentWidth;
 			final int availContentHeight = this.availContentHeight;
@@ -1753,11 +1770,16 @@ public class RBlockViewport extends BaseRCollection {
 	 * @param absolute if true, then position is absolute, else fixed
 	 */
 	private void scheduleAbsDelayedPair(final BoundableRenderable renderable, final int availContentWidth, final int availContentHeight,
-										final HTMLElementImpl element, final boolean absolute, final boolean fixed) {
+										final Element element, final boolean absolute, final boolean fixed) {
 
 		final RenderableContainer containingBlock = absolute ? getPositionedAncestor(this.container) : getRootContainer(container);
 
-		final CSSStyleDeclaration style = element.getCurrentStyle();
+		CSSStyleDeclaration style;
+		if (element instanceof SVGElementImpl) {
+			style = ((SVGElementImpl)element).getCurrentStyle();
+		} else{
+			style = ((HTMLElementImpl)element).getCurrentStyle();
+		}
 
 		this.container.addDelayedPair(DelayedPair.builder().
 				modelNode(element).
@@ -1770,9 +1792,9 @@ public class RBlockViewport extends BaseRCollection {
 				right(style.getRight()).
 				top(style.getTop()).
 				bottom(style.getBottom()).
-				width(HtmlValues.getPixelSize(style.getWidth(), element.getRenderState(), element.getDocumentNode().getDefaultView(), null, availContentWidth)).
-				height(HtmlValues.getPixelSize(style.getHeight(), element.getRenderState(), element.getDocumentNode().getDefaultView(), null, availContentHeight)).
-				rs(element.getRenderState()).
+				width(HtmlValues.getPixelSize(style.getWidth(), (RenderState) element.getRenderState(), element.getDocumentNode().getDefaultView(), null, availContentWidth)).
+				height(HtmlValues.getPixelSize(style.getHeight(), (RenderState) element.getRenderState(), element.getDocumentNode().getDefaultView(), null, availContentHeight)).
+				rs((RenderState) element.getRenderState()).
 				initY(currentLine.getY() + currentLine.getHeight()).
 				initX(currentLine.getX()).
 				isFixed(fixed).

@@ -481,7 +481,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	 * <p>
 	 * This method has no effect on FRAMESETs.
 	 *
-	 * @param overflow See {@link org.loboevolution.html.renderstate.RenderState}.
+	 * @param overflow See {@link RenderState}.
 	 */
 	public void setDefaultOverflowX(final int overflow) {
 		this.defaultOverflowX = overflow;
@@ -496,7 +496,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	 * <p>
 	 * This method has no effect on FRAMESETs.
 	 *
-	 * @param overflow See {@link org.loboevolution.html.renderstate.RenderState}.
+	 * @param overflow See {@link RenderState}.
 	 */
 	public void setDefaultOverflowY(final int overflow) {
 		this.defaultOverflowY = overflow;

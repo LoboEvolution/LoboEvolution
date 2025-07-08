@@ -26,11 +26,12 @@
 
 package org.loboevolution.html.renderer.layout;
 
-import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
-import org.loboevolution.html.dom.domimpl.UINode;
+import org.loboevolution.html.node.Element;
+import org.loboevolution.html.node.UINode;
 import org.loboevolution.html.renderer.RBlockViewport;
 import org.loboevolution.html.renderer.RElement;
+import org.loboevolution.svg.dom.SVGElementImpl;
 
 public abstract class CommonWidgetLayout implements MarkupLayout {
     public  static final int ADD_INLINE = 0;
@@ -42,33 +43,39 @@ public abstract class CommonWidgetLayout implements MarkupLayout {
         this.method = method;
     }
 
-    public  abstract RElement createRenderable(final RBlockViewport bodyLayout, final HTMLElement markupElement);
+    public  abstract RElement createRenderable(final RBlockViewport bodyLayout, final Element markupElement);
 
     @Override
-    public void layoutMarkup(final RBlockViewport bodyLayout, final HTMLElement markupElement) {
-        final HTMLElementImpl markupElementImpl = (HTMLElementImpl) markupElement;
-        final UINode node = markupElementImpl.getUINode();
-        final RElement renderable;
-        if (node == null) {
-            renderable = createRenderable(bodyLayout, markupElement);
-            if (renderable == null) {
-                return;
-            }
-            markupElementImpl.setUINode(renderable);
+    public void layoutMarkup(final RBlockViewport bodyLayout, final Element markupElement) {
+
+        if (markupElement instanceof SVGElementImpl) {
+            RElement renderable = createRenderable(bodyLayout, markupElement);
+            bodyLayout.positionRElement(markupElement, renderable, true, true, false);
         } else {
-            renderable = (RElement) node;
-        }
-        renderable.setOriginalParent(bodyLayout);
-        switch (method) {
-            case ADD_INLINE:
-                bodyLayout.addRenderableToLineCheckStyle(renderable, markupElementImpl);
-                break;
-            case ADD_AS_BLOCK:
-            case ADD_INLINE_BLOCK:
-                bodyLayout.positionRElement(markupElementImpl, renderable, true, true, false);
-                break;
-            default:
-                break;
+            final HTMLElementImpl markupElementImpl = (HTMLElementImpl) markupElement;
+            final UINode node = markupElementImpl.getUINode();
+            final RElement renderable;
+            if (node == null) {
+                renderable = createRenderable(bodyLayout, markupElement);
+                if (renderable == null) {
+                    return;
+                }
+                markupElementImpl.setUINode(renderable);
+            } else {
+                renderable = (RElement) node;
+            }
+            renderable.setOriginalParent(bodyLayout);
+            switch (method) {
+                case ADD_INLINE:
+                    bodyLayout.addRenderableToLineCheckStyle(renderable, markupElementImpl);
+                    break;
+                case ADD_AS_BLOCK:
+                case ADD_INLINE_BLOCK:
+                    bodyLayout.positionRElement(markupElementImpl, renderable, true, true, false);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

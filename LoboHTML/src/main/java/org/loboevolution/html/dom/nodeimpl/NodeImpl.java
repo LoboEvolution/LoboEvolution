@@ -41,13 +41,13 @@ import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.html.dom.*;
 import org.loboevolution.html.dom.filter.ElementFilter;
 import org.loboevolution.html.dom.nodeimpl.event.EventTargetImpl;
+import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.traversal.NodeFilter;
 import org.loboevolution.html.dom.domimpl.*;
 import org.loboevolution.html.dom.filter.TextFilter;
 import org.loboevolution.html.dom.xpath.XPathNSResolverImpl;
 import org.loboevolution.html.node.*;
 import org.loboevolution.html.parser.XHtmlParser;
-import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.renderstate.StyleSheetRenderState;
 import org.loboevolution.html.xpath.XPathNSResolver;
 import org.loboevolution.http.UserAgentContext;
@@ -61,7 +61,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * <p>Abstract NodeImpl class.</p>
  */
 @Slf4j
-public abstract class NodeImpl extends EventTargetImpl implements Node, ModelNode, Cloneable {
+public abstract class NodeImpl extends EventTargetImpl implements Node, Cloneable {
 	private static final RenderState INVALID_RENDER_STATE = new StyleSheetRenderState(null);
 
 	protected volatile Document document;
@@ -143,10 +143,10 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, ModelNod
 			}
 		}
 
-		((NodeImpl) newChild).setParentImpl(this);
+		newChild.setParentImpl(this);
 
 		if (Strings.isNotBlank(getNamespaceURI()) && Strings.isBlank(newChild.getNamespaceURI())) {
-			((NodeImpl) newChild).setNamespaceURI(getNamespaceURI());
+			newChild.setNamespaceURI(getNamespaceURI());
 		}
 
 		nodeList.add(newChild);
@@ -170,9 +170,10 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, ModelNod
 		return insertBefore(newChild, this.getFirstChild());
 	}
 
-	private void appendChildrenToCollectionImpl(final NodeFilter filter, final Collection<Node> collection) {
-		nodeList.forEach(child -> {
-			final NodeImpl node = (NodeImpl) child;
+	/** {@inheritDoc} */
+	@Override
+	public void appendChildrenToCollectionImpl(final NodeFilter filter, final Collection<Node> collection) {
+		nodeList.forEach(node -> {
 			if (filter.acceptNode(node) == NodeFilter.FILTER_ACCEPT) {
 				collection.add(node);
 			}
@@ -274,8 +275,7 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, ModelNod
 	 */
 	@Override
 	public short compareDocumentPosition(final Node other) {
-		final NodeImpl their = (NodeImpl) other;
-		if (their == this) {
+        if (other == this) {
 			return 0;
 		}
 
@@ -287,10 +287,10 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, ModelNod
 			return DOCUMENT_POSITION_PRECEDING | DOCUMENT_POSITION_FOLLOWING;
 		}
 
-		if (Objects.equals(their.getDocumentNode(), getDocumentNode())) {
+		if (Objects.equals(other.getDocumentNode(), getDocumentNode())) {
 			final List<Node> ancestry = new ArrayList<>();
-			ancestry.add(their);
-			Node p = their.getParentNode();
+			ancestry.add(other);
+			Node p = other.getParentNode();
 			while (p != null) {
 				if (p == this) {
 					return DOCUMENT_POSITION_CONTAINED_BY | DOCUMENT_POSITION_FOLLOWING;
@@ -342,8 +342,8 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, ModelNod
 	/**
 	 * <p>createRenderState.</p>
 	 *
-	 * @param prevRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
-	 * @return a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 * @param prevRenderState a {@link RenderState} object.
+	 * @return a {@link RenderState} object.
 	 */
 	protected RenderState createRenderState(final RenderState prevRenderState) {
 		return prevRenderState;
@@ -352,16 +352,10 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, ModelNod
 	@Override
 	public NamedNodeMap getAttributes() {return null;}
 
-	/**
-	 * Extracts all descendents that match the filter, except those descendents of
-	 * nodes that match the filter.
-	 *
-	 * @param filter a {@link NodeFilter} object.
-	 * @param al a {@link java.util.ArrayList} object.
-	 */
-	private void extractDescendentsArrayImpl(final NodeFilter filter, final List<Node> al, final boolean nestIntoMatchingNodes) {
-		nodeList.forEach(child -> {
-			final NodeImpl n = (NodeImpl) child;
+	/** {@inheritDoc} */
+	@Override
+	public void extractDescendentsArrayImpl(final NodeFilter filter, final List<Node> al, final boolean nestIntoMatchingNodes) {
+		nodeList.forEach(n -> {
 			if (filter.acceptNode(n) == NodeFilter.FILTER_ACCEPT) {
 				al.add(n);
 				if (nestIntoMatchingNodes) {
@@ -373,31 +367,24 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, ModelNod
 		});
 	}
 
-	/**
-	 * Tries to get a UINode associated with the current node. Failing that, it
-	 * tries ancestors recursively. This method will return the closest
-	 * <i>block-level</i> renderer node, if any.
-	 *
-	 * @return a {@link org.loboevolution.html.dom.domimpl.UINode} object.
-	 */
+	/** {@inheritDoc} */
+	@Override
 	public UINode findUINode() {
 		// Called in GUI thread always.
 		final UINode uiNode = this.uiNode;
 		if (uiNode != null) {
 			return uiNode;
 		}
-		final NodeImpl parentNode = (NodeImpl) getParentNode();
+		final Node parentNode = getParentNode();
 		return parentNode == null ? null : parentNode.findUINode();
 	}
 
-	/**
-	 * <p>forgetRenderState.</p>
-	 */
-	protected void forgetRenderState() {
+	@Override
+	public void forgetRenderState() {
 		synchronized (this) {
 			if (this.renderState != INVALID_RENDER_STATE) {
 				this.renderState = INVALID_RENDER_STATE;
-				nodeList.forEach(child -> ((NodeImpl) child).forgetRenderState());
+				nodeList.forEach(Node::forgetRenderState);
 			}
 		}
 	}
@@ -565,7 +552,7 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, ModelNod
 	/** {@inheritDoc} */
 	@Override
 	public Node getNextSibling() {
-		final NodeImpl parent = (NodeImpl) getParentNode();
+		final Node parent = getParentNode();
 		return parent == null ? null : parent.getNextTo(this);
 	}
 
@@ -575,7 +562,7 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, ModelNod
 	 * @return a {@link org.loboevolution.html.node.Element} object.
 	 */
 	public Element getNextElementSibling() {
-		final NodeImpl parent = (NodeImpl) this.getParentNode();
+		final Node parent = this.getParentNode();
 		if (parent != null) {
 			Node next = this;
 			do {
@@ -588,7 +575,8 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, ModelNod
 		return null;
 	}
 
-	private Node getNextTo(final Node node) {
+	@Override
+	public Node getNextTo(final Node node) {
 		final int idx = this.nodeList.indexOf(node);
 		if (idx == -1) {
 			return null;
@@ -661,11 +649,11 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, ModelNod
 	 * <p>getParentRenderState.</p>
 	 *
 	 * @param parent a {@link java.lang.Object} object.
-	 * @return a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 * @return a {@link RenderState} object.
 	 */
 	protected final RenderState getParentRenderState(final Object parent) {
-		if (parent instanceof NodeImpl) {
-			return ((NodeImpl) parent).getRenderState();
+		if (parent instanceof Node) {
+			return (RenderState) ((Node)parent).getRenderState();
 		} else {
 			return null;
 		}
@@ -680,7 +668,7 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, ModelNod
 	/** {@inheritDoc} */
 	@Override
 	public Node getPreviousSibling() {
-		final NodeImpl parent = (NodeImpl) getParentNode();
+		final Node parent = getParentNode();
 		return parent == null ? null : parent.getPreviousTo(this);
 	}
 
@@ -690,7 +678,7 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, ModelNod
 	 * @return a {@link org.loboevolution.html.node.Element} object.
 	 */
 	public Element getPreviousElementSibling() {
-		final NodeImpl parent = (NodeImpl) this.getParentNode();
+		final Node parent = this.getParentNode();
 		if (parent != null) {
 			Node previous = this;
 			do {
@@ -703,7 +691,8 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, ModelNod
 		return null;
 	}
 
-	private Node getPreviousTo(final Node node) {
+	@Override
+	public Node getPreviousTo(final Node node) {
 		final int idx = this.nodeList.indexOf(node);
 		if (idx == -1) {
 			return null;
@@ -719,7 +708,9 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, ModelNod
 	}
 
 
-	/** {@inheritDoc} */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public RenderState getRenderState() {
 		// Generally called from the GUI thread, except for
@@ -779,7 +770,7 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, ModelNod
 	/**
 	 * <p>getUINode.</p>
 	 *
-	 * @return a {@link org.loboevolution.html.dom.domimpl.UINode} object.
+	 * @return a {@link UINode} object.
 	 */
 	public UINode getUINode() {
 		return this.uiNode;
@@ -925,7 +916,7 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, ModelNod
 		}
 
 		if (newChild instanceof NodeImpl) {
-			((NodeImpl) newChild).setParentImpl(this);
+			newChild.setParentImpl(this);
 		}
 		this.nodeList.add(idx + 1, newChild);
 
@@ -946,7 +937,7 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, ModelNod
 	protected Node insertAt(final Node newChild, final int idx) {
 
 		if (newChild instanceof NodeImpl) {
-			((NodeImpl) newChild).setParentImpl(this);
+			newChild.setParentImpl(this);
 		}
 		this.nodeList.add(idx, newChild);
 
@@ -1008,7 +999,7 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, ModelNod
 
 
 			if (newChild instanceof NodeImpl) {
-				((NodeImpl) newChild).setParentImpl(this);
+				newChild.setParentImpl(this);
 			}
 			if (!this.nodeList.contains(newChild)) {
 				this.nodeList.add(idx, newChild);
@@ -1018,17 +1009,6 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, ModelNod
 			informStructureInvalid();
 		}
 		return newChild;
-	}
-
-	private boolean isAncestorOf(final Node other) {
-		final NodeImpl parent = (NodeImpl) other.getParentNode();
-		if (parent == this) {
-			return true;
-		} else if (parent == null) {
-			return false;
-		} else {
-			return isAncestorOf(parent);
-		}
 	}
 
 	/** {@inheritDoc} */
@@ -1156,7 +1136,7 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, ModelNod
 		if (!this.notificationsSuspended) {
 			informStructureInvalid();
 		}
-		((NodeImpl) oldChild).setParentImpl(null);
+		oldChild.setParentImpl(null);
 		return oldChild;
 	}
 
@@ -1295,7 +1275,7 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, ModelNod
 
 
 		final int idx2 = this.nodeList.indexOf(newChild);
-		((NodeImpl)newChild).setParentImpl(this);
+		newChild.setParentImpl(this);
 		this.nodeList.set(idx, newChild);
 		if (idx2 != -1) {
 			this.nodeList.remove(idx2);
@@ -1330,27 +1310,17 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, ModelNod
 		this.document = value;
 	}
 
-	/**
-	 * <p>setOwnerDocument.</p>
-	 *
-	 * @param value a {@link org.loboevolution.html.node.Document} object.
-	 * @param deep a boolean.
-	 */
+	/** {@inheritDoc} */
+	@Override
 	public void setOwnerDocument(final Document value, final boolean deep) {
 		this.document = value;
 		if (deep) {
-			nodeList.forEach(node -> {
-				final NodeImpl child = (NodeImpl) node;
-				child.setOwnerDocument(value, deep);
-			});
+			nodeList.forEach(child -> child.setOwnerDocument(value, deep));
 		}
 	}
 
-	/**
-	 * <p>setParentImpl.</p>
-	 *
-	 * @param parent a {@link org.loboevolution.html.node.Node} object.
-	 */
+	/** {@inheritDoc} */
+	@Override
 	public final void setParentImpl(final Node parent) {
 		this.parentNode = parent;
 	}
@@ -1390,7 +1360,7 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, ModelNod
 	/**
 	 * <p>setUINode.</p>
 	 *
-	 * @param uiNode a {@link org.loboevolution.html.dom.domimpl.UINode} object.
+	 * @param uiNode a {@link UINode} object.
 	 */
 	public void setUINode(final UINode uiNode) {
 		// Called in GUI thread always.
@@ -1455,11 +1425,8 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, ModelNod
 		return getNodeName();
 	}
 
-	/**
-	 * <p>visit.</p>
-	 *
-	 * @param visitor a {@link org.loboevolution.html.dom.nodeimpl.NodeVisitor} object.
-	 */
+	/** {@inheritDoc} */
+	@Override
 	public void visit(final NodeVisitor visitor) {
 		synchronized (this) {
 			visitImpl(visitor);
@@ -1469,14 +1436,11 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, ModelNod
 	/**
 	 * <p>visitImpl.</p>
 	 *
-	 * @param visitor a {@link org.loboevolution.html.dom.nodeimpl.NodeVisitor} object.
+	 * @param visitor a {@link NodeVisitor} object.
 	 */
-	protected void visitImpl(final NodeVisitor visitor) {
+	public void visitImpl(final NodeVisitor visitor) {
 		visitor.visit(this);
-		nodeList.forEach(node -> {
-			final NodeImpl child = (NodeImpl) node;
-            child.visit(visitor);
-        });
+		nodeList.forEach(child -> child.visit(visitor));
 	}
 
 	/**

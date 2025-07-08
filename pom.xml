@@ -122,6 +122,7 @@
         <module>LoboPDF</module>
         <module>LoboIViewer</module>
         <module>LoboJTattoo</module>
+        <module>LoboSVG</module>
         <module>LoboHTML</module>
         <module>LoboUnitTest</module>
         <module>LoboJhrome</module>

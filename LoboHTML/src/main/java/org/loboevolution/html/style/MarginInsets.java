@@ -41,7 +41,7 @@ public class MarginInsets {
 	 *
 	 * @param cssProperties a {@link CSSStyleDeclaration} object.
 	 * @param element a {@link  org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
-	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 * @param renderState a {@link RenderState} object.
 	 * @return a {@link org.loboevolution.html.style.HtmlInsets} object.
 	 */
 	public static HtmlInsets getMarginInsets(final CSSStyleDeclaration cssProperties, final HTMLElementImpl element, final RenderState renderState) {
@@ -61,7 +61,7 @@ public class MarginInsets {
 	 *
 	 * @param cssProperties a {@link CSSStyleDeclaration} object.
 	 * @param element a {@link  org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
-	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 * @param renderState a {@link RenderState} object.
 	 * @return a {@link org.loboevolution.html.style.HtmlInsets} object.
 	 */
 	public static HtmlInsets getPaddingInsets(final CSSStyleDeclaration cssProperties, final HTMLElementImpl element, final RenderState renderState) {

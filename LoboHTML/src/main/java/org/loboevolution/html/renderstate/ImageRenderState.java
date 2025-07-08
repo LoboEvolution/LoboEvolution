@@ -41,7 +41,7 @@ public class ImageRenderState extends StyleSheetRenderState {
 	/**
 	 * <p>Constructor for ImageRenderState.</p>
 	 *
-	 * @param prevRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 * @param prevRenderState a {@link RenderState} object.
 	 * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
 	 */
 	public ImageRenderState(final RenderState prevRenderState, final HTMLElementImpl element) {

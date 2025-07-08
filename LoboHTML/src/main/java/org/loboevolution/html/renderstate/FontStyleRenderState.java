@@ -62,7 +62,7 @@ public class FontStyleRenderState extends RenderStateDelegator {
 	/**
 	 * <p>Constructor for FontStyleRenderState.</p>
 	 *
-	 * @param prevRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 * @param prevRenderState a {@link RenderState} object.
 	 * @param type a {@link org.loboevolution.laf.LAFType} object.
 	 */
 	public FontStyleRenderState(final RenderState prevRenderState, final HTMLElementImpl element, final LAFType type) {
@@ -76,7 +76,7 @@ public class FontStyleRenderState extends RenderStateDelegator {
 	/**
 	 * <p>Constructor for FontStyleRenderState.</p>
 	 *
-	 * @param prevRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 * @param prevRenderState a {@link RenderState} object.
 	 * @param superscript a {@link java.lang.Integer} object.
 	 */
 	public FontStyleRenderState(final RenderState prevRenderState, final HTMLElementImpl element, final Integer superscript) {

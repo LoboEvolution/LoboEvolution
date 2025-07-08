@@ -41,7 +41,7 @@ public abstract class RenderStateDelegator implements RenderState {
 	/**
 	 * <p>Constructor for RenderStateDelegator.</p>
 	 *
-	 * @param delegate a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 * @param delegate a {@link RenderState} object.
 	 */
 	public RenderStateDelegator(final RenderState delegate) {
 		super();

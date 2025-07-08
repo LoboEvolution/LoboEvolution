@@ -26,13 +26,14 @@
 
 package org.loboevolution.html.builder;
 
+import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
-import org.loboevolution.svg.SVGLineElementImpl;
+import org.loboevolution.svg.dom.SVGLineElementImpl;
 
 public class SVGLineBuilder implements HTMLElementBuilder {
 
     @Override
-    public HTMLElementImpl build(final String name) {
-        return new SVGLineElementImpl(name);
+    public HTMLElement build(final String name) {
+        return new SVGLineElementImpl(new HTMLElementImpl(name));
     }
 }

@@ -26,13 +26,13 @@
 
 package org.loboevolution.html.renderer.layout;
 
-import org.loboevolution.html.dom.HTMLElement;
+import org.loboevolution.html.node.Element;
 import org.loboevolution.html.renderer.RBlockViewport;
 
 public class NopLayout implements MarkupLayout{
 
     @Override
-    public void layoutMarkup(RBlockViewport bodyLayout, HTMLElement markupElement) {
+    public void layoutMarkup(RBlockViewport bodyLayout, Element markupElement) {
 
     }
 }

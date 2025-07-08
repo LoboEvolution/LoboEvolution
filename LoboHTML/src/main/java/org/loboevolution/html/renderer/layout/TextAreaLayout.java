@@ -29,7 +29,7 @@ package org.loboevolution.html.renderer.layout;
 import org.loboevolution.html.control.RUIControl;
 import org.loboevolution.html.control.TextAreaControl;
 import org.loboevolution.html.control.UIControl;
-import org.loboevolution.html.dom.HTMLElement;
+import org.loboevolution.html.node.Element;
 import org.loboevolution.html.dom.domimpl.HTMLTextAreaElementImpl;
 import org.loboevolution.html.renderer.RBlockViewport;
 import org.loboevolution.html.renderer.RElement;
@@ -44,7 +44,7 @@ public class TextAreaLayout extends CommonWidgetLayout {
     }
 
     @Override
-    public  RElement createRenderable(final RBlockViewport bodyLayout, final HTMLElement markupElement) {
+    public  RElement createRenderable(final RBlockViewport bodyLayout, final Element markupElement) {
         final HTMLTextAreaElementImpl markupElementImpl = (HTMLTextAreaElementImpl) markupElement;
         final UIControl control = new TextAreaControl(markupElementImpl);
         return new RUIControl(markupElementImpl, control, bodyLayout.getContainer(), bodyLayout.getUserAgentContext());

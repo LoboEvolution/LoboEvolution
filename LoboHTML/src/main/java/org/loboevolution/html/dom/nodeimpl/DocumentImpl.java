@@ -120,9 +120,8 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
 			throw new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR, "readonly node");
 		}
 
-		final NodeImpl node = (NodeImpl) source;
-		node.setOwnerDocument(this.document, true);
-		return node;
+		source.setOwnerDocument(this.document, true);
+		return source;
 	}
 
 	@Override
