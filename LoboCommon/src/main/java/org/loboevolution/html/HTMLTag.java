@@ -38,126 +38,261 @@ import java.util.Map;
 @Getter
 public enum HTMLTag {
 
-    A("A"),
-    AUDIO("AUDIO"),
+    HTML("HTML"),
+    BODY("BODY"),
+    HEAD("HEAD"),
+
+    // DOCUMENT METADATA
+    BASE("BASE"),
+    BASEFONT("BASEFONT"),
+    LINK("LINK"),
+    META("META"),
+    STYLE("STYLE"),
+    TITLE("TITLE"),
+
+    // CONTENT SECTIONING
     ADDRESS("ADDRESS"),
-    ANCHOR("ANCHOR"),
-    ANIMATE("ANIMATE"),
-    ANIMATE_TRASFORM("ANIMATETRANSFORM"),
-    APPLET("APPLET"),
     ARTICLE("ARTICLE"),
     ASIDE("ASIDE"),
-    B("B"),
-    BASE("BASE"),
-    BLOCKQUOTE("BLOCKQUOTE"),
-    BODY("BODY"),
-    BR("BR"),
-    BUTTON("BUTTON"),
-    CANVAS("CANVAS"),
-    CAPTION("CAPTION"),
-    CENTER("CENTER"),
-    CHANNEL("CHANNEL"),
-    CIRCLE("CIRCLE"),
-    CITE("CITE"),
-    CLIPPATH("CLIPPATH"),
-    CODE("CODE"),
-    COL("COL"),
-    COLGROUP("COLGROUP"),
-    DD("DD"),
-    DEFS("DEFS"),
-    DESCRIPTION("DESCRIPTION"),
-    DIALOG("DIALOG"),
-    DIV("DIV"),
-    DIR("DIR"),
-    DL("DL"),
-    DT("DT"),
-    DETAILS("DETAILS"),
-    ELLIPSE("ELLIPSE"),
-    EM("EM"),
-    EMBED("EMBED"),
-    FIELDSET("FIELDSET"),
-    FIGCAPTION("FIGCAPTION"),
-    FIGURE("FIGURE"),
-    FORM("FORM"),
     FOOTER("FOOTER"),
-    G("G"),
+    HEADER("HEADER"),
     H1("H1"),
     H2("H2"),
     H3("H3"),
     H4("H4"),
     H5("H5"),
     H6("H6"),
-    HEAD("HEAD"),
-    HEADER("HEADER"),
-    HR("HR"),
-    HTML("HTML"),
-    I("I"),
-    IFRAME("IFRAME"),
-    IMAGE("IMAGE"),
-    IMG("IMG"),
-    INPUT("INPUT"),
-    ITEM("ITEM"),
-    LEGEND("LEGEND"),
-    LI("LI"),
-    LINE("LINE"),
-    LINEAR_GRADIENT("LINEARGRADIENT"),
-    LINK("LINK"),
+    HGROUP("HGROUP"),
     MAIN("MAIN"),
-    MARQUEE("MARQUEE"),
-    META("META"),
-
-    METER("METER"),
-    MENU("MENU"),
     NAV("NAV"),
-    NOSCRIPT("NOSCRIPT"),
-    OBJECT("OBJECT"),
+    SECTION("SECTION"),
+
+    // TEXT CONTENT
+    BLOCKQUOTE("BLOCKQUOTE"),
+    DD("DD"),
+    DIV("DIV"),
+    DL("DL"),
+    DT("DT"),
+    FIGCAPTION("FIGCAPTION"),
+    FIGURE("FIGURE"),
+    HR("HR"),
+    LI("LI"),
+    MENU("MENU"),
     OL("OL"),
-    OPTION("OPTION"),
-    OPTGROUP("OPTGROUP"),
     P("P"),
+    PRE("PRE"),
+    UL("UL"),
+
+    // INLINE TEXT SEMANTICS
+    A("A"),
+    ANCHOR("ANCHOR"),
+    ABBR("ABBR"),
+    B("B"),
+    BDI("BDI"),
+    BDO("BDO"),
+    BR("BR"),
+    CITE("CITE"),
+    CODE("CODE"),
+    DATA("DATA"),
+    DFN("DFN"),
+    EM("EM"),
+    I("I"),
+    KBD("KBD"),
+    MARK("MARK"),
+    Q("Q"),
+    RB("RB"),
+    RP("RP"),
+    RT("RT"),
+    RTC("RTC"),
+    RUBY("RUBY"),
+    S("S"),
+    SAMP("SAMP"),
+    SMALL("SMALL"),
+    SPAN("SPAN"),
+    STRONG("STRONG"),
+    SUB("SUB"),
+    SUP("SUP"),
+    TIME("TIME"),
+    U("U"),
+    VAR("VAR"),
+    WBR("WBR"),
+
+    // IMAGE AND MULTIMEDIA
+    AREA("AREA"),
+    AUDIO("AUDIO"),
+    IMG("IMG"),
+    MAP("MAP"),
+    TRACK("TRACK"),
+    VIDEO("VIDEO"),
+
+    // EMBEDDED CONTENT
+    EMBED("EMBED"),
+    IFRAME("IFRAME"),
+    OBJECT("OBJECT"),
+    PARAM("PARAM"),
+    PICTURE("PICTURE"),
+    SOURCE("SOURCE"),
+
+    // MATHML
+    MATH("MATH"),
+
+    // SCRIPTING
+    CANVAS("CANVAS"),
+    NOSCRIPT("NOSCRIPT"),
+    SCRIPT("SCRIPT"),
+
+    // DEMARCATING EDITS
+    DEL("DEL"),
+    INS("INS"),
+
+    // TABLE CONTENT
+    CAPTION("CAPTION"),
+    COL("COL"),
+    COLGROUP("COLGROUP"),
+    TABLE("TABLE"),
+    TBODY("TBODY"),
+    TD("TD"),
+    TFOOT("TFOOT"),
+    TH("TH"),
+    THEAD("THEAD"),
+    TR("TR"),
+
+    // FORMS
+    BUTTON("BUTTON"),
+    DATALIST("DATALIST"),
+    FIELDSET("FIELDSET"),
+    FORM("FORM"),
+    INPUT("INPUT"),
+    LABEL("LABEL"),
+    LEGEND("LEGEND"),
+    METER("METER"),
+    OPTGROUP("OPTGROUP"),
+    OPTION("OPTION"),
+    OUTPUT("OUTPUT"),
+    PROGRESS("PROGRESS"),
+    SELECT("SELECT"),
+    TEXTAREA("TEXTAREA"),
+
+    // INTERACTIVE ELEMENTS
+    DETAILS("DETAILS"),
+    DIALOG("DIALOG"),
+    SUMMARY("SUMMARY"),
+
+    // WEB COMPONENTS
+    SLOT("SLOT"),
+    TEMPLATE("TEMPLATE"),
+
+    // OBSOLETE/DEPRECATED
+    ACRONYM("ACRONYM"),
+    APPLET("APPLET"),
+    BGSOUND("BGSOUND"),
+    BIG("BIG"),
+    CENTER("CENTER"),
+    COMMAND("COMMAND"),
+    CONTENT("CONTENT"),
+    DIR("DIR"),
+    FONT("FONT"),
+    FRAME("FRAME"),
+    FRAMESET("FRAMESET"),
+    KEYGEN("KEYGEN"),
+    MARQUEE("MARQUEE"),
+    MENUITEM("MENUITEM"),
+    NOBR("NOBR"),
+    NOEMBED("NOEMBED"),
+    NOFRAMES("NOFRAMES"),
+    PLAINTEXT("PLAINTEXT"),
+    SHADOW("SHADOW"),
+    SPACER("SPACER"),
+    STRIKE("STRIKE"),
+    TT("TT"),
+    XMP("XMP"),
+
+    // RSS FEED ELEMENTS (SEZIONE AGGIUNTIVA)
+    RSS("RSS"),
+    CHANNEL("CHANNEL"),
+    DESCRIPTION("DESCRIPTION"),
+    LANGUAGE("LANGUAGE"),
+    COPYRIGHT("COPYRIGHT"),
+    MANAGING_EDITOR("MANAGINGEDITOR"),
+    WEB_MASTER("WEBMASTER"),
+    PUB_DATE("PUBDATE"),
+    LAST_BUILD_DATE("LASTBUILDDATE"),
+    CATEGORY("CATEGORY"),
+    GENERATOR("GENERATOR"),
+    DOCS("DOCS"),
+    CLOUD("CLOUD"),
+    TTL("TTL"),
+    RATING("RATING"),
+    TEXT_INPUT("TEXTINPUT"),
+    SKIP_HOURS("SKIPHOURS"),
+    SKIP_DAYS("SKIPDAYS"),
+
+    // ITEM-SPECIFIC TAGS
+    ITEM("ITEM"),
+    AUTHOR("AUTHOR"),
+    COMMENTS("COMMENTS"),
+    ENCLOSURE("ENCLOSURE"),
+    GUID("GUID"),
+
+    // SVG ELEMENTS (SEZIONE AGGIUNTIVA)
+    SVG("SVG"),
+    CIRCLE("CIRCLE"),
+    CLIPPATH("CLIPPATH"),
+    DEFS("DEFS"),
+    ELLIPSE("ELLIPSE"),
+    FEBLEND("FEBLEND"),
+    FECOLORMATRIX("FECOLORMATRIX"),
+    FECOMPONENTTRANSFER("FECOMPONENTTRANSFER"),
+    FECOMPOSITE("FECOMPOSITE"),
+    FECONVOLVEMATRIX("FECONVOLVEMATRIX"),
+    FEDIFFUSELIGHTING("FEDIFFUSELIGHTING"),
+    FEDISPLACEMENTMAP("FEDISPLACEMENTMAP"),
+    FEDISTANTLIGHT("FEDISTANTLIGHT"),
+    FEFLOOD("FEFLOOD"),
+    FEFUNCA("FEFUNCA"),
+    FEFUNCB("FEFUNCB"),
+    FEFUNCG("FEFUNCG"),
+    FEFUNCR("FEFUNCR"),
+    FEGAUSSIANBLUR("FEGAUSSIANBLUR"),
+    FEIMAGE("FEIMAGE"),
+    FEMERGE("FEMERGE"),
+    FEMERGENODE("FEMERGENODE"),
+    FEMORPHOLOGY("FEMORPHOLOGY"),
+    FEOFFSET("FEOFFSET"),
+    FEPOINTLIGHT("FEPOINTLIGHT"),
+    FESPECULARLIGHTING("FESPECULARLIGHTING"),
+    FESPOTLIGHT("FESPOTLIGHT"),
+    FETILE("FETILE"),
+    FETURBULENCE("FETURBULENCE"),
+    FILTER("FILTER"),
+    FOREIGNOBJECT("FOREIGNOBJECT"),
+    G("G"),
+    IMAGE("IMAGE"),
+    LINE("LINE"),
+    LINEARRGRADIENT("LINEARGRADIENT"),
+    MARKER("MARKER"),
+    MASK("MASK"),
     PATH("PATH"),
+    PATTERN("PATTERN"),
     POLYGON("POLYGON"),
     POLYLINE("POLYLINE"),
-    PRE("PRE"),
-    PROGRESS("PROGRESS"),
-    Q("Q"),
-    RADIAL_GRADIENT("RADIALGRADIENT"),
+    RADIALGRADIENT("RADIALGRADIENT"),
     RECT("RECT"),
-    RSS("RSS"),
-    SAMP("SAMP"),
-    SCRIPT("SCRIPT"),
-    SELECT("SELECT"),
-    SECTION("SECTION"),
-    SMALL("SMALL"),
-    SPACER("SPACER"),
-    SPAN("SPAN"),
     STOP("STOP"),
-    STRIKE("STRIKE"),
-    STRONG("STRONG"),
-    STYLE("STYLE"),
-    SUB("SUB"),
-    SUMMARY("SUMMARY"),
-    SUP("SUP"),
-    SVG("SVG"),
     SYMBOL("SYMBOL"),
-    TABLE("TABLE"),
-    TD("TD"),
     TEXT("TEXT"),
-    TEXTAREA("TEXTAREA"),
-    TH("TH"),
-    TITLE("TITLE"),
-    TR("TR"),
-    TFOOT("TFOOT"),
-    THEAD("THEAD"),
-    TBODY("TBODY"),
-    TT("TT"),
-    U("U"),
-    UL("UL"),
+    TSPAN("TSPAN"),
     USE("USE"),
-    KBD("KBD"),
-    VAR("VAR"),
+    VIEW("VIEW"),
 
-    VIDEO("VIDEO");
+    // SVG ANIMATION ELEMENTS
+    ANIMATE("ANIMATE"),
+    ANIMATE_MOTION("ANIMATEMOTION"),
+    ANIMATETRANSFORM("ANIMATETRANSFORM"),
+    ANIMATETRASFORM("ANIMATETRANSFORM"),
+    DISCARDELEMENT("DISCARDELEMENT"),
+    MPATHELEMENT("MPATHELEMENT"),
+    SET("SET");
 
     private final String value;
     private static final Map<String, HTMLTag> ENUM_MAP;
@@ -177,21 +312,32 @@ public enum HTMLTag {
     /**
      * <p>isEqual.</p>
      *
-     * @param value a {@link java.lang.String} object.
+     * @param value a {@link String} object.
      * @return a boolean.
      */
     public boolean isEqual(final String value) {
-        return this.value.equals(value);
+        return value.equals(getValue());
+    }
+
+    /**
+     * <p>isHtml.</p>
+     *
+     * @param actionName a {@link String} object.
+     * @return a boolean.
+     */
+    public static boolean isHtml(final String actionName) {
+        return ENUM_MAP.containsKey(actionName);
     }
 
     /**
      * <p>get.</p>
      *
-     * @param actionName a {@link java.lang.String} object.
-     * @return a {@link org.loboevolution.html.HTMLTag} object.
+     * @param actionName a {@link String} object.
+     * @return a {@link HTMLTag} object.
      */
     public static HTMLTag get(final String actionName) {
-        return ENUM_MAP.get(actionName);
+        String trimmed = actionName.startsWith("/") ? actionName.substring(1) : actionName;
+        return ENUM_MAP.get(trimmed);
     }
 
 }

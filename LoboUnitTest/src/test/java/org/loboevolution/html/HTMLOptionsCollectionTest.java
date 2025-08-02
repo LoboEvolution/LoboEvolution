@@ -275,7 +275,9 @@ public class HTMLOptionsCollectionTest extends LoboUnitTest {
                 + "      try {\n"
                 + "        var oSelect = document.forms.testForm.select1;\n"
                 + "        alert(oSelect.length);\n"
-                + "        var opt = new Option('foo', '123');\n"
+                + "        var opt = new Option();\n"
+                + "        opt.text = 'foo';\n"
+                + "        opt.value = '123';\n"
                 + "        oSelect.options.add(opt" + param + ");\n"
                 + "        alert(oSelect.options.length);\n"
                 + "        for (var i = 0; i < oSelect.options.length; i++) {\n"
@@ -510,7 +512,9 @@ public class HTMLOptionsCollectionTest extends LoboUnitTest {
                 + "      try {\n"
                 + "        var oSelect = document.forms.testForm.select1;\n"
                 + "        alert(oSelect.length);\n"
-                + "        var opt = new Option('foo', '123');\n"
+                + "        var opt = new Option();\n"
+                + "        opt.text = 'foo';\n"
+                + "        opt.value = '123';\n"
                 + "        oSelect.options[" + pos + "] = " + param + ";\n"
                 + "        alert(oSelect.options.length);\n"
                 + "        for (var i = 0; i < oSelect.options.length; i++) {\n"
@@ -783,7 +787,7 @@ public class HTMLOptionsCollectionTest extends LoboUnitTest {
 
     @Test
     @Alerts({"1", "", "4", "One", "1", "", "0"})
-    public void setLength_increase() {
+    public void setLengthIncrease() {
         final String html
                 = "<html><head><script>\n"
                 + "function test() {\n"

@@ -115,22 +115,16 @@ public class HTMLDListElementTest extends LoboUnitTest {
                         + "        alert(document.getElementById('dl2').getAttribute('type'));\n"
                         + "        alert(document.getElementById('dl3').getAttribute('type'));\n"
                         + "        alert(document.getElementById('dl4').getAttribute('type'));\n"
-
                         + "        document.getElementById('dl1').type = '1';\n"
                         + "        alert(document.getElementById('dl1').type);\n"
-
                         + "        document.getElementById('dl1').type = 'a';\n"
                         + "        alert(document.getElementById('dl1').type);\n"
-
                         + "        document.getElementById('dl1').type = 'A';\n"
                         + "        alert(document.getElementById('dl1').type);\n"
-
                         + "        document.getElementById('dl1').type = 'i';\n"
                         + "        alert(document.getElementById('dl1').type);\n"
-
                         + "        document.getElementById('dl1').type = 'I';\n"
                         + "        alert(document.getElementById('dl1').type);\n"
-
                         + "        try { document.getElementById('dl1').type = 'u' } catch(e) {alert('exception');}\n"
                         + "        alert(document.getElementById('dl1').type);\n"
                         + "      }\n"

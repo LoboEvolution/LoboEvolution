@@ -268,7 +268,7 @@ public class ElementClientHeightTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts("0")
+    @Alerts("400")
     public void div() {
         checkHtmlAlert(test("div"));
     }

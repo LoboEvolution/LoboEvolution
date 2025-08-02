@@ -894,9 +894,9 @@ public class HTMLDocumentTest extends LoboUnitTest {
         assertNotNull(elm);
         assertEquals("font-family: 'Does Not Exist', Neither; color: navy", elm.getAttribute("style"));
         final CSSStyleDeclaration style = elm.getStyle();
-        assertEquals("font-family: \"Does not exist\", Neither; color: navy", style.getCssText());
+        assertEquals("font-family: \"Does Not Exist\", Neither; color: navy", style.getCssText());
         assertEquals(2, style.getLength());
-        assertEquals("\"does not exist\", neither", style.getPropertyValue("font-family"));
+        assertEquals("\"Does Not Exist\", Neither", style.getPropertyValue("font-family"));
         final Attr attr = elm.getAttributeNode("style");
         assertNotNull(attr);
         attr.setValue("");

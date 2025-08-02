@@ -951,63 +951,55 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, Cloneabl
 	@Override
 	public Node insertBefore(final Node newChild, final Node refChild) {
 		synchronized (this) {
-			if(refChild == null) {
-				appendChild(newChild);
-				if (!this.notificationsSuspended) {
-					informStructureInvalid();
-				}
-				return newChild;
+			if (refChild == null) {
+				return appendChild(newChild);
+			}
+
+			if (newChild.getNodeType() == Node.ATTRIBUTE_NODE) {
+				throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Cannot insert an attribute node");
+			}
+
+			if (newChild == this) {
+				throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Cannot insert a node into itself");
 			}
 
 			if (newChild.getNodeType() == Node.DOCUMENT_TYPE_NODE) {
-				final NodeListImpl list = getNodeList();
-				list.forEach(n -> {
+				nodeList.forEach(n -> {
 					if (n.getNodeType() == Node.DOCUMENT_TYPE_NODE) {
-						throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, " Only one doctype on document allowed.");
+						throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Only one doctype allowed.");
 					}
 				});
 			}
 
-			if (!getNodeList().contains(refChild)) {
-				throw new DOMException(DOMException.NOT_FOUND_ERR, "Not a child of this node.");
-			}
-
-			if(!Objects.equals(newChild.getOwnerDocument(), getOwnerDocument())) {
+			if (!Objects.equals(newChild.getOwnerDocument(), getOwnerDocument())) {
 				throw new DOMException(DOMException.WRONG_DOCUMENT_ERR, "Different Document");
 			}
 
-			final int idx = this.nodeList.indexOf(refChild);
+			final int idx = nodeList.indexOf(refChild);
 			if (idx == -1) {
 				throw new DOMException(DOMException.NOT_FOUND_ERR, "refChild not found");
 			}
 
-			if (newChild.getNodeType() == Node.DOCUMENT_NODE) {
-				throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Cannot append a document.");
+			if (isAncestorOf(this, newChild)) {
+				throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Cannot insert an ancestor.");
 			}
 
-			if (newChild.getNodeType() == Node.ATTRIBUTE_NODE) {
-				throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Use setAttributeNode to add attribute nodes.");
+			int existingIdx = nodeList.indexOf(newChild);
+			if (existingIdx != -1) {
+				nodeList.remove(existingIdx);
 			}
 
-			if (newChild.getNodeType() == Node.ELEMENT_NODE) {
-
-				if (newChild.isSameNode(this)) {
-					throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Cannot insert itself or an ancestor.");
-				}
-
-			}
-
+			nodeList.add(idx, newChild);
 
 			if (newChild instanceof NodeImpl) {
 				newChild.setParentImpl(this);
 			}
-			if (!this.nodeList.contains(newChild)) {
-				this.nodeList.add(idx, newChild);
-			}
 		}
-		if (!this.notificationsSuspended) {
+
+		if (!notificationsSuspended) {
 			informStructureInvalid();
 		}
+
 		return newChild;
 	}
 
@@ -1466,6 +1458,15 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, Cloneabl
 		} catch (final CloneNotSupportedException e) {
 			throw new IllegalStateException(e);
 		}
+	}
+
+	private boolean isAncestorOf(Node node, Node potentialAncestor) {
+		Node parent = node.getParentNode();
+		while (parent != null) {
+			if (parent == potentialAncestor) return true;
+			parent = parent.getParentNode();
+		}
+		return false;
 	}
 
 	public short getNONE() {

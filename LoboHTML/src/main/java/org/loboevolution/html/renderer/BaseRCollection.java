@@ -350,7 +350,7 @@ public abstract class BaseRCollection extends BaseBoundableRenderable implements
 		int width = -1;
 
 		if(element instanceof HTMLAnchorElementImpl && Strings.isNotBlank(textContent)) {
-			width = (int) (Strings.texMeasure(textContent,  renderState.getFont()).getWidth()) + 5;
+			width = Strings.texWidth(textContent,  renderState.getFont());
 		}
 
 		if (Strings.isNotBlank(widthText)) {
@@ -372,7 +372,7 @@ public abstract class BaseRCollection extends BaseBoundableRenderable implements
 				right = right + marginInsets.getRight();
 				left = left + marginInsets.getLeft();
 			}
-			width = (int) (Strings.texMeasure(textContent,  renderState.getFont()).getWidth() + right + left);
+			width = Strings.texWidth(textContent,  renderState.getFont()) + right + left;
 		}
 
 		if (Strings.isNotBlank(props.getMaxWidth())) {
@@ -433,7 +433,7 @@ public abstract class BaseRCollection extends BaseBoundableRenderable implements
 
 		final String textContent = element.getTextContent();
 		if (height == -1 && Strings.isNotBlank(textContent) && renderState.getPosition() == RenderState.POSITION_ABSOLUTE) {
-			height = (int) Strings.texMeasure(textContent, renderState.getFont()).getHeight();
+			height = Strings.texHeight(textContent,  renderState.getFont());
 		}
 
 		if (props.getMaxHeight() != null) {

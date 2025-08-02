@@ -25,6 +25,7 @@
  */
 package org.loboevolution.html.dom.filter;
 
+import lombok.AllArgsConstructor;
 import org.loboevolution.html.dom.HTMLOptionElement;
 import org.loboevolution.traversal.NodeFilter;
 import org.loboevolution.html.node.Node;
@@ -32,12 +33,17 @@ import org.loboevolution.html.node.Node;
 /**
  * <p>OptionFilter class.</p>
  */
+@AllArgsConstructor
 public class OptionFilter implements NodeFilter {
+
+	private boolean selected;
 
 	/** {@inheritDoc} */
 	@Override
 	public short acceptNode(final Node node) {
-		return node instanceof HTMLOptionElement ?
-				NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+		if(node instanceof HTMLOptionElement op){
+            return !selected || op.isSelected() ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+		}
+		return NodeFilter.FILTER_REJECT;
 	}
 }

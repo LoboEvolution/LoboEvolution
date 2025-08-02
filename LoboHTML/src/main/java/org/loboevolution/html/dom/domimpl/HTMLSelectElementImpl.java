@@ -104,7 +104,7 @@ public class HTMLSelectElementImpl extends HTMLBasicInputElement implements HTML
     @Override
     public HTMLOptionsCollection getOptions() {
         if (options == null) {
-            options = new HTMLOptionsCollectionImpl(this, new OptionFilter());
+            options = new HTMLOptionsCollectionImpl(this, new OptionFilter(false));
         }
         return options;
     }
@@ -279,8 +279,7 @@ public class HTMLSelectElementImpl extends HTMLBasicInputElement implements HTML
      */
     @Override
     public HTMLCollection getSelectedOptions() {
-        // TODO Auto-generated method stub
-        return null;
+        return new HTMLOptionsCollectionImpl(this, new OptionFilter(true));
     }
 
     /**

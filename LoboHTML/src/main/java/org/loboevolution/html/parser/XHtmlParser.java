@@ -210,8 +210,8 @@ public class XHtmlParser {
 	 * @param ancestors  a {@link java.util.LinkedList} object
 	 * @return {@link java.lang.Number} object.
 	 */
-	private int parseToken(final Node parent, final LineNumberReader reader, final Set<HTMLTag> stopTags,
-						   final List<String> ancestors) throws IOException, StopException {
+	private int parseToken(Node parent, final LineNumberReader reader, final Set<HTMLTag> stopTags,
+                           final List<String> ancestors) throws IOException, StopException {
 		final Document doc = this.document;
 		final HTMLDocumentImpl htmlDoc = (HTMLDocumentImpl) doc;
 		final StringBuilder textSb = this.readUpToTagBegin(reader);
@@ -229,9 +229,8 @@ public class XHtmlParser {
 				final AtomicBoolean isCda = new AtomicBoolean(false);
 
 				try {
-					text.chars()
-							.forEach(i -> {
-								final char ch = (char) i;
+					for (int i = 0; i < text.length(); i++) {
+						final char ch = text.charAt(i);
 								if (ch == '&') {
 									if (!txt.isEmpty()) {
 										final Node textNode = doc.createTextNode(txt.toString());
@@ -269,7 +268,7 @@ public class XHtmlParser {
 									ent.setLength(0);
 
 								}
-							});
+							}
 
 					if (!txt.isEmpty()) {
 						final Node textNode = doc.createTextNode(txt.toString());
@@ -286,10 +285,28 @@ public class XHtmlParser {
 
 		if (this.justReadTagBegin) {
 			String tag = this.readTag(parent, reader);
+
 			if (Strings.isBlank(tag)) {
 				return TOKEN_EOD;
 			}
 			String normalTag = tag.toUpperCase();
+
+			if (shouldCloseParentBeforeAppending(parent, normalTag)) {
+				this.normalLastTag = parent.getNodeName();
+
+				Node grandParent = parent.getParentNode();
+				if (grandParent != null) {
+					grandParent.removeChild(parent);
+					grandParent.appendChild(parent);
+
+					Element newElement = doc.createElement(normalTag);
+					grandParent.appendChild(newElement);
+
+					return parseToken(newElement, reader, stopTags, ancestors);
+				}
+				return TOKEN_END_ELEMENT;
+			}
+
 			try {
 
 				if (tag.startsWith("!")) {
@@ -340,53 +357,50 @@ public class XHtmlParser {
 							needRoot = false;
 							return TOKEN_BAD;
 						case "!ENTITY":
-							String doctypeStr2 = this.parseEndOfTag(reader);
+							String doctypeStr2 = this.parseEndOfTag(reader).trim();
 							doctypeStr2 = doctypeStr2.substring(0, doctypeStr2.length() - 1);
-							String[] sp = doctypeStr2.split("\"");
-							final EntityReferenceImpl reference;
 
-							if (sp.length == 2) {
-								reference = new EntityReferenceImpl(null, null, sp[0].trim(), sp[1], null);
-								htmlDoc.getDoctype().getEntities().setNamedItem(reference);
-							} else {
-								reference = new EntityReferenceImpl();
+							String[] parts = doctypeStr2.split("\\s+", 3);
+							if (parts.length < 2) {
+								return TOKEN_BAD;
 							}
+
+							String entityName = parts[0].trim();
+							String entityValue = parts[1].replaceAll("^\"|\"$", ""); // Remove surrounding quotes
+
+							EntityReferenceImpl reference = new EntityReferenceImpl();
 							reference.setOwnerDocument(document);
 							reference.setParentImpl(document);
+							reference.setNodeName(entityName);
 
-							if (sp.length > 2) {
-								sp = doctypeStr2.split("[\"\\s+]");
+							if (parts.length >= 3) {
+								String[] remainingParts = parts[2].split("\\s+");
+								boolean isPublic = false;
+								boolean isNdata = false;
 
-								final AtomicInteger ai = new AtomicInteger(0);
-								final AtomicBoolean isPublic = new AtomicBoolean(false);
-								final AtomicBoolean isNotation = new AtomicBoolean(false);
+								for (String part : remainingParts) {
+									part = part.trim();
+									if (part.isEmpty()) continue;
 
-								Arrays.stream(sp).forEach(s -> {
-
-									if (Strings.isNotBlank(s)) {
-										if (ai.get() == 0) {
-											reference.setNodeName(s.trim());
-										} else {
-											if (isPublic.get()) {
-												reference.setPublicId(s);
-												isPublic.set(false);
-											} else if (isNotation.get()) {
-												reference.setNotationName(s);
-												isNotation.set(false);
-											} else if (s.equals("PUBLIC")) {
-												isPublic.set(true);
-											} else if (s.equals("NDATA")) {
-												isNotation.set(true);
-											} else {
-												reference.setSystemId(s);
-											}
-										}
-										ai.incrementAndGet();
+									if ("PUBLIC".equals(part)) {
+										isPublic = true;
+									} else if ("NDATA".equals(part)) {
+										isNdata = true;
+									} else if (isPublic) {
+										reference.setPublicId(part);
+										isPublic = false;
+									} else if (isNdata) {
+										reference.setNotationName(part);
+										isNdata = false;
+									} else {
+										reference.setSystemId(part);
 									}
-								});
-
-								htmlDoc.getDoctype().getEntities().setNamedItem(reference);
+								}
+							} else {
+								reference.setSystemId(entityValue);
 							}
+
+							htmlDoc.getDoctype().getEntities().setNamedItem(reference);
 							needRoot = false;
 							return TOKEN_BAD;
 						case "!NOTATION":
@@ -492,7 +506,28 @@ public class XHtmlParser {
 							element = doc.createElementNS(reference.get(), normalTag);
 
 						} else {
+
+							if (shouldCloseParentBeforeAppending(parent, normalTag)) {
+								this.normalLastTag = parent.getNodeName();
+
+								parent.getParentNode().appendChild(parent.cloneNode(false));
+								return TOKEN_END_ELEMENT;
+							}
+
 							element = doc.createElement(normalTag);
+
+							if (element != null) {
+								Node current = element;
+								while (current != null && current.getParentNode() != null) {
+									if (shouldCloseParentBeforeAppending(current.getParentNode(), current.getNodeName())) {
+										Node grandParent = current.getParentNode().getParentNode();
+										if (grandParent != null) {
+											grandParent.appendChild(current.getParentNode());
+										}
+									}
+									current = current.getParentNode();
+								}
+							}
 						}
 
 						element.setUserData(MODIFYING_KEY, Boolean.TRUE, null);
@@ -572,7 +607,6 @@ public class XHtmlParser {
 												return TOKEN_EOD;
 											}
 										} catch (final StopException se) {
-											// newElement does not have a parent.
 											final Element newElement = se.getElement();
 											tag = newElement.getTagName();
 											normalTag = tag.toUpperCase();
@@ -597,11 +631,8 @@ public class XHtmlParser {
 											}
 											ancestors.removeFirst();
 											ancestors.addFirst(normalTag);
-											// Switch element
 											element.setUserData(MODIFYING_KEY, Boolean.FALSE, null);
-											// newElement should have been suspended.
 											element = newElement;
-											// Add to parent
 											safeAppendChild(parent, element);
 											if (this.justReadEmptyElement) {
 												return TOKEN_BEGIN_ELEMENT;
@@ -689,8 +720,13 @@ public class XHtmlParser {
 										}
 										final String text = sb.toString();
 										if (Strings.isNotBlank(text.trim())) {
-											final Node textNode = text.trim().startsWith("&") ? doc.createEntityReference(text) : doc.createTextNode(text);
-											safeAppendChild(parent, textNode);
+											Node actualParent = parent;
+											if (shouldCloseParentBeforeAppending(parent, tagName)) {
+												actualParent = parent.getParentNode();
+											}
+											final Node textNode = text.trim().startsWith("&") ?
+													doc.createEntityReference(text) : doc.createTextNode(text);
+											safeAppendChild(actualParent, textNode);
 										}
 									}
 									return TOKEN_END_ELEMENT;
@@ -727,16 +763,21 @@ public class XHtmlParser {
 		this.justReadTagBegin = false;
 		this.justReadTagEnd = false;
 		this.justReadEmptyElement = false;
-		if (addTextNode) {
-			if (decodeEntities) {
-				sb = entityDecode(sb);
-			}
-			final String text = sb.toString();
+		if (addTextNode && !sb.isEmpty()) {
+			String text = decodeEntities ? entityDecode(sb).toString() : sb.toString();
 			if (Strings.isNotBlank(text.trim())) {
-				final Node textNode = text.trim().startsWith("&") ? doc.createEntityReference(text) : doc.createTextNode(text);
-				safeAppendChild(parent, textNode);
+				Node targetParent = parent;
+
+				if (shouldCloseParentBeforeAppending(parent, tagName)) {
+					targetParent = parent.getParentNode();
+				}
+
+				Node textNode = text.trim().startsWith("&") ?
+						doc.createEntityReference(text) : doc.createTextNode(text);
+				safeAppendChild(targetParent, textNode);
 			}
 		}
+
 		return XHtmlParser.TOKEN_EOD;
 	}
 
@@ -802,7 +843,7 @@ public class XHtmlParser {
 		if (chInt != -1) {
 			boolean cont = true;
 			char ch;
-			for (; ; ) {
+			for (;;) {
 				ch = (char) chInt;
 				if (Character.isLetter(ch)) {
 					// Speed up normal case
@@ -1044,7 +1085,6 @@ public class XHtmlParser {
 		}
 		if (readSomething) {
 			this.justReadTagBegin = false;
-			this.justReadTagEnd = false;
 		}
 	}
 
@@ -1067,9 +1107,6 @@ public class XHtmlParser {
 		if (this.justReadTagEnd) {
 			return false;
 		}
-
-		// Read attribute name up to '=' character.
-		// May read several attribute names without explicit values.
 
 		StringBuilder attributeName = null;
 		boolean blankFound = false;
@@ -1231,6 +1268,8 @@ public class XHtmlParser {
 
 	private void safeAppendChild(final Node parent, final Node child) {
 		Node newParent = parent;
+
+		if(child instanceof Element)
 		if (needRoot) {
 			final String nodeName = child.getNodeName();
 			if ("HTML".equalsIgnoreCase(nodeName)) {
@@ -1261,8 +1300,7 @@ public class XHtmlParser {
 	}
 
 	private void ensureBodyAppendChild(final Node parent, final Node child) {
-		final Node newParent = parent;
-		if (needRoot) {
+        if (needRoot) {
 			final String nodeNameTU = child.getNodeName().toUpperCase();
 			if ("BODY".equals(nodeNameTU)) {
 				lastBodyElement = child;
@@ -1270,7 +1308,8 @@ public class XHtmlParser {
 				lastHeadElement = child;
 			}
 		}
-		if(newParent != null) {newParent.appendChild(child);}
+		if(parent != null) {
+            parent.appendChild(child);}
 	}
 
 	private void ensureBodyElement(final Node parent) {
@@ -1309,7 +1348,7 @@ public class XHtmlParser {
 			}
 
 
-			sb.append(rawText.substring(startIdx, ampIdx));
+			sb.append(rawText, startIdx, ampIdx);
 			final int colonIdx = rawText.indexOf(";", ampIdx);
 			if (colonIdx == -1) {
 				sb.append('&');
@@ -1356,7 +1395,6 @@ public class XHtmlParser {
 	}
 
 	private void setAttributeNode(final Element element, final String attributeName, final String attributeValue) {
-
 		if (this.document.isXml()) {
 			String namespaceURI = null;
 			if (attributeName.contains(":")) {
@@ -1377,5 +1415,29 @@ public class XHtmlParser {
 		} else {
 			element.setAttribute(attributeName, attributeValue);
 		}
+	}
+
+	private boolean shouldCloseParentBeforeAppending(Node parent, String tagName) {
+		if (parent == null || parent.getNodeType() != Node.ELEMENT_NODE) {
+			return false;
+		}
+
+		String parentTag = parent.getNodeName().toUpperCase();
+		String newTag = tagName.toUpperCase();
+		HTMLEntities entities = new HTMLEntities();
+
+		if (entities.isElementNestable(newTag)) {
+			return false;
+		}
+
+		if (entities.isComplexNestingElement(parentTag) && entities.isComplexNestingElement(newTag)) {
+			return entities.violatesComplexNestingRules(parentTag, newTag);
+		}
+
+		if (parentTag.equals(newTag) && entities.isElementNonNestable(parentTag)) {
+			return true;
+		}
+
+		return entities.violatesParentChildRule(parentTag, newTag);
 	}
 }

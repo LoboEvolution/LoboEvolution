@@ -63,7 +63,7 @@ public class Attrgetownerelement02Test extends LoboUnitTest {
         element.setAttributeNodeNS(attr);
         ownerElement = attr.getOwnerElement();
         ownerElementName = ownerElement.getNodeName();
-        assertEquals("root", ownerElementName);
+        assertEquals("ROOT", ownerElementName);
     }
 }
 

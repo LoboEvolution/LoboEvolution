@@ -28,10 +28,7 @@ package org.loboevolution.html;
 
 import org.loboevolution.info.ElementInfo;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * <p>HTMLEntities class.</p>
@@ -402,8 +399,6 @@ public class HTMLEntities {
 		paragraphStopElements.add(HTMLTag.DIV);
 		paragraphStopElements.add(HTMLTag.TABLE);
 		paragraphStopElements.add(HTMLTag.PRE);
-		paragraphStopElements.add(HTMLTag.UL);
-		paragraphStopElements.add(HTMLTag.OL);
 
 		final ElementInfo paragraphElement = ElementInfo.builder()
 				.childElementOk(true)
@@ -441,5 +436,108 @@ public class HTMLEntities {
 		elementInfos.put(HTMLTag.OPTION, optionElement);
 		elementInfos.put(HTMLTag.A, optionalEndElement);
 		elementInfos.put(HTMLTag.ANCHOR, optionalEndElement);
+
+		elementInfos.put(HTMLTag.UL, optionalEndElement);
+		elementInfos.put(HTMLTag.OL, optionalEndElement);
+	}
+
+	public boolean violatesParentChildRule(String parentTag, String childTag) {
+		String trimmed = childTag.startsWith("/") ? childTag.substring(1) : childTag;
+		String parentTagTrim = parentTag.startsWith("/") ? parentTag.substring(1) : parentTag;
+		HTMLTag prtag = HTMLTag.get(parentTagTrim);
+		HTMLTag trimmedTag = HTMLTag.get(trimmed);
+		if (prtag != null && trimmedTag != null) {
+			Set<HTMLTag> forbiddenChildren = PARENT_CHILD_RULES.get(prtag);
+			return forbiddenChildren != null && forbiddenChildren.contains(trimmedTag);
+		} else {
+			return false;
+		}
+	}
+
+	public boolean isElementNonNestable(String tagName) {
+		String trimmed = tagName.startsWith("/") ? tagName.substring(1) : tagName;
+		return NON_NESTABLE_TAGS.contains(HTMLTag.get(trimmed));
+	}
+
+	public boolean isElementNestable(String tagName) {
+		String trimmed = tagName.startsWith("/") ? tagName.substring(1) : tagName;
+		return HTMLTag.isHtml(trimmed) && REPEATABLE.contains(HTMLTag.get(trimmed));
+	}
+
+	private final Set<HTMLTag> REPEATABLE = Set.of(
+			HTMLTag.UL, HTMLTag.OL, HTMLTag.LI, HTMLTag.DIV, HTMLTag.P, HTMLTag.SPAN, HTMLTag.SECTION, HTMLTag.FORM
+	);
+
+	private final Set<HTMLTag> NON_NESTABLE_TAGS = Set.of(
+			HTMLTag.P, HTMLTag.H1, HTMLTag.H2, HTMLTag.H3, HTMLTag.H4, HTMLTag.H5, HTMLTag.H6, HTMLTag.LI, HTMLTag.DT, HTMLTag.DD,
+			HTMLTag.ARTICLE, HTMLTag.SECTION, HTMLTag.NAV, HTMLTag.HEADER, HTMLTag.FOOTER, HTMLTag.MAIN
+	);
+
+	private final Map<HTMLTag, Set<HTMLTag>> PARENT_CHILD_RULES = Map.of(
+			HTMLTag.UL, Set.of(HTMLTag.UL, HTMLTag.OL),
+			HTMLTag.OL, Set.of(HTMLTag.UL, HTMLTag.OL),
+			HTMLTag.TABLE, Set.of(HTMLTag.TR),
+			HTMLTag.TR, Set.of(HTMLTag.TD, HTMLTag.TH),
+			HTMLTag.SELECT, Set.of(HTMLTag.SELECT),
+			HTMLTag.FORM, Set.of(HTMLTag.FORM)
+	);
+
+	public boolean isComplexNestingElement(String tagName) {
+		if (HTMLTag.isHtml(tagName)) {
+			return switch (HTMLTag.get(tagName)) {
+				case HTMLTag.TABLE, HTMLTag.THEAD, HTMLTag.TBODY, HTMLTag.TFOOT, HTMLTag.TR, HTMLTag.TD, HTMLTag.TH,
+					 HTMLTag.CAPTION, HTMLTag.COLGROUP, HTMLTag.COL, HTMLTag.UL, HTMLTag.OL, HTMLTag.LI, HTMLTag.DL,
+					 HTMLTag.DT, HTMLTag.DD, HTMLTag.SELECT, HTMLTag.OPTGROUP, HTMLTag.OPTION, HTMLTag.FIELDSET,
+					 HTMLTag.LEGEND, HTMLTag.FIGURE, HTMLTag.FIGCAPTION, HTMLTag.DETAILS, HTMLTag.SUMMARY, HTMLTag.MENU,
+					 HTMLTag.DIALOG -> true;
+				default -> false;
+			};
+		}
+		return false;
+	}
+
+	public boolean violatesComplexNestingRules(String parentTag, String newTag) {
+		HTMLTag parent = HTMLTag.get(parentTag);
+		HTMLTag child = HTMLTag.get(newTag);
+
+		if (parent == null || child == null) {
+			return false;
+		}
+
+
+		return switch (parent) {
+			case TABLE ->   !(child == HTMLTag.TR ||
+						child == HTMLTag.THEAD ||
+						child == HTMLTag.TBODY ||
+						child == HTMLTag.TFOOT ||
+						child == HTMLTag.CAPTION ||
+						child == HTMLTag.COLGROUP);
+			case THEAD, TBODY, TFOOT ->   child != HTMLTag.TR;
+            case TR ->  !(child == HTMLTag.TD || child == HTMLTag.TH);
+			case SELECT -> !(HTMLTag.OPTGROUP.isEqual(newTag) || HTMLTag.OPTION.isEqual(newTag));
+			case OPTGROUP -> !HTMLTag.OPTION.isEqual(newTag);
+			case UL, HTMLTag.OL -> !HTMLTag.LI.isEqual(newTag);
+			case DL -> !(HTMLTag.DT.isEqual(newTag) || HTMLTag.DD.isEqual(newTag));
+			case FIELDSET -> !HTMLTag.LEGEND.isEqual(newTag) && !isFlowContent(newTag);
+			default -> false;
+		};
+	}
+
+	private static boolean isFlowContent(String tagName) {
+		return !isMetadataContent(tagName) && !isSectioningContent(tagName);
+	}
+
+	private static boolean isMetadataContent(String tagName) {
+		return switch (HTMLTag.get(tagName)) {
+			case HTMLTag.BASE, HTMLTag.LINK, HTMLTag.META, HTMLTag.NOSCRIPT, HTMLTag.SCRIPT, HTMLTag.STYLE, HTMLTag.TEMPLATE, HTMLTag.TITLE -> true;
+			default -> false;
+		};
+	}
+
+	private static boolean isSectioningContent(String tagName) {
+		return switch (HTMLTag.get(tagName)) {
+			case HTMLTag.ARTICLE, HTMLTag.ASIDE, HTMLTag.NAV, HTMLTag.SECTION -> true;
+			default -> false;
+		};
 	}
 }

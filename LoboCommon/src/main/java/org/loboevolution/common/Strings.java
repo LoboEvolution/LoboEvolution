@@ -31,8 +31,10 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import java.awt.*;
 import java.awt.font.FontRenderContext;
+import java.awt.font.GlyphVector;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
 import java.security.spec.KeySpec;
 import java.util.ArrayList;
 import java.util.Base64;
@@ -72,16 +74,55 @@ public final class Strings {
 	}
 
 	/**
-	 * tex measure
+	 * tex height
 	 *
 	 * @param text a {@link java.lang.String} object.
 	 * @param font a {@link java.awt.Font} object.
-	 * @return a {@link java.awt.geom.Rectangle2D} object.
+	 * @return a {@link java.awt.Dimension} object.
 	 */
-	public static Rectangle2D texMeasure(final String text, final Font font) {
-		final AffineTransform affinetransform = new AffineTransform();
-		final FontRenderContext frc = new FontRenderContext(affinetransform,true,true);
-		return  font.getStringBounds(text, frc);
+	public static int texHeight(final String text, final Font font) {
+		BufferedImage img = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g2 = img.createGraphics();
+		g2.setFont(font);
+
+		FontMetrics fm = g2.getFontMetrics();
+		int ascent = fm.getAscent();
+		int descent = fm.getDescent();
+		int height = ascent + descent;
+
+		int fontSize = font.getSize();
+		if (height > fontSize + 1) {
+			height = fontSize + 1;
+		}
+
+		g2.dispose();
+		return height;
+	}
+
+	/**
+	 * tex width
+	 *
+	 * @param text a {@link java.lang.String} object.
+	 * @param font a {@link java.awt.Font} object.
+	 * @return a {@link java.awt.Dimension} object.
+	 */
+	public static int texWidth(final String text, final Font font) {
+		BufferedImage img = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g2 = img.createGraphics();
+		g2.setFont(font);
+
+		g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		g2.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);
+
+		FontRenderContext frc = g2.getFontRenderContext();
+		GlyphVector gv = font.createGlyphVector(frc, text);
+		Rectangle2D bounds = gv.getPixelBounds(frc, 0, 0);
+
+		int width = (int) Math.ceil(bounds.getWidth());
+
+		g2.dispose();
+		return width;
 	}
 
 	/**

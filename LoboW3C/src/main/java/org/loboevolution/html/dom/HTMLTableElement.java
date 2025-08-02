@@ -186,14 +186,14 @@ public interface HTMLTableElement extends HTMLElement {
      *
      * @return a {@link org.loboevolution.html.dom.HTMLCollection} object.
      */
-    HTMLCollection gettBodies();
+    HTMLCollection getTbodies();
 
     /**
      * Retrieves the tFoot object of the table.
      *
      * @return a {@link org.loboevolution.html.dom.HTMLTableSectionElement} object.
      */
-    HTMLTableSectionElement gettFoot();
+    HTMLTableSectionElement getTfoot();
 
     
     /**
@@ -208,7 +208,7 @@ public interface HTMLTableElement extends HTMLElement {
      *
      * @return a {@link org.loboevolution.html.dom.HTMLTableSectionElement} object.
      */
-    HTMLTableSectionElement gettHead();
+    HTMLTableSectionElement getThead();
 
     
     /**

@@ -78,7 +78,7 @@ public class HTMLTableRowElementTest extends LoboUnitTest {
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"
                 + "  <table>\n"
-                + "    <tr id='myId'/>\n"
+                + "    <tr id='myId'>\n"
                 + "      <td id='td1'>1</td>\n"
                 + "      <td id='td2'>2</td>\n"
                 + "      <td id='td3'>3</td>\n"
@@ -104,7 +104,7 @@ public class HTMLTableRowElementTest extends LoboUnitTest {
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"
                 + "  <table>\n"
-                + "    <tr id='myId'/>\n"
+                + "    <tr id='myId'>\n"
                 + "      <td id='td1'>1</td>\n"
                 + "      <td id='td2'>2</td>\n"
                 + "      <td id='td3'>3</td>\n"
@@ -241,7 +241,7 @@ public class HTMLTableRowElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"", "#0000aa", "x"})
+    @Alerts({"null", "#0000aa", "x"})
     public void bgColor() {
         final String html =
                 "<html>\n"

@@ -83,18 +83,30 @@ public class TextImpl extends CharacterDataImpl implements Text {
 	/** {@inheritDoc} */
 	@Override
 	public String getWholeText() {
-		final NodeImpl parent = (NodeImpl) getParentNode();
-		if (parent == null) {
-			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Text node has no parent");
+		StringBuilder wholeText = new StringBuilder();
+		NodeImpl currentNode = this;
+
+		Node prev = currentNode.getPreviousSibling();
+		while (prev != null && prev.getNodeType() == Node.TEXT_NODE) {
+			wholeText.insert(0, prev.getNodeValue());
+			prev = prev.getPreviousSibling();
 		}
-		return parent.getTextContent();
+
+		wholeText.append(this.getNodeValue());
+
+		Node next = currentNode.getNextSibling();
+		while (next != null && next.getNodeType() == Node.TEXT_NODE) {
+			wholeText.append(next.getNodeValue());
+			next = next.getNextSibling();
+		}
+
+		return wholeText.toString();
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public boolean isElementContentWhitespace() {
-		final String t = this.text;
-		return t == null || t.trim().isEmpty();
+		return !getWholeText().trim().isEmpty();
 	}
 
 	/** {@inheritDoc} */

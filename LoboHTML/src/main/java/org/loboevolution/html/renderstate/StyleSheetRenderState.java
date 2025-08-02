@@ -1073,8 +1073,8 @@ public class StyleSheetRenderState implements RenderState {
 	@Override
 	public String getBoxSizing() {
 		final CSSStyleDeclaration props = this.getCssProperties();
-		final String boxSizing = props != null ? props.getBoxSizing() : "";
-		final String visibTextTL = Strings.isBlank(boxSizing) ? "" : boxSizing;
+		final String boxSizing = props != null ? props.getBoxSizing() : CSSValues.CONTENT_BOX.getValue();
+		final String visibTextTL = Strings.isBlank(boxSizing) ? CSSValues.CONTENT_BOX.getValue() : boxSizing;
 		final CSSValues box = CSSValues.get(visibTextTL);
 		if (box.equals(CSSValues.INHERIT)) {
 			return this.getPreviousRenderState().getBoxSizing();

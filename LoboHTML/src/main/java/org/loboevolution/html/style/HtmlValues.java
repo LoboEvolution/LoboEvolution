@@ -166,79 +166,83 @@ public class HtmlValues {
 	 */
 	public static int getPixelSize(final String spec, final RenderState renderState, final Window window, final int errorValue) {
 		try {
-			final int dpi = GraphicsEnvironment.isHeadless() ? 72 : Toolkit.getDefaultToolkit().getScreenResolution();
-			final String lcSpec = spec.toLowerCase();
-			String units = "";
-			String text = "";
-			if (isUnits(spec)) {
-				if (spec.endsWith("q")) {
-					units = lcSpec.substring(lcSpec.length() - 1);
-					text = lcSpec.substring(0, lcSpec.length() - 1);
-				} else if (spec.endsWith("rem")) {
-					units = lcSpec.substring(lcSpec.length() - 3);
-					text = lcSpec.substring(0, lcSpec.length() - 3);
-				} else {
-					units = lcSpec.substring(lcSpec.length() - 2);
-					text = lcSpec.substring(0, lcSpec.length() - 2);
-				}
-			}
-
-			switch (units) {
-			case "px":
-                final double val = Double.parseDouble(text);
-                final double inches = val / 96;
-                return (int) Math.round(dpi * inches);
-			case "em":
-				final FontFactory FONT_FACTORY = FontFactory.getInstance();
-				final WindowImpl win = (WindowImpl) window;
-				if (win == null || win.getConfig() == null) {
-					return (int) Math.round(16.0f * Double.parseDouble(text));
+			if (Strings.isNotBlank(spec)) {
+				final int dpi = GraphicsEnvironment.isHeadless() ? 72 : Toolkit.getDefaultToolkit().getScreenResolution();
+				final String lcSpec = spec.toLowerCase();
+				String units = "";
+				String text = "";
+				if (isUnits(spec)) {
+					if (spec.endsWith("q")) {
+						units = lcSpec.substring(lcSpec.length() - 1);
+						text = lcSpec.substring(0, lcSpec.length() - 1);
+					} else if (spec.endsWith("rem")) {
+						units = lcSpec.substring(lcSpec.length() - 3);
+						text = lcSpec.substring(0, lcSpec.length() - 3);
+					} else {
+						units = lcSpec.substring(lcSpec.length() - 2);
+						text = lcSpec.substring(0, lcSpec.length() - 2);
+					}
 				}
 
-				final Font DEFAULT_FONT = FONT_FACTORY.getFont(FontValues.getDefaultFontKey(win.getConfig()));
-				final Font f = (renderState == null) ? DEFAULT_FONT : renderState.getFont();
-				final int fontSize = f.getSize();
-				return (int) Math.round(fontSize * Double.parseDouble(text));
+				switch (units) {
+					case "px":
+						final double val = Double.parseDouble(text);
+						final double inches = val / 96;
+						return (int) Math.round(dpi * inches);
+					case "em":
+						final FontFactory FONT_FACTORY = FontFactory.getInstance();
+						final WindowImpl win = (WindowImpl) window;
+						if (win == null || win.getConfig() == null) {
+							return (int) Math.round(16.0f * Double.parseDouble(text));
+						}
 
-			case "rem":
-				final WindowImpl win2 = (WindowImpl) window;
-				final float fs = win2.getConfig() != null ? win2.getConfig().getFontSize() : 16.0f;
-				return (int) Math.round(fs * Double.parseDouble(text));
-			case "pt":
-				return inches(72, dpi, text);
-			case "pc":
-				return inches(6, dpi, text);
-			case "cm":
-				return inches(2.54, dpi, text);
-			case "mm":
-				return inches(25.4, dpi, text);
-			case "q":
-				return inches(1016, dpi, text);
-			case "ex":
-				final double xHeight = renderState.getFontMetrics().getAscent() * 0.47;
-				return (int) Math.round(xHeight * Double.parseDouble(text));
-			case "in":
-				return (int) Math.round(dpi * Double.parseDouble(text));
-			case "vh":
-				if (window != null) {
-					final double ih = window.getInnerHeight();
-					return (int) Math.round(ih * Double.parseDouble(text) / 100.0);
-				} else {
-					return (int) Math.round(Double.parseDouble(lcSpec));
+						final Font DEFAULT_FONT = FONT_FACTORY.getFont(FontValues.getDefaultFontKey(win.getConfig()));
+						final Font f = (renderState == null) ? DEFAULT_FONT : renderState.getFont();
+						final int fontSize = f.getSize();
+						return (int) Math.round(fontSize * Double.parseDouble(text));
+
+					case "rem":
+						final WindowImpl win2 = (WindowImpl) window;
+						final float fs = win2.getConfig() != null ? win2.getConfig().getFontSize() : 16.0f;
+						return (int) Math.round(fs * Double.parseDouble(text));
+					case "pt":
+						return inches(72, dpi, text);
+					case "pc":
+						return inches(6, dpi, text);
+					case "cm":
+						return inches(2.54, dpi, text);
+					case "mm":
+						return inches(25.4, dpi, text);
+					case "q":
+						return inches(1016, dpi, text);
+					case "ex":
+						final double xHeight = renderState.getFontMetrics().getAscent() * 0.47;
+						return (int) Math.round(xHeight * Double.parseDouble(text));
+					case "in":
+						return (int) Math.round(dpi * Double.parseDouble(text));
+					case "vh":
+						if (window != null) {
+							final double ih = window.getInnerHeight();
+							return (int) Math.round(ih * Double.parseDouble(text) / 100.0);
+						} else {
+							return (int) Math.round(Double.parseDouble(lcSpec));
+						}
+					case "vw":
+						if (window != null) {
+							final double iw = window.getInnerWidth();
+							return (int) Math.round(iw * Double.parseDouble(text) / 100.0);
+						} else {
+							return (int) Math.round(Double.parseDouble(lcSpec));
+						}
+					default:
+						return (int) Math.round(Double.parseDouble(lcSpec));
 				}
-			case "vw":
-				if (window != null) {
-					final double iw = window.getInnerWidth();
-					return (int) Math.round(iw * Double.parseDouble(text) / 100.0);
-				} else {
-					return (int) Math.round(Double.parseDouble(lcSpec));
-				}
-			default:
-				return (int) Math.round(Double.parseDouble(lcSpec));
 			}
 		} catch (final Exception ex) {
 			return errorValue;
 		}
+
+		return errorValue;
 	}
 	
 	/**

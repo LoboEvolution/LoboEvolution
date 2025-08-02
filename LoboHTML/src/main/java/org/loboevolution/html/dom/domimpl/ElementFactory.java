@@ -164,12 +164,12 @@ public class ElementFactory {
 		builders.put(HTMLTag.USE, new SVGUseBuilder());
 		builders.put(HTMLTag.SYMBOL, new SVGSymbolBuilder());
 		builders.put(HTMLTag.TEXT, new SVGTextBuilder());
-		builders.put(HTMLTag.RADIAL_GRADIENT, new SVGRadialGradientBuilder());
-		builders.put(HTMLTag.LINEAR_GRADIENT, new SVGLinearGradientBuilder());
+		builders.put(HTMLTag.RADIALGRADIENT, new SVGRadialGradientBuilder());
+		builders.put(HTMLTag.LINEARRGRADIENT, new SVGLinearGradientBuilder());
 		builders.put(HTMLTag.STOP, new SVGStopBuilder());
 		builders.put(HTMLTag.CLIPPATH, new SVGClipPathBuilder());
 		builders.put(HTMLTag.ANIMATE, new SVGAnimateBuilder());
-		builders.put(HTMLTag.ANIMATE_TRASFORM, new SVGAnimateTrasformBuilder());
+		builders.put(HTMLTag.ANIMATETRASFORM, new SVGAnimateTrasformBuilder());
 		builders.put(HTMLTag.IMAGE, new SVGImageBuilder());
 		builders.put(HTMLTag.LINK, new LinkBuilder());
 		builders.put(HTMLTag.LEGEND, new LegendBuilder());

@@ -58,6 +58,7 @@ import org.loboevolution.html.style.CSSUtilities;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.html.style.StyleSheetAggregator;
 
+import org.loboevolution.svg.dom.SVGElementImpl;
 import org.mozilla.javascript.annotations.JSFunction;
 
 import javax.swing.*;
@@ -328,9 +329,8 @@ public class ElementImpl extends NodeImpl implements Element {
 		final NodeListImpl childNodes = (NodeListImpl) getDescendents(new ElementFilter(null), true);
 		AtomicBoolean check = new AtomicBoolean(false);
 		childNodes.forEach(child -> {
-			if (child instanceof Element && !Objects.equals(newAttr.getOwnerElement(), child) && !check.get()) {
-				ElementImpl el = (ElementImpl) child;
-				Attr checkAttr = el.getAttributeNodeNS(newAttr.getNamespaceURI(), newAttr.getLocalName());
+			if (child instanceof HTMLElement el && !Objects.equals(newAttr.getOwnerElement(), child) && !check.get()) {
+                Attr checkAttr = el.getAttributeNodeNS(newAttr.getNamespaceURI(), newAttr.getLocalName());
 				check.set(checkAttr != null);
 			}
 		});
@@ -1326,7 +1326,17 @@ public class ElementImpl extends NodeImpl implements Element {
 			} else {
 				parentWidth = getParentElement().getOffsetWidth();
 			}
-			widthSize = HtmlValues.getPixelSize(CSSValues.AUTO.isEqual(width) ? "100%" : Strings.isBlank(width) ? childWidth(this, doc, parentWidth) + "px" : width, null, doc.getDefaultView(), 0, parentWidth);
+
+			if (rs.getDisplay() != RenderState.DISPLAY_INLINE) {
+
+				widthSize = HtmlValues.getPixelSize(CSSValues.AUTO.isEqual(width) ? "100%" : Strings.isBlank(width) ?
+						childWidth(this, doc, parentWidth) + "px" : width, null, doc.getDefaultView(), 0, parentWidth);
+
+			} else {
+				widthSize = 0;
+			}
+
+
 			if (Strings.isBlank(width) && rs.getDisplay() == RenderState.DISPLAY_BLOCK) {
 				widthSize = parentWidth == null ? 0 : parentWidth;
 			} else {
@@ -1344,17 +1354,13 @@ public class ElementImpl extends NodeImpl implements Element {
 				}
 			}
 
-			if (!isClient && rs.getDisplay() == RenderState.DISPLAY_INLINE) {
-				widthSize = 0;
-			} else {
-				final HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
-				final HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
-				final Dimension preferredSize = htmlPanel.getPreferredSize();
-				widthSize = widthSize == -1 ? preferredSize.width : widthSize;
+			final HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
+			final HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
+			final Dimension preferredSize = htmlPanel.getPreferredSize();
+			widthSize = widthSize == -1 ? preferredSize.width : widthSize;
 
-				if (!(this instanceof HTMLHtmlElement) && widthSize == preferredSize.width) {
-					widthSize = widthSize - SCROLL_BAR_THICKNESS;
-				}
+			if (!(this instanceof HTMLHtmlElement) && widthSize == preferredSize.width) {
+				widthSize = widthSize - SCROLL_BAR_THICKNESS;
 			}
 
 			if (padding) {
@@ -1416,15 +1422,10 @@ public class ElementImpl extends NodeImpl implements Element {
 				return heightSize;
 			}
 
-			if (!isClient && rs.getDisplay() == RenderState.DISPLAY_INLINE) {
-				heightSize = 0;
-			} else {
+			heightSize = heightSize == -1 ? preferredSize.height : heightSize;
 
-				heightSize = heightSize == -1 ? preferredSize.height : heightSize;
-
-				if (!(this instanceof HTMLHtmlElement) && heightSize == preferredSize.height) {
-					heightSize = heightSize - SCROLL_BAR_THICKNESS;
-				}
+			if (!(this instanceof HTMLHtmlElement) && heightSize == preferredSize.height) {
+				heightSize = heightSize - SCROLL_BAR_THICKNESS;
 			}
 
 			if (padding) {
@@ -1461,11 +1462,16 @@ public class ElementImpl extends NodeImpl implements Element {
 					} else if (elm instanceof HTMLDDElementImpl) {
 						h.addAndGet(17);
 					} else {
-						h.addAndGet((int)Strings.texMeasure(child.getTextContent(), elm.getRenderState().getFont()).getHeight());
+						h.addAndGet(Strings.texHeight(child.getTextContent(), elm.getRenderState().getFont()));
 					}
 					break;
 				case Node.ELEMENT_NODE:
-					final CSSStyleDeclaration currentStyle = ((HTMLElementImpl)child).getCurrentStyle();
+                    CSSStyleDeclaration currentStyle;
+                    if (child instanceof SVGElementImpl) {
+                        currentStyle = ((SVGElementImpl) child).getCurrentStyle();
+                    } else {
+                        currentStyle = ((HTMLElementImpl) child).getCurrentStyle();
+                    }
 					final String height = currentStyle.getHeight();
 					if(Strings.isNotBlank(height)){
 						h.addAndGet(HtmlValues.getPixelSize(CSSValues.AUTO.isEqual(height) ? "100%" : height, null, doc.getDefaultView(), 0, parentHeight));
@@ -1486,7 +1492,7 @@ public class ElementImpl extends NodeImpl implements Element {
 			final int type = child.getNodeType();
 			if(type == Node.TEXT_NODE){
 				final Text text = (Text) child;
-				h.addAndGet(text.getLength() * 8);
+				h.addAndGet(Strings.texWidth(text.getTextContent(),  elm.getRenderState().getFont()));
 			} else if (type == Node.ELEMENT_NODE) {
                 final CSSStyleDeclaration currentStyle = ((HTMLElementImpl) child).getCurrentStyle();
                 final String width = currentStyle.getWidth();

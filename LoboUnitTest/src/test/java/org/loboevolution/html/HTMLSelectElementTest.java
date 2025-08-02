@@ -38,8 +38,8 @@ import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLOptionElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLSelectElementImpl;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Tests for {@link HTMLSelectElement}.
@@ -183,7 +183,9 @@ public class HTMLSelectElementTest extends LoboUnitTest {
                         + "  <script>\n"
                         + "    function doTest() {\n"
                         + "      var oSelect = document.getElementById('main');\n"
-                        + "      var oOption = new Option('bla', 1);\n"
+                        + "      var oOption = new Option();\n"
+                        + "      oOption.text = 'bla';\n"
+                        + "      oOption.value = 1;\n"
                         + "      oSelect.options[oSelect.options.length] = oOption;\n"
                         + "      oOption.selected = false;\n"
                         + "      alert(oSelect.selectedIndex);\n"
@@ -384,7 +386,10 @@ public class HTMLSelectElementTest extends LoboUnitTest {
                         + "    function doTest() {\n"
                         + "      var options = document.form1.select1.options;\n"
                         + "      var index = options.length;\n"
-                        + "      options[index] = new Option('Four','value4');\n"
+                        + "      var oOption = new Option();\n"
+                        + "      oOption.text = 'Four';\n"
+                        + "      oOption.value = 'value4';\n"
+                        + "      options[index] = oOption;\n"
                         + "      alert(options.length);\n"
                         + "      alert(options[index].text);\n"
                         + "      alert(options[index].value);\n"
@@ -418,7 +423,9 @@ public class HTMLSelectElementTest extends LoboUnitTest {
                         + "      alert(firstSelectedIndex);\n"
                         + "      alert(options[firstSelectedIndex].selected);\n"
                         + "      var index = options.length;\n"
-                        + "      var oOption = new Option('Four','value4');\n"
+                        + "      var oOption = new Option();\n"
+                        + "      oOption.text = 'Four';\n"
+                        + "      oOption.value = 'value4';\n"
                         + "      oOption.selected = true;\n"
                         + "      options[index] = oOption;\n"
                         + "      alert(options.length);\n"
@@ -453,7 +460,10 @@ public class HTMLSelectElementTest extends LoboUnitTest {
                         + "    function doTest() {\n"
                         + "      var options = document.form1.select1;\n"
                         + "      try {\n"
-                        + "        options.add(new Option('Four','value4'), null);\n"
+                        + "         var oOption = new Option();\n"
+                        + "         oOption.text = 'Four';\n"
+                        + "         oOption.value = 'value4';\n"
+                        + "         options.add(oOption, null);\n"
                         + "      } catch(e) { alert('exception'); }\n"
                         + "      alert(options.length);\n"
                         + "      var index = options.length - 1;\n"
@@ -486,14 +496,19 @@ public class HTMLSelectElementTest extends LoboUnitTest {
                         + "    function doTest() {\n"
                         + "      var oSelect = document.form1.select1;\n"
                         + "      try {\n"
-                        + "        oSelect.add(new Option('Four', 'value4'));\n"
-                        + "        alert(oSelect.length);\n"
-                        + "        alert(oSelect[oSelect.length-1].text);\n"
-                        + "        alert(oSelect[oSelect.length-1].value);\n"
-
-                        + "        oSelect.add(new Option('Three b', 'value3b'), 3);\n"
-                        + "        alert(oSelect[3].text);\n"
-                        + "        alert(oSelect[3].value);\n"
+                        + "         var oOption = new Option();\n"
+                        + "         oOption.text = 'Four';\n"
+                        + "         oOption.value = 'value4';\n"
+                        + "         oSelect.add(oOption);\n"
+                        + "         alert(oSelect.length);\n"
+                        + "         alert(oSelect[oSelect.length-1].text);\n"
+                        + "         alert(oSelect[oSelect.length-1].value);\n"
+                        + "         oOption = new Option();\n"
+                        + "         oOption.text = 'Three b';\n"
+                        + "         oOption.value = 'value3b';\n"
+                        + "         oSelect.add(oOption, 3);\n"
+                        + "         alert(oSelect[3].text);\n"
+                        + "         alert(oSelect[3].value);\n"
                         + "      } catch(e) { alert('exception'); }\n"
                         + "    }\n"
                         + "  </script>\n"
@@ -523,9 +538,12 @@ public class HTMLSelectElementTest extends LoboUnitTest {
                         + "      var oSelect = document.form1.select1;\n"
                         + "      try {\n"
                         + "        alert(oSelect.length);\n"
-                        + "        oSelect.add(new Option('test', 'testValue'), null);\n"
-                        + "        alert(oSelect[oSelect.length-1].text);\n"
-                        + "        alert(oSelect[oSelect.length-1].value);\n"
+                        + "         var oOption = new Option();\n"
+                        + "         oOption.text = 'test';\n"
+                        + "         oOption.value = 'testValue';\n"
+                        + "         oSelect.add(oOption, null);\n"
+                        + "         alert(oSelect[oSelect.length-1].text);\n"
+                        + "         alert(oSelect[oSelect.length-1].value);\n"
                         + "      } catch(e) { alert('exception'); }\n"
                         + "    }\n"
                         + "  </script>\n"
@@ -766,9 +784,11 @@ public class HTMLSelectElementTest extends LoboUnitTest {
                         + "      try {\n"
                         + "        var oSelect = document.forms.testForm.select1;\n"
                         + "        alert(oSelect.length);\n"
-                        + "        var opt = new Option('foo', '123');\n"
+                        + "        var oOption = new Option();\n"
+                        + "        oOption.text = 'foo';\n"
+                        + "        oOption.value = '123';\n"
+                        + "        var opt = oOption;\n"
                         + "        oSelect.add(opt" + param + ");\n"
-
                         + "        alert(oSelect.length);\n"
                         + "        alert(oSelect.selectedIndex);\n"
                         + "        for (var i = 0; i < oSelect.options.length; i++) {\n"
@@ -806,7 +826,9 @@ public class HTMLSelectElementTest extends LoboUnitTest {
                         + "      try {\n"
                         + "        var oSelect = document.forms.testForm.testSelect;\n"
                         + "        alert(oSelect.length);\n"
-                        + "        var opt = new Option('foo', '123');\n"
+                        + "        var opt = new Option();\n"
+                        + "        opt.text = 'foo';\n"
+                        + "        opt.value = '123';\n"
                         + "        oSelect.add(opt, -1);\n"
                         + "        alert(oSelect.length);\n"
                         + "      } catch (e) { alert('exception'); }\n"
@@ -2057,7 +2079,10 @@ public class HTMLSelectElementTest extends LoboUnitTest {
                         + "    function doTest() {\n"
                         + "      var select = document.getElementById('select1');\n"
                         + "      alert(select[1]);\n"
-                        + "      select[1] = new Option('text','value');\n"
+                        + "      var opt = new Option();\n"
+                        + "      opt.text = 'text';\n"
+                        + "      opt.value = 'value';\n"
+                        + "      select[1] = opt;\n"
                         + "      alert(select[1]);\n"
                         + "      alert(select.options.length);\n"
                         + "    }\n"
@@ -2083,7 +2108,10 @@ public class HTMLSelectElementTest extends LoboUnitTest {
                         + "    function doTest() {\n"
                         + "      var select = document.getElementById('select1');\n"
                         + "      alert(select[7]);\n"
-                        + "      select[7] = new Option('text','value');\n"
+                        + "      var opt = new Option();\n"
+                        + "      opt.text = 'text';\n"
+                        + "      opt.value = 'value';\n"
+                        + "      select[7] = opt;\n"
                         + "      alert(select[7]);\n"
                         + "      alert(select.options.length);\n"
                         + "    }\n"
@@ -2217,5 +2245,30 @@ public class HTMLSelectElementTest extends LoboUnitTest {
                         + "</html>";
 
         checkHtmlAlert(html);
+    }
+
+    @Test
+    public void noOnchangeFromJS() {
+        final String html = "<html><head><title>Test infinite loop on js onchange</title></head>\n"
+                + "<body><form name='myForm'>\n"
+                + "<select id='a' onchange='this.form.b.selectedIndex=0'>\n"
+                + "<option value='1'>one</option>\n"
+                + "<option value='2'>two</option>\n"
+                + "</select>\n"
+                + "<select id='b' onchange='alert(\"b changed\")'>\n"
+                + "<option value='G'>green</option>\n"
+                + "<option value='R' selected>red</option>\n"
+                + "</select>\n"
+                + "</form>\n"
+                + "</body>\n"
+                + "</html>";
+
+        final HTMLDocument document = loadHtml(html);
+        HTMLSelectElementImpl elem = (HTMLSelectElementImpl) document.getElementById("a");
+        assertEquals("two", elem.getOptions().item(1).getNodeValue());
+
+        elem = (HTMLSelectElementImpl) document.getElementById("b");
+        assertEquals(1, elem.getSelectedOptions().getLength());
+        assertEquals("red", elem.getOptions().item(0).getNodeValue());
     }
 }

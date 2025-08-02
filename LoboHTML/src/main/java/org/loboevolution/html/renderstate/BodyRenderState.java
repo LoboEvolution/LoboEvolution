@@ -119,6 +119,23 @@ public class BodyRenderState extends StyleSheetRenderState {
     }
 
     @Override
+    public HtmlInsets getPaddingInsets() {
+        HtmlInsets insets = this.paddingInsets;
+
+        if (insets != INVALID_INSETS) {
+            return insets;
+        }
+        insets = super.getPaddingInsets();
+        if (insets == null || insets.htmlInsetsIsVoid()) {
+            final int padding = HtmlValues.getPixelSize("8px", null, this.document.getDefaultView(), 0);
+            insets = new HtmlInsets(padding, HtmlInsets.TYPE_PIXELS);
+        }
+
+        this.paddingInsets = insets;
+        return insets;
+    }
+
+    @Override
     public int getDefaultDisplay() {
         return DISPLAY_BLOCK;
     }

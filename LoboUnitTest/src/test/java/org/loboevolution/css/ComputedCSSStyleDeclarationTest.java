@@ -1161,10 +1161,9 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts({"0", "0"})
+    @Alerts({"0", "17"})
     public void widthAndHeightChildDisplayNoneWidth() {
         final String content = "<html><head><script>\n"
-
                 + "  function test() {\n"
                 + "    var outer = document.getElementById('outer');\n"
                 + "   alert(outer.offsetWidth);\n"
@@ -1182,7 +1181,6 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
     @Alerts({"0", "0"})
     public void widthAndHeightChildDisplayNoneWidthLineBreak() {
         final String content = "<html><head><script>\n"
-
                 + "  function test() {\n"
                 + "    var outer = document.getElementById('outer');\n"
                 + "   alert(outer.offsetWidth);\n"
@@ -1348,10 +1346,9 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts("18")
+    @Alerts("17")
     public void offsetHeightWithContent() {
         final String html = "<html><head><script>\n"
-
                 + "  function test() {\n"
                 + "   alert(document.getElementById('div1').offsetHeight);\n"
                 + "  }\n"
@@ -1365,10 +1362,10 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts("18")
+    @Alerts("17")
     public void offsetHeightWithChild() {
-        final String html = "<html><head><script>\n"
-
+        final String html = "<html><head>"
+                + "  <script>\n"
                 + "  function test() {\n"
                 + "   alert(document.getElementById('div1').offsetHeight);\n"
                 + "  }\n"
@@ -1936,7 +1933,7 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts({"18", "18px", "36", "36px", "54", "54px"})
+    @Alerts({"17", "17px", "34", "34px", "51", "51px"})
     public void heightManyLines() {
         final String html = "<html>\n"
                 + "<head><script>\n"

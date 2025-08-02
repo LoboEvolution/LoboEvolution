@@ -186,8 +186,8 @@ public class HTMLTemplateElementTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts({"<template></template>", "<template>HtmlUnit</template>",
-            "<template><div>HtmlUnit</div><div>is great</div></template>"})
+    @Alerts({"<TEMPLATE/>", "<TEMPLATE>HtmlUnit</TEMPLATE>",
+            "<TEMPLATE><DIV>HtmlUnit</DIV><DIV>is great</DIV></TEMPLATE>"})
     public void innerHTMLIncludingTemplate() {
         final String html =
                 "<html>\n"

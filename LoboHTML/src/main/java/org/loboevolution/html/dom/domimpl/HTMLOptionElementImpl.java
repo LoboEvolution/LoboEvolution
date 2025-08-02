@@ -136,7 +136,11 @@ public class HTMLOptionElementImpl extends HTMLElementImpl implements HTMLOption
 	/** {@inheritDoc} */
 	@Override
 	public String getValue() {
-		return getAttribute("value");
+		String value = getAttribute("value");
+		if (Strings.isNotBlank(value)) {
+			return value;
+		}
+		return getText();
 	}
 
 	/** {@inheritDoc} */

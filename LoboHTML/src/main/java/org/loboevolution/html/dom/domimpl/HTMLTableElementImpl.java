@@ -228,13 +228,13 @@ public class HTMLTableElementImpl extends HTMLElementImpl implements HTMLTableEl
 
 	/** {@inheritDoc} */
 	@Override
-	public HTMLCollection gettBodies() {
+	public HTMLCollection getTbodies() {
 		return new HTMLCollectionImpl(this, new ElementFilter("TBODY"));
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public HTMLTableSectionElement gettFoot() {
+	public HTMLTableSectionElement getTfoot() {
 		if (this.tfoot == null) {
 			final Node node = getFirstChildByFilter(new ElementFilter("TFOOT"));
 			if (node == null) {
@@ -249,7 +249,7 @@ public class HTMLTableElementImpl extends HTMLElementImpl implements HTMLTableEl
 	
 	/** {@inheritDoc} */
 	@Override
-	public HTMLTableSectionElement gettHead() {
+	public HTMLTableSectionElement getThead() {
 		if (this.thead == null) {
 			final Node node = getFirstChildByFilter(new ElementFilter("THEAD"));
 			if (node == null) {
