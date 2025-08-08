@@ -29,9 +29,7 @@ package org.loboevolution.html.js.css;
 import org.htmlunit.cssparser.dom.AbstractCSSRuleImpl;
 import org.htmlunit.cssparser.dom.CSSPageRuleImpl;
 import org.htmlunit.cssparser.util.CSSProperties;
-import org.loboevolution.css.CSSStyleDeclaration;
-import org.loboevolution.css.CSSStyleRule;
-import org.loboevolution.css.CSSStyleSheet;
+import org.loboevolution.css.*;
 import org.loboevolution.html.style.setter.*;
 import org.loboevolution.net.NameValuePair;
 
@@ -73,6 +71,11 @@ public class CSSStyleRuleImpl extends AbstractCSSStyleRule implements CSSPropert
     @Override
     public CSSStyleSheet getParentStyleSheet() {
         return abstractCSSRule != null ? new CSSStyleSheetImpl(abstractCSSRule.getParentStyleSheet()) : null;
+    }
+
+    @Override
+    public CSSMediaRule getParentRule() {
+        return new CSSMediaRuleImpl(abstractCSSRule.getParentRule());
     }
 
     /** {@inheritDoc} */

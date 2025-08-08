@@ -28,7 +28,7 @@ package org.loboevolution.html.js.css;
 
 import org.htmlunit.cssparser.dom.AbstractCSSRuleImpl;
 import org.loboevolution.css.CSSMediaRule;
-import org.loboevolution.css.CSSRule;
+import org.loboevolution.css.CSSRuleList;
 import org.loboevolution.css.MediaList;
 
 import java.util.List;
@@ -37,8 +37,15 @@ import java.util.List;
  * <p>CSSMediaRuleImpl class.</p>
  */
 public class CSSMediaRuleImpl extends AbstractCSSStyleRule implements CSSMediaRule {
+
+    private final org.htmlunit.cssparser.dom.CSSMediaRuleImpl cssMediaRule;
+
+    private final CSSRuleListImpl cssRuleList;
+
     public CSSMediaRuleImpl(AbstractCSSRuleImpl abstractCSSRule) {
         super(abstractCSSRule);
+        this.cssMediaRule = (org.htmlunit.cssparser.dom.CSSMediaRuleImpl) abstractCSSRule;
+        cssRuleList = new CSSRuleListImpl(cssMediaRule.getCssRules());
     }
 
     @Override
@@ -48,22 +55,33 @@ public class CSSMediaRuleImpl extends AbstractCSSStyleRule implements CSSMediaRu
 
     @Override
     public void setMedia(String media) {
-
     }
 
     @Override
-    public List<CSSRule> getCssRules() {
-        return null;
+    public CSSRuleList getCssRules() {
+        return cssRuleList;
     }
 
     @Override
-    public int insertRule(String rule, int index) {
-        return 0;
+    public void insertRule(String rule) {
+        cssMediaRule.insertRule(rule, 0);
+        cssRuleList.getStyleRuleList().addFirst(new CSSStyleRuleImpl(cssMediaRule.getCssRules().getRules().getFirst()));
     }
 
     @Override
-    public void deleteRule(int index) {
+    public void insertRule(String rule, Integer index) {
+        List<AbstractCSSRuleImpl> rules = cssMediaRule.getCssRules().getRules();
+        int ruleCount = rules.size();
+        int insertionIndex = (index != null) ? index : ruleCount;
 
+        cssMediaRule.insertRule(rule, insertionIndex);
+        cssRuleList.getStyleRuleList().add(new CSSStyleRuleImpl(cssMediaRule.getCssRules().getRules().get(insertionIndex)));
+    }
+
+    @Override
+    public void deleteRule(Integer index) {
+        cssMediaRule.deleteRule(index != null ? index : 0);
+        cssRuleList.getStyleRuleList().remove(index != null ? index : 0);
     }
 
     @Override

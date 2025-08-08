@@ -161,14 +161,14 @@ public class FontValues extends HtmlValues {
 		switch (units) {
 			case "rem":
 				try {
-					return (int) Math.round(defaultSize * Double.parseDouble(text));
+					return defaultSize * Float.parseFloat(text);
 				} catch (final NumberFormatException nfe) {
 					return defaultSize;
 				}
 			case "em":
 				try {
 					final float parentFontSize = parentRenderState == null ? defaultSize : parentRenderState.getFont().getSize();
-					return (int) Math.round(parentFontSize * Double.parseDouble(text));
+					return parentFontSize * Float.parseFloat(text);
 				} catch (final NumberFormatException nfe) {
 					return defaultSize;
 				}
@@ -184,11 +184,17 @@ public class FontValues extends HtmlValues {
 				final String value = specTL.substring(0, specTL.length() - 1);
 				try {
 					final float parentFontSize = parentRenderState == null ? defaultSize : parentRenderState.getFont().getSize();
-					final double valued = Double.parseDouble(value);
-					return (float) (parentFontSize * valued / 100.0);
+					final float valued = Float.parseFloat(value);
+					return parentFontSize * valued / 100;
 				} catch (final NumberFormatException nfe) {
 					return defaultSize;
 				}
+			case "vh":
+				final float ih = (float) window.getInnerHeight();
+				return ih *  Float.parseFloat(text) / 100;
+			case "vw":
+				final float iw =  (float) window.getInnerWidth();
+				return iw *  Float.parseFloat(text) / 100;
 			default:
 				final CSSValues fontZize = CSSValues.get(specTL);
 				switch (fontZize) {
@@ -223,7 +229,6 @@ public class FontValues extends HtmlValues {
 						return getPixelSize(spec, parentRenderState, window, (int) defaultSize);
 				}
 		}
-
 	}
 
 	/**

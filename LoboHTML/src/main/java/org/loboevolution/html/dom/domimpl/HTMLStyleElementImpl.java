@@ -137,7 +137,7 @@ public class HTMLStyleElementImpl extends HTMLElementImpl implements HTMLStyleEl
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) getOwnerDocument();
 		if (CSSUtilities.matchesMedia(getMedia(), doc.getDefaultView())) {
 			final String text = getRawInnerText(true);
-			if (Strings.isNotBlank(text) && !isDisabled()) {
+			if (text != null && !isDisabled()) {
 				final String processedText = CSSUtilities.preProcessCss(text);
 				final CSSOMParser parser = new CSSOMParser(new CSS3Parser());
 				final String baseURI = doc.getBaseURI();

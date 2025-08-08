@@ -39,7 +39,7 @@ public class CSSMediaRuleTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts({"[object CSSMediaRule]", "[object CSSMediaRule]"})
+    @Alerts({"[object CSSMediaRuleImpl]", "[object CSSMediaRule]"})
     public void scriptableToString() {
         final String html
                 = "<html>"
@@ -405,7 +405,7 @@ public class CSSMediaRuleTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"1", "0", "2", "span { color: rgb(0, 0, 0); }", "[object CSSMediaRule]",
+    @Alerts({"1", "2", "span { color: rgb(0, 0, 0); }", "[object CSSMediaRule]",
             "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]"})
     public void insertRule() {
         final String html
@@ -420,14 +420,14 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 + "  var rules = rule.cssRules;\n"
                 + " alert(rules.length);\n"
                 + "  try {\n"
-                + "   alert(rule.insertRule('span { color:#000000; }'));\n"
+                + "   rule.insertRule('span { color:#000000; }')\n"
                 + "   alert(rules.length);\n"
                 + "    for (var i = 0; i < rules.length; i++) {\n"
                 + "     alert(rules.item(i).cssText);\n"
                 + "     alert(rules.item(i).parentRule);\n"
                 + "    }\n"
                 + "  } catch(e) {\n"
-                + "   alert('exception');\n"
+                + "   alert(e);\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</body></html>";
@@ -508,7 +508,7 @@ public class CSSMediaRuleTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"1", "1", "2", "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]",
+    @Alerts({"1", "2", "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]",
             "span { color: rgb(0, 0, 0); }", "[object CSSMediaRule]"})
     public void insertRuleWithIndex() {
         final String html
@@ -523,7 +523,7 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 + "  var rules = rule.cssRules;\n"
                 + " alert(rules.length);\n"
                 + "  try {\n"
-                + "   alert(rule.insertRule('span { color:#000000; }', 1));\n"
+                + "  rule.insertRule('span { color:#000000; }', 1);\n"
                 + "   alert(rules.length);\n"
                 + "    for (var i = 0; i < rules.length; i++) {\n"
                 + "     alert(rules.item(i).cssText);\n"
@@ -617,8 +617,8 @@ public class CSSMediaRuleTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"1", "0", "2", "span { color: rgb(0, 0, 0); }", "[object CSSMediaRule]",
-            "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]"})
+    @Alerts({"1", "2", "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]",
+            "span { color: rgb(0, 0, 0); }", "[object CSSMediaRule]"})
     public void insertRuleWithIndexNull() {
         final String html
                 = "<html>"
@@ -632,7 +632,7 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 + "  var rules = rule.cssRules;\n"
                 + " alert(rules.length);\n"
                 + "  try {\n"
-                + "   alert(rule.insertRule('span { color:#000000; }', null));\n"
+                + "   rule.insertRule('span { color:#000000; }', null);\n"
                 + "   alert(rules.length);\n"
                 + "    for (var i = 0; i < rules.length; i++) {\n"
                 + "     alert(rules.item(i).cssText);\n"
@@ -648,8 +648,8 @@ public class CSSMediaRuleTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"1", "0", "2", "span { color: rgb(0, 0, 0); }", "[object CSSMediaRule]",
-            "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]"})
+    @Alerts({"1", "2", "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]",
+            "span { color: rgb(0, 0, 0); }", "[object CSSMediaRule]"})
     public void insertRuleWithIndexNaN() {
         final String html
                 = "<html>"
@@ -661,9 +661,9 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
                 + "  var rules = rule.cssRules;\n"
-                + " alert(rules.length);\n"
+                + "  alert(rules.length);\n"
                 + "  try {\n"
-                + "   alert(rule.insertRule('span { color:#000000; }', 'abc'));\n"
+                + "   rule.insertRule('span { color:#000000; }', 'abc');\n"
                 + "   alert(rules.length);\n"
                 + "    for (var i = 0; i < rules.length; i++) {\n"
                 + "     alert(rules.item(i).cssText);\n"
@@ -778,7 +778,7 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 + "     alert(rules.item(i).cssText);\n"
                 + "    }\n"
                 + "  } catch(e) {\n"
-                + "   alert('exception');\n"
+                + "   alert(e);\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</body></html>";

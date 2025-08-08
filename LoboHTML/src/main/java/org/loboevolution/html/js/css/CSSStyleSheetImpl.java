@@ -65,25 +65,26 @@ public class CSSStyleSheetImpl extends StyleSheetImpl implements CSSStyleSheet {
     @Override
     public long insertRule(final String rule, final int index) {
         try {
-            this.cssStyleSheet.insertRule(rule, index);
-            this.cssRuleList.addStyleRule(cssStyleSheet.getCssRules());
-        } catch (final IndexOutOfBoundsException e) {
-            throw new DOMException(
-                    DOMException.INDEX_SIZE_ERR, e.getMessage());
-        } catch (DOMException cssException) {
-            throw cssException;
-        } catch (final Exception e) {
+
             final int pos = rule.indexOf('{');
             if (pos > -1) {
-                final String newRule = rule.substring(0, pos) + "{}";
+                final String newRule = rule.substring(0, pos);
                 try {
+                    System.out.println("newRule " + newRule);
                     insertRule(newRule, index);
                     return index;
                 } catch (final Exception ex) {
                     return 0;
                 }
+            } else {
+                this.cssStyleSheet.insertRule(rule, index);
+                this.cssRuleList.addStyleRule(cssStyleSheet.getCssRules());
             }
-            return 0;
+        } catch (final IndexOutOfBoundsException e) {
+            throw new DOMException(
+                    DOMException.INDEX_SIZE_ERR, e.getMessage());
+        } catch (Exception ex) {
+            throw ex;
         }
         return index;
     }
@@ -93,7 +94,7 @@ public class CSSStyleSheetImpl extends StyleSheetImpl implements CSSStyleSheet {
     public void deleteRule(final int index) {
         try {
             cssStyleSheet.deleteRule(index);
-            this.cssRuleList.addStyleRule(cssStyleSheet.getCssRules());
+            cssRuleList.getStyleRuleList().remove(index);
         } catch (final Exception e) {
             throw new DOMException(
                     DOMException.INDEX_SIZE_ERR, e.getMessage());

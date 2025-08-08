@@ -26,38 +26,41 @@
 
 package org.loboevolution.html.js.css;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.htmlunit.cssparser.dom.AbstractCSSRuleImpl;
-import org.loboevolution.html.node.AbstractList;
 import org.loboevolution.css.CSSRuleList;
 import org.loboevolution.css.CSSStyleRule;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * <p>CSSRuleListImpl class.</p>
  */
-public class CSSRuleListImpl extends AbstractList<CSSStyleRule> implements CSSRuleList {
+public class CSSRuleListImpl implements CSSRuleList {
+
+    @Getter
+    @Setter
+    private List<CSSStyleRule> styleRuleList = new ArrayList<>();
 
     private final org.htmlunit.cssparser.dom.CSSRuleListImpl cssRuleList;
 
     public CSSRuleListImpl(final org.htmlunit.cssparser.dom.CSSRuleListImpl cssRuleList) {
         this.cssRuleList = cssRuleList;
+        addStyleRule(cssRuleList);
     }
 
     /** {@inheritDoc} */
     @Override
     public CSSStyleRule item(final int index) {
-        try{
-            return this.get(index);
-        } catch (final Exception e){
-            return null;
-        }
+        return styleRuleList.get(index);
     }
 
     /** {@inheritDoc} */
     @Override
     public long getLength() {
-        return this.size();
+        return styleRuleList.size();
     }
 
     /**
@@ -66,44 +69,38 @@ public class CSSRuleListImpl extends AbstractList<CSSStyleRule> implements CSSRu
      */
     public void addStyleRule(final org.htmlunit.cssparser.dom.CSSRuleListImpl newList) {
         List<AbstractCSSRuleImpl> ruls;
-        if (newList != null) {
-            clear();
-            ruls = newList.getRules();
-        } else {
-            ruls = cssRuleList.getRules();
-        }
-
+        styleRuleList.clear();
+        ruls = newList != null ? newList.getRules() : cssRuleList.getRules();
         ruls.forEach(rule -> {
 
             if (rule instanceof org.htmlunit.cssparser.dom.CSSStyleRuleImpl) {
-                add(new CSSStyleRuleImpl(rule));
+                styleRuleList.add(new CSSStyleRuleImpl(rule));
             }
             if (rule instanceof org.htmlunit.cssparser.dom.CSSImportRuleImpl) {
-                add(new CSSImportRuleImpl((org.htmlunit.cssparser.dom.CSSImportRuleImpl) rule));
+                styleRuleList.add(new CSSImportRuleImpl((org.htmlunit.cssparser.dom.CSSImportRuleImpl) rule));
             }
 
             if (rule instanceof org.htmlunit.cssparser.dom.CSSFontFaceRuleImpl) {
-                add(new CSSFontFaceRuleImpl((org.htmlunit.cssparser.dom.CSSFontFaceRuleImpl) rule));
+                styleRuleList.add(new CSSFontFaceRuleImpl((org.htmlunit.cssparser.dom.CSSFontFaceRuleImpl) rule));
             }
 
             if (rule instanceof org.htmlunit.cssparser.dom.CSSPageRuleImpl) {
-                add(new CSSPageRuleImpl((org.htmlunit.cssparser.dom.CSSPageRuleImpl) rule));
+                styleRuleList.add(new CSSPageRuleImpl((org.htmlunit.cssparser.dom.CSSPageRuleImpl) rule));
             }
 
             if (rule instanceof org.htmlunit.cssparser.dom.CSSCharsetRuleImpl) {
-                add(new CSSCharsetRuleImpl(rule));
+                styleRuleList.add(new CSSCharsetRuleImpl(rule));
             }
 
             if (rule instanceof org.htmlunit.cssparser.dom.CSSUnknownRuleImpl unknownRule) {
                 if (unknownRule.getCssText().startsWith("@keyframes")) {
-                    add(new CSSKeyFramesRuleImpl(this, rule));
+                    styleRuleList.add(new CSSKeyFramesRuleImpl(this, rule));
                 }
             }
 
             if (rule instanceof org.htmlunit.cssparser.dom.CSSMediaRuleImpl) {
-                add(new CSSMediaRuleImpl( rule));
+                styleRuleList.add(new CSSMediaRuleImpl(rule));
             }
-
         });
     }
 

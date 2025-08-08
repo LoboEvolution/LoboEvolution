@@ -31,10 +31,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.loboevolution.annotation.Alerts;
 import org.loboevolution.annotation.AlertsExtension;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.dom.HTMLDocument;
-import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Tests for {@link ComputedCSSStyleDeclaration}.
@@ -81,6 +77,7 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
     }
 
     @Test
+    @Alerts("none")
     public void stringProperties() {
         final String html
                 = "<html><head><body>\n"
@@ -103,14 +100,14 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
                 + "} catch (e) { array[array.length] = 'exception'; }\n"
                 + "array.sort();\n"
                 + "document.getElementById('myTextarea').value = array.join('\\n');\n"
+                + "alert(document.getElementById('myTextarea').value);"
                 + "</script></body></html>";
 
-        final HTMLDocument document = loadHtml(html);
-        HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("myTextarea");
-        assertEquals("ComputedCSSStyleDeclarationTest.properties.notAttached", elem.getNodeValue());
+        checkHtmlAlert(html);
     }
 
     @Test
+    @Alerts("none")
     public void stringPropertiesNotAttached() {
         final String html
                 = "<html><head><body>\n"
@@ -131,11 +128,10 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
                 + "} catch (e) { array[array.length] = 'exception'; }\n"
                 + "array.sort();\n"
                 + "document.getElementById('myTextarea').value = array.join('\\n');\n"
+                + "alert(document.getElementById('myTextarea').value);"
                 + "</script></body></html>";
 
-        final HTMLDocument document = loadHtml(html);
-        HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("myTextarea");
-        assertEquals("ComputedCSSStyleDeclarationTest.properties.notAttached", elem.getNodeValue());
+        checkHtmlAlert(html);
     }
 
 
@@ -860,7 +856,7 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts("4.05px")
+    @Alerts("3px")
     public void fontSizeVH() {
         final String html = "<html><body>\n"
                 + "<div id='d0' style='font-size: 0.6vh;'>\n"
@@ -881,7 +877,7 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts("7.55px")
+    @Alerts("4.8px")
     public void fontSizeVW() {
         final String html = "<html><body>\n"
                 + "<div id='d0' style='font-size: 0.6vw;'>\n"
@@ -1248,7 +1244,6 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
     @Alerts({"", "rgb(0, 0, 255)"})
     public void getPropertyValue() {
         final String html = "<html><head><script>\n"
-
                 + "function doTest() {\n"
                 + "  try {\n"
                 + "    var d = document.getElementById('div1');\n"

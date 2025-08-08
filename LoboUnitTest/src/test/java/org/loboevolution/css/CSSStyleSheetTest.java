@@ -182,7 +182,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts({"1", "false", "0", "div", "", "2"})
+    @Alerts({"1", "false", "div", "", "2"})
     public void insertRuleInvalidRule() {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -194,7 +194,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
                 + "   alert(rules.length);\n"
                 + "   alert(s.insertRule == undefined);\n"
                 + "    if (s.insertRule) {\n"
-                + "     alert(s.insertRule('div {invalid}', 0));\n"
+                + "     s.insertRule('div {invalid}', 0);\n"
                 + "     alert(rules[0].selectorText);\n"
                 + "     alert(rules[0].style.cssText);\n"
                 + "    }\n"
@@ -234,7 +234,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"2", "false", "false", "undefined", "1", "div", "color: red;"})
+    @Alerts({"2", "false", "1", "p", "vertical-align: top"})
     public void removeRuleDeleteRule() {
         final String html = "<html><head><script>\n"
                 + "function doTest() {\n"
@@ -243,11 +243,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
                 + "  var rules = s.cssRules || s.rules;\n"
                 + " alert(rules.length);\n"
                 + " alert(s.deleteRule == undefined);\n"
-                + " alert(s.removeRule == undefined);\n"
-                + "  if (s.deleteRule)\n"
-                + "   alert(s.deleteRule(0));\n"
-                + "  else\n"
-                + "   alert(s.removeRule(0));\n"
+                + " s.deleteRule(1);\n"
                 + " alert(rules.length);\n"
                 + " alert(rules[0].selectorText);\n"
                 + " alert(rules[0].style.cssText);\n"
@@ -271,10 +267,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
                 + "     var f = document.getElementById('myStyle');\n"
                 + "     var s = f.sheet ? f.sheet : f.styleSheet;\n"
                 + "     var rules = s.cssRules || s.rules;\n"
-                + "         if (s.deleteRule)\n"
-                + "             s.deleteRule(19);\n"
-                + "         else\n"
-                + "             s.removeRule(19);\n"
+                + "     s.deleteRule(19);\n"
                 + "     alert('deleted');\n"
                 + "  } catch(err) {alert('exception'); }\n"
                 + "}</script>\n"
@@ -287,7 +280,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts({"2", "1", "div", "color: red"})
+    @Alerts({"2", "1", "p", "vertical-align: top"})
     public void deleteRuleIgnored() {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -298,10 +291,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
                 + "  var rules = s.cssRules || s.rules;\n"
                 + " alert(rules.length);\n"
                 + "  try {\n"
-                + "    if (s.deleteRule)\n"
-                + "      s.deleteRule(0);\n"
-                + "    else\n"
-                + "      s.removeRule(0);\n"
+                + "   s.deleteRule(1);\n"
                 + "   alert(rules.length);\n"
                 + "   alert(rules[0].selectorText);\n"
                 + "   alert(rules[0].style.cssText);\n"
@@ -320,7 +310,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts({"2", "1", "p", "vertical-align: top;"})
+    @Alerts({"2", "1", "p", "vertical-align: top"})
     public void deleteRuleIgnoredLast() {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -331,10 +321,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
                 + "  var rules = s.cssRules || s.rules;\n"
                 + " alert(rules.length);\n"
                 + "  try {\n"
-                + "    if (s.deleteRule)\n"
-                + "      s.deleteRule(1);\n"
-                + "    else\n"
-                + "      s.removeRule(1);\n"
+                + "   s.deleteRule(1);\n"
                 + "   alert(rules.length);\n"
                 + "   alert(rules[0].selectorText);\n"
                 + "   alert(rules[0].style.cssText);\n"

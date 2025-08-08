@@ -36,17 +36,13 @@ import org.loboevolution.css.CSSStyleSheet;
  * <p>AbstractCSSStyleRule class.</p>
  */
 public abstract class AbstractCSSStyleRule extends CSSRuleImpl implements CSSStyleRule {
+
     public AbstractCSSStyleRule(AbstractCSSRuleImpl abstractCSSRule) {
         super(abstractCSSRule);
     }
 
     @Override
     public CSSStyleDeclaration getStyle() {
-        return null;
-    }
-
-    @Override
-    public CSSRule getParentRule() {
         return null;
     }
 

@@ -40,7 +40,10 @@ import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.laf.ColorFactory;
 
 import java.awt.*;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.Arrays;
+import java.util.Locale;
 
 /**
  * <p>ComputedCSSStyleDeclaration class.</p>
@@ -591,15 +594,18 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
     public String getFontSize() {
         final HTMLElementImpl parent = (HTMLElementImpl) element.getParentElement();
         final CSSStyleDeclaration style = element.getStyle();
-        final int fontSize;
+        final float fontSize;
+        String styleFz;
 
         if (Strings.isCssBlank(style.getFontSize()) && parent != null && parent.getStyle().getLength() > 0) {
             final CSSStyleDeclaration currentStyle = parent.getStyle();
-            fontSize = FontValues.getPixelSize(currentStyle.getFontSize(), null, window, -1);
+            styleFz = currentStyle.getFontSize();
         } else {
-            fontSize = Float.valueOf(FontValues.getFontSize(style.getFontSize(), window, null)).intValue();
+            styleFz = style.getFontSize();
         }
-        return this.element.getParentNode() == null ? null : (fontSize < 7 ? 6 : fontSize) + "px";
+
+        fontSize = FontValues.getFontSize(styleFz, window, null);
+        return this.element.getParentNode() == null ? null : new DecimalFormat("#.##",  new DecimalFormatSymbols(Locale.US)).format(fontSize) + "px";
     }
 
     /**

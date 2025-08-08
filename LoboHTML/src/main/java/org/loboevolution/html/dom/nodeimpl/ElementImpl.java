@@ -1333,7 +1333,7 @@ public class ElementImpl extends NodeImpl implements Element {
 						childWidth(this, doc, parentWidth) + "px" : width, null, doc.getDefaultView(), 0, parentWidth);
 
 			} else {
-				widthSize = 0;
+				widthSize = getContentWidth();
 			}
 
 
@@ -1443,6 +1443,20 @@ public class ElementImpl extends NodeImpl implements Element {
 			}
 		}
 		return heightSize;
+	}
+
+	private int getContentWidth() {
+		// Get the text content
+		String text = getTextContent();
+		if (text == null || text.isEmpty()) {
+			return 0;
+		}
+
+		// Get font metrics from render state
+		RenderState rs = getRenderState();
+		FontMetrics fm = rs.getFontMetrics();
+
+		return fm.stringWidth(text);
 	}
 
 	private int childHeight(final ElementImpl elm, final String position, final HTMLDocumentImpl doc, final Integer parentHeight) {

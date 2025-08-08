@@ -25,25 +25,45 @@
  */
 package org.loboevolution.css;
 
-import java.util.List;
-
 public interface CSSMediaRule extends CSSRule {
 
     /**
-     * <p> getMedia. </p>
-     * @return a {@link MediaList} object.
+     * <p>getMedia.</p>
+     * @return a {@link MediaList} object representing the media queries for this rule.
      */
     MediaList getMedia();
 
     /**
-     * <p> setMedia. </p>
-     * media a {@link java.lang.String} object.
+     * <p>setMedia.</p>
+     * @param media a {@link java.lang.String} object specifying the media query text.
      */
     void setMedia(String media);
 
-    List<CSSRule> getCssRules();
+    /**
+     * <p>getCssRules.</p>
+     * @return a {@link CSSRuleList} object containing all CSS rules in this media rule.
+     */
+    CSSRuleList getCssRules();
 
-    int insertRule(String rule, int index);
+    /**
+     * <p>insertRule.</p>
+     * Adds a new rule to the end of this media rule's CSS rule list.
+     * @param rule a {@link java.lang.String} object containing the CSS rule text to insert.
+     */
+    void insertRule(String rule);
 
-    void deleteRule(int index);
+    /**
+     * <p>insertRule.</p>
+     * Adds a new rule at the specified position in this media rule's CSS rule list.
+     * @param rule a {@link java.lang.String} object containing the CSS rule text to insert.
+     * @param index an {@link java.lang.Integer} specifying the position at which to insert the rule.
+     */
+    void insertRule(String rule, Integer index);
+
+    /**
+     * <p>deleteRule.</p>
+     * Removes a rule at the specified position from this media rule's CSS rule list.
+     * @param index an {@link java.lang.Integer} specifying the position of the rule to remove.
+     */
+    void deleteRule(Integer index);
 }
