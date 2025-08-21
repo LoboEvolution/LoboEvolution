@@ -31,58 +31,105 @@ import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.style.FontValues;
 import org.loboevolution.html.style.HtmlValues;
 
+import java.util.Arrays;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 /**
  * <p>FontParser class.</p>
  */
 public class FontParser {
 
-    public final static int FONT_STYLE_INDEX = 0;
-    public final static int FONT_VARIANT_INDEX = 1;
-    public final static int FONT_WEIGHT_INDEX = 2;
-    public final static int FONT_SIZE_INDEX = 3;
-    public final static int LINE_HEIGHT_INDEX = 4;
-    public final static int FONT_FAMILY_INDEX = 5;
-    public final static int FONT_STRETCH_INDEX = 6;
+    public final static int FONT_STYLE_INDEX = 0;    // font-style (optional)
+    public final static int FONT_VARIANT_INDEX = 1;  // font-variant (optional)
+    public final static int FONT_WEIGHT_INDEX = 2;   // font-weight (optional)
+    public final static int FONT_STRETCH_INDEX = 3;  // font-stretch (optional, CSS3)
+    public final static int FONT_SIZE_INDEX = 4;     // font-size (required)
+    public final static int LINE_HEIGHT_INDEX = 5;   // line-height (optional)
+    public final static int FONT_FAMILY_INDEX = 6;   // font-family (required, LAST)
+
+      private static final Set<String> FONT_STRETCH_VALUES = Set.of(
+            "ultra-condensed", "extra-condensed", "condensed", "semi-condensed",
+            "normal", "semi-expanded", "expanded", "extra-expanded", "ultra-expanded",
+            "50%", "75%", "100%", "125%", "150%"
+    );
+
+    private static final Set<String> GENERIC_FONT_FAMILIES = Set.of(
+            "serif", "sans-serif", "monospace", "cursive", "fantasy", "system-ui"
+    );
 
     public String[] fontParser(final String font) {
-        final String[] tokens = font.replace(" / ", "/").split(" ");
-        if (tokens.length > 1) {
-            final String[] details = new String[7];
-            fontParser(tokens, details);
-            if (details[FONT_SIZE_INDEX] != null && details[FONT_FAMILY_INDEX] == null) {
-                details[FONT_FAMILY_INDEX] = font.indexOf('"') == -1 ? tokens[tokens.length - 1] : font.substring(font.indexOf('"'));
-                return details;
-            }
+        if (font == null || font.trim().isEmpty()) {
+            return null;
         }
-        return null;
+
+        final String[] details = new String[7];
+        String remaining = parseFontProperties(font, details);
+
+        // The remaining part should be the font family
+        if (remaining != null && !remaining.isEmpty()) {
+            details[FONT_FAMILY_INDEX] = remaining.contains("\"") ? remaining : formatFontFamily(remaining.trim());
+        }
+
+        // At minimum, we need font-size and font-family
+        if (details[FONT_SIZE_INDEX] == null || details[FONT_FAMILY_INDEX] == null) {
+            return null;
+        }
+
+        return details;
     }
 
-    private void fontParser(final  String[] tokens, String[] details) {
-        for (String token : tokens) {
-            if (FontValues.isFontStyle(token)) {
+    private String parseFontProperties(String font, String[] details) {
+        String[] tokens = font.replace(" / ", "/").split("\\s+");
+        int i = 0;
+
+        // Parse style, variant, weight, stretch
+        while (i < tokens.length) {
+            String token = tokens[i];
+            boolean matched = false;
+
+            if (details[FONT_STYLE_INDEX] == null && FontValues.isFontStyle(token)) {
                 details[FONT_STYLE_INDEX] = token;
-            }
-
-            if (FontValues.isFontVariant(token)) {
+                matched = true;
+            } else if (details[FONT_VARIANT_INDEX] == null && FontValues.isFontVariant(token)) {
                 details[FONT_VARIANT_INDEX] = token;
-            }
-
-            if (FontValues.isFontWeight(token)) {
+                matched = true;
+            } else if (details[FONT_WEIGHT_INDEX] == null && FontValues.isFontWeight(token)) {
                 details[FONT_WEIGHT_INDEX] = token;
-            }
-
-            if (FontValues.isFontStretch(token)) {
+                matched = true;
+            } else if (details[FONT_STRETCH_INDEX] == null && FontValues.isFontStretch(token)) {
                 details[FONT_STRETCH_INDEX] = token;
+                matched = true;
+            } else {
+                // Try to parse as font-size/line-height
+                String[] fontSize = fontSizeParser(token);
+                if (fontSize != null) {
+                    details[FONT_SIZE_INDEX] = fontSize[0];
+                    details[LINE_HEIGHT_INDEX] = fontSize[1];
+                    matched = true;
+                    i++;
+                    break; // After size, the rest is family
+                }
             }
 
-            final String[] fontSize = fontSizeParser(token);
-            if (fontSize != null) {
-                details[FONT_SIZE_INDEX] = fontSize[0];
-                details[LINE_HEIGHT_INDEX] = fontSize[1];
+            if (!matched) {
+                break; // No more properties to parse
             }
+            i++;
         }
-    }
 
+        // Collect remaining tokens as font family
+        if (i < tokens.length) {
+            StringBuilder family = new StringBuilder();
+            for (; i < tokens.length; i++) {
+                if (family.length() > 0) family.append(" ");
+                family.append(tokens[i]);
+            }
+            return family.toString();
+        }
+
+        return "";
+    }
 
     private String[] fontSizeParser(final String fontSize) {
         final int slash = fontSize.indexOf('/');
@@ -102,5 +149,24 @@ public class FontParser {
 
     private boolean isValidLineHeight(final String lineHeight) {
         return HtmlValues.isUnits(lineHeight) || CSSValues.NORMAL.isEqual(lineHeight) || lineHeight.endsWith("%");
+    }
+
+    private String formatFontFamily(String fontFamily) {
+        String cleaned = fontFamily.replace("\"", "").trim();
+
+        if (GENERIC_FONT_FAMILIES.contains(cleaned.toLowerCase())) {
+            return cleaned.toLowerCase();
+        }
+
+        String capitalized = capitalizeFontName(cleaned);
+        return cleaned.contains(" ") ? "\"" + capitalized + "\"" : capitalized;
+    }
+
+    private String capitalizeFontName(String name) {
+        return Arrays.stream(name.split("\\s+"))
+                .map(word -> word.isEmpty() ? word :
+                        Character.toUpperCase(word.charAt(0)) +
+                                (word.length() > 1 ? word.substring(1).toLowerCase() : ""))
+                .collect(Collectors.joining(" "));
     }
 }

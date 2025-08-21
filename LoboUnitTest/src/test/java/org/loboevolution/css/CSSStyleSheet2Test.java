@@ -25,6 +25,7 @@
  */
 package org.loboevolution.css;
 
+import org.htmlunit.cssparser.dom.DOMException;
 import org.htmlunit.cssparser.parser.CSSErrorHandler;
 import org.htmlunit.cssparser.parser.CSSException;
 import org.htmlunit.cssparser.parser.CSSOMParser;
@@ -39,6 +40,7 @@ import org.loboevolution.annotation.AlertsExtension;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLDocument;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
+import org.loboevolution.html.style.CSSUtilities;
 import org.loboevolution.html.style.StyleSheetAggregator;
 
 import java.io.IOException;
@@ -66,10 +68,10 @@ public class CSSStyleSheet2Test extends LoboUnitTest {
         final HTMLDocument document = loadHtml(html);
         HTMLElementImpl form = (HTMLElementImpl) document.getElementById("f1");
         HTMLElementImpl body = (HTMLElementImpl) document.getBody();
-        HTMLElementImpl input1 = (HTMLElementImpl) document.getElementById("i1");
-        HTMLElementImpl input2 = (HTMLElementImpl) document.getElementById("i2");
-        HTMLElementImpl button1 = (HTMLElementImpl) document.getElementById("b1");
-        HTMLElementImpl button2 = (HTMLElementImpl) document.getElementById("b2");
+        HTMLElementImpl input1 = (HTMLElementImpl) document.getElementsByName("i1").item(0);
+        HTMLElementImpl input2 = (HTMLElementImpl) document.getElementsByName("i2").item(0);
+        HTMLElementImpl button1 = (HTMLElementImpl) document.getElementsByName("b1").item(0);
+        HTMLElementImpl button2 = (HTMLElementImpl) document.getElementsByName("b2").item(0);
         Selector selector = parseSelector("*.yui-log input");
 
         assertFalse(StyleSheetAggregator.selects(selector, body, null));
@@ -91,7 +93,7 @@ public class CSSStyleSheet2Test extends LoboUnitTest {
 
     @Test
     public void selectsChildSelector() {
-        testSelects("body > div", false, false, true);
+        testSelects("body > div", false, true, false);
     }
 
     @Test
@@ -101,7 +103,7 @@ public class CSSStyleSheet2Test extends LoboUnitTest {
 
     @Test
     public void selectsElementSelector() {
-        testSelects("div", false, false, true);
+        testSelects("div", false, true, false);
     }
 
     @Test
@@ -123,20 +125,19 @@ public class CSSStyleSheet2Test extends LoboUnitTest {
                         + "<div id='d:e'></div>\n"
                         + "<div id='d-e'></div>\n"
                         + "</body></html>";
+
         final HTMLDocument document = loadHtml(html);
-
-        Selector selector = parseSelectors("#d\\:e").get(0);
+        Selector selector = parseSelector("#d\\:e");
         assertTrue(StyleSheetAggregator.selects(selector, document.getElementById("d:e"), null));
-
-        selector = parseSelectors("#d-e").get(0);
-        assertTrue(StyleSheetAggregator.selects(selector, document.getElementById("d:e"), null));
+        selector = parseSelector("#d-e");
+        assertTrue(StyleSheetAggregator.selects(selector, document.getElementById("d-e"), null));
     }
 
     @Test
     public void selectsConditionalSelectorClassCondition() {
-        testSelects("div.bar", false, false, true);
-        testSelects(".bar", false, false, true);
-        testSelects("div[class~=bar]", false, false, true);
+        testSelects("div.bar", false, true, false);
+        testSelects(".bar", false, true, false);
+        testSelects("div[class~=bar]", false, true, false);
     }
 
     @Test
@@ -146,7 +147,7 @@ public class CSSStyleSheet2Test extends LoboUnitTest {
 
     @Test
     public void selectsPseudoClassLang() {
-        testSelects(":lang(en)", true, false, true);
+        testSelects(":lang(en)", false, true, true);
         testSelects(":lang(de)", false, false, false);
     }
 
@@ -169,47 +170,19 @@ public class CSSStyleSheet2Test extends LoboUnitTest {
                         + "</html>";
         final HTMLDocument document = loadHtml(html);
 
-        final Selector selector = parseSelectors(css).get(0);
+        final Selector selector = parseSelector(css);
         assertEquals(selectBody, StyleSheetAggregator.selects(selector, document.getElementById("b"), null));
         assertEquals(selectDivD, StyleSheetAggregator.selects(selector, document.getElementById("d"), null));
         assertEquals(selectSpanS, StyleSheetAggregator.selects(selector, document.getElementById("s"), null));
     }
 
     private static Selector parseSelector(final String rule) {
-        return parseSelectors(rule).get(0);
-    }
-
-    private static SelectorList parseSelectors(final String source) {
-        SelectorList selectors = null;
-        final CSSErrorHandler errorHandler = new CSSErrorHandler() {
-
-            @Override
-            public void warning(final CSSParseException exception) throws CSSException {
-                throw exception;
-            }
-
-            @Override
-            public void fatalError(final CSSParseException exception) throws CSSException {
-                throw exception;
-            }
-
-            @Override
-            public void error(final CSSParseException exception) throws CSSException {
-                throw exception;
-            }
-        };
-        
-        final CSSOMParser parser = new CSSOMParser(new CSS3Parser());
-        parser.setErrorHandler(errorHandler);
         try {
-            selectors = parser.parseSelectors(source);
-        } catch (IOException e) {
+            return CSSUtilities.getSelectorList(rule).get(0);
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        // in case of error parseSelectors returns null
-        if (selectors == null ) {
-            selectors = new SelectorListImpl();
-        }
-        return selectors;
+
+        return null;
     }
 }

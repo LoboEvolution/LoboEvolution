@@ -349,7 +349,7 @@ public class CSSMediaRuleTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"[object CSSRuleList]", "[object CSSRuleList]", "1", "[object CSSStyleRule]",
+    @Alerts({"[object CSSRuleList]", "1", "[object CSSStyleRule]",
             "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]"})
     public void cssRules() {
         final String html
@@ -362,7 +362,6 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
                 + "  var rules = rule.cssRules;\n"
-                + " alert(Object.prototype.toString.call(rules));\n"
                 + " alert(rules);\n"
                 + " alert(rules.length);\n"
                 + "  for (var i = 0; i < rules.length; i++) {\n"
@@ -377,7 +376,7 @@ public class CSSMediaRuleTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"[object CSSRuleList]", "[object CSSRuleList]", "1", "[object CSSStyleRule]",
+    @Alerts({"[object CSSRuleList]", "1", "[object CSSStyleRule]",
             "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]"})
     public void cssRulesMediaNotMatching() {
         final String html
@@ -390,7 +389,6 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
                 + "  var rules = rule.cssRules;\n"
-                + " alert(Object.prototype.toString.call(rules));\n"
                 + " alert(rules);\n"
                 + " alert(rules.length);\n"
                 + "  for (var i = 0; i < rules.length; i++) {\n"

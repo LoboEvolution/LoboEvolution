@@ -813,6 +813,7 @@ public class CSSStyleDeclaration3Test extends LoboUnitTest {
         fontComputed("14pX sAns-serif; font-stretch: expanded", "");
     }
 
+
     private void fontComputed(final String fontStyle) {
         final String html =
                 "<html>\n"
@@ -845,7 +846,6 @@ public class CSSStyleDeclaration3Test extends LoboUnitTest {
                         + "<body>\n"
                         + "  <div id='tester'>hello</div>\n"
                         + "  <script>\n"
-
                         + "    var myDiv = document.getElementById('tester');\n"
                         + "    var myStyle = window.getComputedStyle(myDiv, null);\n"
                         + "   alert(myStyle.fontStyle);\n"

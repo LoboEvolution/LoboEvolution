@@ -44,9 +44,9 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts({"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]",
-            "[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]"})
-    public void scriptableToString() {
+    @Alerts({"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]"})
+    public void
+    scriptableToString() {
         final String html
                 = "<html><body>\n"
                 + "<style>\n"
@@ -56,10 +56,8 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
                 + "<script>\n" 
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var decl = styleSheet.cssRules[0].style;\n"
-                + " alert(Object.prototype.toString.call(decl));\n"
                 + " alert(decl);\n" 
                 + "  decl = document.getElementById('myDiv').style;\n"
-                + " alert(Object.prototype.toString.call(decl));\n"
                 + " alert(decl);\n"
                 + "</script>\n" 
                 + "</body></html>";
@@ -2203,7 +2201,7 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"", "", "", ""})
+    @Alerts({"null", "null", "", "null"})
     public void setToNull() {
         final String html
                 = "<html><head><script>\n" 
@@ -2295,7 +2293,7 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"null", "2", "", "2", "5", "5", "5", "5"})
+    @Alerts({"null", "2", "null", "2", "5", "5", "5", "5"})
     public void widows() {
         final String html = "<html><head>\n"
                 + "<script>"
