@@ -38,7 +38,7 @@ jobs:
     - name: checkout
       uses: actions/checkout@v4
     - name: set up JDK 21
-      uses: actions/setup-java@v4
+      uses: actions/setup-java@v5
       env:
        ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
       with:
