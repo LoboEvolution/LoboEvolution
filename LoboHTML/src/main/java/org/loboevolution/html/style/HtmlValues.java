@@ -524,6 +524,7 @@ public class HtmlValues {
 				token.endsWith("q") ||
 				token.endsWith("vh") ||
 				token.endsWith("vw") ||
+                token.endsWith("deg") ||
 				token.endsWith("rem");
 	}
 

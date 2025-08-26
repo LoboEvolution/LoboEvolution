@@ -31,8 +31,7 @@ import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.style.FontValues;
 import org.loboevolution.html.style.HtmlValues;
 
-import java.util.Arrays;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -48,15 +47,29 @@ public class FontParser {
     public final static int LINE_HEIGHT_INDEX = 5;   // line-height (optional)
     public final static int FONT_FAMILY_INDEX = 6;   // font-family (required, LAST)
 
-      private static final Set<String> FONT_STRETCH_VALUES = Set.of(
-            "ultra-condensed", "extra-condensed", "condensed", "semi-condensed",
-            "normal", "semi-expanded", "expanded", "extra-expanded", "ultra-expanded",
-            "50%", "75%", "100%", "125%", "150%"
-    );
+    public static final Map<String, String> FONT_STRETCH_VALUES;
+
+    static {
+        Map<String, String> map = new LinkedHashMap<>();
+        map.put("ultra-condensed", "50%");
+        map.put("extra-condensed", "62.5%");
+        map.put("condensed", "75%");
+        map.put("semi-condensed", "87.5%");
+        map.put("normal", "100%");
+        map.put("semi-expanded", "112.5%");
+        map.put("expanded", "125%");
+        map.put("extra-expanded", "150%");
+        map.put("ultra-expanded", "200%");
+        FONT_STRETCH_VALUES = Collections.unmodifiableMap(map);
+    }
 
     private static final Set<String> GENERIC_FONT_FAMILIES = Set.of(
             "serif", "sans-serif", "monospace", "cursive", "fantasy", "system-ui"
     );
+
+    public static String getPercentage(String stretchValue) {
+        return FONT_STRETCH_VALUES.getOrDefault(stretchValue, "100%");
+    }
 
     public String[] fontParser(final String font) {
         if (font == null || font.trim().isEmpty()) {
