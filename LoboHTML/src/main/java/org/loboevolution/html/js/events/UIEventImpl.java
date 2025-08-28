@@ -56,8 +56,13 @@ public class UIEventImpl extends EventImpl implements UIEvent {
 	 * <p>Constructor for UIEventImpl.</p>
 	 */
 	public UIEventImpl(final Object[] params) throws DOMException {
-		setParams(params);
-		if (params.length < 3) {
+        try {
+            setParams(params);
+        } catch (DOMException e) {
+            throw new RuntimeException("Failed to initialize Event", e);
+        }
+
+        if (params.length < 3) {
 			if (params.length > 1 && params[1] != null) {
 				NativeObject obj = (NativeObject) params[1];
 				if(obj.get("view") == null)

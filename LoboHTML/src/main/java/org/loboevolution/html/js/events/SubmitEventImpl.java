@@ -27,6 +27,7 @@
 package org.loboevolution.html.js.events;
 
 import lombok.NoArgsConstructor;
+import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.events.SubmitEvent;
 import org.loboevolution.html.dom.HTMLElement;
 
@@ -42,7 +43,11 @@ public class SubmitEventImpl extends EventImpl implements SubmitEvent {
      * @param params event constructor parameters
      */
     public SubmitEventImpl(Object[] params) {
-        setParams(params);
+        try {
+            setParams(params);
+        } catch (DOMException e) {
+            throw new RuntimeException("Failed to initialize Event", e);
+        }
     }
 
     @Override

@@ -115,7 +115,11 @@ public class PDFImage {
      */
     protected PDFImage(final PDFObject imageObj) throws IOException {
         this.imageObj = imageObj;
-        this.jpegDecode = PDFDecoder.isLastFilter(imageObj, PDFDecoder.DCT_FILTERS);
+        try {
+            this.jpegDecode = PDFDecoder.isLastFilter(imageObj, PDFDecoder.DCT_FILTERS);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to initialize PDFImage", e);
+        }
     }
 
     /**

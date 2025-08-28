@@ -378,7 +378,6 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 
 		public void layoutMacStyle(final Container c) {
 			final int spacing = getHorSpacing();
-			getWidth();
 			final int h = getHeight();
 
 			// assumes all buttons have the same dimensions these dimensions include the

@@ -29,6 +29,7 @@ package org.loboevolution.html.js.events;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.common.Strings;
 import org.loboevolution.events.InputEvent;
 import org.mozilla.javascript.NativeArray;
@@ -47,7 +48,12 @@ public class InputEventImpl extends UIEventImpl implements InputEvent {
     private Boolean isComposing = false;
 
     public InputEventImpl(final Object[] params) throws RuntimeException {
-        setParams(params);
+        try {
+            setParams(params);
+        } catch (DOMException e) {
+            throw new RuntimeException("Failed to initialize Event", e);
+        }
+
         if (params.length > 1) {
             if (params[1] != null) {
                 NativeObject obj = (NativeObject) params[1];

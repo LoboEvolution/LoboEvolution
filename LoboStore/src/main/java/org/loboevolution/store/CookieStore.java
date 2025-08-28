@@ -26,10 +26,7 @@
 
 package org.loboevolution.store;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -200,7 +197,7 @@ public class CookieStore {
 						cookies.add(cookie);
 					}
 				}
-			} catch (final Exception e) {
+			} catch (final SQLException e) {
 				log.error(e.getMessage(), e);
 				return null;
 			}

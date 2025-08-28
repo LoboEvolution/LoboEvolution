@@ -27,6 +27,7 @@
 package org.loboevolution.html.js.events;
 
 import lombok.NoArgsConstructor;
+import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.events.PopStateEvent;
 
 @NoArgsConstructor
@@ -38,7 +39,11 @@ public class PopStateEventImpl extends EventImpl implements PopStateEvent {
      * @param params event constructor parameters
      */
     public PopStateEventImpl(Object[] params) {
-        setParams(params);
+        try {
+            setParams(params);
+        } catch (DOMException e) {
+            throw new RuntimeException("Failed to initialize Event", e);
+        }
     }
 
     @Override

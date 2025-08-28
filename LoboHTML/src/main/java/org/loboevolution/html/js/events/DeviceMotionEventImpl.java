@@ -27,6 +27,7 @@
 package org.loboevolution.html.js.events;
 
 import lombok.NoArgsConstructor;
+import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.events.DeviceAcceleration;
 import org.loboevolution.events.DeviceMotionEvent;
 import org.loboevolution.events.DeviceRotationRate;
@@ -40,7 +41,11 @@ public class DeviceMotionEventImpl extends EventImpl implements DeviceMotionEven
      * @param params event constructor parameters
      */
     public DeviceMotionEventImpl(Object[] params) {
-        setParams(params);
+        try {
+            setParams(params);
+        } catch (DOMException e) {
+            throw new RuntimeException("Failed to initialize Event", e);
+        }
     }
 
     @Override

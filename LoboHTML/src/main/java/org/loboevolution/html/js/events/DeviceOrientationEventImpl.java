@@ -2,6 +2,7 @@ package org.loboevolution.html.js.events;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.events.DeviceOrientationEvent;
 
 @NoArgsConstructor
@@ -19,7 +20,11 @@ public class DeviceOrientationEventImpl extends EventImpl implements DeviceOrien
      * @param params event constructor parameters
      */
     public DeviceOrientationEventImpl(Object[] params) {
-        setParams(params);
+        try {
+            setParams(params);
+        } catch (DOMException e) {
+            throw new RuntimeException("Failed to initialize Event", e);
+        }
     }
 
     @Override

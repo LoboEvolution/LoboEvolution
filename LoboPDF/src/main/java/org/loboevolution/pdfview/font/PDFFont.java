@@ -306,7 +306,7 @@ public abstract class PDFFont {
             return new String[0];
         }
 
-        osName = osName != null ? osName.toLowerCase() : "";
+        osName = osName.toLowerCase();
         if (osName.startsWith("windows")) {
             // start with some reasonable default
             String path = "C:/WINDOWS/Fonts";
@@ -319,7 +319,7 @@ public abstract class PDFFont {
                 // drop through and accept default path
             }
             return new String[]{path};
-        } else if (osName != null && osName.startsWith("mac")) {
+        } else if (osName.startsWith("mac")) {
             final List<String> paths = new ArrayList<>(Arrays.asList(
                     "/Library/Fonts",
                     "/Network/Library/Fonts",

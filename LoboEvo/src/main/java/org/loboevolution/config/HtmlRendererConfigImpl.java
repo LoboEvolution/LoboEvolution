@@ -38,10 +38,7 @@ import org.loboevolution.store.*;
 import java.awt.*;
 import java.net.URI;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.List;
 import java.util.Map;
 
@@ -118,7 +115,7 @@ public class HtmlRendererConfigImpl implements HtmlRendererConfig {
                 setBlackWhite(rs.getInt(24) == 1);
                 setWhiteBlack(rs.getInt(25) == 1);
             }
-        } catch (final Exception e) {
+        } catch (final SQLException e) {
             log.info(e.getMessage());
         }
     }

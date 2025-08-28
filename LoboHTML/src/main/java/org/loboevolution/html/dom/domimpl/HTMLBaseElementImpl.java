@@ -52,7 +52,7 @@ public class HTMLBaseElementImpl extends HTMLElementImpl {
 	/** {@inheritDoc} */
 	@Override
 	public Object setUserData(final String key, final Object data, final UserDataHandler handler) {
-		if (XHtmlParser.MODIFYING_KEY.equals(key) && data != Boolean.TRUE) {
+		if (XHtmlParser.MODIFYING_KEY.equals(key) && !Boolean.TRUE.equals(data)) {
 			processBaseTag();
 		}
 		return super.setUserData(key, data, handler);

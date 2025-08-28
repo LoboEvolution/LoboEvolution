@@ -28,12 +28,10 @@ package org.loboevolution.common;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.File;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.Charset;
-import java.nio.file.Path;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -46,9 +44,6 @@ import java.util.StringTokenizer;
  */
 @Slf4j
 public class Urls {
-	
-	/** The Constant PATTERN_RFC1123. */
-	public static final DateFormat PATTERN_RFC1123 = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz", Locale.US);
 
 	/**
 	 * <p>createURI.</p>
@@ -201,10 +196,9 @@ public class Urls {
 		final String expires = connection.getHeaderField("Expires");
 		if (expires != null) {
 			try {
-				synchronized (PATTERN_RFC1123) {
-					final Date expDate = PATTERN_RFC1123.parse(expires);
-					return expDate.getTime();
-				}
+                DateFormat PATTERN_RFC1123 = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz", Locale.US);
+                final Date expDate = PATTERN_RFC1123.parse(expires);
+                return expDate.getTime();
 			} catch (final ParseException pe) {
 				try {
 					return baseTime + Integer.parseInt(expires);
