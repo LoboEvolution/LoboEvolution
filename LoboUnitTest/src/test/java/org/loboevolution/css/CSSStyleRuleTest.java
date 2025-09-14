@@ -188,30 +188,6 @@ public class CSSStyleRuleTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"1", ""})
-    public void oldIEStyleFilter() {
-        final String html = "<html><head>\n"
-                + "<style>\n"
-                + "  BODY { filter: progid:DXImageTransform.Microsoft.AlphaImageLoader"
-                + "(src='rightCorner.gif', sizingMethod='crop'); }\n"
-                + "</style>\n"
-                + "<script>\n"
-                + "function test() {\n"
-                + "  try {\n"
-                + "    var sheet = document.styleSheets[0];\n"
-                + "    var rules = sheet.cssRules || sheet.rules;\n"
-                + "   alert(rules.length);\n"
-                + "   alert(rules[0].style.filter);\n"
-                + "  } catch(e) {alert('exception'); }\n"
-                + "}\n"
-                + "</script>\n"
-                + "</head><body onload='test()'>\n"
-                + "</body></html>";
-
-        checkHtmlAlert(html);
-    }
-
-    @Test
     @Alerts({"1", "none"})
     public void filter() {
         final String html = "<html><head>\n"

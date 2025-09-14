@@ -732,13 +732,15 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     /** {@inheritDoc} */
     @Override
     public String getFontSizeAdjust() {
-        return this.getPropertyValue(FONT_SIZE_ADJUST);
+        return this.getPropertyValue(FONT_SIZE_ADJUST) != null ? this.getPropertyValue(FONT_SIZE_ADJUST) : CSSValues.NONE.getValue();
     }
 
     /** {@inheritDoc} */
     @Override
     public String getFontStretch() {
-        return this.getPropertyValue(FONT_STRETCH);
+        String fontStretch = this.getPropertyValue(FONT_STRETCH);
+        return fontStretch == null && getFontSizeAdjust() != null ? CSSValues.NORMAL.getValue() :
+               fontStretch == null && getFontSizeAdjust() == null ? CSSValues.EXPANDED.getValue() : fontStretch;
     }
 
     /** {@inheritDoc} */
@@ -1573,7 +1575,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     /** {@inheritDoc} */
     @Override
     public void setFontSizeAdjust(final String fontSizeAdjust) {
-       this.setProperty(FONT_SIZE_ADJUST, fontSizeAdjust);
+        new FontSetter().changeValue(this, fontSizeAdjust);
         this.element.informInvalid();
     }
 

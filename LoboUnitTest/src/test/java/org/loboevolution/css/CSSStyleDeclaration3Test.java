@@ -464,13 +464,13 @@ public class CSSStyleDeclaration3Test extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"normal", "normal", "normal", "14px", "normal", "sans-serif", "expanded", "normal"})
+    @Alerts({"normal", "normal", "normal", "14px", "normal", "sans-serif", "none", "expanded"})
     public void fontStretchBefore() {
         font("14pX sAns-serif", "font-stretch: expanded");
     }
 
     @Test
-    @Alerts({"normal", "normal", "normal", "14px", "normal", "sans-serif", "expanded", "expanded"})
+    @Alerts({"normal", "normal", "normal", "14px", "normal", "sans-serif", "none", "expanded"})
     public void fontStretchAfter() {
         font("14pX sAns-serif; font-stretch: expanded", "");
     }
@@ -630,13 +630,13 @@ public class CSSStyleDeclaration3Test extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"normal", "normal", "normal", "14px", "normal", "sans-serif", "expanded", "normal"})
+    @Alerts({"normal", "normal", "normal", "14px", "normal", "sans-serif", "none", "expanded"})
     public void fontCssStretchBefore() {
         fontCss("14pX sAns-serif", "font-stretch: expanded");
     }
 
     @Test
-    @Alerts({"normal", "normal", "normal", "14px", "normal", "sans-serif", "expanded", "expanded"})
+    @Alerts({"normal", "normal", "normal", "14px", "normal", "sans-serif", "none", "expanded"})
     public void fontCssStretchAfter() {
         fontCss("14pX sAns-serif; font-stretch: expanded", "");
     }
@@ -802,16 +802,17 @@ public class CSSStyleDeclaration3Test extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"normal", "normal", "400", "14px", "normal", "sans-serif", "expanded", "100%"})
+    @Alerts({"normal", "normal", "400", "14px", "normal", "sans-serif", "none", "125%"})
     public void fontComputedStretchBefore() {
         fontComputed("14pX sAns-serif", "font-stretch: expanded");
     }
 
     @Test
-    @Alerts({"normal", "normal", "400", "14px", "normal", "sans-serif", "expanded", "125%"})
+    @Alerts({"normal", "normal", "400", "14px", "normal", "sans-serif", "none", "125%"})
     public void fontComputedStretchAfter() {
         fontComputed("14pX sAns-serif; font-stretch: expanded", "");
     }
+
 
     private void fontComputed(final String fontStyle) {
         final String html =
@@ -840,12 +841,11 @@ public class CSSStyleDeclaration3Test extends LoboUnitTest {
         final String html =
                 "<html>\n"
                         + "</head>\n"
-                        + "  <style type='text/css'>div { " + otherStyle + "; font: " + fontStyle + " }</style>\n"
+                        + "  <style type='text/css'>div { font: " + fontStyle + ";  " + otherStyle + " }</style>\n"
                         + "</head>\n"
                         + "<body>\n"
                         + "  <div id='tester'>hello</div>\n"
                         + "  <script>\n"
-
                         + "    var myDiv = document.getElementById('tester');\n"
                         + "    var myStyle = window.getComputedStyle(myDiv, null);\n"
                         + "   alert(myStyle.fontStyle);\n"

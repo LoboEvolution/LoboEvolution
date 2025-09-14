@@ -35,6 +35,7 @@ import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.gui.HtmlPanel;
 import org.loboevolution.css.CSSStyleDeclaration;
 import org.loboevolution.css.ComputedCSSStyleDeclaration;
+import org.loboevolution.html.parser.FontParser;
 import org.loboevolution.js.Window;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.laf.ColorFactory;
@@ -594,7 +595,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
     public String getFontSize() {
         final HTMLElementImpl parent = (HTMLElementImpl) element.getParentElement();
         final CSSStyleDeclaration style = element.getStyle();
-        final float fontSize;
+        float fontSize;
         String styleFz;
 
         if (Strings.isCssBlank(style.getFontSize()) && parent != null && parent.getStyle().getLength() > 0) {
@@ -605,6 +606,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
         }
 
         fontSize = FontValues.getFontSize(styleFz, window, null);
+        fontSize = fontSize < 6 ? 6 : fontSize;
         return this.element.getParentNode() == null ? null : new DecimalFormat("#.##",  new DecimalFormatSymbols(Locale.US)).format(fontSize) + "px";
     }
 
@@ -613,7 +615,11 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      */
     @Override
     public String getFontSizeAdjust() {
-        return this.element.getParentNode() == null ? null : style.getFontSizeAdjust();
+        if(this.element.getParentNode() == null){
+            return "none";
+        }
+
+        return  style.getFontSizeAdjust() == null ? "none" :  style.getFontSizeAdjust();
     }
 
     /**
@@ -621,7 +627,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      */
     @Override
     public String getFontStretch() {
-        return this.element.getParentNode() == null ? null : style.getFontStretch();
+        return this.element.getParentNode() == null ? "none" : FontParser.getPercentage(style.getFontStretch());
     }
 
     /**

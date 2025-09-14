@@ -75,7 +75,7 @@ public class CSSStyleRuleImpl extends AbstractCSSStyleRule implements CSSPropert
 
     @Override
     public CSSMediaRule getParentRule() {
-        return new CSSMediaRuleImpl(abstractCSSRule.getParentRule());
+        return abstractCSSRule.getParentRule() != null ? new CSSMediaRuleImpl(abstractCSSRule.getParentRule()) : null;
     }
 
     /** {@inheritDoc} */

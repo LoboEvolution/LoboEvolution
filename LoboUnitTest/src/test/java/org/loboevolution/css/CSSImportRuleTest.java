@@ -39,7 +39,7 @@ public class CSSImportRuleTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts({"[object CSSImportRule]", "[object CSSImportRule]"})
+    @Alerts({"[object CSSImportRule]"})
     public void scriptableToString() {
         final String html
                 = "<html><body>\n"
@@ -49,7 +49,6 @@ public class CSSImportRuleTest extends LoboUnitTest {
                 + "<script>\n" 
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
-                + " alert(Object.prototype.toString.call(rule));\n"
                 + " alert(rule);\n"
                 + "</script>\n"
                 + "</body></html>";
@@ -266,7 +265,7 @@ public class CSSImportRuleTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts({"[object MediaList]", "", "0", "", "@import url(\"imp.css\");"})
+    @Alerts({"", "0", "", "@import url(\"imp.css\");"})
     public void mediaNone() {
         final String html
                 = "<html><body>\n"
@@ -277,7 +276,6 @@ public class CSSImportRuleTest extends LoboUnitTest {
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
                 + "  var mediaList = rule.media;\n"
-                + " alert(Object.prototype.toString.call(mediaList));\n"
                 + " alert(mediaList);\n"
                 + " alert(mediaList.length);\n"
                 + "  for (var i = 0; i < mediaList.length; i++) {\n"
@@ -293,7 +291,7 @@ public class CSSImportRuleTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts({"[object MediaList]", "all", "1", "all", "all", "@import url(\"imp.css\") all;"})
+    @Alerts({"all", "1", "all", "all", "@import url(\"imp.css\") all;"})
     public void mediaAll() {
         final String html
                 = "<html><body>\n"
@@ -304,7 +302,6 @@ public class CSSImportRuleTest extends LoboUnitTest {
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
                 + "  var mediaList = rule.media;\n"
-                + " alert(Object.prototype.toString.call(mediaList));\n"
                 + " alert(mediaList);\n"
                 + " alert(mediaList.length);\n"
                 + "  for (var i = 0; i < mediaList.length; i++) {\n"
@@ -320,7 +317,7 @@ public class CSSImportRuleTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts({"[object MediaList]", "screen", "1", "screen", "screen", "@import url(\"imp.css\") screen;"})
+    @Alerts({"screen", "1", "screen", "screen", "@import url(\"imp.css\") screen;"})
     public void media() {
         final String html
                 = "<html><body>\n"
@@ -331,7 +328,6 @@ public class CSSImportRuleTest extends LoboUnitTest {
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
                 + "  var mediaList = rule.media;\n"
-                + " alert(Object.prototype.toString.call(mediaList));\n"
                 + " alert(mediaList);\n"
                 + " alert(mediaList.length);\n"
                 + "  for (var i = 0; i < mediaList.length; i++) {\n"

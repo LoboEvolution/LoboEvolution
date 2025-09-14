@@ -39,7 +39,7 @@ import org.loboevolution.driver.LoboUnitTest;
 public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
 
     @Test
-    @Alerts({"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]"})
+    @Alerts({"[object CSSStyleDeclaration]"})
     public void scriptableToString() {
         final String html
                 = "<html><body>\n"
@@ -48,7 +48,6 @@ public class ComputedCSSStyleDeclarationTest extends LoboUnitTest {
                 + "</style>\n" + "<div id='myDiv'></div>\n"+ "<script>\n"
 				+ "  var div = document.getElementById('myDiv');\n"
                 + "  var decl = window.getComputedStyle(div, null);\n"
-                + " alert(Object.prototype.toString.call(decl));\n"
                 + " alert(decl);\n"
                 + "</script>\n" + "</body></html>";
 

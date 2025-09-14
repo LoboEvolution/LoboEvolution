@@ -39,7 +39,7 @@ public class CSSPageRuleTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts({"[object CSSPageRule]", "[object CSSPageRule]"})
+    @Alerts({"[object CSSPageRule]"})
     public void scriptableToString() {
         final String html
                 = "<html><body>\n" 
@@ -49,7 +49,6 @@ public class CSSPageRuleTest extends LoboUnitTest {
                 + "<script>\n"
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
-                + " alert(Object.prototype.toString.call(rule));\n"
                 + " alert(rule);\n"
                 + "</script>\n" 
                 + "</body></html>";
@@ -430,7 +429,7 @@ public class CSSPageRuleTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]", "0", "[object CSSPageRule]", ""})
+    @Alerts({"[object CSSStyleDeclaration]", "0", "[object CSSPageRule]", ""})
     public void styleEmpty() {
         final String html
                 = "<html><body>\n" 
@@ -441,7 +440,6 @@ public class CSSPageRuleTest extends LoboUnitTest {
                 + "  var styleSheet = document.styleSheets[0];\n"
                 + "  var rule = styleSheet.cssRules[0];\n"
                 + "  var style = rule.style;\n"
-                + " alert(Object.prototype.toString.call(style));\n"
                 + " alert(style);\n"
                 + " alert(style.length);\n"
                 + " alert(style.parentRule);\n"

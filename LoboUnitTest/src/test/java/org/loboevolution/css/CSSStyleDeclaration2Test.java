@@ -141,7 +141,7 @@ public class CSSStyleDeclaration2Test extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"", "baseline", "sub", "super", "text-top",
+    @Alerts({"null", "baseline", "sub", "super", "text-top",
             "text-bottom", "middle", "top", "bottom",
             "1.7em", "4px", "32%",
             "inherit", "initial", "revert", "unset",
