@@ -120,13 +120,15 @@ public class GradientStyle {
 		case "to bottom":
 		default:
 			if (direction.contains("deg")) {
-				Collections.reverse(Arrays.asList(colors));
-				final double rotation = Double.parseDouble(direction.substring(0, direction.lastIndexOf('d')));
-				final AffineTransform tf = AffineTransform.getTranslateInstance(-width / 2, -height / 2);
-		        tf.preConcatenate(AffineTransform.getRotateInstance(Math.toRadians(rotation)));
-		        tf.preConcatenate(AffineTransform.getTranslateInstance(width / 2, height / 2));
-		        g2.setTransform(tf);
-				linearGradientPaint = new LinearGradientPaint(0, 0, width, height, info.getFractions(), colors, cMethod);
+                final double rotation = Double.parseDouble(direction.substring(0, direction.lastIndexOf('d')));
+                double angleRad = Math.toRadians(rotation);
+                double cos = Math.cos(angleRad);
+                double sin = Math.sin(angleRad);
+                float x1 = (float)((double) width / 2 - cos * width / 2);
+                float y1 = (float)((double) height / 2 - sin * height / 2);
+                float x2 = (float)((double) width / 2 + cos * width / 2);
+                float y2 = (float)((double) height / 2 + sin * height / 2);
+                linearGradientPaint = new LinearGradientPaint(x1, y1, x2, y2, info.getFractions(), colors, cMethod);
 			} else {
 				linearGradientPaint = new LinearGradientPaint(0, 0, 0, height, info.getFractions(), colors, cMethod);
 			}
@@ -250,18 +252,42 @@ public class GradientStyle {
 				build();
 	}
 
-	private static void setFractions(final List<Float> listFractions, final char[] charArray, final int index, final String color) {
-		final boolean isPercent = color.contains("%");
-		final float numberOnly = isPercent ? Float.parseFloat(color.replaceAll("[^0-9]", "")) /100 : 0f;
-		
-		if (listFractions.isEmpty()) {
-			listFractions.add(isPercent ? numberOnly : 0F);
-		} else if (index == charArray.length - 1) {
-			listFractions.add(isPercent ? numberOnly : 1F);
-		} else {
-			listFractions.add(isPercent ? numberOnly : (float) (listFractions.size() * 0.3));
-		}
-	}
+    private static void setFractions(final List<Float> listFractions, final char[] charArray, final int index, final String color) {
+        final boolean isPercent = color.contains("%");
+
+        if (isPercent) {
+            final float numberOnly = Float.parseFloat(color.replaceAll("[^0-9.]", "")) / 100;
+            listFractions.add(numberOnly);
+        } else {
+            final int totalColors = countColorsInGradient(charArray);
+            if (listFractions.isEmpty()) {
+                listFractions.add(0.0f);
+            } else if (index == charArray.length - 1) {
+                listFractions.add(1.0f);
+            } else {
+                final float fraction = (float) listFractions.size() / (totalColors - 1);
+                listFractions.add(fraction);
+            }
+        }
+    }
+
+    private static int countColorsInGradient(char[] charArray) {
+        int colorCount = 0;
+        boolean inColor = false;
+
+        for (char c : charArray) {
+            if (c == '#' || Character.isLetter(c)) {
+                if (!inColor) {
+                    colorCount++;
+                    inColor = true;
+                }
+            } else if (c == ',' || c == ')') {
+                inColor = false;
+            }
+        }
+
+        return colorCount;
+    }
 
 	private int getHeight(final HTMLDocumentImpl document, final CSSStyleDeclaration props, final RenderState renderState) {
 		int heightSize = HtmlValues.getPixelSize(props.getHeight(), renderState, document.getDefaultView(), -1);
