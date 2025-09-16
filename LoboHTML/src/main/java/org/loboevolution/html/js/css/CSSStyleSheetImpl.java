@@ -70,6 +70,7 @@ public class CSSStyleSheetImpl extends StyleSheetImpl implements CSSStyleSheet {
             if (pos > -1) {
                 final String newRule = rule.substring(0, pos);
                 try {
+                    System.out.println("newRule " + newRule);
                     insertRule(newRule, index);
                     return index;
                 } catch (final Exception ex) {

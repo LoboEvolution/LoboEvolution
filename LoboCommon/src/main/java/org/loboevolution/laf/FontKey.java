@@ -85,9 +85,6 @@ public class FontKey {
 	/** The font. */
 	private String font;
 
-    /** The stretch. */
-    private String stretch;
-
 	/** {@inheritDoc} */
 	@Override
 	public boolean equals(final Object other) {
@@ -103,7 +100,7 @@ public class FontKey {
 				Objects.equals(this.fontStyle, ors.fontStyle) &&
 				Objects.equals(this.fontWeight, ors.fontWeight) &&
 				Objects.equals(this.fontVariant, ors.fontVariant) &&
-                Objects.equals(this.stretch, ors.stretch) &&
+				Objects.equals(this.superscript, ors.superscript) &&
 				Objects.equals(this.locales, ors.locales);
 	}
 

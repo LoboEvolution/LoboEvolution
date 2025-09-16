@@ -92,48 +92,24 @@ public final class FontFactory {
 	public Font scriptFont(final Font baseFont, final FontKey key) {
 
 		final Map<TextAttribute, Object> additionalAttributes = new HashMap<>();
-        final Map<TextAttribute,?> attributes = baseFont.getAttributes();
 
-		Integer fontSuperScript = (Integer) attributes.get(TextAttribute.SUPERSCRIPT);
+		Integer fontSuperScript = (Integer) baseFont.getAttributes().get(TextAttribute.SUPERSCRIPT);
 		if (fontSuperScript == null) {
 			fontSuperScript = key.getSuperscript();
 		}
 		additionalAttributes.put(TextAttribute.SUPERSCRIPT, fontSuperScript);
 
-		Integer fontUnderline = (Integer) attributes.get(TextAttribute.UNDERLINE);
+		Integer fontUnderline = (Integer) baseFont.getAttributes().get(TextAttribute.UNDERLINE);
 		if (fontUnderline == null) {
 			fontUnderline = key.getUnderline();
 		}
 		additionalAttributes.put(TextAttribute.UNDERLINE, fontUnderline);
 
-        Object fontStrikethrough = attributes.get(TextAttribute.STRIKETHROUGH_ON);
-        if (fontStrikethrough == null) {
-            fontStrikethrough = key.getStrikethrough();
-        }
+		Boolean fontStrikethrough = (Boolean) baseFont.getAttributes().get(TextAttribute.STRIKETHROUGH_ON);
+		if (fontStrikethrough == null) {
+			fontStrikethrough = key.getStrikethrough();
+		}
 		additionalAttributes.put(TextAttribute.STRIKETHROUGH, fontStrikethrough);
-
-        if (key.getStretch() != null) {
-            switch (key.getStretch()) {
-                case "expanded":
-                    additionalAttributes.put(TextAttribute.WIDTH, TextAttribute.WIDTH_SEMI_EXTENDED);
-                    break;
-                case "normal":
-                    additionalAttributes.put(TextAttribute.WIDTH, TextAttribute.WIDTH_REGULAR);
-                    break;
-                case "condensed":
-                    additionalAttributes.put(TextAttribute.WIDTH, TextAttribute.WIDTH_SEMI_CONDENSED);
-                    break;
-                case "ultra-condensed":
-                    additionalAttributes.put(TextAttribute.WIDTH, TextAttribute.WIDTH_CONDENSED);
-                    break;
-                default:
-                    if(key.getStretch().contains("%")) {
-                        float valoreFloat = Float.parseFloat(key.getStretch().replace("%", ""));
-                        additionalAttributes.put(TextAttribute.WIDTH, (valoreFloat * 0.01));
-                    }
-                    break;
-            }
-        }
 
 		return baseFont.deriveFont(additionalAttributes);
 	}

@@ -78,7 +78,6 @@ public class FontValues extends HtmlValues {
 		final String verticalAlign = style.getVerticalAlign();
 		final String letterSpacing = style.getLetterSpacing();
 		final String textDecoration = style.getTextDecoration();
-        final String stretch = style.getFontStretch();
 
 		if (key.getFontSize() > 0 ||
 				Strings.isNotBlank(fontSize) ||
@@ -87,8 +86,7 @@ public class FontValues extends HtmlValues {
 				Strings.isNotBlank(fontWeight) ||
 				Strings.isNotBlank(verticalAlign) ||
 				Strings.isNotBlank(letterSpacing) ||
-				Strings.isNotBlank(textDecoration) ||
-                Strings.isNotBlank(stretch)) {
+				Strings.isNotBlank(textDecoration)) {
 
 			if (Strings.isBlank(fontSize) && key.getFontSize() == 0) fontSize = null;
 
@@ -101,7 +99,7 @@ public class FontValues extends HtmlValues {
 			key.setStrikethrough(getFontStrikeThrough(textDecoration, prevRenderState, config.isStrikethrough()));
 			key.setUnderline(FontValues.getFontUnderline(textDecoration, prevRenderState, config.isStrikethrough()));
 			key.setFontWeight(FontValues.getFontWeight(fontWeight, prevRenderState, config.isBold()));
-            key.setStretch(stretch);
+
 
 			if(key.getFontSize() == 0 || Strings.isNotBlank(fontSize))
 				key.setFontSize(FontValues.getFontSize(fontSize, element.getDocumentNode().getDefaultView(), prevRenderState));
