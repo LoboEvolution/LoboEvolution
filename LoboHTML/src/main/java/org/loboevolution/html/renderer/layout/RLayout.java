@@ -39,7 +39,7 @@ import java.util.Map;
 public class RLayout {
 
 	/** Constant elementLayout */
-	public static final Map<HTMLTag, MarkupLayout> elementLayout = Collections.unmodifiableMap();
+	public static final Map<HTMLTag, MarkupLayout> elementLayout = new HashMap<>();
 
 
     static {

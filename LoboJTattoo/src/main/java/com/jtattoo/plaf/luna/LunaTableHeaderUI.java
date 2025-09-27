@@ -28,7 +28,7 @@ package com.jtattoo.plaf.luna;
 import javax.swing.JComponent;
 import javax.swing.plaf.ComponentUI;
 
-import com.jtattoo.plaf.BaseTableHeaderUI;
+import com.jtattoo.plaf.base.BaseTableHeaderUI;
 
 /**
  * <p>LunaTableHeaderUI class.</p>

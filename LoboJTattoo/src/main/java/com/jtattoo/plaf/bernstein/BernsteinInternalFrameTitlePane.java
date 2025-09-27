@@ -33,7 +33,7 @@ import java.awt.Graphics2D;
 import javax.swing.JInternalFrame;
 
 import com.jtattoo.plaf.AbstractLookAndFeel;
-import com.jtattoo.plaf.BaseInternalFrameTitlePane;
+import com.jtattoo.plaf.base.BaseInternalFrameTitlePane;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**

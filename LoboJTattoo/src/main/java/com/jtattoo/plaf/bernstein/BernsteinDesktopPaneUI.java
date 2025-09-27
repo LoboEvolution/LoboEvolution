@@ -30,7 +30,7 @@ import java.awt.Graphics;
 import javax.swing.JComponent;
 import javax.swing.plaf.ComponentUI;
 
-import com.jtattoo.plaf.BaseDesktopPaneUI;
+import com.jtattoo.plaf.base.BaseDesktopPaneUI;
 
 /**
  * <p>BernsteinDesktopPaneUI class.</p>

@@ -32,7 +32,7 @@ import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.ComponentUI;
 
 import com.jtattoo.plaf.AbstractLookAndFeel;
-import com.jtattoo.plaf.BaseTabbedPaneUI;
+import com.jtattoo.plaf.base.BaseTabbedPaneUI;
 import com.jtattoo.plaf.ColorHelper;
 
 /**

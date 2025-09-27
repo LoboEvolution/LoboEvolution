@@ -37,6 +37,7 @@ import javax.swing.plaf.InsetsUIResource;
 
 import com.jtattoo.plaf.*;
 import com.jtattoo.plaf.BorderFactory;
+import com.jtattoo.plaf.base.*;
 
 /**
  * <p>McWinLookAndFeel class.</p>

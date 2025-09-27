@@ -33,6 +33,7 @@ import java.awt.RenderingHints;
 import java.awt.Shape;
 import java.awt.geom.Area;
 import java.awt.geom.Ellipse2D;
+import java.io.Serial;
 import java.io.Serializable;
 
 import javax.swing.AbstractButton;
@@ -41,10 +42,14 @@ import javax.swing.Icon;
 import javax.swing.plaf.UIResource;
 
 import com.jtattoo.plaf.AbstractLookAndFeel;
-import com.jtattoo.plaf.BaseIcons;
+import com.jtattoo.plaf.base.BaseIcons;
 import com.jtattoo.plaf.ColorHelper;
 import com.jtattoo.plaf.JTattooUtilities;
 import com.jtattoo.plaf.LazyImageIcon;
+import com.jtattoo.plaf.base.icon.MacCloseIcon;
+import com.jtattoo.plaf.base.icon.MacIconIcon;
+import com.jtattoo.plaf.base.icon.MacMaxIcon;
+import com.jtattoo.plaf.base.icon.MacMinIcon;
 
 /**
  * <p>McWinIcons class.</p>
@@ -57,10 +62,8 @@ public class McWinIcons extends BaseIcons {
 	// --------------------------------------------------------------------------------------------------------
 	private static class CheckBoxIcon implements Icon, UIResource, Serializable {
 
-		/**
-		 *
-		 */
-		private static final long serialVersionUID = 1L;
+		@Serial
+        private static final long serialVersionUID = 1L;
 		private static final int GAP = 4;
 		private static final Icon SMALL_CHECK_ICON = new LazyImageIcon("mcwin/icons/small/check_symbol_16x11.png");
 		private static final Icon SMALL_CHECK_DISABLED_ICON = new LazyImageIcon(
@@ -165,10 +168,8 @@ int x = iconX;
 
 	private static class RadioButtonIcon implements Icon, UIResource, Serializable {
 
-		/**
-		 *
-		 */
-		private static final long serialVersionUID = 1L;
+		@Serial
+        private static final long serialVersionUID = 1L;
 		private static final int GAP = 2;
 
 		@Override
@@ -264,10 +265,8 @@ int x = iconX;
 
 	private static class ThumbIcon implements Icon, UIResource, Serializable {
 
-		/**
-		 *
-		 */
-		private static final long serialVersionUID = 1L;
+		@Serial
+        private static final long serialVersionUID = 1L;
 		private static final  int WIDTH = 15;
 		private static final  int HEIGHT = 15;
 		private boolean isRollover = false;

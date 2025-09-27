@@ -38,7 +38,7 @@ import javax.swing.JComponent;
 import javax.swing.plaf.ComponentUI;
 
 import com.jtattoo.plaf.AbstractLookAndFeel;
-import com.jtattoo.plaf.BaseScrollBarUI;
+import com.jtattoo.plaf.base.BaseScrollBarUI;
 import com.jtattoo.plaf.ColorHelper;
 import com.jtattoo.plaf.JTattooUtilities;
 

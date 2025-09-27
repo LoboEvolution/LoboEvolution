@@ -27,7 +27,7 @@ package com.jtattoo.plaf.noire;
 
 import javax.swing.Icon;
 
-import com.jtattoo.plaf.BaseIcons;
+import com.jtattoo.plaf.base.BaseIcons;
 import com.jtattoo.plaf.hifi.HiFiIcons;
 
 /**

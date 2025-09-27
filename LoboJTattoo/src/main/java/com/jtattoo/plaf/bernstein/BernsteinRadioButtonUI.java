@@ -32,7 +32,7 @@ import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.ComponentUI;
 
 import com.jtattoo.plaf.AbstractLookAndFeel;
-import com.jtattoo.plaf.BaseRadioButtonUI;
+import com.jtattoo.plaf.base.BaseRadioButtonUI;
 
 /**
  * <p>BernsteinRadioButtonUI class.</p>

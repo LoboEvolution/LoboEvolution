@@ -32,8 +32,8 @@ import javax.swing.JMenuBar;
 import javax.swing.plaf.ComponentUI;
 
 import com.jtattoo.plaf.AbstractLookAndFeel;
-import com.jtattoo.plaf.BaseBorders;
-import com.jtattoo.plaf.BaseMenuBarUI;
+import com.jtattoo.plaf.base.BaseBorders;
+import com.jtattoo.plaf.base.BaseMenuBarUI;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**

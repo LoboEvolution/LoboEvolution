@@ -44,10 +44,11 @@ import javax.swing.JButton;
 import javax.swing.plaf.ColorUIResource;
 
 import com.jtattoo.plaf.AbstractLookAndFeel;
-import com.jtattoo.plaf.BaseIcons;
+import com.jtattoo.plaf.base.BaseIcons;
 import com.jtattoo.plaf.ColorHelper;
 import com.jtattoo.plaf.JTattooUtilities;
 import com.jtattoo.plaf.LazyImageIcon;
+import com.jtattoo.plaf.base.icon.*;
 
 /**
  * <p>AcrylIcons class.</p>
@@ -64,20 +65,14 @@ public class AcrylIcons extends BaseIcons {
 
 		private static final Icon SMALL_CHECK_ICON = new LazyImageIcon("acryl/icons/small/check_symbol_12x11.png");
 		private static final Icon SMALL_CHECK_INVERSE_ICON = new LazyImageIcon("icons/small/check_symbol_10x10.png");
-		// private static final Icon SMALL_CHECK_PRESSED_ICON = new
-		// LazyImageIcon("acryl/icons/small/check_symbol_pressed_10x10.png");
 		private static final Icon SMALL_CHECK_DISABLED_ICON = new LazyImageIcon(
 				"icons/small/check_symbol_disabled_10x10.png");
 		private static final Icon MEDIUM_CHECK_ICON = new LazyImageIcon("acryl/icons/medium/check_symbol_14x13.png");
 		private static final Icon MEDIUM_CHECK_INVERSE_ICON = new LazyImageIcon("icons/medium/check_symbol_12x12.png");
-		// private static final Icon MEDIUM_CHECK_PRESSED_ICON = new
-		// LazyImageIcon("acryl/icons/medium/check_symbol_pressed_12x12.png");
 		private static final Icon MEDIUM_CHECK_DISABLED_ICON = new LazyImageIcon(
 				"icons/medium/check_symbol_disabled_12x12.png");
 		private static final Icon LARGE_CHECK_ICON = new LazyImageIcon("acryl/icons/large/check_symbol_16x15.png");
 		private static final Icon LARGE_CHECK_INVERSE_ICON = new LazyImageIcon("icons/large/check_symbol_14x14.png");
-		// private static final Icon LARGE_CHECK_PRESSED_ICON = new
-		// LazyImageIcon("acryl/icons/large/check_symbol_pressed_14x14.png");
 		private static final Icon LARGE_CHECK_DISABLED_ICON = new LazyImageIcon(
 				"icons/large/check_symbol_disabled_14x14.png");
 
@@ -371,16 +366,16 @@ public class AcrylIcons extends BaseIcons {
 			Icon icon = null;
 			switch (iconTyp) {
 			case ICON_ICON_TYP:
-				icon = new BaseIcons.IconSymbol(EXTRA_LIGHT_GRAY, cShadow, null, new Insets(0, 5, 0, 5));
+				icon = new IconSymbol(EXTRA_LIGHT_GRAY, cShadow, null, new Insets(0, 5, 0, 5));
 				break;
 			case MIN_ICON_TYP:
-				icon = new BaseIcons.MinSymbol(EXTRA_LIGHT_GRAY, cShadow, null, new Insets(0, 4, 0, 4));
+				icon = new MinSymbol(EXTRA_LIGHT_GRAY, cShadow, null, new Insets(0, 4, 0, 4));
 				break;
 			case MAX_ICON_TYP:
-				icon = new BaseIcons.MaxSymbol(EXTRA_LIGHT_GRAY, cShadow, null, new Insets(0, 4, 0, 4));
+				icon = new MaxSymbol(EXTRA_LIGHT_GRAY, cShadow, null, new Insets(0, 4, 0, 4));
 				break;
 			case CLOSE_ICON_TYP:
-				icon = new BaseIcons.CloseSymbol(Color.white, ColorHelper.darker(cShadow, 50), null,
+				icon = new CloseSymbol(Color.white, ColorHelper.darker(cShadow, 50), null,
 						new Insets(0, 5, 0, 5));
 				break;
 			default:

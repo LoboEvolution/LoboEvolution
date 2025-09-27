@@ -38,6 +38,7 @@ import javax.swing.plaf.basic.BasicProgressBarUI;
 
 import com.jtattoo.plaf.*;
 import com.jtattoo.plaf.BorderFactory;
+import com.jtattoo.plaf.base.*;
 
 /**
  * <p>FastLookAndFeel class.</p>

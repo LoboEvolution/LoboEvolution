@@ -36,7 +36,7 @@ import javax.swing.border.Border;
 import javax.swing.plaf.ComponentUI;
 
 import com.jtattoo.plaf.AbstractLookAndFeel;
-import com.jtattoo.plaf.BaseSpinnerUI;
+import com.jtattoo.plaf.base.BaseSpinnerUI;
 import com.jtattoo.plaf.ColorHelper;
 import com.jtattoo.plaf.JTattooUtilities;
 

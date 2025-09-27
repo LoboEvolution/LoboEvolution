@@ -26,6 +26,8 @@
 
 package com.jtattoo.plaf;
 
+import com.jtattoo.plaf.base.BaseBorders;
+
 import javax.swing.border.Border;
 
 public abstract class AbstractBorderFactory implements BorderFactory {

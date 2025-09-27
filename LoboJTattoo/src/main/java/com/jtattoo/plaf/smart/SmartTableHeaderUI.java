@@ -29,7 +29,7 @@ package com.jtattoo.plaf.smart;
 import javax.swing.JComponent;
 import javax.swing.plaf.ComponentUI;
 
-import com.jtattoo.plaf.BaseTableHeaderUI;
+import com.jtattoo.plaf.base.BaseTableHeaderUI;
 
 /**
  * <p>SmartTableHeaderUI class.</p>

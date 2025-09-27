@@ -38,10 +38,11 @@ import javax.swing.Icon;
 import javax.swing.JButton;
 
 import com.jtattoo.plaf.AbstractLookAndFeel;
-import com.jtattoo.plaf.BaseIcons;
+import com.jtattoo.plaf.base.BaseIcons;
 import com.jtattoo.plaf.ColorHelper;
 import com.jtattoo.plaf.JTattooUtilities;
 import com.jtattoo.plaf.LazyImageIcon;
+import com.jtattoo.plaf.base.icon.*;
 
 /**
  * <p>LunaIcons class.</p>
@@ -141,16 +142,16 @@ public class LunaIcons extends BaseIcons {
 			Icon icon = null;
 			switch (iconTyp) {
 			case ICON_ICON_TYP:
-				icon = new BaseIcons.IconSymbol(cHi, cLo, null, new Insets(0, 0, 0, 1));
+				icon = new IconSymbol(cHi, cLo, null, new Insets(0, 0, 0, 1));
 				break;
 			case MIN_ICON_TYP:
-				icon = new BaseIcons.MinSymbol(cHi, cLo, null, new Insets(0, 0, 0, 0));
+				icon = new MinSymbol(cHi, cLo, null, new Insets(0, 0, 0, 0));
 				break;
 			case MAX_ICON_TYP:
-				icon = new BaseIcons.MaxSymbol(cHi, cLo, null, new Insets(0, 0, 0, 1));
+				icon = new MaxSymbol(cHi, cLo, null, new Insets(0, 0, 0, 1));
 				break;
 			case CLOSE_ICON_TYP:
-				icon = new BaseIcons.CloseSymbol(cHi, cLo, null, new Insets(0, 0, 0, 1));
+				icon = new CloseSymbol(cHi, cLo, null, new Insets(0, 0, 0, 1));
 				break;
 			default:
 				break;

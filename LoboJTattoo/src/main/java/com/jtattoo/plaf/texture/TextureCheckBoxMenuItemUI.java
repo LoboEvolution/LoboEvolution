@@ -39,7 +39,7 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.UIResource;
 
 import com.jtattoo.plaf.AbstractLookAndFeel;
-import com.jtattoo.plaf.BaseCheckBoxMenuItemUI;
+import com.jtattoo.plaf.base.BaseCheckBoxMenuItemUI;
 import com.jtattoo.plaf.ColorHelper;
 import com.jtattoo.plaf.JTattooUtilities;
 

@@ -38,7 +38,7 @@ import javax.swing.JComponent;
 import javax.swing.border.AbstractBorder;
 import javax.swing.plaf.ComponentUI;
 
-import com.jtattoo.plaf.BaseComboBoxUI;
+import com.jtattoo.plaf.base.BaseComboBoxUI;
 import com.jtattoo.plaf.NoFocusButton;
 
 /**

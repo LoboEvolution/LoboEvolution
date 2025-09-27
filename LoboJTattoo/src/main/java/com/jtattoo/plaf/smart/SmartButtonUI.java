@@ -38,7 +38,7 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.UIResource;
 
 import com.jtattoo.plaf.AbstractLookAndFeel;
-import com.jtattoo.plaf.BaseButtonUI;
+import com.jtattoo.plaf.base.BaseButtonUI;
 
 /**
  * <p>SmartButtonUI class.</p>

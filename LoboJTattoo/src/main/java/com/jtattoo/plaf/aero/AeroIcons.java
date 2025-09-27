@@ -32,7 +32,8 @@ import java.awt.Insets;
 import javax.swing.Icon;
 
 import com.jtattoo.plaf.AbstractLookAndFeel;
-import com.jtattoo.plaf.BaseIcons;
+import com.jtattoo.plaf.base.BaseIcons;
+import com.jtattoo.plaf.base.icon.*;
 
 /**
  * <p>AeroIcons class.</p>
@@ -52,7 +53,7 @@ public class AeroIcons extends BaseIcons {
 			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
 				closeIcon = new MacCloseIcon();
 			} else {
-				closeIcon = new BaseIcons.CloseSymbol(Color.black, Color.white, null, new Insets(2, 2, 2, 2));
+				closeIcon = new CloseSymbol(Color.black, Color.white, null, new Insets(2, 2, 2, 2));
 			}
 		}
 		return closeIcon;
@@ -68,7 +69,7 @@ public class AeroIcons extends BaseIcons {
 			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
 				iconIcon = new MacIconIcon();
 			} else {
-				iconIcon = new BaseIcons.IconSymbol(Color.black, Color.white, null, new Insets(2, 2, 2, 2));
+				iconIcon = new IconSymbol(Color.black, Color.white, null, new Insets(2, 2, 2, 2));
 			}
 		}
 		return iconIcon;
@@ -84,7 +85,7 @@ public class AeroIcons extends BaseIcons {
 			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
 				maxIcon = new MacMaxIcon();
 			} else {
-				maxIcon = new BaseIcons.MaxSymbol(Color.black, Color.white, null, new Insets(2, 2, 2, 2));
+				maxIcon = new MaxSymbol(Color.black, Color.white, null, new Insets(2, 2, 2, 2));
 			}
 		}
 		return maxIcon;
@@ -100,7 +101,7 @@ public class AeroIcons extends BaseIcons {
 			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
 				minIcon = new MacMinIcon();
 			} else {
-				minIcon = new BaseIcons.MinSymbol(Color.black, Color.white, null, new Insets(2, 2, 2, 2));
+				minIcon = new MinSymbol(Color.black, Color.white, null, new Insets(2, 2, 2, 2));
 			}
 		}
 		return minIcon;

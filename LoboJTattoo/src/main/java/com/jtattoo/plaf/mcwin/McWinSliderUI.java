@@ -33,7 +33,7 @@ import javax.swing.JSlider;
 import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.ComponentUI;
 
-import com.jtattoo.plaf.BaseSliderUI;
+import com.jtattoo.plaf.base.BaseSliderUI;
 
 /**
  * <p>McWinSliderUI class.</p>

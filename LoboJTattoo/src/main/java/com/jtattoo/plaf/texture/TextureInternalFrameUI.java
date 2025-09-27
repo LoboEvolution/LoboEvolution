@@ -29,7 +29,7 @@ import javax.swing.JComponent;
 import javax.swing.JInternalFrame;
 import javax.swing.plaf.ComponentUI;
 
-import com.jtattoo.plaf.BaseInternalFrameUI;
+import com.jtattoo.plaf.base.BaseInternalFrameUI;
 
 /**
  * <p>TextureInternalFrameUI class.</p>

@@ -26,6 +26,8 @@
 
 package com.jtattoo.plaf;
 
+import com.jtattoo.plaf.base.BaseIcons;
+
 import javax.swing.*;
 
 public class AbstractIconFactory implements IconFactory {

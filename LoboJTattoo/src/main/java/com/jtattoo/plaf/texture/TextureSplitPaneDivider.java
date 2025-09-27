@@ -35,7 +35,7 @@ import javax.swing.JSplitPane;
 import javax.swing.UIManager;
 
 import com.jtattoo.plaf.AbstractLookAndFeel;
-import com.jtattoo.plaf.BaseSplitPaneDivider;
+import com.jtattoo.plaf.base.BaseSplitPaneDivider;
 
 /**
  * <p>TextureSplitPaneDivider class.</p>

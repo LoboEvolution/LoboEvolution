@@ -31,7 +31,7 @@ import javax.swing.border.Border;
 import javax.swing.plaf.ComponentUI;
 
 import com.jtattoo.plaf.AbstractToolBarUI;
-import com.jtattoo.plaf.BaseBorders;
+import com.jtattoo.plaf.base.BaseBorders;
 
 /**
  * <p>AeroToolBarUI class.</p>

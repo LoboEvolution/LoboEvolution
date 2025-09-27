@@ -35,7 +35,7 @@ import javax.swing.JMenuBar;
 import javax.swing.plaf.ComponentUI;
 
 import com.jtattoo.plaf.AbstractLookAndFeel;
-import com.jtattoo.plaf.BaseButtonUI;
+import com.jtattoo.plaf.base.BaseButtonUI;
 import com.jtattoo.plaf.ColorHelper;
 
 /**

@@ -39,9 +39,9 @@ import javax.swing.JDialog;
 import javax.swing.JRootPane;
 
 import com.jtattoo.plaf.AbstractLookAndFeel;
-import com.jtattoo.plaf.BaseRootPaneUI;
-import com.jtattoo.plaf.BaseTitleButton;
-import com.jtattoo.plaf.BaseTitlePane;
+import com.jtattoo.plaf.base.BaseRootPaneUI;
+import com.jtattoo.plaf.base.BaseTitleButton;
+import com.jtattoo.plaf.base.BaseTitlePane;
 import com.jtattoo.plaf.ColorHelper;
 import com.jtattoo.plaf.JTattooUtilities;
 
@@ -62,7 +62,7 @@ public class SmartTitlePane extends BaseTitlePane {
 	 * <p>Constructor for SmartTitlePane.</p>
 	 *
 	 * @param root a {@link javax.swing.JRootPane} object.
-	 * @param ui a {@link com.jtattoo.plaf.BaseRootPaneUI} object.
+	 * @param ui a {@link BaseRootPaneUI} object.
 	 */
 	public SmartTitlePane(final JRootPane root, final BaseRootPaneUI ui) {
 		super(root, ui);

@@ -33,7 +33,7 @@ import javax.swing.ButtonModel;
 import javax.swing.Icon;
 import javax.swing.plaf.UIResource;
 
-import com.jtattoo.plaf.BaseIcons;
+import com.jtattoo.plaf.base.BaseIcons;
 import com.jtattoo.plaf.JTattooUtilities;
 import com.jtattoo.plaf.LazyImageIcon;
 

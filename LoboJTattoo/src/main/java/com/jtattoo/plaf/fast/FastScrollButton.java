@@ -31,8 +31,8 @@ import java.awt.Graphics;
 import javax.swing.Icon;
 
 import com.jtattoo.plaf.AbstractLookAndFeel;
-import com.jtattoo.plaf.BaseIcons;
-import com.jtattoo.plaf.BaseScrollButton;
+import com.jtattoo.plaf.base.BaseIcons;
+import com.jtattoo.plaf.base.BaseScrollButton;
 import com.jtattoo.plaf.ColorHelper;
 import com.jtattoo.plaf.JTattooUtilities;
 

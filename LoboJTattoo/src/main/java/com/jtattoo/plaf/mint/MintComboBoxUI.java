@@ -37,8 +37,8 @@ import javax.swing.border.Border;
 import javax.swing.plaf.ComponentUI;
 
 import com.jtattoo.plaf.AbstractLookAndFeel;
-import com.jtattoo.plaf.BaseComboBoxUI;
-import com.jtattoo.plaf.BaseIcons;
+import com.jtattoo.plaf.base.BaseComboBoxUI;
+import com.jtattoo.plaf.base.BaseIcons;
 import com.jtattoo.plaf.JTattooUtilities;
 import com.jtattoo.plaf.NoFocusButton;
 

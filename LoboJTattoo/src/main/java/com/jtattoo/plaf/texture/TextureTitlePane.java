@@ -35,8 +35,8 @@ import java.awt.geom.Rectangle2D;
 import javax.swing.JRootPane;
 
 import com.jtattoo.plaf.AbstractLookAndFeel;
-import com.jtattoo.plaf.BaseRootPaneUI;
-import com.jtattoo.plaf.BaseTitlePane;
+import com.jtattoo.plaf.base.BaseRootPaneUI;
+import com.jtattoo.plaf.base.BaseTitlePane;
 import com.jtattoo.plaf.ColorHelper;
 import com.jtattoo.plaf.JTattooUtilities;
 
@@ -57,7 +57,7 @@ public class TextureTitlePane extends BaseTitlePane {
 	 * <p>Constructor for TextureTitlePane.</p>
 	 *
 	 * @param root a {@link javax.swing.JRootPane} object.
-	 * @param ui a {@link com.jtattoo.plaf.BaseRootPaneUI} object.
+	 * @param ui a {@link BaseRootPaneUI} object.
 	 */
 	public TextureTitlePane(final JRootPane root, final BaseRootPaneUI ui) {
 		super(root, ui);

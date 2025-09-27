@@ -41,7 +41,7 @@ import javax.swing.plaf.UIResource;
 import javax.swing.plaf.basic.BasicGraphicsUtils;
 
 import com.jtattoo.plaf.AbstractLookAndFeel;
-import com.jtattoo.plaf.BaseButtonUI;
+import com.jtattoo.plaf.base.BaseButtonUI;
 
 /**
  * <p>LunaButtonUI class.</p>

@@ -25,6 +25,9 @@
  */
 package com.jtattoo.plaf;
 
+import com.jtattoo.plaf.base.BaseBorders;
+import com.jtattoo.plaf.base.BaseIcons;
+
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
