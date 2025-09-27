@@ -35,7 +35,7 @@ import javax.swing.JMenuItem;
 import javax.swing.plaf.ComponentUI;
 
 import com.jtattoo.plaf.AbstractLookAndFeel;
-import com.jtattoo.plaf.BaseMenuItemUI;
+import com.jtattoo.plaf.base.BaseMenuItemUI;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**

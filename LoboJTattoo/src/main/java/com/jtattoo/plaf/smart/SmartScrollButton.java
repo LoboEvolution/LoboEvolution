@@ -28,7 +28,7 @@ package com.jtattoo.plaf.smart;
 import java.awt.Graphics;
 
 import com.jtattoo.plaf.AbstractLookAndFeel;
-import com.jtattoo.plaf.BaseScrollButton;
+import com.jtattoo.plaf.base.BaseScrollButton;
 
 /**
  * <p>SmartScrollButton class.</p>

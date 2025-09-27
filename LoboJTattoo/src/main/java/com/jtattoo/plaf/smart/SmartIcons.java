@@ -38,9 +38,10 @@ import javax.swing.Icon;
 import javax.swing.JButton;
 
 import com.jtattoo.plaf.AbstractLookAndFeel;
-import com.jtattoo.plaf.BaseIcons;
+import com.jtattoo.plaf.base.BaseIcons;
 import com.jtattoo.plaf.ColorHelper;
 import com.jtattoo.plaf.JTattooUtilities;
+import com.jtattoo.plaf.base.icon.*;
 
 /**
  * <p>SmartIcons class.</p>
@@ -133,16 +134,16 @@ public class SmartIcons extends BaseIcons {
 			Icon icon = null;
 			switch (iconTyp) {
 				case ICON_ICON_TYP:
-					icon = new BaseIcons.IconSymbol(cHi, cLo, null);
+                    icon = new IconSymbol(cHi, cLo, null);
 					break;
 				case MIN_ICON_TYP:
-					icon = new BaseIcons.MinSymbol(cHi, cLo, null);
+					icon = new MinSymbol(cHi, cLo, null);
 					break;
 				case MAX_ICON_TYP:
-					icon = new BaseIcons.MaxSymbol(cHi, cLo, null);
+					icon = new MaxSymbol(cHi, cLo, null);
 					break;
 				case CLOSE_ICON_TYP:
-					icon = new BaseIcons.CloseSymbol(cHi, cLo, null);
+					icon = new CloseSymbol(cHi, cLo, null);
 					break;
 				default:
 					break;

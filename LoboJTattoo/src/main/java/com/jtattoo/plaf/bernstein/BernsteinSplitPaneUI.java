@@ -30,7 +30,7 @@ import javax.swing.JComponent;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicSplitPaneDivider;
 
-import com.jtattoo.plaf.BaseSplitPaneUI;
+import com.jtattoo.plaf.base.BaseSplitPaneUI;
 
 /**
  * <p>BernsteinSplitPaneUI class.</p>

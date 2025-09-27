@@ -28,8 +28,6 @@ package com.jtattoo.plaf.bernstein;
 import javax.swing.border.Border;
 
 import com.jtattoo.plaf.AbstractBorderFactory;
-import com.jtattoo.plaf.BorderFactory;
-import com.jtattoo.plaf.BaseBorders;
 
 /**
  * <p>BernsteinBorderFactory class.</p>

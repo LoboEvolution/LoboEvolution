@@ -25,7 +25,7 @@
  */
 package com.jtattoo.plaf.fast;
 
-import com.jtattoo.plaf.BaseIcons;
+import com.jtattoo.plaf.base.BaseIcons;
 
 /**
  * <p>FastIcons class.</p>

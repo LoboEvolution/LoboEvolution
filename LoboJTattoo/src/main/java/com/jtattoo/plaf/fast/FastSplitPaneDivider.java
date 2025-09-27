@@ -28,7 +28,7 @@ package com.jtattoo.plaf.fast;
 import java.awt.Graphics;
 
 import com.jtattoo.plaf.AbstractLookAndFeel;
-import com.jtattoo.plaf.BaseSplitPaneDivider;
+import com.jtattoo.plaf.base.BaseSplitPaneDivider;
 
 /**
  * <p>FastSplitPaneDivider class.</p>

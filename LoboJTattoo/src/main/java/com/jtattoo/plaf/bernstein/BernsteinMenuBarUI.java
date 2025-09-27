@@ -32,7 +32,7 @@ import javax.swing.JMenuBar;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicMenuBarUI;
 
-import com.jtattoo.plaf.BaseBorders;
+import com.jtattoo.plaf.base.BaseBorders;
 
 /**
  * <p>BernsteinMenuBarUI class.</p>

@@ -31,7 +31,7 @@ import javax.swing.JComponent;
 import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.ComponentUI;
 
-import com.jtattoo.plaf.BasePanelUI;
+import com.jtattoo.plaf.base.BasePanelUI;
 
 /**
  * <p>HiFiPanelUI class.</p>

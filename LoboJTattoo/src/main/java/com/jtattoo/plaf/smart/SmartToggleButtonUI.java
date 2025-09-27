@@ -33,7 +33,7 @@ import javax.swing.JComponent;
 import javax.swing.plaf.ComponentUI;
 
 import com.jtattoo.plaf.AbstractLookAndFeel;
-import com.jtattoo.plaf.BaseToggleButtonUI;
+import com.jtattoo.plaf.base.BaseToggleButtonUI;
 
 /**
  * <p>SmartToggleButtonUI class.</p>

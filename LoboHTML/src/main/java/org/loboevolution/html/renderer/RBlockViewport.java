@@ -237,10 +237,6 @@ public class RBlockViewport extends BaseRCollection {
 		}
 	}
 
-	private void addAsSeqBlock(final RElement block) {
-		this.addAsSeqBlock(block, true, true, true, false);
-	}
-
 	private boolean addElsewhereIfFloat(final BoundableRenderable renderable, final Element element,
 										final boolean usesAlignAttribute, final CSSStyleDeclaration style) {
 

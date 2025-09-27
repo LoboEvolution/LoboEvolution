@@ -29,8 +29,6 @@ package com.jtattoo.plaf.aluminium;
 import javax.swing.border.Border;
 
 import com.jtattoo.plaf.AbstractBorderFactory;
-import com.jtattoo.plaf.BorderFactory;
-import com.jtattoo.plaf.BaseBorders;
 
 /**
  * <p>AluminiumBorderFactory class.</p>

@@ -34,7 +34,7 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicGraphicsUtils;
 
 import com.jtattoo.plaf.AbstractLookAndFeel;
-import com.jtattoo.plaf.BaseRadioButtonUI;
+import com.jtattoo.plaf.base.BaseRadioButtonUI;
 
 /**
  * <p>GraphiteRadioButtonUI class.</p>

@@ -31,8 +31,9 @@ import java.awt.Insets;
 import javax.swing.Icon;
 
 import com.jtattoo.plaf.AbstractLookAndFeel;
-import com.jtattoo.plaf.BaseIcons;
+import com.jtattoo.plaf.base.BaseIcons;
 import com.jtattoo.plaf.LazyImageIcon;
+import com.jtattoo.plaf.base.icon.*;
 
 /**
  * <p>AluminiumIcons class.</p>
@@ -55,7 +56,7 @@ public class AluminiumIcons extends BaseIcons {
 				final Color iconColor = AbstractLookAndFeel.getTheme().getWindowIconColor();
 				final Color iconShadowColor = AbstractLookAndFeel.getTheme().getWindowIconShadowColor();
 				final Color iconRolloverColor = AbstractLookAndFeel.getTheme().getWindowIconRolloverColor();
-				closeIcon = new BaseIcons.CloseSymbol(iconColor, iconShadowColor, iconRolloverColor,
+				closeIcon = new CloseSymbol(iconColor, iconShadowColor, iconRolloverColor,
 						new Insets(0, 0, 1, 0));
 			}
 		}
@@ -75,7 +76,7 @@ public class AluminiumIcons extends BaseIcons {
 				final Color iconColor = AbstractLookAndFeel.getTheme().getWindowIconColor();
 				final Color iconShadowColor = AbstractLookAndFeel.getTheme().getWindowIconShadowColor();
 				final Color iconRolloverColor = AbstractLookAndFeel.getTheme().getWindowIconRolloverColor();
-				iconIcon = new BaseIcons.IconSymbol(iconColor, iconShadowColor, iconRolloverColor,
+				iconIcon = new IconSymbol(iconColor, iconShadowColor, iconRolloverColor,
 						new Insets(0, 0, 1, 0));
 			}
 		}
@@ -95,7 +96,7 @@ public class AluminiumIcons extends BaseIcons {
 				final Color iconColor = AbstractLookAndFeel.getTheme().getWindowIconColor();
 				final Color iconShadowColor = AbstractLookAndFeel.getTheme().getWindowIconShadowColor();
 				final Color iconRolloverColor = AbstractLookAndFeel.getTheme().getWindowIconRolloverColor();
-				maxIcon = new BaseIcons.MaxSymbol(iconColor, iconShadowColor, iconRolloverColor,
+				maxIcon = new MaxSymbol(iconColor, iconShadowColor, iconRolloverColor,
 						new Insets(0, 0, 1, 0));
 			}
 		}
@@ -115,7 +116,7 @@ public class AluminiumIcons extends BaseIcons {
 				final Color iconColor = AbstractLookAndFeel.getTheme().getWindowIconColor();
 				final Color iconShadowColor = AbstractLookAndFeel.getTheme().getWindowIconShadowColor();
 				final Color iconRolloverColor = AbstractLookAndFeel.getTheme().getWindowIconRolloverColor();
-				minIcon = new BaseIcons.MinSymbol(iconColor, iconShadowColor, iconRolloverColor,
+				minIcon = new MinSymbol(iconColor, iconShadowColor, iconRolloverColor,
 						new Insets(0, 0, 1, 0));
 			}
 		}

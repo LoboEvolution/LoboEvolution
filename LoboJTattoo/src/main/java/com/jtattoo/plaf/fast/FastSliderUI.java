@@ -38,7 +38,7 @@ import javax.swing.SwingConstants;
 import javax.swing.plaf.ComponentUI;
 
 import com.jtattoo.plaf.AbstractLookAndFeel;
-import com.jtattoo.plaf.BaseSliderUI;
+import com.jtattoo.plaf.base.BaseSliderUI;
 import com.jtattoo.plaf.ColorHelper;
 import com.jtattoo.plaf.JTattooUtilities;
 

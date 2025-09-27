@@ -37,6 +37,7 @@ import javax.swing.UIDefaults;
 
 import com.jtattoo.plaf.*;
 import com.jtattoo.plaf.IconFactory;
+import com.jtattoo.plaf.base.*;
 
 /**
  * <p>AcrylLookAndFeel class.</p>

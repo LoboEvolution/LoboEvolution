@@ -30,7 +30,7 @@ import javax.swing.JComponent;
 import javax.swing.JRootPane;
 import javax.swing.plaf.ComponentUI;
 
-import com.jtattoo.plaf.BaseRootPaneUI;
+import com.jtattoo.plaf.base.BaseRootPaneUI;
 
 /**
  * <p>AluminiumRootPaneUI class.</p>

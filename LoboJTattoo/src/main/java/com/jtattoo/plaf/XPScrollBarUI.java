@@ -26,6 +26,8 @@
 
 package com.jtattoo.plaf;
 
+import com.jtattoo.plaf.base.BaseScrollBarUI;
+
 import java.awt.Adjustable;
 import java.awt.AlphaComposite;
 import java.awt.Color;

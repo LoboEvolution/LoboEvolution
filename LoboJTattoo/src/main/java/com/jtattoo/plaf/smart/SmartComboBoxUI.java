@@ -34,8 +34,9 @@ import javax.swing.border.Border;
 import javax.swing.plaf.ComponentUI;
 
 import com.jtattoo.plaf.AbstractLookAndFeel;
-import com.jtattoo.plaf.BaseComboBoxUI;
+import com.jtattoo.plaf.base.BaseComboBoxUI;
 import com.jtattoo.plaf.JTattooUtilities;
+import com.jtattoo.plaf.smart.button.ArrowButton;
 
 /**
  * <p>SmartComboBoxUI class.</p>
@@ -45,25 +46,6 @@ import com.jtattoo.plaf.JTattooUtilities;
  */
 public class SmartComboBoxUI extends BaseComboBoxUI {
 
-	// --------------------------------------------------------------------------------------------------
-	static class ArrowButton extends BaseComboBoxUI.ArrowButton {
-
-		/**
-		 *
-		 */
-		private static final long serialVersionUID = 1L;
-
-		@Override
-		public void paint(final Graphics g) {
-			super.paint(g);
-			if (getModel().isRollover()) {
-				g.setColor(AbstractLookAndFeel.getFocusColor());
-				g.drawLine(1, 0, getWidth() - 1, 0);
-				g.drawLine(1, 1, getWidth() - 1, 1);
-			}
-		}
-
-	} // end of class Arrow Button
 
 	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {

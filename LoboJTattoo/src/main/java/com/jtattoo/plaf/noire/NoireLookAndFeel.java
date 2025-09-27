@@ -35,6 +35,7 @@ import javax.swing.UIDefaults;
 
 import com.jtattoo.plaf.*;
 import com.jtattoo.plaf.BorderFactory;
+import com.jtattoo.plaf.base.*;
 import com.jtattoo.plaf.hifi.HiFiBorderFactory;
 import com.jtattoo.plaf.hifi.HiFiButtonUI;
 import com.jtattoo.plaf.hifi.HiFiCheckBoxUI;

@@ -32,7 +32,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 import com.jtattoo.plaf.AbstractLookAndFeel;
-import com.jtattoo.plaf.BaseSplitPaneDivider;
+import com.jtattoo.plaf.base.BaseSplitPaneDivider;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**

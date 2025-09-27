@@ -35,9 +35,10 @@ import javax.swing.border.Border;
 import javax.swing.plaf.ComponentUI;
 
 import com.jtattoo.plaf.AbstractLookAndFeel;
-import com.jtattoo.plaf.BaseComboBoxUI;
+import com.jtattoo.plaf.base.BaseComboBoxUI;
 import com.jtattoo.plaf.ColorHelper;
 import com.jtattoo.plaf.JTattooUtilities;
+import com.jtattoo.plaf.smart.button.ArrowButton;
 
 /**
  * <p>AcrylComboBoxUI class.</p>
@@ -55,7 +56,7 @@ public class AcrylComboBoxUI extends BaseComboBoxUI {
 	/** {@inheritDoc} */
 	@Override
 	public JButton createArrowButton() {
-		final ArrowButton button = new BaseComboBoxUI.ArrowButton();
+		final ArrowButton button = new ArrowButton();
 		final Color borderColor = ColorHelper.brighter(AbstractLookAndFeel.getTheme().getFrameColor(), 50);
 		if (JTattooUtilities.isLeftToRight(comboBox)) {
 			final Border border = BorderFactory.createMatteBorder(0, 1, 0, 0, borderColor);

@@ -33,7 +33,7 @@ import javax.swing.JViewport;
 import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.ComponentUI;
 
-import com.jtattoo.plaf.BaseScrollPaneUI;
+import com.jtattoo.plaf.base.BaseScrollPaneUI;
 
 /**
  * <p>TextureScrollPaneUI class.</p>

@@ -39,7 +39,7 @@ import javax.swing.plaf.basic.BasicHTML;
 import javax.swing.text.View;
 
 import com.jtattoo.plaf.AbstractLookAndFeel;
-import com.jtattoo.plaf.BaseRadioButtonUI;
+import com.jtattoo.plaf.base.BaseRadioButtonUI;
 import com.jtattoo.plaf.ColorHelper;
 import com.jtattoo.plaf.JTattooUtilities;
 
