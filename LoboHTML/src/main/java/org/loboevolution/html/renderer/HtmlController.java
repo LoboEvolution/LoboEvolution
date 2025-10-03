@@ -26,7 +26,9 @@
 
 package org.loboevolution.html.renderer;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.loboevolution.events.Event;
 import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.dom.domimpl.*;
@@ -47,6 +49,7 @@ import java.awt.event.MouseEvent;
 /**
  * <p>HtmlController class.</p>
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class HtmlController {
 
 	@Getter

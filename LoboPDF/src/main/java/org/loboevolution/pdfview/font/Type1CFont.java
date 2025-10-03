@@ -662,6 +662,7 @@ public class Type1CFont extends OutlineFont {
         float x1, y1, x2, y2, ybase;
         int hold;
         while (this.pos < r.getEnd()) {
+            float fx;
             final int cmd = readCommand(true);
             hold = 0;
             switch (cmd) {
@@ -679,14 +680,16 @@ public class Type1CFont extends OutlineFont {
                         gp.closePath();
                     }
                     pt.open = false;
-                    gp.moveTo(pt.x, pt.y);
+                    gp.moveTo(pt.getX(), pt.y);
                     this.stackptr = 0;
                     break;
                 case 5: // rlineto
                     for (i = 0; i < this.stackptr; ) {
-                        pt.x += this.stack[i++];
+                        fx = pt.getX();
+                        pt.setX(fx + this.stack[i++]);
+
                         pt.y += this.stack[i++];
-                        gp.lineTo(pt.x, pt.y);
+                        gp.lineTo(pt.getX(), pt.y);
                     }
                     pt.open = true;
                     this.stackptr = 0;
@@ -694,11 +697,12 @@ public class Type1CFont extends OutlineFont {
                 case 6: // hlineto
                     for (i = 0; i < this.stackptr; ) {
                         if ((i & 1) == 0) {
-                            pt.x += this.stack[i++];
+                            fx = pt.getX();
+                            pt.setX(fx + this.stack[i++]);
                         } else {
                             pt.y += this.stack[i++];
                         }
-                        gp.lineTo(pt.x, pt.y);
+                        gp.lineTo(pt.getX(), pt.y);
                     }
                     pt.open = true;
                     this.stackptr = 0;
@@ -708,22 +712,23 @@ public class Type1CFont extends OutlineFont {
                         if ((i & 1) == 0) {
                             pt.y += this.stack[i++];
                         } else {
-                            pt.x += this.stack[i++];
+                            fx = pt.getX();
+                            pt.setX(fx + this.stack[i++]);
                         }
-                        gp.lineTo(pt.x, pt.y);
+                        gp.lineTo(pt.getX(), pt.y);
                     }
                     pt.open = true;
                     this.stackptr = 0;
                     break;
                 case 8: // rrcurveto
                     for (i = 0; i < this.stackptr; ) {
-                        x1 = pt.x + this.stack[i++];
+                        x1 = pt.getX() + this.stack[i++];
                         y1 = pt.y + this.stack[i++];
                         x2 = x1 + this.stack[i++];
                         y2 = y1 + this.stack[i++];
-                        pt.x = x2 + this.stack[i++];
+                        pt.setX(x2 + this.stack[i++]);
                         pt.y = y2 + this.stack[i++];
-                        gp.curveTo(x1, y1, x2, y2, pt.x, pt.y);
+                        gp.curveTo(x1, y1, x2, y2, pt.getX(), pt.y);
                     }
                     pt.open = true;
                     this.stackptr = 0;
@@ -770,12 +775,13 @@ public class Type1CFont extends OutlineFont {
                         this.stack[0] = this.stack[1];
                         this.stack[1] = this.stack[2];
                     }
-                    pt.x += this.stack[0];
+                    fx = pt.getX();
+                    pt.setX(fx + this.stack[0]);
                     pt.y += this.stack[1];
                     if (pt.open) {
                         gp.closePath();
                     }
-                    gp.moveTo(pt.x, pt.y);
+                    gp.moveTo(pt.getX(), pt.y);
                     pt.open = false;
                     this.stackptr = 0;
                     break;
@@ -783,59 +789,63 @@ public class Type1CFont extends OutlineFont {
                     if (this.stackptr > 1) {
                         this.stack[0] = this.stack[1];
                     }
-                    pt.x += this.stack[0];
+                    fx = pt.getX();
+                    pt.setX(fx + this.stack[0]);
                     if (pt.open) {
                         gp.closePath();
                     }
-                    gp.moveTo(pt.x, pt.y);
+                    gp.moveTo(pt.getX(), pt.y);
                     pt.open = false;
                     this.stackptr = 0;
                     break;
                 case 24: // rcurveline
                     for (i = 0; i < this.stackptr - 2; ) {
-                        x1 = pt.x + this.stack[i++];
+                        x1 = pt.getX() + this.stack[i++];
                         y1 = pt.y + this.stack[i++];
                         x2 = x1 + this.stack[i++];
                         y2 = y1 + this.stack[i++];
-                        pt.x = x2 + this.stack[i++];
+                        pt.setX(x2 + this.stack[i++]);
                         pt.y = y2 + this.stack[i++];
-                        gp.curveTo(x1, y1, x2, y2, pt.x, pt.y);
+                        gp.curveTo(x1, y1, x2, y2, pt.getX(), pt.y);
                     }
-                    pt.x += this.stack[i++];
+                    fx = pt.getX();
+                    pt.setX(fx + this.stack[i++]);
                     pt.y += this.stack[i++];
-                    gp.lineTo(pt.x, pt.y);
+                    gp.lineTo(pt.getX(), pt.y);
                     pt.open = true;
                     this.stackptr = 0;
                     break;
                 case 25: // rlinecurve
                     for (i = 0; i < this.stackptr - 6; ) {
-                        pt.x += this.stack[i++];
+                        fx = pt.getX();
+                        pt.setX(fx + this.stack[i++]);
                         pt.y += this.stack[i++];
-                        gp.lineTo(pt.x, pt.y);
+                        gp.lineTo(pt.getX(), pt.y);
                     }
-                    x1 = pt.x + this.stack[i++];
+                    x1 = pt.getX() + this.stack[i++];
                     y1 = pt.y + this.stack[i++];
                     x2 = x1 + this.stack[i++];
                     y2 = y1 + this.stack[i++];
-                    pt.x = x2 + this.stack[i++];
+                    pt.setX(x2 + this.stack[i++]);
                     pt.y = y2 + this.stack[i++];
-                    gp.curveTo(x1, y1, x2, y2, pt.x, pt.y);
+                    gp.curveTo(x1, y1, x2, y2, pt.getX(), pt.y);
                     pt.open = true;
                     this.stackptr = 0;
                     break;
                 case 26: // vvcurveto
                     i = 0;
                     if ((this.stackptr & 1) == 1) { // odd number of arguments
-                        pt.x += this.stack[i++];
+                        fx = pt.getX();
+                        pt.setX(fx + this.stack[i++]);
                     }
                     while (i < this.stackptr) {
-                        x1 = pt.x;
+                        x1 = pt.getX();
                         y1 = pt.y + this.stack[i++];
                         x2 = x1 + this.stack[i++];
                         y2 = y1 + this.stack[i++];
-                        pt.x = x2;
+                        pt.setX(x2);
                         pt.y = y2 + this.stack[i++];
-                        gp.curveTo(x1, y1, x2, y2, pt.x, pt.y);
+                        gp.curveTo(x1, y1, x2, y2, pt.getX(), pt.y);
                     }
                     pt.open = true;
                     this.stackptr = 0;
@@ -846,13 +856,13 @@ public class Type1CFont extends OutlineFont {
                         pt.y += this.stack[i++];
                     }
                     while (i < this.stackptr) {
-                        x1 = pt.x + this.stack[i++];
+                        x1 = pt.getX() + this.stack[i++];
                         y1 = pt.y;
                         x2 = x1 + this.stack[i++];
                         y2 = y1 + this.stack[i++];
-                        pt.x = x2 + this.stack[i++];
+                        pt.setX(x2 + this.stack[i++]);
                         pt.y = y2;
-                        gp.curveTo(x1, y1, x2, y2, pt.x, pt.y);
+                        gp.curveTo(x1, y1, x2, y2, pt.getX(), pt.y);
                     }
                     pt.open = true;
                     this.stackptr = 0;
@@ -870,20 +880,21 @@ public class Type1CFont extends OutlineFont {
                 case 31: // hvcurveto
                     for (i = 0; i < this.stackptr; ) {
                         final boolean hv = (((i + hold) & 4) == 0);
-                        x1 = pt.x + (hv ? this.stack[i++] : 0);
+                        x1 = pt.getX() + (hv ? this.stack[i++] : 0);
                         y1 = pt.y + (hv ? 0 : this.stack[i++]);
                         x2 = x1 + this.stack[i++];
                         y2 = y1 + this.stack[i++];
-                        pt.x = x2 + (hv ? 0 : this.stack[i++]);
+                        pt.setX(x2 + (hv ? 0 : this.stack[i++]));
                         pt.y = y2 + (hv ? this.stack[i++] : 0);
                         if (i == this.stackptr - 1) {
                             if (hv) {
-                                pt.x += this.stack[i++];
+                                fx = pt.getX();
+                                pt.setX(fx + this.stack[i++]);
                             } else {
                                 pt.y += this.stack[i++];
                             }
                         }
-                        gp.curveTo(x1, y1, x2, y2, pt.x, pt.y);
+                        gp.curveTo(x1, y1, x2, y2, pt.getX(), pt.y);
                     }
                     pt.open = true;
                     this.stackptr = 0;
@@ -992,82 +1003,82 @@ public class Type1CFont extends OutlineFont {
                     }
                     break;
                 case 1034: // hflex
-                    x1 = pt.x + this.stack[0];
+                    x1 = pt.getX() + this.stack[0];
                     y1 = ybase = pt.y;
                     x2 = x1 + this.stack[1];
                     y2 = y1 + this.stack[2];
-                    pt.x = x2 + this.stack[3];
+                    pt.setX(x2 + this.stack[3]);
                     pt.y = y2;
-                    gp.curveTo(x1, y1, x2, y2, pt.x, pt.y);
-                    x1 = pt.x + this.stack[4];
+                    gp.curveTo(x1, y1, x2, y2, pt.getX(), pt.y);
+                    x1 = pt.getX() + this.stack[4];
                     y1 = pt.y;
                     x2 = x1 + this.stack[5];
                     y2 = ybase;
-                    pt.x = x2 + this.stack[6];
+                    pt.setX(x2 + this.stack[6]);
                     pt.y = y2;
-                    gp.curveTo(x1, y1, x2, y2, pt.x, pt.y);
+                    gp.curveTo(x1, y1, x2, y2, pt.getX(), pt.y);
                     pt.open = true;
                     this.stackptr = 0;
                     break;
                 case 1035: // flex
-                    x1 = pt.x + this.stack[0];
+                    x1 = pt.getX() + this.stack[0];
                     y1 = pt.y + this.stack[1];
                     x2 = x1 + this.stack[2];
                     y2 = y1 + this.stack[3];
-                    pt.x = x2 + this.stack[4];
+                    pt.setX(x2 + this.stack[4]);
                     pt.y = y2 + this.stack[5];
-                    gp.curveTo(x1, y1, x2, y2, pt.x, pt.y);
-                    x1 = pt.x + this.stack[6];
+                    gp.curveTo(x1, y1, x2, y2, pt.getX(), pt.y);
+                    x1 = pt.getX() + this.stack[6];
                     y1 = pt.y + this.stack[7];
                     x2 = x1 + this.stack[8];
                     y2 = y1 + this.stack[9];
-                    pt.x = x2 + this.stack[10];
+                    pt.setX(x2 + this.stack[10]);
                     pt.y = y2 + this.stack[11];
-                    gp.curveTo(x1, y1, x2, y2, pt.x, pt.y);
+                    gp.curveTo(x1, y1, x2, y2, pt.getX(), pt.y);
                     pt.open = true;
                     this.stackptr = 0;
                     break;
                 case 1036: // hflex1
                     ybase = pt.y;
-                    x1 = pt.x + this.stack[0];
+                    x1 = pt.getX() + this.stack[0];
                     y1 = pt.y + this.stack[1];
                     x2 = x1 + this.stack[2];
                     y2 = y1 + this.stack[3];
-                    pt.x = x2 + this.stack[4];
+                    pt.setX(x2 + this.stack[4]);
                     pt.y = y2;
-                    gp.curveTo(x1, y1, x2, y2, pt.x, pt.y);
-                    x1 = pt.x + this.stack[5];
+                    gp.curveTo(x1, y1, x2, y2, pt.getX(), pt.y);
+                    x1 = pt.getX() + this.stack[5];
                     y1 = pt.y;
                     x2 = x1 + this.stack[6];
                     y2 = y1 + this.stack[7];
-                    pt.x = x2 + this.stack[8];
+                    pt.setX(x2 + this.stack[8]);
                     pt.y = ybase;
-                    gp.curveTo(x1, y1, x2, y2, pt.x, pt.y);
+                    gp.curveTo(x1, y1, x2, y2, pt.getX(), pt.y);
                     pt.open = true;
                     this.stackptr = 0;
                     break;
                 case 1037: // flex1
                     ybase = pt.y;
-                    final float xbase = pt.x;
-                    x1 = pt.x + this.stack[0];
+                    final float xbase = pt.getX();
+                    x1 = pt.getX() + this.stack[0];
                     y1 = pt.y + this.stack[1];
                     x2 = x1 + this.stack[2];
                     y2 = y1 + this.stack[3];
-                    pt.x = x2 + this.stack[4];
+                    pt.setX(x2 + this.stack[4]);
                     pt.y = y2 + this.stack[5];
-                    gp.curveTo(x1, y1, x2, y2, pt.x, pt.y);
-                    x1 = pt.x + this.stack[6];
+                    gp.curveTo(x1, y1, x2, y2, pt.getX(), pt.y);
+                    x1 = pt.getX() + this.stack[6];
                     y1 = pt.y + this.stack[7];
                     x2 = x1 + this.stack[8];
                     y2 = y1 + this.stack[9];
                     if (Math.abs(x2 - xbase) > Math.abs(y2 - ybase)) {
-                        pt.x = x2 + this.stack[10];
+                        pt.setX(x2 + this.stack[10]);
                         pt.y = ybase;
                     } else {
-                        pt.x = xbase;
+                        pt.setX(xbase);
                         pt.y = y2 + this.stack[10];
                     }
-                    gp.curveTo(x1, y1, x2, y2, pt.x, pt.y);
+                    gp.curveTo(x1, y1, x2, y2, pt.getX(), pt.y);
                     pt.open = true;
                     this.stackptr = 0;
                     break;
@@ -1135,7 +1146,7 @@ public class Type1CFont extends OutlineFont {
          */
         record Range(int start, int len) {
 
-        public final int getEnd() {
+        public int getEnd() {
                 return this.start + this.len;
             }
 

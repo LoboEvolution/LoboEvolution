@@ -165,21 +165,20 @@ public class TextureDefaultTheme extends AbstractTheme {
 		Color bottomLo = buttonColorDark;
 		Color[] topColors = ColorHelper.createColorArr(topHi, topLo, 11);
 		Color[] bottomColors = ColorHelper.createColorArr(bottomHi, bottomLo, 13);
-		BUTTON_COLORS = new Color[24];
-		System.arraycopy(topColors, 0, BUTTON_COLORS, 0, 11);
-		System.arraycopy(bottomColors, 0, BUTTON_COLORS, 11, 13);
-		CHECKBOX_COLORS = BUTTON_COLORS;
+		setButtonColors(new Color[24]);
+		System.arraycopy(topColors, 0, getButtonColors(), 0, 11);
+		System.arraycopy(bottomColors, 0, getButtonColors(), 11, 13);
+		setCheckboxColors(getButtonColors());
 
-		DEFAULT_COLORS = ColorHelper.createColorArr(controlColorLight, controlColorDark, 24);
-		HIDEFAULT_COLORS = new Color[20];
+		setDefaultColors(ColorHelper.createColorArr(controlColorLight, controlColorDark, 24));
+		setHidefaultColors(new Color[20]);
 		for (int i = 0; i < 20; i++) {
-			HIDEFAULT_COLORS[i] = ColorHelper.brighter(DEFAULT_COLORS[i], 40);
+			getHiDefaultColors()[i] = ColorHelper.brighter(getDefaultColors()[i], 40);
 		}
-		SELECTED_COLORS = ColorHelper.createColorArr(selectionBackgroundColorLight, selectionBackgroundColorDark, 20);
-		SELECTION_COLORS = SELECTED_COLORS;// ColorHelper.createColorArr(selectionBackgroundColorLight,
-											// selectionBackgroundColorDark, 20);
-		MENU_SELECTION_COLORS = ColorHelper.createColorArr(menuSelectionBackgroundColorLight,
-				menuSelectionBackgroundColorDark, 20);
+		setSelectedColors(ColorHelper.createColorArr(selectionBackgroundColorLight, selectionBackgroundColorDark, 20));
+		setSelectionColors(getSelectedColors());
+		setMenuSelectionColors(ColorHelper.createColorArr(menuSelectionBackgroundColorLight,
+                menuSelectionBackgroundColorDark, 20));
 
 		topHi = rolloverColorLight;
 		topLo = rolloverColorDark;
@@ -187,32 +186,31 @@ public class TextureDefaultTheme extends AbstractTheme {
 		bottomLo = ColorHelper.darker(rolloverColorDark, 10);
 		topColors = ColorHelper.createColorArr(topHi, topLo, 11);
 		bottomColors = ColorHelper.createColorArr(bottomHi, bottomLo, 13);
-		ROLLOVER_COLORS = new Color[24];
-		System.arraycopy(topColors, 0, ROLLOVER_COLORS, 0, 11);
-		System.arraycopy(bottomColors, 0, ROLLOVER_COLORS, 11, 13);
-		// PRESSED_COLORS = ColorHelper.createColorArr(buttonColorDark,
-		// buttonColorLight, 24);
-		DISABLED_COLORS = ColorHelper.createColorArr(SUPER_LIGHT_GRAY, EXTRA_LIGHT_GRAY, 24);
-		ACTIVE_COLORS = DEFAULT_COLORS;
-		INACTIVE_COLORS = BUTTON_COLORS;
+		setRolloverColors(new Color[24]);
+		System.arraycopy(topColors, 0, getRolloverColors(), 0, 11);
+		System.arraycopy(bottomColors, 0, getRolloverColors(), 11, 13);
 
-		WINDOW_TITLE_COLORS = ColorHelper.createColorArr(windowTitleColorLight, windowTitleColorDark, 24);
-		WINDOW_INACTIVE_TITLE_COLORS = ColorHelper.createColorArr(windowInactiveTitleColorLight,
-				windowInactiveTitleColorDark, 24);
+		setDisabledColors(ColorHelper.createColorArr(SUPER_LIGHT_GRAY, EXTRA_LIGHT_GRAY, 24));
+		setActiveColors(getDefaultColors());
+		setInactiveColors(getButtonColors());
 
-		TOOLBAR_COLORS = ColorHelper.createColorArr(toolbarColorLight, toolbarColorDark, 24);
-		MENUBAR_COLORS = ColorHelper.createColorArr(menuColorLight, menuColorDark, 24);
+		setWindowTitleColors(ColorHelper.createColorArr(windowTitleColorLight, windowTitleColorDark, 24));
+		setWindowInactiveTitleColors(ColorHelper.createColorArr(windowInactiveTitleColorLight,
+                windowInactiveTitleColorDark, 24));
 
-		TAB_COLORS = BUTTON_COLORS;// ColorHelper.createColorArr(controlColorLight, controlColorDark, 24);
-		COL_HEADER_COLORS = BUTTON_COLORS;
+		setToolbarColors(ColorHelper.createColorArr(toolbarColorLight, toolbarColorDark, 24));
+		setMenubarColors(ColorHelper.createColorArr(menuColorLight, menuColorDark, 24));
 
-		THUMB_COLORS = ColorHelper.createColorArr(backgroundColorLight, backgroundColorDark, 24);
+		setTabColors(getButtonColors());// ColorHelper.createColorArr(controlColorLight, controlColorDark, 24);
+		setColHeaderColors(getButtonColors());
+
+		setThumbColors(ColorHelper.createColorArr(backgroundColorLight, backgroundColorDark, 24));
 		final Color hiColor = ColorHelper.brighter(backgroundColor, 30);
 		final Color loColor = ColorHelper.brighter(backgroundColor, 10);
-		TRACK_COLORS = ColorHelper.createColorArr(loColor, hiColor, 24);
+		setTrackColors(ColorHelper.createColorArr(loColor, hiColor, 24));
 
-		SLIDER_COLORS = THUMB_COLORS;
-		PROGRESSBAR_COLORS = SLIDER_COLORS;
+		setSliderColors(getThumbColors());
+		setProgressbarColors(getSliderColors());
 	}
 
 } // end of class TextureDefaultTheme

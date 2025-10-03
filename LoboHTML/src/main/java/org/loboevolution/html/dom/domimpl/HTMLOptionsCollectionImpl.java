@@ -237,7 +237,7 @@ public class HTMLOptionsCollectionImpl extends HTMLCollectionImpl implements HTM
 				nodeList.add(element);
 			} else {
 				element.setParentImpl(selctElement);
-				nodeList.add(before < 0 ? 0 : before, element);
+				nodeList.add(Math.max(before, 0), element);
 			}
 		}
 	}

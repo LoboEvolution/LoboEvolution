@@ -86,6 +86,7 @@ public class PDFPage {
      * more commands added to the cmds list.
      */
     private boolean finished = false;
+
     /**
      * List of annotations for this page
      */
@@ -496,7 +497,7 @@ public class PDFPage {
      * @throws java.lang.InterruptedException if any.
      */
     public synchronized void waitForFinish() throws InterruptedException {
-        if (!this.finished) {
+        while (!this.finished) {
             wait();
         }
     }

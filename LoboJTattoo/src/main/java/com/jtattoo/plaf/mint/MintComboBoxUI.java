@@ -69,7 +69,7 @@ public class MintComboBoxUI extends BaseComboBoxUI {
 					JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getDefaultColors(), 0, 0,
 							size.width, size.height);
 				} else {
-					JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getInActiveColors(), 0, 0,
+					JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getInactiveColors(), 0, 0,
 							size.width, size.height);
 				}
 			} else {

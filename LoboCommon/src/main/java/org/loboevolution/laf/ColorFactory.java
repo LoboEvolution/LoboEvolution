@@ -44,16 +44,16 @@ public final class ColorFactory {
 	private final Map<String, Color> colorMap;
 
 	/** The Constant HSL_START. */
-	private final String HSL_START = "hsl(";
+    private static final String HSL_START = "hsl(";
 
 	/** The Constant HSLA_START. */
-	private final String HSLA_START = "hsla(";
+	private static final String HSLA_START = "hsla(";
 
 	/** The Constant RGB_START. */
-	private final String RGB_START = "rgb(";
+    private static final String RGB_START = "rgb(";
 
 	/** The Constant RGBA_START. */
-	private final String RGBA_START = "rgba(";
+    private static final String RGBA_START = "rgba(";
 
 	/**
 	 * Gets the instance.

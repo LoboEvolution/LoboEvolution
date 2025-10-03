@@ -87,7 +87,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	@Setter
 	private int preferredWidth = -1;
 	private boolean processingDocumentNotification = false;
-	protected RBlock rblock;
+    private RBlock rblock;
 
 	protected final HtmlRendererContext rcontext;
 

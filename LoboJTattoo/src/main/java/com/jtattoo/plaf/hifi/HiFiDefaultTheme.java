@@ -154,29 +154,29 @@ public class HiFiDefaultTheme extends AbstractTheme {
 	@Override
 	public void setUpColorArrs() {
 		super.setUpColorArrs();
-		DEFAULT_COLORS = ColorHelper.createColorArr(controlColorLight, controlColorDark, 20);
-		HIDEFAULT_COLORS = ColorHelper.createColorArr(ColorHelper.brighter(controlColorLight, 15),
-				ColorHelper.brighter(controlColorDark, 15), 20);
-		ACTIVE_COLORS = DEFAULT_COLORS;
-		INACTIVE_COLORS = ColorHelper.createColorArr(new Color(64, 64, 64), new Color(32, 32, 32), 20);
-		SELECTED_COLORS = HIDEFAULT_COLORS;
-		BUTTON_COLORS = ColorHelper.createColorArr(buttonColorLight, buttonColorDark, 20);
-		ROLLOVER_COLORS = HIDEFAULT_COLORS;
-		DISABLED_COLORS = ColorHelper.createColorArr(ColorHelper.brighter(controlColorDark, 5),
-				ColorHelper.darker(controlColorDark, 10), 20);
+		setDefaultColors(ColorHelper.createColorArr(controlColorLight, controlColorDark, 20));
+		setHidefaultColors(ColorHelper.createColorArr(ColorHelper.brighter(controlColorLight, 15),
+                ColorHelper.brighter(controlColorDark, 15), 20));
+		setActiveColors(getDefaultColors());
+		setInactiveColors(ColorHelper.createColorArr(new Color(64, 64, 64), new Color(32, 32, 32), 20));
+		setSelectedColors(getHiDefaultColors());
+		setButtonColors(ColorHelper.createColorArr(buttonColorLight, buttonColorDark, 20));
+		setRolloverColors(getHiDefaultColors());
+		setDisabledColors(ColorHelper.createColorArr(ColorHelper.brighter(controlColorDark, 5),
+				ColorHelper.darker(controlColorDark, 10), 20));
 
-		WINDOW_TITLE_COLORS = ColorHelper.createColorArr(windowTitleColorLight, windowTitleColorDark, 20);
-		WINDOW_INACTIVE_TITLE_COLORS = ColorHelper.createColorArr(windowInactiveTitleColorLight,
-				windowInactiveTitleColorDark, 20);
-		MENUBAR_COLORS = DEFAULT_COLORS;
-		TOOLBAR_COLORS = MENUBAR_COLORS;
-		TRACK_COLORS = ColorHelper.createColorArr(ColorHelper.darker(backgroundColor, 10),
-				ColorHelper.brighter(backgroundColor, 5), 20);
-		SLIDER_COLORS = DEFAULT_COLORS;
-		PROGRESSBAR_COLORS = DEFAULT_COLORS;
-		THUMB_COLORS = DEFAULT_COLORS;
-		TAB_COLORS = DEFAULT_COLORS;
-		COL_HEADER_COLORS = DEFAULT_COLORS;
+		setWindowTitleColors(ColorHelper.createColorArr(windowTitleColorLight, windowTitleColorDark, 20));
+		setWindowInactiveTitleColors(ColorHelper.createColorArr(windowInactiveTitleColorLight,
+                windowInactiveTitleColorDark, 20));
+		setMenubarColors(getDefaultColors());
+		setToolbarColors(getMenubarColors());
+		setTrackColors(ColorHelper.createColorArr(ColorHelper.darker(backgroundColor, 10),
+                ColorHelper.brighter(backgroundColor, 5), 20));
+		setSliderColors(getDefaultColors());
+		setProgressbarColors(getDefaultColors());
+		setThumbColors(getDefaultColors());
+		setTabColors(getDefaultColors());
+		setColHeaderColors(getDefaultColors());
 	}
 
 } // end of class HiFiDefaultTheme

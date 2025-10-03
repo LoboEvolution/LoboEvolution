@@ -41,7 +41,7 @@ public class SpinButton extends NoFocusButton {
                 } else if (JTattooUtilities.isFrameActive(this)) {
                     colors = AbstractLookAndFeel.getTheme().getButtonColors();
                 } else {
-                    colors = AbstractLookAndFeel.getTheme().getInActiveColors();
+                    colors = AbstractLookAndFeel.getTheme().getInactiveColors();
                 }
             }
         } else {

@@ -26,6 +26,7 @@
 
 package org.loboevolution.html.dom.input;
 
+import lombok.EqualsAndHashCode;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.control.InputControl;
 import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
@@ -39,6 +40,7 @@ import java.awt.event.KeyListener;
 /**
  * <p>InputNumber class.</p>
  */
+
 public class InputNumber extends InputText {
 
 	private final JTextField numeric;
@@ -94,4 +96,9 @@ public class InputNumber extends InputText {
 			}
 		};
 	}
+
+    @Override
+    public boolean equals(Object o) {
+        return super.equals(o);
+    }
 }

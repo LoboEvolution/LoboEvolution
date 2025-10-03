@@ -47,7 +47,7 @@ public class AcrylDefaultTheme extends AbstractTheme {
 		setUpColor();
 		// Overwrite defaults with user props
 		loadProperties();
-		// Setup the color arrays
+		// Set up the color arrays
 		setUpColorArrs();
 	}
 
@@ -138,23 +138,24 @@ public class AcrylDefaultTheme extends AbstractTheme {
 
 		Color[] topColors = ColorHelper.createColorArr(topHi, topLo, 10);
 		Color[] bottomColors = ColorHelper.createColorArr(bottomHi, bottomLo, 10);
-		DEFAULT_COLORS = new Color[20];
+		setDefaultColors(new Color[20]);
+        Color[] defaultColors = getDefaultColors();
 		for (int i = 0; i < 10; i++) {
-			DEFAULT_COLORS[i] = topColors[i];
-			DEFAULT_COLORS[i + 10] = bottomColors[i];
+            defaultColors[i] = topColors[i];
+            defaultColors[i + 10] = bottomColors[i];
 		}
 
-		ACTIVE_COLORS = DEFAULT_COLORS;
+		setActiveColors(defaultColors);
 		if (controlColorLight.equals(new ColorUIResource(96, 98, 100))) {
-			ROLLOVER_COLORS = new Color[]{new Color(194, 207, 233), new Color(185, 201, 231),
-					new Color(176, 195, 228), new Color(168, 189, 226), new Color(158, 182, 223),
-					new Color(148, 176, 220), new Color(138, 169, 217), new Color(132, 169, 217),
-					new Color(124, 169, 218), new Color(116, 167, 218), new Color(104, 160, 218),
-					new Color(86, 150, 214), new Color(64, 136, 210), new Color(72, 144, 214), new Color(79, 150, 219),
-					new Color(89, 157, 224), new Color(100, 165, 230), new Color(110, 172, 235),
-					new Color(120, 180, 240), new Color(127, 186, 247), new Color(134, 193, 254),
-					new Color(142, 202, 254), new Color(151, 211, 255), new Color(158, 218, 255),
-					new Color(166, 226, 255), new Color(177, 239, 255), new Color(188, 252, 255),};
+			setRolloverColors(new Color[]{new Color(194, 207, 233), new Color(185, 201, 231),
+                    new Color(176, 195, 228), new Color(168, 189, 226), new Color(158, 182, 223),
+                    new Color(148, 176, 220), new Color(138, 169, 217), new Color(132, 169, 217),
+                    new Color(124, 169, 218), new Color(116, 167, 218), new Color(104, 160, 218),
+                    new Color(86, 150, 214), new Color(64, 136, 210), new Color(72, 144, 214), new Color(79, 150, 219),
+                    new Color(89, 157, 224), new Color(100, 165, 230), new Color(110, 172, 235),
+                    new Color(120, 180, 240), new Color(127, 186, 247), new Color(134, 193, 254),
+                    new Color(142, 202, 254), new Color(151, 211, 255), new Color(158, 218, 255),
+                    new Color(166, 226, 255), new Color(177, 239, 255), new Color(188, 252, 255),});
 		} else {
 			topHi = ColorHelper.brighter(rolloverColorLight, 20);
 			topLo = ColorHelper.brighter(rolloverColorLight, 30);
@@ -162,15 +163,15 @@ public class AcrylDefaultTheme extends AbstractTheme {
 			bottomLo = rolloverColorLight;
 			topColors = ColorHelper.createColorArr(topHi, topLo, 10);
 			bottomColors = ColorHelper.createColorArr(bottomHi, bottomLo, 10);
-			ROLLOVER_COLORS = new Color[20];
+			setRolloverColors(new Color[20]);
 			for (int i = 0; i < 10; i++) {
-				ROLLOVER_COLORS[i] = topColors[i];
-				ROLLOVER_COLORS[i + 10] = bottomColors[i];
+				getRolloverColors()[i] = topColors[i];
+				getRolloverColors()[i + 10] = bottomColors[i];
 			}
 		}
 
-		SELECTED_COLORS = ColorHelper.createColorArr(new Color(200, 200, 200), new Color(240, 240, 240), 20);
-		DISABLED_COLORS = ColorHelper.createColorArr(Color.white, new Color(230, 230, 230), 20);
+		setSelectedColors(ColorHelper.createColorArr(new Color(200, 200, 200), new Color(240, 240, 240), 20));
+		setDisabledColors(ColorHelper.createColorArr(Color.white, new Color(230, 230, 230), 20));
 
 		topHi = windowTitleColorLight;
 		topLo = ColorHelper.brighter(windowTitleColorLight, 20);
@@ -178,10 +179,10 @@ public class AcrylDefaultTheme extends AbstractTheme {
 		bottomLo = windowTitleColorLight;
 		topColors = ColorHelper.createColorArr(topHi, topLo, 10);
 		bottomColors = ColorHelper.createColorArr(bottomHi, bottomLo, 10);
-		WINDOW_TITLE_COLORS = new Color[20];
+		setWindowTitleColors(new Color[20]);
 		for (int i = 0; i < 10; i++) {
-			WINDOW_TITLE_COLORS[i] = topColors[i];
-			WINDOW_TITLE_COLORS[i + 10] = bottomColors[i];
+			getWindowTitleColors()[i] = topColors[i];
+			getWindowTitleColors()[i + 10] = bottomColors[i];
 		}
 
 		topHi = windowInactiveTitleColorLight;
@@ -190,14 +191,14 @@ public class AcrylDefaultTheme extends AbstractTheme {
 		bottomLo = windowInactiveTitleColorLight;
 		topColors = ColorHelper.createColorArr(topHi, topLo, 10);
 		bottomColors = ColorHelper.createColorArr(bottomHi, bottomLo, 10);
-		WINDOW_INACTIVE_TITLE_COLORS = new Color[20];
+		setWindowInactiveTitleColors(new Color[20]);
 		for (int i = 0; i < 10; i++) {
-			WINDOW_INACTIVE_TITLE_COLORS[i] = ColorHelper.brighter(topColors[i], 10);
-			WINDOW_INACTIVE_TITLE_COLORS[i + 10] = ColorHelper.brighter(bottomColors[i], 10);
+			getWindowInactiveTitleColors()[i] = ColorHelper.brighter(topColors[i], 10);
+			getWindowInactiveTitleColors()[i + 10] = ColorHelper.brighter(bottomColors[i], 10);
 		}
 
-		MENUBAR_COLORS = ColorHelper.createColorArr(menuColorLight, menuColorDark, 20);
-		TOOLBAR_COLORS = ColorHelper.createColorArr(toolbarColorLight, toolbarColorDark, 20);
+		setMenubarColors(ColorHelper.createColorArr(menuColorLight, menuColorDark, 20));
+		setToolbarColors(ColorHelper.createColorArr(toolbarColorLight, toolbarColorDark, 20));
 
 		topHi = ColorHelper.brighter(buttonColorLight, 20);
 		topLo = ColorHelper.brighter(buttonColorLight, 80);
@@ -205,20 +206,20 @@ public class AcrylDefaultTheme extends AbstractTheme {
 		bottomLo = buttonColorLight;
 		topColors = ColorHelper.createColorArr(topHi, topLo, 10);
 		bottomColors = ColorHelper.createColorArr(bottomHi, bottomLo, 10);
-		BUTTON_COLORS = new Color[20];
+		setButtonColors(new Color[20]);
 		for (int i = 0; i < 10; i++) {
-			BUTTON_COLORS[i] = topColors[i];
-			BUTTON_COLORS[i + 10] = bottomColors[i];
+			getButtonColors()[i] = topColors[i];
+			getButtonColors()[i + 10] = bottomColors[i];
 		}
-		CHECKBOX_COLORS = DEFAULT_COLORS;
-		INACTIVE_COLORS = BUTTON_COLORS;
-		TAB_COLORS = BUTTON_COLORS;
-		COL_HEADER_COLORS = BUTTON_COLORS;
+		setCheckboxColors(defaultColors);
+		setInactiveColors(getButtonColors());
+		setTabColors(getButtonColors());
+		setColHeaderColors(getButtonColors());
 
-		TRACK_COLORS = ColorHelper.createColorArr(backgroundColor, Color.white, 16);
-		THUMB_COLORS = DEFAULT_COLORS;
-		SLIDER_COLORS = DEFAULT_COLORS;
-		PROGRESSBAR_COLORS = DEFAULT_COLORS;
+		setTrackColors(ColorHelper.createColorArr(backgroundColor, Color.white, 16));
+		setThumbColors(getDefaultColors());
+		setSliderColors(defaultColors);
+		setProgressbarColors(defaultColors);
 	}
 
 } // end of class AcrylDefaultTheme

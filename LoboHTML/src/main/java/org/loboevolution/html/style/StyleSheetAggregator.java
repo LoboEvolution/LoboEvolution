@@ -47,7 +47,6 @@ import org.loboevolution.common.Urls;
 import org.loboevolution.config.HtmlRendererConfig;
 import org.loboevolution.html.dom.*;
 import org.loboevolution.html.dom.domimpl.*;
-import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.js.css.StyleSheetListImpl;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.Text;

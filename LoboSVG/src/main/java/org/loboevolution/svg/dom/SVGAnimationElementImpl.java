@@ -26,6 +26,7 @@
 
 package org.loboevolution.svg.dom;
 
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.common.Strings;
@@ -41,14 +42,16 @@ import java.util.List;
  * <p>SVGAnimationElementImpl class.</p>
  */
 @Slf4j
+@Getter
+@Setter
 public abstract class SVGAnimationElementImpl extends SVGAnimationImpl implements SVGAnimationElement {
 
-	public List<Float> times = null;
-	public List<String> vals = null;
-	public List<SVGPathSegCurvetoCubicAbsImpl> splines = null;
+    private List<Float> times = null;
+    private List<String> vals = null;
+    private List<SVGPathSegCurvetoCubicAbsImpl> splines = null;
 
 	private boolean active = false;
-	protected boolean finished = false;
+    private boolean finished = false;
 	private float startTime;
 	private float endTime;
 
@@ -262,7 +265,7 @@ public abstract class SVGAnimationElementImpl extends SVGAnimationImpl implement
 
 	protected void setupTimeValueVectors(final String calcMode, final String values) {
 		times = new ArrayList<>();
-		vals = new ArrayList();
+		vals = new ArrayList<>();
 		final String keyTimes = getAttribute("keyTimes");
 
 		if (Strings.isCssBlank(keyTimes)) {

@@ -7,11 +7,11 @@ import java.awt.*;
 
 public class CloseSymbol implements Icon {
 
-    private Color foregroundColor = null;
-    private Color shadowColor = null;
-    private Color rolloverColor = null;
-    private Color inactiveForegroundColor = null;
-    private Color inactiveShadowColor = null;
+    private final Color foregroundColor;
+    private final Color shadowColor;
+    private final Color rolloverColor;
+    private final Color inactiveForegroundColor;
+    private final Color inactiveShadowColor;
     private Insets insets = new Insets(0, 0, 0, 0);
 
     public CloseSymbol(final Color foregroundColor, final Color shadowColor, final Color rolloverColor) {

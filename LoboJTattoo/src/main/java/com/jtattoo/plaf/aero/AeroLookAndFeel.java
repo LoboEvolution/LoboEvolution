@@ -26,6 +26,7 @@
 
 package com.jtattoo.plaf.aero;
 
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -47,7 +48,8 @@ import com.jtattoo.plaf.base.*;
  */
 public class AeroLookAndFeel extends AbstractLookAndFeel {
 
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	private static AeroDefaultTheme myTheme = null;
 

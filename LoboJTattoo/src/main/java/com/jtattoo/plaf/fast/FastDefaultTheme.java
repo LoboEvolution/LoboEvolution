@@ -93,23 +93,21 @@ public class FastDefaultTheme extends AbstractTheme {
 	public void setUpColorArrs() {
 		super.setUpColorArrs();
 		// Generate the color arrays
-		DEFAULT_COLORS = ColorHelper.createColorArr(controlBackgroundColor, controlBackgroundColor, 2);
-		HIDEFAULT_COLORS = ColorHelper.createColorArr(backgroundColor, backgroundColor, 2);
+		setDefaultColors(ColorHelper.createColorArr(controlBackgroundColor, controlBackgroundColor, 2));
+		setHidefaultColors(ColorHelper.createColorArr(backgroundColor, backgroundColor, 2));
 
-		ACTIVE_COLORS = DEFAULT_COLORS;
-		INACTIVE_COLORS = HIDEFAULT_COLORS;
+		setActiveColors(getDefaultColors());
+		setInactiveColors(getHiDefaultColors());
 
-		// ROLLOVER_COLORS = ColorHelper.createColorArr(buttonBackgroundColor,
-		// buttonBackgroundColor, 2);
-		ROLLOVER_COLORS = ColorHelper.createColorArr(SUPER_LIGHT_GRAY, SUPER_LIGHT_GRAY, 2);
-		SELECTED_COLORS = ColorHelper.createColorArr(backgroundColor, backgroundColor, 2);
-		DISABLED_COLORS = ColorHelper.createColorArr(controlColorLight, controlColorLight, 2);
+		setRolloverColors(ColorHelper.createColorArr(SUPER_LIGHT_GRAY, SUPER_LIGHT_GRAY, 2));
+		setSelectedColors(ColorHelper.createColorArr(backgroundColor, backgroundColor, 2));
+		setDisabledColors(ColorHelper.createColorArr(controlColorLight, controlColorLight, 2));
 
-		BUTTON_COLORS = ColorHelper.createColorArr(buttonBackgroundColor, buttonBackgroundColor, 2);
-		COL_HEADER_COLORS = ColorHelper.createColorArr(SUPER_LIGHT_GRAY, SUPER_LIGHT_GRAY, 2);
-		CHECKBOX_COLORS = ColorHelper.createColorArr(SUPER_LIGHT_GRAY, SUPER_LIGHT_GRAY, 2);
+		setButtonColors(ColorHelper.createColorArr(buttonBackgroundColor, buttonBackgroundColor, 2));
+		setColHeaderColors(ColorHelper.createColorArr(SUPER_LIGHT_GRAY, SUPER_LIGHT_GRAY, 2));
+		setCheckboxColors(ColorHelper.createColorArr(SUPER_LIGHT_GRAY, SUPER_LIGHT_GRAY, 2));
 
-		TAB_COLORS = DEFAULT_COLORS;
+		setTabColors(getDefaultColors());
 	}
 
 } // end of class FastDefaultTheme

@@ -120,17 +120,17 @@ public class LunaDefaultTheme extends AbstractTheme {
 		super.setUpColorArrs();
 
 		// Generate the color arrays
-		DEFAULT_COLORS = ColorHelper.createColorArr(controlColorLight, controlColorDark, 20);
-		HIDEFAULT_COLORS = ColorHelper.createColorArr(ColorHelper.brighter(controlColorLight, 90),
-				ColorHelper.brighter(controlColorDark, 30), 20);
+		setDefaultColors(ColorHelper.createColorArr(controlColorLight, controlColorDark, 20));
+		setHidefaultColors(ColorHelper.createColorArr(ColorHelper.brighter(controlColorLight, 90),
+                ColorHelper.brighter(controlColorDark, 30), 20));
 
-		ACTIVE_COLORS = DEFAULT_COLORS;
-		INACTIVE_COLORS = ColorHelper.createColorArr(new Color(248, 247, 241), backgroundColor, 20);
+		setActiveColors(getDefaultColors());
+		setInactiveColors(ColorHelper.createColorArr(new Color(248, 247, 241), backgroundColor, 20));
 
-		ROLLOVER_COLORS = ColorHelper.createColorArr(ColorHelper.brighter(controlColorLight, 30),
-				ColorHelper.brighter(controlColorDark, 20), 30);
-		SELECTED_COLORS = DEFAULT_COLORS;
-		DISABLED_COLORS = ColorHelper.createColorArr(Color.white, Color.lightGray, 20);
+		setRolloverColors(ColorHelper.createColorArr(ColorHelper.brighter(controlColorLight, 30),
+                ColorHelper.brighter(controlColorDark, 20), 30));
+		setSelectedColors(getDefaultColors());
+		setDisabledColors(ColorHelper.createColorArr(Color.white, Color.lightGray, 20));
 
 		// Generate the color arrays
 		final Color topHi = windowTitleColorLight;
@@ -138,35 +138,32 @@ public class LunaDefaultTheme extends AbstractTheme {
 		final Color bottomHi = ColorHelper.brighter(windowTitleColorDark, 15);
 		final Color bottomLo = windowTitleColorDark;
 
-		WINDOW_TITLE_COLORS = new Color[20];
+		setWindowTitleColors(new Color[20]);
 		final Color[] topColors = ColorHelper.createColorArr(topHi, topLo, 8);
-		System.arraycopy(topColors, 0, WINDOW_TITLE_COLORS, 0, 8);
+		System.arraycopy(topColors, 0, getWindowTitleColors(), 0, 8);
 		final Color[] bottomColors = ColorHelper.createColorArr(bottomHi, bottomLo, 12);
-		System.arraycopy(bottomColors, 0, WINDOW_TITLE_COLORS, 8, 12);
+		System.arraycopy(bottomColors, 0, getWindowTitleColors(), 8, 12);
 
-		WINDOW_INACTIVE_TITLE_COLORS = new Color[WINDOW_TITLE_COLORS.length];
-		for (int i = 0; i < WINDOW_INACTIVE_TITLE_COLORS.length; i++) {
-			WINDOW_INACTIVE_TITLE_COLORS[i] = ColorHelper.brighter(WINDOW_TITLE_COLORS[i], 20);
+		setWindowInactiveTitleColors(new Color[getWindowTitleColors().length]);
+		for (int i = 0; i < getWindowInactiveTitleColors().length; i++) {
+			getWindowInactiveTitleColors()[i] = ColorHelper.brighter(getWindowTitleColors()[i], 20);
 		}
 
-		MENUBAR_COLORS = ColorHelper.createColorArr(menuColorLight, menuColorDark, 20);
-		TOOLBAR_COLORS = ColorHelper.createColorArr(toolbarColorLight, toolbarColorDark, 20);
+		setMenubarColors(ColorHelper.createColorArr(menuColorLight, menuColorDark, 20));
+		setToolbarColors(ColorHelper.createColorArr(toolbarColorLight, toolbarColorDark, 20));
 
-		BUTTON_COLORS = new Color[] { new Color(255, 255, 255), new Color(254, 254, 254), new Color(252, 252, 251),
-				new Color(251, 251, 249), new Color(250, 250, 248), new Color(249, 249, 246), new Color(248, 248, 244),
-				new Color(247, 247, 243), new Color(246, 246, 242), new Color(245, 245, 240), new Color(244, 244, 239),
-				new Color(243, 243, 238), new Color(242, 242, 236), new Color(241, 241, 235), new Color(240, 240, 234),
-				new Color(236, 235, 230), new Color(226, 223, 214), new Color(214, 208, 197), };
-		TAB_COLORS = ColorHelper.createColorArr(Color.white, new Color(236, 235, 230), 20);
-		COL_HEADER_COLORS = TAB_COLORS;
-		CHECKBOX_COLORS = TAB_COLORS;
-		TRACK_COLORS = ColorHelper.createColorArr(new Color(243, 241, 236), new Color(254, 254, 251), 20);
-		THUMB_COLORS = ColorHelper.createColorArr(new Color(218, 230, 254), new Color(180, 197, 240), 20);
-		// SLIDER_COLORS = ColorHelper.createColorArr(new Color(218, 230, 254), new
-		// Color(180, 197, 240), 20);
-		SLIDER_COLORS = THUMB_COLORS;// ColorHelper.createColorArr(new Color(243, 241, 236), new Color(254, 254,
-										// 251), 20);
-		PROGRESSBAR_COLORS = THUMB_COLORS;
+		setButtonColors(new Color[]{new Color(255, 255, 255), new Color(254, 254, 254), new Color(252, 252, 251),
+                new Color(251, 251, 249), new Color(250, 250, 248), new Color(249, 249, 246), new Color(248, 248, 244),
+                new Color(247, 247, 243), new Color(246, 246, 242), new Color(245, 245, 240), new Color(244, 244, 239),
+                new Color(243, 243, 238), new Color(242, 242, 236), new Color(241, 241, 235), new Color(240, 240, 234),
+                new Color(236, 235, 230), new Color(226, 223, 214), new Color(214, 208, 197),});
+		setTabColors(ColorHelper.createColorArr(Color.white, new Color(236, 235, 230), 20));
+		setColHeaderColors(getTabColors());
+		setCheckboxColors(getTabColors());
+		setTrackColors(ColorHelper.createColorArr(new Color(243, 241, 236), new Color(254, 254, 251), 20));
+		setThumbColors(ColorHelper.createColorArr(new Color(218, 230, 254), new Color(180, 197, 240), 20));
+		setSliderColors(getThumbColors());
+		setProgressbarColors(getThumbColors());
 	}
 
 } // end of class LunaDefaultTheme

@@ -119,45 +119,45 @@ public class AeroDefaultTheme extends AbstractTheme {
 		super.setUpColorArrs();
 		Color[] color1 = ColorHelper.createColorArr(controlColorLight, controlColorDark, 6);
 		Color[] color2 = ColorHelper.createColorArr(ColorHelper.brighter(controlColorDark, 10), controlColorLight, 15);
-		System.arraycopy(color1, 0, DEFAULT_COLORS, 0, 6);
-		System.arraycopy(color2, 0, DEFAULT_COLORS, 5, 15);
+		System.arraycopy(color1, 0, getDefaultColors(), 0, 6);
+		System.arraycopy(color2, 0, getDefaultColors(), 5, 15);
 		for (int i = 0; i < 20; i++) {
-			HIDEFAULT_COLORS[i] = ColorHelper.brighter(DEFAULT_COLORS[i], 60);
+			getHiDefaultColors()[i] = ColorHelper.brighter(getDefaultColors()[i], 60);
 		}
 
-		ROLLOVER_COLORS = HIDEFAULT_COLORS;
-		ACTIVE_COLORS = DEFAULT_COLORS;
+		setRolloverColors(getHiDefaultColors());
+		setActiveColors(getDefaultColors());
 
-		DISABLED_COLORS = ColorHelper.createColorArr(new Color(240, 240, 240), new Color(220, 220, 220), 20);
+		setDisabledColors(ColorHelper.createColorArr(new Color(240, 240, 240), new Color(220, 220, 220), 20));
 
 		color1 = ColorHelper.createColorArr(windowTitleColorLight, windowTitleColorDark, 6);
 		color2 = ColorHelper.createColorArr(ColorHelper.brighter(windowTitleColorDark, 10), windowTitleColorLight, 15);
-		System.arraycopy(color1, 0, WINDOW_TITLE_COLORS, 0, 6);
-		System.arraycopy(color2, 0, WINDOW_TITLE_COLORS, 5, 15);
+		System.arraycopy(color1, 0, getWindowTitleColors(), 0, 6);
+		System.arraycopy(color2, 0, getWindowTitleColors(), 5, 15);
 
-		MENUBAR_COLORS = ColorHelper.createColorArr(menuColorLight, menuColorDark, 20);
-		TOOLBAR_COLORS = ColorHelper.createColorArr(toolbarColorLight, toolbarColorDark, 20);
+		setMenubarColors(ColorHelper.createColorArr(menuColorLight, menuColorDark, 20));
+		setToolbarColors(ColorHelper.createColorArr(toolbarColorLight, toolbarColorDark, 20));
 
-		BUTTON_COLORS = new Color[] { new Color(247, 247, 247), new Color(243, 243, 243), new Color(240, 240, 240),
+		setButtonColors(new Color[] { new Color(247, 247, 247), new Color(243, 243, 243), new Color(240, 240, 240),
 				new Color(230, 230, 230), new Color(220, 220, 220), new Color(214, 214, 214), new Color(218, 218, 218),
 				new Color(222, 222, 222), new Color(226, 226, 226), new Color(230, 230, 230), new Color(234, 234, 234),
 				new Color(237, 237, 237), new Color(240, 240, 240), new Color(242, 242, 242), new Color(244, 244, 244),
 				new Color(246, 246, 246), new Color(248, 248, 248), new Color(250, 250, 250), new Color(252, 252, 252),
-				new Color(254, 254, 254), new Color(255, 255, 255), };
-		CHECKBOX_COLORS = BUTTON_COLORS;
+				new Color(254, 254, 254), new Color(255, 255, 255), });
+		setCheckboxColors(getButtonColors());
 
-		SELECTED_COLORS = new Color[20];
+		setSelectedColors(new Color[20]);
 		for (int i = 0; i < 20; i++) {
-			SELECTED_COLORS[i] = ColorHelper.brighter(DEFAULT_COLORS[i], 40);
+			getSelectedColors()[i] = ColorHelper.brighter(getDefaultColors()[i], 40);
 		}
-		TAB_COLORS = BUTTON_COLORS;
-		COL_HEADER_COLORS = BUTTON_COLORS;
-		THUMB_COLORS = SELECTED_COLORS;
-		SLIDER_COLORS = THUMB_COLORS;
-		PROGRESSBAR_COLORS = THUMB_COLORS;
-		INACTIVE_COLORS = BUTTON_COLORS;
+		setTabColors(getButtonColors());
+		setColHeaderColors(getButtonColors());
+		setThumbColors(getSelectedColors());
+		setSliderColors(getThumbColors());
+		setProgressbarColors(getThumbColors());
+		setInactiveColors(getButtonColors());
 
-		WINDOW_INACTIVE_TITLE_COLORS = INACTIVE_COLORS;
+		setWindowInactiveTitleColors(getInactiveColors());
 	}
 
 } // end of class AeroDefaultTheme

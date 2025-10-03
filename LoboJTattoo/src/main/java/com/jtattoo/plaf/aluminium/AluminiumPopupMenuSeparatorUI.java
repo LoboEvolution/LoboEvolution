@@ -43,8 +43,6 @@ import javax.swing.plaf.basic.BasicSeparatorUI;
  */
 public class AluminiumPopupMenuSeparatorUI extends BasicSeparatorUI {
 
-	private static final Dimension SIZE = new Dimension(1, 1);
-
 	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {
 		return new AluminiumPopupMenuSeparatorUI();
@@ -53,7 +51,7 @@ public class AluminiumPopupMenuSeparatorUI extends BasicSeparatorUI {
 	/** {@inheritDoc} */
 	@Override
 	public Dimension getPreferredSize(final JComponent c) {
-		return SIZE;
+		return new Dimension(1, 1);
 	}
 
 	/** {@inheritDoc} */

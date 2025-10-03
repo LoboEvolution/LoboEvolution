@@ -122,31 +122,31 @@ public class SmartDefaultTheme extends AbstractTheme {
 		super.setUpColorArrs();
 
 		// Generate the color arrays
-		DEFAULT_COLORS = ColorHelper.createColorArr(controlColorLight, controlColorDark, 20);
-		HIDEFAULT_COLORS = ColorHelper.createColorArr(ColorHelper.brighter(controlColorLight, 90),
-				ColorHelper.brighter(controlColorDark, 30), 20);
+		setDefaultColors(ColorHelper.createColorArr(controlColorLight, controlColorDark, 20));
+		setHidefaultColors(ColorHelper.createColorArr(ColorHelper.brighter(controlColorLight, 90),
+                ColorHelper.brighter(controlColorDark, 30), 20));
 
-		ACTIVE_COLORS = DEFAULT_COLORS;
-		INACTIVE_COLORS = ColorHelper.createColorArr(Color.white, backgroundColor, 20);
+		setActiveColors(getDefaultColors());
+		setInactiveColors(ColorHelper.createColorArr(Color.white, backgroundColor, 20));
 
-		ROLLOVER_COLORS = ColorHelper.createColorArr(rolloverColorLight, rolloverColorDark, 20);
-		SELECTED_COLORS = DEFAULT_COLORS;
-		DISABLED_COLORS = ColorHelper.createColorArr(Color.white, new Color(230, 230, 230), 20);
+		setRolloverColors(ColorHelper.createColorArr(rolloverColorLight, rolloverColorDark, 20));
+		setSelectedColors(getDefaultColors());
+		setDisabledColors(ColorHelper.createColorArr(Color.white, new Color(230, 230, 230), 20));
 
-		WINDOW_TITLE_COLORS = ColorHelper.createColorArr(windowTitleColorLight, windowTitleColorDark, 20);
-		WINDOW_INACTIVE_TITLE_COLORS = ColorHelper.createColorArr(windowInactiveTitleColorLight,
-				windowInactiveTitleColorDark, 20);
-		MENUBAR_COLORS = ColorHelper.createColorArr(menuColorLight, menuColorDark, 20);
-		TOOLBAR_COLORS = ColorHelper.createColorArr(toolbarColorLight, toolbarColorDark, 20);
+		setWindowTitleColors(ColorHelper.createColorArr(windowTitleColorLight, windowTitleColorDark, 20));
+		setWindowInactiveTitleColors(ColorHelper.createColorArr(windowInactiveTitleColorLight,
+                windowInactiveTitleColorDark, 20));
+		setMenubarColors(ColorHelper.createColorArr(menuColorLight, menuColorDark, 20));
+		setToolbarColors(ColorHelper.createColorArr(toolbarColorLight, toolbarColorDark, 20));
 
-		BUTTON_COLORS = ColorHelper.createColorArr(buttonColorLight, buttonColorDark, 20);
-		TAB_COLORS = ColorHelper.createColorArr(Color.white, backgroundColor, 20);
-		CHECKBOX_COLORS = TAB_COLORS;
-		COL_HEADER_COLORS = MENUBAR_COLORS;
-		TRACK_COLORS = ColorHelper.createColorArr(backgroundColor, Color.white, 16);
-		THUMB_COLORS = DEFAULT_COLORS;
-		SLIDER_COLORS = DEFAULT_COLORS;
-		PROGRESSBAR_COLORS = DEFAULT_COLORS;
+		setButtonColors(ColorHelper.createColorArr(buttonColorLight, buttonColorDark, 20));
+		setTabColors(ColorHelper.createColorArr(Color.white, backgroundColor, 20));
+		setCheckboxColors(getTabColors());
+		setColHeaderColors(getMenubarColors());
+		setTrackColors(ColorHelper.createColorArr(backgroundColor, Color.white, 16));
+		setThumbColors(getDefaultColors());
+		setSliderColors(getDefaultColors());
+		setProgressbarColors(getDefaultColors());
 	}
 
 } // end of class SmartDefaultTheme

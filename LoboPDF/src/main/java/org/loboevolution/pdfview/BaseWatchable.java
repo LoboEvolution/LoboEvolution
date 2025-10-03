@@ -123,65 +123,62 @@ public abstract class BaseWatchable implements Watchable, Runnable {
     public void run() {
         try {
             Thread.sleep(1);
-            // call setup once we started
             if (getStatus() == Watchable.NOT_STARTED) {
                 setup();
             }
 
             setStatus(Watchable.PAUSED);
 
-            synchronized (this.parserLock) {
-                while (!isFinished() && getStatus() != Watchable.STOPPED) {
-                    if (isExecutable()) {
-                        // set the status to running
-                        setStatus(Watchable.RUNNING);
-
-                        try {
-                            // keep going until the status is no longer running,
-                            // our gate tells us to stop, or no-one is watching
-                            int laststatus = Watchable.RUNNING;
-                            while ((getStatus() == Watchable.RUNNING) && (this.gate == null || !this.gate.iterate())) {
-                                // update the status based on this iteration
-                                final int status = iterate();
-                                if (status != laststatus) {
-                                    // update status only when necessary, this increases performance
-                                    setStatus(status);
-                                    laststatus = status;
-                                }
-
-                            }
-
-                            // make sure we are paused
-                            if (getStatus() == Watchable.RUNNING) {
-                                setStatus(Watchable.PAUSED);
-                            }
-                        } catch (final Exception ex) {
-                            setError(ex);
-                        }
-                    } else {
-                        // wait for our status to change
-                        synchronized (this.statusLock) {
-                            if (!isExecutable()) {
-                                try {
-                                    this.statusLock.wait();
-                                } catch (final InterruptedException ie) {
-                                    Thread.currentThread().interrupt(); // ← Preserve the interrupt status
-                                    PDFDebugger.debug("Thread interrupted while waiting for status change.");
-                                }
+            while (!isFinished() && getStatus() != Watchable.STOPPED) {
+                // Check if executable without holding any locks first
+                if (!isExecutable()) {
+                    // Wait for status change without any other locks held
+                    synchronized (this.statusLock) {
+                        while (!isExecutable() && !isFinished() && getStatus() != Watchable.STOPPED) {
+                            try {
+                                this.statusLock.wait();
+                            } catch (final InterruptedException ie) {
+                                Thread.currentThread().interrupt();
+                                break;
                             }
                         }
                     }
+                    // After wait, continue to next iteration to re-check conditions
+                    continue;
+                }
+
+                // Now we know we're executable - do the work with parserLock
+                synchronized (this.parserLock) {
+                    if (!isExecutable()) { // Re-check inside lock
+                        continue;
+                    }
+
+                    setStatus(Watchable.RUNNING);
+                    try {
+                        int laststatus = Watchable.RUNNING;
+                        while ((getStatus() == Watchable.RUNNING) && (this.gate == null || !this.gate.iterate())) {
+                            final int status = iterate();
+                            if (status != laststatus) {
+                                setStatus(status);
+                                laststatus = status;
+                            }
+                        }
+
+                        if (getStatus() == Watchable.RUNNING) {
+                            setStatus(Watchable.PAUSED);
+                        }
+                    } catch (final Exception ex) {
+                        setError(ex);
+                    }
                 }
             }
-            // call cleanup when we are done
-            if (getStatus() == Watchable.COMPLETED || getStatus() == Watchable.ERROR) {
 
+            if (getStatus() == Watchable.COMPLETED || getStatus() == Watchable.ERROR) {
                 cleanup();
             }
         } catch (final InterruptedException e) {
             PDFDebugger.debug("Interrupted.");
         }
-        // notify that we are no longer running
         this.thread = null;
     }
 
@@ -299,54 +296,42 @@ public abstract class BaseWatchable implements Watchable, Runnable {
     }
 
     /**
-     * Wait for this watchable to finish
-     */
-    public void waitForFinish() {
-        synchronized (this.statusLock) {
-            while (!isFinished() && getStatus() != Watchable.STOPPED) {
-                try {
-                    this.statusLock.wait();
-                } catch (final InterruptedException ex) {
-                    Thread.currentThread().interrupt();
-                    PDFDebugger.debug("Thread interrupted while waiting for status change.");
-                }
-            }
-        }
-    }
-
-    /**
      * Start executing this watchable
      *
      * @param synchronous if true, run in this thread
      */
-    protected synchronized void execute(final boolean synchronous) {
-        // see if we're already running
-        if (this.thread != null) {
-            // we're already running. Make sure we wake up on any change.
-            synchronized (this.statusLock) {
-                this.statusLock.notifyAll();
+    protected void execute(final boolean synchronous) {
+        // Use finer-grained locking instead of method synchronization
+        synchronized (this) {
+            if (this.thread != null || isFinished()) {
+                synchronized (this.statusLock) {
+                    this.statusLock.notifyAll();
+                }
+                return;
             }
-
-            return;
-        } else if (isFinished()) {
-            // we're all finished
-            return;
         }
 
-        // we'return not running. Start up
         if (synchronous) {
-            this.thread = Thread.currentThread();
+            synchronized (this) {
+                this.thread = Thread.currentThread();
+            }
             run();
         } else {
-            this.thread = new Thread(this);
-            this.thread.setName(getClass().getName());
-            //Fix for NPE: Taken from http://java.net/jira/browse/PDF_RENDERER-46
-            synchronized (statusLock) {
-                final Thread.UncaughtExceptionHandler h = (th, ex) -> PDFDebugger.debug("Uncaught exception: " + ex);
-                thread.setUncaughtExceptionHandler(h);
-                thread.start();
+            Thread newThread = new Thread(this);
+            newThread.setName(getClass().getName());
+
+            // Configure thread outside any locks
+            final Thread.UncaughtExceptionHandler h = (th, ex) ->
+                    PDFDebugger.debug("Uncaught exception: " + ex);
+            newThread.setUncaughtExceptionHandler(h);
+
+            synchronized (this.statusLock) {
+                synchronized (this) {
+                    this.thread = newThread;
+                }
+                newThread.start();
                 try {
-                    statusLock.wait();
+                    statusLock.wait();  // Now only holding statusLock
                 } catch (final InterruptedException ex) {
                     Thread.currentThread().interrupt();
                     PDFDebugger.debug("Thread interrupted while waiting for status change.");

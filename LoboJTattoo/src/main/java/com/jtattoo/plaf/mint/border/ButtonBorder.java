@@ -6,18 +6,17 @@ import java.awt.*;
 
 public class ButtonBorder implements Border, UIResource {
 
-    private static final Insets INSETS = new Insets(3, 8, 5, 10);
-
     @Override
     public Insets getBorderInsets(final Component c) {
-        return INSETS;
+        return new Insets(3, 8, 5, 10);
     }
 
     public Insets getBorderInsets(final Component c, final Insets borderInsets) {
-        borderInsets.left = INSETS.left;
-        borderInsets.top = INSETS.top;
-        borderInsets.right = INSETS.right;
-        borderInsets.bottom = INSETS.bottom;
+        Insets insets = new Insets(3, 8, 5, 10);
+        borderInsets.left = insets.left;
+        borderInsets.top = insets.top;
+        borderInsets.right = insets.right;
+        borderInsets.bottom = insets.bottom;
         return borderInsets;
     }
 

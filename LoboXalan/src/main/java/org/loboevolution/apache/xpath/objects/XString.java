@@ -237,7 +237,7 @@ public class XString extends XObject {
   @Override
   public boolean equals(final Object obj2) {
 
-    if (null == obj2) return false;
+    if (obj2 == null) return false;
 
     // In order to handle the 'all' semantics of
     // nodeset comparisons, we always call the

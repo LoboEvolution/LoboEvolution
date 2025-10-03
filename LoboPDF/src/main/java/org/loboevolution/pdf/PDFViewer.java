@@ -59,44 +59,58 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
      * The Constant TITLE.
      */
     public static final String TITLE = "LoboEvolution PDF Viewer";
+
     /**
      * The Constant serialVersionUID.
      */
     @Serial
     private static final long serialVersionUID = 1L;
-    private final float ZOOM_FACTOR = 1.2f;
+
+    /**
+     * The ZOOM_FACTOR.
+     */
+    private static final float ZOOM_FACTOR = 1.2f;
+
     /**
      * The current PDFFile.
      */
     protected transient PDFFile curFile;
+
     /**
      * The page display.
      */
     protected transient PagePanel page;
+
     /**
      * The full screen page display, or null if not in full screen mode.
      */
     protected transient PagePanel fspp;
+
     /**
      * The current page number (starts at 0), or -1 if no page.
      */
     protected int curpage = -1;
+
     /**
      * The scroll page.
      */
     JScrollPane scrollPage;
+
     /**
      * the name of the current document.
      */
     private String docName;
+
     /**
      * The split between thumbs and page.
      */
     private JSplitPane split;
+
     /**
      * The thumbnail scroll pane.
      */
     private JScrollPane thumbscroll;
+
     /**
      * The thumbnail display.
      */

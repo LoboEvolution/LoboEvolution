@@ -47,8 +47,8 @@ import com.jtattoo.plaf.JTattooUtilities;
  */
 public class AluminiumTabbedPaneUI extends BaseTabbedPaneUI {
 
-	private static Color[] TOP_SELECTED_TAB_COLORS = null;
-	private static Color[] BOTTOM_SELECTED_TAB_COLORS = null;
+	private static Color[] TOP_SELECTED_tabColors = null;
+	private static Color[] BOTTOM_SELECTED_tabColors = null;
 
 	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {
@@ -61,9 +61,9 @@ public class AluminiumTabbedPaneUI extends BaseTabbedPaneUI {
 		final Color backColor = tabPane.getBackgroundAt(tabIndex);
 		if (backColor instanceof UIResource && isSelected) {
 			if (tabPane.getTabPlacement() == BOTTOM) {
-				return BOTTOM_SELECTED_TAB_COLORS;
+				return BOTTOM_SELECTED_tabColors;
 			} else {
-				return TOP_SELECTED_TAB_COLORS;
+				return TOP_SELECTED_tabColors;
 			}
 		}
 		return super.getTabColors(tabIndex, isSelected, isRollover);
@@ -94,8 +94,8 @@ public class AluminiumTabbedPaneUI extends BaseTabbedPaneUI {
 		final Color c = AbstractLookAndFeel.getTheme().getBackgroundColor();
 		final Color cHi = ColorHelper.brighter(c, 20);
 		final Color cLo = ColorHelper.darker(c, 10);
-		TOP_SELECTED_TAB_COLORS = ColorHelper.createColorArr(cHi, c, 20);
-		BOTTOM_SELECTED_TAB_COLORS = ColorHelper.createColorArr(c, cLo, 20);
+		TOP_SELECTED_tabColors = ColorHelper.createColorArr(cHi, c, 20);
+		BOTTOM_SELECTED_tabColors = ColorHelper.createColorArr(c, cLo, 20);
 	}
 
 	/** {@inheritDoc} */

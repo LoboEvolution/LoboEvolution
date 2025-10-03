@@ -397,7 +397,7 @@ public class BaseSliderUI extends BasicSliderUI {
 			}
 			final Color[] colors;
 			if (!JTattooUtilities.isActive(slider)) {
-				colors = AbstractLookAndFeel.getTheme().getInActiveColors();
+				colors = AbstractLookAndFeel.getTheme().getInactiveColors();
 			} else {
 				if (slider.isEnabled()) {
 					colors = AbstractLookAndFeel.getTheme().getSliderColors();
@@ -426,7 +426,7 @@ public class BaseSliderUI extends BasicSliderUI {
 			}
 			final Color[] colors;
 			if (!JTattooUtilities.isActive(slider)) {
-				colors = AbstractLookAndFeel.getTheme().getInActiveColors();
+				colors = AbstractLookAndFeel.getTheme().getInactiveColors();
 			} else {
 				if (slider.isEnabled()) {
 					colors = AbstractLookAndFeel.getTheme().getSliderColors();

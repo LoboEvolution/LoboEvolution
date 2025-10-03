@@ -89,7 +89,7 @@ public class BuiltinFont extends Type1Font {
     /**
      * the properties file
      */
-    private static Properties props;
+    private Properties props;
 
     /**
      * Create a new Builtin object based on the name of a built-in font
@@ -216,12 +216,14 @@ public class BuiltinFont extends Type1Font {
 
         // read the data from the file
         final byte[] data = new byte[length];
-        final InputStream fontStream = NativeFont.class.getResourceAsStream("res/" + file);
-        int cur = 0;
-        while (cur < length) {
-            cur += fontStream.read(data, cur, length - cur);
+        try (InputStream fontStream = NativeFont.class.getResourceAsStream("res/" + file)) {
+            if (fontStream != null) {
+                int cur = 0;
+                while (cur < length) {
+                    cur += fontStream.read(data, cur, length - cur);
+                }
+            }
         }
-        fontStream.close();
 
         // are we a pfb file?
         if ((data[0] & 0xff) == 0x80) {

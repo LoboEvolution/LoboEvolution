@@ -115,7 +115,7 @@ int x = iconX;
 				if (button.isRolloverEnabled() && model.isRollover()) {
 					colors = AbstractLookAndFeel.getTheme().getRolloverColors();
 				} else if (!JTattooUtilities.isFrameActive(button)) {
-					colors = AbstractLookAndFeel.getTheme().getInActiveColors();
+					colors = AbstractLookAndFeel.getTheme().getInactiveColors();
 				} else if (button.isSelected()) {
 					colors = AbstractLookAndFeel.getTheme().getDefaultColors();
 				} else {
@@ -212,7 +212,7 @@ int x = iconX;
 				if (button.isRolloverEnabled() && model.isRollover() || model.isPressed() && model.isArmed()) {
 					colors = AbstractLookAndFeel.getTheme().getRolloverColors();
 				} else if (!JTattooUtilities.isFrameActive(button)) {
-					colors = AbstractLookAndFeel.getTheme().getInActiveColors();
+					colors = AbstractLookAndFeel.getTheme().getInactiveColors();
 				} else if (button.isSelected()) {
 					colors = AbstractLookAndFeel.getTheme().getDefaultColors();
 				} else {

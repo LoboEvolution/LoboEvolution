@@ -28,7 +28,9 @@
  */
 package org.loboevolution.common;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.awt.Component;
 import java.awt.Container;
@@ -38,11 +40,11 @@ import java.awt.LayoutManager;
 /**
  * <p>WrapperLayout class.</p>
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class WrapperLayout implements LayoutManager {
 
 	@Getter
 	private static final WrapperLayout instance = new WrapperLayout();
-
 
 	/** {@inheritDoc} */
 	@Override

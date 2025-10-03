@@ -26,7 +26,9 @@
 
 package org.loboevolution.pdfview;
 
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * Since there is no context that is passed between the various classes that
@@ -37,7 +39,9 @@ import lombok.Data;
  * PDFRenderer API.
  */
 @Data
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class Configuration {
+
     private static Configuration INSTANCE;
 
     /**

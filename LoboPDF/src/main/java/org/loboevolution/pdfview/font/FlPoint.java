@@ -26,6 +26,8 @@
 
 package org.loboevolution.pdfview.font;
 
+import lombok.Data;
+
 /**
  * A floating-point Point, with public fields.  Also contains a flag
  * for "open" to indicate that the path this point is a member of has
@@ -33,15 +35,13 @@ package org.loboevolution.pdfview.font;
  * <p>
  * Author Mike Wessler
  */
+@Data
 public class FlPoint {
-    /**
-     * x coordinate of the point
-     */
-    public float x = 0;
 
-    /**
-     * y coordinate of the point
-     */
+    /** x coordinate of the point*/
+    private float x = 0;
+
+    /** y coordinate of the point */
     public float y = 0;
 
     /**
@@ -50,9 +50,7 @@ public class FlPoint {
      */
     public boolean open = false;
 
-    /**
-     * reset the values to (0,0) and closed
-     */
+    /** reset the values to (0,0) and closed */
     public final void reset() {
         this.x = 0;
         this.y = 0;

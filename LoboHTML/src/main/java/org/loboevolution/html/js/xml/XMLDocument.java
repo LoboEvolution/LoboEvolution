@@ -62,7 +62,7 @@ import java.util.List;
 @Slf4j
 public class XMLDocument implements Document {
 
-	private static Document doc;
+	private Document doc;
 
 	/**
 	 * Load XML file

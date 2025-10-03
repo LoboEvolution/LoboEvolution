@@ -37,7 +37,6 @@ import org.loboevolution.laf.ColorFactory;
 
 import java.awt.*;
 import java.awt.MultipleGradientPaint.CycleMethod;
-import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
@@ -84,8 +83,7 @@ public class GradientStyle {
 
 	private BufferedImage linearGadient(final HTMLDocumentImpl document, final CSSStyleDeclaration props, final RenderState renderState, final String backgroundImage,
 										final String start, final CycleMethod cMethod) {
-		final StringBuilder builder  = new StringBuilder();
-		builder.append(start).append("(");
+
 		final int startIdx = start.length();
 		final int closingIdx = backgroundImage.lastIndexOf(')');
 		final String quote = backgroundImage.substring(startIdx+1, closingIdx);
@@ -154,8 +152,8 @@ public class GradientStyle {
 		final int height = getHeight(document, props, renderState);
 		final BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 		final Graphics2D g2 = image.createGraphics();
-		final Point2D center = new Point2D.Float(width/2, height/2);
-		final float radius = width/2;
+		final Point2D center = new Point2D.Float((float) width /2, (float) height /2);
+		final float radius = (float) width /2;
 		final GradientInfo info = parseGradint(values);
 		Color[] colors = info.getColors();
 		final float[] fractions = ArrayUtilities.removeFloat(info.getFractions(), info.getFractions().length-1);

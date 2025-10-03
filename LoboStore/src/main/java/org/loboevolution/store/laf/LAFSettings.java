@@ -211,7 +211,7 @@ public class LAFSettings implements Serializable {
     @Builder.Default
     private float fontSize = 16.0f;
 
-    private final String LOOK_AND_FEEL =
+    private static final String LOOK_AND_FEEL =
             " SELECT DISTINCT acryl, aero, aluminium, bernstein, fast, graphite," +
                     " 	    		 hiFi,luna, mcWin, mint, noire, smart, texture," +
                     "	 			 subscript, superscript, underline, italic, strikethrough," +

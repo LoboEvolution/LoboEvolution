@@ -124,31 +124,31 @@ public class MintDefaultTheme extends AbstractTheme {
 		super.setUpColorArrs();
 
 		// Generate the color arrays
-		DEFAULT_COLORS = ColorHelper.createColorArr(controlColorLight, controlColorDark, 20);
-		HIDEFAULT_COLORS = ColorHelper.createColorArr(ColorHelper.brighter(controlColorLight, 40),
-				ColorHelper.brighter(controlColorDark, 40), 20);
-		ACTIVE_COLORS = DEFAULT_COLORS;
-		ROLLOVER_COLORS = ColorHelper.createColorArr(rolloverColorLight, rolloverColorDark, 20);
-		SELECTED_COLORS = DEFAULT_COLORS;
-		DISABLED_COLORS = ColorHelper.createColorArr(new Color(248, 248, 248), new Color(224, 224, 224), 20);
-		WINDOW_TITLE_COLORS = ColorHelper.createColorArr(windowTitleColorLight, windowTitleColorDark, 20);
-		WINDOW_INACTIVE_TITLE_COLORS = ColorHelper.createColorArr(windowInactiveTitleColorLight,
-				windowInactiveTitleColorDark, 20);
-		MENUBAR_COLORS = ColorHelper.createColorArr(menuColorLight, menuColorDark, 20);
-		TOOLBAR_COLORS = ColorHelper.createColorArr(toolbarColorLight, toolbarColorDark, 20);
-		BUTTON_COLORS = new Color[] { new Color(255, 255, 255), new Color(254, 255, 254), new Color(253, 255, 254),
-				new Color(252, 255, 254), new Color(251, 254, 253), new Color(250, 253, 252), new Color(250, 253, 252),
-				new Color(248, 250, 249), new Color(244, 248, 246), new Color(240, 245, 243), new Color(238, 242, 240),
-				new Color(232, 237, 235), new Color(232, 237, 235), new Color(224, 230, 227), new Color(214, 221, 217),
-				new Color(204, 212, 208), new Color(160, 164, 162), };
-		TAB_COLORS = ColorHelper.createColorArr(buttonColorLight, buttonColorDark, 20);
-		CHECKBOX_COLORS = TAB_COLORS;
-		COL_HEADER_COLORS = ColorHelper.createColorArr(buttonColorLight, buttonColorDark, 20);
-		TRACK_COLORS = ColorHelper.createColorArr(new Color(238, 238, 238), Color.white, 20);
-		THUMB_COLORS = DEFAULT_COLORS;
-		SLIDER_COLORS = DEFAULT_COLORS;
-		PROGRESSBAR_COLORS = DEFAULT_COLORS;
-		INACTIVE_COLORS = ColorHelper.createColorArr(buttonColorLight, buttonColorDark, 20);
+		setDefaultColors(ColorHelper.createColorArr(controlColorLight, controlColorDark, 20));
+		setHidefaultColors(ColorHelper.createColorArr(ColorHelper.brighter(controlColorLight, 40),
+                ColorHelper.brighter(controlColorDark, 40), 20));
+		setActiveColors(getDefaultColors());
+		setRolloverColors(ColorHelper.createColorArr(rolloverColorLight, rolloverColorDark, 20));
+		setSelectedColors(getDefaultColors());
+		setDisabledColors(ColorHelper.createColorArr(new Color(248, 248, 248), new Color(224, 224, 224), 20));
+		setWindowTitleColors(ColorHelper.createColorArr(windowTitleColorLight, windowTitleColorDark, 20));
+		setWindowInactiveTitleColors(ColorHelper.createColorArr(windowInactiveTitleColorLight,
+                windowInactiveTitleColorDark, 20));
+		setMenubarColors(ColorHelper.createColorArr(menuColorLight, menuColorDark, 20));
+		setToolbarColors(ColorHelper.createColorArr(toolbarColorLight, toolbarColorDark, 20));
+		setButtonColors(new Color[]{new Color(255, 255, 255), new Color(254, 255, 254), new Color(253, 255, 254),
+                new Color(252, 255, 254), new Color(251, 254, 253), new Color(250, 253, 252), new Color(250, 253, 252),
+                new Color(248, 250, 249), new Color(244, 248, 246), new Color(240, 245, 243), new Color(238, 242, 240),
+                new Color(232, 237, 235), new Color(232, 237, 235), new Color(224, 230, 227), new Color(214, 221, 217),
+                new Color(204, 212, 208), new Color(160, 164, 162),});
+		setTabColors(ColorHelper.createColorArr(buttonColorLight, buttonColorDark, 20));
+		setCheckboxColors(getTabColors());
+		setColHeaderColors(ColorHelper.createColorArr(buttonColorLight, buttonColorDark, 20));
+		setTrackColors(ColorHelper.createColorArr(new Color(238, 238, 238), Color.white, 20));
+		setThumbColors(getDefaultColors());
+		setSliderColors(getDefaultColors());
+		setProgressbarColors(getDefaultColors());
+		setInactiveColors(ColorHelper.createColorArr(buttonColorLight, buttonColorDark, 20));
 	}
 
 } // end of class MintDefaultTheme

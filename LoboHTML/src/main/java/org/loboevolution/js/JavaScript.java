@@ -25,7 +25,9 @@
  */
 package org.loboevolution.js;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.node.Document;
 import org.mozilla.javascript.Function;
@@ -39,6 +41,7 @@ import java.util.WeakHashMap;
 /**
  * <p>JavaScript class.</p>
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class JavaScript {
 
 	@Getter
