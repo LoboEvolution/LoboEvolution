@@ -7,11 +7,11 @@ import java.awt.*;
 
 public class IconSymbol implements Icon {
 
-    private Color foregroundColor = null;
-    private Color shadowColor = null;
-    private Color inactiveForegroundColor = null;
-    private Color inactiveShadowColor = null;
-    private Color rolloverColor = null;
+    private final Color foregroundColor;
+    private final Color shadowColor;
+    private final Color inactiveForegroundColor;
+    private final Color inactiveShadowColor;
+    private final Color rolloverColor;
     private Insets insets = new Insets(0, 0, 0, 0);
 
     public IconSymbol(final Color foregroundColor, final Color shadowColor, final Color rolloverColor) {

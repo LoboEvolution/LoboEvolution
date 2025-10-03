@@ -28,6 +28,7 @@ package org.loboevolution.html.js.events;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.events.CloseEvent;
 import org.mozilla.javascript.NativeObject;
 
@@ -45,7 +46,12 @@ public class CloseEventImpl extends EventImpl implements CloseEvent {
      * @param params event constructor parameters
      */
     public CloseEventImpl(Object[] params) {
-        setParams(params);
+        try {
+            setParams(params);
+        } catch (DOMException e) {
+            throw new RuntimeException("Failed to initialize Event", e);
+        }
+
         if (params != null && params.length > 0) {
             if (params.length > 1) {
                 if (params[1] != null && params[1] instanceof NativeObject obj) {

@@ -28,6 +28,8 @@ package org.loboevolution.html.renderer.layout;
 
 import org.loboevolution.html.HTMLTag;
 
+import java.net.Socket;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,7 +41,8 @@ public class RLayout {
 	/** Constant elementLayout */
 	public static final Map<HTMLTag, MarkupLayout> elementLayout = new HashMap<>();
 
-	static {
+
+    static {
 		final Map<HTMLTag, MarkupLayout> el = elementLayout;
 
 		final InLineLayout inline = new InLineLayout();

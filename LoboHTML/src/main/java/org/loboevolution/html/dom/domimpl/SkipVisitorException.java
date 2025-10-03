@@ -31,9 +31,7 @@ package org.loboevolution.html.dom.domimpl;
 import java.io.Serial;
 
 class SkipVisitorException extends RuntimeException {
-	/**
-	 * 
-	 */
+
 	@Serial
     private static final long serialVersionUID = 1L;
 

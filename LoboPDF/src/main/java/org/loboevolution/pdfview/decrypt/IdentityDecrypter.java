@@ -26,6 +26,8 @@
 
 package org.loboevolution.pdfview.decrypt;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import org.loboevolution.pdfview.PDFObject;
 import org.loboevolution.pdfview.PDFParseException;
 
@@ -37,6 +39,7 @@ import java.nio.ByteBuffer;
  * <p>
  * Author Luke Kirby
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class IdentityDecrypter implements PDFDecrypter {
 
     private static final IdentityDecrypter INSTANCE = new IdentityDecrypter();

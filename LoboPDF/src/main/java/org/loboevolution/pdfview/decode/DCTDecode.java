@@ -155,7 +155,7 @@ class MyTracker implements ImageObserver {
      * Wait until the image is done, then return.
      */
     public synchronized void waitForAll() {
-        if (!this.done) {
+        while (!this.done) {
             try {
                 wait();
             } catch (final InterruptedException e) {

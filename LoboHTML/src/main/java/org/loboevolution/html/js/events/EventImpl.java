@@ -70,8 +70,12 @@ public class EventImpl extends AbstractScriptableDelegate implements Event {
     /**
      * <p>Constructor for EventImpl.</p>
      */
-    public EventImpl(final Object[] params) throws DOMException {
-        setParams(params);
+    public EventImpl(final Object[] params) {
+        try {
+            setParams(params);
+        } catch (DOMException e) {
+            throw new RuntimeException("Failed to initialize Event", e);
+        }
     }
 
     protected void setParams(final Object[] params) throws DOMException {

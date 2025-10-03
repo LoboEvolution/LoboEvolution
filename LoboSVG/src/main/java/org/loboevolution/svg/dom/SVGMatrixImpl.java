@@ -190,7 +190,7 @@ public class SVGMatrixImpl implements SVGMatrix {
 	public SVGMatrix inverse() throws SVGException {
 		final AffineTransform inverse;
 		try {
-			inverse = this.transform.createInverse();
+			inverse = transform.createInverse();
 		} catch (final NoninvertibleTransformException e) {
 			return null;
 		}

@@ -36,10 +36,7 @@ import org.loboevolution.store.DatabseSQLite;
 import java.awt.*;
 import java.io.Serial;
 import java.io.Serializable;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -214,7 +211,7 @@ public class LAFSettings implements Serializable {
     @Builder.Default
     private float fontSize = 16.0f;
 
-    private final String LOOK_AND_FEEL =
+    private static final String LOOK_AND_FEEL =
             " SELECT DISTINCT acryl, aero, aluminium, bernstein, fast, graphite," +
                     " 	    		 hiFi,luna, mcWin, mint, noire, smart, texture," +
                     "	 			 subscript, superscript, underline, italic, strikethrough," +
@@ -280,7 +277,7 @@ public class LAFSettings implements Serializable {
                         blackWhite(rs.getInt(24) == 1).
                         whiteBlack(rs.getInt(25) == 1).build();
             }
-        } catch (final Exception e) {
+        } catch (final SQLException e) {
             return this;
         }
         return laf;

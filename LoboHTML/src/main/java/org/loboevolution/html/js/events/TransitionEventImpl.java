@@ -47,7 +47,12 @@ public class TransitionEventImpl extends EventImpl implements TransitionEvent {
      * <p>Constructor for TransitionEventImpl.</p>
      */
     public TransitionEventImpl(Object[] params) throws DOMException {
-        setParams(params);
+        try {
+            setParams(params);
+        } catch (DOMException e) {
+            throw new RuntimeException("Failed to initialize Event", e);
+        }
+
         if (params.length > 1) {
             if (params[1] != null && params[1] instanceof NativeObject obj) {
                 this.elapsedTime = (Double) obj.get("elapsedTime");

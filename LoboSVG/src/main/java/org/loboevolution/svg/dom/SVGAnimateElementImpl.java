@@ -110,7 +110,7 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 				calcMode = "linear"; // set to default linear
 			}
 
-			if (times == null || vals == null) {
+			if (getTimes() == null || getVals() == null) {
 				setupTimeValueVectors(calcMode, values);
 			}
 
@@ -120,17 +120,17 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 			SVGLengthImpl beforeLength = null;
 			SVGLengthImpl afterLength = null;
 			int splineIndex = 0;
-			for (int i = 0; i < times.size() - 1; i++) {
-				beforeTime = times.get(i);
-				afterTime = times.get(i + 1);
+			for (int i = 0; i < getTimes().size() - 1; i++) {
+				beforeTime = getTimes().get(i);
+				afterTime = getTimes().get(i + 1);
 				if (percentageComplete >= beforeTime && percentageComplete <= afterTime) {
-					beforeLength = new SVGLengthImpl(vals.get(i));
-					afterLength = new SVGLengthImpl(vals.get(i + 1));
+					beforeLength = new SVGLengthImpl(getVals().get(i));
+					afterLength = new SVGLengthImpl(getVals().get(i + 1));
 					break;
 				}
-				if (i == times.size() - 2 && calcMode.equals("discrete") && percentageComplete > afterTime) {
-					beforeLength = new SVGLengthImpl(vals.get(i + 1));
-					afterLength = new SVGLengthImpl(vals.get(i + 1));
+				if (i == getTimes().size() - 2 && calcMode.equals("discrete") && percentageComplete > afterTime) {
+					beforeLength = new SVGLengthImpl(getVals().get(i + 1));
+					afterLength = new SVGLengthImpl(getVals().get(i + 1));
 					break;
 				}
 				splineIndex++;
@@ -218,7 +218,7 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 				calcMode = "linear";
 			}
 
-			if (times == null || vals == null) {
+			if (getTimes() == null || getVals() == null) {
 				setupTimeValueVectors(calcMode, values);
 			}
 
@@ -228,17 +228,17 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 			SVGLengthList beforeLengthList = null;
 			SVGLengthList afterLengthList = null;
 			int splineIndex = 0;
-			for (int i = 0; i < times.size() - 1; i++) {
-				beforeTime = times.get(i);
-				afterTime = times.get(i + 1);
+			for (int i = 0; i < getTimes().size() - 1; i++) {
+				beforeTime = getTimes().get(i);
+				afterTime = getTimes().get(i + 1);
 				if (percentageComplete >= beforeTime && percentageComplete <= afterTime) {
-					beforeLengthList = makeLengthList(vals.get(i));
-					afterLengthList = makeLengthList(vals.get(i + 1));
+					beforeLengthList = makeLengthList(getVals().get(i));
+					afterLengthList = makeLengthList(getVals().get(i + 1));
 					break;
 				}
-				if (i == times.size() - 2 && calcMode.equals("discrete") && percentageComplete > afterTime) {
-					beforeLengthList = makeLengthList(vals.get(i + 1));
-					afterLengthList = makeLengthList(vals.get(i + 1));
+				if (i == getTimes().size() - 2 && calcMode.equals("discrete") && percentageComplete > afterTime) {
+					beforeLengthList = makeLengthList(getVals().get(i + 1));
+					afterLengthList = makeLengthList(getVals().get(i + 1));
 					break;
 				}
 				splineIndex++;
@@ -361,7 +361,7 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 				calcMode = "linear"; // set to default linear
 			}
 
-			if (times == null || vals == null) {
+			if (getTimes() == null || getVals() == null) {
 				setupTimeValueVectors(calcMode, values);
 			}
 
@@ -370,12 +370,12 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 			float afterTime = 0;
 			Boolean beforeBool = null;
 			Boolean afterBool = null;
-			for (int i = 0; i < times.size() - 1; i++) {
-				beforeTime = times.get(i);
-				afterTime = times.get(i + 1);
+			for (int i = 0; i < getTimes().size() - 1; i++) {
+				beforeTime = getTimes().get(i);
+				afterTime = getTimes().get(i + 1);
 				if (percentageComplete >= beforeTime && percentageComplete <= afterTime) {
-					beforeBool = Boolean.valueOf(vals.get(i));
-					afterBool = Boolean.valueOf(vals.get(i + 1));
+					beforeBool = Boolean.valueOf(getVals().get(i));
+					afterBool = Boolean.valueOf(getVals().get(i + 1));
 					break;
 				}
 			}
@@ -417,7 +417,7 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 				from = getTargetElement().getAttribute(getAttribute("attributeName"));
 			}
 			final String to = getAttribute("to");
-			if (!finished) {
+			if (!isFinished()) {
 				return from;
 			} else {
 				return to;
@@ -431,7 +431,7 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 				calcMode = "linear"; // set to default linear
 			}
 
-			if (times == null || vals == null) {
+			if (getTimes() == null || getVals() == null) {
 				setupTimeValueVectors(calcMode, values);
 			}
 
@@ -440,17 +440,17 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 			float afterTime = 0;
 			String beforeString = null;
 			String afterString = null;
-			for (int i = 0; i < times.size() - 1; i++) {
-				beforeTime = times.get(i);
-				afterTime = times.get(i + 1);
+			for (int i = 0; i < getTimes().size() - 1; i++) {
+				beforeTime = getTimes().get(i);
+				afterTime = getTimes().get(i + 1);
 				if (percentageComplete >= beforeTime && percentageComplete <= afterTime) {
-					beforeString = vals.get(i);
-					afterString = vals.get(i + 1);
+					beforeString = getVals().get(i);
+					afterString = getVals().get(i + 1);
 					break;
 				}
-				if (i == times.size() - 2 && calcMode.equals("discrete") && percentageComplete > afterTime) {
-					beforeString = vals.get(i + 1);
-					afterString = vals.get(i + 1);
+				if (i == getTimes().size() - 2 && calcMode.equals("discrete") && percentageComplete > afterTime) {
+					beforeString = getVals().get(i + 1);
+					afterString = getVals().get(i + 1);
 					break;
 				}
 			}
@@ -494,7 +494,7 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 				calcMode = "linear"; // set to default linear
 			}
 
-			if (times == null || vals == null) {
+			if (getTimes() == null || getVals() == null) {
 				setupTimeValueVectors(calcMode, values);
 			}
 
@@ -504,17 +504,17 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 			Float beforeNumber = null;
 			Float afterNumber = null;
 			int splineIndex = 0;
-			for (int i = 0; i < times.size() - 1; i++) {
-				beforeTime = times.get(i);
-				afterTime = times.get(i + 1);
+			for (int i = 0; i < getTimes().size() - 1; i++) {
+				beforeTime = getTimes().get(i);
+				afterTime = getTimes().get(i + 1);
 				if (percentageComplete >= beforeTime && percentageComplete <= afterTime) {
-					beforeNumber = Float.parseFloat(vals.get(i));
-					afterNumber = Float.parseFloat(vals.get(i + 1));
+					beforeNumber = Float.parseFloat(getVals().get(i));
+					afterNumber = Float.parseFloat(getVals().get(i + 1));
 					break;
 				}
-				if (i == times.size() - 2 && calcMode.equals("discrete") && percentageComplete > afterTime) {
-					beforeNumber = Float.parseFloat(vals.get(i + 1));
-					afterNumber = Float.parseFloat(vals.get(i + 1));
+				if (i == getTimes().size() - 2 && calcMode.equals("discrete") && percentageComplete > afterTime) {
+					beforeNumber = Float.parseFloat(getVals().get(i + 1));
+					afterNumber = Float.parseFloat(getVals().get(i + 1));
 					break;
 				}
 				splineIndex++;
@@ -596,7 +596,7 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 				calcMode = "linear"; // set to default linear
 			}
 
-			if (times == null || vals == null) {
+			if (getTimes() == null || getVals() == null) {
 				setupTimeValueVectors(calcMode, values);
 			}
 
@@ -606,17 +606,17 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 			SVGNumberList beforeNumberList = null;
 			SVGNumberList afterNumberList = null;
 			int splineIndex = 0;
-			for (int i = 0; i < times.size() - 1; i++) {
-				beforeTime = (times.get(i));
-				afterTime = (times.get(i + 1));
+			for (int i = 0; i < getTimes().size() - 1; i++) {
+				beforeTime = (getTimes().get(i));
+				afterTime = (getTimes().get(i + 1));
 				if (percentageComplete >= beforeTime && percentageComplete <= afterTime) {
-					beforeNumberList = new SVGNumberListImpl(vals.get(i));
-					afterNumberList = new SVGNumberListImpl(vals.get(i + 1));
+					beforeNumberList = new SVGNumberListImpl(getVals().get(i));
+					afterNumberList = new SVGNumberListImpl(getVals().get(i + 1));
 					break;
 				}
-				if (i == times.size() - 2 && calcMode.equals("discrete") && percentageComplete > afterTime) {
-					beforeNumberList = new SVGNumberListImpl(vals.get(i + 1));
-					afterNumberList = new SVGNumberListImpl(vals.get(i + 1));
+				if (i == getTimes().size() - 2 && calcMode.equals("discrete") && percentageComplete > afterTime) {
+					beforeNumberList = new SVGNumberListImpl(getVals().get(i + 1));
+					afterNumberList = new SVGNumberListImpl(getVals().get(i + 1));
 					break;
 				}
 				splineIndex++;
@@ -731,7 +731,7 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 				calcMode = "linear"; // set to default linear
 			}
 
-			if (times == null || vals == null) {
+			if (getTimes() == null || getVals() == null) {
 				setupTimeValueVectors(calcMode, values);
 			}
 
@@ -741,17 +741,17 @@ public class SVGAnimateElementImpl extends SVGAnimationElementImpl implements SV
 			SVGAngleImpl beforeAngle = null;
 			SVGAngleImpl afterAngle = null;
 			int splineIndex = 0;
-			for (int i = 0; i < times.size() - 1; i++) {
-				beforeTime = times.get(i);
-				afterTime = times.get(i + 1);
+			for (int i = 0; i < getTimes().size() - 1; i++) {
+				beforeTime = getTimes().get(i);
+				afterTime = getTimes().get(i + 1);
 				if (percentageComplete >= beforeTime && percentageComplete <= afterTime) {
-					beforeAngle = new SVGAngleImpl(vals.get(i));
-					afterAngle = new SVGAngleImpl(vals.get(i + 1));
+					beforeAngle = new SVGAngleImpl(getVals().get(i));
+					afterAngle = new SVGAngleImpl(getVals().get(i + 1));
 					break;
 				}
-				if (i == times.size() - 2 && calcMode.equals("discrete") && percentageComplete > afterTime) {
-					beforeAngle = new SVGAngleImpl(vals.get(i + 1));
-					afterAngle = new SVGAngleImpl(vals.get(i + 1));
+				if (i == getTimes().size() - 2 && calcMode.equals("discrete") && percentageComplete > afterTime) {
+					beforeAngle = new SVGAngleImpl(getVals().get(i + 1));
+					afterAngle = new SVGAngleImpl(getVals().get(i + 1));
 					break;
 				}
 				splineIndex++;

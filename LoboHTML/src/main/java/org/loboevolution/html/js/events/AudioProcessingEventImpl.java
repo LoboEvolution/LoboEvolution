@@ -50,7 +50,12 @@ public class AudioProcessingEventImpl extends UIEventImpl implements AudioProces
      * @param params event constructor parameters
      */
     public AudioProcessingEventImpl(Object[] params) throws DOMException {
-        setParams(params);
+        try {
+            setParams(params);
+        } catch (DOMException e) {
+            throw new RuntimeException("Failed to initialize Event", e);
+        }
+
         if (params.length < 3) {
             if (params[1] != null && params[1] instanceof NativeObject obj) {
                 this.inputBuffer = (AudioBuffer) obj.get("inputBuffer");

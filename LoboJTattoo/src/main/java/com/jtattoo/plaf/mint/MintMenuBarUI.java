@@ -52,7 +52,7 @@ public class MintMenuBarUI extends BasicMenuBarUI {
 	public void paint(final Graphics g, final JComponent c) {
 		final int w = c.getWidth();
 		final int h = c.getHeight();
-		JTattooUtilities.fillVerGradient(g, AbstractLookAndFeel.getTheme().getMenuBarColors(), 0, 0, w, h);
+		JTattooUtilities.fillVerGradient(g, AbstractLookAndFeel.getTheme().getMenubarColors(), 0, 0, w, h);
 	}
 
 } // end of class MintMenuBarUI

@@ -124,10 +124,7 @@ public class JBIG2Decoder {
 
         final byte[] bytes = pageBitmap.getData(true);
 
-        if (bytes == null)
-            return null;
-
-        // make a a DEEP copy so we cant alter
+        // make a DEEP copy so we cant alter
         final int len = bytes.length;
         final byte[] copy = new byte[len];
         System.arraycopy(bytes, 0, copy, 0, len);

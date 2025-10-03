@@ -27,25 +27,18 @@
 package com.jtattoo.plaf.base;
 
 import com.jtattoo.plaf.AbstractLookAndFeel;
-import com.jtattoo.plaf.ColorHelper;
 import com.jtattoo.plaf.JTattooUtilities;
-import com.jtattoo.plaf.NoFocusButton;
 import com.jtattoo.plaf.base.button.ArrowButton;
 
-import java.awt.AlphaComposite;
 import java.awt.Color;
-import java.awt.Composite;
 import java.awt.Dimension;
 import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 import javax.swing.BorderFactory;
-import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JTextField;
@@ -61,9 +54,7 @@ import javax.swing.plaf.basic.BasicComboBoxUI;
  */
 public class BaseComboBoxUI extends BasicComboBoxUI {
 
-
-
-	public class PropertyChangeHandler implements PropertyChangeListener {
+     class PropertyChangeHandler implements PropertyChangeListener {
 
 		@Override
 		public void propertyChange(final PropertyChangeEvent e) {

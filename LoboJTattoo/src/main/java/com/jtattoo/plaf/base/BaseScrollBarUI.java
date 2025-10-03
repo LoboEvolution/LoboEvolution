@@ -185,7 +185,7 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
 		if (isRollover || isDragging) {
 			return AbstractLookAndFeel.getTheme().getRolloverColors();
 		} else if (!JTattooUtilities.isActive(scrollbar)) {
-			return AbstractLookAndFeel.getTheme().getInActiveColors();
+			return AbstractLookAndFeel.getTheme().getInactiveColors();
 		} else {
 			return AbstractLookAndFeel.getTheme().getThumbColors();
 		}

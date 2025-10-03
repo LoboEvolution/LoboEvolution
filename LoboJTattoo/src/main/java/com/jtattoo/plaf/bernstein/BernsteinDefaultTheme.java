@@ -118,47 +118,43 @@ public class BernsteinDefaultTheme extends AbstractTheme {
 	public void setUpColorArrs() {
 		super.setUpColorArrs();
 		// Generate the color arrays
-		DEFAULT_COLORS = new Color[] { new Color(247, 225, 0), new Color(251, 232, 0), new Color(243, 216, 0),
-				new Color(237, 204, 0), new Color(239, 209, 0), new Color(242, 215, 0), new Color(243, 216, 0),
-				new Color(245, 221, 0), new Color(246, 222, 0), new Color(247, 225, 0), new Color(248, 227, 0),
-				new Color(249, 230, 0), new Color(251, 232, 0), new Color(252, 235, 0), new Color(253, 237, 0),
-				new Color(253, 237, 0), new Color(254, 240, 0), };
-		HIDEFAULT_COLORS = new Color[DEFAULT_COLORS.length];
-		for (int i = 0; i < DEFAULT_COLORS.length; i++) {
-			HIDEFAULT_COLORS[i] = ColorHelper.brighter(DEFAULT_COLORS[i], 50.0);
+		setDefaultColors(new Color[]{new Color(247, 225, 0), new Color(251, 232, 0), new Color(243, 216, 0),
+                new Color(237, 204, 0), new Color(239, 209, 0), new Color(242, 215, 0), new Color(243, 216, 0),
+                new Color(245, 221, 0), new Color(246, 222, 0), new Color(247, 225, 0), new Color(248, 227, 0),
+                new Color(249, 230, 0), new Color(251, 232, 0), new Color(252, 235, 0), new Color(253, 237, 0),
+                new Color(253, 237, 0), new Color(254, 240, 0),});
+		setHidefaultColors(new Color[getDefaultColors().length]);
+		for (int i = 0; i < getDefaultColors().length; i++) {
+            getHiDefaultColors()[i] = ColorHelper.brighter(getDefaultColors()[i], 50.0);
 		}
 
-		ACTIVE_COLORS = DEFAULT_COLORS;
-		INACTIVE_COLORS = HIDEFAULT_COLORS;
-		SELECTED_COLORS = DEFAULT_COLORS;
-//        PRESSED_COLORS = new Color[DEFAULT_COLORS.length];
-//        for (int i = 0; i < DEFAULT_COLORS.length; i++) {
-//            PRESSED_COLORS[i] = backgroundColor;
-//        }
+		setActiveColors(getDefaultColors());
+		setInactiveColors(getHiDefaultColors());
+		setSelectedColors(getDefaultColors());
 
-		ROLLOVER_COLORS = new Color[DEFAULT_COLORS.length];
-		for (int i = 0; i < DEFAULT_COLORS.length; i++) {
-			ROLLOVER_COLORS[i] = ColorHelper.brighter(DEFAULT_COLORS[i], 70.0);
+		setRolloverColors(new Color[getDefaultColors().length]);
+		for (int i = 0; i < getDefaultColors().length; i++) {
+			getRolloverColors()[i] = ColorHelper.brighter(getDefaultColors()[i], 70.0);
 		}
 
-		DISABLED_COLORS = new Color[HIDEFAULT_COLORS.length];
-		for (int i = 0; i < HIDEFAULT_COLORS.length; i++) {
-			DISABLED_COLORS[i] = ColorHelper.brighter(HIDEFAULT_COLORS[i], 40.0);
+		setDisabledColors(new Color[getHiDefaultColors().length]);
+		for (int i = 0; i < getHiDefaultColors().length; i++) {
+			getDisabledColors()[i] = ColorHelper.brighter(getHiDefaultColors()[i], 40.0);
 		}
 
-		WINDOW_TITLE_COLORS = ColorHelper.createColorArr(windowTitleColorLight, windowTitleColorDark, 20);
-		WINDOW_INACTIVE_TITLE_COLORS = ColorHelper.createColorArr(windowInactiveTitleColorLight,
-				windowInactiveTitleColorDark, 20);
-		MENUBAR_COLORS = ColorHelper.createColorArr(menuColorLight, menuColorDark, 20);
-		TOOLBAR_COLORS = MENUBAR_COLORS;
+		setWindowTitleColors(ColorHelper.createColorArr(windowTitleColorLight, windowTitleColorDark, 20));
+		setWindowInactiveTitleColors(ColorHelper.createColorArr(windowInactiveTitleColorLight,
+                windowInactiveTitleColorDark, 20));
+		setMenubarColors(ColorHelper.createColorArr(menuColorLight, menuColorDark, 20));
+		setToolbarColors(getMenubarColors());
 
-		BUTTON_COLORS = HIDEFAULT_COLORS;
-		TAB_COLORS = BUTTON_COLORS;
-		COL_HEADER_COLORS = HIDEFAULT_COLORS;
-		THUMB_COLORS = HIDEFAULT_COLORS;
-		TRACK_COLORS = ColorHelper.createColorArr(new Color(255, 245, 200), Color.white, 20);
-		SLIDER_COLORS = DEFAULT_COLORS;
-		PROGRESSBAR_COLORS = DEFAULT_COLORS;
+		setButtonColors(getHiDefaultColors());
+		setTabColors(getButtonColors());
+		setColHeaderColors(getHiDefaultColors());
+		setThumbColors(getHiDefaultColors());
+		setTrackColors(ColorHelper.createColorArr(new Color(255, 245, 200), Color.white, 20));
+		setSliderColors(getDefaultColors());
+		setProgressbarColors(getDefaultColors());
 	}
 
 } // end of class BernsteinDefaultTheme

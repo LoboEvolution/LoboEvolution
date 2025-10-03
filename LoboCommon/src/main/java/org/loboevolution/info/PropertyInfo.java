@@ -33,7 +33,6 @@ import java.lang.reflect.Method;
  * <p>PropertyInfo class.</p>
  */
 @Data
-
 public class PropertyInfo {
 
 	/** The getter. */

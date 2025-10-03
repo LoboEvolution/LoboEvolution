@@ -28,6 +28,8 @@
  */
 package org.loboevolution.html.control;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.loboevolution.html.AlignValues;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.node.Element;
@@ -39,11 +41,14 @@ import java.io.Serial;
 /**
  * <p>Abstract BaseControl class.</p>
  */
+@Data
+@EqualsAndHashCode(callSuper = true)
 public abstract class BaseControl extends JComponent implements UIControl {
+
 	@Serial
     private static final long serialVersionUID = 1L;
-	protected final Element controlElement;
-	protected RUIControl ruicontrol;
+    private final Element controlElement;
+    private RUIControl ruicontrol;
 
 	/**
 	 * <p>Constructor for BaseControl.</p>

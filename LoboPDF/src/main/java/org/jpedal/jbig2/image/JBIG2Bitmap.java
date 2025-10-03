@@ -1083,10 +1083,7 @@ public final class JBIG2Bitmap {
     public BufferedImage getBufferedImage() {
         final byte[] bytes = getData(true);
 
-        if (bytes == null)
-            return null;
-
-        // make a a DEEP copy so we can't alter
+        // make a DEEP copy so we can't alter
         final int len = bytes.length;
         final byte[] copy = new byte[len];
         System.arraycopy(bytes, 0, copy, 0, len);

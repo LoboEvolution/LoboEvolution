@@ -27,6 +27,7 @@
 package org.loboevolution.html.js.events;
 
 import lombok.NoArgsConstructor;
+import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.events.Gamepad;
 import org.loboevolution.events.GamepadEvent;
 
@@ -39,7 +40,11 @@ public class GamepadEventimpl extends EventImpl implements GamepadEvent {
      * @param params event constructor parameters
      */
     public GamepadEventimpl(Object[] params) {
-        setParams(params);
+        try {
+            setParams(params);
+        } catch (DOMException e) {
+            throw new RuntimeException("Failed to initialize Event", e);
+        }
     }
 
     @Override

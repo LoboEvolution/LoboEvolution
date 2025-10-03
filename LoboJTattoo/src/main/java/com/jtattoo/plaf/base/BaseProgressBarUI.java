@@ -142,9 +142,9 @@ public class BaseProgressBarUI extends BasicProgressBarUI {
 		final Color[] colors;
 		if (progressBar.getForeground() instanceof UIResource) {
 			if (!JTattooUtilities.isActive(c)) {
-				colors = AbstractLookAndFeel.getTheme().getInActiveColors();
+				colors = AbstractLookAndFeel.getTheme().getInactiveColors();
 			} else if (c.isEnabled()) {
-				colors = AbstractLookAndFeel.getTheme().getProgressBarColors();
+				colors = AbstractLookAndFeel.getTheme().getProgressbarColors();
 			} else {
 				colors = AbstractLookAndFeel.getTheme().getDisabledColors();
 			}
@@ -200,9 +200,9 @@ public class BaseProgressBarUI extends BasicProgressBarUI {
 		final Color[] colors;
 		if (progressBar.getForeground() instanceof UIResource) {
 			if (!JTattooUtilities.isActive(c)) {
-				colors = AbstractLookAndFeel.getTheme().getInActiveColors();
+				colors = AbstractLookAndFeel.getTheme().getInactiveColors();
 			} else if (c.isEnabled()) {
-				colors = AbstractLookAndFeel.getTheme().getProgressBarColors();
+				colors = AbstractLookAndFeel.getTheme().getProgressbarColors();
 			} else {
 				colors = AbstractLookAndFeel.getTheme().getDisabledColors();
 			}

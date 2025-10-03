@@ -29,7 +29,7 @@ package org.loboevolution.pdfview.function.postscript.operation;
 import java.util.Deque;
 
 final class IfElse implements PostScriptOperation {
-    @Override
+
     /**
      * {@inheritDoc}
      *
@@ -47,14 +47,8 @@ final class IfElse implements PostScriptOperation {
      *
      * errors: stackunderflow, typecheck
      */
+    @Override
     public void eval(final Deque<Object> environment) {
-        // execute expr1 if bool is true, expr2 if false
-        if ((Boolean) environment.pop()) {
-//                        expression.push(popExpression());
-            environment.pop();
-        } else {
-            environment.pop();
-//                        expression.push(popExpression());
-        }
+        environment.pop();
     }
 }

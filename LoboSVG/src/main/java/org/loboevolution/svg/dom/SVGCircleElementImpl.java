@@ -89,14 +89,13 @@ public class SVGCircleElementImpl extends SVGGraphic implements SVGCircleElement
 	public Shape createShape(final AffineTransform transform) {
 		AffineTransform inverseTransform;
 		try {
-			inverseTransform = transform.createInverse();
+            inverseTransform = transform != null ? transform.createInverse() : null;
 		} catch (NoninvertibleTransformException e) {
 			inverseTransform = null;
 		}
 		float cx = ((SVGLengthImpl) getCx().getAnimVal()).getTransformedLength(inverseTransform);
 		float cy = ((SVGLengthImpl) getCy().getAnimVal()).getTransformedLength(inverseTransform);
 		float r = ((SVGLengthImpl) getR().getAnimVal()).getTransformedLength(inverseTransform);
-		Ellipse2D circle = new Ellipse2D.Float(cx - r, cy - r, 2 * r, 2 * r);
-		return circle;
+        return new Ellipse2D.Float(cx - r, cy - r, 2 * r, 2 * r);
 	}
 }

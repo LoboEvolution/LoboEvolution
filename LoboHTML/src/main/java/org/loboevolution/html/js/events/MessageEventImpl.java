@@ -28,6 +28,7 @@ package org.loboevolution.html.js.events;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.events.MessageEvent;
 import org.loboevolution.js.MessageEventSource;
 import org.loboevolution.js.MessagePort;
@@ -51,7 +52,11 @@ public class MessageEventImpl extends EventImpl implements MessageEvent {
      * @param params event constructor parameters
      */
     public MessageEventImpl(Object[] params) {
-        setParams(params);
+        try {
+            setParams(params);
+        } catch (DOMException e) {
+            throw new RuntimeException("Failed to initialize Event", e);
+        }
     }
 
     @Override

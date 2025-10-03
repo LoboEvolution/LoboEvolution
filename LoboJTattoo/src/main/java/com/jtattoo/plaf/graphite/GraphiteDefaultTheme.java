@@ -151,46 +151,44 @@ public class GraphiteDefaultTheme extends AbstractTheme {
 	@Override
 	public void setUpColorArrs() {
 		super.setUpColorArrs();
-		BUTTON_COLORS = ColorHelper.createColorArr(buttonColorLight, buttonColorDark, 24);
-		CHECKBOX_COLORS = BUTTON_COLORS;
-		DEFAULT_COLORS = ColorHelper.createColorArr(controlColorLight, controlColorDark, 24);
-		HIDEFAULT_COLORS = new Color[20];
+		setButtonColors(ColorHelper.createColorArr(buttonColorLight, buttonColorDark, 24));
+		setCheckboxColors(getButtonColors());
+		setDefaultColors(ColorHelper.createColorArr(controlColorLight, controlColorDark, 24));
+		setHidefaultColors(new Color[20]);
 		for (int i = 0; i < 20; i++) {
-			HIDEFAULT_COLORS[i] = ColorHelper.brighter(DEFAULT_COLORS[i], 40);
+			getHiDefaultColors()[i] = ColorHelper.brighter(getDefaultColors()[i], 40);
 		}
-		SELECTED_COLORS = DEFAULT_COLORS;
-		SELECTION_COLORS = ColorHelper.createColorArr(selectionBackgroundColorLight, selectionBackgroundColorDark, 20);
-		MENU_SELECTION_COLORS = ColorHelper.createColorArr(menuSelectionBackgroundColorLight,
-				menuSelectionBackgroundColorDark, 20);
-		ROLLOVER_COLORS = ColorHelper.createColorArr(rolloverColorLight, rolloverColorDark, 24);
-		// PRESSED_COLORS = ColorHelper.createColorArr(menuColorDark, menuColorLight,
-		// 24);
-		DISABLED_COLORS = ColorHelper.createColorArr(SUPER_LIGHT_GRAY, EXTRA_LIGHT_GRAY, 24);
-		ACTIVE_COLORS = DEFAULT_COLORS;
-		INACTIVE_COLORS = BUTTON_COLORS;
+		setSelectedColors(getDefaultColors());
+		setSelectionColors(ColorHelper.createColorArr(selectionBackgroundColorLight, selectionBackgroundColorDark, 20));
+		setMenuSelectionColors(ColorHelper.createColorArr(menuSelectionBackgroundColorLight,
+                menuSelectionBackgroundColorDark, 20));
+		setRolloverColors(ColorHelper.createColorArr(rolloverColorLight, rolloverColorDark, 24));
+		setDisabledColors(ColorHelper.createColorArr(SUPER_LIGHT_GRAY, EXTRA_LIGHT_GRAY, 24));
+		setActiveColors(getDefaultColors());
+		setInactiveColors(getButtonColors());
 
-		WINDOW_TITLE_COLORS = ColorHelper.createColorArr(windowTitleColorLight, windowTitleColorDark, 24);
-		WINDOW_INACTIVE_TITLE_COLORS = ColorHelper.createColorArr(windowInactiveTitleColorLight,
-				windowInactiveTitleColorDark, 24);
+		setWindowTitleColors(ColorHelper.createColorArr(windowTitleColorLight, windowTitleColorDark, 24));
+		setWindowInactiveTitleColors(ColorHelper.createColorArr(windowInactiveTitleColorLight,
+                windowInactiveTitleColorDark, 24));
 
-		TOOLBAR_COLORS = ColorHelper.createColorArr(toolbarColorLight, toolbarColorDark, 24);
-		MENUBAR_COLORS = ColorHelper.createColorArr(menuColorLight, menuColorDark, 24);
+		setToolbarColors(ColorHelper.createColorArr(toolbarColorLight, toolbarColorDark, 24));
+		setMenubarColors(ColorHelper.createColorArr(menuColorLight, menuColorDark, 24));
 
-		TAB_COLORS = BUTTON_COLORS;
-		COL_HEADER_COLORS = BUTTON_COLORS;
+		setTabColors(getButtonColors());
+		setColHeaderColors(getButtonColors());
 		Color hiColor = backgroundColorLight;
 		Color loColor = ColorHelper.darker(backgroundColor, 4);
-		TRACK_COLORS = ColorHelper.createColorArr(loColor, hiColor, 24);
+		setTrackColors(ColorHelper.createColorArr(loColor, hiColor, 24));
 		if ("true".equals(System.getProperty("graphiteBrightThumb"))) {
 			hiColor = backgroundColorDark;
 			loColor = ColorHelper.darker(backgroundColorDark, 10);
-			THUMB_COLORS = ColorHelper.createColorArr(hiColor, loColor, 24);
+			setThumbColors(ColorHelper.createColorArr(hiColor, loColor, 24));
 		} else {
-			THUMB_COLORS = DEFAULT_COLORS;
+			setThumbColors(getDefaultColors());
 		}
 
-		SLIDER_COLORS = DEFAULT_COLORS;
-		PROGRESSBAR_COLORS = DEFAULT_COLORS;
+		setSliderColors(getDefaultColors());
+		setProgressbarColors(getDefaultColors());
 	}
 
 } // end of class GraphiteDefaultTheme

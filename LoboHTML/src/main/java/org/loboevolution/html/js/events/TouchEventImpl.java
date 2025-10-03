@@ -27,6 +27,7 @@
 package org.loboevolution.html.js.events;
 
 import lombok.NoArgsConstructor;
+import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.events.TouchEvent;
 import org.loboevolution.events.TouchList;
 
@@ -39,7 +40,11 @@ public class TouchEventImpl extends UIEventImpl implements TouchEvent {
      * @param params event constructor parameters
      */
     public TouchEventImpl(Object[] params) {
-        setParams(params);
+        try {
+            setParams(params);
+        } catch (DOMException e) {
+            throw new RuntimeException("Failed to initialize Event", e);
+        }
     }
 
     @Override

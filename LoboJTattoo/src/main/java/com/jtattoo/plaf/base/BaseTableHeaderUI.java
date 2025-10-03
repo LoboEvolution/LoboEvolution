@@ -179,7 +179,7 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
 				}
 			} else {
 				if (header.getBackground() instanceof ColorUIResource) {
-					JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getInActiveColors(), 0, 0, w, h);
+					JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getInactiveColors(), 0, 0, w, h);
 				} else {
 					g.setColor(header.getBackground());
 					g.fillRect(0, 0, w, h);
@@ -490,7 +490,7 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
 			} else if (drawAlwaysActive() || JTattooUtilities.isFrameActive(header)) {
 				JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getColHeaderColors(), x, y, w, h);
 			} else {
-				JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getInActiveColors(), x, y, w, h);
+				JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getInactiveColors(), x, y, w, h);
 			}
 		} else {
 			g.setColor(header.getBackground());

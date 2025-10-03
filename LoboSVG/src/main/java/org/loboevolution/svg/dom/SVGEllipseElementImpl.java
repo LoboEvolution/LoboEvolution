@@ -95,7 +95,7 @@ public class SVGEllipseElementImpl extends SVGGraphic implements SVGEllipseEleme
 	public Shape createShape(final AffineTransform transform) {
 		AffineTransform inverseTransform;
 		try {
-			inverseTransform = transform.createInverse();
+			inverseTransform = transform != null ? transform.createInverse() : null;
 		} catch (NoninvertibleTransformException e) {
 			inverseTransform = null;
 		}

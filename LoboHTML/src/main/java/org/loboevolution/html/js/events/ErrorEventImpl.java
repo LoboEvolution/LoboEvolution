@@ -41,7 +41,11 @@ public class ErrorEventImpl extends EventImpl implements ErrorEvent {
      * @param params event constructor parameters
      */
     public ErrorEventImpl(Object[] params) throws DOMException {
-        setParams(params);
+        try {
+            setParams(params);
+        } catch (DOMException e) {
+            throw new RuntimeException("Failed to initialize Event", e);
+        }
     }
 
     @Override

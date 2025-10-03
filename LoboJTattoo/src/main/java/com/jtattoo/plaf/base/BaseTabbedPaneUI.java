@@ -2366,7 +2366,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 					if (JTattooUtilities.isFrameActive(tabPane)) {
 						colorArr = AbstractLookAndFeel.getTheme().getTabColors();
 					} else {
-						colorArr = AbstractLookAndFeel.getTheme().getInActiveColors();
+						colorArr = AbstractLookAndFeel.getTheme().getInactiveColors();
 					}
 				}
 			} else if (backColor != null) {

@@ -27,6 +27,7 @@
 package org.loboevolution.html.js.events;
 
 import lombok.NoArgsConstructor;
+import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.events.PageTransitionEvent;
 
 @NoArgsConstructor
@@ -38,7 +39,11 @@ public class PageTransitionEventImpl extends EventImpl implements PageTransition
      * @param params event constructor parameters
      */
     public PageTransitionEventImpl(Object[] params) {
-        setParams(params);
+        try {
+            setParams(params);
+        } catch (DOMException e) {
+            throw new RuntimeException("Failed to initialize Event", e);
+        }
     }
 
     @Override

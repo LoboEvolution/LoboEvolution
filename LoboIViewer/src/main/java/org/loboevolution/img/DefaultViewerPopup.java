@@ -52,9 +52,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 /**
  * The default popup menu for image viewers. The contents of the menu are
  * unspecified and may change between library versions.
- *
  * Author Kazo Csaba
- *
  */
 public class DefaultViewerPopup extends JPopupMenu {
 
@@ -65,9 +63,9 @@ public class DefaultViewerPopup extends JPopupMenu {
 	 * These will only be accessed from the event dispatch thread so using a static
 	 * instance to share the current directory across components is fine.
 	 */
-	private static JFileChooser saveChooser;
-	private static JButton saveChooserHelpButton;
-	private static JLabel saveChooserHelpLabel;
+	private JFileChooser saveChooser;
+	private JButton saveChooserHelpButton;
+	private JLabel saveChooserHelpLabel;
 	
 	/**
 	 * Creates a popup menu for use with the specified viewer.

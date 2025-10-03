@@ -29,10 +29,7 @@ package org.loboevolution.http;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -118,7 +115,7 @@ public class CookieManager {
 						cookies.add(cookie);
 					}
 				}
-			} catch (final Exception e) {
+			} catch (final SQLException e) {
 				log.error(e.getMessage(), e);
 				return null;
 			}

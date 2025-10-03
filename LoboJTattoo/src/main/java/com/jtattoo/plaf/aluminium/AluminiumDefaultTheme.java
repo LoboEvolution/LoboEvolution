@@ -132,43 +132,38 @@ public class AluminiumDefaultTheme extends AbstractTheme {
 	@Override
 	public void setUpColorArrs() {
 		super.setUpColorArrs();
-		DEFAULT_COLORS = ColorHelper.createColorArr(controlColorLight, controlColorDark, 20);
-		HIDEFAULT_COLORS = new Color[DEFAULT_COLORS.length];
-		for (int i = 0; i < DEFAULT_COLORS.length; i++) {
-			HIDEFAULT_COLORS[i] = ColorHelper.brighter(DEFAULT_COLORS[i], 20);
+		setDefaultColors(ColorHelper.createColorArr(controlColorLight, controlColorDark, 20));
+		setHidefaultColors(new Color[getDefaultColors().length]);
+        Color[] defaultColors = getDefaultColors();
+		for (int i = 0; i < defaultColors.length; i++) {
+			getHiDefaultColors()[i] = ColorHelper.brighter(defaultColors[i], 20);
 		}
 
-		ACTIVE_COLORS = DEFAULT_COLORS;
-		INACTIVE_COLORS = ColorHelper.createColorArr(new Color(240, 240, 240), new Color(220, 220, 220), 20);
+		setActiveColors(defaultColors);
+		setInactiveColors(ColorHelper.createColorArr(new Color(240, 240, 240), new Color(220, 220, 220), 20));
 
-		// PRESSED_COLORS =
-		// ColorHelper.createColorArr(ColorHelper.darker(selectionBackgroundColor, 5),
-		// ColorHelper.brighter(selectionBackgroundColor, 20), 20);
-		DISABLED_COLORS = ColorHelper.createColorArr(Color.white, Color.lightGray, 20);
-		BUTTON_COLORS = new Color[] { new Color(240, 240, 240), new Color(235, 235, 235), new Color(232, 232, 232),
-				new Color(230, 230, 230), new Color(228, 228, 228), new Color(225, 225, 225), new Color(220, 220, 220),
-				new Color(215, 215, 215), new Color(210, 210, 210), new Color(205, 205, 205), new Color(210, 210, 210),
-				new Color(215, 215, 215), new Color(220, 220, 220), new Color(225, 225, 225), new Color(228, 228, 228),
-				new Color(230, 230, 230), new Color(232, 232, 232), new Color(235, 235, 235), };
-		ROLLOVER_COLORS = ColorHelper.createColorArr(rolloverColorLight, rolloverColorDark, 20);
-		WINDOW_TITLE_COLORS = ColorHelper.createColorArr(windowTitleColorLight, windowTitleColorDark, 20);
-		WINDOW_INACTIVE_TITLE_COLORS = ColorHelper.createColorArr(windowInactiveTitleColorLight,
-				windowInactiveTitleColorDark, 20);
-		MENUBAR_COLORS = ColorHelper.createColorArr(menuColorLight, menuColorDark, 20);
-		TOOLBAR_COLORS = ColorHelper.createColorArr(toolbarColorLight, toolbarColorDark, 20);
-		TAB_COLORS = DEFAULT_COLORS;
-		COL_HEADER_COLORS = BUTTON_COLORS;
+		setDisabledColors(ColorHelper.createColorArr(Color.white, Color.lightGray, 20));
+		setButtonColors(new Color[]{new Color(240, 240, 240), new Color(235, 235, 235), new Color(232, 232, 232),
+                new Color(230, 230, 230), new Color(228, 228, 228), new Color(225, 225, 225), new Color(220, 220, 220),
+                new Color(215, 215, 215), new Color(210, 210, 210), new Color(205, 205, 205), new Color(210, 210, 210),
+                new Color(215, 215, 215), new Color(220, 220, 220), new Color(225, 225, 225), new Color(228, 228, 228),
+                new Color(230, 230, 230), new Color(232, 232, 232), new Color(235, 235, 235),});
+		setRolloverColors(ColorHelper.createColorArr(rolloverColorLight, rolloverColorDark, 20));
+		setWindowTitleColors(ColorHelper.createColorArr(windowTitleColorLight, windowTitleColorDark, 20));
+		setWindowInactiveTitleColors(ColorHelper.createColorArr(windowInactiveTitleColorLight,
+                windowInactiveTitleColorDark, 20));
+		setMenubarColors(ColorHelper.createColorArr(menuColorLight, menuColorDark, 20));
+		setToolbarColors(ColorHelper.createColorArr(toolbarColorLight, toolbarColorDark, 20));
+		setTabColors(getDefaultColors());
+		setColHeaderColors(getButtonColors());
 
-		SELECTED_COLORS = ColorHelper.createColorArr(ColorHelper.brighter(selectionBackgroundColor, 40),
-				selectionBackgroundColor, 20);
+		setSelectedColors(ColorHelper.createColorArr(ColorHelper.brighter(selectionBackgroundColor, 40),
+                selectionBackgroundColor, 20));
 
-		TRACK_COLORS = ColorHelper.createColorArr(new Color(210, 210, 210), new Color(230, 230, 230), 20);
-		// THUMB_COLORS = ColorHelper.createColorArr(new Color(202, 208, 172), new
-		// Color(180, 188, 137), 20);
-		THUMB_COLORS = ColorHelper.createColorArr(new Color(200, 200, 200), new Color(170, 170, 170), 20);
-		// SLIDER_COLORS = DEFAULT_COLORS;
-		SLIDER_COLORS = ColorHelper.createColorArr(new Color(180, 180, 180), new Color(150, 150, 150), 10);
-		PROGRESSBAR_COLORS = SLIDER_COLORS;
+		setTrackColors(ColorHelper.createColorArr(new Color(210, 210, 210), new Color(230, 230, 230), 20));
+		setThumbColors(ColorHelper.createColorArr(new Color(200, 200, 200), new Color(170, 170, 170), 20));
+		setSliderColors(ColorHelper.createColorArr(new Color(180, 180, 180), new Color(150, 150, 150), 10));
+		setProgressbarColors(getSliderColors());
 	}
 
 } // end of class AluminiumDefaultTheme

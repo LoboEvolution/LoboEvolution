@@ -33,7 +33,7 @@ public class Flag {
     /**
      * The is set.
      */
-    private boolean isSet;
+    private volatile boolean isSet = false;
 
     /**
      * Sets the flag. Any pending waitForFlag calls will now return.
@@ -56,23 +56,14 @@ public class Flag {
      * interruptions, use interruptibleWaitForFlag instead.
      */
     public synchronized void waitForFlag() {
-        if (!isSet) {
+        while (!isSet) {
             try {
                 wait();
             } catch (final InterruptedException ie) {
                 Thread.currentThread().interrupt();
+                // Consider breaking out of the loop on interrupt
+                break;
             }
-        }
-    }
-
-    /**
-     * Waits for the flag to be set, if it is not set already.
-     *
-     * @throws java.lang.InterruptedException if any.
-     */
-    public synchronized void interruptibleWaitForFlag() throws InterruptedException {
-        if (!isSet) {
-            wait();
         }
     }
 }

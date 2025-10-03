@@ -327,10 +327,9 @@ public class XPathResultImpl implements XPathResult {
             } catch (final TransformerException e) {
                 // Type check above should prevent this exception from
                 // occurring.
-                new XPathException(XPathException.TYPE_ERR, e.getMessage());
+                throw new XPathException(XPathException.TYPE_ERR, e.getMessage());
             }
         }
-        return false;
     }
 
     /**

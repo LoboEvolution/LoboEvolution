@@ -32,10 +32,7 @@ import org.loboevolution.info.GeneralInfo;
 import java.awt.*;
 import java.io.Serial;
 import java.io.Serializable;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -124,8 +121,8 @@ public class GeneralStore implements Serializable {
 						height = rs.getInt(2);
 					}
 				}
-			} catch (final Exception e) {
-				//log.error(e.getMessage(), e);
+			} catch (final SQLException e) {
+				log.error(e.getMessage(), e);
 			}
 			if (width > -1 && height > -1) {
 				bounds = new Rectangle(width, height);

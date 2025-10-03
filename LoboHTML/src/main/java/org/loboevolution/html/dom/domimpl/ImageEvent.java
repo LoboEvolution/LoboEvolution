@@ -32,9 +32,7 @@ import java.util.EventObject;
  * <p>ImageEvent class.</p>
  */
 public class ImageEvent extends EventObject {
-	/**
-	 * 
-	 */
+
 	@Serial
     private static final long serialVersionUID = 1L;
 	public final java.awt.Image image;

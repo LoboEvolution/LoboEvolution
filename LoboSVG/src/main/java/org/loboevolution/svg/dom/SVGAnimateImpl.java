@@ -172,9 +172,9 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 			timer.stop();
 		}
 
-		if (animate.getDur() == 0 && (from == to)) {
-			timer.stop();
-		}
+        if (animate.getDur() == 0 && Double.compare(from, to) == 0) {
+            timer.stop();
+        }
 
 		counter++;
 	}

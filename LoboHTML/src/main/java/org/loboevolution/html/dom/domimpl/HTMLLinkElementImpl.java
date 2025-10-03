@@ -356,7 +356,7 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 	/** {@inheritDoc} */
 	@Override
 	public Object setUserData(final String key, final Object data, final UserDataHandler handler) {
-		if (XHtmlParser.MODIFYING_KEY.equals(key) && data != Boolean.TRUE) {
+		if (XHtmlParser.MODIFYING_KEY.equals(key) && !Boolean.TRUE.equals(data)) {
 			processLink();
 		}
 		return super.setUserData(key, data, handler);

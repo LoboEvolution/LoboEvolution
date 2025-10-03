@@ -183,7 +183,7 @@ public abstract class CharacterDataImpl extends NodeImpl implements CharacterDat
 		if (someText != null && someText.length() > 32) {
 			someText = someText.substring(0, 29) + "...";
 		}
-		return getNodeName() + "[length=" + someText.length() + ",text=" + someText + "]";
+		return getNodeName() + "[length=" + (someText != null ? someText.length() : 0) + ",text=" + someText + "]";
 	}
 
 }

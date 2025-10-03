@@ -50,7 +50,12 @@ public class BlobEventImpl extends EventImpl implements BlobEvent {
      * * @param params event constructor parameters
      */
     public BlobEventImpl(Object[] params) throws DOMException {
-        setParams(params);
+        try {
+            setParams(params);
+        } catch (DOMException e) {
+            throw new RuntimeException("Failed to initialize Event", e);
+        }
+
         if (params.length < 3) {
             if (params[1] != null && params[1] instanceof NativeObject obj) {
                if(obj.get("data") == null || "".equals(obj.get("data")))

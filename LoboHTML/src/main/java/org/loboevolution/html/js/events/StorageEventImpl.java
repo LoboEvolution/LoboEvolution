@@ -28,6 +28,7 @@ package org.loboevolution.html.js.events;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.events.StorageEvent;
 import org.loboevolution.js.webstorage.Storage;
 
@@ -50,7 +51,11 @@ public class StorageEventImpl extends UIEventImpl implements StorageEvent {
      * @param params event constructor parameters
      */
     public StorageEventImpl(Object[] params) {
-        setParams(params);
+        try {
+            setParams(params);
+        } catch (DOMException e) {
+            throw new RuntimeException("Failed to initialize Event", e);
+        }
     }
 
     @Override

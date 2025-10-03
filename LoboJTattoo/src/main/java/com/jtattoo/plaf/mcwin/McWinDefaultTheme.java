@@ -123,89 +123,88 @@ public class McWinDefaultTheme extends AbstractTheme {
 
 		if (controlColorLight.equals(new ColorUIResource(106, 150, 192))) {
 			// Generate the color arrays
-			DEFAULT_COLORS = new Color[] { new Color(106, 150, 192), new Color(154, 190, 209), new Color(182, 208, 231),
-					new Color(200, 223, 255), new Color(189, 218, 246), new Color(167, 204, 231),
-					new Color(148, 191, 226), new Color(144, 181, 225), new Color(145, 182, 226),
-					new Color(151, 188, 230), new Color(160, 198, 235), new Color(168, 206, 242),
-					new Color(174, 213, 244), new Color(183, 222, 251), new Color(191, 230, 255),
-					new Color(202, 237, 255), new Color(206, 247, 253), new Color(211, 255, 254),
-					new Color(208, 255, 254), new Color(206, 249, 255), new Color(202, 237, 255), };
+			setDefaultColors(new Color[]{new Color(106, 150, 192), new Color(154, 190, 209), new Color(182, 208, 231),
+                    new Color(200, 223, 255), new Color(189, 218, 246), new Color(167, 204, 231),
+                    new Color(148, 191, 226), new Color(144, 181, 225), new Color(145, 182, 226),
+                    new Color(151, 188, 230), new Color(160, 198, 235), new Color(168, 206, 242),
+                    new Color(174, 213, 244), new Color(183, 222, 251), new Color(191, 230, 255),
+                    new Color(202, 237, 255), new Color(206, 247, 253), new Color(211, 255, 254),
+                    new Color(208, 255, 254), new Color(206, 249, 255), new Color(202, 237, 255),});
 		} else {
 			final Color[] color1 = ColorHelper.createColorArr(controlColorLight, controlColorDark, 6);
 			color1[0] = controlColorDark;
 			final Color[] color2 = ColorHelper.createColorArr(ColorHelper.brighter(controlColorDark, 10), controlColorLight,
 					15);
-			System.arraycopy(color1, 0, DEFAULT_COLORS, 0, 6);
-            System.arraycopy(color2, 0, DEFAULT_COLORS, 5, 15);
+			System.arraycopy(color1, 0, getDefaultColors(), 0, 6);
+            System.arraycopy(color2, 0, getDefaultColors(), 5, 15);
 		}
 		if (rolloverColorDark.equals(new ColorUIResource(106, 192, 150))) {
-			ROLLOVER_COLORS = new Color[] { new Color(106, 192, 150), new Color(154, 209, 190),
-					new Color(173, 220, 198), new Color(182, 232, 203), new Color(180, 234, 207),
-					new Color(167, 231, 204), new Color(148, 226, 191), new Color(144, 225, 181),
-					new Color(145, 226, 182), new Color(151, 230, 188), new Color(160, 235, 198),
-					new Color(168, 242, 206), new Color(174, 244, 213), new Color(183, 251, 222),
-					new Color(191, 255, 230), new Color(202, 255, 237), new Color(206, 253, 247),
-					new Color(211, 254, 255), new Color(208, 254, 255), new Color(206, 249, 255),
-					new Color(196, 247, 227), };
+			setRolloverColors(new Color[]{new Color(106, 192, 150), new Color(154, 209, 190),
+                    new Color(173, 220, 198), new Color(182, 232, 203), new Color(180, 234, 207),
+                    new Color(167, 231, 204), new Color(148, 226, 191), new Color(144, 225, 181),
+                    new Color(145, 226, 182), new Color(151, 230, 188), new Color(160, 235, 198),
+                    new Color(168, 242, 206), new Color(174, 244, 213), new Color(183, 251, 222),
+                    new Color(191, 255, 230), new Color(202, 255, 237), new Color(206, 253, 247),
+                    new Color(211, 254, 255), new Color(208, 254, 255), new Color(206, 249, 255),
+                    new Color(196, 247, 227),});
 		} else {
 			final Color[] color1 = ColorHelper.createColorArr(rolloverColorLight, rolloverColorDark, 6);
 			color1[0] = rolloverColorDark;
 			final Color[] color2 = ColorHelper.createColorArr(ColorHelper.brighter(rolloverColorDark, 10), rolloverColorLight,
 					15);
-			System.arraycopy(color1, 0, ROLLOVER_COLORS, 0, 6);
-            System.arraycopy(color2, 0, ROLLOVER_COLORS, 5, 15);
+			System.arraycopy(color1, 0, getRolloverColors(), 0, 6);
+            System.arraycopy(color2, 0, getRolloverColors(), 5, 15);
 		}
 
-		HIDEFAULT_COLORS = new Color[] { new Color(250, 250, 250), new Color(250, 250, 250), new Color(240, 240, 240),
-				new Color(230, 230, 230), new Color(220, 220, 220), new Color(214, 214, 214), new Color(218, 218, 218),
-				new Color(222, 222, 222), new Color(226, 226, 226), new Color(230, 230, 230), new Color(234, 234, 234),
-				new Color(237, 237, 237), new Color(240, 240, 240), new Color(242, 242, 242), new Color(244, 244, 244),
-				new Color(246, 246, 246), new Color(248, 248, 248), new Color(250, 250, 250), new Color(252, 252, 252),
-				new Color(254, 254, 254), new Color(255, 255, 255), };
+		setHidefaultColors(new Color[]{new Color(250, 250, 250), new Color(250, 250, 250), new Color(240, 240, 240),
+                new Color(230, 230, 230), new Color(220, 220, 220), new Color(214, 214, 214), new Color(218, 218, 218),
+                new Color(222, 222, 222), new Color(226, 226, 226), new Color(230, 230, 230), new Color(234, 234, 234),
+                new Color(237, 237, 237), new Color(240, 240, 240), new Color(242, 242, 242), new Color(244, 244, 244),
+                new Color(246, 246, 246), new Color(248, 248, 248), new Color(250, 250, 250), new Color(252, 252, 252),
+                new Color(254, 254, 254), new Color(255, 255, 255),});
 
-		ACTIVE_COLORS = DEFAULT_COLORS;
-		INACTIVE_COLORS = HIDEFAULT_COLORS;
-		SELECTED_COLORS = DEFAULT_COLORS;
+		setActiveColors(getDefaultColors());
+		setInactiveColors(getDisabledColors());
+		setSelectedColors(getDefaultColors());
 
-		// PRESSED_COLORS = ColorHelper.createColorArr(lightGray, extraLightGray, 20);
-		DISABLED_COLORS = new Color[HIDEFAULT_COLORS.length];
-		for (int i = 0; i < HIDEFAULT_COLORS.length; i++) {
-			DISABLED_COLORS[i] = ColorHelper.brighter(HIDEFAULT_COLORS[i], 40.0);
+		setDisabledColors(new Color[getDisabledColors().length]);
+		for (int i = 0; i < getDisabledColors().length; i++) {
+			getDisabledColors()[i] = ColorHelper.brighter(getDisabledColors()[i], 40.0);
 		}
 
-		WINDOW_TITLE_COLORS = ColorHelper.createColorArr(windowTitleColorLight, windowTitleColorDark, 20);
-		WINDOW_INACTIVE_TITLE_COLORS = ColorHelper.createColorArr(windowInactiveTitleColorLight,
-				windowInactiveTitleColorDark, 20);
-		MENUBAR_COLORS = ColorHelper.createColorArr(menuColorLight, menuColorDark, 20);
-		TOOLBAR_COLORS = MENUBAR_COLORS;
+		setWindowTitleColors(ColorHelper.createColorArr(windowTitleColorLight, windowTitleColorDark, 20));
+		setWindowInactiveTitleColors(ColorHelper.createColorArr(windowInactiveTitleColorLight,
+                windowInactiveTitleColorDark, 20));
+		setMenubarColors(ColorHelper.createColorArr(menuColorLight, menuColorDark, 20));
+		setToolbarColors(getMenubarColors());
 
-		BUTTON_COLORS = HIDEFAULT_COLORS;
-		CHECKBOX_COLORS = BUTTON_COLORS;
-		TAB_COLORS = BUTTON_COLORS;
+		setButtonColors(getDisabledColors());
+		setCheckboxColors(getButtonColors());
+		setTabColors(getButtonColors());
 		if (isBrightMode()) {
-			COL_HEADER_COLORS = HIDEFAULT_COLORS;
+			setColHeaderColors(getDisabledColors());
 		} else {
-			COL_HEADER_COLORS = DEFAULT_COLORS;
+			setColHeaderColors(getDefaultColors());
 		}
 		if (isBrightMode()) {
 			if (controlColorLight.equals(new ColorUIResource(106, 150, 192))) {
-				THUMB_COLORS = HIDEFAULT_COLORS;
+				setThumbColors(getHiDefaultColors());
 			} else {
 				final Color cHi = ColorHelper.brighter(controlColorLight, 10);
 				final Color cLo = ColorHelper.brighter(controlColorDark, 10);
 				final Color[] color1 = ColorHelper.createColorArr(cHi, cLo, 6);
 				color1[0] = cLo;
 				final Color[] color2 = ColorHelper.createColorArr(ColorHelper.brighter(cLo, 10), cHi, 15);
-				System.arraycopy(color1, 0, THUMB_COLORS, 0, 6);
-                System.arraycopy(color2, 0, THUMB_COLORS, 5, 15);
+				System.arraycopy(color1, 0, getThumbColors(), 0, 6);
+                System.arraycopy(color2, 0, getThumbColors(), 5, 15);
 
 			}
 		} else {
-			THUMB_COLORS = DEFAULT_COLORS;
+			setThumbColors(getDefaultColors());
 		}
-		TRACK_COLORS = ColorHelper.createColorArr(new Color(220, 220, 220), Color.white, 20);
-		SLIDER_COLORS = DEFAULT_COLORS;
-		PROGRESSBAR_COLORS = DEFAULT_COLORS;
+		setTrackColors(ColorHelper.createColorArr(new Color(220, 220, 220), Color.white, 20));
+		setSliderColors(getDefaultColors());
+		setProgressbarColors(getDefaultColors());
 	}
 
 } // end of class McWinDefaultTheme

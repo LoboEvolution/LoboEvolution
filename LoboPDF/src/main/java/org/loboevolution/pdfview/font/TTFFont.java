@@ -45,7 +45,7 @@ public class TTFFont extends OutlineFont {
     /**
      * the truetype font itself
      */
-    private final TrueTypeFont font;
+    private TrueTypeFont font;
 
     /**
      * the number of units per em in the font
@@ -88,15 +88,14 @@ public class TTFFont extends OutlineFont {
         if (ttfObj != null || fontFile != null) {
             if (ttfObj != null) {
                 font = TrueTypeFont.parseFont(ttfObj.getStreamBuffer());
-            } else {
-                final RandomAccessFile raFile = fontFile != null ? new RandomAccessFile(fontFile, "r") : null;
+            }
+            if (fontFile != null) {
+                final RandomAccessFile raFile = new RandomAccessFile(fontFile, "r");
                 try (raFile; FileChannel fc = raFile.getChannel()) {
                     MappedByteBuffer mappedFont = fc.map(FileChannel.MapMode.READ_ONLY, 0, fc.size());
                     font = TrueTypeFont.parseFont(mappedFont);
                     mappedFont = null;
                 }
-                // swallow
-                // swallow
             }
             // read the units per em from the head table
             final HeadTable head = (HeadTable) font.getTable("head");

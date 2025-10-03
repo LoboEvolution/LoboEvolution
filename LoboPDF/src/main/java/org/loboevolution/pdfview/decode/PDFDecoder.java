@@ -111,40 +111,35 @@ public class PDFDecoder {
             for (int i = 0; i < spec.ary.length; i++) {
                 final String enctype = spec.ary[i].getStringValue();
                 if (enctype != null) {
-                    try {
-                        if (filterLimits.contains(enctype)) {
-                            break;
-                        }
 
-                        switch (enctype) {
-                            case "FlateDecode", "Fl" -> streamBuf = FlateDecode.decode(dict, streamBuf, spec.params[i]);
-                            case "LZWDecode", "LZW" -> streamBuf = LZWDecode.decode(streamBuf, spec.params[i]);
-                            case "ASCII85Decode", "A85" -> streamBuf = ASCII85Decode.decode(streamBuf, spec.params[i]);
-                            case "ASCIIHexDecode", "AHx" ->
-                                    streamBuf = ASCIIHexDecode.decode(streamBuf, spec.params[i]);
-                            case "RunLengthDecode", "RL" ->
-                                    streamBuf = RunLengthDecode.decode(streamBuf, spec.params[i]);
-                            case "DCTDecode", "DCT" -> streamBuf = DCTDecode.decode(dict, streamBuf, spec.params[i]);
-                            case "JPXDecode" -> streamBuf = JPXDecode.decode(dict, streamBuf, spec.params[i]);
-                            case "CCITTFaxDecode", "CCF" ->
-                                    streamBuf = CCITTFaxDecode.decode(dict, streamBuf, spec.params[i]);
-                            case "Crypt" -> {
-                                String cfName = PDFDecrypterFactory.CF_IDENTITY;
-                                if (spec.params[i] != null) {
-                                    final PDFObject nameObj = spec.params[i].getDictRef("Name");
-                                    if (nameObj != null && nameObj.getType() == PDFObject.NAME) {
-                                        cfName = nameObj.getStringValue();
-                                    }
-                                }
-                                streamBuf = dict.getDecrypter().decryptBuffer(cfName, null, streamBuf);
-                            }
-                            case "JBIG2Decode" -> streamBuf = JBig2Decode.decode(dict, streamBuf, spec.params[i]);
-                            default ->
-                                    throw new PDFParseException("Unknown coding method:" + spec.ary[i].getStringValue());
-                        }
-                    } catch (final Exception e) {
-                        throw new PDFParseException("Problem decoding " + enctype + " encoded stream!", e);
+                    if (filterLimits.contains(enctype)) {
+                        break;
                     }
+
+                    switch (enctype) {
+                        case "FlateDecode", "Fl" -> streamBuf = FlateDecode.decode(dict, streamBuf, spec.params[i]);
+                        case "LZWDecode", "LZW" -> streamBuf = LZWDecode.decode(streamBuf, spec.params[i]);
+                        case "ASCII85Decode", "A85" -> streamBuf = ASCII85Decode.decode(streamBuf, spec.params[i]);
+                        case "ASCIIHexDecode", "AHx" -> streamBuf = ASCIIHexDecode.decode(streamBuf, spec.params[i]);
+                        case "RunLengthDecode", "RL" -> streamBuf = RunLengthDecode.decode(streamBuf, spec.params[i]);
+                        case "DCTDecode", "DCT" -> streamBuf = DCTDecode.decode(dict, streamBuf, spec.params[i]);
+                        case "JPXDecode" -> streamBuf = JPXDecode.decode(dict, streamBuf, spec.params[i]);
+                        case "CCITTFaxDecode", "CCF" ->
+                                streamBuf = CCITTFaxDecode.decode(dict, streamBuf, spec.params[i]);
+                        case "Crypt" -> {
+                            String cfName = PDFDecrypterFactory.CF_IDENTITY;
+                            if (spec.params[i] != null) {
+                                final PDFObject nameObj = spec.params[i].getDictRef("Name");
+                                if (nameObj != null && nameObj.getType() == PDFObject.NAME) {
+                                    cfName = nameObj.getStringValue();
+                                }
+                            }
+                            streamBuf = dict.getDecrypter().decryptBuffer(cfName, null, streamBuf);
+                        }
+                        case "JBIG2Decode" -> streamBuf = JBig2Decode.decode(dict, streamBuf, spec.params[i]);
+                        default -> throw new PDFParseException("Unknown coding method:" + spec.ary[i].getStringValue());
+                    }
+
                 }
             }
         }

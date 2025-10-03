@@ -123,7 +123,7 @@ public class HTMLStyleElementImpl extends HTMLElementImpl implements HTMLStyleEl
 	/** {@inheritDoc} */
 	@Override
 	public Object setUserData(final String key, final Object data, final UserDataHandler handler) {
-		if (XHtmlParser.MODIFYING_KEY.equals(key) && data != Boolean.TRUE) {
+		if (XHtmlParser.MODIFYING_KEY.equals(key) && !Boolean.TRUE.equals(data)) {
 			processStyle();
 		}
 		return super.setUserData(key, data, handler);

@@ -189,7 +189,7 @@ public class PDFDecrypterFactory {
             final PDFObject lengthObj = cryptFilter.getDictRef("Length");
             // The Errata for PDF 1.7 explains that the value of
             // Length in CF dictionaries is in bytes
-            final Integer length = lengthObj != null ? lengthObj.getIntValue() * 8 :
+            final Integer length = lengthObj != null ? Integer.valueOf(lengthObj.getIntValue() * 8) :
                     (bitLengthObj != null) ? bitLengthObj.getIntValue() : null;
 
             // CFM is the crypt filter method, describing whether RC4,

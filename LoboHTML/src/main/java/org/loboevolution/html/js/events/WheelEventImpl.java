@@ -43,7 +43,11 @@ public class WheelEventImpl extends MouseEventImpl implements WheelEvent {
      * @param params event constructor parameters
      */
     public WheelEventImpl(Object[] params) {
-        setParams(params);
+        try {
+            setParams(params);
+        } catch (DOMException e) {
+            throw new RuntimeException("Failed to initialize Event", e);
+        }
     }
 
     @Override

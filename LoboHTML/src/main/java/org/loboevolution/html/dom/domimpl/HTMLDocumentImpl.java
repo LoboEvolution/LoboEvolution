@@ -64,7 +64,9 @@ import org.xml.sax.SAXException;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.*;
 /**
@@ -151,8 +153,8 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 				setDomain(docURL.getHost());
 				this.setDocumentURI(documentURI);
 			}
-		} catch (Exception mfu) {
-			log.warn("HTMLDocumentImpl(): Document URI {} is malformed.",  documentURI);
+        } catch (MalformedURLException | URISyntaxException e) {
+            log.warn("HTMLDocumentImpl(): Document URI {} is malformed.",  documentURI);
 		}
 		this.document = this;
 		setWindow(rcontext, ucontext, config);

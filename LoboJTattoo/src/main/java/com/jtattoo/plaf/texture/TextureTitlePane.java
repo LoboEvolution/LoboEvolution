@@ -31,6 +31,7 @@ import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.geom.Area;
 import java.awt.geom.Rectangle2D;
+import java.io.Serial;
 
 import javax.swing.JRootPane;
 
@@ -48,9 +49,7 @@ import com.jtattoo.plaf.JTattooUtilities;
  */
 public class TextureTitlePane extends BaseTitlePane {
 
-	/**
-	 *
-	 */
+	@Serial
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -107,14 +106,14 @@ public class TextureTitlePane extends BaseTitlePane {
 		}
 		g.setColor(fc);
 
-		Area clipArea = new Area(new Rectangle2D.Double(x, 0, getWidth(), getHeight() / 2));
+		Area clipArea = new Area(new Rectangle2D.Double(x, 0, getWidth(), (double) getHeight() / 2));
 		if (savedClip != null) {
 			clipArea.intersect(new Area(savedClip));
 		}
 		g2D.setClip(clipArea);
 		JTattooUtilities.drawString(rootPane, g, title, x, y);
 
-		clipArea = new Area(new Rectangle2D.Double(x, getHeight() / 2, getWidth(), getHeight()));
+		clipArea = new Area(new Rectangle2D.Double(x, (double) getHeight() / 2, getWidth(), getHeight()));
 		if (savedClip != null) {
 			clipArea.intersect(new Area(savedClip));
 		}

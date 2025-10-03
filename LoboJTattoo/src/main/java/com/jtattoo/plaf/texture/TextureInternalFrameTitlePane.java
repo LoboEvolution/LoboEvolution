@@ -112,7 +112,7 @@ public class TextureInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 		g.setColor(fc);
 		JTattooUtilities.drawString(frame, g, title, x, y);
 
-		final Area clipArea = new Area(new Rectangle2D.Double(x, getHeight() / 2, getWidth(), getHeight()));
+		final Area clipArea = new Area(new Rectangle2D.Double(x, (double) getHeight() / 2, getWidth(), getHeight()));
 		if (savedClip != null) {
 			clipArea.intersect(new Area(savedClip));
 		}

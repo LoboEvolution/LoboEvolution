@@ -1363,7 +1363,7 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, Cloneabl
 	@Override
 	public Object setUserData(final String key, final Object data, final UserDataHandler handler) {
 		if (XHtmlParser.MODIFYING_KEY.equals(key)) {
-			final boolean ns = Boolean.TRUE == data;
+			final boolean ns = Boolean.TRUE.equals(data);
 			this.notificationsSuspended = ns;
 			if (!ns) {
 				informNodeLoaded();

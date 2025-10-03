@@ -159,10 +159,10 @@ public class NoireDefaultTheme extends AbstractTheme {
 		Color bottomLo = ColorHelper.darker(buttonColorDark, 40);
 		Color[] topColors = ColorHelper.createColorArr(topHi, topLo, 10);
 		Color[] bottomColors = ColorHelper.createColorArr(bottomHi, bottomLo, 12);
-		BUTTON_COLORS = new Color[22];
-		System.arraycopy(topColors, 0, BUTTON_COLORS, 0, 10);
-		System.arraycopy(bottomColors, 0, BUTTON_COLORS, 10, 12);
-		CHECKBOX_COLORS = BUTTON_COLORS;
+		setButtonColors(new Color[22]);
+		System.arraycopy(topColors, 0, getButtonColors(), 0, 10);
+		System.arraycopy(bottomColors, 0, getButtonColors(), 10, 12);
+		setCheckboxColors(getButtonColors());
 
 		topHi = ColorHelper.brighter(controlColorLight, 40);
 		topLo = ColorHelper.brighter(controlColorDark, 40);
@@ -170,16 +170,14 @@ public class NoireDefaultTheme extends AbstractTheme {
 		bottomLo = controlColorDark;
 		topColors = ColorHelper.createColorArr(topHi, topLo, 10);
 		bottomColors = ColorHelper.createColorArr(bottomHi, bottomLo, 12);
-		DEFAULT_COLORS = new Color[22];
-		System.arraycopy(topColors, 0, DEFAULT_COLORS, 0, 10);
-		System.arraycopy(bottomColors, 0, DEFAULT_COLORS, 10, 12);
+		setDefaultColors(new Color[22]);
+		System.arraycopy(topColors, 0, getButtonColors(), 0, 10);
+		System.arraycopy(bottomColors, 0, getButtonColors(), 10, 12);
 
-		HIDEFAULT_COLORS = ColorHelper.createColorArr(ColorHelper.brighter(controlColorLight, 15),
-				ColorHelper.brighter(controlColorDark, 15), 20);
-		ACTIVE_COLORS = ColorHelper.createColorArr(controlColorLight, controlColorDark, 20);
-		INACTIVE_COLORS = ColorHelper.createColorArr(ColorHelper.brighter(controlColorLight, 5),
-				ColorHelper.brighter(controlColorDark, 5), 20);
-		SELECTED_COLORS = BUTTON_COLORS;
+		setHidefaultColors(ColorHelper.createColorArr(ColorHelper.brighter(controlColorLight, 15), ColorHelper.brighter(controlColorDark, 15), 20));
+		setActiveColors(ColorHelper.createColorArr(controlColorLight, controlColorDark, 20));
+		setInactiveColors(ColorHelper.createColorArr(ColorHelper.brighter(controlColorLight, 5), ColorHelper.brighter(controlColorDark, 5), 20));
+		setSelectedColors(getButtonColors());
 
 		topHi = ColorHelper.brighter(rolloverColorLight, 40);
 		topLo = rolloverColorLight;
@@ -187,31 +185,31 @@ public class NoireDefaultTheme extends AbstractTheme {
 		bottomLo = ColorHelper.darker(rolloverColorDark, 20);
 		topColors = ColorHelper.createColorArr(topHi, topLo, 10);
 		bottomColors = ColorHelper.createColorArr(bottomHi, bottomLo, 12);
-		ROLLOVER_COLORS = new Color[22];
-		System.arraycopy(topColors, 0, ROLLOVER_COLORS, 0, 10);
-		System.arraycopy(bottomColors, 0, ROLLOVER_COLORS, 10, 12);
-		DISABLED_COLORS = ColorHelper.createColorArr(new Color(80, 80, 80), new Color(64, 64, 64), 20);
+		setRolloverColors(new Color[22]);
+		System.arraycopy(topColors, 0, getRolloverColors(), 0, 10);
+		System.arraycopy(bottomColors, 0, getRolloverColors(), 10, 12);
+        setDisabledColors(ColorHelper.createColorArr(new Color(80, 80, 80), new Color(64, 64, 64), 20));
 		topHi = ColorHelper.brighter(windowTitleColorLight, 40);
 		topLo = ColorHelper.brighter(windowTitleColorDark, 40);
 		bottomHi = windowTitleColorLight;
 		bottomLo = windowTitleColorDark;
 		topColors = ColorHelper.createColorArr(topHi, topLo, 8);
 		bottomColors = ColorHelper.createColorArr(bottomHi, bottomLo, 12);
-		WINDOW_TITLE_COLORS = new Color[20];
-		System.arraycopy(topColors, 0, WINDOW_TITLE_COLORS, 0, 8);
-		System.arraycopy(bottomColors, 0, WINDOW_TITLE_COLORS, 8, 12);
-		WINDOW_INACTIVE_TITLE_COLORS = ColorHelper.createColorArr(windowInactiveTitleColorLight,
-				windowInactiveTitleColorDark, 20);
-		MENUBAR_COLORS = DEFAULT_COLORS;
-		TOOLBAR_COLORS = MENUBAR_COLORS;
-		SLIDER_COLORS = BUTTON_COLORS;
-		PROGRESSBAR_COLORS = DEFAULT_COLORS;
-		THUMB_COLORS = DEFAULT_COLORS;
-		TRACK_COLORS = ColorHelper.createColorArr(ColorHelper.darker(inputBackgroundColor, 5),
-				ColorHelper.brighter(inputBackgroundColor, 10), 20);
+		setWindowTitleColors(new Color[20]);
+		System.arraycopy(topColors, 0, getWindowTitleColors(), 0, 8);
+		System.arraycopy(bottomColors, 0, getWindowTitleColors(), 8, 12);
+		setWindowInactiveTitleColors(ColorHelper.createColorArr(windowInactiveTitleColorLight,
+                windowInactiveTitleColorDark, 20));
+		setMenubarColors(getDefaultColors());
+		setToolbarColors(getMenubarColors());
+		setSliderColors(getButtonColors());
+		setProgressbarColors(getDefaultColors());
+		setThumbColors(getDefaultColors());
+		setTrackColors(ColorHelper.createColorArr(ColorHelper.darker(inputBackgroundColor, 5),
+                ColorHelper.brighter(inputBackgroundColor, 10), 20));
 
-		TAB_COLORS = DEFAULT_COLORS;
-		COL_HEADER_COLORS = DEFAULT_COLORS;
+		setTabColors(getDefaultColors());
+		setColHeaderColors(getDefaultColors());
 	}
 
 } // end of class NoireDefaultTheme
