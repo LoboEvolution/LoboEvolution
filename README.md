@@ -9,7 +9,6 @@
 </p>
 <p class="center">	
 	<a href="https://app.codacy.com/gh/LoboEvolution/LoboEvolution/dashboard?utm_content"><img alt="Codacy" src="https://app.codacy.com/project/badge/Grade/899f68bba4a5463d8a7699821d840c5c" /></a>
-	<a href="https://codebeat.co/projects/github-com-loboevolution-loboevolution-master"><img alt="codebeat badge" src="https://codebeat.co/badges/74e4393e-77b9-44a9-ad98-0b33fb839754" /></a>
 	<a href="https://codeclimate.com/github/LoboEvolution/LoboEvolution/maintainability"><img alt="codeclimate badge"  src="https://api.codeclimate.com/v1/badges/eaeed65cfc69b72b4701/maintainability" /></a>
 	<a href="https://github.com/LoboEvolution/LoboEvolution/actions/workflows/codeql.yml"><img src="https://github.com/LoboEvolution/LoboEvolution/actions/workflows/codeql.yml/badge.svg?branch=master" alt="Docs"></a>
 </p>
