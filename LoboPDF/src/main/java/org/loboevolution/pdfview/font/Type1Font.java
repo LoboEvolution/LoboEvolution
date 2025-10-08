@@ -455,29 +455,29 @@ public class Type1Font extends OutlineFont {
                         this.sloc = 0;
                         break;
                     case 4:   // y vmoveto
-                        pt.y += pop();
+                        pt.setY(pt.getY() + pop());
                         if (flexMode) {
-                            flexArray[flexPt++] = pt.x;
-                            flexArray[flexPt++] = pt.y;
+                            flexArray[flexPt++] = pt.getX();
+                            flexArray[flexPt++] = pt.getY();
                         } else {
-                            gp.moveTo(pt.x, pt.y);
+                            gp.moveTo(pt.getX(), pt.getY());
                         }
                         this.sloc = 0;
                         break;
                     case 5:   // x y rlineto
-                        pt.y += pop();
-                        pt.x += pop();
-                        gp.lineTo(pt.x, pt.y);
+                        pt.setY(pt.getY() + pop());
+                        pt.setX(pt.getX() + pop());
+                        gp.lineTo(pt.getX(), pt.getY());
                         this.sloc = 0;
                         break;
                     case 6:   // x hlineto
-                        pt.x += pop();
-                        gp.lineTo(pt.x, pt.y);
+                        pt.setX(pt.getX() + pop());
+                        gp.lineTo(pt.getX(), pt.getY());
                         this.sloc = 0;
                         break;
                     case 7:   // y vlineto
-                        pt.y += pop();
-                        gp.lineTo(pt.x, pt.y);
+                        pt.setY(pt.getY() + pop());
+                        gp.lineTo(pt.getX(), pt.getY());
                         this.sloc = 0;
                         break;
                     case 8:   // x1 y1 x2 y2 x3 y3 rcurveto
@@ -487,11 +487,11 @@ public class Type1Font extends OutlineFont {
                         x2 = pop();
                         y1 = pop();
                         x1 = pop();
-                        gp.curveTo(pt.x + x1, pt.y + y1,
-                                pt.x + x1 + x2, pt.y + y1 + y2,
-                                pt.x + x1 + x2 + x3, pt.y + y1 + y2 + y3);
-                        pt.x += x1 + x2 + x3;
-                        pt.y += y1 + y2 + y3;
+                        gp.curveTo(pt.getX() + x1, pt.getY() + y1,
+                                pt.getX() + x1 + x2, pt.getY() + y1 + y2,
+                                pt.getX() + x1 + x2 + x3, pt.getY() + y1 + y2 + y3);
+                        pt.setX(pt.getX() +x1 + x2 + x3);
+                       pt.setY(pt.getY() +y1 + y2 + y3);
                         this.sloc = 0;
                         break;
                     case 9:   // closepath
@@ -553,19 +553,19 @@ public class Type1Font extends OutlineFont {
                             buildAccentChar(x, y, a, b, gp);
                             this.sloc = 0;
                         } else if (v == 7) {  // x y w h sbw
-                            wid.y = pop();
-                            wid.x = pop();
-                            pt.y = pop();
-                            pt.x = pop();
+                            wid.setY(pop());
+                            wid.setX(pop());
+                            pt.setY(pop());
+                            pt.setX(pop());
                             this.sloc = 0;
                         } else if (v == 12) {  // a b div -> a/b
                             final float b = pop();
                             final float a = pop();
                             this.stack[this.sloc++] = a / b;
                         } else if (v == 33) {  // a b setcurrentpoint
-                            pt.y = pop();
-                            pt.x = pop();
-                            gp.moveTo(pt.x, pt.y);
+                            pt.setY(pop());
+                            pt.setX(pop());
+                            gp.moveTo(pt.getX(), pt.getY());
                             this.sloc = 0;
                         } else if (v == 0) { // dotsection
                             this.sloc = 0;
@@ -604,10 +604,10 @@ public class Type1Font extends OutlineFont {
                         }
                         break;
                     case 13:  // s w hsbw
-                        wid.x = pop();
-                        wid.y = 0;
-                        pt.x = pop();
-                        pt.y = 0;
+                        wid.setX(pop());
+                        wid.setY(0);
+                        pt.setX(pop());
+                        pt.setY(0);
                         //		    gp.moveTo(pt.x, pt.y);
                         this.sloc = 0;
                         break;
@@ -622,23 +622,23 @@ public class Type1Font extends OutlineFont {
                     case 20:  // x
                         throw new RuntimeException("Bad command (" + v + ")");
                     case 21:  // x y rmoveto
-                        pt.y += pop();
-                        pt.x += pop();
+                        pt.setY(pt.getY() + pop());
+                        pt.setX(pt.getX() + pop());
                         if (flexMode) {
-                            flexArray[flexPt++] = pt.x;
-                            flexArray[flexPt++] = pt.y;
+                            flexArray[flexPt++] = pt.getX();
+                            flexArray[flexPt++] = pt.getY();
                         } else {
-                            gp.moveTo(pt.x, pt.y);
+                            gp.moveTo(pt.getX(), pt.getY());
                         }
                         this.sloc = 0;
                         break;
                     case 22:  // x hmoveto
-                        pt.x += pop();
+                        pt.setX(pt.getX() + pop());
                         if (flexMode) {
-                            flexArray[flexPt++] = pt.x;
-                            flexArray[flexPt++] = pt.y;
+                            flexArray[flexPt++] = pt.getX();
+                            flexArray[flexPt++] = pt.getY();
                         } else {
-                            gp.moveTo(pt.x, pt.y);
+                            gp.moveTo(pt.getX(), pt.getY());
                         }
                         this.sloc = 0;
                         break;
@@ -656,11 +656,11 @@ public class Type1Font extends OutlineFont {
                         x2 = pop();
                         y1 = pop();
                         x1 = y3 = 0;
-                        gp.curveTo(pt.x, pt.y + y1,
-                                pt.x + x2, pt.y + y1 + y2,
-                                pt.x + x2 + x3, pt.y + y1 + y2);
-                        pt.x += x2 + x3;
-                        pt.y += y1 + y2;
+                        gp.curveTo(pt.getX(), pt.getY() + y1,
+                                pt.getX() + x2, pt.getY() + y1 + y2,
+                                pt.getX() + x2 + x3, pt.getY() + y1 + y2);
+                        pt.setX(pt.getX() + x2 + x3);
+                        pt.setY(pt.getY() + y1 + y2);
                         this.sloc = 0;
                         break;
                     case 31:  // x1 x2 y2 y3 hvcurveto
@@ -669,11 +669,11 @@ public class Type1Font extends OutlineFont {
                         x2 = pop();
                         x1 = pop();
                         y1 = x3 = 0;
-                        gp.curveTo(pt.x + x1, pt.y,
-                                pt.x + x1 + x2, pt.y + y2,
-                                pt.x + x1 + x2, pt.y + y2 + y3);
-                        pt.x += x1 + x2;
-                        pt.y += y2 + y3;
+                        gp.curveTo(pt.getX() + x1, pt.getY(),
+                                pt.getX() + x1 + x2, pt.getY() + y2,
+                                pt.getX() + x1 + x2, pt.getY() + y2 + y3);
+                        pt.setX(pt.getX() + x1 + x2);
+                        pt.setY(pt.getY() + y2 + y3);
                         this.sloc = 0;
                         break;
                     default:
@@ -753,7 +753,7 @@ public class Type1Font extends OutlineFont {
 
                 final FlPoint width = this.name2width.get(key);
                 if (width != null) {
-                    return width.x / getDefaultWidth();
+                    return width.getX() / getDefaultWidth();
                 }
             }
 
@@ -804,9 +804,9 @@ public class Type1Font extends OutlineFont {
 
             final GeneralPath gp = parseGlyph(cs, advance, this.at);
 
-            if (width != 0 && advance.x != 0) {
+            if (width != 0 && advance.getX() != 0) {
                 // scale the glyph to fit in the width
-                final Point2D p = new Point2D.Float(advance.x, advance.y);
+                final Point2D p = new Point2D.Float(advance.getX(), advance.getY());
                 this.at.transform(p, p);
 
                 final double scale = width / p.getX();

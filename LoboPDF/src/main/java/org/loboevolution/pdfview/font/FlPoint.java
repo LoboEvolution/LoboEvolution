@@ -42,7 +42,7 @@ public class FlPoint {
     private float x = 0;
 
     /** y coordinate of the point */
-    public float y = 0;
+    private float y = 0;
 
     /**
      * whether the path this point is a part of is open or closed.
