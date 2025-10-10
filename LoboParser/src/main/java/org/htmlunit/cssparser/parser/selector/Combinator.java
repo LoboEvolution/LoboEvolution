@@ -14,25 +14,40 @@
  */
 package org.htmlunit.cssparser.parser.selector;
 
-import java.io.Serializable;
-
-import org.htmlunit.cssparser.parser.AbstractLocatable;
-
 /**
- * <p>Abstract AbstractSelector class.</p>
+ * <p>Combinator enum.</p>
  *
  * @author Ronald Brill
  */
-public abstract class AbstractSelector extends AbstractLocatable implements Selector, Serializable {
+public enum Combinator {
 
-    private SelectorSpecificity specificity_;
+    /** DESCENDANT_COMBINATOR ( ). */
+    DESCENDANT_COMBINATOR(' '),
 
-    /** {@inheritDoc} */
+    /** CHILD_COMBINATOR (&gt;). */
+    CHILD_COMBINATOR('>'),
+
+    /** NEXT_SIBLING_COMBINATOR (+). */
+    NEXT_SIBLING_COMBINATOR('+'),
+
+    /** SUBSEQUENT_SIBLING_COMBINATOR (~). */
+    SUBSEQUENT_SIBLING_COMBINATOR('~');
+
+    private final char combinatorChar_;
+
+    Combinator(final char combinatorChar) {
+        combinatorChar_ = combinatorChar;
+    }
+
+    char getChar() {
+        return combinatorChar_;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public SelectorSpecificity getSelectorSpecificity() {
-        if (specificity_ == null) {
-            specificity_ = new SelectorSpecificity(this);
-        }
-        return specificity_;
+    public String toString() {
+        return name() + " ('" + getChar() + "')";
     }
 }

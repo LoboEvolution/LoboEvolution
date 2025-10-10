@@ -239,13 +239,19 @@ public interface CSS3ParserConstants {
   /** RegularExpression Id. */
   int FUNCTION_LCH = 117;
   /** RegularExpression Id. */
-  int CUSTOM_PROPERTY_NAME = 118;
+  int FUNCTION_IS = 118;
   /** RegularExpression Id. */
-  int FUNCTION = 119;
+  int FUNCTION_WHERE = 119;
   /** RegularExpression Id. */
-  int ATKEYWORD = 120;
+  int FUNCTION_HAS = 120;
   /** RegularExpression Id. */
-  int UNKNOWN = 121;
+  int CUSTOM_PROPERTY_NAME = 121;
+  /** RegularExpression Id. */
+  int FUNCTION = 122;
+  /** RegularExpression Id. */
+  int ATKEYWORD = 123;
+  /** RegularExpression Id. */
+  int UNKNOWN = 124;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -372,6 +378,9 @@ public interface CSS3ParserConstants {
     "<FUNCTION_HWB>",
     "<FUNCTION_LAB>",
     "<FUNCTION_LCH>",
+    "<FUNCTION_IS>",
+    "<FUNCTION_WHERE>",
+    "<FUNCTION_HAS>",
     "<CUSTOM_PROPERTY_NAME>",
     "<FUNCTION>",
     "<ATKEYWORD>",

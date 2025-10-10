@@ -18,27 +18,30 @@ import java.io.Serializable;
 
 import org.htmlunit.cssparser.parser.AbstractLocatable;
 import org.htmlunit.cssparser.parser.Locator;
+import org.htmlunit.cssparser.parser.selector.SelectorList;
 
 /**
+ * :is condition.
+ *
  * @author Ronald Brill
  */
-public class LangCondition extends AbstractLocatable implements Condition, Serializable {
+public class IsPseudoClassCondition extends AbstractLocatable implements Condition, Serializable {
 
-    private final String lang_;
+    private final SelectorList selectors_;
 
     /**
      * Ctor.
-     * @param lang the language
-     * @param locator the locato
+     * @param selectors the selector list
+     * @param locator the locator
      */
-    public LangCondition(final String lang, final Locator locator) {
-        lang_ = lang;
+    public IsPseudoClassCondition(final SelectorList selectors, final Locator locator) {
+        selectors_ = selectors;
         setLocator(locator);
     }
 
     @Override
     public ConditionType getConditionType() {
-        return ConditionType.LANG_CONDITION;
+        return ConditionType.IS_PSEUDO_CLASS_CONDITION;
     }
 
     /**
@@ -50,24 +53,22 @@ public class LangCondition extends AbstractLocatable implements Condition, Seria
     }
 
     /**
-     * @return the language
+     * {@inheritDoc}
      */
     @Override
     public String getValue() {
-        return lang_;
+        return selectors_.toString();
+    }
+
+    /**
+     * @return the list of selectors
+     */
+    public SelectorList getSelectors() {
+        return selectors_;
     }
 
     @Override
     public String toString() {
-        final StringBuilder result = new StringBuilder();
-        result.append(":lang(");
-
-        final String lang = getValue();
-        if (null != lang) {
-            result.append(lang);
-        }
-
-        result.append(")");
-        return result.toString();
+        return ":is(" + getValue() + ")";
     }
 }

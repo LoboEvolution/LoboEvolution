@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -39,55 +39,56 @@ public abstract class AbstractCSSParser {
     private CSSErrorHandler errorHandler_;
     private InputSource source_;
 
-    private static final HashMap<String, String> parserMessages_ = new HashMap<>();
+    private static final HashMap<String, String> PARSER_MESSAGES_ = new HashMap<>();
 
     static {
-        parserMessages_.put("invalidExpectingOne", "Invalid token \"{0}\". Was expecting: {1}.");
-        parserMessages_.put("invalidExpectingMore", "Invalid token \"{0}\". Was expecting one of: {1}.");
-        parserMessages_.put("invalidColor", "Invalid color \"{0}\".");
-        parserMessages_.put("invalidStyleSheet", "Error in style sheet.");
-        parserMessages_.put("invalidRule", "Error in rule.");
-        parserMessages_.put("invalidUnknownRule", "Error in unknown at-rule.");
-        parserMessages_.put("invalidCharsetRule", "Error in @charset rule.");
-        parserMessages_.put("misplacedCharsetRule", "The @charset must be the first element in the style sheet.");
-        parserMessages_.put("invalidImportRule", "Error in @import rule.");
-        parserMessages_.put("invalidImportRuleIgnored", "@import rule must occur before all other rules.");
-        parserMessages_.put("invalidImportRuleIgnored2",
+        PARSER_MESSAGES_.put("invalidExpectingOne", "Invalid token \"{0}\". Was expecting: {1}.");
+        PARSER_MESSAGES_.put("invalidExpectingMore", "Invalid token \"{0}\". Was expecting one of: {1}.");
+        PARSER_MESSAGES_.put("invalidColor", "Invalid color \"{0}\".");
+        PARSER_MESSAGES_.put("invalidStyleSheet", "Error in style sheet.");
+        PARSER_MESSAGES_.put("invalidRule", "Error in rule.");
+        PARSER_MESSAGES_.put("invalidUnknownRule", "Error in unknown at-rule.");
+        PARSER_MESSAGES_.put("invalidCharsetRule", "Error in @charset rule.");
+        PARSER_MESSAGES_.put("misplacedCharsetRule", "The @charset must be the first element in the style sheet.");
+        PARSER_MESSAGES_.put("invalidImportRule", "Error in @import rule.");
+        PARSER_MESSAGES_.put("invalidImportRuleIgnored", "@import rule must occur before all other rules.");
+        PARSER_MESSAGES_.put("invalidImportRuleIgnored2",
                                 "@import rule must occur before all other rules, except the @charset rule.");
-        parserMessages_.put("invalidPageRule", "Error in @page rule.");
-        parserMessages_.put("invalidFontFaceRule", "Error in @font-face rule.");
-        parserMessages_.put("invalidMediaList", "Error in media list.");
-        parserMessages_.put("invalidMediaRule", "Error in @media rule.");
-        parserMessages_.put("invalidStyleRule", "Error in style rule.");
-        parserMessages_.put("invalidStyleDeclaration", "Error in style declaration.");
-        parserMessages_.put("invalidDeclaration", "Error in declaration.");
-        parserMessages_.put("invalidDeclarationInvalidChar", "Error in declaration; invalid character \"{0}\" found.");
-        parserMessages_.put("invalidDeclarationStarHack",
+        PARSER_MESSAGES_.put("invalidPageRule", "Error in @page rule.");
+        PARSER_MESSAGES_.put("invalidFontFaceRule", "Error in @font-face rule.");
+        PARSER_MESSAGES_.put("invalidMediaList", "Error in media list.");
+        PARSER_MESSAGES_.put("invalidMediaRule", "Error in @media rule.");
+        PARSER_MESSAGES_.put("invalidStyleRule", "Error in style rule.");
+        PARSER_MESSAGES_.put("invalidStyleDeclaration", "Error in style declaration.");
+        PARSER_MESSAGES_.put("invalidDeclaration", "Error in declaration.");
+        PARSER_MESSAGES_.put("invalidDeclarationInvalidChar", "Error in declaration; invalid character \"{0}\" found.");
+        PARSER_MESSAGES_.put("invalidDeclarationStarHack",
                                     "Error in declaration. ''*'' is not allowed as first char of a property.");
-        parserMessages_.put("invalidSelectorList", "Error in selector list.");
-        parserMessages_.put("invalidSelector", "Error in selector.");
-        parserMessages_.put("invalidSimpleSelector", "Error in simple selector.");
-        parserMessages_.put("invalidClassSelector", "Error in class selector.");
-        parserMessages_.put("invalidElementName", "Error in element name.");
-        parserMessages_.put("invalidAttrib", "Error in attribute selector.");
-        parserMessages_.put("invalidPseudo", "Error in pseudo class or element.");
-        parserMessages_.put("duplicatePseudo", "Duplicate pseudo class \":{0}\" or pseudo class \":{0}\" not at end.");
-        parserMessages_.put("invalidHash", "Error in hash.");
-        parserMessages_.put("invalidExpr", "Error in expression.");
-        parserMessages_.put("invalidExprColon", "Error in expression; '':'' found after identifier \"{0}\".");
-        parserMessages_.put("invalidPrio", "Error in priority.");
+        PARSER_MESSAGES_.put("invalidSelectorList", "Error in selector list.");
+        PARSER_MESSAGES_.put("invalidSelector", "Error in selector.");
+        PARSER_MESSAGES_.put("invalidSimpleSelector", "Error in simple selector.");
+        PARSER_MESSAGES_.put("invalidClassSelector", "Error in class selector.");
+        PARSER_MESSAGES_.put("invalidElementName", "Error in element name.");
+        PARSER_MESSAGES_.put("invalidAttrib", "Error in attribute selector.");
+        PARSER_MESSAGES_.put("invalidPseudo", "Error in pseudo class or element.");
+        PARSER_MESSAGES_.put("invalidPseudoColon", "\":{0}\" is not a valid selector.");
+        PARSER_MESSAGES_.put("duplicatePseudo", "Duplicate pseudo class \":{0}\" or pseudo class \":{0}\" not at end.");
+        PARSER_MESSAGES_.put("invalidHash", "Error in hash.");
+        PARSER_MESSAGES_.put("invalidExpr", "Error in expression.");
+        PARSER_MESSAGES_.put("invalidExprColon", "Error in expression; '':'' found after identifier \"{0}\".");
+        PARSER_MESSAGES_.put("invalidPrio", "Error in priority.");
 
-        parserMessages_.put("invalidPagePseudoClass",
+        PARSER_MESSAGES_.put("invalidPagePseudoClass",
                 "Invalid page pseudo class \"{0}\"; valid values are \"blank\", \"first\", \"left\", and \"right\".");
 
-        parserMessages_.put("invalidCaseInSensitivelyIdentifier",
+        PARSER_MESSAGES_.put("invalidCaseInSensitivelyIdentifier",
                 "Invalid case-insensitively identifier \"{0}\" found; valid values are \"i\", and \"s\".");
 
-        parserMessages_.put("ignoringRule", "Ignoring the whole rule.");
-        parserMessages_.put("ignoringFollowingDeclarations", "Ignoring the following declarations in this rule.");
+        PARSER_MESSAGES_.put("ignoringRule", "Ignoring the whole rule.");
+        PARSER_MESSAGES_.put("ignoringFollowingDeclarations", "Ignoring the following declarations in this rule.");
 
-        parserMessages_.put("tokenMgrError", "Lexical error.");
-        parserMessages_.put("domException", "DOM exception: ''{0}''");
+        PARSER_MESSAGES_.put("tokenMgrError", "Lexical error.");
+        PARSER_MESSAGES_.put("domException", "DOM exception: ''{0}''");
     }
 
     private static final String NUM_CHARS = "0123456789.";
@@ -169,7 +170,7 @@ public abstract class AbstractCSSParser {
      * @return the parser message
      */
     protected String getParserMessage(final String key) {
-        final String msg = parserMessages_.get(key);
+        final String msg = PARSER_MESSAGES_.get(key);
         if (msg == null) {
             return "[[" + key + "]]";
         }

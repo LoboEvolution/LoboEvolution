@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,25 +21,22 @@ import org.htmlunit.cssparser.parser.Locator;
 import org.htmlunit.cssparser.parser.selector.SelectorList;
 
 /**
- * Not condition.
+ * :not condition.
  *
  * @author Ronald Brill
  */
 public class NotPseudoClassCondition extends AbstractLocatable implements Condition, Serializable {
 
     private final SelectorList selectors_;
-    private final boolean doubleColon_;
 
     /**
      * Ctor.
      * @param selectors the selector list
      * @param locator the locator
-     * @param doubleColon true if was prefixed by double colon
      */
-    public NotPseudoClassCondition(final SelectorList selectors, final Locator locator, final boolean doubleColon) {
+    public NotPseudoClassCondition(final SelectorList selectors, final Locator locator) {
         selectors_ = selectors;
         setLocator(locator);
-        doubleColon_ = doubleColon;
     }
 
     @Override
@@ -72,6 +69,6 @@ public class NotPseudoClassCondition extends AbstractLocatable implements Condit
 
     @Override
     public String toString() {
-        return (doubleColon_ ? "::" : ":") + "not(" + getValue() + ")";
+        return ":not(" + getValue() + ")";
     }
 }

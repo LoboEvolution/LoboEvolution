@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,6 +17,8 @@ package org.htmlunit.cssparser.parser.selector;
 import java.io.Serializable;
 
 import org.htmlunit.cssparser.parser.condition.Condition;
+import org.htmlunit.cssparser.parser.condition.HasPseudoClassCondition;
+import org.htmlunit.cssparser.parser.condition.IsPseudoClassCondition;
 import org.htmlunit.cssparser.parser.condition.NotPseudoClassCondition;
 
 /**
@@ -55,6 +57,12 @@ public class SelectorSpecificity implements Comparable<SelectorSpecificity>, Ser
         idCount_ = idCount;
         classCount_ = classCount;
         typeCount_ = typeCount;
+    }
+
+    private void add(final SelectorSpecificity specificity) {
+        idCount_ += specificity.idCount_;
+        classCount_ += specificity.classCount_;
+        typeCount_ += specificity.typeCount_;
     }
 
     private void readSelectorSpecificity(final Selector selector) {
@@ -97,6 +105,10 @@ public class SelectorSpecificity implements Comparable<SelectorSpecificity>, Ser
                 readSelectorSpecificity(gas.getSelector());
                 readSelectorSpecificity(gas.getSimpleSelector());
                 return;
+            case RELATIVE_SELECTOR:
+                final RelativeSelector rs = (RelativeSelector) selector;
+                readSelectorSpecificity(rs.getSelector());
+                return;
             default:
                 throw new RuntimeException("Unhandled CSS selector type for specificity computation: '"
                         + selector.getSelectorType() + "'.");
@@ -131,10 +143,37 @@ public class SelectorSpecificity implements Comparable<SelectorSpecificity>, Ser
                 return;
             case NOT_PSEUDO_CLASS_CONDITION:
                 final NotPseudoClassCondition notPseudoCondition = (NotPseudoClassCondition) condition;
-                final SelectorList selectorList = notPseudoCondition.getSelectors();
-                for (final Selector selector : selectorList) {
+                final SelectorList notSelectorList = notPseudoCondition.getSelectors();
+                for (final Selector selector : notSelectorList) {
                     readSelectorSpecificity(selector);
                 }
+                return;
+            case IS_PSEUDO_CLASS_CONDITION:
+                final IsPseudoClassCondition isPseudoCondition = (IsPseudoClassCondition) condition;
+                final SelectorList isSelectorList = isPseudoCondition.getSelectors();
+                SelectorSpecificity maxIs = new SelectorSpecificity(false, 0, 0, 0);
+                for (final Selector selector : isSelectorList) {
+                    final SelectorSpecificity selSpec = new SelectorSpecificity(selector);
+                    if (selSpec.compareTo(maxIs) > 0) {
+                        maxIs = selSpec;
+                    }
+                }
+                add(maxIs);
+                return;
+            case WHERE_PSEUDO_CLASS_CONDITION:
+                // always 0
+                return;
+            case HAS_PSEUDO_CLASS_CONDITION:
+                final HasPseudoClassCondition hasPseudoCondition = (HasPseudoClassCondition) condition;
+                final SelectorList hasSelectorList = hasPseudoCondition.getSelectors();
+                SelectorSpecificity maxHas = new SelectorSpecificity(false, 0, 0, 0);
+                for (final Selector selector : hasSelectorList) {
+                    final SelectorSpecificity selSpec = new SelectorSpecificity(selector);
+                    if (selSpec.compareTo(maxHas) > 0) {
+                        maxHas = selSpec;
+                    }
+                }
+                add(maxHas);
                 return;
             case PSEUDO_CLASS_CONDITION:
                 classCount_++;
