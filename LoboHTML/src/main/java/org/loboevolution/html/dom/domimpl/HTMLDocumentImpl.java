@@ -333,20 +333,19 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 		}
 	}
 
-	final StyleSheetAggregator getStyleSheetAggregator() {
+	public final StyleSheetAggregator getStyleSheetAggregator() {
 		synchronized (this) {
 			StyleSheetAggregator ssa = this.styleSheetAggregator;
 			if (ssa == null) {
 				ssa = new StyleSheetAggregator();
 				try {
-					ssa.setDoc(this);
 					ssa.addStyleSheets(this.styleSheets);
-
 				} catch (final Exception mfu) {
 					log.error(mfu.getMessage(), mfu);
 				}
 				this.styleSheetAggregator = ssa;
 			}
+            ssa.setDoc(this);
 			return ssa;
 		}
 	}

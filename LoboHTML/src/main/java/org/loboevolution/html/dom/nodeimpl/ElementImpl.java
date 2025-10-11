@@ -748,9 +748,11 @@ public class ElementImpl extends NodeImpl implements Element {
 
 		try {
 			final SelectorList selectorList = CSSUtilities.getSelectorList(selectors);
+            final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
+            final StyleSheetAggregator ssa = doc.getStyleSheetAggregator();
 			if (selectorList != null) {
 				for (final Selector select : selectorList) {
-					if (StyleSheetAggregator.selects(select, this, null)) {
+					if (ssa.selects(select, this, null)) {
 						return true;
 					}
 				}
@@ -1132,13 +1134,15 @@ public class ElementImpl extends NodeImpl implements Element {
 	@Override
 	public Element querySelector(final String selectors) {
 		try {
+            final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
+            final StyleSheetAggregator ssa = doc.getStyleSheetAggregator();
 			final SelectorList selectorList = CSSUtilities.getSelectorList(selectors);
 			final List<Element> elem = new ArrayList<>();
 			if (selectorList != null) {
 				final NodeListImpl childNodes = (NodeListImpl) getDescendents(new ElementFilter(null), true);
 				childNodes.forEach(child -> {
 					for (final Selector selector : selectorList) {
-						if (child instanceof Element && StyleSheetAggregator.selects(selector, child, null)) {
+						if (child instanceof Element && ssa.selects(selector, child, null)) {
 							elem.add((Element) child);
 						}
 					}
@@ -1170,11 +1174,13 @@ public class ElementImpl extends NodeImpl implements Element {
 
 		try {
 			final SelectorList selectorList = CSSUtilities.getSelectorList(selector);
+            final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
+            final StyleSheetAggregator ssa = doc.getStyleSheetAggregator();
 			if (selectorList != null) {
 				final NodeListImpl childNodes = (NodeListImpl) getDescendents(new ElementFilter(null), true);
 				childNodes.forEach(child -> {
 					for (final Selector select : selectorList) {
-						if (child instanceof Element && StyleSheetAggregator.selects(select, child, null)) {
+						if (child instanceof Element && ssa.selects(select, child, null)) {
 							al.add(child);
 						}
 					}

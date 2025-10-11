@@ -39,6 +39,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.loboevolution.annotation.AlertsExtension;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLDocument;
+import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.style.CSSUtilities;
 import org.loboevolution.html.style.StyleSheetAggregator;
@@ -65,7 +66,8 @@ public class CSSStyleSheet2Test extends LoboUnitTest {
                 + "</form>\n"
                 + "</body></html>";
 
-        final HTMLDocument document = loadHtml(html);
+        final HTMLDocumentImpl document = loadHtml(html);
+        final StyleSheetAggregator ssa = document.getStyleSheetAggregator();
         HTMLElementImpl form = (HTMLElementImpl) document.getElementById("f1");
         HTMLElementImpl body = (HTMLElementImpl) document.getBody();
         HTMLElementImpl input1 = (HTMLElementImpl) document.getElementsByName("i1").item(0);
@@ -74,16 +76,16 @@ public class CSSStyleSheet2Test extends LoboUnitTest {
         HTMLElementImpl button2 = (HTMLElementImpl) document.getElementsByName("b2").item(0);
         Selector selector = parseSelector("*.yui-log input");
 
-        assertFalse(StyleSheetAggregator.selects(selector, body, null));
-        assertFalse(StyleSheetAggregator.selects(selector, form, null));
-        assertTrue(StyleSheetAggregator.selects(selector, input1, null));
-        assertTrue(StyleSheetAggregator.selects(selector, input2, null));
-        assertFalse(StyleSheetAggregator.selects(selector, button1, null));
-        assertFalse(StyleSheetAggregator.selects(selector, button2, null));
+        assertFalse(ssa.selects(selector, body, null));
+        assertFalse(ssa.selects(selector, form, null));
+        assertTrue(ssa.selects(selector, input1, null));
+        assertTrue(ssa.selects(selector, input2, null));
+        assertFalse(ssa.selects(selector, button1, null));
+        assertFalse(ssa.selects(selector, button2, null));
 
         selector = parseSelector("#m1");
-        assertTrue(StyleSheetAggregator.selects(selector, input1, null));
-        assertFalse(StyleSheetAggregator.selects(selector, input2, null));
+        assertTrue(ssa.selects(selector, input1, null));
+        assertFalse(ssa.selects(selector, input2, null));
     }
 
     @Test
@@ -126,11 +128,12 @@ public class CSSStyleSheet2Test extends LoboUnitTest {
                         + "<div id='d-e'></div>\n"
                         + "</body></html>";
 
-        final HTMLDocument document = loadHtml(html);
+        final HTMLDocumentImpl document = loadHtml(html);
+        final StyleSheetAggregator ssa = document.getStyleSheetAggregator();
         Selector selector = parseSelector("#d\\:e");
-        assertTrue(StyleSheetAggregator.selects(selector, document.getElementById("d:e"), null));
+        assertTrue(ssa.selects(selector, document.getElementById("d:e"), null));
         selector = parseSelector("#d-e");
-        assertTrue(StyleSheetAggregator.selects(selector, document.getElementById("d-e"), null));
+        assertTrue(ssa.selects(selector, document.getElementById("d-e"), null));
     }
 
     @Test
@@ -168,12 +171,13 @@ public class CSSStyleSheet2Test extends LoboUnitTest {
                         + "    </div>\n"
                         + "  </body>\n"
                         + "</html>";
-        final HTMLDocument document = loadHtml(html);
 
+        final HTMLDocumentImpl document = loadHtml(html);
+        final StyleSheetAggregator ssa = document.getStyleSheetAggregator();
         final Selector selector = parseSelector(css);
-        assertEquals(selectBody, StyleSheetAggregator.selects(selector, document.getElementById("b"), null));
-        assertEquals(selectDivD, StyleSheetAggregator.selects(selector, document.getElementById("d"), null));
-        assertEquals(selectSpanS, StyleSheetAggregator.selects(selector, document.getElementById("s"), null));
+        assertEquals(selectBody, ssa.selects(selector, document.getElementById("b"), null));
+        assertEquals(selectDivD, ssa.selects(selector, document.getElementById("d"), null));
+        assertEquals(selectSpanS, ssa.selects(selector, document.getElementById("s"), null));
     }
 
     private static Selector parseSelector(final String rule) {

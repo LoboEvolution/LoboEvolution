@@ -149,34 +149,20 @@ public class StyleSheetAggregator {
      * @param pseudoElement a {@link java.lang.String} object.
      * @return a boolean.
      */
-    public static boolean selects(final Selector selector, final Node node, final String pseudoElement) {
-        return new StyleSheetAggregator().selects(selector, (HTMLElement)node, pseudoElement, false);
+    public boolean selects(final Selector selector, final Node node, final String pseudoElement) {
+        return selects(selector, (HTMLElement)node, pseudoElement, false);
     }
 
-    private List<CSSStyleSheetImpl.SelectorEntry> selects(final CSSStyleSheetImpl.CSSStyleSheetRuleIndex index,
-                                                          final HTMLElement element, final String pseudoElement, final boolean mouseOver,
-                                                          final String[] classes) {
-
-        final List<CSSStyleSheetImpl.SelectorEntry> matchingRules = new ArrayList<>();
-        if (isActive(element, index.getMediaList())) {
-            final String elementName = element.getNodeName().toLowerCase();
-            final Iterator<CSSStyleSheetImpl.SelectorEntry> iter = index.getSelectorEntriesIteratorFor(elementName, classes);
-            CSSStyleSheetImpl.SelectorEntry entry = iter.next();
-            while (null != entry) {
-                if (selects(entry.getSelector(), element, pseudoElement, mouseOver)) {
-                    matchingRules.add(entry);
-                }
-                entry = iter.next();
-            }
-
-            for (final CSSStyleSheetImpl.CSSStyleSheetRuleIndex child : index.getChildren()) {
-                matchingRules.addAll(selects(child, element, pseudoElement, mouseOver, classes));
-            }
-        }
-        return matchingRules;
-    }
-
-    private boolean selects(final Selector selector, final HTMLElement element, final String pseudoElement, final boolean mouseOver) {
+    /**
+     * <p>selects.</p>
+     *
+     * @param selector a {@link org.htmlunit.cssparser.parser.selector.Selector} object.
+     * @param element a {@link org.loboevolution.html.dom.HTMLElement} object.
+     * @param pseudoElement a {@link java.lang.String} object.
+     * @param mouseOver a {@link java.lang.Boolean} object.
+     * @return a boolean.
+     */
+    public boolean selects(final Selector selector, final HTMLElement element, final String pseudoElement, final boolean mouseOver) {
         switch (selector.getSelectorType()) {
             case ELEMENT_NODE_SELECTOR:
                 final ElementSelector es = (ElementSelector) selector;
@@ -256,12 +242,12 @@ public class StyleSheetAggregator {
 
                 switch (rs.getCombinator()) {
                     case DESCENDANT_COMBINATOR:
-                    HTMLCollectionImpl collection = (HTMLCollectionImpl) element.getElementsByTagName("*");
-                    List<Element> list = new ArrayList<>();
-                    for (int i = 0; i < collection.getLength(); i++) {
-                        list.add((Element) collection.item(i));
-                    }
-                    return list.stream().anyMatch(descendant -> selects(rs.getSelector(), (HTMLElement) descendant, pseudoElement, mouseOver));
+                        HTMLCollectionImpl collection = (HTMLCollectionImpl) element.getElementsByTagName("*");
+                        List<Element> list = new ArrayList<>();
+                        for (int i = 0; i < collection.getLength(); i++) {
+                            list.add((Element) collection.item(i));
+                        }
+                        return list.stream().anyMatch(descendant -> selects(rs.getSelector(), (HTMLElement) descendant, pseudoElement, mouseOver));
 
                     case CHILD_COMBINATOR:
                         final NodeListImpl childNodes = ((NodeListImpl) element.getChildNodes());
@@ -291,6 +277,29 @@ public class StyleSheetAggregator {
             default:
                 return false;
         }
+    }
+
+    private List<CSSStyleSheetImpl.SelectorEntry> selects(final CSSStyleSheetImpl.CSSStyleSheetRuleIndex index,
+                                                          final HTMLElement element, final String pseudoElement, final boolean mouseOver,
+                                                          final String[] classes) {
+
+        final List<CSSStyleSheetImpl.SelectorEntry> matchingRules = new ArrayList<>();
+        if (isActive(element, index.getMediaList())) {
+            final String elementName = element.getNodeName().toLowerCase();
+            final Iterator<CSSStyleSheetImpl.SelectorEntry> iter = index.getSelectorEntriesIteratorFor(elementName, classes);
+            CSSStyleSheetImpl.SelectorEntry entry = iter.next();
+            while (null != entry) {
+                if (selects(entry.getSelector(), element, pseudoElement, mouseOver)) {
+                    matchingRules.add(entry);
+                }
+                entry = iter.next();
+            }
+
+            for (final CSSStyleSheetImpl.CSSStyleSheetRuleIndex child : index.getChildren()) {
+                matchingRules.addAll(selects(child, element, pseudoElement, mouseOver, classes));
+            }
+        }
+        return matchingRules;
     }
 
     private boolean selects(final Condition condition, final HTMLElement element, final boolean mouseOver) {
@@ -1060,6 +1069,8 @@ public class StyleSheetAggregator {
 
     private boolean getNth(final String nth, final int index) {
 
+        final HTMLDocumentImpl doc = getDoc();
+
         if ("odd".equalsIgnoreCase(nth)) {
             return index % 2 != 0;
         }
@@ -1078,7 +1089,7 @@ public class StyleSheetAggregator {
                 if (!value.isEmpty() && value.charAt(0) == '+') {
                     value = value.substring(1);
                 }
-                a = HtmlValues.getPixelSize(value, getDoc().getRenderState(), getDoc().getDefaultView(), 1);
+                a = HtmlValues.getPixelSize(value, doc.getRenderState(), doc.getDefaultView(), 1);
             }
         }
 
@@ -1086,7 +1097,7 @@ public class StyleSheetAggregator {
         if (!value.isEmpty() && value.charAt(0) == '+') {
             value = value.substring(1);
         }
-        final int b = HtmlValues.getPixelSize(value, null, doc.getDefaultView(), 0);
+        final int b = HtmlValues.getPixelSize(value, doc.getRenderState(), doc.getDefaultView(), 0);
         if (a == 0) {
             return index == b && b > 0;
         }
@@ -1142,7 +1153,7 @@ public class StyleSheetAggregator {
                     final MediaListImpl mediaList = importRule.getMedia();
                     final HTMLDocumentImpl doc = getDoc();
                     final URI uri = Urls.createURI(doc.getBaseURI(), importRule.getHref());
-                    final CSSStyleSheetImpl sheet = CSSUtilities.parseCssExternal(getDoc().getHtmlRendererConfig(), uri, doc.getBaseURI(), null, false);
+                    final CSSStyleSheetImpl sheet = CSSUtilities.parseCssExternal(doc.getHtmlRendererConfig(), uri, doc.getBaseURI(), null, false);
                     if (mediaList.getLength() == 0 && index.getMediaList().getLength() == 0) {
                         index(index, sheet.getCssRules());
                     } else {

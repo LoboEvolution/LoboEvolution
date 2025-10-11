@@ -303,7 +303,8 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
 				final NodeListImpl childNodes = (NodeListImpl) getDescendents(new ElementFilter(null), true);
 				childNodes.forEach(child -> {
 					for (final Selector selector : selectorList) {
-						if (child instanceof Element && StyleSheetAggregator.selects(selector, child, null)) {
+                        final StyleSheetAggregator ssa = ((HTMLDocumentImpl)this).getStyleSheetAggregator();
+						if (child instanceof Element && ssa.selects(selector, child, null)) {
 							elem.add((Element) child);
 						}
 					}
@@ -336,10 +337,11 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
 		try {
 			final SelectorList selectorList = CSSUtilities.getSelectorList(selector);
 			if (selectorList != null) {
+                final StyleSheetAggregator ssa = ((HTMLDocumentImpl)this).getStyleSheetAggregator();
 				final NodeListImpl childNodes = (NodeListImpl) getDescendents(new ElementFilter(null), true);
 				childNodes.forEach(child -> {
 					for (final Selector select : selectorList) {
-						if (child instanceof Element && StyleSheetAggregator.selects(select, child, null)) {
+						if (child instanceof Element && ssa.selects(select, (HTMLElement) child, null)) {
 							al.add(child);
 						}
 					}
