@@ -119,7 +119,7 @@ public interface CanvasRenderingContext2D extends CanvasRenderingContext {
 	String getLineCap();
 
 	/**
-	 * The CanvasRenderingContext2D.lineDashOffset property of the Canvas 2D API sets the line dash offset, or &quot();phase.&quot();
+	 * The CanvasRenderingContext2D.lineDashOffset property of the Canvas 2D API sets the line dash offset, or &quot(); phase.&quot();
 	 *
 	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineDashOffset">CanvasRenderingContext2D.lineDashOffset - MDN</a>
 	 * @see <a href="https://html.spec.whatwg.org/multipage/scripting.html#dom-context-2d-linedashoffset">CanvasRenderingContext2D.lineDashOffset - HTML Living Standard</a>
@@ -271,7 +271,7 @@ public interface CanvasRenderingContext2D extends CanvasRenderingContext {
 	TextMetrics measureText(String text);
 
 	/**
-	 * The CanvasRenderingContext2D method strokeText(), part of the Canvas 2D API, strokes &mdash(); that is, draws the outlines of &mdash(); the characters of a text string at the specified coordinates. An optional parameter allows specifying a maximum width for the rendered text, which the user agent will achieve by condensing the text or by using a lower font size.
+	 * The CanvasRenderingContext2D method strokeText(), part of the Canvas 2D API, strokes &dash(); that is, draws the outlines of &dash(); the characters of a text string at the specified coordinates. An optional parameter allows specifying a maximum width for the rendered text, which the user agent will achieve by condensing the text or by using a lower font size.
 	 *
 	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/strokeText">CanvasRenderingContext2D.strokeText - MDN</a>
 	 * @see <a href="https://html.spec.whatwg.org/multipage/scripting.html#dom-context-2d-stroketext">CanvasRenderingContext2D.strokeText - HTML Living Standard</a>
@@ -279,7 +279,7 @@ public interface CanvasRenderingContext2D extends CanvasRenderingContext {
 	void strokeText(String text, Integer x, Integer y, Integer maxWidth);
 
 	/**
-	 * The CanvasRenderingContext2D method strokeText(), part of the Canvas 2D API, strokes &mdash(); that is, draws the outlines of &mdash(); the characters of a text string at the specified coordinates. An optional parameter allows specifying a maximum width for the rendered text, which the user agent will achieve by condensing the text or by using a lower font size.
+	 * The CanvasRenderingContext2D method strokeText(), part of the Canvas 2D API, strokes &dash(); that is, draws the outlines of &dash(); the characters of a text string at the specified coordinates. An optional parameter allows specifying a maximum width for the rendered text, which the user agent will achieve by condensing the text or by using a lower font size.
 	 *
 	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/strokeText">CanvasRenderingContext2D.strokeText - MDN</a>
 	 * @see <a href="https://html.spec.whatwg.org/multipage/scripting.html#dom-context-2d-stroketext">CanvasRenderingContext2D.strokeText - HTML Living Standard</a>
@@ -387,7 +387,7 @@ public interface CanvasRenderingContext2D extends CanvasRenderingContext {
 	void fill(Path2D path);
 
 	/**
-	 * The CanvasRenderingContext2D.isPointInPath() method of the Canvas 2D API reports whether or not the specified poInteger is contained in the current path.
+	 * The CanvasRenderingContext2D.isPointInPath() method of the Canvas 2D API reports whether the specified poInteger is contained in the current path.
 	 *
 	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/isPointInPath">CanvasRenderingContext2D.isPointInPath - MDN</a>
 	 * @see <a href="https://html.spec.whatwg.org/multipage/scripting.html#dom-context-2d-ispointinpath">CanvasRenderingContext2D.isPointInPath - HTML Living Standard</a>
@@ -395,7 +395,7 @@ public interface CanvasRenderingContext2D extends CanvasRenderingContext {
 	boolean isPointInPath(Integer x, Integer y, String fillRule);
 
 	/**
-	 * The CanvasRenderingContext2D.isPointInPath() method of the Canvas 2D API reports whether or not the specified poInteger is contained in the current path.
+	 * The CanvasRenderingContext2D.isPointInPath() method of the Canvas 2D API reports whether the specified poInteger is contained in the current path.
 	 *
 	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/isPointInPath">CanvasRenderingContext2D.isPointInPath - MDN</a>
 	 * @see <a href="https://html.spec.whatwg.org/multipage/scripting.html#dom-context-2d-ispointinpath">CanvasRenderingContext2D.isPointInPath - HTML Living Standard</a>
@@ -403,7 +403,7 @@ public interface CanvasRenderingContext2D extends CanvasRenderingContext {
 	boolean isPointInPath(Integer x, Integer y);
 
 	/**
-	 * The CanvasRenderingContext2D.isPointInPath() method of the Canvas 2D API reports whether or not the specified poInteger is contained in the current path.
+	 * The CanvasRenderingContext2D.isPointInPath() method of the Canvas 2D API reports whether the specified poInteger is contained in the current path.
 	 *
 	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/isPointInPath">CanvasRenderingContext2D.isPointInPath - MDN</a>
 	 * @see <a href="https://html.spec.whatwg.org/multipage/scripting.html#dom-context-2d-ispointinpath">CanvasRenderingContext2D.isPointInPath - HTML Living Standard</a>
@@ -412,7 +412,7 @@ public interface CanvasRenderingContext2D extends CanvasRenderingContext {
 										String fillRule);
 
 	/**
-	 * The CanvasRenderingContext2D.isPointInPath() method of the Canvas 2D API reports whether or not the specified poInteger is contained in the current path.
+	 * The CanvasRenderingContext2D.isPointInPath() method of the Canvas 2D API reports whether the specified poInteger is contained in the current path.
 	 *
 	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/isPointInPath">CanvasRenderingContext2D.isPointInPath - MDN</a>
 	 * @see <a href="https://html.spec.whatwg.org/multipage/scripting.html#dom-context-2d-ispointinpath">CanvasRenderingContext2D.isPointInPath - HTML Living Standard</a>
@@ -420,7 +420,7 @@ public interface CanvasRenderingContext2D extends CanvasRenderingContext {
 	boolean isPointInPath(Path2D path, Integer x, Integer y);
 
 	/**
-	 * The CanvasRenderingContext2D.isPointInStroke() method of the Canvas 2D API reports whether or not the specified poInteger is inside the area contained by the stroking of a path.
+	 * The CanvasRenderingContext2D.isPointInStroke() method of the Canvas 2D API reports whether the specified poInteger is inside the area contained by the stroking of a path.
 	 *
 	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/isPointInStroke">CanvasRenderingContext2D.isPointInStroke - MDN</a>
 	 * @see <a href="https://html.spec.whatwg.org/multipage/scripting.html#dom-context-2d-ispointinstroke">CanvasRenderingContext2D.isPointInStroke - HTML Living Standard</a>
@@ -428,7 +428,7 @@ public interface CanvasRenderingContext2D extends CanvasRenderingContext {
 	boolean isPointInStroke(Integer x, Integer y);
 
 	/**
-	 * The CanvasRenderingContext2D.isPointInStroke() method of the Canvas 2D API reports whether or not the specified poInteger is inside the area contained by the stroking of a path.
+	 * The CanvasRenderingContext2D.isPointInStroke() method of the Canvas 2D API reports whether the specified poInteger is inside the area contained by the stroking of a path.
 	 *
 	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/isPointInStroke">CanvasRenderingContext2D.isPointInStroke - MDN</a>
 	 * @see <a href="https://html.spec.whatwg.org/multipage/scripting.html#dom-context-2d-ispointinstroke">CanvasRenderingContext2D.isPointInStroke - HTML Living Standard</a>
@@ -452,7 +452,8 @@ public interface CanvasRenderingContext2D extends CanvasRenderingContext {
 	void stroke(Path2D path);
 
 	/**
-	 * The CanvasRenderingContext2D.createImageData() method of the Canvas 2D API creates a new, blank ImageData object with the specified dimensions. All of the pixels in the new object are transparent black.
+	 * The CanvasRenderingContext2D.createImageData() method of the Canvas 2D API creates a new, blank ImageData object with the specified dimensions.
+     * All the pixels in the new object are transparent black.
 	 *
 	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createImageData">CanvasRenderingContext2D.createImageData - MDN</a>
 	 * @see <a href="https://html.spec.whatwg.org/multipage/scripting.html#dom-context-2d-createimagedata">CanvasRenderingContext2D.createImageData - HTML Living Standard</a>
@@ -460,7 +461,8 @@ public interface CanvasRenderingContext2D extends CanvasRenderingContext {
 	ImageData createImageData(Integer sw, Integer sh, ImageDataSettings settings);
 
 	/**
-	 * The CanvasRenderingContext2D.createImageData() method of the Canvas 2D API creates a new, blank ImageData object with the specified dimensions. All of the pixels in the new object are transparent black.
+	 * The CanvasRenderingContext2D.createImageData() method of the Canvas 2D API creates a new, blank ImageData object with the specified dimensions.
+     * All the pixels in the new object are transparent black.
 	 *
 	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createImageData">CanvasRenderingContext2D.createImageData - MDN</a>
 	 * @see <a href="https://html.spec.whatwg.org/multipage/scripting.html#dom-context-2d-createimagedata">CanvasRenderingContext2D.createImageData - HTML Living Standard</a>
@@ -468,7 +470,8 @@ public interface CanvasRenderingContext2D extends CanvasRenderingContext {
 	ImageData createImageData(Integer sw, Integer sh);
 
 	/**
-	 * The CanvasRenderingContext2D.createImageData() method of the Canvas 2D API creates a new, blank ImageData object with the specified dimensions. All of the pixels in the new object are transparent black.
+	 * The CanvasRenderingContext2D.createImageData() method of the Canvas 2D API creates a new, blank ImageData object with the specified dimensions.
+     * All the pixels in the new object are transparent black.
 	 *
 	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createImageData">CanvasRenderingContext2D.createImageData - MDN</a>
 	 * @see <a href="https://html.spec.whatwg.org/multipage/scripting.html#dom-context-2d-createimagedata">CanvasRenderingContext2D.createImageData - HTML Living Standard</a>
@@ -534,7 +537,7 @@ public interface CanvasRenderingContext2D extends CanvasRenderingContext {
 	void arcTo(Integer x1, Integer y1, Integer x2, Integer y2, Integer radius);
 
 	/**
-	 * The CanvasRenderingContext2D.bezierCurveTo() method of the Canvas 2D API adds a cubic B&eacute();zier curve to the current sub-path. It requires three points: the first two are control points and the third one is the end point. The starting poInteger is the latest poInteger in the current path, which can be changed using moveTo() before creating the B&eacute();zier curve.
+	 * The CanvasRenderingContext2D.bezierCurveTo() method of the Canvas 2D API adds a cubic Bézier curve to the current sub-path. It requires three points: the first two are control points and the third one is the end point. The starting poInteger is the latest poInteger in the current path, which can be changed using moveTo() before creating the Beziercurve.
 	 *
 	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/bezierCurveTo">CanvasRenderingContext2D.bezierCurveTo - MDN</a>
 	 * @see <a href="https://html.spec.whatwg.org/multipage/scripting.html#dom-context-2d-beziercurveto">CanvasRenderingContext2D.beziercurveto - HTML Living Standard</a>
@@ -585,7 +588,7 @@ public interface CanvasRenderingContext2D extends CanvasRenderingContext {
 	void moveTo(Integer x, Integer y);
 
 	/**
-	 * The CanvasRenderingContext2D.quadraticCurveTo() method of the Canvas 2D API adds a quadratic B&eacute();zier curve to the current sub-path. It requires two points: the first one is a control poInteger and the second one is the end point. The starting poInteger is the latest poInteger in the current path, which can be changed using moveTo() before creating the quadratic B&eacute();zier curve.
+	 * The CanvasRenderingContext2D.quadraticCurveTo() method of the Canvas 2D API adds a quadratic Bézier curve to the current sub-path. It requires two points: the first one is a control poInteger and the second one is the end point. The starting poInteger is the latest poInteger in the current path, which can be changed using moveTo() before creating the quadratic Beziercurve.
 	 *
 	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/quadraticCurveTo">CanvasRenderingContext2D.quadraticCurveTo - MDN</a>
 	 * @see <a href="https://html.spec.whatwg.org/multipage/scripting.html#dom-context-2d-quadraticcurveto">CanvasRenderingContext2D.quadraticCurveTo - HTML Living Standard</a>
