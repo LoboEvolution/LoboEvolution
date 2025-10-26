@@ -174,7 +174,6 @@ public class FontValues extends HtmlValues {
 				} catch (final NumberFormatException nfe) {
 					return defaultSize;
 				}
-			case "px":
 			case "pt":
 			case "pc":
 			case "mm":

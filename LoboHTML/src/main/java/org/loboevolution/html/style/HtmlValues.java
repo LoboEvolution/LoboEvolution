@@ -187,8 +187,7 @@ public class HtmlValues {
 				switch (units) {
 					case "px":
 						final double val = Double.parseDouble(text);
-						final double inches = val / 96;
-						return (int) Math.round(dpi * inches);
+						return (int) val;
 					case "em":
 						final FontFactory FONT_FACTORY = FontFactory.getInstance();
 						final WindowImpl win = (WindowImpl) window;

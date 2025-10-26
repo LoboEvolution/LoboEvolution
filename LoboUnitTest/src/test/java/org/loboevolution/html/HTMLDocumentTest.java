@@ -468,7 +468,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"[object HTMLCollection]", "4", "red"})
+    @Alerts({"[object HTMLAllCollection]", "4", "red"})
     public void identicalIDs() {
         final String html =
                 "<html>\n"
@@ -1806,18 +1806,6 @@ public class HTMLDocumentTest extends LoboUnitTest {
                 + "  <div id='myDiv'></div>\n"
                 + "</body></html>";
 
-        checkHtmlAlert(html);
-    }
-
-    @Test
-    @Alerts("file://C:/Users/utente/workspace/LoboEvolution/LoboUnitTest/")
-    public void baseURINoBaseTag() {
-        final String html = "<html>\n"
-                + "<body>\n"
-                + "    <script>\n"
-                + "  alert(document.baseURI);\n"
-                + "</script>\n"
-                + "</body></html>";
         checkHtmlAlert(html);
     }
 

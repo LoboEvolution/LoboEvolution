@@ -65,23 +65,17 @@ public class CSSStyleSheetImpl extends StyleSheetImpl implements CSSStyleSheet {
     @Override
     public long insertRule(final String rule, final int index) {
         try {
-
-            final int pos = rule.indexOf('{');
-            if (pos > -1) {
-                final String newRule = rule.substring(0, pos);
-                try {
-                    insertRule(newRule, index);
-                    return index;
-                } catch (final Exception ex) {
-                    return 0;
-                }
-            } else {
-                this.cssStyleSheet.insertRule(rule, index);
-                this.cssRuleList.addStyleRule(cssStyleSheet.getCssRules());
-            }
+            this.cssStyleSheet.insertRule(rule, index);
+            this.cssRuleList.addStyleRule(cssStyleSheet.getCssRules());
         } catch (final IndexOutOfBoundsException e) {
             throw new DOMException(
                     DOMException.INDEX_SIZE_ERR, e.getMessage());
+        } catch (final DOMException e) {
+            final int pos = rule.indexOf('{');
+            if (pos > -1) {
+                final String newRule = rule.substring(0, pos);
+                insertRule(newRule + "{}", index);
+            }
         } catch (Exception ex) {
             throw ex;
         }

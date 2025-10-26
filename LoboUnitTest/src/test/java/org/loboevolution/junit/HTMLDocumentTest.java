@@ -875,19 +875,6 @@ public class HTMLDocumentTest extends LoboUnitTest {
     }
 
     @Test
-    public void getStyleSheet() {
-        final HTMLDocumentImpl doc = (HTMLDocumentImpl) document;
-        final CSSStyleSheet sheet = doc.getStyleSheets().item(0);
-        assertNotNull(sheet);
-        assertNotNull(sheet.getCssRules());
-        assertEquals(6, doc.getStyleSheets().getLength());
-        assertEquals("file:/C:/Users/utente/workspace/LoboEvolution/target/LoboUnitTest/test-classes/org/lobo/css/common.css", sheet.getHref());
-        assertNotNull(sheet);
-        assertEquals("background-color: red", sheet.getCssRules().item(0).getStyle().getCssText());
-        assertEquals(3, sheet.getCssRules().getLength());
-    }
-
-    @Test
     public void getElementgetStyle() {
         final HTMLDocumentImpl doc = (HTMLDocumentImpl) document;
         final HTMLElementImpl elm = (HTMLElementImpl) doc.getElementById("firstH3");

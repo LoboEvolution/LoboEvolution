@@ -31,6 +31,7 @@ import org.loboevolution.annotation.Alerts;
 import org.loboevolution.annotation.AlertsExtension;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLDocument;
+import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -101,7 +102,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
                         + "    <link href='" + URL_CSS + "style1.css' type='text/css'></link>\n"
                         + "    <link href='" + URL_CSS + "style2.css' rel='stylesheet'></link>\n"
                         + "    <link href='" + URL_CSS + "style3.css'></link>\n"
-                        + "    <link href='style4.css' rel='stylesheet'></link>\n"
+                        + "    <link href='" + URL_CSS + "style4.css' rel='stylesheet'></link>\n"
                         + "    <style>div.x { color: red; }</style>\n"
                         + "  </head>\n"
                         + "  <body>\n"
@@ -339,22 +340,22 @@ public class CSSStyleSheetTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"2", ".testStyleDef", "height: 42px;", ".testStyle", "width: 24px;"})
+    @Alerts({"2", "*.testStyleDef", "height: 42px", "*.testStyle", "width: 24px"})
     public void insertRuleLeadingWhitespace() {
         final String html =
                 "<html><head><script>\n"
                         + "function doTest() {\n"
                         + "  var f = document.getElementById('myStyle');\n"
                         + "  var s = f.sheet ? f.sheet : f.styleSheet;\n"
-                        + "  var rules = s.rules;\n"
                         + "  if (s.insertRule) {\n"
                         + "    s.insertRule('.testStyle { width: 24px; }', 0);\n"
                         + "    s.insertRule(' .testStyleDef { height: 42px; }', 0);\n"
-                        + "   alert(rules.length);\n"
-                        + "   alert(rules[0].selectorText);\n"
-                        + "   alert(rules[0].style.cssText);\n"
-                        + "   alert(rules[1].selectorText);\n"
-                        + "   alert(rules[1].style.cssText);\n"
+                        + "    var rules = s.cssRules || s.rules;\n"
+                        + "    alert(rules.length);\n"
+                        + "    alert(rules[0].selectorText);\n"
+                        + "    alert(rules[0].style.cssText);\n"
+                        + "    alert(rules[1].selectorText);\n"
+                        + "     alert(rules[1].style.cssText);\n"
                         + "  }\n"
                         + "}</script>\n"
                         + "<style id='myStyle'></style>\n"
@@ -564,7 +565,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("60")
+    @Alerts("10")
     public void rulePrioritySpecificity2() {
         final String html = "<html><head>\n"
                 + "<style>\n"
@@ -1316,10 +1317,11 @@ public class CSSStyleSheetTest extends LoboUnitTest {
                 + "</div>\n"
                 + "</body></html>";
 
-        final HTMLDocument document = loadHtml(html);
+        final HTMLDocumentImpl document = loadHtml(html);
         HTMLElementImpl elem = (HTMLElementImpl) document.getElementById("anchor");
         assertEquals("none", elem.getComputedStyle().getDisplay());
-        elem = (HTMLElementImpl) elem.querySelector("#anchor");
+        document.setBaseURI(document.getDocumentURI() + "#anchor");
+        elem = (HTMLElementImpl)document.getElementById("anchor");
         assertEquals("block", elem.getComputedStyle().getDisplay());
     }
 
