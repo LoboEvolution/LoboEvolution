@@ -24,16 +24,46 @@
  * Contact info: ivan.difrancesco@yahoo.it
  */
 
-package org.loboevolution.html.node;
+package org.loboevolution.html.dom.domimpl;
+
+import org.loboevolution.html.dom.HTMLCollection;
+import org.loboevolution.html.dom.HTMLMapElement;
+import org.loboevolution.html.dom.filter.AreaFilter;
 
 /**
- * A minimal document object that has no parent. It is used as a lightweight
- * version of Document that stores a segment of a document structure comprised
- * of nodes just like a standard document. The key difference is that because
- * the document fragment isn't part of the active document tree structure,
- * changes made to the fragment don't affect the document, cause reflow, or
- * incur any performance impact that can occur when changes are made.
+ * <p>HTMLMapElementImpl class.</p>
  */
-public interface DocumentFragment extends Node, ParentNode {
+public class HTMLMapElementImpl extends HTMLElementImpl implements HTMLMapElement {
 
+    /**
+     * <p>Constructor for HTMLMapElementImpl.</p>
+     *
+     * @param name a {@link String} object.
+     */
+    public HTMLMapElementImpl(String name) {
+        super(name);
+    }
+
+    @Override
+    public HTMLCollection getAreas() {
+        synchronized (this) {
+            return new HTMLCollectionImpl(this, new AreaFilter());
+        }
+    }
+
+    @Override
+    public String getName() {
+        return  this.getAttribute("name");
+    }
+
+    @Override
+    public void setName(String name) {
+        this.setAttribute("name", name);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public String toString() {
+        return "[object HTMLMapElement]";
+    }
 }

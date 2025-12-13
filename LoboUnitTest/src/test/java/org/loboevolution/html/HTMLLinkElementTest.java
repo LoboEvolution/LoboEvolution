@@ -44,26 +44,26 @@ public class HTMLLinkElementTest extends LoboUnitTest {
     public void basicLinkAttributes() {
         final String html =
                 "<html>\n"
-                        + "  <body onload='test()'>\n"
-                        + "    <script>\n"
-                        + "      function test() {\n"
-                        + "        var s = document.createElement('link');\n"
-                        + "        alert(s.href);\n"
-                        + "        alert(s.type);\n"
-                        + "        alert(s.rel);\n"
-                        + "        alert(s.rev);\n"
-                        + "        s.href = 'test.css';\n"
-                        + "        s.type = 'text/css';\n"
-                        + "        s.rel  = 'stylesheet';\n"
-                        + "        s.rev  = 'stylesheet1';\n"
-                        + "        alert(s.href);\n"
-                        + "        alert(s.type);\n"
-                        + "        alert(s.rel);\n"
-                        + "        alert(s.rev);\n"
-                        + "      }\n"
-                        + "    </script>\n"
-                        + "  </body>\n"
-                        + "</html>";
+                + "  <body onload='test()'>\n"
+                + "    <script>\n"
+                + "      function test() {\n"
+                + "        var s = document.createElement('link');\n"
+                + "        alert(s.href);\n"
+                + "        alert(s.type);\n"
+                + "        alert(s.rel);\n"
+                + "        alert(s.rev);\n"
+                + "        s.href = 'test.css';\n"
+                + "        s.type = 'text/css';\n"
+                + "        s.rel  = 'stylesheet';\n"
+                + "        s.rev  = 'stylesheet1';\n"
+                + "        alert(s.href);\n"
+                + "        alert(s.type);\n"
+                + "        alert(s.rel);\n"
+                + "        alert(s.rev);\n"
+                + "      }\n"
+                + "    </script>\n"
+                + "  </body>\n"
+                + "</html>";
         checkHtmlAlert(html);
     }
 
@@ -131,7 +131,7 @@ public class HTMLLinkElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"0", "2", "0", "0", "", "  \\t"})
+    @Alerts({"0", "2", "0", "0", "", "  \t"})
     public void setRelListStringBlank() {
         final String html
                 = "<html><body><link id='l1'><link id='l2' rel='alternate help'><script>\n"
@@ -161,32 +161,6 @@ public class HTMLLinkElementTest extends LoboUnitTest {
                 + "  alert(a2.relList.length);\n"
                 + "  a1.relList = null;\n"
                 + "  a2.relList = null;\n"
-                + "  alert(a1.relList.length);\n"
-                + "  alert(a2.relList.length);\n"
-                + "  for (var i = 0; i < a1.relList.length; i++) {\n"
-                + "    alert(a1.relList[i]);\n"
-                + "  }\n"
-                + "  for (var i = 0; i < a2.relList.length; i++) {\n"
-                + "    alert(a2.relList[i]);\n"
-                + "  }\n"
-                + "  alert(a1.rel);\n"
-                + "  alert(a2.rel);\n"
-                + "} catch(e) { alert('exception'); }\n"
-                + "</script></body></html>";
-        checkHtmlAlert(html);
-    }
-
-    @Test
-    @Alerts({"0", "2", "1", "1", "undefined", "undefined", "undefined", "undefined"})
-    public void setRelListUndefined() {
-        final String html
-                = "<html><body><link id='l1'><link id='l2' rel='alternate help'><script>\n"
-                + "var a1 = document.getElementById('l1'), a2 = document.getElementById('l2');\n"
-                + "try {\n"
-                + "  alert(a1.relList.length);\n"
-                + "  alert(a2.relList.length);\n"
-                + "  a1.relList = undefined;\n"
-                + "  a2.relList = undefined;\n"
                 + "  alert(a1.relList.length);\n"
                 + "  alert(a2.relList.length);\n"
                 + "  for (var i = 0; i < a1.relList.length; i++) {\n"

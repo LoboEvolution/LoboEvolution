@@ -69,6 +69,7 @@ import java.util.List;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Stream;
 
 /**
@@ -334,6 +335,16 @@ public class ElementImpl extends NodeImpl implements Element {
 				check.set(checkAttr != null);
 			}
 		});
+
+        AtomicReference<Attr> same = new AtomicReference<>(null);
+        NamedNodeMap attrs = getAttributes();
+        for (int i = 0; i < attrs.getLength(); i++) {
+            Node attr = attrs.item(i);
+            if (Objects.equals(attr.getNodeName().toUpperCase(), newAttr.getNodeName().toUpperCase())) {
+                same.set((Attr) attr);
+            }
+        }
+
 		if (newAttr.getOwnerElement() != null && check.get()) {
 			throw new DOMException(DOMException.INUSE_ATTRIBUTE_ERR,
 					"Attr is already an attribute of another Element object. The DOM user must explicitly clone Attr nodes to re-use them in other elements.");
@@ -345,7 +356,11 @@ public class ElementImpl extends NodeImpl implements Element {
 
 		newAttr.setOwnerElement(this);
 		assignAttributeField(newAttr.getName(), newAttr.getValue());
-		return (Attr) map.setNamedItem(newAttr);
+        Attr attr = (Attr) map.setNamedItem(newAttr);
+        if (same.get() != null) {
+            return same.get();
+        }
+		return attr;
 	}
 
 	/** {@inheritDoc} */
@@ -1209,7 +1224,25 @@ public class ElementImpl extends NodeImpl implements Element {
 		}
 	}
 
-	@Override
+    @Override
+    public Node cloneNode(boolean deep) {
+
+        if(!deep){
+            ElementImpl newNode = new ElementImpl(getNodeName());
+            newNode.setOwnerDocument(getOwnerDocument());
+            final NamedNodeMap attributes = getAttributes();
+            if (attributes != null) {
+                for (final Node attr : Nodes.iterable(attributes)) {
+                    newNode.setAttributeNode((Attr) attr);
+                }
+            }
+            return newNode;
+        }
+
+        return super.cloneNode(true);
+    }
+
+    @Override
 	public boolean isEqualNode(final Node arg) {
 		if (!super.isEqualNode(arg)) {
 			return false;
@@ -1350,6 +1383,7 @@ public class ElementImpl extends NodeImpl implements Element {
 				if (widthSize == 0 && (this instanceof HTMLInputElement ||
 						this instanceof HTMLButtonElement ||
 						this instanceof HTMLHeadElement ||
+						this instanceof HTMLScriptElement ||
 						this instanceof HTMLSelectElement ||
 						this instanceof HTMLTextAreaElement ||
 						this instanceof HTMLProgressElement ||
@@ -1493,10 +1527,13 @@ public class ElementImpl extends NodeImpl implements Element {
                         currentStyle = ((HTMLElementImpl) child).getCurrentStyle();
                     }
 					final String height = currentStyle.getHeight();
-					if(Strings.isNotBlank(height)){
-						h.addAndGet(HtmlValues.getPixelSize(CSSValues.AUTO.isEqual(height) ? "100%" : height, null, doc.getDefaultView(), 0, parentHeight));
-					} else {
-						h.addAndGet(childHeight((ElementImpl) child, currentStyle.getPosition(), doc, parentHeight));
+					final String cssDisplay = currentStyle.getDisplay();
+					if (!CSSValues.NONE.isEqual(cssDisplay)) {
+						if (Strings.isNotBlank(height)) {
+							h.addAndGet(HtmlValues.getPixelSize(CSSValues.AUTO.isEqual(height) ? "100%" : height, null, doc.getDefaultView(), 0, parentHeight));
+						} else {
+							h.addAndGet(childHeight((ElementImpl) child, currentStyle.getPosition(), doc, parentHeight));
+						}
 					}
 					break;
 				default:
@@ -1508,6 +1545,11 @@ public class ElementImpl extends NodeImpl implements Element {
 
 	private int childWidth(final ElementImpl elm, final HTMLDocumentImpl doc, final Integer parentWidth) {
 		final AtomicInteger h = new AtomicInteger(0);
+		if (elm instanceof HTMLTextAreaElement ||
+				elm instanceof HTMLBaseFontElement ||
+				elm instanceof HTMLScriptElement ||
+				elm instanceof HTMLSuperscriptElementImpl) return h.get();
+
 		elm.getNodeList().forEach(child -> {
 			final int type = child.getNodeType();
 			if(type == Node.TEXT_NODE){
@@ -1516,11 +1558,14 @@ public class ElementImpl extends NodeImpl implements Element {
 			} else if (type == Node.ELEMENT_NODE) {
                 final CSSStyleDeclaration currentStyle = ((HTMLElementImpl) child).getCurrentStyle();
                 final String width = currentStyle.getWidth();
-                if (Strings.isNotBlank(width)) {
-                    h.addAndGet(HtmlValues.getPixelSize(width, null, doc.getDefaultView(), 0, parentWidth));
-                } else {
-                    h.addAndGet(childWidth((ElementImpl) child, doc, parentWidth));
-                }
+				final String cssDisplay = currentStyle.getDisplay();
+				if (!CSSValues.NONE.isEqual(cssDisplay)) {
+					if (Strings.isNotBlank(width)) {
+						h.addAndGet(HtmlValues.getPixelSize(width, null, doc.getDefaultView(), 0, parentWidth));
+					} else {
+						h.addAndGet(childWidth((ElementImpl) child, doc, parentWidth));
+					}
+				}
             }
 		});
 		return h.get();

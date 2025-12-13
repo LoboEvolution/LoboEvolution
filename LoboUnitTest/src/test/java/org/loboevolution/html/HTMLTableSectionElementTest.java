@@ -503,7 +503,7 @@ public class HTMLTableSectionElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"<thead id=\"thead\"><tr><td>cell1</td></tr></thead>", "new"})
+    @Alerts({"<THEAD id=\"thead\"><TR><TD>cell1</TD></TR></THEAD>", "new"})
     public void outerHTML() {
         final String html =
                 "<html>\n"

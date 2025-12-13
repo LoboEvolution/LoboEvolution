@@ -1790,7 +1790,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"[object HTMLDocument]", "function HTMLDocument() { [native code] }"})
+    @Alerts({"[object HTMLDocument]", "function HTMLDocument"})
     public void type() {
         final String html = "<html><head>\n"
                 + "    <script>\n"

@@ -1370,13 +1370,10 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     private void styleShorthand(final String style, final String attribute, final String expectedValue) {
         final String html = "<html><head>\n"
                 + "<script>\n"
-                + "  function alert(msg) {\n"
-                + "    var ta = document.getElementById('myTextArea');\n"
-                + "    ta.value += msg + '; ';\n"
-                + "  }\n"
                 + "function test() {\n"
                 + "  var style = document.getElementById('d').style;\n"
-                + " alert(style." + attribute + ");\n"
+                + "  var ta = document.getElementById('myTextArea');\n"
+                + "  ta.value = style." + attribute +"\n"
                 + "}\n</script>\n"
                 + "</head>\n"
                 + "<body onload='test()'><div id='d' style='" + style + "'>foo</div>\n"
@@ -1385,7 +1382,7 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
 
         final HTMLDocument document = loadHtml(html);
         HTMLTextAreaElementImpl elem = (HTMLTextAreaElementImpl) document.getElementById("myTextArea");
-        assertEquals(expectedValue + "; ", elem.getValue());
+        assertEquals(expectedValue, elem.getValue());
 
     }
 
@@ -2201,7 +2198,7 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"null", "null", "", "null"})
+    @Alerts({"null", "null", "null", "null"})
     public void setToNull() {
         final String html
                 = "<html><head><script>\n" 
@@ -2423,17 +2420,17 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     public void widthAbsolute() {
         final String html =
                 "<html>\n"
-                        + "</head>\n"
-                        + "  <style type='text/css'>div {position: absolute;}</style>\n"
-                        + "</head>\n"
-                        + "<body>\n"
-                        + "  <div id='tester'></div>\n"
-                        + "  <script>\n" 
+                + "</head>\n"
+                + "  <style type='text/css'>div {position: absolute;}</style>\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "  <div id='tester'></div>\n"
+                + "  <script>\n"
                 + "    var myDiv = document.getElementById('tester');\n"
-                        + "    var myDivStyle = window.getComputedStyle(myDiv, null);\n"
-                        + "   alert(myDivStyle.width);\n"
-                        + "  </script>\n"
-                        + "</body></html>";
+                + "    var myDivStyle = window.getComputedStyle(myDiv, null);\n"
+                + "   alert(myDivStyle.width);\n"
+                + "  </script>\n"
+                + "</body></html>";
 
         checkHtmlAlert(html);
     }
@@ -2443,21 +2440,20 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     public void ctor() {
         final String html =
                 "<html>\n"
-                        + "</head>\n"
-                        + "  <style type='text/css'>div {position: absolute;}</style>\n"
-                        + "</head>\n"
-                        + "<body>\n"
-                        + "  <div id='tester'></div>\n"
-                        + "  <script>\n"
-
-                        + "    try {"
-                        + "      var c = new CSSStyleDeclaration();\n"
-                        + "     alert(c);\n"
-                        + "    } catch(e) {\n"
-                        + "     alert('exception ' + (e instanceof TypeError));\n"
-                        + "    }\n"
-                        + "  </script>\n"
-                        + "</body></html>";
+                + "</head>\n"
+                + "  <style type='text/css'>div {position: absolute;}</style>\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "  <div id='tester'></div>\n"
+                + "  <script>\n"
+                + "    try {"
+                + "      var c = new CSSStyleDeclaration();\n"
+                + "     alert(c);\n"
+                + "    } catch(e) {\n"
+                + "     alert('exception ' + (e instanceof TypeError));\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</body></html>";
 
         checkHtmlAlert(html);
     }

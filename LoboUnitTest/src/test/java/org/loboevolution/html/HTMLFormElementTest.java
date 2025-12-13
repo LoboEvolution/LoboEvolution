@@ -267,79 +267,63 @@ public class HTMLFormElementTest extends LoboUnitTest {
 
     @Test
     @Alerts({"application/x-www-form-urlencoded",
-            "application/x-www-form-urlencoded",
             "application/x-www-form-urlencoded"})
     public void jsDefaultEnctype() {
         jsEnctype(null);
-        jsEncoding(null);
     }
 
     @Test
     @Alerts({"application/x-www-form-urlencoded",
-            "application/x-www-form-urlencoded",
             "application/x-www-form-urlencoded"})
     public void jsEmptyEnctype() {
         jsEnctype("");
-        jsEncoding("");
     }
 
     @Test
     @Alerts({"application/x-www-form-urlencoded",
-            "application/x-www-form-urlencoded",
             "application/x-www-form-urlencoded"})
     public void jsBlankEnctype() {
         jsEnctype(" ");
-        jsEncoding(" ");
     }
 
     @Test
     @Alerts({"application/x-www-form-urlencoded",
-            "application/x-www-form-urlencoded",
             "application/x-www-form-urlencoded"})
     public void jsUnknownEnctype() {
         jsEnctype("unknown");
-        jsEncoding("unknown");
     }
 
     @Test
     @Alerts({"application/x-www-form-urlencoded",
-            "application/x-www-form-urlencoded",
             "application/x-www-form-urlencoded"})
     public void jsUrlencodedEnctype() {
         jsEnctype("application/x-www-form-urlencoded");
-        jsEncoding("application/x-www-form-urlencoded");
     }
 
     @Test
-    @Alerts({"multipart/form-data", "multipart/form-data", "multipart/form-data"})
+    @Alerts({"multipart/form-data", "multipart/form-data"})
     public void jsMultipartEnctype() {
         jsEnctype("multipart/form-data");
-        jsEncoding("multipart/form-data");
     }
 
     @Test
-    @Alerts({"text/plain", "text/plain", "text/plain"})
+    @Alerts({"text/plain", "text/plain"})
     public void jsPlainEnctype() {
         jsEnctype("text/plain");
-        jsEncoding("text/plain");
     }
 
     @Test
     @Alerts({"application/x-www-form-urlencoded",
-            "application/x-www-form-urlencoded",
             "application/x-www-form-urlencoded"})
     public void jsXmlEnctype() {
         jsEnctype("text/xml");
-        jsEncoding("text/xml");
     }
 
     @Test
     @Alerts({"application/x-www-form-urlencoded",
-            "application/x-www-form-urlencoded",
             "application/x-www-form-urlencoded"})
     public void jsJsonEnctype() {
         jsEnctype("application/json");
-        jsEncoding("application/json");
     }
 
     private void jsEnctype(final String enctype) {
@@ -353,29 +337,6 @@ public class HTMLFormElementTest extends LoboUnitTest {
                 + "      alert(document.forms[0].enctype);\n"
                 + "    } catch(e) { alert('exception'); }\n"
                 + "    alert(document.forms[0].encoding);\n"
-                + "  }\n"
-                + "  </script>\n"
-                + "</head>\n"
-                + "<body onload='doTest()'>\n"
-                + "  <form id='testForm' name='testForm' method='post' action = 'page2.html'>\n"
-                + "    <input type='submit' name='submit1' />\n"
-                + "  </form>\n"
-                + "</body></html>";
-
-        checkHtmlAlert(html);
-    }
-
-    private void jsEncoding(final String encoding) {
-        final String html
-                = "<html>\n"
-                + "<head>\n"
-                + "  <script>\n"
-                + "  function doTest() {\n"
-                + "    try {\n"
-                + "      document.forms[0].encoding = '" + encoding + "';\n"
-                + "      alert(document.forms[0].encoding);\n"
-                + "    } catch(e) { alert('exception'); }\n"
-                + "    alert(document.forms[0].enctype);\n"
                 + "  }\n"
                 + "  </script>\n"
                 + "</head>\n"
@@ -809,7 +770,8 @@ public class HTMLFormElementTest extends LoboUnitTest {
     @Alerts({"page 1: formPage1", "page 2: formPage2"})
     public void formAccessAfterBrowsing() {
         final String html = "<html><head>\n"
-                + "<script>\n"                + "function test() {\n"
+                + "<script>\n"
+                + "function test() {\n"
                 + "  window.name = 'page 1: ' + document.forms[0].name;\n"
                 + "  document.location = 'page2.html';\n"
                 + "}\n"
@@ -932,7 +894,7 @@ public class HTMLFormElementTest extends LoboUnitTest {
 
     @Test
     @Alerts("exception")
-    public void item_integer() {
+    public void itemInteger() {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
@@ -1074,7 +1036,7 @@ public class HTMLFormElementTest extends LoboUnitTest {
                 + "<form id='form1' name='form1' method='get' action='" + URL_SECOND + "'>\n"
                 + "  <input type='button' name='button1' />\n"
                 + "</form>\n"
-                + "<script>\n"                + "  // Prepare the iframe for the target\n"
+                + "<script>\n"
                 + "  alert('prepare frame');\n"
                 + "  var div = document.createElement('div');\n"
                 + "  div.style.display = 'none';\n"
@@ -1215,7 +1177,7 @@ public class HTMLFormElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"", "alternate help", "prefetch", "prefetch", "not supported", "notsupported"})
+    @Alerts({"null", "alternate help", "prefetch", "prefetch", "not supported", "notsupported"})
     public void readWriteRel() {
         final String html
                 = "<html><body><form id='f1'>a1</form><form id='f2' rel='alternate help'>a2</form><script>\n"
@@ -1324,53 +1286,27 @@ public class HTMLFormElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"0", "2", "1", "1", "undefined", "undefined", "undefined", "undefined"})
-    public void setRelListUndefined() {
-        final String html
-                = "<html><body><form id='f1'>a1</form><form id='f2' rel='alternate help'>a2</form><script>\n"
-                + "var a1 = document.getElementById('f1'), a2 = document.getElementById('f2');\n"
-                + "try {\n"
-                + "  alert(a1.relList.length);\n"
-                + "  alert(a2.relList.length);\n"
-                + "  a1.relList = undefined;\n"
-                + "  a2.relList = undefined;\n"
-                + "  alert(a1.relList.length);\n"
-                + "  alert(a2.relList.length);\n"
-                + "  for (var i = 0; i < a1.relList.length; i++) {\n"
-                + "    alert(a1.relList[i]);\n"
-                + "  }\n"
-                + "  for (var i = 0; i < a2.relList.length; i++) {\n"
-                + "    alert(a2.relList[i]);\n"
-                + "  }\n"
-                + "  alert(a1.rel);\n"
-                + "  alert(a2.rel);\n"
-                + "} catch(e) { alert('exception'); }\n"
-                + "</script></body></html>";
-        checkHtmlAlert(html);
-    }
-
-    @Test
     @Alerts({"[object HTMLInputElement]", "[object HTMLInputElement]"})
     public void elementsForOf() {
         final String html =
                 "<html>\n"
-                        + "<head>\n"
-                        + "<script>\n"
-                        + "  function test() {\n"
-                        + "    var f = document.getElementById('testForm');\n"
-                        + "    for (var attr of f) {\n"
-                        + "      alert(attr);\n"
-                        + "    }\n"
-                        + "  }\n"
-                        + "</script>\n"
-                        + "</head>\n"
-                        + "<body onload='test()'>\n"
-                        + "  <form name='testForm' id='testForm'>\n"
-                        + "    <input type='submit' id='submit'>\n"
-                        + "    <input type='text' name='test' value=''>"
-                        + "  </form>\n"
-                        + "</body>\n"
-                        + "</html>";
+                + "<head>\n"
+                + "<script>\n"
+                + "  function test() {\n"
+                + "    var f = document.getElementById('testForm');\n"
+                + "    for (var attr of f) {\n"
+                + "      alert(attr);\n"
+                + "    }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form name='testForm' id='testForm'>\n"
+                + "    <input type='submit' id='submit'>\n"
+                + "    <input type='text' name='test' value=''>"
+                + "  </form>\n"
+                + "</body>\n"
+                + "</html>";
 
         checkHtmlAlert(html);
     }

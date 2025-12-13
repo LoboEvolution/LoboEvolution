@@ -54,7 +54,7 @@ public class HTMLVideoElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"[object HTMLVideoElement]", "function HTMLVideoElement() { [native code] }"})
+    @Alerts({"[object HTMLVideoElement]", "function HTMLVideoElement"})
     public void type() {
         final String html = "<html><head>\n"
                 + "    <script>\n"

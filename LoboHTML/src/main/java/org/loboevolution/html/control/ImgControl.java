@@ -28,13 +28,14 @@
  */
 package org.loboevolution.html.control;
 
+import org.loboevolution.common.ArrayUtilities;
 import org.loboevolution.common.Strings;
 import org.loboevolution.common.WrapperLayout;
 import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.AlignValues;
-import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
-import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
-import org.loboevolution.html.dom.domimpl.HTMLImageElementImpl;
+import org.loboevolution.html.dom.HTMLAreaElement;
+import org.loboevolution.html.dom.HTMLMapElement;
+import org.loboevolution.html.dom.domimpl.*;
 import org.loboevolution.gui.HtmlPanel;
 import org.loboevolution.css.CSSStyleDeclaration;
 import org.loboevolution.html.renderer.HtmlController;
@@ -46,6 +47,8 @@ import org.loboevolution.net.HttpNetwork;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.Path2D;
 import java.io.Serial;
 
 /**
@@ -57,6 +60,8 @@ public class ImgControl extends BaseControl {
     private static final long serialVersionUID = 1L;
 
 	private Image image;
+
+    private final HTMLImageElementImpl modelNode;
 
 	private final String alt;
 
@@ -73,6 +78,7 @@ public class ImgControl extends BaseControl {
 	 */
 	public ImgControl(final HTMLImageElementImpl modelNode) {
 		super(modelNode);
+        this.modelNode = modelNode;
 		setLayout(WrapperLayout.getInstance());
 		final UserAgentContext bcontext = modelNode.getUserAgentContext();
 		alt = modelNode.getAlt() != null ? modelNode.getAlt() : "";
@@ -122,12 +128,31 @@ public class ImgControl extends BaseControl {
 	@Override
 	public void paintComponent(final Graphics g) {
 		super.paintComponent(g);
+        Graphics2D g2d = (Graphics2D) g.create();
 		final Dimension size = this.getSize();
 		final Insets insets = this.getInsets();
 		final Image image = this.image;
 		if (image != null) {
-			g.drawImage(image, insets.left, insets.top, size.width - insets.left - insets.right,
+            g2d.drawImage(image, insets.left, insets.top, size.width - insets.left - insets.right,
 					size.height - insets.top - insets.bottom, this);
+
+            HTMLCollectionImpl map = (HTMLCollectionImpl)modelNode.getOwnerDocument().getElementsByTagName("MAP");
+            map.forEach(node -> {
+                HTMLMapElement mapElement = (HTMLMapElement) node;
+                if(mapElement.getName().equalsIgnoreCase(modelNode.getUseMap().substring(1))){
+                    HTMLCollectionImpl areas = (HTMLCollectionImpl)mapElement.getAreas();
+                    areas.forEach(area -> {
+                        HTMLAreaElement areaElement = (HTMLAreaElement) area;
+                        int[] coords = ArrayUtilities.parseCoords(areaElement.getCoords());
+                        Shape shape = toShape(areaElement.getShape(), coords);
+                        g2d.setColor(new Color(255, 0, 0, 60));
+                        g2d.fill(shape);
+                        g2d.setColor(new Color(255, 0, 0));
+                        g2d.setStroke(new BasicStroke(1f));
+                        g2d.draw(shape);
+                    });
+                }
+            });
 		} else {
 			g.drawString(alt, 10, 10);
 		}
@@ -230,4 +255,33 @@ public class ImgControl extends BaseControl {
         final HTMLDocumentImpl doc = (HTMLDocumentImpl)this.getControlElement().getDocumentNode();
 		return  HtmlValues.getPixelSize(size, null, doc.getDefaultView(), -1, availSize);
 	}
+
+    private Shape toShape(String shape, int[] c) {
+        if (shape == null) shape = "rect";
+        switch (shape.toLowerCase()) {
+            case "rect":
+                if (c.length != 4)
+                    throw new IllegalArgumentException("RECT 4 coordinates required: left,top,right,bottom");
+                int x1 = c[0], y1 = c[1], x2 = c[2], y2 = c[3];
+                return new Rectangle(Math.min(x1, x2), Math.min(y1, y2),
+                        Math.abs(x2 - x1), Math.abs(y2 - y1));
+            case "circle":
+                if (c.length != 3)
+                    throw new IllegalArgumentException("CIRCLE 3 coordinates required: cx,cy,r");
+                int cx = c[0], cy = c[1], r = c[2];
+                return new Ellipse2D.Double(cx - r, cy - r, r * 2.0, r * 2.0);
+            case "poly":
+                if (c.length < 6 || c.length % 2 != 0)
+                    throw new IllegalArgumentException("POLY 3 points errors");
+                Path2D.Double path = new Path2D.Double();
+                path.moveTo(c[0], c[1]);
+                for (int i = 2; i < c.length; i += 2) {
+                    path.lineTo(c[i], c[i + 1]);
+                }
+                path.closePath();
+                return path;
+            default:
+                throw new UnsupportedOperationException("shape not supported: " + shape);
+        }
+    }
 }

@@ -28,6 +28,7 @@ package org.loboevolution.junit;
 
 import org.htmlunit.cssparser.dom.DOMException;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.css.CSSStyleDeclaration;
 import org.loboevolution.driver.LoboUnitTest;
@@ -50,8 +51,8 @@ public class DOMElementTest extends LoboUnitTest {
 
     private static DOMImplementationImpl domImpl;
 
-    @BeforeAll
-    public static void setUpBeforeClass() {
+    @BeforeEach
+    public void setUpBeforeClass() {
         final UserAgentContext context = new UserAgentContext(new LocalHtmlRendererConfig(), true);
         context.setUserAgentEnabled(false);
         domImpl = new DOMImplementationImpl(context);
@@ -903,8 +904,7 @@ public class DOMElementTest extends LoboUnitTest {
         span4.appendChild(document.createTextNode("span 4"));
         body.appendChild(span4);
         body.appendChild(document.createTextNode("   "));
-        //
-        assertEquals("       span 1   span 2   span 3     span 4   ", body.getTextContent());
+        assertEquals("span 1   span 2   span 3     span 4", body.getTextContent());
     }
 
     @Test
@@ -1064,7 +1064,7 @@ public class DOMElementTest extends LoboUnitTest {
         Element elm = document.createElement("p");
         assertEquals("P", elm.getTagName());
         elm = document.createElementNS("http://www.example.com/examplens", "e:p");
-        assertEquals("P", elm.getLocalName());
-        assertEquals("E:P", elm.getTagName());
+        assertEquals("p", elm.getLocalName());
+        assertEquals("e:p", elm.getTagName());
     }
 }

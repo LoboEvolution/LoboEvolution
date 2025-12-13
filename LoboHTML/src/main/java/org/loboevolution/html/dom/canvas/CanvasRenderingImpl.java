@@ -1047,4 +1047,9 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
 			graphics.drawRect(x, y, width, height);
 		}
 	}
+
+    @Override
+    public String toString() {
+        return "[object CanvasRenderingContext2D]";
+    }
 }

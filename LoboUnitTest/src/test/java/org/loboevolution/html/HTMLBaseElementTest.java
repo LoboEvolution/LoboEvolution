@@ -63,7 +63,7 @@ public class HTMLBaseElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"[object HTMLBaseElement]", "function HTMLBaseElement() { [native code] }"})
+    @Alerts({"[object HTMLBaseElement]", "function HTMLBaseElement"})
     public void type() {
         final String html = "<html><head>\n"
                 + "<script>\n"

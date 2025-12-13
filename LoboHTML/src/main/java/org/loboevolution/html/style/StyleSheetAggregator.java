@@ -322,7 +322,7 @@ public class StyleSheetAggregator {
                         value = UNESCAPE_SELECTOR.matcher(value).replaceAll("$1");
                     }
                     final String attrValue = element.getAttribute(condition.getLocalName());
-                    return attrValue != null && attrValue.equals(value);
+                    return attrValue != null && attrValue.equalsIgnoreCase(value);
                 }
                 return element.hasAttribute(condition.getLocalName());
 

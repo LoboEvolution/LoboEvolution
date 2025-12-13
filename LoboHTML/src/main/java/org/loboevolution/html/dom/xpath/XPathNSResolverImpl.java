@@ -61,6 +61,7 @@ public class XPathNSResolverImpl implements XPathNSResolver {
                     && (((type = parent.getNodeType()) == Node.ELEMENT_NODE) ||
                     ((type = parent.getNodeType()) == Node.DOCUMENT_NODE) ||
                     ((type = parent.getNodeType()) == Node.ATTRIBUTE_NODE) ||
+                    ((type = parent.getNodeType()) == Node.COMMENT_NODE) ||
                     (type == Node.ENTITY_REFERENCE_NODE))) {
 
                 switch (type) {
@@ -93,6 +94,7 @@ public class XPathNSResolverImpl implements XPathNSResolver {
                         }
                         break;
                     case Node.ATTRIBUTE_NODE:
+                    case Node.COMMENT_NODE:
                         if (prefix.equals(parent.getPrefix())) {
                             return parent.getNamespaceURI();
                         }

@@ -51,6 +51,7 @@ public class Textreplacewholetext03Test extends LoboUnitTest {
         final String wholeText;
         doc = sampleXmlFile("hc_staff.xml");
         textNode = doc.createTextNode("New Text");
+        doc.getElementById("Yα").appendChild(textNode);
         replacedText = textNode.replaceWholeText(" a b c b ");
         wholeText = replacedText.getWholeText();
         assertEquals(" a b c b ", wholeText, "Textreplacewholetext03Assert2");

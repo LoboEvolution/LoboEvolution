@@ -37,7 +37,7 @@
             <code>Accountant</code>
             <sup>56,000</sup>
             <var>Female</var>
-            <acronym title="Yes" xsi:noNamespaceSchemaLocation="Yes">1230 North Ave. Dallas, Texas 98551</acronym>
+            <acronym title="Yes" class="Yes" dir="rtl" xsi:noNamespaceSchemaLocation="Yes">1230 North Ave. Dallas, Texas 98551</acronym>
         </p>
         <p xmlns:dmstc="http://www.usa.com">
             <em>EMP0002</em>

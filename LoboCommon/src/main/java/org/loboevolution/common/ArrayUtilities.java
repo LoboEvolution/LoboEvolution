@@ -27,8 +27,7 @@
 package org.loboevolution.common;
 
 import java.awt.*;
-import java.util.Collection;
-import java.util.Collections;
+import java.util.*;
 import java.util.List;
 import java.util.Objects;
 
@@ -125,4 +124,21 @@ public class ArrayUtilities {
 		}
 		return false;
 	}
+
+    /**
+     * <p>parseCoords.</p>
+     *
+     * @param coords a String object.
+     * @return an array of {@link java.lang.Integer} objects.
+     */
+    public static int[] parseCoords(String coords) {
+        if (coords == null || coords.trim().isEmpty()) {
+            return new int[0];
+        }
+        return Arrays.stream(coords.split(","))
+                .map(String::trim)
+                .filter(s -> !s.isEmpty())
+                .mapToInt(Integer::parseInt)
+                .toArray();
+    }
 }

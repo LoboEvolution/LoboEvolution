@@ -54,7 +54,8 @@ public class AlertsExtension implements BeforeTestExecutionCallback, AfterTestEx
         if (compareValues != null) {
             Object[] expected = (Object[]) context.getStore(ExtensionContext.Namespace.create(getClass())).get(EXPECTED_KEY, Object.class);
             Object[] actual = getActualValue(context);
-            System.out.println(Arrays.toString(expected) + " " + Arrays.toString(actual));
+            System.out.println(Arrays.toString(expected));
+            System.out.println(Arrays.toString(actual));
             assertArrayEquals(expected, actual);
         }
     }

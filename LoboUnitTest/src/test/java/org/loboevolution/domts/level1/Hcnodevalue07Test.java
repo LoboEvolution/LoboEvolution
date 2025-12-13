@@ -27,6 +27,7 @@
 
 package org.loboevolution.domts.level1;
 
+import org.htmlunit.cssparser.dom.DOMException;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
@@ -34,8 +35,7 @@ import org.loboevolution.html.node.DocumentType;
 import org.loboevolution.html.node.NamedNodeMap;
 import org.loboevolution.html.node.Node;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -66,7 +66,13 @@ public class Hcnodevalue07Test extends LoboUnitTest {
         assertNotNull(newNode, "Hcnodevalue07Assert3");
         newValue = newNode.getNodeValue();
         assertNull(newValue, "Hcnodevalue07Assert4");
-        newNode.setNodeValue("This should have no effect");
+        boolean success = false;
+        try {
+            newNode.setNodeValue("This should have no effect");
+        } catch (final DOMException ex) {
+            success = (ex.getCode() == DOMException.INVALID_MODIFICATION_ERR);
+        }
+        assertTrue(success, "Nodevalue05Assert2");
         newValue = newNode.getNodeValue();
         assertNull(newValue, "Hcnodevalue07Assert5");
 

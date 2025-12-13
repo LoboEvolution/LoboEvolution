@@ -311,12 +311,17 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 	public DOMTokenList getRelList() {
 		final DOMTokenListImpl tokList = new DOMTokenListImpl(this);
 		final String rel = getRel();
-		if(Strings.isNotBlank(rel)){
+		if(rel != null){
 			final String[] listString = rel.split(" ");
 			final List<String> names = Arrays.asList(listString);
 			names.forEach(tokList::populate);
 		}
 		return tokList;
+	}
+
+	@Override
+	public void setRelList(String rel) {
+		setRel(rel == null ? "null": rel);
 	}
 
 	/** {@inheritDoc} */

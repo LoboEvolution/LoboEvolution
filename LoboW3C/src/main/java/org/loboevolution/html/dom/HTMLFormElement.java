@@ -206,4 +206,34 @@ public interface HTMLFormElement extends HTMLElement {
      */
     void submit();
 
+    /**
+     * Sets or retrieves the relationship between the object and the destination of the link.
+     *
+     * @return a {@link java.lang.String} object.
+     */
+    String getRel();
+
+
+    /**
+     * <p>setRel.</p>
+     *
+     * @param rel a {@link java.lang.String} object.
+     */
+    void setRel(String rel);
+
+
+    /**
+     * <p>getRelList.</p>
+     *
+     * @return a {@link DOMTokenList} object.
+     */
+    DOMTokenList getRelList();
+
+    /**
+     * <p>setRelList.</p>
+     *
+     * @param rel a {@link java.lang.String} object.
+     */
+    void setRelList(String rel);
+
 }

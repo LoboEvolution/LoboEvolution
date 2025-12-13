@@ -1719,11 +1719,12 @@ public class DocumentTest extends LoboUnitTest {
                 +  "      function test() {\n"
                 +  "        try {\n"
                 +  "          var event = document.createEvent('MouseEvent');\n"
-                +  "         alert(event.target);\n"
+                +  "          alert(event.target);\n"
                 +  "          event.initMouseEvent('click', true, true, window,\n"
                 +  "               1, 0, 0, 0, 0, false, false, false, false, 0, null);\n"
-                +  "         alert(event.target);\n"
+                +  "          alert(event.target);\n"
                 +  "          document.getElementById('d').dispatchEvent(event);\n"
+                +  "          document.getElementById('d').click();"
                 +  "        } catch (e) {alert('exception') }\n"
                 +  "      }\n"
                 +  "    </script>\n"
@@ -1734,7 +1735,7 @@ public class DocumentTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("function onload(event) {alert(\"hi\") }")
+    @Alerts("function onload_12139181() { alert(\"hi\") }")
     public void createEventOverridden() {
         final String html =
                 "<html>\n"
@@ -1747,6 +1748,7 @@ public class DocumentTest extends LoboUnitTest {
                 +  "          event.initMouseEvent('click', true, true, window,\n"
                 +  "               1, 0, 0, 0, 0, false, false, false, false, 0, null);\n"
                 +  "          document.getElementById('d').dispatchEvent(event);\n"
+                +  "          document.getElementById('d').click();"
                 +  "        } catch (e) {alert('exception') }\n"
                 +  "      }\n"
                 +  "    </script>\n"

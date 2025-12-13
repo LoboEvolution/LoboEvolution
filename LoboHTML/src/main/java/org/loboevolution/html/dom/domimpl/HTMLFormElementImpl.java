@@ -26,7 +26,9 @@
 package org.loboevolution.html.dom.domimpl;
 
 import org.loboevolution.common.Nodes;
+import org.loboevolution.common.Strings;
 import org.loboevolution.gui.HtmlRendererContext;
+import org.loboevolution.html.dom.DOMTokenList;
 import org.loboevolution.html.dom.HTMLFormControlsCollection;
 import org.loboevolution.html.dom.HTMLFormElement;
 import org.loboevolution.html.dom.filter.FormFilter;
@@ -45,6 +47,7 @@ import org.mozilla.javascript.Function;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -139,7 +142,8 @@ public class HTMLFormElementImpl extends HTMLElementImpl implements HTMLFormElem
 	/** {@inheritDoc} */
 	@Override
 	public String getEnctype() {
-		return getAttribute("enctype");
+		String enctype = getAttribute("enctype");
+		return Strings.isNotBlank(enctype) && !"null".equals(enctype) ? enctype : "application/x-www-form-urlencoded";
 	}
 
 	/** {@inheritDoc} */
@@ -253,7 +257,10 @@ public class HTMLFormElementImpl extends HTMLElementImpl implements HTMLFormElem
 	/** {@inheritDoc} */
 	@Override
 	public void setEnctype(final String enctype) {
-		setAttribute("enctype", enctype);
+		if (enctype.equalsIgnoreCase("application/x-www-form-urlencoded") ||
+				enctype.equalsIgnoreCase("multipart/form-data")
+				|| enctype.equalsIgnoreCase("text/plain"))
+			setAttribute("enctype", enctype);
 	}
 
 	/** {@inheritDoc} */
@@ -344,15 +351,14 @@ public class HTMLFormElementImpl extends HTMLElementImpl implements HTMLFormElem
 	/** {@inheritDoc} */
 	@Override
 	public String getEncoding() {
-		// TODO Auto-generated method stub
-		return null;
+		return getEnctype();
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void setEncoding(final String encoding) {
-		// TODO Auto-generated method stub
-		
+		setEnctype(encoding);
+
 	}
 
 	/** {@inheritDoc} */
@@ -381,6 +387,33 @@ public class HTMLFormElementImpl extends HTMLElementImpl implements HTMLFormElem
 	public boolean reportValidity() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public String getRel() {
+		return getAttribute("rel");
+	}
+
+	@Override
+	public void setRel(final String rel) {
+		setAttribute("rel", rel);
+	}
+
+	@Override
+	public DOMTokenList getRelList() {
+		final DOMTokenListImpl tokList = new DOMTokenListImpl(this);
+		final String rel = getRel();
+		if(rel != null){
+			final String[] listString = rel.split(" ");
+			final List<String> names = Arrays.asList(listString);
+			names.forEach(tokList::populate);
+		}
+		return tokList;
+	}
+
+	@Override
+	public void setRelList(String rel) {
+		setRel(rel == null ? "null": rel);
 	}
 
 	/**

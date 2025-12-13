@@ -46,20 +46,20 @@ public class HTMLBodyElementTest extends LoboUnitTest {
     public void defaultPaddingAndMargins() {
         final String html =
                 "<html>\n"
-                        + "  <head>\n"
-                        + "    <script>\n"
-                        + "      function test() {\n"
-                        + "        var b = document.getElementById('body');\n"
-                        + "        var s = b.currentStyle ? b.currentStyle : getComputedStyle(b, null);\n"
-                        + "        alert(s.padding + ',' + s.paddingLeft + ',' + s.paddingRight + ',' + s.paddingTop + ',' + s.paddingBottom);\n"
-                        + "        alert(b.style.padding + ',' + b.style.paddingLeft + ',' + b.style.paddingRight + ',' + b.style.paddingTop + ',' + b.style.paddingBottom);\n"
-                        + "        alert(s.margin + ',' + s.marginLeft + ',' + s.marginRight + ',' + s.marginTop + ',' + s.marginBottom);\n"
-                        + "        alert(b.style.margin + ',' + b.style.marginLeft + ',' + b.style.marginRight + ',' + b.style.marginTop + ',' + b.style.marginBottom);\n"
-                        + "      }\n"
-                        + "    </script>\n"
-                        + "  </head>\n"
-                        + "  <body id='body' onload='test()'>blah</body>\n"
-                        + "</html>";
+                + "  <head>\n"
+                + "    <script>\n"
+                + "      function test() {\n"
+                + "        var b = document.getElementById('body');\n"
+                + "        var s = b.currentStyle ? b.currentStyle : getComputedStyle(b, null);\n"
+                + "        alert(s.padding + ',' + s.paddingLeft + ',' + s.paddingRight + ',' + s.paddingTop + ',' + s.paddingBottom);\n"
+                + "        alert(b.style.padding + ',' + b.style.paddingLeft + ',' + b.style.paddingRight + ',' + b.style.paddingTop + ',' + b.style.paddingBottom);\n"
+                + "        alert(s.margin + ',' + s.marginLeft + ',' + s.marginRight + ',' + s.marginTop + ',' + s.marginBottom);\n"
+                + "        alert(b.style.margin + ',' + b.style.marginLeft + ',' + b.style.marginRight + ',' + b.style.marginTop + ',' + b.style.marginBottom);\n"
+                + "      }\n"
+                + "    </script>\n"
+                + "  </head>\n"
+                + "  <body id='body' onload='test()'>blah</body>\n"
+                + "</html>";
         checkHtmlAlert(html);
     }
 
@@ -246,7 +246,7 @@ public class HTMLBodyElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"function HTMLBodyElement() { [native code] }", "ELEMENT_NODE, ATTRIBUTE_NODE, TEXT_NODE, CDATA_SECTION_NODE, ENTITY_REFERENCE_NODE, "
+    @Alerts({"function HTMLBodyElement", "ELEMENT_NODE, ATTRIBUTE_NODE, TEXT_NODE, CDATA_SECTION_NODE, ENTITY_REFERENCE_NODE, "
             + "ENTITY_NODE, PROCESSINGINSTRUCTION_NODE, COMMENT_NODE, DOCUMENT_NODE, DOCUMENT_TYPE_NODE, "
             + "DOCUMENT_FRAGMENT_NODE, NOTATION_NODE, DOCUMENT_POSITION_DISCONNECTED, "
             + "DOCUMENT_POSITION_PRECEDING, "

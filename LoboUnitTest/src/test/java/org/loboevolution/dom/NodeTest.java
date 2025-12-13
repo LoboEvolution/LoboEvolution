@@ -503,7 +503,7 @@ public class NodeTest extends LoboUnitTest {
     @Test
     @Alerts({"<div id=\"myDiv2\"></div><div id=\"myDiv3\"></div>", "myDiv2",
             "<div id=\"myDiv3\"></div>"})
-    public void replaceChild_EmptyDocumentFragment() {
+    public void replaceChildEmptyDocumentFragment() {
         final String html = "<html><head>"
                 + "<script>\n"
                 + "  function test() {\n"
@@ -1058,21 +1058,21 @@ public class NodeTest extends LoboUnitTest {
     public void before() {
         final String html =
                 "<html><head>\n"
-                        + "  <script>\n"
-                        + "    function test() {\n"
-                        + "      var parent = document.createElement('div');\n"
-                        + "      var child = document.createElement('p');\n"
-                        + "      parent.appendChild(child);\n"
-                        + "      var span = document.createElement('span');\n"
-                        + "      if (child.before) {"
-                        + "        child.before(span, null, undefined, 'hello');\n"
-                        + "      }\n"
-                        + "     alert(parent.outerHTML);\n"
-                        + "    }\n"
-                        + "  </script>\n"
-                        + "</head>\n"
-                        + "<body onload='test()'></body>\n"
-                        + "</html>";
+                + "  <script>\n"
+                + "    function test() {\n"
+                + "      var parent = document.createElement('div');\n"
+                + "      var child = document.createElement('p');\n"
+                + "      parent.appendChild(child);\n"
+                + "      var span = document.createElement('span');\n"
+                + "      if (child.before) {"
+                + "        child.before(span, null, undefined, 'hello');\n"
+                + "      }\n"
+                + "     alert(parent.outerHTML);\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'></body>\n"
+                + "</html>";
 
         checkHtmlAlert(html);
     }
@@ -1152,7 +1152,7 @@ public class NodeTest extends LoboUnitTest {
 
     @Test
     @Alerts({"1", "2", "second"})
-    public void eventListenerReturn_false() {
+    public void eventListenerReturnFalse() {
         final String html
                 = "<html><head>\n"
                 + "<script>\n"

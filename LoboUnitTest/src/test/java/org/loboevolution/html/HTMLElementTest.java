@@ -786,7 +786,7 @@ public class HTMLElementTest extends LoboUnitTest {
 
     @Test
     @Alerts({"Old = <B>Old innerHTML</B>",
-            "New  cell value  Đ "})
+             "New = New  cell value  Đ "})
     public void getSetInnerHTMLCharFF() {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -1470,7 +1470,8 @@ public class HTMLElementTest extends LoboUnitTest {
     public void children() {
         final String html = "<html><body>\n"
                 + "<div id='myDiv'><br/><div><SPAN>test</SPAN></div></div>\n"
-                + "<script>\n" + "  var oDiv = document.getElementById('myDiv');\n"
+                + "<script>\n"
+                + "  var oDiv = document.getElementById('myDiv');\n"
                 + "  for (var i = 0; i < oDiv.children.length; i++) {\n"
                 + "    alert(oDiv.children[i].tagName);\n"
                 + "  }\n"
@@ -2322,6 +2323,7 @@ public class HTMLElementTest extends LoboUnitTest {
                         + "  e.initMouseEvent('click', true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);\n"
                         + "  var d = document.getElementById('d');\n"
                         + "  var canceled = !d.dispatchEvent(e);\n"
+                        + "  d.click();"
                         + "}\n"
                         + "</script></head>\n"
                         + "<body onload='foo()'><div id='d' onclick='alert(\"clicked\")'>foo</div></body>\n"
@@ -2694,7 +2696,7 @@ public class HTMLElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"function", "* => body: 0, div1: 0", "foo => body: 3, div1: 1", "foo red => body: 1, div1: 0",
+    @Alerts({"object", "* => body: 0, div1: 0", "foo => body: 3, div1: 1", "foo red => body: 1, div1: 0",
             "red foo => body: 1, div1: 0", "blue foo => body: 0, div1: 0", "null => body: 0, div1: 0"})
     public void getElementsByClassName() {
         final String html

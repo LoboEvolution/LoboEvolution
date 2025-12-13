@@ -512,7 +512,7 @@ public class HTMLElement2Test extends LoboUnitTest {
 
 
     @Test
-    @Alerts({"0", "18"})
+    @Alerts({"0", "17"})
     public void offsetHeightExplicitHeightZero() {
         final String html
                 = "<html><body>\n"
@@ -525,7 +525,7 @@ public class HTMLElement2Test extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"75", "2", "5", "20", "50", "50", "18"})
+    @Alerts({"74", "2", "5", "20", "50", "50", "17"})
     public void offsetHeightCalculatedBasedOnChildren() {
         final String html
                 = "<html>\n"

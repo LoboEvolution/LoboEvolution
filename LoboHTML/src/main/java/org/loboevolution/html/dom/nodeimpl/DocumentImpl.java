@@ -280,7 +280,7 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
 	public Element getLastElementChild() {
 		final long count = nodeList.stream().filter(n -> n instanceof Element).count();
 		final Stream<Node> stream = nodeList.stream();
-		return (Element) stream.filter(n -> n instanceof Element).skip(count - 1).findFirst().orElse(null);
+		return (Element) stream.filter(n -> n instanceof Element).skip(count > 0 ? count - 1 : 0).findFirst().orElse(null);
 	}
 
 	/** {@inheritDoc} */
@@ -341,7 +341,7 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
 				final NodeListImpl childNodes = (NodeListImpl) getDescendents(new ElementFilter(null), true);
 				childNodes.forEach(child -> {
 					for (final Selector select : selectorList) {
-						if (child instanceof Element && ssa.selects(select, (HTMLElement) child, null)) {
+						if (child instanceof Element && ssa.selects(select, child, null)) {
 							al.add(child);
 						}
 					}
@@ -363,7 +363,7 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
                 stream().
                 filter(node -> node.getNodeType() == Node.DOCUMENT_TYPE_NODE).
                 findFirst().
-                orElse(new DocumentTypeImpl());
+                orElse(null);
 	}
 
 	/**
@@ -414,10 +414,9 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
 
 	/** {@inheritDoc} */
 	@Override
-	public Attr createAttributeNS(final String nUri, final String qName) throws DOMException {
+	public Attr createAttributeNS(final String namespaceURI, final String qName) throws DOMException {
 		String prefix = null;
 		String qualifiedName = qName;
-		final String namespaceURI = nUri;
 		if (Strings.isBlank(qualifiedName)) {
 			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
 		}
@@ -1137,6 +1136,11 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
 	/** {@inheritDoc} */
 	@Override
 	public Node importNode(final Node importedNode, final boolean deep) throws DOMException {
+
+		if (getDoctype() == null) {
+			setDoctype(new DocumentTypeImpl());
+		}
+
 		switch (importedNode.getNodeType()) {
 			case ATTRIBUTE_NODE:
 				final Attr attr;

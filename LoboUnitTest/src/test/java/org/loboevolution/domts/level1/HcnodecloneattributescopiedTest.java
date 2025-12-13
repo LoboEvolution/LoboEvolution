@@ -71,6 +71,7 @@ public class HcnodecloneattributescopiedTest extends LoboUnitTest {
         expected.add("title");
         expected.add("class");
         expected.add("dir");
+        expected.add("xsi:noNamespaceSchemaLocation");
 
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("acronym");

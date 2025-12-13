@@ -29,10 +29,7 @@ package org.loboevolution.html.dom.domimpl;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
-import org.loboevolution.html.node.AbstractList;
-import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.Element;
-import org.loboevolution.html.node.Node;
+import org.loboevolution.html.node.*;
 import org.loboevolution.traversal.NodeFilter;
 
 import java.util.Arrays;
@@ -46,6 +43,19 @@ public class HTMLCollectionImpl extends AbstractList<Node> implements HTMLCollec
 	private final NodeImpl rootNode;
 
 	private final NodeFilter filter;
+
+	/**
+	 * <p>
+	 * Constructor for HTMLCollectionImpl.
+	 * </p>
+	 * @param rootNode a {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} object.
+	 * @param list a {@link NodeList} object.
+	 */
+	public HTMLCollectionImpl(final NodeImpl rootNode, final NodeList list) {
+		setList((NodeListImpl) list);
+		this.rootNode = rootNode;
+		this.filter = null;
+	}
 
 	 /**
 	 * <p>
@@ -63,7 +73,9 @@ public class HTMLCollectionImpl extends AbstractList<Node> implements HTMLCollec
 	/** {@inheritDoc} */
 	@Override
 	public int getLength() {
-		setList(Arrays.asList(rootNode.getNodeList(filter).toArray()));
+		if (filter != null) {
+			setList(Arrays.asList(rootNode.getNodeList(filter).toArray()));
+		}
 		return this.size();
 	}
 

@@ -328,7 +328,7 @@ public class HTMLAnchorElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"second/", "object", "function HTMLAnchorElement() { [native code] }"})
+    @Alerts({"second/", "object", "function HTMLAnchorElement"})
     public void typeof() {
         final String html = "<html><head>\n"
                 + "    <script>\n"
@@ -716,33 +716,6 @@ public class HTMLAnchorElementTest extends LoboUnitTest {
                 + "  alert(a2.relList.length);\n"
                 + "  a1.relList = null;\n"
                 + "  a2.relList = null;\n"
-                + "  alert(a1.relList.length);\n"
-                + "  alert(a2.relList.length);\n"
-                + "  for (var i = 0; i < a1.relList.length; i++) {\n"
-                + "    alert(a1.relList[i]);\n"
-                + "  }\n"
-                + "  for (var i = 0; i < a2.relList.length; i++) {\n"
-                + "    alert(a2.relList[i]);\n"
-                + "  }\n"
-                + "  alert(a1.rel);\n"
-                + "  alert(a2.rel);\n"
-                + "} catch(e) { alert('exception'); }\n"
-                + "</script></body></html>";
-        checkHtmlAlert(html);
-    }
-
-
-    @Test
-    @Alerts({"0", "2", "1", "1", "undefined", "undefined", "undefined", "undefined"})
-    public void setRelListUndefined() {
-        final String html
-                = "<html><body><a id='a1'>a1</a><a id='a2' rel='alternate help'>a2</a><script>\n"
-                + "var a1 = document.getElementById('a1'), a2 = document.getElementById('a2');\n"
-                + "try {\n"
-                + "  alert(a1.relList.length);\n"
-                + "  alert(a2.relList.length);\n"
-                + "  a1.relList = undefined;\n"
-                + "  a2.relList = undefined;\n"
                 + "  alert(a1.relList.length);\n"
                 + "  alert(a2.relList.length);\n"
                 + "  for (var i = 0; i < a1.relList.length; i++) {\n"

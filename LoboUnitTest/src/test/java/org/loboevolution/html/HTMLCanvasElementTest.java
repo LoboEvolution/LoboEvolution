@@ -86,16 +86,16 @@ public class HTMLCanvasElementTest extends LoboUnitTest {
     public void toDataUrl() {
         final String html =
                 "<html>\n"
-                        + "<body><canvas id='myCanvas'></canvas>\n"
-                        + "    <script>\n" 
+                + "<body><canvas id='myCanvas'></canvas>\n"
+                + "    <script>\n"
                 + "try {\n"
-                        + "  var canvas = document.getElementById('myCanvas');\n"
-                        + "  alert(canvas.toDataURL());\n"
-                        + "}\n"
-                        + "catch (e) { alert('exception'); }\n"
-                        + "</script>\n"
-                        + "</body>\n"
-                        + "</html>";
+                + "  var canvas = document.getElementById('myCanvas');\n"
+                + "  alert(canvas.toDataURL());\n"
+                + "}\n"
+                + "catch (e) { alert('exception'); }\n"
+                + "</script>\n"
+                + "</body>\n"
+                + "</html>";
         checkHtmlAlert(html);
     }
 
@@ -123,16 +123,16 @@ public class HTMLCanvasElementTest extends LoboUnitTest {
     public void toDataUrlPng() {
         final String html =
                 "<html>\n"
-                        + "<body><canvas id='myCanvas'></canvas>\n"
-                        + "    <script>\n" 
+                + "<body><canvas id='myCanvas'></canvas>\n"
+                + "    <script>\n"
                 + "try {\n"
-                        + "  var canvas = document.getElementById('myCanvas');\n"
-                        + "  alert(canvas.toDataURL('image/png'));\n"
-                        + "}\n"
-                        + "catch (e) { alert('exception'); }\n"
-                        + "</script>\n"
-                        + "</body>\n"
-                        + "</html>";
+                + "  var canvas = document.getElementById('myCanvas');\n"
+                + "  alert(canvas.toDataURL('image/png'));\n"
+                + "}\n"
+                + "catch (e) { alert('exception'); }\n"
+                + "</script>\n"
+                + "</body>\n"
+                + "</html>";
         checkHtmlAlert(html);
     }
 

@@ -30,7 +30,11 @@ package org.loboevolution.html.dom.nodeimpl;
 
 import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.html.node.DocumentFragment;
+import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
+import org.loboevolution.html.node.NodeList;
+
+import java.util.stream.Stream;
 
 /**
  * <p>DocumentFragmentImpl class. </p>
@@ -85,5 +89,39 @@ public class DocumentFragmentImpl extends NodeImpl implements DocumentFragment {
 	@Override
 	public void setNodeValue(final String nodeValue) throws DOMException {
 		throw new DOMException(DOMException.INVALID_MODIFICATION_ERR, "readonly node");
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public int getChildElementCount() {
+		return (int) nodeList.stream().
+				filter(n -> n instanceof Element &&
+						n.getNodeType() != PROCESSING_INSTRUCTION_NODE &&
+						n.getNodeType() != DOCUMENT_TYPE_NODE &&
+						!"xml".equals(n.getNodeName())).count();
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Element getFirstElementChild() {
+		return (Element) nodeList.stream().filter(n -> n instanceof Element).findFirst().orElse(null);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Element getLastElementChild() {
+		final long count = nodeList.stream().filter(n -> n instanceof Element).count();
+		final Stream<Node> stream = nodeList.stream();
+		return (Element) stream.filter(n -> n instanceof Element).skip(count > 0 ? count - 1 : 0).findFirst().orElse(null);
+	}
+
+	@Override
+	public Element querySelector(String selectors) {
+		return null;
+	}
+
+	@Override
+	public NodeList querySelectorAll(String selectors) {
+		return null;
 	}
 }

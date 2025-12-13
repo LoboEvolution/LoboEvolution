@@ -213,6 +213,13 @@ public interface HTMLLinkElement extends HTMLElement {
 	DOMTokenList getRelList();
 
 	/**
+	 * <p>setRelList.</p>
+	 *
+	 * @param rel a {@link java.lang.String} object.
+	 */
+	void setRelList(String rel);
+
+	/**
 	 * Sets or retrieves the relationship between the object and the destination of
 	 * the link.
 	 *

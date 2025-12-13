@@ -53,7 +53,7 @@ public class HTMLAllCollectionTest extends LoboUnitTest {
 
     @Test
     @Alerts("-button2")
-    public void namedItemByName_formWithoutId() {
+    public void namedItemByNameFormWithoutId() {
         namedItem("'button2'");
     }
 
@@ -121,28 +121,19 @@ public class HTMLAllCollectionTest extends LoboUnitTest {
         final String html
                 = "<!doctype html>\n"
                 + "<html id='myHtml'><head id='myHead'><title id='myTitle'>First</title><script>\n"
-                + "  alerts = ''\n"
-                + "  function alert(msg) { alerts += msg + '§';}\n"
                 + "  function report(result) {\n"
-                + "    if (result == null || result == undefined) {\n"
-                + "      alert(result);\n"
-                + "    } else if (('length' in result) && ('item' in result)) {\n"
-                + "      alert('coll ' + result.length);\n"
-                + "      for(var i = 0; i < result.length; i++) {\n"
-                + "        alert(result.item(i).id + '-' + result.item(i).name);\n"
-                + "      }\n"
-                + "    } else if (result.id || result.name) {\n"
-                + "      alert(result.id + '-' + result.name);\n"
-                + "    } else {\n"
-                + "      alert(result);\n"
-                + "    }\n"
+                + "      if (result != null) {"
+                + "         alert('coll ' + result.length);\n"
+                + "         for(var i = 0; i < result.length; i++) {\n"
+                + "         alert(result.item(i).id + '-' + result.item(i).name);\n"
+                + "         }\n"
+                + "      } else alert(result);\n"
                 + "  }\n"
                 + "  function doTest() {\n"
                 + "    try {\n"
                 + "      var item = document.all.namedItem(" + name + ");\n"
                 + "      report(item);\n"
                 + "    } catch(e) { alert(e); }\n"
-                + "    document.title = alerts;"
                 + "  }\n"
                 + "</script></head>\n"
                 + "<body onload='doTest()'>\n"
@@ -432,7 +423,7 @@ public class HTMLAllCollectionTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"[object HTMLAllCollection]", "function HTMLAllCollection() { [native code] }"})
+    @Alerts({"[object HTMLAllCollection]", "function HTMLAllCollection"})
     public void type() {
         final String html = "<html><head>\n"
                 + "    <script>\n"

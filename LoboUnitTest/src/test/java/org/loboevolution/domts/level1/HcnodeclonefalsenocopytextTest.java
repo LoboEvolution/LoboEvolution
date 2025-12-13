@@ -39,7 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * The "cloneNode(deep)" method does not copy text unless it
- * is deep cloned.(Test for deep=false)
+ * is deeply cloned.(Test for deep=false)
  * <p>
  * Retrieve the fourth child of the second employee and
  * the "cloneNode(deep)" method with deep=false.   The

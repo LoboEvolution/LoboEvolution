@@ -728,7 +728,8 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
             return this.element.getParentNode() == null ? null : CSSValues.AUTO.getValue();
         }
 
-        return this.element.getParentNode() == null ? "" : element.calculateHeight(false, false, true) + "px";
+        int height = element.calculateHeight(false, false, false);
+        return height > 0 ? height + "px" : CSSValues.AUTO.getValue();
     }
 
     /**
@@ -1250,7 +1251,8 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
             return this.element.getParentNode() == null ? "" : CSSValues.AUTO.getValue();
         }
 
-        return this.element.getParentNode() == null ? "" : element.calculateWidth(false, false, false) + "px";
+        int width = element.calculateWidth(false, false, false);
+        return width > 0 ? width + "px" : CSSValues.AUTO.getValue();
     }
 
     /**

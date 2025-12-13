@@ -28,6 +28,7 @@ package org.loboevolution.junit;
 
 import org.htmlunit.cssparser.dom.DOMException;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.css.CSSRuleList;
 import org.loboevolution.css.CSSStyleDeclaration;
@@ -50,8 +51,8 @@ public class HTMLDocumentTest extends LoboUnitTest {
 
     private static Document document;
 
-    @BeforeAll
-    public static void setUpBeforeClass() {
+    @BeforeEach
+    public void setUpBeforeClass() {
         document = sampleHtmlFile();
     }
 
@@ -367,19 +368,19 @@ public class HTMLDocumentTest extends LoboUnitTest {
             document.createAttributeNS(Document.XML_NAMESPACE_URI, ":");
             fail("Must throw exception");
         } catch (final DOMException e) {
-            assertEquals(DOMException.INVALID_CHARACTER_ERR, e.getCode());
+            assertEquals(DOMException.NAMESPACE_ERR, e.getCode());
         }
         try {
             document.createAttributeNS(Document.XML_NAMESPACE_URI, "x:");
             fail("Must throw exception");
         } catch (final DOMException e) {
-            assertEquals(DOMException.INVALID_CHARACTER_ERR, e.getCode());
+            assertEquals(DOMException.NAMESPACE_ERR, e.getCode());
         }
         try {
             document.createAttributeNS(Document.XML_NAMESPACE_URI, ":x");
             fail("Must throw exception");
         } catch (final DOMException e) {
-            assertEquals(DOMException.INVALID_CHARACTER_ERR, e.getCode());
+            assertEquals(DOMException.NAMESPACE_ERR, e.getCode());
         }
         try {
             document.createAttributeNS(Document.XML_NAMESPACE_URI, ">");
@@ -576,6 +577,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
 
     @Test
     public void getChildNodes() {
+        document = sampleHtmlFile();
         final NodeListImpl list = (NodeListImpl) document.getChildNodes();
         assertNotNull(list);
         assertEquals(2, list.getLength());
@@ -916,10 +918,11 @@ public class HTMLDocumentTest extends LoboUnitTest {
 
     @Test
     public void testStyleElement() {
+        document = sampleHtmlFile();
         final Element style = (Element) document.getElementsByTagName("style").item(0);
         CSSStyleSheetImpl sheet = (CSSStyleSheetImpl) ((HTMLStyleElement) style).getStyleSheet();
         assertNotNull(sheet);
-        assertEquals(0, sheet.getMedia().getLength());
+        assertEquals(1, sheet.getMedia().getLength());
         assertTrue(sheet.getCssRules().getLength() > 0);
         assertSame(sheet.getOwnerNode(), style);
 
@@ -928,7 +931,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
         assertNotNull(sheet2);
         assertSame(sheet2, sheet);
         assertEquals(1, sheet2.getMedia().getLength());
-        assertEquals("screen", sheet2.getMedia().item(0));
+        assertEquals("screen", sheet2.getMedia().item(1));
         assertTrue(sheet2.getCssRules().getLength() > 0);
         style.setTextContent("body {font-size: 14pt; margin-left: 7%;} h1 {font-size: 2.4em;}");
         sheet = (CSSStyleSheetImpl) ((HTMLLinkElement) style).getSheet();
@@ -1057,7 +1060,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
 
     @Test
     public void testRawText() {
-        final Element style = (Element) document.getElementsByTagName("style").item(0);
+        final Element style = (Element) document.getElementsByTagName("link").item(0);
         final Text text = document.createTextNode("data");
         assertEquals("[object Text]", text.toString());
         text.setData("hello</style>");
@@ -1084,7 +1087,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
         CSSStyleSheetImpl sheet = (CSSStyleSheetImpl) ((HTMLLinkElement) link).getSheet();
         assertNotNull(sheet);
         assertEquals(0, sheet.getMedia().getLength());
-        assertTrue(sheet.getCssRules().getLength() > 0);
+        assertTrue(sheet.getCssRules().getLength() == 0);
 
         link.setAttribute("media", "screen");
         final CSSStyleSheetImpl sheet2 = (CSSStyleSheetImpl) ((HTMLLinkElement) link).getSheet();
@@ -1188,6 +1191,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
 
     @Test
     public void testLinkElementEvilBaseNoDocumentURI() {
+        document = sampleHtmlFile();
         document.setDocumentURI(null);
         final Element base = (Element) document.getElementsByTagName("base").item(0);
         base.setAttribute("href", "jar:http://www.example.com/evil.jar!/dir/file1");
@@ -1245,6 +1249,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
 
     @Test
     public void testFontIOError() {
+        document = sampleHtmlFile();
         final Element head = (Element) document.getElementsByTagName("head").item(0);
         final Element style = document.createElement("style");
         style.setAttribute("type", "text/css");

@@ -28,6 +28,7 @@ package org.loboevolution.junit;
 
 import org.htmlunit.cssparser.dom.DOMException;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.gui.LocalHtmlRendererConfig;
@@ -43,8 +44,8 @@ public class DOMImplementationTest extends LoboUnitTest {
 
     private static DOMImplementationImpl domImpl;
 
-    @BeforeAll
-    public static void setUpBeforeClass() {
+    @BeforeEach
+    public void setUpBeforeClass() {
         final UserAgentContext context = new UserAgentContext(new LocalHtmlRendererConfig(), true);
         context.setUserAgentEnabled(false);
         domImpl = new DOMImplementationImpl(context);

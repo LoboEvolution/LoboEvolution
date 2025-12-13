@@ -52,7 +52,7 @@ public class HTMLHtmlElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"[object HTMLHtmlElement]", "function HTMLHtmlElement() { [native code] }"})
+    @Alerts({"[object HTMLHtmlElement]", "function HTMLHtmlElement"})
     public void HTMLHtmlElementToString() {
         final String html = "<html id='myId'><head><script>\n"
                 + "  function test() {\n"

@@ -31,8 +31,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.loboevolution.html.node.EntityReference;
-import org.loboevolution.html.node.Node;
+import org.loboevolution.html.node.*;
+
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 /**
  * <p>Abstract EntityReferenceImpl class.</p>
@@ -83,5 +86,45 @@ public class EntityReferenceImpl extends NodeImpl implements EntityReference {
     @Override
     public int getNodeType() {
         return Node.ENTITY_REFERENCE_NODE;
+    }
+
+    @Override
+    public short compareDocumentPosition(Node other) {
+        if (other == this) {
+            return 0;
+        }
+
+        if (!Objects.equals(getOwnerDocument(), other.getOwnerDocument())) {
+            return DOCUMENT_POSITION_DISCONNECTED | DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC;
+        }
+
+        if (getNodeType() == Node.ENTITY_NODE && other.getNodeType() == Node.ENTITY_NODE) {
+            DocumentType docType = getOwnerDocument().getDoctype();
+            if (docType != null) {
+                NamedNodeMap entities = docType.getEntities();
+                int indexThis = -1, indexOther = -1;
+                for (int i = 0; i < entities.getLength(); i++) {
+                    Node n = entities.item(i);
+                    if (n == this) indexThis = i;
+                    if (n == other) indexOther = i;
+                }
+                if (indexThis != -1 && indexOther != -1) {
+                    short result = DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC;
+                    if (indexThis < indexOther) {
+                        result |= DOCUMENT_POSITION_PRECEDING; // 2
+                    } else {
+                        result |= DOCUMENT_POSITION_FOLLOWING; // 4
+                    }
+                    return result;
+                }
+            }
+            return DOCUMENT_POSITION_DISCONNECTED | DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC;
+        }
+
+        if (getNodeType() == Node.ENTITY_NODE || other.getNodeType() == Node.ENTITY_NODE) {
+            return DOCUMENT_POSITION_DISCONNECTED | DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC;
+        }
+
+        return DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC;
     }
 }

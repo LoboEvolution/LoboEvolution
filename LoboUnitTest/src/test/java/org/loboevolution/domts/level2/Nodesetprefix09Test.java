@@ -55,16 +55,13 @@ public class Nodesetprefix09Test extends LoboUnitTest {
         final Element element;
         doc = sampleXmlFile("staffNS.xml");
         element = doc.createElementNS("http://www.w3.org/DOM/Test/L2", "dom:elem");
-
-        {
-            boolean success = false;
-            try {
-                element.setPrefix(value);
-            } catch (final DOMException ex) {
-                success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
-            }
-            assertTrue(success);
+        boolean success = false;
+        try {
+            element.setPrefix(value);
+        } catch (final DOMException ex) {
+            success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
         }
+        assertTrue(success);
     }
 }
 

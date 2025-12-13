@@ -174,6 +174,8 @@ public class ElementFactory {
 		builders.put(HTMLTag.LINK, new LinkBuilder());
 		builders.put(HTMLTag.LEGEND, new LegendBuilder());
 		builders.put(HTMLTag.VIDEO, new VideoBuilder());
+        builders.put(HTMLTag.AREA, new AreaBuilder());
+        builders.put(HTMLTag.MAP, new MapBuilder());
 
 		builders.put(HTMLTag.RSS, new RSSBuilder());
 		builders.put(HTMLTag.CHANNEL, new ChannelBuilder());

@@ -232,16 +232,21 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, Cloneabl
 			final int length = newNode.getChildNodes().getLength();
 			if (deep && length == 0) {
 				final NodeListImpl childNodes = (NodeListImpl) getChildNodes();
-				childNodes.forEach(child -> newNode.appendChild(child.cloneNode(true)));
+				childNodes.forEach(newNode::appendChild);
 
 				if (newNode instanceof Element elem) {
                     final NamedNodeMap nnmap = elem.getAttributes();
 					if (nnmap != null) {
 						for (final Node attr : Nodes.iterable(nnmap)) {
-							elem.setAttributeNode((Attr) attr.cloneNode(true));
+							elem.setAttributeNode((Attr) attr);
 						}
 					}
 				}
+			} else if (!deep) {
+				while (newNode.getFirstChild() != null) {
+					newNode.removeChild(newNode.getFirstChild());
+				}
+				newNode.setParentImpl(null);
 			}
 			return newNode;
 		} catch (final Exception err) {
@@ -418,7 +423,8 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, Cloneabl
 	 * @return a {@link org.loboevolution.html.dom.HTMLCollection} object.
 	 */
 	public HTMLCollection getChildren() {
-		return new HTMLCollectionImpl(this, new ElementFilter(null));
+		this.nodeList.removeIf(node -> node.getNodeType() != Node.ELEMENT_NODE);
+		return new HTMLCollectionImpl(this, this.nodeList);
 	}
 
 	/**
@@ -669,7 +675,14 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, Cloneabl
 	@Override
 	public Node getPreviousSibling() {
 		final Node parent = getParentNode();
-		return parent == null ? null : parent.getPreviousTo(this);
+		if (parent != null) {
+			Node node = parent.getPreviousTo(this);
+			if (node instanceof DocumentFragment) {
+				return node.getFirstChild();
+			}
+			return parent.getPreviousTo(this);
+		}
+		return null;
 	}
 
 	/**
@@ -743,7 +756,7 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, Cloneabl
 	@Override
 	public String getTextContent() {
 
-		if(this instanceof DocumentType) {
+		if (this instanceof DocumentType) {
 			return null;
 		}
 
@@ -753,10 +766,19 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, Cloneabl
 			switch (type) {
 				case Node.CDATA_SECTION_NODE:
 				case Node.TEXT_NODE:
+					final String txtContent = child.getTextContent();
+					if (txtContent != null) {
+						sb.append(txtContent);
+					}
+					break;
 				case Node.ELEMENT_NODE:
-					final String textContent = child.getTextContent();
-					if (textContent != null) {
-						sb.append(textContent);
+					HTMLElement element = (HTMLElement) child;
+					RenderState rs = (RenderState) element.getRenderState();
+					if (!(element instanceof HTMLScriptElement) && rs.getDisplay() != RenderState.DISPLAY_NONE) {
+						final String textContent = child.getTextContent();
+						if (textContent != null) {
+							sb.append(textContent);
+						}
 					}
 					break;
 				default:
@@ -764,7 +786,7 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, Cloneabl
 			}
 		});
 
-		return sb.isEmpty() ? null : sb.toString();
+		return sb.isEmpty() ? null : sb.toString().trim();
 	}
 
 	/**
@@ -1014,6 +1036,7 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, Cloneabl
 	public boolean isEqualNode(final Node arg) {
 		return arg instanceof NodeImpl
 				&& getNodeType() == arg.getNodeType()
+                && Objects.equals(getNamespaceURI(), arg.getNamespaceURI())
 				&& Objects.equals(getNodeName().toUpperCase(), arg.getNodeName().toUpperCase())
 				&& Objects.equals(getNodeValue(), arg.getNodeValue())
 				&& ((getLocalName() == null && getLocalName() == null) || Objects.equals(getLocalName().toUpperCase(), arg.getLocalName().toUpperCase()));
@@ -1050,29 +1073,32 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, Cloneabl
 	/** {@inheritDoc} */
 	@Override
 	public String lookupPrefix(final String namespaceURI) {
+		if (namespaceURI == null) return null;
+        String prefix = getPrefix();
 
-		if (namespaceURI == null) {
-			return null;
-		}
-		switch (getNodeType()) {
-			case Node.ATTRIBUTE_NODE:
-				if (namespaceURI.equals(getNamespaceURI())) {
-					return getPrefix();
+		NamedNodeMap attributes = getAttributes();
+		if (attributes != null) {
+			for (int i = 0; i < attributes.getLength(); i++) {
+				Node attr = attributes.item(i);
+				String attrName = attr.getNodeName();
+				if (attrName.startsWith("xmlns:") && namespaceURI.equals(attr.getNodeValue())) {
+					return attrName.substring(6);
 				}
+			}
+		}
 
-				if (getParentNode() != null && getParentNode().getNodeType() == Node.ELEMENT_NODE) {
-					return getParentNode().lookupPrefix(namespaceURI);
-				}
-				return null;
-			case Node.ELEMENT_NODE:
-				if (namespaceURI.equals(getNamespaceURI())) {
-					return getPrefix();
-				}
-				return null;
-			default:
-				return null;
+        if (prefix != null && namespaceURI.equals(getNamespaceURI())) {
+			return prefix;
 		}
+
+		Node parent = getParentNode();
+		if (parent != null) {
+			return parent.lookupPrefix(namespaceURI);
+		}
+
+		return null;
 	}
+
 
 	/**
 	 * {@inheritDoc}

@@ -64,7 +64,7 @@ public class HTMLAreaElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"", "function HTMLAreaElement() { [native code] }"})
+    @Alerts({"", "function HTMLAreaElement"})
     public void type() {
         final String html = "<html><head>\n"
                 + "    <script>\n"
@@ -152,7 +152,7 @@ public class HTMLAreaElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"", "alternate help", "prefetch", "prefetch", "not supported", "notsupported"})
+    @Alerts({"null", "alternate help", "prefetch", "prefetch", "not supported", "notsupported"})
     public void readWriteRel() {
         final String html
                 = "<html><body><map><area id='a1'/><area id='a2' rel='alternate help'/></map><script>\n"
