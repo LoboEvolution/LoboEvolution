@@ -39,7 +39,6 @@ public class BorderStyleSetter implements SubPropertySetter {
 	private final String prefix;
 	private final String property;
 	private final String suffix;
-	final static String BORDER_WIDTH = "3px";
 
 	/**
 	 * <p>Constructor for BorderStyleSetter.</p>
@@ -61,13 +60,6 @@ public class BorderStyleSetter implements SubPropertySetter {
 
 		if (Strings.isNotBlank(newValue)) {
 			properties.setProperty(this.property, newValue);
-
-			if (BORDER_STYLE.equals(property)) {
-				properties.setProperty(BORDER_TOP_WIDTH, BORDER_WIDTH);
-				properties.setProperty(BORDER_BOTTOM_WIDTH, BORDER_WIDTH);
-				properties.setProperty(BORDER_LEFT_WIDTH, BORDER_WIDTH);
-				properties.setProperty(BORDER_RIGHT_WIDTH, BORDER_WIDTH);
-			}
 			
 			final String[] array = HtmlValues.splitCssValue(newValue);
 			final String prefix = this.prefix;

@@ -129,7 +129,7 @@ public final class ColorFactory {
 	final Color c = ColorFactory.getInstance().getColor(colorSpec);
         if (c != null) {
 		if (c.getRed() == 0 && c.getGreen() == 0 && c.getBlue() == 0) {
-			return element.getParentNode() == null ? null : defaultValue;
+		    return element.getParentNode() == null ? null : "rgb(0, 0, 0)";
 		}
 		final float alpha = (float) (c.getAlpha()) / 255.0f;
 		if (alpha > 0 && alpha < 1) {

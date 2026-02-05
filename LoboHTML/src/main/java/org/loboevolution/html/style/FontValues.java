@@ -71,7 +71,7 @@ public class FontValues extends HtmlValues {
 		final HtmlRendererConfig config = document.getConfig();
 
 		String fontSize = style.getFontSize();
-		final String fontFamiy = style.getFontFamily();
+		final String fontFamily = style.getFontFamily();
 		final String fontStyle = style.getFontStyle();
 		final String fontVariant = style.getFontVariant();
 		final String fontWeight = style.getFontWeight();
@@ -82,7 +82,7 @@ public class FontValues extends HtmlValues {
 
 		if (key.getFontSize() > 0 ||
 				Strings.isNotBlank(fontSize) ||
-				Strings.isNotBlank(fontFamiy) ||
+				Strings.isNotBlank(fontFamily) ||
 				Strings.isNotBlank(fontVariant) ||
 				Strings.isNotBlank(fontWeight) ||
 				Strings.isNotBlank(verticalAlign) ||
@@ -92,7 +92,7 @@ public class FontValues extends HtmlValues {
 
 			if (Strings.isBlank(fontSize) && key.getFontSize() == 0) fontSize = null;
 
-			key.setFontFamily(FontValues.getFontFamily(fontFamiy, prevRenderState));
+			key.setFontFamily(FontValues.getFontFamily(fontFamily, prevRenderState));
 			key.setFontStyle(FontValues.getFontStyle(fontStyle, prevRenderState, config.isItalic()));
 			key.setFontVariant(FontValues.getFontVariant(fontVariant));
 			key.setLocales(document.getLocales());
@@ -455,4 +455,43 @@ public class FontValues extends HtmlValues {
             default -> false;
         };
 	}
+
+    /**
+     * {@inheritDoc}
+     *
+     * Checks if is font family.
+     */
+    public static boolean isFontFamily(String value) {
+        if (Strings.isBlank(value)) {
+            return false;
+        }
+
+        String[] genericFamilies = {
+                "serif", "sans-serif", "monospace", "cursive",
+                "fantasy", "system-ui", "ui-serif", "ui-sans-serif",
+                "ui-monospace", "ui-rounded", "emoji", "math", "fangsong",
+                "ahem"
+
+        };
+
+        String[] families = value.split(",");
+
+        for (String family : families) {
+            family = family.trim();
+            if (family.isEmpty()) return false;
+
+            boolean isGeneric = false;
+
+            for (String g : genericFamilies) {
+                if (family.equalsIgnoreCase(g)) {
+                    isGeneric = true;
+                    break;
+                }
+            }
+
+            return isGeneric;
+        }
+
+        return false;
+    }
 }

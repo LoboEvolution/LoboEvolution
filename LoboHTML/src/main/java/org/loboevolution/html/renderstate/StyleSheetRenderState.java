@@ -28,6 +28,7 @@
  */
 package org.loboevolution.html.renderstate;
 
+import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.Strings;
 import org.loboevolution.config.HtmlRendererConfig;
@@ -56,6 +57,7 @@ import java.util.*;
  * <p>StyleSheetRenderState class.</p>
  */
 @Slf4j
+@ToString
 public class StyleSheetRenderState implements RenderState {
 	
 	private static final FontFactory FONT_FACTORY = FontFactory.getInstance();
@@ -1043,12 +1045,6 @@ public class StyleSheetRenderState implements RenderState {
 
 	/** {@inheritDoc} */
 	@Override
-	public String toString() {
-		return "StyleSheetRenderState[font=" + getFont() + ",textDecoration=" + getTextDecorationMask() + "]";
-	}
-	
-	/** {@inheritDoc} */
-	@Override
 	public int getClear() {
 		if (cachedClear == null) {
 			final CSSStyleDeclaration props = this.getCssProperties();
@@ -1068,7 +1064,7 @@ public class StyleSheetRenderState implements RenderState {
 		}
 		return cachedClear;
 	}
-	
+
 	/** {@inheritDoc} */
 	@Override
 	public String getBoxSizing() {

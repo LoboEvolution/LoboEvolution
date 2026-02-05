@@ -56,40 +56,30 @@ public class BorderSetter2 implements SubPropertySetter {
 		properties.setProperty(this.name, value);
 		final String name = this.name;
 		if (Strings.isNotBlank(value)) {
-			final String[] array = HtmlValues.splitCssValue(value);
-			String color = null;
-			String style = null;
-			String width = null;
-			for (final String token : array) {
 
+			properties.setProperty(name + "-style", CSSValues.INITIAL.getValue());
+			properties.setProperty(name + "-color", CSSValues.INITIAL.getValue());
+			properties.setProperty(name + "-width", CSSValues.INITIAL.getValue());
+			final String[] array = HtmlValues.splitCssValue(value);
+			for (final String token : array) {
 				if (HtmlValues.isBorderStyle(token)) {
-					style = token.toLowerCase();
+                    String style = token.toLowerCase();
+                    properties.setProperty(name + "-style", style);
+
 				} else if (ColorFactory.getInstance().isColor(token)) {
-					color = token.toLowerCase();
+                    String color = token.toLowerCase();
+                    properties.setProperty(name + "-color", color);
+
 				} else {
-					width = token.toLowerCase();
+                    String width = token.toLowerCase();
+                    properties.setProperty(name + "-width", width);
+
 				}
 			}
 
-			if (style == null) {
-				style = CSSValues.INITIAL.getValue();
-			}
-
-			if (color == null) {
-				color = CSSValues.INITIAL.getValue();
-			}
-
-			if (width == null) {
-				width = CSSValues.INITIAL.getValue();
-			}
-
-			properties.setProperty(name + "-style", style);
-			properties.setProperty(name + "-color", color);
-			properties.setProperty(name + "-width", width);
-
-			new FourCornersSetter(name, name + "-", "-style").changeValue(declaration, style);
-			new BorderStyleSetter(name, name + "-", "-color").changeValue(declaration, color);
-			new FourCornersSetter(name, name + "-", "-width").changeValue(declaration, width);
+			new FourCornersSetter(name, name + "-", "-style").changeValue(declaration, properties.getPropertyValue(name + "-style"));
+			new BorderStyleSetter(name, name + "-", "-color").changeValue(declaration, properties.getPropertyValue(name + "-color"));
+			new FourCornersSetter(name, name + "-", "-width").changeValue(declaration, properties.getPropertyValue(name + "-width"));
 		}
 	}
 }

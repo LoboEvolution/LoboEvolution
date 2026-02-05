@@ -70,74 +70,10 @@ public class CSSStyleDeclaration2Test extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"success", "letterSpacing 42% - 42em",
-            "outlineWidth 42.0 - ; 42.7 - ; 42 - ; 42% - 42em",
-            "success",
-            "success",
-            "wordSpacing 42% - 42em"})
+    @Alerts({"letterSpacing 42% - 42em"})
     public void widthLikePropertiesTont() {
         widthLikeProperties("fontSize", "letterSpacing", "outlineWidth", "textIndent",
                 "verticalAlign", "wordSpacing");
-    }
-
-    private void widthLikeProperties(final String... properties) {
-        final String props = "'" + String.join("', '", properties) + "'";
-        final String html
-                = "<html><head><script>\n"
-                + "function test() {\n"
-                + "  var properties = [" + props + "];\n"
-                + "\n"
-                + "  for (var prop in properties) {\n"
-                + "    prop = properties[prop];\n"
-                + "    var result = '';\n"
-                + "    var node = document.createElement('div');\n"
-                + "    if (node.style[prop] != '') {\n"
-                + "      if (result == '') { result += prop } else { result += '; ' }\n"
-                + "      result += ' initial ' + node.style[prop];\n"
-                + "    }\n"
-                + "    node.style[prop] = '42.0';\n"
-                + "    if (node.style[prop] != '42px') {\n"
-                + "      if (result == '') { result += prop } else { result += ';' }\n"
-                + "      result += ' 42.0 - ' + node.style[prop];\n"
-                + "    }\n"
-                + "    node.style[prop] = '42.7';\n"
-                + "    var expected = document.all ? '42px' : '42.7px';\n"
-                + "    if (node.style[prop] != expected) {\n"
-                + "      if (result == '') { result += prop } else { result += ';' }\n"
-                + "      result += ' 42.7 - ' + node.style[prop];\n"
-                + "    }\n"
-                + "    node.style[prop] = '42';\n"
-                + "    if (node.style[prop] != '42px') {\n"
-                + "      if (result == '') { result += prop } else { result += ';' }\n"
-                + "      result += ' 42 - ' + node.style[prop];\n"
-                + "    }\n"
-                + "    node.style[prop] = '42px';\n"
-                + "    if (node.style[prop] != '42px') {\n"
-                + "      if (result == '') { result += prop } else { result += ';' }\n"
-                + "      result += ' 42px - ' + node.style[prop];\n"
-                + "    }\n"
-                + "    node.style[prop] = '42mm';\n"
-                + "    if (node.style[prop] != '42mm') {\n"
-                + "      if (result == '') { result += prop } else { result += ';' }\n"
-                + "      result += ' 42mm - ' + node.style[prop];\n"
-                + "    }\n"
-                + "    node.style[prop] = '42em';\n"
-                + "    if (node.style[prop] != '42em') {\n"
-                + "      if (result == '') { result += prop } else { result += ';' }\n"
-                + "      result += ' 42em - ' + node.style[prop];\n"
-                + "    }\n"
-                + "    node.style[prop] = '42%';\n"
-                + "    if (node.style[prop] != '42%') {\n"
-                + "      if (result == '') { result += prop } else { result += ';' }\n"
-                + "      result += ' 42% - ' + node.style[prop];\n"
-                + "    }\n"
-                + "   alert(result == '' ? 'success' : result);\n"
-                + "  }\n"
-                + "}\n"
-                + "</script></head>\n"
-                + "<body onload='test()'></body></html>";
-
-        checkHtmlAlert(html);
     }
 
     @Test
@@ -157,50 +93,6 @@ public class CSSStyleDeclaration2Test extends LoboUnitTest {
                 "1.7em", "4px", "32%",
                 "inherit", "initial", "revert", "unset",
                 "1 px", "7mond", "not-supported");
-    }
-
-    private void checkPropertyValuesDirect(final String property, final String... propertyValues) {
-        final String propValues = "'" + String.join("', '", propertyValues) + "'";
-        final String html
-                = "<html><head><script>\n"
-                + "function test() {\n"
-                + "  var propValues = [" + propValues + "];\n"
-                + "\n"
-                + "  var node = document.createElement('div');\n"
-                + "  var styleVal = node.style." + property + ";\n"
-                + " alert(styleVal);\n"
-                + "  propValues.forEach(propValue => {\n"
-                + "    node.style." + property + " = propValue;\n"
-                + "    styleVal = node.style." + property + ";\n"
-                + "   alert(styleVal);\n"
-                + "  });\n"
-                + "}\n"
-                + "</script></head>\n"
-                + "<body onload='test()'></body></html>";
-
-        checkHtmlAlert(html);
-    }
-
-    private void checkPropertyValues(final String property, final String... propertyValues) {
-        final String propValues = "'" + String.join("', '", propertyValues) + "'";
-        final String html
-                = "<html><head><script>\n"
-                + "function test() {\n"
-                + "  var propValues = [" + propValues + "];\n"
-                + "\n"
-                + "  var node = document.createElement('div');\n"
-                + "  var styleVal = node.style['" + property + "'];\n"
-                + " alert(styleVal);\n"
-                + "  propValues.forEach(propValue => {\n"
-                + "    node.style['" + property + "'] = propValue;\n"
-                + "    styleVal = node.style['" + property + "'];\n"
-                + "   alert(styleVal);\n"
-                + "  });\n"
-                + "}\n"
-                + "</script></head>\n"
-                + "<body onload='test()'></body></html>";
-
-        checkHtmlAlert(html);
     }
 
     @Test
@@ -273,6 +165,110 @@ public class CSSStyleDeclaration2Test extends LoboUnitTest {
                 + "</head><body onload='test()' style='display: inline'>\n"
                 + "  <div></div>\n"
                 + "</body></html>";
+
+        checkHtmlAlert(html);
+    }
+
+    private void checkPropertyValuesDirect(final String property, final String... propertyValues) {
+        final String propValues = "'" + String.join("', '", propertyValues) + "'";
+        final String html
+                = "<html><head><script>\n"
+                + "function test() {\n"
+                + "  var propValues = [" + propValues + "];\n"
+                + "\n"
+                + "  var node = document.createElement('div');\n"
+                + "  var styleVal = node.style." + property + ";\n"
+                + " alert(styleVal);\n"
+                + "  propValues.forEach(propValue => {\n"
+                + "    node.style." + property + " = propValue;\n"
+                + "    styleVal = node.style." + property + ";\n"
+                + "   alert(styleVal);\n"
+                + "  });\n"
+                + "}\n"
+                + "</script></head>\n"
+                + "<body onload='test()'></body></html>";
+
+        checkHtmlAlert(html);
+    }
+
+    private void checkPropertyValues(final String property, final String... propertyValues) {
+        final String propValues = "'" + String.join("', '", propertyValues) + "'";
+        final String html
+                = "<html><head><script>\n"
+                + "function test() {\n"
+                + "  var propValues = [" + propValues + "];\n"
+                + "\n"
+                + "  var node = document.createElement('div');\n"
+                + "  var styleVal = node.style['" + property + "'];\n"
+                + " alert(styleVal);\n"
+                + "  propValues.forEach(propValue => {\n"
+                + "    node.style['" + property + "'] = propValue;\n"
+                + "    styleVal = node.style['" + property + "'];\n"
+                + "   alert(styleVal);\n"
+                + "  });\n"
+                + "}\n"
+                + "</script></head>\n"
+                + "<body onload='test()'></body></html>";
+
+        checkHtmlAlert(html);
+    }
+
+    private void widthLikeProperties(final String... properties) {
+        final String props = "'" + String.join("', '", properties) + "'";
+        final String html
+                = "<html><head><script>\n"
+                + "function test() {\n"
+                + "  var properties = [" + props + "];\n"
+                + "\n"
+                + "  for (var prop in properties) {\n"
+                + "    prop = properties[prop];\n"
+                + "    var result = '';\n"
+                + "    var node = document.createElement('div');\n"
+                + "    if (node.style[prop] != '' && node.style[prop] != null) {\n"
+                + "      if (result == '') { result += prop } else { result += '; ' }\n"
+                + "      result += ' initial ' + node.style[prop];\n"
+                + "    }\n"
+                + "    node.style[prop] = '42.0';\n"
+                + "    if (node.style[prop] != '42px') {\n"
+                + "      if (result == '') { result += prop } else { result += ';' }\n"
+                + "      result += ' 42.0 - ' + node.style[prop];\n"
+                + "    }\n"
+                + "    node.style[prop] = '42.7';\n"
+                + "    var expected = document.all ? '42.7px' : '42px';\n"
+                + "    if (node.style[prop] != expected) {\n"
+                + "      if (result == '') { result += prop } else { result += ';' }\n"
+                + "      result += ' 42.7 - ' + node.style[prop];\n"
+                + "    }\n"
+                + "    node.style[prop] = '42';\n"
+                + "    if (node.style[prop] != '42px') {\n"
+                + "      if (result == '') { result += prop } else { result += ';' }\n"
+                + "      result += ' 42 - ' + node.style[prop];\n"
+                + "    }\n"
+                + "    node.style[prop] = '42px';\n"
+                + "    if (node.style[prop] != '42px') {\n"
+                + "      if (result == '') { result += prop } else { result += ';' }\n"
+                + "      result += ' 42px - ' + node.style[prop];\n"
+                + "    }\n"
+                + "    node.style[prop] = '42mm';\n"
+                + "    if (node.style[prop] != '42mm') {\n"
+                + "      if (result == '') { result += prop } else { result += ';' }\n"
+                + "      result += ' 42mm - ' + node.style[prop];\n"
+                + "    }\n"
+                + "    node.style[prop] = '42em';\n"
+                + "    if (node.style[prop] != '42em') {\n"
+                + "      if (result == '') { result += prop } else { result += ';' }\n"
+                + "      result += ' 42em - ' + node.style[prop];\n"
+                + "    }\n"
+                + "    node.style[prop] = '42%';\n"
+                + "    if (node.style[prop] != '42%') {\n"
+                + "      if (result == '') { result += prop } else { result += ';' }\n"
+                + "      result += ' 42% - ' + prop;\n"
+                + "    }\n"
+                + "   alert(result == '' ? 'success' : result);\n"
+                + "  }\n"
+                + "}\n"
+                + "</script></head>\n"
+                + "<body onload='test()'></body></html>";
 
         checkHtmlAlert(html);
     }

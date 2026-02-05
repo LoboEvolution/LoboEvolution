@@ -37,6 +37,8 @@ import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.node.Attr;
 import org.loboevolution.css.CSSStyleDeclaration;
+import org.loboevolution.html.parser.FontParser;
+import org.loboevolution.html.style.FontValues;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.html.style.setter.*;
 import org.mozilla.javascript.annotations.JSFunction;
@@ -54,8 +56,6 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
                     "([eE][+-]?(\\d+))?)|(\\.((\\d+))([eE][+-]?(\\d+))?)|" +
                     "(((0[xX](\\p{XDigit}+)(\\.)?)|(0[xX](\\p{XDigit}+)?(\\.)(\\p{XDigit}+)))" +
                     "[pP][+-]?(\\d+)))[fFdD]?))[\\x00-\\x20]*");
-
-    private final Pattern NUMERIC_PATTERN = Pattern.compile("-?\\d+(\\.\\d+)?");
 
     private String overlayColor;
     private final HTMLElementImpl element;
@@ -200,11 +200,13 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
                     (FONT_FAMILY.equals(propertyName) && value.contains("\"")) ? value.trim() :
                             value.trim().toLowerCase();
 
-            if (HtmlValues.isUnits(value)) {
+            if (FontValues.isFontFamily(value)) {
+                style.setProperty(lwPropertyName, value, priority);
+            } else if (HtmlValues.isUnits(value)) {
                 if (BACKGROUND_POSITION.equals(propertyName)) {
                     style.setProperty(lwPropertyName, value, priority);
-                } else {
-                    final int val = HtmlValues.getPixelSize(value, null, element.getOwnerDocument() != null ? element.getOwnerDocument().getDefaultView() : null, -1);
+                } else  {
+                    int val = HtmlValues.getPixelSize(value, null, element.getOwnerDocument() != null ? element.getOwnerDocument().getDefaultView() : null, -1);
                     if (val > -1) {
                         style.setProperty(lwPropertyName, value, priority);
                     }
@@ -217,7 +219,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
                         value += "px";
                         style.setProperty(lwPropertyName, value, priority);
                     }
-                } else if (NUMERIC_PATTERN.matcher(value).matches()) {
+                } else if (Strings.isNumeric(value)) {
                     value += "px";
                     style.setProperty(lwPropertyName, value, priority);
                 } else if (CSSValues.AUTO.isEqual(value) ||

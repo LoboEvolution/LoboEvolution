@@ -80,7 +80,7 @@ public class FontParser {
         String remaining = parseFontProperties(font, details);
 
         // The remaining part should be the font family
-        if (remaining != null && !remaining.isEmpty()) {
+        if (Strings.isNotBlank(remaining)) {
             details[FONT_FAMILY_INDEX] = remaining.contains("\"") ? remaining : formatFontFamily(remaining.trim());
         }
 
@@ -161,7 +161,7 @@ public class FontParser {
     }
 
     private boolean isValidLineHeight(final String lineHeight) {
-        return HtmlValues.isUnits(lineHeight) || CSSValues.NORMAL.isEqual(lineHeight) || lineHeight.endsWith("%");
+        return HtmlValues.isUnits(lineHeight) || Strings.isNumeric(lineHeight) || CSSValues.NORMAL.isEqual(lineHeight) || lineHeight.endsWith("%");
     }
 
     private String formatFontFamily(String fontFamily) {

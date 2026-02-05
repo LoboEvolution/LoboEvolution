@@ -1369,7 +1369,7 @@ public class ElementImpl extends NodeImpl implements Element {
 			if (rs.getDisplay() != RenderState.DISPLAY_INLINE) {
 
 				widthSize = HtmlValues.getPixelSize(CSSValues.AUTO.isEqual(width) ? "100%" : Strings.isBlank(width) ?
-						childWidth(this, doc, parentWidth) + "px" : width, null, doc.getDefaultView(), 0, parentWidth);
+						childWidth(this, doc, parentWidth) + "px" : width, rs, doc.getDefaultView(), 0, parentWidth);
 
 			} else {
 				widthSize = getContentWidth();
@@ -1404,13 +1404,13 @@ public class ElementImpl extends NodeImpl implements Element {
 			}
 
 			if (padding) {
-				widthSize += HtmlValues.getPixelSize(currentStyle.getPaddingRight(), null, doc.getDefaultView(), 0);
-				widthSize += HtmlValues.getPixelSize(currentStyle.getPaddingLeft(), null, doc.getDefaultView(), 0);
+				widthSize += HtmlValues.getPixelSize(currentStyle.getPaddingRight(), rs, doc.getDefaultView(), 0);
+				widthSize += HtmlValues.getPixelSize(currentStyle.getPaddingLeft(), rs, doc.getDefaultView(), 0);
 			}
 
 			if (border) {
-				widthSize += HtmlValues.getPixelSize(currentStyle.getBorderLeftWidth(), null, doc.getDefaultView(), 0);
-				widthSize += HtmlValues.getPixelSize(currentStyle.getBorderRightWidth(), null, doc.getDefaultView(), 0);
+				widthSize += HtmlValues.getPixelSize(currentStyle.getBorderLeftWidth(), rs, doc.getDefaultView(), 0);
+				widthSize += HtmlValues.getPixelSize(currentStyle.getBorderRightWidth(), rs, doc.getDefaultView(), 0);
 			}
 
 			if (isClient && widthSize > 0 && CSSValues.SCROLL.isEqual(overflow)) {
@@ -1450,7 +1450,7 @@ public class ElementImpl extends NodeImpl implements Element {
 				parentHeight = getParentElement().getOffsetHeight();
 			}
 
-			heightSize = HtmlValues.getPixelSize(CSSValues.AUTO.isEqual(height) ? "100%" : Strings.isBlank(height) ? childHeight(this, position, doc, parentHeight) + "px" : height, null, doc.getDefaultView(), 0, parentHeight);
+			heightSize = HtmlValues.getPixelSize(CSSValues.AUTO.isEqual(height) ? "100%" : Strings.isBlank(height) ? childHeight(this, position, doc, parentHeight) + "px" : height, rs, doc.getDefaultView(), 0, parentHeight);
 			if (heightSize == 0 && (this instanceof HTMLInputElement ||
 					this instanceof HTMLButtonElement ||
 					this instanceof HTMLHeadElement ||
@@ -1469,13 +1469,13 @@ public class ElementImpl extends NodeImpl implements Element {
 			}
 
 			if (padding) {
-				heightSize += HtmlValues.getPixelSize(currentStyle.getPaddingTop(), null, doc.getDefaultView(), 0);
-				heightSize += HtmlValues.getPixelSize(currentStyle.getPaddingBottom(), null, doc.getDefaultView(), 0);
+				heightSize += HtmlValues.getPixelSize(currentStyle.getPaddingTop(), rs, doc.getDefaultView(), 0);
+				heightSize += HtmlValues.getPixelSize(currentStyle.getPaddingBottom(), rs, doc.getDefaultView(), 0);
 			}
 
 			if (border) {
-				heightSize += HtmlValues.getPixelSize(currentStyle.getBorderTopWidth(), null, doc.getDefaultView(), 0);
-				heightSize += HtmlValues.getPixelSize(currentStyle.getBorderBottomWidth(), null, doc.getDefaultView(), 0);
+				heightSize += HtmlValues.getPixelSize(currentStyle.getBorderTopWidth(), rs, doc.getDefaultView(), 0);
+				heightSize += HtmlValues.getPixelSize(currentStyle.getBorderBottomWidth(), rs, doc.getDefaultView(), 0);
 			}
 
 			if (isClient && heightSize > 0 && CSSValues.SCROLL.isEqual(overflow)) {

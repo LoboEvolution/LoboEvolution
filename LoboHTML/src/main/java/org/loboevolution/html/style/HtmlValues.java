@@ -26,6 +26,7 @@
 
 package org.loboevolution.html.style;
 
+import org.htmlunit.cssparser.dom.CSSStyleDeclarationImpl;
 import org.htmlunit.cssparser.dom.CSSValueImpl;
 import org.htmlunit.cssparser.dom.CSSValueImpl.CSSPrimitiveValueType;
 import org.loboevolution.common.Strings;
@@ -42,6 +43,7 @@ import org.loboevolution.laf.FontFactory;
 import org.loboevolution.net.HttpNetwork;
 
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 
 /**
@@ -156,6 +158,40 @@ public class HtmlValues {
         };
 	}
 
+    /**
+     * <p>getPixelEmSize.</p>
+     *
+     * @param spec a {@link java.lang.String} object.
+     * @param style a {@link CSSStyleDeclarationImpl} object.
+     * @param window a {@link Window} object.
+     * @param errorValue a {@link java.lang.Integer} object.
+     * @return a {@link java.lang.Integer} object.
+     */
+    public static int getPixelEmSize(final String spec, final CSSStyleDeclarationImpl style, final Window window, final int errorValue) {
+        try {
+            if (Strings.isNotBlank(spec)) {
+
+                final String lcSpec = spec.toLowerCase();
+                String text = lcSpec.substring(0, lcSpec.length() - 2);
+
+                final WindowImpl win = (WindowImpl) window;
+                if (win == null || win.getConfig() == null) {
+                    return (int) Math.round(16.0f * Double.parseDouble(text));
+                }
+
+                final FontFactory FONT_FACTORY = FontFactory.getInstance();
+                final Font DEFAULT_FONT = FONT_FACTORY.getFont(FontValues.getDefaultFontKey(win.getConfig()));
+                final String fz = style.getPropertyValue("font-size");
+                final int fontSize = (fz == null) ? DEFAULT_FONT.getSize() : Integer.parseInt(fz);
+                return (int) Math.round(fontSize * Double.parseDouble(text));
+            }
+        } catch (final Exception ex) {
+            return errorValue;
+        }
+
+        return errorValue;
+    }
+
 	/**
 	 * <p>getPixelSize.</p>
 	 *
@@ -167,8 +203,19 @@ public class HtmlValues {
 	public static int getPixelSize(final String spec, final RenderState renderState, final Window window, final int errorValue) {
 		try {
 			if (Strings.isNotBlank(spec)) {
-				final int dpi = GraphicsEnvironment.isHeadless() ? 72 : Toolkit.getDefaultToolkit().getScreenResolution();
-				final String lcSpec = spec.toLowerCase();
+
+                GraphicsDevice gd = GraphicsEnvironment
+                        .getLocalGraphicsEnvironment()
+                        .getDefaultScreenDevice();
+
+                GraphicsConfiguration gc = gd.getDefaultConfiguration();
+                AffineTransform tx = gc.getDefaultTransform();
+
+                double scaleX = tx.getScaleX();
+                double scaleY = tx.getScaleY();
+                int dpi = (int) (96 * Math.max(scaleX, scaleY));
+
+                final String lcSpec = spec.toLowerCase();
 				String units = "";
 				String text = "";
 				if (isUnits(spec)) {
