@@ -1,25 +1,19 @@
-<style>
-.center {
-  text-align: center;
-}
-</style>
-
-<p class="center">
+<p style="text-align: center;">
 	<img alt="githubusercontent" src="https://avatars3.githubusercontent.com/u/6113075?s=460&v=4" height="130">
 </p>
-<p class="center">	
+<p style="text-align: center;">	
 	<a href="https://app.codacy.com/gh/LoboEvolution/LoboEvolution/dashboard?utm_content"><img alt="Codacy" src="https://app.codacy.com/project/badge/Grade/899f68bba4a5463d8a7699821d840c5c" /></a>
 	<a href="https://codeclimate.com/github/LoboEvolution/LoboEvolution/maintainability"><img alt="codeclimate badge"  src="https://api.codeclimate.com/v1/badges/eaeed65cfc69b72b4701/maintainability" /></a>
 	<a href="https://github.com/LoboEvolution/LoboEvolution/actions/workflows/codeql.yml"><img src="https://github.com/LoboEvolution/LoboEvolution/actions/workflows/codeql.yml/badge.svg?branch=master" alt="Docs"></a>
 </p>
-<p class="center">
+<p style="text-align: center;">
 	<a href="http://sourceforge.net/projects/loboevolution/"><img src="https://img.shields.io/website-up-down-green-red/http/shields.io.svg" alt="Website"/></a>
         <a href="https://github.com/LoboEvolution/LoboEvolution/graphs/contributors"><img alt="Contributors" src="https://img.shields.io/github/contributors/LoboEvolution/LoboEvolution"/></a>
 	<a href="https://github.com/LoboEvolution/LoboEvolution/pulse"><img alt="Activity" src="https://img.shields.io/github/commit-activity/m/LoboEvolution/LoboEvolution"/></a>
 	<a href=""><img alt="PRs" src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" /></a>
 	<a href="https://loboevolution.github.io/LoboEvolution/"><img src="https://inch-ci.org/github/oswetto/LoboEvolution.svg" alt="Docs"></a>
 </p>
-<p class="center">
+<p style="text-align: center;">
 	<a href="https://github.com/LoboEvolution/LoboEvolution/blob/master/LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="MIT"></a>		
 	<img src="https://img.shields.io/badge/version-5.0-blue" alt="Stable Version"/>
         <a href="https://github.com/LoboEvolution/LoboEvolution/releases/download/5.0/loboevolution-5.0.jar"><img src="https://img.shields.io/github/downloads/LoboEvolution/LoboEvolution/total.svg" alt="Download"></a>
@@ -61,7 +55,7 @@ mvn surefire-report:report
 
 | Unit Tests | Passed | Errors | Failures | Skipped | Rate Success |                                  Result                                   |
 |:----------:|:------:|:------:|:--------:|:-------:|:------------:|:-------------------------------------------------------------------------:|
-|    5592    |  3798  |   8    |   1785   |    1    |    67,9%     | [see](https://loboevolution.github.io/LoboEvolution/surefire-report.html) |
+|    5592    |  3807  |   8    |   1776   |    1    |    68,1%     | [see](https://loboevolution.github.io/LoboEvolution/surefire-report.html) |
 
 ### How To Do
 [TODO](https://github.com/oswetto/LoboEvolution/wiki/How-TODO)
