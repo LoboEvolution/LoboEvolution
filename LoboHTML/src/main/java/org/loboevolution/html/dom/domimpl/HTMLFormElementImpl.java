@@ -297,7 +297,7 @@ public class HTMLFormElementImpl extends HTMLElementImpl implements HTMLFormElem
 		final Function onsubmit = getOnsubmit();
 		final WindowImpl window = (WindowImpl) this.getDocumentNode().getDefaultView();
 		if (onsubmit != null) {
-			if (!Executor.executeFunction(this, onsubmit, new Object[0], window.getContextFactory())) {
+			if (!Executor.executeFunction(this.getDocumentNode(), this, onsubmit, new Object[0], window.getContextFactory())) {
 				return;
 			}
 		}

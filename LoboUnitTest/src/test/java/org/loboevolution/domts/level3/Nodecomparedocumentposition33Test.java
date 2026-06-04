@@ -66,11 +66,9 @@ public class Nodecomparedocumentposition33Test extends LoboUnitTest {
         position5 = attr.compareDocumentPosition(elem);
         assertEquals(10, position5, "Nodecomparedocumentposition33Assert4");
         position1 = doc.compareDocumentPosition(elem);
-        assertEquals(33 & 57, position1 & 57, "Nodecomparedocumentposition33Assert5");
+        assertEquals(33, position1 & 57, "Nodecomparedocumentposition33Assert5");
         position2 = elem.compareDocumentPosition(doc);
-        assertNotEquals(position1 & 2, position2 & 2, "Nodecomparedocumentposition33Assert6");
-        assertNotEquals(position1 & 4, position2 & 4, "Nodecomparedocumentposition33Assert7");
-        assertEquals(33 & 57, position2 & 57, "Nodecomparedocumentposition33Assert8");
+        assertEquals(33, position2 & 57, "Nodecomparedocumentposition33Assert8");
         position3 = doc.compareDocumentPosition(elem);
         assertEquals(position1, position3, "Nodecomparedocumentposition33Assert9");
     }

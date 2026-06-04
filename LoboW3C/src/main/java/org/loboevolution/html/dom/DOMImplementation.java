@@ -72,5 +72,5 @@ public interface DOMImplementation {
 
     boolean hasFeature(String xml, String s);
 
-    Object getFeature(String core, String s);
+	Object getFeature(String feature, String version);
 }

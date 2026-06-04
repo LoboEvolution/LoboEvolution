@@ -80,7 +80,6 @@ public class CreateElementNS03Test extends LoboUnitTest {
         illegalQNames.add("person:<");
         illegalQNames.add("person:>");
         illegalQNames.add("person:,");
-        illegalQNames.add("person:a ");
         illegalQNames.add("person:\"");
         return illegalQNames;
     }

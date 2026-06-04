@@ -26,7 +26,6 @@
 
 package org.loboevolution.domts.level3;
 
-
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.DOMError;
@@ -42,7 +41,6 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
 /**
  * Add a L1 element to a L2 namespace aware document and perform namespace normalization.  Should result
  * in an error.
@@ -52,16 +50,14 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-namespaces">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-namespaces</a>
  */
 public class DocumentnormalizeDocument05Test extends LoboUnitTest {
+
     @Test
     public void runTest() {
         final Document doc;
         final Element elem;
         final DOMConfiguration domConfig;
         final HTMLCollection pList;
-        final Element newChild;
-        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
-
-        final List<DOMError> errors;
+        final Element newChild;final List<DOMError> errors;
 
         DOMError error;
         int errorCount = 0;
@@ -83,8 +79,9 @@ public class DocumentnormalizeDocument05Test extends LoboUnitTest {
         domConfig = doc.getDomConfig();
         domConfig.setParameter("namespaces", Boolean.TRUE);
         /*DOMErrorMonitor */
-        domConfig.setParameter("error-handler", errorMonitor);
+        domConfig.setParameter("error-handler", new DOMErrorMonitor());
         doc.normalizeDocument();
+        DOMErrorMonitor errorMonitor = (DOMErrorMonitor) domConfig.getParameter("error-handler");
         errors = errorMonitor.getErrors();
         for (DOMError domError : errors) {
             error = domError;
@@ -107,9 +104,6 @@ public class DocumentnormalizeDocument05Test extends LoboUnitTest {
                 message = error.getMessage();
                 length = message.length();
                 assertTrue((length > 0), "DocumentnormalizeDocument05Assert7");
-                error.getType();
-                error.getRelatedData();
-                error.getRelatedException();
                 errorCount += 1;
             } else {
                 assertEquals(1, severity, "DocumentnormalizeDocument05Assert8");

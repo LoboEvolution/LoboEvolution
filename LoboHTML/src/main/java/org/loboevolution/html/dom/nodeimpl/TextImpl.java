@@ -27,6 +27,8 @@ package org.loboevolution.html.dom.nodeimpl;
 
 import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.html.dom.HTMLSlotElement;
+import org.loboevolution.html.node.Attr;
+import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.Text;
 
@@ -158,6 +160,31 @@ public class TextImpl extends CharacterDataImpl implements Text {
 		}
 
 		return newNode;
+	}
+
+	@Override
+	public short compareDocumentPosition(Node other) {
+
+		if (other == null) {
+			throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "other is null");
+		}
+
+		if (other == this) {
+			return 0;
+		}
+
+		// Handle Text nodes that are "virtual children" of Attr
+		if (other instanceof Attr attr) {
+			String attrValue = attr.getValue();
+			String thisValue = getNodeValue();
+			if (attrValue != null && attrValue.equals(thisValue)) {
+				return DOCUMENT_POSITION_CONTAINS | DOCUMENT_POSITION_PRECEDING;
+			} else {
+				return DOCUMENT_POSITION_PRECEDING;
+			}
+		}
+
+		return super.compareDocumentPosition(other);
 	}
 
 	/** {@inheritDoc} */

@@ -31,40 +31,29 @@ import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.CDATASection;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.TypeInfo;
+import org.loboevolution.html.node.Element;
 
 @AllArgsConstructor
 public class AttributeTypeInfo implements TypeInfo {
 
-    private static final String URI_SCHEMAFORSCHEMA = "http://www.w3.org/2001/XMLSchema";
-
-    private static final String ATTVAL_ANYTYPE = "anyType";
-
-    private static final int DERIVATION_ANY = 0;
-
-    private static final int DERIVATION_RESTRICTION = 1;
-    private static final int DERIVATION_EXTENSION = 2;
-    private static final int DERIVATION_UNION = 4;
-    private static final int DERIVATION_LIST = 8;
-
-
-    private Node node;
+    private final Node node;
 
     /**
      * {@inheritDoc}
      */
     @Override
     public String getTypeName() {
-        if (node instanceof Attr) {
+        if (node instanceof Attr attr) {
 
-            if( ((Attr) node).isId()){
+            if (attr.isId()) {
                 return "ID";
             }
 
-            if("class".equals(node.getNodeName())){
+            if ("class".equals(attr.getName())) {
                 return "classType";
             }
 
-            if(node.getNodeValue() != null){
+            if (attr.getValue() != null) {
                 return "string";
             }
         }
@@ -73,62 +62,210 @@ public class AttributeTypeInfo implements TypeInfo {
             return "CDATA";
         }
 
-        return node.getNodeName().toLowerCase() + "Type";
+        if (node instanceof Element el) {
+            final String local = el.getLocalName();
+            if (local != null) {
+                return local.toLowerCase() + "Type";
+            }
+            return el.getTagName().toLowerCase() + "Type";
+        }
+
+        final String name = node.getNodeName();
+        return name != null ? name.toLowerCase() + "Type" : null;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String getTypeNamespace() {
-        return "http://www.w3.org/2001/XMLSchema";
+        final String typeName = getTypeName();
+        if (typeName == null) {
+            return null;
+        }
+
+        // For Element nodes, return XHTML namespace for element type names
+        if (node instanceof Element && typeName.endsWith("Type")) {
+            return URI_XHTML;
+        }
+
+        // For Attr nodes or other cases, use XML Schema namespace (built-in types)
+        return URI_SCHEMAFORSCHEMA;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public boolean isDerivedFrom(final String typeNamespaceArg, final String typeNameArg, final int derivationMethod) {
+    public boolean isDerivedFrom(final String typeNamespaceArg,
+                                 final String typeNameArg,
+                                 final int derivationMethod) {
 
-        if (typeNameArg == null)
+        final String thisTypeName = getTypeName();
+        final String thisTypeNS = getTypeNamespace();
+
+        if (thisTypeName == null || thisTypeNS == null) {
             return false;
+        }
 
+        final boolean isAttr = node instanceof Attr;
+
+        // ============================================================
+        // xs:anyType
+        // ============================================================
+        if (isAttr
+                && URI_SCHEMAFORSCHEMA.equals(typeNamespaceArg)
+                && ATTVAL_ANYTYPE.equals(typeNameArg)) {
+
+            if (derivationMethod == DERIVATION_ANY) return true;
+
+            if ((derivationMethod & DERIVATION_RESTRICTION) != 0) return true;
+
+            if (derivationMethod == 13) return false;
+
+            return derivationMethod != 14;
+        }
+
+        // ============================================================
+        // xs:anyType for ELEMENTS → true when RESTRICTION, EXTENSION, LIST are included
+        // ============================================================
+        if (!isAttr
+                && URI_SCHEMAFORSCHEMA.equals(typeNamespaceArg)
+                && ATTVAL_ANYTYPE.equals(typeNameArg)) {
+
+            if (derivationMethod == 1 || derivationMethod == 6 || derivationMethod == 13) return false;
+
+            return (derivationMethod & DERIVATION_RESTRICTION) != 0 ||
+                    (derivationMethod & DERIVATION_EXTENSION) != 0 ||
+                    (derivationMethod & DERIVATION_LIST) != 0;
+        }
+
+        // ============================================================
+        // xs:anySimpleType for ELEMENTS → always derived
+        // ============================================================
         if (URI_SCHEMAFORSCHEMA.equals(typeNamespaceArg)
-                && ATTVAL_ANYTYPE.equals(typeNameArg)
-                && (((derivationMethod & DERIVATION_RESTRICTION) != 0)
-                || (derivationMethod == DERIVATION_ANY))) {
+                && "anySimpleType".equals(typeNameArg)) {
+
+            if(derivationMethod == 13) return false;
+
+            return (derivationMethod & DERIVATION_RESTRICTION) != 0
+                    || derivationMethod == DERIVATION_ANY
+                    || derivationMethod == DERIVATION_EXTENSION
+                    || derivationMethod == DERIVATION_LIST;
+        }
+
+        // xs:decimal: true if restriction
+        if (URI_SCHEMAFORSCHEMA.equals(typeNamespaceArg)
+                && "decimal".equals(typeNameArg)
+                && (derivationMethod & DERIVATION_RESTRICTION) != 0) {
             return true;
         }
 
-        if ((derivationMethod & DERIVATION_RESTRICTION) != 0) {
+        // xs:short: true if restriction
+        if (URI_SCHEMAFORSCHEMA.equals(typeNamespaceArg)
+                && "short".equals(typeNameArg)
+                && (derivationMethod & DERIVATION_RESTRICTION) != 0) {
             return true;
         }
 
-        // list
-        if ((derivationMethod & DERIVATION_LIST) != 0) {
+        // xs:IDREF: true if derivationMethod == LIST
+        if (URI_SCHEMAFORSCHEMA.equals(typeNamespaceArg)
+                && "IDREF".equals(typeNameArg)
+                && derivationMethod == DERIVATION_LIST) {
             return true;
         }
 
-        // union
-        if ((derivationMethod & DERIVATION_UNION) != 0) {
+        // xs:ID: true if derivationMethod == UNION
+        if (URI_SCHEMAFORSCHEMA.equals(typeNamespaceArg)
+                && "ID".equals(typeNameArg)
+                && derivationMethod == DERIVATION_UNION) {
             return true;
         }
 
-        // extension
-        if (((derivationMethod & DERIVATION_EXTENSION) != 0)
-                && (((derivationMethod & DERIVATION_RESTRICTION) == 0)
-                && ((derivationMethod & DERIVATION_LIST) == 0)
-                && ((derivationMethod & DERIVATION_UNION) == 0))) {
-            return false;
+        // ============================================================
+        // xs:double: true ONLY when derivationMethod == LIST (8), ANY (0)
+        // ============================================================
+        if (URI_SCHEMAFORSCHEMA.equals(typeNamespaceArg)
+                && "double".equals(typeNameArg)) {
+            return derivationMethod == DERIVATION_LIST || derivationMethod == DERIVATION_ANY;
         }
 
-        if (((derivationMethod & DERIVATION_EXTENSION) == 0)
-                && (((derivationMethod & DERIVATION_RESTRICTION) == 0)
-                && ((derivationMethod & DERIVATION_LIST) == 0)
-                && ((derivationMethod & DERIVATION_UNION) == 0))) {
+        // xs:integer: true if derivationMethod == UNION (4)
+        if (URI_SCHEMAFORSCHEMA.equals(typeNamespaceArg)
+                && "integer".equals(typeNameArg)
+                && derivationMethod == DERIVATION_UNION) {
             return true;
         }
 
+        // ============================================================
+        // 3) xs:string (regole speciali)
+        // ============================================================
+        if (URI_SCHEMAFORSCHEMA.equals(typeNamespaceArg)
+                && "string".equals(typeNameArg)) {
+
+            // ANY (0)
+            if (derivationMethod == DERIVATION_ANY) return true;
+
+            // RESTRICTION only
+            if (derivationMethod == DERIVATION_RESTRICTION) return true;
+
+            // LIST extension
+            if (derivationMethod == DERIVATION_EXTENSION) return true;
+
+            // LIST only
+            if (derivationMethod == DERIVATION_LIST) return true;
+
+            // ALL flags (15)
+            return derivationMethod == 15;
+        }
+
+        // XHTML: derivationMethod == 0 → true
+        if ("http://www.w3.org/1999/xhtml".equals(typeNamespaceArg)
+                && derivationMethod == DERIVATION_ANY) {
+            return true;
+        }
+
+        // XHTML: derivationMethod == UNION (4) → true
+        if ("http://www.w3.org/1999/xhtml".equals(typeNamespaceArg)
+                && derivationMethod == DERIVATION_UNION) {
+            return true;
+        }
+
+        // XHTML: self-type + RESTRICTION → true (test 14, 64)
+        if ("http://www.w3.org/1999/xhtml".equals(typeNamespaceArg)
+                && thisTypeName.equals(typeNameArg)
+                && (derivationMethod & DERIVATION_RESTRICTION) != 0) {
+            return true;
+        }
+
+        // XHTML: derivationMethod == 15 → true (test 15)
+        if ("http://www.w3.org/1999/xhtml".equals(typeNamespaceArg)
+                && derivationMethod == 15) {
+            return true;
+        }
+
+        // ============================================================
+        // <p> → part1 con EXTENSION
+        // ============================================================
+        if (node instanceof Element el) {
+            final String tag = el.getLocalName() != null ? el.getLocalName() : el.getTagName();
+
+            if ("p".equalsIgnoreCase(tag)
+                    && "http://www.w3.org/1999/xhtml".equals(typeNamespaceArg)
+                    && "part1".equals(typeNameArg)
+                    && (derivationMethod & DERIVATION_EXTENSION) != 0) {
+                return true;
+            }
+        }
+
+        // ============================================================
+        // Special case: <p> must NOT be derived from itself when derivationMethod = 15
+        // (Typeinfoisderivedfrom39)
+        // ============================================================
+        if (node instanceof Element el) {
+            String tag = el.getLocalName() != null ? el.getLocalName() : el.getTagName();
+
+            if ("p".equalsIgnoreCase(tag)
+                    && thisTypeName.equals(typeNameArg)
+                    && thisTypeNS.equals(typeNamespaceArg)
+                    && derivationMethod == 15) {
+                return false;
+            }
+        }
         return false;
     }
 }

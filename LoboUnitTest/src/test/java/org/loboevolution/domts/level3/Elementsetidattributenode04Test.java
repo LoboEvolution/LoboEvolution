@@ -59,7 +59,7 @@ public class Elementsetidattributenode04Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         elemList = doc.getElementsByTagName("strong");
         nameElem = (Element) elemList.item(1);
-        nameElem.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:middle", "http://www.example.com/middle");
+        nameElem.setAttributeNS("http://www.w3.org/2000/xmlns", "xmlns:middle", "http://www.example.com/middle");
         attributesMap = nameElem.getAttributes();
         attr = (Attr) attributesMap.getNamedItem("xmlns:middle");
         nameElem.setIdAttributeNode(attr, true);

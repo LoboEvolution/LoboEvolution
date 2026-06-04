@@ -51,8 +51,6 @@ public class Normalizecharacters05Test extends LoboUnitTest {
     public void runTest() {
         final Document doc;
         final DOMConfiguration domConfig;
-        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
-
         HTMLCollection pList;
         Element pElem;
         Text text;
@@ -61,12 +59,13 @@ public class Normalizecharacters05Test extends LoboUnitTest {
         domConfig = doc.getDomConfig();
         domConfig.setParameter("normalize-characters", Boolean.FALSE);
         /*DOMErrorMonitor */
-        domConfig.setParameter("error-handler", errorMonitor);
+        domConfig.setParameter("error-handler", new DOMErrorMonitor());
         pList = doc.getElementsByTagName("p");
         pElem = (Element) pList.item(0);
         text = doc.createTextNode("suçon");
         pElem.appendChild(text);
         doc.normalize();
+        DOMErrorMonitor errorMonitor = (DOMErrorMonitor) domConfig.getParameter("error-handler");
         assertTrue(errorMonitor.assertLowerSeverity(2), "Normalizecharacters05Assert3");
         pList = doc.getElementsByTagName("p");
         pElem = (Element) pList.item(0);

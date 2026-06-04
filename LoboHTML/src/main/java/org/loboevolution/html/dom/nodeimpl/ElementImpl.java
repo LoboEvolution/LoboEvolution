@@ -44,6 +44,7 @@ import org.loboevolution.html.dom.filter.ElementFilter;
 import org.loboevolution.html.dom.filter.TagNameFilter;
 import org.loboevolution.html.dom.filter.TagNsNameFilter;
 import org.loboevolution.gui.HtmlPanel;
+import org.loboevolution.html.dom.nodeimpl.internal.NodeInternal;
 import org.loboevolution.html.js.geom.DOMRectImpl;
 import org.loboevolution.html.js.geom.DOMRectListImpl;
 import org.loboevolution.html.node.*;
@@ -76,7 +77,7 @@ import java.util.stream.Stream;
  * <p>ElementImpl class.</p>
  */
 @Slf4j
-public class ElementImpl extends NodeImpl implements Element {
+public class ElementImpl extends NodeInternal implements Element {
 
 	private static final int SCROLL_BAR_THICKNESS = 16;
 
@@ -94,9 +95,22 @@ public class ElementImpl extends NodeImpl implements Element {
 	 */
 	public ElementImpl(final String name) {
 		this.name = name;
-		this.map = new NamedNodeMapImpl(this, new NodeListImpl());
+		this.map = new NamedNodeMapImpl(this, new NodeListImpl(), false);
 		this.tokList = new DOMTokenListImpl(this);
+	}
 
+	/** {@inheritDoc} */
+	@Override
+	public String getBaseURI() {
+		final String xmlBase = getAttribute("xml:base");
+		if (Strings.isNotBlank(xmlBase)) {
+			return xmlBase;
+		}
+		final Node parent = getParentNode();
+		if (parent != null) {
+			return parent.getBaseURI();
+	}
+		return document.getBaseURI();
 	}
 
 	/** {@inheritDoc} */
@@ -203,14 +217,14 @@ public class ElementImpl extends NodeImpl implements Element {
 				throw new DOMException(DOMException.NAMESPACE_ERR, "The qualified name provided has an empty local name.");
 			}
 
-			if (!Strings.isXMLIdentifier(split[0]) || !Strings.isXMLIdentifier(split[1])) {
+			if (Strings.isXMLIdentifier(split[0]) || Strings.isXMLIdentifier(split[1])) {
 				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
 			}
 
 			prefix = split[0];
 			name = split[1];
 		} else {
-			if (!Strings.isXMLIdentifier(name)) {
+			if (Strings.isXMLIdentifier(name)) {
 				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
 			}
 		}
@@ -223,7 +237,7 @@ public class ElementImpl extends NodeImpl implements Element {
 		final AttrImpl attr = new AttrImpl(name, value, "id".equalsIgnoreCase(name), this, true);
 		final Document doc = getOwnerDocument();
 		attr.setOwnerDocument(doc);
-		attr.setParentImpl(this);
+		attr.setParentImpl(null);
 		attr.setNamespaceURI(getNamespaceURI() != null ? getNamespaceURI() : doc != null ? doc.getNamespaceURI() : getParentNode() != null ? getParentNode().getNamespaceURI() : null);
 		if (Strings.isNotBlank(prefix) && Strings.isNotBlank(attr.getNamespaceURI())) {
 			attr.setPrefix(prefix);
@@ -251,11 +265,11 @@ public class ElementImpl extends NodeImpl implements Element {
 				throw new DOMException(DOMException.NAMESPACE_ERR, "The qualified name provided has an empty local name.");
 			}
 
-			if (split[0].equals("xml") && !"http://www.w3.org/XML/1998/namespace".equals(namespaceURI)) {
-				throw new DOMException(DOMException.NAMESPACE_ERR, "The namespaceURI is not http://www.w3.org/XML/1998/namespace.");
+			if (split[0].equals("xml") && !XML_NAMESPACE_URI.equals(namespaceURI)) {
+				throw new DOMException(DOMException.NAMESPACE_ERR, "The namespaceURI is not http://www.w3.org/XML/1998/namespace");
 			}
 
-			if (!Strings.isXMLIdentifier(split[0]) || !Strings.isXMLIdentifier(split[1])) {
+			if (Strings.isXMLIdentifier(split[0]) || Strings.isXMLIdentifier(split[1])) {
 				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
 			}
 
@@ -264,11 +278,11 @@ public class ElementImpl extends NodeImpl implements Element {
 
 		} else {
 
-			if (!Strings.isXMLIdentifier(qualifiedName)) {
+			if (Strings.isXMLIdentifier(qualifiedName)) {
 				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
 			}
 
-			if (qualifiedName.equals("xmlns") && !"http://www.w3.org/2000/xmlns".equals(namespaceURI)) {
+			if (qualifiedName.equals("xmlns") && !XMLNS_NAMESPACE_URI.equals(namespaceURI)) {
 				throw new DOMException(DOMException.NAMESPACE_ERR, "The namespaceURI is not http://www.w3.org/XML/1998/namespace.");
 			}
 		}
@@ -279,10 +293,10 @@ public class ElementImpl extends NodeImpl implements Element {
 			removeAttributeNode((AttrImpl) node);
 		}
 
-		final AttrImpl attr = new AttrImpl(qualifiedName, value, "id".equalsIgnoreCase(name), this, true);
+		final AttrImpl attr = new AttrImpl(qualifiedName, value, "id".equalsIgnoreCase(qualifiedName), this, true);
 		attr.setNamespaceURI(namespaceURI);
 		attr.setOwnerDocument(getOwnerDocument());
-		attr.setParentImpl(this);
+		attr.setParentImpl(null);
 		if (Strings.isNotBlank(prefix)) attr.setPrefix(prefix);
 		map.setNamedItemNS(attr);
 		assignAttributeField(qualifiedName, value);
@@ -294,6 +308,7 @@ public class ElementImpl extends NodeImpl implements Element {
 		final AttrImpl attr = (AttrImpl) getAttributeNode(localName);
 		if (attr != null) {
 			attr.setNameId(isId);
+			map.setNamedItem(attr);
 		} else {
 			throw new DOMException(DOMException.NOT_FOUND_ERR, "Attribute not found");
 		}
@@ -307,6 +322,7 @@ public class ElementImpl extends NodeImpl implements Element {
 		final AttrImpl attr = (AttrImpl) getAttributeNodeNS(namespaceURI, localName);
 		if (attr != null) {
 			attr.setNameId(isId);
+			map.setNamedItemNS(attr);
 		} else {
 			throw new DOMException(DOMException.NOT_FOUND_ERR, "Attribute not found");
 		}

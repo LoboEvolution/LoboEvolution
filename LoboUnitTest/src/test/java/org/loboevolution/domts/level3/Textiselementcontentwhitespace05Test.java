@@ -55,7 +55,6 @@ public class Textiselementcontentwhitespace05Test extends LoboUnitTest {
         final DOMConfiguration domConfig;
         final boolean canSetValidation;
         final Node refChild;
-        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
 
         doc = sampleXmlFile("barfoo.xml");
         domConfig = doc.getDomConfig();
@@ -64,13 +63,14 @@ public class Textiselementcontentwhitespace05Test extends LoboUnitTest {
         if (canSetValidation) {
             domConfig.setParameter("validate", Boolean.TRUE);
             /*DOMErrorMonitor */
-            domConfig.setParameter("error-handler", errorMonitor);
+            domConfig.setParameter("error-handler", new DOMErrorMonitor());
             bodyList = doc.getElementsByTagName("body");
             bodyElem = (Element) bodyList.item(0);
             refChild = bodyElem.getFirstChild();
             nonBlankNode = doc.createTextNode("not blank");
             bodyElem.insertBefore(nonBlankNode, refChild);
             doc.normalizeDocument();
+            DOMErrorMonitor errorMonitor = (DOMErrorMonitor) domConfig.getParameter("error-handler");
             assertTrue(errorMonitor.assertLowerSeverity(2), "Textiselementcontentwhitespace05Assert3");
             bodyList = doc.getElementsByTagName("body");
             bodyElem = (Element) bodyList.item(0);

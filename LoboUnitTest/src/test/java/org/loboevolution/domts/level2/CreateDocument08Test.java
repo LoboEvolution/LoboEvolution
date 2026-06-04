@@ -51,7 +51,7 @@ public class CreateDocument08Test extends LoboUnitTest {
      */
     @Test
     public void runTest() {
-        final String namespaceURI = "http://www.example.org/schema";
+        final String namespaceURI = "https://www.example.org/schema";
         final DOMImplementation domImpl;
         domImpl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(), true));
         boolean success = false;

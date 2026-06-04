@@ -70,7 +70,7 @@ public class ImportNode10Test extends LoboUnitTest {
         final String name;
         doc = sampleXmlFile("staffNS.xml");
         aNewDoc = sampleXmlFile("staffNS.xml");
-        entRef = aNewDoc.createEntityReference("entRef1");
+        entRef = aNewDoc.createEntityReference("ent1");
         assertNotNull(entRef);
 
         boolean success = false;
@@ -87,7 +87,7 @@ public class ImportNode10Test extends LoboUnitTest {
         system = docType.getSystemId();
         assertEquals("staffNS.dtd", system);
         name = aNode.getNodeName();
-        assertEquals("entRef1", name);
+        assertEquals("ent1", name);
     }
 }
 

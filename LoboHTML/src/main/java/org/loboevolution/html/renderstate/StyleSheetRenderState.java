@@ -53,6 +53,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.*;
 
+import static org.loboevolution.html.CSSValues.*;
+
 /**
  * <p>StyleSheetRenderState class.</p>
  */
@@ -203,14 +205,26 @@ public class StyleSheetRenderState implements RenderState {
 	@Override
 	public String getAlignItems() {
 		final CSSStyleDeclaration props = this.getCssProperties();
-		return props == null ? null : props.getAlignItems();
+		final String alignItems = props == null ? null : props.getAlignItems();
+		final String items = Strings.isBlank(alignItems) ? "" : alignItems;
+		final CSSValues flt = CSSValues.get(items);
+		return switch (flt) {
+			case STRETCH, CENTER, FLEX_START, FLEX_END, BASELINE -> items;
+			default -> NORMAL.getValue();
+		};
 	}
 	
 	/** {@inheritDoc} */
 	@Override
 	public String getAlignContent() {
 		final CSSStyleDeclaration props = this.getCssProperties();
-		return props == null ? null : props.getAlignContent();
+		final String alignContent = props == null ? null : props.getAlignContent();
+		final String align = Strings.isBlank(alignContent) ? "" : alignContent;
+		final CSSValues flt = CSSValues.get(align);
+		return switch (flt) {
+			case STRETCH, CENTER, FLEX_START, FLEX_END, SPACE_BETWEEN, SPACE_AROUND -> align;
+			default -> STRETCH.getValue();
+		};
 	}
 	
 	/** {@inheritDoc} */
@@ -492,7 +506,13 @@ public class StyleSheetRenderState implements RenderState {
 	@Override
 	public String getFlexWrap() {
 		final CSSStyleDeclaration props = this.getCssProperties();
-		return props == null ? null : props.getFlexWrap();
+		final String flexWrap = props == null ? null : props.getFlexWrap();
+		final String wrap = Strings.isBlank(flexWrap) ? "" : flexWrap;
+		final CSSValues flt = CSSValues.get(wrap);
+		return switch (flt) {
+			case NOWRAP, WRAP, WRAP_REVERSE -> wrap;
+			default -> NOWRAP.getValue();
+		};
 	}
 	
 	/** {@inheritDoc} */
@@ -506,7 +526,13 @@ public class StyleSheetRenderState implements RenderState {
 	@Override
 	public String getJustifyContent() {
 		final CSSStyleDeclaration props = this.getCssProperties();
-		return props == null ? null : props.getJustifyContent();
+		final String justifyContent = props == null ? null : props.getJustifyContent();
+		final String flexDirText = Strings.isBlank(justifyContent) ? "" : justifyContent;
+		final CSSValues flt = CSSValues.get(flexDirText);
+		return switch (flt) {
+			case FLEX_START, FLEX_END, CENTER, SPACE_AROUND, SPACE_BETWEEN -> flexDirText;
+			default -> FLEX_START.getValue();
+		};
 	}
 
 	/** {@inheritDoc} */
@@ -908,6 +934,12 @@ public class StyleSheetRenderState implements RenderState {
 		switch (white) {
 		case NOWRAP:
 			wsValue = WS_NOWRAP;
+			break;
+		case PRE:
+		case PRE_WRAP:
+		case BREAK_SPACE:
+		case PRE_LINE:
+			wsValue = WS_PRE;
 			break;
 		case INHERIT:
 			wsValue = this.getPreviousRenderState().getWhiteSpace();

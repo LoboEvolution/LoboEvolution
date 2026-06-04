@@ -29,6 +29,7 @@ package org.loboevolution.domts.level1;
 
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
+import org.loboevolution.html.dom.nodeimpl.ElementImpl;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.Node;
@@ -58,16 +59,16 @@ public class HcnoderemovechildTest extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
-        final Element rootNode;
+        final ElementImpl rootNode;
         final NodeList childList;
         final Node childToRemove;
         final Node removedChild;
         final Node parentNode;
         doc = sampleXmlFile("hc_staff.xml");
-        rootNode = doc.getDocumentElement();
+        rootNode = (ElementImpl) doc.getDocumentElement();
         childList = rootNode.getChildNodes();
         childToRemove = childList.item(1);
-        removedChild = rootNode.removeChild(childToRemove);
+        removedChild = rootNode.removeChildInternal(childToRemove);
         parentNode = removedChild.getParentNode();
         assertNull(parentNode, "HcnoderemovechildAssert2");
     }

@@ -58,8 +58,8 @@ public class ImportNode12Test extends LoboUnitTest {
         final Document aNewDoc;
         final DocumentType doc1Type;
         final NamedNodeMap entityList;
-        final EntityReference entity2;
-        final EntityReference entity1;
+        final Entity entity2;
+        final Entity entity1;
         final Document ownerDocument;
         final DocumentType docType;
         final String system;
@@ -69,8 +69,8 @@ public class ImportNode12Test extends LoboUnitTest {
         doc1Type = aNewDoc.getDoctype();
         entityList = doc1Type.getEntities();
         assertNotNull(entityList);
-        entity2 = (EntityReference) entityList.getNamedItem("ent4");
-        entity1 = (EntityReference) doc.importNode(entity2, true);
+        entity2 = (Entity) entityList.getNamedItem("ent4");
+        entity1 = (Entity) doc.importNode(entity2, true);
         ownerDocument = entity1.getOwnerDocument();
         docType = ownerDocument.getDoctype();
         system = docType.getSystemId();

@@ -50,7 +50,7 @@ public class Documentadoptnode18Test extends LoboUnitTest {
         final DOMImplementation domImpl;
         final DocumentType docType;
         final NamedNodeMap entityMap;
-        final EntityReference ent;
+        final Entity ent;
         final Element docElem;
         final String rootNS;
         final String rootName;
@@ -62,8 +62,7 @@ public class Documentadoptnode18Test extends LoboUnitTest {
         newDoc = domImpl.createDocument(rootNS, rootName, null);
         docType = doc.getDoctype();
         entityMap = docType.getEntities();
-        ent = (EntityReference) entityMap.getNamedItem("delta");
-
+        ent = (Entity) entityMap.getNamedItem("delta");
 
         boolean success = false;
         try {

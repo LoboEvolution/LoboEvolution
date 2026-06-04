@@ -54,10 +54,7 @@ public class Comments01Test extends LoboUnitTest {
         final Comment newComment;
         final Node lastChild;
         final String nodeName;
-        final DOMConfiguration domConfig;
-        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
-
-        HTMLCollection pList;
+        final DOMConfiguration domConfig;HTMLCollection pList;
         doc = sampleXmlFile("barfoo.xml");
         pList = doc.getElementsByTagName("p");
         elem = (Element) pList.item(0);
@@ -66,8 +63,9 @@ public class Comments01Test extends LoboUnitTest {
         domConfig = doc.getDomConfig();
         domConfig.setParameter("comments", Boolean.FALSE);
         /*DOMErrorMonitor */
-        domConfig.setParameter("error-handler", errorMonitor);
+        domConfig.setParameter("error-handler", new DOMErrorMonitor());
         doc.normalize();
+        DOMErrorMonitor errorMonitor = (DOMErrorMonitor) domConfig.getParameter("error-handler");
         assertTrue(errorMonitor.assertLowerSeverity(2), "Comments01Assert3");
         pList = doc.getElementsByTagName("p");
         elem = (Element) pList.item(0);

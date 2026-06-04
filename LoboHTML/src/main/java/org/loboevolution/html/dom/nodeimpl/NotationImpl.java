@@ -30,6 +30,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.html.dom.Notation;
+import org.loboevolution.html.node.Node;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -58,6 +59,30 @@ public class NotationImpl extends NodeImpl implements Notation {
     public void setNodeValue(String nodeValue) throws DOMException {
         throw new DOMException(DOMException.INVALID_MODIFICATION_ERR, "readonly node");
     }
+
+    @Override
+    public short compareDocumentPosition(Node other) {
+        if (other == null) {
+            throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "other is null");
+        }
+
+        if (other == this) {
+            return 0;
+        }
+
+        if (other.getNodeType() == Node.ENTITY_NODE) {
+            return DOCUMENT_POSITION_PRECEDING;
+        }
+
+        return this.compareDocumentPosition(other);
+    }
+    @Override
+    public String getTextContent() {
+        return null;
+    }
+
+    @Override
+    public void setTextContent(String textContent) {}
 
     @Override
     public boolean hasAttributes() {

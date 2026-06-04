@@ -57,11 +57,11 @@ public class BasicInput implements FocusListener, KeyListener, CaretListener, Mo
     @Override
     public void focusGained(final FocusEvent e) {
         if (element.getOnfocus() != null) {
-            Executor.executeFunction(element, element.getOnfocus(), new Object[]{}, getWindowFactory());
+            Executor.executeFunction(element.getOwnerDocument(), element, element.getOnfocus(), new Object[]{}, getWindowFactory());
         }
 
         if (element.getOnfocusin() != null) {
-            Executor.executeFunction(element, element.getOnfocusin(), new Object[]{}, getWindowFactory());
+            Executor.executeFunction(element.getOwnerDocument(), element, element.getOnfocusin(), new Object[]{}, getWindowFactory());
         }
     }
 
@@ -92,28 +92,28 @@ public class BasicInput implements FocusListener, KeyListener, CaretListener, Mo
         }
 
         if (element.getOnblur() != null) {
-            Executor.executeFunction(element, element.getOnblur(), new Object[]{}, getWindowFactory());
+            Executor.executeFunction(element.getOwnerDocument(), element, element.getOnblur(), new Object[]{}, getWindowFactory());
         }
 
         if (element.getOnfocusout() != null) {
             jComponent.setText(element.getValue());
-            Executor.executeFunction(element, element.getOnfocusout(), new Object[]{}, getWindowFactory());
+            Executor.executeFunction(element.getOwnerDocument(), element, element.getOnfocusout(), new Object[]{}, getWindowFactory());
         }
     }
 
     @Override
     public void keyTyped(final KeyEvent e) {
         if (element.getOnkeydown() != null) {
-            Executor.executeFunction(element, element.getOnkeydown(), new Object[]{}, getWindowFactory());
+            Executor.executeFunction(element.getOwnerDocument(), element, element.getOnkeydown(), new Object[]{}, getWindowFactory());
         }
 
         if (element.getOnkeypress() != null) {
-            Executor.executeFunction(element, element.getOnkeypress(), new Object[]{}, getWindowFactory());
+            Executor.executeFunction(element.getOwnerDocument(), element, element.getOnkeypress(), new Object[]{}, getWindowFactory());
         }
 
         if (element.getOninput() != null) {
             element.setValue(Strings.isBlank(element.getValue()) ? String.valueOf(e.getKeyChar()) : element.getValue() + e.getKeyChar());
-            Executor.executeFunction(element, element.getOninput(), new Object[]{}, getWindowFactory());
+            Executor.executeFunction(element.getOwnerDocument(), element, element.getOninput(), new Object[]{}, getWindowFactory());
         }
     }
 
@@ -125,7 +125,7 @@ public class BasicInput implements FocusListener, KeyListener, CaretListener, Mo
     @Override
     public void keyReleased(final KeyEvent e) {
         if (element.getOnkeyup() != null) {
-            Executor.executeFunction(element, element.getOnkeyup(), new Object[]{}, getWindowFactory());
+            Executor.executeFunction(element.getOwnerDocument(), element, element.getOnkeyup(), new Object[]{}, getWindowFactory());
         }
     }
 
@@ -135,30 +135,30 @@ public class BasicInput implements FocusListener, KeyListener, CaretListener, Mo
         final int mark = e.getMark();
 
         if (dot != mark && element.getOnselect() != null) {
-            Executor.executeFunction(element, element.getOnselect(), new Object[]{}, getWindowFactory());
+            Executor.executeFunction(element.getOwnerDocument(), element, element.getOnselect(), new Object[]{}, getWindowFactory());
         }
     }
 
     @Override
     public void mouseEntered(final MouseEvent e) {
         if (element.getOnmouseover() != null) {
-            Executor.executeFunction(element, element.getOnmouseover(), new Object[]{}, getWindowFactory());
+            Executor.executeFunction(element.getOwnerDocument(), element, element.getOnmouseover(), new Object[]{}, getWindowFactory());
         }
     }
 
     public void mousePressed(final MouseEvent e) {
         if (element.getOnkeypress() != null) {
-            Executor.executeFunction(element, element.getOnkeypress(), new Object[]{}, getWindowFactory());
+            Executor.executeFunction(element.getOwnerDocument(), element, element.getOnkeypress(), new Object[]{}, getWindowFactory());
         }
 
         if (element.getOnkeydown() != null) {
-            Executor.executeFunction(element, element.getOnkeydown(), new Object[]{}, getWindowFactory());
+            Executor.executeFunction(element.getOwnerDocument(), element, element.getOnkeydown(), new Object[]{}, getWindowFactory());
         }
     }
 
     public void mouseReleased(final MouseEvent e) {
         if (element.getOnkeyup() != null) {
-            Executor.executeFunction(element, element.getOnkeyup(), new Object[]{}, getWindowFactory());
+            Executor.executeFunction(element.getOwnerDocument(), element, element.getOnkeyup(), new Object[]{}, getWindowFactory());
         }
     }
 

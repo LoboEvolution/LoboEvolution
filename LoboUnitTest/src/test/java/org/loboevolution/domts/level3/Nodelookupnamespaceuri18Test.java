@@ -58,7 +58,7 @@ public class Nodelookupnamespaceuri18Test extends LoboUnitTest {
         elem = (Element) elemList.item(3);
         attributesMap = elem.getAttributes();
         attr = (Attr) attributesMap.getNamedItemNS("*", "dir");
-        namespaceURI = attr.lookupNamespaceURI("nm");
+        namespaceURI = attr.lookupNamespaceURI("xmlns");
         assertEquals("http://www.altavista.com", namespaceURI, "Nodelookupnamespaceuri18Assert2");
     }
 }

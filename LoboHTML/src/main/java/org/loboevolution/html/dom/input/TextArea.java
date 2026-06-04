@@ -81,7 +81,7 @@ public class TextArea extends BasicInput {
 			public void mouseEntered(final MouseEvent e) {
 				if (modelNode.getOnmouseover() != null) {
 					final WindowImpl win = (WindowImpl) modelNode.getDocumentNode().getDefaultView();
-					Executor.executeFunction(modelNode, modelNode.getOnmouseover(), new Object[] {}, win.getContextFactory());
+					Executor.executeFunction(modelNode.getDocumentNode(), modelNode, modelNode.getOnmouseover(), new Object[] {}, win.getContextFactory());
 				}
 			}
 		};

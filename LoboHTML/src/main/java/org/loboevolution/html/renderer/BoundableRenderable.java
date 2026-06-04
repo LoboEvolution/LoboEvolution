@@ -284,6 +284,9 @@ public interface BoundableRenderable extends Renderable {
 	 */
 	boolean onRightClick(final MouseEvent event, final int x, final int y);
 
+	/**
+	 * <p>onMouseScroll.</p>
+	 */
 	void onMouseScroll();
 
 	/**

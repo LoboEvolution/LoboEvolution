@@ -58,7 +58,7 @@ public class Typeinfoisderivedfrom65Test extends LoboUnitTest {
         elemList = doc.getElementsByTagName("strong");
         strongElem = (Element) elemList.item(0);
         elemTypeInfo = (AttributeTypeInfo) strongElem.getSchemaTypeInfo();
-        retValue = ((TypeInfo) elemTypeInfo).isDerivedFrom("http://www.w3.org/2001/XMLSchema", "string", 8);
+        retValue = elemTypeInfo.isDerivedFrom("http://www.w3.org/2001/XMLSchema", "string", 8);
         assertTrue(retValue, "Typeinfoisderivedfrom65Assert2");
     }
 }

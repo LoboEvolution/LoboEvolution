@@ -29,6 +29,7 @@ package org.loboevolution.domts.level3;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
+import org.loboevolution.html.dom.nodeimpl.AttrImpl;
 import org.loboevolution.html.node.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -47,23 +48,23 @@ public class Nodereplacechild32Test extends LoboUnitTest {
         final Document doc;
         final HTMLCollection childList;
         final Element elem;
-        final Attr parent;
+        final AttrImpl parent;
         final Text newChild;
         final Node replaced;
         final String nodeName;
         final EntityReference enRef;
         final EntityReference enRefChild;
-        final String reference = "entity1";
+        final String reference = "gamma";
         doc = sampleXmlFile("hc_staff.xml");
         newChild = doc.createTextNode("Text");
         childList = doc.getElementsByTagNameNS("*", "acronym");
         elem = (Element) childList.item(3);
-        parent = elem.getAttributeNode("class");
+        parent = (AttrImpl) elem.getAttributeNode("class");
         enRef = doc.createEntityReference(reference);
-        enRefChild = (EntityReference) parent.appendChild(enRef);
-        replaced = parent.replaceChild(newChild, enRefChild);
+        enRefChild = (EntityReference) parent.appendChildInternal(enRef);
+        replaced = parent.replaceChildInternal(newChild, enRefChild);
         nodeName = replaced.getNodeName();
-        assertEquals("entity1", nodeName, "Nodereplacechild32Assert2");
+        assertEquals("gamma", nodeName, "Nodereplacechild32Assert2");
     }
 }
 

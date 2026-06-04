@@ -57,7 +57,7 @@ public class Nodereplacechild19Test extends LoboUnitTest {
         docFrag.appendChild(elem);
         replaced = docFrag.replaceChild(entRef, elem);
         nodeName = replaced.getNodeName();
-        assertEquals("dom3:p", nodeName, "Nodereplacechild19Assert2");
+        assertEquals("alpha", nodeName, "Nodereplacechild19Assert2");
     }
 }
 

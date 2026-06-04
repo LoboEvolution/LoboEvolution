@@ -59,9 +59,9 @@ public class Namednodemapremovenameditemns04Test extends LoboUnitTest {
         elementList = doc.getElementsByTagNameNS("*", "employee");
         element = (Element) elementList.item(0);
         attributes = element.getAttributes();
-        attribute = attributes.getNamedItemNS("http://www.w3.org/2000/xmlns/", "xmlns");
+        attribute = attributes.getNamedItemNS("http://www.w3.org/2000/xmlns", "xmlns");
         assertNull(attribute);
-        attribute = attributes.getNamedItemNS("http://www.w3.org/2000/xmlns/", "dmstc");
+        attribute = attributes.getNamedItemNS("http://www.w3.org/2000/xmlns", "dmstc");
         assertNull(attribute);
     }
 }

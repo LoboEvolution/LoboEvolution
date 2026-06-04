@@ -57,8 +57,8 @@ public class Nodesettextcontent10Test extends LoboUnitTest {
         elem = doc.createElementNS("http://www.w3.org/DOM/Test", "dom3:elem");
         txt = doc.createTextNode("Text ");
         comment = doc.createComment("Comment ");
-        entRef = doc.createEntityReference("ent1");
-        pi = doc.createProcessingInstruction("PIT", "PIData ");
+        entRef = doc.createEntityReference("beta");
+        pi = doc.createProcessingInstruction("PIT", "PIData");
         cdata = doc.createCDATASection("CData");
         elem.appendChild(txt);
         elem.appendChild(comment);

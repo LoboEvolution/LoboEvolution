@@ -29,6 +29,7 @@ package org.loboevolution.domts.level3;
 
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
+import org.loboevolution.html.dom.nodeimpl.AttrImpl;
 import org.loboevolution.html.node.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -48,7 +49,7 @@ public class Documentadoptnode16Test extends LoboUnitTest {
         final DocumentFragment docFragment;
         final Element parent;
         final Element child;
-        final Attr childsAttr;
+        final AttrImpl childsAttr;
         final EntityReference entRef;
         final Text textNode;
         final Node adopted;
@@ -64,10 +65,10 @@ public class Documentadoptnode16Test extends LoboUnitTest {
         docFragment = doc.createDocumentFragment();
         parent = doc.createElement("parent");
         child = doc.createElement("child");
-        childsAttr = doc.createAttribute("state");
+        childsAttr = (AttrImpl) doc.createAttribute("state");
         entRef = doc.createEntityReference("gamma");
         textNode = doc.createTextNode("Test");
-        childsAttr.appendChild(entRef);
+        childsAttr.appendChildInternal(entRef);
         child.setAttributeNode(childsAttr);
         child.appendChild(textNode);
         parent.appendChild(child);

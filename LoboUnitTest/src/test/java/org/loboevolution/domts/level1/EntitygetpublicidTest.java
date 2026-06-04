@@ -31,7 +31,7 @@ import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
-import org.loboevolution.html.node.EntityReference;
+import org.loboevolution.html.node.Entity;
 import org.loboevolution.html.node.NamedNodeMap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -61,7 +61,7 @@ public class EntitygetpublicidTest extends LoboUnitTest {
         final Document doc;
         final DocumentType docType;
         final NamedNodeMap entityList;
-        final EntityReference entityNode;
+        final Entity entityNode;
         final String publicId;
         final String notation;
         doc = sampleXmlFile("staff.xml");
@@ -69,7 +69,7 @@ public class EntitygetpublicidTest extends LoboUnitTest {
         assertNotNull(docType, "EntitygetpublicidAssert1");
         entityList = docType.getEntities();
         assertNotNull(entityList, "EntitygetpublicidAssert2");
-        entityNode = (EntityReference) entityList.getNamedItem("ent5");
+        entityNode = (Entity) entityList.getNamedItem("ent5");
         publicId = entityNode.getPublicId();
         assertEquals("entityURI", publicId, "EntitygetpublicidAssert3");
         entityNode.getSystemId();

@@ -67,7 +67,7 @@ public class Hcattrappendchild5Test extends LoboUnitTest {
         try {
             titleAttr.appendChild(textNode);
         } catch (final DOMException ex) {
-            success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
+            success = (ex.getCode() == DOMException.WRONG_DOCUMENT_ERR);
         }
         assertTrue(success, "Hcattrappendchild5Assert2");
 

@@ -62,6 +62,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=542">http://www.w3.org/Bugs/Public/show_bug.cgi?id=542</a>
  */
 public class DocumentnormalizeDocument07Test extends LoboUnitTest {
+
     @Test
     public void runTest() {
         final Document doc;
@@ -69,10 +70,7 @@ public class DocumentnormalizeDocument07Test extends LoboUnitTest {
         final DOMConfiguration domConfig;
         final HTMLCollection elemList;
         final CDATASection newChild;
-        final Node oldChild;
-        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
-
-        final List<DOMError> errors;
+        final Node oldChild;final List<DOMError> errors;
 
         DOMError error;
         int errorCount = 0;
@@ -90,8 +88,9 @@ public class DocumentnormalizeDocument07Test extends LoboUnitTest {
         domConfig = doc.getDomConfig();
         domConfig.setParameter("split-cdata-sections", Boolean.FALSE);
         /*DOMErrorMonitor */
-        domConfig.setParameter("error-handler", errorMonitor);
+        domConfig.setParameter("error-handler", new DOMErrorMonitor());
         doc.normalizeDocument();
+        DOMErrorMonitor errorMonitor = (DOMErrorMonitor) domConfig.getParameter("error-handler");
         errors = errorMonitor.getErrors();
         for (DOMError domError : errors) {
             error = domError;
@@ -109,14 +108,10 @@ public class DocumentnormalizeDocument07Test extends LoboUnitTest {
                 message = error.getMessage();
                 length = message.length();
                 assertTrue(length > 0, "DocumentnormalizeDocument07Assert2");
-                error.getType();
-                error.getRelatedData();
-                error.getRelatedException();
                 errorCount += 1;
             } else {
                 assertEquals(1, severity, "DocumentnormalizeDocument07Assert3");
             }
-
         }
         assertEquals(1, errorCount, "DocumentnormalizeDocument07Assert4");
     }

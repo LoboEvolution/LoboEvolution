@@ -52,10 +52,7 @@ public class Canonicalform01Test extends LoboUnitTest {
         HTMLCollection pList;
         Element pElem;
         final DOMConfiguration domConfig;
-        final boolean canSet;
-        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
-
-        final Node child;
+        final boolean canSet;final Node child;
         final String childName;
         final EntityReference entRef;
         final String childValue;
@@ -66,12 +63,13 @@ public class Canonicalform01Test extends LoboUnitTest {
         if (canSet) {
             domConfig.setParameter("canonical-form", Boolean.TRUE);
             /*DOMErrorMonitor */
-            domConfig.setParameter("error-handler", errorMonitor);
+            domConfig.setParameter("error-handler", new DOMErrorMonitor());
             pList = doc.getElementsByTagName("p");
             pElem = (Element) pList.item(0);
             entRef = doc.createEntityReference("ent1");
             pElem.appendChild(entRef);
             doc.normalizeDocument();
+            DOMErrorMonitor errorMonitor = (DOMErrorMonitor) domConfig.getParameter("error-handler");
             assertTrue(errorMonitor.assertLowerSeverity(2), "Canonicalform01Assert1");
             pList = doc.getElementsByTagName("p");
             pElem = (Element) pList.item(0);

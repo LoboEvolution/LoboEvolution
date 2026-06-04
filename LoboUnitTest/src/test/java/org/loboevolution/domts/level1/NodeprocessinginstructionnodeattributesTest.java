@@ -29,7 +29,7 @@ package org.loboevolution.domts.level1;
 
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.dom.domimpl.HTMLProcessingInstruction;
+import org.loboevolution.html.dom.nodeimpl.ProcessingInstructionImpl;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.NamedNodeMap;
 import org.loboevolution.html.node.NodeList;
@@ -55,11 +55,11 @@ public class NodeprocessinginstructionnodeattributesTest extends LoboUnitTest {
     public void runTest() {
         final Document doc;
         final NodeList testList;
-        final HTMLProcessingInstruction piNode;
+        final ProcessingInstructionImpl piNode;
         final NamedNodeMap attrList;
         doc = sampleXmlFile("staff.xml");
         testList = doc.getChildNodes();
-        piNode = (HTMLProcessingInstruction) testList.item(0);
+        piNode = (ProcessingInstructionImpl) testList.item(0);
         attrList = piNode.getAttributes();
         assertNull(attrList, "NodeprocessinginstructionnodeattributesAssert2");
     }

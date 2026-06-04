@@ -75,15 +75,13 @@ public class HcnodereplacechildinvalidnodetypeTest extends LoboUnitTest {
         oldChild = elementList.item(1);
         rootNode = (Element) oldChild.getParentNode();
 
-        {
-            boolean success = false;
-            try {
-                rootNode.replaceChild(newChild, oldChild);
-            } catch (final DOMException ex) {
-                success = (ex.getCode() == DOMException.HIERARCHY_REQUEST_ERR);
-            }
-            assertTrue(success, "HcnodereplacechildinvalidnodetypeAssert2");
+        boolean success = false;
+        try {
+            rootNode.replaceChild(newChild, oldChild);
+        } catch (final DOMException ex) {
+            success = (ex.getCode() == DOMException.HIERARCHY_REQUEST_ERR);
         }
+        assertTrue(success, "HcnodereplacechildinvalidnodetypeAssert2");
     }
 }
 

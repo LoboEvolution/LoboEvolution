@@ -68,7 +68,7 @@ public class Domconfigurationcansetparameter02Test extends LoboUnitTest {
         strongList = doc.getElementsByTagNameNS("*", "strong");
         strongElem = strongList.item(1);
         childList = strongElem.getChildNodes();
-        cdata1 = childList.item(1);
+        cdata1 = childList.item(0);
         nodeType = cdata1.getNodeType();
         assertEquals(4, nodeType, "Domconfigurationcansetparameter02Assert4");
         cdata2 = childList.item(3);

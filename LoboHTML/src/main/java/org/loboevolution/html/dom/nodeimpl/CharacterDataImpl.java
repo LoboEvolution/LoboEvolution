@@ -178,6 +178,12 @@ public abstract class CharacterDataImpl extends NodeImpl implements CharacterDat
 
 	/** {@inheritDoc} */
 	@Override
+	public String getBaseURI() {
+		return null;
+	}
+
+	/** {@inheritDoc} */
+	@Override
 	public String toString() {
 		String someText = this.text;
 		if (someText != null && someText.length() > 32) {

@@ -62,16 +62,13 @@ public class Noderemovechild18Test extends LoboUnitTest {
         removed = (CDATASection) parent.removeChild(child);
         removedValue = removed.getNodeValue();
         assertEquals("This is an adjacent CDATASection with a reference to a tab &tab;", removedValue, "Noderemovechild18Assert3");
-
-        {
-            boolean success = false;
-            try {
-                child.removeChild(parent);
-            } catch (final DOMException ex) {
-                success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
-            }
-            assertTrue(success, "Noderemovechild18Assert4");
+        boolean success = false;
+        try {
+            child.removeChild(parent);
+        } catch (final DOMException ex) {
+            success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
         }
+        assertTrue(success, "Noderemovechild18Assert4");
     }
 }
 

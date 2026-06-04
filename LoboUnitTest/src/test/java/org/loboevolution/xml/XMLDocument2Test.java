@@ -70,7 +70,7 @@ public class XMLDocument2Test extends LoboUnitTest {
                 + "<script>\n"
                 + "  function test() {\n"
                 + "    var doc = document.implementation.createDocument('', '', null);\n"
-                + "    var d = doc.createElement('doc');\n"
+                + "    var d = doc.createElement('div');\n"
                 + "    doc.appendChild(d);\n"
                 + "    var cdata = doc.createCDATASection('abcdefghij');\n"
                 + "    d.appendChild(cdata);\n"

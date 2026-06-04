@@ -30,6 +30,7 @@ package org.loboevolution.domts.level1;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
+import org.loboevolution.html.dom.nodeimpl.AttrImpl;
 import org.loboevolution.html.node.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -52,7 +53,7 @@ public class Hcattrremovechild1Test extends LoboUnitTest {
         final HTMLCollection acronymList;
         final Element testNode;
         final NamedNodeMap attributes;
-        final Attr titleAttr;
+        final AttrImpl titleAttr;
         String value;
         final Text textNode;
         final Node retval;
@@ -61,10 +62,10 @@ public class Hcattrremovechild1Test extends LoboUnitTest {
         acronymList = doc.getElementsByTagName("acronym");
         testNode = (Element) acronymList.item(3);
         attributes = testNode.getAttributes();
-        titleAttr = (Attr) attributes.getNamedItem("title");
+        titleAttr = (AttrImpl) attributes.getNamedItem("title");
         textNode = (Text) titleAttr.getFirstChild();
         assertNotNull(textNode, "Hcattrremovechild1Assert1");
-        retval = titleAttr.removeChild(textNode);
+        retval = titleAttr.removeChildInternal(textNode);
         value = titleAttr.getValue();
         assertEquals("", value, "Hcattrremovechild1Assert2");
         value = titleAttr.getNodeValue();

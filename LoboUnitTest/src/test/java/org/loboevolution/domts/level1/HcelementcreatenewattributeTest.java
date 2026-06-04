@@ -73,7 +73,7 @@ public class HcelementcreatenewattributeTest extends LoboUnitTest {
         districtAttr = testAddress.getAttributeNode("lang");
         assertNotNull(districtAttr, "HcelementcreatenewattributeAssert2");
         attrVal = testAddress.getAttribute("lang");
-        assertEquals("", attrVal, "HcelementcreatenewattributeAssert3");
+        assertEquals(null, attrVal, "HcelementcreatenewattributeAssert3");
     }
 }
 

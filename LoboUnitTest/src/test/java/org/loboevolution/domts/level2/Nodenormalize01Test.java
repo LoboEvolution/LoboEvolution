@@ -37,13 +37,13 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 /**
- * The method "normalize" puts all Text nodes in the full depth of the sub-tree underneath
+ * The method "normalize" puts all Text nodes in the full depth of the subtree underneath
  * this Node, including attribute nodes, into a "normal" form where only structure
  * (e.g., elements, comments, processing instructions, CDATA sections, and entity references)
  * separates Text nodes, i.e., there are neither adjacent Text nodes nor empty Text nodes.
  * <p>
  * Create a dom tree consisting of elements, comments, processing instructions, CDATA sections,
- * and entity references nodes seperated by text nodes.  Check the length of the node list of each
+ * and entity references nodes separated by text nodes.  Check the length of the node list of each
  * before and after normalize has been called.
 
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-normalize">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-normalize</a>
@@ -92,7 +92,7 @@ public class Nodenormalize01Test extends LoboUnitTest {
         cData = newDoc.createCDATASection("Cdata");
         comment = newDoc.createComment("comment");
         pi = newDoc.createProcessingInstruction("PITarget", "PIData");
-        entRef = newDoc.createEntityReference("EntRef");
+        entRef = newDoc.createEntityReference("ent6");
         assertNotNull(entRef);
         documentElement = newDoc.getDocumentElement();
         documentElement.appendChild(element1);

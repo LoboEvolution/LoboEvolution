@@ -27,7 +27,6 @@
 package org.loboevolution.junit;
 
 import org.htmlunit.cssparser.dom.DOMException;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.css.CSSStyleDeclaration;
@@ -44,6 +43,8 @@ import org.loboevolution.html.node.*;
 import org.loboevolution.http.UserAgentContext;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.loboevolution.html.node.Node.HTML_NAMESPACE_URI;
+import static org.loboevolution.html.node.Node.XML_NAMESPACE_URI;
 
 public class DOMElementTest extends LoboUnitTest {
 
@@ -97,7 +98,7 @@ public class DOMElementTest extends LoboUnitTest {
 
         attrs.setNamedItem(attr);
         final Attr xmlns = document.createAttributeNS(Document.XMLNS_NAMESPACE_URI, "xmlns");
-        xmlns.setValue(Document.HTML_NAMESPACE_URI);
+        xmlns.setValue(HTML_NAMESPACE_URI);
         attrs.setNamedItem(xmlns);
         assertEquals(3, attrs.getLength());
         assertTrue(body.hasAttribute("xmlns"));
@@ -118,15 +119,15 @@ public class DOMElementTest extends LoboUnitTest {
         document = sampleHtmlFile();
         final Element html = document.getDocumentElement();
         final Element body = document.createElement("body");
-        Attr idattr = document.createAttributeNS(Document.HTML_NAMESPACE_URI, "id");
+        Attr idattr = document.createAttributeNS(HTML_NAMESPACE_URI, "id");
         idattr.setValue("bodyId");
         body.setAttributeNode(idattr);
         assertNotNull(idattr.getParentNode());
         assertEquals("bodyId", body.getAttribute("id"));
         assertEquals("bodyId", body.getAttributeNode("id").getValue());
-        assertEquals("bodyId", body.getAttributeNodeNS(Document.HTML_NAMESPACE_URI, "id").getValue());
-        assertTrue(body.hasAttributeNS(Document.HTML_NAMESPACE_URI, "id"));
-        assertFalse(body.hasAttributeNS(Document.HTML_NAMESPACE_URI, "foo"));
+        assertEquals("bodyId", body.getAttributeNodeNS(HTML_NAMESPACE_URI, "id").getValue());
+        assertTrue(body.hasAttributeNS(HTML_NAMESPACE_URI, "id"));
+        assertFalse(body.hasAttributeNS(HTML_NAMESPACE_URI, "foo"));
         assertNull(body.getAttribute("foo"));
         assertNull(body.getAttributeNode("foo"));
         assertNull(body.getAttributeNS(Document.NAMESPACE_SVG, "id"));
@@ -151,7 +152,7 @@ public class DOMElementTest extends LoboUnitTest {
         body.setAttributeNode(idattr);
         assertTrue(body.hasAttribute("id"));
         assertNotNull(idattr.getOwnerElement());
-        body.removeAttributeNS(Document.HTML_NAMESPACE_URI, "id");
+        body.removeAttributeNS(HTML_NAMESPACE_URI, "id");
         assertFalse(body.hasAttribute("id"));
         assertFalse(body.hasAttributes());
 
@@ -164,14 +165,14 @@ public class DOMElementTest extends LoboUnitTest {
         assertEquals("1.1", svg.getAttribute("version"));
         assertEquals("1.1", svg.getAttributeNode("version").getValue());
         assertEquals("1.1", svg.getAttributeNodeNS(Document.NAMESPACE_SVG, "version").getValue());
-        assertNull(svg.getAttributeNS(Document.HTML_NAMESPACE_URI, "version"));
-        assertNull(svg.getAttributeNodeNS(Document.HTML_NAMESPACE_URI, "version"));
-        assertFalse(svg.hasAttributeNS(Document.HTML_NAMESPACE_URI, "version"));
+        assertNull(svg.getAttributeNS(HTML_NAMESPACE_URI, "version"));
+        assertNull(svg.getAttributeNodeNS(HTML_NAMESPACE_URI, "version"));
+        assertFalse(svg.hasAttributeNS(HTML_NAMESPACE_URI, "version"));
         assertTrue(svg.hasAttributeNS(Document.NAMESPACE_SVG, "version"));
 
         success = false;
         try {
-            svg.removeAttributeNS(Document.HTML_NAMESPACE_URI, "version");
+            svg.removeAttributeNS(HTML_NAMESPACE_URI, "version");
         } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
         }
@@ -219,17 +220,17 @@ public class DOMElementTest extends LoboUnitTest {
     public void testSetAttributeNS() {
         document = sampleHtmlFile();
         final Element html = document.getDocumentElement();
-        final Element body = document.createElementNS(Document.HTML_NAMESPACE_URI, "body");
+        final Element body = document.createElementNS(HTML_NAMESPACE_URI, "body");
         html.appendChild(body);
         assertFalse(body.hasAttributes());
-        body.setAttributeNS(Document.HTML_NAMESPACE_URI, "foo", "bar");
+        body.setAttributeNS(HTML_NAMESPACE_URI, "foo", "bar");
         assertTrue(body.hasAttribute("foo"));
-        assertTrue(body.hasAttributeNS(Document.HTML_NAMESPACE_URI, "foo"));
-        assertEquals("bar", body.getAttributeNS(Document.HTML_NAMESPACE_URI, "foo"));
+        assertTrue(body.hasAttributeNS(HTML_NAMESPACE_URI, "foo"));
+        assertEquals("bar", body.getAttributeNS(HTML_NAMESPACE_URI, "foo"));
         assertEquals("bar", body.getAttribute("foo"));
         body.setAttributeNS(null, "foo", "foobar");
         assertTrue(body.hasAttribute("foo"));
-        assertFalse(body.hasAttributeNS(Document.HTML_NAMESPACE_URI, "foo"));
+        assertFalse(body.hasAttributeNS(HTML_NAMESPACE_URI, "foo"));
         assertEquals("foobar", body.getAttributeNS(null, "foo"));
         assertEquals("foobar", body.getAttribute("foo"));
         body.setAttribute("foo", "bar");
@@ -270,13 +271,13 @@ public class DOMElementTest extends LoboUnitTest {
         document = sampleHtmlFile();
         final Element p = document.createElement("p");
         try {
-            p.setAttributeNS(Document.HTML_NAMESPACE_URI, null, "bar");
+            p.setAttributeNS(HTML_NAMESPACE_URI, null, "bar");
             fail("Must throw an exception");
         } catch (final DOMException e) {
             assertEquals(DOMException.INVALID_CHARACTER_ERR, e.getCode());
         }
         try {
-            p.setAttributeNS(Document.HTML_NAMESPACE_URI, "foo=", "bar");
+            p.setAttributeNS(HTML_NAMESPACE_URI, "foo=", "bar");
             fail("Must throw an exception");
         } catch (final DOMException e) {
             assertEquals(DOMException.INVALID_CHARACTER_ERR, e.getCode());
@@ -311,8 +312,8 @@ public class DOMElementTest extends LoboUnitTest {
         assertEquals("bodyId", body.getAttribute("id"));
         assertEquals(1, body.getAttributes().getLength());
         assertEquals("bodyId", body.getId());
-        assertNull(attr.lookupPrefix(Document.HTML_NAMESPACE_URI));
-        assertEquals(Document.XML_NAMESPACE_URI, attr.lookupNamespaceURI("xml"));
+        assertNull(attr.lookupPrefix(HTML_NAMESPACE_URI));
+        assertEquals(XML_NAMESPACE_URI, attr.lookupNamespaceURI("xml"));
         assertNull(attr.lookupNamespaceURI("foo"));
         // Set the attribute to itself
         body.setAttributeNode(attr);
@@ -331,14 +332,14 @@ public class DOMElementTest extends LoboUnitTest {
         assertEquals("fooclass", body.getAttribute("class"));
         assertFalse(body.getAttributeNode("class").isId());
         // Replace class attribute, first with another namespace
-        attr = document.createAttributeNS("http://www.example.com/examplens", "e:class");
+        attr = document.createAttributeNS("https://www.example.com/examplens", "e:class");
         attr.setValue("barclass");
         assertEquals("class", attr.getLocalName());
-        assertEquals("http://www.example.com/examplens", attr.getNamespaceURI());
+        assertEquals("https://www.example.com/examplens", attr.getNamespaceURI());
         body.setAttributeNodeNS(attr);
         assertEquals("e:class=barclass", attr.getName() + "=" + attr.getNodeValue());
-        assertEquals("http://www.example.com/examplens", attr.lookupNamespaceURI("e"));
-        assertEquals("e", attr.lookupPrefix("http://www.example.com/examplens"));
+        assertEquals("https://www.example.com/examplens", attr.lookupNamespaceURI("e"));
+        assertEquals("e", attr.lookupPrefix("https://www.example.com/examplens"));
         assertNull(attr.lookupPrefix(null));
         assertEquals("fooclass", body.getAttribute("class"));
         attr = document.createAttribute("class");
@@ -418,9 +419,9 @@ public class DOMElementTest extends LoboUnitTest {
     public void testSetAttributeNodeNSXML() {
         document = sampleHtmlFile();
         final Element html = document.getDocumentElement();
-        final Attr xml = document.createAttributeNS(Document.XML_NAMESPACE_URI, "xml:lang");
+        final Attr xml = document.createAttributeNS(XML_NAMESPACE_URI, "xml:lang");
         xml.setValue("en");
-        assertEquals(Document.XML_NAMESPACE_URI, xml.getNamespaceURI());
+        assertEquals(XML_NAMESPACE_URI, xml.getNamespaceURI());
         assertEquals("lang", xml.getLocalName());
         assertEquals("xml:lang", xml.getName());
         assertFalse(xml.isId());
@@ -428,22 +429,22 @@ public class DOMElementTest extends LoboUnitTest {
         assertTrue(html.hasAttributes());
         assertNotNull(xml.getParentNode());
         assertNotNull(xml.getOwnerElement());
-        assertTrue(html.hasAttributeNS(Document.XML_NAMESPACE_URI, "lang"));
+        assertTrue(html.hasAttributeNS(XML_NAMESPACE_URI, "lang"));
         final Attr attr = document.createAttribute("lang");
         attr.setValue("en");
         html.setAttributeNode(attr);
-        assertTrue(html.hasAttributeNS(Document.XML_NAMESPACE_URI, "lang"));
+        assertTrue(html.hasAttributeNS(XML_NAMESPACE_URI, "lang"));
         assertTrue(html.hasAttributeNS(null, "lang"));
         assertTrue(html.hasAttribute("lang"));
         assertSame(attr, html.getAttributeNode("lang"));
         assertEquals(2, html.getAttributes().getLength());
         // Recognize xml:id as an implicit 'id' attribute.
-        final Attr idattr = document.createAttributeNS(Document.XML_NAMESPACE_URI, "xml:id");
+        final Attr idattr = document.createAttributeNS(XML_NAMESPACE_URI, "xml:id");
         idattr.setValue("foo");
         html.setAttributeNode(idattr);
         assertTrue(idattr.isId());
-        assertTrue(html.hasAttributeNS(Document.XML_NAMESPACE_URI, "id"));
-        assertSame(idattr, html.getAttributeNodeNS(Document.XML_NAMESPACE_URI, "id"));
+        assertTrue(html.hasAttributeNS(XML_NAMESPACE_URI, "id"));
+        assertSame(idattr, html.getAttributeNodeNS(XML_NAMESPACE_URI, "id"));
         assertEquals("foo", html.getId());
         assertEquals(3, html.getAttributes().getLength());
         assertSame(idattr, html.removeAttributeNode(idattr));
@@ -451,7 +452,7 @@ public class DOMElementTest extends LoboUnitTest {
         assertEquals(2, html.getAttributes().getLength());
         //
         try {
-            document.createAttributeNS("http://www.example.com/ns", "xml:foo");
+            document.createAttributeNS("https://www.example.com/ns", "xml:foo");
             fail("Must throw exception");
         } catch (final DOMException e) {
             assertEquals(DOMException.NAMESPACE_ERR, e.getCode());
@@ -1063,7 +1064,7 @@ public class DOMElementTest extends LoboUnitTest {
         document = sampleHtmlFile();
         Element elm = document.createElement("p");
         assertEquals("P", elm.getTagName());
-        elm = document.createElementNS("http://www.example.com/examplens", "e:p");
+        elm = document.createElementNS("https://www.example.com/examplens", "e:p");
         assertEquals("p", elm.getLocalName());
         assertEquals("e:p", elm.getTagName());
     }

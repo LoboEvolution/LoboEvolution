@@ -52,16 +52,14 @@ public class Infoset05Test extends LoboUnitTest {
     public void runTest() {
         final Document doc;
         final Element docElem;
-        final DOMConfiguration domConfig;
-        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
-
-        final Attr xmlnsAttr;
+        final DOMConfiguration domConfig;final Attr xmlnsAttr;
         doc = sampleXmlFile("barfoo.xml");
         domConfig = doc.getDomConfig();
         domConfig.setParameter("infoset", Boolean.TRUE);
         /*DOMErrorMonitor */
-        domConfig.setParameter("error-handler", errorMonitor);
+        domConfig.setParameter("error-handler", new DOMErrorMonitor());
         doc.normalizeDocument();
+        DOMErrorMonitor errorMonitor = (DOMErrorMonitor) domConfig.getParameter("error-handler");
         assertTrue(errorMonitor.assertLowerSeverity(2), "Infoset05Assert3");
         docElem = doc.getDocumentElement();
         xmlnsAttr = docElem.getAttributeNode("xmlns");

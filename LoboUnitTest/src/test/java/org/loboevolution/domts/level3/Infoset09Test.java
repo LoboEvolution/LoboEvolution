@@ -52,10 +52,7 @@ public class Infoset09Test extends LoboUnitTest {
         final Comment newComment;
         final Node lastChild;
         final String nodeName;
-        final DOMConfiguration domConfig;
-        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
-
-        HTMLCollection pList;
+        final DOMConfiguration domConfig;HTMLCollection pList;
         doc = sampleXmlFile("barfoo.xml");
         pList = doc.getElementsByTagName("p");
         elem = (Element) pList.item(0);
@@ -65,8 +62,9 @@ public class Infoset09Test extends LoboUnitTest {
         domConfig.setParameter("comments", Boolean.FALSE);
         domConfig.setParameter("infoset", Boolean.TRUE);
         /*DOMErrorMonitor */
-        domConfig.setParameter("error-handler", errorMonitor);
+        domConfig.setParameter("error-handler", new DOMErrorMonitor());
         doc.normalizeDocument();
+        DOMErrorMonitor errorMonitor = (DOMErrorMonitor) domConfig.getParameter("error-handler");
         assertTrue(errorMonitor.assertLowerSeverity(2), "Infoset09Assert3");
         pList = doc.getElementsByTagName("p");
         elem = (Element) pList.item(0);

@@ -29,10 +29,7 @@ package org.loboevolution.domts.level2;
 
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.DocumentType;
-import org.loboevolution.html.node.EntityReference;
-import org.loboevolution.html.node.NamedNodeMap;
+import org.loboevolution.html.node.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -61,8 +58,8 @@ public class ImportNode09Test extends LoboUnitTest {
         final Document doc;
         final Document aNewDoc;
         final NamedNodeMap entityList;
-        final EntityReference entity2;
-        final EntityReference entity1;
+        final Entity entity2;
+        final Entity entity1;
         final Document ownerDocument;
         DocumentType docType;
         String system;
@@ -74,8 +71,8 @@ public class ImportNode09Test extends LoboUnitTest {
         docType = aNewDoc.getDoctype();
         entityList = docType.getEntities();
         assertNotNull(entityList);
-        entity2 = (EntityReference) entityList.getNamedItem("ent6");
-        entity1 = (EntityReference) doc.importNode(entity2, false);
+        entity2 = (Entity) entityList.getNamedItem("ent6");
+        entity1 = (Entity) doc.importNode(entity2, false);
         ownerDocument = entity1.getOwnerDocument();
         docType = ownerDocument.getDoctype();
         system = docType.getSystemId();

@@ -31,6 +31,7 @@ import org.htmlunit.cssparser.dom.DOMException;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
+import org.loboevolution.html.dom.nodeimpl.AttrImpl;
 import org.loboevolution.html.node.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -50,7 +51,7 @@ public class Noderemovechild28Test extends LoboUnitTest {
         final Document doc;
         final HTMLCollection parentList;
         final NamedNodeMap attrsMap;
-        final Attr parent;
+        final AttrImpl parent;
         final Text child;
         final Element elem;
         final Text removed;
@@ -59,9 +60,9 @@ public class Noderemovechild28Test extends LoboUnitTest {
         parentList = doc.getElementsByTagName("acronym");
         elem = (Element) parentList.item(0);
         attrsMap = elem.getAttributes();
-        parent = (Attr) attrsMap.getNamedItem("xsi:noNamespaceSchemaLocation");
+        parent = (AttrImpl) attrsMap.getNamedItem("xsi:noNamespaceSchemaLocation");
         child = (Text) parent.getFirstChild();
-        removed = (Text) parent.removeChild(child);
+        removed = (Text) parent.removeChildInternal(child);
         removedName = removed.getNodeValue();
         assertEquals("Yes", removedName, "Noderemovechild28Assert3");
 

@@ -45,22 +45,21 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument</a>
  */
 public class DocumentnormalizeDocument01Test extends LoboUnitTest {
+
     @Test
     public void runTest() {
         final Document doc;
         Element docElem;
         final String docElemNodeName;
         final String origDocElemNodeName;
-        final DOMConfiguration domConfig;
-        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
-
-        doc = sampleXmlFile("hc_staff.xml");
+        final DOMConfiguration domConfig;doc = sampleXmlFile("hc_staff.xml");
         docElem = doc.getDocumentElement();
         origDocElemNodeName = docElem.getNodeName();
         domConfig = doc.getDomConfig();
         /*DOMErrorMonitor */
-        domConfig.setParameter("error-handler", errorMonitor);
+        domConfig.setParameter("error-handler", new DOMErrorMonitor());
         doc.normalizeDocument();
+        DOMErrorMonitor errorMonitor = (DOMErrorMonitor) domConfig.getParameter("error-handler");
         assertTrue(errorMonitor.assertLowerSeverity(2), "DocumentnormalizeDocument01Assert3");
         docElem = doc.getDocumentElement();
         docElemNodeName = docElem.getNodeName();

@@ -32,12 +32,14 @@ import lombok.NoArgsConstructor;
 import org.loboevolution.events.Event;
 import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.dom.domimpl.*;
+import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.ModelNode;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.js.Executor;
 import org.loboevolution.html.js.WindowImpl;
 import org.loboevolution.html.js.events.EventImpl;
 import org.loboevolution.html.js.events.MouseEventImpl;
+import org.loboevolution.html.node.Node;
 import org.loboevolution.js.JavaScript;
 import org.loboevolution.js.LoboContextFactory;
 import org.mozilla.javascript.Context;
@@ -417,22 +419,25 @@ public class HtmlController {
 		return false;
 	}
 
-	public boolean execute(final NodeImpl node, final Function f, Event evt) {
-		WindowImpl win = getWindow(node);
+	public boolean execute(final Node node, final Function f, Event evt) {
+
+		Document document;
+		if (node instanceof Document) {
+			document =  (Document) node;
+		} else {
+			document = node.getOwnerDocument();
+		}
+
+		WindowImpl win = (WindowImpl) document.getDefaultView();
 		LoboContextFactory contextFactory = win.getContextFactory();
 		try (Context ctx = contextFactory.enterContext()) {
 			Scriptable windowScope = win.getWindowScope(ctx);
 			final Object eventJSObj = JavaScript.getInstance().getJavascriptObject(evt, windowScope);
 			ScriptableObject.putProperty(windowScope, "event", eventJSObj);
-			if (!Executor.executeFunction(node, f, new Object[0], contextFactory)) {
+			if (!Executor.executeFunction(document, node, f, new Object[0], contextFactory)) {
 				return false;
 			}
 		}
 		return true;
-	}
-
-	private WindowImpl getWindow(final NodeImpl e) {
-		final HTMLDocumentImpl doc = (HTMLDocumentImpl) e.getOwnerDocument();
-		return (WindowImpl) doc.getDefaultView();
 	}
 }

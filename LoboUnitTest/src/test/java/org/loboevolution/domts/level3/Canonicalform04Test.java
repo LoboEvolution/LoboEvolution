@@ -52,10 +52,7 @@ public class Canonicalform04Test extends LoboUnitTest {
     public void runTest() {
         final Document doc;
         final Element docElem;
-        final DOMConfiguration domConfig;
-        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
-
-        final Attr xmlnsAttr;
+        final DOMConfiguration domConfig;final Attr xmlnsAttr;
         final boolean canSet;
         doc = sampleXmlFile("barfoo.xml");
         domConfig = doc.getDomConfig();
@@ -63,9 +60,10 @@ public class Canonicalform04Test extends LoboUnitTest {
 
         if (canSet) {
             /*DOMErrorMonitor */
-            domConfig.setParameter("error-handler", errorMonitor);
+            domConfig.setParameter("error-handler", new DOMErrorMonitor());
             domConfig.setParameter("canonical-form", Boolean.TRUE);
             doc.normalizeDocument();
+            DOMErrorMonitor errorMonitor = (DOMErrorMonitor) domConfig.getParameter("error-handler");
             assertTrue(errorMonitor.assertLowerSeverity(2), "Canonicalform04Assert3");
             docElem = doc.getDocumentElement();
             xmlnsAttr = docElem.getAttributeNode("xmlns");

@@ -51,10 +51,7 @@ public class Canonicalform08Test extends LoboUnitTest {
     public void runTest() {
         final Document doc;
         final DOMConfiguration domConfig;
-        final boolean canSet;
-        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
-
-        Node node;
+        final boolean canSet;Node node;
         String nodeValue;
         int nodeType;
         int length;
@@ -65,8 +62,9 @@ public class Canonicalform08Test extends LoboUnitTest {
         if (canSet) {
             domConfig.setParameter("canonical-form", Boolean.TRUE);
             /*DOMErrorMonitor */
-            domConfig.setParameter("error-handler", errorMonitor);
+            domConfig.setParameter("error-handler", new DOMErrorMonitor());
             doc.normalizeDocument();
+            DOMErrorMonitor errorMonitor = (DOMErrorMonitor) domConfig.getParameter("error-handler");
             assertTrue(errorMonitor.assertLowerSeverity(2), "Canonicalform08Assert1");
             node = doc.getFirstChild();
             nodeType = node.getNodeType();

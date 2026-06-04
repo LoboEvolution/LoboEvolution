@@ -67,7 +67,7 @@ public class HcnodelistindexnotzeroTest extends LoboUnitTest {
         elementList = doc.getElementsByTagName("p");
         employeeNode = elementList.item(2);
         employeeList = employeeNode.getChildNodes();
-        child = employeeList.item(3);
+        child = employeeList.item(1);
         childName = child.getNodeName();
 
         if ("#text".equals(childName)) {

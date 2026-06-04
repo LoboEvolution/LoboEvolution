@@ -60,7 +60,6 @@ public class Canonicalform06Test extends LoboUnitTest {
         final Document doc;
         Element elem;
         final DOMConfiguration domConfig;
-        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
         final List<DOMError> errors;
         int severity;
         String type;
@@ -72,7 +71,7 @@ public class Canonicalform06Test extends LoboUnitTest {
 
         boolean success = false;
         try {
-            doc.createElementNS("http://www.example.org/domts/wellformed01", "LegalNameࢎ");
+            doc.createElementNS("https://www.example.org/domts/wellformed01", "LegalNameࢎ");
         } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
         }
@@ -87,7 +86,7 @@ public class Canonicalform06Test extends LoboUnitTest {
             }
             throw ex;
         }
-        elem = doc.createElementNS("http://www.example.org/domts/wellformed01", "LegalName");
+        elem = doc.createElementNS("https://www.example.org/domts/wellformed01", "LegalName");
         doc.appendChild(elem);
         doc.setXmlVersion("1.0");
         domConfig = doc.getDomConfig();
@@ -96,8 +95,9 @@ public class Canonicalform06Test extends LoboUnitTest {
         if (canSet) {
             domConfig.setParameter("canonical-form", Boolean.TRUE);
             /*DOMErrorMonitor */
-            domConfig.setParameter("error-handler", errorMonitor);
+            domConfig.setParameter("error-handler", new DOMErrorMonitor());
             doc.normalizeDocument();
+            DOMErrorMonitor errorMonitor = (DOMErrorMonitor) domConfig.getParameter("error-handler");
             errors = errorMonitor.getErrors();
             for (final DOMError error : errors) {
                 severity = error.getSeverity();

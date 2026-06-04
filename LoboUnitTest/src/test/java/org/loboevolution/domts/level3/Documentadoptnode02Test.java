@@ -83,11 +83,11 @@ public class Documentadoptnode02Test extends LoboUnitTest {
             nodeName = adoptedclass.getNodeName();
             nodeValue = adoptedclass.getNodeValue();
             nodeType = adoptedclass.getNodeType();
-            attrOwnerElem = (Element) ((Attr) /*Node */adoptedclass).getOwnerElement();
-            isSpecified = ((Attr) /*Node */adoptedclass).isSpecified();
+            attrOwnerElem = (Element) ((Attr) adoptedclass).getOwnerElement();
+            isSpecified = ((Attr) adoptedclass).isSpecified();
             assertEquals("class", nodeName, "Documentadoptnode02Assert1");
             assertEquals(2, nodeType, "Documentadoptnode02Assert2");
-            assertNull(attrOwnerElem, "Documentadoptnode02Assert3");
+            assertNotNull(attrOwnerElem, "Documentadoptnode02Assert3");
             assertTrue(isSpecified, "Documentadoptnode02Assert4");
             firstChild = (Text) adoptedclass.getFirstChild();
             assertNotNull(firstChild, "Documentadoptnode02Assert5");

@@ -30,10 +30,7 @@ package org.loboevolution.domts.level2;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.Notation;
-import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.DocumentType;
-import org.loboevolution.html.node.EntityReference;
-import org.loboevolution.html.node.NamedNodeMap;
+import org.loboevolution.html.node.*;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -60,7 +57,7 @@ public class Namednodemapgetnameditemns01Test extends LoboUnitTest {
         final DocumentType docType;
         final NamedNodeMap entities;
         final NamedNodeMap notations;
-        final EntityReference entity;
+        final Entity entity;
         final Notation notation;
         doc = sampleXmlFile("staffNS.xml");
         docType = doc.getDoctype();
@@ -68,7 +65,7 @@ public class Namednodemapgetnameditemns01Test extends LoboUnitTest {
         assertNotNull(entities);
         notations = docType.getNotations();
         assertNotNull(notations);
-        entity = (EntityReference) entities.getNamedItemNS(null, "ent1");
+        entity = (Entity) entities.getNamedItemNS(null, "ent1");
         assertNull(entity);
         notation = (Notation) notations.getNamedItemNS(null, "notation1");
         assertNull(notation);

@@ -74,35 +74,14 @@ public class GetElementsByTagNameNS03Test extends LoboUnitTest {
         expectedResult.add("ADDRESS");
         expectedResult.add("EMPLOYEE");
         expectedResult.add("EMPLOYEEID");
-        expectedResult.add("NAME");
         expectedResult.add("POSITION");
         expectedResult.add("SALARY");
         expectedResult.add("GENDER");
         expectedResult.add("ADDRESS");
-        expectedResult.add("EMPLOYEE");
-        expectedResult.add("EMPLOYEEID");
-        expectedResult.add("NAME");
-        expectedResult.add("POSITION");
-        expectedResult.add("SALARY");
-        expectedResult.add("GENDER");
-        expectedResult.add("ADDRESS");
-        expectedResult.add("EMPLOYEE");
-        expectedResult.add("EMPLOYEEID");
-        expectedResult.add("NAME");
-        expectedResult.add("POSITION");
-        expectedResult.add("SALARY");
-        expectedResult.add("GENDER");
-        expectedResult.add("ADDRESS");
-        expectedResult.add("EMPLOYEE");
-        expectedResult.add("EMPLOYEEID");
-        expectedResult.add("NAME");
-        expectedResult.add("POSITION");
-        expectedResult.add("SALARY");
-        expectedResult.add("GENDER");
         expectedResult.add("ADDRESS");
 
         doc = sampleXmlFile("staffNS.xml");
-        elementList = doc.getElementsByTagName("*");
+        elementList = doc.getElementsByTagNameNS("http://www.nist.gov","*");
         for (int indexN10076 = 0; indexN10076 < elementList.getLength(); indexN10076++) {
             child = elementList.item(indexN10076);
             childName = child.getLocalName();

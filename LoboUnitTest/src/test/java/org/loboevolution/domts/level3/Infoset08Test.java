@@ -49,18 +49,16 @@ public class Infoset08Test extends LoboUnitTest {
         final Document doc;
         final HTMLCollection bodyList;
         final Element body;
-        final DOMConfiguration domConfig;
-        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
-
-        Node child;
+        final DOMConfiguration domConfig;Node child;
         String childName;
         doc = sampleXmlFile("barfoo.xml");
         domConfig = doc.getDomConfig();
         domConfig.setParameter("infoset", Boolean.TRUE);
         /*DOMErrorMonitor */
-        domConfig.setParameter("error-handler", errorMonitor);
+        domConfig.setParameter("error-handler", new DOMErrorMonitor());
 
         doc.normalizeDocument();
+        DOMErrorMonitor errorMonitor = (DOMErrorMonitor) domConfig.getParameter("error-handler");
         assertTrue(errorMonitor.assertLowerSeverity(2), "Infoset08Assert1");
         bodyList = doc.getElementsByTagName("body");
         body = (Element) bodyList.item(0);

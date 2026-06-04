@@ -54,16 +54,13 @@ public class Noderemovechild13Test extends LoboUnitTest {
         eRef = doc.createEntityReference("alpha");
         txt = (Text) eRef.getFirstChild();
         assertNotNull(txt, "Noderemovechild13Assert3");
-
-        {
-            boolean success = false;
-            try {
-                eRef.removeChild(txt);
-            } catch (final DOMException ex) {
-                success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
-            }
-            assertTrue(success, "Noderemovechild13Assert4");
+        boolean success = false;
+        try {
+            eRef.removeChild(txt);
+        } catch (final DOMException ex) {
+            success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
         }
+        assertTrue(success, "Noderemovechild13Assert4");
     }
 }
 

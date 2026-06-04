@@ -86,6 +86,12 @@ public class DTMNodeProxy
      */
     final int node;
 
+    private boolean xmlStandalone;
+
+    private String xmlVersion;
+
+    private String xmlEncoding;
+
     /**
      * The return value as Empty String.
      */
@@ -1652,7 +1658,7 @@ public class DTMNodeProxy
         }
 
         @Override
-        public Object getFeature(final String core, final String s) {
+        public Object getFeature(String feature, String version) {
             throw new DTMDOMException(DOMException.NOT_SUPPORTED_ERR);
         }
     }
@@ -1801,7 +1807,7 @@ public class DTMNodeProxy
                         final String attrPrefix = attr.getPrefix();
                         final String value = attr.getNodeValue();
                         namespace = attr.getNamespaceURI();
-                        if (namespace != null && namespace.equals("http://www.w3.org/2000/xmlns/")) {
+                        if (namespace != null && namespace.equals("http://www.w3.org/2000/xmlns")) {
                             // at this point we are dealing with DOM Level 2 nodes only
                             if (specifiedPrefix == null && attr.getNodeName().equals("xmlns")) {
                                 // default namespace
@@ -2133,8 +2139,6 @@ public class DTMNodeProxy
         return null;
     }
 
-    private boolean xmlStandalone;
-
     /**
      * {@inheritDoc}
      */
@@ -2151,8 +2155,6 @@ public class DTMNodeProxy
         this.xmlStandalone = xmlStandalone;
     }
 
-    private String xmlVersion;
-
     /**
      * {@inheritDoc}
      */
@@ -2167,6 +2169,11 @@ public class DTMNodeProxy
     @Override
     public void setXmlVersion(final String xmlVersion) throws DOMException {
         this.xmlVersion = xmlVersion;
+    }
+
+    @Override
+    public void setXmlEncoding(String xmlEncoding) {
+        this.xmlEncoding = xmlEncoding;
     }
 
     @Override

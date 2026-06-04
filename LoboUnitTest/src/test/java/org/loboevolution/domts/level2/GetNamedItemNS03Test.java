@@ -31,7 +31,7 @@ import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
-import org.loboevolution.html.node.EntityReference;
+import org.loboevolution.html.node.Entity;
 import org.loboevolution.html.node.NamedNodeMap;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -55,13 +55,13 @@ public class GetNamedItemNS03Test extends LoboUnitTest {
         final Document doc;
         final DocumentType docType;
         final NamedNodeMap entities;
-        final EntityReference entity;
+        final Entity entity;
 
         doc = sampleXmlFile("staffNS.xml");
         docType = doc.getDoctype();
         entities = docType.getEntities();
         assertNotNull(entities);
-        entity = (EntityReference) entities.getNamedItemNS(null, "ent1");
+        entity = (Entity) entities.getNamedItemNS(null, "ent1");
         assertNull(entity);
     }
 }

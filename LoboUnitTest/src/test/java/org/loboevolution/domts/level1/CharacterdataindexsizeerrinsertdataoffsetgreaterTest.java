@@ -70,16 +70,13 @@ public class CharacterdataindexsizeerrinsertdataoffsetgreaterTest extends LoboUn
         elementList = doc.getElementsByTagName("address");
         nameNode = elementList.item(0);
         child = (CharacterData) nameNode.getFirstChild();
-
-        {
-            boolean success = false;
-            try {
-                child.insertData(40, "ABC");
-            } catch (final DOMException ex) {
-                success = (ex.getCode() == DOMException.INDEX_SIZE_ERR);
-            }
-            assertTrue(success, "CharacterdataindexsizeerrinsertdataoffsetgreaterAssert2");
+        boolean success = false;
+        try {
+            child.insertData(40, "ABC");
+        } catch (final DOMException ex) {
+            success = (ex.getCode() == DOMException.INDEX_SIZE_ERR);
         }
+        assertTrue(success, "CharacterdataindexsizeerrinsertdataoffsetgreaterAssert2");
     }
 }
 

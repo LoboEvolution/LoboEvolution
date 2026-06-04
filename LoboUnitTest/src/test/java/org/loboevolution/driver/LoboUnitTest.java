@@ -36,9 +36,9 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.js.Window;
 import org.loboevolution.net.HttpNetwork;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
 
@@ -85,8 +85,9 @@ public class LoboUnitTest extends LoboWebDriver {
     public static Document sampleHtmlFile() {
         URL url = LoboWebDriver.class.getResource("/org/lobo/html/htmlsample.html");
         final DocumentImpl doc;
-        try (InputStream stream = HttpNetwork.getInputStream(url.openConnection())) {
-            doc = loadHtml(stream, url.toString());
+        try (InputStream stream = HttpNetwork.getInputStream(url.openConnection());
+             Reader reader = createXmlReader(stream)) {
+            doc = loadHtml(reader, url.toString());
             doc.setTest(true);
             return doc;
         } catch (IOException e) {
@@ -103,8 +104,9 @@ public class LoboUnitTest extends LoboWebDriver {
     public static Document sampleXmlFile(final String fileName) {
         URL url = LoboWebDriver.class.getResource("/org/lobo/xml/" + fileName);
         final DocumentImpl doc;
-        try (InputStream stream = HttpNetwork.getInputStream(url.openConnection())) {
-            doc = loadHtml(stream, url.toString());
+        try (InputStream stream = HttpNetwork.getInputStream(url.openConnection());
+             Reader reader = createXmlReader(stream)) {
+            doc = loadHtml(reader, url.toString());
             doc.setTest(true);
             doc.setXml(true);
             return doc;
@@ -153,6 +155,37 @@ public class LoboUnitTest extends LoboWebDriver {
         } catch (Exception ex) {
             log.error(ex.getMessage(), ex);
         }
+    }
+
+    private static Reader createXmlReader(InputStream is) throws IOException {
+        PushbackInputStream pb = new PushbackInputStream(is, 3);
+
+        byte[] bom = new byte[3];
+        int n = pb.read(bom, 0, bom.length);
+
+        if (n == -1) {
+            return new InputStreamReader(pb, StandardCharsets.UTF_8);
+        }
+
+        // UTF-16 BE
+        if (bom[0] == (byte)0xFE && bom[1] == (byte)0xFF) {
+            pb.unread(bom, 2, n - 2);
+            return new InputStreamReader(pb, StandardCharsets.UTF_16BE);
+        }
+
+        // UTF-16 LE
+        if (bom[0] == (byte)0xFF && bom[1] == (byte)0xFE) {
+            pb.unread(bom, 2, n - 2);
+            return new InputStreamReader(pb, StandardCharsets.UTF_16LE);
+        }
+
+        // UTF-8 BOM
+        if (bom[0] == (byte)0xEF && bom[1] == (byte)0xBB && bom[2] == (byte)0xBF) {
+            return new InputStreamReader(pb, StandardCharsets.UTF_8);
+        }
+
+        pb.unread(bom, 0, n);
+        return new InputStreamReader(pb, StandardCharsets.UTF_8);
     }
 
     /**

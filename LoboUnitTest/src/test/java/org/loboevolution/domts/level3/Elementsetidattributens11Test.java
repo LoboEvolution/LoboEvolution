@@ -64,8 +64,8 @@ public class Elementsetidattributens11Test extends LoboUnitTest {
         elemList = doc.getElementsByTagNameNS("*", "p");
         pElem1 = (Element) elemList.item(1);
         pElem2 = (Element) elemList.item(2);
-        pElem1.setIdAttributeNS("http://www.usa.com", "dmstc", true);
-        pElem2.setIdAttributeNS("http://www.usa.com", "dmstc", true);
+        pElem1.setIdAttributeNS("http://www.w3.org/1999/xhtml", "dmstc", true);
+        pElem2.setIdAttributeNS("http://www.w3.org/1999/xhtml", "dmstc", true);
         attributesMap = pElem1.getAttributes();
         attr = (Attr) attributesMap.getNamedItem("xmlns:dmstc");
         id = attr.isId();

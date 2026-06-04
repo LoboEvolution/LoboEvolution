@@ -30,6 +30,7 @@ import org.htmlunit.cssparser.dom.DOMException;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
+import org.loboevolution.html.dom.nodeimpl.AttrImpl;
 import org.loboevolution.html.node.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -37,19 +38,20 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
- * Using removeChild on a default Attribute node attempt to remove its Text child node and
+ * Using removeChild on a default Attribute node attempt to remove its Text child node
  * and verify the name of the returned node that was removed.  Now attempt the reverse
  * and verify if a NOT_FOUND_ERR is thrown.
 
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-1734834066">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-1734834066</a>
  */
 public class Noderemovechild30Test extends LoboUnitTest {
+
     @Test
     public void runTest() {
         final Document doc;
         final HTMLCollection parentList;
         final NamedNodeMap attrsMap;
-        final Attr parent;
+        final AttrImpl parent;
         final Text child;
         final Element elem;
         final Text removed;
@@ -58,21 +60,19 @@ public class Noderemovechild30Test extends LoboUnitTest {
         parentList = doc.getElementsByTagName("p");
         elem = (Element) parentList.item(3);
         attrsMap = elem.getAttributes();
-        parent = (Attr) attrsMap.getNamedItemNS("*", "dir");
+        parent = (AttrImpl) attrsMap.getNamedItemNS("*", "dir");
         child = (Text) parent.getFirstChild();
         removed = (Text) parent.removeChild(child);
         removedName = removed.getNodeValue();
         assertEquals("rtl", removedName, "Noderemovechild30Assert3");
 
-        {
-            boolean success = false;
-            try {
-                child.removeChild(parent);
-            } catch (final DOMException ex) {
-                success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
-            }
-            assertTrue(success, "Noderemovechild30Assert4");
+        boolean success = false;
+        try {
+            child.removeChild(parent);
+        } catch (final DOMException ex) {
+            success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
         }
+        assertTrue(success, "Noderemovechild30Assert4");
     }
 }
 

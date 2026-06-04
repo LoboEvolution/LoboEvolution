@@ -56,16 +56,13 @@ public class Nodeinsertbefore14Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
         newAttr = doc.createAttributeNS("http://www.w3.org/DOM/Test", "dom3:attr");
-
-        {
-            boolean success = false;
-            try {
-                docType.insertBefore(newAttr, docType);
-            } catch (final DOMException ex) {
-                success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
-            }
-            assertTrue(success, "Nodeinsertbefore14Assert2");
+        boolean success = false;
+        try {
+            docType.insertBefore(newAttr, docType);
+        } catch (final DOMException ex) {
+            success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
         }
+        assertTrue(success, "Nodeinsertbefore14Assert2");
     }
 }
 

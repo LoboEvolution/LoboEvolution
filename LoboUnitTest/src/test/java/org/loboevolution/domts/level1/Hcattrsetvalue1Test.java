@@ -1,4 +1,3 @@
-
 /*
  * MIT License
  *
@@ -34,9 +33,8 @@ import org.loboevolution.html.node.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
 /**
- * Sets Attr.value on an attribute that only has a simple value.
+ * Sets Attr value on an attribute that only has a simple value.
 
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-221662474">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-221662474</a>
  */

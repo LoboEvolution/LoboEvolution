@@ -58,7 +58,7 @@ public class HcdocumentgetdoctypeTest extends LoboUnitTest {
 
         if ((docType != null)) {
             docTypeName = docType.getName();
-            assertEquals("html", docTypeName, "HcdocumentgetdoctypeAssert1");
+            assertEquals("html", docTypeName.trim(), "HcdocumentgetdoctypeAssert1");
             nodeValue = docType.getNodeValue();
             assertNull(nodeValue, "HcdocumentgetdoctypeAssert2");
         }

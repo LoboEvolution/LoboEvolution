@@ -19,7 +19,10 @@
 		<!ELEMENT dateTime (#PCDATA)>
 		<!ATTLIST dateTime  value CDATA #IMPLIED union CDATA #IMPLIED>
 		<!ELEMENT time (#PCDATA)>
-		<!ATTLIST time  value CDATA #IMPLIED union CDATA #IMPLIED>]><svg xmlns="http://www.w3.org/2000/svg" 	 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 	xsi:schemaLocation="http://www.w3.org/2000/svg datatype_normalization.svg.xsd">
+		<!ATTLIST time  value CDATA #IMPLIED union CDATA #IMPLIED>]>
+	<svg xmlns="http://www.w3.org/2000/svg"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://www.w3.org/2000/svg datatype_normalization.svg.xsd">
 	<rect x="0" y="0" width="100" height="100"/>
 	<script type="text/ecmascript">&svgtest;&svgunit;</script>
 	<data xmlns:data='http://www.w3.org/2001/DOM-Test-Suite/Level-3/datatype_normalization'>

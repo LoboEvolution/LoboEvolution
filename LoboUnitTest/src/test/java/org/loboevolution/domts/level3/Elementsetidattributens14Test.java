@@ -66,7 +66,7 @@ public class Elementsetidattributens14Test extends LoboUnitTest {
         pElem = (Element) elemList.item(1);
         elemList = doc.getElementsByTagNameNS("*", "acronym");
         acronymElem = (Element) elemList.item(2);
-        pElem.setIdAttributeNS("http://www.usa.com", "dmstc", true);
+        pElem.setIdAttributeNS("http://www.w3.org/1999/xhtml", "dmstc", true);
         acronymElem.setIdAttributeNS("http://www.w3.org/2001/XMLSchema-instance", "noNamespaceSchemaLocation", true);
         attributesMap = pElem.getAttributes();
         attr = (Attr) attributesMap.getNamedItem("xmlns:dmstc");

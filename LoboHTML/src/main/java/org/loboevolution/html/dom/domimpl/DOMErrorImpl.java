@@ -26,10 +26,10 @@
 
 package org.loboevolution.html.dom.domimpl;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.loboevolution.html.dom.DOMError;
 import org.loboevolution.html.dom.DOMLocator;
+import org.loboevolution.html.node.Node;
 
 /**
  * This is a utility implementation of EventListener
@@ -37,26 +37,29 @@ import org.loboevolution.html.dom.DOMLocator;
  * to lists of all events by mode
  */
 @Data
-@AllArgsConstructor
 public class DOMErrorImpl implements DOMError {
-  private final short severity;
-  private final String message;
-  private final String type;
-  private final Object relatedException;
-  private final Object relatedData;
 
-  private final DOMLocator location;
+    private short severity;
+    private String message;
+    private String type;
+    private Object relatedData;
+    private Object relatedException;
+    private DOMLocator location;
 
-  /**
-   * Public constructor
-   *
-   */
-  public DOMErrorImpl(final DOMError src) {
-    this.severity = src.getSeverity();
-    this.message = src.getMessage();
-    this.type = src.getType();
-    this.relatedException = src.getRelatedException();
-    this.relatedData = src.getRelatedData();
-    this.location = new DOMLocatorImpl(src.getLocation());
-  }
+    public DOMErrorImpl(short severity, String message) {
+        this(severity, message, null, null, null);
+    }
+
+    public DOMErrorImpl(short severity,
+                        String message,
+                        String type,
+                        Object relatedData,
+                        Object relatedException) {
+        this.severity = severity;
+        this.message = message;
+        this.type = type;
+        this.relatedData = relatedData;
+        this.relatedException = relatedException;
+        this.location = new DOMLocatorImpl((Node) relatedData);
+    }
 }

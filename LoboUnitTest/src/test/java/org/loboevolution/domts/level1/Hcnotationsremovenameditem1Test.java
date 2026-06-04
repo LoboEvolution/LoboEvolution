@@ -39,7 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
- * An attempt to add remove an notation should result in a NO_MODIFICATION_ERR.
+ * An attempt to add remove a notation should result in a NO_MODIFICATION_ERR.
 
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-D46829EF">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-D46829EF</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-D58B193">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-D58B193</a>
@@ -61,15 +61,13 @@ public class Hcnotationsremovenameditem1Test extends LoboUnitTest {
         notations = docType.getNotations();
         assertNotNull(notations, "Hcnotationsremovenameditem1Assert4");
 
-        {
-            boolean success = false;
-            try {
-                notations.removeNamedItem("notation1");
-            } catch (final DOMException ex) {
-                success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
-            }
-            assertTrue(success, "Hcnotationsremovenameditem1Assert5");
+        boolean success = false;
+        try {
+            notations.removeNamedItem("notation1");
+        } catch (final DOMException ex) {
+            success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
         }
+        assertTrue(success, "Hcnotationsremovenameditem1Assert5");
     }
 }
 

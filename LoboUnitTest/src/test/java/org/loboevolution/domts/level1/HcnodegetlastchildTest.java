@@ -41,9 +41,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * of this node.
  * <p>
  * Retrieve the second employee and invoke the
- * "getLastChild()" method.   The NodeName returned
- * should be "#text".
-
+ * "getLastChild()" method.
+ * The NodeName returned should be "#text".
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-61AD09FB">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-61AD09FB</a>
  */
 public class HcnodegetlastchildTest extends LoboUnitTest {

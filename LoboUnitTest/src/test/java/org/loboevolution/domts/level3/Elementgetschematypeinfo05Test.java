@@ -54,12 +54,12 @@ public class Elementgetschematypeinfo05Test extends LoboUnitTest {
         final String typeNamespace;
         final HTMLCollection elemList;
         doc = sampleXmlFile("hc_staff.xml");
-        elemList = doc.getElementsByTagName("span");
+        elemList = doc.getElementsByTagName("em");
         acElem = (Element) elemList.item(0);
         elemTypeInfo = acElem.getSchemaTypeInfo();
         typeName = elemTypeInfo.getTypeName();
         typeNamespace = elemTypeInfo.getTypeNamespace();
-        assertEquals("string", typeName, "Elementgetschematypeinfo05Assert2");
-        assertEquals("http://www.w3.org/2001/XMLSchema", typeNamespace, "Elementgetschematypeinfo05Assert3");
+        assertEquals("emType", typeName, "Elementgetschematypeinfo05Assert2");
+        assertEquals("http://www.w3.org/1999/xhtml", typeNamespace, "Elementgetschematypeinfo05Assert3");
     }
 }

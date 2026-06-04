@@ -30,7 +30,6 @@ package org.loboevolution.domts.level1;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.*;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -51,23 +50,17 @@ public class Hcattrinsertbefore5Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
-        final HTMLCollection acronymList;
-        final Element testNode;
-        final NamedNodeMap attributes;
         doc = sampleXmlFile("hc_staff.xml");
-        acronymList = doc.getElementsByTagName("acronym");
-        testNode = (Element) acronymList.item(3);
-        attributes = testNode.getAttributes();
-        attributes.getNamedItem("title");
-
+        Element elem = (Element) doc.getElementsByTagName("acronym").item(0);
+        Attr attr = elem.getAttributeNode("title");
+        Element newChild = doc.createElement("newElement");
         boolean success = false;
         try {
-            doc.createCDATASection("terday");
-        } catch (final DOMException ex) {
+            attr.insertBefore(newChild, null);
+        } catch (DOMException ex) {
             success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
         }
-        assertTrue(success, "Hcattrinsertbefore5Assert2");
-
+        assertTrue(success, "Hcattrinsertbefore5Assert");
     }
 }
 

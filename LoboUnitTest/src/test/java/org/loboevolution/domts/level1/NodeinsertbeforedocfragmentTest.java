@@ -40,8 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * If the "newChild" is a DocumentFragment object then all
- * its children are inserted in the same order before the
- * the "refChild".
+ * its children are inserted in the same order before the "refChild".
  * <p>
  * Create a DocumentFragment object and populate it with
  * two Element nodes.   Retrieve the second employee and
@@ -82,10 +81,10 @@ public class NodeinsertbeforedocfragmentTest extends LoboUnitTest {
         employeeNode.insertBefore(newdocFragment, refChild);
         child = childList.item(3);
         childName = child.getNodeName();
-        assertEquals("newChild1", childName, "NodeinsertbeforedocfragmentAssert1");
+        assertEquals("NEWCHILD1", childName, "NodeinsertbeforedocfragmentAssert1");
         child = childList.item(4);
         childName = child.getNodeName();
-        assertEquals("newChild2", childName, "NodeinsertbeforedocfragmentAssert2");
+        assertEquals("NEWCHILD2", childName, "NodeinsertbeforedocfragmentAssert2");
     }
 }
 

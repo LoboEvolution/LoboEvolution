@@ -60,6 +60,24 @@ public class DocumentTypeImpl extends NodeImpl implements DocumentType {
 		this.systemId = systemId;
 	}
 
+	@Override
+	public short compareDocumentPosition(Node other) {
+		if (other == null) {
+			throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "other is null");
+		}
+
+		if (other == this) {
+			return 0;
+		}
+
+		// Handle DocumentType vs Document (DocumentType is contained by and follows Document)
+		if (other.getNodeType() == DOCUMENT_NODE) {
+			return DOCUMENT_POSITION_CONTAINS | DOCUMENT_POSITION_PRECEDING;
+		}
+
+		return super.compareDocumentPosition(other);
+	}
+
 	/** {@inheritDoc} */
 	@Override
 	public String getLocalName() {
@@ -90,8 +108,37 @@ public class DocumentTypeImpl extends NodeImpl implements DocumentType {
 	}
 
 	@Override
+	public String getTextContent() {
+		return null;
+	}
+
+	@Override
+	public void setTextContent(String textContent) {}
+
+	/** {@inheritDoc} */
+	@Override
+	public String getBaseURI() {
+		return null;
+	}
+
+	@Override
 	public void setNodeValue(final String nodeValue) throws DOMException {
 		throw new DOMException(DOMException.INVALID_MODIFICATION_ERR, "readonly node");
+	}
+
+	@Override
+	public Node insertBefore(final Node newChild, final Node refChild) throws DOMException {
+		throw new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR, "readonly node");
+	}
+
+	@Override
+	public Node replaceChild(Node newChild, Node oldChild) {
+
+		if (newChild.getNodeType() == Node.ATTRIBUTE_NODE) {
+			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Document cannot append Attr");
+		}
+
+		throw new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR, "readonly node");
 	}
 
 	/** {@inheritDoc} */
@@ -123,13 +170,13 @@ public class DocumentTypeImpl extends NodeImpl implements DocumentType {
 
 	@Override
 	public NamedNodeMap getNotations() {
-		if(this.notation == null) this.notation = new NamedNodeMapImpl(this, new NodeListImpl());
+		if(this.notation == null) this.notation = new NamedNodeMapImpl(this, new NodeListImpl(), true);
 		return this.notation;
 	}
 
 	@Override
 	public NamedNodeMap getEntities() {
-		if(this.entities == null) this.entities = new NamedNodeMapImpl(this, new NodeListImpl());
+		if(this.entities == null) this.entities = new NamedNodeMapImpl(this, new NodeListImpl(), true);
 		return this.entities;
 	}
 

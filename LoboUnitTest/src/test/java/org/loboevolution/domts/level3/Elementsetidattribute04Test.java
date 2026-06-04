@@ -52,7 +52,7 @@ public class Elementsetidattribute04Test extends LoboUnitTest {
         final HTMLCollection elemList;
         final Element nameElem;
         final NamedNodeMap attributesMap;
-        final Attr attr;
+        Attr attr;
         boolean id;
         final Element elem;
         final String elemName;
@@ -69,6 +69,7 @@ public class Elementsetidattribute04Test extends LoboUnitTest {
         elemName = elem.getTagName();
         assertEquals("STRONG", elemName, "Elementsetidattribute04Assert2");
         nameElem.setIdAttribute("hasMiddleName", false);
+        attr = (Attr) attributesMap.getNamedItem("hasMiddleName");
         id = attr.isId();
         assertFalse(id, "Elementsetidattribute04Assert3");
     }

@@ -23,9 +23,7 @@
  *
  * Contact info: ivan.difrancesco@yahoo.it
  */
-
 package org.loboevolution.domts.level3;
-
 
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
@@ -34,7 +32,6 @@ import org.loboevolution.html.node.Document;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-
 /**
  * Invoke getFeature method on this DOMImplementation with the value of the feature parameter
  * as Core and version as "".  This should return a DOMImplementation object that's not null.
@@ -42,6 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMImplementation3-getFeature">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#DOMImplementation3-getFeature</a>
  */
 public class Domimplementationgetfeature02Test extends LoboUnitTest {
+
     @Test
     public void runTest() {
         final Document doc;

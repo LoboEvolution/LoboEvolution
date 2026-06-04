@@ -131,7 +131,7 @@ public class InputText extends BasicInput {
 			
 			if (modelNode.getOnselect() != null) {
 				final WindowImpl win = (WindowImpl) modelNode.getDocumentNode().getDefaultView();
-				Executor.executeFunction(modelNode, modelNode.getOnselect(), new Object[] {}, win.getContextFactory());
+				Executor.executeFunction(modelNode.getDocumentNode(), modelNode, modelNode.getOnselect(), new Object[] {}, win.getContextFactory());
 			}
 		}
 

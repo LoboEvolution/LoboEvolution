@@ -49,7 +49,7 @@ public class Nodereplacechild38Test extends LoboUnitTest {
         final Document doc;
         final DocumentType docType;
         final NamedNodeMap entitiesMap;
-        final Node ent;
+        final Entity ent;
         final Text oldChild;
         final EntityReference entRef;
         final Text txt;
@@ -60,76 +60,63 @@ public class Nodereplacechild38Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
         entitiesMap = docType.getEntities();
-        ent = entitiesMap.getNamedItem("alpha");
+        ent = (Entity) entitiesMap.getNamedItem("alpha");
         assertNotNull(ent, "Nodereplacechild38Assert3");
         oldChild = (Text) ent.getFirstChild();
         assertNotNull(oldChild, "Nodereplacechild38Assert4");
         cdata = doc.createCDATASection("CDATASection");
-
-        {
-            boolean success = false;
-            try {
-                ent.replaceChild(cdata, oldChild);
-            } catch (final DOMException ex) {
-                success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
-            }
-            assertTrue(success, "Nodereplacechild38Assert5");
+        boolean success = false;
+        try {
+            ent.replaceChild(cdata, oldChild);
+        } catch (final DOMException ex) {
+            success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
         }
+        assertTrue(success, "Nodereplacechild38Assert5");
         pi = doc.createProcessingInstruction("target", "data");
 
-        {
-            boolean success = false;
-            try {
-                ent.replaceChild(pi, oldChild);
-            } catch (final DOMException ex) {
-                success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
-            }
-            assertTrue(success, "Nodereplacechild38Assert6");
+        success = false;
+        try {
+            ent.replaceChild(pi, oldChild);
+        } catch (final DOMException ex) {
+            success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
         }
+        assertTrue(success, "Nodereplacechild38Assert6");
         comment = doc.createComment("Comment");
 
-        {
-            boolean success = false;
-            try {
-                ent.replaceChild(comment, oldChild);
-            } catch (final DOMException ex) {
-                success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
-            }
-            assertTrue(success, "Nodereplacechild38Assert7");
+        success = false;
+        try {
+            ent.replaceChild(comment, oldChild);
+        } catch (final DOMException ex) {
+            success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
         }
+        assertTrue(success, "Nodereplacechild38Assert7");
         txt = doc.createTextNode("Text");
 
-        {
-            boolean success = false;
-            try {
-                ent.replaceChild(txt, oldChild);
-            } catch (final DOMException ex) {
-                success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
-            }
-            assertTrue(success, "Nodereplacechild38Assert8");
+        success = false;
+        try {
+            ent.replaceChild(txt, oldChild);
+        } catch (final DOMException ex) {
+            success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
         }
+        assertTrue(success, "Nodereplacechild38Assert8");
         elem = doc.createElementNS("http://www.w3.org/1999/xhtml", "xhtml:p");
 
-        {
-            boolean success = false;
-            try {
-                ent.replaceChild(elem, oldChild);
-            } catch (final DOMException ex) {
-                success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
-            }
-            assertTrue(success, "Nodereplacechild38Assert9");
+        success = false;
+        try {
+            ent.replaceChild(elem, oldChild);
+        } catch (final DOMException ex) {
+            success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
         }
+        assertTrue(success, "Nodereplacechild38Assert9");
         entRef = doc.createEntityReference("delta");
 
-        {
-            boolean success = false;
-            try {
-                ent.replaceChild(entRef, oldChild);
-            } catch (final DOMException ex) {
-                success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
-            }
-            assertTrue(success, "Nodereplacechild38Assert10");
+        success = false;
+        try {
+            ent.replaceChild(entRef, oldChild);
+        } catch (final DOMException ex) {
+            success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
         }
+        assertTrue(success, "Nodereplacechild38Assert10");
     }
 }
 

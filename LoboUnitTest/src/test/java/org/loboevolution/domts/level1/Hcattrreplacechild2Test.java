@@ -30,6 +30,7 @@ package org.loboevolution.domts.level1;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
+import org.loboevolution.html.dom.nodeimpl.AttrImpl;
 import org.loboevolution.html.node.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -54,7 +55,7 @@ public class Hcattrreplacechild2Test extends LoboUnitTest {
         final HTMLCollection acronymList;
         final Element testNode;
         final NamedNodeMap attributes;
-        final Attr titleAttr;
+        final AttrImpl titleAttr;
         String value;
         final Text terNode;
         final Text dayNode;
@@ -65,7 +66,7 @@ public class Hcattrreplacechild2Test extends LoboUnitTest {
         acronymList = doc.getElementsByTagName("acronym");
         testNode = (Element) acronymList.item(3);
         attributes = testNode.getAttributes();
-        titleAttr = (Attr) attributes.getNamedItem("title");
+        titleAttr = (AttrImpl) attributes.getNamedItem("title");
         terNode = doc.createTextNode("ter");
         dayNode = doc.createTextNode("day");
         docFrag = doc.createDocumentFragment();
@@ -73,7 +74,7 @@ public class Hcattrreplacechild2Test extends LoboUnitTest {
         docFrag.appendChild(dayNode);
         firstChild = titleAttr.getFirstChild();
         assertNotNull(firstChild, "Hcattrreplacechild2Assert1");
-        retval = titleAttr.replaceChild(docFrag, firstChild);
+        retval = titleAttr.replaceChildInternal(docFrag, firstChild);
         value = titleAttr.getValue();
         assertEquals("terday", value, "Hcattrreplacechild2Assert2");
         value = titleAttr.getNodeValue();

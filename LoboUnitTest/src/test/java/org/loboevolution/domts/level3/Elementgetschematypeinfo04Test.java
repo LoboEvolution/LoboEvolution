@@ -61,7 +61,7 @@ public class Elementgetschematypeinfo04Test extends LoboUnitTest {
         elemTypeInfo = codeElem.getSchemaTypeInfo();
         typeName = elemTypeInfo.getTypeName();
         typeNamespace = elemTypeInfo.getTypeNamespace();
-        assertEquals("code", typeName, "Elementgetschematypeinfo04Assert2");
+        assertEquals("codeType", typeName, "Elementgetschematypeinfo04Assert2");
         assertEquals("http://www.w3.org/1999/xhtml", typeNamespace, "Elementgetschematypeinfo04Assert3");
     }
 }

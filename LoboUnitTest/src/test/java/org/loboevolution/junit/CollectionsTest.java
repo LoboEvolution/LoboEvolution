@@ -105,7 +105,7 @@ public class CollectionsTest extends LoboUnitTest {
         dbFac.setIgnoringElementContentWhitespace(ignoreElementContentWhitespace);
         dbFac.setNamespaceAware(true);
         final Document refdoc = sampleXmlFile("entities.xhtml");
-        refdoc.setDocumentURI("http://www.example.com/xml/entities.xhtml");
+        refdoc.setDocumentURI("https://www.example.com/xml/entities.xhtml");
         final DocumentType refdoctype = refdoc.getDoctype();
         final DocumentType doctype = xmlDoc.getDoctype();
         if (refdoctype == null) {

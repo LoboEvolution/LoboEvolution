@@ -33,6 +33,7 @@ import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 
@@ -61,7 +62,7 @@ public class HcelementremoveattributeTest extends LoboUnitTest {
         testEmployee = (Element) elementList.item(3);
         testEmployee.removeAttribute("class");
         attrValue = testEmployee.getAttribute("class");
-        assertNull(attrValue, "HcelementremoveattributeAssert1");
+        assertEquals(attrValue, null,  "HcelementremoveattributeAssert1");
     }
 }
 

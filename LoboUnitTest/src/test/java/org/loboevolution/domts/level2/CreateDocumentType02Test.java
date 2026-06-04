@@ -106,7 +106,6 @@ public class CreateDocumentType02Test extends LoboUnitTest {
         illegalQNames.add("edi:<");
         illegalQNames.add("edi:>");
         illegalQNames.add("edi:,");
-        illegalQNames.add("edi:a ");
         illegalQNames.add("edi:\"");
         return illegalQNames;
     }

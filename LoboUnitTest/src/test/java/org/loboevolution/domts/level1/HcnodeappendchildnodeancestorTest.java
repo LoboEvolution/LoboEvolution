@@ -68,15 +68,13 @@ public class HcnodeappendchildnodeancestorTest extends LoboUnitTest {
         elementList = doc.getElementsByTagName("p");
         employeeNode = elementList.item(1);
 
-        {
-            boolean success = false;
-            try {
-                employeeNode.appendChild(newChild);
-            } catch (final DOMException ex) {
-                success = (ex.getCode() == DOMException.HIERARCHY_REQUEST_ERR);
-            }
-            assertTrue(success, "HcnodeappendchildnodeancestorAssert2");
+        boolean success = false;
+        try {
+            employeeNode.appendChild(newChild);
+        } catch (final DOMException ex) {
+            success = (ex.getCode() == DOMException.HIERARCHY_REQUEST_ERR);
         }
+        assertTrue(success, "HcnodeappendchildnodeancestorAssert2");
     }
 }
 

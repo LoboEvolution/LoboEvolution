@@ -41,25 +41,17 @@ import java.util.List;
 @Data
 public class DOMErrorMonitor implements DOMErrorHandler {
 
-    private final List<DOMError> errors;
+    private final List<DOMError> errors = new ArrayList<>();
 
-    public DOMErrorMonitor(){
-        errors = new ArrayList<>();
-    }
-
-    /**
-     * Implementation of DOMErrorHandler.handleError that
-     * adds copy of error to list for later retrieval.
-     */
     @Override
-    public boolean handleError(final DOMError error) {
-        errors.add(new DOMErrorImpl(error));
-        return true;
+    public boolean handleError(DOMError error) {
+        errors.add(error);
+        return error.getSeverity() != DOMError.SEVERITY_FATAL_ERROR;
     }
 
-    public boolean assertLowerSeverity(final int severity) {
-        for (final DOMError error : errors) {
-            if (error.getSeverity() >= severity) {
+    public boolean assertLowerSeverity(int maxSeverity) {
+        for (DOMError error : errors) {
+            if (error.getSeverity() > maxSeverity) {
                 return false;
             }
         }

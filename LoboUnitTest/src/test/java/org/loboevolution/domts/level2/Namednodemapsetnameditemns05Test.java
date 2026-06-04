@@ -31,10 +31,7 @@ import org.htmlunit.cssparser.dom.DOMException;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.Notation;
-import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.DocumentType;
-import org.loboevolution.html.node.EntityReference;
-import org.loboevolution.html.node.NamedNodeMap;
+import org.loboevolution.html.node.*;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -61,7 +58,7 @@ public class Namednodemapsetnameditemns05Test extends LoboUnitTest {
         final DocumentType docType;
         final NamedNodeMap entities;
         final NamedNodeMap notations;
-        final EntityReference entity;
+        final Entity entity;
         final Notation notation;
 
         doc = sampleXmlFile("staffNS.xml");
@@ -70,7 +67,7 @@ public class Namednodemapsetnameditemns05Test extends LoboUnitTest {
         assertNotNull(entities);
         notations = docType.getNotations();
         assertNotNull(notations);
-        entity = (EntityReference) entities.getNamedItem("ent1");
+        entity = (Entity) entities.getNamedItem("ent1");
         notation = (Notation) notations.getNamedItem("notation1");
 
         boolean success = false;

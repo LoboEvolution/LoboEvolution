@@ -50,28 +50,25 @@ public class Nodereplacechild31Test extends LoboUnitTest {
         final HTMLCollection childList;
         final Element elem;
         final Element span;
-        final EntityReference ent4Ref;
+        final EntityReference entity;
         final Text spanText;
         final Element newChild;
         doc = sampleXmlFile("hc_staff.xml");
         childList = doc.getElementsByTagName("var");
         elem = (Element) childList.item(2);
-        ent4Ref = (EntityReference) elem.getFirstChild();
-        span = (Element) ent4Ref.getFirstChild();
+        entity = (EntityReference) elem.getFirstChild();
+        span = (Element) entity.getFirstChild();
         assertNotNull(span, "Nodereplacechild31Assert3");
         spanText = (Text) span.getFirstChild();
         assertNotNull(spanText, "Nodereplacechild31Assert4");
         newChild = doc.createElementNS("http://www.w3.org/1999/xhtml", "xhtml:p");
-
-        {
-            boolean success = false;
-            try {
-                span.replaceChild(newChild, spanText);
-            } catch (final DOMException ex) {
-                success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
-            }
-            assertTrue(success, "Nodereplacechild31Assert5");
+        boolean success = false;
+        try {
+            span.replaceChild(newChild, spanText);
+        } catch (final DOMException ex) {
+            success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
         }
+        assertTrue(success, "Nodereplacechild31Assert5");
     }
 }
 

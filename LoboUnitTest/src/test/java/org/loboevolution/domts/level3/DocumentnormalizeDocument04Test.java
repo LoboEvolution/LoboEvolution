@@ -55,10 +55,7 @@ public class DocumentnormalizeDocument04Test extends LoboUnitTest {
         final Comment newComment;
         Node lastChild;
         String nodeName;
-        final DOMConfiguration domConfig;
-        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
-
-        HTMLCollection pList;
+        final DOMConfiguration domConfig;HTMLCollection pList;
         doc = sampleXmlFile("barfoo.xml");
         pList = doc.getElementsByTagName("p");
         elem = (Element) pList.item(0);
@@ -67,8 +64,9 @@ public class DocumentnormalizeDocument04Test extends LoboUnitTest {
         domConfig = doc.getDomConfig();
         domConfig.setParameter("comments", Boolean.TRUE);
         /*DOMErrorMonitor */
-        domConfig.setParameter("error-handler", errorMonitor);
+        domConfig.setParameter("error-handler", new DOMErrorMonitor());
         doc.normalizeDocument();
+        DOMErrorMonitor errorMonitor = (DOMErrorMonitor) domConfig.getParameter("error-handler");
         assertTrue(errorMonitor.assertLowerSeverity(2), "DocumentnormalizeDocument04Assert3");
         pList = doc.getElementsByTagName("p");
         elem = (Element) pList.item(0);
@@ -77,6 +75,7 @@ public class DocumentnormalizeDocument04Test extends LoboUnitTest {
         assertEquals("#comment", nodeName, "DocumentnormalizeDocument04Assert4");
         domConfig.setParameter("comments", Boolean.FALSE);
         doc.normalizeDocument();
+        errorMonitor = (DOMErrorMonitor) domConfig.getParameter("error-handler");
         assertTrue(errorMonitor.assertLowerSeverity(2), "DocumentnormalizeDocument04Assert5");
         pList = doc.getElementsByTagName("p");
         elem = (Element) pList.item(0);

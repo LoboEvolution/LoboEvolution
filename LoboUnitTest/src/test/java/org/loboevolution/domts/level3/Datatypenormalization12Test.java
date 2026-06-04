@@ -59,8 +59,6 @@ public class Datatypenormalization12Test extends LoboUnitTest {
         final boolean canSetValidate;
         final boolean canSetXMLSchema;
         final String xsdNS = "http://www.w3.org/2001/XMLSchema";
-        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
-
         doc = sampleXmlFile("datatype_normalization.xml");
         domConfig = doc.getDomConfig();
         canSetNormalization = domConfig.canSetParameter("datatype-normalization", Boolean.TRUE);
@@ -74,8 +72,9 @@ public class Datatypenormalization12Test extends LoboUnitTest {
             /*DOMString */
             domConfig.setParameter("schema-type", xsdNS);
             /*DOMErrorMonitor */
-            domConfig.setParameter("error-handler", errorMonitor);
+            domConfig.setParameter("error-handler", new DOMErrorMonitor());
             doc.normalizeDocument();
+            DOMErrorMonitor errorMonitor = (DOMErrorMonitor) domConfig.getParameter("error-handler");
             assertTrue(errorMonitor.assertLowerSeverity(2), "Datatypenormalization12Assert3");
             elemList = doc.getElementsByTagNameNS("http://www.w3.org/2001/DOM-Test-Suite/Level-3/datatype_normalization", "data:time");
             element = (Element) elemList.item(0);

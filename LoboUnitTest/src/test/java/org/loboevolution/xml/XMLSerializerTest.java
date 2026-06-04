@@ -194,7 +194,7 @@ public class XMLSerializerTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("<TEXTAREA xmlns=\"http://www.w3.org/1999/xhtml\"></textarea>")
+    @Alerts("<TEXTAREA xmlns=\"http://www.w3.org/1999/xhtml\"></TEXTAREA>")
     public void mixedCase() {
         final String html = "<html><head>\n"
                + "<script>\n"
@@ -213,7 +213,7 @@ public class XMLSerializerTest extends LoboUnitTest {
             "<BASEFONT xmlns=\"http://www.w3.org/1999/xhtml\" />",
             "<BR xmlns=\"http://www.w3.org/1999/xhtml\" />",
             "<HR xmlns=\"http://www.w3.org/1999/xhtml\" />",
-            "<INUT xmlns=\"http://www.w3.org/1999/xhtml\" />",
+            "<INPUT xmlns=\"http://www.w3.org/1999/xhtml\" />",
             "<LINK xmlns=\"http://www.w3.org/1999/xhtml\" />",
             "<META xmlns=\"http://www.w3.org/1999/xhtml\" />"})
     public void noClosingTag() {

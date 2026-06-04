@@ -37,7 +37,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Invoke the renameNode method on this document node to rename a node such that its
- * qualifiedName has a prefix that is "xmlns:xml"and namespaceURI is "<a href="http://www.w3.org/2000/XMLNS/">...</a>".
+ * qualifiedName has a prefix that is "xmlns:xml"and namespaceURI is "<a href="http://www.w3.org/2000/xmlns">...</a>".
  * Check if a NAMESPACE_ERR gets thrown.
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-renameNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-renameNode</a>
  */
@@ -63,7 +63,7 @@ public class Documentrenamenode21Test extends LoboUnitTest {
 
         boolean success = false;
         try {
-            newDoc.renameNode(attr, "http://www.w3.org/2000/XMLNS/", "xmlns:xml");
+            newDoc.renameNode(attr, "http://www.w3.org/2000/xmlns", "xmlns:xml");
         } catch (final DOMException ex) {
             success = (ex.getCode() == DOMException.NAMESPACE_ERR);
         }

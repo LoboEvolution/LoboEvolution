@@ -39,7 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 /**
- * Check if a type derived by extension from a list of a item type returns false
+ * Check if a type derived by extension from a list of an item type returns false
  * when asked if it derives by restriction from anySimpleType type.
 
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#TypeInfo-isDerivedFrom</a>

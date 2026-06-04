@@ -31,6 +31,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.loboevolution.html.dom.nodeimpl.internal.NodeInternal;
 import org.loboevolution.html.node.*;
 
 import java.util.HashSet;
@@ -38,20 +39,20 @@ import java.util.Objects;
 import java.util.Set;
 
 /**
- * <p>Abstract EntityReferenceImpl class.</p>
+ * <p> EntityReferenceImpl class.</p>
  */
-
 @EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class EntityReferenceImpl extends NodeImpl implements EntityReference {
+public class EntityReferenceImpl extends NodeInternal implements EntityReference {
 
     private String publicId;
     private String systemId;
     private String nodeName;
     private String nodeValue;
     private String notationName;
+    private boolean expanded = false;
 
     @Override
     public Node replaceChild(final Node newChild, final Node oldChild) {
@@ -59,18 +60,13 @@ public class EntityReferenceImpl extends NodeImpl implements EntityReference {
     }
 
     @Override
-    public boolean hasAttributes() {
-        return false;
+    public Node removeChild(final Node oldChild) {
+        throw new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR, "readonly node");
     }
 
     @Override
     public Node appendChild(final Node newChild) {
         throw new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR, "readonly node");
-    }
-
-    @Override
-    public String getLocalName() {
-        return this.nodeName;
     }
 
     @Override
@@ -84,47 +80,48 @@ public class EntityReferenceImpl extends NodeImpl implements EntityReference {
     }
 
     @Override
-    public int getNodeType() {
-        return Node.ENTITY_REFERENCE_NODE;
+    public boolean hasAttributes() {
+        return false;
     }
 
     @Override
-    public short compareDocumentPosition(Node other) {
-        if (other == this) {
-            return 0;
-        }
+    public String getLocalName() {
+        return this.nodeName;
+    }
 
-        if (!Objects.equals(getOwnerDocument(), other.getOwnerDocument())) {
-            return DOCUMENT_POSITION_DISCONNECTED | DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC;
-        }
+    @Override
+    public Node getFirstChild() {
+        ensureExpanded();
+        return super.getFirstChild();
+    }
 
-        if (getNodeType() == Node.ENTITY_NODE && other.getNodeType() == Node.ENTITY_NODE) {
-            DocumentType docType = getOwnerDocument().getDoctype();
-            if (docType != null) {
-                NamedNodeMap entities = docType.getEntities();
-                int indexThis = -1, indexOther = -1;
-                for (int i = 0; i < entities.getLength(); i++) {
-                    Node n = entities.item(i);
-                    if (n == this) indexThis = i;
-                    if (n == other) indexOther = i;
-                }
-                if (indexThis != -1 && indexOther != -1) {
-                    short result = DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC;
-                    if (indexThis < indexOther) {
-                        result |= DOCUMENT_POSITION_PRECEDING; // 2
-                    } else {
-                        result |= DOCUMENT_POSITION_FOLLOWING; // 4
-                    }
-                    return result;
-                }
-            }
-            return DOCUMENT_POSITION_DISCONNECTED | DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC;
-        }
+    private void ensureExpanded() {
+        if (expanded) return;
+        expanded = true;
 
-        if (getNodeType() == Node.ENTITY_NODE || other.getNodeType() == Node.ENTITY_NODE) {
-            return DOCUMENT_POSITION_DISCONNECTED | DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC;
-        }
+        // Check if we already have children (from createEntityReference or previous expansion)
+        if (super.getFirstChild() != null) return;
 
-        return DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC;
+        DocumentType doctype = getOwnerDocument().getDoctype();
+        if (doctype == null) return;
+
+        NamedNodeMap entities = doctype.getEntities();
+        if (entities == null) return;
+
+
+        Node entity = entities.getNamedItem(getNodeName());
+        if (entity == null) return;
+
+        Node child = entity.getFirstChild();
+        while (child != null) {
+            Node clone = child.cloneNode(true);
+            super.appendChild(clone);
+            child = child.getNextSibling();
+        }
+    }
+
+    @Override
+    public int getNodeType() {
+        return Node.ENTITY_REFERENCE_NODE;
     }
 }

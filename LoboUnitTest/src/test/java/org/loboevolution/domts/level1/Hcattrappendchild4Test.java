@@ -55,7 +55,7 @@ public class Hcattrappendchild4Test extends LoboUnitTest {
         final Element testNode;
         final NamedNodeMap attributes;
         final Attr titleAttr;
-        final Node textNode;
+        final CDATASection textNode;
         doc = sampleXmlFile("hc_staff.xml");
         acronymList = doc.getElementsByTagName("acronym");
         testNode = (Element) acronymList.item(3);

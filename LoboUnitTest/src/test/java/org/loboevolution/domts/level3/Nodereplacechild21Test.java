@@ -49,6 +49,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-785887307</a>
  */
 public class Nodereplacechild21Test extends LoboUnitTest {
+
     @Test
     public void runTest() {
         final Document doc;
@@ -68,25 +69,21 @@ public class Nodereplacechild21Test extends LoboUnitTest {
         notationsMap = docType1.getNotations();
         notation = (Notation) notationsMap.getNamedItem("notation1");
 
-        {
-            boolean success = false;
-            try {
-                docType.replaceChild(notation, ent);
-            } catch (final DOMException ex) {
-                success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
-            }
-            assertTrue(success, "Nodereplacechild21Assert2");
+        boolean success = false;
+        try {
+            docType.replaceChild(notation, ent);
+        } catch (final DOMException ex) {
+            success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
         }
+        assertTrue(success, "Nodereplacechild21Assert2");
 
-        {
-            boolean success = false;
-            try {
-                docType.replaceChild(ent, docType);
-            } catch (final DOMException ex) {
-                success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
-            }
-            assertTrue(success, "Nodereplacechild21Assert3");
+        success = false;
+        try {
+            docType.replaceChild(ent, docType);
+        } catch (final DOMException ex) {
+            success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
         }
+        assertTrue(success, "Nodereplacechild21Assert3");
     }
 }
 

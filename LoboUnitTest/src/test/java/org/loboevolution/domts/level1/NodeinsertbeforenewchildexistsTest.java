@@ -72,12 +72,12 @@ public class NodeinsertbeforenewchildexistsTest extends LoboUnitTest {
         final List<String> expectedWhitespace = getStrings();
 
         final List<String> expectedNoWhitespace = new ArrayList<>();
-        expectedNoWhitespace.add("EMPLOYEEID");
         expectedNoWhitespace.add("NAME");
         expectedNoWhitespace.add("POSITION");
         expectedNoWhitespace.add("SALARY");
         expectedNoWhitespace.add("GENDER");
         expectedNoWhitespace.add("ADDRESS");
+        expectedNoWhitespace.add("EMPLOYEEID");
 
         final List<String> expected;
         final List<String> result = new ArrayList<>();
@@ -111,16 +111,16 @@ public class NodeinsertbeforenewchildexistsTest extends LoboUnitTest {
         final List<String> expectedWhitespace = new ArrayList<>();
         expectedWhitespace.add("#text");
         expectedWhitespace.add("#text");
-        expectedWhitespace.add("name");
+        expectedWhitespace.add("NAME");
         expectedWhitespace.add("#text");
-        expectedWhitespace.add("position");
+        expectedWhitespace.add("POSITION");
         expectedWhitespace.add("#text");
-        expectedWhitespace.add("salary");
+        expectedWhitespace.add("SALARY");
         expectedWhitespace.add("#text");
-        expectedWhitespace.add("gender");
+        expectedWhitespace.add("GENDER");
         expectedWhitespace.add("#text");
-        expectedWhitespace.add("employeeId");
         expectedWhitespace.add("ADDRESS");
+        expectedWhitespace.add("EMPLOYEEID");
         expectedWhitespace.add("#text");
         return expectedWhitespace;
     }

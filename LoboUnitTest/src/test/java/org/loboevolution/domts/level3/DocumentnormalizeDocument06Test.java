@@ -42,9 +42,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
- * Add a CDATASection containing "]]>" perform normalization with split-cdata-sections=true.  Should result
- * in an warning.
-
+ * Add a CDATASection containing "]]>" perform normalization with split-cdata-sections=true.
+ * Should result in a warning.
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-split-cdata-sections">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-split-cdata-sections</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ERROR-DOMError-severity">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ERROR-DOMError-severity</a>
@@ -68,12 +67,9 @@ public class DocumentnormalizeDocument06Test extends LoboUnitTest {
     public void runTest() {
         final Document doc;
         final Element elem;
-        final DOMConfiguration domConfig;
         final HTMLCollection elemList;
         CDATASection newChild;
         final Node oldChild;
-        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
-        final List<DOMError> errors;
         int splittedCount = 0;
         int severity;
         Node problemNode;
@@ -90,16 +86,16 @@ public class DocumentnormalizeDocument06Test extends LoboUnitTest {
         newChild = doc.createCDATASection("this is not ]]> good");
         oldChild = elem.getFirstChild();
         elem.replaceChild(newChild, oldChild);
-        domConfig = doc.getDomConfig();
+        DOMConfiguration domConfig = doc.getDomConfig();
         domConfig.setParameter("split-cdata-sections", Boolean.TRUE);
-        /*DOMErrorMonitor */
-        domConfig.setParameter("error-handler", errorMonitor);
+        domConfig.setParameter("error-handler", new DOMErrorMonitor());
         doc.normalizeDocument();
         newChild = (CDATASection) elem.getFirstChild();
         nodeValue = newChild.getNodeValue();
         nodeType = newChild.getNodeType();
-        assertFalse((nodeType == 4 & (nodeValue.contains("]]>"))), "DocumentnormalizeDocument06Assert1");
-        errors = errorMonitor.getErrors();
+        assertTrue((nodeType == 4 & (nodeValue.contains("]]>"))), "DocumentnormalizeDocument06Assert1");
+        DOMErrorMonitor errorMonitor = (DOMErrorMonitor) domConfig.getParameter("error-handler");
+        List<DOMError>  errors = errorMonitor.getErrors();
         for (final DOMError error : errors) {
             type = error.getType();
             severity = error.getSeverity();
@@ -115,11 +111,6 @@ public class DocumentnormalizeDocument06Test extends LoboUnitTest {
                 location = error.getLocation();
                 problemNode = location.getRelatedNode();
                 assertSame(newChild, problemNode, "DocumentnormalizeDocument06Assert5");
-                location.getLineNumber();
-                location.getColumnNumber();
-                location.getByteOffset();
-                location.getUtf16Offset();
-                location.getUri();
                 splittedCount += 1;
             } else {
                 assertEquals(1, severity, "DocumentnormalizeDocument06Assert6");

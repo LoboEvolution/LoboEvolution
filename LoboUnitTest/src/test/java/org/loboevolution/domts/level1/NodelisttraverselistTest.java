@@ -98,15 +98,15 @@ public class NodelisttraverselistTest extends LoboUnitTest {
     private static List<String> getStrings() {
         final List<String> expectedWhitespace = new ArrayList<>();
         expectedWhitespace.add("#text");
-        expectedWhitespace.add("employeeId");
+        expectedWhitespace.add("EMPLOYEEID");
         expectedWhitespace.add("#text");
-        expectedWhitespace.add("name");
+        expectedWhitespace.add("NAME");
         expectedWhitespace.add("#text");
-        expectedWhitespace.add("position");
+        expectedWhitespace.add("POSITION");
         expectedWhitespace.add("#text");
-        expectedWhitespace.add("salary");
+        expectedWhitespace.add("SALARY");
         expectedWhitespace.add("#text");
-        expectedWhitespace.add("gender");
+        expectedWhitespace.add("GENDER");
         expectedWhitespace.add("#text");
         expectedWhitespace.add("ADDRESS");
         expectedWhitespace.add("#text");

@@ -30,6 +30,7 @@ package org.loboevolution.domts.level3;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
+import org.loboevolution.html.dom.nodeimpl.AttrImpl;
 import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.EntityReference;
@@ -47,24 +48,22 @@ public class Nodereplacechild35Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
-        final Attr parent;
+        final AttrImpl parent;
         final EntityReference oldChild;
         final Attr newChild;
         doc = sampleXmlFile("hc_staff.xml");
-        parent = doc.createAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:lang");
+        parent = (AttrImpl) doc.createAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:lang");
         oldChild = doc.createEntityReference("delta");
-        parent.appendChild(oldChild);
+        parent.appendChildInternal(oldChild);
         newChild = doc.createAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:lang");
 
-        {
-            boolean success = false;
-            try {
-                parent.replaceChild(newChild, oldChild);
-            } catch (final DOMException ex) {
-                success = (ex.getCode() == DOMException.HIERARCHY_REQUEST_ERR);
-            }
-            assertTrue(success, "Nodereplacechild35Assert2");
+        boolean success = false;
+        try {
+            parent.replaceChild(newChild, oldChild);
+        } catch (final DOMException ex) {
+            success = (ex.getCode() == DOMException.HIERARCHY_REQUEST_ERR);
         }
+        assertTrue(success, "Nodereplacechild35Assert2");
     }
 }
 

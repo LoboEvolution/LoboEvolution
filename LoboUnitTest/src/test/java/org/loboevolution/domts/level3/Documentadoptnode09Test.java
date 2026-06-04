@@ -58,7 +58,6 @@ public class Documentadoptnode09Test extends LoboUnitTest {
         domImpl = doc.getImplementation();
         newDoc = domImpl.createDocument(rootNS, rootName, null);
 
-
         boolean success = false;
         try {
             newDoc.adoptNode(doc);

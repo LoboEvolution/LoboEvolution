@@ -27,7 +27,6 @@
 package org.loboevolution.junit;
 
 import org.htmlunit.cssparser.dom.DOMException;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.css.CSSStyleSheet;
@@ -43,6 +42,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.loboevolution.html.node.Node.XML_NAMESPACE_URI;
 
 public class DOMDocumentTest extends LoboUnitTest {
 
@@ -67,12 +67,12 @@ public class DOMDocumentTest extends LoboUnitTest {
     @Test
     public void testGetOwnerDocument() {
         final Document document = domImpl.createDocument(null, null, null);
-        assertNotNull(document.getOwnerDocument());
+        assertNull(document.getOwnerDocument());
     }
 
     @Test
     public void testText() {
-        final Document document = domImpl.createDocument(Document.XML_NAMESPACE_URI, null, null);
+        final Document document = domImpl.createDocument(XML_NAMESPACE_URI, null, null);
         Text c = document.createTextNode("A text node");
         assertEquals("A text node", c.getData());
         assertEquals("A text node", c.getNodeValue());
@@ -191,7 +191,7 @@ public class DOMDocumentTest extends LoboUnitTest {
 
     @Test
     public void testCharacterData() {
-        final Document document = domImpl.createDocument(Document.XML_NAMESPACE_URI, null, null);
+        final Document document = domImpl.createDocument(XML_NAMESPACE_URI, null, null);
         CDATASection c = document.createCDATASection("A CDATA section");
         assertEquals("A CDATA section", c.getData());
         assertEquals("A CDATA section", c.getNodeValue());
@@ -266,12 +266,12 @@ public class DOMDocumentTest extends LoboUnitTest {
 
     @Test
     public void testCloneNode() {
-        Document document = domImpl.createDocument(Document.XML_NAMESPACE_URI, null, null);
+        Document document = domImpl.createDocument(XML_NAMESPACE_URI, null, null);
         Document cloned = (Document) document.cloneNode(false);
         assertTrue(document.isEqualNode(cloned));
         assertSame(document.getClass(), cloned.getClass());
-        final DocumentType docType = domImpl.createDocumentType("foo", null, "http://www.example.com/foo.dtd");
-        document = domImpl.createDocument(Document.XML_NAMESPACE_URI, "foo", docType);
+        final DocumentType docType = domImpl.createDocumentType("foo", null, "https://www.example.com/foo.dtd");
+        document = domImpl.createDocument(XML_NAMESPACE_URI, "foo", docType);
         final Element docElm = document.getDocumentElement();
         docElm.setAttribute("id", "myId");
         assertTrue(document.isEqualNode(document.cloneNode(true)));
@@ -291,7 +291,7 @@ public class DOMDocumentTest extends LoboUnitTest {
 
     @Test
     public void testCreateElementNS() {
-        final Document document = domImpl.createDocument(Document.XML_NAMESPACE_URI, null, null);
+        final Document document = domImpl.createDocument(XML_NAMESPACE_URI, null, null);
         final Element element = document.createElementNS(null, "element");
         element.setAttribute("Id", "myId");
         assertEquals("myId", element.getAttribute("Id"));
@@ -307,7 +307,7 @@ public class DOMDocumentTest extends LoboUnitTest {
 
     @Test
     public void testCreateElementError() {
-        final Document document = domImpl.createDocument(Document.XML_NAMESPACE_URI, null, null);
+        final Document document = domImpl.createDocument(XML_NAMESPACE_URI, null, null);
         try {
             document.createElement("p'");
             fail("Must throw exception");
@@ -348,9 +348,9 @@ public class DOMDocumentTest extends LoboUnitTest {
 
     @Test
     public void testCreateElementNSError() {
-        final Document document = domImpl.createDocument(Document.XML_NAMESPACE_URI, null, null);
+        final Document document = domImpl.createDocument(XML_NAMESPACE_URI, null, null);
         try {
-            document.createElementNS(Document.XML_NAMESPACE_URI, "e:p'");
+            document.createElementNS(XML_NAMESPACE_URI, "e:p'");
             fail("Must throw exception");
         } catch (final DOMException e) {
             assertEquals(DOMException.INVALID_CHARACTER_ERR, e.getCode());
@@ -359,7 +359,7 @@ public class DOMDocumentTest extends LoboUnitTest {
 
     @Test
     public void testCreateElementNSError2() {
-        final Document document = domImpl.createDocument(Document.XML_NAMESPACE_URI, null, null);
+        final Document document = domImpl.createDocument(XML_NAMESPACE_URI, null, null);
         try {
             document.createElementNS(null, "foo:bar");
             fail("Must throw an exception");
@@ -370,28 +370,28 @@ public class DOMDocumentTest extends LoboUnitTest {
 
     @Test
     public void testCreateElementNSError3() {
-        final Document document = domImpl.createDocument(Document.XML_NAMESPACE_URI, null, null);
+        final Document document = domImpl.createDocument(XML_NAMESPACE_URI, null, null);
 
         try {
-            document.createElementNS(Document.XML_NAMESPACE_URI, null);
+            document.createElementNS(XML_NAMESPACE_URI, null);
             fail("Must throw exception");
         } catch (final DOMException e) {
             assertEquals(DOMException.INVALID_CHARACTER_ERR, e.getCode());
         }
         try {
-            document.createElementNS(Document.XML_NAMESPACE_URI, "");
+            document.createElementNS(XML_NAMESPACE_URI, "");
             fail("Must throw exception");
         } catch (final DOMException e) {
             assertEquals(DOMException.INVALID_CHARACTER_ERR, e.getCode());
         }
         try {
-            document.createElementNS(Document.XML_NAMESPACE_URI, "foo:");
+            document.createElementNS(XML_NAMESPACE_URI, "foo:");
             fail("Must throw exception");
         } catch (final DOMException e) {
-            assertEquals(DOMException.INVALID_CHARACTER_ERR, e.getCode());
+            assertEquals(DOMException.NAMESPACE_ERR, e.getCode());
         }
         try {
-            document.createElementNS(Document.XML_NAMESPACE_URI, ":foo");
+            document.createElementNS(XML_NAMESPACE_URI, ":foo");
             fail("Must throw exception");
         } catch (final DOMException e) {
             assertEquals(DOMException.INVALID_CHARACTER_ERR, e.getCode());
@@ -400,7 +400,7 @@ public class DOMDocumentTest extends LoboUnitTest {
 
     @Test
     public void testCreateElementNSHighCharError() {
-        final Document document = domImpl.createDocument(Document.XML_NAMESPACE_URI, null, null);
+        final Document document = domImpl.createDocument(XML_NAMESPACE_URI, null, null);
         try {
             document.createElementNS(null, "\u26a1");
             fail("Must throw exception");
@@ -411,7 +411,7 @@ public class DOMDocumentTest extends LoboUnitTest {
 
     @Test
     public void testCreateElementNSInjectionError() {
-        final Document document = domImpl.createDocument(Document.XML_NAMESPACE_URI, null, null);
+        final Document document = domImpl.createDocument(XML_NAMESPACE_URI, null, null);
         try {
             document.createElementNS(null, "\"");
             fail("Must throw an exception");
@@ -434,7 +434,7 @@ public class DOMDocumentTest extends LoboUnitTest {
 
     @Test
     public void testCreateComment() {
-        final Document document = domImpl.createDocument(Document.XML_NAMESPACE_URI, null, null);
+        final Document document = domImpl.createDocument(XML_NAMESPACE_URI, null, null);
         Comment comment = document.createComment("My comment");
         assertNotNull(comment);
         assertEquals("My comment", comment.getData());
@@ -466,7 +466,7 @@ public class DOMDocumentTest extends LoboUnitTest {
 
     @Test
     public void testCreateDocumentFragment() {
-        final Document document = domImpl.createDocument(Document.XML_NAMESPACE_URI, "foo", null);
+        final Document document = domImpl.createDocument(XML_NAMESPACE_URI, "foo", null);
         final DocumentFragment df = document.createDocumentFragment();
         assertNotNull(df);
         final Comment comment = document.createComment("My comment");
@@ -487,8 +487,8 @@ public class DOMDocumentTest extends LoboUnitTest {
 
     @Test
     public void testCreateAttribute() {
-        final Document document = domImpl.createDocument(Document.XML_NAMESPACE_URI, null, null);
-        final Element docElm = document.createElementNS(Document.XML_NAMESPACE_URI, "doc");
+        final Document document = domImpl.createDocument(XML_NAMESPACE_URI, null, null);
+        final Element docElm = document.createElementNS(XML_NAMESPACE_URI, "doc");
         document.appendChild(docElm);
         Attr attr = document.createAttribute("lang");
         assertNotNull(attr);
@@ -537,7 +537,7 @@ public class DOMDocumentTest extends LoboUnitTest {
             attr.replaceChild(attr2, attr);
             fail("Must throw an exception");
         } catch (final DOMException e) {
-            assertEquals(DOMException.NOT_SUPPORTED_ERR, e.getCode());
+            assertEquals(DOMException.NOT_FOUND_ERR, e.getCode());
         }
         docElm.setAttributeNode(attr2);
         final Attr attr3 = document.createAttribute("id");
@@ -557,7 +557,7 @@ public class DOMDocumentTest extends LoboUnitTest {
 
     @Test
     public void testCreateAttributeNS2() {
-        final Document document = domImpl.createDocument(Document.XML_NAMESPACE_URI, null, null);
+        final Document document = domImpl.createDocument(XML_NAMESPACE_URI, null, null);
         final Attr attr = document.createAttributeNS("http://www.w3.org/2000/svg", "version");
         assertNotNull(attr);
         attr.setValue("1.1");
@@ -574,14 +574,14 @@ public class DOMDocumentTest extends LoboUnitTest {
 
     @Test
     public void testCreateAttributeNSError() {
-        final Document document = domImpl.createDocument("http://www.example.com/examplens", null, null);
+        final Document document = domImpl.createDocument("https://www.example.com/examplens", null, null);
         try {
-            document.createAttributeNS("http://www.example.com/examplens", "xmlns");
+            document.createAttributeNS("https://www.example.com/examplens", "xmlns");
             fail("Must throw exception");
         } catch (final DOMException e) {
             assertEquals(DOMException.NAMESPACE_ERR, e.getCode());
         }
-        Attr attr = document.createAttributeNS("http://www.example.com/examplens", "doc");
+        Attr attr = document.createAttributeNS("https://www.example.com/examplens", "doc");
         try {
             attr.setPrefix("xmlns");
             fail("Must throw exception");
@@ -601,7 +601,7 @@ public class DOMDocumentTest extends LoboUnitTest {
             assertEquals(DOMException.NAMESPACE_ERR, e.getCode());
         }
 
-        attr = document.createAttributeNS(Document.XML_NAMESPACE_URI, "doc");
+        attr = document.createAttributeNS(XML_NAMESPACE_URI, "doc");
         attr.setPrefix("xml");
         try {
             document.createAttributeNS(null, "foo:bar");
@@ -616,25 +616,25 @@ public class DOMDocumentTest extends LoboUnitTest {
             assertEquals(DOMException.NAMESPACE_ERR, e.getCode());
         }
         try {
-            document.createAttributeNS("http://www.example.com/examplens", null);
+            document.createAttributeNS("https://www.example.com/examplens", null);
             fail("Must throw exception");
         } catch (final DOMException e) {
             assertEquals(DOMException.INVALID_CHARACTER_ERR, e.getCode());
         }
         try {
-            document.createAttributeNS("http://www.example.com/examplens", "");
+            document.createAttributeNS("https://www.example.com/examplens", "");
             fail("Must throw exception");
         } catch (final DOMException e) {
             assertEquals(DOMException.INVALID_CHARACTER_ERR, e.getCode());
         }
         try {
-            document.createAttributeNS("http://www.example.com/examplens", ":bar");
+            document.createAttributeNS("https://www.example.com/examplens", ":bar");
             fail("Must throw exception");
         } catch (final DOMException e) {
             assertEquals(DOMException.NAMESPACE_ERR, e.getCode());
         }
         try {
-            document.createAttributeNS("http://www.example.com/examplens", "foo:");
+            document.createAttributeNS("https://www.example.com/examplens", "foo:");
             fail("Must throw exception");
         } catch (final DOMException e) {
             assertEquals(DOMException.NAMESPACE_ERR, e.getCode());
@@ -707,7 +707,7 @@ public class DOMDocumentTest extends LoboUnitTest {
         }
         try {
             document.createProcessingInstruction("xml-foo ?>",
-                    "<DOCTYPE SYSTEM='http://www.example.com/malicious.dtd'>");
+                    "<DOCTYPE SYSTEM='https://www.example.com/malicious.dtd'>");
             fail("Must throw exception");
         } catch (final DOMException e) {
             assertEquals(DOMException.INVALID_CHARACTER_ERR, e.getCode());
@@ -846,21 +846,21 @@ public class DOMDocumentTest extends LoboUnitTest {
 
     @Test
     public void getElementsByTagNameNS() {
-        final Document document = domImpl.createDocument(Document.XML_NAMESPACE_URI, "doc", null);
+        final Document document = domImpl.createDocument(XML_NAMESPACE_URI, "doc", null);
         final Element docElm = document.getDocumentElement();
-        final Element elem1 = document.createElementNS(Document.XML_NAMESPACE_URI, "div");
+        final Element elem1 = document.createElementNS(XML_NAMESPACE_URI, "div");
         elem1.setAttribute("id", "div1");
         docElm.appendChild(elem1);
-        final Element elem2 = document.createElementNS(Document.XML_NAMESPACE_URI, "div");
+        final Element elem2 = document.createElementNS(XML_NAMESPACE_URI, "div");
         elem2.setAttribute("id", "div2");
         elem1.appendChild(elem2);
-        final Element elem3 = document.createElementNS(Document.XML_NAMESPACE_URI, "div");
+        final Element elem3 = document.createElementNS(XML_NAMESPACE_URI, "div");
         elem3.setAttribute("id", "div3");
         elem2.appendChild(elem3);
-        final Element elem4 = document.createElementNS(Document.XML_NAMESPACE_URI, "div");
+        final Element elem4 = document.createElementNS(XML_NAMESPACE_URI, "div");
         elem4.setAttribute("id", "div4");
         docElm.appendChild(elem4);
-        final HTMLCollectionImpl list = (HTMLCollectionImpl) document.getElementsByTagNameNS(Document.XML_NAMESPACE_URI, "div");
+        final HTMLCollectionImpl list = (HTMLCollectionImpl) document.getElementsByTagNameNS(XML_NAMESPACE_URI, "div");
         assertNotNull(list);
         assertEquals(4, list.getLength());
         assertNull(list.item(-1));
@@ -886,18 +886,18 @@ public class DOMDocumentTest extends LoboUnitTest {
 
     @Test
     public void getElementsByTagNameNSAsterisk() {
-        final Document document = domImpl.createDocument(Document.XML_NAMESPACE_URI, "doc", null);
+        final Document document = domImpl.createDocument(XML_NAMESPACE_URI, "doc", null);
         final Element docElm = document.getDocumentElement();
-        final Element elem1 = document.createElementNS(Document.XML_NAMESPACE_URI, "div");
+        final Element elem1 = document.createElementNS(XML_NAMESPACE_URI, "div");
         elem1.setAttribute("id", "div1");
         docElm.appendChild(elem1);
-        final Element elem2 = document.createElementNS(Document.XML_NAMESPACE_URI, "div");
+        final Element elem2 = document.createElementNS(XML_NAMESPACE_URI, "div");
         elem2.setAttribute("id", "div2");
         elem1.appendChild(elem2);
-        final Element elem3 = document.createElementNS(Document.XML_NAMESPACE_URI, "div");
+        final Element elem3 = document.createElementNS(XML_NAMESPACE_URI, "div");
         elem3.setAttribute("id", "div3");
         elem2.appendChild(elem3);
-        final Element elem4 = document.createElementNS(Document.XML_NAMESPACE_URI, "div");
+        final Element elem4 = document.createElementNS(XML_NAMESPACE_URI, "div");
         elem4.setAttribute("id", "div4");
         docElm.appendChild(elem4);
         final HTMLCollectionImpl list = (HTMLCollectionImpl) document.getElementsByTagNameNS("*", "div");
@@ -926,22 +926,22 @@ public class DOMDocumentTest extends LoboUnitTest {
 
     @Test
     public void getElementsByTagNameNSMixed() {
-        final Document document = domImpl.createDocument(Document.XML_NAMESPACE_URI, "doc", null);
+        final Document document = domImpl.createDocument(XML_NAMESPACE_URI, "doc", null);
         final Element docElm = document.getDocumentElement();
-        final Element elem1 = document.createElementNS("http://www.example.com/differentns", "div");
+        final Element elem1 = document.createElementNS("https://www.example.com/differentns", "div");
         elem1.setAttribute("id", "div1");
         docElm.appendChild(elem1);
-        final Element elem2 = document.createElementNS("http://www.example.com/differentns", "div");
+        final Element elem2 = document.createElementNS("https://www.example.com/differentns", "div");
         elem2.setAttribute("id", "div2");
         elem1.appendChild(elem2);
-        final Element elem3 = document.createElementNS(Document.XML_NAMESPACE_URI, "div");
+        final Element elem3 = document.createElementNS(XML_NAMESPACE_URI, "div");
         elem3.setAttribute("id", "div3");
         elem2.appendChild(elem3);
-        final Element elem4 = document.createElementNS("http://www.example.com/differentns", "div");
+        final Element elem4 = document.createElementNS("https://www.example.com/differentns", "div");
         elem4.setAttribute("id", "div4");
         docElm.appendChild(elem4);
 
-        HTMLCollectionImpl list = (HTMLCollectionImpl) document.getElementsByTagNameNS(Document.XML_NAMESPACE_URI, "div");
+        HTMLCollectionImpl list = (HTMLCollectionImpl) document.getElementsByTagNameNS(XML_NAMESPACE_URI, "div");
         assertNotNull(list);
         assertEquals(1, list.getLength());
         assertNull(list.item(-1));
@@ -957,7 +957,7 @@ public class DOMDocumentTest extends LoboUnitTest {
         } catch (final NoSuchElementException e) {
         }
 
-        list = (HTMLCollectionImpl) document.getElementsByTagNameNS("http://www.example.com/differentns", "div");
+        list = (HTMLCollectionImpl) document.getElementsByTagNameNS("https://www.example.com/differentns", "div");
         assertNotNull(list);
         assertEquals(3, list.getLength());
         assertNull(list.item(-1));
@@ -978,7 +978,7 @@ public class DOMDocumentTest extends LoboUnitTest {
         } catch (final NoSuchElementException e) {
         }
 
-        list = (HTMLCollectionImpl) elem1.getElementsByTagNameNS("http://www.example.com/differentns", "div");
+        list = (HTMLCollectionImpl) elem1.getElementsByTagNameNS("https://www.example.com/differentns", "div");
         assertNotNull(list);
         assertEquals(1, list.getLength());
         assertNull(list.item(-1));
@@ -995,7 +995,7 @@ public class DOMDocumentTest extends LoboUnitTest {
         } catch (final NoSuchElementException e) {
         }
 
-        list = (HTMLCollectionImpl) elem1.getElementsByTagNameNS(Document.XML_NAMESPACE_URI, "div");
+        list = (HTMLCollectionImpl) elem1.getElementsByTagNameNS(XML_NAMESPACE_URI, "div");
         assertNotNull(list);
         assertEquals(1, list.getLength());
         assertNull(list.item(-1));
@@ -1012,7 +1012,7 @@ public class DOMDocumentTest extends LoboUnitTest {
         } catch (final NoSuchElementException e) {
         }
 
-        list = (HTMLCollectionImpl) elem3.getElementsByTagNameNS(Document.XML_NAMESPACE_URI, "div");
+        list = (HTMLCollectionImpl) elem3.getElementsByTagNameNS(XML_NAMESPACE_URI, "div");
         assertNotNull(list);
         assertEquals(0, list.getLength());
         assertNull(list.item(-1));
@@ -1029,18 +1029,18 @@ public class DOMDocumentTest extends LoboUnitTest {
 
     @Test
     public void getElementsByTagNameNSMixedAsterisk() {
-        final Document document = domImpl.createDocument(Document.XML_NAMESPACE_URI, "doc", null);
+        final Document document = domImpl.createDocument(XML_NAMESPACE_URI, "doc", null);
         final Element docElm = document.getDocumentElement();
-        final Element elem1 = document.createElementNS("http://www.example.com/differentns", "div");
+        final Element elem1 = document.createElementNS("https://www.example.com/differentns", "div");
         elem1.setAttribute("id", "div1");
         docElm.appendChild(elem1);
-        final Element elem2 = document.createElementNS("http://www.example.com/differentns", "div");
+        final Element elem2 = document.createElementNS("https://www.example.com/differentns", "div");
         elem2.setAttribute("id", "div2");
         elem1.appendChild(elem2);
-        final Element elem3 = document.createElementNS(Document.XML_NAMESPACE_URI, "div");
+        final Element elem3 = document.createElementNS(XML_NAMESPACE_URI, "div");
         elem3.setAttribute("id", "div3");
         elem2.appendChild(elem3);
-        final Element elem4 = document.createElementNS("http://www.example.com/differentns", "div");
+        final Element elem4 = document.createElementNS("https://www.example.com/differentns", "div");
         elem4.setAttribute("id", "div4");
         docElm.appendChild(elem4);
 
@@ -1479,7 +1479,7 @@ public class DOMDocumentTest extends LoboUnitTest {
 
     @Test
     public void testAppendappendChild() {
-        final Document document = domImpl.createDocument("http://www.example.com/examplens", null, null);
+        final Document document = domImpl.createDocument("https://www.example.com/examplens", null, null);
         final Element docelm = document.createElementNS(null, "doc");
         final Element element = document.createElementNS(null, "element");
         document.appendChild(docelm);
@@ -1520,7 +1520,7 @@ public class DOMDocumentTest extends LoboUnitTest {
 
     @Test
     public void testInsertBefore() {
-        final Document document = domImpl.createDocument(Document.XML_NAMESPACE_URI, null, null);
+        final Document document = domImpl.createDocument(XML_NAMESPACE_URI, null, null);
         final Comment comment = document.createComment(" Comment ");
         document.appendChild(comment);
 
@@ -1593,7 +1593,7 @@ public class DOMDocumentTest extends LoboUnitTest {
 
     @Test
     public void testReplaceChild() {
-        final Document document = domImpl.createDocument(Document.XML_NAMESPACE_URI, null, null);
+        final Document document = domImpl.createDocument(XML_NAMESPACE_URI, null, null);
 
         final Element docelm = document.createElementNS(null, "doc");
         final Element element = document.createElementNS(null, "element");
@@ -1614,7 +1614,7 @@ public class DOMDocumentTest extends LoboUnitTest {
         try {
             document.replaceChild(dtd2, dtd);
         } catch (final DOMException e) {
-            assertEquals(DOMException.NOT_FOUND_ERR, e.getCode());
+            assertEquals(DOMException.HIERARCHY_REQUEST_ERR, e.getCode());
         }
         document.appendChild(dtd);
         assertSame(dtd, document.getDoctype());
@@ -1639,27 +1639,27 @@ public class DOMDocumentTest extends LoboUnitTest {
     public void testBaseAttribute() {
         final Document document = domImpl.createDocument("", "foo", null);
         final Element element = document.getDocumentElement();
-        element.setAttributeNS(Document.XML_NAMESPACE_URI, "xml:base", "http://www.example.com/");
-        assertEquals("http://www.example.com/", element.getAttribute("xml:base"));
+        element.setAttributeNS(XML_NAMESPACE_URI, "xml:base", "https://www.example.com/");
+        assertEquals("https://www.example.com/", element.getAttribute("xml:base"));
         final Attr attr = element.getAttributeNode("xml:base");
         assertNotNull(attr);
-        attr.setValue("jar:http://www.example.com/evil.jar!/file");
+        attr.setValue("jar:https://www.example.com/evil.jar!/file");
         assertNull(document.getBaseURI());
-        document.setDocumentURI("http://www.example.com/foo.html");
-        assertEquals("http://www.example.com/foo.html", document.getBaseURI());
-        assertEquals("jar:http://www.example.com/evil.jar!/file", attr.getValue());
+        document.setDocumentURI("https://www.example.com/foo.html");
+        assertEquals("https://www.example.com/foo.html", document.getBaseURI());
+        assertEquals("jar:https://www.example.com/evil.jar!/file", attr.getValue());
         attr.setValue("file:/dev/zero");
-        assertEquals("http://www.example.com/foo.html", document.getBaseURI());
+        assertEquals("https://www.example.com/foo.html", document.getBaseURI());
     }
 
     @Test
     public void testLookupNamespaceURI() {
-        Document document = domImpl.createDocument(Document.XML_NAMESPACE_URI, "x:doc", null);
+        Document document = domImpl.createDocument(XML_NAMESPACE_URI, "x:doc", null);
         final Element docelm = document.getDocumentElement();
         assertEquals("[object HTMLElement]", docelm.toString());
-        assertEquals(Document.XML_NAMESPACE_URI, docelm.lookupNamespaceURI("x"));
+        assertEquals(XML_NAMESPACE_URI, docelm.lookupNamespaceURI("x"));
         assertNull(docelm.lookupNamespaceURI("z"));
-        assertEquals(Document.XML_NAMESPACE_URI, document.lookupNamespaceURI("x"));
+        assertEquals(XML_NAMESPACE_URI, document.lookupNamespaceURI("x"));
         assertNull(document.lookupNamespaceURI("z"));
         document = domImpl.createDocument("", null, null);
         assertNull(document.lookupNamespaceURI("x"));

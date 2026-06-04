@@ -28,6 +28,7 @@ package org.loboevolution.domts.level3;
 
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
+import org.loboevolution.html.dom.nodeimpl.AttrImpl;
 import org.loboevolution.html.node.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -43,16 +44,16 @@ public class Nodereplacechild34Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
-        final Attr parent;
+        final AttrImpl parent;
         final EntityReference oldChild;
         final Text newChild;
         final String nodeValue;
         doc = sampleXmlFile("hc_staff.xml");
-        parent = doc.createAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:lang");
+        parent = (AttrImpl) doc.createAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:lang");
         oldChild = doc.createEntityReference("delta");
-        parent.appendChild(oldChild);
+        parent.appendChildInternal(oldChild);
         newChild = doc.createTextNode("Text");
-        parent.replaceChild(newChild, oldChild);
+        parent.replaceChildInternal(newChild, oldChild);
         nodeValue = parent.getValue();
         assertEquals("Text", nodeValue, "Nodereplacechild34Assert2");
     }

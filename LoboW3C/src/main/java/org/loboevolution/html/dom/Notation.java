@@ -29,6 +29,7 @@ package org.loboevolution.html.dom;
 import org.loboevolution.html.node.Node;
 
 public interface Notation extends Node {
+
     String getPublicId();
 
     String getSystemId();

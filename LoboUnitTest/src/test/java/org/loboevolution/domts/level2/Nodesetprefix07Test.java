@@ -39,8 +39,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * The method setPrefix raises a NAMESPACE_ERR if this node is an attribute and the specified
  * prefix is "xmlns" and the namespaceURI of this node is different from
- * "<a href="http://www.w3.org/2000/xmlns/">...</a>".
- * Create a new attribute node whose namespaceURI is different form "<a href="http://www.w3.org/2000/xmlns/">...</a>"
+ * "<a href="http://www.w3.org/2000/xmlns">...</a>".
+ * Create a new attribute node whose namespaceURI is different form "<a href="http://www.w3.org/2000/xmlns">...</a>"
  * and node prefix is "xmlns".
  * Check if the NAMESPACE_ERR was thrown.
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSPrefix">http://www.w3.org/TR/DOM-Level-2-Core/core#ID-NodeNSPrefix</a>

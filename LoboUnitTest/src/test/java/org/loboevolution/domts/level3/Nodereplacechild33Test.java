@@ -30,6 +30,7 @@ package org.loboevolution.domts.level3;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
+import org.loboevolution.html.dom.nodeimpl.AttrImpl;
 import org.loboevolution.html.node.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -47,7 +48,7 @@ public class Nodereplacechild33Test extends LoboUnitTest {
         final Document doc;
         final HTMLCollection childList;
         final Element elem;
-        final Attr parent;
+        final AttrImpl parent;
         final Node oldChild;
         final EntityReference newChild;
         final Node replaced;
@@ -56,9 +57,9 @@ public class Nodereplacechild33Test extends LoboUnitTest {
         newChild = doc.createEntityReference("delta");
         childList = doc.getElementsByTagName("p");
         elem = (Element) childList.item(3);
-        parent = elem.getAttributeNodeNS("*", "dir");
+        parent = (AttrImpl) elem.getAttributeNodeNS("*", "dir");
         oldChild = parent.getLastChild();
-        replaced = parent.replaceChild(newChild, oldChild);
+        replaced = parent.replaceChildInternal(newChild, oldChild);
         nodeValue = replaced.getNodeValue();
         assertEquals("rtl", nodeValue, "Nodereplacechild33Assert2");
     }

@@ -113,7 +113,7 @@ public class EventTargetImpl extends AbstractScriptableDelegate implements Event
                             eventImpl.setTarget(elem);
                             eventImpl.setCurrentTarget(elem);
                             final WindowImpl window = (WindowImpl) elem.getDocumentNode().getDefaultView();
-                            Executor.executeFunction((NodeImpl) element, listenerEntry.getFunction(), new Object[0], window.getContextFactory());
+                            Executor.executeFunction(element.getOwnerDocument(), element, listenerEntry.getFunction(), new Object[0], window.getContextFactory());
                         }
                     } catch (Exception e) {
                         log.error("Catched EventListener exception", e);

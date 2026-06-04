@@ -30,10 +30,7 @@ package org.loboevolution.domts.level1;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.DocumentType;
-import org.loboevolution.html.node.NamedNodeMap;
-import org.loboevolution.html.node.Node;
+import org.loboevolution.html.node.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -53,7 +50,7 @@ public class Hcnodevalue07Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
-        final Node newNode;
+        final Entity newNode;
         String newValue;
         final NamedNodeMap nodeMap;
         final DocumentType docType;
@@ -62,7 +59,7 @@ public class Hcnodevalue07Test extends LoboUnitTest {
         assertNotNull(docType, "Hcnodevalue07Assert1");
         nodeMap = docType.getEntities();
         assertNotNull(nodeMap, "Hcnodevalue07Assert2");
-        newNode = nodeMap.getNamedItem("alpha");
+        newNode = (Entity) nodeMap.getNamedItem("alpha");
         assertNotNull(newNode, "Hcnodevalue07Assert3");
         newValue = newNode.getNodeValue();
         assertNull(newValue, "Hcnodevalue07Assert4");

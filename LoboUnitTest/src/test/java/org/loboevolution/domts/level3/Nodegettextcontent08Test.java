@@ -56,7 +56,7 @@ public class Nodegettextcontent08Test extends LoboUnitTest {
         elem.setAttributeNodeNS(att);
         attr = elem.getAttributeNodeNS("http://www.w3.org/XML/1998/namespace", "lang");
         textContent = attr.getTextContent();
-        assertEquals("", textContent, "Nodegettextcontent08Assert2");
+        assertEquals(null, textContent, "Nodegettextcontent08Assert2");
     }
 }
 

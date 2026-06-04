@@ -31,6 +31,7 @@ import org.loboevolution.html.dom.*;
 import org.loboevolution.events.Event;
 import org.loboevolution.html.node.ranges.DocumentRange;
 import org.loboevolution.html.node.ranges.Range;
+import org.loboevolution.js.IgnoreJs;
 import org.loboevolution.js.Location;
 import org.loboevolution.js.Window;
 import org.loboevolution.traversal.DocumentTraversal;
@@ -45,18 +46,6 @@ import org.loboevolution.type.VisibilityState;
  * page's content, which is the DOM tree.
  */
 public interface Document extends Node, NonElementParentNode, ParentNode, DocumentTraversal, DocumentRange {
-
-	/** Constant <code>XMLNS_NAMESPACE_URI="<a href="http://www.w3.org/2000/xmlns/">...</a>"</code> */
-	String XMLNS_NAMESPACE_URI = "http://www.w3.org/2000/xmlns/";
-
-	/** Constant <code>XML_NAMESPACE_URI="<a href="http://www.w3.org/XML/1998/namespace">...</a>"</code> */
-	String XML_NAMESPACE_URI = "http://www.w3.org/XML/1998/namespace";
-
-	/** Constant <code>HTML_NAMESPACE_URI="<a href="http://www.w3.org/1999/xhtml">...</a>"</code> */
-	String HTML_NAMESPACE_URI = "http://www.w3.org/1999/xhtml";
-
-	/** Constant <code>NAMESPACE_SVG="<a href="http://www.w3.org/2000/svg">...</a>"</code> */
-	String NAMESPACE_SVG = "http://www.w3.org/2000/svg";
 
 	/**
 	 * Sets or gets the URL for the current document.
@@ -758,6 +747,14 @@ public interface Document extends Node, NonElementParentNode, ParentNode, Docume
 	void setXmlVersion(String xmlVersion);
 
 	/**
+	 * <p>setXmlEncoding.</p>
+	 *
+	 * @param xmlEncodingn a {@link java.lang.String} object.
+	 */
+	@IgnoreJs
+	void setXmlEncoding(String xmlEncodingn);
+
+	/**
 	 * Gets a value indicating whether the object currently has focus.
 	 *
 	 * @return a boolean.
@@ -929,7 +926,13 @@ public interface Document extends Node, NonElementParentNode, ParentNode, Docume
 	 */
 	XPathResult evaluate(String expression, Node contextNode, XPathNSResolver resolver, short type, Object result);
 
-    EntityReference createEntityReference(String ent1);
+	/**
+	 * <p>createEntityReference.</p>
+	 *
+	 * @param entity a {@link java.lang.String} object.
+	 * @return a {@link org.loboevolution.html.node.EntityReference} object.
+	 */
+	EntityReference createEntityReference(String entity);
 
 	Node renameNode(Node node, String namespaceURI, String qualifiedName);
 

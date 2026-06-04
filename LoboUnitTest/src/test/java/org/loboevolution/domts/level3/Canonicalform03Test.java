@@ -55,10 +55,7 @@ public class Canonicalform03Test extends LoboUnitTest {
         final CDATASection cdata;
         final Text text;
         String nodeName;
-        final DOMConfiguration domConfig;
-        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
-
-        final boolean canSet;
+        final DOMConfiguration domConfig;final boolean canSet;
         doc = sampleXmlFile("hc_staff.xml");
         elemList = doc.getElementsByTagName("strong");
         elemName = (Element) elemList.item(1);
@@ -66,12 +63,13 @@ public class Canonicalform03Test extends LoboUnitTest {
         nodeName = cdata.getNodeName();
         assertEquals("#cdata-section", nodeName, "Canonicalform03Assert3");
         domConfig = doc.getDomConfig();
-        domConfig.setParameter("error-handler", errorMonitor);
+        domConfig.setParameter("error-handler", new DOMErrorMonitor());
         canSet = domConfig.canSetParameter("canonical-form", Boolean.TRUE);
 
         if (canSet) {
             domConfig.setParameter("canonical-form", Boolean.TRUE);
             doc.normalizeDocument();
+            DOMErrorMonitor errorMonitor = (DOMErrorMonitor) domConfig.getParameter("error-handler");
             assertTrue(errorMonitor.assertLowerSeverity(2), "Canonicalform03Assert4");
             elemList = doc.getElementsByTagName("strong");
             elemName = (Element) elemList.item(1);

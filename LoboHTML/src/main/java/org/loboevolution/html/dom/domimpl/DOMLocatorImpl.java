@@ -34,19 +34,37 @@ import org.loboevolution.html.node.Node;
  */
 @Data
 public class DOMLocatorImpl implements DOMLocator {
-    private final int lineNumber;
-    private final int columnNumber;
-    private final int byteOffset;
-    private final int utf16Offset;
-    private final Node relatedNode;
-    private final String uri;
 
-    public DOMLocatorImpl(final DOMLocator src) {
-        this.lineNumber = src.getLineNumber();
-        this.columnNumber = src.getColumnNumber();
-        this.byteOffset = src.getByteOffset();
-        this.utf16Offset = src.getUtf16Offset();
-        this.relatedNode = src.getRelatedNode();
-        this.uri = src.getUri();
+    private int lineNumber = -1;
+    private int columnNumber = -1;
+    private int byteOffset = -1;
+    private int utf16Offset = -1;
+    private Node relatedNode;
+    private String uri;
+
+    public DOMLocatorImpl() {
+    }
+
+    public DOMLocatorImpl(Node relatedNode) {
+        this.relatedNode = relatedNode;
+    }
+
+    public DOMLocatorImpl(Node relatedNode, String uri) {
+        this.relatedNode = relatedNode;
+        this.uri = uri;
+    }
+
+    public DOMLocatorImpl(int lineNumber,
+                          int columnNumber,
+                          int byteOffset,
+                          int utf16Offset,
+                          Node relatedNode,
+                          String uri) {
+        this.lineNumber = lineNumber;
+        this.columnNumber = columnNumber;
+        this.byteOffset = byteOffset;
+        this.utf16Offset = utf16Offset;
+        this.relatedNode = relatedNode;
+        this.uri = uri;
     }
 }

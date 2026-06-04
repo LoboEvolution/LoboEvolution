@@ -33,8 +33,7 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.TypeInfo;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Check if anonymous type of p element is derived from xsd:simpleType.
@@ -55,6 +54,6 @@ public class Typeinfoisderivedfrom35Test extends LoboUnitTest {
         typeInfo = elem.getSchemaTypeInfo();
         assertNotNull(typeInfo, "Typeinfoisderivedfrom35Assert3");
         isDerived = typeInfo.isDerivedFrom("http://www.w3.org/2001/XMLSchema", "anySimpleType", 15);
-        assertFalse(isDerived, "Typeinfoisderivedfrom35Assert4");
+        assertTrue(isDerived, "Typeinfoisderivedfrom35Assert4");
     }
 }

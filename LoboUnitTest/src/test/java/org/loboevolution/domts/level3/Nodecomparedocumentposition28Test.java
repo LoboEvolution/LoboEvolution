@@ -30,10 +30,7 @@ package org.loboevolution.domts.level3;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
-import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.Element;
-import org.loboevolution.html.node.EntityReference;
-import org.loboevolution.html.node.ProcessingInstruction;
+import org.loboevolution.html.node.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -52,27 +49,27 @@ public class Nodecomparedocumentposition28Test extends LoboUnitTest {
         final Document doc;
         final HTMLCollection varList;
         final Element varElem;
-        final EntityReference entRef;
-        final Element entRefChild1;
-        final ProcessingInstruction entRefChild2;
-        final int entRefChild1Position;
-        final int entRefChild2Position;
+        final EntityReference entity;
+        final Element entityChild1;
+        final ProcessingInstruction entityChild2;
+        final int entityChild1Position;
+        final int entityChild2Position;
         doc = sampleXmlFile("hc_staff.xml");
 
         varList = doc.getElementsByTagName("var");
         varElem = (Element) varList.item(2);
         assertNotNull(varElem, "Nodecomparedocumentposition28Assert3");
-        entRef = (EntityReference) varElem.getFirstChild();
-        assertNotNull(entRef, "Nodecomparedocumentposition28Assert4");
+        entity = (EntityReference) varElem.getFirstChild();
+        assertNotNull(entity, "Nodecomparedocumentposition28Assert4");
 
-        entRefChild1 = (Element) entRef.getFirstChild();
-        assertNotNull(entRefChild1, "Nodecomparedocumentposition28Assert5");
-        entRefChild2 = (ProcessingInstruction) entRef.getLastChild();
-        assertNotNull(entRefChild2, "Nodecomparedocumentposition28Assert6");
-        entRefChild1Position = entRefChild1.compareDocumentPosition(entRefChild2);
-        assertEquals(4, entRefChild1Position, "Nodecomparedocumentposition28Assert7");
-        entRefChild2Position = entRefChild2.compareDocumentPosition(entRefChild1);
-        assertEquals(2, entRefChild2Position, "Nodecomparedocumentposition28Assert8");
+        entityChild1 = (Element) entity.getFirstChild();
+        assertNotNull(entityChild1, "Nodecomparedocumentposition28Assert5");
+        entityChild2 = (ProcessingInstruction) entity.getLastChild();
+        assertNotNull(entityChild2, "Nodecomparedocumentposition28Assert6");
+        entityChild1Position = entityChild1.compareDocumentPosition(entityChild2);
+        assertEquals(4, entityChild1Position, "Nodecomparedocumentposition28Assert7");
+        entityChild2Position = entityChild2.compareDocumentPosition(entityChild1);
+        assertEquals(2, entityChild2Position, "Nodecomparedocumentposition28Assert8");
     }
 }
 

@@ -57,10 +57,7 @@ public class Cdatasections01Test extends LoboUnitTest {
         final CDATASection cdata;
         final String nodeName;
         final DOMConfiguration domConfig;
-        HTMLCollection pList;
-        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
-
-        doc = sampleXmlFile("barfoo.xml");
+        HTMLCollection pList;doc = sampleXmlFile("barfoo.xml");
         pList = doc.getElementsByTagName("p");
         elem = (Element) pList.item(0);
         newCdata = doc.createCDATASection("CDATA");
@@ -68,8 +65,9 @@ public class Cdatasections01Test extends LoboUnitTest {
         domConfig = doc.getDomConfig();
         domConfig.setParameter("cdata-sections", Boolean.FALSE);
         /*DOMErrorMonitor */
-        domConfig.setParameter("error-handler", errorMonitor);
+        domConfig.setParameter("error-handler", new DOMErrorMonitor());
         doc.normalize();
+        DOMErrorMonitor errorMonitor = (DOMErrorMonitor) domConfig.getParameter("error-handler");
         assertTrue(errorMonitor.assertLowerSeverity(2), "Cdatasections01Assert3");
         pList = doc.getElementsByTagName("p");
         elem = (Element) pList.item(0);

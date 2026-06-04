@@ -53,7 +53,6 @@ public class Splitcdatasections01Test extends LoboUnitTest {
         final HTMLCollection elemList;
         final CDATASection newChild;
         final Node oldChild;
-        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
 
         doc = sampleXmlFile("barfoo.xml");
         elemList = doc.getElementsByTagName("p");
@@ -64,8 +63,9 @@ public class Splitcdatasections01Test extends LoboUnitTest {
         domConfig = doc.getDomConfig();
         domConfig.setParameter("split-cdata-sections", Boolean.FALSE);
         /*DOMErrorMonitor */
-        domConfig.setParameter("error-handler", errorMonitor);
+        domConfig.setParameter("error-handler", new DOMErrorMonitor());
         doc.normalize();
+        DOMErrorMonitor errorMonitor = (DOMErrorMonitor) domConfig.getParameter("error-handler");
         assertTrue(errorMonitor.assertLowerSeverity(2), "Splitcdatasections01Assert2");
     }
 }

@@ -54,11 +54,10 @@ public class Elementsetidattributens02Test extends LoboUnitTest {
         boolean id;
         final Element elem;
         final String elemName;
-        final String xsiNS = "http://www.w3.org/2001/XMLSchema-instance";
         doc = sampleXmlFile("hc_staff.xml");
         elemList = doc.getElementsByTagNameNS("*", "acronym");
         addressElem = (Element) elemList.item(2);
-        addressElem.setIdAttributeNS(xsiNS, "noNamespaceSchemaLocation", true);
+        addressElem.setIdAttributeNS("http://www.w3.org/1999/xhtml", "xsi:noNamespaceSchemaLocation", true);
         attributesMap = addressElem.getAttributes();
         attr = (Attr) attributesMap.getNamedItem("xsi:noNamespaceSchemaLocation");
         id = attr.isId();
@@ -67,7 +66,7 @@ public class Elementsetidattributens02Test extends LoboUnitTest {
         assertNotNull(elem, "Elementsetidattributens02Assert2");
         elemName = elem.getTagName();
         assertEquals("ACRONYM", elemName, "Elementsetidattributens02Assert3");
-        addressElem.setIdAttributeNS(xsiNS, "noNamespaceSchemaLocation", false);
+        addressElem.setIdAttributeNS("http://www.w3.org/1999/xhtml", "noNamespaceSchemaLocation", false);
         id = attr.isId();
         assertFalse(id, "Elementsetidattributens02Assert4");
     }

@@ -1,4 +1,3 @@
-
 /*
  * MIT License
  *
@@ -34,7 +33,6 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
 
 /**
  * The method setPrefix raises a INVALID_CHARACTER_ERR if the specified prefix contains an illegal character.

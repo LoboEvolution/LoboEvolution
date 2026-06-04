@@ -59,7 +59,7 @@ public class Nodesettextcontent11Test extends LoboUnitTest {
         txt = doc.createTextNode("Text ");
         comment = doc.createComment("Comment ");
         entRef = doc.createEntityReference("alpha");
-        pi = doc.createProcessingInstruction("PIT", "PIData ");
+        pi = doc.createProcessingInstruction("PIT", "PIData");
         cdata = doc.createCDATASection("CData");
         elem.appendChild(txt);
         elem.appendChild(comment);

@@ -34,6 +34,7 @@ import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 
@@ -71,7 +72,7 @@ public class HcelementgetelementemptyTest extends LoboUnitTest {
         testEmployee = (Element) elementList.item(3);
         testEmployee.setAttributeNode(newAttribute);
         attrValue = testEmployee.getAttribute("lang");
-        assertNull(attrValue, "HcelementgetelementemptyAssert1");
+        assertEquals(attrValue, null,  "HcelementgetelementemptyAssert1");
     }
 }
 

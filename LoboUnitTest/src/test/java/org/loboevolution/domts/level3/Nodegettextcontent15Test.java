@@ -57,7 +57,7 @@ public class Nodegettextcontent15Test extends LoboUnitTest {
         txt = doc.createTextNode("Text ");
         comment = doc.createComment("Comment ");
         entRef = doc.createEntityReference("beta");
-        pi = doc.createProcessingInstruction("PIT", "PIData ");
+        pi = doc.createProcessingInstruction("PIT", "PIData");
         cdata = doc.createCDATASection("CData");
         elem.appendChild(txt);
         elem.appendChild(comment);

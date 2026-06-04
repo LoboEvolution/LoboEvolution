@@ -56,10 +56,7 @@ public class DocumentnormalizeDocument08Test extends LoboUnitTest {
         final DOMConfiguration domConfig;
         HTMLCollection elemList;
         CDATASection newChild;
-        final Node oldChild;
-        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
-
-        final List<DOMError> errors;
+        final Node oldChild;final List<DOMError> errors;
 
         DOMError error;
         final int length;
@@ -78,8 +75,9 @@ public class DocumentnormalizeDocument08Test extends LoboUnitTest {
         domConfig = doc.getDomConfig();
         domConfig.setParameter("split-cdata-sections", Boolean.TRUE);
         /*DOMErrorMonitor */
-        domConfig.setParameter("error-handler", errorMonitor);
+        domConfig.setParameter("error-handler", new DOMErrorMonitor());
         doc.normalizeDocument();
+        DOMErrorMonitor errorMonitor = (DOMErrorMonitor) domConfig.getParameter("error-handler");
         errors = errorMonitor.getErrors();
         for (DOMError domError : errors) {
             error = domError;
@@ -89,7 +87,7 @@ public class DocumentnormalizeDocument08Test extends LoboUnitTest {
             if ("cdata-sections-splitted".equals(type)) {
                 splittedCount += 1;
             } else {
-                assertEquals(1, severity, "DocumentnormalizeDocument08Assert3");
+                assertEquals(2, severity, "DocumentnormalizeDocument08Assert3");
             }
 
         }

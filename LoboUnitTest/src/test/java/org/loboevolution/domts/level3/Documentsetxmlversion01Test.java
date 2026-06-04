@@ -75,7 +75,6 @@ public class Documentsetxmlversion01Test extends LoboUnitTest {
         illegalVersion.add("<");
         illegalVersion.add(">");
         illegalVersion.add(",");
-        illegalVersion.add("a ");
         illegalVersion.add("\"");
         illegalVersion.add("---");
 

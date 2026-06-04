@@ -59,8 +59,8 @@ public class Elementsetidattributens03Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         elemList = doc.getElementsByTagName("em");
         employeeIdElem = (Element) elemList.item(0);
-        employeeIdElem.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:newAttr", "newValue");
-        employeeIdElem.setIdAttributeNS("http://www.w3.org/2000/xmlns/", "newAttr", true);
+        employeeIdElem.setAttributeNS("http://www.w3.org/2000/xmlns", "xmlns:newAttr", "newValue");
+        employeeIdElem.setIdAttributeNS("http://www.w3.org/2000/xmlns", "newAttr", true);
         attributesMap = employeeIdElem.getAttributes();
         attr = (Attr) attributesMap.getNamedItem("xmlns:newAttr");
         id = attr.isId();
@@ -68,7 +68,7 @@ public class Elementsetidattributens03Test extends LoboUnitTest {
         elem = doc.getElementById("newValue");
         elemName = elem.getTagName();
         assertEquals("EM", elemName, "Elementsetidattributens03Assert2");
-        employeeIdElem.setIdAttributeNS("http://www.w3.org/2000/xmlns/", "newAttr", false);
+        employeeIdElem.setIdAttributeNS("http://www.w3.org/2000/xmlns", "newAttr", false);
         id = attr.isId();
         assertFalse(id, "Elementsetidattributens03Assert3");
     }

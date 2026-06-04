@@ -61,7 +61,6 @@ public class Canonicalform05Test extends LoboUnitTest {
         final DOMConfiguration domConfig;
         final HTMLCollection pList;
         final Element newChild;
-        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
         final List<DOMError> errors;
         int errorCount = 0;
         int severity;
@@ -86,8 +85,9 @@ public class Canonicalform05Test extends LoboUnitTest {
         if (canSet) {
             domConfig.setParameter("canonical-form", Boolean.TRUE);
             /*DOMErrorMonitor */
-            domConfig.setParameter("error-handler", errorMonitor);
+            domConfig.setParameter("error-handler", new DOMErrorMonitor());
             doc.normalizeDocument();
+            DOMErrorMonitor errorMonitor = (DOMErrorMonitor) domConfig.getParameter("error-handler");
             errors = errorMonitor.getErrors();
             for (final DOMError error : errors) {
                 severity = error.getSeverity();
@@ -112,7 +112,6 @@ public class Canonicalform05Test extends LoboUnitTest {
                 } else {
                     assertEquals(1, severity, "Canonicalform05Assert8");
                 }
-
             }
             assertEquals(1, errorCount, "Canonicalform05Assert9");
         }

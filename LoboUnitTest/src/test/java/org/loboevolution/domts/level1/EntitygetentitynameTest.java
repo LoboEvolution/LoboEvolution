@@ -31,7 +31,7 @@ import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
-import org.loboevolution.html.node.EntityReference;
+import org.loboevolution.html.node.Entity;
 import org.loboevolution.html.node.NamedNodeMap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -59,14 +59,14 @@ public class EntitygetentitynameTest extends LoboUnitTest {
         final Document doc;
         final DocumentType docType;
         final NamedNodeMap entityList;
-        final EntityReference entityNode;
+        final Entity entityNode;
         final String entityName;
         doc = sampleXmlFile("staff.xml");
         docType = doc.getDoctype();
         assertNotNull(docType, "EntitygetentitynameAssert1");
         entityList = docType.getEntities();
         assertNotNull(entityList, "EntitygetentitynameAssert2");
-        entityNode = (EntityReference) entityList.getNamedItem("ent1");
+        entityNode = (Entity) entityList.getNamedItem("ent1");
         entityName = entityNode.getNodeName();
         assertEquals("ent1", entityName, "EntitygetentitynameAssert3");
     }

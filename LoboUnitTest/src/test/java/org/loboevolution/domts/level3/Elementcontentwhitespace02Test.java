@@ -53,24 +53,20 @@ public class Elementcontentwhitespace02Test extends LoboUnitTest {
         final Element body;
         final DOMConfiguration domConfig;
         final boolean canSet;
-        final boolean canSetValidate;
-        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
-
-        Node child;
+        final boolean canSetValidate;Node child;
         final String childName;
         doc = sampleXmlFile("barfoo.xml");
         domConfig = doc.getDomConfig();
         canSet = domConfig.canSetParameter("element-content-whitespace", Boolean.FALSE);
         canSetValidate = domConfig.canSetParameter("validate", Boolean.TRUE);
 
-        if (
-                (canSetValidate & canSet)
-        ) {
+        if (canSetValidate & canSet) {
             domConfig.setParameter("element-content-whitespace", Boolean.FALSE);
             domConfig.setParameter("validate", Boolean.TRUE);
             /*DOMErrorMonitor */
-            domConfig.setParameter("error-handler", errorMonitor);
+            domConfig.setParameter("error-handler", new DOMErrorMonitor());
             doc.normalizeDocument();
+            DOMErrorMonitor errorMonitor = (DOMErrorMonitor) domConfig.getParameter("error-handler");
             assertTrue(errorMonitor.assertLowerSeverity(2), "Elementcontentwhitespace02Assert1");
             bodyList = doc.getElementsByTagName("body");
             body = (Element) bodyList.item(0);

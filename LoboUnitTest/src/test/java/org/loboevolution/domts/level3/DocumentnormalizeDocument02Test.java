@@ -26,7 +26,6 @@
 
 package org.loboevolution.domts.level3;
 
-
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.DOMConfiguration;
@@ -37,7 +36,6 @@ import org.loboevolution.html.node.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-
 /**
  * Normalize a document with the 'cdata-sections' parameter set to false and
  * check if the CDATASection has been preserved.
@@ -46,6 +44,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-cdata-sections">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-cdata-sections</a>
  */
 public class DocumentnormalizeDocument02Test extends LoboUnitTest {
+
     @Test
     public void runTest() {
         final Document doc;
@@ -54,10 +53,7 @@ public class DocumentnormalizeDocument02Test extends LoboUnitTest {
         CDATASection cdata;
         final Text text;
         String nodeName;
-        final DOMConfiguration domConfig;
-        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
-
-        doc = sampleXmlFile("hc_staff.xml");
+        final DOMConfiguration domConfig;doc = sampleXmlFile("hc_staff.xml");
         elemList = doc.getElementsByTagName("strong");
         elemName = (Element) elemList.item(1);
         cdata = (CDATASection) elemName.getLastChild();
@@ -66,8 +62,9 @@ public class DocumentnormalizeDocument02Test extends LoboUnitTest {
         domConfig = doc.getDomConfig();
         domConfig.setParameter("cdata-sections", Boolean.TRUE);
         /*DOMErrorMonitor */
-        domConfig.setParameter("error-handler", errorMonitor);
+        domConfig.setParameter("error-handler", new DOMErrorMonitor());
         doc.normalizeDocument();
+        DOMErrorMonitor errorMonitor = (DOMErrorMonitor) domConfig.getParameter("error-handler");
         assertTrue(errorMonitor.assertLowerSeverity(2), "DocumentnormalizeDocument02Assert4");
         elemList = doc.getElementsByTagName("strong");
         elemName = (Element) elemList.item(1);

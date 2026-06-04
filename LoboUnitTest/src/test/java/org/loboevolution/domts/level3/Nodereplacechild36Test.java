@@ -53,15 +53,13 @@ public class Nodereplacechild36Test extends LoboUnitTest {
         oldChild = doc.createEntityReference("delta");
         newChild = doc.createTextNode("Text");
 
-        {
-            boolean success = false;
-            try {
-                parent.replaceChild(newChild, oldChild);
-            } catch (final DOMException ex) {
-                success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
-            }
-            assertTrue(success, "Nodereplacechild36Assert2");
+        boolean success = false;
+        try {
+            parent.replaceChild(newChild, oldChild);
+        } catch (final DOMException ex) {
+            success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
         }
+        assertTrue(success, "Nodereplacechild36Assert2");
     }
 }
 

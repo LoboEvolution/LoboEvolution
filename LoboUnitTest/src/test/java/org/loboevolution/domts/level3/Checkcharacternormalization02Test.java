@@ -26,7 +26,6 @@
 
 package org.loboevolution.domts.level3;
 
-
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.DOMConfiguration;
@@ -40,7 +39,6 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
-
 
 /**
  * Normalize document with check-character-normalization set to true, check that
@@ -56,37 +54,31 @@ public class Checkcharacternormalization02Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
-        final DOMConfiguration domConfig;
-        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
-
         final HTMLCollection pList;
         final Element pElem;
         final Text text;
         final boolean canSet;
-        final List<DOMError> errors;
-
-        DOMError error;
         int severity;
         DOMLocator locator;
         Node relatedNode;
         int errorCount = 0;
         String errorType;
         doc = sampleXmlFile("barfoo.xml");
-        domConfig = doc.getDomConfig();
+        DOMConfiguration domConfig = doc.getDomConfig();
         canSet = domConfig.canSetParameter("check-character-normalization", Boolean.TRUE);
 
         if (canSet) {
             domConfig.setParameter("check-character-normalization", Boolean.TRUE);
             /*DOMErrorMonitor */
-            domConfig.setParameter("error-handler", errorMonitor);
+            domConfig.setParameter("error-handler", new DOMErrorMonitor());
             pList = doc.getElementsByTagName("p");
             pElem = (Element) pList.item(0);
             text = doc.createTextNode("suçon");
             pElem.appendChild(text);
             doc.normalizeDocument();
-            errors = errorMonitor.getErrors();
-            for (DOMError domError : errors) {
-                error = domError;
+            DOMErrorMonitor errorMonitor = (DOMErrorMonitor) domConfig.getParameter("error-handler");
+            List<DOMError> errors = errorMonitor.getErrors();
+            for (DOMError error : errors) {
                 severity = error.getSeverity();
 
                 if (severity == 2) {

@@ -50,10 +50,7 @@ public class Elementcontentwhitespace03Test extends LoboUnitTest {
         final HTMLCollection bodyList;
         final Element body;
         final DOMConfiguration domConfig;
-        final boolean canSet;
-        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
-
-        Node child;
+        final boolean canSet;Node child;
         String childName;
         doc = sampleXmlFile("barfoo.xml");
         domConfig = doc.getDomConfig();
@@ -63,8 +60,9 @@ public class Elementcontentwhitespace03Test extends LoboUnitTest {
         if (canSet) {
             domConfig.setParameter("element-content-whitespace", Boolean.FALSE);
             /*DOMErrorMonitor */
-            domConfig.setParameter("error-handler", errorMonitor);
+            domConfig.setParameter("error-handler", new DOMErrorMonitor());
             doc.normalize();
+            DOMErrorMonitor errorMonitor = (DOMErrorMonitor) domConfig.getParameter("error-handler");
             assertTrue(errorMonitor.assertLowerSeverity(2), "Elementcontentwhitespace03Assert1");
             bodyList = doc.getElementsByTagName("body");
             body = (Element) bodyList.item(0);

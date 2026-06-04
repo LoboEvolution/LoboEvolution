@@ -26,7 +26,6 @@
 
 package org.loboevolution.domts.level3;
 
-
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.DOMConfiguration;
@@ -40,16 +39,15 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
 /**
- * Add a L1 attribute to a L2 namespace aware document and perform namespace normalization.  Should result
- * in an error.
-
+ * Add a L1 attribute to a L2 namespace aware document and perform namespace normalization.
+ * Should result in an error.
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/namespaces-algorithms#normalizeDocumentAlgo">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/namespaces-algorithms#normalizeDocumentAlgo</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-namespaces">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-namespaces</a>
  */
 public class DocumentnormalizeDocument13Test extends LoboUnitTest {
+
     @Test
     public void runTest() {
         final Document doc;
@@ -57,10 +55,6 @@ public class DocumentnormalizeDocument13Test extends LoboUnitTest {
         final DOMConfiguration domConfig;
         final HTMLCollection pList;
         final Attr newAttr;
-        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
-
-        final List<DOMError> errors;
-
         DOMError error;
         int errorCount = 0;
         int severity;
@@ -80,14 +74,13 @@ public class DocumentnormalizeDocument13Test extends LoboUnitTest {
         newAttr = elem.getAttributeNode("title");
         domConfig = doc.getDomConfig();
         domConfig.setParameter("namespaces", Boolean.TRUE);
-        /*DOMErrorMonitor */
-        domConfig.setParameter("error-handler", errorMonitor);
+        domConfig.setParameter("error-handler", new DOMErrorMonitor());
         doc.normalizeDocument();
-        errors = errorMonitor.getErrors();
+        DOMErrorMonitor errorMonitor = (DOMErrorMonitor) domConfig.getParameter("error-handler");
+        List<DOMError> errors = errorMonitor.getErrors();
         for (DOMError domError : errors) {
             error = domError;
             severity = error.getSeverity();
-
             if (severity == 2) {
                 location = error.getLocation();
                 problemNode = location.getRelatedNode();
@@ -105,9 +98,6 @@ public class DocumentnormalizeDocument13Test extends LoboUnitTest {
                 message = error.getMessage();
                 length = message.length();
                 assertTrue((length > 0), "DocumentnormalizeDocument13Assert7");
-                error.getType();
-                error.getRelatedData();
-                error.getRelatedException();
                 errorCount += 1;
             } else {
                 assertEquals(1, severity, "DocumentnormalizeDocument13Assert8");

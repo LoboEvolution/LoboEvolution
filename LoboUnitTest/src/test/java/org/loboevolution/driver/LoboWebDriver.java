@@ -39,6 +39,7 @@ import org.loboevolution.http.UserAgentContext;
 import java.awt.*;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Reader;
 import java.io.StringReader;
 import java.nio.charset.StandardCharsets;
 
@@ -51,13 +52,13 @@ public class LoboWebDriver {
     /**
      * <p>loadHtml.</p>
      *
-     * @param in  a {@link java.io.InputStream} object.
+     * @param reader  a {@link java.io.Reader} object.
      * @param url a {@link java.lang.String} object.
      * @return a {@link org.loboevolution.html.dom.domimpl.HTMLDocumentImpl} object.
      */
-    protected static HTMLDocumentImpl loadHtml(final InputStream in, final String url) {
+    protected static HTMLDocumentImpl loadHtml(final Reader reader, final String url) {
         HTMLDocumentImpl doc = null;
-        try (final WritableLineReader wis = new WritableLineReader(new InputStreamReader(in, StandardCharsets.UTF_8))) {
+        try (final WritableLineReader wis = new WritableLineReader(reader)) {
             final HtmlRendererConfig config = new LocalHtmlRendererConfig();
             final UserAgentContext ucontext = new UserAgentContext(config, true);
             final HtmlPanel panel = new HtmlPanel();

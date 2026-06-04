@@ -58,10 +58,7 @@ public class Datatypenormalization18Test extends LoboUnitTest {
         final boolean canSetValidate;
         final boolean canSetXMLSchema;
         final boolean canSetDataNorm;
-        final String xsdNS = "http://www.w3.org/2001/XMLSchema";
-        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
-
-        Node childNode;
+        final String xsdNS = "http://www.w3.org/2001/XMLSchema";Node childNode;
         String childValue;
         doc = sampleXmlFile("datatype_normalization2.xml");
         domConfig = doc.getDomConfig();
@@ -77,8 +74,9 @@ public class Datatypenormalization18Test extends LoboUnitTest {
             /*DOMString */
             domConfig.setParameter("schema-type", xsdNS);
             /*DOMErrorMonitor */
-            domConfig.setParameter("error-handler", errorMonitor);
+            domConfig.setParameter("error-handler", new DOMErrorMonitor());
             doc.normalize();
+            DOMErrorMonitor errorMonitor = (DOMErrorMonitor) domConfig.getParameter("error-handler");
             assertTrue(errorMonitor.assertLowerSeverity(2), "Datatypenormalization18Assert1");
             elemList = doc.getElementsByTagNameNS("http://www.w3.org/1999/xhtml", "code");
             element = (Element) elemList.item(1);

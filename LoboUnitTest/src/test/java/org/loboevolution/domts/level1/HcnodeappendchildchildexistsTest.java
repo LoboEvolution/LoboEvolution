@@ -74,12 +74,12 @@ public class HcnodeappendchildchildexistsTest extends LoboUnitTest {
 
         int nodeType;
         final List<String> expected = new ArrayList<>();
+        expected.add("EM");
         expected.add("STRONG");
         expected.add("CODE");
         expected.add("SUP");
         expected.add("VAR");
         expected.add("ACRONYM");
-        expected.add("EM");
 
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("p");

@@ -226,8 +226,8 @@ public class DOMImplementationTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"mydoc", "null", "mydoc", "null"})
-    public void createDocument_qualifiedName() {
+    @Alerts({"MYDOC", "null", "MYDOC", "null"})
+    public void createDocumentQualifiedName() {
         final String html = "<html><head>"
                 + "<script>\n"
                 + "  function test() {\n"

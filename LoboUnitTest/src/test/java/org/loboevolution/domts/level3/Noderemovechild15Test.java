@@ -55,15 +55,13 @@ public class Noderemovechild15Test extends LoboUnitTest {
         elem = (Element) eRef.getFirstChild();
         assertNotNull(elem, "Noderemovechild15Assert3");
 
-        {
-            boolean success = false;
-            try {
-                eRef.removeChild(elem);
-            } catch (final DOMException ex) {
-                success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
-            }
-            assertTrue(success, "Noderemovechild15Assert4");
+        boolean success = false;
+        try {
+            eRef.removeChild(elem);
+        } catch (final DOMException ex) {
+            success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
         }
+        assertTrue(success, "Noderemovechild15Assert4");
     }
 }
 

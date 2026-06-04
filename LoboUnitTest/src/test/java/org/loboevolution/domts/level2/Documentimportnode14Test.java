@@ -71,7 +71,7 @@ public class Documentimportnode14Test extends LoboUnitTest {
         imported = newDoc.importNode(employeeElem, true);
         attrNode = ((Element) imported).getAttributeNodeNS(null, "defaultAttr");
         assertNull(attrNode);
-        attrValue = ((Element) imported).getAttributeNS("http://www.w3.org/2000/xmlns/", "emp");
+        attrValue = ((Element) imported).getAttributeNS("http://www.w3.org/2000/xmlns", "emp");
         assertEquals("http://www.nist.gov", attrValue);
     }
 }

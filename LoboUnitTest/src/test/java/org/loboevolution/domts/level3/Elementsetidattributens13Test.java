@@ -62,8 +62,8 @@ public class Elementsetidattributens13Test extends LoboUnitTest {
         doc = sampleXmlFile("hc_staff.xml");
         elemList = doc.getElementsByTagName("strong");
         nameElem = (Element) elemList.item(2);
-        nameElem.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:newAttr", "newValue");
-        nameElem.setIdAttributeNS("http://www.w3.org/2000/xmlns/", "newAttr", true);
+        nameElem.setAttributeNS("http://www.w3.org/2000/xmlns", "xmlns:newAttr", "newValue");
+        nameElem.setIdAttributeNS("http://www.w3.org/2000/xmlns", "newAttr", true);
         attributesMap = nameElem.getAttributes();
         attr = (Attr) attributesMap.getNamedItem("xmlns:newAttr");
         id = attr.isId();
@@ -72,15 +72,13 @@ public class Elementsetidattributens13Test extends LoboUnitTest {
         elemName = elem.getTagName();
         assertEquals("STRONG", elemName, "Elementsetidattributens13Assert4");
 
-        {
-            boolean success = false;
-            try {
-                nameElem.setIdAttributeNS("http://www.w3.org/XML/1998/namespace", "lang", false);
-            } catch (final DOMException ex) {
-                success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
-            }
-            assertTrue(success, "Elementsetidattributens13Assert5");
+        boolean success = false;
+        try {
+            nameElem.setIdAttributeNS("http://www.w3.org/XML/1998/namespace", "lang", false);
+        } catch (final DOMException ex) {
+            success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
         }
+        assertTrue(success, "Elementsetidattributens13Assert5");
     }
 }
 

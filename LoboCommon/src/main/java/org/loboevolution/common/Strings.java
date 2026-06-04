@@ -32,7 +32,6 @@ import javax.crypto.spec.PBEKeySpec;
 import java.awt.*;
 import java.awt.font.FontRenderContext;
 import java.awt.font.GlyphVector;
-import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.security.spec.KeySpec;
@@ -164,9 +163,8 @@ public final class Strings {
 	}
 
 	public static boolean isStringBuilderNotBlack(final StringBuilder text) {
-		return (text != null) && (text.length() > 0);
+		return (text != null) && (!text.isEmpty());
 	}
-
 
 	public static boolean containsIgnoreCase(final String text, final String text1) {
 		return text != null && text1 != null && (text.contains(text1.toLowerCase()) || text.contains(text1.toUpperCase()));
@@ -347,6 +345,27 @@ public final class Strings {
 		return text;
 	}
 
+	public static String stripQuotes(String value) {
+		if (value == null) {
+			return null;
+		}
+
+		value = value.trim();
+
+		int len = value.length();
+		if (len >= 2) {
+			char first = value.charAt(0);
+			char last = value.charAt(len - 1);
+
+			if ((first == '"' && last == '"') ||
+					(first == '\'' && last == '\'')) {
+				return value.substring(1, len - 1);
+			}
+		}
+
+		return value;
+	}
+
 	/**
 	 * <p>containsWords.</p>
 	 *
@@ -399,32 +418,32 @@ public final class Strings {
 	}
 
 	public static boolean isValidTag(final String name, final boolean isXml) {
-		if (Strings.isBlank(name)) {
-			return false;
+		if ("".equals(name)) {
+			return true;
 		}
-		final Pattern pattern = Pattern.compile(isXml ? "[A-Za-z0-9]*" : "(\\\"[^\\\"]*\\\"|'[^']*'|[^'\\\">])*", Pattern.CASE_INSENSITIVE);
+		final Pattern pattern = Pattern.compile(isXml ? "[A-Za-z0-9]*" : "(\"[^\"]*\"|'[^']*'|[^'\">])*", Pattern.CASE_INSENSITIVE);
 		return pattern.matcher(name).matches();
 	}
 
 
 	public static boolean isXMLIdentifier(final String str) {
 		if (isBlank(str)) {
-			return false;
+			return true;
 		}
 
 		final String s = str.trim();
 
 		if (!isXMLIdentifierStart(s.charAt(0))) {
-			return false;
+			return true;
 		}
 
 		for (int i = 1; i < s.length(); i++) {
 			if (!isXMLIdentifierPart(s.charAt(i))) {
-				return false;
+				return true;
 			}
 		}
 
-		return true;
+		return false;
 	}
 
 

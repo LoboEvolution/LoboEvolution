@@ -54,23 +54,21 @@ public class Checkcharacternormalization01Test extends LoboUnitTest {
     @Test
     public void runTest() {
         final Document doc;
-        final DOMConfiguration domConfig;
-        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
-
-        HTMLCollection pList;
+        final DOMConfiguration domConfig;HTMLCollection pList;
         Element pElem;
         Text text;
         final String textValue;
         doc = sampleXmlFile("barfoo.xml");
         domConfig = doc.getDomConfig();
         /*DOMErrorMonitor */
-        domConfig.setParameter("error-handler", errorMonitor);
+        domConfig.setParameter("error-handler", new DOMErrorMonitor());
         domConfig.setParameter("check-character-normalization", Boolean.FALSE);
         pList = doc.getElementsByTagName("p");
         pElem = (Element) pList.item(0);
         text = doc.createTextNode("suçon");
         pElem.appendChild(text);
         doc.normalizeDocument();
+        DOMErrorMonitor errorMonitor = (DOMErrorMonitor) domConfig.getParameter("error-handler");
         assertTrue(errorMonitor.assertLowerSeverity(2), "Checkcharacternormalization01Assert3");
         pList = doc.getElementsByTagName("p");
         pElem = (Element) pList.item(0);

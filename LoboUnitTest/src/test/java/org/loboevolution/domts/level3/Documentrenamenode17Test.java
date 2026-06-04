@@ -37,7 +37,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Invoke the renameNode method to rename a new element node of a new document so that
- * its namespaceURI is <a href="http://www.w3.org/2000/xmlns/">...</a> and qualifiedName is xmlns:xmlns.
+ * its namespaceURI is <a href="http://www.w3.org/2000/xmlns">...</a> and qualifiedName is xmlns:xmlns.
  * Check if this element has been renamed successfully by verifying the
  * nodeName, attributes of the renamed node.
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-renameNode">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-renameNode</a>

@@ -67,7 +67,9 @@ public class HcelementretrieveallattributesTest extends LoboUnitTest {
 
         final List<String> expected = new ArrayList<>();
         expected.add("title");
+        expected.add("class");
         expected.add("dir");
+        expected.add("xsi:noNamespaceSchemaLocation");
 
         doc = sampleXmlFile("hc_staff.xml");
         addressList = doc.getElementsByTagName("acronym");

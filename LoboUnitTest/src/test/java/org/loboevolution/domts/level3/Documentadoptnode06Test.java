@@ -30,6 +30,7 @@ package org.loboevolution.domts.level3;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.DOMImplementation;
+import org.loboevolution.html.dom.nodeimpl.AttrImpl;
 import org.loboevolution.html.node.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -51,7 +52,7 @@ public class Documentadoptnode06Test extends LoboUnitTest {
         final Document doc;
         final Document newDoc;
         final DOMImplementation domImpl;
-        final Attr newAttr;
+        final AttrImpl newAttr;
         final Text newText;
         final EntityReference newEntRef;
         final Attr adoptedAttr;
@@ -75,11 +76,11 @@ public class Documentadoptnode06Test extends LoboUnitTest {
         rootNS = docElem.getNamespaceURI();
         domImpl = doc.getImplementation();
         newDoc = domImpl.createDocument(rootNS, rootName, null);
-        newAttr = doc.createAttributeNS(xmlNS, "xml:lang");
+        newAttr = (AttrImpl) doc.createAttributeNS(xmlNS, "xml:lang");
         newText = doc.createTextNode("Text Node");
         newEntRef = doc.createEntityReference("alpha");
-        newAttr.appendChild(newText);
-        newAttr.appendChild(newEntRef);
+        newAttr.appendChildInternal(newText);
+        newAttr.appendChildInternal(newEntRef);
         adoptedAttr = (Attr) newDoc.adoptNode(newAttr);
 
         if ((adoptedAttr != null)) {

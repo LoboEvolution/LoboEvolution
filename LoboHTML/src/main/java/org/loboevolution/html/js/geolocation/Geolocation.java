@@ -27,9 +27,9 @@
 package org.loboevolution.html.js.geolocation;
 
 import lombok.extern.slf4j.Slf4j;
-import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.js.Executor;
 import org.loboevolution.html.js.WindowImpl;
+import org.loboevolution.html.node.Document;
 import org.loboevolution.js.AbstractScriptableDelegate;
 import org.loboevolution.js.Window;
 import org.mozilla.javascript.Function;
@@ -74,8 +74,8 @@ public class Geolocation extends AbstractScriptableDelegate {
 	public void getCurrentPosition(final Function success) throws Exception {
 		final IPAddressBasedGeoAcquirer ip = new IPAddressBasedGeoAcquirer();
 		final Position acquireLocation = ip.acquireLocation();
-		final NodeImpl node = (NodeImpl) window.getDocumentNode();
-		Executor.executeFunction(node, success, new Object[] { acquireLocation }, window.getContextFactory());
+		final Document document = window.getDocumentNode();
+		Executor.executeFunction(document, document, success, new Object[] { acquireLocation }, window.getContextFactory());
 	}
 
 	/**
@@ -139,13 +139,13 @@ public class Geolocation extends AbstractScriptableDelegate {
 	}
 
 	private void geoError(final Function error, final Exception e) {
-		final NodeImpl node = (NodeImpl) window.getDocumentNode();
+		final Document document = window.getDocumentNode();
 		PositionError pError = null;
 		if (e instanceof UnknownHostException) {
 			pError = new PositionError(PositionError.POSITION_UNAVAILABLE);
 		} else if (e instanceof TimeoutException) {
 			pError = new PositionError(PositionError.TIMEOUT);
 		}
-		Executor.executeFunction(node, error, new Object[] { pError }, window.getContextFactory());
+		Executor.executeFunction(document, document, error, new Object[] { pError }, window.getContextFactory());
 	}
 }

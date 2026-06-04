@@ -109,15 +109,15 @@ public class NodereplacechildnewchildexistsTest extends LoboUnitTest {
         final List<String> expectedWithWhitespace = new ArrayList<>();
         expectedWithWhitespace.add("#text");
         expectedWithWhitespace.add("#text");
-        expectedWithWhitespace.add("name");
+        expectedWithWhitespace.add("NAME");
         expectedWithWhitespace.add("#text");
-        expectedWithWhitespace.add("position");
+        expectedWithWhitespace.add("POSITION");
         expectedWithWhitespace.add("#text");
-        expectedWithWhitespace.add("salary");
+        expectedWithWhitespace.add("SALARY");
         expectedWithWhitespace.add("#text");
-        expectedWithWhitespace.add("gender");
+        expectedWithWhitespace.add("GENDER");
         expectedWithWhitespace.add("#text");
-        expectedWithWhitespace.add("employeeId");
+        expectedWithWhitespace.add("EMPLOYEEID");
         expectedWithWhitespace.add("#text");
         return expectedWithWhitespace;
     }

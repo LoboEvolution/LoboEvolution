@@ -23,9 +23,7 @@
  *
  * Contact info: ivan.difrancesco@yahoo.it
  */
-
 package org.loboevolution.domts.level3;
-
 
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
@@ -37,7 +35,6 @@ import org.loboevolution.html.node.TypeInfo;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-
 
 /**
  * DTD types always return false for isDerivedFrom.

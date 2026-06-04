@@ -31,15 +31,16 @@ import org.htmlunit.cssparser.dom.DOMException;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
+import org.loboevolution.html.dom.nodeimpl.AttrImpl;
 import org.loboevolution.html.node.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Using removeChild on a default Attribute node attempt to remove its EntityReference child node and
+ * Using removeChild on a default Attribute node attempt to remove its EntityReference child node
  * and verify the name of the returned node that was removed.  Now attempt the reverse
  * and verify if a NO_MODIFICATION_ALLOWED_ERR or NOT_FOUND_ERR is thrown.
- * Then remove an child of the entity reference and expect a NO_MODIFICATION_ALLOWED_ERR.
+ * Then remove a child of the entity reference and expect a NO_MODIFICATION_ALLOWED_ERR.
 
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-1734834066">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#ID-1734834066</a>
  */
@@ -49,7 +50,7 @@ public class Noderemovechild31Test extends LoboUnitTest {
         final Document doc;
         final HTMLCollection parentList;
         final NamedNodeMap attrsMap;
-        final Attr parent;
+        final AttrImpl parent;
         final EntityReference child;
         final EntityReference entRef;
         final Element elem;
@@ -60,11 +61,11 @@ public class Noderemovechild31Test extends LoboUnitTest {
         parentList = doc.getElementsByTagName("acronym");
         elem = (Element) parentList.item(3);
         attrsMap = elem.getAttributes();
-        parent = (Attr) attrsMap.getNamedItem("class");
+        parent = (AttrImpl) attrsMap.getNamedItem("class");
         entRef = doc.createEntityReference("delta");
-        parent.appendChild(entRef);
+        parent.appendChildInternal(entRef);
         child = (EntityReference) parent.getLastChild();
-        removed = (EntityReference) parent.removeChild(child);
+        removed = (EntityReference) parent.removeChildInternal(child);
         removedName = removed.getNodeName();
         assertEquals("delta", removedName, "Noderemovechild31Assert1");
 

@@ -601,6 +601,12 @@ public class XMLDocument implements Document {
 
 	/** {@inheritDoc} */
 	@Override
+	public void setXmlEncoding(final String xmlEncoding) {
+		doc.setXmlEncoding(xmlEncoding);
+	}
+
+	/** {@inheritDoc} */
+	@Override
 	public boolean isIsConnected() {
 
 		return doc.isIsConnected();

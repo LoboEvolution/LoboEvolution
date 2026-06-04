@@ -54,7 +54,7 @@ public class Noderemovechild12Test extends LoboUnitTest {
         final EntityReference removedERef;
         doc = sampleXmlFile("hc_staff.xml");
         docFrag = doc.createDocumentFragment();
-        eRef = doc.createEntityReference("ent1");
+        eRef = doc.createEntityReference("alpha");
         docFrag.appendChild(eRef);
         docFrag.removeChild(eRef);
         removedERef = (EntityReference) docFrag.getFirstChild();

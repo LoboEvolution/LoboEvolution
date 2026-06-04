@@ -45,14 +45,18 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 
 	private final Node owner;
 
+	private final boolean readOnly;
+
 	/**
 	 * <p>Constructor for NamedNodeMapImpl.</p>
 	 *
 	 * @param owner a {@link org.loboevolution.html.node.Node} object.
 	 * @param attribs a {@link org.loboevolution.html.dom.nodeimpl.NodeListImpl} object.
+	 * @param readOnly a {@link java.lang.Boolean} object.
 	 */
-	public NamedNodeMapImpl(final Node owner, final NodeListImpl attribs) {
-		this.owner = owner;
+	public NamedNodeMapImpl(final Node owner, final NodeListImpl attribs, final boolean readOnly) {
+		 this.owner = owner;
+		 this.readOnly = readOnly;
 		 attribs.forEach(attr -> {
 			final String name = attr.getLocalName();
 			final String value = attr.getNodeValue();
@@ -74,17 +78,26 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 	/** {@inheritDoc} */
 	@Override
 	public Node getNamedItem(final String name) {
-		final AtomicReference<Node> atomicReference = new AtomicReference<>();
+		final AtomicReference<Node> atomicReference = new AtomicReference<>(null);
 		if (Strings.isNotBlank(name)) {
 			String nm = name.contains(":") ? name.split(":")[1] : name;
+			if (nm.startsWith("&")) {
+				nm = nm.substring(1, nm.length()-1);
+			}
+
+			final String finalNm = nm;
 			attributes.forEach(attr -> {
 				final String key = attr.getLocalName();
 
-				if(!name.contains(":") && attr.getPrefix() == null && nm.equalsIgnoreCase(key) && atomicReference.get() == null) {
+				if(!name.contains(":") && attr.getPrefix() == null && finalNm.equalsIgnoreCase(key) && atomicReference.get() == null) {
 					atomicReference.set(attr);
 				}
 
-				if(name.contains(":") && attr.getPrefix() != null && nm.equalsIgnoreCase(key) && atomicReference.get() == null) {
+				if(name.contains(":") && attr.getPrefix() != null && finalNm.equalsIgnoreCase(key) && atomicReference.get() == null) {
+					atomicReference.set(attr);
+				}
+
+				if(name.contains(":") && attr.getPrefix() == null && key.contains(finalNm) && atomicReference.get() == null) {
 					atomicReference.set(attr);
 				}
 			});
@@ -105,7 +118,7 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 				final String namespace = attr.getNamespaceURI();
 				final String parentNamespace = owner.getParentNode() != null ? owner.getParentNode().getNamespaceURI() : null;
 				if (Strings.isBlank(namespaceURI) || "*".equals(namespaceURI) || namespaceURI.equals(namespace) || namespaceURI.equals(parentNamespace)) {
-					if (attr.getLocalName().equalsIgnoreCase(localName)) {
+					if (attr.getLocalName().contains(localName) || localName.contains(attr.getLocalName())) {
 						atomicReference.set(attr);
 					}
 				}
@@ -130,6 +143,12 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 	/** {@inheritDoc} */
 	@Override
 	public Node removeNamedItem(final String name) throws DOMException {
+
+		if (readOnly) {
+			throw new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR,
+					"This NamedNodeMap is read-only");
+		}
+
 		final AtomicReference<Node> atomicReference = new AtomicReference<>();
 		attributes.forEach(attr -> {
 			final String key = attr.getNodeName();
@@ -149,12 +168,17 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 	@Override
 	public Node removeNamedItemNS(final String namespaceURI, final String localName) throws DOMException {
 
+		if (readOnly) {
+			throw new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR,
+					"This NamedNodeMap is read-only");
+		}
+
 		final AtomicReference<Node> atomicReference = new AtomicReference<>(null);
 		attributes.forEach(attr -> {
 			final String namespace = attr.getNamespaceURI();
 			final String parentNamespace = owner.getParentNode() != null ? owner.getParentNode().getNamespaceURI() : null;
-			if (namespaceURI != null && ("*".equals(namespaceURI) || namespaceURI.equals(namespace) || namespaceURI.equals(parentNamespace))) {
-				if (attr.getLocalName().equalsIgnoreCase(localName)) {
+			if (Strings.isBlank(namespaceURI) || "*".equals(namespaceURI) || namespaceURI.equals(namespace) || namespaceURI.equals(parentNamespace)) {
+				if (attr.getLocalName().contains(localName) || localName.contains(attr.getLocalName())) {
 					atomicReference.set(attr);
 				}
 			}
@@ -191,18 +215,35 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 			throw new DOMException(DOMException.WRONG_DOCUMENT_ERR, "Different Document");
 		}
 
-		final Node check = getNamedItem(node.getNodeName());
-		this.attributes.remove(check);
-
-		if (node instanceof Attr attr) {
-            final TextImpl t = new TextImpl(attr.getValue());
-			t.setOwnerDocument(attr.getOwnerDocument());
-			t.setParentImpl(attr.getParentNode());
-			attr.appendChild(t);
+		// For entities, don't replace existing ones - XML uses the first declaration
+		if (node.getNodeType() == Node.ENTITY_NODE) {
+			final Node existing = getNamedItem(node.getNodeName());
+			if (existing != null) {
+				return node;
+			}
 		}
 
-		this.attributes.add(node);
-		return node;
+		// remove existing attribute with same name
+		final Node existing = getNamedItem(node.getNodeName());
+		if (existing != null) {
+			int idx = attributes.indexOf(existing);
+			if (idx != -1) {
+				attributes.set(idx, node);
+			}
+
+			if (existing instanceof Attr a) {
+				a.setOwnerElement(null);
+			}
+
+			if (node instanceof Attr newAttr) {
+				newAttr.setOwnerElement(owner);
+			}
+
+			return existing;
+		}
+
+		attributes.add(node);
+		return null;
 	}
 
 	/** {@inheritDoc} */
@@ -214,6 +255,10 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 			throw new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR, "readonly node");
 		}
 
+		if (node.getNodeType() == Node.ENTITY_NODE) {
+			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "readonly node");
+		}
+
 		if (!Objects.equals(node.getOwnerDocument(), owner.getOwnerDocument())) {
 			throw new DOMException(DOMException.WRONG_DOCUMENT_ERR, "Different Document");
 		}
@@ -222,20 +267,17 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 			throw new DOMException(DOMException.INUSE_ATTRIBUTE_ERR, "Different Element");
 		}
 
+		// remove existing attribute with same name
+		final Node existing = getNamedItemNS(node.getNamespaceURI(), node.getLocalName());
+		this.attributes.remove(existing);
+
 		if (node instanceof Attr attr) {
-            final TextImpl t = new TextImpl(attr.getValue());
-			t.setOwnerDocument(attr.getOwnerDocument());
-			t.setParentImpl(attr.getParentNode());
-			attr.appendChild(t);
-			final Node check = getNamedItemNS(attr.getNamespaceURI(), attr.getLocalName());
-			if (check != null) {
-				this.attributes.remove(check);
-				this.attributes.add(node);
-				return node;
-			}
+			attr.setOwnerElement(owner);
 		}
 
+		// DO NOT append children to Attr — forbidden by DOM
 		this.attributes.add(node);
+
 		return node;
 	}
 

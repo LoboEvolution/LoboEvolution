@@ -41,7 +41,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Create a NamedNodeMap object from the attributes of the
  * last child of the third "p" element and traverse the
- * list from index 0 thru length -1.  All indices should
+ * list from index 0 through length -1.  All indices should
  * be valid.
 
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-84CF096">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-84CF096</a>
@@ -67,13 +67,13 @@ public class HcnamednodemapchildnoderangeTest extends LoboUnitTest {
         testEmployee = (Element) elementList.item(2);
         attributes = testEmployee.getAttributes();
         length = attributes.getLength();
-        assertEquals(2, length, "HcnamednodemapchildnoderangeAssert1");
+        assertEquals(4, length, "HcnamednodemapchildnoderangeAssert1");
 
         child = attributes.item(0);
         assertNotNull(child, "HcnamednodemapchildnoderangeAssert2");
         child = attributes.item(1);
         assertNotNull(child, "HcnamednodemapchildnoderangeAssert3");
-        child = attributes.item(3);
+        child = attributes.item(4);
         assertNull(child, "HcnamednodemapchildnoderangeAssert4");
     }
 

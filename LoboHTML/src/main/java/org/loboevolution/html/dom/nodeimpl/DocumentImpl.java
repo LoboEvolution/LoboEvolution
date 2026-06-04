@@ -44,6 +44,7 @@ import org.loboevolution.html.dom.filter.*;
 import org.loboevolution.html.dom.nodeimpl.traversal.NodeIteratorImpl;
 import org.loboevolution.html.dom.nodeimpl.traversal.TreeWalkerImpl;
 import org.loboevolution.html.dom.xpath.XPathEvaluatorImpl;
+import org.loboevolution.html.helper.NormalizeNode;
 import org.loboevolution.html.io.LocalWritableLineReader;
 import org.loboevolution.html.io.WritableLineReader;
 import org.loboevolution.html.js.WindowImpl;
@@ -81,7 +82,13 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
 
 	private boolean xmlStandalone;
 
+	@Getter
+	@Setter
 	private boolean xml = false;
+
+	@Getter
+	@Setter
+	private boolean hasEncoding = false;
 
 	private boolean isrss = false;
 
@@ -90,6 +97,9 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
 	private boolean test = false;
 
 	private String xmlVersion = null;
+
+	@Setter
+	private String xmlEncoding;
 
 	private String documentURI;
 
@@ -107,16 +117,20 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
 
 	public WritableLineReader reader;
 
+	private final DOMConfiguration domConfig = new DOMConfigurationImpl();
+
+	@Getter
+	private final Map<String, Map<String, String>> dtdDefaultAttributes = new HashMap<>();
+
 	/** {@inheritDoc} */
 	@Override
 	public Node adoptNode(final Node source) {
 
-		if (source instanceof DocumentType || Objects.equals(this, source)) {
+		if (source instanceof Document || source instanceof DocumentType || Objects.equals(this, source)) {
 			throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Unknwon node implementation");
 		}
 
-
-		if (source instanceof EntityReference || source instanceof Notation) {
+		if (source instanceof Entity ||source instanceof EntityReference || source instanceof Notation) {
 			throw new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR, "readonly node");
 		}
 
@@ -126,6 +140,10 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
 
 	@Override
 	public Node renameNode(final Node node, final String namespaceURI, final String qualifiedName) {
+
+		if(!Objects.equals(node.getOwnerDocument(), this))
+			throw new DOMException(DOMException.WRONG_DOCUMENT_ERR, "Different Document");
+
 		if (node instanceof Attr) {
 			return createAttributeNS(namespaceURI, qualifiedName);
 		}
@@ -139,6 +157,43 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
 
 	/** {@inheritDoc} */
 	@Override
+	public Node insertBefore(final Node newChild, final Node refChild) {
+
+		if (refChild.getParentNode() != this) {
+			throw new DOMException(DOMException.NOT_FOUND_ERR, "refChild not child of Document");
+		}
+
+		switch (newChild.getNodeType()) {
+			case Node.ELEMENT_NODE:
+				if (getDocumentElement() != null && newChild != getDocumentElement()) {
+					throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR,
+							"Document already has a root element");
+				}
+				break;
+
+			case Node.DOCUMENT_TYPE_NODE:
+				if (getDoctype() != null && newChild != getDoctype()) {
+					throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR,
+							"Document already has a doctype");
+				}
+				break;
+
+			case Node.COMMENT_NODE:
+			case Node.PROCESSING_INSTRUCTION_NODE:
+			case Node.DOCUMENT_FRAGMENT_NODE:
+				// Not Allowed
+				break;
+
+			default:
+				throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR,
+						"Node type not allowed as child of Document");
+		}
+
+		return super.insertBefore(newChild, refChild);
+	}
+
+	/** {@inheritDoc} */
+	@Override
 	public Element createElement(final String tn) {
 		String tagName = tn;
 		if (Strings.isNotBlank(tagName) && tagName.equals(":")) {
@@ -147,12 +202,12 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
 
 		if (Strings.isNotBlank(tagName) && tagName.contains(":")) {
 			tagName = tagName.split(":")[1];
-			if (!Strings.isXMLIdentifier(tagName)) {
+			if (Strings.isXMLIdentifier(tagName)) {
 				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
 			}
 		}
 
-		if (Strings.isBlank(tagName) || !Strings.isValidTag(tagName, isXml())) {
+		if (tagName == null || !Strings.isValidTag(tagName, isXml())) {
 			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
 		}
 
@@ -163,18 +218,37 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
 	}
 
 	@Override
-	public EntityReference createEntityReference(final String entity) {
-		final EntityReferenceImpl entityReference = new EntityReferenceImpl();
-		entityReference.setNodeName(entity);
-		entityReference.setOwnerDocument(this);
-		return entityReference;
+	public EntityReference createEntityReference(final String name) {
+
+		if (Strings.isBlank(name)) {
+			throw new DOMException(DOMException.INVALID_CHARACTER_ERR,
+					"Entity Reference cannot contain spaces");
+		}
+
+		final EntityReferenceImpl ref = new EntityReferenceImpl();
+		ref.setNodeName(name);
+		ref.setOwnerDocument(this);
+
+		final DocumentType doctype = this.getDoctype();
+		if (doctype != null) {
+
+			final NamedNodeMap entities = doctype.getEntities();
+			final Entity entity = (Entity) entities.getNamedItem(name);
+
+			if (entity != null) {
+				for (final Node child : (NodeListImpl) entity.getChildNodes()) {
+					ref.appendChildInternal(child.cloneNode(true));
+				}
+			}
+		}
+
+        return ref;
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public Element createElementNS(final String nUri, final String qName) {
+	public Element createElementNS(final String nUri, final String qualifiedName) {
 		String prefix = null;
-		final String qualifiedName = qName;
 		String namespaceURI = nUri;
 
 		if (Strings.isBlank(qualifiedName)) {
@@ -189,14 +263,14 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
 
 			final String[] split = qualifiedName.split(":");
 			if (split.length != 2) {
-				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name provided has an empty local name.");
+				throw new DOMException(DOMException.NAMESPACE_ERR, "The namespace URI provided is not valid");
 			}
 
 			if (Strings.isBlank(split[0]) || Strings.isBlank(split[1])) {
 				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name provided has an empty local name.");
 			}
 
-			if (!Strings.isXMLIdentifier(split[0]) || !Strings.isXMLIdentifier(split[1])) {
+			if (Strings.isXMLIdentifier(split[0]) || Strings.isXMLIdentifier(split[1])) {
 				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
 			}
 
@@ -208,7 +282,7 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
 		} else{
 			namespaceURI = Strings.isBlank(namespaceURI) ? getNamespaceURI() : namespaceURI;
 
-			if (!Strings.isXMLIdentifier(qualifiedName)) {
+			if (Strings.isXMLIdentifier(qualifiedName)) {
 				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
 			}
 
@@ -229,7 +303,7 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
 	/** {@inheritDoc} */
 	@Override
 	public Element createElementNS(final String namespaceURI, final String qualifiedName, final String options) {
-		if (Strings.isBlank(qualifiedName) || !Strings.isXMLIdentifier(qualifiedName)) {
+		if (Strings.isBlank(qualifiedName) || Strings.isXMLIdentifier(qualifiedName)) {
 			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
 		}
 
@@ -404,7 +478,7 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
 	 */
 	@Override
 	public Attr createAttribute(final String name) {
-		if (!Strings.isXMLIdentifier(name)) {
+		if (Strings.isBlank(name)) {
 			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
 		}
 		final AttrImpl attr = new AttrImpl(name, null, "id".equalsIgnoreCase(name), null, true);
@@ -426,17 +500,22 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
 			if (split.length != 2) {
 				throw new DOMException(DOMException.NAMESPACE_ERR, "The qualified name provided has an empty local name.");
 			}
+
 			if (Strings.isBlank(split[0]) || Strings.isBlank(split[1])) {
 				throw new DOMException(DOMException.NAMESPACE_ERR, "The qualified name provided has an empty local name.");
 			}
 
-			if (!Strings.isXMLIdentifier(split[0]) || !Strings.isXMLIdentifier(split[1])) {
+			if (Strings.isBlank(namespaceURI)) {
+				throw new DOMException(DOMException.NAMESPACE_ERR, "The namespaceURI name provided has an empty local name.");
+			}
+
+			if (Strings.isXMLIdentifier(split[0]) || Strings.isXMLIdentifier(split[1])) {
 				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
 			}
 			prefix = split[0];
 			qualifiedName = split[1];
 		} else{
-			if (!Strings.isXMLIdentifier(qualifiedName)) {
+			if (Strings.isXMLIdentifier(qualifiedName)) {
 				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
 			}
 		}
@@ -488,7 +567,7 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
 	@Override
 	public ProcessingInstruction createProcessingInstruction(final String target, final String data) {
 
-		if (!Strings.isXMLIdentifier(target)) {
+		if (Strings.isXMLIdentifier(target)) {
 			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The target contains the invalid character");
 		}
 
@@ -502,7 +581,7 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
 					"A processing instruction data cannot contain a '?>'");
 		}
 
-		final HTMLProcessingInstruction node = new HTMLProcessingInstruction("");
+		final ProcessingInstructionImpl node = new ProcessingInstructionImpl();
 		node.setData(data);
 		node.setTarget(target);
 		node.setOwnerDocument(this);
@@ -512,7 +591,7 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
 	/** {@inheritDoc} */
 	@Override
 	public DOMConfiguration getDomConfig() {
-		return new DOMConfigurationImpl();
+		return domConfig;
 	}
 
 	/** {@inheritDoc} */
@@ -549,19 +628,63 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
 	/** {@inheritDoc} */
 	@Override
 	public String getInputEncoding() {
-		return "UTF-8";
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public String getXmlEncoding() {
-		return "UTF-8";
+		return getXmlEncoding();
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void normalizeDocument() {
-		visitImpl(Node::normalize);
+		NormalizeNode normalize = new NormalizeNode();
+		DOMConfiguration config = getDomConfig();
+
+		boolean splitCDATA = Boolean.TRUE.equals(config.getParameter("split-cdata-sections"));
+		boolean wellFormed = Boolean.TRUE.equals(config.getParameter("well-formed"));
+		boolean namespaces = Boolean.TRUE.equals(config.getParameter("namespaces"));
+		boolean namespaceDeclarations = Boolean.TRUE.equals(config.getParameter("namespace-declarations"));
+		boolean canonical = Boolean.TRUE.equals(config.getParameter("canonical-form"));
+		boolean comments = Boolean.TRUE.equals(config.getParameter("comments"));
+		boolean entities = Boolean.TRUE.equals(config.getParameter("entities"));
+		boolean elementContentWhitespace = Boolean.TRUE.equals(config.getParameter("element-content-whitespace"));
+		boolean cdataSections = Boolean.TRUE.equals(config.getParameter("cdata-sections"));
+		boolean validate = Boolean.TRUE.equals(config.getParameter("validate-if-schema"));
+		boolean datatype = Boolean.TRUE.equals(config.getParameter("datatype-normalization"));
+
+		DOMErrorMonitor errorHandler = (DOMErrorMonitor) config.getParameter("error-handler");
+		normalize.normalizeTree(this);
+
+		normalize.splitCDataSections(this, errorHandler, splitCDATA);
+
+		if (namespaces) {
+			normalize.validateNamespaces(this, errorHandler, isXml());
+		}
+
+		if (wellFormed) {
+			normalize.validateWellFormed(this, errorHandler, isXml());
+		}
+
+		if (!elementContentWhitespace) {
+			normalize.removeElementContentWhitespace(this);
+		}
+
+		if (!namespaceDeclarations) {
+			normalize.removeNamespaceDeclarations(this);
+		}
+
+		if (!comments) {
+			normalize.removeComments(this);
+		}
+
+		if (!entities) {
+			normalize.expandEntityReferences(this);
+		}
+
+		if (!cdataSections) {
+			normalize.replaceCDATAWithText(this);
+		}
+
+		if (canonical) {
+			normalize.canonicalForm(this, errorHandler);
+		}
 	}
 
 	/** {@inheritDoc} */
@@ -586,6 +709,12 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
 	@Override
 	public String getXmlVersion() {
 		return this.xmlVersion == null ? "1.0" : this.xmlVersion;
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public String getXmlEncoding() {
+		return xmlEncoding != null ? xmlEncoding.toUpperCase() : null;
 	}
 
 	/** {@inheritDoc} */
@@ -1199,6 +1328,11 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
 				final EntityReferenceImpl reference = (EntityReferenceImpl) importedNode;
 				reference.setOwnerDocument(this);
 				return reference;
+			case ENTITY_NODE:
+				getDoctype().getEntities().setNamedItem(importedNode);
+				final EntityImpl entity = (EntityImpl) importedNode;
+				entity.setOwnerDocument(this);
+				return entity;
 			case NOTATION_NODE:
 				getDoctype().getNotations().setNamedItem(importedNode);
 				final NotationImpl notation = (NotationImpl) importedNode;
@@ -1339,18 +1473,6 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
 		return false;
 	}
 
-
-
-	@Override
-	public boolean isXml() {
-		return xml;
-	}
-
-	@Override
-	public void setXml(final boolean xml) {
-		this.xml = xml;
-	}
-
 	@Override
 	public String getLocalName() {
 		return "";
@@ -1362,7 +1484,85 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
 	}
 
 	@Override
+	public Node replaceChild(final Node newChild, final Node oldChild) {
+
+		if (newChild == oldChild) {
+			return oldChild;
+		}
+
+		if (newChild instanceof DocumentType) {
+
+			Node dt = getDoctype();
+			Node root = getDocumentElement();
+
+			if (oldChild == dt) {
+				return super.replaceChild(newChild, oldChild);
+			}
+
+			if (dt != null) {
+				throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR,
+						"Document already has a DocumentType");
+			}
+
+			if (root != null) {
+				throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR,
+						"Cannot insert DocumentType after DocumentElement");
+			}
+		}
+
+		if (newChild.getNodeType() == Node.ELEMENT_NODE) {
+
+			Element currentRoot = getDocumentElement();
+
+			if (currentRoot != null && oldChild != currentRoot) {
+				throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR,
+						"Document already has a root element");
+			}
+		}
+
+		return super.replaceChild(newChild, oldChild);
+	}
+
+	@Override
+	public short compareDocumentPosition(Node other) {
+		if (other == null) {
+			throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "other is null");
+		}
+
+		if (other == this) {
+			return 0;
+		}
+
+		switch (other.getNodeType()) {
+			case Node.DOCUMENT_NODE:
+				if (System.identityHashCode(this) < System.identityHashCode(other)) {
+					return DOCUMENT_POSITION_DISCONNECTED | DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC | DOCUMENT_POSITION_PRECEDING;
+				} else {
+					return DOCUMENT_POSITION_DISCONNECTED | DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC | DOCUMENT_POSITION_FOLLOWING;
+				}
+			case DOCUMENT_TYPE_NODE:
+			case PROCESSING_INSTRUCTION_NODE:
+			case COMMENT_NODE:
+			case ELEMENT_NODE:
+				return DOCUMENT_POSITION_CONTAINED_BY | DOCUMENT_POSITION_FOLLOWING;
+			case ATTRIBUTE_NODE:
+				return DOCUMENT_POSITION_CONTAINS | DOCUMENT_POSITION_PRECEDING;
+			default:
+				if (getParentNode() == null) {
+					return DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC | DOCUMENT_POSITION_DISCONNECTED | DOCUMENT_POSITION_PRECEDING;
+				}
+        }
+
+		return super.compareDocumentPosition(other);
+	}
+
+	@Override
 	public String getNodeValue() throws DOMException {
+		return null;
+	}
+
+	@Override
+	public Document getOwnerDocument() throws DOMException {
 		return null;
 	}
 

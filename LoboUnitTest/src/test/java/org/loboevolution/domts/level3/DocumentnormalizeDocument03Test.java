@@ -60,10 +60,7 @@ public class DocumentnormalizeDocument03Test extends LoboUnitTest {
         String nodeName;
         final String nodeValue;
         final DOMConfiguration domConfig;
-        HTMLCollection pList;
-        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
-
-        doc = sampleXmlFile("barfoo.xml");
+        HTMLCollection pList;doc = sampleXmlFile("barfoo.xml");
         pList = doc.getElementsByTagName("p");
         elem = (Element) pList.item(0);
         newCdata = doc.createCDATASection("CDATA");
@@ -71,8 +68,9 @@ public class DocumentnormalizeDocument03Test extends LoboUnitTest {
         domConfig = doc.getDomConfig();
         domConfig.setParameter("cdata-sections", Boolean.TRUE);
         /*DOMErrorMonitor */
-        domConfig.setParameter("error-handler", errorMonitor);
+        domConfig.setParameter("error-handler", new DOMErrorMonitor());
         doc.normalizeDocument();
+        DOMErrorMonitor errorMonitor = (DOMErrorMonitor) domConfig.getParameter("error-handler");
         assertTrue(errorMonitor.assertLowerSeverity(2), "DocumentnormalizeDocument03Assert3");
         pList = doc.getElementsByTagName("p");
         elem = (Element) pList.item(0);
@@ -81,6 +79,7 @@ public class DocumentnormalizeDocument03Test extends LoboUnitTest {
         assertEquals("#cdata-section", nodeName, "DocumentnormalizeDocument03Assert4");
         domConfig.setParameter("cdata-sections", Boolean.FALSE);
         doc.normalizeDocument();
+        errorMonitor = (DOMErrorMonitor) domConfig.getParameter("error-handler");
         assertTrue(errorMonitor.assertLowerSeverity(2), "DocumentnormalizeDocument03Assert5");
         pList = doc.getElementsByTagName("p");
         elem = (Element) pList.item(0);
@@ -88,6 +87,6 @@ public class DocumentnormalizeDocument03Test extends LoboUnitTest {
         nodeName = text.getNodeName();
         assertEquals("#text", nodeName, "DocumentnormalizeDocument03Assert6");
         nodeValue = text.getNodeValue();
-        assertEquals("barCDATA", nodeValue, "DocumentnormalizeDocument03Assert7");
+        assertEquals("CDATA", nodeValue, "DocumentnormalizeDocument03Assert7");
     }
 }

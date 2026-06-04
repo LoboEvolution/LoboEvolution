@@ -73,7 +73,7 @@ public class GetAttributeNS02Test extends LoboUnitTest {
         elementList = doc.getElementsByTagName("address");
         testAddr = (Element) elementList.item(0);
         attrValue = testAddr.getAttributeNS(namespaceURI, localName);
-        assertNull(attrValue);
+        assertEquals(attrValue, null, "GetAttributeNS02Test");
     }
 }
 

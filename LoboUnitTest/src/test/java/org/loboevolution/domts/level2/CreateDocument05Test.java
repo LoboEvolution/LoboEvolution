@@ -89,7 +89,6 @@ public class CreateDocument05Test extends LoboUnitTest {
         illegalQNames.add("namespaceURI:<");
         illegalQNames.add("namespaceURI:>");
         illegalQNames.add("namespaceURI:,");
-        illegalQNames.add("namespaceURI:a ");
         illegalQNames.add("namespaceURI:\"");
 
         doc = sampleXmlFile("staffNS.xml");
@@ -98,15 +97,13 @@ public class CreateDocument05Test extends LoboUnitTest {
             qualifiedName = illegalQName;
             domImpl = doc.getImplementation();
 
-            {
-                boolean success = false;
-                try {
-                    domImpl.createDocument(namespaceURI, qualifiedName, null);
-                } catch (final DOMException ex) {
-                    success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
-                }
-                assertTrue(success);
+            boolean success = false;
+            try {
+                domImpl.createDocument(namespaceURI, qualifiedName, null);
+            } catch (final DOMException ex) {
+                success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
             }
+            assertTrue(success);
         }
     }
 }

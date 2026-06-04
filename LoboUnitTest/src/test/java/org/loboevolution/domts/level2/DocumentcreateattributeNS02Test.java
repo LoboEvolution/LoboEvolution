@@ -72,7 +72,7 @@ public class DocumentcreateattributeNS02Test extends LoboUnitTest {
         assertNull(nodeValue);
         assertEquals("xml", prefix);
         assertEquals("http://www.w3.org/XML/1998/namespace", namespaceURI);
-        attribute2 = doc.createAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns");
+        attribute2 = doc.createAttributeNS("http://www.w3.org/2000/xmlns", "xmlns");
         name = attribute2.getName();
         nodeName = attribute2.getNodeName();
         nodeValue = attribute2.getNodeValue();
@@ -80,7 +80,7 @@ public class DocumentcreateattributeNS02Test extends LoboUnitTest {
         assertEquals("xmlns", name);
         assertEquals("xmlns", nodeName);
         assertNull(nodeValue);
-        assertEquals("http://www.w3.org/2000/xmlns/", namespaceURI);
+        assertEquals("http://www.w3.org/2000/xmlns", namespaceURI);
     }
 
 }

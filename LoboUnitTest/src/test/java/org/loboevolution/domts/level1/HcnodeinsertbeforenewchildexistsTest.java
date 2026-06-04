@@ -74,8 +74,8 @@ public class HcnodeinsertbeforenewchildexistsTest extends LoboUnitTest {
         expected.add("CODE");
         expected.add("SUP");
         expected.add("VAR");
-        expected.add("EM");
         expected.add("ACRONYM");
+        expected.add("EM");
 
         final List<String> result = new ArrayList<>();
 

@@ -57,12 +57,49 @@ public class DocumentFragmentImpl extends NodeImpl implements DocumentFragment {
 		}
 		return super.appendChild(newChild);
 	}
+
 	@Override
 	public Node prependChild(final Node newChild) {
 		if (newChild.getNodeType() == Node.DOCUMENT_TYPE_NODE) {
 			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Cannot append a fragment.");
 		}
 		return super.prependChild(newChild);
+	}
+
+	@Override
+	public Node replaceChild(Node newChild, Node oldChild) {
+
+		if (newChild.getNodeType() == Node.DOCUMENT_TYPE_NODE) {
+			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR,
+					"DocumentType not allowed in DocumentFragment");
+		}
+
+		if (newChild.getNodeType() == Node.ATTRIBUTE_NODE) {
+			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR,
+					"Attr not allowed in DocumentFragment");
+		}
+
+		return super.replaceChild(newChild, oldChild);
+	}
+
+	@Override
+	public short compareDocumentPosition(Node other) {
+
+		if (other == null) {
+			throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "other is null");
+		}
+
+		if (other == this) {
+			return 0;
+		}
+
+		// Handle DocumentFragment or other disconnected nodes
+		if (getDocumentNode() != other.getDocumentNode() ||
+				(getNodeType() == Node.DOCUMENT_FRAGMENT_NODE && other.getNodeType() == Node.ATTRIBUTE_NODE)) {
+			return DOCUMENT_POSITION_DISCONNECTED | DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC;
+		}
+
+		return super.compareDocumentPosition(other);
 	}
 
 	@Override

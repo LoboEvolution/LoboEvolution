@@ -49,7 +49,7 @@ public class Documentgetxmlencoding05Test extends LoboUnitTest {
         doc = sampleXmlFile("barfoo_utf8.xml");
         cloned = (Document) doc.cloneNode(true);
         encodingName = cloned.getXmlEncoding();
-        assertTrue(("uTf-8".equals(encodingName) || (encodingName == null)), "documentgetxmlencoding05"
+        assertTrue(("UTF-8".equals(encodingName) || (encodingName == null)), "documentgetxmlencoding05"
         );
     }
 }

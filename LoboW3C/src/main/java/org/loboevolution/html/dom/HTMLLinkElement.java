@@ -30,7 +30,7 @@ import org.loboevolution.css.StyleSheet;
 
 /**
  * Reference information for external resources and the relationship of those
- * resources to a document and vice-versa. This object inherits all of the
+ * resources to a document and vice versa. This object inherits all of the
  * properties and methods of the HTMLElement interface.
  */
 public interface HTMLLinkElement extends HTMLElement {

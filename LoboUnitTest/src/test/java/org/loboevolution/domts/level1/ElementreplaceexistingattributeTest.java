@@ -34,6 +34,7 @@ import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 
@@ -70,7 +71,7 @@ public class ElementreplaceexistingattributeTest extends LoboUnitTest {
         newAttribute = doc.createAttribute("street");
         testEmployee.setAttributeNode(newAttribute);
         name = testEmployee.getAttribute("street");
-        assertNull(name, "ElementreplaceexistingattributeAssert1");
+        assertEquals(name, null,"ElementreplaceexistingattributeAssert1");
     }
 }
 

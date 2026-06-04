@@ -61,7 +61,7 @@ public class HcnamednodemapnumberofnodesTest extends LoboUnitTest {
         testEmployee = (Element) elementList.item(2);
         attributes = testEmployee.getAttributes();
         length = attributes.getLength();
-        assertEquals(3, length, "HcnamednodemapnumberofnodesAssert1");
+        assertEquals(4, length, "HcnamednodemapnumberofnodesAssert1");
     }
 }
 

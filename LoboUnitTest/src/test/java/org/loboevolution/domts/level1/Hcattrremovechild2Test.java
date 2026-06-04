@@ -37,7 +37,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
- * Attempts to remove a freshly created text node which should result in a NOT_FOUND_ERR exception.
+ * Attempts to remove a freshly created text node which should result in a NOT_SUPPORTED_ERR exception.
 
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-637646024">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-637646024</a>
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1734834066">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-1734834066</a>
@@ -65,7 +65,7 @@ public class Hcattrremovechild2Test extends LoboUnitTest {
         try {
             titleAttr.removeChild(textNode);
         } catch (final DOMException ex) {
-            success = (ex.getCode() == DOMException.NOT_FOUND_ERR);
+            success = (ex.getCode() == DOMException.NOT_SUPPORTED_ERR);
         }
         assertTrue(success, "Hcattrremovechild2Assert2");
     }

@@ -75,7 +75,7 @@ public class DOMImplementationImpl implements DOMImplementation {
 			throw new DOMException(DOMException.WRONG_DOCUMENT_ERR, "Different Document");
 		}
 
-		if (Strings.isNotBlank(qualifiedName)) {
+		if (qualifiedName != null) {
 
 			if (qualifiedName.contains(":")) {
 				final String[] split = qualifiedName.split(":");
@@ -86,7 +86,7 @@ public class DOMImplementationImpl implements DOMImplementation {
 					throw new DOMException(DOMException.NAMESPACE_ERR, "The qualified name provided has an empty local name.");
 				}
 
-				if (!Strings.isXMLIdentifier(split[0]) || !Strings.isXMLIdentifier(split[1])) {
+				if (Strings.isXMLIdentifier(split[0]) || Strings.isXMLIdentifier(split[1])) {
 					throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
 				}
 
@@ -99,10 +99,19 @@ public class DOMImplementationImpl implements DOMImplementation {
 			final ElementImpl elem;
 			if (Strings.isNotBlank(namespaceURI)) {
 				elem = (ElementImpl) doc.createElementNS(namespaceURI, qualifiedName);
+				// Set xmlns attribute for the prefix if present
+				if (qualifiedName.contains(":")) {
+					String prefix = qualifiedName.split(":")[0];
+					elem.setAttributeNS(Document.XMLNS_NAMESPACE_URI, "xmlns:" + prefix, namespaceURI);
+				}
+				doc.appendChild(elem);
 			} else {
-				elem = (ElementImpl) doc.createElement(qualifiedName);
+				if (Strings.isNotBlank(qualifiedName)) {
+					elem = (ElementImpl) doc.createElement(qualifiedName);
+					doc.appendChild(elem);
+				}
 			}
-			doc.appendChild(elem);
+
 		}
 
 		return doc;
@@ -127,15 +136,47 @@ public class DOMImplementationImpl implements DOMImplementation {
 	}
 
 	@Override
-	public Object getFeature(final String core, final String s) {
+	public Object getFeature(String feature, String version) {
+		if (feature == null) return null;
+
+		feature = feature.toLowerCase();
+		version = version == null ? null : version.trim();
+
+		switch (feature) {
+			case "core":
+				if (Strings.isBlank(version) || version.equals("2.0") || version.equals("3.0")) {
+					return this;
+				}
+				break;
+
+			case "xml":
+				if ((Strings.isBlank(version)) || version.equals("2.0") || version.equals("3.0")) {
+					return this; // supporti XML
+				}
+				break;
+
+			case "ls":
+				if ((Strings.isBlank(version)) || version.equals("3.0")) {
+					return new DOMImplementationImpl(context);
+				}
+				break;
+
+			case "traversal":
+				if ((Strings.isBlank(version)) || version.equals("2.0")) {
+					return new Object();
+				}
+				break;
+		}
+
 		return null;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>createHTMLDocument.</p>
-	 */
+
+		/**
+         * {@inheritDoc}
+         *
+         * <p>createHTMLDocument.</p>
+         */
 	public Document createHTMLDocument(final String title) {
 		final DocumentImpl doc = (DocumentImpl) createHTMLDocument();
 		doc.setTitle(title);
@@ -155,15 +196,15 @@ public class DOMImplementationImpl implements DOMImplementation {
 			final String prefix = qualifiedName.substring(0, prefixSeparator);
 			final String localName = qualifiedName.substring(prefixSeparator + 1);
 
-			if (!Strings.isXMLIdentifier(prefix)) {
+			if (Strings.isXMLIdentifier(prefix)) {
 				throw new DOMException(DOMException.NAMESPACE_ERR, qualifiedName);
 			}
 
-			if (!Strings.isXMLIdentifier(localName)) {
+			if (Strings.isXMLIdentifier(localName)) {
 				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, qualifiedName);
 			}
 		} else {
-			if (!Strings.isXMLIdentifier(qualifiedName)) {
+			if (Strings.isXMLIdentifier(qualifiedName)) {
 				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, qualifiedName);
 			}
 		}

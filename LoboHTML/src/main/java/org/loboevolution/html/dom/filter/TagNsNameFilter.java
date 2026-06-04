@@ -51,7 +51,7 @@ public class TagNsNameFilter implements NodeFilter {
         }
 
         final String lc = localName.contains(":") ? localName.split(":")[1] : localName;
-        final boolean tag = node.getLocalName().equalsIgnoreCase(lc.toUpperCase().trim());
+        final boolean tag = lc.equals("*") || node.getLocalName().equalsIgnoreCase(lc.toUpperCase().trim());
 
         if (tag && namespaceURI == null && node.getNamespaceURI() == null) {
             return NodeFilter.FILTER_ACCEPT;

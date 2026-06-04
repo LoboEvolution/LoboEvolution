@@ -46,7 +46,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Create a document with an XML 1.1 valid but XML 1.0 invalid element and
  * normalize document with well-formed set to true.
-
+ *
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-normalizeDocument</a>
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-well-formed">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-well-formed</a>
  */
@@ -58,10 +58,7 @@ public class Wellformed01Test extends LoboUnitTest {
         final Document doc;
         Element elem;
         final DOMConfiguration domConfig;
-        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
-
         final List<DOMError> errors;
-
         DOMError error;
         int severity;
         String type;
@@ -70,15 +67,13 @@ public class Wellformed01Test extends LoboUnitTest {
         domImpl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(), true));
         doc = domImpl.createDocument(null, null, null);
 
-        {
-            boolean success = false;
-            try {
-                doc.createElementNS("http://www.example.org/domts/wellformed01", "LegalNameࢎ");
-            } catch (final DOMException ex) {
-                success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
-            }
-            assertTrue(success, "Wellformed01Assert1");
+        boolean success = false;
+        try {
+            doc.createElementNS("http://www.example.org/domts/wellformed01", "LegalNameࢎ");
+        } catch (final DOMException ex) {
+            success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
         }
+        assertTrue(success, "Wellformed01Assert1");
 
         try {
             doc.setXmlVersion("1.1");
@@ -89,14 +84,15 @@ public class Wellformed01Test extends LoboUnitTest {
             }
             throw ex;
         }
-        elem = doc.createElementNS("http://www.example.org/domts/wellformed01", "LegalName");
+        elem = doc.createElementNS("https://www.example.org/domts/wellformed01", "LegalName");
         doc.appendChild(elem);
         doc.setXmlVersion("1.0");
         domConfig = doc.getDomConfig();
         domConfig.setParameter("well-formed", Boolean.TRUE);
         /*DOMErrorMonitor */
-        domConfig.setParameter("error-handler", errorMonitor);
+        domConfig.setParameter("error-handler", new DOMErrorMonitor());
         doc.normalizeDocument();
+        DOMErrorMonitor errorMonitor = (DOMErrorMonitor) domConfig.getParameter("error-handler");
         errors = errorMonitor.getErrors();
         for (final DOMError domError : errors) {
             error = domError;

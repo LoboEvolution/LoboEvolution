@@ -63,6 +63,18 @@ public interface Node extends ModelNode, EventTarget {
 	short DOCUMENT_POSITION_CONTAINED_BY = 16;
 	short DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC = 32;
 
+	/** Constant <code>XMLNS_NAMESPACE_URI="<a href="http://www.w3.org/2000/xmlns">...</a>"</code> */
+	String XMLNS_NAMESPACE_URI = "http://www.w3.org/2000/xmlns";
+
+	/** Constant <code>XML_NAMESPACE_URI="<a href="http://www.w3.org/XML/1998/namespace">...</a>"</code> */
+	String XML_NAMESPACE_URI = "http://www.w3.org/XML/1998/namespace";
+
+	/** Constant <code>HTML_NAMESPACE_URI="<a href="http://www.w3.org/1999/xhtml">...</a>"</code> */
+	String HTML_NAMESPACE_URI = "http://www.w3.org/1999/xhtml";
+
+	/** Constant <code>NAMESPACE_SVG="<a href="http://www.w3.org/2000/svg">...</a>"</code> */
+	String NAMESPACE_SVG = "http://www.w3.org/2000/svg";
+
 	/**
 	 * Returns node's node document's document base URL.
 	 *

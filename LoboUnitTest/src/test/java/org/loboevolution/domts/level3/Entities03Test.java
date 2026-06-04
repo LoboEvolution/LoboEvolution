@@ -54,10 +54,7 @@ public class Entities03Test extends LoboUnitTest {
         final Document doc;
         HTMLCollection pList;
         Element pElem;
-        final DOMConfiguration domConfig;
-        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
-
-        Node child;
+        final DOMConfiguration domConfig;Node child;
         final String childName;
         final EntityReference entRef;
         final int childType;
@@ -65,12 +62,13 @@ public class Entities03Test extends LoboUnitTest {
         domConfig = doc.getDomConfig();
         domConfig.setParameter("entities", Boolean.FALSE);
         /*DOMErrorMonitor */
-        domConfig.setParameter("error-handler", errorMonitor);
+        domConfig.setParameter("error-handler", new DOMErrorMonitor());
         pList = doc.getElementsByTagName("p");
         pElem = (Element) pList.item(0);
         entRef = doc.createEntityReference("ent3");
         pElem.appendChild(entRef);
         doc.normalizeDocument();
+        DOMErrorMonitor errorMonitor = (DOMErrorMonitor) domConfig.getParameter("error-handler");
         assertTrue(errorMonitor.assertLowerSeverity(2), "Entities03Assert1");
         pList = doc.getElementsByTagName("p");
         pElem = (Element) pList.item(0);

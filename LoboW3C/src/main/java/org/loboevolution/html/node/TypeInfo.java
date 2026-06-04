@@ -28,6 +28,16 @@ package org.loboevolution.html.node;
 
 public interface TypeInfo {
 
+    String ATTVAL_ANYTYPE = "anyType";
+    int DERIVATION_ANY = 0;
+    int DERIVATION_RESTRICTION = 1;
+    int DERIVATION_EXTENSION = 2;
+    int DERIVATION_UNION = 4;
+    int DERIVATION_LIST = 8;
+
+    String URI_SCHEMAFORSCHEMA = "http://www.w3.org/2001/XMLSchema";
+    String URI_XHTML = "http://www.w3.org/1999/xhtml";
+
     /**
      * <p>getTypeName.</p>
      *

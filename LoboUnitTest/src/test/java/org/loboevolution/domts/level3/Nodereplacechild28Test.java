@@ -63,15 +63,13 @@ public class Nodereplacechild28Test extends LoboUnitTest {
         dallas = (Text) betaRef.getNextSibling();
         assertNotNull(dallas, "Nodereplacechild28Assert5");
 
-        {
-            boolean success = false;
-            try {
-                acronym.replaceChild(betaText, dallas);
-            } catch (final DOMException ex) {
-                success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
-            }
-            assertTrue(success, "Nodereplacechild28Assert6");
+        boolean success = false;
+        try {
+            acronym.replaceChild(betaText, dallas);
+        } catch (final DOMException ex) {
+            success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
         }
+        assertTrue(success, "Nodereplacechild28Assert6");
     }
 }
 

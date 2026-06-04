@@ -75,6 +75,8 @@ public enum CSSValues {
 
     BOTTOM("bottom"),
 
+    BREAK_SPACE("break-space"),
+
     CAPITALIZE("capitalize"),
 
     CAPTION("caption"),
@@ -212,6 +214,10 @@ public enum CSSValues {
     POINTER("pointer"),
 
     PRE("pre"),
+
+    PRE_LINE("pre-line"),
+
+    PRE_WRAP("pre-wrap"),
 
     PROGRESS("progress"),
 

@@ -30,10 +30,7 @@ package org.loboevolution.domts.level3;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.node.Document;
-import org.loboevolution.html.node.DocumentType;
-import org.loboevolution.html.node.NamedNodeMap;
-import org.loboevolution.html.node.Node;
+import org.loboevolution.html.node.*;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -50,22 +47,20 @@ public class Nodesettextcontent13Test extends LoboUnitTest {
     public void runTest() {
         final Document doc;
         final DocumentType docType;
-        final Node entity;
+        final Entity entity;
         final NamedNodeMap entitymap;
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
         entitymap = docType.getEntities();
-        entity = entitymap.getNamedItem("delta");
+        entity = (Entity) entitymap.getNamedItem("delta");
 
-        {
-            boolean success = false;
-            try {
-                entity.setTextContent("NA");
-            } catch (final DOMException ex) {
-                success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
-            }
-            assertTrue(success, "Nodesettextcontent13Assert2");
+        boolean success = false;
+        try {
+            entity.setTextContent("NA");
+        } catch (final DOMException ex) {
+            success = (ex.getCode() == DOMException.NO_MODIFICATION_ALLOWED_ERR);
         }
+        assertTrue(success, "Nodesettextcontent13Assert2");
     }
 }
 

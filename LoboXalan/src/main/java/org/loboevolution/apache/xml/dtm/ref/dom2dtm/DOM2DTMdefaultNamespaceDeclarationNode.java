@@ -85,7 +85,7 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
   /** {@inheritDoc} */
   @Override
   public String getNamespaceURI() {
-    return "http://www.w3.org/2000/xmlns/";
+    return "http://www.w3.org/2000/xmlns";
   }
 
   /** {@inheritDoc} */
@@ -469,7 +469,7 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr, TypeInfo {
               final String attrPrefix = attr.getPrefix();
               final String value = attr.getNodeValue();
               namespace = attr.getNamespaceURI();
-              if (namespace != null && namespace.equals("http://www.w3.org/2000/xmlns/")) {
+              if (namespace != null && namespace.equals("http://www.w3.org/2000/xmlns")) {
                 // at this point we are dealing with DOM Level 2 nodes only
                 if (specifiedPrefix == null && attr.getNodeName().equals("xmlns")) {
                   // default namespace

@@ -51,10 +51,7 @@ public class Infoset02Test extends LoboUnitTest {
         final Document doc;
         HTMLCollection pList;
         Element pElem;
-        final DOMConfiguration domConfig;
-        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
-
-        final Node child;
+        final DOMConfiguration domConfig;final Node child;
         final String childName;
         final EntityReference entRef;
         final int childType;
@@ -62,12 +59,13 @@ public class Infoset02Test extends LoboUnitTest {
         domConfig = doc.getDomConfig();
         domConfig.setParameter("infoset", Boolean.TRUE);
         /*DOMErrorMonitor */
-        domConfig.setParameter("error-handler", errorMonitor);
+        domConfig.setParameter("error-handler", new DOMErrorMonitor());
         pList = doc.getElementsByTagName("p");
         pElem = (Element) pList.item(0);
-        entRef = doc.createEntityReference("ent3");
+        entRef = doc.createEntityReference("ent1");
         pElem.appendChild(entRef);
         doc.normalizeDocument();
+        DOMErrorMonitor errorMonitor = (DOMErrorMonitor) domConfig.getParameter("error-handler");
         assertTrue(errorMonitor.assertLowerSeverity(2), "Infoset02Assert1");
         pList = doc.getElementsByTagName("p");
         pElem = (Element) pList.item(0);

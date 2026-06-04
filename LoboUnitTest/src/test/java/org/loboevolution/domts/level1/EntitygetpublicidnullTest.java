@@ -31,7 +31,7 @@ import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.DocumentType;
-import org.loboevolution.html.node.EntityReference;
+import org.loboevolution.html.node.Entity;
 import org.loboevolution.html.node.NamedNodeMap;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -60,14 +60,14 @@ public class EntitygetpublicidnullTest extends LoboUnitTest {
         final Document doc;
         final DocumentType docType;
         final NamedNodeMap entityList;
-        final EntityReference entityNode;
+        final Entity entityNode;
         final String publicId;
         doc = sampleXmlFile("staff.xml");
         docType = doc.getDoctype();
         assertNotNull(docType, "EntitygetpublicidnullAssert3");
         entityList = docType.getEntities();
         assertNotNull(entityList, "EntitygetpublicidnullAssert4");
-        entityNode = (EntityReference) entityList.getNamedItem("ent1");
+        entityNode = (Entity) entityList.getNamedItem("ent1");
         publicId = entityNode.getPublicId();
         assertNull(publicId, "EntitygetpublicidnullAssert5");
     }

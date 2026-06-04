@@ -29,12 +29,11 @@
  * Selima Prague FBI Project
  * 5th-March-2008
  */
-package org.loboevolution.html.dom.domimpl;
+package org.loboevolution.html.dom.nodeimpl;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.htmlunit.cssparser.dom.DOMException;
-import org.loboevolution.html.node.NamedNodeMap;
+import org.loboevolution.common.Strings;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.ProcessingInstruction;
 
@@ -42,27 +41,24 @@ import org.loboevolution.html.node.ProcessingInstruction;
  * HTML DOM object representing processing instruction as per HTML 4.0
  * specification.
  */
-@Getter
-@Setter
-public class HTMLProcessingInstruction extends HTMLElementImpl implements ProcessingInstruction {
+@EqualsAndHashCode(callSuper = true)
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class ProcessingInstructionImpl extends NodeImpl implements ProcessingInstruction {
 
 	private String data;
-
 	private String target;
+	private String publicId;
+	private String systemId;
+	private String nodeName;
+	private String nodeValue;
+	private String notationName;
+	private String localName;
 
-	/**
-	 * <p>Constructor for HTMLButtonElementImpl.</p>
-	 *
-	 * @param name a {@link java.lang.String} object.
-	 */
-	public HTMLProcessingInstruction(final String name) {
-		super(name);
-	}
-
-	/** {@inheritDoc} */
 	@Override
-	public String getLocalName() {
-		return this.target;
+	public boolean hasAttributes() {
+		return false;
 	}
 
 	/** {@inheritDoc} */
@@ -73,82 +69,87 @@ public class HTMLProcessingInstruction extends HTMLElementImpl implements Proces
 
 	/** {@inheritDoc} */
 	@Override
-	public int getNodeType() {
-		return Node.PROCESSING_INSTRUCTION_NODE;
+	public void setData(String data) {
+		if (data.contains("?>")) {
+			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "Invalid PI data");
+		}
+		this.data = data;
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public String getData() {
+		if (this.nodeValue == null) {
+			return this.data;
+		} else {
+			return this.nodeValue;
+		}
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public String getNodeValue() {
-		return this.data;
+		return getData();
 	}
 
-
-	/** {@inheritDoc} */
-	@Override
-	public void setNodeValue(final String nodeValue) {
-		this.data = nodeValue;
-	}
-
-	/** {@inheritDoc} */
 	@Override
 	public int getLength() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	/** {@inheritDoc} */
 	@Override
-	public void appendData(final String data) {
+	public void appendData(String data) {
 		// TODO Auto-generated method stub
-
 	}
 
-	/** {@inheritDoc} */
 	@Override
-	public void deleteData(final int offset, final int count) {
+	public void deleteData(int offset, int count) {
 		// TODO Auto-generated method stub
-
 	}
 
-	/** {@inheritDoc} */
 	@Override
-	public void insertData(final int offset, final String data) {
+	public void insertData(int offset, String data) {
 		// TODO Auto-generated method stub
-
 	}
 
-	/** {@inheritDoc} */
 	@Override
-	public void replaceData(final int offset, final int count, final String data) {
+	public void replaceData(int offset, int count, String data) {
 		// TODO Auto-generated method stub
-
 	}
 
-	/** {@inheritDoc} */
 	@Override
-	public String substringData(final int offset, final int count) {
+	public String substringData(int offset, int count) {
 		// TODO Auto-generated method stub
-		return null;
+		return "";
 	}
 
 	@Override
-	public int getClientHeight() {
-		final int clientHeight = super.getClientHeight();
-		return clientHeight == 0 ? 16 : clientHeight;
+	public Node appendChild(Node newChild) {
+
+		int type = newChild.getNodeType();
+		if (type == Node.DOCUMENT_TYPE_NODE || type == Node.DOCUMENT_FRAGMENT_NODE) {
+			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR,
+					"Invalid child type for Attr");
+		}
+
+		return super.appendChild(newChild);
 	}
 
 	@Override
-	public NamedNodeMap getAttributes() {
-		return null;
+	public String getBaseURI() {
+		final Node parent = getParentNode();
+		if (parent != null) {
+			return parent.getBaseURI();
+		}
+		return document.getBaseURI();
 	}
 
 	@Override
-	public Node appendChild(final Node newChild) {
-		throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Cannot append node.");
+	public int getNodeType() {
+		return Node.PROCESSING_INSTRUCTION_NODE;
 	}
 
-	/** {@inheritDoc} */
 	@Override
 	public String toString() {
 		return "[object HTMLProcessingElement]";

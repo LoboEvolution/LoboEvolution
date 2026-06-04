@@ -61,24 +61,20 @@ public class Nodereplacechild25Test extends LoboUnitTest {
         elem = (Element) childList.item(1);
         entRef = (EntityReference) elem.getFirstChild();
 
-        {
-            boolean success = false;
-            try {
-                elem.replaceChild(entity, entRef);
-            } catch (final DOMException ex) {
-                success = (ex.getCode() == DOMException.HIERARCHY_REQUEST_ERR);
-            }
-            assertTrue(success, "Nodereplacechild25Assert2");
+        boolean success = false;
+        try {
+            elem.replaceChild(entity, entRef);
+        } catch (final DOMException ex) {
+            success = (ex.getCode() == DOMException.HIERARCHY_REQUEST_ERR);
         }
+        assertTrue(success, "Nodereplacechild25Assert2");
 
-        {
-            boolean success = false;
-            try {
-                elem.replaceChild(elem, entRef);
-            } catch (final DOMException ex) {
-                success = (ex.getCode() == DOMException.HIERARCHY_REQUEST_ERR);
-            }
-            assertTrue(success, "Nodereplacechild25Assert3");
+        success = false;
+        try {
+            elem.replaceChild(elem, entRef);
+        } catch (final DOMException ex) {
+            success = (ex.getCode() == DOMException.HIERARCHY_REQUEST_ERR);
         }
+        assertTrue(success, "Nodereplacechild25Assert3");
     }
 }

@@ -43,6 +43,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-encoding">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#Document3-encoding</a>
  */
 public class Documentgetxmlencoding02Test extends LoboUnitTest {
+
     @Test
     public void runTest() {
         final Document doc;

@@ -32,6 +32,7 @@ import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.*;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 
@@ -78,7 +79,7 @@ public class HcnamednodemapsetnameditemthatexistsTest extends LoboUnitTest {
         attributes.setNamedItem(newAttribute);
         districtNode = (Attr) attributes.getNamedItem("class");
         attrValue = districtNode.getNodeValue();
-        assertNull(attrValue, "HcnamednodemapsetnameditemthatexistsAssert1");
+        assertEquals(attrValue, null, "HcnamednodemapsetnameditemthatexistsAssert1");
     }
 }
 

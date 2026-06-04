@@ -105,10 +105,17 @@ public class HTMLCollectionImpl extends AbstractList<Node> implements HTMLCollec
 	/** {@inheritDoc} */
 	@Override
 	public Element namedItem(final String name) {
-		final Document doc = this.rootNode.getOwnerDocument();
+		Document doc;
+		if (this.rootNode instanceof Document) {
+			doc =  (Document) this.rootNode;
+		} else {
+			doc = this.rootNode.getOwnerDocument();
+		}
+
 		if (doc == null) {
 			return null;
 		}
+
 		final HTMLCollectionImpl nodeList = (HTMLCollectionImpl) doc.getElementsByName(name);
 		if (nodeList.size() > 0) {
 			final Optional<Node> node = nodeList.stream().findFirst();

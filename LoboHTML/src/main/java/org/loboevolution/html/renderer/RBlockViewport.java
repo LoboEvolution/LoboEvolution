@@ -123,10 +123,10 @@ public class RBlockViewport extends BaseRCollection {
 	protected final HtmlRendererContext rendererContext;
 
 	@Getter
-	private UserAgentContext userAgentContext;
+	private final UserAgentContext userAgentContext;
 
 	@Getter
-	private RenderableContainer container;
+	private final RenderableContainer container;
 	
 	protected final FrameContext frameContext;
 

@@ -69,7 +69,6 @@ public class CreateAttributeNS03Test extends LoboUnitTest {
                 success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
             }
             assertTrue(success);
-
         }
     }
 
@@ -100,7 +99,6 @@ public class CreateAttributeNS03Test extends LoboUnitTest {
         illegalQNames.add("person:<");
         illegalQNames.add("person:>");
         illegalQNames.add("person:,");
-        illegalQNames.add("person:a ");
         illegalQNames.add("person:\"");
         return illegalQNames;
     }

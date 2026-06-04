@@ -29,6 +29,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.events.Event;
+import org.loboevolution.html.node.Node;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.js.JavaScript;
 import org.loboevolution.js.LoboContextFactory;
@@ -57,14 +58,38 @@ public class Executor {
 	/**
 	 * <p>executeFunction.</p>
 	 *
-	 * @param element a {@link org.loboevolution.html.dom.nodeimpl.NodeImpl} object.
+	 * @param doc a {@link org.loboevolution.html.node.Document} object.
+	 * @param element a {@link org.loboevolution.html.node.Node} object.
 	 * @param f a {@link org.mozilla.javascript.Function} object.
 	 * @param obj an array of {@link java.lang.Object} objects.
 	 *            * @param contextFactory a {@link LoboContextFactory} object.
 	 * @return a boolean.
 	 */
-	public static boolean executeFunction(final NodeImpl element, final Function f, final Object[] obj, final LoboContextFactory contextFactory) {
-		return executeFunction(element, element, f, obj, contextFactory);
+	public static boolean executeFunction(final Document doc, final Node element, final Function f, final Object[] obj, final LoboContextFactory contextFactory) {
+		if (doc == null) {
+			throw new IllegalStateException("Element does not belong to a document.");
+		}
+
+		try(Context ctx = createContext(contextFactory)) {
+			final Scriptable scope = (Scriptable) doc.getUserData(Executor.SCOPE_KEY);
+			if (scope == null) {
+				throw new IllegalStateException(
+						"Scriptable (scope) instance was expected to be keyed as UserData to document using "
+								+ Executor.SCOPE_KEY);
+			}
+			final JavaScript js = JavaScript.getInstance();
+			final Scriptable thisScope = (Scriptable) js.getJavascriptObject(element, scope);
+			try {
+				final Object result = f.call(ctx, thisScope, thisScope, obj);
+				if (!(result instanceof Boolean)) {
+					return true;
+				}
+				return (Boolean) result;
+			} catch (final Throwable thrown) {
+				log.error("executeFunction(): There was an error in Javascript code.", thrown);
+				return true;
+			}
+		}
 	}
 
 	/**
@@ -90,35 +115,6 @@ public class Executor {
 			}
 		} finally {
 			Context.exit();
-		}
-	}
-
-	private static boolean executeFunction(final NodeImpl element, final Object thisObject, final Function f,
-										   final Object[] obj, final LoboContextFactory contextFactory) {
-		final Document doc = element.getOwnerDocument();
-		if (doc == null) {
-			throw new IllegalStateException("Element does not belong to a document.");
-		}
-
-		try(Context ctx = createContext(contextFactory)) {
-			final Scriptable scope = (Scriptable) doc.getUserData(Executor.SCOPE_KEY);
-			if (scope == null) {
-				throw new IllegalStateException(
-						"Scriptable (scope) instance was expected to be keyed as UserData to document using "
-								+ Executor.SCOPE_KEY);
-			}
-			final JavaScript js = JavaScript.getInstance();
-			final Scriptable thisScope = (Scriptable) js.getJavascriptObject(thisObject, scope);
-			try {
-				final Object result = f.call(ctx, thisScope, thisScope, obj);
-				if (!(result instanceof Boolean)) {
-					return true;
-				}
-				return (Boolean) result;
-			} catch (final Throwable thrown) {
-				log.error("executeFunction(): There was an error in Javascript code.", thrown);
-				return true;
-			}
 		}
 	}
 }

@@ -65,10 +65,11 @@ public class HcnodeelementnodeattributesTest extends LoboUnitTest {
         expected.add("title");
         expected.add("class");
         expected.add("dir");
+        expected.add("xsi:noNamespaceSchemaLocation");
 
         doc = sampleXmlFile("hc_staff.xml");
         elementList = doc.getElementsByTagName("acronym");
-        testAddr = (Element) elementList.item(2);
+        testAddr = (Element) elementList.item(0);
         addrAttr = testAddr.getAttributes();
         for (int indexN10070 = 0; indexN10070 < addrAttr.getLength(); indexN10070++) {
             attrNode = addrAttr.item(indexN10070);

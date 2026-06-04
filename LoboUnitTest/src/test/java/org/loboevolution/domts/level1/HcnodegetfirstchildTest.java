@@ -41,8 +41,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * of this node.
  * <p>
  * Retrieve the second employee and invoke the
- * "getFirstChild()" method.   The NodeName returned
- * should be "#text" or "EM".
+ * "getFirstChild()" method.
+ * The NodeName returned should be "#text" or "EM".
 
  * @see <a href="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-169727388">http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core#ID-169727388</a>
  * @see <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=246">http://www.w3.org/Bugs/Public/show_bug.cgi?id=246</a>

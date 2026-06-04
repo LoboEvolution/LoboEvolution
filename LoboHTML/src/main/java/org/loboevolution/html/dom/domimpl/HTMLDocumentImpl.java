@@ -448,14 +448,6 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 		}
 	}
 
-	/** {@inheritDoc} */
-	@Override
-	public void normalizeDocument() {
-		synchronized (this) {
-			visitImpl(Node::normalize);
-		}
-	}
-
 	/**
 	 * Changed if the position of the node in a parent has changed.
 	 *

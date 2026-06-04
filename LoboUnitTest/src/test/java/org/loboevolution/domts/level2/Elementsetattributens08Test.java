@@ -39,7 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * The method setAttributeNS adds a new attribute and raises a NAMESPACE_ERR
  * if the qualifiedName, or its prefix, is "xmlns" and the namespaceURI is
- * different from "<a href="http://www.w3.org/2000/xmlns/">...</a>".
+ * different from "<a href="http://www.w3.org/2000/xmlns">...</a>".
  * <p>
  * Invoke the setAttributeNS method on a new Element object with namespaceURI that is
  * <a href="http://www.w3.org/DOMTest/level2">...</a> and a qualifiedName that has the prefix xmlns and once

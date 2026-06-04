@@ -30,7 +30,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.gui.LocalHtmlRendererConfig;
-import org.loboevolution.html.dom.domimpl.HTMLProcessingInstruction;
+import org.loboevolution.html.dom.nodeimpl.ProcessingInstructionImpl;
 import org.loboevolution.html.dom.nodeimpl.CommentImpl;
 import org.loboevolution.html.dom.domimpl.DOMImplementationImpl;
 import org.loboevolution.html.dom.nodeimpl.TextImpl;
@@ -102,7 +102,9 @@ public class XMLContentHandler implements ContentHandler, LexicalHandler, ErrorH
 
     @Override
     public void characters(char[] chars, int start, int length) throws SAXException {
-        currentNode.appendChild(new TextImpl(new String(chars, start, length)));
+        Text text = new TextImpl(new String(chars, start, length));
+        text.setOwnerDocument(document);
+        currentNode.appendChild(text);
     }
 
     @Override
@@ -110,7 +112,7 @@ public class XMLContentHandler implements ContentHandler, LexicalHandler, ErrorH
 
     @Override
     public void processingInstruction(String target, String data) {
-        HTMLProcessingInstruction pi = new HTMLProcessingInstruction("");
+        ProcessingInstructionImpl pi = new ProcessingInstructionImpl();
         pi.setData(data);
         pi.setTarget(target);
         currentNode.appendChild(pi);

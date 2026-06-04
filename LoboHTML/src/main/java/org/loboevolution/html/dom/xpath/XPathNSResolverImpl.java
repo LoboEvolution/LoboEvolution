@@ -51,60 +51,72 @@ public class XPathNSResolverImpl implements XPathNSResolver {
     @Override
     public String lookupNamespaceURI(final String prefix) {
         if (Strings.isBlank(prefix)) return null;
-        String namespace = null;
 
-        if ("xml".equals(prefix)) {
-            namespace = "http://www.w3.org/XML/1998/namespace";
-        } else {
-            int type;
-            while (parent != null
-                    && (((type = parent.getNodeType()) == Node.ELEMENT_NODE) ||
-                    ((type = parent.getNodeType()) == Node.DOCUMENT_NODE) ||
-                    ((type = parent.getNodeType()) == Node.ATTRIBUTE_NODE) ||
-                    ((type = parent.getNodeType()) == Node.COMMENT_NODE) ||
-                    (type == Node.ENTITY_REFERENCE_NODE))) {
+        Node current = parent;
 
-                switch (type) {
-                    case Node.DOCUMENT_NODE:
-                        final Document document = (Document) parent;
-                        final Element docelm = document.getDocumentElement();
-                        if (docelm != null && docelm.getNodeName().indexOf(prefix.toUpperCase() + ":") == 0) {
-                            return docelm.getNamespaceURI();
-                        }
-                        break;
-                    case Node.ELEMENT_NODE:
-                        if (parent.getNodeName().indexOf(prefix + ":") == 0) {
-                            return parent.getNamespaceURI();
-                        }
-                        final NamedNodeMap nnm = parent.getAttributes();
-                        if (nnm != null) {
-                            for (int i = 0; i < nnm.getLength(); i++) {
-                                final Node attr = nnm.item(i);
-                                final String aname = attr.getNodeName();
-                                final boolean isPrefix = aname.startsWith("xmlns:");
-                                if (isPrefix || aname.equals("xmlns")) {
-                                    final int index = aname.indexOf(':');
-                                    final String p = isPrefix ? aname.substring(index + 1) : "";
-                                    if (p.equals(prefix)) {
-                                        namespace = attr.getNodeValue();
-                                        break;
+        while (current != null) {
+            final int type = current.getNodeType();
+
+            switch (type) {
+                case Node.ELEMENT_NODE:
+                    final Element element = (Element) current;
+                    final String nodeName = element.getNodeName();
+                    final int colonIdx = nodeName.indexOf(':');
+                    if (colonIdx > 0 && nodeName.substring(0, colonIdx).equals(prefix)) {
+                        return element.getNamespaceURI();
+                    }
+                    final NamedNodeMap nnm = element.getAttributes();
+                    if (nnm != null) {
+                        for (int i = 0; i < nnm.getLength(); i++) {
+                            final Node attr = nnm.item(i);
+                            final String aname = attr.getNodeName();
+                            if (aname.startsWith("xmlns:")) {
+                                final int attrColonIdx = aname.indexOf(':');
+                                if (attrColonIdx >= 0) {
+                                    final String attrPrefix = aname.substring(attrColonIdx + 1);
+                                    if (prefix.equals(attrPrefix)) {
+                                        return attr.getNodeValue();
                                     }
                                 }
+                            } else if (aname.equals("xmlns") && prefix.isEmpty()) {
+                                return attr.getNodeValue();
                             }
                         }
-                        break;
-                    case Node.ATTRIBUTE_NODE:
-                    case Node.COMMENT_NODE:
-                        if (prefix.equals(parent.getPrefix())) {
-                            return parent.getNamespaceURI();
+                    }
+                    break;
+                case Node.DOCUMENT_NODE:
+                    final Document document = (Document) current;
+                    final Element docelm = document.getDocumentElement();
+                    if (docelm != null) {
+                        final String docNodeName = docelm.getNodeName();
+                        final int docColonIdx = docNodeName.indexOf(':');
+                        if (docColonIdx > 0 && docNodeName.substring(0, docColonIdx).equals(prefix)) {
+                            return docelm.getNamespaceURI();
                         }
-                        break;
-                    default:
-                        break;
-                }
-                parent = parent.getParentNode();
+                    }
+                    break;
+                case Node.ATTRIBUTE_NODE:
+                    final Element attrOwner = (Element) ((Attr) current).getOwnerElement();
+                    if (attrOwner != null) {
+                        current = attrOwner;
+                    } else {
+                        current = current.getParentNode();
+                    }
+                    break;
+                case Node.TEXT_NODE:
+                case Node.CDATA_SECTION_NODE:
+                    current = current.getParentNode();
+                    continue;
+                case Node.COMMENT_NODE:
+                    if (prefix.equals(current.getPrefix())) {
+                        return current.getNamespaceURI();
+                    }
+                    break;
+                default:
+                    break;
             }
+            current = current.getParentNode();
         }
-        return namespace;
+        return null;
     }
 }

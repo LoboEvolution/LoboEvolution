@@ -63,7 +63,7 @@ public class Documentrenamenode09Test extends LoboUnitTest {
         newDoc = domImpl.createDocument("http://www.w3.org/DOM/Test", "dom:newD", null);
         attr = doc.createAttributeNS("http://www.w3.org/DOM/Test", "test");
         newDoc.adoptNode(attr);
-        renamedNode = newDoc.renameNode(attr, "http://www.w3.org/2000/xmlns/", "xmlns:xmlns");
+        renamedNode = newDoc.renameNode(attr, "http://www.w3.org/2000/xmlns", "xmlns:xmlns");
         attrNodeName = renamedNode.getNodeName();
         assertEquals("xmlns:xmlns", attrNodeName, "Documentrenamenode09Assert2");
     }

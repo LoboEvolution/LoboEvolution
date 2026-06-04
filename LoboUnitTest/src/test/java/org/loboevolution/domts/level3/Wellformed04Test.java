@@ -60,7 +60,6 @@ public class Wellformed04Test extends LoboUnitTest {
         final Document doc;
         final Element docElem;
         final DOMConfiguration domConfig;
-        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
 
         final List<DOMError> errors;
         final boolean canSet;
@@ -95,8 +94,9 @@ public class Wellformed04Test extends LoboUnitTest {
         if (canSet) {
             domConfig.setParameter("well-formed", Boolean.FALSE);
             /*DOMErrorMonitor */
-            domConfig.setParameter("error-handler", errorMonitor);
+            domConfig.setParameter("error-handler", new DOMErrorMonitor());
             doc.normalizeDocument();
+            DOMErrorMonitor errorMonitor = (DOMErrorMonitor) domConfig.getParameter("error-handler");
             errors = errorMonitor.getErrors();
             for (final DOMError domError : errors) {
                 assertNull(domError, "Wellformed04Assert4");

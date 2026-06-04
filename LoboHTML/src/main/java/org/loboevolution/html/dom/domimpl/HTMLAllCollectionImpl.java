@@ -97,7 +97,13 @@ public class HTMLAllCollectionImpl extends AbstractList<Node> implements HTMLAll
      */
     @Override
     public HTMLAllCollection tags(final String tag) {
-        final Document doc = this.rootNode.getOwnerDocument();
+        Document doc;
+        if (this.rootNode instanceof Document) {
+            doc =  (Document) this.rootNode;
+        } else {
+            doc = this.rootNode.getOwnerDocument();
+        }
+
         if (doc == null) {
             return null;
         }

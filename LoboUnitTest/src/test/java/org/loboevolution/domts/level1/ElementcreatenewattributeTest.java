@@ -34,8 +34,7 @@ import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -73,7 +72,7 @@ public class ElementcreatenewattributeTest extends LoboUnitTest {
         districtAttr = testAddress.getAttributeNode("district");
         assertNotNull(districtAttr, "ElementcreatenewattributeAssert2");
         attrVal = testAddress.getAttribute("district");
-        assertNull(attrVal, "ElementcreatenewattributeAssert3");
+        assertEquals(attrVal, "null", "ElementcreatenewattributeAssert3");
     }
 }
 

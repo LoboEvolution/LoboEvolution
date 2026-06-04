@@ -48,12 +48,12 @@ public class Noderemovechild25Test extends LoboUnitTest {
         final Document doc;
         final DocumentType docType;
         final NamedNodeMap entitiesMap;
-        final Node ent4;
+        final Entity ent4;
         final Element span;
         doc = sampleXmlFile("hc_staff.xml");
         docType = doc.getDoctype();
         entitiesMap = docType.getEntities();
-        ent4 = entitiesMap.getNamedItem("ent4");
+        ent4 = (Entity) entitiesMap.getNamedItem("ent4");
         assertNotNull(ent4, "Noderemovechild25Assert3");
         span = (Element) ent4.getFirstChild();
         assertNotNull(span, "Noderemovechild25Assert4");

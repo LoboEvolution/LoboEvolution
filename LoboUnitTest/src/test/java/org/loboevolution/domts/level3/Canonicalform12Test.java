@@ -51,10 +51,7 @@ public class Canonicalform12Test extends LoboUnitTest {
     public void runTest() {
         final Document doc;
         final DOMConfiguration domConfig;
-        final boolean canSet;
-        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
-
-        final DocumentType doctype;
+        final boolean canSet;final DocumentType doctype;
         doc = sampleXmlFile("barfoo.xml");
         domConfig = doc.getDomConfig();
         canSet = domConfig.canSetParameter("canonical-form", Boolean.TRUE);
@@ -62,8 +59,9 @@ public class Canonicalform12Test extends LoboUnitTest {
         if (canSet) {
             domConfig.setParameter("canonical-form", Boolean.TRUE);
             /*DOMErrorMonitor */
-            domConfig.setParameter("error-handler", errorMonitor);
+            domConfig.setParameter("error-handler", new DOMErrorMonitor());
             doc.normalizeDocument();
+            DOMErrorMonitor errorMonitor = (DOMErrorMonitor) domConfig.getParameter("error-handler");
             assertTrue(errorMonitor.assertLowerSeverity(2), "Canonicalform12Assert3");
             doctype = doc.getDoctype();
             assertNull(doctype, "Canonicalform12Assert4");

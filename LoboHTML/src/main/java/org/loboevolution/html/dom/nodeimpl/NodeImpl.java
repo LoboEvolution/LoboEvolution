@@ -39,12 +39,11 @@ import org.loboevolution.config.HtmlRendererConfig;
 import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.gui.LocalHtmlRendererConfig;
 import org.loboevolution.html.dom.*;
-import org.loboevolution.html.dom.filter.ElementFilter;
 import org.loboevolution.html.dom.nodeimpl.event.EventTargetImpl;
+import org.loboevolution.html.dom.nodeimpl.internal.NodeInternal;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.traversal.NodeFilter;
 import org.loboevolution.html.dom.domimpl.*;
-import org.loboevolution.html.dom.filter.TextFilter;
 import org.loboevolution.html.dom.xpath.XPathNSResolverImpl;
 import org.loboevolution.html.node.*;
 import org.loboevolution.html.parser.XHtmlParser;
@@ -117,7 +116,7 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, Cloneabl
 			});
 		}
 
-		if (newChild.getOwnerDocument() != null && getOwnerDocument() != null &&
+		if (!(this instanceof Document) &&
 				!Objects.equals(newChild.getOwnerDocument(), getOwnerDocument())) {
 			throw new DOMException(DOMException.WRONG_DOCUMENT_ERR, "Different Document");
 		}
@@ -232,10 +231,16 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, Cloneabl
 			final int length = newNode.getChildNodes().getLength();
 			if (deep && length == 0) {
 				final NodeListImpl childNodes = (NodeListImpl) getChildNodes();
-				childNodes.forEach(newNode::appendChild);
+				childNodes.forEach(n -> {
+					if(n instanceof NodeInternal) {
+						((NodeInternal) n).appendChildInternal(newNode);
+					} else{
+						n.appendChild(newNode);
+					}
+				});
 
 				if (newNode instanceof Element elem) {
-                    final NamedNodeMap nnmap = elem.getAttributes();
+					final NamedNodeMap nnmap = elem.getAttributes();
 					if (nnmap != null) {
 						for (final Node attr : Nodes.iterable(nnmap)) {
 							elem.setAttributeNode((Attr) attr);
@@ -244,7 +249,11 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, Cloneabl
 				}
 			} else if (!deep) {
 				while (newNode.getFirstChild() != null) {
-					newNode.removeChild(newNode.getFirstChild());
+					if(newNode instanceof NodeInternal) {
+						((NodeInternal) newNode).removeChildInternal(newNode.getFirstChild());
+					} else{
+						newNode.removeChild(newNode.getFirstChild());
+					}
 				}
 				newNode.setParentImpl(null);
 			}
@@ -280,16 +289,28 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, Cloneabl
 	 */
 	@Override
 	public short compareDocumentPosition(final Node other) {
-        if (other == this) {
+		if (other == null) {
+			throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "other is null");
+		}
+
+		if (other == this) {
 			return 0;
 		}
 
-		if (getNodeType() == DOCUMENT_NODE && other.getParentNode() == null) {
-			return DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC | DOCUMENT_POSITION_DISCONNECTED;
+		// Handle DocumentFragment or other disconnected nodes
+		if (other.getNodeType() == Node.DOCUMENT_FRAGMENT_NODE) {
+			if (getDocumentNode() != other.getDocumentNode() ||
+					(getNodeType() == Node.DOCUMENT_FRAGMENT_NODE && other.getNodeType() == Node.ATTRIBUTE_NODE)) {
+				return DOCUMENT_POSITION_DISCONNECTED | DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC;
+			}
 		}
 
-		if (other.getNodeType() == DOCUMENT_NODE && getParentNode() == null) {
-			return DOCUMENT_POSITION_PRECEDING | DOCUMENT_POSITION_FOLLOWING;
+		if (other.getNodeType() == Node.DOCUMENT_NODE) {
+			return DOCUMENT_POSITION_CONTAINS | DOCUMENT_POSITION_PRECEDING;
+		}
+
+		if (other.getNodeType() == Node.ATTRIBUTE_NODE) {
+			return DOCUMENT_POSITION_CONTAINED_BY | DOCUMENT_POSITION_FOLLOWING;
 		}
 
 		if (Objects.equals(other.getDocumentNode(), getDocumentNode())) {
@@ -314,7 +335,7 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, Cloneabl
 							return DOCUMENT_POSITION_CONTAINS | DOCUMENT_POSITION_PRECEDING;
 						}
 						final Node sibling = ancestry.get(sibpos);
-                        if (sibling instanceof Attr) {
+						if (sibling instanceof Attr) {
 							final NamedNodeMap nnm = p.getAttributes();
 							for (int i = nnm.getLength() - 1; i >= 0; i--) {
 								final Node n = nnm.item(i);
@@ -333,8 +354,18 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, Cloneabl
 									return DOCUMENT_POSITION_PRECEDING;
 								}
 							}
+							// If not found in child nodes, check if both are Entity/Notation children of DocumentType
+							// They are considered siblings in document order based on DTD declaration order
+							if (this.getNodeType() == Node.ENTITY_NODE && sibling.getNodeType() == Node.NOTATION_NODE) {
+								// Entity precedes Notation in DTD declaration order
+								return DOCUMENT_POSITION_PRECEDING;
+							} else if (this.getNodeType() == Node.NOTATION_NODE && sibling.getNodeType() == Node.ENTITY_NODE) {
+								// Notation follows Entity in DTD declaration order
+								return DOCUMENT_POSITION_FOLLOWING;
+							}
 						}
-						throw new IllegalStateException("Sibling nodes appear not to be siblings?");
+						// If we reach here, nodes are disconnected (e.g., Entity/Notation comparison)
+						return Node.DOCUMENT_POSITION_DISCONNECTED;
 					}
 				}
 				k = p;
@@ -977,6 +1008,19 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, Cloneabl
 				return appendChild(newChild);
 			}
 
+			if (newChild.getNodeType() == Node.DOCUMENT_FRAGMENT_NODE) {
+
+				List<Node> fragmentChildren = new ArrayList<>();
+				for (Node c = newChild.getFirstChild(); c != null; c = c.getNextSibling()) {
+					fragmentChildren.add(c);
+				}
+
+				for (Node c : fragmentChildren) {
+					insertBefore(c, refChild);
+				}
+				return newChild;
+			}
+
 			if (newChild.getNodeType() == Node.ATTRIBUTE_NODE) {
 				throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Cannot insert an attribute node");
 			}
@@ -993,7 +1037,8 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, Cloneabl
 				});
 			}
 
-			if (!Objects.equals(newChild.getOwnerDocument(), getOwnerDocument())) {
+			if (!(this instanceof Document) &&
+					!Objects.equals(newChild.getOwnerDocument(), getOwnerDocument())) {
 				throw new DOMException(DOMException.WRONG_DOCUMENT_ERR, "Different Document");
 			}
 
@@ -1036,7 +1081,7 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, Cloneabl
 	public boolean isEqualNode(final Node arg) {
 		return arg instanceof NodeImpl
 				&& getNodeType() == arg.getNodeType()
-                && Objects.equals(getNamespaceURI(), arg.getNamespaceURI())
+				&& Objects.equals(getNamespaceURI(), arg.getNamespaceURI())
 				&& Objects.equals(getNodeName().toUpperCase(), arg.getNodeName().toUpperCase())
 				&& Objects.equals(getNodeValue(), arg.getNodeValue())
 				&& ((getLocalName() == null && getLocalName() == null) || Objects.equals(getLocalName().toUpperCase(), arg.getLocalName().toUpperCase()));
@@ -1074,8 +1119,25 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, Cloneabl
 	@Override
 	public String lookupPrefix(final String namespaceURI) {
 		if (namespaceURI == null) return null;
-        String prefix = getPrefix();
 
+		// Traverse parent chain first
+		Node parent = getParentNode();
+		if (parent != null) {
+			String result = parent.lookupPrefix(namespaceURI);
+			if (result != null) {
+				return result;
+			}
+		}
+
+		// For Element nodes, check the element's qualified name prefix
+		if (getNodeType() == Node.ELEMENT_NODE) {
+			final String prefix = getPrefix();
+			if (prefix != null && namespaceURI.equals(getNamespaceURI())) {
+				return prefix;
+			}
+		}
+
+		// Check xmlns declarations on this node
 		NamedNodeMap attributes = getAttributes();
 		if (attributes != null) {
 			for (int i = 0; i < attributes.getLength(); i++) {
@@ -1086,16 +1148,6 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, Cloneabl
 				}
 			}
 		}
-
-        if (prefix != null && namespaceURI.equals(getNamespaceURI())) {
-			return prefix;
-		}
-
-		Node parent = getParentNode();
-		if (parent != null) {
-			return parent.lookupPrefix(namespaceURI);
-		}
-
 		return null;
 	}
 
@@ -1105,37 +1157,81 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, Cloneabl
 	 */
 	@Override
 	public void normalize() {
-		for (Node child = getFirstChild(); child != null; child = child.getNextSibling()) {
-			{
-				switch (child.getNodeType()) {
-					case TEXT_NODE:
-					case CDATA_SECTION_NODE:
-						while (child.getNextSibling() != null &&
-								(child.getNextSibling().getNodeType() == TEXT_NODE ||
-										child.getNextSibling().getNodeType() == CDATA_SECTION_NODE)) {
-							final Text text = (Text) child;
-							text.appendData(child.getNextSibling().getNodeValue());
-							removeChild(child.getNextSibling());
+		Node child = getFirstChild();
+
+		while (child != null) {
+			Node next = child.getNextSibling();
+
+			switch (child.getNodeType()) {
+				case TEXT_NODE: {
+					Text text = (Text) child;
+
+					Node currentNext = child.getNextSibling();
+
+					while (currentNext != null &&
+							currentNext.getNodeType() == TEXT_NODE &&
+							currentNext.getParentNode() == this) {
+
+						Node nextNext = currentNext.getNextSibling();
+						text.appendData(currentNext.getNodeValue());
+
+						if(Node.DOCUMENT_NODE != getNodeType() &&
+								Node.DOCUMENT_FRAGMENT_NODE != getNodeType()) {
+							((NodeInternal)this).removeChildInternal(currentNext);
 						}
-						break;
-					case ELEMENT_NODE:
-						final NamedNodeMap attrs = child.getAttributes();
-						final int len = attrs.getLength();
-						for (int i = 0; i < len; i++) {
-							final Node attr = attrs.item(i);
-							attr.normalize();
+						currentNext = nextNext;
+						if (currentNext == child) {
+							break;
 						}
-						// Fall through
-					case DOCUMENT_NODE:
-					case DOCUMENT_FRAGMENT_NODE:
-					case ATTRIBUTE_NODE:
-					case ENTITY_REFERENCE_NODE:
-						child.normalize();
-						break;
-					default:
-						break;
+					}
+					break;
 				}
+
+				case CDATA_SECTION_NODE: {
+					// CDATA sections should be preserved - only merge with adjacent CDATA
+					Text cdata = (Text) child;
+
+					Node currentNext = child.getNextSibling();
+
+					while (currentNext != null &&
+							currentNext.getNodeType() == CDATA_SECTION_NODE &&
+							currentNext.getParentNode() == this) {
+
+						Node nextNext = currentNext.getNextSibling();
+						cdata.appendData(currentNext.getNodeValue());
+
+						if(Node.DOCUMENT_NODE != getNodeType() &&
+								Node.DOCUMENT_FRAGMENT_NODE != getNodeType()) {
+							((NodeInternal)this).removeChildInternal(currentNext);
+						}
+						currentNext = nextNext;
+						if (currentNext == child) {
+							break;
+						}
+					}
+					break;
+				}
+
+				case ELEMENT_NODE: {
+					NamedNodeMap attrs = child.getAttributes();
+					for (int i = 0; i < attrs.getLength(); i++) {
+						attrs.item(i).normalize();
+					}
+					child.normalize();
+					break;
+				}
+
+				case DOCUMENT_NODE:
+				case DOCUMENT_FRAGMENT_NODE:
+				case ATTRIBUTE_NODE:
+					child.normalize();
+					break;
+
+				default:
+					break;
 			}
+
+			child = next;
 		}
 
 		if (!this.notificationsSuspended) {
@@ -1151,6 +1247,7 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, Cloneabl
 				throw new DOMException(DOMException.NOT_FOUND_ERR, "oldChild not found");
 			}
 		}
+
 		if (!this.notificationsSuspended) {
 			informStructureInvalid();
 		}
@@ -1263,34 +1360,31 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, Cloneabl
 			return oldChild;
 		}
 
+		if (newChild == this) {
+			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR,
+					"A node cannot be inserted as a child of itself");
+		}
+
+		if (newChild.contains(this)) {
+			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR,
+					"New child would create a cycle in the tree");
+		}
+
+		if (newChild.getNodeType() == Node.ENTITY_NODE) {
+			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR,
+					"Entity nodes cannot be inserted into the DOM tree");
+		}
+
+		if (!(this instanceof Document) &&
+				!Objects.equals(newChild.getOwnerDocument(), getOwnerDocument())) {
+			throw new DOMException(DOMException.WRONG_DOCUMENT_ERR,
+					"Different Document");
+		}
+
 		final int idx = this.nodeList.indexOf(oldChild);
 		if (idx == -1) {
 			throw new DOMException(DOMException.NOT_FOUND_ERR, "oldChild not found");
 		}
-
-		if (getNodeType() == Node.DOCUMENT_TYPE_NODE && newChild.getNodeType() == Node.ATTRIBUTE_NODE) {
-			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Document cannot append Attr");
-		}
-
-		if (getNodeType() == Node.ENTITY_REFERENCE_NODE) {
-			throw new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR, "readonly node");
-		}
-
-		if (newChild.contains(oldChild)) {
-			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Child node is already a parent.");
-		}
-
-		if (Objects.equals(newChild, this)) {
-			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Node is equals");
-		}
-
-		if (newChild.getOwnerDocument() == null) {
-			newChild.setOwnerDocument(getOwnerDocument());
-		}
-
-		if(!Objects.equals(newChild.getOwnerDocument(), getOwnerDocument()))
-			throw new DOMException(DOMException.WRONG_DOCUMENT_ERR, "Different Document");
-
 
 		final int idx2 = this.nodeList.indexOf(newChild);
 		newChild.setParentImpl(this);
@@ -1305,6 +1399,7 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, Cloneabl
 
 		return oldChild;
 	}
+
 
 	/** {@inheritDoc} */
 	@Override
@@ -1348,11 +1443,15 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, Cloneabl
 	public void setPrefix(final String prefix) throws DOMException {
 
 		if (namespaceURI == null ||
-				("xml".equals(prefix) && !Document.XML_NAMESPACE_URI.equals(getNamespaceURI()))) {
+				("xml".equals(prefix) && !XML_NAMESPACE_URI.equals(getNamespaceURI()))) {
 			throw new DOMException(DOMException.NAMESPACE_ERR, "Wrong namespace for prefix xml");
 		}
 
-		if (prefix != null && !Strings.isXMLIdentifier(prefix)) {
+		if (Strings.isXMLIdentifier(prefix)) {
+			throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "The qualified name contains the invalid character");
+		}
+
+		if (prefix != null && Strings.isXMLIdentifier(prefix)) {
 			throw new DOMException(DOMException.NAMESPACE_ERR, "Invalid prefix");
 		}
 		this.prefix = prefix;
@@ -1360,19 +1459,18 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, Cloneabl
 
 	/** {@inheritDoc} */
 	@Override
-	public void setTextContent(final String textContent) {
-		synchronized (this) {
-			removeChildrenImpl(new TextFilter());
-			if (Strings.isNotBlank(textContent)) {
-				final TextImpl t = new TextImpl(textContent);
-				t.setOwnerDocument(this.document);
-				t.setParentImpl(this);
-				this.nodeList.add(t);
-			}
+	public void setTextContent(String textContent) {
+
+		while (this.hasChildNodes()) {
+			this.removeChild(this.getFirstChild());
 		}
-		if (!this.notificationsSuspended) {
-			informStructureInvalid();
+
+		if (textContent == null) {
+			return;
 		}
+
+		Text text = this.getOwnerDocument().createTextNode(textContent);
+		this.appendChild(text);
 	}
 
 	/**

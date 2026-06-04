@@ -52,18 +52,14 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see <a href="http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-well-formed">http://www.w3.org/TR/2003/CR-DOM-Level-3-Core-20031107/core#parameter-well-formed</a>
  */
 public class Wellformed03Test extends LoboUnitTest {
+
     @Test
     public void runTest() {
         final DOMImplementation domImpl;
-
         final Document doc;
         final Element docElem;
         Attr attr;
         final DOMConfiguration domConfig;
-        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
-
-        final List<DOMError> errors;
-
         DOMError error;
         int severity;
         String type;
@@ -72,16 +68,13 @@ public class Wellformed03Test extends LoboUnitTest {
         domImpl = new DOMImplementationImpl(new UserAgentContext(new LocalHtmlRendererConfig(), true));
         doc = domImpl.createDocument("http://www.w3.org/1999/xhtml", "html", null);
         docElem = doc.getDocumentElement();
-
-        {
-            boolean success = false;
-            try {
-                doc.createAttribute("LegalNameࢎ");
-            } catch (final DOMException ex) {
-                success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
-            }
-            assertTrue(success, "Wellformed03Assert1");
+        boolean success = false;
+        try {
+            doc.createAttribute("LegalNameࢎ");
+        } catch (final DOMException ex) {
+            success = (ex.getCode() == DOMException.INVALID_CHARACTER_ERR);
         }
+        assertTrue(success, "Wellformed03Assert1");
 
         try {
             doc.setXmlVersion("1.1");
@@ -98,9 +91,10 @@ public class Wellformed03Test extends LoboUnitTest {
         domConfig = doc.getDomConfig();
         domConfig.setParameter("well-formed", Boolean.TRUE);
         /*DOMErrorMonitor */
-        domConfig.setParameter("error-handler", errorMonitor);
+        domConfig.setParameter("error-handler", new DOMErrorMonitor());
         doc.normalizeDocument();
-        errors = errorMonitor.getErrors();
+        DOMErrorMonitor errorMonitor = (DOMErrorMonitor) domConfig.getParameter("error-handler");
+        List<DOMError> errors = errorMonitor.getErrors();
         for (final DOMError domError : errors) {
             error = domError;
             severity = error.getSeverity();

@@ -1844,6 +1844,12 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, GlobalE
 		return null;
 	}
 
+	public void updateInlineStyle(String cssText) {
+		if (this.localStyleDeclarationState != null) {
+			this.localStyleDeclarationState.setCssText(cssText != null ? cssText : "");
+		}
+	}
+
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

@@ -34,12 +34,13 @@ import org.loboevolution.html.node.NodeList;
 import org.loboevolution.html.node.ProcessingInstruction;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 /**
  * The "getData()" method returns the content of the
- * processing instruction.  It starts at the first non
- * white character following the target and ends at the
+ * processing instruction.  It starts at the first non- * white
+ * character following the target and ends at the
  * character immediately preceding the "?&#62;".
  * <p>
  * Retrieve the ProcessingInstruction node located
@@ -62,10 +63,18 @@ public class ProcessinginstructiongetdataTest extends LoboUnitTest {
         final ProcessingInstruction piNode;
         final String data;
         doc = sampleXmlFile("staff.xml");
-        childNodes = doc.getChildNodes();
-        piNode = (ProcessingInstruction) childNodes.item(0);
-        data = piNode.getData();
-        assertEquals("PIDATA", data, "ProcessinginstructiongetdataAssert1");
+        ProcessingInstruction pi = null;
+        NodeList children = doc.getChildNodes();
+        for (int i = 0; i < children.getLength(); i++) {
+            if (children.item(i) instanceof ProcessingInstruction) {
+                pi = (ProcessingInstruction) children.item(i);
+                break;
+            }
+        }
+
+        assertNotNull(pi, "PI not found");
+        assertEquals("TEST-STYLE", pi.getTarget());
+        assertEquals("PIDATA", pi.getData());
     }
 
 }

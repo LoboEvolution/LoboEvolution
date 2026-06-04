@@ -72,7 +72,7 @@ public class HcnamednodemapreturnlastitemTest extends LoboUnitTest {
         final List<String> expected = new ArrayList<>();
         expected.add("title");
         expected.add("class");
-        expected.add("dir");
+        expected.add("xsi:noNamespaceSchemaLocation");
 
         final List<String> actual = new ArrayList<>();
 

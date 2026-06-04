@@ -149,8 +149,8 @@ public class ComputedFontTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"", "16px \"Times New Roman\"",
-            "null", "\"Times New Roman\"", "", "16px abc", "abc", "abc"})
+    @Alerts({"", "16px Times New Roman",
+            "null", "Times New Roman", "", "16px abc", "abc", "abc"})
     public void minimalFontFamilyReversed() {
         font("xyz 1px", "fontFamily", "abc");
     }

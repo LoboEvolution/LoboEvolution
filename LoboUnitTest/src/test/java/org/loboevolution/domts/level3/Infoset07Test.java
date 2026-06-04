@@ -62,7 +62,6 @@ public class Infoset07Test extends LoboUnitTest {
         final Element docElem;
         Attr attr;
         final DOMConfiguration domConfig;
-        final DOMErrorMonitor errorMonitor = new DOMErrorMonitor();
         final List<DOMError> errors;
         int severity;
         String type;
@@ -96,8 +95,9 @@ public class Infoset07Test extends LoboUnitTest {
         domConfig = doc.getDomConfig();
         domConfig.setParameter("infoset", Boolean.TRUE);
         /*DOMErrorMonitor */
-        domConfig.setParameter("error-handler", errorMonitor);
+        domConfig.setParameter("error-handler", new DOMErrorMonitor());
         doc.normalizeDocument();
+        DOMErrorMonitor errorMonitor = (DOMErrorMonitor) domConfig.getParameter("error-handler");
         errors = errorMonitor.getErrors();
         for (final DOMError error : errors) {
             severity = error.getSeverity();
