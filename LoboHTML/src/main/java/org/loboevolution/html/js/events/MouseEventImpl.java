@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2014 - 2025 LoboEvolution
+ * Copyright (c) 2014 - 2026 LoboEvolution
  *
  * Permission is hereby granted, free of che, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
