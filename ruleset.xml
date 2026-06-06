@@ -823,7 +823,7 @@ public class MyTestCase extends TestCase {
 JUnit tests should include at least one assertion.  This makes the tests more robust, and using assert 
 with messages provide the developer a clearer idea of what the test does.
         </description>
-        <priority>3</priority>
+        <priority>0</priority>
         <example>
 <![CDATA[
 public class Foo extends TestCase {
