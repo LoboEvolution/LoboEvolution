@@ -57,6 +57,7 @@ import org.loboevolution.html.node.Node;
 import org.loboevolution.js.*;
 import org.loboevolution.js.console.Console;
 import org.loboevolution.js.webstorage.Storage;
+import org.loboevolution.js.xml.XSLTProcessor;
 import org.loboevolution.traversal.NodeFilter;
 import org.loboevolution.views.DocumentView;
 import org.loboevolution.http.UserAgentContext;
@@ -1254,6 +1255,7 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 		final JavaInstantiator jiXSeralizer = (args) -> new XMLSerializerImpl();
 		final JavaInstantiator jiXPath = (args) -> new XPathResultImpl();
 		final JavaInstantiator jiXMLDocument = (args) -> new XMLDocument();
+		final JavaInstantiator jiXSLTProcessorImpl = (args) -> new XSLTProcessorImpl();
 		final JavaInstantiator jiText = (args) -> new TextImpl();
 		final JavaInstantiator jiAudioContext = (args) -> new AudioContextImpl();
 		final JavaInstantiator jiBlob = (args) -> new BlobImpl();
@@ -1303,6 +1305,7 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 		js.defineJsObject(ws, "XMLSerializer", XMLSerializerImpl.class, jiXSeralizer);
 		js.defineJsObject(ws, "XPathResult", XPathResultImpl.class, jiXPath);
 		js.defineJsObject(ws, "XMLDocument", XMLDocument.class, jiXMLDocument);
+		js.defineJsObject(ws, "XSLTProcessor", XSLTProcessor.class, jiXSLTProcessorImpl);
 		js.defineJsObject(ws, "Element", ElementImpl.class, jiElement);
 		js.defineJsObject(ws, "Text", TextImpl.class, jiText);
 		js.defineJsObject(ws, "AudioContext", AudioContextImpl.class, jiAudioContext);
