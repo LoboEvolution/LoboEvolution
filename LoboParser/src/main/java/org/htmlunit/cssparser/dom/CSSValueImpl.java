@@ -83,6 +83,42 @@ public class CSSValueImpl extends AbstractLocatable implements Serializable {
         /** CSS_VMAX. */
         CSS_VMAX,
 
+        /** CSS_DVW. */
+        CSS_DVW,
+
+        /** CSS_DVH. */
+        CSS_DVH,
+
+        /** CSS_DVMIN. */
+        CSS_DVMIN,
+
+        /** CSS_DVMAX. */
+        CSS_DVMAX,
+
+        /** CSS_LVW. */
+        CSS_LVW,
+
+        /** CSS_LVH. */
+        CSS_LVH,
+
+        /** CSS_LVMIN. */
+        CSS_LVMIN,
+
+        /** CSS_LVMAX. */
+        CSS_LVMAX,
+
+        /** CSS_SVW. */
+        CSS_SVW,
+
+        /** CSS_SVH. */
+        CSS_SVH,
+
+        /** CSS_SVMIN. */
+        CSS_SVMIN,
+
+        /** CSS_SVMAX. */
+        CSS_SVMAX,
+
         /** CSS_PX. */
         CSS_PX,
 
@@ -269,8 +305,7 @@ public class CSSValueImpl extends AbstractLocatable implements Serializable {
 
                 final CSSValueImpl cssValue = (CSSValueImpl) o;
                 if (separate) {
-                    if (cssValue.value_ instanceof LexicalUnit) {
-                        final LexicalUnit lu = (LexicalUnit) cssValue.value_;
+                    if (cssValue.value_ instanceof LexicalUnit lu) {
                         if (lu.getLexicalUnitType() != LexicalUnitType.OPERATOR_COMMA) {
                             sb.append(" ");
                         }
@@ -329,88 +364,59 @@ public class CSSValueImpl extends AbstractLocatable implements Serializable {
      * @return the primitive type
      */
     public CSSPrimitiveValueType getPrimitiveType() {
-        if (value_ instanceof LexicalUnit) {
-            final LexicalUnit lu = (LexicalUnit) value_;
-            switch (lu.getLexicalUnitType()) {
-                case INHERIT:
-                    return CSSPrimitiveValueType.CSS_IDENT;
-                case INTEGER:
-                case REAL:
-                    return CSSPrimitiveValueType.CSS_NUMBER;
-                case EM:
-                    return CSSPrimitiveValueType.CSS_EMS;
-                case REM:
-                    return CSSPrimitiveValueType.CSS_REM;
-                case EX:
-                    return CSSPrimitiveValueType.CSS_EXS;
-                case CH:
-                    return CSSPrimitiveValueType.CSS_CH;
-                case VW:
-                    return CSSPrimitiveValueType.CSS_VW;
-                case VH:
-                    return CSSPrimitiveValueType.CSS_VH;
-                case VMIN:
-                    return CSSPrimitiveValueType.CSS_VMIN;
-                case VMAX:
-                    return CSSPrimitiveValueType.CSS_VMAX;
-                case PIXEL:
-                    return CSSPrimitiveValueType.CSS_PX;
-                case INCH:
-                    return CSSPrimitiveValueType.CSS_IN;
-                case CENTIMETER:
-                    return CSSPrimitiveValueType.CSS_CM;
-                case MILLIMETER:
-                    return CSSPrimitiveValueType.CSS_MM;
-                case POINT:
-                    return CSSPrimitiveValueType.CSS_PT;
-                case PICA:
-                    return CSSPrimitiveValueType.CSS_PC;
-                case QUATER:
-                    return CSSPrimitiveValueType.CSS_Q;
-                case PERCENTAGE:
-                    return CSSPrimitiveValueType.CSS_PERCENTAGE;
-                case URI:
-                    return CSSPrimitiveValueType.CSS_URI;
-                case COUNTER_FUNCTION:
-    //            case COUNTERS_FUNCTION:
-                    return CSSPrimitiveValueType.CSS_COUNTER;
-    //            case RGBCOLOR:
-    //                return CSS_RGBCOLOR;
-                case DEGREE:
-                    return CSSPrimitiveValueType.CSS_DEG;
-                case GRADIAN:
-                    return CSSPrimitiveValueType.CSS_GRAD;
-                case RADIAN:
-                    return CSSPrimitiveValueType.CSS_RAD;
-                case TURN:
-                    return CSSPrimitiveValueType.CSS_TURN;
-                case MILLISECOND:
-                    return CSSPrimitiveValueType.CSS_MS;
-                case SECOND:
-                    return CSSPrimitiveValueType.CSS_S;
-                case HERTZ:
-                    return CSSPrimitiveValueType.CSS_HZ;
-                case KILOHERTZ:
-                    return CSSPrimitiveValueType.CSS_KHZ;
-                case IDENT:
-                    return CSSPrimitiveValueType.CSS_IDENT;
-                case NONE:
-                    return CSSPrimitiveValueType.CSS_IDENT;
-                case STRING_VALUE:
-                    return CSSPrimitiveValueType.CSS_STRING;
-                case ATTR:
-                    return CSSPrimitiveValueType.CSS_ATTR;
-    //            case RECT_FUNCTION:
-    //                return CSSPrimitiveValueType.CSS_RECT;
-                case UNICODERANGE:
-                case FUNCTION:
-                case FUNCTION_CALC:
-                    return CSSPrimitiveValueType.CSS_STRING;
-                case DIMENSION:
-                    return CSSPrimitiveValueType.CSS_DIMENSION;
-                default:
-                    return CSSPrimitiveValueType.CSS_UNKNOWN;
-            }
+        if (value_ instanceof LexicalUnit lu) {
+            return switch (lu.getLexicalUnitType()) {
+                case INHERIT -> CSSPrimitiveValueType.CSS_IDENT;
+                case INTEGER, REAL -> CSSPrimitiveValueType.CSS_NUMBER;
+                case EM -> CSSPrimitiveValueType.CSS_EMS;
+                case REM -> CSSPrimitiveValueType.CSS_REM;
+                case EX -> CSSPrimitiveValueType.CSS_EXS;
+                case CH -> CSSPrimitiveValueType.CSS_CH;
+                case VW -> CSSPrimitiveValueType.CSS_VW;
+                case VH -> CSSPrimitiveValueType.CSS_VH;
+                case VMIN -> CSSPrimitiveValueType.CSS_VMIN;
+                case VMAX -> CSSPrimitiveValueType.CSS_VMAX;
+                case DVW -> CSSPrimitiveValueType.CSS_DVW;
+                case DVH -> CSSPrimitiveValueType.CSS_DVH;
+                case DVMIN -> CSSPrimitiveValueType.CSS_DVMIN;
+                case DVMAX -> CSSPrimitiveValueType.CSS_DVMAX;
+                case LVW -> CSSPrimitiveValueType.CSS_LVW;
+                case LVH -> CSSPrimitiveValueType.CSS_LVH;
+                case LVMIN -> CSSPrimitiveValueType.CSS_LVMIN;
+                case LVMAX -> CSSPrimitiveValueType.CSS_LVMAX;
+                case SVW -> CSSPrimitiveValueType.CSS_SVW;
+                case SVH -> CSSPrimitiveValueType.CSS_SVH;
+                case SVMIN -> CSSPrimitiveValueType.CSS_SVMIN;
+                case SVMAX -> CSSPrimitiveValueType.CSS_SVMAX;
+                case PIXEL -> CSSPrimitiveValueType.CSS_PX;
+                case INCH -> CSSPrimitiveValueType.CSS_IN;
+                case CENTIMETER -> CSSPrimitiveValueType.CSS_CM;
+                case MILLIMETER -> CSSPrimitiveValueType.CSS_MM;
+                case POINT -> CSSPrimitiveValueType.CSS_PT;
+                case PICA -> CSSPrimitiveValueType.CSS_PC;
+                case QUATER -> CSSPrimitiveValueType.CSS_Q;
+                case PERCENTAGE -> CSSPrimitiveValueType.CSS_PERCENTAGE;
+                case URI -> CSSPrimitiveValueType.CSS_URI;
+                case COUNTER_FUNCTION -> CSSPrimitiveValueType.CSS_COUNTER;
+                // case COUNTERS_FUNCTION
+                // case RGBCOLOR -> CSS_RGBCOLOR;
+                case DEGREE -> CSSPrimitiveValueType.CSS_DEG;
+                case GRADIAN -> CSSPrimitiveValueType.CSS_GRAD;
+                case RADIAN -> CSSPrimitiveValueType.CSS_RAD;
+                case TURN -> CSSPrimitiveValueType.CSS_TURN;
+                case MILLISECOND -> CSSPrimitiveValueType.CSS_MS;
+                case SECOND -> CSSPrimitiveValueType.CSS_S;
+                case HERTZ -> CSSPrimitiveValueType.CSS_HZ;
+                case KILOHERTZ -> CSSPrimitiveValueType.CSS_KHZ;
+                case IDENT -> CSSPrimitiveValueType.CSS_IDENT;
+                case NONE -> CSSPrimitiveValueType.CSS_IDENT;
+                case STRING_VALUE -> CSSPrimitiveValueType.CSS_STRING;
+                case ATTR -> CSSPrimitiveValueType.CSS_ATTR;
+                // case RECT_FUNCTION-> CSSPrimitiveValueType.CSS_RECT;
+                case UNICODERANGE, FUNCTION, FUNCTION_CALC -> CSSPrimitiveValueType.CSS_STRING;
+                case DIMENSION -> CSSPrimitiveValueType.CSS_DIMENSION;
+                default -> CSSPrimitiveValueType.CSS_UNKNOWN;
+            };
         }
         else if (value_ instanceof RectImpl) {
             return CSSPrimitiveValueType.CSS_RECT;
@@ -453,8 +459,7 @@ public class CSSValueImpl extends AbstractLocatable implements Serializable {
      * @throws DOMException in case of error
      */
     public double getDoubleValue() throws DOMException {
-        if (value_ instanceof LexicalUnit) {
-            final LexicalUnit lu = (LexicalUnit) value_;
+        if (value_ instanceof LexicalUnit lu) {
             return lu.getDoubleValue();
         }
         throw new DOMException(
@@ -472,8 +477,7 @@ public class CSSValueImpl extends AbstractLocatable implements Serializable {
      * @throws DOMException case of error
      */
     public String getStringValue() throws DOMException {
-        if (value_ instanceof LexicalUnit) {
-            final LexicalUnit lu = (LexicalUnit) value_;
+        if (value_ instanceof LexicalUnit lu) {
             if ((lu.getLexicalUnitType() == LexicalUnitType.IDENT)
                 || (lu.getLexicalUnitType() == LexicalUnitType.STRING_VALUE)
                 || (lu.getLexicalUnitType() == LexicalUnitType.URI)
@@ -543,10 +547,9 @@ public class CSSValueImpl extends AbstractLocatable implements Serializable {
         if (this == obj) {
             return true;
         }
-        if (!(obj instanceof CSSValueImpl)) {
+        if (!(obj instanceof CSSValueImpl cv)) {
             return false;
         }
-        final CSSValueImpl cv = (CSSValueImpl) obj;
         // TODO to be improved!
         return super.equals(obj)
             && (getCssValueType() == cv.getCssValueType())

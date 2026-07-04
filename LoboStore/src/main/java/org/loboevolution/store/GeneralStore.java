@@ -243,6 +243,6 @@ public class GeneralStore implements Serializable {
 		deleteBounds();
 		deleteStartUpUrl();
 		insertNetwork(true, true, true,true, true, true);
-		insertBounds(new Rectangle(800, 400));
+		insertBounds(new Rectangle(1600, 900));
 	}
 }

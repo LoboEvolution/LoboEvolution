@@ -126,14 +126,7 @@ public class BorderInsets {
 		String borderBottomWidth = "";
 		String borderRightWidth = "";
 
-		if (parentStyle == null) {
-			if (!(element instanceof HTMLHtmlElement)) {
-				binfo.setTopStyle(BORDER_STYLE_NONE);
-				binfo.setLeftStyle(BORDER_STYLE_NONE);
-				binfo.setBottomStyle(BORDER_STYLE_NONE);
-				binfo.setRightStyle(BORDER_STYLE_NONE);
-			}
-		} else {
+		if (parentStyle != null) {
 			borderTopWidth = parentStyle.getBorderTopWidth();
 			borderLeftWidth = parentStyle.getBorderLeftWidth();
 			borderBottomWidth = parentStyle.getBorderBottomWidth();

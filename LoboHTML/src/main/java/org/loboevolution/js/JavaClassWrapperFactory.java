@@ -36,8 +36,10 @@ public final class JavaClassWrapperFactory {
 
     private final Map<Class<?>, WeakReference<JavaClassWrapper>> classWrappers = new WeakHashMap<>();
 
+	private final Map<Class<?>, String> customClassNames = new WeakHashMap<>();
 
-    /**
+
+	/**
 	 * <p>Getter for the field instance.</p>
 	 *
 	 * @return a {@link org.loboevolution.js.JavaClassWrapperFactory} object.
@@ -65,5 +67,26 @@ public final class JavaClassWrapperFactory {
 			}
 			return jcw;
 		}
+	}
+
+	/**
+	 * <p>getCustomClassName.</p>
+	 *
+	 * @param clazz a {@link java.lang.Class} object.
+	 * @return the custom class name for JavaScript, or null if not set.
+	 */
+	public String getCustomClassName(final Class<?> clazz) {
+		return this.customClassNames.get(clazz);
+	}
+
+	/**
+	 * <p>registerCustomClassName.</p>
+	 * Registers a custom JavaScript class name for a Java class.
+	 *
+	 * @param clazz a {@link java.lang.Class} object.
+	 * @param customClassName the custom JavaScript class name.
+	 */
+	public void registerCustomClassName(final Class<?> clazz, final String customClassName) {
+		this.customClassNames.put(clazz, customClassName);
 	}
 }

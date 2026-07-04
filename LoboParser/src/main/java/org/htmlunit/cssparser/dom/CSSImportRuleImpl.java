@@ -139,10 +139,9 @@ public class CSSImportRuleImpl extends AbstractCSSRuleImpl {
         if (this == obj) {
             return true;
         }
-        if (!(obj instanceof CSSImportRuleImpl)) {
+        if (!(obj instanceof CSSImportRuleImpl cir)) {
             return false;
         }
-        final CSSImportRuleImpl cir = (CSSImportRuleImpl) obj;
         return super.equals(obj)
             && ParserUtils.equals(getHref(), cir.getHref())
             && ParserUtils.equals(getMedia(), cir.getMedia());

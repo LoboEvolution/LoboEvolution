@@ -14,6 +14,8 @@
  */
 package org.htmlunit.cssparser.util;
 
+import java.util.Objects;
+
 /**
  * Util methods.
  *
@@ -63,7 +65,7 @@ public final class ParserUtils {
      * @return true if the both objects are equals
      */
     public static boolean equals(final Object obj1, final Object obj2) {
-        return obj1 == null ? obj2 == null : obj1.equals(obj2);
+        return Objects.equals(obj1, obj2);
     }
 
     /**

@@ -195,8 +195,9 @@ public class HttpNetwork {
 	 */
 	public static String getSource(URI uri, final String integrity) throws Exception {
 		try (final InputStream in = openConnectionCheckRedirects(getURLConnection(uri, Proxy.NO_PROXY,null))) {
-			if(AlgorithmDigest.validate(IOUtil.readFully(in), integrity)){
-				return toString(in);
+			final byte[] content = IOUtil.readFully(in);
+			if(AlgorithmDigest.validate(content, integrity)){
+				return toString(new java.io.ByteArrayInputStream(content));
 			}
 		} catch (final SocketTimeoutException e) {
 			log.error("More time elapsed {}", TIMEOUT_VALUE);

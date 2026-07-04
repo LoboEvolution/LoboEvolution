@@ -240,7 +240,7 @@ public class FontValues extends HtmlValues {
 	 * @return a {@link java.lang.String} object.
 	 */
 	public static String getFontFamily(final String fontFamily, final RenderState parentRenderState) {
-		if (fontFamily == null) {
+		if (Strings.isBlank(fontFamily)) {
 			if (parentRenderState != null) {
 				return parentRenderState.getFont().getFamily();
 			} else {
@@ -259,7 +259,7 @@ public class FontValues extends HtmlValues {
 	 * @return a boolean.
 	 */
 	private static boolean getFontStrikeThrough(final String strikethrough, final RenderState parentRenderState, final boolean isStrikethrough) {
-		if (strikethrough == null) {
+		if (Strings.isBlank(strikethrough)) {
 			if (parentRenderState != null && parentRenderState.getFont() != null) {
 				final Boolean strikethroughon = (Boolean) parentRenderState.getFont().getAttributes().get(TextAttribute.STRIKETHROUGH_ON);
 				return strikethroughon != null && strikethroughon;
@@ -285,7 +285,7 @@ public class FontValues extends HtmlValues {
 	 * @return a {@link java.lang.String} object.
 	 */
 	private static String getFontStyle(final String fontStyle, final RenderState parentRenderState, final boolean isItalic) {
-		if (fontStyle == null) {
+		if (Strings.isBlank(fontStyle)) {
 			if (parentRenderState != null) {
 				if (parentRenderState.getFont().getStyle() == Font.BOLD)
 					return CSSValues.ITALIC.getValue();
@@ -306,7 +306,7 @@ public class FontValues extends HtmlValues {
 	 * @return a {@link java.lang.String} object.
 	 */
 	public static String getFontVariant(final String fontVariant) {
-		if (fontVariant == null){
+		if (Strings.isBlank(fontVariant)){
 			return CSSValues.NORMAL.getValue();
 		}
 		return fontVariant;
@@ -349,7 +349,7 @@ public class FontValues extends HtmlValues {
 	 */
 	private static Integer getFontUnderline(final String underline, final RenderState parentRenderState, final boolean isStrikethrough) {
 
-		if (underline == null) {
+		if (Strings.isBlank(underline)) {
 			if (parentRenderState != null) {
 				return (Integer) parentRenderState.getFont().getAttributes().get(TextAttribute.UNDERLINE_LOW_ONE_PIXEL);
 			} else {
@@ -374,7 +374,7 @@ public class FontValues extends HtmlValues {
 	 * @return a {@link java.lang.String} object.
 	 */
 	public static String getFontWeight(final String fontWeight, final RenderState parentRenderState, final boolean isBold) {
-		if (fontWeight == null) {
+		if (Strings.isBlank(fontWeight)) {
 			if (parentRenderState != null) {
 				if (parentRenderState.getFont().getAttributes().get(TextAttribute.WEIGHT) == null) {
 					return CSSValues.BOLD400.getValue();
@@ -400,10 +400,20 @@ public class FontValues extends HtmlValues {
 	 * Checks if is font style.
 	 */
 	public static boolean isFontStyle(final String token) {
-		final CSSValues tok = CSSValues.get(token);
+		if (Strings.isBlank(token)) {
+			return false;
+		}
+		final String tokenLower = token.toLowerCase();
+		final CSSValues tok = CSSValues.get(tokenLower);
         return switch (tok) {
             case ITALIC, NORMAL, OBLIQUE -> true;
-            default -> false;
+            default -> {
+                // Handle oblique with angle (e.g., "oblique 10deg")
+                if (tokenLower.startsWith("oblique")) {
+                    yield true;
+                }
+                yield false;
+            }
         };
 	}
 

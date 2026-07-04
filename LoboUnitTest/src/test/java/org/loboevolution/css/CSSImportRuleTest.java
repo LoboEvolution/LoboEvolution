@@ -372,7 +372,7 @@ public class CSSImportRuleTest extends LoboUnitTest {
 
     @Test
     @Alerts({"[object HTMLStyleElement]", "[object CSSStyleSheet]", "imp.css",
-            "null", "div { color: green; }"})
+            "", "div { color: green; }"})
     public void styleSheet() {
         final String html
                 = "<html><body>\n"
@@ -395,7 +395,7 @@ public class CSSImportRuleTest extends LoboUnitTest {
 
     @Test
     @Alerts({"[object HTMLStyleElement]", "[object CSSStyleSheet]", "imp.css",
-            "[object CSSRuleList]", "null", "0"})
+            "[object CSSRuleList]", "", "0"})
     public void styleSheetNotAvailable() {
         final String html
                 = "<html><body>\n"

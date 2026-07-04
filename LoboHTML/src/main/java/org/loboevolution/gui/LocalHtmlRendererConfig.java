@@ -72,7 +72,7 @@ public class LocalHtmlRendererConfig implements HtmlRendererConfig {
 
     @Override
     public Rectangle getInitialWindowBounds() {
-        return new Rectangle(500, 800);
+        return new Rectangle(1600, 900);
     }
 
     @Override

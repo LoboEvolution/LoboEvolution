@@ -133,6 +133,13 @@ public class HTMLFieldsetElementImpl extends HTMLElementImpl implements HTMLFiel
 
     /** {@inheritDoc} */
     @Override
+    public int getClientHeight() {
+        final int clientHeight = super.getClientHeight();
+        return clientHeight == 0 ? 35 : clientHeight;
+    }
+
+    /** {@inheritDoc} */
+    @Override
     public Integer getClientWidth() {
         int clientWidth = getDocumentNode().getDocumentElement().getClientWidth();
         if (getRenderState() != null && getRenderState().getPaddingInsets() != null) {

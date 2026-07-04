@@ -39,7 +39,7 @@ public class CSSMediaRuleTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts({"[object CSSMediaRuleImpl]", "[object CSSMediaRule]"})
+    @Alerts({"[object CSSMediaRule]", "[object CSSMediaRule]"})
     public void scriptableToString() {
         final String html
                 = "<html>"
@@ -115,8 +115,8 @@ public class CSSMediaRuleTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("@media print {\n  #navigation { display: none; }"
-            + "\n  @media (max-width: 12cm) {\n  .note { float: none; }\n}\n}")
+    @Alerts("@media print {\n  *#navigation { display: none; }"
+            + "\n  @media (max-width: 12cm) {\n  *.note { float: none; }\n}\n}")
     public void cssTextNested() {
         final String html
                 = "<html><body>\n"
@@ -185,7 +185,7 @@ public class CSSMediaRuleTest extends LoboUnitTest {
                 + "<body>\n"
                 + "<style>\n"
                 + "  @media print { #navigation { display: none; } "
-                + "@media (max-width: 12cm) { .note { float: none; } } }"
+                + "  @media (max-width: 12cm) { .note { float: none; } } }"
                 + "</style>\n"
                 + "<script>\n"
                 + "  var styleSheet = document.styleSheets[0];\n"

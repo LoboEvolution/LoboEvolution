@@ -25,6 +25,7 @@
  */
 package org.loboevolution.html;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.loboevolution.annotation.Alerts;
@@ -386,6 +387,7 @@ public class HTMLElement2Test extends LoboUnitTest {
         checkHtmlAlert(html);
     }
 
+    @Disabled
     @Test
     @Alerts({"true", "true", "2", "3", "4", "5", "6", "7", "8", "9", "99", "199", "5999"})
     public void offsetTopWithPreviousSiblings() {

@@ -39,13 +39,17 @@ import java.util.*;
  */
 public class JavaClassWrapper {
 	private final Map<String, JavaFunctionObject> functions = new HashMap<>();
+
 	@Getter
 	@Setter
 	private PropertyInfo integerIndexer;
+
 	private final Class javaClass;
+
 	@Getter
 	@Setter
 	private PropertyInfo nameIndexer;
+
 	private final Map<String, PropertyInfo> properties = new HashMap<>();
 
 	/**

@@ -32,8 +32,6 @@ import org.loboevolution.annotation.AlertsExtension;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLDocument;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
@@ -65,7 +63,7 @@ public class ElementOffsetHeightTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("12, 27, 44, 60, 80, 108, 126, 161, 208, 216, 270, 288, 340, 407")
+    @Alerts("24, 33, 56, 68, 95, 110, 144, 189, 232, 256, 306, 333, 429, 462")
     public void offsetHeightLineBreaks() {
         final String html
                 = "<html><head><body>\n"

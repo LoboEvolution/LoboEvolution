@@ -26,8 +26,8 @@ import org.htmlunit.cssparser.parser.LexicalUnit;
  */
 public class AbstractColor implements Serializable {
 
-    private String function_;
-    private CSSValueImpl cssValue_;
+    private final String function_;
+    private final CSSValueImpl cssValue_;
 
     /**
      * Constructor that reads the values from the given

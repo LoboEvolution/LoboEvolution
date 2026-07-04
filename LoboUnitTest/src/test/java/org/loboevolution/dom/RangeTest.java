@@ -131,15 +131,15 @@ public class RangeTest extends LoboUnitTest {
         checkHtmlAlert(html);
     }
 
-    @Disabled
+
     @Test
-    @Alerts({"1 <p><b id=\"b\">text1<span id=\"s\">inner</span>text2</b></p>",
+    @Alerts({"1 <P><B id=\"b\">text1<SPAN id=\"s\">inner</SPAN>text2</B></P>",
             "2 text1",
             "3 [object DocumentFragment]",
-            "4 1: [object HTMLParagraphElement]: <b id=\"b\">text1</b>",
-            "5 <p><b id=\"b\"><span id=\"s\">inner</span>text2</b></p>",
-            "6 1: [object HTMLParagraphElement]: <b id=\"b\"><span id=\"s\"></span>text2</b>",
-            "7 <p><b id=\"b\"><span id=\"s\">inner</span></b></p>"})
+            "4 1: [object HTMLParagraphElement]: <B id=\"b\">text1</B>",
+            "5 <P><B id=\"b\"><SPAN id=\"s\">inner</SPAN>text2</B></P>",
+            "6 1: [object HTMLParagraphElement]: <B id=\"b\"><SPAN id=\"s\"></SPAN>text2</B>",
+            "7 <P><B id=\"b\"><SPAN id=\"s\">inner</SPAN></B></P>"})
     public void extractContents2() {
         final String html =
                 "<html><body><div id='d'><p><b id='b'>text1<span id='s'>inner</span>text2</b></p></div>\n"

@@ -49,7 +49,7 @@ public class HTMLStyleElementTest extends LoboUnitTest {
                 + "  alert(f.sheet);\n"
                 + "  alert(f.styleSheet);\n"
                 + "}</script>\n"
-                + "<style id='myStyle'>p: vertical-align:top</style>\n"
+                + "<style id='myStyle'>p#vertical-align {vertical-align: top;}</style>\n"
                 + "</head><body onload='doTest()'>\n"
                 + "</body></html>";
 
@@ -349,7 +349,7 @@ public class HTMLStyleElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"rgb(0, 0, 0)", "rgb(0, 128, 0)", "rgb(0, 0, 0)"})
+    @Alerts({"rgb(0, 0, 0)", "rgb(0, 128, 0)", "rgb(0, 0, 255)"})
     public void scriptInCdataHtml() {
         final String html =
                 "<html>\n"

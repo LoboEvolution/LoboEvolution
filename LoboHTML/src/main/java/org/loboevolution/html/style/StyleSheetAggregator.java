@@ -131,6 +131,13 @@ public class StyleSheetAggregator {
     public final List<CSSStyleSheetImpl.SelectorEntry> getActiveStyleDeclarations(final HTMLElementImpl element, final String elementName, final String[] classes, final boolean mouseOver) {
         List<CSSStyleSheetImpl.SelectorEntry> matchingRules = new ArrayList<>();
         for (final CSSStyleSheetImpl sheet : styleSheets) {
+            final MediaListImpl sheetMedia = sheet.getMedia();
+            if (sheetMedia != null && sheetMedia.getLength() > 0) {
+                if (!isActive(element, sheetMedia)) {
+                    continue;
+                }
+            }
+
             if (matchingRules.isEmpty()) {
                 matchingRules = selects(sheet.getRuleIndex(), element, elementName, mouseOver, classes);
             } else {
@@ -167,8 +174,8 @@ public class StyleSheetAggregator {
             case ELEMENT_NODE_SELECTOR:
                 final ElementSelector es = (ElementSelector) selector;
                 final String name = es.getLocalNameLowerCase();
-                if (name == null || element != null &&
-                        name.equals(element.getNodeName().toLowerCase())) {
+                if (name == null || (element != null &&
+                        name.equals(element.getNodeName().toLowerCase()))) {
                     final List<Condition> conditions = es.getConditions();
                     if (conditions != null) {
                         for (final Condition condition : conditions) {
@@ -477,6 +484,9 @@ public class StyleSheetAggregator {
             case "placeholder":
                 return element.hasAttribute("placeholder");
 
+            case "placeholder-shown":
+                return element instanceof HTMLInputElement && Strings.isNotBlank(((HTMLInputElement) element).getPlaceholder());
+
             case "read-only":
                 return element.hasAttribute("readonly");
 
@@ -502,6 +512,29 @@ public class StyleSheetAggregator {
                 if (element instanceof HTMLInputElement) {
                     return ((HTMLInputElementImpl) element).isFocusable();
                 }
+                break;
+
+            case "focus-within":
+                if (element instanceof HTMLInputElement && ((HTMLInputElementImpl) element).isFocusable()) {
+                    return true;
+                }
+                final HTMLCollection descendants = element.getElementsByTagName("*");
+                for (int i = 0; i < descendants.getLength(); i++) {
+                    final Node desc = descendants.item(i);
+                    if (desc instanceof HTMLInputElement && ((HTMLInputElementImpl) desc).isFocusable()) {
+                        return true;
+                    }
+                }
+                return false;
+
+            case "focus-visible":
+                if (element instanceof HTMLInputElement) {
+                    return ((HTMLInputElementImpl) element).isFocusable() && !((HTMLInputElement) element).isReadOnly();
+                }
+                if (element instanceof HTMLTextAreaElement) {
+                    return ((HTMLTextAreaElementImpl) element).isFocusable() && !((HTMLTextAreaElement) element).isReadOnly();
+                }
+                break;
 
             case "checked":
                 if (element instanceof HTMLInputElement) {
@@ -879,10 +912,6 @@ public class StyleSheetAggregator {
                                 || NTH_COMPLEX.matcher(arg).matches();
                     }
 
-                    if ("placeholder-shown".equals(value)) {
-                        return true;
-                    }
-
                     return CSS4_PSEUDO_CLASSES.contains(value);
                 default:
                     return true;
@@ -900,7 +929,7 @@ public class StyleSheetAggregator {
      * @return a boolean.
      */
     public static boolean isActive(final Window window, final MediaListImpl mediaList) {
-        if (mediaList.getLength() == 0) {
+        if (mediaList == null || mediaList.getLength() == 0) {
             return true;
         }
 
@@ -925,8 +954,12 @@ public class StyleSheetAggregator {
 
     private static boolean isActive(final Window window, final MediaQuery mediaQuery) {
         final String mediaType = mediaQuery.getMedia();
-        if ("screen".equalsIgnoreCase(mediaType) || "all".equalsIgnoreCase(mediaType) || "print".equalsIgnoreCase(mediaType)) {
-
+        // Implicit "all" (no media type specified) should always be active
+        if (mediaType == null || mediaType.isEmpty() || ("all".equalsIgnoreCase(mediaType) && mediaQuery.getProperties().isEmpty())) {
+            return true;
+        }
+        
+        if ("screen".equalsIgnoreCase(mediaType)) {
             for (final Property property : mediaQuery.getProperties()) {
                 int val = -1;
                 if(property.getValue() == null) return "resolution".equals(property.getName()) || "orientation".equals(property.getName());
@@ -1036,9 +1069,124 @@ public class StyleSheetAggregator {
                     default:
                 }
             }
+            return true;
         }
+        
+        // "all" media type with properties should be evaluated
+        if ("all".equalsIgnoreCase(mediaType)) {
+            for (final Property property : mediaQuery.getProperties()) {
+                int val = -1;
+                if(property.getValue() == null) return "resolution".equals(property.getName()) || "orientation".equals(property.getName());
+                final String value = property.getValue().getCssText();
+                switch (property.getName()) {
+                    case "max-width":
+                        if (HtmlValues.isUnits(value)) {
+                            val = HtmlValues.getPixelSize(value, null, window, -1);
+                        }
+                        if (val == -1 || val < window.getInnerWidth()) {
+                            return false;
+                        }
+                        break;
+                    case "max-height":
+                        if (HtmlValues.isUnits(value)) {
+                            val = HtmlValues.getPixelSize(value, null, window, -1);
+                        }
+                        if (val == -1 || val < window.getInnerHeight()) {
+                            return false;
+                        }
+                        break;
 
-        return !mediaQuery.getProperties().isEmpty() || !"print".equalsIgnoreCase(mediaType);
+                    case "min-width":
+                        if (HtmlValues.isUnits(value)) {
+                            val = HtmlValues.getPixelSize(value, null, window, -1);
+                        }
+                        if (val == -1 || val > window.getInnerWidth()) {
+                            return false;
+                        }
+                        break;
+
+                    case "min-height":
+                        if (HtmlValues.isUnits(value)) {
+                            val = HtmlValues.getPixelSize(value, null, window, -1);
+                        }
+                        if (val == -1 || val > window.getInnerHeight()) {
+                            return false;
+                        }
+                        break;
+
+                    case "max-device-width":
+                        if (HtmlValues.isUnits(value)) {
+                            val = HtmlValues.getPixelSize(value, null, window, -1);
+                        }
+                        if (val == -1 || val < window.getScreen().getWidth()) {
+                            return false;
+                        }
+                        break;
+                    case "max-device-height":
+                        if (HtmlValues.isUnits(value)) {
+                            val = HtmlValues.getPixelSize(value, null, window, -1);
+                        }
+                        if (val == -1 || val < window.getScreen().getHeight()) {
+                            return false;
+                        }
+                        break;
+
+                    case "min-device-width":
+                        if (HtmlValues.isUnits(value)) {
+                            val = HtmlValues.getPixelSize(value, null, window, -1);
+                        }
+                        if (val == -1 || val > window.getScreen().getWidth()) {
+                            return false;
+                        }
+                        break;
+                    case "min-device-height":
+                        if (HtmlValues.isUnits(value)) {
+                            val = HtmlValues.getPixelSize(value, null, window, -1);
+                        }
+                        if (val == -1 || val > window.getScreen().getHeight()) {
+                            return false;
+                        }
+                        break;
+                    case "resolution":
+                        val = HtmlValues.resolutionValue(property.getValue());
+                        if (val == -1 || Math.round(val) != window.getScreen().getPixelDepth()) {
+                            return false;
+                        }
+                        break;
+                    case "max-resolution":
+                        val = HtmlValues.resolutionValue(property.getValue());
+                        if (val == -1 || val < window.getScreen().getPixelDepth()) {
+                            return false;
+                        }
+                        break;
+
+                    case "min-resolution":
+                        val = HtmlValues.resolutionValue(property.getValue());
+                        if (val == -1 || val > window.getScreen().getPixelDepth()) {
+                            return false;
+                        }
+                        break;
+
+                    case "orientation":
+                        if ("portrait".equals(value)) {
+                            if (window.getInnerWidth() > window.getInnerHeight()) {
+                                return false;
+                            }
+                        } else if ("landscape".equals(value)) {
+                            if (window.getInnerWidth() < window.getInnerHeight()) {
+                                return false;
+                            }
+                        } else {
+                            return false;
+                        }
+                        break;
+                    default:
+                }
+            }
+            return true;
+        }
+        
+        return false;
     }
 
     private boolean isEmpty(final HTMLElement element) {
@@ -1143,7 +1291,9 @@ public class StyleSheetAggregator {
                 }
             } else if (rule instanceof CSSMediaRuleImpl mediaRule) {
                 final MediaListImpl mediaList = mediaRule.getMediaList();
-                if (mediaList.getLength() == 0 && index.getMediaList().getLength() == 0) {
+                // If media rule has no media type, add to current index
+                // Otherwise, create a child index with the media type
+                if (mediaList.getLength() == 0) {
                     index(index, mediaRule.getCssRules());
                 } else {
                     index(index.addMedia(mediaList), mediaRule.getCssRules());
@@ -1154,7 +1304,10 @@ public class StyleSheetAggregator {
                     final HTMLDocumentImpl doc = getDoc();
                     final URI uri = Urls.createURI(doc.getBaseURI(), importRule.getHref());
                     final CSSStyleSheetImpl sheet = CSSUtilities.parseCssExternal(doc.getHtmlRendererConfig(), uri, doc.getBaseURI(), null, false);
-                    if (mediaList.getLength() == 0 && index.getMediaList().getLength() == 0) {
+                    
+                    // If import has no media type (empty media list or empty media text), add to current index
+                    // Otherwise, create a child index with the media type
+                    if (mediaList.getLength() == 0 || mediaList.getMediaText().isEmpty()) {
                         index(index, sheet.getCssRules());
                     } else {
                         index(index.addMedia(mediaList), sheet.getCssRules());

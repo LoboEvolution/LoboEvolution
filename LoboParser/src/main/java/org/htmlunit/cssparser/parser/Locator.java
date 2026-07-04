@@ -103,10 +103,9 @@ public class Locator implements Serializable {
         if (this == obj) {
             return true;
         }
-        if (!(obj instanceof Locator)) {
+        if (!(obj instanceof Locator l)) {
             return false;
         }
-        final Locator l = (Locator) obj;
         return (getColumnNumber() == l.getColumnNumber())
             && (getLineNumber() == l.getLineNumber())
             && ParserUtils.equals(getUri(), l.getUri());

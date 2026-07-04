@@ -62,7 +62,8 @@ public class LoboWebDriver {
             final HtmlRendererConfig config = new LocalHtmlRendererConfig();
             final UserAgentContext ucontext = new UserAgentContext(config, true);
             final HtmlPanel panel = new HtmlPanel();
-            panel.setPreferredSize(new Dimension(800, 400));
+            panel.setPreferredSize(new Dimension(1600, 900));
+            panel.setSize(1600, 900);
             final HtmlRendererContext rendererContext = new LocalHtmlRendererContext(panel, ucontext);
             ucontext.setUserAgentEnabled(true);
             doc = new HTMLDocumentImpl(ucontext, rendererContext, config, wis, url);
@@ -85,7 +86,8 @@ public class LoboWebDriver {
             final HtmlRendererConfig config = new LocalHtmlRendererConfig();
             final UserAgentContext ucontext = new UserAgentContext(config, true);
             final HtmlPanel panel = new HtmlPanel();
-            panel.setPreferredSize(new Dimension(800, 400));
+            panel.setPreferredSize(new Dimension(1600, 900));
+            panel.setSize(1600, 900);
             final HtmlRendererContext rendererContext = new LocalHtmlRendererContext(panel, ucontext);
             ucontext.setUserAgentEnabled(true);
             String local = "file://" + System.getProperty("user.dir").replace("\\", "/") + "/";

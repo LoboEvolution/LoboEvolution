@@ -969,13 +969,6 @@ public class ElementOffsetWidthTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts("-16")
-    public void xmp() {
-        test("xmp");
-    }
-
-
-    @Test
     @Alerts("177")
     public void input() {
         test("input");

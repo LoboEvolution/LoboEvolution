@@ -1104,33 +1104,30 @@ public class ElementClientWidthTest extends LoboUnitTest {
     }
 
     private static String test(final String tagName) {
-        switch (tagName) {
-            case "basefont":
-                return headElementClosesItself(tagName);
-            case "script":
-                return "<html><head>\n"
-                        + "<script>\n"
-                        + "function test() {\n"
-                        + "  var e = document.getElementById('outer');\n"
-                        + "  alert(" + VALUE_ + ");\n"
-                        + "}\n"
-                        + "</script>\n"
-                        + "</head><body onload='test()'>\n"
-                        + "<script id='outer'>//<script>\n"
-                        + "</script>\n"
-                        + "</body></html>";
-            default:
-                return "<html><head>\n"
-                        + "<script>\n"
-                        + "function test() {\n"
-                        + "  var e = document.getElementById('outer');\n"
-                        + "  alert(" + VALUE_ + ");\n"
-                        + "}\n"
-                        + "</script>\n"
-                        + "</head><body onload='test()'>\n"
-                        + "<" + tagName + " id='outer'><" + tagName + "></" + tagName + "></" + tagName + ">\n"
-                        + "</body></html>";
-        }
+        return switch (tagName) {
+            case "basefont" -> headElementClosesItself(tagName);
+            case "script" -> "<html><head>\n"
+                    + "<script>\n"
+                    + "function test() {\n"
+                    + "  var e = document.getElementById('outer');\n"
+                    + "  alert(" + VALUE_ + ");\n"
+                    + "}\n"
+                    + "</script>\n"
+                    + "</head><body onload='test()'>\n"
+                    + "<script id='outer'>//<script>\n"
+                    + "</script>\n"
+                    + "</body></html>";
+            default -> "<html><head>\n"
+                    + "<script>\n"
+                    + "function test() {\n"
+                    + "  var e = document.getElementById('outer');\n"
+                    + "  alert(" + VALUE_ + ");\n"
+                    + "}\n"
+                    + "</script>\n"
+                    + "</head><body onload='test()'>\n"
+                    + "<" + tagName + " id='outer'><" + tagName + "></" + tagName + "></" + tagName + ">\n"
+                    + "</body></html>";
+        };
     }
 
     private static String testInput(final String type) {

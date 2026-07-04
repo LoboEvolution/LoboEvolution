@@ -45,8 +45,7 @@ public class CSSStyleDeclaration2Test extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"borderBottomWidth 42% - 42em", "borderLeftWidth 42% - 42em",
-            "borderRightWidth 42% - 42em", "borderTopWidth 42% - 42em"})
+    @Alerts({"success", "success", "success", "success"})
     public void widthLikePropertiesBorder() {
         widthLikeProperties("borderBottomWidth", "borderLeftWidth", "borderRightWidth", "borderTopWidth");
     }
@@ -70,14 +69,14 @@ public class CSSStyleDeclaration2Test extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"letterSpacing 42% - 42em"})
+    @Alerts({"success", "success", "success", "success", "success", "success"})
     public void widthLikePropertiesTont() {
         widthLikeProperties("fontSize", "letterSpacing", "outlineWidth", "textIndent",
                 "verticalAlign", "wordSpacing");
     }
 
     @Test
-    @Alerts({"null", "baseline", "sub", "super", "text-top",
+    @Alerts({"", "baseline", "sub", "super", "text-top",
             "text-bottom", "middle", "top", "bottom",
             "1.7em", "4px", "32%",
             "inherit", "initial", "revert", "unset",

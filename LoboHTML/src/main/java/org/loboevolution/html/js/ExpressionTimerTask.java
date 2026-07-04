@@ -67,7 +67,7 @@ class ExpressionTimerTask extends WeakWindowTask {
 		try {
 			final WindowImpl window = this.getWindow();
 			if (window == null) {
-				log.info("actionPerformed(): WindowImpl is no longer available.");
+				log.info("ExpressionTimerTask actionPerformed(): WindowImpl is no longer available.");
 				return;
 			}
 			if (this.removeTask) {

@@ -87,7 +87,7 @@ public interface HTMLStyleElement extends HTMLElement {
 	 *
 	 * @return a {@link CSSStyleSheet} object.
 	 */
-	CSSStyleSheet getStyleSheet();
+	CSSStyleSheet getSheet();
 
 
 }

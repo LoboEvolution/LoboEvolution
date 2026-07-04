@@ -343,7 +343,7 @@ public class LocalHtmlRendererContext implements HtmlRendererContext{
         if (bpanel != null && bpanel.getWidth() > 0) {
             return bpanel.getWidth();
         }
-        return 800;
+        return 1600;
     }
 
     /** {@inheritDoc} */
@@ -353,7 +353,7 @@ public class LocalHtmlRendererContext implements HtmlRendererContext{
         if (bpanel != null && bpanel.getHeight() > 0) {
             return bpanel.getHeight();
         }
-        return 500;
+        return 900;
     }
 
     /** {@inheritDoc} */

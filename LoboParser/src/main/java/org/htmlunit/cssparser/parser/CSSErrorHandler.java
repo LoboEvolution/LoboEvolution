@@ -15,9 +15,9 @@
 package org.htmlunit.cssparser.parser;
 
 /**
-  * Interface for CSS parser error handlers.
-  * @author Ronald Brill
-  */
+ * Interface for CSS parser error handlers.
+ * @author Ronald Brill
+ */
 public interface CSSErrorHandler {
 
     /**

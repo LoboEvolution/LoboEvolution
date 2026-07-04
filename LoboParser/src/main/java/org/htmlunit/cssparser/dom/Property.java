@@ -111,10 +111,9 @@ public class Property extends AbstractLocatable implements Serializable {
         if (this == obj) {
             return true;
         }
-        if (!(obj instanceof Property)) {
+        if (!(obj instanceof Property p)) {
             return false;
         }
-        final Property p = (Property) obj;
         return super.equals(obj)
             && (important_ == p.important_)
             && ParserUtils.equals(name_, p.name_)

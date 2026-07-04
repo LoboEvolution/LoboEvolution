@@ -85,6 +85,7 @@ public class ElementFactory {
 
 		builders.put(HTMLTag.SPAN, new SpanBuilder());
 		builders.put(HTMLTag.SCRIPT, new ScriptBuilder());
+		builders.put(HTMLTag.PARAM, new ParamBuilder());
 		builders.put(HTMLTag.IMG, new ImgBuilder());
 		builders.put(HTMLTag.STYLE, new StyleBuilder());
 		builders.put(HTMLTag.A, new AnchorBuilder());
@@ -149,9 +150,11 @@ public class ElementFactory {
 
 		builders.put(HTMLTag.FIGURE, new FigureBuilder());
 		builders.put(HTMLTag.FIELDSET, new FieldsetBuilder());
+		builders.put(HTMLTag.PLAINTEXT, new PlainTextBuilder());
 		builders.put(HTMLTag.CANVAS, new CanvasBuilder());
 
-		builders.put(HTMLTag.SVG, new SVGBuilder());
+		builders.put(HTMLTag.LISTING, new ListingBuilder());
+	builders.put(HTMLTag.SVG, new SVGBuilder());
 		builders.put(HTMLTag.RECT, new SVGRectBuilder());
 		builders.put(HTMLTag.CIRCLE, new SVGCircleBuilder());
 		builders.put(HTMLTag.ELLIPSE, new SVGEllipseBuilder());

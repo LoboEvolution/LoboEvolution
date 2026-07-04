@@ -252,9 +252,11 @@ public class RBlockScroll {
                 }
             }
 
+            if (bodyLayout.getY() != prevY) {
+                rBlock.repaint();
+            }
             resetScrollBars(null);
             rBlock.updateWidgetBounds();
-            rBlock.repaint();
             return bodyLayout.getY() != prevY;
         }
         return false;
@@ -275,9 +277,11 @@ public class RBlockScroll {
                 bodyLayout.setX((int) newX + 10);
             }
 
+            if (bodyLayout.getX() != prevX) {
+                rBlock.repaint();
+            }
             resetScrollBars(null);
             rBlock.updateWidgetBounds();
-            rBlock.repaint();
             return bodyLayout.getX() != prevX;
         }
         return false;

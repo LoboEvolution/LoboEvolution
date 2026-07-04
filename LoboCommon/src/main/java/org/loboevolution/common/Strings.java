@@ -167,15 +167,29 @@ public final class Strings {
 	}
 
 	public static boolean containsIgnoreCase(final String text, final String text1) {
-		return text != null && text1 != null && (text.contains(text1.toLowerCase()) || text.contains(text1.toUpperCase()));
+		if (text == null || text1 == null) {
+			return false;
+		}
+		final int len = text1.length();
+		if (len == 0) {
+			return true;
+		}
+		for (int i = 0; i <= text.length() - len; i++) {
+			if (text.regionMatches(true, i, text1, 0, len)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public static boolean startsWithIgnoreCase(final String text, final String text1) {
-		return text != null && text1 != null && (text.startsWith(text1.toLowerCase()) || text.startsWith(text1.toUpperCase()));
+		return text != null && text1 != null && text.length() >= text1.length()
+				&& text.regionMatches(true, 0, text1, 0, text1.length());
 	}
 
 	public static boolean endsWithIgnoreCase(final String text, final String text1) {
-		return text != null && text1 != null && (text.endsWith(text1.toLowerCase()) || text.endsWith(text1.toUpperCase()));
+		return text != null && text1 != null && text.length() >= text1.length()
+				&& text.regionMatches(true, text.length() - text1.length(), text1, 0, text1.length());
 	}
 
 	public static String[] splitIgnoreCase(final String text, final String text1) {

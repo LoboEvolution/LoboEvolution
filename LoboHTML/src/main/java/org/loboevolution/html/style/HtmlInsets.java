@@ -40,19 +40,19 @@ import java.awt.*;
 @Data
 @Slf4j
 public class HtmlInsets {
-	
+
 	/** Constant TYPE_UNDEFINED=0 */
 	public static final int TYPE_UNDEFINED = 0;
-	
+
 	/** Constant TYPE_PIXELS=1 */
 	public static final int TYPE_PIXELS = 1;
-	
+
 	/** Constant TYPE_AUTO=2 */
 	public static final int TYPE_AUTO = 2;
 
 	/** Constant TYPE_PERCENT=3 */
 	public static final int TYPE_PERCENT = 3;
-	
+
 	private int top;
 
 	private int bottom;
@@ -137,7 +137,7 @@ public class HtmlInsets {
 		if (Strings.isNotBlank(sizeText)) {
 			if ("auto".equalsIgnoreCase(sizeText)) {
 				type = HtmlInsets.TYPE_AUTO;
-			} else if (sizeText.endsWith("%")) {
+			} else if (sizeText.toLowerCase().endsWith("%")) {
 				type = HtmlInsets.TYPE_PERCENT;
 				try {
 					value = Integer.parseInt(sizeText.substring(0, sizeText.length() - 1));
@@ -154,13 +154,13 @@ public class HtmlInsets {
 	}
 
 	private int getInsetPixels(final int value, final int type, final int availSize, final int autoValue) {
-        return switch (type) {
-            case TYPE_PIXELS -> value;
-            case TYPE_UNDEFINED -> 0;
-            case TYPE_AUTO -> autoValue;
-            case TYPE_PERCENT -> availSize * value / 100;
-            default -> throw new IllegalStateException();
-        };
+		return switch (type) {
+			case TYPE_PIXELS -> value;
+			case TYPE_UNDEFINED -> 0;
+			case TYPE_AUTO -> autoValue;
+			case TYPE_PERCENT -> availSize * value / 100;
+			default -> throw new IllegalStateException();
+		};
 	}
 
 	/** {@inheritDoc} */

@@ -157,10 +157,9 @@ public class MediaListImpl extends AbstractLocatable implements Serializable {
         if (this == obj) {
             return true;
         }
-        if (!(obj instanceof MediaListImpl)) {
+        if (!(obj instanceof MediaListImpl ml)) {
             return false;
         }
-        final MediaListImpl ml = (MediaListImpl) obj;
         return super.equals(obj) && equalsMedia(ml);
     }
 

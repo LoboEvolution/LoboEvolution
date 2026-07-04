@@ -35,11 +35,16 @@ import org.htmlunit.cssparser.dom.CSSCharsetRuleImpl;
 import org.htmlunit.cssparser.dom.CSSMediaRuleImpl;
 import org.loboevolution.css.CSSRule;
 import org.loboevolution.css.CSSStyleSheet;
+import org.loboevolution.js.JavaClassWrapperFactory;
 
 /**
  * <p>CSSRuleImpl class.</p>
  */
 public class CSSRuleImpl implements CSSRule {
+
+    static {
+        JavaClassWrapperFactory.getInstance().registerCustomClassName(CSSRuleImpl.class, "CSSRule");
+    }
 
     private final AbstractCSSRuleImpl abstractCSSRule;
 
@@ -58,6 +63,24 @@ public class CSSRuleImpl implements CSSRule {
     public CSSRule getParentRule() {
         final AbstractCSSRuleImpl parent = abstractCSSRule.getParentRule();
         if (parent != null) {
+            if (parent instanceof org.htmlunit.cssparser.dom.CSSMediaRuleImpl) {
+                return new org.loboevolution.html.js.css.CSSMediaRuleImpl(parent);
+            }
+            if (parent instanceof org.htmlunit.cssparser.dom.CSSImportRuleImpl) {
+                return new org.loboevolution.html.js.css.CSSImportRuleImpl((org.htmlunit.cssparser.dom.CSSImportRuleImpl) parent);
+            }
+            if (parent instanceof org.htmlunit.cssparser.dom.CSSFontFaceRuleImpl) {
+                return new org.loboevolution.html.js.css.CSSFontFaceRuleImpl((org.htmlunit.cssparser.dom.CSSFontFaceRuleImpl) parent);
+            }
+            if (parent instanceof org.htmlunit.cssparser.dom.CSSPageRuleImpl) {
+                return new org.loboevolution.html.js.css.CSSPageRuleImpl((org.htmlunit.cssparser.dom.CSSPageRuleImpl) parent);
+            }
+            if (parent instanceof org.htmlunit.cssparser.dom.CSSCharsetRuleImpl) {
+                return new org.loboevolution.html.js.css.CSSCharsetRuleImpl(parent);
+            }
+            if (parent instanceof org.htmlunit.cssparser.dom.CSSStyleRuleImpl) {
+                return new org.loboevolution.html.js.css.CSSStyleRuleImpl(parent);
+            }
             return new CSSRuleImpl(parent);
         }
         return null;

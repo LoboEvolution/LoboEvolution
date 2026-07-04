@@ -46,6 +46,12 @@ public interface CSSMediaRule extends CSSRule {
     CSSRuleList getCssRules();
 
     /**
+     * <p>getConditionText.</p>
+     * @return the media text string.
+     */
+    String getConditionText();
+
+    /**
      * <p>insertRule.</p>
      * Adds a new rule to the end of this media rule's CSS rule list.
      * @param rule a {@link java.lang.String} object containing the CSS rule text to insert.

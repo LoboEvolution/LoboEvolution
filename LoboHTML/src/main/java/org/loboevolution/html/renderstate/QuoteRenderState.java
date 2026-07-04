@@ -64,4 +64,10 @@ public class QuoteRenderState extends AbstractMarginRenderState {
         insets.setRightType(HtmlInsets.TYPE_PIXELS);
         return insets;
     }
+
+    /** {@inheritDoc} */
+    @Override
+    public int getDefaultDisplay() {
+        return element.getNodeName().equals("Q") ? DISPLAY_INLINE : DISPLAY_BLOCK;
+    }
 }

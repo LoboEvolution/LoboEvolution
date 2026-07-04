@@ -25,6 +25,8 @@
  */
 package org.loboevolution.html.renderstate;
 
+import org.loboevolution.common.Strings;
+import org.loboevolution.css.CSSStyleDeclaration;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.style.BorderInsets;
 import org.loboevolution.html.style.HtmlInsets;
@@ -61,6 +63,16 @@ public class IFrameRenderState extends StyleSheetRenderState {
 			}
 			final HTMLElementImpl element = this.element;
 			if (element != null) {
+				final CSSStyleDeclaration props = getCssProperties();
+				final boolean hasCssBorder = props != null && (
+					Strings.isNotBlank(props.getBorderTopWidth()) ||
+					Strings.isNotBlank(props.getBorderRightWidth()) ||
+					Strings.isNotBlank(props.getBorderBottomWidth()) ||
+					Strings.isNotBlank(props.getBorderLeftWidth()));
+				if (hasCssBorder) {
+					this.borderInfo = binfo;
+					return binfo;
+				}
 				String border = element.getAttribute("frameborder");
 				if (border != null) {
 					border = border.trim();

@@ -15,7 +15,6 @@
 package org.htmlunit.cssparser.dom;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.htmlunit.cssparser.util.ParserUtils;
@@ -67,9 +66,7 @@ public class CSSStyleSheetListImpl {
     public CSSStyleSheetImpl merge() {
         final CSSStyleSheetImpl merged = new CSSStyleSheetImpl();
         final CSSRuleListImpl cssRuleList = new CSSRuleListImpl();
-        final Iterator<CSSStyleSheetImpl> it = getCSSStyleSheets().iterator();
-        while (it.hasNext()) {
-            final CSSStyleSheetImpl cssStyleSheet = it.next();
+        for (final CSSStyleSheetImpl cssStyleSheet : getCSSStyleSheets()) {
             final CSSMediaRuleImpl cssMediaRule = new CSSMediaRuleImpl(merged, null, cssStyleSheet.getMedia());
             cssMediaRule.setRuleList(cssStyleSheet.getCssRules());
             cssRuleList.add(cssMediaRule);
@@ -85,10 +82,9 @@ public class CSSStyleSheetListImpl {
         if (this == obj) {
             return true;
         }
-        if (!(obj instanceof CSSStyleSheetListImpl)) {
+        if (!(obj instanceof CSSStyleSheetListImpl ssl)) {
             return false;
         }
-        final CSSStyleSheetListImpl ssl = (CSSStyleSheetListImpl) obj;
         return equalsStyleSheets(ssl);
     }
 

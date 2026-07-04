@@ -732,6 +732,7 @@ public class HTMLInputElementImpl extends HTMLBasicInputElement implements HTMLI
         if ("button".equals(type) ||
                 "password".equals(type) ||
                 "reset".equals(type) ||
+                "select".equals(type) ||
                 "submit".equals(type) ||
                 "text".equals(type)) {
             clientWidth = clientWidth + 4;
@@ -760,6 +761,7 @@ public class HTMLInputElementImpl extends HTMLBasicInputElement implements HTMLI
                 case "month":
                 case "time":
                 case "password":
+                case "select":
                     clientWidth = 173;
                     break;
                 case "radio":
@@ -810,6 +812,7 @@ public class HTMLInputElementImpl extends HTMLBasicInputElement implements HTMLI
                 case "button":
                 case "submit":
                 case "password":
+                case "select":
                     clientHeight = 17;
                     break;
                 default:
@@ -817,6 +820,11 @@ public class HTMLInputElementImpl extends HTMLBasicInputElement implements HTMLI
             }
         }
         return clientHeight;
+    }
+
+    @Override
+    public Integer getOffsetHeight() {
+        return getClientHeight();
     }
 
     /**

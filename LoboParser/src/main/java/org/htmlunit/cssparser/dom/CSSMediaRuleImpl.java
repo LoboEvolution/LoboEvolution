@@ -195,10 +195,9 @@ public class CSSMediaRuleImpl extends AbstractCSSRuleImpl {
         if (this == obj) {
             return true;
         }
-        if (!(obj instanceof CSSMediaRuleImpl)) {
+        if (!(obj instanceof CSSMediaRuleImpl cmr)) {
             return false;
         }
-        final CSSMediaRuleImpl cmr = (CSSMediaRuleImpl) obj;
         return super.equals(obj)
             && ParserUtils.equals(getMediaList(), cmr.getMediaList())
             && ParserUtils.equals(getCssRules(), cmr.getCssRules());

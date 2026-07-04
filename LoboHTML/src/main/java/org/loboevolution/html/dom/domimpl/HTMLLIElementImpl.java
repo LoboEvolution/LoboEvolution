@@ -48,6 +48,12 @@ public class HTMLLIElementImpl extends HTMLElementImpl implements HTMLLIElement 
 
 	/** {@inheritDoc} */
 	@Override
+	protected boolean isBlockForInnerText() {
+		return true;
+	}
+
+	/** {@inheritDoc} */
+	@Override
 	protected RenderState createRenderState(final RenderState prevRenderState) {
 		return new DisplayRenderState(prevRenderState, this, RenderState.DISPLAY_LIST_ITEM);
 	}
@@ -78,6 +84,13 @@ public class HTMLLIElementImpl extends HTMLElementImpl implements HTMLLIElement 
 		setAttribute("value", String.valueOf(value));
 	}
 	
+	/** {@inheritDoc} */
+	@Override
+	public int getClientHeight() {
+		final int clientHeight = super.getClientHeight();
+		return clientHeight == 0 ? 18 : clientHeight;
+	}
+
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

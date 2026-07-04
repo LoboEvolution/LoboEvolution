@@ -34,6 +34,8 @@ import org.mozilla.javascript.ScriptableObject;
 
 import java.io.Serial;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>JavaObjectWrapper class.</p>
@@ -43,13 +45,16 @@ public class JavaObjectWrapper extends ScriptableObject {
 
 	/** The Constant serialVersionUID. */
 	@Serial
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
 	/** The delegate. */
 	private final Object delegate;
 
 	/** The class wrapper. */
 	private final JavaClassWrapper classWrapper;
+
+	/** The custom class name for JavaScript. */
+	private final String customClassName;
 
 
 	/**
@@ -59,11 +64,23 @@ public class JavaObjectWrapper extends ScriptableObject {
 	 * @param delegate     the delegate
 	 */
 	public JavaObjectWrapper(final JavaClassWrapper classWrapper, final Object delegate) {
+		this(classWrapper, delegate, null);
+	}
+
+	/**
+	 * Instantiates a new java object wrapper with a custom class name.
+	 *
+	 * @param classWrapper the class wrapper
+	 * @param delegate     the delegate
+	 * @param customClassName the custom JavaScript class name
+	 */
+	public JavaObjectWrapper(final JavaClassWrapper classWrapper, final Object delegate, final String customClassName) {
 		if (delegate == null) {
 			throw new IllegalArgumentException("Argument delegate cannot be null.");
 		}
 		this.classWrapper = classWrapper;
 		this.delegate = delegate;
+		this.customClassName = customClassName;
 	}
 
 	/**
@@ -80,7 +97,7 @@ public class JavaObjectWrapper extends ScriptableObject {
 	/** {@inheritDoc} */
 	@Override
 	public String getClassName() {
-		return this.classWrapper.getClassName();
+		return this.customClassName != null ? this.customClassName : this.classWrapper.getClassName();
 	}
 
 	/** {@inheritDoc} */
@@ -144,6 +161,24 @@ public class JavaObjectWrapper extends ScriptableObject {
 				if (result != Scriptable.NOT_FOUND) {
 					return result;
 				}
+				if (name.indexOf('-') != -1) {
+					final String camelName = kebabToCamel(name);
+					final PropertyInfo camelProp = this.classWrapper.getProperty(camelName);
+					if (camelProp != null) {
+						final Method getter = camelProp.getGetter();
+						if (getter != null) {
+							try {
+								final Object javaObject = this.getJavaObject();
+								if (javaObject != null) {
+									final Object val = getter.invoke(javaObject, (Object[]) null);
+									return JavaScript.getInstance().getJavascriptObject(val, start.getParentScope());
+								}
+							} catch (final Exception err) {
+								log.error(err.getMessage(), err);
+							}
+						}
+					}
+				}
 				final PropertyInfo ni = this.classWrapper.getNameIndexer();
 				if (ni != null) {
 					final Method getter = ni.getGetter();
@@ -198,7 +233,7 @@ public class JavaObjectWrapper extends ScriptableObject {
 		if (value instanceof org.mozilla.javascript.Undefined) {
 			super.put(name, start, value);
 		} else {
-			final PropertyInfo pinfo = this.classWrapper.getProperty(name);
+			PropertyInfo pinfo = this.classWrapper.getProperty(name);
 			if (pinfo != null) {
 				final Method setter = pinfo.getSetter();
 				if (setter != null) {
@@ -211,6 +246,23 @@ public class JavaObjectWrapper extends ScriptableObject {
 					}
 				}
 			} else {
+				if (name.indexOf('-') != -1) {
+					final String camelName = kebabToCamel(name);
+					pinfo = this.classWrapper.getProperty(camelName);
+					if (pinfo != null) {
+						final Method setter = pinfo.getSetter();
+						if (setter != null) {
+							try {
+								final Object actualValue;
+								actualValue = JavaScript.getInstance().getJavaObject(value, pinfo.getPropertyType());
+								setter.invoke(this.getJavaObject(), actualValue);
+							} catch (final Exception err) {
+								log.error(err.getMessage(), err);
+							}
+						}
+						return;
+					}
+				}
 				final PropertyInfo ni = this.classWrapper.getNameIndexer();
 				if (ni != null) {
 					final Method setter = ni.getSetter();
@@ -235,6 +287,94 @@ public class JavaObjectWrapper extends ScriptableObject {
 
 	/** {@inheritDoc} */
 	@Override
+	public boolean has(final int index, final Scriptable start) {
+		if (this.classWrapper.getIntegerIndexer() != null) {
+			final PropertyInfo lenProp = this.classWrapper.getProperty("length");
+			if (lenProp != null) {
+				final Method lenGetter = lenProp.getGetter();
+				if (lenGetter != null) {
+					try {
+						final Object lenVal = lenGetter.invoke(this.getJavaObject());
+						if (lenVal instanceof Number && index >= 0 && index < ((Number) lenVal).intValue()) {
+							return true;
+						}
+					} catch (final Exception ignored) {
+						// ignore
+					}
+				}
+			}
+		}
+		return super.has(index, start);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public boolean has(final String name, final Scriptable start) {
+		if (this.classWrapper.getProperty(name) != null || this.classWrapper.getFunction(name) != null) {
+			return true;
+		}
+		if (name.indexOf('-') != -1 && this.classWrapper.getProperty(kebabToCamel(name)) != null) {
+			return true;
+		}
+		if (this.classWrapper.getNameIndexer() != null) {
+			final Method getter = this.classWrapper.getNameIndexer().getGetter();
+			if (getter != null) {
+				try {
+					final Object val = getter.invoke(this.getJavaObject(), name);
+					if (val != null) {
+						return true;
+					}
+				} catch (final Exception ignored) {
+				}
+			}
+		}
+		return super.has(name, start);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Object[] getIds() {
+		final List<Object> ids = new ArrayList<>();
+		for (final Object id : super.getIds()) {
+			ids.add(id);
+		}
+		final PropertyInfo intIndexer = this.classWrapper.getIntegerIndexer();
+		if (intIndexer != null) {
+			final PropertyInfo lenProp = this.classWrapper.getProperty("length");
+			if (lenProp != null) {
+				final Method lenGetter = lenProp.getGetter();
+				if (lenGetter != null) {
+					try {
+						final Object lenVal = lenGetter.invoke(this.getJavaObject());
+						if (lenVal instanceof Number) {
+							final int len = ((Number) lenVal).intValue();
+							for (int i = 0; i < len; i++) {
+								ids.add(i);
+							}
+						}
+					} catch (final Exception ignored) {
+						// ignore
+					}
+				}
+			}
+			ids.add("length");
+			final Method getter = intIndexer.getGetter();
+			if (getter != null) {
+				ids.add(getter.getName());
+			}
+		}
+		final PropertyInfo nameIndexer = this.classWrapper.getNameIndexer();
+		if (nameIndexer != null) {
+			final Method getter = nameIndexer.getGetter();
+			if (getter != null) {
+				ids.add(getter.getName());
+			}
+		}
+		return ids.toArray();
+	}
+
+	/** {@inheritDoc} */
+	@Override
 	public Object getDefaultValue(final Class hint) {
 		if (hint == null || String.class.equals(hint)) {
 			final Object javaObject = this.getJavaObject();
@@ -254,6 +394,21 @@ public class JavaObjectWrapper extends ScriptableObject {
 		} else {
 			return super.getDefaultValue(hint);
 		}
+	}
+
+	private static String kebabToCamel(final String name) {
+		final StringBuilder sb = new StringBuilder(name.length());
+		boolean nextUpper = false;
+		for (int i = 0; i < name.length(); i++) {
+			final char c = name.charAt(i);
+			if (c == '-') {
+				nextUpper = true;
+			} else {
+				sb.append(nextUpper ? Character.toUpperCase(c) : c);
+				nextUpper = false;
+			}
+		}
+		return sb.toString();
 	}
 
 	/** {@inheritDoc} */

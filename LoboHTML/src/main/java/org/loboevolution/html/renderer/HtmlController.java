@@ -338,7 +338,10 @@ public class HtmlController {
 	 */
 	public void onMouseScroll(final ModelNode node) {
 		if (node instanceof HTMLElementImpl uiElement) {
-            final Function f = uiElement.getOnscroll();
+			final Function f = uiElement.getOnscroll();
+			if (f == null) {
+				return;
+			}
 			final MouseEventImpl evt = new MouseEventImpl();
 			evt.initMouseEvent("scroll", false, false, null, 0, 0, 0,
 					0, 0, true, true, true, true, 0, uiElement);

@@ -208,10 +208,16 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, GlobalE
 			pseudoElement = "";
 		}
 
-		final CSSStyleDeclarationImpl style = (CSSStyleDeclarationImpl) addStyleSheetDeclarations(false, pseudoElement);
+		final CSSStyleDeclarationImpl style = (CSSStyleDeclarationImpl) addStyleSheetDeclarations(false, getTagName());
 		final CSSStyleDeclarationImpl localStyle = (CSSStyleDeclarationImpl) getStyle();
-		localStyle.merge(style);
-		this.computedStyles = new ComputedCSSStyleDeclarationImpl(this, localStyle);
+		
+		// If local style is empty, use stylesheet style directly
+		if (localStyle.getProperties().isEmpty() && !style.getProperties().isEmpty()) {
+			this.computedStyles = new ComputedCSSStyleDeclarationImpl(this, style);
+		} else {
+			localStyle.merge(style);
+			this.computedStyles = new ComputedCSSStyleDeclarationImpl(this, localStyle);
+		}
 		return this.computedStyles;
 	}
 
@@ -269,7 +275,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, GlobalE
 
 		StyleSheetRenderState renderState = (StyleSheetRenderState) getRenderState();
 		final String left = renderState.getLeft();
-		if (this instanceof HTMLBodyElement || (left != null && RenderState.POSITION_STATIC == renderState.getPosition())) {
+		if (this instanceof HTMLBodyElement) {
 			return 0;
 		}
 
@@ -279,28 +285,34 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, GlobalE
 		}
 
 		int offseLeft = HtmlValues.getPixelSize(left, getRenderState(), doc.getDefaultView(), 0);
-		int borderLeftWidth = 0;
-		int marginLeft = renderState.getMarginInsets() != null ? renderState.getMarginInsets().getLeft() : 0;
-		int paddingLeft = RenderState.POSITION_STATIC != renderState.getPosition() ? renderState.getPaddingInsets() != null ? renderState.getPaddingInsets().getLeft() : 0 : 0;
+		int marginLeft = 0;
+		int paddingLeft = 0;
 
-		Node currentElement = this;
+		// Use computed style for margin to get stylesheet styles
+		ComputedCSSStyleDeclaration style = this.getComputedStyle();
+		if (style != null) {
+			marginLeft = HtmlValues.getPixelSize(style.getMarginLeft(), getRenderState(), doc.getDefaultView(), 0);
+		}
+
+		if (RenderState.POSITION_STATIC != renderState.getPosition()) {
+			if (style != null) {
+				paddingLeft = HtmlValues.getPixelSize(style.getPaddingLeft(), getRenderState(), doc.getDefaultView(), 0);
+			}
+		}
+
+		Node currentElement = this.getParentNode();
 		while (currentElement != null) {
-			final Node parentNode = currentElement.getParentNode();
-            if (parentNode instanceof HTMLBodyElement && RenderState.POSITION_STATIC == renderState.getPosition() &&
-					RenderState.POSITION_RELATIVE == renderState.getPosition()) {
-                offseLeft += 8;
-            } else if (parentNode instanceof HTMLElement) {
-				final HTMLElementImpl parentElement = (HTMLElementImpl) parentNode;
-				final CSSStyleDeclaration css = parentElement.getCurrentStyle();
-				borderLeftWidth += HtmlValues.getPixelSize(css.getBorderLeftWidth(), getRenderState(), doc.getDefaultView(), 0);
-				marginLeft += HtmlValues.getPixelSize(css.getMarginLeft(), getRenderState(), doc.getDefaultView(), 0);
-				paddingLeft += HtmlValues.getPixelSize(css.getPaddingLeft(), getRenderState(), doc.getDefaultView(), 0);
+            if (currentElement instanceof HTMLElement) {
+				final HTMLElementImpl parentElement = (HTMLElementImpl) currentElement;
+				ComputedCSSStyleDeclaration parentComputedStyle = parentElement.getComputedStyle();
+				if (parentComputedStyle != null) {
+					marginLeft += HtmlValues.getPixelSize(parentComputedStyle.getMarginLeft(), getRenderState(), doc.getDefaultView(), 0);
+				}
 			}
 			currentElement = currentElement.getParentNode();
 		}
 
 		offseLeft += marginLeft;
-		offseLeft += borderLeftWidth;
 		offseLeft += paddingLeft;
 
 		if (offseLeft == 0 && getParentNode() instanceof HTMLBodyElement) {
@@ -316,7 +328,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, GlobalE
 
 		StyleSheetRenderState renderState = (StyleSheetRenderState) getRenderState();
 		final String top = renderState.getTop();
-		if (this instanceof HTMLBodyElement || (top != null && RenderState.POSITION_STATIC == renderState.getPosition())) {
+		if (this instanceof HTMLBodyElement || (Strings.isNotBlank(top) && RenderState.POSITION_STATIC == renderState.getPosition())) {
 			return 0;
 		}
 
@@ -330,6 +342,16 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, GlobalE
 		int marginTop = renderState.getMarginInsets() != null ? renderState.getMarginInsets().getTop() : 0;
 		int paddingTop = RenderState.POSITION_STATIC != renderState.getPosition() ? renderState.getPaddingInsets() != null ? renderState.getPaddingInsets().getTop() : 0 : 0;
 
+		if (RenderState.POSITION_STATIC == renderState.getPosition()) {
+			Node prev = getPreviousSibling();
+			while (prev != null) {
+				if (prev instanceof HTMLElementImpl) {
+					offsetTop += ((HTMLElementImpl) prev).getOffsetHeight();
+				}
+				prev = prev.getPreviousSibling();
+			}
+		}
+
 		Node currentElement = this;
 		while (currentElement != null) {
 			final Node parentNode = currentElement.getParentNode();
@@ -337,10 +359,10 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, GlobalE
 				final HTMLElementImpl parentElement = (HTMLElementImpl) parentNode;
 				final CSSStyleDeclaration css = parentElement.getCurrentStyle();
 				borderTopWidth += HtmlValues.getPixelSize(css.getBorderTopWidth(), getRenderState(), doc.getDefaultView(), 0);
+				marginTop += HtmlValues.getPixelSize(css.getMarginTop(), getRenderState(), doc.getDefaultView(), 0);
 				if(RenderState.POSITION_STATIC != renderState.getPosition()){
-					marginTop += HtmlValues.getPixelSize(css.getMarginTop(), getRenderState(), doc.getDefaultView(), 0);
+					paddingTop += HtmlValues.getPixelSize(css.getPaddingTop(), getRenderState(), doc.getDefaultView(), 0);
 				}
-				paddingTop += HtmlValues.getPixelSize(css.getPaddingTop(), getRenderState(), doc.getDefaultView(), 0);
 			}
 			currentElement = currentElement.getParentNode();
 		}
@@ -348,10 +370,6 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, GlobalE
 		offsetTop += marginTop;
 		offsetTop += borderTopWidth;
 		offsetTop += paddingTop;
-
-		if (offsetTop == 0 && getParentNode() instanceof HTMLBodyElement) {
-			return 8;
-		}
 
 		return offsetTop;
 	}
@@ -392,8 +410,6 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, GlobalE
             if (elementParent.currentStyleDeclarationState != null) {
 				return elementParent.currentStyleDeclarationState;
 			}
-
-			return elementParent.getCurrentStyle();
 		}
 		return null;
 	}
@@ -1821,7 +1837,20 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, GlobalE
 
 		final List<CSSStyleSheetImpl.SelectorEntry> matchingRules = findStyleDeclarations(elementName, classNameArray, mouseOver);
 		for (final CSSStyleSheetImpl.SelectorEntry entry : matchingRules) {
-			localStyleDeclarationState.getProperties().addAll(entry.getRule().getStyle().getProperties());
+			for (final Property prop : entry.getRule().getStyle().getProperties()) {
+				final Property existing = localStyleDeclarationState.getPropertyDeclaration(prop.getName());
+				if (existing == null) {
+					localStyleDeclarationState.getProperties().add(prop);
+				} else if (prop.isImportant() && !existing.isImportant()) {
+					localStyleDeclarationState.getProperties().remove(existing);
+					localStyleDeclarationState.getProperties().add(prop);
+				} else if (!prop.isImportant() && existing.isImportant()) {
+					continue;
+				} else {
+					localStyleDeclarationState.getProperties().remove(existing);
+					localStyleDeclarationState.getProperties().add(prop);
+				}
+			}
 		}
 		return propertyValueProcessed(localStyleDeclarationState);
 	}
@@ -1842,12 +1871,6 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, GlobalE
 			log.error(ex.getMessage(), ex);
 		}
 		return null;
-	}
-
-	public void updateInlineStyle(String cssText) {
-		if (this.localStyleDeclarationState != null) {
-			this.localStyleDeclarationState.setCssText(cssText != null ? cssText : "");
-		}
 	}
 
 	/** {@inheritDoc} */

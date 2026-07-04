@@ -29,6 +29,8 @@
 package org.loboevolution.html.dom.domimpl;
 
 import org.htmlunit.cssparser.dom.DOMException;
+import org.loboevolution.gui.HtmlPanel;
+import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.dom.HTMLBodyElement;
 import org.loboevolution.html.dom.HTMLDocument;
 import org.loboevolution.html.dom.HTMLHtmlElement;
@@ -279,6 +281,27 @@ public class HTMLBodyElementImpl extends HTMLElementImpl implements HTMLBodyElem
 	@Override
 	public void setOnunload(final Function onunload) {
 		addEventListener("unload", onunload, false);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public int getClientHeight() {
+		final int clientHeight = super.getClientHeight();
+		if (clientHeight > 0) {
+			return clientHeight;
+		}
+
+		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
+		if (doc != null) {
+			final HtmlRendererContext ctx = doc.getHtmlRendererContext();
+			if (ctx != null) {
+				final HtmlPanel htmlPanel = ctx.getHtmlPanel();
+				if (htmlPanel != null) {
+					return htmlPanel.getPreferredSize().height;
+				}
+			}
+		}
+		return 0;
 	}
 
 	/** {@inheritDoc} */

@@ -71,6 +71,30 @@ public interface LexicalUnit {
         VMIN,
         /** VMAX. */
         VMAX,
+        /** DVW. */
+        DVW,
+        /** DVH. */
+        DVH,
+        /** DVMIN. */
+        DVMIN,
+        /** DVMAX. */
+        DVMAX,
+        /** LVW. */
+        LVW,
+        /** LVH. */
+        LVH,
+        /** LVMIN. */
+        LVMIN,
+        /** LVMAX. */
+        LVMAX,
+        /** SVW. */
+        SVW,
+        /** SVH. */
+        SVH,
+        /** SVMIN. */
+        SVMIN,
+        /** SVMAX. */
+        SVMAX,
         /** PIXEL. */
         PIXEL,
         /** INCH. */

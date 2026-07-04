@@ -916,14 +916,14 @@ public class HTMLDocumentTest extends LoboUnitTest {
     public void testStyleElement() {
         document = sampleHtmlFile();
         final Element style = (Element) document.getElementsByTagName("style").item(0);
-        CSSStyleSheetImpl sheet = (CSSStyleSheetImpl) ((HTMLStyleElement) style).getStyleSheet();
+        CSSStyleSheetImpl sheet = (CSSStyleSheetImpl) ((HTMLStyleElement) style).getSheet();
         assertNotNull(sheet);
         assertEquals(1, sheet.getMedia().getLength());
         assertTrue(sheet.getCssRules().getLength() > 0);
         assertSame(sheet.getOwnerNode(), style);
 
         style.setAttribute("media", "screen");
-        final CSSStyleSheetImpl sheet2 = (CSSStyleSheetImpl) ((HTMLStyleElement) style).getStyleSheet();
+        final CSSStyleSheetImpl sheet2 = (CSSStyleSheetImpl) ((HTMLStyleElement) style).getSheet();
         assertNotNull(sheet2);
         assertSame(sheet2, sheet);
         assertEquals(1, sheet2.getMedia().getLength());
@@ -1019,7 +1019,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
     public void testStyleElement2() {
         final Element style = document.createElement("style");
         style.setAttribute("type", "text/css");
-        CSSStyleSheetImpl sheet = (CSSStyleSheetImpl) ((HTMLStyleElement) style).getStyleSheet();
+        CSSStyleSheetImpl sheet = (CSSStyleSheetImpl) ((HTMLStyleElement) style).getSheet();
         assertNotNull(sheet);
         assertEquals(0, sheet.getCssRules().getLength());
 

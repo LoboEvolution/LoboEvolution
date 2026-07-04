@@ -81,7 +81,7 @@ public class FontParser {
 
         // The remaining part should be the font family
         if (Strings.isNotBlank(remaining)) {
-            details[FONT_FAMILY_INDEX] = remaining.contains("\"") ? remaining : formatFontFamily(remaining.trim());
+            details[FONT_FAMILY_INDEX] = formatFontFamily(remaining.trim());
         }
 
         // At minimum, we need font-size and font-family
@@ -93,7 +93,9 @@ public class FontParser {
     }
 
     private String parseFontProperties(String font, String[] details) {
-        String[] tokens = font.replace(" / ", "/").split("\\s+");
+        // Normalize spaces around slash: "1px/ 2px" -> "1px/2px"
+        String normalized = font.replaceAll("\\s*/\\s*", "/");
+        String[] tokens = normalized.split("\\s+");
         int i = 0;
 
         // Parse style, variant, weight, stretch
@@ -102,8 +104,25 @@ public class FontParser {
             boolean matched = false;
 
             if (details[FONT_STYLE_INDEX] == null && FontValues.isFontStyle(token)) {
-                details[FONT_STYLE_INDEX] = token;
-                matched = true;
+                // Check if this is oblique with an angle (e.g., "oblique 10deg")
+                String tokenLower = token.toLowerCase();
+                if (tokenLower.startsWith("oblique") && i + 1 < tokens.length) {
+                    String nextToken = tokens[i + 1];
+                    String nextTokenLower = nextToken.toLowerCase();
+                    // Check if next token is an angle (deg, rad, grad, turn)
+                    if (nextTokenLower.matches("\\d+(\\.\\d+)?(deg|rad|grad|turn)")) {
+                        // Preserve original case for angle
+                        details[FONT_STYLE_INDEX] = tokenLower + " " + nextToken;
+                        i++; // Skip the angle token
+                        matched = true;
+                    } else {
+                        details[FONT_STYLE_INDEX] = tokenLower;
+                        matched = true;
+                    }
+                } else {
+                    details[FONT_STYLE_INDEX] = tokenLower;
+                    matched = true;
+                }
             } else if (details[FONT_VARIANT_INDEX] == null && FontValues.isFontVariant(token)) {
                 details[FONT_VARIANT_INDEX] = token;
                 matched = true;
@@ -146,12 +165,15 @@ public class FontParser {
 
     private String[] fontSizeParser(final String fontSize) {
         final int slash = fontSize.indexOf('/');
-        final String actualFontSize = slash == -1 ? fontSize : fontSize.substring(0, slash);
-        if (!HtmlValues.isUnits(actualFontSize) && !actualFontSize.endsWith("%")) {
+        final String actualFontSize = slash == -1 ? fontSize : fontSize.substring(0, slash).trim();
+        
+        // Check if font size has valid units
+        boolean hasValidUnits = HtmlValues.isUnits(actualFontSize) || actualFontSize.endsWith("%");
+        if (!hasValidUnits) {
             return null;
         }
 
-        String actualLineHeight = slash == -1 ? "" : fontSize.substring(slash + 1);
+        String actualLineHeight = slash == -1 ? "" : fontSize.substring(slash + 1).trim();
         if (Strings.isBlank(actualLineHeight)) {
             actualLineHeight = null;
         } else if (!isValidLineHeight(actualLineHeight)) {
@@ -165,14 +187,29 @@ public class FontParser {
     }
 
     private String formatFontFamily(String fontFamily) {
+        // Handle multiple font families separated by commas
+        if (fontFamily.contains(",")) {
+            String[] families = fontFamily.split(",");
+            StringBuilder result = new StringBuilder();
+            for (int i = 0; i < families.length; i++) {
+                if (i > 0) result.append(", ");
+                result.append(formatSingleFontFamily(families[i].trim()));
+            }
+            return result.toString();
+        }
+        
+        return formatSingleFontFamily(fontFamily);
+    }
+
+    private String formatSingleFontFamily(String fontFamily) {
         String cleaned = fontFamily.replace("\"", "").trim();
 
         if (GENERIC_FONT_FAMILIES.contains(cleaned.toLowerCase())) {
             return cleaned.toLowerCase();
         }
 
-        String capitalized = capitalizeFontName(cleaned);
-        return cleaned.contains(" ") ? "\"" + capitalized + "\"" : capitalized;
+        // Don't capitalize - preserve original casing
+        return cleaned.contains(" ") ? "\"" + cleaned + "\"" : cleaned;
     }
 
     private String capitalizeFontName(String name) {

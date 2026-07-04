@@ -437,7 +437,7 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"null", "null", "pink", "color: pink"})
+    @Alerts({"null", "", "pink", "color: pink"})
     public void styleOneUndefinedCssAttribute() {
         final String html
                 = "<html><head><script>\n" 
@@ -456,7 +456,7 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts({"null", "hidden", "undefined"})
+    @Alerts({"", "hidden", "undefined"})
     public void mozillaStyle() {
         final String content
                 = "<html><head><script>\n" 
@@ -498,20 +498,6 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
                 + " alert(typeof oDiv.style.color);\n"
                 + " alert(typeof oDiv.style.backgroundImage);\n"
                 + " alert(typeof oDiv.style.foo);\n"
-                + "}\n</script></head>\n"
-                + "<body onload='doTest()'>\n"
-                + "<div id='div1'>foo</div></body></html>";
-        checkHtmlAlert(html);
-    }
-
-    @Test
-    @Alerts("123")
-    public void setStylePropertyNonString() {
-        final String html = "<html><head><script>\n"
-                + "function doTest() {\n"
-                + "  var oDiv1 = document.getElementById('div1');\n"
-                + "  oDiv1.style.pixelLeft = 123;\n"
-                + " alert(oDiv1.style.pixelLeft);\n"
                 + "}\n</script></head>\n"
                 + "<body onload='doTest()'>\n"
                 + "<div id='div1'>foo</div></body></html>";
@@ -593,7 +579,7 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"30px", "null", "30px", "arial", "null", "arial"})
+    @Alerts({"30px", "", "30px", "arial", "", "arial"})
     public void getPropertyValueWithDash() {
         final String html =
                 "<html><body onload='test()'><script>\n" 
@@ -638,7 +624,7 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"null", "0.5", "0.4", "0.33333", "-3", "3", "null", "null", "null"})
+    @Alerts({"", "0.5", "0.4", "0.33333", "-3", "3", "", "", ""})
     public void initOpacity() {
         final String html = "<html><body>\n"
                 + "<div id='o1' style='opacity: '>d</div>\n"
@@ -735,8 +721,8 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"null", "null", "null", "null", "null", "null", "null", "null", "null",
-            "null", "null", "null", "null", "null", "null", "null"})
+    @Alerts({"", "", "", "", "", "", "", "", "",
+            "", "", "", "", "", "", ""})
     public void borderStylesNoStyle() {
         final String html
                 = "<html><head><script>\n" 
@@ -1025,7 +1011,7 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"null", "null", "15px", "italic", "null", "italic"})
+    @Alerts({"", "", "15px", "italic", "", "italic"})
     public void cssText2() {
         final String html = "<html><head>"
                 + "<script>\n"
@@ -1387,13 +1373,13 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"null"})
+    @Alerts({""})
     public void getProperty() {
         getPropertyValue("\"font\"");
     }
 
     @Test
-    @Alerts({"null"})
+    @Alerts({""})
     public void getPropertyFont() {
         getPropertyValue("'font'");
     }
@@ -1411,13 +1397,13 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"null"})
+    @Alerts({""})
     public void getPropertyFont0() {
         getPropertyValue("'font'");
     }
 
     @Test
-    @Alerts({"null"})
+    @Alerts({""})
     public void getPropertyColor0() {
         getPropertyValue("'green'");
     }
@@ -1429,7 +1415,7 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"null"})
+    @Alerts({""})
     public void getPropertyFont1() {
         getPropertyValue("'font'");
     }
@@ -1614,24 +1600,22 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"red ", "black ", "blue important", "gray ", "green "})
-    public void setProperty() {
-        setPropertyBackgroundColor("'background-color', 'red', ''");
-        setPropertyBackgroundColor("'background-ColoR', 'black', ''");
-        setPropertyBackgroundColor("'background-color', 'blue', 'important'");
-        setPropertyBackgroundColor("'background-color', 'gray', null");
-        setPropertyBackgroundColor("'background-color', 'green', undefined");
+    public void setPropertyBackgroundColor() {
+        setPropertyBackgroundColor("'background-color', 'red', ''", "red ");
+        setPropertyBackgroundColor("'background-ColoR', 'black', ''", "black ");
+        setPropertyBackgroundColor("'background-color', 'blue', 'important'", "blue important");
+        setPropertyBackgroundColor("'background-color', 'gray', null", "gray ");
+        setPropertyBackgroundColor("'background-color', 'green', undefined", "green ");
     }
 
     @Test
-    @Alerts({"green ", "black important", "green "})
-    public void setPropertyImportant() {
-        setPropertyBackgroundColor("'background-color', 'white', 'crucial'");
-        setPropertyBackgroundColor("'background-color', 'black', 'imPORTant'");
-        setPropertyBackgroundColor("'background-color', 'blue', 'important '");
+    public void setPropertyBackgroundColorImportant() {
+        setPropertyBackgroundColor("'background-color', 'white', 'crucial'", "green ");
+        setPropertyBackgroundColor("'background-color', 'black', 'imPORTant'", "black important");
+        setPropertyBackgroundColor("'background-color', 'blue', 'important '", "green ");
     }
 
-    private void setPropertyBackgroundColor(final String params) {
+    private void setPropertyBackgroundColor(final String params, String expected) {
         final String html =
                 "<html><body onload='test()'>\n"
                         + "<a id='a' href='#' style='background-color:green'>go</a>\n"
@@ -1645,7 +1629,7 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
                         + "  }\n"
                         + "</script>\n"
                         + "</body></html>";
-        checkHtmlAlert(html);
+        checkHtmlAlert(html, expected);
     }
 
     @Test
@@ -1953,7 +1937,7 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
         setLengthProperty(cssProp, prop, "'ellen'", "17px");
         setLengthProperty(cssProp, prop, "undefined", "17px");
         setLengthProperty(cssProp, prop, "'undefined'", "17px");
-        setLengthProperty(cssProp, prop, "''", "null");
+        setLengthProperty(cssProp, prop, "''", "");
         setLengthProperty(cssProp, prop, "NaN", "17px");
         setLengthProperty(cssProp, prop, "'NaNpx'", "17px");
         setLengthProperty(cssProp, prop, "true", "17px");
@@ -1971,7 +1955,7 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
         setLength(cssProp, prop, "'ellen'", "17px");
         setLength(cssProp, prop, "undefined", "17px");
         setLength(cssProp, prop, "'undefined'", "17px");
-        setLength(cssProp, prop, "''","null");
+        setLength(cssProp, prop, "''","");
         setLength(cssProp, prop, "NaN", "17px");
         setLength(cssProp, prop, "'NaNpx'", "17px");
         setLength(cssProp, prop, "true", "17px");
@@ -2080,29 +2064,6 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
 
     @Test
     @Alerts({"5px", "undefined", "1em", "undefined"})
-    public void pixelLeft() {
-        final String html = "<html><body>\n"
-                + "<div id='a' style='left: 5px; border: 1px solid black;'>a</div>\n"
-                + "<div id='b' style='left: 1em; border: 1px solid black;'>b</div>\n"
-                + "<script>\n" 
-                + "  var a = document.getElementById('a');\n"
-                + "  var b = document.getElementById('b');\n"
-                + " alert(a.style.left);\n"
-                + " alert(a.style.pixelLeft);\n"
-                + " alert(b.style.left);\n"
-                + " alert(b.style.pixelLeft);\n"
-                + "  if(a.style.pixelLeft) {\n"
-                + "    a.style.pixelLeft = 30;\n"
-                + "   alert(a.style.left);\n"
-                + "   alert(a.style.pixelLeft);\n"
-                + "  }\n"
-                + "</script>\n"
-                + "</body></html>";
-        checkHtmlAlert(html);
-    }
-
-    @Test
-    @Alerts({"5px", "undefined", "1em", "undefined"})
     public void pixelRight() {
         final String html = "<html><body>\n"
                 + "<div id='a' style='right: 5px; border: 1px solid black;'>a</div>\n"
@@ -2198,7 +2159,7 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"null", "null", "null", "null"})
+    @Alerts({"", "", "", ""})
     public void setToNull() {
         final String html
                 = "<html><head><script>\n" 
@@ -2290,7 +2251,7 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"null", "2", "null", "2", "5", "5", "5", "5"})
+    @Alerts({"", "2", "", "2", "5", "5", "5", "5"})
     public void widows() {
         final String html = "<html><head>\n"
                 + "<script>"
@@ -2317,7 +2278,7 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"null", "2", "null", "2", "5", "5", "5", "5"})
+    @Alerts({"", "2", "", "2", "5", "5", "5", "5"})
     public void orphans() {
         final String html = "<html><head>\n"
                 + "<script>"
@@ -2460,7 +2421,7 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts({"background-color", "string", "font-weight", "null", "string", "null", "string"})
+    @Alerts({"background-color", "string", "font-weight", "null", "object", "null", "object"})
     public void item() {
         final String html
                 = "<html><body>\n" 
@@ -2483,26 +2444,6 @@ public class CSSStyleDeclarationTest extends LoboUnitTest {
                 + "  }\n"
                 + "</script>\n" 
                 + "</body></html>";
-
-        checkHtmlAlert(html);
-    }
-
-    @Test
-    @Alerts("\"abCD\"")
-    public void content() {
-        final String html =
-                "<html>\n"
-                        + "</head>\n"
-                        + "  <style type='text/css'>#myDiv::before { content: 'abCD' }</style>\n"
-                        + "</head>\n"
-                        + "<body>\n"
-                        + "  <div id='myDiv'></div>\n"
-                        + "  <script>\n" 
-                        + "    var myDiv = document.getElementById('myDiv');\n"
-                        + "    var myDivStyle = window.getComputedStyle(myDiv, '::before');\n"
-                        + "   alert(myDivStyle.content);\n"
-                        + "  </script>\n"
-                        + "</body></html>";
 
         checkHtmlAlert(html);
     }

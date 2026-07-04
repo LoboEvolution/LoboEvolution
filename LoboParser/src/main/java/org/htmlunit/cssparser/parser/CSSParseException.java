@@ -41,7 +41,6 @@ public class CSSParseException extends CSSException {
     }
 
     /**
-
      * Wrap an existing exception in a CSSParseException.
      *
      * <p>This constructor is especially useful when an application is

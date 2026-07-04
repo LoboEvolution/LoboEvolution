@@ -58,9 +58,7 @@ public class MediaQueryListImpl implements MediaQueryList {
         final MediaListImpl media = CSSUtilities.parseMedia(processedText);
 
         if (Strings.isBlank(media.getMediaText()) ||
-                "screen".equalsIgnoreCase(media.getMediaText()) ||
-                "all".equalsIgnoreCase(media.getMediaText()) ||
-                "print".equalsIgnoreCase( media.getMediaText())) {
+                "all".equalsIgnoreCase(media.getMediaText())) {
             return true;
         }
 

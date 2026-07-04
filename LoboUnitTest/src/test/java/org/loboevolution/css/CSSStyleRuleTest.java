@@ -39,7 +39,7 @@ public class CSSStyleRuleTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts({"[object CSSStyleRule]", "1", "[object CSSStyleSheet]", "null", "H1", "null", "10px", "null", "red"})
+    @Alerts({"[object CSSStyleRule]", "1", "[object CSSStyleSheet]", "null", "H1", "", "10px", "", "red"})
     public void test() {
         final String html = "<html><head>\n"
                 + "<style>\n"

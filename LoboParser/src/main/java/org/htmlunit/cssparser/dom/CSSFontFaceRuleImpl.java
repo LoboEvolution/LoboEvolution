@@ -112,10 +112,9 @@ public class CSSFontFaceRuleImpl extends AbstractCSSRuleImpl {
         if (this == obj) {
             return true;
         }
-        if (!(obj instanceof CSSFontFaceRuleImpl)) {
+        if (!(obj instanceof CSSFontFaceRuleImpl cffr)) {
             return false;
         }
-        final CSSFontFaceRuleImpl cffr = (CSSFontFaceRuleImpl) obj;
         return super.equals(obj)
             && ParserUtils.equals(getStyle(), cffr.getStyle());
     }

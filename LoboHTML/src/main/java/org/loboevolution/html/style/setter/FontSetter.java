@@ -43,30 +43,44 @@ public class FontSetter implements SubPropertySetter {
     @Override
     public void changeValue(final CSSStyleDeclaration declaration, final String newValue) {
         final CSSStyleDeclarationImpl properties = (CSSStyleDeclarationImpl) declaration;
-        setDefaultFontValues(properties);
         if (Strings.isNotBlank(newValue)) {
             FontParser fontParser = new FontParser();
             String[] tokens = fontParser.fontParser(newValue);
             if (tokens != null) {
-                properties.setProperty(FONT_FAMILY, tokens[FontParser.FONT_FAMILY_INDEX]);
-                properties.setProperty(FONT_SIZE, tokens[FontParser.FONT_SIZE_INDEX]);
+                // Set the parsed values
+                if (tokens[FontParser.FONT_FAMILY_INDEX] != null) {
+                    properties.setProperty(FONT_FAMILY, tokens[FontParser.FONT_FAMILY_INDEX]);
+                }
+                if (tokens[FontParser.FONT_SIZE_INDEX] != null) {
+                    properties.setProperty(FONT_SIZE, tokens[FontParser.FONT_SIZE_INDEX]);
+                }
 
+                // Set default values for unspecified properties
                 if (tokens[FontParser.FONT_STYLE_INDEX] != null) {
                     properties.setProperty(FONT_STYLE, tokens[FontParser.FONT_STYLE_INDEX]);
+                } else {
+                    properties.setProperty(FONT_STYLE, CSSValues.NORMAL.getValue());
                 }
 
                 if (tokens[FontParser.FONT_VARIANT_INDEX] != null) {
                     properties.setProperty(FONT_VARIANT, tokens[FontParser.FONT_VARIANT_INDEX]);
+                } else {
+                    properties.setProperty(FONT_VARIANT, CSSValues.NORMAL.getValue());
                 }
 
                 if (tokens[FontParser.LINE_HEIGHT_INDEX] != null) {
                     properties.setProperty(LINE_HEIGHT, tokens[FontParser.LINE_HEIGHT_INDEX]);
+                } else {
+                    properties.setProperty(LINE_HEIGHT, CSSValues.NORMAL.getValue());
                 }
 
                 if (tokens[FontParser.FONT_WEIGHT_INDEX] != null) {
                     properties.setProperty(FONT_WEIGHT, tokens[FontParser.FONT_WEIGHT_INDEX]);
+                } else {
+                    properties.setProperty(FONT_WEIGHT, CSSValues.NORMAL.getValue());
                 }
 
+                // Don't override font-stretch if it was not specified in the shorthand
                 if (tokens[FontParser.FONT_STRETCH_INDEX] != null) {
                     properties.setProperty(FONT_STRETCH, tokens[FontParser.FONT_STRETCH_INDEX]);
                 }
@@ -74,6 +88,8 @@ public class FontSetter implements SubPropertySetter {
             } else {
                 setNullFontValues(properties);
             }
+        } else {
+            setNullFontValues(properties);
         }
     }
 

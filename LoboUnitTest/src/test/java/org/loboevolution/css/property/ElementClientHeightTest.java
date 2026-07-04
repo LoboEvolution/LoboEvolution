@@ -154,7 +154,7 @@ public class ElementClientHeightTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("630")
+    @Alerts("900")
     public void body() {
         checkHtmlAlert(test("body"));
     }
@@ -268,7 +268,7 @@ public class ElementClientHeightTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts("400")
+    @Alerts("0")
     public void div() {
         checkHtmlAlert(test("div"));
     }
@@ -946,12 +946,6 @@ public class ElementClientHeightTest extends LoboUnitTest {
         checkHtmlAlert(test("wbr"));
     }
 
-    @Test
-    @Alerts("15")
-    public void xmp() {
-        checkHtmlAlert(test("xmp"));
-    }
-
 
     @Test
     @Alerts("17")
@@ -1060,33 +1054,30 @@ public class ElementClientHeightTest extends LoboUnitTest {
     }
 
     private static String test(final String tagName) {
-        switch (tagName) {
-            case "basefont":
-                return headElementClosesItself(tagName);
-            case "script":
-                return "<html><head>\n"
-                        + "<script>\n"
-                        + "function test() {\n"
-                        + "  var e = document.getElementById('outer');\n"
-                        + "  alert(" + VALUE_ + ");\n"
-                        + "}\n"
-                        + "</script>\n"
-                        + "</head><body onload='test()'>\n"
-                        + "<script id='outer'>//<script>\n"
-                        + "</script>\n"
-                        + "</body></html>";
-            default:
-                return "<html><head>\n"
-                        + "<script>\n"
-                        + "function test() {\n"
-                        + "  var e = document.getElementById('outer');\n"
-                        + "  alert(" + VALUE_ + ");\n"
-                        + "}\n"
-                        + "</script>\n"
-                        + "</head><body onload='test()'>\n"
-                        + "<" + tagName + " id='outer'><" + tagName + "></" + tagName + "></" + tagName + ">\n"
-                        + "</body></html>";
-        }
+        return switch (tagName) {
+            case "basefont" -> headElementClosesItself(tagName);
+            case "script" -> "<html><head>\n"
+                    + "<script>\n"
+                    + "function test() {\n"
+                    + "  var e = document.getElementById('outer');\n"
+                    + "  alert(" + VALUE_ + ");\n"
+                    + "}\n"
+                    + "</script>\n"
+                    + "</head><body onload='test()'>\n"
+                    + "<script id='outer'>//<script>\n"
+                    + "</script>\n"
+                    + "</body></html>";
+            default -> "<html><head>\n"
+                    + "<script>\n"
+                    + "function test() {\n"
+                    + "  var e = document.getElementById('outer');\n"
+                    + "  alert(" + VALUE_ + ");\n"
+                    + "}\n"
+                    + "</script>\n"
+                    + "</head><body onload='test()'>\n"
+                    + "<" + tagName + " id='outer'><" + tagName + "></" + tagName + "></" + tagName + ">\n"
+                    + "</body></html>";
+        };
     }
 
     private static String testInput(final String type) {

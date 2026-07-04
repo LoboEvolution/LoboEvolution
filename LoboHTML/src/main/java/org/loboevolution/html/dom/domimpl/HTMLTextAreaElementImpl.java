@@ -226,6 +226,12 @@ public class HTMLTextAreaElementImpl extends HTMLBasicInputElement implements HT
 		return offsetWidth == 0 ? 183 : offsetWidth;
 	}
 
+	@Override
+	public Integer getOffsetHeight() {
+		final int offsetHeight = super.getOffsetHeight();
+		return offsetHeight == 0 ? getClientHeight() : offsetHeight;
+	}
+
 	/** {@inheritDoc} */
 	@Override
 	protected RenderState createRenderState(final RenderState prevRenderState) {

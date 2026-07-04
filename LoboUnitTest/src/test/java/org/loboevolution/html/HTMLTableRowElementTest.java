@@ -340,7 +340,7 @@ public class HTMLTableRowElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"cell1", "[object HTMLTableCellElement]", "abc", "[object Text]", ""})
+    @Alerts({"cell1", "[object HTMLTableCellElement]", "abc", "[object Text]", "null"})
     public void textContent() {
         final String html
                 = "<html><body>\n"

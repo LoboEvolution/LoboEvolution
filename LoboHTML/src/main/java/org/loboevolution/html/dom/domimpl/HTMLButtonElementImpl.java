@@ -346,6 +346,12 @@ public class HTMLButtonElementImpl extends HTMLElementImpl implements HTMLButton
 		final int offsetWidth = super.getOffsetWidth();
 		return offsetWidth == 0 ? 22 : offsetWidth;
 	}
+
+	@Override
+	public Integer getOffsetHeight() {
+		final int offsetHeight = super.getOffsetHeight();
+		return offsetHeight == 0 ? getClientHeight() : offsetHeight;
+	}
 	
 	/** {@inheritDoc} */
 	@Override

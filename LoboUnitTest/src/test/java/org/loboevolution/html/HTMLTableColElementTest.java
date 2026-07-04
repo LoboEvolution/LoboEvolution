@@ -339,7 +339,7 @@ public class HTMLTableColElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("<table><colgroup><col></colgroup></table>")
+    @Alerts("<TABLE><COLGROUP><COL/></COLGROUP></TABLE>")
     public void parsing() {
         final String html
                 = "<html><body><div><table><colgroup><col></colgroup></table></div>\n"

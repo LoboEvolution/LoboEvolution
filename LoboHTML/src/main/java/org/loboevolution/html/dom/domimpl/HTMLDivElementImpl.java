@@ -46,7 +46,17 @@ public class HTMLDivElementImpl extends HTMLElementImpl implements HTMLDivElemen
 
 	/** {@inheritDoc} */
 	@Override
+	protected boolean isBlockForInnerText() {
+		return true;
+	}
+
+	/** {@inheritDoc} */
+	@Override
 	protected void appendInnerTextImpl(final StringBuilder buffer) {
+		if (!"div".equalsIgnoreCase(getLocalName())) {
+			super.appendInnerTextImpl(buffer);
+			return;
+		}
 		final int length = buffer.length();
 		int lineBreaks;
 		if (length == 0) {

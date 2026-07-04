@@ -70,7 +70,7 @@ class FunctionTimerTask extends WeakWindowTask {
 		try {
 			final WindowImpl window = this.getWindow();
 			if (window == null) {
-				log.info("actionPerformed(): WindowImpl is no longer available.");
+				log.info("FucntionTimerTask actionPerformed(): WindowImpl is no longer available.");
 				return;
 			}
 			if (this.removeTask) {

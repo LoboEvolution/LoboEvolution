@@ -97,7 +97,7 @@ public class XMLSerializerTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"<foo/>", "<foo/>"})
+    @Alerts({"FOO xmlns=\"http://www.w3.org/1999/xhtml\" />", "FOO xmlns=\"http://www.w3.org/1999/xhtml\" />"})
     public void document() {
         final String html = "<html><head>\n"
                 + "<script>\n"

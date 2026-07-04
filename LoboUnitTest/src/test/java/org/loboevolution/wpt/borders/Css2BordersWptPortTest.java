@@ -21,7 +21,7 @@ public class Css2BordersWptPortTest extends LoboUnitTest {
      * @see <a href='https://github.com/web-platform-tests/wpt/blob/b953dd19a65e5cf42efd6c375b60593be7565c22/css/CSS2/borders/border-001-ref.xht'>border-001-ref.xht<a/>
      */
     @Test
-    @Alerts({"25px","normal", "ahem", "rgb(0, 0, 0)", "25px", "150px"})
+    @Alerts({"25px","normal", "Ahem", "rgb(0, 0, 0)", "25px", "150px"})
     public void border001() {
         final String html =
                 "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>"

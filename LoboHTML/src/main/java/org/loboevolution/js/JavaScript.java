@@ -93,14 +93,14 @@ public class JavaScript {
 				return getStringValue(javascriptObject);
 			}
 		} else if (type == int.class || type == Integer.class) {
-            return switch (javascriptObject) {
-                case Double v -> v.intValue();
-                case String s -> Strings.isNumeric(s) ? Float.valueOf(s) : null;
-                case Short i -> (int) i;
-                case Long l -> l.intValue();
-                case Float v -> v.intValue();
-                default -> javascriptObject;
-            };
+			return switch (javascriptObject) {
+				case Double v -> v.intValue();
+				case String s -> Strings.isNumeric(s) ? Float.valueOf(s) : null;
+				case Short i -> (int) i;
+				case Long l -> l.intValue();
+				case Float v -> v.intValue();
+				default -> javascriptObject;
+			};
 		} else {
 			return javascriptObject;
 		}
@@ -124,8 +124,10 @@ public class JavaScript {
 			synchronized (this) {
 				Scriptable javascriptObject = ((ScriptableDelegate) raw).getScriptable();
 				if (javascriptObject == null) {
+					final Class<?> rawClass = raw.getClass();
+					final String customClassName = JavaClassWrapperFactory.getInstance().getCustomClassName(rawClass);
 					final JavaObjectWrapper jow = new JavaObjectWrapper(
-							JavaClassWrapperFactory.getInstance().getClassWrapper(raw.getClass()), raw);
+							JavaClassWrapperFactory.getInstance().getClassWrapper(rawClass), raw, customClassName);
 					javascriptObject = jow;
 					jow.setParentScope(scope);
 					((ScriptableDelegate) raw).setScriptable(jow);
@@ -147,7 +149,8 @@ public class JavaScript {
 				if (jow == null) {
 					final Class<? extends Object> javaClass = raw.getClass();
 					final JavaClassWrapper wrapper = JavaClassWrapperFactory.getInstance().getClassWrapper(javaClass);
-					jow = new JavaObjectWrapper(wrapper, raw);
+					final String customClassName = JavaClassWrapperFactory.getInstance().getCustomClassName(javaClass);
+					jow = new JavaObjectWrapper(wrapper, raw, customClassName);
 					this.javaObjectToWrapper.put(raw, new WeakReference<>(jow));
 				}
 				jow.setParentScope(scope);
@@ -174,9 +177,9 @@ public class JavaScript {
 		final Function constructorFunction = new JavaConstructorObject(jsClassName, classWrapper, instantiator);
 		ScriptableObject.defineProperty(scope, jsClassName, constructorFunction, ScriptableObject.READONLY);
 	}
-	
+
 	private boolean isBoxClass(final Class clazz) {
-        return clazz == Integer.class || clazz == Boolean.class || clazz == Double.class || clazz == Float.class
-                || clazz == Long.class || clazz == Byte.class || clazz == Short.class || clazz == Character.class;
-    }
+		return clazz == Integer.class || clazz == Boolean.class || clazz == Double.class || clazz == Float.class
+				|| clazz == Long.class || clazz == Byte.class || clazz == Short.class || clazz == Character.class;
+	}
 }

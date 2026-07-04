@@ -30,6 +30,7 @@ import org.htmlunit.cssparser.dom.AbstractCSSRuleImpl;
 import org.loboevolution.css.CSSMediaRule;
 import org.loboevolution.css.CSSRuleList;
 import org.loboevolution.css.MediaList;
+import org.loboevolution.js.JavaClassWrapperFactory;
 
 import java.util.List;
 
@@ -37,6 +38,10 @@ import java.util.List;
  * <p>CSSMediaRuleImpl class.</p>
  */
 public class CSSMediaRuleImpl extends AbstractCSSStyleRule implements CSSMediaRule {
+
+    static {
+        JavaClassWrapperFactory.getInstance().registerCustomClassName(CSSMediaRuleImpl.class, "CSSMediaRule");
+    }
 
     private final org.htmlunit.cssparser.dom.CSSMediaRuleImpl cssMediaRule;
 
@@ -50,7 +55,18 @@ public class CSSMediaRuleImpl extends AbstractCSSStyleRule implements CSSMediaRu
 
     @Override
     public MediaList getMedia() {
-        return null;
+        org.htmlunit.cssparser.dom.MediaListImpl mediaList = cssMediaRule.getMediaList();
+        return mediaList == null ? null : new MediaListImpl(mediaList);
+    }
+
+    /**
+     * <p>getConditionText.</p>
+     * @return the media text string.
+     */
+    @Override
+    public String getConditionText() {
+        org.htmlunit.cssparser.dom.MediaListImpl mediaList = cssMediaRule.getMediaList();
+        return mediaList == null ? "" : mediaList.getMediaText();
     }
 
     @Override

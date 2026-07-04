@@ -29,6 +29,7 @@
 package org.loboevolution.html.dom.domimpl;
 
 import lombok.extern.slf4j.Slf4j;
+import org.loboevolution.common.Strings;
 import org.loboevolution.common.Urls;
 import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.control.ImgSvgControl;
@@ -39,11 +40,15 @@ import org.loboevolution.html.dom.canvas.CanvasImageSource;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.renderstate.ImageRenderState;
 import org.loboevolution.html.renderstate.RenderState;
+import org.loboevolution.info.TimingInfo;
+import org.loboevolution.net.HttpNetwork;
 import org.loboevolution.net.UserAgent;
 import org.loboevolution.type.Decoding;
 import org.mozilla.javascript.Function;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
@@ -64,7 +69,7 @@ public class HTMLImageElementImpl extends HTMLElementImpl implements HTMLImageEl
 	/**
 	 * <p>Constructor for HTMLImageElementImpl.</p>
 	 *
-	 * @param name a {@link java.lang.String} object.
+	 * @param name a {@link String} object.
 	 */
 	public HTMLImageElementImpl(final String name) {
 		super(name);
@@ -87,6 +92,30 @@ public class HTMLImageElementImpl extends HTMLElementImpl implements HTMLImageEl
 	@Override
 	protected RenderState createRenderState(final RenderState prevRenderState) {
 		return new ImageRenderState(prevRenderState, this);
+	}
+
+	@Override
+	public Integer getOffsetWidth() {
+		System.out.println("getOffsetWidth");
+		final Image img = getImage();
+		if (img != null) {
+			final int w = img.getWidth(null);
+			if (w > 0) return w;
+		}
+		final Integer s = super.getOffsetWidth();
+		return s != null && s > 0 ? s : 16;
+	}
+
+	@Override
+	public Integer getOffsetHeight() {
+		System.out.println("getOffsetHeight");
+		final Image img = getImage();
+		if (img != null) {
+			final int h = img.getHeight(null);
+			if (h > 0) return h;
+		}
+		final Integer s = super.getOffsetHeight();
+		return s != null && s > 0 ? s : 16;
 	}
 
 	/** {@inheritDoc} */
@@ -141,7 +170,7 @@ public class HTMLImageElementImpl extends HTMLElementImpl implements HTMLImageEl
 	/**
 	 * <p>getOnload.</p>
 	 *
-	 * @return a {@link org.mozilla.javascript.Function} object.
+	 * @return a {@link Function} object.
 	 */
 	public Function getOnload() {
 		final Object document = this.document;
@@ -395,7 +424,7 @@ public class HTMLImageElementImpl extends HTMLElementImpl implements HTMLImageEl
 	/**
 	 * <p>draw.</p>
 	 *
-	 * @param imgSvgControl a {@link org.loboevolution.html.control.ImgSvgControl} object.
+	 * @param imgSvgControl a {@link ImgSvgControl} object.
 	 */
 	public void draw(final ImgSvgControl imgSvgControl) {
 		try {
@@ -439,6 +468,19 @@ public class HTMLImageElementImpl extends HTMLElementImpl implements HTMLImageEl
 		} catch (final Exception e) {
 			log.error(e.getMessage(), e);
 		}
+	}
+
+	private Image getImage() {
+		Image cachedImage = null;
+		if (Strings.isBlank(getSrc())) {
+			return null;
+		}
+		try {
+			cachedImage = HttpNetwork.getImage(this, new TimingInfo(), true);
+		} catch (final Exception e) {
+			log.warn("Failed to load image: {}", getSrc(), e);
+		}
+		return cachedImage;
 	}
 
 	/** {@inheritDoc} */

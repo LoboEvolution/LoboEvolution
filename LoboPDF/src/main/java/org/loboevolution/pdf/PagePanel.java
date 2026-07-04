@@ -76,7 +76,7 @@ public class PagePanel extends JPanel implements ImageObserver, MouseListener {
      * Create a new PDFPanel, with a default size of 800 by 600 pixels.
      */
     public PagePanel() {
-        setPreferredSize(new Dimension(800, 600));
+        setPreferredSize(new Dimension(1600, 900));
         setFocusable(true);
         addMouseListener(this);
     }

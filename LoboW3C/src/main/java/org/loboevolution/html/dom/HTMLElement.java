@@ -28,6 +28,7 @@ package org.loboevolution.html.dom;
 
 import org.loboevolution.css.CSSStyleDeclaration;
 import org.loboevolution.html.node.Element;
+import org.loboevolution.js.IgnoreJs;
 
 /**
  * Any HTML element. Some elements directly implement this interface, while
@@ -126,8 +127,17 @@ public interface HTMLElement extends Element {
      */
 	Integer getOffsetWidth();
 
+	/**
+	 * <p> getStyle. </p>
+	 * @return a {@link CSSStyleDeclaration} object.
+	 */
 	CSSStyleDeclaration getStyle();
 
+	/**
+	 * <p> getCurrentStyle. </p>
+	 * @return a {@link CSSStyleDeclaration} object.
+	 */
+	@IgnoreJs
 	CSSStyleDeclaration getCurrentStyle();
 
 	/**

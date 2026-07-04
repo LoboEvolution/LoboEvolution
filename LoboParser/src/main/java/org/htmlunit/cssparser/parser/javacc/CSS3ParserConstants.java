@@ -59,199 +59,183 @@ public interface CSS3ParserConstants {
   /** RegularExpression Id. */
   int URL = 27;
   /** RegularExpression Id. */
-  int A_LETTER = 28;
+  int CDO = 28;
   /** RegularExpression Id. */
-  int C_LETTER = 29;
+  int CDC = 29;
   /** RegularExpression Id. */
-  int D_LETTER = 30;
+  int INCLUDES = 30;
   /** RegularExpression Id. */
-  int E_LETTER = 31;
+  int DASHMATCH = 31;
   /** RegularExpression Id. */
-  int F_LETTER = 32;
+  int PREFIXMATCH = 32;
   /** RegularExpression Id. */
-  int G_LETTER = 33;
+  int SUFFIXMATCH = 33;
   /** RegularExpression Id. */
-  int H_LETTER = 34;
+  int SUBSTRINGMATCH = 34;
   /** RegularExpression Id. */
-  int I_LETTER = 35;
+  int LBRACE = 35;
   /** RegularExpression Id. */
-  int K_LETTER = 36;
+  int RBRACE = 36;
   /** RegularExpression Id. */
-  int L_LETTER = 37;
+  int LROUND = 37;
   /** RegularExpression Id. */
-  int M_LETTER = 38;
+  int RROUND = 38;
   /** RegularExpression Id. */
-  int N_LETTER = 39;
+  int DOT = 39;
   /** RegularExpression Id. */
-  int O_LETTER = 40;
+  int SEMICOLON = 40;
   /** RegularExpression Id. */
-  int P_LETTER = 41;
+  int COLON = 41;
   /** RegularExpression Id. */
-  int R_LETTER = 42;
+  int ASTERISK = 42;
   /** RegularExpression Id. */
-  int S_LETTER = 43;
+  int SLASH = 43;
   /** RegularExpression Id. */
-  int T_LETTER = 44;
+  int MINUS = 44;
   /** RegularExpression Id. */
-  int U_LETTER = 45;
+  int EQUALS = 45;
   /** RegularExpression Id. */
-  int X_LETTER = 46;
+  int LSQUARE = 46;
   /** RegularExpression Id. */
-  int Z_LETTER = 47;
+  int RSQUARE = 47;
   /** RegularExpression Id. */
-  int CDO = 48;
+  int PLUS = 48;
   /** RegularExpression Id. */
-  int CDC = 49;
+  int GREATER = 49;
   /** RegularExpression Id. */
-  int INCLUDES = 50;
+  int TILDE = 50;
   /** RegularExpression Id. */
-  int DASHMATCH = 51;
+  int COMMA = 51;
   /** RegularExpression Id. */
-  int PREFIXMATCH = 52;
+  int HASH = 52;
   /** RegularExpression Id. */
-  int SUFFIXMATCH = 53;
+  int IMPORT_SYM = 53;
   /** RegularExpression Id. */
-  int SUBSTRINGMATCH = 54;
+  int PAGE_SYM = 54;
   /** RegularExpression Id. */
-  int LBRACE = 55;
+  int MEDIA_SYM = 55;
   /** RegularExpression Id. */
-  int RBRACE = 56;
+  int FONT_FACE_SYM = 56;
   /** RegularExpression Id. */
-  int LROUND = 57;
+  int CHARSET_SYM = 57;
   /** RegularExpression Id. */
-  int RROUND = 58;
+  int IMPORTANT_SYM = 58;
   /** RegularExpression Id. */
-  int DOT = 59;
+  int EMS = 59;
   /** RegularExpression Id. */
-  int SEMICOLON = 60;
+  int REM = 60;
   /** RegularExpression Id. */
-  int COLON = 61;
+  int EXS = 61;
   /** RegularExpression Id. */
-  int ASTERISK = 62;
+  int CH = 62;
   /** RegularExpression Id. */
-  int SLASH = 63;
+  int VW = 63;
   /** RegularExpression Id. */
-  int MINUS = 64;
+  int VH = 64;
   /** RegularExpression Id. */
-  int EQUALS = 65;
+  int VMIN = 65;
   /** RegularExpression Id. */
-  int LSQUARE = 66;
+  int VMAX = 66;
   /** RegularExpression Id. */
-  int RSQUARE = 67;
+  int DVW = 67;
   /** RegularExpression Id. */
-  int PLUS = 68;
+  int DVH = 68;
   /** RegularExpression Id. */
-  int GREATER = 69;
+  int DVMIN = 69;
   /** RegularExpression Id. */
-  int TILDE = 70;
+  int DVMAX = 70;
   /** RegularExpression Id. */
-  int COMMA = 71;
+  int LVW = 71;
   /** RegularExpression Id. */
-  int HASH = 72;
+  int LVH = 72;
   /** RegularExpression Id. */
-  int IMPORT_SYM = 73;
+  int LVMIN = 73;
   /** RegularExpression Id. */
-  int PAGE_SYM = 74;
+  int LVMAX = 74;
   /** RegularExpression Id. */
-  int MEDIA_SYM = 75;
+  int SVW = 75;
   /** RegularExpression Id. */
-  int FONT_FACE_SYM = 76;
+  int SVH = 76;
   /** RegularExpression Id. */
-  int CHARSET_SYM = 77;
+  int SVMIN = 77;
   /** RegularExpression Id. */
-  int IMPORTANT_SYM = 78;
+  int SVMAX = 78;
   /** RegularExpression Id. */
-  int EMS = 79;
+  int LENGTH_PX = 79;
   /** RegularExpression Id. */
-  int REM = 80;
+  int LENGTH_CM = 80;
   /** RegularExpression Id. */
-  int EXS = 81;
+  int LENGTH_MM = 81;
   /** RegularExpression Id. */
-  int CH = 82;
+  int LENGTH_IN = 82;
   /** RegularExpression Id. */
-  int VW = 83;
+  int LENGTH_PT = 83;
   /** RegularExpression Id. */
-  int VH = 84;
+  int LENGTH_PC = 84;
   /** RegularExpression Id. */
-  int VMIN = 85;
+  int LENGTH_Q = 85;
   /** RegularExpression Id. */
-  int VMAX = 86;
+  int ANGLE_DEG = 86;
   /** RegularExpression Id. */
-  int LENGTH_PX = 87;
+  int ANGLE_RAD = 87;
   /** RegularExpression Id. */
-  int LENGTH_CM = 88;
+  int ANGLE_GRAD = 88;
   /** RegularExpression Id. */
-  int LENGTH_MM = 89;
+  int ANGLE_TURN = 89;
   /** RegularExpression Id. */
-  int LENGTH_IN = 90;
+  int TIME_MS = 90;
   /** RegularExpression Id. */
-  int LENGTH_PT = 91;
+  int TIME_S = 91;
   /** RegularExpression Id. */
-  int LENGTH_PC = 92;
+  int FREQ_HZ = 92;
   /** RegularExpression Id. */
-  int LENGTH_Q = 93;
+  int FREQ_KHZ = 93;
   /** RegularExpression Id. */
-  int ANGLE_DEG = 94;
+  int RESOLUTION_DPI = 94;
   /** RegularExpression Id. */
-  int ANGLE_RAD = 95;
+  int RESOLUTION_DPCM = 95;
   /** RegularExpression Id. */
-  int ANGLE_GRAD = 96;
+  int PERCENTAGE = 96;
   /** RegularExpression Id. */
-  int ANGLE_TURN = 97;
+  int DIMENSION = 97;
   /** RegularExpression Id. */
-  int TIME_MS = 98;
+  int H_PLACEHOLDER = 98;
   /** RegularExpression Id. */
-  int TIME_S = 99;
+  int UNICODE_RANGE = 99;
   /** RegularExpression Id. */
-  int FREQ_HZ = 100;
+  int URI = 100;
   /** RegularExpression Id. */
-  int FREQ_KHZ = 101;
+  int FUNCTION_NOT = 101;
   /** RegularExpression Id. */
-  int RESOLUTION_DPI = 102;
+  int FUNCTION_LANG = 102;
   /** RegularExpression Id. */
-  int RESOLUTION_DPCM = 103;
+  int FUNCTION_CALC = 103;
   /** RegularExpression Id. */
-  int PERCENTAGE = 104;
+  int FUNCTION_VAR = 104;
   /** RegularExpression Id. */
-  int DIMENSION = 105;
+  int FUNCTION_RGB = 105;
   /** RegularExpression Id. */
-  int H_PLACEHOLDER = 106;
+  int FUNCTION_HSL = 106;
   /** RegularExpression Id. */
-  int UNICODE_RANGE = 107;
+  int FUNCTION_HWB = 107;
   /** RegularExpression Id. */
-  int URI = 108;
+  int FUNCTION_LAB = 108;
   /** RegularExpression Id. */
-  int FUNCTION_NOT = 109;
+  int FUNCTION_LCH = 109;
   /** RegularExpression Id. */
-  int FUNCTION_LANG = 110;
+  int FUNCTION_IS = 110;
   /** RegularExpression Id. */
-  int FUNCTION_CALC = 111;
+  int FUNCTION_WHERE = 111;
   /** RegularExpression Id. */
-  int FUNCTION_VAR = 112;
+  int FUNCTION_HAS = 112;
   /** RegularExpression Id. */
-  int FUNCTION_RGB = 113;
+  int CUSTOM_PROPERTY_NAME = 113;
   /** RegularExpression Id. */
-  int FUNCTION_HSL = 114;
+  int FUNCTION = 114;
   /** RegularExpression Id. */
-  int FUNCTION_HWB = 115;
+  int ATKEYWORD = 115;
   /** RegularExpression Id. */
-  int FUNCTION_LAB = 116;
-  /** RegularExpression Id. */
-  int FUNCTION_LCH = 117;
-  /** RegularExpression Id. */
-  int FUNCTION_IS = 118;
-  /** RegularExpression Id. */
-  int FUNCTION_WHERE = 119;
-  /** RegularExpression Id. */
-  int FUNCTION_HAS = 120;
-  /** RegularExpression Id. */
-  int CUSTOM_PROPERTY_NAME = 121;
-  /** RegularExpression Id. */
-  int FUNCTION = 122;
-  /** RegularExpression Id. */
-  int ATKEYWORD = 123;
-  /** RegularExpression Id. */
-  int UNKNOWN = 124;
+  int UNKNOWN = 116;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -288,26 +272,6 @@ public interface CSS3ParserConstants {
     "<NUM>",
     "<STRING>",
     "<URL>",
-    "<A_LETTER>",
-    "<C_LETTER>",
-    "<D_LETTER>",
-    "<E_LETTER>",
-    "<F_LETTER>",
-    "<G_LETTER>",
-    "<H_LETTER>",
-    "<I_LETTER>",
-    "<K_LETTER>",
-    "<L_LETTER>",
-    "<M_LETTER>",
-    "<N_LETTER>",
-    "<O_LETTER>",
-    "<P_LETTER>",
-    "<R_LETTER>",
-    "<S_LETTER>",
-    "<T_LETTER>",
-    "<U_LETTER>",
-    "<X_LETTER>",
-    "<Z_LETTER>",
     "\"<!--\"",
     "\"-->\"",
     "\"~=\"",
@@ -333,11 +297,11 @@ public interface CSS3ParserConstants {
     "\"~\"",
     "\",\"",
     "<HASH>",
-    "<IMPORT_SYM>",
-    "<PAGE_SYM>",
-    "<MEDIA_SYM>",
-    "<FONT_FACE_SYM>",
-    "<CHARSET_SYM>",
+    "\"@import\"",
+    "\"@page\"",
+    "\"@media\"",
+    "\"@font-face\"",
+    "\"@charset\"",
     "<IMPORTANT_SYM>",
     "<EMS>",
     "<REM>",
@@ -347,6 +311,18 @@ public interface CSS3ParserConstants {
     "<VH>",
     "<VMIN>",
     "<VMAX>",
+    "<DVW>",
+    "<DVH>",
+    "<DVMIN>",
+    "<DVMAX>",
+    "<LVW>",
+    "<LVH>",
+    "<LVMIN>",
+    "<LVMAX>",
+    "<SVW>",
+    "<SVH>",
+    "<SVMIN>",
+    "<SVMAX>",
     "<LENGTH_PX>",
     "<LENGTH_CM>",
     "<LENGTH_MM>",

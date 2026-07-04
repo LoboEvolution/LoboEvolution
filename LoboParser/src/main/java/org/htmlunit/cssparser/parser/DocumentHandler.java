@@ -29,7 +29,7 @@ public interface DocumentHandler {
 
     /**
      * Receive notification of the beginning of a style sheet.
-     *
+     * <p>
      * The CSS parser will invoke this method only once, before any other
      * methods in this interface.
      *
@@ -41,7 +41,7 @@ public interface DocumentHandler {
 
     /**
      * Receive notification of the end of a document.
-     *
+     * <p>
      * The CSS parser will invoke this method only once, and it will be the
      * last method invoked during the parse. The parser shall not invoke this
      * method until it has either abandoned parsing (because of an
@@ -95,7 +95,7 @@ public interface DocumentHandler {
      * @param characterEncoding the character encoding
      * @param locator the locator
      * @throws CSSException Any CSS exception, possibly wrapping another
-     *  exception.
+     *      exception.
      */
     void charset(String characterEncoding, Locator locator) throws CSSException;
 
@@ -105,10 +105,10 @@ public interface DocumentHandler {
      * @param uri The URI of the imported style sheet.
      * @param media The intended destination media for style information.
      * @param defaultNamespaceURI The default namespace URI for the imported
-     *  style sheet.
+     *      style sheet.
      * @param locator the locator
      * @exception CSSException Any CSS exception, possibly wrapping another
-     *  exception.
+     *      exception.
      */
     void importStyle(String uri, MediaQueryList media,
         String defaultNamespaceURI, Locator locator) throws CSSException;
@@ -120,26 +120,26 @@ public interface DocumentHandler {
      * @param atRule The complete ignored at-rule.
      * @param locator the locator
      * @exception CSSException Any CSS exception, possibly wrapping another
-     *  exception.
+     *      exception.
      */
     void ignorableAtRule(String atRule, Locator locator) throws CSSException;
 
     /**
      * Receive notification of the beginning of a font face statement.
-     *
+     * <p>
      * The Parser will invoke this method at the beginning of every font face
      * statement in the style sheet. there will be a corresponding endFontFace()
      * event for every startFontFace() event.
      *
      * @param locator the locator
      * @exception CSSException Any CSS exception, possibly wrapping another
-     *  exception.
+     *      exception.
      */
     void startFontFace(Locator locator) throws CSSException;
 
     /**
      * Receive notification of the beginning of a page statement.
-     *
+     * <p>
      * The Parser will invoke this method at the beginning of every page
      * statement in the style sheet. there will be a corresponding endPage()
      * event for every startPage() event.
@@ -148,13 +148,13 @@ public interface DocumentHandler {
      * @param pseudoPage the pseudo page (if any, null otherwise)
      * @param locator the locator
      * @exception CSSException Any CSS exception, possibly wrapping another
-     *  exception.
+     *      exception.
      */
     void startPage(String name, String pseudoPage, Locator locator) throws CSSException;
 
     /**
      * Receive notification of the beginning of a media statement.
-     *
+     * <p>
      * The Parser will invoke this method at the beginning of every media
      * statement in the style sheet. there will be a corresponding endMedia()
      * event for every startElement() event.
@@ -162,7 +162,7 @@ public interface DocumentHandler {
      * @param media The intended destination media for style information.
      * @param locator the locator
      * @exception CSSException Any CSS exception, possibly wrapping another
-     *  exception.
+     *      exception.
      */
     void startMedia(MediaQueryList media, Locator locator) throws CSSException;
 
@@ -172,7 +172,7 @@ public interface DocumentHandler {
      * @param selectors All intended selectors for all declarations.
      * @param locator the locator
      * @exception CSSException Any CSS exception, possibly wrapping another
-     *  exception.
+     *     exception.
      */
     void startSelector(SelectorList selectors, Locator locator) throws CSSException;
 

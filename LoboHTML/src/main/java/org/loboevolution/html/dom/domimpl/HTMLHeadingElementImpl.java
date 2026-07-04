@@ -45,6 +45,12 @@ public class HTMLHeadingElementImpl extends HTMLElementImpl implements HTMLHeadi
 
 	/** {@inheritDoc} */
 	@Override
+	protected boolean isBlockForInnerText() {
+		return true;
+	}
+
+	/** {@inheritDoc} */
+	@Override
 	protected void appendInnerTextImpl(final StringBuilder buffer) {
 		final int length = buffer.length();
 		int lineBreaks;

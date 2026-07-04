@@ -95,10 +95,9 @@ public class CSSUnknownRuleImpl extends AbstractCSSRuleImpl {
         if (this == obj) {
             return true;
         }
-        if (!(obj instanceof CSSUnknownRuleImpl)) {
+        if (!(obj instanceof CSSUnknownRuleImpl cur)) {
             return false;
         }
-        final CSSUnknownRuleImpl cur = (CSSUnknownRuleImpl) obj;
         return super.equals(obj)
             && ParserUtils.equals(getCssText(), cur.getCssText());
     }

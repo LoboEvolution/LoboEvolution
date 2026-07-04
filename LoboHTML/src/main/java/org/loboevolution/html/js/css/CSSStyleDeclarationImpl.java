@@ -37,10 +37,10 @@ import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.node.Attr;
 import org.loboevolution.css.CSSStyleDeclaration;
-import org.loboevolution.html.parser.FontParser;
 import org.loboevolution.html.style.FontValues;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.html.style.setter.*;
+import org.loboevolution.js.JavaClassWrapperFactory;
 import org.mozilla.javascript.annotations.JSFunction;
 
 import java.util.*;
@@ -50,6 +50,10 @@ import java.util.regex.Pattern;
  * <p>CSSStyleDeclarationImpl class.</p>
  */
 public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
+
+    static {
+        JavaClassWrapperFactory.getInstance().registerCustomClassName(CSSStyleDeclarationImpl.class, "CSSStyleDeclaration");
+    }
 
     private static final Pattern DOUBLE_PATTERN = Pattern.compile(
             "[\\x00-\\x20]*[+-]?(NaN|Infinity|((((\\d+)(\\.)?((\\d+)?)" +
@@ -65,7 +69,11 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
 
     private static final Map<String, Boolean> propertyLenght = new HashMap<>();
 
+    private static final Map<String, Boolean> propertyLengthNoPercent = new HashMap<>();
+
     private static final Map<String, SubPropertySetter> SUB_SETTERS = new HashMap<>();
+
+    private static final Map<String, String[]> SHORTHAND_TO_LONGHANDS = new HashMap<>();
 
     static {
         final Map<String, SubPropertySetter> subSetters = SUB_SETTERS;
@@ -101,10 +109,6 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
         propertyLenght.put(PADDING_LEFT, true);
         propertyLenght.put(PADDING_RIGHT, true);
         propertyLenght.put(PADDING_BOTTOM, true);
-        propertyLenght.put(BORDER_TOP_WIDTH, true);
-        propertyLenght.put(BORDER_LEFT_WIDTH, true);
-        propertyLenght.put(BORDER_RIGHT_WIDTH, true);
-        propertyLenght.put(BORDER_BOTTOM_WIDTH, true);
         propertyLenght.put(MAX_WIDTH, true);
         propertyLenght.put(MIN_WIDTH, true);
         propertyLenght.put(MAX_HEIGHT, true);
@@ -116,6 +120,14 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
         propertyLenght.put(VERTICAL_ALIGN, true);
         propertyLenght.put(OUTLINE_WIDTH, true);
         propertyLenght.put(Z_INDEX, true);
+        propertyLenght.put(BORDER_TOP_WIDTH, true);
+        propertyLenght.put(BORDER_LEFT_WIDTH, true);
+        propertyLenght.put(BORDER_RIGHT_WIDTH, true);
+        propertyLenght.put(BORDER_BOTTOM_WIDTH, true);
+
+        SHORTHAND_TO_LONGHANDS.put(MARGIN, new String[]{"margin-top", "margin-right", "margin-bottom", "margin-left"});
+        SHORTHAND_TO_LONGHANDS.put(PADDING, new String[]{"padding-top", "padding-right", "padding-bottom", "padding-left"});
+
     }
 
     /**
@@ -153,7 +165,11 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     /** {@inheritDoc} */
     @Override
     public String getCssText() {
-        return style.getCssText();
+        final String cssText = style.getCssText();
+        if (Strings.isNotBlank(cssText) && !cssText.endsWith(";")) {
+            return cssText;
+        }
+        return cssText;
     }
 
     /** {@inheritDoc} */
@@ -178,61 +194,128 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
         return Strings.isNotBlank(style.getPropertyPriority(property));
     }
 
-    @JSFunction
     public void setProperty(final String propertyName, final String value) {
-       this.setProperty(propertyName, value, "");
+        setProperty(propertyName, value, "");
     }
 
     @Override
+    @JSFunction
     public void setProperty(final String propertyName, final String vl, final String priority) {
         String lwPropertyName = propertyName.toLowerCase();
-        final String propertyPriority1 = getPropertyPriority(lwPropertyName);
         String value = vl;
+        
+        // Normalize null/undefined to empty priority
+        String normalizedPriority = priority;
+        if (priority == null || "null".equals(priority) || "undefined".equals(priority)) {
+            normalizedPriority = "";
+        }
 
-        if(Strings.isNotBlank(propertyPriority1) ||
-                (Strings.isNotBlank(priority) && !"important".equalsIgnoreCase(priority))) return;
+        // Reject if new priority is not empty and not exactly "important" (case-insensitive, no extra whitespace)
+        if (Strings.isNotBlank(normalizedPriority) && !"important".equalsIgnoreCase(normalizedPriority)) {
+            // Invalid priority - do not set the property at all
+            return;
+        }
+        
+        // Normalize to lowercase "important" if it's a valid priority
+        if ("important".equalsIgnoreCase(normalizedPriority)) {
+            normalizedPriority = "important";
+        }
 
         if (Strings.isBlank(value) || "null".equals(value)) {
             if (Strings.isBlank(value)) value = "";
-            style.setProperty(lwPropertyName, value, priority);
+            style.setProperty(lwPropertyName, value, normalizedPriority);
         } else {
-            value = HtmlValues.isUrl(value) ? value.trim() :
-                    (FONT_FAMILY.equals(propertyName) && value.contains("\"")) ? value.trim() :
-                            value.trim().toLowerCase();
+            value = value.trim();
+
+            // Don't lowercase font-style values that start with "oblique" to preserve angle
+            // Don't lowercase URL values to preserve case in filenames
+            // Don't lowercase font-family values to preserve font name casing
+            if (!FONT_STYLE.equals(propertyName) && !HtmlValues.isUrl(value) && !FONT_FAMILY.equals(propertyName)) {
+                value = value.toLowerCase();
+            }
+
+            // For font-style with angle, set directly without CSS parsing to avoid normalization
+            if (FONT_STYLE.equals(propertyName) && value.toLowerCase().startsWith("oblique") && value.contains(" ")) {
+                style.setProperty(lwPropertyName, value, normalizedPriority);
+                return;
+            }
 
             if (FontValues.isFontFamily(value)) {
-                style.setProperty(lwPropertyName, value, priority);
+                style.setProperty(lwPropertyName, value, normalizedPriority);
             } else if (HtmlValues.isUnits(value)) {
                 if (BACKGROUND_POSITION.equals(propertyName)) {
-                    style.setProperty(lwPropertyName, value, priority);
+                    style.setProperty(lwPropertyName, value, normalizedPriority);
+                } else if (propertyLengthNoPercent.get(lwPropertyName) != null && propertyLengthNoPercent.get(lwPropertyName)) {
+                    // For border-width properties, only accept px, em, ex, in, cm, mm, pt, pc, and valid keywords
+                    if (value.endsWith("px") || value.endsWith("em") || value.endsWith("ex") ||
+                            value.endsWith("in") || value.endsWith("cm") || value.endsWith("mm") ||
+                            value.endsWith("pt") || value.endsWith("pc") || value.endsWith("q")) {
+                        int val = HtmlValues.getPixelSize(value, null, element.getOwnerDocument() != null ? element.getOwnerDocument().getDefaultView() : null, -1);
+                        if (val > -1) {
+                            style.setProperty(lwPropertyName, value, normalizedPriority);
+                        }
+                    }
                 } else  {
                     int val = HtmlValues.getPixelSize(value, null, element.getOwnerDocument() != null ? element.getOwnerDocument().getDefaultView() : null, -1);
                     if (val > -1) {
-                        style.setProperty(lwPropertyName, value, priority);
+                        style.setProperty(lwPropertyName, value, normalizedPriority);
                     }
                 }
             } else if (propertyLenght.get(lwPropertyName) != null && propertyLenght.get(lwPropertyName)) {
 
-                if (DOUBLE_PATTERN.matcher(value).matches()) {
-                    final double d = Double.parseDouble(value);
-                    if (!Double.isNaN(d) && !Double.isInfinite(d)) {
-                        value += "px";
-                        style.setProperty(lwPropertyName, value, priority);
-                    }
-                } else if (Strings.isNumeric(value)) {
-                    value += "px";
-                    style.setProperty(lwPropertyName, value, priority);
-                } else if (CSSValues.AUTO.isEqual(value) ||
+                if (CSSValues.AUTO.isEqual(value) ||
                         CSSValues.INHERIT.isEqual(value) ||
                         CSSValues.INITIAL.isEqual(value) ||
+                        CSSValues.REVERT.isEqual(value) ||
+                        CSSValues.UNSET.isEqual(value) ||
                         CSSValues.THICK.isEqual(value) ||
                         CSSValues.THIN.isEqual(value) ||
                         CSSValues.MEDIUM.isEqual(value) ||
                         value.endsWith("%")) {
-                    style.setProperty(lwPropertyName, value, priority);
+                    style.setProperty(lwPropertyName, value, normalizedPriority);
+                } else if (VERTICAL_ALIGN.equals(lwPropertyName) &&
+                        (CSSValues.BASELINE.isEqual(value) ||
+                        CSSValues.SUB.isEqual(value) ||
+                        CSSValues.SUPER.isEqual(value) ||
+                        CSSValues.TEXT_TOP.isEqual(value) ||
+                        CSSValues.TEXT_BOTTOM.isEqual(value) ||
+                        CSSValues.MIDDLE.isEqual(value) ||
+                        CSSValues.TOP.isEqual(value) ||
+                        CSSValues.BOTTOM.isEqual(value))) {
+                    style.setProperty(lwPropertyName, value, normalizedPriority);
+                } else if (DOUBLE_PATTERN.matcher(value).matches()) {
+                    final double d = Double.parseDouble(value);
+                    if (!Double.isNaN(d) && !Double.isInfinite(d)) {
+                        value += "px";
+                        style.setProperty(lwPropertyName, value, normalizedPriority);
+                    }
+                } else if (Strings.isNumeric(value)) {
+                    value += "px";
+                    style.setProperty(lwPropertyName, value, normalizedPriority);
+                }
+            } else if (propertyLengthNoPercent.get(lwPropertyName) != null && propertyLengthNoPercent.get(lwPropertyName)) {
+                // Handle border-width properties without percent support
+                if (CSSValues.AUTO.isEqual(value) ||
+                        CSSValues.INHERIT.isEqual(value) ||
+                        CSSValues.INITIAL.isEqual(value) ||
+                        CSSValues.REVERT.isEqual(value) ||
+                        CSSValues.UNSET.isEqual(value) ||
+                        CSSValues.THICK.isEqual(value) ||
+                        CSSValues.THIN.isEqual(value) ||
+                        CSSValues.MEDIUM.isEqual(value)) {
+                    style.setProperty(lwPropertyName, value, normalizedPriority);
+                } else if (DOUBLE_PATTERN.matcher(value).matches()) {
+                    final double d = Double.parseDouble(value);
+                    if (!Double.isNaN(d) && !Double.isInfinite(d)) {
+                        value += "px";
+                        style.setProperty(lwPropertyName, value, normalizedPriority);
+                    }
+                } else if (Strings.isNumeric(value)) {
+                    value += "px";
+                    style.setProperty(lwPropertyName, value, normalizedPriority);
                 }
             } else {
-                style.setProperty(lwPropertyName, value, priority);
+                style.setProperty(lwPropertyName, value, normalizedPriority);
             }
         }
         refreshStyle(lwPropertyName, value);
@@ -249,6 +332,11 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
         final SubPropertySetter setter = SUB_SETTERS.get(lowerCaseName);
         if (setter != null) {
             setter.changeValue(this, value);
+            if (important) {
+                style.getProperties().stream()
+                        .filter(prop -> isExpandedProperty(lowerCaseName, prop.getName()))
+                        .forEach(prop -> prop.setImportant(true));
+            }
         } else {
             setProperty(lowerCaseName, value, important ? "important" : "");
         }
@@ -289,17 +377,15 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
 
     @Override
     public String item(final int index) {
-        try {
-            final Property property = style.getProperties().get(index);
-            return property.getName();
-        } catch (final Exception e) {
-            return null;
-        }
+        return expandedItem(index);
     }
 
     @Override
     public String removeProperty(String property) {
         String remove = style.removeProperty(property);
+        if (add) {
+            return remove;
+        }
         Attr attr = this.element.getAttributeNode("style");
         if (attr != null) {
             String style = attr.getNodeValue();
@@ -326,20 +412,31 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
             String style = attr.getNodeValue();
             if (style.contains(";")) {
                 String[] splitStyle = style.split(";");
-                for (String s : splitStyle) {
-                    String[] cssArray = s.split(":");
-                    if (lwPropertyName.equalsIgnoreCase(cssArray[0].trim())) {
-                        style = style.
-                                replace(cssArray[0], lwPropertyName).
-                                replace(cssArray[1], value).
-                                replace(":", ": ");
+                boolean found = false;
+                StringBuilder newStyle = new StringBuilder();
+                for (int i = 0; i < splitStyle.length; i++) {
+                    String[] cssArray = splitStyle[i].split(":");
+                    String trimmedProp = cssArray[0].trim();
+                    if (lwPropertyName.equalsIgnoreCase(trimmedProp)) {
+                        newStyle.append(lwPropertyName).append(": ").append(value);
+                        found = true;
+                    } else {
+                        newStyle.append(splitStyle[i].trim());
+                    }
+                    if (i < splitStyle.length - 1) {
+                        newStyle.append("; ");
                     }
                 }
-                attr.setValue(style);
+                if (!found) {
+                    newStyle.append("; ").append(lwPropertyName).append(": ").append(value);
+                }
+                attr.setValue(newStyle.toString());
             } else {
                 String[] splitStyle = style.split(":");
                 if (lwPropertyName.equalsIgnoreCase(splitStyle[0].trim())) {
                     attr.setValue(lwPropertyName + ": " + value);
+                } else {
+                    attr.setValue(style + "; " + lwPropertyName + ": " + value);
                 }
             }
         }
@@ -353,7 +450,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
 
     @Override
     public int getLength() {
-        return style.getLength();
+        return expandedLength();
     }
 
     public List<Property> getProperties() {
@@ -361,6 +458,9 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     }
 
     public AbstractCSSStyleRule getParentRule() {
+        if (style.getParentRule() == null) {
+            return null;
+        }
         if (style.getParentRule() instanceof CSSPageRuleImpl) {
             return new org.loboevolution.html.js.css.CSSPageRuleImpl((CSSPageRuleImpl) style.getParentRule());
         }
@@ -376,7 +476,6 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
         if (style.getParentRule() instanceof CSSMediaRuleImpl) {
             return new org.loboevolution.html.js.css.CSSMediaRuleImpl(style.getParentRule());
         }
-
         return new org.loboevolution.html.js.css.CSSStyleRuleImpl(style.getParentRule());
     }
 
@@ -713,7 +812,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
         if(Strings.isBlank(fontSize)) return "";
         if (Strings.isNotBlank(fontStyle) && !fontStyle.equals(CSSValues.NORMAL.getValue())) font.append(fontStyle).append(" ");
         if (Strings.isNotBlank(fontVariant) && !fontVariant.equals(CSSValues.NORMAL.getValue())) font.append(fontVariant).append(" ");
-        if (Strings.isNotBlank(fontWeight) && !fontWeight.equals(CSSValues.BOLD400.getValue())) font.append(fontWeight).append(" ");
+        if (Strings.isNotBlank(fontWeight) && !fontWeight.equals(CSSValues.NORMAL.getValue()) && !fontWeight.equals(CSSValues.BOLD400.getValue())) font.append(fontWeight).append(" ");
         if (Strings.isNotBlank(fontLineHeight) && !fontLineHeight.equals(CSSValues.NORMAL.getValue())) font.append(fontSize).append(" / ").append(fontLineHeight).append(" "); else font.append(fontSize).append(" ");
         if (Strings.isNotBlank(fontFamily)) font.append(fontFamily).append(" ");
         return font.toString().trim();
@@ -734,15 +833,13 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     /** {@inheritDoc} */
     @Override
     public String getFontSizeAdjust() {
-        return this.getPropertyValue(FONT_SIZE_ADJUST) != null ? this.getPropertyValue(FONT_SIZE_ADJUST) : CSSValues.NONE.getValue();
+        return this.getPropertyValue(FONT_SIZE_ADJUST);
     }
 
     /** {@inheritDoc} */
     @Override
     public String getFontStretch() {
-        String fontStretch = this.getPropertyValue(FONT_STRETCH);
-        return fontStretch == null && getFontSizeAdjust() != null ? CSSValues.NORMAL.getValue() :
-               fontStretch == null && getFontSizeAdjust() == null ? CSSValues.EXPANDED.getValue() : fontStretch;
+        return this.getPropertyValue(FONT_STRETCH);
     }
 
     /** {@inheritDoc} */
@@ -1211,7 +1308,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     @Override
     public String getzIndex() {
         final String zIndex = this.getPropertyValue(Z_INDEX);
-        if (zIndex != null && zIndex.contains(".")) {
+        if (zIndex.contains(".")) {
             return "";
         }
         final int val = HtmlValues.getPixelSize(zIndex, null, null, -1);
@@ -1221,7 +1318,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     /** {@inheritDoc} */
     @Override
     public void setAzimuth(final String azimuth) {
-       this.setProperty(AZIMUTH, azimuth);
+        this.setProperty(AZIMUTH, azimuth);
     }
 
     /** {@inheritDoc} */
@@ -1234,21 +1331,21 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     /** {@inheritDoc} */
     @Override
     public void setBackgroundAttachment(final String backgroundAttachment) {
-       this.setProperty(BACKGROUND_ATTACHMENT, backgroundAttachment);
+        this.setProperty(BACKGROUND_ATTACHMENT, backgroundAttachment);
         this.element.informLookInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
     public void setBackgroundColor(final String backgroundColor) {
-       this.setProperty(BACKGROUND_COLOR, backgroundColor);
+        this.setProperty(BACKGROUND_COLOR, backgroundColor);
         this.element.informLookInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
     public void setBackgroundPosition(final String backgroundPosition) {
-       this.setProperty(BACKGROUND_POSITION, backgroundPosition);
+        this.setProperty(BACKGROUND_POSITION, backgroundPosition);
         this.element.informLookInvalid();
     }
 
@@ -1262,7 +1359,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     /** {@inheritDoc} */
     @Override
     public void setBackgroundRepeat(final String backgroundRepeat) {
-       this.setProperty(BACKGROUND_REPEAT, backgroundRepeat);
+        this.setProperty(BACKGROUND_REPEAT, backgroundRepeat);
         this.element.informLookInvalid();
     }
 
@@ -1290,7 +1387,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     /** {@inheritDoc} */
     @Override
     public void setBorderBottomColor(final String borderBottomColor) {
-       this.setProperty(BORDER_BOTTOM_COLOR, borderBottomColor);
+        this.setProperty(BORDER_BOTTOM_COLOR, borderBottomColor);
         this.element.informLookInvalid();
     }
 
@@ -1311,7 +1408,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     /** {@inheritDoc} */
     @Override
     public void setBorderCollapse(final String borderCollapse) {
-       this.setProperty(BORDER_COLLAPSE, borderCollapse);
+        this.setProperty(BORDER_COLLAPSE, borderCollapse);
         this.element.informInvalid();
     }
 
@@ -1332,7 +1429,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     /** {@inheritDoc} */
     @Override
     public void setBorderLeftColor(final String borderLeftColor) {
-       this.setProperty(BORDER_LEFT_COLOR, borderLeftColor);
+        this.setProperty(BORDER_LEFT_COLOR, borderLeftColor);
         this.element.informLookInvalid();
     }
 
@@ -1360,7 +1457,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     /** {@inheritDoc} */
     @Override
     public void setBorderRightColor(final String borderRightColor) {
-       this.setProperty(BORDER_RIGHT_COLOR, borderRightColor);
+        this.setProperty(BORDER_RIGHT_COLOR, borderRightColor);
         this.element.informLookInvalid();
     }
 
@@ -1381,7 +1478,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     /** {@inheritDoc} */
     @Override
     public void setBorderSpacing(final String borderSpacing) {
-       this.setProperty(BORDER_SPACING, borderSpacing);
+        this.setProperty(BORDER_SPACING, borderSpacing);
         this.element.informInvalid();
     }
 
@@ -1402,7 +1499,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     /** {@inheritDoc} */
     @Override
     public void setBorderTopColor(final String borderTopColor) {
-       this.setProperty(BORDER_TOP_COLOR, borderTopColor);
+        this.setProperty(BORDER_TOP_COLOR, borderTopColor);
         this.element.informLookInvalid();
     }
 
@@ -1437,32 +1534,32 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     /** {@inheritDoc} */
     @Override
     public void setCaptionSide(final String captionSide) {
-       this.setProperty(CAPTION_SIDE, captionSide);
+        this.setProperty(CAPTION_SIDE, captionSide);
     }
 
     /** {@inheritDoc} */
     @Override
     public void setClear(final String clear) {
-       this.setProperty(CLEAR, clear);
+        this.setProperty(CLEAR, clear);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
     public void setClip(final String clip) {
-       this.setProperty(CLIP, clip);
+        this.setProperty(CLIP, clip);
     }
 
     /** {@inheritDoc} */
     @Override
     public void setClipPath(final String clip) {
-       this.setProperty(CLIP_PATH,clip);
+        this.setProperty(CLIP_PATH,clip);
     }
 
     /** {@inheritDoc} */
     @Override
     public void setClipRule(final String clip) {
-       this.setProperty(CLIP_RULE,clip);
+        this.setProperty(CLIP_RULE,clip);
     }
 
     /** {@inheritDoc} */
@@ -1475,81 +1572,81 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     /** {@inheritDoc} */
     @Override
     public void setContent(final String content) {
-       this.setProperty(CONTENT, content);
+        this.setProperty(CONTENT, content);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
     public void setCounterIncrement(final String counterIncrement) {
-       this.setProperty(COUNTER_INCREMENT, counterIncrement);
+        this.setProperty(COUNTER_INCREMENT, counterIncrement);
         this.element.informLookInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
     public void setCounterReset(final String counterReset) {
-       this.setProperty(COUNTER_RESET, counterReset);
+        this.setProperty(COUNTER_RESET, counterReset);
         this.element.informLookInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
     public void setCssFloat(final String cssFloat) {
-       this.setProperty(CSS_FLOAT, cssFloat);
+        this.setProperty(CSS_FLOAT, cssFloat);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
     public void setCue(final String cue) {
-       this.setProperty(CUE, cue);
+        this.setProperty(CUE, cue);
     }
 
     /** {@inheritDoc} */
     @Override
     public void setCueAfter(final String cueAfter) {
-       this.setProperty(CUE_AFTER, cueAfter);
+        this.setProperty(CUE_AFTER, cueAfter);
     }
 
     /** {@inheritDoc} */
     @Override
     public void setCueBefore(final String cueBefore) {
-       this.setProperty(CUE_BEFORE, cueBefore);
+        this.setProperty(CUE_BEFORE, cueBefore);
     }
 
     /** {@inheritDoc} */
     @Override
     public void setCursor(final String cursor) {
-       this.setProperty(CURSOR, cursor);
+        this.setProperty(CURSOR, cursor);
         this.element.informLookInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
     public void setDirection(final String direction) {
-       this.setProperty(DIRECTION, direction);
+        this.setProperty(DIRECTION, direction);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
     public void setDisplay(final String display) {
-       this.setProperty(DISPLAY, display);
+        this.setProperty(DISPLAY, display);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
     public void setElevation(final String elevation) {
-       this.setProperty(ELEVATION, elevation);
+        this.setProperty(ELEVATION, elevation);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
     public void setEmptyCells(final String emptyCells) {
-       this.setProperty(EMPTY_CELLS, emptyCells);
+        this.setProperty(EMPTY_CELLS, emptyCells);
     }
 
     /** {@inheritDoc} */
@@ -1562,7 +1659,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     /** {@inheritDoc} */
     @Override
     public void setFontFamily(final String fontFamily) {
-       this.setProperty(FONT_FAMILY, fontFamily);
+        this.setProperty(FONT_FAMILY, fontFamily);
         this.element.informInvalid();
     }
 
@@ -1584,35 +1681,35 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     /** {@inheritDoc} */
     @Override
     public void setFontStretch(final String fontStretch) {
-       this.setProperty(FONT_STRETCH, fontStretch);
+        this.setProperty(FONT_STRETCH, fontStretch);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
     public void setFontStyle(final String fontStyle) {
-       this.setProperty(FONT_STYLE, fontStyle);
+        this.setProperty(FONT_STYLE, fontStyle);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
     public void setFontVariant(final String fontVariant) {
-       this.setProperty(FONT_VARIANT, fontVariant);
+        this.setProperty(FONT_VARIANT, fontVariant);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
     public void setFontWeight(final String fontWeight) {
-       this.setProperty(FONT_WEIGHT, fontWeight);
+        this.setProperty(FONT_WEIGHT, fontWeight);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
     public void setFloat(final String value) {
-       this.setProperty(FLOAT, value);
+        this.setProperty(FLOAT, value);
     }
 
     /** {@inheritDoc} */
@@ -1639,35 +1736,35 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     /** {@inheritDoc} */
     @Override
     public void setLineHeight(final String lineHeight) {
-       this.setProperty(LINE_HEIGHT, lineHeight);
+        this.setProperty(LINE_HEIGHT, lineHeight);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
     public void setListStyle(final String listStyle) {
-       this.setProperty(LIST_STYLE, listStyle);
+        this.setProperty(LIST_STYLE, listStyle);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
     public void setListStyleImage(final String listStyleImage) {
-       this.setProperty(LIST_STYLE_IMAGE, listStyleImage);
+        this.setProperty(LIST_STYLE_IMAGE, listStyleImage);
         this.element.informLookInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
     public void setListStylePosition(final String listStylePosition) {
-       this.setProperty(LIST_STYLE_POSITION, listStylePosition);
+        this.setProperty(LIST_STYLE_POSITION, listStylePosition);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
     public void setListStyleType(final String listStyleType) {
-       this.setProperty(LIST_STYLE_TYPE, listStyleType);
+        this.setProperty(LIST_STYLE_TYPE, listStyleType);
         this.element.informLookInvalid();
     }
 
@@ -1709,13 +1806,13 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     /** {@inheritDoc} */
     @Override
     public void setMarkerOffset(final String markerOffset) {
-       this.setProperty(MARKER_OFFSET, markerOffset);
+        this.setProperty(MARKER_OFFSET, markerOffset);
     }
 
     /** {@inheritDoc} */
     @Override
     public void setMarks(final String marks) {
-       this.setProperty(MARKS, marks);
+        this.setProperty(MARKS, marks);
     }
 
     /** {@inheritDoc} */
@@ -1758,21 +1855,21 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     /** {@inheritDoc} */
     @Override
     public void setOutline(final String outline) {
-       this.setProperty(OUTLINE, outline);
-       this.element.informInvalid();
+        this.setProperty(OUTLINE, outline);
+        this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
     public void setOutlineColor(final String outlineColor) {
-       this.setProperty(OUTLINE_COLOR, outlineColor);
+        this.setProperty(OUTLINE_COLOR, outlineColor);
         this.element.informLookInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
     public void setOutlineStyle(final String outlineStyle) {
-       this.setProperty(OUTLINE_STYLE, outlineStyle);
+        this.setProperty(OUTLINE_STYLE, outlineStyle);
         this.element.informLookInvalid();
     }
 
@@ -1786,7 +1883,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     /** {@inheritDoc} */
     @Override
     public void setOverflow(final String overflow) {
-       this.setProperty(OVERFLOW, overflow);
+        this.setProperty(OVERFLOW, overflow);
         this.element.informInvalid();
     }
 
@@ -1828,84 +1925,84 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     /** {@inheritDoc} */
     @Override
     public void setPage(final String page) {
-       this.setProperty(PAGE, page);
+        this.setProperty(PAGE, page);
     }
 
     /** {@inheritDoc} */
     @Override
     public void setPageBreakAfter(final String pageBreakAfter) {
-       this.setProperty(PAGE_BREAK_AFTER, pageBreakAfter);
+        this.setProperty(PAGE_BREAK_AFTER, pageBreakAfter);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
     public void setPageBreakBefore(final String pageBreakBefore) {
-       this.setProperty(PAGE_BREAK_BEFORE, pageBreakBefore);
+        this.setProperty(PAGE_BREAK_BEFORE, pageBreakBefore);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
     public void setPageBreakInside(final String pageBreakInside) {
-       this.setProperty(PAGE_BREAK_INSIDE, pageBreakInside);
+        this.setProperty(PAGE_BREAK_INSIDE, pageBreakInside);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
     public void setPause(final String pause) {
-       this.setProperty(PAUSE, pause);
+        this.setProperty(PAUSE, pause);
     }
 
 
     /** {@inheritDoc} */
     @Override
     public void setPauseAfter(final String pauseAfter) {
-       this.setProperty(PAUSE_AFTER, pauseAfter);
+        this.setProperty(PAUSE_AFTER, pauseAfter);
     }
 
     /** {@inheritDoc} */
     @Override
     public void setPauseBefore(final String pauseBefore) {
-       this.setProperty(PAUSE_BEFORE, pauseBefore);
+        this.setProperty(PAUSE_BEFORE, pauseBefore);
     }
 
     /** {@inheritDoc} */
     @Override
     public void setPitch(final String pitch) {
-       this.setProperty(PITCH, pitch);
+        this.setProperty(PITCH, pitch);
     }
 
     /** {@inheritDoc} */
     @Override
     public void setPitchRange(final String pitchRange) {
-       this.setProperty(PITCH_RANGE, pitchRange);
+        this.setProperty(PITCH_RANGE, pitchRange);
     }
 
     /** {@inheritDoc} */
     @Override
     public void setPlayDuring(final String playDuring) {
-       this.setProperty(PLAY_DURING, playDuring);
+        this.setProperty(PLAY_DURING, playDuring);
     }
 
     /** {@inheritDoc} */
     @Override
     public void setPosition(final String position) {
-       this.setProperty(POSITION, position);
+        this.setProperty(POSITION, position);
         this.element.informPositionInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
     public void setQuotes(final String quotes) {
-       this.setProperty(QUOTES, quotes);
+        this.setProperty(QUOTES, quotes);
     }
 
     /** {@inheritDoc} */
     @Override
     public void setRichness(final String richness) {
-       this.setProperty(RICHNESS, richness);
+        this.setProperty(RICHNESS, richness);
     }
 
     /** {@inheritDoc} */
@@ -1918,64 +2015,64 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     /** {@inheritDoc} */
     @Override
     public void setSize(final String size) {
-       this.setProperty(SIZE, size);
+        this.setProperty(SIZE, size);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
     public void setSpeak(final String speak) {
-       this.setProperty(SPEAK, speak);
+        this.setProperty(SPEAK, speak);
     }
 
     /** {@inheritDoc} */
     @Override
     public void setSpeakHeader(final String speakHeader) {
-       this.setProperty(SPEAK_HEADER, speakHeader);
+        this.setProperty(SPEAK_HEADER, speakHeader);
     }
 
     /** {@inheritDoc} */
     @Override
     public void setSpeakNumeral(final String speakNumeral) {
-       this.setProperty(SPEAK_NUMERAL, speakNumeral);
+        this.setProperty(SPEAK_NUMERAL, speakNumeral);
     }
 
     /** {@inheritDoc} */
     @Override
     public void setSpeakPunctuation(final String speakPunctuation) {
-       this.setProperty(SPEAK_PUNCTUATION, speakPunctuation);
+        this.setProperty(SPEAK_PUNCTUATION, speakPunctuation);
     }
 
     /** {@inheritDoc} */
     @Override
     public void setSpeechRate(final String speechRate) {
-       this.setProperty(SPEECH_RATE, speechRate);
+        this.setProperty(SPEECH_RATE, speechRate);
     }
 
     /** {@inheritDoc} */
     @Override
     public void setStress(final String stress) {
-       this.setProperty(STRESS, stress);
+        this.setProperty(STRESS, stress);
     }
 
     /** {@inheritDoc} */
     @Override
     public void setTableLayout(final String tableLayout) {
-       this.setProperty(TABLE_LAYOUT, tableLayout);
+        this.setProperty(TABLE_LAYOUT, tableLayout);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
     public void setTextAlign(final String textAlign) {
-       this.setProperty(TEXT_ALIGN, textAlign);
+        this.setProperty(TEXT_ALIGN, textAlign);
         this.element.informLayoutInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
     public void setTextDecoration(final String textDecoration) {
-       this.setProperty(TEXT_DECORATION, textDecoration);
+        this.setProperty(TEXT_DECORATION, textDecoration);
         this.element.informLookInvalid();
     }
 
@@ -1989,14 +2086,14 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     /** {@inheritDoc} */
     @Override
     public void setTextShadow(final String textShadow) {
-       this.setProperty(TEXT_SHADOW, textShadow);
+        this.setProperty(TEXT_SHADOW, textShadow);
         this.element.informLookInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
     public void setTextTransform(final String textTransform) {
-       this.setProperty(TEXT_TRANSFORM, textTransform);
+        this.setProperty(TEXT_TRANSFORM, textTransform);
         this.element.informInvalid();
     }
 
@@ -2010,7 +2107,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     /** {@inheritDoc} */
     @Override
     public void setUnicodeBidi(final String unicodeBidi) {
-       this.setProperty(UNICODE_BIDI, unicodeBidi);
+        this.setProperty(UNICODE_BIDI, unicodeBidi);
         this.element.informInvalid();
     }
 
@@ -2024,35 +2121,35 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     /** {@inheritDoc} */
     @Override
     public void setVisibility(final String visibility) {
-       this.setProperty(VISIBILITY, visibility);
+        this.setProperty(VISIBILITY, visibility);
         this.element.informLookInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
     public void setVoiceFamily(final String voiceFamily) {
-       this.setProperty(VOICE_FAMILY, voiceFamily);
+        this.setProperty(VOICE_FAMILY, voiceFamily);
     }
 
     /** {@inheritDoc} */
     @Override
     public void setVolume(final String volume) {
-       this.setProperty(VOLUME, volume);
+        this.setProperty(VOLUME, volume);
     }
 
     /** {@inheritDoc} */
     @Override
     public void setWhiteSpace(final String whiteSpace) {
-       this.setProperty(WHITE_SPACE, whiteSpace);
+        this.setProperty(WHITE_SPACE, whiteSpace);
         this.element.informInvalid();
     }
 
     /** {@inheritDoc} */
     @Override
     public void setWidows(final String widows) {
-       if(!"0".equals(widows)) {
-           this.setProperty(WIDOWS, widows);
-       }
+        if(!"0".equals(widows)) {
+            this.setProperty(WIDOWS, widows);
+        }
     }
 
     /** {@inheritDoc} */
@@ -2078,7 +2175,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     /** {@inheritDoc} */
     @Override
     public void setFill(final String value) {
-       this.setProperty(FILL, value);
+        this.setProperty(FILL, value);
     }
 
     /** {@inheritDoc} */
@@ -2090,7 +2187,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     /** {@inheritDoc} */
     @Override
     public void setFillOpacity(final String value) {
-       this.setProperty(FILL_OPACITY, value);
+        this.setProperty(FILL_OPACITY, value);
         this.element.informInvalid();
     }
 
@@ -2103,7 +2200,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     /** {@inheritDoc} */
     @Override
     public void setOpacity(final String value) {
-       this.setProperty(OPACITY, value);
+        this.setProperty(OPACITY, value);
         this.element.informInvalid();
     }
 
@@ -2128,7 +2225,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     /** {@inheritDoc} */
     @Override
     public void setStroke(final String value) {
-       this.setProperty(STROKE, value);
+        this.setProperty(STROKE, value);
         this.element.informInvalid();
     }
 
@@ -2141,7 +2238,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     /** {@inheritDoc} */
     @Override
     public void setStrokeDashArray(final String value) {
-       this.setProperty(STROKE_DASHARRAY, value);
+        this.setProperty(STROKE_DASHARRAY, value);
         this.element.informInvalid();
     }
 
@@ -2154,7 +2251,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     /** {@inheritDoc} */
     @Override
     public void setStrokeLineCap(final String value) {
-       this.setProperty(STROKE_LINE_CAP, value);
+        this.setProperty(STROKE_LINE_CAP, value);
         this.element.informInvalid();
     }
 
@@ -2167,7 +2264,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     /** {@inheritDoc} */
     @Override
     public void setStrokeLineJoin(final String value) {
-       this.setProperty(STROKE_LINE_JOINP, value);
+        this.setProperty(STROKE_LINE_JOINP, value);
         this.element.informInvalid();
     }
 
@@ -2180,7 +2277,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     /** {@inheritDoc} */
     @Override
     public void setStrokeMiterLimit(final String value) {
-       this.setProperty(STROKE_MITERLIMIT, value);
+        this.setProperty(STROKE_MITERLIMIT, value);
         this.element.informInvalid();
     }
 
@@ -2193,7 +2290,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     /** {@inheritDoc} */
     @Override
     public void setStrokeOpacity(final String value) {
-       this.setProperty(STROKE_OPACITY, value);
+        this.setProperty(STROKE_OPACITY, value);
         this.element.informInvalid();
     }
 
@@ -2206,7 +2303,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     /** {@inheritDoc} */
     @Override
     public void setStrokeWidth(final String value) {
-       this.setProperty(STROKE_WIDTH, value);
+        this.setProperty(STROKE_WIDTH, value);
         this.element.informInvalid();
     }
 
@@ -2230,7 +2327,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
     /** {@inheritDoc} */
     @Override
     public void setTransform(final String value) {
-       this.setProperty(TRANSFORM, value);
+        this.setProperty(TRANSFORM, value);
         this.element.informInvalid();
     }
 
@@ -2252,6 +2349,54 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
             this.setProperty(Z_INDEX, zIndex);
             this.element.informPositionInvalid();
         }
+    }
+
+    private boolean isExpandedProperty(final String shorthand, final String property) {
+        return switch (shorthand) {
+            case MARGIN -> property.startsWith("margin-");
+            case PADDING -> property.startsWith("padding-");
+            case BORDER -> property.startsWith("border-");
+            case BORDER_TOP -> property.startsWith("border-top-");
+            case BORDER_LEFT -> property.startsWith("border-left-");
+            case BORDER_BOTTOM -> property.startsWith("border-bottom-");
+            case BORDER_RIGHT -> property.startsWith("border-right-");
+            case BORDER_COLOR -> property.startsWith("border-") && property.endsWith("-color");
+            case BORDER_STYLE -> BORDER_STYLE.equals(property) || property.startsWith("border-") && property.endsWith("-style");
+            case BORDER_WIDTH -> property.startsWith("border-") && property.endsWith("-width");
+            case BACKGROUND -> property.startsWith("background-");
+            case FONT -> property.startsWith("font-");
+            default -> shorthand.equals(property);
+        };
+    }
+
+    private int expandedLength() {
+        int len = 0;
+        for (final Property p : style.getProperties()) {
+            final String name = p.getName();
+            final String[] longhands = SHORTHAND_TO_LONGHANDS.get(name);
+            len += (longhands != null) ? longhands.length : 1;
+        }
+        return len;
+    }
+
+    private String expandedItem(final int index) {
+        int count = 0;
+        for (final Property p : style.getProperties()) {
+            final String name = p.getName();
+            final String[] longhands = SHORTHAND_TO_LONGHANDS.get(name);
+            if (longhands != null) {
+                if (index < count + longhands.length) {
+                    return longhands[index - count];
+                }
+                count += longhands.length;
+            } else {
+                if (index == count) {
+                    return name;
+                }
+                count++;
+            }
+        }
+        return null;
     }
 
     @Override

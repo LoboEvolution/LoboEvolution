@@ -76,8 +76,8 @@ public class HtmlValues {
 		}
 		return listStyle;
 	}
-	
-	
+
+
 	/**
 	 * <p>getListStyleImage.</p>
 	 *
@@ -127,11 +127,11 @@ public class HtmlValues {
 	public static ListValues getListStylePosition(final String token) {
 		final String tokenTL = token.toLowerCase();
 		final CSSValues tkn = CSSValues.get(tokenTL);
-        return switch (tkn) {
-            case INSIDE -> ListValues.POSITION_INSIDE;
-            case OUTSIDE -> ListValues.POSITION_OUTSIDE;
-            default -> ListValues.POSITION_UNSET;
-        };
+		return switch (tkn) {
+			case INSIDE -> ListValues.POSITION_INSIDE;
+			case OUTSIDE -> ListValues.POSITION_OUTSIDE;
+			default -> ListValues.POSITION_UNSET;
+		};
 	}
 
 	/**
@@ -143,54 +143,20 @@ public class HtmlValues {
 	public static ListValues getListStyleType(final String token) {
 		final String tokenTL = token.toLowerCase();
 		final CSSValues tkn = CSSValues.get(tokenTL);
-        return switch (tkn) {
-            case NONE -> ListValues.TYPE_NONE;
-            case DISC -> ListValues.TYPE_DISC;
-            case CIRCLE -> ListValues.TYPE_CIRCLE;
-            case SQUARE -> ListValues.TYPE_SQUARE;
-            case DECIMAL -> ListValues.TYPE_DECIMAL;
-            case DECIMAL_LEADING_ZERO -> ListValues.TYPE_DECIMAL_LEADING_ZERO;
-            case LOWER_ALPHA, LOWER_LATIN -> ListValues.TYPE_LOWER_ALPHA;
-            case UPPER_ALPHA, UPPER_LATIN -> ListValues.TYPE_UPPER_ALPHA;
-            case LOWER_ROMAN -> ListValues.TYPE_LOWER_ROMAN;
-            case UPPER_ROMAN -> ListValues.TYPE_UPPER_ROMAN;
-            default -> ListValues.TYPE_UNSET;
-        };
+		return switch (tkn) {
+			case NONE -> ListValues.TYPE_NONE;
+			case DISC -> ListValues.TYPE_DISC;
+			case CIRCLE -> ListValues.TYPE_CIRCLE;
+			case SQUARE -> ListValues.TYPE_SQUARE;
+			case DECIMAL -> ListValues.TYPE_DECIMAL;
+			case DECIMAL_LEADING_ZERO -> ListValues.TYPE_DECIMAL_LEADING_ZERO;
+			case LOWER_ALPHA, LOWER_LATIN -> ListValues.TYPE_LOWER_ALPHA;
+			case UPPER_ALPHA, UPPER_LATIN -> ListValues.TYPE_UPPER_ALPHA;
+			case LOWER_ROMAN -> ListValues.TYPE_LOWER_ROMAN;
+			case UPPER_ROMAN -> ListValues.TYPE_UPPER_ROMAN;
+			default -> ListValues.TYPE_UNSET;
+		};
 	}
-
-    /**
-     * <p>getPixelEmSize.</p>
-     *
-     * @param spec a {@link java.lang.String} object.
-     * @param style a {@link CSSStyleDeclarationImpl} object.
-     * @param window a {@link Window} object.
-     * @param errorValue a {@link java.lang.Integer} object.
-     * @return a {@link java.lang.Integer} object.
-     */
-    public static int getPixelEmSize(final String spec, final CSSStyleDeclarationImpl style, final Window window, final int errorValue) {
-        try {
-            if (Strings.isNotBlank(spec)) {
-
-                final String lcSpec = spec.toLowerCase();
-                String text = lcSpec.substring(0, lcSpec.length() - 2);
-
-                final WindowImpl win = (WindowImpl) window;
-                if (win == null || win.getConfig() == null) {
-                    return (int) Math.round(16.0f * Double.parseDouble(text));
-                }
-
-                final FontFactory FONT_FACTORY = FontFactory.getInstance();
-                final Font DEFAULT_FONT = FONT_FACTORY.getFont(FontValues.getDefaultFontKey(win.getConfig()));
-                final String fz = style.getPropertyValue("font-size");
-                final int fontSize = (fz == null) ? DEFAULT_FONT.getSize() : Integer.parseInt(fz);
-                return (int) Math.round(fontSize * Double.parseDouble(text));
-            }
-        } catch (final Exception ex) {
-            return errorValue;
-        }
-
-        return errorValue;
-    }
 
 	/**
 	 * <p>getPixelSize.</p>
@@ -204,25 +170,25 @@ public class HtmlValues {
 		try {
 			if (Strings.isNotBlank(spec)) {
 
-                GraphicsDevice gd = GraphicsEnvironment
-                        .getLocalGraphicsEnvironment()
-                        .getDefaultScreenDevice();
+				GraphicsDevice gd = GraphicsEnvironment
+						.getLocalGraphicsEnvironment()
+						.getDefaultScreenDevice();
 
-                GraphicsConfiguration gc = gd.getDefaultConfiguration();
-                AffineTransform tx = gc.getDefaultTransform();
+				GraphicsConfiguration gc = gd.getDefaultConfiguration();
+				AffineTransform tx = gc.getDefaultTransform();
 
-                double scaleX = tx.getScaleX();
-                double scaleY = tx.getScaleY();
-                int dpi = (int) (96 * Math.max(scaleX, scaleY));
+				double scaleX = tx.getScaleX();
+				double scaleY = tx.getScaleY();
+				int dpi = (int) (96 * Math.max(scaleX, scaleY));
 
-                final String lcSpec = spec.toLowerCase();
+				final String lcSpec = spec.toLowerCase();
 				String units = "";
 				String text = "";
 				if (isUnits(spec)) {
-					if (spec.endsWith("q")) {
+					if (lcSpec.endsWith("q")) {
 						units = lcSpec.substring(lcSpec.length() - 1);
 						text = lcSpec.substring(0, lcSpec.length() - 1);
-					} else if (spec.endsWith("rem")) {
+					} else if (lcSpec.endsWith("rem")) {
 						units = lcSpec.substring(lcSpec.length() - 3);
 						text = lcSpec.substring(0, lcSpec.length() - 3);
 					} else {
@@ -290,7 +256,7 @@ public class HtmlValues {
 
 		return errorValue;
 	}
-	
+
 	/**
 	 * <p>getPixelSize.</p>
 	 *
@@ -302,7 +268,7 @@ public class HtmlValues {
 	 */
 	public static Integer getPixelSize(final String spec, final RenderState renderState, final Window window, final Integer errorValue, final Integer availSize) {
 		try {
-			if (spec.endsWith("%")) {
+			if (spec != null && spec.toLowerCase().endsWith("%")) {
 				final String perText = spec.substring(0, spec.length() - 1);
 				final double val = Double.parseDouble(perText);
 				return (int) Math.round(availSize * val / 100.0);
@@ -313,7 +279,7 @@ public class HtmlValues {
 			return errorValue;
 		}
 	}
-	
+
 	/**
 	 * <p>resolutionValue.</p>
 	 *
@@ -321,26 +287,26 @@ public class HtmlValues {
 	 * @return a {@link java.lang.Integer} object.
 	 */
 	public static int resolutionValue(final CSSValueImpl cssValue) {
-        if (cssValue == null) {
-            return -1;
-        }
-        
-        if (cssValue.getPrimitiveType() == CSSPrimitiveValueType.CSS_DIMENSION) {
-        	final String units = cssValue.getCssText().substring(cssValue.getCssText().length() - 3);
-            return switch (units) {
-                case "dpi" -> (int) cssValue.getDoubleValue();
-                case "dpcm" -> (int) (2.54f * cssValue.getDoubleValue());
-                case "dppx" -> (int) (96 * cssValue.getDoubleValue());
-                default -> {
-                    if (HtmlValues.isUnits(cssValue.getCssText())) {
-                        yield HtmlValues.getPixelSize(cssValue.getCssText(), null, null, -1);
-                    }
-                    yield -1;
-                }
-            };
-       }
-        return -1;
-    }
+		if (cssValue == null) {
+			return -1;
+		}
+
+		if (cssValue.getPrimitiveType() == CSSPrimitiveValueType.CSS_DIMENSION) {
+			final String units = cssValue.getCssText().substring(cssValue.getCssText().length() - 3);
+			return switch (units) {
+				case "dpi" -> (int) cssValue.getDoubleValue();
+				case "dpcm" -> (int) (2.54f * cssValue.getDoubleValue());
+				case "dppx" -> (int) (96 * cssValue.getDoubleValue());
+				default -> {
+					if (HtmlValues.isUnits(cssValue.getCssText())) {
+						yield HtmlValues.getPixelSize(cssValue.getCssText(), null, null, -1);
+					}
+					yield -1;
+				}
+			};
+		}
+		return -1;
+	}
 
 	/**
 	 * <p>isBackgroundPosition.</p>
@@ -399,7 +365,7 @@ public class HtmlValues {
 	public static boolean isUrl(final String token) {
 		return token.toLowerCase().startsWith("url(");
 	}
-	
+
 	/**
 	 * <p>isGradient.</p>
 	 *
@@ -409,7 +375,7 @@ public class HtmlValues {
 	public static boolean isGradient(final String token) {
 		return token.toLowerCase().contains("gradient");
 	}
-	
+
 	/**
 	 * <p>quoteAndEscape.</p>
 	 *
@@ -424,14 +390,14 @@ public class HtmlValues {
 		while (index < length) {
 			final char ch = text.charAt(index);
 			switch (ch) {
-			case '\'':
-				result.append("\\'");
-				break;
-			case '\\':
-				result.append("\\\\");
-				break;
-			default:
-				result.append(ch);
+				case '\'':
+					result.append("\\'");
+					break;
+				case '\\':
+					result.append("\\\\");
+					break;
+				default:
+					result.append(ch);
 			}
 			index++;
 		}
@@ -453,37 +419,37 @@ public class HtmlValues {
 		for (int i = 0; i < len; i++) {
 			final char ch = cssValue.charAt(i);
 			switch (ch) {
-			case '(':
-				parenCount++;
-				if (currentWord == null) {
-					currentWord = new StringBuilder();
-				}
-				currentWord.append(ch);
-				break;
-			case ')':
-				parenCount--;
-				if (currentWord == null) {
-					currentWord = new StringBuilder();
-				}
-				currentWord.append(ch);
-				break;
-			case ' ':
-			case '\t':
-			case '\n':
-			case '\r':
-				if (parenCount == 0) {
-					tokens.add(currentWord.toString());
-					currentWord = null;
+				case '(':
+					parenCount++;
+					if (currentWord == null) {
+						currentWord = new StringBuilder();
+					}
+					currentWord.append(ch);
 					break;
-				} else {
-					// Fall through - no break
-				}
-			default:
-				if (currentWord == null) {
-					currentWord = new StringBuilder();
-				}
-				currentWord.append(ch);
-				break;
+				case ')':
+					parenCount--;
+					if (currentWord == null) {
+						currentWord = new StringBuilder();
+					}
+					currentWord.append(ch);
+					break;
+				case ' ':
+				case '\t':
+				case '\n':
+				case '\r':
+					if (parenCount == 0) {
+						tokens.add(currentWord.toString());
+						currentWord = null;
+						break;
+					} else {
+						// Fall through - no break
+					}
+				default:
+					if (currentWord == null) {
+						currentWord = new StringBuilder();
+					}
+					currentWord.append(ch);
+					break;
 			}
 		}
 		if (currentWord != null) {
@@ -507,71 +473,72 @@ public class HtmlValues {
 		if (index < length) {
 			final char ch = text.charAt(index);
 			switch (ch) {
-			case '\'':
-				single = true;
-				break;
-			case '"':
-				break;
-			case '\\':
-				escape = true;
-				break;
-			default:
-				result.append(ch);
+				case '\'':
+					single = true;
+					break;
+				case '"':
+					break;
+				case '\\':
+					escape = true;
+					break;
+				default:
+					result.append(ch);
 			}
 			index++;
 		}
 		OUTER: for (; index < length; index++) {
 			final char ch = text.charAt(index);
 			switch (ch) {
-			case '\'':
-				if (escape || !single) {
-					escape = false;
+				case '\'':
+					if (escape || !single) {
+						escape = false;
+						result.append(ch);
+					} else {
+						break OUTER;
+					}
+					break;
+				case '"':
+					if (escape || single) {
+						escape = false;
+						result.append(ch);
+					} else {
+						break OUTER;
+					}
+					break;
+				case '\\':
+					if (escape) {
+						escape = false;
+						result.append(ch);
+					} else {
+						escape = true;
+					}
+					break;
+				default:
+					if (escape) {
+						escape = false;
+						result.append('\\');
+					}
 					result.append(ch);
-				} else {
-					break OUTER;
-				}
-				break;
-			case '"':
-				if (escape || single) {
-					escape = false;
-					result.append(ch);
-				} else {
-					break OUTER;
-				}
-				break;
-			case '\\':
-				if (escape) {
-					escape = false;
-					result.append(ch);
-				} else {
-					escape = true;
-				}
-				break;
-			default:
-				if (escape) {
-					escape = false;
-					result.append('\\');
-				}
-				result.append(ch);
 			}
 		}
 		return result.toString();
 	}
 
 	public static boolean isUnits(final String token) {
-		return token.endsWith("px") ||
-				token.endsWith("pt") ||
-				token.endsWith("pc") ||
-				token.endsWith("cm") ||
-				token.endsWith("mm") ||
-				token.endsWith("ex") ||
-				token.endsWith("em") ||
-				(token.endsWith("in")  && !token.startsWith("zoom") && !token.equals("thin")) ||
-				token.endsWith("q") ||
-				token.endsWith("vh") ||
-				token.endsWith("vw") ||
-                token.endsWith("deg") ||
-				token.endsWith("rem");
+		final String lowerToken = token.toLowerCase();
+		return lowerToken.endsWith("px") ||
+				lowerToken.endsWith("pt") ||
+				lowerToken.endsWith("pc") ||
+				lowerToken.endsWith("cm") ||
+				lowerToken.endsWith("mm") ||
+				lowerToken.endsWith("ex") ||
+				lowerToken.endsWith("em") ||
+				(lowerToken.endsWith("in")  && !lowerToken.startsWith("zoom") && !lowerToken.equals("thin")) ||
+				lowerToken.endsWith("q") ||
+				lowerToken.endsWith("vh") ||
+				lowerToken.endsWith("vw") ||
+				lowerToken.endsWith("deg") ||
+				lowerToken.endsWith("rem");
 	}
 
 	private static int inches(final double value, final int dpi, final String text) {

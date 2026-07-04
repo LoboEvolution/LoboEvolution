@@ -403,7 +403,7 @@ public class CSSPageRuleTest extends LoboUnitTest {
 
     @Test
     @Alerts({"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]", "4", "[object CSSPageRule]",
-            "margin: 1cm;", "margin-top", "margin-right", "margin-bottom", "margin-left"})
+            "margin: 1cm", "margin-top", "margin-right", "margin-bottom", "margin-left"})
     public void style() {
         final String html
                 = "<html><body>\n" 

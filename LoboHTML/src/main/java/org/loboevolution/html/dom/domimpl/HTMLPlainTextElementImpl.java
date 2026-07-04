@@ -24,31 +24,34 @@
  * Contact info: ivan.difrancesco@yahoo.it
  */
 
-package org.loboevolution.net;
+package org.loboevolution.html.dom.domimpl;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import org.loboevolution.html.renderstate.PreRenderState;
+import org.loboevolution.html.renderstate.RenderState;
 
 /**
- * <p>IOUtil class.</p>
+ * <p>HTMLPlainTextElementImpl class.</p>
  */
-public class IOUtil {
+public class HTMLPlainTextElementImpl extends HTMLElementImpl {
 
     /**
-     * Read all inputStream content to a byte array.
+     * <p>Constructor for HTMLPlainTextElementImpl.</p>
      *
-     * @param inputStream input stream
-     * @return content as byte array
-     * @throws IOException on error
+     * @param name a {@link java.lang.String} object.
      */
-    public static byte[] readFully(final InputStream inputStream) throws IOException {
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        final byte[] buffer = new byte[4096];
-        int bytesRead;
-        while ((bytesRead = inputStream.read(buffer)) != -1) {
-            baos.write(buffer, 0, bytesRead);
-        }
-        return baos.toByteArray();
+    public HTMLPlainTextElementImpl(final String name) {
+        super(name);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    protected RenderState createRenderState(final RenderState prevRenderState) {
+        return new PreRenderState(prevRenderState, this);
+    }
+
+    @Override
+    public int getClientHeight() {
+        final int clientHeight = super.getClientHeight();
+        return clientHeight == 0 ? 30 : clientHeight;
     }
 }

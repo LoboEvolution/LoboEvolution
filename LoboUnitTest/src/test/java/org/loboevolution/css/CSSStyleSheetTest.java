@@ -686,7 +686,7 @@ public class CSSStyleSheetTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts({"none", "1"})
+    @Alerts({"block", "1"})
     public void mediaOnLinkTagNoMedia() {
         mediaOnLinkTag("");
     }

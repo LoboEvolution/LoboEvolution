@@ -91,10 +91,9 @@ public class CSSCharsetRuleImpl extends AbstractCSSRuleImpl {
         if (this == obj) {
             return true;
         }
-        if (!(obj instanceof CSSCharsetRuleImpl)) {
+        if (!(obj instanceof CSSCharsetRuleImpl ccr)) {
             return false;
         }
-        final CSSCharsetRuleImpl ccr = (CSSCharsetRuleImpl) obj;
         return super.equals(obj)
             && ParserUtils.equals(getEncoding(), ccr.getEncoding());
     }

@@ -1263,7 +1263,7 @@ public class HTMLInputElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"left", "right", "bottom", "middle", "top", "wrong", ""})
+    @Alerts({"left", "right", "bottom", "middle", "top", "wrong", "null"})
     public void getAlign() {
         final String html
                 = "<html><body>\n"

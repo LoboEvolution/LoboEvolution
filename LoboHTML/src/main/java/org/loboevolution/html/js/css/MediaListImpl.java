@@ -26,13 +26,22 @@
 
 package org.loboevolution.html.js.css;
 
+import org.htmlunit.cssparser.dom.Property;
 import org.htmlunit.cssparser.parser.media.MediaQuery;
 import org.loboevolution.css.MediaList;
+import org.loboevolution.js.AbstractScriptableDelegate;
+import org.loboevolution.js.JavaClassWrapperFactory;
+
+import java.util.List;
 
 /**
  * <p>MediaListImpl class.</p>
  */
-public class MediaListImpl implements MediaList {
+public class MediaListImpl extends AbstractScriptableDelegate implements MediaList {
+
+    static {
+        JavaClassWrapperFactory.getInstance().registerCustomClassName(MediaListImpl.class, "MediaList");
+    }
 
     private final org.htmlunit.cssparser.dom.MediaListImpl media;
 
@@ -40,14 +49,18 @@ public class MediaListImpl implements MediaList {
         this.media = media;
     }
 
-    /** {@inheritDoc} */
-    @Override
+    /**
+     * <p>getMediaText.</p>
+     * @return the media text string.
+     */
     public String getMediaText() {
-        return media.getMediaText();
+        return media == null ? "" : media.getMediaText();
     }
 
-    /** {@inheritDoc} */
-    @Override
+    /**
+     * <p>getLength.</p>
+     * @return the number of media queries.
+     */
     public int getLength() {
         return media == null ? 0 : media.getLength();
     }
@@ -55,11 +68,56 @@ public class MediaListImpl implements MediaList {
     /** {@inheritDoc} */
     @Override
     public String item(final int index) {
-        if (index < 0 || index >= getLength()) {
+        if (media == null || index < 0 || index >= getLength()) {
             return null;
         }
         final MediaQuery mq = media.mediaQuery(index);
-        return mq.toString();
+        return mq == null ? null : formatMediaQuery(mq);
+    }
+
+    /**
+     * Formats a media query to the expected string representation.
+     * @param mq the media query
+     * @return formatted media query string
+     */
+    private String formatMediaQuery(final MediaQuery mq) {
+        final StringBuilder sb = new StringBuilder();
+        boolean hasMedia = false;
+
+        if (mq.isOnly()) {
+            sb.append("only ");
+            sb.append(mq.getMedia());
+            hasMedia = true;
+        } else if (mq.isNot()) {
+            sb.append("not ");
+            sb.append(mq.getMedia());
+            hasMedia = true;
+        } else {
+            if (mq.getMedia() != null && !mq.getMedia().isEmpty()) {
+                sb.append(mq.getMedia());
+                hasMedia = true;
+            }
+        }
+
+        final List<Property> properties = mq.getProperties();
+        for (final Property prop : properties) {
+            if (hasMedia) {
+                sb.append(" and ");
+            } else {
+                hasMedia = true;
+            }
+            sb.append("(");
+            sb.append(prop.getName());
+            if (prop.getValue() != null) {
+                final String value = prop.getValue().getCssText();
+                if (value != null && !value.isEmpty()) {
+                    sb.append(": ");
+                    sb.append(value);
+                }
+            }
+            sb.append(")");
+        }
+        return sb.toString();
     }
 
     /** {@inheritDoc} */
@@ -76,6 +134,6 @@ public class MediaListImpl implements MediaList {
 
     @Override
     public String toString() {
-        return getLength() > 0 ? "all" : "";
+        return getLength() > 0 ? getMediaText()  : "";
     }
 }

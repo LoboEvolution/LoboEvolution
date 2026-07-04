@@ -98,10 +98,9 @@ public class CSSRuleListImpl implements Serializable {
         if (this == obj) {
             return true;
         }
-        if (!(obj instanceof CSSRuleListImpl)) {
+        if (!(obj instanceof CSSRuleListImpl crl)) {
             return false;
         }
-        final CSSRuleListImpl crl = (CSSRuleListImpl) obj;
         return equalsRules(crl);
     }
 

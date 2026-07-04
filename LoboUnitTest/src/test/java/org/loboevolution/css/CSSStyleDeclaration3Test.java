@@ -39,7 +39,7 @@ public class CSSStyleDeclaration3Test extends LoboUnitTest {
 
 
     @Test
-    @Alerts({"null", "null", "null", "null", "null"})
+    @Alerts({"", "", "", "", ""})
     public void backgroundEmpty() {
         background("");
     }
@@ -122,26 +122,8 @@ public class CSSStyleDeclaration3Test extends LoboUnitTest {
         background("#fff no-repeat 20px 100px");
     }
 
-    private void background(final String backgroundStyle) {
-        final String html =
-                "<html>\n"
-                        + "<body>\n"
-                        + "  <div id='tester' style='background: " + backgroundStyle + "' >hello</div>\n"
-                        + "  <script>\n"
-                        + "   var myStyle = document.getElementById('tester').style;\n"
-                        + "   alert(myStyle.backgroundColor);\n"
-                        + "   alert(myStyle.backgroundImage);\n"
-                        + "   alert(myStyle.backgroundRepeat);\n"
-                        + "   alert(myStyle.backgroundPosition);\n"
-                        + "   alert(myStyle.backgroundAttachment);\n"
-                        + "  </script>\n"
-                        + "</body></html>";
-
-        checkHtmlAlert(html);
-    }
-
     @Test
-    @Alerts({"null", "null", "null", "null", "null"})
+    @Alerts({"", "", "", "", ""})
     public void backgroundCssEmpty() {
         backgroundCss("");
     }
@@ -224,28 +206,8 @@ public class CSSStyleDeclaration3Test extends LoboUnitTest {
         backgroundCss("#fff 20px 100px");
     }
 
-    private void backgroundCss(final String backgroundStyle) {
-        final String html =
-                "<html>\n"
-                        + "</head>\n"
-                        + "  <style type='text/css'>div { background: " + backgroundStyle + " }</style>\n"
-                        + "</head>\n"
-                        + "<body>\n"
-                        + "  <div id='tester'>hello</div>\n"
-                        + "  <script>\n"
-                        + "   var myStyle = document.styleSheets[0].cssRules[0].style;\n"
-                        + "   alert(myStyle.backgroundColor);\n"
-                        + "   alert(myStyle.backgroundImage);\n"
-                        + "   alert(myStyle.backgroundRepeat);\n"
-                        + "   alert(myStyle.backgroundPosition);\n"
-                        + "   alert(myStyle.backgroundAttachment);\n"
-                        + "  </script>\n"
-                        + "</body></html>";
-        checkHtmlAlert(html);
-    }
-
     @Test
-    @Alerts({"initial", "null", "null", "null", "null"})
+    @Alerts({"initial", "", "", "", ""})
     public void backgroundComputedEmpty() {
         backgroundComputed("");
     }
@@ -350,25 +312,25 @@ public class CSSStyleDeclaration3Test extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"null", "null", "null", "null", "null", "null"})
+    @Alerts({"", "", "", "", "", ""})
     public void fontEmpty() {
         font("");
     }
 
     @Test
-    @Alerts({"null", "null", "null", "null", "null", "null"})
+    @Alerts({"", "", "", "", "", ""})
     public void fontSizeOnly() {
         font("14px");
     }
 
     @Test
-    @Alerts({"null", "null", "null", "null", "null", "null"})
+    @Alerts({"", "", "", "", "", ""})
     public void fontFamilyOnly() {
         font("sans-serif");
     }
 
     @Test
-    @Alerts({"null", "null", "null", "null", "null", "null"})
+    @Alerts({"", "", "", "", "", ""})
     public void fontAllExceptSizeAndFamily() {
         font("italic small-caps bold");
     }
@@ -452,25 +414,25 @@ public class CSSStyleDeclaration3Test extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"normal", "normal", "normal", "14px", "normal", "sans-serif", "0.5", "normal"})
+    @Alerts({"normal", "normal", "normal", "14px", "normal", "sans-serif", "0.5", ""})
     public void fontSizeAdjustBefore() {
         font("14pX sAns-serif", "font-size-adjust: 0.5");
     }
 
     @Test
-    @Alerts({"normal", "normal", "normal", "14px", "normal", "sans-serif", "0.5", "normal"})
+    @Alerts({"normal", "normal", "normal", "14px", "normal", "sans-serif", "0.5", ""})
     public void fontSizeAdjustAfter() {
         font("14pX sAns-serif; font-size-adjust: 0.5", "");
     }
 
     @Test
-    @Alerts({"normal", "normal", "normal", "14px", "normal", "sans-serif", "none", "expanded"})
+    @Alerts({"normal", "normal", "normal", "14px", "normal", "sans-serif", "", "expanded"})
     public void fontStretchBefore() {
         font("14pX sAns-serif", "font-stretch: expanded");
     }
 
     @Test
-    @Alerts({"normal", "normal", "normal", "14px", "normal", "sans-serif", "none", "expanded"})
+    @Alerts({"normal", "normal", "normal", "14px", "normal", "sans-serif", "", "expanded"})
     public void fontStretchAfter() {
         font("14pX sAns-serif; font-stretch: expanded", "");
     }
@@ -516,25 +478,25 @@ public class CSSStyleDeclaration3Test extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"null", "null", "null", "null", "null", "null"})
+    @Alerts({"", "", "", "", "", ""})
     public void fontCssEmpty() {
         fontCss("");
     }
 
     @Test
-    @Alerts({"null", "null", "null", "null", "null", "null"})
+    @Alerts({"", "", "", "", "", ""})
     public void fontCssSizeOnly() {
         fontCss("14px");
     }
 
     @Test
-    @Alerts({"null", "null", "null", "null", "null", "null"})
+    @Alerts({"", "", "", "", "", ""})
     public void fontCssFamilyOnly() {
         fontCss("sans-serif");
     }
 
     @Test
-    @Alerts({"null", "null", "null", "null", "null", "null"})
+    @Alerts({"", "", "", "", "", ""})
     public void fontCssAllExceptSizeAndFamily() {
         fontCss("italic small-caps bold");
     }
@@ -618,25 +580,25 @@ public class CSSStyleDeclaration3Test extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"normal", "normal", "normal", "14px", "normal", "sans-serif", "0.5", "normal"})
+    @Alerts({"normal", "normal", "normal", "14px", "normal", "sans-serif", "0.5", ""})
     public void fontCssSizeAdjustBefore() {
         fontCss("14pX sAns-serif", "font-size-adjust: 0.5");
     }
 
     @Test
-    @Alerts({"normal", "normal", "normal", "14px", "normal", "sans-serif", "0.5", "normal"})
+    @Alerts({"normal", "normal", "normal", "14px", "normal", "sans-serif", "0.5", ""})
     public void fontCssSizeAdjustAfter() {
         fontCss("14pX sAns-serif; font-size-adjust: 0.5", "");
     }
 
     @Test
-    @Alerts({"normal", "normal", "normal", "14px", "normal", "sans-serif", "none", "expanded"})
+    @Alerts({"normal", "normal", "normal", "14px", "normal", "sans-serif", "", "expanded"})
     public void fontCssStretchBefore() {
         fontCss("14pX sAns-serif", "font-stretch: expanded");
     }
 
     @Test
-    @Alerts({"normal", "normal", "normal", "14px", "normal", "sans-serif", "none", "expanded"})
+    @Alerts({"normal", "normal", "normal", "14px", "normal", "sans-serif", "", "expanded"})
     public void fontCssStretchAfter() {
         fontCss("14pX sAns-serif; font-stretch: expanded", "");
     }
@@ -688,25 +650,25 @@ public class CSSStyleDeclaration3Test extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"normal", "normal", "400", "16px", "normal", "Times New Roman"})
+    @Alerts({"normal", "normal", "400", "16px", "normal", "serif"})
     public void fontComputedEmpty() {
         fontComputed("");
     }
 
     @Test
-    @Alerts({"normal", "normal", "400", "16px", "normal", "Times New Roman"})
+    @Alerts({"normal", "normal", "400", "16px", "normal", "serif"})
     public void fontComputedSizeOnly() {
         fontComputed("14px");
     }
 
     @Test
-    @Alerts({"normal", "normal", "400", "16px", "normal", "Times New Roman"})
+    @Alerts({"normal", "normal", "400", "16px", "normal", "serif"})
     public void fontComputedFamilyOnly() {
         fontComputed("sans-serif");
     }
 
     @Test
-    @Alerts({"normal", "normal", "400", "16px", "normal", "Times New Roman"})
+    @Alerts({"normal", "normal", "400", "16px", "normal", "serif"})
     public void fontComputedAllExceptSizeAndFamily() {
         fontComputed("italic small-caps bold");
     }
@@ -802,13 +764,13 @@ public class CSSStyleDeclaration3Test extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"normal", "normal", "400", "14px", "normal", "sans-serif", "none", "125%"})
+    @Alerts({"normal", "normal", "400", "14px", "normal", "sans-serif", "", "125%"})
     public void fontComputedStretchBefore() {
         fontComputed("14pX sAns-serif", "font-stretch: expanded");
     }
 
     @Test
-    @Alerts({"normal", "normal", "400", "14px", "normal", "sans-serif", "none", "125%"})
+    @Alerts({"normal", "normal", "400", "14px", "normal", "sans-serif", "", "125%"})
     public void fontComputedStretchAfter() {
         fontComputed("14pX sAns-serif; font-stretch: expanded", "");
     }
@@ -863,7 +825,7 @@ public class CSSStyleDeclaration3Test extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"null", "null", "null", "null", "null", "null", "null", "null", "null", "null", "null", "null"})
+    @Alerts({"", "", "", "", "", "", "", "", "", "", "", ""})
     public void borderEmpty() {
         border("");
     }
@@ -964,7 +926,7 @@ public class CSSStyleDeclaration3Test extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"null", "null", "null", "null", "null", "null", "null", "null", "null", "null", "null", "null"})
+    @Alerts({"", "", "", "", "", "", "", "", "", "", "", ""})
     public void borderCssEmpty() {
         borderCss("");
     }
@@ -1171,5 +1133,43 @@ public class CSSStyleDeclaration3Test extends LoboUnitTest {
                         + "</body></html>";
 
        checkHtmlAlert(html);
+    }
+
+    private void backgroundCss(final String backgroundStyle) {
+        final String html =
+                "<html>\n"
+                        + "</head>\n"
+                        + "  <style type='text/css'>div { background: " + backgroundStyle + " }</style>\n"
+                        + "</head>\n"
+                        + "<body>\n"
+                        + "  <div id='tester'>hello</div>\n"
+                        + "  <script>\n"
+                        + "   var myStyle = document.styleSheets[0].cssRules[0].style;\n"
+                        + "   alert(myStyle.backgroundColor);\n"
+                        + "   alert(myStyle.backgroundImage);\n"
+                        + "   alert(myStyle.backgroundRepeat);\n"
+                        + "   alert(myStyle.backgroundPosition);\n"
+                        + "   alert(myStyle.backgroundAttachment);\n"
+                        + "  </script>\n"
+                        + "</body></html>";
+        checkHtmlAlert(html);
+    }
+
+    private void background(final String backgroundStyle) {
+        final String html =
+                "<html>\n"
+                        + "<body>\n"
+                        + "  <div id='tester' style='background: " + backgroundStyle + "' >hello</div>\n"
+                        + "  <script>\n"
+                        + "   var myStyle = document.getElementById('tester').style;\n"
+                        + "   alert(myStyle.backgroundColor);\n"
+                        + "   alert(myStyle.backgroundImage);\n"
+                        + "   alert(myStyle.backgroundRepeat);\n"
+                        + "   alert(myStyle.backgroundPosition);\n"
+                        + "   alert(myStyle.backgroundAttachment);\n"
+                        + "  </script>\n"
+                        + "</body></html>";
+
+        checkHtmlAlert(html);
     }
 }

@@ -24,31 +24,15 @@
  * Contact info: ivan.difrancesco@yahoo.it
  */
 
-package org.loboevolution.net;
+package org.loboevolution.html.builder;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import org.loboevolution.html.dom.HTMLElement;
+import org.loboevolution.html.dom.domimpl.HTMLListingElementImpl;
 
-/**
- * <p>IOUtil class.</p>
- */
-public class IOUtil {
+public class ListingBuilder implements HTMLElementBuilder {
 
-    /**
-     * Read all inputStream content to a byte array.
-     *
-     * @param inputStream input stream
-     * @return content as byte array
-     * @throws IOException on error
-     */
-    public static byte[] readFully(final InputStream inputStream) throws IOException {
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        final byte[] buffer = new byte[4096];
-        int bytesRead;
-        while ((bytesRead = inputStream.read(buffer)) != -1) {
-            baos.write(buffer, 0, bytesRead);
-        }
-        return baos.toByteArray();
+    @Override
+    public HTMLElement build(final String name) {
+        return new HTMLListingElementImpl(name);
     }
 }

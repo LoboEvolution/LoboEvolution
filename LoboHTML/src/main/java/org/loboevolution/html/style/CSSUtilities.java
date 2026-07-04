@@ -144,6 +144,14 @@ public final class CSSUtilities {
 	 */
 	public static String preProcessCss(final String text) {
 		try {
+			// First, remove HTML comment markers <!-- and -->
+			// and CDATA section markers <![CDATA[ and ]]>
+			// In HTML mode, these markers are not valid and should be stripped
+			String processed = text;
+			processed = processed.replace("<!--", "");
+			processed = processed.replace("-->", "");
+			processed = processed.replace("<!\\[CDATA\\[", "");
+			processed = processed.replace("]]>", "");
 			final BufferedReader reader = new BufferedReader(new StringReader(text));
 			String line;
 			final StringBuilder sb = new StringBuilder();

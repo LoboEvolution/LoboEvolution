@@ -187,8 +187,9 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 					info.setName(scriptURL != null ? scriptURL.getFile() : new URI(scriptURI).toURL().getFile());
 
 					try (InputStream in = getStream(scriptURL, scriptURI, info)) {
-						if (AlgorithmDigest.validate(IOUtil.readFully(in), getIntegrity())) {
-							try (final Reader reader = new InputStreamReader(in, StandardCharsets.UTF_8)) {
+						final byte[] scriptContent = IOUtil.readFully(in);
+						if (AlgorithmDigest.validate(scriptContent, getIntegrity())) {
+							try (final Reader reader = new InputStreamReader(new java.io.ByteArrayInputStream(scriptContent), StandardCharsets.UTF_8)) {
 								final BufferedReader br = new BufferedReader(reader);
 								ctx.evaluateReader(scope, br, scriptURI, 1, null);
 							} catch (Exception e) {

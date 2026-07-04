@@ -79,7 +79,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
         final HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
         final HTMLElementImpl parent = (HTMLElementImpl) element.getParentElement();
 
-        if (parent != null) {
+        if (parent != null && parent.getStyle() != null) {
             final CSSStyleDeclaration currentStyle = parent.getStyle();
             availHeight = HtmlValues.getPixelSize(currentStyle.getHeight(), element.getRenderState(), window, -1);
             availWidth = HtmlValues.getPixelSize(currentStyle.getWidth(), element.getRenderState(), window, -1);
@@ -126,7 +126,11 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      */
     @Override
     public String getBackgroundAttachment() {
-        return this.element.getParentNode() == null ? null : style.getBackgroundAttachment();
+        if (this.element.getParentNode() == null) {
+            return null;
+        }
+        final String value = style.getBackgroundAttachment();
+        return Strings.isBlank(value) ? "" : value;
     }
 
     /**
@@ -142,7 +146,11 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      */
     @Override
     public String getBackgroundImage() {
-        return this.element.getParentNode() == null ? null : style.getBackgroundImage();
+        if (this.element.getParentNode() == null) {
+            return null;
+        }
+        final String value = style.getBackgroundImage();
+        return Strings.isBlank(value) ? "" : value;
     }
 
     /**
@@ -184,7 +192,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
             return builder.toString().trim();
         }
 
-        return null;
+        return "";
     }
 
     /**
@@ -192,7 +200,11 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      */
     @Override
     public String getBackgroundRepeat() {
-        return this.element.getParentNode() == null ? null : style.getBackgroundRepeat();
+        if (this.element.getParentNode() == null) {
+            return null;
+        }
+        final String value = style.getBackgroundRepeat();
+        return Strings.isBlank(value) ? "" : value;
     }
 
     /**
@@ -246,7 +258,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
             final int borderBottomWidth = ((HtmlInsets) element.getRenderState().getBorderInfo().getInsets()).getBottom();
             return this.element.getParentNode() == null ? "" : borderBottomWidth == -1 ? "0px" : borderBottomWidth + "px";
         }
-        return "";
+        return "0px";
     }
 
     /**
@@ -254,7 +266,23 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      */
     @Override
     public String getBorderCollapse() {
-        return this.element.getParentNode() == null ? null : style.getBorderCollapse();
+        if (this.element.getParentNode() == null) {
+            return null;
+        }
+        final CSSStyleDeclaration currentStyle = this.element.getCurrentStyle();
+        final String value = currentStyle.getBorderCollapse();
+        if (Strings.isNotBlank(value)) {
+            return value;
+        }
+        var node = this.element.getParentNode();
+        while (node instanceof HTMLElementImpl) {
+            final var pv = ((HTMLElementImpl) node).getCurrentStyle().getBorderCollapse();
+            if (Strings.isNotBlank(pv)) {
+                return pv;
+            }
+            node = node.getParentNode();
+        }
+        return "separate";
     }
 
     /**
@@ -278,11 +306,14 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      */
     @Override
     public String getBorderLeftWidth() {
+        if (this.element.getParentNode() == null) {
+            return "";
+        }
         if (element.getRenderState() != null) {
             final int borderLeftWidth = ((HtmlInsets) element.getRenderState().getBorderInfo().getInsets()).getLeft();
-            return this.element.getParentNode() == null ? "" : borderLeftWidth == -1 ? "0px" : borderLeftWidth + "px";
+            return borderLeftWidth == -1 ? "0px" : borderLeftWidth + "px";
         }
-        return "";
+        return "0px";
     }
 
     /**
@@ -314,11 +345,14 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      */
     @Override
     public String getBorderRightWidth() {
+        if (this.element.getParentNode() == null) {
+            return "";
+        }
         if (element.getRenderState() != null) {
             final int borderRightWidth = ((HtmlInsets) element.getRenderState().getBorderInfo().getInsets()).getRight();
-            return this.element.getParentNode() == null ? "" : borderRightWidth == -1 ? "0px" : borderRightWidth + "px";
+            return borderRightWidth == -1 ? "0px" : borderRightWidth + "px";
         }
-        return "";
+        return "0px";
     }
 
     /**
@@ -387,7 +421,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
             final int borderTopWidth = ((HtmlInsets) element.getRenderState().getBorderInfo().getInsets()).getTop();
             return this.element.getParentNode() == null ? "" : borderTopWidth == -1 ? "0px" : borderTopWidth + "px";
         }
-        return "";
+        return "0px";
     }
 
     /**
@@ -493,7 +527,31 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
     @Override
     public String getCursor() {
         final RenderState rs = element.getRenderState();
-        return this.element.getParentNode() == null ? null : rs.getCursor().getType() == Cursor.DEFAULT_CURSOR ? "auto" : style.getCursor();
+        if (this.element.getParentNode() == null) {
+            return null;
+        }
+        final String cursorValue = style.getCursor();
+        if (Strings.isNotBlank(cursorValue)) {
+            return cursorValue;
+        }
+        final Cursor cursor = rs.getCursor();
+        if (cursor == null) {
+            return "auto";
+        }
+        final int cursorType = cursor.getType();
+        return switch (cursorType) {
+            case Cursor.DEFAULT_CURSOR -> "auto";
+            case Cursor.TEXT_CURSOR -> "auto";
+            case Cursor.CROSSHAIR_CURSOR -> "crosshair";
+            case Cursor.E_RESIZE_CURSOR, Cursor.W_RESIZE_CURSOR -> "ew-resize";
+            case Cursor.N_RESIZE_CURSOR, Cursor.S_RESIZE_CURSOR -> "ns-resize";
+            case Cursor.NE_RESIZE_CURSOR, Cursor.SW_RESIZE_CURSOR -> "nesw-resize";
+            case Cursor.NW_RESIZE_CURSOR, Cursor.SE_RESIZE_CURSOR -> "nwse-resize";
+            case Cursor.HAND_CURSOR -> "pointer";
+            case Cursor.MOVE_CURSOR -> "move";
+            case Cursor.WAIT_CURSOR -> "wait";
+            default -> "auto";
+        };
     }
 
     /**
@@ -564,17 +622,23 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      */
     @Override
     public String getFont() {
+        if (this.element.getParentNode() == null) {
+            return "";
+        }
+
         final StringBuilder font = new StringBuilder();
         final String fontStyle = style.getFontStyle();
         final String lineHeight = getLineHeight();
-        final String fontSize = getFontSize();
+        final String fontSize = style.getFontSize();
         final String fontFamily = getFontFamily();
 
         if (Strings.isCssNotBlank(fontStyle) && !fontStyle.equals(CSSValues.NORMAL.getValue())) {
-            font.append(CSSValues.ITALIC.getValue()).append(" ");
+            font.append(fontStyle).append(" ");
         }
 
-        font.append(fontSize);
+        // Use the computed font size if available, otherwise use the style font size
+        final String computedFontSize = getFontSize();
+        font.append(Strings.isCssNotBlank(computedFontSize) ? computedFontSize : fontSize);
 
         if (Strings.isCssNotBlank(lineHeight) && !lineHeight.equals(CSSValues.NORMAL.getValue())) {
             font.append(" / ").append(lineHeight);
@@ -584,7 +648,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
             font.append(" ").append(fontFamily);
         }
 
-        return this.element.getParentNode() == null ? null : font.toString().trim();
+        return font.toString().trim();
     }
 
 
@@ -593,8 +657,11 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      */
     @Override
     public String getFontSize() {
+        if (this.element.getParentNode() == null) {
+            return "";
+        }
+
         final HTMLElementImpl parent = (HTMLElementImpl) element.getParentElement();
-        final CSSStyleDeclaration style = element.getStyle();
         float fontSize;
         String styleFz;
 
@@ -607,7 +674,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
 
         fontSize = FontValues.getFontSize(styleFz, window, null);
         fontSize = fontSize < 6 ? 6 : fontSize;
-        return this.element.getParentNode() == null ? null : new DecimalFormat("#.##",  new DecimalFormatSymbols(Locale.US)).format(fontSize) + "px";
+        return new DecimalFormat("#.##",  new DecimalFormatSymbols(Locale.US)).format(fontSize) + "px";
     }
 
     /**
@@ -615,11 +682,12 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      */
     @Override
     public String getFontSizeAdjust() {
-        if(this.element.getParentNode() == null){
-            return "none";
+        if (this.element.getParentNode() == null) {
+            return "";
         }
 
-        return  style.getFontSizeAdjust() == null ? "none" :  style.getFontSizeAdjust();
+        final String value = style.getFontSizeAdjust();
+        return Strings.isBlank(value) ? "" : value;
     }
 
     /**
@@ -627,7 +695,11 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      */
     @Override
     public String getFontStretch() {
-        return this.element.getParentNode() == null ? "none" : FontParser.getPercentage(style.getFontStretch());
+        if (this.element.getParentNode() == null) {
+            return "";
+        }
+
+        return FontParser.getPercentage(style.getFontStretch());
     }
 
     /**
@@ -635,12 +707,14 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      */
     @Override
     public String getFontStyle() {
+        if (this.element.getParentNode() == null) {
+            return "";
+        }
         final String fontStyle = style.getFontStyle();
         if (Strings.isCssNotBlank(fontStyle)) {
-            return this.element.getParentNode() == null ? null : !fontStyle.equals(CSSValues.NORMAL.getValue()) ? CSSValues.ITALIC.getValue() : fontStyle;
-        } else {
-            return this.element.getParentNode() == null ? null : CSSValues.NORMAL.getValue();
+            return fontStyle;
         }
+        return CSSValues.NORMAL.getValue();
     }
 
     /**
@@ -648,7 +722,10 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      */
     @Override
     public String getFontVariant() {
-        return this.element.getParentNode() == null ? null : FontValues.getFontVariant(style.getFontVariant());
+        if (this.element.getParentNode() == null) {
+            return "";
+        }
+        return FontValues.getFontVariant(style.getFontVariant());
     }
 
     /**
@@ -656,8 +733,11 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      */
     @Override
     public String getFontWeight() {
+        if (this.element.getParentNode() == null) {
+            return "";
+        }
         final String font = FontValues.getFontWeight(style.getFontWeight(), null, false);
-        return this.element.getParentNode() == null ? null : Strings.isBlank(font) ? CSSValues.BOLD400.getValue() : font;
+        return Strings.isBlank(font) ? CSSValues.BOLD400.getValue() : font;
     }
 
     /**
@@ -665,8 +745,14 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      */
     @Override
     public String getFontFamily() {
-        final CSSStyleDeclaration style = element.getStyle();
-        return this.element.getParentNode() == null ? null : FontValues.getFontFamily(style.getFontFamily(), null);
+        if (this.element.getParentNode() == null) {
+            return "";
+        }
+        final String fontFamily = style.getFontFamily();
+        if (Strings.isCssNotBlank(fontFamily)) {
+            return fontFamily;
+        }
+        return FontValues.getFontFamily(fontFamily, null);
     }
 
     /**
@@ -698,21 +784,41 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      */
     @Override
     public String getLineHeight() {
-        final HTMLElementImpl parent = (HTMLElementImpl) element.getParentElement();
-        final CSSStyleDeclaration style = element.getStyle();
-        int lineHeight;
+        if (this.element.getParentNode() == null) {
+            return "";
+        }
 
-        if (Strings.isCssBlank(style.getLineHeight()) && parent != null && parent.getStyle().getLength() > 0) {
+        final String lineHeight = this.style.getLineHeight();
+
+        if (CSSValues.NORMAL.isEqual(lineHeight)) {
+            return CSSValues.NORMAL.getValue();
+        }
+
+        if (Strings.isBlank(lineHeight)) {
+            return CSSValues.NORMAL.getValue();
+        }
+
+        final HTMLElementImpl parent = (HTMLElementImpl) element.getParentElement();
+        float lh;
+
+        if (parent != null && parent.getStyle().getLength() > 0) {
             final CSSStyleDeclaration currentStyle = parent.getStyle();
-            lineHeight = FontValues.getPixelSize(currentStyle.getLineHeight(), element.getRenderState(), window, -1);
+            lh = FontValues.getPixelSize(currentStyle.getLineHeight(), element.getRenderState(), window, -1);
         } else {
-            if (style.getLineHeight() == null || CSSValues.NORMAL.isEqual(style.getLineHeight())) {
-                return CSSValues.NORMAL.getValue();
+            final String lhLower = lineHeight.toLowerCase();
+            if (lhLower.endsWith("em")) {
+                final float fontSize = FontValues.getFontSize(this.style.getFontSize(), window, element.getRenderState());
+                final float multiplier = Float.parseFloat(lhLower.substring(0, lhLower.length() - 2));
+                lh = fontSize * multiplier;
+            } else if (lhLower.endsWith("%")) {
+                final float fontSize = FontValues.getFontSize(this.style.getFontSize(), window, element.getRenderState());
+                final float percentage = Float.parseFloat(lhLower.substring(0, lhLower.length() - 1));
+                lh = fontSize * percentage / 100;
             } else {
-                lineHeight = Float.valueOf(FontValues.getFontSize(style.getLineHeight(), window, element.getRenderState())).intValue();
+                lh = FontValues.getPixelSize(lineHeight, element.getRenderState(), window, -1);
             }
         }
-        return this.element.getParentNode() == null ? null : lineHeight + "px";
+        return new DecimalFormat("#.##",  new DecimalFormatSymbols(Locale.US)).format(lh) + "px";
     }
 
     /**
@@ -725,11 +831,15 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
         }
 
         if (CSSValues.NONE.isEqual(style.getDisplay())) {
-            return this.element.getParentNode() == null ? null : CSSValues.AUTO.getValue();
+            return CSSValues.AUTO.getValue();
         }
 
-        int height = element.calculateHeight(false, false, false);
-        return height > 0 ? height + "px" : CSSValues.AUTO.getValue();
+        final String heightValue = style.getPropertyValue("height");
+        if (Strings.isNotBlank(heightValue) && !CSSValues.AUTO.isEqual(heightValue)) {
+            return HtmlValues.getPixelSize(heightValue, element.getRenderState(), window.getWindow(), -1, availHeight) + "px";
+        }
+        final int oh = element.getOffsetHeight();
+        return oh + "px";
     }
 
     /**
@@ -770,7 +880,13 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      */
     @Override
     public String getMargin() {
-        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getMargin()) ? "" : style.getMargin();
+        final String cssMargin = style.getMargin();
+        if (element.getParentNode() == null) return "";
+        if (Strings.isCssBlank(cssMargin)) {
+            return element instanceof HTMLBodyElement ? "8px" : "0px";
+        }
+        final int marginTop = HtmlValues.getPixelSize(cssMargin, element.getRenderState(), window.getWindow(), -1, availHeight);
+        return marginTop + "px";
     }
 
     /**
@@ -779,11 +895,14 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
     @Override
     public String getMarginBottom() {
         final String cssMarginBottom = style.getMarginBottom();
-        if (element.getParentNode() == null) return "";
-        if (Strings.isCssBlank(cssMarginBottom))
-            return this.element.getParentNode() == null ? null : CSSValues.NONE.getValue();
+        if (Strings.isCssBlank(cssMarginBottom)) {
+            final RenderState rs = element.getRenderState();
+            final HtmlInsets marginInsets = rs != null ? rs.getMarginInsets() : null;
+            final int marginBottom = marginInsets != null ? marginInsets.getBottom() : (element instanceof HTMLBodyElement ? 8 : 0);
+            return marginBottom + "px";
+        }
         final int marginBottom = HtmlValues.getPixelSize(cssMarginBottom, element.getRenderState(), window.getWindow(), -1, availHeight);
-        return this.element.getParentNode() == null ? "" : marginBottom + "px";
+        return marginBottom == -1 ? (element instanceof HTMLBodyElement ? "8px" : "0px") : marginBottom + "px";
     }
 
     /**
@@ -792,11 +911,14 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
     @Override
     public String getMarginLeft() {
         final String cssMarginLeft = style.getMarginLeft();
-        if (element.getParentNode() == null) return "";
-        if (Strings.isCssBlank(cssMarginLeft))
-            return this.element.getParentNode() == null ? null : CSSValues.NONE.getValue();
+        if (Strings.isCssBlank(cssMarginLeft)) {
+            final RenderState rs = element.getRenderState();
+            final HtmlInsets marginInsets = rs != null ? rs.getMarginInsets() : null;
+            final int marginLeft = marginInsets != null ? marginInsets.getLeft() : (element instanceof HTMLBodyElement ? 8 : 0);
+            return marginLeft + "px";
+        }
         final int marginLeft = HtmlValues.getPixelSize(cssMarginLeft, element.getRenderState(), window.getWindow(), -1, availWidth);
-        return this.element.getParentNode() == null ? "" : marginLeft + "px";
+        return marginLeft == -1 ? (element instanceof HTMLBodyElement ? "8px" : "0px") : marginLeft + "px";
     }
 
     /**
@@ -804,11 +926,18 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      */
     @Override
     public String getMarginRight() {
+        if (this.element.getParentNode() == null) {
+            return "";
+        }
         final String cssMarginRight = style.getMarginRight();
-        if (element.getParentNode() == null) return "";
-        if (Strings.isCssBlank(cssMarginRight)) return this.element.getParentNode() == null ? null : "0px";
+        if (Strings.isCssBlank(cssMarginRight)) {
+            final RenderState rs = element.getRenderState();
+            final HtmlInsets marginInsets = rs != null ? rs.getMarginInsets() : null;
+            final int marginRight = marginInsets != null ? marginInsets.getRight() : (element instanceof HTMLBodyElement ? 8 : 0);
+            return marginRight + "px";
+        }
         final int marginRight = HtmlValues.getPixelSize(cssMarginRight, element.getRenderState(), window.getWindow(), -1, availWidth);
-        return this.element.getParentNode() == null ? "" : marginRight + "px";
+        return marginRight == -1 ? (element instanceof HTMLBodyElement ? "8px" : "0px") : marginRight + "px";
     }
 
     /**
@@ -817,11 +946,14 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
     @Override
     public String getMarginTop() {
         final String cssMarginTop = style.getMarginTop();
-        if (element.getParentNode() == null) return "";
-        if (Strings.isCssBlank(cssMarginTop))
-            return this.element.getParentNode() == null ? null : CSSValues.NONE.getValue();
+        if (Strings.isCssBlank(cssMarginTop)) {
+            final RenderState rs = element.getRenderState();
+            final HtmlInsets marginInsets = rs != null ? rs.getMarginInsets() : null;
+            final int marginTop = marginInsets != null ? marginInsets.getTop() : (element instanceof HTMLBodyElement ? 8 : 0);
+            return marginTop + "px";
+        }
         final int marginTop = HtmlValues.getPixelSize(cssMarginTop, element.getRenderState(), window.getWindow(), -1, availHeight);
-        return this.element.getParentNode() == null ? "" : marginTop + "px";
+        return marginTop == -1 ? (element instanceof HTMLBodyElement ? "8px" : "0px") : marginTop + "px";
     }
 
     /**
@@ -893,7 +1025,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      */
     @Override
     public String getPadding() {
-        return this.element.getParentNode() == null ? null : Strings.isBlank(style.getPadding()) ? CSSValues.NONE.getValue() : style.getPadding();
+        return this.element.getParentNode() == null ? "0px" : Strings.isBlank(style.getPadding()) ? "0px" : style.getPadding();
     }
 
     /**
@@ -902,8 +1034,14 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
     @Override
     public String getPaddingBottom() {
         final String cssPaddingBottom = style.getPaddingBottom();
+        if (Strings.isCssBlank(cssPaddingBottom)) {
+            final RenderState rs = element.getRenderState();
+            final HtmlInsets paddingInsets = rs != null ? rs.getPaddingInsets() : null;
+            final int paddingBottom = paddingInsets != null ? paddingInsets.getBottom() : 0;
+            return paddingBottom + "px";
+        }
         final int paddingBottom = HtmlValues.getPixelSize(cssPaddingBottom, element.getRenderState(), window.getWindow(), -1, availHeight);
-        return this.element.getParentNode() == null ? null : paddingBottom + "px";
+        return paddingBottom == -1 ? "0px" : paddingBottom + "px";
     }
 
     /**
@@ -912,8 +1050,14 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
     @Override
     public String getPaddingLeft() {
         final String cssPaddingLeft = style.getPaddingLeft();
+        if (Strings.isCssBlank(cssPaddingLeft)) {
+            final RenderState rs = element.getRenderState();
+            final HtmlInsets paddingInsets = rs != null ? rs.getPaddingInsets() : null;
+            final int paddingLeft = paddingInsets != null ? paddingInsets.getLeft() : 0;
+            return paddingLeft + "px";
+        }
         final int paddingLeft = HtmlValues.getPixelSize(cssPaddingLeft, element.getRenderState(), window.getWindow(), -1, availWidth);
-        return this.element.getParentNode() == null ? null : paddingLeft + "px";
+        return paddingLeft == -1 ? "0px" : paddingLeft + "px";
     }
 
     /**
@@ -922,8 +1066,14 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
     @Override
     public String getPaddingRight() {
         final String cssPaddingRight = style.getPaddingRight();
+        if (Strings.isCssBlank(cssPaddingRight)) {
+            final RenderState rs = element.getRenderState();
+            final HtmlInsets paddingInsets = rs != null ? rs.getPaddingInsets() : null;
+            final int paddingRight = paddingInsets != null ? paddingInsets.getRight() : 0;
+            return paddingRight + "px";
+        }
         final int paddingRight = HtmlValues.getPixelSize(cssPaddingRight, element.getRenderState(), window.getWindow(), -1, availWidth);
-        return this.element.getParentNode() == null ? null : paddingRight + "px";
+        return paddingRight == -1 ? "0px" : paddingRight + "px";
     }
 
     /**
@@ -932,8 +1082,14 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
     @Override
     public String getPaddingTop() {
         final String cssPaddingTop = style.getPaddingTop();
+        if (Strings.isCssBlank(cssPaddingTop)) {
+            final RenderState rs = element.getRenderState();
+            final HtmlInsets paddingInsets = rs != null ? rs.getPaddingInsets() : null;
+            final int paddingTop = paddingInsets != null ? paddingInsets.getTop() : 0;
+            return paddingTop + "px";
+        }
         final int paddingTop = HtmlValues.getPixelSize(cssPaddingTop, element.getRenderState(), window.getWindow(), -1, availHeight);
-        return this.element.getParentNode() == null ? null : paddingTop + "px";
+        return paddingTop == -1 ? "0px" : paddingTop + "px";
     }
 
     /**
@@ -1248,11 +1404,31 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
         }
 
         if (CSSValues.NONE.isEqual(style.getDisplay())) {
-            return this.element.getParentNode() == null ? "" : CSSValues.AUTO.getValue();
+            return CSSValues.AUTO.getValue();
         }
 
-        int width = element.calculateWidth(false, false, false);
-        return width > 0 ? width + "px" : CSSValues.AUTO.getValue();
+        final String widthValue = style.getPropertyValue("width");
+        final String position = style.getPosition();
+        final boolean isAbsolute = CSSValues.ABSOLUTE.isEqual(position);
+
+        if (isAbsolute) {
+            return "0px";
+        }
+
+        if (Strings.isNotBlank(widthValue)) {
+            return HtmlValues.getPixelSize(widthValue, element.getRenderState(), window.getWindow(), -1, availWidth) + "px";
+        }
+
+        // If no explicit width, check parent's width
+        final HTMLElementImpl parent = (HTMLElementImpl) element.getParentElement();
+        if (parent != null && parent.getStyle() != null) {
+            final String parentWidth = parent.getStyle().getPropertyValue("width");
+            if (Strings.isNotBlank(parentWidth)) {
+                return HtmlValues.getPixelSize(parentWidth, element.getRenderState(), window.getWindow(), -1, availWidth) + "px";
+            }
+        }
+
+        return null;
     }
 
     /**
@@ -1773,7 +1949,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
      */
     @Override
     public String getBoxSizing() {
-        return this.element.getParentNode() == null ? "" : style.getBoxSizing() == null ? CSSValues.CONTENT_BOX.getValue() : style.getBoxSizing();
+        return this.element.getParentNode() == null ? "" : Strings.isBlank(style.getBoxSizing()) ? CSSValues.CONTENT_BOX.getValue() : style.getBoxSizing();
     }
 
     /**
@@ -2602,7 +2778,59 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
 
     @Override
     public String getPropertyValue(final String property) {
-        return style.getPropertyValue(property);
+        final String rawValue = style.getPropertyValue(property);
+        if (Strings.isBlank(rawValue)) {
+            return "";
+        }
+
+        return switch (property.toLowerCase()) {
+            case "color" -> getColor();
+            case "background-color" -> getBackgroundColor();
+            case "border-top-color" -> getBorderTopColor();
+            case "border-right-color" -> getBorderRightColor();
+            case "border-bottom-color" -> getBorderBottomColor();
+            case "border-left-color" -> getBorderLeftColor();
+            case "outline-color" -> getOutlineColor();
+            case "font-family" -> getFontFamily();
+            case "font-size" -> getFontSize();
+            case "font-weight" -> getFontWeight();
+            case "font-style" -> getFontStyle();
+            case "line-height" -> getLineHeight();
+            case "width" -> getWidth();
+            case "height" -> getHeight();
+            case "margin" -> getMargin();
+            case "margin-top" -> getMarginTop();
+            case "margin-right" -> getMarginRight();
+            case "margin-bottom" -> getMarginBottom();
+            case "margin-left" -> getMarginLeft();
+            case "padding" -> getPadding();
+            case "padding-top" -> getPaddingTop();
+            case "padding-right" -> getPaddingRight();
+            case "padding-bottom" -> getPaddingBottom();
+            case "padding-left" -> getPaddingLeft();
+            case "border-width" -> getBorderWidth();
+            case "border-top-width" -> getBorderTopWidth();
+            case "border-right-width" -> getBorderRightWidth();
+            case "border-bottom-width" -> getBorderBottomWidth();
+            case "border-left-width" -> getBorderLeftWidth();
+            case "display" -> getDisplay();
+            case "position" -> getPosition();
+            case "top" -> getTop();
+            case "left" -> getLeft();
+            case "right" -> getRight();
+            case "bottom" -> getBottom();
+            case "z-index" -> getzIndex();
+            case "overflow" -> getOverflow();
+            case "visibility" -> getVisibility();
+            case "opacity" -> getOpacity();
+            case "text-align" -> getTextAlign();
+            case "text-decoration" -> getTextDecoration();
+            case "vertical-align" -> getVerticalAlign();
+            case "white-space" -> getWhiteSpace();
+            //case "overflow-x" -> getOverflowX();
+            // case "overflow-y" -> getOverflowY();
+            default -> "";
+        };
     }
 
     @Override

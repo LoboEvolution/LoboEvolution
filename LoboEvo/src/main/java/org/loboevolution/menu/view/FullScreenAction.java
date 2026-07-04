@@ -43,7 +43,7 @@ public class FullScreenAction extends AbstractAction {
 
 	private static final GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0];
 
-	private static final DisplayMode newDisplayMode = new DisplayMode(800, 600, 32, 0);
+	private static final DisplayMode newDisplayMode = new DisplayMode(1600, 900, 32, 0);
 
 	private static final DisplayMode oldDisplayMode = device.getDisplayMode();
 

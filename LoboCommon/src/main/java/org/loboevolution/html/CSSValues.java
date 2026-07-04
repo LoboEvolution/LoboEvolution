@@ -43,6 +43,8 @@ public enum CSSValues {
 
     BASELINE("baseline"),
 
+    BOTTOM("bottom"),
+
     BACKCOMPAT("BackCompat"),
 
     BLINK("blink"),
@@ -72,8 +74,6 @@ public enum CSSValues {
     BOLDER("bolder"),
 
     BORDER_BOX("border-box"),
-
-    BOTTOM("bottom"),
 
     BREAK_SPACE("break-space"),
 
@@ -181,6 +181,8 @@ public enum CSSValues {
 
     MEDIUM("medium"),
 
+    MIDDLE("middle"),
+
     MENU("menu"),
 
     MESSAGE_BOX("message-box"),
@@ -223,6 +225,8 @@ public enum CSSValues {
 
     RELATIVE("relative"),
 
+    REVERT("revert"),
+
     REPEAT("repeat"),
 
     REPEAT_NO("no-repeat"),
@@ -263,6 +267,10 @@ public enum CSSValues {
 
     SQUARE("square"),
 
+    SUB("sub"),
+
+    SUPER("super"),
+
     SPACE_AROUND("space-around"),
 
     SPACE_BETWEEN("space-between"),
@@ -293,6 +301,10 @@ public enum CSSValues {
 
     TABLE_FOOTER_GROUP("table-footer-group"),
 
+    TEXT_BOTTOM("text-bottom"),
+
+    TEXT_TOP("text-top"),
+
     THIN("thin"),
 
     THICK("thick"),
@@ -302,6 +314,8 @@ public enum CSSValues {
     TOP("top"),
 
     UNDERLINE("underline"),
+
+    UNSET("unset"),
 
     UPPER_ALPHA("upper-alpha"),
 

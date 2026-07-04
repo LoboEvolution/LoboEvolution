@@ -726,7 +726,7 @@ public class DOMElementTest extends LoboUnitTest {
         assertEquals("font-family: Arial", body.getAttribute("style"));
         final CSSStyleDeclaration style = body.getStyle();
         assertNotNull(style);
-        assertEquals("font-family: arial", style.getCssText());
+        assertEquals("font-family: Arial", style.getCssText());
         style.setCssText("font-family: Helvetica");
         assertEquals("font-family: Helvetica", style.getCssText());
         assertEquals("font-family: Helvetica", body.getAttribute("style"));

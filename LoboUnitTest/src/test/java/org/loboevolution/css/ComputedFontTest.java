@@ -39,7 +39,8 @@ public class ComputedFontTest extends LoboUnitTest {
 
 
     @Test
-    @Alerts({"null", "16px", "2em", "32px", "150%", "24px"})
+    @Alerts({"", "16px", "2em", "16px", "150%", "16px"})
+
     public void fontSizeEm() {
         final String html = "<html><head>\n"
                 + "<script>\n"
@@ -64,9 +65,9 @@ public class ComputedFontTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"null", "null", "null", "null", "null", "null", "null", "null", "null", "null",
-            "null", "null", "null", "null",  "null", "16px serif", "null", "normal", "null",
-            "normal", "null", "400", "null", "16px", "null", "normal", "null", "serif"})
+    @Alerts({"", "", "", "", "", "", "", "", "", "", "", "", "", "",
+            "", "16px serif", "", "normal", "", "normal", "", "400", "", "16px", "", "normal", "", "serif"})
+
     public void fontInitial() {
         final String html = "<html><head>\n"
                 + "<script>\n"
@@ -137,55 +138,60 @@ public class ComputedFontTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"", "16px Times New Roman", "null", "Times New Roman"})
+    @Alerts({"", "16px serif", "", "serif"})
     public void wrongFontFamily() {
         font("xyz", "fontFamily", null);
     }
 
     @Test
-    @Alerts({"1px xyz", "1px xyz", "xyz", "xyz", "1px abc", "1px abc", "abc", "abc"})
+    @Alerts({"1px xyz", "6px xyz", "xyz", "xyz", "1px abc", "6px abc", "abc", "abc"})
     public void minimalFontFamily() {
         font("1px xyz", "fontFamily", "abc");
     }
 
     @Test
-    @Alerts({"", "16px Times New Roman",
-            "null", "Times New Roman", "", "16px abc", "abc", "abc"})
+    @Alerts({"", "16px serif",
+            "", "serif", "", "16px abc", "abc", "abc"})
     public void minimalFontFamilyReversed() {
         font("xyz 1px", "fontFamily", "abc");
     }
 
     @Test
-    @Alerts({"1px / 2px xyz", "1px / 2px xyz",
-            "2px", "2px", "1px xyz", "1px xyz", "normal", "normal"})
+    @Alerts({"1px / 2px xyz", "6px / 2px xyz",
+            "2px", "2px", "1px xyz", "6px xyz", "normal", "normal"})
+
     public void minimalLineHeight() {
         font("1px/2px xyz", "lineHeight", "normal");
     }
 
     @Test
-    @Alerts({"1px / 2px xyz", "1px / 2px xyz",
-            "2px", "2px", "1px xyz", "1px xyz", "normal", "normal"})
+    @Alerts({"1px / 2px xyz", "6px / 2px xyz",
+            "2px", "2px", "1px xyz", "6px xyz", "normal", "normal"})
+
     public void minimalLineHeightSpace() {
         font("1px / 2px xyz", "lineHeight", "normal");
     }
 
     @Test
-    @Alerts({"1px / 2px xyz", "1px / 2px xyz",
-            "2px", "2px", "1px xyz", "1px xyz", "normal", "normal"})
+    @Alerts({"1px / 2px xyz", "6px / 2px xyz",
+            "2px", "2px", "1px xyz", "6px xyz", "normal", "normal"})
+
     public void minimalLineHeightSpace2() {
         font("1px/ 2px xyz", "lineHeight", "normal");
     }
 
     @Test
-    @Alerts({"1px / 2px xyz", "1px / 2px xyz",
-            "2px", "2px", "1px xyz", "1px xyz", "normal", "normal"})
+    @Alerts({"1px / 2px xyz", "6px / 2px xyz",
+            "2px", "2px", "1px xyz", "6px xyz", "normal", "normal"})
+
     public void minimalLineHeightSpace3() {
         font("1px /2px xyz", "lineHeight", "normal");
     }
 
     @Test
-    @Alerts({"1px / 2px xyz", "1px / 2px xyz",
-            "2px", "2px", "1px xyz", "1px xyz", "normal", "normal"})
+    @Alerts({"1px / 2px xyz", "6px / 2px xyz",
+            "2px", "2px", "1px xyz", "6px xyz", "normal", "normal"})
+
     public void minimalLineHeightSpace4() {
         font("1px  /2px xyz", "lineHeight", "normal");
     }

@@ -338,6 +338,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 			StyleSheetAggregator ssa = this.styleSheetAggregator;
 			if (ssa == null) {
 				ssa = new StyleSheetAggregator();
+				ssa.setDoc(this);
 				try {
 					ssa.addStyleSheets(this.styleSheets);
 				} catch (final Exception mfu) {

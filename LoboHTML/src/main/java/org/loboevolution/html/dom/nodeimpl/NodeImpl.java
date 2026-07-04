@@ -208,13 +208,39 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, Cloneabl
 	 */
 	protected void appendInnerTextImpl(final StringBuilder buffer) {
 		nodeList.forEach(child -> {
-			if (child instanceof ElementImpl) {
-				((ElementImpl) child).appendInnerTextImpl(buffer);
+			if (child instanceof ElementImpl element) {
+				appendInnerTextFromElement(buffer, element);
 			}
 			if (child instanceof Text) {
-				buffer.append(child.getTextContent());
+				appendInnerTextFromTextNode(buffer, child.getTextContent());
 			}
 		});
+	}
+
+	private static void appendInnerTextFromElement(final StringBuilder buffer, final ElementImpl element) {
+		if (buffer.length() > 0) {
+			final char last = buffer.charAt(buffer.length() - 1);
+			if (!Character.isWhitespace(last) && element.isBlockForInnerText()) {
+				buffer.append(' ');
+			}
+		}
+		element.appendInnerTextImpl(buffer);
+	}
+
+	private static void appendInnerTextFromTextNode(final StringBuilder buffer, final String text) {
+		if (text == null || text.isEmpty()) {
+			return;
+		}
+		if (text.trim().isEmpty()) {
+			if (buffer.length() > 0) {
+				final char last = buffer.charAt(buffer.length() - 1);
+				if (!Character.isWhitespace(last)) {
+					buffer.append(' ');
+				}
+			}
+			return;
+		}
+		buffer.append(text);
 	}
 
 	/** {@inheritDoc} */
@@ -766,7 +792,7 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, Cloneabl
 				return rs;
 			}
 			final Object parent = this.parentNode;
-			if (parent != null || this instanceof Document) {
+			if (parent != null || this instanceof Document || this instanceof HTMLBodyElement) {
 				final RenderState prs = getParentRenderState(parent);
 				rs = createRenderState(prs);
 				this.renderState = rs;
@@ -1588,6 +1614,17 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, Cloneabl
 		Node parent = node.getParentNode();
 		while (parent != null) {
 			if (parent == potentialAncestor) return true;
+			parent = parent.getParentNode();
+		}
+		return false;
+	}
+
+	public boolean isAncestorOf(final Node node) {
+		Node parent = node;
+		while (parent != null) {
+			if (parent == this) {
+				return true;
+			}
 			parent = parent.getParentNode();
 		}
 		return false;

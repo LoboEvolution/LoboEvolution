@@ -315,10 +315,9 @@ public class CSSStyleSheetImpl implements Serializable {
         if (this == obj) {
             return true;
         }
-        if (!(obj instanceof CSSStyleSheetImpl)) {
+        if (!(obj instanceof CSSStyleSheetImpl css)) {
             return false;
         }
-        final CSSStyleSheetImpl css = (CSSStyleSheetImpl) obj;
         boolean eq = ParserUtils.equals(getCssRules(), css.getCssRules());
         eq = eq && (getDisabled() == css.getDisabled());
         eq = eq && ParserUtils.equals(getHref(), css.getHref());

@@ -159,10 +159,9 @@ public class CSSPageRuleImpl extends AbstractCSSRuleImpl {
         if (this == obj) {
             return true;
         }
-        if (!(obj instanceof CSSPageRuleImpl)) {
+        if (!(obj instanceof CSSPageRuleImpl cpr)) {
             return false;
         }
-        final CSSPageRuleImpl cpr = (CSSPageRuleImpl) obj;
         return super.equals(obj)
             && ParserUtils.equals(getSelectorText(), cpr.getSelectorText())
             && ParserUtils.equals(getStyle(), cpr.getStyle());

@@ -38,6 +38,7 @@ import org.loboevolution.js.WindowProxy;
 import org.loboevolution.html.renderstate.IFrameRenderState;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.style.HtmlValues;
+import org.loboevolution.js.Window;
 import org.loboevolution.net.UserAgent;
 
 import java.awt.*;
@@ -149,24 +150,51 @@ public class HTMLIFrameElementImpl extends HTMLElementImpl implements HTMLIFrame
 
 	@Override
 	public int getClientHeight() {
+		final String heightAttr = this.getAttribute("height");
+		if (Strings.isNotBlank(heightAttr)) {
+			try {
+				return Integer.parseInt(heightAttr);
+			} catch (final NumberFormatException e) {
+				final HTMLDocumentImpl doc = (HTMLDocumentImpl) getDocumentNode();
+				if (doc != null) {
+					return HtmlValues.getPixelSize(heightAttr, getRenderState(), doc.getDefaultView(), 150);
+				}
+			}
+		}
 		final int clientHeight = super.getClientHeight();
 		return clientHeight == 0 ? 150 : clientHeight;
 	}
 
 	@Override
 	public Integer getOffsetHeight() {
-		return getClientHeight();
+		final int ch = getClientHeight();
+		final HTMLDocumentImpl doc = (HTMLDocumentImpl) getDocumentNode();
+		final RenderState rs = getRenderState();
+		final Window w = doc != null ? doc.getDefaultView() : null;
+		final int borderTop = HtmlValues.getPixelSize(getCurrentStyle().getBorderTopWidth(), rs, w, 0);
+		final int borderBottom = HtmlValues.getPixelSize(getCurrentStyle().getBorderBottomWidth(), rs, w, 0);
+		return ch + borderTop + borderBottom;
 	}
 
 	@Override
 	public Integer getClientWidth() {
+		final String widthAttr = this.getAttribute("width");
+		if (Strings.isNotBlank(widthAttr)) {
+			final HTMLDocumentImpl doc = (HTMLDocumentImpl) getDocumentNode();
+			return HtmlValues.getPixelSize(widthAttr, getRenderState(), doc.getDefaultView(), 300);
+		}
 		final int clientWidth = super.getClientWidth();
 		return clientWidth == 0 ? 300 : clientWidth;
 	}
 
 	@Override
 	public Integer getOffsetWidth() {
-		return getClientWidth();
+		final int cw = getClientWidth();
+		final HTMLDocumentImpl doc = (HTMLDocumentImpl) getDocumentNode();
+		final RenderState rs = getRenderState();
+		final int borderLeft = HtmlValues.getPixelSize(getCurrentStyle().getBorderLeftWidth(), rs, doc.getDefaultView(), 0);
+		final int borderRight = HtmlValues.getPixelSize(getCurrentStyle().getBorderRightWidth(), rs, doc.getDefaultView(), 0);
+		return cw + borderLeft + borderRight;
 	}
 
 	/** {@inheritDoc} */

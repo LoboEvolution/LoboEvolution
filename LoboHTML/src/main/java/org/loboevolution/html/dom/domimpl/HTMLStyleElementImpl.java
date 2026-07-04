@@ -31,7 +31,6 @@ package org.loboevolution.html.dom.domimpl;
 import org.htmlunit.cssparser.parser.CSSOMParser;
 import org.htmlunit.cssparser.parser.InputSource;
 import org.htmlunit.cssparser.parser.javacc.CSS3Parser;
-import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.HTMLStyleElement;
 import org.loboevolution.svg.SVGSVGElement;
 import org.loboevolution.html.js.css.CSSStyleSheetImpl;
@@ -47,7 +46,7 @@ public class HTMLStyleElementImpl extends HTMLElementImpl implements HTMLStyleEl
 
 	private boolean disabled;
 
-	private CSSStyleSheetImpl styleSheet;
+	private CSSStyleSheetImpl sheet;
 
 	/**
 	 * <p>Constructor for HTMLStyleElementImpl.</p>
@@ -79,8 +78,8 @@ public class HTMLStyleElementImpl extends HTMLElementImpl implements HTMLStyleEl
 
 	/** {@inheritDoc} */
 	@Override
-	public CSSStyleSheet getStyleSheet() {
-		return this.styleSheet;
+	public CSSStyleSheet getSheet() {
+		return this.sheet;
 	}
 
 	/** {@inheritDoc} */
@@ -99,7 +98,7 @@ public class HTMLStyleElementImpl extends HTMLElementImpl implements HTMLStyleEl
 	@Override
 	public void setDisabled(final boolean disabled) {
 		this.disabled = disabled;
-		final CSSStyleSheetImpl sheet = this.styleSheet;
+		final CSSStyleSheetImpl sheet = this.sheet;
 		if (sheet != null) {
 			sheet.setDisabled(disabled);
 			if(disabled) {
@@ -133,28 +132,27 @@ public class HTMLStyleElementImpl extends HTMLElementImpl implements HTMLStyleEl
 	 * <p>processStyle.</p>
 	 */
 	private void processStyle() {
-		this.styleSheet = null;
+		this.sheet = null;
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) getOwnerDocument();
-		if (CSSUtilities.matchesMedia(getMedia(), doc.getDefaultView())) {
-			final String text = getRawInnerText(true);
-			if (text != null && !isDisabled()) {
-				final String processedText = CSSUtilities.preProcessCss(text);
-				final CSSOMParser parser = new CSSOMParser(new CSS3Parser());
-				final String baseURI = doc.getBaseURI();
-				final InputSource is = CSSUtilities.getCssInputSourceForStyleSheet(processedText, baseURI);
-				try {
-					final org.htmlunit.cssparser.dom.CSSStyleSheetImpl sheet = parser.parseStyleSheet(is, null);
-					sheet.setDisabled(this.disabled);
-					final CSSStyleSheetImpl cssStyleSheet = new CSSStyleSheetImpl(sheet);
-					cssStyleSheet.setOwnerNode(this);
+		final String text = getRawInnerText(true);
+		if (text != null && !isDisabled()) {
+			final String processedText = CSSUtilities.preProcessCss(text);
+			final CSSOMParser parser = new CSSOMParser(new CSS3Parser());
+			final String baseURI = doc.getBaseURI();
+			final InputSource is = CSSUtilities.getCssInputSourceForStyleSheet(processedText, baseURI);
+			try {
+				final org.htmlunit.cssparser.dom.CSSStyleSheetImpl sheet = parser.parseStyleSheet(is, null);
+				sheet.setDisabled(this.disabled);
+				sheet.setMediaText(getMedia());
+				final CSSStyleSheetImpl cssStyleSheet = new CSSStyleSheetImpl(sheet);
+				cssStyleSheet.setOwnerNode(this);
 
-					if(! (this.getParentNode() instanceof SVGSVGElement))
-						doc.addStyleSheet(cssStyleSheet);
+				if(! (this.getParentNode() instanceof SVGSVGElement))
+					doc.addStyleSheet(cssStyleSheet);
 
-					this.styleSheet = cssStyleSheet;
-				} catch (final Throwable err) {
-					this.warn("Unable to parse style sheet", err);
-				}
+				this.sheet = cssStyleSheet;
+			} catch (final Throwable err) {
+				this.warn("Unable to parse style sheet", err);
 			}
 		}
 	}
@@ -162,6 +160,26 @@ public class HTMLStyleElementImpl extends HTMLElementImpl implements HTMLStyleEl
 	@Override
 	public int getClientHeight() {
 		return 0;
+	}
+
+	@Override
+	public Integer getClientWidth() {
+		return 0;
+	}
+
+	@Override
+	public Integer getOffsetWidth() {
+		return 0;
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void informStructureInvalid() {
+		super.informStructureInvalid();
+		// Re-process style when structure changes (e.g., when text content is added dynamically)
+		if (this.sheet != null || this.getRawInnerText(true) != null) {
+			processStyle();
+		}
 	}
 	
 	/** {@inheritDoc} */

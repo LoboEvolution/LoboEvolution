@@ -127,12 +127,7 @@ public class CSSStyleRuleImpl extends AbstractCSSRuleImpl {
             final CSSOMParser parser = new CSSOMParser();
             selectors_ = parser.parseSelectors(selectorText);
         }
-        catch (final CSSException e) {
-            throw new DOMException(
-                DOMException.SYNTAX_ERR,
-                e.getMessage());
-        }
-        catch (final IOException e) {
+        catch (final CSSException | IOException e) {
             throw new DOMException(
                 DOMException.SYNTAX_ERR,
                 e.getMessage());
@@ -164,10 +159,9 @@ public class CSSStyleRuleImpl extends AbstractCSSRuleImpl {
         if (this == obj) {
             return true;
         }
-        if (!(obj instanceof CSSStyleRuleImpl)) {
+        if (!(obj instanceof CSSStyleRuleImpl csr)) {
             return false;
         }
-        final CSSStyleRuleImpl csr = (CSSStyleRuleImpl) obj;
         return super.equals(obj)
             && ParserUtils.equals(getSelectorText(), csr.getSelectorText())
             && ParserUtils.equals(getStyle(), csr.getStyle());

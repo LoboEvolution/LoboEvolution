@@ -51,6 +51,12 @@ public class HTMLDetailsElementImpl extends HTMLElementImpl implements HTMLDetai
     }
 
     @Override
+    public int getClientHeight() {
+        final int clientHeight = super.getClientHeight();
+        return clientHeight == 0 ? 18 : clientHeight;
+    }
+
+    @Override
     public boolean isOpen() {
         return false;
     }

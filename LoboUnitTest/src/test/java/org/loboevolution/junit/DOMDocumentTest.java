@@ -748,21 +748,21 @@ public class DOMDocumentTest extends LoboUnitTest {
         final Element style = document.createElement("style");
         document.getDocumentElement().appendChild(style);
         style.setAttribute("type", "text/css");
-        CSSStyleSheet sheet = ((HTMLStyleElementImpl) style).getStyleSheet();
+        CSSStyleSheet sheet = ((HTMLStyleElementImpl) style).getSheet();
         assertNotNull(sheet);
         assertEquals(0, sheet.getCssRules().getLength());
 
         style.removeAttributeNode(style.getAttributeNode("type"));
-        sheet = ((HTMLStyleElementImpl) style).getStyleSheet();
+        sheet = ((HTMLStyleElementImpl) style).getSheet();
         assertNotNull(sheet);
         assertEquals(0, sheet.getCssRules().getLength());
 
         style.setAttribute("type", "text/xsl");
-        sheet = ((HTMLStyleElementImpl) style).getStyleSheet();
+        sheet = ((HTMLStyleElementImpl) style).getSheet();
         assertNull(sheet);
 
         style.removeAttribute("type");
-        sheet = ((HTMLStyleElementImpl) style).getStyleSheet();
+        sheet = ((HTMLStyleElementImpl) style).getSheet();
         assertNotNull(sheet);
         assertEquals(0, sheet.getCssRules().getLength());
         style.setTextContent("body {color: blue;}");
@@ -771,7 +771,7 @@ public class DOMDocumentTest extends LoboUnitTest {
 
         style.setTextContent("foo:");
         assertEquals("<style>foo:</style>", style.toString());
-        sheet = ((HTMLStyleElementImpl) style).getStyleSheet();
+        sheet = ((HTMLStyleElementImpl) style).getSheet();
         assertEquals(0, sheet.getCssRules().getLength());
         assertEquals("<style>foo:</style>", style.toString());
         style.normalize();

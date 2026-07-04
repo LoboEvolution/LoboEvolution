@@ -38,6 +38,9 @@ public class StyleSheetListImpl extends AbstractList<CSSStyleSheet> implements S
     /** {@inheritDoc} */
     @Override
     public CSSStyleSheet item(final int index) {
+        if (index < 0 || index >= size()) {
+            return null;
+        }
         return this.get(index);
     }
 
