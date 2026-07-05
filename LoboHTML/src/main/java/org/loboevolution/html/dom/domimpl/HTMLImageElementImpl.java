@@ -96,7 +96,6 @@ public class HTMLImageElementImpl extends HTMLElementImpl implements HTMLImageEl
 
 	@Override
 	public Integer getOffsetWidth() {
-		System.out.println("getOffsetWidth");
 		final Image img = getImage();
 		if (img != null) {
 			final int w = img.getWidth(null);
@@ -108,7 +107,6 @@ public class HTMLImageElementImpl extends HTMLElementImpl implements HTMLImageEl
 
 	@Override
 	public Integer getOffsetHeight() {
-		System.out.println("getOffsetHeight");
 		final Image img = getImage();
 		if (img != null) {
 			final int h = img.getHeight(null);

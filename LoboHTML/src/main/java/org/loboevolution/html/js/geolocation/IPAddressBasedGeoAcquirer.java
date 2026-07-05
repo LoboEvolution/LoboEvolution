@@ -43,7 +43,7 @@ public class IPAddressBasedGeoAcquirer {
 	 * @throws java.lang.Exception if any.
 	 */
 	protected Position acquireLocation() throws Exception {
-		final String source = HttpNetwork.getSource(new URI("https://freegeoip.app/json/"), null);
+		final String source = HttpNetwork.getSource(new URI("https://freegeoip.app/json/"), null, null);
 		final JSONObject children = new JSONObject(source);
 		final double latitude = Double.parseDouble(children.optString("latitude"));
 		final double longitude = Double.parseDouble(children.optString("longitude"));

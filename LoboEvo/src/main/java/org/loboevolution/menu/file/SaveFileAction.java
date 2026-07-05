@@ -91,7 +91,7 @@ public class SaveFileAction extends AbstractAction {
 			}
 
 			try (final ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
-				final String source = HttpNetwork.getSource(new URI(toolbar.getAddressBar().getText()), null);
+				final String source = HttpNetwork.getSource(new URI(toolbar.getAddressBar().getText()), null, null);
 				baos.write(source.getBytes());
 				final OutputStream ops = Files.newOutputStream(selectedFile.toPath());
 				baos.writeTo(ops);

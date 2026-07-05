@@ -90,7 +90,10 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 				final HtmlRendererContext rcontext = this.getHtmlRendererContext();
 				final HtmlRendererConfig config = this.getHtmlRendererConfig();
 
-				final String href = getHref();
+				String href = getHref();
+				if (Strings.isBlank(href)) {
+					href = getAttribute("data-href");
+				}
 				final String cleanRel = rel.trim().toLowerCase();
 				final boolean isStyleSheet = cleanRel.equals("stylesheet");
 				final boolean isAltStyleSheet = cleanRel.equals("alternate stylesheet");

@@ -71,8 +71,13 @@ public final class HtmlLength {
 	public HtmlLength(final String spec, final HTMLDocumentImpl doc) throws IndexOutOfBoundsException, NumberFormatException {
 		final String specTrim = spec.trim();
 		final int length = specTrim.length();
-		final char lastChar = specTrim.charAt(length - 1);
 		final String parseable;
+		if (length == 0) {
+			this.lengthType = PIXELS;
+			this.rawValue = 0;
+			return;
+		}
+		final char lastChar = specTrim.charAt(length - 1);
 		if (lastChar == '%') {
 			this.lengthType = LENGTH;
 			parseable = specTrim.substring(0, length - 1).trim();

@@ -371,7 +371,9 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 
 	/** {@inheritDoc} */
 	public void setupRelativePosition(final RenderableContainer container) {
-		setupRelativePosition((RenderState)getModelNode().getRenderState(), container.getInnerWidth(), container.getInnerHeight());
+		if(this.modelNode instanceof HTMLElementImpl) {
+			setupRelativePosition((RenderState)getModelNode().getRenderState(), container.getInnerWidth(), container.getInnerHeight());
+		}
 	}
 
 	private void setupRelativePosition(final RenderState rs, final int availWidth, final int availHeight) {

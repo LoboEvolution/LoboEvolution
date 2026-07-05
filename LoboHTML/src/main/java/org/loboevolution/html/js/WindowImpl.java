@@ -182,6 +182,7 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 					this.clearState();
 				}
 				this.forgetAllTasks();
+				this.windowScope = null;
 				this.initWindowScope(document);
 				document.setUserData(Executor.SCOPE_KEY, getWindowScope(ctx), null);
 				this.document = document;
@@ -1328,6 +1329,7 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 		js.defineElementClass(ws, doc, "HTMLVideoElement", "HTMLVideoElement", HTMLVideoElementImpl.class);
 		js.defineElementClass(ws, doc, "Node", "Node", NodeImpl.class);
 		js.defineElementClass(ws, doc, "Range", "Range", RangeImpl.class);
+		js.defineElementClass(ws, doc, "DOMTokenList", "DOMTokenList", DOMTokenListImpl.class);
 
 
 

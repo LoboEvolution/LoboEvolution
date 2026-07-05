@@ -43,6 +43,7 @@ import java.awt.print.PageFormat;
 import java.awt.print.PrinterJob;
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
+import java.net.Proxy;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
@@ -359,11 +360,9 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
      * @param url the url
      * @throws java.io.IOException if any.
      */
-    public void openFile(final URL url) throws IOException {
-        final URLConnection connection = url.openConnection();
-        connection.setRequestProperty("User-Agent", UserAgent.getUserAgent());
-        connection.getHeaderField("Set-Cookie");
-        try (final InputStream inputStream = HttpNetwork.openConnectionCheckRedirects(connection)) {
+    public void openFile(final URL url) throws Exception {
+        URLConnection connection = HttpNetwork.getURLConnection(new URI(url.toString()), Proxy.NO_PROXY, "GET", null);
+        try (InputStream inputStream = HttpNetwork.getInputStream(connection)) {
             final ByteBuffer byteBuffer = BytesUtilities.readStream(inputStream);
             openPDFByteBuffer(byteBuffer, url.toString(), url.getFile());
         } catch (final Exception e) {

@@ -45,7 +45,8 @@ import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Base64;
-import java.util.UUID;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.zip.GZIPInputStream;
@@ -61,32 +62,6 @@ public class HttpNetwork {
 	
 	/** Constant TIMEOUT_VALUE="2000" */
 	public static final int TIMEOUT_VALUE = 2000;
-
-	private static InputStream getGzipStream(final URLConnection con) throws IOException {
-		final InputStream cis = con.getInputStream();
-		if (cis != null) {
-			if (GZIP_ENCODING.equals(con.getContentEncoding())) {
-				return new GZIPInputStream(con.getInputStream());
-			} else {
-				return con.getInputStream();
-			}
-		} else {
-			return null;
-		}
-	}
-
-	private static InputStream getGzipStreamError(final HttpURLConnection con) throws IOException {
-		final InputStream cis = con.getErrorStream();
-		if (cis != null) {
-			if (GZIP_ENCODING.equals(con.getContentEncoding())) {
-				return new GZIPInputStream(con.getErrorStream());
-			} else {
-				return con.getErrorStream();
-			}
-		} else {
-			return null;
-		}
-	}
 
 	/**
 	 * <p>getInputStream.</p>
@@ -140,7 +115,15 @@ public class HttpNetwork {
 				}
 			} else {
 				URI uri = Strings.isNotBlank(baseUri) ? Urls.createURI(baseUri, href) : new URI(href);
-				try (final InputStream in = HttpNetwork.openConnectionCheckRedirects(getURLConnection(uri, Proxy.NO_PROXY,null))) {
+				URLConnection connection = getURLConnection(uri, Proxy.NO_PROXY, "GET", null);
+				String contentType = connection.getContentType();
+
+				if (contentType != null && contentType.startsWith("text/html")) {
+					log.warn("Expected image but received HTML from {}", connection.getURL());
+					return null;
+				}
+
+				try (InputStream in = HttpNetwork.getInputStream(connection)) {
 					if (href.contains(";base64,")) {
 						final String base64 = href.split(";base64,")[1];
 						final byte[] decodedBytes = Base64.getDecoder().decode(base64);
@@ -148,28 +131,9 @@ public class HttpNetwork {
 						return ImageIO.read(stream);
 					} else if (href.endsWith(".svg")) {
 						return null; //TODO SVG From URL
-					} else if (href.startsWith("https")) {
-						if (in != null) {
-							final BufferedImage bi = ImageIO.read(in);
-							if (bi != null) {
-								return Toolkit.getDefaultToolkit().createImage(bi.getSource());
-							}
-						}
-						return null;
-					} else if (href.endsWith(".gif")) {
-						try {
-							return new ImageIcon(uri.toURL()).getImage();
-						} catch (final Exception e) {
-							return ImageIO.read(in);
-						}
-					} else if (href.endsWith(".bmp")) {
-						try {
-							return ImageIO.read(in);
-						} catch (final IOException e) {
-							log.error(e.getMessage(), e);
-						}
 					} else {
-						return ImageIO.read(in);
+						BufferedImage image = ImageIO.read(in);
+						return Toolkit.getDefaultToolkit().createImage(image.getSource());
 					}
 				} catch (final FileNotFoundException e) {
 					log.error(e.getMessage(), e);
@@ -189,125 +153,100 @@ public class HttpNetwork {
 	 * <p>getSource.</p>
 	 *
 	 * @param uri        a {@link String} object.
+	 * @param headers    a {@link Map} object.
 	 * @param integrity  a {@link String} object.
 	 * @return a {@link java.lang.String} object.
 	 * @throws java.lang.Exception if any.
 	 */
-	public static String getSource(URI uri, final String integrity) throws Exception {
-		try (final InputStream in = openConnectionCheckRedirects(getURLConnection(uri, Proxy.NO_PROXY,null))) {
-			final byte[] content = IOUtil.readFully(in);
-			if(AlgorithmDigest.validate(content, integrity)){
-				return toString(new java.io.ByteArrayInputStream(content));
+	public static String getSource(URI uri, Map<String, String> headers, final String integrity) throws Exception {
+
+		URLConnection connection = getURLConnection(uri, Proxy.NO_PROXY, "GET", headers);
+		try (InputStream in = HttpNetwork.getInputStream(connection)) {
+			if (in == null) {
+				return "";
 			}
+
+			final byte[] content = IOUtil.readFully(in);
+			if (AlgorithmDigest.validate(content, integrity)) {
+				return new String(content, StandardCharsets.UTF_8);
+			}
+
 		} catch (final SocketTimeoutException e) {
 			log.error("More time elapsed {}", TIMEOUT_VALUE);
-	    }
+		}
+
 		return "";
 	}
 
 
-	public static URLConnection getURLConnection(URI uri, Proxy proxy, String method) throws Exception {
-		URLConnection connection;
+	/**
+	 * <p>getURLConnection.</p>
+	 *
+	 * @param uri       a {@link String} object.
+	 * @param proxy     a {@link Proxy} object.
+	 * @param method    a {@link String} object.
+	 * @param extraHeaders  a {@link Map} object.
+	 * @return a {@link String} object.
+	 * @throws Exception if any.
+	 */
+	public static URLConnection getURLConnection(URI uri, Proxy proxy, String method, Map<String, String> extraHeaders) throws Exception {
+
 		URL url = uri.toURL();
-		if (url.toString().contains("file")) {
-			url = new URI(url.toString().replace("//", "///")).toURL();
-			connection = proxy == null || proxy.equals(Proxy.NO_PROXY) ? url.openConnection() : url.openConnection(proxy);
+		URLConnection connection;
 
-			if ("POST".equals(method)) {
-				String boundary = UUID.randomUUID().toString();
-				connection.setUseCaches(false);
-				connection.setDoOutput(true);
-				connection.setDoInput(true);
-				connection.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + boundary);
-			} else {
-				connection.setDoInput(true);
+		connection = (proxy == null || proxy.equals(Proxy.NO_PROXY))
+				? url.openConnection()
+				: url.openConnection(proxy);
+
+		if (Strings.isNotBlank(method) && connection instanceof HttpURLConnection hc) {
+			hc.setRequestMethod(method.toUpperCase());
+		}
+
+		// Timeout
+		connection.setConnectTimeout(TIMEOUT_VALUE);
+		connection.setReadTimeout(TIMEOUT_VALUE);
+
+		connection.setRequestProperty("User-Agent", UserAgent.getUserAgent());
+		connection.setRequestProperty("Accept-Encoding", "gzip");
+		connection.setRequestProperty("Connection", "keep-alive");
+
+		// Header anti‑bot (Chrome-like)
+		connection.setRequestProperty("Sec-Fetch-Dest", "style");
+		connection.setRequestProperty("Sec-Fetch-Mode", "no-cors");
+		connection.setRequestProperty("Sec-Fetch-Site", "same-site");
+
+		// Header
+		if (extraHeaders != null) {
+			for (Map.Entry<String, String> e : extraHeaders.entrySet()) {
+				connection.setRequestProperty(e.getKey(), e.getValue());
 			}
+		}
 
-			connection.setRequestProperty("User-Agent", UserAgent.getUserAgent());
-			connection.getHeaderField("Set-Cookie");
 
-			if (Strings.isNotBlank(method) && connection instanceof HttpURLConnection hc) {
-				hc.setRequestMethod(method.toUpperCase());
-			}
-
-			connection.connect();
-		} else {
-
-			connection = url.openConnection();
-
-			if (Strings.isNotBlank(method) && connection instanceof HttpURLConnection hc) {
-				hc.setRequestMethod(method.toUpperCase());
-			}
-
-			if ("POST".equals(method)) {
-				String boundary = UUID.randomUUID().toString();
-				connection.setUseCaches(false);
-				connection.setDoOutput(true);
-				connection.setDoInput(false);
-				connection.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + boundary);
-			} else {
-				connection.setDoInput(true);
-				connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-			}
-
-			connection.setRequestProperty("User-Agent", UserAgent.getUserAgent());
-			connection.getHeaderField("Set-Cookie");
+		connection.connect();
+		if (connection instanceof HttpURLConnection h) {
+			h.setInstanceFollowRedirects(true);
 		}
 		return connection;
 	}
 
+	/**
+	 * <p>sourceResponse.</p>
+	 *
+	 * @param scriptURI a {@link URI} object.
+	 * @param integrity a {@link String} object.
+	 * @return a {@link java.lang.String} object.
+	 * @throws java.io.IOException if any.
+	 */
 	public static String sourceResponse(final URI scriptURI, final String integrity) {
 		try {
-			return getSource(scriptURI, integrity);
+			Map<String, String> headers = new HashMap<>();
+			headers.put("Accept", "text/css,*/*;q=0.1");
+			return getSource(scriptURI, headers, integrity);
 		} catch (final Exception err) {
 			log.error(err.getMessage(), err);
 			return "";
 		}
-	}
-
-	/**
-	 * <p>openConnectionCheckRedirects.</p>
-	 *
-	 * @param c a {@link java.net.URLConnection} object.
-	 * @return a {@link java.io.InputStream} object.
-	 * @throws java.lang.Exception if any.
-	 */
-	public static InputStream openConnectionCheckRedirects(URLConnection c) throws Exception {
-		boolean redir;
-		int redirects = 0;
-		InputStream in;
-
-		if (c.getConnectTimeout() == 0) {
-			c.setConnectTimeout(TIMEOUT_VALUE);
-			c.setReadTimeout(TIMEOUT_VALUE);
-		}
-
-		do {
-			if (c instanceof HttpURLConnection) {
-				((HttpURLConnection) c).setInstanceFollowRedirects(false);
-			}
-			in = getInputStream(c);
-			redir = false;
-			if (c instanceof HttpURLConnection http) {
-                final int stat = http.getResponseCode();
-				if (stat >= 300 && stat <= 307 && stat != 306 && stat != HttpURLConnection.HTTP_NOT_MODIFIED) {
-					final String loc = http.getHeaderField("Location");
-					URL target = null;
-					if (loc != null) {
-						target = new URI(loc).toURL();
-					}
-					http.disconnect();
-					if (target == null || !(target.getProtocol().equals("http") || target.getProtocol().equals("https"))
-							|| redirects >= 5) {
-						throw new SecurityException("illegal URL redirect");
-					}
-					redir = true;
-					c = target.openConnection();
-					redirects++;
-				}
-			}
-		} while (redir);
-		return in;
 	}
 
 	/**
@@ -333,5 +272,31 @@ public class HttpNetwork {
 			}
 		}
 		return buff.toString();
+	}
+
+	private static InputStream getGzipStream(final URLConnection con) throws IOException {
+		final InputStream cis = con.getInputStream();
+		if (cis != null) {
+			if (GZIP_ENCODING.equals(con.getContentEncoding())) {
+				return new GZIPInputStream(con.getInputStream());
+			} else {
+				return con.getInputStream();
+			}
+		} else {
+			return null;
+		}
+	}
+
+	private static InputStream getGzipStreamError(final HttpURLConnection con) throws IOException {
+		final InputStream cis = con.getErrorStream();
+		if (cis != null) {
+			if (GZIP_ENCODING.equals(con.getContentEncoding())) {
+				return new GZIPInputStream(con.getErrorStream());
+			} else {
+				return con.getErrorStream();
+			}
+		} else {
+			return null;
+		}
 	}
 }

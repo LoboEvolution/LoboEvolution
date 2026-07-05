@@ -131,13 +131,14 @@ public class HtmlRendererConfigImpl implements HtmlRendererConfig {
     }
 
     @Override
-    public String getSourceCache(final URI baseUri, final String type, final String integrity, final boolean test) {
+    public String getSourceCache(final URI scriptURI, final String type, final String integrity, final boolean test) {
+        String source = null;
         try {
             final ExternalResourcesStore resourcesStore = new ExternalResourcesStore();
-            String baseUrl = baseUri.toString();
-            String source = resourcesStore.getSourceCache(baseUrl, type, test);
+            String baseUrl = scriptURI.toString();
+            source = null; //resourcesStore.getSourceCache(baseUrl, type, test);
             if (Strings.isBlank(source)) {
-                source = HttpNetwork.sourceResponse(baseUri, integrity);
+                source = HttpNetwork.sourceResponse(scriptURI, integrity);
                 if (!test) {
                     resourcesStore.saveCache(baseUrl, source, type);
                 }
@@ -147,7 +148,7 @@ public class HtmlRendererConfigImpl implements HtmlRendererConfig {
             log.error(e.getMessage(), e);
         }
 
-        return null;
+        return source;
     }
 
     @Override

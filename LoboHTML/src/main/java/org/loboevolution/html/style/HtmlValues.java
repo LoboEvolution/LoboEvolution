@@ -89,6 +89,7 @@ public class HtmlValues {
 		final String start = "url(";
 		final int startIdx = start.length();
 		final int closingIdx = token.lastIndexOf(')');
+		if (closingIdx == -1 || closingIdx <= startIdx) return null;
 		final String quotedUri = token.substring(startIdx, closingIdx);
 		final String[] items = { "http", "https", "file" };
 		final TimingInfo info = new TimingInfo();

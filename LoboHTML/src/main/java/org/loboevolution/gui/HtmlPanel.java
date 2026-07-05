@@ -508,7 +508,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 
 	public static HtmlPanel createlocalPanel(final URLConnection connection, final HtmlPanel panel, final HtmlRendererContext rendererContext,
                                              final HtmlRendererConfig config, final String uri) throws Exception {
-		try (final InputStream in = HttpNetwork.openConnectionCheckRedirects(connection);
+		try (final InputStream in = HttpNetwork.getInputStream(connection);
              final Reader reader = new InputStreamReader(in, StandardCharsets.UTF_8)) {
 			final InputSource is = new InputSourceImpl(reader, uri);
 			final DocumentBuilderImpl builder = new DocumentBuilderImpl(rendererContext.getUserAgentContext(),rendererContext, config);

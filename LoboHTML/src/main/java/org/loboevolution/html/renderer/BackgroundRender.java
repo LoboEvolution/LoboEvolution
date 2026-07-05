@@ -254,8 +254,9 @@ public class BackgroundRender {
         if (HtmlValues.isUrl(backgroundImageText)) {
             final String start = "url(";
             final int startIdx = start.length() + 1;
-            final int closingIdx = backgroundImageText.lastIndexOf(')') - 1;
-            String quotedUri = backgroundImageText.substring(startIdx, closingIdx);
+            final int closingIdx = backgroundImageText.lastIndexOf(')');
+            if (closingIdx == -1 || closingIdx <= startIdx) return;
+            String quotedUri = backgroundImageText.substring(startIdx, closingIdx - 1);
             final String[] items = {"http", "https", "file"};
             if (Strings.containsWords(quotedUri, items)) {
                 try {

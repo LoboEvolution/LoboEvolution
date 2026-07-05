@@ -179,7 +179,7 @@ public class StyleSheetAggregator {
                     final List<Condition> conditions = es.getConditions();
                     if (conditions != null) {
                         for (final Condition condition : conditions) {
-                            if (!selects(condition, element, mouseOver)) {
+                            if (element != null && !selects(condition, element, mouseOver)) {
                                 return false;
                             }
                         }
@@ -259,7 +259,7 @@ public class StyleSheetAggregator {
                     case CHILD_COMBINATOR:
                         final NodeListImpl childNodes = ((NodeListImpl) element.getChildNodes());
                         for (final Node child : childNodes) {
-                            if (selects(rs.getSelector(), (HTMLElement)child, pseudoElement, mouseOver)) {
+                            if (child instanceof HTMLElement && selects(rs.getSelector(), (HTMLElement)child, pseudoElement, mouseOver)) {
                                 return true;
                             }
                         }
@@ -647,7 +647,8 @@ public class StyleSheetAggregator {
                 return Strings.isNotBlank(ref) && ref.contains("#") && ref.split("#")[1].equals(element.getId());
 
             default:
-                String substring = value.substring(value.indexOf('(') + 1, value.length() - 1);
+                final int openParen = value.indexOf('(');
+                final String substring = openParen != -1 ? value.substring(openParen + 1, value.length() - 1) : "";
                 if (value.startsWith("nth-child(")) {
                     int index = 0;
                     for (Node n = element; n != null; n = n.getPreviousSibling()) {
@@ -902,11 +903,17 @@ public class StyleSheetAggregator {
                         if (value.endsWith("()")) {
                             return false;
                         }
-                        value = value.substring(0, value.indexOf('(') + 1) + ')';
+                        final int openParen = value.indexOf('(');
+                        if (openParen != -1) {
+                            value = value.substring(0, openParen + 1) + ')';
+                        }
                     }
 
-                    if ("nth-child(".equals(value.substring(0, 10))) {
-                        final String arg = value.substring(value.indexOf('(') + 1, value.lastIndexOf(')'));
+                    if (value.length() >= 10 && "nth-child(".equals(value.substring(0, 10))) {
+                        final int openParen = value.indexOf('(');
+                        final int closeParen = value.lastIndexOf(')');
+                        final String arg = openParen != -1 && closeParen > openParen ?
+                                value.substring(openParen + 1, closeParen) : "";
                         return "even".equalsIgnoreCase(arg) || "odd".equalsIgnoreCase(arg)
                                 || NTH_NUMERIC.matcher(arg).matches()
                                 || NTH_COMPLEX.matcher(arg).matches();

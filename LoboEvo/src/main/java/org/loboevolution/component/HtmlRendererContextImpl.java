@@ -413,8 +413,9 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 			final String backgroundImageText = style.getBackgroundImage();
 			final String start = "url(";
 			final int startIdx = start.length() + 1;
-			final int closingIdx = backgroundImageText.lastIndexOf(')') - 1;
-			final String quotedUri = backgroundImageText.substring(startIdx, closingIdx);
+			final int closingIdx = backgroundImageText.lastIndexOf(')');
+			if (closingIdx == -1 || closingIdx <= startIdx) return false;
+			final String quotedUri = backgroundImageText.substring(startIdx, closingIdx - 1);
 			elmImg.setSrc(quotedUri);
 			element = elmImg;
 		}
@@ -860,7 +861,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 					return;
 				}
 			}
-			try (final InputStream in = HttpNetwork.openConnectionCheckRedirects(connection)) {
+			try (final InputStream in = HttpNetwork.getInputStream(connection)) {
 				final RecordedInputStream rin = new RecordedInputStream(in, 1000000);
 				final InputStream bin = new BufferedInputStream(rin, 8192);
 				final String actualURI = urlForLoading.toExternalForm();

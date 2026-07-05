@@ -96,8 +96,8 @@ public class NavigatorFrame {
     private static HtmlPanel createPanel(final IBrowserPanel browserPanel, final URLConnection connection, final String uri) throws Exception {
         final HtmlPanel panel = new HtmlPanel();
         panel.setBrowserPanel(browserPanel);
-        try (final InputStream in = HttpNetwork.openConnectionCheckRedirects(connection);
-             final Reader reader = new InputStreamReader(in, StandardCharsets.UTF_8)) {
+        try (InputStream inputStream = HttpNetwork.getInputStream(connection);
+             final Reader reader = new InputStreamReader(inputStream, StandardCharsets.UTF_8)) {
 
             final InputSource is = new InputSourceImpl(reader, uri);
             final UserAgentContext ucontext = new UserAgentContext(new HtmlRendererConfigImpl());

@@ -326,7 +326,10 @@ public class HttpRequest extends XMLHttpRequestEventTargetImpl {
                      final String password) throws Exception {
 
 		synchronized (this) {
-			this.connection = HttpNetwork.getURLConnection(uri,this.proxy, method);
+			Map<String, String> headers = new HashMap<>();
+			headers.put("Referer", "https://github.com/");
+			headers.put("Accept-Language", "it-IT,it;q=0.9");
+			this.connection = HttpNetwork.getURLConnection(uri,this.proxy, method, headers);
 			this.isAsync = asyncFlag;
 			this.requestMethod = method;
 			this.requestURI = uri;
@@ -401,7 +404,7 @@ public class HttpRequest extends XMLHttpRequestEventTargetImpl {
 				this.responseHeadersMap = c.getHeaderFields();
 			}
 
-			try (final InputStream in = HttpNetwork.openConnectionCheckRedirects(c)) {
+			try (final InputStream in = HttpNetwork.getInputStream(c)) {
 				final int contentLength = c.getContentLength();
 				final byte[] bytes = IORoutines.load(in, contentLength == -1 ? 4096 : contentLength);
 				changeState(ReadyStateType.DONE, HttpURLConnection.HTTP_OK, "", bytes);

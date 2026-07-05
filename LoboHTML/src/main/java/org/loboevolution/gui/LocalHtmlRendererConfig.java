@@ -57,7 +57,9 @@ public class LocalHtmlRendererConfig implements HtmlRendererConfig {
 
     @Override
     public String getSourceCache(final URI scriptURI, final String type, final String integrity, final boolean test) throws Exception {
-        return HttpNetwork.getSource(scriptURI, integrity);
+        Map<String, String> headers = new HashMap<>();
+        headers.put("Accept", "text/css,*/*;q=0.1");
+        return HttpNetwork.getSource(scriptURI, headers, integrity);
     }
 
     @Override

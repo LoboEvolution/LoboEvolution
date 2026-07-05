@@ -69,10 +69,7 @@ public class Urls {
 				return new URI(relUrl);
 			}
 		} else {
-			if (baseUri.contains("file:") && !relativeUrl.contains("..")) {
-				return new URI(baseUri + relativeUrl);
-			} else
-				return new URI(baseUri).resolve(encodeIllegalCharacters(relativeUrl));
+			return new URI(baseUri).resolve(encodeIllegalCharacters(relativeUrl));
 		}
 		return null;
 	}

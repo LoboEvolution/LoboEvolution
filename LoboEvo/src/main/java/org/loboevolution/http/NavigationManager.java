@@ -29,10 +29,7 @@ package org.loboevolution.http;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.net.SocketTimeoutException;
-import java.net.URI;
-import java.net.URL;
-import java.net.URLConnection;
+import java.net.*;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
@@ -47,7 +44,6 @@ import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.parser.DocumentBuilderImpl;
 import org.loboevolution.html.parser.InputSourceImpl;
 import org.loboevolution.net.HttpNetwork;
-import org.loboevolution.net.UserAgent;
 import org.loboevolution.store.NavigationStore;
 import org.loboevolution.store.SearchEngineStore;
 import org.loboevolution.store.ToolsStore;
@@ -69,12 +65,9 @@ public class NavigationManager {
 	public static Document getDocument(final String uri) {
 		final HtmlPanel panel = new HtmlPanel();
 		try {
-			final URL url = new URI(uri).toURL();
-			final URLConnection connection = url.openConnection();
-			connection.setRequestProperty("User-Agent", UserAgent.getUserAgent());
-			connection.getHeaderField("Set-Cookie");
-			try (final InputStream in = HttpNetwork.openConnectionCheckRedirects(connection);
-                 final Reader reader = new InputStreamReader(in, StandardCharsets.UTF_8)) {
+			URLConnection connection = HttpNetwork.getURLConnection(new URI(uri), Proxy.NO_PROXY, "GET", null);
+			try (InputStream inputStream = HttpNetwork.getInputStream(connection);
+                 final Reader reader = new InputStreamReader(inputStream, StandardCharsets.UTF_8)) {
 
 				final InputSource is = new InputSourceImpl(reader, uri);
 				final UserAgentContext ucontext = new UserAgentContext(new HtmlRendererConfigImpl());
