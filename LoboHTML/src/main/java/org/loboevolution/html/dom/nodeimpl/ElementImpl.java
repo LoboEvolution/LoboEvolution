@@ -1102,6 +1102,28 @@ public class ElementImpl extends NodeInternal implements Element {
 
 		top = top + marginTop;
 		left = left + marginLeft;
+
+		if (!CSSValues.ABSOLUTE.isEqual(position) && !CSSValues.FIXED.isEqual(position)) {
+			final String thisDisplay = currentStyle.getDisplay();
+			if ("inline-block".equals(thisDisplay) || "inline".equals(thisDisplay)) {
+				Node prev = getPreviousSibling();
+				while (prev != null) {
+					if (prev instanceof HTMLElementImpl) {
+						HTMLElementImpl prevEl = (HTMLElementImpl) prev;
+						String prevDisplay = prevEl.getCurrentStyle().getDisplay();
+						if ("inline".equals(prevDisplay) || "inline-block".equals(prevDisplay)) {
+							left += prevEl.getOffsetWidth();
+							String prevMarginRight = prevEl.getCurrentStyle().getMarginRight();
+							if (Strings.isNotBlank(prevMarginRight)) {
+								left += HtmlValues.getPixelSize(prevMarginRight, rs, win, 0);
+							}
+						}
+					}
+					prev = prev.getPreviousSibling();
+				}
+			}
+		}
+
 		final int bottom = top + height;
 		return new DOMRectImpl(width, height, top, bottom, left);
 	}
@@ -1561,11 +1583,13 @@ public class ElementImpl extends NodeInternal implements Element {
 	}
 
 	private int childHeight(final ElementImpl elm, final HTMLDocumentImpl doc, final Integer parentHeight) {
-		final AtomicInteger h = new AtomicInteger(0);
+		final AtomicInteger blockSum = new AtomicInteger(0);
+		final AtomicInteger inlineMax = new AtomicInteger(0);
+		final AtomicBoolean hasBlockChild = new AtomicBoolean(false);
 		if (elm instanceof HTMLTextAreaElement ||
 				elm instanceof HTMLBaseFontElement ||
 				elm instanceof HTMLScriptElement ||
-				elm instanceof HTMLSuperscriptElementImpl) return h.get();
+				elm instanceof HTMLSuperscriptElementImpl) return 0;
 
 		final RenderState elmRs = elm.getRenderState();
 		final int display = elmRs != null ? elmRs.getDisplay() : RenderState.DISPLAY_INLINE;
@@ -1578,9 +1602,9 @@ public class ElementImpl extends NodeInternal implements Element {
 				case Node.CDATA_SECTION_NODE:
 				case Node.TEXT_NODE:
 					if (elm instanceof HTMLFieldSetElement) {
-						h.addAndGet(35);
+						inlineMax.set(Math.max(inlineMax.get(), 35));
 					} else if (elm instanceof HTMLDDElementImpl) {
-						h.addAndGet(17);
+						inlineMax.set(Math.max(inlineMax.get(), 17));
 					} else if (elmRs != null) {
 						final String text = child.getTextContent();
 						if (isBlock && contentWidth > 0 && text != null && text.contains(" ")) {
@@ -1602,9 +1626,9 @@ public class ElementImpl extends NodeInternal implements Element {
 									currentLineWidth += spaceWidth;
 								}
 							}
-							h.addAndGet(lineCount * lineHeight);
+							inlineMax.set(Math.max(inlineMax.get(), lineCount * lineHeight));
 						} else {
-							h.addAndGet(Strings.texHeight(text, elmRs.getFont()));
+							inlineMax.set(Math.max(inlineMax.get(), Strings.texHeight(text, elmRs.getFont())));
 						}
 					}
 					break;
@@ -1618,10 +1642,20 @@ public class ElementImpl extends NodeInternal implements Element {
 					final String height = currentStyle.getHeight();
 					final String cssDisplay = currentStyle.getDisplay();
 					if (!CSSValues.NONE.isEqual(cssDisplay)) {
+						final boolean childIsInline = RenderState.DISPLAY_INLINE == toDisplay(cssDisplay) || RenderState.DISPLAY_INLINE_BLOCK == toDisplay(cssDisplay);
+						final int childH;
 						if (Strings.isNotBlank(height)) {
-							h.addAndGet(HtmlValues.getPixelSize(CSSValues.AUTO.isEqual(height) ? "100%" : height, null, doc.getDefaultView(), 0, parentHeight));
+							childH = HtmlValues.getPixelSize(CSSValues.AUTO.isEqual(height) ? "100%" : height, null, doc.getDefaultView(), 0, parentHeight);
 						} else if (child instanceof ElementImpl) {
-							h.addAndGet(childHeight((ElementImpl) child, doc, parentHeight));
+							childH = childHeight((ElementImpl) child, doc, parentHeight);
+						} else {
+							childH = 0;
+						}
+						if (childIsInline) {
+							inlineMax.set(Math.max(inlineMax.get(), childH));
+						} else {
+							blockSum.addAndGet(childH);
+							hasBlockChild.set(true);
 						}
 					}
 					break;
@@ -1630,7 +1664,23 @@ public class ElementImpl extends NodeInternal implements Element {
 			}
 		});
 
-		return h.get();
+		return hasBlockChild.get() ? blockSum.get() : inlineMax.get();
+	}
+
+	private int toDisplay(final String cssDisplay) {
+		if ("block".equals(cssDisplay)) return RenderState.DISPLAY_BLOCK;
+		if ("inline".equals(cssDisplay)) return RenderState.DISPLAY_INLINE;
+		if ("inline-block".equals(cssDisplay)) return RenderState.DISPLAY_INLINE_BLOCK;
+		if ("list-item".equals(cssDisplay)) return RenderState.DISPLAY_LIST_ITEM;
+		if ("none".equals(cssDisplay)) return RenderState.DISPLAY_NONE;
+		if ("table".equals(cssDisplay)) return RenderState.DISPLAY_TABLE;
+		if ("inline-table".equals(cssDisplay)) return RenderState.DISPLAY_INLINE_TABLE;
+		if ("table-row".equals(cssDisplay)) return RenderState.DISPLAY_TABLE_ROW;
+		if ("table-cell".equals(cssDisplay)) return RenderState.DISPLAY_TABLE_CELL;
+		if ("table-column".equals(cssDisplay)) return RenderState.DISPLAY_TABLE_COLUMN;
+		if ("table-column-group".equals(cssDisplay)) return RenderState.DISPLAY_TABLE_COLUMN_GROUP;
+		if ("flex".equals(cssDisplay)) return RenderState.DISPLAY_FLEX_BOX;
+		return RenderState.DISPLAY_INLINE;
 	}
 
 	private int getContentWidthForText(final ElementImpl elm) {

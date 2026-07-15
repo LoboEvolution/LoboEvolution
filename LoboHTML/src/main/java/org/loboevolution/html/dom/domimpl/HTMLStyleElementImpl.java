@@ -172,6 +172,11 @@ public class HTMLStyleElementImpl extends HTMLElementImpl implements HTMLStyleEl
 		return 0;
 	}
 
+	@Override
+	public Integer getOffsetHeight() {
+		return 0;
+	}
+
 	/** {@inheritDoc} */
 	@Override
 	public void informStructureInvalid() {

@@ -28,6 +28,7 @@ package org.loboevolution.html.renderer;
 
 import org.loboevolution.html.node.ModelNode;
 import org.loboevolution.html.renderer.info.RBlockInfo;
+import org.loboevolution.html.renderer.info.RLayoutInfo;
 import org.loboevolution.html.renderer.table.RTable;
 import org.loboevolution.html.renderstate.RenderState;
 
@@ -125,7 +126,17 @@ public class RInlineBlock extends BaseElementRenderable {
 	/** {@inheritDoc} */
 	@Override
 	protected void doLayout(final int availWidth, final int availHeight, final boolean sizeOnly) {
-		this.child.layout(availWidth, availHeight, sizeOnly);
+		if (this.child instanceof RBlock) {
+			((RBlock) this.child).doLayout(RLayoutInfo.builder()
+					.availWidth(availWidth)
+					.availHeight(availHeight)
+					.expandWidth(false)
+					.expandHeight(false)
+					.sizeOnly(sizeOnly)
+					.build());
+		} else {
+			this.child.layout(availWidth, availHeight, sizeOnly);
+		}
 		assignDimension();
 	}
 

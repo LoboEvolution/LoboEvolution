@@ -1377,6 +1377,22 @@ public class XHtmlParser {
 	private void ensureBodyElement(final Node parent) {
 		if (lastBodyElement == null) {
 			lastBodyElement = document.createElement("BODY");
+			// Foster-parent existing non-head/non-body child elements into <body>
+			// so that orphan content has an appropriate parent (matching Firefox behavior).
+			List<Node> toFoster = new ArrayList<>();
+			for (int i = 0; i < parent.getChildNodes().getLength(); i++) {
+				Node child = parent.getChildNodes().item(i);
+				if (child.getNodeType() == Node.ELEMENT_NODE
+						&& child != lastHeadElement
+						&& !"HEAD".equalsIgnoreCase(child.getNodeName())
+						&& !"BODY".equalsIgnoreCase(child.getNodeName())) {
+					toFoster.add(child);
+				}
+			}
+			for (Node child : toFoster) {
+				parent.removeChild(child);
+				lastBodyElement.appendChild(child);
+			}
 			parent.appendChild(lastBodyElement);
 		}
 	}

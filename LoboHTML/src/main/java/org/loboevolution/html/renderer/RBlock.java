@@ -246,20 +246,25 @@ public class RBlock extends BaseElementRenderable {
             tentativeHeight = declaredHeight == -1 ? availHeight : declaredHeight + insetsTotalHeight + paddingTotalHeight;
         }
 
-		if ((declaredWidth == -1) && !expandWidth && (availWidth > (insetsTotalWidth + paddingTotalWidth))) {
+		if (!expandWidth && (availWidth > (insetsTotalWidth + paddingTotalWidth))) {
 			final RenderThreadState state = RenderThreadState.getState();
 			final boolean prevOverrideNoWrap = state.overrideNoWrap;
-			if (!prevOverrideNoWrap) {
-				state.overrideNoWrap = true;
-				try {
-                    bodyLayout.layout(paddingTotalWidth, paddingTotalHeight, paddingInsets, -1, null, true);
-					if ((bodyLayout.getWidth() + insetsTotalWidth) < tentativeWidth) {
-						tentativeWidth = bodyLayout.getWidth() + insetsTotalWidth;
+			state.overrideNoWrap = true;
+			try {
+                bodyLayout.layout(availWidth - insetsTotalWidth - paddingTotalWidth, paddingTotalHeight, paddingInsets, -1, null, true);
+				final int bw = bodyLayout.getWidth();
+				final int contentWidth = bw + insetsTotalWidth;
+				if (declaredWidth == -1) {
+					if (contentWidth < tentativeWidth) {
+						tentativeWidth = contentWidth;
 						tentativeHeight = bodyLayout.getHeight() + insetsTotalHeight;
 					}
-				} finally {
-					state.overrideNoWrap = false;
+				} else {
+					tentativeWidth = Math.max(tentativeWidth, contentWidth);
+					tentativeHeight = Math.max(tentativeHeight, bodyLayout.getHeight() + insetsTotalHeight);
 				}
+			} finally {
+				state.overrideNoWrap = prevOverrideNoWrap;
 			}
 		}
 

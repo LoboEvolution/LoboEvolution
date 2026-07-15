@@ -315,6 +315,28 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, GlobalE
 		offseLeft += marginLeft;
 		offseLeft += paddingLeft;
 
+		if (RenderState.POSITION_STATIC == renderState.getPosition()) {
+			final int thisDisplay = renderState.getDisplay();
+			if (thisDisplay == RenderState.DISPLAY_INLINE || thisDisplay == RenderState.DISPLAY_INLINE_BLOCK) {
+				Node prev = getPreviousSibling();
+				while (prev != null) {
+					if (prev instanceof HTMLElementImpl) {
+						HTMLElementImpl prevEl = (HTMLElementImpl) prev;
+						RenderState prevRs = prevEl.getRenderState();
+						int prevDisplay = prevRs != null ? prevRs.getDisplay() : RenderState.DISPLAY_INLINE;
+						if (prevDisplay == RenderState.DISPLAY_INLINE || prevDisplay == RenderState.DISPLAY_INLINE_BLOCK) {
+							offseLeft += prevEl.getOffsetWidth();
+							ComputedCSSStyleDeclaration prevStyle = prevEl.getComputedStyle();
+							if (prevStyle != null) {
+								offseLeft += HtmlValues.getPixelSize(prevStyle.getMarginRight(), prevRs, doc.getDefaultView(), 0);
+							}
+						}
+					}
+					prev = prev.getPreviousSibling();
+				}
+			}
+		}
+
 		if (offseLeft == 0 && getParentNode() instanceof HTMLBodyElement) {
 			return 8;
 		}
@@ -343,12 +365,16 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, GlobalE
 		int paddingTop = RenderState.POSITION_STATIC != renderState.getPosition() ? renderState.getPaddingInsets() != null ? renderState.getPaddingInsets().getTop() : 0 : 0;
 
 		if (RenderState.POSITION_STATIC == renderState.getPosition()) {
-			Node prev = getPreviousSibling();
-			while (prev != null) {
-				if (prev instanceof HTMLElementImpl) {
-					offsetTop += ((HTMLElementImpl) prev).getOffsetHeight();
+			final int thisDisplay = renderState.getDisplay();
+			final boolean isInlineOrInlineBlock = thisDisplay == RenderState.DISPLAY_INLINE || thisDisplay == RenderState.DISPLAY_INLINE_BLOCK;
+			if (!isInlineOrInlineBlock) {
+				Node prev = getPreviousSibling();
+				while (prev != null) {
+					if (prev instanceof HTMLElementImpl) {
+						offsetTop += ((HTMLElementImpl) prev).getOffsetHeight();
+					}
+					prev = prev.getPreviousSibling();
 				}
-				prev = prev.getPreviousSibling();
 			}
 		}
 

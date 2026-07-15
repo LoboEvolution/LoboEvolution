@@ -189,7 +189,7 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 								final BufferedReader br = new BufferedReader(reader);
 								ctx.evaluateReader(scope, br, scriptURI, 1, null);
 							} catch (Exception e) {
-								throw new Exception();
+								throw new Exception(e);
 							}
 						}
 					} catch (final SocketTimeoutException e) {

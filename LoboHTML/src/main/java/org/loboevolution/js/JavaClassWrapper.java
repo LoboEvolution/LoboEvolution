@@ -234,7 +234,8 @@ public class JavaClassWrapper {
 		boolean getter = !methodName.startsWith("set");
         PropertyInfo indexer = this.nameIndexer;
 		if (indexer == null) {
-			indexer = new PropertyInfo("$item", Object.class);
+			final Class pt = getter ? method.getReturnType() : method.getParameterTypes()[1];
+			indexer = new PropertyInfo("$item", pt);
 			this.nameIndexer = indexer;
 		}
 		if (getter) {

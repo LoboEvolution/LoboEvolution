@@ -350,7 +350,7 @@ public abstract class BaseRCollection extends BaseBoundableRenderable implements
 		int width = -1;
 
 		if(element instanceof HTMLAnchorElementImpl && Strings.isNotBlank(textContent)) {
-			width = Strings.texWidth(textContent,  renderState.getFont());
+			width = Strings.texWidth(textContent, renderState.getFont());
 		}
 
 		if (Strings.isNotBlank(widthText)) {

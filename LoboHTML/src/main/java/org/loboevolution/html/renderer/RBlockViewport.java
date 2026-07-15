@@ -51,6 +51,7 @@ import org.loboevolution.html.renderer.info.RLayoutInfo;
 import org.loboevolution.html.renderer.layout.MarkupLayout;
 import org.loboevolution.html.renderer.table.RTable;
 import org.loboevolution.html.renderstate.RenderState;
+import org.loboevolution.html.renderstate.RenderThreadState;
 import org.loboevolution.html.style.HtmlInsets;
 import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.style.HtmlValues;
@@ -995,6 +996,8 @@ public class RBlockViewport extends BaseRCollection {
 		this.availContentHeight = availh;
 		this.availContentWidth = availw;
 
+		this.overrideNoWrap = RenderThreadState.getState().overrideNoWrap;
+
 		// New floating algorithm.
 		layoutPass((NodeImpl) this.modelNode);
 
@@ -1045,6 +1048,7 @@ public class RBlockViewport extends BaseRCollection {
 			}
 		}
 
+		this.maxX = Math.min(this.maxX, desiredWidth - paddingInsets.right);
 		this.setWidth(paddingInsets.right + this.maxX);
 		this.setHeight(paddingInsets.bottom + maxY);
 	}
@@ -1634,8 +1638,9 @@ public class RBlockViewport extends BaseRCollection {
 			addExportableFloat(element, leftFloat, boxX, boxY);
 		}
 		// Adjust maxX based on float.
-		if (boxX + boxWidth > this.maxX) {
-			this.maxX = boxX + boxWidth;
+		final int floatRightEdge = boxX + boxWidth;
+		if (floatRightEdge > this.maxX) {
+			this.maxX = Math.min(floatRightEdge, desiredWidth - this.paddingInsets.right);
 		}
 		// Adjust maxY based on float, but only if this viewport is the float limit.
 		if (isFloatLimit()) {
@@ -1854,14 +1859,11 @@ public class RBlockViewport extends BaseRCollection {
 			final int rightOffset = fetchRightOffset(y);
 			line.changeLimits(leftOffset, this.desiredWidth - leftOffset - rightOffset);
 		} else {
-			// These pending floats are positioned when
-			// lineDone() is called.
-			Collection<RFloatInfo> c = this.pendingFloats;
-			if (c == null) {
-				c = new LinkedList<>();
-				this.pendingFloats = c;
-			}
-			c.add(floatInfo);
+			final int y = line.getY();
+			placeFloat(floatInfo.getRenderable(), y, floatInfo.isLeftFloat());
+			final int leftOffset = fetchLeftOffset(y);
+			final int rightOffset = fetchRightOffset(y);
+			line.changeLimits(leftOffset, this.desiredWidth - leftOffset - rightOffset);
 		}
 	}
 
