@@ -45,6 +45,7 @@ import org.loboevolution.info.TimingInfo;
 import org.loboevolution.net.AlgorithmDigest;
 import org.loboevolution.net.HttpNetwork;
 import org.loboevolution.net.IOUtil;
+import org.loboevolution.net.MimeType;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.RhinoException;
 import org.mozilla.javascript.Scriptable;
@@ -174,43 +175,47 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 			final WindowImpl window = (WindowImpl) doc.getDefaultView();
 			try (Context ctx = Executor.createContext(window.getContextFactory())) {
 				final String src = getSrc();
+				final String type = getType();
 				final Instant start = Instant.now();
 
-				if (Strings.isNotBlank(src)) {
-					final TimingInfo info = new TimingInfo();
-					final URL scriptURL = ((HTMLDocumentImpl) doc).getFullURL(src);
-					final String scriptURI = scriptURL == null ? src : scriptURL.toExternalForm();
-					info.setName(scriptURL != null ? scriptURL.getFile() : new URI(scriptURI).toURL().getFile());
+				if (MimeType.JS.getValue().equals(type)) {
 
-					try (InputStream in = getStream(scriptURL, scriptURI, info)) {
-						final byte[] scriptContent = IOUtil.readFully(in);
-						if (AlgorithmDigest.validate(scriptContent, getIntegrity())) {
-							try (final Reader reader = new InputStreamReader(new java.io.ByteArrayInputStream(scriptContent), StandardCharsets.UTF_8)) {
-								final BufferedReader br = new BufferedReader(reader);
-								ctx.evaluateReader(scope, br, scriptURI, 1, null);
-							} catch (Exception e) {
-								throw new Exception(e);
+					if (Strings.isNotBlank(src)) {
+						final TimingInfo info = new TimingInfo();
+						final URL scriptURL = ((HTMLDocumentImpl) doc).getFullURL(src);
+						final String scriptURI = scriptURL == null ? src : scriptURL.toExternalForm();
+						info.setName(scriptURL != null ? scriptURL.getFile() : new URI(scriptURI).toURL().getFile());
+
+						try (InputStream in = getStream(scriptURL, scriptURI, info)) {
+							final byte[] scriptContent = IOUtil.readFully(in);
+							if (AlgorithmDigest.validate(scriptContent, getIntegrity())) {
+								try (final Reader reader = new InputStreamReader(new java.io.ByteArrayInputStream(scriptContent), StandardCharsets.UTF_8)) {
+									final BufferedReader br = new BufferedReader(reader);
+									ctx.evaluateReader(scope, br, scriptURI, 1, null);
+								} catch (Exception e) {
+									throw new Exception(e);
+								}
 							}
-						}
-					} catch (final SocketTimeoutException e) {
-						info.setHttpResponse(400);
-					} catch (final Exception e) {
-						log.error(e.getMessage(), e);
-					} finally {
-						final Instant finish = Instant.now();
-						final long timeElapsed = Duration.between(start, finish).toMillis();
-						info.setTimeElapsed(timeElapsed);
-						info.setPath(scriptURI);
-						info.setHttpResponse(200);
+						} catch (final SocketTimeoutException e) {
+							info.setHttpResponse(400);
+						} catch (final Exception e) {
+							log.error(e.getMessage(), e);
+						} finally {
+							final Instant finish = Instant.now();
+							final long timeElapsed = Duration.between(start, finish).toMillis();
+							info.setTimeElapsed(timeElapsed);
+							info.setPath(scriptURI);
+							info.setHttpResponse(200);
 
-						final HtmlRendererContext htmlRendererContext = this.getHtmlRendererContext();
-						final HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
-						htmlPanel.getBrowserPanel().getTimingList.add(info);
+							final HtmlRendererContext htmlRendererContext = this.getHtmlRendererContext();
+							final HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
+							htmlPanel.getBrowserPanel().getTimingList.add(info);
+						}
+					} else {
+						final String scriptURI = doc.getBaseURI();
+						text = getText();
+						ctx.evaluateString(scope, text, scriptURI, 1, null);
 					}
-				} else {
-					final String scriptURI = doc.getBaseURI();
-					text = getText();
-					ctx.evaluateString(scope, text, scriptURI, 1, null);
 				}
 			} catch (final RhinoException ecmaError) {
 				final String error = ecmaError.sourceName() + ":" + ecmaError.lineNumber() + ": " + ecmaError.getMessage();

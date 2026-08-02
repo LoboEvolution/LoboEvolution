@@ -75,6 +75,17 @@ public class XHtmlParser {
 
 	private static final int TOKEN_TEXT = 2;
 
+	private static final Map<String, Character> XML_PREDEFINED_ENTITIES;
+
+	static {
+		XML_PREDEFINED_ENTITIES = new HashMap<>(6);
+		XML_PREDEFINED_ENTITIES.put("lt", '<');
+		XML_PREDEFINED_ENTITIES.put("gt", '>');
+		XML_PREDEFINED_ENTITIES.put("amp", '&');
+		XML_PREDEFINED_ENTITIES.put("apos", '\'');
+		XML_PREDEFINED_ENTITIES.put("quot", '"');
+	}
+
 	private final Document document;
 
 	private boolean justReadEmptyElement = false;
@@ -298,8 +309,12 @@ public class XHtmlParser {
 											document.getDoctype().getEntities().getNamedItem(name) != null) {
 										textNode = doc.createEntityReference(name);
 									} else {
-										throw new DOMException(DOMException.INVALID_CHARACTER_ERR,
-												"Undefined entity: " + name);
+										String decoded = decodeXmlNamedEntity(name);
+										if (decoded == null) {
+											throw new DOMException(DOMException.INVALID_CHARACTER_ERR,
+													"Undefined entity: " + name);
+										}
+										textNode = doc.createTextNode(decoded);
 									}
 								}
 
@@ -1458,6 +1473,23 @@ public class XHtmlParser {
 			}
 			startIdx = colonIdx + 1;
 		}
+	}
+
+	private static String decodeXmlNamedEntity(final String name) {
+		Character c = XML_PREDEFINED_ENTITIES.get(name);
+		if (c == null) {
+			c = XML_PREDEFINED_ENTITIES.get(name.toLowerCase());
+		}
+		if (c != null) {
+			return c.toString();
+		}
+		final Entities entity = Entities.get(name);
+		c = entity == null ? null : HTMLEntities.ENTITIES.get(entity);
+		if (c == null) {
+			final Entities lower = Entities.get(name.toLowerCase());
+			c = lower == null ? null : HTMLEntities.ENTITIES.get(lower);
+		}
+		return c == null ? null : c.toString();
 	}
 
 	private static int getEntityChar(final String spec) {

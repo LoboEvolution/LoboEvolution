@@ -59,7 +59,7 @@ public final class DateUtil {
 			try {
 				return parse(dateString, regexp, loc);
 			} catch (final ParseException e) {
-				log.info(e.getMessage());
+				//log.info(e.getMessage());
 			}
 		}
 		return null;
@@ -76,8 +76,6 @@ public final class DateUtil {
 		DATE_FORMAT.add("dd MMM yyyy");
 		DATE_FORMAT.add("dd MMMM yyyy");
 		DATE_FORMAT.add("dd-MMM-yy");
-		DATE_FORMAT.add("dd-MMM-yy");
-		DATE_FORMAT.add("yy-MMM-dd");
 		DATE_FORMAT.add("yy-MMM-dd");
 		DATE_FORMAT.add("yyyyMMddHHmm");
 		DATE_FORMAT.add("yyyyMMdd HHmm");
@@ -105,9 +103,13 @@ public final class DateUtil {
 		DATE_FORMAT.add("EEE dd'nd' MMM yyyy");
 		DATE_FORMAT.add("EEE dd'rd' MMM yyyy");
 		DATE_FORMAT.add("EEE, dd-MMM-yyyy HH:mm:ss z");
+		DATE_FORMAT.add("EEEE, dd-MMM-yyyy HH:mm:ss z");
+		DATE_FORMAT.add("EEE, dd-MMM-yy HH:mm:ss z");
+		DATE_FORMAT.add("EEEE, dd-MMM-yy HH:mm:ss z");
 		DATE_FORMAT.add("EEEMMM ddyyyy");
 		DATE_FORMAT.add("EEEdd MMM yyyy HHmmss Z");
 		DATE_FORMAT.add("EEE, dd MMM yyyy HH:mm:ss Z");
+		DATE_FORMAT.add("EEE, dd MMM yyyy HH:mm:ss z");
 		DATE_FORMAT.add("EEE MMM dd HHmmss Z yyyy");
 		DATE_FORMAT.add("yyyy-MM-dd HHmmss Z");
 		DATE_FORMAT.add("yyyy-MM-dd HHmmss.S");
