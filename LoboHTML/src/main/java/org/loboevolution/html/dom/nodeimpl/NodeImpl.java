@@ -142,6 +142,11 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, Cloneabl
 			}
 		}
 
+		final Node oldParent = newChild.getParentNode();
+		if (oldParent != null && oldParent instanceof NodeImpl) {
+			((NodeImpl) oldParent).getNodeList().remove(newChild);
+		}
+
 		newChild.setParentImpl(this);
 
 		if (Strings.isNotBlank(getNamespaceURI()) && Strings.isBlank(newChild.getNamespaceURI())) {

@@ -260,7 +260,6 @@ public class RBlock extends BaseElementRenderable {
 						tentativeHeight = bodyLayout.getHeight() + insetsTotalHeight;
 					}
 				} else {
-					tentativeWidth = Math.max(tentativeWidth, contentWidth);
 					tentativeHeight = Math.max(tentativeHeight, bodyLayout.getHeight() + insetsTotalHeight);
 				}
 			} finally {
@@ -457,11 +456,16 @@ public class RBlock extends BaseElementRenderable {
 		final HtmlInsets minsets = rs.getMarginInsets();
 		if (minsets != null) {
 			if (availWidth > 1) {
-                if (minsets.getLeftType() == HtmlInsets.TYPE_AUTO) {
+				final boolean leftAuto = minsets.getLeftType() == HtmlInsets.TYPE_AUTO;
+				final boolean rightAuto = minsets.getRightType() == HtmlInsets.TYPE_AUTO;
+				if (leftAuto && rightAuto) {
+					this.marginInsets.left = availWidth / 2;
+					this.marginInsets.right = availWidth / 2;
+					changes.width += availWidth;
+				} else if (leftAuto) {
 					this.marginInsets.left = availWidth;
 					changes.width += availWidth;
-				}
-				if (minsets.getRightType() == HtmlInsets.TYPE_AUTO) {
+				} else if (rightAuto) {
 					this.marginInsets.right = availWidth;
 					changes.width += availWidth;
 				}

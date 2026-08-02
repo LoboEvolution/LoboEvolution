@@ -39,6 +39,65 @@ import org.loboevolution.html.dom.HTMLUListElement;
 public class HTMLUListElementTest extends LoboUnitTest {
 
     @Test
+    @Alerts({"2", "LI", "LI"})
+    public void unclosedLiAutoClose() {
+        final String html = "<html><head>\n"
+                + "<script>\n"
+                + "  function test() {\n"
+                + "    var ul = document.getElementById('myId');\n"
+                + "    alert(ul.childNodes.length);\n"
+                + "    for (var i = 0; i < ul.childNodes.length; i++) {\n"
+                + "      alert(ul.childNodes[i].nodeName);\n"
+                + "    }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head><body onload='test()'>\n"
+                + "  <ul id='myId'><li>a<li>b</ul>\n"
+                + "</body></html>";
+        checkHtmlAlert(html);
+    }
+
+    @Test
+    @Alerts({"144"})
+    public void ulWidthEm() {
+        final String html = "<html><head>\n"
+                + "<style>\n"
+                + "  ul { width: 9em; margin: 0; padding: 0; border: none; }\n"
+                + "  li { margin: 0; padding: 0; }\n"
+                + "</style>\n"
+                + "<script>\n"
+                + "  function test() {\n"
+                + "    var ul = document.getElementById('myId');\n"
+                + "    alert(ul.getBoundingClientRect().width);\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head><body onload='test()'>\n"
+                + "  <ul id='myId'><li>a</li></ul>\n"
+                + "</body></html>";
+        checkHtmlAlert(html);
+    }
+
+    @Test
+    @Alerts({"144"})
+    public void ulAbsWidth144pxLiNotInflated() {
+        final String html = "<html><head>\n"
+                + "<style>\n"
+                + "  ul { position: absolute; width: 144px; }\n"
+                + "  li { padding: 0; margin: 0; }\n"
+                + "</style>\n"
+                + "<script>\n"
+                + "  function test() {\n"
+                + "    var li = document.querySelector('li');\n"
+                + "    alert(li.getBoundingClientRect().width);\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head><body onload='test()'>\n"
+                + "  <ul id='myId'><li>Home page</li></ul>\n"
+                + "</body></html>";
+        checkHtmlAlert(html);
+    }
+
+    @Test
     @Alerts("[object HTMLUListElement]")
     public void simpleScriptable() {
         final String html = "<html><head>\n"

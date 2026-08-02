@@ -316,6 +316,41 @@ public class HTMLEntities {
 		entities.put(Entities.CIRC, (char) 710);
 		entities.put(Entities.TILDE, (char) 732);
 
+		final Set<HTMLTag> listItemStopElements = new HashSet<>();
+		listItemStopElements.add(HTMLTag.LI);
+
+		final ElementInfo listItemElement = ElementInfo.builder()
+				.childElementOk(true)
+				.endElementType(ElementInfo.END_ELEMENT_OPTIONAL)
+				.stopTags(listItemStopElements)
+				.noScriptElement(false)
+				.decodeEntities(true)
+				.build();
+
+		final Set<HTMLTag> definitionTermStopElements = new HashSet<>();
+		definitionTermStopElements.add(HTMLTag.DT);
+		definitionTermStopElements.add(HTMLTag.DD);
+
+		final ElementInfo definitionTermElement = ElementInfo.builder()
+				.childElementOk(true)
+				.endElementType(ElementInfo.END_ELEMENT_OPTIONAL)
+				.stopTags(definitionTermStopElements)
+				.noScriptElement(false)
+				.decodeEntities(true)
+				.build();
+
+		final Set<HTMLTag> definitionDescStopElements = new HashSet<>();
+		definitionDescStopElements.add(HTMLTag.DD);
+		definitionDescStopElements.add(HTMLTag.DT);
+
+		final ElementInfo definitionDescElement = ElementInfo.builder()
+				.childElementOk(true)
+				.endElementType(ElementInfo.END_ELEMENT_OPTIONAL)
+				.stopTags(definitionDescStopElements)
+				.noScriptElement(false)
+				.decodeEntities(true)
+				.build();
+
 		final ElementInfo optionalEndElement = ElementInfo.builder()
 				.childElementOk(true)
 				.endElementType(ElementInfo.END_ELEMENT_OPTIONAL)
@@ -394,6 +429,17 @@ public class HTMLEntities {
 				.decodeEntities(true)
 				.build();
 
+		final Set<HTMLTag> divStopElements = new HashSet<>();
+		divStopElements.add(HTMLTag.DIV);
+
+		final ElementInfo divElement = ElementInfo.builder()
+				.childElementOk(true)
+				.endElementType(ElementInfo.END_ELEMENT_REQUIRED)
+				.stopTags(divStopElements)
+				.noScriptElement(false)
+				.decodeEntities(true)
+				.build();
+
 		final Set<HTMLTag> paragraphStopElements = new HashSet<>();
 		paragraphStopElements.add(HTMLTag.P);
 		paragraphStopElements.add(HTMLTag.DIV);
@@ -423,10 +469,11 @@ public class HTMLEntities {
 		elementInfos.put(HTMLTag.EMBED, forbiddenEndElement);
 		elementInfos.put(HTMLTag.SPACER, forbiddenEndElement);
 
+		elementInfos.put(HTMLTag.DIV, divElement);
 		elementInfos.put(HTMLTag.P, paragraphElement);
-		elementInfos.put(HTMLTag.LI, optionalEndElement);
-		elementInfos.put(HTMLTag.DT, optionalEndElement);
-		elementInfos.put(HTMLTag.DD, optionalEndElement);
+		elementInfos.put(HTMLTag.LI, listItemElement);
+		elementInfos.put(HTMLTag.DT, definitionTermElement);
+		elementInfos.put(HTMLTag.DD, definitionDescElement);
 		elementInfos.put(HTMLTag.TR, optionalEndElement);
 		elementInfos.put(HTMLTag.DETAILS, optionalEndElement);
 
