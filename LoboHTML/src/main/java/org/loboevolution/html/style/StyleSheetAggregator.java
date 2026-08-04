@@ -1309,8 +1309,12 @@ public class StyleSheetAggregator {
                 try {
                     final MediaListImpl mediaList = importRule.getMedia();
                     final HTMLDocumentImpl doc = getDoc();
-                    final URI uri = Urls.createURI(doc.getBaseURI(), importRule.getHref());
-                    final CSSStyleSheetImpl sheet = CSSUtilities.parseCssExternal(doc.getHtmlRendererConfig(), uri, doc.getBaseURI(), null, false);
+                    final CSSStyleSheetImpl parentSheet = importRule.getParentStyleSheet();
+                    final String sheetBase = parentSheet != null && Strings.isNotBlank(parentSheet.getBaseURI())
+                            ? parentSheet.getBaseURI() : doc.getBaseURI();
+                    final URI uri = Urls.createURI(sheetBase, importRule.getHref());
+                    final CSSStyleSheetImpl sheet = CSSUtilities.parseCssExternal(doc.getHtmlRendererConfig(), uri, uri.toString(), null, false);
+                    sheet.setBaseURI(uri.toString());
                     
                     // If import has no media type (empty media list or empty media text), add to current index
                     // Otherwise, create a child index with the media type

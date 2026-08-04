@@ -178,7 +178,7 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 				final String type = getType();
 				final Instant start = Instant.now();
 
-				if (MimeType.JS.getValue().equals(type)) {
+				if (Strings.isBlank(type) || isJavaScriptType(type)) {
 
 					if (Strings.isNotBlank(src)) {
 						final TimingInfo info = new TimingInfo();
@@ -224,6 +224,13 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 				log.error("Unable to evaluate Javascript code", err);
 			}
 		}
+	}
+
+	private static boolean isJavaScriptType(final String type) {
+		return type != null
+				&& (type.equalsIgnoreCase("text/javascript") || type.equalsIgnoreCase("application/javascript")
+						|| type.equalsIgnoreCase("application/ecmascript") || type.equalsIgnoreCase("text/ecmascript")
+						|| type.equalsIgnoreCase("module"));
 	}
 
 	private InputStream getStream(URL scriptURL, String scriptURI, TimingInfo info) throws Exception {

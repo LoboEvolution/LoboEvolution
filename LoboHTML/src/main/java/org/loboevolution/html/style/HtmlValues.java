@@ -26,7 +26,6 @@
 
 package org.loboevolution.html.style;
 
-import org.htmlunit.cssparser.dom.CSSStyleDeclarationImpl;
 import org.htmlunit.cssparser.dom.CSSValueImpl;
 import org.htmlunit.cssparser.dom.CSSValueImpl.CSSPrimitiveValueType;
 import org.loboevolution.common.Strings;

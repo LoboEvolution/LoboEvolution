@@ -1521,7 +1521,7 @@ public class XHtmlParser {
 			}
 
 			if (attributeName.startsWith("xml:")) {
-				element.setAttributeNS(Document.XMLNS_NAMESPACE_URI, attributeName, attributeValue);
+				element.setAttributeNS(Document.XML_NAMESPACE_URI, attributeName, attributeValue);
 				return;
 			}
 

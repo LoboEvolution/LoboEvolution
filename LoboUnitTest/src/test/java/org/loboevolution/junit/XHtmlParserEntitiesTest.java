@@ -27,10 +27,13 @@ package org.loboevolution.junit;
 
 import org.junit.jupiter.api.Test;
 import org.loboevolution.driver.LoboUnitTest;
+import org.loboevolution.html.node.Attr;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
+import org.loboevolution.html.node.Node;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Tests for entity decoding in XHTML documents parsed in XML mode
@@ -50,5 +53,15 @@ public class XHtmlParserEntitiesTest extends LoboUnitTest {
 		final Document xmlDoc = sampleXmlFile("XHtmlEntities.xhtml");
 		final Element p2 = xmlDoc.getElementById("p2");
 		assertEquals("\u00A9 \u221E", p2.getTextContent());
+}
+
+	@Test
+	public void parseXmlLangAttribute() {
+		final Document xmlDoc = sampleXmlFile("XHtmlLangAttr.xhtml");
+		final Element body = xmlDoc.getElementById("DocBody");
+		final Attr lang = body.getAttributeNode("xml:lang");
+		assertEquals("en", lang.getValue());
+		assertEquals(Node.XML_NAMESPACE_URI, lang.getNamespaceURI());
+		assertTrue(body.hasAttributeNS(Node.XML_NAMESPACE_URI, "lang"));
 	}
 }

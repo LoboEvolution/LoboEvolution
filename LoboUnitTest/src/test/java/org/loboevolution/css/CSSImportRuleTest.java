@@ -525,6 +525,23 @@ public class CSSImportRuleTest extends LoboUnitTest {
 
     @Test
     @Alerts("true")
+    public void importedStylesheetsResolvedRelativeToStylesheetFolder() {
+        final String html = "<html><head>\n"
+                + "<link rel='stylesheet' type='text/css' href='" + URL_CSS + "subfolder/link.css'></link>\n"
+                + "<body>\n"
+                + "<div id='d' class='linkimport'>foo</div>\n"
+                + "<script>\n" 
+                + "var d = document.getElementById('d');\n"
+                + "var s = window.getComputedStyle(d, null);\n"
+                + "alert(s.color.indexOf('128') > 0);\n"
+                + "</script>\n"
+                + "</body></html>";
+        checkHtmlAlert(html);
+    }
+
+
+    @Test
+    @Alerts("true")
     public void circularImportedStylesheets() {
         final String html = "<html><head>\n"
                 + "<link rel='stylesheet' type='text/css' href='" + URL_CSS + "file1.css'></link>\n"

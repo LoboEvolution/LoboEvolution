@@ -54,4 +54,25 @@ public class ListRenderState extends AbstractMarginRenderState {
 		insets.setBottomType(HtmlInsets.TYPE_PIXELS);
 		return insets;
 	}
+
+	@Override
+	public HtmlInsets getPaddingInsets() {
+		HtmlInsets insets = this.paddingInsets;
+		if (insets != INVALID_INSETS) {
+			return insets;
+		}
+		insets = super.getPaddingInsets();
+		if (insets == null || insets.htmlInsetsIsVoid()) {
+			insets = getDefaultPaddingInsets();
+		}
+		this.paddingInsets = insets;
+		return insets;
+	}
+
+	private HtmlInsets getDefaultPaddingInsets() {
+		final HtmlInsets insets = new HtmlInsets();
+		insets.setLeft(HtmlValues.getPixelSize("40px", null, element.getDocumentNode().getDefaultView(), -1));
+		insets.setLeftType(HtmlInsets.TYPE_PIXELS);
+		return insets;
+	}
 }

@@ -129,7 +129,7 @@ public class HttpNetwork {
 						final byte[] decodedBytes = Base64.getDecoder().decode(base64);
 						final InputStream stream = new ByteArrayInputStream(decodedBytes);
 						return ImageIO.read(stream);
-					} else if (href.endsWith(".svg")) {
+					} else if (href.endsWith(".svg") || (contentType != null && contentType.startsWith("image/svg"))) {
 						return null; //TODO SVG From URL
 					} else {
 						BufferedImage image = ImageIO.read(in);
@@ -161,6 +161,13 @@ public class HttpNetwork {
 	public static String getSource(URI uri, Map<String, String> headers, final String integrity) throws Exception {
 
 		URLConnection connection = getURLConnection(uri, Proxy.NO_PROXY, "GET", headers);
+		if (connection instanceof HttpURLConnection http) {
+			final int code = http.getResponseCode();
+			if (code >= 400) {
+				log.warn("HTTP {} fetching {}", code, uri);
+				return "";
+			}
+		}
 		try (InputStream in = HttpNetwork.getInputStream(connection)) {
 			if (in == null) {
 				return "";
@@ -190,8 +197,32 @@ public class HttpNetwork {
 	 * @throws Exception if any.
 	 */
 	public static URLConnection getURLConnection(URI uri, Proxy proxy, String method, Map<String, String> extraHeaders) throws Exception {
+		URLConnection connection = openConnection(uri, proxy, method, extraHeaders);
+		if (connection instanceof HttpURLConnection http) {
+			final int maxRedirects = 5;
+			for (int redirects = 0; redirects < maxRedirects; redirects++) {
+				final int code = http.getResponseCode();
+				final String location = http.getHeaderField("Location");
+				if (isRedirect(code) && location != null) {
+					http.disconnect();
+					final URI nextUri = uri.resolve(location.trim());
+					connection = openConnection(nextUri, proxy, method, extraHeaders);
+					if (connection instanceof HttpURLConnection) {
+						uri = nextUri;
+						http = (HttpURLConnection) connection;
+					} else {
+						return connection;
+					}
+				} else {
+					return connection;
+				}
+			}
+		}
+		return connection;
+	}
 
-		URL url = uri.toURL();
+	private static URLConnection openConnection(URI uri, Proxy proxy, String method, Map<String, String> extraHeaders) throws Exception {
+		final URL url = uri.toURL();
 		URLConnection connection;
 
 		connection = (proxy == null || proxy.equals(Proxy.NO_PROXY))
@@ -222,12 +253,15 @@ public class HttpNetwork {
 			}
 		}
 
-
-		connection.connect();
 		if (connection instanceof HttpURLConnection h) {
 			h.setInstanceFollowRedirects(true);
 		}
+		connection.connect();
 		return connection;
+	}
+
+	private static boolean isRedirect(final int code) {
+		return code == 301 || code == 302 || code == 303 || code == 307 || code == 308;
 	}
 
 	/**

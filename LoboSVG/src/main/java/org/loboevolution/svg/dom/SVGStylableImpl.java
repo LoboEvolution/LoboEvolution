@@ -158,7 +158,9 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 		int strokeWidth = 1;
 		final String strokeWidthProp = Strings.isNotBlank(style.getStrokeWidth()) ? style.getStrokeWidth() : getAttribute("stroke-width");
 		if (Strings.isNotBlank(strokeWidthProp)) {
-			strokeWidth = Integer.parseInt(strokeWidthProp); //HtmlValues.getPixelSize(strokeWidthProp, null, doc.getDefaultView(), 1);
+			SVGLengthImpl l = new SVGLengthImpl();
+			l.setValueAsString(strokeWidthProp);
+			strokeWidth = (int) l.getValueInSpecifiedUnits();
 		}
 		return strokeWidth;
 	}
@@ -173,7 +175,9 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 		int miterlimit = 4;
 		final String strokeMiterlimit = Strings.isNotBlank(style.getStrokeMiterLimit()) ? style.getStrokeMiterLimit() : getAttribute("stroke-miterlimit");
 		if (Strings.isNotBlank(strokeMiterlimit)) {
-			miterlimit = Integer.parseInt(strokeMiterlimit); //HtmlValues.getPixelSize(strokeMiterlimit, null, doc.getDefaultView(), 4);
+			SVGLengthImpl l = new SVGLengthImpl();
+			l.setValueAsString(strokeMiterlimit);
+			miterlimit = (int) l.getValueInSpecifiedUnits();
 		}
 		return miterlimit;
 	}

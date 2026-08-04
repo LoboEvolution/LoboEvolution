@@ -38,7 +38,6 @@ import org.loboevolution.events.Event;
 import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.HTMLDocument;
-import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.filter.BodyFilter;
 import org.loboevolution.html.dom.filter.HeadFilter;
 import org.loboevolution.html.dom.nodeimpl.DocumentImpl;
@@ -77,8 +76,6 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 
 	@Setter
 	private volatile String baseURI;
-
-	private HTMLElement body;
 
 	@Getter
 	@Setter
@@ -446,14 +443,6 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	public void removeNamedItem(final String name) {
 		synchronized (this) {
 			this.elementsByName.remove(name);
-		}
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setBody(final HTMLElement body) {
-		synchronized (this) {
-			this.body = body;
 		}
 	}
 

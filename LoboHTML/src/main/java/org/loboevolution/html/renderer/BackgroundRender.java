@@ -260,17 +260,17 @@ public class BackgroundRender {
             final String[] items = {"http", "https", "file"};
             if (Strings.containsWords(quotedUri, items)) {
                 try {
-                    binfo.setBackgroundImage(linkUri(document, backgroundImageText));
+                    binfo.setBackgroundImage(linkUri(document, quotedUri));
                 } catch (final Exception e) {
                     binfo.setBackgroundImage(null);
                 }
             } else {
                 if (quotedUri.contains(";base64,")) {
-                    final String base64 = backgroundImageText.split(";base64,")[1];
+                    final String base64 = quotedUri.split(";base64,")[1];
                     final byte[] decodedBytes = Base64.getDecoder().decode(Strings.linearize(base64));
-                    backgroundImageText = Arrays.toString(decodedBytes);
+                    quotedUri = Arrays.toString(decodedBytes);
                 }
-                binfo.setBackgroundImage(linkUri(document, backgroundImageText));
+                binfo.setBackgroundImage(linkUri(document, quotedUri));
             }
         } else if (HtmlValues.isGradient(backgroundImageText)) {
             try {

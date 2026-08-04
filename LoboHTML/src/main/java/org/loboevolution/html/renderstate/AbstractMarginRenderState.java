@@ -32,6 +32,7 @@ import org.loboevolution.html.style.HtmlInsets;
  * <p>Abstract AbstractMarginRenderState class.</p>
  */
 public abstract class AbstractMarginRenderState extends BlockRenderState {
+
 	/**
 	 * <p>Constructor for AbstractMarginRenderState.</p>
 	 *

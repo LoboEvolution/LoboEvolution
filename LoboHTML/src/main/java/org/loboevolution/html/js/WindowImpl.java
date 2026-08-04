@@ -1298,7 +1298,6 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 		js.defineJsObject(ws, "XMLHttpRequestUpload", XMLHttpRequestUploadImpl.class, jiXUpload);
 		js.defineJsObject(ws, "XMLHttpRequest", XMLHttpRequestImpl.class, jiXhttp);
 		js.defineJsObject(ws, "DOMParser", DOMParserImpl.class, jiDomp);
-		js.defineJsObject(ws, "InputEvent", InputEventImpl.class, jiInputEvent);
 		js.defineJsObject(ws, "FormData", FormDataImpl.class, jiform);
 		js.defineJsObject(ws, "LocalStorage", LocalStorage.class, jiloc);
 		js.defineJsObject(ws, "XMLSerializer", XMLSerializerImpl.class, jiXSeralizer);
