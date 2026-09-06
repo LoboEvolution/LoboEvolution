@@ -79,14 +79,16 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTabl
 		int trcount = 0;
 		int index = idx;
 		if (index == -1) index = this.nodeList.size() -1;
+		int nodeIndex = 0;
 		for (final Node node : nodeList) {
 			if ("TD".equalsIgnoreCase(node.getNodeName())) {
 				if (trcount == index) {
-					removeChildAt(nodeList.indexOf(node));
+					removeChildAt(nodeIndex);
 					return;
 				}
 				trcount++;
 			}
+			nodeIndex++;
 		}
 		
 		if (this.nodeList.size() < index) {

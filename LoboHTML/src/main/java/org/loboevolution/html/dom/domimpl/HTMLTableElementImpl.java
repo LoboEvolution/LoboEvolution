@@ -123,14 +123,16 @@ public class HTMLTableElementImpl extends HTMLElementImpl implements HTMLTableEl
 	@Override
 	public void deleteRow(final int index) {
 		int trcount = 0;
+		int nodeIndex = 0;
         for (final Node node : nodeList) {
             if ("TR".equalsIgnoreCase(node.getNodeName())) {
                 if (trcount == index) {
-                    removeChildAt(nodeList.indexOf(node));
+                    removeChildAt(nodeIndex);
                     return;
                 }
                 trcount++;
             }
+			nodeIndex++;
         }
 	}
 
