@@ -23,46 +23,40 @@
  *
  * Contact info: ivan.difrancesco@yahoo.it
  */
+package org.loboevolution.html.renderstate;
 
-package org.loboevolution.html;
-
-import java.awt.*;
+import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
+import org.loboevolution.info.BorderInfo;
 
 /**
- * This interface should be implemented to provide OBJECT, EMBED or APPLET
- * functionality.
+ * <p>ObjectRenderState class.</p>
  */
-public interface HtmlObject {
-	/**
-	 * <p>destroy.</p>
-	 */
-	void destroy();
+public class ObjectRenderState extends StyleSheetRenderState {
 
 	/**
-	 * <p>getComponent.</p>
+	 * <p>Constructor for ObjectRenderState.</p>
 	 *
-	 * @return a {@link java.awt.Component} object.
+	 * @param prevRenderState a {@link RenderState} object.
+	 * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
 	 */
-	Component getComponent();
+	public ObjectRenderState(final RenderState prevRenderState, final HTMLElementImpl element) {
+		super(prevRenderState, element);
+	}
 
-	/**
-	 * Called as the object is layed out, either the first time it's layed out or
-	 * whenever the DOM changes. This is where the object should reset its state
-	 * based on element children or attributes and possibly change its preferred
-	 * size if appropriate.
-	 *
-	 * @param availableWidth a {@link java.lang.Integer} object.
-	 * @param availableHeight a {@link java.lang.Integer} object.
-	 */
-	void reset(int availableWidth, final int availableHeight);
-
-	/**
-	 * <p>resume.</p>
-	 */
-	void resume();
-
-	/**
-	 * <p>suspend.</p>
-	 */
-	void suspend();
+	/** {@inheritDoc} */
+	@Override
+	public BorderInfo getBorderInfo() {
+		BorderInfo binfo = this.borderInfo;
+		if (binfo != INVALID_BORDER_INFO) {
+			return binfo;
+		}
+		binfo = super.getBorderInfo();
+		if (binfo == null || binfo.borderInfoIsVoid()) {
+			if (binfo == null) {
+				binfo = new BorderInfo();
+			}
+		}
+		this.borderInfo = binfo;
+		return binfo;
+	}
 }

@@ -60,8 +60,8 @@ public class HttpNetwork {
 	/** Constant GZIP_ENCODING="gzip" */
 	public static final String GZIP_ENCODING = "gzip";
 	
-	/** Constant TIMEOUT_VALUE="2000" */
-	public static final int TIMEOUT_VALUE = 2000;
+	/** Constant TIMEOUT_VALUE="10000" */
+	public static final int TIMEOUT_VALUE = 10000;
 
 	/**
 	 * <p>getInputStream.</p>

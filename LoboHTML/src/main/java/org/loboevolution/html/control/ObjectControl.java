@@ -24,27 +24,39 @@
  * Contact info: ivan.difrancesco@yahoo.it
  */
 
-package org.loboevolution.html.renderer.layout;
+package org.loboevolution.html.control;
 
-import org.loboevolution.html.control.*;
-import org.loboevolution.html.node.Element;
+import org.loboevolution.common.WrapperLayout;
 import org.loboevolution.html.dom.domimpl.HTMLObjectElementImpl;
-import org.loboevolution.html.renderer.RBlockViewport;
-import org.loboevolution.html.renderer.RElement;
 
-public class ObjectLayout extends CommonWidgetLayout {
+import java.io.Serial;
 
-    /**
-     * @param tryToRenderContent If the object is unknown, content is rendered as  HTML.
-     */
-    public ObjectLayout(final boolean tryToRenderContent) {
-        super(ADD_INLINE);
-    }
+/**
+ * <p>ObjectControl class.</p>
+ */
+public class ObjectControl extends BaseControl {
 
-    @Override
-    public  RElement createRenderable(final RBlockViewport bodyLayout, final Element markupElement) {
-        final HTMLObjectElementImpl markupElementImpl = (HTMLObjectElementImpl)markupElement;
-        final UIControl control = new ObjectControl(markupElementImpl);
-        return new RUIControl(markupElementImpl, control, bodyLayout.getContainer(), bodyLayout.getUserAgentContext());
-    }
+	@Serial
+    private static final long serialVersionUID = 1L;
+
+	/** The element. */
+	private final HTMLObjectElementImpl modelNode;
+
+	/**
+	 * <p>Constructor for ObjectControl.</p>
+	 *
+	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.HTMLObjectElementImpl} object.
+	 */
+	public ObjectControl(final HTMLObjectElementImpl modelNode) {
+		super(modelNode);
+		setLayout(WrapperLayout.getInstance());
+		this.modelNode = modelNode;
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void reset(final int availWidth, final int availHeight) {
+		super.reset(availWidth, availHeight);
+		modelNode.draw(this);
+	}
 }

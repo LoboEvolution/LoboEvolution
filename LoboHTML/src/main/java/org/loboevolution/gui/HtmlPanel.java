@@ -602,4 +602,13 @@ public class HtmlPanel extends JComponent implements FrameContext {
 		this.add(shp);
 		this.nodeRenderer = shp;
 	}
+
+	public static HtmlPanel createFallbackPanel(final NodeImpl node, final UserAgentContext ucontext, final HtmlRendererContext rcontext) {
+		final HtmlPanel panel = new HtmlPanel();
+		panel.setUpAsBlock(ucontext, rcontext);
+		if (panel.htmlBlockPanel != null) {
+			panel.htmlBlockPanel.setRootNode(node);
+		}
+		return panel;
+	}
 }
