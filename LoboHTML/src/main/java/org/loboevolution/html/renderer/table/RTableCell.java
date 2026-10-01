@@ -120,7 +120,7 @@ public class RTableCell extends RBlock {
 			}
             return this.cellElement.getCurrentStyle().getHeight();
         } else if ("inherit".equals(heightText)) {
-			return this.cellElement.getParentStyle().getWidth();
+			return this.cellElement.getParentStyle().getHeight();
 		} else {
             return heightText;
         }
@@ -170,16 +170,14 @@ public class RTableCell extends RBlock {
 		final String widthText = props == null ? null : props.getWidth();
 		if (widthText == null) {
 			if (this.cellElement instanceof HTMLTableCellElement htmlTableCellElement) {
-                if (htmlTableCellElement.getWidth() != null) {
+				if (htmlTableCellElement.getWidth() != null) {
 					return htmlTableCellElement.getWidth();
 				}
 			}
-			return this.cellElement.getCurrentStyle().getWidth();
 		} else if ("inherit".equals(widthText)) {
 			return this.cellElement.getParentStyle().getWidth();
-		} else {
-			return widthText;
 		}
+		return widthText;
 	}
 
 	/** {@inheritDoc} */

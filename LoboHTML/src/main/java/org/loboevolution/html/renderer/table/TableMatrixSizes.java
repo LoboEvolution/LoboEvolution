@@ -26,12 +26,15 @@
 
 package org.loboevolution.html.renderer.table;
 
+import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.css.CSSStyleDeclaration;
+import org.loboevolution.html.renderer.RBlock;
 import org.loboevolution.html.renderer.info.RLayoutInfo;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.renderstate.RenderThreadState;
+import org.loboevolution.html.style.HtmlInsets;
 import org.loboevolution.html.style.HtmlLength;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.info.CaptionSizeInfo;
@@ -82,29 +85,30 @@ class TableMatrixSizes {
 					widthText = element.getParentStyle().getWidth();
 				}
 
-				int width = -1;
-
-				if (widthText != null) {
-					width = HtmlValues.getPixelSize(widthText, element.getRenderState(), doc.getDefaultView(), 0, availWidth);
-				}
-
-				if (props.getMaxWidth() != null) {
-					final int maxWidth = HtmlValues.getPixelSize(props.getMaxWidth(), element.getRenderState(), doc.getDefaultView(), 0, availWidth);
-
-					if (width == 0 || width > maxWidth) {
-						width = maxWidth;
+				final HtmlLength widthLength = new HtmlLength(widthText, doc);
+				if (Strings.isNotBlank(props.getMaxWidth()) || Strings.isNotBlank(props.getMinWidth())) {
+					int width = widthLength.getLength(availWidth);
+					if (Strings.isNotBlank(props.getMaxWidth())) {
+						final int maxWidth = HtmlValues.getPixelSize(props.getMaxWidth(), element.getRenderState(), doc.getDefaultView(), 0, availWidth);
+						if (width == 0 || width > maxWidth) {
+							width = maxWidth;
+						}
 					}
-				}
-
-				if (props.getMinWidth() != null) {
-					final int minWidth = HtmlValues.getPixelSize(props.getMinWidth(), element.getRenderState(), doc.getDefaultView(), 0,  availWidth);
-
-					if (width == 0 || width < minWidth) {
-						width = minWidth;
+					if (Strings.isNotBlank(props.getMinWidth())) {
+						final int minWidth = HtmlValues.getPixelSize(props.getMinWidth(), element.getRenderState(), doc.getDefaultView(), 0, availWidth);
+						if (width == 0 || width < minWidth) {
+							width = minWidth;
+						}
 					}
+					return new HtmlLength(width);
+				} else {
+					final int width = HtmlValues.getPixelSize(widthText, element.getRenderState(), doc.getDefaultView(), 0, availWidth);
+					// Return null for auto/undefined width (0 means not specified)
+					if (width == 0) {
+						return null;
+					}
+					return new HtmlLength(width);
 				}
-
-				return new HtmlLength(width);
 			}
 		} catch (final Exception err) {
 			return null;
@@ -302,22 +306,19 @@ class TableMatrixSizes {
 		final int widthsOfExtras = matrix.widthsOfExtras;
 		int cellAvailWidth = tableWidth - widthsOfExtras;
 		if (cellAvailWidth < 0) {
-			tableWidth += -cellAvailWidth;
 			cellAvailWidth = 0;
 		}
 
-		// Determine tentative column widths based on specified cell widths
-
-		determineTentativeSizes(columnSizes, widthsOfExtras, cellAvailWidth, widthKnown);
+		determineTentativeSizes(columnSizes, cellAvailWidth);
 
 		// Pre-render cells. This will give the minimum width of each cell,
 		// in addition to the minimum height.
 
-		preLayout(hasBorder, cellSpacingX, cellSpacingY, widthKnown);
+		preLayout(hasBorder, cellSpacingX, cellSpacingY, cellAvailWidth);
 
 		// Increases column widths if they are less than minimums of each cell.
 
-		adjustForRenderWidths(columnSizes, hasBorder, cellSpacingX, widthKnown);
+		adjustForRenderWidths(columnSizes);
 
 		// Adjust for expected total width
 
@@ -327,22 +328,15 @@ class TableMatrixSizes {
 
 	void determineRowSizes(final int hasBorder, final int cellSpacing, final int availHeight, final boolean sizeOnly) {
 		final HtmlLength tableHeightLength = TableMatrixSizes.getHeightLength(matrix.tableElement, availHeight);
-		int tableHeight;
-		final SizeInfo[] rowSizes = matrix.rowSizes;
-		final int heightsOfExtras = matrix.heightsOfExtras;
 		if (tableHeightLength != null) {
-			tableHeight = tableHeightLength.getLength(availHeight);
-			determineRowSizesFixedTH(hasBorder, cellSpacing, availHeight, tableHeight, sizeOnly);
+			int tableHeight = tableHeightLength.getLength(availHeight);
+			determineRowSizesFixedTH(hasBorder, cellSpacing, tableHeight, sizeOnly);
 		} else {
-			tableHeight = heightsOfExtras;
-			for (final SizeInfo rowSize : rowSizes) {
-				tableHeight += rowSize.getMinSize();
-			}
-			determineRowSizesFlexibleTH(hasBorder, cellSpacing, availHeight, sizeOnly);
+			determineRowSizesFlexibleTH(hasBorder, cellSpacing, sizeOnly);
 		}
 	}
 
-	private void determineRowSizesFixedTH(final int hasBorder, final int cellSpacing, final int availHeight, final int tableHeight,
+	private void determineRowSizesFixedTH(final int hasBorder, final int cellSpacing, final int tableHeight,
                                           final boolean sizeOnly) {
 		final SizeInfo[] rowSizes = matrix.rowSizes;
 		final int heightsOfExtras = matrix.heightsOfExtras;
@@ -376,8 +370,7 @@ class TableMatrixSizes {
 			for (final SizeInfo rowSizeInfo : rowSizes) {
 				final HtmlLength heightLength = (HtmlLength) rowSizeInfo.getHtmlLength();
 				if (heightLength != null && heightLength.getLengthType() == HtmlLength.LENGTH) {
-					final int actualSize = rowSizeInfo.getActualSize();
-					final int prevActualSize = actualSize;
+                    final int prevActualSize = rowSizeInfo.getActualSize();
 					int newActualSize = (int) Math.round(prevActualSize * ratio);
 					if (newActualSize < rowSizeInfo.getMinSize()) {
 						newActualSize = rowSizeInfo.getMinSize();
@@ -414,8 +407,7 @@ class TableMatrixSizes {
 			for (final SizeInfo rowSizeInfo : rowSizes) {
 				final HtmlLength heightLength = (HtmlLength) rowSizeInfo.getHtmlLength();
 				if (heightLength != null && heightLength.getLengthType() != HtmlLength.LENGTH) {
-					final int actualSize = rowSizeInfo.getActualSize();
-					final int prevActualSize = actualSize;
+                    final int prevActualSize = rowSizeInfo.getActualSize();
 					int newActualSize = (int) Math.round(prevActualSize * ratio);
 					if (newActualSize < rowSizeInfo.getMinSize()) {
 						newActualSize = rowSizeInfo.getMinSize();
@@ -464,7 +456,7 @@ class TableMatrixSizes {
 		finalRender(hasBorder, cellSpacing, sizeOnly);
 	}
 
-	private void determineRowSizesFlexibleTH(final int hasBorder, final int cellSpacing, final int availHeight, final boolean sizeOnly) {
+	private void determineRowSizesFlexibleTH(final int hasBorder, final int cellSpacing, final boolean sizeOnly) {
 		final SizeInfo[] rowSizes = matrix.rowSizes;
 		final int heightsOfExtras = matrix.heightsOfExtras;
 
@@ -528,12 +520,9 @@ class TableMatrixSizes {
 	 * specified witdhs (heights) if available.
 	 * 
 	 * @param columnSizes a {@link SizeInfo} object.
-	 * @param widthsOfExtras a {@link java.lang.Integer} object.
 	 * @param cellAvailWidth a {@link java.lang.Integer} object.
-	 * @param setNoWidthColumns a {@link java.lang.Boolean} object.
 	 */
-	private void determineTentativeSizes(final SizeInfo[] columnSizes, final int widthsOfExtras, final int cellAvailWidth,
-                                         final boolean setNoWidthColumns) {
+	private void determineTentativeSizes(final SizeInfo[] columnSizes, final int cellAvailWidth) {
 
 		// Look at percentages first
 		int widthUsedByPercent = 0;
@@ -609,8 +598,7 @@ class TableMatrixSizes {
 	/**
 	 * Contracts column sizes according to render sizes.
 	 */
-	private void adjustForRenderWidths(final SizeInfo[] columnSizes, final int hasBorder, final int cellSpacing,
-                                       final boolean tableWidthKnown) {
+private void adjustForRenderWidths(final SizeInfo[] columnSizes) {
 		for (final SizeInfo si : columnSizes) {
 			if (si.getActualSize() < si.getLayoutSize()) {
 				si.setActualSize(si.getLayoutSize());
@@ -709,13 +697,15 @@ class TableMatrixSizes {
 			matrix.caption.doLayout(RLayoutInfo.builder()
 							.availWidth(matrix.captionSize.getWidth())
 							.availHeight(matrix.captionSize.getHeight())
-							.expandWidth(true)
-							.expandHeight(true)
+							.expandWidth(false)
+							.expandHeight(false)
 							.blockFloatBoundsSource(null)
 							.defaultOverflowX(RenderState.OVERFLOW_NONE)
 							.defaultOverflowY(RenderState.OVERFLOW_NONE)
-							.sizeOnly(true)
+							.sizeOnly(false)
 							.build());
+			// Apply render state padding/margin to BaseElementRenderable fields
+			matrix.caption.applyPaddingMarginFromRenderState((RenderState) matrix.caption.getModelNode().getRenderState(), matrix.captionSize.getWidth(), matrix.captionSize.getHeight());
 		}
 	}
 
@@ -723,7 +713,7 @@ class TableMatrixSizes {
 	 * This method renders each cell using already set actual column widths. It sets
 	 * minimum row heights based on matrix.
 	 */
-	private void preLayout(final int hasBorder, final int cellSpacingX, final int cellSpacingY, final boolean tableWidthKnown) {
+	private void preLayout(final int hasBorder, final int cellSpacingX, final int cellSpacingY, final int cellAvailWidth) {
 		// TODO: Fix for table without width that has a subtable with width=100%.
 		// TODO: Maybe it can be addressed when NOWRAP is implemented.
 		// TODO: Maybe it's possible to eliminate this pre-layout altogether.
@@ -744,15 +734,17 @@ class TableMatrixSizes {
 		final List<RTableCell> allCells = matrix.getAllCells();
 		if (matrix.caption != null) {
 			matrix.caption.doLayout(RLayoutInfo.builder()
-					.availWidth(0)
+					.availWidth(cellAvailWidth)
 					.availHeight(0)
-					.expandWidth(true)
-					.expandHeight(true)
+					.expandWidth(false)
+					.expandHeight(false)
 					.blockFloatBoundsSource(null)
 					.defaultOverflowX(0)
 					.defaultOverflowY(0)
 					.sizeOnly(true)
 					.build());
+			// Apply render state padding/margin to BaseElementRenderable fields
+			matrix.caption.applyPaddingMarginFromRenderState((RenderState) matrix.caption.getModelNode().getRenderState(), cellAvailWidth, 0);
 			matrix.captionSize.setHeight(matrix.caption.getHeight());
 			matrix.captionSize.setWidth(matrix.caption.getWidth());
 		}
@@ -789,9 +781,11 @@ class TableMatrixSizes {
 			final boolean prevOverrideNoWrap = state.overrideNoWrap;
 			try {
 				if (!prevOverrideNoWrap) {
-					state.overrideNoWrap = !widthDeclared;
+					state.overrideNoWrap = true; // Always measure intrinsic width (no wrap)
 				}
-				size = cell.doCellLayout(cellsTotalWidth, 0, true, true, true);
+				// For columns without explicit width, measure intrinsic width
+				final int layoutWidth = widthDeclared && cellsTotalWidth > 0 ? cellsTotalWidth : cellAvailWidth;
+				size = cell.doCellLayout(layoutWidth, 0, false, false, true);
 			} finally {
 				state.overrideNoWrap = prevOverrideNoWrap;
 			}
@@ -872,14 +866,20 @@ class TableMatrixSizes {
 		if (expectedPercentWidthTotal < 0) {
 			expectedPercentWidthTotal = 0;
 		}
-		final double ratio = (double) expectedPercentWidthTotal / widthTotal;
+		final double ratio = widthTotal == 0 ? 0 : (double) expectedPercentWidthTotal / widthTotal;
 		int noWidthCount = 0;
+		int remainingWidth = cellAvailWidth;
+		int remainingColumns = numNoWidth;
 		for (int i = 0; i < numCols; i++) {
 			final SizeInfo sizeInfo = columnSizes[i];
 			if (sizeInfo.getHtmlLength() == null) {
 				final int oldActualSize = sizeInfo.getActualSize();
 				int newActualSize;
-				if (++noWidthCount == numNoWidth) {
+				if (widthTotal == 0) {
+					newActualSize = Math.max(sizeInfo.getLayoutSize(), remainingWidth / remainingColumns);
+					remainingWidth -= newActualSize;
+					remainingColumns--;
+				} else if (++noWidthCount == numNoWidth) {
 					// Last column without a width.
 					final int currentDiff = currentTotal - cellAvailWidth;
 					newActualSize = oldActualSize - currentDiff;
@@ -918,7 +918,7 @@ class TableMatrixSizes {
 				noWidthTotal += columnSizes[i].getActualSize();
 			}
 		}
-		if (noWidthTotal > 0) {
+		if (numNoWidth > 0) {
 			currentTotal = adjustCurrentTotal2(columnSizes, matrix.rowSizes, matrix.rows, cellSpacingX, numCols,
 					noWidthTotal, difference, cellSpacingX, hasBorder, numNoWidth, cellAvailWidth, currentTotal);
 			difference = currentTotal - cellAvailWidth;

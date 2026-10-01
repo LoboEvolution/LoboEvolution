@@ -181,6 +181,15 @@ public class HtmlPanel extends JComponent implements FrameContext {
 		this.notificationImmediateAction = this::processNotifications;
 	}
 
+	@Override
+	public void doLayout() {
+		super.doLayout();
+		final HtmlBlockPanel block = this.htmlBlockPanel;
+		if (block != null) {
+			block.doLayout();
+		}
+	}
+
 	private void addNotification(final DocumentNotification notification) {
 		// This can be called in a random thread.
 		final List<DocumentNotification> notifs = this.notifications;

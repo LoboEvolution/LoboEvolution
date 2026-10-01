@@ -93,6 +93,9 @@ public class GradientStyle {
 		final String direction = direction(quote);
 		final GradientInfo info = parseGradint(values);
 		final Color[] colors = info.getColors();
+		if (colors == null || colors.length < 2) {
+			return null;
+		}
 		final int width = getWidth(document, props, renderState);
 		final int height = getHeight(document, props, renderState);
 		LinearGradientPaint linearGradientPaint;
@@ -159,6 +162,9 @@ public class GradientStyle {
 		final float radius = (float) width /2;
 		final GradientInfo info = parseGradint(values);
 		Color[] colors = info.getColors();
+		if (colors == null || colors.length < 2) {
+			return null;
+		}
 		final float[] fractions = ArrayUtilities.removeFloat(info.getFractions(), info.getFractions().length-1);
 		final Color background = colors[colors.length-1];
 		colors = ArrayUtilities.removeColor(colors, colors.length-1);

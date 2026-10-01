@@ -83,12 +83,8 @@ public final class HtmlLength {
 			parseable = specTrim.substring(0, length - 1).trim();
 		} else if (lastChar == '*') {
 			this.lengthType = MULTI_LENGTH;
-			if (length <= 1) {
-				parseable = "1";
-			} else {
-				parseable = specTrim.substring(0, length - 1).trim();
-			}
-		} else {
+            parseable = specTrim.substring(0, length - 1).trim();
+        } else {
 			this.lengthType = PIXELS;
 			parseable = specTrim;
 		}

@@ -952,6 +952,23 @@ public class RBlock extends BaseElementRenderable {
 		scroll.updateWidgetBounds(guiX, guiY);
 	}
 
+	public void applyPaddingMarginFromRenderState(final RenderState rs, final int availWidth, final int availHeight) {
+		if (rs != null) {
+			final HtmlInsets paddingHtml = rs.getPaddingInsets();
+			final HtmlInsets marginHtml = rs.getMarginInsets();
+			if (paddingHtml != null) {
+				this.paddingInsets = paddingHtml.getAWTInsets(availWidth, availHeight, 0, 0);
+			}
+			if (marginHtml != null) {
+				this.marginInsets = marginHtml.getAWTInsets(availWidth, availHeight, 0, 0);
+			}
+		}
+	}
+
+	public RBlockViewport getBodyLayout() {
+		return this.bodyLayout;
+	}
+
 	private void correctViewportOrigin(final Insets insets, final int blockWidth, final int blockHeight) {
 		final RBlockViewport bodyLayout = this.bodyLayout;
 		final int viewPortX = bodyLayout.getX();
