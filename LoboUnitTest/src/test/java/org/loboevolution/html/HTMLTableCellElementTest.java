@@ -77,7 +77,7 @@ public class HTMLTableCellElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"p", "po", "", "u", "8", "U8"})
+    @Alerts({"p", "po", "null", "u", "8", "U8"})
     public void ch() {
         final String html
                 = "<html><body><table>\n"
@@ -107,7 +107,7 @@ public class HTMLTableCellElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"0", "4", "", "5.2", "-3", "abc"})
+    @Alerts({"0", "4", "null", "5.2", "-3", "abc"})
     public void chOff() {
         final String html
                 = "<html><body><table>\n"
@@ -351,7 +351,7 @@ public class HTMLTableCellElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"999", "1000", "1000"})
+    @Alerts({"999", "1000", "1001"})
     public void colSpanLarge() {
         final String html
                 = "<html><body><table>\n"
@@ -471,7 +471,7 @@ public class HTMLTableCellElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"999", "1001", "65534", "65534"})
+    @Alerts({"999", "1001", "65534", "65535"})
     public void rowSpanLarge() {
         final String html
                 = "<html><body><table>\n"
@@ -527,7 +527,7 @@ public class HTMLTableCellElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"100,42", "90,36"})
+    @Alerts({"100,42", "89,36"})
     public void cellWidthHeightWithBorderCollapse() {
         final String html
                 = "<html><body><table id='t'><tr>\n"

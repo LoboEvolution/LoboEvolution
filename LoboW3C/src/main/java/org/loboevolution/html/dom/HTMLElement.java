@@ -120,18 +120,18 @@ public interface HTMLElement extends Element {
 	 */
 	int getOffsetTop();
 
-	/**
+/**
      * <p>getOffsetWidth.</p>
      *
      * @return a {@link java.lang.Integer} object.
      */
-	Integer getOffsetWidth();
+    Integer getOffsetWidth();
 
-	/**
-	 * <p> getStyle. </p>
-	 * @return a {@link CSSStyleDeclaration} object.
-	 */
-	CSSStyleDeclaration getStyle();
+    /**
+     * <p> getStyle. </p>
+     * @return a {@link CSSStyleDeclaration} object.
+     */
+    CSSStyleDeclaration getStyle();
 
 	/**
 	 * <p> getCurrentStyle. </p>

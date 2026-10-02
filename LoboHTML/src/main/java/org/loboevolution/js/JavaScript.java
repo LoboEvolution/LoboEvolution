@@ -101,6 +101,18 @@ public class JavaScript {
 				case Float v -> v.intValue();
 				default -> javascriptObject;
 			};
+		} else if (type == boolean.class || type == Boolean.class) {
+			if (javascriptObject instanceof Boolean) {
+				return javascriptObject;
+			} else if (javascriptObject instanceof String) {
+				// JavaScript truthy/falsy: non-empty string is true
+				return !((String) javascriptObject).isEmpty();
+			} else if (javascriptObject instanceof Double) {
+				return ((Double) javascriptObject) != 0.0;
+			} else if (javascriptObject instanceof Number) {
+				return ((Number) javascriptObject).doubleValue() != 0.0;
+			}
+			return javascriptObject != null;
 		} else {
 			return javascriptObject;
 		}
@@ -135,6 +147,8 @@ public class JavaScript {
 				javascriptObject.setParentScope(scope);
 				return javascriptObject;
 			}
+		} else if (isBoxClass(raw.getClass())) {
+			return raw;
 		} else if (isBoxClass(raw.getClass())) {
 			return raw;
 		} else {

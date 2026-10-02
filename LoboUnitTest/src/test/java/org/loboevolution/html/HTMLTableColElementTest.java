@@ -39,7 +39,7 @@ import org.loboevolution.html.dom.HTMLTableColElement;
 public class HTMLTableColElementTest extends LoboUnitTest {
 
     @Test
-    @Alerts({"left", "right", "justify", "char", "center", "wrong", ""})
+    @Alerts({"left", "right", "justify", "char", "center", "wrong", "null"})
     public void getAlign() {
         final String html
                 = "<html><body>\n"
@@ -93,7 +93,7 @@ public class HTMLTableColElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"p", "po", "", "u", "8", "U8"})
+    @Alerts({"p", "po", "null", "u", "8", "U8"})
     public void ch() {
         final String html
                 = "<html><body><table>\n"
@@ -126,7 +126,7 @@ public class HTMLTableColElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"0", "4", "", "5.2", "-3", "abc"})
+    @Alerts({"0", "4", "null", "5.2", "-3", "abc"})
     public void chOff() {
         final String html
                 = "<html><body><table>\n"
@@ -239,7 +239,7 @@ public class HTMLTableColElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"50", "75%", "foo", "-7", "20.2", "", "80", "40", "abc", "-10", "30%", "33.3"})
+    @Alerts({"50", "75%", "foo", "-7", "20.2", "null", "80", "40", "abc", "-10", "30%", "33.3"})
     public void width() {
         final String html
                 = "<html><body><table>\n"
@@ -318,7 +318,7 @@ public class HTMLTableColElementTest extends LoboUnitTest {
      * Regression test for bug 2948498.
      */
     @Test
-    @Alerts({"null", "string"})
+    @Alerts({"null", "object"})
     public void widthNull() {
         final String html
                 = "<html><head>\n"

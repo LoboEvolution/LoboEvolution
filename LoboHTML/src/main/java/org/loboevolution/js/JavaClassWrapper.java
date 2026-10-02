@@ -181,6 +181,10 @@ public class JavaClassWrapper {
 					(text.length() > 1 && Character.isUpperCase(text.charAt(1)))) {
 				return text;
 			}
+			// Handle boolean getter "isXxx" -> property "xxx"
+			if (text.startsWith("is") && text.length() > 2 && Character.isUpperCase(text.charAt(2))) {
+				return Character.toLowerCase(text.charAt(2)) + text.substring(3);
+			}
 			return Character.toLowerCase(text.charAt(0)) + text.substring(1);
 		} catch (final IndexOutOfBoundsException iob) {
 			return text;

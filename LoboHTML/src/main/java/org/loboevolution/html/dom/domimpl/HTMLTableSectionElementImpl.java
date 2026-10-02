@@ -64,13 +64,13 @@ public class HTMLTableSectionElementImpl extends HTMLElementImpl implements HTML
 	/** {@inheritDoc} */
 	@Override
 	public String getCh() {
-		return getAttribute("ch");
+		return getAttribute("char");
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public String getChOff() {
-		return getAttribute("choff");
+		return getAttribute("charoff");
 	}
 
 	/** {@inheritDoc} */
@@ -109,14 +109,13 @@ public class HTMLTableSectionElementImpl extends HTMLElementImpl implements HTML
 	/** {@inheritDoc} */
 	@Override
 	public void setCh(final String ch) {
-		setAttribute("ch", ch);
-		
+		setAttribute("char", ch);
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void setChOff(final String chOff) {
-		setAttribute("choff", chOff);
+		setAttribute("charoff", chOff);
 		
 	}
 
