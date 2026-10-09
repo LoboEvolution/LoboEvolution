@@ -191,7 +191,7 @@ public class SelectOption {
 						} else {
 							comboBox.addItem(item);
 						}
-						if (option.isSelected()) {
+						if (option.isSelected() != null && option.isSelected()) {
 							selectedItem = item;
 						}
 						if (option.isDefaultSelected()) {

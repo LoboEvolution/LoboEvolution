@@ -61,6 +61,7 @@ public class GradientStyle {
 	public BufferedImage gradientToImg(final HTMLDocumentImpl document, final CSSStyleDeclaration props, final RenderState renderState, final String backgroundImage) {
 		BufferedImage image = null;
 		final int idx = backgroundImage.indexOf("(");
+		if (idx == -1) return null;
 		final String quote = backgroundImage.substring(0, idx);
         switch (quote) {
 		case "linear-gradient":
@@ -86,11 +87,15 @@ public class GradientStyle {
 
 		final int startIdx = start.length();
 		final int closingIdx = backgroundImage.lastIndexOf(')');
+		if (closingIdx == -1 || closingIdx <= startIdx + 1) return null;
 		final String quote = backgroundImage.substring(startIdx+1, closingIdx);
 		final String values = gradientValues(quote);
 		final String direction = direction(quote);
 		final GradientInfo info = parseGradint(values);
 		final Color[] colors = info.getColors();
+		if (colors == null || colors.length < 2) {
+			return null;
+		}
 		final int width = getWidth(document, props, renderState);
 		final int height = getHeight(document, props, renderState);
 		LinearGradientPaint linearGradientPaint;
@@ -146,6 +151,7 @@ public class GradientStyle {
 		builder.append(start).append("(");
 		final int startIdx = builder.length();
 		final int closingIdx = backgroundImage.lastIndexOf(')');
+		if (closingIdx == -1 || closingIdx <= startIdx) return null;
 		final String quote = backgroundImage.substring(startIdx, closingIdx);
 		final String values = gradientValues(quote);
 		final int width = getWidth(document, props, renderState);
@@ -156,6 +162,9 @@ public class GradientStyle {
 		final float radius = (float) width /2;
 		final GradientInfo info = parseGradint(values);
 		Color[] colors = info.getColors();
+		if (colors == null || colors.length < 2) {
+			return null;
+		}
 		final float[] fractions = ArrayUtilities.removeFloat(info.getFractions(), info.getFractions().length-1);
 		final Color background = colors[colors.length-1];
 		colors = ArrayUtilities.removeColor(colors, colors.length-1);

@@ -746,4 +746,88 @@ public class DOMTokenListTest extends LoboUnitTest {
 
         checkHtmlAlert(html);
     }
+
+    @Test
+    @Alerts({"true"})
+    public void polyfillDetection() {
+        final String html
+                = "<html><head><script>\n"
+                + "function test() {\n"
+                + "  alert('classList' in document.createElement('_'));\n"
+                + "}\n"
+                + "</script></head><body onload='test()'>\n"
+                + "</body></html>";
+
+        checkHtmlAlert(html);
+    }
+
+    @Test
+    @Alerts({"c1"})
+    public void polyfillAdd() {
+        final String html
+                = "<html><head><script>\n"
+                + "function test() {\n"
+                + "  var t = document.createElement('_');\n"
+                + "  t.classList.add('c1', 'c2');\n"
+                + "  alert(t.classList);\n"
+                + "}\n"
+                + "</script></head><body onload='test()'>\n"
+                + "</body></html>";
+
+        checkHtmlAlert(html);
+    }
+
+    @Test
+    @Alerts({"true", "false"})
+    public void polyfillMultiArg() {
+        final String html
+                = "<html><head><script>\n"
+                + "function test() {\n"
+                + "  var t = document.createElement('_');\n"
+                + "  t.classList.add('c1', 'c2');\n"
+                + "  alert(t.classList.contains('c1'));\n"
+                + "  alert(t.classList.contains('c2'));\n"
+                + "}\n"
+                + "</script></head><body onload='test()'>\n"
+                + "</body></html>";
+
+        checkHtmlAlert(html);
+    }
+
+    @Test
+    @Alerts({"true", "false", "object", "object"})
+    public void polyfillGlobalAccess() {
+        final String html
+                = "<html><head><script>\n"
+                + "function test() {\n"
+                + "  var t = document.createElement('_');\n"
+                + "  alert('classList' in t);\n"
+                + "  t.classList.add('c1', 'c2');\n"
+                + "  alert(t.classList.contains('c2'));\n"
+                + "  alert(typeof DOMTokenList);\n"
+                + "  alert(typeof window.DOMTokenList);\n"
+                + "}\n"
+                + "</script></head><body onload='test()'>\n"
+                + "</body></html>";
+
+        checkHtmlAlert(html);
+    }
+
+    @Test
+    @Alerts({"object", "object", "object", "object", "object"})
+    public void polyfillOtherGlobals() {
+        final String html
+                = "<html><head><script>\n"
+                + "function test() {\n"
+                + "  alert(typeof Image);\n"
+                + "  alert(typeof Option);\n"
+                + "  alert(typeof Node);\n"
+                + "  alert(typeof Range);\n"
+                + "  alert(typeof Element);\n"
+                + "}\n"
+                + "</script></head><body onload='test()'>\n"
+                + "</body></html>";
+
+        checkHtmlAlert(html);
+    }
 }

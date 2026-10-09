@@ -30,6 +30,8 @@ import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.DOMTokenList;
 import org.loboevolution.html.dom.nodeimpl.ElementImpl;
+import org.loboevolution.js.ScriptableDelegate;
+import org.mozilla.javascript.Scriptable;
 
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -39,7 +41,9 @@ import java.util.StringTokenizer;
 /**
  * <p>DOMTokenListImpl class.</p>
  */
-public class DOMTokenListImpl implements DOMTokenList {
+public class DOMTokenListImpl implements DOMTokenList, ScriptableDelegate {
+
+	private Scriptable scriptable;
 
 	private final ElementImpl element;
 
@@ -52,6 +56,16 @@ public class DOMTokenListImpl implements DOMTokenList {
 	public DOMTokenListImpl(final ElementImpl element) {
 		this.element = element;
 		this.tokenset = new LinkedList<>();
+	}
+
+	@Override
+	public Scriptable getScriptable() {
+		return this.scriptable;
+	}
+
+	@Override
+	public void setScriptable(final Scriptable scriptable) {
+		this.scriptable = scriptable;
 	}
 
 	/** {@inheritDoc} */
@@ -91,7 +105,7 @@ public class DOMTokenListImpl implements DOMTokenList {
 				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "Token cannot contain spaces");
 			}
 
-			if (tok.contains(" ") || tok.contains("\t")) {
+			if (tok.contains("\t")) {
 				throw new DOMException(DOMException.INVALID_CHARACTER_ERR, "Token cannot contain spaces");
 			}
 			tokenset.add(tok);

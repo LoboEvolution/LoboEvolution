@@ -108,8 +108,5 @@ public class LinkRenderState extends StyleSheetRenderState {
         return Color.BLUE;
     }
 
-    @Override
-    public int getDisplay() {
-        return DISPLAY_INLINE_BLOCK;
-    }
+
 }

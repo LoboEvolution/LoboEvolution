@@ -126,6 +126,14 @@ public class DOMImplementationImpl implements DOMImplementation {
 		return doc;
 	}
 
+	/** {@inheritDoc} */
+	@Override
+	public Document createHTMLDocument(final String title) {
+		final DocumentImpl doc = (DocumentImpl) createHTMLDocument();
+		doc.setTitle(title);
+		return doc;
+	}
+
 	@Override
 	public boolean hasFeature(final String ftr, final String version) {
 		String feature = ftr;
@@ -169,18 +177,6 @@ public class DOMImplementationImpl implements DOMImplementation {
 		}
 
 		return null;
-	}
-
-
-		/**
-         * {@inheritDoc}
-         *
-         * <p>createHTMLDocument.</p>
-         */
-	public Document createHTMLDocument(final String title) {
-		final DocumentImpl doc = (DocumentImpl) createHTMLDocument();
-		doc.setTitle(title);
-		return doc;
 	}
 
 	/** {@inheritDoc} */

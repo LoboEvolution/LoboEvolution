@@ -90,7 +90,7 @@ public class LoboWebDriver {
             panel.setSize(1600, 900);
             final HtmlRendererContext rendererContext = new LocalHtmlRendererContext(panel, ucontext);
             ucontext.setUserAgentEnabled(true);
-            String local = "file://" + System.getProperty("user.dir").replace("\\", "/") + "/";
+            String local = "file:///" + System.getProperty("user.dir").replace("\\", "/") + "/";
             doc = new HTMLDocumentImpl(ucontext, rendererContext, config, wis, local);
             doc.load();
         } catch (final Exception ex) {

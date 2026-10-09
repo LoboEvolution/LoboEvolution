@@ -57,8 +57,14 @@ class BaseRListElement extends RBlock {
 		super.applyStyle(availWidth, availHeight);
 		final Object rootNode = this.modelNode;
 		if (rootNode instanceof HTMLElementImpl rootElement) {
+			this.listStyle = resolveListStyle(rootElement);
+		}
+	}
 
-            final CSSStyleDeclaration props = rootElement.getCurrentStyle();
+	private ListStyle resolveListStyle(HTMLElementImpl element) {
+		HTMLElementImpl current = element;
+		while (current != null) {
+			final CSSStyleDeclaration props = current.getCurrentStyle();
 			if (props != null) {
 				ListStyle listStyle = null;
 				final String listStyleText = props.getListStyle();
@@ -87,21 +93,25 @@ class BaseRListElement extends RBlock {
 				}
 
 				if (listStyle == null || ListValues.get(listStyle.getType()) == ListValues.TYPE_UNSET) {
-					final String typeAttributeText = rootElement.getAttribute("type");
+					final String typeAttributeText = current.getAttribute("type");
 					if (typeAttributeText != null) {
 						final ListValues newStyleType = HtmlValues.getListStyleType(typeAttributeText);
 						if (newStyleType != ListValues.TYPE_UNSET) {
 							if (listStyle == null) {
 								listStyle = new ListStyle();
-								this.listStyle = listStyle;
 							}
 							listStyle.setType(newStyleType.getValue());
 						}
 					}
 				}
-				this.listStyle = listStyle;
+
+				if (listStyle != null && ListValues.get(listStyle.getType()) != ListValues.TYPE_UNSET) {
+					return listStyle;
+				}
 			}
+			current = (HTMLElementImpl) current.getParentNode();
 		}
+		return null;
 	}
 
 	/** {@inheritDoc} */

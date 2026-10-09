@@ -77,7 +77,8 @@ public class OpenFileAction extends AbstractAction {
 			tabbedPane.setComponentPopupMenu(panel);
 			final HtmlPanel hpanel = NavigatorFrame.createHtmlPanel(panel, url);
 			final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) hpanel.getRootNode();
-			final String title = Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";	
+			final String title = nodeImpl != null && Strings.isNotBlank(nodeImpl.getTitle())
+					? nodeImpl.getTitle() : selectedFile.getName();
 			tabbedPane.insertTab(title, null, hpanel, title, indexPanel);
 			tabbedPane.setSelectedIndex(indexPanel);
 			TabStore.insertTab(indexPanel, url, title);

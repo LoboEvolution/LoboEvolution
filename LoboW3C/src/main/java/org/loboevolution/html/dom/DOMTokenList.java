@@ -54,9 +54,9 @@ public interface DOMTokenList {
      * Adds all arguments passed, except those already present.
      * Throws a "SyntaxError" DOMException if one of the arguments is the empty string.
      * Throws an "InvalidCharacterError" DOMException if one of the arguments contains any ASCII whitespace.
-     * @param tokens a {@link java.lang.String} object.
+     * @param token a {@link java.lang.String} object.
      */
-    void add(String tokens);
+    void add(String token);
 
     /**
      * Returns true if token is present, and false otherwise.
@@ -76,9 +76,9 @@ public interface DOMTokenList {
      * Removes arguments passed, if they are present.
      * Throws a "SyntaxError" DOMException if one of the arguments is the empty string.
      * Throws an "InvalidCharacterError" DOMException if one of the arguments contains any ASCII whitespace.
-     * @param tokens a {@link java.lang.String} object.
+     * @param token a {@link java.lang.String} object.
      */
-    void remove(String tokens);
+    void remove(String token);
 
     /**
      * Replaces token with newToken.

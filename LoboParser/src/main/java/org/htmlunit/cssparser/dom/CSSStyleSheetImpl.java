@@ -46,6 +46,7 @@ public class CSSStyleSheetImpl implements Serializable {
     private boolean disabled_;
     private Node ownerNode_;
     private String href_;
+    private String baseURI_;
     private String title_;
     private MediaListImpl media_;
     private AbstractCSSRuleImpl ownerRule_;
@@ -93,6 +94,24 @@ public class CSSStyleSheetImpl implements Serializable {
      */
     public String getHref() {
         return href_;
+    }
+
+    /**
+     * <p>getBaseURI.</p>
+     *
+     * @return the base URI (the absolute URL this stylesheet was loaded from)
+     */
+    public String getBaseURI() {
+        return baseURI_;
+    }
+
+    /**
+     * <p>setBaseURI.</p>
+     *
+     * @param baseURI the new base URI (the absolute URL this stylesheet was loaded from)
+     */
+    public void setBaseURI(final String baseURI) {
+        baseURI_ = baseURI;
     }
 
     /**
@@ -342,6 +361,7 @@ public class CSSStyleSheetImpl implements Serializable {
         out.writeObject(cssRules_);
         out.writeBoolean(disabled_);
         out.writeObject(href_);
+        out.writeObject(baseURI_);
         out.writeObject(media_);
         out.writeObject(title_);
     }
@@ -356,6 +376,7 @@ public class CSSStyleSheetImpl implements Serializable {
         }
         disabled_ = in.readBoolean();
         href_ = (String) in.readObject();
+        baseURI_ = (String) in.readObject();
         media_ = (MediaListImpl) in.readObject();
         title_ = (String) in.readObject();
     }

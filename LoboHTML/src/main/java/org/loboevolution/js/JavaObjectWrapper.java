@@ -267,12 +267,16 @@ public class JavaObjectWrapper extends ScriptableObject {
 				if (ni != null) {
 					final Method setter = ni.getSetter();
 					if (setter != null) {
-						try {
-							final Object actualValue;
-							actualValue = JavaScript.getInstance().getJavaObject(value, ni.getPropertyType());
-							setter.invoke(this.getJavaObject(), name, actualValue);
-						} catch (final Exception err) {
-							log.error(err.getMessage(), err);
+						final Object actualValue = JavaScript.getInstance().getJavaObject(value, ni.getPropertyType());
+						final Class<?> paramType = setter.getParameterTypes()[1];
+						if (actualValue == null || paramType.isInstance(actualValue)) {
+							try {
+								setter.invoke(this.getJavaObject(), name, actualValue);
+							} catch (final Exception err) {
+								log.error(err.getMessage(), err);
+							}
+						} else {
+							super.put(name, start, value);
 						}
 					} else {
 						super.put(name, start, value);

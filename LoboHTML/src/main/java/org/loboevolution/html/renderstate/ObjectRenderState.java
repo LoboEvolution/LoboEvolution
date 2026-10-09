@@ -23,28 +23,40 @@
  *
  * Contact info: ivan.difrancesco@yahoo.it
  */
+package org.loboevolution.html.renderstate;
 
-package org.loboevolution.html.renderer.layout;
+import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
+import org.loboevolution.info.BorderInfo;
 
-import org.loboevolution.html.control.*;
-import org.loboevolution.html.node.Element;
-import org.loboevolution.html.dom.domimpl.HTMLObjectElementImpl;
-import org.loboevolution.html.renderer.RBlockViewport;
-import org.loboevolution.html.renderer.RElement;
+/**
+ * <p>ObjectRenderState class.</p>
+ */
+public class ObjectRenderState extends StyleSheetRenderState {
 
-public class ObjectLayout extends CommonWidgetLayout {
+	/**
+	 * <p>Constructor for ObjectRenderState.</p>
+	 *
+	 * @param prevRenderState a {@link RenderState} object.
+	 * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
+	 */
+	public ObjectRenderState(final RenderState prevRenderState, final HTMLElementImpl element) {
+		super(prevRenderState, element);
+	}
 
-    /**
-     * @param tryToRenderContent If the object is unknown, content is rendered as  HTML.
-     */
-    public ObjectLayout(final boolean tryToRenderContent) {
-        super(ADD_INLINE);
-    }
-
-    @Override
-    public  RElement createRenderable(final RBlockViewport bodyLayout, final Element markupElement) {
-        final HTMLObjectElementImpl markupElementImpl = (HTMLObjectElementImpl)markupElement;
-        final UIControl control = new ObjectControl(markupElementImpl);
-        return new RUIControl(markupElementImpl, control, bodyLayout.getContainer(), bodyLayout.getUserAgentContext());
-    }
+	/** {@inheritDoc} */
+	@Override
+	public BorderInfo getBorderInfo() {
+		BorderInfo binfo = this.borderInfo;
+		if (binfo != INVALID_BORDER_INFO) {
+			return binfo;
+		}
+		binfo = super.getBorderInfo();
+		if (binfo == null || binfo.borderInfoIsVoid()) {
+			if (binfo == null) {
+				binfo = new BorderInfo();
+			}
+		}
+		this.borderInfo = binfo;
+		return binfo;
+	}
 }

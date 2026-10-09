@@ -1072,7 +1072,6 @@ public class HTMLDocumentTest extends LoboUnitTest {
         assertNotNull(clonesheet);
         assertEquals(sheet.getCssRules().getLength(), clonesheet.getCssRules().getLength());
         Node link = style.cloneNode(false);
-        System.out.println(link.getClass());
         clonesheet = (CSSStyleSheetImpl) ((HTMLLinkElement) cloned).getSheet();
         assertNotNull(clonesheet);
         assertEquals(0, clonesheet.getCssRules().getLength());

@@ -113,7 +113,7 @@ public class ElementFactory {
 		builders.put(HTMLTag.HR, new HrBuilder());
 		builders.put(HTMLTag.BR, new BrBuilder());
 		builders.put(HTMLTag.OBJECT, new HtmlObjectBuilder());
-		builders.put(HTMLTag.EMBED,new NonStandardBuilder());
+		builders.put(HTMLTag.EMBED,new HtmlObjectBuilder());
 		builders.put(HTMLTag.NOSCRIPT, new NoScriptBuilder());
 		builders.put(HTMLTag.OPTGROUP, new OptGroupBuilder());
 

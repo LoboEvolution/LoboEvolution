@@ -29,6 +29,7 @@ package org.loboevolution.html.dom.domimpl;
 import org.loboevolution.html.dom.HTMLTableColElement;
 import org.loboevolution.html.renderstate.DisplayRenderState;
 import org.loboevolution.html.renderstate.RenderState;
+import org.loboevolution.html.style.HtmlValues;
 
 /**
  * <p>HTMLTableColElementImpl class.</p>
@@ -53,20 +54,22 @@ public class HTMLTableColElementImpl extends HTMLElementImpl implements HTMLTabl
 	/** {@inheritDoc} */
 	@Override
 	public String getCh() {
-		return getAttribute("ch");
+		return getAttribute("char");
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public String getChOff() {
-		return getAttribute("choff");
+		return getAttribute("charoff");
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public int getSpan() {
-		// TODO Auto-generated method stub
-		return 0;
+		final String span = getAttribute("span");
+		final HTMLDocumentImpl doc =  (HTMLDocumentImpl)this.document;
+		int iSpan = HtmlValues.getPixelSize(span, null, doc.getDefaultView(), 1);
+		return Math.max(iSpan, 1);
 	}
 
 	/** {@inheritDoc} */
@@ -78,8 +81,7 @@ public class HTMLTableColElementImpl extends HTMLElementImpl implements HTMLTabl
 	/** {@inheritDoc} */
 	@Override
 	public String getWidth() {
-		// TODO Auto-generated method stub
-		return null;
+		return getAttribute("width");
 	}
 
 	/** {@inheritDoc} */
@@ -92,22 +94,20 @@ public class HTMLTableColElementImpl extends HTMLElementImpl implements HTMLTabl
 	/** {@inheritDoc} */
 	@Override
 	public void setCh(final String ch) {
-		setAttribute("ch", ch);
-
+		setAttribute("char", ch);
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void setChOff(final String chOff) {
-		setAttribute("choff", chOff);
+		setAttribute("charoff", chOff);
 
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setSpan(final int span) {
-		// TODO Auto-generated method stub
-
+	public void setSpan(final String span) {
+		setAttribute("span", span);
 	}
 
 	/** {@inheritDoc} */
@@ -120,7 +120,7 @@ public class HTMLTableColElementImpl extends HTMLElementImpl implements HTMLTabl
 	/** {@inheritDoc} */
 	@Override
 	public void setWidth(final String width) {
-		// TODO Auto-generated method stub
+		setAttribute("width", width);
 	}
 
 	/** {@inheritDoc} */

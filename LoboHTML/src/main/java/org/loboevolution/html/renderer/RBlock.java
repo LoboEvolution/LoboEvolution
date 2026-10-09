@@ -229,7 +229,9 @@ public class RBlock extends BaseElementRenderable {
 
 		final Integer declaredMinHeight = getDeclaredMinHeight(renderState, tentativeAvailHeight);
 		if ((declaredMinHeight != null) && declaredMinHeight > 0) {
-			declaredHeight = dh == null ? declaredMinHeight : Math.max(declaredHeight, declaredMinHeight);
+			if (declaredHeight != -1) {
+				declaredHeight = Math.max(declaredHeight, declaredMinHeight);
+			}
 		}
 
 		this.clearGUIComponents();
@@ -246,20 +248,25 @@ public class RBlock extends BaseElementRenderable {
             tentativeHeight = declaredHeight == -1 ? availHeight : declaredHeight + insetsTotalHeight + paddingTotalHeight;
         }
 
-		if ((declaredWidth == -1) && !expandWidth && (availWidth > (insetsTotalWidth + paddingTotalWidth))) {
+		if (!expandWidth && (availWidth > (insetsTotalWidth + paddingTotalWidth))) {
 			final RenderThreadState state = RenderThreadState.getState();
 			final boolean prevOverrideNoWrap = state.overrideNoWrap;
-			if (!prevOverrideNoWrap) {
-				state.overrideNoWrap = true;
-				try {
-                    bodyLayout.layout(paddingTotalWidth, paddingTotalHeight, paddingInsets, -1, null, true);
-					if ((bodyLayout.getWidth() + insetsTotalWidth) < tentativeWidth) {
-						tentativeWidth = bodyLayout.getWidth() + insetsTotalWidth;
+			state.overrideNoWrap = true;
+			try {
+                bodyLayout.layout(availWidth - insetsTotalWidth - paddingTotalWidth, paddingTotalHeight, paddingInsets, -1, null, true);
+				final int bw = bodyLayout.getWidth();
+				final int contentWidth = bw + insetsTotalWidth;
+				if (declaredWidth == -1) {
+					if (contentWidth < tentativeWidth) {
+						tentativeWidth = contentWidth;
 						tentativeHeight = bodyLayout.getHeight() + insetsTotalHeight;
 					}
-				} finally {
-					state.overrideNoWrap = false;
+				} else {
+					tentativeWidth = Math.max(tentativeWidth, contentWidth);
+					tentativeHeight = Math.max(tentativeHeight, bodyLayout.getHeight() + insetsTotalHeight);
 				}
+			} finally {
+				state.overrideNoWrap = prevOverrideNoWrap;
 			}
 		}
 
@@ -378,6 +385,14 @@ public class RBlock extends BaseElementRenderable {
 		} else {
 			resultingHeight = adjDeclaredHeight;
 		}
+		final boolean borderBox = "border-box".equals(rs.getBoxSizing());
+		final int heightConstraintInsets = borderBox
+				? (marginInsets == null ? 0 : marginInsets.top + marginInsets.bottom)
+				: paddingTotalHeight + insetsTotalHeight;
+		if (declaredMinHeight != null && declaredMinHeight > 0) {
+			final int minBlockHeight = declaredMinHeight + heightConstraintInsets;
+			resultingHeight = Math.max(resultingHeight, minBlockHeight);
+		}
 		if (!sizeOnly) {
 			final int alignmentYPercent = rs.getAlignYPercent();
 			if (alignmentYPercent > 0) {
@@ -401,7 +416,7 @@ public class RBlock extends BaseElementRenderable {
 		}
 
 		if (declaredMaxHeight != null) {
-			resultingHeight = Math.min(resultingHeight, declaredMaxHeight + paddingTotalHeight + insetsTotalHeight - scrollHeight);
+			resultingHeight = Math.min(resultingHeight, declaredMaxHeight + heightConstraintInsets - scrollHeight);
 		}
 
 		if (renderState.getPosition() == RenderState.POSITION_STATIC || renderState.getPosition() == RenderState.POSITION_RELATIVE) {
@@ -941,6 +956,23 @@ public class RBlock extends BaseElementRenderable {
 	public void updateWidgetBounds(final int guiX, final int guiY) {
 		super.updateWidgetBounds(guiX, guiY);
 		scroll.updateWidgetBounds(guiX, guiY);
+	}
+
+	public void applyPaddingMarginFromRenderState(final RenderState rs, final int availWidth, final int availHeight) {
+		if (rs != null) {
+			final HtmlInsets paddingHtml = rs.getPaddingInsets();
+			final HtmlInsets marginHtml = rs.getMarginInsets();
+			if (paddingHtml != null) {
+				this.paddingInsets = paddingHtml.getAWTInsets(availWidth, availHeight, 0, 0);
+			}
+			if (marginHtml != null) {
+				this.marginInsets = marginHtml.getAWTInsets(availWidth, availHeight, 0, 0);
+			}
+		}
+	}
+
+	public RBlockViewport getBodyLayout() {
+		return this.bodyLayout;
 	}
 
 	private void correctViewportOrigin(final Insets insets, final int blockWidth, final int blockHeight) {

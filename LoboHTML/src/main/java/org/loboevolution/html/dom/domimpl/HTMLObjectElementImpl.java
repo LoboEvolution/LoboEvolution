@@ -26,15 +26,29 @@
 
 package org.loboevolution.html.dom.domimpl;
 
+import lombok.extern.slf4j.Slf4j;
+import org.loboevolution.common.Strings;
+import org.loboevolution.common.Urls;
+import org.loboevolution.gui.HtmlPanel;
+import org.loboevolution.html.control.ObjectControl;
 import org.loboevolution.html.dom.HTMLFormElement;
 import org.loboevolution.html.dom.HTMLObjectElement;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.ValidityState;
+import org.loboevolution.html.renderstate.ObjectRenderState;
+import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.style.HtmlValues;
+import org.loboevolution.net.UserAgent;
+
+import java.awt.Dimension;
+import java.net.URI;
+import java.net.URL;
+import java.net.URLConnection;
 
 /**
  * <p>HTMLObjectElementImpl class.</p>
  */
+@Slf4j
 public class HTMLObjectElementImpl extends HTMLElementImpl implements HTMLObjectElement {
 	/**
 	 * <p>Constructor for HTMLObjectElementImpl.</p>
@@ -43,6 +57,12 @@ public class HTMLObjectElementImpl extends HTMLElementImpl implements HTMLObject
 	 */
 	public HTMLObjectElementImpl(final String name) {
 		super(name);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	protected RenderState createRenderState(final RenderState prevRenderState) {
+		return new ObjectRenderState(prevRenderState, this);
 	}
 
 	/** {@inheritDoc} */
@@ -321,6 +341,51 @@ public class HTMLObjectElementImpl extends HTMLElementImpl implements HTMLObject
 	@Override
 	public void setCustomValidity(final String error) {
 
+	}
+
+	/**
+	 * <p>draw.</p>
+	 *
+	 * @param objectControl a {@link org.loboevolution.html.control.ObjectControl} object.
+	 */
+	public void draw(final ObjectControl objectControl) {
+		try {
+			if (Strings.isBlank(getData())) {
+				renderFallbackContent(objectControl);
+			} else {
+				final HTMLDocumentImpl doc = (HTMLDocumentImpl) getDocumentNode();
+				URI uri = Urls.createURI(doc.getBaseURI(), getData());
+				if (uri != null) {
+					URL createURL = uri.toURL();
+					final URLConnection connection = createURL.openConnection();
+					connection.setRequestProperty("User-Agent", UserAgent.getUserAgent());
+					connection.getHeaderField("Set-Cookie");
+					connection.connect();
+					final HtmlPanel panel = new HtmlPanel();
+					panel.setBrowserPanel(null);
+					final HtmlPanel newpanel = HtmlPanel.createlocalPanel(connection, panel, doc.getHtmlRendererContext(), doc.getHtmlRendererConfig(), createURL.toString());
+					final String width = getWidth();
+					final String height = getHeight();
+					if (Strings.isNotBlank(width) && Strings.isNotBlank(height)) {
+						final int w = HtmlValues.getPixelSize(width, doc.getRenderState(), doc.getDefaultView(), -1);
+						final int h = HtmlValues.getPixelSize(height, doc.getRenderState(), doc.getDefaultView(), -1);
+						newpanel.setPreferredSize(new Dimension(w, h));
+					}
+					objectControl.add(newpanel);
+				} else {
+					renderFallbackContent(objectControl);
+				}
+			}
+		} catch (final Exception e) {
+			log.error(e.getMessage(), e);
+			renderFallbackContent(objectControl);
+		}
+	}
+
+	private void renderFallbackContent(final ObjectControl objectControl) {
+		final HTMLDocumentImpl doc = (HTMLDocumentImpl) getDocumentNode();
+		final HtmlPanel panel = HtmlPanel.createFallbackPanel(this, doc.getHtmlRendererContext().getUserAgentContext(), doc.getHtmlRendererContext());
+		objectControl.add(panel);
 	}
 
 
