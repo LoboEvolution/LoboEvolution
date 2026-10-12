@@ -1102,6 +1102,27 @@ public class ElementImpl extends NodeInternal implements Element {
 
 		top = top + marginTop;
 		left = left + marginLeft;
+
+		if (!CSSValues.ABSOLUTE.isEqual(position) && !CSSValues.FIXED.isEqual(position)) {
+			final String thisDisplay = currentStyle.getDisplay();
+			if ("inline-block".equals(thisDisplay) || "inline".equals(thisDisplay)) {
+				Node prev = getPreviousSibling();
+				while (prev != null) {
+					if (prev instanceof HTMLElementImpl prevEl) {
+                        String prevDisplay = prevEl.getCurrentStyle().getDisplay();
+						if ("inline".equals(prevDisplay) || "inline-block".equals(prevDisplay)) {
+							left += prevEl.getOffsetWidth();
+							String prevMarginRight = prevEl.getCurrentStyle().getMarginRight();
+							if (Strings.isNotBlank(prevMarginRight)) {
+								left += HtmlValues.getPixelSize(prevMarginRight, rs, win, 0);
+							}
+						}
+					}
+					prev = prev.getPreviousSibling();
+				}
+			}
+		}
+
 		final int bottom = top + height;
 		return new DOMRectImpl(width, height, top, bottom, left);
 	}
@@ -1385,11 +1406,10 @@ public class ElementImpl extends NodeInternal implements Element {
 		final String width = currentStyle.getWidth();
 		final String overflow = currentStyle.getOverflow();
 		final String position = currentStyle.getPosition();
-		final boolean isAbsolute = CSSValues.ABSOLUTE.isEqual(position);
+		final boolean isPositioned = CSSValues.ABSOLUTE.isEqual(position) || CSSValues.FIXED.isEqual(position);
 		final RenderState rs = getRenderState();
 		final boolean padding = !"border-box".equals(currentStyle.getBoxSizing()) && isPadding;
 		final boolean border = !"border-box".equals(currentStyle.getBoxSizing()) && isBorder;
-
 		Integer widthSize;
 
 		if (getParentNode() == null ||
@@ -1415,8 +1435,11 @@ public class ElementImpl extends NodeInternal implements Element {
 				widthSize = getContentWidth();
 			}
 
-			if (Strings.isBlank(width) && (rs.getDisplay() == RenderState.DISPLAY_BLOCK || rs.getDisplay() == RenderState.DISPLAY_LIST_ITEM) && !isAbsolute) {
+			if (Strings.isBlank(width) &&
+					(rs.getDisplay() == RenderState.DISPLAY_BLOCK ||
+							rs.getDisplay() == RenderState.DISPLAY_LIST_ITEM) && !isPositioned) {
 				widthSize = parentWidth == null ? 0 : parentWidth;
+
 			} else {
 
 				if (widthSize == 0 && (this instanceof HTMLInputElement ||
@@ -1437,13 +1460,13 @@ public class ElementImpl extends NodeInternal implements Element {
 			final HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
 			final Dimension preferredSize = htmlPanel.getPreferredSize();
 
-			// For absolute positioned elements, don't fallback to preferredSize
+			// For absolute/fixed positioned elements, don't fallback to preferredSize
 			// keep the content-based width
-			if (!isAbsolute) {
+			if (!isPositioned) {
 				widthSize = widthSize == -1 ? preferredSize.width : widthSize;
 			}
 
-			if (!(this instanceof HTMLHtmlElement) && widthSize == preferredSize.width && !isAbsolute) {
+			if (!(this instanceof HTMLHtmlElement) && widthSize == preferredSize.width && !isPositioned) {
 				widthSize = widthSize - SCROLL_BAR_THICKNESS;
 			}
 
@@ -1561,16 +1584,19 @@ public class ElementImpl extends NodeInternal implements Element {
 	}
 
 	private int childHeight(final ElementImpl elm, final HTMLDocumentImpl doc, final Integer parentHeight) {
-		final AtomicInteger h = new AtomicInteger(0);
+		final AtomicInteger blockSum = new AtomicInteger(0);
+		final AtomicInteger inlineMax = new AtomicInteger(0);
+		final AtomicBoolean hasBlockChild = new AtomicBoolean(false);
+
 		if (elm instanceof HTMLTextAreaElement ||
 				elm instanceof HTMLBaseFontElement ||
 				elm instanceof HTMLScriptElement ||
-				elm instanceof HTMLSuperscriptElementImpl) return h.get();
+				elm instanceof HTMLSuperscriptElementImpl) return 0;
 
 		final RenderState elmRs = elm.getRenderState();
 		final int display = elmRs != null ? elmRs.getDisplay() : RenderState.DISPLAY_INLINE;
 		final boolean isBlock = display == RenderState.DISPLAY_BLOCK;
-		final int contentWidth = isBlock && elmRs != null ? getContentWidthForText(elm) : -1;
+		final int contentWidth = isBlock ? getContentWidthForText(elm) : -1;
 
 		elm.getNodeList().forEach(child -> {
 			final int type = child.getNodeType();
@@ -1578,9 +1604,9 @@ public class ElementImpl extends NodeInternal implements Element {
 				case Node.CDATA_SECTION_NODE:
 				case Node.TEXT_NODE:
 					if (elm instanceof HTMLFieldSetElement) {
-						h.addAndGet(35);
+						inlineMax.set(Math.max(inlineMax.get(), 35));
 					} else if (elm instanceof HTMLDDElementImpl) {
-						h.addAndGet(17);
+						inlineMax.set(Math.max(inlineMax.get(), 17));
 					} else if (elmRs != null) {
 						final String text = child.getTextContent();
 						if (isBlock && contentWidth > 0 && text != null && text.contains(" ")) {
@@ -1602,9 +1628,9 @@ public class ElementImpl extends NodeInternal implements Element {
 									currentLineWidth += spaceWidth;
 								}
 							}
-							h.addAndGet(lineCount * lineHeight);
+							inlineMax.set(Math.max(inlineMax.get(), lineCount * lineHeight));
 						} else {
-							h.addAndGet(Strings.texHeight(text, elmRs.getFont()));
+							inlineMax.set(Math.max(inlineMax.get(), Strings.texHeight(text, elmRs.getFont())));
 						}
 					}
 					break;
@@ -1618,10 +1644,20 @@ public class ElementImpl extends NodeInternal implements Element {
 					final String height = currentStyle.getHeight();
 					final String cssDisplay = currentStyle.getDisplay();
 					if (!CSSValues.NONE.isEqual(cssDisplay)) {
+						final boolean childIsInline = RenderState.DISPLAY_INLINE == toDisplay(cssDisplay) || RenderState.DISPLAY_INLINE_BLOCK == toDisplay(cssDisplay);
+						final int childH;
 						if (Strings.isNotBlank(height)) {
-							h.addAndGet(HtmlValues.getPixelSize(CSSValues.AUTO.isEqual(height) ? "100%" : height, null, doc.getDefaultView(), 0, parentHeight));
+							childH = HtmlValues.getPixelSize(CSSValues.AUTO.isEqual(height) ? "100%" : height, null, doc.getDefaultView(), 0, parentHeight);
 						} else if (child instanceof ElementImpl) {
-							h.addAndGet(childHeight((ElementImpl) child, doc, parentHeight));
+							childH = childHeight((ElementImpl) child, doc, parentHeight);
+						} else {
+							childH = 0;
+						}
+						if (childIsInline) {
+							inlineMax.set(Math.max(inlineMax.get(), childH));
+						} else {
+							blockSum.addAndGet(childH);
+							hasBlockChild.set(true);
 						}
 					}
 					break;
@@ -1630,7 +1666,23 @@ public class ElementImpl extends NodeInternal implements Element {
 			}
 		});
 
-		return h.get();
+		return hasBlockChild.get() ? blockSum.get() : inlineMax.get();
+	}
+
+	private int toDisplay(final String cssDisplay) {
+		if ("block".equals(cssDisplay)) return RenderState.DISPLAY_BLOCK;
+		if ("inline".equals(cssDisplay)) return RenderState.DISPLAY_INLINE;
+		if ("inline-block".equals(cssDisplay)) return RenderState.DISPLAY_INLINE_BLOCK;
+		if ("list-item".equals(cssDisplay)) return RenderState.DISPLAY_LIST_ITEM;
+		if ("none".equals(cssDisplay)) return RenderState.DISPLAY_NONE;
+		if ("table".equals(cssDisplay)) return RenderState.DISPLAY_TABLE;
+		if ("inline-table".equals(cssDisplay)) return RenderState.DISPLAY_INLINE_TABLE;
+		if ("table-row".equals(cssDisplay)) return RenderState.DISPLAY_TABLE_ROW;
+		if ("table-cell".equals(cssDisplay)) return RenderState.DISPLAY_TABLE_CELL;
+		if ("table-column".equals(cssDisplay)) return RenderState.DISPLAY_TABLE_COLUMN;
+		if ("table-column-group".equals(cssDisplay)) return RenderState.DISPLAY_TABLE_COLUMN_GROUP;
+		if ("flex".equals(cssDisplay)) return RenderState.DISPLAY_FLEX_BOX;
+		return RenderState.DISPLAY_INLINE;
 	}
 
 	private int getContentWidthForText(final ElementImpl elm) {

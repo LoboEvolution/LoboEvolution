@@ -79,6 +79,9 @@ public class VirtualCell {
 		final HTMLElementImpl elem = cell.getCellElement();
 		final HTMLDocumentImpl doc =  (HTMLDocumentImpl)elem.getOwnerDocument();
 		final HtmlLength length = widthText == null ? null : new HtmlLength(widthText, doc);
+		if (length != null && length.getLengthType() == HtmlLength.PIXELS && length.getRawValue() == 0) {
+			return null;
+		}
 		if (length != null) {
 			length.divideBy(cell.getColSpan());
 		}

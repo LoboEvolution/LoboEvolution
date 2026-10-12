@@ -41,7 +41,6 @@ public interface HTMLStyleElement extends HTMLElement {
      * @return a {@link java.lang.String} object.
      */
     String getMedia();
-
     
     /**
      * <p>setMedia.</p>
@@ -57,7 +56,6 @@ public interface HTMLStyleElement extends HTMLElement {
      */
     @Deprecated
     String getType();
-
     
     /**
      * <p>setType.</p>
@@ -66,14 +64,12 @@ public interface HTMLStyleElement extends HTMLElement {
      */
     void setType(String type);
 
-
 	/**
 	 * <p>setDisabled.</p>
 	 *
 	 * @param disabled a {@link java.lang.Boolean} object.
 	 */
 	void setDisabled(boolean disabled);
-
 
 	/**
 	 * <p>isDisabled.</p>
@@ -88,6 +84,4 @@ public interface HTMLStyleElement extends HTMLElement {
 	 * @return a {@link CSSStyleSheet} object.
 	 */
 	CSSStyleSheet getSheet();
-
-
 }

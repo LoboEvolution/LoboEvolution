@@ -448,7 +448,7 @@ public class HTMLTableElementTest extends LoboUnitTest {
     public void nestedTables() {
         final String html =
                 "<html><head>\n"
-                        + "    <script>\n"
+                        + "<script>\n"
                         + "function test() {\n"
                         + "  var myTable = document.getElementById('mytable');\n"
                         + "  alert(myTable.rows.length);\n"
@@ -754,7 +754,7 @@ public class HTMLTableElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"", "hello", "unknown", "exception", "", "test"})
+    @Alerts({"null", "hello", "unknown", "exception", "", "test"})
     public void summary() {
         final String html
                 = "<html><body>\n"

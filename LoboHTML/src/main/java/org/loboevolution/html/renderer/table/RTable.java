@@ -65,8 +65,8 @@ public class RTable extends BaseElementRenderable {
 		this.tableMatrix = new TableMatrix(info, this);
 	}
 
-	private void addPositionedRenderable(final BoundableRenderable renderable, final boolean verticalAlignable,
-                                         final boolean isFloat, final boolean isFixed) {
+	private void addPositionedRenderable(final BoundableRenderable renderable,
+										 final boolean isFixed) {
 		SortedSet<PositionedRenderable> others = this.positionedRenderables;
 		if (others == null) {
 			others = new TreeSet<>(new ZIndexComparator());
@@ -75,9 +75,9 @@ public class RTable extends BaseElementRenderable {
 
 		others.add(PositionedRenderable.builder().
 				renderable(renderable).
-				verticalAlignable(verticalAlignable).
+				verticalAlignable(false).
 				ordinal(otherOrdinal++).
-				isFloat(isFloat).
+				isFloat(false).
 				isFixed(isFixed).build());
 
 		renderable.setParent(this);
@@ -118,7 +118,7 @@ public class RTable extends BaseElementRenderable {
 			applyStyle(availWidth, availHeight);
 			final TableMatrix tm = this.tableMatrix;
 			final Insets insets = getInsets(false, false);
-			tm.reset(insets, availWidth, availHeight);
+			tm.reset(insets, availWidth);
 			// TODO: No scrollbars
 			tm.build(availWidth, availHeight, sizeOnly);
 			tm.doLayout(insets);
@@ -202,7 +202,7 @@ public class RTable extends BaseElementRenderable {
 
 	private void importDelayedPair(final DelayedPair pair) {
 	    final BoundableRenderable r = pair.positionPairChild();
-	    this.addPositionedRenderable(r, false, false, pair.isFixed());
+	    this.addPositionedRenderable(r, pair.isFixed());
 	}
 
 	/** {@inheritDoc} */
@@ -309,10 +309,8 @@ public class RTable extends BaseElementRenderable {
 		}
 		try {
 			prePaint(g);
-			final Dimension size = getSize();
 			// TODO: No scrollbars
-			final TableMatrix tm = this.tableMatrix;
-			tm.paint(g, size);
+            this.tableMatrix.paint(g);
 			final Collection<PositionedRenderable> prs = this.positionedRenderables;
 			if (prs != null) {
 				for (final PositionedRenderable pr : prs) {

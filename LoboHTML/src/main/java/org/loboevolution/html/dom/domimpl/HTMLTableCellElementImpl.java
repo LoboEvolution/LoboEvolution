@@ -29,8 +29,11 @@
 package org.loboevolution.html.dom.domimpl;
 
 import org.loboevolution.common.Strings;
+import org.loboevolution.css.CSSStyleDeclaration;
 import org.loboevolution.html.dom.HTMLTableCellElement;
+import org.loboevolution.html.dom.HTMLTableElement;
 import org.loboevolution.html.dom.nodeimpl.NodeListImpl;
+import org.loboevolution.html.node.Node;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.renderstate.TableCellRenderState;
 import org.loboevolution.html.style.HtmlValues;
@@ -42,7 +45,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class HTMLTableCellElementImpl extends HTMLElementImpl implements HTMLTableCellElement {
 
-    private int index = -1;
+	private int index = -1;
 
 	/**
 	 * <p>Constructor for HTMLTableCellElementImpl.</p>
@@ -95,7 +98,7 @@ public class HTMLTableCellElementImpl extends HTMLElementImpl implements HTMLTab
 				final NodeListImpl childNodes = (NodeListImpl) getParentNode().getChildNodes();
 				childNodes.forEach(node -> {
 					if (node instanceof HTMLTableCellElementImpl cell) {
-                        count.incrementAndGet();
+						count.incrementAndGet();
 						if (cell.getId().equals(getId()))
 							index.set(count.get());
 					}
@@ -108,13 +111,13 @@ public class HTMLTableCellElementImpl extends HTMLElementImpl implements HTMLTab
 	/** {@inheritDoc} */
 	@Override
 	public String getCh() {
-		return getAttribute("ch");
+        return getAttribute("char");
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public String getChOff() {
-		return getAttribute("choff");
+		return getAttribute("charoff");
 	}
 
 	/** {@inheritDoc} */
@@ -122,7 +125,8 @@ public class HTMLTableCellElementImpl extends HTMLElementImpl implements HTMLTab
 	public int getColSpan() {
 		final String colSpanText = getAttribute("colspan");
 		final HTMLDocumentImpl doc =  (HTMLDocumentImpl)this.document;
-		return HtmlValues.getPixelSize(colSpanText, null, doc.getDefaultView(), 1);
+		final int value = HtmlValues.getPixelSize(colSpanText, null, doc.getDefaultView(), 1);
+		return Math.max(1, value);
 	}
 
 	/** {@inheritDoc} */
@@ -148,7 +152,8 @@ public class HTMLTableCellElementImpl extends HTMLElementImpl implements HTMLTab
 	public int getRowSpan() {
 		final String rowSpanText = getAttribute("rowspan");
 		final HTMLDocumentImpl doc =  (HTMLDocumentImpl)this.document;
-		return HtmlValues.getPixelSize(rowSpanText, null, doc.getDefaultView(), 1);
+		final int value = HtmlValues.getPixelSize(rowSpanText, null, doc.getDefaultView(), 1);
+		return Math.max(1, value);
 	}
 
 	/** {@inheritDoc} */
@@ -168,7 +173,7 @@ public class HTMLTableCellElementImpl extends HTMLElementImpl implements HTMLTab
 	public String getWidth() {
 		return getAttribute("width");
 	}
-	
+
 	/**
 	 * <p>Setter for the field <code>index</code>.</p>
 	 *
@@ -205,13 +210,13 @@ public class HTMLTableCellElementImpl extends HTMLElementImpl implements HTMLTab
 	/** {@inheritDoc} */
 	@Override
 	public void setCh(final String ch) {
-		setAttribute("ch", ch);
+		setAttribute("char", ch);
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void setChOff(final String chOff) {
-		setAttribute("choff", chOff);
+		setAttribute("charoff", chOff);
 	}
 
 	/** {@inheritDoc} */
@@ -239,7 +244,7 @@ public class HTMLTableCellElementImpl extends HTMLElementImpl implements HTMLTab
 	/** {@inheritDoc} */
 	@Override
 	public void setNoWrap(final boolean noWrap) {
-		setAttribute("nowrap", noWrap ? "nowrap" : null);
+		setAttribute("nowrap", noWrap ? "" : null);
 	}
 
 	/** {@inheritDoc} */
@@ -270,16 +275,125 @@ public class HTMLTableCellElementImpl extends HTMLElementImpl implements HTMLTab
 		setAttribute("width", width);
 	}
 
-	/** {@inheritDoc} */
+/** {@inheritDoc} */
 	@Override
 	public Integer getOffsetWidth() {
-		return null;
+		try {
+			return Integer.valueOf(calculateOffsetWidth());
+		} catch (Exception e) {
+			return 0;
+		}
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Integer getOffsetHeight() {
+		return Integer.valueOf(calculateOffsetHeight());
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public Integer getClientWidth() {
-		return null;
+		return Integer.valueOf(calculateClientWidth());
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public int getClientHeight() {
+		return calculateClientHeight();
+	}
+
+	int calculateOffsetWidth() {
+		try {
+			final CSSStyleDeclaration currentStyle = getCurrentStyle();
+			if (currentStyle == null) {
+				return 0;
+			}
+
+			final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
+			final String width = currentStyle.getWidth();
+			final int contentWidth = HtmlValues.getPixelSize(width, getRenderState(), doc.getDefaultView(), 0);
+			final int paddingLeft = HtmlValues.getPixelSize(currentStyle.getPaddingLeft(), getRenderState(), doc.getDefaultView(), 0);
+			final int paddingRight = HtmlValues.getPixelSize(currentStyle.getPaddingRight(), getRenderState(), doc.getDefaultView(), 0);
+			final int borderLeft = HtmlValues.getPixelSize(currentStyle.getBorderLeftWidth(), getRenderState(), doc.getDefaultView(), 0);
+			final int borderRight = HtmlValues.getPixelSize(currentStyle.getBorderRightWidth(), getRenderState(), doc.getDefaultView(), 0);
+
+			final boolean isBorderCollapse = isBorderCollapse();
+
+			if (isBorderCollapse) {
+				return contentWidth + paddingLeft + paddingRight + borderLeft / 2 + borderRight / 2;
+			} else {
+				return contentWidth + paddingLeft + paddingRight + borderLeft + borderRight;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+
+	int calculateOffsetHeight() {
+		final CSSStyleDeclaration currentStyle = getCurrentStyle();
+		if (currentStyle == null) {
+			return 0;
+		}
+
+		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
+		final int contentHeight = HtmlValues.getPixelSize(currentStyle.getHeight(), getRenderState(), doc.getDefaultView(), 0);
+		final int paddingTop = HtmlValues.getPixelSize(currentStyle.getPaddingTop(), getRenderState(), doc.getDefaultView(), 0);
+		final int paddingBottom = HtmlValues.getPixelSize(currentStyle.getPaddingBottom(), getRenderState(), doc.getDefaultView(), 0);
+		final int borderTop = HtmlValues.getPixelSize(currentStyle.getBorderTopWidth(), getRenderState(), doc.getDefaultView(), 0);
+		final int borderBottom = HtmlValues.getPixelSize(currentStyle.getBorderBottomWidth(), getRenderState(), doc.getDefaultView(), 0);
+
+		final boolean isBorderCollapse = isBorderCollapse();
+
+		if (isBorderCollapse) {
+			return contentHeight + paddingTop + paddingBottom + borderTop / 2 + borderBottom / 2;
+		} else {
+			return contentHeight + paddingTop + paddingBottom + borderTop + borderBottom;
+		}
+	}
+
+	int calculateClientWidth() {
+		final CSSStyleDeclaration currentStyle = getCurrentStyle();
+		if (currentStyle == null) {
+			return 0;
+		}
+
+		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
+		final int contentWidth = HtmlValues.getPixelSize(currentStyle.getWidth(), getRenderState(), doc.getDefaultView(), 0);
+		final int paddingLeft = HtmlValues.getPixelSize(currentStyle.getPaddingLeft(), getRenderState(), doc.getDefaultView(), 0);
+		final int paddingRight = HtmlValues.getPixelSize(currentStyle.getPaddingRight(), getRenderState(), doc.getDefaultView(), 0);
+
+		return contentWidth + paddingLeft + paddingRight;
+	}
+
+	int calculateClientHeight() {
+		final CSSStyleDeclaration currentStyle = getCurrentStyle();
+		if (currentStyle == null) {
+			return 0;
+		}
+
+		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
+		final int contentHeight = HtmlValues.getPixelSize(currentStyle.getHeight(), getRenderState(), doc.getDefaultView(), 0);
+		final int paddingTop = HtmlValues.getPixelSize(currentStyle.getPaddingTop(), getRenderState(), doc.getDefaultView(), 0);
+		final int paddingBottom = HtmlValues.getPixelSize(currentStyle.getPaddingBottom(), getRenderState(), doc.getDefaultView(), 0);
+
+		return contentHeight + paddingTop + paddingBottom;
+	}
+
+	boolean isBorderCollapse() {
+		final Object parentNode = getParentNode();
+		if (parentNode != null) {
+			Node ancestor = (Node) parentNode;
+			while (ancestor != null && !(ancestor instanceof HTMLTableElement)) {
+				ancestor = ancestor.getParentNode();
+			}
+			if (ancestor instanceof HTMLTableElement table) {
+				final String borderCollapse = table.getCurrentStyle().getBorderCollapse();
+				return "collapse".equalsIgnoreCase(borderCollapse);
+			}
+		}
+		return false;
 	}
 
 	/** {@inheritDoc} */

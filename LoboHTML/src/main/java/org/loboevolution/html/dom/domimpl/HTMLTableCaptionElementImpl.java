@@ -29,6 +29,7 @@ package org.loboevolution.html.dom.domimpl;
 import org.loboevolution.html.dom.HTMLTableCaptionElement;
 import org.loboevolution.html.renderstate.DisplayRenderState;
 import org.loboevolution.html.renderstate.RenderState;
+import org.loboevolution.html.renderstate.TableCaptionRenderState;
 
 /**
  * The Class HTMLTableCaptionElementImpl.
@@ -80,7 +81,7 @@ public class HTMLTableCaptionElementImpl extends HTMLElementImpl implements HTML
 	/** {@inheritDoc} */
 	@Override
 	protected RenderState createRenderState(final RenderState prevRenderState) {
-		return new DisplayRenderState(prevRenderState, this, RenderState.DISPLAY_TABLE_CAPTION);
+		return new TableCaptionRenderState(prevRenderState, this);
 	}
 
 	@Override

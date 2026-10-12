@@ -422,6 +422,8 @@ public class HTMLEntities {
 		elementInfos.put(HTMLTag.HR, forbiddenEndElement);
 		elementInfos.put(HTMLTag.EMBED, forbiddenEndElement);
 		elementInfos.put(HTMLTag.SPACER, forbiddenEndElement);
+		elementInfos.put(HTMLTag.COL, forbiddenEndElement);
+		elementInfos.put(HTMLTag.COLGROUP, forbiddenEndElement);
 
 		elementInfos.put(HTMLTag.P, paragraphElement);
 		elementInfos.put(HTMLTag.LI, optionalEndElement);

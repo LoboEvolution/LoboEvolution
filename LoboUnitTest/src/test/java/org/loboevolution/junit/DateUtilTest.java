@@ -23,46 +23,33 @@
  *
  * Contact info: ivan.difrancesco@yahoo.it
  */
+package org.loboevolution.junit;
 
-package org.loboevolution.html;
+import org.junit.jupiter.api.Test;
+import org.loboevolution.driver.LoboUnitTest;
+import org.loboevolution.util.DateUtil;
 
-import java.awt.*;
+import java.util.Locale;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
- * This interface should be implemented to provide OBJECT, EMBED or APPLET
- * functionality.
+ * Tests for {@link DateUtil}.
  */
-public interface HtmlObject {
-	/**
-	 * <p>destroy.</p>
-	 */
-	void destroy();
+public class DateUtilTest extends LoboUnitTest {
 
-	/**
-	 * <p>getComponent.</p>
-	 *
-	 * @return a {@link java.awt.Component} object.
-	 */
-	Component getComponent();
+	@Test
+	public void parseRfc1123Date() {
+		assertNotNull(new DateUtil().determineDateFormat("Sun, 02 Aug 2026 23:09:46 GMT", Locale.US));
+	}
 
-	/**
-	 * Called as the object is layed out, either the first time it's layed out or
-	 * whenever the DOM changes. This is where the object should reset its state
-	 * based on element children or attributes and possibly change its preferred
-	 * size if appropriate.
-	 *
-	 * @param availableWidth a {@link java.lang.Integer} object.
-	 * @param availableHeight a {@link java.lang.Integer} object.
-	 */
-	void reset(int availableWidth, final int availableHeight);
+	@Test
+	public void parseRfc850Date() {
+		assertNotNull(new DateUtil().determineDateFormat("Sunday, 02-Aug-26 23:09:46 GMT", Locale.US));
+	}
 
-	/**
-	 * <p>resume.</p>
-	 */
-	void resume();
-
-	/**
-	 * <p>suspend.</p>
-	 */
-	void suspend();
+	@Test
+	public void parseRfc1123NoLeadingZero() {
+		assertNotNull(new DateUtil().determineDateFormat("Sun, 2 Aug 2026 23:09:46 GMT", Locale.US));
+	}
 }

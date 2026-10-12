@@ -26,45 +26,25 @@
 
 package org.loboevolution.html.renderer.layout;
 
-import org.loboevolution.html.HtmlObject;
-import org.loboevolution.html.control.RUIControl;
-import org.loboevolution.html.control.UIControl;
-import org.loboevolution.html.control.UIControlWrapper;
+import org.loboevolution.html.control.*;
 import org.loboevolution.html.node.Element;
-import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
+import org.loboevolution.html.dom.domimpl.HTMLObjectElementImpl;
 import org.loboevolution.html.renderer.RBlockViewport;
 import org.loboevolution.html.renderer.RElement;
 
 public class ObjectLayout extends CommonWidgetLayout {
-    /**
-     * Must use this ThreadLocal because an ObjectLayout instance is shared across
-     * renderers.
-     */
-    private final ThreadLocal<HtmlObject> htmlObject = new ThreadLocal<>();
-
-    private final boolean tryToRenderContent;
 
     /**
      * @param tryToRenderContent If the object is unknown, content is rendered as  HTML.
      */
     public ObjectLayout(final boolean tryToRenderContent) {
         super(ADD_INLINE);
-        this.tryToRenderContent = tryToRenderContent;
     }
 
     @Override
     public  RElement createRenderable(final RBlockViewport bodyLayout, final Element markupElement) {
-        final HtmlObject ho = this.htmlObject.get();
-        final UIControl uiControl = new UIControlWrapper(ho);
-        final HTMLElementImpl markupElementImpl = (HTMLElementImpl) markupElement;
-        return new RUIControl(markupElementImpl, uiControl, bodyLayout.getContainer(), bodyLayout.getUserAgentContext());
-    }
-
-    @Override
-    public void layoutMarkup(final RBlockViewport bodyLayout, final Element markupElement) {
-        if (this.tryToRenderContent) {
-            final HTMLElementImpl markupElementImpl = (HTMLElementImpl) markupElement;
-            bodyLayout.layoutMarkup(markupElementImpl);
-        }
+        final HTMLObjectElementImpl markupElementImpl = (HTMLObjectElementImpl)markupElement;
+        final UIControl control = new ObjectControl(markupElementImpl);
+        return new RUIControl(markupElementImpl, control, bodyLayout.getContainer(), bodyLayout.getUserAgentContext());
     }
 }

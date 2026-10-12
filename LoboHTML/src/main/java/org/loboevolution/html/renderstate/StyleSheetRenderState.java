@@ -271,31 +271,32 @@ public class StyleSheetRenderState implements RenderState {
 			final String backgroundImageText = props.getBackgroundImage();
 			final String backgroundRepeatText = props.getBackgroundRepeat();
 			final String backgroundPositionText = props.getBackgroundPosition();
-						
-			if (Strings.isNotBlank(backgroundColorText)  ||
-				Strings.isNotBlank(backgroundImageText)  ||
-				Strings.isNotBlank(backgroundRepeatText) ||
-				Strings.isNotBlank(backgroundPositionText)) {
+
+			if (Strings.isNotBlank(backgroundColorText) ||
+					Strings.isNotBlank(backgroundImageText) ||
+					Strings.isNotBlank(backgroundRepeatText) ||
+					Strings.isNotBlank(backgroundPositionText)) {
 				binfo = BackgroundInfo.builder().build();
-			}
 
-			if (Strings.isNotBlank(backgroundColorText)) {
-				final CSSValues bc = CSSValues.get(backgroundColorText);
-				if (bc.equals(CSSValues.INHERIT)) {
-					binfo.setBackgroundColor(this.getPreviousRenderState().getBackgroundColor());
-				} else {
-					binfo.setBackgroundColor(ColorFactory.getInstance().getColor(backgroundColorText));
+
+				if (Strings.isNotBlank(backgroundColorText)) {
+					final CSSValues bc = CSSValues.get(backgroundColorText);
+					if (bc.equals(CSSValues.INHERIT)) {
+						binfo.setBackgroundColor(this.getPreviousRenderState().getBackgroundColor());
+					} else {
+						binfo.setBackgroundColor(ColorFactory.getInstance().getColor(backgroundColorText));
+					}
 				}
-			}
-			
-			if (Strings.isNotBlank(backgroundRepeatText)) {
-				final BackgroundRender backgroundImageRender = new BackgroundRender(element, prevRenderState, document);
-				backgroundImageRender.applyBackgroundRepeat(binfo, backgroundRepeatText);
-			}
 
-			if (Strings.isNotBlank(backgroundImageText)) {
-				final BackgroundRender backgroundImageRender = new BackgroundRender(element, prevRenderState, document);
-				backgroundImageRender.applyBackgroundImage(binfo, backgroundImageText, this, props);
+				if (Strings.isNotBlank(backgroundRepeatText)) {
+					final BackgroundRender backgroundImageRender = new BackgroundRender(element, prevRenderState, document);
+					backgroundImageRender.applyBackgroundRepeat(binfo, backgroundRepeatText);
+				}
+
+				if (Strings.isNotBlank(backgroundImageText)) {
+					final BackgroundRender backgroundImageRender = new BackgroundRender(element, prevRenderState, document);
+					backgroundImageRender.applyBackgroundImage(binfo, backgroundImageText, this, props);
+				}
 			}
 		}
 		this.iBackgroundInfo = binfo;		

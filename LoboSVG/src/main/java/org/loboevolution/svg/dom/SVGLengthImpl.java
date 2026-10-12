@@ -28,6 +28,7 @@ package org.loboevolution.svg.dom;
 
 import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.svg.SVGLength;
+import org.loboevolution.svg.style.SvgValues;
 
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
@@ -112,7 +113,7 @@ public class SVGLengthImpl implements SVGLength {
 	/** {@inheritDoc} */
 	@Override
 	public String getValueAsString() {
-		final String suffix = getUnitTypeAsString(this.unitType);
+		final String suffix = SvgValues.getUnitTypeAsString(this.unitType);
 		if ("unkown".equals(suffix)) {
 			throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Unknow unit type");
 		}
@@ -126,48 +127,70 @@ public class SVGLengthImpl implements SVGLength {
 	/** {@inheritDoc} */
 	@Override
 	public void setValueAsString(final String valueAsStr) {
-		String valueAsString = valueAsStr;
-		if (valueAsString == null) {
-			valueAsString = "0";
+
+		if (valueAsStr == null) {
+			this.valueInSpecifiedUnits = 0;
+			this.unitType = SVGLength.SVG_LENGTHTYPE_NUMBER;
+			return;
 		}
 
-		final String valueString;
-		if (valueAsString.endsWith("cm")) {
-			valueString = valueAsString.substring(0, valueAsString.length() - 2);
-			this.unitType = SVGLength.SVG_LENGTHTYPE_CM;
-		} else if (valueAsString.endsWith("ems")) {
-			valueString = valueAsString.substring(0, valueAsString.length() - 3);
-			this.unitType = SVGLength.SVG_LENGTHTYPE_EMS;
-		} else if (valueAsString.endsWith("exs")) {
-			valueString = valueAsString.substring(0, valueAsString.length() - 3);
-			this.unitType = SVGLength.SVG_LENGTHTYPE_EXS;
-		} else if (valueAsString.endsWith("in")) {
-			valueString = valueAsString.substring(0, valueAsString.length() - 2);
-			this.unitType = SVGLength.SVG_LENGTHTYPE_IN;
-		} else if (valueAsString.endsWith("mm")) {
-			valueString = valueAsString.substring(0, valueAsString.length() - 2);
-			this.unitType = SVGLength.SVG_LENGTHTYPE_MM;
-		} else if (valueAsString.endsWith("pc")) {
-			valueString = valueAsString.substring(0, valueAsString.length() - 2);
-			this.unitType = SVGLength.SVG_LENGTHTYPE_PC;
-		} else if (valueAsString.endsWith("%")) {
-			valueString = valueAsString.substring(0, valueAsString.length() - 1);
-			this.unitType = SVGLength.SVG_LENGTHTYPE_PERCENTAGE;
-		} else if (valueAsString.endsWith("pt")) {
-			valueString = valueAsString.substring(0, valueAsString.length() - 2);
-			this.unitType = SVGLength.SVG_LENGTHTYPE_PT;
-		} else if (valueAsString.endsWith("px")) {
-			valueString = valueAsString.substring(0, valueAsString.length() - 2);
-			this.unitType = SVGLength.SVG_LENGTHTYPE_PX;
-		} else {
-			valueString = valueAsString;
-			this.unitType = SVGLength.SVG_LENGTHTYPE_NUMBER;
+		final String lcSpec = valueAsStr.toLowerCase();
+		String unit = "";
+		String text = lcSpec;
+
+		if (SvgValues.isUnits(lcSpec)) {
+
+			if (lcSpec.endsWith("%") || lcSpec.endsWith("q")) {
+				unit = lcSpec.substring(lcSpec.length() - 1);
+				text = lcSpec.substring(0, lcSpec.length() - 1);
+
+			} else if (lcSpec.endsWith("rem") || lcSpec.endsWith("exs")) {
+				unit = lcSpec.substring(lcSpec.length() - 3);
+				text = lcSpec.substring(0, lcSpec.length() - 3);
+
+			} else {
+				unit = lcSpec.substring(lcSpec.length() - 2);
+				text = lcSpec.substring(0, lcSpec.length() - 2);
+			}
+		}
+
+		switch (unit) {
+			case "cm":
+				this.unitType = SVGLength.SVG_LENGTHTYPE_CM;
+				break;
+			case "em", "rem":
+				this.unitType = SVGLength.SVG_LENGTHTYPE_EMS;
+				break;
+            case "ex":
+			case "exs":
+				this.unitType = SVGLength.SVG_LENGTHTYPE_EXS;
+				break;
+			case "in":
+				this.unitType = SVGLength.SVG_LENGTHTYPE_IN;
+				break;
+			case "mm":
+				this.unitType = SVGLength.SVG_LENGTHTYPE_MM;
+				break;
+			case "pc":
+				this.unitType = SVGLength.SVG_LENGTHTYPE_PC;
+				break;
+			case "%":
+				this.unitType = SVGLength.SVG_LENGTHTYPE_PERCENTAGE;
+				break;
+			case "pt":
+				this.unitType = SVGLength.SVG_LENGTHTYPE_PT;
+				break;
+			case "px":
+				this.unitType = SVGLength.SVG_LENGTHTYPE_PX;
+				break;
+			default:
+				this.unitType = SVGLength.SVG_LENGTHTYPE_NUMBER;
 		}
 
 		try {
-			this.valueInSpecifiedUnits = Float.parseFloat(valueString);
-		} catch (final NumberFormatException e) {
-			throw new DOMException(DOMException.SYNTAX_ERR, "Invalid value: '" + valueString + "'!");
+			this.valueInSpecifiedUnits = Float.parseFloat(text);
+		} catch (NumberFormatException e) {
+			throw new DOMException(DOMException.SYNTAX_ERR, "Invalid value: " + text);
 		}
 	}
 
@@ -202,53 +225,56 @@ public class SVGLengthImpl implements SVGLength {
 			return;
 		}
 
+		// 1) Converti tutto in pollici
 		float inchValue = this.valueInSpecifiedUnits;
+
 		switch (this.unitType) {
-            case SVGLength.SVG_LENGTHTYPE_CM:
-			inchValue = this.valueInSpecifiedUnits / 2.54f;
-			break;
-		case SVGLength.SVG_LENGTHTYPE_MM:
-			inchValue = this.valueInSpecifiedUnits / 25.40013f;
-			break;
-		case SVGLength.SVG_LENGTHTYPE_PT:
-			inchValue = this.valueInSpecifiedUnits / 72.26999f;
-			break;
-		case SVGLength.SVG_LENGTHTYPE_PX:
-			inchValue = this.valueInSpecifiedUnits / 96.0f;
-			break;
-		case SVGLength.SVG_LENGTHTYPE_EMS:
-			inchValue = this.valueInSpecifiedUnits / 7.22699f;
-			break;
-		case SVGLength.SVG_LENGTHTYPE_PC:
-			inchValue = this.valueInSpecifiedUnits / 6.0225f;
-			break;
-		default:
-			break;
+			case SVGLength.SVG_LENGTHTYPE_CM:
+				inchValue = this.valueInSpecifiedUnits / 2.54f;
+				break;
+			case SVGLength.SVG_LENGTHTYPE_MM:
+				inchValue = this.valueInSpecifiedUnits / 25.40013f;
+				break;
+			case SVGLength.SVG_LENGTHTYPE_PT:
+				inchValue = this.valueInSpecifiedUnits / 72.26999f;
+				break;
+			case SVGLength.SVG_LENGTHTYPE_PX:
+				inchValue = this.valueInSpecifiedUnits / 96.0f;
+				break;
+			case SVGLength.SVG_LENGTHTYPE_EMS:
+				inchValue = this.valueInSpecifiedUnits / 7.22699f;
+				break;
+			case SVGLength.SVG_LENGTHTYPE_PC:
+				inchValue = this.valueInSpecifiedUnits / 6.0225f;
+				break;
+			default:
+				break;
 		}
 
 		switch (unitType) {
-            case SVGLength.SVG_LENGTHTYPE_MM:
-			this.valueInSpecifiedUnits = inchValue * 25.40013f;
-			break;
-		case SVGLength.SVG_LENGTHTYPE_CM:
-			this.valueInSpecifiedUnits = inchValue * 25.4f;
-			break;
-		case SVGLength.SVG_LENGTHTYPE_PT:
-			this.valueInSpecifiedUnits = inchValue * 72.26999f;
-			break;
-		case SVGLength.SVG_LENGTHTYPE_PX:
-			this.valueInSpecifiedUnits = inchValue * 96.0f;
-			break;
-		case SVGLength.SVG_LENGTHTYPE_EMS:
-			this.valueInSpecifiedUnits = inchValue * 7.22699f;
-			break;
-		case SVGLength.SVG_LENGTHTYPE_PC:
-			this.valueInSpecifiedUnits = inchValue * 6.0225f;
-			break;
-		default:
-			this.valueInSpecifiedUnits = inchValue;
-			break;
+			case SVGLength.SVG_LENGTHTYPE_MM:
+				this.valueInSpecifiedUnits = inchValue * 25.40013f;
+				break;
+			case SVGLength.SVG_LENGTHTYPE_CM:
+				this.valueInSpecifiedUnits = inchValue * 2.54f;
+				break;
+			case SVGLength.SVG_LENGTHTYPE_PT:
+				this.valueInSpecifiedUnits = inchValue * 72.26999f;
+				break;
+			case SVGLength.SVG_LENGTHTYPE_PX:
+				this.valueInSpecifiedUnits = inchValue * 96.0f;
+				break;
+			case SVGLength.SVG_LENGTHTYPE_EMS:
+				this.valueInSpecifiedUnits = inchValue * 7.22699f;
+				break;
+			case SVGLength.SVG_LENGTHTYPE_PC:
+				this.valueInSpecifiedUnits = inchValue * 6.0225f;
+				break;
+			default:
+				this.valueInSpecifiedUnits = inchValue;
+				break;
 		}
+
 		this.unitType = unitType;
 	}
 
@@ -263,25 +289,6 @@ public class SVGLengthImpl implements SVGLength {
 	public void setValueInSpecifiedUnits(final float valueInSpecifiedUnits) {
 		this.valueInSpecifiedUnits = valueInSpecifiedUnits;
 	}
-
-	private String getUnitTypeAsString(final short unitType) {
-		String suffix = switch (unitType) {
-            case SVGLength.SVG_LENGTHTYPE_CM -> "cm";
-            case SVGLength.SVG_LENGTHTYPE_EMS -> "ems";
-            case SVGLength.SVG_LENGTHTYPE_EXS -> "exs";
-            case SVGLength.SVG_LENGTHTYPE_IN -> "in";
-            case SVGLength.SVG_LENGTHTYPE_MM -> "mm";
-            case SVGLength.SVG_LENGTHTYPE_PC -> "pc";
-            case SVGLength.SVG_LENGTHTYPE_PERCENTAGE -> "%";
-            case SVGLength.SVG_LENGTHTYPE_PT -> "pt";
-            case SVGLength.SVG_LENGTHTYPE_PX -> "px";
-            case SVGLength.SVG_LENGTHTYPE_NUMBER -> "";
-            case SVGLength.SVG_LENGTHTYPE_UNKNOWN -> "unknown";
-            default -> throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Invalid unit type");
-        };
-        return suffix;
-	}
-	
 	
 	/**
 	 * <p>getTransformedLength.</p>
@@ -291,7 +298,7 @@ public class SVGLengthImpl implements SVGLength {
 	 */
 	protected float getTransformedLength(final AffineTransform transform) {
 
-		if (unitType == SVG_LENGTHTYPE_NUMBER || transform == null || transform != null && transform.isIdentity()) {
+		if (unitType == SVG_LENGTHTYPE_NUMBER || transform == null || transform.isIdentity()) {
 			return getValue();
 		}
 
@@ -308,8 +315,7 @@ public class SVGLengthImpl implements SVGLength {
 		final double diffX = transQ2.getX() - transQ1.getX();
 		final double diffY = transQ2.getY() - transQ1.getY();
 
-		final float dist = (float) Math.sqrt(diffX * diffX + diffY * diffY);
-		return dist;
+        return (float) Math.sqrt(diffX * diffX + diffY * diffY);
 
 	}
 }

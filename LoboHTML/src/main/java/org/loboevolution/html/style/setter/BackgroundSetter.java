@@ -26,6 +26,9 @@
 
 package org.loboevolution.html.style.setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.js.css.CSSStyleDeclarationImpl;
@@ -47,14 +50,11 @@ public class BackgroundSetter implements SubPropertySetter {
         properties.setProperty(BACKGROUND, newValue);
         if (Strings.isNotBlank(newValue)) {
             final String[] tokens = HtmlValues.splitCssValue(newValue);
-            boolean hasXPosition = false;
-            boolean hasYPosition = false;
-            boolean lenghtPosition = false;
             String attachment = null;
             String color = null;
             String image = null;
             String backgroundRepeat = null;
-            StringBuilder position = new StringBuilder();
+            final List<String> positionTokens = new ArrayList<>();
             for (final String token : tokens) {
                 if (ColorFactory.getInstance().isColor(token) || CSSValues.INITIAL.equals(CSSValues.get(token))) {
                     color = token;
@@ -63,25 +63,16 @@ public class BackgroundSetter implements SubPropertySetter {
                 } else if (HtmlValues.isBackgroundRepeat(token)) {
                     backgroundRepeat = token;
                 } else if (HtmlValues.isBackgroundPosition(token)) {
-
-                    hasXPosition = CSSValues.get(token).equals(CSSValues.LEFT) ||
-                            CSSValues.get(token).equals(CSSValues.RIGHT) ||
-                            CSSValues.get(token).equals(CSSValues.CENTER);
-                    hasYPosition = !hasXPosition;
-                    lenghtPosition = lenghtPosition || HtmlValues.isUnits(token);
-
-                    if (hasXPosition && !hasYPosition) {
-                        if (!lenghtPosition) {
-                            position.insert(0, token + " ");
-                        } else {
-                            position.append(" ").append(token);
-                        }
-                    } else {
-                        position.append(token).append(" ");
-                    }
+                    positionTokens.add(token);
                 } else if (HtmlValues.isBackgroundAttachment(token)) {
                     attachment = token;
                 }
+            }
+
+            if (!positionTokens.isEmpty()) {
+                properties.setProperty(BACKGROUND_POSITION, formatPosition(positionTokens));
+            } else {
+                properties.setProperty(BACKGROUND_POSITION, CSSValues.INITIAL.toString());
             }
 
             if (color != null) {
@@ -102,17 +93,35 @@ public class BackgroundSetter implements SubPropertySetter {
                 properties.setProperty(BACKGROUND_REPEAT, CSSValues.INITIAL.toString());
             }
 
-            if (!position.isEmpty()) {
-                properties.setProperty(BACKGROUND_POSITION, position.toString());
-            } else {
-                properties.setProperty(BACKGROUND_POSITION, CSSValues.INITIAL.toString());
-            }
-
             if (attachment != null) {
                 properties.setProperty(BACKGROUND_ATTACHMENT, attachment.toString());
             } else {
                 properties.setProperty(BACKGROUND_ATTACHMENT, CSSValues.INITIAL.toString());
             }
         }
+    }
+
+    private String formatPosition(final List<String> tokens) {
+        if (tokens.size() == 1) {
+            return tokens.get(0) + " ";
+        }
+        final String first = tokens.get(0);
+        final String second = tokens.get(1);
+        boolean firstIsY = isYKeyword(first);
+        boolean secondIsX = isXKeyword(second);
+        if (firstIsY && secondIsX) {
+            return second + " " + first + " ";
+        }
+        return first + " " + second + " ";
+    }
+
+    private static boolean isXKeyword(final String token) {
+        final CSSValues val = CSSValues.get(token);
+        return val == CSSValues.LEFT || val == CSSValues.RIGHT || val == CSSValues.CENTER;
+    }
+
+    private static boolean isYKeyword(final String token) {
+        final CSSValues val = CSSValues.get(token);
+        return val == CSSValues.TOP || val == CSSValues.BOTTOM || val == CSSValues.CENTER;
     }
 }

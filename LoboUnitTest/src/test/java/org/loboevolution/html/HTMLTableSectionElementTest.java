@@ -39,19 +39,19 @@ import org.loboevolution.html.dom.HTMLTableSectionElement;
 public class HTMLTableSectionElementTest extends LoboUnitTest {
 
     @Test
-    @Alerts({"", "hello", "left", "hi", "right"})
+    @Alerts({"null", "hello", "left", "hi", "right"})
     public void alignThead() {
         align("th");
     }
 
     @Test
-    @Alerts({"", "hello", "left", "hi", "right"})
+    @Alerts({"null", "hello", "left", "hi", "right"})
     public void alignTbody() {
         align("tb");
     }
 
     @Test
-    @Alerts({"", "hello", "left", "hi", "right"})
+    @Alerts({"null", "hello", "left", "hi", "right"})
     public void alignTfoot() {
         align("tf");
     }
@@ -163,19 +163,19 @@ public class HTMLTableSectionElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"p", "po", "", "u", "8", "U8"})
+    @Alerts({"p", "po", "null", "u", "8", "U8"})
     public void chThead() {
         ch("th");
     }
 
     @Test
-    @Alerts({"p", "po", "", "u", "8", "U8"})
+    @Alerts({"p", "po", "null", "u", "8", "U8"})
     public void chTbody() {
         ch("tb");
     }
 
     @Test
-    @Alerts({"p", "po", "", "u", "8", "U8"})
+    @Alerts({"p", "po", "null", "u", "8", "U8"})
     public void chTfoot() {
         ch("tf");
     }
@@ -231,19 +231,19 @@ public class HTMLTableSectionElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"0", "4", "", "5.2", "-3", "abc"})
+    @Alerts({"0", "4", "null", "5.2", "-3", "abc"})
     public void chOffThead() {
         chOff("th");
     }
 
     @Test
-    @Alerts({"0", "4", "", "5.2", "-3", "abc"})
+    @Alerts({"0", "4", "null", "5.2", "-3", "abc"})
     public void chOffTbody() {
         chOff("tb");
     }
 
     @Test
-    @Alerts({"0", "4", "", "5.2", "-3", "abc"})
+    @Alerts({"0", "4", "null", "5.2", "-3", "abc"})
     public void chOffTfoot() {
         chOff("tf");
     }
@@ -251,49 +251,49 @@ public class HTMLTableSectionElementTest extends LoboUnitTest {
     private void chOff(final String id) {
         final String html =
                 "<html>\n"
-                        + "  <head>\n"
-                        + "    <script>\n"
-                        + "      function test() {\n"
-                        + "        var t1 = document.getElementById('" + id + "1');\n"
-                        + "        var t2 = document.getElementById('" + id + "2');\n"
-                        + "        var t3 = document.getElementById('" + id + "3');\n"
-                        + "        alert(t1.chOff);\n"
-                        + "        alert(t2.chOff);\n"
-                        + "        alert(t3.chOff);\n"
-                        + "        set(t1, '5.2');\n"
-                        + "        set(t2, -3);\n"
-                        + "        set(t3, 'abc');\n"
-                        + "        alert(t1.chOff);\n"
-                        + "        alert(t2.chOff);\n"
-                        + "        alert(t3.chOff);\n"
-                        + "      }\n"
-                        + "      function set(e, value) {\n"
-                        + "        try {\n"
-                        + "          e.chOff = value;\n"
-                        + "        } catch (e) {\n"
-                        + "          alert('error');\n"
-                        + "        }\n"
-                        + "      }\n"
-                        + "    </script>\n"
-                        + "  </head>\n"
-                        + "  <body onload='test()'>\n"
-                        + "    <table id='t1'>\n"
-                        + "      <thead id='th1' charoff='0'/>\n"
-                        + "      <tbody id='tb1' charoff='0'/>\n"
-                        + "      <tfoot id='tf1' charoff='0'/>\n"
-                        + "    </table>\n"
-                        + "    <table id='t2'>\n"
-                        + "      <thead id='th2' charoff='4'/>\n"
-                        + "      <tbody id='tb2' charoff='4'/>\n"
-                        + "      <tfoot id='tf2' charoff='4'/>\n"
-                        + "    </table>\n"
-                        + "    <table id='t3'>\n"
-                        + "      <thead id='th3'/>\n"
-                        + "      <tbody id='tb3'/>\n"
-                        + "      <tfoot id='tf3'/>\n"
-                        + "    </table>\n"
-                        + "  </body>\n"
-                        + "</html>";
+                + "  <head>\n"
+                + "    <script>\n"
+                + "      function test() {\n"
+                + "        var t1 = document.getElementById('" + id + "1');\n"
+                + "        var t2 = document.getElementById('" + id + "2');\n"
+                + "        var t3 = document.getElementById('" + id + "3');\n"
+                + "        alert(t1.chOff);\n"
+                + "        alert(t2.chOff);\n"
+                + "        alert(t3.chOff);\n"
+                + "        set(t1, '5.2');\n"
+                + "        set(t2, -3);\n"
+                + "        set(t3, 'abc');\n"
+                + "        alert(t1.chOff);\n"
+                + "        alert(t2.chOff);\n"
+                + "        alert(t3.chOff);\n"
+                + "      }\n"
+                + "      function set(e, value) {\n"
+                + "        try {\n"
+                + "          e.chOff = value;\n"
+                + "        } catch (e) {\n"
+                + "          alert('error');\n"
+                + "        }\n"
+                + "      }\n"
+                + "    </script>\n"
+                + "  </head>\n"
+                + "  <body onload='test()'>\n"
+                + "    <table id='t1'>\n"
+                + "      <thead id='th1' charoff='0'/>\n"
+                + "      <tbody id='tb1' charoff='0'/>\n"
+                + "      <tfoot id='tf1' charoff='0'/>\n"
+                + "    </table>\n"
+                + "    <table id='t2'>\n"
+                + "      <thead id='th2' charoff='4'/>\n"
+                + "      <tbody id='tb2' charoff='4'/>\n"
+                + "      <tfoot id='tf2' charoff='4'/>\n"
+                + "    </table>\n"
+                + "    <table id='t3'>\n"
+                + "      <thead id='th3'/>\n"
+                + "      <tbody id='tb3'/>\n"
+                + "      <tfoot id='tf3'/>\n"
+                + "    </table>\n"
+                + "  </body>\n"
+                + "</html>";
 
         checkHtmlAlert(html);
     }
@@ -387,7 +387,7 @@ public class HTMLTableSectionElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"cell1", "[object HTMLTableRowElement]", "abc", "[object Text]", ""})
+    @Alerts({"cell1", "[object HTMLTableRowElement]", "abc", "[object Text]", "null"})
     public void textContentBody() {
         final String html
                 = "<html><body>\n"
@@ -409,7 +409,7 @@ public class HTMLTableSectionElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"cell1", "[object HTMLTableRowElement]", "abc", "[object Text]", ""})
+    @Alerts({"cell1", "[object HTMLTableRowElement]", "abc", "[object Text]", "null"})
     public void textContentHeader() {
         final String html
                 = "<html><body>\n"
@@ -431,7 +431,7 @@ public class HTMLTableSectionElementTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"cell1", "[object HTMLTableRowElement]", "abc", "[object Text]", ""})
+    @Alerts({"cell1", "[object HTMLTableRowElement]", "abc", "[object Text]", "null"})
     public void textContentFooter() {
         final String html
                 = "<html><body>\n"

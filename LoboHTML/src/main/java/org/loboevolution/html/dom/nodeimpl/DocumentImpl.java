@@ -993,7 +993,7 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
 	public HTMLElement getBody() {
 		synchronized (this) {
 			if(this.body != null) return this.body;
-			final HTMLCollection collection =  new HTMLCollectionImpl(this, new HeadFilter());
+			final HTMLCollection collection =  new HTMLCollectionImpl(this, new BodyFilter());
 			if(collection.getLength() > 0) return (HTMLElement) collection.item(0);
 			else return null;
 		}

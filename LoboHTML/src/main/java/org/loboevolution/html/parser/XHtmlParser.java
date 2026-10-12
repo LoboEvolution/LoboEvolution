@@ -75,6 +75,17 @@ public class XHtmlParser {
 
 	private static final int TOKEN_TEXT = 2;
 
+	private static final Map<String, Character> XML_PREDEFINED_ENTITIES;
+
+	static {
+		XML_PREDEFINED_ENTITIES = new HashMap<>(6);
+		XML_PREDEFINED_ENTITIES.put("lt", '<');
+		XML_PREDEFINED_ENTITIES.put("gt", '>');
+		XML_PREDEFINED_ENTITIES.put("amp", '&');
+		XML_PREDEFINED_ENTITIES.put("apos", '\'');
+		XML_PREDEFINED_ENTITIES.put("quot", '"');
+	}
+
 	private final Document document;
 
 	private boolean justReadEmptyElement = false;
@@ -298,8 +309,12 @@ public class XHtmlParser {
 											document.getDoctype().getEntities().getNamedItem(name) != null) {
 										textNode = doc.createEntityReference(name);
 									} else {
-										throw new DOMException(DOMException.INVALID_CHARACTER_ERR,
-												"Undefined entity: " + name);
+										String decoded = decodeXmlNamedEntity(name);
+										if (decoded == null) {
+											throw new DOMException(DOMException.INVALID_CHARACTER_ERR,
+													"Undefined entity: " + name);
+										}
+										textNode = doc.createTextNode(decoded);
 									}
 								}
 
@@ -1377,6 +1392,22 @@ public class XHtmlParser {
 	private void ensureBodyElement(final Node parent) {
 		if (lastBodyElement == null) {
 			lastBodyElement = document.createElement("BODY");
+			// Foster-parent existing non-head/non-body child elements into <body>
+			// so that orphan content has an appropriate parent (matching Firefox behavior).
+			List<Node> toFoster = new ArrayList<>();
+			for (int i = 0; i < parent.getChildNodes().getLength(); i++) {
+				Node child = parent.getChildNodes().item(i);
+				if (child.getNodeType() == Node.ELEMENT_NODE
+						&& child != lastHeadElement
+						&& !"HEAD".equalsIgnoreCase(child.getNodeName())
+						&& !"BODY".equalsIgnoreCase(child.getNodeName())) {
+					toFoster.add(child);
+				}
+			}
+			for (Node child : toFoster) {
+				parent.removeChild(child);
+				lastBodyElement.appendChild(child);
+			}
 			parent.appendChild(lastBodyElement);
 		}
 	}
@@ -1444,6 +1475,23 @@ public class XHtmlParser {
 		}
 	}
 
+	private static String decodeXmlNamedEntity(final String name) {
+		Character c = XML_PREDEFINED_ENTITIES.get(name);
+		if (c == null) {
+			c = XML_PREDEFINED_ENTITIES.get(name.toLowerCase());
+		}
+		if (c != null) {
+			return c.toString();
+		}
+		final Entities entity = Entities.get(name);
+		c = entity == null ? null : HTMLEntities.ENTITIES.get(entity);
+		if (c == null) {
+			final Entities lower = Entities.get(name.toLowerCase());
+			c = lower == null ? null : HTMLEntities.ENTITIES.get(lower);
+		}
+		return c == null ? null : c.toString();
+	}
+
 	private static int getEntityChar(final String spec) {
 		Character c = HTMLEntities.ENTITIES.get(Entities.get(spec));
 		if (c == null) {
@@ -1473,7 +1521,7 @@ public class XHtmlParser {
 			}
 
 			if (attributeName.startsWith("xml:")) {
-				element.setAttributeNS(Document.XMLNS_NAMESPACE_URI, attributeName, attributeValue);
+				element.setAttributeNS(Document.XML_NAMESPACE_URI, attributeName, attributeValue);
 				return;
 			}
 

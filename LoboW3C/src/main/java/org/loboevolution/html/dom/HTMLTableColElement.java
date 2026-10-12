@@ -88,9 +88,9 @@ public interface HTMLTableColElement extends HTMLElement {
 	/**
 	 * <p>setSpan.</p>
 	 *
-	 * @param span a {@link java.lang.Integer} object.
+	 * @param span a {@link java.lang.String} object.
 	 */
-	void setSpan(int span);
+	void setSpan(String span);
 
 	/**
 	 * <p>getvAlign.</p>

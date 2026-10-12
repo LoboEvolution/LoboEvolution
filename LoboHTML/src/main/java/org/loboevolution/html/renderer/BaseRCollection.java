@@ -350,14 +350,17 @@ public abstract class BaseRCollection extends BaseBoundableRenderable implements
 		int width = -1;
 
 		if(element instanceof HTMLAnchorElementImpl && Strings.isNotBlank(textContent)) {
-			width = Strings.texWidth(textContent,  renderState.getFont());
+			width = Strings.texWidth(textContent, renderState.getFont());
 		}
 
 		if (Strings.isNotBlank(widthText)) {
 			width = HtmlValues.getPixelSize(widthText, renderState, doc.getDefaultView(), -1, availWidth);
 		}
 
-		if (width == -1 && Strings.isNotBlank(textContent) && (renderState.getPosition() == RenderState.POSITION_ABSOLUTE || renderState.getDisplay() == RenderState.DISPLAY_INLINE_BLOCK)) {
+		if (width == -1 && Strings.isNotBlank(textContent) &&
+				(renderState.getPosition() == RenderState.POSITION_ABSOLUTE ||
+						renderState.getPosition() == RenderState.POSITION_FIXED ||
+						renderState.getDisplay() == RenderState.DISPLAY_INLINE_BLOCK)) {
 			final HtmlInsets paddingInsets = renderState.getPaddingInsets();
 			final HtmlInsets marginInsets = renderState.getMarginInsets();
 			int right = 0;
@@ -417,6 +420,7 @@ public abstract class BaseRCollection extends BaseBoundableRenderable implements
 				heightText = "100%";
 				break;
 			case "auto":
+			case "":
 				if (renderState.getPosition() == RenderState.POSITION_ABSOLUTE) {
 					heightText = "100%";
 				}
@@ -433,23 +437,9 @@ public abstract class BaseRCollection extends BaseBoundableRenderable implements
 
 		final String textContent = element.getTextContent();
 		if (height == -1 && Strings.isNotBlank(textContent) && renderState.getPosition() == RenderState.POSITION_ABSOLUTE) {
-			height = Strings.texHeight(textContent,  renderState.getFont());
+			height = Strings.texHeight(textContent, renderState.getFont());
 		}
 
-		if (props.getMaxHeight() != null) {
-			final int maxHeight = HtmlValues.getPixelSize(props.getMaxHeight(), renderState, doc.getDefaultView(), -1, availHeight);
-			if (height == 0 || height > maxHeight) {
-				height = maxHeight;
-			}
-		}
-
-		if (props.getMinHeight() != null) {
-			if (height == -1 && "100%".equals(props.getMinHeight())) {height = element.getClientHeight();}
-			final int minHeight = HtmlValues.getPixelSize(props.getMinHeight(), renderState, doc.getDefaultView(), -1, availHeight);
-			if (height == 0 || height < minHeight) {
-				height = minHeight;
-			}
-		}
 		return height;
 	}
 	

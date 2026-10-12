@@ -38,7 +38,6 @@ import org.loboevolution.events.Event;
 import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.HTMLDocument;
-import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.filter.BodyFilter;
 import org.loboevolution.html.dom.filter.HeadFilter;
 import org.loboevolution.html.dom.nodeimpl.DocumentImpl;
@@ -77,8 +76,6 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 
 	@Setter
 	private volatile String baseURI;
-
-	private HTMLElement body;
 
 	@Getter
 	@Setter
@@ -304,35 +301,6 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 		return "UTF-8";
 	}
 
-	/** {@inheritDoc} */
-	@Override
-	public HTMLHeadElementImpl getHead() {
-		synchronized (this) {
-			final HTMLCollection collection = new HTMLCollectionImpl(this, new HeadFilter());
-			if (collection.getLength() > 0) {
-				return (HTMLHeadElementImpl) collection.item(0);
-			} else {
-				return null;
-			}
-		}
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public HTMLElement getBody() {
-		synchronized (this) {
-			if (this.body == null) {
-				final HTMLCollection collection = new HTMLCollectionImpl(this, new BodyFilter());
-				if (collection.getLength() > 0) {
-					return (HTMLElement) collection.item(0);
-				} else {
-					return null;
-				}
-			}
-			return this.body;
-		}
-	}
-
 	public final StyleSheetAggregator getStyleSheetAggregator() {
 		synchronized (this) {
 			StyleSheetAggregator ssa = this.styleSheetAggregator;
@@ -475,14 +443,6 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	public void removeNamedItem(final String name) {
 		synchronized (this) {
 			this.elementsByName.remove(name);
-		}
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setBody(final HTMLElement body) {
-		synchronized (this) {
-			this.body = body;
 		}
 	}
 

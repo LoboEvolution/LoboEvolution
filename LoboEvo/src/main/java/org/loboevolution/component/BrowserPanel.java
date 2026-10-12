@@ -26,7 +26,9 @@
 
 package org.loboevolution.component;
 
-import java.awt.BorderLayout;
+import java.awt.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.io.Serial;
 import java.util.List;
 
@@ -67,6 +69,16 @@ public class BrowserPanel extends JPanel implements IBrowserPanel {
 		this.scroll = new JScrollPane();
 		this.tabbedPane = new DnDTabbedPane(this);
 		this.tabbedPane.setComponentPopupMenu(new TabbedPanePopupMenu(this));
+		this.scroll.getViewport().addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentResized(final ComponentEvent event) {
+				final Dimension extent = scroll.getViewport().getExtentSize();
+				if (extent.width > 0 && extent.height > 0) {
+					tabbedPane.setPreferredSize(extent);
+					scroll.getViewport().setViewSize(extent);
+				}
+			}
+		});
 		final List<String> startupURLs = GeneralStore.getStartupURLs();
 
 		if (startupURLs.isEmpty()) {

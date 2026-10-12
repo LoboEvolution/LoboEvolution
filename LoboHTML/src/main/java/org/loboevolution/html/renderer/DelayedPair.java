@@ -28,6 +28,7 @@ package org.loboevolution.html.renderer;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.HTMLDocument;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.node.ModelNode;
@@ -175,14 +176,14 @@ public class DelayedPair {
 
 	private Integer helperGetPixelSize(final String spec, final RenderState rs, final int errorValue,
 			final int avail) {
-		if (spec != null) {
+		if (Strings.isNotBlank(spec)) {
 			Window window = null;
 			final ModelNode node  = getModelNode();
 			if (node instanceof HTMLDocument) {
 				final HTMLDocumentImpl doc = (HTMLDocumentImpl)node;
 				window = doc.getDefaultView();
 			}
-			return "auto".equals(spec) ? null : HtmlValues.getPixelSize(spec, rs, window, errorValue, avail);
+			return "auto".equalsIgnoreCase(spec) ? null : HtmlValues.getPixelSize(spec, rs, window, errorValue, avail);
 		} else {
 			return null;
 		}

@@ -113,6 +113,8 @@ public class RUIControl extends BaseElementRenderable {
 			final int actualAvailHeight = availHeight - paddingHeight - borderHeight - marginHeight;
 			final Integer dw = this.getDeclaredWidth(actualAvailWidth);
 			final Integer dh = this.getDeclaredHeight(actualAvailHeight);
+			final Integer minHeight = this.getDeclaredMinHeight(rs, actualAvailHeight);
+			final Integer maxHeight = this.getDeclaredMaxHeight(rs, actualAvailHeight);
 			final int declaredWidth = dw == null ? -1 : dw;
 			final int declaredHeight = dh == null ? -1 : dh;
 			this.declaredWidth = declaredWidth;
@@ -130,6 +132,15 @@ public class RUIControl extends BaseElementRenderable {
 			}
 			if (finalHeight == -1) {
 				finalHeight = size.height + insets.top + insets.bottom;
+			}
+			final int heightConstraintInsets = "border-box".equals(rs.getBoxSizing())
+					? marginInsets.top + marginInsets.bottom
+					: insets.top + insets.bottom;
+			if (minHeight != null && minHeight > 0) {
+				finalHeight = Math.max(finalHeight, minHeight + heightConstraintInsets);
+			}
+			if (maxHeight != null) {
+				finalHeight = Math.min(finalHeight, maxHeight + heightConstraintInsets);
 			}
 
 			layoutValue = new LayoutValue(finalWidth, finalHeight);

@@ -182,6 +182,7 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 					this.clearState();
 				}
 				this.forgetAllTasks();
+				this.windowScope = null;
 				this.initWindowScope(document);
 				document.setUserData(Executor.SCOPE_KEY, getWindowScope(ctx), null);
 				this.document = document;
@@ -1297,7 +1298,6 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 		js.defineJsObject(ws, "XMLHttpRequestUpload", XMLHttpRequestUploadImpl.class, jiXUpload);
 		js.defineJsObject(ws, "XMLHttpRequest", XMLHttpRequestImpl.class, jiXhttp);
 		js.defineJsObject(ws, "DOMParser", DOMParserImpl.class, jiDomp);
-		js.defineJsObject(ws, "InputEvent", InputEventImpl.class, jiInputEvent);
 		js.defineJsObject(ws, "FormData", FormDataImpl.class, jiform);
 		js.defineJsObject(ws, "LocalStorage", LocalStorage.class, jiloc);
 		js.defineJsObject(ws, "XMLSerializer", XMLSerializerImpl.class, jiXSeralizer);
@@ -1328,6 +1328,7 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 		js.defineElementClass(ws, doc, "HTMLVideoElement", "HTMLVideoElement", HTMLVideoElementImpl.class);
 		js.defineElementClass(ws, doc, "Node", "Node", NodeImpl.class);
 		js.defineElementClass(ws, doc, "Range", "Range", RangeImpl.class);
+		js.defineElementClass(ws, doc, "DOMTokenList", "DOMTokenList", DOMTokenListImpl.class);
 
 
 

@@ -78,8 +78,12 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
         final HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
         final HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
         final HTMLElementImpl parent = (HTMLElementImpl) element.getParentElement();
+        final boolean fixed = CSSValues.FIXED.isEqual(style.getPosition());
 
-        if (parent != null && parent.getStyle() != null) {
+        if (fixed) {
+            availHeight = htmlPanel.getHeight();
+            availWidth = htmlPanel.getWidth();
+        } else if (parent != null && parent.getStyle() != null) {
             final CSSStyleDeclaration currentStyle = parent.getStyle();
             availHeight = HtmlValues.getPixelSize(currentStyle.getHeight(), element.getRenderState(), window, -1);
             availWidth = HtmlValues.getPixelSize(currentStyle.getWidth(), element.getRenderState(), window, -1);
@@ -1410,6 +1414,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
         final String widthValue = style.getPropertyValue("width");
         final String position = style.getPosition();
         final boolean isAbsolute = CSSValues.ABSOLUTE.isEqual(position);
+        final boolean isFixed = CSSValues.FIXED.isEqual(position);
 
         if (isAbsolute) {
             return "0px";
@@ -1421,7 +1426,7 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
 
         // If no explicit width, check parent's width
         final HTMLElementImpl parent = (HTMLElementImpl) element.getParentElement();
-        if (parent != null && parent.getStyle() != null) {
+        if (!isFixed && parent != null && parent.getStyle() != null) {
             final String parentWidth = parent.getStyle().getPropertyValue("width");
             if (Strings.isNotBlank(parentWidth)) {
                 return HtmlValues.getPixelSize(parentWidth, element.getRenderState(), window.getWindow(), -1, availWidth) + "px";

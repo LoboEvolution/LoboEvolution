@@ -90,7 +90,10 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 				final HtmlRendererContext rcontext = this.getHtmlRendererContext();
 				final HtmlRendererConfig config = this.getHtmlRendererConfig();
 
-				final String href = getHref();
+				String href = getHref();
+				if (Strings.isBlank(href)) {
+					href = getAttribute("data-href");
+				}
 				final String cleanRel = rel.trim().toLowerCase();
 				final boolean isStyleSheet = cleanRel.equals("stylesheet");
 				final boolean isAltStyleSheet = cleanRel.equals("alternate stylesheet");
@@ -130,6 +133,7 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 								String fileName = scriptURL.getFile().substring(scriptURL.getFile().lastIndexOf('/') + 1);
 								boolean exist = Urls.exists(scriptURL);
 								sheet.setHref(exist ? fileName : null);
+								sheet.setBaseURI(scriptURI.toString());
 								sheet.setDisabled(this.disabled);
 
 								final CSSStyleSheetImpl cssStyleSheet = new CSSStyleSheetImpl(sheet);
