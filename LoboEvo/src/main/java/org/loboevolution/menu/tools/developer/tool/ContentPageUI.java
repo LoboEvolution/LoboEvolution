@@ -117,7 +117,7 @@ public class ContentPageUI extends AbstractToolsUI {
                             textArea.setText(HttpNetwork.getSource(new URI(href), null));
                             textArea.repaint();
                         } catch (final Exception ex) {
-                            log.error(ex.getMessage(), ex);
+                            log.error("LoboEvolution: Unexpected error", ex);
                         }
                     }
                 }
@@ -129,7 +129,7 @@ public class ContentPageUI extends AbstractToolsUI {
             tablePanel.add(textArea);
             return new JScrollPane(tablePanel);
         } catch (final Exception e) {
-            log.error(e.getMessage(), e);
+            log.error("LoboEvolution: Unexpected error", e);
         }
         return null;
     }

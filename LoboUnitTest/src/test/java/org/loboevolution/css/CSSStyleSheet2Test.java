@@ -25,26 +25,16 @@
  */
 package org.loboevolution.css;
 
-import org.htmlunit.cssparser.dom.DOMException;
-import org.htmlunit.cssparser.parser.CSSErrorHandler;
-import org.htmlunit.cssparser.parser.CSSException;
-import org.htmlunit.cssparser.parser.CSSOMParser;
-import org.htmlunit.cssparser.parser.CSSParseException;
-import org.htmlunit.cssparser.parser.javacc.CSS3Parser;
+import lombok.extern.slf4j.Slf4j;
 import org.htmlunit.cssparser.parser.selector.Selector;
-import org.htmlunit.cssparser.parser.selector.SelectorList;
-import org.htmlunit.cssparser.parser.selector.SelectorListImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.loboevolution.annotation.AlertsExtension;
 import org.loboevolution.driver.LoboUnitTest;
-import org.loboevolution.html.dom.HTMLDocument;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.style.CSSUtilities;
 import org.loboevolution.html.style.StyleSheetAggregator;
-
-import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -52,6 +42,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * Unit tests for {@link CSSStyleSheet}.
  */
 @ExtendWith(AlertsExtension.class)
+@Slf4j
 public class CSSStyleSheet2Test extends LoboUnitTest {
 
     @Test
@@ -184,7 +175,7 @@ public class CSSStyleSheet2Test extends LoboUnitTest {
         try {
             return CSSUtilities.getSelectorList(rule).get(0);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("LoboEvolution: Unexpected error", e);
         }
 
         return null;

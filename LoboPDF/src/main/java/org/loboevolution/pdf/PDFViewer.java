@@ -273,7 +273,7 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
             try {
                 SwingUtilities.invokeAndWait(() -> setVisible(true));
             } catch (final InvocationTargetException e) {
-                log.error(e.getMessage(), e);
+                log.error("LoboEvolution: Unexpected error", e);
             } catch (final InterruptedException ie) {
                 Thread.currentThread().interrupt();
             }
@@ -367,7 +367,7 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
             final ByteBuffer byteBuffer = BytesUtilities.readStream(inputStream);
             openPDFByteBuffer(byteBuffer, url.toString(), url.getFile());
         } catch (final Exception e) {
-            log.error(e.getMessage(), e);
+            log.error("LoboEvolution: Unexpected error", e);
         }
     }
 
@@ -463,7 +463,7 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
             try {
                 openFile(new File(name));
             } catch (final IOException ex) {
-                log.error(ex.getMessage(), ex);
+                log.error("LoboEvolution: Unexpected error", ex);
             }
         }
     }
@@ -482,7 +482,7 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
             try {
                 openFile(new File(name));
             } catch (final IOException ex) {
-                log.error(ex.getMessage(), ex);
+                log.error("LoboEvolution: Unexpected error", ex);
             }
         }
     }
@@ -621,7 +621,7 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
         try {
             outline = curFile.getOutline();
         } catch (final IOException e) {
-            log.info(e.getMessage());
+            log.error("LoboEvolution: Unexpected error", e);
         }
         if (outline != null && olf == null) {
             if (outline.getChildCount() > 0) {
@@ -747,7 +747,7 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
                     }
                 }
             } catch (final IOException eio) {
-                log.error(eio.getMessage(), eio);
+                log.error("LoboEvolution: Unexpected error", eio);
             }
         }
     }

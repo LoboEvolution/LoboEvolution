@@ -110,7 +110,7 @@ public class DownloadTask extends SwingWorker<Void, Void> {
         } catch (final Exception ex) {
             JOptionPane.showMessageDialog(action, "Error downloading file: " + ex.getMessage(),
                     "Error", JOptionPane.ERROR_MESSAGE);
-            log.error(ex.getMessage(), ex);
+            log.error("LoboEvolution: Unexpected error", ex);
             setProgress(0);
             cancel(true);
         }

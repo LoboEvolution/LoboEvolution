@@ -65,7 +65,7 @@ public class WebStore {
 				}
 			}
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 		return name;
 	}
@@ -89,7 +89,7 @@ public class WebStore {
 				}
 			}
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 		return map;
 	}
@@ -111,7 +111,7 @@ public class WebStore {
 			pstmt.setInt(4, tabIndex);
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 	}
 	
@@ -130,7 +130,7 @@ public class WebStore {
 			pstmt.setInt(3, index);
 			pstmt.executeUpdate();
 		} catch (final Exception err) {
-			log.error(err.getMessage(), err);
+			log.error("LoboEvolution: Unexpected error", err);
 		}
 	}
 	
@@ -147,7 +147,7 @@ public class WebStore {
 			pstmt.setInt(2, index);
 			pstmt.executeUpdate();
 		} catch (final Exception err) {
-			log.error(err.getMessage(), err);
+			log.error("LoboEvolution: Unexpected error", err);
 		}
 	}
 	
@@ -160,7 +160,7 @@ public class WebStore {
 			pstmt.setInt(1, 1);
 			pstmt.executeUpdate();
 		} catch (final Exception err) {
-			log.error(err.getMessage(), err);
+			log.error("LoboEvolution: Unexpected error", err);
 		}
 	}
 	
@@ -181,7 +181,7 @@ public class WebStore {
 				}
 			}
 		} catch (final Exception err) {
-			log.error(err.getMessage(), err);
+			log.error("LoboEvolution: Unexpected error", err);
 		}
 		return check;
 	}

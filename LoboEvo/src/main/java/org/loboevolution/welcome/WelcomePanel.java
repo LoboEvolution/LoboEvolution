@@ -89,7 +89,7 @@ public class WelcomePanel extends JPanel implements IWelcomePanel {
                 img = resize(null, is, (int) getSize().getWidth(), (int) getSize().getHeight());
                 g.drawImage(img, 0, 0, null);
             } catch (final IOException e) {
-                log.error(e.getMessage(), e);
+                log.error("LoboEvolution: Unexpected error", e);
             }
             super.paintComponent(g);
         } else {
@@ -140,7 +140,7 @@ public class WelcomePanel extends JPanel implements IWelcomePanel {
             return newResizedImage;
 
         } catch (final IOException e) {
-            log.error(e.getMessage(), e);
+            log.error("LoboEvolution: Unexpected error", e);
         }
         return null;
     }

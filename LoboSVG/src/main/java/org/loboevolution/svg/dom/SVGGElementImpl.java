@@ -114,7 +114,7 @@ public class SVGGElementImpl extends SVGGraphic implements SVGGElement {
 					try {
 						imageTransform.preConcatenate(screenCTM.createInverse());
 					} catch (NoninvertibleTransformException e) {
-						log.info(e.getMessage());
+						log.error("LoboEvolution: Unexpected error", e);
 					}
 					graphics.drawImage(image, imageTransform, null);
 					graphics.setComposite(oldComposite);

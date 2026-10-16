@@ -310,7 +310,7 @@ public class ShowPasswordWindow extends JFrame {
 			}
 
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 
 		panel_3.setPreferredSize(new Dimension(0, 1000));

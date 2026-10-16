@@ -26,6 +26,7 @@
 package org.loboevolution.pdfview;
 
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.pdfview.font.PDFFont;
 import org.loboevolution.pdfview.font.PDFGlyph;
 
@@ -39,6 +40,7 @@ import java.util.List;
  * a class encapsulating the text state
  * Author Mike Wessler
  */
+@Slf4j
 public class PDFTextFormat implements Cloneable {
     /**
      * current matrix transform
@@ -317,8 +319,8 @@ public class PDFTextFormat implements Cloneable {
         final AffineTransform at = new AffineTransform();
         final List<PDFGlyph> l = this.font.getGlyphs(text);
         if (PDFDebugger.SHOW_TEXT_ANCHOR) {
-            if (PDFDebugger.DEBUG_TEXT) {
-                PDFDebugger.debug("POINT count: " + l.size());
+            if (log.isInfoEnabled()) {
+                PDFDebugger.debugging("POINT count: " + l.size());
             }
         }
         for (final PDFGlyph glyph : l) {
@@ -333,12 +335,12 @@ public class PDFTextFormat implements Cloneable {
                 path.lineTo(0, 0);
                 path.closePath();
                 path = (GeneralPath) path.createTransformedShape(at);
-                if (PDFDebugger.DEBUG_TEXT) {
-                    PDFDebugger.debug("BOX " + path.getBounds());
+                if (log.isInfoEnabled()) {
+                    PDFDebugger.debugging("BOX " + path.getBounds());
                 }
                 final PDFCmd lastColor = cmds.findLastCommand(PDFFillPaintCmd.class);
-                if (PDFDebugger.DEBUG_TEXT) {
-                    PDFDebugger.debug("BOX " + lastColor);
+                if (log.isInfoEnabled()) {
+                    PDFDebugger.debugging("BOX " + lastColor);
                 }
                 cmds.addFillPaint(PDFPaint.getColorPaint(new Color(160, 160, 255)));
                 cmds.addPath(path, PDFShapeCmd.FILL, autoAdjustStroke);
@@ -346,10 +348,8 @@ public class PDFTextFormat implements Cloneable {
                     cmds.addCommand(lastColor);
                 }
             }
-            Point2D advance = glyph.getAdvance();
-            if (!PDFDebugger.DISABLE_TEXT) {
-                advance = glyph.addCommands(cmds, at, this.tm);
-            }
+            Point2D advance;
+            advance = glyph.addCommands(cmds, at, this.tm);
             double advanceX = (advance.getX() * this.fontSize) + this.tc;
             if (glyph.getChar() == ' ') {
                 advanceX += this.tw;
@@ -366,8 +366,8 @@ public class PDFTextFormat implements Cloneable {
                 path.lineTo(0, 0);
                 path.closePath();
                 path = (GeneralPath) path.createTransformedShape(at2);
-                if (PDFDebugger.DEBUG_TEXT) {
-                    PDFDebugger.debug("POINT " + advance);
+                if (log.isInfoEnabled()) {
+                    PDFDebugger.debugging("POINT " + advance);
                 }
                 final PDFCmd lastColor = cmds.findLastCommand(PDFFillPaintCmd.class);
                 cmds.addFillPaint(PDFPaint.getColorPaint(new Color(255, 0, 0)));

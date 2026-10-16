@@ -153,7 +153,7 @@ public class NavigationToolbar extends JToolBar {
                 try {
                     pagenum = Integer.parseInt(currentPageBox.getText()) - 1;
                 } catch (final NumberFormatException e) {
-                    log.info(e.getMessage());
+                    log.error("LoboEvolution: Unexpected error", e);
                 }
                 if (pagenum >= curFile.getNumPages()) {
                     pagenum = curFile.getNumPages() - 1;

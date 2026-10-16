@@ -71,7 +71,7 @@ public class CookieManager {
              final PreparedStatement pstmt = conn.prepareStatement(DELETE_COOKIES)) {
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 	}
 
@@ -89,7 +89,7 @@ public class CookieManager {
 			final String domain = url.getHost().replaceFirst("^www.*?\\.", "");
 			cookies = getCookies(domain, "/");
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 		return cookies;
 	}
@@ -116,7 +116,7 @@ public class CookieManager {
 					}
 				}
 			} catch (final SQLException e) {
-				log.error(e.getMessage(), e);
+				log.error("LoboEvolution: Unexpected error", e);
 				return null;
 			}
 		}
@@ -144,7 +144,7 @@ public class CookieManager {
 				}
 			}
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 	}
 
@@ -215,7 +215,7 @@ public class CookieManager {
 			try {
 				expiresDate = new Date(System.currentTimeMillis() + Long.parseLong(maxAge) * 1000);
 			} catch (final NumberFormatException e) {
-				log.error(e.getMessage(), e);
+				log.error("LoboEvolution: Unexpected error", e);
 			}
 		} else if (expires != null) {
 			final DateUtil du = new DateUtil();
@@ -255,7 +255,7 @@ public class CookieManager {
 			pstmt.setInt(8, httponly ? 1 : 0);
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 	}
 

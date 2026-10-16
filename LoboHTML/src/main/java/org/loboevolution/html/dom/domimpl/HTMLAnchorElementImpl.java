@@ -26,6 +26,7 @@
 
 package org.loboevolution.html.dom.domimpl;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.Strings;
 import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.dom.HTMLAnchorElement;
@@ -42,6 +43,7 @@ import java.util.List;
 /**
  * <p>HTMLAnchorElementImpl class.</p>
  */
+@Slf4j
 public class HTMLAnchorElementImpl extends HTMLElementImpl implements HTMLAnchorElement {
 
     /**
@@ -335,13 +337,11 @@ public class HTMLAnchorElementImpl extends HTMLElementImpl implements HTMLAnchor
             if (Strings.isNotBlank(href)) {
                 try {
                     final URL url = getFullURL(href);
-                    if (url == null) {
-                        this.warn("Unable to resolve URI: [" + href + "].");
-                    } else {
+                    if (url != null) {
                         rcontext.linkClicked(url, false);
                     }
                 } catch (Exception mfu) {
-                    this.warn("Error URI: [" + href + "].", mfu);
+                    log.error("LoboEvolution Error URI: [{}].", href, mfu);
                 }
             }
         }
@@ -362,7 +362,7 @@ public class HTMLAnchorElementImpl extends HTMLElementImpl implements HTMLAnchor
                     final URL url = getFullURL(href);
                     return url == null ? null : url.toExternalForm();
                 } catch (Exception mfu) {
-                    this.warn("Error URI: [" + href + "].", mfu);
+                    log.error("LoboEvolution Error URI: [{}].", href, mfu);
                 }
             }
         }

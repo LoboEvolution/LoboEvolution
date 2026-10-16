@@ -377,7 +377,7 @@ public class HTMLObjectElementImpl extends HTMLElementImpl implements HTMLObject
 				}
 			}
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 			renderFallbackContent(objectControl);
 		}
 	}

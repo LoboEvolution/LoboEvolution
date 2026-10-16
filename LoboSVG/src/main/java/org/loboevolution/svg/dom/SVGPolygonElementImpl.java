@@ -108,7 +108,7 @@ public class SVGPolygonElementImpl extends SVGGraphic implements SVGPolygonEleme
 				final SVGPoint point = new SVGPointImpl(x, y);
 				points.appendItem(point);
 			} catch (final NoSuchElementException e) {
-				log.info(e.getMessage());
+				log.error("LoboEvolution: Unexpected error", e);
 			}
 		}
 		return points;

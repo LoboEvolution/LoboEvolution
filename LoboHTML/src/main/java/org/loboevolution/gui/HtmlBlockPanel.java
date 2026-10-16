@@ -238,7 +238,8 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 				}
 			}
 		} catch (final Throwable thrown) {
-			log.error("Unexpected error in layout engine. Document is {} ", getRootNode(), thrown);
+			NodeImpl root = getRootNode();
+			log.error("LoboEvolution Unexpected error in layout engine. Document is {} ", root, thrown);
 		}
 	}
 

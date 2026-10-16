@@ -83,7 +83,7 @@ public abstract class PDFCMap {
 
         if (!cache.containsKey(mapName)) {
             //throw new IOException("Unknown CMap: " + mapName);
-            PDFDebugger.debug("Unknown CMap: '" + mapName + "' procced with 'Identity-H'");
+            PDFDebugger.debugging("Unknown CMap: '" + mapName + "' procced with 'Identity-H'");
             return cache.get("Identity-H");
         }
 

@@ -56,7 +56,7 @@ public class BookmarksStore implements QueryStore, Serializable {
              final PreparedStatement pstmt = conn.prepareStatement(DELETE_BOOKMARKS)) {
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 	}
 	
@@ -71,7 +71,7 @@ public class BookmarksStore implements QueryStore, Serializable {
 			pstmt.setString(1, url.trim());
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 	}
 
@@ -102,7 +102,7 @@ public class BookmarksStore implements QueryStore, Serializable {
 						values.add(info);
 					}
 				} catch (final Exception e) {
-					log.error(e.getMessage(), e);
+					log.error("LoboEvolution: Unexpected error", e);
 				}
 			}
 			return values;
@@ -123,7 +123,7 @@ public class BookmarksStore implements QueryStore, Serializable {
 			pstmt.setString(4, info.getTagsText());
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 	}
 

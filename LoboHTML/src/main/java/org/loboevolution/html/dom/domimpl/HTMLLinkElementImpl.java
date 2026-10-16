@@ -25,6 +25,7 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.Strings;
 import org.loboevolution.common.Urls;
 import org.loboevolution.config.HtmlRendererConfig;
@@ -55,6 +56,7 @@ import java.util.List;
 /**
  * <p>HTMLLinkElementImpl class.</p>
  */
+@Slf4j
 public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElement {
 
 	private boolean disabled;
@@ -85,18 +87,18 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 		if (rel != null) {
 			final HTMLDocumentImpl doc = (HTMLDocumentImpl) getOwnerDocument();
 			final String baseURI = doc.getBaseURI();
+			String href = getHref();
 
 			try {
-				final HtmlRendererContext rcontext = this.getHtmlRendererContext();
-				final HtmlRendererConfig config = this.getHtmlRendererConfig();
 
-				String href = getHref();
 				if (Strings.isBlank(href)) {
 					href = getAttribute("data-href");
 				}
 				final String cleanRel = rel.trim().toLowerCase();
 				final boolean isStyleSheet = cleanRel.equals("stylesheet");
 				final boolean isAltStyleSheet = cleanRel.equals("alternate stylesheet");
+				final HtmlRendererContext rcontext = this.getHtmlRendererContext();
+				final HtmlRendererConfig config = this.getHtmlRendererConfig();
 				final String currentUrl = rcontext.getCurrentURL();
 
 				if ((isStyleSheet || isAltStyleSheet)) {
@@ -156,9 +158,9 @@ public class HTMLLinkElementImpl extends HTMLElementImpl implements HTMLLinkElem
 				}
 
 			} catch (Exception ex) {
-				this.warn("Will not parse CSS. URI=[" + getHref() + "] with BaseURI=[" + baseURI + "] does not appear to be a valid URI.", ex);
+                log.error("LoboEvolution Will not parse CSS. URI=[{}] with BaseURI=[{}] does not appear to be a valid URI.", href, baseURI, ex);
 			} catch (final Throwable err) {
-				this.warn("Unable to parse CSS. URI=[" + getHref() + "].", err);
+                log.error("LoboEvolution Unable to parse CSS. URI=[{}].", href, err);
 			}
 		}
 	}

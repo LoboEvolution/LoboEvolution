@@ -173,7 +173,7 @@ public class Type3Font extends PDFFont {
             return new PDFGlyph(src, name, page, advance);
         } catch (final IOException ioe) {
             // help!
-            PDFDebugger.debug("IOException in Type3 font: " + ioe);
+            PDFDebugger.debugging("IOException in Type3 font: " + ioe);
             BaseWatchable.getErrorHandler().publishException(ioe);
             return null;
         }

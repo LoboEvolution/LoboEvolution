@@ -69,7 +69,7 @@ public class LoboWebDriver {
             doc = new HTMLDocumentImpl(ucontext, rendererContext, config, wis, url);
             doc.load();
         } catch (final Exception ex) {
-            log.error(ex.getMessage(), ex);
+            log.error("LoboEvolution: Unexpected error", ex);
         }
         return doc;
     }
@@ -94,7 +94,7 @@ public class LoboWebDriver {
             doc = new HTMLDocumentImpl(ucontext, rendererContext, config, wis, local);
             doc.load();
         } catch (final Exception ex) {
-            log.error(ex.getMessage(), ex);
+            log.error("LoboEvolution: Unexpected error", ex);
         }
         return doc;
     }

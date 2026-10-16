@@ -131,7 +131,7 @@ public class LoboUnitTest extends LoboWebDriver {
         } catch (final AssertionError e) {
             throw new AssertionError("Result expected: " + alerts + " Result: " + window.getMsg().toString());
         } catch (final Exception ex) {
-            log.error(ex.getMessage(), ex);
+            log.error("LoboEvolution: Unexpected error", ex);
         }
     }
 
@@ -154,7 +154,7 @@ public class LoboUnitTest extends LoboWebDriver {
         } catch (AssertionError e) {
             throw new AssertionError("Result expected: " +  alerts + " Result: " + window.getMsg());
         } catch (Exception ex) {
-            log.error(ex.getMessage(), ex);
+            log.error("LoboEvolution: Unexpected error", ex);
         }
     }
 

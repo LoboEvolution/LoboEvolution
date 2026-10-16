@@ -28,6 +28,7 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
+import lombok.extern.slf4j.Slf4j;
 import org.htmlunit.cssparser.parser.CSSOMParser;
 import org.htmlunit.cssparser.parser.InputSource;
 import org.htmlunit.cssparser.parser.javacc.CSS3Parser;
@@ -42,6 +43,7 @@ import org.loboevolution.html.dom.UserDataHandler;
 /**
  * <p>HTMLStyleElementImpl class.</p>
  */
+@Slf4j
 public class HTMLStyleElementImpl extends HTMLElementImpl implements HTMLStyleElement {
 
 	private boolean disabled;
@@ -152,7 +154,7 @@ public class HTMLStyleElementImpl extends HTMLElementImpl implements HTMLStyleEl
 
 				this.sheet = cssStyleSheet;
 			} catch (final Throwable err) {
-				this.warn("Unable to parse style sheet", err);
+				log.warn("Unable to parse style sheet", err);
 			}
 		}
 	}

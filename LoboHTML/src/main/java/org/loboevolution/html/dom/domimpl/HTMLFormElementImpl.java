@@ -25,6 +25,7 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.Nodes;
 import org.loboevolution.common.Strings;
 import org.loboevolution.gui.HtmlRendererContext;
@@ -54,6 +55,7 @@ import java.util.List;
 /**
  * <p>HTMLFormElementImpl class.</p>
  */
+@Slf4j
 public class HTMLFormElementImpl extends HTMLElementImpl implements HTMLFormElement {
 
 	private HTMLFormControlsCollection elements;
@@ -329,7 +331,7 @@ public class HTMLFormElementImpl extends HTMLElementImpl implements HTMLFormElem
 				final URL url = getFullURL(href);
 				context.submitForm(getMethod(), url, getTarget(), getEnctype(), fia);
 			} catch (Exception mfu) {
-				this.warn("submit()", mfu);
+				log.warn("submit()", mfu);
 			}
 		}
 	}

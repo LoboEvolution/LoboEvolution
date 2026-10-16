@@ -133,7 +133,7 @@ public class PreviewFrame extends JFrame {
             ImageIO.write(buffered, "png", new File(sFile.getAbsolutePath()));
 
         } catch (final Exception e) {
-            log.error(e.getMessage(), e);
+            log.error("LoboEvolution: Unexpected error", e);
         } finally {
             setVisible(false);
         }

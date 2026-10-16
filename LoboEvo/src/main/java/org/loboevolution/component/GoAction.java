@@ -134,7 +134,7 @@ public class GoAction extends AbstractAction {
 					break;
 			}
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 			if (!addressBarText.matches("^\\w+?://.*")) {
 				final SearchEngineStore searchEngine = new ToolsStore().getSelectedSearchEngine();
 				addressBarText = searchEngine.getBaseUrl() + addressBarText;

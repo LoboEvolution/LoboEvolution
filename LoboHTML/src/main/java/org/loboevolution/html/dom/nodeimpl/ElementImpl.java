@@ -169,7 +169,7 @@ public class ElementImpl extends NodeInternal implements Element {
 		try {
 			map.removeNamedItem(name);
 		} catch (final DOMException ex) {
-			log.error(ex.getMessage());
+			log.error("LoboEvolution: Unexpected error", ex);
 		}
 	}
 
@@ -593,8 +593,10 @@ public class ElementImpl extends NodeInternal implements Element {
 			final Node textNode = document.createTextNode(newText);
 			appendChild(textNode);
 		} else {
-			this.warn("setInnerText(): Element " + this + " does not belong to a document.");
-		}
+            if (log.isWarnEnabled()) {
+                log.warn("LoboEvolution InnerText(): Element {} does not belong to a document.", this);
+            }
+        }
 	}
 
 	/**
@@ -628,11 +630,9 @@ public class ElementImpl extends NodeInternal implements Element {
 			this.nodeList.clear();
 			try (final Reader reader = new StringReader(newHtml)) {
 				parser.parse(reader, this);
-			} catch (final Exception thrown) {
-				this.warn("setInnerHTML(): Error setting inner HTML.", thrown);
+			} catch (final Exception ex) {
+				log.error("LoboEvolution setInnerHTML(): Error setting inner HTML.", ex);
 			}
-		} else {
-			this.warn("setInnerHTML(): Element " + this + " does not belong to a document.");
 		}
 	}
 
@@ -749,11 +749,9 @@ public class ElementImpl extends NodeInternal implements Element {
 					final XHtmlParser parser = new XHtmlParser(document.getUserAgentContext(), document, false);
 					parser.parse(reader, this.parentNode);
 				} catch (final Exception thrown) {
-					this.warn("setOuterHTML(): Error setting inner HTML.", thrown);
+					log.warn("setOuterHTML(): Error setting inner HTML.", thrown);
 				}
 			}
-		} else {
-			this.warn("setOuterHTML(): Element " + this + " does not belong to a document.");
 		}
 	}
 

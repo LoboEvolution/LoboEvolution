@@ -199,7 +199,7 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 						} catch (final SocketTimeoutException e) {
 							info.setHttpResponse(400);
 						} catch (final Exception e) {
-							log.error(e.getMessage(), e);
+							log.error("LoboEvolution: Unexpected error", e);
 						} finally {
 							final Instant finish = Instant.now();
 							final long timeElapsed = Duration.between(start, finish).toMillis();

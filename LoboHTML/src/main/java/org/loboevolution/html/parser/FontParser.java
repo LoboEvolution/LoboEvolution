@@ -39,13 +39,13 @@ import java.util.stream.Collectors;
  */
 public class FontParser {
 
-    public final static int FONT_STYLE_INDEX = 0;    // font-style (optional)
-    public final static int FONT_VARIANT_INDEX = 1;  // font-variant (optional)
-    public final static int FONT_WEIGHT_INDEX = 2;   // font-weight (optional)
-    public final static int FONT_STRETCH_INDEX = 3;  // font-stretch (optional, CSS3)
-    public final static int FONT_SIZE_INDEX = 4;     // font-size (required)
-    public final static int LINE_HEIGHT_INDEX = 5;   // line-height (optional)
-    public final static int FONT_FAMILY_INDEX = 6;   // font-family (required, LAST)
+    public static final int FONT_STYLE_INDEX = 0;    // font-style (optional)
+    public static final int FONT_VARIANT_INDEX = 1;  // font-variant (optional)
+    public static final int FONT_WEIGHT_INDEX = 2;   // font-weight (optional)
+    public static final int FONT_STRETCH_INDEX = 3;  // font-stretch (optional, CSS3)
+    public static final int FONT_SIZE_INDEX = 4;     // font-size (required)
+    public static final int LINE_HEIGHT_INDEX = 5;   // line-height (optional)
+    public static final int FONT_FAMILY_INDEX = 6;   // font-family (required, LAST)
 
     public static final Map<String, String> FONT_STRETCH_VALUES;
 

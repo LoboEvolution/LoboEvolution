@@ -81,7 +81,7 @@ public class IconFactory {
 				return icon;
 			}
 		} catch (final IOException e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 			return null;
 		}
 	}

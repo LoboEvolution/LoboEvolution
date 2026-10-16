@@ -80,7 +80,7 @@ public class GoogleChromeData extends BrowserData {
 				}
 			}
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 		return listInfo;
 	}
@@ -102,7 +102,7 @@ public class GoogleChromeData extends BrowserData {
 						.build());
 			}
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 		return cookies;
 	}
@@ -120,7 +120,7 @@ public class GoogleChromeData extends BrowserData {
 			}
 
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 		return hostEntries;
 	}
@@ -173,7 +173,7 @@ public class GoogleChromeData extends BrowserData {
 				}
 			}
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 	}
 }

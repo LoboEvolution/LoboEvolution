@@ -172,13 +172,13 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 	/** {@inheritDoc} */
 	@Override
 	public void blur() {
-		this.warn("back(): Not overridden");
+		log.warn("back(): Not overridden");
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void close() {
-		this.warn("close(): Not overridden");
+		log.warn("close(): Not overridden");
 	}
 
 	/** {@inheritDoc} */
@@ -208,7 +208,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 	/** {@inheritDoc} */
 	@Override
 	public void focus() {
-		this.warn("focus(): Not overridden");
+		log.warn("focus(): Not overridden");
 	}
 
 	/** {@inheritDoc} */
@@ -263,7 +263,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 	/** {@inheritDoc} */
 	@Override
 	public String getDefaultStatus() {
-		this.warn("getDefaultStatus(): Not overridden");
+		log.warn("getDefaultStatus(): Not overridden");
 		return "";
 	}
 
@@ -300,7 +300,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 	public UserAgentContext getUserAgentContext() {
 		synchronized (this) {
 			if (this.bcontext == null) {
-				this.warn("getUserAgentContext(): UserAgentContext not provided in constructor. Creating a simple one.");
+				log.warn("getUserAgentContext(): UserAgentContext not provided in constructor. Creating a simple one.");
 				this.bcontext = new UserAgentContext(config);
 			}
 			return this.bcontext;
@@ -310,7 +310,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 	/** {@inheritDoc} */
 	@Override
 	public boolean isClosed() {
-		this.warn("isClosed(): Not overridden");
+		log.warn("isClosed(): Not overridden");
 		return false;
 	}
 
@@ -478,7 +478,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 			LinkStore.insertLinkVisited(fullURL);
 			bpanel.getScroll().getViewport().add((Component)tabbedPane);
 		} catch (final IOException e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 	}
 
@@ -499,7 +499,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 			tabbedPane.insertTab(title, null, viewer.getComponent(), title, index);
 			bpanel.getScroll().getViewport().add((Component)tabbedPane);
 		} catch (final IOException e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 	}
 
@@ -518,7 +518,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 				final URL url = new URI(document.getDocumentURI()).toURL();
 				this.navigate(url, null);
 			} catch (Exception throwable) {
-				this.warn("reload(): Malformed URL", throwable);
+				log.warn("reload(): Malformed URL", throwable);
 			}
 		}
 	}
@@ -625,7 +625,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 	/** {@inheritDoc} */
 	@Override
 	public void setDefaultStatus(final String message) {
-		this.warn("setDefaultStatus(): Not overridden.");
+		log.warn("setDefaultStatus(): Not overridden.");
 	}
 
 	/** {@inheritDoc} */
@@ -643,7 +643,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 	/** {@inheritDoc} */
 	@Override
 	public void setStatus(final String message) {
-		this.warn("setStatus(): Not overridden");
+		log.warn("setStatus(): Not overridden");
 	}
 
 	/** {@inheritDoc} */
@@ -715,7 +715,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 	/** {@inheritDoc} */
 	@Override
 	public String getStatus() {
-		this.warn("getStatus(): Not overridden");
+		log.warn("getStatus(): Not overridden");
 		return "";
 	}
 
@@ -786,7 +786,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 				urlForLoading = new URI(resolvedURL.getProtocol(), action.getHost(),
 									action.getPath() + refText, null).toURL();
 			} catch (final Exception throwable) {
-				this.warn("malformed", throwable);
+				log.warn("malformed", throwable);
 				urlForLoading = action;
 			}
 		} else {
@@ -874,7 +874,8 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 					panel.scrollToElement(ref);
 				}
 			} catch (final SocketTimeoutException e) {
-				log.error("More time elapsed {}", connection.getConnectTimeout());
+				int timeout = connection.getConnectTimeout();
+				log.error("LoboEvolution More time elapsed {}", timeout);
 			}
 		} finally {
 			this.currentConnection = null;

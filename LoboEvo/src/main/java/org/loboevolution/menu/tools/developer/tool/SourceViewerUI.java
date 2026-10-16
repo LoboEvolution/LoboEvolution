@@ -59,7 +59,7 @@ public class SourceViewerUI  extends AbstractToolsUI {
             final ToolBar toolbar = frame.getToolbar();
             add(addTextArea(HttpNetwork.getSource(new URI(toolbar.getAddressBar().getText()), null)));
         } catch (final Exception ex) {
-            log.error(ex.getMessage(), ex);
+            log.error("LoboEvolution: Unexpected error", ex);
         }
     }
 

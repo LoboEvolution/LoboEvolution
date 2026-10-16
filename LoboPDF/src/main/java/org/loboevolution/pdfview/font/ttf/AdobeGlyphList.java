@@ -109,7 +109,7 @@ public final class AdobeGlyphList {
                         }
                     }
                 } catch (final IOException e) {
-                    log.error(e.getMessage(), e);
+                    log.error("LoboEvolution: Unexpected error", e);
                 }
             }
         }, "Adobe Glyph Loader Thread");

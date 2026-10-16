@@ -282,7 +282,7 @@ public class PDFPage {
             if (!renderer.isFinished()) {
                 renderer.go(wait);
                 if (renderer.getStatus() == Watchable.ERROR) {
-                    PDFDebugger.debug("Error during reading image!");
+                    PDFDebugger.debugging("Error during reading image!");
                 }
             }
         }
@@ -529,7 +529,7 @@ public class PDFPage {
      * observers will be notified.
      */
     public synchronized void finish() {
-        PDFDebugger.debug("Page finished!", 1000);
+        PDFDebugger.debugging("Page finished!");
         this.finished = true;
         notifyAll();
         // notify any outstanding images

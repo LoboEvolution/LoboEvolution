@@ -52,7 +52,7 @@ public class LookAndFeelsStore implements QueryStore{
 		try {
 			conn = DriverManager.getConnection(dbPath);
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 		return conn;
 	}
@@ -65,7 +65,7 @@ public class LookAndFeelsStore implements QueryStore{
              final PreparedStatement pstmt = conn.prepareStatement(this.DELETE_LAF)) {
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 	}
 
@@ -107,7 +107,7 @@ public class LookAndFeelsStore implements QueryStore{
 			pstmt.setInt(25, laf.isWhiteBlack() ? 1 : 0);
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 	}
 }

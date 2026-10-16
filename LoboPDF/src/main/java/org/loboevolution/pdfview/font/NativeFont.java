@@ -281,7 +281,7 @@ public class NativeFont extends OutlineFont {
             try {
                 nameTable = (NameTable) ttf.getTable("name");
             } catch (final Exception ex) {
-                PDFDebugger.debug("Error reading name table for font " + getBaseFont() + ".  Repairing!");
+                PDFDebugger.debugging("Error reading name table for font " + getBaseFont() + ".  Repairing!");
             }
 
             final boolean nameFixed = fixNameTable(ttf, nameTable);
@@ -297,7 +297,7 @@ public class NativeFont extends OutlineFont {
                 fontdata = ttf.writeFont();
             }
         } catch (final Exception ex) {
-            PDFDebugger.debug("Error parsing font : " + getBaseFont());
+            PDFDebugger.debugging("Error parsing font : " + getBaseFont());
             BaseWatchable.getErrorHandler().publishException(ex);
         }
 

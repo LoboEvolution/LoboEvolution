@@ -99,7 +99,7 @@ public final class CSSUtilities {
 					final MediaQueryList media = window.matchMedia(mediaValues);
 					return media.isMatches();
 				} catch (final Exception ex) {
-					log.error(ex.getMessage(), ex);
+					log.error("LoboEvolution: Unexpected error", ex);
 				}
 			}
 		}

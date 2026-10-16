@@ -62,7 +62,7 @@ public class NavigationStore implements QueryStore {
 			pstmt.setInt(3, index);
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 	}
 
@@ -74,7 +74,7 @@ public class NavigationStore implements QueryStore {
              final PreparedStatement pstmt = conn.prepareStatement(DELETE_HOST)) {
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 	}
 	
@@ -89,7 +89,7 @@ public class NavigationStore implements QueryStore {
 			pstmt.setString(1, host);
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 	}
 	
@@ -114,7 +114,7 @@ public class NavigationStore implements QueryStore {
 				}
 			}
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 		return recentHostEntries;
 	}

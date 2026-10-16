@@ -66,7 +66,7 @@ public class InputStore {
 				}
 			}
         } catch (final Exception e) {
-        	log.error(e.getMessage(), e);
+        	log.error("LoboEvolution: Unexpected error", e);
         }
         return autoList;
     }
@@ -92,7 +92,7 @@ public class InputStore {
 				}
 			}
         } catch (final Exception e) {
-        	log.error(e.getMessage(), e);
+        	log.error("LoboEvolution: Unexpected error", e);
         }
         return autoList;
     }
@@ -114,7 +114,7 @@ public class InputStore {
 				pstmt.setString(3, baseUrl);
 				pstmt.executeUpdate();
 			} catch (final Exception e) {
-				log.error(e.getMessage(), e);
+				log.error("LoboEvolution: Unexpected error", e);
 			}
 		}
 	}
@@ -127,7 +127,7 @@ public class InputStore {
              final PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.DELETE_INPUT)) {
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 	}
 	
@@ -144,7 +144,7 @@ public class InputStore {
 			pstmt.setString(2, baseUrl);
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 	}
 

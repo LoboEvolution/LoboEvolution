@@ -97,7 +97,7 @@ public class SaveFileAction extends AbstractAction {
 				baos.writeTo(ops);
 				baos.flush();
 			} catch (final Exception e1) {
-				log.error(e1.getMessage(), e1);
+				log.error("LoboEvolution: Unexpected error", e1);
 			}
 		}
 	}

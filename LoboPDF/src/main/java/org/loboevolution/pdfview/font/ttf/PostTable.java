@@ -185,7 +185,7 @@ public class PostTable extends TrueTypeTable {
                 break;
             default:
                 this.nameMap = new PostMap();
-                PDFDebugger.debug("Unknown post map type: " +
+                PDFDebugger.debugging("Unknown post map type: " +
                         Integer.toHexString(this.format));
                 break;
         }

@@ -166,17 +166,17 @@ public class HttpNetwork {
 						try {
 							return ImageIO.read(in);
 						} catch (final IOException e) {
-							log.error(e.getMessage(), e);
+							log.error("LoboEvolution: Unexpected error", e);
 						}
 					} else {
 						return ImageIO.read(in);
 					}
 				} catch (final FileNotFoundException e) {
-					log.error(e.getMessage(), e);
+					log.error("LoboEvolution: Unexpected error", e);
 				}
 			}
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		} finally {
 			final Instant finish = Instant.now();
 			final long timeElapsed = Duration.between(start, finish).toMillis();
@@ -260,7 +260,7 @@ public class HttpNetwork {
 		try {
 			return getSource(scriptURI, integrity);
 		} catch (final Exception err) {
-			log.error(err.getMessage(), err);
+			log.error("LoboEvolution: Unexpected error", err);
 			return "";
 		}
 	}

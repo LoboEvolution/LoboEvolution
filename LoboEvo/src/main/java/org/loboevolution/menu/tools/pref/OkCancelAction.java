@@ -64,7 +64,7 @@ public class OkCancelAction extends AbstractAction {
 			GuiInit.initLookAndFeel();
 			GuiInit.createAndShowGui();
 		} catch (final Exception ex) {
-			log.error(ex.getMessage(), ex);
+			log.error("LoboEvolution: Unexpected error", ex);
 		}
 
 	}

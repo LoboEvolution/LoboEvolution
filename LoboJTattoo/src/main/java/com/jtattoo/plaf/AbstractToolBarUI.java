@@ -89,7 +89,7 @@ public abstract class AbstractToolBarUI extends BasicToolBarUI {
 		}
 	}
 
-	private final static class NullBorder implements Border, UIResource {
+	private static final class NullBorder implements Border, UIResource {
 
 		private static final Insets INSETS = new Insets(0, 0, 0, 0);
 

@@ -66,7 +66,7 @@ public class NavigatorFrame {
         try {
             return createPanel(browserPanel, connection, uri);
         } catch (final Exception e) {
-            log.error(e.getMessage(), e);
+            log.error("Unexpected error", e);
             return getErrorComponent(browserPanel, connection, uri, e);
         }
     }
@@ -88,7 +88,7 @@ public class NavigatorFrame {
             connection.connect();
             return createPanel(browserPanel, connection, uri);
         } catch (final Exception e) {
-            log.error(e.getMessage(), e);
+            log.error("Unexpected error", e);
             return getErrorComponent(browserPanel, connection, uri, e);
         }
     }
@@ -108,7 +108,8 @@ public class NavigatorFrame {
             final Document document = builder.parse(is);
             panel.setDocument(document, rendererContext);
         } catch (final SocketTimeoutException e) {
-            log.error("More time elapsed {}", connection.getConnectTimeout());
+            int timeout = connection.getConnectTimeout();
+            log.error("LoboEvolution More time elapsed {}", timeout);
         }
         return panel;
     }

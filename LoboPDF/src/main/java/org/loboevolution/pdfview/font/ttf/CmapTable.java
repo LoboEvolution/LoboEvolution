@@ -194,10 +194,10 @@ public class CmapTable extends TrueTypeTable {
                     addCMap(platformID, platformSpecificID, cMap);
                 }
             } catch (final Exception ex) {
-                PDFDebugger.debug("Error reading map.  PlatformID=" +
+                PDFDebugger.debugging("Error reading map.  PlatformID=" +
                         platformID + ", PlatformSpecificID=" +
                         platformSpecificID);
-                PDFDebugger.debug("Reason: " + ex);
+                PDFDebugger.debugging("Reason: " + ex);
             }
         }
     }

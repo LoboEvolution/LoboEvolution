@@ -62,7 +62,7 @@ public class HiFiIcons extends BaseIcons {
 	// ----------------------------------------------------------------------------------------------------------------------
 // inner classes
 //----------------------------------------------------------------------------------------------------------------------
-	private final static class CheckBoxIcon implements Icon, UIResource, Serializable {
+	private static final class CheckBoxIcon implements Icon, UIResource, Serializable {
 
 		/**
 		 *

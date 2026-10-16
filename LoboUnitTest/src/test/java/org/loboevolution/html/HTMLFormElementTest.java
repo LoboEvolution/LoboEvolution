@@ -780,18 +780,6 @@ public class HTMLFormElementTest extends LoboUnitTest {
                 + "<form name='formPage1' action='foo'>\n"
                 + "</form>\n"
                 + "</body></html>";
-        final String secondContent = "<html><head>\n"
-                + "<script>\n"
-                + "function test() {\n"
-                + "  alert(window.name);\n"
-                + "  alert('page 2: ' + document.forms[0].name);\n"
-                + "}\n"
-                + "</script>\n"
-                + "</head><body onload='test()'>\n"
-                + "<form name='formPage2' action='foo'>\n"
-                + "</form>\n"
-                + "</body></html>";
-
         checkHtmlAlert(html);
     }
 

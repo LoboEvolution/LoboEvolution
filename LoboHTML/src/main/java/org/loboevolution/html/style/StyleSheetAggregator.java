@@ -1325,7 +1325,7 @@ public class StyleSheetAggregator {
                         index(index.addMedia(mediaList), sheet.getCssRules());
                     }
                 } catch (final Exception ex) {
-                    log.error(ex.getMessage(), ex);
+                    log.error("LoboEvolution: Unexpected error", ex);
                 }
             }
         }

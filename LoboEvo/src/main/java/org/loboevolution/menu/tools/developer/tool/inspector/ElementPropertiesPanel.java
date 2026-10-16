@@ -76,7 +76,7 @@ public class ElementPropertiesPanel extends JPanel {
                 model.getColumn(0).sizeWidthToFit();
             }
         } catch (final Exception ex) {
-            log.error(ex.getMessage(), ex);
+            log.error("LoboEvolution: Unexpected error", ex);
         }
     }
 

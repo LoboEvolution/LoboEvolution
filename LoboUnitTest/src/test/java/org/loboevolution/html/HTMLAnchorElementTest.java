@@ -32,7 +32,6 @@ import org.loboevolution.annotation.AlertsExtension;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLAnchorElement;
 import org.loboevolution.html.dom.HTMLDocument;
-import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 
 /**
  * Tests for {@link HTMLAnchorElement}.

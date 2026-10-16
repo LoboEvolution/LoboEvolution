@@ -69,7 +69,7 @@ public final class InternalTransferableStore {
                     storedObject = null;
                 }
             } catch (final Exception e) {
-                log.info(e.getMessage());
+                log.error("LoboEvolution: Unexpected error", e);
             }
         }
     }

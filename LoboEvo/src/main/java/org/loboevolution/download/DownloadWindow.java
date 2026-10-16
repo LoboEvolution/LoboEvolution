@@ -181,7 +181,7 @@ public class DownloadWindow extends JFrame implements IDownload {
             final DownloadWindow d = new DownloadWindow(url);
             d.setVisible(true);
         } catch (final Exception e) {
-            log.error(e.getMessage(), e);
+            log.error("LoboEvolution: Unexpected error", e);
         }
     }
     
@@ -195,7 +195,7 @@ public class DownloadWindow extends JFrame implements IDownload {
             final DownloadWindow d = new DownloadWindow(new URI(url).toURL());
             d.setVisible(true);
         } catch (final Exception e) {
-            log.error(e.getMessage(), e);
+            log.error("LoboEvolution: Unexpected error", e);
         }
     }
 
@@ -210,7 +210,7 @@ public class DownloadWindow extends JFrame implements IDownload {
             final DownloadWindow d = new DownloadWindow(tempFile.toURI().toURL());
             d.setVisible(true);
         } catch (final IOException e) {
-            log.error(e.getMessage(), e);
+            log.error("LoboEvolution: Unexpected error", e);
         }
     }
 

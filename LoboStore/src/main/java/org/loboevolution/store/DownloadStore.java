@@ -57,7 +57,7 @@ public class DownloadStore implements QueryStore{
 			pstmt.setString(1, new URI(uri).toURL().toExternalForm());
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 	}
 
@@ -69,7 +69,7 @@ public class DownloadStore implements QueryStore{
              final PreparedStatement pstmt = conn.prepareStatement(DELETE_DOWNLOAD)) {
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 	}
 
@@ -88,7 +88,7 @@ public class DownloadStore implements QueryStore{
 				}
 			}
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 		return recent;
 	}

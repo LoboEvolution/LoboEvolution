@@ -127,18 +127,18 @@ public class Type1CFont extends OutlineFont {
                 parts[partsloc++] = (char) d;
             }
             if (d < 16) {
-                PDFDebugger.debug("0" + Integer.toHexString(d), 200);
+                PDFDebugger.debugging("0" + Integer.toHexString(d));
             } else {
-                PDFDebugger.debug(Integer.toHexString(d), 200);
+                PDFDebugger.debugging(Integer.toHexString(d));
             }
             if ((i & 15) == 15) {
-                PDFDebugger.debug("      " + new String(parts), 200);
+                PDFDebugger.debugging("      " + new String(parts));
                 partsloc = 0;
             } else if ((i & 7) == 7) {
-                PDFDebugger.debug("  ", 200);
+                PDFDebugger.debugging("  ");
                 parts[partsloc++] = ' ';
             } else if ((i & 1) == 1) {
-                PDFDebugger.debug(" ", 200);
+                PDFDebugger.debugging(" ");
             }
         }
     }
@@ -398,7 +398,7 @@ public class Type1CFont extends OutlineFont {
             System.arraycopy(FontSupport.standardEncoding, 0, this.encoding, 0,
                     FontSupport.standardEncoding.length);
         } else if (base == 1) {  // this is the expert encoding
-            PDFDebugger.debug("**** EXPERT ENCODING not yet implemented!");
+            PDFDebugger.debugging("**** EXPERT ENCODING not yet implemented!");
             // TODO: copy ExpertEncoding
         } else {
             this.pos = base;
@@ -420,7 +420,7 @@ public class Type1CFont extends OutlineFont {
                     }
                 }
             } else {
-                PDFDebugger.debug("Bad encoding type: " + encodingtype);
+                PDFDebugger.debugging("Bad encoding type: " + encodingtype);
             }
             // TODO: now check for supplemental encoding data
         }
@@ -488,7 +488,7 @@ public class Type1CFont extends OutlineFont {
         for (int i = 0; i < nextra; i++) {
             final Range r = getIndexEntry(base, i);
             this.names[i] = new String(this.data, r.start(), r.len());
-            PDFDebugger.debug("Read name: " + i + " from " + r.start() + " to " + r.getEnd() + ": " + safe(names[i]), 1000);
+            PDFDebugger.debugging("Read name: " + i + " from " + r.start() + " to " + r.getEnd() + ": " + safe(names[i]));
         }
     }
 
@@ -1083,7 +1083,7 @@ public class Type1CFont extends OutlineFont {
                     this.stackptr = 0;
                     break;
                 default:
-                    PDFDebugger.debug("ERROR! TYPE1C CHARSTRING CMD IS " + cmd);
+                    PDFDebugger.debugging("ERROR! TYPE1C CHARSTRING CMD IS " + cmd);
                     break;
             }
         }

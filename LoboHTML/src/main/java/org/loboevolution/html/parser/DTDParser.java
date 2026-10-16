@@ -27,7 +27,7 @@ public class DTDParser {
             LineNumberReader reader = new LineNumberReader(new InputStreamReader(is));
             parseDTD(reader);
         } catch (Exception e) {
-           log.error(e.getMessage(),e);
+            log.error("LoboEvolution: Unexpected error", e);
         }
     }
 

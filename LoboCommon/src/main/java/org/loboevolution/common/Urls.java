@@ -149,7 +149,7 @@ public class Urls {
 			final URI uri = new URI(url);
 			result = uri.isAbsolute();
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 		return result;
 	}
@@ -187,7 +187,7 @@ public class Urls {
 						try {
 							return baseTime + Integer.parseInt(value);
 						} catch (final NumberFormatException e) {
-							log.error(e.getMessage(), e);
+							log.error("LoboEvolution: Unexpected error", e);
 						}
 					}
 				}
@@ -203,7 +203,7 @@ public class Urls {
 				try {
 					return baseTime + Integer.parseInt(expires);
 				} catch (final NumberFormatException e) {
-					log.error(e.getMessage(), e);
+					log.error("LoboEvolution: Unexpected error", e);
 				}
 			}
 		}

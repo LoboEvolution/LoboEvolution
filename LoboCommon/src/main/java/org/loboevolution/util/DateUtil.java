@@ -59,7 +59,7 @@ public final class DateUtil {
 			try {
 				return parse(dateString, regexp, loc);
 			} catch (final ParseException e) {
-				//log.info(e.getMessage());
+				//log.error("LoboEvolution: Unexpected error", e);
 			}
 		}
 		return null;

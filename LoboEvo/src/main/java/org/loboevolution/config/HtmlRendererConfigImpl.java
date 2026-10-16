@@ -116,7 +116,7 @@ public class HtmlRendererConfigImpl implements HtmlRendererConfig {
                 setWhiteBlack(rs.getInt(25) == 1);
             }
         } catch (final SQLException e) {
-            log.info(e.getMessage());
+            log.error("LoboEvolution: Unexpected error", e);
         }
     }
 
@@ -144,7 +144,7 @@ public class HtmlRendererConfigImpl implements HtmlRendererConfig {
                 return source;
             }
         } catch (Exception e) {
-            log.error(e.getMessage(), e);
+            log.error("LoboEvolution: Unexpected error", e);
         }
 
         return null;

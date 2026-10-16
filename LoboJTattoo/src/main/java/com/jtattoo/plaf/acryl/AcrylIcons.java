@@ -59,7 +59,7 @@ import com.jtattoo.plaf.base.icon.*;
 public class AcrylIcons extends BaseIcons {
 
 	// ----------------------------------------------------------------------------------------------------------------------
-	private final static class CheckBoxIcon implements Icon {
+	private static final class CheckBoxIcon implements Icon {
 
 		private static final int GAP = 2;
 
@@ -184,7 +184,7 @@ public class AcrylIcons extends BaseIcons {
 	}
 
 	// ----------------------------------------------------------------------------------------------------------------------
-	private final static class RadioButtonIcon implements Icon {
+	private static final class RadioButtonIcon implements Icon {
 
 		private static final int GAP = 2;
 

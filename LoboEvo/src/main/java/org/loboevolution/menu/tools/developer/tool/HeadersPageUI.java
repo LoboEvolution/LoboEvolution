@@ -68,7 +68,7 @@ public class HeadersPageUI extends AbstractToolsUI {
             httpcon.getHeaderField("Set-Cookie");
             add(infoContent(httpcon));
         } catch (final Exception e) {
-            log.error(e.getMessage(), e);
+            log.error("LoboEvolution: Unexpected error", e);
         }
     }
 
@@ -90,7 +90,7 @@ public class HeadersPageUI extends AbstractToolsUI {
             jtable.setShowGrid(false);
             return new JScrollPane(jtable);
         } catch (final Exception e) {
-            log.error(e.getMessage(), e);
+            log.error("LoboEvolution: Unexpected error", e);
         }
         return null;
     }

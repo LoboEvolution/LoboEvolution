@@ -102,7 +102,7 @@ public class ConnectionStore implements QueryStore, Serializable {
 				}
 			}
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 		return setting;
 	}
@@ -115,7 +115,7 @@ public class ConnectionStore implements QueryStore, Serializable {
              final PreparedStatement pstmt = conn.prepareStatement(DELETE_CONNECTIONS)) {
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 	}
 
@@ -172,7 +172,7 @@ public class ConnectionStore implements QueryStore, Serializable {
 			pstmt.setInt(7, isDisableProxyForLocalAddresses() ? 1 : 0);
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 	}
 

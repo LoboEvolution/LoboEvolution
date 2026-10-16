@@ -120,7 +120,7 @@ public class SVGAnimationImpl extends SVGElementImpl implements SMILAnimation {
 				try {
 					beginTimeList.add(new TimeImpl(beginTimeString));
 				} catch (final IllegalArgumentException e) {
-					log.info(e.getMessage());
+					log.error("LoboEvolution: Unexpected error", e);
 				}
 			}
 		}
@@ -144,7 +144,7 @@ public class SVGAnimationImpl extends SVGElementImpl implements SMILAnimation {
 				try {
 					beginTimeList.add(new TimeImpl(beginTimeString));
 				} catch (final IllegalArgumentException e) {
-					log.info(e.getMessage());
+					log.error("LoboEvolution: Unexpected error", e);
 				}
 			}
 		}

@@ -140,7 +140,7 @@ public abstract class CharacterDataImpl extends NodeImpl implements CharacterDat
 		} catch (final StringIndexOutOfBoundsException | DOMException e) {
 			throw new DOMException(DOMException.INDEX_SIZE_ERR, "Wrong arguments");
 		} catch (final Exception ex) {
-			log.error(ex.getMessage(), ex);
+			log.error("LoboEvolution: Unexpected error", ex);
 		}
 	}
 

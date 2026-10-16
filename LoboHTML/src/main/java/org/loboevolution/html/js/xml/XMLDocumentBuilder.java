@@ -59,7 +59,7 @@ public class XMLDocumentBuilder {
             parserFactory.setXIncludeAware(false);
             parserFactory.setNamespaceAware(true);
         } catch (final SAXNotRecognizedException | SAXNotSupportedException | ParserConfigurationException e) {
-            log.error(e.getMessage(), e);
+            log.error("LoboEvolution: Unexpected error", e);
         }
     }
 
@@ -68,7 +68,7 @@ public class XMLDocumentBuilder {
             final SAXParser saxParser = parserFactory.newSAXParser();
             return parse(is, saxParser.getXMLReader());
         } catch (final Exception ex) {
-            log.error(ex.getMessage(), ex);
+            log.error("LoboEvolution: Unexpected error", ex);
         }
 
         return null;
@@ -85,7 +85,7 @@ public class XMLDocumentBuilder {
             document.setDocumentURI(is.getSystemId());
             return document;
         } catch (final Throwable e) {
-            log.error(e.getMessage(), e);
+            log.error("LoboEvolution: Unexpected error", e);
         }
         return null;
     }

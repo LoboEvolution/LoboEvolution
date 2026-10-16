@@ -384,7 +384,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 						}
 					}
 				} catch (final Exception ex) {
-					log.info(ex.getMessage());
+					log.error("LoboEvolution: Unexpected error", ex);
 				}
 				tabPane.revalidate();
 				tabPane.repaint();
@@ -678,7 +678,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 				try {
 					selectedComponent = tabPane.getComponentAt(selectedIndex);
 				} catch (final Exception e) {
-					log.info(e.getMessage());
+					log.error("LoboEvolution: Unexpected error", e);
 				}
 			}
 			final int cx;
@@ -762,7 +762,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 							child.setBounds(cx, cy, cw, ch);
 						}
 					} catch (final Exception e) {
-						log.info(e.getMessage());
+						log.error("LoboEvolution: Unexpected error", e);
 					}
 				}
 			}
@@ -1095,7 +1095,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 				try {
 					selectedComponent = tabPane.getComponentAt(selectedIndex);
 				} catch (final Exception ex) {
-					log.info(ex.getMessage());
+					log.error("LoboEvolution: Unexpected error", ex);
 				}
 			}
 			boolean shouldChangeFocus = false;
@@ -3447,7 +3447,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 			}
 			paintFocusIndicator(g, tabPlacement, rects, tabIndex, iconRect, textRect, isSelected);
 		} catch (final Exception e) {
-			log.info(e.getMessage());
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 
 		if (cropShape != null) {

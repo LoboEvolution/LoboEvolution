@@ -105,7 +105,7 @@ public class StorageManager extends SwingWorker<Void, Void> {
 			Thread.sleep(1000);
 
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 
 		return null;
@@ -120,7 +120,7 @@ public class StorageManager extends SwingWorker<Void, Void> {
 			this.frame.setVisible(false);
 			GuiInit.createAndShowGui();
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 	}
 
@@ -202,7 +202,7 @@ public class StorageManager extends SwingWorker<Void, Void> {
 				}
 			}
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 	}
 }

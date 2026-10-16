@@ -129,7 +129,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 		}
 	}
 
-	private final static class SelectionDispatch extends EventDispatch2 {
+	private static final class SelectionDispatch extends EventDispatch2 {
 
 		@Override
 		protected void dispatchEvent(final EventListener listener, final EventObject event) {
@@ -524,7 +524,8 @@ public class HtmlPanel extends JComponent implements FrameContext {
 			final Document document = builder.parse(is);
 			panel.setDocument(document, rendererContext);
 		} catch (final SocketTimeoutException e) {
-			log.error("More time elapsed {}", connection.getConnectTimeout());
+			int timeout = connection.getConnectTimeout();
+			log.error("More time elapsed {}", timeout);
 		}
 		return panel;
 	}

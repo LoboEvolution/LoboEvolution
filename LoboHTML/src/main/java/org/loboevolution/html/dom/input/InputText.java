@@ -203,7 +203,7 @@ public class InputText extends BasicInput {
 			iText.getDocument().insertString(start, text, null);
 			setSelectionRange(start, end);
 		} catch (final BadLocationException e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 	}
 	

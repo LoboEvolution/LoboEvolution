@@ -142,7 +142,7 @@ public class HtmlInsets {
 				try {
 					value = Integer.parseInt(sizeText.substring(0, sizeText.length() - 1));
 				} catch (final Exception e) {
-					log.info(e.getMessage());
+					log.error("LoboEvolution: Unexpected error", e);
 				}
 			} else {
 				final HTMLDocumentImpl doc = (HTMLDocumentImpl)element.getDocumentNode();

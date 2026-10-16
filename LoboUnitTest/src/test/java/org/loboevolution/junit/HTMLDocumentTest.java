@@ -1071,7 +1071,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
         CSSStyleSheetImpl clonesheet = (CSSStyleSheetImpl) ((HTMLLinkElement) cloned).getSheet();
         assertNotNull(clonesheet);
         assertEquals(sheet.getCssRules().getLength(), clonesheet.getCssRules().getLength());
-        Node link = style.cloneNode(false);
+        style.cloneNode(false);
         clonesheet = (CSSStyleSheetImpl) ((HTMLLinkElement) cloned).getSheet();
         assertNotNull(clonesheet);
         assertEquals(0, clonesheet.getCssRules().getLength());
@@ -1083,7 +1083,7 @@ public class HTMLDocumentTest extends LoboUnitTest {
         CSSStyleSheetImpl sheet = (CSSStyleSheetImpl) ((HTMLLinkElement) link).getSheet();
         assertNotNull(sheet);
         assertEquals(0, sheet.getMedia().getLength());
-        assertTrue(sheet.getCssRules().getLength() == 0);
+        assertEquals(0, sheet.getCssRules().getLength());
 
         link.setAttribute("media", "screen");
         final CSSStyleSheetImpl sheet2 = (CSSStyleSheetImpl) ((HTMLLinkElement) link).getSheet();

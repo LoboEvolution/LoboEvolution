@@ -26,7 +26,6 @@
 package org.loboevolution.pdfview;
 
 import lombok.extern.slf4j.Slf4j;
-import org.loboevolution.pdfview.PDFDebugger.DebugStopException;
 import org.loboevolution.pdfview.colorspace.PDFColorSpace;
 import org.loboevolution.pdfview.colorspace.PatternSpace;
 import org.loboevolution.pdfview.decode.PDFDecoder;
@@ -154,7 +153,7 @@ public class PDFParser extends BaseWatchable {
                     c = this.stream[this.loc++];
                 }
             }
-            PDFDebugger.debug("Read comment: " + comment, -1);
+            PDFDebugger.debugging("Read comment: " + comment);
         }
         if (c == '[') {
             this.tok.type = Tok.ARYB;
@@ -188,7 +187,7 @@ public class PDFParser extends BaseWatchable {
             this.tok.type = Tok.CMD;
             this.tok.name = readName();
         } else {
-            PDFDebugger.debug("Encountered character: " + c + " (" + (char) c + ")", 1);
+            PDFDebugger.debugging("Encountered character: " + c + " (" + (char) c + ")");
             this.tok.type = Tok.UNK;
         }
         return this.tok;
@@ -386,13 +385,13 @@ public class PDFParser extends BaseWatchable {
         // to it for use within this iteration
         this.cmds = this.pageRef.get();
         if (this.cmds == null) {
-            PDFDebugger.debug("Page gone. Stopping", 10);
+            PDFDebugger.debugging("Page gone. Stopping");
             return Watchable.STOPPED;
         }
         final Object obj;
         try {
             obj = parseObject();
-        } catch (final DebugStopException e) {
+        } catch (final Exception e) {
             return Watchable.STOPPED;
         }
         // if there's nothing left to parse, we're done
@@ -403,7 +402,7 @@ public class PDFParser extends BaseWatchable {
             // it's a command. figure out what to do.
             // (if not, the token will be "pushed" onto the stack)
             final String cmd = ((Tok) obj).name;
-            PDFDebugger.debug("Command: " + cmd + " (stack size is " + this.stack.size() + ")", 10);
+            PDFDebugger.debugging("Command: " + cmd + " (stack size is " + this.stack.size() + ")");
             switch (cmd) {
                 case "q":
                     // push the parser state
@@ -459,7 +458,7 @@ public class PDFParser extends BaseWatchable {
                 case "gs":
                     // set graphics state to values in a named dictionary
                     final String popString = popString();
-                    PDFDebugger.debug("Set GS state " + popString, 10);
+                    PDFDebugger.debugging("Set GS state " + popString);
                     setGSState(popString);
                     break;
                 case "m": {
@@ -732,8 +731,8 @@ public class PDFParser extends BaseWatchable {
                 case "Do":
                     // make a do call on the referenced object
                     final String name = popString();
-                    if (PDFDebugger.DEBUG_IMAGES) {
-                        PDFDebugger.debug("XObject reference to " + name);
+                    if (log.isInfoEnabled()) {
+                        PDFDebugger.debugging("XObject reference to " + name);
                     }
                     final PDFObject xobj = findResource(name, "XObject");
                     doXObject(xobj);
@@ -872,18 +871,18 @@ public class PDFParser extends BaseWatchable {
                     break;
                 case "q1":
                 case "q0":
-                    PDFDebugger.debug("**** WARNING: Not handled command: " + cmd + " **************************", 10);
+                    PDFDebugger.debugging("**** WARNING: Not handled command: " + cmd + " **************************");
                     break;
                 default:
                     if (this.catchexceptions) {
-                        PDFDebugger.debug("**** WARNING: Unknown command: " + cmd + " **************************", 10);
+                        PDFDebugger.debugging("**** WARNING: Unknown command: " + cmd + " **************************");
                     } else {
                         throw new PDFParseException("Unknown command: " + cmd);
                     }
                     break;
             }
             if (!this.stack.isEmpty()) {
-                PDFDebugger.debug("**** WARNING! Stack not zero! (cmd=" + cmd + ", size=" + this.stack.size() + ") *************************", 10);
+                PDFDebugger.debugging("**** WARNING! Stack not zero! (cmd=" + cmd + ", size=" + this.stack.size() + ") *************************");
                 this.stack.clear();
             }
         } else {
@@ -904,12 +903,12 @@ public class PDFParser extends BaseWatchable {
             this.path.closePath();
             PDFDebugger.logPath(path, "closed");
         } catch (final java.awt.geom.IllegalPathStateException e) {
-            PDFDebugger.debug("Failed to close path", 1000);
+            PDFDebugger.debugging("Failed to close path");
         }
     }
 
     @SuppressWarnings("unused")
-    private void onNextObject(final Tok obj) throws DebugStopException {
+    private void onNextObject(final Tok obj) throws Exception {
         final String progress;
         if (true) {
             final double percent = (100d * this.loc) / this.stream.length;
@@ -924,19 +923,19 @@ public class PDFParser extends BaseWatchable {
         for (final Object operator : this.stack) {
             operators.append(operator).append(" ");
         }
-        if (PDFDebugger.DEBUG_OPERATORS) {
-            PDFDebugger.debug("parser{" + hashCode() + "} " + progress + ": #" + mDebugCommandIndex + " \t" + operators + obj.name);
+        if (log.isInfoEnabled()) {
+            PDFDebugger.debugging("parser{" + hashCode() + "} " + progress + ": #" + mDebugCommandIndex + " \t" + operators + obj.name);
         }
         mDebugCommandIndex++;
-        if (PDFDebugger.DEBUG_STOP_AT_INDEX > 0 && mDebugCommandIndex > PDFDebugger.DEBUG_STOP_AT_INDEX) {
+        if (log.isErrorEnabled()) {
             log.error("Debugging: stopped at instruction #{}", mDebugCommandIndex);
-            throw new DebugStopException();
+            throw new Exception();
         }
         if (PDFDebugger.DRAW_DELAY > 0) {
             try {
                 Thread.sleep(PDFDebugger.DRAW_DELAY);
             } catch (final InterruptedException e) {
-                log.info(e.getMessage());
+                log.error("LoboEvolution: Unexpected error", e);
             }
         }
     }
@@ -1034,12 +1033,12 @@ public class PDFParser extends BaseWatchable {
      */
     private void doImage(final PDFObject obj) throws IOException {
         if (!PDFDebugger.DISABLE_IMAGES) {
-            if (PDFDebugger.DEBUG_IMAGES) {
+            if (log.isInfoEnabled()) {
                 final boolean jpegDecode = PDFDecoder.isLastFilter(obj, PDFDecoder.DCT_FILTERS);
                 if (jpegDecode) {
-                    PDFDebugger.debug("Image is JPEG");
+                    PDFDebugger.debugging("Image is JPEG");
                 } else {
-                    PDFDebugger.debug("Image not JPEG");
+                    PDFDebugger.debugging("Image not JPEG");
                 }
             }
             this.cmds.addImage(PDFImage.createImage(obj, this.resources, false));
@@ -1112,7 +1111,7 @@ public class PDFParser extends BaseWatchable {
      * Double, a String, a HashMap (dictionary), Object[] array, or
      * a Tok containing a PDF command.
      */
-    private Object parseObject() throws PDFParseException, DebugStopException {
+    private Object parseObject() throws PDFParseException, Exception {
         final Tok t = nextToken();
         if (t.type == Tok.NUM) {
             return this.tok.value;
@@ -1151,7 +1150,7 @@ public class PDFParser extends BaseWatchable {
             onNextObject(t);
             return t;
         }
-        PDFDebugger.debug("**** WARNING! parseObject unknown token! (t.type=" + t.type + ") *************************", 10);
+        PDFDebugger.debugging("**** WARNING! parseObject unknown token! (t.type=" + t.type + ") *************************");
         return null;
     }
 
@@ -1160,7 +1159,7 @@ public class PDFParser extends BaseWatchable {
      * read, contains a dictionary until ID, and then image data until
      * EI.
      */
-    private void parseInlineImage() throws IOException, DebugStopException {
+    private void parseInlineImage() throws IOException, Exception {
         // build dictionary until ID, then read image until EI
         final Map<String, PDFObject> hm = new HashMap<>();
         while (true) {
@@ -1173,8 +1172,8 @@ public class PDFParser extends BaseWatchable {
             }
             // it should be a name;
             String name = t.name;
-            if (PDFDebugger.DEBUG_IMAGES) {
-                PDFDebugger.debug("ParseInlineImage, token: " + name);
+            if (log.isInfoEnabled()) {
+                PDFDebugger.debugging("ParseInlineImage, token: " + name);
             }
             switch (name) {
                 case "BPC":
@@ -1235,8 +1234,8 @@ public class PDFParser extends BaseWatchable {
             this.loc++;
         }
         // data runs from dstart to loc
-        if (PDFDebugger.DEBUG_IMAGES) {
-            PDFDebugger.debug("InlineImage from " + dstart + " to " + this.loc);
+        if (log.isInfoEnabled()) {
+            PDFDebugger.debugging("InlineImage from " + dstart + " to " + this.loc);
         }
         final byte[] data = new byte[this.loc - dstart];
         System.arraycopy(this.stream, dstart, data, 0, this.loc - dstart);
@@ -1353,7 +1352,7 @@ public class PDFParser extends BaseWatchable {
             handled = true;
         }
         if (!handled) {
-            PDFDebugger.debug("graphic state command unknown!", 10);
+            PDFDebugger.debugging("graphic state command unknown!");
         }
     }
 

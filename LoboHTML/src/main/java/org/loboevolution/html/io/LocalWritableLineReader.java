@@ -26,6 +26,7 @@
 
 package org.loboevolution.html.io;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.parser.XHtmlParser;
 
@@ -37,6 +38,7 @@ import java.io.StringReader;
 /**
  * <p>LocalWritableLineReader class.</p>
  */
+@Slf4j
 public class LocalWritableLineReader extends WritableLineReader {
 	
 	private HTMLDocumentImpl doc;
@@ -74,10 +76,9 @@ public class LocalWritableLineReader extends WritableLineReader {
 		final XHtmlParser parser = new XHtmlParser(doc.getUcontext(), doc, true);
 		final StringReader strReader = new StringReader(text);
 		try {
-			// This sets up another Javascript scope WindowImpl. Does it matter?
 			parser.parse(strReader);
 		} catch (final Exception err) {
-			doc.warn("Unable to parse written HTML text. BaseURI=[" + doc.getBaseURI() + "].", err);
+            log.error("LoboEvolution Unable to parse written HTML text. BaseURI=[{}].", doc.getBaseURI(), err);
 		}
 	}
 }

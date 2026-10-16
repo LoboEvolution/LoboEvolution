@@ -111,7 +111,7 @@ public class InputImage {
 		try {
 			pg.grabPixels();
 		} catch (final InterruptedException e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 
 		final ColorModel cm = pg.getColorModel();

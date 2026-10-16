@@ -77,7 +77,7 @@ public class ExternalResourcesStore {
 			}
 
 		} catch (final Exception err) {
-			log.error(err.getMessage(), err);
+			log.error("LoboEvolution: Unexpected error", err);
 		}
 		return source;
 	}
@@ -120,7 +120,7 @@ public class ExternalResourcesStore {
 				}
 			}
 		} catch (final Exception err) {
-			log.error(err.getMessage(), err);
+			log.error("LoboEvolution: Unexpected error", err);
 		}
 		return check;
 	}
@@ -138,7 +138,7 @@ public class ExternalResourcesStore {
 			pstmt.setString(6, type);
 			pstmt.executeUpdate();
 		} catch (final Exception err) {
-			log.error(err.getMessage(), err);
+			log.error("LoboEvolution: Unexpected error", err);
 		}
 	}
 
@@ -147,7 +147,7 @@ public class ExternalResourcesStore {
              final PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.DELETE_ALL_CACHE)) {
 			pstmt.executeUpdate();
 		} catch (final Exception err) {
-			log.error(err.getMessage(), err);
+			log.error("LoboEvolution: Unexpected error", err);
 		}
 	}
 
@@ -158,7 +158,7 @@ public class ExternalResourcesStore {
 			pstmt.setString(2, type);
 			pstmt.executeUpdate();
 		} catch (final Exception err) {
-			log.error(err.getMessage(), err);
+			log.error("LoboEvolution: Unexpected error", err);
 		}
 	}
 }

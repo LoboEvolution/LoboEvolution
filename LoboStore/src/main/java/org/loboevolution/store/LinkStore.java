@@ -59,7 +59,7 @@ public class LinkStore {
 				}
 			}
         } catch (final Exception e) {
-        	log.error(e.getMessage(), e);
+        	log.error("LoboEvolution: Unexpected error", e);
         }
         return vis;
     }	
@@ -75,7 +75,7 @@ public class LinkStore {
 			pstmt.setString(1, link);
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 	}
 	
@@ -87,7 +87,7 @@ public class LinkStore {
              final PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.DELETE_LINK)) {
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 	}
 }

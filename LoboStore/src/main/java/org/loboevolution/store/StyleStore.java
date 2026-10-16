@@ -67,7 +67,7 @@ public class StyleStore implements QueryStore, Serializable {
                 }
             }
         } catch (final Exception e) {
-            log.error(e.getMessage(), e);
+            log.error("LoboEvolution: Unexpected error", e);
         }
         return values;
     }
@@ -87,10 +87,10 @@ public class StyleStore implements QueryStore, Serializable {
                 pstmt2.executeUpdate();
 
             } catch (final Exception e) {
-                log.error(e.getMessage(), e);
+                log.error("LoboEvolution: Unexpected error", e);
             }
         } catch (final Exception e) {
-            log.error(e.getMessage(), e);
+            log.error("LoboEvolution: Unexpected error", e);
         }
     }
 
@@ -111,7 +111,7 @@ public class StyleStore implements QueryStore, Serializable {
                 }
             }
         } catch (final Exception e) {
-            log.error(e.getMessage(), e);
+            log.error("LoboEvolution: Unexpected error", e);
         }
         return values;
     }
@@ -140,11 +140,11 @@ public class StyleStore implements QueryStore, Serializable {
                 pstmt2.executeUpdate();
 
             } catch (final Exception e) {
-                log.error(e.getMessage(), e);
+                log.error("LoboEvolution: Unexpected error", e);
             }
 
         } catch (final Exception e) {
-            log.error(e.getMessage(), e);
+            log.error("LoboEvolution: Unexpected error", e);
         }
     }
 
@@ -156,7 +156,7 @@ public class StyleStore implements QueryStore, Serializable {
              final PreparedStatement pstmt = conn.prepareStatement(DELETE_STYLE)) {
             pstmt.executeUpdate();
         } catch (final Exception e) {
-            log.error(e.getMessage(), e);
+            log.error("LoboEvolution: Unexpected error", e);
         }
     }
 }

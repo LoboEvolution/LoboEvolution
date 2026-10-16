@@ -140,14 +140,14 @@ public class TrueTypeFont {
         for (int i = 0; i < numTables; i++) {
             final int tag = data.getInt();
             final String tagString = TrueTypeTable.tagToString(tag);
-            PDFDebugger.debug("TTFFont.parseDirectories: " + tagString, 100);
+            PDFDebugger.debugging("TTFFont.parseDirectories: " + tagString);
             final int checksum = data.getInt();
             final int offset = data.getInt();
             final int length = data.getInt();
 
             // read the data
-            PDFDebugger.debug("TTFFont.parseDirectories: checksum: " +
-                    checksum + ", offset: " + offset + ", length: " + length, 100);
+            PDFDebugger.debugging("TTFFont.parseDirectories: checksum: " +
+                    checksum + ", offset: " + offset + ", length: " + length);
             data.mark();
             data.position(offset);
 
@@ -159,7 +159,7 @@ public class TrueTypeFont {
             if (calcChecksum == checksum) {
                 ttf.addTable(tagString, tableData);
             } else {
-                PDFDebugger.debug("Mismatched checksums on table " + tagString + ": " + calcChecksum + " != " + checksum, 200);
+                PDFDebugger.debugging("Mismatched checksums on table " + tagString + ": " + calcChecksum + " != " + checksum);
 
                 ttf.addTable(tagString, tableData);
 
@@ -411,11 +411,14 @@ public class TrueTypeFont {
      */
     @Override
     public String toString() {
-        log.info("Type         : {} ", getType());
-        log.info("NumTables    : {} ", getNumTables());
-        log.info("SearchRange  : {} ", getSearchRange());
-        log.info("EntrySelector: {} ", getEntrySelector());
-        log.info("RangeShift   : {} ", getRangeShift());
+
+        if(log.isInfoEnabled()) {
+            log.info("Type         : {} ", getType());
+            log.info("NumTables    : {} ", getNumTables());
+            log.info("SearchRange  : {} ", getSearchRange());
+            log.info("EntrySelector: {} ", getEntrySelector());
+            log.info("RangeShift   : {} ", getRangeShift());
+        }
 
         for (final Map.Entry<String, Object> e : this.tables.entrySet()) {
             TrueTypeTable table;

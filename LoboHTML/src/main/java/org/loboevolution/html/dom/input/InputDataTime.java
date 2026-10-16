@@ -85,7 +85,7 @@ public class InputDataTime extends BasicInput {
 			tf.addMouseListener(this);
 
 		} catch (final ParseException err) {
-			log.error(err.getMessage(), err);
+			log.error("LoboEvolution: Unexpected error", err);
 		}
 	}
 }

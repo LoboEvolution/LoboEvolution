@@ -159,7 +159,7 @@ class MyTracker implements ImageObserver {
             try {
                 wait();
             } catch (final InterruptedException e) {
-                log.info(e.getMessage());
+                log.error("LoboEvolution: Unexpected error", e);
             }
         }
     }

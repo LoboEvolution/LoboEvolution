@@ -402,7 +402,7 @@ public class SVGSVGElementImpl extends SVGLocatableImpl implements SVGSVGElement
 					try {
 						imageTransform.preConcatenate(screenCTM.createInverse());
 					} catch (final NoninvertibleTransformException e) {
-						log.info(e.getMessage());
+						log.error("LoboEvolution: Unexpected error", e);
 					}
 					graphics.drawImage(image, imageTransform, null);
 					graphics.setComposite(oldComposite);

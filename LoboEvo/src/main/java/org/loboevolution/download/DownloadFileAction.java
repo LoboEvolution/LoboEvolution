@@ -56,7 +56,7 @@ public class DownloadFileAction extends AbstractAction implements PropertyChange
         try {
             startDownload(action.getDestinationFile());
         } catch (final Exception ex) {
-            log.error(ex.getMessage(), ex);
+            log.error("LoboEvolution: Unexpected error", ex);
         }
     }
 

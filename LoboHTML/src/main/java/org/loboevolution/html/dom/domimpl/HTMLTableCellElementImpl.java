@@ -28,6 +28,7 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.Strings;
 import org.loboevolution.css.CSSStyleDeclaration;
 import org.loboevolution.html.dom.HTMLTableCellElement;
@@ -43,6 +44,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * <p>HTMLTableCellElementImpl class.</p>
  */
+@Slf4j
 public class HTMLTableCellElementImpl extends HTMLElementImpl implements HTMLTableCellElement {
 
 	private int index = -1;
@@ -326,7 +328,7 @@ public class HTMLTableCellElementImpl extends HTMLElementImpl implements HTMLTab
 				return contentWidth + paddingLeft + paddingRight + borderLeft + borderRight;
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error("LoboEvolution: Unexpected error", e);
 			return 0;
 		}
 	}

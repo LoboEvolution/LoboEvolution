@@ -75,7 +75,7 @@ public class GeneralStore implements Serializable {
              final PreparedStatement pstmt = conn.prepareStatement(DELETE_SIZE)) {
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 	}
 
@@ -87,7 +87,7 @@ public class GeneralStore implements Serializable {
              final PreparedStatement pstmt = conn.prepareStatement(DELETE_NETWORK)) {
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 	}
 
@@ -99,7 +99,7 @@ public class GeneralStore implements Serializable {
              final PreparedStatement pstmt = conn.prepareStatement(DELETE_STARTUP)) {
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 	}
 
@@ -122,7 +122,7 @@ public class GeneralStore implements Serializable {
 					}
 				}
 			} catch (final SQLException e) {
-				log.error(e.getMessage(), e);
+				log.error("LoboEvolution: Unexpected error", e);
 			}
 			if (width > -1 && height > -1) {
 				bounds = new Rectangle(width, height);
@@ -152,7 +152,7 @@ public class GeneralStore implements Serializable {
 					}
 				}
 			} catch (final Exception e) {
-				log.error(e.getMessage(), e);
+				log.error("LoboEvolution: Unexpected error", e);
 			}
 		}
 		return setting;
@@ -174,7 +174,7 @@ public class GeneralStore implements Serializable {
 					}
 				}
 			} catch (final Exception e) {
-				log.error(e.getMessage(), e);
+				log.error("LoboEvolution: Unexpected error", e);
 			}
 		}
 		return urls;
@@ -192,7 +192,7 @@ public class GeneralStore implements Serializable {
 			pstmt.setInt(2, rect.height);
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 	}
 
@@ -216,7 +216,7 @@ public class GeneralStore implements Serializable {
 			pstmt.setInt(6, image ? 1 : 0);
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 	}
 
@@ -231,7 +231,7 @@ public class GeneralStore implements Serializable {
 			pstmt.setString(1, url);
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 	}
 

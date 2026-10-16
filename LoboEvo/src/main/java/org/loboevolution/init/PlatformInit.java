@@ -45,7 +45,7 @@ public class PlatformInit {
 			try {
 				new GuiInit().install();
 			} catch (final Exception e) {
-				log.error(e.getMessage(), e);
+				log.error("LoboEvolution: Unexpected error", e);
 			}
 		});
 	}

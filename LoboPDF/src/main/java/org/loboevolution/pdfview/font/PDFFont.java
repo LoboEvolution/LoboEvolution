@@ -167,7 +167,7 @@ public abstract class PDFFont {
                     // it's a Type1 font, included.
                     font = new Type1Font(baseFont, obj, descriptor);
                     if (!((Type1Font) font).isName2OutlineFilled()) {
-                        PDFDebugger.debug("Type1Font can't be parsed completelly, character mapping missing. Use a basefont instead.");
+                        PDFDebugger.debugging("Type1Font can't be parsed completelly, character mapping missing. Use a basefont instead.");
                         font = new BuiltinFont(baseFont, obj, descriptor);
                     }
                 } else if (descriptor.getFontFile3() != null) {
@@ -185,7 +185,7 @@ public abstract class PDFFont {
                         font = new TTFFont(baseFont, obj, descriptor);
                     } catch (final Exception e) {
 //            		PDFRenderer.getErrorHandler().publishException(e);
-                        PDFDebugger.debug("Error parsing font : " + baseFont);
+                        PDFDebugger.debugging("Error parsing font : " + baseFont);
                         // fake it with a built-in font
                         font = new BuiltinFont(baseFont, obj, descriptor);
                     }
@@ -196,7 +196,7 @@ public abstract class PDFFont {
                             font = new TTFFont(baseFont, obj, descriptor, extFontFile);
                         } catch (final Exception e) {
 //                		PDFRenderer.getErrorHandler().publishException(e);
-                            PDFDebugger.debug("Error parsing font : " + baseFont);
+                            PDFDebugger.debugging("Error parsing font : " + baseFont);
                             // fake it with a built-in font
                             font = new BuiltinFont(baseFont, obj, descriptor);
                         }

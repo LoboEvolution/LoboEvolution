@@ -26,6 +26,7 @@
 
 package org.loboevolution.annotation;
 
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.extension.AfterTestExecutionCallback;
 import org.junit.jupiter.api.extension.BeforeTestExecutionCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -35,6 +36,7 @@ import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
+@Slf4j
 public class AlertsExtension implements BeforeTestExecutionCallback, AfterTestExecutionCallback {
 
     private static final String EXPECTED_KEY = "value";
@@ -54,8 +56,10 @@ public class AlertsExtension implements BeforeTestExecutionCallback, AfterTestEx
         if (compareValues != null) {
             Object[] expected = (Object[]) context.getStore(ExtensionContext.Namespace.create(getClass())).get(EXPECTED_KEY, Object.class);
             Object[] actual = getActualValue(context);
-            System.out.println(Arrays.toString(expected));
-            System.out.println(Arrays.toString(actual));
+            if (log.isDebugEnabled()) {
+                log.debug(Arrays.toString(expected));
+                log.debug(Arrays.toString(actual));
+            }
             assertArrayEquals(expected, actual);
         }
     }
@@ -66,7 +70,7 @@ public class AlertsExtension implements BeforeTestExecutionCallback, AfterTestEx
             Method actualValueMethod = testInstance.getClass().getMethod("getActualValue");
             return (Object[]) actualValueMethod.invoke(testInstance);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("LoboEvolution: Unexpected error", e);
         }
         return null;
     }

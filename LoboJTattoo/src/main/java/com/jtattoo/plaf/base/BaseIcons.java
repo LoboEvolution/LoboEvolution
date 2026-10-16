@@ -47,7 +47,7 @@ import javax.swing.JCheckBoxMenuItem;
 public class BaseIcons {
 
 	// -----------------------------------------------------------------------------------------------------------
-	private final static class CheckBoxIcon implements Icon {
+	private static final class CheckBoxIcon implements Icon {
 
 		private static final int GAP = 2;
 		private static final Icon SMALL_CHECK_ICON = new LazyImageIcon("icons/small/check_symbol_10x10.png");

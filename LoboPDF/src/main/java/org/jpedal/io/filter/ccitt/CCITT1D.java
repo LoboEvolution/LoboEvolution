@@ -35,9 +35,9 @@ import java.util.BitSet;
 @Slf4j
 public class CCITT1D implements CCITTDecoder {
 
-    private final static int EOL = -1;
+    private static final int EOL = -1;
     private static final boolean debug = false;
-    final static private int[][][] b = new int[][][]{
+    static final private int[][][] b = new int[][][]{
             {{3, 2, 0}, {2, 3, 0}},
             {{2, 1, 0}, {3, 4, 0}},
 
@@ -178,7 +178,7 @@ public class CCITT1D implements CCITTDecoder {
                     {100, 1664, 1},
                     {101, 1728, 1}
             }};
-    final static private int[][][] w = new int[][][]{{
+    static final private int[][][] w = new int[][][]{{
             {7, 2, 0},
             {8, 3, 0},
             {11, 4, 0},

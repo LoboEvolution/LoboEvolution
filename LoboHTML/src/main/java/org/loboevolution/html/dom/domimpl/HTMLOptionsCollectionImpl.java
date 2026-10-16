@@ -167,7 +167,7 @@ public class HTMLOptionsCollectionImpl extends HTMLCollectionImpl implements HTM
 				}
 			}
 		} catch (final Exception ex) {
-			log.error(ex.getMessage(), ex);
+			log.error("LoboEvolution: Unexpected error", ex);
 		}
 
 		return false;

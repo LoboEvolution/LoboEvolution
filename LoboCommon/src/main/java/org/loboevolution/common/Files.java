@@ -65,7 +65,7 @@ public class Files {
 			}
 			return tempFile;
 		} catch (final IOException e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 			return null;
 		}
 	}

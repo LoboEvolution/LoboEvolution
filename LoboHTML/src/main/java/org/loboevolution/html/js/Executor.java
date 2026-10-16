@@ -110,7 +110,8 @@ public class Executor {
 				}
 				return (Boolean) result;
 			} catch (final Throwable err) {
-				log.error("executeFunction(): Unable to execute Javascript function {} ", f.getClassName(), err);
+				String className = f.getClassName();
+				log.error("executeFunction(): Unable to execute Javascript function {} ", className, err);
 				return true;
 			}
 		} finally {

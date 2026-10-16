@@ -112,7 +112,7 @@ public class ImagePageUI extends AbstractToolsUI {
             tablePanel.add(jPanelImg);
             return new JScrollPane(tablePanel);
         } catch (final Exception e) {
-            log.error(e.getMessage(), e);
+            log.error("LoboEvolution: Unexpected error", e);
         }
         return null;
     }

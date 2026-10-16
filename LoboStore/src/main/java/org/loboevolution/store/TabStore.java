@@ -82,7 +82,7 @@ public class TabStore {
 			pstmt.setString(3, title);
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 	}
 
@@ -97,7 +97,7 @@ public class TabStore {
 			pstmt.setInt(1, index);
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 	}
 	
@@ -109,7 +109,7 @@ public class TabStore {
              final PreparedStatement pstmt = conn.prepareStatement(DELETE_TAB_ALL)) {
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 	}
 
@@ -131,7 +131,7 @@ public class TabStore {
 					}
 				}
 			} catch (final Exception e) {
-				log.error(e.getMessage(), e);
+				log.error("LoboEvolution: Unexpected error", e);
 			}
 		}
 		return url;
@@ -155,7 +155,7 @@ public class TabStore {
 						.build());
 			}
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 		return urls;
 	}
@@ -174,7 +174,7 @@ public class TabStore {
 				urls.add(rs.getString(1));
 			}
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 		return urls;
 	}

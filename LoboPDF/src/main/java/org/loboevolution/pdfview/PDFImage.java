@@ -28,6 +28,7 @@ package org.loboevolution.pdfview;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.pdfview.colorspace.*;
 import org.loboevolution.pdfview.decode.PDFDecoder;
 import org.loboevolution.pdfview.function.FunctionType0;
@@ -57,6 +58,7 @@ import java.util.Map;
  * Encapsulates a PDF Image
  */
 @Data
+@Slf4j
 public class PDFImage {
 
     private static final int[][] GREY_TO_ARGB = new int[8][];
@@ -228,7 +230,7 @@ public class PDFImage {
                         final PDFImage sMaskImage = PDFImage.createImage(sMaskObj, resources, true);
                         image.setSMask(sMaskImage);
                     } catch (final IOException ex) {
-                        PDFDebugger.debug("ERROR: there was a problem parsing the mask for this object");
+                        PDFDebugger.debugging("ERROR: there was a problem parsing the mask for this object");
                         PDFDebugger.dump(obj);
                         BaseWatchable.getErrorHandler().publishException(ex);
                     }
@@ -238,7 +240,7 @@ public class PDFImage {
                     try {
                         image.setColorKeyMask(sMaskObj);
                     } catch (final IOException ex) {
-                        PDFDebugger.debug("ERROR: there was a problem parsing the color mask for this object");
+                        PDFDebugger.debugging("ERROR: there was a problem parsing the color mask for this object");
                         PDFDebugger.dump(obj);
                         BaseWatchable.getErrorHandler().publishException(ex);
                     }
@@ -574,7 +576,7 @@ public class PDFImage {
 
                 bi = outImage;
             } catch (final PDFImageParseException e) {
-                PDFDebugger.debug("Error parsing sMask image caused by:" + e.getMessage(), 100);
+                PDFDebugger.debugging("Error parsing sMask image caused by:" + e.getMessage());
             }
         }
 
@@ -594,8 +596,8 @@ public class PDFImage {
         final int w = before.getWidth();
         final int h = before.getHeight();
 
-        if (PDFDebugger.DEBUG_IMAGES) {
-            PDFDebugger.debug("Scaling image from " + w + "/" + h + " to " + this.width + "/" + this.height);
+        if (log.isDebugEnabled()) {
+            PDFDebugger.debugging("Scaling image from " + w + "/" + h + " to " + this.width + "/" + this.height);
         }
         final BufferedImage after = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
         final AffineTransform at = new AffineTransform();

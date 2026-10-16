@@ -90,7 +90,7 @@ public class CapturePane extends JPanel {
             final BufferedImage img = r.createScreenCapture(captureBounds);
             displayPreview(img, frame);
         } catch (final Exception e) {
-            log.error(e.getMessage(), e);
+            log.error("LoboEvolution: Unexpected error", e);
         }
     }
 

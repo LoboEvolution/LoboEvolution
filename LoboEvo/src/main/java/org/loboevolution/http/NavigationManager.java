@@ -83,10 +83,11 @@ public class NavigationManager {
 				final DocumentBuilderImpl builder = new DocumentBuilderImpl(rendererContext.getUserAgentContext(), rendererContext, config);
 				return builder.parse(is);
 			} catch (final SocketTimeoutException e) {
-				log.error("More time elapsed {}", connection.getConnectTimeout());
+				int timeout = connection.getConnectTimeout();
+				log.error("LoboEvolution More time elapsed {}", timeout);
 		    }
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 		return null;
 	}

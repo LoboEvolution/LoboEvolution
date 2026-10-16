@@ -42,34 +42,7 @@ import java.util.Map;
  */
 @Slf4j
 public class PDFDebugger {
-    /**
-     * Constant <code>DEBUG_DCTDECODE_DATA="debugdctdecode"</code>
-     */
-    public static final String DEBUG_DCTDECODE_DATA = "debugdctdecode";
-    /**
-     * Constant <code>DEBUG_TEXT=false</code>
-     */
-    public static final boolean DEBUG_TEXT = false;
-    /**
-     * Constant <code>DEBUG_IMAGES=false</code>
-     */
-    public static final boolean DEBUG_IMAGES = false;
-    /**
-     * Constant <code>DEBUG_OPERATORS=false</code>
-     */
-    public static final boolean DEBUG_OPERATORS = false;
-    /**
-     * Constant <code>DEBUG_PATH=false</code>
-     */
-    public static final boolean DEBUG_PATH = false;
-    /**
-     * Constant <code>DEBUG_STOP_AT_INDEX=0</code>
-     */
-    public static final int DEBUG_STOP_AT_INDEX = 0;
-    /**
-     * Constant <code>DISABLE_TEXT=false</code>
-     */
-    public static final boolean DISABLE_TEXT = false;
+
     /**
      * Constant <code>DISABLE_IMAGES=false</code>
      */
@@ -116,18 +89,13 @@ public class PDFDebugger {
     public static final long DRAW_DELAY = 0;
 
     /**
-     * Constant <code>debuglevel=4000</code>
-     */
-    public static int debuglevel = 4000;
-
-    /**
      * <p>debugImage.</p>
      *
      * @param image a {@link java.awt.image.BufferedImage} object.
      * @param name  a {@link java.lang.String} object.
      */
     public static void debugImage(final BufferedImage image, final String name) {
-        if (PDFDebugger.DEBUG_IMAGES) {
+        if (log.isInfoEnabled()) {
             if (image == null) {
                 return;
             }
@@ -144,27 +112,13 @@ public class PDFDebugger {
     /**
      * <p>debug.</p>
      *
-     * @param msg   a {@link java.lang.String} object.
-     * @param level a {@link java.lang.Integer} object.
+     * @param msg a {@link java.lang.String} object.
      */
-    public static void debug(final String msg, final int level) {
-        if (level > debuglevel) {
+    public static void debugging(final String msg) {
+        if (log.isInfoEnabled()) {
             log.info(escape(msg));
         }
     }
-
-    // TODO: add debug level and print it? 
-
-    /**
-     * <p>debug.</p>
-     *
-     * @param msg a {@link java.lang.String} object.
-     */
-    public static void debug(final String msg) {
-        debug(msg, debuglevel);
-    }
-
-    // TODO: add debug level and print it? 
 
     /**
      * <p>escape.</p>
@@ -185,15 +139,6 @@ public class PDFDebugger {
     }
 
     /**
-     * <p>setDebugLevel.</p>
-     *
-     * @param level a {@link java.lang.Integer} object.
-     */
-    public static void setDebugLevel(final int level) {
-        debuglevel = level;
-    }
-
-    /**
      * <p>dumpStream.</p>
      *
      * @param stream an array of {@link byte} objects.
@@ -210,17 +155,17 @@ public class PDFDebugger {
      * @param operation a {@link java.lang.String} object.
      */
     public static void logPath(final GeneralPath path, final String operation) {
-        if (PDFDebugger.DEBUG_PATH) {
+        if (log.isInfoEnabled()) {
             if (operation != null) {
                 log.info("Operation: {} ;", operation);
             }
             log.info("Current path: ");
             final Rectangle b = path.getBounds();
             if (b != null)
-                log.info("        Bounds [x={},y={},width={},height={}]", b.x, b.y, b.width, b.height);
+                log.info("Bounds [x={},y={},width={},height={}]", b.x, b.y, b.width, b.height);
             final Point2D p = path.getCurrentPoint();
             if (p != null)
-                log.info("        Point  [x={},y={}]", p.getX(), p.getY());
+                log.info("Point  [x={},y={}]", p.getX(), p.getY());
         }
     }
 
@@ -231,21 +176,15 @@ public class PDFDebugger {
      * @throws java.io.IOException if any.
      */
     public static void dump(final PDFObject obj) throws IOException {
-        PDFDebugger.debug("dumping PDF object: " + obj);
+        PDFDebugger.debugging("dumping PDF object: " + obj);
         if (obj == null) {
             return;
         }
         final Map<String, PDFObject> dict = obj.getDictionary();
-        PDFDebugger.debug("   dict = " + dict);
+        PDFDebugger.debugging("   dict = " + dict);
         for (final Map.Entry<String, PDFObject> entry : dict.entrySet()) {
             final String key = entry.getKey();
-            PDFDebugger.debug("key = " + key + " value = " + dict.get(key));
+            PDFDebugger.debugging("key = " + key + " value = " + dict.get(key));
         }
     }
-
-    @SuppressWarnings("serial")
-    public static class DebugStopException extends Exception {
-        // nothing to do
-    }
-
 }

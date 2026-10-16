@@ -107,7 +107,7 @@ public class XMLDocument implements Document {
 		} catch (final IOException e) {
 			log.error("IOException occurred, XXE may still possible: ", e);
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 	}
 

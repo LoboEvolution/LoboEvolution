@@ -1314,95 +1314,93 @@ public class RBlockViewport extends BaseRCollection {
 		final RenderState renderState = textNode.getRenderState();
 		if (renderState != null) {
 
-
-		final FontMetrics fm = renderState.getFontMetrics();
-		final int descent = fm.getDescent();
-		final int ascentPlusLeading = fm.getAscent() + fm.getLeading();
-		final int wordHeight = fm.getHeight();
-		final int blankWidth = fm.charWidth(' ');
-		final int whiteSpace = this.overrideNoWrap ? RenderState.WS_NOWRAP : renderState.getWhiteSpace();
-		final int textTransform = renderState.getTextTransform();
-		final String text = textNode.getNodeValue();
-		if (whiteSpace != RenderState.WS_PRE) {
-			final boolean prevAllowOverflow = this.currentLine.isAllowOverflow();
-			final boolean allowOverflow = whiteSpace == RenderState.WS_NOWRAP;
-			this.currentLine.setAllowOverflow(allowOverflow);
-			try {
-				final int length = text.length();
-				boolean firstWord = true;
-				final StringBuilder word = new StringBuilder(12);
-				for (int i = 0; i < length; i++) {
-					char ch = text.charAt(i);
-					if (Character.isWhitespace(ch)) {
-						if (firstWord) {
-							firstWord = false;
-						}
-						final int wlen = word.length();
-						if (wlen > 0) {
-							final RWord rword = new RWord(textNode, word.toString(), this.container, fm, descent,
-									ascentPlusLeading, wordHeight, textTransform);
-							addWordToLine(rword);
-							word.delete(0, wlen);
-						}
-						final RLine line = this.currentLine;
-						if (line.getWidth() > 0) {
-							final RBlank rblank = new RBlank(textNode, fm, this.container, ascentPlusLeading,
-									blankWidth, wordHeight);
-							line.addBlank(rblank);
-						}
-						for (i++; i < length; i++) {
-							ch = text.charAt(i);
-							if (!Character.isWhitespace(ch)) {
-								word.append(ch);
-								break;
+			final FontMetrics fm = renderState.getFontMetrics();
+			final int descent = fm.getDescent();
+			final int ascentPlusLeading = fm.getAscent() + fm.getLeading();
+			final int wordHeight = fm.getHeight();
+			final int blankWidth = fm.charWidth(' ');
+			final int whiteSpace = this.overrideNoWrap ? RenderState.WS_NOWRAP : renderState.getWhiteSpace();
+			final int textTransform = renderState.getTextTransform();
+			final String text = textNode.getNodeValue();
+			if (whiteSpace != RenderState.WS_PRE) {
+				final boolean prevAllowOverflow = this.currentLine.isAllowOverflow();
+				final boolean allowOverflow = whiteSpace == RenderState.WS_NOWRAP;
+				this.currentLine.setAllowOverflow(allowOverflow);
+				try {
+					final int length = text.length();
+					boolean firstWord = true;
+					final StringBuilder word = new StringBuilder(12);
+					for (int i = 0; i < length; i++) {
+						char ch = text.charAt(i);
+						if (Character.isWhitespace(ch)) {
+							if (firstWord) {
+								firstWord = false;
 							}
+							final int wlen = word.length();
+							if (wlen > 0) {
+								final RWord rword = new RWord(textNode, word.toString(), this.container, fm, descent,
+										ascentPlusLeading, wordHeight, textTransform);
+								addWordToLine(rword);
+								word.delete(0, wlen);
+							}
+							final RLine line = this.currentLine;
+							if (line.getWidth() > 0) {
+								final RBlank rblank = new RBlank(textNode, fm, this.container, ascentPlusLeading,
+										blankWidth, wordHeight);
+								line.addBlank(rblank);
+							}
+							for (i++; i < length; i++) {
+								ch = text.charAt(i);
+								if (!Character.isWhitespace(ch)) {
+									word.append(ch);
+									break;
+								}
+							}
+						} else {
+							word.append(ch);
 						}
-					} else {
-						word.append(ch);
+					}
+					if (!word.isEmpty()) {
+						final RWord rword = new RWord(textNode, word.toString(), this.container, fm, descent,
+								ascentPlusLeading, wordHeight, textTransform);
+						addWordToLine(rword);
+					}
+				} finally {
+					this.currentLine.setAllowOverflow(prevAllowOverflow);
+				}
+			} else {
+				final int length = text.length();
+				boolean lastCharSlashR = false;
+				final StringBuilder line = new StringBuilder();
+				for (int i = 0; i < length; i++) {
+					final char ch = text.charAt(i);
+					switch (ch) {
+						case '\r':
+							lastCharSlashR = true;
+							break;
+						case '\n':
+							final RWord rword = new RWord(textNode, line.toString(), container, fm, descent, ascentPlusLeading, wordHeight, textTransform);
+							this.addWordToLine(rword);
+							line.delete(0, line.length());
+							final RLine prevLine = this.currentLine;
+							prevLine.setLineBreak(new LineBreak(LineBreak.NONE, textNode));
+							addLine(textNode, prevLine, prevLine.getY() + prevLine.getHeight());
+							break;
+						default:
+							if (lastCharSlashR) {
+								line.append('\r');
+								lastCharSlashR = false;
+							}
+							line.append(ch);
+							break;
 					}
 				}
-				if (!word.isEmpty()) {
-					final RWord rword = new RWord(textNode, word.toString(), this.container, fm, descent,
-							ascentPlusLeading, wordHeight, textTransform);
+				if (!line.isEmpty()) {
+					final RWord rword = new RWord(textNode, line.toString(), this.container, fm, descent, ascentPlusLeading,
+							wordHeight, textTransform);
 					addWordToLine(rword);
 				}
-			} finally {
-				this.currentLine.setAllowOverflow(prevAllowOverflow);
 			}
-		} else {
-			final int length = text.length();
-			boolean lastCharSlashR = false;
-			final StringBuilder line = new StringBuilder();
-			for (int i = 0; i < length; i++) {
-				final char ch = text.charAt(i);
-				switch (ch) {
-				case '\r':
-					lastCharSlashR = true;
-					break;
-				case '\n':
-                    final RWord rword = new RWord(textNode, line.toString(), container, fm, descent, ascentPlusLeading, wordHeight, textTransform);
-                    this.addWordToLine(rword);
-                    line.delete(0, line.length());
-					final RLine prevLine = this.currentLine;
-					prevLine.setLineBreak(new LineBreak(LineBreak.NONE, textNode));
-					addLine(textNode, prevLine, prevLine.getY() + prevLine.getHeight());
-					break;
-				default:
-					if (lastCharSlashR) {
-						line.append('\r');
-						lastCharSlashR = false;
-					}
-					line.append(ch);
-					break;
-				}
-			}
-			if (!line.isEmpty()) {
-				final RWord rword = new RWord(textNode, line.toString(), this.container, fm, descent, ascentPlusLeading,
-						wordHeight, textTransform);
-				addWordToLine(rword);
-			}
-		}} else{
-			log.error("RenderState is null for node {} with parent {} ", textNode, textNode.getParentNode());
 		}
 	}
 

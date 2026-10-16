@@ -309,8 +309,8 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 				ssa.setDoc(this);
 				try {
 					ssa.addStyleSheets(this.styleSheets);
-				} catch (final Exception mfu) {
-					log.error(mfu.getMessage(), mfu);
+				} catch (final Exception ex) {
+					log.error("LoboEvolution: Unexpected error", ex);
 				}
 				this.styleSheetAggregator = ssa;
 			}

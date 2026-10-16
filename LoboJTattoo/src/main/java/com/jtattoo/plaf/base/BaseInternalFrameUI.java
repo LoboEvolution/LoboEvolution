@@ -57,7 +57,7 @@ public class BaseInternalFrameUI extends BasicInternalFrameUI {
 	// -----------------------------------------------------------------------------
 // inner classes
 //-----------------------------------------------------------------------------
-	private final static class MyPropertyChangeHandler implements PropertyChangeListener {
+	private static final class MyPropertyChangeHandler implements PropertyChangeListener {
 
 		@Override
 		public void propertyChange(final PropertyChangeEvent e) {
@@ -114,7 +114,7 @@ public class BaseInternalFrameUI extends BasicInternalFrameUI {
 	} // end of class MyPropertyChangeHandler
 		// -----------------------------------------------------------------------------
 
-	private final static class MyWindowHandler extends WindowAdapter {
+	private static final class MyWindowHandler extends WindowAdapter {
 
 		@Override
 		public void windowActivated(final WindowEvent e) {

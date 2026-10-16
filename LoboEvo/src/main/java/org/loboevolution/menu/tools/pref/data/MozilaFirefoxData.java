@@ -70,7 +70,7 @@ public class MozilaFirefoxData extends BrowserData {
 				bookmarks.add(bookmark);
 			}
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 		return bookmarks;
 	}
@@ -92,7 +92,7 @@ public class MozilaFirefoxData extends BrowserData {
 						.build());
 			}
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 		return cookies;
 	}
@@ -110,7 +110,7 @@ public class MozilaFirefoxData extends BrowserData {
 			}
 
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 		return hostEntries;
 	}
@@ -164,7 +164,7 @@ public class MozilaFirefoxData extends BrowserData {
 				}
 			}
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 	}
 }

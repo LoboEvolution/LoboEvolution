@@ -234,7 +234,7 @@ public class LAFSettings implements Serializable {
                 fonts.add(rs.getString(1));
             }
         } catch (final Exception e) {
-            log.error(e.getMessage(), e);
+            log.error("LoboEvolution: Unexpected error", e);
         }
         return fonts.toArray(new String[0]);
     }

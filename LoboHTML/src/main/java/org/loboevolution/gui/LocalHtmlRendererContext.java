@@ -90,13 +90,13 @@ public class LocalHtmlRendererContext implements HtmlRendererContext{
     /** {@inheritDoc} */
     @Override
     public void blur() {
-        this.warn("back(): Not overridden");
+        log.warn("back(): Not overridden");
     }
 
     /** {@inheritDoc} */
     @Override
     public void close() {
-        this.warn("close(): Not overridden");
+        log.warn("close(): Not overridden");
     }
 
     /** {@inheritDoc} */
@@ -126,7 +126,7 @@ public class LocalHtmlRendererContext implements HtmlRendererContext{
     /** {@inheritDoc} */
     @Override
     public void focus() {
-        this.warn("focus(): Not overridden");
+        log.warn("focus(): Not overridden");
     }
 
     /** {@inheritDoc} */
@@ -152,7 +152,7 @@ public class LocalHtmlRendererContext implements HtmlRendererContext{
     /** {@inheritDoc} */
     @Override
     public String getDefaultStatus() {
-        this.warn("getDefaultStatus(): Not overridden");
+        log.warn("getDefaultStatus(): Not overridden");
         return "";
     }
 
@@ -189,7 +189,7 @@ public class LocalHtmlRendererContext implements HtmlRendererContext{
     public UserAgentContext getUserAgentContext() {
         synchronized (this) {
             if (this.bcontext == null) {
-                this.warn("getUserAgentContext(): UserAgentContext not provided in constructor. Creating a simple one.");
+                log.warn("getUserAgentContext(): UserAgentContext not provided in constructor. Creating a simple one.");
                 this.bcontext = new UserAgentContext(new LocalHtmlRendererConfig());
             }
             return this.bcontext;
@@ -199,7 +199,7 @@ public class LocalHtmlRendererContext implements HtmlRendererContext{
     /** {@inheritDoc} */
     @Override
     public boolean isClosed() {
-        this.warn("isClosed(): Not overridden");
+        log.warn("isClosed(): Not overridden");
         return false;
     }
 
@@ -303,7 +303,7 @@ public class LocalHtmlRendererContext implements HtmlRendererContext{
                 final URL url = new URI(document.getDocumentURI()).toURL();
                 this.navigate(url, null);
             } catch (Exception throwable) {
-                this.warn("reload(): Malformed URL", throwable);
+                log.warn("reload(): Malformed URL", throwable);
             }
         }
     }
@@ -406,7 +406,7 @@ public class LocalHtmlRendererContext implements HtmlRendererContext{
     /** {@inheritDoc} */
     @Override
     public void setDefaultStatus(final String message) {
-        this.warn("setDefaultStatus(): Not overridden.");
+        log.warn("setDefaultStatus(): Not overridden.");
     }
 
     /** {@inheritDoc} */
@@ -424,7 +424,7 @@ public class LocalHtmlRendererContext implements HtmlRendererContext{
     /** {@inheritDoc} */
     @Override
     public void setStatus(final String message) {
-        this.warn("setStatus(): Not overridden");
+        log.warn("setStatus(): Not overridden");
     }
 
     /** {@inheritDoc} */

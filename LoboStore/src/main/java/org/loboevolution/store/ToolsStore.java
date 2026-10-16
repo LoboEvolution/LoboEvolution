@@ -58,7 +58,7 @@ public class ToolsStore implements QueryStore, Serializable {
              final PreparedStatement pstmt = conn.prepareStatement(this.DELETE_SEARCH)) {
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 	}
 
@@ -83,7 +83,7 @@ public class ToolsStore implements QueryStore, Serializable {
 				searchEngineStores.add(se);
 			}
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 		return searchEngineStores;
 	}
@@ -123,7 +123,7 @@ public class ToolsStore implements QueryStore, Serializable {
 			pstmt.setInt(6, selected ? 1 : 0);
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 	}
 
@@ -146,7 +146,7 @@ public class ToolsStore implements QueryStore, Serializable {
 			pstmt.setString(1, name);
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 	}
 
@@ -158,7 +158,7 @@ public class ToolsStore implements QueryStore, Serializable {
              final PreparedStatement pstmt = conn.prepareStatement(this.UPDATE_SEARCH)) {
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 	}
 }

@@ -87,7 +87,7 @@ public class InfoPageUI extends AbstractToolsUI {
             jtable.setShowGrid(false);
             return new JScrollPane(jtable);
         } catch (final Exception e) {
-            log.error(e.getMessage(), e);
+            log.error("LoboEvolution: Unexpected error", e);
         }
         return null;
     }

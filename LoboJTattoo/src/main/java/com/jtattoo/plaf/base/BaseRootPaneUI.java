@@ -518,7 +518,7 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
     }
 
     // ------------------------------------------------------------------------------
-    private final static class BaseRootLayout implements LayoutManager2 {
+    private static final class BaseRootLayout implements LayoutManager2 {
 
         @Override
         public void addLayoutComponent(final Component comp, final Object constraints) {

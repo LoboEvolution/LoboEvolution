@@ -122,7 +122,7 @@ public class JavaObjectWrapper extends ScriptableObject {
 					return JavaScript.getInstance().getJavascriptObject(raw, this.getParentScope());
 				}
 			} catch (final Exception err) {
-				log.error(err.getMessage(), err);
+				log.error("LoboEvolution: Unexpected error", err);
 			}
 		}
 		return Scriptable.NOT_FOUND;
@@ -146,7 +146,7 @@ public class JavaObjectWrapper extends ScriptableObject {
 				final Object val = getter.invoke(javaObject, (Object[]) null);
 				return JavaScript.getInstance().getJavascriptObject(val, start.getParentScope());
 			} catch (final Exception err) {
-				log.error(err.getMessage(), err);
+				log.error("LoboEvolution: Unexpected error", err);
 				return new Object();
 			}
 		} else {
@@ -174,7 +174,7 @@ public class JavaObjectWrapper extends ScriptableObject {
 									return JavaScript.getInstance().getJavascriptObject(val, start.getParentScope());
 								}
 							} catch (final Exception err) {
-								log.error(err.getMessage(), err);
+								log.error("LoboEvolution: Unexpected error", err);
 							}
 						}
 					}
@@ -197,7 +197,7 @@ public class JavaObjectWrapper extends ScriptableObject {
 								return JavaScript.getInstance().getJavascriptObject(val, start.getParentScope());
 							}
 						} catch (final Exception err) {
-							log.error(err.getMessage(), err);
+							log.error("LoboEvolution: Unexpected error", err);
 						}
 					}
 				}
@@ -222,7 +222,7 @@ public class JavaObjectWrapper extends ScriptableObject {
 				actualValue = JavaScript.getInstance().getJavaObject(value, pinfo.getPropertyType());
 				setter.invoke(this.getJavaObject(), index, actualValue);
 			} catch (final Exception err) {
-				log.error(err.getMessage(), err);
+				log.error("LoboEvolution: Unexpected error", err);
 			}
 		}
 	}
@@ -242,7 +242,7 @@ public class JavaObjectWrapper extends ScriptableObject {
 						actualValue = JavaScript.getInstance().getJavaObject(value, pinfo.getPropertyType());
 						setter.invoke(this.getJavaObject(), actualValue);
 					} catch (final Exception err) {
-						log.error(err.getMessage(), err);
+						log.error("LoboEvolution: Unexpected error", err);
 					}
 				}
 			} else {
@@ -257,7 +257,7 @@ public class JavaObjectWrapper extends ScriptableObject {
 								actualValue = JavaScript.getInstance().getJavaObject(value, pinfo.getPropertyType());
 								setter.invoke(this.getJavaObject(), actualValue);
 							} catch (final Exception err) {
-								log.error(err.getMessage(), err);
+								log.error("LoboEvolution: Unexpected error", err);
 							}
 						}
 						return;
@@ -273,7 +273,7 @@ public class JavaObjectWrapper extends ScriptableObject {
 							try {
 								setter.invoke(this.getJavaObject(), name, actualValue);
 							} catch (final Exception err) {
-								log.error(err.getMessage(), err);
+								log.error("LoboEvolution: Unexpected error", err);
 							}
 						} else {
 							super.put(name, start, value);

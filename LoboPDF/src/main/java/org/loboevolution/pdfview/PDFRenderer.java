@@ -373,12 +373,12 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
                 translated.concatenate(at);
 
                 if (!g.drawImage(bi.getSubimage(0, offset, bi.getWidth(), h), translated, null)) {
-                    PDFDebugger.debug("Image part not completed!", 10);
+                    PDFDebugger.debugging("Image part not completed!");
                 }
             }
         } else {
             if (!g.drawImage(bi, at, null)) {
-                PDFDebugger.debug("Image not completed!", 10);
+                PDFDebugger.debugging("Image not completed!");
             }
         }
 
@@ -480,12 +480,12 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
                 translated.concatenate(at);
 
                 if (!g.drawImage(bi.getSubimage(0, offset, bi.getWidth(), h), translated, null)) {
-                    PDFDebugger.debug("Image part not completed!", 10);
+                    PDFDebugger.debugging("Image part not completed!");
                 }
             }
         } else {
             if (!g.drawImage(bi, at, null)) {
-                PDFDebugger.debug("Image not completed!", 10);
+                PDFDebugger.debugging("Image not completed!");
             }
         }
 
@@ -768,7 +768,7 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
         if (this.imageRef != null) {
             bi = this.imageRef.get();
             if (bi == null) {
-                PDFDebugger.debug("Image went away.  Stopping");
+                PDFDebugger.debugging("Image went away.  Stopping");
                 return Watchable.STOPPED;
             }
 

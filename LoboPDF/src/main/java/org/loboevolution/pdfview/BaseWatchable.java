@@ -177,7 +177,7 @@ public abstract class BaseWatchable implements Watchable, Runnable {
                 cleanup();
             }
         } catch (final InterruptedException e) {
-            PDFDebugger.debug("Interrupted.");
+            PDFDebugger.debugging("Interrupted.");
         }
         this.thread = null;
     }
@@ -322,7 +322,7 @@ public abstract class BaseWatchable implements Watchable, Runnable {
 
             // Configure thread outside any locks
             final Thread.UncaughtExceptionHandler h = (th, ex) ->
-                    PDFDebugger.debug("Uncaught exception: " + ex);
+                    PDFDebugger.debugging("Uncaught exception: " + ex);
             newThread.setUncaughtExceptionHandler(h);
 
             synchronized (this.statusLock) {
@@ -334,7 +334,7 @@ public abstract class BaseWatchable implements Watchable, Runnable {
                     statusLock.wait();  // Now only holding statusLock
                 } catch (final InterruptedException ex) {
                     Thread.currentThread().interrupt();
-                    PDFDebugger.debug("Thread interrupted while waiting for status change.");
+                    PDFDebugger.debugging("Thread interrupted while waiting for status change.");
                 }
             }
         }

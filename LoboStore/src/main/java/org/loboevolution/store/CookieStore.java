@@ -121,7 +121,7 @@ public class CookieStore {
 				try {
 					expiresDate = new Date(System.currentTimeMillis() + Integer.parseInt(maxAge) * 1000L);
 				} catch (final NumberFormatException e) {
-					log.error(e.getMessage(), e);
+					log.error("LoboEvolution: Unexpected error", e);
 				}
 			} else if (expires != null) {
 				final DateUtil du = new DateUtil();
@@ -165,7 +165,7 @@ public class CookieStore {
 			pstmt.setInt(8, httponly ? 1 : 0);
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 	}
 
@@ -198,7 +198,7 @@ public class CookieStore {
 					}
 				}
 			} catch (final SQLException e) {
-				log.error(e.getMessage(), e);
+				log.error("LoboEvolution: Unexpected error", e);
 				return null;
 			}
 		}

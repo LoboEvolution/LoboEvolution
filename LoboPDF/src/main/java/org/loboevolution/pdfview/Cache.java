@@ -204,15 +204,15 @@ public class Cache {
      * @return the record, or null if it's not in the cache
      */
     PageRecord getPageRecord(final Integer pageNumber) {
-        PDFDebugger.debug("Request for page " + pageNumber, 1000);
+        PDFDebugger.debugging("Request for page " + pageNumber);
         final SoftReference<PageRecord> ref = this.pages.get(pageNumber);
         if (ref != null) {
             final String val = (ref.get() == null) ? " not in " : " in ";
-            PDFDebugger.debug("Page " + pageNumber + val + "cache", 1000);
+            PDFDebugger.debugging("Page " + pageNumber + val + "cache");
             return ref.get();
         }
 
-        PDFDebugger.debug("Page " + pageNumber + " not in cache", 1000);
+        PDFDebugger.debugging("Page " + pageNumber + " not in cache");
         // not in cache
         return null;
     }
@@ -263,19 +263,19 @@ public class Cache {
         // first find the relevant page record
         final Integer pageNumber = page.getPageNumber();
 
-        PDFDebugger.debug("Request for image on page " + pageNumber, 1000);
+        PDFDebugger.debugging("Request for image on page " + pageNumber);
 
         final PageRecord pageRec = getPageRecord(pageNumber);
         if (pageRec != null) {
             final SoftReference<Record> ref = pageRec.images.get(info);
             if (ref != null) {
                 final String val = (ref.get() == null) ? " not in " : " in ";
-                PDFDebugger.debug("Image on page " + pageNumber + val + " cache", 1000);
+                PDFDebugger.debugging("Image on page " + pageNumber + val + " cache");
                 return ref.get();
             }
         }
 
-        PDFDebugger.debug("Image on page " + pageNumber + " not in cache", 1000);
+        PDFDebugger.debugging("Image on page " + pageNumber + " not in cache");
         // not found
         return null;
     }

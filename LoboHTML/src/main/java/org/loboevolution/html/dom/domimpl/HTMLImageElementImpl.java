@@ -436,7 +436,7 @@ public class HTMLImageElementImpl extends HTMLElementImpl implements HTMLImageEl
 						url = uri.toURL();
 					}
 				} catch (final Exception e) {
-					log.error(e.getMessage(), e);
+					log.error("LoboEvolution: Unexpected error", e);
 				}
 			} else {
 				URI uri = Urls.createURI(null, getSrc());
@@ -464,7 +464,7 @@ public class HTMLImageElementImpl extends HTMLElementImpl implements HTMLImageEl
 				imgSvgControl.add(panel);
 			}
 		} catch (final Exception e) {
-			log.error(e.getMessage(), e);
+			log.error("LoboEvolution: Unexpected error", e);
 		}
 	}
 
@@ -476,7 +476,8 @@ public class HTMLImageElementImpl extends HTMLElementImpl implements HTMLImageEl
 		try {
 			cachedImage = HttpNetwork.getImage(this, new TimingInfo(), true);
 		} catch (final Exception e) {
-			log.warn("Failed to load image: {}", getSrc(), e);
+			String src = getSrc();
+			log.error("LoboEvolution Failed to load image: {}", src, e);
 		}
 		return cachedImage;
 	}

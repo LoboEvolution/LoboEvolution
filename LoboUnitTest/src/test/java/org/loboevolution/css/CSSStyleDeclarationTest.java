@@ -31,7 +31,6 @@ import org.loboevolution.annotation.Alerts;
 import org.loboevolution.annotation.AlertsExtension;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLDocument;
-import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLTextAreaElementImpl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

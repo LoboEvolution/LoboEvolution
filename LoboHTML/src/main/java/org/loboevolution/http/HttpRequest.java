@@ -110,7 +110,7 @@ public class HttpRequest extends XMLHttpRequestEventTargetImpl {
 			try {
 				c.getInputStream().close();
 			} catch (final IOException e) {
-				log.error(e.getMessage(), e);
+				log.error("LoboEvolution: Unexpected error", e);
 			}
 		}
 

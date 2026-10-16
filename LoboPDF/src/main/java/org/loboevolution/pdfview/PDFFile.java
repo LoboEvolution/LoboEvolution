@@ -930,7 +930,7 @@ public class PDFFile {
         // see if it's a dictionary.  If so, this could be a stream.
         PDFObject endkey = readObject(objNum, objGen, decrypter);
         if (endkey.getType() != PDFObject.KEYWORD && endkey.getType() != PDFObject.STREAM) {
-            PDFDebugger.debug("WARNING: Expected 'stream' or 'endobj' but was " + endkey.getType() + " " + endkey.getStringValue());
+            PDFDebugger.debugging("WARNING: Expected 'stream' or 'endobj' but was " + endkey.getType() + " " + endkey.getStringValue());
         }
 
         if (obj.getType() == PDFObject.DICTIONARY && endkey.getStringValue() != null && endkey.getStringValue().equals("stream")) {
@@ -946,7 +946,7 @@ public class PDFFile {
         // at this point, obj is the object, keyword should be "endobj"
         final String endcheck = endkey.getStringValue();
         if (endcheck == null || !endcheck.equals("endobj")) {
-            PDFDebugger.debug("WARNING: object at " + debugpos + " didn't end with 'endobj'");
+            PDFDebugger.debugging("WARNING: object at " + debugpos + " didn't end with 'endobj'");
         }
         obj.setObjectId(objNum, objGen);
         return obj;
@@ -981,7 +981,7 @@ public class PDFFile {
         final int ending = this.buf.position();
 
         if (!nextItemIs("endstream")) {
-            PDFDebugger.debug("read " + length + " chars from " + start + " to " + ending);
+            PDFDebugger.debugging("read " + length + " chars from " + start + " to " + ending);
             throw new PDFParseException("Stream ended inappropriately");
         }
 
@@ -1592,7 +1592,7 @@ public class PDFFile {
                 parser.go(wait);
             }
             if (parser.getStatus() == Watchable.ERROR) {
-                PDFDebugger.debug("Error in parsing the PDF page!");
+                PDFDebugger.debugging("Error in parsing the PDF page!");
             }
         }
 

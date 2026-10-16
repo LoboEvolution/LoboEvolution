@@ -133,7 +133,7 @@ public class BasePopupMenuUI extends BasicPopupMenuUI {
 			try {
 				robot = new Robot();
 			} catch (final AWTException e) {
-				log.info(e.getMessage());
+				log.error("LoboEvolution: Unexpected error", e);
             }
 		}
 		return robot;

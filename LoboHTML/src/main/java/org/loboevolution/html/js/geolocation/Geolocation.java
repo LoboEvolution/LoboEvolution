@@ -106,7 +106,7 @@ public class Geolocation extends AbstractScriptableDelegate {
 					getCurrentPosition(success);
 					Thread.sleep(500);
 				} catch (final Exception e) {
-					log.error(e.getMessage(), e);
+					log.error("LoboEvolution: Unexpected error", e);
 				}
 			}
 		});

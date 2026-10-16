@@ -222,7 +222,7 @@ public class JBIG2ImageReader extends ImageReader {
                     w = newW;
 
                 } catch (final Exception e) {
-                    log.error(e.getMessage(), e);
+                    log.error("LoboEvolution: Unexpected error", e);
                 }
             }
         }
@@ -364,7 +364,7 @@ public class JBIG2ImageReader extends ImageReader {
             wrDst.setRect(destinationOffset.x, destinationOffset.y, raster);
 
         } catch (final RuntimeException e) {
-            log.error(e.getMessage(), e);
+            log.error("LoboEvolution: Unexpected error", e);
         }
 
         return dst;
@@ -486,7 +486,7 @@ public class JBIG2ImageReader extends ImageReader {
             decoder.decodeJBIG2(data);
 
         } catch (final IOException | JBIG2Exception e) {
-            log.error(e.getMessage(), e);
+            log.error("LoboEvolution: Unexpected error", e);
         }
 
         readFile = true;

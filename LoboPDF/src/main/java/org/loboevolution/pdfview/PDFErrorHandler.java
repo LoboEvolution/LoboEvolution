@@ -43,6 +43,6 @@ public class PDFErrorHandler {
      * @param e a {@link java.lang.Throwable} object.
      */
     public void publishException(final Throwable e) {
-        log.error(e.getMessage(), e);
+        log.error("LoboEvolution: Unexpected error", e);
     }
 }

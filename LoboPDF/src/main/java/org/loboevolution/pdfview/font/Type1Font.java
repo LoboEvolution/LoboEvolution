@@ -126,7 +126,7 @@ public class Type1Font extends OutlineFont {
         this.password = 4330;
         final int matrixloc = findSlashName(font, "FontMatrix");
         if (matrixloc < 0) {
-            PDFDebugger.debug("No FontMatrix!");
+            PDFDebugger.debugging("No FontMatrix!");
             this.at = new AffineTransform(0.001f, 0, 0, 0.001f, 0, 0);
         } else {
             final PSParser psp2 = new PSParser(font, matrixloc + 11);
@@ -508,7 +508,7 @@ public class Type1Font extends OutlineFont {
                         }
                         if (n == 0) {
                             if (flexPt != 14) {
-                                PDFDebugger.debug("There must be 14 flex entries!");
+                                PDFDebugger.debugging("There must be 14 flex entries!");
                             } else {
                                 gp.curveTo(flexArray[2], flexArray[3], flexArray[4],
                                         flexArray[5],
@@ -523,18 +523,18 @@ public class Type1Font extends OutlineFont {
                         }
                         if (n == 2) {
                             if (!flexMode) {
-                                PDFDebugger.debug("Flex mode assumed");
+                                PDFDebugger.debugging("Flex mode assumed");
                             } else {
                                 this.sloc = 0;
                                 break;
                             }
                         }
                         if (this.subrs[n] == null) {
-                            PDFDebugger.debug("No subroutine #" + n);
+                            PDFDebugger.debugging("No subroutine #" + n);
                         } else {
                             this.callcount++;
                             if (this.callcount > 10) {
-                                PDFDebugger.debug("Call stack too large");
+                                PDFDebugger.debugging("Call stack too large");
                             } else {
                                 parse(this.subrs[n], gp, pt, wid);
                             }

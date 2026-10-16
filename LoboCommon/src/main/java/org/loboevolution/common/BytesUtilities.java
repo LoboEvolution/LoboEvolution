@@ -57,7 +57,7 @@ public class BytesUtilities {
             final byte[] bytes = inputStreamToByteArray(inputStream);
             buffer = ByteBuffer.wrap(bytes);
         } catch (final IOException ex) {
-            log.error(ex.getMessage(), ex);
+            log.error("LoboEvolution: Unexpected error", ex);
         }
 
         return buffer;

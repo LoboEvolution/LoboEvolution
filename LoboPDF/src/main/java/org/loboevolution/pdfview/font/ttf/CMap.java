@@ -98,7 +98,7 @@ public abstract class CMap {
                 outMap = new CMapFormat6(language);
                 break;
             default:
-                PDFDebugger.debug("Unsupport CMap format: " + format);
+                PDFDebugger.debugging("Unsupport CMap format: " + format);
                 return null;
         }
 
@@ -118,7 +118,7 @@ public abstract class CMap {
         final short format = data.getShort();
         final short lengthShort = data.getShort();
         final int length = 0xFFFF & lengthShort;
-        PDFDebugger.debug("CMAP, length: " + length + ", short: " + lengthShort, 100);
+        PDFDebugger.debugging("CMAP, length: " + length + ", short: " + lengthShort);
 
         // make sure our slice of the data only contains up to the length
         // of this table

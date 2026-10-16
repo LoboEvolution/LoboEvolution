@@ -451,7 +451,9 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, GlobalE
 				} catch (final Exception err) {
 					final String id = getId();
 					final String withId = Strings.isBlank(id) ? "" : " with ID '" + id + "'";
-					this.warn("Unable to parse style attribute value for element " + getTagName() + withId + " in " + getDocumentURL() + ".", err);
+					if(log.isWarnEnabled()) {
+                    	log.warn("LoboEvolution Unable to parse style attribute value for element {}{} in {}.", getTagName(), withId, getDocumentURL(), err);
+					}
 				}
 			}
 			this.localStyleDeclarationState = propertyValueProcessed(styleDeclaration);
@@ -1894,7 +1896,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, GlobalE
 
 			return localStyleDeclarationState;
 		} catch (Exception ex) {
-			log.error(ex.getMessage(), ex);
+			log.error("LoboEvolution: Unexpected error", ex);
 		}
 		return null;
 	}

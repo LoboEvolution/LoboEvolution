@@ -95,7 +95,7 @@ public class XMLSerializerImpl extends AbstractScriptableDelegate implements XML
             }
             return buff.toString();
         } catch (final Exception e) {
-            log.error(e.getMessage(), e);
+            log.error("LoboEvolution: Unexpected error", e);
         }
         return "";
     }
@@ -184,7 +184,7 @@ public class XMLSerializerImpl extends AbstractScriptableDelegate implements XML
             }
 
         } catch (final Exception e) {
-            log.error(e.getMessage(), e);
+            log.error("LoboEvolution: Unexpected error", e);
         }
     }
 

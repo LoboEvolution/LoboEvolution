@@ -334,7 +334,7 @@ public class PDFDecrypterFactory {
                 final PDFObject filter = encryptDict.getDictRef("Filter");
                 return filter != null;
             } catch (final IOException e) {
-                log.info(e.getMessage());
+                log.error("LoboEvolution: Unexpected error", e);
             }
         }
         return false;

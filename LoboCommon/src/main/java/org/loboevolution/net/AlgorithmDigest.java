@@ -39,7 +39,7 @@ import java.util.stream.Collectors;
 @Slf4j
 public class AlgorithmDigest implements Comparable<AlgorithmDigest> {
 
-    private final static Map<String, Integer> str = createMap();
+    private static final Map<String, Integer> str = createMap();
     private final String algorithm;
     private final String digest;
     private final Integer strength;
@@ -119,7 +119,7 @@ public class AlgorithmDigest implements Comparable<AlgorithmDigest> {
             final byte[] digestedBytes = md.digest();
             return Base64.getEncoder().encodeToString(digestedBytes);
         } catch (final Exception e) {
-            log.error(e.getMessage(), e);
+            log.error("LoboEvolution: Unexpected error", e);
         }
         return null;
     }

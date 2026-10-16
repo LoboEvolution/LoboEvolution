@@ -478,7 +478,7 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 			try {
 				return Integer.parseInt((String) value);
 			} catch (final NumberFormatException e) {
-				log.info(e.getMessage());
+				log.error("LoboEvolution: Unexpected error", e);
 			}
 		}
 		return defaultValue;

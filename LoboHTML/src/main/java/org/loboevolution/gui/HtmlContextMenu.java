@@ -108,13 +108,13 @@ public class HtmlContextMenu {
 				try (final InputStream stream = new ByteArrayInputStream(decodedBytes)) {
 					context.openImageViewer(href, stream);
 				} catch (final Exception e1) {
-					log.error(e1.getMessage(), e1);
+					log.error("LoboEvolution: Unexpected error", e1);
 				}
 			} else {
 				try {
 					context.openImageViewer(img.getFullURL(href));
 				} catch (final Exception e1) {
-					log.error(e1.getMessage(), e1);
+					log.error("LoboEvolution: Unexpected error", e1);
 				}
 			}
 		});
@@ -129,7 +129,7 @@ public class HtmlContextMenu {
 				try {
 					clip = img.getFullURL(href).toExternalForm();
 				} catch (final Exception e1) {
-					log.error(e1.getMessage(), e1);
+					log.error("LoboEvolution: Unexpected error", e1);
 				}
 			} else {
 				clip = href;
@@ -155,7 +155,7 @@ public class HtmlContextMenu {
 					d.downloadFile(new ByteArrayInputStream(decodedBytes));
 				}
 			} catch (final Exception e1) {
-				log.error(e1.getMessage(), e1);
+				log.error("LoboEvolution: Unexpected error", e1);
 			}
 		});
 		popupMenu.add(saveImage);
@@ -178,7 +178,7 @@ public class HtmlContextMenu {
 				final URL url = new URI(link.getAbsoluteHref()).toURL();
 				context.linkClicked(url, true);
 			} catch (final Exception e0) {
-				log.error(e0.getMessage(), e0);
+				log.error("LoboEvolution Unexpected error", e0);
 			}
 		});
 		popupMenu.add(menuItem);
@@ -196,7 +196,7 @@ public class HtmlContextMenu {
 				final IDownload d = bpanel.getBrowserFrame().getDownload();
 				d.downloadFile(new URI(link.getAbsoluteHref()).toURL());
 			} catch (final Exception e1) {
-				log.error(e1.getMessage(), e1);
+				log.error("LoboEvolution: Unexpected error", e1);
 			}
 		});
 		popupMenu.add(saveImage);

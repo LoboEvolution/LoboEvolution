@@ -85,7 +85,7 @@ public class CCITTMix extends CCITT2D implements CCITTDecoder {
                 }
             }
         } catch (final Exception ex) {
-            log.error(ex.getMessage(), ex);
+            log.error("LoboEvolution: Unexpected error", ex);
         }
 
         //put it all together
