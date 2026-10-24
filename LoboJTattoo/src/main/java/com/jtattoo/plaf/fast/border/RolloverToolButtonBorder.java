@@ -1,8 +1,6 @@
 package com.jtattoo.plaf.fast.border;
 
 import com.jtattoo.plaf.AbstractLookAndFeel;
-import com.jtattoo.plaf.ColorHelper;
-import com.jtattoo.plaf.JTattooUtilities;
 
 import javax.swing.*;
 import javax.swing.border.Border;

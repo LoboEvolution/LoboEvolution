@@ -52,11 +52,8 @@ public class DOMSelectionListener implements TreeSelectionListener {
         this.elemPropPanel = panel;
     }
 
-    /**
-     * valueChanged
-     *
-     * @param e a {@link javax.swing.event.TreeSelectionEvent} object.
-     */
+    /** {@inheritDoc} */
+    @Override
     public void valueChanged(final TreeSelectionEvent e) {
         final Node node = (Node) this.tree.getLastSelectedPathComponent();
 

@@ -34,10 +34,6 @@ import lombok.NoArgsConstructor;
 import org.loboevolution.html.dom.nodeimpl.internal.NodeInternal;
 import org.loboevolution.html.node.*;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
-
 /**
  * <p> EntityReferenceImpl class.</p>
  */

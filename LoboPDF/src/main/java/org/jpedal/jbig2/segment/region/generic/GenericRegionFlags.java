@@ -48,10 +48,9 @@ public class GenericRegionFlags extends Flags {
      */
     public static final String TPGDON = "TPGDON";
 
-    /**
-     * {@inheritDoc}
-     */
-    public void setFlags(final int flagsAsInt) {
+    /** {@inheritDoc} */
+    @Override
+	public void setFlags(final int flagsAsInt) {
         this.flagsAsInt = flagsAsInt;
         flags.put(MMR, flagsAsInt & 1);
         flags.put(GB_TEMPLATE, (flagsAsInt >> 1) & 3);

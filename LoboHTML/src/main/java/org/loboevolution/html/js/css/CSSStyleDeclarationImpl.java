@@ -194,6 +194,8 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration {
         return Strings.isNotBlank(style.getPropertyPriority(property));
     }
 
+    /** {@inheritDoc} */
+    @Override
     public void setProperty(final String propertyName, final String value) {
         setProperty(propertyName, value, "");
     }

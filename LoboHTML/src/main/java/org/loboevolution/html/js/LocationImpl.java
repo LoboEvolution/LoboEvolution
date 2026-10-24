@@ -56,25 +56,15 @@ public class LocationImpl extends AbstractScriptableDelegate implements Location
 		this.window = window;
 	}
 
-	/**
-	 * <p>
-	 * getHash.
-	 * </p>
-	 *
-	 * @return a {@link java.lang.String} object.
-	 */
+	/** {@inheritDoc} */
+	@Override
 	public String getHash() {
 		final URL url = getURL();
 		return url == null ? null : url.getRef();
 	}
 
-	/**
-	 * <p>
-	 * getHost.
-	 * </p>
-	 *
-	 * @return a {@link java.lang.String} object.
-	 */
+	/** {@inheritDoc} */
+	@Override
 	public String getHost() {
 		final URL url = getURL();
 		if (url == null) {
@@ -83,13 +73,8 @@ public class LocationImpl extends AbstractScriptableDelegate implements Location
 		return url.getHost() + (url.getPort() == -1 ? "" : ":" + url.getPort());
 	}
 
-	/**
-	 * <p>
-	 * getHostname.
-	 * </p>
-	 *
-	 * @return a {@link java.lang.String} object.
-	 */
+	/** {@inheritDoc} */
+	@Override
 	public String getHostname() {
 		final URL url = getURL();
 		if (url == null) {
@@ -98,37 +83,22 @@ public class LocationImpl extends AbstractScriptableDelegate implements Location
 		return url.getHost();
 	}
 
-	/**
-	 * <p>
-	 * getHref.
-	 * </p>
-	 *
-	 * @return a {@link java.lang.String} object.
-	 */
+	/** {@inheritDoc} */
+	@Override
 	public String getHref() {
 		final Document document = this.window.getDocumentNode();
 		return document == null ? null : document.getDocumentURI();
 	}
 
-	/**
-	 * <p>
-	 * getPathname.
-	 * </p>
-	 *
-	 * @return a {@link java.lang.String} object.
-	 */
+	/** {@inheritDoc} */
+	@Override
 	public String getPathname() {
 		final URL url = getURL();
 		return url == null ? null : url.getPath();
 	}
 
-	/**
-	 * <p>
-	 * getPort.
-	 * </p>
-	 *
-	 * @return a {@link java.lang.String} object.
-	 */
+	/** {@inheritDoc} */
+	@Override
 	public String getPort() {
 		final URL url = getURL();
 		if (url == null) {
@@ -138,13 +108,8 @@ public class LocationImpl extends AbstractScriptableDelegate implements Location
 		return port == -1 ? null : String.valueOf(port);
 	}
 
-	/**
-	 * <p>
-	 * getProtocol.
-	 * </p>
-	 *
-	 * @return a {@link java.lang.String} object.
-	 */
+	/** {@inheritDoc} */
+	@Override
 	public String getProtocol() {
 		final URL url = getURL();
 		if (url == null) {
@@ -153,13 +118,8 @@ public class LocationImpl extends AbstractScriptableDelegate implements Location
 		return url.getProtocol() + ":";
 	}
 
-	/**
-	 * <p>
-	 * getSearch.
-	 * </p>
-	 *
-	 * @return a {@link java.lang.String} object.
-	 */
+	/** {@inheritDoc} */
+	@Override
 	public String getSearch() {
 		final URL url = getURL();
 		final String query = url == null ? null : url.getQuery();
@@ -178,11 +138,8 @@ public class LocationImpl extends AbstractScriptableDelegate implements Location
 		return url;
 	}
 
-	/**
-	 * <p>
-	 * reload.
-	 * </p>
-	 */
+	/** {@inheritDoc} */
+	@Override
 	public void reload() {
 		// TODO: This is not really reload.
 		final Document document = this.window.getDocumentNode();
@@ -197,24 +154,14 @@ public class LocationImpl extends AbstractScriptableDelegate implements Location
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>
-	 * replace.
-	 * </p>
-	 */
+	/** {@inheritDoc} */
+	@Override
 	public void replace(final String href) {
 		setHref(href);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>
-	 * setHref.
-	 * </p>
-	 */
+	/** {@inheritDoc} */
+	@Override
 	public void setHref(final String uri) {
 		final HtmlRendererContext rcontext = this.window.getHtmlRendererContext();
 		if (rcontext != null) {

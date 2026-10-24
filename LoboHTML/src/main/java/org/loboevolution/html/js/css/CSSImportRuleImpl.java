@@ -41,19 +41,26 @@ public class CSSImportRuleImpl extends AbstractCSSStyleRule implements CSSImport
         this.abstractCSSRule = abstractCSSRule;
     }
 
+    /** {@inheritDoc} */
+    @Override
     public MediaListImpl getMedia() {
         return new MediaListImpl(abstractCSSRule.getMedia());
     }
 
+    /** {@inheritDoc} */
     @Override
     public void setMedia(String media) {
 
     }
 
+    /** {@inheritDoc} */
+    @Override
     public CSSStyleSheet getStyleSheet() {
         return new CSSStyleSheetImpl(abstractCSSRule.getStyleSheet());
     }
 
+    /** {@inheritDoc} */
+    @Override
     public String getHref() {
         return abstractCSSRule.getHref();
     }

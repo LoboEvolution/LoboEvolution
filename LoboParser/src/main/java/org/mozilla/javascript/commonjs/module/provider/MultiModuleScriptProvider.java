@@ -6,6 +6,8 @@ package org.mozilla.javascript.commonjs.module.provider;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.List;
+
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.commonjs.module.ModuleScript;
@@ -26,7 +28,7 @@ public class MultiModuleScriptProvider implements ModuleScriptProvider {
      * @param providers the providers to multiplex.
      */
     public MultiModuleScriptProvider(Iterable<? extends ModuleScriptProvider> providers) {
-        final ArrayList<ModuleScriptProvider> l = new ArrayList<>();
+        final List<ModuleScriptProvider> l = new ArrayList<>();
         for (ModuleScriptProvider provider : providers) {
             l.add(provider);
         }

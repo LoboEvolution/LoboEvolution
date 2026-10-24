@@ -56,256 +56,218 @@ public class TranslatedRenderable extends BaseBoundableRenderable implements RCo
         translatedChild.paintTranslated(g);
     }
 
-    /**
-     * <p>isFixed.</p>
-     *
-     * @return a boolean.
-     */
+    /** {@inheritDoc} */
+    @Override
     public boolean isFixed() {
         return translatedChild.isFixed();
     }
 
-    /**
-     * <p>getModelNode.</p>
-     *
-     * @return a {@link org.loboevolution.html.node.ModelNode} object.
-     */
+    /** {@inheritDoc} */
+    @Override
     public ModelNode getModelNode() {
         return translatedChild.getModelNode();
     }
 
-    /**
-     * <p>getBounds.</p>
-     *
-     * @return a {@link java.awt.Rectangle} object.
-     */
+    /** {@inheritDoc} */
+    @Override
     public Rectangle getBounds() {
         return translatedChild.getBounds();
     }
 
-    /**
-     * <p>getVisualBounds.</p>
-     *
-     * @return a {@link java.awt.Rectangle} object.
-     */
+    /** {@inheritDoc} */
+    @Override
     public Rectangle getVisualBounds() {
         return translatedChild.getVisualBounds();
     }
 
     /** {@inheritDoc} */
+    @Override
     public boolean contains(final int x, final int y) {
         return translatedChild.contains(x, y);
     }
 
-    /**
-     * <p>getSize.</p>
-     *
-     * @return a {@link java.awt.Dimension} object.
-     */
+    /** {@inheritDoc} */
+    @Override
     public Dimension getSize() {
         return translatedChild.getSize();
     }
 
-    /**
-     * <p>getOrigin.</p>
-     *
-     * @return a {@link java.awt.Point} object.
-     */
+    /** {@inheritDoc} */
+    @Override
     public Point getOrigin() {
         return translatedChild.getOrigin();
     }
 
     /** {@inheritDoc} */
+    @Override
     public Point getOriginRelativeTo(final RCollection ancestor) {
         return translatedChild.getOriginRelativeTo(ancestor);
     }
 
     /** {@inheritDoc} */
+    @Override
     public Point getOriginRelativeToNoScroll(final RCollection ancestor) {
         return translatedChild.getOriginRelativeToNoScroll(ancestor);
     }
 
     /** {@inheritDoc} */
+    @Override
     public void setOriginalParent(final RCollection origParent) {
         translatedChild.setOriginalParent(origParent);
     }
 
-    /**
-     * <p>getOriginalParent.</p>
-     *
-     * @return a {@link org.loboevolution.html.renderer.RCollection} object.
-     */
+    /** {@inheritDoc} */
+    @Override
     public RCollection getOriginalParent() {
         return translatedChild.getOriginalParent();
     }
 
-    /**
-     * <p>getOriginalOrCurrentParent.</p>
-     *
-     * @return a {@link org.loboevolution.html.renderer.RCollection} object.
-     */
+    /** {@inheritDoc} */
+    @Override
     public RCollection getOriginalOrCurrentParent() {
         return translatedChild.getOriginalOrCurrentParent();
     }
 
     /** {@inheritDoc} */
+    @Override
     public void setBounds(final int x, final int y, final int with, final int height) {
         translatedChild.setBounds(x, y, with, height);
     }
 
     /** {@inheritDoc} */
+    @Override
     public void setOrigin(final int x, final int y) {
         translatedChild.setOrigin(x, y);
     }
 
     /** {@inheritDoc} */
+    @Override
     public void setX(final int x) {
         translatedChild.setX(x);
     }
 
     /** {@inheritDoc} */
+    @Override
     public void setY(final int y) {
         translatedChild.setY(y);
     }
 
-    /**
-     * <p>getX.</p>
-     *
-     * @return a {@link java.lang.Integer} object.
-     */
+    /** {@inheritDoc} */
+    @Override
     public int getX() {
         return translatedChild.getX();
     }
 
-    /**
-     * <p>getY.</p>
-     *
-     * @return a {@link java.lang.Integer} object.
-     */
+    /** {@inheritDoc} */
+    @Override
     public int getY() {
         return translatedChild.getY();
     }
 
-    /**
-     * <p>getHeight.</p>
-     *
-     * @return a {@link java.lang.Integer} object.
-     */
+    /** {@inheritDoc} */
+    @Override
     public int getHeight() {
         return translatedChild.getHeight();
     }
 
-    /**
-     * <p>getWidth.</p>
-     *
-     * @return a {@link java.lang.Integer} object.
-     */
+    /** {@inheritDoc} */
+    @Override
     public int getWidth() {
         return translatedChild.getWidth();
     }
 
-    /**
-     * <p>getVisualHeight.</p>
-     *
-     * @return a {@link java.lang.Integer} object.
-     */
+    /** {@inheritDoc} */
+    @Override
     public int getVisualHeight() {
         return translatedChild.getVisualHeight();
     }
 
-    /**
-     * <p>getVisualWidth.</p>
-     *
-     * @return a {@link java.lang.Integer} object.
-     */
+    /** {@inheritDoc} */
+    @Override
     public int getVisualWidth() {
         return translatedChild.getVisualWidth();
     }
 
     /** {@inheritDoc} */
+    @Override
     public void setHeight(final int height) {
         translatedChild.setHeight(height);
     }
 
     /** {@inheritDoc} */
+    @Override
     public void setWidth(final int width) {
         translatedChild.setWidth(width);
     }
 
     /** {@inheritDoc} */
+    @Override
     public RenderableSpot getLowestRenderableSpot(final int x, final int y) {
         return translatedChild.getLowestRenderableSpot(x, y);
     }
 
-    /**
-     * <p>repaint.</p>
-     */
+    /** {@inheritDoc} */
+    @Override
     public void repaint() {
         translatedChild.repaint();
     }
 
     /** {@inheritDoc} */
+    @Override
     public boolean onMousePressed(final MouseEvent event, final int x, final int y) {
         return translatedChild.onMousePressed(event, x, y);
     }
 
     /** {@inheritDoc} */
+    @Override
     public boolean onMouseReleased(final MouseEvent event, final int x, final int y) {
         return translatedChild.onMouseReleased(event, x, y);
     }
 
     /** {@inheritDoc} */
+    @Override
     public boolean onMouseDisarmed(final MouseEvent event) {
         return translatedChild.onMouseDisarmed(event);
     }
 
     /** {@inheritDoc} */
+    @Override
     public boolean onMouseClick(final MouseEvent event, final int x, final int y) {
         return translatedChild.onMouseClick(event, x, y);
     }
 
-    /**
-     * <p>onMiddleClick.</p>
-     *
-     * @param event a {@link java.awt.event.MouseEvent} object.
-     * @param x a {@link java.lang.Integer} object.
-     * @param y a {@link java.lang.Integer} object.
-     * @return a boolean.
-     */
-    public boolean onMiddleClick(final MouseEvent event, final int x, final int y) {
-        return false;
-    }
-
     /** {@inheritDoc} */
+    @Override
     public boolean onDoubleClick(final MouseEvent event, final int x, final int y) {
         return translatedChild.onDoubleClick(event, x, y);
     }
 
     /** {@inheritDoc} */
+    @Override
     public boolean onRightClick(final MouseEvent event, final int x, final int y) {
         return translatedChild.onRightClick(event, x, y);
     }
 
     /** {@inheritDoc} */
+    @Override
     public void onMouseMoved(final MouseEvent event, final int x, final int y, final boolean triggerEvent, final ModelNode limit) {
         translatedChild.onMouseMoved(event, x, y, triggerEvent, limit);
     }
 
     /** {@inheritDoc} */
+    @Override
     public void onMouseOut(final MouseEvent event, final int x, final int y, final ModelNode limit) {
         translatedChild.onMouseOut(event, x, y, limit);
     }
 
-    /**
-     * <p>isContainedByNode.</p>
-     *
-     * @return a boolean.
-     */
+    /** {@inheritDoc} */
+    @Override
     public boolean isContainedByNode() {
         return translatedChild.isContainedByNode();
     }
 
     /** {@inheritDoc} */
+    @Override
     public boolean paintSelection(final Graphics g, final boolean inSelection, final RenderableSpot startPoint, final RenderableSpot endPoint) {
         return translatedChild.paintSelection(g, inSelection, startPoint, endPoint);
     }
@@ -317,6 +279,7 @@ public class TranslatedRenderable extends BaseBoundableRenderable implements RCo
     }
 
     /** {@inheritDoc} */
+    @Override
     public void repaint(final int x, final int y, final int width, final int height) {
         final Point or = translatedChild.getOriginRelativeTo(getParent());
         final Rectangle rect = new Rectangle(x, y, width, height);
@@ -324,18 +287,14 @@ public class TranslatedRenderable extends BaseBoundableRenderable implements RCo
         getParent().repaint(x + or.x, y + or.y, width, height);
     }
 
-    /**
-     * <p>relayout.</p>
-     */
+    /** {@inheritDoc} */
+    @Override
     public void relayout() {
         translatedChild.relayout();
     }
 
-    /**
-     * <p>getZIndex.</p>
-     *
-     * @return a {@link java.lang.Integer} object.
-     */
+    /** {@inheritDoc} */
+    @Override
     public int getZIndex() {
         return translatedChild.getZIndex();
     }
@@ -346,11 +305,6 @@ public class TranslatedRenderable extends BaseBoundableRenderable implements RCo
         // TODO
     }
 
-    /**
-     * <p>getChild.</p>
-     *
-     * @return a {@link org.loboevolution.html.renderer.Renderable} object.
-     */
     public Renderable getChild() {
         return translatedChild;
     }
@@ -421,6 +375,7 @@ public class TranslatedRenderable extends BaseBoundableRenderable implements RCo
     }
 
     /** {@inheritDoc} */
+    @Override
     public Point getOriginRelativeToAbs(final RCollection ancestor) {
         return translatedChild.getOriginRelativeToAbs(ancestor);
     }

@@ -74,7 +74,6 @@ public class BaseRadioButtonUI extends BasicRadioButtonUI {
 	/** Constant textRect */
 	protected static final Rectangle textRect = new Rectangle();
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {
 		if (radioButtonUI == null) {
 			radioButtonUI = new BaseRadioButtonUI();

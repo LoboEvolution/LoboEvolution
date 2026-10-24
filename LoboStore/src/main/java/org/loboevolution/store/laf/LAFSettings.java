@@ -36,7 +36,12 @@ import org.loboevolution.store.DatabseSQLite;
 import java.awt.*;
 import java.io.Serial;
 import java.io.Serializable;
-import java.sql.*;
+
+import java.sql.DriverManager;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 

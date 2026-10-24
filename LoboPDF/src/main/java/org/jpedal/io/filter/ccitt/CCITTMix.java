@@ -48,6 +48,8 @@ public class CCITTMix extends CCITT2D implements CCITTDecoder {
 
     }
 
+    /** {@inheritDoc} */
+    @Override
     public byte[] decode() {
 
         try {

@@ -315,19 +315,5 @@ public class ShaderType2 extends PDFShader {
 
             return (float) tp;
         }
-
-        /**
-         * t = t0 + (t1 - t0) x x'
-         */
-        private float getT(final float xp) {
-
-            if (xp < 0) {
-                return getMinT();
-            } else if (xp > 1) {
-                return getMaxT();
-            } else {
-                return getMinT() + (dt1t0 * xp);
-            }
-        }
     }
 }

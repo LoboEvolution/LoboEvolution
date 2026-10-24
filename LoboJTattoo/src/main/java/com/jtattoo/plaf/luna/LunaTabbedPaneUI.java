@@ -44,7 +44,6 @@ public class LunaTabbedPaneUI extends BaseTabbedPaneUI {
 	private static final Color[] SELECTED_TAB_COLOR = new Color[] { AbstractLookAndFeel.getBackgroundColor() };
 	private static final Color[] SEP_COLOR = new Color[] { AbstractLookAndFeel.getControlDarkShadow() };
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {
 		return new LunaTabbedPaneUI();
 	}

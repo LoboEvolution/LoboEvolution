@@ -28,19 +28,29 @@ package org.loboevolution.html.dom;
 public interface DOMImplementationSource {
 
     /**
-     * <p>getDOMImplementation.</p>
+     * A method to request a DOM implementation.
      *
-     * @param features a {@link java.lang.String} object.
-     * @return a {@link DOMImplementation} object.
+     * @param features A string that specifies which features are required.
+     *                 This is a space separated list in which each feature is specified
+     *                 by its name optionally followed by a space and a version number.
+     *                 This is something like: "XML 1.0 Traversal Events 2.0"
+     * @return An implementation that has the desired features, or
+     * <code>null</code> if this source has none.
      */
     DOMImplementation getDOMImplementation(String features);
 
 
     /**
-     * <p>getDOMImplementation.</p>
+     * A method to request a list of DOM implementations that support the
+     * specified features and versions, as specified in .
      *
-     * @param features a {@link java.lang.String} object.
-     * @return a {@link DOMImplementation} object.
+     * @param features A string that specifies which features and versions
+     *                 are required. This is a space separated list in which each feature
+     *                 is specified by its name optionally followed by a space and a
+     *                 version number. This is something like: "XML 3.0 Traversal +Events
+     *                 2.0"
+     * @return A list of DOM implementations that support the desired
+     * features.
      */
     DOMImplementationList getDOMImplementationList(String features);
 }

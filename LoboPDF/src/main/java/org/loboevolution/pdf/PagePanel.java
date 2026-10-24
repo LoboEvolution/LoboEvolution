@@ -125,10 +125,9 @@ public class PagePanel extends JPanel implements ImageObserver, MouseListener {
         return size == null ? super.getPreferredSize() : this.size;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public void setPreferredSize(final Dimension size) {
+    /** {@inheritDoc} */
+    @Override
+	public void setPreferredSize(final Dimension size) {
         if (super.getPreferredSize() != size) {
             super.setPreferredSize(size);
             this.image = null;
@@ -190,12 +189,8 @@ public class PagePanel extends JPanel implements ImageObserver, MouseListener {
         flag.waitForFlag();
     }
 
-    /**
-     * {@inheritDoc}
-     * <p>
-     * Handles notification of the fact that some part of the image
-     * changed.  Repaints that portion.
-     */
+    /** {@inheritDoc} */
+    @Override
     public boolean imageUpdate(final Image img, final int infoflags, final int x, final int y, final int width, final int height) {
         if ((infoflags & (SOMEBITS | ALLBITS)) != 0) {
             repaint(x + offx, y + offy, width, height);
@@ -208,35 +203,30 @@ public class PagePanel extends JPanel implements ImageObserver, MouseListener {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public void mouseClicked(final MouseEvent e) {
+    /** {@inheritDoc} */
+    @Override
+	public void mouseClicked(final MouseEvent e) {
         requestFocus();
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public void mouseEntered(final MouseEvent e) {
+    /** {@inheritDoc} */
+    @Override
+	public void mouseEntered(final MouseEvent e) {
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public void mouseExited(final MouseEvent e) {
+    /** {@inheritDoc} */
+    @Override
+	public void mouseExited(final MouseEvent e) {
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public void mousePressed(final MouseEvent e) {
+    /** {@inheritDoc} */
+    @Override
+	public void mousePressed(final MouseEvent e) {
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public void mouseReleased(final MouseEvent e) {
+    /** {@inheritDoc} */
+    @Override
+	public void mouseReleased(final MouseEvent e) {
     }
 
 }

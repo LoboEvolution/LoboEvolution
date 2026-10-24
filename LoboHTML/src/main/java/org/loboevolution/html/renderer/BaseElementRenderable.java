@@ -84,7 +84,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 
 	protected Color borderBottomColor;
 
-	protected volatile Image backgroundImage;
+	protected Image backgroundImage;
 
 	protected BorderInfo borderInfo;
 
@@ -370,6 +370,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 	}
 
 	/** {@inheritDoc} */
+	@Override
 	public void setupRelativePosition(final RenderableContainer container) {
 		if(this.modelNode instanceof HTMLElementImpl) {
 			setupRelativePosition((RenderState)getModelNode().getRenderState(), container.getInnerWidth(), container.getInnerHeight());

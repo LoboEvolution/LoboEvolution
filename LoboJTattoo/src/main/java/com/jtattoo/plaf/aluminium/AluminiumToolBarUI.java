@@ -42,7 +42,6 @@ import com.jtattoo.plaf.base.BaseBorders;
  */
 public class AluminiumToolBarUI extends AbstractToolBarUI {
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {
 		return new AluminiumToolBarUI();
 	}

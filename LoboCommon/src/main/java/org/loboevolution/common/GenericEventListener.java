@@ -31,6 +31,7 @@ import java.util.EventObject;
 /**
  * <p>GenericEventListener interface.</p>
  */
+@FunctionalInterface
 public interface GenericEventListener extends EventListener {
 
 	/** Constant EMPTY_ARRAY */

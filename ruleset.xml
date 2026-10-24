@@ -55,13 +55,6 @@
     <rule ref="category/java/bestpractices.xml/LiteralsFirstInComparisons"/>
     <rule ref="category/java/bestpractices.xml/SimplifiableTestAssertion"/>
     <rule ref="category/java/bestpractices.xml/UnitTestAssertionsShouldIncludeMessage"/>
-    <rule ref="category/java/bestpractices.xml/UnitTestContainsTooManyAsserts">
-        <properties>
-            <property name="maximumAsserts" value="1"/>
-        </properties>
-    </rule>
-    <rule ref="category/java/bestpractices.xml/UnitTestShouldIncludeAssert"/>
-
     <!-- Spostata in codestyle in PMD 7 -->
     <rule ref="category/java/codestyle.xml/UnnecessaryImport"/>
 

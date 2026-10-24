@@ -39,7 +39,6 @@ import com.jtattoo.plaf.base.BaseInternalFrameUI;
  */
 public class MintInternalFrameUI extends BaseInternalFrameUI {
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {
 		return new MintInternalFrameUI((JInternalFrame) c);
 	}

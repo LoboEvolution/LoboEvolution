@@ -154,6 +154,9 @@ public final class DOMImplementationRegistry {
             }
         }
         return new DOMImplementationList() {
+
+            /** {@inheritDoc} */
+            @Override
             public DOMImplementation item(final int index) {
                 if (index >= 0 && index < implementations.size()) {
                     try {
@@ -165,6 +168,8 @@ public final class DOMImplementationRegistry {
                 return null;
             }
 
+            /** {@inheritDoc} */
+            @Override
             public int getLength() {
                 return implementations.size();
             }

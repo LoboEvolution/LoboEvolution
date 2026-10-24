@@ -31,8 +31,6 @@ import org.loboevolution.annotation.Alerts;
 import org.loboevolution.annotation.AlertsExtension;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.html.dom.HTMLDialogElement;
-import org.loboevolution.html.dom.HTMLDocument;
-import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 
 /**
  * Unit tests for {@link HTMLDialogElement}.

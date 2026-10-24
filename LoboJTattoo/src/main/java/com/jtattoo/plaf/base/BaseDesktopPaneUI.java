@@ -43,7 +43,6 @@ import javax.swing.plaf.basic.BasicDesktopPaneUI;
  */
 public class BaseDesktopPaneUI extends BasicDesktopPaneUI {
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {
 		return new BaseDesktopPaneUI();
 	}

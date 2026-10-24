@@ -26,7 +26,6 @@
 
 package org.loboevolution.html.dom.input;
 
-import lombok.EqualsAndHashCode;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.control.InputControl;
 import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
@@ -70,6 +69,9 @@ public class InputNumber extends InputText {
 
 	private KeyListener addKeyListener() {
         return new KeyAdapter() {
+
+			/** {@inheritDoc} */
+			@Override
 			public void keyPressed(final KeyEvent keyEvent) {
 				final JTextField num = (JTextField) keyEvent.getSource();
 				if (!Strings.isNumeric(num.getText())) {

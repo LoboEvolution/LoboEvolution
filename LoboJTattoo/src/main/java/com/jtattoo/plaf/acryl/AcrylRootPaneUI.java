@@ -40,7 +40,6 @@ import com.jtattoo.plaf.base.BaseRootPaneUI;
  */
 public class AcrylRootPaneUI extends BaseRootPaneUI {
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {
 		return new AcrylRootPaneUI();
 	}

@@ -47,7 +47,6 @@ import com.jtattoo.plaf.base.BaseBorders;
  */
 public class TextureMenuBarUI extends BasicMenuBarUI {
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent x) {
 		return new TextureMenuBarUI();
 	}

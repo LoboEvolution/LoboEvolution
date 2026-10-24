@@ -53,13 +53,6 @@ public class HTMLTableElementImpl extends HTMLElementImpl implements HTMLTableEl
 
 	/**
 	 * <p>Constructor for HTMLTableElementImpl.</p>
-	 */
-	public HTMLTableElementImpl() {
-		super("TABLE");
-	}
-
-	/**
-	 * <p>Constructor for HTMLTableElementImpl.</p>
 	 *
 	 * @param name a {@link java.lang.String} object.
 	 */
@@ -275,27 +268,12 @@ public class HTMLTableElementImpl extends HTMLElementImpl implements HTMLTableEl
 	 * the row is appended as the last row.
 	 */
 	@Override
-	public HTMLTableRowElement insertRow(final int index) throws Exception {
-		return this.insertRow(index, "TR");
-	}
-	
-	private HTMLTableRowElementImpl insertRow(final Object objIndex, final String tagName)  throws Exception {
+	public HTMLTableRowElement insertRow(final int index) {
 		final Document doc = this.document;
 		if (doc == null) {
 			throw new DOMException(DOMException.WRONG_DOCUMENT_ERR, "Orphan element");
 		}
 		final HTMLTableRowElementImpl rowElement = (HTMLTableRowElementImpl) doc.createElement("TR");
-		
-		int index;
-		if (objIndex instanceof Double) {
-			index = ((Double) objIndex).intValue();
-		} else {
-			if (objIndex == null || "".equals(objIndex)) {
-				index = 0;
-			} else {
-				index = Integer.parseInt(objIndex.toString());
-			}
-		}
 		
 		if (index  == 0 || index  == - 1) {
 			appendChild(rowElement);

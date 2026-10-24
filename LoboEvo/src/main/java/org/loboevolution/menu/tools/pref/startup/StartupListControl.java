@@ -122,7 +122,7 @@ public class StartupListControl extends JComponent {
 		try {
 			final BufferedReader reader = new BufferedReader(new StringReader(text));
 			String line;
-			final ArrayList<String> stringsAL = new ArrayList<>();
+			final List<String> stringsAL = new ArrayList<>();
 			while ((line = reader.readLine()) != null) {
 				stringsAL.add(line);
 			}

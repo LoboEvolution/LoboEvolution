@@ -36,6 +36,7 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.security.spec.KeySpec;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Base64;
 import java.util.StringTokenizer;
 import java.util.regex.Pattern;
@@ -75,11 +76,10 @@ public final class Strings {
 	/**
 	 * tex height
 	 *
-	 * @param text a {@link java.lang.String} object.
 	 * @param font a {@link java.awt.Font} object.
 	 * @return a {@link java.awt.Dimension} object.
 	 */
-	public static int texHeight(final String text, final Font font) {
+	public static int texHeight(final Font font) {
 		BufferedImage img = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2 = img.createGraphics();
 		g2.setFont(font);
@@ -192,15 +192,6 @@ public final class Strings {
 				&& text.regionMatches(true, text.length() - text1.length(), text1, 0, text1.length());
 	}
 
-	public static String[] splitIgnoreCase(final String text, final String text1) {
-		if (text != null && text1 != null) {
-			return text.split(text1.toLowerCase()).length > 1 ? text.split(text1.toLowerCase()) :
-					text.split(text1.toUpperCase()).length > 1 ? text.split(text1.toUpperCase()) : new String[]{};
-		}
-		return null;
-	}
-
-
 	/**
 	 * <p>isNumeric.</p>
 	 *
@@ -226,7 +217,7 @@ public final class Strings {
 	 * @return the string[]
 	 */
 	public static String[] split(final String phrase) {
-		final ArrayList<String> wordList = new ArrayList<>();
+		final List<String> wordList = new ArrayList<>();
 		StringBuilder word = null;
 		final char[] list = phrase.toCharArray();
 		for (final char ch : list) {
@@ -263,7 +254,7 @@ public final class Strings {
 	 */
 	public static String[] splitUsingTokenizer(final String subject, final String delimiters) {
 		final StringTokenizer strTkn = new StringTokenizer(subject, delimiters);
-		final ArrayList<String> arrLis = new ArrayList<>(subject.length());
+		final List<String> arrLis = new ArrayList<>(subject.length());
 
 		while (strTkn.hasMoreTokens()) {
 			arrLis.add(strTkn.nextToken());

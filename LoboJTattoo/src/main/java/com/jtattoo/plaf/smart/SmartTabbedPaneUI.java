@@ -41,7 +41,6 @@ import com.jtattoo.plaf.base.BaseTabbedPaneUI;
  * author Michael Hagen */
 public class SmartTabbedPaneUI extends BaseTabbedPaneUI {
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {
 		return new SmartTabbedPaneUI();
 	}

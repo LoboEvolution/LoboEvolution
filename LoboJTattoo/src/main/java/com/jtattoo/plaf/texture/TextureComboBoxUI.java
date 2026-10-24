@@ -122,7 +122,6 @@ public class TextureComboBoxUI extends BaseComboBoxUI {
 		}
 	} // end of class ArrowButton
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {
 		return new TextureComboBoxUI();
 	}

@@ -54,6 +54,8 @@ public class HTMLTableColGroupElementImpl extends HTMLElementImpl {
 		return null;
 	}
 
+	/** {@inheritDoc} */
+	@Override
 	public Integer getClientWidth() {
 		return null;
 	}

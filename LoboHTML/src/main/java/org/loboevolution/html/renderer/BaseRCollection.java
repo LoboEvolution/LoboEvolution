@@ -144,6 +144,7 @@ public abstract class BaseRCollection extends BaseBoundableRenderable implements
 	}
 
 	/** {@inheritDoc} */
+	@Override
 	public BoundableRenderable getRenderable(final int x, final int y) {
 		final List<Renderable> renderables = getRenderables();
 		final AtomicReference<BoundableRenderable> renderable = new AtomicReference<>(null);
@@ -437,7 +438,7 @@ public abstract class BaseRCollection extends BaseBoundableRenderable implements
 
 		final String textContent = element.getTextContent();
 		if (height == -1 && Strings.isNotBlank(textContent) && renderState.getPosition() == RenderState.POSITION_ABSOLUTE) {
-			height = Strings.texHeight(textContent, renderState.getFont());
+			height = Strings.texHeight(renderState.getFont());
 		}
 
 		return height;

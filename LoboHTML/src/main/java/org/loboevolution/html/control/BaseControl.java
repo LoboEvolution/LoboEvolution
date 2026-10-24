@@ -31,7 +31,6 @@ package org.loboevolution.html.control;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.loboevolution.html.AlignValues;
-import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.node.Element;
 
 import javax.swing.*;

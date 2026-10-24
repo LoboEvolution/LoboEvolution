@@ -54,7 +54,7 @@ public class LocalHtmlRendererContext implements HtmlRendererContext{
 
     private HtmlPanel htmlPanel;
 
-    private volatile HtmlRendererContext opener;
+    private HtmlRendererContext opener;
 
     private final HtmlRendererContext parentRcontext;
 
@@ -463,19 +463,8 @@ public class LocalHtmlRendererContext implements HtmlRendererContext{
         return (Window) current;
     }
 
-    private Proxy getProxy() {
-        return Proxy.NO_PROXY;
-    }
-
-    private void submitFormSync(final String method, final java.net.URL action, final String target, final String enctype,
-                                final FormInput[] formInputs) throws Exception {
-    }
-
-    /**
-     * <p>isTest.</p>
-     *
-     * @return a boolean.
-     */
+    /** {@inheritDoc} */
+    @Override
     public boolean isTestEnabled() {
         return true;
     }

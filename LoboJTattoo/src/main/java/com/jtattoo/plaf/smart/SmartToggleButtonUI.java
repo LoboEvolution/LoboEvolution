@@ -43,7 +43,6 @@ import com.jtattoo.plaf.base.BaseToggleButtonUI;
  */
 public class SmartToggleButtonUI extends BaseToggleButtonUI {
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {
 		return new SmartToggleButtonUI();
 	}

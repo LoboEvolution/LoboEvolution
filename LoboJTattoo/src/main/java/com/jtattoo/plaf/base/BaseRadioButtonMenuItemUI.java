@@ -38,7 +38,6 @@ import javax.swing.plaf.ComponentUI;
  */
 public class BaseRadioButtonMenuItemUI extends BaseMenuItemUI {
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent b) {
 		return new BaseRadioButtonMenuItemUI();
 	}

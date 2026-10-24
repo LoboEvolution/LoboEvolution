@@ -353,8 +353,8 @@ public class NativeRegExp extends IdScriptableObject {
         if (debug) {
             log.info("Prog. length = {}", endPC);
             for (int i = 0; i < endPC; i++) {
-                System.out.print(regexp.program[i]);
-                if (i < (endPC - 1)) System.out.print(", ");
+                log.error(String.valueOf(regexp.program[i]));
+                if (i < (endPC - 1)) log.error(", ");
             }
         }
         regexp.parenCount = state.parenCount;

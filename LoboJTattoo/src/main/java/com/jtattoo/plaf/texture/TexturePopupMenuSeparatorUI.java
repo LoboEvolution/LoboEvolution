@@ -51,7 +51,6 @@ public class TexturePopupMenuSeparatorUI extends BasicSeparatorUI {
 	private static final Color[] BORDER_COLORS = new Color[] { Color.black, new Color(164, 164, 164),
 			new Color(48, 48, 48), new Color(128, 128, 128) };
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {
 		return new TexturePopupMenuSeparatorUI();
 	}

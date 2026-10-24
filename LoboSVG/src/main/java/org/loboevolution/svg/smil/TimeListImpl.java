@@ -29,16 +29,16 @@ package org.loboevolution.svg.smil;
 import org.loboevolution.html.dom.smil.Time;
 import org.loboevolution.html.dom.smil.TimeList;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>TimeListImpl class.</p>
  */
 public class TimeListImpl implements TimeList {
 
-    private final ArrayList<Time> mTimes;
+    private final List<Time> mTimes;
 
-    public TimeListImpl(ArrayList<Time> times) {
+    public TimeListImpl(List<Time> times) {
         mTimes = times;
     }
 

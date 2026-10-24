@@ -50,7 +50,6 @@ import javax.swing.plaf.basic.BasicFormattedTextFieldUI;
  */
 public class BaseFormattedTextFieldUI extends BasicFormattedTextFieldUI {
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {
 		return new BaseFormattedTextFieldUI();
 	}

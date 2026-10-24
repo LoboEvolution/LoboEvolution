@@ -27,7 +27,6 @@
 package org.loboevolution.store;
 
 import java.net.URI;
-import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;

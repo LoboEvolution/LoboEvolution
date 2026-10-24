@@ -31,8 +31,10 @@ import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.style.FontValues;
 import org.loboevolution.html.style.HtmlValues;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Collections;
+import java.util.Map;
+import java.util.Set;
+import java.util.LinkedHashMap;
 
 /**
  * <p>FontParser class.</p>
@@ -210,13 +212,5 @@ public class FontParser {
 
         // Don't capitalize - preserve original casing
         return cleaned.contains(" ") ? "\"" + cleaned + "\"" : cleaned;
-    }
-
-    private String capitalizeFontName(String name) {
-        return Arrays.stream(name.split("\\s+"))
-                .map(word -> word.isEmpty() ? word :
-                        Character.toUpperCase(word.charAt(0)) +
-                                (word.length() > 1 ? word.substring(1).toLowerCase() : ""))
-                .collect(Collectors.joining(" "));
     }
 }

@@ -1628,7 +1628,7 @@ public class ElementImpl extends NodeInternal implements Element {
 							}
 							inlineMax.set(Math.max(inlineMax.get(), lineCount * lineHeight));
 						} else {
-							inlineMax.set(Math.max(inlineMax.get(), Strings.texHeight(text, elmRs.getFont())));
+							inlineMax.set(Math.max(inlineMax.get(), Strings.texHeight(elmRs.getFont())));
 						}
 					}
 					break;

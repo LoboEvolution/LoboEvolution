@@ -27,7 +27,6 @@
 package org.loboevolution.html.builder;
 
 import org.loboevolution.html.dom.HTMLElement;
-import org.loboevolution.html.dom.domimpl.HTMLAreaElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLMapElementImpl;
 
 public class MapBuilder implements HTMLElementBuilder {

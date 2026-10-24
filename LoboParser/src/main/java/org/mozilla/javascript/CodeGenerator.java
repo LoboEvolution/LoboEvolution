@@ -52,7 +52,7 @@ class CodeGenerator extends Icode {
     // fixupTable[i] = (label_index << 32) | fixup_site
     private long[] fixupTable;
     private int fixupTableTop;
-    private final ArrayList<Object> literalIds = new ArrayList<>();
+    private final List<Object> literalIds = new ArrayList<>();
 
     private int exceptionTableTop;
 

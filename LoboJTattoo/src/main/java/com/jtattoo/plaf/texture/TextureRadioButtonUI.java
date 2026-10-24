@@ -48,7 +48,6 @@ public class TextureRadioButtonUI extends BaseRadioButtonUI {
 
 	private static TextureRadioButtonUI radioButtonUI = null;
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {
 		if (radioButtonUI == null) {
 			radioButtonUI = new TextureRadioButtonUI();

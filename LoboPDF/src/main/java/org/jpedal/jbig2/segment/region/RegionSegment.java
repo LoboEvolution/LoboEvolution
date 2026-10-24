@@ -51,12 +51,8 @@ public abstract class RegionSegment extends Segment {
         super(streamDecoder);
     }
 
-    /**
-     * <p>readSegment.</p>
-     *
-     * @throws java.io.IOException             if any.
-     * @throws org.jpedal.jbig2.JBIG2Exception if any.
-     */
+    /** {@inheritDoc} */
+    @Override
     public void readSegment() throws IOException, JBIG2Exception {
         short[] buff = new short[4];
         decoder.readByte(buff);

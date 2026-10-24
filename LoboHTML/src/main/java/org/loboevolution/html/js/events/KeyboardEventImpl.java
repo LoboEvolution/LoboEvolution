@@ -34,9 +34,6 @@ import org.loboevolution.events.KeyboardEvent;
 import org.loboevolution.js.Window;
 import org.mozilla.javascript.NativeObject;
 
-import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
-
 @NoArgsConstructor
 @Getter
 @Setter

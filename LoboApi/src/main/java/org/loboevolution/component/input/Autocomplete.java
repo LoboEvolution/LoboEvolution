@@ -106,14 +106,21 @@ public class Autocomplete {
 			}
 		});
 		txtInput.getDocument().addDocumentListener(new DocumentListener() {
+
+			/** {@inheritDoc} */
+			@Override
 			public void insertUpdate(final DocumentEvent e) {
 				updateList();
 			}
 
+			/** {@inheritDoc} */
+			@Override
 			public void removeUpdate(final DocumentEvent e) {
 				updateList();
 			}
 
+			/** {@inheritDoc} */
+			@Override
 			public void changedUpdate(final DocumentEvent e) {
 				updateList();
 			}

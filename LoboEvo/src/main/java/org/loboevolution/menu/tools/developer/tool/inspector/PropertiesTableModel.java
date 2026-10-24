@@ -51,41 +51,26 @@ public class PropertiesTableModel extends AbstractTableModel {
         this.properties = cssProperties;
     }
 
-    /**
-     * Gets the columnName attribute of the PropertiesTableModel object
-     *
-     * @param col a {@link java.lang.Integer} object
-     * @return The columnName value
-     */
+    /** {@inheritDoc} */
+    @Override
     public String getColumnName(final int col) {
         return colNames[col];
     }
 
-    /**
-     * Gets the columnCount attribute of the PropertiesTableModel object
-     *
-     * @return The columnCount value
-     */
+    /** {@inheritDoc} */
+    @Override
     public int getColumnCount() {
         return colNames.length;
     }
 
-    /**
-     * Gets the rowCount attribute of the PropertiesTableModel object
-     *
-     * @return The rowCount value
-     */
+    /** {@inheritDoc} */
+    @Override
     public int getRowCount() {
         return this.properties.size();
     }
 
-    /**
-     * Gets the valueAt attribute of the PropertiesTableModel object
-     *
-     * @param row a {@link java.lang.Integer} object
-     * @param col a {@link java.lang.Integer} object
-     * @return The valueAt value
-     */
+    /** {@inheritDoc} */
+    @Override
     public Object getValueAt(final int row, final int col) {
         final Map.Entry<String, String> me = (Map.Entry<String, String>) this.properties.entrySet().toArray()[row];
 
@@ -104,13 +89,8 @@ public class PropertiesTableModel extends AbstractTableModel {
         return val;
     }
 
-    /**
-     * Gets the cellEditable attribute of the PropertiesTableModel object
-     *
-     * @param row a {@link java.lang.Integer} object
-     * @param col a {@link java.lang.Integer} object
-     * @return The cellEditable value
-     */
+    /** {@inheritDoc} */
+    @Override
     public boolean isCellEditable(final int row, final int col) {
         return false;
     }

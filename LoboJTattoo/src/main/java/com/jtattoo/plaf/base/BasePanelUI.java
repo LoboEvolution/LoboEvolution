@@ -49,7 +49,6 @@ public class BasePanelUI extends BasicPanelUI {
 
 	private static BasePanelUI panelUI = null;
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {
 		if (panelUI == null) {
 			panelUI = new BasePanelUI();

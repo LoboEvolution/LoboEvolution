@@ -72,10 +72,9 @@ public class TextRegionFlags extends Flags {
      */
     public static final String SB_R_TEMPLATE = "SB_R_TEMPLATE";
 
-    /**
-     * {@inheritDoc}
-     */
-    public void setFlags(final int flagsAsInt) {
+    /** {@inheritDoc} */
+    @Override
+	public void setFlags(final int flagsAsInt) {
         this.flagsAsInt = flagsAsInt;
 
         /*extract SB_HUFF */

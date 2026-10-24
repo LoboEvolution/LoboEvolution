@@ -63,14 +63,12 @@ public class ClearHistoryWindow extends JFrame {
 
 	/**
 	 * <p>Constructor for ClearHistoryWindow.</p>
-	 *
-	 * @param frame a {@link org.loboevolution.component.BrowserFrame} object.
 	 */
-	public ClearHistoryWindow(final BrowserFrame frame) {
-		createAndShowGUI(frame);
+	public ClearHistoryWindow() {
+		createAndShowGUI();
 	}
 
-	private void createAndShowGUI(final BrowserFrame frame) {
+	private void createAndShowGUI() {
 		this.cache = new LoboCheckBox("Cache");
 		this.cookie = new LoboCheckBox("Cookies");
 		this.navigation = new LoboCheckBox("Navigation");

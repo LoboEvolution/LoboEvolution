@@ -162,15 +162,6 @@ public abstract class DTMManager {
 
   // -------------------- private methods --------------------
 
-  static {
-    try {
-      /* Temp debug code - this will be removed after we test everything */
-      final boolean debug = System.getProperty("dtm.debug") != null;
-    } catch (final SecurityException e) {
-      log.info(e.getMessage());
-    }
-  }
-
   /**
    * This value, set at compile time, controls how many bits of the DTM node identifier numbers are
    * used to identify a node within a document, and thus sets the maximum number of nodes per

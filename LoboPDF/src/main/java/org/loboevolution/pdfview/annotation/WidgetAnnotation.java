@@ -176,7 +176,7 @@ public class WidgetAnnotation extends PDFAnnotation {
             }
         }
 
-        final ArrayList<PDFCmd> result = new ArrayList<>();
+        final List<PDFCmd> result = new ArrayList<>();
         result.add(PDFPage.createPushCmd());
         result.add(PDFPage.createPushCmd());
         if ("Image".equals(type)) {

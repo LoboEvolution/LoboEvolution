@@ -350,7 +350,7 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
                 bi.getType() != BufferedImage.TYPE_CUSTOM &&
                 bi.getWidth() >= 1.75 * r.getWidth() && bi.getHeight() >= 1.75 * r.getHeight()) {
             try {
-                return smartDrawImage(image, bi, r, at);
+                return smartDrawImage(bi, r, at);
             } catch (final Exception e) {
                 // do nothing, just go on with the "default" processing
             }
@@ -402,7 +402,7 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
 
     }
 
-    private Rectangle2D smartDrawImage(final PDFImage image, BufferedImage bi, final Rectangle r, AffineTransform at) {
+    private Rectangle2D smartDrawImage(BufferedImage bi, final Rectangle r, AffineTransform at) {
         boolean isBlured = false;
 
         if (Configuration.getInstance().isUseBlurResizingForImages() &&

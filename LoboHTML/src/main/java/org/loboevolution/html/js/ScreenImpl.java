@@ -35,6 +35,7 @@ import java.awt.*;
  * <p>ScreenImpl class.</p>
  */
 public class ScreenImpl extends AbstractScriptableDelegate implements Screen {
+
 	private final GraphicsDevice graphicsDevice;
 	private final GraphicsEnvironment graphicsEnvironment;
 
@@ -51,11 +52,8 @@ public class ScreenImpl extends AbstractScriptableDelegate implements Screen {
 		}
 	}
 
-	/**
-	 * <p>getAvailHeight.</p>
-	 *
-	 * @return a {@link java.lang.Integer} object.
-	 */
+	/** {@inheritDoc} */
+	@Override
 	public int getAvailHeight() {
 		final GraphicsEnvironment ge = this.graphicsEnvironment;
 		if (ge == null) {
@@ -64,11 +62,8 @@ public class ScreenImpl extends AbstractScriptableDelegate implements Screen {
 		return ge.getMaximumWindowBounds().height;
 	}
 
-	/**
-	 * <p>getAvailWidth.</p>
-	 *
-	 * @return a {@link java.lang.Integer} object.
-	 */
+	/** {@inheritDoc} */
+	@Override
 	public int getAvailWidth() {
 		final GraphicsEnvironment ge = this.graphicsEnvironment;
 		if (ge == null) {
@@ -77,39 +72,27 @@ public class ScreenImpl extends AbstractScriptableDelegate implements Screen {
 		return ge.getMaximumWindowBounds().width;
 	}
 
-	/**
-	 * <p>getColorDepth.</p>
-	 *
-	 * @return a {@link java.lang.Integer} object.
-	 */
+	/** {@inheritDoc} */
+	@Override
 	public int getColorDepth() {
 		return 24;
 	}
 
-	/**
-	 * <p>getHeight.</p>
-	 *
-	 * @return a {@link java.lang.Integer} object.
-	 */
+	/** {@inheritDoc} */
+	@Override
 	public int getHeight() {
 		final GraphicsDevice gd = this.graphicsDevice;
 		return gd == null ? 0 : gd.getDisplayMode().getHeight();
 	}
 
-	/**
-	 * <p>getPixelDepth.</p>
-	 *
-	 * @return a {@link java.lang.Integer} object.
-	 */
+	/** {@inheritDoc} */
+	@Override
 	public int getPixelDepth() {
 		return 96;
 	}
 
-	/**
-	 * <p>getWidth.</p>
-	 *
-	 * @return a {@link java.lang.Integer} object.
-	 */
+	/** {@inheritDoc} */
+	@Override
 	public int getWidth() {
 		final GraphicsEnvironment ge = this.graphicsEnvironment;
 		if (ge == null) {

@@ -18,6 +18,8 @@ import java.util.Locale;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.function.BiConsumer;
+
+import lombok.extern.slf4j.Slf4j;
 import org.mozilla.javascript.ast.FunctionNode;
 import org.mozilla.javascript.v8dtoa.DoubleConversion;
 import org.mozilla.javascript.v8dtoa.FastDtoa;
@@ -29,6 +31,7 @@ import org.mozilla.javascript.xml.XMLObject;
  *
  * @author Norris Boyd
  */
+@Slf4j
 public class ScriptRuntime {
 
     /** No instances should be created. */
@@ -5188,7 +5191,7 @@ public class ScriptRuntime {
                             nonJSObject.getClass().getName());
             Context.reportWarning(message);
             // Just to be sure that it would be noticed
-            System.err.println(message);
+            log.error(message);
         }
     }
 

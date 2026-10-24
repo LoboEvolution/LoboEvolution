@@ -56,10 +56,9 @@ public class HalftoneRegionFlags extends Flags {
      */
     public static final String H_DEF_PIXEL = "H_DEF_PIXEL";
 
-    /**
-     * {@inheritDoc}
-     */
-    public void setFlags(final int flagsAsInt) {
+    /** {@inheritDoc} */
+    @Override
+	public void setFlags(final int flagsAsInt) {
         this.flagsAsInt = flagsAsInt;
         flags.put(H_MMR, flagsAsInt & 1);
         flags.put(H_TEMPLATE, (flagsAsInt >> 1) & 3);

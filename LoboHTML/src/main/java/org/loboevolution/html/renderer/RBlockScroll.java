@@ -296,6 +296,8 @@ public class RBlockScroll {
             this.orientation = orientation;
         }
 
+        /** {@inheritDoc} */
+        @Override
         public void stateChanged(final ChangeEvent changeEvent) {
             final Object source = changeEvent.getSource();
             if (source instanceof BoundedRangeModel aModel) {

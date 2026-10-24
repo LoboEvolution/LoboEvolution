@@ -305,13 +305,13 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 		@Override
 		public void layoutContainer(final Container c) {
 			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
-				layoutMacStyle(c);
+				layoutMacStyle();
 			} else {
-				layoutDefault(c);
+				layoutDefault();
 			}
 		}
 
-		public void layoutDefault(final Container c) {
+		public void layoutDefault() {
 			final boolean leftToRight = isLeftToRight();
 
 			final int spacing = getHorSpacing();
@@ -379,7 +379,7 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 			}
 		}
 
-		public void layoutMacStyle(final Container c) {
+		public void layoutMacStyle() {
 			final int spacing = getHorSpacing();
 			final int h = getHeight();
 

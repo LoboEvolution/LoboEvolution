@@ -33,6 +33,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -75,7 +76,7 @@ public final class AdobeGlyphList {
                 StringTokenizer codeTokens;
                 String glyphName;
                 StringTokenizer tokens;
-                final ArrayList<String> unicodes = new ArrayList<>();
+                final List<String> unicodes = new ArrayList<>();
                 final URL resource = getClass().getResource("/org/loboevolution/pdfview/font/ttf/resource/glyphlist.txt");
                 try (final InputStream istr = resource.openStream()) {
                     final BufferedReader reader = new BufferedReader(new InputStreamReader(istr));

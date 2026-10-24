@@ -46,12 +46,8 @@ public class MediaQueryListImpl implements MediaQueryList {
 
     private final String media;
 
-    /**
-     * <p>isMatches.</p>
-     *
-     * @return a boolean.
-     * @throws java.lang.Exception if any.
-     */
+    /** {@inheritDoc} */
+    @Override
     public boolean isMatches() throws Exception {
         final String processedText = CSSUtilities.preProcessCss(media);
         if (Strings.isBlank(processedText)) return true;

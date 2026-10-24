@@ -39,7 +39,6 @@ import com.jtattoo.plaf.base.BaseTableHeaderUI;
  */
 public class SmartTableHeaderUI extends BaseTableHeaderUI {
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {
 		return new SmartTableHeaderUI();
 	}

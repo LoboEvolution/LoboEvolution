@@ -31,7 +31,6 @@ import org.loboevolution.annotation.Alerts;
 import org.loboevolution.annotation.AlertsExtension;
 import org.loboevolution.driver.LoboUnitTest;
 import org.loboevolution.events.EventTarget;
-import org.loboevolution.events.InputEvent;
 
 /**
  * Tests for {@link EventTarget}.

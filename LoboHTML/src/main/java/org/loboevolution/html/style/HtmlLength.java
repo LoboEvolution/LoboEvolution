@@ -47,7 +47,7 @@ public final class HtmlLength {
 	public static final int PIXELS = 1;
 
 	private final int lengthType;
-	private volatile int rawValue;
+	private int rawValue;
 
 	/**
 	 * <p>Constructor for HtmlLength.</p>

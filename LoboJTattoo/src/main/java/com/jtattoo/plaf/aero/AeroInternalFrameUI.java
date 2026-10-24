@@ -40,7 +40,6 @@ import com.jtattoo.plaf.base.BaseInternalFrameUI;
  */
 public class AeroInternalFrameUI extends BaseInternalFrameUI {
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {
 		return new AeroInternalFrameUI((JInternalFrame) c);
 	}

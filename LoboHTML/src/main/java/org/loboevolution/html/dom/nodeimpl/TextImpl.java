@@ -28,7 +28,6 @@ package org.loboevolution.html.dom.nodeimpl;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.html.dom.HTMLSlotElement;
 import org.loboevolution.html.node.Attr;
-import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Node;
 import org.loboevolution.html.node.Text;
 

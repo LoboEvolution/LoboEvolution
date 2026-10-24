@@ -43,23 +43,19 @@ public class ShowBookmarksAction extends AbstractAction {
 
 	private final BrowserFrame frame;
 
-	private final Integer num;
-
 	/**
 	 * <p>Constructor for ShowBookmarksAction.</p>
 	 *
 	 * @param frame a {@link org.loboevolution.component.BrowserFrame} object.
-	 * @param num a {@link java.lang.Integer} object.
 	 */
-	public ShowBookmarksAction(final BrowserFrame frame, final Integer num) {
+	public ShowBookmarksAction(final BrowserFrame frame) {
 		this.frame = frame;
-		this.num = num;
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void actionPerformed(final ActionEvent e) {
-		final ShowBookmarksWindow bookmark = new ShowBookmarksWindow(this.frame, this.num);
+		final ShowBookmarksWindow bookmark = new ShowBookmarksWindow(this.frame);
 		bookmark.setLocationByPlatform(true);
 		bookmark.setVisible(true);
 	}

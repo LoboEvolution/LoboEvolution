@@ -40,7 +40,6 @@ public class TextureCheckBoxUI extends TextureRadioButtonUI {
 
 	private static TextureCheckBoxUI checkBoxUI = null;
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent b) {
 		if (checkBoxUI == null) {
 			checkBoxUI = new TextureCheckBoxUI();

@@ -42,7 +42,6 @@ public class BernsteinDesktopPaneUI extends BaseDesktopPaneUI {
 
 	private static BernsteinDesktopPaneUI desktopPaneUI = null;
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {
 		if (desktopPaneUI == null) {
 			desktopPaneUI = new BernsteinDesktopPaneUI();

@@ -235,6 +235,7 @@ public interface HtmlRendererConfig {
     }
 
     void deleteInput(final String text, final String baseUrl);
+
     void insertLogin(final String type, final String value, final String baseUrl, boolean navigationEnabled);
 
     String getSourceCache(final URI baseUrl, final String type, String integrity, boolean test) throws Exception;

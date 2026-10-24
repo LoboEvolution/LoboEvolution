@@ -46,7 +46,6 @@ import com.jtattoo.plaf.ColorHelper;
  */
 public class FastToggleButtonUI extends BaseToggleButtonUI {
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent b) {
 		return new FastToggleButtonUI();
 	}

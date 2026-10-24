@@ -27,7 +27,6 @@ package org.loboevolution.svg;
 
 
 import org.htmlunit.cssparser.dom.DOMException;
-import org.loboevolution.html.node.Element;
 import org.loboevolution.html.node.NodeList;
 import org.loboevolution.events.Event;
 

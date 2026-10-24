@@ -48,7 +48,6 @@ import com.jtattoo.plaf.smart.button.ArrowButton;
  */
 public class AcrylComboBoxUI extends BaseComboBoxUI {
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {
 		return new AcrylComboBoxUI();
 	}

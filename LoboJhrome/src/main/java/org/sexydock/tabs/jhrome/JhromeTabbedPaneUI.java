@@ -145,13 +145,6 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
             throw new IllegalArgumentException("Must be called on the AWT Event Dispatch Thread!");
         }
     }
-
-    private static void checkNotEDT() {
-        if (SwingUtilities.isEventDispatchThread()) {
-            throw new IllegalArgumentException("Must not be called on the AWT Event Dispatch Thread!");
-        }
-    }
-
     private static void put(final ActionMap map, final Action action) {
         map.put(action.getValue(Action.NAME), action);
     }
@@ -572,10 +565,6 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
      * {@code tab} the tab to remove. If {@code tab} is not a member of this tabbed pane, this method has no effect.
      */
     private void removeTabInternal(final Tab tab) {
-        removeTabInternal(tab, true);
-    }
-
-    private void removeTabInternal(final Tab tab, final boolean startTimer) {
         checkEDT();
 
         final int removedIndex = getInfoIndex(tab);
@@ -636,7 +625,7 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
      * @param tab the tab to remove. If {@code tab} is not a member of this tabbed pane, this method has no effect.
      */
     private void removeTabImmediatelyInternal(final Tab tab) {
-        removeTabInternal(tab, false);
+        removeTabInternal(tab);
         actuallyRemoveTab(tab);
     }
 
@@ -1018,17 +1007,21 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
         }
     }
 
+    /** {@inheritDoc} */
+    @Override
     public int tabForCoordinate(final JTabbedPane pane, final int x, final int y) {
         final Tab tab = getHoverableTabAt(new Point(x, y));
         return virtualizeIndex(getInfoIndex(tab));
     }
 
+    /** {@inheritDoc} */
     @Override
     public Rectangle getTabBounds(final JTabbedPane pane, final int vIndex) {
         final TabInfo info = tabs.get(actualizeIndex(vIndex));
         return info != null ? info.tab.getBounds() : null;
     }
 
+    /** {@inheritDoc} */
     @Override
     public int getTabRunCount(final JTabbedPane pane) {
         return 1;
@@ -1403,15 +1396,15 @@ public class JhromeTabbedPaneUI extends TabbedPaneUI {
 
         @Override
         public Dimension preferredLayoutSize(final Container parent) {
-            return layoutSize(parent, PREFERRED);
+            return layoutSize(PREFERRED);
         }
 
         @Override
         public Dimension minimumLayoutSize(final Container parent) {
-            return layoutSize(parent, MINIMUM);
+            return layoutSize(MINIMUM);
         }
 
-        private Dimension layoutSize(final Container parent, final int sizeType) {
+        private Dimension layoutSize(final int sizeType) {
             final boolean transpose = tabbedPane.getTabPlacement() == SwingConstants.LEFT || tabbedPane.getTabPlacement() == SwingConstants.RIGHT;
 
             int contentWidth = 0;

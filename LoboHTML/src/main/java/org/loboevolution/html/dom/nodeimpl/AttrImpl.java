@@ -30,7 +30,6 @@ import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.common.Nodes;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.node.*;
-import org.loboevolution.html.node.*;
 import org.loboevolution.html.dom.nodeimpl.internal.*;
 import java.util.Objects;
 
@@ -343,34 +342,38 @@ public class AttrImpl extends NodeInternal implements Attr {
         setValue(nodeValue);
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean hasAttributes() {
         return false;
     }
 
+    /** {@inheritDoc} */
+    @Override
     public void setOwnerElement(final Node ownerElement) {
         this.ownerElement = ownerElement;
         setParentImpl(ownerElement);
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getBaseURI() {
         return null;
     }
 
+    /** {@inheritDoc} */
     @Override
     public Node getOwnerElement() {
         return this.ownerElement;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public int getNodeType() {
         return Node.ATTRIBUTE_NODE;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "[object Attr]";

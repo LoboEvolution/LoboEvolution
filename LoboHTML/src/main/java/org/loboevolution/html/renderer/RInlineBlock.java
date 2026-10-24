@@ -66,41 +66,44 @@ public class RInlineBlock extends BaseElementRenderable {
 		this.setHeight(child.getHeight());
 	}
 
-	/**
-	 * <p>getRenderables.</p>
-	 *
-	 * @return a {@link java.util.List} object.
-	 */
+	/** {@inheritDoc} */
+	@Override
 	public List<Renderable> getRenderables() {
 		return this.child.getRenderables();
 	}
 
 	/** {@inheritDoc} */
+	@Override
 	public RenderableSpot getLowestRenderableSpot(final int x, final int y) {
 		return this.child.getLowestRenderableSpot(x, y);
 	}
 
 	/** {@inheritDoc} */
+	@Override
 	public boolean onDoubleClick(final MouseEvent event, final int x, final int y) {
 		return this.child.onDoubleClick(event, x, y);
 	}
 
 	/** {@inheritDoc} */
+	@Override
 	public boolean onMouseClick(final MouseEvent event, final int x, final int y) {
 		return this.child.onMouseClick(event, x, y);
 	}
 
 	/** {@inheritDoc} */
+	@Override
 	public boolean onMouseDisarmed(final MouseEvent event) {
 		return this.child.onMouseDisarmed(event);
 	}
 
 	/** {@inheritDoc} */
+	@Override
 	public boolean onMousePressed(final MouseEvent event, final int x, final int y) {
 		return this.child.onMousePressed(event, x, y);
 	}
 
 	/** {@inheritDoc} */
+	@Override
 	public boolean onMouseReleased(final MouseEvent event, final int x, final int y) {
 		return this.child.onMouseReleased(event, x, y);
 	}

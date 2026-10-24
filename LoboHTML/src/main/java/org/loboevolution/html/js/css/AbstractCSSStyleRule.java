@@ -27,10 +27,8 @@
 package org.loboevolution.html.js.css;
 
 import org.htmlunit.cssparser.dom.AbstractCSSRuleImpl;
-import org.loboevolution.css.CSSRule;
 import org.loboevolution.css.CSSStyleDeclaration;
 import org.loboevolution.css.CSSStyleRule;
-import org.loboevolution.css.CSSStyleSheet;
 
 /**
  * <p>AbstractCSSStyleRule class.</p>

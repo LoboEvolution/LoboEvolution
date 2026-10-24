@@ -60,7 +60,6 @@ import javax.swing.plaf.metal.MetalToolTipUI;
  */
 public class BaseToolTipUI extends MetalToolTipUI {
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {
 		return new BaseToolTipUI();
 	}

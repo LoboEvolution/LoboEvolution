@@ -12,7 +12,6 @@ import org.htmlunit.cssparser.parser.CSSParseException;
 import org.htmlunit.cssparser.parser.LexicalUnit;
 import org.htmlunit.cssparser.parser.LexicalUnitImpl;
 import org.htmlunit.cssparser.parser.LexicalUnit.LexicalUnitType;
-import org.htmlunit.cssparser.parser.Locatable;
 import org.htmlunit.cssparser.parser.Locator;
 import org.htmlunit.cssparser.parser.condition.AttributeCondition;
 import org.htmlunit.cssparser.parser.condition.BeginHyphenAttributeCondition;
@@ -43,7 +42,6 @@ import org.htmlunit.cssparser.parser.selector.Selector;
 import org.htmlunit.cssparser.parser.selector.SelectorList;
 import org.htmlunit.cssparser.parser.selector.SelectorListImpl;
 import org.htmlunit.cssparser.parser.selector.SimpleSelector;
-import org.htmlunit.cssparser.util.ParserUtils;
 
 /**
  * @author David Schweinsberg

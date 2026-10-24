@@ -40,7 +40,6 @@ public class HiFiCheckBoxUI extends HiFiRadioButtonUI {
 
 	private static HiFiCheckBoxUI checkBoxUI = null;
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent b) {
 		if (checkBoxUI == null) {
 			checkBoxUI = new HiFiCheckBoxUI();

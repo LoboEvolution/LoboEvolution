@@ -37,6 +37,7 @@ import org.loboevolution.svg.SVGTransform;
 import org.loboevolution.svg.smil.TimeImpl;
 import org.loboevolution.svg.smil.TimeListImpl;
 
+import java.util.List;
 import java.util.ArrayList;
 
 
@@ -110,7 +111,7 @@ public class SVGAnimationImpl extends SVGElementImpl implements SMILAnimation {
 	/** {@inheritDoc} */
 	@Override
 	public TimeList getBegin() {
-		final ArrayList<Time> beginTimeList = new ArrayList<>();
+		final List<Time> beginTimeList = new ArrayList<>();
 		final String begin = this.getAttribute("begin");
 
 		if (begin != null) {
@@ -134,7 +135,7 @@ public class SVGAnimationImpl extends SVGElementImpl implements SMILAnimation {
 	/** {@inheritDoc} */
 	@Override
 	public TimeList getEnd() {
-		final ArrayList<Time> beginTimeList = new ArrayList<>();
+		final List<Time> beginTimeList = new ArrayList<>();
 		final String begin = this.getAttribute("end");
 
 		if (begin != null) {

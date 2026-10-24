@@ -29,7 +29,6 @@ package org.loboevolution.html.js.events;
 import lombok.NoArgsConstructor;
 import org.htmlunit.cssparser.dom.DOMException;
 import org.loboevolution.events.WheelEvent;
-import org.mozilla.javascript.NativeObject;
 
 /**
  * WheelEventImpl class.

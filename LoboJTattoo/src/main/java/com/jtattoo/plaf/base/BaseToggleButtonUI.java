@@ -63,7 +63,6 @@ public class BaseToggleButtonUI extends BasicToggleButtonUI {
 	private static final Rectangle textRect = new Rectangle();
 	private static final Rectangle iconRect = new Rectangle();
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent b) {
 		return new BaseToggleButtonUI();
 	}

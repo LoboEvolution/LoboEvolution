@@ -43,7 +43,6 @@ import com.jtattoo.plaf.XPScrollBarUI;
  */
 public class HiFiScrollBarUI extends XPScrollBarUI {
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {
 		return new HiFiScrollBarUI();
 	}

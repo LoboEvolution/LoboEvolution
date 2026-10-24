@@ -44,7 +44,6 @@ import com.jtattoo.plaf.JTattooUtilities;
  */
 public class AluminiumMenuBarUI extends BaseMenuBarUI {
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {
 		return new AluminiumMenuBarUI();
 	}

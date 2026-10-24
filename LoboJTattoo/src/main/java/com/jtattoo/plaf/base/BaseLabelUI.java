@@ -47,7 +47,6 @@ public class BaseLabelUI extends BasicLabelUI {
 
 	private static BaseLabelUI baseLabelUI = null;
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {
 		if (baseLabelUI == null) {
 			baseLabelUI = new BaseLabelUI();

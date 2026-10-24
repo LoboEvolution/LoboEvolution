@@ -1869,24 +1869,19 @@ public class ComputedCSSStyleDeclarationImpl implements ComputedCSSStyleDeclarat
         style.setFont(font);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
+    @Override
     public void setFontFamily(final String fontFamily) {
         style.setFontFamily(fontFamily);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public void setFontSize(final String fontSize) {
         style.setFontSize(fontSize);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public void setFontSizeAdjust(final String fontSizeAdjust) {
         style.setFontSizeAdjust(fontSizeAdjust);

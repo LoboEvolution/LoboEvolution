@@ -25,7 +25,6 @@
  */
 package org.loboevolution.pdfview;
 
-import java.io.UnsupportedEncodingException;
 import java.nio.CharBuffer;
 import java.nio.charset.CharacterCodingException;
 import java.nio.charset.StandardCharsets;

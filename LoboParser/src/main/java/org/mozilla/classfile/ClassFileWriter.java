@@ -4325,8 +4325,7 @@ public class ClassFileWriter {
                 minor = (header[4] << 8) | (header[5] & 0xff);
                 major = (header[6] << 8) | (header[7] & 0xff);
             } else {
-                System.err.println(
-                        "Warning: Unable to read ClassFileWriter.class, using default bytecode version");
+                log.error("Warning: Unable to read ClassFileWriter.class, using default bytecode version");
             }
         } catch (IOException ioe) {
             throw new AssertionError("Can't read ClassFileWriter.class to get bytecode version");

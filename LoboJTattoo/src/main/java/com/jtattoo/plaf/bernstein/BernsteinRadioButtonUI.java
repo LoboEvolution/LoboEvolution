@@ -44,7 +44,6 @@ public class BernsteinRadioButtonUI extends BaseRadioButtonUI {
 
 	private static BernsteinRadioButtonUI radioButtonUI = null;
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {
 		if (radioButtonUI == null) {
 			radioButtonUI = new BernsteinRadioButtonUI();

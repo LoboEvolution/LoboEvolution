@@ -89,7 +89,6 @@ public class MintComboBoxUI extends BaseComboBoxUI {
 
 	} // end of end class ArrowButton
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {
 		return new MintComboBoxUI();
 	}

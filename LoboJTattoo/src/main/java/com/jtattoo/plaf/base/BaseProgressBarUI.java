@@ -71,7 +71,6 @@ public class BaseProgressBarUI extends BasicProgressBarUI {
 		}
 	} // end of class PropertyChangeHandler
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI() {
 		return new BaseProgressBarUI();
 	}

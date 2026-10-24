@@ -38,7 +38,6 @@ import com.jtattoo.plaf.base.BaseTableHeaderUI;
  */
 public class LunaTableHeaderUI extends BaseTableHeaderUI {
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {
 		return new LunaTableHeaderUI();
 	}

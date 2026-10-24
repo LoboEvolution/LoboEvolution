@@ -1437,7 +1437,6 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	protected static final int GAP = 5;
 	private static final int CROP_SEGMENT = 12;
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {
 		return new BaseTabbedPaneUI();
 	}
@@ -1863,7 +1862,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	}
 
 	private List<View> createHTMLViewList() {
-		final ArrayList<View> viewList = new ArrayList<>();
+		final List<View> viewList = new ArrayList<>();
 		final int count = tabPane.getTabCount();
 		for ( int i = 0; i < count; i++) {
 			final String title = tabPane.getTitleAt(i);
@@ -3533,20 +3532,6 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 			final int d = 2 * GAP;
 			switch (tabPlacement) {
 			case TOP:
-			default:
-                final Area clipArea = new Area(new RoundRectangle2D.Double(x, y, w, h + 4, d, d));
-                final Area rectArea;
-                if (isSelected) {
-                    rectArea = new Area(new Rectangle2D.Double(x, y, w, h + 2));
-                } else {
-                    rectArea = new Area(new Rectangle2D.Double(x, y, w, h));
-                }
-                clipArea.intersect(rectArea);
-                clipArea.intersect(orgClipArea);
-                g2D.setClip(clipArea);
-                JTattooUtilities.fillHorGradient(g, colorArr, x, y, w, h + 4);
-                g2D.setClip(savedClip);
-                break;
 			case LEFT:
 				if (isSelected) {
 					JTattooUtilities.fillHorGradient(g, colorArr, x + 1, y + 1, w + 1, h - 1);
@@ -3574,6 +3559,20 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 				} else {
 					JTattooUtilities.fillHorGradient(g, colorArr, x, y + 1, w + 1, h - 1);
 				}
+				break;
+			default:
+				final Area clipArea = new Area(new RoundRectangle2D.Double(x, y, w, h + 4, d, d));
+				final Area rectArea;
+				if (isSelected) {
+					rectArea = new Area(new Rectangle2D.Double(x, y, w, h + 2));
+				} else {
+					rectArea = new Area(new Rectangle2D.Double(x, y, w, h));
+				}
+				clipArea.intersect(rectArea);
+				clipArea.intersect(orgClipArea);
+				g2D.setClip(clipArea);
+				JTattooUtilities.fillHorGradient(g, colorArr, x, y, w, h + 4);
+				g2D.setClip(savedClip);
 				break;
 			}
 		}

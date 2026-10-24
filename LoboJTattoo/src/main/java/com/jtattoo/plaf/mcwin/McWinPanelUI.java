@@ -43,7 +43,6 @@ public class McWinPanelUI extends BasePanelUI {
 
 	private static McWinPanelUI panelUI = null;
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {
 		if (panelUI == null) {
 			panelUI = new McWinPanelUI();

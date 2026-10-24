@@ -34,8 +34,6 @@ import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.Element;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-
 
 /**
  * The method getAttributeNodeNS retrieves an Attr node by local name and namespace URI.

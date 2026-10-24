@@ -74,7 +74,6 @@ public class BaseFileChooserUI extends MetalFileChooserUI {
 	private static final int PREF_HEIGHT = 340;
 	private static final Dimension PREF_SIZE = new Dimension(PREF_WIDTH, PREF_HEIGHT);
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {
 		return new BaseFileChooserUI((JFileChooser) c);
 	}

@@ -79,8 +79,6 @@ public class CIDFontType2 extends TTFFont {
 
         parseWidths(fontObj);
 
-        // read the CIDSystemInfo dictionary (required)
-        final PDFObject systemInfoObj = fontObj.getDictRef("CIDSystemInfo");
         // read the cid to gid map (optional)
         final PDFObject mapObj = fontObj.getDictRef("CIDToGIDMap");
 

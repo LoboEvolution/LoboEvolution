@@ -43,19 +43,8 @@ public class DOMTreeCellRenderer extends DefaultTreeCellRenderer {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    /**
-     * Gets the treeCellRendererComponent attribute of the DOMTreeCellRenderer
-     * object
-     *
-     * @param tree a {@link javax.swing.JTree} object.
-     * @param value a {@link java.lang.Object} object.
-     * @param selected a {@link java.lang.Boolean} object.
-     * @param expanded a {@link java.lang.Boolean} object.
-     * @param leaf     a {@link java.lang.Boolean} object.
-     * @param row      a {@link java.lang.Integer} object
-     * @param hasFocus a {@link java.lang.Boolean} object.
-     * @return The treeCellRendererComponent value
-     */
+    /** {@inheritDoc} */
+    @Override
     public Component getTreeCellRendererComponent(final JTree tree, Object value,
                                                   final boolean selected, final boolean expanded, final boolean leaf, final int row, final boolean hasFocus) {
 

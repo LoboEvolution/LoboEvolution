@@ -43,7 +43,6 @@ import com.jtattoo.plaf.ColorHelper;
  */
 public class McWinTabbedPaneUI extends BaseTabbedPaneUI {
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {
 		return new McWinTabbedPaneUI();
 	}

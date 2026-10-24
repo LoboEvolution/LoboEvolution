@@ -253,6 +253,8 @@ public class CCITT2D extends CCITT1D implements CCITTDecoder {
 
     }
 
+    /** {@inheritDoc} */
+    @Override
     public byte[] decode() {
 
         decode2DRun();

@@ -95,7 +95,6 @@ public class McWinComboBoxUI extends BaseComboBoxUI {
 		}
 	}
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {
 		return new McWinComboBoxUI();
 	}

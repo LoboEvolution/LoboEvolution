@@ -26,7 +26,7 @@
 
 package org.sexydock.tabs;
 
-import javax.swing.*;
+import javax.swing.JTabbedPane;
 
 /**
  * The interface for creating {@link ITabbedPaneWindow}s. {@link JTabbedPane} uses this interface to create a new {@code IJhromeWindow} whenever a jhromeTab is

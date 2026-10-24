@@ -42,7 +42,6 @@ import com.jtattoo.plaf.base.BaseBorders;
  */
 public class HiFiToolBarUI extends AbstractToolBarUI {
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {
 		return new HiFiToolBarUI();
 	}

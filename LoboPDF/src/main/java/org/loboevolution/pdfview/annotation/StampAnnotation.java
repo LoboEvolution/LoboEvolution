@@ -119,7 +119,7 @@ public class StampAnnotation extends PDFAnnotation {
         if (type == null) {
             type = obj.getDictRef("S").getStringValue();
         }
-        final ArrayList<PDFCmd> result = new ArrayList<>();
+        final List<PDFCmd> result = new ArrayList<>();
         result.add(PDFPage.createPushCmd());
         result.add(PDFPage.createPushCmd());
         if (type.equals("Image")) {

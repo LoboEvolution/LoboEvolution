@@ -27,7 +27,6 @@
 package org.loboevolution.html.node;
 
 import org.loboevolution.html.dom.HTMLCollection;
-import org.loboevolution.html.node.Node;
 
 /**
  * <p>ParentNode interface.</p>

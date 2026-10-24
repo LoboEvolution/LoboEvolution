@@ -63,12 +63,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 public abstract class NodeImpl extends EventTargetImpl implements Node, Cloneable {
 	private static final RenderState INVALID_RENDER_STATE = new StyleSheetRenderState(null);
 
-	protected volatile Document document;
+	protected Document document;
 	@Getter
 	protected final NodeListImpl nodeList = new NodeListImpl();
-	protected volatile boolean notificationsSuspended = false;
-	protected volatile Node parentNode;
-	private volatile String prefix;
+	protected boolean notificationsSuspended = false;
+	protected Node parentNode;
+	private String prefix;
 	@Setter
 	private String namespaceURI;
 	private RenderState renderState = INVALID_RENDER_STATE;
@@ -493,7 +493,7 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, Cloneabl
 	 * @return a {@link org.loboevolution.html.node.NodeList} object.
 	 */
 	public NodeList getDescendents(final NodeFilter filter, final boolean nestIntoMatchingNodes) {
-		final ArrayList<Node> al = new ArrayList<>();
+		final List<Node> al = new ArrayList<>();
 		synchronized (this) {
 			extractDescendentsArrayImpl(filter, al, nestIntoMatchingNodes);
 		}
@@ -972,11 +972,8 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, Cloneabl
 		}
 	}
 
-	/**
-	 * <p>getDocumentNode.</p>
-	 *
-	 * @return the document
-	 */
+	/** {@inheritDoc} */
+	@Override
 	public Document getDocumentNode() {
 		return document;
 	}
@@ -1440,11 +1437,8 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, Cloneabl
 	@Override
 	public abstract void setNodeValue(final String nodeValue) throws DOMException;
 
-	/**
-	 * <p>setOwnerDocument.</p>
-	 *
-	 * @param value a {@link org.loboevolution.html.node.Document} object.
-	 */
+	/** {@inheritDoc} */
+	@Override
 	public void setOwnerDocument(final Document value) {
 		this.document = value;
 	}

@@ -77,7 +77,6 @@ public class IndexedColor extends PDFColorSpace {
         this.count = count;
         final byte[] data = stream.getStream();
         this.nchannels = base.getNumComponents();
-        final boolean offSized = (data.length / this.nchannels) < count;
         this.colorComponents = new byte[3 * count];
         this.table = new Color[count];
         final float[] comps = new float[this.nchannels];

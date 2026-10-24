@@ -418,6 +418,8 @@ public class CCITT1D implements CCITTDecoder {
 
     }
 
+    /** {@inheritDoc} */
+    @Override
     public byte[] decode() {
 
         moveToEOLMarker();

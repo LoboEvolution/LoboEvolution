@@ -981,6 +981,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	}
 
 	/** {@inheritDoc} */
+	@Override
 	public Insets getInsets(final boolean hscroll, final boolean vscroll) {
 		throw new UnsupportedOperationException("Method added while implementing absolute positioned elements inside relative elements. But not implemented yet.");
 	}
@@ -1010,6 +1011,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	}
 
 	/** {@inheritDoc} */
+	@Override
 	public Point translateDescendentPoint(final BoundableRenderable descendent, final int x, final int y) {
 		return rblock.translateDescendentPoint(descendent, x, y);
 	}

@@ -744,10 +744,7 @@ public class PDFPage {
 class PDFImageCmd extends PDFCmd {
     final PDFImage image;
 
-    /**
-     * {@inheritDoc}
-     */
-    public PDFImageCmd(final PDFImage image) {
+	public PDFImageCmd(final PDFImage image) {
         this.image = image;
     }
 

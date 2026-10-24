@@ -232,9 +232,6 @@ public class CMapFormat4 extends CMap {
         final short[] idDeltas = new short[segCount];
         final short[] idRangeOffsets = new short[segCount];
 
-        // the start of the glyph array
-        final int glyphArrayPos = 16 + (8 * segCount);
-
         // read the endCodes
         for (int i = 0; i < segCount; i++) {
             endCodes[i] = data.getShort();

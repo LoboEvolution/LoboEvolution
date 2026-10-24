@@ -305,7 +305,7 @@ public class HTMLFormElementImpl extends HTMLElementImpl implements HTMLFormElem
 		}
 		final HtmlRendererContext context = getHtmlRendererContext();
 		if (context != null) {
-			final ArrayList<FormInput> formInputs = new ArrayList<>();
+			final List<FormInput> formInputs = new ArrayList<>();
 			if (extraFormInputs != null) {
 				Collections.addAll(formInputs, extraFormInputs);
 			}

@@ -43,18 +43,12 @@ final class MarkupUtilities {
    * @param renderables an array of {@link org.loboevolution.html.renderer.Renderable} objects.
    * @param x a {@link java.lang.Integer} object.
    * @param y a {@link java.lang.Integer} object.
-   * @param vertical a boolean.
    * @return a {@link org.loboevolution.html.renderer.BoundableRenderable} object.
    */
-  public static BoundableRenderable findRenderable(final Renderable[] renderables, final int x, final int y, final boolean vertical) {
-    return findRenderable(renderables, x, y, 0, renderables.length, vertical);
-  }
-
-  private static BoundableRenderable findRenderable(final Renderable[] renderables, final int x, final int y, final int firstIndex,
-      final int length, final boolean vertical) {
-    for (int i = firstIndex + length - 1; i >= firstIndex; i--) {
+  public static BoundableRenderable findRenderable(final Renderable[] renderables, final int x, final int y) {
+    for (int i = renderables.length - 1; i >= 0; i--) {
       if (renderables[i] instanceof BoundableRenderable br2) {
-          if ((!br2.isDelegated()) && br2.contains(x, y)) {
+        if ((!br2.isDelegated()) && br2.contains(x, y)) {
           return br2;
         }
       }

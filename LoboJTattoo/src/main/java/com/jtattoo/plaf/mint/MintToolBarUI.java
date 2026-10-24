@@ -44,7 +44,6 @@ import com.jtattoo.plaf.JTattooUtilities;
  */
 public class MintToolBarUI extends AbstractToolBarUI {
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {
 		return new MintToolBarUI();
 	}

@@ -52,6 +52,7 @@ public class DownloadFileAction extends AbstractAction implements PropertyChange
     }
 
     /** {@inheritDoc} */
+    @Override
     public void actionPerformed(final ActionEvent e) {
         try {
             startDownload(action.getDestinationFile());

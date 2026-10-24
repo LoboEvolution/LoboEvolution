@@ -41,20 +41,25 @@ public class CSSPageRuleImpl extends AbstractCSSStyleRule implements CSSPageRule
         this.abstractCSSRule = abstractCSSRule;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getSelectorText() {
         return abstractCSSRule.getSelectorText();
     }
 
+    /** {@inheritDoc} */
     @Override
     public CSSStyleDeclaration getStyle() {
         return new CSSStyleDeclarationImpl(abstractCSSRule.getStyle());
     }
 
+    /** {@inheritDoc} */
+    @Override
     public void setSelectorText(final String selectorText) {
         abstractCSSRule.setSelectorText(selectorText);
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "[object CSSPageRule]";

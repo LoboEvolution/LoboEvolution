@@ -48,7 +48,6 @@ import com.jtattoo.plaf.base.BaseButtonUI;
  */
 public class SmartButtonUI extends BaseButtonUI {
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {
 		return new SmartButtonUI();
 	}

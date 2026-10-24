@@ -50,7 +50,6 @@ public class BaseSeparatorUI extends BasicSeparatorUI {
 
 	private static final Dimension size = new Dimension(2, 3);
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {
 		return new BaseSeparatorUI();
 	}

@@ -124,6 +124,7 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 	}
 
 	/** {@inheritDoc} */
+    @Override
 	public void actionPerformed(final ActionEvent e) {
 		final String attribute = animate.getAttributeName().toLowerCase();
 		switch (attribute) {

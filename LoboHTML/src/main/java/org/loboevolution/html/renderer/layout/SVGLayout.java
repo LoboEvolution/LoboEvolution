@@ -28,7 +28,6 @@ package org.loboevolution.html.renderer.layout;
 
 import org.loboevolution.html.control.*;
 import org.loboevolution.html.node.Element;
-import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.renderer.RBlockViewport;
 import org.loboevolution.html.renderer.RElement;
 import org.loboevolution.svg.SVGSVGElement;

@@ -1137,7 +1137,7 @@ public class PDFParser extends BaseWatchable {
             return hm;
         } else if (t.type == Tok.ARYB) {
             // build an array
-            final ArrayList<Object> ary = new ArrayList<>();
+            final List<Object> ary = new ArrayList<>();
             Object obj;
             while ((obj = parseObject()) != null) {
                 ary.add(obj);
@@ -1460,21 +1460,6 @@ public class PDFParser extends BaseWatchable {
         } else {
             return (String) obj;
         }
-    }
-
-    /**
-     * pop a PDFObject off the stack.
-     *
-     * @return the PDFObject from the top of the stack
-     * @throws PDFParseException if the top of the stack does not contain
-     *                           a PDFObject.
-     */
-    private PDFObject popObject() throws PDFParseException {
-        final Object obj = this.stack.pop();
-        if (!(obj instanceof PDFObject)) {
-            throw new PDFParseException("Expected a reference here: " + obj.toString());
-        }
-        return (PDFObject) obj;
     }
 
     /**

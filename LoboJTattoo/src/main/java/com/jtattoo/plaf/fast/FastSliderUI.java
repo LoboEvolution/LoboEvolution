@@ -138,7 +138,6 @@ public class FastSliderUI extends BaseSliderUI {
 
 	private static final ThumbVerIcon THUMB_VER_ICON = new ThumbVerIcon();
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {
 		return new FastSliderUI((JSlider) c);
 	}

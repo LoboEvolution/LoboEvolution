@@ -43,10 +43,9 @@ public class PatternDictionaryFlags extends Flags {
      */
     public static final String HD_TEMPLATE = "HD_TEMPLATE";
 
-    /**
-     * {@inheritDoc}
-     */
-    public void setFlags(final int flagsAsInt) {
+    /** {@inheritDoc} */
+    @Override
+	public void setFlags(final int flagsAsInt) {
         this.flagsAsInt = flagsAsInt;
         flags.put(HD_MMR, flagsAsInt & 1);
         flags.put(HD_TEMPLATE, (flagsAsInt >> 1) & 3);

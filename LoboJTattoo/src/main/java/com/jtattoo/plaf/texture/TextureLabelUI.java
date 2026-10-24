@@ -50,7 +50,6 @@ public class TextureLabelUI extends BasicLabelUI {
 
 	private static TextureLabelUI hifiLabelUI = null;
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {
 		if (hifiLabelUI == null) {
 			hifiLabelUI = new TextureLabelUI();

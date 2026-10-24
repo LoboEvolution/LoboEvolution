@@ -26,7 +26,7 @@
 
 package org.loboevolution.html.js;
 
-import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
+import lombok.NoArgsConstructor;
 import org.loboevolution.html.js.xml.XMLDocument;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.js.DOMParser;
@@ -36,13 +36,8 @@ import org.mozilla.javascript.Context;
 /**
  * <p>DOMParser class.</p>
  */
+@NoArgsConstructor
 public class DOMParserImpl extends AbstractScriptableDelegate implements DOMParser {
-
-	private final HTMLDocumentImpl document;
-
-	public DOMParserImpl(final HTMLDocumentImpl document){
-		this.document = document;
-	}
 
 
 	/** {@inheritDoc} */

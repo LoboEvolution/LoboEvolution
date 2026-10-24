@@ -40,7 +40,6 @@ import com.jtattoo.plaf.base.BaseScrollPaneUI;
  */
 public class BernsteinScrollPaneUI extends BaseScrollPaneUI {
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {
 		return new BernsteinScrollPaneUI();
 	}

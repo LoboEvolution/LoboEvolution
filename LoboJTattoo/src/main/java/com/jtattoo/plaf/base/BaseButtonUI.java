@@ -77,7 +77,6 @@ public class BaseButtonUI extends BasicButtonUI {
 	/** Constant defaultColors */
 	protected static Color[] defaultColors = null;
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {
 		return new BaseButtonUI();
 	}

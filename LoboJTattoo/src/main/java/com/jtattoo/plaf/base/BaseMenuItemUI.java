@@ -52,7 +52,6 @@ import javax.swing.plaf.basic.BasicMenuItemUI;
  */
 public class BaseMenuItemUI extends BasicMenuItemUI {
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {
 		return new BaseMenuItemUI();
 	}

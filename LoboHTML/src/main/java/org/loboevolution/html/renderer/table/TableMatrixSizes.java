@@ -31,11 +31,9 @@ import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.css.CSSStyleDeclaration;
-import org.loboevolution.html.renderer.RBlock;
 import org.loboevolution.html.renderer.info.RLayoutInfo;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.renderstate.RenderThreadState;
-import org.loboevolution.html.style.HtmlInsets;
 import org.loboevolution.html.style.HtmlLength;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.info.CaptionSizeInfo;
@@ -191,7 +189,7 @@ class TableMatrixSizes {
 		final SizeInfo[] rowSizes = new SizeInfo[numRows];
 		final List<HTMLElementImpl> rowElements = matrix.rowElements;
 		int index = 0;
-		for (final ArrayList<VirtualCell> row : rows) {
+		for (final List<VirtualCell> row : rows) {
 			final int rs = row.size();
 			if (rs > numCols) {
 				numCols = rs;

@@ -101,7 +101,7 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 
 	private String name = "";
 
-	private volatile HTMLDocumentImpl document;
+	private HTMLDocumentImpl document;
 
 	private History history;
 
@@ -208,18 +208,13 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 		return this.getUaContext();
 	}
 
-	/**
-	 * <p>getWindow.</p>
-	 *
-	 * @return a {@link org.loboevolution.html.js.WindowImpl} object.
-	 */
+	/** {@inheritDoc} */
+	@Override
 	public WindowImpl getWindow() {
 		return this;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
+	/** {@inheritDoc} */
 	@Override
 	public Node namedItem(final String name) {
 		final HTMLDocumentImpl doc = this.document;
@@ -285,9 +280,7 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
+	/** {@inheritDoc} */
 	@Override
 	public void alert(final String message) {
 		if (this.rcontext != null) {
@@ -1248,7 +1241,7 @@ public class WindowImpl extends WindowEventHandlersImpl implements Window {
 		final JavaInstantiator jiXTarget = (args) -> new XMLHttpRequestEventTargetImpl(document);
 		final JavaInstantiator jiXUpload = (args) -> new XMLHttpRequestUploadImpl(document);
 		final JavaInstantiator jiXhttp = (args) -> new XMLHttpRequestImpl(document, ws, this);
-		final JavaInstantiator jiDomp = (args) -> new DOMParserImpl(document);
+		final JavaInstantiator jiDomp = (args) -> new DOMParserImpl();
 		final JavaInstantiator jiform = (args) -> new FormDataImpl(document);
 		final JavaInstantiator jiloc = (args) -> new LocalStorage(this);
 		final JavaInstantiator jiElement = (args) -> new ElementImpl("");

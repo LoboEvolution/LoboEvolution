@@ -49,11 +49,8 @@ public class HTMLQuoteElementImpl extends HTMLElementImpl implements HTMLQuoteEl
 		return new QuoteRenderState(prevRenderState, this);
 	}
 
-	/**
-	 * <p>getCite.</p>
-	 *
-	 * @return a {@link java.lang.String} object.
-	 */
+	/** {@inheritDoc} */
+	@Override
 	public String getCite() {
 		return getAttribute("cite");
 	}

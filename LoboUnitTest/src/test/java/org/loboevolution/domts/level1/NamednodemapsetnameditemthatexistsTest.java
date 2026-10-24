@@ -33,7 +33,6 @@ import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.node.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 /**

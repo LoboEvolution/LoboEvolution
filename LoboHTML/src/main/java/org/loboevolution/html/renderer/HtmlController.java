@@ -34,7 +34,6 @@ import org.loboevolution.gui.HtmlRendererContext;
 import org.loboevolution.html.dom.domimpl.*;
 import org.loboevolution.html.node.Document;
 import org.loboevolution.html.node.ModelNode;
-import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.js.Executor;
 import org.loboevolution.html.js.WindowImpl;
 import org.loboevolution.html.js.events.EventImpl;

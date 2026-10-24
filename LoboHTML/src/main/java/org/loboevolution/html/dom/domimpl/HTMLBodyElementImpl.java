@@ -92,11 +92,8 @@ public class HTMLBodyElementImpl extends HTMLElementImpl implements HTMLBodyElem
 		return getAttribute("link");
 	}
 
-	/**
-	 * <p>getOnload.</p>
-	 *
-	 * @return a {@link org.mozilla.javascript.Function} object.
-	 */
+	/** {@inheritDoc} */
+	@Override
 	public Function getOnload() {
 		final Object document = this.document;
 		if (document instanceof HTMLDocument) {
@@ -157,11 +154,8 @@ public class HTMLBodyElementImpl extends HTMLElementImpl implements HTMLBodyElem
 
 	}
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>setOnload.</p>
-	 */
+	/** {@inheritDoc} */
+	@Override
 	public void setOnload(final Function onload) {
 		final Object document = this.document;
 		if (document instanceof HTMLDocument) {

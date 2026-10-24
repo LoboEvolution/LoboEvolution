@@ -142,13 +142,13 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	@Serial
     private static final long serialVersionUID = 1L;
 
-	private volatile int defaultOverflowX = RenderState.OVERFLOW_AUTO;
+	private int defaultOverflowX = RenderState.OVERFLOW_AUTO;
 	
-	private volatile int defaultOverflowY = RenderState.OVERFLOW_AUTO;
+	private int defaultOverflowY = RenderState.OVERFLOW_AUTO;
 	
-	protected volatile HtmlBlockPanel htmlBlockPanel;
+	protected HtmlBlockPanel htmlBlockPanel;
 	
-	private volatile NodeRenderer nodeRenderer = null;
+	private NodeRenderer nodeRenderer = null;
 	
 	private final Runnable notificationImmediateAction;
 
@@ -158,10 +158,10 @@ public class HtmlPanel extends JComponent implements FrameContext {
 
 	private final Timer notificationTimer;
 
-	private volatile int preferredWidth = -1;
+	private int preferredWidth = -1;
 
 	@Getter
-	private volatile NodeImpl rootNode;
+	private NodeImpl rootNode;
 
 	private final EventDispatch2 selectionDispatch = new SelectionDispatch();
 

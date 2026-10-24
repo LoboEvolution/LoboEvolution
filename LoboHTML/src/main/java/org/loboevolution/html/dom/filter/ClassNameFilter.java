@@ -51,6 +51,7 @@ public class ClassNameFilter implements NodeFilter {
 	}
 
 	/** {@inheritDoc} */
+	@Override
 	public short acceptNode(final Node node) {
 		if (node instanceof Element) {
 			final String classAttribute = ((Element) node).getAttribute("class");

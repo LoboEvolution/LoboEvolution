@@ -185,8 +185,8 @@ public class GradientStyle {
 	private GradientInfo parseGradint(final String quote){
 		String shape = null;
 		String size = null;
-		final ArrayList<Float> listFractions = new ArrayList<>();
-		final ArrayList<Color> colors = new ArrayList<>();
+		final List<Float> listFractions = new ArrayList<>();
+		final List<Color> colors = new ArrayList<>();
 		final String quoteRepalced = quote.replace(" ", "");
 		final char[] charArray = quoteRepalced.toCharArray();
 		boolean isColored = false;

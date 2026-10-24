@@ -45,7 +45,6 @@ import org.loboevolution.info.TimingInfo;
 import org.loboevolution.net.AlgorithmDigest;
 import org.loboevolution.net.HttpNetwork;
 import org.loboevolution.net.IOUtil;
-import org.loboevolution.net.MimeType;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.RhinoException;
 import org.mozilla.javascript.Scriptable;

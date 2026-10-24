@@ -28,7 +28,6 @@ package org.loboevolution.html.style;
 
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.CSSValues;
-import org.loboevolution.html.dom.HTMLHtmlElement;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.css.CSSStyleDeclaration;
 import org.loboevolution.html.renderstate.RenderState;

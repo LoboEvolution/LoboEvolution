@@ -25,8 +25,6 @@
  */
 package com.jtattoo.plaf.smart;
 
-import java.awt.Graphics;
-
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -47,7 +45,6 @@ import com.jtattoo.plaf.smart.button.ArrowButton;
 public class SmartComboBoxUI extends BaseComboBoxUI {
 
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {
 		return new SmartComboBoxUI();
 	}

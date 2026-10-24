@@ -394,7 +394,7 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
 	@Override
 	public NodeList querySelectorAll(final String selector) {
 
-		final ArrayList<Node> al = new ArrayList<>();
+		final List<Node> al = new ArrayList<>();
 
 		if(selector == null) {
 			return new NodeListImpl(al);
@@ -646,8 +646,6 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
 		boolean entities = Boolean.TRUE.equals(config.getParameter("entities"));
 		boolean elementContentWhitespace = Boolean.TRUE.equals(config.getParameter("element-content-whitespace"));
 		boolean cdataSections = Boolean.TRUE.equals(config.getParameter("cdata-sections"));
-		boolean validate = Boolean.TRUE.equals(config.getParameter("validate-if-schema"));
-		boolean datatype = Boolean.TRUE.equals(config.getParameter("datatype-normalization"));
 
 		DOMErrorMonitor errorHandler = (DOMErrorMonitor) config.getParameter("error-handler");
 		normalize.normalizeTree(this);

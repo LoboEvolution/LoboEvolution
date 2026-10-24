@@ -349,7 +349,7 @@ public abstract class AbstractLookAndFeel extends MetalLookAndFeel {
 	 * @return a {@link java.util.List} object.
 	 */
 	public static List<String> getThemes() {
-		final ArrayList<String> themes = new ArrayList<>();
+		final List<String> themes = new ArrayList<>();
 		themes.add(getTheme().getName());
 		return themes;
 	}

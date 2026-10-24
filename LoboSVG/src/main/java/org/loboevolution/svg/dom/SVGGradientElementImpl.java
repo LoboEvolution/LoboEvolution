@@ -38,6 +38,7 @@ import org.loboevolution.svg.SVGGradientElement;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -126,7 +127,7 @@ public class SVGGradientElementImpl extends SVGStylableImpl implements SVGGradie
 	}
 
 	private float[] fractions(final Element elem) {
-		final ArrayList<Float> fractions = new ArrayList<>();
+		final List<Float> fractions = new ArrayList<>();
 		final NodeList children = elem.getChildNodes();
 		for (int i = 0; i < children.getLength(); i++) {
 			Node child = children.item(i);
@@ -145,7 +146,7 @@ public class SVGGradientElementImpl extends SVGStylableImpl implements SVGGradie
 	}
 
 	private Color[] colors(final Element elem) {
-		final ArrayList<Color> colors = new ArrayList<>();
+		final List<Color> colors = new ArrayList<>();
 		final NodeList children = elem.getChildNodes();
 		for (int i = 0; i < children.getLength(); i++) {
 			Node child = children.item(i);

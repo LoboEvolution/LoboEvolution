@@ -67,13 +67,13 @@ public class McWinTitlePane extends BaseTitlePane {
 		@Override
 		public void layoutContainer(final Container c) {
 			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
-				layoutMacStyle(c);
+				layoutMacStyle();
 			} else {
-				layoutDefault(c);
+				layoutDefault();
 			}
 		}
 
-		public void layoutDefault(final Container c) {
+		public void layoutDefault() {
 			final boolean leftToRight = isLeftToRight();
 
 			final int w = getWidth();
@@ -141,7 +141,7 @@ public class McWinTitlePane extends BaseTitlePane {
 			}
 		}
 
-		private void layoutMacStyle(final Container c) {
+		private void layoutMacStyle() {
 			final int spacing = getHorSpacing();
 			final int h = getHeight();
 

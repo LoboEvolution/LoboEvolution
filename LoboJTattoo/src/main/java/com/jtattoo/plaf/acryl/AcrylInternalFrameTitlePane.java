@@ -60,13 +60,13 @@ public class AcrylInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 		@Override
 		public void layoutContainer(final Container c) {
 			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
-				layoutMacStyle(c);
+				layoutMacStyle();
 			} else {
-				layoutDefault(c);
+				layoutDefault();
 			}
 		}
 
-		public void layoutDefault(final Container c) {
+		public void layoutDefault() {
 			final boolean leftToRight = JTattooUtilities.isLeftToRight(frame);
 
 			final int spacing = getHorSpacing();
@@ -123,7 +123,7 @@ public class AcrylInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 			}
 		}
 
-		private void layoutMacStyle(final Container c) {
+		private void layoutMacStyle() {
 			final int spacing = getHorSpacing();
 			final int h = getHeight();
 

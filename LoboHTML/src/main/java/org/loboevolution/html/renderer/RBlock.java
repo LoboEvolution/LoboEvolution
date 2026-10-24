@@ -27,7 +27,6 @@ package org.loboevolution.html.renderer;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.HTMLBodyElement;
 import org.loboevolution.html.dom.HTMLHtmlElement;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
@@ -51,7 +50,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Represents a HTML block in a rendered document, typically a DIV. The root
+ * Represents an HTML block in a rendered document, typically a DIV. The root
  * renderer node is of this type as well.
  * <p>
  * Immediately below an RBlock you will find a node of type
@@ -60,7 +59,8 @@ import java.util.List;
 public class RBlock extends BaseElementRenderable {
 
 	private BoundableRenderable armedRenderable;
-	protected final RBlockViewport bodyLayout;
+	@Getter
+    protected final RBlockViewport bodyLayout;
 	@Getter
 	private final RBlockScroll scroll;
 
@@ -222,11 +222,6 @@ public class RBlock extends BaseElementRenderable {
 		final Integer dh = this.getDeclaredHeight(tentativeAvailHeight);
 		int declaredWidth = dw == null ? -1 : dw;
 		int declaredHeight = dh == null ? -1 : dh;
-		final String cssWidth = node instanceof HTMLElementImpl element ? element.getCurrentStyle().getWidth() : null;
-        final boolean shrinkToFit = (rs.getPosition() == RenderState.POSITION_ABSOLUTE
-										|| rs.getPosition() == RenderState.POSITION_FIXED) &&
-									(Strings.isBlank(cssWidth) || "auto".equalsIgnoreCase(cssWidth));
-
 		final Integer declaredMinWidth = getDeclaredMinWidth(renderState, tentativeAvailWidth);
 		if ((declaredMinWidth != null) && declaredMinWidth > 0) {
 			declaredWidth = dw == null ? declaredMinWidth : Math.max(declaredWidth, declaredMinWidth);
@@ -977,11 +972,7 @@ public class RBlock extends BaseElementRenderable {
 		}
 	}
 
-	public RBlockViewport getBodyLayout() {
-		return this.bodyLayout;
-	}
-
-	private void correctViewportOrigin(final Insets insets, final int blockWidth, final int blockHeight) {
+    private void correctViewportOrigin(final Insets insets, final int blockWidth, final int blockHeight) {
 		final RBlockViewport bodyLayout = this.bodyLayout;
 		final int viewPortX = bodyLayout.getX();
 		final int viewPortY = bodyLayout.getY();

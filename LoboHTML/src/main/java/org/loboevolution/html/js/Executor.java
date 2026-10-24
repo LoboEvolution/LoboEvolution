@@ -26,11 +26,8 @@
 package org.loboevolution.html.js;
 
 import lombok.extern.slf4j.Slf4j;
-import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.node.Document;
-import org.loboevolution.events.Event;
 import org.loboevolution.html.node.Node;
-import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.js.JavaScript;
 import org.loboevolution.js.LoboContextFactory;
 import org.mozilla.javascript.*;

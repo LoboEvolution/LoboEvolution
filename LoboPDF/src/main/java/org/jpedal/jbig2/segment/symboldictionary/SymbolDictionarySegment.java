@@ -68,12 +68,8 @@ public class SymbolDictionarySegment extends Segment {
         super(streamDecoder);
     }
 
-    /**
-     * <p>readSegment.</p>
-     *
-     * @throws java.io.IOException             if any.
-     * @throws org.jpedal.jbig2.JBIG2Exception if any.
-     */
+    /** {@inheritDoc} */
+    @Override
     public void readSegment() throws IOException, JBIG2Exception {
 
         if (JBIG2StreamDecoder.debug)

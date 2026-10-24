@@ -817,7 +817,7 @@ public class PDFFile {
     private PDFObject readArray(
             final int objNum, final int objGen, final PDFDecrypter decrypter) throws IOException {
         // we've already read the [.  Now read objects until ]
-        final ArrayList<PDFObject> ary = new ArrayList<>();
+        final List<PDFObject> ary = new ArrayList<>();
         PDFObject obj;
         while ((obj = readObject(objNum, objGen, decrypter)) != null) {
             ary.add(obj);

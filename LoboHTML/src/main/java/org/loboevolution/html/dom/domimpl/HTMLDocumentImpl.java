@@ -36,10 +36,7 @@ import org.loboevolution.common.Urls;
 import org.loboevolution.config.HtmlRendererConfig;
 import org.loboevolution.events.Event;
 import org.loboevolution.gui.HtmlRendererContext;
-import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.HTMLDocument;
-import org.loboevolution.html.dom.filter.BodyFilter;
-import org.loboevolution.html.dom.filter.HeadFilter;
 import org.loboevolution.html.dom.nodeimpl.DocumentImpl;
 import org.loboevolution.html.dom.nodeimpl.NodeImpl;
 import org.loboevolution.html.dom.nodeimpl.event.DocumentNotificationListener;
@@ -48,7 +45,6 @@ import org.loboevolution.html.js.WindowImpl;
 import org.loboevolution.html.js.css.CSSStyleSheetImpl;
 import org.loboevolution.html.js.css.StyleSheetListImpl;
 import org.loboevolution.html.node.Element;
-import org.loboevolution.html.node.Node;
 import org.loboevolution.css.StyleSheetList;
 import org.loboevolution.html.renderer.HtmlController;
 import org.loboevolution.views.DocumentView;
@@ -75,7 +71,7 @@ import java.util.*;
 public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, DocumentView {
 
 	@Setter
-	private volatile String baseURI;
+	private String baseURI;
 
 	@Getter
 	@Setter

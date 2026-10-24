@@ -81,13 +81,12 @@ public class ShowBookmarksWindow extends JFrame {
 	 * <p>Constructor for ShowBookmarksWindow.</p>
 	 *
 	 * @param frame a {@link org.loboevolution.component.BrowserFrame} object.
-	 * @param num a {@link java.lang.Integer} object.
 	 */
-	public ShowBookmarksWindow(final BrowserFrame frame, final Integer num) {
-		createAndShowGUI(frame, num);
+	public ShowBookmarksWindow(final BrowserFrame frame) {
+		createAndShowGUI(frame);
 	}
 	
-	private void createAndShowGUI(final BrowserFrame frame, final Integer num) {
+	private void createAndShowGUI(final BrowserFrame frame) {
 		final Container contentPane = getContentPane();
 		final LoboBackground lb = new LoboBackground();
 		contentPane.setLayout(null);
@@ -188,7 +187,7 @@ public class ShowBookmarksWindow extends JFrame {
 			JOptionPane.showMessageDialog(contentPane, "Edit Ok!");
 			setVisible(false);
 			dispose();
-			new ShowBookmarksWindow(frame, 100).setVisible(true);
+			new ShowBookmarksWindow(frame).setVisible(true);
 		});
 		panel2.add(okButton);
 
@@ -300,7 +299,7 @@ public class ShowBookmarksWindow extends JFrame {
 					JOptionPane.showMessageDialog(panel_3, "Delete Ok!");
 					setVisible(false);
 					dispose();
-					new ShowBookmarksWindow(frame, 100).setVisible(true);
+					new ShowBookmarksWindow(frame).setVisible(true);
 
 				});
 				panel_3.add(delete);

@@ -59,7 +59,6 @@ import com.jtattoo.plaf.JTattooUtilities;
  */
 public class McWinButtonUI extends BaseButtonUI {
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {
 		return new McWinButtonUI();
 	}

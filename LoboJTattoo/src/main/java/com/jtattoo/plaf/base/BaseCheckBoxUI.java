@@ -42,7 +42,6 @@ public class BaseCheckBoxUI extends BaseRadioButtonUI {
 	private static BaseCheckBoxUI checkBoxUI = null;
 
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent b) {
 		if (checkBoxUI == null) {
 			checkBoxUI = new BaseCheckBoxUI();

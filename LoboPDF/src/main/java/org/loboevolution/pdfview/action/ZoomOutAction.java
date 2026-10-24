@@ -57,10 +57,9 @@ public class ZoomOutAction extends AbstractAction {
         this.dialog = dialog;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public void actionPerformed(final ActionEvent evt) {
+    /** {@inheritDoc} */
+    @Override
+	public void actionPerformed(final ActionEvent evt) {
         dialog.doZoom(zoomfactor);
     }
 }

@@ -65,7 +65,7 @@ public class ShowPasswordWindow extends JFrame {
 	
 	/** The url Edit Txt Fld. */
 	private LoboTextField urlEditTxtFld;
-	
+
 	/** The tmp Url. */
 	private String tmpUrl;
 	
@@ -76,13 +76,12 @@ public class ShowPasswordWindow extends JFrame {
 	 * <p>Constructor for ShowPasswordWindow.</p>
 	 *
 	 * @param frame a {@link org.loboevolution.component.BrowserFrame} object.
-	 * @param num a {@link java.lang.Integer} object.
 	 */
-	public ShowPasswordWindow(final BrowserFrame frame, final Integer num) {
-		createAndShowGUI(frame, num);
+	public ShowPasswordWindow(final BrowserFrame frame) {
+		createAndShowGUI(frame);
 	}
 	
-	private void createAndShowGUI(final BrowserFrame frame, final Integer num) {
+	private void createAndShowGUI(final BrowserFrame frame) {
 		final Container contentPane = getContentPane();
 		final LoboBackground lb = new LoboBackground();
 		contentPane.setLayout(null);
@@ -184,7 +183,7 @@ public class ShowPasswordWindow extends JFrame {
 			JOptionPane.showMessageDialog(contentPane, "Edit Ok!");
 			setVisible(false);
 			dispose();
-			new ShowPasswordWindow(frame, 100).setVisible(true);
+			new ShowPasswordWindow(frame).setVisible(true);
 		});
 		panel2.add(okButton);
 
@@ -298,7 +297,7 @@ public class ShowPasswordWindow extends JFrame {
 					JOptionPane.showMessageDialog(panel_3, "Delete Ok!");
 					setVisible(false);
 					dispose();
-					new ShowPasswordWindow(frame, 100).setVisible(true);
+					new ShowPasswordWindow(frame).setVisible(true);
 
 				});
 				panel_3.add(delete);

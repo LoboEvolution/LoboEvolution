@@ -50,8 +50,10 @@ import org.loboevolution.laf.FontFactory;
 import org.loboevolution.laf.FontKey;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 import static org.loboevolution.html.CSSValues.*;
 
@@ -347,11 +349,8 @@ public class StyleSheetRenderState implements RenderState {
 		return binfo;
 	}
 
-	/**
-	 * <p>getColor.</p>
-	 *
-	 * @return a {@link java.awt.Color} object.
-	 */
+	/** {@inheritDoc} */
+	@Override
 	public Color getColor() {
 		Color c = this.iColor;
 		if (c != null) {
@@ -401,7 +400,7 @@ public class StyleSheetRenderState implements RenderState {
 		if (counters == null) {
 			return 0;
 		}
-		final ArrayList<Integer> counterArray = counters.get(counter);
+		final List<Integer> counterArray = counters.get(counter);
 		if (nesting < 0 || nesting >= counterArray.size()) {
 			return 0;
 		}
@@ -1004,7 +1003,7 @@ public class StyleSheetRenderState implements RenderState {
 			this.counters = counters;
 			counters.put(counter, new ArrayList<>());
 		}
-		final ArrayList<Integer> counterArray = counters.get(counter);
+		final List<Integer> counterArray = counters.get(counter);
 		while (counterArray.size() <= nesting) {
 			counterArray.add(null);
 		}
@@ -1062,7 +1061,7 @@ public class StyleSheetRenderState implements RenderState {
 				this.counters = counters;
 				counters.put(counter, new ArrayList<>());
 			}
-			final ArrayList<Integer> counterArray = counters.get(counter);
+			final List<Integer> counterArray = counters.get(counter);
 			while (counterArray.size() <= nesting) {
 				counterArray.add(null);
 			}

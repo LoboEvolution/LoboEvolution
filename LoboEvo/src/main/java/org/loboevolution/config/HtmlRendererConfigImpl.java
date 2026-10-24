@@ -38,7 +38,11 @@ import org.loboevolution.store.*;
 import java.awt.*;
 import java.net.URI;
 import java.net.URL;
-import java.sql.*;
+import java.sql.DriverManager;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -156,6 +160,7 @@ public class HtmlRendererConfigImpl implements HtmlRendererConfig {
         return styleStore.getStyles(href, baseUrl);
     }
 
+    @Override
     public void insertStyle(final String title, final String href, final String baseUrl, final int enable) {
         final StyleStore styleStore = new StyleStore();
         styleStore.insertStyle(title, href, baseUrl, enable);

@@ -76,6 +76,7 @@ public abstract class BaseBoundableRenderable extends RRectangle implements Boun
 	}
 
 	/** {@inheritDoc} */
+    @Override
 	public boolean contains(final int x, final int y) {
 		final int mx = this.getX();
 		final int my = this.getY();
@@ -97,29 +98,20 @@ public abstract class BaseBoundableRenderable extends RRectangle implements Boun
 		return new Rectangle(this.getX(), this.getY(), this.getWidth(), this.getHeight());
 	}
 
-	/**
-	 * <p>getVisualHeight.</p>
-	 *
-	 * @return a {@link java.lang.Integer} object.
-	 */
+	/** {@inheritDoc} */
+	@Override
 	public int getVisualHeight() {
 		return getHeight();
 	}
 
-	/**
-	 * <p>getVisualWidth.</p>
-	 *
-	 * @return a {@link java.lang.Integer} object.
-	 */
+	/** {@inheritDoc} */
+	@Override
 	public int getVisualWidth() {
 		return getWidth();
 	}
 
-	/**
-	 * <p>getVisualBounds.</p>
-	 *
-	 * @return a {@link java.awt.Rectangle} object.
-	 */
+	/** {@inheritDoc} */
+	@Override
 	public Rectangle getVisualBounds() {
 		return new Rectangle(getX(), getY(), getVisualWidth(), getVisualHeight());
 	}
@@ -211,6 +203,7 @@ public abstract class BaseBoundableRenderable extends RRectangle implements Boun
 	}
 
 	/** {@inheritDoc} */
+	@Override
 	public Point getOriginRelativeToAbs(final RCollection ancestor) {
 		if (ancestor == this) {
 			return new Point(0, 0);
@@ -522,10 +515,13 @@ public abstract class BaseBoundableRenderable extends RRectangle implements Boun
 		this.parent = parent;
 	}
 
+	/** {@inheritDoc} */
+	@Override
 	public boolean isDelegated() {
 		return delegator != null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public RRectangle getRectangle() {
 		return this;

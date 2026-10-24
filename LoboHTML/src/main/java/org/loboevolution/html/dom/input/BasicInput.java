@@ -146,6 +146,8 @@ public class BasicInput implements FocusListener, KeyListener, CaretListener, Mo
         }
     }
 
+    /** {@inheritDoc} */
+    @Override
     public void mousePressed(final MouseEvent e) {
         if (element.getOnkeypress() != null) {
             Executor.executeFunction(element.getOwnerDocument(), element, element.getOnkeypress(), new Object[]{}, getWindowFactory());
@@ -156,12 +158,15 @@ public class BasicInput implements FocusListener, KeyListener, CaretListener, Mo
         }
     }
 
+    /** {@inheritDoc} */
+    @Override
     public void mouseReleased(final MouseEvent e) {
         if (element.getOnkeyup() != null) {
             Executor.executeFunction(element.getOwnerDocument(), element, element.getOnkeyup(), new Object[]{}, getWindowFactory());
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public void mouseExited(final MouseEvent e) {
         // TODO Auto-generated method stub

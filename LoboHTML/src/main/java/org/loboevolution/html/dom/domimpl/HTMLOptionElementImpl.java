@@ -173,11 +173,8 @@ public class HTMLOptionElementImpl extends HTMLElementImpl implements HTMLOption
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>setText.</p>
-	 */
+	/** {@inheritDoc} */
+	@Override
 	public void setText(final String text) {
 		this.text = text;
 		setTextContent(text);

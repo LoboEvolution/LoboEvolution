@@ -103,7 +103,6 @@ public class HiFiComboBoxUI extends BaseComboBoxUI {
 
 	} // end of class ArrowButtonBorder
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {
 		return new HiFiComboBoxUI();
 	}

@@ -5,6 +5,8 @@
 package org.mozilla.javascript;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import org.mozilla.javascript.TopLevel.NativeErrors;
 
 public class NativePromise extends ScriptableObject {
@@ -727,7 +729,7 @@ public class NativePromise extends ScriptableObject {
         // Limit the number of promises in Promise.all the same as it is in V8.
         private static final int MAX_PROMISES = 1 << 21;
 
-        final ArrayList<Object> values = new ArrayList<>();
+        final List<Object> values = new ArrayList<>();
         int remainingElements = 1;
 
         IteratorLikeIterable.Itr iterator;
@@ -854,7 +856,7 @@ public class NativePromise extends ScriptableObject {
         // Limit the number of promises in Promise.any the same as it is in V8.
         private static final int MAX_PROMISES = 1 << 21;
 
-        final ArrayList<Object> errors = new ArrayList<>();
+        final List<Object> errors = new ArrayList<>();
         int remainingElements = 1;
 
         IteratorLikeIterable.Itr iterator;

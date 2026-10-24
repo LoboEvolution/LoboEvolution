@@ -46,9 +46,7 @@ import org.loboevolution.net.UserAgent;
 import org.loboevolution.type.Decoding;
 import org.mozilla.javascript.Function;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
@@ -165,11 +163,8 @@ public class HTMLImageElementImpl extends HTMLElementImpl implements HTMLImageEl
 		return name == null ? "" : name;
 	}
 
-	/**
-	 * <p>getOnload.</p>
-	 *
-	 * @return a {@link Function} object.
-	 */
+	/** {@inheritDoc} */
+	@Override
 	public Function getOnload() {
 		final Object document = this.document;
 		if (document instanceof HTMLDocument) {
@@ -251,11 +246,8 @@ public class HTMLImageElementImpl extends HTMLElementImpl implements HTMLImageEl
 		setAttribute("name", name);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>setOnload.</p>
-	 */
+	/** {@inheritDoc} */
+	@Override
 	public void setOnload(final Function onload) {
 		final Object document = this.document;
 		if (document instanceof HTMLDocument) {
@@ -263,13 +255,7 @@ public class HTMLImageElementImpl extends HTMLElementImpl implements HTMLImageEl
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * Sets the image URI and starts to load the image. Note that an
-	 * HtmlRendererContext should be available to the HTML document for images to be
-	 * loaded.
-	 */
+	/** {@inheritDoc} */
 	@Override
 	public void setSrc(final String src) {
 		setAttribute("src", src);

@@ -28,7 +28,6 @@ package com.jtattoo.plaf;
 
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.Serial;
@@ -42,9 +41,7 @@ import javax.swing.SwingConstants;
 
 /**
  * <p>About class.</p>
- *
  * Author Michael Hagen
- *
  */
 
 // TODO:
@@ -62,10 +59,7 @@ public class About extends JDialog {
 	/** Constant JTATTOO_VERSION="Version: 1.6.12" */
 	public static final String JTATTOO_VERSION = "Version: 1.6.12";
 
-	private static final Dimension SCREEN_SIZE = Toolkit.getDefaultToolkit().getScreenSize();
 	private static final Dimension DLG_SIZE = new Dimension(440, 240);
-	private static final int DLG_POS_X = SCREEN_SIZE.width / 2 - DLG_SIZE.width / 2;
-	private static final int DLG_POS_Y = SCREEN_SIZE.height / 2 - DLG_SIZE.height / 2;
 
 	/**
 	 * <p>Constructor for About.</p>

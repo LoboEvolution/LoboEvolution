@@ -49,18 +49,14 @@ public class MediaListImpl extends AbstractScriptableDelegate implements MediaLi
         this.media = media;
     }
 
-    /**
-     * <p>getMediaText.</p>
-     * @return the media text string.
-     */
+    /** {@inheritDoc} */
+    @Override
     public String getMediaText() {
         return media == null ? "" : media.getMediaText();
     }
 
-    /**
-     * <p>getLength.</p>
-     * @return the number of media queries.
-     */
+    /** {@inheritDoc} */
+    @Override
     public int getLength() {
         return media == null ? 0 : media.getLength();
     }

@@ -95,6 +95,8 @@ public class JhromeTabUI extends BasicTabUI {
         closeButton.setPreferredSize(new Dimension(closeButton.getIcon().getIconWidth() + 1, closeButton.getIcon().getIconHeight() + 1));
     }
 
+    /** {@inheritDoc} */
+    @Override
     protected void onHighlightTimerEvent(final ActionEvent e) {
         final Tab tab = getTab();
         if (tab != null) {
@@ -102,6 +104,7 @@ public class JhromeTabUI extends BasicTabUI {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public void installUI(final JComponent c) {
         super.installUI(c);
@@ -114,10 +117,13 @@ public class JhromeTabUI extends BasicTabUI {
         getTab().addPropertyChangeListener(changeHandler);
     }
 
+    /** {@inheritDoc} */
+    @Override
     public void update(final Graphics g, final JComponent c) {
         paint(g, c);
     }
 
+    /** {@inheritDoc} */
     @Override
     public void uninstallUI(final JComponent c) {
         final Tab tab = getTab();
@@ -133,6 +139,8 @@ public class JhromeTabUI extends BasicTabUI {
         changeHandler = null;
     }
 
+    /** {@inheritDoc} */
+    @Override
     protected void update() {
         super.update();
 

@@ -86,6 +86,8 @@ public class Tab extends JComponent {
         }
     }
 
+    /** {@inheritDoc} */
+    @Override
     public TabUI getUI() {
         return (TabUI) ui;
     }

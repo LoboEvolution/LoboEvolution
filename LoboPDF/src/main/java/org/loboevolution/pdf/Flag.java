@@ -33,7 +33,7 @@ public class Flag {
     /**
      * The is set.
      */
-    private volatile boolean isSet = false;
+    private boolean isSet = false;
 
     /**
      * Sets the flag. Any pending waitForFlag calls will now return.

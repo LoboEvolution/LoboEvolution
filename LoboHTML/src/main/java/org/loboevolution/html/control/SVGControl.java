@@ -26,9 +26,6 @@
 
 package org.loboevolution.html.control;
 
-import org.loboevolution.html.dom.HTMLElement;
-import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
-import org.loboevolution.html.node.Element;
 import org.loboevolution.svg.SVGSVGElement;
 
 import java.awt.*;

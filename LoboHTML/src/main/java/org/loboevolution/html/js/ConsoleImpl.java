@@ -89,11 +89,8 @@ public class ConsoleImpl implements Console {
 		logging(message);
 	}
 
-    /**
-     * {@inheritDoc}
-     *
-     * <p>time.</p>
-     */
+    /** {@inheritDoc} */
+    @Override
     public void time(final String name) {
         time = new Date();
        // logger.info(name + ": timer started");
@@ -101,11 +98,8 @@ public class ConsoleImpl implements Console {
 
     }
 
-    /**
-     * {@inheritDoc}
-     *
-     * <p>timeEnd.</p>
-     */
+    /** {@inheritDoc} */
+    @Override
     public void timeEnd(final String name) {
         if (name.equals(strTime)) {
             final Date date = new Date();
@@ -115,35 +109,27 @@ public class ConsoleImpl implements Console {
 
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public void clear() {
         sessionStorage.removeItem("log");
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public void count(final String label) {
         // TODO Auto-generated method stub
 
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public void count() {
         // TODO Auto-generated method stub
 
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public void dir() {
         // TODO Auto-generated method stub

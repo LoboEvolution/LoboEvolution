@@ -39,7 +39,6 @@ import com.jtattoo.plaf.base.BaseSplitPaneUI;
  */
 public class FastSplitPaneUI extends BaseSplitPaneUI {
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {
 		return new FastSplitPaneUI();
 	}

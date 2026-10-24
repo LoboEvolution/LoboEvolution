@@ -33,10 +33,14 @@ package org.sexydock.tabs;
  * @author andy.edwards
  */
 public class DefaultTabFactory implements ITabFactory {
+
+    /** {@inheritDoc} */
+    @Override
     public Tab createTab() {
         return new Tab();
     }
 
+    /** {@inheritDoc} */
     @Override
     public Tab createTabWithContent() {
         return null;

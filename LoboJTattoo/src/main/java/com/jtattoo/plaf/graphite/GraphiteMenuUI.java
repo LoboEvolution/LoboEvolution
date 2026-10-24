@@ -51,7 +51,6 @@ import com.jtattoo.plaf.JTattooUtilities;
  */
 public class GraphiteMenuUI extends BaseMenuUI {
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {
 		return new GraphiteMenuUI();
 	}

@@ -95,7 +95,6 @@ public class DTDParser {
             while (i + 2 < tokens.length) {
 
                 String attrName = tokens[i++];
-                String attrType = tokens[i++];
                 String defaultDecl = tokens[i++];
 
                 String value = null;

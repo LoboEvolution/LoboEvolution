@@ -32,8 +32,6 @@ import java.io.Serial;
 
 import javax.swing.AbstractAction;
 
-import org.loboevolution.component.BrowserFrame;
-
 /**
  * <p>ClearHistoryAction class.</p>
  */
@@ -42,21 +40,10 @@ public class ClearHistoryAction extends AbstractAction {
 	@Serial
     private static final long serialVersionUID = 1L;
 
-	private final BrowserFrame frame;
-
-	/**
-	 * <p>Constructor for ClearHistoryAction.</p>
-	 *
-	 * @param frame a {@link org.loboevolution.component.BrowserFrame} object.
-	 */
-	public ClearHistoryAction(final BrowserFrame frame) {
-		this.frame = frame;
-	}
-
 	/** {@inheritDoc} */
 	@Override
 	public void actionPerformed(final ActionEvent e) {
-		final ClearHistoryWindow clear = new ClearHistoryWindow(this.frame);
+		final ClearHistoryWindow clear = new ClearHistoryWindow();
 		clear.setLocationByPlatform(true);
 		clear.setResizable(false);
 		clear.setSize(new Dimension(200, 190));

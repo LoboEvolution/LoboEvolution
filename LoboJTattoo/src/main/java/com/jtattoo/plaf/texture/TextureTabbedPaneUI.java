@@ -222,30 +222,6 @@ public class TextureTabbedPaneUI extends BaseTabbedPaneUI {
 			final int d = 2 * GAP;
 			switch (tabPlacement) {
 			case TOP:
-			default:
-				if (isSelected) {
-					final Area clipArea = new Area(new RoundRectangle2D.Double(x, y, w, h + 4, d, d));
-					final Area rectArea = new Area(new Rectangle2D.Double(x, y, w, h + 1));
-					clipArea.intersect(rectArea);
-					clipArea.intersect(orgClipArea);
-					g2D.setClip(clipArea);
-					TextureUtils.fillRect(g, tabPane, x, y, w, h + 4, getSelectedTexture());
-					g2D.setClip(savedClip);
-				} else {
-					final Area clipArea = new Area(new RoundRectangle2D.Double(x, y, w, h + 4, d, d));
-					final Area rectArea = new Area(new Rectangle2D.Double(x, y, w, h));
-					clipArea.intersect(rectArea);
-					clipArea.intersect(orgClipArea);
-					g2D.setClip(clipArea);
-					TextureUtils.fillRect(g, tabPane, x, y, w, h + 4, getUnSelectedTexture(tabIndex));
-					final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f);
-					g2D.setComposite(alpha);
-					final Color[] colors = AbstractLookAndFeel.getTheme().getButtonColors();
-					JTattooUtilities.fillHorGradient(g, colors, x, y, w, h + 4);
-					g2D.setComposite(savedComposite);
-					g2D.setClip(savedClip);
-				}
-				break;
 			case LEFT:
 				if (isSelected) {
 					TextureUtils.fillComponent(g, tabPane, x + 1, y + 1, w, h - 1, getSelectedTexture());
@@ -282,6 +258,30 @@ public class TextureTabbedPaneUI extends BaseTabbedPaneUI {
 					TextureUtils.fillComponent(g, tabPane, x, y + 1, w, h - 1, getSelectedTexture());
 				} else {
 					TextureUtils.fillComponent(g, tabPane, x, y + 1, w, h - 1, getUnSelectedTexture(tabIndex));
+				}
+				break;
+			default:
+				if (isSelected) {
+					final Area clipArea = new Area(new RoundRectangle2D.Double(x, y, w, h + 4, d, d));
+					final Area rectArea = new Area(new Rectangle2D.Double(x, y, w, h + 1));
+					clipArea.intersect(rectArea);
+					clipArea.intersect(orgClipArea);
+					g2D.setClip(clipArea);
+					TextureUtils.fillRect(g, tabPane, x, y, w, h + 4, getSelectedTexture());
+					g2D.setClip(savedClip);
+				} else {
+					final Area clipArea = new Area(new RoundRectangle2D.Double(x, y, w, h + 4, d, d));
+					final Area rectArea = new Area(new Rectangle2D.Double(x, y, w, h));
+					clipArea.intersect(rectArea);
+					clipArea.intersect(orgClipArea);
+					g2D.setClip(clipArea);
+					TextureUtils.fillRect(g, tabPane, x, y, w, h + 4, getUnSelectedTexture(tabIndex));
+					final AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f);
+					g2D.setComposite(alpha);
+					final Color[] colors = AbstractLookAndFeel.getTheme().getButtonColors();
+					JTattooUtilities.fillHorGradient(g, colors, x, y, w, h + 4);
+					g2D.setComposite(savedComposite);
+					g2D.setClip(savedClip);
 				}
 				break;
 			}

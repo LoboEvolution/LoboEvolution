@@ -42,7 +42,6 @@ import com.jtattoo.plaf.JTattooUtilities;
  */
 public class MintMenuBarUI extends BasicMenuBarUI {
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {
 		return new MintMenuBarUI();
 	}

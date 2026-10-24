@@ -61,10 +61,9 @@ public class JBIG2ImageReaderSpi extends ImageReaderSpi {
 
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public boolean canDecodeInput(final Object input) throws IOException {
+    /** {@inheritDoc} */
+    @Override
+	public boolean canDecodeInput(final Object input) throws IOException {
 
         // The input source must be an ImageInputStream because the constructor
         // passes STANDARD_INPUT_TYPE (an array consisting of ImageInputStream)
@@ -96,20 +95,18 @@ public class JBIG2ImageReaderSpi extends ImageReaderSpi {
         return Arrays.equals(controlHeader, header);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public ImageReader createReaderInstance(final Object extension) throws IOException {
+    /** {@inheritDoc} */
+    @Override
+	public ImageReader createReaderInstance(final Object extension) throws IOException {
         // Inform the JBIG2 image reader that this JBIG2 image reader SPI is the
         // originating provider -- the object that creates the JBIG2 image
         // reader.
         return new JBIG2ImageReader(this);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public String getDescription(final java.util.Locale locale) {
+    /** {@inheritDoc} */
+    @Override
+	public String getDescription(final java.util.Locale locale) {
         return "JPedal JBIG2 Image Decoder provided by IDRsolutions.  See http://www.jpedal.org/jbig.php";
     }
 }

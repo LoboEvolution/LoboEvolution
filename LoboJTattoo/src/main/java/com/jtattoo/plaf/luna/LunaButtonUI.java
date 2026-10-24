@@ -51,7 +51,6 @@ import com.jtattoo.plaf.base.BaseButtonUI;
  */
 public class LunaButtonUI extends BaseButtonUI {
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {
 		return new LunaButtonUI();
 	}

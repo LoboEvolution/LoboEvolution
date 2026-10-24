@@ -113,7 +113,6 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
 
 	} // end of class MyTrackListener
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {
 		return new BaseScrollBarUI();
 	}

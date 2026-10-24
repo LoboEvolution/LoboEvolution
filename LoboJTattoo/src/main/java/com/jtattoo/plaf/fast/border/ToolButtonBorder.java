@@ -3,14 +3,11 @@ package com.jtattoo.plaf.fast.border;
 import com.jtattoo.plaf.AbstractLookAndFeel;
 import com.jtattoo.plaf.ColorHelper;
 import com.jtattoo.plaf.JTattooUtilities;
-import com.jtattoo.plaf.LazyImageIcon;
 
 import javax.swing.*;
-import javax.swing.border.AbstractBorder;
 import javax.swing.border.Border;
 import javax.swing.plaf.UIResource;
 import java.awt.*;
-import java.io.Serial;
 
 public class ToolButtonBorder implements Border, UIResource {
 

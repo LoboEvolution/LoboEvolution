@@ -40,7 +40,6 @@ import com.jtattoo.plaf.base.BaseScrollPaneUI;
  */
 public class McWinScrollPaneUI extends BaseScrollPaneUI {
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {
 		return new McWinScrollPaneUI();
 	}

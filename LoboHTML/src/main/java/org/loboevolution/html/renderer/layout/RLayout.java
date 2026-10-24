@@ -28,8 +28,6 @@ package org.loboevolution.html.renderer.layout;
 
 import org.loboevolution.html.HTMLTag;
 
-import java.net.Socket;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 

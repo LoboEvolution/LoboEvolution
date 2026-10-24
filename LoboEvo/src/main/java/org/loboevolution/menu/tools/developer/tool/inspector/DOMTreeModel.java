@@ -82,37 +82,20 @@ public class DOMTreeModel implements TreeModel {
         }
     }
 
-    /**
-     * Adds the specified TreeModel listener to receive TreeModel events from
-     * this component. If listener l is null, no exception is thrown and no
-     * action is performed.
-     *
-     * @param l Contains the TreeModelListener for TreeModelEvent data.
-     */
+    /** {@inheritDoc} */
+    @Override
     public void addTreeModelListener(final TreeModelListener l) {
         this.listeners.add(l);
     }
 
-    /**
-     * Removes the specified TreeModel listener so that it no longer receives
-     * TreeModel events from this component. This method performs no function,
-     * nor does it throw an exception, if the listener specified by the argument
-     * was not previously added to this component. If listener l is null, no
-     * exception is thrown and no action is performed.
-     *
-     * @param l Contains the TreeModelListener for TreeModelEvent data.
-     */
+    /** {@inheritDoc} */
+    @Override
     public void removeTreeModelListener(final TreeModelListener l) {
         this.listeners.remove(l);
     }
 
-    /**
-     * Gets the child attribute of the DOMTreeModel object
-     *
-     * @param parent PARAM
-     * @param index  PARAM
-     * @return The child value
-     */
+    /** {@inheritDoc} */
+    @Override
     public Object getChild(final Object parent, final int index) {
         final Node node = (Node) parent;
         List<Node> children = this.displayableNodes.get(parent);
@@ -122,12 +105,8 @@ public class DOMTreeModel implements TreeModel {
         return children.get(index);
     }
 
-    /**
-     * Gets the childCount attribute of the DOMTreeModel object
-     *
-     * @param parent PARAM
-     * @return The childCount value
-     */
+    /** {@inheritDoc} */
+    @Override
     public int getChildCount(final Object parent) {
 
         final Node node = (Node) parent;
@@ -138,13 +117,8 @@ public class DOMTreeModel implements TreeModel {
         return children.size();
     }
 
-    /**
-     * Gets the indexOfChild attribute of the DOMTreeModel object
-     *
-     * @param parent PARAM
-     * @param child  PARAM
-     * @return The indexOfChild value
-     */
+    /** {@inheritDoc} */
+    @Override
     public int getIndexOfChild(final Object parent, final Object child) {
 
         final Node node = (Node) parent;
@@ -159,35 +133,20 @@ public class DOMTreeModel implements TreeModel {
         }
     }
 
-    /**
-     * Gets the root attribute of the DOMTreeModel object
-     *
-     * @return The root value
-     */
+    /** {@inheritDoc} */
+    @Override
     public Object getRoot() {
         return this.root;
     }
 
-    /**
-     * Gets the leaf attribute of the DOMTreeModel object
-     *
-     * @param nd PARAM
-     * @return The leaf value
-     */
+    /** {@inheritDoc} */
+    @Override
     public boolean isLeaf(final Object nd) {
         final Node node = (Node) nd;
         return !node.hasChildNodes();
     }
 
-    /**
-     * Messaged when the user has altered the value for the item identified
-     * by <code>path</code> to <code>newValue</code>.
-     * If <code>newValue</code> signifies a truly new value
-     * the model should post a <code>treeNodesChanged</code> event.
-     *
-     * @param path     path to the node that the user has altered
-     * @param newValue the new value from the TreeCellEditor
-     */
+    /** {@inheritDoc} */
     @Override
     public void valueForPathChanged(final TreePath path, final Object newValue) {
 

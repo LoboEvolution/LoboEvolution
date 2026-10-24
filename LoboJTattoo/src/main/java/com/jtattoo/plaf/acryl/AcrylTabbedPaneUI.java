@@ -50,7 +50,6 @@ import com.jtattoo.plaf.JTattooUtilities;
  */
 public class AcrylTabbedPaneUI extends BaseTabbedPaneUI {
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {
 		return new AcrylTabbedPaneUI();
 	}

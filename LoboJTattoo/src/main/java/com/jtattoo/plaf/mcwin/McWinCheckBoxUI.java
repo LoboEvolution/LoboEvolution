@@ -40,7 +40,6 @@ public class McWinCheckBoxUI extends McWinRadioButtonUI {
 
 	private static McWinCheckBoxUI checkBoxUI = null;
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent b) {
 		if (checkBoxUI == null) {
 			checkBoxUI = new McWinCheckBoxUI();

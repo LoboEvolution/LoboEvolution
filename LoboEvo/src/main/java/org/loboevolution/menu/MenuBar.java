@@ -82,7 +82,7 @@ public class MenuBar extends JMenuBar {
 		final JMenu menu = new JMenu("Bookmarks");
 		menu.setMnemonic('B');
 		menu.add(menuItem("Add Bookmark", 'A', "ctrl shift a", new AddBookmarkAction(frame)));
-		menu.add(menuItem("Show All Bookmarks", 'S', new ShowBookmarksAction(frame, null)));
+		menu.add(menuItem("Show All Bookmarks", 'S', new ShowBookmarksAction(frame)));
 		return menu;
 	}
 
@@ -96,7 +96,7 @@ public class MenuBar extends JMenuBar {
 		final JMenu menu = new JMenu("Recent");
 		menu.add(menuItem("Hosts", new ShowRecentHostsAction(frame)));
 		menu.add(menuItem("Download", new ShowRecentDownloadAction(frame)));
-		menu.add(menuItem("Bookmarks", new ShowBookmarksAction(frame, 20)));
+		menu.add(menuItem("Bookmarks", new ShowBookmarksAction(frame)));
 		menu.add(menuItem("Password Manager", new ShowPasswordAction(frame, 20)));
 		return menu;
 	}
@@ -160,7 +160,7 @@ public class MenuBar extends JMenuBar {
 		menu.add(menuItem("Preferences...", 'P', new PreferencesAction(frame)));
 		menu.add(menuItem("Developer Tools", ' ', "", new DeveloperToolsAction(frame)));
 		menu.add(menuItem("Screenshot", ' ', "", new ScreenShotAction(frame)));
-		menu.add(menuItem("Clear History", 'M', "ctrl M", new ClearHistoryAction(frame)));
+		menu.add(menuItem("Clear History", 'M', "ctrl M", new ClearHistoryAction()));
 		return menu;
 	}
 

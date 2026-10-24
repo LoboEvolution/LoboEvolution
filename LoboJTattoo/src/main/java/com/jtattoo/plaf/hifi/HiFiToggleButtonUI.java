@@ -52,7 +52,6 @@ import com.jtattoo.plaf.JTattooUtilities;
  */
 public class HiFiToggleButtonUI extends BaseToggleButtonUI {
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {
 		return new HiFiToggleButtonUI();
 	}

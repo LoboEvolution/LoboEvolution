@@ -189,7 +189,6 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
 
 	} // end of class MyRenderComponent
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent h) {
 		return new BaseTableHeaderUI();
 	}

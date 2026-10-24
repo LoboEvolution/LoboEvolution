@@ -43,7 +43,6 @@ public class TexturePanelUI extends BasePanelUI {
 
 	private static TexturePanelUI panelUI = null;
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {
 		if (panelUI == null) {
 			panelUI = new TexturePanelUI();

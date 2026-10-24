@@ -42,7 +42,6 @@ public class AluminiumDesktopPaneUI extends BaseDesktopPaneUI {
 
 	private static AluminiumDesktopPaneUI desktopPaneUI = null;
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {
 		if (desktopPaneUI == null) {
 			desktopPaneUI = new AluminiumDesktopPaneUI();

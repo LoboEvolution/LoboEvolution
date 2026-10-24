@@ -156,15 +156,6 @@ public class HttpRequest extends XMLHttpRequestEventTargetImpl {
 	}
 
 	/**
-	 * <p>Getter for the field responseBytes.</p>
-	 *
-	 * @return an array of {@link byte} objects.
-	 */
-	public synchronized byte[] getResponseBytes() {
-		return this.responseBytes;
-	}
-
-	/**
 	 * <p>getResponseHeader.</p>
 	 *
 	 * @param headerName a {@link java.lang.String} object.
@@ -456,8 +447,7 @@ public class HttpRequest extends XMLHttpRequestEventTargetImpl {
 		writer.flush();
 	}
 
-	private void addFilePart(String fieldName, Blob uploadFile, String fileName, String boundary)
-			throws IOException {
+	private void addFilePart(String fieldName, Blob uploadFile, String fileName, String boundary) {
 
 		writer.append("--").append(boundary).append(LINE);
 		writer.append("Content-Disposition: form-data; name=\"").append(fieldName).append("\"; filename=\"").append(fileName).append("\"").append(LINE);

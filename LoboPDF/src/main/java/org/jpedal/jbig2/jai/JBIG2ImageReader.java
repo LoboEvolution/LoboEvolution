@@ -73,7 +73,6 @@ public class JBIG2ImageReader extends ImageReader {
         int w = ras.getWidth();
         int h = ras.getHeight();
         int d = dBufferedImage;
-        final int g = dBufferedImage;
         int comp = dComp;
 
         byte[] data = ((DataBufferByte) ras.getDataBuffer()).getData();
@@ -240,9 +239,8 @@ public class JBIG2ImageReader extends ImageReader {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
+    @Override
     public void setInput(final Object input, final boolean seekForwardOnly, final boolean ignoreMetadata) {
         super.setInput(input, seekForwardOnly, ignoreMetadata);
 
@@ -263,9 +261,8 @@ public class JBIG2ImageReader extends ImageReader {
             throw new IllegalArgumentException("ImageInputStream expected!");
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
+    @Override
     public BufferedImage read(final int imageIndex, final ImageReadParam param) throws IOException {
 
         BufferedImage dst = null;
@@ -371,27 +368,21 @@ public class JBIG2ImageReader extends ImageReader {
 
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
+    @Override
     public IIOMetadata getImageMetadata(final int imageIndex) throws IOException {
         return null;
     }
 
-    /**
-     * <p>getStreamMetadata.</p>
-     *
-     * @return a {@link javax.imageio.metadata.IIOMetadata} object.
-     * @throws java.io.IOException if any.
-     */
+    /** {@inheritDoc} */
+    @Override
     public IIOMetadata getStreamMetadata() throws IOException {
         return null;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public Iterator<ImageTypeSpecifier> getImageTypes(final int imageIndex) throws IOException {
+    /** {@inheritDoc} */
+    @Override
+	public Iterator<ImageTypeSpecifier> getImageTypes(final int imageIndex) throws IOException {
         readFile();
 
         checkIndex(imageIndex);
@@ -415,19 +406,17 @@ public class JBIG2ImageReader extends ImageReader {
         return l.iterator();
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public int getNumImages(final boolean allowSearch) throws IOException {
+    /** {@inheritDoc} */
+    @Override
+	public int getNumImages(final boolean allowSearch) throws IOException {
         readFile();
 
         return decoder.getNumberOfPages();
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public int getHeight(final int imageIndex) throws IOException {
+    /** {@inheritDoc} */
+    @Override
+	public int getHeight(final int imageIndex) throws IOException {
         readFile();
 
         checkIndex(imageIndex);
@@ -435,10 +424,9 @@ public class JBIG2ImageReader extends ImageReader {
         return decoder.getPageAsJBIG2Bitmap(imageIndex).getHeight();
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public int getWidth(final int imageIndex) throws IOException {
+    /** {@inheritDoc} */
+    @Override
+	public int getWidth(final int imageIndex) throws IOException {
         readFile();
 
         checkIndex(imageIndex);

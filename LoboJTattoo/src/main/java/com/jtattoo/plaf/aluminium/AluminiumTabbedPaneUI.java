@@ -50,7 +50,6 @@ public class AluminiumTabbedPaneUI extends BaseTabbedPaneUI {
 	private static Color[] TOP_SELECTED_tabColors = null;
 	private static Color[] BOTTOM_SELECTED_tabColors = null;
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {
 		return new AluminiumTabbedPaneUI();
 	}

@@ -129,11 +129,14 @@ public class HTMLTableColElementImpl extends HTMLElementImpl implements HTMLTabl
 		return new DisplayRenderState(prevRenderState, this, RenderState.DISPLAY_TABLE_COLUMN);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Integer getOffsetWidth() {
 		return null;
 	}
 
+	/** {@inheritDoc} */
+	@Override
 	public Integer getClientWidth() {
 		return null;
 	}

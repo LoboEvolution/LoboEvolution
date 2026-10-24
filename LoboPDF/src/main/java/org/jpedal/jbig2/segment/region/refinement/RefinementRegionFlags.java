@@ -44,10 +44,9 @@ public class RefinementRegionFlags extends Flags {
      */
     public static final String TPGDON = "TPGDON";
 
-    /**
-     * {@inheritDoc}
-     */
-    public void setFlags(final int flagsAsInt) {
+    /** {@inheritDoc} */
+    @Override
+	public void setFlags(final int flagsAsInt) {
         this.flagsAsInt = flagsAsInt;
         flags.put(GR_TEMPLATE, flagsAsInt & 1);
         flags.put(TPGDON, (flagsAsInt >> 1) & 1);

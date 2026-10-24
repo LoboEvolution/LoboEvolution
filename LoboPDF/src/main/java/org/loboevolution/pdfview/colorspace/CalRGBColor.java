@@ -48,10 +48,6 @@ public class CalRGBColor extends ColorSpace {
     private static final float[] xyzToSRGB = {3.24071f, -0.969258f, 0.0556352f,
             -1.53726f, 1.87599f, -0.203996f,
             -0.498571f, 0.0415557f, 1.05707f};
-    private static final float[] xyzToRGB = {2.04148f, -0.969258f, 0.0134455f,
-            -0.564977f, 1.87599f, -0.118373f,
-            -0.344713f, 0.0415557f, 1.01527f};
-    static ColorSpace cieCS = ColorSpace.getInstance(ColorSpace.CS_CIEXYZ);
     final float[] white = {1f, 1f, 1f};
     final float[] black = {0, 0, 0};
     final float[] matrix = {1f, 0, 0, 0, 1f, 0, 0, 0, 1f};

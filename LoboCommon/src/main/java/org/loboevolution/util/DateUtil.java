@@ -66,7 +66,7 @@ public final class DateUtil {
 	}
 
 	private List<String> formatList() {
-		final ArrayList<String> DATE_FORMAT = new ArrayList<>();
+		final List<String> DATE_FORMAT = new ArrayList<>();
 		DATE_FORMAT.add("yyyyMMdd");
 		DATE_FORMAT.add("dd-MM-yyyy");
 		DATE_FORMAT.add("yyyy-MM-dd");

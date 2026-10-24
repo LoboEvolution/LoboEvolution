@@ -440,6 +440,8 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, GlobalE
 		return null;
 	}
 
+	/** {@inheritDoc} */
+	@Override
 	public CSSStyleDeclaration getStyle() {
 		CSSStyleDeclarationImpl styleDeclaration = new CSSStyleDeclarationImpl(this, false);
 		if (localStyleDeclarationState == null || localStyleDeclarationState.getLength() == 0) {

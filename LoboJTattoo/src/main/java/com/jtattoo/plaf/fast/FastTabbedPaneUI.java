@@ -42,7 +42,6 @@ import com.jtattoo.plaf.JTattooUtilities;
  * author Michael Hagen */
 public class FastTabbedPaneUI extends BaseTabbedPaneUI {
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {
 		return new FastTabbedPaneUI();
 	}

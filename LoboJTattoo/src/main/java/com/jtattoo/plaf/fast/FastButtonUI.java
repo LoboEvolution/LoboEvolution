@@ -46,7 +46,6 @@ import com.jtattoo.plaf.ColorHelper;
  */
 public class FastButtonUI extends BaseButtonUI {
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {
 		return new FastButtonUI();
 	}

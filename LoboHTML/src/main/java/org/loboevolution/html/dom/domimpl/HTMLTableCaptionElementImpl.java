@@ -27,7 +27,6 @@
 package org.loboevolution.html.dom.domimpl;
 
 import org.loboevolution.html.dom.HTMLTableCaptionElement;
-import org.loboevolution.html.renderstate.DisplayRenderState;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.renderstate.TableCaptionRenderState;
 

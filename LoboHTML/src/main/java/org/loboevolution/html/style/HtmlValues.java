@@ -44,6 +44,7 @@ import org.loboevolution.net.HttpNetwork;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>HtmlValues class.</p>
@@ -412,7 +413,7 @@ public class HtmlValues {
 	 * @return an array of {@link java.lang.String} objects.
 	 */
 	public static String[] splitCssValue(final String cssValue) {
-		final ArrayList<String> tokens = new ArrayList<>(4);
+		final List<String> tokens = new ArrayList<>(4);
 		final int len = cssValue.length();
 		int parenCount = 0;
 		StringBuilder currentWord = null;

@@ -155,6 +155,7 @@ public class SVGElementImpl extends SVGElementWrapper implements SVGElement {
 	}
 
 	/** {@inheritDoc} */
+    @Override
 	public void setOwnerSVGElement(final SVGSVGElement ownerSvg) {
 		this.ownerSvg = ownerSvg;
 	}

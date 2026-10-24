@@ -380,7 +380,7 @@ class RLine extends BaseRCollection {
 	@Override
 	public RenderableSpot getLowestRenderableSpot(final int x, final int y) {
 		final Renderable[] rarray = this.renderables.toArray(Renderable.EMPTY_ARRAY);
-		final BoundableRenderable br = MarkupUtilities.findRenderable(rarray, x, y, false);
+		final BoundableRenderable br = MarkupUtilities.findRenderable(rarray, x, y);
 		if (br != null) {
 			final Rectangle rbounds = br.getVisualBounds();
 			return br.getLowestRenderableSpot(x - rbounds.x, y - rbounds.y);
@@ -422,7 +422,7 @@ class RLine extends BaseRCollection {
 	@Override
 	public boolean onDoubleClick(final MouseEvent event, final int x, final int y) {
 		final Renderable[] rarray = this.renderables.toArray(Renderable.EMPTY_ARRAY);
-		final BoundableRenderable r = MarkupUtilities.findRenderable(rarray, x, y, false);
+		final BoundableRenderable r = MarkupUtilities.findRenderable(rarray, x, y);
 		if (r != null) {
 			final Rectangle rbounds = r.getVisualBounds();
 			return r.onDoubleClick(event, x - rbounds.x, y - rbounds.y);
@@ -435,7 +435,7 @@ class RLine extends BaseRCollection {
 	@Override
 	public boolean onMouseClick(final MouseEvent event, final int x, final int y) {
 		final Renderable[] rarray = this.renderables.toArray(Renderable.EMPTY_ARRAY);
-		final BoundableRenderable r = MarkupUtilities.findRenderable(rarray, x, y, false);
+		final BoundableRenderable r = MarkupUtilities.findRenderable(rarray, x, y);
 		if (r != null) {
 			final Rectangle rbounds = r.getVisualBounds();
 			return r.onMouseClick(event, x - rbounds.x, y - rbounds.y);
@@ -460,7 +460,7 @@ class RLine extends BaseRCollection {
 	@Override
 	public boolean onMousePressed(final MouseEvent event, final int x, final int y) {
 		final Renderable[] rarray = this.renderables.toArray(Renderable.EMPTY_ARRAY);
-		final BoundableRenderable r = MarkupUtilities.findRenderable(rarray, x, y, false);
+		final BoundableRenderable r = MarkupUtilities.findRenderable(rarray, x, y);
 		if (r != null) {
 			this.mousePressTarget = r;
 			final Rectangle rbounds = r.getVisualBounds();
@@ -474,7 +474,7 @@ class RLine extends BaseRCollection {
 	@Override
 	public boolean onMouseReleased(final MouseEvent event, final int x, final int y) {
 		final Renderable[] rarray = this.renderables.toArray(Renderable.EMPTY_ARRAY);
-		final BoundableRenderable r = MarkupUtilities.findRenderable(rarray, x, y, false);
+		final BoundableRenderable r = MarkupUtilities.findRenderable(rarray, x, y);
 		if (r != null) {
 			final Rectangle rbounds = r.getVisualBounds();
 			final BoundableRenderable oldArmedRenderable = this.mousePressTarget;

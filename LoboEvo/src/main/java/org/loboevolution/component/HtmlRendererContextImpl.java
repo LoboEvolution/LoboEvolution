@@ -90,7 +90,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 
 	private HtmlPanel htmlPanel;
 
-	private volatile HtmlRendererContext opener;
+	private HtmlRendererContext opener;
 
 	private final HtmlRendererContext parentRcontext;
 
@@ -689,7 +689,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 			tabbedPane.insertTab(title, null, htmlPanel, title, indexPanel);
 			browserFrame.getToolbar().getAddressBar().setText(action.toString());
 			bpanel.getScroll().getViewport().add((Component)tabbedPane);
-			submitFormSync(method, action, target, enctype, formInputs);
+			submitFormSync(method, action, target, formInputs);
 		} catch (final Exception err) {
 			error("navigate(): Error loading or parsing request.", err);
 		}
@@ -742,8 +742,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 		return Proxy.NO_PROXY;
 	}
 
-	private void submitFormSync(final String method, final URL action, final String target, final String enctype,
-								final FormInput[] formInputs) throws Exception {
+	private void submitFormSync(final String method, final URL action, final String target, final FormInput[] formInputs) throws Exception {
 		final String actualMethod = method.toUpperCase();
 		final URL resolvedURL;
 		if ("GET".equals(actualMethod) && formInputs != null) {
@@ -882,11 +881,8 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 		}
 	}
 
-	/**
-	 * <p>isTest.</p>
-	 *
-	 * @return a boolean.
-	 */
+	/** {@inheritDoc} */
+	@Override
 	public boolean isTestEnabled() {
 		return false;
 	}

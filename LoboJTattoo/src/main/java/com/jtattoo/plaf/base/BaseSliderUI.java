@@ -93,7 +93,6 @@ public class BaseSliderUI extends BasicSliderUI {
 
 	} // end of class MyTrackListener
 
-	/** {@inheritDoc} */
 	public static ComponentUI createUI(final JComponent c) {
 		return new BaseSliderUI((JSlider) c);
 	}
