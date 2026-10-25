@@ -28,6 +28,7 @@
  */
 package org.loboevolution.html.control;
 
+import lombok.extern.slf4j.Slf4j;
 import org.loboevolution.common.ArrayUtilities;
 import org.loboevolution.common.Strings;
 import org.loboevolution.common.WrapperLayout;
@@ -54,6 +55,7 @@ import java.io.Serial;
 /**
  * <p>ImgControl class.</p>
  */
+@Slf4j
 public class ImgControl extends BaseControl {
 
 	@Serial
@@ -85,6 +87,15 @@ public class ImgControl extends BaseControl {
 		final TimingInfo info = new TimingInfo();
 		if (bcontext.isImagesEnabled()) {
 			image = HttpNetwork.getImage(modelNode, info, true);
+
+			if (image == null) {
+				try {
+					image = SVGControl.loadSvg(modelNode);
+				} catch (final Exception e) {
+					log.error("LoboEvolution: Unexpected error loading SVG image", e);
+				}
+			}
+
 			final HtmlRendererContext htmlRendererContext = modelNode.getHtmlRendererContext();
 			final HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
 			htmlPanel.getBrowserPanel().getTimingList.add(info);
