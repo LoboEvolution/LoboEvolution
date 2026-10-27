@@ -44,7 +44,7 @@ public class CSSSelector2Test extends LoboUnitTest {
             + "    try {\n"
             + "     alert(document.querySelector(':placeholder-shown'));\n"
             + "    } catch (exception) {\n"
-            + "     alert(exception.name);\n"
+            + "     alert(exception);\n"
             + "    }\n"
             + "  }\n"
             + "</script>\n"

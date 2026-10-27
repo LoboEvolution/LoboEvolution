@@ -121,8 +121,12 @@ public class DOMImplementationImpl implements DOMImplementation {
 	@Override
 	public Document createHTMLDocument() {
 		final HTMLDocumentImpl doc = new HTMLDocumentImpl(this.context);
+		final Element html = doc.createElement("HTML");
+		final Element head = doc.createElement("HEAD");
 		final Element body = doc.createElement("BODY");
-		doc.setBody((HTMLElementImpl)body);
+		doc.appendChild(html);
+		html.appendChild(head);
+		html.appendChild(body);
 		return doc;
 	}
 
@@ -130,6 +134,9 @@ public class DOMImplementationImpl implements DOMImplementation {
 	@Override
 	public Document createHTMLDocument(final String title) {
 		final DocumentImpl doc = (DocumentImpl) createHTMLDocument();
+		final Element titleElement = doc.createElement("TITLE");
+		titleElement.appendChild(doc.createTextNode(title == null ? "" : title));
+		doc.getHead().appendChild(titleElement);
 		doc.setTitle(title);
 		return doc;
 	}

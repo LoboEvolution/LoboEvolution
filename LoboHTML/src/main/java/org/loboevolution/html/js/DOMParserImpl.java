@@ -57,5 +57,9 @@ public class DOMParserImpl extends AbstractScriptableDelegate implements DOMPars
 		return document;
 	}
 
+	@Override
+	public String toString() {
+		return "[object DOMParser]";
+	}
 }
 

@@ -154,7 +154,7 @@ public class DOMParserTest extends LoboUnitTest {
 
     @Test
     @Alerts("[object XMLDocument]")
-    public void parseFromStringApplication_svgXml() {
+    public void parseFromStringApplicationSvgXml() {
         final String content = "<html><head>\n"
                 + "<script>\n"
                 + "  function test() {\n"
@@ -219,7 +219,7 @@ public class DOMParserTest extends LoboUnitTest {
 
     @Test
     @Alerts("parsererror")
-    public void parseFromString_invalidXml() {
+    public void parseFromStringInvalidXml() {
         final String content = "<html><head>\n"
                 + "<script>\n"
                 + "  function test() {\n"

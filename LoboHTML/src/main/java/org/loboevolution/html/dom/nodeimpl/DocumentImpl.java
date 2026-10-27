@@ -374,6 +374,11 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
 			final SelectorList selectorList = CSSUtilities.getSelectorList(selectors);
 			final List<Element> elem = new ArrayList<>();
 			if (selectorList != null) {
+				for (final Selector selector : selectorList) {
+					if (!StyleSheetAggregator.isValidSelector(selector, this)) {
+						throw new IllegalArgumentException("Invalid selector.");
+					}
+				}
 				final NodeListImpl childNodes = (NodeListImpl) getDescendents(new ElementFilter(null), true);
 				childNodes.forEach(child -> {
 					for (final Selector selector : selectorList) {
@@ -411,6 +416,11 @@ public class DocumentImpl extends NodeImpl implements Document, XPathEvaluator {
 		try {
 			final SelectorList selectorList = CSSUtilities.getSelectorList(selector);
 			if (selectorList != null) {
+				for (final Selector parsedSelector : selectorList) {
+					if (!StyleSheetAggregator.isValidSelector(parsedSelector, this)) {
+						throw new IllegalArgumentException("Invalid selector.");
+					}
+				}
                 final StyleSheetAggregator ssa = ((HTMLDocumentImpl)this).getStyleSheetAggregator();
 				final NodeListImpl childNodes = (NodeListImpl) getDescendents(new ElementFilter(null), true);
 				childNodes.forEach(child -> {
