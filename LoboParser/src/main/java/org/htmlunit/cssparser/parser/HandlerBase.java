@@ -122,7 +122,7 @@ public class HandlerBase implements DocumentHandler, CSSErrorHandler {
             .append(exception.getColumnNumber())
             .append("] ")
             .append(exception.getMessage());
-        log.error(sb.toString());
+        log.debug(sb.toString());
     }
 
     /** {@inheritDoc} */
@@ -136,7 +136,7 @@ public class HandlerBase implements DocumentHandler, CSSErrorHandler {
             .append(exception.getColumnNumber())
             .append("] ")
             .append(exception.getMessage());
-        log.error(sb.toString());
+        log.warn(sb.toString());
     }
 
     /** {@inheritDoc} */

@@ -108,7 +108,7 @@ public class SVGImageElementImpl extends SVGGraphic implements SVGImageElement {
 	@Override
 	public void draw(final Graphics2D graphics) {
 		final TimingInfo info = new TimingInfo();
-		final Image image = HttpNetwork.getImage(this, info, false);
+		final Image image = HttpNetwork.getImage(this, info, true);
 		final int realWidth = image.getWidth(null);
 		final int realHeight = image.getHeight(null);
 

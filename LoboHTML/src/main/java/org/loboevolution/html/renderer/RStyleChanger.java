@@ -58,8 +58,10 @@ final class RStyleChanger extends BaseRenderable {
 	/** {@inheritDoc} */
 	@Override
 	public void paint(final Graphics g) {
-		final RenderState rs = (RenderState)this.modelNode.getRenderState();
-		g.setColor(rs.getColor());
-		g.setFont(rs.getFont());
+		final RenderState rs = (RenderState) this.modelNode.getRenderState();
+		if (rs != null) {
+			g.setColor(rs.getColor());
+			g.setFont(rs.getFont());
+		}
 	}
 }

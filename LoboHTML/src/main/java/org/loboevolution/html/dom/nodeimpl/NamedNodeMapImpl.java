@@ -202,7 +202,7 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 			throw new DOMException(DOMException.INUSE_ATTRIBUTE_ERR, "The Node is null");
 		}
 
-		if (element != null && !element.isSameNode(owner)) {
+		if (element != null && !element.isEqualNode(owner)) {
 			throw new DOMException(DOMException.INUSE_ATTRIBUTE_ERR, "Different Element");
 		}
 
@@ -263,7 +263,7 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 			throw new DOMException(DOMException.WRONG_DOCUMENT_ERR, "Different Document");
 		}
 
-		if (element != null && !element.isSameNode(owner)) {
+		if (element != null && !element.isEqualNode(owner)) {
 			throw new DOMException(DOMException.INUSE_ATTRIBUTE_ERR, "Different Element");
 		}
 

@@ -293,14 +293,17 @@ class RLine extends BaseRCollection {
 		int maxAscentPlusLeading = firstFm.getAscent() + firstFm.getLeading();
 		for (final Object r : renderables) {
 			if (r instanceof RStyleChanger rstyleChanger) {
-                final FontMetrics fm = ((RenderState)rstyleChanger.getModelNode().getRenderState()).getFontMetrics();
-				final int descent = fm.getDescent();
-				if (descent > maxDescent) {
-					maxDescent = descent;
-				}
-				final int ascentPlusLeading = fm.getAscent() + fm.getLeading();
-				if (ascentPlusLeading > maxAscentPlusLeading) {
-					maxAscentPlusLeading = ascentPlusLeading;
+				final RenderState rs = (RenderState) rstyleChanger.getModelNode().getRenderState();
+				if (rs != null) {
+					final FontMetrics fm = rs.getFontMetrics();
+					final int descent = fm.getDescent();
+					if (descent > maxDescent) {
+						maxDescent = descent;
+					}
+					final int ascentPlusLeading = fm.getAscent() + fm.getLeading();
+					if (ascentPlusLeading > maxAscentPlusLeading) {
+						maxAscentPlusLeading = ascentPlusLeading;
+					}
 				}
 			}
 		}

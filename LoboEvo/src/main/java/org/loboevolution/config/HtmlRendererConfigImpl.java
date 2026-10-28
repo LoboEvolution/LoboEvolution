@@ -138,20 +138,24 @@ public class HtmlRendererConfigImpl implements HtmlRendererConfig {
     public String getSourceCache(final URI baseUri, final String type, final String integrity, final boolean test) {
         try {
             final ExternalResourcesStore resourcesStore = new ExternalResourcesStore();
-            String baseUrl = baseUri.toString();
-            String source = resourcesStore.getSourceCache(baseUrl, type, test);
-            if (Strings.isBlank(source)) {
-                source = HttpNetwork.sourceResponse(baseUri, integrity);
-                if (!test) {
-                    resourcesStore.saveCache(baseUrl, source, type);
-                }
+            final String baseUrl = baseUri.toString();
+            final String source = resourcesStore.getSourceCache(baseUrl, type, test);
+            if (!Strings.isBlank(source)) {
                 return source;
             }
+            String response = HttpNetwork.sourceResponse(baseUri, integrity);
+            if (Strings.isBlank(response)) {
+                response = "";
+            }
+            if (!test && !Strings.isBlank(response)) {
+                resourcesStore.saveCache(baseUrl, response, type);
+            }
+            return response;
         } catch (Exception e) {
             log.error("LoboEvolution: Unexpected error", e);
         }
 
-        return null;
+        return "";
     }
 
     @Override

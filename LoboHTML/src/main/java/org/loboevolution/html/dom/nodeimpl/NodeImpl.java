@@ -831,7 +831,7 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, Cloneabl
 				case Node.ELEMENT_NODE:
 					HTMLElement element = (HTMLElement) child;
 					RenderState rs = (RenderState) element.getRenderState();
-					if (!(element instanceof HTMLScriptElement) && rs.getDisplay() != RenderState.DISPLAY_NONE) {
+					if (!(element instanceof HTMLScriptElement) && rs != null && rs.getDisplay() != RenderState.DISPLAY_NONE) {
 						final String textContent = child.getTextContent();
 						if (textContent != null) {
 							sb.append(textContent);
@@ -1128,7 +1128,7 @@ public abstract class NodeImpl extends EventTargetImpl implements Node, Cloneabl
 	/** {@inheritDoc} */
 	@Override
 	public boolean isSameNode(final Node other) {
-		return this == other;
+		return Objects.equals(this, other);
 	}
 
 	/** {@inheritDoc} */

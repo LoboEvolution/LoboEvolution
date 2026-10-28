@@ -30,6 +30,17 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.loboevolution.annotation.Alerts;
 import org.loboevolution.annotation.AlertsExtension;
 import org.loboevolution.driver.LoboUnitTest;
+import org.loboevolution.gui.HtmlPanel;
+import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
+import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
+import org.loboevolution.html.renderer.BoundableRenderable;
+import org.loboevolution.html.renderer.RBlock;
+import org.loboevolution.html.renderer.RCollection;
+import javax.swing.SwingUtilities;
+import java.awt.Component;
+import java.awt.Point;
+import java.awt.event.MouseEvent;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Tests for mouse events support.
@@ -339,5 +350,53 @@ public class MouseEventTest extends LoboUnitTest {
                 + "</script></body></html>";
 
         checkHtmlAlert(html);
+    }
+
+    @Test
+    @Alerts("none")
+    public void clickHandlerCanHideElement() {
+        final String html = "<html><body>\n"
+                + "<p id='clicker'>Click me!</p>\n"
+                + "<script>\n"
+                + "  var p = document.getElementById('clicker');\n"
+                + "  p.addEventListener('click', function(event) {\n"
+                + "    this.style.display = 'none';\n"
+                + "  }, false);\n"
+                + "  p.click();\n"
+                + "  alert(p.style.display);\n"
+                + "</script></body></html>";
+        checkHtmlAlert(html);
+    }
+    @Test
+    public void guiClickHandlerCanHideElement() throws Exception {
+        final String html = "<html><body>\n"
+                + "<p id='clicker'>Click me!</p>\n"
+                + "<script>\n"
+                + "  document.getElementById('clicker').addEventListener('click', function(event) {\n"
+                + "    this.style.display = 'none';\n"
+                + "  }, false);\n"
+                + "</script></body></html>";
+        final HTMLDocumentImpl document = loadHtml(html);
+        final HtmlPanel htmlPanel = document.getHtmlRendererContext().getHtmlPanel();
+        final HTMLElementImpl paragraph = (HTMLElementImpl) document.getElementById("clicker");
+        SwingUtilities.invokeAndWait(() -> {
+            htmlPanel.setSize(800, 600);
+            htmlPanel.setDocument(document, document.getHtmlRendererContext());
+            htmlPanel.doLayout();
+            final Component blockPanel = htmlPanel.getComponent(0);
+            blockPanel.setSize(800, 600);
+            blockPanel.doLayout();
+            final BoundableRenderable renderable = (BoundableRenderable) paragraph.getUINode();
+            final RCollection root = (RCollection) ((RBlock) renderable).getParent();
+            final Point origin = renderable.getOriginRelativeTo(root);
+            final int x = origin.x + Math.max(1, renderable.getWidth() / 2);
+            final int y = origin.y + Math.max(1, renderable.getHeight() / 2);
+            final long now = System.currentTimeMillis();
+            blockPanel.dispatchEvent(new MouseEvent(blockPanel, MouseEvent.MOUSE_PRESSED, now,
+                    MouseEvent.BUTTON1_DOWN_MASK, x, y, 1, false, MouseEvent.BUTTON1));
+            blockPanel.dispatchEvent(new MouseEvent(blockPanel, MouseEvent.MOUSE_RELEASED, now + 1,
+                    0, x, y, 1, false, MouseEvent.BUTTON1));
+        });
+        assertEquals("none", paragraph.getStyle().getDisplay());
     }
 }

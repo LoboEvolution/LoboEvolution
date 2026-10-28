@@ -436,7 +436,7 @@ public class HtmlController {
 			Scriptable windowScope = win.getWindowScope(ctx);
 			final Object eventJSObj = JavaScript.getInstance().getJavascriptObject(evt, windowScope);
 			ScriptableObject.putProperty(windowScope, "event", eventJSObj);
-			if (!Executor.executeFunction(document, node, f, new Object[0], contextFactory)) {
+			if (!Executor.executeFunction(document, node, f, new Object[] {eventJSObj}, contextFactory)) {
 				return false;
 			}
 		}
