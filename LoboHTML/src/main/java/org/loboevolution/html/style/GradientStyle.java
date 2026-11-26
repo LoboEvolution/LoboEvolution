@@ -93,7 +93,8 @@ public class GradientStyle {
 		final String direction = direction(quote);
 		final GradientInfo info = parseGradint(values);
 		final Color[] colors = info.getColors();
-		if (colors == null || colors.length < 2) {
+		final float[] fractions = info.getFractions();
+		if (colors == null || colors.length < 2 || fractions == null || fractions.length != colors.length) {
 			return null;
 		}
 		final int width = getWidth(document, props, renderState);
@@ -162,13 +163,20 @@ public class GradientStyle {
 		final float radius = (float) width /2;
 		final GradientInfo info = parseGradint(values);
 		Color[] colors = info.getColors();
-		if (colors == null || colors.length < 2) {
+		final float[] allFractions = info.getFractions();
+		if (colors == null || allFractions == null) {
 			return null;
 		}
-		final float[] fractions = ArrayUtilities.removeFloat(info.getFractions(), info.getFractions().length-1);
-		final Color background = colors[colors.length-1];
-		colors = ArrayUtilities.removeColor(colors, colors.length-1);
-		final RadialGradientPaint p = new RadialGradientPaint(center, radius, fractions, colors, cMethod);
+		// The last color stop is used as the background; the rest feed the
+		// RadialGradientPaint, which requires at least 2 colors whose count
+		// matches the number of fractions.
+		final Color[] paintColors = ArrayUtilities.removeColor(colors, colors.length - 1);
+		final float[] fractions = ArrayUtilities.removeFloat(allFractions, allFractions.length - 1);
+		if (paintColors.length < 2 || paintColors.length != fractions.length) {
+			return null;
+		}
+		final Color background = colors[colors.length - 1];
+		final RadialGradientPaint p = new RadialGradientPaint(center, radius, fractions, paintColors, cMethod);
 		g2.setColor(background);
 		g2.fillRect(0, 0, width, height);
 		g2.setPaint(p);

@@ -511,18 +511,7 @@ public class XHtmlParser {
 							return TOKEN_BAD;
 						case "!ATTLIST":
 							String data = parseEndOfTag(reader).trim();
-							data = data.replaceAll("\\s+", " ");
-							String[] atts = data.split(" ");
-							if (atts.length >= 3) {
-								String elementName = atts[0];
-								String attrName = atts[1];
-								String value = atts[2];
-								value = value.replace("\"", "");
-								doc.getDtdDefaultAttributes()
-										.computeIfAbsent(elementName.toLowerCase(), k -> new HashMap<>())
-										.put(attrName, value);
-							}
-
+							dtdParser.parseAttributeList(data);
 							return TOKEN_BAD;
 						default:
 							passEndOfTag(reader);
@@ -774,9 +763,11 @@ public class XHtmlParser {
 					ch = (char) intCh;
 					if (ch == '/') {
 						final StringBuilder tempBuffer = new StringBuilder();
+						boolean endTagClosed = false;
 						while ((intCh = reader.read()) != -1) {
 							ch = (char) intCh;
 							if (ch == '>') {
+								endTagClosed = true;
 								final String thisTag = tempBuffer.toString().trim();
 								if (thisTag.equalsIgnoreCase(tagName)) {
 									this.justReadTagBegin = false;
@@ -802,6 +793,9 @@ public class XHtmlParser {
 						}
 						sb.append("</");
 						sb.append(tempBuffer);
+						if (endTagClosed) {
+							sb.append('>');
+						}
 					} else if (ch == '!') {
 						final String nextSeven = readN(reader, 7);
 						if ("[CDATA[".equals(nextSeven)) {

@@ -369,7 +369,9 @@ public class HTMLObjectElementImpl extends HTMLElementImpl implements HTMLObject
 					if (Strings.isNotBlank(width) && Strings.isNotBlank(height)) {
 						final int w = HtmlValues.getPixelSize(width, doc.getRenderState(), doc.getDefaultView(), -1);
 						final int h = HtmlValues.getPixelSize(height, doc.getRenderState(), doc.getDefaultView(), -1);
-						newpanel.setPreferredSize(new Dimension(w, h));
+						if (w >= 0 && h >= 0) {
+							newpanel.setPreferredSize(new Dimension(w, h));
+						}
 					}
 					objectControl.add(newpanel);
 				} else {

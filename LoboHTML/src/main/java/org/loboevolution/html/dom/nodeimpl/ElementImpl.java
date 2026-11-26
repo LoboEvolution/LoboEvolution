@@ -1209,6 +1209,13 @@ public class ElementImpl extends NodeInternal implements Element {
             final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
             final StyleSheetAggregator ssa = doc.getStyleSheetAggregator();
 			final SelectorList selectorList = CSSUtilities.getSelectorList(selectors);
+			if (selectorList != null) {
+				for (final Selector parsedSelector : selectorList) {
+					if (!StyleSheetAggregator.isValidSelector(parsedSelector, this)) {
+						throw new IllegalArgumentException("Invalid selector.");
+					}
+				}
+			}
 			final List<Element> elem = new ArrayList<>();
 			if (selectorList != null) {
 				final NodeListImpl childNodes = (NodeListImpl) getDescendents(new ElementFilter(null), true);
@@ -1246,6 +1253,13 @@ public class ElementImpl extends NodeInternal implements Element {
 
 		try {
 			final SelectorList selectorList = CSSUtilities.getSelectorList(selector);
+			if (selectorList != null) {
+				for (final Selector parsedSelector : selectorList) {
+					if (!StyleSheetAggregator.isValidSelector(parsedSelector, this)) {
+						throw new IllegalArgumentException("Invalid selector.");
+					}
+				}
+			}
             final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
             final StyleSheetAggregator ssa = doc.getStyleSheetAggregator();
 			if (selectorList != null) {

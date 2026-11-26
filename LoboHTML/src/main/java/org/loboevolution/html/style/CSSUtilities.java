@@ -119,7 +119,11 @@ public final class CSSUtilities {
 	public static CSSStyleSheetImpl parseCssExternal(final HtmlRendererConfig config, final URI scriptURI,
 													 final String baseURI, final String integrity, final boolean test) throws Exception {
 		final CSSOMParser parser = new CSSOMParser();
-		final String source = config.getSourceCache(scriptURI, "CSS", integrity, test);
+		String source = config.getSourceCache(scriptURI, "CSS", integrity, test);
+		if (source == null) {
+			log.error("LoboEvolution: Could not load CSS from URI [{}]. Parsing as empty stylesheet.", scriptURI);
+			source = "";
+		}
 		final InputSource is = getCssInputSourceForStyleSheet(source, baseURI);
 		return parser.parseStyleSheet(is, null);
 	}

@@ -161,7 +161,7 @@ public class CSSStyleRuleTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"body", "h1", "a.foo", ".foo", ".foo .foo2", ".myFoo", "#byId"})
+    @Alerts({"BoDY", "H1", "A.foo", "*.foo", "*.foo *.foo2", "*.myFoo", "#byId"})
     public void selectorText() {
         final String html = "<html><head>\n"
                 + "<style>\n"

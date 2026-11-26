@@ -181,7 +181,7 @@ public class DOMImplementationTest extends LoboUnitTest {
     @Alerts({"http://www.w3.org/TR/SVG11/feature#BasicStructure 1.0: true",
             "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.1: true",
             "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.2: true"})
-    public void hasFeatureSVG_BasicStructure() {
+    public void hasFeatureSVGBasicStructure() {
         hasFeature("http://www.w3.org/TR/SVG11/feature#BasicStructure", "['1.0', '1.1', '1.2']");
     }
 
@@ -212,7 +212,7 @@ public class DOMImplementationTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("[object XMLDocument]")
+    @Alerts("[object HTMLDocument]")
     public void createDocument() {
         final String html = "<html><head>"
                 + "<script>\n"
@@ -344,7 +344,7 @@ public class DOMImplementationTest extends LoboUnitTest {
 
     @Test
     @Alerts("2")
-    public void createHTMLDocument_jQuery() {
+    public void createHTMLDocumentJQuery() {
         final String html = "<html>\n"
                 + "<head>\n"  
                 + "<script>\n"
@@ -386,9 +386,9 @@ public class DOMImplementationTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts({"<html><head></head><body></body></html>",
-            "<html><head><title></title></head><body></body></html>",
-            "<html><head><title>abc</title></head><body></body></html>"})
+    @Alerts({"<HTML><HEAD/><BODY/></HTML>",
+            "<HTML><HEAD><TITLE></TITLE></HEAD><BODY/></HTML>",
+            "<HTML><HEAD><TITLE>abc</TITLE></HEAD><BODY/></HTML>"})
     public void createHTMLDocumentHtmlCode() {
         final String html = "<html>\n"
                 + "<head>\n"  
@@ -416,8 +416,7 @@ public class DOMImplementationTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("<html><head><title>test</title></head>"
-            + "<body><p>This is a new paragraph.</p></body></html>")
+    @Alerts("<HTML><HEAD><TITLE>test</TITLE></HEAD><BODY><P>This is a new paragraph.</P></BODY></HTML>")
     public void createHTMLDocumentAddParagraph() {
         final String html = "<html>\n"
                 + "<head>\n"  
@@ -429,7 +428,7 @@ public class DOMImplementationTest extends LoboUnitTest {
                 + "      p.innerHTML = 'This is a new paragraph.';\n"
                 + "      doc.body.appendChild(p);"
                 + "     alert(doc.documentElement.outerHTML);\n"
-                + "    } catch(e) {alert('exception'); }\n"
+                + "    } catch(e) {alert(e); }\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head>\n"
@@ -440,7 +439,7 @@ public class DOMImplementationTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("<html><head><title>test</title></head><body><p>Hello</p></body></html>")
+    @Alerts("<HTML><HEAD><TITLE>test</TITLE></HEAD><BODY><P>Hello</P></BODY></HTML>")
     public void createHTMLDocumentInnerAddParagraph() {
         final String html = "<html>\n"
                 + "<head>\n"  
@@ -461,7 +460,7 @@ public class DOMImplementationTest extends LoboUnitTest {
     }
 
     @Test
-    @Alerts("<html><head><title>test</title></head><body><img src=\"x\" onerror=\"alert(1)\"></body></html>")
+    @Alerts("<HTML><HEAD><TITLE>test</TITLE></HEAD><BODY><IMG src=\"x\" onerror=\"alert(1)\"/></BODY></HTML>")
     public void createHTMLDocumentInnerAddImg() {
         final String html = "<html>\n"
                 + "<head>\n"  

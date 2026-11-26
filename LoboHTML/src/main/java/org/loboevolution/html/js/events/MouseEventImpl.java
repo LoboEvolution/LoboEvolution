@@ -223,7 +223,7 @@ public class MouseEventImpl extends UIEventImpl implements MouseEvent {
     @Override
     public Long getButton() {
         if (mouseEvent != null) {
-            return (long) mouseEvent.getButton();
+            return (long) Math.max(0, mouseEvent.getButton() - 1);
         }
         return button;
     }

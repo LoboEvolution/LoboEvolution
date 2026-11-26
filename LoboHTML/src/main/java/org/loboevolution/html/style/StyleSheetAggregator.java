@@ -69,20 +69,24 @@ import java.util.regex.Pattern;
 public class StyleSheetAggregator {
 
     private static final Pattern NTH_NUMERIC = Pattern.compile("\\d+");
-    private static final Pattern NTH_COMPLEX = Pattern.compile("[+-]?\\d*n\\w*([+-]\\w\\d*)?");
+    private static final Pattern NTH_COMPLEX = Pattern.compile("[+-]?(?:\\d*n(?:[+-]\\d+)?|\\d+)");
     private static final Pattern UNESCAPE_SELECTOR = Pattern.compile("\\\\([\\[\\]\\.:])");
 
     private static final Set<String> CSS2_PSEUDO_CLASSES = new HashSet<>(Arrays.asList(
-            "link", "visited", "hover", "active",
-            "focus", "lang", "first-child"));
+            "link", "visited", "hover", "active", "focus", "lang", "first-child"));
 
     private static final Set<String> CSS3_PSEUDO_CLASSES = new HashSet<>(Arrays.asList(
-            "checked", "disabled", "enabled", "indeterminated", "root", "target", "not()",
-            "nth-child()", "nth-last-child()", "nth-of-type()", "nth-last-of-type()",
-            "last-child", "first-of-type", "last-of-type", "only-child", "only-of-type", "empty",
-            "optional", "required", "valid", "invalid"));
+            "checked", "disabled", "enabled", "indeterminate", "root", "target", "not",
+            "nth-child", "nth-last-child", "nth-of-type", "nth-last-of-type",
+            "last-child", "first-of-type", "last-of-type", "only-child", "only-of-type",
+            "empty", "optional", "required", "valid", "invalid", "placeholder-shown", "read-only",
+            "read-write", "default", "in-range", "out-of-range"));
 
-    private static final Set<String> CSS4_PSEUDO_CLASSES = new HashSet<>(Arrays.asList("focus-within", "focus-visible"));
+    private static final Set<String> CSS4_PSEUDO_CLASSES = new HashSet<>(Arrays.asList(
+            "focus-within", "focus-visible", "any-link", "local-link", "scope", "current",
+            "past", "future", "dir", "is",  "where", "has", "target-within", "fullscreen",
+            "user-invalid", "blank", "nth-col", "nth-last-col"
+    ));
 
     private final List<CSSStyleSheetImpl> styleSheets;
 
@@ -485,7 +489,15 @@ public class StyleSheetAggregator {
                 return element.hasAttribute("placeholder");
 
             case "placeholder-shown":
-                return element instanceof HTMLInputElement && Strings.isNotBlank(((HTMLInputElement) element).getPlaceholder());
+                if (element instanceof HTMLInputElement input) {
+                    final String type = input.getType();
+                    return Arrays.asList("text", "search", "url", "tel", "email", "password", "number").contains(type)
+                            && Strings.isNotBlank(input.getPlaceholder())
+                            && Strings.isBlank(input.getValue());
+                }
+                return element instanceof HTMLTextAreaElement
+                        && Strings.isNotBlank(((HTMLTextAreaElement) element).getPlaceholder())
+                        && Strings.isBlank(((HTMLTextAreaElement) element).getValue());
 
             case "read-only":
                 return element.hasAttribute("readonly");
@@ -823,7 +835,7 @@ public class StyleSheetAggregator {
         return attribute.equals(condition);
     }
 
-    private static boolean isValidSelector(final Selector selector, final Node domNode) {
+    public static boolean isValidSelector(final Selector selector, final Node domNode) {
         switch (selector.getSelectorType()) {
             case ELEMENT_NODE_SELECTOR:
                 final List<Condition> conditions = ((ElementSelector) selector).getConditions();
@@ -898,7 +910,18 @@ public class StyleSheetAggregator {
                     }
                     return true;
                 case PSEUDO_CLASS_CONDITION:
-                    String value = condition.getValue();
+                    final String pseudoClass = condition.getValue();
+                    if (isNthPseudoClass(pseudoClass)) {
+                        final int openParen = pseudoClass.indexOf('(');
+                        final int closeParen = pseudoClass.lastIndexOf(')');
+                        if (openParen < 0 || closeParen <= openParen) {
+                            return false;
+                        }
+                        final String argument = pseudoClass.substring(openParen + 1, closeParen).trim();
+                        return "even".equalsIgnoreCase(argument) || "odd".equalsIgnoreCase(argument)
+                                || NTH_COMPLEX.matcher(argument).matches();
+                    }
+                    String value = pseudoClass;
                     if (value.endsWith(")")) {
                         if (value.endsWith("()")) {
                             return false;
@@ -907,16 +930,6 @@ public class StyleSheetAggregator {
                         if (openParen != -1) {
                             value = value.substring(0, openParen + 1) + ')';
                         }
-                    }
-
-                    if (value.length() >= 10 && "nth-child(".equals(value.substring(0, 10))) {
-                        final int openParen = value.indexOf('(');
-                        final int closeParen = value.lastIndexOf(')');
-                        final String arg = openParen != -1 && closeParen > openParen ?
-                                value.substring(openParen + 1, closeParen) : "";
-                        return "even".equalsIgnoreCase(arg) || "odd".equalsIgnoreCase(arg)
-                                || NTH_NUMERIC.matcher(arg).matches()
-                                || NTH_COMPLEX.matcher(arg).matches();
                     }
 
                     return CSS4_PSEUDO_CLASSES.contains(value);
@@ -1329,5 +1342,12 @@ public class StyleSheetAggregator {
                 }
             }
         }
+    }
+
+    private static boolean isNthPseudoClass(final String pseudoClass) {
+        return pseudoClass.startsWith("nth-child(")
+                || pseudoClass.startsWith("nth-last-child(")
+                || pseudoClass.startsWith("nth-of-type(")
+                || pseudoClass.startsWith("nth-last-of-type(");
     }
 }
